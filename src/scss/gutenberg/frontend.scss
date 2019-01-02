@@ -1,0 +1,12 @@
+.content-area {
+    overflow-x: hidden;
+}
+
+.entry-content {
+    .alignfull { //  + 17px / 2 if we take into consideration the scrollbars
+        margin-left: calc( -100vw / 2 + 100% / 2 );
+        margin-right: calc( -100vw / 2 + 100% / 2 );
+        max-width: 100vw;
+        width: auto;
+    }
+}

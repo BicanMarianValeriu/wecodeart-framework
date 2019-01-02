@@ -1,0 +1,353 @@
+/* 	= Base
+--------------------------------------------------------------- */
+/* 1.0 = WordPress Core */
+.alignnone {
+    margin: 5px 0px 20px 0;
+}
+
+.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+
+.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+
+.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+a {
+    img {
+        &.alignright {
+            float: right;
+            margin: 5px 0 20px 20px;
+        }
+
+        &.alignnone {
+            margin: 5px 20px 20px 0;
+        }
+
+        &.alignleft {
+            float: left;
+            margin: 5px 20px 20px 0;
+        }
+
+        &.aligncenter {
+            display: block;
+            margin-left: auto;
+            margin-right: auto
+        }
+    }
+}
+
+.wp-caption {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    max-width: 100%;
+    padding: 5px 3px 10px;
+    text-align: center;
+
+    &.alignnone {
+        margin: 5px 0px 20px 0;
+    }
+
+    &.alignright {
+        margin: 5px 0 20px 20px;
+    }
+
+    &.alignleft {
+        margin: 5px 20px 20px 0;
+    }
+
+    img {
+        border: 0 none;
+        height: auto;
+        margin: 0;
+        max-width: 98.5%;
+        padding: 0;
+        width: auto;
+    }
+
+    p.wp-caption-text {
+        font-size: 11px;
+        line-height: 17px;
+        margin: 0;
+        padding: 0 4px 5px;
+    }
+}
+
+.gallery-caption {
+    display: block;
+}
+
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+
+    &:focus {
+        background-color: #f1f1f1;
+        border-radius: 3px;
+        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+        clip: auto !important;
+        color: #21759b;
+        display: block;
+        font-size: 14px;
+        font-size: 0.875rem;
+        font-weight: bold;
+        height: auto;
+        left: 5px;
+        line-height: normal;
+        padding: 15px 23px 14px;
+        text-decoration: none;
+        top: 5px;width: auto;
+        z-index: 100000; /* Above WP toolbar. */
+    }
+}
+
+.logged-in.admin-bar {
+    .header-bar.sticky {
+        margin-top: 32px!important;
+    }
+}
+
+.comments {
+    svg {
+        width: 30px;
+        height: 30px;
+        vertical-align: -8%;
+
+        @include breakpoint(small down) {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.comment {
+    &.bypostauthor {
+        .comment-content {
+            background: #333;
+    
+            p {
+                color: #fff
+            }
+        }
+    }
+
+    .comment-content {
+        padding: 1rem;
+        border-radius: 6px;
+        background: #F1F1F1;
+    }
+
+    .comment-reply {
+        margin-top: -1rem;
+        margin-right: 1rem
+    }
+}
+
+ul, ol {
+    &.unstyled {
+        list-style-type: none;
+    }
+}
+
+hr {
+    background: linear-gradient(to right, transparent, #dbdbdb, transparent);
+    border: 0;
+    height: 1px;
+    margin: 22px 0;
+
+    &--tall {
+        margin: 44px 0;
+    }
+}
+
+/* 1.0 = WeCodeArt Core */
+.wp-custom-logo {
+    .header {
+        .site-title,
+        .site-description {
+            display: none;
+        }
+    }
+}
+
+.no-sidebar {
+    .content {
+        &__main {
+            border-right: 0;
+        }
+    }
+}
+
+.no-js {
+    @include breakpoint(medium down) {
+        .header-bar {
+            &__menu,
+            &__search {
+                display: none;
+            }
+        }
+    }
+}
+
+.header {
+    &__bar {
+        padding: 10px 0;
+    }
+
+    .site-title {
+        font-size: .9rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 0;
+    }
+
+    .site-description,
+    .button,
+    .input-group {
+        margin-bottom: 0;
+    }
+
+    .site-description {
+        @include breakpoint(small down) {
+            font-size: 12px;
+        }
+    }
+}
+
+.header-bar {
+    &__menu,
+    &__search {
+        @include breakpoint(medium down) {
+            order: 99;
+            padding: 10px 0 0;
+            border-top: 1px solid lightgray;
+        }
+    }
+
+    &__menu {
+        @include breakpoint(medium down) {
+            margin-top: 10px;
+
+            & + .header-bar__search {
+                margin-top: 10px;
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    &__branding {
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.archive-intro,
+.content-area,
+.breadcrumbs,
+.entry-prev-next,
+.footer,
+.footer__attribution {
+    border-top: 1px solid lightgray;
+}
+
+.has-sidebar {
+    .content-area > * > * > * + * {
+        border-left: 1px solid lightgray;
+    
+        @include breakpoint(medium down) {
+            border-left: 0;
+        }
+    }
+}
+
+.entry-meta {
+    svg {
+        width: 15px;
+        height: 15px;
+        vertical-align: -8%;
+        fill: #949494;
+    }
+}
+
+.entry-title {
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    padding-top: 1rem;
+}
+
+.author-box {
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+
+    &__headline {
+        svg {
+            width: 30px;
+            height: 30px;
+            vertical-align: -8%;
+
+            @include breakpoint(small down) {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+    &__website {
+        svg {
+            width: 12px;
+            height: 12px;
+            vertical-align: bottom;
+            fill: #1779ba;
+        }
+    }
+}
+
+.author .author-box {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.svg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.archive-intro {  
+    &__svg,
+    &__title {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &__title {
+        font-size: 30px;
+    }
+
+    &__svg {  
+        width: 50px;
+        height: 50px;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    } 
+}
+
+.cell.auto {
+    flex-basis: auto;
+}

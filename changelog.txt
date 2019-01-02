@@ -1,0 +1,19 @@
+v3.5.0.3
+- Added:
+- Change:
+- Fix: SVG render/compile function aria-hidden attribute
+- Fix: SVG compile missing $sprite param added
+
+v3.5.0.2
+- Added: Gutenberg Alignfull CSS Support
+- Added: Filter "wecodeart/filter/scripts/localize_js" - for changing the output of "wecodeart" js object
+- Change: Header Bar WooCommerce filter name changed: wecodeart/filter/woocommerce/header_cart/defaults
+- Change: Header Bar WooCommerce filter default array keys changed
+- Change: Search Form Filter - args array structure 
+
+v3.5.0
+- CAUTION: Includes breaking changes
+- Rewrite the code from scratch for better performance and fixed multiple untracked bugs.
+
+v1.0.0
+- Initial release
