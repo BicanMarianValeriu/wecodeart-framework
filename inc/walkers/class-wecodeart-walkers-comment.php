@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Comment HTML Template (Walker)
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.9
  * @version		v3.5
  */

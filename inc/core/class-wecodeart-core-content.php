@@ -12,7 +12,7 @@ use WeCodeArt\Utilities\Markup as Markup;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Main Content Class
- * @copyright   Copyright (c) 2018, WeCodeArt Framework
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
  * @version		v3.5
  */

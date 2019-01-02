@@ -13,7 +13,8 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	WP-Customizer Config
+ * @subpackage 	Support\WooCommerce\Customizer
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
  * @version		v3.5
  */

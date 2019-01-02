@@ -14,6 +14,7 @@ use WeCodeArt\Customizer\Controls;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.6
  * @version		v3.5
  */

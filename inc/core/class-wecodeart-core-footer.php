@@ -12,7 +12,7 @@ use WeCodeArt\Customizer as Customizer;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Footer Class
- * @copyright   Copyright (c) 2018, WeCodeArt Framework
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
  * @version		v3.5
  */

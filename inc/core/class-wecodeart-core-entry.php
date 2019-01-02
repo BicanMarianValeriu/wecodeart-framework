@@ -14,7 +14,7 @@ use WeCodeArt\Utilities\Markup\SVG;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry Class
- * @copyright   Copyright (c) 2018, WeCodeArt Framework
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
  * @version		v3.5
  */

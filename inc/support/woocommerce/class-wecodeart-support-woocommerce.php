@@ -13,7 +13,8 @@ use WeCodeArt\Customizer;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Integration\WooCommerce
+ * @subpackage 	Support\WooCommerce
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.9
  * @version		v3.5
  */

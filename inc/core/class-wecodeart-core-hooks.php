@@ -11,6 +11,7 @@ use WeCodeArt\Utilities\Form\Input as Inputs;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	General Hooks
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.0
  * @version		v3.5.0.2
  */

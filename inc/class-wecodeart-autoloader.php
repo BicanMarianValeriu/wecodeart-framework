@@ -7,6 +7,7 @@
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  Autoloader
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
  */
 

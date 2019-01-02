@@ -13,6 +13,7 @@ if ( class_exists( 'WeCodeArt\Customizer\Extender\Section' ) ) return NULL;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer/Extends
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
  * @version		v3.5
  */

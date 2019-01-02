@@ -1,8 +1,8 @@
-## WeCodeArt Framework Copyright 2018
-## http://www.wecodeart.com/
+## WeCodeArt Framework Copyright 2019
+## https://www.wecodeart.com/
 
 Requires at least: WordPress 4.7
-Tested up to: WordPress 4.9.4
+Tested up to: WordPress 5.0.2
 Version: 3.0+
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Up to 4 Footer Columns - Posibility to enable Footer Widgetized Columns/Sidebars. Disable them to not use WP Sidebars and use hooks instead.
 
 ## Support
-Please visit http://www.wecodeart.com/ for further theme support.
+Please visit https://www.wecodeart.com/ for further theme support.
 
 ## Third Party License
 Font Awesome icons, Copyright Dave Gandy

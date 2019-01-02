@@ -11,6 +11,7 @@ use Walker_Nav_Menu;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Header Bar Menu (Walker)
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v2.0
  * @version		v3.5
  */

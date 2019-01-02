@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	WP-Customizer Partials
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.3
  * @version		v3.5
  */

@@ -20,6 +20,7 @@ use WeCodeArt\Core\Scripts;
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  Init
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v1.0
  * @version		v3.5
  */

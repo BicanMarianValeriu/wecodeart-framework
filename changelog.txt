@@ -1,8 +1,10 @@
 v3.5.0.3
-- Added:
+- Added: 
 - Change:
 - Fix: SVG render/compile function aria-hidden attribute
 - Fix: SVG compile missing $sprite param added
+- Misc: Updated readme.txt
+- Misc: Updated theme copyright message / added missing
 
 v3.5.0.2
 - Added: Gutenberg Alignfull CSS Support

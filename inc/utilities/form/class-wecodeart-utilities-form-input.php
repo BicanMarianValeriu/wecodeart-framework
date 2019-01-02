@@ -8,7 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework 
- * @subpackage 	WeCodeArt\Form\Input
+ * @subpackage 	Utilities\Form\Inputs
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.1.2
  * @version 	v3.5
  */

@@ -12,6 +12,7 @@ use WeCodeArt\Customizer\Config as Config;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	WP-Customizer Config
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
  * @version		v3.5
  */

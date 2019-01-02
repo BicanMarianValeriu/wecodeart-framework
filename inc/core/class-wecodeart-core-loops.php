@@ -11,7 +11,7 @@ use WeCodeArt\Core\Entry;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Loops
- * @copyright   Copyright (c) 2018, WeCodeArt Framework
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
  * @version		v3.5
  */ 

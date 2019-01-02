@@ -11,7 +11,7 @@ use WeCodeArt\Utilities\Markup;
  *
  * @package 	WeCodeArt Framework
  * @subpackage  SVG Markup Functions
- * @copyright   Copyright (c) 2018, WeCodeArt Framework
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
  * @version		v3.5.0.3
  */

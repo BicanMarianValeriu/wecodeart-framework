@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * 
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer Formatting
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.6
  * @version 	v3.5
  */ 

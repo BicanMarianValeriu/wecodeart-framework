@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  Utilities\Schema
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.1.2
  * @version		v3.2
  */

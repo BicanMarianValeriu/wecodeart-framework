@@ -12,7 +12,8 @@ use WeCodeArt\Core\Callbacks;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Integration\Yoast SEO
+ * @subpackage 	Support\Yoast SEO
+ * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
  * @version		v3.5
  */
