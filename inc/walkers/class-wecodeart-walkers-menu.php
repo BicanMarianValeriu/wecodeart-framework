@@ -13,7 +13,7 @@ use Walker_Nav_Menu;
  * @subpackage 	Header Bar Menu (Walker)
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v2.0
- * @version		v3.6
+ * @version		v3.6.0.3
  */
 
 /** 
@@ -51,7 +51,7 @@ class Menu extends Walker_Nav_Menu {
 		// Classes
 		$classes = [ 'dropdown-menu', 'menu-item__dropdown' ]; 
 		$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
-		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : ''; 
+		$class_names = $class_names ? 'class="' . esc_attr( $class_names ) . '"' : ''; 
 
 		// Aria Label
 		$labelledby = ''; 
@@ -59,7 +59,7 @@ class Menu extends Walker_Nav_Menu {
 		if ( end( $matches[2] ) ) $labelledby = 'aria-labelledby="' . end( $matches[2] ) . '"'; 
 
 		// Returns
-		$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">{$n}";
+		$output .= "{$n}{$indent}<ul $class_names $labelledby role=\"menu\">{$n}";
 	}
 
 	/**
@@ -113,6 +113,7 @@ class Menu extends Walker_Nav_Menu {
 		if ( isset( $args->has_children ) && $args->has_children ) {
 			$classes[] = 'dropdown';
 		}
+
 		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
 			$classes[] = 'active';
 		}
@@ -300,15 +301,13 @@ class Menu extends Walker_Nav_Menu {
 	 *
 	 * @param array $args passed from the wp_nav_menu function.
 	 */
-	public static function fallback( $args ) {
-		if ( current_user_can( 'edit_theme_options' ) ) {
-
-			/* Get Arguments. */
-			$container       = $args['container'];
-			$container_id    = $args['container_id'];
-			$container_class = $args['container_class'];
-			$menu_class      = $args['menu_class'];
-			$menu_id         = $args['menu_id'];
+	public static function fallback( $args ) { 
+		if ( current_user_can( 'edit_theme_options' ) ) { 
+			$container       = wecodeart_get_prop( $args, 'container' );
+			$container_id    = wecodeart_get_prop( $args, 'container_id' );
+			$container_class = wecodeart_get_prop( $args, 'container_class' );
+			$menu_class      = wecodeart_get_prop( $args, 'menu_class' ); 
+			$menu_id         = wecodeart_get_prop( $args, 'menu_id' );
 
 			// initialize var to store fallback html.
 			$fallback_output = '';
@@ -329,7 +328,7 @@ class Menu extends Walker_Nav_Menu {
 			if ( $menu_class ) {
 				$fallback_output .= ' class="' . esc_attr( $menu_class ) . '"'; }
 			$fallback_output .= '>';
-			$fallback_output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="' . esc_attr__( 'Add a menu', 'wecodeart' ) . '">' . esc_html__( 'Add a menu', 'wecodeart' ) . '</a></li>';
+			$fallback_output .= '<li class="menu-item"><a class="nav-link" href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="' . esc_attr__( 'Add a menu', 'wecodeart' ) . '">' . esc_html__( 'Add a menu', 'wecodeart' ) . '</a></li>';
 			$fallback_output .= '</ul>';
 			if ( $container ) {
 				$fallback_output .= '</' . esc_attr( $container ) . '>';
@@ -402,9 +401,7 @@ class Menu extends Walker_Nav_Menu {
 		// Loop through array of linkmod classes to handle their $atts.
 		if ( ! empty( $linkmod_classes ) ) {
 			foreach ( $linkmod_classes as $link_class ) {
-				if ( ! empty( $link_class ) ) {
-
-					// check for special class types and set a flag for them.
+				if ( ! empty( $link_class ) ) { 
 					if ( 'dropdown-header' === $link_class ) {
 						$linkmod_type = 'dropdown-header';
 					} elseif ( 'dropdown-divider' === $link_class ) {
@@ -428,18 +425,12 @@ class Menu extends Walker_Nav_Menu {
 	private function update_atts_for_linkmod_type( $atts = array(), $linkmod_classes = array() ) {
 		if ( ! empty( $linkmod_classes ) ) {
 			foreach ( $linkmod_classes as $link_class ) {
-				if ( ! empty( $link_class ) ) {
-					// update $atts with a space and the extra classname...
-					// so long as it's not a sr-only class.
-					if ( 'sr-only' !== $link_class ) $atts['class'] .= ' ' . esc_attr( $link_class ); 
-					
-					// check for special class types we need additional handling for.
-					if ( 'disabled' === $link_class ) {
-						// Convert link to '#' and unset open targets.
+				if ( ! empty( $link_class ) ) { 
+					if ( 'sr-only' !== $link_class ) $atts['class'] .= ' ' . esc_attr( $link_class );  
+					if ( 'disabled' === $link_class ) { 
 						$atts['href'] = '#';
-						unset( $atts['target'] );
-					} elseif ( 'dropdown-header' === $link_class || 'dropdown-divider' === $link_class || 'dropdown-item-text' === $link_class ) {
-						// Store a type flag and unset href and target.
+						unset( $atts['target'] ); 
+					} elseif ( in_array( $link_class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-item-text' ] ) ) { 
 						unset( $atts['href'] );
 						unset( $atts['target'] );
 					}

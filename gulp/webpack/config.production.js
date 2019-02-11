@@ -10,7 +10,6 @@ module.exports = {
 		filename: '[name].js',
 	},
 	externals: {
-		'jquery': 'jQuery',
-		'popper.js': 'popper.js'
+		jquery: 'jQuery', 
 	}	
 };

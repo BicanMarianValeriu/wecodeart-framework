@@ -126,24 +126,48 @@ class Customizer {
 	/**
 	 * Grab our Customizer Defaults.
 	 * @param 	string 		mod_name
+	 * @version v3.6.0.3
 	 * @return 	mixed/array
 	 */
 	public static function get_defaults( $mod_name = '' ) {
 		$defaults = array(
 			'header-bar-container'			=> 'container',
 			'header-bar-modules'			=> ['branding', 'menu', 'search'],
+			// Default container/modules used if no other condition matches
 			'content-layout-container'		=> 'container',
 			'content-layout-modules'		=> ['content', 'primary'],
+			// Special Blog page container/modules mod
 			'content-layout-container-blog'	=> 'container',
-			'content-layout-modules-blog'	=> ['content', 'primary'], 
+			'content-layout-modules-blog'	=> ['content', 'primary'],  
 			'footer-layout-container'		=> 'container',
 			'footer-layout-modules'			=> ['footer-1', 'footer-2', 'footer-3' ],
 			'footer-copyright-text'			=> sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy;' ),
 			'page_for_404' 					=> '0'
 		);
+
+		/**
+		 * Since 3.6.0.3
+		 * Added post type defaults for Entry Meta and Container/Modules (singular/archive page types)
+		 */
+		// Customizer defaults for Post Types
+		$get_post_types = get_post_types( [ 'public' => true, 'publicly_queryable' => true  ] );
+		foreach( $get_post_types as $type ) { 
+			// Skip the WOO CPT
+			if( $type === 'product' ) continue;
+			// Entry Meta
+			if( post_type_supports( $type, 'wecodeart-post-info' ) ) {
+				$defaults['content-entry-meta-' . $type . '-archive'] = [ 'author', 'date', 'comments' ];
+				$defaults['content-entry-meta-' . $type . '-singular'] = [ 'author', 'date', 'comments' ];
+			}
+			// Custom Container and Modules
+			$defaults['content-layout-container-' . $type . '-archive'] = 'container';
+			$defaults['content-layout-modules-' . $type . '-archive'] = [ 'content', 'primary' ];
+			$defaults['content-layout-container-' . $type . '-singular'] = 'container';
+			$defaults['content-layout-modules-' . $type . '-singular'] = [ 'content', 'primary' ];
+		}
 		
 		$args = apply_filters( 'wecodeart/filter/customizer/defaults', $defaults );
-
+		
 		// Allows to return a single mod_name default value
 		if( $mod_name && array_key_exists( $mod_name, $args ) ) return $args[$mod_name];
 		else return $args;

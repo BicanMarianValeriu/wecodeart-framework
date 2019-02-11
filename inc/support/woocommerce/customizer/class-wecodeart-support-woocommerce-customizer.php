@@ -16,7 +16,7 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6.0.3
  */
 class Customizer {
 	/**
@@ -36,8 +36,22 @@ class Customizer {
 	}
 
 	public function __construct() {
+		add_filter( 'wecodeart/filter/customizer/defaults', [ $this, 'extend_defaults' ] );
 		new Customizer\Content;
 	}
+
+	/**
+	 * Extend Customizer default options
+	 * @since 3.6.0.3
+	 */
+	public function extend_defaults( $defaults ) {
+		$defaults['content-layout-container-product-archive'] = 'container';
+		$defaults['content-layout-modules-product-archive'] = [ 'content', 'primary' ];
+		$defaults['content-layout-container-product-singular'] = 'container';
+		$defaults['content-layout-modules-product-singular'] = [ 'content', 'primary' ];
+
+		return $defaults;
+	} 
 
 	/**
 	 * A function to render woo content with hooks in it

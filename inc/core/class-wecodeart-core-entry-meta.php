@@ -307,19 +307,26 @@ class Meta {
 	/**
 	 * Get Contextual options
 	 * @since 	3.6
-	 * @version 3.6
+	 * @version 3.6.0.3
 	 * @return 	array $options
 	 */
 	public static function get_options() {
 		$get_post_types = get_post_types( array( 'public' => true, 'publicly_queryable' => true ) );
-		$options = [ 'author', 'date', 'comments' ];
+
+		// Set defaults here if not in customizer class
+		$defaults = [ 'author', 'date', 'comments' ];
+		$options = [];
+
 		foreach( $get_post_types as $type ) { 
+			// Post option preffix
 			$theme_mod =  'content-entry-meta-' . $type;
-			if( $type === 'post' && is_home() || is_post_type_archive( $type ) ) 
-				$options = get_theme_mod( $theme_mod . '-archive' );
+			$is_post_type_archive_page = $type === 'post' && is_home() || is_post_type_archive( $type );
+			if( $is_post_type_archive_page ) $options = get_theme_mod( $theme_mod . '-archive' );
 			elseif( is_singular( $type ) ) $options = get_theme_mod( $theme_mod . '-singular' ); 
 		}
-		return $options;
+
+		if( $options ) return $options; 
+		return $defaults;
 	}
 
 	/**

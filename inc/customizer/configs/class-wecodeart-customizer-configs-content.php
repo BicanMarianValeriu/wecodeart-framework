@@ -16,7 +16,7 @@ use WeCodeArt\Support\WooCommerce\Callbacks as WooCB;
  * @subpackage 	WP-Customizer Config
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6
+ * @version		v3.6.0.3
  */
 
 /**
@@ -39,7 +39,7 @@ class Content extends Config {
 		 * @uses apply_filters for changing this query args
 		 */
 		$get_post_types = get_post_types( 
-			apply_filters( 'wecodeart/customizer/config/get_post_types_args', [ 
+			apply_filters( 'wecodeart/customizer/configs/content/get_post_types_args', [ 
 				'public' => true, 
 				'publicly_queryable' => true 
 			] )
@@ -73,8 +73,7 @@ class Content extends Config {
 				'section'		=> 'content-layout',
 				'title'			=> __( 'Content Modules: Default', 'wecodeart' ),
 				'description'	=> __( 'Enable and reorder Site Inner modules.', 'wecodeart' ),
-				'priority'		=> 10,
-				'default'		=> [ 'content', 'primary' ],
+				'priority'		=> 10, 
 				'choices'		=> $c_modules, 
 				'transport'		=> 'postMessage',
 				'partial'		=> [
@@ -94,8 +93,7 @@ class Content extends Config {
 					'container'			=> __( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
 				),  
-				'priority' 		=> 10, 
-				'default'		=> 'container',
+				'priority' 		=> 10,  
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
 				'active_callback'	   => 'is_home',
 				'transport' 		   => 'postMessage'
@@ -107,8 +105,7 @@ class Content extends Config {
 				'section'		=> 'content-layout',
 				'title'			=> __( 'Content Modules: Blog Page', 'wecodeart' ),
 				'description'	=> __( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
-				'priority'		=> 15,
-				'default'		=> [ 'content', 'primary' ],
+				'priority'		=> 15, 
 				'choices'		=> $c_modules, 
 				'transport'		=> 'postMessage',
 				'active_callback' => 'is_home',
@@ -183,8 +180,7 @@ class Content extends Config {
 						'container'			=> __( 'Container', 'wecodeart' ),
 						'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
 					), 
-					'priority'             => 20,
-					'default'              => 'container',
+					'priority'             => 20, 
 					'active_callback'	   => function() use ( $type ) { return is_post_type_archive( $type ); },
 					'transport' 		   => 'postMessage'
 				),
@@ -195,8 +191,7 @@ class Content extends Config {
 					'section'		=> 'content-layout',
 					'title'			=> sprintf( __( 'Content Modules: %s Archive', 'wecodeart' ), $post_type->labels->singular_name ),
 					'description'	=> __( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
-					'priority'		=> 30,
-					'default'		=> [ 'content', 'primary' ],
+					'priority'		=> 30, 
 					'choices'		=> $c_modules,
 					'active_callback'	=> function() use( $type ) { return is_post_type_archive( $type ); }, 
 					'transport'		=> 'postMessage',
@@ -217,8 +212,7 @@ class Content extends Config {
 						'container'			=> __( 'Container', 'wecodeart' ),
 						'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
 					), 
-					'priority'             => 25,
-					'default'              => 'container',
+					'priority'             => 25, 
 					'active_callback'	   => function() use ( $type ) { return is_singular( $type ); },
 					'transport' 		   => 'postMessage'
 				),
@@ -229,8 +223,7 @@ class Content extends Config {
 					'section'		=> 'content-layout',
 					'title'			=> sprintf( __( 'Content Modules: %s Single', 'wecodeart' ), $post_type->labels->singular_name ),
 					'description'	=> __( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
-					'priority'		=> 35,
-					'default'		=> [ 'content', 'primary' ],
+					'priority'		=> 35, 
 					'choices'		=> $c_modules,
 					'active_callback'	=> function() use( $type ) { return is_singular( $type ); }, 
 					'transport'		=> 'postMessage',
@@ -264,8 +257,7 @@ class Content extends Config {
 					'title'			=> sprintf( __( 'Meta Modules: %s Archive', 'wecodeart' ), $type_obj->labels->singular_name ),
 					'description'	=> __( 'Enable/Disable/Reorder Entry Meta information modules for current post type - archive.', 'wecodeart' ),
 					'priority'		=> 5, 
-					'choices'		=> $m_modules, 
-					'default'		=> [ 'author', 'date', 'comments' ],
+					'choices'		=> $m_modules,  
 					'transport'		=> 'postMessage',
 					'active_callback' => function() use ( $type ) { 
 						if( $type === 'post' && is_home() ) return true;
@@ -285,8 +277,7 @@ class Content extends Config {
 					'title'			=> sprintf( __( 'Meta Modules: %s Single', 'wecodeart' ), $type_obj->labels->singular_name ),
 					'description'	=> __( 'Enable/Disable/Reorder Entry Meta information modules for current post type - single.', 'wecodeart' ),
 					'priority'		=> 10, 
-					'choices'		=> $m_modules, 
-					'default'		=> [ 'author', 'date', 'comments' ],
+					'choices'		=> $m_modules,  
 					'transport'		=> 'postMessage',
 					'active_callback' => function() use( $type ) { return is_singular( $type ); },
 					'partial'		=> [

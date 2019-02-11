@@ -1,3 +1,16 @@
+v3.6.0.3
+- Fix: Fatal error when no "customizer" options are set for blog meta on post (and other CPT) for archive page type;
+- Fix: Primary Menu - Added Fallback code fixes
+- Added: Default values for customizer Post type (singular/archive) for Entry Meta / Container / Modules
+- Added: Default values for customizer Modules/Container for Product Archive/Singular
+- Change: Encapsulated default JS into a self executing function
+
+v3.6.0.2
+- Fix: minor fix in minified file with Bootstrap dependency popper.js
+
+v3.6.0.1
+- Fix: minor fix with customizer config class
+
 v3.6.0 
 - IMPORTANT - Change: Boostrap ON / Foundation OFF
 - Change: Multiple changes in markup to use Bootstrap Classes

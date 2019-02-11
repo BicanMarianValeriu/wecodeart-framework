@@ -15,7 +15,7 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6.0.3
  */
 /**
  * Customizer Config initial setup
@@ -49,8 +49,7 @@ class Content extends Config {
 					'container' 		=> __( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
 				), 
-				'priority' 		=> 15,
-				'default'		=> 'container',
+				'priority' 		=> 15, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
 				'transport' 		   => 'postMessage',
 				'active_callback'	   => [ $callbacks, '_is_woocommerce_archive' ],
@@ -63,8 +62,7 @@ class Content extends Config {
 				'section'		=> 'content-layout',
 				'title'			=> __( 'Content Modules: Product Archive', 'wecodeart' ),
 				'description'	=> __( 'Enable and reorder Site Inner modules.', 'wecodeart' ),
-				'priority'		=> 20,
-				'default'		=> [ 'content', 'primary' ],
+				'priority'		=> 20, 
 				'choices'		=> $c_modules,
 				'active_callback' => [ $callbacks, '_is_woocommerce_archive' ],
 				'transport' 		   => 'postMessage',
@@ -85,8 +83,7 @@ class Content extends Config {
 					'container' 		=> __( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
 				), 
-				'priority' 		=> 15,
-				'default'		=> 'container',
+				'priority' 		=> 15, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
 				'transport' 		   => 'postMessage',
 				'active_callback'	   => 'is_product',
@@ -99,8 +96,7 @@ class Content extends Config {
 				'section'		=> 'content-layout',
 				'title'			=> __( 'Content Modules: Product Single', 'wecodeart' ),
 				'description'	=> __( 'Enable and reorder Site Inner modules.', 'wecodeart' ),
-				'priority'		=> 20,
-				'default'		=> [ 'content', 'primary' ],
+				'priority'		=> 20, 
 				'choices'		=> $c_modules,
 				'active_callback' => 'is_product',
 				'transport'		=> 'postMessage',
