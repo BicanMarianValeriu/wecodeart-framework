@@ -9,21 +9,20 @@ if ( ! defined( 'ABSPATH' ) ) exit(); // Exit if accessed directly.
  * @package 	WeCodeArt Framework
  * @subpackage  Header Bar Menu HTML
  * @since	 	v3.0.3
- * @version    	v3.5
+ * @version    	v3.6
  */
 ?>
 
-<div id="bar-menu" class="header-bar__menu cell small-12 medium-12 large-auto">
+<div id="bar-menu" class="header-bar__menu col-12 col-lg">
 	<nav itemscope="" itemtype="http://schema.org/SiteNavigationElement">
 	<?php 
 		wp_nav_menu( array(
 			'theme_location' => 'primary',
-			'container' 	 => false,
-			'menu_class' 	 => 'menu vertical medium-horizontal', 
+			'container' 	 => false, 
+			'menu_class' 	 => 'menu nav justify-content-end', 
 			'depth' 		 => 10, 
-			'items_wrap'	 => '<ul id="%1$s" class="%2$s" data-responsive-menu="accordion medium-dropdown">%3$s</ul>',
-			'walker' 		 => new WeCodeArt\Walkers\Menu,
-			'fallback_cb' 	 => 'wecodeart_menu_fallback',
+			'items_wrap'	 => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+			'walker' 		 => new WeCodeArt\Walkers\Menu 
 		) );
 	?>
 	</nav>

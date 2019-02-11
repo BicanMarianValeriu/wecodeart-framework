@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Protected Template
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6.0
  */
     global $post;
     $label = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
@@ -16,14 +16,18 @@
 <form action="<?php echo esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ); ?>" method="post" class="callout">	
     <h4><?php echo esc_html__( 'This post is password protected. To view this post, enter the password below:', 'wecodeart' ); ?></h4>
     <div class="input-group">
-        <span class="input-group-label">
-            <?php esc_html_e( 'Password', 'wecodeart' ); ?>:
-        </span>
-        <input class="input-group-field" name="post_password" type="password" size="20"
-            id="<?php echo esc_attr( $label ); ?>"
-            placeholder="<?php esc_attr_e( 'Enter password', 'wecodeart' ); ?>"/>
-        <div class="input-group-button">
-            <input type="submit" class="button" name="Submit" value="<?php esc_attr_e( 'Submit', 'wecodeart' ); ?>"/>
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <?php esc_html_e( 'Password', 'wecodeart' ); ?>:
+            </span>
+        </div>
+        <div class="input-group">
+            <input class="form-control" name="post_password" type="password" size="20"
+                id="<?php echo esc_attr( $label ); ?>"
+                placeholder="<?php esc_attr_e( 'Enter password', 'wecodeart' ); ?>" />
+        </div>
+        <div class="input-group-append">
+            <input type="submit" class="btn btn-primary" name="Submit" value="<?php esc_attr_e( 'Submit', 'wecodeart' ); ?>"/>
         </div>
     </div>
 </form>

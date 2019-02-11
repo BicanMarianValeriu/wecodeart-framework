@@ -1,16 +1,16 @@
 {
     "env": {
-        "browser": true
+        "browser": true,
+        "es6": true
     },
     "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module"
+        "ecmaVersion": 8,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        },
+        "sourceType": "module" 
     },
     "rules": {
-        "semi": 2,
-        "indent": [
-            "error",
-            "tab"
-        ]
+        "semi": 2
     }
 }

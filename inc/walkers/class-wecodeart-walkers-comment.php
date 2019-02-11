@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.9
- * @version		v3.5
+ * @version		v3.6
  */
 
 // Use
@@ -21,18 +21,24 @@ class Comment extends Walker_Comment {
 	var $tree_type = 'comment';
 	var $db_fields = array( 'parent' => 'comment_parent', 'id' => 'comment_ID' );
 
-	// start_lvl – wrapper for child comments list
+	/**
+	 * Start Level
+	 */
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
-		$output .= '<ul class="comment__children medium-offset-1 unstyled">' . "\n";
+		$output .= '<ul class="comment__children offset-md-1 unstyled pl-0">' . "\n";
 	}
 
-	// end_lvl – closing wrapper for child comments list
+	/**
+	 * End Level
+	 */
 	function end_lvl( &$output, $depth = 0, $args = array() ) {
 		$output .= "</ul>\n";
 	}
 
-	// end_el – closing HTML for comment template
-	function end_el(&$output, $comment, $depth = 0, $args = array() ) {
+	/**
+	 * End Element
+	 */
+	function end_el( &$output, $comment, $depth = 0, $args = array() ) {
 		$output .= "</li>\n";
 	}
 
@@ -49,14 +55,14 @@ class Comment extends Walker_Comment {
 		printf(
 			'<div class="ping-body"><p>%1$s %2$s<p></div>', 
 			get_comment_author_link( $comment ), 
-			get_edit_comment_link ( '&#9998;', '<span class="badge primary float-right">', '</span>' )
+			get_edit_comment_link( '&#9998;', '<span class="badge primary float-right">', '</span>' )
 		);
 	}
 	
 	/**
 	 * Outputs a HTML5 comment.
 	 * @since	2.0
-	 * @version	3.5
+	 * @version	3.6
 	 */
 	protected function comment( $comment, $depth, $args ) {
 		// Get what we need
@@ -76,13 +82,13 @@ class Comment extends Walker_Comment {
 
 		// The HTML
 		echo '<li id="comment-' . esc_attr( $comment->comment_ID ) . '" class="' . esc_attr( $class ) . '" itemscope itemtype="http://schema.org/Comment">';
-			echo '<div class="comment__body grid-x">';
+			echo '<div class="comment__body row">';
 			do_action( 'wecodeart/hook/comment/top' ); // Hook Comment Top
-				echo '<div class="cell">';
-					echo '<div class="grid-x grid-padding-x">';
-						echo '<div class="comment-avatar cell shrink"><figure class="gravatar">' . $author_img . '</figure></div>';
-						echo '<div class="comment-meta cell auto subheader">';
-							edit_comment_link ( '&#9998;', '<span class="comment-edit badge secondary float-right">', '</span>' );
+				echo '<div class="col-12">';
+					echo '<div class="row">';
+						echo '<div class="comment-avatar col-auto"><figure class="gravatar">' . $author_img . '</figure></div>';
+						echo '<div class="comment-meta col subheader">';
+							edit_comment_link ( '&#9998;', '<span class="comment-edit badge float-right">', '</span>' );
 							printf( '<span class="comment-author">%s</span>', $author_name );				
 							if ( $comment_date ) :
 								printf( 
@@ -94,7 +100,7 @@ class Comment extends Walker_Comment {
 						echo '</div>';
 					echo '</div>';
 				echo '</div>';
-				echo '<div class="cell">';
+				echo '<div class="col-12">';
 					if ( ! $comment->comment_approved ) echo '<p class="callout">' . $comment_amst .'</p>';
 					printf( '<div class="comment-content" itemprop="text"><p>%s</p></div>', $comment->comment_content );	
 					comment_reply_link( array_merge( $args, array(

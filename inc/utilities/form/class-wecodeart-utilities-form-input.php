@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Utilities\Form\Inputs
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.1.2
- * @version 	v3.5
+ * @version 	v3.6
  */
 class Input {	
 	/*
@@ -67,18 +67,7 @@ class Input {
 				<?php if ( isset( $label ) ) echo '<label>' . esc_html( $label ); ?>
 					<input type="<?php echo esc_attr( $type ) ?>" <?php echo implode ( ' ', $attributes ); ?>/>
 				<?php if ( isset( $label ) ) echo '</label>'; ?>
-			<?php break;
-			
-			/**
-			 * Range-js
-			 */
-			case 'range-js' :
-				if ( isset( $label ) ) echo '<label>' . esc_html( $label ) . '</label>'; ?>				
-				<div class="range-slider-init">
-					<span class="range-slider-handle ui-slider-handle"></span>		
-					<input class="range-slider-input" type="hidden" <?php echo implode ( ' ' , $attributes ); ?> />
-				</div>
-			<?php break;
+			<?php break; 
 			
 			/**
 			 * Textarea

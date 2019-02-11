@@ -16,7 +16,7 @@ use WeCodeArt\Support\WooCommerce\Callbacks as WooCB;
  * @subpackage 	WP-Customizer Config
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 /**
@@ -27,13 +27,23 @@ class Content extends Config {
 	 * Register Site Layout Customizer Configurations.
 	 * @param 	Array                $configurations 
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
-	 * @since 	3.5
+	 * @since 	3.6
 	 * @return 	Array 
 	 */
 	public function register( $configurations, $wp_customize ) {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
 		$callbacks	= WooCB::get_instance();
+		/**
+		 * Get post types for Config Options
+		 * @uses apply_filters for changing this query args
+		 */
+		$get_post_types = get_post_types( 
+			apply_filters( 'wecodeart/customizer/config/get_post_types_args', [ 
+				'public' => true, 
+				'publicly_queryable' => true 
+			] )
+		);
 
 		// Content Modules Choices
 		$c_modules = array();
@@ -46,12 +56,12 @@ class Content extends Config {
 				'type' 			=> 'control',
 				'control'  		=> 'select',
 				'section'		=> 'content-layout',
-				'title' 		=> __( 'Grid Type', 'wecodeart' ),
-				'description' 	=> __( 'Choose the wrapper type.', 'wecodeart' ),
-				'choices'  		=> [
-					'grid-container' 		=> __( 'Grid', 'wecodeart' ),
-					'grid-container fluid' 	=> __( 'Fluid Grid', 'wecodeart' )	
-				],
+				'title' 		=> __( 'Container Type', 'wecodeart' ),
+				'description' 	=> __( 'Choose the type of the container class.', 'wecodeart' ),
+				'choices'  		=> array(
+					'container'			=> __( 'Container', 'wecodeart' ),
+					'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
+				), 
 				'priority' 		=> 5, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
 				'transport' 		   => 'postMessage'
@@ -78,14 +88,14 @@ class Content extends Config {
 				'type' 			=> 'control',
 				'control'  		=> 'select',
 				'section'		=> 'content-layout',
-				'title'			=> __( 'Grid Type: Blog Page', 'wecodeart' ) ,
-				'description'	=> __( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
-				'choices'  		=> [
-					'grid-container' 		=> __( 'Grid', 'wecodeart' ),
-					'grid-container fluid' 	=> __( 'Fluid Grid', 'wecodeart' )
-				], 
+				'title'			=> __( 'Container Type: Blog Page', 'wecodeart' ) ,
+				'description' 	=> __( 'Choose the type of the container class. Affects only current page.', 'wecodeart' ),
+				'choices'  		=> array(
+					'container'			=> __( 'Container', 'wecodeart' ),
+					'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
+				),  
 				'priority' 		=> 10, 
-				'default'		=> 'grid-container',
+				'default'		=> 'container',
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
 				'active_callback'	   => 'is_home',
 				'transport' 		   => 'postMessage'
@@ -123,14 +133,14 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'select',
 					'section'		=> 'content-layout',
-					'title' 		=> sprintf( __( 'Grid Type: %s', 'wecodeart' ), $title ),
-					'description' 	=> __( 'Choose the wrapper type.', 'wecodeart' ),
-					'choices'  		=> [
-						'grid-container' 		=> __( 'Grid', 'wecodeart' ),
-						'grid-container fluid' 	=> __( 'Fluid Grid', 'wecodeart' )
-					],
+					'title' 		=> sprintf( __( 'Container Type: %s', 'wecodeart' ), $title ),
+					'description' 	=> __( 'Choose the type of the container class.', 'wecodeart' ),
+					'choices'  		=> array(
+						'container'			=> __( 'Container', 'wecodeart' ),
+						'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
+					), 
 					'priority'             => 20,
-					'default'              => 'grid-container',
+					'default'              => 'container',
 					'active_callback'	   => function() use ( $ID ) { return is_page( $ID ); },
 					'transport' 		   => 'postMessage'
 				),
@@ -157,10 +167,8 @@ class Content extends Config {
 		}
 
 		// Post Types Archives And Singular Context Mods 
-		$public_posts = get_post_types( array( 'public' => true ) );
-		unset( $public_posts['page'] );
+		$public_posts = $get_post_types; 
 		if( isset( $public_posts['product'] ) ) unset( $public_posts['product'] );
-
 		foreach( $public_posts as $type ) { 
 			$post_type = get_post_type_object( $type );
 			$config = array(
@@ -169,14 +177,14 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'select',
 					'section'		=> 'content-layout',
-					'title' 		=> sprintf( __( 'Grid Type: %s Archive', 'wecodeart' ), $post_type->labels->singular_name ),
-					'description' 	=> __( 'Choose the wrapper type.', 'wecodeart' ),
-					'choices'  		=> [
-						'grid-container' 		=> __( 'Grid', 'wecodeart' ),
-						'grid-container fluid' 	=> __( 'Fluid Grid', 'wecodeart' )
-					],
+					'title' 		=> sprintf( __( 'Container Type: %s Archive', 'wecodeart' ), $post_type->labels->singular_name ),
+					'description' 	=> __( 'Choose the type of the container class.', 'wecodeart' ),
+					'choices'  		=> array(
+						'container'			=> __( 'Container', 'wecodeart' ),
+						'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
+					), 
 					'priority'             => 20,
-					'default'              => 'grid-container',
+					'default'              => 'container',
 					'active_callback'	   => function() use ( $type ) { return is_post_type_archive( $type ); },
 					'transport' 		   => 'postMessage'
 				),
@@ -203,14 +211,14 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'select',
 					'section'		=> 'content-layout',
-					'title' 		=> sprintf( __( 'Grid Type: %s Single', 'wecodeart' ), $post_type->labels->singular_name ),
-					'description' 	=> __( 'Choose the wrapper type.', 'wecodeart' ),
-					'choices'  		=> [
-						'grid-container' 		=> __( 'Grid', 'wecodeart' ),
-						'grid-container fluid' 	=> __( 'Fluid Grid', 'wecodeart' )
-					],
+					'title' 		=> sprintf( __( 'Container Type: %s Single', 'wecodeart' ), $post_type->labels->singular_name ),
+					'description' 	=> __( 'Choose the type of the container class.', 'wecodeart' ),
+					'choices'  		=> array(
+						'container'			=> __( 'Container', 'wecodeart' ),
+						'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
+					), 
 					'priority'             => 25,
-					'default'              => 'grid-container',
+					'default'              => 'container',
 					'active_callback'	   => function() use ( $type ) { return is_singular( $type ); },
 					'transport' 		   => 'postMessage'
 				),
@@ -236,6 +244,62 @@ class Content extends Config {
 			$configurations = array_merge( $configurations, $config );
 		}
 		
+		/**
+		 * Entry Configurable Meta Info
+		 * @since 3.6 
+		 */
+		$m_modules = array();
+		$meta_modules = \WeCodeArt\Core\Entry\Meta::modules();
+		foreach( $meta_modules as $key => $val ) $m_modules[$key] = $val['label']; 
+
+		foreach( $get_post_types as $type ) { 
+			if( ! post_type_supports( $type, 'wecodeart-post-info' ) ) continue;
+			$type_obj = get_post_type_object( $type );
+			$meta_config = array(  
+				array(
+					'name'			=> 'content-entry-meta-' . $type . '-archive',
+					'type'        	=> 'control',
+					'control'  		=> 'wecodeart-sortable',
+					'section'		=> 'content-entry',
+					'title'			=> sprintf( __( 'Meta Modules: %s Archive', 'wecodeart' ), $type_obj->labels->singular_name ),
+					'description'	=> __( 'Enable/Disable/Reorder Entry Meta information modules for current post type - archive.', 'wecodeart' ),
+					'priority'		=> 5, 
+					'choices'		=> $m_modules, 
+					'default'		=> [ 'author', 'date', 'comments' ],
+					'transport'		=> 'postMessage',
+					'active_callback' => function() use ( $type ) { 
+						if( $type === 'post' && is_home() ) return true;
+						return is_post_type_archive( $type ); 
+					},
+					'partial'		=> [
+						'selector'        		=> '.entry-meta',
+						'render_callback' 		=> [ 'WeCodeArt\Core\Entry\Meta', 'render' ],
+						'container_inclusive' 	=> true
+					]
+				),
+				array(
+					'name'			=> 'content-entry-meta-' . $type . '-singular',
+					'type'        	=> 'control',
+					'control'  		=> 'wecodeart-sortable',
+					'section'		=> 'content-entry',
+					'title'			=> sprintf( __( 'Meta Modules: %s Single', 'wecodeart' ), $type_obj->labels->singular_name ),
+					'description'	=> __( 'Enable/Disable/Reorder Entry Meta information modules for current post type - single.', 'wecodeart' ),
+					'priority'		=> 10, 
+					'choices'		=> $m_modules, 
+					'default'		=> [ 'author', 'date', 'comments' ],
+					'transport'		=> 'postMessage',
+					'active_callback' => function() use( $type ) { return is_singular( $type ); },
+					'partial'		=> [
+						'selector'        		=> '.entry-meta',
+						'render_callback' 		=> [ 'WeCodeArt\Core\Entry\Meta', 'render' ],
+						'container_inclusive' 	=> true
+					]
+				)
+			); 
+			// Merge to main config
+			$configurations = array_merge( $configurations, $meta_config );
+		}
+
 		return $configurations;
 	}
 }

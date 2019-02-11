@@ -130,14 +130,14 @@ class Customizer {
 	 */
 	public static function get_defaults( $mod_name = '' ) {
 		$defaults = array(
-			'header-bar-container'			=> 'grid-container',
+			'header-bar-container'			=> 'container',
 			'header-bar-modules'			=> ['branding', 'menu', 'search'],
-			'content-layout-container'		=> 'grid-container',
+			'content-layout-container'		=> 'container',
 			'content-layout-modules'		=> ['content', 'primary'],
-			'content-layout-container-blog'	=> 'grid-container',
+			'content-layout-container-blog'	=> 'container',
 			'content-layout-modules-blog'	=> ['content', 'primary'], 
-			'footer-layout-container'		=> 'grid-container',
-			'footer-layout-modules'			=> ['footer-1', 'footer-2', 'footer-3', 'footer-4'],
+			'footer-layout-container'		=> 'container',
+			'footer-layout-modules'			=> ['footer-1', 'footer-2', 'footer-3' ],
 			'footer-copyright-text'			=> sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy;' ),
 			'page_for_404' 					=> '0'
 		);
@@ -207,18 +207,15 @@ class Customizer {
 			$config = wp_parse_args( $config, $this->get_config_defaults() );
 
 			switch ( $config['type'] ) {
-				case 'panel':
-					// Remove type from configuration.
+				case 'panel': 
 					unset( $config['type'] );
 					$this->register_panel( $config, $wp_customize );
 					break;
-				case 'section':
-					// Remove type from configuration.
+				case 'section': 
 					unset( $config['type'] );
 					$this->register_section( $config, $wp_customize );
 					break;
-				case 'control':
-					// Remove type from configuration.
+				case 'control': 
 					unset( $config['type'] );
 					$this->register_control( $config, $wp_customize );
 					break;

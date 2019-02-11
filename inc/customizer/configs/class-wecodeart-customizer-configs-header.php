@@ -15,7 +15,7 @@ use WeCodeArt\Customizer\Formatting as Formatting;
  * @subpackage 	WP-Customizer Config
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 /**
@@ -26,7 +26,7 @@ class Header extends Config {
 	 * Register Site Layout Customizer Configurations.
 	 * @param 	Array                $configurations 
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
-	 * @since 	3.5
+	 * @since 	3.6
 	 * @return 	Array 
 	 */
 	public function register( $configurations, $wp_customize ) {
@@ -44,10 +44,10 @@ class Header extends Config {
 				'control'  		=> 'select',
 				'section'		=> 'header-bar',
 				'title' 		=> __( 'Grid Type', 'wecodeart' ),
-				'description' 	=> __( 'Choose the width of .grid-container class.', 'wecodeart' ),
+				'description' 	=> __( 'Choose the type of the container class.', 'wecodeart' ),
 				'choices'  		=> array(
-					'grid-container' 		=> __( 'Grid', 'wecodeart' ),
-					'grid-container fluid' 	=> __( 'Fluid Grid', 'wecodeart' ),
+					'container'			=> __( 'Container', 'wecodeart' ),
+					'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
 				), 
 				'priority' 		=> 5, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ], 

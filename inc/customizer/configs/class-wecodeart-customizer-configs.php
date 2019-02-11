@@ -13,7 +13,7 @@ use WeCodeArt\Customizer\Config as Config;
  * @subpackage 	WP-Customizer Config
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 /**
@@ -24,7 +24,7 @@ class Configs extends Config {
 	 * Register Site Layout Customizer Configurations.
 	 * @param 	Array                $configurations 
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
-	 * @since 	3.5
+	 * @since 	3.6
 	 * @return 	Array 
 	 */
 	public function register( $configurations, $wp_customize ) {
@@ -60,6 +60,13 @@ class Configs extends Config {
 				'type'     => 'section',
 				'priority' => 5,
 				'title'    => __( 'Layout Settings', 'wecodeart' ),
+				'panel'    => 'content',
+			),
+			array(
+				'name'     => 'content-entry',
+				'type'     => 'section',
+				'priority' => 10,
+				'title'    => __( 'Entry Settings', 'wecodeart' ),
 				'panel'    => 'content',
 			),
 			/**

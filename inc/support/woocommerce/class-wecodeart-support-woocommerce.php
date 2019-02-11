@@ -16,7 +16,7 @@ use WeCodeArt\Customizer;
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.9
- * @version		v3.5
+ * @version		v3.6
  */
 
 /**
@@ -61,7 +61,7 @@ class WooCommerce {
 		add_action( 'woocommerce_after_main_content',    	array( $this, 'after_content_wrapp' ),  	10 );
 
 		// Filters
-		add_filter( 'wecodeart/filter/header-bar/modules', 	[ $this, 'add_cart_to_header_modules' ] );
+		add_filter( 'wecodeart/filter/header_bar/modules', 	[ $this, 'add_cart_to_header_modules' ] );
 		add_filter( 'woocommerce_add_to_cart_fragments',	[ $this, 'cart_count_fragments' ], 10, 1 );
 	}
 	
@@ -80,20 +80,20 @@ class WooCommerce {
 	 * Before Content
 	 * Wraps all WooCommerce content in wrappers which match the theme markup
 	 * @since   3.5
+	 * @version 3.6.0
 	 * @return  void
 	 */
-	public function before_content_wrapp() {
-		$default = Customizer::get_defaults( 'content-layout-container' );
+	public function before_content_wrapp() { 
 		if( WooCommerce\Callbacks::_is_woocommerce_archive() === true ) {
-			$wrapper = get_theme_mod( 'content-layout-container-product-archive', $default );
-		}
-
-		if( is_product() ) {
-			$wrapper = get_theme_mod( 'content-layout-container-product-singular', $default  );
+			$wrapper = get_theme_mod( 'content-layout-container-product-archive' );
+		} elseif( is_product() ) {
+			$wrapper = get_theme_mod( 'content-layout-container-product-singular' );
+		} else {
+			$wrapper = 'container';
 		} ?>
 		<div class="content-area content-area--woocommerce">
 			<div class="<?php echo sanitize_html_class( $wrapper ); ?>">
-				<div class="grid-x grid-padding-x grid-padding-y">
+				<div class="row">
 		<?php
 				self::sort_modules( 'before' );
 				Content::get_instance()->content_markup_open();
@@ -123,19 +123,19 @@ class WooCommerce {
 
 		if( WooCommerce\Callbacks::_is_woocommerce_archive() === true ) {
 			$modules = get_theme_mod( 'content-layout-modules-product-archive', $default ); 
-		}
-
-		if( is_product() ) {
+		} elseif( is_product() ) {
 			$modules = get_theme_mod( 'content-layout-modules-product-singular', $default ); 
+		} else {
+			$modules = [ 'content', 'primary' ];
 		} 
 
 		$index = array_search( 'content', $modules ); 
-		if( $position == 'after' ) $elements = array_slice( $modules, $index + 1 );
-		if( $position == 'before') $elements = array_slice( $modules, 0, $index, false ); 
+		if( $position === 'after' ) $elements = array_slice( $modules, $index + 1 );
+		if( $position === 'before') $elements = array_slice( $modules, 0, $index, false ); 
 
 		$sortable = wp_parse_args( [
-			'primary' => [
-				'callback' => [ __CLASS__, 'display_shop_sidebar' ]
+			'primary' => [ 
+				'callback' 	=> [ __CLASS__, 'display_shop_sidebar' ]
 			]
 		], \WeCodeArt\Core\Content::content_modules() );
 
@@ -163,7 +163,7 @@ class WooCommerce {
 
 	/**
 	 * Get Shop Sidebar HTML
-	 * @since	v3.5
+	 * @since	v3.6
 	 */
 	public static function display_shop_sidebar() {
 		// Adds ability to filter the attributes of secondary sidebar
@@ -171,7 +171,7 @@ class WooCommerce {
 			'sidebar-shop',
 			[
 				'id' => 'secondary-shop',
-				'class' => 'content__sidebar content__sidebar--shop cell small-12 large-4'
+				'class' => 'content__sidebar content__sidebar--shop col-12 col-lg-4'
 			]
 		);
 		?>
@@ -199,16 +199,16 @@ class WooCommerce {
 	/**
 	 * Render Header Bar Cart Module
 	 * @since   3.5
-	 * @version 3.5.0.2
+	 * @version 3.6.0
 	 * @return  void
 	 */
 	public static function display_cart_module() {
 		// Defaults
 		$defaults = array (
-			'class'		=> 'header-bar__cart cell shrink',
+			'class'		=> 'header-bar__cart col-auto dropdown',
 			'button'	=> [
 				'sr_text' => __( 'Show Cart', 'wecodeart' ),
-				'class' => 'button dropdown arrow-only',
+				'class' => 'dropdown-toggle',
 				'label' => '' // Not used yet - uses WooCommerce Cart Data
 			] 
 		);
@@ -219,8 +219,8 @@ class WooCommerce {
 			<button id="mini-cart" type="button" 
 				class="<?php echo esc_attr( $args['button']['class'] ) ?>"
 				title="<?php esc_attr_e( 'View your shopping cart', 'wecodeart' ); ?>"
-				data-toggle="woocommerce-cart">
-				<span class="show-for-sr"><?php esc_html_e( $args['button']['sr_text'] ); ?></span>
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="screen-reader-text"><?php echo esc_html( $args['button']['sr_text'] ); ?></span>
 				<span class="header-bar__cart-subtotal">
 					<?php echo wp_kses_post( WC()->cart->get_cart_subtotal() ); ?>
 				</span>
@@ -235,7 +235,7 @@ class WooCommerce {
 					?>
 				</span>
 			</button>
-			<div class="dropdown-pane" id="woocommerce-cart" data-dropdown data-hover="true" data-hover-pane="true">
+			<div class="dropdown-menu dropdown-menu-right" id="mini-woocommerce-cart" aria-labelledby="mini-cart">
 				<div class="widget_shopping_cart_content"></div>
 			</div>
 		</div>

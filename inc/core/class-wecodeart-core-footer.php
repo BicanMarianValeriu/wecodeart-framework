@@ -14,7 +14,7 @@ use WeCodeArt\Customizer as Customizer;
  * @subpackage 	Footer Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 class Footer {
@@ -73,15 +73,16 @@ class Footer {
 
 	/**
 	 * Footer Attribution
+	 * @version 3.6.0
 	 * @return 	HTML
 	 */
 	public function attribution_markup() {
 		$copyright = get_theme_mod( 'footer-copyright-text' );
 		?>
 		<div class="footer__attribution attribution">
-			<div class="grid-container fluid">
-				<div class="grid-x grid-padding-x grid-padding-y">
-					<div class="cell text-center">
+			<div class="container-fluid">
+				<div class="row py-3">
+					<div class="col text-center">
 						<span class="attribution__copyright"><?php echo esc_html( $copyright ); ?></span>
 						<span class="attribution__credits">
 							<?php
@@ -186,7 +187,7 @@ class Footer {
 			[
 				'tag' => 'div',
 				'attrs' => [
-					'class' => 'grid-x grid-padding-x grid-padding-y'
+					'class' => 'row pt-4'
 				]
 			]
 		);

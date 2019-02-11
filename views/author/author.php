@@ -10,7 +10,7 @@ use WeCodeArt\Utilities\Markup\SVG;
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box HTML
  * @since 		v3.0.3
- * @version		v3.5
+ * @version		v3.6
  */
 	$author = array();
 	$author['intro'] 	= is_author() ? __( 'All articles by', 'wecodeart' ) : __( 'About', 'wecodeart' );
@@ -23,24 +23,23 @@ use WeCodeArt\Utilities\Markup\SVG;
 	// Retur early if no name or desc
 	if ( 0 === mb_strlen( $author['name'] ) || 0 === mb_strlen( $author['desc'] ) ) return;
 
-	$wrapper = [ get_theme_mod( 'content-general-layout', 'grid-container' ) ];
-	$wrapper[] = ( ! is_author() ) ? 'full' : NULL;
+	$wrapper = is_single() ? [ 'container-full' ] : [ get_theme_mod( 'content-general-layout', 'container' ) ]; 
 ?>
 <div id="author-box" class="author-box">
 	<div class="<?php echo esc_attr( trim( implode( ' ', $wrapper ) ) ); ?>">
-		<div class="grid-x grid-padding-x">
-			<div class="author-box__name cell small-12">
+		<div class="row">
+			<div class="author-box__name col-12">
 				<h3 class="author-box__headline">
 					<?php SVG::render( 'icon--user' ); ?>	
 					<span><?php echo implode( ' ', [ $author['intro'], $author['name'] ] ); ?></span>
 				</h3>
 			</div>
-			<div class="author-box__gravatar cell small-12 medium-shrink text-center medium-text-left"><?php
+			<div class="author-box__gravatar col-12 col-md-auto text-center text-md-left"><?php
 				echo $author['avatar'];
 			?></div>
-			<div class="author-box__description cell auto">
+			<div class="author-box__description col">
 				<?php echo wpautop( get_the_author_meta( 'description' ) ); ?>
-				<a class="author-box__website button small hollow float-right"
+				<a class="author-box__website btn btn-sm small btn-outline-primary float-right"
 					href="<?php echo esc_url( get_the_author_meta( 'url' ) ); ?>" target="_blank" rel="nofollow">
 					<?php SVG::render( 'icon--globe' ); ?>
 					<span><?php esc_html_e( 'Website', 'wecodeart' ); ?></span>

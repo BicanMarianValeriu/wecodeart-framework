@@ -8,11 +8,11 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Header Bar Search HTML
  * @since	 	v3.0.3
- * @version    	v3.5
+ * @version    	v3.6
  */
 ?>
 
-<div id="bar-search" class="header-bar__search cell small-12 large-4 medium-order-99">
+<div id="bar-search" class="header-bar__search col-12 col-lg-4">
 	<?php get_search_form(); ?>
 </div>
 <!-- /bar-search -->

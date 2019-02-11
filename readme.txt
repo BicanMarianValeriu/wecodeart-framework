@@ -2,7 +2,7 @@
 ## https://www.wecodeart.com/
 
 Requires at least: WordPress 4.7
-Tested up to: WordPress 5.0.2
+Tested up to: WordPress 5.0.3
 Version: 3.0+
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -23,6 +23,6 @@ Font Awesome icons, Copyright Dave Gandy
 License: SIL Open Font License, version 1.1.
 Source: http://fontawesome.io/
 
-Foundation Framework, Copyright Zurb
+Bootstrap, Copyright Twitter
 License: MIT.
-Source: http://foundation.zurb.com/
+Source: https://getbootstrap.com/docs/4.2/about/license/

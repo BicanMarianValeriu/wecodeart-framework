@@ -16,7 +16,7 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * @subpackage 	Archive Intro Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 class Archive {
@@ -64,8 +64,8 @@ class Archive {
 		$wrappers = [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'archive-intro' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'grid-x grid-padding-x grid-padding-y' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'cell' ] ]
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col' ] ]
 		];
 
 		Markup::wrap( 'archive-wrappers', $wrappers, 'the_archive_title' );

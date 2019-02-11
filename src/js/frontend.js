@@ -1,33 +1,26 @@
-import wcaParseData from './plugins/wecodeart-parseData';
-import wcaLoadScript from './plugins/wecodeart-loadScript';
+import wcaHasScrollbar, { handleDocumentScrollbar } from './plugins/HasScrollbar';
 
-var wecodeart = window.wecodeart || {};
-// WeCodeArt 
-wecodeart.fn = {
-	// Get Plugin Options
-	getOptions: wcaParseData,
-	// Load Script Function
-	loadScript: wcaLoadScript
+import 'bootstrap/js/dist/util';
+import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/dropdown';
+
+/**
+ * Base WCA Functions
+ * @since 3.6
+ */
+wecodeart.fn = { 
+	hasScrollbar: wcaHasScrollbar
 };
 
-export default (function (wecodeart, $) {
-	'use strict';
-
-	wecodeart = wecodeart || {};
-
-	wecodeart.fn.init = function () {
-		// HTML Classes
-		var html = document.documentElement;
-		html.classList.remove('no-js');
-		html.classList.add('js');
-
-		document.addEventListener('DOMContentLoaded', () => {
-			let inOBJ = (wecodeart.assetsEnqueue.indexOf('wecodeart-core') > -1) ? true : null;
-			if (!inOBJ) return;
-			$(document).foundation();
-		});
-	};
-
-	return wecodeart.fn.init();
-
-}).apply(this, [window.wecodeart, jQuery]); 
+/**
+ * Init
+ */
+document.addEventListener('DOMContentLoaded', () => {
+	// HTML Classes
+	let html = document.documentElement;
+	html.classList.remove('no-js');
+	html.classList.add('js'); 
+	// Document Scrollbar
+	handleDocumentScrollbar(); 
+	jQuery(window).on('resize', handleDocumentScrollbar);
+});

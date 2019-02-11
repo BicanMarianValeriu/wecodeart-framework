@@ -3,11 +3,11 @@
  * @author		Bican Marian Valeriu <http://www.wecodeart.com/>
  * @package 	WeCodeArt Framework
  * @since 		v1.0
- * @version 	v3.5
+ * @version 	v3.6
  */
-(function ($) {
+(function ($) {  
 	var api = wp.customize; // Shorthand version of wp.customize
-	/**
+	/**  
 	 * These functions handle live preview for the Website Header Area
 	 */
 	// 1.Site Title
@@ -27,7 +27,7 @@
 	// 3.Header Bar Layout: Row or Expanded
 	api('header-bar-container', function (value) {
 		value.bind(function (to) {
-			$('#header-bar .grid-container').toggleClass('fluid', 'grid-container fluid' == to);
+			$('#header-bar .container').toggleClass('container-fluid', 'container-fluid' == to);
 		});
 	});
 
@@ -36,7 +36,7 @@
 	 */ 
 	api('content-layout-container', function (value) {
 		value.bind(function (to) {
-			$('.content .grid-container').toggleClass('fluid', 'grid-container fluid' == to);
+			$('.content .container').toggleClass('container-fluid', 'container-fluid' == to);
 		});
 	});
 
@@ -45,7 +45,7 @@
 	 */
 	api('footer-layout-container', function (value) {
 		value.bind(function (to) {
-			$('.footer__widgets .grid-container').toggleClass('fluid', 'grid-container fluid' == to);
+			$('.footer__widgets .container-fluid').toggleClass('container-fluid', 'container-fluid' == to);
 		});
 	});
 

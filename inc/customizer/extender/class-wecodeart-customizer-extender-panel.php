@@ -48,4 +48,3 @@ class Panel extends WP_Customize_Panel {
 		return $array;
 	}
 }
-

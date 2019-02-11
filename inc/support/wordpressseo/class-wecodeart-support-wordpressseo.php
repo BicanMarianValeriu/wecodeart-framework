@@ -15,7 +15,7 @@ use WeCodeArt\Core\Callbacks;
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 class WordPressSeo {
 	/**
@@ -46,6 +46,7 @@ class WordPressSeo {
 	/**
 	 * Yoast BreadCrumbs
 	 * @since   3.5
+	 * @version 3.6
 	 * @return  void
 	 */
 	public function render_yoast_breadcrumbs() {
@@ -55,7 +56,7 @@ class WordPressSeo {
 
 		if( Helpers::detectplugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
 			if( WooCommerce\Callbacks::_is_woocommerce_archive() === true ) {
-				unset($options['container']);
+				unset( $options['container'] );
 				$options['container'] = get_theme_mod( 'content-layout-container-product-archive' ); 
 			}
 	
@@ -68,8 +69,8 @@ class WordPressSeo {
 		$wrappers = [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'grid-x grid-padding-x grid-padding-y' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'cell' ] ]
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col' ] ]
 		];
 		
 		Markup::wrap( 
@@ -78,7 +79,7 @@ class WordPressSeo {
 			// Function to wrap
 			'yoast_breadcrumb',
 			// Function Arguments
-			[ '<div class="breadcrumbs__list">', '</div>' ]
+			[ '<div class="breadcrumbs__list py-2">', '</div>' ]
 		); 
 	}
 }

@@ -1,5 +1,23 @@
 /* 	= Base
 --------------------------------------------------------------- */
+/* 0.0 = Root */
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+select {
+    @extend .form-control;
+    width: 100%;
+}
+
+button,
+.button,
+input[type="submit"] {
+    @extend .btn;
+    @extend .btn-primary;
+}
+
+label {
+    width: 100%;
+}
+
 /* 1.0 = WordPress Core */
 .alignnone {
     margin: 5px 0px 20px 0;
@@ -123,10 +141,14 @@ a {
         height: 30px;
         vertical-align: -8%;
 
-        @include breakpoint(small down) {
+        @include media-breakpoint-down(sm) {
             width: 20px;
             height: 20px;
         }
+    }
+
+    label {
+        width: 100%;
     }
 }
 
@@ -188,17 +210,6 @@ hr {
     }
 }
 
-.no-js {
-    @include breakpoint(medium down) {
-        .header-bar {
-            &__menu,
-            &__search {
-                display: none;
-            }
-        }
-    }
-}
-
 .header {
     &__bar {
         padding: 10px 0;
@@ -218,30 +229,20 @@ hr {
     }
 
     .site-description {
-        @include breakpoint(small down) {
+        @include media-breakpoint-down(md) {
             font-size: 12px;
         }
     }
 }
 
-.header-bar {
+.header-bar { 
     &__menu,
     &__search {
-        @include breakpoint(medium down) {
-            order: 99;
-            padding: 10px 0 0;
-            border-top: 1px solid lightgray;
-        }
-    }
-
-    &__menu {
-        @include breakpoint(medium down) {
+        @include media-breakpoint-down(md) {
             margin-top: 10px;
-
-            & + .header-bar__search {
-                margin-top: 10px;
-                padding-bottom: 0;
-            }
+            order: 100;
+            padding-top: 10px;
+            border-top: 1px solid lightgray;
         }
     }
 
@@ -249,6 +250,17 @@ hr {
         svg {
             width: 20px;
             height: 20px;
+        }
+    }
+}
+
+.no-js {
+    @include media-breakpoint-down(md) {
+        .header-bar {
+            &__menu,
+            &__search {
+                display: none;
+            }
         }
     }
 }
@@ -264,9 +276,9 @@ hr {
 
 .has-sidebar {
     .content-area > * > * > * + * {
-        border-left: 1px solid lightgray;
-    
-        @include breakpoint(medium down) {
+        border-left: 1px solid lightgray; 
+
+        @include media-breakpoint-down(md) {
             border-left: 0;
         }
     }
@@ -299,19 +311,18 @@ hr {
             height: 30px;
             vertical-align: -8%;
 
-            @include breakpoint(small down) {
+            @include media-breakpoint-down(sm) {
                 width: 20px;
                 height: 20px;
-            }
+            } 
         }
     }
 
     &__website {
         svg {
             width: 12px;
-            height: 12px;
-            vertical-align: bottom;
-            fill: #1779ba;
+            height: 12px; 
+            fill: currentColor;
         }
     }
 }
@@ -346,8 +357,16 @@ hr {
             height: 100%;
         }
     } 
-}
+} 
 
-.cell.auto {
-    flex-basis: auto;
+/* 1.0 = WooCommerce */
+.woocommerce {
+    .col2-set {
+        .col-1,
+        .col-2 {
+            padding: 0;
+            flex: 0 0 48%;
+            max-width: 48%;
+        }
+    }
 }

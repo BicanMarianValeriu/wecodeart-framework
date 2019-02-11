@@ -60,7 +60,7 @@ class Content {
 			'content',
 			[
 				'id' => 'primary',
-				'class' => 'content__main cell small-12 large-auto'
+				'class' => 'content__main col col-sm-12 col-lg'
 			]
 		);
 		?>
@@ -129,7 +129,7 @@ class Content {
 			'sidebar-primary',
 			[
 				'id' => 'secondary',
-				'class' => 'content__sidebar cell small-12 large-4'
+				'class' => 'content__sidebar col col-sm-12 col-lg-4'
 			]
 		);
 		?>
@@ -153,7 +153,7 @@ class Content {
 			'sidebar-secondary',
 			[
 				'id' => 'secondary-2',
-				'class' => 'content__sidebar content__sidebar--secondary cell small-12 large-2'
+				'class' => 'content__sidebar content__sidebar--secondary col col-sm-12 col-lg-2'
 			]
 		);
 		?>
@@ -197,7 +197,7 @@ class Content {
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 * @since 	unknown
-	 * @version v3.5
+	 * @version v3.6
 	 * @uses	WeCodeArt\Utilities\Markup::wrap();
 	 * @return 	HTML
 	 */
@@ -225,7 +225,7 @@ class Content {
 			[
 				'tag' => 'div',
 				'attrs' => [
-					'class' => 'grid-x grid-padding-x'
+					'class' => 'row'
 				]
 			]
 		];
@@ -250,6 +250,8 @@ class Content {
 
 	/**
 	 * Get Contextual Modules Options
+	 * @since 	3.5.0
+	 * @version	3.6
 	 * @return array 
 	 */
 	public static function get_contextual_options() {
@@ -267,7 +269,7 @@ class Content {
 			$ID = $page->ID;
 			if( is_page( $ID ) ) {
 				return [
-					'container' => get_theme_mod( 'content-layout-container-page-' . $ID, 'grid-container' ),
+					'container' => get_theme_mod( 'content-layout-container-page-' . $ID, 'container' ),
 					'modules' 	=> get_theme_mod( 'content-layout-modules-page-' . $ID, [ 'content', 'primary' ] )
 				]; 
 			}
@@ -277,7 +279,7 @@ class Content {
 		$fof = get_theme_mod( 'page_for_404', '0' );
 		if( is_404() && $fof !== '' ) {
 			return [
-				'container' => get_theme_mod( 'content-layout-container-page-' . $fof, 'grid-container' ),
+				'container' => get_theme_mod( 'content-layout-container-page-' . $fof, 'container' ),
 				'modules' => get_theme_mod( 'content-layout-modules-page-' . $fof, [ 'content', 'primary' ] )
 			]; 
 		}
@@ -290,14 +292,14 @@ class Content {
 		foreach( $public_posts as $type ) { 
 			if( is_post_type_archive( $type ) ) {
 				return [
-					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive', 'grid-container' ),
+					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive', 'container' ),
 					'modules' => get_theme_mod( 'content-layout-modules-' . $type . '-archive', [ 'content', 'primary' ] )
 				]; 
 			}
 
 			if( is_singular( $type ) ) {
 				return [
-					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular', 'grid-container' ),
+					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular', 'container' ),
 					'modules' => get_theme_mod( 'content-layout-modules-' . $type . '-singular', [ 'content', 'primary' ] )
 				]; 
 			}

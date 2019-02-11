@@ -71,7 +71,7 @@ class Comments {
 	/**
 	 * Render Comments List
 	 * @since	unknows
-	 * @version v3.5
+	 * @version v3.6
 	 * @return 	string HTML
 	 */
 	public function render_comments_list() {
@@ -103,17 +103,17 @@ class Comments {
 				'avatar_size' 	=> 60,
 				'walker'		=> new CommentWalker,
 			) );
-			echo '<ol id="comments-list" class="comments-list no-bullet">';
+			echo '<ol id="comments-list" class="comments-list unstyled pl-0">';
 			wp_list_comments( $args );
 			echo '</ol>';
 			// Comments Navigation
 			$prev_link = get_previous_comments_link();
 			$next_link = get_next_comments_link();
 			if ( $prev_link || $next_link ) {
-				echo '<nav class="comments-navigation"><div class="grid-x grid-padding-x">';
+				echo '<nav class="comments-navigation"><div class="row">';
 				echo '<h3 class="show-for-sr">' . __( 'Comments Navigation', 'wecodeart' ) . '</h3>';
-				if ( $prev_link ) printf( '<div class="cell small-12 medium-auto">%s</div>', $prev_link );
-				if ( $next_link ) printf( '<div class="cell small-12 medium-auto text-right">%s</div>', $next_link );			
+				if ( $prev_link ) printf( '<div class="col col-sm-12 col-md">%s</div>', $prev_link );
+				if ( $next_link ) printf( '<div class="col col-sm-12 col-md text-right">%s</div>', $next_link );			
 				echo '</div></nav>';
 			}
 		// If Comments are open but there are no comments, print this message!
@@ -129,7 +129,7 @@ class Comments {
 	/**
 	 * Render Comment Form.
  	 * @since	unknown
-	 * @version v3.5
+	 * @version v3.6
 	 */
 	public function render_comment_form() {
 		// Bail if comments are closed for this post type.
@@ -139,8 +139,8 @@ class Comments {
 			'format'			 	=> 'html5',
 			'title_reply_before' 	=> '<h3 id="reply-title" class="headline"> ' . SVG::compile( 'icon--comment-dots' ) . ' ',
 			'title_reply_after'  	=> '</h3>',
-			'class_form' 			=> 'comment-form grid-x',
-			'class_submit' 			=> 'button',
+			'class_form' 			=> 'comment-form row no-gutters',
+			'class_submit' 			=> 'btn btn-primary',
 			'cancel_reply_before' 	=> '<span class="float-right"><small>',
 			'cancel_reply_after' 	=> '</small></span>'
 		) );
@@ -187,12 +187,12 @@ class Comments {
 	/**
 	 * Replace Comment Reply Button class.
 	 * @since	unknown
-	 * @version v3.5
+	 * @version v3.6
 	 * @param 	string $class
 	 * @return 	string $class
 	 */
 	public function replace_reply_link_class( $class ) {
-		$class = str_replace( "class='comment-reply-link", "class='comment-reply-link button tiny", $class );
+		$class = str_replace( "class='comment-reply-link", "class='comment-reply-link btn btn-primary btn-sm", $class );
 		return $class;
 	}
 }

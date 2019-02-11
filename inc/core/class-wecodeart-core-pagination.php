@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Pagination Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 class Pagination {
@@ -45,29 +45,29 @@ class Pagination {
 	/**
 	 * Display links to previous and next post, from a single post.
 	 * @since	v1.0
-	 * @version	v3.5
+	 * @version	v3.6
     * @return null Return early if not a post.
 	 */
 	public function prev_next_post_nav() {
         // Return only on Single Post
         if ( ! is_singular( 'post' ) ) return;	
         // Set the defaults
-        $prev = '<span class="show-for-sr">' . __( 'Previous Post', 'wecodeart' ) . '</span>';
-        $next = '<span class="show-for-sr">' . __( 'Next Post', 'wecodeart' ) . '</span>';
+        $prev = '<span class="screen-reader-text">' . __( 'Previous Post', 'wecodeart' ) . '</span>';
+        $next = '<span class="screen-reader-text">' . __( 'Next Post', 'wecodeart' ) . '</span>';
         $schema = '<span itemprop="name">%title</span>';
         // The HTML
         ?>
         <nav id="entry-prev-next" class="entry-prev-next"
             itemscope="" itemtype="http://schema.org/SiteNavigationElement">
-            <h3 class="show-for-sr"><?php _e( 'Post Navigation', 'wecodeart' ) ?></h3>
-            <div class="grid-x grid-margin-x grid-padding-y">
+            <h3 class="screen-reader-text"><?php _e( 'Post Navigation', 'wecodeart' ) ?></h3>
+            <div class="row pt-3">
             <?php
                 previous_post_link(
-                    '<div class="cell small-12 medium-auto">' . $prev . '%link</div>', 
+                    '<div class="col col-sm-12 col-md">' . $prev . '%link</div>', 
                     '&#x000AB; '. $schema 
                 );
                 next_post_link(
-                    '<div class="cell small-12 medium-auto medium-text-right">' . $next . '%link</div>',  
+                    '<div class="col col-sm-12 col-md text-md-right">' . $next . '%link</div>',  
                     $schema .' &#x000BB;'
                 );
             ?>
@@ -79,7 +79,7 @@ class Pagination {
 	/**
      * Display links to previous and next post, from a single post.
      * @since	v1.0
-     * @version v3.5
+     * @version v3.6
      * @return  string HTML
      */
     public function numeric_posts_nav() {
@@ -96,15 +96,12 @@ class Pagination {
         <nav itemscope="" itemtype="http://schema.org/SiteNavigationElement">
             <ul class="pagination" role="navigation" aria-label="<?php esc_attr_e( 'Pagination', 'wecodeart' ); ?>">
                 <?php foreach( $links as $key => $link ) { 
-                        $class = [ 'pagination__item' ];
+                        $class = [ 'page-item', 'pagination__item' ];
                         $class[] = ( strpos( $link, 'current' ) !== false ) ? 'pagination__item--current' : NULL;
-                        $class[] = ( strpos( $link, 'current' ) !== false ) ? 'current' : NULL;
+                        $class[] = ( strpos( $link, 'current' ) !== false ) ? 'active' : NULL;
                     ?>
-                    <li class="<?php echo esc_attr( trim( implode( ' ', $class ) ) ); ?>">
-                        <?php
-                            $link = str_replace( ' current', '', $link ); 
-                            echo $link; 
-                        ?>
+                    <li class="<?php echo esc_attr( trim( implode( ' ', $class ) ) ); ?> ">
+                        <?php echo str_replace( 'page-numbers', 'page-link', $link ); ?>
                     </li> 				
                 <?php } ?>
             </ul>
@@ -115,7 +112,7 @@ class Pagination {
     /**
      * WP-Link Pages for paginated posts
      * @since	unknown
-     * @version v3.0.2
+     * @version v3.6.0
      * @return 	null 	Return early if not a post.
      */
     public function post_content_nav() {
@@ -124,9 +121,9 @@ class Pagination {
         
         $label = '<span class="entry-pages__title label">' . __( 'Pages:', 'wecodeart' ) . '</span>';
         wp_link_pages( array(
-            'before'      => '<nav class="entry-pages" itemscope="" itemtype="http://schema.org/SiteNavigationElement">' . $label,
+            'before'      => '<nav class="entry-pages pagination" itemscope="" itemtype="http://schema.org/SiteNavigationElement">' . $label,
             'after'       => '</nav>',
-            'link_before' => '<span class="badge">',
+            'link_before' => '<span class="page-link">',
             'link_after'  => '</span>',
         ) );
     }

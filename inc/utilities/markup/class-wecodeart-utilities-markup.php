@@ -108,10 +108,8 @@ class Markup {
 		$output = '';
 		ob_start();
 		foreach( $functions as $f ) {
-			if( 
-				is_array( $f ) && method_exists( $f[0], $f[1] ) || 
-				is_string( $f ) && function_exists( $f ) 
-			) call_user_func( $f );
+			if( is_array( $f ) && method_exists( $f[0], $f[1] ) || is_string( $f ) && function_exists( $f ) ) 
+				call_user_func( $f );
 		}
 		$output .= ob_get_clean();	
 		// Return the output
@@ -164,16 +162,26 @@ class Markup {
 		if( empty( $function_html ) ) return;
 
 		$html = '';
+
 		foreach( $args as $key => $elem ) {
 			$context .= '-' . $key; // Dynamic context filter for each wrapper 
 			$open_tag = implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $context, $elem['attrs'] ) ] );
 			$html .= '<' . $open_tag . '>';
 		}
+
 		$html .= $function_html;
+		
 		foreach( $args as $elem ) $html .= '</' . esc_html( $elem['tag'] ) . '>';
 		
+		/**
+		 * Filter the final HTML output of the function
+		 * @since 	3.6.0
+		 * @return 	string of HTML
+		 */
+		$output = apply_filters( "wecodeart/filter/wrap/{$context}/output", $html, $context );
+
 		// Return the output
-		if( $echo ) echo $html; 
-		else return $html;
+		if( $echo ) echo $output; 
+		else return $output;
 	}
 }

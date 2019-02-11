@@ -7,9 +7,9 @@
         background: #fff;
         cursor: move;
 
-        &[data-value="content"] {
+        /* &[data-value="content"] {
             pointer-events: none;
-        }
+        } */
         
         &.invisible {
             color: #aaa;

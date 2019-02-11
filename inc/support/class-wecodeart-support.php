@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage  Theme Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 // Use
 use WeCodeArt\Support\WooCommerce;
@@ -54,6 +54,17 @@ class Support {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 */
 	function after_setup_theme() {
+		/**
+		 * Get post types for Config Options
+		 * @uses apply_filters for changing this query args
+		 */
+		$get_post_types = get_post_types( 
+			apply_filters( 'wecodeart/support/get_post_types_args', [ 
+				'public' => true, 
+				'publicly_queryable' => true 
+			] )
+		); 
+
 		// Content width
 		$GLOBALS['content_width'] = apply_filters( 'wecodeart/filter/content_width', 1280 );
 
@@ -92,11 +103,8 @@ class Support {
 		 */
 		add_theme_support( 'responsive-embeds' );
 
-		// Add support for Meta info for posts other than Page Type
-		$public_posts = get_post_types( array( 'public' => true ) );
-		foreach( $public_posts as $post_type ) if( 'page' !== $post_type ) {
-			add_post_type_support( $post_type, 'wecodeart-post-info' );
-		}
+		// Add support for Meta info for posts other than Page Type 
+		foreach( $get_post_types as $type ) add_post_type_support( $type, 'wecodeart-post-info' ); 
 
 		// Register New Menu
 		register_nav_menus( array(
@@ -110,20 +118,20 @@ class Support {
 				array(
 					'name'      => __( 'Small', 'wecodeart' ),
 					'shortName' => __( 'S', 'wecodeart' ),
-					'size'      => 19.5,
+					'size'      => 14,
 					'slug'      => 'small',
 				),
 				array(
 					'name'      => __( 'Normal', 'wecodeart' ),
 					'shortName' => __( 'M', 'wecodeart' ),
-					'size'      => 22,
+					'size'      => 16,
 					'slug'      => 'normal',
 				),
 
 				array(
 					'name'      => __( 'Large', 'wecodeart' ),
 					'shortName' => __( 'L', 'wecodeart' ),
-					'size'      => 36.5,
+					'size'      => 26,
 					'slug'      => 'large',
 				),
 				array(

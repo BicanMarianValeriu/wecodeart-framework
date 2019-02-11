@@ -11,13 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @subpackage 	WP-Customizer Config
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 /**
  * Customizer Config initial setup
  */
-class Config {
+abstract class Config {
 	/**
 	 * Instance
 	 *
@@ -46,9 +46,7 @@ class Config {
 	 * @param 	Array                $configurations 
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
 	 * @since 	3.5
-	 * @return 	Array 
+	 * @version 3.6 
 	 */
-	public function register( array $configurations, $wp_customize ) {
-		return $configurations;
-	}
+	public abstract function register( array $configurations, $wp_customize );
 }

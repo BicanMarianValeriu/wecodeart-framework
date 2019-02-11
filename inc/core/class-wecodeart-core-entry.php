@@ -16,7 +16,7 @@ use WeCodeArt\Utilities\Markup\SVG;
  * @subpackage 	Entry Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 class Entry {
@@ -45,7 +45,6 @@ class Entry {
 		add_action( 'wecodeart_entry_open',		[ $this, 'markup_open' ], 			5	);
 		add_action( 'wecodeart_entry_header', 	[ $this, 'header_markup_open' ],	10 	);
 		add_action( 'wecodeart_entry_header', 	[ $this, 'render_title_markup' ],	15 	);
-		add_action( 'wecodeart_entry_header', 	[ $this, 'render_post_meta' ],		20 	);
 		add_action( 'wecodeart_entry_header', 	[ $this, 'header_markup_close' ],	90 	);
 		add_action( 'wecodeart_entry_footer', 	[ $this, 'footer_markup_open' ],	5 	);
 		add_action( 'wecodeart_entry_footer', 	[ $this, 'render_post_footer' ] 		);
@@ -57,16 +56,19 @@ class Entry {
 		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_noposts' ], 		10 	);
 
 		add_action( 'the_password_form', 		[ $this, 'render_paswordprotected' ] 	);
+
+		// Init Meta Class
+		Entry\Meta::get_instance();
 	}
 	
 	/**
 	 * Entry Markup Open
 	 * @since 	v1
-	 * @version v3.5
+	 * @version v3.6
 	 * @return 	string HTML
 	 */
 	public function markup_open() {
-		$classes = [ 'flex-container', 'flex-dir-column' ];
+		$classes = [ 'd-flex', 'flex-column', 'mb-3' ];
 		$attributes = Markup::generate_attr(
 			'entry',
 			[
@@ -96,12 +98,7 @@ class Entry {
 	 * @return 	string HTML
 	 */
 	public function header_markup_open() {
-		$attributes = Markup::generate_attr(
-			'entry-header',
-			[
-				'class'	=> 'entry-header'
-			]
-		);
+		$attributes = Markup::generate_attr( 'entry-header', [ 'class'	=> 'entry-header' ] );
 		?>
 		<header <?php echo $attributes; ?>>
 		<?php
@@ -124,12 +121,7 @@ class Entry {
 	 * @return 	string HTML
 	 */
 	public function footer_markup_open() {
-		$attributes = Markup::generate_attr(
-			'entry-header',
-			[
-				'class'	=> 'entry-footer'
-			]
-		);
+		$attributes = Markup::generate_attr( 'entry-header', [ 'class'	=> 'entry-footer' ] );
 		?>
 		<footer <?php echo $attributes; ?>>
 		<?php
@@ -203,271 +195,12 @@ class Entry {
 	} 
 
 	/**
-	 * Entry Meta Author Template
-	 * @since	v1.0
-	 * @version v3.3
-	 */
-	public function wecodeart_post_meta_author( $args = array() ) {
-		// Set the defaults
-		$defaults = array(
-			'before'	=> SVG::compile( 'icon--user', [ 'title' => 'Some Title' ] ),
-			'after'  	=> '&nbsp;',
-			'sr_text'  	=>  __( 'Posted by ', 'wecodeart' ),
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/author/defaults', $defaults ) );
-
-		// Get what we need
-		$author	= get_the_author();
-		$url    = get_author_posts_url( get_the_author_meta( 'ID' ) );
-
-		// The HTML
-		return apply_filters( 'wecodeart/filter/entry/meta/author/html', sprintf(
-			/* translators: %s: post author */
-			__( '<span class="entry-author">%1$s %2$s %3$s %4$s %5$s</span>', 'wecodeart' ),
-			$args[ 'before' ],
-			'<span class="show-for-sr">' . esc_html( $args['sr_text'] ) . '</span>',
-			sprintf( '<a href="%s" class="entry-author-link" rel="author">', esc_url( $url ) ),
-			sprintf( '<span class="entry-author-name">%s</span></a>', esc_html( $author ) ),
-			$args[ 'after' ] ) 
-		);
-	}
-
-	/**
-	 * Entry Meta Date Template
-	 * @since	v1.0
-	 * @version v3.3
-	 */
-	public function wecodeart_post_meta_date( $args = array() ) {
-		// Set the Defaults
-		$defaults = array(
-			'before'	=> SVG::compile( 'icon--clock' ),
-			'after'  	=> '&nbsp;',
-			'sr_text'  	=> __( 'Posted on ', 'wecodeart' ),
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/date/defaults', $defaults ) );
-
-		$output = '<time class="published" datetime="%1$s">%2$s</time>';
-		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$output .= '<time class="updated hide" datetime="%3$s">%4$s</time>';
-		}
-
-		$output = sprintf( $output,
-			get_the_date( DATE_W3C ),
-			get_the_date(),
-			get_the_modified_date( DATE_W3C ),
-			get_the_modified_date()
-		);
-
-		// Wrap the time string in a link, add scren-reader-text and FontIcon.
-		return apply_filters( 'wecodeart/filter/entry/meta/date/html', sprintf(
-			/* translators: %s: post date */
-			__( '<span class="entry-date">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ),
-			$args[ 'before' ],
-			'<span class="show-for-sr">' . esc_html( $args['sr_text'] ) . '</span>',
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $output . '</a>',
-			$args[ 'after' ] ) 
-		);
-	} 
-
-	/**
-	 * Entry Meta Categories Template
-	 * @since	v1.0
-	 * @version v3.5
-	 */
-	public function wecodeart_post_meta_cats( $args = array() ) {
-		// Set the defaults
-		$defaults = array(
-			'before' 	=> SVG::compile( 'icon--folder' ),
-			'after'  	=> '&nbsp;',
-			'sr_text'	=> __( 'Posted in ', 'wecodeart' ),
-			'sep'    	=> ', ',
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/cats/defaults', $defaults ) );
-
-		// Get what we need
-		$cats = get_the_category_list( $args['sep'] );
-
-		// Do nothing if no cats
-		if ( ! $cats ) return;
-
-		// The HTML
-		return apply_filters( 'wecodeart/filter/entry/meta/cats/html', sprintf( 
-			/* translators: %s: post cats */
-			__( '<span class="entry-cats">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ), 
-			$args[ 'before' ], 
-			'<span class="show-for-sr">' . esc_html( $args['sr_text'] ) . '</span>',
-			$cats, 
-			$args[ 'after' ] 
-			) 
-		);
-	}
-
-	/**
-	 * Entry Meta Tags Template
-	 * @since	v1.0
-	 * @version v3.3
-	 */
-	public function wecodeart_post_meta_tags( $args = array() ) {
-		// Set the Defaults
-		$defaults = array(
-			'before'  	=> SVG::compile( 'icon--tag' ),
-			'after'  	=> '&nbsp;',
-			'sr_text'	=> __( 'Tagged with ', 'wecodeart' ),
-			'sep'  		=> ',',
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/tags/defaults', $defaults ) );
-
-		// Get what we need
-		$tags = get_the_tag_list( '', trim( $args['sep'] ) . ' ', '' );
-
-		// Do nothing if no tags
-		if ( ! $tags ) return;
-
-		// The HTML
-		return apply_filters( 'wecodeart/filter/entry/meta/tags/html', sprintf( 
-			/* translators: %s: post tags */
-			__( '<span class="entry-tags">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ),
-			$args['before'],
-			'<span class="show-for-sr">' . esc_html( $args['sr_text'] ) . '</span>',
-			$tags,
-			$args['after']
-			) 
-		);
-	} 
-
-	/**
-	 * Entry Meta Comments Template
-	 * @since	v1.0
-	 * @version v3.3
-	 */
-	public function wecodeart_post_meta_comments( $args = array() ) {
-		// Only if post type supports
-		if ( ! post_type_supports( get_post_type(), 'comments' ) ) return;
-
-		// Set the Defaults
-		$defaults = array(
-			'before'       	=> SVG::compile( 'icon--comments' ),
-			'after'      	=> '&nbsp;',
-			'hide_if_off' 	=> true,
-			'more'        	=> __( '% Comments', 'wecodeart' ),
-			'one'         	=> __( '1 Comment', 'wecodeart' ),
-			'zero'        	=> __( 'Leave a Comment', 'wecodeart' ),
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/comments/defaults', $defaults ) );
-
-		// Show only where comments are enabled or have comments (even if disabled)
-		if ( ( ! comments_open() && 0 === get_comments_number() ) && true === $args['hide_if_off'] ) { 
-			return;
-		} elseif ( comments_open() && ! have_comments() || ! comments_open() && 0 < get_comments_number() ) {
-			// Get what we need
-			ob_start();
-			comments_number( $args['zero'], $args['one'], $args['more'] );
-			$comments = ob_get_clean();	
-			$comments = '<a href="' . esc_url( get_comments_link() ) . '" rel="nofollow">' . esc_html( $comments ) . '</a>';
-
-			// The HTML
-			return apply_filters( 'wecodeart/filter/entry/meta/comments/html', sprintf( 
-				/* translators: %s: post comments */
-				__( '<span class="entry-comments">%1$s %2$s %3$s</span>', 'wecodeart' ),
-				$args['before'],
-				$comments,
-				$args['after']
-				) 
-			);
-		}
-	}
-
-	/**
-	 * Entry Meta Edit Template
-	 * @since	v1.0
-	 * @version	v3.5
-	 * @return 	HTML
-	 */
-	public function wecodeart_post_meta_edit( $args = array() ) {
-		if( ! is_user_logged_in() ) return;
-		// Set the defaults
-		$defaults = array(
-			'before' 	=> '&nbsp;',
-			'after'  	=> '',
-			'text'   	=> '&#9998;',
-			'class'  	=> 'entry-edit-link badge primary',
-		);
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/edit/defaults', $defaults ) );
-
-		// Get what we need
-		ob_start();
-		edit_post_link( esc_html( $args['text'] ), esc_html( $args['before'] ), esc_html( $args['after'] ), '', esc_attr( $args['class'] )  );
-		$output = ob_get_clean();
-
-		// The HTML	
-		return apply_filters( 
-			'wecodeart/filter/entry/meta/edit/html', 
-			sprintf( __( '<span class="entry-edit float-right">%1s</span>', 'wecodeart' ), $output )
-		);
-	}
-
-	/**
-	 * Entry Meta Read More Template
-	 * @since	v1.0
-	 * @version	v3.5
-	 * @return 	HTML
-	 */
-	public function wecodeart_post_meta_more( $args = array() ) {
-		// Set the Defaults
-		$defaults = array(
-			'before'	=> '',
-			'after' 	=> '&#xbb;',
-			'text' 		=> __( 'Read More', 'wecodeart' ),
-			'class' 	=> 'entry-more button float-right',
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/more/defaults', $defaults ) );
-
-		// The HTML
-		return apply_filters( 'wecodeart/filter/entry/more/html', sprintf( 
-			'<a href="%1$s" class="%2$s">%3$s %4$s %5$s</a>', 
-			get_permalink(), 
-			esc_attr( $args['class'] ), 
-			$args['before'], 
-			esc_html( $args['text'] ), 
-			$args['after'] ) 
-		);
-	}
-
-	/**
-	 * Echo the post info (byline) under the post title.
-	 * By default, only does post info on posts.
-	 */
-	public function render_post_meta() {
-		// Do dont return on Pages
-		if( ! post_type_supports( get_post_type(), 'wecodeart-post-info' ) ) {
-			return;
-		}
-		// The HTML
-		$output  = '<p class="entry-meta subheader">';
-		$output .= $this->wecodeart_post_meta_author();
-		$output .= $this->wecodeart_post_meta_date();
-		$output .= $this->wecodeart_post_meta_cats();
-		if( apply_filters( 'wecodeart_filter_show_meta_tags', false ) ) 
-			$output .= $this->wecodeart_post_meta_tags();
-		$output .= $this->wecodeart_post_meta_comments();
-		$output .= $this->wecodeart_post_meta_edit();
-		$output .= '</p>';
-		echo $output;
-	}
-
-	/**
 	 * Echo the post read more button.
 	 * By default, only does it on archives.
 	 */
 	public function render_post_footer() {
 		// Do dont return on Singular
-		if ( ! is_singular() ) echo $this->wecodeart_post_meta_more();
+		if ( ! is_singular() ) echo Entry\Meta::read_more();
 	}
 
 	/**

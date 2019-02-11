@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Front-End Scripts
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.9
- * @version		v3.5
+ * @version		v3.6
  */ 
 
 class Scripts {
@@ -43,18 +43,19 @@ class Scripts {
 	/**
 	 * WeCodeArt JS Object
 	 * @since	v3.2
-	 * @version v3.5.0.2
+	 * @version v3.6
 	 */
 	public function localize_js() {
 		global $wp_scripts;
 
-		$wecodeart = apply_filters( 'wecodeart/filter/scripts/localize_js', [
-			'assetsEnqueue' 	=> wp_json_encode( $wp_scripts->queue ),
-			'functionsQueue' 	=> [],
+		$wecodeart = [
+			'assetsEnqueue' 	=> wp_json_encode( $wp_scripts->queue ), 
 			'templateDirectory' => get_template_directory_uri()
-		] );
+		];
 		if( is_child_theme() ) $wecodeart['childDirectory'] = get_stylesheet_directory_uri();
-		wp_localize_script( 'wecodeart-core', 'wecodeart', $wecodeart );
+		wp_localize_script( 'wecodeart-core', 'wecodeart', 
+			apply_filters( 'wecodeart/filter/scripts/localize_js', $wecodeart ) 
+		);
 	}
 
 	/**
@@ -73,15 +74,14 @@ class Scripts {
 	/**
 	 * Enqueue Front-End Styles
 	 * @since	v1.0
-	 * @version v3.5
+	 * @version v3.6
 	 */
 	public function front_scripts() {
 		// Enqueue Styles
-		wp_enqueue_style( 'wecodeart-core',	get_parent_theme_file_uri( '/assets/css/style.css' ), [], '3.5' );
+		wp_enqueue_style( 'wecodeart-core',	get_parent_theme_file_uri( '/assets/css/style.css' ), [], '3.6' );
 
 		// Enqueue scripts
-		wp_enqueue_script( 'wecodeart-core', 		get_parent_theme_file_uri( '/assets/js/bundle.js' ), 			array( 'jquery' ), '3.5', true );		
-		wp_enqueue_script( 'wecodeart-foundation', 	get_parent_theme_file_uri( '/assets/js/foundation.min.js' ), 	array( 'jquery' ), '6.5.1', true );
+		wp_enqueue_script( 'wecodeart-core', get_parent_theme_file_uri( '/assets/js/frontend.js' ), ['jquery'], '3.6', true );		
 		if ( 
 			( is_page() && comments_open() && get_option( 'thread_comments' ) ) || 
 			( is_single() && comments_open() && get_option( 'thread_comments' ) ) 

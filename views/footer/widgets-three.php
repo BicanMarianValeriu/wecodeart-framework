@@ -8,9 +8,9 @@
 	 * @package 	WeCodeArt Framework
 	 * @subpackage 	Widgets HTML
 	 * @since  		v3.5
-	 * @version 	v3.5
+	 * @version 	v3.6
 	 */
 ?>
-<div class="cell small-12 large-auto">
+<div class="col-12 col-lg mb-4">
 	<?php if ( ! function_exists( 'dynamic_sidebar' ) || ! dynamic_sidebar( 'footer-3' ) ); ?>
 </div>

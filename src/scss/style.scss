@@ -5,58 +5,71 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu
 Author URI: http://www.iambican.com/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Now is Gutenberg ready.
-Version: 3.5.0.2
+Version: 3.6.0
 Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-menu, custom-logo, custom-header, flexible-header, footer-widgets, theme-options, threaded-comments, translation-ready
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: wecodeart
-Info: Unminified CSS/SCSS is found in /src/ folder 
+Text Domain: wecodeart 
 !*/
-/* Foundation SCSS */
-@import 'abstracts/settings';
-@import "../../node_modules/foundation-sites/scss/foundation";
-//@include foundation-everything;
-@include foundation-global-styles;
-@include foundation-xy-grid-classes;
-//@include foundation-grid;
-//@include foundation-flex-grid;
-@include foundation-flex-classes;
-@include foundation-typography;
-@include foundation-forms;
-@include foundation-button;
-@include foundation-accordion;
-@include foundation-accordion-menu;
-@include foundation-badge;
-//@include foundation-breadcrumbs;
-@include foundation-button-group;
-@include foundation-callout;
-@include foundation-card;
-@include foundation-close-button;
-@include foundation-menu;
-@include foundation-menu-icon;
-@include foundation-drilldown-menu;
-@include foundation-dropdown;
-@include foundation-dropdown-menu;
-@include foundation-responsive-embed;
-@include foundation-label;
-//@include foundation-media-object;
-//@include foundation-off-canvas;
-//@include foundation-orbit;
-@include foundation-pagination;
-//@include foundation-progress-bar;
-//@include foundation-slider;
-//@include foundation-sticky;
-@include foundation-reveal;
-@include foundation-switch;
-@include foundation-table;
-@include foundation-tabs;
-@include foundation-thumbnail;
-//@include foundation-title-bar;
-@include foundation-tooltip;
-//@include foundation-top-bar;
-@include foundation-visibility-classes;
-@include foundation-float-classes;
-@include foundation-prototype-list-style-type;
+
+// Required
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "abstracts/variables";
+
+// Optional
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/code";
+@import "../../node_modules/bootstrap/scss/grid";
+@import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/code";
+@import "../../node_modules/bootstrap/scss/dropdown";
+@import "../../node_modules/bootstrap/scss/forms";
+@import "../../node_modules/bootstrap/scss/input-group";
+@import "../../node_modules/bootstrap/scss/nav";
+@import "../../node_modules/bootstrap/scss/pagination";
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/tables";
+//@import "../../node_modules/bootstrap/scss/utilities";
+@import "../../node_modules/bootstrap/scss/utilities/align";
+@import "../../node_modules/bootstrap/scss/utilities/display";
+@import "../../node_modules/bootstrap/scss/utilities/clearfix";
+@import "../../node_modules/bootstrap/scss/utilities/flex";
+@import "../../node_modules/bootstrap/scss/utilities/float";
+@import "../../node_modules/bootstrap/scss/utilities/screenreaders";
+@import "../../node_modules/bootstrap/scss/utilities/spacing";
+@import "../../node_modules/bootstrap/scss/utilities/text";
+@import "../../node_modules/bootstrap/scss/utilities/visibility";
+//@import "../../node_modules/bootstrap/scss/utilities/background";
+//@import "../../node_modules/bootstrap/scss/utilities/borders";
+//@import "../../node_modules/bootstrap/scss/utilities/embed";
+//@import "../../node_modules/bootstrap/scss/utilities/shadows";
+//@import "../../node_modules/bootstrap/scss/utilities/sizing"; 
+//@import "../../node_modules/bootstrap/scss/utilities/overflow";
+//@import "../../node_modules/bootstrap/scss/utilities/position";
+
+//@import "../../node_modules/bootstrap/scss/badge";
+//@import "../../node_modules/bootstrap/scss/popover";
+//@import "../../node_modules/bootstrap/scss/navbar";
+//@import "../../node_modules/bootstrap/scss/print";
+//@import "../../node_modules/bootstrap/scss/transitions"; 
+//@import "../../node_modules/bootstrap/scss/alert";
+//@import "../../node_modules/bootstrap/scss/images";
+//@import "../../node_modules/bootstrap/scss/breadcrumb";
+//@import "../../node_modules/bootstrap/scss/button-group";
+//@import "../../node_modules/bootstrap/scss/card";
+//@import "../../node_modules/bootstrap/scss/carousel";
+//@import "../../node_modules/bootstrap/scss/close";
+//@import "../../node_modules/bootstrap/scss/custom-forms";
+//@import "../../node_modules/bootstrap/scss/jumbotron";
+//@import "../../node_modules/bootstrap/scss/list-group";
+//@import "../../node_modules/bootstrap/scss/media";
+//@import "../../node_modules/bootstrap/scss/modal";
+//@import "../../node_modules/bootstrap/scss/progress";
+//@import "../../node_modules/bootstrap/scss/spinners";
+//@import "../../node_modules/bootstrap/scss/toasts";
+//@import "../../node_modules/bootstrap/scss/tooltip";
 
 /* Base WP + WeCodeart */
 @import 'base/base';

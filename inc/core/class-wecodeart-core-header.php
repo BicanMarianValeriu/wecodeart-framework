@@ -13,7 +13,7 @@ use WeCodeArt\Utilities\Markup as Markup;
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 class Header {
@@ -130,7 +130,7 @@ class Header {
 	/**
 	 * Variable that holds the Header Modules and Options
 	 * @since	v1.5
-	 * @version v3.5
+	 * @version v3.6
 	 * @return 	array
 	 */
 	public static function nav_bar_modules() {
@@ -149,18 +149,15 @@ class Header {
 		$defaults['search'] = array(
 			'label'    => __( 'Search Form', 'wecodeart' ),
 			'callback' => array( __CLASS__, 'display_search' )
-		);
-		
-		// New Modules
-		$modules = apply_filters( 'wecodeart/filter/header-bar/modules', $defaults );
+		); 
 
-		return $modules;
+		return apply_filters( 'wecodeart/filter/header_bar/modules', $defaults ); 
 	}
 
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 * @since 	unknown
-	 * @version v3.5
+	 * @version v3.6
 	 * @uses	wecodeart_sortable_html()
 	 * @return 	HTML
 	 */
@@ -176,13 +173,13 @@ class Header {
 			[
 				'tag' => 'div',
 				'attrs' => [
-					'class' => get_theme_mod( 'header-bar-container', 'grid-container' )
+					'class' => get_theme_mod( 'header-bar-container' )
 				]
 			],
 			[
 				'tag' => 'div',
 				'attrs' => [
-					'class' => 'grid-x grid-padding-x align-middle'
+					'class' => 'row align-items-center'
 				]
 			]
 		);
@@ -193,7 +190,7 @@ class Header {
 	/**
 	 * Return the Header final HTML with modules selected by user
 	 * @since	v1.5
-	 * @version v3.5
+	 * @version v3.6
 	 * @uses	Markup::sortable()
 	 * @return 	string HTML
 	 */
@@ -201,7 +198,7 @@ class Header {
 		// Sort the modules
 		Markup::sortable( 
 			self::nav_bar_modules(), 
-			get_theme_mod( 'header-bar-modules', array( 'branding', 'menu', 'search' ) )
+			get_theme_mod( 'header-bar-modules' )
 		); 
 	}
 
