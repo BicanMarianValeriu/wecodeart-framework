@@ -1,4 +1,5 @@
 v3.6.0.4
+- Fix: Author Box posts URL
 - Fix: Entry Meta - Author url on frontend and placeholder text for ajax refresh on WP customizer
 - Change: CSS was split into multiple smaller files
 - Change: Sidebar/Footers Widget title wrapper class
