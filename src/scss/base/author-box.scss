@@ -1,0 +1,34 @@
+.author {
+    .author-box {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+}
+
+.author-box {
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+
+    &__headline {
+        svg {
+            width: 30px;
+            height: 30px;
+            vertical-align: -8%;
+
+            @include media-breakpoint-down(sm) {
+                width: 20px;
+                height: 20px;
+            } 
+        }
+    }
+
+    &__website {
+        svg {
+            width: 12px;
+            height: 12px; 
+            fill: currentColor;
+        }
+    }
+}

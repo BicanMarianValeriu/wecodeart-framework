@@ -1,0 +1,50 @@
+.archive-intro,
+.content-area,
+.breadcrumbs,
+.entry-prev-next,
+.footer,
+.footer__attribution {
+    border-top: 1px solid $gray-100;
+}
+
+.has-sidebar {
+    .content-area > * > * > * + * {
+        border-left: 1px solid $gray-100; 
+
+        @include media-breakpoint-down(md) {
+            border-left: 0;
+        }
+    }
+}
+
+.archive-intro {  
+    &__svg,
+    &__title {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &__title {
+        font-size: 30px;
+    }
+
+    &__svg {  
+        width: 50px;
+        height: 50px;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    } 
+} 
+
+.content__sidebar {
+    aside {
+        padding-top: 1.5rem;
+    }
+}
+
+.widget {
+    margin: 0 0 2.5rem;  
+}

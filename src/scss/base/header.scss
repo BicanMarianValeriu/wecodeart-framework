@@ -1,0 +1,71 @@
+.wp-custom-logo {
+    .header {
+        .site-title,
+        .site-description {
+            display: none;
+        }
+    }
+}
+
+.no-sidebar {
+    .content {
+        &__main {
+            border-right: 0;
+        }
+    }
+}
+
+.header {
+    &__bar {
+        padding: 10px 0;
+    }
+
+    .site-title {
+        font-size: .9rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 0;
+    }
+
+    .site-description,
+    .button,
+    .input-group {
+        margin-bottom: 0;
+    }
+
+    .site-description {
+        @include media-breakpoint-down(md) {
+            font-size: 12px;
+        }
+    }
+}
+
+.header-bar { 
+    &__menu,
+    &__search {
+        @include media-breakpoint-down(md) {
+            margin-top: 10px;
+            order: 100;
+            padding-top: 10px;
+            border-top: 1px solid lightgray;
+        }
+    }
+
+    &__branding {
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.no-js {
+    @include media-breakpoint-down(md) {
+        .header-bar {
+            &__menu,
+            &__search {
+                display: none;
+            }
+        }
+    }
+}

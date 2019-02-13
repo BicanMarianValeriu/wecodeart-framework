@@ -14,7 +14,7 @@ use WeCodeArt\Utilities\Markup as Markup;
  * @subpackage 	Main Content Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6
  */
 
 class Content {
@@ -251,7 +251,7 @@ class Content {
 	/**
 	 * Get Contextual Modules Options
 	 * @since 	3.5.0
-	 * @version	3.6
+	 * @version	3.6.0.4
 	 * @return array 
 	 */
 	public static function get_contextual_options() {
@@ -267,7 +267,7 @@ class Content {
 		$pages = get_pages();
 		foreach( $pages as $page ) {		
 			$ID = $page->ID;
-			if( is_page( $ID ) ) {
+			if( is_page( $ID ) ) { // default must be provided since we do not set in customizer
 				return [
 					'container' => get_theme_mod( 'content-layout-container-page-' . $ID, 'container' ),
 					'modules' 	=> get_theme_mod( 'content-layout-modules-page-' . $ID, [ 'content', 'primary' ] )
@@ -277,7 +277,7 @@ class Content {
 
 		// 404 Page Mods
 		$fof = get_theme_mod( 'page_for_404', '0' );
-		if( is_404() && $fof !== '' ) {
+		if( is_404() && $fof !== '' ) { // default must be provided since we do not set in customizer
 			return [
 				'container' => get_theme_mod( 'content-layout-container-page-' . $fof, 'container' ),
 				'modules' => get_theme_mod( 'content-layout-modules-page-' . $fof, [ 'content', 'primary' ] )
@@ -285,22 +285,20 @@ class Content {
 		}
 
 		// Post Types Archives And Singular Context Mods 
-		$public_posts = get_post_types( array( 'public' => true ) );
-		unset( $public_posts['page'] );
-		if( isset( $public_posts['product'] ) ) unset( $public_posts['product'] );
-		
+		$public_posts = get_post_types( [ 'public' => true, 'publicly_queryable' => true ] ); 
+
 		foreach( $public_posts as $type ) { 
 			if( is_post_type_archive( $type ) ) {
 				return [
-					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive', 'container' ),
-					'modules' => get_theme_mod( 'content-layout-modules-' . $type . '-archive', [ 'content', 'primary' ] )
+					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive' ),
+					'modules' => get_theme_mod( 'content-layout-modules-' . $type . '-archive' )
 				]; 
 			}
 
 			if( is_singular( $type ) ) {
 				return [
-					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular', 'container' ),
-					'modules' => get_theme_mod( 'content-layout-modules-' . $type . '-singular', [ 'content', 'primary' ] )
+					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular' ),
+					'modules' => get_theme_mod( 'content-layout-modules-' . $type . '-singular' )
 				]; 
 			}
 		}
@@ -315,7 +313,7 @@ class Content {
 	/**
 	 * Return the Inner final HTML with modules selected by user for each page.
 	 * @since 	v1.0
-	 * @version	v3.5
+	 * @version	v3.6.0.4
 	 * @return 	void
 	 */
 	public function register_sidebars() {
@@ -326,6 +324,8 @@ class Content {
 			'description'   => __( 'This is the default Primary Sidebar.', 'wecodeart' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
+			'before_title'  => '<h4 class="widget__title">',
+			'after_title'   => '</h4>'
 		);
 		register_sidebar( $primary );
 		if ( apply_filters( 'wecodeart/filter/sidebars/secondary/enable', false ) ) {
@@ -336,6 +336,8 @@ class Content {
 				'description'   => __( 'Secondary Sidebar - only enabled via filter.', 'wecodeart' ),
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</div>',
+				'before_title'  => '<h4 class="widget__title">',
+				'after_title'   => '</h4>'
 			);
 			register_sidebar( $secondary );
 		}

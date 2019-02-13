@@ -212,7 +212,7 @@ class Footer {
 	/**
 	 * Register Sidebars Based on Active Options
 	 * @since	unknown
-	 * @version	v3.5
+	 * @version	v3.6.0.4
 	 * @return 	void
 	 */
 	public function register_sidebars() {
@@ -234,7 +234,7 @@ class Footer {
 					'id'            => $sidebar,
 					'before_widget' => '<div id="%1$s" class="widget %2$s">',
 					'after_widget'  => '</div>',
-					'before_title'  => '<h4 class="widget-title">',
+					'before_title'  => '<h4 class="widget__title">',
 					'after_title'   => '</h4>',
 				)
 			);

@@ -1,3 +1,12 @@
+v3.6.0.4
+- Fix: Entry Meta - Author url on frontend and placeholder text for ajax refresh on WP customizer
+- Change: CSS was split into multiple smaller files
+- Change: Sidebar/Footers Widget title wrapper class
+- Change: Content::get_contextual_options() function - get_post_types args and removed defaults per post type (added in customizer)
+- Change: Yoast's Breadcrumbs Bootstrap Spacing class removed in favor of custom css
+- Added: Basic CSS styles for various elements to beautify the started theme a beautify
+- Removed: Yoast's Breadcrumbs Contextual options (single/archive wrapper) since we use the same naming in WOO Customizer settins as well
+
 v3.6.0.3
 - Fix: Fatal error when no "customizer" options are set for blog meta on post (and other CPT) for archive page type;
 - Fix: Primary Menu - Added Fallback code fixes
@@ -14,10 +23,10 @@ v3.6.0.1
 v3.6.0 
 - IMPORTANT - Change: Boostrap ON / Foundation OFF
 - Change: Multiple changes in markup to use Bootstrap Classes
-- Change 'wecodeart/filter/header-bar/modules' to 'wecodeart/filter/header_bar/modules'
+- Change: 'wecodeart/filter/header-bar/modules' to 'wecodeart/filter/header_bar/modules'
 - Fix: SVG render/compile function aria-hidden attribute
 - Fix: SVG compile missing $sprite param added
-- Added (HOT): Custom CPT Meta modules with customizer options ( context: archive/single )
+- Added: (HOT): Custom CPT Meta modules with customizer options ( context: archive/single )
 - Change: CPT Meta functions to sortable Modules ( Class )
 - Misc: Updated readme.txt
 - Misc: Updated theme copyright message / added missing

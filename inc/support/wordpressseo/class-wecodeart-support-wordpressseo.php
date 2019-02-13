@@ -46,25 +46,13 @@ class WordPressSeo {
 	/**
 	 * Yoast BreadCrumbs
 	 * @since   3.5
-	 * @version 3.6
+	 * @version 3.6.0.4
 	 * @return  void
 	 */
 	public function render_yoast_breadcrumbs() {
 		if( ! function_exists( 'yoast_breadcrumb' ) || Callbacks::_is_frontpage() ) return;
 
-		$options = \WeCodeArt\Core\Content::get_contextual_options();  
-
-		if( Helpers::detectplugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
-			if( WooCommerce\Callbacks::_is_woocommerce_archive() === true ) {
-				unset( $options['container'] );
-				$options['container'] = get_theme_mod( 'content-layout-container-product-archive' ); 
-			}
-	
-			if( is_product() ) {
-				unset($options['container']);
-				$options['container'] = get_theme_mod( 'content-layout-container-product-singular' ); 
-			} 
-		} 
+		$options = \WeCodeArt\Core\Content::get_contextual_options(); 
 
 		$wrappers = [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs' ] ],
@@ -79,7 +67,7 @@ class WordPressSeo {
 			// Function to wrap
 			'yoast_breadcrumb',
 			// Function Arguments
-			[ '<div class="breadcrumbs__list py-2">', '</div>' ]
+			[ '<div class="breadcrumbs__list">', '</div>' ]
 		); 
 	}
 }

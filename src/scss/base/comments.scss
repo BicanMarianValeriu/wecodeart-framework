@@ -1,0 +1,39 @@
+.comments {
+    svg {
+        width: 30px;
+        height: 30px;
+        vertical-align: -8%;
+
+        @include media-breakpoint-down(sm) {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    label {
+        width: 100%;
+    }
+}
+
+.comment {
+    &.bypostauthor {
+        .comment-content {
+            background: #333;
+    
+            p {
+                color: #fff
+            }
+        }
+    }
+
+    .comment-content {
+        padding: 1rem;
+        border-radius: 6px;
+        background: #F1F1F1;
+    }
+
+    .comment-reply {
+        margin-top: -1rem;
+        margin-right: 1rem
+    }
+} 

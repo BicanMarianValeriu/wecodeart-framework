@@ -47,13 +47,14 @@ class Meta {
 	/**
 	 * Entry Meta Author Template
 	 * @since	v1.0
-	 * @version v3.6
+	 * @version v3.6.0.4
 	 */
 	public static function author( $args = array(), $echo = true ) {
-		// Get what we need
-		global $current_user;   
-		$author_id = $current_user->ID;
+		// Get what we need 
+		$author_id = get_the_author_meta( 'ID' );
 		$author	= get_the_author_meta( 'display_name', $author_id );
+		// In order to render something when ajax refreshed in customizer
+		$author = $author ? $author : __( 'Author Name', 'wecodeart' );
 		$url    = get_author_posts_url( $author_id );
 
 		// Set the defaults

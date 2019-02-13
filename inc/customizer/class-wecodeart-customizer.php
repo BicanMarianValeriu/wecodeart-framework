@@ -150,7 +150,7 @@ class Customizer {
 		 * Added post type defaults for Entry Meta and Container/Modules (singular/archive page types)
 		 */
 		// Customizer defaults for Post Types
-		$get_post_types = get_post_types( [ 'public' => true, 'publicly_queryable' => true  ] );
+		$get_post_types = get_post_types( [ 'public' => true, 'publicly_queryable' => true ] );
 		foreach( $get_post_types as $type ) { 
 			// Skip the WOO CPT
 			if( $type === 'product' ) continue;
