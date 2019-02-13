@@ -28,9 +28,8 @@ class Overrides extends Config {
 	 * @since 	3.5
 	 * @return 	Array 
 	 */
-	public function register( $configurations, $wp_customize ) { 
-
-		$_configs = array( 
+	public function register( $configurations, $wp_customize ) {  
+		$_configs = array(
 			array(
 				'name'			=> 'page_for_404',
 				'type' 			=> 'control',
@@ -38,8 +37,8 @@ class Overrides extends Config {
 				'section'		=> 'static_front_page',
 				'capability'	=> 'edit_theme_options',
 				'title' 		=> __( 'Page for 404', 'wecodeart' ),
-				'description' 	=> __( 'Select your custom page that will show on 404 error.', 'wecodeart' ), 
-				'priority' 		=> 50, 
+				'description' 	=> __( 'Select your custom page that will show on 404 error.', 'wecodeart' ),
+				'priority' 		=> 50,
 				'transport'		=> 'postMessage',
 				'sanitize_callback' 	=> 'absint',
 				'sanitize_js_callback' 	=> 'absint'
