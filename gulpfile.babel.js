@@ -18,12 +18,12 @@ const genericTask = (mode, context = 'building') => {
 	else if (mode === 'production') modeName = 'Production Mode';
 	else modeName = undefined;
 
-	// Combine all booting tasks into one array!
+	// Combine all tasks into one array!
 	const allBootingTasks = [
-		Object.assign(deleteBuild(mode, 'css'), { displayName: `Booting Styles Task: Clean - ${modeName}` }),
-		Object.assign(buildStyles(mode), { displayName: `Booting Styles Task: Build - ${modeName}` }),
-		Object.assign(deleteBuild(mode, 'js'), { displayName: `Booting Scripts Task: Clean - ${modeName}` }),
-		Object.assign(buildScripts(mode), { displayName: `Booting Scripts Task: Build - ${modeName}` })
+		Object.assign(deleteBuild(mode, 'css'), { displayName: `Running Styles Task: Clean - ${modeName}` }),
+		Object.assign(buildStyles(mode), { displayName: `Running Styles Task: Build - ${modeName}` }),
+		Object.assign(deleteBuild(mode, 'js'), { displayName: `Running Scripts Task: Clean - ${modeName}` }),
+		Object.assign(buildScripts(mode), { displayName: `Running Scripts Task: Build - ${modeName}` })
 	];
 
 	// Browser Loading & Watching
@@ -56,9 +56,9 @@ const genericTask = (mode, context = 'building') => {
 	if (context === 'compiling') {
 		return [
 			...allBootingTasks,
-			Object.assign(compileSVG, { displayName: `Booting SVG Task - ${modeName}` }),
-			/* Object.assign(deleteBuild(mode, 'build'), { displayName: `Booting Cache Busting Task: Clean - ${modeName}` }), */
-			/* Object.assign(revisionFiles, { displayName: `Booting Cache Busting Task: Revision - ${modeName}` }) */
+			Object.assign(compileSVG, { displayName: `Running SVG Task - ${modeName}` }),
+			/* Object.assign(deleteBuild(mode, 'build'), { displayName: `Running Cache Busting Task: Clean - ${modeName}` }), */
+			/* Object.assign(revisionFiles, { displayName: `Running Cache Busting Task: Revision - ${modeName}` }) */
 		];
 	}
 
@@ -78,12 +78,14 @@ build.description = 'Cleans and build the final source code.';
 /**
  * Exports tasks
  * @instructions 
- * Both serve and build tasks runs the browser sync instance
- * I left them this way just for testing purposes, if minification could possibly cause issues
+ * `gulp serve` for running local server and watch for file changes 
+ * `gulp build` for building final minified code and hash main css/js bundles
+ * `gulp compileSVG` for rebuilding svg sprite if any and is necessary
+ * `gulp revision` for re-hashing main css/js bundles if JS bundlers fails to build js before this task
  */
 
 // Named Exports
-export { serve, build, compileSVG, revisionFiles };
+export { serve, build, compileSVG, revisionFiles as revision };
 
 // Default
 export default defaultTask;
