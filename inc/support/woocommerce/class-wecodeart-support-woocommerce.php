@@ -199,7 +199,7 @@ class WooCommerce {
 	/**
 	 * Render Header Bar Cart Module
 	 * @since   3.5
-	 * @version 3.6.0
+	 * @version 3.6.0.6
 	 * @return  void
 	 */
 	public static function display_cart_module() {
@@ -236,7 +236,7 @@ class WooCommerce {
 				</span>
 			</button>
 			<div class="dropdown-menu dropdown-menu-right" id="mini-woocommerce-cart" aria-labelledby="mini-cart">
-				<div class="widget_shopping_cart_content"></div>
+				<?php the_widget( 'WC_Widget_Cart', 'title=' ); ?>
 			</div>
 		</div>
 		<!-- /bar-cart -->

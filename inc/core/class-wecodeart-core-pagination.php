@@ -45,21 +45,37 @@ class Pagination {
 	/**
 	 * Display links to previous and next post, from a single post.
 	 * @since	v1.0
-	 * @version	v3.6
-    * @return null Return early if not a post.
+	 * @version	v3.6.0.6
+     * @return  null        Return early if not a post.
 	 */
 	public function prev_next_post_nav() {
         // Return only on Single Post
-        if ( ! is_singular( 'post' ) ) return;	
+        $single_post_navigation_enabled = apply_filters( 'wecodeart/filter/entry/navigation/enabled', true, get_post_type() );
+        
+        if ( ! is_singular() || $single_post_navigation_enabled === false ) return;	
+
+        $post_obj = get_post_type_object( get_post_type() );
+
         // Set the defaults
-        $prev = '<span class="screen-reader-text">' . __( 'Previous Post', 'wecodeart' ) . '</span>';
-        $next = '<span class="screen-reader-text">' . __( 'Next Post', 'wecodeart' ) . '</span>';
+        $prev = '<span class="screen-reader-text">' . sprintf( 
+            __( 'Previous %s', 'wecodeart' ),
+            $post_obj->labels->singular_name
+        ) . '</span>';
+
+        $next = '<span class="screen-reader-text">' . sprintf( 
+            __( 'Next %s', 'wecodeart' ),
+            $post_obj->labels->singular_name
+        ) . '</span>';
+
         $schema = '<span itemprop="name">%title</span>';
+        
         // The HTML
         ?>
         <nav id="entry-prev-next" class="entry-prev-next"
             itemscope="" itemtype="http://schema.org/SiteNavigationElement">
-            <h3 class="screen-reader-text"><?php _e( 'Post Navigation', 'wecodeart' ) ?></h3>
+            <h3 class="screen-reader-text"><?php 
+                echo sprintf( __( '%s Navigation', 'wecodeart' ), $post_obj->labels->singular_name ); 
+            ?></h3>
             <div class="row pt-3">
             <?php
                 previous_post_link(

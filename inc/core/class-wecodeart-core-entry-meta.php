@@ -386,7 +386,7 @@ class Meta {
 	 * @return 	string HTML
 	 */
 	public static function render() {
-		// Do dont return on Pages 
+		// Do dont return on CPT Without Support
 		if( ! post_type_supports( get_post_type(), 'wecodeart-post-info' ) ) return; 
 
 		$wrappers = array( [ 'tag' => 'div', 'attrs' => [ 'class' => 'entry-meta' ] ] );

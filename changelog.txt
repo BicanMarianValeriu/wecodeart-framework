@@ -1,3 +1,8 @@
+v3.6.0.6
+- Added: Filter `wecodeart/filter/entry/navigation/enabled` and CPT support for Single CPT prev/next navigation
+- Change: Output the_widget( 'WC_Widget_Cart', 'title=' ) for WOO Header Bar Module instead of plain HTML container
+-
+
 v3.6.0.5
 - Fix: Customizer PHP silent warning.
 
