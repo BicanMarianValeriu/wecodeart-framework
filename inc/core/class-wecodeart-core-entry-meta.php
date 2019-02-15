@@ -277,14 +277,14 @@ class Meta {
 	/**
 	 * Entry Meta Read More Template
 	 * @since	1.0
-	 * @version	3.6
+	 * @version	3.6.0.7
 	 * @return 	HTML
 	 */
 	public static function read_more( $args = array(), $echo = true ) {
 		// Set the Defaults
 		$defaults = array(
 			'before'	=> '',
-			'after' 	=> '&#xbb;',
+			'after' 	=> '<span aria-hidden="true">&#xbb;</span><span class="screen-reader-text">' . get_the_title() . '</span>',
 			'text' 		=> __( 'Read More', 'wecodeart' ),
 			'class' 	=> 'entry-more btn btn-primary',
 		);
@@ -308,14 +308,13 @@ class Meta {
 	/**
 	 * Get Contextual options
 	 * @since 	3.6
-	 * @version 3.6.0.3
-	 * @return 	array $options
+	 * @version 3.6.0.7
+	 * @return 	array 	$options
 	 */
 	public static function get_options() {
 		$get_post_types = get_post_types( array( 'public' => true, 'publicly_queryable' => true ) );
 
-		// Set defaults here if not in customizer class
-		$defaults = [ 'author', 'date', 'comments' ];
+		// Default empty
 		$options = [];
 
 		foreach( $get_post_types as $type ) { 
@@ -326,8 +325,7 @@ class Meta {
 			elseif( is_singular( $type ) ) $options = get_theme_mod( $theme_mod . '-singular' ); 
 		}
 
-		if( $options ) return $options; 
-		return $defaults;
+		return $options;  
 	}
 
 	/**

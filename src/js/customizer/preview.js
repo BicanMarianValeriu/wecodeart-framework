@@ -1,57 +1,54 @@
 /**
  * This file adds some LIVE changes to WeCodeArt Framework Customizer
- * @author		Bican Marian Valeriu <http://www.wecodeart.com/>
+ * @author		Bican Marian Valeriu 
+ * @author_url  https://www.wecodeart.com/
  * @package 	WeCodeArt Framework
  * @since 		v1.0
- * @version 	v3.6
+ * @version 	v3.6.0.7
  */
-(function ($) {  
-	var api = wp.customize; // Shorthand version of wp.customize
-	/**  
-	 * These functions handle live preview for the Website Header Area
-	 */
-	// 1.Site Title
-	api('blogname', function (value) {
-		value.bind(function (to) {
-			$('.site-title a').text(to);
-		});
-	});
+(function ($) {
+	var api = wp.customize; // Shorthand version of wp.customize 
 
-	// 2.Site Description
-	api('blogdescription', function (value) {
-		value.bind(function (to) {
-			$('.site-description').text(to);
-		});
-	});
+	// 1. Site Title
+	api('blogname', value => value.bind(to => $('.site-title a').text(to))); 
 
-	// 3.Header Bar Layout: Row or Expanded
+	// 2. Site Description 
+	api('blogdescription', value => value.bind(to => $('.site-description').text(to))); 
+
+	// 3. Header Bar Container
 	api('header-bar-container', function (value) {
 		value.bind(function (to) {
-			$('#header-bar .container').toggleClass('container-fluid', 'container-fluid' == to);
+			var el = $('#header-bar .container, #header-bar .container-fluid');
+			if ('container-fluid' === to) el.addClass('container-fluid').removeClass('container');
+			else el.addClass('container').removeClass('container-fluid');
+		});
+	}); 
+	
+	// 4. Content Containers
+	var contentContexts = ['' /* default */, 'blog']; //@todo add pages/cpt context
+	contentContexts.forEach(context => {
+		let apiOption = 'content-layout-container';
+		if (context.length) apiOption = [apiOption, context].join('-');
+
+		api(apiOption, function (value) {
+			value.bind(function (to) {
+				var el = $('.content .container, .content .container-fluid');
+				if ('container-fluid' === to) el.addClass('container-fluid').removeClass('container');
+				else el.addClass('container').removeClass('container-fluid');
+			});
 		});
 	});
 
-	/**
-	 * These functions handle live preview for the Website Inner Area
-	 */ 
-	api('content-layout-container', function (value) {
-		value.bind(function (to) {
-			$('.content .container').toggleClass('container-fluid', 'container-fluid' == to);
-		});
-	});
-
-	/**
-	 * These functions handle live preview for the Website Footer Area
-	 */
+	// 5. Footer Container
 	api('footer-layout-container', function (value) {
 		value.bind(function (to) {
-			$('.footer__widgets .container-fluid').toggleClass('container-fluid', 'container-fluid' == to);
+			var el = $('.footer__widgets .container, .footer__widgets .container-fluid');
+			if ('container-fluid' === to) el.addClass('container-fluid').removeClass('container');
+			else el.addClass('container').removeClass('container-fluid');
 		});
 	});
 
-	api('footer-copyright-text', function (value) {
-		value.bind(function (to) {
-			$('.copyright').text(to);
-		});
-	});
+	// 6 Footer Copyright Text
+	api('footer-copyright-text', value => value.bind(to => $('.attribution__copyright').text(to)));
+
 })(jQuery);

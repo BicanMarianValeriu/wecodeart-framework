@@ -1,7 +1,19 @@
+v3.6.1
+- Fixed: 'has-sidebar' body class for each context (blog/page/cpt archive or singular) and sanitize class array before return;
+- Fixed: Customizer Preview JS
+- Fixed: Entry Meta modules defaults to empty to reflect the case if all customizer entry meta modules are disabled
+- Fixed: Markup::wrap() function dynamic context key for self::generate_attr()
+- Changed: Moved 'wecodeart' function to functions.php and removed wecodeart.php file
+- Updated: Read More button on archives, added screen reader text and arria hidden for double arrow symbol
+- Updated: sanitize_html_class for numberic pagination classes / removed empty space from classnames string
+- Added: Gutenberg / wecodeart_gutenberg_wide_or_full() to check for wide/full CPTs
+- Added: Gutenberg / wecodeart_gutenberg_wide_or_full_sidebar() if sidebar should be disabled on singular CPTs
+- Added: Gutenberg / Filter: `wecodeart/filter/gutenberg/wide_or_full_sidebar_disable` with `true' by default
+
 v3.6.0.6
-- Added: Filter `wecodeart/filter/entry/navigation/enabled` and CPT support for Single CPT prev/next navigation
+- Added: Filter `wecodeart/filter/entry/prev_next_nav/enabled` and CPT support for Single CPT prev/next navigation
+- Added: Filter function to disable Prev/Next navigation on pages
 - Change: Output the_widget( 'WC_Widget_Cart', 'title=' ) for WOO Header Bar Module instead of plain HTML container
--
 
 v3.6.0.5
 - Fix: Customizer PHP silent warning.

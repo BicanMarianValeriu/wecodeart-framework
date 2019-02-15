@@ -88,7 +88,6 @@ final class WeCodeArt {
 		Support		::get_instance();
 
 		// Put all the pieces together - Everything ends here :)
-		require get_parent_theme_file_path( '/inc/functions/functions.php' );
-		require get_parent_theme_file_path( '/inc/wecodeart.php' );
+		require get_parent_theme_file_path( '/inc/functions/functions.php' ); 
 	} 
 }

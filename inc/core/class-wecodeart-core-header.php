@@ -196,10 +196,7 @@ class Header {
 	 */
 	public static function sort_header_bar() {
 		// Sort the modules
-		Markup::sortable( 
-			self::nav_bar_modules(), 
-			get_theme_mod( 'header-bar-modules' )
-		); 
+		Markup::sortable( self::nav_bar_modules(), get_theme_mod( 'header-bar-modules' ) ); 
 	}
 
 	/**

@@ -53,24 +53,42 @@ class Hooks {
 	 * @return array
 	 */
 	public function body_classes( $classes ) {
+		$get_post_types = get_post_types( [ 'public' => true, 'publicly_queryable' => true ] );
+		$has_sidebar 	= get_theme_mod( 'content-layout-modules' );
+		$all_pages		= get_pages();
+
 		// Add a class of hfeed to non-singular pages.
 		if ( ! is_singular() ) $classes[] = 'hfeed';
 		
 		// Adds a class of group-blog to blogs with more than 1 published author.
 		if ( is_multi_author() ) $classes[] = 'group-blog';
-
-		$has_sidebar = get_theme_mod( 'content-general-inner', array( 'content', 'primary' ) );
+		
 		// Page Has Sidebar
-		$pages = get_pages();
-		foreach( $pages as $page ) {		
-			$ID = $page->ID;
-			if( is_page( $ID ) ) $has_sidebar = get_theme_mod( 'content-general-inner-' . $ID, array( 'content', 'primary' ) );
+		foreach( $all_pages as $page ) { 
+			if( is_page( $page->ID ) ) $has_sidebar = get_theme_mod( 'content-layout-modules-page-' . $page->ID );
+		}
+		
+		// Blog Has Sidebar
+		if( is_home() ) $has_sidebar = get_theme_mod( 'content-layout-modules-blog' );
+		
+		// CPTS Archive/Single 
+		foreach( $get_post_types as $type ) { 
+			if( is_post_type_archive( $type ) ) $has_sidebar = get_theme_mod( 'content-layout-modules-' . $type . '-archive' );
+			if( is_singular( $type ) ) $has_sidebar = get_theme_mod( 'content-layout-modules-' . $type . '-singular' );
 		}
 
-		if( in_array( 'primary', $has_sidebar ) ) $classes[] = 'has-sidebar';
+		// Add sidebar class
+		if( in_array( 'primary', $has_sidebar ) || in_array( 'secondary', $has_sidebar ) ) $classes[] = 'has-sidebar';
 		else $classes[] = 'no-sidebar';
+		
+		// Singular sidebar class if gutenberg wide/full layout 
+		if( wecodeart_gutenberg_wide_or_full_sidebar() ) { 
+			$classes = array_diff( $classes, [ 'has-sidebar' ] );
+			$classes[] = 'no-sidebar'; 
+		} 
 
 		// Return Classes
+		$classes = array_map( 'sanitize_html_class', $classes );
 		return $classes;
 	}
 	

@@ -11,8 +11,22 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
- * @version 	v3.5
+ * @version 	v3.6.0.6
  */
+
+/**
+ * Puts Everything togheter
+ * 
+ * @since		v1.0
+ * @version		v3.3
+ * 
+ * @return 		mixed 	Site Layout
+ */
+function wecodeart() {	
+	get_header(); 
+	do_action( 'wecodeart_inner_markup' ); 
+	get_footer(); 
+}
 
 /**
  * Get a specific property of an array without needing to check if that property exists.
@@ -35,3 +49,46 @@ function wecodeart_get_prop( $array, $prop, $default = null ) {
 	else $value = ''; 
 	return empty( $value ) && null !== $default ? $default : $value;
 }
+
+/**
+ * Check if current post has full/wide blocks aligns
+ * 
+ * @since	3.6.1
+ * @param  	object|integer
+ * 
+ * @return 	boolean
+ */
+function wecodeart_gutenberg_wide_or_full( $post = 0 ) {
+	if( ! $post ) global $post;  
+	
+	// Retrieve an array of blocks used for this post
+	$blocks = parse_blocks( $post->post_content ); 
+
+	foreach( $blocks as $block ) {  
+		// If we have full/wide allign return true early and bail
+		if( in_array( wecodeart_get_prop( $block['attrs'], 'align' ), [ 'full', 'wide' ] ) ) {
+			return true;
+			break;
+		}
+	}
+
+	// Return false
+	return false;
+}
+
+/**
+ * Remove sidebar on gutenberg posts with wide/full layout
+ * 
+ * @since	3.6.1
+ * @uses 	filter: `wecodeart/filter/gutenberg/wide_or_full_sidebar/disable`
+ * 
+ * @return 	boolean|null
+ */
+function wecodeart_gutenberg_wide_or_full_sidebar() {
+	$remove_sidebar_if_wide_or_full = apply_filters( 'wecodeart/filter/gutenberg/wide_or_full_sidebar_disable', true );
+	
+	if( $remove_sidebar_if_wide_or_full === false ) return false; 
+	if( is_singular() && wecodeart_gutenberg_wide_or_full() ) return true;
+
+	return null;
+} 

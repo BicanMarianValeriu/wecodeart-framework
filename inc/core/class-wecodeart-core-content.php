@@ -251,15 +251,15 @@ class Content {
 	/**
 	 * Get Contextual Modules Options
 	 * @since 	3.5.0
-	 * @version	3.6.0.4
-	 * @return array 
+	 * @version	3.6.0.7
+	 * @return 	array 
 	 */
 	public static function get_contextual_options() {
 		// Blog Page
 		if( is_home() ) {
 			return [
 				'container' => get_theme_mod( 'content-layout-container-blog' ),
-				'modules' => get_theme_mod( 'content-layout-modules-blog' )
+				'modules' 	=> get_theme_mod( 'content-layout-modules-blog' )
 			];
 		}
 
@@ -280,7 +280,7 @@ class Content {
 		if( is_404() && $fof !== '' ) { // default must be provided since we do not set in customizer
 			return [
 				'container' => get_theme_mod( 'content-layout-container-page-' . $fof, 'container' ),
-				'modules' => get_theme_mod( 'content-layout-modules-page-' . $fof, [ 'content', 'primary' ] )
+				'modules' 	=> get_theme_mod( 'content-layout-modules-page-' . $fof, [ 'content', 'primary' ] )
 			]; 
 		}
 
@@ -291,17 +291,19 @@ class Content {
 			if( is_post_type_archive( $type ) ) {
 				return [
 					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive' ),
-					'modules' => get_theme_mod( 'content-layout-modules-' . $type . '-archive' )
+					'modules' 	=> get_theme_mod( 'content-layout-modules-' . $type . '-archive' )
 				]; 
 			}
 
 			if( is_singular( $type ) ) {
-				return [
-					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular' ),
-					'modules' => get_theme_mod( 'content-layout-modules-' . $type . '-singular' )
-				]; 
+				$options = [];
+				$options['container'] = get_theme_mod( 'content-layout-container-' . $type . '-singular' );
+				$modules = get_theme_mod( 'content-layout-modules-' . $type . '-singular' );
+				if( wecodeart_gutenberg_wide_or_full_sidebar() ) $modules = [ 'content' ]; // Return content only 
+				$options['modules'] = $modules;
+				return $options;
 			}
-		}
+		} 
 
 		// Everywhere/Defaults
 		return [

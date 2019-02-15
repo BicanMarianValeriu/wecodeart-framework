@@ -40,6 +40,7 @@ class Pagination {
         add_action( 'wecodeart/hook/main/after',    [ $this, 'numeric_posts_nav' ], 10 );
         add_action( 'wecodeart_entry_footer',       [ $this, 'post_content_nav' ],  10 );
         add_action( 'wecodeart_entry_footer',       [ $this, 'prev_next_post_nav' ], 90 );
+        add_filter( 'wecodeart/filter/entry/prev_next_nav/enabled', [ $this, 'filter_prev_next_page' ], 10, 2 );
 	}
 	
 	/**
@@ -50,7 +51,7 @@ class Pagination {
 	 */
 	public function prev_next_post_nav() {
         // Return only on Single Post
-        $single_post_navigation_enabled = apply_filters( 'wecodeart/filter/entry/navigation/enabled', true, get_post_type() );
+        $single_post_navigation_enabled = apply_filters( 'wecodeart/filter/entry/prev_next_nav/enabled', true, get_post_type() );
         
         if ( ! is_singular() || $single_post_navigation_enabled === false ) return;	
 
@@ -115,8 +116,9 @@ class Pagination {
                         $class = [ 'page-item', 'pagination__item' ];
                         $class[] = ( strpos( $link, 'current' ) !== false ) ? 'pagination__item--current' : NULL;
                         $class[] = ( strpos( $link, 'current' ) !== false ) ? 'active' : NULL;
+                        $class = array_map( 'sanitize_html_class', $class );
                     ?>
-                    <li class="<?php echo esc_attr( trim( implode( ' ', $class ) ) ); ?> ">
+                    <li class="<?php echo esc_attr( trim( implode( ' ', $class ) ) ); ?>">
                         <?php echo str_replace( 'page-numbers', 'page-link', $link ); ?>
                     </li> 				
                 <?php } ?>
@@ -142,5 +144,17 @@ class Pagination {
             'link_before' => '<span class="page-link">',
             'link_after'  => '</span>',
         ) );
+    }
+
+    /**
+     * Filter to disable prev/next nav on pages
+     * @since 3.6.0.6
+     * @param   boolean     $enabled
+     * @param   string      $post_type
+     * @return  boolean
+     */
+    public function filter_prev_next_page( $enabled, $post_type ) {
+        if( $post_type === 'page' ) $enabled = false;
+        return $enabled;
     }
 }
