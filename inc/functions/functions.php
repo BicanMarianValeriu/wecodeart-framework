@@ -58,7 +58,7 @@ function wecodeart_get_prop( $array, $prop, $default = null ) {
  * 
  * @return 	boolean
  */
-function wecodeart_gutenberg_wide_or_full( $post = 0 ) {
+function wecodeart_gutenberg_is_wide_or_full( $post = 0 ) {
 	if( ! $post ) global $post;  
 	
 	// Retrieve an array of blocks used for this post
@@ -80,15 +80,15 @@ function wecodeart_gutenberg_wide_or_full( $post = 0 ) {
  * Remove sidebar on gutenberg posts with wide/full layout
  * 
  * @since	3.6.1
- * @uses 	filter: `wecodeart/filter/gutenberg/wide_or_full_sidebar/disable`
+ * @uses 	filter: `wecodeart/filter/gutenberg/wide_or_full_content`
  * 
  * @return 	boolean|null
  */
-function wecodeart_gutenberg_wide_or_full_sidebar() {
-	$remove_sidebar_if_wide_or_full = apply_filters( 'wecodeart/filter/gutenberg/wide_or_full_sidebar_disable', true );
+function wecodeart_gutenberg_wide_or_full_content() {
+	$remove_sidebar_if_wide_or_full = apply_filters( 'wecodeart/filter/gutenberg/wide_or_full_content', true );
 	
 	if( $remove_sidebar_if_wide_or_full === false ) return false; 
-	if( is_singular() && wecodeart_gutenberg_wide_or_full() ) return true;
+	if( is_singular() && wecodeart_gutenberg_is_wide_or_full() ) return true;
 
 	return null;
 } 

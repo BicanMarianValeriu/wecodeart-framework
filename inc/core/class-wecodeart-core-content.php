@@ -251,7 +251,7 @@ class Content {
 	/**
 	 * Get Contextual Modules Options
 	 * @since 	3.5.0
-	 * @version	3.6.0.7
+	 * @version	3.6.1
 	 * @return 	array 
 	 */
 	public static function get_contextual_options() {
@@ -295,13 +295,14 @@ class Content {
 				]; 
 			}
 
-			if( is_singular( $type ) ) {
-				$options = [];
-				$options['container'] = get_theme_mod( 'content-layout-container-' . $type . '-singular' );
-				$modules = get_theme_mod( 'content-layout-modules-' . $type . '-singular' );
-				if( wecodeart_gutenberg_wide_or_full_sidebar() ) $modules = [ 'content' ]; // Return content only 
-				$options['modules'] = $modules;
-				return $options;
+			if( is_singular( $type ) ) {  
+				$modules 	= get_theme_mod( 'content-layout-modules-' . $type . '-singular' ); 
+				if( wecodeart_gutenberg_wide_or_full_content() ) $modules = [ 'content' ]; // Return content only 
+				
+				return [
+					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular' ),
+					'modules' 	=> $modules
+				];
 			}
 		} 
 

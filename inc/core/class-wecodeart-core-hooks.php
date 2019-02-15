@@ -82,7 +82,7 @@ class Hooks {
 		else $classes[] = 'no-sidebar';
 		
 		// Singular sidebar class if gutenberg wide/full layout 
-		if( wecodeart_gutenberg_wide_or_full_sidebar() ) { 
+		if( wecodeart_gutenberg_wide_or_full_content() ) { 
 			$classes = array_diff( $classes, [ 'has-sidebar' ] );
 			$classes[] = 'no-sidebar'; 
 		} 
