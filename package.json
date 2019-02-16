@@ -4,13 +4,13 @@
 	"main": "gulpfile.babel.js",
 	"author": "Bican Marian Valeriu",
 	"dependencies": {
-		"bootstrap": "^4.2.1",
+		"bootstrap": "^4.3.1",
 		"jquery": "^3.3.1",
 		"popper.js": "^1.14.7"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.2.2",
-		"@babel/plugin-proposal-class-properties": "^7.3.0",
+		"@babel/core": "^7.3.3",
+		"@babel/plugin-proposal-class-properties": "^7.3.3",
 		"@babel/plugin-proposal-object-rest-spread": "^7.3.1",
 		"@babel/plugin-transform-async-to-generator": "^7.2.0",
 		"@babel/polyfill": "^7.2.5",
@@ -36,7 +36,7 @@
 		"merge-stream": "^1.0.1",
 		"through2": "^3.0.0",
 		"vinyl-named": "^1.1.0",
-		"webpack": "^4.29.3",
+		"webpack": "^4.29.4",
 		"webpack-cli": "^3.2.3",
 		"webpack-stream": "^5.2.1"
 	}

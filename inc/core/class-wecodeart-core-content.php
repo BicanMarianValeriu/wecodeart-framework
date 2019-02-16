@@ -51,7 +51,7 @@ class Content {
 	/**
 	 * Echo the opening tag markup for content
 	 * @since 	unknown
-	 * @version	3.5
+	 * @version	3.6.1.1
 	 * @return 	string HTML 
 	 */
 	public function content_markup_open() { 
@@ -60,7 +60,7 @@ class Content {
 			'content',
 			[
 				'id' => 'primary',
-				'class' => 'content__main col col-sm-12 col-lg'
+				'class' => 'content__main col col-12 col-lg'
 			]
 		);
 		?>
@@ -120,7 +120,7 @@ class Content {
 	/**
 	 * Get Primary Sidebar View
 	 * @since	v1.0
-	 * @version v3.5
+	 * @version v3.6.1.1
 	 * @return	HTML
 	 */
 	public static function display_primary_sidebar() {
@@ -129,7 +129,7 @@ class Content {
 			'sidebar-primary',
 			[
 				'id' => 'secondary',
-				'class' => 'content__sidebar col col-sm-12 col-lg-4'
+				'class' => 'content__sidebar col col-12 col-lg-4'
 			]
 		);
 		?>
