@@ -1,5 +1,9 @@
 v3.6.1.2
-- Fix: 
+- Added: .flex-nowrap for content .row wrapper
+- Added: .col-12 for comment form fields
+- Added: Callbacks::_is_post_archive() for checking if on default post archive ( including search and home )
+- Fixed: Entry Meta Modules customizer active callback for Archives 
+- Fixed: Entry Meta Modules output for search page
 
 v3.6.1.1
 - Fixed: Content/Sidebar Mobile Responsive classes

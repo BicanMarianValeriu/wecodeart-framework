@@ -260,7 +260,7 @@ class Content extends Config {
 					'choices'		=> $m_modules,  
 					'transport'		=> 'postMessage',
 					'active_callback' => function() use ( $type ) { 
-						if( $type === 'post' && is_home() ) return true;
+						if( $type === 'post' && ( is_home() || is_archive() || is_search() ) ) return true;
 						return is_post_type_archive( $type ); 
 					},
 					'partial'		=> [

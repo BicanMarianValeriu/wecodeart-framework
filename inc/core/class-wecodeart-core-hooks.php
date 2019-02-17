@@ -182,7 +182,7 @@ class Hooks {
 		$commenter = wp_get_current_commenter();
 		$req       = get_option( 'require_name_email' );
 		
-		$author_name	= '<div class="comment-form-author col col-md-7">' .
+		$author_name	= '<div class="comment-form-author col-12 col-md-7">' .
 			Inputs::compile( 'text', __( 'Name *', 'wecodeart' ), array( 
 				'id' 	=> 'author',
 				'class'	=> 'form-control',
@@ -195,7 +195,7 @@ class Hooks {
 			)
 		. '</div>';
 		
-		$author_email	= '<div class="comment-form-email col col-md-7">' .
+		$author_email	= '<div class="comment-form-email col-12 col-md-7">' .
 			Inputs::compile( 'email', __( 'Email *', 'wecodeart' ), array( 			
 				'id' 	=> 'email',
 				'class'	=> 'form-control',
@@ -208,7 +208,7 @@ class Hooks {
 			) 
 		. '</div>';
 		
-		$author_url		= '<div class="comment-form-url col col-md-7">' .
+		$author_url		= '<div class="comment-form-url col-12 col-md-7">' .
 			Inputs::compile( 'url', __( 'Website', 'wecodeart' ), array( 
 				'id' 	=> 'url',
 				'class'	=> 'form-control',

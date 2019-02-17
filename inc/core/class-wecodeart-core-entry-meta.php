@@ -2,6 +2,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit();
 // Use
+use WeCodeArt\Core\Callbacks;
 use WeCodeArt\Utilities\Markup as Markup;
 use WeCodeArt\Utilities\Markup\SVG;
 
@@ -308,7 +309,7 @@ class Meta {
 	/**
 	 * Get Contextual options
 	 * @since 	3.6
-	 * @version 3.6.1.1
+	 * @version 3.6.1.2
 	 * @return 	array 	$options
 	 */
 	public static function get_options() {
@@ -319,11 +320,11 @@ class Meta {
 
 		foreach( $get_post_types as $type ) { 
 			// Post option preffix
-			$theme_mod =  'content-entry-meta-' . $type; 
-			 
+			$theme_mod =  'content-entry-meta-' . $type;  
+
 			if( is_singular( $type ) ) $options = get_theme_mod( $theme_mod . '-singular' ); 
 			if( is_post_type_archive( $type ) ) $options = get_theme_mod( $theme_mod . '-archive' ); 
-			if( $type === 'post' && ( is_home() || is_archive() ) ) $options = get_theme_mod( $theme_mod . '-archive' ); 
+			if( $type === 'post' && Callbacks::_is_post_archive() ) $options = get_theme_mod( $theme_mod . '-archive' ); 
 		}
 
 		return $options;  

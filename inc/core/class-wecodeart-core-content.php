@@ -197,7 +197,7 @@ class Content {
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 * @since 	unknown
-	 * @version v3.6
+	 * @version v3.6.1.2
 	 * @uses	WeCodeArt\Utilities\Markup::wrap();
 	 * @return 	HTML
 	 */
@@ -225,7 +225,7 @@ class Content {
 			[
 				'tag' => 'div',
 				'attrs' => [
-					'class' => 'row'
+					'class' => 'row flex-nowrap'
 				]
 			]
 		];
