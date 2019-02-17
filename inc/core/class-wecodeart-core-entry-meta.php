@@ -308,7 +308,7 @@ class Meta {
 	/**
 	 * Get Contextual options
 	 * @since 	3.6
-	 * @version 3.6.0.7
+	 * @version 3.6.1.1
 	 * @return 	array 	$options
 	 */
 	public static function get_options() {
@@ -319,10 +319,11 @@ class Meta {
 
 		foreach( $get_post_types as $type ) { 
 			// Post option preffix
-			$theme_mod =  'content-entry-meta-' . $type;
-			$is_post_type_archive_page = $type === 'post' && is_home() || is_post_type_archive( $type );
-			if( $is_post_type_archive_page ) $options = get_theme_mod( $theme_mod . '-archive' );
-			elseif( is_singular( $type ) ) $options = get_theme_mod( $theme_mod . '-singular' ); 
+			$theme_mod =  'content-entry-meta-' . $type; 
+			 
+			if( is_singular( $type ) ) $options = get_theme_mod( $theme_mod . '-singular' ); 
+			if( is_post_type_archive( $type ) ) $options = get_theme_mod( $theme_mod . '-archive' ); 
+			if( $type === 'post' && ( is_home() || is_archive() ) ) $options = get_theme_mod( $theme_mod . '-archive' ); 
 		}
 
 		return $options;  

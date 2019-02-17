@@ -164,8 +164,8 @@ class Markup {
 		$html = '';
 
 		foreach( $args as $key => $elem ) {
-			$context = $context . '-' . $key; // Dynamic context filter for each wrapper 
-			$open_tag = implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $context, $elem['attrs'] ) ] );
+			$_context = $context . '/' . $key; // Dynamic context filter for each wrapper  
+			$open_tag = implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $_context, $elem['attrs'] ) ] );
 			$html .= '<' . $open_tag . '>';
 		}
 

@@ -1,5 +1,11 @@
-v3.6.1
+v3.6.1.2
+- Fix: 
+
+v3.6.1.1
 - Fixed: Content/Sidebar Mobile Responsive classes
+- Fixed: Entry/Meta::get_options() for archives
+- Changed: 'archive-wrappers' to 'archive-intro-wrappers' context for Archive Intro Wrappers
+- Updated: WeCodeArt/Autoloader() can now be instantiated with custom namespace and root directory for child themes autoloading
 
 v3.6.1
 - Fixed: 'has-sidebar' body class for each context (blog/page/cpt archive or singular) and sanitize class array before return;

@@ -68,7 +68,7 @@ class Archive {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col' ] ]
 		];
 
-		Markup::wrap( 'archive-wrappers', $wrappers, 'the_archive_title' );
+		Markup::wrap( 'archive-intro-wrappers', $wrappers, 'the_archive_title' );
 		
 	}
 

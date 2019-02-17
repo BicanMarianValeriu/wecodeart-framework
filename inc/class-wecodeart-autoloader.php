@@ -8,12 +8,12 @@
  * @package 	WeCodeArt Framework.
  * @subpackage  Autoloader
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		v3.5
+ * @since		3.5
+ * @version 	3.6.1
  */
 
 /**
- * Autoloader class.
- *
+ * Autoloader class 
  * @since 3.5
  */
 class Autoloader {
@@ -23,12 +23,15 @@ class Autoloader {
 	 *
 	 * @access 	private
 	 * @since 	3.5
+	 * @version 3.6.1
+	 * 
 	 * @var 	array 	$cached_paths	Cached FilePaths
 	 * @var 	string	$_namespace		Theme Namespace
 	 * @var 	string	$_separator		Namespace Separator
 	 */
 	private $cached_paths 	= array();
-	private $_namespace		= 'WeCodeArt';
+	private $_namespace		= '';
+	private $_directory		= '';
 	private $_separator 	= '\\';
 
 	/**
@@ -36,12 +39,15 @@ class Autoloader {
 	 *
 	 * @access 	public
 	 * @since 	3.5
+	 * @version 3.6.1
 	 */
-	public function __construct() {
+	public function __construct( $namespace = 'WeCodeArt', $root = __DIR__ ) { 
+		$this->_namespace = $namespace;
+		$this->_directory = $root;
 
-		spl_autoload_register( array( $this, 'autoload' ) );
-		
-	}
+		spl_autoload_register( array( $this, 'autoload' ) ); 
+
+	} 
 
 	/**
 	 * The WeCodeArt class autoloader.
@@ -49,6 +55,8 @@ class Autoloader {
 	 *
 	 * @access 	protected
 	 * @since 	3.5
+	 * @version 3.6.1
+	 * 
 	 * @param 	string 	$class_name 	The name of the class we're trying to load.
 	 */
 	protected function autoload( $class_name ) {
@@ -83,7 +91,10 @@ class Autoloader {
 	 *
 	 * @access 	protected
 	 * @since 	3.5
+	 * @version 3.6.1
+	 * 
 	 * @param 	string 	$class_name 	The name of the class we're trying to load.
+	 * 
 	 * @return 	array
 	 */
 	protected function get_paths( $class_name ) {
@@ -94,7 +105,7 @@ class Autoloader {
 		$filename = 'class-' . strtolower( str_replace( $this->_separator, '-', $class_name ) ) . '.php';
 
 		// Check same directory
-		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $filename;
+		$paths[] = $this->_directory . DIRECTORY_SEPARATOR . $filename;
 
 		// Look into sub-directory
 		$substr   = str_replace( $this->_namespace . $this->_separator, '', $class_name );
@@ -104,7 +115,7 @@ class Autoloader {
 		// Build the filepath
 		$previous_path = '';
 		for ( $i = 0; $i < $levels; $i++ ) {
-			$paths[]        = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $previous_path . strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR . $filename;
+			$paths[]        = $this->_directory . DIRECTORY_SEPARATOR . $previous_path . strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR . $filename;
 			$previous_path .= strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR;
 		}
 
