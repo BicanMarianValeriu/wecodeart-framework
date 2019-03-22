@@ -22,52 +22,42 @@ use WeCodeArt\Core\Scripts;
  * @subpackage  Init
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v1.0
- * @version		v3.5
+ * @version		v3.6.2
  */
 
 // Include the autoloader.
 require_once( get_parent_theme_file_path( '/inc/class-wecodeart-autoloader.php' ) );
 new WeCodeArt\Autoloader();
 
-// Start up class
-WeCodeArt::get_instance();
+/**
+ * Final Class
+ */
 final class WeCodeArt {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton; 
 	
 	/**
 	 * Version
 	 *
 	 * @var $version
 	 */
-	private static $theme_data;
-	
-	/**
-	 * Initiator
-	 *
-	 * @since 	v3.3
-	 * @return 	object
-	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
+	private static $theme_data; 
 
 	/**
-	 * Constructor
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public function __construct() {
+	public function init() {
 		// Can we proceed with theme activation ?
 		if( Activation::get_instance()->is_ok() === false ) return;
 		
-		$this->init();
+		$this->modules();
 	}
 
-	public function init() {
+	/**
+	 * Send to Constructor
+	 * @since 3.6.2
+	 */
+	public function modules() {
 		self::$theme_data = wp_get_theme( null );
 
 		// Fire Core Classes
@@ -91,3 +81,5 @@ final class WeCodeArt {
 		require get_parent_theme_file_path( '/inc/functions/functions.php' ); 
 	} 
 }
+
+WeCodeArt::get_instance();

@@ -17,6 +17,7 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * @since 		v3.5
  * @version		v3.6.0.3
  */
+
 /**
  * Customizer Config initial setup
  */

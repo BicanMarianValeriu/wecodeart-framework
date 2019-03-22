@@ -13,32 +13,11 @@ use WeCodeArt\Utilities\Markup;
  * @subpackage  SVG Markup Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
- * @version		v3.5.0.3
+ * @version		v3.6.2
  */
 
 class SVG {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
-	
-	/**
-	 * Initiator
-	 *
-	 * @since 	v3.3
-	 * @return 	object
-	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	/**
-	 * Constructor
-	 */
-	public function __construct() {}
+	use \WeCodeArt\Singleton;  
 
 	/**
 	 * Render an SVG Icon.

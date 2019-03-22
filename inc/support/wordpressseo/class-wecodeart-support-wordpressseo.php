@@ -15,26 +15,16 @@ use WeCodeArt\Core\Callbacks;
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6
+ * @version		v3.6.2
  */
 class WordPressSeo {
-	/**
-	 * Instance
-	 *
-	 * @access 	private
-	 * @var 	object
-	 */
-	private static $instance;
+	use \WeCodeArt\Singleton; 
 
 	/**
-	 * Initiator
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) ) self::$instance = new self;
-		return self::$instance;
-	}
-
-	public function __construct() {
+	public function init() {
 		if( apply_filters( 'wecodeart/filter/support/breadcrumbs/woocommerce-yoast', true )
 		&& Helpers::detectplugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
 			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );

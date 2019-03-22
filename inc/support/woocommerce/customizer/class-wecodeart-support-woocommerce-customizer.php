@@ -16,27 +16,18 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6.0.3
+ * @version		v3.6.2
  */
 class Customizer {
-	/**
-	 * Instance
-	 *
-	 * @access 	private
-	 * @var 	object
-	 */
-	private static $instance;
+	use \WeCodeArt\Singleton; 
 
 	/**
-	 * Initiator
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) ) self::$instance = new self;
-		return self::$instance;
-	}
-
-	public function __construct() {
+	public function init() {
 		add_filter( 'wecodeart/filter/customizer/defaults', [ $this, 'extend_defaults' ] );
+
 		new Customizer\Content;
 	}
 

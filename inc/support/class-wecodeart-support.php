@@ -1,6 +1,10 @@
 <?php namespace WeCodeArt;
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit();
+// Use
+use WeCodeArt\Support\WooCommerce;
+use WeCodeArt\Support\WordPressSeo;
+use WeCodeArt\Utilities\Helpers;
 /**
  * WeCodeArt Framework.
  *
@@ -11,39 +15,20 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage  Theme Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
- * @version		v3.6
+ * @version		v3.6.2
  */
-// Use
-use WeCodeArt\Support\WooCommerce;
-use WeCodeArt\Support\WordPressSeo;
-use WeCodeArt\Utilities\Helpers;
 
 class Support {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton; 
 
 	/**
-	 * Initiator
-	 *
-	 * @since 	v3.3
-	 * @return 	object
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
+	public function init() {
 
 		// Theme Support
-		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ), 2 );
+		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ], 2 );
 
 		// Integrations/Compatability/Plugin Support
 		if( Helpers::detectplugin( [ 'classes' 		=> [ 'woocommerce' ] ] ) )		WooCommerce::get_instance();

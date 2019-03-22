@@ -16,7 +16,7 @@ use WeCodeArt\Customizer;
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.9
- * @version		v3.6
+ * @version		v3.6.2
  */
 
 /**
@@ -24,23 +24,13 @@ use WeCodeArt\Customizer;
  * to ensure proper support for WooCommerce
  */
 class WooCommerce {
-	/**
-	 * Instance
-	 *
-	 * @access 	private
-	 * @var 	object
-	 */
-	private static $instance;
+	use \WeCodeArt\Singleton; 
 
 	/**
-	 * Initiator
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) ) self::$instance = new self;
-		return self::$instance;
-	}
-
-	public function __construct() {
+	public function init() {
 		// Customizer Options
 		WooCommerce\Customizer::get_instance();
 

@@ -11,29 +11,17 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Front-End Scripts
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.9
- * @version		v3.6
+ * @version		v3.6.2
  */ 
 
 class Scripts {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton;
 
 	/**
-	 * Initiator
-	 *
-	 * @since 	v3.3
-	 * @return 	object
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	public function __construct() {
+	public function init() {
 		// All starts here
 		add_action( 'wp_enqueue_scripts', 	array( $this, 'front_scripts'  		) );
 		add_action( 'wp_enqueue_scripts', 	array( $this, 'localize_js'	 		), 90 );

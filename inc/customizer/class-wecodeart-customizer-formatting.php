@@ -8,23 +8,15 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Customizer Formatting
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.6
- * @version 	v3.5
+ * @version 	v3.6.2
  */ 
 
 final class Formatting {
-
-	// This will hold the first copy of this class that get's called.
-	static private $_instance = NULL;
+	use \WeCodeArt\Singleton;  
 
 	// Don't let any other code un-singleton this class.
 	private function __construct() {}
-	private function __clone() {}
-
-	// This is the entry point for this class.
-	static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
+	private function __clone() {} 
 	
 	/**
 	 * Sanitize a value for use as a linear CSS value.

@@ -11,32 +11,17 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Pagination Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6
+ * @version		v3.6.2
  */
 
 class Pagination {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton;
 
 	/**
-	 * Initiator
-	 *
-	 * @since 	v3.5
-	 * @return 	object
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	/**
-	 * Class Constructor.
-	 */
-	public function __construct() {
+	public function init() {
         add_action( 'wecodeart/hook/main/after',    [ $this, 'numeric_posts_nav' ], 10 );
         add_action( 'wecodeart_entry_footer',       [ $this, 'post_content_nav' ],  10 );
         add_action( 'wecodeart_entry_footer',       [ $this, 'prev_next_post_nav' ], 90 );

@@ -14,32 +14,17 @@ use WeCodeArt\Utilities\Markup as Markup;
  * @subpackage 	Main Content Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6
+ * @version		v3.6.2
  */
 
 class Content {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton;
 
 	/**
-	 * Initiator
-	 *
-	 * @since 	v3.5
-	 * @return 	object
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	/**
-	 * Class Constructor.
-	 */
-	public function __construct() {
+	public function init() {
 		Loops::get_instance();
 
 		add_action( 'wecodeart/hook/loop/before',	[ $this, 'content_markup_open' 	] );

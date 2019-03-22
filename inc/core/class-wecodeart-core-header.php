@@ -13,36 +13,21 @@ use WeCodeArt\Utilities\Markup as Markup;
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6
+ * @version		v3.6.2
  */
 
 class Header {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton;
 
 	/**
-	 * Initiator
-	 *
-	 * @since 	v3.5
-	 * @return 	object
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	/**
-	 * Class Constructor.
-	 */
-	public function __construct() {
-		add_action( 'wp_head',	array( $this, 'meta_pingback' ) );
-		add_action( 'wp_head',	array( $this, 'meta_viewport' ) );
-		add_filter( 'wecodeart/filter/attributes/body', array( $this, 'body_attrs' ) );
-		add_action( 'wecodeart_header_markup', array( $this, 'header_markup' ) );
+	public function init() {
+		add_action( 'wp_head',	[ $this, 'meta_pingback' ] );
+		add_action( 'wp_head',	[ $this, 'meta_viewport' ] );
+		add_filter( 'wecodeart/filter/attributes/body', [ $this, 'body_attrs' ]		);
+		add_action( 'wecodeart_header_markup', 			[ $this, 'header_markup' ] 	);
 	}
 	
 	/**

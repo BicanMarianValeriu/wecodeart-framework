@@ -13,32 +13,17 @@ use WeCodeArt\Utilities\Form\Input as Inputs;
  * @subpackage 	General Hooks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.0
- * @version		v3.6
+ * @version		v3.6.2
  */
 
 class Hooks {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton;
 
 	/**
-	 * Initiator
-	 *
-	 * @since 	v3.3
-	 * @return 	object
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	/**
-	 * Class Constructor.
-	 */
-	public function __construct() {
+	public function init() {
 		add_filter( 'body_class',               array( $this, 'body_classes' ) );
 		add_filter( 'post_class', 			  	array( $this, 'post_classes' ) );
 		add_filter( 'comment_form_defaults',	array( $this, 'comment_form_defaults' ) );

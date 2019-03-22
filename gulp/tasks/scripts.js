@@ -1,7 +1,7 @@
 import gulp from 'gulp';
 import path from 'path';
 import pump from 'pump';
-import merge from 'merge';
+//import merge from 'merge';
 import gulpBabel from 'gulp-babel';
 import gulpRename from 'gulp-rename';
 import gulpUglify from 'gulp-uglify';
@@ -14,7 +14,7 @@ import webpackStream from 'webpack-stream';
 
 import { srcPath, distPath } from './index';
 
-import paths from './../paths'; 
+import paths from './../paths';
 
 // Build Scripts Task
 const buildScripts = (mode) => (done) => {
@@ -23,41 +23,45 @@ const buildScripts = (mode) => (done) => {
 	else if (mode === 'production') streamMode = require('./../webpack/config.production.js');
 	else streamMode = undefined;
 
-	let _main = ['development', 'production'].includes(mode) ? pump([
-		gulp.src(srcPath('js')),
-		vinylNamed(),
-		webpackStream(streamMode, webpack),
-		gulpSourcemaps.init({ loadMaps: true }),
-		through.obj(function (file, enc, cb) {
-			const isSourceMap = /\.map$/.test(file.path);
-			if (!isSourceMap) this.push(file);
-			cb();
-		}),
-		gulpBabel(),
-		...((mode === 'production') ? [gulpUglify()] : []),
-		gulpSourcemaps.write('./'),
-		gulp.dest(distPath('js')),
-		browserSync.stream(),
-	], done) : undefined;
+	const pumps = () => {
+		// Main Frontend
+		pump([
+			gulp.src(srcPath('js')),
+			vinylNamed(),
+			webpackStream(streamMode, webpack),
+			gulpSourcemaps.init({ loadMaps: true }),
+			through.obj(function (file, enc, cb) {
+				const isSourceMap = /\.map$/.test(file.path);
+				if (!isSourceMap) this.push(file);
+				cb();
+			}),
+			gulpBabel(),
+			...((mode === 'production') ? [gulpUglify()] : []),
+			gulpSourcemaps.write('./'),
+			gulp.dest(distPath('js')),
+			browserSync.stream(),
+		], done);
 
-	let _customizer = ['development', 'production'].includes(mode) ? pump([
-		gulp.src(paths.entry.js.customizer),
-		vinylNamed(),
-		gulpSourcemaps.init({ loadMaps: true }),
-		through.obj(function (file, enc, cb) {
-			const isSourceMap = /\.map$/.test(file.path);
-			if (!isSourceMap) this.push(file);
-			cb();
-		}),
-		gulpBabel(),
-		...((mode === 'production') ? [gulpUglify()] : []),
-		gulpRename(file => file.dirname = path.join('customizer', file.dirname)),
-		gulpSourcemaps.write('./'),
-		gulp.dest(distPath('js')),
-		browserSync.stream(),
-	], done) : undefined;
+		// Customizer
+		pump([
+			gulp.src(paths.entry.js.customizer),
+			vinylNamed(),
+			gulpSourcemaps.init({ loadMaps: true }),
+			through.obj(function (file, enc, cb) {
+				const isSourceMap = /\.map$/.test(file.path);
+				if (!isSourceMap) this.push(file);
+				cb();
+			}),
+			gulpBabel(),
+			...((mode === 'production') ? [gulpUglify()] : []),
+			gulpRename(file => file.dirname = path.join('customizer', file.dirname)),
+			gulpSourcemaps.write('./'),
+			gulp.dest(distPath('js')),
+			browserSync.stream(),
+		], done);
+	};
 
-	merge(_main, _customizer);
+	['development', 'production'].includes(mode) ? pumps() : undefined;
 };
 
 export { buildScripts };

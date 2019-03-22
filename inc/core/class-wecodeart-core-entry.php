@@ -16,32 +16,17 @@ use WeCodeArt\Utilities\Markup\SVG;
  * @subpackage 	Entry Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6
+ * @version		v3.6.2
  */
 
 class Entry {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton;
 
 	/**
-	 * Initiator
-	 *
-	 * @since 	v3.5
-	 * @return 	object
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	/**
-	 * Class Constructor.
-	 */
-	public function __construct() {
+	public function init() {
 		add_action( 'wecodeart_entry_open',		[ $this, 'markup_open' ], 			5	);
 		add_action( 'wecodeart_entry_header', 	[ $this, 'header_markup_open' ],	10 	);
 		add_action( 'wecodeart_entry_header', 	[ $this, 'render_title_markup' ],	15 	);

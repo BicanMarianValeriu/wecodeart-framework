@@ -11,36 +11,20 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @subpackage 	WP-Customizer Partials
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.3
- * @version		v3.5
+ * @version		v3.6.2
  */
 
 /**
  * Customizer Partials initial setup
  */
 class Partials {
+	use \WeCodeArt\Singleton; 
 
 	/**
-	 * Instance
-	 *
-	 * @access 	private
-	 * @var 	object
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	private static $instance;
-
-	/**
-	 * Initiator
-	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
-
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
+	public function init() {
 		add_action( 'customize_register', array( $this, 'register' ), 950 );
 	}
 

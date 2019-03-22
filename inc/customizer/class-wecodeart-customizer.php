@@ -16,17 +16,11 @@ use WeCodeArt\Customizer\Controls;
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.6
- * @version		v3.5
+ * @version		v3.6.2
  */
 
 class Customizer {
-	/**
-	 * Instance
-	 *
-	 * @access 	private
-	 * @var 	object
-	 */
-	private static $instance;
+	use \WeCodeArt\Singleton; 
 
 	/**
 	 * Customizer Configurations.
@@ -34,17 +28,13 @@ class Customizer {
 	 * @since 	3.5
 	 * @var 	array
 	 */
-	private static $configurations;
-
-	/**
-	 * Initiator
-	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) ) self::$instance = new self; 
-		return self::$instance;
-	}
+	private static $configurations; 
 	
-	public function __construct() {
+	/**
+	 * Send to Constructor
+	 * @since 3.6.2
+	 */
+	public function init() {
 		// Init Defaults
 		add_action( 'init', array( $this, 'set_defaults' ), 10 );
 

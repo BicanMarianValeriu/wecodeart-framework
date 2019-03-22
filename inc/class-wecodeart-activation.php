@@ -11,38 +11,25 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
- * @version 	v3.5
+ * @version 	v3.6.2
  */
  
 class Activation {
+	use \WeCodeArt\Singleton;
+
 	/**
 	 * Vars
 	 * @access 	protected 
 	 */
 	protected $requirements = [];
 	protected $messages = [];
-	protected $status = true; 
-
-	/**
-	 * Instance
-	 *
-	 * @access 	private
-	 * @var 	object
-	 */
-	private static $instance;
-
-	/**
-	 * Initiator
-	 */
-	public static function get_instance() {
-		if( ! isset( self::$instance ) ) self::$instance = new self;
-		return self::$instance;
-	}
+	protected $status = true;  
 	
 	/**
-	 * Construtor
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public function __construct() {
+	public function init() {
 
 		$this->messages = apply_filters( 'wecodeart/filter/activation/messages', [
 			'customizer' => __( 'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 'wecodeart' ),
@@ -66,10 +53,10 @@ class Activation {
 	/**
 	 * Get Activation Validation Status
 	 * @since 	3.5
-	 * @version	3.5
+	 * @version	3.6.2
 	 */
 	public function is_ok() {
-		if( ! $this->requirements ) return;
+		if( ! $this->requirements ) return true;
 		foreach( $this->requirements as $val ) {
 			if( $val['failed'] === true ) {
 				$this->status = false;
@@ -82,7 +69,7 @@ class Activation {
 	/**
 	 * Set Requirements
 	 * @since 	3.5
-	 * @version	3.5
+	 * @version	3.6.2
 	 */
 	public function set_requirements( $args = [] ) {
 		// Setup an array with data to check compatability
@@ -94,7 +81,7 @@ class Activation {
 			],
 			[
 				'label' 	=> 'PHP',
-				'required' 	=> '5.3.0',
+				'required' 	=> '5.4.0',
 				'installed' => phpversion()
 			]
 		];

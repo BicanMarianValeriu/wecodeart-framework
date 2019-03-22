@@ -12,17 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Customizer/Controls
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6.2
  */
 
 class Controls {
-	/**
-	 * Instance
-	 *
-	 * @access 	private
-	 * @var 	object
-	 */
-	private static $instance;
+	use \WeCodeArt\Singleton;  
 
 	/**
 	 * Registered Controls.
@@ -30,22 +24,15 @@ class Controls {
 	 * @since 	3.5
 	 * @var 	Array
 	 */
-	public static $controls;
-
-	/**
-	 * Initiator
-	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) ) self::$instance = new self; 
-		return self::$instance;
-	}
+	public static $controls; 
 	
 	/**
-	 * Constructor
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public function __construct() {
+	public function init() {
 		// Register our custom controls.
-		add_action( 'customize_register', array( $this, 'register_controls' ) );
+		add_action( 'customize_register', [ $this, 'register_controls' ] );
 	}
 
 	/**

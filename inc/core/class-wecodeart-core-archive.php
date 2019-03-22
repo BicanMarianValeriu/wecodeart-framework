@@ -16,30 +16,15 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * @subpackage 	Archive Intro Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6
+ * @version		v3.6.2
  */
 
 class Archive {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton;
 
 	/**
-	 * Initiator
-	 *
-	 * @since 	v3.5
-	 * @return 	object
-	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	/**
-	 * Class Constructor.
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
 	public function __construct() {
 		add_filter( 'get_the_archive_title', 		[ $this, 'filter_cat_title' 	] );

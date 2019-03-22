@@ -11,27 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	WeCodeArt\Core\Callbacks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6.1.2
+ * @version		v3.6.2
  */
 
 class Callbacks {
-	/**
-	 * Instance
-	 *
-	 * @access 	private
-	 * @var 	object
-	 */
-	private static $instance;
-
-	/**
-	 * Initiator
-	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) ) self::$instance = new self;
-		return self::$instance;
-	}
-
-	public function __construct() {}
+	use \WeCodeArt\Singleton; 
 
 	/**
 	 * Checks if the current page is a product archive

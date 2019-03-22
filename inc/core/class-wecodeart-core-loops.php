@@ -13,40 +13,28 @@ use WeCodeArt\Core\Entry;
  * @subpackage 	Loops
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.5
+ * @version		v3.6.2
  */ 
 class Loops {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
+	use \WeCodeArt\Singleton;
 
-	private static $page_for_404 = NULL;
+	private static $page_for_404 = NULL; 
+	
 	/**
-	 * Initiator
-	 *
-	 * @since 	v3.5
-	 * @return 	object
+	 * Send to Constructor
+	 * @since 3.6.2
 	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	public function __construct() {
+	public function init() {
 		self::$page_for_404 = get_theme_mod( 'page_for_404' );
 
-		add_action( 'init', [ $this, 'init' ] );
+		add_action( 'init', [ $this, 'hooks' ] );
 	}
 
 	/**
 	 * Init hooks and actions
-	 * @since	v3.5
-	 * @version v3.5
+	 * @since	v3.6.2
 	 */
-	public function init() {
+	public function hooks() {
 		if( self::$page_for_404 > 0 ) {
 			add_filter( 'display_post_states', 			[ $this, 'filter_404_post_state' ], 10, 2 );
 			// Remove 404 error page from Search Results

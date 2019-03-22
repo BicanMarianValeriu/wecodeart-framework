@@ -1,3 +1,10 @@
+v3.6.2
+- Added - Singleton class for avoiding code repetition for class instantiation
+- Changed - Class Constructors to init() method after Singleton trait implementation
+- Changed - Final class init method extends the constructor while old method will now be called modules();
+- 
+- DEV - Gulp Setup improvements for JS and package updates (see github repo)
+
 v3.6.1.2
 - Added: .flex-nowrap for content .row wrapper
 - Added: .col-12 for comment form fields

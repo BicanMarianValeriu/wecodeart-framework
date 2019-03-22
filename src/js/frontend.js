@@ -13,7 +13,7 @@ import 'bootstrap/js/dist/dropdown';
 	 * @since 3.6
 	 */
 	wecodeart.fn = {
-		hasScrollbar: wcaHasScrollbar 
+		hasScrollbar: wcaHasScrollbar
 	};
 
 	/**
@@ -26,7 +26,7 @@ import 'bootstrap/js/dist/dropdown';
 		html.classList.add('js');
 		// Document Scrollbar
 		handleDocumentScrollbar();
-		jQuery(window).on('resize', handleDocumentScrollbar);
+		window.onresize = handleDocumentScrollbar;
 	});
 
 }).apply(this, [window.wecodeart]);

@@ -11,32 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage  Markup Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
- * @version		v3.5
+ * @version		v3.6.2
  */
 
 class Markup {
-	/**
-	 * Instance
-	 *
-	 * @var $_instance
-	 */
-	private static $_instance = NULL;
-
-	/**
-	 * Initiator
-	 *
-	 * @since 	v3.3
-	 * @return 	object
-	 */
-	public static function get_instance() {
-		if( self::$_instance == NULL ) self::$_instance = new self;
-		return self::$_instance;
-	}
-
-	/**
-	 * Constructor
-	 */
-	public function __construct() {}
+	use \WeCodeArt\Singleton; 
 
 	/**
 	 * Merge array of attributes with defaults, and apply contextual filter on array.
