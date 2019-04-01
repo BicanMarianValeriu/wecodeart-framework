@@ -1,8 +1,17 @@
+v3.6.4
+- Changed - WooCommerce Cart Fragments ob_get_clean();
+
+v3.6.3 
+- Changed - WooCommerce Cart Fragments ob_get_clean();
+- Changed - Filter for set_i18n() default Activation Messages
+- Changed - Rename wecodeart.styleDirectory ( from childDirectory ) in JS localized object
+- Added - Activation Class set messages method ( set_i18n ) 
+- Removed - default entry extra Bootstrap flex classes and margin bottom class
+
 v3.6.2
 - Added - Singleton class for avoiding code repetition for class instantiation
 - Changed - Class Constructors to init() method after Singleton trait implementation
-- Changed - Final class init method extends the constructor while old method will now be called modules();
-- 
+- Changed - Final class init method extends the constructor while old method will now be called modules(); 
 - DEV - Gulp Setup improvements for JS and package updates (see github repo)
 
 v3.6.1.2

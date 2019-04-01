@@ -1,7 +1,10 @@
 <?php namespace WeCodeArt\Core;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit();
-// Use
+
+// Use 
+use WeCodeArt\Utilities\Form\Input;
 use WeCodeArt\Utilities\Markup\SVG;
 use WeCodeArt\Walkers\Comment as CommentWalker;
 /**
@@ -14,7 +17,7 @@ use WeCodeArt\Walkers\Comment as CommentWalker;
  * @subpackage 	Comments Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6.2
+ * @version		v3.6.3
  */
 class Comments {
 	use \WeCodeArt\Singleton;
@@ -27,6 +30,8 @@ class Comments {
 		// WP Core
 		add_filter( 'comment_form_fields',	[ $this, 'comment_form_fields' 		] );
 		add_filter( 'comment_reply_link',	[ $this, 'replace_reply_link_class' ] );
+		add_filter( 'comment_form_defaults',[ $this, 'comment_form_defaults' 	] );
+
 		// WeCodeArt Core
 		add_action( 'wecodeart_comments_list', 	[ $this, 'render_comments_list' ] );
 		add_action( 'wecodeart_pings_list', 	[ $this, 'render_pings_list' 	] );
@@ -167,6 +172,94 @@ class Comments {
 		
 		$fields['comment'] = $comment_field;
 		return $fields;
+	}
+
+	/**
+	 * Filter Comment Respond Args.
+	 *
+	 * @since	unknown
+	 * @version	3.6.0
+	 * @return 	array
+	 */
+	public function comment_form_defaults( array $defaults ) {
+		// Fields escapes all the data for us. 	
+		$commenter = wp_get_current_commenter();
+		$req       = get_option( 'require_name_email' );
+		
+		$author_name	= '<div class="comment-form-author col-12 col-md-7">' .
+			Input::compile( 'text', __( 'Name *', 'wecodeart' ), array( 
+				'id' 	=> 'author',
+				'class'	=> 'form-control',
+				'name' 	=> 'author', 
+				'required' 	=> ( $req ) ? 'required' : NULL, 
+				'size' 		=> absint( 30 ), 
+				'maxlength' => absint( 245 ),
+				'value' 	=> $commenter['comment_author'] 
+				) 
+			)
+		. '</div>';
+		
+		$author_email	= '<div class="comment-form-email col-12 col-md-7">' .
+			Input::compile( 'email', __( 'Email *', 'wecodeart' ), array( 			
+				'id' 	=> 'email',
+				'class'	=> 'form-control',
+				'name' 	=> 'email',
+				'required' 	=> ( $req ) ? 'required' : NULL, 
+				'size' 		=> absint( 30 ), 
+				'maxlength' => absint( 100 ),
+				'value' 	=> $commenter['comment_author_email'] 
+				)
+			) 
+		. '</div>';
+		
+		$author_url		= '<div class="comment-form-url col-12 col-md-7">' .
+			Input::compile( 'url', __( 'Website', 'wecodeart' ), array( 
+				'id' 	=> 'url',
+				'class'	=> 'form-control',
+				'name' 	=> 'url',
+				'size' 		 => absint( 30 ), 
+				'maxlength'  => absint( 200 ),
+				'value' 	 => $commenter['comment_author_url'] 
+				)
+			) 
+		. '</div>';
+
+		$author_comment		= '<div class="comment-form-comment col-12">' .
+			Input::compile( 'textarea', __( 'Comment*', 'wecodeart' ), array( 
+				'id' 	=> 'comment',
+				'class'	=> 'form-control',
+				'name' 	=> 'comment',
+				'rows'	=> absint( 8 ), 
+				'cols'  => absint( 45 ),
+				'required' 		 => 'true', 
+				'aria-required'  => 'true' 
+				)
+			) 
+		. '</div>';
+		
+		$required_text = sprintf( ' ' . __( 'Required fiels are marked %s', 'wecodeart' ), '<span class="required">*</span>' );
+		$notes_before 	= '<div class="comment-notes col-12 mb-3">' . __( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
+		$notes_after 	= '<div class="form-allowed-tags col-12 mb-3">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'wecodeart' ), ' <code>' . allowed_tags() . '</code>' ) . '</div>';
+
+		$args = array(
+			'title_reply' 	=> __( 'Speak Your Mind', 'wecodeart' ),
+			'comment_field' => $author_comment,
+			'comment_notes_before' 	=> $notes_before,
+			'comment_notes_after' 	=> $notes_after,
+			'submit_field'         	=> '<div class="form-submit col-12 mb-3">%1$s %2$s</div>',
+			'class_submit'         	=> 'btn btn-primary',
+			'fields' 		=> array(
+				'author' => $author_name,
+				'email'  => $author_email,
+				'url'    => $author_url,
+			)
+		);
+
+		// Merge $args with $defaults
+		$args = wp_parse_args( $args, $defaults );
+
+		// Return filterable array of $args, along with other optional variables
+		return apply_filters( 'wecodeart/filter/comment_form_args', $args, $commenter, $req ); 
 	}
 
 	/**

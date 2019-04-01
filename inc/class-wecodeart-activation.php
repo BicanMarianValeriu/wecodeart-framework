@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
- * @version 	v3.6.2
+ * @version 	v3.6.3
  */
  
 class Activation {
@@ -30,12 +30,7 @@ class Activation {
 	 * @since 3.6.2
 	 */
 	public function init() {
-
-		$this->messages = apply_filters( 'wecodeart/filter/activation/messages', [
-			'customizer' => __( 'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 'wecodeart' ),
-			'checkpoint' => __( 'WeCodeArt Framework requires at least %s version %s. You are running version %s. Please upgrade and try again.', 'wecodeart' )
-		] );
-
+		$this->set_i18n();
 		$this->set_requirements();
 		$this->compare_requirements();
 
@@ -49,6 +44,7 @@ class Activation {
 			do_action( 'wecodeart/hook/activation/failed' );
 		}
 	}
+
 
 	/**
 	 * Get Activation Validation Status
@@ -64,6 +60,21 @@ class Activation {
 			} 
 		}	
 		return $this->status;
+	}
+
+	/**
+	 * Set Translation Messages
+	 * @since 	3.6.3 
+	 */
+	public function set_i18n( $args = [] ) {
+		$defaults = [
+			'customizer' => __( 'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 'wecodeart' ),
+			'checkpoint' => __( 'WeCodeArt Framework requires at least %s version %s. You are running version %s. Please upgrade and try again.', 'wecodeart' )
+		];
+
+		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/i18n', $defaults ) );
+
+		return $this->messages = $args;	
 	}
 
 	/**
@@ -88,7 +99,7 @@ class Activation {
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/requirements', $defaults ) );
 
-		$this->requirements = $args;	
+		return $this->requirements = $args;	
 	}
 
 	/**

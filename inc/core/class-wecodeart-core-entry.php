@@ -49,18 +49,14 @@ class Entry {
 	/**
 	 * Entry Markup Open
 	 * @since 	v1
-	 * @version v3.6
+	 * @version v3.6.3
 	 * @return 	string HTML
 	 */
-	public function markup_open() {
-		$classes = [ 'd-flex', 'flex-column', 'mb-3' ];
-		$attributes = Markup::generate_attr(
-			'entry',
-			[
-				'id' 	=> 'post-' . get_the_ID(),
-				'class'	=> implode( ' ', get_post_class( $classes ) )
-			]
-		);
+	public function markup_open() { 
+		$attributes = Markup::generate_attr( 'entry', [ 
+			'id' 	=> 'entry-' . get_the_ID(), 
+			'class'	=> implode( ' ', get_post_class() ) 
+		] );
 		?>
 		<article <?php echo $attributes; ?>>
 		<?php
@@ -147,9 +143,9 @@ class Entry {
 	 */
 	public function post_image() {
 		global $post_ID;
-		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
-			return;
-		}
+
+		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) return; 
+		
 		if ( is_singular() ) :	
 			the_post_thumbnail( 'medium', array( 'class' => 'alignleft' ) ); 
 		else :

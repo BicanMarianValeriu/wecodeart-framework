@@ -1,8 +1,8 @@
 <?php namespace WeCodeArt\Core;
+
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-// Use
-use WeCodeArt\Utilities\Form\Input as Inputs;
+if ( ! defined( 'ABSPATH' ) ) exit(); 
+
 /**
  * WeCodeArt Framework.
  *
@@ -13,7 +13,7 @@ use WeCodeArt\Utilities\Form\Input as Inputs;
  * @subpackage 	General Hooks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.0
- * @version		v3.6.2
+ * @version		v3.6.3
  */
 
 class Hooks {
@@ -26,7 +26,6 @@ class Hooks {
 	public function init() {
 		add_filter( 'body_class',               array( $this, 'body_classes' ) );
 		add_filter( 'post_class', 			  	array( $this, 'post_classes' ) );
-		add_filter( 'comment_form_defaults',	array( $this, 'comment_form_defaults' ) );
 		add_filter( 'get_custom_logo', 		 	array( $this, 'custom_logo' ) );
 		add_action( 'get_search_form',          array( $this, 'search_form' ) );
 	}
@@ -35,6 +34,7 @@ class Hooks {
 	 * Adds custom classes to the array of body classes.
 	 *
 	 * @param array $classes Classes for the body element.
+	 * 
 	 * @return array
 	 */
 	public function body_classes( $classes ) {
@@ -100,6 +100,7 @@ class Hooks {
 	 * Filter classes to the array of post classes.
 	 *
 	 * @param 	array $classes Classes for the post.
+	 * 
 	 * @return 	array
 	 */
 	public function post_classes( $classes ) {
@@ -115,8 +116,10 @@ class Hooks {
 	
 	/**
 	 * Filter Search form HTML Markup.
+	 * 
 	 * @since 	unknown
 	 * @version v3.6
+	 * 
 	 * @return 	string $form
 	 */
 	public function search_form( $args = array() ) {
@@ -153,94 +156,5 @@ class Hooks {
 		
 		// Return The Form with everything in it
 		return apply_filters( 'wecodeart/filter/search_form/html', $form );
-	}
-	
-	/**
-	 * Filter Comment Respond Args.
-	 *
-	 * @since	unknown
-	 * @version	3.6.0
-	 * @return 	array
-	 */
-	public function comment_form_defaults( array $defaults ) {
-		// Fields escapes all the data for us. 	
-		$commenter = wp_get_current_commenter();
-		$req       = get_option( 'require_name_email' );
-		
-		$author_name	= '<div class="comment-form-author col-12 col-md-7">' .
-			Inputs::compile( 'text', __( 'Name *', 'wecodeart' ), array( 
-				'id' 	=> 'author',
-				'class'	=> 'form-control',
-				'name' 	=> 'author', 
-				'required' 	=> ( $req ) ? 'required' : NULL, 
-				'size' 		=> absint( 30 ), 
-				'maxlength' => absint( 245 ),
-				'value' 	=> $commenter['comment_author'] 
-				) 
-			)
-		. '</div>';
-		
-		$author_email	= '<div class="comment-form-email col-12 col-md-7">' .
-			Inputs::compile( 'email', __( 'Email *', 'wecodeart' ), array( 			
-				'id' 	=> 'email',
-				'class'	=> 'form-control',
-				'name' 	=> 'email',
-				'required' 	=> ( $req ) ? 'required' : NULL, 
-				'size' 		=> absint( 30 ), 
-				'maxlength' => absint( 100 ),
-				'value' 	=> $commenter['comment_author_email'] 
-				)
-			) 
-		. '</div>';
-		
-		$author_url		= '<div class="comment-form-url col-12 col-md-7">' .
-			Inputs::compile( 'url', __( 'Website', 'wecodeart' ), array( 
-				'id' 	=> 'url',
-				'class'	=> 'form-control',
-				'name' 	=> 'url',
-				'size' 		 => absint( 30 ), 
-				'maxlength'  => absint( 200 ),
-				'value' 	 => $commenter['comment_author_url'] 
-				)
-			) 
-		. '</div>';
-
-		$author_comment		= '<div class="comment-form-comment col-12">' .
-			Inputs::compile( 'textarea', __( 'Comment*', 'wecodeart' ), array( 
-				'id' 	=> 'comment',
-				'class'	=> 'form-control',
-				'name' 	=> 'comment',
-				'rows'	=> absint( 8 ), 
-				'cols'  => absint( 45 ),
-				'required' 		 => 'true', 
-				'aria-required'  => 'true' 
-				)
-			) 
-		. '</div>';
-		
-		$required_text = sprintf( ' ' . __( 'Required fiels are marked %s', 'wecodeart' ), '<span class="required">*</span>' );
-		$notes_before 	= '<div class="comment-notes col-12 mb-3">' . __( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
-		$notes_after 	= '<div class="form-allowed-tags col-12 mb-3">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'wecodeart' ), ' <code>' . allowed_tags() . '</code>' ) . '</div>';
-
-		$args = array(
-			'title_reply' 	=> __( 'Speak Your Mind', 'wecodeart' ),
-			'comment_field' => $author_comment,
-			'comment_notes_before' 	=> $notes_before,
-			'comment_notes_after' 	=> $notes_after,
-			'submit_field'         	=> '<div class="form-submit col-12 mb-3">%1$s %2$s</div>',
-			'class_submit'         	=> 'btn btn-primary',
-			'fields' 		=> array(
-				'author' => $author_name,
-				'email'  => $author_email,
-				'url'    => $author_url,
-			)
-		);
-
-		// Merge $args with $defaults
-		$args = wp_parse_args( $args, $defaults );
-
-		// Return filterable array of $args, along with other optional variables
-		return apply_filters( 'wecodeart/filter/comment_form_args', $args, $commenter, $req );
-
-	}
+	} 
 }
