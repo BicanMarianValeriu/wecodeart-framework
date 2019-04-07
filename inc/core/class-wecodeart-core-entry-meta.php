@@ -16,7 +16,7 @@ use WeCodeArt\Utilities\Markup\SVG;
  * @subpackage 	Entry Meta Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.6
- * @version		v3.6.2
+ * @version		v3.6.4
  */
 
 class Meta {
@@ -24,10 +24,10 @@ class Meta {
 
 	/**
 	 * Send to Constructor
-	 * @since 3.6.2
+	 * @since 3.6.4
 	 */
 	public function init() {
-		add_action( 'wecodeart_entry_header', [ $this, 'render' ], 20 ); 
+		add_action( 'wecodeart/hook/entry/header', [ $this, 'render' ], 20 ); 
 	}
 	
 	/**
@@ -113,14 +113,14 @@ class Meta {
 	 * @since	v1.0
 	 * @version v3.6
 	 */
-	public static function categories( $args = array(), $echo = true ) {
+	public static function categories( $args = [], $echo = true ) {
 		// Set the defaults
-		$defaults = array(
+		$defaults = [
 			'before' 	=> SVG::compile( 'icon--folder' ),
 			'after'  	=> '&nbsp;',
 			'sr_text'	=> __( 'Posted in ', 'wecodeart' ),
 			'sep'    	=> ', ',
-		);
+		];
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/cats/defaults', $defaults ) );
 
@@ -138,8 +138,7 @@ class Meta {
 			'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
 			$cats, 
 			$args[ 'after' ] 
-			) 
-		);
+		) );
 
 		if ( $echo ) echo $output;
 		else return $output;

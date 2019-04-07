@@ -16,7 +16,7 @@ use WeCodeArt\Utilities\Markup\SVG;
  * @subpackage 	Entry Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6.2
+ * @version		v3.6.4
  */
 
 class Entry {
@@ -27,23 +27,23 @@ class Entry {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'wecodeart_entry_open',		[ $this, 'markup_open' ], 			5	);
-		add_action( 'wecodeart_entry_header', 	[ $this, 'header_markup_open' ],	10 	);
-		add_action( 'wecodeart_entry_header', 	[ $this, 'render_title_markup' ],	15 	);
-		add_action( 'wecodeart_entry_header', 	[ $this, 'header_markup_close' ],	90 	);
-		add_action( 'wecodeart_entry_footer', 	[ $this, 'footer_markup_open' ],	5 	);
-		add_action( 'wecodeart_entry_footer', 	[ $this, 'render_post_footer' ] 		);
-		add_action( 'wecodeart_entry_footer',	[ $this, 'render_author_box' ], 	20 	);
-		add_action( 'wecodeart_entry_footer', 	[ $this, 'footer_markup_close' ], 	95 	);
-		add_action( 'wecodeart_entry_content', 	[ $this, 'render_content_markup' ]		);
-		add_action( 'wecodeart_entry_close', 	[ $this, 'markup_close' ],			95 	);
+		add_action( 'wecodeart_entry_open',		[ $this, 'markup_open' 		], 5 ); 
+		add_action( 'wecodeart_entry_header', 	[ $this, 'render_header' 	] ); 
+		add_action( 'wecodeart_entry_content', 	[ $this, 'render_content' 	] );
+		add_action( 'wecodeart_entry_footer',	[ $this, 'render_footer' 	] ); 
+		add_action( 'wecodeart_entry_close', 	[ $this, 'markup_close' 	], 95 );
+		
+		add_action( 'wecodeart/hook/entry/header',	[ $this, 'render_title' 		], 10 );
+		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_read_more' 	], 10 );
+		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_author_box' 	], 20 );
 
-		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_noposts' ], 		10 	);
+		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_noposts' ], 10 );
 
-		add_action( 'the_password_form', 		[ $this, 'render_paswordprotected' ] 	);
+		add_action( 'the_password_form', [ $this, 'render_paswordprotected' ] );
 
-		// Init Meta Class
+		// Init Classes
 		Entry\Meta::get_instance();
+		Entry\Media::get_instance(); 
 	}
 	
 	/**
@@ -70,124 +70,106 @@ class Entry {
 	 */
 	public function markup_close() {
 		?></article><?php
-	}
+	} 
 
 	/**
-	 * Entry Header Markup Open
-	 * @since 	v1
-	 * @version v3.5
+	 * Render Header
+	 * @since 	v3.6.4
+	 * @uses	Markup::wrap()
 	 * @return 	string HTML
 	 */
-	public function header_markup_open() {
-		$attributes = Markup::generate_attr( 'entry-header', [ 'class'	=> 'entry-header' ] );
-		?>
-		<header <?php echo $attributes; ?>>
-		<?php
-	}
+	public function render_header() { 
+
+		Markup::wrap( 'entry-header', [ [
+			'tag' 	=> 'header',
+			'attrs' => [ 
+				'class' => 'entry-header' 
+			]
+		] ], 'do_action', [ 'wecodeart/hook/entry/header' ] );  
+	} 
 
 	/**
-	 * Entry Header Markup Close
-	 * @since 	v1
-	 * @version v3.5
+	 * Render Footer
+	 * @since 	v3.6.4
+	 * @uses	Markup::wrap()
 	 * @return 	string HTML
 	 */
-	public function header_markup_close() {
-		?></header><?php
-	}
+	public function render_footer() { 
+
+		Markup::wrap( 'entry-footer', [ [
+			'tag' 	=> 'footer',
+			'attrs' => [ 
+				'class' => 'entry-footer' 
+			]
+		] ], 'do_action', [ 'wecodeart/hook/entry/footer' ] );  
+	} 
 
 	/**
-	 * Entry Footer Markup Open
-	 * @since 	v1
-	 * @version v3.5
-	 * @return 	string HTML
+	 * Retrieve entry title with link
+	 * @since 	3.6.4
+	 * @param	bool	$link
+	 * @param 	bool 	$echo 
 	 */
-	public function footer_markup_open() {
-		$attributes = Markup::generate_attr( 'entry-header', [ 'class'	=> 'entry-footer' ] );
-		?>
-		<footer <?php echo $attributes; ?>>
-		<?php
-	}
+	public function the_title( $link = true, $echo = true ) {
+		$title = get_the_title();
 
-	/**
-	 * Entry Footer Markup Close
-	 * @since 	v1
-	 * @version v3.5
-	 * @return 	string HTML
-	 */
-	public function footer_markup_close() {
-		?></footer><?php
+		if ( 0 === mb_strlen( $title ) ) return;
+		
+		if ( $link && ! is_singular() ) {
+			$title = sprintf( '<a href="%s" rel="bookmark">%s</a>', esc_url( get_permalink() ), esc_html( $title ) );
+		}
+		
+		if( $echo !== true ) return $title;
+		else echo $title;
 	}
 
 	/**
 	 * Echo the Entry Title Markup
-	 * @since 	v1
-	 * @version v3.5
+	 * @since 	1.0
+	 * @uses	Markup::wrap()
+	 * @version 3.6.4
 	 */
-	public function render_title_markup() {
-		$title = get_the_title();
-		if ( 0 === mb_strlen( $title ) ) return;
-		// Link it in other places than Single Posts
-		if ( ! is_singular() ) {
-			$title = sprintf( '<a href="%s" rel="bookmark">%s</a>', esc_url( get_permalink() ), esc_html( $title ) );
-		}
+	public function render_title() {  
 		// Wrap in H1 on singular pages, else H2
 		$wrap = is_singular() ? 'h1' : 'h2';
-		// Build the output
-		$output = sprintf( '<%s class="entry-title">%s</%s>', $wrap, $title, $wrap );
-		
-		echo $output;
-	} 
 
-	/**
-	 * Echo the Entry IMG Markup
-	 */
-	public function post_image() {
-		global $post_ID;
-
-		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) return; 
-		
-		if ( is_singular() ) :	
-			the_post_thumbnail( 'medium', array( 'class' => 'alignleft' ) ); 
-		else :
-			$img = get_the_post_thumbnail( $post_ID, 'thumbnail', array( 'class' => 'thumbnail alignleft' ));
-			printf( '<a href="%s" aria-hidden="true">%s</a>', esc_url( get_permalink() ), $img );
-		endif;
-	}
+		Markup::wrap( 'entry-title', [ [
+			'tag' 	=> $wrap,
+			'attrs' => [ 
+				'class' => 'entry-title' 
+			]
+		] ], [ $this, 'the_title' ] );  
+	}  
 
 	/**
 	 * Echo the Entry Content/Excerpt Markup
-	 * @since	v1.0
-	 * @version v3.5
+	 * @since	1.0
+	 * @uses	Markup::wrap()
+	 * @version	3.6.4
 	 */
-	public function render_content_markup() {
-		$thecontent = get_the_content();
-		// Display Full Content on Single Page/Post
-		if ( is_singular() && ! empty( $thecontent ) ) {
-			echo '<div class="entry-content">';
-			$this->post_image();
-			the_content();
-			echo '</div>';
-		} else {
-			echo '<div class="entry-content excerpt">';
-			$this->post_image();
-			the_excerpt();
-			echo '</div>';
-		}
+	public function render_content() {  
+		Markup::wrap( 'entry-content', [ [
+			'tag' 	=> 'div',
+			'attrs' => [ 
+				'class' => is_singular() ? 'entry-content' : 'entry-excerpt' 
+			]
+		] ], is_singular() ? 'the_content' : 'the_excerpt' ); 
 	} 
 
 	/**
-	 * Echo the post read more button.
-	 * By default, only does it on archives.
+	 * Echo the post read more button. 
+	 * @since 	unknown
+	 * @version 3.6.4
 	 */
-	public function render_post_footer() {
+	public function render_read_more() {
 		// Do dont return on Singular
 		if ( ! is_singular() ) echo Entry\Meta::read_more();
 	}
 
 	/**
 	 * Return the content for No Posts
-	 * @since	v2.2
-	 * @version v3.1.2
+	 * @since	2.2
+	 * @version	3.1.2
 	 */
 	public function render_noposts() {
 		get_template_part( 'views/entry/content', 'none' );
@@ -195,8 +177,8 @@ class Entry {
 
 	/**
 	 * Return the content for No Posts
-	 * @since	v3.5
-	 * @version v3.5
+	 * @since	3.5
+	 * @version	3.5
 	 */
 	public function render_paswordprotected() {
 		get_template_part( 'views/entry/content', 'protected' );
@@ -204,13 +186,13 @@ class Entry {
 
 	/**
 	 * Add Author Box on single Post
-	 * @since	v3.5
-	 * @version v3.5
+	 * @since	3.5
+	 * @version	3.5
 	 */
 	public function render_author_box() {
 		// Filter to give posibility for disable
 		if( apply_filters( 'wecodeart/filter/author-box/single', '__return_true' ) ) { 
 			if( is_single() ) get_template_part( 'views/author/author' );
 		}
-	}
+	} 
 }

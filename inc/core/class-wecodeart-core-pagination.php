@@ -1,6 +1,8 @@
 <?php namespace WeCodeArt\Core;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit();
+
 /**
  * WeCodeArt Framework.
  *
@@ -11,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Pagination Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6.2
+ * @version		v3.6.4
  */
 
 class Pagination {
@@ -31,7 +33,7 @@ class Pagination {
 	/**
 	 * Display links to previous and next post, from a single post.
 	 * @since	v1.0
-	 * @version	v3.6.0.6
+	 * @version	v3.6.4
      * @return  null        Return early if not a post.
 	 */
 	public function prev_next_post_nav() {
@@ -60,7 +62,7 @@ class Pagination {
         <nav id="entry-prev-next" class="entry-prev-next"
             itemscope="" itemtype="http://schema.org/SiteNavigationElement">
             <h3 class="screen-reader-text"><?php 
-                echo sprintf( __( '%s Navigation', 'wecodeart' ), $post_obj->labels->singular_name ); 
+                printf( __( '%s Navigation', 'wecodeart' ), $post_obj->labels->singular_name ); 
             ?></h3>
             <div class="row pt-3">
             <?php
@@ -133,7 +135,7 @@ class Pagination {
 
     /**
      * Filter to disable prev/next nav on pages
-     * @since 3.6.0.6
+     * @since   3.6.0.6
      * @param   boolean     $enabled
      * @param   string      $post_type
      * @return  boolean

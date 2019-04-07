@@ -1,5 +1,13 @@
 v3.6.4
-- Changed - WooCommerce Cart Fragments ob_get_clean();
+- Changed - class-wecodeart-core-entry functions names ( removed some ) and added improved functionality; 
+- Added - class-wecodeart-core-entry-media.php with huge improvements to Entry Images
+- Added - function the_title() ( retrieve the title with link on archives )
+- Added - function get_media_id() ( retrieve post atached media ids )
+- Added - function generate_dummy_placeholder() - use a dummy image to avoid 'content' jumping when images are not loaded
+- Added - function get_image_ratio() ( compare image vs dummy image and get ratio class )
+- Added - function get_image() ( retrieve post image with fallbacks )
+- Added - function filter_render_image() 
+- Added - wecodeart/filter/render_image/disable for ability to disable media rendering ( disable by default on singular )
 
 v3.6.3 
 - Changed - WooCommerce Cart Fragments ob_get_clean();

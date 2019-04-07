@@ -1,2 +1,50 @@
-"use strict";wp.customize.controlConstructor["wecodeart-sortable"]=wp.customize.Control.extend({ready:function(){var i=this;i.sortableContainer=i.container.find("ul.wecodeart-sortable__list").first(),i.sortableContainer.sortable({stop:function(){i.updateValue()}}).disableSelection().find("li").each(function(){jQuery(this).find("i.visibility").click(function(){jQuery(this).toggleClass("dashicons-visibility-faint").parents("li:eq(0)").toggleClass("invisible")})}).click(function(){i.updateValue()})},updateValue:function(){var i=[];this.sortableContainer.find("li").each(function(){jQuery(this).is(".invisible")||i.push(jQuery(this).data("value"))}),this.setting.set(i)}});
+"use strict";
+
+/**
+ * File sortable.js
+ *
+ * Handles sortable list
+ *
+ * @package WeCodeArt
+ * @since 	v3.3
+ * @version v3.6
+ * 
+ */
+wp.customize.controlConstructor['wecodeart-sortable'] = wp.customize.Control.extend({
+  ready: function ready() {
+    'use strict';
+
+    var control = this; // Set the sortable container.
+
+    control.sortableContainer = control.container.find('ul.wecodeart-sortable__list').first(); // Init sortable.
+
+    control.sortableContainer.sortable({
+      // Update value when we stop sorting.
+      stop: function stop() {
+        control.updateValue();
+      }
+    }).disableSelection().find('li').each(function () {
+      jQuery(this).find('i.visibility').click(function () {
+        jQuery(this).toggleClass('dashicons-visibility-faint').parents('li:eq(0)').toggleClass('invisible');
+      });
+    }).click(function () {
+      // Update value on click.
+      control.updateValue();
+    });
+  },
+
+  /**
+   * Updates the sorting list
+   */
+  updateValue: function updateValue() {
+    'use strict';
+
+    var control = this,
+        newValue = [];
+    this.sortableContainer.find('li').each(function () {
+      if (!jQuery(this).is('.invisible')) newValue.push(jQuery(this).data('value'));
+    });
+    control.setting.set(newValue);
+  }
+});
 //# sourceMappingURL=sortable.js.map

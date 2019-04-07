@@ -14,7 +14,7 @@ use WeCodeArt\Utilities\Markup as Markup;
  * @subpackage 	Main Content Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6.2
+ * @version		v3.6.4
  */
 
 class Content {
@@ -36,7 +36,7 @@ class Content {
 	/**
 	 * Echo the opening tag markup for content
 	 * @since 	unknown
-	 * @version	3.6.1.1
+	 * @version	3.6.4
 	 * @return 	string HTML 
 	 */
 	public function content_markup_open() { 
@@ -45,7 +45,7 @@ class Content {
 			'content',
 			[
 				'id' => 'primary',
-				'class' => 'content__main col col-12 col-lg'
+				'class' => 'content__main col-12 col-lg'
 			]
 		);
 		?>
@@ -61,7 +61,7 @@ class Content {
 				$attributes = Markup::generate_attr(
 					'main',
 					[
-						'id' => 'main',
+						'id' 	=> 'main',
 						'class' => 'site-main'
 					]
 				);
@@ -105,7 +105,7 @@ class Content {
 	/**
 	 * Get Primary Sidebar View
 	 * @since	v1.0
-	 * @version v3.6.1.1
+	 * @version v3.6.4
 	 * @return	HTML
 	 */
 	public static function display_primary_sidebar() {
@@ -113,8 +113,8 @@ class Content {
 		$attributes = Markup::generate_attr(
 			'sidebar-primary',
 			[
-				'id' => 'secondary',
-				'class' => 'content__sidebar col col-12 col-lg-4'
+				'id' 	=> 'secondary',
+				'class' => 'content__sidebar col-12 col-lg-4'
 			]
 		);
 		?>
@@ -137,8 +137,8 @@ class Content {
 		$attributes = Markup::generate_attr(
 			'sidebar-secondary',
 			[
-				'id' => 'secondary-2',
-				'class' => 'content__sidebar content__sidebar--secondary col col-sm-12 col-lg-2'
+				'id' 	=> 'secondary-2',
+				'class' => 'content__sidebar content__sidebar--secondary col-sm-12 col-lg-2'
 			]
 		);
 		?>
@@ -182,7 +182,7 @@ class Content {
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 * @since 	unknown
-	 * @version v3.6.1.2
+	 * @version v3.6.4
 	 * @uses	WeCodeArt\Utilities\Markup::wrap();
 	 * @return 	HTML
 	 */
@@ -195,24 +195,9 @@ class Content {
 		$class = trim( implode( ' ', $class ) );
 
 		$wrappers = [
-			[
-				'tag' => 'div',
-				'attrs' => [
-					'class' => $class
-				]
-			],
-			[
-				'tag' => 'div',
-				'attrs' => [
-					'class' => $options['container']
-				]
-			],
-			[
-				'tag' => 'div',
-				'attrs' => [
-					'class' => 'row flex-nowrap'
-				]
-			]
+			[ 'tag' => 'div', 'attrs' => [ 'class' => $class ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ]
 		];
 
 		Markup::wrap( 'content-wrappers', $wrappers, [ __CLASS__, 'sort_modules' ] ); 
