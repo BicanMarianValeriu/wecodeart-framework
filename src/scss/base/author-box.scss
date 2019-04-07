@@ -8,8 +8,8 @@
 .author-box {
     padding: 1rem 0;
     margin-bottom: 1rem;
-    border-top: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
+    border-top: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
 
     &__headline {
         svg {

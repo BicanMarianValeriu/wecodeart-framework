@@ -50,7 +50,7 @@ class Hooks {
 		
 		// Page Has Sidebar
 		foreach( $all_pages as $page ) { 
-			if( is_page( $page->ID ) ) $has_sidebar = get_theme_mod( 'content-layout-modules-page-' . $page->ID );
+			if( is_page( $page->ID ) ) $has_sidebar = get_theme_mod( 'content-layout-modules-page-' . $page->ID, [] );
 		}
 		
 		// Blog Has Sidebar

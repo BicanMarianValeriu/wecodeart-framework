@@ -1,5 +1,6 @@
 v3.6.6
-- Changed - ...;
+- Fixed - CSS fixes ( header/author box and more );
+- Fixed - PAGES default fallback for customizer get_theme_mod() - issue with hooks
 
 v3.6.5
 - Fixed - Mobile Menu Collapse state; 
