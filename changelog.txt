@@ -1,3 +1,6 @@
+v3.6.5
+- Changed - ...; 
+
 v3.6.4
 - Changed - class-wecodeart-core-entry functions names ( removed some ) and added improved functionality; 
 - Added - class-wecodeart-core-entry-media.php with huge improvements to Entry Images
