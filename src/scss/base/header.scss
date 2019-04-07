@@ -43,11 +43,17 @@
 .header-bar { 
     &__menu,
     &__search {
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(md) { 
             margin-top: 10px;
             order: 100;
             padding-top: 10px;
-            border-top: 1px solid lightgray;
+            border-top: 1px solid $gray-100;
+        }
+
+        &:not(.show):not(.collapsing) {
+            @include media-breakpoint-down(md) { 
+                display: none;
+            }
         }
     }
 
