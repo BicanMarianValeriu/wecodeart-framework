@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage  Markup Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		v3.5
- * @version		v3.6.2
+ * @version		v3.7.0
  */
 
 class Markup {
@@ -30,6 +30,7 @@ class Markup {
 			'class' => sanitize_html_class( $context ),
 		);
 		$attributes = wp_parse_args( $attributes, $defaults );
+
 		// Contextual filter.
 		return apply_filters( "wecodeart/filter/attributes/{$context}", $attributes, $context, $args );
 	}
@@ -45,12 +46,14 @@ class Markup {
 	public static function generate_attr( $context, $attributes = array(), $args = array() ) {
 		$attributes = self::parse_attr( $context, $attributes, $args );
 		$output = '';
+
 		// Cycle through attributes, build tag attribute string.
 		foreach( $attributes as $key => $value ) {
 			if ( ! $value ) continue;
 			if ( true === $value ) $output .= esc_html( $key ) . ' ';
 			else $output .= sprintf( '%s="%s" ', esc_html( $key ), esc_attr( $value ) );
 		}
+
 		$output = apply_filters( "wecodeart/filter/attributes/{$context}/output", $output, $attributes, $context, $args );
 		return trim( $output );
 	}
@@ -108,10 +111,11 @@ class Markup {
 		// Only run if we have function
 		if( 
 			is_array( $function ) && ! method_exists( $function[0], $function[1] ) || 
-			is_string( $function ) && ! function_exists( $function ) 
+			is_string( $function ) && ! function_exists( $function ) ||
+			is_string( $function ) && ! is_callable( $function )
 		) {
 			return new \WP_Error( 'wecodeart_markup_no_callback', 
-				__( 'The specified callback does not exists.', 'wecodeart' )
+				__( 'The specified callback does not exists or is not a function.', 'wecodeart' )
 			);
 		}
 		
@@ -151,7 +155,17 @@ class Markup {
 		$html .= $function_html;
 		
 		foreach( $args as $elem ) $html .= '</' . esc_html( $elem['tag'] ) . '>';
-		
+
+		/**
+		 * Developer Comments
+		 * @since 3.7.0
+		 */
+		if( WP_DEBUG === true ) {
+			$comment = implode( '.', explode( ' ', $args[0]['attrs']['class'] ) );
+			$comment .= " @filter = `wecodeart/filter/attributes/{$context}`";
+			$html .= "<!-- /.{$comment} -->";
+		}
+
 		/**
 		 * Filter the final HTML output of the function
 		 * @since 	3.6.0

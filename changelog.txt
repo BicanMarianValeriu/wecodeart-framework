@@ -1,5 +1,18 @@
-v3.6.7
-- Fixed - ...;
+v3.7.0
+- Added - Improved comments template - breaking changes
+- Added - date( 'Y' ) - year in footer copyright message
+- Added - Markup::wrap() can now use anonymous function that returns content to wrap
+- Added - Markup::wrap() can now out html comments ( class and filter to change the attributes of the wrappers )
+- Added - Header now uses Markup::wrap() function
+- Added - Footer now uses Markup::wrap() function
+- Added - Footer Attribution now uses Markup::wrap() function 
+- Added - Passed post_type and post index as arguments to Default Loop entry actions
+- Added - Better Accessibility for PREV/NEXT single entry navigation
+- Added - Woocommerce wrapper via Markup::generate_attr() function ( ability to change attributes via filter )
+- Fixed - Responsive for PREV/NEXT single entry navigation / removed Boostrap padding top class;
+- Removed - View for header-menu in favor for Markup::wrap() function ( better customizability of the wrapper )
+- Removed - View for header-search in favor for Markup::wrap() function ( better customizability of the wrapper )
+- Removed - View for entry/content-none.php / added in function directly ( no need for view and filter )
 
 v3.6.6
 - Fixed - CSS fixes ( header/author box and more );

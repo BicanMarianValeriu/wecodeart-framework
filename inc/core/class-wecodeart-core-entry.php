@@ -15,8 +15,8 @@ use WeCodeArt\Utilities\Markup\SVG;
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.4
+ * @since 		3.5
+ * @version		3.7.0
  */
 
 class Entry {
@@ -169,10 +169,18 @@ class Entry {
 	/**
 	 * Return the content for No Posts
 	 * @since	2.2
-	 * @version	3.1.2
+	 * @version	3.7.0
+	 * @return	string
 	 */
-	public function render_noposts() {
-		get_template_part( 'views/entry/content', 'none' );
+	public function render_noposts() { 
+		?>
+		<p><?php 
+			esc_html_e( apply_filters( 
+				'wecodeart/filter/entry/noposts_message', 
+				__( 'There are no posts matching your criteria.', 'wecodeart' ) 
+			), 'wecodeart' );
+		 ?></p>
+		<?php
 	}
 
 	/**

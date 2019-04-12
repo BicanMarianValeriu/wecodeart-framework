@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @subpackage 	Pagination Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6.4
+ * @version		v3.6.7
  */
 
 class Pagination {
@@ -21,19 +21,19 @@ class Pagination {
 
 	/**
 	 * Send to Constructor
-	 * @since 3.6.2
+	 * @since 3.6.7
 	 */
 	public function init() {
         add_action( 'wecodeart/hook/main/after',    [ $this, 'numeric_posts_nav' ], 10 );
-        add_action( 'wecodeart_entry_footer',       [ $this, 'post_content_nav' ],  10 );
-        add_action( 'wecodeart_entry_footer',       [ $this, 'prev_next_post_nav' ], 90 );
+        add_action( 'wecodeart/hook/entry/footer',  [ $this, 'post_content_nav' ],  30 );
+        add_action( 'wecodeart/hook/entry/footer',  [ $this, 'prev_next_post_nav' ], 50 );
         add_filter( 'wecodeart/filter/entry/prev_next_nav/enabled', [ $this, 'filter_prev_next_page' ], 10, 2 );
 	}
 	
 	/**
 	 * Display links to previous and next post, from a single post.
 	 * @since	v1.0
-	 * @version	v3.6.4
+	 * @version	v3.6.7
      * @return  null        Return early if not a post.
 	 */
 	public function prev_next_post_nav() {
@@ -64,15 +64,15 @@ class Pagination {
             <h3 class="screen-reader-text"><?php 
                 printf( __( '%s Navigation', 'wecodeart' ), $post_obj->labels->singular_name ); 
             ?></h3>
-            <div class="row pt-3">
+            <div class="row">
             <?php
                 previous_post_link(
-                    '<div class="col col-sm-12 col-md">' . $prev . '%link</div>', 
-                    '&#x000AB; '. $schema 
+                    '<div class="col-sm-12 col-md">' . $prev . '%link</div>', 
+                    '<span aria-hidden="true">&#x000AB;</span> ' . $schema 
                 );
                 next_post_link(
-                    '<div class="col col-sm-12 col-md text-md-right">' . $next . '%link</div>',  
-                    $schema .' &#x000BB;'
+                    '<div class="col-sm-12 col-md text-md-right">' . $next . '%link</div>',  
+                    $schema . ' <span aria-hidden="true">&#x000BB;</span>'
                 );
             ?>
             </div>

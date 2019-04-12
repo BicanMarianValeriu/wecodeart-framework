@@ -1,8 +1,9 @@
 <?php namespace WeCodeArt;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit(); 
-// Use
-use WeCodeArt_Theme_Mods as WeCodeArt_Theme_Mods;
+
+// Use 
 use WeCodeArt\Customizer\Partials;
 use WeCodeArt\Customizer\Controls;
 
@@ -15,8 +16,8 @@ use WeCodeArt\Customizer\Controls;
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v1.6
- * @version		v3.6.2
+ * @since 		1.6
+ * @version		3.7.0
  */
 
 class Customizer {
@@ -116,7 +117,7 @@ class Customizer {
 	/**
 	 * Grab our Customizer Defaults.
 	 * @param 	string 		mod_name
-	 * @version v3.6.0.3
+	 * @version	3.7.0
 	 * @return 	mixed/array
 	 */
 	public static function get_defaults( $mod_name = '' ) {
@@ -131,13 +132,13 @@ class Customizer {
 			'content-layout-modules-blog'	=> ['content', 'primary'],  
 			'footer-layout-container'		=> 'container',
 			'footer-layout-modules'			=> ['footer-1', 'footer-2', 'footer-3' ],
-			'footer-copyright-text'			=> sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy;' ),
+			'footer-copyright-text'			=> sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy; ' . date( 'Y' ) ),
 			'page_for_404' 					=> '0'
 		);
 
 		/**
-		 * Since 3.6.0.3
 		 * Added post type defaults for Entry Meta and Container/Modules (singular/archive page types)
+		 * @since 3.6.0.3
 		 */
 		// Customizer defaults for Post Types
 		$get_post_types = get_post_types( [ 'public' => true, 'publicly_queryable' => true ] );

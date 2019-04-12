@@ -10,7 +10,7 @@ use WeCodeArt\Utilities\Markup\SVG;
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box HTML
  * @since 		v3.0.3
- * @version		v3.6
+ * @version		v3.7.0
  */
 	$author = array();
 	$author['intro'] 	= is_author() ? __( 'All articles by', 'wecodeart' ) : __( 'About', 'wecodeart' );
@@ -23,7 +23,7 @@ use WeCodeArt\Utilities\Markup\SVG;
 	// Retur early if no name or desc
 	if ( 0 === mb_strlen( $author['name'] ) || 0 === mb_strlen( $author['desc'] ) ) return;
 
-	$wrapper = is_single() ? [ 'container-full' ] : [ get_theme_mod( 'content-general-layout', 'container' ) ]; 
+	$wrapper = is_single() ? [ 'container-full' ] : [ get_theme_mod( 'content-layout-container' ) ]; 
 ?>
 <div id="author-box" class="author-box">
 	<div class="<?php echo esc_attr( trim( implode( ' ', $wrapper ) ) ); ?>">
@@ -42,7 +42,7 @@ use WeCodeArt\Utilities\Markup\SVG;
 				<a class="author-box__website btn btn-sm small btn-outline-primary float-right"
 					href="<?php echo esc_url( get_the_author_meta( 'url' ) ); ?>" target="_blank" rel="nofollow">
 					<?php SVG::render( 'icon--globe' ); ?>
-					<span><?php esc_html_e( 'Website', 'wecodeart' ); ?></span>
+					<span><?php _e( 'Website', 'wecodeart' ); ?></span>
 				</a>
 			</div>
 		</div>

@@ -353,9 +353,9 @@ class Meta {
 
 	/**
 	 * Return the Inner final HTML with modules selected by user for each entry type.
+	 * @uses	Markup::sortable()
 	 * @since 	3.6
 	 * @version	3.6
-	 * @uses	WeCodeArt\Utilities\Layout::sortable()
 	 * @return 	string HTML
 	 */
 	public static function sort_modules() {
@@ -364,9 +364,9 @@ class Meta {
 
 	/**
 	 * Return the Entry Meta HTML with modules selected by user
+	 * @uses	Markup::wrap()
 	 * @since	3.6
 	 * @version	3.6
- 	 * @uses	WeCodeArt\Utilities\Layout::wrap()
 	 * @return 	string HTML
 	 */
 	public static function render() {
@@ -375,6 +375,6 @@ class Meta {
 
 		$wrappers = array( [ 'tag' => 'div', 'attrs' => [ 'class' => 'entry-meta' ] ] );
 
-		Markup::wrap( 'entry-meta-wrappers', $wrappers, [ __CLASS__, 'sort_modules' ] ); 
+		Markup::wrap( 'entry-meta', $wrappers, [ __CLASS__, 'sort_modules' ] ); 
 	}
 }

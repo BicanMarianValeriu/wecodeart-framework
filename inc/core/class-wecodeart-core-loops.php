@@ -13,11 +13,14 @@ use WeCodeArt\Core\Entry;
  * @subpackage 	Loops
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6.2
+ * @version		v3.6.7
  */ 
 class Loops {
 	use \WeCodeArt\Singleton;
 
+	/**
+	 * 404 Page ID
+	 */
 	private static $page_for_404 = NULL; 
 	
 	/**
@@ -67,24 +70,39 @@ class Loops {
 	/**
 	 * Standard WP Loop, meant to be executed anywhere needed in templates.
 	 * @since	v1.0
-	 * @version v3.3
+	 * @version v3.6.7
 	 */
 	public static function default() {
+		global $wp_query;
+
 		do_action( 'wecodeart/hook/loop/before' );
+		
 		// The WordPress Loop
 		if( have_posts() ) :
+
 			do_action( 'wecodeart/hook/loop/while/before' );
+
 			while( have_posts() ) : the_post();
-				do_action( 'wecodeart_entry_open' );
-				do_action( 'wecodeart_entry_header' );
-				do_action( 'wecodeart_entry_content' );
-				do_action( 'wecodeart_entry_footer' );
-				do_action( 'wecodeart_entry_close' );
+
+				$type 	= get_post_type();
+				$index 	= $wp_query->current_post;
+
+				do_action( 'wecodeart_entry_open', 		$type, $index );
+				do_action( 'wecodeart_entry_header', 	$type, $index );
+				do_action( 'wecodeart_entry_content', 	$type, $index );
+				do_action( 'wecodeart_entry_footer', 	$type, $index );
+				do_action( 'wecodeart_entry_close', 	$type, $index );
+
 			endwhile; // end of one post
+
 			do_action( 'wecodeart/hook/loop/while/after' );
+
 		else : // if no posts exist
+
 			do_action( 'wecodeart/hook/loop/else' );
+
 		endif; // end loop
+
 		do_action( 'wecodeart/hook/loop/after' );
 	}
 

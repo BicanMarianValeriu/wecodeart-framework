@@ -8,8 +8,8 @@
      *
      * @package 	WeCodeArt Framework
      * @subpackage 	Header
-     * @since 		v1.0
-     * @version		v3.5
+     * @since       1.0
+     * @version     3.7.0
      */
 ?>	
 <!DOCTYPE html>

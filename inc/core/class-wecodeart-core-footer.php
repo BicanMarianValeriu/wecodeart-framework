@@ -1,9 +1,12 @@
 <?php namespace WeCodeArt\Core;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit();
+
 // Use
 use WeCodeArt\Utilities\Markup as Markup;
 use WeCodeArt\Customizer as Customizer;
+
 /**
  * WeCodeArt Framework.
  *
@@ -13,8 +16,8 @@ use WeCodeArt\Customizer as Customizer;
  * @package 	WeCodeArt Framework
  * @subpackage 	Footer Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.2
+ * @since 		3.5
+ * @version		3.7.0
  */
 
 class Footer {
@@ -32,57 +35,55 @@ class Footer {
 	
 	/**
 	 * Output FOOTER markup function
+	 * @uses	Markup::wrap()
 	 * @since 	1.0
-	 * @version	3.5
+	 * @version	3.7.0
 	 * @return 	HTML 
 	 */
 	public function footer_markup() {
-		$footer_attr = Markup::generate_attr( 'footer', [
-			'id' 		=> 'footer', 
-			'itemscope' => 'itemscope',
-			'itemtype' 	=> 'http://schema.org/WPFooter'
-		] ); // Attrs are escaped by the functiona above
-		?>
-		<footer <?php echo $footer_attr; ?>>
-			<?php 
-				do_action( 'wecodeart/hook/footer/top' );		// Hook Top
-		
-				Footer::render_widgets();	
-		
-				do_action( 'wecodeart/hook/footer/bottom' );	// Hook Bottom
-			?>
-		</footer>
-		<!-- /footer.footer -->
-		<?php
+		Markup::wrap( 'footer', [ [
+			'tag' 	=> 'footer',
+			'attrs' => [
+				'id' 		=> 'footer', 
+				'class'		=> 'footer', 
+				'itemscope' => 'itemscope',
+				'itemtype' 	=> 'http://schema.org/WPFooter'
+			]
+		] ], function() {   
+			do_action( 'wecodeart/hook/footer/top' ); 
+			Footer::render_widgets();	 
+			do_action( 'wecodeart/hook/footer/bottom' ); 
+		} ); 
 	}
 
 	/**
 	 * Footer Attribution
-	 * @version 3.6.0
+	 * @uses	Markup::wrap()
+	 * @since 	1.0
+	 * @version 3.7.0
 	 * @return 	HTML
 	 */
-	public function attribution_markup() {
-		$copyright = get_theme_mod( 'footer-copyright-text' );
-		?>
-		<div class="footer__attribution attribution">
-			<div class="container-fluid">
-				<div class="row py-3">
-					<div class="col text-center">
-						<span class="attribution__copyright"><?php echo esc_html( $copyright ); ?></span>
-						<span class="attribution__credits">
-							<?php
-								printf( 
-									esc_html__( 'Built on %1$s.', 'wecodeart' ), 
-									'<a href="https://www.wecodeart.com/" target="_blank">WeCodeArt Framework</a>' 
-								);
-							?>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /attribution -->
-		<?php
+	public function attribution_markup() { 
+
+		Markup::wrap( 'footer-attribution', [ 
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'footer__attribution attribution' ] ], 
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'container-fluid' ] ], 
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row py-3' ] ], 
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col text-center' ] ] 
+		], function() {   
+			?>
+			<span class="attribution__copyright"><?php esc_html_e( get_theme_mod( 'footer-copyright-text' ) ); ?></span>
+			<span class="attribution__credits">
+				<?php
+					printf( 
+						esc_html__( 'Built on %1$s.', 'wecodeart' ), 
+						'<a href="https://www.wecodeart.com/" target="_blank">WeCodeArt Framework</a>' 
+					);
+				?>
+			</span>
+			<?php
+		} );  
+		
 	}
 
 	/**
@@ -152,30 +153,15 @@ class Footer {
 	 * Return the Footer final widgets HTML with modules selected by user
 	 * @since	v3.5
 	 * @version v3.5
- 	 * @uses	WeCodeArt\Utilities\Layout::wrap()
+ 	 * @uses	Markup::wrap()
 	 * @return 	string HTML
 	 */
 	public static function render_widgets() {
-		$wrappers = array(
-			[
-				'tag' => 'div',
-				'attrs' => [
-					'class' => 'footer__widgets'
-				]
-			],
-			[
-				'tag' => 'div',
-				'attrs' => [
-					'class' => get_theme_mod( 'footer-layout-container' )
-				]
-			],
-			[
-				'tag' => 'div',
-				'attrs' => [
-					'class' => 'row pt-4'
-				]
-			]
-		);
+		$wrappers = [
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'footer__widgets' ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'footer-layout-container' ) ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row pt-4' ] ]
+		];
 
 		Markup::wrap( 'footer-widgets-wrappers', $wrappers, [ __CLASS__, 'sort_widgets' ] ); 
 	}
@@ -184,20 +170,17 @@ class Footer {
 	 * Return the Inner final HTML with modules selected by user for each page.
 	 * @since 	3.5
 	 * @version	3.5
-	 * @uses	WeCodeArt\Utilities\Layout::sortable()
+	 * @uses	Markup::sortable()
 	 * @return 	HTML
 	 */
 	public static function sort_widgets() {
-		Markup::sortable( 
-			self::footer_widgets(),
-			get_theme_mod( 'footer-layout-modules' )
-		);
+		Markup::sortable( self::footer_widgets(), get_theme_mod( 'footer-layout-modules' ) );
 	}
 
 	/**
 	 * Register Sidebars Based on Active Options
 	 * @since	unknown
-	 * @version	v3.6.0.4
+	 * @version	3.7.0
 	 * @return 	void
 	 */
 	public function register_sidebars() {

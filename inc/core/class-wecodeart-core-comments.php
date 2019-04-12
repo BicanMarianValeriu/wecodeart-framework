@@ -5,8 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) exit();
 
 // Use 
 use WeCodeArt\Utilities\Form\Input;
+use WeCodeArt\Utilities\Markup;
 use WeCodeArt\Utilities\Markup\SVG;
 use WeCodeArt\Walkers\Comment as CommentWalker;
+
 /**
  * WeCodeArt Framework.
  *
@@ -17,14 +19,14 @@ use WeCodeArt\Walkers\Comment as CommentWalker;
  * @subpackage 	Comments Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v3.5
- * @version		v3.6.3
+ * @version		v3.7.0
  */
 class Comments {
 	use \WeCodeArt\Singleton;
 
 	/**
 	 * Send to Constructor
-	 * @since 3.6.2
+	 * @since 3.7.0
 	 */
 	public function init() {
 		// WP Core
@@ -33,95 +35,178 @@ class Comments {
 		add_filter( 'comment_form_defaults',[ $this, 'comment_form_defaults' 	] );
 
 		// WeCodeArt Core
-		add_action( 'wecodeart_comments_list', 	[ $this, 'render_comments_list' ] );
-		add_action( 'wecodeart_pings_list', 	[ $this, 'render_pings_list' 	] );
-		add_action( 'wecodeart_comment_form', 	[ $this, 'render_comment_form' 	] );
-		add_action( 'wecodeart_entry_footer', 	[ $this, 'get_comments_template' ], 50 );
+		add_action( 'wecodeart_comments',		[ $this, 'render_meta'		], 10 );
+		add_action( 'wecodeart_comments', 		[ $this, 'render_nav' 		], 15 ); 
+		add_action( 'wecodeart_comments', 		[ $this, 'render_comments'	], 20 );
+		add_action( 'wecodeart_comments', 		[ $this, 'render_pings'		], 30 );
+		add_action( 'wecodeart_comments', 		[ $this, 'render_nav' 		], 35 ); 
+		add_action( 'wecodeart_comments', 		[ $this, 'render_respond'	], 40 );
+		
+		add_action( 'wecodeart/hook/entry/footer', [ $this, 'get_comments_template' ], 40 );
 	}
 	
 	/**
 	 * Get the comments template
+	 * 
 	 * @since 	unknown
-	 * @version	3.5
-	 * @return 	HTML 
+	 * @version	3.7.0
+	 * @return 	void 
 	 */
 	public function get_comments_template() {
-		// Bail if post does not support Comments
-		if ( ! post_type_supports( get_post_type(), 'comments' ) ) return;
-		// Run on singular pages
-		if ( is_singular() && ! in_array( get_post_type(), array( 'post', 'page' ) ) ) {
-			comments_template( '', true );
-		} elseif ( is_singular( 'post' ) ) {
-			comments_template( '', true );
-		} elseif ( is_singular( 'page' ) ) {
-			comments_template( '', true );
+		// Only if CPT supports and singular entry
+		if ( post_type_supports( get_post_type(), 'comments' ) && is_singular() ) comments_template( null, true ); 
+		return;
+	}
+
+	/**
+	 * Render Comments Info
+	 * 
+	 * @since	3.7.0
+	 * @return 	string 	html
+	 */
+	public function get_comments_info( $echo = true ) {
+
+		$comments_number = intval( get_comments_number() );
+
+		$defaults = [
+			'icon' 		=> SVG::compile( 'icon--comments' ) . ' ',
+			'empty' 	=> __( 'No comments, so go and ...', 'wecodeart' ),
+			'closed'	=> false, // __( 'Comments are closed.', 'wecodeart' )
+			'add_one'	=> __( 'add one', 'wecodeart' ) 
+		]; 
+
+		$args = apply_filters( 'wecodeart/filter/comments/get_comments_info/args', $defaults, get_post_type() );
+
+		$icon_html 	= '';
+		$header_tx 	= '';
+		if( comments_open() ) {
+			$icon_html = $args['icon'];
+			if ( 1 === $comments_number ) {
+				$header_tx = _x( 'One comment', 'comments title', 'wecodeart' );
+			} elseif ( 1 < $comments_number ) {
+				$header_tx = sprintf(
+					_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
+					number_format_i18n( $comments_number )
+				);
+			} else {
+				$header_tx = $args['empty']; 
+			} 
+		} else {
+			if( $args['closed'] !== false && is_string( $args['closed'] ) ) $header_tx = $args['closed']; 
+		} 
+
+		// Prepare HTML output
+		$output = ''; 
+		$output .= $icon_html;
+		$output .= $header_tx; 
+
+		// Append `add comment` link
+		if( comments_open() ) {
+			$output .= sprintf( '<a class="float-right" href="#respond" rel="nofollow">%s</a>', $args['add_one'] ); 
+		}
+
+		$output = apply_filters( 'wecodeart/filter/comments/get_comments_info/output', trim( $output ) );
+
+		if( $echo ) echo $output;
+		return $output; 
+	} 
+
+	/**
+	 * Render Comments List
+	 * 
+	 * @since	unknown
+	 * @version 3.7.0
+	 * @return 	void
+	 */
+	public function render_comments() {  
+		if ( have_comments() ) {  
+			Markup::wrap( 'comments-list', [ [ 
+				'tag' 	=> 'ol', 
+				'attrs' => [ 
+					'id' 	=> 'comments-list', 
+					'class' => 'comments__list unstyled pl-0' 
+				] 
+			] ], function() { // Required as this to be read by theme check
+				wp_list_comments( apply_filters( 'wecodeart/filter/comments/list/args', [
+					'type' 		 	=> 'comment',
+					'avatar_size' 	=> 60,
+					'walker'		=> new CommentWalker,
+				] ) ); 
+			} );  
+		} 
+		return;
+	}
+
+	/**
+	 * Render Pings List.
+	 * 
+	 * @since	unknown
+	 * @version 3.7.0
+	 * @return 	void
+	 */
+	public function render_pings() {
+		global $wp_query;
+		
+		// If have pings.
+		if ( ! empty( $wp_query->comments_by_type['pings'] ) ) {  
+			Markup::wrap( 'pings-list', [ [ 
+				'tag' => 'ol', 
+				'attrs' => [ 
+					'id' 	=> 'pings-list', 
+					'class' => 'pings-list no-bullet' 
+				] 
+			] ], 'wp_list_comments', [ apply_filters( 'wecodeart/filter/comments/pings/args', [
+				'type' 		 => 'pings',
+				'short_ping' => true,
+				'walker'	 => new CommentWalker,
+			] ) ] ); 
 		}
 	}
 
 	/**
-	 * Render Comments List
-	 * @since	unknows
-	 * @version v3.6
+	 * Render Comments Info
+	 * @since	3.7.0
+	 * @return	string	HTML
+	 */
+	public function render_meta() {  
+		Markup::wrap( 'comments-info', [ [ 
+			'tag' 	=> 'h3', 
+			'attrs' => [ 
+				'id' 	=> 'comments-title', 
+				'class' => 'comments__headline' 
+			] 
+		] ], [ $this, 'get_comments_info' ] );
+	}
+
+	/**
+	 * Render Coments Pagination
+	 * @since 	3.7.0
 	 * @return 	string HTML
 	 */
-	public function render_comments_list() {
-		$comments_number = get_comments_number();
-		if ( have_comments() ) {
-			$icon = SVG::compile( 'icon--comments' ); 
-			echo '<h3 id="comments-title" class="comments__headline">' . $icon . ' ';
-			if ( 1 === $comments_number ) {
-				printf( _x( 'One comment', 'comments title', 'wecodeart' ) );
-			} else {
-				printf(
-					_nx(
-						'%1$s comment',
-						'%1$s comments',
-						$comments_number,
-						'comments title',
-						'wecodeart'
-					),
-					number_format_i18n( $comments_number )
-				);
-			}
-			
-			if ( comments_open() ) echo '<a class="float-right" href="#respond" rel="nofollow">' . __( 'add one', 'wecodeart' ) . '</a>';
-			
-			echo '</h3>';
-			
-			$args = apply_filters( 'wecodeart/filter/comments/list/args', array(
-				'type' 			=> 'comment',
-				'avatar_size' 	=> 60,
-				'walker'		=> new CommentWalker,
-			) );
-			echo '<ol id="comments-list" class="comments-list unstyled pl-0">';
-			wp_list_comments( $args );
-			echo '</ol>';
-			// Comments Navigation
-			$prev_link = get_previous_comments_link();
-			$next_link = get_next_comments_link();
-			if ( $prev_link || $next_link ) {
-				echo '<nav class="comments-navigation"><div class="row">';
-				echo '<h3 class="show-for-sr">' . __( 'Comments Navigation', 'wecodeart' ) . '</h3>';
-				if ( $prev_link ) printf( '<div class="col col-sm-12 col-md">%s</div>', $prev_link );
-				if ( $next_link ) printf( '<div class="col col-sm-12 col-md text-right">%s</div>', $next_link );			
-				echo '</div></nav>';
-			}
-		// If Comments are open but there are no comments, print this message!
-		} elseif ( comments_open() && 
-			$comments_empty_text = sprintf( 
-				__( 'No comments, so go and ... %s', 'wecodeart' ), 
-				'<a class="float-right" href="#respond" rel="nofollow">add one</a>' 
-				) ) {
-			echo '<h3 id="comments-title" class="headline">' . SVG::compile( 'icon--comments' ) . ' ' . $comments_empty_text . '</h3>';
-		}
+	public function render_nav() {
+		// Comments Navigation  
+		Markup::wrap( 'comments-nav', [ 
+			[ 'tag' => 'nav', 'attrs' => [ 'class' => 'comments__nav' ] ],
+			[ 'tag' => 'span', 'attrs' => [ 'class' => 'row pb-3' ] ]
+		], function() {
+			Markup::wrap( 'comments-prev-link', [ [ 
+				'tag' 	=> 'div', 
+				'attrs' => [ 'class' => 'col-sm-12 col-md' ] 
+			] ], 'previous_comments_link' ); 
+	
+			Markup::wrap( 'comments-next-link', [ [ 
+				'tag' 	=> 'div', 
+				'attrs' => [ 'class' => 'col-sm-12 col-md text-md-right' ] 
+			] ], 'next_comments_link' );  
+		} );  
 	}
 
 	/**
 	 * Render Comment Form.
  	 * @since	unknown
-	 * @version v3.6
+	 * @version 3.6
 	 */
-	public function render_comment_form() {
+	public function render_respond() {
 		// Bail if comments are closed for this post type.
 		if ( ( is_singular() && ! comments_open() ) ) return;
 	
@@ -136,33 +221,13 @@ class Comments {
 		) );
 
 		comment_form( $args );
-	}
-
-	/**
-	 * Render Pings List.
-	 * @since	unknown
-	 * @version v3.5
-	 */
-	public function render_pings_list() {
-		global $wp_query;
-		
-		// If have pings.
-		if ( ! empty( $wp_query->comments_by_type['pings'] ) ) {
-			$args = apply_filters( 'wecodeart/filter/pings/args', array(
-				'type' 		 => 'pings',
-				'short_ping' => true,
-				'walker'	 => new CommentWalker,
-			) );
-			echo '<ol id="pings-list" class="pings-list no-bullet">';
-			wp_list_comments( $args );
-			echo '</ol>';
-		}
-	}
+	} 
 
 	/**
 	 * Move Comment Field Bellow Name/Email/Website.
+	 * 
 	 * @since	unknown
-	 * @version v3.5
+	 * @version 3.5
 	 * @param 	array $fields
 	 * @return 	array $fields
 	 */
@@ -178,10 +243,10 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	3.6.0
+	 * @version	3.7.0
 	 * @return 	array
 	 */
-	public function comment_form_defaults( array $defaults ) {
+	public function comment_form_defaults( $defaults ) {
 		// Fields escapes all the data for us. 	
 		$commenter = wp_get_current_commenter();
 		$req       = get_option( 'require_name_email' );
@@ -237,40 +302,41 @@ class Comments {
 			) 
 		. '</div>';
 		
-		$required_text = sprintf( ' ' . __( 'Required fiels are marked %s', 'wecodeart' ), '<span class="required">*</span>' );
+		$required_text 	= sprintf( ' ' . __( 'Required fiels are marked %s', 'wecodeart' ), '<span class="required">*</span>' );
 		$notes_before 	= '<div class="comment-notes col-12 mb-3">' . __( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
 		$notes_after 	= '<div class="form-allowed-tags col-12 mb-3">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'wecodeart' ), ' <code>' . allowed_tags() . '</code>' ) . '</div>';
 
 		$args = array(
-			'title_reply' 	=> __( 'Speak Your Mind', 'wecodeart' ),
-			'comment_field' => $author_comment,
+			'title_reply' 			=> __( 'Speak Your Mind', 'wecodeart' ),
+			'comment_field' 		=> $author_comment,
 			'comment_notes_before' 	=> $notes_before,
 			'comment_notes_after' 	=> $notes_after,
 			'submit_field'         	=> '<div class="form-submit col-12 mb-3">%1$s %2$s</div>',
 			'class_submit'         	=> 'btn btn-primary',
-			'fields' 		=> array(
+			'fields' => [
 				'author' => $author_name,
 				'email'  => $author_email,
-				'url'    => $author_url,
-			)
+				'url'    => $author_url
+			]
 		);
 
 		// Merge $args with $defaults
 		$args = wp_parse_args( $args, $defaults );
 
 		// Return filterable array of $args, along with other optional variables
-		return apply_filters( 'wecodeart/filter/comment_form_args', $args, $commenter, $req ); 
+		return apply_filters( 'wecodeart/filter/comments/respond/args', $args, $commenter, $req ); 
 	}
 
 	/**
 	 * Replace Comment Reply Button class.
+	 * 
 	 * @since	unknown
-	 * @version v3.6
+	 * @version 3.7.0
 	 * @param 	string $class
 	 * @return 	string $class
 	 */
 	public function replace_reply_link_class( $class ) {
-		$class = str_replace( "class='comment-reply-link", "class='comment-reply-link btn btn-primary btn-sm", $class );
+		$class = str_replace( "class='comment-reply-link", "class='comment-reply__link btn btn-primary btn-sm", $class );
 		return $class;
-	}
+	} 
 }

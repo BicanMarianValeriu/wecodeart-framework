@@ -1,9 +1,12 @@
 <?php namespace WeCodeArt\Core;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit();
+
 // Use
 use WeCodeArt\Core\Loops as Loops;
 use WeCodeArt\Utilities\Markup as Markup;
+
 /**
  * WeCodeArt Framework.
  *
@@ -13,8 +16,8 @@ use WeCodeArt\Utilities\Markup as Markup;
  * @package 	WeCodeArt Framework
  * @subpackage 	Main Content Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.4
+ * @since 		3.5
+ * @version		3.7.0
  */
 
 class Content {
@@ -76,7 +79,8 @@ class Content {
 	 * @version	3.5
 	 * @return 	string HTML
 	 */
-	public function content_markup_close() {	?>
+	public function content_markup_close() {	
+		?>
 			</main>
 			<?php 
 				
@@ -104,50 +108,34 @@ class Content {
 
 	/**
 	 * Get Primary Sidebar View
-	 * @since	v1.0
-	 * @version v3.6.4
+	 * @since	1.0
+	 * @version	3.7.0
 	 * @return	HTML
 	 */
 	public static function display_primary_sidebar() {
-		// Adds ability to filter the attributes of primary sidebar
-		$attributes = Markup::generate_attr(
-			'sidebar-primary',
-			[
-				'id' 	=> 'secondary',
-				'class' => 'content__sidebar col-12 col-lg-4'
+	 	Markup::wrap( 'sidebar-primary', [ [ 
+			'tag' 	=> 'div',
+			'attrs' => [
+				'id' 	=> 'secondary', 
+				'class' => 'content__sidebar col-12 col-lg-4' 
 			]
-		);
-		?>
-		<div <?php echo $attributes; ?>>
-			<?php
-				get_template_part( 'views/sidebars/sidebar', 'primary' );
-			?>
-		</div>
-		<?php
+		] ], 'get_template_part', [ 'views/sidebars/sidebar', 'primary' ] ); 
 	}
 
 	/**
 	 * Get Secondary Sidebar View
-	 * @since	v1.0
-	 * @version v3.5
+	 * @since	1.0
+	 * @version	3.7.0
 	 * @return	HTML
 	 */
 	public static function display_secondary_sidebar() {
-		// Adds ability to filter the attributes of secondary sidebar
-		$attributes = Markup::generate_attr(
-			'sidebar-secondary',
-			[
-				'id' 	=> 'secondary-2',
-				'class' => 'content__sidebar content__sidebar--secondary col-sm-12 col-lg-2'
+		Markup::wrap( 'sidebar-primary', [ [ 
+			'tag' 	=> 'div',
+			'attrs' => [
+				'id' 	=> 'secondary-2', 
+				'class' => 'content__sidebar content__sidebar--secondary col-sm-12 col-lg-2' 
 			]
-		);
-		?>
-		<div <?php echo $attributes; ?>>
-			<?php
-				get_template_part( 'views/sidebars/sidebar', 'secondary' );
-			?>
-		</div>
-		<?php
+		] ], 'get_template_part', [ 'views/sidebars/sidebar', 'secondary' ] );  
 	}
 
 	/**
@@ -182,7 +170,7 @@ class Content {
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 * @since 	unknown
-	 * @version v3.6.4
+	 * @version	3.6.4
 	 * @uses	WeCodeArt\Utilities\Markup::wrap();
 	 * @return 	HTML
 	 */

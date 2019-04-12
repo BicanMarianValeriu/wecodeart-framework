@@ -1,4 +1,8 @@
-<?php
+<?php 
+
+// Use 
+use WeCodeArt\Utilities\Markup;
+
 /**
  * WeCodeArt Framework.
  *
@@ -8,29 +12,37 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Comments Template
  * @since 		v1.0
- * @version		v3.5
+ * @version		v3.7
  */
+
 if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' === basename( $_SERVER['SCRIPT_FILENAME'] ) )
 	die ( 'Please do not load this page directly!' );
 
 if ( post_password_required() ) {
 	printf( '<p class="callout">%s</p>', __( 'This post is password protected. Enter the password to view comments.', 'wecodeart' ) );
 	return;
-}
+} 
 
-if ( ! comments_open( get_the_ID() ) && ! have_comments() ) return;
+do_action( 'wecodeart/hook/comments/before' );
 
-echo '<div id="comments" class="comments">';
-	// Comments List
-	do_action( 'wecodeart/hook/comments/before' ); // Hook
-	do_action( 'wecodeart_comments_list' 		); // Print comments list 
-	do_action( 'wecodeart/hook/comments/after'  ); // Hook
-	// Pings List
-	do_action( 'wecodeart/hook/pings/before' ); // Hook
-	do_action( 'wecodeart_pings_list' 		 ); // Print pings list 
-	do_action( 'wecodeart/hook/pings/after'  ); // Hook
-	// Comments Respond
-	do_action( 'wecodeart/hook/respond/form/before' ); // Hook
-	do_action( 'wecodeart_comment_form' 			); // Print respond form
-	do_action( 'wecodeart/hook/respond/form/after' 	); // Hook
-echo '</div>';		
+/**
+ * @uses 	WeCodeArt\Utilities\Markup::wrap() function ( context, wrappers array, function, function args, echo )
+ * @hook	'wecodeart_comments' 	
+ * @hooked 	{
+ * 	- WeCodeArt\Core\Comments->render_meta() 		- 10 	comments intro text
+ * 	- WeCodeArt\Core\Comments->render_nav() 		- 15 	comments navigation
+ * 	- WeCodeArt\Core\Comments->render_comments() 	- 20 	comments list
+ * 	- WeCodeArt\Core\Comments->render_pings() 		- 30 	comments pings list
+ * 	- WeCodeArt\Core\Comments->render_nav() 		- 35 	comments navigation
+ * 	- WeCodeArt\Core\Comments->render_respond() 	- 40 	comments reply form
+ * }
+ */
+Markup::wrap( 'comments', [ [ 
+	'tag' 	=> 'div', 
+	'attrs' => [ 
+		'id' 	=> 'comments', 
+		'class' => 'comments' 
+	] 
+] ], 'do_action', [ 'wecodeart_comments', get_post_type() ] ); 
+
+do_action( 'wecodeart/hook/comments/after' ); 

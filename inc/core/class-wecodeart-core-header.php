@@ -12,8 +12,8 @@ use WeCodeArt\Utilities\Markup as Markup;
  * @package 	WeCodeArt Framework
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.2
+ * @since		3.5
+ * @version		3.7.0
  */
 
 class Header {
@@ -32,33 +32,25 @@ class Header {
 	
 	/**
 	 * Output HEADER markup function
+	 * @uses	Markup::wrap()
 	 * @since 	unknown
-	 * @version	3.5
+	 * @version	3.7.0
 	 * @return 	HTML 
 	 */
 	public function header_markup() {
-		$header_attr = Markup::generate_attr( 'header', [
-			'id' 		=> 'header', 
-			'itemscope' => 'itemscope',
-			'itemtype' 	=> 'http://schema.org/WPHeader'
-		] ); // Attrs are escaped by the functiona above
-		?>
-		<header <?php echo $header_attr; ?>>
-			<?php 
-			
-				// Top Hook Inside #Header 	
-				do_action( 'wecodeart/hook/header/top' );
-			
-				// Header Bar
-				Header::render_header_bar();	
-			
-				// Bottom Hook Inside #Header 
-				do_action( 'wecodeart/hook/header/bottom' );
-			
-			?>
-		</header>
-		<!-- /header.header -->
-		<?php
+		Markup::wrap( 'header', [ [
+			'tag' 	=> 'header',
+			'attrs' => [
+				'id' 		=> 'header', 
+				'class'		=> 'header', 
+				'itemscope' => 'itemscope',
+				'itemtype' 	=> 'http://schema.org/WPHeader'
+			]
+		] ], function() {   
+			do_action( 'wecodeart/hook/header/top' ); 
+			Header::render_header_bar();	 
+			do_action( 'wecodeart/hook/header/bottom' ); 
+		} );  
 	}
 
 	/**
@@ -71,18 +63,43 @@ class Header {
 
 	/**
 	 * Header Menu View
+	 * @uses	Markup::wrap()
+	 * @since 	unknown
+	 * @version	3.7.0
 	 * @return 	HTML 
 	 */
-	public static function display_menu() {
-		get_template_part( 'views/header/bar', 'menu' );
+	public static function display_menu() { 
+		Markup::wrap( 'header-menu', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'id' 	=> 'bar-menu',
+				'class' => 'header-bar__menu col-12 col-lg'
+			]
+		] ], 'wp_nav_menu', [ apply_filters( 'wecodeart/filter/menu/main', [
+			'theme_location' => 'primary',
+			'container' 	 => 'nav', 
+			'menu_class' 	 => 'menu nav justify-content-end', 
+			'depth' 		 => 10,  
+			'walker' 		 => new \WeCodeArt\Walkers\Menu,
+			'fallback_cb'	 => 'WeCodeArt\Walkers\Menu::fallback' 
+		] ) ] ); 
 	}
 
 	/**
 	 * Header Search View
-	 * @return 	HTML 
+	 * @uses	Markup::wrap()
+	 * @since 	unknown
+	 * @version	3.7.0
+	 * @return 	string 	HTML 
 	 */
-	public static function display_search() {
-		get_template_part( 'views/header/bar', 'search' );
+	public static function display_search() { 
+		Markup::wrap( 'header-search', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'id' 	=> 'bar-search',
+				'class' => 'header-bar__search col-12 col-lg-4'
+			]
+		] ], 'get_search_form' ); 
 	}
 
 	/**
@@ -142,8 +159,8 @@ class Header {
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 * @since 	unknown
-	 * @version v3.6
-	 * @uses	wecodeart_sortable_html()
+	 * @version	3.6
+	 * @uses	Markup::wrap()
 	 * @return 	HTML
 	 */
 	public static function render_header_bar() {

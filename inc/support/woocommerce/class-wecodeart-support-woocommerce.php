@@ -16,7 +16,7 @@ use WeCodeArt\Customizer;
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		v1.9
- * @version		v3.6.2
+ * @version		v3.7.0
  */
 
 /**
@@ -69,7 +69,7 @@ class WooCommerce {
 	 * Before Content
 	 * Wraps all WooCommerce content in wrappers which match the theme markup
 	 * @since   3.5
-	 * @version 3.6.0
+	 * @version 3.7.0
 	 * @return  void
 	 */
 	public function before_content_wrapp() { 
@@ -79,8 +79,16 @@ class WooCommerce {
 			$wrapper = get_theme_mod( 'content-layout-container-product-singular' );
 		} else {
 			$wrapper = 'container';
-		} ?>
-		<div class="content-area content-area--woocommerce">
+		} 
+
+		/**
+		 * Added Attributes / can be filtered
+		 * @since 3.7.0
+		 */
+		$attributes = Markup::generate_attr( 'woocommerce-wrapper', [ 'class' => 'content-area content-area--woocommerce' ] );
+		
+		?>
+		<div <?php echo $attributes; // @wpcs ok - escaped with the function above ?>>
 			<div class="<?php echo sanitize_html_class( $wrapper ); ?>">
 				<div class="row">
 		<?php
@@ -150,30 +158,24 @@ class WooCommerce {
 
 	/**
 	 * Get Shop Sidebar HTML
-	 * @since	v3.6
-	 * @version	v3.6.3
+	 * @uses	Markup::wrap()
+	 * @since	3.6
+	 * @version 3.7.0
 	 */
 	public static function display_sidebar() {
 		// Adds ability to filter the attributes of secondary sidebar
-		$attributes = Markup::generate_attr(
-			'sidebar-shop',
-			[
-				'id' => 'secondary-shop',
+		$attributes = Markup::wrap( 'sidebar-shop', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'id' 	=> 'secondary-shop',
 				'class' => 'content__sidebar content__sidebar--shop col-12 col-lg-4'
 			]
-		);
-		?>
-		<div <?php echo $attributes; ?>>
-			<?php
-				get_template_part( 'views/sidebars/sidebar', 'shop' );
-			?>
-		</div>
-		<?php
+		] ], 'get_template_part', [ 'views/sidebars/sidebar', 'shop' ] ); 
 	}
 
 	/**
 	 * Filter - WooCommerce Header Bar Cart Module
-	 * @since	v3.5
+	 * @since	 3.5
 	 */
 	public function add_cart_to_header_modules( $modules ) {
 		$modules['cart'] = array(
@@ -233,8 +235,8 @@ class WooCommerce {
 
 	/**
 	 * Filter - Cart Fragments
-	 * @since 	v3.5
-	 * @version v3.6.3
+	 * @since 	3.5
+	 * @version	3.6.3
 	 */
 	public function cart_count_fragments( $fragments ) {
 

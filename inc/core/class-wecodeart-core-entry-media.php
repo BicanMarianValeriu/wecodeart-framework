@@ -101,7 +101,7 @@ class Media {
 	 */
 	public static function generate_dummy_placeholder( $args ) { 
 
-		$args = apply_filters( 'wecodeart/filter/media/dummy/defaults', wp_parse_args( $args, [
+		$args = apply_filters( 'wecodeart/filter/media/dummy/args', wp_parse_args( $args, [
 			'width'		=> 768,
 			'height'	=> 768, 
 			'padding' 	=> number_format( absint( $args['height'] ) / absint( $args['width'] ) * 100, 7 )
@@ -161,10 +161,10 @@ class Media {
 			'fallback' 	=> 'first' 
 		];  
 
-		$args = apply_filters( 'wecodeart/filter/media/get_image_args', wp_parse_args( $args, $defaults ), get_post_type() );
+		$args = apply_filters( 'wecodeart/filter/media/get_image/args', wp_parse_args( $args, $defaults ), get_post_type() );
 		
 		// Allow child theme to short-circuit this function.
-		$pre = apply_filters( 'wecodeart/filter/media/pre_get_image', false, $args, get_post() );
+		$pre = apply_filters( 'wecodeart/filter/media/get_image/pre', false, $args, get_post() );
 		if ( false !== $pre ) return $pre; 
 		
 		// If post thumbnail (native WP) exists, use its id.
@@ -227,23 +227,12 @@ class Media {
 		$disable = apply_filters( 'wecodeart/filter/media/render_image/disable', false );
 		if ( post_password_required() || is_attachment() || $disable === true ) return; 
 		
-		$args = wp_parse_args( $args, [ 
-			'attrs' => [
-				'class' => 'entry-media__src' 
-			]
-		] ); 
+		$args = wp_parse_args( $args, [ 'attrs' => [ 'class' => 'entry-media__src' ] ] ); 
 
-		$wrappers = [
-			[
-				'tag' => 'div',
-				'attrs' => [
-					'class' => 'entry-media'
-				]	
-			]
-		];
+		$wrappers = [ [ 'tag' => 'div', 'attrs' => [ 'class' => 'entry-media' ] ] ];
 
 		if ( ! is_singular() ) $wrappers[] = [
-			'tag' => 'a',
+			'tag' 	=> 'a',
 			'attrs' => [
 				'href'	=> esc_url( get_permalink() ),
 				'class' => 'entry-media__link'  
