@@ -1,3 +1,6 @@
+v3.7.1
+- Added - ...
+
 v3.7.0
 - Added - Improved comments template - breaking changes
 - Added - date( 'Y' ) - year in footer copyright message
