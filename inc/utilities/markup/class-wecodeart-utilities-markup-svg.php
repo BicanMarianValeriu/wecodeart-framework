@@ -1,8 +1,4 @@
-<?php namespace WeCodeArt\Utilities\Markup;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-// Use
-use WeCodeArt\Utilities\Markup;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -10,19 +6,31 @@ use WeCodeArt\Utilities\Markup;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage  SVG Markup Functions
+ * @subpackage  Utilities\Markup\SVG
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		v3.5
- * @version		v3.6.2
+ * @since		3.5
+ * @version		3.7.1
  */
 
+namespace WeCodeArt\Utilities\Markup;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Utilities\Markup;
+
+/**
+ * SVG Rendering
+ */
 class SVG {
+
 	use \WeCodeArt\Singleton;  
 
 	/**
-	 * Render an SVG Icon.
+	 * Render an SVG Icon
+	 *
 	 * @param	string	Icon Name
 	 * @param 	array 	Args
+	 *
 	 * @param 	string	Fallback 
 	 */
 	public static function render( string $icon, $args = [], $fallback = '', $sprite = '' ) {
@@ -31,19 +39,23 @@ class SVG {
 
 	/**
 	 * Compile an SVG Icon from sprite
-	 * @param	string	Icon Name
-	 * @param 	array 	Args
-	 * @param 	string	Fallback 
+	 *
+	 * @param	string	$icon - icon name
+	 * @param 	array 	$args - arguments
+	 * @param 	string	Fallback
+	 *
+	 * @return	string
 	 */
 	public static function compile( string $icon, $args = [], $fallback = '', $sprite = '' ) {
 		// Make sure $args are an array.
 		if ( empty( $icon ) ) return __( 'Please define an SVG icon filename!', 'wecodeart' );
 		if ( empty( $sprite ) ) $sprite = get_template_directory_uri() . '/assets/images/sprite.svg';
+
 		// Set defaults.
-		$defaults = array(
+		$defaults = [
 			'title'    => '',
 			'desc'     => '',
-		);
+		];
 	
 		// Parse args.
 		$args = wp_parse_args( $args, $defaults );
@@ -68,12 +80,14 @@ class SVG {
 
 		// Begin SVG markup.
 		$svg = '<svg ' . $attributes . '>';
+
 		// Display the title.
 		if ( $args['title'] ) {
 			$svg .= '<title id="title-' . $unique_id . '">' . esc_html( $args['title'] ) . '</title>';
 			// Display the desc only if the title is already set.
 			if ( $args['desc'] ) $svg .= '<desc id="desc-' . $unique_id . '">' . esc_html( $args['desc'] ) . '</desc>';
 		}
+
 		/**
 		 * Display the icon.
 		 * The whitespace around `<use>` is intentional - it is a work around to a keyboard navigation bug in Safari 10.
@@ -81,10 +95,11 @@ class SVG {
 		 */
 		$icon = $sprite . '#' . esc_html( $icon );
 		$svg .= ' <use href="' . $icon . '" xlink:href="' . $icon . '"></use> ';
+
 		// Add some markup to use as a fallback for browsers that do not support SVGs.
 		if( $fallback ) $svg .= '<span class="svg-fallback icon-' . esc_attr( $fallback ) . '"></span>';
 		$svg .= '</svg>';
-	
+
 		return $svg;
 	}
 }

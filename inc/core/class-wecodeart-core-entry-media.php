@@ -1,13 +1,4 @@
-<?php namespace WeCodeArt\Core\Entry;
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-
-// Use
-use WeCodeArt\Core\Callbacks;
-use WeCodeArt\Utilities\Markup as Markup;
-use WeCodeArt\Utilities\Markup\SVG;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -17,11 +8,23 @@ use WeCodeArt\Utilities\Markup\SVG;
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry Media Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.6
- * @version		v3.6.4
+ * @since		3.6
+ * @version		3.6.4
  */
 
+namespace WeCodeArt\Core\Entry;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Core\Callbacks;
+use WeCodeArt\Utilities\Markup as Markup;
+use WeCodeArt\Utilities\Markup\SVG;
+
+/**
+ * Handles Entry Media output
+ */
 class Media {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -29,7 +32,7 @@ class Media {
 	 * @since 3.6.4
 	 */
 	public function init() {
-		// Action
+		// Actions
 		add_action( 'wecodeart/hook/entry/header', [ $this, 'render_image' ], 15 );
 
 		// Filters
@@ -38,12 +41,13 @@ class Media {
 	
 	/**
 	 * Get information about available image sizes
+	 *
 	 * @since	3.6.4
 	 * @param 	string 	$size
+	 *
 	 * @return 	mixed
 	 */
 	public static function get_image_sizes( $size = '' ) {
-	
 		global $_wp_additional_image_sizes;
 	
 		$sizes = array();
@@ -78,10 +82,13 @@ class Media {
 	}
 
 	/**
-	 * Pull an attachment ID from a post, if one exists. 
-	 * @since 	3.6.4 
+	 * Pull an attachment ID from a post, if one exists.
+	 *
+	 * @since 	3.6.4
+	 *
 	 * @param 	int 		$index   	Optional. 	Index of which image to return from a post. Default is 0.
 	 * @param 	int 		$post_id 	Optional. 	Post ID. Default is `get_the_ID()`.
+	 *
 	 * @return 	int|bool 	Image ID, or `false` if image with given index does not exist.
 	 */
 	public static function get_media_id( $type = 'image', $index = 0, $post_id = null ) {
@@ -94,9 +101,12 @@ class Media {
 	}
 
 	/**
-	 * Generate a Dummy Placeholder 
+	 * Generate a Dummy Placeholder
+	 *
 	 * @since	3.6.4
+	 *
 	 * @param 	array 	$args 	- must have an width and height key
+	 *
 	 * @return 	string 	$html
 	 */
 	public static function generate_dummy_placeholder( $args ) { 
@@ -118,10 +128,14 @@ class Media {
 
 	/**
 	 * Get Image Ratio
+	 *
 	 * @since 	3.6.4
+	 *
 	 * @param  	int		$id
 	 * @param	string	$size
 	 * @param 	int 	$dummy ratio
+	 *
+	 * @return 	mixed
 	 */
 	public static function get_image_ratio( $id, $size, $dummy_ratio ) {
 		$real_sizes = wp_get_attachment_metadata( $id );
@@ -138,7 +152,7 @@ class Media {
 
 		if( $real_ratio > $dummy_ratio ) $ratio_class = 'wider';
 		if( $real_ratio < $dummy_ratio ) $ratio_class = 'taller';
-		if( $real_ratio === $dummy_ratio ) $ratio_class = 'square';
+		if( $real_ratio === $dummy_ratio ) $ratio_class = 'match';
 
 		if( isset( $ratio_class ) ) return $ratio_class;
 		return null;
@@ -146,8 +160,12 @@ class Media {
 
 	/**
 	 * Get Image - Return an image pulled from the media gallery. 
-	 * @since 	3.6.4 
-	 * @param 	array $args 
+	 *
+	 * @since 	3.6.4
+	 *
+	 * @param 	array	$args
+	 * @param	bool	$echo
+	 *
 	 * @return 	string|bool
 	 */
 	public static function get_image( $args = [], $echo = false ) {
@@ -220,8 +238,13 @@ class Media {
 
 	/**
 	 * Echo the Entry IMG Markup
+	 *
 	 * @since 	1.0
 	 * @version 3.6.4
+	 *
+	 * @param 	array	$args
+	 *
+	 * @return 	mixed
 	 */
 	public function render_image( $args = [] ) {  
 		$disable = apply_filters( 'wecodeart/filter/media/render_image/disable', false );
@@ -255,7 +278,12 @@ class Media {
 
 	/**
 	 * Filter to disable image on single posts by default
+	 *
 	 * @since	3.6.4
+	 *
+	 * @param 	boolean	$disable
+	 *
+	 * @return 	boolean
 	 */
 	public function filter_render_image( $disable ) {
 		if( is_singular() ) $disable = true;

@@ -26,15 +26,15 @@ if ( post_password_required() ) {
 do_action( 'wecodeart/hook/comments/before' );
 
 /**
- * @uses 	WeCodeArt\Utilities\Markup::wrap() function ( context, wrappers array, function, function args, echo )
+ * @see 	WeCodeArt\Utilities\Markup::wrap()
  * @hook	'wecodeart_comments' 	
  * @hooked 	{
- * 	- WeCodeArt\Core\Comments->render_meta() 		- 10 	comments intro text
- * 	- WeCodeArt\Core\Comments->render_nav() 		- 15 	comments navigation
- * 	- WeCodeArt\Core\Comments->render_comments() 	- 20 	comments list
- * 	- WeCodeArt\Core\Comments->render_pings() 		- 30 	comments pings list
- * 	- WeCodeArt\Core\Comments->render_nav() 		- 35 	comments navigation
- * 	- WeCodeArt\Core\Comments->render_respond() 	- 40 	comments reply form
+ * - WeCodeArt\Core\Comments->render_meta()		- 10 	comments intro text
+ * - WeCodeArt\Core\Comments->render_nav() 		- 15 	comments navigation
+ * - WeCodeArt\Core\Comments->render_comments()	- 20 	comments list
+ * - WeCodeArt\Core\Comments->render_pings()	- 30 	comments pings list
+ * - WeCodeArt\Core\Comments->render_nav() 		- 35 	comments navigation
+ * - WeCodeArt\Core\Comments->render_respond() 	- 40 	comments reply form
  * }
  */
 Markup::wrap( 'comments', [ [ 

@@ -1,8 +1,4 @@
-<?php namespace WeCodeArt\Core;
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -10,13 +6,29 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Pagination Class
+ * @subpackage 	Core\Pagination
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.7
+ * @since 		3.5
+ * @version		3.7.1
  */
 
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Utilities\Markup;
+
+/**
+ * Handles Paginations
+ * Method calls are not called here, but in their own Classes
+ * {
+ * - WeCodeArt\Core\Entry       @entry_content()/entry_prev_next()
+ * - WeCodeArt\Core\Content     @arhive()
+ * - WeCodeArt\Core\Comments    @comments()
+ * }
+ */
 class Pagination {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -24,69 +36,18 @@ class Pagination {
 	 * @since 3.6.7
 	 */
 	public function init() {
-        add_action( 'wecodeart/hook/main/after',    [ $this, 'numeric_posts_nav' ], 10 );
-        add_action( 'wecodeart/hook/entry/footer',  [ $this, 'post_content_nav' ],  30 );
-        add_action( 'wecodeart/hook/entry/footer',  [ $this, 'prev_next_post_nav' ], 50 );
         add_filter( 'wecodeart/filter/entry/prev_next_nav/enabled', [ $this, 'filter_prev_next_page' ], 10, 2 );
 	}
-	
-	/**
-	 * Display links to previous and next post, from a single post.
-	 * @since	v1.0
-	 * @version	v3.6.7
-     * @return  null        Return early if not a post.
-	 */
-	public function prev_next_post_nav() {
-        // Return only on Single Post
-        $single_post_navigation_enabled = apply_filters( 'wecodeart/filter/entry/prev_next_nav/enabled', true, get_post_type() );
-        
-        if ( ! is_singular() || $single_post_navigation_enabled === false ) return;	
-
-        $post_obj = get_post_type_object( get_post_type() );
-
-        // Set the defaults
-        $prev = '<span class="screen-reader-text">' . sprintf( 
-            __( 'Previous %s', 'wecodeart' ),
-            $post_obj->labels->singular_name
-        ) . '</span>';
-
-        $next = '<span class="screen-reader-text">' . sprintf( 
-            __( 'Next %s', 'wecodeart' ),
-            $post_obj->labels->singular_name
-        ) . '</span>';
-
-        $schema = '<span itemprop="name">%title</span>';
-        
-        // The HTML
-        ?>
-        <nav id="entry-prev-next" class="entry-prev-next"
-            itemscope="" itemtype="http://schema.org/SiteNavigationElement">
-            <h3 class="screen-reader-text"><?php 
-                printf( __( '%s Navigation', 'wecodeart' ), $post_obj->labels->singular_name ); 
-            ?></h3>
-            <div class="row">
-            <?php
-                previous_post_link(
-                    '<div class="col-sm-12 col-md">' . $prev . '%link</div>', 
-                    '<span aria-hidden="true">&#x000AB;</span> ' . $schema 
-                );
-                next_post_link(
-                    '<div class="col-sm-12 col-md text-md-right">' . $next . '%link</div>',  
-                    $schema . ' <span aria-hidden="true">&#x000BB;</span>'
-                );
-            ?>
-            </div>
-        </nav>
-    <?php
-    }
 
 	/**
      * Display links to previous and next post, from a single post.
-     * @since	v1.0
-     * @version v3.6
+     *
+     * @since	1.0.0
+     * @version 3.7.1
+     *
      * @return  string HTML
      */
-    public function numeric_posts_nav() {
+    public function archive() {
         $args = array( 
             'mixed' => 'array',
             'type' 	=> 'array',
@@ -96,48 +57,193 @@ class Pagination {
         
         if ( empty( $links ) || is_singular() ) return; 	
         
-        ?>	
-        <nav itemscope="" itemtype="http://schema.org/SiteNavigationElement">
-            <ul class="pagination" role="navigation" aria-label="<?php esc_attr_e( 'Pagination', 'wecodeart' ); ?>">
-                <?php foreach( $links as $key => $link ) { 
-                        $class = [ 'page-item', 'pagination__item' ];
-                        $class[] = ( strpos( $link, 'current' ) !== false ) ? 'pagination__item--current' : NULL;
-                        $class[] = ( strpos( $link, 'current' ) !== false ) ? 'active' : NULL;
-                        $class = array_map( 'sanitize_html_class', $class );
-                    ?>
-                    <li class="<?php echo esc_attr( trim( implode( ' ', $class ) ) ); ?>">
-                        <?php echo str_replace( 'page-numbers', 'page-link', $link ); ?>
-                    </li> 				
-                <?php } ?>
-            </ul>
-        </nav>
-        <?php
+        /**
+         * @since 3.7.1
+         */
+        Markup::wrap( 'pagination', [
+            [
+                'tag'   => 'nav',
+                'attrs' => [
+                    'class'     => false,
+                    'itemscope' => 'itemscope',
+                    'itemtype'  => 'http://schema.org/SiteNavigationElement'
+                ]
+            ],
+            [
+                'tag'   => 'ul',
+                'attrs' => [
+                    'class'         => 'pagination',
+                    'aria-label'    => esc_html__( 'Pagination', 'wecodeart' )
+                ]
+            ] 
+        ], function() use ( $links ) { 
+            foreach( $links as $key => $link ) :
+                $class = [ 'page-item', 'pagination__item' ];
+                if( strpos( $link, 'current' ) !== false ) $class[] = 'pagination__item--current';
+                if( strpos( $link, 'current' ) !== false ) $class[] = 'active';
+                $class = array_map( 'sanitize_html_class', $class );
+            ?>
+            <li class="<?php echo esc_attr( trim( implode( ' ', $class ) ) ); ?>">
+                <?php echo str_replace( 'page-numbers', 'page-link', $link ); ?>
+            </li> 				
+            <?php 
+            endforeach; 
+        } ); 
     }
 
     /**
      * WP-Link Pages for paginated posts
+     *
      * @since	unknown
-     * @version v3.6.0
+     * @version 3.7.1
+     *
      * @return 	null 	Return early if not a post.
      */
-    public function post_content_nav() {
-        // Return only on Single Post
+    public function entry_content() {
+        // Return only on Single Post.
         if ( ! is_singular( 'post' ) ) return;	
         
-        $label = '<span class="entry-pages__title label">' . __( 'Pages:', 'wecodeart' ) . '</span>';
-        wp_link_pages( array(
-            'before'      => '<nav class="entry-pages pagination" itemscope="" itemtype="http://schema.org/SiteNavigationElement">' . $label,
-            'after'       => '</nav>',
-            'link_before' => '<span class="page-link">',
-            'link_after'  => '</span>',
-        ) );
+        /**
+         * @since 3.7.1
+         */
+        Markup::wrap( 'entry-pagination', [
+           [
+            'tag'   => 'nav',
+            'attrs' => [
+                'class'     => 'pagination pagination--entry pb-3',
+                'aria-label'=> esc_html__( 'Pagination', 'wecodeart' ),
+                'itemscope' => 'itemscope',
+                'itemtype'  => 'http://schema.org/SiteNavigationElement'
+            ] 
+        ] ], function() {
+            wp_link_pages( apply_filters( 'wecodeart/filter/entry/content_nav/args', [
+                'before'        => '',
+                'after'         => '',
+                'link_before'   => '<span class="page-link">',
+                'link_after'    => '</span>',
+            ] ) );
+        } );
     }
 
     /**
+	 * Display links to previous and next post, from a single post.
+     *
+	 * @since	1.0.0
+	 * @version	3.7.1
+     *
+     * @return  null    Return early if not a post.
+	 */
+	public function entry_prev_next() {
+        // Return only on Single Post.
+        $navigation_enabled = apply_filters( 'wecodeart/filter/entry/prev_next_nav/enabled', true, get_post_type() );
+        
+        if ( ! is_singular() || $navigation_enabled === false ) return;
+        
+		Markup::wrap( 'entry-navigation', [ 
+			[ 
+                'tag'   => 'div', 
+                'attrs' => [ 
+                    'class'         => 'entry-navigation',
+                    'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
+                    'role'          => 'navigation',
+                    'itemscope'     => 'itemscope',
+                    'itemtype'      => 'http://schema.org/SiteNavigationElement',
+                ] 
+            ],
+			[ 
+                'tag'   => 'div', 
+                'attrs' => [ 
+                    'class' => 'row pt-4' 
+                ] 
+            ]
+		], function() { ?>
+            <h3 class="screen-reader-text"><?php 
+                printf( __( '%s Navigation', 'wecodeart' ), get_post_type_object( get_post_type() )->labels->singular_name ); 
+            ?></h3>
+            <?php 
+            
+            $args_prev = apply_filters( 'wecodeart/filter/comments/navigation/prev/args', [] );
+			$args_next = apply_filters( 'wecodeart/filter/comments/navigation/next/args', [] );
+
+			Markup::wrap( 'entry-navigation-prev', [ [ 
+				'tag' 	=> 'div', 
+				'attrs' => [
+                    'class' => 'col-sm-12 col-md' 
+                ]
+			] ], 'previous_post_link', $args_prev );
+	
+			Markup::wrap( 'entry-navigation-next', [ [ 
+				'tag' 	=> 'div', 
+				'attrs' => [
+                    'class' => 'col-sm-12 col-md text-md-right'
+                ] 
+			] ], 'next_post_link', $args_next );  
+        } );  
+    }
+
+    /**
+	 * Render Coments Pagination
+	 *
+	 * @since 	3.7.0
+	 * @version	3.7.1
+	 *
+	 * @return 	string|null
+	 */
+	public function comments() {
+		/**
+		 * Early Break
+		 */
+		if( empty( get_previous_comments_link() || get_next_comments_link() ) ) return;
+
+		Markup::wrap( 'comments-nav', [
+			[ 
+                'tag'   => 'div', 
+                'attrs' => [ 
+                    'class'         => 'comments__nav',
+					'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
+					'role'          => 'navigation',
+                    'itemscope'     => 'itemscope',
+                    'itemtype'      => 'http://schema.org/SiteNavigationElement',
+                ] 
+            ],
+			[ 
+                'tag'   => 'div', 
+                'attrs' => [ 
+                    'class' => 'row pb-3' 
+                ] 
+            ]
+		], function() {
+			?>
+            <h3 class="screen-reader-text"><?php esc_html_e( 'Comments Navigation', 'wecodeart' ); ?></h3>
+			<?php 
+			
+			$args_prev = apply_filters( 'wecodeart/filter/comments/navigation/prev/args', [] );
+			$args_next = apply_filters( 'wecodeart/filter/comments/navigation/next/args', [] );
+
+			Markup::wrap( 'comments-prev-link', [ [ 
+				'tag' 	=> 'div', 
+				'attrs' => [ 
+					'class' => 'col-sm-12 col-md'
+				] 
+			] ], 'previous_comments_link', $args_prev ); 
+	
+			Markup::wrap( 'comments-next-link', [ [ 
+				'tag' 	=> 'div', 
+				'attrs' => [
+					'class' => 'col-sm-12 col-md text-md-right'
+				] 
+			] ], 'next_comments_link', $args_next );  
+		} );  
+    }
+    
+    /**
      * Filter to disable prev/next nav on pages
+     *
      * @since   3.6.0.6
+     *
      * @param   boolean     $enabled
      * @param   string      $post_type
+     *
      * @return  boolean
      */
     public function filter_prev_next_page( $enabled, $post_type ) {

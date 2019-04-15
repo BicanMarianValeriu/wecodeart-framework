@@ -1,11 +1,4 @@
-<?php namespace WeCodeArt\Core\Entry;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-// Use
-use WeCodeArt\Core\Callbacks;
-use WeCodeArt\Utilities\Markup as Markup;
-use WeCodeArt\Utilities\Markup\SVG;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -13,13 +6,25 @@ use WeCodeArt\Utilities\Markup\SVG;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Entry Meta Class
+ * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.6
- * @version		v3.6.4
+ * @since 		3.6
+ * @version		3.7.1
  */
 
+namespace WeCodeArt\Core\Entry;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Core\Callbacks;
+use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Utilities\Markup\SVG;
+
+/**
+ * Handles Entry Meta output
+ */
 class Meta {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -32,18 +37,24 @@ class Meta {
 	
 	/**
 	 * Entry Meta Author Template
-	 * @since	v1.0
-	 * @version v3.6.0.4
+	 *
+	 * @since	1.0
+	 * @version	3.6.0
+	 *
+	 * @param 	array	$args
+	 * @param 	bool	$echo
+	 *
+	 * @return 	string
 	 */
 	public static function author( $args = array(), $echo = true ) {
-		// Get what we need 
-		$author_id = get_the_author_meta( 'ID' );
-		$author	= get_the_author_meta( 'display_name', $author_id );
-		// In order to render something when ajax refreshed in customizer
-		$author = $author ? $author : __( 'Author Name', 'wecodeart' );
-		$url    = get_author_posts_url( $author_id );
+		
+		$author_id 	= get_the_author_meta( 'ID' );
+		$author		= get_the_author_meta( 'display_name', $author_id );
+		$url    	= get_author_posts_url( $author_id );
 
-		// Set the defaults
+		// In order to render something when ajax refreshed in customizer.
+		$author = $author ? $author : __( 'Author Name', 'wecodeart' );
+		
 		$defaults = array(
 			'before'	=> SVG::compile( 'icon--user' ),
 			'after'  	=> '&nbsp;',
@@ -69,8 +80,14 @@ class Meta {
 
 	/**
 	 * Entry Meta Date Template
-	 * @since	v1.0
-	 * @version v3.6
+	 *
+	 * @since	1.0
+	 * @version	3.6
+	 *
+	 * @param 	array	$args
+	 * @param 	bool	$echo
+	 *
+	 * @return 	string
 	 */
 	public static function date( $args = array(), $echo = true ) {
 		// Set the Defaults
@@ -110,8 +127,14 @@ class Meta {
 
 	/**
 	 * Entry Meta Categories Template
-	 * @since	v1.0
-	 * @version v3.6
+	 *
+	 * @since	1.0
+	 * @version	3.6
+	 * 
+	 * @param 	array	$args
+	 * @param 	bool	$echo
+	 *
+	 * @return 	string
 	 */
 	public static function categories( $args = [], $echo = true ) {
 		// Set the defaults
@@ -146,8 +169,14 @@ class Meta {
 
 	/**
 	 * Entry Meta Tags Template
-	 * @since	v1.0
-	 * @version v3.6
+	 *
+	 * @since	1.0
+	 * @version	3.6
+	 *
+	 * @param 	array	$args
+	 * @param 	bool	$echo
+	 *
+	 * @return 	string
 	 */
 	public static function tags( $args = array(), $echo = true ) {
 		// Set the Defaults
@@ -155,13 +184,13 @@ class Meta {
 			'before'  	=> SVG::compile( 'icon--tag' ),
 			'after'  	=> '&nbsp;',
 			'sr_text'	=> __( 'Tagged with ', 'wecodeart' ),
-			'sep'  		=> ',',
+			'sep'  		=> ', ',
 		);
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/tags/defaults', $defaults ) );
 
 		// Get what we need
-		$tags = get_the_tag_list( '', trim( $args['sep'] ) . ' ', '' );
+		$tags = get_the_tag_list( '', trim( $args['sep'] ), '' );
 
 		// Do nothing if no tags
 		if ( ! $tags ) return;
@@ -183,8 +212,14 @@ class Meta {
 
 	/**
 	 * Entry Meta Comments Template
-	 * @since	v1.0
-	 * @version v3.6
+	 *
+	 * @since	1.0
+	 * @version	3.6
+	 * 
+	 * @param 	array	$args
+	 * @param 	bool	$echo
+	 *
+	 * @return 	string
 	 */
 	public static function comments( $args = array(), $echo = true ) {
 		// Only if post type supports
@@ -229,9 +264,14 @@ class Meta {
 
 	/**
 	 * Entry Meta Edit Template
-	 * @since	v1.0
-	 * @version	v3.6 
-	 * @return 	HTML
+	 *
+	 * @since	1.0
+	 * @version	3.6
+	 *
+	 * @param 	array	$args
+	 * @param 	bool	$echo
+	 *
+	 * @return 	string
 	 */
 	public static function edit_link( $args = array(), $echo = true ) {
 		if( ! is_user_logged_in() ) return;
@@ -261,9 +301,14 @@ class Meta {
 
 	/**
 	 * Entry Meta Read More Template
+	 *
 	 * @since	1.0
 	 * @version	3.6.0.7
-	 * @return 	HTML
+	 *
+	 * @param 	array	$args
+	 * @param 	bool	$echo
+	 *
+	 * @return 	string
 	 */
 	public static function read_more( $args = array(), $echo = true ) {
 		// Set the Defaults
@@ -292,9 +337,11 @@ class Meta {
 
 	/**
 	 * Get Contextual options
+	 *
 	 * @since 	3.6
 	 * @version 3.6.1.2
-	 * @return 	array 	$options
+	 *
+	 * @return 	array
 	 */
 	public static function get_options() {
 		$get_post_types = get_post_types( array( 'public' => true, 'publicly_queryable' => true ) );
@@ -316,8 +363,10 @@ class Meta {
 
 	/**
 	 * This function holds our Meta Modules
+	 *
 	 * @since	3.6
 	 * @version	3.6
+	 *
 	 * @return 	array
 	 */
 	public static function modules() {
@@ -353,10 +402,12 @@ class Meta {
 
 	/**
 	 * Return the Inner final HTML with modules selected by user for each entry type.
+	 *
 	 * @uses	Markup::sortable()
 	 * @since 	3.6
 	 * @version	3.6
-	 * @return 	string HTML
+	 *
+	 * @return 	void
 	 */
 	public static function sort_modules() {
 		Markup::sortable( self::modules(), self::get_options() );
@@ -364,10 +415,13 @@ class Meta {
 
 	/**
 	 * Return the Entry Meta HTML with modules selected by user
+	 * 
 	 * @uses	Markup::wrap()
+	 *
 	 * @since	3.6
 	 * @version	3.6
-	 * @return 	string HTML
+	 *
+	 * @return 	void
 	 */
 	public static function render() {
 		// Do dont return on CPT Without Support

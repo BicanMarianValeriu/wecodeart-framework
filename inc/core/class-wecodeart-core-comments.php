@@ -1,14 +1,4 @@
-<?php namespace WeCodeArt\Core;
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-
-// Use 
-use WeCodeArt\Utilities\Form\Input;
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\SVG;
-use WeCodeArt\Walkers\Comment as CommentWalker;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -16,12 +6,27 @@ use WeCodeArt\Walkers\Comment as CommentWalker;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Comments Class
+ * @subpackage 	Core\Comments
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.7.0
+ * @since		3.5
+ * @version		3.7.1
+ */
+
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Core\Pagination;
+use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Utilities\Markup\Input;
+use WeCodeArt\Walkers\Comment as CommentWalker;
+
+/**
+ * Handles Comments Functionality
  */
 class Comments {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -35,21 +40,22 @@ class Comments {
 		add_filter( 'comment_form_defaults',[ $this, 'comment_form_defaults' 	] );
 
 		// WeCodeArt Core
-		add_action( 'wecodeart_comments',		[ $this, 'render_meta'		], 10 );
-		add_action( 'wecodeart_comments', 		[ $this, 'render_nav' 		], 15 ); 
-		add_action( 'wecodeart_comments', 		[ $this, 'render_comments'	], 20 );
-		add_action( 'wecodeart_comments', 		[ $this, 'render_pings'		], 30 );
-		add_action( 'wecodeart_comments', 		[ $this, 'render_nav' 		], 35 ); 
-		add_action( 'wecodeart_comments', 		[ $this, 'render_respond'	], 40 );
+		add_action( 'wecodeart_comments', [ $this, 'render_meta'		], 10 );
+		add_action( 'wecodeart_comments', [ Pagination::get_instance(), 'comments' ], 15 ); 
+		add_action( 'wecodeart_comments', [ $this, 'render_comments'	], 20 );
+		add_action( 'wecodeart_comments', [ $this, 'render_pings'		], 30 );
+		add_action( 'wecodeart_comments', [ Pagination::get_instance(), 'comments' ], 35 ); 
+		add_action( 'wecodeart_comments', [ $this, 'render_respond'		], 40 );
 		
-		add_action( 'wecodeart/hook/entry/footer', [ $this, 'get_comments_template' ], 40 );
+		add_action( 'wecodeart/hook/entry/footer', [ $this, 'get_comments_template' ], 30 );
 	}
 	
 	/**
 	 * Get the comments template
-	 * 
+	 *
 	 * @since 	unknown
 	 * @version	3.7.0
+	 *
 	 * @return 	void 
 	 */
 	public function get_comments_template() {
@@ -60,9 +66,10 @@ class Comments {
 
 	/**
 	 * Render Comments Info
-	 * 
+	 *
 	 * @since	3.7.0
-	 * @return 	string 	html
+	 *
+	 * @return 	string
 	 */
 	public function get_comments_info( $echo = true ) {
 
@@ -113,9 +120,10 @@ class Comments {
 
 	/**
 	 * Render Comments List
-	 * 
+	 *
 	 * @since	unknown
 	 * @version 3.7.0
+	 *
 	 * @return 	void
 	 */
 	public function render_comments() {  
@@ -139,9 +147,10 @@ class Comments {
 
 	/**
 	 * Render Pings List.
-	 * 
+	 *
 	 * @since	unknown
 	 * @version 3.7.0
+	 *
 	 * @return 	void
 	 */
 	public function render_pings() {
@@ -165,7 +174,9 @@ class Comments {
 
 	/**
 	 * Render Comments Info
+	 *
 	 * @since	3.7.0
+	 *
 	 * @return	string	HTML
 	 */
 	public function render_meta() {  
@@ -179,31 +190,10 @@ class Comments {
 	}
 
 	/**
-	 * Render Coments Pagination
-	 * @since 	3.7.0
-	 * @return 	string HTML
-	 */
-	public function render_nav() {
-		// Comments Navigation  
-		Markup::wrap( 'comments-nav', [ 
-			[ 'tag' => 'nav', 'attrs' => [ 'class' => 'comments__nav' ] ],
-			[ 'tag' => 'span', 'attrs' => [ 'class' => 'row pb-3' ] ]
-		], function() {
-			Markup::wrap( 'comments-prev-link', [ [ 
-				'tag' 	=> 'div', 
-				'attrs' => [ 'class' => 'col-sm-12 col-md' ] 
-			] ], 'previous_comments_link' ); 
-	
-			Markup::wrap( 'comments-next-link', [ [ 
-				'tag' 	=> 'div', 
-				'attrs' => [ 'class' => 'col-sm-12 col-md text-md-right' ] 
-			] ], 'next_comments_link' );  
-		} );  
-	}
-
-	/**
 	 * Render Comment Form.
- 	 * @since	unknown
+	 *
+	 * @since	unknown
+	 *
 	 * @version 3.6
 	 */
 	public function render_respond() {
@@ -225,11 +215,13 @@ class Comments {
 
 	/**
 	 * Move Comment Field Bellow Name/Email/Website.
-	 * 
+	 *
 	 * @since	unknown
 	 * @version 3.5
+	 *
 	 * @param 	array $fields
-	 * @return 	array $fields
+	 *
+	 * @return 	array
 	 */
 	public function comment_form_fields( $fields ) {
 		$comment_field = $fields['comment'];
@@ -243,7 +235,8 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	3.7.0
+	 * @version	3.7.1
+	 *
 	 * @return 	array
 	 */
 	public function comment_form_defaults( $defaults ) {
@@ -295,8 +288,7 @@ class Comments {
 				'class'	=> 'form-control',
 				'name' 	=> 'comment',
 				'rows'	=> absint( 8 ), 
-				'cols'  => absint( 45 ),
-				'required' 		 => 'true', 
+				'cols'  => absint( 45 ), 
 				'aria-required'  => 'true' 
 				)
 			) 
@@ -329,11 +321,13 @@ class Comments {
 
 	/**
 	 * Replace Comment Reply Button class.
-	 * 
+	 *
 	 * @since	unknown
 	 * @version 3.7.0
+	 *
 	 * @param 	string $class
-	 * @return 	string $class
+	 *
+	 * @return 	string
 	 */
 	public function replace_reply_link_class( $class ) {
 		$class = str_replace( "class='comment-reply-link", "class='comment-reply__link btn btn-primary btn-sm", $class );

@@ -1,12 +1,4 @@
-<?php namespace WeCodeArt\Core;
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-
-// Use
-use WeCodeArt\Core\Loops as Loops;
-use WeCodeArt\Utilities\Markup as Markup;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -14,13 +6,25 @@ use WeCodeArt\Utilities\Markup as Markup;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Main Content Class
+ * @subpackage 	Core\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.0
+ * @version		3.7.1
  */
 
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Core\Loops;
+use WeCodeArt\Core\Pagination;
+use WeCodeArt\Utilities\Markup;
+
+/**
+ * Handles Content Containers
+ */
 class Content {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -30,10 +34,12 @@ class Content {
 	public function init() {
 		Loops::get_instance();
 
+		add_action( 'widgets_init', 				[ $this, 'register_sidebars' 	] );
+
+		add_action( 'wecodeart_inner_markup', 		[ $this, 'render_modules' 		] );
 		add_action( 'wecodeart/hook/loop/before',	[ $this, 'content_markup_open' 	] );
 		add_action( 'wecodeart/hook/loop/after',	[ $this, 'content_markup_close' ] );
-		add_action( 'wecodeart_inner_markup', 		[ $this, 'render_modules' 		] );
-		add_action( 'widgets_init', 				[ $this, 'register_sidebars' 	] );
+		add_action( 'wecodeart/hook/main/after',    [ Pagination::get_instance(), 'archive' ], 10 );
 	}
 	
 	/**
@@ -47,7 +53,7 @@ class Content {
 		$attributes = Markup::generate_attr(
 			'content',
 			[
-				'id' => 'primary',
+				'id' 	=> 'primary',
 				'class' => 'content__main col-12 col-lg'
 			]
 		);
@@ -85,8 +91,7 @@ class Content {
 			<?php 
 				
 				/**
-				 * @hooked wecodeart_numeric_posts_nav - 10
-				 * ---
+				 * @hooked WeCodeArt\Core\Pagination\numeric_posts_nav() - 10 
 				 */
 				do_action( 'wecodeart/hook/main/after' ); 
 				
@@ -169,21 +174,22 @@ class Content {
 
 	/**
 	 * Returns the inner markp with wrapper based on user options
+	 *
 	 * @since 	unknown
-	 * @version	3.6.4
+	 * @version	3.7.1
 	 * @uses	WeCodeArt\Utilities\Markup::wrap();
+	 *
 	 * @return 	HTML
 	 */
 	public static function render_modules() {
 		$options = self::get_contextual_options();
 
 		$class= [ 'content-area' ];
-		$class[] = in_array( 'primary', 	$options['modules'] ) ? 'content-area--has-primary-sidebar' : NULL;
-		$class[] = in_array( 'secondary',	$options['modules'] ) ? 'content-area--has-secondary-sidebar' : NULL;
-		$class = trim( implode( ' ', $class ) );
+		if( in_array( 'primary', $options['modules'], true ) ) $class[] = 'content-area--has-primary-sidebar';
+		if( in_array( 'secondary', $options['modules'], true ) ) $class[] = 'content-area--has-secondary-sidebar';
 
 		$wrappers = [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => $class ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => implode( ' ', $class ) ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ]
 		];
@@ -273,8 +279,8 @@ class Content {
 
 	/**
 	 * Return the Inner final HTML with modules selected by user for each page.
-	 * @since 	v1.0
-	 * @version	v3.6.0.4
+	 * @since	1.0
+	 * @version	3.6.0.4
 	 * @return 	void
 	 */
 	public function register_sidebars() {

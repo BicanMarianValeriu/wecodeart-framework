@@ -1,11 +1,4 @@
-<?php namespace WeCodeArt\Core;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-// Use
-use WeCodeArt\Core\Loops as Loops;
-use WeCodeArt\Utilities\Markup as Markup;
-use WeCodeArt\Utilities\Markup\SVG;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -13,13 +6,26 @@ use WeCodeArt\Utilities\Markup\SVG;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Entry Class
+ * @subpackage 	Core\Entry
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.0
+ * @version		3.7.1
  */
 
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Core\Loops;
+use WeCodeArt\Core\Pagination;
+use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Utilities\Markup\SVG;
+
+/**
+ * Handles WP CPT outputs
+ */
 class Entry {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -36,21 +42,29 @@ class Entry {
 		add_action( 'wecodeart/hook/entry/header',	[ $this, 'render_title' 		], 10 );
 		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_read_more' 	], 10 );
 		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_author_box' 	], 20 );
+        add_action( 'wecodeart/hook/entry/footer',  [ Pagination::get_instance(), 'entry_content' 	], 10 );
+        add_action( 'wecodeart/hook/entry/footer',  [ Pagination::get_instance(), 'entry_prev_next' ], 40 );
 
 		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_noposts' ], 10 );
 
+		add_filter( 'wecodeart/filter/entry/title/disabled', [ $this, 'filter_home_title' ], 10, 2 );
+
 		add_action( 'the_password_form', [ $this, 'render_paswordprotected' ] );
 
-		// Init Classes
+		/**
+		 * Child classes
+		 */
 		Entry\Meta::get_instance();
 		Entry\Media::get_instance(); 
 	}
 	
 	/**
 	 * Entry Markup Open
-	 * @since 	v1
-	 * @version v3.6.3
-	 * @return 	string HTML
+	 *
+	 * @since	1.0
+	 * @version	3.6.3
+	 *
+	 * @return 	string
 	 */
 	public function markup_open() { 
 		$attributes = Markup::generate_attr( 'entry', [ 
@@ -64,9 +78,11 @@ class Entry {
 
 	/**
 	 * Entry Markup Close
-	 * @since 	v1
-	 * @version v3.5
-	 * @return 	string HTML
+	 *
+	 * @since	1.0
+	 * @version 3.5
+	 *
+	 * @return 	string
 	 */
 	public function markup_close() {
 		?></article><?php
@@ -74,46 +90,65 @@ class Entry {
 
 	/**
 	 * Render Header
-	 * @since 	v3.6.4
+	 *
+	 * @since	3.6.4
 	 * @uses	Markup::wrap()
-	 * @return 	string HTML
+	 *
+	 * @return 	string
 	 */
 	public function render_header() { 
-
 		Markup::wrap( 'entry-header', [ [
 			'tag' 	=> 'header',
 			'attrs' => [ 
-				'class' => 'entry-header' 
+				'class' => 'entry-header'
 			]
 		] ], 'do_action', [ 'wecodeart/hook/entry/header' ] );  
 	} 
 
 	/**
 	 * Render Footer
-	 * @since 	v3.6.4
-	 * @uses	Markup::wrap()
-	 * @return 	string HTML
+	 *
+	 * @since	3.6.4
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 *
+	 * @return 	void
 	 */
-	public function render_footer() { 
-
+	public function render_footer() {
+		/**
+		 * @see 	WeCodeArt\Utilities\Markup::wrap()
+		 * @hook	'wecodeart/hook/entry/footer' 	
+		 * @hooked 	{
+		 * - WeCodeArt\Core\Entry->render_read_more()			- 10 Entry Read More ( Archive only )
+		 * - WeCodeArt\Core\Entry->render_author_box()			- 20 Author Info
+		 * - WeCodeArt\Core\Comments->get_comments_template()	- 30 Entry Comments
+		 * - WeCodeArt\Core\Pagination->post_content_nav()		- 10 Entry Nav ( Single only ) 
+		 * - WeCodeArt\Core\Pagination->prev_next_post_nav()	- 40 Entry Prev/Next Nav
+		 * }
+		 */
 		Markup::wrap( 'entry-footer', [ [
 			'tag' 	=> 'footer',
 			'attrs' => [ 
 				'class' => 'entry-footer' 
 			]
-		] ], 'do_action', [ 'wecodeart/hook/entry/footer' ] );  
+		] ], 'do_action', [ 'wecodeart/hook/entry/footer' ] );
 	} 
 
 	/**
 	 * Retrieve entry title with link
+	 *
 	 * @since 	3.6.4
+	 * @version	3.7.1
+	 *
 	 * @param	bool	$link
 	 * @param 	bool 	$echo 
+	 *
+	 * @return 	string
 	 */
 	public function the_title( $link = true, $echo = true ) {
+		$disabled = apply_filters( 'wecodeart/filter/entry/title/disabled', false, get_the_ID() );
 		$title = get_the_title();
 
-		if ( 0 === mb_strlen( $title ) ) return;
+		if ( 0 === mb_strlen( $title ) || $disabled === true ) return;
 		
 		if ( $link && ! is_singular() ) {
 			$title = sprintf( '<a href="%s" rel="bookmark">%s</a>', esc_url( get_permalink() ), esc_html( $title ) );
@@ -125,16 +160,16 @@ class Entry {
 
 	/**
 	 * Echo the Entry Title Markup
+	 *
 	 * @since 	1.0
 	 * @uses	Markup::wrap()
 	 * @version 3.6.4
+	 *
+	 * @return 	void
 	 */
-	public function render_title() {  
-		// Wrap in H1 on singular pages, else H2
-		$wrap = is_singular() ? 'h1' : 'h2';
-
+	public function render_title() {
 		Markup::wrap( 'entry-title', [ [
-			'tag' 	=> $wrap,
+			'tag' 	=> is_singular() ? 'h1' : 'h2',
 			'attrs' => [ 
 				'class' => 'entry-title' 
 			]
@@ -143,9 +178,12 @@ class Entry {
 
 	/**
 	 * Echo the Entry Content/Excerpt Markup
+	 *
 	 * @since	1.0
 	 * @uses	Markup::wrap()
 	 * @version	3.6.4
+	 *
+	 * @return	void
 	 */
 	public function render_content() {  
 		Markup::wrap( 'entry-content', [ [
@@ -157,9 +195,12 @@ class Entry {
 	} 
 
 	/**
-	 * Echo the post read more button. 
+	 * Echo the post read more button.
+	 *
 	 * @since 	unknown
 	 * @version 3.6.4
+	 *
+	 * @return 	void
 	 */
 	public function render_read_more() {
 		// Do dont return on Singular
@@ -168,25 +209,30 @@ class Entry {
 
 	/**
 	 * Return the content for No Posts
+	 *
 	 * @since	2.2
-	 * @version	3.7.0
+	 * @version	3.7.1
+	 *
 	 * @return	string
 	 */
 	public function render_noposts() { 
 		?>
 		<p><?php 
-			esc_html_e( apply_filters( 
+			echo esc_html( apply_filters( 
 				'wecodeart/filter/entry/noposts_message', 
 				__( 'There are no posts matching your criteria.', 'wecodeart' ) 
-			), 'wecodeart' );
+			) );
 		 ?></p>
 		<?php
 	}
 
 	/**
 	 * Return the content for No Posts
+	 *
 	 * @since	3.5
 	 * @version	3.5
+	 *
+	 * @return 	void
 	 */
 	public function render_paswordprotected() {
 		get_template_part( 'views/entry/content', 'protected' );
@@ -194,13 +240,34 @@ class Entry {
 
 	/**
 	 * Add Author Box on single Post
+	 *
 	 * @since	3.5
 	 * @version	3.5
+	 *
+	 * @return	void
 	 */
 	public function render_author_box() {
 		// Filter to give posibility for disable
 		if( apply_filters( 'wecodeart/filter/author-box/single', '__return_true' ) ) { 
 			if( is_single() ) get_template_part( 'views/author/author' );
 		}
-	} 
+	}
+
+	/**
+	 * Remove title on homepage
+	 *
+	 * @since	3.7.1
+	 * @version	3.7.1
+	 *
+	 * @param 	boolean	$disabled
+	 * @param	integer	$post_id
+	 *
+	 * @return	boolean
+	 */
+	public function filter_home_title( $disabled, $post_id ) {
+		$custom_page = get_option( 'page_on_front' );
+		if( intval( $custom_page ) === 0 ) return $disabled;
+		if( intval( $custom_page ) === intval( $post_id ) ) $disabled = true;
+		return $disabled;
+	}
 }

@@ -1,12 +1,4 @@
-<?php namespace WeCodeArt\Core;
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-
-// Use
-use WeCodeArt\Utilities\Markup as Markup;
-use WeCodeArt\Customizer as Customizer;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -14,12 +6,22 @@ use WeCodeArt\Customizer as Customizer;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Footer Class
+ * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.0
+ * @version		3.7.1
  */
 
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Customizer;
+use WeCodeArt\Utilities\Markup;
+
+/**
+ * Handles Footer Area of the Framework
+ */
 class Footer {
 	use \WeCodeArt\Singleton;
 
@@ -36,8 +38,10 @@ class Footer {
 	/**
 	 * Output FOOTER markup function
 	 * @uses	Markup::wrap()
+	 *
 	 * @since 	1.0
 	 * @version	3.7.0
+	 *
 	 * @return 	HTML 
 	 */
 	public function footer_markup() {
@@ -60,7 +64,7 @@ class Footer {
 	 * Footer Attribution
 	 * @uses	Markup::wrap()
 	 * @since 	1.0
-	 * @version 3.7.0
+	 * @version 3.7.2
 	 * @return 	HTML
 	 */
 	public function attribution_markup() { 
@@ -72,7 +76,7 @@ class Footer {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col text-center' ] ] 
 		], function() {   
 			?>
-			<span class="attribution__copyright"><?php esc_html_e( get_theme_mod( 'footer-copyright-text' ) ); ?></span>
+			<span class="attribution__copyright"><?php echo esc_html( get_theme_mod( 'footer-copyright-text' ) ); ?></span>
 			<span class="attribution__credits">
 				<?php
 					printf( 
@@ -151,8 +155,8 @@ class Footer {
 
 	/**
 	 * Return the Footer final widgets HTML with modules selected by user
-	 * @since	v3.5
-	 * @version v3.5
+	 * @since	3.5
+	 * @version 3.7.1
  	 * @uses	Markup::wrap()
 	 * @return 	string HTML
 	 */
@@ -163,7 +167,7 @@ class Footer {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row pt-4' ] ]
 		];
 
-		Markup::wrap( 'footer-widgets-wrappers', $wrappers, [ __CLASS__, 'sort_widgets' ] ); 
+		Markup::wrap( 'footer-widgets', $wrappers, [ __CLASS__, 'sort_widgets' ] ); 
 	}
 
 	/**

@@ -7,12 +7,12 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Footer Template
- * @since  		v1.0
- * @version 	v3.5
+ * @since  		1.0.0
+ * @version 	3.7.1
  */
 
         do_action( 'wecodeart/hook/inner/bottom' );     // Hook Inner Bottom	
-        echo '</div><!-- /div.content -->';
+        echo '</div><!-- /.content @filter = `wecodeart/filter/attributes/content` -->';
         do_action( 'wecodeart/hook/inner/after' ); 	    // Hook Inner After
 
         do_action( 'wecodeart/hook/footer/before' );	// Hook Before Footer

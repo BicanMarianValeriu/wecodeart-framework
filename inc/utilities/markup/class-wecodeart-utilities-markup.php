@@ -1,6 +1,4 @@
-<?php namespace WeCodeArt\Utilities;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -10,19 +8,29 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @package 	WeCodeArt Framework
  * @subpackage  Markup Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		v3.5
- * @version		v3.7.0
+ * @since		3.5
+ * @version		3.7.1
  */
 
+namespace WeCodeArt\Utilities;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+/**
+ * Markup Utilities Parent Class
+ */
 class Markup {
+
 	use \WeCodeArt\Singleton; 
 
 	/**
 	 * Merge array of attributes with defaults, and apply contextual filter on array.
 	 * @since 	3.5
+	 *
 	 * @param 	string 	$context    The context, to build filter name.
 	 * @param 	array  	$attributes Optional. Extra attributes to merge with defaults.
 	 * @param 	array  	$args       Optional. Custom data to pass to filter.
+	 *
 	 * @return 	array 	Merged and filtered attributes.
 	 */
 	public static function parse_attr( $context, $attributes = array(), $args = array() ) {
@@ -37,10 +45,13 @@ class Markup {
 
 	/**
 	 * Build list of attributes into a string and apply contextual filter on string.
+	 *
 	 * @since 	3.5
+	 *
 	 * @param 	string 	$context    The context, to build filter name.
 	 * @param 	array  	$attributes Optional. Extra attributes to merge with defaults.
 	 * @param 	array  	$args       Optional. Custom data to pass to filter.
+	 *
 	 * @return 	string 	String of HTML attributes and values.
 	 */
 	public static function generate_attr( $context, $attributes = array(), $args = array() ) {
@@ -60,9 +71,11 @@ class Markup {
 
 	/**
 	 * Return Sortable callback functions based on input.
+	 *
 	 * @param	array  	modules	required
 	 * @param 	array 	options	required
 	 * @param 	boolean	echo	optional
+	 *
 	 * @return 	string/object 	HTML/WP_Error
 	 */
 	public static function sortable( array $modules, array $options, $echo = true ) { 
@@ -101,24 +114,15 @@ class Markup {
 
 	/**
      * Wrapper method for any html
-	 * @param	string 			context		required ( used by generate_attr's dynamic filter )
-	 * @param 	mixed 			function	required ( the function called to be wrapped )
-	 * @param 	array			args		required ( wrappers array - must have tag/attrs key defined )
-	 * @param 	array			func_args	optional ( optional params for the function called above )
+	 *
+	 * @param	string	context		required ( used by generate_attr's dynamic filter )
+	 * @param 	mixed	function	required ( the function called to be wrapped )
+	 * @param 	array	args		required ( wrappers array - must have tag/attrs key defined )
+	 * @param 	array	func_args	optional ( optional params for the function called above )
+	 *
 	 * @return 	string/object 	HTML/WP_Error
 	 */
-	public static function wrap( string $context, array $wrappers, $function, $func_args = [], $echo = true ) {
-		// Only run if we have function
-		if( 
-			is_array( $function ) && ! method_exists( $function[0], $function[1] ) || 
-			is_string( $function ) && ! function_exists( $function ) ||
-			is_string( $function ) && ! is_callable( $function )
-		) {
-			return new \WP_Error( 'wecodeart_markup_no_callback', 
-				__( 'The specified callback does not exists or is not a function.', 'wecodeart' )
-			);
-		}
-		
+	public static function wrap( string $context, array $wrappers, $content = '', $func_args = [], $echo = true ) {
 		// Wrapper must have a 'tag' defined
 		$_wrappers = array_map( function( $wrapper ) {
 			return array_key_exists( 'tag', $wrapper ); 
@@ -137,24 +141,32 @@ class Markup {
 		// Parse args.
 		$args = wp_parse_args( $wrappers, $defaults );
 
-		// Build the HTML 
-		ob_start();
-		call_user_func_array( $function, $func_args );
-		$function_html = ob_get_clean();
+		// Build the HTML
+		$function_html = '';
+
+		if( is_callable( $content ) ) {
+			ob_start();
+			call_user_func_array( $content, $func_args );
+			$function_html .= ob_get_clean();
+		} else {
+			$function_html .= $content;
+		}
 
 		if( empty( $function_html ) ) return;
 
 		$html = '';
-
+		
 		foreach( $args as $key => $elem ) {
-			$_context = $context . '/' . $key; // Dynamic context filter for each wrapper  
-			$open_tag = implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $_context, $elem['attrs'] ) ] );
+			$_context = $context . '/' . $key; // Dynamic context filter for each wrapper.
+			$open_tag = trim( implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $_context, $elem['attrs'] ) ] ) );
 			$html .= '<' . $open_tag . '>';
 		}
 
 		$html .= $function_html;
 		
-		foreach( $args as $elem ) $html .= '</' . esc_html( $elem['tag'] ) . '>';
+		foreach( $args as $key => $elem ) {
+			$html .= '</' . esc_html( $elem['tag'] ) . '>';
+		}
 
 		/**
 		 * Developer Comments

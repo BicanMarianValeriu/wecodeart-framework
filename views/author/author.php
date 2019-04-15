@@ -9,8 +9,8 @@ use WeCodeArt\Utilities\Markup\SVG;
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box HTML
- * @since 		v3.0.3
- * @version		v3.7.0
+ * @since 		3.0.3
+ * @version		3.7.1
  */
 	$author = array();
 	$author['intro'] 	= is_author() ? __( 'All articles by', 'wecodeart' ) : __( 'About', 'wecodeart' );
@@ -38,11 +38,11 @@ use WeCodeArt\Utilities\Markup\SVG;
 				echo $author['avatar'];
 			?></div>
 			<div class="author-box__description col">
-				<?php echo wpautop( get_the_author_meta( 'description' ) ); ?>
-				<a class="author-box__website btn btn-sm small btn-outline-primary float-right"
-					href="<?php echo esc_url( get_the_author_meta( 'url' ) ); ?>" target="_blank" rel="nofollow">
+				<?php echo wpautop( wp_kses_post( $author['desc'] ) ); ?>
+				<a class="author-box__website btn btn-sm btn-outline-primary float-right"
+					href="<?php echo esc_url( $author['url'] ); ?>" target="_blank" rel="nofollow">
 					<?php SVG::render( 'icon--globe' ); ?>
-					<span><?php _e( 'Website', 'wecodeart' ); ?></span>
+					<span><?php esc_html_e( 'Website', 'wecodeart' ); ?></span>
 				</a>
 			</div>
 		</div>

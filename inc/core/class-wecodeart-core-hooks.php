@@ -118,7 +118,7 @@ class Hooks {
 	 * Filter Search form HTML Markup.
 	 * 
 	 * @since 	unknown
-	 * @version v3.6
+	 * @version 3.7.1
 	 * 
 	 * @return 	string $form
 	 */
@@ -133,7 +133,7 @@ class Hooks {
 			],
 			'button' 	=> [
 				'label' => __( 'Search', 'wecodeart' ),
-				'class' => 'button'
+				'class' => 'btn btn-primary'
 			]
 		);
 		
@@ -147,7 +147,7 @@ class Hooks {
 			$args['input']['v_or_h'], 
 			$args['input']['placeholder'] 
 		);  
-		$form .= sprintf( '<div class="input-group-append"><button class="btn btn-primary" type="submit" class="%s">%s</button></div>', 
+		$form .= sprintf( '<div class="input-group-append"><button type="submit" class="%s">%s</button></div>', 
 			esc_attr( $args['button']['class'] ),
 			$args['button']['label']
 		);

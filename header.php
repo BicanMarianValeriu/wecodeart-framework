@@ -8,8 +8,8 @@
      *
      * @package 	WeCodeArt Framework
      * @subpackage 	Header
-     * @since       1.0
-     * @version     3.7.0
+     * @since       1.0.0
+     * @version     3.7.1
      */
 ?>	
 <!DOCTYPE html>
@@ -25,8 +25,13 @@
         do_action( 'wecodeart_header_markup' 		);	// WeCodeArt Header
         do_action( 'wecodeart/hook/header/after' 	);	// Hook After Header
 
-        do_action( 'wecodeart/hook/inner/before' ); 	// Hook Inner Before
-        echo '<div id="content" class="content">';
+        do_action( 'wecodeart/hook/inner/before' ); 	// Hook Inner Before 
+    ?>
+        <div <?php echo Markup::generate_attr( 'content', [ 
+            'class' => 'content',
+            'id'    => 'content'
+        ] ); ?>>
+    <?php
         do_action( 'wecodeart/hook/inner/top' );		// Hook Inner Top
     ?>
         

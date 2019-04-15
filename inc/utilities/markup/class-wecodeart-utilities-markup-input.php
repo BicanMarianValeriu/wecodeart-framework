@@ -1,6 +1,4 @@
-<?php namespace WeCodeArt\Utilities\Form;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+<?php
 /**
  * WeCodeArt Framework
  *
@@ -8,10 +6,18 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework 
- * @subpackage 	Utilities\Form\Inputs
+ * @subpackage 	Utilities\Markup\Input
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		v3.1.2
- * @version 	v3.6
+ * @since		3.1.2
+ * @version		3.7.1
+ */
+
+namespace WeCodeArt\Utilities\Markup;
+
+if ( ! defined( 'ABSPATH' ) ) exit(); 
+
+/**
+ * Standard Inputs Markup
  */
 class Input {	
 	/*
@@ -46,24 +52,33 @@ class Input {
 	
 	/**
 	 * Create HTML Inputs
+	 *
 	 * @param  	array     	$array() 	Existing option array if exists (optional)
+	 *
 	 * @return 	array 		$array 		Array of options, all standard DOM input options
 	 */
 	protected static function input( $type, $label, $attrs, $choices ) {		
-		// Will hold Input Attributes
+		// Will hold Input Attributes.
 		$attributes = array();
 		
-		// Create HTML for Input Attributes
+		// Create HTML for Input Attributes.
 		foreach( $attrs as $name => $val ) {
 			$attributes[$name] = isset( $val ) ? sanitize_title_with_dashes( $name ) . '="' . esc_attr( $val ) . '"' : NULL;
 		}
 		
-		// Switch our input type
+		// Switch our input type.
 		switch( $type ) {			
 			/**
 			 * Text/Number/Email/URL/Password/Range/Submit share same HTML
 			 */
-			case 'text' : case 'number' : case 'email' : case 'password' : case 'url' : case 'checkbox' : case 'range' : case 'submit' :   ?>
+			case 'url' : 
+			case 'text' : 
+			case 'email' : 
+			case 'range' : 
+			case 'number' : 
+			case 'submit' :   
+			case 'password' : 
+			case 'checkbox' : ?>
 				<?php if ( isset( $label ) ) echo '<label>' . esc_html( $label ); ?>
 					<input type="<?php echo esc_attr( $type ) ?>" <?php echo implode ( ' ', $attributes ); ?>/>
 				<?php if ( isset( $label ) ) echo '</label>'; ?>

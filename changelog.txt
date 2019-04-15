@@ -1,5 +1,17 @@
+v3.7.2
+- Updated - 
+- Changed -
+- Fixed - Footer esc_html_e() translation function textdomain for copyright
+
 v3.7.1
-- Added - ...
+- Updated - Various PHP comments/spacing/indentation corrections
+- Changed - Changed namespace of the Utilities\Form\Input to Utilities\Markup\Input
+- Added - Markup::generate_attr() used for content wrapper, which adds dynamic filter for its attributes
+- Added - Markup::wrap() for various pagination functions
+- Added - wecodeart/filter/entry/title/disabled and disabled entry title by default on Homepage ( if page is set )
+- Fixed - Search Form button double class attribute
+- Fixed - Author box wp_kses_post and escaping
+- Fixed - Markup Validation - broken by Markup::wrap() with nav tags ( still unknown ). Now is 100% valid.
 
 v3.7.0
 - Added - Improved comments template - breaking changes
