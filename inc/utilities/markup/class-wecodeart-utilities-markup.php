@@ -9,7 +9,7 @@
  * @subpackage  Markup Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.1
+ * @version		3.7.2
  */
 
 namespace WeCodeArt\Utilities;
@@ -115,6 +115,9 @@ class Markup {
 	/**
      * Wrapper method for any html
 	 *
+	 * @since 	unknown
+	 * @version	3.7.2
+	 *
 	 * @param	string	context		required ( used by generate_attr's dynamic filter )
 	 * @param 	mixed	function	required ( the function called to be wrapped )
 	 * @param 	array	args		required ( wrappers array - must have tag/attrs key defined )
@@ -164,6 +167,12 @@ class Markup {
 
 		$html .= $function_html;
 		
+		/**
+		 * Close the wrappers in reverse order
+		 * @since 3.7.2
+		 */
+		$args = array_reverse( $args );
+
 		foreach( $args as $key => $elem ) {
 			$html .= '</' . esc_html( $elem['tag'] ) . '>';
 		}

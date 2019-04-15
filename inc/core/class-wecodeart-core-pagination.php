@@ -141,11 +141,10 @@ class Pagination {
         
 		Markup::wrap( 'entry-navigation', [ 
 			[ 
-                'tag'   => 'div', 
+                'tag'   => 'nav', 
                 'attrs' => [ 
                     'class'         => 'entry-navigation',
                     'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
-                    'role'          => 'navigation',
                     'itemscope'     => 'itemscope',
                     'itemtype'      => 'http://schema.org/SiteNavigationElement',
                 ] 
@@ -185,7 +184,7 @@ class Pagination {
 	 * Render Coments Pagination
 	 *
 	 * @since 	3.7.0
-	 * @version	3.7.1
+	 * @version	3.7.2
 	 *
 	 * @return 	string|null
 	 */
@@ -197,11 +196,10 @@ class Pagination {
 
 		Markup::wrap( 'comments-nav', [
 			[ 
-                'tag'   => 'div', 
+                'tag'   => 'nav', 
                 'attrs' => [ 
                     'class'         => 'comments__nav',
-					'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
-					'role'          => 'navigation',
+					'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ), 
                     'itemscope'     => 'itemscope',
                     'itemtype'      => 'http://schema.org/SiteNavigationElement',
                 ] 

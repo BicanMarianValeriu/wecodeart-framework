@@ -1,7 +1,10 @@
-v3.7.2
-- Updated - 
-- Changed -
+v3.7.3
+- Fixed - 
+
+v3.7.2 
+- Changed - Paginations wrappers changed to `nav` from `div`
 - Fixed - Footer esc_html_e() translation function textdomain for copyright
+- Fixed - Markup::wrap() function - closing wrappers in reverse order for valid html
 
 v3.7.1
 - Updated - Various PHP comments/spacing/indentation corrections
