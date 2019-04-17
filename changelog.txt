@@ -1,3 +1,6 @@
+v3.7.6
+- Added - ...
+
 v3.7.5
 - Updated - Core\Entry\Meta methods data escaping for strings.
 - Updated - Core\Loops::default() now uses Markup::wrap() function ( adds ability to easily change wrappers )
