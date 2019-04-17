@@ -7,8 +7,8 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Sidebar PHP
- * @since 		v1.0
- * @version		v3.0.8
+ * @since 		1.0
+ * @version		3.0.8
  */
 
 if ( ! class_exists( 'wecodeart_sidebar_dummy' ) ) {

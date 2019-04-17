@@ -1,8 +1,4 @@
-<?php namespace WeCodeArt\Core;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-// Use
-use WeCodeArt\Utilities\Markup as Markup;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -16,7 +12,17 @@ use WeCodeArt\Utilities\Markup as Markup;
  * @version		3.7.0
  */
 
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Utilities\Markup;
+
+/**
+ * Framework Header
+ */
 class Header {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -32,10 +38,12 @@ class Header {
 	
 	/**
 	 * Output HEADER markup function
-	 * @uses	Markup::wrap()
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @since 	unknown
 	 * @version	3.7.0
-	 * @return 	HTML 
+	 *
+	 * @return 	void 
 	 */
 	public function header_markup() {
 		Markup::wrap( 'header', [ [
@@ -46,16 +54,25 @@ class Header {
 				'itemscope' => 'itemscope',
 				'itemtype' 	=> 'http://schema.org/WPHeader'
 			]
-		] ], function() {   
-			do_action( 'wecodeart/hook/header/top' ); 
-			Header::render_header_bar();	 
+		] ], function() {
+			/** 
+			 * @hook	'wecodeart/hook/header/top'
+			 */
+			do_action( 'wecodeart/hook/header/top' );
+
+			Header::render_header_bar();
+
+			/** 
+			 * @hook	'wecodeart/hook/header/bottom'
+			 */	 
 			do_action( 'wecodeart/hook/header/bottom' ); 
-		} );  
+		} );
 	}
 
 	/**
 	 * Header Branding View
-	 * @return 	HTML
+	 *
+	 * @return 	void
 	 */
 	public static function display_branding() {
 		get_template_part( 'views/header/bar', 'branding' );
@@ -63,10 +80,12 @@ class Header {
 
 	/**
 	 * Header Menu View
-	 * @uses	Markup::wrap()
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @since 	unknown
 	 * @version	3.7.0
-	 * @return 	HTML 
+	 *
+	 * @return 	void 
 	 */
 	public static function display_menu() { 
 		Markup::wrap( 'header-menu', [ [
@@ -82,15 +101,17 @@ class Header {
 			'depth' 		 => 10,  
 			'walker' 		 => new \WeCodeArt\Walkers\Menu,
 			'fallback_cb'	 => 'WeCodeArt\Walkers\Menu::fallback' 
-		] ) ] ); 
+		] ) ] );
 	}
 
 	/**
 	 * Header Search View
-	 * @uses	Markup::wrap()
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @since 	unknown
 	 * @version	3.7.0
-	 * @return 	string 	HTML 
+	 * 
+	 * @return 	void
 	 */
 	public static function display_search() { 
 		Markup::wrap( 'header-search', [ [
@@ -104,18 +125,20 @@ class Header {
 
 	/**
 	 * Generate Body Attrs
-	 * @since	v3.5
-	 * @version v3.5
+	 *
+	 * @since 	3.5
+	 * @version 3.5
+	 *
 	 * @return 	array 
 	 */
 	public function body_attrs( $args = [] ) {
-		// Set up blog variable
+		// Set up blog variable.
 		$blog = ( is_home() || is_archive() || is_attachment() || is_tax() || is_single() ) ? true : false;
-		// Set up default itemtype
+		// Set up default itemtype.
 		$itemtype = 'WebPage';
-		// Get itemtype for the blog
+		// Get itemtype for the blog.
 		$itemtype = ( $blog ) ? 'Blog' : $itemtype;
-		// Get itemtype for search results
+		// Get itemtype for search results.
 		$itemtype = ( is_search() ) ? 'SearchResultsPage' : $itemtype;
 
 		$defaults = [
@@ -131,8 +154,10 @@ class Header {
 
 	/**
 	 * Variable that holds the Header Modules and Options
-	 * @since	v1.5
-	 * @version v3.6
+	 *
+	 * @since	1.5
+	 * @version	3.6
+	 *
 	 * @return 	array
 	 */
 	public static function nav_bar_modules() {
@@ -158,28 +183,30 @@ class Header {
 
 	/**
 	 * Returns the inner markp with wrapper based on user options
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @since 	unknown
 	 * @version	3.6
-	 * @uses	Markup::wrap()
-	 * @return 	HTML
+	 *
+	 * @return 	void
 	 */
 	public static function render_header_bar() {
 		$wrappers = array(
 			[
-				'tag' => 'div',
+				'tag' 	=> 'div',
 				'attrs' => [
-					'id' => 'header-bar',
+					'id' 	=> 'header-bar',
 					'class' => 'header__bar header-bar'
 				]
 			],
 			[
-				'tag' => 'div',
+				'tag' 	=> 'div',
 				'attrs' => [
 					'class' => get_theme_mod( 'header-bar-container' )
 				]
 			],
 			[
-				'tag' => 'div',
+				'tag' 	=> 'div',
 				'attrs' => [
 					'class' => 'row align-items-center'
 				]
@@ -191,10 +218,12 @@ class Header {
 
 	/**
 	 * Return the Header final HTML with modules selected by user
-	 * @since	v1.5
-	 * @version v3.6
-	 * @uses	Markup::sortable()
-	 * @return 	string HTML
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::sortable()
+	 * @since	1.5
+	 * @version	3.6
+	 *
+	 * @return 	void
 	 */
 	public static function sort_header_bar() {
 		// Sort the modules
@@ -202,7 +231,8 @@ class Header {
 	}
 
 	/**
-	 * Add a pingback url auto-discovery wp_head for singularly identifiable articles.
+	 * Add a pingback url auto-discovery wp_head for singularly identifiable articles
+	 *
 	 * @since	v2.2
 	 * @version v2.2
 	 */
@@ -211,7 +241,8 @@ class Header {
 	}
 
 	/**
-	 * Add a meta viewport printed in wp_head.
+	 * Add a meta viewport printed in wp_head
+	 *
 	 * @since	v2.2
 	 * @version v2.2
 	 */

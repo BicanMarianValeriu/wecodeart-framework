@@ -48,7 +48,6 @@ class SVG {
 	 */
 	public static function compile( string $icon, $args = [], $fallback = '', $sprite = '' ) {
 		// Make sure $args are an array.
-		if ( empty( $icon ) ) return __( 'Please define an SVG icon filename!', 'wecodeart' );
 		if ( empty( $sprite ) ) $sprite = get_template_directory_uri() . '/assets/images/sprite.svg';
 
 		// Set defaults.

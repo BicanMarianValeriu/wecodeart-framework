@@ -1,9 +1,4 @@
-<?php namespace WeCodeArt\Customizer\Configs;
-// No direct access, please.
-if ( ! defined( 'ABSPATH' ) ) exit;
-// Use
-use WeCodeArt\Customizer\Config as Config; 
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -11,22 +6,30 @@ use WeCodeArt\Customizer\Config as Config;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	WP-Customizer Config
+ * @subpackage 	Customizer\Configs\Overrides
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.5
+ * @since 		3.5
+ * @version		3.7.3
  */
+
+namespace WeCodeArt\Customizer\Configs;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use WeCodeArt\Customizer\Config;
 
 /**
  * Customizer Config Overrides
  */
 class Overrides extends Config {
 	/**
-	 * Register Site Layout Customizer Configurations.
-	 * @param 	Array                $configurations 
+	 * Register Site Layout Customizer Configurations
+	 *
+	 * @param 	array                $configurations 
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
 	 * @since 	3.5
-	 * @return 	Array 
+	 *
+	 * @return 	array 
 	 */
 	public function register( $configurations, $wp_customize ) {  
 		$_configs = array(
@@ -36,8 +39,8 @@ class Overrides extends Config {
 				'control'  		=> 'dropdown-pages',
 				'section'		=> 'static_front_page',
 				'capability'	=> 'edit_theme_options',
-				'title' 		=> __( 'Page for 404', 'wecodeart' ),
-				'description' 	=> __( 'Select your custom page that will show on 404 error.', 'wecodeart' ),
+				'title' 		=> esc_html__( 'Page for 404', 'wecodeart' ),
+				'description' 	=> esc_html__( 'Select your custom page that will show on 404 error.', 'wecodeart' ),
 				'priority' 		=> 50,
 				'transport'		=> 'postMessage',
 				'sanitize_callback' 	=> 'absint',

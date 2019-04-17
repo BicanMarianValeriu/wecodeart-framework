@@ -1,6 +1,4 @@
-<?php namespace WeCodeArt\Core;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -8,13 +6,21 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Front-End Scripts
+ * @subpackage 	Core\Scripts
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v1.9
- * @version		v3.6.2
+ * @since 		1.9
+ * @version		3.7.5
  */ 
 
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+/**
+ * Framework Assets
+ */
 class Scripts {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -30,14 +36,17 @@ class Scripts {
 
 	/**
 	 * WeCodeArt JS Object
-	 * @since	v3.2
-	 * @version v3.6.3
+	 *
+	 * @since	3.2
+	 * @version	3.6.3
+	 *
+	 * @return 	void
 	 */
 	public function localize_js() {
 		global $wp_scripts;
 
 		$wecodeart = [
-			'assetsEnqueue' 	=> wp_json_encode( $wp_scripts->queue ), 
+			'assetsEnqueue' 	=> $wp_scripts->queue, 
 			'templateDirectory' => get_template_directory_uri()
 		];
 		if( is_child_theme() ) $wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
@@ -49,8 +58,9 @@ class Scripts {
 
 	/**
 	 * jQuery to Footer
-	 * @since	v3.1.2
-	 * @version v3.5
+	 *
+	 * @since	3.1.2
+	 * @version	3.5
 	 */
 	public function jquery_to_footer( $wp_scripts ) {
 		if ( ! is_admin() && apply_filters( 'wecodeart/filter/scripts/jquery-in-footer', false ) ) {
@@ -62,15 +72,16 @@ class Scripts {
 
 	/**
 	 * Enqueue Front-End Styles
-	 * @since	v1.0
-	 * @version v3.6.2
+	 *
+	 * @since	1.0
+	 * @version	3.7.5
 	 */
 	public function front_scripts() {
 		// Enqueue Styles
-		wp_enqueue_style( 'wecodeart-core',	get_parent_theme_file_uri( '/assets/css/style.css' ), [], '3.6.2' );
+		wp_enqueue_style( 'wecodeart-core',	get_parent_theme_file_uri( '/assets/css/style.css' ), [], '3.7.5' );
 
 		// Enqueue scripts
-		wp_enqueue_script( 'wecodeart-core', get_parent_theme_file_uri( '/assets/js/frontend.js' ), ['jquery'], '3.6.2', true );		
+		wp_enqueue_script( 'wecodeart-core', get_parent_theme_file_uri( '/assets/js/frontend.js' ), ['jquery'], '3.7.5', true );		
 		if ( 
 			( is_page() && comments_open() && get_option( 'thread_comments' ) ) || 
 			( is_single() && comments_open() && get_option( 'thread_comments' ) ) 

@@ -1,11 +1,4 @@
-<?php namespace WeCodeArt\Customizer\Controls;
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
-// Use
-use WP_Customize_Control as WP_Customize_Control;
-// If exists return null.
-if ( class_exists( 'WeCodeArt\Customizer\Controls\Slider' ) ) return NULL;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -13,11 +6,19 @@ if ( class_exists( 'WeCodeArt\Customizer\Controls\Slider' ) ) return NULL;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Customizer/Controls
+ * @subpackage 	Customizer\Controls\Slider
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.5
+ * @since 		3.5
+ * @version		3.5
  */
+
+namespace WeCodeArt\Customizer\Controls;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use WP_Customize_Control;
+
+if ( class_exists( 'WeCodeArt\Customizer\Controls\Slider' ) ) return NULL;
 
 /**
  * Sortable control (uses checkboxes).

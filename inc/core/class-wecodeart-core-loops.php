@@ -1,8 +1,4 @@
-<?php namespace WeCodeArt\Core;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-// Use 
-use WeCodeArt\Core\Entry;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -12,10 +8,22 @@ use WeCodeArt\Core\Entry;
  * @package 	WeCodeArt Framework
  * @subpackage 	Loops
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.7
+ * @since		3.5
+ * @version		3.7.3
  */ 
+
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Core\Entry;
+use WeCodeArt\Utilities\Markup;
+
+/**
+ * Loops
+ */
 class Loops {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -35,16 +43,16 @@ class Loops {
 
 	/**
 	 * Init hooks and actions
-	 * @since	v3.6.2
+	 * @since 3.6.2
 	 */
 	public function hooks() {
 		if( self::$page_for_404 > 0 ) {
 			add_filter( 'display_post_states', 			[ $this, 'filter_404_post_state' ], 10, 2 );
 			// Remove 404 error page from Search Results
-			add_action( 'pre_get_posts',				[ $this, 'exclude_404_page' ] );
+			add_action( 'pre_get_posts',				[ $this, 'exclude_404_page' ] ); 
 			// Remove 404 error page from YOAST sitemap
 			add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', function () {
-				return array( self::$page_for_404 );
+				return [ self::$page_for_404 ];
 			} );
 
 			add_action( 'wp_head', function() {
@@ -69,15 +77,18 @@ class Loops {
 
 	/**
 	 * Standard WP Loop, meant to be executed anywhere needed in templates.
-	 * @since	v1.0
-	 * @version v3.6.7
+	 *
+	 * @since	1.0
+	 * @version	3.7.3
+	 *
+	 * @return 	void
 	 */
 	public static function default() {
 		global $wp_query;
 
 		do_action( 'wecodeart/hook/loop/before' );
 		
-		// The WordPress Loop
+		// The WordPress Loop.
 		if( have_posts() ) :
 
 			do_action( 'wecodeart/hook/loop/while/before' );
@@ -87,29 +98,59 @@ class Loops {
 				$type 	= get_post_type();
 				$index 	= $wp_query->current_post;
 
-				do_action( 'wecodeart_entry_open', 		$type, $index );
-				do_action( 'wecodeart_entry_header', 	$type, $index );
-				do_action( 'wecodeart_entry_content', 	$type, $index );
-				do_action( 'wecodeart_entry_footer', 	$type, $index );
-				do_action( 'wecodeart_entry_close', 	$type, $index );
+				Markup::wrap( 'entry', [ [
+					'tag' 	=> 'article',
+					'attrs' => [
+						'id' 	=> $type . '-' . get_the_ID(), 
+						'class'	=> implode( ' ', get_post_class() ) 
+					]
+				] ], function() use ( $type, $index ) {
+					/**
+					 * This hooks follow WPCS and they are not meant to be used for custom hooks
+					 * in order to keep a propper HTML structure
+					 * Use the ones bellow for hooking custom actions
+					 * @uses the following hooks {
+					 * - wecodeart/hook/entry/header
+					 * - wecodeart/hook/entry/content
+					 * - wecodeart/hook/entry/footer
+					 * }
+					 */
 
-			endwhile; // end of one post
+					/**
+					 * @see WeCodeArt\Core\Entry->render_header();
+					 */
+					do_action( 'wecodeart_entry_header', $type, $index );
+
+					/**
+					 * @see WeCodeArt\Core\Entry->render_content();
+					 */
+					do_action( 'wecodeart_entry_content', $type, $index );
+
+					/**
+					 * @see WeCodeArt\Core\Entry->render_footer();
+					 */
+					do_action( 'wecodeart_entry_footer', $type, $index );
+
+				} );
+
+			endwhile; // end of one post.
 
 			do_action( 'wecodeart/hook/loop/while/after' );
 
-		else : // if no posts exist
+		else : // if no posts exist.
 
 			do_action( 'wecodeart/hook/loop/else' );
 
-		endif; // end loop
+		endif; // end loop.
 
 		do_action( 'wecodeart/hook/loop/after' );
 	}
 
 	/**
 	 * Returns the 404 Page Loop
-	 * @since	v3.5
-	 * @version v3.5
+	 *
+	 * @since	3.5
+	 * @version	3.5
 	 */
 	public static function fourofour() {
 		if( self::$page_for_404 > 0 ) {
@@ -137,6 +178,7 @@ class Loops {
 
 	/**
 	 * Exclude 404 page from results
+	 *
 	 * @param  object $query WP_Query
 	 */
 	public function exclude_404_page( $query ) {
@@ -157,8 +199,8 @@ class Loops {
 				) 
 			) {
 				if ( is_admin() || ( ! is_admin() && is_search() ) ) $pageids = get_all_page_ids();
-				else $pageids = array( $pageid ); 
-				$query->set( 'post__not_in', array_merge( ( array ) $query->get( 'post__not_in', array() ), $pageids ) );
+				else $pageids = [ $pageid ]; 
+				$query->set( 'post__not_in', array_merge( ( array ) $query->get( 'post__not_in', [] ), $pageids ) );
 			}
 		}
 	}

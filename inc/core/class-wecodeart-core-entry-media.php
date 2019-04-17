@@ -9,7 +9,7 @@
  * @subpackage 	Entry Media Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.6
- * @version		3.6.4
+ * @version		3.7.3
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -32,10 +32,10 @@ class Media {
 	 * @since 3.6.4
 	 */
 	public function init() {
-		// Actions
-		add_action( 'wecodeart/hook/entry/header', [ $this, 'render_image' ], 15 );
+		// Actions.
+		add_action( 'wecodeart/hook/entry/header', [ $this, 'render_image' ], 20 );
 
-		// Filters
+		// Filters.
 		add_filter( 'wecodeart/filter/media/render_image/disable', [ $this, 'filter_render_image' ] );
 	}
 	

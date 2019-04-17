@@ -1,6 +1,4 @@
-<?php namespace WeCodeArt\Utilities;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -10,10 +8,17 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @package 	WeCodeArt Framework
  * @subpackage  Helper Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		v3.5
- * @version		v3.6.2
+ * @since		3.5
+ * @version		3.7.3
  */
 
+namespace WeCodeArt\Utilities;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+/**
+ * Helpers functions
+ */
 class Helpers {
 	use \WeCodeArt\Singleton;  
 
@@ -32,11 +37,12 @@ class Helpers {
 
 	/**
 	 * Detect active plugin by constant, class or function existence.
-	 * @since 3.5
-	 * @param 	array 	$plugins Array of array for constants, classes and / or functions to check for plugin existence.
-	 * @return 	bool 	True if plugin exists or false if plugin constant, class or function not detected.
+	 * @since 	3.5
+	 * @param 	array 	$plugins 	Array of array for constants, classes and / or functions to check for plugin existence
+	 * 
+	 * @return 	boolean
 	 */
-	public static function detectplugin( array $plugins ) {
+	public static function detect_plugin( array $plugins ) {
 		// Check for classes.
 		if ( isset( $plugins['classes'] ) ) foreach ( $plugins['classes'] as $name ) if ( class_exists( $name ) ) return true;
 

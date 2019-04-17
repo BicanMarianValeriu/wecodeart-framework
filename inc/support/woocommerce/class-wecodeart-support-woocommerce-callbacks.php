@@ -1,8 +1,4 @@
-<?php namespace WeCodeArt\Support\WooCommerce;
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
-// Use
-use WeCodeArt\Utilities\Helpers as Helpers;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -12,20 +8,33 @@ use WeCodeArt\Utilities\Helpers as Helpers;
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\WooCommerce\Callbacks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.2
+ * @since 		3.5
+ * @version		3.7.3
  */
 
+namespace WeCodeArt\Support\WooCommerce;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use WeCodeArt\Utilities\Helpers as Helpers;
+
+/**
+ * Callbacks used on WooCommerce
+ */
 class Callbacks {
+
 	use \WeCodeArt\Singleton;  
 
 	/**
 	 * Checks if the current page is a product archive
-	 * @since	v2.2
-	 * @version	v3.5
+	 *
+	 * @since	2.2
+	 * @version	3.7.3
+	 *
+	 * @return 	boolean
 	 */
 	public static function _is_woocommerce_archive() {
-		if ( Helpers::detectplugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
+		if ( Helpers::detect_plugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
 			if ( is_post_type_archive( 'product' ) || is_product_taxonomy() || is_product_category() || is_product_tag() ) {
 				return true;
 			} else {
@@ -38,10 +47,13 @@ class Callbacks {
 
 	/**
 	 * Check any page that WooCommerce is active on
-	 * @since	v2.0
+	 *
+	 * @since	3.7.3
+	 *
+	 * @return 	boolean
 	 */
 	public static function _is_woocommerce_page() {
-		if ( Helpers::detectplugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
+		if ( Helpers::detect_plugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
 			if ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) {
 				return true;
 			} else {

@@ -1,10 +1,4 @@
-<?php namespace WeCodeArt\Customizer\Configs;
-// No direct access, please.
-if ( ! defined( 'ABSPATH' ) ) exit;
-// Use
-use WeCodeArt\Customizer\Config as Config;
-use WeCodeArt\Customizer\Formatting as Formatting;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -12,22 +6,31 @@ use WeCodeArt\Customizer\Formatting as Formatting;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	WP-Customizer Config
+ * @subpackage 	Customizer\Configs\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6
+ * @since		3.5
+ * @version		3.7.3
  */
+
+namespace WeCodeArt\Customizer\Configs;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use WeCodeArt\Customizer\Config;
+use WeCodeArt\Customizer\Formatting;
 
 /**
  * Customizer Config Footer setup
  */
 class Footer extends Config {
 	/**
-	 * Register Site Layout Customizer Configurations.
-	 * @param 	Array                $configurations 
+	 * Register Site Layout Customizer Configurations
+	 *
+	 * @param 	array                $configurations 
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
 	 * @since 	3.6
-	 * @return 	Array 
+	 *
+	 * @return 	array 
 	 */
 	public function register( $configurations, $wp_customize ) {
 		// A handy class for formatting theme mods.
@@ -44,11 +47,11 @@ class Footer extends Config {
 				'type' 			=> 'control',
 				'control'  		=> 'select',
 				'section'		=> 'footer-layout',
-				'title' 		=> __( 'Grid Type', 'wecodeart' ),
-				'description' 	=> __( 'Choose the type of the container class.', 'wecodeart' ),
+				'title' 		=> esc_html__( 'Grid Type', 'wecodeart' ),
+				'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
 				'choices'  		=> array(
-					'container'			=> __( 'Container', 'wecodeart' ),
-					'container-fluid' 	=> __( 'Container Fluid', 'wecodeart' ),
+					'container'			=> esc_html__( 'Container', 'wecodeart' ),
+					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 				), 
 				'priority' 		=> 5, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ], 
@@ -59,8 +62,8 @@ class Footer extends Config {
 				'type'        	=> 'control',
 				'control'  		=> 'wecodeart-sortable',
 				'section'		=> 'footer-layout',
-				'title'			=> __( 'Footer Columns', 'wecodeart' ),
-				'description'	=> __( 'Enable and reorder Footer Columns.', 'wecodeart' ),
+				'title'			=> esc_html__( 'Footer Columns', 'wecodeart' ),
+				'description'	=> esc_html__( 'Enable and reorder Footer Columns.', 'wecodeart' ),
 				'priority'   	=> 10, 
 				'choices'		=> $widgets,
 				'transport'		=> 'postMessage',
@@ -75,8 +78,8 @@ class Footer extends Config {
 				'type'        	=> 'control',
 				'control'  		=> 'textarea',
 				'section'		=> 'footer-copyright',
-				'title'			=> __( 'Footer Copyright Text', 'wecodeart' ),
-				'description'	=> __( 'Enter your copyright text here. Appears in Footer attribution.', 'wecodeart' ),
+				'title'			=> esc_html__( 'Footer Copyright Text', 'wecodeart' ),
+				'description'	=> esc_html__( 'Enter your copyright text here. Appears in Footer attribution.', 'wecodeart' ),
 				'priority'		=> 5,
 				'sanitize_callback'	=> 'sanitize_text_field', 
 				'transport'		=> 'postMessage',

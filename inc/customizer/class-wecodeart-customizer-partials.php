@@ -1,6 +1,4 @@
-<?php namespace WeCodeArt\Customizer;
-// No direct access, please.
-if ( ! defined( 'ABSPATH' ) ) exit;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -10,14 +8,19 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @package 	WeCodeArt Framework
  * @subpackage 	WP-Customizer Partials
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.3
- * @version		v3.6.2
+ * @since 		3.3
+ * @version		3.6.2
  */
 
+namespace WeCodeArt\Customizer;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
- * Customizer Partials initial setup
+ * Customizer Partials
  */
 class Partials {
+
 	use \WeCodeArt\Singleton; 
 
 	/**
@@ -40,15 +43,15 @@ class Partials {
 		$wp_customize->get_section( 'title_tagline' 	)->panel		= 'header';
 
 		// Selective Refresh
-		$wp_customize->selective_refresh->add_partial( 'blogname', array(
+		$wp_customize->selective_refresh->add_partial( 'blogname', [
 			'selector'        => '.site-title a',
-			'render_callback' => array( $this, '_render_blogname' ),
-		) );
+			'render_callback' => [ $this, '_render_blogname' ],
+		] );
 
-		$wp_customize->selective_refresh->add_partial( 'blogdescription', array(
+		$wp_customize->selective_refresh->add_partial( 'blogdescription', [
 			'selector'        => '.site-description',
-			'render_callback' => array( $this, '_render_blogdescription' ),
-		) ); 
+			'render_callback' => [ $this, '_render_blogdescription' ],
+		] ); 
 	}
 		
 	/**

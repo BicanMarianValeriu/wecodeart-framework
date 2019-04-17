@@ -1,6 +1,4 @@
 <?php
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit(); 
 /**
  * WeCodeArt Framework
  *
@@ -10,17 +8,19 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @package 	WeCodeArt Framework 
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		v3.5
- * @version 	v3.6.0.6
+ * @since		3.5
+ * @version 	3.7.3
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit(); 
 
 /**
  * Puts Everything togheter
  * 
- * @since		v1.0
- * @version		v3.3
+ * @since	1.0
+ * @version	3.3
  * 
- * @return 		mixed 	Site Layout
+ * @return	mixed 	Site Layout
  */
 function wecodeart() {	
 	get_header(); 
@@ -28,12 +28,13 @@ function wecodeart() {
 	get_footer(); 
 }
 
+
 /**
  * Get a specific property of an array without needing to check if that property exists.
  * Provide a default value if you want to return a specific value if the property is not set.
  *
  * @since  	3.5
- * @access 	public
+ *
  * @author 	Gravity Forms - Easiest Tool to Create Advanced Forms for Your WordPress-Powered Website.
  * @link  	https://www.gravityforms.com/
  *
@@ -61,18 +62,17 @@ function wecodeart_get_prop( $array, $prop, $default = null ) {
 function wecodeart_gutenberg_is_wide_or_full( $post = 0 ) {
 	if( ! $post ) global $post;  
 	
-	// Retrieve an array of blocks used for this post
+	// Retrieve an array of blocks used for this post.
 	$blocks = parse_blocks( $post->post_content ); 
 
 	foreach( $blocks as $block ) {  
-		// If we have full/wide allign return true early and bail
+		// If we have full/wide allign return true early and bail.
 		if( in_array( wecodeart_get_prop( $block['attrs'], 'align' ), [ 'full', 'wide' ] ) ) {
 			return true;
 			break;
 		}
 	}
 
-	// Return false
 	return false;
 }
 
@@ -85,9 +85,9 @@ function wecodeart_gutenberg_is_wide_or_full( $post = 0 ) {
  * @return 	boolean|null
  */
 function wecodeart_gutenberg_wide_or_full_content() {
-	$remove_sidebar_if_wide_or_full = apply_filters( 'wecodeart/filter/gutenberg/wide_or_full_content', true );
+	$enabled = apply_filters( 'wecodeart/filter/gutenberg/wide_or_full_content', true );
 	
-	if( $remove_sidebar_if_wide_or_full === false ) return false; 
+	if( $enabled === false ) return false; 
 	if( is_singular() && wecodeart_gutenberg_is_wide_or_full() ) return true;
 
 	return null;

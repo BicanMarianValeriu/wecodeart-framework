@@ -1,8 +1,4 @@
-<?php namespace WeCodeArt\Walkers;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-// Use
-use Walker_Nav_Menu;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -10,11 +6,17 @@ use Walker_Nav_Menu;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Header Bar Menu (Walker)
+ * @subpackage 	Walkers\Menu
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v2.0
- * @version		v3.6.0.3
+ * @since 		2.0
+ * @version		3.6.0.3
  */
+
+namespace WeCodeArt\Walkers;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use Walker_Nav_Menu;
 
 /** 
  * Plugin Name: WP Bootstrap Navwalker
@@ -28,7 +30,6 @@ use Walker_Nav_Menu;
  * License: GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  */
- 
 class Menu extends Walker_Nav_Menu {   
     /**
 	 * Starts the list before the elements are added. 
@@ -63,10 +64,13 @@ class Menu extends Walker_Nav_Menu {
 	}
 
 	/**
-	 * Starts the element output. 
+	 * Starts the element output.
+	 *
 	 * @since WP 3.0.0
-	 * @since WP 4.4.0 The {@see 'nav_menu_item_args'} filter was added. 
-	 * @see Walker_Nav_Menu::start_el() 
+	 * @since WP 4.4.0 The {@see 'nav_menu_item_args'} filter was added.
+	 *
+	 * @see Walker_Nav_Menu::start_el()
+	 *
 	 * @param string   $output Used to append additional content (passed by reference).
 	 * @param WP_Post  $item   Menu item data object.
 	 * @param int      $depth  Depth of menu item. Used for padding.
@@ -293,7 +297,7 @@ class Menu extends Walker_Nav_Menu {
 
 	/**
 	 * Menu Fallback
-	 * =============
+	 *
 	 * If this function is assigned to the wp_nav_menu's fallback_cb variable
 	 * and a menu has not been assigned to the theme location in the WordPress
 	 * menu manager the function with display nothing to a non-logged in user,
@@ -391,7 +395,8 @@ class Menu extends Walker_Nav_Menu {
 
 	/**
 	 * Return a string containing a linkmod type and update $atts array
-	 * accordingly depending on the decided. 
+	 * accordingly depending on the decided.
+	 *
 	 * @since 	4.0.0 
 	 * @param 	array 	$linkmod_classes array of any link modifier classes. 
 	 * @return 	string	empty for default, a linkmod type string otherwise.
@@ -416,7 +421,8 @@ class Menu extends Walker_Nav_Menu {
 	}
 
 	/**
-	 * Update the attributes of a nav item depending on the limkmod classes. 
+	 * Update the attributes of a nav item depending on the limkmod classes.
+	 *
 	 * @since 4.0.0 
 	 * @param array $atts            array of atts for the current link in nav item.
 	 * @param array $linkmod_classes an array of classes that modify link or nav item behaviors or displays. 
@@ -441,7 +447,8 @@ class Menu extends Walker_Nav_Menu {
 	}
 
 	/**
-	 * Wraps the passed text in a screen reader only class. 
+	 * Wraps the passed text in a screen reader only class.
+	 * 
 	 * @since 	4.0.0 
 	 * @param 	string 	$text 	the string of text to be wrapped in a screen reader class.
 	 * @return 	string      	the string wrapped in a span with the class.
@@ -452,7 +459,8 @@ class Menu extends Walker_Nav_Menu {
 	}
 
 	/**
-	 * Returns the correct opening element and attributes for a linkmod. 
+	 * Returns the correct opening element and attributes for a linkmod.
+	 * 
 	 * @since 	4.0.0 
 	 * @param 	string 	$linkmod_type 	a sting containing a linkmod type flag.
 	 * @param 	string 	$attributes   	a string of attributes to add to the element. 
@@ -471,7 +479,8 @@ class Menu extends Walker_Nav_Menu {
 	}
 
 	/**
-	 * Return the correct closing tag for the linkmod element. 
+	 * Return the correct closing tag for the linkmod element.
+	 *
 	 * @since 4.0.0 
 	 * @param string $linkmod_type a string containing a special linkmod type. 
 	 * @return string              a string with the closing tag for this linkmod type.

@@ -1,10 +1,4 @@
-<?php namespace WeCodeArt\Support;
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
-// Use
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Core\Callbacks; 
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -14,10 +8,23 @@ use WeCodeArt\Core\Callbacks;
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.2
+ * @since 		3.5
+ * @version		3.6.2
+ */
+
+namespace WeCodeArt\Support;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Utilities\Helpers;
+use WeCodeArt\Core\Callbacks;
+
+/**
+ * WPSEO Integration
  */
 class WordPressSeo {
+
 	use \WeCodeArt\Singleton; 
 
 	/**
@@ -26,7 +33,7 @@ class WordPressSeo {
 	 */
 	public function init() {
 		if( apply_filters( 'wecodeart/filter/support/breadcrumbs/woocommerce-yoast', true )
-		&& Helpers::detectplugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
+		&& Helpers::detect_plugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
 			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 		}
 
@@ -35,8 +42,10 @@ class WordPressSeo {
 
 	/**
 	 * Yoast BreadCrumbs
+	 *
 	 * @since   3.5
 	 * @version 3.6.0.4
+	 *
 	 * @return  void
 	 */
 	public function render_yoast_breadcrumbs() {

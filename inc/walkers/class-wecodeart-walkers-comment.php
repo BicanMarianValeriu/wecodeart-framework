@@ -1,11 +1,4 @@
-<?php namespace WeCodeArt\Walkers;
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-
-// Use
-use Walker_Comment;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -15,10 +8,19 @@ use Walker_Comment;
  * @package 	WeCodeArt Framework
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v1.9
- * @version		v3.6.7
+ * @since		1.9
+ * @version		3.6.7
  */
 
+namespace WeCodeArt\Walkers;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use Walker_Comment;
+
+/**
+ * Comment Walker Class
+ */
 class Comment extends Walker_Comment {
 	var $tree_type = 'comment';
 	var $db_fields = array( 'parent' => 'comment_parent', 'id' => 'comment_ID' );
@@ -64,7 +66,7 @@ class Comment extends Walker_Comment {
 	/**
 	 * Outputs a HTML5 comment.
 	 * @since	2.0
-	 * @version	3.6
+	 * @version	3.7.3
 	 */
 	protected function comment( $comment, $depth, $args ) {
 		// Get what we need
@@ -72,7 +74,7 @@ class Comment extends Walker_Comment {
 		$author_img 	= get_avatar( $comment, $args['avatar_size'], '', __( 'Author\'s gravatar', 'wecodeart' ) );
 		$author_name 	= '<strong itemprop="name">' . $comment->comment_author . '</strong>';
 		if ( ! empty( $comment->comment_author_url ) && 'http://' !== $comment->comment_author_url ) {
-			$author_name = sprintf( '<a href="%1$s" rel="author" itemprop="url">%2$s</a>', esc_url( $comment->comment_author_url ), $author_name );
+			$author_name = sprintf( '<a href="%1$s" rel="external nofollow" itemprop="url">%2$s</a>', esc_url( $comment->comment_author_url ), $author_name );
 		}
 
 		// Setup Filters

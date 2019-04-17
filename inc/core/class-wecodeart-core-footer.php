@@ -31,14 +31,14 @@ class Footer {
 	 */
 	public function init() {
 		add_action( 'wecodeart_footer_markup', 		[ $this, 'footer_markup' ] );
-		add_action( 'wecodeart/hook/footer/bottom', [ $this, 'attribution_markup' ], 99 );
+		add_action( 'wecodeart/hook/footer/bottom', [ $this, 'attribution_markup' ], 95 );
 		add_action( 'widgets_init', 				[ $this, 'register_sidebars' ] );
 	}
 	
 	/**
 	 * Output FOOTER markup function
-	 * @uses	Markup::wrap()
 	 *
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @since 	1.0
 	 * @version	3.7.0
 	 *
@@ -53,19 +53,32 @@ class Footer {
 				'itemscope' => 'itemscope',
 				'itemtype' 	=> 'http://schema.org/WPFooter'
 			]
-		] ], function() {   
-			do_action( 'wecodeart/hook/footer/top' ); 
-			Footer::render_widgets();	 
+		] ], function() {
+			/** 
+			 * @hook	'wecodeart/hook/footer/top'
+			 */ 
+			do_action( 'wecodeart/hook/footer/top' );
+			
+			Footer::render_widgets();
+			
+			/** 
+			 * @hook	'wecodeart/hook/footer/bottom' 	
+			 * @hooked 	{
+			 * - WeCodeArt\Core\Footer->attribution_markup()	- 95	Attribution 
+			 * }
+			 */ 
 			do_action( 'wecodeart/hook/footer/bottom' ); 
 		} ); 
 	}
 
 	/**
 	 * Footer Attribution
-	 * @uses	Markup::wrap()
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @since 	1.0
 	 * @version 3.7.2
-	 * @return 	HTML
+	 *
+	 * @return 	void
 	 */
 	public function attribution_markup() { 
 
@@ -92,7 +105,8 @@ class Footer {
 
 	/**
 	 * Footer Widgetized Area
-	 * @return 	HTML 
+	 *
+	 * @return 	void 
 	 */
 	public static function footer_widgets_one() {
 		get_template_part( 'views/footer/widgets', 'one' );
@@ -100,7 +114,8 @@ class Footer {
 
 	/**
 	 * Footer Widgetized Area
-	 * @return 	HTML 
+	 *
+	 * @return 	void 
 	 */
 	public static function footer_widgets_two() {
 		get_template_part( 'views/footer/widgets', 'two' );
@@ -108,7 +123,8 @@ class Footer {
 
 	/**
 	 * Footer Widgetized Area
-	 * @return 	HTML 
+	 *
+	 * @return 	void 
 	 */
 	public static function footer_widgets_three() {
 		get_template_part( 'views/footer/widgets', 'three' );
@@ -116,7 +132,8 @@ class Footer {
 
 	/**
 	 * Footer Widgetized Area
-	 * @return 	HTML 
+	 *
+	 * @return 	void 
 	 */
 	public static function footer_widgets_four() {
 		get_template_part( 'views/footer/widgets', 'four' );
@@ -124,8 +141,10 @@ class Footer {
 
 	/**
 	 * This function holds our footer widgets
-	 * @since	v1.5
-	 * @version v3.5
+	 *
+	 * @since	1.5
+	 * @version	3.5
+	 *
 	 * @return 	array
 	 */
 	public static function footer_widgets() {
@@ -155,10 +174,12 @@ class Footer {
 
 	/**
 	 * Return the Footer final widgets HTML with modules selected by user
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @since	3.5
 	 * @version 3.7.1
- 	 * @uses	Markup::wrap()
-	 * @return 	string HTML
+	 *
+	 * @return 	void
 	 */
 	public static function render_widgets() {
 		$wrappers = [
@@ -172,10 +193,12 @@ class Footer {
 
 	/**
 	 * Return the Inner final HTML with modules selected by user for each page.
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::sortable()
 	 * @since 	3.5
 	 * @version	3.5
-	 * @uses	Markup::sortable()
-	 * @return 	HTML
+	 *
+	 * @return 	void
 	 */
 	public static function sort_widgets() {
 		Markup::sortable( self::footer_widgets(), get_theme_mod( 'footer-layout-modules' ) );
@@ -183,8 +206,10 @@ class Footer {
 
 	/**
 	 * Register Sidebars Based on Active Options
+	 *
 	 * @since	unknown
 	 * @version	3.7.0
+	 *
 	 * @return 	void
 	 */
 	public function register_sidebars() {
@@ -200,16 +225,14 @@ class Footer {
 		// Register Sidebar for each active footer columns
 		foreach( $active as $sidebar ) {
 			if( isset( $columns[$sidebar]['not_a_sidebar'] ) && $columns[$sidebar]['not_a_sidebar'] === true ) continue;
-			register_sidebar(
-				array(
-					'name'          => $columns[$sidebar]['label'], // Translatable string defined in the function from the variable
-					'id'            => $sidebar,
-					'before_widget' => '<div id="%1$s" class="widget %2$s">',
-					'after_widget'  => '</div>',
-					'before_title'  => '<h4 class="widget__title">',
-					'after_title'   => '</h4>',
-				)
-			);
+			register_sidebar( [
+				'name'          => $columns[$sidebar]['label'], // @wpcs ok - translatable in $var
+				'id'            => $sidebar,
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</div>',
+				'before_title'  => '<h4 class="widget__title">',
+				'after_title'   => '</h4>',
+			] );
 		}
 	}
 }

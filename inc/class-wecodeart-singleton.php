@@ -1,6 +1,4 @@
-<?php namespace WeCodeArt;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+<?php
 /**
  * WeCodeArt Framework
  *
@@ -10,7 +8,15 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @package 	WeCodeArt Framework 
  * @subpackage 	Singleton
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		v3.6.2
+ * @since		3.6.2
+ */
+
+namespace WeCodeArt;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+/**
+ * Singleton DRY class
  */
 trait Singleton { 
 	/**

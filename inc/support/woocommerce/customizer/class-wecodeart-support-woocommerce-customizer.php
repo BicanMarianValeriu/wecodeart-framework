@@ -1,11 +1,4 @@
-<?php namespace WeCodeArt\Support\WooCommerce;
-// No direct access, please.
-if ( ! defined( 'ABSPATH' ) ) exit;
-// Use
-use WeCodeArt\Customizer\Config as Config;
-use WeCodeArt\Customizer\Formatting as Formatting;
-use WeCodeArt\Support\WooCommerce\Callbacks;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -15,10 +8,23 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.2
+ * @since 		3.5
+ * @version		3.6.2
+ */
+
+namespace WeCodeArt\Support\WooCommerce;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use WeCodeArt\Customizer\Config;
+use WeCodeArt\Customizer\Formatting;
+use WeCodeArt\Support\WooCommerce\Callbacks;
+
+/**
+ * Handles Customizer Settings for WooCommerce
  */
 class Customizer {
+
 	use \WeCodeArt\Singleton; 
 
 	/**
@@ -33,6 +39,7 @@ class Customizer {
 
 	/**
 	 * Extend Customizer default options
+	 *
 	 * @since 3.6.0.3
 	 */
 	public function extend_defaults( $defaults ) {
@@ -47,7 +54,9 @@ class Customizer {
 	/**
 	 * A function to render woo content with hooks in it
 	 * Used for rendering callback in customizer only
+	 *
 	 * @since   3.5
+	 *
 	 * @return  void 
 	 */
 	public static function render_content() {  

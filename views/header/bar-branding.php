@@ -1,6 +1,4 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit(); // Exit if accessed directly.
-// Use
-use WeCodeArt\Utilities\Markup\SVG;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -9,9 +7,14 @@ use WeCodeArt\Utilities\Markup\SVG;
  *
  * @package 	WeCodeArt Framework
  * @subpackage  Header Branding HTML
- * @since	 	v3.0.5
- * @version    	v3.6
+ * @since	 	3.0.5
+ * @version    	3.7.3
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Utilities\Markup\SVG;
+
 ?>
 <div id="bar-branding" class="header-bar__branding col col-lg-auto">
 	<div class="row no-gutters align-items-center">
@@ -26,7 +29,7 @@ use WeCodeArt\Utilities\Markup\SVG;
 				endif; 						
 				$description = get_bloginfo( 'description', 'display' );
 				if ( $description || is_customize_preview() ) : ?>
-					<p class="site-description"><?php echo $description; ?></p>
+					<p class="site-description"><?php echo wp_kses_post( $description ); ?></p>
 			<?php 
 				endif; 
 			?>
@@ -34,19 +37,21 @@ use WeCodeArt\Utilities\Markup\SVG;
 		<?php 
 			$mod = get_theme_mod( 'header-bar-modules' );
 			if ( in_array( 'search', $mod ) ) {
-			// Display a search toggle on small devices ?>
+				// Display a search toggle on small devices 
+			?>
 				<div class="col-auto d-lg-none">
 					<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__search" aria-expanded="false" aria-controls="bar-search">
-						<span class="screen-reader-text"><?php _e( 'Search', 'wecodeart' ); ?></span>
+						<span class="screen-reader-text"><?php esc_html_e( 'Search', 'wecodeart' ); ?></span>
 						<?php SVG::render( 'icon--search' ); ?>
 					</button>
 				</div>
 			<?php }
 			if ( in_array( 'menu', $mod ) ) { 
-			// Display a menu toggle on small devices ?>
+				// Display a menu toggle on small devices 
+			?>
 				<div class="col-auto d-lg-none">
 					<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__menu" aria-expanded="false" aria-controls="bar-menu">
-						<span class="screen-reader-text"><?php _e( 'Primary Menu', 'wecodeart' ); ?></span>
+						<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', 'wecodeart' ); ?></span>
 						<?php SVG::render( 'icon--bars' ); ?>
 					</button>
 				</div>

@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.1
+ * @version		3.7.3
  */
 
 namespace WeCodeArt\Core;
@@ -33,82 +33,63 @@ class Entry {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'wecodeart_entry_open',		[ $this, 'markup_open' 		], 5 ); 
+		add_action( 'the_password_form', [ $this, 'render_paswordprotected' ] );
+
 		add_action( 'wecodeart_entry_header', 	[ $this, 'render_header' 	] ); 
 		add_action( 'wecodeart_entry_content', 	[ $this, 'render_content' 	] );
-		add_action( 'wecodeart_entry_footer',	[ $this, 'render_footer' 	] ); 
-		add_action( 'wecodeart_entry_close', 	[ $this, 'markup_close' 	], 95 );
+		add_action( 'wecodeart_entry_footer',	[ $this, 'render_footer' 	] );  
 		
 		add_action( 'wecodeart/hook/entry/header',	[ $this, 'render_title' 		], 10 );
 		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_read_more' 	], 10 );
-		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_author_box' 	], 20 );
-        add_action( 'wecodeart/hook/entry/footer',  [ Pagination::get_instance(), 'entry_content' 	], 10 );
-        add_action( 'wecodeart/hook/entry/footer',  [ Pagination::get_instance(), 'entry_prev_next' ], 40 );
+        add_action( 'wecodeart/hook/entry/footer',  [ Pagination::get_instance(), 	'entry_content'		], 10 );
+		add_action( 'wecodeart/hook/entry/footer', 	[ Author::get_instance(),		'author_box_single'	], 20 );
+        add_action( 'wecodeart/hook/entry/footer',  [ Pagination::get_instance(), 	'entry_prev_next' 	], 40 );
 
 		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_noposts' ], 10 );
 
 		add_filter( 'wecodeart/filter/entry/title/disabled', [ $this, 'filter_home_title' ], 10, 2 );
 
-		add_action( 'the_password_form', [ $this, 'render_paswordprotected' ] );
 
 		/**
 		 * Child classes
 		 */
 		Entry\Meta::get_instance();
 		Entry\Media::get_instance(); 
-	}
-	
-	/**
-	 * Entry Markup Open
-	 *
-	 * @since	1.0
-	 * @version	3.6.3
-	 *
-	 * @return 	string
-	 */
-	public function markup_open() { 
-		$attributes = Markup::generate_attr( 'entry', [ 
-			'id' 	=> 'entry-' . get_the_ID(), 
-			'class'	=> implode( ' ', get_post_class() ) 
-		] );
-		?>
-		<article <?php echo $attributes; ?>>
-		<?php
-	}
-
-	/**
-	 * Entry Markup Close
-	 *
-	 * @since	1.0
-	 * @version 3.5
-	 *
-	 * @return 	string
-	 */
-	public function markup_close() {
-		?></article><?php
 	} 
 
 	/**
 	 * Render Header
 	 *
 	 * @since	3.6.4
-	 * @uses	Markup::wrap()
+	 * @version	3.7.3
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 *
 	 * @return 	string
 	 */
-	public function render_header() { 
+	public function render_header() {
+		/**
+		 * @see 	WeCodeArt\Utilities\Markup::wrap()
+		 * @see		do_action(); WP Function
+		 * @hook	'wecodeart/hook/entry/header' 	
+		 * @hooked 	{
+		 * - WeCodeArt\Core\Entry->render_title()		- 10 Entry Title
+		 * - WeCodeArt\Core\Entry\Media->render_image()	- 20 Entry Image ( Archive only ) 
+		 * - WeCodeArt\Core\Entry\Meta->render()		- 30 Entry Meta Information ( author, date, comments etc )
+		 * }
+		 */
 		Markup::wrap( 'entry-header', [ [
 			'tag' 	=> 'header',
 			'attrs' => [ 
 				'class' => 'entry-header'
 			]
-		] ], 'do_action', [ 'wecodeart/hook/entry/header' ] );  
+		] ], 'do_action', [ 'wecodeart/hook/entry/header', get_post() ] );  
 	} 
 
 	/**
 	 * Render Footer
 	 *
 	 * @since	3.6.4
+	 * @version	3.7.3
 	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 *
 	 * @return 	void
@@ -116,13 +97,15 @@ class Entry {
 	public function render_footer() {
 		/**
 		 * @see 	WeCodeArt\Utilities\Markup::wrap()
+		 * @see		do_action(); WP Function
 		 * @hook	'wecodeart/hook/entry/footer' 	
 		 * @hooked 	{
-		 * - WeCodeArt\Core\Entry->render_read_more()			- 10 Entry Read More ( Archive only )
-		 * - WeCodeArt\Core\Entry->render_author_box()			- 20 Author Info
-		 * - WeCodeArt\Core\Comments->get_comments_template()	- 30 Entry Comments
-		 * - WeCodeArt\Core\Pagination->post_content_nav()		- 10 Entry Nav ( Single only ) 
-		 * - WeCodeArt\Core\Pagination->prev_next_post_nav()	- 40 Entry Prev/Next Nav
+		 * - WeCodeArt\Core\Entry		->render_read_more()		- 10 Entry Read More ( Archive only )
+		 * - WeCodeArt\Core\Entry		->render_author_box()		- 20 Author Info
+		 * - WeCodeArt\Core\Comments	->get_comments_template()	- 30 Entry Comments
+		 * - WeCodeArt\Core\Pagination	->post_content_nav()		- 10 Entry Nav ( Single only ) 
+		 * - WeCodeArt\Core\Author		->author_box_single()		- 20 Author Box
+		 * - WeCodeArt\Core\Pagination	->prev_next_post_nav()		- 40 Entry Prev/Next Nav
 		 * }
 		 */
 		Markup::wrap( 'entry-footer', [ [
@@ -130,7 +113,7 @@ class Entry {
 			'attrs' => [ 
 				'class' => 'entry-footer' 
 			]
-		] ], 'do_action', [ 'wecodeart/hook/entry/footer' ] );
+		] ], 'do_action', [ 'wecodeart/hook/entry/footer', get_post() ] );
 	} 
 
 	/**
@@ -162,7 +145,7 @@ class Entry {
 	 * Echo the Entry Title Markup
 	 *
 	 * @since 	1.0
-	 * @uses	Markup::wrap()
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @version 3.6.4
 	 *
 	 * @return 	void
@@ -180,7 +163,7 @@ class Entry {
 	 * Echo the Entry Content/Excerpt Markup
 	 *
 	 * @since	1.0
-	 * @uses	Markup::wrap()
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @version	3.6.4
 	 *
 	 * @return	void
@@ -236,22 +219,7 @@ class Entry {
 	 */
 	public function render_paswordprotected() {
 		get_template_part( 'views/entry/content', 'protected' );
-	}
-
-	/**
-	 * Add Author Box on single Post
-	 *
-	 * @since	3.5
-	 * @version	3.5
-	 *
-	 * @return	void
-	 */
-	public function render_author_box() {
-		// Filter to give posibility for disable
-		if( apply_filters( 'wecodeart/filter/author-box/single', '__return_true' ) ) { 
-			if( is_single() ) get_template_part( 'views/author/author' );
-		}
-	}
+	} 
 
 	/**
 	 * Remove title on homepage

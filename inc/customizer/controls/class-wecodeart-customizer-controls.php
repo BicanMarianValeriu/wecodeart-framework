@@ -1,7 +1,4 @@
-<?php namespace WeCodeArt\Customizer;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit(); 
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -11,11 +8,16 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer/Controls
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.2
+ * @since		3.5
+ * @version		3.6.2
  */
 
+namespace WeCodeArt\Customizer;
+
+if ( ! defined( 'ABSPATH' ) ) exit(); 
+
 class Controls {
+
 	use \WeCodeArt\Singleton;  
 
 	/**
@@ -48,8 +50,9 @@ class Controls {
 	/**
 	 * Add Control to self::$controls and Register control to WordPress Customizer.
 	 *
-	 * @param 	String $name Slug for the control.
-	 * @param 	Array  $atts Control Attributes.
+	 * @param 	string $name Slug for the control.
+	 * @param 	array  $atts Control Attributes.
+	 *
 	 * @return 	void
 	 */
 	public static function add_control( $name, $atts ) {
@@ -58,8 +61,10 @@ class Controls {
 
 	/**
 	 * Returns control instance
-	 * @param  	string 	$control_type control type.
+	 *
 	 * @since 	3.5
+	 * @param  	string 	$control_type control type.
+	 *
 	 * @return 	string
 	 */
 	public static function get_control_instance( $control_type ) {
@@ -72,8 +77,10 @@ class Controls {
 
 	/**
 	 * Returns control and its attributes
-	 * @param  	string 	$control_type control type.
+	 *
 	 * @since 	3.5
+	 * @param  	string 	$control_type control type.
+	 *
 	 * @return 	array
 	 */
 	public static function get_control( $control_type ) {
@@ -83,8 +90,10 @@ class Controls {
 
 	/**
 	 * Returns Santize callback for control
-	 * @param  	string 	$control control.
+	 *
 	 * @since 	3.5
+	 * @param  	string 	$control control.
+	 *
 	 * @return 	string
 	 */
 	public static function get_sanitize_call( $control ) {

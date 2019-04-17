@@ -7,8 +7,8 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Protected Template
- * @since 		v3.5
- * @version		v3.7.0
+ * @since 	    3.5
+ * @version	    3.7.3
  */
     global $post;
     $label = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
@@ -18,7 +18,7 @@
     <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text">
-                <?php _e( 'Password', 'wecodeart' ); ?>:
+                <?php esc_html_e( 'Password', 'wecodeart' ); ?>:
             </span>
         </div>
         <div class="input-group">

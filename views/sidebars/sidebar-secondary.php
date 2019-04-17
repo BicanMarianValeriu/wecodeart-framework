@@ -1,4 +1,4 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit(); // Exit if accessed directly
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -7,9 +7,11 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Secondary Sidebar
- * @since 		v3.0.4
- * @version		v3.5
+ * @since 		3.0.4
+ * @version		3.5
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit();
 ?>
 <aside id="secondary-sidebar" class="secondary-sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
 	<?php 

@@ -18,6 +18,7 @@
         do_action( 'wecodeart/hook/footer/before' );	// Hook Before Footer
         do_action( 'wecodeart_footer_markup' 	  );	// WeCodeArt Footer
         do_action( 'wecodeart/hook/footer/after'  );	// Hook After Footer
+        
         wp_footer(); 									// WordPress Footer 
     ?>
     </body>

@@ -44,12 +44,14 @@ class Content {
 	
 	/**
 	 * Echo the opening tag markup for content
+	 *
 	 * @since 	unknown
 	 * @version	3.6.4
-	 * @return 	string HTML 
+	 *
+	 * @return 	string 
 	 */
 	public function content_markup_open() { 
-		// Adds ability to filter the attributes of main content
+		// Adds ability to filter the attributes of main content.
 		$attributes = Markup::generate_attr(
 			'content',
 			[
@@ -81,9 +83,11 @@ class Content {
 
 	/**
 	 * Echo the ending tag markup for content
+	 *
 	 * @since 	unknown
 	 * @version	3.5
-	 * @return 	string HTML
+	 *
+	 * @return 	string
 	 */
 	public function content_markup_close() {	
 		?>
@@ -102,9 +106,11 @@ class Content {
 
 	/**
 	 * Return the required loop based on conditionals
-	 * @since	v1.0
-	 * @version v3.5
-	 * @return	WeCodeArt Loop
+	 *
+	 * @since	1.0
+	 * @version	3.5
+	 * 
+	 * @return	void
 	 */
 	public static function get_loop() {
 		if( is_404() ) Loops::fourofour();
@@ -113,9 +119,11 @@ class Content {
 
 	/**
 	 * Get Primary Sidebar View
+	 *
 	 * @since	1.0
 	 * @version	3.7.0
-	 * @return	HTML
+	 *
+	 * @return	void
 	 */
 	public static function display_primary_sidebar() {
 	 	Markup::wrap( 'sidebar-primary', [ [ 
@@ -129,9 +137,11 @@ class Content {
 
 	/**
 	 * Get Secondary Sidebar View
+	 *
 	 * @since	1.0
 	 * @version	3.7.0
-	 * @return	HTML
+	 *
+	 * @return	void
 	 */
 	public static function display_secondary_sidebar() {
 		Markup::wrap( 'sidebar-primary', [ [ 
@@ -145,8 +155,10 @@ class Content {
 
 	/**
 	 * Variable that holds the Header Modules and Options
-	 * @since	v1.5
-	 * @version v3.5
+	 *
+	 * @since	1.5
+	 * @version	3.5
+	 *
 	 * @return 	array
 	 */
 	public static function content_modules() {
@@ -199,10 +211,12 @@ class Content {
 
 	/**
 	 * Return the Inner final HTML with modules selected by user for each page.
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::sortable();
 	 * @since 	unknown
 	 * @version	3.5
-	 * @uses	WeCodeArt\Utilities\Markup::sortable();
-	 * @return 	HTML
+	 *
+	 * @return 	void
 	 */
 	public static function sort_modules() {
 		// Everywhere/Defaults
@@ -214,8 +228,10 @@ class Content {
 
 	/**
 	 * Get Contextual Modules Options
+	 *
 	 * @since 	3.5.0
 	 * @version	3.6.1
+	 *
 	 * @return 	array 
 	 */
 	public static function get_contextual_options() {
@@ -279,8 +295,10 @@ class Content {
 
 	/**
 	 * Return the Inner final HTML with modules selected by user for each page.
+	 *
 	 * @since	1.0
 	 * @version	3.6.0.4
+	 *
 	 * @return 	void
 	 */
 	public function register_sidebars() {

@@ -6,10 +6,10 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage  Markup Functions
+ * @subpackage  Utilities\Markup
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.2
+ * @version		3.7.3
  */
 
 namespace WeCodeArt\Utilities;
@@ -33,10 +33,11 @@ class Markup {
 	 *
 	 * @return 	array 	Merged and filtered attributes.
 	 */
-	public static function parse_attr( $context, $attributes = array(), $args = array() ) {
-		$defaults = array(
-			'class' => sanitize_html_class( $context ),
-		);
+	public static function parse_attr( $context, $attributes = [], $args = [] ) {
+		$defaults = [
+			'class' => sanitize_html_class( $context )
+		];
+
 		$attributes = wp_parse_args( $attributes, $defaults );
 
 		// Contextual filter.
@@ -52,7 +53,7 @@ class Markup {
 	 * @param 	array  	$attributes Optional. Extra attributes to merge with defaults.
 	 * @param 	array  	$args       Optional. Custom data to pass to filter.
 	 *
-	 * @return 	string 	String of HTML attributes and values.
+	 * @return 	string
 	 */
 	public static function generate_attr( $context, $attributes = array(), $args = array() ) {
 		$attributes = self::parse_attr( $context, $attributes, $args );
@@ -76,38 +77,39 @@ class Markup {
 	 * @param 	array 	options	required
 	 * @param 	boolean	echo	optional
 	 *
-	 * @return 	string/object 	HTML/WP_Error
+	 * @return 	string|object 	HTML/WP_Error
 	 */
 	public static function sortable( array $modules, array $options, $echo = true ) { 
 		$_callbacks = array_map( function( $module ) {
-			return array_key_exists( 'callback', $module ); 
+			return ( isset( $module['callback'] ) && is_callable( $module['callback'] ) ); 
 		}, $modules );
 
-		// Only run if we have callbacks set for all of the modules
+		// Only run if we have callbacks set for all of the modules.
 		if( count( array_unique( $_callbacks ) ) !== 1  ) {
 			return new \WP_Error( 'wecodeart_markup_has_no_callbacks', 
-				__( 'Some of the modules array item does not have a callback function defined.', 'wecodeart' ) 
+				__( 'Please define a callback function for each of the modules.', 'wecodeart' ) 
 			);
 		}
 
-		// Variable Holder
-		$functions = array();
+		$functions = [];
 		
 		// If key from options exists in modules array, loads it's callback functions.
-		foreach( $options as $opt ) if( array_key_exists( $opt, $modules ) ) $functions[] = $modules[$opt]['callback'];
+		foreach( $options as $opt ) {
+			if( array_key_exists( $opt, $modules ) ) {
+				$functions[] = $modules[$opt]['callback'];
+			}
+		}
 
 		// Bail if there are no functions to return.
 		if( ! $functions ) return;
 		
-		// Build the HTML
+		// Build the HTML.
 		$output = '';
 		ob_start();
-		foreach( $functions as $f ) {
-			if( is_array( $f ) && method_exists( $f[0], $f[1] ) || is_string( $f ) && function_exists( $f ) ) 
-				call_user_func( $f );
-		}
-		$output .= ob_get_clean();	
-		// Return the output
+		foreach( $functions as $func ) call_user_func( $func );
+		$output .= ob_get_clean();
+
+		// Return the output.
 		if( $echo ) echo $output; 
 		else return $output;
 	}
@@ -171,9 +173,9 @@ class Markup {
 		 * Close the wrappers in reverse order
 		 * @since 3.7.2
 		 */
-		$args = array_reverse( $args );
+		$_args = array_reverse( $args );
 
-		foreach( $args as $key => $elem ) {
+		foreach( $_args as $key => $elem ) {
 			$html .= '</' . esc_html( $elem['tag'] ) . '>';
 		}
 
@@ -182,20 +184,40 @@ class Markup {
 		 * @since 3.7.0
 		 */
 		if( WP_DEBUG === true ) {
-			$comment = implode( '.', explode( ' ', $args[0]['attrs']['class'] ) );
+			$classes = explode( ' ', $args[0]['attrs']['class'] );
+			$comment = ( count( $classes ) > 0 ) ? $classes[0] : $args[0]['attrs']['class'];
 			$comment .= " @filter = `wecodeart/filter/attributes/{$context}`";
 			$html .= "<!-- /.{$comment} -->";
 		}
 
 		/**
 		 * Filter the final HTML output of the function
-		 * @since 	3.6.0
-		 * @return 	string of HTML
+		 * @since 3.6.0
 		 */
 		$output = apply_filters( "wecodeart/filter/wrap/{$context}/output", $html, $context );
 
-		// Return the output
+		// Return the output.
 		if( $echo ) echo $output; 
 		else return $output;
+	}
+
+	/**
+	 * Renders template file with data.
+	 *
+	 * @since	3.7.3
+	 *
+	 * @param  string $file Relative path to the template file.
+	 * @param  array  $data Dataset for the template.
+	 *
+	 * @return void
+	 */
+	public static function template( $file, $data = [] ) {
+		$template = new Markup\Template( [
+			'directory' => get_stylesheet_directory(),
+			'templates' => 'views',
+			'extension' => '.tpl.php'
+		] );
+
+		return $template->set_file( $file )->render( $data );
 	}
 }

@@ -1,11 +1,4 @@
-<?php namespace WeCodeArt\Core;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
-// Use
-use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\SVG;
-use WeCodeArt\Support\WooCommerce\Callbacks;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -13,13 +6,26 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Archive Intro Class
+ * @subpackage 	Core\Archive
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.2
+ * @since		3.5
+ * @version		3.7.3
  */
 
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Utilities\Helpers;
+use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Support\WooCommerce\Callbacks;
+
+/**
+ * Adds some output to archive pages
+ */
 class Archive {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -29,19 +35,21 @@ class Archive {
 	public function __construct() {
 		add_filter( 'get_the_archive_title', 		[ $this, 'filter_cat_title' 	] );
 		add_action( 'wecodeart/hook/inner/top',		[ $this, 'render_intro_markup' 	], 15 );
-		add_action( 'wecodeart/hook/inner/top', 	[ $this, 'render_author_box'	], 20 ); 
+		add_action( 'wecodeart/hook/inner/top', 	[ Author::get_instance(), 'author_box_archive' ], 20 );
 	}
 	
 	/**
 	 * Echo the Archive Intro Markup
+	 *
 	 * @since 	unknown
-	 * @version	3.5
-	 * @return 	HTML 
+	 * @version	3.7.3
+	 *
+	 * @return 	void 
 	 */
 	public function render_intro_markup() {
-		// Don't enable on author archive / WooCommerce
+		// Don't enable on author archive / WooCommerce.
 		if( ! is_archive() && ! is_search() || is_author() || 
-			( Helpers::detectplugin( [ 'classes' => [ 'woocommerce' ] ] ) && is_woocommerce() )
+			( Helpers::detect_plugin( [ 'classes' => [ 'woocommerce' ] ] ) && is_woocommerce() )
 		) return;
 
 		$options = Content::get_contextual_options(); 
@@ -53,32 +61,23 @@ class Archive {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col' ] ]
 		];
 
-		Markup::wrap( 'archive-intro-wrappers', $wrappers, 'the_archive_title' );
+		Markup::wrap( 'archive-intro', $wrappers, 'the_archive_title' );
 		
-	}
+	} 
 
 	/**
-	 * Echo the Archive Intro Markup
-	 * @since 	unknown
-	 * @version	v3.5
-	 * @return 	string HTML 
-	 */
-	public function render_author_box() {
-		// Filter to give posibility for disable
-		if( apply_filters( 'wecodeart/filter/author-box/archive', true ) ) { 
-			if( is_author() ) get_template_part( 'views/author/author' );
-		}
-	}
-
-	/**
-	 * Filter category title 
-	 * @since 	v3.5
-	 * @version	v3.5
-	 * @return 	string HTML 
+	 * Filter category title
+	 *
+	 * @since	3.5
+	 * @version	3.5
+	 *
+	 * @return 	string
 	 */
 	public function filter_cat_title() {
 		$output = '<span class="archive-intro__svg">' . SVG::compile( 'icon--folder' ) . '</span> ';
+
 		$title_template = '<span class="archive-intro__title">%s</span>';
+
 		if ( is_search() ) {
 			$output = sprintf( $title_template, sprintf( __( 'Search Results for "%s"', 'wecodeart' ), '<span>' .  get_search_query() . '</span>' ) );
 		} elseif ( is_category() ) {

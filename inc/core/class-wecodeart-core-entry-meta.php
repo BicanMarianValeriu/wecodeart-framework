@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.6
- * @version		3.7.1
+ * @version		3.7.3
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -32,14 +32,14 @@ class Meta {
 	 * @since 3.6.4
 	 */
 	public function init() {
-		add_action( 'wecodeart/hook/entry/header', [ $this, 'render' ], 20 ); 
+		add_action( 'wecodeart/hook/entry/header', [ $this, 'render' ], 30 ); 
 	}
 	
 	/**
 	 * Entry Meta Author Template
 	 *
 	 * @since	1.0
-	 * @version	3.6.0
+	 * @version	3.7.3
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -53,12 +53,12 @@ class Meta {
 		$url    	= get_author_posts_url( $author_id );
 
 		// In order to render something when ajax refreshed in customizer.
-		$author = $author ? $author : __( 'Author Name', 'wecodeart' );
+		$author = $author ? $author : esc_html__( 'Author Name', 'wecodeart' );
 		
 		$defaults = array(
 			'before'	=> SVG::compile( 'icon--user' ),
 			'after'  	=> '&nbsp;',
-			'sr_text'  	=>  __( 'Posted by ', 'wecodeart' ),
+			'sr_text'  	=>  esc_html__( 'Posted by ', 'wecodeart' ),
 		);
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/author/defaults', $defaults ) );
@@ -82,7 +82,7 @@ class Meta {
 	 * Entry Meta Date Template
 	 *
 	 * @since	1.0
-	 * @version	3.6
+	 * @version	3.7.3
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -94,7 +94,7 @@ class Meta {
 		$defaults = array(
 			'before'	=> SVG::compile( 'icon--clock' ),
 			'after'  	=> '&nbsp;',
-			'sr_text'  	=> __( 'Posted on ', 'wecodeart' ),
+			'sr_text'  	=> esc_html__( 'Posted on ', 'wecodeart' ),
 		);
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/date/defaults', $defaults ) );
@@ -129,7 +129,7 @@ class Meta {
 	 * Entry Meta Categories Template
 	 *
 	 * @since	1.0
-	 * @version	3.6
+	 * @version	3.7.3
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -141,7 +141,7 @@ class Meta {
 		$defaults = [
 			'before' 	=> SVG::compile( 'icon--folder' ),
 			'after'  	=> '&nbsp;',
-			'sr_text'	=> __( 'Posted in ', 'wecodeart' ),
+			'sr_text'	=> esc_html__( 'Posted in ', 'wecodeart' ),
 			'sep'    	=> ', ',
 		];
 
@@ -171,7 +171,7 @@ class Meta {
 	 * Entry Meta Tags Template
 	 *
 	 * @since	1.0
-	 * @version	3.6
+	 * @version	3.7.3
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -183,14 +183,14 @@ class Meta {
 		$defaults = array(
 			'before'  	=> SVG::compile( 'icon--tag' ),
 			'after'  	=> '&nbsp;',
-			'sr_text'	=> __( 'Tagged with ', 'wecodeart' ),
+			'sr_text'	=> esc_html__( 'Tagged with ', 'wecodeart' ),
 			'sep'  		=> ', ',
 		);
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/tags/defaults', $defaults ) );
 
 		// Get what we need
-		$tags = get_the_tag_list( '', trim( $args['sep'] ), '' );
+		$tags = get_the_tag_list( '', $args['sep'] , '' );
 
 		// Do nothing if no tags
 		if ( ! $tags ) return;
@@ -214,7 +214,7 @@ class Meta {
 	 * Entry Meta Comments Template
 	 *
 	 * @since	1.0
-	 * @version	3.6
+	 * @version	3.7.3
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -230,9 +230,9 @@ class Meta {
 			'before'       	=> SVG::compile( 'icon--comments' ),
 			'after'      	=> '&nbsp;',
 			'hide_if_off' 	=> true,
-			'more'        	=> __( '% Comments', 'wecodeart' ),
-			'one'         	=> __( '1 Comment', 'wecodeart' ),
-			'zero'        	=> __( 'Leave a Comment', 'wecodeart' ),
+			'more'        	=> esc_html__( '% Comments', 'wecodeart' ),
+			'one'         	=> esc_html__( '1 Comment', 'wecodeart' ),
+			'zero'        	=> esc_html__( 'Leave a Comment', 'wecodeart' ),
 		);
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/comments/defaults', $defaults ) );
@@ -303,7 +303,7 @@ class Meta {
 	 * Entry Meta Read More Template
 	 *
 	 * @since	1.0
-	 * @version	3.6.0.7
+	 * @version	3.7.3
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -315,7 +315,7 @@ class Meta {
 		$defaults = array(
 			'before'	=> '',
 			'after' 	=> '<span aria-hidden="true">&#xbb;</span><span class="screen-reader-text">' . get_the_title() . '</span>',
-			'text' 		=> __( 'Read More', 'wecodeart' ),
+			'text' 		=> esc_html__( 'Read More', 'wecodeart' ),
 			'class' 	=> 'entry-more btn btn-primary',
 		);
 
@@ -424,7 +424,7 @@ class Meta {
 	 * @return 	void
 	 */
 	public static function render() {
-		// Do dont return on CPT Without Support
+		// Do dont return on CPT Without Support.
 		if( ! post_type_supports( get_post_type(), 'wecodeart-post-info' ) ) return; 
 
 		$wrappers = array( [ 'tag' => 'div', 'attrs' => [ 'class' => 'entry-meta' ] ] );

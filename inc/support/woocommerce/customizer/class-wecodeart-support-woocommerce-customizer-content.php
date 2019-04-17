@@ -1,10 +1,4 @@
-<?php namespace WeCodeArt\Support\WooCommerce\Customizer;
-// No direct access, please.
-if ( ! defined( 'ABSPATH' ) ) exit;
-// Use
-use WeCodeArt\Customizer\Config as Config;
-use WeCodeArt\Customizer\Formatting as Formatting;
-use WeCodeArt\Support\WooCommerce\Callbacks;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -14,9 +8,17 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.0.3
+ * @since 		3.5
+ * @version		3.6.0.3
  */
+
+namespace WeCodeArt\Support\WooCommerce\Customizer;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use WeCodeArt\Customizer\Config as Config;
+use WeCodeArt\Customizer\Formatting as Formatting;
+use WeCodeArt\Support\WooCommerce\Callbacks;
 
 /**
  * Customizer Config initial setup
@@ -24,10 +26,13 @@ use WeCodeArt\Support\WooCommerce\Callbacks;
 class Content extends Config {
 	/**
 	 * Register Site Layout Customizer Configurations.
-	 * @param 	Array                $configurations 
-	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
+	 *
+	 * @param 	array	$configurations 
+	 * @param 	object	$wp_customize  	instance of WP_Customize_Manager.
+	 *
 	 * @since 	3.5
-	 * @return 	Array 
+	 *
+	 * @return 	array 
 	 */
 	public function register( $configurations, $wp_customize ) {
 		// A handy class for formatting theme mods.

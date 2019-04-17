@@ -1,27 +1,31 @@
-<?php namespace WeCodeArt\Customizer;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit();
+<?php
 /**
  * Class to handle sanitization for WeCodeArt Framework Customizer
  * 
  * @package 	WeCodeArt Framework
- * @subpackage 	Customizer Formatting
+ * @subpackage 	Customizer\Formatting
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v1.6
- * @version 	v3.6.2
+ * @since 		1.6
+ * @version 	3.6.2
  */ 
 
-final class Formatting {
-	use \WeCodeArt\Singleton;  
+namespace WeCodeArt\Customizer;
 
-	// Don't let any other code un-singleton this class.
-	private function __construct() {}
-	private function __clone() {} 
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+/**
+ * Customizer Sanitizers
+ */
+final class Formatting {
+
+	use \WeCodeArt\Singleton;
 	
 	/**
 	 * Sanitize a value for use as a linear CSS value.
 	 * Stuff like, `10px`, `5em`, `20%`, `calc( 100% - 30px )`.
+	 *
 	 * @param  $string string Any string.
+	 *
 	 * @return string  The provided string, sanitized for linear CSS.
 	 */
 	public static function wecodeart_sanitize_linear_css( $string ) {
@@ -32,6 +36,7 @@ final class Formatting {
 	
 	/**
 	 * Sanitize checkbox inputs.
+	 *
 	 * @return 	1/0 (enabled/disabled).
 	 */
 	public static function wecodeart_sanitize_checkbox( $input ) {
@@ -40,9 +45,11 @@ final class Formatting {
 	}
 	
 	/**
-	 * Sanitize Select and Radios.
+	 * Sanitize Select and Radios
+	 *
 	 * @param  	string 	$input    setting input.
 	 * @param  	object 	$setting  setting object.
+	 *
 	 * @return 	array 	choices/default
 	 */
 	public static function sanitize_choices( $input, $setting ) {
@@ -51,9 +58,11 @@ final class Formatting {
 	}
 	
 	/**
-	 * Sanitize Sortable Choices Control.
+	 * Sanitize Sortable Choices Control
+	 *
 	 * @param  string $input    setting input.
 	 * @param  object $setting  setting object.
+	 *
 	 * @return mixed            setting input value.
 	 */
 	public static function sanitize_sortable_choices( $input, $setting ) {	
@@ -64,8 +73,10 @@ final class Formatting {
 
 	/**
 	 * Sanitize Number
+	 *
 	 * @param  int 		$val      Customizer setting input number.
 	 * @param  object 	$setting  Setting object.
+	 *
 	 * @return int		Return number.
 	 */
 	public static function sanitize_number( $val, $setting ) {

@@ -1,6 +1,4 @@
-<?php namespace WeCodeArt;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+<?php
 /**
  * WeCodeArt Framework
  *
@@ -10,11 +8,19 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * @package 	WeCodeArt Framework 
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		v3.5
- * @version 	v3.6.3
+ * @since		3.5
+ * @version		3.6.3
  */
- 
+
+namespace WeCodeArt;
+
+if ( ! defined( 'ABSPATH' ) ) exit(); 
+
+/**
+ * Activation - runs first before any other class to make sure user meets the requirements
+ */
 class Activation {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -104,6 +110,7 @@ class Activation {
 
 	/**
 	 * Compare Requirements
+	 *
 	 * @since 	3.5
 	 * @version	3.5
 	 */
@@ -116,17 +123,19 @@ class Activation {
 
 	/**
 	 * Show an error notice box
+	 *
 	 * @since 	1.8
 	 * @version	3.5
 	 */
 	public function after_switch_theme() {	 
 		switch_theme( WP_DEFAULT_THEME );
 		unset( $_GET['activated'] );
-		add_action( 'admin_notices', array( $this, 'admin_notice' ) ); 
+		add_action( 'admin_notices', [ $this, 'admin_notice' ] ); 
 	}
 
 	/**
 	 * Show an error notice box
+	 *
 	 * @since 	1.8
 	 * @version	3.5 
 	 */
@@ -142,6 +151,7 @@ class Activation {
 
 	/**
 	 * Show an error notice box on WP Customizer
+	 *
 	 * @since 	1.8
 	 * @version	3.5 
 	 */
@@ -149,7 +159,7 @@ class Activation {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
 			if( $val['failed'] === true ) {
-				wp_die( $this->messages['customizer'], '', array( 'back_link' => true ) );
+				wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
 				break;
 			}
 		} 
@@ -157,6 +167,7 @@ class Activation {
 
 	/**
 	 * Prevents the Theme Preview from being loaded.
+	 *
 	 * @since 	1.8
 	 * @version	3.5 
 	 */

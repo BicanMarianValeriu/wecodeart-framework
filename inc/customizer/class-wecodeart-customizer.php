@@ -1,12 +1,4 @@
-<?php namespace WeCodeArt;
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit(); 
-
-// Use 
-use WeCodeArt\Customizer\Partials;
-use WeCodeArt\Customizer\Controls;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -20,11 +12,23 @@ use WeCodeArt\Customizer\Controls;
  * @version		3.7.0
  */
 
+namespace WeCodeArt;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WeCodeArt\Customizer\Partials;
+use WeCodeArt\Customizer\Controls;
+
+/**
+ * Customizer Options
+ */
 class Customizer {
+
 	use \WeCodeArt\Singleton; 
 
 	/**
 	 * Customizer Configurations.
+	 *
 	 * @access 	private
 	 * @since 	3.5
 	 * @var 	array
@@ -76,6 +80,7 @@ class Customizer {
 
 	/**
 	 * Return default values for the Customize Configuration.
+	 *
 	 * @since 	3.5
 	 * @return 	array default values for the Customizer Configurations.
 	 */
@@ -105,6 +110,7 @@ class Customizer {
 
 	/**
 	 * Filter and return Customizer Configurations.
+	 *
 	 * @param 	WP_Customize_Manager $wp_customize Reference to WP_Customize_Manager.
 	 * @since 	3.5
 	 * @return 	Array Customizer Configurations for registering Sections/Panels/Controls.
@@ -116,6 +122,7 @@ class Customizer {
 
 	/**
 	 * Grab our Customizer Defaults.
+	 *
 	 * @param 	string 		mod_name
 	 * @version	3.7.0
 	 * @return 	mixed/array
@@ -166,6 +173,7 @@ class Customizer {
 
 	/**
 	 * Adds a value to each setting if one isn't already present.
+	 *
 	 * @uses get_defaults()
 	 */
 	public function set_defaults() {
@@ -176,6 +184,7 @@ class Customizer {
 
 	/**
 	 * Apply Customizer setting defaults.
+	 *
 	 * @param  object $wp_customize the Customizer object.
 	 * @uses   get_defaults()
 	 */
@@ -185,6 +194,7 @@ class Customizer {
 	
 	/**
 	 * Get theme mod value.
+	 *
 	 * @param 	string $value
 	 * @return 	string
 	 */
@@ -201,6 +211,7 @@ class Customizer {
 
 	/**
 	 * Get theme Mods
+	 *
 	 * @since 	3.5
 	 * @uses 	get_theme_mods()
 	 * @uses 	self::get_defaults()
@@ -211,8 +222,10 @@ class Customizer {
 
 	/**
 	 * Process and Register Customizer Panels, Sections, Settings and Controls.
+	 *
 	 * @param 	WP_Customize_Manager $wp_customize Reference to WP_Customize_Manager.
 	 * @since 	3.5
+	 *
 	 * @return 	void
 	 */
 	public function register_settings( $wp_customize ) {
@@ -240,9 +253,11 @@ class Customizer {
 	
 	/**
 	 * Register Customizer Panel.
+	 *
 	 * @param 	Array                $config Panel Configuration settings.
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
 	 * @since 	3.5
+	 *
 	 * @return 	void
 	 */
 	private function register_panel( $config, $wp_customize ) {
@@ -253,9 +268,11 @@ class Customizer {
 
 	/**
 	 * Register Customizer Section.
+	 *
 	 * @param 	Array                $config Panel Configuration settings.
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
 	 * @since 	3.5
+	 *
 	 * @return 	void
 	 */
 	private function register_section( $config, $wp_customize ) {
@@ -265,15 +282,17 @@ class Customizer {
 	
 	/**
 	 * Register Customizer Control and Setting.
+	 *
 	 * @param 	Array                $config Panel Configuration settings.
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
 	 * @since 	3.5
+	 *
 	 * @return 	void
 	 */
 	private function register_control( $config, $wp_customize ) {
 		$wp_customize->add_setting(
 			wecodeart_get_prop( $config, 'name' ),
-			array( 
+			[
 				// Default of the 'default' is null if not exists since we apply it with wp filter after theme setup
 				'default'			=> wecodeart_get_prop( $config, 'default', false ),
 				'type'              => wecodeart_get_prop( $config, 'datastore_type' ),
@@ -282,7 +301,7 @@ class Customizer {
 					// Set Sanitize Callback Automatically
 					Customizer\Controls::get_sanitize_call( wecodeart_get_prop( $config, 'control' ) ) 
 				),
-			)
+			]
 		);
 
 		$instance = Customizer\Controls::get_control_instance( wecodeart_get_prop( $config, 'control' ) );
@@ -306,14 +325,11 @@ class Customizer {
 		 */
 		if ( wecodeart_get_prop( $config, 'partial', false ) ) {
 			if ( isset( $wp_customize->selective_refresh ) ) {
-				$wp_customize->selective_refresh->add_partial(
-					wecodeart_get_prop( $config, 'name' ),
-					array(
-						'selector'            => wecodeart_get_prop( $config['partial'], 'selector' ),
-						'container_inclusive' => wecodeart_get_prop( $config['partial'], 'container_inclusive' ),
-						'render_callback'     => wecodeart_get_prop( $config['partial'], 'render_callback' ),
-					)
-				);
+				$wp_customize->selective_refresh->add_partial( wecodeart_get_prop( $config, 'name' ), [
+					'selector'            => wecodeart_get_prop( $config['partial'], 'selector' ),
+					'container_inclusive' => wecodeart_get_prop( $config['partial'], 'container_inclusive' ),
+					'render_callback'     => wecodeart_get_prop( $config['partial'], 'render_callback' ),
+				] );
 			}
 		}
 	}

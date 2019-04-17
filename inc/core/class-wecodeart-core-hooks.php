@@ -1,8 +1,4 @@
-<?php namespace WeCodeArt\Core;
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit(); 
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -10,13 +6,21 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	General Hooks
+ * @subpackage 	Core\Hooks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.0
- * @version		v3.6.3
+ * @since 		3.0
+ * @version		3.6.3
  */
 
+namespace WeCodeArt\Core;
+
+if ( ! defined( 'ABSPATH' ) ) exit(); 
+
+/**
+ * General Hooks
+ */
 class Hooks {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -50,7 +54,9 @@ class Hooks {
 		
 		// Page Has Sidebar
 		foreach( $all_pages as $page ) { 
-			if( is_page( $page->ID ) ) $has_sidebar = get_theme_mod( 'content-layout-modules-page-' . $page->ID, [] );
+			if( is_page( $page->ID ) ) {
+				$has_sidebar = get_theme_mod( 'content-layout-modules-page-' . $page->ID, $has_sidebar );
+			}
 		}
 		
 		// Blog Has Sidebar

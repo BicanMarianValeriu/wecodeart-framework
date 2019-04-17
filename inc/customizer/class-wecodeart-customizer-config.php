@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @package 	WeCodeArt Framework
  * @subpackage 	WP-Customizer Config
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6.0.5
+ * @since 		3.5
+ * @version		3.6.0.5
  */
 
 /**

@@ -1,10 +1,4 @@
-<?php namespace WeCodeArt\Customizer\Extender;
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit(); 
-// Use
-use WP_Customize_Panel as WP_Customize_Panel;
-// If exists return null.
-if ( class_exists( 'WeCodeArt\Customizer\Extender\Panel' ) ) return NULL;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -14,13 +8,25 @@ if ( class_exists( 'WeCodeArt\Customizer\Extender\Panel' ) ) return NULL;
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer/Extends
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.5
+ * @since 		3.5
+ * @version		3.5
  */
 
+namespace WeCodeArt\Customizer\Extender;
+
+if ( ! defined( 'ABSPATH' ) ) exit();
+
+use WP_Customize_Panel;
+
+if ( class_exists( 'WeCodeArt\Customizer\Extender\Panel' ) ) return NULL;
+
+/**
+ * Custom Panel
+ */
 class Panel extends WP_Customize_Panel {
 	/**
 	 * Panel
+	 *
 	 * @since 3.5
 	 * @var string
 	 */
@@ -28,6 +34,7 @@ class Panel extends WP_Customize_Panel {
 
 	/**
 	 * Control type.
+	 *
 	 * @since  	3.5
 	 * @var 	string
 	 */
@@ -35,7 +42,9 @@ class Panel extends WP_Customize_Panel {
 
 	/**
 	 * Get panel parameters for JS.
+	 *
 	 * @since 	3.5
+	 *
 	 * @return 	array Exported parameters.
 	 */
 	public function json() {

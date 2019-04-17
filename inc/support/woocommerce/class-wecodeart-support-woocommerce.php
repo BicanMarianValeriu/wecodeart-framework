@@ -1,11 +1,4 @@
-<?php namespace WeCodeArt\Support;
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
-use WeCodeArt\Core\Content;
-use WeCodeArt\Core\Pagination;
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Customizer;
-
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -15,15 +8,25 @@ use WeCodeArt\Customizer;
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v1.9
- * @version		v3.7.0
+ * @since 		1.9
+ * @version		3.7.3
  */
+
+namespace WeCodeArt\Support;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use WeCodeArt\Core\Content;
+use WeCodeArt\Core\Pagination;
+use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Customizer;
 
 /**
  * The Class: Handles all necesary functions and requirements 
  * to ensure proper support for WooCommerce
  */
 class WooCommerce {
+
 	use \WeCodeArt\Singleton; 
 
 	/**
@@ -66,10 +69,11 @@ class WooCommerce {
 	}  
 	
 	/**
-	 * Before Content
-	 * Wraps all WooCommerce content in wrappers which match the theme markup
+	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup
+	 *
 	 * @since   3.5
 	 * @version 3.7.0
+	 *
 	 * @return  void
 	 */
 	public function before_content_wrapp() { 
@@ -97,9 +101,10 @@ class WooCommerce {
 	}
 
 	/**
-	 * After Content
-	 * Wraps all WooCommerce content in wrappers which match the theme markup
+	 * After Content - Wraps all WooCommerce content in wrappers which match the theme markup
+	 *
 	 * @since   3.5
+	 *
 	 * @return  void
 	 */
 	public function after_content_wrapp() { 
@@ -113,9 +118,13 @@ class WooCommerce {
 	
 	/**
 	 * Sort Content Modules based on position
+	 *
 	 * @since 	unknown
-	 * @version	v3.6.3
+	 * @version	3.6.3
+	 *
 	 * @param 	string 	$position Accepts before/after - render sorted modules before/after woocommerce content.
+	 *
+	 * @return 	void
 	 */
 	public static function sort_modules( string $position ) {  
 		if( WooCommerce\Callbacks::_is_woocommerce_archive() === true ) {
@@ -142,8 +151,11 @@ class WooCommerce {
 
 	/**
 	 * Register WooCommerce Shop Sidebar
-	 * @since	v3.3
-	 * @version v3.6.3
+	 *
+	 * @since	3.3
+	 * @version	3.6.3
+	 *
+	 * @return 	void
 	 */
 	public function register_sidebars() {  
 		register_sidebar( [
@@ -158,13 +170,16 @@ class WooCommerce {
 
 	/**
 	 * Get Shop Sidebar HTML
-	 * @uses	Markup::wrap()
+	 *
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @since	3.6
-	 * @version 3.7.0
+	 * @version 3.7.3
+	 *
+	 * @return 	void
 	 */
 	public static function display_sidebar() {
 		// Adds ability to filter the attributes of secondary sidebar
-		$attributes = Markup::wrap( 'sidebar-shop', [ [
+		Markup::wrap( 'sidebar-shop', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
 				'id' 	=> 'secondary-shop',
@@ -175,7 +190,8 @@ class WooCommerce {
 
 	/**
 	 * Filter - WooCommerce Header Bar Cart Module
-	 * @since	 3.5
+	 *
+	 * @since	3.5
 	 */
 	public function add_cart_to_header_modules( $modules ) {
 		$modules['cart'] = array(
@@ -188,8 +204,10 @@ class WooCommerce {
 
 	/**
 	 * Render Header Bar Cart Module
+	 *
 	 * @since   3.5
 	 * @version 3.6.3
+	 *
 	 * @return  void
 	 */
 	public static function display_cart_module() {
@@ -235,8 +253,13 @@ class WooCommerce {
 
 	/**
 	 * Filter - Cart Fragments
+	 *
 	 * @since 	3.5
 	 * @version	3.6.3
+	 *
+	 * @param 	array	fragments
+	 *
+	 * @return	array
 	 */
 	public function cart_count_fragments( $fragments ) {
 

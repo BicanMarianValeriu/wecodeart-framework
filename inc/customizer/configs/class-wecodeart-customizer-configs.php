@@ -1,8 +1,4 @@
-<?php namespace WeCodeArt\Customizer;
-// No direct access, please.
-if ( ! defined( 'ABSPATH' ) ) exit;
-// Use
-use WeCodeArt\Customizer\Config as Config;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -10,26 +6,33 @@ use WeCodeArt\Customizer\Config as Config;
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	WP-Customizer Config
+ * @subpackage 	Customizer\Configs
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		v3.5
- * @version		v3.6
+ * @since 		3.5
+ * @version		3.7.3
  */
+
+namespace WeCodeArt\Customizer;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use WeCodeArt\Customizer\Config;
 
 /**
  * Customizer Configs Panel/Sections
  */
 class Configs extends Config {
 	/**
-	 * Register Site Layout Customizer Configurations.
-	 * @param 	Array                $configurations 
+	 * Register Site Layout Customizer Configurations
+	 *
+	 * @param 	array                $configurations 
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
 	 * @since 	3.6
-	 * @return 	Array 
+	 *
+	 * @return 	array 
 	 */
 	public function register( $configurations, $wp_customize ) {
 		$configs = array(
-
 			/**
 			 * Header 
 			 */
@@ -37,13 +40,13 @@ class Configs extends Config {
 				'name'     => 'header',
 				'type'     => 'panel',
 				'priority' => 5,
-				'title'    => __( 'Header Settings', 'wecodeart' ) 
+				'title'    => esc_html__( 'Header Settings', 'wecodeart' ) 
 			),
 			array(
 				'name'     => 'header-bar',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => __( 'Header Bar', 'wecodeart' ),
+				'title'    => esc_html__( 'Header Bar', 'wecodeart' ),
 				'panel'    => 'header',
 			),
 			/**
@@ -53,20 +56,20 @@ class Configs extends Config {
 				'name'     => 'content',
 				'type'     => 'panel',
 				'priority' => 10,
-				'title'    => __( 'Content Settings', 'wecodeart' ) 
+				'title'    => esc_html__( 'Content Settings', 'wecodeart' ) 
 			),
 			array(
 				'name'     => 'content-layout',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => __( 'Layout Settings', 'wecodeart' ),
+				'title'    => esc_html__( 'Layout Settings', 'wecodeart' ),
 				'panel'    => 'content',
 			),
 			array(
 				'name'     => 'content-entry',
 				'type'     => 'section',
 				'priority' => 10,
-				'title'    => __( 'Entry Settings', 'wecodeart' ),
+				'title'    => esc_html__( 'Entry Settings', 'wecodeart' ),
 				'panel'    => 'content',
 			),
 			/**
@@ -76,20 +79,20 @@ class Configs extends Config {
 				'name'     => 'footer',
 				'type'     => 'panel',
 				'priority' => 15,
-				'title'    => __( 'Footer Settings', 'wecodeart' ) 
+				'title'    => esc_html__( 'Footer Settings', 'wecodeart' ) 
 			),
 			array(
 				'name'     => 'footer-layout',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => __( 'Layout Settings', 'wecodeart' ),
+				'title'    => esc_html__( 'Layout Settings', 'wecodeart' ),
 				'panel'    => 'footer',
 			),
 			array(
 				'name'     => 'footer-copyright',
 				'type'     => 'section',
 				'priority' => 10,
-				'title'    => __( 'Copyright', 'wecodeart' ),
+				'title'    => esc_html__( 'Copyright', 'wecodeart' ),
 				'panel'    => 'footer',
 			)
 		);

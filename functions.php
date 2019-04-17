@@ -7,8 +7,8 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Functions PHP
- * @since 		v1.0
- * @version		v3.5
+ * @since 	    1.0
+ * @version     3.5
 */
 
 require_once( get_template_directory() . '/inc/init.php' );

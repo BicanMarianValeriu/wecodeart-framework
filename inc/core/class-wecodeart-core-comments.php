@@ -9,7 +9,7 @@
  * @subpackage 	Core\Comments
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.1
+ * @version		3.7.3
  */
 
 namespace WeCodeArt\Core;
@@ -67,7 +67,7 @@ class Comments {
 	/**
 	 * Render Comments Info
 	 *
-	 * @since	3.7.0
+	 * @since	3.7.3
 	 *
 	 * @return 	string
 	 */
@@ -77,9 +77,9 @@ class Comments {
 
 		$defaults = [
 			'icon' 		=> SVG::compile( 'icon--comments' ) . ' ',
-			'empty' 	=> __( 'No comments, so go and ...', 'wecodeart' ),
+			'empty' 	=> esc_html__( 'No comments, so go and ...', 'wecodeart' ),
 			'closed'	=> false, // __( 'Comments are closed.', 'wecodeart' )
-			'add_one'	=> __( 'add one', 'wecodeart' ) 
+			'add_one'	=> esc_html__( 'add one', 'wecodeart' ) 
 		]; 
 
 		$args = apply_filters( 'wecodeart/filter/comments/get_comments_info/args', $defaults, get_post_type() );
@@ -235,7 +235,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	3.7.1
+	 * @version	3.7.3
 	 *
 	 * @return 	array
 	 */
@@ -245,7 +245,7 @@ class Comments {
 		$req       = get_option( 'require_name_email' );
 		
 		$author_name	= '<div class="comment-form-author col-12 col-md-7">' .
-			Input::compile( 'text', __( 'Name *', 'wecodeart' ), array( 
+			Input::compile( 'text', esc_html__( 'Name *', 'wecodeart' ), array( 
 				'id' 	=> 'author',
 				'class'	=> 'form-control',
 				'name' 	=> 'author', 
@@ -258,7 +258,7 @@ class Comments {
 		. '</div>';
 		
 		$author_email	= '<div class="comment-form-email col-12 col-md-7">' .
-			Input::compile( 'email', __( 'Email *', 'wecodeart' ), array( 			
+			Input::compile( 'email', esc_html__( 'Email *', 'wecodeart' ), array( 			
 				'id' 	=> 'email',
 				'class'	=> 'form-control',
 				'name' 	=> 'email',
@@ -271,7 +271,7 @@ class Comments {
 		. '</div>';
 		
 		$author_url		= '<div class="comment-form-url col-12 col-md-7">' .
-			Input::compile( 'url', __( 'Website', 'wecodeart' ), array( 
+			Input::compile( 'url', esc_html__( 'Website', 'wecodeart' ), array( 
 				'id' 	=> 'url',
 				'class'	=> 'form-control',
 				'name' 	=> 'url',
@@ -283,7 +283,7 @@ class Comments {
 		. '</div>';
 
 		$author_comment		= '<div class="comment-form-comment col-12">' .
-			Input::compile( 'textarea', __( 'Comment*', 'wecodeart' ), array( 
+			Input::compile( 'textarea', esc_html__( 'Comment*', 'wecodeart' ), array( 
 				'id' 	=> 'comment',
 				'class'	=> 'form-control',
 				'name' 	=> 'comment',
@@ -294,12 +294,12 @@ class Comments {
 			) 
 		. '</div>';
 		
-		$required_text 	= sprintf( ' ' . __( 'Required fiels are marked %s', 'wecodeart' ), '<span class="required">*</span>' );
-		$notes_before 	= '<div class="comment-notes col-12 mb-3">' . __( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
+		$required_text 	= sprintf( ' ' . esc_html__( 'Required fiels are marked %s', 'wecodeart' ), '<span class="required">*</span>' );
+		$notes_before 	= '<div class="comment-notes col-12 mb-3">' . esc_html__( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
 		$notes_after 	= '<div class="form-allowed-tags col-12 mb-3">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'wecodeart' ), ' <code>' . allowed_tags() . '</code>' ) . '</div>';
 
 		$args = array(
-			'title_reply' 			=> __( 'Speak Your Mind', 'wecodeart' ),
+			'title_reply' 			=> esc_html__( 'Speak Your Mind', 'wecodeart' ),
 			'comment_field' 		=> $author_comment,
 			'comment_notes_before' 	=> $notes_before,
 			'comment_notes_after' 	=> $notes_after,
