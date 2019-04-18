@@ -129,7 +129,7 @@ class Media {
 	/**
 	 * Get Image Ratio
 	 *
-	 * @since 	3.6.4
+	 * @since 	3.7.6
 	 *
 	 * @param  	int		$id
 	 * @param	string	$size
@@ -146,9 +146,12 @@ class Media {
 			if( array_key_exists( $size, $real_sizes['sizes'] ) ) {
 				$real_sizes = $real_sizes['sizes'][$size]; 
 			} 
-		}   
+		}
 
-		$real_ratio = $real_sizes['width'] / $real_sizes['height'];
+		if( ! empty( $real_sizes ) ) {
+			if( empty( $real_sizes['height'] ) ) $real_sizes['height'] = $real_sizes['width']; 
+			$real_ratio = $real_sizes['width'] / $real_sizes['height'];
+		}
 
 		if( $real_ratio > $dummy_ratio ) $ratio_class = 'wider';
 		if( $real_ratio < $dummy_ratio ) $ratio_class = 'taller';

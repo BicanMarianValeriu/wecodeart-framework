@@ -1,5 +1,11 @@
+v3.7.7
+- Fixed - ...
+
 v3.7.6
-- Added - ...
+- Fixed - Media image ratio calculator missing args
+- Fixed - Static HomePage title on search results
+- Changed - Default loop hooks - reduced to 1 from 3 and used priorioty to hook Entry Header/Content/Footer (20,30,40)
+- Removed - 404 Loop, left that for Plugins teritory
 
 v3.7.5
 - Updated - Core\Entry\Meta methods data escaping for strings.

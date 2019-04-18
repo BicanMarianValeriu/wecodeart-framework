@@ -9,7 +9,7 @@
  * @subpackage 	Core\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.1
+ * @version		3.7.6
  */
 
 namespace WeCodeArt\Core;
@@ -32,10 +32,10 @@ class Content {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		Loops::get_instance();
-
+		// WP.
 		add_action( 'widgets_init', 				[ $this, 'register_sidebars' 	] );
 
+		// WeCodeArt.
 		add_action( 'wecodeart_inner_markup', 		[ $this, 'render_modules' 		] );
 		add_action( 'wecodeart/hook/loop/before',	[ $this, 'content_markup_open' 	] );
 		add_action( 'wecodeart/hook/loop/after',	[ $this, 'content_markup_close' ] );
@@ -108,13 +108,12 @@ class Content {
 	 * Return the required loop based on conditionals
 	 *
 	 * @since	1.0
-	 * @version	3.5
+	 * @version	3.7.6
 	 * 
 	 * @return	void
 	 */
 	public static function get_loop() {
-		if( is_404() ) Loops::fourofour();
-		else Loops::default();
+		Loops::default();
 	}
 
 	/**
@@ -157,30 +156,30 @@ class Content {
 	 * Variable that holds the Header Modules and Options
 	 *
 	 * @since	1.5
-	 * @version	3.5
+	 * @version	3.7.6
 	 *
 	 * @return 	array
 	 */
 	public static function content_modules() {
-		// Default Modules (Content+Sidebar)
-		$modules = array();
-		$modules['content'] = array(
-			'label'    => __( 'Entry Content', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'get_loop' ]
-		);
-		$modules['primary'] = array(
-			'label'    => __( 'Primary Sidebar', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'display_primary_sidebar' ]
-		);
-		// Optional Sidebar
+		$modules = [
+			'content' => [
+				'label'    => esc_html__( 'Entry Content', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'get_loop' ]
+			],
+			'primary' => [
+				'label'    => esc_html__( 'Primary Sidebar', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'display_primary_sidebar' ]
+			],
+		];
+		
 		if ( apply_filters( 'wecodeart/filter/sidebar/secondary/enable', false ) ) {
 			$modules['secondary'] = array(
-				'label'    => __( 'Secondary Sidebar', 'wecodeart' ),
+				'label'    => esc_html__( 'Secondary Sidebar', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'display_secondary_sidebar' ]
 			);
 		}
 
-		// Merge default modules with user modules
+		// Filter modules.
 		return apply_filters( 'wecodeart/filter/content/modules', $modules ); 
 	}
 

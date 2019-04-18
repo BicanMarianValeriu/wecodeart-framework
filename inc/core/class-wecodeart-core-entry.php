@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.3
+ * @version		3.7.6
  */
 
 namespace WeCodeArt\Core;
@@ -35,9 +35,9 @@ class Entry {
 	public function init() {
 		add_action( 'the_password_form', [ $this, 'render_paswordprotected' ] );
 
-		add_action( 'wecodeart_entry_header', 	[ $this, 'render_header' 	] ); 
-		add_action( 'wecodeart_entry_content', 	[ $this, 'render_content' 	] );
-		add_action( 'wecodeart_entry_footer',	[ $this, 'render_footer' 	] );  
+		add_action( 'wecodeart_entry', 	[ $this, 'render_header' 	], 20 ); 
+		add_action( 'wecodeart_entry', 	[ $this, 'render_content' 	], 30 );
+		add_action( 'wecodeart_entry',	[ $this, 'render_footer' 	], 40 );  
 		
 		add_action( 'wecodeart/hook/entry/header',	[ $this, 'render_title' 		], 10 );
 		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_read_more' 	], 10 );
@@ -48,7 +48,6 @@ class Entry {
 		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_noposts' ], 10 );
 
 		add_filter( 'wecodeart/filter/entry/title/disabled', [ $this, 'filter_home_title' ], 10, 2 );
-
 
 		/**
 		 * Child classes
@@ -225,7 +224,7 @@ class Entry {
 	 * Remove title on homepage
 	 *
 	 * @since	3.7.1
-	 * @version	3.7.1
+	 * @version	3.7.6
 	 *
 	 * @param 	boolean	$disabled
 	 * @param	integer	$post_id
@@ -235,7 +234,9 @@ class Entry {
 	public function filter_home_title( $disabled, $post_id ) {
 		$custom_page = get_option( 'page_on_front' );
 		if( intval( $custom_page ) === 0 ) return $disabled;
-		if( intval( $custom_page ) === intval( $post_id ) ) $disabled = true;
+		if( ! is_search() ) {
+			if( intval( $custom_page ) === intval( $post_id ) ) $disabled = true;
+		}
 		return $disabled;
 	}
 }
