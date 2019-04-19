@@ -1,1 +1,0 @@
-<div class="sample"><?php echo esc_html( $name ); ?></div>

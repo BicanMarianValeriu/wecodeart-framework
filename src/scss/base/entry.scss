@@ -72,17 +72,13 @@
                 height: 100%; 
             }
         } 
-    }
-
-    &-footer {
-        text-align: right;
-    }
+    } 
 }   
 
-.single-post {
+.hfeed {
     .entry {
         &-footer {
-            text-align: initial;
+            text-align: right;
         }
     }
 }

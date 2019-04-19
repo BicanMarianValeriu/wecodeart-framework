@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.0
+ * @version		3.7.7
  */
 
 namespace WeCodeArt\Core;
@@ -60,7 +60,10 @@ class Header {
 			 */
 			do_action( 'wecodeart/hook/header/top' );
 
-			Header::render_header_bar();
+			/**
+			 * Render Header Bar
+			 */
+			self::render_header_bar();
 
 			/** 
 			 * @hook	'wecodeart/hook/header/bottom'
@@ -156,78 +159,51 @@ class Header {
 	 * Variable that holds the Header Modules and Options
 	 *
 	 * @since	1.5
-	 * @version	3.6
+	 * @version	3.7.7
 	 *
 	 * @return 	array
 	 */
 	public static function nav_bar_modules() {
-		// Set the default modules
-		$defaults = array();
-		$defaults['branding'] = array(
-			'label'    => __( 'Site Branding', 'wecodeart' ),
-			'callback' => array( __CLASS__, 'display_branding' )
-		);
-		// Foundation Menu
-		$defaults['menu'] = array(
-			'label'    => __( 'Primary Menu', 'wecodeart' ),
-			'callback' => array( __CLASS__, 'display_menu' )
-		);
-		// Search Box
-		$defaults['search'] = array(
-			'label'    => __( 'Search Form', 'wecodeart' ),
-			'callback' => array( __CLASS__, 'display_search' )
-		); 
+		$defaults = [
+			'branding' => [
+				'label'    => esc_html__( 'Site Branding', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'display_branding' ]
+			],
+			'menu' => [
+				'label'    => esc_html__( 'Primary Menu', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'display_menu' ]
+			],
+			'search' => [
+				'label'    => esc_html__( 'Search Form', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'display_search' ]
+			],
+		];
 
-		return apply_filters( 'wecodeart/filter/header_bar/modules', $defaults ); 
+		return apply_filters( 'wecodeart/filter/header/bar/modules', $defaults ); 
 	}
 
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 *
 	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Utilities\Markup::sortable()
 	 * @since 	unknown
-	 * @version	3.6
+	 * @version	3.7.7
 	 *
 	 * @return 	void
 	 */
 	public static function render_header_bar() {
-		$wrappers = array(
-			[
-				'tag' 	=> 'div',
-				'attrs' => [
-					'id' 	=> 'header-bar',
-					'class' => 'header__bar header-bar'
-				]
-			],
-			[
-				'tag' 	=> 'div',
-				'attrs' => [
-					'class' => get_theme_mod( 'header-bar-container' )
-				]
-			],
-			[
-				'tag' 	=> 'div',
-				'attrs' => [
-					'class' => 'row align-items-center'
-				]
-			]
-		);
-
-		Markup::wrap( 'header-bar-wrappers', $wrappers, [ __CLASS__, 'sort_header_bar' ] ); 
-	}
-
-	/**
-	 * Return the Header final HTML with modules selected by user
-	 *
-	 * @uses	WeCodeArt\Utilities\Markup::sortable()
-	 * @since	1.5
-	 * @version	3.6
-	 *
-	 * @return 	void
-	 */
-	public static function sort_header_bar() {
-		// Sort the modules
-		Markup::sortable( self::nav_bar_modules(), get_theme_mod( 'header-bar-modules' ) ); 
+		Markup::wrap( 'header-bar', [
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'header__bar header-bar', 'id' => 'header-bar' ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'header-bar-container' ) ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row align-items-center' ] ]
+		], [ Markup::get_instance(), 'sortable' ], [
+			self::nav_bar_modules(),
+			/**
+			 * @since 3.7.7
+			 */
+			apply_filters( 'wecodeart/filter/header/bar/pre', get_theme_mod( 'header-bar-modules' ) )
+		] );  
 	}
 
 	/**

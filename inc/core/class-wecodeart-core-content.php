@@ -9,7 +9,7 @@
  * @subpackage 	Core\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.6
+ * @version		3.7.7
  */
 
 namespace WeCodeArt\Core;
@@ -52,13 +52,10 @@ class Content {
 	 */
 	public function content_markup_open() { 
 		// Adds ability to filter the attributes of main content.
-		$attributes = Markup::generate_attr(
-			'content',
-			[
-				'id' 	=> 'primary',
-				'class' => 'content__main col-12 col-lg'
-			]
-		);
+		$attributes = Markup::generate_attr( 'content', [
+			'id' 	=> 'primary',
+			'class' => 'content__main col-12 col-lg'
+		] );
 		?>
 		<div <?php echo $attributes; ?>>
 			<?php 
@@ -114,81 +111,88 @@ class Content {
 	 */
 	public static function get_loop() {
 		Loops::default();
-	}
+	} 
 
 	/**
-	 * Get Primary Sidebar View
+	 * Generate Sidebar
 	 *
-	 * @since	1.0
-	 * @version	3.7.0
+	 * @since	3.7.7
+	 * @version	3.7.7
 	 *
 	 * @return	void
 	 */
-	public static function display_primary_sidebar() {
-	 	Markup::wrap( 'sidebar-primary', [ [ 
+	public static function render_sidebar( string $index ) {
+		$index = strtolower( $index );
+		if( ! is_active_sidebar( $index ) ) return;
+		/**
+		 * @see WP function `dynamic_sidebar`
+		 * @see WeCodeArt\Utilities\Markup::wrap()
+		 */
+		Markup::wrap( $index . '-sidebar-container', [ [
 			'tag' 	=> 'div',
-			'attrs' => [
-				'id' 	=> 'secondary', 
-				'class' => 'content__sidebar col-12 col-lg-4' 
+			'attrs' => [ 
+				'class'	=> 'content__sidebar col-12 col-lg-4',
 			]
-		] ], 'get_template_part', [ 'views/sidebars/sidebar', 'primary' ] ); 
-	}
+		] ], function() use ( $index ) {
+			$class = $index . '-sidebar';
 
-	/**
-	 * Get Secondary Sidebar View
-	 *
-	 * @since	1.0
-	 * @version	3.7.0
-	 *
-	 * @return	void
-	 */
-	public static function display_secondary_sidebar() {
-		Markup::wrap( 'sidebar-primary', [ [ 
-			'tag' 	=> 'div',
-			'attrs' => [
-				'id' 	=> 'secondary-2', 
-				'class' => 'content__sidebar content__sidebar--secondary col-sm-12 col-lg-2' 
-			]
-		] ], 'get_template_part', [ 'views/sidebars/sidebar', 'secondary' ] );  
+			do_action( "wecodeart/hook/sidebar/{$index}/before" );
+
+			?>
+			<aside class="<?php echo esc_attr( $class ); ?>" itemscope="" itemtype="http://schema.org/WPSideBar"><?php 
+				dynamic_sidebar( $index ); 
+			?></aside>
+			<?php
+
+			do_action( "wecodeart/hook/sidebar/{$index}/after" );
+
+		} );  
 	}
 
 	/**
 	 * Variable that holds the Header Modules and Options
 	 *
 	 * @since	1.5
-	 * @version	3.7.6
+	 * @version	3.7.7
 	 *
 	 * @return 	array
 	 */
 	public static function content_modules() {
-		$modules = [
+		$sides = apply_filters( 'wecodeart/filter/content/sidebars', [
+			'primary'
+		] );
+
+		$defaults = [
 			'content' => [
 				'label'    => esc_html__( 'Entry Content', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'get_loop' ]
-			],
-			'primary' => [
-				'label'    => esc_html__( 'Primary Sidebar', 'wecodeart' ),
-				'callback' => [ __CLASS__, 'display_primary_sidebar' ]
-			],
+			]
 		];
-		
-		if ( apply_filters( 'wecodeart/filter/sidebar/secondary/enable', false ) ) {
-			$modules['secondary'] = array(
-				'label'    => esc_html__( 'Secondary Sidebar', 'wecodeart' ),
-				'callback' => [ __CLASS__, 'display_secondary_sidebar' ]
-			);
+
+		if( is_array( $sides ) && ! empty( $sides ) ) {
+			foreach( $sides as $side ) {
+				$side = strtolower( $side );
+				$defaults[$side] = [
+					'sidebar' 	=> true,
+					'label'    	=> sprintf( esc_html__( '%s Sidebar', 'wecodeart' ), ucfirst( $side ) ),
+					'callback' 	=> function() use ( $side ) {
+						self::render_sidebar( $side );
+					}
+				];
+			}  
 		}
 
 		// Filter modules.
-		return apply_filters( 'wecodeart/filter/content/modules', $modules ); 
+		return apply_filters( 'wecodeart/filter/content/modules', $defaults ); 
 	}
 
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 *
-	 * @since 	unknown
-	 * @version	3.7.1
 	 * @uses	WeCodeArt\Utilities\Markup::wrap();
+	 * @uses	WeCodeArt\Utilities\Markup::sortable();
+	 * @since 	unknown
+	 * @version	3.7.7
 	 *
 	 * @return 	HTML
 	 */
@@ -197,32 +201,44 @@ class Content {
 
 		$class= [ 'content-area' ];
 		if( in_array( 'primary', $options['modules'], true ) ) $class[] = 'content-area--has-primary-sidebar';
-		if( in_array( 'secondary', $options['modules'], true ) ) $class[] = 'content-area--has-secondary-sidebar';
+		if( in_array( 'secondary', $options['modules'], true ) ) $class[] = 'content-area--has-secondary-sidebar'; 
 
-		$wrappers = [
+		Markup::wrap( 'content-wrappers',  [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => implode( ' ', $class ) ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ]
-		];
-
-		Markup::wrap( 'content-wrappers', $wrappers, [ __CLASS__, 'sort_modules' ] ); 
-	}
+		], [ Markup::get_instance(), 'sortable' ], [
+			self::content_modules(), 
+			$options['modules']
+		] ); 
+	} 
 
 	/**
-	 * Return the Inner final HTML with modules selected by user for each page.
+	 * Registers Content Sidebars
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::sortable();
-	 * @since 	unknown
-	 * @version	3.5
+	 * @uses	self::content_modules();
+	 * @since	1.0
+	 * @version	3.7.7
 	 *
 	 * @return 	void
 	 */
-	public static function sort_modules() {
-		// Everywhere/Defaults
-		$options = self::get_contextual_options();
-
-		// Sort the modules
-		Markup::sortable( self::content_modules(), $options['modules'] );
+	public function register_sidebars() {
+		$modules = self::content_modules(); 
+		// Register Sidebar for each active footer columns
+		foreach( $modules as $key => $sidebar ) {
+			if( isset( $sidebar['sidebar'] ) && $sidebar['sidebar'] === true ) {
+				register_sidebar( [
+					'name'          => $sidebar['label'], // @wpcs ok 
+					'id'            => esc_attr( $key ),
+					'class'         => esc_attr( $key ),
+					'description'   => sprintf( esc_html__( 'This is the %s.', 'wecodeart' ), $sidebar['label'] ),
+					'before_widget' => '<div id="%1$s" class="widget %2$s">',
+					'after_widget'  => '</div>',
+					'before_title'  => '<h4 class="widget__title">',
+					'after_title'   => '</h4>',
+				] );
+			} 
+		} 
 	}
 
 	/**
@@ -290,40 +306,5 @@ class Content {
 			'container' => get_theme_mod( 'content-layout-container' ),
 			'modules' 	=> get_theme_mod( 'content-layout-modules' )
 		];
-	}
-
-	/**
-	 * Return the Inner final HTML with modules selected by user for each page.
-	 *
-	 * @since	1.0
-	 * @version	3.6.0.4
-	 *
-	 * @return 	void
-	 */
-	public function register_sidebars() {
-		$primary = array(
-			'class'         => 'primary',
-			'id'            => 'primary',
-			'name'          => __( 'Primary Sidebar', 'wecodeart' ),
-			'description'   => __( 'This is the default Primary Sidebar.', 'wecodeart' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h4 class="widget__title">',
-			'after_title'   => '</h4>'
-		);
-		register_sidebar( $primary );
-		if ( apply_filters( 'wecodeart/filter/sidebars/secondary/enable', false ) ) {
-			$secondary = array(
-				'class'         => 'secondary',
-				'id'            => 'secondary',
-				'name'          => __( 'Secondary Sidebar', 'wecodeart' ),
-				'description'   => __( 'Secondary Sidebar - only enabled via filter.', 'wecodeart' ),
-				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<h4 class="widget__title">',
-				'after_title'   => '</h4>'
-			);
-			register_sidebar( $secondary );
-		}
 	}
 }

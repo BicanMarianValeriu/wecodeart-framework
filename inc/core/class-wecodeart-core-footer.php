@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.1
+ * @version		3.7.7
  */
 
 namespace WeCodeArt\Core;
@@ -59,7 +59,10 @@ class Footer {
 			 */ 
 			do_action( 'wecodeart/hook/footer/top' );
 			
-			Footer::render_widgets();
+			/**
+			 * Render the sidebars
+			 */
+			self::render_widgets();
 			
 			/** 
 			 * @hook	'wecodeart/hook/footer/bottom' 	
@@ -106,102 +109,70 @@ class Footer {
 	/**
 	 * Footer Widgetized Area
 	 *
-	 * @return 	void 
-	 */
-	public static function footer_widgets_one() {
-		get_template_part( 'views/footer/widgets', 'one' );
-	}
-
-	/**
-	 * Footer Widgetized Area
+	 * @since 	3.7.7
 	 *
 	 * @return 	void 
 	 */
-	public static function footer_widgets_two() {
-		get_template_part( 'views/footer/widgets', 'two' );
-	}
+	public static function render_column( int $index ) {
+		if( ! is_active_sidebar( 'footer-' . $index ) ) return;
+		/**
+		 * @see WP function `dynamic_sidebar`
+		 * @see WeCodeArt\Utilities\Markup::wrap()
+		 */
+		Markup::wrap( 'footer-column-' . (string) $index , [ [
+			'tag' 	=> 'div',
+			'attrs' => [ 
+				'class'	=> 'footer__column col-12 col-lg mb-4',
+			]
+		] ], 'dynamic_sidebar', [ 'footer-' . (string) $index ] );
+	} 
 
 	/**
-	 * Footer Widgetized Area
-	 *
-	 * @return 	void 
-	 */
-	public static function footer_widgets_three() {
-		get_template_part( 'views/footer/widgets', 'three' );
-	}
-
-	/**
-	 * Footer Widgetized Area
-	 *
-	 * @return 	void 
-	 */
-	public static function footer_widgets_four() {
-		get_template_part( 'views/footer/widgets', 'four' );
-	}
-
-	/**
-	 * This function holds our footer widgets
+	 * This function generates the columns fot the footer
 	 *
 	 * @since	1.5
-	 * @version	3.5
+	 * @version	3.7.7
 	 *
 	 * @return 	array
 	 */
 	public static function footer_widgets() {
-		$defaults = array();
-		$defaults['footer-1'] = array(
-			'label'    => __( 'Footer One', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'footer_widgets_one' ]
-		);
-		$defaults['footer-2'] = array(
-			'label'    => __( 'Footer Two', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'footer_widgets_two' ]
-		);
-		$defaults['footer-3'] = array(
-			'label'    => __( 'Footer Three', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'footer_widgets_three' ]
-		);
-		$defaults['footer-4'] = array(
-			'label'    => __( 'Footer Four', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'footer_widgets_four' ]
-		);
+		$columns = apply_filters( 'wecodeart/filter/footer/columns', (int) 4 );
+
+		$defaults = [];
+		foreach( range( 1, $columns ) as $column ) {
+			$defaults['footer-' . (string) $column ] = [
+				'label'    => sprintf( esc_html__( 'Footer %s', 'wecodeart' ), $column ),
+				'callback' => function() use ( $column ) {
+					self::render_column( $column );
+				}
+			];
+		} 
 		
-		// New Modules
-		$widgets = apply_filters( 'wecodeart/filter/footer/widgets', $defaults );
+		// Filter the generated array.
+		$widgets = apply_filters( 'wecodeart/filter/footer/widgets', (array) $defaults );
 
 		return $widgets;
-	}
+	} 
 
 	/**
 	 * Return the Footer final widgets HTML with modules selected by user
 	 *
 	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Utilities\Markup::sortable()
 	 * @since	3.5
-	 * @version 3.7.1
+	 * @version 3.7.7
 	 *
 	 * @return 	void
 	 */
-	public static function render_widgets() {
-		$wrappers = [
+	public static function render_widgets() {  
+		Markup::wrap( 'footer-widgets', [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'footer__widgets' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'footer-layout-container' ) ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row pt-4' ] ]
-		];
-
-		Markup::wrap( 'footer-widgets', $wrappers, [ __CLASS__, 'sort_widgets' ] ); 
-	}
-
-	/**
-	 * Return the Inner final HTML with modules selected by user for each page.
-	 *
-	 * @uses	WeCodeArt\Utilities\Markup::sortable()
-	 * @since 	3.5
-	 * @version	3.5
-	 *
-	 * @return 	void
-	 */
-	public static function sort_widgets() {
-		Markup::sortable( self::footer_widgets(), get_theme_mod( 'footer-layout-modules' ) );
+		], [ Markup::get_instance(), 'sortable' ], [ 
+			self::footer_widgets(), 
+			get_theme_mod( 'footer-layout-modules' ) 
+		] ); 
 	}
 
 	/**
@@ -218,7 +189,7 @@ class Footer {
 
 		// Get Default Footer Columns
 		$columns = self::footer_widgets();
-		$active = array();
+		$active = [];
 		foreach( $options as $option ) if( array_key_exists( $option, $columns ) ) $active[] = $option;
 		if( ! $active ) return;
 

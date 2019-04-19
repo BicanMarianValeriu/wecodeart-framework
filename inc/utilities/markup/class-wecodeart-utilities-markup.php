@@ -9,7 +9,7 @@
  * @subpackage  Utilities\Markup
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.3
+ * @version		3.7.7
  */
 
 namespace WeCodeArt\Utilities;
@@ -73,6 +73,8 @@ class Markup {
 	/**
 	 * Return Sortable callback functions based on input.
 	 *
+	 * @version	3.7.7
+	 *
 	 * @param	array  	modules	required
 	 * @param 	array 	options	required
 	 * @param 	boolean	echo	optional
@@ -102,16 +104,15 @@ class Markup {
 
 		// Bail if there are no functions to return.
 		if( ! $functions ) return;
-		
-		// Build the HTML.
-		$output = '';
-		ob_start();
-		foreach( $functions as $func ) call_user_func( $func );
-		$output .= ob_get_clean();
 
 		// Return the output.
-		if( $echo ) echo $output; 
-		else return $output;
+		if( $echo ) {
+			foreach( $functions as $func ) call_user_func( $func );
+		} else {
+			ob_start();
+			foreach( $functions as $func ) call_user_func( $func );
+			return ob_get_clean();
+		}
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Core\Author
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		3.7.5
+ * @since		3.7.7
  */
 
 namespace WeCodeArt\Core;
@@ -24,57 +24,60 @@ use WeCodeArt\Utilities\Markup\SVG;
 class Author {
 
 	use \WeCodeArt\Singleton;
-	
+
 	/**
 	 * Do author box on archive
 	 * 
-	 * @since	3.7.5
+	 * @since	3.7.7
 	 */
 	public function author_box_archive() {
-		if ( ! is_author() || get_query_var( 'paged' ) >= 2 ) {
+		$enabled = apply_filters( 'wecodeart/filter/author/box/archive/enabled', '__return_true' );
+
+		if ( ! $enabled || ( ! is_author() || get_query_var( 'paged' ) >= 2 ) ) {
 			return;
 		}
-	
-		self::render_box();
+
+		self::render_box( 'archive' );
 	}
 
 	/**
 	 * Do author box on single
 	 * 
-	 * @since	3.7.5
+	 * @since	3.7.7
 	 */
 	public function author_box_single() {
+		$enabled = apply_filters( 'wecodeart/filter/author/box/single/enabled', '__return_true' );
 
-		if ( ! is_single() || ! post_type_supports( get_post_type(), 'author' ) ) {
+		if ( ! $enabled || ( ! is_single() || ! post_type_supports( get_post_type(), 'author' ) ) ) {
 			return;
 		}
-	
-		self::render_box();
+
+		self::render_box( 'single' );
 	}
 
 	/**
 	 * Echo the Author Box
 	 *
-	 * @since	3.7.5
+	 * @since	3.7.7
 	 *
 	 * @return 	void 
 	 */
-	public static function render_box() {
+	public static function render_box( $context ) {
 		$enabled = apply_filters( 'wecodeart/filter/author/box/enabled', '__return_true' );
 
-		if( ! $enabled ) return;
+		if( ! $enabled || ! self::get_data( $context ) ) return;
 
-		Markup::template( 'author/box', self::get_data() );
+		Markup::template( 'author/box', self::get_data( $context ) );
 	}
 
 	/**
 	 * Get Author Information
 	 *
-	 * @since 	3.7.5
+	 * @since 	3.7.7
 	 *
 	 * @return 	array 
 	 */
-	public static function get_data() {
+	public static function get_data( $context = '' ) {
 		$avatar_size = apply_filters( 'wecodeart/filter/author/box/gravatar_size', 100 );
 
 		$author = [
@@ -97,9 +100,9 @@ class Author {
 				esc_url( $author['url'] ), esc_html( $author['name'] ) 
 			);
 		}
-		
+
 		if ( 0 === mb_strlen( $author['name'] ) || 0 === mb_strlen( $author['description'] ) ) return [];
-		
-		return apply_filters( 'wecodeart/filter/author/box/context', $author );
+
+		return apply_filters( 'wecodeart/filter/author/box/context', $author, $context );
 	} 
 }

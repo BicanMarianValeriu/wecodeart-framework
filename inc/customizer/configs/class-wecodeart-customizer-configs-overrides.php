@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Overrides
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.3
+ * @version		3.7.7
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -32,8 +32,8 @@ class Overrides extends Config {
 	 * @return 	array 
 	 */
 	public function register( $configurations, $wp_customize ) {  
-		$_configs = array(
-			array(
+		/* $_configs = [
+			[
 				'name'			=> 'page_for_404',
 				'type' 			=> 'control',
 				'control'  		=> 'dropdown-pages',
@@ -45,8 +45,10 @@ class Overrides extends Config {
 				'transport'		=> 'postMessage',
 				'sanitize_callback' 	=> 'absint',
 				'sanitize_js_callback' 	=> 'absint'
-			) 
-		);
+			]
+		]; */
+
+		$_configs = [];
 
 		return array_merge( $configurations, $_configs );
 	}

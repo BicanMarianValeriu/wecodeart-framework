@@ -23,26 +23,26 @@ use Walker_Comment;
  */
 class Comment extends Walker_Comment {
 	var $tree_type = 'comment';
-	var $db_fields = array( 'parent' => 'comment_parent', 'id' => 'comment_ID' );
+	var $db_fields = [ 'parent' => 'comment_parent', 'id' => 'comment_ID' ];
 
 	/**
 	 * Start Level
 	 */
-	function start_lvl( &$output, $depth = 0, $args = array() ) {
+	function start_lvl( &$output, $depth = 0, $args = [] ) {
 		$output .= '<ul class="comment__children offset-md-1 unstyled pl-0">' . "\n";
 	}
 
 	/**
 	 * End Level
 	 */
-	function end_lvl( &$output, $depth = 0, $args = array() ) {
+	function end_lvl( &$output, $depth = 0, $args = [] ) {
 		$output .= "</ul>\n";
 	}
 
 	/**
 	 * End Element
 	 */
-	function end_el( &$output, $comment, $depth = 0, $args = array() ) {
+	function end_el( &$output, $comment, $depth = 0, $args = [] ) {
 		$output .= "</li>\n";
 	}
 
@@ -52,9 +52,9 @@ class Comment extends Walker_Comment {
 	 * @version	3.2
 	 */
 	protected function ping( $comment, $depth, $args ) {
-		// Get what we need
+		// Get what we need.
 		$class = join( ' ', get_comment_class() );
-		// The HTML
+		// The HTML.
 		echo '<li id="ping-' . esc_attr( $comment->comment_ID ) . '" class="' . esc_attr( $class ) . '">';
 		printf(
 			'<div class="ping-body"><p>%1$s %2$s<p></div>', 
@@ -69,7 +69,7 @@ class Comment extends Walker_Comment {
 	 * @version	3.7.3
 	 */
 	protected function comment( $comment, $depth, $args ) {
-		// Get what we need
+		// Get what we need.
 		$class 			= join( ' ', get_comment_class() );
 		$author_img 	= get_avatar( $comment, $args['avatar_size'], '', __( 'Author\'s gravatar', 'wecodeart' ) );
 		$author_name 	= '<strong itemprop="name">' . $comment->comment_author . '</strong>';
@@ -77,14 +77,14 @@ class Comment extends Walker_Comment {
 			$author_name = sprintf( '<a href="%1$s" rel="external nofollow" itemprop="url">%2$s</a>', esc_url( $comment->comment_author_url ), $author_name );
 		}
 
-		// Setup Filters
+		// Setup Filters.
 		$comment_date = apply_filters( 'wecodeart/filter/comments/date/enable', true, get_post_type() );
 		$comment_amst = apply_filters( 
 			'wecodeart/filter/comments/awaiting-moderation-text', 
 			__( 'Your comment is awaiting moderation.', 'wecodeart' ) 
 		);	
 
-		// The HTML
+		// The HTML.
 		echo '<li id="comment-' . esc_attr( $comment->comment_ID ) . '" class="' . esc_attr( $class ) . '" itemscope itemtype="http://schema.org/Comment">';
 			echo '<div class="comment__body row">';
 			do_action( 'wecodeart/hook/comment/top' ); // Hook Comment Top

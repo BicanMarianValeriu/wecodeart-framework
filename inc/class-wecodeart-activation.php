@@ -24,11 +24,27 @@ class Activation {
 	use \WeCodeArt\Singleton;
 
 	/**
-	 * Vars
-	 * @access 	protected 
+	 * Requirements
+	 *
+	 * @access 	protected
+	 * @var		array
 	 */
 	protected $requirements = [];
+
+	/**
+	 * Messages
+	 *
+	 * @access 	protected
+	 * @var		array
+	 */
 	protected $messages = [];
+
+	/**
+	 * Status
+	 *
+	 * @access 	protected
+	 * @var		boolean
+	 */
 	protected $status = true;  
 	
 	/**
@@ -41,12 +57,12 @@ class Activation {
 		$this->compare_requirements();
 
 		if( $this->is_ok() === false ) {
-			// Add default error notices into admin, prevent customizer load and redirect nottice
+			// Add default error notices into admin, prevent customizer load and redirect notice.
 			add_action( 'after_switch_theme', 	array( $this, 'after_switch_theme' 	) );
 			add_action( 'load-customize.php', 	array( $this, 'customizer_notice' 	) );
 			add_action( 'template_redirect', 	array( $this, 'redirect_notice' 	) );
 
-			// Add Our Theme Hook
+			// Add Our Theme Hook.
 			do_action( 'wecodeart/hook/activation/failed' );
 		}
 	}
@@ -54,6 +70,7 @@ class Activation {
 
 	/**
 	 * Get Activation Validation Status
+	 *
 	 * @since 	3.5
 	 * @version	3.6.2
 	 */
@@ -63,13 +80,15 @@ class Activation {
 			if( $val['failed'] === true ) {
 				$this->status = false;
 				break;
-			} 
-		}	
+			}
+		}
+
 		return $this->status;
 	}
 
 	/**
 	 * Set Translation Messages
+	 *
 	 * @since 	3.6.3 
 	 */
 	public function set_i18n( $args = [] ) {
@@ -85,11 +104,12 @@ class Activation {
 
 	/**
 	 * Set Requirements
+	 *
 	 * @since 	3.5
 	 * @version	3.6.2
 	 */
 	public function set_requirements( $args = [] ) {
-		// Setup an array with data to check compatability
+		// Setup an array with data to check compatability.
 		$defaults = [
 			[
 				'label'		=> 'WordPress',
@@ -127,7 +147,7 @@ class Activation {
 	 * @since 	1.8
 	 * @version	3.5
 	 */
-	public function after_switch_theme() {	 
+	public function after_switch_theme() {
 		switch_theme( WP_DEFAULT_THEME );
 		unset( $_GET['activated'] );
 		add_action( 'admin_notices', [ $this, 'admin_notice' ] ); 

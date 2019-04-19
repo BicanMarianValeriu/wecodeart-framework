@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.6
+ * @version		3.7.7
  */
 
 namespace WeCodeArt\Core;
@@ -63,7 +63,7 @@ class Entry {
 	 * @version	3.7.3
 	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 *
-	 * @return 	string
+	 * @return 	void
 	 */
 	public function render_header() {
 		/**
@@ -119,7 +119,7 @@ class Entry {
 	 * Retrieve entry title with link
 	 *
 	 * @since 	3.6.4
-	 * @version	3.7.1
+	 * @version	3.7.7
 	 *
 	 * @param	bool	$link
 	 * @param 	bool 	$echo 
@@ -127,7 +127,8 @@ class Entry {
 	 * @return 	string
 	 */
 	public function the_title( $link = true, $echo = true ) {
-		$disabled = apply_filters( 'wecodeart/filter/entry/title/disabled', false, get_the_ID() );
+		$disabled = apply_filters( 'wecodeart/filter/entry/title/disabled', '__return_false', get_the_ID() );
+
 		$title = get_the_title();
 
 		if ( 0 === mb_strlen( $title ) || $disabled === true ) return;
@@ -152,10 +153,10 @@ class Entry {
 	public function render_title() {
 		Markup::wrap( 'entry-title', [ [
 			'tag' 	=> is_singular() ? 'h1' : 'h2',
-			'attrs' => [ 
-				'class' => 'entry-title' 
+			'attrs' => [
+				'class' => 'entry-title'
 			]
-		] ], [ $this, 'the_title' ] );  
+		] ], [ $this, 'the_title' ] );
 	}  
 
 	/**
@@ -167,13 +168,13 @@ class Entry {
 	 *
 	 * @return	void
 	 */
-	public function render_content() {  
+	public function render_content() {
 		Markup::wrap( 'entry-content', [ [
 			'tag' 	=> 'div',
-			'attrs' => [ 
-				'class' => is_singular() ? 'entry-content' : 'entry-excerpt' 
+			'attrs' => [
+				'class' => is_singular() ? 'entry-content' : 'entry-excerpt'
 			]
-		] ], is_singular() ? 'the_content' : 'the_excerpt' ); 
+		] ], is_singular() ? 'the_content' : 'the_excerpt' );
 	} 
 
 	/**

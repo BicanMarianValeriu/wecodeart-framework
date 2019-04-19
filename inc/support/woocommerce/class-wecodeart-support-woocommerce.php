@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.9
- * @version		3.7.3
+ * @version		3.7.7
  */
 
 namespace WeCodeArt\Support;
@@ -53,7 +53,7 @@ class WooCommerce {
 		add_action( 'woocommerce_after_main_content',    	[ $this, 'after_content_wrapp' ],  	10 );
 
 		// Filters
-		add_filter( 'wecodeart/filter/header_bar/modules', 	[ $this, 'add_cart_to_header_modules' ] );
+		add_filter( 'wecodeart/filter/header/bar/modules', 	[ $this, 'add_cart_to_header_modules' ] );
 		add_filter( 'woocommerce_add_to_cart_fragments',	[ $this, 'cart_count_fragments' ], 10, 1 );
 	}
 	
@@ -76,7 +76,7 @@ class WooCommerce {
 	 *
 	 * @return  void
 	 */
-	public function before_content_wrapp() { 
+	public function before_content_wrapp() {
 		if( WooCommerce\Callbacks::_is_woocommerce_archive() === true ) {
 			$wrapper = get_theme_mod( 'content-layout-container-product-archive' );
 		} elseif( is_product() ) {
@@ -97,6 +97,7 @@ class WooCommerce {
 				<div class="row">
 		<?php
 				self::sort_modules( 'before' );
+
 				Content::get_instance()->content_markup_open();
 	}
 
@@ -107,8 +108,9 @@ class WooCommerce {
 	 *
 	 * @return  void
 	 */
-	public function after_content_wrapp() { 
+	public function after_content_wrapp() {
 				Content::get_instance()->content_markup_close();
+
 				self::sort_modules( 'after' ); ?>
 				</div>
 			</div>
@@ -120,32 +122,34 @@ class WooCommerce {
 	 * Sort Content Modules based on position
 	 *
 	 * @since 	unknown
-	 * @version	3.6.3
+	 * @version	3.7.7
 	 *
 	 * @param 	string 	$position Accepts before/after - render sorted modules before/after woocommerce content.
 	 *
 	 * @return 	void
 	 */
-	public static function sort_modules( string $position ) {  
+	public static function sort_modules( string $position ) {
 		if( WooCommerce\Callbacks::_is_woocommerce_archive() === true ) {
 			$modules = get_theme_mod( 'content-layout-modules-product-archive' ); 
 		} elseif( is_product() ) {
 			$modules = get_theme_mod( 'content-layout-modules-product-singular' ); 
 		} else {
 			$modules = [ 'content', 'primary' ];
-		} 
+		}
 
-		$index = array_search( 'content', $modules ); 
+		$index = array_search( 'content', $modules );
 		if( $position === 'after' ) $elements = array_slice( $modules, $index + 1 );
-		if( $position === 'before') $elements = array_slice( $modules, 0, $index, false ); 
+		if( $position === 'before') $elements = array_slice( $modules, 0, $index, false );
 
 		$sortable = wp_parse_args( [
-			'primary' => [ 
-				'callback' 	=> [ __CLASS__, 'display_sidebar' ]
+			'primary' => [
+				'callback' => function() {
+					Content::render_sidebar( 'shop' );
+				}
 			]
-		], \WeCodeArt\Core\Content::content_modules() );
+		], Content::content_modules() );
 
-		// Sort the modules based on context
+		// Sort the modules based on context.
 		Markup::sortable( $sortable, $elements );
 	}
 
@@ -157,36 +161,16 @@ class WooCommerce {
 	 *
 	 * @return 	void
 	 */
-	public function register_sidebars() {  
+	public function register_sidebars() {
 		register_sidebar( [
 			'class'         => 'shop',
-			'id'            => 'shop-1',
+			'id'            => 'shop',
 			'name'          => __( 'Shop Sidebar', 'wecodeart' ),
 			'description'   => __( 'This is the Shop Sidebar - it will replace Primary Sidebar.', 'wecodeart' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>'
 		] );
-	}
-
-	/**
-	 * Get Shop Sidebar HTML
-	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
-	 * @since	3.6
-	 * @version 3.7.3
-	 *
-	 * @return 	void
-	 */
-	public static function display_sidebar() {
-		// Adds ability to filter the attributes of secondary sidebar
-		Markup::wrap( 'sidebar-shop', [ [
-			'tag' 	=> 'div',
-			'attrs' => [
-				'id' 	=> 'secondary-shop',
-				'class' => 'content__sidebar content__sidebar--shop col-12 col-lg-4'
-			]
-		] ], 'get_template_part', [ 'views/sidebars/sidebar', 'shop' ] ); 
-	}
+	} 
 
 	/**
 	 * Filter - WooCommerce Header Bar Cart Module
@@ -194,10 +178,10 @@ class WooCommerce {
 	 * @since	3.5
 	 */
 	public function add_cart_to_header_modules( $modules ) {
-		$modules['cart'] = array(
+		$modules['cart'] = [
 			'label'    => __( 'WooCommerce Cart', 'wecodeart' ),
 			'callback' => [ __CLASS__, 'display_cart_module' ],
-		);
+		];
 
 		return $modules;
 	} 
@@ -206,20 +190,20 @@ class WooCommerce {
 	 * Render Header Bar Cart Module
 	 *
 	 * @since   3.5
-	 * @version 3.6.3
+	 * @version 3.7.7
 	 *
 	 * @return  void
 	 */
 	public static function display_cart_module() {
-		// Defaults
-		$defaults = array (
+		// Defaults.
+		$defaults = [
 			'class'		=> 'header-bar__cart col-auto dropdown',
 			'button'	=> [
-				'sr_text' => __( 'Show Cart', 'wecodeart' ),
-				'class' => 'dropdown-toggle',
-				'label' => '' // Not used yet - uses WooCommerce Cart Data
-			] 
-		);
+				'sr_text' 	=> esc_html__( 'Show Cart', 'wecodeart' ),
+				'class' 	=> 'dropdown-toggle',
+				'label' 	=> '' // Not used yet - uses WooCommerce Cart Data.
+			]
+		];
 
 		$args = apply_filters( 'wecodeart/filter/woocommerce/header_cart/defaults', $defaults );
 		?>
@@ -233,13 +217,13 @@ class WooCommerce {
 					<?php echo wp_kses_post( WC()->cart->get_cart_subtotal() ); ?>
 				</span>
 				<span class="header-bar__cart-count">
-					<?php 
+					<?php
 						echo wp_kses_data( 
 							sprintf( 
 								_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), 'wecodeart' ), 
 								WC()->cart->get_cart_contents_count() 
 							) 
-						); 
+						);
 					?>
 				</span>
 			</button>
@@ -255,7 +239,7 @@ class WooCommerce {
 	 * Filter - Cart Fragments
 	 *
 	 * @since 	3.5
-	 * @version	3.6.3
+	 * @version	3.7.7
 	 *
 	 * @param 	array	fragments
 	 *
@@ -263,22 +247,18 @@ class WooCommerce {
 	 */
 	public function cart_count_fragments( $fragments ) {
 
-		ob_start();
-		printf( 
+		$fragments['span.header-bar__cart-subtotal'] = sprintf(
 			'<span class="header-bar__cart-subtotal">%s</span>',
 			wp_kses_post( WC()->cart->get_cart_subtotal() )
-		); 
-		$fragments['span.header-bar__cart-subtotal'] = ob_get_clean();
+		);
 
-		ob_start();
-		printf( 
+		$fragments['span.header-bar__cart-count'] = sprintf(
 			'<span class="header-bar__cart-count">%s</span>',
-			sprintf( 
-				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), 'wecodeart' ), 
-				WC()->cart->get_cart_contents_count() 
-			) 
-		); 
-		$fragments['span.header-bar__cart-count'] = ob_get_clean(); 
+			sprintf(
+				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), 'wecodeart' ),
+				WC()->cart->get_cart_contents_count()
+			)
+		);
 
 		return $fragments;
 	} 

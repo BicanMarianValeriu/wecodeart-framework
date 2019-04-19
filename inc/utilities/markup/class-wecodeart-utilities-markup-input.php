@@ -9,7 +9,7 @@
  * @subpackage 	Utilities\Markup\Input
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.1.2
- * @version		3.7.1
+ * @version		3.7.7
  */
 
 namespace WeCodeArt\Utilities\Markup;
@@ -27,24 +27,28 @@ class Input {
 	
 	/**
 	 * Render the HTML of the input
+	 *
 	 * @access 	public
 	 * @param 	string 		$type		text/number/etc
 	 * @param 	string 		$label		Label Text
 	 * @param 	array 		$attrs		Input Attributes (id, name, value, etc)
+	 *
 	 * @return	function	input		Returns the HTML
 	 */
-	public static function render( $type = 'hidden', $label, $attrs = array(), $choices = array() ) {
+	public static function render( $type = 'hidden', $label, $attrs = [], $choices = []) {
 		return self::input( $type, $label, $attrs, $choices );
 	}
 	
 	/**
 	 * Get the HTML of the input
+	 *
 	 * @access 	public
 	 * @param 	string 		$type		text/number/etc
 	 * @param 	array 		$args		$this->defaults/args
+	 *
 	 * @return	function	input		Renders the HTML
 	 */
-	public static function compile( $type = 'hidden', $label, $attrs = array(), $choices = array() ) {
+	public static function compile( $type = 'hidden', $label, $attrs = [], $choices = [] ) {
 		ob_start();
 		self::input( $type, $label, $attrs, $choices );
 		return ob_get_clean();
@@ -57,9 +61,9 @@ class Input {
 	 *
 	 * @return 	array 		$array 		Array of options, all standard DOM input options
 	 */
-	protected static function input( $type, $label, $attrs, $choices ) {		
+	protected static function input( $type, $label, $attrs, $choices ) {
 		// Will hold Input Attributes.
-		$attributes = array();
+		$attributes = [];
 		
 		// Create HTML for Input Attributes.
 		foreach( $attrs as $name => $val ) {
@@ -80,7 +84,7 @@ class Input {
 			case 'password' : 
 			case 'checkbox' : ?>
 				<?php if ( isset( $label ) ) echo '<label>' . esc_html( $label ); ?>
-					<input type="<?php echo esc_attr( $type ) ?>" <?php echo implode ( ' ', $attributes ); ?>/>
+					<input type="<?php echo esc_attr( $type ) ?>" <?php echo implode( ' ', $attributes ); ?>/>
 				<?php if ( isset( $label ) ) echo '</label>'; ?>
 			<?php break; 
 			
@@ -89,7 +93,7 @@ class Input {
 			 */
 			case 'textarea' : ?>				
 				<?php if ( isset( $label ) ) echo '<label>' . esc_html( $label ); ?>
-					<textarea <?php echo implode ( ' ', $attributes ); ?>></textarea>
+					<textarea <?php echo implode( ' ', $attributes ); ?>></textarea>
 				<?php if ( isset( $label ) ) echo '</label>'; ?>
 			<?php break;
 			
@@ -103,7 +107,7 @@ class Input {
 						<input 	
 							type="radio" 
 							name="<?php echo esc_attr( $attrs['name'] ) ?>" 
-							value="<?php echo esc_attr( $value ); ?>" <?php if( isset( $attrs['value'] ) ) checked( $attrs['value'] , $value, true ); ?> 
+							value="<?php echo esc_attr( $value ); ?>" <?php if( isset( $attrs['value'] ) ) checked( $attrs['value'], $value, true ); ?> 
 							id="<?php echo esc_attr( $value ) ?>"/>
 						<label for="<?php echo esc_attr( $value ) ?>"><?php echo esc_html( $label ) ?></label>
 					<?php } // End Foreach ?>
@@ -115,12 +119,12 @@ class Input {
 			 */
 			case 'select' : ?>
 				<?php if ( isset( $label ) ) echo '<label>' . esc_html( $label ); ?>
-				<select <?php unset( $attributes['placeholder'] ); echo implode ( ' ' , $attributes ); ?>>
+				<select <?php unset( $attributes['placeholder'] ); echo implode( ' ' , $attributes ); ?>>
 					<?php if( isset( $attrs['placeholder'] ) ) { ?>
-						<option value=''><?php echo esc_attr( $attrs['placeholder'] ); ?></option>
+						<option value=''><?php echo esc_html( $attrs['placeholder'] ); ?></option>
 					<?php } // if isset = placeholder ?>
 					<?php foreach( $choices as $value => $label ) { ?>
-						<option value="<?php echo esc_attr( $value ); ?>" <?php if( isset( $attrs['value'] ) ) selected( $attrs['value'] , $value, true ); ?>>
+						<option value="<?php echo esc_attr( $value ); ?>" <?php if( isset( $attrs['value'] ) ) selected( $attrs['value'], $value, true ); ?>>
 							<?php echo esc_html( $label ); ?>
 						</option>
 					<?php } // End Foreach ?>
@@ -132,7 +136,7 @@ class Input {
 			 * Default/Other Value goes to hidden field
 			 */
 			default : ?>
-				<input type="hidden" <?php echo implode ( ' ', $attributes ); ?>/>
+				<input type="hidden" <?php echo implode( ' ', $attributes ); ?>/>
 			<?php
 		}
 	}

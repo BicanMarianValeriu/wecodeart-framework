@@ -36,7 +36,7 @@ class Footer extends Config {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
 
-		// Header Modules Choices
+		// Header Modules Choices.
 		$widgets = array();
 		$modules = \WeCodeArt\Core\Footer::footer_widgets();
 		foreach( $modules as $k => $v ) $widgets[$k] = $v['label']; 

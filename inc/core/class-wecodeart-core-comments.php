@@ -323,14 +323,14 @@ class Comments {
 	 * Replace Comment Reply Button class.
 	 *
 	 * @since	unknown
-	 * @version 3.7.0
+	 * @version 3.7.7
 	 *
 	 * @param 	string $class
 	 *
 	 * @return 	string
 	 */
 	public function replace_reply_link_class( $class ) {
-		$class = str_replace( "class='comment-reply-link", "class='comment-reply__link btn btn-primary btn-sm", $class );
+		$class = str_replace( "class='comment-reply-link", "class='comment-reply-link btn btn-primary btn-sm", $class );
 		return $class;
 	} 
 }
