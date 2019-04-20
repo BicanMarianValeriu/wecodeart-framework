@@ -9,7 +9,7 @@
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.9
- * @version		3.6.7
+ * @version		3.7.8
  */
 
 namespace WeCodeArt\Walkers;
@@ -49,29 +49,32 @@ class Comment extends Walker_Comment {
 	/**
 	 * Outputs a pingback comment.
 	 * @since	2.0
-	 * @version	3.2
+	 * @version	3.7.8
 	 */
 	protected function ping( $comment, $depth, $args ) {
-		// Get what we need.
-		$class = join( ' ', get_comment_class() );
-		// The HTML.
-		echo '<li id="ping-' . esc_attr( $comment->comment_ID ) . '" class="' . esc_attr( $class ) . '">';
-		printf(
-			'<div class="ping-body"><p>%1$s %2$s<p></div>', 
-			get_comment_author_link( $comment ), 
-			get_edit_comment_link( '&#9998;', '<span class="badge primary float-right">', '</span>' )
-		);
+		?>
+		<li id="ping-<?php echo esc_attr( $comment->comment_ID ); ?>" class="<?php echo esc_attr( join( ' ', get_comment_class() ) ); ?>">
+			<div class="ping-body">
+				<?php
+				// Ping content.
+				echo wp_kses_post( comment_author_link( $comment ) );
+
+				// Edit link.
+				edit_comment_link( '&#9998;', '<span class="badge badge-primary text-white float-right">', '</span>' );
+				?>
+			</div>
+		<?php 
 	}
 	
 	/**
 	 * Outputs a HTML5 comment.
 	 * @since	2.0
-	 * @version	3.7.3
+	 * @version	3.7.9
 	 */
 	protected function comment( $comment, $depth, $args ) {
 		// Get what we need.
 		$class 			= join( ' ', get_comment_class() );
-		$author_img 	= get_avatar( $comment, $args['avatar_size'], '', __( 'Author\'s gravatar', 'wecodeart' ) );
+		$author_img 	= get_avatar( $comment, $args['avatar_size'], '', esc_html__( 'Author\'s gravatar', 'wecodeart' ) );
 		$author_name 	= '<strong itemprop="name">' . $comment->comment_author . '</strong>';
 		if ( ! empty( $comment->comment_author_url ) && 'http://' !== $comment->comment_author_url ) {
 			$author_name = sprintf( '<a href="%1$s" rel="external nofollow" itemprop="url">%2$s</a>', esc_url( $comment->comment_author_url ), $author_name );
@@ -98,7 +101,7 @@ class Comment extends Walker_Comment {
 								printf( 
 									'<p class="comment-date"><time class="created" itemprop="dateCreated" datetime="%1$s">%2$s</time></p>', 
 									esc_html( get_comment_date( DATE_W3C ) ),
-									esc_html( get_comment_date() ) . ' ' . __( 'at', 'wecodeart' ) . ' ' . esc_html( get_comment_time() ) 
+									esc_html( get_comment_date() ) . ' ' . esc_html__( 'at', 'wecodeart' ) . ' ' . esc_html( get_comment_time() ) 
 								);
 							endif;
 						echo '</div>';

@@ -129,7 +129,7 @@ class Pagination {
 	 * Display links to previous and next post, from a single post.
      *
 	 * @since	1.0.0
-	 * @version	3.7.1
+	 * @version	3.7.9
      *
      * @return  null    Return early if not a post.
 	 */
@@ -157,7 +157,7 @@ class Pagination {
             ]
 		], function() { ?>
             <h3 class="screen-reader-text"><?php 
-                printf( __( '%s Navigation', 'wecodeart' ), get_post_type_object( get_post_type() )->labels->singular_name ); 
+                printf( esc_html__( '%s Navigation', 'wecodeart' ), get_post_type_object( get_post_type() )->labels->singular_name ); 
             ?></h3>
             <?php 
             

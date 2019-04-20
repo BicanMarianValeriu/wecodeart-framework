@@ -124,21 +124,21 @@ class Hooks {
 	 * Filter Search form HTML Markup.
 	 * 
 	 * @since 	unknown
-	 * @version 3.7.1
+	 * @version 3.7.9
 	 * 
 	 * @return 	string $form
 	 */
 	public function search_form( $args = array() ) {
 		// Set the Defaults
 		$defaults = array(
-			'sr_text'	=> __( 'Search this website', 'wecodeart' ),
+			'sr_text'	=> esc_html__( 'Search this website', 'wecodeart' ),
 			'input' => [
 				'id'		=> uniqid( 'searchform-' ),
-				'placeholder'	=> get_search_query() ? apply_filters( 'the_search_query', get_search_query() ) : __( 'Enter keyword', 'wecodeart' ) . ' &#x02026;',
+				'placeholder'	=> get_search_query() ? apply_filters( 'the_search_query', get_search_query() ) : esc_html__( 'Enter keyword', 'wecodeart' ) . ' &#x02026;',
 				'v_or_h'		=> ( get_search_query() == '' ) ? 'placeholder' : 'value',
 			],
 			'button' 	=> [
-				'label' => __( 'Search', 'wecodeart' ),
+				'label' => esc_html__( 'Search', 'wecodeart' ),
 				'class' => 'btn btn-primary'
 			]
 		);

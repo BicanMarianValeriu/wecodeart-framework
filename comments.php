@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Comments Template
  * @since 		1.0
- * @version		3.7.3
+ * @version		3.7.9
  */
 
 use WeCodeArt\Utilities\Markup;
@@ -18,7 +18,7 @@ if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' === basename( $_SE
 }
 
 if ( post_password_required() ) {
-	printf( '<p class="callout">%s</p>', __( 'This post is password protected. Enter the password to view comments.', 'wecodeart' ) );
+	printf( '<p class="callout">%s</p>', esc_html__( 'This post is password protected. Enter the password to view comments.', 'wecodeart' ) );
 	return;
 } 
 

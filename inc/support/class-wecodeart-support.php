@@ -9,7 +9,7 @@
  * @subpackage  Theme Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.6.2
+ * @version		3.7.9
  */
 
 namespace WeCodeArt;
@@ -98,7 +98,7 @@ class Support {
 
 		// Register New Menu
 		register_nav_menus( array(
-			'primary' => __( 'Primary Menu', 'wecodeart' ),
+			'primary' => esc_html__( 'Primary Menu', 'wecodeart' ),
 		) );
 
 		// Add custom editor font sizes.
@@ -106,27 +106,27 @@ class Support {
 			'editor-font-sizes',
 			array(
 				array(
-					'name'      => __( 'Small', 'wecodeart' ),
-					'shortName' => __( 'S', 'wecodeart' ),
+					'name'      => esc_html__( 'Small', 'wecodeart' ),
+					'shortName' => esc_html__( 'S', 'wecodeart' ),
 					'size'      => 14,
 					'slug'      => 'small',
 				),
 				array(
-					'name'      => __( 'Normal', 'wecodeart' ),
-					'shortName' => __( 'M', 'wecodeart' ),
+					'name'      => esc_html__( 'Normal', 'wecodeart' ),
+					'shortName' => esc_html__( 'M', 'wecodeart' ),
 					'size'      => 16,
 					'slug'      => 'normal',
 				),
 
 				array(
-					'name'      => __( 'Large', 'wecodeart' ),
-					'shortName' => __( 'L', 'wecodeart' ),
+					'name'      => esc_html__( 'Large', 'wecodeart' ),
+					'shortName' => esc_html__( 'L', 'wecodeart' ),
 					'size'      => 26,
 					'slug'      => 'large',
 				),
 				array(
-					'name'      => __( 'Huge', 'wecodeart' ),
-					'shortName' => __( 'XL', 'wecodeart' ),
+					'name'      => esc_html__( 'Huge', 'wecodeart' ),
+					'shortName' => esc_html__( 'XL', 'wecodeart' ),
 					'size'      => 49.5,
 					'slug'      => 'huge',
 				),
@@ -138,27 +138,27 @@ class Support {
 			'editor-color-palette',
 			array(
 				array(
-					'name'  => __( 'Primary', 'wecodeart' ),
+					'name'  => esc_html__( 'Primary', 'wecodeart' ),
 					'slug'  => 'primary',
 					'color' => '#0088cc',
 				),
 				array(
-					'name'  => __( 'Secondary', 'wecodeart' ),
+					'name'  => esc_html__( 'Secondary', 'wecodeart' ),
 					'slug'  => 'secondary',
 					'color' => '#0066cc',
 				),
 				array(
-					'name'  => __( 'Dark Gray', 'wecodeart' ),
+					'name'  => esc_html__( 'Dark Gray', 'wecodeart' ),
 					'slug'  => 'dark-gray',
 					'color' => '#111',
 				),
 				array(
-					'name'  => __( 'Light Gray', 'wecodeart' ),
+					'name'  => esc_html__( 'Light Gray', 'wecodeart' ),
 					'slug'  => 'light-gray',
 					'color' => '#f1f3f7',
 				),
 				array(
-					'name'  => __( 'White', 'wecodeart' ),
+					'name'  => esc_html__( 'White', 'wecodeart' ),
 					'slug'  => 'white',
 					'color' => '#FFF',
 				),

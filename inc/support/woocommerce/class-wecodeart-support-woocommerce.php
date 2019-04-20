@@ -157,7 +157,7 @@ class WooCommerce {
 	 * Register WooCommerce Shop Sidebar
 	 *
 	 * @since	3.3
-	 * @version	3.6.3
+	 * @version	3.7.9
 	 *
 	 * @return 	void
 	 */
@@ -165,8 +165,8 @@ class WooCommerce {
 		register_sidebar( [
 			'class'         => 'shop',
 			'id'            => 'shop',
-			'name'          => __( 'Shop Sidebar', 'wecodeart' ),
-			'description'   => __( 'This is the Shop Sidebar - it will replace Primary Sidebar.', 'wecodeart' ),
+			'name'          => esc_html__( 'Shop Sidebar', 'wecodeart' ),
+			'description'   => esc_html__( 'This is the Shop Sidebar - it will replace Primary Sidebar.', 'wecodeart' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>'
 		] );
@@ -176,10 +176,11 @@ class WooCommerce {
 	 * Filter - WooCommerce Header Bar Cart Module
 	 *
 	 * @since	3.5
+	 * @version	3.7.9
 	 */
 	public function add_cart_to_header_modules( $modules ) {
 		$modules['cart'] = [
-			'label'    => __( 'WooCommerce Cart', 'wecodeart' ),
+			'label'    => esc_html__( 'WooCommerce Cart', 'wecodeart' ),
 			'callback' => [ __CLASS__, 'display_cart_module' ],
 		];
 
@@ -190,7 +191,7 @@ class WooCommerce {
 	 * Render Header Bar Cart Module
 	 *
 	 * @since   3.5
-	 * @version 3.7.7
+	 * @version 3.7.9
 	 *
 	 * @return  void
 	 */

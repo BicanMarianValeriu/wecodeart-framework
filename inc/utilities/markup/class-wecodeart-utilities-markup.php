@@ -55,9 +55,11 @@ class Markup {
 	 *
 	 * @return 	string
 	 */
-	public static function generate_attr( $context, $attributes = array(), $args = array() ) {
+	public static function generate_attr( $context, $attributes = [], $args = [] ) {
 		$attributes = self::parse_attr( $context, $attributes, $args );
 		$output = '';
+
+		if( empty( $attributes ) ) return $output;
 
 		// Cycle through attributes, build tag attribute string.
 		foreach( $attributes as $key => $value ) {
@@ -119,7 +121,7 @@ class Markup {
      * Wrapper method for any html
 	 *
 	 * @since 	unknown
-	 * @version	3.7.2
+	 * @version	3.7.8
 	 *
 	 * @param	string	context		required ( used by generate_attr's dynamic filter )
 	 * @param 	mixed	function	required ( the function called to be wrapped )
@@ -129,25 +131,36 @@ class Markup {
 	 * @return 	string/object 	HTML/WP_Error
 	 */
 	public static function wrap( string $context, array $wrappers, $content = '', $func_args = [], $echo = true ) {
+		// Set defaults.
+		$defaults = [
+			[
+				'tag' 	=> 'div',
+				'attrs' => [
+					'class' => esc_attr( $context )
+				]
+			]
+		];
+
+		/**
+		 * Merge and filter
+		 * @since 3.7.8
+		 */
+		$args = apply_filters( "wecodeart/filter/wrappers/{$context}", $wrappers );
+
 		// Wrapper must have a 'tag' defined
-		$_wrappers = array_map( function( $wrapper ) {
-			return array_key_exists( 'tag', $wrapper ); 
-		}, $wrappers );
+		$_wrappers = array_map( function( $item ) {
+			return array_key_exists( 'tag', $item ) && is_string( $item['tag'] ); 
+		}, $args );
 
 		// Make sure $args are an array.
-		if ( empty( $wrappers ) || ( ! empty( $wrappers ) && count( array_unique( $_wrappers ) ) !== 1 ) ) {
-			return new \WP_Error( 'wecodeart_markup_no_wrappers', 
-				__( 'Wrappers are missing or are not properly defined. Each wrapper must contain a "tag" key', 'wecodeart' )
+		if ( empty( $args ) || ( ! empty( $args ) && count( array_unique( $_wrappers ) ) !== 1 ) ) {
+			$args = $defaults;
+			new \WP_Error( 'wecodeart_markup_wrap_fallback', 
+				__( "Wrappers are not properly defined for '{$context}'. Please check your theme code.", 'wecodeart' )
 			);
 		}
-
-		// Set defaults.
-		$defaults = [];
-
-		// Parse args.
-		$args = wp_parse_args( $wrappers, $defaults );
-
-		// Build the HTML
+		
+		// Build the HTML.
 		$function_html = '';
 
 		if( is_callable( $content ) ) {
@@ -163,8 +176,9 @@ class Markup {
 		$html = '';
 		
 		foreach( $args as $key => $elem ) {
-			$_context = $context . '/' . $key; // Dynamic context filter for each wrapper.
-			$open_tag = trim( implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $_context, $elem['attrs'] ) ] ) );
+			$_context 	= $context . '/' . $key; // Dynamic context filter for each wrapper.
+			$attrs 		= isset( $elem['attrs'] ) ? ( array ) $elem['attrs'] : [];
+			$open_tag 	= trim( implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $_context, $attrs ) ] ) );
 			$html .= '<' . $open_tag . '>';
 		}
 
@@ -185,10 +199,12 @@ class Markup {
 		 * @since 3.7.0
 		 */
 		if( WP_DEBUG === true ) {
-			$classes = explode( ' ', $args[0]['attrs']['class'] );
-			$comment = ( count( $classes ) > 0 ) ? $classes[0] : $args[0]['attrs']['class'];
-			$comment .= " @filter = `wecodeart/filter/attributes/{$context}`";
-			$html .= "<!-- /.{$comment} -->";
+			if( isset( $args[0]['attrs'] ) && isset( $args[0]['attrs']['class'] ) ) {
+				$classes = explode( ' ', $args[0]['attrs']['class'] );
+				$comment = ( count( $classes ) > 0 ) ? $classes[0] : $args[0]['attrs']['class'];
+				$comment .= " @filter = `wecodeart/filter/wrappers/{$context}`";
+				$html .= "<!-- /.{$comment} -->";
+			}
 		}
 
 		/**

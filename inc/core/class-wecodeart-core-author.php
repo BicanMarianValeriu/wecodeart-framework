@@ -73,7 +73,7 @@ class Author {
 	/**
 	 * Get Author Information
 	 *
-	 * @since 	3.7.7
+	 * @since 	3.7.9
 	 *
 	 * @return 	array 
 	 */
@@ -82,7 +82,7 @@ class Author {
 
 		$author = [
 			'icon'			=> SVG::compile( 'icon--user' ),
-			'intro' 		=> is_author() ? __( 'All articles by', 'wecodeart' ) : __( 'About', 'wecodeart' ),
+			'intro' 		=> is_author() ? esc_html__( 'All articles by', 'wecodeart' ) : esc_html__( 'About', 'wecodeart' ),
 			'name'			=> get_the_author(),
 			'avatar' 		=> get_avatar( get_the_author_meta( 'email' ), $avatar_size, '', get_the_author() . "'s gravatar" ),
 			'description'	=> wpautop( get_the_author_meta( 'description' ) ),

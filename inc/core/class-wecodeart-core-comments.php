@@ -78,7 +78,7 @@ class Comments {
 		$defaults = [
 			'icon' 		=> SVG::compile( 'icon--comments' ) . ' ',
 			'empty' 	=> esc_html__( 'No comments, so go and ...', 'wecodeart' ),
-			'closed'	=> false, // __( 'Comments are closed.', 'wecodeart' )
+			'closed'	=> false,
 			'add_one'	=> esc_html__( 'add one', 'wecodeart' ) 
 		]; 
 
@@ -149,7 +149,7 @@ class Comments {
 	 * Render Pings List.
 	 *
 	 * @since	unknown
-	 * @version 3.7.0
+	 * @version 3.7.8
 	 *
 	 * @return 	void
 	 */
@@ -159,10 +159,10 @@ class Comments {
 		// If have pings.
 		if ( ! empty( $wp_query->comments_by_type['pings'] ) ) {  
 			Markup::wrap( 'pings-list', [ [ 
-				'tag' => 'ol', 
+				'tag' 	=> 'ol', 
 				'attrs' => [ 
 					'id' 	=> 'pings-list', 
-					'class' => 'pings-list no-bullet' 
+					'class' => 'comments__pings unstyled pl-0 pings-list' 
 				] 
 			] ], 'wp_list_comments', [ apply_filters( 'wecodeart/filter/comments/pings/args', [
 				'type' 		 => 'pings',

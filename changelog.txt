@@ -1,5 +1,11 @@
+v3.7.9
+- Updated - Translation escaping across some files
+
 v3.7.8
-- Fixed - ...
+- Added - Default Pings List classes ( to remove bullets/padding )
+- Added - wecodeart/filter/wrappers/{context} filter for Markup::wrap() function
+- Fixed - Pings edit links ( Walker )
+- Updated - Better error handling for Markup::wrap() method after
 
 v3.7.7
 - Fixed - Comment reply link append form to the clicked reply element

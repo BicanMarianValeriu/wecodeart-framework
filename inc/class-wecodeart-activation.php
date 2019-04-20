@@ -89,12 +89,12 @@ class Activation {
 	/**
 	 * Set Translation Messages
 	 *
-	 * @since 	3.6.3 
+	 * @since 	3.7.9
 	 */
 	public function set_i18n( $args = [] ) {
 		$defaults = [
-			'customizer' => __( 'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 'wecodeart' ),
-			'checkpoint' => __( 'WeCodeArt Framework requires at least %s version %s. You are running version %s. Please upgrade and try again.', 'wecodeart' )
+			'customizer' => esc_html__( 'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 'wecodeart' ),
+			'checkpoint' => esc_html__( 'WeCodeArt Framework requires at least %s version %s. You are running version %s. Please upgrade and try again.', 'wecodeart' )
 		];
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/i18n', $defaults ) );
