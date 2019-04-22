@@ -117,14 +117,14 @@ class Customizer {
 	 */
 	private function get_configurations( $wp_customize ) {
 		if ( ! is_null( self::$configurations ) ) return self::$configurations;
-		return apply_filters( 'wecodeart/filter/customizer/configurations', array(), $wp_customize );
+		return apply_filters( 'wecodeart/filter/customizer/configurations', [], $wp_customize );
 	}
 
 	/**
 	 * Grab our Customizer Defaults.
 	 *
 	 * @param 	string 		mod_name
-	 * @version	3.7.0
+	 * @version	3.7.9
 	 * @return 	mixed/array
 	 */
 	public static function get_defaults( $mod_name = '' ) {
@@ -140,7 +140,6 @@ class Customizer {
 			'footer-layout-container'		=> 'container',
 			'footer-layout-modules'			=> ['footer-1', 'footer-2', 'footer-3' ],
 			'footer-copyright-text'			=> sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy; ' . date( 'Y' ) ),
-			'page_for_404' 					=> '0'
 		);
 
 		/**
@@ -154,14 +153,14 @@ class Customizer {
 			if( $type === 'product' ) continue;
 			// Entry Meta
 			if( post_type_supports( $type, 'wecodeart-post-info' ) ) {
-				$defaults['content-entry-meta-' . $type . '-archive'] = [ 'author', 'date', 'comments' ];
-				$defaults['content-entry-meta-' . $type . '-singular'] = [ 'author', 'date', 'comments' ];
+				$defaults['content-entry-meta-' . $type . '-archive'] 	= [ 'author', 'date', 'comments' ];
+				$defaults['content-entry-meta-' . $type . '-singular'] 	= [ 'author', 'date', 'comments' ];
 			}
 			// Custom Container and Modules
-			$defaults['content-layout-container-' . $type . '-archive'] = 'container';
-			$defaults['content-layout-modules-' . $type . '-archive'] = [ 'content', 'primary' ];
-			$defaults['content-layout-container-' . $type . '-singular'] = 'container';
-			$defaults['content-layout-modules-' . $type . '-singular'] = [ 'content', 'primary' ];
+			$defaults['content-layout-container-' . $type . '-archive']		= 'container';
+			$defaults['content-layout-modules-' . $type . '-archive'] 		= [ 'content', 'primary' ];
+			$defaults['content-layout-container-' . $type . '-singular'] 	= 'container';
+			$defaults['content-layout-modules-' . $type . '-singular'] 		= [ 'content', 'primary' ];
 		}
 		
 		$args = apply_filters( 'wecodeart/filter/customizer/defaults', $defaults );

@@ -1,5 +1,7 @@
-v3.7.9
+v3.8.0
 - Updated - Translation escaping across some files
+- Fixed - Customizer empty setting for old 404 page
+- Removed - Old structured data class
 
 v3.7.8
 - Added - Default Pings List classes ( to remove bullets/padding )

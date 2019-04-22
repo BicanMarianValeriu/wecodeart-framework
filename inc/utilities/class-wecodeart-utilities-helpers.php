@@ -9,7 +9,7 @@
  * @subpackage  Helper Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.3
+ * @version		3.8.0
  */
 
 namespace WeCodeArt\Utilities;
@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
  * Helpers functions
  */
 class Helpers {
+
 	use \WeCodeArt\Singleton;  
 
 	/**
@@ -54,5 +55,25 @@ class Helpers {
 
 		// No class, function or constant found to exist.
 		return false;
+	}
+
+	/**
+	 * Trim CSS
+	 *
+	 * @since 	3.7.7
+	 * @param 	string $css CSS content to trim.
+	 *
+	 * @return 	string
+	 */
+	public static function trim_css( $css = '' ) {
+
+		// Trim white space for faster page loading.
+		if ( ! empty( $css ) ) {
+			$css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
+			$css = str_replace( [ "\r\n", "\r", "\n", "\t", '  ', '    ', '    ' ], '', $css );
+			$css = str_replace( ', ', ',', $css );
+		}
+
+		return $css;
 	}
 }

@@ -9,7 +9,7 @@
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.9
- * @version		3.7.8
+ * @version		3.7.9
  */
 
 namespace WeCodeArt\Walkers;
