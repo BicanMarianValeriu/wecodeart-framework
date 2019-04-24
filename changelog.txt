@@ -1,3 +1,6 @@
+v3.8.1
+- Added - wp_body_open();
+
 v3.8.0
 - Updated - Translation escaping across some files
 - Fixed - Customizer empty setting for old 404 page
