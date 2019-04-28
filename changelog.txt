@@ -1,3 +1,6 @@
+v3.8.2
+- Added - ...;
+
 v3.8.1
 - Added - wp_body_open() function hook;
 - Added - WeCodeArt::layout() method and changed 'wecodeart()' function to use this method
