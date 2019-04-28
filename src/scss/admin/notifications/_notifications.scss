@@ -1,0 +1,32 @@
+.wca-notice {
+    &--theme-rating {
+        & > .wca-notice {
+            &__container {
+                flex-flow: row nowrap;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            padding: 5px 5px 2px;
+
+            span {
+                display: inline-block;
+                vertical-align: sub;
+            }
+        }
+    }
+
+    &__container {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+
+    &__heading {
+        margin-bottom: 0;
+    }
+
+    &__image {
+        margin: 1.5rem 1rem 1.5rem 0;
+    }
+}

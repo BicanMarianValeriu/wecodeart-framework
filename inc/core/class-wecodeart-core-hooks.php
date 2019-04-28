@@ -16,6 +16,8 @@ namespace WeCodeArt\Core;
 
 if ( ! defined( 'ABSPATH' ) ) exit(); 
 
+use WeCodeArt\Utilities\Callbacks;
+
 /**
  * General Hooks
  */
@@ -73,7 +75,7 @@ class Hooks {
 		else $classes[] = 'no-sidebar';
 		
 		// Singular sidebar class if gutenberg wide/full layout 
-		if( wecodeart_gutenberg_wide_or_full_content() ) { 
+		if( Callbacks::is_full_content() ) { 
 			$classes = array_diff( $classes, [ 'has-sidebar' ] );
 			$classes[] = 'gutenberg-disabled-sidebar'; 
 			$classes[] = 'no-sidebar'; 
@@ -115,7 +117,7 @@ class Hooks {
 		// Add "entry" to the post class array
 		$classes[] = 'entry';
 		// Remove "hentry" from post class array
-		$classes = array_diff( $classes, array( 'hentry' ) );
+		$classes = array_diff( $classes, [ 'hentry' ]);
 		
 		return $classes;
 	}

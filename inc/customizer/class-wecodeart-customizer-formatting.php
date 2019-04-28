@@ -6,7 +6,7 @@
  * @subpackage 	Customizer\Formatting
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.6
- * @version 	3.6.2
+ * @version 	3.8.1
  */ 
 
 namespace WeCodeArt\Customizer;
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
 final class Formatting {
 
 	use \WeCodeArt\Singleton;
-	
+
 	/**
 	 * Sanitize a value for use as a linear CSS value.
 	 * Stuff like, `10px`, `5em`, `20%`, `calc( 100% - 30px )`.
@@ -28,7 +28,7 @@ final class Formatting {
 	 *
 	 * @return string  The provided string, sanitized for linear CSS.
 	 */
-	public static function wecodeart_sanitize_linear_css( $string ) {
+	public static function sanitize_linear_css( $string ) {
 		// Strip away any chars that aren't part of a linear CSS value.
 		$out = preg_replace( '/[^a-zA-Z0-9 +-_.()% ]/', '', $string );
 		return $out;
@@ -39,7 +39,7 @@ final class Formatting {
 	 *
 	 * @return 	1/0 (enabled/disabled).
 	 */
-	public static function wecodeart_sanitize_checkbox( $input ) {
+	public static function sanitize_checkbox( $input ) {
 		// Return 1 for enable and 0 for disable
 		return( 1 === absint( $input ) ) ? 1 : 0;
 	}

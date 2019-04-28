@@ -1,5 +1,10 @@
 v3.8.1
-- Added - wp_body_open();
+- Added - wp_body_open() function hook;
+- Added - WeCodeArt::layout() method and changed 'wecodeart()' function to use this method
+- Added - Support Class for ANR Captcha plugin.
+- Added - Admin Notification system class for handling Notifications.
+- Changed - Comments submit input to button.
+- Changed - wecodeart/filter/gutenberg/wide_or_full_content to wecodeart/filter/gutenberg/auto_layout
 
 v3.8.0
 - Updated - Translation escaping across some files

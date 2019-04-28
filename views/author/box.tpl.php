@@ -24,12 +24,12 @@ if ( ! defined( 'ABSPATH' ) ) exit();
 			</div>
 			<div class="author-box__gravatar col-12 col-md-auto text-center text-md-left"><?php
 				echo wp_kses( $avatar, [ 'img' => [
-					'alt'    => true,
 					'class'  => true,
+					'width'  => true,
 					'height' => true,
+					'alt'    => true,
 					'src'    => true,
 					'srcset' => true,
-					'width'  => true,
 				] ] );
 			?></div>
 			<div class="author-box__description col">

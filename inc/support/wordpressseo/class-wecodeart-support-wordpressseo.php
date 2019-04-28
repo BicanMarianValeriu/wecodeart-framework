@@ -9,16 +9,17 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.6.2
+ * @version		3.8.1
  */
 
 namespace WeCodeArt\Support;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+use WeCodeArt\Core\Content;
 use WeCodeArt\Utilities\Markup;
 use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Core\Callbacks;
+use WeCodeArt\Utilities\Callbacks;
 
 /**
  * WPSEO Integration
@@ -44,14 +45,14 @@ class WordPressSeo {
 	 * Yoast BreadCrumbs
 	 *
 	 * @since   3.5
-	 * @version 3.6.0.4
+	 * @version 3.8.1
 	 *
 	 * @return  void
 	 */
 	public function render_yoast_breadcrumbs() {
-		if( ! function_exists( 'yoast_breadcrumb' ) || Callbacks::_is_frontpage() ) return;
+		if( ! function_exists( 'yoast_breadcrumb' ) || Callbacks::is_front_page() ) return;
 
-		$options = \WeCodeArt\Core\Content::get_contextual_options(); 
+		$options = Content::get_contextual_options(); 
 
 		$wrappers = [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs' ] ],

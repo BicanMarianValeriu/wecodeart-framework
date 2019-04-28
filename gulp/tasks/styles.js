@@ -1,22 +1,18 @@
 import gulp from 'gulp';
-import path from 'path';
 import pump from 'pump';
-import merge from 'merge-stream';
 import browserSync from 'browser-sync';
 import autoprefixer from 'autoprefixer';
 import gulpSASS from 'gulp-sass';
-import gulpRename from 'gulp-rename';
 import gulpPostCSS from 'gulp-postcss';
 import gulpCleanCSS from 'gulp-clean-css';
 import gulpSourcemaps from 'gulp-sourcemaps';
 
 import { srcPath, distPath } from './index';
 
-import paths from './../paths';
 import config from './../config';
 
 // Build Styles Task
-const buildStyles = (mode) => (done) => {
+const processStyles = (mode, { entry, output }) => {
     let outputStyle;
     if (mode === 'development') outputStyle = 'nested';
     else if (mode === 'production') outputStyle = 'compressed';
@@ -26,30 +22,32 @@ const buildStyles = (mode) => (done) => {
         autoprefixer(config.autoprefixer)
     ];
 
-    let _main = ['development', 'production'].includes(mode) ? pump([
-        gulp.src(paths.entry.scss.main),
+    return [
+        gulp.src(entry),
         gulpSourcemaps.init({ loadMaps: true }),
         gulpSASS({ outputStyle }),
         ...((mode === 'production') ? [gulpCleanCSS(config.cleanCSS)] : []),
         gulpPostCSS(postcssPlugins),
         gulpSourcemaps.write('./'),
-        gulp.dest(distPath('css')),
+        gulp.dest(output),
         browserSync.stream(),
-    ], done) : undefined;
+    ];
+};
 
-    let _customizer = ['development', 'production'].includes(mode) ? pump([
-        gulp.src(paths.entry.scss.customizer),
-        gulpSourcemaps.init({ loadMaps: true }),
-        gulpSASS({ outputStyle }),
-        ...((mode === 'production') ? [gulpCleanCSS(config.cleanCSS)] : []),
-        gulpPostCSS(postcssPlugins),
-        gulpSourcemaps.write('./'),
-        gulpRename(file => file.dirname = path.join('customizer', file.dirname)),
-        gulp.dest(distPath('css')),
-        browserSync.stream(),
-    ], done) : undefined;
+// Build Styles Task
+const buildStyles = (mode) => (done) => {
+    const pumps = () => {
+        // FrontEnd CSS ( Gutenberg Frontend CSS imported into frontend SCSS )
+        pump(processStyles(mode, { entry: srcPath('scss'), output: distPath('css') }), done);
 
-    merge(_main, _customizer);
+        // Admin CSS
+        pump(processStyles(mode, { entry: srcPath('scss/admin'), output: distPath('css/admin') }), done);
+
+        // Customizer CSS
+        pump(processStyles(mode, { entry: srcPath('scss/customizer'), output: distPath('css/customizer') }), done);
+    };
+
+    ['development', 'production'].includes(mode) ? pumps() : undefined;
 };
 
 export { buildStyles };

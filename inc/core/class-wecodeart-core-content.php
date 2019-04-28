@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
 use WeCodeArt\Core\Loops;
 use WeCodeArt\Core\Pagination;
 use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Utilities\Callbacks;
 
 /**
  * Handles Content Containers
@@ -245,7 +246,7 @@ class Content {
 	 * Get Contextual Modules Options
 	 *
 	 * @since 	3.5.0
-	 * @version	3.6.1
+	 * @version	3.8.1
 	 *
 	 * @return 	array 
 	 */
@@ -270,15 +271,6 @@ class Content {
 			}
 		}
 
-		// 404 Page Mods
-		$fof = get_theme_mod( 'page_for_404', '0' );
-		if( is_404() && $fof !== '' ) { // default must be provided since we do not set in customizer
-			return [
-				'container' => get_theme_mod( 'content-layout-container-page-' . $fof, 'container' ),
-				'modules' 	=> get_theme_mod( 'content-layout-modules-page-' . $fof, [ 'content', 'primary' ] )
-			]; 
-		}
-
 		// Post Types Archives And Singular Context Mods 
 		$public_posts = get_post_types( [ 'public' => true, 'publicly_queryable' => true ] ); 
 
@@ -292,7 +284,7 @@ class Content {
 
 			if( is_singular( $type ) ) {  
 				$modules 	= get_theme_mod( 'content-layout-modules-' . $type . '-singular' ); 
-				if( wecodeart_gutenberg_wide_or_full_content() ) $modules = [ 'content' ]; // Return content only 
+				if( Callbacks::is_full_content() ) $modules = [ 'content' ];
 				
 				return [
 					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular' ),

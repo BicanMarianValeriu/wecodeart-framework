@@ -76,4 +76,18 @@ class Helpers {
 
 		return $css;
 	}
+
+	/**
+	 * Get a specific property of an array
+	 *
+	 * @since  	3.8.1
+	 *
+	 * @return null|string|mixed The value
+	 */
+	public static function get_prop( $array, $prop, $default = null ) {
+		if ( ! is_array( $array ) && ! ( is_object( $array ) && $array instanceof ArrayAccess ) ) return $default; 
+		if ( isset( $array[ $prop ] ) ) $value = $array[ $prop ];
+		else $value = ''; 
+		return empty( $value ) && null !== $default ? $default : $value;
+	}
 }

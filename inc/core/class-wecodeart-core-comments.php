@@ -9,7 +9,7 @@
  * @subpackage 	Core\Comments
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.3
+ * @version		3.8.1
  */
 
 namespace WeCodeArt\Core;
@@ -235,7 +235,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	3.7.3
+	 * @version	3.8.1
 	 *
 	 * @return 	array
 	 */
@@ -298,19 +298,20 @@ class Comments {
 		$notes_before 	= '<div class="comment-notes col-12 mb-3">' . esc_html__( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
 		$notes_after 	= '<div class="form-allowed-tags col-12 mb-3">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'wecodeart' ), ' <code>' . allowed_tags() . '</code>' ) . '</div>';
 
-		$args = array(
+		$args = [
 			'title_reply' 			=> esc_html__( 'Speak Your Mind', 'wecodeart' ),
 			'comment_field' 		=> $author_comment,
 			'comment_notes_before' 	=> $notes_before,
 			'comment_notes_after' 	=> $notes_after,
 			'submit_field'         	=> '<div class="form-submit col-12 mb-3">%1$s %2$s</div>',
+			'submit_button'         => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
 			'class_submit'         	=> 'btn btn-primary',
 			'fields' => [
 				'author' => $author_name,
 				'email'  => $author_email,
 				'url'    => $author_url
 			]
-		);
+		];
 
 		// Merge $args with $defaults
 		$args = wp_parse_args( $args, $defaults );

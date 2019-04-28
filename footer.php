@@ -8,18 +8,34 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Footer Template
  * @since  		1.0.0
- * @version 	3.7.1
+ * @version 	3.8.1
  */
 
-        do_action( 'wecodeart/hook/inner/bottom' );     // Hook Inner Bottom	
-        echo '</div><!-- /.content @filter = `wecodeart/filter/attributes/content` -->';
-        do_action( 'wecodeart/hook/inner/after' ); 	    // Hook Inner After
+        do_action( 'wecodeart/hook/inner/bottom' );     // Hook Inner Bottom
 
-        do_action( 'wecodeart/hook/footer/before' );	// Hook Before Footer
-        do_action( 'wecodeart_footer_markup' 	  );	// WeCodeArt Footer
-        do_action( 'wecodeart/hook/footer/after'  );	// Hook After Footer
+        echo '</div>';
+
+        if( WP_DEBUG === true ) {
+            ?>
+            <!-- /.content @filter = `wecodeart/filter/attributes/content` -->
+            <?php 
+        }
+
+        do_action( 'wecodeart/hook/inner/after' ); 	    // Hook Inner After.
+
+        do_action( 'wecodeart/hook/footer/before' );    // Hook Before Footer.
+
+        /**
+         * @see WeCodeArt\Core\Footer->footer_markup();
+         */
+        do_action( 'wecodeart_footer_markup' );
+
+        do_action( 'wecodeart/hook/footer/after' );	// Hook After Footer.
         
-        wp_footer(); 									// WordPress Footer 
+        /**
+         * WP Footer
+         */
+        wp_footer(); 
     ?>
     </body>
 </html>

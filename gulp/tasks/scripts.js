@@ -1,9 +1,6 @@
 import gulp from 'gulp';
-import path from 'path';
 import pump from 'pump';
-//import merge from 'merge';
 import gulpBabel from 'gulp-babel';
-import gulpRename from 'gulp-rename';
 import gulpUglify from 'gulp-uglify';
 import gulpSourcemaps from 'gulp-sourcemaps';
 import vinylNamed from 'vinyl-named';
@@ -14,7 +11,22 @@ import webpackStream from 'webpack-stream';
 
 import { srcPath, distPath } from './index';
 
-import paths from './../paths';
+// This runs the same after any compiler
+const afterBundler = (mode, dest) => {
+	return [
+		gulpSourcemaps.init({ loadMaps: true }),
+		through.obj(function (file, enc, cb) {
+			const isSourceMap = /\.map$/.test(file.path);
+			if (!isSourceMap) this.push(file);
+			cb();
+		}),
+		gulpBabel(),
+		...((mode === 'production') ? [gulpUglify()] : []),
+		gulpSourcemaps.write('./'),
+		gulp.dest(dest),
+		browserSync.stream()
+	];
+};
 
 // Build Scripts Task
 const buildScripts = (mode) => (done) => {
@@ -29,36 +41,14 @@ const buildScripts = (mode) => (done) => {
 			gulp.src(srcPath('js')),
 			vinylNamed(),
 			webpackStream(streamMode, webpack),
-			gulpSourcemaps.init({ loadMaps: true }),
-			through.obj(function (file, enc, cb) {
-				const isSourceMap = /\.map$/.test(file.path);
-				if (!isSourceMap) this.push(file);
-				cb();
-			}),
-			gulpBabel(),
-			...((mode === 'production') ? [gulpUglify()] : []),
-			gulpSourcemaps.write('./'),
-			gulp.dest(distPath('js')),
-			browserSync.stream(),
+			...afterBundler(mode, distPath('js'))
 		], done);
 
+		// Admin
+		pump([ gulp.src(srcPath('js/admin')), vinylNamed(), ...afterBundler(mode, distPath('js/admin')) ], done);
+
 		// Customizer
-		pump([
-			gulp.src(paths.entry.js.customizer),
-			vinylNamed(),
-			gulpSourcemaps.init({ loadMaps: true }),
-			through.obj(function (file, enc, cb) {
-				const isSourceMap = /\.map$/.test(file.path);
-				if (!isSourceMap) this.push(file);
-				cb();
-			}),
-			gulpBabel(),
-			...((mode === 'production') ? [gulpUglify()] : []),
-			gulpRename(file => file.dirname = path.join('customizer', file.dirname)),
-			gulpSourcemaps.write('./'),
-			gulp.dest(distPath('js')),
-			browserSync.stream(),
-		], done);
+		pump([ gulp.src(srcPath('js/customizer')), vinylNamed(), ...afterBundler(mode, distPath('js/customizer')) ], done);
 	};
 
 	['development', 'production'].includes(mode) ? pumps() : undefined;

@@ -9,13 +9,14 @@
  * @subpackage  Theme Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.9
+ * @version		3.8.1
  */
 
 namespace WeCodeArt;
 
 if ( ! defined( 'ABSPATH' ) ) exit();
 
+use WeCodeArt\Support\ANR;
 use WeCodeArt\Support\WooCommerce;
 use WeCodeArt\Support\WordPressSeo;
 use WeCodeArt\Utilities\Helpers;
@@ -36,8 +37,9 @@ class Support {
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ], 2 );
 
 		// Integrations/Compatability/Plugin Support
-		if( Helpers::detect_plugin( [ 'classes'		=> [ 'woocommerce' ] ] ) )		WooCommerce::get_instance();
-		if( Helpers::detect_plugin( [ 'constants' 	=> [ 'WPSEO_VERSION' ] ] ) ) 	WordPressSeo::get_instance();
+		if( Helpers::detect_plugin( [ 'classes'		=> [ 'woocommerce' ] ] ) )			WooCommerce::get_instance();
+		if( Helpers::detect_plugin( [ 'constants' 	=> [ 'WPSEO_VERSION' ] ] ) ) 		WordPressSeo::get_instance();
+		if( Helpers::detect_plugin( [ 'constants' 	=> [ 'ANR_PLUGIN_VERSION' ] ] ) ) 	ANR::get_instance();
 	}
 
 	/**

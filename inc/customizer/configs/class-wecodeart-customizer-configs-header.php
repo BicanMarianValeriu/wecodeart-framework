@@ -16,8 +16,8 @@ namespace WeCodeArt\Customizer\Configs;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-use WeCodeArt\Customizer\Config as Config;
-use WeCodeArt\Customizer\Formatting as Formatting;
+use WeCodeArt\Customizer\Config;
+use WeCodeArt\Customizer\Formatting;
 
 /**
  * Customizer Config initial setup
@@ -35,8 +35,9 @@ class Header extends Config {
 	public function register( $configurations, $wp_customize ) {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
+
 		// Header Modules Choices
-		$h_modules = array();
+		$h_modules = [];
 		$modules = \WeCodeArt\Core\Header::nav_bar_modules();
 		foreach( $modules as $key => $val ) $h_modules[$key] = $val['label']; 
 

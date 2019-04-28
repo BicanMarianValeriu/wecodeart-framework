@@ -9,7 +9,7 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.0
- * @version		3.6.2
+ * @version		3.8.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit();
@@ -26,6 +26,7 @@ use WeCodeArt\Core\Footer;
 use WeCodeArt\Core\Comments;
 use WeCodeArt\Core\Hooks;
 use WeCodeArt\Core\Scripts;
+use WeCodeArt\Admin;
 
 // Include the autoloader.
 require_once( get_parent_theme_file_path( '/inc/class-wecodeart-autoloader.php' ) );
@@ -37,7 +38,7 @@ new WeCodeArt\Autoloader();
 final class WeCodeArt {
 
 	use \WeCodeArt\Singleton; 
-	
+
 	/**
 	 * Theme Data
 	 *
@@ -76,15 +77,46 @@ final class WeCodeArt {
 		Scripts		::get_instance();
 		Hooks		::get_instance();
 
-		// Fire Customizer Class
-		Customizer	::get_instance();
+		// Admin Stuff
+		Admin 		::get_instance();
+		Customizer 	::get_instance();
 
 		// Fire Support Class
 		Support		::get_instance();
+	}
+	
+	/**
+	 * Render the layout
+	 *
+	 * @since 3.8.1
+	 */
+	public static function layout() {
 
-		// Put all the pieces together - Everything ends here :)
-		require get_parent_theme_file_path( '/inc/functions/functions.php' ); 
-	} 
+		get_header();
+
+		/**
+		 * @see - WeCodeArt\Core\Content::render_modules();
+		 */
+		do_action( 'wecodeart_inner_markup' );
+
+		get_footer();
+
+	}
 }
 
+/**
+ * Init the Framework
+ */
 WeCodeArt::get_instance();
+
+/**
+ * Puts Everything togheter
+ *
+ * @since	1.0
+ * @version	3.8.1
+ *
+ * @return	mixed 	Site Layout
+ */
+function wecodeart() {	
+	WeCodeArt::layout(); 
+}

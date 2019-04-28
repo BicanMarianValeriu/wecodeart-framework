@@ -9,12 +9,14 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.6.3
+ * @version		3.8.1
  */
 
 namespace WeCodeArt;
 
 if ( ! defined( 'ABSPATH' ) ) exit(); 
+
+use WeCodeArt\Admin\Notifications;
 
 /**
  * Activation - runs first before any other class to make sure user meets the requirements
@@ -57,6 +59,9 @@ class Activation {
 		$this->compare_requirements();
 
 		if( $this->is_ok() === false ) {
+			// Init notifications system on Activation Check.
+			Notifications::get_instance();
+
 			// Add default error notices into admin, prevent customizer load and redirect notice.
 			add_action( 'after_switch_theme', 	array( $this, 'after_switch_theme' 	) );
 			add_action( 'load-customize.php', 	array( $this, 'customizer_notice' 	) );
@@ -145,26 +150,26 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	3.5
+	 * @version	3.8.1
 	 */
 	public function after_switch_theme() {
 		switch_theme( WP_DEFAULT_THEME );
 		unset( $_GET['activated'] );
-		add_action( 'admin_notices', [ $this, 'admin_notice' ] ); 
+		$this->admin_notice(); 
 	}
 
 	/**
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	3.5 
+	 * @version	3.8.1
 	 */
 	public function admin_notice() {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
 			if( $val['failed'] === true ) {
 				$message = sprintf( $this->messages['checkpoint'], $val['label'], $val['required'], $val['installed'] );
-				printf( '<div class="error"><p>%s</p></div>', $message );
+				Notifications::add( [ 'type' => 'error', 'message' => wpautop( $message ) ] );
 			}
 		}	
 	}

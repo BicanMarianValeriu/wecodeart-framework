@@ -16,9 +16,9 @@ namespace WeCodeArt\Core\Entry;
 
 if ( ! defined( 'ABSPATH' ) ) exit();
 
-use WeCodeArt\Core\Callbacks;
 use WeCodeArt\Utilities\Markup;
 use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Utilities\Callbacks;
 
 /**
  * Handles Entry Meta output
@@ -355,7 +355,7 @@ class Meta {
 
 			if( is_singular( $type ) ) $options = get_theme_mod( $theme_mod . '-singular' ); 
 			if( is_post_type_archive( $type ) ) $options = get_theme_mod( $theme_mod . '-archive' ); 
-			if( $type === 'post' && Callbacks::_is_post_archive() ) $options = get_theme_mod( $theme_mod . '-archive' ); 
+			if( $type === 'post' && Callbacks::is_post_archive() ) $options = get_theme_mod( $theme_mod . '-archive' ); 
 		}
 
 		return $options;  
