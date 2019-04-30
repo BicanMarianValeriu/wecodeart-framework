@@ -69,7 +69,7 @@ class Archive {
 	 * Filter category title
 	 *
 	 * @since	3.5
-	 * @version	3.5
+	 * @version	3.8.2
 	 *
 	 * @return 	string
 	 */
@@ -81,23 +81,23 @@ class Archive {
 		if ( is_search() ) {
 			$output = sprintf( $title_template, sprintf( __( 'Search Results for "%s"', 'wecodeart' ), '<span>' .  get_search_query() . '</span>' ) );
 		} elseif ( is_category() ) {
-			$output .= sprintf( $title_template, __( 'Category Archives: ', 'wecodeart' ) . ' ' . single_term_title( '', false ) );
+			$output .= sprintf( $title_template, esc_html__( 'Category Archives: ', 'wecodeart' ) . ' ' . single_term_title( '', false ) );
 		} elseif ( is_tag() ) {
-			$output .= sprintf( $title_template, __( 'Tag Archives: ', 'wecodeart' ) . ' ' . single_term_title( '', false ) );
+			$output .= sprintf( $title_template, esc_html__( 'Tag Archives: ', 'wecodeart' ) . ' ' . single_term_title( '', false ) );
 		} elseif ( is_year() ) {
-			$output .= sprintf( $title_template, __( 'Yearly Archives: ', 'wecodeart' ) . ' ' . get_the_date( _x( 'Y', 'yearly archives date format', 'wecodeart' ) ) );
+			$output .= sprintf( $title_template, esc_html__( 'Yearly Archives: ', 'wecodeart' ) . ' ' . get_the_date( _x( 'Y', 'yearly archives date format', 'wecodeart' ) ) );
 		} elseif ( is_month() ) {
-			$output .= sprintf( $title_template, __( 'Monthly Archives: ', 'wecodeart' ) . ' ' . get_the_date( _x( 'F Y', 'monthly archives date format', 'wecodeart' ) ) );
+			$output .= sprintf( $title_template, esc_html__( 'Monthly Archives: ', 'wecodeart' ) . ' ' . get_the_date( _x( 'F Y', 'monthly archives date format', 'wecodeart' ) ) );
 		} elseif ( is_day() ) {
-			$output .= sprintf( $title_template, __( 'Daily Archives: ', 'wecodeart' ) . ' ' . get_the_date() );
+			$output .= sprintf( $title_template, esc_html__( 'Daily Archives: ', 'wecodeart' ) . ' ' . get_the_date() );
 		} elseif ( is_post_type_archive() ) {
-			$output .= sprintf( $title_template, __( 'Post Type Archives: ', 'wecodeart' ) . ' ' . post_type_archive_title( '', false ) );
+			$output .= sprintf( $title_template, esc_html__( 'Post Type Archives: ', 'wecodeart' ) . ' ' . post_type_archive_title( '', false ) );
 		} elseif ( is_tax() ) {
 			$tax = get_taxonomy( get_queried_object()->taxonomy );
 			/* translators: %s: Taxonomy singular name */
 			$output .= sprintf( esc_html__( '%s Archives:', 'wecodeart' ), $tax->labels->singular_name );
 		} else {
-			$output .= __( 'Archives:', 'wecodeart' );
+			$output .= esc_html__( 'Archives:', 'wecodeart' );
 		} 
 
 		return trim( $output );

@@ -94,7 +94,7 @@ class Admin {
 						</div>
 					</div>',
 					'https://www.wecodeart.com/wp-content/uploads/2019/01/cropped-wecodeart-logo-2.png',
-					esc_html__( 'Hello! I\'m glad you use WeCodeArt Framework to build this website — Thanks a ton!', 'wecodeart' ),
+					esc_html__( 'Hello! I\'m glad you use WeCodeArt Framework to build this website - Thanks a ton!', 'wecodeart' ),
 					esc_html__( 'Could you please do me a BIG favor and give it a 5-star rating on WordPress? This would boost my motivation and help other users make a comfortable decision while choosing the WeCodeArt Framework.', 'wecodeart' ),
 					'https://wordpress.org/support/theme/wecodeart/reviews/?filter=5#new-post',
 					esc_html__( 'Ok, you deserve it', 'wecodeart' ),

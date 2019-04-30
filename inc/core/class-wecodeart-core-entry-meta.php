@@ -39,18 +39,18 @@ class Meta {
 	 * Entry Meta Author Template
 	 *
 	 * @since	1.0
-	 * @version	3.7.3
+	 * @version	3.8.2
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
 	 *
 	 * @return 	string
 	 */
-	public static function author( $args = array(), $echo = true ) {
+	public static function author( $args = [], $echo = true ) {
 		
 		$author_id 	= get_the_author_meta( 'ID' );
 		$author		= get_the_author_meta( 'display_name', $author_id );
-		$url    	= get_author_posts_url( $author_id );
+		$author_url = get_author_posts_url( $author_id );
 
 		// In order to render something when ajax refreshed in customizer.
 		$author = $author ? $author : esc_html__( 'Author Name', 'wecodeart' );
@@ -69,10 +69,10 @@ class Meta {
 			__( '<span class="entry-author">%1$s %2$s %3$s %4$s %5$s</span>', 'wecodeart' ),
 			$args[ 'before' ],
 			'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
-			sprintf( '<a href="%s" class="entry-author-link" rel="author">', esc_url( $url ) ),
+			sprintf( '<a href="%s" class="entry-author-link" rel="author">', esc_url( $author_url ) ),
 			sprintf( '<span class="entry-author-name">%s</span></a>', esc_html( $author ) ),
-			$args[ 'after' ] ) 
-		);
+			$args[ 'after' ] 
+		), $author_id, $defaults );
 
 		if ( $echo ) echo $output;
 		else return $output;
@@ -89,7 +89,7 @@ class Meta {
 	 *
 	 * @return 	string
 	 */
-	public static function date( $args = array(), $echo = true ) {
+	public static function date( $args = [], $echo = true ) {
 		// Set the Defaults
 		$defaults = array(
 			'before'	=> SVG::compile( 'icon--clock' ),
@@ -178,7 +178,7 @@ class Meta {
 	 *
 	 * @return 	string
 	 */
-	public static function tags( $args = array(), $echo = true ) {
+	public static function tags( $args = [], $echo = true ) {
 		// Set the Defaults
 		$defaults = array(
 			'before'  	=> SVG::compile( 'icon--tag' ),
@@ -190,7 +190,7 @@ class Meta {
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/tags/defaults', $defaults ) );
 
 		// Get what we need
-		$tags = get_the_tag_list( '', $args['sep'] , '' );
+		$tags = get_the_tag_list( '', $args['sep'], '' );
 
 		// Do nothing if no tags
 		if ( ! $tags ) return;
@@ -221,7 +221,7 @@ class Meta {
 	 *
 	 * @return 	string
 	 */
-	public static function comments( $args = array(), $echo = true ) {
+	public static function comments( $args = [], $echo = true ) {
 		// Only if post type supports
 		if ( ! post_type_supports( get_post_type(), 'comments' ) ) return;
 
@@ -273,7 +273,7 @@ class Meta {
 	 *
 	 * @return 	string
 	 */
-	public static function edit_link( $args = array(), $echo = true ) {
+	public static function edit_link( $args = [], $echo = true ) {
 		if( ! is_user_logged_in() ) return;
 		// Set the defaults
 		$defaults = array(
@@ -290,9 +290,8 @@ class Meta {
 		$html = ob_get_clean();
 
 		// The HTML	
-		$output = apply_filters( 
-			'wecodeart/filter/entry/meta/edit/html', 
-			sprintf( __( '<span class="entry-edit float-right">%1s</span>', 'wecodeart' ), $html )
+		$output = apply_filters( 'wecodeart/filter/entry/meta/edit/html', 
+			sprintf( __( '<span class="entry-edit float-right">%1s</span>', 'wecodeart' ), $html ) 
 		);
 
 		if ( $echo ) echo $output;
@@ -310,7 +309,7 @@ class Meta {
 	 *
 	 * @return 	string
 	 */
-	public static function read_more( $args = array(), $echo = true ) {
+	public static function read_more( $args = [], $echo = true ) {
 		// Set the Defaults
 		$defaults = array(
 			'before'	=> '',

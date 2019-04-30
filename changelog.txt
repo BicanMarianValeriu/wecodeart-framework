@@ -1,5 +1,11 @@
+v3.8.3
+- Added - Basic Widgets SCSS.
+- Updated - ...
+
 v3.8.2
-- Added - ...;
+- Updated - Archive intro titles escape translated text
+- Fixed - Admin class notification non printable characters
+- Added - Passed author ID and $defaults for Meta method filter
 
 v3.8.1
 - Added - wp_body_open() function hook;
@@ -41,14 +47,14 @@ v3.7.5
 - Updated - Core\Entry\Meta methods data escaping for strings.
 - Updated - Core\Loops::default() now uses Markup::wrap() function ( adds ability to easily change wrappers )
 - Updated - Partials Classes comments and messages ( moving towards PSR rules )
-- Updated - Classes string translation function __() to esc_html__()
+- Updated - Classes string translation function
 - Added - WeCodeArt\Utilities\Markup\Template - class used to render template files.
 - Added - WeCodeArt\Core\Author - class used to get/render author information.
 - Changed - Author Box template and render functions for Entry/Archive class.
 
 v3.7.2 
 - Changed - Paginations wrappers changed to `nav` from `div`
-- Fixed - Footer esc_html_e() translation function textdomain for copyright
+- Fixed - Footer esc_html_e translation function textdomain for copyright
 - Fixed - Markup::wrap() function - closing wrappers in reverse order for valid html
 
 v3.7.1
