@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.6
- * @version		3.7.3
+ * @version		3.8.3
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -39,7 +39,7 @@ class Meta {
 	 * Entry Meta Author Template
 	 *
 	 * @since	1.0
-	 * @version	3.8.2
+	 * @version	3.8.3
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -71,8 +71,8 @@ class Meta {
 			'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
 			sprintf( '<a href="%s" class="entry-author-link" rel="author">', esc_url( $author_url ) ),
 			sprintf( '<span class="entry-author-name">%s</span></a>', esc_html( $author ) ),
-			$args[ 'after' ] 
-		), $author_id, $defaults );
+			$args[ 'after' ]
+		), $author_id, $args );
 
 		if ( $echo ) echo $output;
 		else return $output;
@@ -364,36 +364,37 @@ class Meta {
 	 * This function holds our Meta Modules
 	 *
 	 * @since	3.6
-	 * @version	3.6
+	 * @version	3.8.3
 	 *
 	 * @return 	array
 	 */
 	public static function modules() {
-		$defaults = array();
-		$defaults['author'] = array(
-			'label'    => __( 'Author', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'author' ]
-		);
-		$defaults['date'] = array(
-			'label'    => __( 'Date', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'date' ]
-		);
-		$defaults['categories'] = array(
-			'label'    => __( 'Categories', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'categories' ]
-		);
-		$defaults['tags'] = array(
-			'label'    => __( 'Tags', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'tags' ]
-		);
-		$defaults['comments'] = array(
-			'label'    => __( 'Comments', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'comments' ]
-		);
-		$defaults['edit'] = array(
-			'label'    => __( 'Edit Link', 'wecodeart' ),
-			'callback' => [ __CLASS__, 'edit_link' ]
-		);
+		$defaults = [
+			'author' => [
+				'label'    => esc_html__( 'Author', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'author' ]
+			],
+			'date' => [
+				'label'    => esc_html__( 'Date', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'date' ]
+			],
+			'categories' => [
+				'label'    => esc_html__( 'Categories', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'categories' ]
+			],
+			'tags' => [
+				'label'    => esc_html__( 'Tags', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'tags' ]
+			],
+			'comments' => [
+				'label'    => esc_html__( 'Comments', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'comments' ]
+			],
+			'edit' => [
+				'label'    => esc_html__( 'Edit Link', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'edit_link' ]
+			]
+		];
 		
 		// Return Modules
 		return apply_filters( 'wecodeart/filter/entry/meta/modules', $defaults ); 

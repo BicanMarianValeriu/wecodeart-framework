@@ -87,8 +87,7 @@ class Customizer {
 	 */
 	private function get_config_defaults() {
 		return apply_filters(
-			'wecodeart/filter/customizer/config/defaults',
-			array(
+			'wecodeart/filter/customizer/config/defaults', [
 				'priority'             => null,
 				'title'                => null,
 				'label'                => null,
@@ -105,7 +104,7 @@ class Customizer {
 				'transport'            => null,
 				'default'              => null,
 				'selector'             => null,
-			)
+			]
 		);
 	}
 

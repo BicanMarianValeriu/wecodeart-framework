@@ -35,6 +35,7 @@ class Content {
 	public function init() {
 		// WP.
 		add_action( 'widgets_init', 				[ $this, 'register_sidebars' 	] );
+		add_action( 'wp_body_open',					[ $this, 'skip_link' ], 0 );
 
 		// WeCodeArt.
 		add_action( 'wecodeart_inner_markup', 		[ $this, 'render_modules' 		] );
@@ -62,20 +63,12 @@ class Content {
 			<?php 
 			
 				/**
-				 * @hooked
-				 * ---
+				 * @hooked - none
 				 */
 				do_action( 'wecodeart/hook/main/before' ); 
-				
-				$attributes = Markup::generate_attr(
-					'main',
-					[
-						'id' 	=> 'main',
-						'class' => 'site-main'
-					]
-				);
+
 			?>
-			<main <?php echo $attributes; ?>>
+			<main <?php echo Markup::generate_attr( 'main', [ 'id' => 'main', 'class' => 'site-main' ] ); ?>>
 		<?php
 	}
 
@@ -240,6 +233,19 @@ class Content {
 				] );
 			} 
 		} 
+	}
+
+	/**
+	 * Skip to Content Link
+	 *
+	 * @since	3.8.3
+	 *
+	 * @return 	void
+	 */
+	public function skip_link() {
+		?>
+		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wecodeart' ); ?></a>
+		<?php
 	}
 
 	/**

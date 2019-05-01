@@ -8,30 +8,35 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Header
  * @since       1.0.0
- * @version     3.7.1
+ * @version     3.8.3
  */
 
 use WeCodeArt\Utilities\Markup;
+
 ?>	
 <!DOCTYPE html>
 <html class="no-js" <?php language_attributes( 'html' ); ?>>
     <head>
         <meta charset="<?php bloginfo( 'charset' ); ?>">
         <link rel="profile" href="http://gmpg.org/xfn/11">
-        <?php wp_head(); // WP Head ?>
+        <?php wp_head(); // WP Head. ?>
     </head>	
     <body <?php echo Markup::generate_attr( 'body', [ 'class' => implode( ' ', get_body_class() ) ] ); ?>>
     <?php
+        /**
+         * Added via Hook to avoid extra check for function exists/backwards compatability
+         *
+         * @see - https://wordpress.org/news/2019/04/wordpress-5-2-beta-2/
+         */
+        do_action( 'wp_body_open' );
+
         do_action( 'wecodeart/hook/header/before' 	);	// Hook Before Header
         do_action( 'wecodeart_header_markup' 		);	// WeCodeArt Header
         do_action( 'wecodeart/hook/header/after' 	);	// Hook After Header
 
         do_action( 'wecodeart/hook/inner/before' ); 	// Hook Inner Before 
     ?>
-        <div <?php echo Markup::generate_attr( 'content', [ 
-            'class' => 'content',
-            'id'    => 'content'
-        ] ); ?>>
+        <div <?php echo Markup::generate_attr( 'content-wrapper', [ 'class' => 'content', 'id' => 'content' ] ); ?>>
     <?php
         do_action( 'wecodeart/hook/inner/top' );		// Hook Inner Top
     ?>

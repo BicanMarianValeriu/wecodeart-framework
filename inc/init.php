@@ -52,10 +52,10 @@ final class WeCodeArt {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		// Can we proceed with theme activation ?
-		if( Activation::get_instance()->is_ok() === false ) return;
-		
-		$this->load();
+		// Can we proceed with theme activation/loading?
+		if( Activation::get_instance()->is_ok() ) {
+			$this->load();
+		}
 	}
 
 	/**
@@ -91,7 +91,9 @@ final class WeCodeArt {
 	 * @since 3.8.1
 	 */
 	public static function layout() {
-
+		/**
+		 * @see - https://developer.wordpress.org/reference/functions/get_header/
+		 */
 		get_header();
 
 		/**
@@ -99,8 +101,10 @@ final class WeCodeArt {
 		 */
 		do_action( 'wecodeart_inner_markup' );
 
+		/**
+		 * @see - https://developer.wordpress.org/reference/functions/get_footer/
+		 */
 		get_footer();
-
 	}
 }
 

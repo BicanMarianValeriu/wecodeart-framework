@@ -9,7 +9,7 @@
  * @subpackage 	Walkers\Menu
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		2.0
- * @version		3.6.0.3
+ * @version		3.8.3
  */
 
 namespace WeCodeArt\Walkers;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Walkers;
 if ( ! defined( 'ABSPATH' ) ) exit();
 
 use Walker_Nav_Menu;
+use WeCodeArt\Utilities\Helpers;
 
 /** 
  * Plugin Name: WP Bootstrap Navwalker
@@ -298,22 +299,19 @@ class Menu extends Walker_Nav_Menu {
 	/**
 	 * Menu Fallback
 	 *
-	 * If this function is assigned to the wp_nav_menu's fallback_cb variable
-	 * and a menu has not been assigned to the theme location in the WordPress
-	 * menu manager the function with display nothing to a non-logged in user,
-	 * and will add a link to the WordPress menu manager if logged in as an admin.
+	 * @since 	unknown
+	 * @version	3.8.3 (WeCodeArt)
 	 *
 	 * @param array $args passed from the wp_nav_menu function.
 	 */
 	public static function fallback( $args ) { 
 		if ( current_user_can( 'edit_theme_options' ) ) { 
-			$container       = wecodeart_get_prop( $args, 'container' );
-			$container_id    = wecodeart_get_prop( $args, 'container_id' );
-			$container_class = wecodeart_get_prop( $args, 'container_class' );
-			$menu_class      = wecodeart_get_prop( $args, 'menu_class' ); 
-			$menu_id         = wecodeart_get_prop( $args, 'menu_id' );
+			$container       = Helpers::get_prop( $args, 'container' );
+			$container_id    = Helpers::get_prop( $args, 'container_id' );
+			$container_class = Helpers::get_prop( $args, 'container_class' );
+			$menu_class      = Helpers::get_prop( $args, 'menu_class' ); 
+			$menu_id         = Helpers::get_prop( $args, 'menu_id' );
 
-			// initialize var to store fallback html.
 			$fallback_output = '';
 
 			if ( $container ) {
@@ -326,6 +324,7 @@ class Menu extends Walker_Nav_Menu {
 				}
 				$fallback_output .= '>';
 			}
+
 			$fallback_output .= '<ul';
 			if ( $menu_id ) {
 				$fallback_output .= ' id="' . esc_attr( $menu_id ) . '"'; }
@@ -370,7 +369,7 @@ class Menu extends Walker_Nav_Menu {
 		foreach ( $classes as $key => $class ) {
 			// If any special classes are found, store the class in it's
 			// holder array and and unset the item from $classes.
-			if ( preg_match( '/^disabled|^sr-only/i', $class ) ) {
+			if ( preg_match( '/^disabled|^sr-only|^screen-reader-text/i', $class ) ) {
 				// Test for .disabled or .sr-only classes.
 				$linkmod_classes[] = $class;
 				unset( $classes[ $key ] );
@@ -454,7 +453,7 @@ class Menu extends Walker_Nav_Menu {
 	 * @return 	string      	the string wrapped in a span with the class.
 	 */
 	private function wrap_for_screen_reader( $text = '' ) {
-		if ( $text ) $text = '<span class="sr-only">' . $text . '</span>'; 
+		if ( $text ) $text = '<span class="sr-only screen-reader-text">' . $text . '</span>'; 
 		return $text;
 	}
 

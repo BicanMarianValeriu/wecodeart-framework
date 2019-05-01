@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.8.1
+ * @version		3.8.3
  */
 
 namespace WeCodeArt\Support;
@@ -45,29 +45,19 @@ class WordPressSeo {
 	 * Yoast BreadCrumbs
 	 *
 	 * @since   3.5
-	 * @version 3.8.1
+	 * @version 3.8.3
 	 *
 	 * @return  void
 	 */
 	public function render_yoast_breadcrumbs() {
-		if( ! function_exists( 'yoast_breadcrumb' ) || Callbacks::is_front_page() ) return;
+		if( Callbacks::is_front_page() ) return;
 
-		$options = Content::get_contextual_options(); 
-
-		$wrappers = [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col' ] ]
-		];
+		$options = Content::get_contextual_options();
 		
-		Markup::wrap( 
-			'breadcrumbs', 	// Context
-			$wrappers, 		// Wrappers
-			// Function to wrap
-			'yoast_breadcrumb',
-			// Function Arguments
-			[ '<div class="breadcrumbs__list">', '</div>' ]
-		); 
+		Markup::wrap( 'breadcrumbs', [
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs', 'id' => 'breadcrumb' ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs__list' ] ]
+		], 'yoast_breadcrumb' ); 
 	}
 }

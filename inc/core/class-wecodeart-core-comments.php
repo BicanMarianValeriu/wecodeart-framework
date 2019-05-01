@@ -68,6 +68,7 @@ class Comments {
 	 * Render Comments Info
 	 *
 	 * @since	3.7.3
+	 * @version	3.8.3
 	 *
 	 * @return 	string
 	 */
@@ -86,11 +87,9 @@ class Comments {
 
 		$icon_html 	= '';
 		$header_tx 	= '';
-		if( comments_open() ) {
+		if( comments_open() || $comments_number !== 0 ) {
 			$icon_html = $args['icon'];
-			if ( 1 === $comments_number ) {
-				$header_tx = _x( 'One comment', 'comments title', 'wecodeart' );
-			} elseif ( 1 < $comments_number ) {
+			if ( 0 !== $comments_number ) {
 				$header_tx = sprintf(
 					_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
 					number_format_i18n( $comments_number )
@@ -200,7 +199,7 @@ class Comments {
 		// Bail if comments are closed for this post type.
 		if ( ( is_singular() && ! comments_open() ) ) return;
 	
-		$args = apply_filters( 'wecodeart/filter/comments/form/args', array(
+		$args = apply_filters( 'wecodeart/filter/comments/form/args',[
 			'format'			 	=> 'html5',
 			'title_reply_before' 	=> '<h3 id="reply-title" class="headline"> ' . SVG::compile( 'icon--comment-dots' ) . ' ',
 			'title_reply_after'  	=> '</h3>',
@@ -208,7 +207,7 @@ class Comments {
 			'class_submit' 			=> 'btn btn-primary',
 			'cancel_reply_before' 	=> '<span class="float-right"><small>',
 			'cancel_reply_after' 	=> '</small></span>'
-		) );
+		] );
 
 		comment_form( $args );
 	} 

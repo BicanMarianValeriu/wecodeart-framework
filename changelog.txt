@@ -1,6 +1,15 @@
 v3.8.3
-- Added - Basic Widgets SCSS.
-- Updated - ...
+- Fixed - Display Comments Headline when Comments are closed but CPT has comments
+- Fixed - Added wp_body_open() missing hook. (supposed to be added from v3.8.1)
+- Fixed - Walker fallback ( screen reader class. old function fix )
+- Fixed - Content Context for Markup::wrap()
+- Updated - Yoast Integration - added 'breadcrumb' ID for schema markup
+- Updated - Yoast Breadcrumbs - removed additional unnecessary function check
+- Updated - Yoast Breadcrumbs - simplified wrappers and moved all wrappers into filterable Markup::wrap()
+- Updated - Escaping translation function in some classes
+- Added - Basic Widgets styleing in SCSS.
+- Added - Core\Content->skip_link() method for Accessibility and hooked into wp_body_open hook.
+- Changed - Meta::author() filter passing $args (filtered) instead of $defaults arguments.
 
 v3.8.2
 - Updated - Archive intro titles escape translated text
