@@ -56,7 +56,7 @@ class Admin {
 						</p>
 					</div>',
 					esc_html__( 'Did you know? WeCodeArt Framework uses Customizer to manage options!', 'wecodeart' ),
-					esc_html__( 'Go to WP Customizer and see the options. Each CPT has it\'s own options, based on page/archive you are currenty viewing in customizer.', 'wecodeart' ),
+					esc_html__( 'Go to WP Customizer and see the options. Each CPT has it\'s own options, based on page/archive you are currently viewing in customizer.', 'wecodeart' ),
 					esc_url( admin_url( '/customize.php' ) ),
 					esc_html__( 'Awesome, show me the options', 'wecodeart' ),
 					esc_html__( 'Thanks, but I already know', 'wecodeart' ),

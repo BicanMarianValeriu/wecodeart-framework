@@ -49,10 +49,10 @@ class Header extends Config {
 				'section'		=> 'header-bar',
 				'title' 		=> esc_html__( 'Grid Type', 'wecodeart' ),
 				'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
-				'choices'  		=> array(
+				'choices'  		=> [
 					'container'			=> esc_html__( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-				), 
+				], 
 				'priority' 		=> 5, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ], 
 				'transport' 		   => 'postMessage'

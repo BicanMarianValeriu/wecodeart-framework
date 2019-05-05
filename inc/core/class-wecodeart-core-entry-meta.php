@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.6
- * @version		3.8.3
+ * @version		3.8.4
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -82,7 +82,7 @@ class Meta {
 	 * Entry Meta Date Template
 	 *
 	 * @since	1.0
-	 * @version	3.7.3
+	 * @version	3.8.4
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -113,12 +113,13 @@ class Meta {
 
 		// Wrap the time string in a link, add scren-reader-text and FontIcon.
 		$output = apply_filters( 'wecodeart/filter/entry/meta/date/html', sprintf(
-			/* translators: %s: post date */
-			__( '<span class="entry-date">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ),
-			$args[ 'before' ],
-			'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $html . '</a>',
-			$args[ 'after' ] ) 
+				/* translators: %s: post date */
+				__( '<span class="entry-date">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ),
+				$args[ 'before' ],
+				'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
+				'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $html . '</a>',
+				$args[ 'after' ] 
+			), $args
 		);
 
 		if ( $echo ) echo $output;
@@ -129,7 +130,7 @@ class Meta {
 	 * Entry Meta Categories Template
 	 *
 	 * @since	1.0
-	 * @version	3.7.3
+	 * @version	3.8.4
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -155,13 +156,14 @@ class Meta {
 
 		// The HTML
 		$output = apply_filters( 'wecodeart/filter/entry/meta/cats/html', sprintf( 
-			/* translators: %s: post cats */
-			__( '<span class="entry-cats">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ), 
-			$args[ 'before' ], 
-			'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
-			$cats, 
-			$args[ 'after' ] 
-		) );
+				/* translators: %s: post cats */
+				__( '<span class="entry-cats">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ), 
+				$args[ 'before' ], 
+				'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
+				$cats, 
+				$args[ 'after' ] 
+			), $args
+		);
 
 		if ( $echo ) echo $output;
 		else return $output;
@@ -171,7 +173,7 @@ class Meta {
 	 * Entry Meta Tags Template
 	 *
 	 * @since	1.0
-	 * @version	3.7.3
+	 * @version	3.8.4
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -181,7 +183,7 @@ class Meta {
 	public static function tags( $args = [], $echo = true ) {
 		// Set the Defaults
 		$defaults = array(
-			'before'  	=> SVG::compile( 'icon--tag' ),
+			'before'  	=> SVG::compile( 'icon--tags' ) . ' ',
 			'after'  	=> '&nbsp;',
 			'sr_text'	=> esc_html__( 'Tagged with ', 'wecodeart' ),
 			'sep'  		=> ', ',
@@ -190,20 +192,18 @@ class Meta {
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/tags/defaults', $defaults ) );
 
 		// Get what we need
-		$tags = get_the_tag_list( '', $args['sep'], '' );
+		$tags = get_the_tag_list( $args['before'], $args['sep'], $args['after'] );
 
 		// Do nothing if no tags
 		if ( ! $tags ) return;
 
 		// The HTML
 		$output = apply_filters( 'wecodeart/filter/entry/meta/tags/html', sprintf( 
-			/* translators: %s: post tags */
-			__( '<span class="entry-tags">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ),
-			$args['before'],
-			'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
-			$tags,
-			$args['after']
-			) 
+				/* translators: %s: post tags */
+				__( '<span class="entry-tags">%1$s %2$s</span>', 'wecodeart' ),
+				'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
+				$tags
+			), $args
 		);
 
 		if ( $echo ) echo $output;
@@ -214,7 +214,7 @@ class Meta {
 	 * Entry Meta Comments Template
 	 *
 	 * @since	1.0
-	 * @version	3.7.3
+	 * @version	3.8.4
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -233,33 +233,37 @@ class Meta {
 			'more'        	=> esc_html__( '% Comments', 'wecodeart' ),
 			'one'         	=> esc_html__( '1 Comment', 'wecodeart' ),
 			'zero'        	=> esc_html__( 'Leave a Comment', 'wecodeart' ),
+			'closed'		=> esc_html__( 'Comments are Closed', 'wecodeart' )
 		);
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/comments/defaults', $defaults ) );
 
 		// Show only where comments are enabled or have comments (even if disabled)
-		if ( ( ! comments_open() && 0 === get_comments_number() ) && true === $args['hide_if_off'] ) { 
+		if ( ! comments_open() && true === (bool) $args['hide_if_off'] ) { 
 			return;
-		} elseif ( comments_open() && ! have_comments() || ! comments_open() && 0 < get_comments_number() ) {
-			// Get what we need
-			ob_start();
-			comments_number( $args['zero'], $args['one'], $args['more'] );
-			$comments = ob_get_clean();	
-			$comments = '<a href="' . esc_url( get_comments_link() ) . '" rel="nofollow">' . esc_html( $comments ) . '</a>';
+		}
 
-			// The HTML
-			$output = apply_filters( 'wecodeart/filter/entry/meta/comments/html', sprintf( 
+		// Get what we need
+		$css_class = 'entry-comments__link';
+		$number    = (int) get_comments_number( get_the_ID() );
+		if( 0 === $number ) $css_class .= ' none';
+		elseif ( 1 === $number ) $css_class .= ' one';
+		elseif ( 1 < $number ) $css_class .= ' multiple';
+
+		ob_start();
+		comments_popup_link( $args['zero'], $args['one'], $args['more'], $css_class, $args['closed'] );
+		$comments = ob_get_clean();
+
+		// The HTML
+		$output = apply_filters( 'wecodeart/filter/entry/meta/comments/html', sprintf( 
 				/* translators: %s: post comments */
 				__( '<span class="entry-comments">%1$s %2$s %3$s</span>', 'wecodeart' ),
-				$args['before'],
-				$comments,
-				$args['after']
-				) 
-			);
+				$args['before'], $comments, $args['after']
+			), $args
+		);
 
-			if ( $echo ) echo $output;
-			else return $output;
-		}
+		if ( $echo ) echo $output;
+		else return $output;
 	}
 
 	/**
@@ -302,7 +306,7 @@ class Meta {
 	 * Entry Meta Read More Template
 	 *
 	 * @since	1.0
-	 * @version	3.7.3
+	 * @version	3.8.4
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -323,7 +327,7 @@ class Meta {
 		// The HTML
 		$output = apply_filters( 'wecodeart/filter/entry/more/html', sprintf( 
 			'<a href="%1$s" class="%2$s">%3$s %4$s %5$s</a>', 
-			get_permalink(), 
+			esc_url( get_permalink() ), 
 			esc_attr( $args['class'] ), 
 			$args['before'], 
 			esc_html( $args['text'] ), 
@@ -350,7 +354,7 @@ class Meta {
 
 		foreach( $get_post_types as $type ) { 
 			// Post option preffix
-			$theme_mod =  'content-entry-meta-' . $type;  
+			$theme_mod =  'content-entry-meta-' . $type;
 
 			if( is_singular( $type ) ) $options = get_theme_mod( $theme_mod . '-singular' ); 
 			if( is_post_type_archive( $type ) ) $options = get_theme_mod( $theme_mod . '-archive' ); 

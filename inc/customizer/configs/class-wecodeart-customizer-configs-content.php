@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.3
+ * @version		3.8.4
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -61,10 +61,10 @@ class Content extends Config {
 				'section'		=> 'content-layout',
 				'title' 		=> esc_html__( 'Container Type', 'wecodeart' ),
 				'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
-				'choices'  		=> array(
+				'choices'  		=> [
 					'container'			=> esc_html__( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-				), 
+				], 
 				'priority' 		=> 5, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
 				'transport' 		   => 'postMessage'
@@ -92,10 +92,10 @@ class Content extends Config {
 				'section'		=> 'content-layout',
 				'title'			=> esc_html__( 'Container Type: Blog Page', 'wecodeart' ) ,
 				'description' 	=> esc_html__( 'Choose the type of the container class. Affects only current page.', 'wecodeart' ),
-				'choices'  		=> array(
+				'choices'  		=> [
 					'container'			=> esc_html__( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-				),  
+				],  
 				'priority' 		=> 10,  
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
 				'active_callback'	   => 'is_home',
@@ -135,10 +135,10 @@ class Content extends Config {
 					'section'		=> 'content-layout',
 					'title' 		=> sprintf( esc_html__( 'Container Type: %s', 'wecodeart' ), $title ),
 					'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
-					'choices'  		=> array(
+					'choices'  		=> [
 						'container'			=> esc_html__( 'Container', 'wecodeart' ),
 						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-					), 
+					], 
 					'priority'             => 20,
 					'default'              => 'container',
 					'active_callback'	   => function() use ( $ID ) { return is_page( $ID ); },
@@ -170,19 +170,19 @@ class Content extends Config {
 		$public_posts = $get_post_types; 
 		if( isset( $public_posts['product'] ) ) unset( $public_posts['product'] );
 		foreach( $public_posts as $type ) { 
-			$post_type = get_post_type_object( $type );
+			$type_label = get_post_type_object( $type )->labels->singular_name;
 			$config = array(
 				array(
 					'name'			=> 'content-layout-container-' . $type . '-archive',
 					'type'        	=> 'control',
 					'control'  		=> 'select',
 					'section'		=> 'content-layout',
-					'title' 		=> sprintf( esc_html__( 'Container Type: %s Archive', 'wecodeart' ), $post_type->labels->singular_name ),
+					'title' 		=> sprintf( esc_html__( 'Container Type: %s Archive', 'wecodeart' ), $type_label ),
 					'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
-					'choices'  		=> array(
+					'choices'  		=> [
 						'container'			=> esc_html__( 'Container', 'wecodeart' ),
 						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-					), 
+					], 
 					'priority'             => 20, 
 					'active_callback'	   => function() use ( $type ) { return is_post_type_archive( $type ); },
 					'transport' 		   => 'postMessage'
@@ -192,7 +192,7 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-layout',
-					'title'			=> sprintf( esc_html__( 'Content Modules: %s Archive', 'wecodeart' ), $post_type->labels->singular_name ),
+					'title'			=> sprintf( esc_html__( 'Content Modules: %s Archive', 'wecodeart' ), $type_label ),
 					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
 					'priority'		=> 30, 
 					'choices'		=> $c_modules,
@@ -209,7 +209,7 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'select',
 					'section'		=> 'content-layout',
-					'title' 		=> sprintf( esc_html__( 'Container Type: %s Single', 'wecodeart' ), $post_type->labels->singular_name ),
+					'title' 		=> sprintf( esc_html__( 'Container Type: %s Single', 'wecodeart' ), $type_label ),
 					'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
 					'choices'  		=> array(
 						'container'			=> esc_html__( 'Container', 'wecodeart' ),
@@ -224,7 +224,7 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-layout',
-					'title'			=> sprintf( esc_html__( 'Content Modules: %s Single', 'wecodeart' ), $post_type->labels->singular_name ),
+					'title'			=> sprintf( esc_html__( 'Content Modules: %s Single', 'wecodeart' ), $type_label ),
 					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
 					'priority'		=> 35, 
 					'choices'		=> $c_modules,
@@ -250,14 +250,14 @@ class Content extends Config {
 
 		foreach( $get_post_types as $type ) { 
 			if( ! post_type_supports( $type, 'wecodeart-post-info' ) ) continue;
-			$type_obj = get_post_type_object( $type );
+			$type_label = get_post_type_object( $type )->labels->singular_name;
 			$meta_config = array(  
 				array(
 					'name'			=> 'content-entry-meta-' . $type . '-archive',
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-entry',
-					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Archive', 'wecodeart' ), $type_obj->labels->singular_name ),
+					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Archive', 'wecodeart' ), $type_label ),
 					'description'	=> esc_html__( 'Enable/Disable/Reorder Entry Meta information modules for current post type - archive.', 'wecodeart' ),
 					'priority'		=> 5, 
 					'choices'		=> $m_modules,  
@@ -277,7 +277,7 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-entry',
-					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Single', 'wecodeart' ), $type_obj->labels->singular_name ),
+					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Single', 'wecodeart' ), $type_label ),
 					'description'	=> esc_html__( 'Enable/Disable/Reorder Entry Meta information modules for current post type - single.', 'wecodeart' ),
 					'priority'		=> 10, 
 					'choices'		=> $m_modules,  

@@ -38,7 +38,7 @@ class Config {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_filter( 'wecodeart/filter/customizer/configurations', array( $this, 'register' ), 30, 2 );
+		add_filter( 'wecodeart/filter/customizer/configurations', [ $this, 'register' ], 30, 2 );
 	}
 
 	/**

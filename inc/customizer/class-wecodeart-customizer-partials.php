@@ -28,7 +28,7 @@ class Partials {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'customize_register', array( $this, 'register' ), 950 );
+		add_action( 'customize_register', [ $this, 'register' ], 950 );
 	}
 
 	/**

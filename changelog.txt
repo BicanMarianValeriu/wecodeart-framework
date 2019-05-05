@@ -1,3 +1,13 @@
+v3.8.5
+- Fixed - ...
+
+v3.8.4
+- Fixed - Customizer Options notification typo
+- Removed - Author box classes
+- Updated - Entry Meta filters pass default args
+- Updated - Customizer small fixed/updates
+- Changed - Entry Meta Comments link function
+
 v3.8.3
 - Fixed - Display Comments Headline when Comments are closed but CPT has comments
 - Fixed - Added wp_body_open() missing hook. (supposed to be added from v3.8.1)

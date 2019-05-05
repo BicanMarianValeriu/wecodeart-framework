@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box Template
  * @since 		3.0.3
- * @version		3.7.3
+ * @version		3.8.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit(); 
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
 					<span><?php echo wp_kses_post( implode( ' ', [ $intro, $name ] ) ); ?></span>
 				</h3>
 			</div>
-			<div class="author-box__gravatar col-12 col-md-auto text-center text-md-left"><?php
+			<div class="author-box__gravatar col-12 col-md-auto"><?php
 				echo wp_kses( $avatar, [ 'img' => [
 					'class'  => true,
 					'width'  => true,
