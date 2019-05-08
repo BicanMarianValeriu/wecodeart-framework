@@ -69,7 +69,7 @@ class Comment extends Walker_Comment {
 	/**
 	 * Outputs a HTML5 comment.
 	 * @since	2.0
-	 * @version	3.7.9
+	 * @version	3.8.5
 	 */
 	protected function comment( $comment, $depth, $args ) {
 		// Get what we need.
@@ -84,7 +84,7 @@ class Comment extends Walker_Comment {
 		$comment_date = apply_filters( 'wecodeart/filter/comments/date/enable', true, get_post_type() );
 		$comment_amst = apply_filters( 
 			'wecodeart/filter/comments/awaiting-moderation-text', 
-			__( 'Your comment is awaiting moderation.', 'wecodeart' ) 
+			esc_html__( 'Your comment is awaiting moderation.', 'wecodeart' ) 
 		);	
 
 		// The HTML.
@@ -110,11 +110,11 @@ class Comment extends Walker_Comment {
 				echo '<div class="col-12">';
 					if ( ! $comment->comment_approved ) echo '<p class="callout">' . $comment_amst .'</p>';
 					printf( '<div class="comment-content" itemprop="text"><p>%s</p></div>', $comment->comment_content );	
-					comment_reply_link( array_merge( $args, array(
+					comment_reply_link( array_merge( $args, [
 						'depth'  => $depth,
 						'before' => '<span class="comment-reply float-right">',
 						'after'  => '</span>',
-					) ) );
+					] ) );
 				echo '</div>';
 			do_action( 'wecodeart/hook/comment/bottom' ); // Hook Comment Bottom
 			echo '</div>';

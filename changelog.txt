@@ -1,5 +1,8 @@
 v3.8.5
-- Fixed - ...
+- Fixed - Translation function calls must NOT contain PHP variables - on markup::wrap()
+- Added - Customizer Divider Control for adding simple information blocks in customizability
+- Changed - Autoloader now supports PSR4 Class naming (while still support old naming until v4). Non Breaking Change - unless theme core is modified.
+- Updated - Comments Walker escaping for awaiting moderation text
 
 v3.8.4
 - Fixed - Customizer Options notification typo

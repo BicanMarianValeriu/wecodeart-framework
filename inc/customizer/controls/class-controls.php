@@ -9,7 +9,7 @@
  * @subpackage 	Customizer/Controls
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.6.2
+ * @version		3.8.5
  */
 
 namespace WeCodeArt\Customizer;
@@ -109,9 +109,15 @@ class Controls {
  */
 Controls::add_control( 'wecodeart-slider', [ 
 	'callback' 			=> 'WeCodeArt\Customizer\Controls\Slider',
-	'sanitize_callback' => ['WeCodeArt\Customizer\Formatting', 'sanitize_number']
+	'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_number' ]
 ] );
+
 Controls::add_control( 'wecodeart-sortable', [ 
 	'callback' 			=> 'WeCodeArt\Customizer\Controls\Sortable',
-	'sanitize_callback' => ['WeCodeArt\Customizer\Formatting', 'sanitize_sortable_choices']
-] ); 
+	'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_sortable_choices' ]
+] );
+
+Controls::add_control( 'wecodeart-divider', [ 
+	'callback' 			=> 'WeCodeArt\Customizer\Controls\Divider',
+	'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_text_field' ]
+] );

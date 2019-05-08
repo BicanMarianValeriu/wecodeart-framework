@@ -9,7 +9,7 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.0
- * @version		3.8.1
+ * @version		3.8.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit();
@@ -29,7 +29,7 @@ use WeCodeArt\Core\Scripts;
 use WeCodeArt\Admin;
 
 // Include the autoloader.
-require_once( get_parent_theme_file_path( '/inc/class-wecodeart-autoloader.php' ) );
+require_once( get_parent_theme_file_path( '/inc/class-autoloader.php' ) );
 new WeCodeArt\Autoloader();
 
 /**

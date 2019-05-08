@@ -156,7 +156,10 @@ class Markup {
 		if ( empty( $args ) || ( ! empty( $args ) && count( array_unique( $_wrappers ) ) !== 1 ) ) {
 			$args = $defaults;
 			new \WP_Error( 'wecodeart_markup_wrap_fallback', 
-				__( "Wrappers are not properly defined for '{$context}'. Please check your theme code.", 'wecodeart' )
+				sprintf( 
+					__( 'Wrappers are not properly defined for "%s". Please check your theme code.', 'wecodeart' ),
+					$context
+				)
 			);
 		}
 		

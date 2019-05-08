@@ -51,10 +51,10 @@ class Content extends Config {
 				'section'		=> 'content-layout',
 				'title' 		=> esc_html__( 'Grid Type: Product Archive', 'wecodeart' ),
 				'description' 	=> esc_html__( 'Choose the type of .container class.', 'wecodeart' ),
-				'choices'  		=> array(
+				'choices'  		=> [
 					'container' 		=> esc_html__( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-				), 
+				], 
 				'priority' 		=> 15, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
 				'transport' 		   => 'postMessage',
@@ -85,10 +85,10 @@ class Content extends Config {
 				'section'		=> 'content-layout',
 				'title' 		=> esc_html__( 'Grid Type: Product Single', 'wecodeart' ),
 				'description' 	=> esc_html__( 'Choose the type of .container class.', 'wecodeart' ),
-				'choices'  		=> array(
+				'choices'  		=> [
 					'container' 		=> esc_html__( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-				), 
+				], 
 				'priority' 		=> 15, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
 				'transport' 		   => 'postMessage',

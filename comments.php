@@ -14,11 +14,11 @@
 use WeCodeArt\Utilities\Markup;
 
 if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' === basename( $_SERVER['SCRIPT_FILENAME'] ) ) {
-	die ( 'Please do not load this page directly!' );
+	die( 'Please do not load this page directly!' );
 }
 
 if ( post_password_required() ) {
-	printf( '<p class="callout">%s</p>', esc_html__( 'This post is password protected. Enter the password to view comments.', 'wecodeart' ) );
+	printf( '<p class="alert">%s</p>', esc_html__( 'This post is password protected. Enter the password to view comments.', 'wecodeart' ) );
 	return;
 } 
 
@@ -36,12 +36,12 @@ do_action( 'wecodeart/hook/comments/before' );
  * - WeCodeArt\Core\Comments	->render_respond() 	- 40	comments reply form
  * }
  */
-Markup::wrap( 'comments', [ [ 
-	'tag' 	=> 'div', 
-	'attrs' => [ 
-		'id' 	=> 'comments', 
-		'class' => 'comments' 
-	] 
-] ], 'do_action', [ 'wecodeart_comments', get_post_type() ] ); 
+Markup::wrap( 'comments', [ [
+	'tag' 	=> 'div',
+	'attrs' => [
+		'id' 	=> 'comments',
+		'class' => 'comments'
+	]
+] ], 'do_action', [ 'wecodeart_comments', get_post_type() ] );
 
-do_action( 'wecodeart/hook/comments/after' ); 
+do_action( 'wecodeart/hook/comments/after' );

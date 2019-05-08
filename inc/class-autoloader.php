@@ -9,7 +9,7 @@
  * @subpackage  Autoloader
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version 	3.6.1
+ * @version 	3.8.5
  */
 
 namespace WeCodeArt;
@@ -31,7 +31,7 @@ class Autoloader {
 	 * @var 	string	$_namespace		Theme Namespace
 	 * @var 	string	$_separator		Namespace Separator
 	 */
-	private $cached_paths 	= array();
+	private $cached_paths 	= [];
 	private $namespace		= '';
 	private $directory		= '';
 	private $separator 		= '\\';
@@ -47,8 +47,7 @@ class Autoloader {
 		$this->namespace = $namespace;
 		$this->directory = $root;
 
-		spl_autoload_register( array( $this, 'autoload' ) ); 
-
+		spl_autoload_register( [ $this, 'autoload' ] );
 	} 
 
 	/**
@@ -58,7 +57,7 @@ class Autoloader {
 	 * @access 	protected
 	 * @since 	3.5
 	 * @version 3.6.1
-	 * 
+	 *
 	 * @param 	string 	$class_name 	The name of the class we're trying to load.
 	 */
 	protected function autoload( $class_name ) {
@@ -85,7 +84,6 @@ class Autoloader {
 				return;
 			}
 		}
-
 	}
 
 	/**
@@ -93,20 +91,22 @@ class Autoloader {
 	 *
 	 * @access 	protected
 	 * @since 	3.5
-	 * @version 3.6.1
-	 * 
+	 * @version 3.8.5
+	 *
 	 * @param 	string 	$class_name 	The name of the class we're trying to load.
-	 * 
+	 *
 	 * @return 	array
 	 */
 	protected function get_paths( $class_name ) {
-
-		$paths = array();
+		$paths = [];
 
 		// Build the filename
-		$filename = 'class-' . strtolower( str_replace( $this->separator, '-', $class_name ) ) . '.php';
+		$old_filename = 'class-' . strtolower( str_replace( $this->separator, '-', $class_name ) ) . '.php';
+		$exploded = explode( $this->separator, $class_name );
+		$filename = 'class-' . strtolower( end( $exploded ) ) . '.php';
 
 		// Check same directory
+		$paths[] = $this->directory . DIRECTORY_SEPARATOR . $old_filename;
 		$paths[] = $this->directory . DIRECTORY_SEPARATOR . $filename;
 
 		// Look into sub-directory
@@ -117,12 +117,12 @@ class Autoloader {
 		// Build the filepath
 		$previous_path = '';
 		for ( $i = 0; $i < $levels; $i++ ) {
+			$paths[]        = $this->directory . DIRECTORY_SEPARATOR . $previous_path . strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR . $old_filename;
 			$paths[]        = $this->directory . DIRECTORY_SEPARATOR . $previous_path . strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR . $filename;
 			$previous_path .= strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR;
 		}
 
 		// Return Paths
 		return $paths;
-		
 	}
 }

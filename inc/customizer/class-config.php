@@ -1,6 +1,4 @@
-<?php namespace WeCodeArt\Customizer;
-// No direct access, please.
-if ( ! defined( 'ABSPATH' ) ) exit;
+<?php
 /**
  * WeCodeArt Framework.
  *
@@ -13,6 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @since 		3.5
  * @version		3.6.0.5
  */
+
+namespace WeCodeArt\Customizer;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Customizer Config initial setup

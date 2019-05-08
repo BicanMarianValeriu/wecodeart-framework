@@ -2,7 +2,7 @@
 ## https://www.wecodeart.com/
 
 Requires at least: WordPress 4.7
-Tested up to: WordPress 5.1.1
+Tested up to: WordPress 5.2
 Version: 3.0+
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -25,4 +25,4 @@ Source: http://fontawesome.io/
 
 Bootstrap, Copyright Twitter
 License: MIT.
-Source: https://getbootstrap.com/docs/4.2/about/license/
+Source: https://getbootstrap.com/docs/4.3/about/license/
