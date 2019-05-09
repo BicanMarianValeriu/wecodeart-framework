@@ -78,10 +78,10 @@ class Scripts {
 	 */
 	public function front_scripts() {
 		// Enqueue Styles
-		wp_enqueue_style( 'wecodeart-core',	get_parent_theme_file_uri( '/assets/css/style.css' ), [], '3.7.5' );
+		wp_enqueue_style( 'wecodeart-core',	get_parent_theme_file_uri( '/assets/minified/css/style.css' ), [], '3.7.5' );
 
 		// Enqueue scripts
-		wp_enqueue_script( 'wecodeart-core', get_parent_theme_file_uri( '/assets/js/frontend.js' ), ['jquery'], '3.7.5', true );		
+		wp_enqueue_script( 'wecodeart-core', get_parent_theme_file_uri( '/assets/minified/js/frontend.js' ), ['jquery'], '3.7.5', true );		
 		if ( 
 			( is_page() && comments_open() && get_option( 'thread_comments' ) ) || 
 			( is_single() && comments_open() && get_option( 'thread_comments' ) ) 

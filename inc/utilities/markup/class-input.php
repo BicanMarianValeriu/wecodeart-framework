@@ -9,7 +9,7 @@
  * @subpackage 	Utilities\Markup\Input
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.1.2
- * @version		3.7.7
+ * @version		3.8.6
  */
 
 namespace WeCodeArt\Utilities\Markup;
@@ -35,8 +35,8 @@ class Input {
 	 *
 	 * @return	function	input		Returns the HTML
 	 */
-	public static function render( $type = 'hidden', $label, $attrs = [], $choices = []) {
-		return self::input( $type, $label, $attrs, $choices );
+	public static function render( $type = 'hidden', $label, $attrs = [], $choices = [], $messages = [] ) {
+		self::input( $type, $label, $attrs, $choices, $messages );
 	}
 	
 	/**
@@ -48,30 +48,36 @@ class Input {
 	 *
 	 * @return	function	input		Renders the HTML
 	 */
-	public static function compile( $type = 'hidden', $label, $attrs = [], $choices = [] ) {
+	public static function compile( $type = 'hidden', $label, $attrs = [], $choices = [], $messages = [] ) {
 		ob_start();
-		self::input( $type, $label, $attrs, $choices );
+		self::input( $type, $label, $attrs, $choices, $messages );
 		return ob_get_clean();
 	}
 	
 	/**
 	 * Create HTML Inputs
 	 *
-	 * @param  	array     	$array() 	Existing option array if exists (optional)
+	 * @since	unknown
+	 * @version	3.8.6
 	 *
-	 * @return 	array 		$array 		Array of options, all standard DOM input options
+	 * @param  	array	$array	Existing option array if exists (optional)
+	 *
+	 * @return 	array	$array	Array of options, all standard DOM input options
 	 */
-	protected static function input( $type, $label, $attrs, $choices ) {
-		// Will hold Input Attributes.
-		$attributes = [];
-		
-		// Create HTML for Input Attributes.
-		foreach( $attrs as $name => $val ) {
-			$attributes[$name] = isset( $val ) ? sanitize_title_with_dashes( $name ) . '="' . esc_attr( $val ) . '"' : NULL;
-		}
-		
+	protected static function input( $type, $label, $attrs, $choices, $messages ) {
+		// Add default ID
+		$attrs = wp_parse_args( $attrs, [
+			'type'  => $type,
+			'class' => 'form-control',
+			'name'	=> isset( $attrs['name'] ) ? $attrs['name'] : uniqid( 'input-' ),
+			'id' 	=> isset( $attrs['id'] ) ? $attrs['id'] : isset( $attrs['name'] ) ? $attrs['name'] : uniqid( 'input-' ),
+		] );
+
+		// Label.
+		$label = is_string( $label ) ? [ 'text' => $label ] : $label;
+
 		// Switch our input type.
-		switch( $type ) {			
+		switch( $type ) {
 			/**
 			 * Text/Number/Email/URL/Password/Range/Submit share same HTML
 			 */
@@ -81,63 +87,172 @@ class Input {
 			case 'range' : 
 			case 'number' : 
 			case 'submit' :   
-			case 'password' : 
-			case 'checkbox' : ?>
-				<?php if ( isset( $label ) ) echo '<label>' . esc_html( $label ); ?>
-					<input type="<?php echo esc_attr( $type ) ?>" <?php echo implode( ' ', $attributes ); ?>/>
-				<?php if ( isset( $label ) ) echo '</label>'; ?>
-			<?php break; 
+			case 'password' :
+				if ( isset( $label['text'] ) ) {
+					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), esc_html( $label['text'] ) );
+				}
+			?>
+				<input <?php echo \WeCodeArt\Utilities\Markup::generate_attr( $type . '-input', $attrs ); ?>/>
+			<?php if( ! empty( $messages ) ) self::messages( $messages ); ?>
+			<?php break;
+
+			/**
+			 * Checkbox / File / Switch
+			 */
+			case 'checkbox' :
+			case 'checkbox-switch' :
+				$class = ( $type === 'checkbox-switch' ) ? 'custom-switch' : 'custom-checkbox';
+				$classes = array_merge( [ 'custom-control', $class, $attrs['class'] ] );
+				$attrs = wp_parse_args( [
+					'type'	=> 'checkbox',
+					'class' => 'custom-control-input',
+				], $attrs ); 
+			?>
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+			<input <?php echo \WeCodeArt\Utilities\Markup::generate_attr( $type . '-input', $attrs ); ?>/>
+			<?php
+				if ( isset( $label['text'] ) ) {
+					printf( '<label class="custom-control-label" for="%s">%s</label>', 
+						esc_attr( $attrs['id'] ), wp_kses_post( $label['text'] ) 
+					);
+				}
+				if( ! empty( $messages ) ) self::messages( $messages );
+			?>
+			</div>
+			<?php break;
 			
 			/**
 			 * Textarea
 			 */
-			case 'textarea' : ?>				
-				<?php if ( isset( $label ) ) echo '<label>' . esc_html( $label ); ?>
-					<textarea <?php echo implode( ' ', $attributes ); ?>></textarea>
-				<?php if ( isset( $label ) ) echo '</label>'; ?>
-			<?php break;
-			
-			/**
-			 * Radio Buttons
-			 */
-			case 'radio' : ?>
-				<fieldset class="fieldset radio">
-				<?php if ( isset( $label ) ) echo '<legend>' . esc_html( $label ) . '</legend>'; ?>
-					<?php foreach ( (array) $choices as $value => $label ) { ?>
-						<input 	
-							type="radio" 
-							name="<?php echo esc_attr( $attrs['name'] ) ?>" 
-							value="<?php echo esc_attr( $value ); ?>" <?php if( isset( $attrs['value'] ) ) checked( $attrs['value'], $value, true ); ?> 
-							id="<?php echo esc_attr( $value ) ?>"/>
-						<label for="<?php echo esc_attr( $value ) ?>"><?php echo esc_html( $label ) ?></label>
-					<?php } // End Foreach ?>
-				</fieldset> 
+			case 'textarea' :
+				unset( $attrs['type'] );
+				if ( isset( $label['text'] ) ) {
+					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), esc_html( $label['text'] ) );
+				}
+			?>
+				<textarea <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'textarea', $attrs ); ?>></textarea>
+				<?php if( ! empty( $messages ) ) self::messages( $messages ); ?>
 			<?php break;
 			
 			/**
 			 * Select Input
 			 */
-			case 'select' : ?>
-				<?php if ( isset( $label ) ) echo '<label>' . esc_html( $label ); ?>
-				<select <?php unset( $attributes['placeholder'] ); echo implode( ' ' , $attributes ); ?>>
-					<?php if( isset( $attrs['placeholder'] ) ) { ?>
-						<option value=''><?php echo esc_html( $attrs['placeholder'] ); ?></option>
-					<?php } // if isset = placeholder ?>
-					<?php foreach( $choices as $value => $label ) { ?>
-						<option value="<?php echo esc_attr( $value ); ?>" <?php if( isset( $attrs['value'] ) ) selected( $attrs['value'], $value, true ); ?>>
-							<?php echo esc_html( $label ); ?>
-						</option>
-					<?php } // End Foreach ?>
+			case 'select' :
+				if ( isset( $label['text'] ) ) {
+					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), esc_html( $label['text'] ) );
+				}
+				$placeholder = $attrs['placeholder'];
+				unset( $attrs['type'] );
+				unset( $attrs['placeholder'] );
+			?>
+				<select <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'select', $attrs ); ?>>
+					<?php if( isset( $placeholder ) ) { ?>
+						<option disabled<?php if( ! isset( $attrs['value'] ) ) : ?> selected<?php endif; ?>><?php 
+							echo esc_html( $placeholder ); 
+						?></option>
+					<?php } ?>
+					<?php foreach( $choices as $value => $label ) {
+						$option = [
+							'value'		=> $value,
+							'selected'	=> isset( $attrs['value'] ) ? (string) $attrs['value'] === (string) $value : null
+						];
+						?>
+						<option <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'select-option', $option ); ?>><?php 
+							echo esc_html( $label );
+						?></option>
+					<?php } ?>
 				</select>
-				<?php if ( isset( $label ) ) echo '</label>'; ?>
+				<?php if( ! empty( $messages ) ) self::messages( $messages ); ?>
+			<?php break;
+
+			/**
+			 * Radio Buttons/Checkbox Group
+			 */
+			case 'radio' :
+			case 'checkbox-group' :
+				$ctx = ( $type === 'checkbox-group' ) ? 'checkbox' : $type;
+
+				$classes = explode( ' ', $attrs['class'] );
+				if ( ( $key = array_search( 'form-control', $classes ) ) !== false ) unset( $classes[$key] );
+				$classes = array_merge( [ 'form-group', 'fieldset', 'fieldset--' . $ctx, 'text-left' ], $classes );
+				$fieldset = [ 'class' => implode( ' ', $classes ) ];
+				?>
+				<fieldset <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'fieldset-' . $ctx, $fieldset ); ?>>
+				<?php if ( isset( $label['text'] ) ) {
+					printf( '<legend>%s</legend>', esc_html( $label['text'] ) ); 
+				}
+				foreach ( (array) $choices as $key => $label ) {
+					$wrap_args = [ 'class' => 'form-check custom-control custom-' . $ctx ];
+					$label = is_string( $label ) ? [ 'text' => $label ] : $label;
+				?>
+					<div <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'fieldset-' . $ctx . '-wrap', $wrap_args ); ?>>
+				<?php
+					$input_args = [
+						'id'		=> $key,
+						'type' 		=> $ctx,
+						'value'		=> $key,
+						'class'		=> 'form-check-input custom-control-input',
+						'name' 		=> $ctx === 'checkbox' ? $attrs['name'] . '[' . $key . ']' : $attrs['name'],
+						'checked'	=> isset( $attrs['value'] ) ? (string) $attrs['value'] === (string) $key : null,
+						'disabled'	=> isset( $label['disabled'] ) && (bool) $label['disabled'] === true ? true : null
+					];
+
+					$input_attrs = \WeCodeArt\Utilities\Markup::generate_attr( 'fieldset-' . $ctx . '-input', $input_args );
+				?>
+					<input <?php echo $input_attrs; // WPCS OK - Escaped in function above. ?>/>
+					<?php 
+						printf( '<label class="form-check-label custom-control-label" for="%s">%s</label>', 
+							esc_attr( $input_args['id'] ), esc_html( $label['text'] ) 
+						); ?>
+					</div>
+				<?php } ?>
+				<?php if( ! empty( $messages ) ) self::messages( $messages ); ?>
+				</fieldset> 
 			<?php break;
 
 			/**
 			 * Default/Other Value goes to hidden field
 			 */
 			default : ?>
-				<input type="hidden" <?php echo implode( ' ', $attributes ); ?>/>
+				<input <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'hidden-input', $attrs ); ?>/>
 			<?php
 		}
+	}
+
+	/**
+	 * Render the messages HTML of the input
+	 *
+	 * @access 	protected
+	 * @param 	array		$messages	Input messages (id, name, value, etc)
+	 *
+	 * @return	string
+	 */
+	protected static function messages( $messages = [], $echo = true ) {
+		if( ! $messages ) return;
+
+		$html = '';
+
+		$help = isset( $messages['help'] ) ? $messages['help'] : false;
+		if( isset( $messages['help'] ) ) unset( $messages['help'] );
+
+		if( is_string( $help ) ) {
+			$html .= sprintf( '<small class="help-text">%s</small>', $help );
+		}
+
+		if( $messages ) {
+			foreach( $messages as $key => $msg ) {
+				$data 		= is_string( $msg ) ? [ 'text' => $msg ] : $msg;
+				$message 	= isset( $data['text'] ) ? $data['text'] : '';
+				$class		= isset( $data['class'] ) ? $data['class'] : $key . '-tooltip';
+				$html .= sprintf( '<div class="%s">%s</div>', esc_attr( $class ), $message );
+			}
+		}
+
+		if( $echo ) {
+			echo $html;
+			return;
+		}
+
+		return $html;
 	}
 }

@@ -116,7 +116,7 @@ class Admin {
 	public function enqueue_scripts() {
 		wp_enqueue_style( 
 			strtolower( str_replace( '\\', '-', __CLASS__ ) ), 
-			get_parent_theme_file_uri( '/assets/css/admin/style.css' ), 
+			get_parent_theme_file_uri( '/assets/minified/css/admin/style.css' ), 
 			[],
 			'3.8.1'
 		);

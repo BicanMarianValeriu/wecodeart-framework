@@ -5,12 +5,13 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu
 Author URI: https://www.iambican.com/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 3.8.5
-Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-menu, custom-colors, custom-logo, custom-header, flexible-header, featured-images, full-width-template, footer-widgets, theme-options, threaded-comments, translation-ready
+Version: 3.8.6
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
-!*/
+Domain Path: /languages
+Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-menu, custom-colors, custom-logo, custom-header, flexible-header, featured-images, full-width-template, footer-widgets, theme-options, threaded-comments, translation-ready
+*/
 
 // Required
 @import "../../node_modules/bootstrap/scss/functions";

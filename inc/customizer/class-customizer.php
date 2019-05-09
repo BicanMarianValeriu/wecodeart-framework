@@ -72,7 +72,7 @@ class Customizer {
 
 		wp_enqueue_script( 
 			$handle, 
-			get_theme_file_uri( '/assets/js/customizer/preview.js' ), 
+			get_theme_file_uri( '/assets/minified/js/customizer/preview.js' ), 
 			[ 'jquery','customize-preview' ], 
 			'3.5', 
 			true 

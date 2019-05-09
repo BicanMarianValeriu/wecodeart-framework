@@ -3,6 +3,7 @@ import pump from 'pump';
 import browserSync from 'browser-sync';
 import autoprefixer from 'autoprefixer';
 import gulpSASS from 'gulp-sass';
+import gulpRevAll from 'gulp-rev-all';
 import gulpPostCSS from 'gulp-postcss';
 import gulpCleanCSS from 'gulp-clean-css';
 import gulpSourcemaps from 'gulp-sourcemaps';
@@ -29,6 +30,7 @@ const processStyles = (mode, { entry, output }) => {
         ...((mode === 'production') ? [gulpCleanCSS(config.cleanCSS)] : []),
         gulpPostCSS(postcssPlugins),
         gulpSourcemaps.write('./'),
+        /* ...((mode === 'production') ? [gulpRevAll.revision()] : []), */
         gulp.dest(output),
         browserSync.stream(),
     ];
@@ -38,13 +40,22 @@ const processStyles = (mode, { entry, output }) => {
 const buildStyles = (mode) => (done) => {
     const pumps = () => {
         // FrontEnd CSS ( Gutenberg Frontend CSS imported into frontend SCSS )
-        pump(processStyles(mode, { entry: srcPath('scss'), output: distPath('css') }), done);
+        pump(processStyles(mode, {
+            entry: srcPath('scss'),
+            output: (mode === 'production') ? distPath('minified/css') : distPath('unminified/css')
+        }), done);
 
         // Admin CSS
-        pump(processStyles(mode, { entry: srcPath('scss/admin'), output: distPath('css/admin') }), done);
+        pump(processStyles(mode, {
+            entry: srcPath('scss/admin'),
+            output: (mode === 'production') ? distPath('minified/css/admin') : distPath('unminified/css/admin')
+        }), done);
 
         // Customizer CSS
-        pump(processStyles(mode, { entry: srcPath('scss/customizer'), output: distPath('css/customizer') }), done);
+        pump(processStyles(mode, {
+            entry: srcPath('scss/customizer'),
+            output: (mode === 'production') ? distPath('minified/css/customizer') : distPath('unminified/css/customizer')
+        }), done);
     };
 
     ['development', 'production'].includes(mode) ? pumps() : undefined;

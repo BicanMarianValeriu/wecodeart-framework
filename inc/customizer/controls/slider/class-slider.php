@@ -50,14 +50,14 @@ class Slider extends WP_Customize_Control {
 
 		wp_enqueue_style(
             $handle,
-			get_theme_file_uri( '/assets/css/customizer/controls/slider.css' ),
+			get_theme_file_uri( '/assets/minified/css/customizer/controls/slider.css' ),
             array(),
 			''
 		);
 		
 		wp_enqueue_script(
             $handle,
-			get_theme_file_uri( '/assets/js/customizer/controls/slider.js' ),
+			get_theme_file_uri( '/assets/minified/js/customizer/controls/slider.js' ),
             array( 'jquery', 'customize-base' ),
             false,
             true

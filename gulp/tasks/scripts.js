@@ -41,14 +41,22 @@ const buildScripts = (mode) => (done) => {
 			gulp.src(srcPath('js')),
 			vinylNamed(),
 			webpackStream(streamMode, webpack),
-			...afterBundler(mode, distPath('js'))
+			...afterBundler(mode, (mode === 'production') ? distPath('minified/js') : distPath('unminified/js'))
 		], done);
 
 		// Admin
-		pump([ gulp.src(srcPath('js/admin')), vinylNamed(), ...afterBundler(mode, distPath('js/admin')) ], done);
+		pump([
+			gulp.src(srcPath('js/admin')), 
+			vinylNamed(), 
+			...afterBundler(mode, (mode === 'production') ? distPath('minified/js/admin') : distPath('unminified/js/admin'))
+		], done);
 
 		// Customizer
-		pump([ gulp.src(srcPath('js/customizer')), vinylNamed(), ...afterBundler(mode, distPath('js/customizer')) ], done);
+		pump([
+			gulp.src(srcPath('js/customizer')), 
+			vinylNamed(), 
+			...afterBundler(mode, (mode === 'production') ? distPath('minified/js/customizer') : distPath('unminified/js/customizer'))
+		], done);
 	};
 
 	['development', 'production'].includes(mode) ? pumps() : undefined;

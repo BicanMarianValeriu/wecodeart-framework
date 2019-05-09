@@ -43,14 +43,14 @@ class Sortable extends WP_Customize_Control {
 
 		wp_enqueue_style(
             $handle,
-			get_theme_file_uri( '/assets/css/customizer/controls/sortable.css' ),
+			get_theme_file_uri( '/assets/minified/css/customizer/controls/sortable.css' ),
             array(),
 			''
 		);
 		
 		wp_enqueue_script(
             $handle,
-			get_theme_file_uri( '/assets/js/customizer/controls/sortable.js' ),
+			get_theme_file_uri( '/assets/minified/js/customizer/controls/sortable.js' ),
             array( 'jquery', 'customize-base', 'jquery-ui-core', 'jquery-ui-sortable' ),
             false,
             true

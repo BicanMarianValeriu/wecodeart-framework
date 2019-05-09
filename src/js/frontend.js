@@ -20,11 +20,9 @@ import 'bootstrap/js/dist/dropdown';
 	 * Init
 	 */
 	document.addEventListener('DOMContentLoaded', () => {
-		// HTML Classes
 		let html = document.documentElement;
 		html.classList.remove('no-js');
 		html.classList.add('js');
-		// Document Scrollbar
 		handleDocumentScrollbar();
 		window.onresize = handleDocumentScrollbar;
 	});

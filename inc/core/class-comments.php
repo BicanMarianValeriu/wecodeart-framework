@@ -234,7 +234,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	3.8.1
+	 * @version	3.8.6
 	 *
 	 * @return 	array
 	 */
@@ -243,9 +243,9 @@ class Comments {
 		$commenter = wp_get_current_commenter();
 		$req       = get_option( 'require_name_email' );
 		
-		$author_name	= '<div class="comment-form-author col-12 col-md-7">' .
+		$author_name	= '<div class="form-group comment-form-author col-12 col-md-7">' .
 			Input::compile( 'text', esc_html__( 'Name *', 'wecodeart' ), array( 
-				'id' 	=> 'author',
+				'id' 	=> 'comment-author',
 				'class'	=> 'form-control',
 				'name' 	=> 'author', 
 				'required' 	=> ( $req ) ? 'required' : NULL, 
@@ -256,9 +256,9 @@ class Comments {
 			)
 		. '</div>';
 		
-		$author_email	= '<div class="comment-form-email col-12 col-md-7">' .
+		$author_email	= '<div class="form-group comment-form-email col-12 col-md-7">' .
 			Input::compile( 'email', esc_html__( 'Email *', 'wecodeart' ), array( 			
-				'id' 	=> 'email',
+				'id' 	=> 'comment-email',
 				'class'	=> 'form-control',
 				'name' 	=> 'email',
 				'required' 	=> ( $req ) ? 'required' : NULL, 
@@ -269,9 +269,9 @@ class Comments {
 			) 
 		. '</div>';
 		
-		$author_url		= '<div class="comment-form-url col-12 col-md-7">' .
+		$author_url		= '<div class="form-group comment-form-url col-12 col-md-7">' .
 			Input::compile( 'url', esc_html__( 'Website', 'wecodeart' ), array( 
-				'id' 	=> 'url',
+				'id' 	=> 'comment-url',
 				'class'	=> 'form-control',
 				'name' 	=> 'url',
 				'size' 		 => absint( 30 ), 
@@ -281,7 +281,7 @@ class Comments {
 			) 
 		. '</div>';
 
-		$author_comment		= '<div class="comment-form-comment col-12">' .
+		$author_comment	= '<div class="form-group comment-form-comment w-100">' .
 			Input::compile( 'textarea', esc_html__( 'Comment*', 'wecodeart' ), array( 
 				'id' 	=> 'comment',
 				'class'	=> 'form-control',
@@ -294,15 +294,15 @@ class Comments {
 		. '</div>';
 		
 		$required_text 	= sprintf( ' ' . esc_html__( 'Required fiels are marked %s', 'wecodeart' ), '<span class="required">*</span>' );
-		$notes_before 	= '<div class="comment-notes col-12 mb-3">' . esc_html__( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
-		$notes_after 	= '<div class="form-allowed-tags col-12 mb-3">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'wecodeart' ), ' <code>' . allowed_tags() . '</code>' ) . '</div>';
+		$notes_before 	= '<div class="form-group comment-form-notes">' . esc_html__( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
+		$notes_after 	= '<div class="form-group comment-form-allowed-tags">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'wecodeart' ), ' <code>' . allowed_tags() . '</code>' ) . '</div>';
 
 		$args = [
 			'title_reply' 			=> esc_html__( 'Speak Your Mind', 'wecodeart' ),
 			'comment_field' 		=> $author_comment,
 			'comment_notes_before' 	=> $notes_before,
 			'comment_notes_after' 	=> $notes_after,
-			'submit_field'         	=> '<div class="form-submit col-12 mb-3">%1$s %2$s</div>',
+			'submit_field'         	=> '<div class="form-group comment-form-submit">%1$s %2$s</div>',
 			'submit_button'         => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
 			'class_submit'         	=> 'btn btn-primary',
 			'fields' => [

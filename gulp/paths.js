@@ -2,7 +2,6 @@ export default {
 	theme: './',   
 	
 	entry: {
-		css: './assets/css/*.css',
 		svg: './src/svg/**/*.svg',
 		scss: {
 			watch: './src/scss/**/*.scss',
@@ -19,9 +18,6 @@ export default {
 	},
 
 	output: {
-		build: './assets/build/',
-		css: './assets/css/',
 		svg: './assets/images/',
-		js: './assets/js/'
 	}
 };

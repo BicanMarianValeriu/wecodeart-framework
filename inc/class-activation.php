@@ -111,19 +111,19 @@ class Activation {
 	 * Set Requirements
 	 *
 	 * @since 	3.5
-	 * @version	3.6.2
+	 * @version	3.8.6
 	 */
 	public function set_requirements( $args = [] ) {
 		// Setup an array with data to check compatability.
 		$defaults = [
 			[
 				'label'		=> 'WordPress',
-				'required' 	=> '4.7.0',
+				'required' 	=> '5.0',
 				'installed' => $GLOBALS['wp_version']
 			],
 			[
 				'label' 	=> 'PHP',
-				'required' 	=> '5.4.0',
+				'required' 	=> '5.6.2',
 				'installed' => phpversion()
 			]
 		];

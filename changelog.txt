@@ -1,3 +1,9 @@
+v3.8.6
+- Updated - Gulp/Webpack assets output to minified/unminified ( setup not in WP Version of the theme )
+- Updated - Comments inputs bootstrap form classes
+- Updated - Markup::input() - Added Bootstrap custom inputs and support validation/help text ( todo -> add file input )
+- Changed - Bumped minimum PHP Version to 5.6.2 and WP Version to 5.0
+
 v3.8.5
 - Fixed - Translation function calls must NOT contain PHP variables - on markup::wrap()
 - Added - Customizer Divider Control for adding simple information blocks in customizability
