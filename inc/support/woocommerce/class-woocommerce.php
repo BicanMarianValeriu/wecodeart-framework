@@ -66,7 +66,7 @@ class WooCommerce {
 		add_theme_support( 'wc-product-gallery-zoom' );
 		add_theme_support( 'wc-product-gallery-lightbox' );
 		add_theme_support( 'wc-product-gallery-slider' );
-	}  
+	}
 	
 	/**
 	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup

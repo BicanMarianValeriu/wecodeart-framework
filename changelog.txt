@@ -1,3 +1,6 @@
+v3.8.7
+- Fixed - Notification.js script path.
+
 v3.8.6
 - Updated - Gulp/Webpack assets output to minified/unminified ( setup not in WP Version of the theme )
 - Updated - Comments inputs bootstrap form classes

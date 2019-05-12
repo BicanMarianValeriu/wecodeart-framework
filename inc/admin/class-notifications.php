@@ -145,13 +145,13 @@ class Notifications {
 	/**
 	 * Enqueue Scripts.
 	 *
-	 * @since 	3.8.1
+	 * @since 	3.8.6
 	 * @return 	void
 	 */
 	public function enqueue_scripts() {
 		wp_register_script( 
 			strtolower( str_replace( '\\', '-', __CLASS__ ) ),
-			get_parent_theme_file_uri( '/assets/js/admin/notification.js' ),
+			get_parent_theme_file_uri( '/assets/minified/js/admin/notification.js' ),
 			[ 'jquery' ], 
 			self::$version, 
 			true 
