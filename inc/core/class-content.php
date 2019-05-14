@@ -201,10 +201,7 @@ class Content {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => implode( ' ', $class ) ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ]
-		], [ Markup::get_instance(), 'sortable' ], [
-			self::content_modules(), 
-			$options['modules']
-		] ); 
+		], [ Markup::get_instance(), 'sortable' ], [ self::content_modules(), $options['modules'] ] ); 
 	} 
 
 	/**

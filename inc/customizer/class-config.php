@@ -21,22 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class Config {
 	/**
-	 * Instance
-	 *
-	 * @access 	private
-	 * @var 	object
-	 */
-	private static $instance;
-
-	/**
-	 * Initiator
-	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) ) self::$instance = new self; 
-		return self::$instance;
-	}
-
-	/**
 	 * Constructor
 	 */
 	public function __construct() {
@@ -45,12 +29,31 @@ class Config {
 
 	/**
 	 * Base Method for Registering Customizer Configurations.
-	 * @param 	Array                $configurations 
-	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
+	 *
 	 * @since 	3.5
 	 * @version 3.6.0.5
+	 *
+	 * @param 	array                $configurations 
+	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
+	 *
+	 * @return 	array
 	 */
 	public function register( $configurations, $wp_customize ) {
 		return $configurations;
+	}
+
+	/**
+	 * Base Method for Registering Customizer Configurations.
+	 *
+	 * @since 	3.8.8
+	 *
+	 * @param 	array  $new_configs
+	 *
+	 * @return 	void
+	 */
+	public static function add( array $new_configs ) {
+		add_filter( 'wecodeart/filter/customizer/configurations', function( $configurations ) use( $new_configs ) {
+			return array_merge( $configurations, $new_configs );
+		}, 40 );
 	}
 }

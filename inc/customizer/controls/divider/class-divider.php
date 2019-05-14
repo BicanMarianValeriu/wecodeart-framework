@@ -55,7 +55,7 @@ class Divider extends WP_Customize_Control {
 	 */
 	public function enqueue() {
 		$handle = strtolower( str_replace( '\\', '-', __CLASS__ ) );
-		wp_enqueue_style( $handle, get_theme_file_uri( '/assets/css/customizer/controls/divider.css' ), null );
+		wp_enqueue_style( $handle, get_theme_file_uri( '/assets/minified/css/customizer/controls/divider.css' ), null );
 	}
 
 	/**

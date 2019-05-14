@@ -293,7 +293,7 @@ class Customizer {
 			Helpers::get_prop( $config, 'name' ),
 			[
 				// Default of the 'default' is null if not exists since we apply it with wp filter after theme setup
-				'default'			=> Helpers::get_prop( $config, 'default', false ),
+				'default'			=> Helpers::get_prop( $config, 'default' ),
 				'type'              => Helpers::get_prop( $config, 'datastore_type' ),
 				'transport'         => Helpers::get_prop( $config, 'transport', 'refresh' ),
 				'sanitize_callback' => Helpers::get_prop( $config, 'sanitize_callback', 

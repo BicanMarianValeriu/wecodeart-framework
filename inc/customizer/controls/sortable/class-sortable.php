@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Controls\Sortable
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.5
+ * @version		3.8.8
  */
 
 namespace WeCodeArt\Customizer\Controls;
@@ -78,7 +78,7 @@ class Sortable extends WP_Customize_Control {
 		$this->json['inputAttrs'] = '';
 
 		foreach ( $this->input_attrs as $attr => $value ) {
-			$this->json['inputAttrs'] .= $attr . '="' . esc_attr( $value ) . '" ';
+			$this->json['inputAttrs'] .= esc_html( $attr ) . '="' . esc_attr( $value ) . '" ';
 		}
 		
 		$this->json['inputAttrs'] = maybe_serialize( $this->input_attrs() );
@@ -110,7 +110,7 @@ class Sortable extends WP_Customize_Control {
 					<li {{{ data.inputAttrs }}} class='wecodeart-sortable__item' data-value='{{ choiceID }}'>
 						<i class='dashicons dashicons-menu'></i>
 						<i class="dashicons dashicons-visibility visibility"></i>
-						{{{ data.choices[ choiceID ] }}}
+						<span>{{{ data.choices[ choiceID ] }}}</span>
 					</li>
 				<# }); #>
 				<# _.each( data.choices, function( choiceLabel, choiceID ) { #>
@@ -118,7 +118,7 @@ class Sortable extends WP_Customize_Control {
 						<li {{{ data.inputAttrs }}} class='wecodeart-sortable__item invisible' data-value='{{ choiceID }}'>
 							<i class='dashicons dashicons-menu'></i>
 							<i class="dashicons dashicons-visibility visibility"></i>
-							{{{ data.choices[ choiceID ] }}}
+							<span>{{{ data.choices[ choiceID ] }}}</span>
 						</li>
 					<# } #>
 				<# }); #>
