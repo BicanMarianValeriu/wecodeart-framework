@@ -37,20 +37,24 @@ class Sortable extends WP_Customize_Control {
 	 * Enqueue control related scripts/styles.
 	 *
 	 * @access public
+	 *
+	 * @since	unknown
+	 * @version	3.8.9
 	 */
 	public function enqueue() {
 		$handle = strtolower( str_replace( '\\', '-', __CLASS__ ) );
+		$folder = defined( WP_DEBUG ) && WP_DEBUG === true ? 'unminified' : 'minified';
 
 		wp_enqueue_style(
             $handle,
-			get_theme_file_uri( '/assets/minified/css/customizer/controls/sortable.css' ),
+			get_parent_theme_file_uri( '/assets/' . $folder . '/css/customizer/controls/sortable.css' ),
             array(),
 			''
 		);
 		
 		wp_enqueue_script(
             $handle,
-			get_theme_file_uri( '/assets/minified/js/customizer/controls/sortable.js' ),
+			get_parent_theme_file_uri( '/assets/' . $folder . '/js/customizer/controls/sortable.js' ),
             array( 'jquery', 'customize-base', 'jquery-ui-core', 'jquery-ui-sortable' ),
             false,
             true

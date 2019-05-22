@@ -119,8 +119,8 @@ WeCodeArt::get_instance();
  * @since	1.0
  * @version	3.8.1
  *
- * @return	mixed 	Site Layout
+ * @return	void
  */
 function wecodeart() {	
-	WeCodeArt::layout(); 
+	return WeCodeArt::layout(); 
 }

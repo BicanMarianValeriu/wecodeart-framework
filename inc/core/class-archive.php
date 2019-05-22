@@ -95,9 +95,9 @@ class Archive {
 		} elseif ( is_tax() ) {
 			$tax = get_taxonomy( get_queried_object()->taxonomy );
 			/* translators: %s: Taxonomy singular name */
-			$output .= sprintf( esc_html__( '%s Archives:', 'wecodeart' ), $tax->labels->singular_name );
+			$output .= sprintf( esc_html__( '%s Archives', 'wecodeart' ), $tax->labels->singular_name );
 		} else {
-			$output .= esc_html__( 'Archives:', 'wecodeart' );
+			$output .= esc_html__( 'Archives', 'wecodeart' );
 		} 
 
 		return trim( $output );

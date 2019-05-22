@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		3.8.1
+ * @version		3.8.9
  */
 
 namespace WeCodeArt\Support;
@@ -59,6 +59,7 @@ class ANR {
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
+	 * @version	3.8.9
 	 * @see 	anr_captcha_form_field();
 	 * @uses	anr_captcha_class::init()->form_field();
 	 *
@@ -66,15 +67,15 @@ class ANR {
 	 */
 	public function wrapp_form_field() {
 		Markup::wrap( 'comment-captcha', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'comment-form-captcha col-12 col-md-7' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'form-group mt-3' ] ],
-		], [ Captcha::init(), 'form_field' ] ); // Echoes the anr_captcha_form_field().
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'form-group comment-form-captcha col-12 col-md-7' ] ],
+		], [ Captcha::init(), 'form_field' ] ); // Echoes the form_field().
 	}
 
 	/**
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
+	 * @version	3.8.9
 	 * @see 	anr_captcha_class::init()->captcha_form_field();
 	 * @uses	anr_captcha_class::init()->captcha_form_field();
 	 *
@@ -88,8 +89,7 @@ class ANR {
 		}
 
 		$defaults .= Markup::wrap( 'comment-captcha', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'comment-form-captcha col-12 col-md-7' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'form-group mt-3' ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'form-group comment-form-captcha col-12 col-md-7' ] ],
 		], [ Captcha::init(), 'captcha_form_field' ], [ true ], false );
 
 		return $defaults;

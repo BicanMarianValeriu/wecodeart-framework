@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		3.8.1
+ * @version		3.8.9
  */
 
 namespace WeCodeArt;
@@ -29,6 +29,8 @@ class Admin {
 	 * Send to Constructor
 	 */
 	public function init() {
+		if( ! is_admin() ) return;
+
 		// Init notification system.
 		Admin\Notifications::get_instance();
 
@@ -111,12 +113,15 @@ class Admin {
 	/**
 	 * Admin CSS
 	 *
-	 * @since 3.8.1
+	 * @since 	3.8.1
+	 * @version	3.8.9
 	 */
 	public function enqueue_scripts() {
+		$folder = defined( WP_DEBUG ) && WP_DEBUG === true ? 'unminified' : 'minified';
+
 		wp_enqueue_style( 
 			strtolower( str_replace( '\\', '-', __CLASS__ ) ), 
-			get_parent_theme_file_uri( '/assets/minified/css/admin/style.css' ), 
+			get_parent_theme_file_uri( '/assets/' . $folder . '/css/admin/style.css' ), 
 			[],
 			'3.8.1'
 		);

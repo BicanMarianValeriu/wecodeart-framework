@@ -69,7 +69,7 @@ class Comment extends Walker_Comment {
 	/**
 	 * Outputs a HTML5 comment.
 	 * @since	2.0
-	 * @version	3.8.5
+	 * @version	3.8.9
 	 */
 	protected function comment( $comment, $depth, $args ) {
 		// Get what we need.
@@ -90,7 +90,7 @@ class Comment extends Walker_Comment {
 		// The HTML.
 		echo '<li id="comment-' . esc_attr( $comment->comment_ID ) . '" class="' . esc_attr( $class ) . '" itemscope itemtype="http://schema.org/Comment">';
 			echo '<div class="comment__body row">';
-			do_action( 'wecodeart/hook/comment/top' ); // Hook Comment Top
+			do_action( 'wecodeart/hook/comment/top', $comment ); // Hook Comment Top
 				echo '<div class="col-12">';
 					echo '<div class="row">';
 						echo '<div class="comment-avatar col-auto"><figure class="gravatar">' . $author_img . '</figure></div>';
@@ -116,7 +116,7 @@ class Comment extends Walker_Comment {
 						'after'  => '</span>',
 					] ) );
 				echo '</div>';
-			do_action( 'wecodeart/hook/comment/bottom' ); // Hook Comment Bottom
+			do_action( 'wecodeart/hook/comment/bottom', $comment ); // Hook Comment Bottom
 			echo '</div>';
 		// No ending tag because of nesting	
 	}

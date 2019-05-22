@@ -249,7 +249,7 @@ class Content {
 	 * Get Contextual Modules Options
 	 *
 	 * @since 	3.5.0
-	 * @version	3.8.1
+	 * @version	3.8.9
 	 *
 	 * @return 	array 
 	 */
@@ -278,13 +278,6 @@ class Content {
 		$public_posts = get_post_types( [ 'public' => true, 'publicly_queryable' => true ] ); 
 
 		foreach( $public_posts as $type ) { 
-			if( is_post_type_archive( $type ) ) {
-				return [
-					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive' ),
-					'modules' 	=> get_theme_mod( 'content-layout-modules-' . $type . '-archive' )
-				]; 
-			}
-
 			if( is_singular( $type ) ) {  
 				$modules 	= get_theme_mod( 'content-layout-modules-' . $type . '-singular' ); 
 				if( Callbacks::is_full_content() ) $modules = [ 'content' ];
@@ -293,6 +286,11 @@ class Content {
 					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular' ),
 					'modules' 	=> $modules
 				];
+			} else {
+				return [
+					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive' ),
+					'modules' 	=> get_theme_mod( 'content-layout-modules-' . $type . '-archive' )
+				]; 
 			}
 		} 
 

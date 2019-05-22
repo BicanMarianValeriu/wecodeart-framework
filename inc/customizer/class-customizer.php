@@ -66,13 +66,17 @@ class Customizer {
 
 	/**
 	 * Grab our Customizer Scripts.
+	 *
+	 * @since 	unknown
+	 * @version	3.8.9
 	 */
 	public function enqueue_preview() {
 		$handle = strtolower( str_replace( '\\', '-', __CLASS__ ) ) . '-preview';
+		$folder = defined( WP_DEBUG ) && WP_DEBUG === true ? 'unminified' : 'minified';
 
 		wp_enqueue_script( 
 			$handle, 
-			get_theme_file_uri( '/assets/minified/js/customizer/preview.js' ), 
+			get_theme_file_uri( '/assets/' . $folder . '/js/customizer/preview.js' ), 
 			[ 'jquery','customize-preview' ], 
 			'3.5', 
 			true 

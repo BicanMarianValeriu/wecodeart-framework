@@ -1,5 +1,12 @@
-v3.8.9
+v3.9.0
 - Fixed - ...
+
+v3.8.9
+- Fixed - CPT Customizer options and frontend bug with custom slugs for CPT.
+- Updated - Passed $comment into comments hooks (top/bottom).
+- Updated - ANR reCaptcha support - removed extra wrapper and added .form-group class to parrent wrapper (comments)
+- Updated - Archive labels.
+- Updated - Scripts loading with WP_DEBUG. If true it will load unminified file, else the minified asset.
 
 v3.8.8
 - Added - Customizer Config Class added static method to add customizer configurations. ( Config::add() with an array of controls )
