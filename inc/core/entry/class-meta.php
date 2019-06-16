@@ -306,7 +306,7 @@ class Meta {
 	 * Entry Meta Read More Template
 	 *
 	 * @since	1.0
-	 * @version	3.8.4
+	 * @version	3.9.0
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -319,7 +319,7 @@ class Meta {
 			'before'	=> '',
 			'after' 	=> '<span aria-hidden="true">&#xbb;</span><span class="screen-reader-text">' . get_the_title() . '</span>',
 			'text' 		=> esc_html__( 'Read More', 'wecodeart' ),
-			'class' 	=> 'entry-more btn btn-primary',
+			'class' 	=> 'entry-more btn btn-dark',
 		);
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/more/defaults', $defaults ) );
@@ -334,8 +334,12 @@ class Meta {
 			$args['after'] ) 
 		);
 
-		if ( $echo ) echo $output;
-		else return $output;
+		if ( $echo ) {
+			echo $output;
+			return;
+		} else {
+			return $output;
+		}
 	} 
 
 	/**

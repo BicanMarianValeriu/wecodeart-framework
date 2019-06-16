@@ -9,7 +9,7 @@
  * @subpackage 	Notifications
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		3.8.1
+ * @version		3.9.0
  */
 
 namespace WeCodeArt\Admin;
@@ -146,12 +146,15 @@ class Notifications {
 	 * Enqueue Scripts.
 	 *
 	 * @since 	3.8.6
+	 * @version	3.9.0
 	 * @return 	void
 	 */
 	public function enqueue_scripts() {
+		$folder = defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 'unminified' : 'minified';
+
 		wp_register_script( 
 			strtolower( str_replace( '\\', '-', __CLASS__ ) ),
-			get_parent_theme_file_uri( '/assets/minified/js/admin/notification.js' ),
+			get_parent_theme_file_uri( '/assets/' . $folder . '/js/admin/notification.js' ),
 			[ 'jquery' ], 
 			self::$version, 
 			true 

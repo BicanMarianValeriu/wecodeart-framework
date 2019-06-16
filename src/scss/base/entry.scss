@@ -17,6 +17,10 @@
         -ms-word-wrap: break-word;
         word-wrap: break-word;
         padding-top: 1rem;
+
+        a {
+            color: $gray-900;
+        }
     }
     
     /* Meta */

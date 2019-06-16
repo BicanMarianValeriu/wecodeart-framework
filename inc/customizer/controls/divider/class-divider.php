@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Controls\Divider
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.5
- * @version		3.8.5
+ * @version		3.9.0
  */
 
 namespace WeCodeArt\Customizer\Controls;
@@ -55,7 +55,9 @@ class Divider extends WP_Customize_Control {
 	 */
 	public function enqueue() {
 		$handle = strtolower( str_replace( '\\', '-', __CLASS__ ) );
-		wp_enqueue_style( $handle, get_theme_file_uri( '/assets/minified/css/customizer/controls/divider.css' ), null );
+		$folder = defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 'unminified' : 'minified';
+	
+		wp_enqueue_style( $handle, get_theme_file_uri( '/assets/' . $folder . '/css/customizer/controls/divider.css' ), null );
 	}
 
 	/**

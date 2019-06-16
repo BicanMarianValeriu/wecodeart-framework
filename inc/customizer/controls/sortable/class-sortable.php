@@ -43,7 +43,7 @@ class Sortable extends WP_Customize_Control {
 	 */
 	public function enqueue() {
 		$handle = strtolower( str_replace( '\\', '-', __CLASS__ ) );
-		$folder = defined( WP_DEBUG ) && WP_DEBUG === true ? 'unminified' : 'minified';
+		$folder = defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 'unminified' : 'minified';
 
 		wp_enqueue_style(
             $handle,

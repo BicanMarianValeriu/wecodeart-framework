@@ -18,8 +18,8 @@
 .customize-control-wecodeart-divider .customize-control-caption {
   top: 50%;
   -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   position: absolute;
   right: 0;
   font-size: 11px;

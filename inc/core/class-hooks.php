@@ -126,7 +126,7 @@ class Hooks {
 	 * Filter Search form HTML Markup.
 	 * 
 	 * @since 	unknown
-	 * @version 3.7.9
+	 * @version 3.9.0
 	 * 
 	 * @return 	string $form
 	 */
@@ -141,7 +141,7 @@ class Hooks {
 			],
 			'button' 	=> [
 				'label' => esc_html__( 'Search', 'wecodeart' ),
-				'class' => 'btn btn-primary'
+				'class' => 'btn btn-dark'
 			]
 		);
 		

@@ -6,13 +6,6 @@ select {
     width: 100%;
 }
 
-button,
-.button,
-input[type="submit"] {
-    @extend .btn;
-    @extend .btn-primary;
-}
-
 label {
     width: 100%;
 }

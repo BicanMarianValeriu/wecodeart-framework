@@ -1,5 +1,12 @@
-v3.9.0
+v3.9.1
 - Fixed - ...
+
+v3.9.0
+- Changed - Default button class changed to btn-dark
+- Fixed - Assets enqueue with defined 'WP_DEBUG' (added missing quotes)
+- Updated - Improved base design.
+- Updated - github version -> npm packages
+- Updated - Notification.js enqueue minified/unminified version if WP_DEBUG
 
 v3.8.9
 - Fixed - CPT Customizer options and frontend bug with custom slugs for CPT.

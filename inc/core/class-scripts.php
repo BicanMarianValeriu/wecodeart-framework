@@ -74,10 +74,10 @@ class Scripts {
 	 * Enqueue Front-End Styles
 	 *
 	 * @since	1.0
-	 * @version	3.8.9
+	 * @version	3.9.0
 	 */
 	public function front_scripts() {
-		$folder = defined( WP_DEBUG ) && WP_DEBUG === true ? 'unminified' : 'minified';
+		$folder = defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 'unminified' : 'minified';
 
 		// Enqueue Styles
 		wp_enqueue_style( 'wecodeart-core',	get_parent_theme_file_uri( '/assets/' . $folder . '/css/style.css' ), [], '3.7.5' );

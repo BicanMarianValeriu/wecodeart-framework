@@ -20,7 +20,7 @@ const processStyles = (mode, { entry, output }) => {
     else outputStyle = undefined;
 
     const postcssPlugins = [
-        autoprefixer(config.autoprefixer)
+        autoprefixer()
     ];
 
     return [

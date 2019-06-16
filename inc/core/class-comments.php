@@ -234,7 +234,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	3.8.6
+	 * @version	3.9.0
 	 *
 	 * @return 	array
 	 */
@@ -294,7 +294,7 @@ class Comments {
 		. '</div>';
 		
 		$required_text 	= sprintf( ' ' . esc_html__( 'Required fiels are marked %s', 'wecodeart' ), '<span class="required">*</span>' );
-		$notes_before 	= '<div class="form-group comment-form-notes">' . esc_html__( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
+		$notes_before 	= '<div class="form-group comment-form-notes w-100">' . esc_html__( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? $required_text : '' ) . '</div>';
 		$notes_after 	= '<div class="form-group comment-form-allowed-tags">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'wecodeart' ), ' <code>' . allowed_tags() . '</code>' ) . '</div>';
 
 		$args = [
@@ -304,7 +304,7 @@ class Comments {
 			'comment_notes_after' 	=> $notes_after,
 			'submit_field'         	=> '<div class="form-group comment-form-submit">%1$s %2$s</div>',
 			'submit_button'         => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
-			'class_submit'         	=> 'btn btn-primary',
+			'class_submit'         	=> 'btn btn-dark',
 			'fields' => [
 				'author' => $author_name,
 				'email'  => $author_email,
@@ -330,7 +330,7 @@ class Comments {
 	 * @return 	string
 	 */
 	public function replace_reply_link_class( $class ) {
-		$class = str_replace( "class='comment-reply-link", "class='comment-reply-link btn btn-primary btn-sm", $class );
+		$class = str_replace( "class='comment-reply-link", "class='comment-reply-link btn btn-dark btn-sm", $class );
 		return $class;
 	} 
 }
