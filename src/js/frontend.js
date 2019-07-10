@@ -5,9 +5,6 @@ import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/dropdown';
 
 (function (wecodeart) {
-
-	'use strict';
-
 	/**
 	 * Base WCA Functions
 	 * @since 3.6

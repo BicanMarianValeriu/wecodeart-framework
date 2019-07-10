@@ -4207,12 +4207,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     __webpack_require__.n(bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_3__);
 
     (function (wecodeart) {
-      'use strict';
       /**
        * Base WCA Functions
        * @since 3.6
        */
-
       wecodeart.fn = {
         hasScrollbar: _plugins_HasScrollbar__WEBPACK_IMPORTED_MODULE_0__["default"]
       };

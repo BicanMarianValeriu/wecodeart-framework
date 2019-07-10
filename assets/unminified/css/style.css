@@ -4,7 +4,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 3.9.0
+Version: 3.9.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -6242,21 +6242,40 @@ svg,
         margin-right: 0; } }
     .entry-media__link {
       display: block; }
-    .entry-media img {
+    .entry-media .ls-blur-up-img, .entry-media__src {
       position: absolute;
       top: 50%;
       left: 50%;
       -webkit-transform: translate3d(-50%, -50%, 0);
-              transform: translate3d(-50%, -50%, 0); }
-      .entry-media img.match {
+              transform: translate3d(-50%, -50%, 0);
+      /* only if you want to change the blur-up option from always to auto or want to use blur up effect without a lowsrc image. */
+      font-family: "blur-up: auto", "object-fit: cover";
+      -o-object-fit: cover;
+         object-fit: cover; }
+      .entry-media .ls-blur-up-img.match, .entry-media__src.match {
         width: 100%;
         height: 100%; }
-      .entry-media img.taller {
+      .entry-media .ls-blur-up-img.taller, .entry-media__src.taller {
         width: 100%;
         height: auto; }
-      .entry-media img.wider {
+      .entry-media .ls-blur-up-img.wider, .entry-media__src.wider {
         width: auto;
         height: 100%; }
+      .entry-media .ls-blur-up-img.ls-blur-up-is-loading, .entry-media .ls-blur-up-img.lazyload:not([src]), .entry-media__src.ls-blur-up-is-loading, .entry-media__src.lazyload:not([src]) {
+        visibility: hidden; }
+    .entry-media .ls-blur-up-img {
+      -webkit-filter: blur(10px);
+              filter: blur(10px);
+      opacity: 1;
+      -webkit-transition: opacity 1000ms, -webkit-filter 1500ms;
+      transition: opacity 1000ms, -webkit-filter 1500ms;
+      -o-transition: opacity 1000ms, filter 1500ms;
+      transition: opacity 1000ms, filter 1500ms;
+      transition: opacity 1000ms, filter 1500ms, -webkit-filter 1500ms; }
+    .entry-media .ls-blur-up-img.ls-inview.ls-original-loaded {
+      opacity: 0;
+      -webkit-filter: blur(5px);
+              filter: blur(5px); }
 
 .hfeed .entry-footer {
   text-align: right; }

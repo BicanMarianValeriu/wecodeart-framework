@@ -121,7 +121,7 @@ class Media {
 			'aria-hidden' 	=> 'true', 
 			'class'			=> 'entry-media__dummy',
 			'style'			=> 'padding-bottom:' .  $args['padding'] . '%;'
-		] ) . '></div>'; 
+		] ) . '></div>';
 
 		return $html;
 	}
@@ -177,9 +177,10 @@ class Media {
 			'format'   	=> 'html',
 			'size'     	=> 'large',
 			'dummy'		=> true,
+			'lazyload'	=> false,
 			'num'      	=> 0,
 			'attrs'    	=> [],
-			'fallback' 	=> 'first' 
+			'fallback' 	=> 'first'
 		];  
 
 		$args = apply_filters( 'wecodeart/filter/media/get_image/args', wp_parse_args( $args, $defaults ), get_post_type() );
@@ -201,16 +202,26 @@ class Media {
 		if ( isset( $id ) ) {	
 			$html = '';
 
+			$dummy_sizes = self::get_image_sizes( $args['size'] );
+			$dummy_ratio = absint( $dummy_sizes['width'] ) / absint( $dummy_sizes['height'] );
+			
 			if( (bool) $args['dummy'] ) {
-				$dummy_sizes = self::get_image_sizes( $args['size'] ); 
-				$dummy_ratio = absint( $dummy_sizes['width'] ) / absint( $dummy_sizes['height'] );
-				  
-				$args['attrs']['class'] .= ' ' . self::get_image_ratio( $id, $args['size'], $dummy_ratio ); 
-
+				$args['attrs']['class'] .= ' ' . self::get_image_ratio( $id, $args['size'], $dummy_ratio );
 				$html .= self::generate_dummy_placeholder( $dummy_sizes ); 
 			}
 
-			$html .= wp_get_attachment_image( $id, $args['size'], false, $args['attrs'] ); 
+			if( (bool) $args['lazyload'] ) {
+				$template = '<img class="%s" data-lowsrc="%s" data-sizes="%s" data-src="%s" data-srcset="%s" />';
+				$html .= sprintf( $template, 
+					'entry-media__src lazyload ' . self::get_image_ratio( $id, $args['size'], $dummy_ratio ),
+					wp_get_attachment_image_src( $id, 'thumbnail' )[0],
+					wp_get_attachment_image_sizes( $id, $args['size'] ),
+					wp_get_attachment_image_src( $id, $args['size'] )[0],
+					wp_get_attachment_image_srcset( $id, $args['size'] )
+				);
+			} else {
+				$html .= wp_get_attachment_image( $id, $args['size'], false, $args['attrs'] );
+			}
 
 			list( $url ) = wp_get_attachment_image_src( $id, $args['size'], false );
 

@@ -1,5 +1,7 @@
 v3.9.1
-- Fixed - ...
+- Fixed - Removed comments submit default class key - interfering with filter.
+- Updated - Comments allowed tags HTML - Added tooltip functionality.
+- Updated - NPM setup - see Github Repo
 
 v3.9.0
 - Changed - Default button class changed to btn-dark
