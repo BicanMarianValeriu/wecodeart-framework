@@ -1,4 +1,6 @@
-const entryArray = ['./src/js/frontend.js'];
+const entryArray = [
+	'./src/js/frontend.js'
+];
 
 const entryObject = entryArray.reduce((acc, item) => {
 	const name = item.replace('./src/js/', '').replace('.js', '');

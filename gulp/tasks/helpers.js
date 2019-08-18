@@ -43,4 +43,28 @@ const deleteBuild = (mode, assetType) => () => {
 	return ['development', 'production'].includes(mode) ? del([distPath(assetType)]) : undefined;
 };
 
-export { srcPath, distPath, deleteBuild };
+const publicPath = (folder, rootD = '') => {
+	const theme = path.basename(path.resolve('./'));
+	if (rootD === true) {
+		rootD = `/${path.basename(path.resolve('../../../'))}`;
+	}
+	return `${rootD}/wp-content/themes/${theme}/${folder}/`;
+};
+
+const outputPath = (mode, assetType = '', folder = '') => {
+	let streamType;
+	if (mode === 'development') streamType = 'unminified';
+	else if (mode === 'production') streamType = 'minified';
+	else streamType = undefined;
+
+	if ([ 'css', 'js' ].includes(assetType)) {		
+		streamType += `/${assetType}`;
+		if (folder !== '') streamType += `/${folder}`;
+
+		return distPath(streamType);
+	}
+	
+	console.error('Unsupported asset type entered into Gulp Task Runner for outputPath');
+};
+
+export { srcPath, distPath, deleteBuild, publicPath, outputPath };

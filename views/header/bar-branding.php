@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Header Branding HTML
  * @since	 	3.0.5
- * @version    	3.7.3
+ * @version    	3.9.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit();
@@ -42,7 +42,7 @@ use WeCodeArt\Utilities\Markup\SVG;
 				<div class="col-auto d-lg-none">
 					<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__search" aria-expanded="false" aria-controls="bar-search">
 						<span class="screen-reader-text"><?php esc_html_e( 'Search', 'wecodeart' ); ?></span>
-						<?php SVG::render( 'icon--search' ); ?>
+						<?php SVG::render( 'search' ); ?>
 					</button>
 				</div>
 			<?php }
@@ -52,7 +52,7 @@ use WeCodeArt\Utilities\Markup\SVG;
 				<div class="col-auto d-lg-none">
 					<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__menu" aria-expanded="false" aria-controls="bar-menu">
 						<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', 'wecodeart' ); ?></span>
-						<?php SVG::render( 'icon--bars' ); ?>
+						<?php SVG::render( 'bars' ); ?>
 					</button>
 				</div>
 			<?php }

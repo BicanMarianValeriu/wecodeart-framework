@@ -49,7 +49,10 @@ class Scripts {
 			'assetsEnqueue' 	=> $wp_scripts->queue, 
 			'templateDirectory' => get_template_directory_uri()
 		];
-		if( is_child_theme() ) $wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
+
+		if( is_child_theme() ) {
+			$wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
+		}
 		
 		wp_localize_script( 'wecodeart-core', 'wecodeart', 
 			apply_filters( 'wecodeart/filter/scripts/localize_js', $wecodeart ) 
@@ -74,19 +77,18 @@ class Scripts {
 	 * Enqueue Front-End Styles
 	 *
 	 * @since	1.0
-	 * @version	3.9.0
+	 * @version	3.9.2
 	 */
 	public function front_scripts() {
 		$folder = defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 'unminified' : 'minified';
 
 		// Enqueue Styles
-		wp_enqueue_style( 'wecodeart-core',	get_parent_theme_file_uri( '/assets/' . $folder . '/css/style.css' ), [], '3.7.5' );
+		wp_enqueue_style( 'wecodeart-core',	get_parent_theme_file_uri( '/assets/' . $folder . '/css/style.css' ), [], '3.9.2' );
 
 		// Enqueue scripts
-		wp_enqueue_script( 'wecodeart-core', get_parent_theme_file_uri( '/assets/' . $folder . '/js/frontend.js' ), [ 'jquery' ], '3.7.5', true );		
-		if ( 
-			( is_page() && comments_open() && get_option( 'thread_comments' ) ) || 
-			( is_single() && comments_open() && get_option( 'thread_comments' ) ) 
-		) wp_enqueue_script( 'comment-reply' );
+		wp_enqueue_script( 'wecodeart-core', get_parent_theme_file_uri( '/assets/' . $folder . '/js/frontend.js' ), [ 'jquery' ], '3.9.2', true );		
+		if ( ( is_page() || is_single() ) && comments_open() && get_option( 'thread_comments' ) ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
 	}
 }

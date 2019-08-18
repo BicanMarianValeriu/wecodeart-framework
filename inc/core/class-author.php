@@ -9,6 +9,7 @@
  * @subpackage 	Core\Author
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.7.7
+ * @version		3.9.2
  */
 
 namespace WeCodeArt\Core;
@@ -73,22 +74,24 @@ class Author {
 	/**
 	 * Get Author Information
 	 *
-	 * @since 	3.7.9
+	 * @since 	3.9.1
+	 * @version	3.9.2
 	 *
 	 * @return 	array 
 	 */
 	public static function get_data( $context = '' ) {
 		$avatar_size = apply_filters( 'wecodeart/filter/author/box/gravatar_size', 100 );
+		$avatar_alt  = sprintf( esc_html__( "%s's gravatar", 'wecodeart' ), get_the_author() );
 
 		$author = [
-			'icon'			=> SVG::compile( 'icon--user' ),
+			'icon'			=> SVG::compile( 'user' ),
 			'intro' 		=> is_author() ? esc_html__( 'All articles by', 'wecodeart' ) : esc_html__( 'About', 'wecodeart' ),
 			'name'			=> get_the_author(),
-			'avatar' 		=> get_avatar( get_the_author_meta( 'email' ), $avatar_size, '', get_the_author() . "'s gravatar" ),
+			'avatar' 		=> get_avatar( get_the_author_meta( 'email' ), $avatar_size, '', $avatar_alt ),
 			'description'	=> wpautop( get_the_author_meta( 'description' ) ),
 			'url'			=> get_author_posts_url( get_the_author_meta( 'ID' ) ),
 			'website'		=> [
-				'icon' 	=> SVG::compile( 'icon--globe' ),
+				'icon' 	=> SVG::compile( 'globe' ),
 				'label'	=> esc_html__( 'Website', 'wecodeart' )
 			],
 			'container' 	=> ! is_single() ? get_theme_mod( 'content-layout-container' ) : 'container-full'

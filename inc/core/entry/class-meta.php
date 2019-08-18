@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.6
- * @version		3.8.4
+ * @version		3.9.2
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -56,7 +56,7 @@ class Meta {
 		$author = $author ? $author : esc_html__( 'Author Name', 'wecodeart' );
 		
 		$defaults = array(
-			'before'	=> SVG::compile( 'icon--user' ),
+			'before'	=> SVG::compile( 'user' ),
 			'after'  	=> '&nbsp;',
 			'sr_text'  	=>  esc_html__( 'Posted by ', 'wecodeart' ),
 		);
@@ -82,7 +82,7 @@ class Meta {
 	 * Entry Meta Date Template
 	 *
 	 * @since	1.0
-	 * @version	3.8.4
+	 * @version	3.9.2
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -92,7 +92,7 @@ class Meta {
 	public static function date( $args = [], $echo = true ) {
 		// Set the Defaults
 		$defaults = array(
-			'before'	=> SVG::compile( 'icon--clock' ),
+			'before'	=> SVG::compile( 'clock' ),
 			'after'  	=> '&nbsp;',
 			'sr_text'  	=> esc_html__( 'Posted on ', 'wecodeart' ),
 		);
@@ -130,7 +130,7 @@ class Meta {
 	 * Entry Meta Categories Template
 	 *
 	 * @since	1.0
-	 * @version	3.8.4
+	 * @version	3.9.2
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -140,7 +140,7 @@ class Meta {
 	public static function categories( $args = [], $echo = true ) {
 		// Set the defaults
 		$defaults = [
-			'before' 	=> SVG::compile( 'icon--folder' ),
+			'before' 	=> SVG::compile( 'folder' ),
 			'after'  	=> '&nbsp;',
 			'sr_text'	=> esc_html__( 'Posted in ', 'wecodeart' ),
 			'sep'    	=> ', ',
@@ -173,7 +173,7 @@ class Meta {
 	 * Entry Meta Tags Template
 	 *
 	 * @since	1.0
-	 * @version	3.8.4
+	 * @version	3.9.2
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -183,7 +183,7 @@ class Meta {
 	public static function tags( $args = [], $echo = true ) {
 		// Set the Defaults
 		$defaults = array(
-			'before'  	=> SVG::compile( 'icon--tags' ) . ' ',
+			'before'  	=> SVG::compile( 'tags' ) . ' ',
 			'after'  	=> '&nbsp;',
 			'sr_text'	=> esc_html__( 'Tagged with ', 'wecodeart' ),
 			'sep'  		=> ', ',
@@ -214,7 +214,7 @@ class Meta {
 	 * Entry Meta Comments Template
 	 *
 	 * @since	1.0
-	 * @version	3.8.4
+	 * @version	3.9.2
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -227,7 +227,7 @@ class Meta {
 
 		// Set the Defaults
 		$defaults = array(
-			'before'       	=> SVG::compile( 'icon--comments' ),
+			'before'       	=> SVG::compile( 'comments' ),
 			'after'      	=> '&nbsp;',
 			'hide_if_off' 	=> true,
 			'more'        	=> esc_html__( '% Comments', 'wecodeart' ),

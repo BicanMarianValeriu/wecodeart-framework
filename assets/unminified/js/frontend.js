@@ -4166,53 +4166,54 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     /* harmony import */
 
 
-    var _plugins_HasScrollbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./plugins/HasScrollbar */
-    "./src/js/plugins/HasScrollbar.js");
-    /* harmony import */
-
-
-    var bootstrap_js_dist_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var bootstrap_js_dist_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! bootstrap/js/dist/util */
     "./node_modules/bootstrap/js/dist/util.js");
     /* harmony import */
 
 
-    var bootstrap_js_dist_util__WEBPACK_IMPORTED_MODULE_1___default =
+    var bootstrap_js_dist_util__WEBPACK_IMPORTED_MODULE_0___default =
     /*#__PURE__*/
-    __webpack_require__.n(bootstrap_js_dist_util__WEBPACK_IMPORTED_MODULE_1__);
+    __webpack_require__.n(bootstrap_js_dist_util__WEBPACK_IMPORTED_MODULE_0__);
     /* harmony import */
 
 
-    var bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! bootstrap/js/dist/collapse */
     "./node_modules/bootstrap/js/dist/collapse.js");
     /* harmony import */
 
 
-    var bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_2___default =
+    var bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_1___default =
     /*#__PURE__*/
-    __webpack_require__.n(bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_2__);
+    __webpack_require__.n(bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_1__);
     /* harmony import */
 
 
-    var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! bootstrap/js/dist/dropdown */
     "./node_modules/bootstrap/js/dist/dropdown.js");
     /* harmony import */
 
 
-    var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_3___default =
+    var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_2___default =
     /*#__PURE__*/
-    __webpack_require__.n(bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_3__);
+    __webpack_require__.n(bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_2__);
+    /* harmony import */
+
+
+    var _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./helpers/HasScrollbar */
+    "./src/js/helpers/HasScrollbar.js");
 
     (function (wecodeart) {
       /**
        * Base WCA Functions
        * @since 3.6
        */
+      wecodeart.plugins = {};
       wecodeart.fn = {
-        hasScrollbar: _plugins_HasScrollbar__WEBPACK_IMPORTED_MODULE_0__["default"]
+        hasScrollbar: _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_3__["default"]
       };
       /**
        * Init
@@ -4222,23 +4223,23 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var html = document.documentElement;
         html.classList.remove('no-js');
         html.classList.add('js');
-        Object(_plugins_HasScrollbar__WEBPACK_IMPORTED_MODULE_0__["handleDocumentScrollbar"])();
-        window.onresize = _plugins_HasScrollbar__WEBPACK_IMPORTED_MODULE_0__["handleDocumentScrollbar"];
+        Object(_helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_3__["handleDocumentScrollbar"])();
+        window.onresize = _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_3__["handleDocumentScrollbar"];
       });
     }).apply(undefined, [window.wecodeart]);
     /***/
   },
 
   /***/
-  "./src/js/plugins/HasScrollbar.js":
+  "./src/js/helpers/HasScrollbar.js":
   /*!****************************************!*\
-    !*** ./src/js/plugins/HasScrollbar.js ***!
+    !*** ./src/js/helpers/HasScrollbar.js ***!
     \****************************************/
 
   /*! exports provided: default, handleDocumentScrollbar */
 
   /***/
-  function srcJsPluginsHasScrollbarJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsHelpersHasScrollbarJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);

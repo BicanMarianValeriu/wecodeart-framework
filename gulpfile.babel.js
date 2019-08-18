@@ -3,9 +3,9 @@
 import gulp from 'gulp';
 import browserSync from 'browser-sync';
 import config from './gulp/config';
-import { compileSVG, deleteBuild, srcPath, buildScripts, buildStyles } from './gulp/tasks';
+import { deleteBuild, srcPath, buildScripts, buildStyles } from './gulp/tasks';
 
-var project_slug = 'wecodeart';
+const projectSlug = 'wecodeart';
 
 // Browsersync
 const bsync = proxy => browserSync.init(config.browserSync(proxy));
@@ -28,7 +28,7 @@ const genericTask = (mode, context = 'building') => {
 
 	// Browser Loading & Watching
 	const browserLoadingWatching = done => {
-		bsync('http://working.on/' + project_slug);
+		bsync('http://working.on/' + projectSlug);
 
 		// Watch - Styles
 		gulp.watch(srcPath('scss', true))
@@ -57,7 +57,6 @@ const genericTask = (mode, context = 'building') => {
 		return [
 			Object.assign(deleteBuild(mode, 'minified'), { displayName: `Running Cleaning Task: Clean - ${modeName}` }),
 			...allBootingTasks,
-			Object.assign(compileSVG, { displayName: `Running SVG Task - ${modeName}` }),
 		];
 	}
 
@@ -83,7 +82,7 @@ build.description = 'Cleans and build the final source code.';
  */
 
 // Named Exports
-export { serve, build, compileSVG };
+export { serve, build };
 
 // Default
 export default defaultTask;

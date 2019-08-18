@@ -1,3 +1,7 @@
+v3.9.2
+- Updated - Maintenance cleanup and NPM Updates (on Github)
+- Updated - Removed icons sprite and added PHP generated icons
+
 v3.9.1
 - Fixed - Removed comments submit default class key - interfering with filter.
 - Updated - Comments allowed tags HTML - Added tooltip functionality.

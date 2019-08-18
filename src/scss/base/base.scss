@@ -139,7 +139,11 @@ hr {
 }
 
 svg,
-.svg {
+.svg-inline {
     display: inline-block;
     vertical-align: middle;
+
+    .fa-secondary {
+        opacity: .4;
+    }
 }

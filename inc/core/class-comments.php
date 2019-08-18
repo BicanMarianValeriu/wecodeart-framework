@@ -68,7 +68,7 @@ class Comments {
 	 * Render Comments Info
 	 *
 	 * @since	3.7.3
-	 * @version	3.8.3
+	 * @version	3.9.2
 	 *
 	 * @return 	string
 	 */
@@ -77,7 +77,7 @@ class Comments {
 		$comments_number = intval( get_comments_number() );
 
 		$defaults = [
-			'icon' 		=> SVG::compile( 'icon--comments' ) . ' ',
+			'icon' 		=> SVG::compile( 'comments' ) . ' ',
 			'empty' 	=> esc_html__( 'No comments, so go and ...', 'wecodeart' ),
 			'closed'	=> false,
 			'add_one'	=> esc_html__( 'add one', 'wecodeart' ) 
@@ -193,7 +193,7 @@ class Comments {
 	 *
 	 * @since	unknown
 	 *
-	 * @version 3.9.1
+	 * @version 3.9.2
 	 */
 	public function render_respond() {
 		// Bail if comments are closed for this post type.
@@ -201,7 +201,7 @@ class Comments {
 	
 		$args = apply_filters( 'wecodeart/filter/comments/form/args', [
 			'format'			 	=> 'html5',
-			'title_reply_before' 	=> '<h3 id="reply-title" class="headline"> ' . SVG::compile( 'icon--comment-dots' ) . ' ',
+			'title_reply_before' 	=> '<h3 id="reply-title" class="headline"> ' . SVG::compile( 'comment-dots' ) . ' ',
 			'title_reply_after'  	=> '</h3>',
 			'class_form' 			=> 'comment-form row no-gutters',
 			'cancel_reply_before' 	=> '<span class="float-right"><small>',

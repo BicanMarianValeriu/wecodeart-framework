@@ -72,7 +72,6 @@ class Activation {
 		}
 	}
 
-
 	/**
 	 * Get Activation Validation Status
 	 *
