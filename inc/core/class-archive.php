@@ -9,7 +9,7 @@
  * @subpackage 	Core\Archive
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.3
+ * @version		3.9.3
  */
 
 namespace WeCodeArt\Core;
@@ -30,9 +30,9 @@ class Archive {
 
 	/**
 	 * Send to Constructor
-	 * @since 3.6.2
+	 * @since 3.9.3
 	 */
-	public function __construct() {
+	public function init() {
 		add_filter( 'get_the_archive_title', 		[ $this, 'filter_cat_title' 	] );
 		add_action( 'wecodeart/hook/inner/top',		[ $this, 'render_intro_markup' 	], 15 );
 		add_action( 'wecodeart/hook/inner/top', 	[ Author::get_instance(), 'author_box_archive' ], 20 );
@@ -69,12 +69,12 @@ class Archive {
 	 * Filter category title
 	 *
 	 * @since	3.5
-	 * @version	3.8.2
+	 * @version	3.9.3
 	 *
 	 * @return 	string
 	 */
 	public function filter_cat_title() {
-		$output = '<span class="archive-intro__svg">' . SVG::compile( 'icon--folder' ) . '</span> ';
+		$output = '<span class="archive-intro__svg">' . SVG::compile( 'folder' ) . '</span> ';
 
 		$title_template = '<span class="archive-intro__title">%s</span>';
 

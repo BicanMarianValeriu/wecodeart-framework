@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.6
- * @version		3.9.2
+ * @version		3.9.3
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -82,7 +82,7 @@ class Meta {
 	 * Entry Meta Date Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.2
+	 * @version	3.9.3
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -99,9 +99,9 @@ class Meta {
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/date/defaults', $defaults ) );
 
-		$output = '<time class="published" datetime="%1$s">%2$s</time>';
+		$output = '<time class="entry-date__time entry-date__time--published" datetime="%1$s">%2$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$output .= '<time class="updated d-none" datetime="%3$s">%4$s</time>';
+			$output .= '<time class="entry-date__time entry-date__time--updated d-none" datetime="%3$s">%4$s</time>';
 		}
 
 		$html = sprintf( $output,
@@ -122,15 +122,19 @@ class Meta {
 			), $args
 		);
 
-		if ( $echo ) echo $output;
-		else return $output;
+		if ( $echo ) {
+			echo $output;
+			return;
+		}
+		
+		return $output;
 	} 
 
 	/**
 	 * Entry Meta Categories Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.2
+	 * @version	3.9.3
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -140,7 +144,7 @@ class Meta {
 	public static function categories( $args = [], $echo = true ) {
 		// Set the defaults
 		$defaults = [
-			'before' 	=> SVG::compile( 'folder' ),
+			'before' 	=> SVG::compile( 'folders' ),
 			'after'  	=> '&nbsp;',
 			'sr_text'	=> esc_html__( 'Posted in ', 'wecodeart' ),
 			'sep'    	=> ', ',
@@ -149,10 +153,25 @@ class Meta {
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/cats/defaults', $defaults ) );
 
 		// Get what we need
-		$cats = get_the_category_list( $args['sep'] );
+		$primary_cat = get_post_meta( get_the_ID(), '_yoast_wpseo_primary_category', true );
+		if( $primary_cat ) {
+			$cats = sprintf( 
+				'<a href="%s" rel="category tag">%s</a>', 
+				esc_url( get_category_link( $primary_cat ) ),
+				esc_html( get_term_by( 'id', $primary_cat, 'category' )->name )
+			);
+
+			$args = wp_parse_args( [
+				'before' => SVG::compile( 'folder' )
+			], $args );
+		} else {
+			$cats = get_the_category_list( $args['sep'] );
+		}
 
 		// Do nothing if no cats
-		if ( ! $cats ) return;
+		if ( ! $cats ) {
+			return;
+		}
 
 		// The HTML
 		$output = apply_filters( 'wecodeart/filter/entry/meta/cats/html', sprintf( 
@@ -165,15 +184,19 @@ class Meta {
 			), $args
 		);
 
-		if ( $echo ) echo $output;
-		else return $output;
+		if ( $echo ) {
+			echo $output;
+			return;
+		}
+
+		return $output;
 	}
 
 	/**
 	 * Entry Meta Tags Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.2
+	 * @version	3.9.3
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -183,7 +206,7 @@ class Meta {
 	public static function tags( $args = [], $echo = true ) {
 		// Set the Defaults
 		$defaults = array(
-			'before'  	=> SVG::compile( 'tags' ) . ' ',
+			'before'  	=> SVG::compile( 'tags' ) . '&nbsp; ',
 			'after'  	=> '&nbsp;',
 			'sr_text'	=> esc_html__( 'Tagged with ', 'wecodeart' ),
 			'sep'  		=> ', ',
@@ -195,7 +218,9 @@ class Meta {
 		$tags = get_the_tag_list( $args['before'], $args['sep'], $args['after'] );
 
 		// Do nothing if no tags
-		if ( ! $tags ) return;
+		if ( ! $tags ) {
+			return;
+		}
 
 		// The HTML
 		$output = apply_filters( 'wecodeart/filter/entry/meta/tags/html', sprintf( 
@@ -206,8 +231,12 @@ class Meta {
 			), $args
 		);
 
-		if ( $echo ) echo $output;
-		else return $output;
+		if ( $echo ) {
+			echo $output;
+			return;
+		}
+		
+		return $output;
 	} 
 
 	/**
@@ -223,7 +252,9 @@ class Meta {
 	 */
 	public static function comments( $args = [], $echo = true ) {
 		// Only if post type supports
-		if ( ! post_type_supports( get_post_type(), 'comments' ) ) return;
+		if ( ! post_type_supports( get_post_type(), 'comments' ) ) {
+			return;
+		}
 
 		// Set the Defaults
 		$defaults = array(

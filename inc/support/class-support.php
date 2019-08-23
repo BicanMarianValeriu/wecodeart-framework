@@ -25,6 +25,7 @@ use WeCodeArt\Utilities\Helpers;
  * Support for various plugins and features.
  */
 class Support {
+
 	use \WeCodeArt\Singleton; 
 
 	/**
@@ -96,7 +97,9 @@ class Support {
 		add_theme_support( 'responsive-embeds' );
 
 		// Add support for Meta info for posts other than Page Type 
-		foreach( $get_post_types as $type ) add_post_type_support( $type, 'wecodeart-post-info' ); 
+		foreach( $get_post_types as $type ) { 
+			add_post_type_support( $type, 'wecodeart-post-info' );
+		}
 
 		// Register New Menu
 		register_nav_menus( array(

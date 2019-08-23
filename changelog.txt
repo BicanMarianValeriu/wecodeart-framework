@@ -1,3 +1,10 @@
+v3.9.3
+- Added - SVG Folders icons
+- Added - Media extra args to output any custom media by ID
+- Fixed - Fixed Category Icon
+- Updated - Post Categories will now use Yoast Primary's category and if is used, icon will change to single folder
+- Changed - WeCodeArt\Customizer\Config to abastract class and required `register` function.
+
 v3.9.2
 - Updated - Maintenance cleanup and NPM Updates (on Github)
 - Updated - Removed icons sprite and added PHP generated icons

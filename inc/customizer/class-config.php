@@ -9,51 +9,30 @@
  * @subpackage 	WP-Customizer Config
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.8.8
+ * @version		3.9.3
  */
 
 namespace WeCodeArt\Customizer;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Customizer Config initial setup
  */
-class Config {
+abstract class Config {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		add_filter( 'wecodeart/filter/customizer/configurations', [ $this, 'register' ], 30, 2 );
-	}
-
-	/**
-	 * Base Method for Registering Customizer Configurations.
-	 *
-	 * @since 	3.5
-	 * @version 3.6.0.5
-	 *
-	 * @param 	array                $configurations 
-	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
-	 *
-	 * @return 	array
-	 */
-	public function register( $configurations, $wp_customize ) {
-		return $configurations;
-	}
-
-	/**
-	 * Base Method for Registering Customizer Configurations.
-	 *
-	 * @since 	3.8.8
-	 *
-	 * @param 	array  $new_configs
-	 *
-	 * @return 	void
-	 */
-	public static function add( array $new_configs ) {
-		add_filter( 'wecodeart/filter/customizer/configurations', function( $configurations ) use( $new_configs ) {
-			return array_merge( $configurations, $new_configs );
-		}, 40 );
+		// Register new Customizer elements.
+		if ( method_exists( $this, 'register' ) ) {
+			add_filter( 'wecodeart/filter/customizer/configurations', [ $this, 'register' ], 30, 2 );
+		} else {
+			_doing_it_wrong( 
+				'WeCodeArt\Customizer\Config', 
+				esc_html__( 'When extending WeCodeArt\Customizer\Config, you must create a register method, merging existing arguments with new ones.', 'wecodeart' ),
+				'3.9.3'
+			);
+		}
 	}
 }

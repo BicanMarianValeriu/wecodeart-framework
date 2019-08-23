@@ -217,8 +217,12 @@ class Markup {
 		$output = apply_filters( "wecodeart/filter/wrap/{$context}/output", $html, $context );
 
 		// Return the output.
-		if( $echo ) echo $output; 
-		else return $output;
+		if( $echo ) {
+			echo $output;
+			return;
+		}
+		
+		return $output;
 	}
 
 	/**

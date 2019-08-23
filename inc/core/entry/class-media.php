@@ -165,6 +165,7 @@ class Media {
 	 * Get Image - Return an image pulled from the media gallery. 
 	 *
 	 * @since 	3.6.4
+	 * @version	3.9.3
 	 *
 	 * @param 	array	$args
 	 * @param	bool	$echo
@@ -174,6 +175,7 @@ class Media {
 	public static function get_image( $args = [], $echo = false ) {
 		$defaults = [
 			'post_id'	=> null,
+			'media_id'	=> null,
 			'format'   	=> 'html',
 			'size'     	=> 'large',
 			'dummy'		=> true,
@@ -190,7 +192,9 @@ class Media {
 		if ( false !== $pre ) return $pre; 
 		
 		// If post thumbnail (native WP) exists, use its id.
-		if ( 0 === $args['num'] && has_post_thumbnail( $args['post_id'] ) ) {
+		if( is_int( $args['media_id'] ) ) {
+			$id = absint( $args['media_id'] );
+		} elseif ( 0 === $args['num'] && has_post_thumbnail( $args['post_id'] ) ) {
 			$id = get_post_thumbnail_id( $args['post_id'] );
 		} elseif ( 'first' === $args['fallback'] ) { 
 			$id = self::get_media_id( 'image', $args['num'], $args['post_id'] );
@@ -246,8 +250,13 @@ class Media {
 
 		// Return data, filtered.
 		$output = apply_filters( 'wecodeart/filter/media/get_image', $output, $args, $id, $html, $url, $src );
-		if( $echo ) echo $output;
-		else return $output;
+
+		if( $echo ) {
+			echo $output;
+			return;
+		}
+
+		return $output;
 	}
 
 	/**
