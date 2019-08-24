@@ -75,7 +75,7 @@ class Author {
 	 * Get Author Information
 	 *
 	 * @since 	3.9.1
-	 * @version	3.9.2
+	 * @version	3.9.3
 	 *
 	 * @return 	array 
 	 */
@@ -90,12 +90,12 @@ class Author {
 			'avatar' 		=> get_avatar( get_the_author_meta( 'email' ), $avatar_size, '', $avatar_alt ),
 			'description'	=> wpautop( get_the_author_meta( 'description' ) ),
 			'url'			=> get_author_posts_url( get_the_author_meta( 'ID' ) ),
-			'website'		=> [
-				'icon' 	=> SVG::compile( 'globe' ),
-				'label'	=> esc_html__( 'Website', 'wecodeart' )
-			],
 			'container' 	=> ! is_single() ? get_theme_mod( 'content-layout-container' ) : 'container-full'
 		];
+
+		if ( 0 === mb_strlen( $author['name'] ) || 0 === mb_strlen( $author['description'] ) ) {
+			return [];
+		}
 
 		if ( is_singular() ) {
 			$author['name']	= sprintf( 
@@ -103,8 +103,6 @@ class Author {
 				esc_url( $author['url'] ), esc_html( $author['name'] ) 
 			);
 		}
-
-		if ( 0 === mb_strlen( $author['name'] ) || 0 === mb_strlen( $author['description'] ) ) return [];
 
 		return apply_filters( 'wecodeart/filter/author/box/context', $author, $context );
 	} 

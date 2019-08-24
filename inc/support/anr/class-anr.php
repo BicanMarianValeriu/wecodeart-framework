@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 use anr_captcha_class as Captcha;
 use WeCodeArt\Utilities\Markup;

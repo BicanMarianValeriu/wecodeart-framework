@@ -18,6 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 use WeCodeArt\Core\Content;
 use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Utilities\Markup\SVG;
 use WeCodeArt\Utilities\Helpers;
 use WeCodeArt\Utilities\Callbacks;
 
@@ -38,7 +39,11 @@ class WordPressSeo {
 			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 		}
 
-		add_action( 'wecodeart/hook/inner/top', [ $this, 'render_yoast_breadcrumbs' ], 30 );
+		add_action( 'wecodeart/hook/inner/top', 			[ $this, 'render_yoast_breadcrumbs' ], 30 );
+		
+		if( apply_filters( 'wecodeart/filter/support/yoast/author/social/enable', true ) ) {
+			add_filter( 'wecodeart/filter/author/box/context', [ $this, 'filter_author_context' ] );
+		}
 	}
 
 	/**
@@ -50,7 +55,9 @@ class WordPressSeo {
 	 * @return  void
 	 */
 	public function render_yoast_breadcrumbs() {
-		if( Callbacks::is_front_page() ) return;
+		if( Callbacks::is_front_page() ) {
+			return;
+		}
 
 		$options = Content::get_contextual_options();
 		
@@ -59,5 +66,52 @@ class WordPressSeo {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs__list' ] ]
 		], 'yoast_breadcrumb' ); 
+	}
+
+	/**
+	 * Extend Author Box with Yoast's Social
+	 *
+	 * @since	3.9.3
+	 *
+	 * @return 	array
+	 */
+	public function filter_author_context( $args ) {
+		$author_ID = get_the_author_meta( 'ID' );
+
+		$args = wp_parse_args( [
+			'social' => array_map( function( $item ) use( $author_ID ) {
+				$item  	= strtolower( $item );
+				$icon  	= $item;
+				$value 	= get_the_author_meta( $item, $author_ID );
+				$target = '_blank';
+
+				switch( $item ) :
+					case 'twitter':
+						$value = "https://twitter.com/${value}";
+						break;
+					case 'url':
+						$icon  	= 'globe';
+						$target	= $value ? $target : '_self';
+						$value 	= $value ?: get_author_posts_url( $author_ID );
+						break;
+					default:
+						$value = $value;
+				endswitch;
+
+				return [
+					'title' => ucfirst( $item ),
+					'url'	=> esc_url( $value ),
+					'icon'	=> SVG::compile( $icon ),
+					'target'=> $target
+				];
+
+			}, apply_filters( 'wecodeart/filter/support/yoast/author/social', [
+				'facebook',
+				'twitter',
+				'url'
+			] ) )
+		], $args );
+
+		return $args;
 	}
 }

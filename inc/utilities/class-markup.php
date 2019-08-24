@@ -73,6 +73,43 @@ class Markup {
 	}
 
 	/**
+	 * Remove attributes from a HTML element.
+	 *
+	 * @since	3.9.3
+	 *
+	 * @param 	string       	$text       A string of HTML formatted code.
+	 * @param 	array|string	$elements   Elements that $attributes should be stripped from.
+	 * @param 	array|string 	$attributes Attributes that should be stripped from $elements.
+	 * @param 	bool         	$two_passes Whether the function should allow two passes.
+	 * @return 	string			HTML markup with attributes stripped.
+	 */
+	function strip_attr( $text, $elements, $attributes, $two_passes = true ) {
+
+		// Cache elements pattern.
+		$elements_pattern = implode( '|', (array) $elements );
+
+		// Build patterns.
+		$patterns = [];
+		foreach ( (array) $attributes as $attribute ) {
+			$patterns[] = sprintf( 
+				'~(<(?:%s(?=\s+))[^>]*)\s+%s(?:=(?:[\\\'"][^\\\'"]+[\\\'"]|(?:[^\s>\/]|\/(?!>))+))?([^>]*>)~', 
+				$elements_pattern, 
+				$attribute 
+			);
+		}
+
+		// First pass.
+		$text = preg_replace( $patterns, '$1$2', $text );
+
+		if ( $two_passes ) { // Second pass.
+			$text = preg_replace( $patterns, '$1$2', $text );
+		}
+
+		return $text;
+
+	}
+
+	/**
 	 * Return Sortable callback functions based on input.
 	 *
 	 * @version	3.7.7

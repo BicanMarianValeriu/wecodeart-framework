@@ -1,9 +1,16 @@
 v3.9.3
+- Added - WeCodeArt\Core\Search class for building WP Search Form and passing all markup trough Markup API;
 - Added - SVG Folders icons
+- Added - Support on Author Box for Yoast SEO User Social Profiles
 - Added - Media extra args to output any custom media by ID
+- Added - WeCodeArt\Core\Hooks\search_form - wecodeart/filter/search_form/args.
+- Added - WeCodeArt\Core\Hooks\search_form - wecodeart/filter/search_form/args.
 - Fixed - Fixed Category Icon
 - Updated - Post Categories will now use Yoast Primary's category and if is used, icon will change to single folder
 - Changed - WeCodeArt\Customizer\Config to abastract class and required `register` function.
+- Changed - WeCodeArt\Core\Hooks\search_form to use the new WeCodeArt\Core\Search.
+- Changed - WeCodeArt\Core\Hooks\search_form defaults filter moved to WeCodeArt\Core\Search.
+- Changed - WeCodeArt\Core\Search - wecodeart/filter/search_form/defaults simplified keys.
 
 v3.9.2
 - Updated - Maintenance cleanup and NPM Updates (on Github)

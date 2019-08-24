@@ -9,14 +9,16 @@
  * @subpackage 	Core\Hooks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.0
- * @version		3.6.3
+ * @version		3.9.3
  */
 
 namespace WeCodeArt\Core;
 
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+defined( 'ABSPATH' ) || exit(); 
 
+use WeCodeArt\Core\Search;
 use WeCodeArt\Utilities\Callbacks;
+use WeCodeArt\Utilities\Markup\SVG;
 
 /**
  * General Hooks
@@ -30,10 +32,10 @@ class Hooks {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_filter( 'body_class',               array( $this, 'body_classes' ) );
-		add_filter( 'post_class', 			  	array( $this, 'post_classes' ) );
-		add_filter( 'get_custom_logo', 		 	array( $this, 'custom_logo' ) );
-		add_action( 'get_search_form',          array( $this, 'search_form' ) );
+		add_filter( 'body_class',		array( $this, 'body_classes'	) );
+		add_filter( 'post_class',		array( $this, 'post_classes'	) );
+		add_filter( 'get_custom_logo',	array( $this, 'custom_logo' 	) );
+		add_filter( 'get_search_form',	array( $this, 'search_form' 	) );
 	}
 	
 	/**
@@ -49,10 +51,14 @@ class Hooks {
 		$all_pages		= get_pages();
 
 		// Add a class of hfeed to non-singular pages.
-		if ( ! is_singular() ) $classes[] = 'hfeed';
+		if ( ! is_singular() ) {
+			$classes[] = 'hfeed';
+		}
 		
 		// Adds a class of group-blog to blogs with more than 1 published author.
-		if ( is_multi_author() ) $classes[] = 'group-blog';
+		if ( is_multi_author() ) {
+			$classes[] = 'group-blog';
+		}
 		
 		// Page Has Sidebar
 		foreach( $all_pages as $page ) { 
@@ -62,17 +68,26 @@ class Hooks {
 		}
 		
 		// Blog Has Sidebar
-		if( is_home() ) $has_sidebar = get_theme_mod( 'content-layout-modules-blog' );
+		if( is_home() ) {
+			$has_sidebar = get_theme_mod( 'content-layout-modules-blog' );
+		}
 		
 		// CPTS Archive/Single 
 		foreach( $get_post_types as $type ) { 
-			if( is_post_type_archive( $type ) ) $has_sidebar = get_theme_mod( 'content-layout-modules-' . $type . '-archive' );
-			if( is_singular( $type ) ) $has_sidebar = get_theme_mod( 'content-layout-modules-' . $type . '-singular' );
+			if( is_post_type_archive( $type ) ) {
+				$has_sidebar = get_theme_mod( 'content-layout-modules-' . $type . '-archive' );
+			}
+			if( is_singular( $type ) ){
+				$has_sidebar = get_theme_mod( 'content-layout-modules-' . $type . '-singular' );
+			}
 		}
 
 		// Add sidebar class
-		if( in_array( 'primary', $has_sidebar ) || in_array( 'secondary', $has_sidebar ) ) $classes[] = 'has-sidebar';
-		else $classes[] = 'no-sidebar';
+		if( in_array( 'primary', $has_sidebar ) || in_array( 'secondary', $has_sidebar ) ) {
+			$classes[] = 'has-sidebar';
+		} else {
+			$classes[] = 'no-sidebar';
+		}
 		
 		// Singular sidebar class if gutenberg wide/full layout 
 		if( Callbacks::is_full_content() ) { 
@@ -83,6 +98,7 @@ class Hooks {
 
 		// Return Classes
 		$classes = array_map( 'sanitize_html_class', $classes );
+
 		return $classes;
 	}
 	
@@ -95,10 +111,10 @@ class Hooks {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
 		$html = sprintf( '<a href="%1$s" class="custom-logo-link" rel="home" itemprop="url">%2$s</a>',
             esc_url( home_url( '/' ) ),
-            wp_get_attachment_image( $custom_logo_id, 'full', false, array(
-                'class'	=> 'custom-logo',
+            wp_get_attachment_image( $custom_logo_id, 'full', false, [
+				'class'	=> 'custom-logo',
 				'alt'	=> get_bloginfo( 'name' )
-            ) )
+			] )
         );
 		
 		return $html;	
@@ -112,12 +128,14 @@ class Hooks {
 	 * @return 	array
 	 */
 	public function post_classes( $classes ) {
-		if ( is_admin() ) return $classes;
+		if ( is_admin() ) {
+			return $classes;
+		}
 		
 		// Add "entry" to the post class array
 		$classes[] = 'entry';
 		// Remove "hentry" from post class array
-		$classes = array_diff( $classes, [ 'hentry' ]);
+		$classes = array_diff( $classes, [ 'hentry' ] );
 		
 		return $classes;
 	}
@@ -126,43 +144,34 @@ class Hooks {
 	 * Filter Search form HTML Markup.
 	 * 
 	 * @since 	unknown
-	 * @version 3.9.0
+	 * @version 3.9.3
 	 * 
 	 * @return 	string $form
 	 */
-	public function search_form( $args = array() ) {
-		// Set the Defaults
-		$defaults = array(
-			'sr_text'	=> esc_html__( 'Search this website', 'wecodeart' ),
-			'input' => [
-				'id'		=> uniqid( 'searchform-' ),
-				'placeholder'	=> get_search_query() ? apply_filters( 'the_search_query', get_search_query() ) : esc_html__( 'Enter keyword', 'wecodeart' ) . ' &#x02026;',
-				'v_or_h'		=> ( get_search_query() == '' ) ? 'placeholder' : 'value',
-			],
-			'button' 	=> [
-				'label' => esc_html__( 'Search', 'wecodeart' ),
-				'class' => 'btn btn-dark'
-			]
-		);
-		
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/search_form/defaults', $defaults ) );
-		
-		$form  = sprintf( '<form class="search-form" role="search" method="get" action="%s">', esc_url( home_url( '/' ) ) );
-		$form .= sprintf( '<label class="screen-reader-text" for="%1s">%2s</label>', $args['input']['id'], esc_html( $args['sr_text']  ) );	
-		$form .= sprintf( '<div class="input-group">');		
-		$form .= sprintf( '<input class="form-control" type="search" name="s" id="%1s" %s="%2s" required="" />', 
-			$args['input']['id'], 
-			$args['input']['v_or_h'], 
-			$args['input']['placeholder'] 
-		);  
-		$form .= sprintf( '<div class="input-group-append"><button type="submit" class="%s">%s</button></div>', 
-			esc_attr( $args['button']['class'] ),
-			$args['button']['label']
-		);
-		$form .= sprintf( '</div>');
-		$form .= sprintf( '</form>');
-		
-		// Return The Form with everything in it
-		return apply_filters( 'wecodeart/filter/search_form/html', $form );
+	public function search_form() {
+		/**
+		 * Allow the default form args to be filtered.
+		 *
+		 * @since 3.9.3
+		 *
+		 * @param string The form args.
+		 */
+		$query_or_placeholder =  esc_attr( 
+			apply_filters( 'the_search_query', get_search_query() ) 
+		) ?: sprintf( __( 'Search this website %s', 'wecodeart' ), '&#x02026;' );
+
+		$form = new Search( apply_filters( 'wecodeart/filter/search_form/args', [
+			'input_text'	=> $query_or_placeholder,
+			'button_label' 	=> SVG::compile( 'search' ),
+		] ) );
+
+		/**
+		 * Allow the form output to be filtered.
+		 *
+		 * @since 3.9.3
+		 *
+		 * @param string The form markup.
+		 */
+		return apply_filters( 'wecodeart/filter/search_form/html', $form->get_form() );
 	} 
 }

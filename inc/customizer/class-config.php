@@ -28,9 +28,15 @@ abstract class Config {
 		if ( method_exists( $this, 'register' ) ) {
 			add_filter( 'wecodeart/filter/customizer/configurations', [ $this, 'register' ], 30, 2 );
 		} else {
-			_doing_it_wrong( 
-				'WeCodeArt\Customizer\Config', 
-				esc_html__( 'When extending WeCodeArt\Customizer\Config, you must create a register method, merging existing arguments with new ones.', 'wecodeart' ),
+			_doing_it_wrong(
+				__CLASS__, 
+				sprintf( 
+					esc_html__(
+						'When extending %s, you must create a `register` method, merging existing arguments with new ones.',
+						'wecodeart' 
+					),
+					__CLASS__
+				),
 				'3.9.3'
 			);
 		}
