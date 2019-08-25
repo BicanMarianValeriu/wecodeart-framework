@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Utilities\Helpers;
 use WeCodeArt\Customizer\Partials;
 use WeCodeArt\Customizer\Controls;
+use WeCodeArt\Customizer\Configs;
 
 /**
  * Customizer Options
@@ -55,13 +56,14 @@ class Customizer {
 		Controls::get_instance();
 		
 		// Selective Refresh Partials.
-		Partials::get_instance(); // default overrides + templates.
+		Partials::get_instance();
 
-		new Customizer\Configs;
-		new Customizer\Configs\Overrides;
-		new Customizer\Configs\Header;
-		new Customizer\Configs\Content;
-		new Customizer\Configs\Footer;
+		// Theme panels and configs.
+		new Configs();
+		new Configs\Overrides();
+		new Configs\Header();
+		new Configs\Content();
+		new Configs\Footer();
 	}
 
 	/**

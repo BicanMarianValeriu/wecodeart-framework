@@ -24,12 +24,17 @@
         }
     }
 
-    &__website {
+    &__social {
+        display: flex;
+        margin: 0 -5px;
+
+        &-item {
+            margin: 0 5px;
+        }
+
         svg {
-            width: 12px;
-            height: 12px; 
+            display: block;
             fill: currentColor;
-            vertical-align: -10%;
         }
     }
 }

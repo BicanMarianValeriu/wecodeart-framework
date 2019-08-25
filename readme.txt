@@ -1,8 +1,8 @@
 ## WeCodeArt Framework Copyright 2019
 ## https://www.wecodeart.com/
 
-Requires at least: WordPress 4.7
-Tested up to: WordPress 5.2
+Requires at least: WordPress 45.0
+Tested up to: WordPress 5.2.2
 Version: 3.0+
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

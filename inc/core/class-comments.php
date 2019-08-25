@@ -154,20 +154,20 @@ class Comments {
 	 */
 	public function render_pings() {
 		global $wp_query;
-		
+
 		// If have pings.
 		if ( ! empty( $wp_query->comments_by_type['pings'] ) ) {  
-			Markup::wrap( 'pings-list', [ [ 
-				'tag' 	=> 'ol', 
-				'attrs' => [ 
-					'id' 	=> 'pings-list', 
-					'class' => 'comments__pings unstyled pl-0 pings-list' 
-				] 
+			Markup::wrap( 'pings-list', [ [
+				'tag' 	=> 'ol',
+				'attrs' => [
+					'id' 	=> 'pings-list',
+					'class' => 'comments__pings unstyled pl-0 pings-list'
+				]
 			] ], 'wp_list_comments', [ apply_filters( 'wecodeart/filter/comments/pings/args', [
 				'type' 		 => 'pings',
 				'short_ping' => true,
 				'walker'	 => new CommentWalker,
-			] ) ] ); 
+			] ) ] );
 		}
 	}
 

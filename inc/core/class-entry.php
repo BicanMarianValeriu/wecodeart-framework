@@ -119,7 +119,7 @@ class Entry {
 	 * Retrieve entry title with link
 	 *
 	 * @since 	3.6.4
-	 * @version	3.7.7
+	 * @version	3.9.4
 	 *
 	 * @param	bool	$link
 	 * @param 	bool 	$echo 
@@ -131,14 +131,20 @@ class Entry {
 
 		$title = get_the_title();
 
-		if ( 0 === mb_strlen( $title ) || $disabled === true ) return;
+		if ( 0 === mb_strlen( $title ) || $disabled === true ) {
+			return;
+		}
 		
 		if ( $link && ! is_singular() ) {
 			$title = sprintf( '<a href="%s" rel="bookmark">%s</a>', esc_url( get_permalink() ), esc_html( $title ) );
 		}
 		
-		if( $echo !== true ) return $title;
-		else echo $title;
+		if( $echo ) {
+			echo wp_kses_post( $title );
+			return;
+		}
+
+		return wp_kses_post( $title );
 	}
 
 	/**

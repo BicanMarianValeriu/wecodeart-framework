@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Admin;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Utilities\Markup;
 
@@ -220,15 +220,19 @@ class Notifications {
 	 * Markup Notice.
 	 *
 	 * @since 	3.8.1
+	 * @version	3.9.4
+	 *
 	 * @param  	array $notice Notice markup.
 	 * @return 	void
 	 */
 	public static function markup( $notice = [] ) {
 
+		do_action( "wecodeart/action/admin/notification/{$notice['id']}/before" );
 		do_action( "wecodeart/hook/admin/notification/{$notice['id']}/before" );
 
 		Markup::template( 'admin/notification', $notice );
 
+		do_action( "wecodeart/action/admin/notification/{$notice['id']}/after" );
 		do_action( "wecodeart/hook/admin/notification/{$notice['id']}/after" );
 	}
 

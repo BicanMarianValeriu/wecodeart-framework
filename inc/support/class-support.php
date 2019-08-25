@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) exit();
 
 use WeCodeArt\Support\ANR;
 use WeCodeArt\Support\WooCommerce;
-use WeCodeArt\Support\WordPressSeo;
+use WeCodeArt\Support\WPSeo;
 use WeCodeArt\Utilities\Helpers;
 
 /**
@@ -39,7 +39,7 @@ class Support {
 
 		// Integrations/Compatability/Plugin Support
 		if( Helpers::detect_plugin( [ 'classes'		=> [ 'woocommerce' ] ] ) )			WooCommerce::get_instance();
-		if( Helpers::detect_plugin( [ 'constants' 	=> [ 'WPSEO_VERSION' ] ] ) ) 		WordPressSeo::get_instance();
+		if( Helpers::detect_plugin( [ 'constants' 	=> [ 'WPSEO_VERSION' ] ] ) ) 		WPSeo::get_instance();
 		if( Helpers::detect_plugin( [ 'constants' 	=> [ 'ANR_PLUGIN_VERSION' ] ] ) ) 	ANR::get_instance();
 	}
 

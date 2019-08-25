@@ -14,11 +14,11 @@
 defined( 'ABSPATH' ) || exit();
 
 ?>
-<div id="author-box" class="author-box">
+<div id="author-box" class="author-box py-4 mb-5">
 	<div class="<?php echo esc_attr( $container ); ?>">
 		<div class="row">
 			<div class="author-box__name col-12">
-				<h3 class="author-box__headline">
+				<h3 class="author-box__headline mb-3">
 					<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>	
 					<span><?php echo wp_kses_post( implode( ' ', [ $intro, $name ] ) ); ?></span>
 				</h3>
@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit();
 				<div class="author-box__social">
 				<?php foreach( $social as $item ) {
 						$key = strtolower( $item['title'] );
-						$classes = [ 'author-box__social-item', 'author-box__social-item--' . $key, 'mr-2' ];
+						$classes = [ 'author-box__social-item', 'author-box__social-item--' . $key ];
 						$label	 = $item['icon'];
 					?>
 					<a class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"

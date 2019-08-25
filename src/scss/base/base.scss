@@ -142,6 +142,7 @@ svg,
 .svg-inline {
     display: inline-block;
     vertical-align: middle;
+    min-width: 1em;
 
     .fa-secondary {
         opacity: .4;

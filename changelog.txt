@@ -1,3 +1,8 @@
+v3.9.4
+- Changed - Renamed WordPressSeo class to WPSeo
+- Added - SVG::add_icon() method for adding icons to store
+- Updated - Small fixes
+
 v3.9.3
 - Added - WeCodeArt\Core\Search class for building WP Search Form and passing all markup trough Markup API;
 - Added - SVG Folders icons
