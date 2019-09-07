@@ -9,15 +9,15 @@
  * @subpackage 	Entry Media Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.6
- * @version		3.7.3
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Core\Entry;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Core\Callbacks;
-use WeCodeArt\Utilities\Markup as Markup;
+use WeCodeArt\Utilities\Markup;
 use WeCodeArt\Utilities\Markup\SVG;
 
 /**
@@ -85,6 +85,7 @@ class Media {
 	 * Pull an attachment ID from a post, if one exists.
 	 *
 	 * @since 	3.6.4
+	 * @version	3.9.5
 	 *
 	 * @param 	int 		$index   	Optional. 	Index of which image to return from a post. Default is 0.
 	 * @param 	int 		$post_id 	Optional. 	Post ID. Default is `get_the_ID()`.
@@ -93,7 +94,7 @@ class Media {
 	 */
 	public static function get_media_id( $type = 'image', $index = 0, $post_id = null ) {
 
-		$media_ids = array_keys( get_attached_media( $type, $post_id ? $post_id : get_the_ID() ) ); 
+		$media_ids = array_keys( get_attached_media( $type, $post_id ?: get_the_ID() ) ); 
 
 		if ( isset( $media_ids[ $index ] ) ) return $media_ids[ $index ]; 
 
@@ -130,6 +131,7 @@ class Media {
 	 * Get Image Ratio
 	 *
 	 * @since 	3.7.6
+	 * @version	3.9.5
 	 *
 	 * @param  	int		$id
 	 * @param	string	$size
@@ -139,7 +141,7 @@ class Media {
 	 */
 	public static function get_image_ratio( $id, $size, $dummy_ratio ) {
 		$real_sizes = wp_get_attachment_metadata( $id );
-		$real_sizes = $real_sizes ? $real_sizes : []; 
+		$real_sizes = $real_sizes ?: []; 
 		$real_ratio = 1; // 1 by default
 
 		if( array_key_exists( 'sizes', $real_sizes ) ) {
@@ -263,7 +265,7 @@ class Media {
 	 * Echo the Entry IMG Markup
 	 *
 	 * @since 	1.0
-	 * @version 3.6.4
+	 * @version 3.9.5
 	 *
 	 * @param 	array	$args
 	 *
@@ -271,7 +273,7 @@ class Media {
 	 */
 	public function render_image( $args = [] ) {  
 		$disable = apply_filters( 'wecodeart/filter/media/render_image/disable', false );
-		if ( post_password_required() || is_attachment() || $disable === true ) return; 
+		if ( is_attachment() || $disable === true ) return; 
 		
 		$args = wp_parse_args( $args, [ 'attrs' => [ 'class' => 'entry-media__src' ] ] ); 
 
@@ -309,7 +311,10 @@ class Media {
 	 * @return 	boolean
 	 */
 	public function filter_render_image( $disable ) {
-		if( is_singular() ) $disable = true;
+		if( is_singular() ) {
+			$disable = true;
+		}
+
 		return $disable;
 	}
 }

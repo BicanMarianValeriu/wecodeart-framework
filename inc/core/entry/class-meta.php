@@ -9,12 +9,12 @@
  * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.6
- * @version		3.9.3
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Core\Entry;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Utilities\Markup;
 use WeCodeArt\Utilities\Markup\SVG;
@@ -39,50 +39,33 @@ class Meta {
 	 * Entry Meta Author Template
 	 *
 	 * @since	1.0
-	 * @version	3.8.3
+	 * @version	3.9.5
 	 *
-	 * @param 	array	$args
 	 * @param 	bool	$echo
 	 *
 	 * @return 	string
 	 */
-	public static function author( $args = [], $echo = true ) {
+	public static function author( $author_id = 0, $echo = true ) {
 		
-		$author_id 	= get_the_author_meta( 'ID' );
+		$author_id 	= $author_id ?: get_the_author_meta( 'ID' );
 		$author		= get_the_author_meta( 'display_name', $author_id );
 		$author_url = get_author_posts_url( $author_id );
 
 		// In order to render something when ajax refreshed in customizer.
-		$author = $author ? $author : esc_html__( 'Author Name', 'wecodeart' );
+		$author_name = $author ? $author : esc_html__( 'Author Name', wecodeart_config( 'textdomain' ) );
 		
-		$defaults = array(
-			'before'	=> SVG::compile( 'user' ),
-			'after'  	=> '&nbsp;',
-			'sr_text'  	=>  esc_html__( 'Posted by ', 'wecodeart' ),
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/author/defaults', $defaults ) );
-
-		// The HTML
-		$output = apply_filters( 'wecodeart/filter/entry/meta/author/html', sprintf(
-			/* translators: %s: post author */
-			__( '<span class="entry-author">%1$s %2$s %3$s %4$s %5$s</span>', 'wecodeart' ),
-			$args[ 'before' ],
-			'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
-			sprintf( '<a href="%s" class="entry-author-link" rel="author">', esc_url( $author_url ) ),
-			sprintf( '<span class="entry-author-name">%s</span></a>', esc_html( $author ) ),
-			$args[ 'after' ]
-		), $author_id, $args );
-
-		if ( $echo ) echo $output;
-		else return $output;
+		Markup::template( 'entry/meta/author', [
+			'author_id'		=> $author_id,
+			'author_url'	=> $author_url,
+			'author_name'	=> $author_name,
+		], $echo );
 	}
 
 	/**
 	 * Entry Meta Date Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.3
+	 * @version	3.9.5
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -90,51 +73,32 @@ class Meta {
 	 * @return 	string
 	 */
 	public static function date( $args = [], $echo = true ) {
-		// Set the Defaults
-		$defaults = array(
-			'before'	=> SVG::compile( 'clock' ),
-			'after'  	=> '&nbsp;',
-			'sr_text'  	=> esc_html__( 'Posted on ', 'wecodeart' ),
-		);
+		$defaults = [
+			'published'		=> [
+				'robot'	=> get_the_date( DATE_W3C ),
+				'human' => get_the_date()
+			],
+		];
 
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/date/defaults', $defaults ) );
-
-		$output = '<time class="entry-date__time entry-date__time--published" datetime="%1$s">%2$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$output .= '<time class="entry-date__time entry-date__time--updated d-none" datetime="%3$s">%4$s</time>';
+			$defaults = wp_parse_args( [
+				'modified' => [
+					'robot'	=> get_the_modified_date( DATE_W3C ),
+					'human' => get_the_modified_date()
+				],
+			], $defaults );
 		}
 
-		$html = sprintf( $output,
-			get_the_date( DATE_W3C ),
-			get_the_date(),
-			get_the_modified_date( DATE_W3C ),
-			get_the_modified_date()
-		);
+		$args = wp_parse_args( $args, $defaults );
 
-		// Wrap the time string in a link, add scren-reader-text and FontIcon.
-		$output = apply_filters( 'wecodeart/filter/entry/meta/date/html', sprintf(
-				/* translators: %s: post date */
-				__( '<span class="entry-date">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ),
-				$args[ 'before' ],
-				'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
-				'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $html . '</a>',
-				$args[ 'after' ] 
-			), $args
-		);
-
-		if ( $echo ) {
-			echo $output;
-			return;
-		}
-		
-		return $output;
+		Markup::template( 'entry/meta/date', $args, $echo );
 	} 
 
 	/**
 	 * Entry Meta Categories Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.3
+	 * @version	3.9.5
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -146,7 +110,7 @@ class Meta {
 		$defaults = [
 			'before' 	=> SVG::compile( 'folders' ),
 			'after'  	=> '&nbsp;',
-			'sr_text'	=> esc_html__( 'Posted in ', 'wecodeart' ),
+			'sr_text'	=> esc_html__( 'Posted in ', wecodeart_config( 'textdomain' ) ),
 			'sep'    	=> ', ',
 		];
 
@@ -176,7 +140,7 @@ class Meta {
 		// The HTML
 		$output = apply_filters( 'wecodeart/filter/entry/meta/cats/html', sprintf( 
 				/* translators: %s: post cats */
-				__( '<span class="entry-cats">%1$s %2$s %3$s %4$s</span>', 'wecodeart' ), 
+				__( '<span class="entry-cats">%1$s %2$s %3$s %4$s</span>', wecodeart_config( 'textdomain' ) ), 
 				$args[ 'before' ], 
 				'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
 				$cats, 
@@ -196,7 +160,7 @@ class Meta {
 	 * Entry Meta Tags Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.3
+	 * @version	3.9.5
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -204,46 +168,22 @@ class Meta {
 	 * @return 	string
 	 */
 	public static function tags( $args = [], $echo = true ) {
-		// Set the Defaults
-		$defaults = array(
-			'before'  	=> SVG::compile( 'tags' ) . '&nbsp; ',
-			'after'  	=> '&nbsp;',
-			'sr_text'	=> esc_html__( 'Tagged with ', 'wecodeart' ),
-			'sep'  		=> ', ',
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/tags/defaults', $defaults ) );
-
-		// Get what we need
-		$tags = get_the_tag_list( $args['before'], $args['sep'], $args['after'] );
-
 		// Do nothing if no tags
-		if ( ! $tags ) {
+		if ( empty( get_the_tags() ) ) {
 			return;
 		}
 
-		// The HTML
-		$output = apply_filters( 'wecodeart/filter/entry/meta/tags/html', sprintf( 
-				/* translators: %s: post tags */
-				__( '<span class="entry-tags">%1$s %2$s</span>', 'wecodeart' ),
-				'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
-				$tags
-			), $args
-		);
-
-		if ( $echo ) {
-			echo $output;
-			return;
-		}
-		
-		return $output;
+		Markup::template( 'entry/meta/tags', wp_parse_args( $args, [
+			'post_id' 	=> get_the_ID(),
+			'separator' => ', ',
+		] ), $echo );
 	} 
 
 	/**
 	 * Entry Meta Comments Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.2
+	 * @version	3.9.5
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -256,52 +196,43 @@ class Meta {
 			return;
 		}
 
-		// Set the Defaults
-		$defaults = array(
-			'before'       	=> SVG::compile( 'comments' ),
-			'after'      	=> '&nbsp;',
-			'hide_if_off' 	=> true,
-			'more'        	=> esc_html__( '% Comments', 'wecodeart' ),
-			'one'         	=> esc_html__( '1 Comment', 'wecodeart' ),
-			'zero'        	=> esc_html__( 'Leave a Comment', 'wecodeart' ),
-			'closed'		=> esc_html__( 'Comments are Closed', 'wecodeart' )
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/comments/defaults', $defaults ) );
-
 		// Show only where comments are enabled or have comments (even if disabled)
-		if ( ! comments_open() && true === (bool) $args['hide_if_off'] ) { 
+		if ( ! comments_open() && true === (bool) apply_filters( 'wecodeart/filter/entry/meta/comments/hide_if_off', true ) ) { 
 			return;
 		}
 
-		// Get what we need
-		$css_class = 'entry-comments__link';
-		$number    = (int) get_comments_number( get_the_ID() );
-		if( 0 === $number ) $css_class .= ' none';
-		elseif ( 1 === $number ) $css_class .= ' one';
-		elseif ( 1 < $number ) $css_class .= ' multiple';
+		$number     = (int) get_comments_number( get_the_ID() );
 
-		ob_start();
-		comments_popup_link( $args['zero'], $args['one'], $args['more'], $css_class, $args['closed'] );
-		$comments = ob_get_clean();
+		$classnames = [ 'entry-comments' ];
 
-		// The HTML
-		$output = apply_filters( 'wecodeart/filter/entry/meta/comments/html', sprintf( 
-				/* translators: %s: post comments */
-				__( '<span class="entry-comments">%1$s %2$s %3$s</span>', 'wecodeart' ),
-				$args['before'], $comments, $args['after']
-			), $args
-		);
+		if( 0 === $number ) {
+			$classnames[] = 'entry-comments--none';
+		} elseif ( 1 === $number ) {
+			$classnames[] = 'entry-comments--one';
+		} elseif ( 1 < $number ) {
+			$classnames[] = 'entry-comments--multiple';
+		}
+		
+		if( post_password_required() ) {
+			$classnames[] = 'entry-comments--protected';
+		}
 
-		if ( $echo ) echo $output;
-		else return $output;
+		Markup::template( 'entry/meta/comments', wp_parse_args( $args, [
+			'classname'	=> esc_attr( implode( ' ', $classnames ) ),
+			'i18n' 		=> [
+				'more'        	=> esc_html__( '% Comments', 			wecodeart_config( 'textdomain' ) ),
+				'one'         	=> esc_html__( '1 Comment', 			wecodeart_config( 'textdomain' ) ),
+				'zero'        	=> esc_html__( 'Leave a Comment', 		wecodeart_config( 'textdomain' ) ),
+				'closed'		=> esc_html__( 'Comments are Closed', 	wecodeart_config( 'textdomain' ) )
+			]
+		] ), $echo );
 	}
 
 	/**
 	 * Entry Meta Edit Template
 	 *
 	 * @since	1.0
-	 * @version	3.6
+	 * @version	3.9.5
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -309,35 +240,23 @@ class Meta {
 	 * @return 	string
 	 */
 	public static function edit_link( $args = [], $echo = true ) {
-		if( ! is_user_logged_in() ) return;
-		// Set the defaults
-		$defaults = array(
-			'before' 	=> '&nbsp;',
-			'after'  	=> '',
-			'text'   	=> '&#9998;',
-			'class'  	=> 'entry-edit-link',
-		);
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/edit/defaults', $defaults ) );
-
-		// Get what we need
-		ob_start();
-		edit_post_link( esc_html( $args['text'] ), esc_html( $args['before'] ), esc_html( $args['after'] ), '', esc_attr( $args['class'] )  );
-		$html = ob_get_clean();
-
-		// The HTML	
-		$output = apply_filters( 'wecodeart/filter/entry/meta/edit/html', 
-			sprintf( __( '<span class="entry-edit float-right">%1s</span>', 'wecodeart' ), $html ) 
-		);
-
-		if ( $echo ) echo $output;
-		else return $output;
+		if( ! is_user_logged_in() ) {
+			return;
+		}
+		
+		Markup::template( [ 'entry/meta/edit', 'link' ], wp_parse_args( $args, [
+			'post_id' => get_the_ID(),
+			'i18n' => [
+				'text'	=> esc_html__( 'Edit', wecodeart_config( 'textdomain' ) ),
+			],
+		] ), $echo );
 	}
 
 	/**
 	 * Entry Meta Read More Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.0
+	 * @version	3.9.5
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -345,92 +264,81 @@ class Meta {
 	 * @return 	string
 	 */
 	public static function read_more( $args = [], $echo = true ) {
-		// Set the Defaults
-		$defaults = array(
-			'before'	=> '',
-			'after' 	=> '<span aria-hidden="true">&#xbb;</span><span class="screen-reader-text">' . get_the_title() . '</span>',
-			'text' 		=> esc_html__( 'Read More', 'wecodeart' ),
-			'class' 	=> 'entry-more btn btn-dark',
-		);
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/more/defaults', $defaults ) );
-
-		// The HTML
-		$output = apply_filters( 'wecodeart/filter/entry/more/html', sprintf( 
-			'<a href="%1$s" class="%2$s">%3$s %4$s %5$s</a>', 
-			esc_url( get_permalink() ), 
-			esc_attr( $args['class'] ), 
-			$args['before'], 
-			esc_html( $args['text'] ), 
-			$args['after'] ) 
-		);
-
-		if ( $echo ) {
-			echo $output;
-			return;
-		} else {
-			return $output;
-		}
-	} 
+		Markup::template( [ 'entry/meta/read', 'more' ], wp_parse_args( $args, [
+			'permalink'	=> get_the_permalink(),
+			'title'		=> get_the_title(),
+			'post_id' 	=> get_the_ID(),
+		] ), $echo );
+	}
 
 	/**
 	 * Get Contextual options
 	 *
 	 * @since 	3.6
-	 * @version 3.6.1.2
+	 * @version 3.9.5
 	 *
 	 * @return 	array
 	 */
 	public static function get_options() {
-		$get_post_types = get_post_types( array( 'public' => true, 'publicly_queryable' => true ) );
-
 		// Default empty
 		$options = [];
+		$context = '';
 
-		foreach( $get_post_types as $type ) { 
+		foreach( wecodeart( 'public_post_types' ) as $type ) { 
 			// Post option preffix
 			$theme_mod =  'content-entry-meta-' . $type;
 
-			if( is_singular( $type ) ) $options = get_theme_mod( $theme_mod . '-singular' ); 
-			if( is_post_type_archive( $type ) ) $options = get_theme_mod( $theme_mod . '-archive' ); 
-			if( $type === 'post' && Callbacks::is_post_archive() ) $options = get_theme_mod( $theme_mod . '-archive' ); 
+			if( is_singular( $type ) ) {
+				$options = get_theme_mod( $theme_mod . '-singular' );
+				$context = 'single';
+			}
+
+			if( is_post_type_archive( $type ) ) {
+				$options = get_theme_mod( $theme_mod . '-archive' );
+				$context = 'archive';
+			}
+
+			if( $type === 'post' && Callbacks::is_post_archive() ) {
+				$options = get_theme_mod( $theme_mod . '-archive' );
+				$context = 'archive';
+			}
 		}
 
-		return $options;  
+		return apply_filters( 'wecodeart/filter/entry/meta/get_options', $options, $context );  
 	}
 
 	/**
 	 * This function holds our Meta Modules
 	 *
 	 * @since	3.6
-	 * @version	3.8.3
+	 * @version	3.9.5
 	 *
 	 * @return 	array
 	 */
 	public static function modules() {
 		$defaults = [
 			'author' => [
-				'label'    => esc_html__( 'Author', 'wecodeart' ),
+				'label'    => esc_html__( 'Author', wecodeart_config( 'textdomain' ) ),
 				'callback' => [ __CLASS__, 'author' ]
 			],
 			'date' => [
-				'label'    => esc_html__( 'Date', 'wecodeart' ),
+				'label'    => esc_html__( 'Date', wecodeart_config( 'textdomain' ) ),
 				'callback' => [ __CLASS__, 'date' ]
 			],
 			'categories' => [
-				'label'    => esc_html__( 'Categories', 'wecodeart' ),
+				'label'    => esc_html__( 'Categories', wecodeart_config( 'textdomain' ) ),
 				'callback' => [ __CLASS__, 'categories' ]
 			],
 			'tags' => [
-				'label'    => esc_html__( 'Tags', 'wecodeart' ),
+				'label'    => esc_html__( 'Tags', wecodeart_config( 'textdomain' ) ),
 				'callback' => [ __CLASS__, 'tags' ]
 			],
 			'comments' => [
-				'label'    => esc_html__( 'Comments', 'wecodeart' ),
+				'label'    => esc_html__( 'Comments', wecodeart_config( 'textdomain' ) ),
 				'callback' => [ __CLASS__, 'comments' ]
 			],
 			'edit' => [
-				'label'    => esc_html__( 'Edit Link', 'wecodeart' ),
+				'label'    => esc_html__( 'Edit Link', wecodeart_config( 'textdomain' ) ),
 				'callback' => [ __CLASS__, 'edit_link' ]
 			]
 		];
@@ -440,25 +348,12 @@ class Meta {
 	}
 
 	/**
-	 * Return the Inner final HTML with modules selected by user for each entry type.
-	 *
-	 * @uses	Markup::sortable()
-	 * @since 	3.6
-	 * @version	3.6
-	 *
-	 * @return 	void
-	 */
-	public static function sort_modules() {
-		Markup::sortable( self::modules(), self::get_options() );
-	}
-
-	/**
 	 * Return the Entry Meta HTML with modules selected by user
 	 * 
 	 * @uses	Markup::wrap()
 	 *
 	 * @since	3.6
-	 * @version	3.6
+	 * @version	3.9.5
 	 *
 	 * @return 	void
 	 */
@@ -466,8 +361,14 @@ class Meta {
 		// Do dont return on CPT Without Support.
 		if( ! post_type_supports( get_post_type(), 'wecodeart-post-info' ) ) return; 
 
-		$wrappers = array( [ 'tag' => 'div', 'attrs' => [ 'class' => 'entry-meta' ] ] );
-
-		Markup::wrap( 'entry-meta', $wrappers, [ __CLASS__, 'sort_modules' ] ); 
+		Markup::wrap( 'entry-meta', [ [ 
+				'tag' 	=> 'div', 
+				'attrs' => [ 
+					'class' => 'entry-meta' 
+				]
+			] ], 
+			[ 'WeCodeArt\Utilities\Markup', 'sortable' ],
+			[ self::modules(), self::get_options() ]
+		); 
 	}
 }

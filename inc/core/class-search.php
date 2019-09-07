@@ -9,7 +9,7 @@
  * @subpackage 	Core\Search
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.9.3
- * @version		3.9.3
+ * @version		3.9.5
  */ 
 
 namespace WeCodeArt\Core;
@@ -48,17 +48,18 @@ class Search {
 	/**
 	 * Constructor.
 	 *
-	 * @since 1.0.0
+	 * @since 	1.0.0
+	 * @version 3.9.5
 	 *
 	 * @param array $strings Optional. Array of strings. Default is an empty array.
 	 */
 	public function __construct( array $strings = [] ) {
 		$this->unique_id 	= wp_unique_id( 'search-form-' );
 		$this->search_query = esc_attr( apply_filters( 'the_search_query', get_search_query() ) );
-		$this->strings 		= array_merge( apply_filters( 'wecodeart/filter/search_form/defaults', [
-			'button_label' 	=> __( 'Search', 'wecodeart' ),
-			'sr_text'		=> __( 'Search this website', 'wecodeart' ),
-			'input_text'	=> $this->search_query ?: sprintf( __( 'Enter keyword %s', 'wecodeart' ),' &#x02026;' ),
+		$this->strings 		= array_merge( apply_filters( 'wecodeart/filter/search_form/i18n', [
+			'button' 	=> __( 'Search', 				wecodeart_config( 'textdomain' ) ),
+			'reader'	=> __( 'Search this website', 	wecodeart_config( 'textdomain' ) ),
+			'input'		=> $this->search_query ?: sprintf( __( 'Enter keyword %s', wecodeart_config( 'textdomain' ) ),' &#x02026;' ),
 		] ), $strings );
 	}
 
@@ -120,7 +121,7 @@ class Search {
 				'required' 	=> true,
 			];
 	
-			$args[( $this->search_query === '' ) ? 'placeholder' : 'value'] = $this->strings['input_text'];
+			$args[( $this->search_query === '' ) ? 'placeholder' : 'value'] = $this->strings['input'];
 
 			$html = Input::compile( 'search', null, $args ) . $this->get_submit();
 
@@ -150,7 +151,7 @@ class Search {
 				'type'	=> 'submit',
 				'class'	=> 'btn btn-dark',
 			]
-		] ], 'printf', [ $this->strings['button_label'] ], false );
+		] ], 'printf', [ $this->strings['button'] ], false );
 
 	}
 
@@ -169,7 +170,7 @@ class Search {
 				'class'	=> 'screen-reader-text',
 				'for'	=> $this->get_input_id()
 			]
-		] ], 'printf', [ $this->strings['sr_text'] ], false );
+		] ], 'printf', [ $this->strings['reader'] ], false );
 
 	}
 

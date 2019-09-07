@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.9
- * @version		3.7.7
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Support;
@@ -157,30 +157,31 @@ class WooCommerce {
 	 * Register WooCommerce Shop Sidebar
 	 *
 	 * @since	3.3
-	 * @version	3.7.9
+	 * @version	3.9.5
 	 *
 	 * @return 	void
 	 */
 	public function register_sidebars() {
-		register_sidebar( [
-			'class'         => 'shop',
+		wecodeart( 'register_sidebars', [ [
 			'id'            => 'shop',
-			'name'          => esc_html__( 'Shop Sidebar', 'wecodeart' ),
-			'description'   => esc_html__( 'This is the Shop Sidebar - it will replace Primary Sidebar.', 'wecodeart' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</div>'
-		] );
+			'class'         => 'shop',
+			'name'          => esc_html__( 'Shop Sidebar', wecodeart_config( 'textdomain' ) ),
+			'description'   => esc_html__( 
+				'This is the Shop Sidebar - it will replace Primary Sidebar on WooCommerce Pages.', 
+				wecodeart_config( 'textdomain' ) 
+			),
+		] ] );
 	} 
 
 	/**
 	 * Filter - WooCommerce Header Bar Cart Module
 	 *
 	 * @since	3.5
-	 * @version	3.7.9
+	 * @version	3.9.5
 	 */
 	public function add_cart_to_header_modules( $modules ) {
 		$modules['cart'] = [
-			'label'    => esc_html__( 'WooCommerce Cart', 'wecodeart' ),
+			'label'    => esc_html__( 'WooCommerce Cart', wecodeart_config( 'textdomain' ) ),
 			'callback' => [ __CLASS__, 'display_cart_module' ],
 		];
 
@@ -191,56 +192,25 @@ class WooCommerce {
 	 * Render Header Bar Cart Module
 	 *
 	 * @since   3.5
-	 * @version 3.7.9
+	 * @version 3.9.5
 	 *
 	 * @return  void
 	 */
 	public static function display_cart_module() {
-		// Defaults.
-		$defaults = [
-			'class'		=> 'header-bar__cart col-auto dropdown',
-			'button'	=> [
-				'sr_text' 	=> esc_html__( 'Show Cart', 'wecodeart' ),
-				'class' 	=> 'dropdown-toggle',
-				'label' 	=> '' // Not used yet - uses WooCommerce Cart Data.
-			]
-		];
-
-		$args = apply_filters( 'wecodeart/filter/woocommerce/header_cart/defaults', $defaults );
-		?>
-		<div id="bar-cart" class="<?php echo esc_attr( $args['class'] ) ?>">
-			<button id="mini-cart" type="button" 
-				class="<?php echo esc_attr( $args['button']['class'] ) ?>"
-				title="<?php esc_attr_e( 'View your shopping cart', 'wecodeart' ); ?>"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span class="screen-reader-text"><?php echo esc_html( $args['button']['sr_text'] ); ?></span>
-				<span class="header-bar__cart-subtotal">
-					<?php echo wp_kses_post( WC()->cart->get_cart_subtotal() ); ?>
-				</span>
-				<span class="header-bar__cart-count">
-					<?php
-						echo wp_kses_data( 
-							sprintf( 
-								_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), 'wecodeart' ), 
-								WC()->cart->get_cart_contents_count() 
-							) 
-						);
-					?>
-				</span>
-			</button>
-			<div class="dropdown-menu dropdown-menu-right" id="mini-woocommerce-cart" aria-labelledby="mini-cart">
-				<div class="widget_shopping_cart_content"></div>
-			</div>
-		</div>
-		<!-- /bar-cart -->
-		<?php
+		Markup::template( [ 'header/woo', 'cart' ], [
+			'subtotal' 	=> wp_kses_post( WC()->cart->get_cart_subtotal() ),
+			'count'		=> wp_kses_data( sprintf( 
+				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), wecodeart_config( 'textdomain' ) ), 
+				WC()->cart->get_cart_contents_count() 
+			)  )
+		] );
 	}
 
 	/**
 	 * Filter - Cart Fragments
 	 *
 	 * @since 	3.5
-	 * @version	3.7.7
+	 * @version	3.9.5
 	 *
 	 * @param 	array	fragments
 	 *
@@ -256,7 +226,7 @@ class WooCommerce {
 		$fragments['span.header-bar__cart-count'] = sprintf(
 			'<span class="header-bar__cart-count">%s</span>',
 			sprintf(
-				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), 'wecodeart' ),
+				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), wecodeart_config( 'textdomain' ) ),
 				WC()->cart->get_cart_contents_count()
 			)
 		);

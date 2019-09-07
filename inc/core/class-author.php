@@ -9,15 +9,14 @@
  * @subpackage 	Core\Author
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.7.7
- * @version		3.9.2
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Core;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\SVG;
 
 /**
  * Adds some output to archive pages
@@ -28,8 +27,9 @@ class Author {
 
 	/**
 	 * Do author box on archive
-	 * 
+	 *
 	 * @since	3.7.7
+	 * @version	3.9.5
 	 */
 	public function author_box_archive() {
 		$enabled = apply_filters( 'wecodeart/filter/author/box/archive/enabled', '__return_true' );
@@ -38,13 +38,14 @@ class Author {
 			return;
 		}
 
-		self::render_box( 'archive' );
+		self::render_box();
 	}
 
 	/**
 	 * Do author box on single
-	 * 
+	 *
 	 * @since	3.7.7
+	 * @version	3.9.5
 	 */
 	public function author_box_single() {
 		$enabled = apply_filters( 'wecodeart/filter/author/box/single/enabled', '__return_true' );
@@ -53,39 +54,39 @@ class Author {
 			return;
 		}
 
-		self::render_box( 'single' );
+		self::render_box();
 	}
 
 	/**
 	 * Echo the Author Box
 	 *
 	 * @since	3.7.7
+	 * @version 3.9.5
 	 *
 	 * @return 	void 
 	 */
-	public static function render_box( $context ) {
+	public static function render_box() {
 		$enabled = apply_filters( 'wecodeart/filter/author/box/enabled', '__return_true' );
 
-		if( ! $enabled || ! self::get_data( $context ) ) return;
+		if( ! $enabled || ! self::get_data() ) return;
 
-		Markup::template( 'author/box', self::get_data( $context ) );
+		Markup::template( 'entry/author/box', self::get_data() );
 	}
 
 	/**
 	 * Get Author Information
 	 *
 	 * @since 	3.9.1
-	 * @version	3.9.3
+	 * @version	3.9.5
 	 *
 	 * @return 	array 
 	 */
-	public static function get_data( $context = '' ) {
+	public static function get_data() {
 		$avatar_size = apply_filters( 'wecodeart/filter/author/box/gravatar_size', 100 );
-		$avatar_alt  = sprintf( esc_html__( "%s's gravatar", 'wecodeart' ), get_the_author() );
+		$avatar_alt  = sprintf( esc_html__( "%s's gravatar", wecodeart_config( 'textdomain' ) ), get_the_author() );
 
 		$author = [
-			'icon'			=> SVG::compile( 'user' ),
-			'intro' 		=> is_author() ? esc_html__( 'All articles by', 'wecodeart' ) : esc_html__( 'About', 'wecodeart' ),
+			'intro' 		=> is_author() ? esc_html__( 'All articles by', wecodeart_config( 'textdomain' ) ) : esc_html__( 'About', wecodeart_config( 'textdomain' ) ),
 			'name'			=> get_the_author(),
 			'avatar' 		=> get_avatar( get_the_author_meta( 'email' ), $avatar_size, '', $avatar_alt ),
 			'description'	=> wpautop( get_the_author_meta( 'description' ) ),
@@ -104,6 +105,6 @@ class Author {
 			);
 		}
 
-		return apply_filters( 'wecodeart/filter/author/box/context', $author, $context );
+		return $author;
 	} 
 }

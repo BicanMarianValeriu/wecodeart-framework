@@ -9,12 +9,12 @@
  * @subpackage 	Utilities\Callbacks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.8.1
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Utilities;
 
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+defined( 'ABSPATH' ) || exit(); 
 
 /**
  * Callback functions wich returns boolean
@@ -52,14 +52,16 @@ class Callbacks {
 	 * Check if current post has full/wide blocks aligns
 	 *
 	 * @since	3.6.1
-	 * @version	3.8.1
+	 * @version	3.9.5
 	 *
 	 * @param  	object|integer
 	 *
 	 * @return 	boolean
 	 */
-	public static function has_wide_or_full_block( $post = 0 ) {
-		if( ! $post ) global $post;  
+	public static function has_wide_or_full_block( \WP_Post $post = null ) {
+		if( ! $post ) {
+			global $post;
+		}
 		
 		// Retrieve an array of blocks used for this post.
 		$blocks = parse_blocks( $post->post_content ); 
@@ -79,17 +81,17 @@ class Callbacks {
 	 * Remove sidebar on gutenberg posts with wide/full layout
 	 *
 	 * @since	3.6.1
-	 * @version	3.8.1
+	 * @version	3.9.5
 	 *
 	 * @uses 	filter: `wecodeart/filter/gutenberg/auto_layout`
 	 *
 	 * @return 	boolean|null
 	 */
-	public static function is_full_content() {
+	public static function is_full_content( \WP_Post $post = null ) {
 		$enabled = apply_filters( 'wecodeart/filter/gutenberg/auto_layout', true );
 
 		if( ! is_singular() || $enabled === false ) return false;
-		if( self::has_wide_or_full_block() ) return true;
+		if( self::has_wide_or_full_block( $post ) ) return true;
 
 		return null;
 	}

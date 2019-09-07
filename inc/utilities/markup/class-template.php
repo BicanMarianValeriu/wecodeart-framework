@@ -9,11 +9,15 @@
  * @subpackage 	Utilities\Markup\Template
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.7.3
+ * @version     3.9.5
  */
 
 namespace WeCodeArt\Utilities\Markup;
 
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+defined( 'ABSPATH' ) || exit(); 
+
+use WeCodeArt\Config\Interfaces\ConfigInterface;
+use WeCodeArt\Config\Exceptions\FileNotFoundException;
 
 class Template {
     /**
@@ -35,8 +39,22 @@ class Template {
      *
      * @param $config
      */
-    public function __construct( array $config ) {
+    public function __construct( ConfigInterface $config ) {
         $this->config = $config;
+    }
+
+    /**
+     * Compile template.
+     *
+     * @param  array $context
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function compile( array $context = [] ) {
+        ob_start();
+        $this->render( $context );
+        return ob_get_clean();
     }
 
     /**
@@ -51,14 +69,14 @@ class Template {
         if ( $template = locate_template( $path = $this->get_relative_path(), false, false ) ) {
             $this->do_actions();
 
-            extract( apply_filters( "wecodeart/filter/template/{$this->get_filename()}/context", $context ) );
+            extract( apply_filters( "wecodeart/filter/template/context", $context, $this->get_file_name() ) );
 
-            require $template;
+            require( $template );
 
             return;
         }
 
-        throw new \Exception( "Template file [{$this->get_relative_path()}] cannot be located." );
+        throw new FileNotFoundException("Template file [{$this->get_relative_path()}] cannot be located.");
     }
 
     /**
@@ -88,7 +106,7 @@ class Template {
      * @return string
      */
     public function get_path() {
-        $directory = $this->config['directory'];
+        $directory = $this->config['paths']['directory'];
         return $directory . '/' . $this->get_relative_path();
     }
 
@@ -98,11 +116,11 @@ class Template {
      * @return string
      */
     public function get_relative_path() {
-        $templates = $this->config['templates'];
+        $views = $this->config['directories']['views'];
 
-        $extension = $this->config['extension'];
+        $extension = $this->config['views']['extension'];
 
-        return $templates . '/' . $this->get_filename($extension);
+        return $views . '/' . $this->get_file_name( $extension );
     }
 
     /**
@@ -110,16 +128,16 @@ class Template {
      *
      * @return string
      */
-    public function get_filename( $extension = '.php' ) {
+    public function get_file_name( $extension = '.php' ) {
         if ( $this->is_named() ) {
-            return join( '-', $this->file ) . $extension;
-		}
-		
-        if ( is_array( $this->file ) && isset( $this->file[0] ) ) {
-            return "{$this->file[0]}{$extension}";
+            $file_name = join( '-', $this->file ) . $extension;
+		} elseif ( is_array( $this->file ) && isset( $this->file[0] ) ) {
+            $file_name = "{$this->file[0]}{$extension}";
+        } else {
+            $file_name = $this->file . $extension;
         }
 
-        return apply_filters( 'wecodeart/filter/template/filename', "{$this->file}{$extension}" );
+        return apply_filters( 'wecodeart/filter/template/filename', $file_name, $this->file );
     }
 
     /**

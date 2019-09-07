@@ -8,14 +8,14 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Footer Template
  * @since  		1.0.0
- * @version 	3.8.1
+ * @version 	3.9.5
  */
 
         do_action( 'wecodeart/hook/inner/bottom' );     // Hook Inner Bottom
 
         echo '</div>';
 
-        if( WP_DEBUG === true ) {
+        if( wecodeart( 'is_dev_mode' ) ) {
             ?>
             <!-- /.content @filter = `wecodeart/filter/attributes/content` -->
             <?php 
@@ -30,7 +30,7 @@
          */
         do_action( 'wecodeart_footer_markup' );
 
-        do_action( 'wecodeart/hook/footer/after' );	// Hook After Footer.
+        do_action( 'wecodeart/hook/footer/after' );	    // Hook After Footer.
         
         /**
          * WP Footer

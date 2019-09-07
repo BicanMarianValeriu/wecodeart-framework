@@ -8,22 +8,32 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box Template
  * @since 		3.0.3
- * @version		3.9.3
+ * @version		3.9.5
  */
 
 defined( 'ABSPATH' ) || exit();
+
+use WeCodeArt\Utilities\Helpers;
+use WeCodeArt\Utilities\Markup\SVG;
 
 ?>
 <div id="author-box" class="author-box py-4 mb-5">
 	<div class="<?php echo esc_attr( $container ); ?>">
 		<div class="row">
 			<div class="author-box__name col-12">
-				<h3 class="author-box__headline mb-3">
-					<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>	
-					<span><?php echo wp_kses_post( implode( ' ', [ $intro, $name ] ) ); ?></span>
+				<h3 class="author-box__headline mb-3"><?php
+				
+					echo Helpers::kses_svg( SVG::compile( 'user' ) ); 
+					
+				?><span class="ml-2"><?php
+				
+					echo wp_kses_post( implode( ' ', [ $intro, $name ] ) );
+
+				?></span>
 				</h3>
 			</div>
 			<div class="author-box__gravatar col-12 col-md-auto"><?php
+
 				echo wp_kses( $avatar, [ 'img' => [
 					'class'  => true,
 					'width'  => true,
@@ -32,25 +42,29 @@ defined( 'ABSPATH' ) || exit();
 					'src'    => true,
 					'srcset' => true,
 				] ] );
+
 			?></div>
-			<div class="author-box__description col">
-			<?php echo wp_kses_post( $description ); ?>
-			<?php if( isset( $social ) && is_array( $social ) ) { ?>
-				<div class="author-box__social">
-				<?php foreach( $social as $item ) {
+			<div class="author-box__description col"><?php
+			
+				echo wp_kses_post( $description );
+				
+				if( isset( $social ) && is_array( $social ) ) { ?>
+				<div class="author-box__social"><?php
+					foreach( $social as $item ) {
 						$key = strtolower( $item['title'] );
 						$classes = [ 'author-box__social-item', 'author-box__social-item--' . $key ];
-						$label	 = $item['icon'];
 					?>
 					<a class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
 						href="<?php echo esc_url( $item['url'] ); ?>"
 						target="<?php echo esc_attr( $item['target'] ); ?>"
-						rel="<?php echo ( $item['target'] === '_self' ) ? 'follow' : 'nofollow' ; ?>">
-						<?php echo $label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</a>
-				<?php } ?>
+						rel="<?php echo ( $item['target'] === '_self' ) ? 'follow' : 'nofollow' ; ?>"><?php 
+						
+						echo Helpers::kses_svg( $item['icon'] );
+
+					?></a>
+					<?php } ?>
 				</div>
-			<?php } ?>
+				<?php } ?>
 			</div>
 		</div>
 	</div>

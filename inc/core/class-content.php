@@ -9,12 +9,12 @@
  * @subpackage 	Core\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.7
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Core;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Core\Loops;
 use WeCodeArt\Core\Pagination;
@@ -96,28 +96,20 @@ class Content {
 	}
 
 	/**
-	 * Return the required loop based on conditionals
-	 *
-	 * @since	1.0
-	 * @version	3.7.6
-	 * 
-	 * @return	void
-	 */
-	public static function get_loop() {
-		Loops::default();
-	} 
-
-	/**
 	 * Generate Sidebar
 	 *
 	 * @since	3.7.7
-	 * @version	3.7.7
+	 * @version	3.9.5
 	 *
 	 * @return	void
 	 */
 	public static function render_sidebar( string $index ) {
 		$index = strtolower( $index );
-		if( ! is_active_sidebar( $index ) ) return;
+
+		if( ! is_active_sidebar( $index ) ) {
+			return;
+		}
+
 		/**
 		 * @see WP function `dynamic_sidebar`
 		 * @see WeCodeArt\Utilities\Markup::wrap()
@@ -132,12 +124,15 @@ class Content {
 
 			do_action( "wecodeart/hook/sidebar/{$index}/before" );
 
-			?>
-			<aside class="<?php echo esc_attr( $class ); ?>" itemscope="" itemtype="http://schema.org/WPSideBar"><?php 
-				dynamic_sidebar( $index ); 
-			?></aside>
-			<?php
-
+			Markup::wrap( $index . '-sidebar', [ [
+				'tag' 	=> 'aside',
+				'attrs' => [ 
+					'class'		=> $index . '-sidebar',
+					'itemscope' => '',
+					'itemtype'	=> 'https://schema.org/WPSideBar'
+				]
+			] ], 'dynamic_sidebar', [ $index ] );
+			
 			do_action( "wecodeart/hook/sidebar/{$index}/after" );
 
 		} );  
@@ -147,28 +142,28 @@ class Content {
 	 * Variable that holds the Header Modules and Options
 	 *
 	 * @since	1.5
-	 * @version	3.7.7
+	 * @version	3.9.5
 	 *
 	 * @return 	array
 	 */
 	public static function content_modules() {
-		$sides = apply_filters( 'wecodeart/filter/content/sidebars', [
+		$sides = (array) apply_filters( 'wecodeart/filter/content/sidebars', [
 			'primary'
 		] );
 
-		$defaults = [
+		$modules = [
 			'content' => [
-				'label'    => esc_html__( 'Entry Content', 'wecodeart' ),
-				'callback' => [ __CLASS__, 'get_loop' ]
+				'label'    	=> esc_html__( 'Entry Content', wecodeart_config( 'textdomain' ) ),
+				'callback' 	=> [ Loops::get_instance(), 'default' ],
+				'sidebar'	=> false
 			]
 		];
 
-		if( is_array( $sides ) && ! empty( $sides ) ) {
+		if( ! empty( $sides ) ) {
 			foreach( $sides as $side ) {
 				$side = strtolower( $side );
-				$defaults[$side] = [
-					'sidebar' 	=> true,
-					'label'    	=> sprintf( esc_html__( '%s Sidebar', 'wecodeart' ), ucfirst( $side ) ),
+				$modules[$side] = [
+					'label'    	=> sprintf( esc_html__( '%s Sidebar', wecodeart_config( 'textdomain' ) ), ucfirst( $side ) ),
 					'callback' 	=> function() use ( $side ) {
 						self::render_sidebar( $side );
 					}
@@ -176,8 +171,8 @@ class Content {
 			}  
 		}
 
-		// Filter modules.
-		return apply_filters( 'wecodeart/filter/content/modules', $defaults ); 
+		// Filter the generated array.
+		return apply_filters( 'wecodeart/filter/content/modules', (array) $modules );
 	}
 
 	/**
@@ -209,47 +204,39 @@ class Content {
 	 *
 	 * @uses	self::content_modules();
 	 * @since	1.0
-	 * @version	3.7.7
+	 * @version	3.9.5
 	 *
 	 * @return 	void
 	 */
 	public function register_sidebars() {
-		$modules = self::content_modules(); 
-		// Register Sidebar for each active footer columns
-		foreach( $modules as $key => $sidebar ) {
-			if( isset( $sidebar['sidebar'] ) && $sidebar['sidebar'] === true ) {
-				register_sidebar( [
-					'name'          => $sidebar['label'], // @wpcs ok 
-					'id'            => esc_attr( $key ),
-					'class'         => esc_attr( $key ),
-					'description'   => sprintf( esc_html__( 'This is the %s.', 'wecodeart' ), $sidebar['label'] ),
-					'before_widget' => '<div id="%1$s" class="widget %2$s">',
-					'after_widget'  => '</div>',
-					'before_title'  => '<h4 class="widget__title">',
-					'after_title'   => '</h4>',
-				] );
-			} 
-		} 
+		// Register Sidebar for each active footer columns.
+		$sidebars 	= wp_list_filter( self::content_modules(), [ 
+			'sidebar' => false 
+		], 'NOT' );
+
+		// Register Sidebar for each active footer columns.
+		wecodeart( 'register_sidebars', $sidebars );
 	}
 
 	/**
 	 * Skip to Content Link
 	 *
 	 * @since	3.8.3
+	 * @version	3.9.5
 	 *
 	 * @return 	void
 	 */
 	public function skip_link() {
-		?>
-		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wecodeart' ); ?></a>
-		<?php
+		?><a class="skip-link screen-reader-text" href="#content"><?php 
+			esc_html_e( 'Skip to content', wecodeart_config( 'textdomain' ) ); 
+		?></a> <?php
 	}
 
 	/**
 	 * Get Contextual Modules Options
 	 *
 	 * @since 	3.5.0
-	 * @version	3.8.9
+	 * @version	3.9.5
 	 *
 	 * @return 	array 
 	 */
@@ -263,21 +250,19 @@ class Content {
 		}
 
 		// Page Specific Mods
-		$pages = get_pages();
-		foreach( $pages as $page ) {		
+		foreach( get_pages() as $page ) {		
 			$ID = $page->ID;
 			if( is_page( $ID ) ) { // default must be provided since we do not set in customizer
 				return [
 					'container' => get_theme_mod( 'content-layout-container-page-' . $ID, 'container' ),
 					'modules' 	=> get_theme_mod( 'content-layout-modules-page-' . $ID, [ 'content', 'primary' ] )
-				]; 
+				];
+				break;
 			}
 		}
 
-		// Post Types Archives And Singular Context Mods 
-		$public_posts = get_post_types( [ 'public' => true, 'publicly_queryable' => true ] ); 
-
-		foreach( $public_posts as $type ) { 
+		// Post Types Archives And Singular Context Mods.
+		foreach( wecodeart( 'public_post_types' ) as $type ) { 
 			if( is_singular( $type ) ) {  
 				$modules 	= get_theme_mod( 'content-layout-modules-' . $type . '-singular' ); 
 				if( Callbacks::is_full_content() ) $modules = [ 'content' ];

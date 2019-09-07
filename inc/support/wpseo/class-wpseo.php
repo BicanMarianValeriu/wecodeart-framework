@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.8.3
+ * @version		3.9.3
  */
 
 namespace WeCodeArt\Support;
@@ -49,7 +49,7 @@ class WPSeo {
 			/**
 			 * Extend Author box data with Social
 			 */
-			add_filter( 'wecodeart/filter/author/box/context', [ $this, 'filter_author_context' ] );
+			add_filter( 'wecodeart/filter/template/context', [ $this, 'filter_author_context' ], 10, 2 );
 		}
 	}
 
@@ -79,10 +79,15 @@ class WPSeo {
 	 * Extend Author Box with Yoast's Social
 	 *
 	 * @since	3.9.3
+	 * @since	3.9.5
 	 *
 	 * @return 	array
 	 */
-	public function filter_author_context( $args ) {
+	public function filter_author_context( $args, $name ) {
+		if( $name !== 'entry/author/box.php' ) {
+			return $args;
+		}
+
 		$author_ID = get_the_author_meta( 'ID' );
 
 		$social_profiles = apply_filters( 'wecodeart/filter/support/yoast/author/social', [

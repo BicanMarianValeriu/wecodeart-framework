@@ -9,7 +9,7 @@
  * @subpackage  Utilities\Markup\SVG
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.4
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Utilities\Markup;
@@ -49,7 +49,7 @@ class SVG {
 	 */
 	protected static $icons = [
 		'user' => [
-			'viewBox' 	=> '0 0 512 512',
+			'viewBox' 	=> '0 0 448 512',
 			'paths'  	=> [
 				[
 					'M352 128A128 128 0 1 1 224 0a128 128 0 0 1 128 128z',
@@ -75,7 +75,7 @@ class SVG {
 			]		
 		],
 		'tags' => [
-			'viewBox' => '0 0 512 512',
+			'viewBox' 	=> '0 0 640 512',
 			'paths'  	=> [
 				[
 					'M497.94 225.94L286.06 14.06A48 48 0 0 0 252.12 0H48A48 48 0 0 0 0 48v204.12a48 48 0 0 0 14.06 33.94l211.88 211.88a48 48 0 0 0 67.88 0l204.12-204.12a48 48 0 0 0 0-67.88zM112 160a48 48 0 1 1 48-48 48 48 0 0 1-48 48z',
@@ -174,8 +174,9 @@ class SVG {
 	public static function compile( string $icon, $args = [], $fallback = '' ) {
 		// Set defaults.
 		$defaults = [
-			'title'    => '',
-			'desc'     => '',
+			'title'	=> '',
+			'desc'	=> '',
+			'class'	=> '',
 		];
 	
 		// Parse args.
@@ -206,6 +207,10 @@ class SVG {
 				if ( $args['desc'] ) {
 					$attrs['aria-labelledby'] = 'title-' . $unique_id . ' desc-' . $unique_id . '';
 				}
+			}
+
+			if( $args['class'] ) {
+				$attrs['class'] .= ' ' . $args['class'];
 			}
 
 			$attributes = Markup::generate_attr( $icon, $attrs );
@@ -288,7 +293,10 @@ class SVG {
 			_doing_it_wrong(
 				__CLASS__, 
 				sprintf( 
-					esc_html__( 'When adding an SVG Icon with %s you must define `viewBox` and `paths` keys.', 'wecodeart' ),
+					esc_html__( 
+						'When adding an SVG Icon with %s you must define `viewBox` and `paths` keys.', 
+						wecodeart_config( 'textdomain' )
+					),
 					__FUNCTION__
 				),
 				'3.9.4'

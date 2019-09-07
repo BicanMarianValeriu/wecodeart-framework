@@ -9,12 +9,12 @@
  * @subpackage 	Loops
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.6
+ * @version		3.9.5
  */ 
 
 namespace WeCodeArt\Core;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Core\Entry;
 use WeCodeArt\Utilities\Markup;
@@ -30,7 +30,7 @@ class Loops {
 	 * Standard WP Loop, meant to be executed anywhere needed in templates.
 	 *
 	 * @since	1.0
-	 * @version	3.7.6
+	 * @version	3.9.5
 	 *
 	 * @return 	void
 	 */
@@ -46,10 +46,10 @@ class Loops {
 
 			while( have_posts() ) : the_post();
 
-				$type 	= get_post_type();
-				$index 	= $wp_query->current_post;
+				$post_id 	= get_the_ID();
+				$index 		= $wp_query->current_post;
 				
-				do_action( 'wecodeart/hook/loop/entry/before', $type, $index );
+				do_action( 'wecodeart/hook/loop/entry/before', $post_id, $index );
 
 				/**
 				 * Entry Hook
@@ -66,12 +66,12 @@ class Loops {
 				Markup::wrap( 'entry', [ [
 					'tag' 	=> 'article',
 					'attrs' => [
-						'id' 	=> $type . '-' . get_the_ID(), 
+						'id' 	=> get_post_type() . '-' . $post_id, 
 						'class'	=> implode( ' ', get_post_class() ) 
 					]
-				] ], 'do_action', [ 'wecodeart_entry', $type, $index  ] );
+				] ], 'do_action', [ 'wecodeart_entry', $post_id, $index  ] );
 
-				do_action( 'wecodeart/hook/loop/entry/after', $type, $index );
+				do_action( 'wecodeart/hook/loop/entry/after', $post_id, $index );
 
 			endwhile; // end of one post.
 

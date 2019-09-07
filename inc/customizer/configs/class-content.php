@@ -9,12 +9,12 @@
  * @subpackage 	Customizer\Configs\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.8.4
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Customizer\Configs;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Customizer\Config;
 use WeCodeArt\Customizer\Formatting;
@@ -37,21 +37,13 @@ class Content extends Config {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
 		$callbacks	= WooCB::get_instance();
-		/**
-		 * Get post types for Config Options
-		 * @uses apply_filters for changing this query args
-		 */
-		$get_post_types = get_post_types( 
-			apply_filters( 'wecodeart/customizer/configs/content/get_post_types_args', [ 
-				'public' => true, 
-				'publicly_queryable' => true 
-			] )
-		);
 
 		// Content Modules Choices
 		$c_modules = array();
 		$inner_modules = \WeCodeArt\Core\Content::content_modules();
-		foreach( $inner_modules as $key => $val ) $c_modules[$key] = $val['label']; 
+		foreach( $inner_modules as $key => $val ) {
+			$c_modules[$key] = $val['label'];
+		}
 
 		$_configs = array( 
 			array(
@@ -167,8 +159,11 @@ class Content extends Config {
 		}
 
 		// Post Types Archives And Singular Context Mods 
-		$public_posts = $get_post_types; 
-		if( isset( $public_posts['product'] ) ) unset( $public_posts['product'] );
+		$public_posts = wecodeart( 'public_post_types' ); 
+		if( isset( $public_posts['product'] ) ) {
+			unset( $public_posts['product'] );
+		}
+
 		foreach( $public_posts as $type ) { 
 			$type_label = get_post_type_object( $type )->labels->singular_name;
 			$config = array(
@@ -246,10 +241,15 @@ class Content extends Config {
 		 */
 		$m_modules = array();
 		$meta_modules = \WeCodeArt\Core\Entry\Meta::modules();
-		foreach( $meta_modules as $key => $val ) $m_modules[$key] = $val['label']; 
+		foreach( $meta_modules as $key => $val ) {
+			$m_modules[$key] = $val['label'];
+		}
 
-		foreach( $get_post_types as $type ) { 
-			if( ! post_type_supports( $type, 'wecodeart-post-info' ) ) continue;
+		foreach( $public_posts as $type ) { 
+			if( ! post_type_supports( $type, 'wecodeart-post-info' ) ) {
+				continue;
+			}
+
 			$type_label = get_post_type_object( $type )->labels->singular_name;
 			$meta_config = array(  
 				array(

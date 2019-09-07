@@ -9,12 +9,12 @@
  * @subpackage 	Core\Comments
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.1
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Core;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Core\Pagination;
 use WeCodeArt\Utilities\Markup;
@@ -68,7 +68,7 @@ class Comments {
 	 * Render Comments Info
 	 *
 	 * @since	3.7.3
-	 * @version	3.9.2
+	 * @version	3.9.5
 	 *
 	 * @return 	string
 	 */
@@ -78,9 +78,9 @@ class Comments {
 
 		$defaults = [
 			'icon' 		=> SVG::compile( 'comments' ) . ' ',
-			'empty' 	=> esc_html__( 'No comments, so go and ...', 'wecodeart' ),
+			'empty' 	=> esc_html__( 'No comments, so go and ...', wecodeart_config( 'textdomain' ) ),
 			'closed'	=> false,
-			'add_one'	=> esc_html__( 'add one', 'wecodeart' ) 
+			'add_one'	=> esc_html__( 'add one', wecodeart_config( 'textdomain' ) ) 
 		]; 
 
 		$args = apply_filters( 'wecodeart/filter/comments/get_comments_info/args', $defaults, get_post_type() );
@@ -91,7 +91,7 @@ class Comments {
 			$icon_html = $args['icon'];
 			if ( 0 !== $comments_number ) {
 				$header_tx = sprintf(
-					_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
+					_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', wecodeart_config( 'textdomain' ) ),
 					number_format_i18n( $comments_number )
 				);
 			} else {
@@ -113,7 +113,11 @@ class Comments {
 
 		$output = apply_filters( 'wecodeart/filter/comments/get_comments_info/output', trim( $output ) );
 
-		if( $echo ) echo $output;
+		if( $echo ) {
+			echo $output;
+			return;
+		}
+
 		return $output; 
 	} 
 
@@ -125,22 +129,22 @@ class Comments {
 	 *
 	 * @return 	void
 	 */
-	public function render_comments() {  
-		if ( have_comments() ) {  
-			Markup::wrap( 'comments-list', [ [ 
-				'tag' 	=> 'ol', 
-				'attrs' => [ 
-					'id' 	=> 'comments-list', 
-					'class' => 'comments__list unstyled pl-0' 
-				] 
+	public function render_comments() {
+		if ( have_comments() ) {
+			Markup::wrap( 'comments-list', [ [
+				'tag' 	=> 'ol',
+				'attrs' => [
+					'id' 	=> 'comments-list',
+					'class' => 'comments__list unstyled pl-0'
+				]
 			] ], function() { // Required as this to be read by theme check
 				wp_list_comments( apply_filters( 'wecodeart/filter/comments/list/args', [
 					'type' 		 	=> 'comment',
 					'avatar_size' 	=> 60,
 					'walker'		=> new CommentWalker,
-				] ) ); 
-			} );  
-		} 
+				] ) );
+			} );
+		}
 		return;
 	}
 
@@ -156,7 +160,7 @@ class Comments {
 		global $wp_query;
 
 		// If have pings.
-		if ( ! empty( $wp_query->comments_by_type['pings'] ) ) {  
+		if ( ! empty( $wp_query->comments_by_type['pings'] ) ) {
 			Markup::wrap( 'pings-list', [ [
 				'tag' 	=> 'ol',
 				'attrs' => [
@@ -169,6 +173,7 @@ class Comments {
 				'walker'	 => new CommentWalker,
 			] ) ] );
 		}
+		return;
 	}
 
 	/**
@@ -179,12 +184,12 @@ class Comments {
 	 * @return	string	HTML
 	 */
 	public function render_meta() {  
-		Markup::wrap( 'comments-info', [ [ 
-			'tag' 	=> 'h3', 
-			'attrs' => [ 
-				'id' 	=> 'comments-title', 
-				'class' => 'comments__headline' 
-			] 
+		Markup::wrap( 'comments-info', [ [
+			'tag' 	=> 'h3',
+			'attrs' => [
+				'id' 	=> 'comments-title',
+				'class' => 'comments__headline'
+			]
 		] ], [ $this, 'get_comments_info' ] );
 	}
 
@@ -198,7 +203,7 @@ class Comments {
 	public function render_respond() {
 		// Bail if comments are closed for this post type.
 		if ( ( is_singular() && ! comments_open() ) ) return;
-	
+
 		$args = apply_filters( 'wecodeart/filter/comments/form/args', [
 			'format'			 	=> 'html5',
 			'title_reply_before' 	=> '<h3 id="reply-title" class="headline"> ' . SVG::compile( 'comment-dots' ) . ' ',
@@ -233,7 +238,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	3.9.0
+	 * @version	3.9.5
 	 *
 	 * @return 	array
 	 */
@@ -241,75 +246,112 @@ class Comments {
 		// Fields escapes all the data for us. 	
 		$commenter = wp_get_current_commenter();
 		$req       = get_option( 'require_name_email' );
-		
-		$author_name	= '<div class="form-group comment-form-author col-12 col-md-7">' .
-			Input::compile( 'text', esc_html__( 'Name *', 'wecodeart' ), [
+
+		$author_name	= Markup::wrap( 'comment-author-name', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'class' => 'form-group comment-form-author col-12 col-md-7'
+			]
+		] ], [ 'WeCodeArt\Utilities\Markup\Input', 'render' ], [
+			'text',
+			esc_html__( 'Name *', wecodeart_config( 'textdomain' ) ),
+			[
 				'id' 	=> 'comment-author',
 				'class'	=> 'form-control',
-				'name' 	=> 'author', 
-				'required' 	=> ( $req ) ? 'required' : NULL, 
-				'size' 		=> absint( 30 ), 
-				'maxlength' => absint( 245 ),
-				'value' 	=> $commenter['comment_author'] 
-				]
-			)
-		. '</div>';
-		
-		$author_email	= '<div class="form-group comment-form-email col-12 col-md-7">' .
-			Input::compile( 'email', esc_html__( 'Email *', 'wecodeart' ), [			
+				'name' 	=> 'author',
+				'required' 	=> ( $req ) ? 'required' : NULL,
+				'size' 		=> 30,
+				'maxlength' => 245,
+				'value' 	=> $commenter['comment_author']
+			]
+		], false );
+
+		// Author Email.
+		$author_email = Markup::wrap( 'comment-author-email', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'class' => 'form-group comment-form-email col-12 col-md-7'
+			]
+		] ], [ 'WeCodeArt\Utilities\Markup\Input', 'render' ], [
+			'email',
+			esc_html__( 'Email *', wecodeart_config( 'textdomain' ) ),
+			[
 				'id' 	=> 'comment-email',
 				'class'	=> 'form-control',
 				'name' 	=> 'email',
-				'required' 	=> ( $req ) ? 'required' : NULL, 
-				'size' 		=> absint( 30 ), 
-				'maxlength' => absint( 100 ),
-				'value' 	=> $commenter['comment_author_email'] 
-				]
-			) 
-		. '</div>';
-		
-		$author_url		= '<div class="form-group comment-form-url col-12 col-md-7">' .
-			Input::compile( 'url', esc_html__( 'Website', 'wecodeart' ), [
+				'required' 	=> ( $req ) ? 'required' : NULL,
+				'size' 		=> 30,
+				'maxlength' => 100,
+				'value' 	=> $commenter['comment_author_email']
+			]
+		], false );
+
+		// Author URL.
+		$author_url	= Markup::wrap( 'comment-author-url', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'class' => 'form-group comment-form-url col-12 col-md-7'
+			]
+		] ], [ 'WeCodeArt\Utilities\Markup\Input', 'render' ], [ 
+			'url', 
+			esc_html__( 'Website', wecodeart_config( 'textdomain' ) ), 
+			[
 				'id' 	=> 'comment-url',
 				'class'	=> 'form-control',
 				'name' 	=> 'url',
-				'size' 		 => absint( 30 ), 
-				'maxlength'  => absint( 200 ),
-				'value' 	 => $commenter['comment_author_url'] 
-				]
-			) 
-		. '</div>';
+				'size' 		 => 30, 
+				'maxlength'  => 200,
+				'value' 	 => $commenter['comment_author_url']  
+			]
+		], false );
 
-		$author_comment	= '<div class="form-group comment-form-comment w-100">' .
-			Input::compile( 'textarea', esc_html__( 'Comment*', 'wecodeart' ), [
+		// The Comment.
+		$author_comment	= Markup::wrap( 'comment-field', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'class' => 'form-group comment-form-comment w-100'
+			]
+		] ], [ 'WeCodeArt\Utilities\Markup\Input', 'render' ], [ 
+			'textarea', 
+			esc_html__( 'Comment *', wecodeart_config( 'textdomain' ) ), 
+			[
 				'id' 	=> 'comment',
 				'class'	=> 'form-control',
 				'name' 	=> 'comment',
 				'rows'	=> absint( 8 ), 
 				'cols'  => absint( 45 ), 
 				'aria-required'  => 'true' 
-				]
-			) 
-		. '</div>';
+			]
+		], false );
 
 		$args = [
-			'title_reply' 			=> esc_html__( 'Speak Your Mind', 'wecodeart' ),
+			'title_reply' 			=> esc_html__( 'Speak Your Mind', wecodeart_config( 'textdomain' ) ),
 			'comment_field' 		=> $author_comment,
-			'comment_notes_before' 	=> sprintf( 
-				'<div class="form-group comment-form-notes w-100">%s</div>',
-				esc_html__( 'Your email address will not be published.', 'wecodeart' ) . ( $req ? sprintf( 
-					' ' . esc_html__( 'Required fiels are marked %s', 'wecodeart' ), 
-					'<span class="required">*</span>' 
-				) : '' )
-			),
-			'comment_notes_after' 	=> sprintf( 
-				'<div class="form-group comment-form-allowed-tags">%s</div>',
-				sprintf( 
-					__( 'You may use these %s tags and attributes: %s', 'wecodeart' ),
+			'comment_notes_before' 	=> Markup::wrap( 'comment-notes-before', [ [
+				'tag' 	=> 'div',
+				'attrs' => [
+					'class' => 'form-group comment-form-notes w-100'
+				]
+			] ], function() use ( $req ) {
+				$string = esc_html__( 'Your email address will not be published.', wecodeart_config( 'textdomain' ) );
+				if( $req ) {
+					$string .= ' ' . sprintf( esc_html__( 'Required fiels are marked "%s".', wecodeart_config( 'textdomain' ) ), 
+						'<span class="required">*</span>' 
+					);
+				}
+				echo wp_kses_post( $string );
+			}, [], false ),
+			'comment_notes_after' 	=> Markup::wrap( 'comment-notes-after', [ [
+				'tag' 	=> 'div',
+				'attrs' => [
+					'class' => 'form-group comment-form-allowed-tags'
+				]
+			] ], function() {
+				printf( esc_html__( 'You may use these %s tags and attributes: %s.', wecodeart_config( 'textdomain' ) ),
 					'<abbr data-toggle="tooltip" title="HyperText Markup Language">HTML</abbr>',
 					'<code>' . allowed_tags() . '</code>'
-				)
-			),
+				);
+			}, [], false ),
 			'submit_field'         	=> '<div class="form-group comment-form-submit">%1$s %2$s</div>',
 			'submit_button'         => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
 			'class_submit'         	=> 'btn btn-dark',
@@ -324,7 +366,7 @@ class Comments {
 		$args = wp_parse_args( $args, $defaults );
 
 		// Return filterable array of $args, along with other optional variables
-		return apply_filters( 'wecodeart/filter/comments/args', $args, $commenter, $req ); 
+		return apply_filters( 'wecodeart/filter/comments/form/args', $args, $commenter, $req );
 	}
 
 	/**

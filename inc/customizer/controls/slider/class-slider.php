@@ -9,12 +9,12 @@
  * @subpackage 	Customizer\Controls\Slider
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.5
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Customizer\Controls;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 use WP_Customize_Control;
 
@@ -24,6 +24,9 @@ if ( class_exists( 'WeCodeArt\Customizer\Controls\Slider' ) ) return NULL;
  * Sortable control (uses checkboxes).
  */
 class Slider extends WP_Customize_Control {
+
+	use \WeCodeArt\Core\Scripts\Base;
+
 	/**
 	 * The control type.
 	 *
@@ -46,24 +49,20 @@ class Slider extends WP_Customize_Control {
 	 * @access public
 	 *
 	 * @since 	unknown
-	 * @version	3.8.9
+	 * @version	3.9.5
 	 */
 	public function enqueue() {
-		$handle = strtolower( str_replace( '\\', '-', __CLASS__ ) );
-		$folder = defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 'unminified' : 'minified';
-
-		wp_enqueue_style(
-            $handle,
-			get_parent_theme_file_uri( '/assets/' . $folder . '/css/customizer/controls/slider.css' )
-		);
+		
+		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'slider' ), [], wecodeart( 'version' ) );
 		
 		wp_enqueue_script(
-            $handle,
-			get_parent_theme_file_uri( '/assets/' . $folder . '/js/customizer/controls/slider.js' ),
-            [ 'jquery', 'customize-base' ],
-            false,
+            $this->make_handle(),
+			get_asset( 'js', 'slider', 'customizer/controls' ),
+           	[ 'jquery', 'customize-base' ],
+			wecodeart( 'version' ),
             true
-        );
+		);
+
 	}
 
 	/**

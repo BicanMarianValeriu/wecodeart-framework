@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Index PHP
  * @since 	    1.0
- * @version     1.0
+ * @version     3.9.5
  */
 
-wecodeart();
+wecodeart( 'layout' );

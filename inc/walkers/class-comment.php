@@ -9,7 +9,7 @@
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.9
- * @version		3.7.9
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Walkers;
@@ -69,7 +69,7 @@ class Comment extends Walker_Comment {
 	/**
 	 * Outputs a HTML5 comment.
 	 * @since	2.0
-	 * @version	3.8.9
+	 * @version	3.9.5
 	 */
 	protected function comment( $comment, $depth, $args ) {
 		// Get what we need.
@@ -77,11 +77,15 @@ class Comment extends Walker_Comment {
 		$author_img 	= get_avatar( $comment, $args['avatar_size'], '', esc_html__( 'Author\'s gravatar', 'wecodeart' ) );
 		$author_name 	= '<strong itemprop="name">' . $comment->comment_author . '</strong>';
 		if ( ! empty( $comment->comment_author_url ) && 'http://' !== $comment->comment_author_url ) {
-			$author_name = sprintf( '<a href="%1$s" rel="external nofollow" itemprop="url">%2$s</a>', esc_url( $comment->comment_author_url ), $author_name );
+			$author_name = sprintf(
+				'<a href="%1$s" rel="external nofollow" itemprop="url">%2$s</a>', 
+				esc_url( $comment->comment_author_url ),
+				$author_name
+			);
 		}
 
 		// Setup Filters.
-		$comment_date = apply_filters( 'wecodeart/filter/comments/date/enable', true, get_post_type() );
+		$comment_date = apply_filters( 'wecodeart/filter/comments/date/enable', true );
 		$comment_amst = apply_filters( 
 			'wecodeart/filter/comments/awaiting-moderation-text', 
 			esc_html__( 'Your comment is awaiting moderation.', 'wecodeart' ) 
@@ -89,7 +93,7 @@ class Comment extends Walker_Comment {
 
 		// The HTML.
 		echo '<li id="comment-' . esc_attr( $comment->comment_ID ) . '" class="' . esc_attr( $class ) . '" itemscope itemtype="http://schema.org/Comment">';
-			echo '<div class="comment__body row">';
+			echo '<div class="comment__body row mb-3">';
 			do_action( 'wecodeart/hook/comment/top', $comment ); // Hook Comment Top
 				echo '<div class="col-12">';
 					echo '<div class="row">';

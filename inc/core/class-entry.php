@@ -33,7 +33,7 @@ class Entry {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'the_password_form', [ $this, 'render_paswordprotected' ] );
+		add_filter( 'the_password_form', [ $this, 'render_paswordprotected' ] );
 
 		add_action( 'wecodeart_entry', 	[ $this, 'render_header' 	], 20 ); 
 		add_action( 'wecodeart_entry', 	[ $this, 'render_content' 	], 30 );
@@ -60,7 +60,7 @@ class Entry {
 	 * Render Header
 	 *
 	 * @since	3.6.4
-	 * @version	3.7.3
+	 * @version	3.9.5
 	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 *
 	 * @return 	void
@@ -81,14 +81,14 @@ class Entry {
 			'attrs' => [ 
 				'class' => 'entry-header'
 			]
-		] ], 'do_action', [ 'wecodeart/hook/entry/header', get_post() ] );  
+		] ], 'do_action', [ 'wecodeart/hook/entry/header', get_the_ID() ] );  
 	} 
 
 	/**
 	 * Render Footer
 	 *
 	 * @since	3.6.4
-	 * @version	3.7.3
+	 * @version	3.9.5
 	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 *
 	 * @return 	void
@@ -112,14 +112,14 @@ class Entry {
 			'attrs' => [ 
 				'class' => 'entry-footer' 
 			]
-		] ], 'do_action', [ 'wecodeart/hook/entry/footer', get_post() ] );
+		] ], 'do_action', [ 'wecodeart/hook/entry/footer', get_the_ID() ] );
 	} 
 
 	/**
 	 * Retrieve entry title with link
 	 *
 	 * @since 	3.6.4
-	 * @version	3.9.4
+	 * @version	3.9.5
 	 *
 	 * @param	bool	$link
 	 * @param 	bool 	$echo 
@@ -127,7 +127,7 @@ class Entry {
 	 * @return 	string
 	 */
 	public function the_title( $link = true, $echo = true ) {
-		$disabled = apply_filters( 'wecodeart/filter/entry/title/disabled', '__return_false', get_the_ID() );
+		$disabled = apply_filters( 'wecodeart/filter/entry/title/disabled', false, get_the_ID() );
 
 		$title = get_the_title();
 
@@ -152,17 +152,17 @@ class Entry {
 	 *
 	 * @since 	1.0
 	 * @uses	WeCodeArt\Utilities\Markup::wrap()
-	 * @version 3.6.4
+	 * @version 3.9.5
 	 *
 	 * @return 	void
 	 */
-	public function render_title() {
+	public function render_title( $echo = true ) {
 		Markup::wrap( 'entry-title', [ [
 			'tag' 	=> is_singular() ? 'h1' : 'h2',
 			'attrs' => [
 				'class' => 'entry-title'
 			]
-		] ], [ $this, 'the_title' ] );
+		] ], [ $this, 'the_title' ], [], $echo );
 	}  
 
 	/**
@@ -193,7 +193,10 @@ class Entry {
 	 */
 	public function render_read_more() {
 		// Do dont return on Singular
-		if ( ! is_singular() ) echo Entry\Meta::read_more();
+		if ( ! is_singular() ) {
+			echo Entry\Meta::read_more();
+			return;
+		}
 	}
 
 	/**
@@ -204,14 +207,15 @@ class Entry {
 	 *
 	 * @return	string
 	 */
-	public function render_noposts() { 
-		?>
+	public function render_noposts() { ?>
 		<p><?php 
+
 			echo esc_html( apply_filters( 
 				'wecodeart/filter/entry/noposts_message', 
-				__( 'There are no posts matching your criteria.', 'wecodeart' ) 
+				__( 'There are no posts matching your criteria.', wecodeart_config( 'textdomain' ) ) 
 			) );
-		 ?></p>
+
+		?></p>
 		<?php
 	}
 
@@ -219,12 +223,15 @@ class Entry {
 	 * Return the content for No Posts
 	 *
 	 * @since	3.5
-	 * @version	3.5
+	 * @version	3.9.5
 	 *
 	 * @return 	void
 	 */
-	public function render_paswordprotected() {
-		get_template_part( 'views/entry/content', 'protected' );
+	public function render_paswordprotected( $template ) {
+		$template = Markup::template( 'entry/protected', [], false );
+		$template = trim( preg_replace( '/\s+/', ' ', $template ) );
+		$template = preg_replace( '/>\s*</', '><', $template );
+		return $template;
 	} 
 
 	/**

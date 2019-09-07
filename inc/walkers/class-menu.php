@@ -422,12 +422,14 @@ class Menu extends Walker_Nav_Menu {
 	/**
 	 * Update the attributes of a nav item depending on the limkmod classes.
 	 *
-	 * @since 4.0.0 
+	 * @since 4.0.0
+	 *
 	 * @param array $atts            array of atts for the current link in nav item.
-	 * @param array $linkmod_classes an array of classes that modify link or nav item behaviors or displays. 
+	 * @param array $linkmod_classes an array of classes that modify link or nav item behaviors or displays.
+	 *
 	 * @return array                 maybe updated array of attributes for item.
 	 */
-	private function update_atts_for_linkmod_type( $atts = array(), $linkmod_classes = array() ) {
+	private function update_atts_for_linkmod_type( $atts = [], $linkmod_classes = [] ) {
 		if ( ! empty( $linkmod_classes ) ) {
 			foreach ( $linkmod_classes as $link_class ) {
 				if ( ! empty( $link_class ) ) { 
@@ -453,7 +455,10 @@ class Menu extends Walker_Nav_Menu {
 	 * @return 	string      	the string wrapped in a span with the class.
 	 */
 	private function wrap_for_screen_reader( $text = '' ) {
-		if ( $text ) $text = '<span class="sr-only screen-reader-text">' . $text . '</span>'; 
+		if ( $text ) {
+			$text = '<span class="sr-only screen-reader-text">' . $text . '</span>';
+		}
+
 		return $text;
 	}
 

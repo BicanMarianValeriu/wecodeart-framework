@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Header Branding HTML
  * @since	 	3.0.5
- * @version    	3.9.2
+ * @version    	3.9.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit();
@@ -16,45 +16,41 @@ if ( ! defined( 'ABSPATH' ) ) exit();
 use WeCodeArt\Utilities\Markup\SVG;
 
 ?>
-<div id="bar-branding" class="header-bar__branding col col-lg-auto">
+<div id="bar-branding" class="header-bar__branding col col-lg-auto pr-0">
 	<div class="row no-gutters align-items-center">
-		<div class="col">	
-			<?php 
+		<div class="col">
+			<?php
 				if ( has_custom_logo() ) the_custom_logo();
-				if ( is_front_page() ) : ?>	
+				if ( is_front_page() ) : ?>
 					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>		
 				<?php else : ?>
 				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php 
-				endif; 						
+			<?php
+				endif;
 				$description = get_bloginfo( 'description', 'display' );
 				if ( $description || is_customize_preview() ) : ?>
 					<p class="site-description"><?php echo wp_kses_post( $description ); ?></p>
-			<?php 
-				endif; 
+			<?php
+				endif;
 			?>
 		</div>
 		<?php 
 			$mod = get_theme_mod( 'header-bar-modules' );
-			if ( in_array( 'search', $mod ) ) {
-				// Display a search toggle on small devices 
-			?>
-				<div class="col-auto d-lg-none">
-					<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__search" aria-expanded="false" aria-controls="bar-search">
-						<span class="screen-reader-text"><?php esc_html_e( 'Search', 'wecodeart' ); ?></span>
-						<?php SVG::render( 'search' ); ?>
-					</button>
-				</div>
+			if ( in_array( 'search', $mod ) ) { ?>
+			<div class="col-auto d-lg-none">
+				<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__search" aria-expanded="false" aria-controls="bar-search">
+					<span class="screen-reader-text"><?php esc_html_e( 'Search', 'wecodeart' ); ?></span>
+					<?php SVG::render( 'search' ); ?>
+				</button>
+			</div>
 			<?php }
-			if ( in_array( 'menu', $mod ) ) { 
-				// Display a menu toggle on small devices 
-			?>
-				<div class="col-auto d-lg-none">
-					<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__menu" aria-expanded="false" aria-controls="bar-menu">
-						<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', 'wecodeart' ); ?></span>
-						<?php SVG::render( 'bars' ); ?>
-					</button>
-				</div>
+			if ( in_array( 'menu', $mod ) ) { ?>
+			<div class="col-auto d-lg-none">
+				<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__menu" aria-expanded="false" aria-controls="bar-menu">
+					<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', 'wecodeart' ); ?></span>
+					<?php SVG::render( 'bars' ); ?>
+				</button>
+			</div>
 			<?php }
 		?>
 	</div>

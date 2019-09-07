@@ -1,3 +1,7 @@
+v3.9.5
+- Added - Added 'Configuration' functionality to the theme which will enable more awesome features.
+- Updated - Comment Form fields wrappers passed trough Markup API, fully customizable now.
+
 v3.9.4
 - Changed - Renamed WordPressSeo class to WPSeo
 - Added - SVG::add_icon() method for adding icons to store

@@ -9,12 +9,12 @@
  * @subpackage 	Core\Pagination
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.1
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Core;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Utilities\Markup;
 
@@ -43,7 +43,7 @@ class Pagination {
      * Display links to previous and next post, from a single post.
      *
      * @since	1.0.0
-     * @version 3.7.1
+     * @version 3.9.5
      *
      * @return  string HTML
      */
@@ -73,7 +73,7 @@ class Pagination {
                 'tag'   => 'ul',
                 'attrs' => [
                     'class'         => 'pagination',
-                    'aria-label'    => esc_html__( 'Pagination', 'wecodeart' )
+                    'aria-label'    => esc_html__( 'Pagination', wecodeart_config( 'textdomain' ) )
                 ]
             ] 
         ], function() use ( $links ) { 
@@ -95,7 +95,7 @@ class Pagination {
      * WP-Link Pages for paginated posts
      *
      * @since	unknown
-     * @version 3.7.1
+     * @version 3.9.5
      *
      * @return 	null 	Return early if not a post.
      */
@@ -111,7 +111,7 @@ class Pagination {
             'tag'   => 'nav',
             'attrs' => [
                 'class'     => 'pagination pagination--entry pb-3',
-                'aria-label'=> esc_html__( 'Pagination', 'wecodeart' ),
+                'aria-label'=> esc_html__( 'Pagination', wecodeart_config( 'textdomain' ) ),
                 'itemscope' => 'itemscope',
                 'itemtype'  => 'http://schema.org/SiteNavigationElement'
             ] 
@@ -129,7 +129,7 @@ class Pagination {
 	 * Display links to previous and next post, from a single post.
      *
 	 * @since	1.0.0
-	 * @version	3.7.9
+	 * @version	3.9.5
      *
      * @return  null    Return early if not a post.
 	 */
@@ -144,7 +144,7 @@ class Pagination {
                 'tag'   => 'nav', 
                 'attrs' => [ 
                     'class'         => 'entry-navigation',
-                    'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
+                    'aria-label'    => esc_html__( 'Navigation', wecodeart_config( 'textdomain' ) ),
                     'itemscope'     => 'itemscope',
                     'itemtype'      => 'http://schema.org/SiteNavigationElement',
                 ] 
@@ -157,7 +157,7 @@ class Pagination {
             ]
 		], function() { ?>
             <h3 class="screen-reader-text"><?php 
-                printf( esc_html__( '%s Navigation', 'wecodeart' ), get_post_type_object( get_post_type() )->labels->singular_name ); 
+                printf( esc_html__( '%s Navigation', wecodeart_config( 'textdomain' ) ), get_post_type_object( get_post_type() )->labels->singular_name ); 
             ?></h3>
             <?php 
             
@@ -184,7 +184,7 @@ class Pagination {
 	 * Render Coments Pagination
 	 *
 	 * @since 	3.7.0
-	 * @version	3.7.2
+	 * @version	3.9.5
 	 *
 	 * @return 	string|null
 	 */
@@ -195,24 +195,24 @@ class Pagination {
 		if( empty( get_previous_comments_link() || get_next_comments_link() ) ) return;
 
 		Markup::wrap( 'comments-nav', [
-			[ 
-                'tag'   => 'nav', 
-                'attrs' => [ 
+			[
+                'tag'   => 'nav',
+                'attrs' => [
                     'class'         => 'comments__nav',
-					'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ), 
+					'aria-label'    => esc_html__( 'Navigation', wecodeart_config( 'textdomain' ) ),
                     'itemscope'     => 'itemscope',
                     'itemtype'      => 'http://schema.org/SiteNavigationElement',
-                ] 
+                ]
             ],
-			[ 
-                'tag'   => 'div', 
-                'attrs' => [ 
-                    'class' => 'row pb-3' 
-                ] 
+			[
+                'tag'   => 'div',
+                'attrs' => [
+                    'class' => 'row pb-3'
+                ]
             ]
 		], function() {
 			?>
-            <h3 class="screen-reader-text"><?php esc_html_e( 'Comments Navigation', 'wecodeart' ); ?></h3>
+            <h3 class="screen-reader-text"><?php esc_html_e( 'Comments Navigation', wecodeart_config( 'textdomain' ) ); ?></h3>
 			<?php 
 			
 			$args_prev = apply_filters( 'wecodeart/filter/comments/navigation/prev/args', [] );

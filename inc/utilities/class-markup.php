@@ -9,12 +9,12 @@
  * @subpackage  Utilities\Markup
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.7
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Utilities;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 /**
  * Markup Utilities Parent Class
@@ -25,7 +25,9 @@ class Markup {
 
 	/**
 	 * Merge array of attributes with defaults, and apply contextual filter on array.
+	 *
 	 * @since 	3.5
+	 * @version	3.9.5
 	 *
 	 * @param 	string 	$context    The context, to build filter name.
 	 * @param 	array  	$attributes Optional. Extra attributes to merge with defaults.
@@ -41,13 +43,14 @@ class Markup {
 		$attributes = wp_parse_args( $attributes, $defaults );
 
 		// Contextual filter.
-		return apply_filters( "wecodeart/filter/attributes/{$context}", $attributes, $context, $args );
+		return apply_filters( "wecodeart/filter/attributes/{$context}", $attributes, $args );
 	}
 
 	/**
 	 * Build list of attributes into a string and apply contextual filter on string.
 	 *
 	 * @since 	3.5
+	 * @version 3.9.5
 	 *
 	 * @param 	string 	$context    The context, to build filter name.
 	 * @param 	array  	$attributes Optional. Extra attributes to merge with defaults.
@@ -68,7 +71,7 @@ class Markup {
 			else $output .= sprintf( '%s="%s" ', esc_html( $key ), esc_attr( $value ) );
 		}
 
-		$output = apply_filters( "wecodeart/filter/attributes/{$context}/output", $output, $attributes, $context, $args );
+		$output = apply_filters( "wecodeart/filter/attributes/{$context}/output", $output, $attributes, $args );
 		return trim( $output );
 	}
 
@@ -112,7 +115,8 @@ class Markup {
 	/**
 	 * Return Sortable callback functions based on input.
 	 *
-	 * @version	3.7.7
+	 * @since	unknown
+	 * @version	3.9.5
 	 *
 	 * @param	array  	modules	required
 	 * @param 	array 	options	required
@@ -121,15 +125,18 @@ class Markup {
 	 * @return 	string|object 	HTML/WP_Error
 	 */
 	public static function sortable( array $modules, array $options, $echo = true ) { 
-		$_callbacks = array_map( function( $module ) {
+		$callbacks = array_map( function( $module ) {
 			return ( isset( $module['callback'] ) && is_callable( $module['callback'] ) ); 
 		}, $modules );
 
 		// Only run if we have callbacks set for all of the modules.
-		if( count( array_unique( $_callbacks ) ) !== 1  ) {
-			return new \WP_Error( 'wecodeart_markup_has_no_callbacks', 
-				__( 'Please define a callback function for each of the modules.', 'wecodeart' ) 
+		if( count( array_unique( $callbacks ) ) !== 1  ) {
+			_doing_it_wrong(
+				__CLASS__, 
+				esc_html__( 'Please define a callback function for each of the modules.', wecodeart_config( 'textdomain' ) ),
+				'3.9.5'
 			);
+			return null;
 		}
 
 		$functions = [];
@@ -147,18 +154,19 @@ class Markup {
 		// Return the output.
 		if( $echo ) {
 			foreach( $functions as $func ) call_user_func( $func );
-		} else {
-			ob_start();
-			foreach( $functions as $func ) call_user_func( $func );
-			return ob_get_clean();
+			return;
 		}
+
+		ob_start();
+		foreach( $functions as $func ) call_user_func( $func );
+		return ob_get_clean();
 	}
 
 	/**
      * Wrapper method for any html
 	 *
 	 * @since 	unknown
-	 * @version	3.7.8
+	 * @version	3.9.5
 	 *
 	 * @param	string	context		required ( used by generate_attr's dynamic filter )
 	 * @param 	mixed	function	required ( the function called to be wrapped )
@@ -194,7 +202,7 @@ class Markup {
 			$args = $defaults;
 			new \WP_Error( 'wecodeart_markup_wrap_fallback', 
 				sprintf( 
-					__( 'Wrappers are not properly defined for "%s". Please check your theme code.', 'wecodeart' ),
+					__( 'Wrappers are not properly defined for "%s". Please check your theme code.', wecodeart_config( 'textdomain' ) ),
 					$context
 				)
 			);
@@ -266,19 +274,20 @@ class Markup {
 	 * Renders template file with data.
 	 *
 	 * @since	3.7.3
+	 * @version	3.9.5
 	 *
 	 * @param  string $file Relative path to the template file.
 	 * @param  array  $data Dataset for the template.
 	 *
 	 * @return void
 	 */
-	public static function template( $file, $data = [] ) {
-		$template = new Markup\Template( [
-			'directory' => get_stylesheet_directory(),
-			'templates' => 'views',
-			'extension' => '.tpl.php'
-		] );
+	public static function template( $file, $data = [], $echo = true ) {
+		$template = new Markup\Template( wecodeart_config() );
+		
+		if( $echo ) {
+			return $template->set_file( $file )->render( $data );
+		}
 
-		return $template->set_file( $file )->render( $data );
+		return $template->set_file( $file )->compile( $data );
 	}
 }

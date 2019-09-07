@@ -9,12 +9,12 @@
  * @subpackage  Theme Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.8.1
+ * @version		3.9.5
  */
 
 namespace WeCodeArt;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Support\ANR;
 use WeCodeArt\Support\WooCommerce;
@@ -26,16 +26,17 @@ use WeCodeArt\Utilities\Helpers;
  */
 class Support {
 
-	use \WeCodeArt\Singleton; 
+	use Singleton; 
 
 	/**
 	 * Send to Constructor
 	 * @since 3.6.2
 	 */
 	public function init() {
-
+		
 		// Theme Support
-		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ], 2 );
+		add_action( 'after_setup_theme', [ $this, 'after_setup_theme'	], 2 );
+		add_action( 'after_setup_theme', [ $this, 'register_menus' 		], 10 );
 
 		// Integrations/Compatability/Plugin Support
 		if( Helpers::detect_plugin( [ 'classes'		=> [ 'woocommerce' ] ] ) )			WooCommerce::get_instance();
@@ -47,22 +48,19 @@ class Support {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 */
 	function after_setup_theme() {
-		/**
-		 * Get post types for Config Options
-		 * @uses apply_filters for changing this query args
-		 */
-		$get_post_types = get_post_types( 
-			apply_filters( 'wecodeart/support/get_post_types_args', [ 
-				'public' => true, 
-				'publicly_queryable' => true 
-			] )
-		); 
+		// Add support for Meta info for posts other than Page Type 
+		foreach( wecodeart( 'public_post_types' ) as $type ) { 
+			add_post_type_support( $type, 'wecodeart-post-info' );
+		}
 
 		// Content width
 		$GLOBALS['content_width'] = apply_filters( 'wecodeart/filter/content_width', 1280 );
 
 		// Translation
-		load_theme_textdomain( 'wecodeart', get_template_directory_uri() . '/languages' );	
+		load_theme_textdomain( 
+			wecodeart_config( 'textdomain' ), 
+			wecodeart_config( 'paths' )['uri'] . '/' . wecodeart_config( 'directories' )['languages'] 
+		);
 
 		// Automatic Feed Links
 		add_theme_support( 'automatic-feed-links' );
@@ -86,52 +84,48 @@ class Support {
 		add_theme_support( 'editor-style' );
 
 		// Custom Logo
-		add_theme_support( 'custom-logo', array(
+		add_theme_support( 'custom-logo', [
 			'height'      => 50,
 			'width'       => 100,
-		) );
+		] );
 
-		/**
-		 * Add support for responsive embedded content.
-		 */
+		// HTML5
+		add_theme_support( 'html5', [ 'gallery', 'caption' ] );
+
+		// Responsive Embeds
 		add_theme_support( 'responsive-embeds' );
 
-		// Add support for Meta info for posts other than Page Type 
-		foreach( $get_post_types as $type ) { 
-			add_post_type_support( $type, 'wecodeart-post-info' );
-		}
-
-		// Register New Menu
-		register_nav_menus( array(
-			'primary' => esc_html__( 'Primary Menu', 'wecodeart' ),
-		) );
+		// AMP Support
+		add_theme_support( 'amp', apply_filters( 'wecodeart/filter/support/amp', [ 
+			'paired' => true 
+		] ) );
 
 		// Add custom editor font sizes.
 		add_theme_support(
 			'editor-font-sizes',
 			array(
 				array(
-					'name'      => esc_html__( 'Small', 'wecodeart' ),
-					'shortName' => esc_html__( 'S', 'wecodeart' ),
+					'name'      => esc_html__( 'Small', wecodeart_config( 'textdomain' ) ),
+					'shortName' => esc_html__( 'S', wecodeart_config( 'textdomain' ) ),
 					'size'      => 14,
 					'slug'      => 'small',
 				),
 				array(
-					'name'      => esc_html__( 'Normal', 'wecodeart' ),
-					'shortName' => esc_html__( 'M', 'wecodeart' ),
+					'name'      => esc_html__( 'Normal', wecodeart_config( 'textdomain' ) ),
+					'shortName' => esc_html__( 'M', wecodeart_config( 'textdomain' ) ),
 					'size'      => 16,
 					'slug'      => 'normal',
 				),
 
 				array(
-					'name'      => esc_html__( 'Large', 'wecodeart' ),
-					'shortName' => esc_html__( 'L', 'wecodeart' ),
+					'name'      => esc_html__( 'Large', wecodeart_config( 'textdomain' ) ),
+					'shortName' => esc_html__( 'L', wecodeart_config( 'textdomain' ) ),
 					'size'      => 26,
 					'slug'      => 'large',
 				),
 				array(
-					'name'      => esc_html__( 'Huge', 'wecodeart' ),
-					'shortName' => esc_html__( 'XL', 'wecodeart' ),
+					'name'      => esc_html__( 'Huge', wecodeart_config( 'textdomain' ) ),
+					'shortName' => esc_html__( 'XL', wecodeart_config( 'textdomain' ) ),
 					'size'      => 49.5,
 					'slug'      => 'huge',
 				),
@@ -139,35 +133,41 @@ class Support {
 		);
 
 		// Editor color palette.
-		add_theme_support(
-			'editor-color-palette',
-			array(
-				array(
-					'name'  => esc_html__( 'Primary', 'wecodeart' ),
-					'slug'  => 'primary',
-					'color' => '#0088cc',
-				),
-				array(
-					'name'  => esc_html__( 'Secondary', 'wecodeart' ),
-					'slug'  => 'secondary',
-					'color' => '#0066cc',
-				),
-				array(
-					'name'  => esc_html__( 'Dark Gray', 'wecodeart' ),
-					'slug'  => 'dark-gray',
-					'color' => '#111',
-				),
-				array(
-					'name'  => esc_html__( 'Light Gray', 'wecodeart' ),
-					'slug'  => 'light-gray',
-					'color' => '#f1f3f7',
-				),
-				array(
-					'name'  => esc_html__( 'White', 'wecodeart' ),
-					'slug'  => 'white',
-					'color' => '#FFF',
-				),
-			)
-		);
+		$wecodeart_colors = apply_filters( 'wecodeart/filter/support/editor-color-palette', [
+			'primary' 	=> [ 'color' => '#2388ed', 'label' => 'Primary' 	],
+			'secondary' => [ 'color' => '#6c757d', 'label' => 'Secondary' 	],
+			'danger' 	=> [ 'color' => '#dc3545', 'label' => 'Danger' 		],
+			'success' 	=> [ 'color' => '#7dc855', 'label' => 'Success' 	],
+			'info' 		=> [ 'color' => '#17a2b8', 'label' => 'Info' 		],
+			'warning' 	=> [ 'color' => '#ffc107', 'label' => 'Warning'		],
+			'dark' 		=> [ 'color' => '#343a40', 'label' => 'Dark' 		],
+			'light' 	=> [ 'color' => '#f1f3f7', 'label' => 'Light' 		],
+			'white' 	=> [ 'color' => '#ffffff', 'label' => 'White' 		],
+		] );
+
+		$colors = [];
+		foreach( $wecodeart_colors as $slug => $color ) {
+			$colors[] = [
+				'name' 	=> esc_html__( $color['label'], wecodeart_config( 'textdomain' ) ),
+				'slug'	=> esc_attr( strtolower( $slug ) ),
+				'color'	=> sanitize_hex_color( $color['color'] ),
+			];
+		}
+
+		add_theme_support( 'editor-color-palette', $colors );
+	}
+
+	/**
+	 * Register Menus
+	 *
+	 * @since	3.9.5
+	 *
+	 * @return 	void
+	 */
+	public function register_menus() {
+		// Register New Menu
+		register_nav_menus( [ 
+			'primary' => esc_html__( 'Primary Menu', wecodeart_config( 'textdomain' ) ) 
+		] );
 	}
 }

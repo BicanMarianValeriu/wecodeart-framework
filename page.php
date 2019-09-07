@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Page PHP
  * @since 	    3.5
- * @version	    3.5
+ * @version	    3.9.5
  */
 
-wecodeart();
+wecodeart( 'layout' );

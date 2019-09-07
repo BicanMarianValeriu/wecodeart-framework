@@ -213,17 +213,19 @@ class Header {
 	 * @version v2.2
 	 */
 	public function meta_pingback() {
-		if ( is_singular() && pings_open() ) printf( '<link rel="pingback" href="%s" />' . "\n", get_bloginfo( 'pingback_url' ) );
+		if ( is_singular() && pings_open() ) {
+			printf( '<link rel="pingback" href="%s" />' . "\n", get_bloginfo( 'pingback_url' ) );
+		}
 	}
 
 	/**
 	 * Add a meta viewport printed in wp_head
 	 *
-	 * @since	v2.2
-	 * @version v2.2
+	 * @since	2.2.x
+	 * @version 3.9.5
 	 */
 	public function meta_viewport() {
-		$viewport = apply_filters( 'wecodeart_filter_viewport_value', 'width=device-width, initial-scale=1' );
+		$viewport = apply_filters( 'wecodeart/filter/viewport', 'width=device-width, initial-scale=1' );
 		printf( '<meta name="viewport" content="%s" />' . "\n", esc_attr( $viewport ) );
 	}
 }

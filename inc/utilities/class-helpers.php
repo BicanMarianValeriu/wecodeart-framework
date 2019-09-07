@@ -90,4 +90,30 @@ class Helpers {
 		else $value = ''; 
 		return empty( $value ) && null !== $default ? $default : $value;
 	}
+
+	/**
+	 * Kses SVG
+	 *
+	 * @param 	string 	$data
+	 *
+	 * @return 	string
+	 */
+	public static function kses_svg( string $data ) {
+		return wp_kses( $data, [ 
+			'svg' => [
+				'class'  		=> true,
+				'aria-hidden'  	=> true,
+				'role' 			=> true,
+				'focusable'    	=> true,
+				'xmlns'    		=> true,
+				'viewbox' 		=> true,
+			],
+			'g' 	=> [],
+			'path' 	=> [
+				'd' 	=> true,
+				'class' => true,
+				'fill'	=> true
+			]
+		] );
+	}
 }

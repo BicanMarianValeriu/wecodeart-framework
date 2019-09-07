@@ -9,7 +9,7 @@
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.6
- * @version		3.8.1
+ * @version		3.9.5
  */
 
 namespace WeCodeArt;
@@ -26,7 +26,8 @@ use WeCodeArt\Customizer\Configs;
  */
 class Customizer {
 
-	use \WeCodeArt\Singleton; 
+	use \WeCodeArt\Singleton;
+	use \WeCodeArt\Core\Scripts\Base;
 
 	/**
 	 * Customizer Configurations.
@@ -50,7 +51,7 @@ class Customizer {
 		add_action( 'customize_register', array( $this, 'apply_defaults'	) );
 
 		// Add Preview Script.
-		add_action( 'customize_preview_init', array( $this, 'enqueue_preview' ) );
+		add_action( 'customize_preview_init', [ $this, 'enqueue_preview' ] );
 
 		// Custom Controls.
 		Controls::get_instance();
@@ -70,19 +71,18 @@ class Customizer {
 	 * Grab our Customizer Scripts.
 	 *
 	 * @since 	unknown
-	 * @version	3.8.9
+	 * @version	3.9.5
 	 */
 	public function enqueue_preview() {
-		$handle = strtolower( str_replace( '\\', '-', __CLASS__ ) ) . '-preview';
-		$folder = defined( WP_DEBUG ) && WP_DEBUG === true ? 'unminified' : 'minified';
 
 		wp_enqueue_script( 
-			$handle, 
-			get_theme_file_uri( '/assets/' . $folder . '/js/customizer/preview.js' ), 
+			$this->make_handle( 'preview' ),
+			$this->get_asset( 'js', 'preview' ),
 			[ 'jquery','customize-preview' ], 
-			'3.5', 
+			wecodeart( 'version' ), 
 			true 
 		);
+		
 	}
 
 	/**
@@ -153,8 +153,7 @@ class Customizer {
 		 * @since 3.6.0.3
 		 */
 		// Customizer defaults for Post Types
-		$get_post_types = get_post_types( [ 'public' => true, 'publicly_queryable' => true ] );
-		foreach( $get_post_types as $type ) { 
+		foreach( wecodeart( 'public_post_types' ) as $type ) { 
 			// Skip the WOO CPT
 			if( $type === 'product' ) continue;
 			// Entry Meta

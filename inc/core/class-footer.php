@@ -9,12 +9,12 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.7
+ * @version		3.9.5
  */
 
 namespace WeCodeArt\Core;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Customizer;
 use WeCodeArt\Utilities\Markup;
@@ -23,6 +23,7 @@ use WeCodeArt\Utilities\Markup;
  * Handles Footer Area of the Framework
  */
 class Footer {
+
 	use \WeCodeArt\Singleton;
 
 	/**
@@ -79,7 +80,7 @@ class Footer {
 	 *
 	 * @uses	WeCodeArt\Utilities\Markup::wrap()
 	 * @since 	1.0
-	 * @version 3.7.2
+	 * @version 3.9.5
 	 *
 	 * @return 	void
 	 */
@@ -96,7 +97,7 @@ class Footer {
 			<span class="attribution__credits">
 				<?php
 					printf( 
-						esc_html__( 'Built on %1$s.', 'wecodeart' ), 
+						esc_html__( 'Built on %1$s.', wecodeart_config( 'textdomain' ) ), 
 						'<a href="https://www.wecodeart.com/" target="_blank">WeCodeArt Framework</a>' 
 					);
 				?>
@@ -131,27 +132,26 @@ class Footer {
 	 * This function generates the columns fot the footer
 	 *
 	 * @since	1.5
-	 * @version	3.7.7
+	 * @version	3.9.5
 	 *
 	 * @return 	array
 	 */
 	public static function footer_widgets() {
 		$columns = apply_filters( 'wecodeart/filter/footer/columns', (int) 4 );
 
-		$defaults = [];
+		$widgets = [];
 		foreach( range( 1, $columns ) as $column ) {
-			$defaults['footer-' . (string) $column ] = [
-				'label'    => sprintf( esc_html__( 'Footer %s', 'wecodeart' ), $column ),
-				'callback' => function() use ( $column ) {
+			$widgets['footer-' . (string) $column ] = [
+				'id'		=> 'footer-' . $column,
+				'label'    	=> sprintf( esc_html__( 'Footer %s', wecodeart_config( 'textdomain' ) ), $column ),
+				'callback' 	=> function() use ( $column ) {
 					self::render_column( $column );
 				}
 			];
-		} 
+		}
 		
 		// Filter the generated array.
-		$widgets = apply_filters( 'wecodeart/filter/footer/widgets', (array) $defaults );
-
-		return $widgets;
+		return apply_filters( 'wecodeart/filter/footer/widgets', (array) $widgets );
 	} 
 
 	/**
@@ -179,31 +179,27 @@ class Footer {
 	 * Register Sidebars Based on Active Options
 	 *
 	 * @since	unknown
-	 * @version	3.7.0
+	 * @version	3.9.5
 	 *
 	 * @return 	void
 	 */
 	public function register_sidebars() {
-		// Get theme mod
-		$options = get_theme_mod( 'footer-layout-modules', Customizer::get_defaults( 'footer-layout-modules' ) );
+		// Get theme mod.
+		$options 	= get_theme_mod( 'footer-layout-modules', Customizer::get_defaults( 'footer-layout-modules' ) );
 
-		// Get Default Footer Columns
-		$columns = self::footer_widgets();
-		$active = [];
-		foreach( $options as $option ) if( array_key_exists( $option, $columns ) ) $active[] = $option;
-		if( ! $active ) return;
+		// Get Default Footer Columns.
+		$columns 	= self::footer_widgets();
+		$active 	= array_intersect_key( $options, array_keys( $columns ) );
 
-		// Register Sidebar for each active footer columns
-		foreach( $active as $sidebar ) {
-			if( isset( $columns[$sidebar]['not_a_sidebar'] ) && $columns[$sidebar]['not_a_sidebar'] === true ) continue;
-			register_sidebar( [
-				'name'          => $columns[$sidebar]['label'], // @wpcs ok - translatable in $var
-				'id'            => $sidebar,
-				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<h4 class="widget__title">',
-				'after_title'   => '</h4>',
-			] );
+		if( empty( $active ) ) {
+			return;
 		}
+
+		// Register Sidebar for each active footer columns.
+		$sidebars = wp_list_filter( $columns, [ 
+			'sidebar' => false 
+		], 'NOT' );
+
+		wecodeart( 'register_sidebars', $sidebars );
 	}
 }

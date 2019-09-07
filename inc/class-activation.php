@@ -9,13 +9,14 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.8.1
+ * @version		3.9.5
  */
 
 namespace WeCodeArt;
 
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+defined( 'ABSPATH' ) || exit(); 
 
+use WeCodeArt\Config;
 use WeCodeArt\Admin\Notifications;
 
 /**
@@ -94,11 +95,11 @@ class Activation {
 	 * Set Translation Messages
 	 *
 	 * @since 	3.7.9
+	 * @version	3.9.5
 	 */
 	public function set_i18n( $args = [] ) {
 		$defaults = [
 			'customizer' => esc_html__( 'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 'wecodeart' ),
-			'checkpoint' => esc_html__( 'WeCodeArt Framework requires at least %s version %s. You are running version %s. Please upgrade and try again.', 'wecodeart' )
 		];
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/i18n', $defaults ) );
@@ -110,24 +111,13 @@ class Activation {
 	 * Set Requirements
 	 *
 	 * @since 	3.5
-	 * @version	3.8.6
+	 * @version	3.9.5
 	 */
 	public function set_requirements( $args = [] ) {
-		// Setup an array with data to check compatability.
-		$defaults = [
-			[
-				'label'		=> 'WordPress',
-				'required' 	=> '5.0',
-				'installed' => $GLOBALS['wp_version']
-			],
-			[
-				'label' 	=> 'PHP',
-				'required' 	=> '5.6.2',
-				'installed' => phpversion()
-			]
-		];
+		$config 		= Config::get_config();
+		$requirements 	= isset( $config['requirements'] ) ? $config['requirements'] : [];
 
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/requirements', $defaults ) );
+		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/requirements', $requirements ) );
 
 		return $this->requirements = $args;	
 	}
@@ -136,24 +126,33 @@ class Activation {
 	 * Compare Requirements
 	 *
 	 * @since 	3.5
-	 * @version	3.5
+	 * @version	3.9.5
 	 */
 	public function compare_requirements() {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
 			$this->requirements[$key]['failed'] = version_compare( $val['installed'], $val['required'], '<=' );
-		}	
+		}
 	}
 
 	/**
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	3.8.1
+	 * @version	3.9.5
 	 */
 	public function after_switch_theme() {
-		switch_theme( WP_DEFAULT_THEME );
-		unset( $_GET['activated'] );
+		unset( $_GET['activated'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		$old_theme = wp_get_theme( get_option( 'theme_switched' ) );
+		if ( $old_theme->exists() && strpos( $old_theme->get_stylesheet(), 'wecodeart' ) === false ) {
+			$fallback_stylesheet = $old_theme->get_stylesheet();
+		} else {
+			$fallback_stylesheet = WP_DEFAULT_THEME;
+		}
+	
+		switch_theme( $fallback_stylesheet );
+
 		$this->admin_notice(); 
 	}
 
@@ -161,14 +160,13 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	3.8.1
+	 * @version	3.9.5
 	 */
 	public function admin_notice() {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
 			if( $val['failed'] === true ) {
-				$message = sprintf( $this->messages['checkpoint'], $val['label'], $val['required'], $val['installed'] );
-				Notifications::add( [ 'type' => 'error', 'message' => wpautop( $message ) ] );
+				Notifications::add( [ 'type' => 'error', 'message' => wpautop( $val['i18n'] ) ] );
 			}
 		}	
 	}
@@ -177,7 +175,7 @@ class Activation {
 	 * Show an error notice box on WP Customizer
 	 *
 	 * @since 	1.8
-	 * @version	3.5 
+	 * @version	3.9.5
 	 */
 	public function customizer_notice() {
 		if( ! $this->requirements ) return;
@@ -186,16 +184,18 @@ class Activation {
 				wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
 				break;
 			}
-		} 
+		}
 	}
 
 	/**
 	 * Prevents the Theme Preview from being loaded.
 	 *
 	 * @since 	1.8
-	 * @version	3.5 
+	 * @version	3.5
 	 */
 	public function redirect_notice() {
-		if( isset( $_GET['preview'] ) ) wp_die( $this->messages['customizer'] );
+		if( isset( $_GET['preview'] ) ) {
+			wp_die( $this->messages['customizer'] );
+		}
 	}
 }

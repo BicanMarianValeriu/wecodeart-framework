@@ -43,6 +43,9 @@ class Input {
 	 * Get the HTML of the input
 	 *
 	 * @access 	public
+	 * @since	unknown
+	 * @version	3.9.5
+	 *
 	 * @param 	string 		$type		text/number/etc
 	 * @param 	array 		$args		$this->defaults/args
 	 *
@@ -51,7 +54,7 @@ class Input {
 	public static function compile( $type = 'hidden', $label, $attrs = [], $choices = [], $messages = [] ) {
 		ob_start();
 		self::input( $type, $label, $attrs, $choices, $messages );
-		return ob_get_clean();
+		return preg_replace( '/(\>)\s*(\<)/m', '$1$2', ob_get_clean() );
 	}
 	
 	/**
