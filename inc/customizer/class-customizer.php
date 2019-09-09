@@ -78,7 +78,7 @@ class Customizer {
 		wp_enqueue_script( 
 			$this->make_handle( 'preview' ),
 			$this->get_asset( 'js', 'preview' ),
-			[ 'jquery','customize-preview' ], 
+			[ 'jquery', 'customize-preview' ], 
 			wecodeart( 'version' ), 
 			true 
 		);

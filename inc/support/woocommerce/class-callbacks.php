@@ -9,12 +9,12 @@
  * @subpackage 	Support\WooCommerce\Callbacks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.3
+ * @version		3.9.6
  */
 
 namespace WeCodeArt\Support\WooCommerce;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Utilities\Helpers as Helpers;
 
@@ -29,13 +29,13 @@ class Callbacks {
 	 * Checks if the current page is a product archive
 	 *
 	 * @since	2.2
-	 * @version	3.7.3
+	 * @version	3.9.6
 	 *
 	 * @return 	boolean
 	 */
 	public static function _is_woocommerce_archive() {
 		if ( Helpers::detect_plugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
-			if ( is_post_type_archive( 'product' ) || is_product_taxonomy() || is_product_category() || is_product_tag() ) {
+			if ( is_shop() || is_product_taxonomy() || is_product_category() || is_product_tag() ) {
 				return true;
 			} else {
 				return false;

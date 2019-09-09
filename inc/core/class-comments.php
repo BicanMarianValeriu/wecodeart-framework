@@ -197,14 +197,13 @@ class Comments {
 	 * Render Comment Form.
 	 *
 	 * @since	unknown
-	 *
-	 * @version 3.9.2
+	 * @version 3.9.5
 	 */
 	public function render_respond() {
 		// Bail if comments are closed for this post type.
 		if ( ( is_singular() && ! comments_open() ) ) return;
 
-		$args = apply_filters( 'wecodeart/filter/comments/form/args', [
+		$args = apply_filters( 'wecodeart/filter/comments/respond/args', [
 			'format'			 	=> 'html5',
 			'title_reply_before' 	=> '<h3 id="reply-title" class="headline"> ' . SVG::compile( 'comment-dots' ) . ' ',
 			'title_reply_after'  	=> '</h3>',

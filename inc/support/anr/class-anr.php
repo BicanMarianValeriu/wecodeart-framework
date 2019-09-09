@@ -66,9 +66,12 @@ class ANR {
 	 * @return  void
 	 */
 	public function wrapp_form_field() {
-		Markup::wrap( 'comment-captcha', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'form-group comment-form-captcha col-12 col-md-7' ] ],
-		], [ Captcha::init(), 'form_field' ] ); // Echoes the form_field().
+		Markup::wrap( 'comment-captcha', [ [ 
+			'tag' => 'div', 
+			'attrs' => [ 
+				'class' => 'form-group comment-form-captcha col-12 col-md-7' 
+			]
+		] ], [ Captcha::init(), 'form_field' ] ); // Echoes the form_field().
 	}
 
 	/**
@@ -88,9 +91,12 @@ class ANR {
 			return $defaults;
 		}
 
-		$defaults .= Markup::wrap( 'comment-captcha', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'form-group comment-form-captcha col-12 col-md-7' ] ],
-		], [ Captcha::init(), 'captcha_form_field' ], [ true ], false );
+		$defaults .= Markup::wrap( 'comment-captcha', [ [ 
+			'tag' 	=> 'div', 
+			'attrs' => [ 
+				'class' => 'form-group comment-form-captcha col-12 col-md-7' 
+			]
+		] ], [ Captcha::init(), 'captcha_form_field' ], [ true ], false );
 
 		return $defaults;
 	}

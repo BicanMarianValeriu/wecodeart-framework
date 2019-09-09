@@ -9,15 +9,15 @@
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.6.0.3
+ * @version		3.9.6
  */
 
 namespace WeCodeArt\Support\WooCommerce\Customizer;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Customizer\Config as Config;
-use WeCodeArt\Customizer\Formatting as Formatting;
+use WeCodeArt\Customizer\Config;
+use WeCodeArt\Customizer\Formatting;
 use WeCodeArt\Support\WooCommerce\Callbacks;
 
 /**
@@ -38,10 +38,9 @@ class Content extends Config {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
 		$callbacks	= Callbacks::get_instance();
-		// Content Modules Choices
-		$c_modules = array();
-		$inner_modules = \WeCodeArt\Core\Content::content_modules();
-		foreach( $inner_modules as $key => $val ) $c_modules[$key] = $val['label']; 
+
+		// Content Modules Choices.
+		$c_modules = wp_list_pluck( \WeCodeArt\Core\Content::content_modules(), 'label' );
 
 		$_configs = array( 
 			array(
@@ -55,27 +54,27 @@ class Content extends Config {
 					'container' 		=> esc_html__( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 				], 
-				'priority' 		=> 15, 
-				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
-				'transport' 		   => 'postMessage',
-				'active_callback'	   => [ $callbacks, '_is_woocommerce_archive' ],
-				'transport' 		   => 'postMessage' 
+				'priority'			=> 15, 
+				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ],
+				'transport'			=> 'postMessage',
+				'active_callback'	=> [ $callbacks, '_is_woocommerce_archive' ],
+				'transport'			=> 'postMessage' 
 			),
 			array(
-				'name'			=> 'content-layout-modules-product-archive',
-				'type'        	=> 'control',
-				'control'  		=> 'wecodeart-sortable',
-				'section'		=> 'content-layout',
-				'title'			=> esc_html__( 'Content Modules: Product Archive', 'wecodeart' ),
-				'description'	=> esc_html__( 'Enable and reorder Site Inner modules.', 'wecodeart' ),
-				'priority'		=> 20, 
-				'choices'		=> $c_modules,
-				'active_callback' => [ $callbacks, '_is_woocommerce_archive' ],
-				'transport' 		   => 'postMessage',
-				'partial'		=> [
-					'selector'        => '.content-area',
-					'render_callback' => [ 'WeCodeArt\Support\WooCommerce\Customizer', 'render_content' ],
-					'container_inclusive' => true
+				'name'				=> 'content-layout-modules-product-archive',
+				'type'        		=> 'control',
+				'control'  			=> 'wecodeart-sortable',
+				'section'			=> 'content-layout',
+				'title'				=> esc_html__( 'Content Modules: Product Archive', 'wecodeart' ),
+				'description'		=> esc_html__( 'Enable and reorder Site Inner modules.', 'wecodeart' ),
+				'priority'			=> 20, 
+				'choices'			=> $c_modules,
+				'active_callback' 	=> [ $callbacks, '_is_woocommerce_archive' ],
+				'transport'			=> 'postMessage',
+				'partial'			=> [
+					'selector'        		=> '.content-area',
+					'render_callback' 		=> [ Partials::get_instance(), 'render_content' ],
+					'container_inclusive' 	=> true
 				]
 			),
 			array(
@@ -89,26 +88,26 @@ class Content extends Config {
 					'container' 		=> esc_html__( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 				], 
-				'priority' 		=> 15, 
-				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
-				'transport' 		   => 'postMessage',
-				'active_callback'	   => 'is_product',
-				'transport' 		   => 'postMessage' 
+				'priority'			=> 15, 
+				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ],
+				'transport'			=> 'postMessage',
+				'active_callback'	=> 'is_product',
+				'transport'			=> 'postMessage' 
 			),
 			array(
-				'name'			=> 'content-layout-modules-product-singular',
-				'type'        	=> 'control',
-				'control'  		=> 'wecodeart-sortable',
-				'section'		=> 'content-layout',
-				'title'			=> esc_html__( 'Content Modules: Product Single', 'wecodeart' ),
-				'description'	=> esc_html__( 'Enable and reorder Site Inner modules.', 'wecodeart' ),
-				'priority'		=> 20, 
-				'choices'		=> $c_modules,
-				'active_callback' => 'is_product',
-				'transport'		=> 'postMessage',
-				'partial'		=> [
+				'name'				=> 'content-layout-modules-product-singular',
+				'type'        		=> 'control',
+				'control'  			=> 'wecodeart-sortable',
+				'section'			=> 'content-layout',
+				'title'				=> esc_html__( 'Content Modules: Product Single', 'wecodeart' ),
+				'description'		=> esc_html__( 'Enable and reorder Site Inner modules.', 'wecodeart' ),
+				'priority'			=> 20, 
+				'choices'			=> $c_modules,
+				'active_callback' 	=> 'is_product',
+				'transport'			=> 'postMessage',
+				'partial'			=> [
 					'selector'        => '.content-area',
-					'render_callback' => [ 'WeCodeArt\Support\WooCommerce\Customizer', 'render_content' ],
+					'render_callback' => [ Partials::get_instance(), 'render_content' ],
 					'container_inclusive' => true
 				]
 			)

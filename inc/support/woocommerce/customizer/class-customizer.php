@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.6.2
+ * @version		3.9.6
  */
 
 namespace WeCodeArt\Support\WooCommerce;
@@ -34,13 +34,13 @@ class Customizer {
 	public function init() {
 		add_filter( 'wecodeart/filter/customizer/defaults', [ $this, 'extend_defaults' ] );
 
-		new Customizer\Content;
+		new Customizer\Content();
 	}
 
 	/**
 	 * Extend Customizer default options
 	 *
-	 * @since 3.6.0.3
+	 * @since 3.6.0
 	 */
 	public function extend_defaults( $defaults ) {
 		$defaults['content-layout-container-product-archive'] = 'container';
@@ -49,47 +49,5 @@ class Customizer {
 		$defaults['content-layout-modules-product-singular'] = [ 'content', 'primary' ];
 
 		return $defaults;
-	} 
-
-	/**
-	 * A function to render woo content with hooks in it
-	 * Used for rendering callback in customizer only
-	 *
-	 * @since   3.5
-	 *
-	 * @return  void 
-	 */
-	public static function render_content() {  
-		do_action( 'woocommerce_before_main_content' );
-		if ( is_singular( 'product' ) ) {
-			while ( have_posts() ) :
-				the_post();
-				wc_get_template_part( 'content', 'single-product' );
-			endwhile;	
-		} else {
-			?>
-			<header class="woocommerce-products-header">
-				<?php if( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
-					<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
-				<?php endif; ?>
-				<?php do_action( 'woocommerce_archive_description' ); ?>
-			</header>
-			<?php if( woocommerce_product_loop() ) {
-				do_action( 'woocommerce_before_shop_loop' );
-				woocommerce_product_loop_start();
-				if( wc_get_loop_prop( 'total' ) ) {
-					while ( have_posts() ) {
-						the_post(); 
-						do_action( 'woocommerce_shop_loop' );
-						wc_get_template_part( 'content', 'product' );
-					}
-				}
-				woocommerce_product_loop_end();
-				do_action( 'woocommerce_after_shop_loop' );
-			} else { 
-				do_action( 'woocommerce_no_products_found' );
-			} 
-		}
-		do_action( 'woocommerce_after_main_content' );  
-	} 
+	}
 }

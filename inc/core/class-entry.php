@@ -33,19 +33,19 @@ class Entry {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_filter( 'the_password_form', [ $this, 'render_paswordprotected' ] );
+		add_filter( 'the_password_form', [ $this, 'render_pasword_protected' ] );
 
 		add_action( 'wecodeart_entry', 	[ $this, 'render_header' 	], 20 ); 
 		add_action( 'wecodeart_entry', 	[ $this, 'render_content' 	], 30 );
 		add_action( 'wecodeart_entry',	[ $this, 'render_footer' 	], 40 );  
 		
 		add_action( 'wecodeart/hook/entry/header',	[ $this, 'render_title' 		], 10 );
-		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_read_more' 	], 10 );
+		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_read_more'		], 10 );
         add_action( 'wecodeart/hook/entry/footer',  [ Pagination::get_instance(), 	'entry_content'		], 10 );
 		add_action( 'wecodeart/hook/entry/footer', 	[ Author::get_instance(),		'author_box_single'	], 20 );
         add_action( 'wecodeart/hook/entry/footer',  [ Pagination::get_instance(), 	'entry_prev_next' 	], 40 );
 
-		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_noposts' ], 10 );
+		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_no_posts' ], 10 );
 
 		add_filter( 'wecodeart/filter/entry/title/disabled', [ $this, 'filter_home_title' ], 10, 2 );
 
@@ -181,33 +181,40 @@ class Entry {
 				'class' => is_singular() ? 'entry-content' : 'entry-excerpt'
 			]
 		] ], is_singular() ? 'the_content' : 'the_excerpt' );
-	} 
+	}
 
 	/**
-	 * Echo the post read more button.
+	 * Entry Meta Read More Template
 	 *
-	 * @since 	unknown
-	 * @version 3.6.4
+	 * @since	1.0
+	 * @version	3.9.6
 	 *
-	 * @return 	void
+	 * @param 	array	$args
+	 * @param 	bool	$echo
+	 *
+	 * @return 	string
 	 */
-	public function render_read_more() {
-		// Do dont return on Singular
-		if ( ! is_singular() ) {
-			echo Entry\Meta::read_more();
+	public function render_read_more( $args = [], $echo = true ) {
+		if ( is_singular() ) {
 			return;
 		}
+
+		Markup::template( [ 'entry/read', 'more' ], wp_parse_args( $args, [
+			'permalink'	=> get_the_permalink(),
+			'title'		=> get_the_title(),
+			'post_id' 	=> get_the_ID(),
+		] ), $echo );
 	}
 
 	/**
 	 * Return the content for No Posts
 	 *
 	 * @since	2.2
-	 * @version	3.7.1
+	 * @version	3.9.6
 	 *
 	 * @return	string
 	 */
-	public function render_noposts() { ?>
+	public function render_no_posts() { ?>
 		<p><?php 
 
 			echo esc_html( apply_filters( 
@@ -223,11 +230,11 @@ class Entry {
 	 * Return the content for No Posts
 	 *
 	 * @since	3.5
-	 * @version	3.9.5
+	 * @version	3.9.6
 	 *
 	 * @return 	void
 	 */
-	public function render_paswordprotected( $template ) {
+	public function render_pasword_protected( $template ) {
 		$template = Markup::template( 'entry/protected', [], false );
 		$template = trim( preg_replace( '/\s+/', ' ', $template ) );
 		$template = preg_replace( '/>\s*</', '><', $template );
@@ -247,10 +254,15 @@ class Entry {
 	 */
 	public function filter_home_title( $disabled, $post_id ) {
 		$custom_page = get_option( 'page_on_front' );
-		if( intval( $custom_page ) === 0 ) return $disabled;
-		if( ! is_search() ) {
-			if( intval( $custom_page ) === intval( $post_id ) ) $disabled = true;
+
+		if( intval( $custom_page ) === 0 ) {
+			return $disabled;
 		}
+
+		if( ! is_search() && intval( $custom_page ) === intval( $post_id ) ) {
+			$disabled = true;
+		}
+
 		return $disabled;
 	}
 }

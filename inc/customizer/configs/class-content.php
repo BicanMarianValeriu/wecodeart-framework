@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.5
+ * @version		3.9.6
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Customizer\Config;
 use WeCodeArt\Customizer\Formatting;
+use WeCodeArt\Utilities\Callbacks;
 use WeCodeArt\Support\WooCommerce\Callbacks as WooCB;
 
 /**
@@ -38,12 +39,8 @@ class Content extends Config {
 		$formatting = Formatting::get_instance();
 		$callbacks	= WooCB::get_instance();
 
-		// Content Modules Choices
-		$c_modules = array();
-		$inner_modules = \WeCodeArt\Core\Content::content_modules();
-		foreach( $inner_modules as $key => $val ) {
-			$c_modules[$key] = $val['label'];
-		}
+		// Content Modules Choices.
+		$c_modules = wp_list_pluck( \WeCodeArt\Core\Content::content_modules(), 'label' );
 
 		$_configs = array( 
 			array(
@@ -239,11 +236,7 @@ class Content extends Config {
 		 * Entry Configurable Meta Info
 		 * @since 3.6 
 		 */
-		$m_modules = array();
-		$meta_modules = \WeCodeArt\Core\Entry\Meta::modules();
-		foreach( $meta_modules as $key => $val ) {
-			$m_modules[$key] = $val['label'];
-		}
+		$meta_modules = wp_list_pluck( \WeCodeArt\Core\Entry\Meta::modules(), 'label' );
 
 		foreach( $public_posts as $type ) { 
 			if( ! post_type_supports( $type, 'wecodeart-post-info' ) ) {
@@ -260,11 +253,11 @@ class Content extends Config {
 					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Archive', 'wecodeart' ), $type_label ),
 					'description'	=> esc_html__( 'Enable/Disable/Reorder Entry Meta information modules for current post type - archive.', 'wecodeart' ),
 					'priority'		=> 5, 
-					'choices'		=> $m_modules,  
+					'choices'		=> $meta_modules,  
 					'transport'		=> 'postMessage',
-					'active_callback' => function() use ( $type ) { 
-						if( $type === 'post' && ( is_home() || is_archive() || is_search() ) ) return true;
-						return is_post_type_archive( $type ); 
+					'active_callback' => function() use ( $type ) {
+						if( $type === 'post' && Callbacks::is_post_archive() ) return true;
+						return is_post_type_archive( $type );
 					},
 					'partial'		=> [
 						'selector'        		=> '.entry-meta',
@@ -280,7 +273,7 @@ class Content extends Config {
 					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Single', 'wecodeart' ), $type_label ),
 					'description'	=> esc_html__( 'Enable/Disable/Reorder Entry Meta information modules for current post type - single.', 'wecodeart' ),
 					'priority'		=> 10, 
-					'choices'		=> $m_modules,  
+					'choices'		=> $meta_modules,  
 					'transport'		=> 'postMessage',
 					'active_callback' => function() use( $type ) { return is_singular( $type ); },
 					'partial'		=> [

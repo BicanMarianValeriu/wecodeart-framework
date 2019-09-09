@@ -9,7 +9,7 @@
  * @subpackage 	Entry\Meta\Edit
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.9.5
- * @version		3.9.5
+ * @version		3.9.6
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -25,6 +25,6 @@ defined( 'ABSPATH' ) || exit();
         get_the_title( $post_id ) 
     ) ); ?>"><?php
 
-    edit_post_link( esc_html( $i18n['text'] ), '', '', isset( $post_id ) ?: 0, 'entry-edit__link' );
+    edit_post_link( esc_html__( 'Edit', wecodeart_config( 'textdomain' ) ), '', '', $post_id ?: 0, 'entry-edit__link' );
     
 ?></span>

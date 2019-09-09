@@ -39,20 +39,25 @@ class Meta {
 	 * Entry Meta Author Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.5
+	 * @version	3.9.6
 	 *
+	 * @param 	int		$author_id
 	 * @param 	bool	$echo
 	 *
 	 * @return 	string
 	 */
 	public static function author( $author_id = 0, $echo = true ) {
-		
+		// Only if post type supports.
+		if ( ! post_type_supports( get_post_type(), 'author' ) ) {
+			return;
+		}
+
 		$author_id 	= $author_id ?: get_the_author_meta( 'ID' );
 		$author		= get_the_author_meta( 'display_name', $author_id );
 		$author_url = get_author_posts_url( $author_id );
 
 		// In order to render something when ajax refreshed in customizer.
-		$author_name = $author ? $author : esc_html__( 'Author Name', wecodeart_config( 'textdomain' ) );
+		$author_name = $author ?: esc_html__( 'Author Name', wecodeart_config( 'textdomain' ) );
 		
 		Markup::template( 'entry/meta/author', [
 			'author_id'		=> $author_id,
@@ -98,7 +103,7 @@ class Meta {
 	 * Entry Meta Categories Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.5
+	 * @version	3.9.6
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -106,54 +111,16 @@ class Meta {
 	 * @return 	string
 	 */
 	public static function categories( $args = [], $echo = true ) {
-		// Set the defaults
-		$defaults = [
-			'before' 	=> SVG::compile( 'folders' ),
-			'after'  	=> '&nbsp;',
-			'sr_text'	=> esc_html__( 'Posted in ', wecodeart_config( 'textdomain' ) ),
-			'sep'    	=> ', ',
-		];
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/entry/meta/cats/defaults', $defaults ) );
-
-		// Get what we need
-		$primary_cat = get_post_meta( get_the_ID(), '_yoast_wpseo_primary_category', true );
-		if( $primary_cat ) {
-			$cats = sprintf( 
-				'<a href="%s" rel="category tag">%s</a>', 
-				esc_url( get_category_link( $primary_cat ) ),
-				esc_html( get_term_by( 'id', $primary_cat, 'category' )->name )
-			);
-
-			$args = wp_parse_args( [
-				'before' => SVG::compile( 'folder' )
-			], $args );
-		} else {
-			$cats = get_the_category_list( $args['sep'] );
-		}
-
-		// Do nothing if no cats
-		if ( ! $cats ) {
+		// Do nothing if no tags
+		if ( empty( get_the_category() ) ) {
 			return;
 		}
 
-		// The HTML
-		$output = apply_filters( 'wecodeart/filter/entry/meta/cats/html', sprintf( 
-				/* translators: %s: post cats */
-				__( '<span class="entry-cats">%1$s %2$s %3$s %4$s</span>', wecodeart_config( 'textdomain' ) ), 
-				$args[ 'before' ], 
-				'<span class="screen-reader-text">' . esc_html( $args['sr_text'] ) . '</span>',
-				$cats, 
-				$args[ 'after' ] 
-			), $args
-		);
-
-		if ( $echo ) {
-			echo $output;
-			return;
-		}
-
-		return $output;
+		Markup::template( 'entry/meta/categories', wp_parse_args( $args, [
+			'primary'	=> get_post_meta( get_the_ID(), '_yoast_wpseo_primary_category', true ),
+			'post_id' 	=> get_the_ID(),
+			'separator' => ', ',
+		] ), $echo );
 	}
 
 	/**
@@ -183,7 +150,7 @@ class Meta {
 	 * Entry Meta Comments Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.5
+	 * @version	3.9.6
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -191,7 +158,7 @@ class Meta {
 	 * @return 	string
 	 */
 	public static function comments( $args = [], $echo = true ) {
-		// Only if post type supports
+		// Only if post type supports.
 		if ( ! post_type_supports( get_post_type(), 'comments' ) ) {
 			return;
 		}
@@ -201,24 +168,8 @@ class Meta {
 			return;
 		}
 
-		$number     = (int) get_comments_number( get_the_ID() );
-
-		$classnames = [ 'entry-comments' ];
-
-		if( 0 === $number ) {
-			$classnames[] = 'entry-comments--none';
-		} elseif ( 1 === $number ) {
-			$classnames[] = 'entry-comments--one';
-		} elseif ( 1 < $number ) {
-			$classnames[] = 'entry-comments--multiple';
-		}
-		
-		if( post_password_required() ) {
-			$classnames[] = 'entry-comments--protected';
-		}
-
 		Markup::template( 'entry/meta/comments', wp_parse_args( $args, [
-			'classname'	=> esc_attr( implode( ' ', $classnames ) ),
+			'number'	=> (int) get_comments_number( get_the_ID() ),
 			'i18n' 		=> [
 				'more'        	=> esc_html__( '% Comments', 			wecodeart_config( 'textdomain' ) ),
 				'one'         	=> esc_html__( '1 Comment', 			wecodeart_config( 'textdomain' ) ),
@@ -232,7 +183,7 @@ class Meta {
 	 * Entry Meta Edit Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.5
+	 * @version	3.9.6
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -246,28 +197,6 @@ class Meta {
 		
 		Markup::template( [ 'entry/meta/edit', 'link' ], wp_parse_args( $args, [
 			'post_id' => get_the_ID(),
-			'i18n' => [
-				'text'	=> esc_html__( 'Edit', wecodeart_config( 'textdomain' ) ),
-			],
-		] ), $echo );
-	}
-
-	/**
-	 * Entry Meta Read More Template
-	 *
-	 * @since	1.0
-	 * @version	3.9.5
-	 *
-	 * @param 	array	$args
-	 * @param 	bool	$echo
-	 *
-	 * @return 	string
-	 */
-	public static function read_more( $args = [], $echo = true ) {
-		Markup::template( [ 'entry/meta/read', 'more' ], wp_parse_args( $args, [
-			'permalink'	=> get_the_permalink(),
-			'title'		=> get_the_title(),
-			'post_id' 	=> get_the_ID(),
 		] ), $echo );
 	}
 
@@ -275,33 +204,35 @@ class Meta {
 	 * Get Contextual options
 	 *
 	 * @since 	3.6
-	 * @version 3.9.5
+	 * @version 3.9.6
 	 *
 	 * @return 	array
 	 */
 	public static function get_options() {
-		// Default empty
+		// Default empty.
 		$options = [];
 		$context = '';
+		$post_tp = get_post_type();
 
-		foreach( wecodeart( 'public_post_types' ) as $type ) { 
-			// Post option preffix
-			$theme_mod =  'content-entry-meta-' . $type;
+		if( ! post_type_supports( $post_tp, 'wecodeart-post-info' ) ) {
+			return;
+		}
 
-			if( is_singular( $type ) ) {
-				$options = get_theme_mod( $theme_mod . '-singular' );
-				$context = 'single';
-			}
+		$types = wecodeart( 'public_post_types' );
 
-			if( is_post_type_archive( $type ) ) {
-				$options = get_theme_mod( $theme_mod . '-archive' );
-				$context = 'archive';
-			}
+		if( is_singular( $types ) ) {
+			$options = get_theme_mod( 'content-entry-meta-' . $post_tp . '-singular' );
+			$context = 'single';
+		}
 
-			if( $type === 'post' && Callbacks::is_post_archive() ) {
-				$options = get_theme_mod( $theme_mod . '-archive' );
-				$context = 'archive';
-			}
+		if( is_post_type_archive( $types ) ) {
+			$options = get_theme_mod( 'content-entry-meta-' . $post_tp . '-archive' );
+			$context = 'archive';
+		}
+
+		if( Callbacks::is_post_archive() ) {
+			$options = get_theme_mod( 'content-entry-meta-' . $post_tp . '-archive' );
+			$context = 'archive';
 		}
 
 		return apply_filters( 'wecodeart/filter/entry/meta/get_options', $options, $context );  
@@ -343,7 +274,7 @@ class Meta {
 			]
 		];
 		
-		// Return Modules
+		// Return Modules.
 		return apply_filters( 'wecodeart/filter/entry/meta/modules', $defaults ); 
 	}
 
@@ -359,7 +290,9 @@ class Meta {
 	 */
 	public static function render() {
 		// Do dont return on CPT Without Support.
-		if( ! post_type_supports( get_post_type(), 'wecodeart-post-info' ) ) return; 
+		if( ! post_type_supports( get_post_type(), 'wecodeart-post-info' ) ) {
+			return;
+		}
 
 		Markup::wrap( 'entry-meta', [ [ 
 				'tag' 	=> 'div', 

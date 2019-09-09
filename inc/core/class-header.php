@@ -75,10 +75,25 @@ class Header {
 	/**
 	 * Header Branding View
 	 *
+	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @since 	???
+	 * @version	3.9.6
+	 *
 	 * @return 	void
 	 */
 	public static function display_branding() {
-		get_template_part( 'views/header/bar', 'branding' );
+		Markup::wrap( 'header-branding', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'id' 	=> 'bar-branding',
+				'class' => 'header-bar__branding col col-lg-auto pr-0'
+			] 
+		], [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'class' => 'row no-gutters align-items-center'
+			]
+		] ], 'get_template_part', [ 'views/header/bar', 'branding'  ] );
 	}
 
 	/**

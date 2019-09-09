@@ -192,18 +192,24 @@ class WooCommerce {
 	 * Render Header Bar Cart Module
 	 *
 	 * @since   3.5
-	 * @version 3.9.5
+	 * @version 3.9.6
 	 *
 	 * @return  void
 	 */
 	public static function display_cart_module() {
-		Markup::template( [ 'header/woo', 'cart' ], [
+		Markup::wrap( 'header-cart', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'id' 	=> 'bar-cart',
+				'class' => 'header-bar__cart col-auto align-self-stretch dropdown'
+			] 
+		] ], [ 'WeCodeArt\Utilities\Markup', 'template' ], [ [ 'header/woo', 'cart' ], [
 			'subtotal' 	=> wp_kses_post( WC()->cart->get_cart_subtotal() ),
 			'count'		=> wp_kses_data( sprintf( 
 				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), wecodeart_config( 'textdomain' ) ), 
 				WC()->cart->get_cart_contents_count() 
-			)  )
-		] );
+			) )
+		] ] );
 	}
 
 	/**

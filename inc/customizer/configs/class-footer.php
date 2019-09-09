@@ -9,12 +9,12 @@
  * @subpackage 	Customizer\Configs\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.3
+ * @version		3.9.6
  */
 
 namespace WeCodeArt\Customizer\Configs;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Customizer\Config;
 use WeCodeArt\Customizer\Formatting;
@@ -36,10 +36,8 @@ class Footer extends Config {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
 
-		// Header Modules Choices.
-		$widgets = array();
-		$modules = \WeCodeArt\Core\Footer::footer_widgets();
-		foreach( $modules as $k => $v ) $widgets[$k] = $v['label']; 
+		// Footer Modules Choices.
+		$widgets = wp_list_pluck( \WeCodeArt\Core\Footer::footer_widgets(), 'label' );
 
 		$_configs = array( 
 			array(

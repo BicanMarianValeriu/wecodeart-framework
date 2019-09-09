@@ -1,3 +1,7 @@
+v3.9.6
+- Updated - WooCommerce pass cart module through markup wrapp/template API
+- Updated - Code refactor for some of the remaining 3.9.5 update templates (meta/post)
+
 v3.9.5
 - Added - Added 'Configuration' functionality to the theme which will enable more awesome features.
 - Updated - Comment Form fields wrappers passed trough Markup API, fully customizable now.

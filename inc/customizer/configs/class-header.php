@@ -9,12 +9,12 @@
  * @subpackage 	Customizer\Configs\Header
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.3
+ * @version		3.9.6
  */
 
 namespace WeCodeArt\Customizer\Configs;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Customizer\Config;
 use WeCodeArt\Customizer\Formatting;
@@ -35,11 +35,6 @@ class Header extends Config {
 	public function register( $configurations, $wp_customize ) {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
-
-		// Header Modules Choices
-		$h_modules = [];
-		$modules = \WeCodeArt\Core\Header::nav_bar_modules();
-		foreach( $modules as $key => $val ) $h_modules[$key] = $val['label']; 
 
 		$_configs = array( 
 			array(
@@ -65,7 +60,7 @@ class Header extends Config {
 				'title'        	=> esc_html__( 'Header Bar Modules', 'wecodeart' ),
 				'description'	=> esc_html__( 'Enable and reorder Header Bar modules.', 'wecodeart' ),
 				'priority'   	=> 10, 
-				'choices'		=> $h_modules,
+				'choices'		=> wp_list_pluck( \WeCodeArt\Core\Header::nav_bar_modules(), 'label' ),
 				'transport'		=> 'postMessage',
 				'partial'		=> [
 					'selector'        		=> '.header__bar.header-bar',
