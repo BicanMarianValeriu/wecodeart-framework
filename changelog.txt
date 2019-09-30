@@ -1,3 +1,10 @@
+v3.9.7
+- Added   - Add theme support for meta modules - accepts array of keys with the same name as meta modules keys
+- Updated - Admin use Scripts Base for enqueue CSS (auto handle and asset path)
+- Updated - Public post types service hook
+- Changed - Customizer: removed some unnecessary options
+- Fixed -   Issue with Customizer footer sidebar registration.
+
 v3.9.6
 - Updated - WooCommerce pass cart module through markup wrapp/template API
 - Updated - Code refactor for some of the remaining 3.9.5 update templates (meta/post)

@@ -317,8 +317,8 @@ class Comments {
 				'id' 	=> 'comment',
 				'class'	=> 'form-control',
 				'name' 	=> 'comment',
-				'rows'	=> absint( 8 ), 
-				'cols'  => absint( 45 ), 
+				'rows'	=> absint( 8 ),
+				'cols'  => absint( 45 ),
 				'aria-required'  => 'true' 
 			]
 		], false );

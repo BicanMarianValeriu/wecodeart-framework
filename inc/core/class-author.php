@@ -100,7 +100,7 @@ class Author {
 
 		if ( is_singular() ) {
 			$author['name']	= sprintf( 
-				'<a href="%s" rel="author nofollow">%s</a>', 
+				'<a href="%s" rel="author nofollow">%s</a>',
 				esc_url( $author['url'] ), esc_html( $author['name'] ) 
 			);
 		}

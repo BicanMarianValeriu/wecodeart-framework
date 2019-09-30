@@ -236,19 +236,11 @@ class Content {
 	 * Get Contextual Modules Options
 	 *
 	 * @since 	3.5.0
-	 * @version	3.9.5
+	 * @version	3.9.7
 	 *
 	 * @return 	array 
 	 */
 	public static function get_contextual_options() {
-		// Blog Page
-		if( is_home() ) {
-			return [
-				'container' => get_theme_mod( 'content-layout-container-blog' ),
-				'modules' 	=> get_theme_mod( 'content-layout-modules-blog' )
-			];
-		}
-
 		// Page Specific Mods
 		foreach( get_pages() as $page ) {		
 			$ID = $page->ID;
@@ -264,14 +256,17 @@ class Content {
 		// Post Types Archives And Singular Context Mods.
 		foreach( wecodeart( 'public_post_types' ) as $type ) { 
 			if( is_singular( $type ) ) {  
-				$modules 	= get_theme_mod( 'content-layout-modules-' . $type . '-singular' ); 
+				$modules 	= get_theme_mod( 'content-layout-modules-' . $type . '-singular' );
+				
 				if( Callbacks::is_full_content() ) $modules = [ 'content' ];
 				
 				return [
 					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular' ),
 					'modules' 	=> $modules
 				];
-			} else {
+			} 
+			
+			if( $type === 'post' && Callbacks::is_post_archive() || is_post_type_archive( $type ) ) {
 				return [
 					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive' ),
 					'modules' 	=> get_theme_mod( 'content-layout-modules-' . $type . '-archive' )

@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.6
- * @version		3.9.5
+ * @version		3.9.7
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -242,7 +242,7 @@ class Meta {
 	 * This function holds our Meta Modules
 	 *
 	 * @since	3.6
-	 * @version	3.9.5
+	 * @version	3.9.7
 	 *
 	 * @return 	array
 	 */
@@ -273,9 +273,16 @@ class Meta {
 				'callback' => [ __CLASS__, 'edit_link' ]
 			]
 		];
-		
+
 		// Return Modules.
-		return apply_filters( 'wecodeart/filter/entry/meta/modules', $defaults ); 
+		$defaults = apply_filters( 'wecodeart/filter/entry/meta/modules', $defaults );
+
+		// Supported Modules
+		$defaults = array_filter( $defaults, function( $item ) {
+			return in_array( $item, current( get_theme_support( 'meta-modules' ) ) );
+		}, ARRAY_FILTER_USE_KEY );
+
+		return $defaults;
 	}
 
 	/**

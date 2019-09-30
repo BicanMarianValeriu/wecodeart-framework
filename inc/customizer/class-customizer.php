@@ -9,7 +9,7 @@
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.6
- * @version		3.9.5
+ * @version		3.9.7
  */
 
 namespace WeCodeArt;
@@ -130,37 +130,37 @@ class Customizer {
 	 * Grab our Customizer Defaults.
 	 *
 	 * @param 	string 		mod_name
-	 * @version	3.7.9
+	 * @version	3.9.7
+	 *
 	 * @return 	mixed/array
 	 */
 	public static function get_defaults( $mod_name = '' ) {
 		$defaults = array(
 			'header-bar-container'			=> 'container',
-			'header-bar-modules'			=> ['branding', 'menu', 'search'],
-			// Default container/modules used if no other condition matches
+			'header-bar-modules'			=> [ 'branding', 'menu', 'search' ],
 			'content-layout-container'		=> 'container',
-			'content-layout-modules'		=> ['content', 'primary'],
-			// Special Blog page container/modules mod
-			'content-layout-container-blog'	=> 'container',
-			'content-layout-modules-blog'	=> ['content', 'primary'],  
+			'content-layout-modules'		=> [ 'content', 'primary' ],
 			'footer-layout-container'		=> 'container',
-			'footer-layout-modules'			=> ['footer-1', 'footer-2', 'footer-3' ],
+			'footer-layout-modules'			=> [ 'footer-1', 'footer-2', 'footer-3' ],
 			'footer-copyright-text'			=> sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy; ' . date( 'Y' ) ),
 		);
 
 		/**
 		 * Added post type defaults for Entry Meta and Container/Modules (singular/archive page types)
-		 * @since 3.6.0.3
+		 *
+		 * @since 3.6.0
 		 */
 		// Customizer defaults for Post Types
-		foreach( wecodeart( 'public_post_types' ) as $type ) { 
+		foreach( wecodeart( 'public_post_types' ) as $type ) {
 			// Skip the WOO CPT
 			if( $type === 'product' ) continue;
+
 			// Entry Meta
 			if( post_type_supports( $type, 'wecodeart-post-info' ) ) {
 				$defaults['content-entry-meta-' . $type . '-archive'] 	= [ 'author', 'date', 'comments' ];
 				$defaults['content-entry-meta-' . $type . '-singular'] 	= [ 'author', 'date', 'comments' ];
 			}
+
 			// Custom Container and Modules
 			$defaults['content-layout-container-' . $type . '-archive']		= 'container';
 			$defaults['content-layout-modules-' . $type . '-archive'] 		= [ 'content', 'primary' ];
@@ -171,8 +171,11 @@ class Customizer {
 		$args = apply_filters( 'wecodeart/filter/customizer/defaults', $defaults );
 		
 		// Allows to return a single mod_name default value
-		if( $mod_name && array_key_exists( $mod_name, $args ) ) return $args[$mod_name];
-		else return $args;
+		if( $mod_name && array_key_exists( $mod_name, $args ) ) {
+			return $args[$mod_name];
+		}
+		
+		return $args;
 	}
 
 	/**
@@ -205,11 +208,15 @@ class Customizer {
 	public function get_theme_mod_value( $value ) {
 		// Remove theme_mod_ prefix to find setting name
 		$key = substr( current_filter(), 10 );
+
 		$set_theme_mods = get_theme_mods();
+
 		// If a value is set, return it early;
 		if ( isset( $set_theme_mods[ $key ] ) ) return $value;
+
 		// If not return the default
-		$values = $this->get_defaults(); 
+		$values = $this->get_defaults();
+
 		return isset( $values[ $key ] ) ? $values[ $key ] : $value;
 	}
 

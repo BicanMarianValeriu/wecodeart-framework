@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.5
+ * @version		3.9.7
  */
 
 namespace WeCodeArt\Core;
@@ -179,16 +179,15 @@ class Footer {
 	 * Register Sidebars Based on Active Options
 	 *
 	 * @since	unknown
-	 * @version	3.9.5
+	 * @version	3.9.7
 	 *
 	 * @return 	void
 	 */
 	public function register_sidebars() {
-		// Get theme mod.
-		$options 	= get_theme_mod( 'footer-layout-modules', Customizer::get_defaults( 'footer-layout-modules' ) );
-
 		// Get Default Footer Columns.
 		$columns 	= self::footer_widgets();
+		$options	= get_theme_mod( 'footer-layout-modules', Customizer::get_defaults( 'footer-layout-modules' ) );
+
 		$active 	= array_intersect_key( $options, array_keys( $columns ) );
 
 		if( empty( $active ) ) {
@@ -196,8 +195,12 @@ class Footer {
 		}
 
 		// Register Sidebar for each active footer columns.
-		$sidebars = wp_list_filter( $columns, [ 
-			'sidebar' => false 
+		$filtered = array_filter( $columns, function( $item ) use( $active ) {
+			return in_array( $item['id'], $active );
+		} );
+
+		$sidebars = wp_list_filter( $filtered, [ 
+			'sidebar' => false
 		], 'NOT' );
 
 		wecodeart( 'register_sidebars', $sidebars );

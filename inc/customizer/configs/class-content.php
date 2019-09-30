@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.6
+ * @version		3.9.7
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -74,39 +74,6 @@ class Content extends Config {
 					'container_inclusive' 	=> true
 				]
 			),
-			array(
-				'name'			=> 'content-layout-container-blog',
-				'type' 			=> 'control',
-				'control'  		=> 'select',
-				'section'		=> 'content-layout',
-				'title'			=> esc_html__( 'Container Type: Blog Page', 'wecodeart' ) ,
-				'description' 	=> esc_html__( 'Choose the type of the container class. Affects only current page.', 'wecodeart' ),
-				'choices'  		=> [
-					'container'			=> esc_html__( 'Container', 'wecodeart' ),
-					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-				],  
-				'priority' 		=> 10,  
-				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
-				'active_callback'	   => 'is_home',
-				'transport' 		   => 'postMessage'
-			),
-			array(
-				'name'			=> 'content-layout-modules-blog',
-				'type'        	=> 'control',
-				'control'  		=> 'wecodeart-sortable',
-				'section'		=> 'content-layout',
-				'title'			=> esc_html__( 'Content Modules: Blog Page', 'wecodeart' ),
-				'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
-				'priority'		=> 15, 
-				'choices'		=> $c_modules, 
-				'transport'		=> 'postMessage',
-				'active_callback' => 'is_home',
-				'partial'		=> [
-					'selector'        		=> '.content-area',
-					'render_callback' 		=> [ 'WeCodeArt\Core\Content', 'render_modules' ],
-					'container_inclusive' 	=> true
-				]
-			)
 		);
 
 		$configurations = array_merge( $configurations, $_configs );
@@ -156,12 +123,13 @@ class Content extends Config {
 		}
 
 		// Post Types Archives And Singular Context Mods 
-		$public_posts = wecodeart( 'public_post_types' ); 
+		$public_posts = wecodeart( 'public_post_types' );
+		
 		if( isset( $public_posts['product'] ) ) {
 			unset( $public_posts['product'] );
 		}
 
-		foreach( $public_posts as $type ) { 
+		foreach( $public_posts as $type ) {
 			$type_label = get_post_type_object( $type )->labels->singular_name;
 			$config = array(
 				array(
@@ -176,7 +144,10 @@ class Content extends Config {
 						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 					], 
 					'priority'             => 20, 
-					'active_callback'	   => function() use ( $type ) { return is_post_type_archive( $type ); },
+					'active_callback'	   => function() use ( $type ) {
+						if( $type === 'post' && Callbacks::is_post_archive() ) return true;
+						return is_post_type_archive( $type );
+					},
 					'transport' 		   => 'postMessage'
 				),
 				array(
@@ -188,7 +159,10 @@ class Content extends Config {
 					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
 					'priority'		=> 30, 
 					'choices'		=> $c_modules,
-					'active_callback'	=> function() use( $type ) { return is_post_type_archive( $type ); }, 
+					'active_callback'	=> function() use( $type ) {
+						if( $type === 'post' && Callbacks::is_post_archive() ) return true;
+						return is_post_type_archive( $type ); 
+					}, 
 					'transport'		=> 'postMessage',
 					'partial'		=> [
 						'selector'        => '.content-area',
@@ -208,7 +182,9 @@ class Content extends Config {
 						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 					), 
 					'priority'             => 25, 
-					'active_callback'	   => function() use ( $type ) { return is_singular( $type ); },
+					'active_callback'	   => function() use ( $type ) {
+						return is_singular( $type );
+					},
 					'transport' 		   => 'postMessage'
 				),
 				array(
@@ -220,7 +196,9 @@ class Content extends Config {
 					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
 					'priority'		=> 35, 
 					'choices'		=> $c_modules,
-					'active_callback'	=> function() use( $type ) { return is_singular( $type ); }, 
+					'active_callback'	=> function() use( $type ) {
+						return is_singular( $type );
+					}, 
 					'transport'		=> 'postMessage',
 					'partial'		=> [
 						'selector'        		=> '.content-area',
@@ -275,7 +253,9 @@ class Content extends Config {
 					'priority'		=> 10, 
 					'choices'		=> $meta_modules,  
 					'transport'		=> 'postMessage',
-					'active_callback' => function() use( $type ) { return is_singular( $type ); },
+					'active_callback' => function() use( $type ) {
+						return is_singular( $type );
+					},
 					'partial'		=> [
 						'selector'        		=> '.entry-meta',
 						'render_callback' 		=> [ 'WeCodeArt\Core\Entry\Meta', 'render' ],

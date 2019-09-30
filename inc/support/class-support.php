@@ -9,7 +9,7 @@
  * @subpackage  Theme Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.5
+ * @version		3.9.7
  */
 
 namespace WeCodeArt;
@@ -46,6 +46,9 @@ class Support {
 
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
+	 *
+	 * @since 	1.0
+	 * @version	3.9.7
 	 */
 	function after_setup_theme() {
 		// Add support for Meta info for posts other than Page Type 
@@ -61,6 +64,9 @@ class Support {
 			wecodeart_config( 'textdomain' ), 
 			wecodeart_config( 'paths' )['uri'] . '/' . wecodeart_config( 'directories' )['languages'] 
 		);
+
+		// Meta Modules
+		add_theme_support( 'meta-modules', [ 'author', 'date', 'categories', 'tags', 'comments', 'edit' ] );
 
 		// Automatic Feed Links
 		add_theme_support( 'automatic-feed-links' );

@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		3.9.5
+ * @version		3.9.7
  */
 
 namespace WeCodeArt;
@@ -17,13 +17,12 @@ namespace WeCodeArt;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Admin
- *
- * @since 3.8.1
+ * Admin Side Functionality
  */
 class Admin {
 
 	use \WeCodeArt\Singleton;
+	use \WeCodeArt\Core\Scripts\Base;
 
 	/**
 	 * Send to Constructor
@@ -116,16 +115,9 @@ class Admin {
 	 * Admin CSS
 	 *
 	 * @since 	3.8.1
-	 * @version	3.8.9
+	 * @version	3.9.7
 	 */
 	public function enqueue_scripts() {
-		$folder = defined( WP_DEBUG ) && WP_DEBUG === true ? 'unminified' : 'minified';
-
-		wp_enqueue_style( 
-			strtolower( str_replace( '\\', '-', __CLASS__ ) ), 
-			get_parent_theme_file_uri( '/assets/' . $folder . '/css/admin/style.css' ), 
-			[],
-			'3.8.1'
-		);
+		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'style' ), [], wecodeart( 'version' ) );
 	}
 }
