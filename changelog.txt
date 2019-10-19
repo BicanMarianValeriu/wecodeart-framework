@@ -1,3 +1,9 @@
+v3.9.9
+- Fixed -
+
+v3.9.8
+- Fixed - Minor fix with filter for entry nav
+
 v3.9.7
 - Added   - Add theme support for meta modules - accepts array of keys with the same name as meta modules keys
 - Updated - Admin use Scripts Base for enqueue CSS (auto handle and asset path)

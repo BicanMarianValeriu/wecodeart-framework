@@ -161,8 +161,8 @@ class Pagination {
             ?></h3>
             <?php 
             
-            $args_prev = apply_filters( 'wecodeart/filter/comments/navigation/prev/args', [] );
-			$args_next = apply_filters( 'wecodeart/filter/comments/navigation/next/args', [] );
+            $args_prev = apply_filters( 'wecodeart/filter/entry/navigation/prev/args', [] );
+			$args_next = apply_filters( 'wecodeart/filter/entry/navigation/next/args', [] );
 
 			Markup::wrap( 'entry-navigation-prev', [ [ 
 				'tag' 	=> 'div', 

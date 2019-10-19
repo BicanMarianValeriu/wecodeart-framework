@@ -144,12 +144,12 @@ class Input {
 				if ( isset( $label['text'] ) ) {
 					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), esc_html( $label['text'] ) );
 				}
-				$placeholder = $attrs['placeholder'];
+				$placeholder = isset( $attrs['placeholder'] ) ? $attrs['placeholder'] : false;
 				unset( $attrs['type'] );
 				unset( $attrs['placeholder'] );
 			?>
 				<select <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'select', $attrs ); ?>>
-					<?php if( isset( $placeholder ) ) { ?>
+					<?php if( $placeholder ) { ?>
 						<option disabled<?php if( ! isset( $attrs['value'] ) ) : ?> selected<?php endif; ?>><?php 
 							echo esc_html( $placeholder ); 
 						?></option>

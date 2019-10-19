@@ -1,6 +1,6 @@
 {
 	"name": "wecodeart",
-	"version": "3.9.6",
+	"version": "3.9.8",
 	"main": "gulpfile.babel.js",
 	"author": "Bican Marian Valeriu",
 	"browserslist": [
@@ -8,18 +8,18 @@
 	],
 	"dependencies": {
 		"bootstrap": "^4.3.1",
-		"popper.js": "^1.15.0"
+		"popper.js": "^1.16.0"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.6.0",
+		"@babel/core": "^7.6.4",
 		"@babel/plugin-proposal-class-properties": "^7.5.5",
-		"@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+		"@babel/plugin-proposal-object-rest-spread": "^7.6.2",
 		"@babel/plugin-transform-async-to-generator": "^7.5.0",
 		"@babel/polyfill": "^7.6.0",
-		"@babel/preset-env": "^7.6.0",
-		"@babel/register": "^7.6.0",
+		"@babel/preset-env": "^7.6.3",
+		"@babel/register": "^7.6.2",
 		"@wordpress/browserslist-config": "^2.6.0",
-		"autoprefixer": "^9.6.1",
+		"autoprefixer": "^9.6.5",
 		"browser-sync": "^2.26.7",
 		"del": "^5.1.0",
 		"gulp": "^4.0.2",
@@ -34,8 +34,8 @@
 		"merge-stream": "^2.0.0",
 		"through2": "^3.0.1",
 		"vinyl-named": "^1.1.0",
-		"webpack": "^4.39.3",
-		"webpack-cli": "^3.3.8",
+		"webpack": "^4.41.2",
+		"webpack-cli": "^3.3.9",
 		"webpack-stream": "^5.2.1"
 	}
 }
