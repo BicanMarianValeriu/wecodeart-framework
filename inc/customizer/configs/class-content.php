@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.7
+ * @version		4.0
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -18,8 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Customizer\Config;
 use WeCodeArt\Customizer\Formatting;
-use WeCodeArt\Utilities\Callbacks;
-use WeCodeArt\Support\WooCommerce\Callbacks as WooCB;
+use WeCodeArt\Support\WooCommerce\Callbacks;
 
 /**
  * Customizer Config initial setup
@@ -37,7 +36,7 @@ class Content extends Config {
 	public function register( $configurations, $wp_customize ) {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
-		$callbacks	= WooCB::get_instance();
+		$callbacks	= Callbacks::get_instance();
 
 		// Content Modules Choices.
 		$c_modules = wp_list_pluck( \WeCodeArt\Core\Content::content_modules(), 'label' );
@@ -48,11 +47,11 @@ class Content extends Config {
 				'type' 			=> 'control',
 				'control'  		=> 'select',
 				'section'		=> 'content-layout',
-				'title' 		=> esc_html__( 'Container Type', 'wecodeart' ),
-				'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
+				'title' 		=> esc_html__( 'Container Type', wecodeart_config( 'textdomain' ) ),
+				'description' 	=> esc_html__( 'Choose the type of the container class.', wecodeart_config( 'textdomain' ) ),
 				'choices'  		=> [
-					'container'			=> esc_html__( 'Container', 'wecodeart' ),
-					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
+					'container'			=> esc_html__( 'Container', wecodeart_config( 'textdomain' ) ),
+					'container-fluid' 	=> esc_html__( 'Container Fluid', wecodeart_config( 'textdomain' ) ),
 				], 
 				'priority' 		=> 5, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
@@ -63,8 +62,8 @@ class Content extends Config {
 				'type'        	=> 'control',
 				'control'  		=> 'wecodeart-sortable',
 				'section'		=> 'content-layout',
-				'title'			=> esc_html__( 'Content Modules: Default', 'wecodeart' ),
-				'description'	=> esc_html__( 'Enable and reorder Site Inner modules.', 'wecodeart' ),
+				'title'			=> esc_html__( 'Content Modules: Default', wecodeart_config( 'textdomain' ) ),
+				'description'	=> esc_html__( 'Enable and reorder Site Inner modules.', wecodeart_config( 'textdomain' ) ),
 				'priority'		=> 10, 
 				'choices'		=> $c_modules, 
 				'transport'		=> 'postMessage',
@@ -89,11 +88,11 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'select',
 					'section'		=> 'content-layout',
-					'title' 		=> sprintf( esc_html__( 'Container Type: %s', 'wecodeart' ), $title ),
-					'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
+					'title' 		=> sprintf( esc_html__( 'Container Type: %s', wecodeart_config( 'textdomain' ) ), $title ),
+					'description' 	=> esc_html__( 'Choose the type of the container class.', wecodeart_config( 'textdomain' ) ),
 					'choices'  		=> [
-						'container'			=> esc_html__( 'Container', 'wecodeart' ),
-						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
+						'container'			=> esc_html__( 'Container', wecodeart_config( 'textdomain' ) ),
+						'container-fluid' 	=> esc_html__( 'Container Fluid', wecodeart_config( 'textdomain' ) ),
 					], 
 					'priority'             => 20,
 					'default'              => 'container',
@@ -105,8 +104,8 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-layout',
-					'title'			=> sprintf( esc_html__( 'Content Modules: %s', 'wecodeart' ), $title ),
-					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
+					'title'			=> sprintf( esc_html__( 'Content Modules: %s', wecodeart_config( 'textdomain' ) ), $title ),
+					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', wecodeart_config( 'textdomain' ) ),
 					'priority'		=> 30,
 					'default'		=> [ 'content', 'primary' ],
 					'choices'		=> $c_modules,
@@ -137,15 +136,15 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'select',
 					'section'		=> 'content-layout',
-					'title' 		=> sprintf( esc_html__( 'Container Type: %s Archive', 'wecodeart' ), $type_label ),
-					'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
+					'title' 		=> sprintf( esc_html__( 'Container Type: %s Archive', wecodeart_config( 'textdomain' ) ), $type_label ),
+					'description' 	=> esc_html__( 'Choose the type of the container class.', wecodeart_config( 'textdomain' ) ),
 					'choices'  		=> [
-						'container'			=> esc_html__( 'Container', 'wecodeart' ),
-						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
+						'container'			=> esc_html__( 'Container', wecodeart_config( 'textdomain' ) ),
+						'container-fluid' 	=> esc_html__( 'Container Fluid', wecodeart_config( 'textdomain' ) ),
 					], 
 					'priority'             => 20, 
 					'active_callback'	   => function() use ( $type ) {
-						if( $type === 'post' && Callbacks::is_post_archive() ) return true;
+						if( $type === 'post' && wecodeart_if( 'is_post_archive' ) ) return true;
 						return is_post_type_archive( $type );
 					},
 					'transport' 		   => 'postMessage'
@@ -155,12 +154,12 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-layout',
-					'title'			=> sprintf( esc_html__( 'Content Modules: %s Archive', 'wecodeart' ), $type_label ),
-					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
+					'title'			=> sprintf( esc_html__( 'Content Modules: %s Archive', wecodeart_config( 'textdomain' ) ), $type_label ),
+					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', wecodeart_config( 'textdomain' ) ),
 					'priority'		=> 30, 
 					'choices'		=> $c_modules,
 					'active_callback'	=> function() use( $type ) {
-						if( $type === 'post' && Callbacks::is_post_archive() ) return true;
+						if( $type === 'post' && wecodeart_if( 'is_post_archive' ) ) return true;
 						return is_post_type_archive( $type ); 
 					}, 
 					'transport'		=> 'postMessage',
@@ -175,11 +174,11 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'select',
 					'section'		=> 'content-layout',
-					'title' 		=> sprintf( esc_html__( 'Container Type: %s Single', 'wecodeart' ), $type_label ),
-					'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
+					'title' 		=> sprintf( esc_html__( 'Container Type: %s Single', wecodeart_config( 'textdomain' ) ), $type_label ),
+					'description' 	=> esc_html__( 'Choose the type of the container class.', wecodeart_config( 'textdomain' ) ),
 					'choices'  		=> array(
-						'container'			=> esc_html__( 'Container', 'wecodeart' ),
-						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
+						'container'			=> esc_html__( 'Container', wecodeart_config( 'textdomain' ) ),
+						'container-fluid' 	=> esc_html__( 'Container Fluid', wecodeart_config( 'textdomain' ) ),
 					), 
 					'priority'             => 25, 
 					'active_callback'	   => function() use ( $type ) {
@@ -192,8 +191,8 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-layout',
-					'title'			=> sprintf( esc_html__( 'Content Modules: %s Single', 'wecodeart' ), $type_label ),
-					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
+					'title'			=> sprintf( esc_html__( 'Content Modules: %s Single', wecodeart_config( 'textdomain' ) ), $type_label ),
+					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', wecodeart_config( 'textdomain' ) ),
 					'priority'		=> 35, 
 					'choices'		=> $c_modules,
 					'active_callback'	=> function() use( $type ) {
@@ -228,13 +227,13 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-entry',
-					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Archive', 'wecodeart' ), $type_label ),
-					'description'	=> esc_html__( 'Enable/Disable/Reorder Entry Meta information modules for current post type - archive.', 'wecodeart' ),
+					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Archive', wecodeart_config( 'textdomain' ) ), $type_label ),
+					'description'	=> esc_html__( 'Enable/Disable/Reorder Entry Meta information modules for current post type - archive.', wecodeart_config( 'textdomain' ) ),
 					'priority'		=> 5, 
 					'choices'		=> $meta_modules,  
 					'transport'		=> 'postMessage',
 					'active_callback' => function() use ( $type ) {
-						if( $type === 'post' && Callbacks::is_post_archive() ) return true;
+						if( $type === 'post' && wecodeart_if( 'is_post_archive' ) ) return true;
 						return is_post_type_archive( $type );
 					},
 					'partial'		=> [
@@ -248,8 +247,8 @@ class Content extends Config {
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-entry',
-					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Single', 'wecodeart' ), $type_label ),
-					'description'	=> esc_html__( 'Enable/Disable/Reorder Entry Meta information modules for current post type - single.', 'wecodeart' ),
+					'title'			=> sprintf( esc_html__( 'Meta Modules: %s Single', wecodeart_config( 'textdomain' ) ), $type_label ),
+					'description'	=> esc_html__( 'Enable/Disable/Reorder Entry Meta information modules for current post type - single.', wecodeart_config( 'textdomain' ) ),
 					'priority'		=> 10, 
 					'choices'		=> $meta_modules,  
 					'transport'		=> 'postMessage',

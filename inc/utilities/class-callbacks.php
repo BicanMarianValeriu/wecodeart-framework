@@ -9,12 +9,12 @@
  * @subpackage 	Utilities\Callbacks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.5
+ * @version		4.0
  */
 
 namespace WeCodeArt\Utilities;
 
-defined( 'ABSPATH' ) || exit(); 
+defined( 'ABSPATH' ) || exit();
 
 /**
  * Callback functions wich returns boolean
@@ -27,72 +27,51 @@ class Callbacks {
 	 * Checks if the current page is a product archive
 	 *
 	 * @since	1.8.8
-	 * @version	3.8.1
+	 * @version	4.0
 	 *
 	 * @return 	boolean
 	 */
 	public static function is_front_page() {
-		return ( is_front_page() && ! is_home() );
+		_deprecated_function( __METHOD__, '4.0' );
 	}
 
 	/**
 	 * Check if on default post archive
 	 *
 	 * @since	3.6.1
-	 * @version	3.8.1
+	 * @version	4.0
 	 *
 	 * @return 	boolean
 	 */
 	public static function is_post_archive() {
-		return ( 'post' === get_post_type() && ( is_home() || is_archive() || is_search() ) );
-		return false;
+		_deprecated_function( __METHOD__, '4.0' );
 	}
 
 	/**
 	 * Check if current post has full/wide blocks aligns
 	 *
 	 * @since	3.6.1
-	 * @version	3.9.5
+	 * @version	4.0
 	 *
 	 * @param  	object|integer
 	 *
 	 * @return 	boolean
 	 */
 	public static function has_wide_or_full_block( \WP_Post $post = null ) {
-		if( ! $post ) {
-			global $post;
-		}
-		
-		// Retrieve an array of blocks used for this post.
-		$blocks = parse_blocks( $post->post_content ); 
-
-		foreach( $blocks as $block ) {  
-			// If we have full/wide allign return true early and bail.
-			if( in_array( Helpers::get_prop( $block['attrs'], 'align' ), [ 'full', 'wide' ] ) ) {
-				return true;
-				break;
-			}
-		}
-
-		return false;
+		_deprecated_function( __METHOD__, '4.0' );
 	}
 
 	/**
 	 * Remove sidebar on gutenberg posts with wide/full layout
 	 *
 	 * @since	3.6.1
-	 * @version	3.9.5
+	 * @version	4.0
 	 *
 	 * @uses 	filter: `wecodeart/filter/gutenberg/auto_layout`
 	 *
 	 * @return 	boolean|null
 	 */
 	public static function is_full_content( \WP_Post $post = null ) {
-		$enabled = apply_filters( 'wecodeart/filter/gutenberg/auto_layout', true );
-
-		if( ! is_singular() || $enabled === false ) return false;
-		if( self::has_wide_or_full_block( $post ) ) return true;
-
-		return null;
+		_deprecated_function( __METHOD__, '4.0' );
 	}
 }

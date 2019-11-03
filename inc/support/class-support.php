@@ -167,13 +167,18 @@ class Support {
 	 * Register Menus
 	 *
 	 * @since	3.9.5
+	 * @version	3.9.9
 	 *
 	 * @return 	void
 	 */
 	public function register_menus() {
-		// Register New Menu
-		register_nav_menus( [ 
-			'primary' => esc_html__( 'Primary Menu', wecodeart_config( 'textdomain' ) ) 
-		] );
+		$header_modules = get_theme_mod( 'header-bar-modules', [] );
+
+		if( in_array( 'menu', $header_modules ) ) {
+			// Register New Menu
+			register_nav_menus( [ 
+				'primary' => esc_html__( 'Primary Menu', wecodeart_config( 'textdomain' ) ) 
+			] );
+		}
 	}
 }

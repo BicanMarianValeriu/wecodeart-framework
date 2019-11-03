@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.3
+ * @version		3.9.9
  */
 
 namespace WeCodeArt\Customizer;
@@ -40,13 +40,13 @@ class Configs extends Config {
 				'name'     => 'header',
 				'type'     => 'panel',
 				'priority' => 5,
-				'title'    => esc_html__( 'Header Settings', 'wecodeart' ) 
+				'title'    => esc_html__( 'Header Settings', wecodeart_config( 'textdomain' ) ) 
 			),
 			array(
 				'name'     => 'header-bar',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => esc_html__( 'Header Bar', 'wecodeart' ),
+				'title'    => esc_html__( 'Header Bar', wecodeart_config( 'textdomain' ) ),
 				'panel'    => 'header',
 			),
 			/**
@@ -56,20 +56,20 @@ class Configs extends Config {
 				'name'     => 'content',
 				'type'     => 'panel',
 				'priority' => 10,
-				'title'    => esc_html__( 'Content Settings', 'wecodeart' ) 
+				'title'    => esc_html__( 'Content Settings', wecodeart_config( 'textdomain' ) ) 
 			),
 			array(
 				'name'     => 'content-layout',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => esc_html__( 'Layout Settings', 'wecodeart' ),
+				'title'    => esc_html__( 'Layout Settings', wecodeart_config( 'textdomain' ) ),
 				'panel'    => 'content',
 			),
 			array(
 				'name'     => 'content-entry',
 				'type'     => 'section',
 				'priority' => 10,
-				'title'    => esc_html__( 'Entry Settings', 'wecodeart' ),
+				'title'    => esc_html__( 'Entry Settings', wecodeart_config( 'textdomain' ) ),
 				'panel'    => 'content',
 			),
 			/**
@@ -79,20 +79,20 @@ class Configs extends Config {
 				'name'     => 'footer',
 				'type'     => 'panel',
 				'priority' => 15,
-				'title'    => esc_html__( 'Footer Settings', 'wecodeart' ) 
+				'title'    => esc_html__( 'Footer Settings', wecodeart_config( 'textdomain' ) ) 
 			),
 			array(
 				'name'     => 'footer-layout',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => esc_html__( 'Layout Settings', 'wecodeart' ),
+				'title'    => esc_html__( 'Layout Settings', wecodeart_config( 'textdomain' ) ),
 				'panel'    => 'footer',
 			),
 			array(
 				'name'     => 'footer-copyright',
 				'type'     => 'section',
 				'priority' => 10,
-				'title'    => esc_html__( 'Copyright', 'wecodeart' ),
+				'title'    => esc_html__( 'Copyright', wecodeart_config( 'textdomain' ) ),
 				'panel'    => 'footer',
 			)
 		);

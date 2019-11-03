@@ -9,7 +9,7 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.0
- * @version		3.9.5
+ * @version		3.9.9
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -61,17 +61,6 @@ final class WeCodeArt implements ArrayAccess {
      * @var array
      */
 	protected $deposit = [];
-
-	/**
-	 * Send to Constructor
-	 * @since 3.6.2
-	 */
-	public function init() {
-		// Can we proceed with theme activation/loading?
-		if( Activation::get_instance()->is_ok() ) {
-			$this->load();
-        }
-	}
 
 	/**
 	 * Load Theme Modules
@@ -276,11 +265,42 @@ function wecodeart_config( $key = null, $default = null ) {
 }
 
 /**
+ * Check if condition is met.
+ *
+ * @since	4.0
+ * @version	4.0
+ *
+ * @param   string|array    $parameters
+ * @param   object          $theme
+ *
+ * @return  mixed|null|bool
+ */
+function wecodeart_if( $parameters, WeCodeArt $theme = null ) {
+    if( empty( $parameters ) ) return null;
+
+    $theme = $theme ?: WeCodeArt::get_instance();
+    
+    foreach ( (array) $parameters as $conditional ) {
+        if ( ! $theme->has( $conditional ) ) return null;
+        if ( ! $theme->get( $conditional )->is_met() ) return false;
+    }
+
+    return true;
+}
+
+/**
  * App Binding Functions
  */
 $theme  = wecodeart(); 
 $config = Config::get_config();
 
 require_once __DIR__ . '/config/setup.php';
+
+/**
+ * Maybe Load the theme if checks are passed
+ */
+if( Activation::get_instance()->is_ok() ) {
+    $theme->load();
+}
 
 return $theme;

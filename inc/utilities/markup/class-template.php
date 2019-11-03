@@ -71,7 +71,7 @@ class Template {
 
             extract( apply_filters( "wecodeart/filter/template/context", $context, $this->get_file_name() ) );
 
-            require( $template );
+            require $template;
 
             return;
         }

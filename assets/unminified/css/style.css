@@ -4,7 +4,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 3.9.5
+Version: 4.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -1698,12 +1698,10 @@ select {
     border-color: #94ccf2;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(34, 150, 228, 0.25); }
-  .form-control:-ms-input-placeholder, input:not([type="submit"]):not([type="radio"]):not([type="checkbox"]):-ms-input-placeholder,
-  select:-ms-input-placeholder {
+  .form-control:-ms-input-placeholder, input:not([type="submit"]):not([type="radio"]):not([type="checkbox"]):-ms-input-placeholder, select:-ms-input-placeholder {
     color: #6c757d;
     opacity: 1; }
-  .form-control::-ms-input-placeholder, input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::-ms-input-placeholder,
-  select::-ms-input-placeholder {
+  .form-control::-ms-input-placeholder, input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::-ms-input-placeholder, select::-ms-input-placeholder {
     color: #6c757d;
     opacity: 1; }
   .form-control::placeholder, input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::placeholder,

@@ -9,7 +9,7 @@
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.6
- * @version		3.9.7
+ * @version		3.9.9
  */
 
 namespace WeCodeArt;
@@ -130,20 +130,12 @@ class Customizer {
 	 * Grab our Customizer Defaults.
 	 *
 	 * @param 	string 		mod_name
-	 * @version	3.9.7
+	 * @version	3.9.9
 	 *
 	 * @return 	mixed/array
 	 */
 	public static function get_defaults( $mod_name = '' ) {
-		$defaults = array(
-			'header-bar-container'			=> 'container',
-			'header-bar-modules'			=> [ 'branding', 'menu', 'search' ],
-			'content-layout-container'		=> 'container',
-			'content-layout-modules'		=> [ 'content', 'primary' ],
-			'footer-layout-container'		=> 'container',
-			'footer-layout-modules'			=> [ 'footer-1', 'footer-2', 'footer-3' ],
-			'footer-copyright-text'			=> sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy; ' . date( 'Y' ) ),
-		);
+		$defaults = wecodeart_config( 'customizer' );
 
 		/**
 		 * Added post type defaults for Entry Meta and Container/Modules (singular/archive page types)

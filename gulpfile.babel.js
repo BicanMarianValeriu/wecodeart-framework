@@ -78,7 +78,6 @@ build.description = 'Cleans and build the final source code.';
  * @instructions 
  * `gulp serve` for running local server and watch for file changes 
  * `gulp build` for building final minified code and hash main css/js bundles
- * `gulp compileSVG` for rebuilding svg sprite if any and is necessary
  */
 
 // Named Exports

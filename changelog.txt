@@ -1,5 +1,10 @@
-v3.9.9
-- Fixed -
+v4.0
+- Added - Callbacks transformed into conditionals that will extend Conditional Interface
+- Added - wecodeart_if( [ 'conditional', 'conditional' ] ) and implementation across the theme
+- Fixed - Minor random fixes.
+- Fixed - Theme Activation to allow usage of wecodeart_config() function during activation process
+- Updated - Textdomain to wecodeart_config('textdomain') function;
+- Updated - Entry::render_title() now accepts 2 arguments: link (bool) and echo (bool). Also the args will be passed to Entry::the_title() to allow usage for both echo/return;
 
 v3.9.8
 - Fixed - Minor fix with filter for entry nav

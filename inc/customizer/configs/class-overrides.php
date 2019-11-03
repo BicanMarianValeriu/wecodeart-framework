@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Overrides
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.7
+ * @version		3.9.9
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -39,8 +39,8 @@ class Overrides extends Config {
 				'control'  		=> 'dropdown-pages',
 				'section'		=> 'static_front_page',
 				'capability'	=> 'edit_theme_options',
-				'title' 		=> esc_html__( 'Page for 404', 'wecodeart' ),
-				'description' 	=> esc_html__( 'Select your custom page that will show on 404 error.', 'wecodeart' ),
+				'title' 		=> esc_html__( 'Page for 404', wecodeart_config( 'textdomain' ) ),
+				'description' 	=> esc_html__( 'Select your custom page that will show on 404 error.', wecodeart_config( 'textdomain' ) ),
 				'priority' 		=> 50,
 				'transport'		=> 'postMessage',
 				'sanitize_callback' 	=> 'absint',

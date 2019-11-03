@@ -1097,9 +1097,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
               },
               preventOverflow: {
                 boundariesElement: this._config.boundary
-              } // Disable Popper.js if we have a static display
+              }
+            } // Disable Popper.js if we have a static display
 
-            }
           };
 
           if (this._config.display === 'static') {
@@ -1512,7 +1512,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     (function (global) {
       /**!
       * @fileOverview Kickass library to create and place poppers near their reference elements.
-      * @version 1.15.0
+      * @version 1.16.0
       * @license
       * Copyright (c) 2016 Federico Zivolo and contributors
       *
@@ -1534,16 +1534,19 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
       * SOFTWARE.
       */
-      var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
-      var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
-      var timeoutDuration = 0;
+      var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && typeof navigator !== 'undefined';
 
-      for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
-        if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
-          timeoutDuration = 1;
-          break;
+      var timeoutDuration = function () {
+        var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
+
+        for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
+          if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
+            return 1;
+          }
         }
-      }
+
+        return 0;
+      }();
 
       function microtaskDebounce(fn) {
         var called = false;
@@ -1667,6 +1670,18 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         }
 
         return getScrollParent(getParentNode(element));
+      }
+      /**
+       * Returns the reference node of the reference object, or the reference object itself.
+       * @method
+       * @memberof Popper.Utils
+       * @param {Element|Object} reference - the reference element (the popper will be relative to this)
+       * @returns {Element} parent
+       */
+
+
+      function getReferenceNode(reference) {
+        return reference && reference.referenceNode ? reference.referenceNode : reference;
       }
 
       var isIE11 = isBrowser && !!(window.MSInputMethodContext && document.documentMode);
@@ -1974,8 +1989,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         }; // subtract scrollbar size from sizes
 
         var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
-        var width = sizes.width || element.clientWidth || result.right - result.left;
-        var height = sizes.height || element.clientHeight || result.bottom - result.top;
+        var width = sizes.width || element.clientWidth || result.width;
+        var height = sizes.height || element.clientHeight || result.height;
         var horizScrollbar = element.offsetWidth - width;
         var vertScrollbar = element.offsetHeight - height; // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
         // we make this check conditional for performance reasons
@@ -2126,7 +2141,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           top: 0,
           left: 0
         };
-        var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference); // Handle viewport case
+        var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference)); // Handle viewport case
 
         if (boundariesElement === 'viewport') {
           boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent, fixedPosition);
@@ -2247,7 +2262,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
       function getReferenceOffsets(state, popper, reference) {
         var fixedPosition = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-        var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
+        var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference));
         return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent, fixedPosition);
       }
       /**
@@ -2511,7 +2526,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           this.popper.style[getSupportedPropertyName('transform')] = '';
         }
 
-        this.disableEventListeners(); // remove the popper if user explicity asked for the deletion on destroy
+        this.disableEventListeners(); // remove the popper if user explicitly asked for the deletion on destroy
         // do not use `remove` because IE11 doesn't support it
 
         if (this.options.removeOnDestroy) {

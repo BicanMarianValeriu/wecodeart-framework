@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.6
- * @version		3.9.7
+ * @version		4.0
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Utilities\Markup;
 use WeCodeArt\Utilities\Markup\SVG;
-use WeCodeArt\Utilities\Callbacks;
 
 /**
  * Handles Entry Meta output
@@ -204,7 +203,7 @@ class Meta {
 	 * Get Contextual options
 	 *
 	 * @since 	3.6
-	 * @version 3.9.6
+	 * @version 4.0
 	 *
 	 * @return 	array
 	 */
@@ -225,12 +224,7 @@ class Meta {
 			$context = 'single';
 		}
 
-		if( is_post_type_archive( $types ) ) {
-			$options = get_theme_mod( 'content-entry-meta-' . $post_tp . '-archive' );
-			$context = 'archive';
-		}
-
-		if( Callbacks::is_post_archive() ) {
+		if( is_post_type_archive( $types ) || wecodeart_if( 'is_post_archive' ) ) {
 			$options = get_theme_mod( 'content-entry-meta-' . $post_tp . '-archive' );
 			$context = 'archive';
 		}

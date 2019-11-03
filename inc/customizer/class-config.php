@@ -9,7 +9,7 @@
  * @subpackage 	WP-Customizer Config
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.3
+ * @version		3.9.9
  */
 
 namespace WeCodeArt\Customizer;
@@ -33,7 +33,7 @@ abstract class Config {
 				sprintf( 
 					esc_html__(
 						'When extending %s, you must create a `register` method, merging existing arguments with new ones.',
-						'wecodeart' 
+						wecodeart_config( 'textdomain' )
 					),
 					__CLASS__
 				),

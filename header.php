@@ -21,7 +21,9 @@ use WeCodeArt\Utilities\Markup;
         <link rel="profile" href="http://gmpg.org/xfn/11">
         <?php wp_head(); // WP Head. ?>
     </head>	
-    <body <?php echo Markup::generate_attr( 'body', [ 'class' => implode( ' ', get_body_class() ) ] ); ?>>
+    <body <?php echo Markup::generate_attr( 'body', [
+        'class' => implode( ' ', get_body_class() )
+    ] ); ?>>
     <?php
         /**
          * Added via Hook to avoid extra check for function exists/backwards compatability
@@ -36,7 +38,10 @@ use WeCodeArt\Utilities\Markup;
 
         do_action( 'wecodeart/hook/inner/before' ); 	// Hook Inner Before 
     ?>
-        <div <?php echo Markup::generate_attr( 'content-wrapper', [ 'class' => 'content', 'id' => 'content' ] ); ?>>
+        <div <?php echo Markup::generate_attr( 'content-wrapper', [
+            'class' => 'content',
+            'id'    => 'content'
+        ] ); ?>>
     <?php
         do_action( 'wecodeart/hook/inner/top' );		// Hook Inner Top
     ?>

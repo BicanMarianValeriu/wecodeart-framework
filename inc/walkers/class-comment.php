@@ -9,7 +9,7 @@
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.9
- * @version		3.9.5
+ * @version		3.9.9
  */
 
 namespace WeCodeArt\Walkers;
@@ -23,7 +23,10 @@ use Walker_Comment;
  */
 class Comment extends Walker_Comment {
 	var $tree_type = 'comment';
-	var $db_fields = [ 'parent' => 'comment_parent', 'id' => 'comment_ID' ];
+	var $db_fields = [ 
+		'parent' 	=> 'comment_parent',
+		'id' 		=> 'comment_ID' 
+	];
 
 	/**
 	 * Start Level
@@ -68,13 +71,14 @@ class Comment extends Walker_Comment {
 	
 	/**
 	 * Outputs a HTML5 comment.
+	 *
 	 * @since	2.0
-	 * @version	3.9.5
+	 * @version	3.9.9
 	 */
 	protected function comment( $comment, $depth, $args ) {
 		// Get what we need.
 		$class 			= join( ' ', get_comment_class() );
-		$author_img 	= get_avatar( $comment, $args['avatar_size'], '', esc_html__( 'Author\'s gravatar', 'wecodeart' ) );
+		$author_img 	= get_avatar( $comment, $args['avatar_size'], '', esc_html__( 'Author\'s gravatar', wecodeart_config( 'textdomain' ) ) );
 		$author_name 	= '<strong itemprop="name">' . $comment->comment_author . '</strong>';
 		if ( ! empty( $comment->comment_author_url ) && 'http://' !== $comment->comment_author_url ) {
 			$author_name = sprintf(
@@ -88,7 +92,7 @@ class Comment extends Walker_Comment {
 		$comment_date = apply_filters( 'wecodeart/filter/comments/date/enable', true );
 		$comment_amst = apply_filters( 
 			'wecodeart/filter/comments/awaiting-moderation-text', 
-			esc_html__( 'Your comment is awaiting moderation.', 'wecodeart' ) 
+			esc_html__( 'Your comment is awaiting moderation.', wecodeart_config( 'textdomain' ) ) 
 		);	
 
 		// The HTML.
@@ -105,7 +109,7 @@ class Comment extends Walker_Comment {
 								printf( 
 									'<p class="comment-date"><time class="created" itemprop="dateCreated" datetime="%1$s">%2$s</time></p>', 
 									esc_html( get_comment_date( DATE_W3C ) ),
-									esc_html( get_comment_date() ) . ' ' . esc_html__( 'at', 'wecodeart' ) . ' ' . esc_html( get_comment_time() ) 
+									esc_html( get_comment_date() ) . ' ' . esc_html__( 'at', wecodeart_config( 'textdomain' ) ) . ' ' . esc_html( get_comment_time() ) 
 								);
 							endif;
 						echo '</div>';

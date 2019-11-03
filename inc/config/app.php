@@ -39,7 +39,7 @@ return [
     | be in sync with `Text Domain:` entry inside style.css theme file.
     |
     */
-    'textdomain' => wp_get_theme()->get( 'TextDomain' ),
+    'textdomain' => 'wecodeart',
     /*
     |--------------------------------------------------------------------------
     | Templates files extension
@@ -81,5 +81,25 @@ return [
         'views'     => 'views',
         'assets'    => 'assets',
         'languages' => 'languages',
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Theme Customizer
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for customizer options.
+    |
+    */
+    'customizer' => [
+        'header-bar-container'      => 'container',
+        'header-bar-modules'        => [ 'branding', 'menu', 'search' ],
+        'content-layout-container'  => 'container',
+        'content-layout-modules'    => [ 'content', 'primary' ],
+        'footer-layout-container'   => 'container',
+        'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
+        'footer-copyright-text'     => sprintf(
+            __( 'Copyright %s - All rights reserved.', 'wecodeart' ), 
+            '&copy; ' . date( 'Y' )
+        ),
     ],
 ];

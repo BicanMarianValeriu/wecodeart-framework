@@ -16,7 +16,7 @@ namespace WeCodeArt\Support\WooCommerce;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Utilities\Helpers as Helpers;
+use WeCodeArt\Utilities\Helpers;
 
 /**
  * Callbacks used on WooCommerce

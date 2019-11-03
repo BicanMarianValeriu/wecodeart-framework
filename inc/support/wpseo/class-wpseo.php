@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.3
+ * @version		3.9.9
  */
 
 namespace WeCodeArt\Support;
@@ -57,12 +57,12 @@ class WPSeo {
 	 * Yoast BreadCrumbs
 	 *
 	 * @since   3.5
-	 * @version 3.8.3
+	 * @version 3.9.9
 	 *
 	 * @return  void
 	 */
 	public function render_yoast_breadcrumbs() {
-		if( Callbacks::is_front_page() ) {
+		if( wecodeart( 'is_front_page' )->is_met() ) {
 			return;
 		}
 

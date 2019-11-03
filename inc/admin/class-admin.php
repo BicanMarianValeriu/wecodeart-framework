@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		3.9.7
+ * @version		4.0
  */
 
 namespace WeCodeArt;
@@ -28,7 +28,7 @@ class Admin {
 	 * Send to Constructor
 	 */
 	public function init() {
-		if( ! is_admin() ) {
+		if( ! wecodeart_if( 'is_admin' ) ) {
 			return;
 		}
 

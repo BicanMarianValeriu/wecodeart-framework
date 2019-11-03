@@ -9,8 +9,14 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.9.5
- * @version		3.9.5
+ * @version		4.0.0
  */
+
+use WeCodeArt\Utilities\Conditional\Admin_Conditional;
+use WeCodeArt\Utilities\Conditional\Logged_In_Conditional;
+use WeCodeArt\Utilities\Conditional\Front_Page_Conditional;
+use WeCodeArt\Utilities\Conditional\Full_Layout_Conditional;
+use WeCodeArt\Utilities\Conditional\Post_Archive_Conditional;
 
 /**
  * Bind Config.
@@ -180,3 +186,28 @@ wecodeart()->bind( 'register_sidebars', function( WeCodeArt $theme, $parameters 
         ] );
     }
 } );
+
+/**
+ * Bind Conditionals.
+ *
+ * @since   4.0
+ *
+ * @param   array $parameters
+ *
+ * @return  void
+ */
+$conditionals = [
+    'is_admin'          => Admin_Conditional::class,
+    'is_logged'         => Logged_In_Conditional::class,
+    'is_front_page'     => Front_Page_Conditional::class,
+    'is_full_layout'    => Full_Layout_Conditional::class,
+    'is_post_archive'   => Post_Archive_Conditional::class,
+];
+
+foreach ( $conditionals as $key => $conditional ) {
+
+    wecodeart()->bind( $key, function( WeCodeArt $theme ) use ( $conditional ) {
+        return ( new $conditional );
+    } );
+
+}

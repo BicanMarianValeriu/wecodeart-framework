@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.6
+ * @version		3.9.9
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -45,11 +45,11 @@ class Footer extends Config {
 				'type' 			=> 'control',
 				'control'  		=> 'select',
 				'section'		=> 'footer-layout',
-				'title' 		=> esc_html__( 'Grid Type', 'wecodeart' ),
-				'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
+				'title' 		=> esc_html__( 'Grid Type', wecodeart_config( 'textdomain' ) ),
+				'description' 	=> esc_html__( 'Choose the type of the container class.', wecodeart_config( 'textdomain' ) ),
 				'choices'  		=> [
-					'container'			=> esc_html__( 'Container', 'wecodeart' ),
-					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
+					'container'			=> esc_html__( 'Container', wecodeart_config( 'textdomain' ) ),
+					'container-fluid' 	=> esc_html__( 'Container Fluid', wecodeart_config( 'textdomain' ) ),
 				], 
 				'priority' 		=> 5, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ], 
@@ -60,8 +60,8 @@ class Footer extends Config {
 				'type'        	=> 'control',
 				'control'  		=> 'wecodeart-sortable',
 				'section'		=> 'footer-layout',
-				'title'			=> esc_html__( 'Footer Columns', 'wecodeart' ),
-				'description'	=> esc_html__( 'Enable and reorder Footer Columns.', 'wecodeart' ),
+				'title'			=> esc_html__( 'Footer Columns', wecodeart_config( 'textdomain' ) ),
+				'description'	=> esc_html__( 'Enable and reorder Footer Columns.', wecodeart_config( 'textdomain' ) ),
 				'priority'   	=> 10, 
 				'choices'		=> $widgets,
 				'transport'		=> 'postMessage',
@@ -76,8 +76,8 @@ class Footer extends Config {
 				'type'        	=> 'control',
 				'control'  		=> 'textarea',
 				'section'		=> 'footer-copyright',
-				'title'			=> esc_html__( 'Footer Copyright Text', 'wecodeart' ),
-				'description'	=> esc_html__( 'Enter your copyright text here. Appears in Footer attribution.', 'wecodeart' ),
+				'title'			=> esc_html__( 'Footer Copyright Text', wecodeart_config( 'textdomain' ) ),
+				'description'	=> esc_html__( 'Enter your copyright text here. Appears in Footer attribution.', wecodeart_config( 'textdomain' ) ),
 				'priority'		=> 5,
 				'sanitize_callback'	=> 'sanitize_text_field', 
 				'transport'		=> 'postMessage',

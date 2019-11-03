@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Header
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.6
+ * @version		3.9.9
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -42,11 +42,11 @@ class Header extends Config {
 				'type' 			=> 'control',
 				'control'  		=> 'select',
 				'section'		=> 'header-bar',
-				'title' 		=> esc_html__( 'Grid Type', 'wecodeart' ),
-				'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
+				'title' 		=> esc_html__( 'Grid Type', wecodeart_config( 'textdomain' ) ),
+				'description' 	=> esc_html__( 'Choose the type of the container class.', wecodeart_config( 'textdomain' ) ),
 				'choices'  		=> [
-					'container'			=> esc_html__( 'Container', 'wecodeart' ),
-					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
+					'container'			=> esc_html__( 'Container', wecodeart_config( 'textdomain' ) ),
+					'container-fluid' 	=> esc_html__( 'Container Fluid', wecodeart_config( 'textdomain' ) ),
 				], 
 				'priority' 		=> 5, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ], 
@@ -57,8 +57,8 @@ class Header extends Config {
 				'type'        	=> 'control',
 				'control'  		=> 'wecodeart-sortable',
 				'section'		=> 'header-bar',
-				'title'        	=> esc_html__( 'Header Bar Modules', 'wecodeart' ),
-				'description'	=> esc_html__( 'Enable and reorder Header Bar modules.', 'wecodeart' ),
+				'title'        	=> esc_html__( 'Header Bar Modules', wecodeart_config( 'textdomain' ) ),
+				'description'	=> esc_html__( 'Enable and reorder Header Bar modules.', wecodeart_config( 'textdomain' ) ),
 				'priority'   	=> 10, 
 				'choices'		=> wp_list_pluck( \WeCodeArt\Core\Header::nav_bar_modules(), 'label' ),
 				'transport'		=> 'postMessage',

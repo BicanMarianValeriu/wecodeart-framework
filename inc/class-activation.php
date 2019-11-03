@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.5
+ * @version		3.9.9
  */
 
 namespace WeCodeArt;
@@ -95,11 +95,14 @@ class Activation {
 	 * Set Translation Messages
 	 *
 	 * @since 	3.7.9
-	 * @version	3.9.5
+	 * @version	3.9.9
 	 */
 	public function set_i18n( $args = [] ) {
 		$defaults = [
-			'customizer' => esc_html__( 'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 'wecodeart' ),
+			'customizer' => esc_html__( 
+				'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 
+				wecodeart_config( 'textdomain' )
+			),
 		];
 
 		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/i18n', $defaults ) );
@@ -111,15 +114,13 @@ class Activation {
 	 * Set Requirements
 	 *
 	 * @since 	3.5
-	 * @version	3.9.5
+	 * @version	3.9.9
 	 */
 	public function set_requirements( $args = [] ) {
-		$config 		= Config::get_config();
-		$requirements 	= isset( $config['requirements'] ) ? $config['requirements'] : [];
-
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/requirements', $requirements ) );
-
-		return $this->requirements = $args;	
+		return $this->requirements = wp_parse_args( $args, apply_filters( 
+			'wecodeart/filter/activation/requirements', 
+			wecodeart_config( 'requirements' ) 
+		) );	
 	}
 
 	/**

@@ -93,7 +93,7 @@ class Header {
 			'attrs' => [
 				'class' => 'row no-gutters align-items-center'
 			]
-		] ], 'get_template_part', [ 'views/header/bar', 'branding'  ] );
+		] ], 'get_template_part', [ 'views/header/bar', 'branding' ] );
 	}
 
 	/**
@@ -114,11 +114,11 @@ class Header {
 			]
 		] ], 'wp_nav_menu', [ apply_filters( 'wecodeart/filter/menu/main', [
 			'theme_location' => 'primary',
-			'container' 	 => 'nav', 
-			'menu_class' 	 => 'menu nav justify-content-end', 
-			'depth' 		 => 10,  
+			'container' 	 => 'nav',
+			'menu_class' 	 => 'menu nav justify-content-end',
+			'depth' 		 => 10,
 			'walker' 		 => new \WeCodeArt\Walkers\Menu,
-			'fallback_cb'	 => 'WeCodeArt\Walkers\Menu::fallback' 
+			'fallback_cb'	 => 'WeCodeArt\Walkers\Menu::fallback'
 		] ) ] );
 	}
 
@@ -174,22 +174,22 @@ class Header {
 	 * Variable that holds the Header Modules and Options
 	 *
 	 * @since	1.5
-	 * @version	3.7.7
+	 * @version	3.9.9
 	 *
 	 * @return 	array
 	 */
 	public static function nav_bar_modules() {
 		$defaults = [
 			'branding' => [
-				'label'    => esc_html__( 'Site Branding', 'wecodeart' ),
+				'label'    => esc_html__( 'Site Branding', wecodeart_config( 'textdomain' ) ),
 				'callback' => [ __CLASS__, 'display_branding' ]
 			],
 			'menu' => [
-				'label'    => esc_html__( 'Primary Menu', 'wecodeart' ),
+				'label'    => esc_html__( 'Primary Menu', wecodeart_config( 'textdomain' ) ),
 				'callback' => [ __CLASS__, 'display_menu' ]
 			],
 			'search' => [
-				'label'    => esc_html__( 'Search Form', 'wecodeart' ),
+				'label'    => esc_html__( 'Search Form', wecodeart_config( 'textdomain' ) ),
 				'callback' => [ __CLASS__, 'display_search' ]
 			],
 		];

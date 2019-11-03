@@ -16,10 +16,6 @@ namespace WeCodeArt\Support\WooCommerce;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-use WeCodeArt\Customizer\Config;
-use WeCodeArt\Customizer\Formatting;
-use WeCodeArt\Support\WooCommerce\Callbacks;
-
 /**
  * Handles Customizer Settings for WooCommerce
  */
@@ -43,10 +39,10 @@ class Customizer {
 	 * @since 3.6.0
 	 */
 	public function extend_defaults( $defaults ) {
-		$defaults['content-layout-container-product-archive'] = 'container';
-		$defaults['content-layout-modules-product-archive'] = [ 'content', 'primary' ];
-		$defaults['content-layout-container-product-singular'] = 'container';
-		$defaults['content-layout-modules-product-singular'] = [ 'content', 'primary' ];
+		$defaults['content-layout-container-product-archive'] 	= 'container';
+		$defaults['content-layout-modules-product-archive'] 	= [ 'content', 'primary' ];
+		$defaults['content-layout-container-product-singular'] 	= 'container';
+		$defaults['content-layout-modules-product-singular'] 	= [ 'content', 'primary' ];
 
 		return $defaults;
 	}

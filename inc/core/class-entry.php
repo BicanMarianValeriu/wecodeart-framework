@@ -152,17 +152,17 @@ class Entry {
 	 *
 	 * @since 	1.0
 	 * @uses	WeCodeArt\Utilities\Markup::wrap()
-	 * @version 3.9.5
+	 * @version 3.9.9
 	 *
 	 * @return 	void
 	 */
-	public function render_title( $echo = true ) {
+	public function render_title( $link = true, $echo = true ) {
 		Markup::wrap( 'entry-title', [ [
 			'tag' 	=> is_singular() ? 'h1' : 'h2',
 			'attrs' => [
 				'class' => 'entry-title'
 			]
-		] ], [ $this, 'the_title' ], [], $echo );
+		] ], [ $this, 'the_title' ], [ $link, $echo ], $echo );
 	}  
 
 	/**
