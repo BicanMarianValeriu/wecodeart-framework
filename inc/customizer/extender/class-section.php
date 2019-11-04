@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Customizer\Extender;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WP_Customize_Section as WP_Customize_Section;
 

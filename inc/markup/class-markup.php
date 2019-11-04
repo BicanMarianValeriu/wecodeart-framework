@@ -6,13 +6,13 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage  Utilities\Markup
+ * @subpackage  Markup
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.5
+ * @version		4.0.1
  */
 
-namespace WeCodeArt\Utilities;
+namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -79,6 +79,7 @@ class Markup {
 	 * Remove attributes from a HTML element.
 	 *
 	 * @since	3.9.3
+	 * @version	4.0.1
 	 *
 	 * @param 	string       	$text       A string of HTML formatted code.
 	 * @param 	array|string	$elements   Elements that $attributes should be stripped from.
@@ -86,7 +87,7 @@ class Markup {
 	 * @param 	bool         	$two_passes Whether the function should allow two passes.
 	 * @return 	string			HTML markup with attributes stripped.
 	 */
-	function strip_attr( $text, $elements, $attributes, $two_passes = true ) {
+	public static function strip_attr( $text, $elements, $attributes, $two_passes = true ) {
 
 		// Cache elements pattern.
 		$elements_pattern = implode( '|', (array) $elements );
@@ -166,7 +167,7 @@ class Markup {
      * Wrapper method for any html
 	 *
 	 * @since 	unknown
-	 * @version	3.9.5
+	 * @version	4.0.1
 	 *
 	 * @param	string	context		required ( used by generate_attr's dynamic filter )
 	 * @param 	mixed	function	required ( the function called to be wrapped )
@@ -246,7 +247,7 @@ class Markup {
 		 * Developer Comments
 		 * @since 3.7.0
 		 */
-		if( WP_DEBUG === true ) {
+		if( wecodeart_if( 'is_dev_mode' ) ) {
 			if( isset( $args[0]['attrs'] ) && isset( $args[0]['attrs']['class'] ) ) {
 				$classes = explode( ' ', $args[0]['attrs']['class'] );
 				$comment = ( count( $classes ) > 0 ) ? $classes[0] : $args[0]['attrs']['class'];

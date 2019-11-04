@@ -13,7 +13,7 @@
 
 namespace WeCodeArt;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 /**
  * Singleton DRY class

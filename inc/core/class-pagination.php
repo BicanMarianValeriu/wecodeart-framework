@@ -9,14 +9,14 @@
  * @subpackage 	Core\Pagination
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 /**
  * Handles Paginations
@@ -157,7 +157,10 @@ class Pagination {
             ]
 		], function() { ?>
             <h3 class="screen-reader-text"><?php 
-                printf( esc_html__( '%s Navigation', wecodeart_config( 'textdomain' ) ), get_post_type_object( get_post_type() )->labels->singular_name ); 
+                printf( 
+                    esc_html__( '%s Navigation', wecodeart_config( 'textdomain' ) ), 
+                    get_post_type_object( get_post_type() )->labels->singular_name 
+                ); 
             ?></h3>
             <?php 
             

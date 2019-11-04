@@ -6,27 +6,27 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Utilities\Conditional\is_post_archive
+ * @subpackage 	Conditional\is_logged
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		4.0
- * @version		4.0
+ * @version		4.0.1
  */
 
-namespace WeCodeArt\Utilities\Conditional;
+namespace WeCodeArt\Conditional;
 
 defined( 'ABSPATH' ) || exit(); 
 
-use WeCodeArt\Utilities\Conditional;
+use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
 
 /**
- * Conditional that is only met when in the post archive.
+ * Conditional that is only met when is logged in.
  */
-class Post_Archive_Conditional implements Conditional {
+class Logged_In implements Conditional {
 
 	/**
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return ( 'post' === \get_post_type() && ( \is_home() || \is_archive() || \is_search() ) );
+		return \is_user_logged_in();
 	}
 }

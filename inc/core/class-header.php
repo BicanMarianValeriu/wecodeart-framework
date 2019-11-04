@@ -9,14 +9,14 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.7.7
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 /**
  * Framework Header
@@ -39,7 +39,7 @@ class Header {
 	/**
 	 * Output HEADER markup function
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
 	 * @version	3.7.0
 	 *
@@ -75,7 +75,7 @@ class Header {
 	/**
 	 * Header Branding View
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	???
 	 * @version	3.9.6
 	 *
@@ -99,7 +99,7 @@ class Header {
 	/**
 	 * Header Menu View
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
 	 * @version	3.7.0
 	 *
@@ -125,7 +125,7 @@ class Header {
 	/**
 	 * Header Search View
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
 	 * @version	3.7.0
 	 * 
@@ -200,8 +200,8 @@ class Header {
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
-	 * @uses	WeCodeArt\Utilities\Markup::sortable()
+	 * @uses	WeCodeArt\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::sortable()
 	 * @since 	unknown
 	 * @version	3.7.7
 	 *

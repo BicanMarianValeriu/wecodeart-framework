@@ -8,14 +8,14 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Footer Template
  * @since  		1.0.0
- * @version 	3.9.5
+ * @version 	4.0.1
  */
 
         do_action( 'wecodeart/hook/inner/bottom' );     // Hook Inner Bottom
 
         echo '</div>';
 
-        if( wecodeart( 'is_dev_mode' ) ) {
+        if( wecodeart_if( 'is_dev_mode' ) ) {
             ?>
             <!-- /.content @filter = `wecodeart/filter/attributes/content` -->
             <?php 

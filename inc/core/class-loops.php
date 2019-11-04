@@ -9,15 +9,14 @@
  * @subpackage 	Loops
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.5
+ * @version		4.0.1
  */ 
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Core\Entry;
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 /**
  * Loops
@@ -54,7 +53,7 @@ class Loops {
 				/**
 				 * Entry Hook
 				 * 
-				 * @see 	WeCodeArt\Utilities\Markup::wrap()
+				 * @see 	WeCodeArt\Markup::wrap()
 				 * @see		do_action(); WP Function
 				 * @hook	'wecodeart_entry' 	
 				 * @hooked 	{

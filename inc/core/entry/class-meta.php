@@ -9,15 +9,15 @@
  * @subpackage 	Core\Entry\Meta
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.6
- * @version		4.0
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core\Entry;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Markup;
+use WeCodeArt\Markup\SVG;
 
 /**
  * Handles Entry Meta output
@@ -285,7 +285,7 @@ class Meta {
 	 * @uses	Markup::wrap()
 	 *
 	 * @since	3.6
-	 * @version	3.9.5
+	 * @version	4.0.1
 	 *
 	 * @return 	void
 	 */
@@ -301,7 +301,7 @@ class Meta {
 					'class' => 'entry-meta' 
 				]
 			] ], 
-			[ 'WeCodeArt\Utilities\Markup', 'sortable' ],
+			[ 'WeCodeArt\Markup', 'sortable' ],
 			[ self::modules(), self::get_options() ]
 		); 
 	}

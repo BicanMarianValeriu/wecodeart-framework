@@ -6,15 +6,15 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework 
- * @subpackage 	Utilities\Markup\Input
+ * @subpackage 	Markup\Input
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.1.2
- * @version		3.8.6
+ * @version		4.0.1
  */
 
-namespace WeCodeArt\Utilities\Markup;
+namespace WeCodeArt\Markup;
 
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+defined( 'ABSPATH' ) || exit();
 
 /**
  * Standard Inputs Markup
@@ -95,7 +95,7 @@ class Input {
 					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), esc_html( $label['text'] ) );
 				}
 			?>
-				<input <?php echo \WeCodeArt\Utilities\Markup::generate_attr( $type . '-input', $attrs ); ?>/>
+				<input <?php echo \WeCodeArt\Markup::generate_attr( $type . '-input', $attrs ); ?>/>
 			<?php if( ! empty( $messages ) ) self::messages( $messages ); ?>
 			<?php break;
 
@@ -112,7 +112,7 @@ class Input {
 				], $attrs ); 
 			?>
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-			<input <?php echo \WeCodeArt\Utilities\Markup::generate_attr( $type . '-input', $attrs ); ?>/>
+			<input <?php echo \WeCodeArt\Markup::generate_attr( $type . '-input', $attrs ); ?>/>
 			<?php
 				if ( isset( $label['text'] ) ) {
 					printf( '<label class="custom-control-label" for="%s">%s</label>', 
@@ -133,7 +133,7 @@ class Input {
 					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), esc_html( $label['text'] ) );
 				}
 			?>
-				<textarea <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'textarea', $attrs ); ?>></textarea>
+				<textarea <?php echo \WeCodeArt\Markup::generate_attr( 'textarea', $attrs ); ?>></textarea>
 				<?php if( ! empty( $messages ) ) self::messages( $messages ); ?>
 			<?php break;
 			
@@ -148,7 +148,7 @@ class Input {
 				unset( $attrs['type'] );
 				unset( $attrs['placeholder'] );
 			?>
-				<select <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'select', $attrs ); ?>>
+				<select <?php echo \WeCodeArt\Markup::generate_attr( 'select', $attrs ); ?>>
 					<?php if( $placeholder ) { ?>
 						<option disabled<?php if( ! isset( $attrs['value'] ) ) : ?> selected<?php endif; ?>><?php 
 							echo esc_html( $placeholder ); 
@@ -160,7 +160,7 @@ class Input {
 							'selected'	=> isset( $attrs['value'] ) ? (string) $attrs['value'] === (string) $value : null
 						];
 						?>
-						<option <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'select-option', $option ); ?>><?php 
+						<option <?php echo \WeCodeArt\Markup::generate_attr( 'select-option', $option ); ?>><?php 
 							echo esc_html( $label );
 						?></option>
 					<?php } ?>
@@ -180,7 +180,7 @@ class Input {
 				$classes = array_merge( [ 'form-group', 'fieldset', 'fieldset--' . $ctx, 'text-left' ], $classes );
 				$fieldset = [ 'class' => implode( ' ', $classes ) ];
 				?>
-				<fieldset <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'fieldset-' . $ctx, $fieldset ); ?>>
+				<fieldset <?php echo \WeCodeArt\Markup::generate_attr( 'fieldset-' . $ctx, $fieldset ); ?>>
 				<?php if ( isset( $label['text'] ) ) {
 					printf( '<legend>%s</legend>', esc_html( $label['text'] ) ); 
 				}
@@ -188,7 +188,7 @@ class Input {
 					$wrap_args = [ 'class' => 'form-check custom-control custom-' . $ctx ];
 					$label = is_string( $label ) ? [ 'text' => $label ] : $label;
 				?>
-					<div <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'fieldset-' . $ctx . '-wrap', $wrap_args ); ?>>
+					<div <?php echo \WeCodeArt\Markup::generate_attr( 'fieldset-' . $ctx . '-wrap', $wrap_args ); ?>>
 				<?php
 					$input_args = [
 						'id'		=> $key,
@@ -200,7 +200,7 @@ class Input {
 						'disabled'	=> isset( $label['disabled'] ) && (bool) $label['disabled'] === true ? true : null
 					];
 
-					$input_attrs = \WeCodeArt\Utilities\Markup::generate_attr( 'fieldset-' . $ctx . '-input', $input_args );
+					$input_attrs = \WeCodeArt\Markup::generate_attr( 'fieldset-' . $ctx . '-input', $input_args );
 				?>
 					<input <?php echo $input_attrs; // WPCS OK - Escaped in function above. ?>/>
 					<?php 
@@ -217,7 +217,7 @@ class Input {
 			 * Default/Other Value goes to hidden field
 			 */
 			default : ?>
-				<input <?php echo \WeCodeArt\Utilities\Markup::generate_attr( 'hidden-input', $attrs ); ?>/>
+				<input <?php echo \WeCodeArt\Markup::generate_attr( 'hidden-input', $attrs ); ?>/>
 			<?php
 		}
 	}

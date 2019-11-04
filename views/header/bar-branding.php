@@ -8,12 +8,13 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Header Branding HTML
  * @since	 	3.0.5
- * @version    	3.9.9
+ * @version    	4.0.1
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\kses_svg;
 
 ?>
 <div class="col">
@@ -38,7 +39,7 @@ use WeCodeArt\Utilities\Markup\SVG;
 	<div class="col-auto d-lg-none">
 		<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__search" aria-expanded="false" aria-controls="bar-search">
 			<span class="screen-reader-text"><?php esc_html_e( 'Search', wecodeart_config( 'textdomain' ) ); ?></span>
-			<?php SVG::render( 'search' ); ?>
+			<?php echo kses_svg( SVG::compile( 'search' ) ); ?>
 		</button>
 	</div>
 	<?php }
@@ -46,7 +47,7 @@ use WeCodeArt\Utilities\Markup\SVG;
 	<div class="col-auto d-lg-none">
 		<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__menu" aria-expanded="false" aria-controls="bar-menu">
 			<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', wecodeart_config( 'textdomain' ) ); ?></span>
-			<?php SVG::render( 'bars' ); ?>
+			<?php echo kses_svg( SVG::compile( 'bars' ) ); ?>
 		</button>
 	</div>
 	<?php }

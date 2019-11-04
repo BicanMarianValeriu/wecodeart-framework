@@ -6,19 +6,22 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework 
- * @subpackage 	Utilities\Markup\Template
+ * @subpackage 	Markup\Template
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.7.3
- * @version     3.9.5
+ * @version     4.0.1
  */
 
-namespace WeCodeArt\Utilities\Markup;
+namespace WeCodeArt\Markup;
 
 defined( 'ABSPATH' ) || exit(); 
 
 use WeCodeArt\Config\Interfaces\ConfigInterface;
 use WeCodeArt\Config\Exceptions\FileNotFoundException;
 
+/**
+ * Template
+ */
 class Template {
     /**
      * Theme config instance.

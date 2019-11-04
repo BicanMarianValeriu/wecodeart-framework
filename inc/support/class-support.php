@@ -9,7 +9,7 @@
  * @subpackage  Theme Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.7
+ * @version		4.0.1
  */
 
 namespace WeCodeArt;
@@ -20,6 +20,7 @@ use WeCodeArt\Support\ANR;
 use WeCodeArt\Support\WooCommerce;
 use WeCodeArt\Support\WPSeo;
 use WeCodeArt\Utilities\Helpers;
+use function WeCodeArt\Functions\detect_plugin;
 
 /**
  * Support for various plugins and features.
@@ -39,9 +40,9 @@ class Support {
 		add_action( 'after_setup_theme', [ $this, 'register_menus' 		], 10 );
 
 		// Integrations/Compatability/Plugin Support
-		if( Helpers::detect_plugin( [ 'classes'		=> [ 'woocommerce' ] ] ) )			WooCommerce::get_instance();
-		if( Helpers::detect_plugin( [ 'constants' 	=> [ 'WPSEO_VERSION' ] ] ) ) 		WPSeo::get_instance();
-		if( Helpers::detect_plugin( [ 'constants' 	=> [ 'ANR_PLUGIN_VERSION' ] ] ) ) 	ANR::get_instance();
+		if( detect_plugin( [ 'classes'		=> [ 'woocommerce' ] ] ) )			WooCommerce::get_instance();
+		if( detect_plugin( [ 'constants' 	=> [ 'WPSEO_VERSION' ] ] ) ) 		WPSeo::get_instance();
+		if( detect_plugin( [ 'constants' 	=> [ 'ANR_PLUGIN_VERSION' ] ] ) ) 	ANR::get_instance();
 	}
 
 	/**

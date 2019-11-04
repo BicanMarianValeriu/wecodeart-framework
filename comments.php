@@ -8,10 +8,10 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Comments Template
  * @since 		1.0
- * @version		3.9.5
+ * @version		4.0.1
  */
 
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' === basename( $_SERVER['SCRIPT_FILENAME'] ) ) {
 	die( 'Please do not load this page directly!' );
@@ -32,7 +32,7 @@ if ( post_password_required() ) {
 do_action( 'wecodeart/hook/comments/before' );
 
 /**
- * @see 	WeCodeArt\Utilities\Markup::wrap()
+ * @see 	WeCodeArt\Markup::wrap()
  * @hook	'wecodeart_comments'
  * @hooked 	{
  * - WeCodeArt\Core\Comments	->render_meta()		- 10	comments intro text

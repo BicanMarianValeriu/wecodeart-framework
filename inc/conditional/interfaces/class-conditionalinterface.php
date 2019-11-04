@@ -6,27 +6,27 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Utilities\Conditional\is_admin
+ * @subpackage 	Conditional\Interfaces
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		4.0
  * @version		4.0
  */
 
-namespace WeCodeArt\Utilities\Conditional;
+namespace WeCodeArt\Conditional\Interfaces;
 
 defined( 'ABSPATH' ) || exit(); 
 
-use WeCodeArt\Utilities\Conditional;
-
 /**
- * Conditional that is only met when in the admin.
+ * Conditional interface, used to prevent integrations from loading.
+ *
+ * @package WeCodeArt\Conditional\ConditionalInterface
  */
-class Admin_Conditional implements Conditional {
+interface ConditionalInterface {
 
 	/**
-	 * @inheritdoc
+	 * Returns whether or not this conditional is met.
+	 *
+	 * @return boolean Whether or not the conditional is met.
 	 */
-	public function is_met() {
-		return \is_admin();
-	}
+	public function is_met();
 }

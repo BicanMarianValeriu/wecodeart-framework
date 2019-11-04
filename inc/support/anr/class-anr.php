@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		3.8.9
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Support;
@@ -17,7 +17,7 @@ namespace WeCodeArt\Support;
 defined( 'ABSPATH' ) || exit;
 
 use anr_captcha_class as Captcha;
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 /**
  * ANR Integration

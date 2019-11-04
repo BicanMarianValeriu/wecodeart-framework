@@ -9,13 +9,13 @@
  * @subpackage 	Entry\Meta\Tags
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.9.5
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\kses_svg;
 
 /**
  * @param   int     $post_id   WP_Post ID
@@ -25,7 +25,7 @@ use WeCodeArt\Utilities\Markup\SVG;
 <span class="entry-tags">
     <span class="d-inline-block mr-1"><?php
     
-        echo Helpers::kses_svg( SVG::compile( 'tags' ) );
+        echo kses_svg( SVG::compile( 'tags' ) );
 
     ?></span>
     <span class="screen-reader-text"><?php

@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Customizer\Config;
 use WeCodeArt\Customizer\Formatting;
-use WeCodeArt\Support\WooCommerce\Callbacks;
 
 /**
  * Customizer Config initial setup
@@ -36,7 +35,6 @@ class Content extends Config {
 	public function register( $configurations, $wp_customize ) {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
-		$callbacks	= Callbacks::get_instance();
 
 		// Content Modules Choices.
 		$c_modules = wp_list_pluck( \WeCodeArt\Core\Content::content_modules(), 'label' );

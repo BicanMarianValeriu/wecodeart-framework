@@ -9,14 +9,14 @@
  * @subpackage 	Core\Author
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.7.7
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 /**
  * Adds some output to archive pages

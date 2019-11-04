@@ -9,7 +9,7 @@
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.6
- * @version		3.9.9
+ * @version		4.0.1
  */
 
 namespace WeCodeArt;
@@ -20,6 +20,7 @@ use WeCodeArt\Utilities\Helpers;
 use WeCodeArt\Customizer\Partials;
 use WeCodeArt\Customizer\Controls;
 use WeCodeArt\Customizer\Configs;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Customizer Options
@@ -259,13 +260,15 @@ class Customizer {
 	 *
 	 * @param 	Array                $config Panel Configuration settings.
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
+	 *
 	 * @since 	3.5
+	 * @version	4.0.1
 	 *
 	 * @return 	void
 	 */
 	private function register_panel( $config, $wp_customize ) {
 		$wp_customize->add_panel( 
-			new Customizer\Extender\Panel( $wp_customize, Helpers::get_prop( $config, 'name' ), $config ) 
+			new Customizer\Extender\Panel( $wp_customize, get_prop( $config, 'name' ), $config ) 
 		);
 	}
 
@@ -274,13 +277,15 @@ class Customizer {
 	 *
 	 * @param 	Array                $config Panel Configuration settings.
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
+	 *
 	 * @since 	3.5
+	 * @version	4.0.1
 	 *
 	 * @return 	void
 	 */
 	private function register_section( $config, $wp_customize ) {
-		$callback = Helpers::get_prop( $config, 'section_callback', 'WeCodeArt\Customizer\Extender\Section' );
-		$wp_customize->add_section( new $callback( $wp_customize, Helpers::get_prop( $config, 'name' ), $config ) );
+		$callback = get_prop( $config, 'section_callback', 'WeCodeArt\Customizer\Extender\Section' );
+		$wp_customize->add_section( new $callback( $wp_customize, get_prop( $config, 'name' ), $config ) );
 	}
 	
 	/**
@@ -288,50 +293,52 @@ class Customizer {
 	 *
 	 * @param 	Array                $config Panel Configuration settings.
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
+	 *
 	 * @since 	3.5
+	 * @version	4.0.1
 	 *
 	 * @return 	void
 	 */
 	private function register_control( $config, $wp_customize ) {
 		$wp_customize->add_setting(
-			Helpers::get_prop( $config, 'name' ),
+			get_prop( $config, 'name' ),
 			[
 				// Default of the 'default' is null if not exists since we apply it with wp filter after theme setup
-				'default'			=> Helpers::get_prop( $config, 'default' ),
-				'type'              => Helpers::get_prop( $config, 'datastore_type' ),
-				'transport'         => Helpers::get_prop( $config, 'transport', 'refresh' ),
-				'sanitize_callback' => Helpers::get_prop( $config, 'sanitize_callback', 
+				'default'			=> get_prop( $config, 'default' ),
+				'type'              => get_prop( $config, 'datastore_type' ),
+				'transport'         => get_prop( $config, 'transport', 'refresh' ),
+				'sanitize_callback' => get_prop( $config, 'sanitize_callback', 
 					// Set Sanitize Callback Automatically
-					Customizer\Controls::get_sanitize_call( Helpers::get_prop( $config, 'control' ) ) 
+					Customizer\Controls::get_sanitize_call( get_prop( $config, 'control' ) ) 
 				),
 			]
 		);
 
-		$instance = Customizer\Controls::get_control_instance( Helpers::get_prop( $config, 'control' ) );
+		$instance = Customizer\Controls::get_control_instance( get_prop( $config, 'control' ) );
 
-		$config['label'] = Helpers::get_prop( $config, 'title' );
-		$config['type']  = Helpers::get_prop( $config, 'control' ); 
+		$config['label'] = get_prop( $config, 'title' );
+		$config['type']  = get_prop( $config, 'control' ); 
 
 		/**
 		 * Register a new custom control instance or wp default
 		 */
 		if ( false !== $instance ) {
 			$wp_customize->add_control(
-				new $instance( $wp_customize, Helpers::get_prop( $config, 'name' ), $config )
+				new $instance( $wp_customize, get_prop( $config, 'name' ), $config )
 			);
 		} else {
-			$wp_customize->add_control( Helpers::get_prop( $config, 'name' ), $config );
+			$wp_customize->add_control( get_prop( $config, 'name' ), $config );
 		}
 
 		/**
 		 * Add support to define partial inside our custom config
 		 */
-		if ( Helpers::get_prop( $config, 'partial', false ) ) {
+		if ( get_prop( $config, 'partial', false ) ) {
 			if ( isset( $wp_customize->selective_refresh ) ) {
-				$wp_customize->selective_refresh->add_partial( Helpers::get_prop( $config, 'name' ), [
-					'selector'            => Helpers::get_prop( $config['partial'], 'selector' ),
-					'container_inclusive' => Helpers::get_prop( $config['partial'], 'container_inclusive' ),
-					'render_callback'     => Helpers::get_prop( $config['partial'], 'render_callback' ),
+				$wp_customize->selective_refresh->add_partial( get_prop( $config, 'name' ), [
+					'selector'            => get_prop( $config['partial'], 'selector' ),
+					'container_inclusive' => get_prop( $config['partial'], 'container_inclusive' ),
+					'render_callback'     => get_prop( $config['partial'], 'render_callback' ),
 				] );
 			}
 		}

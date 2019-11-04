@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.9
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Support;
@@ -17,10 +17,9 @@ namespace WeCodeArt\Support;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Core\Content;
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\SVG;
-use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Utilities\Callbacks;
+use WeCodeArt\Markup;
+use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\detect_plugin;
 
 /**
  * WPSEO Integration
@@ -31,14 +30,13 @@ class WPSeo {
 
 	/**
 	 * Send to Constructor
+	 *
 	 * @since 3.6.2
 	 */
 	public function init() {
 		if(
-			(
-				apply_filters( 'wecodeart/filter/support/breadcrumbs/woocommerce-yoast', true ) ||
-				apply_filters( 'wecodeart/filter/support/yoast/breadcrumbs/woocommerce', true )
-			) && Helpers::detect_plugin( [ 'classes' => [ 'woocommerce' ] ] )
+			apply_filters( 'wecodeart/filter/support/yoast/breadcrumbs/woocommerce', true ) && 
+			detect_plugin( [ 'classes' => [ 'woocommerce' ] ] )
 		) {
 			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 		}
@@ -57,12 +55,12 @@ class WPSeo {
 	 * Yoast BreadCrumbs
 	 *
 	 * @since   3.5
-	 * @version 3.9.9
+	 * @version 4.0.1
 	 *
 	 * @return  void
 	 */
 	public function render_yoast_breadcrumbs() {
-		if( wecodeart( 'is_front_page' )->is_met() ) {
+		if( wecodeart_if( 'is_front_page' ) ) {
 			return;
 		}
 

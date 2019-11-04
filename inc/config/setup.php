@@ -9,14 +9,8 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.9.5
- * @version		4.0.0
+ * @version		4.0.1
  */
-
-use WeCodeArt\Utilities\Conditional\Admin_Conditional;
-use WeCodeArt\Utilities\Conditional\Logged_In_Conditional;
-use WeCodeArt\Utilities\Conditional\Front_Page_Conditional;
-use WeCodeArt\Utilities\Conditional\Full_Layout_Conditional;
-use WeCodeArt\Utilities\Conditional\Post_Archive_Conditional;
 
 /**
  * Bind Config.
@@ -26,6 +20,18 @@ use WeCodeArt\Utilities\Conditional\Post_Archive_Conditional;
  */
 wecodeart()->bind( 'config', function () use ( $config ) {
     return new WeCodeArt\Config( $config );
+} );
+
+/**
+ * Bind Conditionals.
+ *
+ * @since   4.0.1
+ *
+ * @param   array   $conditionals   - configuration object passed earlier.
+ * @return  void
+ */
+wecodeart()->bind( 'conditionals', function () use ( $conditionals ) {
+    return new WeCodeArt\Conditional( $conditionals );
 } );
 
 /**
@@ -70,17 +76,6 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
 } );
 
 /**
- * Bind is_dev_mode.
- *
- * @since   3.9.5
- *
- * @return bool
- */
-wecodeart()->bind( 'is_dev_mode', function () {
-    return defined( 'WP_DEBUG' ) && WP_DEBUG || defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
-} );
-
-/**
  * Bind ThemeName.
  *
  * @since   3.9.5
@@ -105,11 +100,12 @@ wecodeart()->bind( 'name', function () {
  * Bind Version.
  *
  * @since   3.9.5
+ * @version 4.0.1
  *
  * @return string
  */
-wecodeart()->bind( 'version', function ( WeCodeArt $theme ) {
-    if ( wecodeart( 'is_dev_mode' ) ) {
+wecodeart()->bind( 'version', function () {
+    if ( wecodeart_if( 'is_dev_mode' ) ) {
 		return (string) time();
 	}
 
@@ -186,28 +182,3 @@ wecodeart()->bind( 'register_sidebars', function( WeCodeArt $theme, $parameters 
         ] );
     }
 } );
-
-/**
- * Bind Conditionals.
- *
- * @since   4.0
- *
- * @param   array $parameters
- *
- * @return  void
- */
-$conditionals = [
-    'is_admin'          => Admin_Conditional::class,
-    'is_logged'         => Logged_In_Conditional::class,
-    'is_front_page'     => Front_Page_Conditional::class,
-    'is_full_layout'    => Full_Layout_Conditional::class,
-    'is_post_archive'   => Post_Archive_Conditional::class,
-];
-
-foreach ( $conditionals as $key => $conditional ) {
-
-    wecodeart()->bind( $key, function( WeCodeArt $theme ) use ( $conditional ) {
-        return ( new $conditional );
-    } );
-
-}

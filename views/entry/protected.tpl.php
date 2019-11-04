@@ -8,14 +8,14 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Protected Template
  * @since 	    3.5
- * @version	    3.9.5
+ * @version	    4.0.1
  */
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Utilities\Markup\SVG;
-use WeCodeArt\Utilities\Markup\Input;
+use WeCodeArt\Markup\SVG;
+use WeCodeArt\Markup\Input;
+use function WeCodeArt\Functions\kses_svg;
 
 SVG::add_icon( 'key', [
     'viewBox'	=> '0 0 512 512',
@@ -42,7 +42,7 @@ SVG::add_icon( 'unlock', [
         <div class="input-group-prepend">
             <span class="input-group-text text-primary"><?php 
             
-                echo Helpers::kses_svg( SVG::compile( 'unlock', [
+                echo kses_svg( SVG::compile( 'unlock', [
                     'class' => 'fa-fw'
                 ] ) );
                 
@@ -63,7 +63,7 @@ SVG::add_icon( 'unlock', [
         <div class="input-group-append">
             <button type="submit" class="btn btn-dark"><?php
                 
-                echo Helpers::kses_svg( SVG::compile( 'key', [
+                echo kses_svg( SVG::compile( 'key', [
                     'class' => 'mr-2'
                 ] ) );
 

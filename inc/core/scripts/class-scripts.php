@@ -9,15 +9,15 @@
  * @subpackage 	Core\Scripts
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.9
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Helpers;
+use WeCodeArt\Markup;
+use function WeCodeArt\Functions\trim_css;
 use function WeCodeArt\Core\Scripts\get_asset;
 
 /**
@@ -105,13 +105,13 @@ class Scripts {
 	 * Filter Customizer Custom CSS
 	 *
 	 * @since	3.9.5
+	 * @version	4.0.1
 	 *
 	 * @param 	string $css CSS from Customizer.
 	 * @return 	string
 	 */
 	public function trim_customizer_css( $css ) {
-		$css = Helpers::trim_css( $css );
-		return $css;
+		return trim_css( $css );
 	}
 
 	/**
@@ -230,7 +230,7 @@ function get_asset( string $type, string $name, $location = '' ) {
 		);
 	}
 
-	$file_path = wecodeart( 'is_dev_mode' ) ? 'unminified' : 'minified';
+	$file_path = wecodeart_if( 'is_dev_mode' ) ? 'unminified' : 'minified';
 	$file_path .= '/' . $type;
 	$file_path .= $location ? '/' . $location . '/' : '/';
 	$file_path .= $name . '.' . $type;

@@ -9,7 +9,7 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.0
- * @version		3.9.9
+ * @version		4.0.1
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -28,9 +28,11 @@ use WeCodeArt\Core\Hooks;
 use WeCodeArt\Core\Scripts;
 use WeCodeArt\Admin;
 use WeCodeArt\Config;
+use WeCodeArt\Conditional;
 use WeCodeArt\Config\Exceptions\BindingResolutionException;
 
-// Include the autoloader.
+// Include the functions and autoloader.
+require_once( get_parent_theme_file_path( '/inc/functions.php' ) );
 require_once( get_parent_theme_file_path( '/inc/class-autoloader.php' ) );
 new WeCodeArt\Autoloader();
 
@@ -268,21 +270,20 @@ function wecodeart_config( $key = null, $default = null ) {
  * Check if condition is met.
  *
  * @since	4.0
- * @version	4.0
+ * @version	4.0.1
  *
  * @param   string|array    $parameters
- * @param   object          $theme
  *
  * @return  mixed|null|bool
  */
-function wecodeart_if( $parameters, WeCodeArt $theme = null ) {
+function wecodeart_if( $parameters ) {
     if( empty( $parameters ) ) return null;
-
-    $theme = $theme ?: WeCodeArt::get_instance();
     
     foreach ( (array) $parameters as $conditional ) {
-        if ( ! $theme->has( $conditional ) ) return null;
-        if ( ! $theme->get( $conditional )->is_met() ) return false;
+        if ( ! wecodeart( 'conditionals' )->has( $conditional ) ) return null;
+        $class  = wecodeart( 'conditionals' )->get( $conditional );
+        $is_met = ( new $class )->is_met();
+        if( ! $is_met ) return false;
     }
 
     return true;
@@ -291,10 +292,25 @@ function wecodeart_if( $parameters, WeCodeArt $theme = null ) {
 /**
  * App Binding Functions
  */
-$theme  = wecodeart(); 
-$config = Config::get_config();
+$theme          = wecodeart();
+$config         = Config::get_config();
+$conditionals   = Conditional::get_conditionals();
+
+/**
+ * Before Setup Hook
+ *
+ * @since 4.0.1 
+ */
+do_action( 'wecodeart/setup/before' );
 
 require_once __DIR__ . '/config/setup.php';
+
+/**
+ * After Setup Hook
+ *
+ * @since 4.0.1 
+ */
+do_action( 'wecodeart/setup/after' );
 
 /**
  * Maybe Load the theme if checks are passed

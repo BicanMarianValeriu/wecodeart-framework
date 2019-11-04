@@ -6,23 +6,24 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Utilities\Conditional\is_full_layout
+ * @subpackage 	Conditional\is_full_layout
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		4.0
- * @version		4.0
+ * @version		4.0.1
  */
 
-namespace WeCodeArt\Utilities\Conditional;
+namespace WeCodeArt\Conditional;
 
 defined( 'ABSPATH' ) || exit(); 
 
 use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Utilities\Conditional;
+use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Conditional that is only met when in Gutenberg has wide/full content.
  */
-class Full_Layout_Conditional implements Conditional {
+class Full_Layout implements ConditionalInterface {
 
 	/**
 	 * @inheritdoc
@@ -39,7 +40,7 @@ class Full_Layout_Conditional implements Conditional {
 
 		foreach( $blocks as $block ) {  
 			// If we have full/wide allign return true early and bail.
-			if( in_array( Helpers::get_prop( $block['attrs'], 'align' ), [ 'full', 'wide' ] ) ) {
+			if( in_array( get_prop( $block['attrs'], 'align' ), [ 'full', 'wide' ] ) ) {
 				return true;
 			}
 		}

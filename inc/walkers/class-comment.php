@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Walkers;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use Walker_Comment;
 

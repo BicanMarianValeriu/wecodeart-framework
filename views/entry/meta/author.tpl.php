@@ -9,13 +9,13 @@
  * @subpackage 	Entry\Meta\Author
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.9.5
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\kses_svg;
 
 /**
  * @param   string  $author_name   Author Name
@@ -26,7 +26,7 @@ use WeCodeArt\Utilities\Markup\SVG;
 <span class="entry-author mr-2">
     <span class="d-inline-block mr-1"><?php
     
-    echo Helpers::kses_svg( SVG::compile( 'user' ) );
+    echo kses_svg( SVG::compile( 'user' ) );
     
     ?></span>
     <span class="screen-reader-text"><?php

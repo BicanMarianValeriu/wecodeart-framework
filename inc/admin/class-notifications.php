@@ -9,14 +9,14 @@
  * @subpackage 	Notifications
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		3.9.0
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 /**
  * Notifications

@@ -8,10 +8,10 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Header
  * @since       1.0.0
- * @version     3.8.3
+ * @version     4.0.1
  */
 
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 ?>	
 <!DOCTYPE html>

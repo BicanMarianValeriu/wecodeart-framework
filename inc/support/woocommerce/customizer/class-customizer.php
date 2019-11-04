@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\WooCommerce;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Handles Customizer Settings for WooCommerce

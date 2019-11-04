@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Config\Interfaces\ConfigInterface;
 use WeCodeArt\Config\Exceptions\FileNotFoundException;
 
-
 /**
  * Framework Assets
  */

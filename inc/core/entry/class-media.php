@@ -9,16 +9,15 @@
  * @subpackage 	Entry Media Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.6
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core\Entry;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Core\Callbacks;
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Markup;
+use WeCodeArt\Markup\SVG;
 
 /**
  * Handles Entry Media output

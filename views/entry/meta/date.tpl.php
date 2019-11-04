@@ -9,13 +9,13 @@
  * @subpackage 	Entry\Meta\Date
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.9.5
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\kses_svg;
 
 /**
  * @param   array  $published   Date published
@@ -32,7 +32,7 @@ $class_published    = isset( $modified ) ? $class_published . ' d-none' : $class
 <span class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
     <span class="d-inline-block mr-1"><?php
 
-        echo Helpers::kses_svg( SVG::compile( 'clock' ) );
+        echo kses_svg( SVG::compile( 'clock' ) );
 
     ?></span>
     <span class="screen-reader-text"><?php

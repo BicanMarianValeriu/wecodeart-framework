@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.6
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Support\WooCommerce\Customizer;
@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Customizer\Config;
 use WeCodeArt\Customizer\Formatting;
-use WeCodeArt\Support\WooCommerce\Callbacks;
 
 /**
  * Customizer Config initial setup
@@ -37,7 +36,6 @@ class Content extends Config {
 	public function register( $configurations, $wp_customize ) {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
-		$callbacks	= Callbacks::get_instance();
 
 		// Content Modules Choices.
 		$c_modules = wp_list_pluck( \WeCodeArt\Core\Content::content_modules(), 'label' );
@@ -57,8 +55,9 @@ class Content extends Config {
 				'priority'			=> 15, 
 				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ],
 				'transport'			=> 'postMessage',
-				'active_callback'	=> [ $callbacks, '_is_woocommerce_archive' ],
-				'transport'			=> 'postMessage' 
+				'active_callback'	=> function() {
+					return wecodeart_if( 'is_woocommerce_archive' );
+				}, 
 			),
 			array(
 				'name'				=> 'content-layout-modules-product-archive',
@@ -69,8 +68,10 @@ class Content extends Config {
 				'description'		=> esc_html__( 'Enable and reorder Site Inner modules.', 'wecodeart' ),
 				'priority'			=> 20, 
 				'choices'			=> $c_modules,
-				'active_callback' 	=> [ $callbacks, '_is_woocommerce_archive' ],
 				'transport'			=> 'postMessage',
+				'active_callback' 	=> function() {
+					return wecodeart_if( 'is_woocommerce_archive' );
+				},
 				'partial'			=> [
 					'selector'        		=> '.content-area',
 					'render_callback' 		=> [ Partials::get_instance(), 'render_content' ],

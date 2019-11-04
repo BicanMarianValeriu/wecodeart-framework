@@ -9,17 +9,15 @@
  * @subpackage 	Core\Archive
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\SVG;
-use WeCodeArt\Support\WooCommerce\Callbacks;
+use WeCodeArt\Markup;
+use WeCodeArt\Markup\SVG;
 
 /**
  * Adds some output to archive pages
@@ -42,15 +40,13 @@ class Archive {
 	 * Echo the Archive Intro Markup
 	 *
 	 * @since 	unknown
-	 * @version	3.7.3
+	 * @version	4.0.1
 	 *
 	 * @return 	void 
 	 */
 	public function render_intro_markup() {
 		// Don't enable on author archive / WooCommerce.
-		if( ! is_archive() && ! is_search() || is_author() || 
-			( Helpers::detect_plugin( [ 'classes' => [ 'woocommerce' ] ] ) && is_woocommerce() )
-		) return;
+		if( ! is_archive() && ! is_search() || is_author() || wecodeart_if( 'is_woocommerce_archive' ) ) return;
 
 		$options = Content::get_contextual_options(); 
 

@@ -9,17 +9,17 @@
  * @subpackage 	Core\Entry
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.7.7
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Core\Loops;
 use WeCodeArt\Core\Pagination;
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Markup;
+use WeCodeArt\Markup\SVG;
 
 /**
  * Handles WP CPT outputs
@@ -61,13 +61,13 @@ class Entry {
 	 *
 	 * @since	3.6.4
 	 * @version	3.9.5
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 *
 	 * @return 	void
 	 */
 	public function render_header() {
 		/**
-		 * @see 	WeCodeArt\Utilities\Markup::wrap()
+		 * @see 	WeCodeArt\Markup::wrap()
 		 * @see		do_action(); WP Function
 		 * @hook	'wecodeart/hook/entry/header' 	
 		 * @hooked 	{
@@ -89,13 +89,13 @@ class Entry {
 	 *
 	 * @since	3.6.4
 	 * @version	3.9.5
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 *
 	 * @return 	void
 	 */
 	public function render_footer() {
 		/**
-		 * @see 	WeCodeArt\Utilities\Markup::wrap()
+		 * @see 	WeCodeArt\Markup::wrap()
 		 * @see		do_action(); WP Function
 		 * @hook	'wecodeart/hook/entry/footer' 	
 		 * @hooked 	{
@@ -151,7 +151,7 @@ class Entry {
 	 * Echo the Entry Title Markup
 	 *
 	 * @since 	1.0
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 * @version 3.9.9
 	 *
 	 * @return 	void
@@ -169,7 +169,7 @@ class Entry {
 	 * Echo the Entry Content/Excerpt Markup
 	 *
 	 * @since	1.0
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 * @version	3.6.4
 	 *
 	 * @return	void

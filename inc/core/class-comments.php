@@ -9,7 +9,7 @@
  * @subpackage 	Core\Comments
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
@@ -17,9 +17,9 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Core\Pagination;
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\SVG;
-use WeCodeArt\Utilities\Markup\Input;
+use WeCodeArt\Markup;
+use WeCodeArt\Markup\SVG;
+use WeCodeArt\Markup\Input;
 use WeCodeArt\Walkers\Comment as CommentWalker;
 
 /**
@@ -237,7 +237,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	3.9.5
+	 * @version	4.0.1
 	 *
 	 * @return 	array
 	 */
@@ -251,7 +251,7 @@ class Comments {
 			'attrs' => [
 				'class' => 'form-group comment-form-author col-12 col-md-7'
 			]
-		] ], [ 'WeCodeArt\Utilities\Markup\Input', 'render' ], [
+		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [
 			'text',
 			esc_html__( 'Name *', wecodeart_config( 'textdomain' ) ),
 			[
@@ -271,7 +271,7 @@ class Comments {
 			'attrs' => [
 				'class' => 'form-group comment-form-email col-12 col-md-7'
 			]
-		] ], [ 'WeCodeArt\Utilities\Markup\Input', 'render' ], [
+		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [
 			'email',
 			esc_html__( 'Email *', wecodeart_config( 'textdomain' ) ),
 			[
@@ -291,7 +291,7 @@ class Comments {
 			'attrs' => [
 				'class' => 'form-group comment-form-url col-12 col-md-7'
 			]
-		] ], [ 'WeCodeArt\Utilities\Markup\Input', 'render' ], [ 
+		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
 			'url', 
 			esc_html__( 'Website', wecodeart_config( 'textdomain' ) ), 
 			[
@@ -310,7 +310,7 @@ class Comments {
 			'attrs' => [
 				'class' => 'form-group comment-form-comment w-100'
 			]
-		] ], [ 'WeCodeArt\Utilities\Markup\Input', 'render' ], [ 
+		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
 			'textarea', 
 			esc_html__( 'Comment *', wecodeart_config( 'textdomain' ) ), 
 			[

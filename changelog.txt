@@ -1,3 +1,15 @@
+v4.0.1
+- Added - WeCodeArt\Functions with functions from previous WeCodeArt\Utilities\Helpers
+- Added - Action: 'wecodeart/setup/before' and 'wecodeart/setup/after' - Runs before setting the theme and loading the files
+- Added - Filter: 'wecodeart/conditional/get/before' to add conditionals before setup them on main theme
+- Updated - Breaking change: WeCodeArt\Utilities\Markup to WeCodeArt\Markup
+- Updated - WooCommerce Conditionals to new API.
+- Updated - Breaking change: WeCodeArt\Utilities\Helpers to WeCodeArt\Functions
+- Updated - Conditionals bound to new $theme key: 'conditionals' and refactored to new folder
+- Removed - WeCodeArt\Utilities\Helpers
+- Removed - WeCodeArt\Utilities\Callbacks
+- Removed - WeCodeArt\Support\WooCoomerce\Callbacks
+
 v4.0
 - Added - Callbacks transformed into conditionals that will extend Conditional Interface
 - Added - wecodeart_if( [ 'conditional', 'conditional' ] ) and implementation across the theme

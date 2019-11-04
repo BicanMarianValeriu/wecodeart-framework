@@ -9,15 +9,15 @@
  * @subpackage 	Walkers\Menu
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		2.0
- * @version		3.8.3
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Walkers;
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
 use Walker_Nav_Menu;
-use WeCodeArt\Utilities\Helpers;
+use function WeCodeArt\Functions\get_prop;
 
 /** 
  * Plugin Name: WP Bootstrap Navwalker
@@ -300,17 +300,17 @@ class Menu extends Walker_Nav_Menu {
 	 * Menu Fallback
 	 *
 	 * @since 	unknown
-	 * @version	3.8.3 (WeCodeArt)
+	 * @version	4.0.1
 	 *
 	 * @param array $args passed from the wp_nav_menu function.
 	 */
 	public static function fallback( $args ) { 
 		if ( current_user_can( 'edit_theme_options' ) ) { 
-			$container       = Helpers::get_prop( $args, 'container' );
-			$container_id    = Helpers::get_prop( $args, 'container_id' );
-			$container_class = Helpers::get_prop( $args, 'container_class' );
-			$menu_class      = Helpers::get_prop( $args, 'menu_class' ); 
-			$menu_id         = Helpers::get_prop( $args, 'menu_id' );
+			$container       = get_prop( $args, 'container' );
+			$container_id    = get_prop( $args, 'container_id' );
+			$container_class = get_prop( $args, 'container_class' );
+			$menu_class      = get_prop( $args, 'menu_class' ); 
+			$menu_id         = get_prop( $args, 'menu_id' );
 
 			$fallback_output = '';
 

@@ -6,27 +6,27 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Utilities\Conditional\is_logged
+ * @subpackage 	Conditional\is_dev_mode
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		4.0
- * @version		4.0
+ * @since 		4.0.1
+ * @version		4.0.1
  */
 
-namespace WeCodeArt\Utilities\Conditional;
+namespace WeCodeArt\Conditional;
 
 defined( 'ABSPATH' ) || exit(); 
 
-use WeCodeArt\Utilities\Conditional;
+use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
 
 /**
- * Conditional that is only met when is logged in.
+ * Conditional that is only met when in dev mode.
  */
-class Logged_In_Conditional implements Conditional {
+class Dev_Mode implements ConditionalInterface {
 
 	/**
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return \is_user_logged_in();
+		return \defined( 'WP_DEBUG' ) && \WP_DEBUG || \defined( 'SCRIPT_DEBUG' ) && \SCRIPT_DEBUG;
 	}
 }

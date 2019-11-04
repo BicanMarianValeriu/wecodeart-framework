@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.9
- * @version		3.9.5
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Support;
@@ -18,8 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 use WeCodeArt\Core\Content;
 use WeCodeArt\Core\Pagination;
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 use WeCodeArt\Customizer;
+use WeCodeArt\Support\WooCommerce\Conditional\WOO_Page;
+use WeCodeArt\Support\WooCommerce\Conditional\WOO_Archive;
 
 /**
  * The Class: Handles all necesary functions and requirements 
@@ -34,6 +36,9 @@ class WooCommerce {
 	 * @since 3.6.2
 	 */
 	public function init() {
+		// Conditionals
+		$this->register_conditionals();
+
 		// Customizer Options
 		WooCommerce\Customizer::get_instance();
 
@@ -58,10 +63,22 @@ class WooCommerce {
 	}
 	
 	/**
+	 * Register Conditionals
+	 *
+	 * @return void
+	 */
+	public function register_conditionals() {
+		wecodeart( 'conditionals' )->set( [
+			'is_woocommerce_page'		=> WOO_Page::class,
+			'is_woocommerce_archive' 	=> WOO_Archive::class,
+		] );
+	}
+
+	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 * @since	unknown
 	 */
-	function after_setup_theme() {
+	public function after_setup_theme() {
 		add_theme_support( 'woocommerce' );
 		add_theme_support( 'wc-product-gallery-zoom' );
 		add_theme_support( 'wc-product-gallery-lightbox' );
@@ -72,12 +89,12 @@ class WooCommerce {
 	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup
 	 *
 	 * @since   3.5
-	 * @version 3.7.0
+	 * @version 4.0.1
 	 *
 	 * @return  void
 	 */
 	public function before_content_wrapp() {
-		if( WooCommerce\Callbacks::_is_woocommerce_archive() === true ) {
+		if( wecodeart_if( 'is_woocommerce_archive' ) ) {
 			$wrapper = get_theme_mod( 'content-layout-container-product-archive' );
 		} elseif( is_product() ) {
 			$wrapper = get_theme_mod( 'content-layout-container-product-singular' );
@@ -122,14 +139,14 @@ class WooCommerce {
 	 * Sort Content Modules based on position
 	 *
 	 * @since 	unknown
-	 * @version	3.7.7
+	 * @version	4.0.1
 	 *
 	 * @param 	string 	$position Accepts before/after - render sorted modules before/after woocommerce content.
 	 *
 	 * @return 	void
 	 */
 	public static function sort_modules( string $position ) {
-		if( WooCommerce\Callbacks::_is_woocommerce_archive() === true ) {
+		if( wecodeart_if( 'is_woocommerce_archive' ) ) {
 			$modules = get_theme_mod( 'content-layout-modules-product-archive' ); 
 		} elseif( is_product() ) {
 			$modules = get_theme_mod( 'content-layout-modules-product-singular' ); 
@@ -192,7 +209,7 @@ class WooCommerce {
 	 * Render Header Bar Cart Module
 	 *
 	 * @since   3.5
-	 * @version 3.9.6
+	 * @version 4.0.1
 	 *
 	 * @return  void
 	 */
@@ -203,7 +220,7 @@ class WooCommerce {
 				'id' 	=> 'bar-cart',
 				'class' => 'header-bar__cart col-auto align-self-stretch dropdown'
 			] 
-		] ], [ 'WeCodeArt\Utilities\Markup', 'template' ], [ [ 'header/woo', 'cart' ], [
+		] ], [ 'WeCodeArt\Markup', 'template' ], [ [ 'header/woo', 'cart' ], [
 			'subtotal' 	=> wp_kses_post( WC()->cart->get_cart_subtotal() ),
 			'count'		=> wp_kses_data( sprintf( 
 				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), wecodeart_config( 'textdomain' ) ), 

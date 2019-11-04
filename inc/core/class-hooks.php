@@ -9,7 +9,7 @@
  * @subpackage 	Core\Hooks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.0
- * @version		4.0
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
@@ -18,8 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Core\Search;
 use WeCodeArt\Core\Content;
-use WeCodeArt\Utilities\Callbacks;
-use WeCodeArt\Utilities\Markup\SVG;
+use WeCodeArt\Markup\SVG;
 
 /**
  * General Hooks

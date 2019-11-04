@@ -9,7 +9,7 @@
  * @subpackage 	Core\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Core\Loops;
 use WeCodeArt\Core\Pagination;
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 /**
  * Handles Content Containers
@@ -111,7 +111,7 @@ class Content {
 
 		/**
 		 * @see WP function `dynamic_sidebar`
-		 * @see WeCodeArt\Utilities\Markup::wrap()
+		 * @see WeCodeArt\Markup::wrap()
 		 */
 		Markup::wrap( $index . '-sidebar-container', [ [
 			'tag' 	=> 'div',
@@ -177,8 +177,8 @@ class Content {
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap();
-	 * @uses	WeCodeArt\Utilities\Markup::sortable();
+	 * @uses	WeCodeArt\Markup::wrap();
+	 * @uses	WeCodeArt\Markup::sortable();
 	 * @since 	unknown
 	 * @version	3.7.7
 	 *

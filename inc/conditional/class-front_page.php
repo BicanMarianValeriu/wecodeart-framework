@@ -6,22 +6,22 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Utilities\Conditional\is_front_page
+ * @subpackage 	Conditional\is_front_page
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		4.0
- * @version		4.0
+ * @version		4.0.1
  */
 
-namespace WeCodeArt\Utilities\Conditional;
+namespace WeCodeArt\Conditional;
 
 defined( 'ABSPATH' ) || exit(); 
 
-use WeCodeArt\Utilities\Conditional;
+use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
 
 /**
  * Conditional that is only met when in the front page.
  */
-class Front_Page_Conditional implements Conditional {
+class Front_Page implements ConditionalInterface {
 
 	/**
 	 * @inheritdoc

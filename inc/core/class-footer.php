@@ -9,15 +9,15 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.7
+ * @version		4.0.1
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Markup;
 use WeCodeArt\Customizer;
-use WeCodeArt\Utilities\Markup;
 
 /**
  * Handles Footer Area of the Framework
@@ -39,7 +39,7 @@ class Footer {
 	/**
 	 * Output FOOTER markup function
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	1.0
 	 * @version	3.7.0
 	 *
@@ -78,7 +78,7 @@ class Footer {
 	/**
 	 * Footer Attribution
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	1.0
 	 * @version 3.9.5
 	 *
@@ -118,7 +118,7 @@ class Footer {
 		if( ! is_active_sidebar( 'footer-' . $index ) ) return;
 		/**
 		 * @see WP function `dynamic_sidebar`
-		 * @see WeCodeArt\Utilities\Markup::wrap()
+		 * @see WeCodeArt\Markup::wrap()
 		 */
 		Markup::wrap( 'footer-column-' . (string) $index , [ [
 			'tag' 	=> 'div',
@@ -157,8 +157,8 @@ class Footer {
 	/**
 	 * Return the Footer final widgets HTML with modules selected by user
 	 *
-	 * @uses	WeCodeArt\Utilities\Markup::wrap()
-	 * @uses	WeCodeArt\Utilities\Markup::sortable()
+	 * @uses	WeCodeArt\Markup::wrap()
+	 * @uses	WeCodeArt\Markup::sortable()
 	 * @since	3.5
 	 * @version 3.7.7
 	 *

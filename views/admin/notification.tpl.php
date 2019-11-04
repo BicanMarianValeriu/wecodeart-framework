@@ -8,12 +8,12 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Notification Template
  * @since 		3.8.1
- * @version		3.8.1
+ * @version		4.0.1
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit();
+defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Markup;
+use WeCodeArt\Markup;
 
 $attributes = Markup::generate_attr( 'admin-notification', [
 	'id'			=> $id,

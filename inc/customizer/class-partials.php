@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Customizer;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit();
 
 /**
  * Customizer Partials

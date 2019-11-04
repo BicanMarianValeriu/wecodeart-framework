@@ -9,15 +9,15 @@
  * @subpackage 	Core\Search
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.9.3
- * @version		3.9.5
+ * @version		4.0.1
  */ 
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Utilities\Markup;
-use WeCodeArt\Utilities\Markup\Input;
+use WeCodeArt\Markup;
+use WeCodeArt\Markup\Input;
 
 /**
  * Framework Search
