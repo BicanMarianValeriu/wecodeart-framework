@@ -5,7 +5,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 4.0.1
+Version: 4.0.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -44,14 +44,14 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import "../../node_modules/bootstrap/scss/utilities/visibility";
 @import "../../node_modules/bootstrap/scss/utilities/sizing";
 @import "../../node_modules/bootstrap/scss/transitions"; 
-//@import "../../node_modules/bootstrap/scss/utilities/background";
-//@import "../../node_modules/bootstrap/scss/utilities/borders";
+@import "../../node_modules/bootstrap/scss/utilities/background";
+@import "../../node_modules/bootstrap/scss/utilities/borders";
+@import "../../node_modules/bootstrap/scss/utilities/shadows";
+@import "../../node_modules/bootstrap/scss/badge";
 //@import "../../node_modules/bootstrap/scss/utilities/embed";
-//@import "../../node_modules/bootstrap/scss/utilities/shadows";
 //@import "../../node_modules/bootstrap/scss/utilities/overflow";
 //@import "../../node_modules/bootstrap/scss/utilities/position";
 
-//@import "../../node_modules/bootstrap/scss/badge";
 //@import "../../node_modules/bootstrap/scss/popover";
 //@import "../../node_modules/bootstrap/scss/navbar";
 //@import "../../node_modules/bootstrap/scss/print";

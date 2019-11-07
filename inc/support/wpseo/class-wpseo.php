@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.1
+ * @version		4.0.2
  */
 
 namespace WeCodeArt\Support;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Core\Content;
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
+use WeCodeArt\Support\WPSeo\Conditional\Plugin as Plugin_Condition;
 use function WeCodeArt\Functions\detect_plugin;
 
 /**
@@ -30,13 +31,32 @@ class WPSeo {
 
 	/**
 	 * Send to Constructor
-	 *
-	 * @since 3.6.2
 	 */
-	public function init() {
+	public function init() {}
+
+	/**
+	 * Get Conditionals
+	 *
+	 * @return void
+	 */
+	public static function get_conditionals() {
+		wecodeart( 'conditionals' )->set( [
+			'is_yoast_active' => Plugin_Condition::class,
+		] );
+
+		return [ 'is_yoast_active' ];
+	}
+
+	/**
+	 * Send to Constructor
+	 *
+	 * @since 	3.6.2
+	 * @version	4.0.2
+	 */
+	public function register_hooks() {
 		if(
-			apply_filters( 'wecodeart/filter/support/yoast/breadcrumbs/woocommerce', true ) && 
-			detect_plugin( [ 'classes' => [ 'woocommerce' ] ] )
+			detect_plugin( [ 'classes' => [ 'woocommerce' ] ] ) && // We could use wecodeart_if()
+			apply_filters( 'wecodeart/filter/support/yoast/breadcrumbs/woocommerce', true ) 
 		) {
 			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 		}
@@ -70,7 +90,7 @@ class WPSeo {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs', 'id' => 'breadcrumb' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs__list' ] ]
-		], 'yoast_breadcrumb' ); 
+		], 'yoast_breadcrumb' );
 	}
 
 	/**

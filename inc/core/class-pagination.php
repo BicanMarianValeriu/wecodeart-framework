@@ -159,7 +159,7 @@ class Pagination {
             <h3 class="screen-reader-text"><?php 
                 printf( 
                     esc_html__( '%s Navigation', wecodeart_config( 'textdomain' ) ), 
-                    get_post_type_object( get_post_type() )->labels->singular_name 
+                    get_post_type_object( get_post_type() )->labels->singular_name
                 ); 
             ?></h3>
             <?php 

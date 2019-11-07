@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Input
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.1.2
- * @version		4.0.1
+ * @version		4.0.2
  */
 
 namespace WeCodeArt\Markup;
@@ -252,10 +252,10 @@ class Input {
 		}
 
 		if( $echo ) {
-			echo $html;
+			echo wp_kses_post( $html );
 			return;
 		}
 
-		return $html;
+		return wp_kses_post( $html );
 	}
 }

@@ -235,7 +235,7 @@ class Content {
 	 * Get Contextual Modules Options
 	 *
 	 * @since 	3.5.0
-	 * @version	4.0.0
+	 * @version	4.0.2
 	 *
 	 * @return 	array 
 	 */
@@ -244,11 +244,16 @@ class Content {
 		foreach( get_pages() as $page ) {		
 			$ID = $page->ID;
 			if( is_page( $ID ) ) { // default must be provided since we do not set in customizer
+				$modules = get_theme_mod( 'content-layout-modules-page-' . $ID, [ 'content', 'primary' ] );
+
+				if( wecodeart_if( 'is_full_layout' ) && ! empty( $modules ) ) {
+					$modules = [ 'content' ];
+				}
+
 				return [
 					'container' => get_theme_mod( 'content-layout-container-page-' . $ID, 'container' ),
-					'modules' 	=> get_theme_mod( 'content-layout-modules-page-' . $ID, [ 'content', 'primary' ] )
+					'modules' 	=> $modules,
 				];
-				break;
 			}
 		}
 
@@ -257,7 +262,9 @@ class Content {
 			if( is_singular( $type ) ) {  
 				$modules 	= get_theme_mod( 'content-layout-modules-' . $type . '-singular' );
 				
-				if( wecodeart_if( 'is_full_layout' ) ) $modules = [ 'content' ];
+				if( wecodeart_if( 'is_full_layout' ) ) {
+					$modules = [ 'content' ];
+				}
 				
 				return [
 					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular' ),

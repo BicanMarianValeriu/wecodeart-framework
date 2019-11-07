@@ -9,7 +9,7 @@
  * @subpackage  Autoloader
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version 	3.8.5
+ * @version 	4.0.2
  */
 
 namespace WeCodeArt;
@@ -91,7 +91,7 @@ class Autoloader {
 	 *
 	 * @access 	protected
 	 * @since 	3.5
-	 * @version 3.8.5
+	 * @version 4.0.2
 	 *
 	 * @param 	string 	$class_name 	The name of the class we're trying to load.
 	 *
@@ -101,12 +101,10 @@ class Autoloader {
 		$paths = [];
 
 		// Build the filename
-		$old_filename = 'class-' . strtolower( str_replace( $this->separator, '-', $class_name ) ) . '.php';
 		$exploded = explode( $this->separator, $class_name );
 		$filename = 'class-' . strtolower( end( $exploded ) ) . '.php';
 
 		// Check same directory
-		$paths[] = $this->directory . DIRECTORY_SEPARATOR . $old_filename;
 		$paths[] = $this->directory . DIRECTORY_SEPARATOR . $filename;
 
 		// Look into sub-directory
@@ -117,7 +115,6 @@ class Autoloader {
 		// Build the filepath
 		$previous_path = '';
 		for ( $i = 0; $i < $levels; $i++ ) {
-			$paths[]        = $this->directory . DIRECTORY_SEPARATOR . $previous_path . strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR . $old_filename;
 			$paths[]        = $this->directory . DIRECTORY_SEPARATOR . $previous_path . strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR . $filename;
 			$previous_path .= strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR;
 		}

@@ -133,8 +133,8 @@ wecodeart()->bind( 'version', function () {
  */
 wecodeart()->bind( 'public_post_types', function( WeCodeArt $theme, $parameters ) {
     $types = get_post_types( wp_parse_args( $parameters, apply_filters( 'wecodeart/bind/public_post_types/args', [ 
-        'public' 				=> true, 
-        'publicly_queryable' 	=> true 
+        'public' 				=> true,
+        'publicly_queryable' 	=> true
     ] ) ) );
 
     return apply_filters( 'wecodeart/bind/public_post_types', $types );

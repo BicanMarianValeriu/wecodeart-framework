@@ -21,20 +21,8 @@
 }
 
 .comment {
-    &.bypostauthor {
-        .comment-content {
-            background: #333;
-    
-            p {
-                color: #fff
-            }
-        }
-    }
-
-    .comment-content {
-        padding: 1rem;
-        border-radius: 6px;
-        background: #F1F1F1;
+    .bypostauthor {
+        color: initial;
     }
 
     .comment-reply {

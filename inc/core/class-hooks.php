@@ -9,7 +9,7 @@
  * @subpackage 	Core\Hooks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.0
- * @version		4.0.1
+ * @version		4.0.2
  */
 
 namespace WeCodeArt\Core;
@@ -40,7 +40,7 @@ class Hooks {
 	/**
 	 * Adds custom classes to the array of body classes.
 	 *
-	 * @version 4.0
+	 * @version 4.0.2
 	 *
 	 * @param 	array 	$classes Classes for the body element.
 	 *
@@ -59,18 +59,21 @@ class Hooks {
 		
 		$modules = Content::get_contextual_options()['modules'];
 
-		// Add sidebar class/
+		// Add sidebar class
 		if( in_array( 'primary', $modules, true ) || in_array( 'secondary', $modules, true ) ) {
+			$classes[] = 'page--has-sidebar';
 			$classes[] = 'has-sidebar';
 		} else {
+			$classes[] = 'page--no-sidebar';
 			$classes[] = 'no-sidebar';
 		}
 		
 		// Singular sidebar class if gutenberg wide/full layout/
 		if( wecodeart_if( 'is_full_layout' ) ) { 
-			$classes = array_diff( $classes, [ 'has-sidebar' ] );
+			$classes = array_diff( $classes, [ 'has-sidebar', 'page--has-sidebar' ] );
 			$classes[] = 'gutenberg-disabled-sidebar'; 
-			$classes[] = 'no-sidebar'; 
+			$classes[] = 'no-sidebar';
+			$classes[] = 'page--full-width';
 		} 
 
 		// Return Classes.
@@ -126,8 +129,8 @@ class Hooks {
 		 *
 		 * @param string The form args.
 		 */
-		$query_or_placeholder =  esc_attr( 
-			apply_filters( 'the_search_query', get_search_query() ) 
+		$query_or_placeholder = esc_attr(
+			apply_filters( 'the_search_query', get_search_query() )
 		) ?: sprintf( __( 'Search this website %s', wecodeart_config( 'textdomain' ) ), '&#x02026;' );
 
 		$form = new Search( apply_filters( 'wecodeart/filter/search_form/i18n', [

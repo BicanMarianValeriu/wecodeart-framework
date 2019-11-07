@@ -16,7 +16,6 @@ namespace WeCodeArt\Support\WooCommerce\Conditional;
 
 defined( 'ABSPATH' ) || exit(); 
 
-use WeCodeArt\Utilities\Helpers;
 use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
 use function WeCodeArt\Functions\detect_plugin;
 

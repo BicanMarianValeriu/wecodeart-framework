@@ -9,17 +9,19 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.9
- * @version		4.0.1
+ * @version		4.0.2
  */
 
 namespace WeCodeArt\Support;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Core\Content;
 use WeCodeArt\Core\Pagination;
 use WeCodeArt\Markup;
 use WeCodeArt\Customizer;
+use WeCodeArt\Support\Interfaces\Integration;
+use WeCodeArt\Support\WooCommerce\Conditional\Plugin;
 use WeCodeArt\Support\WooCommerce\Conditional\WOO_Page;
 use WeCodeArt\Support\WooCommerce\Conditional\WOO_Archive;
 
@@ -27,18 +29,36 @@ use WeCodeArt\Support\WooCommerce\Conditional\WOO_Archive;
  * The Class: Handles all necesary functions and requirements 
  * to ensure proper support for WooCommerce
  */
-class WooCommerce {
+class WooCommerce implements Integration {
 
 	use \WeCodeArt\Singleton; 
 
 	/**
 	 * Send to Constructor
-	 * @since 3.6.2
 	 */
-	public function init() {
-		// Conditionals
-		$this->register_conditionals();
+	public function init() {}
+	
+	/**
+	 * Get Conditionals
+	 *
+	 * @return void
+	 */
+	public static function get_conditionals() {
+		wecodeart( 'conditionals' )->set( [
+			'is_woocommerce_active'		=> Plugin::class,
+			'is_woocommerce_page'		=> WOO_Page::class,
+			'is_woocommerce_archive'	=> WOO_Archive::class,
+		] );
 
+		return [ 'is_woocommerce_active' ];
+	}
+
+	/**
+	 * Register Hooks
+	 *
+	 * @return void
+	 */
+	public function register_hooks() {
 		// Customizer Options
 		WooCommerce\Customizer::get_instance();
 
@@ -60,18 +80,6 @@ class WooCommerce {
 		// Filters
 		add_filter( 'wecodeart/filter/header/bar/modules', 	[ $this, 'add_cart_to_header_modules' ] );
 		add_filter( 'woocommerce_add_to_cart_fragments',	[ $this, 'cart_count_fragments' ], 10, 1 );
-	}
-	
-	/**
-	 * Register Conditionals
-	 *
-	 * @return void
-	 */
-	public function register_conditionals() {
-		wecodeart( 'conditionals' )->set( [
-			'is_woocommerce_page'		=> WOO_Page::class,
-			'is_woocommerce_archive' 	=> WOO_Archive::class,
-		] );
 	}
 
 	/**

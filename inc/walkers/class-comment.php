@@ -9,7 +9,7 @@
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.9
- * @version		3.9.9
+ * @version		4.0.2
  */
 
 namespace WeCodeArt\Walkers;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Walkers;
 defined( 'ABSPATH' ) || exit();
 
 use Walker_Comment;
+use WeCodeArt\Markup;
 
 /**
  * Comment Walker Class
@@ -51,21 +52,23 @@ class Comment extends Walker_Comment {
 
 	/**
 	 * Outputs a pingback comment.
+	 *
 	 * @since	2.0
-	 * @version	3.7.8
+	 * @version	4.0.2
 	 */
 	protected function ping( $comment, $depth, $args ) {
 		?>
-		<li id="ping-<?php echo esc_attr( $comment->comment_ID ); ?>" class="<?php echo esc_attr( join( ' ', get_comment_class() ) ); ?>">
-			<div class="ping-body">
-				<?php
+		<li class="<?php echo esc_attr( join( ' ', get_comment_class() ) ); ?>"
+			id="ping-<?php echo esc_attr( $comment->comment_ID ); ?>">
+			<div class="ping-body"><?php
+
 				// Ping content.
 				echo wp_kses_post( comment_author_link( $comment ) );
 
 				// Edit link.
 				edit_comment_link( '&#9998;', '<span class="badge badge-primary text-white float-right">', '</span>' );
-				?>
-			</div>
+				
+			?></div>
 		<?php 
 	}
 	
@@ -73,59 +76,44 @@ class Comment extends Walker_Comment {
 	 * Outputs a HTML5 comment.
 	 *
 	 * @since	2.0
-	 * @version	3.9.9
+	 * @version	4.0.2
+	 *
+	 * @return 	void
 	 */
 	protected function comment( $comment, $depth, $args ) {
-		// Get what we need.
-		$class 			= join( ' ', get_comment_class() );
-		$author_img 	= get_avatar( $comment, $args['avatar_size'], '', esc_html__( 'Author\'s gravatar', wecodeart_config( 'textdomain' ) ) );
-		$author_name 	= '<strong itemprop="name">' . $comment->comment_author . '</strong>';
-		if ( ! empty( $comment->comment_author_url ) && 'http://' !== $comment->comment_author_url ) {
-			$author_name = sprintf(
-				'<a href="%1$s" rel="external nofollow" itemprop="url">%2$s</a>', 
-				esc_url( $comment->comment_author_url ),
-				$author_name
-			);
-		}
+		?>
+		<li class="<?php echo esc_attr( join( ' ', get_comment_class() ) ); ?>"
+			id="comment-<?php echo esc_attr( $comment->comment_ID ); ?>"
+			itemscope=""
+			itemtype="http://schema.org/Comment">
+		<?php
 
-		// Setup Filters.
-		$comment_date = apply_filters( 'wecodeart/filter/comments/date/enable', true );
-		$comment_amst = apply_filters( 
-			'wecodeart/filter/comments/awaiting-moderation-text', 
-			esc_html__( 'Your comment is awaiting moderation.', wecodeart_config( 'textdomain' ) ) 
-		);	
+			// Get what we need.
+			$author_name 	= '<strong itemprop="name">' . $comment->comment_author . '</strong>';
+			if ( ! empty( $comment->comment_author_url ) && 'http://' !== $comment->comment_author_url ) {
+				$author_name = sprintf(
+					'<a href="%1$s" rel="external nofollow" itemprop="url">%2$s</a>', 
+					esc_url( $comment->comment_author_url ),
+					$author_name
+				);
+			}
 
-		// The HTML.
-		echo '<li id="comment-' . esc_attr( $comment->comment_ID ) . '" class="' . esc_attr( $class ) . '" itemscope itemtype="http://schema.org/Comment">';
-			echo '<div class="comment__body row mb-3">';
-			do_action( 'wecodeart/hook/comment/top', $comment ); // Hook Comment Top
-				echo '<div class="col-12">';
-					echo '<div class="row">';
-						echo '<div class="comment-avatar col-auto"><figure class="gravatar">' . $author_img . '</figure></div>';
-						echo '<div class="comment-meta col subheader">';
-							edit_comment_link ( '&#9998;', '<span class="comment-edit badge float-right">', '</span>' );
-							printf( '<span class="comment-author">%s</span>', $author_name );				
-							if ( $comment_date ) :
-								printf( 
-									'<p class="comment-date"><time class="created" itemprop="dateCreated" datetime="%1$s">%2$s</time></p>', 
-									esc_html( get_comment_date( DATE_W3C ) ),
-									esc_html( get_comment_date() ) . ' ' . esc_html__( 'at', wecodeart_config( 'textdomain' ) ) . ' ' . esc_html( get_comment_time() ) 
-								);
-							endif;
-						echo '</div>';
-					echo '</div>';
-				echo '</div>';
-				echo '<div class="col-12">';
-					if ( ! $comment->comment_approved ) echo '<p class="callout">' . $comment_amst .'</p>';
-					printf( '<div class="comment-content" itemprop="text"><p>%s</p></div>', $comment->comment_content );	
-					comment_reply_link( array_merge( $args, [
-						'depth'  => $depth,
-						'before' => '<span class="comment-reply float-right">',
-						'after'  => '</span>',
-					] ) );
-				echo '</div>';
-			do_action( 'wecodeart/hook/comment/bottom', $comment ); // Hook Comment Bottom
-			echo '</div>';
-		// No ending tag because of nesting	
+			// Comment body template.
+			Markup::template( 'entry/comment', [
+				'awaiting'	=> esc_html__( 'Your comment is awaiting moderation.', wecodeart_config( 'textdomain' ) ),
+				'by_author' => in_array( 'bypostauthor', get_comment_class() ),
+				'comment' 	=> $comment,
+				'depth'		=> $depth,
+				'args'		=> $args,
+				'author' 	=> [
+					'name'		=> $author_name,
+					'gravatar' 	=> get_avatar(
+						$comment,
+						$args['avatar_size'],
+						'',
+						esc_html__( 'Author\'s gravatar', wecodeart_config( 'textdomain' ) )
+					),
+				],
+			] );
 	}
 }

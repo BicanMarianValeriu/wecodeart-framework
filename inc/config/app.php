@@ -66,6 +66,7 @@ return [
     'paths' => [
         'directory' => get_template_directory(),
         'uri'       => get_template_directory_uri(),
+        'child'     => get_stylesheet_directory(),
     ],
     /*
     |--------------------------------------------------------------------------

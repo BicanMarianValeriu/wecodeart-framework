@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.0.1
+ * @version		4.0.2
  */
 
 namespace WeCodeArt\Support;
@@ -18,31 +18,47 @@ defined( 'ABSPATH' ) || exit;
 
 use anr_captcha_class as Captcha;
 use WeCodeArt\Markup;
+use WeCodeArt\Support\Interfaces\Integration;
+use WeCodeArt\Support\ANR\Conditional\Plugin as ANR_Condition;
+use WeCodeArt\Support\ANR\Conditional\Supported as ANR_Support;
 
 /**
  * ANR Integration
  * @see https://wordpress.org/plugins/advanced-nocaptcha-recaptcha/
  */
-class ANR {
+class ANR implements Integration {
 
-	use \WeCodeArt\Singleton; 
+	use \WeCodeArt\Singleton;
 
 	/**
 	 * Send to Constructor
 	 */
-	public function init() {
-		add_action( 'init', [ $this, 'hooks' ] );
+	public function init() {}
+
+	/**
+	 * Get Conditionals
+	 *
+	 * @return void
+	 */
+	public static function get_conditionals() {
+		wecodeart( 'conditionals' )->set( [
+			'is_anr_support' 	=> ANR_Support::class,
+			'is_anr_active'		=> ANR_Condition::class,
+		] );
+
+		return [ 'is_anr_active', 'is_anr_support' ];
 	}
 
 	/**
 	 * Hooks
 	 *
 	 * @since   3.8.1
+	 * @version	4.0.2
 	 *
 	 * @return  void
 	 */
-	public function hooks() {
-		if( apply_filters( 'wecodeart/filter/support/anr', true ) ) {
+	public function register_hooks() {
+		add_action( 'init', function() {
 			$anr_instance = Captcha::init();
 
 			if ( ! is_user_logged_in() ) {
@@ -52,7 +68,7 @@ class ANR {
 				remove_filter( 'comment_form_field_comment', 	[ $anr_instance, 'comment_form_field' ], 99 );
 				add_filter( 'comment_form_field_comment', 		[ $this, 'wrapp_comment_form_field' ] );
 			}
-		}
+		} );
 	}
 
 	/**

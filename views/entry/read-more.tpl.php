@@ -9,7 +9,7 @@
  * @subpackage 	Entry\Meta\More
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.9.5
- * @version		3.9.5
+ * @version		4.0.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit();
  * @param   string  $title      Post Title
  */
 ?>
-<a href="<?php echo esc_url( $permalink ); ?>" class="entry-more btn btn-dark">
+<a href="<?php echo esc_url( $permalink ); ?>" class="entry-more btn btn-light shadow-soft">
     <span><?php esc_html_e( 'Read More', wecodeart_config( 'textdomain' ) ); ?></span>
     <span aria-hidden="true">&#xbb;</span><span class="screen-reader-text"><?php echo esc_html( $title ); ?></span>
 </a>

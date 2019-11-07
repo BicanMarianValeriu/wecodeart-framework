@@ -1,3 +1,19 @@
+v4.0.2
+- Added - Support theme starter content
+- Added - Comment Body Template via Markup\Template API and updated Walkers\Comment
+- Added - wecodeart/filter/support/editor-font-sizes for filtering Gutenberg editor font sizes
+- Added - WeCodeArt\Loadable Interface
+- Added - WeCodeArt\Support\Interfaces\Integration for loading extensions/integrations
+- Added - Plugin active conditional for supported plugins (Yoast/WooCommerce/ANR Captcha integrations)
+- Added - Support class to load and overwrite translation first from /wp-content/ then child theme then master theme.
+- Updated - Support Class to register integrations and autoload them
+- Updated - Supported plugins to implement new Integration interface
+- Updated - Autoloader - remove old filename searching
+- Updated - Markup\Input and Markup\SVG sanitize output
+- Updated - Small CSS improvements for base styles
+- Removed - wecodeart/filter/comments/date/enable
+- Removed - wecodeart/filter/comments/awaiting-moderation-text
+
 v4.0.1
 - Added - WeCodeArt\Functions with functions from previous WeCodeArt\Utilities\Helpers
 - Added - Action: 'wecodeart/setup/before' and 'wecodeart/setup/after' - Runs before setting the theme and loading the files

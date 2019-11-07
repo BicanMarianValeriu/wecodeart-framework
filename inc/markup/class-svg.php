@@ -9,7 +9,7 @@
  * @subpackage  Markup\SVG
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.1
+ * @version		4.0.2
  */
 
 namespace WeCodeArt\Markup;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Markup;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Markup;
+use function WeCodeArt\Functions\kses_svg;
 
 /**
  * SVG Rendering
@@ -237,7 +238,7 @@ class SVG {
 			$svg  = preg_replace( "/([\n\t]+)/", ' ', $svg ); 	// Remove newlines & tabs.
 			$svg  = preg_replace( '/>\s*</', '><', $svg ); 		// Remove white space between SVG tags.
 	
-			return $svg;
+			return kses_svg( $svg );
 		}
 
 		return null;

@@ -6,13 +6,13 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Support\WooCommerce\Conditional\is_woocommerce_archive
+ * @subpackage 	Support\WPSeo\Conditional\is_yoast_active
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since 		4.0.1
- * @version		4.0.1
+ * @since 		4.0.2
+ * @version		4.0.2
  */
 
-namespace WeCodeArt\Support\WooCommerce\Conditional;
+namespace WeCodeArt\Support\WPSeo\Conditional;
 
 defined( 'ABSPATH' ) || exit(); 
 
@@ -20,22 +20,14 @@ use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
 use function WeCodeArt\Functions\detect_plugin;
 
 /**
- * Conditional that is only met when in the front page.
+ * Conditional that is only met when plugin is active.
  */
-class WOO_Archive implements ConditionalInterface {
+class Plugin implements ConditionalInterface {
 
 	/**
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		if ( detect_plugin( [ 'classes' => [ 'woocommerce' ] ] ) ) {
-			if ( \is_shop() || \is_product_taxonomy() || \is_product_category() || \is_product_tag() ) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
+		return detect_plugin( [ 'constants' => [ 'WPSEO_VERSION' ] ] );
 	}
 }

@@ -149,3 +149,15 @@ svg,
         opacity: .4;
     }
 }
+
+.border {
+    &-soft {
+        border-color: #F3F7FA !important;
+    }
+}
+
+.shadow {
+    &-soft {
+        box-shadow: 0 0.25rem 1.875rem rgba(42, 53, 79, 0.08) !important;        
+    }
+}

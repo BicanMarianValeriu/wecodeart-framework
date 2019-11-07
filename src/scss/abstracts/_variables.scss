@@ -232,9 +232,9 @@ $line-height-sm:              1.5 !default;
 $border-width:                1px !default;
 $border-color:                $gray-300 !default;
 
-$border-radius:               0rem !default;
-$border-radius-lg:            0rem !default;
-$border-radius-sm:            0rem !default;
+$border-radius:               .25rem !default;
+$border-radius-lg:            .75rem !default;
+$border-radius-sm:            .10rem !default;
 
 $rounded-pill:                50rem !default;
 
