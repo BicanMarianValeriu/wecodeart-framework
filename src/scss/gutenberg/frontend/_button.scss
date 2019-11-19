@@ -1,0 +1,38 @@
+.wp-block-button {
+	color: $white;
+
+	&.aligncenter {
+		text-align: center;
+	}
+
+	&.alignright {
+		/*rtl:ignore*/
+		text-align: right;
+	}
+
+	&__link {
+		@include button-size(
+			$btn-padding-y,
+			$btn-padding-x-lg,
+			$btn-font-size,
+			$btn-line-height,
+			$btn-border-radius
+		);
+	
+		&:hover,
+		&:focus,
+		&:active,
+		&:visited {
+			color: inherit;
+		}
+	
+		.is-style-outline & {
+			background-color: transparent;
+			border: 2px solid currentColor;
+		}
+	
+		.is-style-squared & {
+			@include border-radius( 0 );
+		}
+	}
+}

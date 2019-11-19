@@ -30,10 +30,17 @@ const afterBundler = (mode, dest) => {
 
 // Build Scripts Task
 const buildScripts = (mode) => (done) => {
-	let streamMode;
-	if (mode === 'development') streamMode = require('./../webpack/config.development.js');
-	else if (mode === 'production') streamMode = require('./../webpack/config.production.js');
-	else streamMode = undefined;
+	let streamMode, streamGutenberg;
+	if (mode === 'development') {
+		streamMode = require('./../webpack/config.development.js');
+		streamGutenberg = require('./../webpack/config.gutenberg.development.js');
+	} else if (mode === 'production') {
+		streamMode = require('./../webpack/config.production.js');
+		streamGutenberg = require('./../webpack/config.gutenberg.production.js');
+	} else {
+		streamMode = undefined;
+		streamGutenberg = undefined;
+	}
 
 	const pumps = () => {
 		// Main Frontend
@@ -42,6 +49,14 @@ const buildScripts = (mode) => (done) => {
 			vinylNamed(),
 			webpackStream(streamMode, webpack),
 			...afterBundler(mode, (mode === 'production') ? distPath('minified/js') : distPath('unminified/js'))
+		], done);
+
+		// Gutenberg
+		pump([
+			gulp.src(srcPath('js/gutenberg')), 
+			vinylNamed(),
+			webpackStream(streamGutenberg, webpack),
+			...afterBundler(mode, (mode === 'production') ? distPath('minified/js/gutenberg') : distPath('unminified/js/gutenberg'))
 		], done);
 
 		// Admin

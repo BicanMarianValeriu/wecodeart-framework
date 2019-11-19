@@ -1,0 +1,6 @@
+.wp-block-code {
+    padding: 1rem;
+    border: 1px solid;
+    @include alert-variant( white, $gray-300, $dark );
+    @include border-radius();
+}

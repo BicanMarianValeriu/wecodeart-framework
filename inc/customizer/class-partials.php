@@ -9,7 +9,7 @@
  * @subpackage 	WP-Customizer Partials
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.3
- * @version		3.6.2
+ * @version		4.0.3
  */
 
 namespace WeCodeArt\Customizer;
@@ -71,7 +71,11 @@ class Partials {
 	/**
 	 * Render the Footer Copyright for the selective refresh partial.
 	 */
-	public static function _render_footer_copyright() {
-		return wp_kses_post( get_theme_mod( 'footer-copyright-text' ) );
+	public static function render_footer_copyright() {
+		$copyright = get_theme_mod( 'footer-copyright-text' );
+		$copyright = str_replace( '[copy]', '&copy;', $copyright );
+		$copyright = str_replace( '[year]', date( 'Y' ), $copyright );
+
+		return wp_kses_post( $copyright );
 	}
 }

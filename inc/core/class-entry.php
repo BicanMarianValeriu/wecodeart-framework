@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.1
+ * @version		4.0.3
  */
 
 namespace WeCodeArt\Core;
@@ -47,7 +47,7 @@ class Entry {
 
 		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_no_posts' ], 10 );
 
-		add_filter( 'wecodeart/filter/entry/title/disabled', [ $this, 'filter_home_title' ], 10, 2 );
+		//add_filter( 'wecodeart/filter/entry/title/disabled', [ $this, 'filter_home_title' ], 10, 2 );
 
 		/**
 		 * Child classes
@@ -245,7 +245,7 @@ class Entry {
 	 * Remove title on homepage
 	 *
 	 * @since	3.7.1
-	 * @version	3.7.6
+	 * @version	4.0.3
 	 *
 	 * @param 	boolean	$disabled
 	 * @param	integer	$post_id
@@ -253,6 +253,9 @@ class Entry {
 	 * @return	boolean
 	 */
 	public function filter_home_title( $disabled, $post_id ) {
+		return _deprecated_function( __FUNCTION__, '4.0.3' );
+
+		/* 
 		$custom_page = get_option( 'page_on_front' );
 
 		if( intval( $custom_page ) === 0 ) {
@@ -264,5 +267,6 @@ class Entry {
 		}
 
 		return $disabled;
+		*/
 	}
 }

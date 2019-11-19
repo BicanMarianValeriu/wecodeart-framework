@@ -9,12 +9,14 @@ const srcPath = (file, watch = false) => {
 	if (file === 'scss' && watch === false) return paths.entry.scss.main;
 	if (file === 'scss' && watch === true) return paths.entry.scss.watch;
 	if (file === 'scss/admin' && watch === false) return paths.entry.scss.admin;
+	if (file === 'scss/gutenberg' && watch === false) return paths.entry.scss.gutenberg;
 	if (file === 'scss/customizer' && watch === false) return paths.entry.scss.customizer;
 	if (file === 'svg' && watch === false) return paths.entry.svg;
 	if (file === 'svg' && watch === true) return paths.entry.svg;
 	if (file === 'js' && watch === false) return entryArray;
 	if (file === 'js' && watch === true) return paths.entry.js.watch;
 	if (file === 'js/admin' && watch === false) return paths.entry.js.admin;
+	if (file === 'js/gutenberg' && watch === false) return paths.entry.js.gutenberg;
 	if (file === 'js/customizer' && watch === false) return paths.entry.js.customizer;
 	console.error('Unsupported file type entered into Gulp Task Runner for Source Path');
 };
@@ -24,15 +26,19 @@ const distPath = (file) => {
 		'unminified/css',
 		'unminified/css/admin',
 		'unminified/css/customizer',
+		'unminified/css/gutenberg',
 		'unminified/js',
 		'unminified/js/admin',
 		'unminified/js/customizer',
+		'unminified/js/gutenberg',
 		'minified/css',
 		'minified/css/admin',
 		'minified/css/customizer',
+		'minified/css/gutenberg',
 		'minified/js',
 		'minified/js/admin',
 		'minified/js/customizer',
+		'minified/js/gutenberg',
 		'minified',
 		'images',
 	].includes(file)) return `./assets/${file}`;

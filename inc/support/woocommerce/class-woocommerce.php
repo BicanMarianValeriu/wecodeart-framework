@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.9
- * @version		4.0.2
+ * @version		4.0.3
  */
 
 namespace WeCodeArt\Support;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Core\Content;
 use WeCodeArt\Core\Pagination;
 use WeCodeArt\Markup;
+use WeCodeArt\Markup\SVG;
 use WeCodeArt\Customizer;
 use WeCodeArt\Support\Interfaces\Integration;
 use WeCodeArt\Support\WooCommerce\Conditional\Plugin;

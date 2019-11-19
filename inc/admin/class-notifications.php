@@ -9,7 +9,7 @@
  * @subpackage 	Notifications
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.0.1
+ * @version		4.0.3
  */
 
 namespace WeCodeArt\Admin;
@@ -26,15 +26,7 @@ use WeCodeArt\Markup;
 class Notifications {
 
 	use \WeCodeArt\Singleton;
-
-	/**
-	 * Notices
-	 *
-	 * @access 	private
-	 * @var 	array Notices.
-	 * @since 	3.8.1
-	 */
-	private static $version = '3.8.1';
+	use \WeCodeArt\Core\Scripts\Base;
 
 	/**
 	 * Notices
@@ -146,18 +138,16 @@ class Notifications {
 	 * Enqueue Scripts.
 	 *
 	 * @since 	3.8.6
-	 * @version	3.9.0
+	 * @version	4.0.3
 	 * @return 	void
 	 */
 	public function enqueue_scripts() {
-		$folder = defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 'unminified' : 'minified';
-
 		wp_register_script( 
-			strtolower( str_replace( '\\', '-', __CLASS__ ) ),
-			get_parent_theme_file_uri( '/assets/' . $folder . '/js/admin/notification.js' ),
-			[ 'jquery' ], 
-			self::$version, 
-			true 
+			$this->make_handle(),
+			$this->get_asset( 'js', 'notification' ),
+			[ 'jquery' ],
+			wecodeart( 'version' ),
+			true
 		);
 	}
 
@@ -220,7 +210,7 @@ class Notifications {
 	 * Markup Notice.
 	 *
 	 * @since 	3.8.1
-	 * @version	3.9.4
+	 * @version	4.0.3
 	 *
 	 * @param  	array $notice Notice markup.
 	 * @return 	void
@@ -228,22 +218,22 @@ class Notifications {
 	public static function markup( $notice = [] ) {
 
 		do_action( "wecodeart/action/admin/notification/{$notice['id']}/before" );
-		do_action( "wecodeart/hook/admin/notification/{$notice['id']}/before" );
 
 		Markup::template( 'admin/notification', $notice );
 
 		do_action( "wecodeart/action/admin/notification/{$notice['id']}/after" );
-		do_action( "wecodeart/hook/admin/notification/{$notice['id']}/after" );
 	}
 
 	/**
 	 * Render Notifications
 	 *
 	 * @since 	3.8.1
+	 * @version	4.0.3 
+	 *
 	 * @return 	void
 	 */
 	public function render() {
-		wp_enqueue_script( strtolower( str_replace( '\\', '-', __CLASS__ ) ) );
+		wp_enqueue_script( $this->make_handle() );
 
 		$defaults = array(
 			'id'		=> '',      // Optional, Notice ID.

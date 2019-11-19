@@ -9,13 +9,14 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.0
- * @version		4.0.1
+ * @version		4.0.3
  */
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Activation;
 use WeCodeArt\Customizer;
+use WeCodeArt\Gutenberg;
 use WeCodeArt\Support;
 use WeCodeArt\Core\Header;
 use WeCodeArt\Core\Content;
@@ -84,7 +85,10 @@ final class WeCodeArt implements ArrayAccess {
 
 		// Admin Stuff
 		Admin 		::get_instance();
-		Customizer 	::get_instance();
+        Customizer 	::get_instance();
+        
+        // Gutenberg
+        Gutenberg   ::get_instance();
 
 		// Fire Support Class
 		Support		::get_instance();

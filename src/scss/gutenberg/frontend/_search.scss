@@ -1,0 +1,17 @@
+.wp-block-search {
+	display: flex;
+	flex-wrap: wrap;
+
+	&__label {
+		width: 100%;
+	}
+
+	&__input {
+		flex-grow: 1;
+		max-width: 360px;
+	}
+
+	&__button {
+		margin-left: 10px;
+	}
+}

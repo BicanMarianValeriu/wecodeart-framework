@@ -56,7 +56,7 @@ class Support {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 	1.0
-	 * @version	4.0.2
+	 * @version	4.0.3
 	 */
 	function after_setup_theme() {
 		// Add support for Meta info for posts other than Page Type 
@@ -163,6 +163,7 @@ class Support {
 		}
 
 		add_theme_support( 'editor-color-palette', $colors );
+		add_theme_support( 'wecodeart-color-palette-classnames' );
 	}
 
 	/**

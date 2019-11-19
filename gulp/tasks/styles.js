@@ -56,6 +56,12 @@ const buildStyles = (mode) => (done) => {
             entry: srcPath('scss/customizer'),
             output: (mode === 'production') ? distPath('minified/css/customizer') : distPath('unminified/css/customizer')
         }), done);
+
+        // Gutenberg CSS
+        pump(processStyles(mode, {
+            entry: srcPath('scss/gutenberg'),
+            output: (mode === 'production') ? distPath('minified/css/gutenberg') : distPath('unminified/css/gutenberg')
+        }), done);
     };
 
     ['development', 'production'].includes(mode) ? pumps() : undefined;

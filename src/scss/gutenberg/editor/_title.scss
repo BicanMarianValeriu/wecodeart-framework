@@ -1,0 +1,34 @@
+/*--------------------------------------------------------------
+# Hide Title
+--------------------------------------------------------------*/
+body {
+	&.wca-title-hidden {
+		.editor-post-title {
+			&__block {
+				.editor-post-title {
+					&__input {
+						opacity: 0.5;
+					}
+				}
+			}
+		}
+
+		.wca-hidden-title-label {
+			display: block;
+		}
+	}
+}
+
+.wca-hide-title-label {
+	&.components-base-control {
+		.components-base-control {
+			&__help {
+				margin-top: 5px;
+				padding: 1px 10px;
+				margin-left: 0;
+				font-size: 12px;
+				font-style: italic;
+			}
+		}
+	}
+}

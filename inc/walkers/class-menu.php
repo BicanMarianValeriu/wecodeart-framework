@@ -9,7 +9,7 @@
  * @subpackage 	Walkers\Menu
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		2.0
- * @version		4.0.1
+ * @version		4.0.3
  */
 
 namespace WeCodeArt\Walkers;
@@ -222,8 +222,9 @@ class Menu extends Walker_Nav_Menu {
 		 * output inside of the item before the $title (the link text).
 		 */
 		$icon_html = '';
-		if ( ! empty( $icon_class_string ) )
-			$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> '; 
+		if ( ! empty( $icon_class_string ) ) {
+			$icon_html = '<i class="' . esc_attr( $icon_class_string ) . ' mr-1" aria-hidden="true"></i> '; 
+		}
 
 		/** This filter is documented in wp-includes/post-template.php */
 		$title = apply_filters( 'the_title', $item->title, $item->ID );

@@ -1,0 +1,47 @@
+/*--------------------------------------------------------------
+# Code Editor
+--------------------------------------------------------------*/
+.edit-post-text-editor {
+	max-width: 99% !important;
+	
+	&__body {
+		.editor-post-title {
+			&__block {
+				max-width: 100% !important;
+			}
+		}
+	
+		.CodeMirror { /* stylelint-disable-line selector-class-pattern */
+			height: auto;
+	
+			&.CodeMirror-wrap { /* stylelint-disable-line selector-class-pattern */
+				border: 1px solid #ddd;
+			}
+	
+			.CodeMirror-scroll { /* stylelint-disable-line selector-class-pattern */
+				height: auto !important;
+				overflow: visible !important;
+			}
+		}
+	}
+}
+
+.wca-editor-loaded {
+	.edit-post-text-editor,
+	.edit-post-visual-editor {
+		animation: slide-up 0.4s ease;
+	}
+
+	@keyframes slide-up {
+
+		0% {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+}

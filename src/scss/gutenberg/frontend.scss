@@ -1,23 +1,67 @@
-.content {
-    overflow-x: hidden;
-}
+html {
+    @include media-breakpoint-up( 'lg' ) {
+        &.has-scrollbar {
+            .site-container {
+                .alignfull {
+                    margin-left: calc( -50vw + 50% + 17px / 2 );
+                    margin-right: calc( -50vw + 50% + 17px / 2 );
+                }
+            }
+        }
+    }
 
-.entry-content {
-    .alignfull { //  + 17px / 2 if we take into consideration the scrollbars
-        margin-left: calc( -50vw + 50% );
-        margin-right: calc( -50vw + 50% );
-        max-width: 100vw;
-        width: auto;
+    body {
+        overflow-x: hidden;
     }
 }
 
-html.has-scrollbar {
-    .entry-content {
-        .alignfull {  
-            margin-left: calc( -50vw + 50% + 17px / 2 );
-            margin-right: calc( -50vw + 50% + 17px / 2 );
+.site-container {
+	@include media-breakpoint-up( 'lg' ) {
+		.alignfull,
+        .alignwide {
+			width: auto;
             max-width: 100vw;
-            width: auto;
         }
-    } 
+        
+        .alignfull { //  + 17px / 2 if we take into consideration the scrollbars
+            margin-left: calc( -50vw + 50% );
+            margin-right: calc( -50vw + 50% );
+        }
+		
+        .alignwide {
+			@include media-breakpoint-up( md ) {
+				margin-left: calc( -42.3vw + 50% );
+                margin-right: calc( -42.3vw + 50% );
+            }
+        }
+    }
 }
+
+@import "root";
+@import "frontend/audio";
+@import "frontend/button";
+@import "frontend/calendar";
+@import "frontend/categories";
+@import "frontend/code";
+@import "frontend/columns";
+@import "frontend/cover";
+@import "frontend/embed";
+@import "frontend/file";
+@import "frontend/gallery";
+@import "frontend/image";
+@import "frontend/latest-comments";
+@import "frontend/latest-posts";
+@import "frontend/media-text";
+@import "frontend/navigation-menu";
+@import "frontend/paragraph";
+@import "frontend/pullquote";
+@import "frontend/quote";
+@import "frontend/rss";
+@import "frontend/search";
+@import "frontend/separator";
+@import "frontend/social-links";
+@import "frontend/spacer";
+@import "frontend/subhead";
+@import "frontend/table";
+@import "frontend/verse";
+@import "frontend/video";

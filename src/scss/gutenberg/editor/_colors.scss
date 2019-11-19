@@ -1,0 +1,73 @@
+/*--------------------------------------------------------------
+# Text Colors
+--------------------------------------------------------------*/
+.components-wca-inline-color {
+	&__indicator {
+		position: absolute;
+		background: #000;
+		height: 3px;
+		width: 20px;
+		bottom: 6px;
+		left: auto;
+		right: auto;
+		margin: 0 5px;
+	
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+		}
+	}
+}
+
+.components-wca-toolbar {
+	&__control {
+		&.components-icon-button {
+			&.has-text {
+				svg {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+}
+
+.components-wca__inline-color-popover {
+	.components-popover {
+		&__content {
+			padding: 10px 18px;
+	
+			.components-color-palette {
+				margin-top: 0.6rem;
+			}
+	
+			.component-color-indicator {
+				vertical-align: text-bottom;
+			}
+	
+			.components-base-control__title {
+				display: block;
+				margin-bottom: 16px;
+				font-weight: 600;
+				color: #191e23;
+			}
+		}
+	}
+}
+
+.block-editor-block-list {
+	&__block {
+		.block-editor-block-contextual-toolbar {
+			.components-toolbar {
+				&.wca-components-toolbar {
+					border-right: 0;
+					border-left: 0;
+				}
+			}
+		}
+	}
+}

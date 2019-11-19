@@ -1,0 +1,36 @@
+.wp-block-latest-comments {
+	@include list-unstyled();
+
+	&__comment {
+		margin-bottom: 1rem;
+	
+		.has-avatars & {
+			min-height: 40px;
+	
+			.wp-block-latest-comments {
+				&__comment {
+					&-meta,
+					&-excerpt {
+						margin-left: 52px;
+					}
+				}
+			}
+		}
+
+		&-date {
+			color: $gray-500;
+			display: block;
+			font-size: 12px;
+		}
+	}
+
+	.avatar,
+	&__comment-avatar {
+		display: block;
+		float: left;
+		height: 40px;
+		width: 40px;
+		border-radius: 50%;
+		margin-right: 12px;
+	}
+}

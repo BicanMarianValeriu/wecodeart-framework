@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.0
+ * @version		4.0.0
  */
 
 namespace WeCodeArt;

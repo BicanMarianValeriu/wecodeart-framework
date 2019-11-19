@@ -1,0 +1,98 @@
+.wp-block-gallery {
+	@for $i from 1 through 8 {
+		&.columns-#{ $i } {
+			.blocks-gallery-image,
+			.blocks-gallery-item {
+				@include make-col( 12 / $i );
+
+				@include media-breakpoint-down( 'sm' ) {
+					@include make-col( 12 / 2 );
+				}
+			}
+		}
+	}
+
+	.blocks-gallery-grid {
+		@include make-row( 20px );
+		@include list-unstyled();
+	}
+
+	.blocks-gallery-image,
+	.blocks-gallery-item {
+		@include make-col-ready( 20px );
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		figure {
+			height: 100%;
+			margin: 0 0 20px;
+
+			// IE doesn't support flex so omit that.
+			@supports (position: sticky) {
+				display: flex;
+				align-items: flex-end;
+				justify-content: flex-start;
+			}
+		}
+
+		img {
+			display: block;
+			max-width: 100%;
+			width: 100%;
+			height: auto;
+
+			// IE11 doesn't read rules inside this query. They are applied only to modern browsers.
+			@supports (position: sticky) {
+				width: auto;
+			}
+		}
+
+		figcaption {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			max-height: 100%;
+			overflow: auto;
+			padding: 40px 10px 10px;
+			color: $white;
+			text-align: center;
+			background: linear-gradient( 0deg, rgba( $black, 0.7) 0, rgba( $black, 0.3 ) 70%, transparent );
+
+			img {
+				display: inline;
+			}
+		}
+	}
+
+	// Cropped
+	&.is-cropped .blocks-gallery-image,
+	&.is-cropped .blocks-gallery-item {
+		a,
+		img {
+			// IE11 doesn't support object-fit, so just make sure images aren't skewed.
+			// The following rules are for all browsers.
+			width: 100%;
+
+			// IE11 doesn't read rules inside this query. They are applied only to modern browsers.
+			@supports (position: sticky) {
+				height: 100%;
+				flex: 1;
+				object-fit: cover;
+			}
+		}
+	}
+
+	// Apply max-width to floated items that have no intrinsic width.
+	&.alignleft,
+	&.alignright {
+		width: 100%;
+	}
+
+	// If the gallery is centered, center the content inside as well.
+	&.aligncenter {
+		.blocks-gallery-item figure {
+			justify-content: center;
+		}
+	}
+}

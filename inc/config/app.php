@@ -98,9 +98,6 @@ return [
         'content-layout-modules'    => [ 'content', 'primary' ],
         'footer-layout-container'   => 'container',
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
-        'footer-copyright-text'     => sprintf(
-            __( 'Copyright %s - All rights reserved.', 'wecodeart' ), 
-            '&copy; ' . date( 'Y' )
-        ),
+        'footer-copyright-text'     => __( 'Copyright [copy] [year] - All rights reserved.', 'wecodeart' ),
     ],
 ];

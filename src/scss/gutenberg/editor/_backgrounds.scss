@@ -1,0 +1,18 @@
+/*--------------------------------------------------------------
+# Backgrounds
+--------------------------------------------------------------*/
+.components-editorskit-background-color__indicator {
+	position: absolute;
+	background-color: currentColor;
+	height: 1px;
+	width: 20px;
+	bottom: 9px;
+	left: auto;
+	right: auto;
+	margin: 0 3px 0 7px;
+}
+
+.has-inline-background {
+	padding: 0.12em 4px;
+	border-radius: 2px;
+}

@@ -1,0 +1,31 @@
+.wp-block-rss {
+	&.alignleft {
+		/*rtl:ignore*/
+		margin-right: 2em;
+	}
+
+	&.alignright {
+		/*rtl:ignore*/
+		margin-left: 2em;
+	}
+
+	&.is-grid {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 0;
+		list-style: none;
+
+		li {
+			margin: 0 16px 16px 0;
+			width: 100%;
+		}
+	}
+
+	&__item {
+		&-date,
+		&-author {
+			display: block;
+			color: $gray-300;
+		}		
+	}
+}

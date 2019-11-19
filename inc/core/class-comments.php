@@ -68,7 +68,7 @@ class Comments {
 	 * Render Comments Info
 	 *
 	 * @since	3.7.3
-	 * @version	3.9.5
+	 * @version	4.0.3
 	 *
 	 * @return 	string
 	 */
@@ -77,8 +77,8 @@ class Comments {
 		$comments_number = intval( get_comments_number() );
 
 		$defaults = [
-			'icon' 		=> SVG::compile( 'comments' ) . ' ',
-			'empty' 	=> esc_html__( 'No comments, so go and ...', wecodeart_config( 'textdomain' ) ),
+			'icon' 		=> SVG::compile( 'comments' ) . ' ', // Escaped with kses inside fn.
+			'empty' 	=> esc_html__( 'No comments', wecodeart_config( 'textdomain' ) ),
 			'closed'	=> false,
 			'add_one'	=> esc_html__( 'add one', wecodeart_config( 'textdomain' ) ) 
 		]; 
@@ -114,11 +114,11 @@ class Comments {
 		$output = apply_filters( 'wecodeart/filter/comments/get_comments_info/output', trim( $output ) );
 
 		if( $echo ) {
-			echo $output;
+			echo $output; // WP.Cs.OK
 			return;
 		}
 
-		return $output; 
+		return $output; // WP.Cs.OK
 	} 
 
 	/**

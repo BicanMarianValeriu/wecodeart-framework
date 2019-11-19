@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.9
+ * @version		4.0.3
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -77,13 +77,13 @@ class Footer extends Config {
 				'control'  		=> 'textarea',
 				'section'		=> 'footer-copyright',
 				'title'			=> esc_html__( 'Footer Copyright Text', wecodeart_config( 'textdomain' ) ),
-				'description'	=> esc_html__( 'Enter your copyright text here. Appears in Footer attribution.', wecodeart_config( 'textdomain' ) ),
+				'description'	=> __( 'You can use <code>[copy]</code> and <code>[year]</code> to output copyright symbol and current year.', wecodeart_config( 'textdomain' ) ),
 				'priority'		=> 5,
 				'sanitize_callback'	=> 'sanitize_text_field', 
 				'transport'		=> 'postMessage',
 				'partial'		=> [
 					'selector'        => '.attribution__copyright',
-					'render_callback' => [ 'WeCodeArt\Customizer\Partials', '_render_footer_copyright' ]
+					'render_callback' => [ 'WeCodeArt\Customizer\Partials', 'render_footer_copyright' ]
 				]	
 			)
 		);

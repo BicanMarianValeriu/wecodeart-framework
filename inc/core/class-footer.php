@@ -80,7 +80,7 @@ class Footer {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	1.0
-	 * @version 3.9.5
+	 * @version 4.0.3
 	 *
 	 * @return 	void
 	 */
@@ -91,17 +91,20 @@ class Footer {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'container-fluid' ] ], 
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row py-3' ] ], 
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col text-center' ] ] 
-		], function() {   
+		], function() {
+
+			$copyright = get_theme_mod( 'footer-copyright-text' );
+			$copyright = str_replace( '[copy]', '&copy;', $copyright );
+			$copyright = str_replace( '[year]', date( 'Y' ), $copyright );
+
 			?>
-			<span class="attribution__copyright"><?php echo esc_html( get_theme_mod( 'footer-copyright-text' ) ); ?></span>
-			<span class="attribution__credits">
-				<?php
-					printf( 
-						esc_html__( 'Built on %1$s.', wecodeart_config( 'textdomain' ) ), 
-						'<a href="https://www.wecodeart.com/" target="_blank">WeCodeArt Framework</a>' 
-					);
-				?>
-			</span>
+			<span class="attribution__copyright"><?php echo wp_kses_post( $copyright ); ?></span>
+			<span class="attribution__credits"><?php
+				printf( 
+					esc_html__( 'Built on %1$s.', wecodeart_config( 'textdomain' ) ), 
+					'<a href="https://www.wecodeart.com/" target="_blank">WeCodeArt Framework</a>' 
+				);
+			?></span>
 			<?php
 		} );  
 		

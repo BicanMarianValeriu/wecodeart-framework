@@ -264,7 +264,7 @@ class Media {
 	 * Echo the Entry IMG Markup
 	 *
 	 * @since 	1.0
-	 * @version 3.9.5
+	 * @version 4.0.3
 	 *
 	 * @param 	array	$args
 	 *
@@ -274,17 +274,28 @@ class Media {
 		$disable = apply_filters( 'wecodeart/filter/media/render_image/disable', false );
 		if ( is_attachment() || $disable === true ) return; 
 		
-		$args = wp_parse_args( $args, [ 'attrs' => [ 'class' => 'entry-media__src' ] ] ); 
-
-		$wrappers = [ [ 'tag' => 'div', 'attrs' => [ 'class' => 'entry-media' ] ] ];
-
-		if ( ! is_singular() ) $wrappers[] = [
-			'tag' 	=> 'a',
-			'attrs' => [
-				'href'	=> esc_url( get_permalink() ),
-				'class' => 'entry-media__link'  
+		$args = wp_parse_args( $args, [ 
+			'attrs' => [ 
+				'class' => 'entry-media__src' 
 			]
-		];
+		] ); 
+
+		$wrappers = [ [ 
+			'tag' 	=> 'div', 
+			'attrs' => [ 
+				'class' => 'entry-media' 
+			] 
+		] ];
+
+		if ( ! is_singular() ) {
+			$wrappers[] = [
+				'tag' 	=> 'a',
+				'attrs' => [
+					'href'	=> esc_url( get_permalink() ),
+					'class' => 'entry-media__link'  
+				]
+			];
+		}
 		
 		/**
 		 * Return the image wrapped into containers

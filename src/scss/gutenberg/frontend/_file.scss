@@ -1,0 +1,40 @@
+.wp-block-file {
+	margin-bottom: 1.5em;
+
+	&.aligncenter {
+		text-align: center;
+	}
+
+	&.alignright {
+		/*rtl:ignore*/
+		text-align: right;
+	}
+
+	&__button {
+		@include button-size( 
+            $btn-padding-y, 
+            $btn-padding-x-lg, 
+            $btn-font-size, 
+            $btn-line-height, 
+            $btn-border-radius 
+        );
+	}
+
+	a.wp-block-file__button {
+		text-decoration: none;
+
+		&:hover,
+		&:visited,
+		&:focus,
+		&:active {
+			box-shadow: none;
+			color: $white;
+			opacity: 0.85;
+			text-decoration: none;
+		}
+	}
+
+	* + .wp-block-file__button {
+		margin-left: 0.75em;
+	}
+}
