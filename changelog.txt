@@ -1,5 +1,5 @@
 v4.0.3
-- Added - Major Gutenberg Improvements
+- Added - Major Gutenberg Improvements - too many to be mentioned here.
 - Updated - Footer copyright Customizer Option and added 2 'shortcodes'
 - Updated - Class Admin/Notification to use Base scripts for handle and enqueue Functions
 - Removed - Actions: wecodeart/action/admin/notification/{$notice['id']}/after and before

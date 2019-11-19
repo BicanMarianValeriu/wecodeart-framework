@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-//import map from 'lodash/map';
 const { map } = lodash;
 
 /**

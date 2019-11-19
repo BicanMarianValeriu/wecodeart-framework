@@ -1,9 +1,7 @@
 /**
  * External dependencies
  */
-//import get from 'lodash/get';
 const { get } = lodash;
-
 
 /**
  * WordPress dependencies

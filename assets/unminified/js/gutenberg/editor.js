@@ -1768,12 +1768,14 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var compose = wp.compose.compose;
     var withSelect = wp.data.withSelect;
     var Fragment = wp.element.Fragment;
-    var _wp$blockEditor = wp.blockEditor,
-        InspectorControls = _wp$blockEditor.InspectorControls,
-        FontSizePicker = _wp$blockEditor.FontSizePicker,
-        withFontSizes = _wp$blockEditor.withFontSizes,
-        withColors = _wp$blockEditor.withColors,
-        PanelColorSettings = _wp$blockEditor.PanelColorSettings;
+
+    var _ref = wp.blockEditor || wp.editor,
+        InspectorControls = _ref.InspectorControls,
+        FontSizePicker = _ref.FontSizePicker,
+        withFontSizes = _ref.withFontSizes,
+        withColors = _ref.withColors,
+        PanelColorSettings = _ref.PanelColorSettings;
+
     var _wp$components = wp.components,
         PanelBody = _wp$components.PanelBody,
         withFallbackStyles = _wp$components.withFallbackStyles;
@@ -2691,7 +2693,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /**
      * External dependencies
      */
-    //import { get } from 'lodash';
 
 
     var _lodash = lodash,
@@ -2996,7 +2997,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /**
      * External dependencies
      */
-    //import map from 'lodash/map';
 
 
     var _lodash = lodash,
@@ -3833,7 +3833,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /**
      * External dependencies
      */
-    //import get from 'lodash/get';
 
 
     var _lodash = lodash,
