@@ -1,3 +1,6 @@
+v4.0.4
+- Fixed - Added missing editor.js assets causing Gutenberg Editor to break
+
 v4.0.3
 - Added - Major Gutenberg Improvements - too many to be mentioned here.
 - Updated - Footer copyright Customizer Option and added 2 'shortcodes'
