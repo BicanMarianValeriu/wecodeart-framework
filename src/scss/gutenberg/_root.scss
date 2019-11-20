@@ -4,27 +4,19 @@
 
 :root {
 	// Theme
-	.has-inline-background,
-	.has-background {
-		@each $color, $value in $theme-colors {
-			&.has-#{$color}-background-color {
-				@include alert-variant( $value, transparent, white );
-			}
-		}
-	}
-
 	.has-inline-background {
 		@include border-radius();
 		padding: .10rem .2rem;
 		margin: 0 .2rem;
 	}
 	
-	.has-inline-color,
-	.has-text-color {
-		@each $color, $value in $theme-colors {
-			&.has-#{$color}-color {
-				color: #{$value};
-			}
+	@each $color, $value in $theme-colors {
+		.has-#{$color}-color {
+			color: #{$value};
+		}
+
+		.has-#{$color}-background-color {
+			@include alert-variant( $value, transparent, white );
 		}
 	}
 

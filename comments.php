@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Comments Template
  * @since 		1.0
- * @version		4.0.1
+ * @version		4.0.5
  */
 
 use WeCodeArt\Markup;
@@ -18,15 +18,14 @@ if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' === basename( $_SE
 }
 
 if ( post_password_required() ) {
-	Markup::wrap( 'comment-form-protected', [ [
+	return Markup::wrap( 'comment-form-protected', [ [
 		'tag' 	=> 'p',
 		'attrs' => [
-			'class' => 'alert alert-light border-primary'
+			'class' => 'alert alert-danger shadow-soft'
 		]
 	] ], 'printf', [ 
 		esc_html__( 'This post is password protected. Enter the password to view comments.', wecodeart_config( 'textdomain' ) )
 	] );
-	return;
 } 
 
 do_action( 'wecodeart/hook/comments/before' );

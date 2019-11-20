@@ -9,7 +9,7 @@
  * @subpackage 	Core\Hooks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.0
- * @version		4.0.2
+ * @version		4.0.5
  */
 
 namespace WeCodeArt\Core;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Core\Search;
 use WeCodeArt\Core\Content;
 use WeCodeArt\Markup\SVG;
+use WeCodeArt\Walkers\Menu;
 
 /**
  * General Hooks
@@ -35,6 +36,7 @@ class Hooks {
 		add_filter( 'body_class',		array( $this, 'body_classes'	) );
 		add_filter( 'post_class',		array( $this, 'post_classes'	) );
 		add_filter( 'get_search_form',	array( $this, 'search_form' 	) );
+		add_filter( 'wp_nav_menu_args',	array( $this, 'menu_args' 		) );
 	}
 	
 	/**
@@ -146,5 +148,21 @@ class Hooks {
 		 * @param string The form markup.
 		 */
 		return apply_filters( 'wecodeart/filter/search_form/html', $form->get_form() );
-	} 
+	}
+
+	/**
+	 * Adds Walker to WP Menus by default.
+	 *
+	 * @since 	4.0.5
+	 *
+	 * @param 	array 	$args.
+	 *
+	 * @return 	array
+	 */
+	public function menu_args( $args ) {
+		return wp_parse_args( [
+			'walker' 		 => new Menu,
+			'fallback_cb'	 => 'WeCodeArt\Walkers\Menu::fallback'
+		], $args );
+	}
 }

@@ -8,14 +8,13 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Protected Template
  * @since 	    3.5
- * @version	    4.0.1
+ * @version	    4.0.5
  */
 
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Markup\SVG;
 use WeCodeArt\Markup\Input;
-use function WeCodeArt\Functions\kses_svg;
 
 SVG::add_icon( 'key', [
     'viewBox'	=> '0 0 512 512',
@@ -33,7 +32,7 @@ SVG::add_icon( 'unlock', [
  */
 ?>
 <form action="<?php echo esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ); ?>"
-    method="post" class="alert alert-light border-primary py-4">
+    method="post" class="alert alert-light border-soft shadow-soft py-4">
     <h4><?php esc_html_e( 
         'This post is password protected. To view this post, enter the password below!',
         wecodeart_config( 'textdomain' ) 
@@ -42,9 +41,9 @@ SVG::add_icon( 'unlock', [
         <div class="input-group-prepend">
             <span class="input-group-text text-primary"><?php 
             
-                echo kses_svg( SVG::compile( 'unlock', [
+                SVG::render( 'unlock', [
                     'class' => 'fa-fw'
-                ] ) );
+                ] );
                 
             ?></span>
         </div>
@@ -61,11 +60,11 @@ SVG::add_icon( 'unlock', [
 
         ?></div>
         <div class="input-group-append">
-            <button type="submit" class="btn btn-dark"><?php
+            <button type="submit" class="btn btn-light"><?php
                 
-                echo kses_svg( SVG::compile( 'key', [
+                SVG::render( 'key', [
                     'class' => 'mr-2'
-                ] ) );
+                ] );
 
                 ?><span><?php
                 

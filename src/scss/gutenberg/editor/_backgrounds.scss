@@ -13,6 +13,13 @@
 }
 
 .has-inline-background {
-	padding: 0.12em 4px;
-	border-radius: 2px;
+	@include border-radius();
+	padding: .10rem .2rem;
+	margin: 0 .2rem;
+}
+
+@each $color, $value in $theme-colors {
+	.has-#{$color}-background-color {
+		@include alert-variant( $value, transparent, white );
+	}
 }

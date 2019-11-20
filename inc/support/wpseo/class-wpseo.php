@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.2
+ * @version		4.0.5
  */
 
 namespace WeCodeArt\Support;
@@ -51,17 +51,17 @@ class WPSeo {
 	 * Send to Constructor
 	 *
 	 * @since 	3.6.2
-	 * @version	4.0.2
+	 * @version	4.0.5
 	 */
 	public function register_hooks() {
-		if(
-			detect_plugin( [ 'classes' => [ 'woocommerce' ] ] ) && // We could use wecodeart_if()
-			apply_filters( 'wecodeart/filter/support/yoast/breadcrumbs/woocommerce', true ) 
-		) {
+		add_action( 'wecodeart/hook/inner/top', [ $this, 'render_yoast_breadcrumbs' ], 30 );
+
+		if( apply_filters( 'wecodeart/filter/support/yoast/breadcrumbs/woocommerce', true ) ) {
+			/**
+			 * Use YOAST Crumbs instead of WooCommerce
+			 */
 			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 		}
-
-		add_action( 'wecodeart/hook/inner/top', [ $this, 'render_yoast_breadcrumbs' ], 30 );
 		
 		if( apply_filters( 'wecodeart/filter/support/yoast/author/social/enable', true ) ) {
 			/**

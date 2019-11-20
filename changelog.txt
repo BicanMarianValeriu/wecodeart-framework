@@ -1,3 +1,10 @@
+v4.0.5
+- Updated - Password protected form adjusted shadow and border and kses_svg removed (already escaped by fn)
+- Updated - Comment display note for password prottected posts
+- Updated - Bar Branding View and remove Walker from Menu Args
+- Updated - Security: Added empty index.php where missing in folders
+- Added - WeCodeArt\Core\Hooks->menu_args to pass Walker for Menu by default to all
+
 v4.0.4
 - Fixed - Added missing editor.js assets causing Gutenberg Editor to break
 

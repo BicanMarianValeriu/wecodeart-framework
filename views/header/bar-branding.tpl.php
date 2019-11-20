@@ -8,46 +8,50 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Header Branding HTML
  * @since	 	3.0.5
- * @version    	4.0.1
+ * @version    	4.0.5
  */
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup\SVG;
-use function WeCodeArt\Functions\kses_svg;
+
+$modules = get_theme_mod( 'header-bar-modules' );
 
 ?>
 <div class="col">
 	<?php
+		// Logo
 		if ( has_custom_logo() ) the_custom_logo();
-		if ( is_front_page() ) : ?>
-			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>		
-		<?php else : ?>
-		<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-	<?php
-		endif;
+
+		// Title
+		printf(
+			'<%1$s class="site-title"><a href="%2$s" rel="home">%3$s</a></%1$s>',
+			is_front_page() ? 'h1' : 'p',
+			esc_url( home_url( '/' ) ),
+			get_bloginfo( 'name' ) 
+		);
+		
+		// Description
 		$description = get_bloginfo( 'description', 'display' );
 		if ( $description || is_customize_preview() ) : ?>
-			<p class="site-description"><?php echo wp_kses_post( $description ); ?></p>
-	<?php
+		<p class="site-description"><?php echo wp_kses_post( $description ); ?></p><?php
 		endif;
 	?>
 </div>
 <?php 
-	$mod = get_theme_mod( 'header-bar-modules' );
-	if ( in_array( 'search', $mod ) ) { ?>
+	if ( in_array( 'search', $modules ) ) { ?>
 	<div class="col-auto d-lg-none">
 		<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__search" aria-expanded="false" aria-controls="bar-search">
 			<span class="screen-reader-text"><?php esc_html_e( 'Search', wecodeart_config( 'textdomain' ) ); ?></span>
-			<?php echo kses_svg( SVG::compile( 'search' ) ); ?>
+			<?php SVG::render( 'search' ); ?>
 		</button>
 	</div>
 	<?php }
-	if ( in_array( 'menu', $mod ) ) { ?>
+	if ( in_array( 'menu', $modules ) ) { ?>
 	<div class="col-auto d-lg-none">
 		<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__menu" aria-expanded="false" aria-controls="bar-menu">
 			<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', wecodeart_config( 'textdomain' ) ); ?></span>
-			<?php echo kses_svg( SVG::compile( 'bars' ) ); ?>
+			<?php SVG::render( 'bars' ); ?>
 		</button>
 	</div>
 	<?php }

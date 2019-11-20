@@ -77,7 +77,7 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	???
-	 * @version	3.9.6
+	 * @version	4.0.5
 	 *
 	 * @return 	void
 	 */
@@ -93,7 +93,7 @@ class Header {
 			'attrs' => [
 				'class' => 'row no-gutters align-items-center'
 			]
-		] ], 'get_template_part', [ 'views/header/bar', 'branding' ] );
+		] ], 'WeCodeArt\Markup::template', [ 'header/bar-branding' ] );
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
-	 * @version	3.7.0
+	 * @version	4.0.5
 	 *
 	 * @return 	void 
 	 */
@@ -117,8 +117,6 @@ class Header {
 			'container' 	 => 'nav',
 			'menu_class' 	 => 'menu nav justify-content-end',
 			'depth' 		 => 10,
-			'walker' 		 => new \WeCodeArt\Walkers\Menu,
-			'fallback_cb'	 => 'WeCodeArt\Walkers\Menu::fallback'
 		] ) ] );
 	}
 
@@ -203,7 +201,7 @@ class Header {
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @uses	WeCodeArt\Markup::sortable()
 	 * @since 	unknown
-	 * @version	3.7.7
+	 * @version	4.0.5
 	 *
 	 * @return 	void
 	 */
@@ -212,7 +210,7 @@ class Header {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'header__bar header-bar', 'id' => 'header-bar' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'header-bar-container' ) ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row align-items-center' ] ]
-		], [ Markup::get_instance(), 'sortable' ], [
+		], 'WeCodeArt\Markup::sortable', [
 			self::nav_bar_modules(),
 			/**
 			 * @since 3.7.7

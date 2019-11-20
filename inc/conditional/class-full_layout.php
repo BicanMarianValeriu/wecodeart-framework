@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Conditional;
 
-defined( 'ABSPATH' ) || exit(); 
+defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Utilities\Helpers;
 use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
