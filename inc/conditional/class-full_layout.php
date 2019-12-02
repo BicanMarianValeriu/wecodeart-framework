@@ -36,7 +36,7 @@ class Full_Layout implements ConditionalInterface {
 		if( ! is_singular() || $enabled === false ) return false;
 
 		// Retrieve an array of blocks used for this post.
-		$blocks = parse_blocks( $post->post_content ); 
+		$blocks = parse_blocks( $post->post_content );
 
 		foreach( $blocks as $block ) {  
 			// If we have full/wide allign return true early and bail.

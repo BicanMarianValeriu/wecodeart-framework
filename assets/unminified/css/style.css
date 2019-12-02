@@ -4,7 +4,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 4.0.3
+Version: 4.0.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -5421,6 +5421,12 @@ svg,
 .hfeed .entry-footer {
   text-align: right; }
 
+.page--title-hiden .site-main {
+  margin-top: 0; }
+
+.page--title-hiden .entry {
+  margin-bottom: 0; }
+
 .breadcrumbs__list {
   padding: .5rem 0; }
 
@@ -5490,6 +5496,14 @@ svg,
 .widget_recent_entries ul {
   list-style-type: none;
   padding-left: 0; }
+  .widget_archive ul a,
+  .widget_meta ul a,
+  .widget_pages ul a,
+  .widget_categories ul a,
+  .widget_nav_menu ul a,
+  .widget_recent_comments ul a,
+  .widget_recent_entries ul a {
+    padding: 0; }
 
 .widget_calendar table {
   width: 100%; }
@@ -5519,122 +5533,110 @@ html body {
 :root {
   /*lint-disable function-comma-space-after */
   /*lint-enable function-comma-space-after */ }
-  :root .has-inline-background.has-primary-background-color,
-  :root .has-background.has-primary-background-color {
-    color: white;
-    background-color: #2296e4;
-    border-color: transparent; }
-    :root .has-inline-background.has-primary-background-color hr,
-    :root .has-background.has-primary-background-color hr {
-      border-top-color: rgba(0, 0, 0, 0); }
-    :root .has-inline-background.has-primary-background-color .alert-link,
-    :root .has-background.has-primary-background-color .alert-link {
-      color: #e6e6e6; }
-  :root .has-inline-background.has-secondary-background-color,
-  :root .has-background.has-secondary-background-color {
-    color: white;
-    background-color: #6c757d;
-    border-color: transparent; }
-    :root .has-inline-background.has-secondary-background-color hr,
-    :root .has-background.has-secondary-background-color hr {
-      border-top-color: rgba(0, 0, 0, 0); }
-    :root .has-inline-background.has-secondary-background-color .alert-link,
-    :root .has-background.has-secondary-background-color .alert-link {
-      color: #e6e6e6; }
-  :root .has-inline-background.has-success-background-color,
-  :root .has-background.has-success-background-color {
-    color: white;
-    background-color: #28a745;
-    border-color: transparent; }
-    :root .has-inline-background.has-success-background-color hr,
-    :root .has-background.has-success-background-color hr {
-      border-top-color: rgba(0, 0, 0, 0); }
-    :root .has-inline-background.has-success-background-color .alert-link,
-    :root .has-background.has-success-background-color .alert-link {
-      color: #e6e6e6; }
-  :root .has-inline-background.has-info-background-color,
-  :root .has-background.has-info-background-color {
-    color: white;
-    background-color: #17a2b8;
-    border-color: transparent; }
-    :root .has-inline-background.has-info-background-color hr,
-    :root .has-background.has-info-background-color hr {
-      border-top-color: rgba(0, 0, 0, 0); }
-    :root .has-inline-background.has-info-background-color .alert-link,
-    :root .has-background.has-info-background-color .alert-link {
-      color: #e6e6e6; }
-  :root .has-inline-background.has-warning-background-color,
-  :root .has-background.has-warning-background-color {
-    color: white;
-    background-color: #ffc107;
-    border-color: transparent; }
-    :root .has-inline-background.has-warning-background-color hr,
-    :root .has-background.has-warning-background-color hr {
-      border-top-color: rgba(0, 0, 0, 0); }
-    :root .has-inline-background.has-warning-background-color .alert-link,
-    :root .has-background.has-warning-background-color .alert-link {
-      color: #e6e6e6; }
-  :root .has-inline-background.has-danger-background-color,
-  :root .has-background.has-danger-background-color {
-    color: white;
-    background-color: #dc3545;
-    border-color: transparent; }
-    :root .has-inline-background.has-danger-background-color hr,
-    :root .has-background.has-danger-background-color hr {
-      border-top-color: rgba(0, 0, 0, 0); }
-    :root .has-inline-background.has-danger-background-color .alert-link,
-    :root .has-background.has-danger-background-color .alert-link {
-      color: #e6e6e6; }
-  :root .has-inline-background.has-light-background-color,
-  :root .has-background.has-light-background-color {
-    color: white;
-    background-color: #f1f3f7;
-    border-color: transparent; }
-    :root .has-inline-background.has-light-background-color hr,
-    :root .has-background.has-light-background-color hr {
-      border-top-color: rgba(0, 0, 0, 0); }
-    :root .has-inline-background.has-light-background-color .alert-link,
-    :root .has-background.has-light-background-color .alert-link {
-      color: #e6e6e6; }
-  :root .has-inline-background.has-dark-background-color,
-  :root .has-background.has-dark-background-color {
-    color: white;
-    background-color: #343a40;
-    border-color: transparent; }
-    :root .has-inline-background.has-dark-background-color hr,
-    :root .has-background.has-dark-background-color hr {
-      border-top-color: rgba(0, 0, 0, 0); }
-    :root .has-inline-background.has-dark-background-color .alert-link,
-    :root .has-background.has-dark-background-color .alert-link {
-      color: #e6e6e6; }
   :root .has-inline-background {
     border-radius: 0.25rem;
     padding: .10rem .2rem;
     margin: 0 .2rem; }
-  :root .has-inline-color.has-primary-color,
-  :root .has-text-color.has-primary-color {
+  :root .has-primary-color {
     color: #2296e4; }
-  :root .has-inline-color.has-secondary-color,
-  :root .has-text-color.has-secondary-color {
+  :root .has-primary-background-color {
+    background-color: #2296e4; }
+  :root p.has-primary-background-color {
+    color: white;
+    background-color: #2296e4;
+    border-color: transparent; }
+    :root p.has-primary-background-color hr {
+      border-top-color: rgba(0, 0, 0, 0); }
+    :root p.has-primary-background-color .alert-link {
+      color: #e6e6e6; }
+  :root .has-secondary-color {
     color: #6c757d; }
-  :root .has-inline-color.has-success-color,
-  :root .has-text-color.has-success-color {
+  :root .has-secondary-background-color {
+    background-color: #6c757d; }
+  :root p.has-secondary-background-color {
+    color: white;
+    background-color: #6c757d;
+    border-color: transparent; }
+    :root p.has-secondary-background-color hr {
+      border-top-color: rgba(0, 0, 0, 0); }
+    :root p.has-secondary-background-color .alert-link {
+      color: #e6e6e6; }
+  :root .has-success-color {
     color: #28a745; }
-  :root .has-inline-color.has-info-color,
-  :root .has-text-color.has-info-color {
+  :root .has-success-background-color {
+    background-color: #28a745; }
+  :root p.has-success-background-color {
+    color: white;
+    background-color: #28a745;
+    border-color: transparent; }
+    :root p.has-success-background-color hr {
+      border-top-color: rgba(0, 0, 0, 0); }
+    :root p.has-success-background-color .alert-link {
+      color: #e6e6e6; }
+  :root .has-info-color {
     color: #17a2b8; }
-  :root .has-inline-color.has-warning-color,
-  :root .has-text-color.has-warning-color {
+  :root .has-info-background-color {
+    background-color: #17a2b8; }
+  :root p.has-info-background-color {
+    color: white;
+    background-color: #17a2b8;
+    border-color: transparent; }
+    :root p.has-info-background-color hr {
+      border-top-color: rgba(0, 0, 0, 0); }
+    :root p.has-info-background-color .alert-link {
+      color: #e6e6e6; }
+  :root .has-warning-color {
     color: #ffc107; }
-  :root .has-inline-color.has-danger-color,
-  :root .has-text-color.has-danger-color {
+  :root .has-warning-background-color {
+    background-color: #ffc107; }
+  :root p.has-warning-background-color {
+    color: white;
+    background-color: #ffc107;
+    border-color: transparent; }
+    :root p.has-warning-background-color hr {
+      border-top-color: rgba(0, 0, 0, 0); }
+    :root p.has-warning-background-color .alert-link {
+      color: #e6e6e6; }
+  :root .has-danger-color {
     color: #dc3545; }
-  :root .has-inline-color.has-light-color,
-  :root .has-text-color.has-light-color {
+  :root .has-danger-background-color {
+    background-color: #dc3545; }
+  :root p.has-danger-background-color {
+    color: white;
+    background-color: #dc3545;
+    border-color: transparent; }
+    :root p.has-danger-background-color hr {
+      border-top-color: rgba(0, 0, 0, 0); }
+    :root p.has-danger-background-color .alert-link {
+      color: #e6e6e6; }
+  :root .has-light-color {
     color: #f1f3f7; }
-  :root .has-inline-color.has-dark-color,
-  :root .has-text-color.has-dark-color {
+  :root .has-light-background-color {
+    background-color: #f1f3f7; }
+  :root p.has-light-background-color {
+    color: white;
+    background-color: #f1f3f7;
+    border-color: transparent; }
+    :root p.has-light-background-color hr {
+      border-top-color: rgba(0, 0, 0, 0); }
+    :root p.has-light-background-color .alert-link {
+      color: #e6e6e6; }
+  :root .has-dark-color {
     color: #343a40; }
+  :root .has-dark-background-color {
+    background-color: #343a40; }
+  :root p.has-dark-background-color {
+    color: white;
+    background-color: #343a40;
+    border-color: transparent; }
+    :root p.has-dark-background-color hr {
+      border-top-color: rgba(0, 0, 0, 0); }
+    :root p.has-dark-background-color .alert-link {
+      color: #e6e6e6; }
+  :root .has-white-color {
+    color: white; }
+  :root .has-white-background-color {
+    background-color: white; }
   :root .has-pale-pink-background-color {
     background-color: #f78da7; }
   :root .has-vivid-red-background-color {
@@ -5817,6 +5819,9 @@ html body {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px; }
+  .wp-block-columns.no-gutters {
+    margin-left: 0 !important;
+    margin-right: 0 !important; }
   .wp-block-columns.are-vertically-aligned-top {
     align-items: flex-start; }
   .wp-block-columns.are-vertically-aligned-center {
@@ -5828,8 +5833,7 @@ html body {
   position: relative;
   width: 100%;
   padding-right: 15px;
-  padding-left: 15px;
-  flex: 1 1 0; }
+  padding-left: 15px; }
   .wp-block-column.is-vertically-aligned-top {
     align-self: flex-start; }
   .wp-block-column.is-vertically-aligned-center {
@@ -6049,6 +6053,9 @@ section.wp-block-cover-image > h2,
 
 .wp-block-embed {
   margin-bottom: 1em; }
+  .wp-block-embed figcaption {
+    text-align: center;
+    font-size: 80%; }
 
 .wp-embed-responsive .wp-block-embed.wp-embed-aspect-21-9 .wp-block-embed__wrapper,
 .wp-embed-responsive .wp-block-embed.wp-embed-aspect-18-9 .wp-block-embed__wrapper,
@@ -6313,6 +6320,10 @@ section.wp-block-cover-image > h2,
   .wp-block-image .aligncenter {
     margin-left: auto;
     margin-right: auto; }
+  .wp-block-image figcaption {
+    text-align: center;
+    margin: 5px 0 10px;
+    font-size: 80%; }
 
 .is-style-circle-mask img {
   border-radius: 9999px; }
@@ -6464,11 +6475,9 @@ section.wp-block-cover-image > h2,
   border: 0; }
 
 .wp-block-navigation-menu > ul {
-  display: block;
-  list-style: none;
-  margin: 0;
-  max-width: none;
   padding-left: 0;
+  list-style: none;
+  max-width: none;
   position: relative; }
   .wp-block-navigation-menu > ul ul {
     padding-left: 0; }
@@ -6636,10 +6645,16 @@ p.has-background {
   .wp-block-search__label {
     width: 100%; }
   .wp-block-search__input {
+    box-shadow: none;
+    border: 1px solid #e6e6e6;
     flex-grow: 1;
     max-width: 360px; }
   .wp-block-search__button {
-    margin-left: 10px; }
+    margin-left: 10px;
+    padding: 0.375rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem; }
 
 .wp-block-separator.is-style-wide {
   border-bottom-width: 1px; }
@@ -7039,5 +7054,131 @@ pre.wp-block-verse {
          object-fit: cover; } }
   .wp-block-video.aligncenter {
     text-align: center; }
+  .wp-block-video figcaption {
+    text-align: center;
+    font-size: 80%;
+    margin: 5px 0 10px; }
+
+.has-background-overlay:not(.has-background-image) {
+  background-color: #000; }
+
+.has-background-video {
+  position: relative; }
+  .has-background-video .pin-t {
+    top: 0; }
+  .has-background-video .pin-b {
+    bottom: 0; }
+  .has-background-video .pin-l {
+    left: 0; }
+  .has-background-video .pin-t {
+    right: 0; }
+  .has-background-video .object-cover {
+    -o-object-fit: cover;
+       object-fit: cover; }
+  .has-background-video .object-position {
+    -o-object-position: center;
+       object-position: center; }
+
+.has-background-image.has-parallax {
+  background-attachment: fixed; }
+  @supports (-webkit-overflow-scrolling: touch) {
+    .has-background-image.has-parallax {
+      background-attachment: scroll; } }
+  @media (prefers-reduced-motion: reduce) {
+    .has-background-image.has-parallax {
+      background-attachment: scroll; } }
+
+.has-background-image.has-background-overlay {
+  position: relative; }
+  .has-background-image.has-background-overlay::before {
+    background-color: inherit;
+    bottom: 0;
+    content: "";
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    top: 0; }
+
+.has-background-image.has-background-overlay-10::before {
+  opacity: 0.1; }
+
+.has-background-image.has-background-overlay-20::before {
+  opacity: 0.2; }
+
+.has-background-image.has-background-overlay-30::before {
+  opacity: 0.3; }
+
+.has-background-image.has-background-overlay-40::before {
+  opacity: 0.4; }
+
+.has-background-image.has-background-overlay-50::before {
+  opacity: 0.5; }
+
+.has-background-image.has-background-overlay-60::before {
+  opacity: 0.6; }
+
+.has-background-image.has-background-overlay-70::before {
+  opacity: 0.7; }
+
+.has-background-image.has-background-overlay-80::before {
+  opacity: 0.8; }
+
+.has-background-image.has-background-overlay-90::before {
+  opacity: 0.9; }
+
+.has-background-image.has-background-overlay-100::before {
+  opacity: 1; }
+
+.has-background-image.bg-transparent {
+  background-color: transparent !important; }
+
+.has-background-image.bg-repeat {
+  background-repeat: repeat; }
+
+.has-background-image.bg-no-repeat {
+  background-repeat: no-repeat; }
+
+.has-background-image.bg-repeat-x {
+  background-repeat: repeat-x; }
+
+.has-background-image.bg-repeat-y {
+  background-repeat: repeat-y; }
+
+.has-background-image.bg-cover {
+  background-size: cover; }
+
+.has-background-image.bg-auto {
+  background-size: auto; }
+
+.has-background-image.bg-contain {
+  background-size: contain; }
+
+.has-background-image.bg-top-left {
+  background-position: top left; }
+
+.has-background-image.bg-top-center {
+  background-position: top center; }
+
+.has-background-image.bg-top-right {
+  background-position: top right; }
+
+.has-background-image.bg-center-left {
+  background-position: center left; }
+
+.has-background-image.bg-center-center {
+  background-position: center center; }
+
+.has-background-image.bg-center-right {
+  background-position: center right; }
+
+.has-background-image.bg-bottom-left {
+  background-position: bottom left; }
+
+.has-background-image.bg-bottom-center {
+  background-position: bottom center; }
+
+.has-background-image.bg-bottom-right {
+  background-position: bottom right; }
 
 /*# sourceMappingURL=style.css.map */

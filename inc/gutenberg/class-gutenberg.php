@@ -44,6 +44,7 @@ class Gutenberg {
 		
 		// Modules
 		Gutenberg\Modules\CSS::get_instance();
+		Gutenberg\Modules\Page::get_instance();
 		Gutenberg\Modules\Title::get_instance();
 		Gutenberg\Modules\Classes::get_instance();
 	}
@@ -58,7 +59,7 @@ class Gutenberg {
 	public function block_category( $categories ) {
 		return array_merge( $categories, [ [
 			'slug' 	=> 'wca',
-			'title' => __( 'WCA - Gutenberg Blocks', wecodeart_config( 'textdomain' ) ),
+			'title' => __( 'WeCodeArt', wecodeart_config( 'textdomain' ) ),
 		] ] );
 	}
 

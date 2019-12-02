@@ -16,8 +16,20 @@
 		}
 
 		.has-#{$color}-background-color {
+			background-color: #{$value};
+		}
+		
+		p.has-#{$color}-background-color {
 			@include alert-variant( $value, transparent, white );
 		}
+	}
+
+	.has-white-color {
+		color: white;
+	}
+
+	.has-white-background-color {
+		background-color: white;
 	}
 
 	// Background colors.

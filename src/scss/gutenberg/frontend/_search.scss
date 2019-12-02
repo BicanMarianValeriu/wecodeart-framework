@@ -7,11 +7,20 @@
 	}
 
 	&__input {
+		box-shadow: none;
+		border: 1px solid $gray-200;
 		flex-grow: 1;
 		max-width: 360px;
 	}
 
 	&__button {
 		margin-left: 10px;
+		@include button-size(
+			$btn-padding-y,
+			$btn-padding-x-lg,
+			$btn-font-size,
+			$btn-line-height,
+			$btn-border-radius
+		);
 	}
 }

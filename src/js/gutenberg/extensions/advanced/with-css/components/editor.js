@@ -3,10 +3,7 @@
  */
 const { __ } = wp.i18n;
 
-const {
-	Component,
-	Fragment
-} = wp.element;
+const { Component, Fragment } = wp.element;
 
 class CSSEditor extends Component {
 	constructor() {

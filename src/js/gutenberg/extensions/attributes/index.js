@@ -1,20 +1,32 @@
 /**
- * External dependencies
- */
-import classnames from 'classnames';
-
-/**
  * WordPress Dependencies
  */
 const { addFilter } = wp.hooks;
-const { Fragment } = wp.element;
 const { createHigherOrderComponent } = wp.compose;
-const { hasBlockSupport } = wp.blocks;
 
-const restrictedBlocks = ['core/freeform', 'core/shortcode', 'core/nextpage'];
+/**
+ * Internal dependencies
+ */
+import { BackgroundAttributes } from './../../components/background';
+
+const restrictedBlocks = [
+	'core/freeform',
+	'core/shortcode',
+	'core/nextpage',
+	'woocommerce/handpicked-products',
+	'woocommerce/products-by-attribute',
+	'woocommerce/products-by-tag',
+	'woocommerce/product-best-sellers',
+	'woocommerce/product-top-rated',
+	'woocommerce/product-on-sale',
+	'woocommerce/product-new',
+];
 const blocksWithFullScreen = ['core/image', 'core/cover', 'core/group', 'core/columns', 'core/media-text'];
-const blocksWithFontSize = ['core/list'];
 const blocksWithAnchor = ['core/spacer', 'core/separator'];
+const blocksWithFontSize = ['core/list'];
+const blocksWithBackgrounds = ['core/columns', 'core/column'];
+const blocksWithContainer = ['core/columns'];
+const blocksWithColumns = ['core/column'];
 
 /**
  * Filters registered block settings, extending attributes with anchor using ID
@@ -25,7 +37,8 @@ const blocksWithAnchor = ['core/spacer', 'core/separator'];
  * @return 	{Object} Filtered block settings.
  */
 function addAttributes(settings) {
-	if (typeof settings.attributes !== 'undefined' && !restrictedBlocks.includes(settings.name)) {
+	const { name: blockName } = settings;
+	if (typeof settings.attributes !== 'undefined' && !restrictedBlocks.includes(blockName)) {
 		settings.attributes = Object.assign(settings.attributes, {
 			wecodeart: {
 				type: 'object',
@@ -40,31 +53,8 @@ function addAttributes(settings) {
 			},
 		});
 
-		// Add vertical full screen support.
-		if (blocksWithFullScreen.includes(settings.name)) {
-			if (!settings.supports) {
-				settings.supports = {};
-			}
-			settings.supports = Object.assign(settings.supports, {
-				hasHeightFullScreen: true,
-			});
-		}
-
-		if (hasBlockSupport(settings, 'hasHeightFullScreen')) {
-			if (typeof settings.attributes !== 'undefined') {
-				if (!settings.attributes.isHeightFullScreen) {
-					settings.attributes = Object.assign(settings.attributes, {
-						isHeightFullScreen: {
-							type: 'boolean',
-							default: false,
-						},
-					});
-				}
-			}
-		}
-
 		// Add custom font size picker on selected blocks.
-		if (blocksWithFontSize.includes(settings.name)) {
+		if (blocksWithFontSize.includes(blockName)) {
 			if (!settings.attributes) {
 				settings.attributes = {};
 			}
@@ -85,12 +75,54 @@ function addAttributes(settings) {
 		}
 
 		// Enable anchor to selected blocks
-		if (blocksWithAnchor.includes(settings.name)) {
+		if (blocksWithAnchor.includes(blockName)) {
 			if (!settings.supports) {
 				settings.supports = {};
 			}
 			settings.supports = Object.assign(settings.supports, {
 				anchor: true,
+			});
+		}
+
+		// Backgrounds
+		if (blocksWithBackgrounds.includes(blockName)) {
+			if (!settings.supports) {
+				settings.supports = {};
+			}
+			settings.supports = Object.assign(settings.supports, {
+				hasBackground: true,
+			});
+
+			settings.attributes = Object.assign(settings.attributes, BackgroundAttributes);
+		}
+
+		// Columns Container
+		if (blocksWithContainer.includes(blockName)) {
+			settings.attributes = Object.assign(settings.attributes, {
+				container: {
+					type: 'boolean',
+					default: true,
+				},
+				gutters: {
+					type: 'boolean',
+					default: false,
+				}
+			});
+		}
+
+		// Column Classes
+		if (blocksWithColumns.includes(blockName)) {
+			settings.attributes = Object.assign(settings.attributes, {
+				bootstrapColumns: {
+					type: 'object',
+					default: {
+						global: 'col-12',
+						sm: 'col-sm',
+						md: '',
+						lg: '',
+						xl: '',
+					},
+				},
 			});
 		}
 	}
@@ -106,103 +138,37 @@ function addAttributes(settings) {
  */
 const withAttributes = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const {
-			attributes,
-		} = props;
+		const { name: blockName } = props;
 
-		if (typeof attributes.wecodeart === 'undefined') {
-			attributes.wecodeart = [];
+		if (!restrictedBlocks.includes(blockName)) {
+			props.attributes.wecodeart = props.attributes.wecodeart || {};
+
+			if (typeof props.attributes.wecodeart === 'undefined') {
+				props.attributes.wecodeart = Object.assign({}, props.attributes.wecodeart);
+			}
 		}
 
-		return (
-			<Fragment>
-				<BlockEdit {...props} />
-			</Fragment>
-		);
+		return <BlockEdit {...props} />;
 	};
 }, 'withAttributes');
 
 /**
- * Override props assigned to save component to inject atttributes
- *
- * @param {Object} extraProps Additional props applied to save element.
- * @param {Object} blockType  Block type.
- * @param {Object} attributes Current block attributes.
- *
- * @return {Object} Filtered props applied to save element.
+ * Run our filters
  */
-function applyExtraClass(extraProps, blockType, attributes) {
-	const { wecodeart, isHeightFullScreen } = attributes;
-
-	if (typeof wecodeart !== 'undefined' && !restrictedBlocks.includes(blockType.name)) {
-		let classNames;
-		if (typeof wecodeart.id !== 'undefined') {
-			extraProps.className = classnames(extraProps.className, wecodeart.id);
-		}
-
-		if (typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile) {
-			extraProps.className = classnames(extraProps.className, 'd-none d-md-block');
-		}
-
-		if (typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet) {
-			classNames = extraProps.className.replace(' d-md-block', '');
-			extraProps.className = classnames(classNames, 'd-md-none d-lg-block');
-		}
-
-		if (typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop) {
-			classNames = extraProps.className.replace(' d-lg-block', '');
-			extraProps.className = classnames(classNames, 'd-lg-none');
-		}
-	}
-
-	if (hasBlockSupport(blockType.name, 'hasHeightFullScreen') && isHeightFullScreen) {
-		extraProps.className = classnames(extraProps.className, 'h-screen');
-	}
-
-	return extraProps;
+function applyFilters() {
+	addFilter('editor.BlockEdit', 'wecodeart/editor/attributes', withAttributes);
+	addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom/attributes', addAttributes);
 }
 
-const addEditorBlockAttributes = createHigherOrderComponent((BlockListBlock) => {
-	return (props) => {
-		const { name, attributes } = props;
-		const { isHeightFullScreen } = attributes;
+applyFilters();
 
-		let wrapperProps = props.wrapperProps;
-		let customData = {};
-
-		if (hasBlockSupport(name, 'hasHeightFullScreen') && isHeightFullScreen) {
-			customData = Object.assign(customData, { 'data-wecodeart-h-screen': 1 });
-		}
-
-		wrapperProps = {
-			...wrapperProps,
-			...customData,
-		};
-
-		return <BlockListBlock {...props} wrapperProps={wrapperProps} />;
-	};
-}, 'addEditorBlockAttributes');
-
-addFilter(
-	'blocks.registerBlockType',
-	'wecodeart/custom/attributes',
-	addAttributes
-);
-
-addFilter(
-	'editor.BlockEdit',
-	'wecodeart/attributes',
-	withAttributes
-);
-
-addFilter(
-	'blocks.getSaveContent.extraProps',
-	'wecodeart/applyExtraClass',
-	applyExtraClass
-);
-
-addFilter(
-	'editor.BlockListBlock',
-	'wecodeart/addEditorBlockAttributes',
-	addEditorBlockAttributes
-);
+/**
+ * Exports
+ */
+export {
+	restrictedBlocks,
+	blocksWithAnchor,
+	blocksWithFontSize,
+	blocksWithFullScreen,
+	blocksWithBackgrounds,
+};

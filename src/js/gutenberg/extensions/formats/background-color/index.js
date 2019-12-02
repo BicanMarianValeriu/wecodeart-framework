@@ -1,12 +1,12 @@
 /**
- * Internal dependencies
- */
-import Edit from './components/edit';
-
-/**
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
+
+/**
+ * Internal dependencies
+ */
+import Edit from './components/edit';
 
 /**
  * Block constants

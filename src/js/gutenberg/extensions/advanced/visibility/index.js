@@ -4,29 +4,31 @@
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
 const { Fragment } = wp.element;
-const { withSelect, select } = wp.data;
 const { InspectorControls } = wp.blockEditor;
-const { compose, createHigherOrderComponent } = wp.compose;
+const { createHigherOrderComponent } = wp.compose;
 const { PanelBody } = wp.components;
 
-import DevicesOptions from './components';
-
-const restrictedBlocks = ['core/block', 'core/freeform', 'core/shortcode', 'core/template', 'core/nextpage'];
-
-const enhance = compose(
-	withSelect(() => {
-		return {};
-	})
-);
+/**
+ * External Dependencies
+ */
+import classnames from 'classnames';
 
 /**
- * Add custom CoBlocks attributes to selected blocks
+ * Internal Dependencies
+ */
+import DevicesOptions from './components';
+import { restrictedBlocks } from '../../attributes';
+import { getVisibilityClasses } from './utils';
+
+
+/**
+ * Add custom Controls to selected blocks
  *
  * @param {Function} BlockEdit Original component.
  * @return {string} Wrapped component.
  */
-const withAdvancedControls = createHigherOrderComponent((BlockEdit) => {
-	return enhance(({ ...props }) => {
+const withVisibilityControls = createHigherOrderComponent((BlockEdit) => {
+	return (props) => {
 		const {
 			name,
 			isSelected,
@@ -52,7 +54,38 @@ const withAdvancedControls = createHigherOrderComponent((BlockEdit) => {
 				}
 			</Fragment>
 		);
-	});
+	};
 }, 'withAdvancedControls');
 
-addFilter('editor.BlockEdit', 'wecodeart/editor/visibility/with-advanced-controls', withAdvancedControls);
+/**
+ * Override props assigned to save component to inject atttributes
+ *
+ * @param {Object} extraProps Additional props applied to save element.
+ * @param {Object} blockType  Block type.
+ * @param {Object} attributes Current block attributes.
+ *
+ * @return {Object} Filtered props applied to save element.
+ */
+function applyExtraClasses(extraProps, blockType, attributes) {
+	const { wecodeart } = attributes;
+	const { name: blockName } = blockType;
+
+	if (!restrictedBlocks.includes(blockName) && typeof wecodeart !== 'undefined') {
+		if (
+			typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile ||
+			typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet ||
+			typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop
+		) {
+			extraProps.className = classnames(extraProps.className, getVisibilityClasses(attributes));
+		}
+	}
+
+	return extraProps;
+}
+
+function applyFilters() {
+	addFilter('editor.BlockEdit', 'wecodeart/editor/visibility/withVisibilityControls', withVisibilityControls);
+	addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/visibility/applyExtraClass', applyExtraClasses);
+}
+
+applyFilters();

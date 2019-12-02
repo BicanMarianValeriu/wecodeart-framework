@@ -6,6 +6,7 @@ import codeEditor from './code-editor';
 import disableTitle from './disable-title';
 import headingLabel from './heading-label';
 import clearFormating from './clear-formatting';
+import builderTemplate from './builder-template';
 
 const { registerPlugin } = wp.plugins;
 
@@ -15,7 +16,8 @@ export default function registerWCAPlugins() {
 		codeEditor,
 		disableTitle,
 		headingLabel,
-		clearFormating
+		clearFormating,
+		builderTemplate
 	].forEach((block) => {
         if (!block) return;
 		

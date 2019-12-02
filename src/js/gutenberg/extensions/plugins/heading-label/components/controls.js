@@ -1,8 +1,4 @@
 /**
- * Internal dependencies
- */
-
-/**
  * WordPress dependencies
  */
 const { withSelect } = wp.data;
@@ -24,10 +20,10 @@ class HeadingLabel extends Component {
 
 	sync() {
 		const { isDisabled } = this.props;
-		if ( ! isDisabled ) {
-			document.body.classList.add( 'is-wca-heading-label-on' );
+		if (!isDisabled) {
+			document.body.classList.add('is-wca-heading-label-on');
 		} else {
-			document.body.classList.remove( 'is-wca-heading-label-on' );
+			document.body.classList.remove('is-wca-heading-label-on');
 		}
 	}
 
@@ -36,9 +32,9 @@ class HeadingLabel extends Component {
 	}
 }
 
-export default compose( [
-	withSelect( ( select ) => ( {
+export default compose([
+	withSelect((select) => ({
 		isDisabled: false,
-	} ) ),
+	})),
 	withSpokenMessages,
-] )( HeadingLabel );
+])(HeadingLabel);

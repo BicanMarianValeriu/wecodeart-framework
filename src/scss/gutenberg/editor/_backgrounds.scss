@@ -1,15 +1,20 @@
 /*--------------------------------------------------------------
 # Backgrounds
 --------------------------------------------------------------*/
-.components-editorskit-background-color__indicator {
-	position: absolute;
-	background-color: currentColor;
-	height: 1px;
-	width: 20px;
-	bottom: 9px;
-	left: auto;
-	right: auto;
-	margin: 0 3px 0 7px;
+.wp-block {
+    &[data-wca-background="1"] {
+        background-position: center center;
+    }
+}
+
+@each $color, $value in $theme-colors {
+	.has-#{$color}-background-color {
+		background-color: $value;
+	}
+
+	p.has-#{$color}-background-color {
+		@include alert-variant( $value, transparent, white );
+	}
 }
 
 .has-inline-background {
@@ -18,8 +23,12 @@
 	margin: 0 .2rem;
 }
 
-@each $color, $value in $theme-colors {
-	.has-#{$color}-background-color {
-		@include alert-variant( $value, transparent, white );
-	}
+.wecodeart-background-panel {
+	.component-color-indicator {
+        position: absolute;
+        margin: 0;
+        top: 50%;
+        right: 40px;
+        transform: translate3d(0,-50%,0);
+    }
 }

@@ -10,9 +10,9 @@ const { withSpokenMessages, CheckboxControl } = wp.components;
 
 class DisableTitle extends Component {
 	constructor() {
-		super( ...arguments );
+		super(...arguments);
 
-		this.initialize = this.initialize.bind( this );
+		this.initialize = this.initialize.bind(this);
 	}
 
 	componentDidMount() {
@@ -25,40 +25,46 @@ class DisableTitle extends Component {
 
 	initialize() {
 		const { postMeta } = this.props;
-		
-		const titleBlock = document.querySelector( '.editor-post-title__block' );
 
-		if ( titleBlock ) {
-			const isHidden = typeof postMeta !== 'undefined' && typeof postMeta._wca_title_hidden !== 'undefined' ? postMeta._wca_title_hidden : false;
+		const titleBlock = document.querySelector('.editor-post-title__block');
+
+		if (titleBlock) {
+			const { _wca_title_hidden: value } = postMeta;
+			const isHidden = typeof postMeta !== 'undefined' && typeof value !== 'undefined' ? value : false;
 			const bodyClass = isHidden ? 'wca-title-hidden' : 'wca-title-visible';
-			
-			if ( isHidden ) {
-				document.body.classList.remove( 'wca-title-visible' );
+
+			if (isHidden) {
+				document.body.classList.remove('wca-title-visible');
 			} else {
-				document.body.classList.remove( 'wca-title-hidden' );
+				document.body.classList.remove('wca-title-hidden');
 			}
 
-			document.body.classList.add( bodyClass );
+			document.body.classList.add(bodyClass);
 		}
 	}
 
 	render() {
 		const { onToggle, postMeta, postType } = this.props;
 
-		if ( [ 'wp_block' ].includes( postType ) ) {
+		if (['wp_block'].includes(postType)) {
 			return false;
 		}
 
-		const isHidden = typeof postMeta !== 'undefined' && typeof postMeta._wca_title_hidden !== 'undefined' ? postMeta._wca_title_hidden : false;
+		const { _wca_title_hidden: value } = postMeta;
+
+		const isHidden = typeof postMeta !== 'undefined' && typeof value !== 'undefined' ? value : false;
+
+		let help = isHidden ? __('Hidden', 'wecodeart') : __('Shown', 'wecodeart');
+		help = sprintf(__('Title is %s.', 'wecodeart'), help);
 
 		return (
 			<PluginPostStatusInfo>
 				<CheckboxControl
-					className="wca-hide-title-label"
-					label={ __( 'Hide ' + postType + ' title on single template?', 'wecodeart' ) }
-					checked={ isHidden }
-					onChange={ onToggle }
-					help={ isHidden ? __( 'Title is now hidden.', 'wecodeart' ) : null }
+					className="wca-post-status-label"
+					label={__('Hide ' + postType + ' title on single template?', 'wecodeart')}
+					checked={isHidden}
+					onChange={onToggle}
+					help={help}
 				/>
 			</PluginPostStatusInfo>
 		);
@@ -66,26 +72,26 @@ class DisableTitle extends Component {
 }
 
 export default compose(
-	withSelect( () => {
+	withSelect(() => {
 		return {
-			postType: select( 'core/editor' ).getEditedPostAttribute( 'type' ),
-			postMeta: select( 'core/editor' ).getEditedPostAttribute( 'meta' ),
+			postType: select('core/editor').getEditedPostAttribute('type'),
+			postMeta: select('core/editor').getEditedPostAttribute('meta'),
 		};
-	} ),
-	withDispatch( ( dispatch, ownProps ) => {
-		let metavalue;
-		if ( typeof ownProps.postMeta !== 'undefined' && typeof ownProps.postMeta._wca_title_hidden !== 'undefined' ) {
-			metavalue = ownProps.postMeta._wca_title_hidden;
+	}),
+	withDispatch((dispatch, ownProps) => {
+		let metaValue;
+		if (typeof ownProps.postMeta !== 'undefined' && typeof ownProps.postMeta._wca_title_hidden !== 'undefined') {
+			metaValue = ownProps.postMeta._wca_title_hidden;
 		}
 		return {
 			onToggle() {
-				dispatch( 'core/editor' ).editPost( {
+				dispatch('core/editor').editPost({
 					meta: {
-						_wca_title_hidden: ! metavalue,
+						_wca_title_hidden: !metaValue,
 					},
-				} );
+				});
 			},
 		};
-	} ),
+	}),
 	withSpokenMessages,
-)( DisableTitle );
+)(DisableTitle);

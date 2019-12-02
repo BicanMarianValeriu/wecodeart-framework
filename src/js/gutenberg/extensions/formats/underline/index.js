@@ -14,24 +14,19 @@ const name = 'wca/underline';
 
 export const underline = {
 	name,
-	title: __( 'Underline', 'wecodeart' ),
+	title: __('Underline', 'wecodeart'),
 	tagName: 'span',
 	className: 'has-underline',
 	attributes: {
-		style: 'style',
+		class: 'class',
 	},
-	edit( { isActive, value, onChange } ) {
-		const formatTypes = select( 'core/rich-text' ).getFormatTypes();
-		const checkFormats = formatTypes.filter( ( formats ) => formats.name === 'wpcom/underline' );
+	edit({ isActive, value, onChange }) {
+		const formatTypes = select('core/rich-text').getFormatTypes();
+		const checkFormats = formatTypes.filter((formats) => formats.name === 'wpcom/underline');
 
 		const onToggle = () => {
 			onChange(
-				toggleFormat( value, {
-					type: name,
-					attributes: {
-						style: 'text-decoration: underline;',
-					},
-				} )
+				toggleFormat(value, { type: name })
 			);
 		};
 
@@ -40,17 +35,18 @@ export const underline = {
 				<RichTextShortcut
 					type="primary"
 					character="u"
-					onUse={ onToggle }
+					onUse={onToggle}
 				/>
-				{ checkFormats.length === 0 && ( <RichTextToolbarButton
-					icon="editor-underline"
-					title={ __( 'Underline', 'wecodeart' ) }
-					onClick={ onToggle }
-					isActive={ isActive }
-					shortcutType="primary"
-					shortcutCharacter="u"
-				/> )
-				}
+				{checkFormats.length === 0 && (
+					<RichTextToolbarButton
+						icon="editor-underline"
+						title={__('Underline', 'wecodeart')}
+						onClick={onToggle}
+						isActive={isActive}
+						shortcutType="primary"
+						shortcutCharacter="u"
+					/>
+				)}
 			</Fragment>
 		);
 	},

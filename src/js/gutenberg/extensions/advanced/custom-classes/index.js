@@ -54,10 +54,11 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 		const {
 			customClassNames,
 			suggestions,
+			isSelected,
 			setState,
 		} = props;
 
-		if (hasCustomClassName && props.isSelected) {
+		if (hasCustomClassName && isSelected) {
 			return (
 				<Fragment>
 					<BlockEdit {...props} />
@@ -85,7 +86,7 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 
 function applyFilters() {
 	removeFilter('editor.BlockEdit', 'core/editor/custom-class-name/with-inspector-control');
-	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-class-name/with-inspector-control', withInspectorControl);
+	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-class-name/withInspectorControl', withInspectorControl);
 }
 
 applyFilters();

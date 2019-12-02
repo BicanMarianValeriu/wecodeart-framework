@@ -22,35 +22,33 @@ class ClearFormatting extends Component {
 		} = this.props;
 
 		const onToggle = () => {
-			const formatTypes = select( 'core/rich-text' ).getFormatTypes();
-			if ( formatTypes.length > 0 ) {
+			const formatTypes = select('core/rich-text').getFormatTypes();
+			if (formatTypes.length > 0) {
 				let newValue = value;
 
-				map( formatTypes, ( activeFormat ) => {
-					newValue = removeFormat( newValue, activeFormat.name );
-				} );
+				map(formatTypes, (activeFormat) => {
+					newValue = removeFormat(newValue, activeFormat.name);
+				});
 
-				onChange( { ...newValue } );
+				onChange({ ...newValue });
 			}
 		};
 		return (
 			<RichTextToolbarButton
 				icon="editor-removeformatting"
-				title={ __( 'Clear Formatting', 'wecodeart' ) }
-				onClick={ onToggle }
-				isActive={ isActive }
+				title={__('Clear Formatting', 'wecodeart')}
+				onClick={onToggle}
+				isActive={isActive}
 			/>
 		);
 	}
 }
 
 export default compose(
-	withSelect( () => {
+	withSelect(() => {
 		return {
 			isDisabled: false,
 		};
-	} ),
-	ifCondition( ( props ) => {
-		return ! props.isDisabled;
-	} )
-)( ClearFormatting );
+	}),
+	ifCondition((props) => !props.isDisabled)
+)(ClearFormatting);

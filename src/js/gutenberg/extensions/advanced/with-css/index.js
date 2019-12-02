@@ -2,23 +2,21 @@
  * WordPress dependencies.
  */
 const { assign } = lodash;
-const { __ } = wp.i18n;
 const { hasBlockSupport } = wp.blocks;
 const { createHigherOrderComponent } = wp.compose;
-const { InspectorAdvancedControls } = wp.blockEditor || wp.editor;
+const { InspectorAdvancedControls } = wp.blockEditor;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 
 /**
  * Internal dependencies.
  */
-
+import { restrictedBlocks } from '../../attributes';
 import CSSEditor from './components/editor';
-
 import './inject-css.js';
 
-const addAttribute = (settings) => {
-	if (hasBlockSupport(settings, 'customClassName', true)) {
+const addAttributes = (settings) => {
+	if (!restrictedBlocks.includes(settings.name) && hasBlockSupport(settings, 'customClassName', true)) {
 		settings.attributes = assign(settings.attributes, {
 			hasCustomCSS: {
 				type: 'boolean',
@@ -36,8 +34,9 @@ const addAttribute = (settings) => {
 
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
+		const isRestrictedBlock = !restrictedBlocks.includes(props.name);
 		const hasCustomClassName = hasBlockSupport(props.name, 'customClassName', true);
-		if (hasCustomClassName && props.isSelected) {
+		if (isRestrictedBlock && hasCustomClassName && props.isSelected) {
 			return (
 				<Fragment>
 					<BlockEdit {...props} />
@@ -56,5 +55,5 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	};
 }, 'withInspectorControl');
 
-addFilter('blocks.registerBlockType', 'wecodeart/editor/advanced/custom-css/add-attribute', addAttribute);
-addFilter('editor.BlockEdit', 'wecodeart/editor/advanced/custom-css/with-inspector-control', withInspectorControl);
+addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
+addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl);

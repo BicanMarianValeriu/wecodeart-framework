@@ -3,7 +3,10 @@ v4.0.5
 - Updated - Comment display note for password prottected posts
 - Updated - Bar Branding View and remove Walker from Menu Args
 - Updated - Security: Added empty index.php where missing in folders
+- Updated - Gutenberg Improvements - tons of them
 - Added - WeCodeArt\Core\Hooks->menu_args to pass Walker for Menu by default to all
+- Added - Theme colors for backgrounds and text color classes inside Gutenberg Editor
+- Added - Gutenberg Background Controls for Columns/Column blocks
 
 v4.0.4
 - Fixed - Added missing editor.js assets causing Gutenberg Editor to break

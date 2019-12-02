@@ -1,6 +1,7 @@
 /**
  * Internal dependencies
  */
+import { abbreviation } from './abbreviation';
 import { underline } from './underline';
 import { justify } from './justify';
 import { textColor } from './text-color';
@@ -15,12 +16,13 @@ const { registerFormatType } = wp.richText;
 
 function registerWeCodeArtFormats() {
 	[
-		underline,
-		justify,
-		textColor,
+		abbreviation,
 		backgroundColor,
-		markdown,
 		clear,
+		justify,
+		markdown,
+		textColor,
+		underline,
 	].forEach( ( { name, ...settings } ) => {
 		if ( name ) {
 			registerFormatType( name, settings );

@@ -3,6 +3,10 @@ const { registerBlockType } = wp.blocks;
 // Attributes
 import './extensions/attributes';
 
+// Core Blocks
+import './blocks/columns';
+import './blocks/column';
+
 // Block Panels
 import './extensions/block-panel';
 import './extensions/advanced';
@@ -13,11 +17,14 @@ import './extensions/plugins';
 // Formats
 import './extensions/formats/';
 
+
 export default function registerWCABlocks() {
-    [].forEach((block) => {
+    [
+        /* import */
+    ].forEach((block) => {
         if (!block) return;
         const { name, settings } = block;
-        registerBlockType(name, settings);
+        registerBlockType(name, { ...settings, category: 'wca' });
     });
 }
 

@@ -9,7 +9,7 @@
  * @subpackage 	Core\Hooks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.0
- * @version		4.0.5
+ * @version		4.0.6
  */
 
 namespace WeCodeArt\Core;
@@ -42,7 +42,7 @@ class Hooks {
 	/**
 	 * Adds custom classes to the array of body classes.
 	 *
-	 * @version 4.0.2
+	 * @version 4.0.6
 	 *
 	 * @param 	array 	$classes Classes for the body element.
 	 *
@@ -64,17 +64,13 @@ class Hooks {
 		// Add sidebar class
 		if( in_array( 'primary', $modules, true ) || in_array( 'secondary', $modules, true ) ) {
 			$classes[] = 'page--has-sidebar';
-			$classes[] = 'has-sidebar';
 		} else {
 			$classes[] = 'page--no-sidebar';
-			$classes[] = 'no-sidebar';
 		}
 		
 		// Singular sidebar class if gutenberg wide/full layout/
 		if( wecodeart_if( 'is_full_layout' ) ) { 
 			$classes = array_diff( $classes, [ 'has-sidebar', 'page--has-sidebar' ] );
-			$classes[] = 'gutenberg-disabled-sidebar'; 
-			$classes[] = 'no-sidebar';
 			$classes[] = 'page--full-width';
 		} 
 

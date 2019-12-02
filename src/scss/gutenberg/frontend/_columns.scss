@@ -1,6 +1,11 @@
 /* Defaults */
 .wp-block-columns {
 	@include make-row();
+
+	&.no-gutters {
+		margin-left: 0!important;
+		margin-right: 0!important;
+	}
 	
 	&.are-vertically-aligned-top {
 		align-items: flex-start;
@@ -17,7 +22,6 @@
 
 .wp-block-column {
 	@include make-col-ready();
-	flex: 1 1 0;
 
 	&.is-vertically-aligned-top {
 		align-self: flex-start;

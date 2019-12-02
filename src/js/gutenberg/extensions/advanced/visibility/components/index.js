@@ -7,7 +7,7 @@ const { Fragment } = wp.element;
 const { ToggleControl } = wp.components;
 
 const DevicesOptions = (props) => {
-	const { clientId, attributes, reloadModal, } = props;
+	const { clientId, attributes, reloadModal } = props;
 
 	const { wecodeart } = attributes;
 

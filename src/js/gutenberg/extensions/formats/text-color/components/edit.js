@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
-const { Component, Fragment } = wp.element;
+const { Component } = wp.element;
 const { select, withSelect } = wp.data;
 const { BlockControls, getColorClassName, getColorObjectByColorValue, getColorObjectByAttributeValues } = wp.blockEditor;
 const { applyFormat, removeFormat, getActiveFormat } = wp.richText;
@@ -31,11 +31,7 @@ class Edit extends Component {
 
 	render() {
 		const { isOpen } = this.state;
-		const {
-			value,
-			onChange,
-			colors,
-		} = this.props;
+		const { value, onChange, colors } = this.props;
 
 		let activeColor;
 
@@ -57,72 +53,81 @@ class Edit extends Component {
 		}
 
 		return (
-			<Fragment>
-				<BlockControls>
-					<Toolbar className="wca-components-toolbar">
-						<IconButton
-							className="components-button components-icon-button components-wca-toolbar__control components-toolbar__control components-wca-color-format"
-							icon="editor-textcolor"
-							aria-haspopup="true"
-							tooltip={title}
-							onClick={this.toggle}
-						>
-							<span
-								className="components-wca-inline-color__indicator"
-								style={{
-									backgroundColor: activeColor,
-								}}
-							/>
-						</IconButton>
+			<BlockControls>
+				<Toolbar className="components-toolbar--wca">
+					<IconButton
+						className="components-button components-icon-button components-toolbar__control components-wca-color-format"
+						icon="editor-textcolor"
+						aria-haspopup="true"
+						tooltip={title}
+						onClick={this.toggle}
+					>
+						<span
+							className="components-toolbar__indicator"
+							style={{
+								backgroundColor: activeColor,
+							}}
+						/>
+					</IconButton>
 
-						{isOpen && (
-							<Popover
-								position="bottom center"
-								className="components-wca__inline-color-popover"
-								focusOnMount="container"
-								onClickOutside={(onClickOutside) => {
-									if ((!onClickOutside.target.classList.contains('components-wca-color-format') && !document.querySelector('.components-wca-color-format').contains(onClickOutside.target)) && (!document.querySelector('.components-color-palette__picker') || (document.querySelector('.components-color-palette__picker') && !document.querySelector('.components-color-palette__picker').contains(onClickOutside.target)))) {
-										this.setState({ isOpen: !isOpen });
+					{isOpen && (
+						<Popover
+							position="bottom center"
+							className="components-popover--wca"
+							focusOnMount="container"
+							onClickOutside={(onClickOutside) => {
+								if (
+									(
+										!onClickOutside.target.classList.contains('components-wca-color-format') &&
+										!document.querySelector('.components-wca-color-format').contains(onClickOutside.target)
+									) && (
+										!document.querySelector('.components-color-palette__picker') ||
+										(
+											document.querySelector('.components-color-palette__picker') &&
+											!document.querySelector('.components-color-palette__picker').contains(onClickOutside.target)
+										)
+									)
+								) {
+									this.setState({ isOpen: !isOpen });
+								}
+							}}
+						>
+							<ColorPalette
+								colors={colors}
+								value={activeColor}
+								onChange={(color) => {
+									if (color) {
+										let colorObject = null;
+
+										if (
+											typeof window.wecodeartInfo !== 'undefined' &&
+											window.wecodeartInfo.supports.colorPalette
+										) {
+											colorObject = getColorObjectByColorValue(colors, color);
+										}
+										onChange(
+											applyFormat(value, {
+												type: name,
+												attributes: colorObject ?
+													{
+														class: getColorClassName('color', colorObject.slug),
+													} :
+													{
+														style: `color:${color}`,
+													},
+											})
+										);
+									} else {
+										onChange(removeFormat(value, name));
 									}
 								}}
 							>
-								<ColorPalette
-									colors={colors}
-									value={activeColor}
-									onChange={(color) => {
-										if (color) {
-											let colorObject = null;
+							</ColorPalette>
+						</Popover>
+					)}
 
-											if (
-												typeof window.wecodeartInfo !== 'undefined' &&
-												window.wecodeartInfo.supports.colorPalette
-											) {
-												colorObject = getColorObjectByColorValue(colors, color);
-											}
-											onChange(
-												applyFormat(value, {
-													type: name,
-													attributes: colorObject ?
-														{
-															class: getColorClassName('color', colorObject.slug),
-														} :
-														{
-															style: `color:${color}`,
-														},
-												})
-											);
-										} else {
-											onChange(removeFormat(value, name));
-										}
-									}}
-								>
-								</ColorPalette>
-							</Popover>
-						)}
-
-					</Toolbar>
-				</BlockControls>
-			</Fragment>
+				</Toolbar>
+			</BlockControls>
 		);
 	}
 }

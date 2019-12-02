@@ -8,7 +8,40 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Page PHP
  * @since 	    3.5
- * @version	    3.9.5
+ * @version	    4.0.5
  */
 
-wecodeart( 'layout' );
+use WeCodeArt\Markup;
+use WeCodeArt\Core\Loops;
+use WeCodeArt\Core\Content;
+
+$modules = [ 'header', 'content', 'footer' ];
+
+if( get_post_meta( get_the_ID(), '_wca_builder_template', true ) ) {
+    remove_action( 'wecodeart/hook/loop/before', [ Content::get_instance(), 'content_markup_open' ] );
+    remove_action( 'wecodeart/hook/loop/after', [ Content::get_instance(), 'content_markup_close' ] );
+    $modules = [
+        'header', // Header
+        function() {
+
+            // Hook Main Before
+            do_action( 'wecodeart/hook/main/before' );
+
+            // Main Content
+            Markup::wrap( 'main', [ [
+                'tag' => 'main',
+                'attrs' => [
+                    'id' 	=> 'main', 
+                    'class'	=> 'site-main' 
+                ]
+            ] ], [ Loops::get_instance(), 'default' ] );
+
+            // Hook Main After
+            do_action( 'wecodeart/hook/main/after' );
+
+        },
+        'footer' // Footer
+    ];
+}
+
+wecodeart( 'layout', $modules );

@@ -19,13 +19,12 @@ body {
 	}
 }
 
-.wca-hide-title-label {
+.wca-post-status-label {
 	&.components-base-control {
 		.components-base-control {
 			&__help {
-				margin-top: 5px;
-				padding: 1px 10px;
-				margin-left: 0;
+				margin: 5px 0 0;
+				padding: 0;
 				font-size: 12px;
 				font-style: italic;
 			}
