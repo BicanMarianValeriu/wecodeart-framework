@@ -7,34 +7,18 @@ import classnames from 'classnames';
  * WordPress dependencies.
  */
 const { __ } = wp.i18n;
-const { withSelect } = wp.data;
 const { addFilter } = wp.hooks;
 const { Fragment } = wp.element;
 const { ToggleControl, PanelBody } = wp.components;
 const { InspectorControls, InnerBlocks } = wp.blockEditor;
-const { createHigherOrderComponent, compose } = wp.compose;
+const { createHigherOrderComponent } = wp.compose;
 
 /**
  * Internal dependencies.
  */
-import { BackgroundVideo, BackgroundClasses, BackgroundStyles } from '../../components/background';
+import { BackgroundVideo, BackgroundClasses, BackgroundStyles } from '../../controls/background';
 import { getVisibilityClasses } from '../../extensions/advanced/visibility/utils';
 import { restrictedBlocks } from '../../extensions/attributes';
-
-/**
- * Override the default block element to add Font Panels.
- *
- * @param  {Function} BlockListBlock Original component
- * @return {Function} Wrapped component
- */
-const enhance = compose(
-    withSelect((select) => {
-        return {
-            selected: select('core/block-editor').getSelectedBlock(),
-            select,
-        };
-    })
-);
 
 /**
  * Columns Controls
@@ -43,18 +27,15 @@ const enhance = compose(
  * @return {string} Wrapped component.
  */
 const withColumnsControls = createHigherOrderComponent((BlockEdit) => {
-    return enhance((props) => {
+    return (props) => {
         const {
             name: blockName,
-            setAttributes,
             isSelected,
-            select,
         } = props;
 
         if (!restrictedBlocks.includes(blockName) && blockName === 'core/columns' && isSelected) {
 
-            const { attributes } = select('core/block-editor').getBlock(props.clientId);
-
+            const { attributes, setAttributes } = props;
             const { container, gutters } = attributes;
 
             const getStateText = (boolean) => {
@@ -93,7 +74,7 @@ const withColumnsControls = createHigherOrderComponent((BlockEdit) => {
         }
 
         return <BlockEdit {...props} />;
-    });
+    };
 }, 'withColumnsControls');
 
 /**
@@ -141,6 +122,9 @@ function getSaveElement(element, blockType, attributes) {
     return element;
 }
 
+/**
+ * Apply Filters
+ */
 function applyFilters() {
     addFilter('blocks.getSaveElement', 'wecodeart/blocks/columns/getSaveElement', getSaveElement);
     addFilter('editor.BlockEdit', 'wecodeart/editor/columns/withColumnsControls', withColumnsControls);

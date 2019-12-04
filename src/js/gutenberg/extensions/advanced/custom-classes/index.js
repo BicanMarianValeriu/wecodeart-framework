@@ -15,12 +15,15 @@ const { hasBlockSupport } = wp.blocks;
 const { InspectorAdvancedControls } = wp.blockEditor;
 const { FormTokenField } = wp.components;
 
+/**
+ * Enhance Block
+ */
 const enhance = compose(
 	withState({
 		customClassNames: [],
 	}),
-	withSelect((selectFn, block) => {
-		const selectedBlock = selectFn('core/block-editor').getSelectedBlock();
+	withSelect((select, block) => {
+		const selectedBlock = select('core/block-editor').getSelectedBlock();
 		let getClasses = get(selectedBlock, 'attributes.className');
 
 		if (getClasses) {
@@ -33,8 +36,10 @@ const enhance = compose(
 			}
 		}
 
+		const { wecodeart: { customClasses } } = select('core/editor').getEditorSettings();
+
 		return {
-			suggestions: selectFn('core/editor').getEditorSettings().wecodeart.customClasses,
+			suggestions: customClasses,
 		};
 	}),
 );
@@ -84,9 +89,12 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	});
 }, 'withInspectorControl');
 
+/**
+ * Apply Filters
+ */
 function applyFilters() {
 	removeFilter('editor.BlockEdit', 'core/editor/custom-class-name/with-inspector-control');
-	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-class-name/withInspectorControl', withInspectorControl);
+	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-classes/withInspectorControl', withInspectorControl);
 }
 
 applyFilters();

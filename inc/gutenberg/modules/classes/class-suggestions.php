@@ -6,10 +6,10 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package		WeCodeArt Framework
- * @subpackage  Gutenberg
+ * @subpackage  Gutenberg\Classes\Suggestions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		4.0.3
- * @version		4.0.3
+ * @since		4.0.5
+ * @version		4.0.6
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Classes;
@@ -35,6 +35,7 @@ class Suggestions {
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'flex_classes' ] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'display_classes' ] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'spacing_classes' ] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'offset_order_classes' ] );
 	}
 
 	/**
@@ -143,6 +144,32 @@ class Suggestions {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function offset_order_classes( $args ) {
+		foreach( range( 1, 12 ) as $column ) {
+			$args[] = 'offset-' . $column;
+			$args[] = 'order-' . $column;
+		}
+		
+		foreach( [ 'sm', 'md', 'lg', 'xl' ] as $break ) {
+			foreach( range( 1, 12 ) as $column ) {
+				$args[] = 'offset-' . $break . '-' . $column;
+				$args[] = 'order-' . $break . '-' . $column;
+			}
+		}
+
+		return wp_parse_args( [
+			'order-first',
+			'order-last'
+		], $args );
 	}
 
 	/**

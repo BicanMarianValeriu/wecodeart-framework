@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
+const { __, sprintf } = wp.i18n;
 const { Component } = wp.element;
 const { compose } = wp.compose;
 const { PluginPostStatusInfo } = wp.editPost;
@@ -24,7 +24,7 @@ class DisableTitle extends Component {
 	}
 
 	initialize() {
-		const { postMeta } = this.props;
+		const { postMeta = {} } = this.props;
 
 		const titleBlock = document.querySelector('.editor-post-title__block');
 
@@ -44,7 +44,7 @@ class DisableTitle extends Component {
 	}
 
 	render() {
-		const { onToggle, postMeta, postType } = this.props;
+		const { onToggle, postMeta = {}, postType } = this.props;
 
 		if (['wp_block'].includes(postType)) {
 			return false;
@@ -54,14 +54,14 @@ class DisableTitle extends Component {
 
 		const isHidden = typeof postMeta !== 'undefined' && typeof value !== 'undefined' ? value : false;
 
-		let help = isHidden ? __('Hidden', 'wecodeart') : __('Shown', 'wecodeart');
+		let help = isHidden ? __('hidden', 'wecodeart') : __('shown', 'wecodeart');
 		help = sprintf(__('Title is %s.', 'wecodeart'), help);
 
 		return (
 			<PluginPostStatusInfo>
 				<CheckboxControl
 					className="wca-post-status-label"
-					label={__('Hide ' + postType + ' title on single template?', 'wecodeart')}
+					label={sprintf(__('Hide %s title on single template?', 'wecodeart'), postType)}
 					checked={isHidden}
 					onChange={onToggle}
 					help={help}

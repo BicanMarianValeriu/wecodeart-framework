@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { ALLOWED_BG_MEDIA_TYPES, BLOCKS_WITH_AUTOPADDING } from './';
+import { ALLOWED_BG_MEDIA_TYPES } from './';
 
 /**
  * WordPress dependencies
@@ -34,12 +34,6 @@ class BackgroundDropZone extends Component {
             }
 
             this.props.setAttributes({ backgroundImg: media.url, backgroundType: mediaType });
-            // Set padding when background image is added.
-            if (BLOCKS_WITH_AUTOPADDING.includes(this.props.name)) {
-                if (!this.props.attributes.paddingSize || this.props.attributes.paddingSize === 'no') {
-                    this.props.setAttributes({ paddingSize: 'medium' });
-                }
-            }
         }
     }
 

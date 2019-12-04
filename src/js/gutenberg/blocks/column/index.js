@@ -3,9 +3,8 @@
  */
 const { __ } = wp.i18n;
 const { InspectorControls } = wp.blockEditor;
-const { createHigherOrderComponent, compose } = wp.compose;
+const { createHigherOrderComponent } = wp.compose;
 const { PanelBody } = wp.components;
-const { withSelect } = wp.data;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 
@@ -18,22 +17,7 @@ import classnames from 'classnames';
  * Internal dependencies.
  */
 import { restrictedBlocks } from '../../extensions/attributes';
-import ResponsiveColumns from './controls';
-
-/**
- * Override the default block element to add Font Panels.
- *
- * @param  {Function} BlockListBlock Original component
- * @return {Function} Wrapped component
- */
-const enhance = compose(
-    withSelect((select) => {
-        return {
-            selected: select('core/block-editor').getSelectedBlock(),
-            select,
-        };
-    })
-);
+import ResponsiveColumns from '../../controls/bootstrap-columns';
 
 /**
  * Column Controls
@@ -42,7 +26,7 @@ const enhance = compose(
  * @return {string} Wrapped component.
  */
 const withColumnControls = createHigherOrderComponent((BlockEdit) => {
-    return enhance((props) => {
+    return (props) => {
         const {
             name: blockName,
             isSelected,
@@ -69,7 +53,7 @@ const withColumnControls = createHigherOrderComponent((BlockEdit) => {
         }
 
         return <BlockEdit {...props} />;
-    });
+    };
 }, 'withColumnControls');
 
 /**
@@ -103,6 +87,9 @@ function applyExtraSettings(extraProps, blockType, attributes) {
     return extraProps;
 }
 
+/**
+ * Apply Filters
+ */
 function applyFilters() {
     addFilter('editor.BlockEdit', 'wecodeart/editor/columns/withColumnControls', withColumnControls);
     addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/columns/applyExtraSettings', applyExtraSettings);

@@ -1,78 +1,90 @@
 .wp-block-media-text {
-	display: grid;
-	grid-template-rows: auto;
-	grid-template-columns: 50% 1fr;
-
-	.has-media-on-the-right {
-		grid-template-columns: 1fr 50%;
+	@include make-row(0);
+	flex-wrap: nowrap;
+	
+	&.is-stacked-on-mobile {
+		@include media-breakpoint-down( 'sm' ) {
+			display: block;
+		}
 	}
-}
-
-.wp-block-media-text.is-vertically-aligned-top {
-	.wp-block-media-text__content,
-	.wp-block-media-text__media {
-		align-self: start;
+	
+	&.is-vertically-aligned-top {
+		.wp-block-media-text__content,
+		.wp-block-media-text__media {
+			align-self: flex-start;
+		}
 	}
-}
-.wp-block-media-text,
-.wp-block-media-text.is-vertically-aligned-center {
-	.wp-block-media-text__content,
-	.wp-block-media-text__media {
+	
+	&.is-vertically-aligned-center {
+		.wp-block-media-text__content,
+		.wp-block-media-text__media {
+			align-self: center;
+		}
+	}
+
+	&.is-vertically-aligned-bottom {
+		.wp-block-media-text__content,
+		.wp-block-media-text__media {
+			align-self: flex-end;
+		}
+	}
+
+	&.has-media-on-the-right {
+		.wp-block-media-text__media {
+			order: 99;
+		}
+	}
+
+	&.is-image-fill {
+		figure.wp-block-media-text__media {
+			height: 100%;
+			min-height: 250px;
+			background-size: cover;
+	
+			> img {
+				// The image is visually hidden but accessible to assistive technologies.
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				border: 0;
+			}
+		}
+	}
+
+	&__content,
+	&__media {
+		width: auto;
+		flex: 0 0 auto;
+		flex-basis: auto;
 		align-self: center;
 	}
-}
-
-.wp-block-media-text.is-vertically-aligned-bottom {
-	.wp-block-media-text__content,
-	.wp-block-media-text__media {
-		align-self: end;
+	
+	&__content {
+		flex-grow: 1;
+		padding: 0 10px;
+		
+		@include media-breakpoint-up( 'md' ) {
+			padding: 0 5% 0 5%;
+		}
 	}
-}
 
-.wp-block-media-text .wp-block-media-text__media {
-	grid-column: 1;
-	grid-row: 1;
-	margin: 0;
-}
+	&__media {
+		flex-basis: var(--media-width, 50%);
+		margin: 0;
 
-.wp-block-media-text .wp-block-media-text__content {
-	grid-column: 2;
-	grid-row: 1;
-	word-break: break-word;
-	padding: 0 8% 0 8%;
-}
+		@include media-breakpoint-down( 'sm' ) {
+			margin-bottom: 1.5rem;
+		}
+	}
 
-.wp-block-media-text.has-media-on-the-right .wp-block-media-text__media {
-	grid-column: 2;
-	grid-row: 1;
-}
-
-.wp-block-media-text.has-media-on-the-right .wp-block-media-text__content {
-	grid-column: 1;
-	grid-row: 1;
-}
-
-.wp-block-media-text > figure > img,
-.wp-block-media-text > figure > video {
-	max-width: unset;
-	width: 100%;
-	vertical-align: middle;
-}
-
-.wp-block-media-text.is-image-fill figure.wp-block-media-text__media {
-	height: 100%;
-	min-height: 250px;
-	background-size: cover;
-}
-
-.wp-block-media-text.is-image-fill figure.wp-block-media-text__media > img {
-	// The image is visually hidden but accessible to assistive technologies.
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
+	& > figure > img,
+	& > figure > video {
+		max-width: unset;
+		width: 100%;
+		vertical-align: middle;
+	}
 }

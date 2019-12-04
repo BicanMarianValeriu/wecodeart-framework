@@ -83,6 +83,9 @@ function applyExtraClasses(extraProps, blockType, attributes) {
 	return extraProps;
 }
 
+/**
+ * Apply Filters
+ */
 function applyFilters() {
 	addFilter('editor.BlockEdit', 'wecodeart/editor/visibility/withVisibilityControls', withVisibilityControls);
 	addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/visibility/applyExtraClass', applyExtraClasses);

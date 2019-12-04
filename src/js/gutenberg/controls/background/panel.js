@@ -6,7 +6,6 @@ const { isEmpty } = lodash;
 /**
  * Internal dependencies
  */
-import { BLOCKS_WITH_AUTOPADDING } from './';
 import ResponsiveTabsControl from '../responsive-tabs';
 
 /**
@@ -306,13 +305,6 @@ class BackgroundPanel extends Component {
 									backgroundPadding: 0,
 									backgroundPaddingMobile: 0,
 								});
-
-								// Remove padding when background image is removed.
-								if (BLOCKS_WITH_AUTOPADDING.includes(this.props.name)) {
-									if (attributes.paddingSize) {
-										setAttributes({ paddingSize: 'no' });
-									}
-								}
 							}}
 						>
 							{sprintf(__('Remove %s', 'wecodeart'), backgroundType)}

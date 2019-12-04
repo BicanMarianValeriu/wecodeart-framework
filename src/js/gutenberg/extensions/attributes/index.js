@@ -7,7 +7,7 @@ const { createHigherOrderComponent } = wp.compose;
 /**
  * Internal dependencies
  */
-import { BackgroundAttributes } from './../../components/background';
+import { BackgroundAttributes } from './../../controls/background';
 
 const restrictedBlocks = [
 	'core/freeform',

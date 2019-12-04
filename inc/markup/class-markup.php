@@ -264,11 +264,11 @@ class Markup {
 
 		// Return the output.
 		if( $echo ) {
-			echo $output;
+			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			return;
 		}
 		
-		return $output;
+		return $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**

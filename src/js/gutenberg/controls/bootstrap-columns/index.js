@@ -5,12 +5,17 @@ const { __, sprintf } = wp.i18n;
 const { Fragment } = wp.element;
 const { Component } = wp.element;
 const { SelectControl, TabPanel } = wp.components;
+const { compose } = wp.compose;
+const { withSelect } = wp.data;
 
 /**
  * Internal dependencies
  */
 import icons from './icons';
 
+/**
+ * BootstrapColumns
+ */
 class ResponsiveColumns extends Component {
     constructor() {
         super(...arguments);
@@ -41,13 +46,19 @@ class ResponsiveColumns extends Component {
                 return string.endsWith('-12');
             };
 
+            const isAuto = (string) => {
+                return string.endsWith('-auto');
+            };
+
             if (isFull(option)) {
                 label = __('Full Width', 'wecodeart');
             } else if (isNumber(option)) {
                 const number = isNumber(option);
                 label = sprintf(__('%s/12', 'wecodeart'), number);
+            } else if (isAuto(option)) {
+                label = __('Auto - Shrink', 'wecodeart');
             } else {
-                label = __('Fill - Remaining', 'wecodeart');
+                label = __('Auto - Expand', 'wecodeart');
             }
 
             return label;
@@ -108,15 +119,16 @@ class ResponsiveColumns extends Component {
                 ]}>
                 {
                     (tab) => {
-                        const isNone = bootstrapColumns[tab.name] === '';
+                        const { name: tabName } = tab;
+                        const isNone = bootstrapColumns[tabName] === '';
                         return (
                             <Fragment>
                                 <SelectControl
                                     className={'components-font-size-picker__select'}
-                                    label={sprintf(label, tab.name.toUpperCase())}
-                                    value={bootstrapColumns[tab.name]}
-                                    onChange={(value) => onChange(value, tab.name)}
-                                    options={this.getSelectOptions(tab.name)}
+                                    label={sprintf(label, tabName.toUpperCase())}
+                                    value={bootstrapColumns[tabName]}
+                                    onChange={(value) => onChange(value, tabName)}
+                                    options={this.getSelectOptions(tabName)}
                                 />
                                 {isNone && <span class="wecodeart-horizontal-tabs__item-help">
                                     <small>{__('Previous breakpoint column size is used.', 'wecodeart')}</small>
@@ -130,4 +142,10 @@ class ResponsiveColumns extends Component {
     }
 }
 
-export default ResponsiveColumns;
+export default compose(
+    withSelect((select) => {
+        return {
+            select
+        };
+    }),
+)(ResponsiveColumns);

@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.2
+ * @version		4.0.6
  */
 
 namespace WeCodeArt;
@@ -116,7 +116,7 @@ class Support {
 			array(
 				'name'      => esc_html__( 'Small', wecodeart_config( 'textdomain' ) ),
 				'shortName' => esc_html__( 'S', wecodeart_config( 'textdomain' ) ),
-				'size'      => 14,
+				'size'      => 13,
 				'slug'      => 'small',
 			),
 			array(
@@ -129,13 +129,13 @@ class Support {
 			array(
 				'name'      => esc_html__( 'Large', wecodeart_config( 'textdomain' ) ),
 				'shortName' => esc_html__( 'L', wecodeart_config( 'textdomain' ) ),
-				'size'      => 26,
+				'size'      => 36,
 				'slug'      => 'large',
 			),
 			array(
 				'name'      => esc_html__( 'Huge', wecodeart_config( 'textdomain' ) ),
 				'shortName' => esc_html__( 'XL', wecodeart_config( 'textdomain' ) ),
-				'size'      => 49.5,
+				'size'      => 42,
 				'slug'      => 'huge',
 			),
 		] ) );

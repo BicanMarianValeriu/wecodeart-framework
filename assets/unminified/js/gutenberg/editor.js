@@ -325,408 +325,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/blocks/column/controls.js":
-  /*!****************************************************!*\
-    !*** ./src/js/gutenberg/blocks/column/controls.js ***!
-    \****************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcJsGutenbergBlocksColumnControlsJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony import */
-
-
-    var _icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./icons */
-    "./src/js/gutenberg/blocks/column/icons.js");
-
-    function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-        _typeof = function _typeof(obj) {
-          return _typeof2(obj);
-        };
-      } else {
-        _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
-        };
-      }
-
-      return _typeof(obj);
-    }
-
-    function _toConsumableArray(arr) {
-      return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-    }
-
-    function _nonIterableSpread() {
-      throw new TypeError("Invalid attempt to spread non-iterable instance");
-    }
-
-    function _iterableToArray(iter) {
-      if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-    }
-
-    function _arrayWithoutHoles(arr) {
-      if (Array.isArray(arr)) {
-        for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-          arr2[i] = arr[i];
-        }
-
-        return arr2;
-      }
-    }
-
-    function ownKeys(object, enumerableOnly) {
-      var keys = Object.keys(object);
-
-      if (Object.getOwnPropertySymbols) {
-        var symbols = Object.getOwnPropertySymbols(object);
-        if (enumerableOnly) symbols = symbols.filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        });
-        keys.push.apply(keys, symbols);
-      }
-
-      return keys;
-    }
-
-    function _objectSpread(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i] != null ? arguments[i] : {};
-
-        if (i % 2) {
-          ownKeys(source, true).forEach(function (key) {
-            _defineProperty(target, key, source[key]);
-          });
-        } else if (Object.getOwnPropertyDescriptors) {
-          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-        } else {
-          ownKeys(source).forEach(function (key) {
-            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-          });
-        }
-      }
-
-      return target;
-    }
-
-    function _defineProperty(obj, key, value) {
-      if (key in obj) {
-        Object.defineProperty(obj, key, {
-          value: value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        });
-      } else {
-        obj[key] = value;
-      }
-
-      return obj;
-    }
-
-    function _classCallCheck(instance, Constructor) {
-      if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-      }
-    }
-
-    function _defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-
-    function _createClass(Constructor, protoProps, staticProps) {
-      if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) _defineProperties(Constructor, staticProps);
-      return Constructor;
-    }
-
-    function _possibleConstructorReturn(self, call) {
-      if (call && (_typeof(call) === "object" || typeof call === "function")) {
-        return call;
-      }
-
-      return _assertThisInitialized(self);
-    }
-
-    function _getPrototypeOf(o) {
-      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-      };
-      return _getPrototypeOf(o);
-    }
-
-    function _assertThisInitialized(self) {
-      if (self === void 0) {
-        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-      }
-
-      return self;
-    }
-
-    function _inherits(subClass, superClass) {
-      if (typeof superClass !== "function" && superClass !== null) {
-        throw new TypeError("Super expression must either be null or a function");
-      }
-
-      subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-          value: subClass,
-          writable: true,
-          configurable: true
-        }
-      });
-      if (superClass) _setPrototypeOf(subClass, superClass);
-    }
-
-    function _setPrototypeOf(o, p) {
-      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-      };
-
-      return _setPrototypeOf(o, p);
-    }
-    /**
-     * WordPress dependencies
-     */
-
-
-    var _wp$i18n = wp.i18n,
-        __ = _wp$i18n.__,
-        sprintf = _wp$i18n.sprintf;
-    var Fragment = wp.element.Fragment;
-    var Component = wp.element.Component;
-    var _wp$components = wp.components,
-        SelectControl = _wp$components.SelectControl,
-        TabPanel = _wp$components.TabPanel;
-    /**
-     * Internal dependencies
-     */
-
-    var ResponsiveColumns =
-    /*#__PURE__*/
-    function (_Component) {
-      _inherits(ResponsiveColumns, _Component);
-
-      function ResponsiveColumns() {
-        var _this;
-
-        _classCallCheck(this, ResponsiveColumns);
-
-        _this = _possibleConstructorReturn(this, _getPrototypeOf(ResponsiveColumns).apply(this, arguments));
-        _this.setColumn = _this.setColumn.bind(_assertThisInitialized(_this));
-        return _this;
-      }
-
-      _createClass(ResponsiveColumns, [{
-        key: "setColumn",
-        value: function setColumn(value) {
-          var breakpoint = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'global';
-          var _this$props = this.props,
-              bootstrapColumns = _this$props.attributes.bootstrapColumns,
-              setAttributes = _this$props.setAttributes;
-          setAttributes({
-            bootstrapColumns: _objectSpread({}, bootstrapColumns, _defineProperty({}, breakpoint, value))
-          });
-        }
-      }, {
-        key: "getSelectOptions",
-        value: function getSelectOptions() {
-          var prefix = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'global';
-          var select = this.props.select;
-
-          var _select$getEditorSett = select('core/editor').getEditorSettings(),
-              columnsClasses = _select$getEditorSett.wecodeart.columnsClasses;
-
-          var makeLabel = function makeLabel(option) {
-            var label = option;
-
-            var isNumber = function isNumber(string) {
-              var match = string.match(/\d+$/);
-
-              if (match) {
-                return parseInt(match[0]);
-              }
-
-              return false;
-            };
-
-            var isFull = function isFull(string) {
-              return string.endsWith('-12');
-            };
-
-            if (isFull(option)) {
-              label = __('Full Width', 'wecodeart');
-            } else if (isNumber(option)) {
-              var number = isNumber(option);
-              label = sprintf(__('%s/12', 'wecodeart'), number);
-            } else {
-              label = __('Fill - Remaining', 'wecodeart');
-            }
-
-            return label;
-          };
-
-          var breakpointOpts = _toConsumableArray(columnsClasses[prefix].map(function (option) {
-            return {
-              value: option,
-              label: makeLabel(option)
-            };
-          }));
-
-          if (prefix !== 'global') {
-            breakpointOpts.unshift({
-              value: '',
-              label: __('None', 'wecodeart')
-            });
-          }
-
-          return breakpointOpts;
-        }
-      }, {
-        key: "render",
-        value: function render() {
-          var _this2 = this;
-
-          var _this$props2 = this.props,
-              _this$props2$label = _this$props2.label,
-              label = _this$props2$label === void 0 ? __('Column Width - %s', 'wecodeart') : _this$props2$label,
-              _this$props2$onChange = _this$props2.onChange,
-              _onChange = _this$props2$onChange === void 0 ? this.setColumn : _this$props2$onChange,
-              bootstrapColumns = _this$props2.attributes.bootstrapColumns;
-
-          return wp.element.createElement(TabPanel, {
-            className: "components-base-control wecodeart-horizontal-tabs",
-            activeClass: "is-active",
-            initialTabName: "global",
-            tabs: [{
-              name: 'global',
-              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].global,
-              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--global'
-            }, {
-              name: 'sm',
-              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].sm,
-              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--sm'
-            }, {
-              name: 'md',
-              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].md,
-              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--md'
-            }, {
-              name: 'lg',
-              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].lg,
-              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--lg'
-            }, {
-              name: 'xl',
-              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].xl,
-              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--xl'
-            }]
-          }, function (tab) {
-            var isNone = bootstrapColumns[tab.name] === '';
-            return wp.element.createElement(Fragment, null, wp.element.createElement(SelectControl, {
-              className: 'components-font-size-picker__select',
-              label: sprintf(label, tab.name.toUpperCase()),
-              value: bootstrapColumns[tab.name],
-              onChange: function onChange(value) {
-                return _onChange(value, tab.name);
-              },
-              options: _this2.getSelectOptions(tab.name)
-            }), isNone && wp.element.createElement("span", {
-              class: "wecodeart-horizontal-tabs__item-help"
-            }, wp.element.createElement("small", null, __('Previous breakpoint column size is used.', 'wecodeart'))));
-          });
-        }
-      }]);
-
-      return ResponsiveColumns;
-    }(Component);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = ResponsiveColumns;
-    /***/
-  },
-
-  /***/
-  "./src/js/gutenberg/blocks/column/icons.js":
-  /*!*************************************************!*\
-    !*** ./src/js/gutenberg/blocks/column/icons.js ***!
-    \*************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcJsGutenbergBlocksColumnIconsJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /**
-     * WordPress dependencies
-     */
-
-
-    var _wp$components = wp.components,
-        SVG = _wp$components.SVG,
-        Path = _wp$components.Path,
-        G = _wp$components.G;
-    /**
-     * Custom icons
-     */
-
-    var icons = {};
-    icons.global = wp.element.createElement(SVG, {
-      viewBox: "0 0 496 512",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, wp.element.createElement(Path, {
-      d: "M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4-73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z"
-    }));
-    icons.xs = wp.element.createElement(SVG, {
-      viewBox: "0 0 333.197 333.197",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, wp.element.createElement(Path, {
-      d: "M317.239,82.529l-66.571-66.571c-21.279-21.277-55.898-21.277-77.178,0L15.958,173.49   c-21.277,21.278-21.277,55.899,0,77.178l66.571,66.571c10.64,10.639,24.614,15.958,38.589,15.958s27.949-5.319,38.589-15.958   L275.79,201.156c2.929-2.93,2.929-7.678,0-10.607c-2.93-2.928-7.678-2.928-10.607,0l-96.948,96.948L60.467,179.73   c-2.93-2.928-7.678-2.928-10.607,0c-2.929,2.93-2.929,7.678,0,10.607l107.768,107.767l-8.527,8.527   c-7.474,7.475-17.411,11.591-27.981,11.591s-20.508-4.116-27.981-11.591l-66.571-66.571c-7.475-7.474-11.591-17.411-11.591-27.981   s4.116-20.508,11.591-27.981L169.463,41.2l127.838,127.838c0.183,0.183,0.374,0.354,0.57,0.515   c1.375,1.121,3.055,1.682,4.734,1.682s3.359-0.561,4.734-1.682c0.196-0.16,0.387-0.332,0.57-0.515l9.331-9.331   C338.517,138.429,338.517,103.808,317.239,82.529z M306.632,149.1l-4.027,4.027L180.07,30.593l4.027-4.027   c7.474-7.475,17.411-11.591,27.981-11.591s20.508,4.116,27.981,11.591l66.571,66.571c7.475,7.474,11.591,17.411,11.591,27.981   S314.106,141.626,306.632,149.1z"
-    }));
-    icons.sm = wp.element.createElement(SVG, {
-      viewBox: "0 0 320 512",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, wp.element.createElement(Path, {
-      d: "M196 448h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12zM320 48v416c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V48C0 21.5 21.5 0 48 0h224c26.5 0 48 21.5 48 48zm-32 0c0-8.8-7.2-16-16-16H48c-8.8 0-16 7.2-16 16v416c0 8.8 7.2 16 16 16h224c8.8 0 16-7.2 16-16V48z"
-    }));
-    icons.md = wp.element.createElement(SVG, {
-      viewBox: "0 0 448 512",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, wp.element.createElement(Path, {
-      d: "M256 416c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-21.3 14.3-32 32-32s32 14.3 32 32zM448 48v416c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V48C0 21.5 21.5 0 48 0h352c26.5 0 48 21.5 48 48zm-32 0c0-8.8-7.2-16-16-16H48c-8.8 0-16 7.2-16 16v416c0 8.8 7.2 16 16 16h352c8.8 0 16-7.2 16-16V48z"
-    }));
-    icons.lg = wp.element.createElement(SVG, {
-      viewBox: "0 0 640 512",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, wp.element.createElement(Path, {
-      d: "M624 352h-48V64c0-35.2-28.8-64-64-64H128C92.8 0 64 28.8 64 64v288H16c-8.8 0-16 7.2-16 16v48c0 52.8 43.2 96 96 96h448c52.8 0 96-43.2 96-96v-48c0-8.8-7.2-16-16-16zM112 64c0-8.67 7.33-16 16-16h384c8.67 0 16 7.33 16 16v288H112V64zm480 352c0 26.47-21.53 48-48 48H96c-26.47 0-48-21.53-48-48v-16h180.9c5.57 9.39 15.38 16 27.1 16h128c11.72 0 21.52-6.61 27.1-16H592v16z"
-    }));
-    icons.xl = wp.element.createElement(SVG, {
-      viewBox: "0 0 640 512",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, wp.element.createElement(Path, {
-      d: "M528 464H112a16 16 0 0 0-16 16v16a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-16a16 16 0 0 0-16-16zM592 0H48A48 48 0 0 0 0 48v320a48 48 0 0 0 48 48h544a48 48 0 0 0 48-48V48a48 48 0 0 0-48-48zm0 368H48V48h544z"
-    }));
-    /* harmony default export */
-
-    __webpack_exports__["default"] = icons;
-    /***/
-  },
-
-  /***/
   "./src/js/gutenberg/blocks/column/index.js":
   /*!*************************************************!*\
     !*** ./src/js/gutenberg/blocks/column/index.js ***!
@@ -760,9 +358,9 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var _controls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ./controls */
-    "./src/js/gutenberg/blocks/column/controls.js");
+    var _controls_bootstrap_columns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../../controls/bootstrap-columns */
+    "./src/js/gutenberg/controls/bootstrap-columns/index.js");
 
     function _defineProperty(obj, key, value) {
       if (key in obj) {
@@ -807,11 +405,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var __ = wp.i18n.__;
     var InspectorControls = wp.blockEditor.InspectorControls;
-    var _wp$compose = wp.compose,
-        createHigherOrderComponent = _wp$compose.createHigherOrderComponent,
-        compose = _wp$compose.compose;
+    var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
     var PanelBody = wp.components.PanelBody;
-    var withSelect = wp.data.withSelect;
     var Fragment = wp.element.Fragment;
     var addFilter = wp.hooks.addFilter;
     /**
@@ -823,19 +418,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
     /**
-     * Override the default block element to add Font Panels.
-     *
-     * @param  {Function} BlockListBlock Original component
-     * @return {Function} Wrapped component
-     */
-
-    var enhance = compose(withSelect(function (select) {
-      return {
-        selected: select('core/block-editor').getSelectedBlock(),
-        select: select
-      };
-    }));
-    /**
      * Column Controls
      *
      * @param {Function} BlockEdit Original component.
@@ -843,7 +425,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
     var withColumnControls = createHigherOrderComponent(function (BlockEdit) {
-      return enhance(function (props) {
+      return function (props) {
         var blockName = props.name,
             isSelected = props.isSelected;
 
@@ -854,11 +436,11 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             className: "components-panel__body--wecodeart-column-panel"
           }, wp.element.createElement("p", {
             className: "components-base-control__label"
-          }, __('Bootstrap columns uses mobile-first approach. This option has no visual preview but it will affect the live page.', 'wecodeart')), wp.element.createElement(_controls__WEBPACK_IMPORTED_MODULE_2__["default"], props))));
+          }, __('Bootstrap columns uses mobile-first approach. This option has no visual preview but it will affect the live page.', 'wecodeart')), wp.element.createElement(_controls_bootstrap_columns__WEBPACK_IMPORTED_MODULE_2__["default"], props))));
         }
 
         return wp.element.createElement(BlockEdit, props);
-      });
+      };
     }, 'withColumnControls');
     /**
      * Override props assigned to save component to inject atttributes
@@ -892,6 +474,10 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
       return extraProps;
     }
+    /**
+     * Apply Filters
+     */
+
 
     function applyFilters() {
       addFilter('editor.BlockEdit', 'wecodeart/editor/columns/withColumnControls', withColumnControls);
@@ -930,9 +516,9 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var _components_background__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ../../components/background */
-    "./src/js/gutenberg/components/background/index.js");
+    var _controls_background__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ../../controls/background */
+    "./src/js/gutenberg/controls/background/index.js");
     /* harmony import */
 
 
@@ -970,7 +556,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
     var __ = wp.i18n.__;
-    var withSelect = wp.data.withSelect;
     var addFilter = wp.hooks.addFilter;
     var Fragment = wp.element.Fragment;
     var _wp$components = wp.components,
@@ -979,26 +564,11 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var _wp$blockEditor = wp.blockEditor,
         InspectorControls = _wp$blockEditor.InspectorControls,
         InnerBlocks = _wp$blockEditor.InnerBlocks;
-    var _wp$compose = wp.compose,
-        createHigherOrderComponent = _wp$compose.createHigherOrderComponent,
-        compose = _wp$compose.compose;
+    var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
     /**
      * Internal dependencies.
      */
 
-    /**
-     * Override the default block element to add Font Panels.
-     *
-     * @param  {Function} BlockListBlock Original component
-     * @return {Function} Wrapped component
-     */
-
-    var enhance = compose(withSelect(function (select) {
-      return {
-        selected: select('core/block-editor').getSelectedBlock(),
-        select: select
-      };
-    }));
     /**
      * Columns Controls
      *
@@ -1007,16 +577,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
     var withColumnsControls = createHigherOrderComponent(function (BlockEdit) {
-      return enhance(function (props) {
+      return function (props) {
         var blockName = props.name,
-            setAttributes = props.setAttributes,
-            isSelected = props.isSelected,
-            select = props.select;
+            isSelected = props.isSelected;
 
         if (!_extensions_attributes__WEBPACK_IMPORTED_MODULE_3__["restrictedBlocks"].includes(blockName) && blockName === 'core/columns' && isSelected) {
-          var _select$getBlock = select('core/block-editor').getBlock(props.clientId),
-              attributes = _select$getBlock.attributes;
-
+          var attributes = props.attributes,
+              setAttributes = props.setAttributes;
           var container = attributes.container,
               gutters = attributes.gutters;
 
@@ -1052,7 +619,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         }
 
         return wp.element.createElement(BlockEdit, props);
-      });
+      };
     }, 'withColumnsControls');
     /**
      * Override props assigned to save component to inject atttributes
@@ -1075,7 +642,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             align = attributes.align,
             verticalAlignment = attributes.verticalAlignment,
             gutters = attributes.gutters;
-        var sectionClassName = classnames__WEBPACK_IMPORTED_MODULE_0___default()('wca-section', className, Object(_components_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundClasses"])(attributes), Object(_extensions_advanced_visibility_utils__WEBPACK_IMPORTED_MODULE_2__["getVisibilityClasses"])(attributes));
+        var sectionClassName = classnames__WEBPACK_IMPORTED_MODULE_0___default()('wca-section', className, Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundClasses"])(attributes), Object(_extensions_advanced_visibility_utils__WEBPACK_IMPORTED_MODULE_2__["getVisibilityClasses"])(attributes));
         var innerClassName = classnames__WEBPACK_IMPORTED_MODULE_0___default()('wca-section__inner', {
           'container': container && ['full', 'wide'].includes(align) === false,
           'container-fluid': container && ['full', 'wide'].includes(align) === true
@@ -1083,8 +650,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var rowClassName = classnames__WEBPACK_IMPORTED_MODULE_0___default()('row', (_classnames = {}, _defineProperty(_classnames, "align-items-".concat(verticalAlignment), verticalAlignment), _defineProperty(_classnames, 'no-gutters', container && gutters), _classnames));
         return wp.element.createElement("section", {
           className: sectionClassName,
-          style: Object(_components_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundStyles"])(attributes, {})
-        }, Object(_components_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundVideo"])(attributes), wp.element.createElement("div", {
+          style: Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundStyles"])(attributes, {})
+        }, Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundVideo"])(attributes), wp.element.createElement("div", {
           className: innerClassName
         }, wp.element.createElement("div", {
           className: rowClassName
@@ -1093,6 +660,10 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
       return element;
     }
+    /**
+     * Apply Filters
+     */
+
 
     function applyFilters() {
       addFilter('blocks.getSaveElement', 'wecodeart/blocks/columns/getSaveElement', getSaveElement);
@@ -1104,15 +675,124 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/background/attributes.js":
-  /*!**************************************************************!*\
-    !*** ./src/js/gutenberg/components/background/attributes.js ***!
-    \**************************************************************/
+  "./src/js/gutenberg/blocks/media-text/index.js":
+  /*!*****************************************************!*\
+    !*** ./src/js/gutenberg/blocks/media-text/index.js ***!
+    \*****************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function srcJsGutenbergBlocksMediaTextIndexJs(module, exports) {
+    function ownKeys(object, enumerableOnly) {
+      var keys = Object.keys(object);
+
+      if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+        keys.push.apply(keys, symbols);
+      }
+
+      return keys;
+    }
+
+    function _objectSpread(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i] != null ? arguments[i] : {};
+
+        if (i % 2) {
+          ownKeys(Object(source), true).forEach(function (key) {
+            _defineProperty(target, key, source[key]);
+          });
+        } else if (Object.getOwnPropertyDescriptors) {
+          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+        } else {
+          ownKeys(Object(source)).forEach(function (key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+          });
+        }
+      }
+
+      return target;
+    }
+
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+
+      return obj;
+    }
+    /**
+     * WordPress dependencies.
+     */
+
+
+    var getColorClassName = wp.blockEditor.getColorClassName;
+    var addFilter = wp.hooks.addFilter;
+    /**
+     * Override props assigned to save component to inject atttributes
+     *
+     * @param {Object} extraProps Additional props applied to save element.
+     * @param {Object} blockType  Block type.
+     * @param {Object} attributes Current block attributes.
+     *
+     * @return {Object} Filtered props applied to save element.
+     */
+
+    function applyExtraSettings(extraProps, blockType, attributes) {
+      var blockName = blockType.name;
+
+      if (blockName === 'core/media-text') {
+        var mediaWidth = attributes.mediaWidth,
+            backgroundColor = attributes.backgroundColor,
+            customBackgroundColor = attributes.customBackgroundColor;
+        var backgroundClass = getColorClassName('background-color', backgroundColor);
+        var styles = {
+          backgroundColor: backgroundClass ? undefined : customBackgroundColor
+        };
+
+        if (mediaWidth !== 50) {
+          styles = _objectSpread({}, styles, _defineProperty({}, "--media-width", "".concat(mediaWidth, "%;")));
+        }
+
+        extraProps.style = styles;
+      }
+
+      return extraProps;
+    }
+    /**
+     * Apply Filters
+     */
+
+
+    function applyFilters() {
+      addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/media-text/applyExtraSettings', applyExtraSettings);
+    }
+
+    applyFilters();
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/controls/background/attributes.js":
+  /*!************************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/attributes.js ***!
+    \************************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundAttributesJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundAttributesJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -1178,15 +858,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/background/classes.js":
-  /*!***********************************************************!*\
-    !*** ./src/js/gutenberg/components/background/classes.js ***!
-    \***********************************************************/
+  "./src/js/gutenberg/controls/background/classes.js":
+  /*!*********************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/classes.js ***!
+    \*********************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundClassesJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundClassesJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -1267,15 +947,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/background/controls.js":
-  /*!************************************************************!*\
-    !*** ./src/js/gutenberg/components/background/controls.js ***!
-    \************************************************************/
+  "./src/js/gutenberg/controls/background/controls.js":
+  /*!**********************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/controls.js ***!
+    \**********************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundControlsJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundControlsJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -1284,13 +964,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! ./icons */
-    "./src/js/gutenberg/components/background/icons.js");
+    "./src/js/gutenberg/controls/background/icons.js");
     /* harmony import */
 
 
     var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! ./ */
-    "./src/js/gutenberg/components/background/index.js");
+    "./src/js/gutenberg/controls/background/index.js");
     /**
      * WordPress dependencies
      */
@@ -1401,15 +1081,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/background/dropzone.js":
-  /*!************************************************************!*\
-    !*** ./src/js/gutenberg/components/background/dropzone.js ***!
-    \************************************************************/
+  "./src/js/gutenberg/controls/background/dropzone.js":
+  /*!**********************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/dropzone.js ***!
+    \**********************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundDropzoneJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundDropzoneJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -1418,7 +1098,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! ./ */
-    "./src/js/gutenberg/components/background/index.js");
+    "./src/js/gutenberg/controls/background/index.js");
 
     function _typeof(obj) {
       if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
@@ -1604,15 +1284,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             this.props.setAttributes({
               backgroundImg: media.url,
               backgroundType: mediaType
-            }); // Set padding when background image is added.
-
-            if (___WEBPACK_IMPORTED_MODULE_0__["BLOCKS_WITH_AUTOPADDING"].includes(this.props.name)) {
-              if (!this.props.attributes.paddingSize || this.props.attributes.paddingSize === 'no') {
-                this.props.setAttributes({
-                  paddingSize: 'medium'
-                });
-              }
-            }
+            });
           }
         }
       }, {
@@ -1635,15 +1307,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/background/icons.js":
-  /*!*********************************************************!*\
-    !*** ./src/js/gutenberg/components/background/icons.js ***!
-    \*********************************************************/
+  "./src/js/gutenberg/controls/background/icons.js":
+  /*!*******************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/icons.js ***!
+    \*******************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundIconsJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundIconsJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -1718,15 +1390,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/background/index.js":
-  /*!*********************************************************!*\
-    !*** ./src/js/gutenberg/components/background/index.js ***!
-    \*********************************************************/
+  "./src/js/gutenberg/controls/background/index.js":
+  /*!*******************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/index.js ***!
+    \*******************************************************/
 
-  /*! exports provided: BackgroundAttributes, BackgroundClasses, BackgroundControls, BackgroundDropZone, BackgroundStyles, BackgroundTransforms, BackgroundVideo, BackgroundPanel, ALLOWED_BG_MEDIA_TYPES, BLOCKS_WITH_AUTOPADDING */
+  /*! exports provided: BackgroundAttributes, BackgroundClasses, BackgroundControls, BackgroundDropZone, BackgroundStyles, BackgroundTransforms, BackgroundVideo, BackgroundPanel, ALLOWED_BG_MEDIA_TYPES */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundIndexJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundIndexJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -1736,18 +1408,12 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.d(__webpack_exports__, "ALLOWED_BG_MEDIA_TYPES", function () {
       return ALLOWED_BG_MEDIA_TYPES;
     });
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "BLOCKS_WITH_AUTOPADDING", function () {
-      return BLOCKS_WITH_AUTOPADDING;
-    });
     /* harmony import */
 
 
     var _attributes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! ./attributes */
-    "./src/js/gutenberg/components/background/attributes.js");
+    "./src/js/gutenberg/controls/background/attributes.js");
     /* harmony reexport (safe) */
 
 
@@ -1759,7 +1425,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _classes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! ./classes */
-    "./src/js/gutenberg/components/background/classes.js");
+    "./src/js/gutenberg/controls/background/classes.js");
     /* harmony reexport (safe) */
 
 
@@ -1771,7 +1437,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _controls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ./controls */
-    "./src/js/gutenberg/components/background/controls.js");
+    "./src/js/gutenberg/controls/background/controls.js");
     /* harmony reexport (safe) */
 
 
@@ -1783,7 +1449,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _dropzone__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./dropzone */
-    "./src/js/gutenberg/components/background/dropzone.js");
+    "./src/js/gutenberg/controls/background/dropzone.js");
     /* harmony reexport (safe) */
 
 
@@ -1795,7 +1461,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./styles */
-    "./src/js/gutenberg/components/background/styles.js");
+    "./src/js/gutenberg/controls/background/styles.js");
     /* harmony reexport (safe) */
 
 
@@ -1807,7 +1473,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _panel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ./panel */
-    "./src/js/gutenberg/components/background/panel.js");
+    "./src/js/gutenberg/controls/background/panel.js");
     /* harmony reexport (safe) */
 
 
@@ -1819,7 +1485,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _transforms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./transforms */
-    "./src/js/gutenberg/components/background/transforms.js");
+    "./src/js/gutenberg/controls/background/transforms.js");
     /* harmony reexport (safe) */
 
 
@@ -1831,7 +1497,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _video__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ./video */
-    "./src/js/gutenberg/components/background/video.js");
+    "./src/js/gutenberg/controls/background/video.js");
     /* harmony reexport (safe) */
 
 
@@ -1844,35 +1510,28 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
     var ALLOWED_BG_MEDIA_TYPES = ['image', 'video'];
-    var BLOCKS_WITH_AUTOPADDING = ['core/columns', 'core/column'];
     /***/
   },
 
   /***/
-  "./src/js/gutenberg/components/background/panel.js":
-  /*!*********************************************************!*\
-    !*** ./src/js/gutenberg/components/background/panel.js ***!
-    \*********************************************************/
+  "./src/js/gutenberg/controls/background/panel.js":
+  /*!*******************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/panel.js ***!
+    \*******************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundPanelJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundPanelJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony import */
 
 
-    var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./ */
-    "./src/js/gutenberg/components/background/index.js");
-    /* harmony import */
-
-
-    var _responsive_tabs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _responsive_tabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! ../responsive-tabs */
-    "./src/js/gutenberg/components/responsive-tabs/index.js");
+    "./src/js/gutenberg/controls/responsive-tabs/index.js");
 
     function _typeof(obj) {
       if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
@@ -2215,7 +1874,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             min: 0,
             max: 100,
             step: 10
-          }), hasGalleryControls && wp.element.createElement(Fragment, null, wp.element.createElement(_responsive_tabs__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, this.props, {
+          }), hasGalleryControls && wp.element.createElement(Fragment, null, wp.element.createElement(_responsive_tabs__WEBPACK_IMPORTED_MODULE_0__["default"], _extends({}, this.props, {
             label: __('Padding', 'wecodeart'),
             value: backgroundPadding,
             valueMobile: backgroundPaddingMobile,
@@ -2293,15 +1952,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
                 hasParallax: false,
                 backgroundPadding: 0,
                 backgroundPaddingMobile: 0
-              }); // Remove padding when background image is removed.
-
-              if (___WEBPACK_IMPORTED_MODULE_0__["BLOCKS_WITH_AUTOPADDING"].includes(_this2.props.name)) {
-                if (attributes.paddingSize) {
-                  setAttributes({
-                    paddingSize: 'no'
-                  });
-                }
-              }
+              });
             }
           }, sprintf(__('Remove %s', 'wecodeart'), backgroundType))));
         }
@@ -2317,15 +1968,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/background/styles.js":
-  /*!**********************************************************!*\
-    !*** ./src/js/gutenberg/components/background/styles.js ***!
-    \**********************************************************/
+  "./src/js/gutenberg/controls/background/styles.js":
+  /*!********************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/styles.js ***!
+    \********************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundStylesJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundStylesJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -2349,13 +2000,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var source = arguments[i] != null ? arguments[i] : {};
 
         if (i % 2) {
-          ownKeys(source, true).forEach(function (key) {
+          ownKeys(Object(source), true).forEach(function (key) {
             _defineProperty(target, key, source[key]);
           });
         } else if (Object.getOwnPropertyDescriptors) {
           Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
         } else {
-          ownKeys(source).forEach(function (key) {
+          ownKeys(Object(source)).forEach(function (key) {
             Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
           });
         }
@@ -2393,8 +2044,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * @returns {Object} styles.
      */
 
-    var BackgroundStyles = function BackgroundStyles(attributes, props) {
-      var colors = props.colors;
+    var BackgroundStyles = function BackgroundStyles(attributes) {
+      var colors = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var backgroundColor = attributes.backgroundColor,
           customBackgroundColor = attributes.customBackgroundColor;
       var showBGPosition = attributes && attributes.backgroundImg && attributes.backgroundType === 'image';
@@ -2432,15 +2083,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/background/transforms.js":
-  /*!**************************************************************!*\
-    !*** ./src/js/gutenberg/components/background/transforms.js ***!
-    \**************************************************************/
+  "./src/js/gutenberg/controls/background/transforms.js":
+  /*!************************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/transforms.js ***!
+    \************************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundTransformsJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundTransformsJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -2477,15 +2128,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/background/video.js":
-  /*!*********************************************************!*\
-    !*** ./src/js/gutenberg/components/background/video.js ***!
-    \*********************************************************/
+  "./src/js/gutenberg/controls/background/video.js":
+  /*!*******************************************************!*\
+    !*** ./src/js/gutenberg/controls/background/video.js ***!
+    \*******************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsBackgroundVideoJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBackgroundVideoJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -2521,15 +2172,433 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/responsive-tabs/icons.js":
+  "./src/js/gutenberg/controls/bootstrap-columns/icons.js":
   /*!**************************************************************!*\
-    !*** ./src/js/gutenberg/components/responsive-tabs/icons.js ***!
+    !*** ./src/js/gutenberg/controls/bootstrap-columns/icons.js ***!
     \**************************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsResponsiveTabsIconsJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsBootstrapColumnsIconsJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /**
+     * WordPress dependencies
+     */
+
+
+    var _wp$components = wp.components,
+        SVG = _wp$components.SVG,
+        Path = _wp$components.Path;
+    /**
+     * Custom icons
+     */
+
+    var icons = {};
+    icons.global = wp.element.createElement(SVG, {
+      viewBox: "0 0 496 512",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, wp.element.createElement(Path, {
+      d: "M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4-73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z"
+    }));
+    icons.xs = wp.element.createElement(SVG, {
+      viewBox: "0 0 333.197 333.197",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, wp.element.createElement(Path, {
+      d: "M317.239,82.529l-66.571-66.571c-21.279-21.277-55.898-21.277-77.178,0L15.958,173.49   c-21.277,21.278-21.277,55.899,0,77.178l66.571,66.571c10.64,10.639,24.614,15.958,38.589,15.958s27.949-5.319,38.589-15.958   L275.79,201.156c2.929-2.93,2.929-7.678,0-10.607c-2.93-2.928-7.678-2.928-10.607,0l-96.948,96.948L60.467,179.73   c-2.93-2.928-7.678-2.928-10.607,0c-2.929,2.93-2.929,7.678,0,10.607l107.768,107.767l-8.527,8.527   c-7.474,7.475-17.411,11.591-27.981,11.591s-20.508-4.116-27.981-11.591l-66.571-66.571c-7.475-7.474-11.591-17.411-11.591-27.981   s4.116-20.508,11.591-27.981L169.463,41.2l127.838,127.838c0.183,0.183,0.374,0.354,0.57,0.515   c1.375,1.121,3.055,1.682,4.734,1.682s3.359-0.561,4.734-1.682c0.196-0.16,0.387-0.332,0.57-0.515l9.331-9.331   C338.517,138.429,338.517,103.808,317.239,82.529z M306.632,149.1l-4.027,4.027L180.07,30.593l4.027-4.027   c7.474-7.475,17.411-11.591,27.981-11.591s20.508,4.116,27.981,11.591l66.571,66.571c7.475,7.474,11.591,17.411,11.591,27.981   S314.106,141.626,306.632,149.1z"
+    }));
+    icons.sm = wp.element.createElement(SVG, {
+      viewBox: "0 0 320 512",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, wp.element.createElement(Path, {
+      d: "M196 448h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12zM320 48v416c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V48C0 21.5 21.5 0 48 0h224c26.5 0 48 21.5 48 48zm-32 0c0-8.8-7.2-16-16-16H48c-8.8 0-16 7.2-16 16v416c0 8.8 7.2 16 16 16h224c8.8 0 16-7.2 16-16V48z"
+    }));
+    icons.md = wp.element.createElement(SVG, {
+      viewBox: "0 0 448 512",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, wp.element.createElement(Path, {
+      d: "M256 416c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-21.3 14.3-32 32-32s32 14.3 32 32zM448 48v416c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V48C0 21.5 21.5 0 48 0h352c26.5 0 48 21.5 48 48zm-32 0c0-8.8-7.2-16-16-16H48c-8.8 0-16 7.2-16 16v416c0 8.8 7.2 16 16 16h352c8.8 0 16-7.2 16-16V48z"
+    }));
+    icons.lg = wp.element.createElement(SVG, {
+      viewBox: "0 0 640 512",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, wp.element.createElement(Path, {
+      d: "M624 352h-48V64c0-35.2-28.8-64-64-64H128C92.8 0 64 28.8 64 64v288H16c-8.8 0-16 7.2-16 16v48c0 52.8 43.2 96 96 96h448c52.8 0 96-43.2 96-96v-48c0-8.8-7.2-16-16-16zM112 64c0-8.67 7.33-16 16-16h384c8.67 0 16 7.33 16 16v288H112V64zm480 352c0 26.47-21.53 48-48 48H96c-26.47 0-48-21.53-48-48v-16h180.9c5.57 9.39 15.38 16 27.1 16h128c11.72 0 21.52-6.61 27.1-16H592v16z"
+    }));
+    icons.xl = wp.element.createElement(SVG, {
+      viewBox: "0 0 640 512",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, wp.element.createElement(Path, {
+      d: "M528 464H112a16 16 0 0 0-16 16v16a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-16a16 16 0 0 0-16-16zM592 0H48A48 48 0 0 0 0 48v320a48 48 0 0 0 48 48h544a48 48 0 0 0 48-48V48a48 48 0 0 0-48-48zm0 368H48V48h544z"
+    }));
+    /* harmony default export */
+
+    __webpack_exports__["default"] = icons;
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/controls/bootstrap-columns/index.js":
+  /*!**************************************************************!*\
+    !*** ./src/js/gutenberg/controls/bootstrap-columns/index.js ***!
+    \**************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcJsGutenbergControlsBootstrapColumnsIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony import */
+
+
+    var _icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./icons */
+    "./src/js/gutenberg/controls/bootstrap-columns/icons.js");
+
+    function _typeof(obj) {
+      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+        _typeof = function _typeof(obj) {
+          return _typeof2(obj);
+        };
+      } else {
+        _typeof = function _typeof(obj) {
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+        };
+      }
+
+      return _typeof(obj);
+    }
+
+    function _toConsumableArray(arr) {
+      return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+    }
+
+    function _nonIterableSpread() {
+      throw new TypeError("Invalid attempt to spread non-iterable instance");
+    }
+
+    function _iterableToArray(iter) {
+      if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+    }
+
+    function _arrayWithoutHoles(arr) {
+      if (Array.isArray(arr)) {
+        for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+          arr2[i] = arr[i];
+        }
+
+        return arr2;
+      }
+    }
+
+    function ownKeys(object, enumerableOnly) {
+      var keys = Object.keys(object);
+
+      if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+        keys.push.apply(keys, symbols);
+      }
+
+      return keys;
+    }
+
+    function _objectSpread(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i] != null ? arguments[i] : {};
+
+        if (i % 2) {
+          ownKeys(Object(source), true).forEach(function (key) {
+            _defineProperty(target, key, source[key]);
+          });
+        } else if (Object.getOwnPropertyDescriptors) {
+          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+        } else {
+          ownKeys(Object(source)).forEach(function (key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+          });
+        }
+      }
+
+      return target;
+    }
+
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+
+      return obj;
+    }
+
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+
+    function _possibleConstructorReturn(self, call) {
+      if (call && (_typeof(call) === "object" || typeof call === "function")) {
+        return call;
+      }
+
+      return _assertThisInitialized(self);
+    }
+
+    function _getPrototypeOf(o) {
+      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+        return o.__proto__ || Object.getPrototypeOf(o);
+      };
+      return _getPrototypeOf(o);
+    }
+
+    function _assertThisInitialized(self) {
+      if (self === void 0) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+
+      return self;
+    }
+
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function");
+      }
+
+      subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+          value: subClass,
+          writable: true,
+          configurable: true
+        }
+      });
+      if (superClass) _setPrototypeOf(subClass, superClass);
+    }
+
+    function _setPrototypeOf(o, p) {
+      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+        o.__proto__ = p;
+        return o;
+      };
+
+      return _setPrototypeOf(o, p);
+    }
+    /**
+     * WordPress dependencies
+     */
+
+
+    var _wp$i18n = wp.i18n,
+        __ = _wp$i18n.__,
+        sprintf = _wp$i18n.sprintf;
+    var Fragment = wp.element.Fragment;
+    var Component = wp.element.Component;
+    var _wp$components = wp.components,
+        SelectControl = _wp$components.SelectControl,
+        TabPanel = _wp$components.TabPanel;
+    var compose = wp.compose.compose;
+    var withSelect = wp.data.withSelect;
+    /**
+     * Internal dependencies
+     */
+
+    /**
+     * BootstrapColumns
+     */
+
+    var ResponsiveColumns =
+    /*#__PURE__*/
+    function (_Component) {
+      _inherits(ResponsiveColumns, _Component);
+
+      function ResponsiveColumns() {
+        var _this;
+
+        _classCallCheck(this, ResponsiveColumns);
+
+        _this = _possibleConstructorReturn(this, _getPrototypeOf(ResponsiveColumns).apply(this, arguments));
+        _this.setColumn = _this.setColumn.bind(_assertThisInitialized(_this));
+        return _this;
+      }
+
+      _createClass(ResponsiveColumns, [{
+        key: "setColumn",
+        value: function setColumn(value) {
+          var breakpoint = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'global';
+          var _this$props = this.props,
+              bootstrapColumns = _this$props.attributes.bootstrapColumns,
+              setAttributes = _this$props.setAttributes;
+          setAttributes({
+            bootstrapColumns: _objectSpread({}, bootstrapColumns, _defineProperty({}, breakpoint, value))
+          });
+        }
+      }, {
+        key: "getSelectOptions",
+        value: function getSelectOptions() {
+          var prefix = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'global';
+          var select = this.props.select;
+
+          var _select$getEditorSett = select('core/editor').getEditorSettings(),
+              columnsClasses = _select$getEditorSett.wecodeart.columnsClasses;
+
+          var makeLabel = function makeLabel(option) {
+            var label = option;
+
+            var isNumber = function isNumber(string) {
+              var match = string.match(/\d+$/);
+
+              if (match) {
+                return parseInt(match[0]);
+              }
+
+              return false;
+            };
+
+            var isFull = function isFull(string) {
+              return string.endsWith('-12');
+            };
+
+            var isAuto = function isAuto(string) {
+              return string.endsWith('-auto');
+            };
+
+            if (isFull(option)) {
+              label = __('Full Width', 'wecodeart');
+            } else if (isNumber(option)) {
+              var number = isNumber(option);
+              label = sprintf(__('%s/12', 'wecodeart'), number);
+            } else if (isAuto(option)) {
+              label = __('Auto - Shrink', 'wecodeart');
+            } else {
+              label = __('Auto - Expand', 'wecodeart');
+            }
+
+            return label;
+          };
+
+          var breakpointOpts = _toConsumableArray(columnsClasses[prefix].map(function (option) {
+            return {
+              value: option,
+              label: makeLabel(option)
+            };
+          }));
+
+          if (prefix !== 'global') {
+            breakpointOpts.unshift({
+              value: '',
+              label: __('None', 'wecodeart')
+            });
+          }
+
+          return breakpointOpts;
+        }
+      }, {
+        key: "render",
+        value: function render() {
+          var _this2 = this;
+
+          var _this$props2 = this.props,
+              _this$props2$label = _this$props2.label,
+              label = _this$props2$label === void 0 ? __('Column Width - %s', 'wecodeart') : _this$props2$label,
+              _this$props2$onChange = _this$props2.onChange,
+              _onChange = _this$props2$onChange === void 0 ? this.setColumn : _this$props2$onChange,
+              bootstrapColumns = _this$props2.attributes.bootstrapColumns;
+
+          return wp.element.createElement(TabPanel, {
+            className: "components-base-control wecodeart-horizontal-tabs",
+            activeClass: "is-active",
+            initialTabName: "global",
+            tabs: [{
+              name: 'global',
+              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].global,
+              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--global'
+            }, {
+              name: 'sm',
+              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].sm,
+              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--sm'
+            }, {
+              name: 'md',
+              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].md,
+              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--md'
+            }, {
+              name: 'lg',
+              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].lg,
+              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--lg'
+            }, {
+              name: 'xl',
+              title: _icons__WEBPACK_IMPORTED_MODULE_0__["default"].xl,
+              className: 'wecodeart-horizontal-tabs__item wecodeart-horizontal-tabs__item--xl'
+            }]
+          }, function (tab) {
+            var tabName = tab.name;
+            var isNone = bootstrapColumns[tabName] === '';
+            return wp.element.createElement(Fragment, null, wp.element.createElement(SelectControl, {
+              className: 'components-font-size-picker__select',
+              label: sprintf(label, tabName.toUpperCase()),
+              value: bootstrapColumns[tabName],
+              onChange: function onChange(value) {
+                return _onChange(value, tabName);
+              },
+              options: _this2.getSelectOptions(tabName)
+            }), isNone && wp.element.createElement("span", {
+              class: "wecodeart-horizontal-tabs__item-help"
+            }, wp.element.createElement("small", null, __('Previous breakpoint column size is used.', 'wecodeart'))));
+          });
+        }
+      }]);
+
+      return ResponsiveColumns;
+    }(Component);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = compose(withSelect(function (select) {
+      return {
+        select: select
+      };
+    }))(ResponsiveColumns);
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/controls/responsive-tabs/icons.js":
+  /*!************************************************************!*\
+    !*** ./src/js/gutenberg/controls/responsive-tabs/icons.js ***!
+    \************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcJsGutenbergControlsResponsiveTabsIconsJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -2578,15 +2647,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/components/responsive-tabs/index.js":
-  /*!**************************************************************!*\
-    !*** ./src/js/gutenberg/components/responsive-tabs/index.js ***!
-    \**************************************************************/
+  "./src/js/gutenberg/controls/responsive-tabs/index.js":
+  /*!************************************************************!*\
+    !*** ./src/js/gutenberg/controls/responsive-tabs/index.js ***!
+    \************************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergComponentsResponsiveTabsIndexJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergControlsResponsiveTabsIndexJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -2595,7 +2664,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! ./icons */
-    "./src/js/gutenberg/components/responsive-tabs/icons.js");
+    "./src/js/gutenberg/controls/responsive-tabs/icons.js");
 
     function _typeof(obj) {
       if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
@@ -2839,26 +2908,38 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var _extensions_block_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! ./extensions/block-panel */
-    "./src/js/gutenberg/extensions/block-panel/index.js");
+    var _blocks_media_text__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./blocks/media-text */
+    "./src/js/gutenberg/blocks/media-text/index.js");
     /* harmony import */
 
 
-    var _extensions_advanced__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _blocks_media_text__WEBPACK_IMPORTED_MODULE_3___default =
+    /*#__PURE__*/
+    __webpack_require__.n(_blocks_media_text__WEBPACK_IMPORTED_MODULE_3__);
+    /* harmony import */
+
+
+    var _extensions_modules__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ./extensions/modules */
+    "./src/js/gutenberg/extensions/modules/index.js");
+    /* harmony import */
+
+
+    var _extensions_advanced__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ./extensions/advanced */
     "./src/js/gutenberg/extensions/advanced/index.js");
     /* harmony import */
 
 
-    var _extensions_plugins__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _extensions_plugins__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./extensions/plugins */
     "./src/js/gutenberg/extensions/plugins/index.js");
     /* harmony import */
 
 
-    var _extensions_formats___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-    /*! ./extensions/formats/ */
+    var _extensions_formats__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ./extensions/formats */
     "./src/js/gutenberg/extensions/formats/index.js");
 
     function ownKeys(object, enumerableOnly) {
@@ -2880,13 +2961,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var source = arguments[i] != null ? arguments[i] : {};
 
         if (i % 2) {
-          ownKeys(source, true).forEach(function (key) {
+          ownKeys(Object(source), true).forEach(function (key) {
             _defineProperty(target, key, source[key]);
           });
         } else if (Object.getOwnPropertyDescriptors) {
           Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
         } else {
-          ownKeys(source).forEach(function (key) {
+          ownKeys(Object(source)).forEach(function (key) {
             Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
           });
         }
@@ -2989,10 +3070,14 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var hasBlockSupport = wp.blocks.hasBlockSupport;
     var InspectorAdvancedControls = wp.blockEditor.InspectorAdvancedControls;
     var FormTokenField = wp.components.FormTokenField;
+    /**
+     * Enhance Block
+     */
+
     var enhance = compose(withState({
       customClassNames: []
-    }), withSelect(function (selectFn, block) {
-      var selectedBlock = selectFn('core/block-editor').getSelectedBlock();
+    }), withSelect(function (select, block) {
+      var selectedBlock = select('core/block-editor').getSelectedBlock();
       var getClasses = get(selectedBlock, 'attributes.className');
 
       if (getClasses) {
@@ -3007,8 +3092,11 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         }
       }
 
+      var _select$getEditorSett = select('core/editor').getEditorSettings(),
+          customClasses = _select$getEditorSett.wecodeart.customClasses;
+
       return {
-        suggestions: selectFn('core/editor').getEditorSettings().wecodeart.customClasses
+        suggestions: customClasses
       };
     }));
     /**
@@ -3050,10 +3138,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         return wp.element.createElement(BlockEdit, props);
       });
     }, 'withInspectorControl');
+    /**
+     * Apply Filters
+     */
 
     function applyFilters() {
       removeFilter('editor.BlockEdit', 'core/editor/custom-class-name/with-inspector-control');
-      addFilter('editor.BlockEdit', 'wecodeart/editor/custom-class-name/withInspectorControl', withInspectorControl);
+      addFilter('editor.BlockEdit', 'wecodeart/editor/custom-classes/withInspectorControl', withInspectorControl);
     }
 
     applyFilters();
@@ -3061,348 +3152,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/extensions/advanced/index.js":
-  /*!*******************************************************!*\
-    !*** ./src/js/gutenberg/extensions/advanced/index.js ***!
-    \*******************************************************/
-
-  /*! no exports provided */
-
-  /***/
-  function srcJsGutenbergExtensionsAdvancedIndexJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony import */
-
-
-    var _custom_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./custom-classes */
-    "./src/js/gutenberg/extensions/advanced/custom-classes/index.js");
-    /* harmony import */
-
-
-    var _custom_classes__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(_custom_classes__WEBPACK_IMPORTED_MODULE_0__);
-    /* harmony import */
-
-
-    var _visibility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ./visibility */
-    "./src/js/gutenberg/extensions/advanced/visibility/index.js");
-    /* harmony import */
-
-
-    var _with_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ./with-css */
-    "./src/js/gutenberg/extensions/advanced/with-css/index.js");
-    /**
-     * Internal dependencies
-     */
-
-    /***/
-
-  },
-
-  /***/
-  "./src/js/gutenberg/extensions/advanced/visibility/components/index.js":
-  /*!*****************************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/advanced/visibility/components/index.js ***!
-    \*****************************************************************************/
+  "./src/js/gutenberg/extensions/advanced/custom-css/components/editor.js":
+  /*!******************************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/advanced/custom-css/components/editor.js ***!
+    \******************************************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergExtensionsAdvancedVisibilityComponentsIndexJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-
-    function _defineProperty(obj, key, value) {
-      if (key in obj) {
-        Object.defineProperty(obj, key, {
-          value: value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        });
-      } else {
-        obj[key] = value;
-      }
-
-      return obj;
-    }
-    /**
-     * WordPress Dependencies
-     */
-
-
-    var __ = wp.i18n.__;
-    var dispatch = wp.data.dispatch;
-    var Fragment = wp.element.Fragment;
-    var ToggleControl = wp.components.ToggleControl;
-
-    var DevicesOptions = function DevicesOptions(props) {
-      var clientId = props.clientId,
-          attributes = props.attributes,
-          reloadModal = props.reloadModal;
-      var wecodeart = attributes.wecodeart;
-
-      var onSelectDevice = function onSelectDevice(device) {
-        var newValue = !wecodeart[device];
-        delete wecodeart[device];
-        var blockOptions = Object.assign(_defineProperty({}, device, newValue), wecodeart);
-        dispatch('core/block-editor').updateBlockAttributes(clientId, {
-          wecodeart: blockOptions
-        });
-
-        if (reloadModal) {
-          reloadModal();
-        }
-      };
-
-      if (typeof wecodeart === 'undefined') {
-        return;
-      }
-
-      return wp.element.createElement(Fragment, null, wp.element.createElement(ToggleControl, {
-        label: __('Hide on Mobile', 'wecodeart'),
-        checked: typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile,
-        onChange: function onChange() {
-          return onSelectDevice('mobile');
-        }
-      }), wp.element.createElement(ToggleControl, {
-        label: __('Hide on Tablet', 'wecodeart'),
-        checked: typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet,
-        onChange: function onChange() {
-          return onSelectDevice('tablet');
-        }
-      }), wp.element.createElement(ToggleControl, {
-        label: __('Hide on Desktop', 'wecodeart'),
-        checked: typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop,
-        onChange: function onChange() {
-          return onSelectDevice('desktop');
-        }
-      }));
-    };
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = DevicesOptions;
-    /***/
-  },
-
-  /***/
-  "./src/js/gutenberg/extensions/advanced/visibility/index.js":
-  /*!******************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/advanced/visibility/index.js ***!
-    \******************************************************************/
-
-  /*! no exports provided */
-
-  /***/
-  function srcJsGutenbergExtensionsAdvancedVisibilityIndexJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony import */
-
-
-    var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! classnames */
-    "./node_modules/classnames/index.js");
-    /* harmony import */
-
-
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-    /* harmony import */
-
-
-    var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ./components */
-    "./src/js/gutenberg/extensions/advanced/visibility/components/index.js");
-    /* harmony import */
-
-
-    var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ../../attributes */
-    "./src/js/gutenberg/extensions/attributes/index.js");
-    /* harmony import */
-
-
-    var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! ./utils */
-    "./src/js/gutenberg/extensions/advanced/visibility/utils.js");
-    /**
-     * WordPress Dependencies
-     */
-
-
-    var __ = wp.i18n.__;
-    var addFilter = wp.hooks.addFilter;
-    var Fragment = wp.element.Fragment;
-    var InspectorControls = wp.blockEditor.InspectorControls;
-    var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
-    var PanelBody = wp.components.PanelBody;
-    /**
-     * External Dependencies
-     */
-
-    /**
-     * Internal Dependencies
-     */
-
-    /**
-     * Add custom Controls to selected blocks
-     *
-     * @param {Function} BlockEdit Original component.
-     * @return {string} Wrapped component.
-     */
-
-    var withVisibilityControls = createHigherOrderComponent(function (BlockEdit) {
-      return function (props) {
-        var name = props.name,
-            isSelected = props.isSelected,
-            isDisabledDevices = props.isDisabledDevices;
-        return wp.element.createElement(Fragment, null, wp.element.createElement(BlockEdit, props), isSelected && !isDisabledDevices && !_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(name) && wp.element.createElement(InspectorControls, null, wp.element.createElement(PanelBody, {
-          title: __('Visibility', 'wecodeart'),
-          initialOpen: false,
-          className: "wecodeart-panel"
-        }, wp.element.createElement("p", null, wp.element.createElement("small", null, __('Attention: The display settings will only take effect once you are on the live page, and not while you\'re editing in Gutenberg.', 'wecodeart'))), Object(_components__WEBPACK_IMPORTED_MODULE_1__["default"])(props))));
-      };
-    }, 'withAdvancedControls');
-    /**
-     * Override props assigned to save component to inject atttributes
-     *
-     * @param {Object} extraProps Additional props applied to save element.
-     * @param {Object} blockType  Block type.
-     * @param {Object} attributes Current block attributes.
-     *
-     * @return {Object} Filtered props applied to save element.
-     */
-
-    function applyExtraClasses(extraProps, blockType, attributes) {
-      var wecodeart = attributes.wecodeart;
-      var blockName = blockType.name;
-
-      if (!_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(blockName) && typeof wecodeart !== 'undefined') {
-        if (typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile || typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet || typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop) {
-          extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getVisibilityClasses"])(attributes));
-        }
-      }
-
-      return extraProps;
-    }
-
-    function applyFilters() {
-      addFilter('editor.BlockEdit', 'wecodeart/editor/visibility/withVisibilityControls', withVisibilityControls);
-      addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/visibility/applyExtraClass', applyExtraClasses);
-    }
-
-    applyFilters();
-    /***/
-  },
-
-  /***/
-  "./src/js/gutenberg/extensions/advanced/visibility/utils.js":
-  /*!******************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/advanced/visibility/utils.js ***!
-    \******************************************************************/
-
-  /*! exports provided: getVisibilityClasses */
-
-  /***/
-  function srcJsGutenbergExtensionsAdvancedVisibilityUtilsJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "getVisibilityClasses", function () {
-      return getVisibilityClasses;
-    });
-
-    function _toConsumableArray(arr) {
-      return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-    }
-
-    function _nonIterableSpread() {
-      throw new TypeError("Invalid attempt to spread non-iterable instance");
-    }
-
-    function _iterableToArray(iter) {
-      if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-    }
-
-    function _arrayWithoutHoles(arr) {
-      if (Array.isArray(arr)) {
-        for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-          arr2[i] = arr[i];
-        }
-
-        return arr2;
-      }
-    }
-
-    function _defineProperty(obj, key, value) {
-      if (key in obj) {
-        Object.defineProperty(obj, key, {
-          value: value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        });
-      } else {
-        obj[key] = value;
-      }
-
-      return obj;
-    }
-
-    var _lodash = lodash,
-        findIndex = _lodash.findIndex;
-
-    var getVisibilityClasses = function getVisibilityClasses(attributes) {
-      var wecodeart = attributes.wecodeart;
-      var classNames = [_defineProperty({}, wecodeart.id, typeof wecodeart.id !== 'undefined')];
-
-      if (typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile) {
-        classNames = [].concat(_toConsumableArray(classNames), ['d-none', 'd-md-block']);
-      }
-
-      if (typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet) {
-        var index = findIndex(classNames, 'd-md-block');
-        classNames.splice(index, 1);
-        classNames = [].concat(_toConsumableArray(classNames), ['d-md-none', 'd-lg-block']);
-      }
-
-      if (typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop) {
-        var _index = findIndex(classNames, 'd-lg-block');
-
-        classNames.splice(_index, 1);
-        classNames = [].concat(_toConsumableArray(classNames), ['d-lg-none']);
-      }
-
-      return classNames;
-    };
-    /***/
-
-  },
-
-  /***/
-  "./src/js/gutenberg/extensions/advanced/with-css/components/editor.js":
-  /*!****************************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/advanced/with-css/components/editor.js ***!
-    \****************************************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcJsGutenbergExtensionsAdvancedWithCssComponentsEditorJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergExtensionsAdvancedCustomCssComponentsEditorJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -3616,15 +3374,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/extensions/advanced/with-css/index.js":
-  /*!****************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/advanced/with-css/index.js ***!
-    \****************************************************************/
+  "./src/js/gutenberg/extensions/advanced/custom-css/index.js":
+  /*!******************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/advanced/custom-css/index.js ***!
+    \******************************************************************/
 
   /*! no exports provided */
 
   /***/
-  function srcJsGutenbergExtensionsAdvancedWithCssIndexJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergExtensionsAdvancedCustomCssIndexJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -3639,19 +3397,19 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var _components_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! ./components/editor */
-    "./src/js/gutenberg/extensions/advanced/with-css/components/editor.js");
+    "./src/js/gutenberg/extensions/advanced/custom-css/components/editor.js");
     /* harmony import */
 
 
-    var _inject_css_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ./inject-css.js */
-    "./src/js/gutenberg/extensions/advanced/with-css/inject-css.js");
+    var _inject_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./inject-css */
+    "./src/js/gutenberg/extensions/advanced/custom-css/inject-css.js");
     /* harmony import */
 
 
-    var _inject_css_js__WEBPACK_IMPORTED_MODULE_2___default =
+    var _inject_css__WEBPACK_IMPORTED_MODULE_2___default =
     /*#__PURE__*/
-    __webpack_require__.n(_inject_css_js__WEBPACK_IMPORTED_MODULE_2__);
+    __webpack_require__.n(_inject_css__WEBPACK_IMPORTED_MODULE_2__);
     /**
      * WordPress dependencies.
      */
@@ -3684,6 +3442,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
       return settings;
     };
+    /**
+     * Override the default edit UI to include a new block inspector control for
+     * assigning the custom class name, if block supports custom class name.
+     *
+     * @param {Function} BlockEdit Original component.
+     *
+     * @return {string} Wrapped component.
+     */
+
 
     var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
       return function (props) {
@@ -3701,21 +3468,29 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         return wp.element.createElement(BlockEdit, props);
       };
     }, 'withInspectorControl');
-    addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
-    addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl);
+    /**
+     * Apply Filters
+     */
+
+    function applyFilters() {
+      addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
+      addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl);
+    }
+
+    applyFilters();
     /***/
   },
 
   /***/
-  "./src/js/gutenberg/extensions/advanced/with-css/inject-css.js":
-  /*!*********************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/advanced/with-css/inject-css.js ***!
-    \*********************************************************************/
+  "./src/js/gutenberg/extensions/advanced/custom-css/inject-css.js":
+  /*!***********************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/advanced/custom-css/inject-css.js ***!
+    \***********************************************************************/
 
   /*! no static exports found */
 
   /***/
-  function srcJsGutenbergExtensionsAdvancedWithCssInjectCssJs(module, exports) {
+  function srcJsGutenbergExtensionsAdvancedCustomCssInjectCssJs(module, exports) {
     /**
      * WordPress dependencies.
      */
@@ -3786,6 +3561,343 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
+  "./src/js/gutenberg/extensions/advanced/index.js":
+  /*!*******************************************************!*\
+    !*** ./src/js/gutenberg/extensions/advanced/index.js ***!
+    \*******************************************************/
+
+  /*! no exports provided */
+
+  /***/
+  function srcJsGutenbergExtensionsAdvancedIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony import */
+
+
+    var _custom_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./custom-classes */
+    "./src/js/gutenberg/extensions/advanced/custom-classes/index.js");
+    /* harmony import */
+
+
+    var _custom_classes__WEBPACK_IMPORTED_MODULE_0___default =
+    /*#__PURE__*/
+    __webpack_require__.n(_custom_classes__WEBPACK_IMPORTED_MODULE_0__);
+    /* harmony import */
+
+
+    var _custom_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./custom-css */
+    "./src/js/gutenberg/extensions/advanced/custom-css/index.js");
+    /* harmony import */
+
+
+    var _visibility__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./visibility */
+    "./src/js/gutenberg/extensions/advanced/visibility/index.js");
+    /**
+     * Internal dependencies
+     */
+
+    /***/
+
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/advanced/visibility/components/index.js":
+  /*!*****************************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/advanced/visibility/components/index.js ***!
+    \*****************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcJsGutenbergExtensionsAdvancedVisibilityComponentsIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+
+      return obj;
+    }
+    /**
+     * WordPress Dependencies
+     */
+
+
+    var __ = wp.i18n.__;
+    var dispatch = wp.data.dispatch;
+    var Fragment = wp.element.Fragment;
+    var ToggleControl = wp.components.ToggleControl;
+
+    var DevicesOptions = function DevicesOptions(props) {
+      var clientId = props.clientId,
+          attributes = props.attributes,
+          reloadModal = props.reloadModal;
+      var wecodeart = attributes.wecodeart;
+
+      var onSelectDevice = function onSelectDevice(device) {
+        var newValue = !wecodeart[device];
+        delete wecodeart[device];
+        var blockOptions = Object.assign(_defineProperty({}, device, newValue), wecodeart);
+        dispatch('core/block-editor').updateBlockAttributes(clientId, {
+          wecodeart: blockOptions
+        });
+
+        if (reloadModal) {
+          reloadModal();
+        }
+      };
+
+      if (typeof wecodeart === 'undefined') {
+        return;
+      }
+
+      return wp.element.createElement(Fragment, null, wp.element.createElement(ToggleControl, {
+        label: __('Hide on Mobile', 'wecodeart'),
+        checked: typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile,
+        onChange: function onChange() {
+          return onSelectDevice('mobile');
+        }
+      }), wp.element.createElement(ToggleControl, {
+        label: __('Hide on Tablet', 'wecodeart'),
+        checked: typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet,
+        onChange: function onChange() {
+          return onSelectDevice('tablet');
+        }
+      }), wp.element.createElement(ToggleControl, {
+        label: __('Hide on Desktop', 'wecodeart'),
+        checked: typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop,
+        onChange: function onChange() {
+          return onSelectDevice('desktop');
+        }
+      }));
+    };
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = DevicesOptions;
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/advanced/visibility/index.js":
+  /*!******************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/advanced/visibility/index.js ***!
+    \******************************************************************/
+
+  /*! no exports provided */
+
+  /***/
+  function srcJsGutenbergExtensionsAdvancedVisibilityIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony import */
+
+
+    var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! classnames */
+    "./node_modules/classnames/index.js");
+    /* harmony import */
+
+
+    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
+    /*#__PURE__*/
+    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+    /* harmony import */
+
+
+    var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./components */
+    "./src/js/gutenberg/extensions/advanced/visibility/components/index.js");
+    /* harmony import */
+
+
+    var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../../attributes */
+    "./src/js/gutenberg/extensions/attributes/index.js");
+    /* harmony import */
+
+
+    var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./utils */
+    "./src/js/gutenberg/extensions/advanced/visibility/utils.js");
+    /**
+     * WordPress Dependencies
+     */
+
+
+    var __ = wp.i18n.__;
+    var addFilter = wp.hooks.addFilter;
+    var Fragment = wp.element.Fragment;
+    var InspectorControls = wp.blockEditor.InspectorControls;
+    var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
+    var PanelBody = wp.components.PanelBody;
+    /**
+     * External Dependencies
+     */
+
+    /**
+     * Internal Dependencies
+     */
+
+    /**
+     * Add custom Controls to selected blocks
+     *
+     * @param {Function} BlockEdit Original component.
+     * @return {string} Wrapped component.
+     */
+
+    var withVisibilityControls = createHigherOrderComponent(function (BlockEdit) {
+      return function (props) {
+        var name = props.name,
+            isSelected = props.isSelected,
+            isDisabledDevices = props.isDisabledDevices;
+        return wp.element.createElement(Fragment, null, wp.element.createElement(BlockEdit, props), isSelected && !isDisabledDevices && !_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(name) && wp.element.createElement(InspectorControls, null, wp.element.createElement(PanelBody, {
+          title: __('Visibility', 'wecodeart'),
+          initialOpen: false,
+          className: "wecodeart-panel"
+        }, wp.element.createElement("p", null, wp.element.createElement("small", null, __('Attention: The display settings will only take effect once you are on the live page, and not while you\'re editing in Gutenberg.', 'wecodeart'))), Object(_components__WEBPACK_IMPORTED_MODULE_1__["default"])(props))));
+      };
+    }, 'withAdvancedControls');
+    /**
+     * Override props assigned to save component to inject atttributes
+     *
+     * @param {Object} extraProps Additional props applied to save element.
+     * @param {Object} blockType  Block type.
+     * @param {Object} attributes Current block attributes.
+     *
+     * @return {Object} Filtered props applied to save element.
+     */
+
+    function applyExtraClasses(extraProps, blockType, attributes) {
+      var wecodeart = attributes.wecodeart;
+      var blockName = blockType.name;
+
+      if (!_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(blockName) && typeof wecodeart !== 'undefined') {
+        if (typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile || typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet || typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop) {
+          extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getVisibilityClasses"])(attributes));
+        }
+      }
+
+      return extraProps;
+    }
+    /**
+     * Apply Filters
+     */
+
+
+    function applyFilters() {
+      addFilter('editor.BlockEdit', 'wecodeart/editor/visibility/withVisibilityControls', withVisibilityControls);
+      addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/visibility/applyExtraClass', applyExtraClasses);
+    }
+
+    applyFilters();
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/advanced/visibility/utils.js":
+  /*!******************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/advanced/visibility/utils.js ***!
+    \******************************************************************/
+
+  /*! exports provided: getVisibilityClasses */
+
+  /***/
+  function srcJsGutenbergExtensionsAdvancedVisibilityUtilsJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "getVisibilityClasses", function () {
+      return getVisibilityClasses;
+    });
+
+    function _toConsumableArray(arr) {
+      return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+    }
+
+    function _nonIterableSpread() {
+      throw new TypeError("Invalid attempt to spread non-iterable instance");
+    }
+
+    function _iterableToArray(iter) {
+      if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+    }
+
+    function _arrayWithoutHoles(arr) {
+      if (Array.isArray(arr)) {
+        for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+          arr2[i] = arr[i];
+        }
+
+        return arr2;
+      }
+    }
+
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+
+      return obj;
+    }
+
+    var _lodash = lodash,
+        findIndex = _lodash.findIndex;
+
+    var getVisibilityClasses = function getVisibilityClasses(attributes) {
+      var wecodeart = attributes.wecodeart;
+      var classNames = [_defineProperty({}, wecodeart.id, typeof wecodeart.id !== 'undefined')];
+
+      if (typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile) {
+        classNames = [].concat(_toConsumableArray(classNames), ['d-none', 'd-md-block']);
+      }
+
+      if (typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet) {
+        var index = findIndex(classNames, 'd-md-block');
+        classNames.splice(index, 1);
+        classNames = [].concat(_toConsumableArray(classNames), ['d-md-none', 'd-lg-block']);
+      }
+
+      if (typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop) {
+        var _index = findIndex(classNames, 'd-lg-block');
+
+        classNames.splice(_index, 1);
+        classNames = [].concat(_toConsumableArray(classNames), ['d-lg-none']);
+      }
+
+      return classNames;
+    };
+    /***/
+
+  },
+
+  /***/
   "./src/js/gutenberg/extensions/attributes/index.js":
   /*!*********************************************************!*\
     !*** ./src/js/gutenberg/extensions/attributes/index.js ***!
@@ -3831,9 +3943,9 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var _components_background__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./../../components/background */
-    "./src/js/gutenberg/components/background/index.js");
+    var _controls_background__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./../../controls/background */
+    "./src/js/gutenberg/controls/background/index.js");
     /**
      * WordPress Dependencies
      */
@@ -3920,7 +4032,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
           settings.supports = Object.assign(settings.supports, {
             hasBackground: true
           });
-          settings.attributes = Object.assign(settings.attributes, _components_background__WEBPACK_IMPORTED_MODULE_0__["BackgroundAttributes"]);
+          settings.attributes = Object.assign(settings.attributes, _controls_background__WEBPACK_IMPORTED_MODULE_0__["BackgroundAttributes"]);
         } // Columns Container
 
 
@@ -3993,743 +4105,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * Exports
      */
 
-    /***/
-  },
-
-  /***/
-  "./src/js/gutenberg/extensions/block-panel/index.js":
-  /*!**********************************************************!*\
-    !*** ./src/js/gutenberg/extensions/block-panel/index.js ***!
-    \**********************************************************/
-
-  /*! no exports provided */
-
-  /***/
-  function srcJsGutenbergExtensionsBlockPanelIndexJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony import */
-
-
-    var _with_text__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./with-text */
-    "./src/js/gutenberg/extensions/block-panel/with-text/index.js");
-    /* harmony import */
-
-
-    var _with_background__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ./with-background */
-    "./src/js/gutenberg/extensions/block-panel/with-background/index.js");
-    /**
-     * Internal dependencies
-     */
-
-    /***/
-
-  },
-
-  /***/
-  "./src/js/gutenberg/extensions/block-panel/with-background/index.js":
-  /*!**************************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/block-panel/with-background/index.js ***!
-    \**************************************************************************/
-
-  /*! no exports provided */
-
-  /***/
-  function srcJsGutenbergExtensionsBlockPanelWithBackgroundIndexJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony import */
-
-
-    var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! classnames */
-    "./node_modules/classnames/index.js");
-    /* harmony import */
-
-
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-    /* harmony import */
-
-
-    var _components_background__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ../../../components/background */
-    "./src/js/gutenberg/components/background/index.js");
-    /* harmony import */
-
-
-    var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ../../attributes */
-    "./src/js/gutenberg/extensions/attributes/index.js");
-
-    function _extends() {
-      _extends = Object.assign || function (target) {
-        for (var i = 1; i < arguments.length; i++) {
-          var source = arguments[i];
-
-          for (var key in source) {
-            if (Object.prototype.hasOwnProperty.call(source, key)) {
-              target[key] = source[key];
-            }
-          }
-        }
-
-        return target;
-      };
-
-      return _extends.apply(this, arguments);
-    }
-
-    function ownKeys(object, enumerableOnly) {
-      var keys = Object.keys(object);
-
-      if (Object.getOwnPropertySymbols) {
-        var symbols = Object.getOwnPropertySymbols(object);
-        if (enumerableOnly) symbols = symbols.filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        });
-        keys.push.apply(keys, symbols);
-      }
-
-      return keys;
-    }
-
-    function _objectSpread(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i] != null ? arguments[i] : {};
-
-        if (i % 2) {
-          ownKeys(source, true).forEach(function (key) {
-            _defineProperty(target, key, source[key]);
-          });
-        } else if (Object.getOwnPropertyDescriptors) {
-          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-        } else {
-          ownKeys(source).forEach(function (key) {
-            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-          });
-        }
-      }
-
-      return target;
-    }
-
-    function _defineProperty(obj, key, value) {
-      if (key in obj) {
-        Object.defineProperty(obj, key, {
-          value: value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        });
-      } else {
-        obj[key] = value;
-      }
-
-      return obj;
-    }
-
-    function _objectWithoutProperties(source, excluded) {
-      if (source == null) return {};
-
-      var target = _objectWithoutPropertiesLoose(source, excluded);
-
-      var key, i;
-
-      if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-        for (i = 0; i < sourceSymbolKeys.length; i++) {
-          key = sourceSymbolKeys[i];
-          if (excluded.indexOf(key) >= 0) continue;
-          if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-          target[key] = source[key];
-        }
-      }
-
-      return target;
-    }
-
-    function _objectWithoutPropertiesLoose(source, excluded) {
-      if (source == null) return {};
-      var target = {};
-      var sourceKeys = Object.keys(source);
-      var key, i;
-
-      for (i = 0; i < sourceKeys.length; i++) {
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-      }
-
-      return target;
-    }
-    /**
-     * External Dependencies
-     */
-
-    /**
-     * WordPress dependencies.
-     */
-
-
-    var _lodash = lodash,
-        find = _lodash.find;
-    var __ = wp.i18n.__;
-    var hasBlockSupport = wp.blocks.hasBlockSupport;
-    var _wp$blockEditor = wp.blockEditor,
-        BlockControls = _wp$blockEditor.BlockControls,
-        InspectorControls = _wp$blockEditor.InspectorControls,
-        withColors = _wp$blockEditor.withColors;
-    var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
-    var compose = wp.compose.compose;
-    var withSelect = wp.data.withSelect;
-    var Fragment = wp.element.Fragment;
-    var withFallbackStyles = wp.components.withFallbackStyles;
-    var addFilter = wp.hooks.addFilter;
-    /**
-     * Internal dependencies.
-     */
-
-    /**
-     * Override the default block element to add Font Panels.
-     *
-     * @param  {Function} BlockListBlock Original component
-     * @return {Function} Wrapped component
-     */
-
-    var enhance = compose(withSelect(function (select) {
-      return {
-        selected: select('core/block-editor').getSelectedBlock(),
-        select: select
-      };
-    }), withColors('backgroundColor'), withFallbackStyles(function (node, ownProps) {
-      var _ownProps$attributes = ownProps.attributes,
-          backgroundColor = _ownProps$attributes.backgroundColor,
-          customBackgroundColor = _ownProps$attributes.customBackgroundColor;
-      var editableNode = node.querySelector('[contenteditable="true"]');
-      var computedStyles = editableNode ? getComputedStyle(editableNode) : null;
-      return {
-        fallbackBackgroundColor: backgroundColor || customBackgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor
-      };
-    }));
-    /**
-     * Add custom WeCodeArt attributes to selected blocks
-     *
-     * @param {Function} BlockListBlock Original component.
-     * @return {string} Wrapped component.
-     */
-
-    var withBackgroundSettings = createHigherOrderComponent(function (BlockListBlock) {
-      return enhance(function (_ref) {
-        var select = _ref.select,
-            props = _objectWithoutProperties(_ref, ["select"]);
-
-        var customData = {};
-        var wrapperProps = props.wrapperProps;
-        var blockName = select('core/block-editor').getBlockName(props.clientId);
-
-        if (!_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(blockName) && hasBlockSupport(blockName, 'hasBackground')) {
-          var _select$getBlock = select('core/block-editor').getBlock(props.clientId),
-              attributes = _select$getBlock.attributes;
-
-          var _select$getSettings = select('core/block-editor').getSettings(),
-              colors = _select$getSettings.colors;
-
-          props.colors = colors;
-          var backgroundImg = attributes.backgroundImg;
-
-          if (backgroundImg !== '') {
-            customData = _objectSpread({}, customData, {}, {
-              'data-wca-background': 1
-            });
-          }
-
-          wrapperProps = _objectSpread({}, wrapperProps, {
-            style: Object(_components_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundStyles"])(attributes, props)
-          }, customData);
-        }
-
-        return wp.element.createElement(BlockListBlock, _extends({}, props, {
-          wrapperProps: wrapperProps
-        }));
-      });
-    }, 'withBackgroundSettings');
-    /**
-     * BG Controls
-     *
-     * @param {Function} BlockEdit Original component.
-     * @return {string} Wrapped component.
-     */
-
-    var withBackgroundControls = createHigherOrderComponent(function (BlockEdit) {
-      return enhance(function (props) {
-        var blockName = props.name,
-            isSelected = props.isSelected;
-
-        if (!_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(blockName) && hasBlockSupport(blockName, 'hasBackground') && isSelected) {
-          return wp.element.createElement(Fragment, null, wp.element.createElement(BlockEdit, props), wp.element.createElement(BlockControls, null, Object(_components_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundControls"])(props)), wp.element.createElement(InspectorControls, null, wp.element.createElement(_components_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundPanel"], _extends({}, props, {
-            hasOverlay: true
-          }))));
-        }
-
-        return wp.element.createElement(BlockEdit, props);
-      });
-    }, 'withBackgroundControls');
-    /**
-     * Override props assigned to save component to inject atttributes
-     *
-     * @param {Object} extraProps Additional props applied to save element.
-     * @param {Object} blockType  Block type.
-     * @param {Object} attributes Current block attributes.
-     *
-     * @return {Object} Filtered props applied to save element.
-     */
-
-    function applyExtraSettings(extraProps, blockType, attributes) {
-      if (!_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(blockType.name) && hasBlockSupport(blockType.name, 'hasBackground')) {
-        extraProps.style = Object(_components_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundStyles"])(attributes, {});
-        extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, Object(_components_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundClasses"])(attributes));
-      }
-
-      return extraProps;
-    }
-
-    function applyFilters() {
-      addFilter('editor.BlockEdit', 'wecodeart/editor/with-background/withBackgroundControls', withBackgroundControls);
-      addFilter('editor.BlockListBlock', 'wecodeart/editor/with-background/withBackgroundSettings', withBackgroundSettings);
-      addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/with-background/applyExtraSettings', applyExtraSettings);
-    }
-
-    applyFilters();
-    /***/
-  },
-
-  /***/
-  "./src/js/gutenberg/extensions/block-panel/with-text/applyStyle.js":
-  /*!*************************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/block-panel/with-text/applyStyle.js ***!
-    \*************************************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcJsGutenbergExtensionsBlockPanelWithTextApplyStyleJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "default", function () {
-      return applyStyle;
-    });
-    /**
-     * WordPress Dependencies
-     */
-
-
-    var _lodash = lodash,
-        find = _lodash.find;
-    /**
-     * Apply Fonts CSS styles
-     */
-
-    function applyStyle(attributes, blockName) {
-      var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      var fontSizes = props.fontSizes,
-          colors = props.colors;
-      var textColor = attributes.textColor,
-          customTextColor = attributes.customTextColor,
-          fontSize = attributes.fontSize,
-          customFontSize = attributes.customFontSize;
-      var style = {};
-
-      if (typeof fontSize !== 'undefined') {
-        var fontSizeObject = find(fontSizes, {
-          slug: fontSize
-        });
-
-        if (typeof fontSizeObject !== 'undefined' && typeof fontSizeObject.size !== 'undefined') {
-          style.fontSize = fontSizeObject.size + 'px';
-        }
-      } else if (typeof customFontSize !== 'undefined') {
-        style.fontSize = customFontSize + 'px';
-      }
-
-      if (typeof textColor !== 'undefined') {
-        if (typeof colors !== 'undefined') {
-          var textColorValue = find(colors, {
-            slug: textColor
-          });
-
-          if (typeof textColorValue !== 'undefined' && typeof textColorValue.color !== 'undefined') {
-            style.color = textColorValue.color;
-          }
-        }
-      } else if (typeof customTextColor !== 'undefined') {
-        style.color = customTextColor;
-      }
-
-      return style;
-    }
-    /***/
-
-  },
-
-  /***/
-  "./src/js/gutenberg/extensions/block-panel/with-text/index.js":
-  /*!********************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/block-panel/with-text/index.js ***!
-    \********************************************************************/
-
-  /*! no exports provided */
-
-  /***/
-  function srcJsGutenbergExtensionsBlockPanelWithTextIndexJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony import */
-
-
-    var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! classnames */
-    "./node_modules/classnames/index.js");
-    /* harmony import */
-
-
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-    /* harmony import */
-
-
-    var _applyStyle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ./applyStyle */
-    "./src/js/gutenberg/extensions/block-panel/with-text/applyStyle.js");
-    /* harmony import */
-
-
-    var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ../../attributes */
-    "./src/js/gutenberg/extensions/attributes/index.js");
-
-    function _extends() {
-      _extends = Object.assign || function (target) {
-        for (var i = 1; i < arguments.length; i++) {
-          var source = arguments[i];
-
-          for (var key in source) {
-            if (Object.prototype.hasOwnProperty.call(source, key)) {
-              target[key] = source[key];
-            }
-          }
-        }
-
-        return target;
-      };
-
-      return _extends.apply(this, arguments);
-    }
-
-    function ownKeys(object, enumerableOnly) {
-      var keys = Object.keys(object);
-
-      if (Object.getOwnPropertySymbols) {
-        var symbols = Object.getOwnPropertySymbols(object);
-        if (enumerableOnly) symbols = symbols.filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        });
-        keys.push.apply(keys, symbols);
-      }
-
-      return keys;
-    }
-
-    function _objectSpread(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i] != null ? arguments[i] : {};
-
-        if (i % 2) {
-          ownKeys(source, true).forEach(function (key) {
-            _defineProperty(target, key, source[key]);
-          });
-        } else if (Object.getOwnPropertyDescriptors) {
-          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-        } else {
-          ownKeys(source).forEach(function (key) {
-            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-          });
-        }
-      }
-
-      return target;
-    }
-
-    function _defineProperty(obj, key, value) {
-      if (key in obj) {
-        Object.defineProperty(obj, key, {
-          value: value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        });
-      } else {
-        obj[key] = value;
-      }
-
-      return obj;
-    }
-
-    function _objectWithoutProperties(source, excluded) {
-      if (source == null) return {};
-
-      var target = _objectWithoutPropertiesLoose(source, excluded);
-
-      var key, i;
-
-      if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-        for (i = 0; i < sourceSymbolKeys.length; i++) {
-          key = sourceSymbolKeys[i];
-          if (excluded.indexOf(key) >= 0) continue;
-          if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-          target[key] = source[key];
-        }
-      }
-
-      return target;
-    }
-
-    function _objectWithoutPropertiesLoose(source, excluded) {
-      if (source == null) return {};
-      var target = {};
-      var sourceKeys = Object.keys(source);
-      var key, i;
-
-      for (i = 0; i < sourceKeys.length; i++) {
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-      }
-
-      return target;
-    }
-    /**
-     * External Dependencies
-     */
-
-    /**
-     * WordPress Dependencies
-     */
-
-
-    var _lodash = lodash,
-        assign = _lodash.assign;
-    var __ = wp.i18n.__;
-    var withSelect = wp.data.withSelect;
-    var Fragment = wp.element.Fragment;
-    var _wp$blockEditor = wp.blockEditor,
-        InspectorControls = _wp$blockEditor.InspectorControls,
-        FontSizePicker = _wp$blockEditor.FontSizePicker,
-        withFontSizes = _wp$blockEditor.withFontSizes,
-        withColors = _wp$blockEditor.withColors,
-        PanelColorSettings = _wp$blockEditor.PanelColorSettings;
-    var _wp$components = wp.components,
-        PanelBody = _wp$components.PanelBody,
-        withFallbackStyles = _wp$components.withFallbackStyles;
-    var addFilter = wp.hooks.addFilter;
-    var _wp$compose = wp.compose,
-        compose = _wp$compose.compose,
-        createHigherOrderComponent = _wp$compose.createHigherOrderComponent;
-    /**
-     * Internal Dependencies
-     */
-
-    /**
-     * Override the default block element to add Font Panels.
-     *
-     * @param  {Function} BlockListBlock Original component
-     * @return {Function} Wrapped component
-     */
-
-    var WithTextControls = compose([withSelect(function (select) {
-      return {
-        propDemo: true
-      };
-    }), withColors({
-      textColor: 'color'
-    }), withFontSizes('fontSize'), withFallbackStyles(function (node, ownProps) {
-      var _ownProps$attributes = ownProps.attributes,
-          fontSize = _ownProps$attributes.fontSize,
-          customFontSize = _ownProps$attributes.customFontSize,
-          textColor = _ownProps$attributes.textColor;
-      var editableNode = node.querySelector('[contenteditable="true"]');
-      var computedStyles = editableNode ? getComputedStyle(editableNode) : null;
-      return {
-        fallbackTextColor: textColor || !computedStyles ? undefined : computedStyles.color,
-        fallbackFontSize: fontSize || customFontSize || !computedStyles ? undefined : parseInt(computedStyles.fontSize) || undefined
-      };
-    })])(function (props) {
-      var fallbackFontSize = props.fallbackFontSize,
-          fontSize = props.fontSize,
-          setFontSize = props.setFontSize,
-          textColor = props.textColor,
-          setTextColor = props.setTextColor;
-      return wp.element.createElement(InspectorControls, null, wp.element.createElement(PanelBody, {
-        title: __('Text Settings', 'wecodeart'),
-        initialOpen: false,
-        className: "wecodeart-panel"
-      }, wp.element.createElement(FontSizePicker, {
-        fallbackFontSize: fallbackFontSize,
-        value: fontSize.size,
-        onChange: setFontSize
-      })), wp.element.createElement(PanelColorSettings, {
-        title: __('Color Settings', 'wecodeart'),
-        initialOpen: false,
-        colorSettings: [{
-          value: textColor.color,
-          onChange: setTextColor,
-          label: __('Text Color', 'wecodeart')
-        }]
-      }));
-    });
-    /**
-     * Override the default block element to add wrapper props.
-     *
-     * @param  {Function} BlockListBlock Original component
-     * @return {Function} Wrapped component
-     */
-
-    var enhance = compose(
-    /**
-     * For blocks whose block type doesn't support `multiple`, provides the
-     * wrapped component with `originalBlockClientId` -- a reference to the
-     * first block of the same type in the content -- if and only if that
-     * "original" block is not the current one. Thus, an inexisting
-     * `originalBlockClientId` prop signals that the block is valid.
-     *
-     */
-    withSelect(function (select) {
-      var _select$getSettings = select('core/block-editor').getSettings(),
-          fontSizes = _select$getSettings.fontSizes,
-          colors = _select$getSettings.colors;
-
-      return {
-        selected: select('core/block-editor').getSelectedBlock(),
-        fontSizes: fontSizes,
-        select: select,
-        colors: colors
-      };
-    }));
-    /**
-     * Add custom WeCodeArt attributes to selected blocks
-     *
-     * @param {Function} BlockListBlock Original component.
-     * @return {string} Wrapped component.
-     */
-
-    var withTextSettings = createHigherOrderComponent(function (BlockListBlock) {
-      return enhance(function (_ref) {
-        var select = _ref.select,
-            props = _objectWithoutProperties(_ref, ["select"]);
-
-        var wrapperProps = props.wrapperProps;
-        var customData = {};
-        var attributes = select('core/block-editor').getBlock(props.clientId).attributes;
-        var blockName = select('core/block-editor').getBlockName(props.clientId);
-
-        if (_attributes__WEBPACK_IMPORTED_MODULE_2__["blocksWithFontSize"].includes(blockName)) {
-          var customFontSize = attributes.customFontSize,
-              fontSize = attributes.fontSize;
-
-          if (customFontSize || fontSize) {
-            customData = assign(customData, {
-              'data-custom-fontsize': 1
-            });
-          }
-
-          wrapperProps = _objectSpread({}, wrapperProps, {
-            style: Object(_applyStyle__WEBPACK_IMPORTED_MODULE_1__["default"])(attributes, blockName, props)
-          }, customData);
-        }
-
-        return wp.element.createElement(BlockListBlock, _extends({}, props, {
-          wrapperProps: wrapperProps
-        }));
-      });
-    }, 'withTextSettings');
-    /**
-     * Add custom WeCodeArt attributes to selected blocks
-     *
-     * @param {Function} BlockEdit Original component.
-     * @return {string} Wrapped component.
-     */
-
-    var withBlockPanel = createHigherOrderComponent(function (BlockEdit) {
-      return enhance(function (_ref2) {
-        var props = _extends({}, _ref2);
-
-        var name = props.name,
-            isSelected = props.isSelected;
-
-        if (isSelected && _attributes__WEBPACK_IMPORTED_MODULE_2__["blocksWithFontSize"].includes(name)) {
-          return wp.element.createElement(Fragment, null, wp.element.createElement(BlockEdit, props), wp.element.createElement(WithTextControls, props));
-        }
-
-        return wp.element.createElement(BlockEdit, props);
-      });
-    }, 'withBlockPanel');
-    /**
-     * Override props assigned to save component to inject atttributes
-     *
-     * @param {Object} extraProps Additional props applied to save element.
-     * @param {Object} blockType  Block type.
-     * @param {Object} attributes Current block attributes.
-     *
-     * @return {Object} Filtered props applied to save element.
-     */
-
-    function applyTextSettings(extraProps, blockType, attributes) {
-      if (_attributes__WEBPACK_IMPORTED_MODULE_2__["blocksWithFontSize"].includes(blockType.name)) {
-        if (typeof extraProps.style !== 'undefined') {
-          extraProps.style = assign(extraProps.style, Object(_applyStyle__WEBPACK_IMPORTED_MODULE_1__["default"])(attributes, blockType.name));
-        } else {
-          extraProps.style = Object(_applyStyle__WEBPACK_IMPORTED_MODULE_1__["default"])(attributes, blockType.name);
-        }
-
-        var customFontSize = attributes.customFontSize,
-            fontSize = attributes.fontSize,
-            textColor = attributes.textColor;
-
-        if (fontSize) {
-          extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, 'has-' + fontSize + '-font-size');
-        } else if (customFontSize) {
-          extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, 'has-custom-size');
-        }
-
-        if (textColor) {
-          extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, 'has-' + textColor + '-color');
-        }
-      }
-
-      return extraProps;
-    }
-
-    function applyFilters() {
-      addFilter('editor.BlockEdit', 'wecodeart/editor/with-text/withBlockPanel', withBlockPanel);
-      addFilter('editor.BlockListBlock', 'wecodeart/editor/with-text/withTextSettings', withTextSettings);
-      addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/with-text/applyTextSettings', applyTextSettings);
-    }
-
-    applyFilters();
     /***/
   },
 
@@ -5432,13 +4807,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var source = arguments[i] != null ? arguments[i] : {};
 
         if (i % 2) {
-          ownKeys(source, true).forEach(function (key) {
+          ownKeys(Object(source), true).forEach(function (key) {
             _defineProperty(target, key, source[key]);
           });
         } else if (Object.getOwnPropertyDescriptors) {
           Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
         } else {
-          ownKeys(source).forEach(function (key) {
+          ownKeys(Object(source)).forEach(function (key) {
             Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
           });
         }
@@ -6087,13 +5462,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var source = arguments[i] != null ? arguments[i] : {};
 
         if (i % 2) {
-          ownKeys(source, true).forEach(function (key) {
+          ownKeys(Object(source), true).forEach(function (key) {
             _defineProperty(target, key, source[key]);
           });
         } else if (Object.getOwnPropertyDescriptors) {
           Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
         } else {
-          ownKeys(source).forEach(function (key) {
+          ownKeys(Object(source)).forEach(function (key) {
             Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
           });
         }
@@ -6869,6 +6244,710 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
+  "./src/js/gutenberg/extensions/modules/index.js":
+  /*!******************************************************!*\
+    !*** ./src/js/gutenberg/extensions/modules/index.js ***!
+    \******************************************************/
+
+  /*! no exports provided */
+
+  /***/
+  function srcJsGutenbergExtensionsModulesIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony import */
+
+
+    var _with_text__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./with-text */
+    "./src/js/gutenberg/extensions/modules/with-text/index.js");
+    /* harmony import */
+
+
+    var _with_background__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./with-background */
+    "./src/js/gutenberg/extensions/modules/with-background/index.js");
+    /**
+     * Internal dependencies
+     */
+
+    /***/
+
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/modules/with-background/index.js":
+  /*!**********************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/modules/with-background/index.js ***!
+    \**********************************************************************/
+
+  /*! no exports provided */
+
+  /***/
+  function srcJsGutenbergExtensionsModulesWithBackgroundIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony import */
+
+
+    var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! classnames */
+    "./node_modules/classnames/index.js");
+    /* harmony import */
+
+
+    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
+    /*#__PURE__*/
+    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+    /* harmony import */
+
+
+    var _controls_background__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ../../../controls/background */
+    "./src/js/gutenberg/controls/background/index.js");
+    /* harmony import */
+
+
+    var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../../attributes */
+    "./src/js/gutenberg/extensions/attributes/index.js");
+
+    function ownKeys(object, enumerableOnly) {
+      var keys = Object.keys(object);
+
+      if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+        keys.push.apply(keys, symbols);
+      }
+
+      return keys;
+    }
+
+    function _objectSpread(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i] != null ? arguments[i] : {};
+
+        if (i % 2) {
+          ownKeys(Object(source), true).forEach(function (key) {
+            _defineProperty(target, key, source[key]);
+          });
+        } else if (Object.getOwnPropertyDescriptors) {
+          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+        } else {
+          ownKeys(Object(source)).forEach(function (key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+          });
+        }
+      }
+
+      return target;
+    }
+
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+
+      return obj;
+    }
+
+    function _extends() {
+      _extends = Object.assign || function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+          var source = arguments[i];
+
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+
+        return target;
+      };
+
+      return _extends.apply(this, arguments);
+    }
+    /**
+     * WordPress dependencies.
+     */
+
+
+    var hasBlockSupport = wp.blocks.hasBlockSupport;
+    var _wp$blockEditor = wp.blockEditor,
+        BlockControls = _wp$blockEditor.BlockControls,
+        InspectorControls = _wp$blockEditor.InspectorControls,
+        withColors = _wp$blockEditor.withColors;
+    var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
+    var compose = wp.compose.compose;
+    var _wp$data = wp.data,
+        select = _wp$data.select,
+        withSelect = _wp$data.withSelect;
+    var Fragment = wp.element.Fragment;
+    var withFallbackStyles = wp.components.withFallbackStyles;
+    var addFilter = wp.hooks.addFilter;
+    /**
+     * External Dependencies
+     */
+
+    /**
+     * Internal dependencies.
+     */
+
+    /**
+     * Override the default block element to add Font Panels.
+     *
+     * @param  {Function} BlockListBlock Original component
+     * @return {Function} Wrapped component
+     */
+
+    var enhance = compose([withSelect(function (select) {
+      return {
+        selected: select('core/block-editor').getSelectedBlock(),
+        select: select
+      };
+    }), withColors('backgroundColor'), withFallbackStyles(function (node, ownProps) {
+      var _ownProps$attributes = ownProps.attributes,
+          backgroundColor = _ownProps$attributes.backgroundColor,
+          customBackgroundColor = _ownProps$attributes.customBackgroundColor;
+      var editableNode = node.querySelector('[contenteditable="true"]');
+      var computedStyles = editableNode ? getComputedStyle(editableNode) : null;
+      return {
+        fallbackBackgroundColor: backgroundColor || customBackgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor
+      };
+    })]);
+    /**
+     * BG Controls
+     *
+     * @param {Function} BlockEdit Original component.
+     * @return {string} Wrapped component.
+     */
+
+    var withBackgroundControls = createHigherOrderComponent(function (BlockEdit) {
+      return enhance(function (props) {
+        var blockName = props.name,
+            isSelected = props.isSelected;
+
+        if (!_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(blockName) && hasBlockSupport(blockName, 'hasBackground') && isSelected) {
+          return wp.element.createElement(Fragment, null, wp.element.createElement(BlockEdit, props), wp.element.createElement(BlockControls, null, Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundControls"])(props)), wp.element.createElement(InspectorControls, null, wp.element.createElement(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundPanel"], _extends({}, props, {
+            hasOverlay: true
+          }))));
+        }
+
+        return wp.element.createElement(BlockEdit, props);
+      });
+    }, 'withBackgroundControls');
+    /**
+     * Add custom WeCodeArt attributes to selected blocks
+     *
+     * @param {Function} BlockListBlock Original component.
+     * @return {string} Wrapped component.
+     */
+
+    var withBackgroundSettings = createHigherOrderComponent(function (BlockListBlock) {
+      return function (props) {
+        var blockName = props.name,
+            wrapperProps = props.wrapperProps;
+        var customData = {};
+
+        if (!_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(blockName) && hasBlockSupport(blockName, 'hasBackground')) {
+          var attributes = props.attributes;
+
+          var _select$getSettings = select('core/block-editor').getSettings(),
+              colors = _select$getSettings.colors;
+
+          var backgroundImg = attributes.backgroundImg;
+
+          if (backgroundImg !== '') {
+            customData = _objectSpread({}, customData, {}, {
+              'data-wca-background': 1
+            });
+          }
+
+          wrapperProps = _objectSpread({}, wrapperProps, {
+            style: Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundStyles"])(attributes, colors)
+          }, customData);
+        }
+
+        return wp.element.createElement(BlockListBlock, _extends({}, props, {
+          wrapperProps: wrapperProps
+        }));
+      };
+    }, 'withBackgroundSettings');
+    /**
+     * Override props assigned to save component to inject atttributes
+     *
+     * @param {Object} extraProps Additional props applied to save element.
+     * @param {Object} blockType  Block type.
+     * @param {Object} attributes Current block attributes.
+     *
+     * @return {Object} Filtered props applied to save element.
+     */
+
+    function applyExtraSettings(extraProps, blockType, attributes) {
+      var blockName = blockType.name;
+
+      if (!_attributes__WEBPACK_IMPORTED_MODULE_2__["restrictedBlocks"].includes(blockName) && hasBlockSupport(blockName, 'hasBackground')) {
+        extraProps.style = Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundStyles"])(attributes, {});
+        extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundClasses"])(attributes));
+      }
+
+      return extraProps;
+    }
+    /**
+     * Apply Filters
+     */
+
+
+    function applyFilters() {
+      addFilter('editor.BlockEdit', 'wecodeart/editor/with-background/withBackgroundControls', withBackgroundControls);
+      addFilter('editor.BlockListBlock', 'wecodeart/editor/with-background/withBackgroundSettings', withBackgroundSettings);
+      addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/with-background/applyExtraSettings', applyExtraSettings);
+    }
+
+    applyFilters();
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/modules/with-text/applyStyle.js":
+  /*!*********************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/modules/with-text/applyStyle.js ***!
+    \*********************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcJsGutenbergExtensionsModulesWithTextApplyStyleJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "default", function () {
+      return applyStyle;
+    });
+    /**
+     * WordPress Dependencies
+     */
+
+
+    var _lodash = lodash,
+        find = _lodash.find;
+    /**
+     * Apply Fonts CSS styles
+     */
+
+    function applyStyle(attributes, blockName) {
+      var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var fontSizes = props.fontSizes,
+          colors = props.colors;
+      var textColor = attributes.textColor,
+          customTextColor = attributes.customTextColor,
+          fontSize = attributes.fontSize,
+          customFontSize = attributes.customFontSize;
+      var style = {};
+
+      if (typeof fontSize !== 'undefined') {
+        var fontSizeObject = find(fontSizes, {
+          slug: fontSize
+        });
+
+        if (typeof fontSizeObject !== 'undefined' && typeof fontSizeObject.size !== 'undefined') {
+          style.fontSize = fontSizeObject.size + 'px';
+        }
+      } else if (typeof customFontSize !== 'undefined') {
+        style.fontSize = customFontSize + 'px';
+      }
+
+      if (typeof textColor !== 'undefined') {
+        if (typeof colors !== 'undefined') {
+          var textColorValue = find(colors, {
+            slug: textColor
+          });
+
+          if (typeof textColorValue !== 'undefined' && typeof textColorValue.color !== 'undefined') {
+            style.color = textColorValue.color;
+          }
+        }
+      } else if (typeof customTextColor !== 'undefined') {
+        style.color = customTextColor;
+      }
+
+      return style;
+    }
+    /***/
+
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/modules/with-text/index.js":
+  /*!****************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/modules/with-text/index.js ***!
+    \****************************************************************/
+
+  /*! no exports provided */
+
+  /***/
+  function srcJsGutenbergExtensionsModulesWithTextIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony import */
+
+
+    var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! classnames */
+    "./node_modules/classnames/index.js");
+    /* harmony import */
+
+
+    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
+    /*#__PURE__*/
+    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+    /* harmony import */
+
+
+    var _applyStyle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./applyStyle */
+    "./src/js/gutenberg/extensions/modules/with-text/applyStyle.js");
+    /* harmony import */
+
+
+    var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../../attributes */
+    "./src/js/gutenberg/extensions/attributes/index.js");
+
+    function _extends() {
+      _extends = Object.assign || function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+          var source = arguments[i];
+
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+
+        return target;
+      };
+
+      return _extends.apply(this, arguments);
+    }
+
+    function ownKeys(object, enumerableOnly) {
+      var keys = Object.keys(object);
+
+      if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+        keys.push.apply(keys, symbols);
+      }
+
+      return keys;
+    }
+
+    function _objectSpread(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i] != null ? arguments[i] : {};
+
+        if (i % 2) {
+          ownKeys(Object(source), true).forEach(function (key) {
+            _defineProperty(target, key, source[key]);
+          });
+        } else if (Object.getOwnPropertyDescriptors) {
+          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+        } else {
+          ownKeys(Object(source)).forEach(function (key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+          });
+        }
+      }
+
+      return target;
+    }
+
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+
+      return obj;
+    }
+
+    function _objectWithoutProperties(source, excluded) {
+      if (source == null) return {};
+
+      var target = _objectWithoutPropertiesLoose(source, excluded);
+
+      var key, i;
+
+      if (Object.getOwnPropertySymbols) {
+        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+        for (i = 0; i < sourceSymbolKeys.length; i++) {
+          key = sourceSymbolKeys[i];
+          if (excluded.indexOf(key) >= 0) continue;
+          if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+          target[key] = source[key];
+        }
+      }
+
+      return target;
+    }
+
+    function _objectWithoutPropertiesLoose(source, excluded) {
+      if (source == null) return {};
+      var target = {};
+      var sourceKeys = Object.keys(source);
+      var key, i;
+
+      for (i = 0; i < sourceKeys.length; i++) {
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+      }
+
+      return target;
+    }
+    /**
+     * External Dependencies
+     */
+
+    /**
+     * WordPress Dependencies
+     */
+
+
+    var _lodash = lodash,
+        assign = _lodash.assign;
+    var __ = wp.i18n.__;
+    var withSelect = wp.data.withSelect;
+    var Fragment = wp.element.Fragment;
+    var _wp$blockEditor = wp.blockEditor,
+        InspectorControls = _wp$blockEditor.InspectorControls,
+        FontSizePicker = _wp$blockEditor.FontSizePicker,
+        withFontSizes = _wp$blockEditor.withFontSizes,
+        withColors = _wp$blockEditor.withColors,
+        PanelColorSettings = _wp$blockEditor.PanelColorSettings;
+    var _wp$components = wp.components,
+        PanelBody = _wp$components.PanelBody,
+        withFallbackStyles = _wp$components.withFallbackStyles;
+    var addFilter = wp.hooks.addFilter;
+    var _wp$compose = wp.compose,
+        compose = _wp$compose.compose,
+        createHigherOrderComponent = _wp$compose.createHigherOrderComponent;
+    /**
+     * Internal Dependencies
+     */
+
+    /**
+     * Override the default block element to add Font Panels.
+     *
+     * @param  {Function} BlockListBlock Original component
+     * @return {Function} Wrapped component
+     */
+
+    var WithTextControls = compose([withColors({
+      textColor: 'color'
+    }), withFontSizes('fontSize'), withFallbackStyles(function (node, ownProps) {
+      var _ownProps$attributes = ownProps.attributes,
+          fontSize = _ownProps$attributes.fontSize,
+          customFontSize = _ownProps$attributes.customFontSize,
+          textColor = _ownProps$attributes.textColor;
+      var editableNode = node.querySelector('[contenteditable="true"]');
+      var computedStyles = editableNode ? getComputedStyle(editableNode) : null;
+      return {
+        fallbackTextColor: textColor || !computedStyles ? undefined : computedStyles.color,
+        fallbackFontSize: fontSize || customFontSize || !computedStyles ? undefined : parseInt(computedStyles.fontSize) || undefined
+      };
+    })])(function (props) {
+      var fallbackFontSize = props.fallbackFontSize,
+          fontSize = props.fontSize,
+          setFontSize = props.setFontSize,
+          textColor = props.textColor,
+          setTextColor = props.setTextColor;
+      return wp.element.createElement(InspectorControls, null, wp.element.createElement(PanelBody, {
+        title: __('Text Settings', 'wecodeart'),
+        initialOpen: false,
+        className: "wecodeart-panel"
+      }, wp.element.createElement(FontSizePicker, {
+        fallbackFontSize: fallbackFontSize,
+        value: fontSize.size,
+        onChange: setFontSize
+      })), wp.element.createElement(PanelColorSettings, {
+        title: __('Color Settings', 'wecodeart'),
+        initialOpen: false,
+        colorSettings: [{
+          value: textColor.color,
+          onChange: setTextColor,
+          label: __('Text Color', 'wecodeart')
+        }]
+      }));
+    });
+    /**
+     * Override the default block element to add wrapper props.
+     *
+     * @param  {Function} BlockListBlock Original component
+     * @return {Function} Wrapped component
+     */
+
+    var enhance = compose(
+    /**
+     * For blocks whose block type doesn't support `multiple`, provides the
+     * wrapped component with `originalBlockClientId` -- a reference to the
+     * first block of the same type in the content -- if and only if that
+     * "original" block is not the current one. Thus, an inexisting
+     * `originalBlockClientId` prop signals that the block is valid.
+     *
+     */
+    withSelect(function (select) {
+      var _select$getSettings = select('core/block-editor').getSettings(),
+          fontSizes = _select$getSettings.fontSizes,
+          colors = _select$getSettings.colors;
+
+      return {
+        selected: select('core/block-editor').getSelectedBlock(),
+        fontSizes: fontSizes,
+        select: select,
+        colors: colors
+      };
+    }));
+    /**
+     * Add custom WeCodeArt attributes to selected blocks
+     *
+     * @param {Function} BlockListBlock Original component.
+     * @return {string} Wrapped component.
+     */
+
+    var withTextSettings = createHigherOrderComponent(function (BlockListBlock) {
+      return enhance(function (_ref) {
+        var select = _ref.select,
+            props = _objectWithoutProperties(_ref, ["select"]);
+
+        var wrapperProps = props.wrapperProps;
+        var customData = {};
+
+        var _select$getBlock = select('core/block-editor').getBlock(props.clientId),
+            attributes = _select$getBlock.attributes;
+
+        var blockName = select('core/block-editor').getBlockName(props.clientId);
+
+        if (_attributes__WEBPACK_IMPORTED_MODULE_2__["blocksWithFontSize"].includes(blockName)) {
+          var customFontSize = attributes.customFontSize,
+              fontSize = attributes.fontSize;
+
+          if (customFontSize || fontSize) {
+            customData = assign(customData, {
+              'data-custom-fontsize': 1
+            });
+          }
+
+          wrapperProps = _objectSpread({}, wrapperProps, {
+            style: Object(_applyStyle__WEBPACK_IMPORTED_MODULE_1__["default"])(attributes, blockName, props)
+          }, customData);
+        }
+
+        return wp.element.createElement(BlockListBlock, _extends({}, props, {
+          wrapperProps: wrapperProps
+        }));
+      });
+    }, 'withTextSettings');
+    /**
+     * Add custom WeCodeArt attributes to selected blocks
+     *
+     * @param {Function} BlockEdit Original component.
+     * @return {string} Wrapped component.
+     */
+
+    var withBlockPanel = createHigherOrderComponent(function (BlockEdit) {
+      return enhance(function (_ref2) {
+        var props = _extends({}, _ref2);
+
+        var name = props.name,
+            isSelected = props.isSelected;
+
+        if (isSelected && _attributes__WEBPACK_IMPORTED_MODULE_2__["blocksWithFontSize"].includes(name)) {
+          return wp.element.createElement(Fragment, null, wp.element.createElement(BlockEdit, props), wp.element.createElement(WithTextControls, props));
+        }
+
+        return wp.element.createElement(BlockEdit, props);
+      });
+    }, 'withBlockPanel');
+    /**
+     * Override props assigned to save component to inject atttributes
+     *
+     * @param {Object} extraProps Additional props applied to save element.
+     * @param {Object} blockType  Block type.
+     * @param {Object} attributes Current block attributes.
+     *
+     * @return {Object} Filtered props applied to save element.
+     */
+
+    function applyTextSettings(extraProps, blockType, attributes) {
+      if (_attributes__WEBPACK_IMPORTED_MODULE_2__["blocksWithFontSize"].includes(blockType.name)) {
+        if (typeof extraProps.style !== 'undefined') {
+          extraProps.style = assign(extraProps.style, Object(_applyStyle__WEBPACK_IMPORTED_MODULE_1__["default"])(attributes, blockType.name));
+        } else {
+          extraProps.style = Object(_applyStyle__WEBPACK_IMPORTED_MODULE_1__["default"])(attributes, blockType.name);
+        }
+
+        var customFontSize = attributes.customFontSize,
+            fontSize = attributes.fontSize,
+            textColor = attributes.textColor;
+
+        if (fontSize) {
+          extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, 'has-' + fontSize + '-font-size');
+        } else if (customFontSize) {
+          extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, 'has-custom-size');
+        }
+
+        if (textColor) {
+          extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, 'has-' + textColor + '-color');
+        }
+      }
+
+      return extraProps;
+    }
+    /**
+     * Apply Filters
+     */
+
+
+    function applyFilters() {
+      addFilter('editor.BlockEdit', 'wecodeart/editor/with-text/withBlockPanel', withBlockPanel);
+      addFilter('editor.BlockListBlock', 'wecodeart/editor/with-text/withTextSettings', withTextSettings);
+      addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/with-text/applyTextSettings', applyTextSettings);
+    }
+
+    applyFilters();
+    /***/
+  },
+
+  /***/
   "./src/js/gutenberg/extensions/plugins/builder-template/components/controls.js":
   /*!*************************************************************************************!*\
     !*** ./src/js/gutenberg/extensions/plugins/builder-template/components/controls.js ***!
@@ -6976,7 +7055,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         ifCondition = _wp$compose.ifCondition;
     var PluginPostStatusInfo = wp.editPost.PluginPostStatusInfo;
     var _wp$data = wp.data,
-        select = _wp$data.select,
         withSelect = _wp$data.withSelect,
         withDispatch = _wp$data.withDispatch;
     var _wp$components = wp.components,
@@ -7025,7 +7103,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = compose(withSelect(function () {
+    __webpack_exports__["default"] = compose(withSelect(function (select) {
       return {
         postType: select('core/editor').getEditedPostAttribute('type'),
         postMeta: select('core/editor').getEditedPostAttribute('meta')
@@ -7132,13 +7210,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var source = arguments[i] != null ? arguments[i] : {};
 
         if (i % 2) {
-          ownKeys(source, true).forEach(function (key) {
+          ownKeys(Object(source), true).forEach(function (key) {
             _defineProperty(target, key, source[key]);
           });
         } else if (Object.getOwnPropertyDescriptors) {
           Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
         } else {
-          ownKeys(source).forEach(function (key) {
+          ownKeys(Object(source)).forEach(function (key) {
             Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
           });
         }
@@ -7706,7 +7784,9 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
 
-    var __ = wp.i18n.__;
+    var _wp$i18n = wp.i18n,
+        __ = _wp$i18n.__,
+        sprintf = _wp$i18n.sprintf;
     var Component = wp.element.Component;
     var compose = wp.compose.compose;
     var PluginPostStatusInfo = wp.editPost.PluginPostStatusInfo;
@@ -7746,7 +7826,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }, {
         key: "initialize",
         value: function initialize() {
-          var postMeta = this.props.postMeta;
+          var _this$props$postMeta = this.props.postMeta,
+              postMeta = _this$props$postMeta === void 0 ? {} : _this$props$postMeta;
           var titleBlock = document.querySelector('.editor-post-title__block');
 
           if (titleBlock) {
@@ -7768,7 +7849,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         value: function render() {
           var _this$props = this.props,
               onToggle = _this$props.onToggle,
-              postMeta = _this$props.postMeta,
+              _this$props$postMeta2 = _this$props.postMeta,
+              postMeta = _this$props$postMeta2 === void 0 ? {} : _this$props$postMeta2,
               postType = _this$props.postType;
 
           if (['wp_block'].includes(postType)) {
@@ -7777,11 +7859,11 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
           var value = postMeta._wca_title_hidden;
           var isHidden = typeof postMeta !== 'undefined' && typeof value !== 'undefined' ? value : false;
-          var help = isHidden ? __('Hidden', 'wecodeart') : __('Shown', 'wecodeart');
+          var help = isHidden ? __('hidden', 'wecodeart') : __('shown', 'wecodeart');
           help = sprintf(__('Title is %s.', 'wecodeart'), help);
           return wp.element.createElement(PluginPostStatusInfo, null, wp.element.createElement(CheckboxControl, {
             className: "wca-post-status-label",
-            label: __('Hide ' + postType + ' title on single template?', 'wecodeart'),
+            label: sprintf(__('Hide %s title on single template?', 'wecodeart'), postType),
             checked: isHidden,
             onChange: onToggle,
             help: help

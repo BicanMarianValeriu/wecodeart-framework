@@ -10,8 +10,7 @@ const { find } = lodash;
  * @param {Object} backgroundColor The selected background color.
  * @returns {Object} styles.
  */
-const BackgroundStyles = (attributes, props) => {
-    const { colors } = props;
+const BackgroundStyles = (attributes, colors = {}) => {
     const { backgroundColor, customBackgroundColor } = attributes;
     
     const showBGPosition = attributes && attributes.backgroundImg && attributes.backgroundType === 'image';

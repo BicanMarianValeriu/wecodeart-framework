@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.1
+ * @version		4.0.6
  */
 
 namespace WeCodeArt\Core;
@@ -77,7 +77,7 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	???
-	 * @version	4.0.5
+	 * @version	4.0.6
 	 *
 	 * @return 	void
 	 */
@@ -86,7 +86,7 @@ class Header {
 			'tag' 	=> 'div',
 			'attrs' => [
 				'id' 	=> 'bar-branding',
-				'class' => 'header-bar__branding col col-lg-auto pr-0'
+				'class' => 'header-bar__branding col col-lg-auto'
 			] 
 		], [
 			'tag' 	=> 'div',

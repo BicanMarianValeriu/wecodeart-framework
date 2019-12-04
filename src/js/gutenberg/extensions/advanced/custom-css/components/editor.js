@@ -2,7 +2,6 @@
  * WordPress dependencies.
  */
 const { __ } = wp.i18n;
-
 const { Component, Fragment } = wp.element;
 
 class CSSEditor extends Component {

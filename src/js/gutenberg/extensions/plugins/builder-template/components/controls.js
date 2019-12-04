@@ -5,7 +5,7 @@ const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { compose, ifCondition } = wp.compose;
 const { PluginPostStatusInfo } = wp.editPost;
-const { select, withSelect, withDispatch } = wp.data;
+const { withSelect, withDispatch } = wp.data;
 const { withSpokenMessages, CheckboxControl } = wp.components;
 
 class BuilderTemplate extends Component {
@@ -42,7 +42,7 @@ class BuilderTemplate extends Component {
 }
 
 export default compose(
-	withSelect(() => {
+	withSelect((select) => {
 		return {
 			postType: select('core/editor').getEditedPostAttribute('type'),
 			postMeta: select('core/editor').getEditedPostAttribute('meta'),

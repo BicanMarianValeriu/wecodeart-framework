@@ -6,17 +6,17 @@ import './extensions/attributes';
 // Core Blocks
 import './blocks/columns';
 import './blocks/column';
+import './blocks/media-text';
 
 // Block Panels
-import './extensions/block-panel';
+import './extensions/modules';
 import './extensions/advanced';
 
 // Plugins
 import './extensions/plugins';
 
 // Formats
-import './extensions/formats/';
-
+import './extensions/formats';
 
 export default function registerWCABlocks() {
     [

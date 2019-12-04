@@ -28,11 +28,6 @@ import { blocksWithFontSize } from '../../attributes';
  * @return {Function} Wrapped component
  */
 const WithTextControls = compose([
-	withSelect((select) => {
-		return {
-			propDemo: true
-		};
-	}),
 	withColors({ textColor: 'color' }),
 	withFontSizes('fontSize'),
 	withFallbackStyles((node, ownProps) => {
@@ -119,7 +114,8 @@ const withTextSettings = createHigherOrderComponent((BlockListBlock) => {
 	return enhance(({ select, ...props }) => {
 		let wrapperProps = props.wrapperProps;
 		let customData = {};
-		const attributes = select('core/block-editor').getBlock(props.clientId).attributes;
+
+		const { attributes } = select('core/block-editor').getBlock(props.clientId);
 		const blockName = select('core/block-editor').getBlockName(props.clientId);
 
 		if (blocksWithFontSize.includes(blockName)) {
@@ -196,6 +192,9 @@ function applyTextSettings(extraProps, blockType, attributes) {
 	return extraProps;
 }
 
+/**
+ * Apply Filters
+ */
 function applyFilters() {
 	addFilter('editor.BlockEdit', 'wecodeart/editor/with-text/withBlockPanel', withBlockPanel);
 	addFilter('editor.BlockListBlock', 'wecodeart/editor/with-text/withTextSettings', withTextSettings);

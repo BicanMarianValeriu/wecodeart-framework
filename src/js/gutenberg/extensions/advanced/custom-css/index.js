@@ -13,7 +13,7 @@ const { addFilter } = wp.hooks;
  */
 import { restrictedBlocks } from '../../attributes';
 import CSSEditor from './components/editor';
-import './inject-css.js';
+import './inject-css';
 
 const addAttributes = (settings) => {
 	if (!restrictedBlocks.includes(settings.name) && hasBlockSupport(settings, 'customClassName', true)) {
@@ -32,6 +32,14 @@ const addAttributes = (settings) => {
 	return settings;
 };
 
+/**
+ * Override the default edit UI to include a new block inspector control for
+ * assigning the custom class name, if block supports custom class name.
+ *
+ * @param {Function} BlockEdit Original component.
+ *
+ * @return {string} Wrapped component.
+ */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
 		const isRestrictedBlock = !restrictedBlocks.includes(props.name);
@@ -55,5 +63,12 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	};
 }, 'withInspectorControl');
 
-addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
-addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl);
+/**
+ * Apply Filters
+ */
+function applyFilters() {
+	addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
+	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl);
+}
+
+applyFilters();

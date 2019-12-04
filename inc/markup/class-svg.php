@@ -160,7 +160,7 @@ class SVG {
 	 * @param 	string
 	 */
 	public static function render( string $icon, $args = [], $fallback = '' ) {
-		echo self::compile( $icon, $args, $fallback );
+		echo self::compile( $icon, $args, $fallback ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**

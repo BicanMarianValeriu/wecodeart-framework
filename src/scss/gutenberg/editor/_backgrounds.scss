@@ -11,10 +11,6 @@
 	.has-#{$color}-background-color {
 		background-color: $value;
 	}
-
-	p.has-#{$color}-background-color {
-		@include alert-variant( $value, transparent, white );
-	}
 }
 
 .has-inline-background {

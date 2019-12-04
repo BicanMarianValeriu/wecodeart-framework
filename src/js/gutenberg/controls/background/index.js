@@ -22,4 +22,3 @@ export {
 };
 
 export const ALLOWED_BG_MEDIA_TYPES = [ 'image', 'video' ];
-export const BLOCKS_WITH_AUTOPADDING = [ 'core/columns', 'core/column' ];

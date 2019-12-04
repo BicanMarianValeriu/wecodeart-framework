@@ -8,8 +8,8 @@
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		4.0.3
- * @version		4.0.3
+ * @since		4.0.5
+ * @version		4.0.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules;

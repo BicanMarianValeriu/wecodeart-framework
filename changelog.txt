@@ -1,3 +1,11 @@
+v4.0.6
+- Added - Gutenberg Offset Classes for Advanced Classname suggestions
+- Added - Gutenberg Order Classes for Advanced Classname suggestions
+- Added - Gutenberg Abbreviation formatting for text
+- Added - .col-auto and its breakpoint classes for Columns Block
+- Updated - Refactor Gutenberg source code - function names, folder names etc
+- Updated - Added WPCS ignore to some secure code
+
 v4.0.5
 - Updated - Password protected form adjusted shadow and border and kses_svg removed (already escaped by fn)
 - Updated - Comment display note for password prottected posts

@@ -6,10 +6,10 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package		WeCodeArt Framework
- * @subpackage  Gutenberg
+ * @subpackage  Gutenberg\Classes\Columns
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		4.0.3
- * @version		4.0.3
+ * @since		4.0.5
+ * @version		4.0.6
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Classes;
@@ -61,9 +61,10 @@ class Columns {
 	public function global_classes( $args ) {
 		if( ! isset( $args['global'] ) ) {
 			$args['global'] = [];
+			$args['global'][] = 'col-auto';
 
 			foreach( range( 1, 12 ) as $number ) {
-				$args['global'][] = 'col-'. $number;
+				$args['global'][] = 'col-' . $number;
 			}
 		}
 
@@ -82,6 +83,8 @@ class Columns {
 			if( ! isset( $args[$breakpoint] ) ) {
 				$args[$breakpoint] = [];
 				$args[$breakpoint][] = 'col-' . $breakpoint;
+				$args[$breakpoint][] = 'col-' . $breakpoint . '-auto';
+
 				foreach( range( 1, 12 ) as $number ) {
 					$args[$breakpoint][] = 'col-'. $breakpoint . '-' . $number;
 				}
