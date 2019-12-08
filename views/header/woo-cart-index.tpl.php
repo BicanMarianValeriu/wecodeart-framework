@@ -8,10 +8,12 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Header Woo Cart
  * @since	 	3.9.5
- * @version    	3.9.6
+ * @version    	4.0.7
  */
 
 defined( 'ABSPATH' ) || exit();
+
+use WeCodeArt\Markup;
 
 /**
  * @see     WeCodeArt\Support\WooCommerce\display_cart_module
@@ -20,11 +22,22 @@ defined( 'ABSPATH' ) || exit();
  */
 ?>
 <button id="mini-cart" type="button" class="dropdown-toggle"
-    data-toggle="tooltip" aria-haspopup="true" aria-expanded="false"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
     title="<?php esc_attr_e( 'View your shopping cart', wecodeart_config( 'textdomain' ) ); ?>">
     <span class="screen-reader-text"><?php esc_html_e( 'Show Cart', wecodeart_config( 'textdomain' ) ); ?></span>
-    <span class="header-bar__cart-subtotal"><?php echo wp_kses_post( $subtotal ); ?></span>
-    <span class="header-bar__cart-count"><?php echo wp_kses_data( $count ); ?> </span>
+    <?php
+    
+        // Subtotal
+        Markup::template( [ 'header/woo-cart', 'subtotal' ], [
+            'subtotal'  => $subtotal,
+        ] );
+        
+        // Count
+        Markup::template( [ 'header/woo-cart', 'count' ], [
+            'count'     => $count,
+        ] );
+
+    ?>
 </button>
 <div class="dropdown-menu dropdown-menu-right" id="mini-woocommerce-cart" aria-labelledby="mini-cart">
     <div class="widget_shopping_cart_content"></div>

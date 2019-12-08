@@ -1,7 +1,14 @@
+v4.0.7
+- Fixed - Media Text small css issue with content width.
+- Updated - Updated Gutenberg Advanced Classes suggestions for order-first/last with breakpoints
+- Updated - Added 'woocommerce' key in wecodeart_config() - it will hold WooCommerce Configuration
+- Updated - Header WOO Cart code refactor + add posibility to change HTML without updating fragments via Markup::template()
+
 v4.0.6
 - Added - Gutenberg Offset Classes for Advanced Classname suggestions
 - Added - Gutenberg Order Classes for Advanced Classname suggestions
 - Added - Gutenberg Abbreviation formatting for text
+- Added - Gutenberg Media Text Block - improved styles
 - Added - .col-auto and its breakpoint classes for Columns Block
 - Updated - Refactor Gutenberg source code - function names, folder names etc
 - Updated - Added WPCS ignore to some secure code

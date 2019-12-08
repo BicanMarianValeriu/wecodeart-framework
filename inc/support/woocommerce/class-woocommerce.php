@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.9
- * @version		4.0.3
+ * @version		4.0.7
  */
 
 namespace WeCodeArt\Support;
@@ -118,7 +118,7 @@ class WooCommerce implements Integration {
 		$attributes = Markup::generate_attr( 'woocommerce-wrapper', [ 'class' => 'content-area content-area--woocommerce' ] );
 		
 		?>
-		<div <?php echo $attributes; // @wpcs ok - escaped with the function above ?>>
+		<div <?php echo $attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<div class="<?php echo sanitize_html_class( $wrapper ); ?>">
 				<div class="row">
 		<?php
@@ -203,12 +203,12 @@ class WooCommerce implements Integration {
 	 * Filter - WooCommerce Header Bar Cart Module
 	 *
 	 * @since	3.5
-	 * @version	3.9.5
+	 * @version	4.0.7
 	 */
 	public function add_cart_to_header_modules( $modules ) {
 		$modules['cart'] = [
 			'label'    => esc_html__( 'WooCommerce Cart', wecodeart_config( 'textdomain' ) ),
-			'callback' => [ __CLASS__, 'display_cart_module' ],
+			'callback' => [ $this, 'display_cart_module' ],
 		];
 
 		return $modules;
@@ -218,23 +218,20 @@ class WooCommerce implements Integration {
 	 * Render Header Bar Cart Module
 	 *
 	 * @since   3.5
-	 * @version 4.0.1
+	 * @version 4.0.7
 	 *
 	 * @return  void
 	 */
-	public static function display_cart_module() {
+	public function display_cart_module() {
 		Markup::wrap( 'header-cart', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
 				'id' 	=> 'bar-cart',
 				'class' => 'header-bar__cart col-auto align-self-stretch dropdown'
 			] 
-		] ], [ 'WeCodeArt\Markup', 'template' ], [ [ 'header/woo', 'cart' ], [
+		] ], [ 'WeCodeArt\Markup', 'template' ], [ [ 'header/woo-cart', 'index' ], [
 			'subtotal' 	=> wp_kses_post( WC()->cart->get_cart_subtotal() ),
-			'count'		=> wp_kses_data( sprintf( 
-				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), wecodeart_config( 'textdomain' ) ), 
-				WC()->cart->get_cart_contents_count() 
-			) )
+			'count'		=> wp_kses_data( WC()->cart->get_cart_contents_count() )
 		] ] );
 	}
 
@@ -242,26 +239,47 @@ class WooCommerce implements Integration {
 	 * Filter - Cart Fragments
 	 *
 	 * @since 	3.5
-	 * @version	3.9.5
+	 * @version	4.0.7
 	 *
 	 * @param 	array	fragments
 	 *
 	 * @return	array
 	 */
 	public function cart_count_fragments( $fragments ) {
+		$subtotal = Markup::template( [ 'header/woo-cart', 'subtotal' ], [
+            'subtotal' => WC()->cart->get_cart_subtotal(),
+		], false );
 
-		$fragments['span.header-bar__cart-subtotal'] = sprintf(
-			'<span class="header-bar__cart-subtotal">%s</span>',
-			wp_kses_post( WC()->cart->get_cart_subtotal() )
-		);
+		$doc = new \DOMDocument();
+		$doc->loadHTML( $subtotal );
+		$body = $doc->getElementsByTagName('body');
+		
+		if ( $body && 0 < $body->length ) {
+			$body = $body->item(0);
+			$body_els = $body->getElementsByTagName('*');
 
-		$fragments['span.header-bar__cart-count'] = sprintf(
-			'<span class="header-bar__cart-count">%s</span>',
-			sprintf(
-				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), wecodeart_config( 'textdomain' ) ),
-				WC()->cart->get_cart_contents_count()
-			)
-		);
+			if ( $body_els && 0 < $body_els->length ) {
+				$first_child = $body_els->item(0);
+				$fragments["{$first_child->tagName}.{$first_child->getAttribute('class')}"] = $subtotal;
+			}
+		}
+
+		$count = Markup::template( [ 'header/woo-cart', 'count' ], [
+            'count'  => WC()->cart->get_cart_contents_count(),
+		], false );
+
+		$doc->loadHTML( $count );
+		$body = $doc->getElementsByTagName('body');
+		
+		if ( $body && 0 < $body->length ) {
+			$body = $body->item(0);
+			$body_els = $body->getElementsByTagName('*');
+
+			if ( $body_els && 0 < $body_els->length ) {
+				$first_child = $body_els->item(0);
+				$fragments["{$first_child->tagName}.{$first_child->getAttribute('class')}"] = $count;
+			}
+		}
 
 		return $fragments;
 	} 

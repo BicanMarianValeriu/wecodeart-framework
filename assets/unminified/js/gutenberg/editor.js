@@ -405,7 +405,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var __ = wp.i18n.__;
     var InspectorControls = wp.blockEditor.InspectorControls;
-    var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
     var PanelBody = wp.components.PanelBody;
     var Fragment = wp.element.Fragment;
     var addFilter = wp.hooks.addFilter;
@@ -424,7 +423,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * @return {string} Wrapped component.
      */
 
-    var withColumnControls = createHigherOrderComponent(function (BlockEdit) {
+    function withColumnControls(BlockEdit) {
       return function (props) {
         var blockName = props.name,
             isSelected = props.isSelected;
@@ -441,7 +440,9 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
         return wp.element.createElement(BlockEdit, props);
       };
-    }, 'withColumnControls');
+    }
+
+    ;
     /**
      * Override props assigned to save component to inject atttributes
      *
@@ -560,7 +561,9 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var Fragment = wp.element.Fragment;
     var _wp$components = wp.components,
         ToggleControl = _wp$components.ToggleControl,
-        PanelBody = _wp$components.PanelBody;
+        PanelBody = _wp$components.PanelBody,
+        Path = _wp$components.Path,
+        SVG = _wp$components.SVG;
     var _wp$blockEditor = wp.blockEditor,
         InspectorControls = _wp$blockEditor.InspectorControls,
         InnerBlocks = _wp$blockEditor.InnerBlocks;
@@ -570,13 +573,52 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
     /**
+     * Filters registered block settings, extending attributes with anchor using ID
+     * of the first node.
+     *
+     * @param 	{Object} settings Original block settings.
+     *
+     * @return 	{Object} Filtered block settings.
+     */
+
+    function addColumnsPatterns(settings) {
+      var blockName = settings.name;
+
+      if (!_extensions_attributes__WEBPACK_IMPORTED_MODULE_3__["restrictedBlocks"].includes(blockName) && blockName === 'core/columns') {
+        settings.patterns = [{
+          name: 'one-column',
+          label: __('One Column'),
+          icon: wp.element.createElement(SVG, {
+            className: "dashicon",
+            height: "26",
+            viewBox: "0 0 50 26",
+            width: "50",
+            xmlns: "http://www.w3.org/2000/svg"
+          }, wp.element.createElement(Path, {
+            d: "m48.0833333 0h-46.16666663c-1.05416667 0-1.91666667.9-1.91666667 2v22c0 1.1.8625 2 1.91666667 2h46.16666663c1.0541667 0 1.9166667-.9 1.9166667-2v-22c0-1.1-.8625-2-1.9166667-2zm0 24h-46.16666663v-22h46.16666663z"
+          })),
+          isDefault: true,
+          innerBlocks: [['core/column', {
+            width: 100,
+            bootstrapColumns: {
+              global: 'col-12',
+              sm: 'col-sm'
+            }
+          }]]
+        }];
+      }
+
+      return settings;
+    }
+    /**
      * Columns Controls
      *
      * @param {Function} BlockEdit Original component.
      * @return {string} Wrapped component.
      */
 
-    var withColumnsControls = createHigherOrderComponent(function (BlockEdit) {
+
+    function withColumnsControls(BlockEdit) {
       return function (props) {
         var blockName = props.name,
             isSelected = props.isSelected;
@@ -620,7 +662,9 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
         return wp.element.createElement(BlockEdit, props);
       };
-    }, 'withColumnsControls');
+    }
+
+    ;
     /**
      * Override props assigned to save component to inject atttributes
      *
@@ -667,6 +711,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     function applyFilters() {
       addFilter('blocks.getSaveElement', 'wecodeart/blocks/columns/getSaveElement', getSaveElement);
+      addFilter('blocks.registerBlockType', 'wecodeart/blocks/columns/patters', addColumnsPatterns);
       addFilter('editor.BlockEdit', 'wecodeart/editor/columns/withColumnsControls', withColumnsControls);
     }
 
@@ -2465,10 +2510,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         key: "getSelectOptions",
         value: function getSelectOptions() {
           var prefix = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'global';
-          var select = this.props.select;
-
-          var _select$getEditorSett = select('core/editor').getEditorSettings(),
-              columnsClasses = _select$getEditorSett.wecodeart.columnsClasses;
+          var columnsClasses = this.props.columnsClasses;
 
           var makeLabel = function makeLabel(option) {
             var label = option;
@@ -2531,8 +2573,10 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
               label = _this$props2$label === void 0 ? __('Column Width - %s', 'wecodeart') : _this$props2$label,
               _this$props2$onChange = _this$props2.onChange,
               _onChange = _this$props2$onChange === void 0 ? this.setColumn : _this$props2$onChange,
+              columnsClasses = _this$props2.columnsClasses,
               bootstrapColumns = _this$props2.attributes.bootstrapColumns;
 
+          if (columnsClasses === undefined) return null;
           return wp.element.createElement(TabPanel, {
             className: "components-base-control wecodeart-horizontal-tabs",
             activeClass: "is-active",
@@ -2582,7 +2626,14 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
     __webpack_exports__["default"] = compose(withSelect(function (select) {
+      var _select$getEditorSett = select('core/editor').getEditorSettings(),
+          _select$getEditorSett2 = _select$getEditorSett.wecodeart;
+
+      _select$getEditorSett2 = _select$getEditorSett2 === void 0 ? {} : _select$getEditorSett2;
+      var _select$getEditorSett3 = _select$getEditorSett2.columnsClasses,
+          columnsClasses = _select$getEditorSett3 === void 0 ? undefined : _select$getEditorSett3;
       return {
+        columnsClasses: columnsClasses,
         select: select
       };
     }))(ResponsiveColumns);

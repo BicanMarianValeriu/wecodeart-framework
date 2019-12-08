@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Classes\Suggestions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		4.0.5
- * @version		4.0.6
+ * @version		4.0.7
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Classes;
@@ -161,8 +161,10 @@ class Suggestions {
 		
 		foreach( [ 'sm', 'md', 'lg', 'xl' ] as $break ) {
 			foreach( range( 1, 12 ) as $column ) {
-				$args[] = 'offset-' . $break . '-' . $column;
+				$args[] = 'order-' . $break . '-first';
+				$args[] = 'order-' . $break . '-last';
 				$args[] = 'order-' . $break . '-' . $column;
+				$args[] = 'offset-' . $break . '-' . $column;
 			}
 		}
 

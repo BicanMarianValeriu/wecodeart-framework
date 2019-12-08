@@ -9,12 +9,14 @@
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.6
+ * @version		4.0.7
  */
 
 namespace WeCodeArt\Support\WooCommerce;
 
 defined( 'ABSPATH' ) || exit;
+
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Handles Customizer Settings for WooCommerce
@@ -37,13 +39,11 @@ class Customizer {
 	 * Extend Customizer default options
 	 *
 	 * @since 3.6.0
+	 * @since 4.0.7
 	 */
 	public function extend_defaults( $defaults ) {
-		$defaults['content-layout-container-product-archive'] 	= 'container';
-		$defaults['content-layout-modules-product-archive'] 	= [ 'content', 'primary' ];
-		$defaults['content-layout-container-product-singular'] 	= 'container';
-		$defaults['content-layout-modules-product-singular'] 	= [ 'content', 'primary' ];
+		$woo_config = get_prop( wecodeart_config( 'woocommerce' ), 'customizer', [] );
 
-		return $defaults;
+		return wp_parse_args( $woo_config, $defaults );
 	}
 }

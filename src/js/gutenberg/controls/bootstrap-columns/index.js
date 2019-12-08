@@ -28,8 +28,7 @@ class ResponsiveColumns extends Component {
     }
 
     getSelectOptions(prefix = 'global') {
-        const { select } = this.props;
-        const { wecodeart: { columnsClasses } } = select('core/editor').getEditorSettings();
+        const { columnsClasses } = this.props;
 
         const makeLabel = (option) => {
             let label = option;
@@ -80,10 +79,13 @@ class ResponsiveColumns extends Component {
         const {
             label = __('Column Width - %s', 'wecodeart'),
             onChange = this.setColumn,
+            columnsClasses,
             attributes: {
                 bootstrapColumns
             }
         } = this.props;
+
+        if (columnsClasses === undefined) return null;
 
         return (
             <TabPanel
@@ -144,7 +146,10 @@ class ResponsiveColumns extends Component {
 
 export default compose(
     withSelect((select) => {
+        const { wecodeart: { columnsClasses = undefined } = {} } = select('core/editor').getEditorSettings();
+
         return {
+            columnsClasses,
             select
         };
     }),

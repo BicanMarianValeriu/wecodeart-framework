@@ -3,7 +3,6 @@
  */
 const { __ } = wp.i18n;
 const { InspectorControls } = wp.blockEditor;
-const { createHigherOrderComponent } = wp.compose;
 const { PanelBody } = wp.components;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
@@ -25,7 +24,7 @@ import ResponsiveColumns from '../../controls/bootstrap-columns';
  * @param {Function} BlockEdit Original component.
  * @return {string} Wrapped component.
  */
-const withColumnControls = createHigherOrderComponent((BlockEdit) => {
+function withColumnControls(BlockEdit) {
     return (props) => {
         const {
             name: blockName,
@@ -54,7 +53,7 @@ const withColumnControls = createHigherOrderComponent((BlockEdit) => {
 
         return <BlockEdit {...props} />;
     };
-}, 'withColumnControls');
+};
 
 /**
  * Override props assigned to save component to inject atttributes

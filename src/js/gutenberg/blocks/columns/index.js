@@ -9,7 +9,7 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
 const { Fragment } = wp.element;
-const { ToggleControl, PanelBody } = wp.components;
+const { ToggleControl, PanelBody, Path, SVG } = wp.components;
 const { InspectorControls, InnerBlocks } = wp.blockEditor;
 const { createHigherOrderComponent } = wp.compose;
 
@@ -21,12 +21,45 @@ import { getVisibilityClasses } from '../../extensions/advanced/visibility/utils
 import { restrictedBlocks } from '../../extensions/attributes';
 
 /**
+ * Filters registered block settings, extending attributes with anchor using ID
+ * of the first node.
+ *
+ * @param 	{Object} settings Original block settings.
+ *
+ * @return 	{Object} Filtered block settings.
+ */
+function addColumnsPatterns(settings) {
+    const { name: blockName } = settings;
+    if (!restrictedBlocks.includes(blockName) && blockName === 'core/columns') {
+        settings.patterns = [
+            {
+                name: 'one-column',
+                label: __('One Column'),
+                icon: <SVG className="dashicon" height="26" viewBox="0 0 50 26" width="50" xmlns="http://www.w3.org/2000/svg"><Path d="m48.0833333 0h-46.16666663c-1.05416667 0-1.91666667.9-1.91666667 2v22c0 1.1.8625 2 1.91666667 2h46.16666663c1.0541667 0 1.9166667-.9 1.9166667-2v-22c0-1.1-.8625-2-1.9166667-2zm0 24h-46.16666663v-22h46.16666663z" /></SVG>,
+                isDefault: true,
+                innerBlocks: [
+                    ['core/column', {
+                        width: 100,
+                        bootstrapColumns: {
+                            global: 'col-12',
+                            sm: 'col-sm',
+                        }
+                    }],
+                ],
+            },
+        ];
+    }
+
+    return settings;
+}
+
+/**
  * Columns Controls
  *
  * @param {Function} BlockEdit Original component.
  * @return {string} Wrapped component.
  */
-const withColumnsControls = createHigherOrderComponent((BlockEdit) => {
+function withColumnsControls(BlockEdit) {
     return (props) => {
         const {
             name: blockName,
@@ -75,7 +108,7 @@ const withColumnsControls = createHigherOrderComponent((BlockEdit) => {
 
         return <BlockEdit {...props} />;
     };
-}, 'withColumnsControls');
+};
 
 /**
  * Override props assigned to save component to inject atttributes
@@ -127,6 +160,7 @@ function getSaveElement(element, blockType, attributes) {
  */
 function applyFilters() {
     addFilter('blocks.getSaveElement', 'wecodeart/blocks/columns/getSaveElement', getSaveElement);
+    addFilter('blocks.registerBlockType', 'wecodeart/blocks/columns/patters', addColumnsPatterns);
     addFilter('editor.BlockEdit', 'wecodeart/editor/columns/withColumnsControls', withColumnsControls);
 }
 

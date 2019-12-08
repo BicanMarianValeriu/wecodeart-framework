@@ -4,7 +4,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 4.0.6
+Version: 4.0.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -8532,9 +8532,6 @@ section.wp-block-cover-image > h2,
 
 .wp-block-media-text {
   display: flex;
-  flex-wrap: wrap;
-  margin-right: 0;
-  margin-left: 0;
   flex-wrap: nowrap; }
   @media (max-width: 767.98px) {
     .wp-block-media-text.is-stacked-on-mobile {
@@ -8570,6 +8567,7 @@ section.wp-block-cover-image > h2,
     align-self: center; }
   .wp-block-media-text__content {
     flex-grow: 1;
+    flex-shrink: 1;
     padding: 0 10px; }
     @media (min-width: 768px) {
       .wp-block-media-text__content {
@@ -8587,10 +8585,10 @@ section.wp-block-cover-image > h2,
     vertical-align: middle; }
 
 .wp-block-navigation-menu > ul {
-  padding-left: 0;
-  list-style: none;
+  position: relative;
   max-width: none;
-  position: relative; }
+  padding-left: 0;
+  list-style: none; }
   .wp-block-navigation-menu > ul ul {
     padding-left: 0; }
   .wp-block-navigation-menu > ul li {
@@ -8603,9 +8601,9 @@ section.wp-block-cover-image > h2,
     .wp-block-navigation-menu > ul li:focus-within > ul,
     .wp-block-navigation-menu > ul li ul:hover,
     .wp-block-navigation-menu > ul li ul:focus {
+      display: block;
       visibility: visible;
-      opacity: 1;
-      display: block; }
+      opacity: 1; }
   .wp-block-navigation-menu > ul > li > a {
     padding-left: 0; }
   .wp-block-navigation-menu > ul > li:first-of-type > a {

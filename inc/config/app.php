@@ -100,4 +100,20 @@ return [
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
         'footer-copyright-text'     => __( 'Copyright [copy] [year] - All rights reserved.', 'wecodeart' ),
     ],
+    /*
+    |--------------------------------------------------------------------------
+    | Theme WooCommerce
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for WooCommerce.
+    |
+    */
+    'woocommerce' => [
+        'customizer' => [
+            'content-layout-container-product-archive'  => 'container',
+            'content-layout-modules-product-archive'    => [ 'content', 'primary' ],
+            'content-layout-container-product-singular' => 'container',
+            'content-layout-modules-product-singular'   => [ 'content', 'primary' ],
+        ]
+    ],
 ];
