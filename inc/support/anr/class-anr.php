@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.0.2
+ * @version		4.0.8
  */
 
 namespace WeCodeArt\Support;
@@ -42,11 +42,11 @@ class ANR implements Integration {
 	 */
 	public static function get_conditionals() {
 		wecodeart( 'conditionals' )->set( [
-			'is_anr_support' 	=> ANR_Support::class,
+			'has_anr_support'	=> ANR_Support::class,
 			'is_anr_active'		=> ANR_Condition::class,
 		] );
 
-		return [ 'is_anr_active', 'is_anr_support' ];
+		return [ 'is_anr_active', 'has_anr_support' ];
 	}
 
 	/**
@@ -75,7 +75,7 @@ class ANR implements Integration {
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
-	 * @version	3.8.9
+	 * @version	4.0.8
 	 * @see 	anr_captcha_form_field();
 	 * @uses	anr_captcha_class::init()->form_field();
 	 *
@@ -87,14 +87,20 @@ class ANR implements Integration {
 			'attrs' => [ 
 				'class' => 'form-group comment-form-captcha col-12 col-md-7' 
 			]
-		] ], [ Captcha::init(), 'form_field' ] ); // Echoes the form_field().
+		] ], function() { ?>
+			<label for="g-recaptcha-response"><?php esc_html_e( 'Captcha *', wecodeart_config( 'textdomain' ) ); ?></label>
+			<?php
+
+			Captcha::init()->form_field(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+		} ); // Echoes the form_field().
 	}
 
 	/**
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
-	 * @version	3.8.9
+	 * @version	4.0.8
 	 * @see 	anr_captcha_class::init()->captcha_form_field();
 	 * @uses	anr_captcha_class::init()->captcha_form_field();
 	 *
@@ -103,7 +109,7 @@ class ANR implements Integration {
 	public function wrapp_comment_form_field( $defaults ) {
 		$loggedin_hide = anr_get_option( 'loggedin_hide' );
 
-		if ( is_user_logged_in() && $loggedin_hide ) {
+		if ( is_user_logged_in() && $loggedin_hide  === (bool) true ) {
 			return $defaults;
 		}
 
@@ -112,7 +118,13 @@ class ANR implements Integration {
 			'attrs' => [ 
 				'class' => 'form-group comment-form-captcha col-12 col-md-7' 
 			]
-		] ], [ Captcha::init(), 'captcha_form_field' ], [ true ], false );
+		] ], function() { ?>
+			<label for="g-recaptcha-response"><?php esc_html_e( 'Captcha *', wecodeart_config( 'textdomain' ) ); ?></label>
+			<?php
+
+			echo Captcha::init()->captcha_form_field(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		
+		}, [], false );
 
 		return $defaults;
 	}

@@ -170,10 +170,10 @@ class Meta {
 		Markup::template( 'entry/meta/comments', wp_parse_args( $args, [
 			'number'	=> (int) get_comments_number( get_the_ID() ),
 			'i18n' 		=> [
-				'more'        	=> esc_html__( '% Comments', 			wecodeart_config( 'textdomain' ) ),
-				'one'         	=> esc_html__( '1 Comment', 			wecodeart_config( 'textdomain' ) ),
-				'zero'        	=> esc_html__( 'Leave a Comment', 		wecodeart_config( 'textdomain' ) ),
-				'closed'		=> esc_html__( 'Comments are Closed', 	wecodeart_config( 'textdomain' ) )
+				'more'		=> esc_html__( '% Comments', 			wecodeart_config( 'textdomain' ) ),
+				'one'		=> esc_html__( '1 Comment', 			wecodeart_config( 'textdomain' ) ),
+				'zero'		=> esc_html__( 'Leave a Comment', 		wecodeart_config( 'textdomain' ) ),
+				'closed'	=> esc_html__( 'Comments are Closed', 	wecodeart_config( 'textdomain' ) )
 			]
 		] ), $echo );
 	}
@@ -296,13 +296,10 @@ class Meta {
 		}
 
 		Markup::wrap( 'entry-meta', [ [ 
-				'tag' 	=> 'div', 
-				'attrs' => [ 
-					'class' => 'entry-meta' 
-				]
-			] ], 
-			[ 'WeCodeArt\Markup', 'sortable' ],
-			[ self::modules(), self::get_options() ]
-		); 
+			'tag' 	=> 'div', 
+			'attrs' => [ 
+				'class' => 'entry-meta' 
+			]
+		] ], [ 'WeCodeArt\Markup', 'sortable' ], [ self::modules(), self::get_options() ] ); 
 	}
 }

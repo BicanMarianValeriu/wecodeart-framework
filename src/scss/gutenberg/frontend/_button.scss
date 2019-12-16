@@ -27,6 +27,7 @@
 		}
 	
 		.is-style-outline & {
+			color: $dark;
 			background-color: transparent;
 			border: 2px solid currentColor;
 		}

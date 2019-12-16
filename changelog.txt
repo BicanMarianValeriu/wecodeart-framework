@@ -1,3 +1,7 @@
+v4.0.8
+- Fixed - Captcha error when user is logged in an captcha is shown
+- Updated - Minor CSS fixes
+
 v4.0.7
 - Fixed - Media Text small css issue with content width.
 - Updated - Updated Gutenberg Advanced Classes suggestions for order-first/last with breakpoints

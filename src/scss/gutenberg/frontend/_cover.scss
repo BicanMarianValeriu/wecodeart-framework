@@ -1,15 +1,16 @@
 .wp-block-cover-image,
 .wp-block-cover {
 	position: relative;
-	background-color: $black;
-	background-size: cover;
-	background-position: center center;
-	min-height: 430px;
-	height: 100%;
-	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
+	height: 100%;
+	min-height: 430px;
+	margin-bottom: 1.5rem;
+	background-color: $black;
+	background-size: cover;
+	background-position: center center;
 	overflow: hidden;
 
 	&.has-parallax {
@@ -99,7 +100,7 @@
 	h6,
 	.wp-block-subhead {
 		&:not(.has-text-color) {
-			color: inherit;
+			color: white;
 		}
 	}
 }

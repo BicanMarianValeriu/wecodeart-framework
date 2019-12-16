@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR\Conditional\is_anr_support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		4.0.2
- * @version		4.0.2
+ * @version		4.0.8
  */
 
 namespace WeCodeArt\Support\ANR\Conditional;
@@ -17,7 +17,6 @@ namespace WeCodeArt\Support\ANR\Conditional;
 defined( 'ABSPATH' ) || exit(); 
 
 use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
-use function WeCodeArt\Functions\detect_plugin;
 
 /**
  * Conditional that is only met when plugin is supported.
