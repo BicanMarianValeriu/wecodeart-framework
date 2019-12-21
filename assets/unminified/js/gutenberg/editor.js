@@ -5150,6 +5150,12 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var _clear__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./clear */
     "./src/js/gutenberg/extensions/formats/clear/index.js");
+    /* harmony import */
+
+
+    var _tooltip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ./tooltip */
+    "./src/js/gutenberg/extensions/formats/tooltip/index.js");
 
     function _objectWithoutProperties(source, excluded) {
       if (source == null) return {};
@@ -5198,7 +5204,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var registerFormatType = wp.richText.registerFormatType;
 
     function registerWeCodeArtFormats() {
-      [_abbreviation__WEBPACK_IMPORTED_MODULE_0__["abbreviation"], _background_color__WEBPACK_IMPORTED_MODULE_4__["backgroundColor"], _clear__WEBPACK_IMPORTED_MODULE_6__["clear"], _justify__WEBPACK_IMPORTED_MODULE_2__["justify"], _markdown__WEBPACK_IMPORTED_MODULE_5__["markdown"], _text_color__WEBPACK_IMPORTED_MODULE_3__["textColor"], _underline__WEBPACK_IMPORTED_MODULE_1__["underline"]].forEach(function (_ref) {
+      [_abbreviation__WEBPACK_IMPORTED_MODULE_0__["abbreviation"], _background_color__WEBPACK_IMPORTED_MODULE_4__["backgroundColor"], _clear__WEBPACK_IMPORTED_MODULE_6__["clear"], _justify__WEBPACK_IMPORTED_MODULE_2__["justify"], _markdown__WEBPACK_IMPORTED_MODULE_5__["markdown"], _text_color__WEBPACK_IMPORTED_MODULE_3__["textColor"], _underline__WEBPACK_IMPORTED_MODULE_1__["underline"], _tooltip__WEBPACK_IMPORTED_MODULE_7__["tooltip"]].forEach(function (_ref) {
         var name = _ref.name,
             settings = _objectWithoutProperties(_ref, ["name"]);
 
@@ -6219,6 +6225,488 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
+  "./src/js/gutenberg/extensions/formats/tooltip/components/edit.js":
+  /*!************************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/formats/tooltip/components/edit.js ***!
+    \************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcJsGutenbergExtensionsFormatsTooltipComponentsEditJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+
+    function _typeof(obj) {
+      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+        _typeof = function _typeof(obj) {
+          return _typeof2(obj);
+        };
+      } else {
+        _typeof = function _typeof(obj) {
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+        };
+      }
+
+      return _typeof(obj);
+    }
+
+    function ownKeys(object, enumerableOnly) {
+      var keys = Object.keys(object);
+
+      if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+        keys.push.apply(keys, symbols);
+      }
+
+      return keys;
+    }
+
+    function _objectSpread(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i] != null ? arguments[i] : {};
+
+        if (i % 2) {
+          ownKeys(Object(source), true).forEach(function (key) {
+            _defineProperty(target, key, source[key]);
+          });
+        } else if (Object.getOwnPropertyDescriptors) {
+          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+        } else {
+          ownKeys(Object(source)).forEach(function (key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+          });
+        }
+      }
+
+      return target;
+    }
+
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+
+      return obj;
+    }
+
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+
+    function _possibleConstructorReturn(self, call) {
+      if (call && (_typeof(call) === "object" || typeof call === "function")) {
+        return call;
+      }
+
+      return _assertThisInitialized(self);
+    }
+
+    function _getPrototypeOf(o) {
+      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+        return o.__proto__ || Object.getPrototypeOf(o);
+      };
+      return _getPrototypeOf(o);
+    }
+
+    function _assertThisInitialized(self) {
+      if (self === void 0) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+
+      return self;
+    }
+
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function");
+      }
+
+      subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+          value: subClass,
+          writable: true,
+          configurable: true
+        }
+      });
+      if (superClass) _setPrototypeOf(subClass, superClass);
+    }
+
+    function _setPrototypeOf(o, p) {
+      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+        o.__proto__ = p;
+        return o;
+      };
+
+      return _setPrototypeOf(o, p);
+    }
+    /**
+     * WordPress dependencies
+     */
+
+
+    var __ = wp.i18n.__;
+    var _wp$element = wp.element,
+        Component = _wp$element.Component,
+        Fragment = _wp$element.Fragment;
+    var _wp$compose = wp.compose,
+        compose = _wp$compose.compose,
+        ifCondition = _wp$compose.ifCondition;
+    var withSelect = wp.data.withSelect;
+    var RichTextToolbarButton = wp.blockEditor.RichTextToolbarButton;
+    var _wp$richText = wp.richText,
+        applyFormat = _wp$richText.applyFormat,
+        removeFormat = _wp$richText.removeFormat,
+        getActiveFormat = _wp$richText.getActiveFormat;
+    var _wp$components = wp.components,
+        Modal = _wp$components.Modal,
+        Button = _wp$components.Button,
+        TabPanel = _wp$components.TabPanel,
+        ToggleControl = _wp$components.ToggleControl,
+        TextareaControl = _wp$components.TextareaControl;
+    var name = 'wca/tooltip';
+
+    var Edit =
+    /*#__PURE__*/
+    function (_Component) {
+      _inherits(Edit, _Component);
+
+      function Edit() {
+        var _this;
+
+        _classCallCheck(this, Edit);
+
+        _this = _possibleConstructorReturn(this, _getPrototypeOf(Edit).apply(this, arguments));
+        _this.toggle = _this.toggle.bind(_assertThisInitialized(_this));
+        _this.toggleEditor = _this.toggleEditor.bind(_assertThisInitialized(_this));
+        _this.editor;
+        _this.state = {
+          title: '',
+          isOpen: false,
+          isPopover: false,
+          isEditor: false,
+          isHtml: true,
+          options: {}
+        };
+        return _this;
+      }
+
+      _createClass(Edit, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+          this.addCodeMirror();
+        }
+      }, {
+        key: "componentDidUpdate",
+        value: function componentDidUpdate() {
+          this.addCodeMirror();
+        }
+      }, {
+        key: "toggle",
+        value: function toggle() {
+          this.setState(function (state) {
+            return {
+              isOpen: !state.isOpen
+            };
+          });
+
+          if (this.state.isEditor) {
+            this.setState({
+              isEditor: false
+            });
+          }
+        }
+      }, {
+        key: "toggleEditor",
+        value: function toggleEditor() {
+          this.setState(function (state) {
+            return {
+              isHtml: !state.isHtml
+            };
+          });
+
+          if (this.state.isEditor && this.setState.isHtml !== true) {
+            this.setState({
+              isEditor: false
+            });
+          }
+        }
+      }, {
+        key: "addCodeMirror",
+        value: function addCodeMirror() {
+          var _this2 = this;
+
+          var _this$state = this.state,
+              value = _this$state.title,
+              isEditor = _this$state.isEditor;
+
+          if (isEditor === false) {
+            var editorSettings = {
+              value: value,
+              mode: 'text/html',
+              lint: true,
+              tabSize: 1,
+              indentUnit: 1,
+              height: 'auto',
+              lineNumbers: true,
+              lineWrapping: true,
+              matchBrackets: true,
+              autoCloseBrackets: true,
+              styleActiveLine: true,
+              styleActiveSelected: true,
+              scrollbarStyle: 'null',
+              gutters: ['CodeMirror-lint-markers'],
+              extraKeys: {
+                'Ctrl-Space': 'autocomplete',
+                'Alt-F': 'findPersistent',
+                'Cmd-F': 'findPersistent'
+              }
+            };
+            var EditorContainer = document.getElementById('wecodeart-tooltip-editor');
+
+            if (EditorContainer) {
+              this.editor = wp.CodeMirror(EditorContainer, editorSettings);
+              this.editor.on('change', function () {
+                return _this2.setState({
+                  title: _this2.editor.getValue()
+                });
+              });
+
+              if (EditorContainer.children.length) {
+                this.setState({
+                  isEditor: true
+                });
+              } else {
+                this.setState({
+                  isEditor: false
+                });
+              }
+            }
+          }
+        }
+      }, {
+        key: "render",
+        value: function render() {
+          var _this3 = this;
+
+          var _this$state2 = this.state,
+              title = _this$state2.title,
+              isPopover = _this$state2.isPopover,
+              isHtml = _this$state2.isHtml,
+              isEditor = _this$state2.isEditor;
+          var _this$props = this.props,
+              isActive = _this$props.isActive,
+              value = _this$props.value,
+              onChange = _this$props.onChange;
+          var activeFormat = getActiveFormat(value, name);
+          var tabs = {};
+
+          tabs.content = function () {
+            return wp.element.createElement(Fragment, null, wp.element.createElement(ToggleControl, {
+              label: __('Use HTML Content ?', 'wecodeart'),
+              help: __('Select to enable HTML content!', 'wecodeart'),
+              checked: isHtml,
+              onChange: _this3.toggleEditor
+            }), !isHtml && wp.element.createElement(TextareaControl, {
+              label: __('Tooltip', 'wecodeart'),
+              value: activeFormat && !title ? activeFormat.attributes.title : title,
+              onChange: function onChange(_title) {
+                return _this3.setState({
+                  title: _title
+                });
+              }
+            }), isHtml && wp.element.createElement("div", {
+              className: "wecodeart-tooltip__editor",
+              id: "wecodeart-tooltip-editor"
+            }));
+          };
+
+          tabs.options = function () {
+            return wp.element.createElement(Fragment, null, wp.element.createElement(ToggleControl, {
+              label: __('Popover ?', 'wecodeart'),
+              checked: isPopover,
+              onChange: function onChange(option) {
+                return _this3.setState({
+                  isPopover: option
+                });
+              }
+            }));
+          };
+
+          var onSelect = function onSelect(tab) {
+            if (tab === 'options' && isHtml && isEditor) {
+              _this3.setState({
+                isEditor: false
+              });
+            }
+
+            if (tab === 'content' && isHtml) {
+              _this3.toggleEditor();
+            }
+          };
+
+          return wp.element.createElement(Fragment, null, wp.element.createElement(RichTextToolbarButton, {
+            icon: "testimonial",
+            title: __('Tooltip', 'wecodeart'),
+            onClick: this.toggle,
+            isActive: isActive
+          }), this.state.isOpen && wp.element.createElement(Modal, {
+            title: __('Insert Tooltip', 'wecodeart'),
+            className: "wecodeart-tooltips-modal",
+            onRequestClose: this.toggle
+          }, wp.element.createElement(TabPanel, {
+            className: "wecodeart-horizontal-tabs wecodeart-horizontal-tabs--tooltips",
+            activeClass: "is-active",
+            onSelect: onSelect,
+            tabs: [{
+              name: 'content',
+              title: __('Content', 'wecodeart'),
+              className: 'tab-one'
+            }, {
+              name: 'options',
+              title: __('Options', 'wecodeart'),
+              className: 'tab-two'
+            }]
+          }, function (tab) {
+            return tabs[tab.name]();
+          }), wp.element.createElement(Button, {
+            isPrimary: true,
+            isLarge: true,
+            onClick: function onClick() {
+              if (title) {
+                var attributes = {
+                  title: title
+                };
+                var options = {
+                  type: 'tooltip'
+                };
+
+                if (isPopover) {
+                  options = _objectSpread({}, options, {
+                    type: 'popover'
+                  });
+                }
+
+                if (isHtml) {
+                  options = _objectSpread({}, options, {
+                    html: true
+                  });
+                }
+
+                attributes.options = JSON.stringify(options);
+                onChange(applyFormat(value, {
+                  type: name,
+                  attributes: attributes
+                }));
+              } else {
+                onChange(removeFormat(value, name));
+              }
+
+              _this3.toggle();
+            }
+          }, __('Apply', 'wecodeart'))));
+        }
+      }]);
+
+      return Edit;
+    }(Component);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = compose(withSelect(function (select) {
+      return {
+        selectedBlock: select('core/block-editor').getSelectedBlock()
+      };
+    }), ifCondition(function (props) {
+      return props.selectedBlock && (props.selectedBlock.name === 'core/paragraph' || props.selectedBlock.name === 'core/heading');
+    }))(Edit);
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/formats/tooltip/index.js":
+  /*!**************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/formats/tooltip/index.js ***!
+    \**************************************************************/
+
+  /*! exports provided: tooltip */
+
+  /***/
+  function srcJsGutenbergExtensionsFormatsTooltipIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "tooltip", function () {
+      return tooltip;
+    });
+    /* harmony import */
+
+
+    var _components_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./components/edit */
+    "./src/js/gutenberg/extensions/formats/tooltip/components/edit.js");
+    /**
+     * WordPress dependencies
+     */
+
+
+    var __ = wp.i18n.__;
+    /**
+     * Internal dependencies
+     */
+
+    /**
+     * Block constants
+     */
+
+    var name = 'wca/tooltip';
+    var tooltip = {
+      name: name,
+      title: __('Tooltip', 'wecodeart'),
+      tagName: 'abbr',
+      className: 'has-tooltip',
+      attributes: {
+        title: '',
+        options: ''
+      },
+      edit: _components_edit__WEBPACK_IMPORTED_MODULE_0__["default"]
+    };
+    /***/
+  },
+
+  /***/
   "./src/js/gutenberg/extensions/formats/underline/index.js":
   /*!****************************************************************!*\
     !*** ./src/js/gutenberg/extensions/formats/underline/index.js ***!
@@ -6272,7 +6760,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         });
 
         var onToggle = function onToggle() {
-          onChange(toggleFormat(value, {
+          return onChange(toggleFormat(value, {
             type: name
           }));
         };

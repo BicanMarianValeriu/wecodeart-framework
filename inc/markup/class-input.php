@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Input
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.1.2
- * @version		4.0.2
+ * @version		4.0.9
  */
 
 namespace WeCodeArt\Markup;
@@ -61,7 +61,7 @@ class Input {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	3.8.6
+	 * @version	4.0.9
 	 *
 	 * @param  	array	$array	Existing option array if exists (optional)
 	 *
@@ -72,8 +72,8 @@ class Input {
 		$attrs = wp_parse_args( $attrs, [
 			'type'  => $type,
 			'class' => 'form-control',
-			'name'	=> isset( $attrs['name'] ) ? $attrs['name'] : uniqid( 'input-' ),
-			'id' 	=> isset( $attrs['id'] ) ? $attrs['id'] : isset( $attrs['name'] ) ? $attrs['name'] : uniqid( 'input-' ),
+			'name'	=> isset( $attrs['name'] ) ? $attrs['name'] : false,
+			'id' 	=> isset( $attrs['id'] ) ? $attrs['id'] : isset( $attrs['name'] ) ? $attrs['name'] : wp_unique_id( 'input-' ),
 		] );
 
 		// Label.
@@ -92,7 +92,7 @@ class Input {
 			case 'submit' :   
 			case 'password' :
 				if ( isset( $label['text'] ) ) {
-					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), esc_html( $label['text'] ) );
+					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), wp_kses_post( $label['text'] ) );
 				}
 			?>
 				<input <?php echo \WeCodeArt\Markup::generate_attr( $type . '-input', $attrs ); ?>/>
@@ -104,9 +104,9 @@ class Input {
 			 */
 			case 'checkbox' :
 			case 'checkbox-switch' :
-				$class = ( $type === 'checkbox-switch' ) ? 'custom-switch' : 'custom-checkbox';
-				$classes = array_merge( [ 'custom-control', $class, $attrs['class'] ] );
-				$attrs = wp_parse_args( [
+				$class 		= ( $type === 'checkbox-switch' ) ? 'custom-switch' : 'custom-checkbox';
+				$classes 	= array_merge( [ 'custom-control', $class, $attrs['class'] ] );
+				$attrs 		= wp_parse_args( [
 					'type'	=> 'checkbox',
 					'class' => 'custom-control-input',
 				], $attrs ); 
@@ -115,8 +115,10 @@ class Input {
 			<input <?php echo \WeCodeArt\Markup::generate_attr( $type . '-input', $attrs ); ?>/>
 			<?php
 				if ( isset( $label['text'] ) ) {
-					printf( '<label class="custom-control-label" for="%s">%s</label>', 
-						esc_attr( $attrs['id'] ), wp_kses_post( $label['text'] ) 
+					printf(
+						'<label class="custom-control-label" for="%s">%s</label>',
+						esc_attr( $attrs['id'] ),
+						wp_kses_post( $label['text'] )
 					);
 				}
 				if( ! empty( $messages ) ) self::messages( $messages );
@@ -130,7 +132,7 @@ class Input {
 			case 'textarea' :
 				unset( $attrs['type'] );
 				if ( isset( $label['text'] ) ) {
-					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), esc_html( $label['text'] ) );
+					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), wp_kses_post( $label['text'] ) );
 				}
 			?>
 				<textarea <?php echo \WeCodeArt\Markup::generate_attr( 'textarea', $attrs ); ?>></textarea>
@@ -142,7 +144,7 @@ class Input {
 			 */
 			case 'select' :
 				if ( isset( $label['text'] ) ) {
-					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), esc_html( $label['text'] ) );
+					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), wp_kses_post( $label['text'] ) );
 				}
 				$placeholder = isset( $attrs['placeholder'] ) ? $attrs['placeholder'] : false;
 				unset( $attrs['type'] );
@@ -150,8 +152,10 @@ class Input {
 			?>
 				<select <?php echo \WeCodeArt\Markup::generate_attr( 'select', $attrs ); ?>>
 					<?php if( $placeholder ) { ?>
-						<option disabled<?php if( ! isset( $attrs['value'] ) ) : ?> selected<?php endif; ?>><?php 
-							echo esc_html( $placeholder ); 
+						<option disabled<?php if( ! isset( $attrs['value'] ) ) : ?> selected<?php endif; ?>><?php
+						
+							echo esc_html( $placeholder );
+
 						?></option>
 					<?php } ?>
 					<?php foreach( $choices as $value => $label ) {
@@ -160,8 +164,10 @@ class Input {
 							'selected'	=> isset( $attrs['value'] ) ? (string) $attrs['value'] === (string) $value : null
 						];
 						?>
-						<option <?php echo \WeCodeArt\Markup::generate_attr( 'select-option', $option ); ?>><?php 
+						<option <?php echo \WeCodeArt\Markup::generate_attr( 'select-option', $option ); ?>><?php
+
 							echo esc_html( $label );
+
 						?></option>
 					<?php } ?>
 				</select>
@@ -181,9 +187,10 @@ class Input {
 				$fieldset = [ 'class' => implode( ' ', $classes ) ];
 				?>
 				<fieldset <?php echo \WeCodeArt\Markup::generate_attr( 'fieldset-' . $ctx, $fieldset ); ?>>
-				<?php if ( isset( $label['text'] ) ) {
-					printf( '<legend>%s</legend>', esc_html( $label['text'] ) ); 
-				}
+				<?php
+					if ( isset( $label['text'] ) ) {
+						printf( '<legend>%s</legend>', esc_html( $label['text'] ) ); 
+					}
 				foreach ( (array) $choices as $key => $label ) {
 					$wrap_args = [ 'class' => 'form-check custom-control custom-' . $ctx ];
 					$label = is_string( $label ) ? [ 'text' => $label ] : $label;
@@ -202,11 +209,14 @@ class Input {
 
 					$input_attrs = \WeCodeArt\Markup::generate_attr( 'fieldset-' . $ctx . '-input', $input_args );
 				?>
-					<input <?php echo $input_attrs; // WPCS OK - Escaped in function above. ?>/>
-					<?php 
-						printf( '<label class="form-check-label custom-control-label" for="%s">%s</label>', 
-							esc_attr( $input_args['id'] ), esc_html( $label['text'] ) 
-						); ?>
+					<input <?php echo $input_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>/>
+					<?php
+						printf( 
+							'<label class="form-check-label custom-control-label" for="%s">%s</label>', 
+							esc_attr( $input_args['id'] ), 
+							wp_kses_post( $label['text'] ) 
+						);
+					?>
 					</div>
 				<?php } ?>
 				<?php if( ! empty( $messages ) ) self::messages( $messages ); ?>

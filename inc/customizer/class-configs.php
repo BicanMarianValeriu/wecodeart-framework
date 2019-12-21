@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.9
+ * @version		4.0.9
  */
 
 namespace WeCodeArt\Customizer;
@@ -94,7 +94,16 @@ class Configs extends Config {
 				'priority' => 10,
 				'title'    => esc_html__( 'Copyright', wecodeart_config( 'textdomain' ) ),
 				'panel'    => 'footer',
-			)
+			),
+			/**
+			 * Extensions
+			 */
+			array(
+				'name'     => 'extensions',
+				'type'     => 'panel',
+				'priority' => 25,
+				'title'    => esc_html__( 'Extensions', wecodeart_config( 'textdomain' ) ) 
+			),
 		);
 
 		return array_merge( $configurations, $configs );

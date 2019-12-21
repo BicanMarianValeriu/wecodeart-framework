@@ -303,7 +303,7 @@ $conditionals   = Conditional::get_conditionals();
 /**
  * Before Setup Hook
  *
- * @since 4.0.1 
+ * @since 4.0.1
  */
 do_action( 'wecodeart/setup/before' );
 
@@ -312,7 +312,7 @@ require_once __DIR__ . '/config/setup.php';
 /**
  * After Setup Hook
  *
- * @since 4.0.1 
+ * @since 4.0.1
  */
 do_action( 'wecodeart/setup/after' );
 
@@ -321,6 +321,12 @@ do_action( 'wecodeart/setup/after' );
  */
 if( Activation::get_instance()->is_ok() ) {
     $theme->load();
+    /**
+     * Theme Loaded Hook
+     *
+     * @since 4.0.9
+     */
+    do_action( 'wecodeart/theme/loaded' );
 }
 
 return $theme;

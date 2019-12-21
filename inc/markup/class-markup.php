@@ -275,7 +275,7 @@ class Markup {
 	 * Renders template file with data.
 	 *
 	 * @since	3.7.3
-	 * @version	3.9.5
+	 * @version	4.0.9
 	 *
 	 * @param  string $file Relative path to the template file.
 	 * @param  array  $data Dataset for the template.
@@ -284,11 +284,12 @@ class Markup {
 	 */
 	public static function template( $file, $data = [], $echo = true ) {
 		$template = new Markup\Template( wecodeart_config() );
-		
+		$template->set_file( $file );
+
 		if( $echo ) {
-			return $template->set_file( $file )->render( $data );
+			return $template->render( $data );
 		}
 
-		return $template->set_file( $file )->compile( $data );
+		return $template->compile( $data );
 	}
 }

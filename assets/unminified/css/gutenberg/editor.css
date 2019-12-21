@@ -388,4 +388,22 @@ body.wca-title-hidden .wca-hidden-title-label {
 .is-wca-heading-label-on.is-guide-lines-on .editor-styles-wrapper .wp-block[data-type="core/heading"]:not(.is-selected):not(.is-hovered) .wp-block-heading h6::after {
   left: -34px; }
 
+.wecodeart-horizontal-tabs--tooltips {
+  border-top: 1px solid #d3d3d3;
+  margin-bottom: 10px; }
+  .wecodeart-horizontal-tabs--tooltips .components-tab-panel__tabs {
+    border-bottom: 1px solid #d3d3d3; }
+  .wecodeart-horizontal-tabs--tooltips .components-button {
+    padding: 10px 15px;
+    flex: 1 1 auto;
+    text-align: center;
+    justify-content: center; }
+    .wecodeart-horizontal-tabs--tooltips .components-button + .components-button {
+      border-left: 1px solid #d3d3d3; }
+  .wecodeart-horizontal-tabs--tooltips .components-base-control .components-base-control__help {
+    margin-top: 0; }
+
+.wecodeart-tooltips-modal {
+  min-width: 40rem; }
+
 /*# sourceMappingURL=editor.css.map */

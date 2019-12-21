@@ -1,6 +1,8 @@
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/dropdown';
+import 'bootstrap/js/dist/tooltip';
+import 'bootstrap/js/dist/popover';
 
 import wcaHasScrollbar, { handleDocumentScrollbar } from './helpers/HasScrollbar';
 
@@ -23,6 +25,23 @@ import wcaHasScrollbar, { handleDocumentScrollbar } from './helpers/HasScrollbar
 		html.classList.add('js');
 		handleDocumentScrollbar();
 		window.onresize = handleDocumentScrollbar;
+
+		const { fn: { getOptions } } = wecodeart;
+		
+		const customTooltips = document.querySelectorAll('.has-tooltip');
+		for (let item of customTooltips) {
+			const $item = jQuery(item);
+			const options = getOptions(item.getAttribute('options'));
+			const { type } = options;
+			delete options.type;
+			if (type === 'popover') {
+				$item.popover(options);
+			}
+
+			if (type === 'tooltip') {
+				$item.tooltip(options);
+			}
+		}
 	});
 
 }).apply(this, [window.wecodeart]);

@@ -12,13 +12,13 @@
 		"popper.js": "^1.16.0"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.7.4",
+		"@babel/core": "^7.7.5",
 		"@babel/plugin-proposal-class-properties": "^7.7.4",
 		"@babel/plugin-proposal-object-rest-spread": "^7.7.4",
 		"@babel/plugin-transform-async-to-generator": "^7.7.4",
 		"@babel/plugin-transform-react-jsx": "^7.7.4",
 		"@babel/polyfill": "^7.7.0",
-		"@babel/preset-env": "^7.7.4",
+		"@babel/preset-env": "^7.7.6",
 		"@babel/register": "^7.7.4",
 		"@wordpress/browserslist-config": "^2.6.0",
 		"autoprefixer": "^9.7.3",
@@ -38,7 +38,7 @@
 		"merge-stream": "^2.0.0",
 		"through2": "^3.0.1",
 		"vinyl-named": "^1.1.0",
-		"webpack": "^4.41.2",
+		"webpack": "^4.41.3",
 		"webpack-cli": "^3.3.10",
 		"webpack-stream": "^5.2.1"
 	}

@@ -24,11 +24,7 @@ export const underline = {
 		const formatTypes = select('core/rich-text').getFormatTypes();
 		const checkFormats = formatTypes.filter((formats) => formats.name === 'wpcom/underline');
 
-		const onToggle = () => {
-			onChange(
-				toggleFormat(value, { type: name })
-			);
-		};
+		const onToggle = () => onChange(toggleFormat(value, { type: name }));
 
 		return (
 			<Fragment>

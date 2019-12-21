@@ -1,3 +1,9 @@
+v4.0.9
+- Added - 'wecodeart/theme/loaded' hook
+- Added - Gutenberg Tooltip format plugin
+- Fixed - Markup::input HTML validation with double generated id`s
+- Updated - Markup\Template to have the ability to search in custom folder instead of only theme (for plugins)
+
 v4.0.8
 - Fixed - Captcha error when user is logged in an captcha is shown
 - Updated - Minor CSS fixes

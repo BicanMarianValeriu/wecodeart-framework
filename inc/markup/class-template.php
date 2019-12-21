@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Template
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.7.3
- * @version     4.0.1
+ * @version     4.0.9
  */
 
 namespace WeCodeArt\Markup;
@@ -69,7 +69,7 @@ class Template {
      * @return void
      */
     public function render( array $context = [] ) {
-        if ( $template = locate_template( $path = $this->get_relative_path(), false, false ) ) {
+        if ( $template = $this->locate_template( $this->get_relative_path(), false, false ) ) {
             $this->do_actions();
 
             extract( apply_filters( "wecodeart/filter/template/context", $context, $this->get_file_name() ) );
@@ -180,5 +180,38 @@ class Template {
      */
     public function get_file() {
         return $this->file;
+    }
+
+    /**
+     * Locate the template.
+     *
+     * @return string
+     */
+    public function locate_template( $template_names, $load = false, $require_once = true ) {
+        $located = '';
+        foreach ( (array) $template_names as $template_name ) {
+            if ( ! $template_name ) {
+                continue;
+            }
+            if ( file_exists( get_stylesheet_directory() . '/' . $template_name ) ) {
+                $located = get_stylesheet_directory() . '/' . $template_name;
+                break;
+            } elseif ( file_exists( get_template_directory() . '/' . $template_name ) ) {
+                $located = get_template_directory() . '/' . $template_name;
+                break;
+            } elseif ( file_exists( $this->config['paths']['directory'] . '/' . $template_name ) ) {
+                $located = $this->config['paths']['directory'] . '/' . $template_name;
+                break;
+            } elseif ( file_exists( ABSPATH . WPINC . '/theme-compat/' . $template_name ) ) {
+                $located = ABSPATH . WPINC . '/theme-compat/' . $template_name;
+                break;
+            }
+        }
+     
+        if ( $load && '' !== $located ) {
+            load_template( $located, $require_once );
+        }
+     
+        return $located;
     }
 }

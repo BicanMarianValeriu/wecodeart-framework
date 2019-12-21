@@ -25,9 +25,7 @@ class Edit extends Component {
     }
 
     toggle() {
-        this.setState((state) => ({
-            isOpen: !state.isOpen,
-        }));
+        this.setState((state) => ({ isOpen: !state.isOpen }));
     }
 
     render() {
@@ -72,12 +70,7 @@ class Edit extends Component {
                                     attributes.lang = lang;
                                 }
 
-                                onChange(
-                                    applyFormat(value, {
-                                        type: name,
-                                        attributes,
-                                    })
-                                );
+                                onChange(applyFormat(value, { type: name, attributes }));
                             } else {
                                 onChange(removeFormat(value, name));
                             }

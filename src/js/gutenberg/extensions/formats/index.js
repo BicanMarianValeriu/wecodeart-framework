@@ -8,6 +8,7 @@ import { textColor } from './text-color';
 import { backgroundColor } from './background-color';
 import { markdown } from './markdown';
 import { clear } from './clear';
+import { tooltip } from './tooltip';
 
 /**
  * WordPress dependencies
@@ -23,6 +24,7 @@ function registerWeCodeArtFormats() {
 		markdown,
 		textColor,
 		underline,
+		tooltip
 	].forEach( ( { name, ...settings } ) => {
 		if ( name ) {
 			registerFormatType( name, settings );
