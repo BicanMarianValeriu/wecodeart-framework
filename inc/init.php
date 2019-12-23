@@ -274,14 +274,14 @@ function wecodeart_config( $key = null, $default = null ) {
  * Check if condition is met.
  *
  * @since	4.0
- * @version	4.0.1
+ * @version	4.0.9
  *
  * @param   string|array    $parameters
  *
  * @return  mixed|null|bool
  */
 function wecodeart_if( $parameters ) {
-    if( empty( $parameters ) ) return null;
+    if( empty( $parameters ) ) return true;
     
     foreach ( (array) $parameters as $conditional ) {
         if ( ! wecodeart( 'conditionals' )->has( $conditional ) ) return null;
@@ -298,14 +298,13 @@ function wecodeart_if( $parameters ) {
  */
 $theme          = wecodeart();
 $config         = Config::get_config();
-$conditionals   = Conditional::get_conditionals();
 
 /**
  * Before Setup Hook
  *
  * @since 4.0.1
  */
-do_action( 'wecodeart/setup/before' );
+do_action( 'wecodeart/setup/before', $config );
 
 require_once __DIR__ . '/config/setup.php';
 
@@ -314,19 +313,25 @@ require_once __DIR__ . '/config/setup.php';
  *
  * @since 4.0.1
  */
-do_action( 'wecodeart/setup/after' );
+do_action( 'wecodeart/setup/after', $theme );
 
 /**
  * Maybe Load the theme if checks are passed
  */
 if( Activation::get_instance()->is_ok() ) {
     $theme->load();
+    
     /**
      * Theme Loaded Hook
      *
      * @since 4.0.9
      */
     do_action( 'wecodeart/theme/loaded' );
+
+    /**
+     * Load Integrations
+     */
+    wecodeart( 'integrations' )->load();
 }
 
 return $theme;

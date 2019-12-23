@@ -9,7 +9,7 @@
  * @subpackage 	Conditional
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		4.0
- * @version		4.0.1
+ * @version		4.1.0
  */
 
 namespace WeCodeArt;
@@ -24,6 +24,9 @@ use ArrayAccess;
  * @author     Bican Marian Valeriu <marianvaleriubican@gmail.com>
  */
 class Conditional implements ArrayAccess {
+
+    use Singleton;
+
     /**
      * All of the conditional items.
      *
@@ -38,8 +41,10 @@ class Conditional implements ArrayAccess {
      *
      * @return void
      */
-    public function __construct( array $items = [] ) {
-        $this->items = $items;
+    public function init() {
+        foreach( self::get_conditionals() as $key => $condition ) {
+            $this->set( $key, $condition );
+        }
     }
 
 	/**

@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.9.5
- * @version		4.0.1
+ * @version		4.1.0
  */
 
 /**
@@ -30,8 +30,20 @@ wecodeart()->bind( 'config', function () use ( $config ) {
  * @param   array   $conditionals   - configuration object passed earlier.
  * @return  void
  */
-wecodeart()->bind( 'conditionals', function () use ( $conditionals ) {
-    return new WeCodeArt\Conditional( $conditionals );
+wecodeart()->bind( 'conditionals', function () {
+    return WeCodeArt\Conditional::get_instance();
+} );
+
+/**
+ * Bind Integrations.
+ *
+ * @since   4.1.0
+ *
+ * @param   array   $conditionals   - configuration object passed earlier.
+ * @return  void
+ */
+wecodeart()->bind( 'integrations', function () {
+    return WeCodeArt\Support::get_instance();
 } );
 
 /**

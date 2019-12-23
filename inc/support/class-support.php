@@ -9,21 +9,19 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.6
+ * @version		4.1.0
  */
 
 namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Support\ANR;
-use WeCodeArt\Support\WPSeo;
-use WeCodeArt\Support\WooCommerce;
+use ArrayAccess;
 
 /**
  * Support for various plugins and features.
  */
-class Support {
+class Support implements ArrayAccess {
 
 	use Singleton; 
 
@@ -32,7 +30,7 @@ class Support {
 	 *
 	 * @var Integration[]
 	 */
-	protected $integrations = [];
+	protected $items = [];
 
 	/**
 	 * Send to Constructor
@@ -43,13 +41,10 @@ class Support {
 		\add_action( 'after_setup_theme', [ $this, 'after_setup_theme'	] );
 		\add_action( 'after_setup_theme', [ $this, 'load_translations'	] );
 
-		// Register Integrations
-		$this->register_integration( ANR::class );
-		$this->register_integration( WPSeo::class );
-		$this->register_integration( WooCommerce::class );
-
-		// Load Integrations
-		$this->load_integrations();
+		// Register Default Integrations
+		$this->register( 'plugin/anr', 			Support\ANR::class 			);
+		$this->register( 'plugin/wpseo', 		Support\WPSeo::class 		);
+		$this->register( 'plugin/woocommerce', 	Support\WooCommerce::class 	);
 	}
 
 	/**
@@ -58,7 +53,7 @@ class Support {
 	 * @since 	1.0
 	 * @version	4.0.3
 	 */
-	function after_setup_theme() {
+	public function after_setup_theme() {
 		// Add support for Meta info for posts other than Page Type 
 		foreach( wecodeart( 'public_post_types' ) as $type ) { 
 			add_post_type_support( $type, 'wecodeart-post-info' );
@@ -267,26 +262,16 @@ class Support {
 	}
 
 	/**
-	 * Registers an integration.
-	 *
-	 * @param string $class The class name of the integration to be loaded.
-	 *
-	 * @return void
-	 */
-	public function register_integration( $class ) {
-		$this->integrations[] = $class;
-	}
-
-	/**
 	 * Loads all registered integrations if their conditionals are met.
 	 *
 	 * @return void
 	 */
-	protected function load_integrations() {
-		foreach ( $this->integrations as $class ) {
+	public function load() {
+		foreach ( $this->items as $class ) {
 			if ( ! $this->conditionals_are_met( $class ) ) {
 				continue;
 			}
+			$class::get_instance();
 			$class::get_instance()->register_hooks();
 		}
 	}
@@ -302,4 +287,113 @@ class Support {
 		$conditionals = $class::get_conditionals();
 		return wecodeart_if( $conditionals );
 	}
+
+	/**
+     * Determine if the given integration value exists.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function has( $key ) {
+        return isset( $this->items[$key] );
+    }
+
+    /**
+     * Get the specified integration value.
+     *
+     * @param  string  $key
+     * @param  mixed   $default
+     *
+     * @return mixed
+     */
+    public function get( $key, $default = null ) {
+        if ( ! isset( $this->items[$key] ) ) {
+            return $default;
+        }
+
+        return apply_filters( "wecodeart/integration/get/{$key}", $this->items[$key] );
+    }
+
+	/**
+     * Set a given integration value.
+     *
+     * @param  array|string  $key
+     * @param  mixed   $value
+     *
+     * @return void
+     */
+    public function register( $key, $value = null ) {
+        $this->set( $key, $value );
+	}
+	
+    /**
+     * Set a given integration value.
+     *
+     * @param  array|string  $key
+     * @param  mixed   $value
+     *
+     * @return void
+     */
+    public function set( $key, $value = null ) {
+        $keys = is_array( $key ) ? $key : [ $key => $value ];
+
+        foreach ( $keys as $key => $value ) {
+            $this->items[$key] = apply_filters( "wecodeart/integration/set/{$key}", $value );
+        }
+    }
+
+    /**
+     * Get all of the integration items for the application.
+     *
+     * @return array
+     */
+    public function all() {
+        return $this->items;
+    }
+
+    /**
+     * Determine if the given integration option exists.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function offsetExists( $key ) {
+        return $this->has( $key );
+    }
+
+    /**
+     * Get a integration option.
+     *
+     * @param  string  $key
+     *
+     * @return mixed
+     */
+    public function offsetGet( $key ) {
+        return $this->get( $key );
+    }
+
+    /**
+     * Set a integration option.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     *
+     * @return void
+     */
+    public function offsetSet( $key, $value ) {
+        $this->set( $key, $value );
+    }
+
+    /**
+     * Unset a integration option.
+     *
+     * @param  string  $key
+     *
+     * @return void
+     */
+    public function offsetUnset( $key ) {
+        $this->set( $key, null );
+    }
 }

@@ -43,7 +43,7 @@ class WPSeo {
 		wecodeart( 'conditionals' )->set( [
 			'is_yoast_active' => Plugin_Condition::class,
 		] );
-
+		
 		return [ 'is_yoast_active' ];
 	}
 

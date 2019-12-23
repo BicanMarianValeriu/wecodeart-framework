@@ -1,3 +1,7 @@
+v4.1.0
+- Updated - Refactored Support class - now loads integrations after theme has fully loaded
+- Added - wecodeart( 'integrations' ) for registering integrations for the theme
+
 v4.0.9
 - Added - 'wecodeart/theme/loaded' hook
 - Added - Gutenberg Tooltip format plugin
