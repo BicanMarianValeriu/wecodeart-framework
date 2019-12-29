@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.9.5
- * @version		4.1.0
+ * @version		4.1.1
  */
 
 /**
@@ -135,24 +135,6 @@ wecodeart()->bind( 'version', function () {
 } );
 
 /**
- * Bind Public Posts.
- *
- * @since   3.9.5
- *
- * @param   array $parameters
- *
- * @return  array
- */
-wecodeart()->bind( 'public_post_types', function( WeCodeArt $theme, $parameters ) {
-    $types = get_post_types( wp_parse_args( $parameters, apply_filters( 'wecodeart/bind/public_post_types/args', [ 
-        'public' 				=> true,
-        'publicly_queryable' 	=> true
-    ] ) ) );
-
-    return apply_filters( 'wecodeart/bind/public_post_types', $types );
-} );
-
-/**
  * Bind Register Sidebars.
  *
  * @since   3.9.5
@@ -193,4 +175,21 @@ wecodeart()->bind( 'register_sidebars', function( WeCodeArt $theme, $parameters 
             'after_title'   => '</h4>',
         ] );
     }
+} );
+
+/**
+ * Bind Public Posts.
+ *
+ * @since   3.9.5
+ * @version 4.1.1
+ *
+ * @param   array $parameters
+ *
+ * @return  array
+ */
+wecodeart()->factory( 'public_post_types', function( WeCodeArt $theme, $parameters ) {
+    return get_post_types( wp_parse_args( $parameters, [ 
+        'public' 				=> true,
+        'publicly_queryable' 	=> true
+    ] ) );
 } );

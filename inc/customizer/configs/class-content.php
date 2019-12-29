@@ -94,7 +94,7 @@ class Content extends Config {
 					], 
 					'priority'             => 20,
 					'default'              => 'container',
-					'active_callback'	   => function() use ( $ID ) { return is_page( $ID ); },
+					'active_callback'	   => function() use( $ID ) { return is_page( $ID ); },
 					'transport' 		   => 'postMessage'
 				),
 				array(
@@ -107,7 +107,7 @@ class Content extends Config {
 					'priority'		=> 30,
 					'default'		=> [ 'content', 'primary' ],
 					'choices'		=> $c_modules,
-					'active_callback'	=> function() use ( $ID ) { return is_page( $ID ); },
+					'active_callback'	=> function() use( $ID ) { return is_page( $ID ); },
 					'transport'		=> 'postMessage',
 					'partial'		=> [
 						'selector'        		=> '.content-area',
@@ -141,7 +141,7 @@ class Content extends Config {
 						'container-fluid' 	=> esc_html__( 'Container Fluid', wecodeart_config( 'textdomain' ) ),
 					], 
 					'priority'             => 20, 
-					'active_callback'	   => function() use ( $type ) {
+					'active_callback'	   => function() use( $type ) {
 						if( $type === 'post' && wecodeart_if( 'is_post_archive' ) ) return true;
 						return is_post_type_archive( $type );
 					},
@@ -179,7 +179,7 @@ class Content extends Config {
 						'container-fluid' 	=> esc_html__( 'Container Fluid', wecodeart_config( 'textdomain' ) ),
 					), 
 					'priority'             => 25, 
-					'active_callback'	   => function() use ( $type ) {
+					'active_callback'	   => function() use( $type ) {
 						return is_singular( $type );
 					},
 					'transport' 		   => 'postMessage'
@@ -230,7 +230,7 @@ class Content extends Config {
 					'priority'		=> 5, 
 					'choices'		=> $meta_modules,  
 					'transport'		=> 'postMessage',
-					'active_callback' => function() use ( $type ) {
+					'active_callback' => function() use( $type ) {
 						if( $type === 'post' && wecodeart_if( 'is_post_archive' ) ) return true;
 						return is_post_type_archive( $type );
 					},

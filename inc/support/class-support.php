@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		4.1.0
+ * @version		4.1.1
  */
 
 namespace WeCodeArt;
@@ -51,16 +51,14 @@ class Support implements ArrayAccess {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 	1.0
-	 * @version	4.0.3
+	 * @version	4.1.1
 	 */
 	public function after_setup_theme() {
-		// Add support for Meta info for posts other than Page Type 
-		foreach( wecodeart( 'public_post_types' ) as $type ) { 
-			add_post_type_support( $type, 'wecodeart-post-info' );
-		}
-
 		// Content width
 		$GLOBALS['content_width'] = apply_filters( 'wecodeart/filter/content_width', 1280 );
+		
+		// Add support for Meta info for posts other than Page Type 
+		add_post_type_support( 'post', 'wecodeart-post-info' );
 
 		// Starter Content
 		add_theme_support( 'starter-content', self::get_starter_content() );
@@ -271,7 +269,6 @@ class Support implements ArrayAccess {
 			if ( ! $this->conditionals_are_met( $class ) ) {
 				continue;
 			}
-			$class::get_instance();
 			$class::get_instance()->register_hooks();
 		}
 	}

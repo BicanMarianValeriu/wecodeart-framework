@@ -4,7 +4,7 @@
         height: 30px;
         vertical-align: -8%;
 
-        @include media-breakpoint-down(sm) {
+        @include media-breakpoint-down( 'sm' ) {
             width: 20px;
             height: 20px;
         }

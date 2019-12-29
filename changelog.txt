@@ -1,3 +1,8 @@
+v4.1.1
+- Updated - Use add_post_type_support( 'post', 'wecodeart-post-info' ); only for posts (was on all public posts)
+- Updated - wecodeart( 'public_posts_types' ) to "Factory"
+- Removed - wecodeart/bind/public_post_types/args and wecodeart/bind/public_post_types filters
+
 v4.1.0
 - Updated - Refactored Support class - now loads integrations after theme has fully loaded
 - Added - wecodeart( 'integrations' ) for registering integrations for the theme
