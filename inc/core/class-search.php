@@ -9,7 +9,7 @@
  * @subpackage 	Core\Search
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.9.3
- * @version		4.0.1
+ * @version		4.1.2
  */ 
 
 namespace WeCodeArt\Core;
@@ -75,7 +75,8 @@ class Search {
 	/**
 	 * Get form markup.
 	 *
-	 * @since 1.0.0
+	 * @since 	1.0.0
+	 * @version	4.1.2
 	 *
 	 * @return string Form markup.
 	 */
@@ -92,7 +93,7 @@ class Search {
 		] ], function() {
 
 			$html = $this->get_label() . $this->get_input();
-			echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo apply_filters( 'wecodeart/filter/search/get_html', $html ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		}, [], false );
 

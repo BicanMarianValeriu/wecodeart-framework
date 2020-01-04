@@ -9,7 +9,7 @@
  * @subpackage 	Core\Hooks
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.0
- * @version		4.0.6
+ * @version		4.1.2
  */
 
 namespace WeCodeArt\Core;
@@ -37,6 +37,7 @@ class Hooks {
 		add_filter( 'post_class',		array( $this, 'post_classes'	) );
 		add_filter( 'get_search_form',	array( $this, 'search_form' 	) );
 		add_filter( 'wp_nav_menu_args',	array( $this, 'menu_args' 		) );
+		add_filter( 'wp_get_attachment_image_attributes', [ $this, 'lazy_image_loading' ], 10, 3 );
 	}
 	
 	/**
@@ -78,15 +79,6 @@ class Hooks {
 		$classes = array_map( 'sanitize_html_class', $classes );
 
 		return $classes;
-	}
-	
-	/**
-	 * Filter the Custom Logo markup.
-	 *
-	 * @return html
-	 */
-	public function custom_logo() {
-		_deprecated_function( __FUNCTION__, '3.9.5' );
 	}
 	
 	/**
@@ -160,5 +152,25 @@ class Hooks {
 			'walker' 		 => new Menu,
 			'fallback_cb'	 => 'WeCodeArt\Walkers\Menu::fallback'
 		], $args );
+	}
+
+	/**
+	 * Filter the attributes of all images retrieved with `wp_get_attachment_image`,
+	 * add `loading="lazy"` to enable lazy loading in Chrome.
+	 *
+	 * @since 4.1.2
+	 *
+	 * @param 	array $attr Attributes for the image markup.
+	 *
+	 * @return 	array The filtered $attr array.
+	 */
+	public function lazy_image_loading( $attr ) {
+		if ( ! current_theme_supports( 'wecodeart-lazy-images' ) ) {
+			return $attr;
+		}
+
+		$attr['loading'] = 'lazy';
+
+		return $attr;
 	}
 }

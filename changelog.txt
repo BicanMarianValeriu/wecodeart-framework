@@ -1,3 +1,8 @@
+v4.1.2
+- Added - wecodeart/filter/search/get_html filter for filtering the search form/widget HTML
+- Added - Feature: Lazy load images in Chrome 76+ (off by default, enabled with wecodeart-lazy-images theme support)
+- Removed - Deprecated functions
+
 v4.1.1
 - Updated - Use add_post_type_support( 'post', 'wecodeart-post-info' ); only for posts (was on all public posts)
 - Updated - wecodeart( 'public_posts_types' ) to "Factory"
