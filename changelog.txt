@@ -1,3 +1,6 @@
+v4.1.3
+- Added - 
+
 v4.1.2
 - Added - wecodeart/filter/search/get_html filter for filtering the search form/widget HTML
 - Added - Feature: Lazy load images in Chrome 76+ (off by default, enabled with wecodeart-lazy-images theme support)
