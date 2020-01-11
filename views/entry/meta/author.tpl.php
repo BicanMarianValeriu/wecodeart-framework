@@ -31,7 +31,7 @@ use function WeCodeArt\Functions\kses_svg;
     ?></span>
     <span class="screen-reader-text"><?php
     
-    esc_html_e( 'Posted by ', wecodeart_config( 'textdomain' ) );
+    esc_html_e( 'Posted by ', 'wecodeart' );
 
     ?></span>
     <a href="<?php echo esc_url( $author_url ); ?>" class="entry-author-link" rel="author">

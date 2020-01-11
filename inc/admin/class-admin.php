@@ -58,11 +58,11 @@ class Admin {
 							<a href="#" data-repeat="%6$s" class="wca-notice__close button-secondary">%5$s</a>
 						</p>
 					</div>',
-					esc_html__( 'Did you know? WeCodeArt Framework uses Customizer to manage options!', wecodeart_config( 'textdomain' ) ),
-					esc_html__( 'Go to WP Customizer and see the options. Each CPT has it\'s own options, based on page/archive you are currently viewing in customizer.', wecodeart_config( 'textdomain' ) ),
+					esc_html__( 'Did you know? WeCodeArt Framework uses Customizer to manage options!', 'wecodeart' ),
+					esc_html__( 'Go to WP Customizer and see the options. Each CPT has it\'s own options, based on page/archive you are currently viewing in customizer.', 'wecodeart' ),
 					esc_url( admin_url( '/customize.php' ) ),
-					esc_html__( 'Awesome, show me the options', wecodeart_config( 'textdomain' ) ),
-					esc_html__( 'Thanks, but I already know', wecodeart_config( 'textdomain' ) ),
+					esc_html__( 'Awesome, show me the options', 'wecodeart' ),
+					esc_html__( 'Thanks, but I already know', 'wecodeart' ),
 					WEEK_IN_SECONDS
 				),
 				'repeat'	=> WEEK_IN_SECONDS,
@@ -97,12 +97,12 @@ class Admin {
 						</div>
 					</div>',
 					'https://www.wecodeart.com/wp-content/uploads/2019/01/cropped-wecodeart-logo-2.png',
-					esc_html__( 'Hello! I\'m glad you use WeCodeArt Framework to build this website - Thanks a ton!', wecodeart_config( 'textdomain' ) ),
-					esc_html__( 'Could you please do me a BIG favor and give it a 5-star rating on WordPress? This would boost my motivation and help other users make a comfortable decision while choosing the WeCodeArt Framework.', wecodeart_config( 'textdomain' ) ),
+					esc_html__( 'Hello! I\'m glad you use WeCodeArt Framework to build this website - Thanks a ton!', 'wecodeart' ),
+					esc_html__( 'Could you please do me a BIG favor and give it a 5-star rating on WordPress? This would boost my motivation and help other users make a comfortable decision while choosing the WeCodeArt Framework.', 'wecodeart' ),
 					'https://wordpress.org/support/theme/wecodeart/reviews/?filter=5#new-post',
-					esc_html__( 'Ok, you deserve it', wecodeart_config( 'textdomain' ) ),
-					esc_html__( 'Remind me later', wecodeart_config( 'textdomain' ) ),
-					esc_html__( 'I already did', wecodeart_config( 'textdomain' ) ),
+					esc_html__( 'Ok, you deserve it', 'wecodeart' ),
+					esc_html__( 'Remind me later', 'wecodeart' ),
+					esc_html__( 'I already did', 'wecodeart' ),
 					WEEK_IN_SECONDS
 				),
 				'repeat'	=> WEEK_IN_SECONDS,

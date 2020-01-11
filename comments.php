@@ -24,7 +24,7 @@ if ( post_password_required() ) {
 			'class' => 'alert alert-danger shadow-soft'
 		]
 	] ], 'printf', [ 
-		esc_html__( 'This post is password protected. Enter the password to view comments.', wecodeart_config( 'textdomain' ) )
+		esc_html__( 'This post is password protected. Enter the password to view comments.', 'wecodeart' )
 	] );
 } 
 

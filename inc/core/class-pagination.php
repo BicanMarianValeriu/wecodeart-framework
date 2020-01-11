@@ -73,7 +73,7 @@ class Pagination {
                 'tag'   => 'ul',
                 'attrs' => [
                     'class'         => 'pagination',
-                    'aria-label'    => esc_html__( 'Pagination', wecodeart_config( 'textdomain' ) )
+                    'aria-label'    => esc_html__( 'Pagination', 'wecodeart' )
                 ]
             ] 
         ], function() use ( $links ) { 
@@ -111,7 +111,7 @@ class Pagination {
             'tag'   => 'nav',
             'attrs' => [
                 'class'     => 'pagination pagination--entry pb-3',
-                'aria-label'=> esc_html__( 'Pagination', wecodeart_config( 'textdomain' ) ),
+                'aria-label'=> esc_html__( 'Pagination', 'wecodeart' ),
                 'itemscope' => 'itemscope',
                 'itemtype'  => 'http://schema.org/SiteNavigationElement'
             ] 
@@ -144,7 +144,7 @@ class Pagination {
                 'tag'   => 'nav', 
                 'attrs' => [ 
                     'class'         => 'entry-navigation',
-                    'aria-label'    => esc_html__( 'Navigation', wecodeart_config( 'textdomain' ) ),
+                    'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
                     'itemscope'     => 'itemscope',
                     'itemtype'      => 'http://schema.org/SiteNavigationElement',
                 ] 
@@ -158,7 +158,7 @@ class Pagination {
 		], function() { ?>
             <h3 class="screen-reader-text"><?php 
                 printf( 
-                    esc_html__( '%s Navigation', wecodeart_config( 'textdomain' ) ), 
+                    esc_html__( '%s Navigation', 'wecodeart' ), 
                     get_post_type_object( get_post_type() )->labels->singular_name
                 ); 
             ?></h3>
@@ -202,7 +202,7 @@ class Pagination {
                 'tag'   => 'nav',
                 'attrs' => [
                     'class'         => 'comments__nav',
-					'aria-label'    => esc_html__( 'Navigation', wecodeart_config( 'textdomain' ) ),
+					'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
                     'itemscope'     => 'itemscope',
                     'itemtype'      => 'http://schema.org/SiteNavigationElement',
                 ]
@@ -215,7 +215,7 @@ class Pagination {
             ]
 		], function() {
 			?>
-            <h3 class="screen-reader-text"><?php esc_html_e( 'Comments Navigation', wecodeart_config( 'textdomain' ) ); ?></h3>
+            <h3 class="screen-reader-text"><?php esc_html_e( 'Comments Navigation', 'wecodeart' ); ?></h3>
 			<?php 
 			
 			$args_prev = apply_filters( 'wecodeart/filter/comments/navigation/prev/args', [] );

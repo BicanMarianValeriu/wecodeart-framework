@@ -21,10 +21,10 @@ defined( 'ABSPATH' ) || exit();
 ?>
 <span class="entry-edit float-right" title="<?php
     echo esc_attr( sprintf( 
-        __( 'Click to edit "%s"!', wecodeart_config( 'textdomain' ) ), 
+        __( 'Click to edit "%s"!', 'wecodeart' ), 
         get_the_title( $post_id ) 
     ) ); ?>"><?php
 
-    edit_post_link( esc_html__( 'Edit', wecodeart_config( 'textdomain' ) ), '', '', $post_id ?: 0, 'entry-edit__link' );
+    edit_post_link( esc_html__( 'Edit', 'wecodeart' ), '', '', $post_id ?: 0, 'entry-edit__link' );
     
 ?></span>

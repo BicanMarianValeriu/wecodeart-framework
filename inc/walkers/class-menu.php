@@ -332,7 +332,7 @@ class Menu extends Walker_Nav_Menu {
 			if ( $menu_class ) {
 				$fallback_output .= ' class="' . esc_attr( $menu_class ) . '"'; }
 			$fallback_output .= '>';
-			$fallback_output .= '<li class="menu-item"><a class="nav-link" href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="' . esc_attr__( 'Add a menu', wecodeart_config( 'textdomain' ) ) . '">' . esc_html__( 'Add a menu', wecodeart_config( 'textdomain' ) ) . '</a></li>';
+			$fallback_output .= '<li class="menu-item"><a class="nav-link" href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="' . esc_attr__( 'Add a menu', 'wecodeart' ) . '">' . esc_html__( 'Add a menu', 'wecodeart' ) . '</a></li>';
 			$fallback_output .= '</ul>';
 			if ( $container ) {
 				$fallback_output .= '</' . esc_attr( $container ) . '>';

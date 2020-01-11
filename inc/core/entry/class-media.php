@@ -253,11 +253,11 @@ class Media {
 		$output = apply_filters( 'wecodeart/filter/media/get_image', $output, $args, $id, $html, $url, $src );
 
 		if( $echo ) {
-			echo $output;
+			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			return;
 		}
 
-		return $output;
+		return $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
@@ -304,8 +304,8 @@ class Media {
 		$image = Markup::wrap( 'entry-media', $wrappers, [ __CLASS__, 'get_image' ], [ $args, true ], false ); 
 
 		if ( $image ) {
-		 	echo $image;
-			return null;
+		 	echo $image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			return;
 		} else {
 			return false;
 		} 

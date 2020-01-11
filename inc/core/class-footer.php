@@ -101,7 +101,7 @@ class Footer {
 			<span class="attribution__copyright"><?php echo wp_kses_post( $copyright ); ?></span>
 			<span class="attribution__credits"><?php
 				printf( 
-					esc_html__( 'Built on %1$s.', wecodeart_config( 'textdomain' ) ), 
+					esc_html__( 'Built on %1$s.', 'wecodeart' ), 
 					'<a href="https://www.wecodeart.com/" target="_blank">WeCodeArt Framework</a>' 
 				);
 			?></span>
@@ -146,7 +146,7 @@ class Footer {
 		foreach( range( 1, $columns ) as $column ) {
 			$widgets['footer-' . (string) $column ] = [
 				'id'		=> 'footer-' . $column,
-				'label'    	=> sprintf( esc_html__( 'Footer %s', wecodeart_config( 'textdomain' ) ), $column ),
+				'label'    	=> sprintf( esc_html__( 'Footer %s', 'wecodeart' ), $column ),
 				'callback' 	=> function() use ( $column ) {
 					self::render_column( $column );
 				}

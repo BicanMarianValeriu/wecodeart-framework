@@ -88,7 +88,7 @@ class ANR implements Integration {
 				'class' => 'form-group comment-form-captcha col-12 col-md-7' 
 			]
 		] ], function() { ?>
-			<label for="g-recaptcha-response"><?php esc_html_e( 'Captcha *', wecodeart_config( 'textdomain' ) ); ?></label>
+			<label for="g-recaptcha-response"><?php esc_html_e( 'Captcha *', 'wecodeart' ); ?></label>
 			<?php
 
 			Captcha::init()->form_field(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -119,7 +119,7 @@ class ANR implements Integration {
 				'class' => 'form-group comment-form-captcha col-12 col-md-7' 
 			]
 		] ], function() { ?>
-			<label for="g-recaptcha-response"><?php esc_html_e( 'Captcha *', wecodeart_config( 'textdomain' ) ); ?></label>
+			<label for="g-recaptcha-response"><?php esc_html_e( 'Captcha *', 'wecodeart' ); ?></label>
 			<?php
 
 			echo Captcha::init()->captcha_form_field(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

@@ -40,13 +40,13 @@ class Configs extends Config {
 				'name'     => 'header',
 				'type'     => 'panel',
 				'priority' => 5,
-				'title'    => esc_html__( 'Header Settings', wecodeart_config( 'textdomain' ) ) 
+				'title'    => esc_html__( 'Header Settings', 'wecodeart' ) 
 			),
 			array(
 				'name'     => 'header-bar',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => esc_html__( 'Header Bar', wecodeart_config( 'textdomain' ) ),
+				'title'    => esc_html__( 'Header Bar', 'wecodeart' ),
 				'panel'    => 'header',
 			),
 			/**
@@ -56,20 +56,20 @@ class Configs extends Config {
 				'name'     => 'content',
 				'type'     => 'panel',
 				'priority' => 10,
-				'title'    => esc_html__( 'Content Settings', wecodeart_config( 'textdomain' ) ) 
+				'title'    => esc_html__( 'Content Settings', 'wecodeart' ) 
 			),
 			array(
 				'name'     => 'content-layout',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => esc_html__( 'Layout Settings', wecodeart_config( 'textdomain' ) ),
+				'title'    => esc_html__( 'Layout Settings', 'wecodeart' ),
 				'panel'    => 'content',
 			),
 			array(
 				'name'     => 'content-entry',
 				'type'     => 'section',
 				'priority' => 10,
-				'title'    => esc_html__( 'Entry Settings', wecodeart_config( 'textdomain' ) ),
+				'title'    => esc_html__( 'Entry Settings', 'wecodeart' ),
 				'panel'    => 'content',
 			),
 			/**
@@ -79,20 +79,20 @@ class Configs extends Config {
 				'name'     => 'footer',
 				'type'     => 'panel',
 				'priority' => 15,
-				'title'    => esc_html__( 'Footer Settings', wecodeart_config( 'textdomain' ) ) 
+				'title'    => esc_html__( 'Footer Settings', 'wecodeart' ) 
 			),
 			array(
 				'name'     => 'footer-layout',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => esc_html__( 'Layout Settings', wecodeart_config( 'textdomain' ) ),
+				'title'    => esc_html__( 'Layout Settings', 'wecodeart' ),
 				'panel'    => 'footer',
 			),
 			array(
 				'name'     => 'footer-copyright',
 				'type'     => 'section',
 				'priority' => 10,
-				'title'    => esc_html__( 'Copyright', wecodeart_config( 'textdomain' ) ),
+				'title'    => esc_html__( 'Copyright', 'wecodeart' ),
 				'panel'    => 'footer',
 			),
 			/**
@@ -102,7 +102,7 @@ class Configs extends Config {
 				'name'     => 'extensions',
 				'type'     => 'panel',
 				'priority' => 25,
-				'title'    => esc_html__( 'Extensions', wecodeart_config( 'textdomain' ) ) 
+				'title'    => esc_html__( 'Extensions', 'wecodeart' ) 
 			),
 		);
 

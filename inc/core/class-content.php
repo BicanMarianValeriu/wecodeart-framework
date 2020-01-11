@@ -152,7 +152,7 @@ class Content {
 
 		$modules = [
 			'content' => [
-				'label'    	=> esc_html__( 'Entry Content', wecodeart_config( 'textdomain' ) ),
+				'label'    	=> esc_html__( 'Entry Content', 'wecodeart' ),
 				'callback' 	=> [ Loops::get_instance(), 'default' ],
 				'sidebar'	=> false
 			]
@@ -162,7 +162,7 @@ class Content {
 			foreach( $sides as $side ) {
 				$side = strtolower( $side );
 				$modules[$side] = [
-					'label'    	=> sprintf( esc_html__( '%s Sidebar', wecodeart_config( 'textdomain' ) ), ucfirst( $side ) ),
+					'label'    	=> sprintf( esc_html__( '%s Sidebar', 'wecodeart' ), ucfirst( $side ) ),
 					'callback' 	=> function() use ( $side ) {
 						self::render_sidebar( $side );
 					}
@@ -227,7 +227,7 @@ class Content {
 	 */
 	public function skip_link() {
 		?><a class="skip-link screen-reader-text" href="#content"><?php 
-			esc_html_e( 'Skip to content', wecodeart_config( 'textdomain' ) ); 
+			esc_html_e( 'Skip to content', 'wecodeart' ); 
 		?></a> <?php
 	}
 

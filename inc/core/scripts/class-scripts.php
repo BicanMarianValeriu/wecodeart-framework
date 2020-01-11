@@ -64,7 +64,7 @@ class Scripts {
 		
 		wp_localize_script( 
 			$this->make_handle(), 
-			explode( '-', wecodeart_config( 'textdomain' ) )[0], // Domain as JS object.
+			explode( '-', 'wecodeart' )[0], // Domain as JS object.
 			apply_filters( 'wecodeart/filter/scripts/core/localize', $wecodeart ) 
 		);
 	}
@@ -225,7 +225,7 @@ function get_asset( string $type, string $name, $location = '' ) {
 	if( ! in_array( $type, [ 'css', 'js' ] ) ) {
 		return _doing_it_wrong( 
 			__FUNCTION__, 
-			esc_html__( 'Asset must of type CSS/JS.', wecodeart_config( 'textdomain' ) ), 
+			esc_html__( 'Asset must of type CSS/JS.', 'wecodeart' ), 
 			wecodeart( 'version' ) 
 		);
 	}

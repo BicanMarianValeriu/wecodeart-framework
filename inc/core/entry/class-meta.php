@@ -56,7 +56,7 @@ class Meta {
 		$author_url = get_author_posts_url( $author_id );
 
 		// In order to render something when ajax refreshed in customizer.
-		$author_name = $author ?: esc_html__( 'Author Name', wecodeart_config( 'textdomain' ) );
+		$author_name = $author ?: esc_html__( 'Author Name', 'wecodeart' );
 		
 		Markup::template( 'entry/meta/author', [
 			'author_id'		=> $author_id,
@@ -170,10 +170,10 @@ class Meta {
 		Markup::template( 'entry/meta/comments', wp_parse_args( $args, [
 			'number'	=> (int) get_comments_number( get_the_ID() ),
 			'i18n' 		=> [
-				'more'		=> esc_html__( '% Comments', 			wecodeart_config( 'textdomain' ) ),
-				'one'		=> esc_html__( '1 Comment', 			wecodeart_config( 'textdomain' ) ),
-				'zero'		=> esc_html__( 'Leave a Comment', 		wecodeart_config( 'textdomain' ) ),
-				'closed'	=> esc_html__( 'Comments are Closed', 	wecodeart_config( 'textdomain' ) )
+				'more'		=> esc_html__( '% Comments', 			'wecodeart' ),
+				'one'		=> esc_html__( '1 Comment', 			'wecodeart' ),
+				'zero'		=> esc_html__( 'Leave a Comment', 		'wecodeart' ),
+				'closed'	=> esc_html__( 'Comments are Closed', 	'wecodeart' )
 			]
 		] ), $echo );
 	}
@@ -243,27 +243,27 @@ class Meta {
 	public static function modules() {
 		$defaults = [
 			'author' => [
-				'label'    => esc_html__( 'Author', wecodeart_config( 'textdomain' ) ),
+				'label'    => esc_html__( 'Author', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'author' ]
 			],
 			'date' => [
-				'label'    => esc_html__( 'Date', wecodeart_config( 'textdomain' ) ),
+				'label'    => esc_html__( 'Date', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'date' ]
 			],
 			'categories' => [
-				'label'    => esc_html__( 'Categories', wecodeart_config( 'textdomain' ) ),
+				'label'    => esc_html__( 'Categories', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'categories' ]
 			],
 			'tags' => [
-				'label'    => esc_html__( 'Tags', wecodeart_config( 'textdomain' ) ),
+				'label'    => esc_html__( 'Tags', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'tags' ]
 			],
 			'comments' => [
-				'label'    => esc_html__( 'Comments', wecodeart_config( 'textdomain' ) ),
+				'label'    => esc_html__( 'Comments', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'comments' ]
 			],
 			'edit' => [
-				'label'    => esc_html__( 'Edit Link', wecodeart_config( 'textdomain' ) ),
+				'label'    => esc_html__( 'Edit Link', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'edit_link' ]
 			]
 		];

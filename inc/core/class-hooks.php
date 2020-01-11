@@ -121,7 +121,7 @@ class Hooks {
 		 */
 		$query_or_placeholder = esc_attr(
 			apply_filters( 'the_search_query', get_search_query() )
-		) ?: sprintf( __( 'Search this website %s', wecodeart_config( 'textdomain' ) ), '&#x02026;' );
+		) ?: sprintf( __( 'Search this website %s', 'wecodeart' ), '&#x02026;' );
 
 		$form = new Search( apply_filters( 'wecodeart/filter/search_form/i18n', [
 			'input'		=> $query_or_placeholder,

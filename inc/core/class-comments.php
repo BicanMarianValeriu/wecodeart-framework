@@ -78,9 +78,9 @@ class Comments {
 
 		$defaults = [
 			'icon' 		=> SVG::compile( 'comments' ) . ' ', // Escaped with kses inside fn.
-			'empty' 	=> esc_html__( 'No comments', wecodeart_config( 'textdomain' ) ),
+			'empty' 	=> esc_html__( 'No comments', 'wecodeart' ),
 			'closed'	=> false,
-			'add_one'	=> esc_html__( 'add one', wecodeart_config( 'textdomain' ) ) 
+			'add_one'	=> esc_html__( 'add one', 'wecodeart' ) 
 		]; 
 
 		$args = apply_filters( 'wecodeart/filter/comments/get_comments_info/args', $defaults, get_post_type() );
@@ -91,7 +91,7 @@ class Comments {
 			$icon_html = $args['icon'];
 			if ( 0 !== $comments_number ) {
 				$header_tx = sprintf(
-					_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', wecodeart_config( 'textdomain' ) ),
+					_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
 					number_format_i18n( $comments_number )
 				);
 			} else {
@@ -114,11 +114,11 @@ class Comments {
 		$output = apply_filters( 'wecodeart/filter/comments/get_comments_info/output', trim( $output ) );
 
 		if( $echo ) {
-			echo $output; // WP.Cs.OK
+			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			return;
 		}
 
-		return $output; // WP.Cs.OK
+		return $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	} 
 
 	/**
@@ -253,7 +253,7 @@ class Comments {
 			]
 		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [
 			'text',
-			esc_html__( 'Name *', wecodeart_config( 'textdomain' ) ),
+			esc_html__( 'Name *', 'wecodeart' ),
 			[
 				'id' 	=> 'comment-author',
 				'class'	=> 'form-control',
@@ -273,7 +273,7 @@ class Comments {
 			]
 		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [
 			'email',
-			esc_html__( 'Email *', wecodeart_config( 'textdomain' ) ),
+			esc_html__( 'Email *', 'wecodeart' ),
 			[
 				'id' 	=> 'comment-email',
 				'class'	=> 'form-control',
@@ -293,7 +293,7 @@ class Comments {
 			]
 		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
 			'url', 
-			esc_html__( 'Website', wecodeart_config( 'textdomain' ) ), 
+			esc_html__( 'Website', 'wecodeart' ), 
 			[
 				'id' 	=> 'comment-url',
 				'class'	=> 'form-control',
@@ -312,7 +312,7 @@ class Comments {
 			]
 		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
 			'textarea', 
-			esc_html__( 'Comment *', wecodeart_config( 'textdomain' ) ), 
+			esc_html__( 'Comment *', 'wecodeart' ), 
 			[
 				'id' 	=> 'comment',
 				'class'	=> 'form-control',
@@ -324,7 +324,7 @@ class Comments {
 		], false );
 
 		$args = [
-			'title_reply' 			=> esc_html__( 'Speak Your Mind', wecodeart_config( 'textdomain' ) ),
+			'title_reply' 			=> esc_html__( 'Speak Your Mind', 'wecodeart' ),
 			'comment_field' 		=> $author_comment,
 			'comment_notes_before' 	=> Markup::wrap( 'comment-notes-before', [ [
 				'tag' 	=> 'div',
@@ -332,9 +332,9 @@ class Comments {
 					'class' => 'form-group comment-form-notes w-100'
 				]
 			] ], function() use ( $req ) {
-				$string = esc_html__( 'Your email address will not be published.', wecodeart_config( 'textdomain' ) );
+				$string = esc_html__( 'Your email address will not be published.', 'wecodeart' );
 				if( $req ) {
-					$string .= ' ' . sprintf( esc_html__( 'Required fiels are marked "%s".', wecodeart_config( 'textdomain' ) ), 
+					$string .= ' ' . sprintf( esc_html__( 'Required fiels are marked "%s".', 'wecodeart' ), 
 						'<span class="required">*</span>' 
 					);
 				}
@@ -346,7 +346,7 @@ class Comments {
 					'class' => 'form-group comment-form-allowed-tags'
 				]
 			] ], function() {
-				printf( esc_html__( 'You may use these %s tags and attributes: %s.', wecodeart_config( 'textdomain' ) ),
+				printf( esc_html__( 'You may use these %s tags and attributes: %s.', 'wecodeart' ),
 					'<abbr data-toggle="tooltip" title="HyperText Markup Language">HTML</abbr>',
 					'<code>' . allowed_tags() . '</code>'
 				);

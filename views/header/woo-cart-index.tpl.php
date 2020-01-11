@@ -23,8 +23,8 @@ use WeCodeArt\Markup;
 ?>
 <button id="mini-cart" type="button" class="dropdown-toggle"
     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-    title="<?php esc_attr_e( 'View your shopping cart', wecodeart_config( 'textdomain' ) ); ?>">
-    <span class="screen-reader-text"><?php esc_html_e( 'Show Cart', wecodeart_config( 'textdomain' ) ); ?></span>
+    title="<?php esc_attr_e( 'View your shopping cart', 'wecodeart' ); ?>">
+    <span class="screen-reader-text"><?php esc_html_e( 'Show Cart', 'wecodeart' ); ?></span>
     <?php
     
         // Subtotal

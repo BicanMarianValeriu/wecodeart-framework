@@ -33,7 +33,7 @@ abstract class Config {
 				sprintf( 
 					esc_html__(
 						'When extending %s, you must create a `register` method, merging existing arguments with new ones.',
-						wecodeart_config( 'textdomain' )
+						'wecodeart'
 					),
 					__CLASS__
 				),

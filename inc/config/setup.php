@@ -153,7 +153,7 @@ wecodeart()->bind( 'register_sidebars', function( WeCodeArt $theme, $parameters 
     if( count( array_unique( $can_run ) ) !== 1  ) {
         _doing_it_wrong(
             __FUNCTION__, 
-            esc_html__( 'Please define a name for each of the sidebars.', wecodeart_config( 'textdomain' ) ),
+            esc_html__( 'Please define a name for each of the sidebars.', 'wecodeart' ),
             '3.9.5'
         );
         return null;
@@ -168,7 +168,7 @@ wecodeart()->bind( 'register_sidebars', function( WeCodeArt $theme, $parameters 
             'id'            => esc_attr( isset( $sidebar['id'] ) ? $sidebar['id'] : $key ),
             'name'          => esc_html( $label ),
             'class'         => sanitize_html_class( $class, 'wecodeart-sidebar' ),
-            'description'   => $desc ?: sprintf( esc_html__( 'This is the %s.', wecodeart_config( 'textdomain' ) ), $label ),
+            'description'   => $desc ?: sprintf( esc_html__( 'This is the %s.', 'wecodeart' ), $label ),
             'before_widget' => '<div id="%1$s" class="widget %2$s">',
             'after_widget'  => '</div>',
             'before_title'  => '<h4 class="widget__title">',

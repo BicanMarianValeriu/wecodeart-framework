@@ -36,7 +36,7 @@ if( $primary ) {
     ?></span>
     <span class="screen-reader-text"><?php
 
-        esc_html_e( 'Posted in ', wecodeart_config( 'textdomain' ) );
+        esc_html_e( 'Posted in ', 'wecodeart' );
     
     ?></span><?php
     if( $primary ) {

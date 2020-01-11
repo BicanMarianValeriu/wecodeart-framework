@@ -35,7 +35,7 @@ SVG::add_icon( 'unlock', [
     method="post" class="alert alert-light border-soft shadow-soft py-4">
     <h4><?php esc_html_e( 
         'This post is password protected. To view this post, enter the password below!',
-        wecodeart_config( 'textdomain' ) 
+        'wecodeart' 
     ); ?></h4>
     <div class="input-group pt-3 pb-2">
         <div class="input-group-prepend">
@@ -55,7 +55,7 @@ SVG::add_icon( 'unlock', [
                 'class'         => 'form-control rounded-0',
                 'size'          => 20,
                 'required'      => true,
-                'placeholder'   => esc_attr__( 'Enter password', wecodeart_config( 'textdomain' ) )
+                'placeholder'   => esc_attr__( 'Enter password', 'wecodeart' )
             ] );
 
         ?></div>
@@ -68,7 +68,7 @@ SVG::add_icon( 'unlock', [
 
                 ?><span><?php
                 
-                    esc_html_e( 'Unlock', wecodeart_config( 'textdomain' ) );
+                    esc_html_e( 'Unlock', 'wecodeart' );
                     
                 ?></span>
             </button>

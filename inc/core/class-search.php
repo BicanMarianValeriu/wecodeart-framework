@@ -57,9 +57,9 @@ class Search {
 		$this->unique_id 	= wp_unique_id( 'search-form-' );
 		$this->search_query = esc_attr( apply_filters( 'the_search_query', get_search_query() ) );
 		$this->strings 		= array_merge( apply_filters( 'wecodeart/filter/search_form/i18n', [
-			'button' 	=> __( 'Search', 				wecodeart_config( 'textdomain' ) ),
-			'reader'	=> __( 'Search this website', 	wecodeart_config( 'textdomain' ) ),
-			'input'		=> $this->search_query ?: sprintf( __( 'Enter keyword %s', wecodeart_config( 'textdomain' ) ),' &#x02026;' ),
+			'button' 	=> __( 'Search', 				'wecodeart' ),
+			'reader'	=> __( 'Search this website', 	'wecodeart' ),
+			'input'		=> $this->search_query ?: sprintf( __( 'Enter keyword %s', 'wecodeart' ),' &#x02026;' ),
 		] ), $strings );
 	}
 

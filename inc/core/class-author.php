@@ -83,10 +83,10 @@ class Author {
 	 */
 	public static function get_data() {
 		$avatar_size = apply_filters( 'wecodeart/filter/author/box/gravatar_size', 100 );
-		$avatar_alt  = sprintf( esc_html__( "%s's gravatar", wecodeart_config( 'textdomain' ) ), get_the_author() );
+		$avatar_alt  = sprintf( esc_html__( "%s's gravatar", 'wecodeart' ), get_the_author() );
 
 		$author = [
-			'intro' 		=> is_author() ? esc_html__( 'All articles by', wecodeart_config( 'textdomain' ) ) : esc_html__( 'About', wecodeart_config( 'textdomain' ) ),
+			'intro' 		=> is_author() ? esc_html__( 'All articles by', 'wecodeart' ) : esc_html__( 'About', 'wecodeart' ),
 			'name'			=> get_the_author(),
 			'avatar' 		=> get_avatar( get_the_author_meta( 'email' ), $avatar_size, '', $avatar_alt ),
 			'description'	=> wpautop( get_the_author_meta( 'description' ) ),

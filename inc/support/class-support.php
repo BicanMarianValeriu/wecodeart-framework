@@ -107,27 +107,27 @@ class Support implements ArrayAccess {
 		// Add custom editor font sizes.
 		add_theme_support( 'editor-font-sizes', apply_filters( 'wecodeart/filter/support/editor-font-sizes', [
 			array(
-				'name'      => esc_html__( 'Small', wecodeart_config( 'textdomain' ) ),
-				'shortName' => esc_html__( 'S', wecodeart_config( 'textdomain' ) ),
+				'name'      => esc_html__( 'Small', 'wecodeart' ),
+				'shortName' => esc_html__( 'S', 'wecodeart' ),
 				'size'      => 13,
 				'slug'      => 'small',
 			),
 			array(
-				'name'      => esc_html__( 'Normal', wecodeart_config( 'textdomain' ) ),
-				'shortName' => esc_html__( 'M', wecodeart_config( 'textdomain' ) ),
+				'name'      => esc_html__( 'Normal', 'wecodeart' ),
+				'shortName' => esc_html__( 'M', 'wecodeart' ),
 				'size'      => 16,
 				'slug'      => 'normal',
 			),
 
 			array(
-				'name'      => esc_html__( 'Large', wecodeart_config( 'textdomain' ) ),
-				'shortName' => esc_html__( 'L', wecodeart_config( 'textdomain' ) ),
+				'name'      => esc_html__( 'Large', 'wecodeart' ),
+				'shortName' => esc_html__( 'L', 'wecodeart' ),
 				'size'      => 36,
 				'slug'      => 'large',
 			),
 			array(
-				'name'      => esc_html__( 'Huge', wecodeart_config( 'textdomain' ) ),
-				'shortName' => esc_html__( 'XL', wecodeart_config( 'textdomain' ) ),
+				'name'      => esc_html__( 'Huge', 'wecodeart' ),
+				'shortName' => esc_html__( 'XL', 'wecodeart' ),
 				'size'      => 42,
 				'slug'      => 'huge',
 			),
@@ -135,15 +135,15 @@ class Support implements ArrayAccess {
 
 		// Editor color palette.
 		$wecodeart_colors = apply_filters( 'wecodeart/filter/support/editor-color-palette', [
-			'primary' 	=> [ 'color' => '#2388ed', 'label' => esc_html__( 'Primary', 	wecodeart_config( 'textdomain' ) ) 	],
-			'secondary' => [ 'color' => '#6c757d', 'label' => esc_html__( 'Secondary', 	wecodeart_config( 'textdomain' ) ) 	],
-			'danger' 	=> [ 'color' => '#dc3545', 'label' => esc_html__( 'Danger', 	wecodeart_config( 'textdomain' ) )	],
-			'success' 	=> [ 'color' => '#7dc855', 'label' => esc_html__( 'Success', 	wecodeart_config( 'textdomain' ) ) 	],
-			'info' 		=> [ 'color' => '#17a2b8', 'label' => esc_html__( 'Info', 		wecodeart_config( 'textdomain' ) )	],
-			'warning' 	=> [ 'color' => '#ffc107', 'label' => esc_html__( 'Warning', 	wecodeart_config( 'textdomain' ) )	],
-			'dark' 		=> [ 'color' => '#343a40', 'label' => esc_html__( 'Dark', 		wecodeart_config( 'textdomain' ) )	],
-			'light' 	=> [ 'color' => '#f1f3f7', 'label' => esc_html__( 'Light', 		wecodeart_config( 'textdomain' ) )	],
-			'white' 	=> [ 'color' => '#ffffff', 'label' => esc_html__( 'White', 		wecodeart_config( 'textdomain' ) )	],
+			'primary' 	=> [ 'color' => '#2388ed', 'label' => esc_html__( 'Primary', 	'wecodeart' ) 	],
+			'secondary' => [ 'color' => '#6c757d', 'label' => esc_html__( 'Secondary', 	'wecodeart' ) 	],
+			'danger' 	=> [ 'color' => '#dc3545', 'label' => esc_html__( 'Danger', 	'wecodeart' )	],
+			'success' 	=> [ 'color' => '#7dc855', 'label' => esc_html__( 'Success', 	'wecodeart' ) 	],
+			'info' 		=> [ 'color' => '#17a2b8', 'label' => esc_html__( 'Info', 		'wecodeart' )	],
+			'warning' 	=> [ 'color' => '#ffc107', 'label' => esc_html__( 'Warning', 	'wecodeart' )	],
+			'dark' 		=> [ 'color' => '#343a40', 'label' => esc_html__( 'Dark', 		'wecodeart' )	],
+			'light' 	=> [ 'color' => '#f1f3f7', 'label' => esc_html__( 'Light', 		'wecodeart' )	],
+			'white' 	=> [ 'color' => '#ffffff', 'label' => esc_html__( 'White', 		'wecodeart' )	],
 		] );
 
 		$colors = [];
@@ -196,7 +196,7 @@ class Support implements ArrayAccess {
 			'nav_menus'   => array(
 				// Assign a menu to the "primary" location.
 				'primary'  => array(
-					'name'  => __( 'Primary', wecodeart_config( 'textdomain' ) ),
+					'name'  => __( 'Primary', 'wecodeart' ),
 					'items' => array(
 						'page_contact',
 					),
@@ -223,19 +223,19 @@ class Support implements ArrayAccess {
 	public function load_translations() {
 		// Loads wp-content/languages/themes/wecodeart-it_IT.mo.
 		load_theme_textdomain(
-			wecodeart_config( 'textdomain' ),
+			'wecodeart',
 			trailingslashit( WP_LANG_DIR ) . 'themes' 
 		);
 
 		// Loads wp-content/themes/child-theme-name/languages/it_IT.mo.
 		load_theme_textdomain(
-			wecodeart_config( 'textdomain' ),
+			'wecodeart',
 			trailingslashit( wecodeart_config( 'paths' )['child'] ) . wecodeart_config( 'directories' )['languages']
 		);
 
 		// Loads wp-content/themes/wecodeart/languages/it_IT.mo.
 		load_theme_textdomain(
-			wecodeart_config( 'textdomain' ),
+			'wecodeart',
 			trailingslashit( wecodeart_config( 'paths' )['directory'] ) . wecodeart_config( 'directories' )['languages']
 		);
 	}
@@ -254,7 +254,7 @@ class Support implements ArrayAccess {
 		if( in_array( 'menu', $header_modules ) ) {
 			// Register New Menu
 			register_nav_menus( [ 
-				'primary' => esc_html__( 'Primary Menu', wecodeart_config( 'textdomain' ) ) 
+				'primary' => esc_html__( 'Primary Menu', 'wecodeart' ) 
 			] );
 		}
 	}

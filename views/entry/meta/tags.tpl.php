@@ -30,7 +30,7 @@ use function WeCodeArt\Functions\kses_svg;
     ?></span>
     <span class="screen-reader-text"><?php
 
-        esc_html_e( 'Tagged with ', wecodeart_config( 'textdomain' ) );
+        esc_html_e( 'Tagged with ', 'wecodeart' );
 
     ?></span><?php
 

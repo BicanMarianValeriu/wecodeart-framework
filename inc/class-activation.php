@@ -101,7 +101,7 @@ class Activation {
 		$defaults = [
 			'customizer' => esc_html__( 
 				'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 
-				wecodeart_config( 'textdomain' )
+				'wecodeart'
 			),
 		];
 

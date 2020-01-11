@@ -76,40 +76,40 @@ class Archive {
 
 		if ( is_search() ) {
 			$output = sprintf( $title_template, sprintf( 
-				esc_html__( 'Search Results for "%s"', wecodeart_config( 'textdomain' ) ), '<span>' .  get_search_query() . '</span>' 
+				esc_html__( 'Search Results for "%s"', 'wecodeart' ), '<span>' .  get_search_query() . '</span>' 
 			) );
 		} elseif ( is_category() ) {
 			$output .= sprintf( $title_template, sprintf(
-				esc_html__( 'Category Archives: %s', wecodeart_config( 'textdomain' ) ), single_term_title( '', false ) 
+				esc_html__( 'Category Archives: %s', 'wecodeart' ), single_term_title( '', false ) 
 			) );
 		} elseif ( is_tag() ) {
 			$output .= sprintf( $title_template, sprintf(
-				esc_html__( 'Tag Archives: %s', wecodeart_config( 'textdomain' ) ), single_term_title( '', false ) 
+				esc_html__( 'Tag Archives: %s', 'wecodeart' ), single_term_title( '', false ) 
 			) );
 		} elseif ( is_year() ) {
 			$output .= sprintf( $title_template, sprintf(
-				esc_html__( 'Yearly Archives: %s', wecodeart_config( 'textdomain' ) ), 
-				get_the_date( _x( 'Y', 'yearly archives date format', wecodeart_config( 'textdomain' ) ) ) 
+				esc_html__( 'Yearly Archives: %s', 'wecodeart' ), 
+				get_the_date( _x( 'Y', 'yearly archives date format', 'wecodeart' ) ) 
 			) );
 		} elseif ( is_month() ) {
 			$output .= sprintf( $title_template, sprintf(
-				esc_html__( 'Monthly Archives: %s', wecodeart_config( 'textdomain' ) ), 
-				get_the_date( _x( 'F Y', 'monthly archives date format', wecodeart_config( 'textdomain' ) ) ) 
+				esc_html__( 'Monthly Archives: %s', 'wecodeart' ), 
+				get_the_date( _x( 'F Y', 'monthly archives date format', 'wecodeart' ) ) 
 			) );
 		} elseif ( is_day() ) {
 			$output .= sprintf( $title_template, sprintf( 
-				esc_html__( 'Daily Archives: %s', wecodeart_config( 'textdomain' ) ), get_the_date() 
+				esc_html__( 'Daily Archives: %s', 'wecodeart' ), get_the_date() 
 			) );
 		} elseif ( is_post_type_archive() ) {
 			$output .= sprintf( $title_template, sprintf(
-				esc_html__( 'Post Type Archives: %s', wecodeart_config( 'textdomain' ) ), post_type_archive_title( '', false ) 
+				esc_html__( 'Post Type Archives: %s', 'wecodeart' ), post_type_archive_title( '', false ) 
 			) );
 		} elseif ( is_tax() ) {
 			$tax = get_taxonomy( get_queried_object()->taxonomy );
 			/* translators: %s: Taxonomy singular name */
-			$output .= sprintf( esc_html__( '%s Archives', wecodeart_config( 'textdomain' ) ), $tax->labels->singular_name );
+			$output .= sprintf( esc_html__( '%s Archives', 'wecodeart' ), $tax->labels->singular_name );
 		} else {
-			$output .= esc_html__( 'Archives', wecodeart_config( 'textdomain' ) );
+			$output .= esc_html__( 'Archives', 'wecodeart' );
 		} 
 
 		return trim( $output );

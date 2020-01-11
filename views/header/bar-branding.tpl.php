@@ -42,7 +42,7 @@ $modules = get_theme_mod( 'header-bar-modules' );
 	if ( in_array( 'search', $modules ) ) { ?>
 	<div class="col-auto d-lg-none">
 		<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__search" aria-expanded="false" aria-controls="bar-search">
-			<span class="screen-reader-text"><?php esc_html_e( 'Search', wecodeart_config( 'textdomain' ) ); ?></span>
+			<span class="screen-reader-text"><?php esc_html_e( 'Search', 'wecodeart' ); ?></span>
 			<?php SVG::render( 'search' ); ?>
 		</button>
 	</div>
@@ -50,7 +50,7 @@ $modules = get_theme_mod( 'header-bar-modules' );
 	if ( in_array( 'menu', $modules ) ) { ?>
 	<div class="col-auto d-lg-none">
 		<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__menu" aria-expanded="false" aria-controls="bar-menu">
-			<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', wecodeart_config( 'textdomain' ) ); ?></span>
+			<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', 'wecodeart' ); ?></span>
 			<?php SVG::render( 'bars' ); ?>
 		</button>
 	</div>

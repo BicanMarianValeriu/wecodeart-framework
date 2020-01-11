@@ -59,7 +59,7 @@ class Gutenberg {
 	public function block_category( $categories ) {
 		return array_merge( $categories, [ [
 			'slug' 	=> 'wca',
-			'title' => __( 'WeCodeArt', wecodeart_config( 'textdomain' ) ),
+			'title' => __( 'WeCodeArt', 'wecodeart' ),
 		] ] );
 	}
 

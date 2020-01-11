@@ -296,7 +296,7 @@ class SVG {
 				sprintf( 
 					esc_html__( 
 						'When adding an SVG Icon with %s you must define `viewBox` and `paths` keys.', 
-						wecodeart_config( 'textdomain' )
+						'wecodeart'
 					),
 					__FUNCTION__
 				),

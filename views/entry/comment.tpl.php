@@ -60,7 +60,7 @@ defined( 'ABSPATH' ) || exit;
                 if( (bool) $by_author )
                     printf(
                         ' &mdash; <span class="badge badge-primary">%s</span>',
-                        esc_html__( 'Post Author', wecodeart_config( 'textdomain' ) )
+                        esc_html__( 'Post Author', 'wecodeart' )
                     );
 
             ?></div>
@@ -72,7 +72,7 @@ defined( 'ABSPATH' ) || exit;
 
                 echo esc_html( implode( ' ', [
                     get_comment_date(),
-                    __( 'at', wecodeart_config( 'textdomain' ) ),
+                    __( 'at', 'wecodeart' ),
                     get_comment_time()
                 ] ) );
 

@@ -37,7 +37,7 @@ $class_published    = isset( $modified ) ? $class_published . ' d-none' : $class
     ?></span>
     <span class="screen-reader-text"><?php
 
-        esc_html_e( 'Posted on ', wecodeart_config( 'textdomain' ) );
+        esc_html_e( 'Posted on ', 'wecodeart' );
     
     ?></span>
     <a href="<?php echo esc_url( get_permalink() ); ?>" class="entry-date__link mr-2">
@@ -50,7 +50,7 @@ $class_published    = isset( $modified ) ? $class_published . ' d-none' : $class
         <time class="entry-date__time entry-date__time--updated"
             datetime="<?php echo esc_attr( $modified['robot'] ); ?>"
             title="<?php echo esc_attr( sprintf(
-                esc_html__( 'Post updated on %s.', wecodeart_config( 'textdomain' ) ),
+                esc_html__( 'Post updated on %s.', 'wecodeart' ),
                 esc_html( $modified['human'] )
             ) ); ?>"><?php
 

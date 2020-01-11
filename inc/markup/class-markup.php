@@ -134,7 +134,7 @@ class Markup {
 		if( count( array_unique( $callbacks ) ) !== 1  ) {
 			_doing_it_wrong(
 				__CLASS__, 
-				esc_html__( 'Please define a callback function for each of the modules.', wecodeart_config( 'textdomain' ) ),
+				esc_html__( 'Please define a callback function for each of the modules.', 'wecodeart' ),
 				'3.9.5'
 			);
 			return null;
@@ -203,7 +203,7 @@ class Markup {
 			$args = $defaults;
 			new \WP_Error( 'wecodeart_markup_wrap_fallback', 
 				sprintf( 
-					__( 'Wrappers are not properly defined for "%s". Please check your theme code.', wecodeart_config( 'textdomain' ) ),
+					__( 'Wrappers are not properly defined for "%s". Please check your theme code.', 'wecodeart' ),
 					$context
 				)
 			);

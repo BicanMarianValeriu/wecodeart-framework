@@ -1,5 +1,5 @@
 v4.1.3
-- Added - 
+- Fixed - wecodeart_config( 'textdomain' ) to 'wecodeart' across all translation functions
 
 v4.1.2
 - Added - wecodeart/filter/search/get_html filter for filtering the search form/widget HTML

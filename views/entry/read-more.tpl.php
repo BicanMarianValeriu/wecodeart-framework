@@ -20,6 +20,6 @@ defined( 'ABSPATH' ) || exit();
  */
 ?>
 <a href="<?php echo esc_url( $permalink ); ?>" class="entry-more btn btn-light shadow-soft">
-    <span><?php esc_html_e( 'Read More', wecodeart_config( 'textdomain' ) ); ?></span>
+    <span><?php esc_html_e( 'Read More', 'wecodeart' ); ?></span>
     <span aria-hidden="true">&#xbb;</span><span class="screen-reader-text"><?php echo esc_html( $title ); ?></span>
 </a>

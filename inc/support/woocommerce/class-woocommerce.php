@@ -191,10 +191,10 @@ class WooCommerce implements Integration {
 		wecodeart( 'register_sidebars', [ [
 			'id'            => 'shop',
 			'class'         => 'shop',
-			'name'          => esc_html__( 'Shop Sidebar', wecodeart_config( 'textdomain' ) ),
+			'name'          => esc_html__( 'Shop Sidebar', 'wecodeart' ),
 			'description'   => esc_html__( 
 				'This is the Shop Sidebar - it will replace Primary Sidebar on WooCommerce Pages.', 
-				wecodeart_config( 'textdomain' ) 
+				'wecodeart' 
 			),
 		] ] );
 	} 
@@ -207,7 +207,7 @@ class WooCommerce implements Integration {
 	 */
 	public function add_cart_to_header_modules( $modules ) {
 		$modules['cart'] = [
-			'label'    => esc_html__( 'WooCommerce Cart', wecodeart_config( 'textdomain' ) ),
+			'label'    => esc_html__( 'WooCommerce Cart', 'wecodeart' ),
 			'callback' => [ $this, 'display_cart_module' ],
 		];
 

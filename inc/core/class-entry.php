@@ -219,7 +219,7 @@ class Entry {
 
 			echo esc_html( apply_filters( 
 				'wecodeart/filter/entry/noposts_message', 
-				__( 'There are no posts matching your criteria.', wecodeart_config( 'textdomain' ) ) 
+				__( 'There are no posts matching your criteria.', 'wecodeart' ) 
 			) );
 
 		?></p>

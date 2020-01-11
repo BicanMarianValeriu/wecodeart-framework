@@ -179,15 +179,15 @@ class Header {
 	public static function nav_bar_modules() {
 		$defaults = [
 			'branding' => [
-				'label'    => esc_html__( 'Site Branding', wecodeart_config( 'textdomain' ) ),
+				'label'    => esc_html__( 'Site Branding', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'display_branding' ]
 			],
 			'menu' => [
-				'label'    => esc_html__( 'Primary Menu', wecodeart_config( 'textdomain' ) ),
+				'label'    => esc_html__( 'Primary Menu', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'display_menu' ]
 			],
 			'search' => [
-				'label'    => esc_html__( 'Search Form', wecodeart_config( 'textdomain' ) ),
+				'label'    => esc_html__( 'Search Form', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'display_search' ]
 			],
 		];
