@@ -1,12 +1,10 @@
 .entry {  
+    margin-bottom: 25px;
+    
     &::after {
         content: '';
         display: table;
         clear: both;
-    }
-
-    &.post {
-        margin-bottom: 25px;
     }
 
     img {

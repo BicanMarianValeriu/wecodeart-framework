@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.9
- * @version		4.0.7
+ * @version		4.1.4
  */
 
 namespace WeCodeArt\Support;
@@ -98,7 +98,7 @@ class WooCommerce implements Integration {
 	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup
 	 *
 	 * @since   3.5
-	 * @version 4.0.1
+	 * @version 4.1.4
 	 *
 	 * @return  void
 	 */
@@ -108,7 +108,7 @@ class WooCommerce implements Integration {
 		} elseif( is_product() ) {
 			$wrapper = get_theme_mod( 'content-layout-container-product-singular' );
 		} else {
-			$wrapper = 'container';
+			$wrapper = get_theme_mod( 'content-layout-container' );
 		} 
 
 		/**
@@ -148,7 +148,7 @@ class WooCommerce implements Integration {
 	 * Sort Content Modules based on position
 	 *
 	 * @since 	unknown
-	 * @version	4.0.1
+	 * @version	4.1.4
 	 *
 	 * @param 	string 	$position Accepts before/after - render sorted modules before/after woocommerce content.
 	 *
@@ -160,7 +160,7 @@ class WooCommerce implements Integration {
 		} elseif( is_product() ) {
 			$modules = get_theme_mod( 'content-layout-modules-product-singular' ); 
 		} else {
-			$modules = [ 'content', 'primary' ];
+			$modules = get_theme_mod( 'content-layout-modules' );
 		}
 
 		$index = array_search( 'content', $modules );

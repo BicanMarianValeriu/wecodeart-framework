@@ -150,7 +150,7 @@ class Search {
 			'tag' 	=> 'button',
 			'attrs' => [
 				'type'	=> 'submit',
-				'class'	=> 'btn btn-dark',
+				'class'	=> 'btn',
 			]
 		] ], 'printf', [ $this->strings['button'] ], false );
 

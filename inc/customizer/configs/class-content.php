@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Content
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.1
+ * @version		4.1.4
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -77,6 +77,7 @@ class Content extends Config {
 
 		// Page specific Mods
 		$pages = get_pages();
+		
 		foreach( $pages as $page ) {
 			$title = $page->post_title;
 			$ID = $page->ID;
@@ -121,10 +122,6 @@ class Content extends Config {
 
 		// Post Types Archives And Singular Context Mods 
 		$public_posts = wecodeart( 'public_post_types' );
-		
-		if( isset( $public_posts['product'] ) ) {
-			unset( $public_posts['product'] );
-		}
 
 		foreach( $public_posts as $type ) {
 			$type_label = get_post_type_object( $type )->labels->singular_name;

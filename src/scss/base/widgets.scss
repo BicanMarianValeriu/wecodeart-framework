@@ -1,4 +1,14 @@
 /* Default Widgets */
+.widget {
+    margin: 0 0 2.5rem;
+
+    &__title {
+        font-weight: 500;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+}
+
 .widget_archive,
 .widget_meta,
 .widget_pages,
@@ -19,5 +29,16 @@
 .widget_calendar {
     table {
         width: 100%;
+    }
+}
+
+.search-form {
+    .btn {
+        background-color: $gray-100;
+
+        &:hover,
+        &:active {
+            background-color: darken( $gray-100, 5% );
+        }
     }
 }

@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.6
+ * @version		4.1.4
  */
 
 namespace WeCodeArt\Core;
@@ -125,7 +125,7 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
-	 * @version	3.7.0
+	 * @version	4.1.4
 	 * 
 	 * @return 	void
 	 */
@@ -134,7 +134,7 @@ class Header {
 			'tag' 	=> 'div',
 			'attrs' => [
 				'id' 	=> 'bar-search',
-				'class' => 'header-bar__search col-12 col-lg-4'
+				'class' => 'header-bar__search col-12 col-lg-4 ml-auto'
 			]
 		] ], 'get_search_form' ); 
 	}

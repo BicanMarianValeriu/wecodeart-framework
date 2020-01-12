@@ -1,3 +1,17 @@
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
+textarea {
+    @extend .form-control;
+    width: 100%;
+}
+
+select {
+    @include custom-select();
+}
+
+label {
+    width: 100%;
+}
+
 .archive-intro,
 .content-area,
 .breadcrumbs,
@@ -45,6 +59,37 @@
     }
 }
 
-.widget {
-    margin: 0 0 2.5rem;  
+hr {
+    background: linear-gradient(to right, transparent, #dbdbdb, transparent);
+    border: 0;
+    height: 1px;
+    margin: 22px 0;
+
+    &--tall {
+        margin: 44px 0;
+    }
+}
+
+svg,
+.svg-inline {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1rem;
+    height: 1rem;
+
+    .fa-secondary {
+        opacity: .4;
+    }
+}
+
+.border {
+    &-soft {
+        border-color: #F3F7FA !important;
+    }
+}
+
+.shadow {
+    &-soft {
+        box-shadow: 0 0.25rem 1.875rem rgba(42, 53, 79, 0.08) !important;        
+    }
 }

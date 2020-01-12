@@ -9,7 +9,7 @@
  * @subpackage 	Core\Author
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.7.7
- * @version		4.0.1
+ * @version		4.1.4
  */
 
 namespace WeCodeArt\Core;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Adds some output to archive pages
@@ -26,13 +27,29 @@ class Author {
 	use \WeCodeArt\Singleton;
 
 	/**
+     * All of the configuration items for the extension.
+     *
+     * @var array
+     */
+	protected $config = [];
+
+	/**
+	 * Send to Constructor
+	 * @since 3.6.4
+	 */
+	public function init() {
+		$this->config = get_prop( wecodeart_config( 'extensions' ), 'author-box' ); 
+	}
+
+	/**
 	 * Do author box on archive
 	 *
 	 * @since	3.7.7
-	 * @version	3.9.5
+	 * @version	4.1.4
 	 */
 	public function author_box_archive() {
-		$enabled = apply_filters( 'wecodeart/filter/author/box/archive/enabled', '__return_true' );
+		$enabled = get_prop( $this->config, 'archive', false );
+		$enabled = apply_filters( 'wecodeart/filter/author/box/archive/enabled', $enabled ); // Deprecated.
 
 		if ( ! $enabled || ( ! is_author() || get_query_var( 'paged' ) >= 2 ) ) {
 			return;
@@ -45,10 +62,11 @@ class Author {
 	 * Do author box on single
 	 *
 	 * @since	3.7.7
-	 * @version	3.9.5
+	 * @version	4.1.4
 	 */
 	public function author_box_single() {
-		$enabled = apply_filters( 'wecodeart/filter/author/box/single/enabled', '__return_true' );
+		$enabled = get_prop( $this->config, 'single', false );
+		$enabled = apply_filters( 'wecodeart/filter/author/box/single/enabled', $enabled ); // Deprecated.
 
 		if ( ! $enabled || ( ! is_single() || ! post_type_supports( get_post_type(), 'author' ) ) ) {
 			return;
@@ -61,7 +79,7 @@ class Author {
 	 * Echo the Author Box
 	 *
 	 * @since	3.7.7
-	 * @version 3.9.5
+	 * @version 4.1.4
 	 *
 	 * @return 	void 
 	 */

@@ -16,6 +16,7 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 /* Required */
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/mixins";
+@import "abstracts/mixins";
 @import "abstracts/variables";
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 

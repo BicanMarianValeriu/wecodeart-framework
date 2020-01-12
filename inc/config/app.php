@@ -99,7 +99,7 @@ return [
         'content-layout-modules'    => [ 'content', 'primary' ],
         'footer-layout-container'   => 'container',
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
-        'footer-copyright-text'     => __( 'Copyright [copy] [year] - All rights reserved.', 'wecodeart' ),
+        'footer-copyright-text'     => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
     ],
     /*
     |--------------------------------------------------------------------------
@@ -115,6 +115,27 @@ return [
             'content-layout-modules-product-archive'    => [ 'content', 'primary' ],
             'content-layout-container-product-singular' => 'container',
             'content-layout-modules-product-singular'   => [ 'content', 'primary' ],
+        ]
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Theme Extensions
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for extensions.
+    |
+    */
+    'extensions' => [
+        'author-box'    => [
+            'archive'   => true,
+            'single'    => true,
+        ],
+        'wpseo' => [
+            'author-social' => [
+                'facebook' 	=> 'Facebook',
+                'twitter' 	=> 'Twitter',
+                'url'		=> 'Website'
+            ],
         ]
     ],
 ];

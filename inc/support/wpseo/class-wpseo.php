@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.5
+ * @version		4.1.4
  */
 
 namespace WeCodeArt\Support;
@@ -20,6 +20,7 @@ use WeCodeArt\Core\Content;
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
 use WeCodeArt\Support\WPSeo\Conditional\Plugin as Plugin_Condition;
+use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\detect_plugin;
 
 /**
@@ -30,9 +31,18 @@ class WPSeo {
 	use \WeCodeArt\Singleton; 
 
 	/**
+     * All of the configuration items for the extension.
+     *
+     * @var array
+     */
+	protected $config = [];
+	
+	/**
 	 * Send to Constructor
 	 */
-	public function init() {}
+	public function init() {
+		$this->config = get_prop( wecodeart_config( 'extensions' ), 'wpseo' );
+	}
 
 	/**
 	 * Get Conditionals
@@ -51,19 +61,13 @@ class WPSeo {
 	 * Send to Constructor
 	 *
 	 * @since 	3.6.2
-	 * @version	4.0.5
+	 * @version	4.1.4
 	 */
 	public function register_hooks() {
 		add_action( 'wecodeart/hook/inner/top', [ $this, 'render_yoast_breadcrumbs' ], 30 );
-
-		if( apply_filters( 'wecodeart/filter/support/yoast/breadcrumbs/woocommerce', true ) ) {
-			/**
-			 * Use YOAST Crumbs instead of WooCommerce
-			 */
-			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
-		}
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 		
-		if( apply_filters( 'wecodeart/filter/support/yoast/author/social/enable', true ) ) {
+		if( get_prop( $this->config, 'author-social', false ) !== false ) {
 			/**
 			 * Extend Author box data with Social
 			 */
@@ -97,7 +101,7 @@ class WPSeo {
 	 * Extend Author Box with Yoast's Social
 	 *
 	 * @since	3.9.3
-	 * @since	3.9.5
+	 * @since	4.1.4
 	 *
 	 * @return 	array
 	 */
@@ -106,13 +110,13 @@ class WPSeo {
 			return $args;
 		}
 
-		$author_ID = get_the_author_meta( 'ID' );
+		$author_ID  = get_the_author_meta( 'ID' );
+		$config 	= get_prop( $this->config, 'author-social', false );
+		$config 	= apply_filters( 'wecodeart/filter/support/yoast/author/social', $config, $author_ID );
 
-		$social_profiles = apply_filters( 'wecodeart/filter/support/yoast/author/social', [
-			'facebook' 	=> 'Facebook',
-			'twitter' 	=> 'Twitter',
-			'url'		=> 'Website'
-		] );
+		if( $config === false ) {
+			return $args;
+		}
 
 		$social_icons = [
 			'facebook' => [
@@ -142,7 +146,7 @@ class WPSeo {
 		];
 
 		$args = wp_parse_args( [
-			'social' => array_map( function( $item ) use( $author_ID, $social_icons, $social_profiles ) {
+			'social' => array_map( function( $item ) use( $author_ID, $social_icons, $config ) {
 				$item  	= strtolower( $item );
 				$icon  	= $item;
 				$value 	= get_the_author_meta( $item, $author_ID );
@@ -169,14 +173,18 @@ class WPSeo {
 				}
 
 				return [
-					'title' 	=> esc_attr( $social_profiles[$item] ),
+					'title' 	=> esc_attr( $config[$item] ),
 					'url'		=> esc_url( $value ),
 					'icon'		=> SVG::compile( $icon ),
 					'target'	=> $target
 				];
 
-			}, array_keys( $social_profiles ) )
+			}, array_keys( $config ) )
 		], $args );
+
+		$args['social'] = array_filter( $args['social'], function( $item ) {
+			return( isset( $item['url'] ) && $item['url'] !== '' );
+		} );
 
 		return $args;
 	}

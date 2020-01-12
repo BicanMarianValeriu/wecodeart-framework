@@ -9,7 +9,7 @@
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.6
- * @version		4.0.1
+ * @version		4.1.4
  */
 
 namespace WeCodeArt;
@@ -145,9 +145,6 @@ class Customizer {
 		 */
 		// Customizer defaults for Post Types
 		foreach( wecodeart( 'public_post_types' ) as $type ) {
-			// Skip the WOO CPT
-			if( $type === 'product' ) continue;
-
 			// Entry Meta
 			if( post_type_supports( $type, 'wecodeart-post-info' ) ) {
 				$defaults['content-entry-meta-' . $type . '-archive'] 	= [ 'author', 'date', 'comments' ];

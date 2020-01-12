@@ -1,0 +1,56 @@
+@mixin custom-select() {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: $custom-select-height;
+    padding: $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding) $custom-select-padding-y $custom-select-padding-x;
+    background: $custom-select-bg $custom-select-background;
+    color: $custom-select-color;
+    border: $custom-select-border-width solid $custom-select-border-color;
+    font-family: $custom-select-font-family;
+    font-weight: $custom-select-font-weight;
+    line-height: $custom-select-line-height;
+    @include font-size($custom-select-font-size);
+    @include border-radius($custom-select-border-radius, 0);
+    @include box-shadow($custom-select-box-shadow);
+
+    &:focus {
+        border-color: $custom-select-focus-border-color;
+        outline: 0;
+        @if $enable-shadows {
+            box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow;
+        } @else {
+            box-shadow: $custom-select-focus-box-shadow;
+        }
+
+        &::-ms-value {
+            color: $input-color;
+            background-color: $input-bg;
+        }
+    }
+
+    &[multiple],
+    &[size]:not([size="1"]) {
+        height: auto;
+        padding-right: $custom-select-padding-x;
+        background-image: none;
+    }
+
+    &:disabled {
+        color: $custom-select-disabled-color;
+        background-color: $custom-select-disabled-bg;
+    }
+
+    // Hides the default caret in IE11
+    &::-ms-expand {
+        display: none;
+    }
+
+    // Remove outline from select box in FF
+    &:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 $custom-select-color;
+    }
+}

@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.7
+ * @version		4.1.4
  */
 
 namespace WeCodeArt\Support\WooCommerce;
@@ -31,15 +31,31 @@ class Customizer {
 	 */
 	public function init() {
 		add_filter( 'wecodeart/filter/customizer/defaults', [ $this, 'extend_defaults' ] );
+		add_action( 'customize_register', 					[ $this, 'register' ], 960 );
+	}
 
-		new Customizer\Content();
+	/**
+	 * Add our Selective Refresh Partials.
+	 *
+	 * @since 	4.1.4
+	 *
+	 * @param  	object $wp_customize An instance of the WP_Customize_Manager class.
+	 */
+	public function register( $wp_customize ) {
+		foreach( [ 'singular', 'archive' ] as $type ) {
+			$wp_customize->selective_refresh->add_partial( "content-layout-modules-product-{$type}", [
+				'selector'        => '.content-area',
+				'render_callback' => [ Customizer\Partials::get_instance(), 'render_content' ],
+				'container_inclusive' => true
+			] ); 
+		}
 	}
 
 	/**
 	 * Extend Customizer default options
 	 *
-	 * @since 3.6.0
-	 * @since 4.0.7
+	 * @since 	3.6.0
+	 * @version	4.0.7
 	 */
 	public function extend_defaults( $defaults ) {
 		$woo_config = get_prop( wecodeart_config( 'woocommerce' ), 'customizer', [] );

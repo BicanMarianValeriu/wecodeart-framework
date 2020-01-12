@@ -1,5 +1,11 @@
 v4.1.4
-- Added - 
+- Fixed - Fixed minor issue with Author Box social items + set them in config file.
+- Added - Author box config items and updated code to use them
+- Updated - Customizer Public CPT defaults - allow WOO "product" post type
+- Updated - WooCommerce Customizer - partials updated for WOO cpt
+- Updated - Minor CSS improvements
+- Removed - WooCommerce Customizer modules - since we do it in "public_post_types"
+- Removed - "wecodeart/filter/support/yoast/breadcrumbs/woocommerce" filter
 
 v4.1.3
 - Fixed - wecodeart_config( 'textdomain' ) to 'wecodeart' across all translation functions
