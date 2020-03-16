@@ -1,14 +1,14 @@
 /**
  * Internal dependencies
  */
-import { abbreviation } from './abbreviation';
-import { underline } from './underline';
-import { justify } from './justify';
 //import { textColor } from './text-color'; // Deprecated
-import { backgroundColor } from './background-color';
-import { markdown } from './markdown';
 import { clear } from './clear';
 import { tooltip } from './tooltip';
+import { justify } from './justify';
+import { markdown } from './markdown';
+import { underline } from './underline';
+import { abbreviation } from './abbreviation';
+import { backgroundColor } from './background-color';
 
 /**
  * WordPress dependencies
@@ -20,11 +20,11 @@ function registerWeCodeArtFormats() {
 		abbreviation,
 		backgroundColor,
 		clear,
-		justify,
 		markdown,
-		//textColor, // Deprecated
+		justify,
 		underline,
-		tooltip
+		tooltip,
+		//textColor, 	// Deprecated
 	].forEach( ( { name, ...settings } ) => {
 		if ( name ) {
 			registerFormatType( name, settings );

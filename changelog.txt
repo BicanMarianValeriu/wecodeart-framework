@@ -1,5 +1,7 @@
 v4.1.51
-- Updated - Abbreviation
+- Added - Buttons Gutenberg Block CSS
+- Updated - HighLight Color - improvements to JS based on WP Core Text Color
+- Updated - Minor CSS improvements for button
 
 v4.1.5
 - Updated - Minor improvements to Bootstrap Nav Walker

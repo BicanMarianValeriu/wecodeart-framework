@@ -4627,103 +4627,56 @@ function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "funct
     /* harmony import */
 
 
-    var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! classnames */
-    "./node_modules/classnames/index.js");
+    var _inline__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./inline */
+    "./src/js/gutenberg/extensions/formats/background-color/components/inline.js");
     /* harmony import */
 
 
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-    /* harmony import */
+    var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./icons */
+    "./src/js/gutenberg/extensions/formats/background-color/components/icons.js");
 
+    function _slicedToArray(arr, i) {
+      return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+    }
 
-    var _icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ../icon */
-    "./src/js/gutenberg/extensions/formats/background-color/icon.js");
+    function _nonIterableRest() {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    }
 
-    function _typeof(obj) {
-      "@babel/helpers - typeof";
-
-      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-        _typeof = function _typeof(obj) {
-          return typeof obj;
-        };
-      } else {
-        _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-        };
+    function _iterableToArrayLimit(arr, i) {
+      if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
+        return;
       }
 
-      return _typeof(obj);
-    }
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
 
-    function _classCallCheck(instance, Constructor) {
-      if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-      }
-    }
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
 
-    function _defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-
-    function _createClass(Constructor, protoProps, staticProps) {
-      if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) _defineProperties(Constructor, staticProps);
-      return Constructor;
-    }
-
-    function _possibleConstructorReturn(self, call) {
-      if (call && (_typeof(call) === "object" || typeof call === "function")) {
-        return call;
-      }
-
-      return _assertThisInitialized(self);
-    }
-
-    function _getPrototypeOf(o) {
-      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-      };
-      return _getPrototypeOf(o);
-    }
-
-    function _assertThisInitialized(self) {
-      if (self === void 0) {
-        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-      }
-
-      return self;
-    }
-
-    function _inherits(subClass, superClass) {
-      if (typeof superClass !== "function" && superClass !== null) {
-        throw new TypeError("Super expression must either be null or a function");
-      }
-
-      subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-          value: subClass,
-          writable: true,
-          configurable: true
+          if (i && _arr.length === i) break;
         }
-      });
-      if (superClass) _setPrototypeOf(subClass, superClass);
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"] != null) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
     }
 
-    function _setPrototypeOf(o, p) {
-      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-      };
-
-      return _setPrototypeOf(o, p);
+    function _arrayWithHoles(arr) {
+      if (Array.isArray(arr)) return arr;
     }
     /**
      * WordPress dependencies
@@ -4732,32 +4685,21 @@ function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "funct
 
     var __ = wp.i18n.__;
     var _wp$element = wp.element,
-        Component = _wp$element.Component,
-        Fragment = _wp$element.Fragment;
-    var _wp$data = wp.data,
-        select = _wp$data.select,
-        withSelect = _wp$data.withSelect;
-    var _wp$blockEditor = wp.blockEditor,
-        BlockControls = _wp$blockEditor.BlockControls,
-        getColorClassName = _wp$blockEditor.getColorClassName,
-        getColorObjectByColorValue = _wp$blockEditor.getColorObjectByColorValue,
-        getColorObjectByAttributeValues = _wp$blockEditor.getColorObjectByAttributeValues;
-    var _wp$richText = wp.richText,
-        applyFormat = _wp$richText.applyFormat,
-        removeFormat = _wp$richText.removeFormat,
-        getActiveFormat = _wp$richText.getActiveFormat;
-    var _wp$components = wp.components,
-        Toolbar = _wp$components.Toolbar,
-        IconButton = _wp$components.IconButton,
-        Popover = _wp$components.Popover,
-        ColorPalette = _wp$components.ColorPalette;
-    var _wp$compose = wp.compose,
-        compose = _wp$compose.compose,
-        ifCondition = _wp$compose.ifCondition;
+        Fragment = _wp$element.Fragment,
+        useCallback = _wp$element.useCallback,
+        useMemo = _wp$element.useMemo,
+        useState = _wp$element.useState;
+    var useSelect = wp.data.useSelect;
+    var RichTextToolbarButton = wp.blockEditor.RichTextToolbarButton;
+    var removeFormat = wp.richText.removeFormat;
+    var Icon = wp.components.Icon;
     /**
      * External dependencies
      */
 
+    var _lodash = lodash,
+        get = _lodash.get,
+        isEmpty = _lodash.isEmpty;
     /**
      * Internal dependencies
      */
@@ -4766,137 +4708,106 @@ function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "funct
 
     var title = __('Highlight Color', 'wecodeart');
 
-    var Edit = /*#__PURE__*/function (_Component) {
-      _inherits(Edit, _Component);
+    var EMPTY_ARRAY = [];
 
-      function Edit() {
-        var _this;
+    function TextBGColorEdit(_ref) {
+      var value = _ref.value,
+          onChange = _ref.onChange,
+          isActive = _ref.isActive,
+          activeAttributes = _ref.activeAttributes;
 
-        _classCallCheck(this, Edit);
+      var _useSelect = useSelect(function (select) {
+        var blockEditorSelect = select('core/block-editor');
+        var settings;
 
-        _this = _possibleConstructorReturn(this, _getPrototypeOf(Edit).apply(this, arguments));
-        _this.toggle = _this.toggle.bind(_assertThisInitialized(_this));
-        _this.state = {
-          isOpen: false
+        if (blockEditorSelect && blockEditorSelect.getSettings) {
+          settings = blockEditorSelect.getSettings();
+        } else {
+          settings = {};
+        }
+
+        return {
+          colors: get(settings, ['colors'], EMPTY_ARRAY),
+          disableCustomColors: settings.disableCustomColors
         };
-        return _this;
+      }),
+          colors = _useSelect.colors,
+          disableCustomColors = _useSelect.disableCustomColors;
+
+      var _useState = useState(false),
+          _useState2 = _slicedToArray(_useState, 2),
+          isAddingColor = _useState2[0],
+          setIsAddingColor = _useState2[1];
+
+      var enableIsAddingColor = useCallback(function () {
+        return setIsAddingColor(true);
+      }, [setIsAddingColor]);
+      var disableIsAddingColor = useCallback(function () {
+        return setIsAddingColor(false);
+      }, [setIsAddingColor]);
+      var colorIndicatorStyle = useMemo(function () {
+        var activeColor = Object(_inline__WEBPACK_IMPORTED_MODULE_0__["getActiveColor"])(name, value, colors);
+
+        if (!activeColor) {
+          return undefined;
+        }
+
+        return {
+          backgroundColor: activeColor
+        };
+      }, [value, colors]);
+      var hasColorsToChoose = !isEmpty(colors) || disableCustomColors !== true;
+
+      if (!hasColorsToChoose && !isActive) {
+        return null;
       }
 
-      _createClass(Edit, [{
-        key: "toggle",
-        value: function toggle() {
-          this.setState(function (state) {
-            return {
-              isOpen: !state.isOpen
-            };
-          });
-        }
-      }, {
-        key: "render",
-        value: function render() {
-          var _this2 = this;
-
-          var isOpen = this.state.isOpen;
-          var _this$props = this.props,
-              value = _this$props.value,
-              _onChange = _this$props.onChange,
-              isActive = _this$props.isActive,
-              colors = _this$props.colors;
-          var activeColor;
-          var activeColorFormat = getActiveFormat(value, name);
-
-          if (activeColorFormat) {
-            var styleColor = activeColorFormat.attributes.style;
-
-            if (styleColor) {
-              activeColor = styleColor.replace(new RegExp("^background-color:\\s*"), '');
-            }
-
-            var currentClass = activeColorFormat.attributes.class;
-
-            if (currentClass) {
-              var colorSlug = currentClass.replace(/.*has-(.*?)-background-color.*/, '$1');
-              activeColor = getColorObjectByAttributeValues(colors, colorSlug).color;
-            }
+      return wp.element.createElement(Fragment, null, wp.element.createElement(RichTextToolbarButton, {
+        key: isActive ? 'color' : 'color-not-active',
+        className: "format-library-color-button",
+        name: isActive ? 'color' : undefined,
+        isActive: isActive,
+        icon: wp.element.createElement(Fragment, null, wp.element.createElement(Icon, {
+          icon: function icon() {
+            return _icons__WEBPACK_IMPORTED_MODULE_1__["default"].highlighter;
           }
-
-          return wp.element.createElement(Fragment, null, wp.element.createElement(BlockControls, null, wp.element.createElement(Toolbar, {
-            className: "components-toolbar--wca"
-          }, wp.element.createElement(IconButton, {
-            className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-button components-icon-button components-toolbar__control components-wca-background-format', {
-              'is-active': isActive
-            }),
-            icon: _icon__WEBPACK_IMPORTED_MODULE_1__["default"].highlighter,
-            "aria-haspopup": "true",
-            tooltip: title,
-            onClick: this.toggle
-          }), isOpen && wp.element.createElement(Popover, {
-            position: "bottom center",
-            className: "components-popover--wca",
-            focusOnMount: "container",
-            onClickOutside: function onClickOutside(_onClickOutside) {
-              if (!_onClickOutside.target.classList.contains('components-wca-background-format') && !document.querySelector('.components-wca-background-format').contains(_onClickOutside.target) && (!document.querySelector('.components-color-palette__picker') || document.querySelector('.components-color-palette__picker') && !document.querySelector('.components-color-palette__picker').contains(_onClickOutside.target))) {
-                _this2.setState({
-                  isOpen: !isOpen
-                });
-              }
-            }
-          }, wp.element.createElement(ColorPalette, {
-            colors: colors,
-            value: activeColor,
-            onChange: function onChange(color) {
-              if (color) {
-                var colorObject = null;
-
-                if (typeof window.wecodeartInfo !== 'undefined' && window.wecodeartInfo.supports.colorPalette) {
-                  colorObject = getColorObjectByColorValue(colors, color);
-                }
-
-                _onChange(applyFormat(value, {
-                  type: name,
-                  attributes: colorObject ? {
-                    class: getColorClassName('background-color', colorObject.slug)
-                  } : {
-                    style: "background-color:".concat(color)
-                  }
-                }));
-              } else {
-                _onChange(removeFormat(value, name));
-              }
-            }
-          })))));
+        }), isActive && wp.element.createElement("span", {
+          className: "format-library-color-button__indicator",
+          style: colorIndicatorStyle
+        })),
+        title: title // If has no colors to choose but a color is active remove the color onClick
+        ,
+        onClick: hasColorsToChoose ? enableIsAddingColor : function () {
+          return onChange(removeFormat(value, name));
         }
-      }]);
+      }), isAddingColor && wp.element.createElement(_inline__WEBPACK_IMPORTED_MODULE_0__["default"], {
+        name: name,
+        addingColor: isAddingColor,
+        onClose: disableIsAddingColor,
+        isActive: isActive,
+        activeAttributes: activeAttributes,
+        value: value,
+        onChange: onChange
+      }));
+    }
 
-      return Edit;
-    }(Component);
+    ;
     /* harmony default export */
 
-
-    __webpack_exports__["default"] = compose(withSelect(function () {
-      var _select$getSettings = select('core/block-editor').getSettings(),
-          colors = _select$getSettings.colors;
-
-      return {
-        colors: colors ? colors : [],
-        isDisabled: false
-      };
-    }), ifCondition(function (props) {
-      return !props.isDisabled;
-    }))(Edit);
+    __webpack_exports__["default"] = TextBGColorEdit;
     /***/
   },
 
   /***/
-  "./src/js/gutenberg/extensions/formats/background-color/icon.js":
-  /*!**********************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/formats/background-color/icon.js ***!
-    \**********************************************************************/
+  "./src/js/gutenberg/extensions/formats/background-color/components/icons.js":
+  /*!**********************************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/formats/background-color/components/icons.js ***!
+    \**********************************************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function srcJsGutenbergExtensionsFormatsBackgroundColorIconJs(module, __webpack_exports__, __webpack_require__) {
+  function srcJsGutenbergExtensionsFormatsBackgroundColorComponentsIconsJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -4905,22 +4816,243 @@ function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "funct
      */
 
 
-    var icon = {};
-    icon.highlighter = wp.element.createElement("svg", {
+    var icons = {};
+    icons.highlighter = wp.element.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       height: "300",
       width: "300",
       viewBox: "0 0 512 512"
-    }, " ", wp.element.createElement("path", {
+    }, wp.element.createElement("path", {
       d: "M240.2,369.1 C244.39999999999998,373.3 251.2,373 255.10000000000002,368.6 L465.7,125.4 C474.5,115.3 474,100.2 464.5,90.7 L426.3,52.5 C416.8,43 401.7,42.5 391.6,51.3 L148.4,262 C143.9,265.9 143.7,272.7 147.9,276.9 L240.2,369.1 z",
       id: "svg_2"
     }), " ", wp.element.createElement("path", {
       d: "M48.2,449.7 L86.5,462.5 L104.5,444.5 L172.1,444.5 C174.8,444.5 177.4,443.4 179.3,441.5 L205.1,415.7 C209.1,411.7 209.1,405.3 205.1,401.3 L111.6,308 C107.6,304 101.19999999999999,304 97.19999999999999,308 L71.4,333.8 C69.5,335.7 68.4,338.3 68.4,341 L68.4,404.4 C68.4,407.1 67.3,409.7 65.4,411.6 L44.099999999999994,432.9 C38.900000000000006,438.2 41.099999999999994,447.3 48.2,449.7 z",
       id: "svg_3"
-    }), " ");
+    }));
     /* harmony default export */
 
-    __webpack_exports__["default"] = icon;
+    __webpack_exports__["default"] = icons;
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/formats/background-color/components/inline.js":
+  /*!***********************************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/formats/background-color/components/inline.js ***!
+    \***********************************************************************************/
+
+  /*! exports provided: getActiveColor, default */
+
+  /***/
+  function srcJsGutenbergExtensionsFormatsBackgroundColorComponentsInlineJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "getActiveColor", function () {
+      return getActiveColor;
+    });
+
+    function _extends() {
+      _extends = Object.assign || function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+          var source = arguments[i];
+
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+
+        return target;
+      };
+
+      return _extends.apply(this, arguments);
+    }
+
+    function _objectWithoutProperties(source, excluded) {
+      if (source == null) return {};
+
+      var target = _objectWithoutPropertiesLoose(source, excluded);
+
+      var key, i;
+
+      if (Object.getOwnPropertySymbols) {
+        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+        for (i = 0; i < sourceSymbolKeys.length; i++) {
+          key = sourceSymbolKeys[i];
+          if (excluded.indexOf(key) >= 0) continue;
+          if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+          target[key] = source[key];
+        }
+      }
+
+      return target;
+    }
+
+    function _objectWithoutPropertiesLoose(source, excluded) {
+      if (source == null) return {};
+      var target = {};
+      var sourceKeys = Object.keys(source);
+      var key, i;
+
+      for (i = 0; i < sourceKeys.length; i++) {
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+      }
+
+      return target;
+    }
+    /**
+     * WordPress dependencies
+     */
+
+
+    var _wp$element = wp.element,
+        useCallback = _wp$element.useCallback,
+        useMemo = _wp$element.useMemo;
+    var useSelect = wp.data.useSelect;
+    var withSpokenMessages = wp.components.withSpokenMessages;
+    var getRectangleFromRange = wp.dom.getRectangleFromRange;
+    var _wp$richText = wp.richText,
+        applyFormat = _wp$richText.applyFormat,
+        removeFormat = _wp$richText.removeFormat,
+        getActiveFormat = _wp$richText.getActiveFormat;
+    var _wp$blockEditor = wp.blockEditor,
+        ColorPalette = _wp$blockEditor.ColorPalette,
+        URLPopover = _wp$blockEditor.URLPopover,
+        getColorClassName = _wp$blockEditor.getColorClassName,
+        getColorObjectByColorValue = _wp$blockEditor.getColorObjectByColorValue,
+        getColorObjectByAttributeValues = _wp$blockEditor.getColorObjectByAttributeValues;
+    /**
+     * Other Deps
+     */
+
+    var _lodash = lodash,
+        get = _lodash.get;
+
+    function getActiveColor(formatName, formatValue, colors) {
+      var activeColorFormat = getActiveFormat(formatValue, formatName);
+
+      if (!activeColorFormat) {
+        return;
+      }
+
+      var styleColor = activeColorFormat.attributes.style;
+
+      if (styleColor) {
+        return styleColor.replace(new RegExp("^background-color:\\s*"), '');
+      }
+
+      var currentClass = activeColorFormat.attributes.class;
+
+      if (currentClass) {
+        var colorSlug = currentClass.replace(/.*has-(.*?)-background-color.*/, '$1');
+        return getColorObjectByAttributeValues(colors, colorSlug).color;
+      }
+    }
+
+    var ColorPopoverAtLink = function ColorPopoverAtLink(_ref) {
+      var addingColor = _ref.addingColor,
+          props = _objectWithoutProperties(_ref, ["addingColor"]);
+
+      var anchorRect = useMemo(function () {
+        var selection = window.getSelection();
+        var range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+
+        if (!range) {
+          return;
+        }
+
+        if (addingColor) {
+          return getRectangleFromRange(range);
+        }
+
+        var element = range.startContainer;
+        element = element.nextElementSibling || element;
+
+        while (element.nodeType !== window.Node.ELEMENT_NODE) {
+          element = element.parentNode;
+        }
+
+        var closest = element.closest('span');
+
+        if (closest) {
+          return closest.getBoundingClientRect();
+        }
+      }, []);
+
+      if (!anchorRect) {
+        return null;
+      }
+
+      return wp.element.createElement(URLPopover, _extends({
+        anchorRect: anchorRect
+      }, props));
+    };
+
+    var ColorPicker = function ColorPicker(_ref2) {
+      var name = _ref2.name,
+          value = _ref2.value,
+          onChange = _ref2.onChange;
+      var colors = useSelect(function (select) {
+        var _select = select('core/block-editor'),
+            getSettings = _select.getSettings;
+
+        return get(getSettings(), ['colors'], []);
+      });
+      var onColorChange = useCallback(function (color) {
+        if (color) {
+          var colorObject = getColorObjectByColorValue(colors, color);
+          onChange(applyFormat(value, {
+            type: name,
+            attributes: colorObject ? {
+              class: getColorClassName('background-color', colorObject.slug)
+            } : {
+              style: "background-color:".concat(color)
+            }
+          }));
+        } else {
+          onChange(removeFormat(value, name));
+        }
+      }, [colors, onChange]);
+      var activeColor = useMemo(function () {
+        return getActiveColor(name, value, colors);
+      }, [name, value, colors]);
+      return wp.element.createElement(ColorPalette, {
+        value: activeColor,
+        onChange: onColorChange
+      });
+    };
+
+    var InlineColorUI = function InlineColorUI(_ref3) {
+      var name = _ref3.name,
+          value = _ref3.value,
+          onChange = _ref3.onChange,
+          onClose = _ref3.onClose,
+          isActive = _ref3.isActive,
+          addingColor = _ref3.addingColor;
+      return wp.element.createElement(ColorPopoverAtLink, {
+        value: value,
+        isActive: isActive,
+        addingColor: addingColor,
+        onClose: onClose,
+        className: "components-inline-color-popover"
+      }, wp.element.createElement(ColorPicker, {
+        name: name,
+        value: value,
+        onChange: onChange
+      }));
+    };
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = withSpokenMessages(InlineColorUI);
     /***/
   },
 
@@ -5278,15 +5410,15 @@ function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "funct
     /* harmony import */
 
 
-    var _abbreviation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./abbreviation */
-    "./src/js/gutenberg/extensions/formats/abbreviation/index.js");
+    var _clear__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./clear */
+    "./src/js/gutenberg/extensions/formats/clear/index.js");
     /* harmony import */
 
 
-    var _underline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ./underline */
-    "./src/js/gutenberg/extensions/formats/underline/index.js");
+    var _tooltip__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./tooltip */
+    "./src/js/gutenberg/extensions/formats/tooltip/index.js");
     /* harmony import */
 
 
@@ -5296,27 +5428,27 @@ function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "funct
     /* harmony import */
 
 
-    var _background_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! ./background-color */
-    "./src/js/gutenberg/extensions/formats/background-color/index.js");
-    /* harmony import */
-
-
-    var _markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _markdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./markdown */
     "./src/js/gutenberg/extensions/formats/markdown/index.js");
     /* harmony import */
 
 
-    var _clear__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-    /*! ./clear */
-    "./src/js/gutenberg/extensions/formats/clear/index.js");
+    var _underline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ./underline */
+    "./src/js/gutenberg/extensions/formats/underline/index.js");
     /* harmony import */
 
 
-    var _tooltip__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-    /*! ./tooltip */
-    "./src/js/gutenberg/extensions/formats/tooltip/index.js");
+    var _abbreviation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ./abbreviation */
+    "./src/js/gutenberg/extensions/formats/abbreviation/index.js");
+    /* harmony import */
+
+
+    var _background_color__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ./background-color */
+    "./src/js/gutenberg/extensions/formats/background-color/index.js");
 
     function _objectWithoutProperties(source, excluded) {
       if (source == null) return {};
@@ -5366,8 +5498,8 @@ function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "funct
     var registerFormatType = wp.richText.registerFormatType;
 
     function registerWeCodeArtFormats() {
-      [_abbreviation__WEBPACK_IMPORTED_MODULE_0__["abbreviation"], _background_color__WEBPACK_IMPORTED_MODULE_3__["backgroundColor"], _clear__WEBPACK_IMPORTED_MODULE_5__["clear"], _justify__WEBPACK_IMPORTED_MODULE_2__["justify"], _markdown__WEBPACK_IMPORTED_MODULE_4__["markdown"], //textColor, // Deprecated
-      _underline__WEBPACK_IMPORTED_MODULE_1__["underline"], _tooltip__WEBPACK_IMPORTED_MODULE_6__["tooltip"]].forEach(function (_ref) {
+      [_abbreviation__WEBPACK_IMPORTED_MODULE_5__["abbreviation"], _background_color__WEBPACK_IMPORTED_MODULE_6__["backgroundColor"], _clear__WEBPACK_IMPORTED_MODULE_0__["clear"], _markdown__WEBPACK_IMPORTED_MODULE_3__["markdown"], _justify__WEBPACK_IMPORTED_MODULE_2__["justify"], _underline__WEBPACK_IMPORTED_MODULE_4__["underline"], _tooltip__WEBPACK_IMPORTED_MODULE_1__["tooltip"] //textColor, 	// Deprecated
+      ].forEach(function (_ref) {
         var name = _ref.name,
             settings = _objectWithoutProperties(_ref, ["name"]);
 

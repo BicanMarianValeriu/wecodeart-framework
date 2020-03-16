@@ -6,7 +6,7 @@ const { __ } = wp.i18n;
 /**
  * Internal dependencies
  */
-import Edit from './components/edit';
+import edit from './components/edit';
 
 /**
  * Block constants
@@ -22,5 +22,5 @@ export const backgroundColor = {
 		style: 'style',
 		class: 'class',
 	},
-	edit: Edit,
+	edit
 };
