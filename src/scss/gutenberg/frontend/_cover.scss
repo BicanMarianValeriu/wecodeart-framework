@@ -61,8 +61,10 @@
 	// Apply max-width to floated items that have no intrinsic width
 	&.alignleft,
 	&.alignright {
-		max-width: 100%;
-		width: 100%;
+		margin-top: 0;
+		margin-left: 0;
+		margin-right: 0;
+		float: none;
 	}
 
 	// Using flexbox without an assigned height property breaks vertical center alignment in IE11.
@@ -79,15 +81,9 @@
 		}
 	}
 
-	// Aligned cover blocks should not use our global alignment rules
-	&.aligncenter,
-	&.alignleft,
-	&.alignright {
-		display: flex;
-	}
-
 	.wp-block-cover__inner-container {
-		width: calc(100% - 70px);
+		@include make-container();
+      	max-width: 1330px;
 		z-index: 2;
 	}
 

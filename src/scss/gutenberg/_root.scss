@@ -4,12 +4,6 @@
 
 :root {
 	// Theme
-	.has-inline-background {
-		@include border-radius();
-		padding: .10rem .2rem;
-		margin: 0 .2rem;
-	}
-	
 	@each $color, $value in $theme-colors {
 		.has-#{$color}-color {
 			color: #{$value};
@@ -17,10 +11,6 @@
 
 		.has-#{$color}-background-color {
 			background-color: #{$value};
-		}
-		
-		p.has-#{$color}-background-color {
-			@include alert-variant( $value, transparent, white );
 		}
 	}
 
@@ -30,6 +20,12 @@
 
 	.has-white-background-color {
 		background-color: white;
+	}
+
+	.has-inline-background {
+		@include border-radius();
+		padding: .10rem .2rem;
+		margin: 0 .2rem;
 	}
 
 	// Background colors.

@@ -1,3 +1,91 @@
+.wp-block-buttons {
+	display: inline-flex;
+	flex-flow: row wrap;
+	
+	&.is-style-default {
+		margin: 0 -5px;
+
+		> .wp-block-button {
+			flex-grow: 0;
+			padding: 0 5px;
+			margin-bottom: 1rem;
+		}
+	}
+
+	&.is-style-group {
+		vertical-align: middle;
+
+		> .wp-block-button {
+			// Prevent double borders when buttons are next to each other
+			&:not(:first-child) {
+				margin-left: -$btn-border-width;
+			}
+
+			// Reset rounded corners
+			&:not(:last-child) > .wp-block-button__link {
+				@include border-right-radius(0);
+			}
+
+			&:not(:first-child) > .wp-block-button__link {
+				@include border-left-radius(0);
+			}
+		}
+	}
+
+	&.is-style-vertical,
+	&.is-style-group-vertical {
+		flex-direction: column;
+	}
+
+	&.is-style-group-vertical {
+		align-items: flex-start;
+		justify-content: center;
+		margin-bottom: 1rem;
+
+		& > .wp-block-button {
+			width: 100%;
+			margin-bottom: 0;
+
+			// Prevent double borders when buttons are next to each other
+			&:not(:first-child) {
+				margin-top: -$btn-border-width;
+			}
+
+			// Reset rounded corners
+			&:not(:last-child) > .wp-block-button__link {
+				@include border-bottom-radius(0);
+			}
+
+			&:not(:first-child) > .wp-block-button__link {
+				@include border-top-radius(0);
+			}
+
+			&__link {
+				display: block;
+				width: 100%;
+			}
+		}
+	}
+
+	> .wp-block-button {
+		position: relative;
+		flex: 1 1 auto;
+		margin-bottom: 1rem;
+
+		&__link {
+			@include hover() {
+				z-index: 1;
+			}
+			  
+			&:focus,
+			&:active,
+			&.active {
+				z-index: 1;
+			}
+		}
+	}
+}
+
 .wp-block-button {
 	color: $white;
 
@@ -11,8 +99,7 @@
 	}
 
 	&__link {
-		display: inline-block;
-		vertical-align: middle;
+		display: block;
 		user-select: none;
 		outline: none;
 		font-weight: $btn-font-weight;
@@ -24,10 +111,23 @@
 			$btn-line-height,
 			$btn-border-radius
 		);
+
+		&.no-border-radius {
+			@include border-radius(0);
+		}
+
+		@each $color, $value in $theme-colors {
+			&.has-#{$color}-background-color {
+				&:hover {
+					color: white;
+					background-color: darken( $value, 10% );
+				}
+			}
+		}
 	
 		.is-style-outline & {
 			background-color: transparent;
-			border: 2px solid currentColor;
+			border: $input-btn-border-width solid currentColor;
 
 			&:not(.has-text-color) {
 				color: $dark;
@@ -40,11 +140,14 @@
 						color: #{$value};
 					}
 				}
+
+				&.has-#{$color}-color {
+					&:hover {
+						color: white;
+						background-color: #{$value};
+					}
+				}
 			}
-		}
-	
-		.is-style-squared & {
-			@include border-radius( 0 );
 		}
 	}
 }
