@@ -11,6 +11,12 @@
 	}
 
 	&__link {
+		display: inline-block;
+		vertical-align: middle;
+		user-select: none;
+		outline: none;
+		font-weight: $btn-font-weight;
+		@include button-variant( $dark, $gray-200 );
 		@include button-size(
 			$btn-padding-y,
 			$btn-padding-x-lg,
@@ -19,17 +25,22 @@
 			$btn-border-radius
 		);
 	
-		&:hover,
-		&:focus,
-		&:active,
-		&:visited {
-			color: inherit;
-		}
-	
 		.is-style-outline & {
-			color: $dark;
 			background-color: transparent;
 			border: 2px solid currentColor;
+
+			&:not(.has-text-color) {
+				color: $dark;
+			}
+
+			@each $color, $value in $theme-colors {
+				&.has-#{$color}-color {
+					&:hover,
+					&:visited {
+						color: #{$value};
+					}
+				}
+			}
 		}
 	
 		.is-style-squared & {

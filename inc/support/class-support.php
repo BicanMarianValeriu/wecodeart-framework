@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		4.1.1
+ * @version		4.1.5
  */
 
 namespace WeCodeArt;
@@ -51,7 +51,7 @@ class Support implements ArrayAccess {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 	1.0
-	 * @version	4.1.1
+	 * @version	4.1.5
 	 */
 	public function after_setup_theme() {
 		// Content width
@@ -78,12 +78,6 @@ class Support implements ArrayAccess {
 		// Thumbnails
 		add_theme_support( 'post-thumbnails' );
 
-		// Add support for Block Styles.
-		add_theme_support( 'wp-block-styles' );
-
-		// Add support for full and wide align images.
-		add_theme_support( 'align-wide' );
-
 		// Editor Style
 		add_theme_support( 'editor-style' );
 
@@ -103,60 +97,6 @@ class Support implements ArrayAccess {
 		add_theme_support( 'amp', apply_filters( 'wecodeart/filter/support/amp', [ 
 			'paired' => true 
 		] ) );
-
-		// Add custom editor font sizes.
-		add_theme_support( 'editor-font-sizes', apply_filters( 'wecodeart/filter/support/editor-font-sizes', [
-			array(
-				'name'      => esc_html__( 'Small', 'wecodeart' ),
-				'shortName' => esc_html__( 'S', 'wecodeart' ),
-				'size'      => 13,
-				'slug'      => 'small',
-			),
-			array(
-				'name'      => esc_html__( 'Normal', 'wecodeart' ),
-				'shortName' => esc_html__( 'M', 'wecodeart' ),
-				'size'      => 16,
-				'slug'      => 'normal',
-			),
-
-			array(
-				'name'      => esc_html__( 'Large', 'wecodeart' ),
-				'shortName' => esc_html__( 'L', 'wecodeart' ),
-				'size'      => 36,
-				'slug'      => 'large',
-			),
-			array(
-				'name'      => esc_html__( 'Huge', 'wecodeart' ),
-				'shortName' => esc_html__( 'XL', 'wecodeart' ),
-				'size'      => 42,
-				'slug'      => 'huge',
-			),
-		] ) );
-
-		// Editor color palette.
-		$wecodeart_colors = apply_filters( 'wecodeart/filter/support/editor-color-palette', [
-			'primary' 	=> [ 'color' => '#2388ed', 'label' => esc_html__( 'Primary', 	'wecodeart' ) 	],
-			'secondary' => [ 'color' => '#6c757d', 'label' => esc_html__( 'Secondary', 	'wecodeart' ) 	],
-			'danger' 	=> [ 'color' => '#dc3545', 'label' => esc_html__( 'Danger', 	'wecodeart' )	],
-			'success' 	=> [ 'color' => '#7dc855', 'label' => esc_html__( 'Success', 	'wecodeart' ) 	],
-			'info' 		=> [ 'color' => '#17a2b8', 'label' => esc_html__( 'Info', 		'wecodeart' )	],
-			'warning' 	=> [ 'color' => '#ffc107', 'label' => esc_html__( 'Warning', 	'wecodeart' )	],
-			'dark' 		=> [ 'color' => '#343a40', 'label' => esc_html__( 'Dark', 		'wecodeart' )	],
-			'light' 	=> [ 'color' => '#f1f3f7', 'label' => esc_html__( 'Light', 		'wecodeart' )	],
-			'white' 	=> [ 'color' => '#ffffff', 'label' => esc_html__( 'White', 		'wecodeart' )	],
-		] );
-
-		$colors = [];
-		foreach( $wecodeart_colors as $slug => $color ) {
-			$colors[] = [
-				'name' 	=> $color['label'],
-				'slug'	=> esc_attr( strtolower( $slug ) ),
-				'color'	=> sanitize_hex_color( $color['color'] ),
-			];
-		}
-
-		add_theme_support( 'editor-color-palette', $colors );
-		add_theme_support( 'wecodeart-color-palette-classnames' );
 	}
 
 	/**

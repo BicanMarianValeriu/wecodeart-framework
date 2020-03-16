@@ -111,3 +111,27 @@ function kses_svg( string $data ) {
         ]
     ] );
 }
+
+/**
+ * WP_Parse_Args Reccursive
+ *
+ * @param 	array 	$a
+ * @param 	array 	$b
+ *
+ * @return 	array
+ */
+function wp_parse_args_r( &$a, $b ) {
+    $a = (array) $a;
+    $b = (array) $b;
+    $r = $b;
+
+    foreach ( $a as $k => &$v ) {
+        if ( is_array( $v ) && isset( $r[ $k ] ) ) {
+            $r[ $k ] = wp_parse_args_r( $v, $r[ $k ] );
+        } else {
+            $r[ $k ] = $v;
+        }
+    }
+
+    return $r;
+}

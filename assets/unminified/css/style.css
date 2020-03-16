@@ -4,7 +4,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 4.1.4
+Version: 4.1.5
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -7919,16 +7919,62 @@ html body {
     /*rtl:ignore*/
     text-align: right; }
   .wp-block-button__link {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    outline: none;
+    font-weight: 600;
+    color: #fff;
+    background-color: #343a40;
+    border-color: #e6e6e6;
     padding: 0.375rem 1rem;
     font-size: 0.9rem;
     line-height: 1.9;
     border-radius: 0.25rem; }
-    .wp-block-button__link:hover, .wp-block-button__link:focus, .wp-block-button__link:active, .wp-block-button__link:visited {
-      color: inherit; }
+    .wp-block-button__link:hover {
+      color: #fff;
+      background-color: #23272b;
+      border-color: #cdcdcd; }
+    .wp-block-button__link:focus, .wp-block-button__link.focus {
+      color: #fff;
+      background-color: #23272b;
+      border-color: #cdcdcd;
+      box-shadow: 0 0 0 0.2rem rgba(234, 234, 234, 0.5); }
+    .wp-block-button__link.disabled, .wp-block-button__link:disabled {
+      color: #fff;
+      background-color: #343a40;
+      border-color: #e6e6e6; }
+    .wp-block-button__link:not(:disabled):not(.disabled):active, .wp-block-button__link:not(:disabled):not(.disabled).active,
+    .show > .wp-block-button__link.dropdown-toggle {
+      color: #fff;
+      background-color: #1d2124;
+      border-color: #c6c6c6; }
+      .wp-block-button__link:not(:disabled):not(.disabled):active:focus, .wp-block-button__link:not(:disabled):not(.disabled).active:focus,
+      .show > .wp-block-button__link.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(234, 234, 234, 0.5); }
     .is-style-outline .wp-block-button__link {
-      color: #343a40;
       background-color: transparent;
       border: 2px solid currentColor; }
+      .is-style-outline .wp-block-button__link:not(.has-text-color) {
+        color: #343a40; }
+      .is-style-outline .wp-block-button__link.has-primary-color:hover, .is-style-outline .wp-block-button__link.has-primary-color:visited {
+        color: #2388ed; }
+      .is-style-outline .wp-block-button__link.has-secondary-color:hover, .is-style-outline .wp-block-button__link.has-secondary-color:visited {
+        color: #6c757d; }
+      .is-style-outline .wp-block-button__link.has-success-color:hover, .is-style-outline .wp-block-button__link.has-success-color:visited {
+        color: #7dc855; }
+      .is-style-outline .wp-block-button__link.has-info-color:hover, .is-style-outline .wp-block-button__link.has-info-color:visited {
+        color: #17a2b8; }
+      .is-style-outline .wp-block-button__link.has-warning-color:hover, .is-style-outline .wp-block-button__link.has-warning-color:visited {
+        color: #ffc107; }
+      .is-style-outline .wp-block-button__link.has-danger-color:hover, .is-style-outline .wp-block-button__link.has-danger-color:visited {
+        color: #dc3545; }
+      .is-style-outline .wp-block-button__link.has-light-color:hover, .is-style-outline .wp-block-button__link.has-light-color:visited {
+        color: #f1f3f7; }
+      .is-style-outline .wp-block-button__link.has-dark-color:hover, .is-style-outline .wp-block-button__link.has-dark-color:visited {
+        color: #343a40; }
     .is-style-squared .wp-block-button__link {
       border-radius: 0; }
 
@@ -8447,6 +8493,22 @@ section.wp-block-cover-image > h2,
 
 .wp-block-gallery.aligncenter .blocks-gallery-item figure {
   justify-content: center; }
+
+.wp-block-group.has-background {
+  padding: .5rem .8rem;
+  margin-top: 0;
+  margin-bottom: 0; }
+
+.wp-block-group__inner-container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1330px; }
+  .alignfull .wp-block-group__inner-container,
+  .alignwide .wp-block-group__inner-container {
+    max-width: initial; }
 
 .wp-block-image {
   max-width: 100%;

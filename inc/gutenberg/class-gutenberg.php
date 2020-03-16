@@ -9,12 +9,14 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		4.0.3
- * @version		4.0.3
+ * @version		4.1.5
  */
 
 namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit();
+
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Handles Gutenberg Theme Functionality.
@@ -25,23 +27,33 @@ class Gutenberg {
 	use \WeCodeArt\Core\Scripts\Base;
 
 	/**
+	 * The Gutenberg Config.
+	 *
+	 * @var config[]
+	 */
+	protected $config = [];
+
+	/**
 	 * Class Init.
 	 *
 	 * @return void
 	 */
 	public function init() {
-		// Editor Assets.
-		add_action( 'enqueue_block_editor_assets', 	[ $this, 'editor_assets' ] );
-
-		// Frontend Assets.
-		add_action( 'wp_enqueue_scripts', 			[ $this, 'frontend_assets' ], 20 );
+		// Setup Config
+		$this->config = wecodeart_config( 'gutenberg', [] );
 
 		// Block Categories.
 		add_filter( 'block_categories', 			[ $this, 'block_category' ], 10, 1 );
-
+		
+		// Editor Assets.
+		add_action( 'enqueue_block_editor_assets', 	[ $this, 'block_editor_assets' ] );
+		
 		// Editor Settings.
 		add_filter( 'block_editor_settings', 		[ $this, 'block_editor_settings' ], 10, 2 );
-		
+
+		// Theme Support.
+		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
+
 		// Modules
 		Gutenberg\Modules\CSS::get_instance();
 		Gutenberg\Modules\Page::get_instance();
@@ -84,7 +96,7 @@ class Gutenberg {
 	 *
 	 * @return  void
 	 */
-	public function editor_assets() {
+	public function block_editor_assets() {
 		// Gutenberg editor assets.
 		wp_enqueue_style( 	$this->make_handle(),	$this->get_asset( 'css', 'editor' ), 	[], wecodeart( 'version' ) );
 		wp_enqueue_script( 	$this->make_handle(),	$this->get_asset( 'js', 'editor' ), 	[
@@ -112,28 +124,129 @@ class Gutenberg {
 		);
 
 		// Inline
-		$global = array(
-			'theme' => array(
-				'version' => wecodeart( 'version' ),
-			),
-			'supports'   => array(
-				'colorPalette' => get_theme_support( 'wecodeart-color-palette-classnames' ),
-			),
-		);
+		$global = [
+			'theme' 	=> [
+				'version' => wecodeart( 'version' )
+			],
+			'supports'	=> [
+				'colorPalette' => get_prop( $this->config, 'support-palette-classnames', false ),
+			],
+		];
 		wp_add_inline_script( $this->make_handle(), 'window.wecodeartInfo = ' . wp_json_encode( $global ) . ';', 'before' );
 	}
 
 	/**
-	 * Front End Assets
-	 * 
-	 * @since   4.0.3
-	 * @access  public
+	 * Support custom theme support for editorskit-template-block-sizes
+	 *
+	 * @access public
 	 */
-	public function frontend_assets() {
-		wp_deregister_style( 'wp-block-library' );
-		wp_dequeue_style( 'wp-block-library' ); 
-		wp_deregister_style( 'wp-block-library-theme' );
-		wp_dequeue_style( 'wp-block-library-theme' ); 
+	public function theme_support() {
+		// Template Width
+		$options = get_prop( $this->config, 'editor-sizes', [] );
+		if ( is_array( $options ) && ! empty( $options ) ) {
+			add_filter( 'admin_body_class', [ $this, 'body_class_support' ] );
+			global $pagenow;
+			if ( ! empty( $pagenow ) && in_array( $pagenow, array( 'post-new.php', 'post.php', 'edit.php' ) ) ) {
+				add_action( 'admin_head', [ $this, 'template_width_css' ], 100 );
+			}
+		}
+
+		// Add support for Block Styles.
+		if( get_prop( $this->config, 'support-default-styles', false ) ) {
+			add_theme_support( 'wp-block-styles' );
+		} else {
+			add_action( 'wp_print_styles', function() {
+				wp_dequeue_style( 'wp-block-library' ); 		// WordPress Core
+    			wp_dequeue_style( 'wp-block-library-theme' ); 	// WordPress Core
+			}, 100 );
+		}
+
+		// Add support for full and wide align.
+		if( get_prop( $this->config, 'support-align-wide', false ) ) {
+			add_theme_support( 'align-wide' );
+		}
+		
+		// Add custom editor font sizes.
+		if( $sizes = get_prop( $this->config, 'editor-font-sizes', false ) ) {
+			add_theme_support( 'editor-font-sizes', $sizes );
+		}
+
+		// Add support for color palette.
+		if( $colors = get_prop( $this->config, 'editor-color-palette', false ) ) {
+			add_theme_support( 'editor-color-palette', $colors );
+		}
+		
+		// Add support for gradient palette.
+		if( $colors = get_prop( $this->config, 'editor-gradient-presets', false ) ) {
+			add_theme_support( 'editor-gradient-presets', $colors );
+		}
+	}
+
+	/**
+	 * Add custom body class.
+	 *
+	 * @param 	string 	$classes The body classes.
+	 *
+	 * @return 	mixed 	Returns update body class.
+	 */
+	public function body_class_support( $classes ) {
+		global $post;
+
+		$classes .= 'is-wca-body-class-on ';
+
+		if ( isset( $post->ID ) ) {
+			$template = str_replace( array( '.', '/' ), '-', get_page_template_slug( $post->ID ) );
+
+			if ( empty( $template ) ) {
+				$template = 'default';
+			}
+
+			$classes .= $post->post_type . '-template-' . $template . ' ';
+		}
+
+		return $classes;
+	}
+
+	/**
+	 * Add custom css for template width.
+	 *
+	 * @since	4.1.5
+	 *
+	 * @return	void
+	 */
+	public function template_width_css() {
+		global $post;
+
+		if ( ! isset( $post->ID ) ) {
+			return;
+		}
+
+		$script_handle = 'editor-sizes';
+
+		wp_register_style( $this->make_handle( $script_handle ), false, [], wecodeart( 'version' ) );
+		wp_enqueue_style( $this->make_handle( $script_handle ) );
+
+		$templates 	= get_prop( $this->config, 'editor-sizes', [] );
+		$selector	= ' .editor-styles-wrapper .wp-block';
+		$style		= '';
+
+		if ( is_array( $templates ) && ! empty( $templates ) ) {
+			foreach ( $templates as $template => $sizes ) {
+				$block = '.' . $post->post_type . '-template-' . str_replace( [ '.', '/' ], '-', $template ) . $selector;
+				
+				if ( is_array( $sizes ) && ! empty( $sizes ) ) {
+					foreach ( $sizes as $size => $width ) {
+						if ( 'default' === $size ) {
+							$style .= $block . '{ max-width: ' . $width . '; }';
+						} else {
+							$style .= $block . '[data-align="' . $size . '"]{ max-width: ' . $width . '; }';
+						}
+					}
+				}
+			}
+		}
+
+		wp_add_inline_style( $this->make_handle( $script_handle ), $style );
 	}
 
 	/**

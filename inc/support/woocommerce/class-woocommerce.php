@@ -254,11 +254,11 @@ class WooCommerce implements Integration {
 		$doc->loadHTML( $subtotal );
 		$body = $doc->getElementsByTagName('body');
 		
-		if ( $body && 0 < $body->length ) {
+		if( $body && 0 < $body->length ) {
 			$body = $body->item(0);
 			$body_els = $body->getElementsByTagName('*');
 
-			if ( $body_els && 0 < $body_els->length ) {
+			if( $body_els && 0 < $body_els->length ) {
 				$first_child = $body_els->item(0);
 				$fragments["{$first_child->tagName}.{$first_child->getAttribute('class')}"] = $subtotal;
 			}
@@ -271,11 +271,11 @@ class WooCommerce implements Integration {
 		$doc->loadHTML( $count );
 		$body = $doc->getElementsByTagName('body');
 		
-		if ( $body && 0 < $body->length ) {
+		if( $body && 0 < $body->length ) {
 			$body = $body->item(0);
 			$body_els = $body->getElementsByTagName('*');
 
-			if ( $body_els && 0 < $body_els->length ) {
+			if( $body_els && 0 < $body_els->length ) {
 				$first_child = $body_els->item(0);
 				$fragments["{$first_child->tagName}.{$first_child->getAttribute('class')}"] = $count;
 			}

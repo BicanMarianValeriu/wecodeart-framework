@@ -49,7 +49,6 @@ export default compose(
 			blockId: selectedBlock.clientId,
 			blockName: selectedBlock.name,
 			blockContent: get(selectedBlock, 'attributes.content'),
-			isDisabled: false,
 		};
 	}),
 	withDispatch((dispatch) => {
@@ -61,7 +60,7 @@ export default compose(
 		};
 	}),
 	ifCondition((props) => {
-		return !props.isDisabled && allowedBlocks.includes(props.blockName);
+		return allowedBlocks.includes(props.blockName);
 	}),
 	withSpokenMessages,
 )(ClearBlockFormatting);

@@ -73,7 +73,7 @@ function applyExtraSettings(extraProps, blockType, attributes) {
         if (global || xs || sm || md || lg || xl) {
             columnClasses = [...columnClasses, ...[
                 { [global]: global !== 'col' },
-                { [sm]: sm !== 'col-sm-12' && global === 'col-12' },
+                { [sm]: sm },
                 { [md]: md },
                 { [lg]: lg },
                 { [xl]: xl },

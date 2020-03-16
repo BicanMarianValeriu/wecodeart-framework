@@ -4,7 +4,7 @@
 import { abbreviation } from './abbreviation';
 import { underline } from './underline';
 import { justify } from './justify';
-import { textColor } from './text-color';
+//import { textColor } from './text-color'; // Deprecated
 import { backgroundColor } from './background-color';
 import { markdown } from './markdown';
 import { clear } from './clear';
@@ -22,7 +22,7 @@ function registerWeCodeArtFormats() {
 		clear,
 		justify,
 		markdown,
-		textColor,
+		//textColor, // Deprecated
 		underline,
 		tooltip
 	].forEach( ( { name, ...settings } ) => {

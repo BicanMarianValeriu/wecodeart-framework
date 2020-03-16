@@ -1,3 +1,13 @@
+v4.1.51
+- Updated - Abbreviation
+
+v4.1.5
+- Updated - Minor improvements to Bootstrap Nav Walker
+- Updated - Major improvements to Columns/Column default blocks (added patterns with BootStrap Columns)
+- Updated - CSS Improvements to Gutenberg buttons + BootStrap
+- Updated - JS Refactor + added Component/JSManager/Template as default JS + Run JS routes from main theme (class-scripts.php)
+- Removed - Text Color Gutenberg format
+
 v4.1.4
 - Fixed - Fixed minor issue with Author Box social items + set them in config file.
 - Added - Author box config items and updated code to use them

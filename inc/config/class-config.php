@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use ArrayAccess;
 use WeCodeArt\Config\Interfaces\ConfigInterface;
+use function WeCodeArt\Functions\wp_parse_args_r;
 
 /**
  * Config.
@@ -49,7 +50,8 @@ class Config implements ConfigInterface, ArrayAccess {
      * First, search child theme for the config. If config file doesn't exist in the child,
      * search the parent for the config file.
      *
-     * @since 3.9.5
+     * @since   3.9.5
+     * @version 4.1.5
      *
      * @param string $config The config file to look for (not including .php file extension).
      * @return array The config data.
@@ -62,12 +64,12 @@ class Config implements ConfigInterface, ArrayAccess {
 
         if ( is_readable( $parent_file ) ) {
             $parent_req = require $parent_file;
-            $data       = wp_parse_args( $parent_req, $data );
+            $data       = wp_parse_args_r( $parent_req, $data );
         }
         
         if ( is_readable( $child_file ) ) {
             $child_req  = require $child_file;
-            $data       = wp_parse_args( $child_req, $data );
+            $data       = wp_parse_args_r( $child_req, $data );
         }
 
         return (array) $data;

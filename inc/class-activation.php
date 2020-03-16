@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		3.9.9
+ * @version		4.1.5
  */
 
 namespace WeCodeArt;
@@ -81,6 +81,7 @@ class Activation {
 	 */
 	public function is_ok() {
 		if( ! $this->requirements ) return true;
+
 		foreach( $this->requirements as $val ) {
 			if( $val['failed'] === true ) {
 				$this->status = false;
@@ -95,7 +96,7 @@ class Activation {
 	 * Set Translation Messages
 	 *
 	 * @since 	3.7.9
-	 * @version	3.9.9
+	 * @version	4.1.5
 	 */
 	public function set_i18n( $args = [] ) {
 		$defaults = [
@@ -105,34 +106,31 @@ class Activation {
 			),
 		];
 
-		$args = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/i18n', $defaults ) );
-
-		return $this->messages = $args;	
+		return $this->messages = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/i18n', $defaults ) );	
 	}
 
 	/**
 	 * Set Requirements
 	 *
 	 * @since 	3.5
-	 * @version	3.9.9
+	 * @version	4.1.5
 	 */
 	public function set_requirements( $args = [] ) {
-		return $this->requirements = wp_parse_args( $args, apply_filters( 
-			'wecodeart/filter/activation/requirements', 
-			wecodeart_config( 'requirements' ) 
-		) );	
+		return $this->requirements = wp_parse_args( $args, wecodeart_config( 'requirements' ) );	
 	}
 
 	/**
 	 * Compare Requirements
 	 *
 	 * @since 	3.5
-	 * @version	3.9.5
+	 * @version	4.1.5
 	 */
 	public function compare_requirements() {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
-			$this->requirements[$key]['failed'] = version_compare( $val['installed'], $val['required'], '<=' );
+			if( isset( $val['installed'] ) && isset( $val['required'] ) ) {
+				$this->requirements[$key]['failed'] = version_compare( $val['installed'], $val['required'], '<=' );
+			}
 		}
 	}
 
@@ -167,7 +165,10 @@ class Activation {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
 			if( $val['failed'] === true ) {
-				Notifications::add( [ 'type' => 'error', 'message' => wpautop( $val['i18n'] ) ] );
+				Notifications::add( [
+					'type' 		=> 'error',
+					'message' 	=> wpautop( $val['i18n'] )
+				] );
 			}
 		}	
 	}

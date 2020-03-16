@@ -47,8 +47,6 @@ class Entry {
 
 		add_action( 'wecodeart/hook/loop/else', [ $this, 'render_no_posts' ], 10 );
 
-		//add_filter( 'wecodeart/filter/entry/title/disabled', [ $this, 'filter_home_title' ], 10, 2 );
-
 		/**
 		 * Child classes
 		 */
@@ -239,34 +237,5 @@ class Entry {
 		$template = trim( preg_replace( '/\s+/', ' ', $template ) );
 		$template = preg_replace( '/>\s*</', '><', $template );
 		return $template;
-	} 
-
-	/**
-	 * Remove title on homepage
-	 *
-	 * @since	3.7.1
-	 * @version	4.0.3
-	 *
-	 * @param 	boolean	$disabled
-	 * @param	integer	$post_id
-	 *
-	 * @return	boolean
-	 */
-	public function filter_home_title( $disabled, $post_id ) {
-		return _deprecated_function( __FUNCTION__, '4.0.3' );
-
-		/* 
-		$custom_page = get_option( 'page_on_front' );
-
-		if( intval( $custom_page ) === 0 ) {
-			return $disabled;
-		}
-
-		if( ! is_search() && intval( $custom_page ) === intval( $post_id ) ) {
-			$disabled = true;
-		}
-
-		return $disabled;
-		*/
 	}
 }

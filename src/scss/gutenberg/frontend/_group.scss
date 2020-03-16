@@ -1,0 +1,17 @@
+.wp-block-group {
+  &.has-background {
+    padding: .5rem .8rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  &__inner-container {
+    @include make-container();
+    max-width: 1330px;
+
+    .alignfull &,
+    .alignwide & {
+      max-width: initial;
+    }
+  }
+}

@@ -2,6 +2,7 @@
  * External Dependencies
  */
 import classnames from 'classnames';
+import patterns from './patterns';
 
 /**
  * WordPress dependencies.
@@ -9,9 +10,8 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
 const { Fragment } = wp.element;
-const { ToggleControl, PanelBody, Path, SVG } = wp.components;
+const { ToggleControl, PanelBody } = wp.components;
 const { InspectorControls, InnerBlocks } = wp.blockEditor;
-const { createHigherOrderComponent } = wp.compose;
 
 /**
  * Internal dependencies.
@@ -31,23 +31,7 @@ import { restrictedBlocks } from '../../extensions/attributes';
 function addColumnsPatterns(settings) {
     const { name: blockName } = settings;
     if (!restrictedBlocks.includes(blockName) && blockName === 'core/columns') {
-        settings.patterns = [
-            {
-                name: 'one-column',
-                label: __('One Column'),
-                icon: <SVG className="dashicon" height="26" viewBox="0 0 50 26" width="50" xmlns="http://www.w3.org/2000/svg"><Path d="m48.0833333 0h-46.16666663c-1.05416667 0-1.91666667.9-1.91666667 2v22c0 1.1.8625 2 1.91666667 2h46.16666663c1.0541667 0 1.9166667-.9 1.9166667-2v-22c0-1.1-.8625-2-1.9166667-2zm0 24h-46.16666663v-22h46.16666663z" /></SVG>,
-                isDefault: true,
-                innerBlocks: [
-                    ['core/column', {
-                        width: 100,
-                        bootstrapColumns: {
-                            global: 'col-12',
-                            sm: 'col-sm',
-                        }
-                    }],
-                ],
-            },
-        ];
+        settings.patterns = patterns;
     }
 
     return settings;
@@ -159,9 +143,9 @@ function getSaveElement(element, blockType, attributes) {
  * Apply Filters
  */
 function applyFilters() {
-    addFilter('blocks.getSaveElement', 'wecodeart/blocks/columns/getSaveElement', getSaveElement);
-    addFilter('blocks.registerBlockType', 'wecodeart/blocks/columns/patters', addColumnsPatterns);
     addFilter('editor.BlockEdit', 'wecodeart/editor/columns/withColumnsControls', withColumnsControls);
+    addFilter('blocks.registerBlockType', 'wecodeart/blocks/columns/patterns', addColumnsPatterns);
+    addFilter('blocks.getSaveElement', 'wecodeart/blocks/columns/getSaveElement', getSaveElement);
 }
 
 applyFilters();

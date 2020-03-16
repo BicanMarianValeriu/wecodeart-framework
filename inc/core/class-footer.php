@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.1
+ * @version		4.1.5
  */
 
 namespace WeCodeArt\Core;
@@ -135,12 +135,13 @@ class Footer {
 	 * This function generates the columns fot the footer
 	 *
 	 * @since	1.5
-	 * @version	3.9.5
+	 * @version	4.1.5
 	 *
 	 * @return 	array
 	 */
 	public static function footer_widgets() {
-		$columns = apply_filters( 'wecodeart/filter/footer/columns', (int) 4 );
+		$columns = wecodeart_config( 'footer-columns', 4 );
+		$columns = apply_filters( 'wecodeart/filter/footer/columns', $columns ); // Deprecated
 
 		$widgets = [];
 		foreach( range( 1, $columns ) as $column ) {

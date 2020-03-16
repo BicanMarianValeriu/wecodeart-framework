@@ -26,9 +26,7 @@ class ClearFormatting extends Component {
 			if (formatTypes.length > 0) {
 				let newValue = value;
 
-				map(formatTypes, (activeFormat) => {
-					newValue = removeFormat(newValue, activeFormat.name);
-				});
+				map(formatTypes, (activeFormat) => newValue = removeFormat(newValue, activeFormat.name));
 
 				onChange({ ...newValue });
 			}

@@ -9,7 +9,7 @@
  * @subpackage 	Entry Media Class
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.6
- * @version		4.0.1
+ * @version		4.1.5
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -35,13 +35,16 @@ class Media {
 		add_action( 'wecodeart/hook/entry/header', [ $this, 'render_image' ], 20 );
 
 		// Filters.
-		add_filter( 'wecodeart/filter/media/render_image/disable', [ $this, 'filter_render_image' ] );
+		add_filter( 'wecodeart/filter/media/render_image/disable', 	[ $this, 'filter_render_image' 	] );
+		add_filter( 'wecodeart/filter/media/render_image/wrappers', [ $this, 'filter_link_image' 	] );
 	}
 	
 	/**
 	 * Get information about available image sizes
 	 *
 	 * @since	3.6.4
+	 * @version	4.1.5
+	 * 
 	 * @param 	string 	$size
 	 *
 	 * @return 	mixed
@@ -54,7 +57,7 @@ class Media {
 	
 		// Create the full array with sizes and crop info
 		foreach( $get_intermediate_image_sizes as $_size ) {
-			if ( in_array( $_size, array( 'thumbnail', 'medium', 'large' ) ) ) {
+			if ( in_array( $_size, array( 'thumbnail', 'medium', 'medium_large', 'large' ) ) ) {
 				$sizes[ $_size ]['width'] 	= get_option( $_size . '_size_w' );
 				$sizes[ $_size ]['height'] 	= get_option( $_size . '_size_h' );
 				$sizes[ $_size ]['crop'] 	= (bool) get_option( $_size . '_crop' );
@@ -166,7 +169,7 @@ class Media {
 	 * Get Image - Return an image pulled from the media gallery. 
 	 *
 	 * @since 	3.6.4
-	 * @version	3.9.3
+	 * @version	4.1.5
 	 *
 	 * @param 	array	$args
 	 * @param	bool	$echo
@@ -189,7 +192,8 @@ class Media {
 		$args = apply_filters( 'wecodeart/filter/media/get_image/args', wp_parse_args( $args, $defaults ), get_post_type() );
 		
 		// Allow child theme to short-circuit this function.
-		$pre = apply_filters( 'wecodeart/filter/media/get_image/pre', false, $args, get_post() );
+		$pre = apply_filters( 'wecodeart/filter/media/get_image/pre', false, $args );
+
 		if ( false !== $pre ) return $pre; 
 		
 		// If post thumbnail (native WP) exists, use its id.
@@ -264,14 +268,16 @@ class Media {
 	 * Echo the Entry IMG Markup
 	 *
 	 * @since 	1.0
-	 * @version 4.0.3
+	 * @version 4.1.5
 	 *
 	 * @param 	array	$args
+	 * @param 	array	$wrappers
 	 *
 	 * @return 	mixed
 	 */
-	public function render_image( $args = [] ) {  
+	public function render_image( $args = [], $wrappers = [] ) {  
 		$disable = apply_filters( 'wecodeart/filter/media/render_image/disable', false );
+
 		if ( is_attachment() || $disable === true ) return; 
 		
 		$args = wp_parse_args( $args, [ 
@@ -280,22 +286,12 @@ class Media {
 			]
 		] ); 
 
-		$wrappers = [ [ 
+		$wrappers = wp_parse_args( $wrappers, apply_filters( 'wecodeart/filter/media/render_image/wrappers', [ [ 
 			'tag' 	=> 'div', 
 			'attrs' => [ 
 				'class' => 'entry-media' 
 			] 
-		] ];
-
-		if ( ! is_singular() ) {
-			$wrappers[] = [
-				'tag' 	=> 'a',
-				'attrs' => [
-					'href'	=> esc_url( get_permalink() ),
-					'class' => 'entry-media__link'  
-				]
-			];
-		}
+		] ] ) );
 		
 		/**
 		 * Return the image wrapped into containers
@@ -326,5 +322,28 @@ class Media {
 		}
 
 		return $disable;
+	}
+
+	/**
+	 * Filter to add link on image on archives
+	 *
+	 * @since	4.1.5
+	 *
+	 * @param 	boolean	$wrappers
+	 *
+	 * @return 	boolean
+	 */
+	public function filter_link_image( $wrappers ) {
+		if ( ! is_singular() ) {
+			$wrappers[] = [
+				'tag' 	=> 'a',
+				'attrs' => [
+					'href'	=> esc_url( get_permalink() ),
+					'class' => 'entry-media__link'  
+				]
+			];
+		}
+
+		return $wrappers;
 	}
 }

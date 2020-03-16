@@ -138,13 +138,11 @@ function addAttributes(settings) {
  */
 const withAttributes = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const { name: blockName } = props;
+		const { name: blockName, attributes } = props;
 
 		if (!restrictedBlocks.includes(blockName)) {
-			props.attributes.wecodeart = props.attributes.wecodeart || {};
-
-			if (typeof props.attributes.wecodeart === 'undefined') {
-				props.attributes.wecodeart = Object.assign({}, props.attributes.wecodeart);
+			if (typeof attributes.wecodeart === 'undefined') {
+				attributes.wecodeart = Object.assign({}, attributes.wecodeart);
 			}
 		}
 

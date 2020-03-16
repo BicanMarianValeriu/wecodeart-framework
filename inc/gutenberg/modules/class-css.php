@@ -40,6 +40,7 @@ class CSS {
 	 * Render server-side CSS
 	 * 
 	 * @since   4.0.3
+	 * @version 4.1.5
 	 * @access  public
 	 */
 	public function render_ssr_css() {
@@ -56,11 +57,15 @@ class CSS {
 				return;
 			}
 
-			$style = "\n" . '<style type="text/css" media="all" id="'. $this->make_handle() .'">' . "\n";
-			$style .= $this->collect_styles( $blocks );
+			$css_string = $this->collect_styles( $blocks );
+
+			if( empty( $css_string ) ) return;
+
+			$style = "\n" . '<style type="text/css" media="all" id="' . $this->make_handle() . '">' . "\n";
+			$style .= $css_string;
 			$style .= "\n" . '</style>' . "\n";
 
-			echo $style;
+			echo $style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 

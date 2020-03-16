@@ -9,7 +9,7 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		1.0
- * @version		4.0.3
+ * @version		4.1.5
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -33,8 +33,8 @@ use WeCodeArt\Conditional;
 use WeCodeArt\Config\Exceptions\BindingResolutionException;
 
 // Include the functions and autoloader.
-require_once( get_parent_theme_file_path( '/inc/functions.php' ) );
 require_once( get_parent_theme_file_path( '/inc/class-autoloader.php' ) );
+require_once( get_parent_theme_file_path( '/inc/functions.php' ) );
 new WeCodeArt\Autoloader();
 
 /**
@@ -71,7 +71,6 @@ final class WeCodeArt implements ArrayAccess {
 	 * @since 3.6.2
 	 */
 	public function load() {
-
 		// Fire Core Classes
 		Header		::get_instance();
 		Content		::get_instance();
@@ -80,7 +79,6 @@ final class WeCodeArt implements ArrayAccess {
 		Comments	::get_instance();
 		Pagination	::get_instance();
 		Footer		::get_instance();
-		Scripts		::get_instance();
 		Hooks		::get_instance();
 
 		// Admin Stuff
@@ -296,8 +294,8 @@ function wecodeart_if( $parameters ) {
 /**
  * App Binding Functions
  */
-$theme          = wecodeart();
-$config         = Config::get_config();
+$theme  = wecodeart();
+$config = Config::get_config();
 
 /**
  * Before Setup Hook
@@ -318,6 +316,7 @@ do_action( 'wecodeart/setup/after', $theme );
 /**
  * Maybe Load the theme if checks are passed
  */
+Scripts::get_instance(); // Required in admin
 if( Activation::get_instance()->is_ok() ) {
     $theme->load();
     

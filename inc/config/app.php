@@ -1,6 +1,6 @@
 <?php
-$wecodeart_wp_version   = '5.0';
-$wecodeart_php_version  = '5.6.2';
+$required_wp_version   = '5.0';
+$required_php_version  = '5.6.2';
 
 return [
     /*
@@ -13,19 +13,19 @@ return [
     */
     'requirements'  => [
         'wordpress' => [
-            'required'  => $wecodeart_wp_version,
+            'required'  => $required_wp_version,
             'installed' => $GLOBALS['wp_version'],
             'i18n'      => sprintf(
                 __( 'WeCodeArt Framework requires WordPress version %1$s or higher. You are using version %2$s. Please upgrade WordPress to use WeCodeArt Framework.', 'wecodeart' ),
-                $wecodeart_wp_version, $GLOBALS['wp_version']
+                $required_wp_version, $GLOBALS['wp_version']
             ),
         ],
         'php'       => [
-            'required'  => $wecodeart_php_version,
+            'required'  => $required_php_version,
             'installed' => PHP_VERSION,
             'i18n'      => sprintf(
                 __( 'WeCodeArt Framework requires PHP version %1$s or higher. You are using version %2$s. Please <a href="%3$s">upgrade PHP</a> to use WeCodeArt Framework.', 'wecodeart' ), 
-                $wecodeart_php_version, PHP_VERSION, 'https://wordpress.org/support/upgrade-php/'
+                $required_php_version, PHP_VERSION, 'https://wordpress.org/support/upgrade-php/'
             ),
         ],
     ],
@@ -39,8 +39,8 @@ return [
     | be in sync with `Text Domain:` entry inside style.css theme file.
     |
     */
-    'textdomain' => 'wecodeart', // deprecated
-    'domain' => 'wecodeart',
+    'textdomain'    => 'wecodeart', // deprecated
+    'domain'        => 'wecodeart',
     /*
     |--------------------------------------------------------------------------
     | Templates files extension
@@ -100,6 +100,126 @@ return [
         'footer-layout-container'   => 'container',
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
         'footer-copyright-text'     => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Theme Gutenberg
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for gutenberg options.
+    |
+    */
+    'gutenberg' => [
+        'editor-sizes' => [
+            'default' => [
+                'default'   => '780px',
+                'wide'      => '1100px',
+                'full'      => 'initial',
+            ]
+        ],
+        'editor-font-sizes' => [
+            [
+                'name'      => esc_html__( 'Small', 'wecodeart' ),
+				'shortName' => esc_html__( 'S', 'wecodeart' ),
+				'size'      => 13,
+				'slug'      => 'small',
+            ],
+			[
+                'name'      => esc_html__( 'Normal', 'wecodeart' ),
+				'shortName' => esc_html__( 'M', 'wecodeart' ),
+				'size'      => 16,
+				'slug'      => 'normal',
+            ],
+            [
+                'name'      => esc_html__( 'Large', 'wecodeart' ),
+				'shortName' => esc_html__( 'L', 'wecodeart' ),
+				'size'      => 36,
+				'slug'      => 'large',
+            ],
+			[
+                'name'      => esc_html__( 'Huge', 'wecodeart' ),
+				'shortName' => esc_html__( 'XL', 'wecodeart' ),
+				'size'      => 42,
+				'slug'      => 'huge',
+            ],
+        ],
+        'editor-color-palette' => [
+            [
+                'name' 	=> esc_html__( 'Primary', 'wecodeart' ) ,
+				'slug'	=> 'primary',
+				'color'	=> '#2388ed',
+            ],
+            [
+                'name' 	=> esc_html__( 'Secondary', 'wecodeart' ) ,
+				'slug'	=> 'secondary',
+				'color'	=> '#6c757d',
+            ],
+            [
+                'name' 	=> esc_html__( 'Danger', 'wecodeart' ) ,
+				'slug'	=> 'danger',
+				'color'	=> '#dc3545',
+            ],
+            [
+                'name' 	=> esc_html__( 'Success', 'wecodeart' ) ,
+				'slug'	=> 'success',
+				'color'	=> '#7dc855',
+            ],
+            [
+                'name' 	=> esc_html__( 'Info', 'wecodeart' ) ,
+				'slug'	=> 'info',
+				'color'	=> '#17a2b8',
+            ],
+            [
+                'name' 	=> esc_html__( 'Warning', 'wecodeart' ) ,
+				'slug'	=> 'warning',
+				'color'	=> '#ffc107',
+            ],
+            [
+                'name' 	=> esc_html__( 'Dark', 'wecodeart' ) ,
+				'slug'	=> 'dark',
+				'color'	=> '#343a40',
+            ],
+            [
+                'name' 	=> esc_html__( 'Light', 'wecodeart' ) ,
+				'slug'	=> 'light',
+				'color'	=> '#f1f3f7',
+            ],
+            [
+                'name' 	=> esc_html__( 'White', 'wecodeart' ) ,
+				'slug'	=> 'white',
+				'color'	=> '#ffffff',
+            ],
+        ],
+        'editor-gradient-presets' => [
+            [
+                'name'     => __( 'Vivid cyan blue to vivid purple', 'wecodeart' ),
+                'gradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
+                'slug'     => 'vivid-cyan-blue-to-vivid-purple'
+            ],
+            [
+                'name'     => __( 'Vivid green cyan to vivid cyan blue', 'wecodeart' ),
+                'gradient' => 'linear-gradient(135deg,rgba(0,208,132,1) 0%,rgba(6,147,227,1) 100%)',
+                'slug'     => 'vivid-green-cyan-to-vivid-cyan-blue',
+            ],
+            [
+                'name'     => __( 'Light green cyan to vivid green cyan', 'wecodeart' ),
+                'gradient' => 'linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%)',
+                'slug'     => 'light-green-cyan-to-vivid-green-cyan',
+            ],
+            [
+                'name'     => __( 'Luminous vivid amber to luminous vivid orange', 'wecodeart' ),
+                'gradient' => 'linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)',
+                'slug'     => 'luminous-vivid-amber-to-luminous-vivid-orange',
+            ],
+            [
+                'name'     => __( 'Luminous vivid orange to vivid red', 'wecodeart' ),
+                'gradient' => 'linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%)',
+                'slug'     => 'luminous-vivid-orange-to-vivid-red',
+            ],
+        ],
+        'support-default-styles'        => true,
+        'support-align-wide'            => true,
+        'support-palette-classnames'    => true,
     ],
     /*
     |--------------------------------------------------------------------------

@@ -9,7 +9,7 @@
  * @subpackage 	Core\Scripts
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		1.9
- * @version		4.0.1
+ * @version		4.1.5
  */
 
 namespace WeCodeArt\Core;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
 use function WeCodeArt\Functions\trim_css;
+use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Core\Scripts\get_asset;
 
 /**
@@ -37,16 +38,33 @@ class Scripts {
 		// All starts here
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'front_scripts'		] );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'localize_js' 			], 90 );
+		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			], 95 );
 		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] );
 		add_filter( 'wp_get_custom_css', 	[ $this, 'trim_customizer_css' 	] );
 		//add_filter( 'script_loader_tag', 	[ $this, 'maybe_enable_attrs' 	], 10, 3 );
 	}
 
 	/**
+	 * WeCodeArt JS Inline
+	 *
+	 * @since	4.1.5
+	 * @version	4.1.5
+	 *
+	 * @return 	void
+	 */
+	public function inline_js() {
+		global $wp_scripts;
+		$data = 'document.addEventListener("DOMContentLoaded",function(){';
+		$data .= 'var _wjs = new wecodeart.JSM(wecodeart);_wjs.loadEvents();';
+		$data .= '});';
+		wp_add_inline_script( $wp_scripts->queue[ count( $wp_scripts->queue ) - 1 ], $data );
+	}
+
+	/**
 	 * WeCodeArt JS Object
 	 *
 	 * @since	3.2
-	 * @version	3.9.5
+	 * @version	4.1.5
 	 *
 	 * @return 	void
 	 */
@@ -61,22 +79,24 @@ class Scripts {
 		if( is_child_theme() ) {
 			$wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
 		}
+
+		if( wecodeart_if( 'is_dev_mode' ) ) {
+			$wecodeart['isDevMode'] = true;
+		}
 		
-		wp_localize_script( 
-			$this->make_handle(), 
-			explode( '-', 'wecodeart' )[0], // Domain as JS object.
-			apply_filters( 'wecodeart/filter/scripts/core/localize', $wecodeart ) 
-		);
+		wp_localize_script( $this->make_handle(), 'wecodeart', apply_filters( 'wecodeart/filter/scripts/core/localize', $wecodeart ) );
 	}
 
 	/**
 	 * jQuery to Footer
 	 *
 	 * @since	3.1.2
-	 * @version	3.5
+	 * @version	4.1.5
 	 */
 	public function jquery_to_footer( $wp_scripts ) {
-		if ( ! is_admin() && apply_filters( 'wecodeart/filter/scripts/jquery-in-footer', false ) ) {
+		$config = wecodeart_config( 'scripts', [] );
+
+		if ( ! is_admin() && get_prop( $config, 'footer', false ) ) {
 			$wp_scripts->add_data( 'jquery', 			'group', 1 );
 			$wp_scripts->add_data( 'jquery-core', 		'group', 1 );
 			$wp_scripts->add_data( 'jquery-migrate', 	'group', 1 );

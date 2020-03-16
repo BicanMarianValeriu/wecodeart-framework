@@ -68,7 +68,7 @@ class Header {
 			/** 
 			 * @hook	'wecodeart/hook/header/bottom'
 			 */	 
-			do_action( 'wecodeart/hook/header/bottom' ); 
+			do_action( 'wecodeart/hook/header/bottom' );
 		} );
 	}
 

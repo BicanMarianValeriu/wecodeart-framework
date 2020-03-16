@@ -32,7 +32,7 @@ class Overrides extends Config {
 	 * @return 	array 
 	 */
 	public function register( $configurations, $wp_customize ) {  
-		/* $_configs = [
+		$_configs = [
 			[
 				'name'			=> 'page_for_404',
 				'type' 			=> 'control',
@@ -46,7 +46,7 @@ class Overrides extends Config {
 				'sanitize_callback' 	=> 'absint',
 				'sanitize_js_callback' 	=> 'absint'
 			]
-		]; */
+		];
 
 		$_configs = [];
 

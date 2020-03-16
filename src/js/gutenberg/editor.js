@@ -18,6 +18,9 @@ import './extensions/plugins';
 // Formats
 import './extensions/formats';
 
+// Styles
+import './extensions/styles';
+
 export default function registerWCABlocks() {
     [
         /* import */

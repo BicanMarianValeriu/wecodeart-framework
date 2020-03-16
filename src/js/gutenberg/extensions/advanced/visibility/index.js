@@ -20,7 +20,6 @@ import DevicesOptions from './components';
 import { restrictedBlocks } from '../../attributes';
 import { getVisibilityClasses } from './utils';
 
-
 /**
  * Add custom Controls to selected blocks
  *

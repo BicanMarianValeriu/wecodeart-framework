@@ -9,7 +9,7 @@
  * @subpackage 	Walkers\Menu
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		2.0
- * @version		4.0.3
+ * @version		4.1.5
  */
 
 namespace WeCodeArt\Walkers;
@@ -24,7 +24,6 @@ use function WeCodeArt\Functions\get_prop;
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 4.1.0
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -254,7 +253,7 @@ class Menu extends Walker_Nav_Menu {
 		 * This is the end of the internal nav item. We need to close the
 		 * correct element depending on the type of link or link mod.
 		 */
-		if ( '' !== $linkmod_type ) $item_output .= self::linkmod_element_close( $linkmod_type, $attributes );
+		if ( '' !== $linkmod_type ) $item_output .= self::linkmod_element_close( $linkmod_type );
 		else $item_output .= '</a>'; 
 
 		$item_output .= isset( $args->after ) ? $args->after : '';
@@ -306,13 +305,16 @@ class Menu extends Walker_Nav_Menu {
 	 * @param array $args passed from the wp_nav_menu function.
 	 */
 	public static function fallback( $args ) { 
-		if ( current_user_can( 'edit_theme_options' ) ) { 
-			$container       = get_prop( $args, 'container' );
-			$container_id    = get_prop( $args, 'container_id' );
-			$container_class = get_prop( $args, 'container_class' );
-			$menu_class      = get_prop( $args, 'menu_class' ); 
-			$menu_id         = get_prop( $args, 'menu_id' );
+		if ( current_user_can( 'edit_theme_options' ) ) {
 
+			// Get Arguments.
+			$container       = $args['container'];
+			$container_id    = $args['container_id'];
+			$container_class = $args['container_class'];
+			$menu_class      = $args['menu_class'];
+			$menu_id         = $args['menu_id'];
+
+			// Initialize var to store fallback html.
 			$fallback_output = '';
 
 			if ( $container ) {
@@ -325,20 +327,21 @@ class Menu extends Walker_Nav_Menu {
 				}
 				$fallback_output .= '>';
 			}
-
 			$fallback_output .= '<ul';
 			if ( $menu_id ) {
-				$fallback_output .= ' id="' . esc_attr( $menu_id ) . '"'; }
+				$fallback_output .= ' id="' . esc_attr( $menu_id ) . '"';
+			}
 			if ( $menu_class ) {
-				$fallback_output .= ' class="' . esc_attr( $menu_class ) . '"'; }
+				$fallback_output .= ' class="' . esc_attr( $menu_class ) . '"';
+			}
 			$fallback_output .= '>';
-			$fallback_output .= '<li class="menu-item"><a class="nav-link" href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="' . esc_attr__( 'Add a menu', 'wecodeart' ) . '">' . esc_html__( 'Add a menu', 'wecodeart' ) . '</a></li>';
+			$fallback_output .= '<li class="nav-item"><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" class="nav-link" title="' . esc_attr__( 'Add a menu', 'wecodeart' ) . '">' . esc_html__( 'Add a menu', 'wecodeart' ) . '</a></li>';
 			$fallback_output .= '</ul>';
 			if ( $container ) {
 				$fallback_output .= '</' . esc_attr( $container ) . '>';
 			}
 
-			// if $args has 'echo' key and it's true echo, otherwise return.
+			// If $args has 'echo' key and it's true echo, otherwise return.
 			if ( array_key_exists( 'echo', $args ) && $args['echo'] ) {
 				echo $fallback_output; // WPCS: XSS OK.
 			} else {

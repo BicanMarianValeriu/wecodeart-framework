@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
 
 /******/
 (function (modules) {
@@ -346,9 +346,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+    var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
     /* harmony import */
 
 
@@ -467,7 +465,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var columnClasses = ['col'];
 
         if (global || xs || sm || md || lg || xl) {
-          columnClasses = [].concat(_toConsumableArray(columnClasses), [_defineProperty({}, global, global !== 'col'), _defineProperty({}, sm, sm !== 'col-sm-12' && global === 'col-12'), _defineProperty({}, md, md), _defineProperty({}, lg, lg), _defineProperty({}, xl, xl)]);
+          columnClasses = [].concat(_toConsumableArray(columnClasses), [_defineProperty({}, global, global !== 'col'), _defineProperty({}, sm, sm), _defineProperty({}, md, md), _defineProperty({}, lg, lg), _defineProperty({}, xl, xl)]);
         }
 
         extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(extraProps.className, columnClasses);
@@ -511,25 +509,29 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+    var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
     /* harmony import */
 
 
-    var _controls_background__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _patterns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./patterns */
+    "./src/js/gutenberg/blocks/columns/patterns.js");
+    /* harmony import */
+
+
+    var _controls_background__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ../../controls/background */
     "./src/js/gutenberg/controls/background/index.js");
     /* harmony import */
 
 
-    var _extensions_advanced_visibility_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _extensions_advanced_visibility_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ../../extensions/advanced/visibility/utils */
     "./src/js/gutenberg/extensions/advanced/visibility/utils.js");
     /* harmony import */
 
 
-    var _extensions_attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _extensions_attributes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../../extensions/attributes */
     "./src/js/gutenberg/extensions/attributes/index.js");
 
@@ -561,13 +563,10 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var Fragment = wp.element.Fragment;
     var _wp$components = wp.components,
         ToggleControl = _wp$components.ToggleControl,
-        PanelBody = _wp$components.PanelBody,
-        Path = _wp$components.Path,
-        SVG = _wp$components.SVG;
+        PanelBody = _wp$components.PanelBody;
     var _wp$blockEditor = wp.blockEditor,
         InspectorControls = _wp$blockEditor.InspectorControls,
         InnerBlocks = _wp$blockEditor.InnerBlocks;
-    var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
     /**
      * Internal dependencies.
      */
@@ -584,28 +583,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     function addColumnsPatterns(settings) {
       var blockName = settings.name;
 
-      if (!_extensions_attributes__WEBPACK_IMPORTED_MODULE_3__["restrictedBlocks"].includes(blockName) && blockName === 'core/columns') {
-        settings.patterns = [{
-          name: 'one-column',
-          label: __('One Column'),
-          icon: wp.element.createElement(SVG, {
-            className: "dashicon",
-            height: "26",
-            viewBox: "0 0 50 26",
-            width: "50",
-            xmlns: "http://www.w3.org/2000/svg"
-          }, wp.element.createElement(Path, {
-            d: "m48.0833333 0h-46.16666663c-1.05416667 0-1.91666667.9-1.91666667 2v22c0 1.1.8625 2 1.91666667 2h46.16666663c1.0541667 0 1.9166667-.9 1.9166667-2v-22c0-1.1-.8625-2-1.9166667-2zm0 24h-46.16666663v-22h46.16666663z"
-          })),
-          isDefault: true,
-          innerBlocks: [['core/column', {
-            width: 100,
-            bootstrapColumns: {
-              global: 'col-12',
-              sm: 'col-sm'
-            }
-          }]]
-        }];
+      if (!_extensions_attributes__WEBPACK_IMPORTED_MODULE_4__["restrictedBlocks"].includes(blockName) && blockName === 'core/columns') {
+        settings.patterns = _patterns__WEBPACK_IMPORTED_MODULE_1__["default"];
       }
 
       return settings;
@@ -623,7 +602,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var blockName = props.name,
             isSelected = props.isSelected;
 
-        if (!_extensions_attributes__WEBPACK_IMPORTED_MODULE_3__["restrictedBlocks"].includes(blockName) && blockName === 'core/columns' && isSelected) {
+        if (!_extensions_attributes__WEBPACK_IMPORTED_MODULE_4__["restrictedBlocks"].includes(blockName) && blockName === 'core/columns' && isSelected) {
           var attributes = props.attributes,
               setAttributes = props.setAttributes;
           var container = attributes.container,
@@ -686,7 +665,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             align = attributes.align,
             verticalAlignment = attributes.verticalAlignment,
             gutters = attributes.gutters;
-        var sectionClassName = classnames__WEBPACK_IMPORTED_MODULE_0___default()('wca-section', className, Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundClasses"])(attributes), Object(_extensions_advanced_visibility_utils__WEBPACK_IMPORTED_MODULE_2__["getVisibilityClasses"])(attributes));
+        var sectionClassName = classnames__WEBPACK_IMPORTED_MODULE_0___default()('wca-section', className, Object(_controls_background__WEBPACK_IMPORTED_MODULE_2__["BackgroundClasses"])(attributes), Object(_extensions_advanced_visibility_utils__WEBPACK_IMPORTED_MODULE_3__["getVisibilityClasses"])(attributes));
         var innerClassName = classnames__WEBPACK_IMPORTED_MODULE_0___default()('wca-section__inner', {
           'container': container && ['full', 'wide'].includes(align) === false,
           'container-fluid': container && ['full', 'wide'].includes(align) === true
@@ -694,8 +673,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var rowClassName = classnames__WEBPACK_IMPORTED_MODULE_0___default()('row', (_classnames = {}, _defineProperty(_classnames, "align-items-".concat(verticalAlignment), verticalAlignment), _defineProperty(_classnames, 'no-gutters', container && gutters), _classnames));
         return wp.element.createElement("section", {
           className: sectionClassName,
-          style: Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundStyles"])(attributes, {})
-        }, Object(_controls_background__WEBPACK_IMPORTED_MODULE_1__["BackgroundVideo"])(attributes), wp.element.createElement("div", {
+          style: Object(_controls_background__WEBPACK_IMPORTED_MODULE_2__["BackgroundStyles"])(attributes, {})
+        }, Object(_controls_background__WEBPACK_IMPORTED_MODULE_2__["BackgroundVideo"])(attributes), wp.element.createElement("div", {
           className: innerClassName
         }, wp.element.createElement("div", {
           className: rowClassName
@@ -710,12 +689,204 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
     function applyFilters() {
-      addFilter('blocks.getSaveElement', 'wecodeart/blocks/columns/getSaveElement', getSaveElement);
-      addFilter('blocks.registerBlockType', 'wecodeart/blocks/columns/patters', addColumnsPatterns);
       addFilter('editor.BlockEdit', 'wecodeart/editor/columns/withColumnsControls', withColumnsControls);
+      addFilter('blocks.registerBlockType', 'wecodeart/blocks/columns/patterns', addColumnsPatterns);
+      addFilter('blocks.getSaveElement', 'wecodeart/blocks/columns/getSaveElement', getSaveElement);
     }
 
     applyFilters();
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/blocks/columns/patterns.js":
+  /*!*****************************************************!*\
+    !*** ./src/js/gutenberg/blocks/columns/patterns.js ***!
+    \*****************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcJsGutenbergBlocksColumnsPatternsJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /**
+     * WordPress dependencies
+     */
+
+
+    var _wp$components = wp.components,
+        Path = _wp$components.Path,
+        SVG = _wp$components.SVG;
+    var __ = wp.i18n.__;
+    /**
+     * Template option choices for predefined columns layouts.
+     *
+     * @type {WPBlockPattern[]}
+     */
+
+    var patterns = [{
+      name: 'one-column',
+      label: __('One Column', 'wecodeart'),
+      icon: wp.element.createElement(SVG, {
+        className: "dashicon",
+        height: "26",
+        viewBox: "0 0 50 26",
+        width: "50",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, wp.element.createElement(Path, {
+        d: "m48.0833333 0h-46.16666663c-1.05416667 0-1.91666667.9-1.91666667 2v22c0 1.1.8625 2 1.91666667 2h46.16666663c1.0541667 0 1.9166667-.9 1.9166667-2v-22c0-1.1-.8625-2-1.9166667-2zm0 24h-46.16666663v-22h46.16666663z"
+      })),
+      isDefault: true,
+      innerBlocks: [['core/column', {
+        width: 100,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md'
+        }
+      }]]
+    }, {
+      name: 'two-columns-equal',
+      label: __('Two columns; equal split', 'wecodeart'),
+      icon: wp.element.createElement(SVG, {
+        width: "48",
+        height: "48",
+        viewBox: "0 0 48 48",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, wp.element.createElement(Path, {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        d: "M39 12C40.1046 12 41 12.8954 41 14V34C41 35.1046 40.1046 36 39 36H9C7.89543 36 7 35.1046 7 34V14C7 12.8954 7.89543 12 9 12H39ZM39 34V14H25V34H39ZM23 34H9V14H23V34Z"
+      })),
+      innerBlocks: [['core/column', {
+        width: 50,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md'
+        }
+      }], ['core/column', {
+        width: 50,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md'
+        }
+      }]]
+    }, {
+      name: 'two-columns-one-third-two-thirds',
+      label: __('Two columns; one-third, two-thirds split'),
+      icon: wp.element.createElement(SVG, {
+        width: "48",
+        height: "48",
+        viewBox: "0 0 48 48",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, wp.element.createElement(Path, {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        d: "M39 12C40.1046 12 41 12.8954 41 14V34C41 35.1046 40.1046 36 39 36H9C7.89543 36 7 35.1046 7 34V14C7 12.8954 7.89543 12 9 12H39ZM39 34V14H20V34H39ZM18 34H9V14H18V34Z"
+      })),
+      innerBlocks: [['core/column', {
+        width: 33.33,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md-4'
+        }
+      }], ['core/column', {
+        width: 66.66,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md-8'
+        }
+      }]]
+    }, {
+      name: 'two-columns-two-thirds-one-third',
+      label: __('Two columns; two-thirds, one-third split'),
+      icon: wp.element.createElement(SVG, {
+        width: "48",
+        height: "48",
+        viewBox: "0 0 48 48",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, wp.element.createElement(Path, {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        d: "M39 12C40.1046 12 41 12.8954 41 14V34C41 35.1046 40.1046 36 39 36H9C7.89543 36 7 35.1046 7 34V14C7 12.8954 7.89543 12 9 12H39ZM39 34V14H30V34H39ZM28 34H9V14H28V34Z"
+      })),
+      innerBlocks: [['core/column', {
+        width: 66.66,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md-8'
+        }
+      }], ['core/column', {
+        width: 33.33,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md-4'
+        }
+      }]]
+    }, {
+      name: 'three-columns-equal',
+      label: __('Three columns; equal split'),
+      icon: wp.element.createElement(SVG, {
+        width: "48",
+        height: "48",
+        viewBox: "0 0 48 48",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, wp.element.createElement(Path, {
+        fillRule: "evenodd",
+        d: "M41 14a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h30a2 2 0 0 0 2-2V14zM28.5 34h-9V14h9v20zm2 0V14H39v20h-8.5zm-13 0H9V14h8.5v20z"
+      })),
+      innerBlocks: [['core/column', {
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md'
+        }
+      }], ['core/column', {
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md'
+        }
+      }], ['core/column', {
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md'
+        }
+      }]]
+    }, {
+      name: 'three-columns-wider-center',
+      label: __('Three columns; wide center column'),
+      icon: wp.element.createElement(SVG, {
+        width: "48",
+        height: "48",
+        viewBox: "0 0 48 48",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, wp.element.createElement(Path, {
+        fillRule: "evenodd",
+        d: "M41 14a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h30a2 2 0 0 0 2-2V14zM31 34H17V14h14v20zm2 0V14h6v20h-6zm-18 0H9V14h6v20z"
+      })),
+      innerBlocks: [['core/column', {
+        width: 25,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md-3'
+        }
+      }], ['core/column', {
+        width: 50,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md-6'
+        }
+      }], ['core/column', {
+        width: 25,
+        bootstrapColumns: {
+          global: 'col-12',
+          md: 'col-md-3'
+        }
+      }]]
+    }];
+    /* harmony default export */
+
+    __webpack_exports__["default"] = patterns;
     /***/
   },
 
@@ -1146,13 +1317,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     "./src/js/gutenberg/controls/background/index.js");
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -1284,9 +1457,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var mediaUpload = wp.blockEditor.mediaUpload;
     var DropZone = wp.components.DropZone;
 
-    var BackgroundDropZone =
-    /*#__PURE__*/
-    function (_Component) {
+    var BackgroundDropZone = /*#__PURE__*/function (_Component) {
       _inherits(BackgroundDropZone, _Component);
 
       function BackgroundDropZone() {
@@ -1579,13 +1750,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     "./src/js/gutenberg/controls/responsive-tabs/index.js");
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -1709,9 +1882,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         ColorPalette = _wp$components.ColorPalette,
         ColorIndicator = _wp$components.ColorIndicator;
 
-    var BackgroundPanel =
-    /*#__PURE__*/
-    function (_Component) {
+    var BackgroundPanel = /*#__PURE__*/function (_Component) {
       _inherits(BackgroundPanel, _Component);
 
       function BackgroundPanel() {
@@ -2305,13 +2476,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     "./src/js/gutenberg/controls/bootstrap-columns/icons.js");
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -2480,9 +2653,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * BootstrapColumns
      */
 
-    var ResponsiveColumns =
-    /*#__PURE__*/
-    function (_Component) {
+    var ResponsiveColumns = /*#__PURE__*/function (_Component) {
       _inherits(ResponsiveColumns, _Component);
 
       function ResponsiveColumns() {
@@ -2718,13 +2889,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     "./src/js/gutenberg/controls/responsive-tabs/icons.js");
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -2816,9 +2989,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         RangeControl = _wp$components.RangeControl,
         TabPanel = _wp$components.TabPanel;
 
-    var ResponsiveTabsControl =
-    /*#__PURE__*/
-    function (_Component) {
+    var ResponsiveTabsControl = /*#__PURE__*/function (_Component) {
       _inherits(ResponsiveTabsControl, _Component);
 
       function ResponsiveTabsControl() {
@@ -2965,9 +3136,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var _blocks_media_text__WEBPACK_IMPORTED_MODULE_3___default =
-    /*#__PURE__*/
-    __webpack_require__.n(_blocks_media_text__WEBPACK_IMPORTED_MODULE_3__);
+    var _blocks_media_text__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_media_text__WEBPACK_IMPORTED_MODULE_3__);
     /* harmony import */
 
 
@@ -2992,6 +3161,12 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var _extensions_formats__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ./extensions/formats */
     "./src/js/gutenberg/extensions/formats/index.js");
+    /* harmony import */
+
+
+    var _extensions_styles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ./extensions/styles */
+    "./src/js/gutenberg/extensions/styles/index.js");
 
     function ownKeys(object, enumerableOnly) {
       var keys = Object.keys(object);
@@ -3047,6 +3222,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     // Block Panels
     // Plugins
     // Formats
+    // Styles
 
     function registerWCABlocks() {
       [
@@ -3217,13 +3393,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -3308,9 +3486,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         Component = _wp$element.Component,
         Fragment = _wp$element.Fragment;
 
-    var CSSEditor =
-    /*#__PURE__*/
-    function (_Component) {
+    var CSSEditor = /*#__PURE__*/function (_Component) {
       _inherits(CSSEditor, _Component);
 
       function CSSEditor() {
@@ -3458,9 +3634,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var _inject_css__WEBPACK_IMPORTED_MODULE_2___default =
-    /*#__PURE__*/
-    __webpack_require__.n(_inject_css__WEBPACK_IMPORTED_MODULE_2__);
+    var _inject_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_inject_css__WEBPACK_IMPORTED_MODULE_2__);
     /**
      * WordPress dependencies.
      */
@@ -3633,9 +3807,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var _custom_classes__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(_custom_classes__WEBPACK_IMPORTED_MODULE_0__);
+    var _custom_classes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_custom_classes__WEBPACK_IMPORTED_MODULE_0__);
     /* harmony import */
 
 
@@ -3766,9 +3938,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+    var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
     /* harmony import */
 
 
@@ -4129,13 +4299,12 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var withAttributes = createHigherOrderComponent(function (BlockEdit) {
       return function (props) {
-        var blockName = props.name;
+        var blockName = props.name,
+            attributes = props.attributes;
 
         if (!restrictedBlocks.includes(blockName)) {
-          props.attributes.wecodeart = props.attributes.wecodeart || {};
-
-          if (typeof props.attributes.wecodeart === 'undefined') {
-            props.attributes.wecodeart = Object.assign({}, props.attributes.wecodeart);
+          if (typeof attributes.wecodeart === 'undefined') {
+            attributes.wecodeart = Object.assign({}, attributes.wecodeart);
           }
         }
 
@@ -4174,13 +4343,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -4279,9 +4450,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         TextControl = _wp$components.TextControl;
     var name = 'wca/abbreviation';
 
-    var Edit =
-    /*#__PURE__*/
-    function (_Component) {
+    var Edit = /*#__PURE__*/function (_Component) {
       _inherits(Edit, _Component);
 
       function Edit() {
@@ -4464,9 +4633,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+    var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
     /* harmony import */
 
 
@@ -4475,13 +4642,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     "./src/js/gutenberg/extensions/formats/background-color/icon.js");
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -4597,9 +4766,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var title = __('Highlight Color', 'wecodeart');
 
-    var Edit =
-    /*#__PURE__*/
-    function (_Component) {
+    var Edit = /*#__PURE__*/function (_Component) {
       _inherits(Edit, _Component);
 
       function Edit() {
@@ -4826,13 +4993,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -4978,9 +5147,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var RichTextToolbarButton = wp.blockEditor.RichTextToolbarButton;
     var removeFormat = wp.richText.removeFormat;
 
-    var ClearFormatting =
-    /*#__PURE__*/
-    function (_Component) {
+    var ClearFormatting = /*#__PURE__*/function (_Component) {
       _inherits(ClearFormatting, _Component);
 
       function ClearFormatting() {
@@ -5003,7 +5170,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             if (formatTypes.length > 0) {
               var newValue = value;
               map(formatTypes, function (activeFormat) {
-                newValue = removeFormat(newValue, activeFormat.name);
+                return newValue = removeFormat(newValue, activeFormat.name);
               });
               onChange(_objectSpread({}, newValue));
             }
@@ -5129,31 +5296,25 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var _text_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! ./text-color */
-    "./src/js/gutenberg/extensions/formats/text-color/index.js");
-    /* harmony import */
-
-
-    var _background_color__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _background_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./background-color */
     "./src/js/gutenberg/extensions/formats/background-color/index.js");
     /* harmony import */
 
 
-    var _markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./markdown */
     "./src/js/gutenberg/extensions/formats/markdown/index.js");
     /* harmony import */
 
 
-    var _clear__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _clear__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ./clear */
     "./src/js/gutenberg/extensions/formats/clear/index.js");
     /* harmony import */
 
 
-    var _tooltip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _tooltip__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./tooltip */
     "./src/js/gutenberg/extensions/formats/tooltip/index.js");
 
@@ -5195,6 +5356,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /**
      * Internal dependencies
      */
+    //import { textColor } from './text-color'; // Deprecated
 
     /**
      * WordPress dependencies
@@ -5204,7 +5366,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var registerFormatType = wp.richText.registerFormatType;
 
     function registerWeCodeArtFormats() {
-      [_abbreviation__WEBPACK_IMPORTED_MODULE_0__["abbreviation"], _background_color__WEBPACK_IMPORTED_MODULE_4__["backgroundColor"], _clear__WEBPACK_IMPORTED_MODULE_6__["clear"], _justify__WEBPACK_IMPORTED_MODULE_2__["justify"], _markdown__WEBPACK_IMPORTED_MODULE_5__["markdown"], _text_color__WEBPACK_IMPORTED_MODULE_3__["textColor"], _underline__WEBPACK_IMPORTED_MODULE_1__["underline"], _tooltip__WEBPACK_IMPORTED_MODULE_7__["tooltip"]].forEach(function (_ref) {
+      [_abbreviation__WEBPACK_IMPORTED_MODULE_0__["abbreviation"], _background_color__WEBPACK_IMPORTED_MODULE_3__["backgroundColor"], _clear__WEBPACK_IMPORTED_MODULE_5__["clear"], _justify__WEBPACK_IMPORTED_MODULE_2__["justify"], _markdown__WEBPACK_IMPORTED_MODULE_4__["markdown"], //textColor, // Deprecated
+      _underline__WEBPACK_IMPORTED_MODULE_1__["underline"], _tooltip__WEBPACK_IMPORTED_MODULE_6__["tooltip"]].forEach(function (_ref) {
         var name = _ref.name,
             settings = _objectWithoutProperties(_ref, ["name"]);
 
@@ -5233,13 +5396,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -5336,9 +5501,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         withDispatch = _wp$data.withDispatch;
     var RichTextToolbarButton = wp.blockEditor.RichTextToolbarButton;
 
-    var JustifyControl =
-    /*#__PURE__*/
-    function (_Component) {
+    var JustifyControl = /*#__PURE__*/function (_Component) {
       _inherits(JustifyControl, _Component);
 
       function JustifyControl() {
@@ -5487,13 +5650,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     "./src/js/gutenberg/extensions/formats/markdown/get-active-formats.js");
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -5644,9 +5809,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * Internal dependencies
      */
 
-    var MarkdownControl =
-    /*#__PURE__*/
-    function (_Component) {
+    var MarkdownControl = /*#__PURE__*/function (_Component) {
       _inherits(MarkdownControl, _Component);
 
       function MarkdownControl() {
@@ -5919,312 +6082,6 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   },
 
   /***/
-  "./src/js/gutenberg/extensions/formats/text-color/components/edit.js":
-  /*!***************************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/formats/text-color/components/edit.js ***!
-    \***************************************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcJsGutenbergExtensionsFormatsTextColorComponentsEditJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-
-    function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-        _typeof = function _typeof(obj) {
-          return _typeof2(obj);
-        };
-      } else {
-        _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
-        };
-      }
-
-      return _typeof(obj);
-    }
-
-    function _classCallCheck(instance, Constructor) {
-      if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-      }
-    }
-
-    function _defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-
-    function _createClass(Constructor, protoProps, staticProps) {
-      if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) _defineProperties(Constructor, staticProps);
-      return Constructor;
-    }
-
-    function _possibleConstructorReturn(self, call) {
-      if (call && (_typeof(call) === "object" || typeof call === "function")) {
-        return call;
-      }
-
-      return _assertThisInitialized(self);
-    }
-
-    function _getPrototypeOf(o) {
-      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-      };
-      return _getPrototypeOf(o);
-    }
-
-    function _assertThisInitialized(self) {
-      if (self === void 0) {
-        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-      }
-
-      return self;
-    }
-
-    function _inherits(subClass, superClass) {
-      if (typeof superClass !== "function" && superClass !== null) {
-        throw new TypeError("Super expression must either be null or a function");
-      }
-
-      subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-          value: subClass,
-          writable: true,
-          configurable: true
-        }
-      });
-      if (superClass) _setPrototypeOf(subClass, superClass);
-    }
-
-    function _setPrototypeOf(o, p) {
-      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-      };
-
-      return _setPrototypeOf(o, p);
-    }
-    /**
-     * WordPress dependencies
-     */
-
-
-    var __ = wp.i18n.__;
-    var Component = wp.element.Component;
-    var _wp$data = wp.data,
-        select = _wp$data.select,
-        withSelect = _wp$data.withSelect;
-    var _wp$blockEditor = wp.blockEditor,
-        BlockControls = _wp$blockEditor.BlockControls,
-        getColorClassName = _wp$blockEditor.getColorClassName,
-        getColorObjectByColorValue = _wp$blockEditor.getColorObjectByColorValue,
-        getColorObjectByAttributeValues = _wp$blockEditor.getColorObjectByAttributeValues;
-    var _wp$richText = wp.richText,
-        applyFormat = _wp$richText.applyFormat,
-        removeFormat = _wp$richText.removeFormat,
-        getActiveFormat = _wp$richText.getActiveFormat;
-    var _wp$components = wp.components,
-        Toolbar = _wp$components.Toolbar,
-        IconButton = _wp$components.IconButton,
-        Popover = _wp$components.Popover,
-        ColorPalette = _wp$components.ColorPalette;
-    var _wp$compose = wp.compose,
-        compose = _wp$compose.compose,
-        ifCondition = _wp$compose.ifCondition;
-    var name = 'wca/color';
-
-    var title = __('Text Color', 'wecodeart');
-
-    var Edit =
-    /*#__PURE__*/
-    function (_Component) {
-      _inherits(Edit, _Component);
-
-      function Edit() {
-        var _this;
-
-        _classCallCheck(this, Edit);
-
-        _this = _possibleConstructorReturn(this, _getPrototypeOf(Edit).apply(this, arguments));
-        _this.toggle = _this.toggle.bind(_assertThisInitialized(_this));
-        _this.state = {
-          isOpen: false
-        };
-        return _this;
-      }
-
-      _createClass(Edit, [{
-        key: "toggle",
-        value: function toggle() {
-          this.setState(function (state) {
-            return {
-              isOpen: !state.isOpen
-            };
-          });
-        }
-      }, {
-        key: "render",
-        value: function render() {
-          var _this2 = this;
-
-          var isOpen = this.state.isOpen;
-          var _this$props = this.props,
-              value = _this$props.value,
-              _onChange = _this$props.onChange,
-              colors = _this$props.colors;
-          var activeColor;
-          var activeColorFormat = getActiveFormat(value, name);
-
-          if (activeColorFormat) {
-            var styleColor = activeColorFormat.attributes.style;
-
-            if (styleColor) {
-              activeColor = styleColor.replace(new RegExp("^color:\\s*"), '');
-            }
-
-            var currentClass = activeColorFormat.attributes.class;
-
-            if (currentClass) {
-              var colorSlug = currentClass.replace(/.*has-(.*?)-color.*/, '$1');
-              activeColor = getColorObjectByAttributeValues(colors, colorSlug).color;
-            }
-          }
-
-          return wp.element.createElement(BlockControls, null, wp.element.createElement(Toolbar, {
-            className: "components-toolbar--wca"
-          }, wp.element.createElement(IconButton, {
-            className: "components-button components-icon-button components-toolbar__control components-wca-color-format",
-            icon: "editor-textcolor",
-            "aria-haspopup": "true",
-            tooltip: title,
-            onClick: this.toggle
-          }, wp.element.createElement("span", {
-            className: "components-toolbar__indicator",
-            style: {
-              backgroundColor: activeColor
-            }
-          })), isOpen && wp.element.createElement(Popover, {
-            position: "bottom center",
-            className: "components-popover--wca",
-            focusOnMount: "container",
-            onClickOutside: function onClickOutside(_onClickOutside) {
-              if (!_onClickOutside.target.classList.contains('components-wca-color-format') && !document.querySelector('.components-wca-color-format').contains(_onClickOutside.target) && (!document.querySelector('.components-color-palette__picker') || document.querySelector('.components-color-palette__picker') && !document.querySelector('.components-color-palette__picker').contains(_onClickOutside.target))) {
-                _this2.setState({
-                  isOpen: !isOpen
-                });
-              }
-            }
-          }, wp.element.createElement(ColorPalette, {
-            colors: colors,
-            value: activeColor,
-            onChange: function onChange(color) {
-              if (color) {
-                var colorObject = null;
-
-                if (typeof window.wecodeartInfo !== 'undefined' && window.wecodeartInfo.supports.colorPalette) {
-                  colorObject = getColorObjectByColorValue(colors, color);
-                }
-
-                _onChange(applyFormat(value, {
-                  type: name,
-                  attributes: colorObject ? {
-                    class: getColorClassName('color', colorObject.slug)
-                  } : {
-                    style: "color:".concat(color)
-                  }
-                }));
-              } else {
-                _onChange(removeFormat(value, name));
-              }
-            }
-          }))));
-        }
-      }]);
-
-      return Edit;
-    }(Component);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = compose(withSelect(function () {
-      var _select$getSettings = select('core/block-editor').getSettings(),
-          colors = _select$getSettings.colors;
-
-      return {
-        colors: colors ? colors : [],
-        isDisabled: false
-      };
-    }), ifCondition(function (props) {
-      return !props.isDisabled;
-    }))(Edit);
-    /***/
-  },
-
-  /***/
-  "./src/js/gutenberg/extensions/formats/text-color/index.js":
-  /*!*****************************************************************!*\
-    !*** ./src/js/gutenberg/extensions/formats/text-color/index.js ***!
-    \*****************************************************************/
-
-  /*! exports provided: textColor */
-
-  /***/
-  function srcJsGutenbergExtensionsFormatsTextColorIndexJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "textColor", function () {
-      return textColor;
-    });
-    /* harmony import */
-
-
-    var _components_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./components/edit */
-    "./src/js/gutenberg/extensions/formats/text-color/components/edit.js");
-    /**
-     * WordPress dependencies
-     */
-
-
-    var __ = wp.i18n.__;
-    /**
-     * Internal dependencies
-     */
-
-    /**
-     * Block constants
-     */
-
-    var name = 'wca/color';
-    var textColor = {
-      name: name,
-      title: __('Text Color', 'wecodeart'),
-      tagName: 'span',
-      className: 'has-inline-color',
-      attributes: {
-        style: 'style',
-        class: 'class'
-      },
-      edit: _components_edit__WEBPACK_IMPORTED_MODULE_0__["default"]
-    };
-    /***/
-  },
-
-  /***/
   "./src/js/gutenberg/extensions/formats/tooltip/components/edit.js":
   /*!************************************************************************!*\
     !*** ./src/js/gutenberg/extensions/formats/tooltip/components/edit.js ***!
@@ -6239,13 +6096,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -6395,9 +6254,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         TextareaControl = _wp$components.TextareaControl;
     var name = 'wca/tooltip';
 
-    var Edit =
-    /*#__PURE__*/
-    function (_Component) {
+    var Edit = /*#__PURE__*/function (_Component) {
       _inherits(Edit, _Component);
 
       function Edit() {
@@ -6837,9 +6694,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+    var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
     /* harmony import */
 
 
@@ -7154,9 +7009,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     /* harmony import */
 
 
-    var classnames__WEBPACK_IMPORTED_MODULE_0___default =
-    /*#__PURE__*/
-    __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+    var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
     /* harmony import */
 
 
@@ -7501,13 +7354,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -7600,9 +7455,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         withSpokenMessages = _wp$components.withSpokenMessages,
         CheckboxControl = _wp$components.CheckboxControl;
 
-    var BuilderTemplate =
-    /*#__PURE__*/
-    function (_Component) {
+    var BuilderTemplate = /*#__PURE__*/function (_Component) {
       _inherits(BuilderTemplate, _Component);
 
       function BuilderTemplate() {
@@ -7717,13 +7570,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -7877,9 +7732,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * Render plugin
      */
 
-    var ClearBlockFormatting =
-    /*#__PURE__*/
-    function (_Component) {
+    var ClearBlockFormatting = /*#__PURE__*/function (_Component) {
       _inherits(ClearBlockFormatting, _Component);
 
       function ClearBlockFormatting() {
@@ -7928,8 +7781,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return {
         blockId: selectedBlock.clientId,
         blockName: selectedBlock.name,
-        blockContent: get(selectedBlock, 'attributes.content'),
-        isDisabled: false
+        blockContent: get(selectedBlock, 'attributes.content')
       };
     }), withDispatch(function (dispatch) {
       var _dispatch = dispatch('core/block-editor'),
@@ -7943,7 +7795,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         }
       };
     }), ifCondition(function (props) {
-      return !props.isDisabled && allowedBlocks.includes(props.blockName);
+      return allowedBlocks.includes(props.blockName);
     }), withSpokenMessages)(ClearBlockFormatting);
     /***/
   },
@@ -7996,13 +7848,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -8093,9 +7947,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * Render plugin
      */
 
-    var CodeEditor =
-    /*#__PURE__*/
-    function (_Component) {
+    var CodeEditor = /*#__PURE__*/function (_Component) {
       _inherits(CodeEditor, _Component);
 
       function CodeEditor() {
@@ -8237,13 +8089,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -8337,9 +8191,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         withSpokenMessages = _wp$components.withSpokenMessages,
         CheckboxControl = _wp$components.CheckboxControl;
 
-    var DisableTitle =
-    /*#__PURE__*/
-    function (_Component) {
+    var DisableTitle = /*#__PURE__*/function (_Component) {
       _inherits(DisableTitle, _Component);
 
       function DisableTitle() {
@@ -8488,13 +8340,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     __webpack_require__.r(__webpack_exports__);
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -8582,9 +8436,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * Render plugin
      */
 
-    var HeadingLabel =
-    /*#__PURE__*/
-    function (_Component) {
+    var HeadingLabel = /*#__PURE__*/function (_Component) {
       _inherits(HeadingLabel, _Component);
 
       function HeadingLabel() {
@@ -8825,13 +8677,15 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     "./src/js/gutenberg/extensions/plugins/markdown/components/config.js");
 
     function _typeof(obj) {
-      if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      "@babel/helpers - typeof";
+
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
-          return _typeof2(obj);
+          return typeof obj;
         };
       } else {
         _typeof = function _typeof(obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
         };
       }
 
@@ -8958,9 +8812,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * Render plugin
      */
 
-    var MarkdownFormatting =
-    /*#__PURE__*/
-    function (_Component) {
+    var MarkdownFormatting = /*#__PURE__*/function (_Component) {
       _inherits(MarkdownFormatting, _Component);
 
       function MarkdownFormatting() {
@@ -9104,6 +8956,91 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       name: 'wca-markdown-formatting',
       render: _components_menu__WEBPACK_IMPORTED_MODULE_0__["default"]
     };
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/styles/buttons/index.js":
+  /*!*************************************************************!*\
+    !*** ./src/js/gutenberg/extensions/styles/buttons/index.js ***!
+    \*************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcJsGutenbergExtensionsStylesButtonsIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /**
+     * WP dependencies
+     */
+
+
+    var __ = wp.i18n.__;
+    /**
+     * Buttons
+     */
+
+    var buttons = {
+      block: 'core/buttons',
+      styles: [{
+        name: 'default',
+        label: __('Default', 'wecodeart'),
+        isDefault: true
+      }, {
+        name: 'vertical',
+        label: __('Vertical', 'wecodeart')
+      }, {
+        name: 'group',
+        label: __('Group', 'wecodeart')
+      }, {
+        name: 'group-vertical',
+        label: __('Group Vertical', 'wecodeart')
+      }]
+    };
+    /* harmony default export */
+
+    __webpack_exports__["default"] = buttons;
+    /***/
+  },
+
+  /***/
+  "./src/js/gutenberg/extensions/styles/index.js":
+  /*!*****************************************************!*\
+    !*** ./src/js/gutenberg/extensions/styles/index.js ***!
+    \*****************************************************/
+
+  /*! no exports provided */
+
+  /***/
+  function srcJsGutenbergExtensionsStylesIndexJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony import */
+
+
+    var _buttons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./buttons */
+    "./src/js/gutenberg/extensions/styles/buttons/index.js");
+    /**
+     * WP dependencies
+     */
+
+
+    var registerBlockStyle = wp.blocks.registerBlockStyle;
+
+    function registerWCAStyles() {
+      [_buttons__WEBPACK_IMPORTED_MODULE_0__["default"]].forEach(function (item) {
+        if (!item) return;
+        var block = item.block,
+            styles = item.styles;
+        registerBlockStyle(block, styles);
+      });
+    }
+
+    registerWCAStyles();
     /***/
   },
 

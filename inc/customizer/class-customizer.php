@@ -62,7 +62,7 @@ class Customizer {
 
 		// Theme panels and configs.
 		new Configs();
-		new Configs\Overrides();
+		//new Configs\Overrides();
 		new Configs\Header();
 		new Configs\Content();
 		new Configs\Footer();
