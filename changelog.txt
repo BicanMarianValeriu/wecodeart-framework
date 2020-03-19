@@ -1,5 +1,6 @@
 v4.1.53
-- Added - ...
+- Added - Admin Requirements Notifications moved to Template Files
+- Updated - Markup::wrap() generate_attr ussage: default context for wrappers and pass index using 3rd argument
 
 v4.1.52
 - Added - New Gutenberg Block: Import Block JSON

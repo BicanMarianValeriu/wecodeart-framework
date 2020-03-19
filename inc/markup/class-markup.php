@@ -9,7 +9,7 @@
  * @subpackage  Markup
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.1
+ * @version		4.1.53
  */
 
 namespace WeCodeArt;
@@ -167,7 +167,7 @@ class Markup {
      * Wrapper method for any html
 	 *
 	 * @since 	unknown
-	 * @version	4.0.1
+	 * @version	4.1.53
 	 *
 	 * @param	string	context		required ( used by generate_attr's dynamic filter )
 	 * @param 	mixed	function	required ( the function called to be wrapped )
@@ -225,9 +225,10 @@ class Markup {
 		$html = '';
 		
 		foreach( $args as $key => $elem ) {
-			$_context 	= $context . '/' . $key; // Dynamic context filter for each wrapper.
 			$attrs 		= isset( $elem['attrs'] ) ? ( array ) $elem['attrs'] : [];
-			$open_tag 	= trim( implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $_context, $attrs ) ] ) );
+			$open_tag 	= trim( implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $context, $attrs, [
+				'index' => $key
+			] ) ] ) );
 			$html .= '<' . $open_tag . '>';
 		}
 

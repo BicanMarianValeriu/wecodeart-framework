@@ -39,8 +39,7 @@ return [
     | be in sync with `Text Domain:` entry inside style.css theme file.
     |
     */
-    'textdomain'    => 'wecodeart', // deprecated
-    'domain'        => 'wecodeart',
+    'domain' => 'wecodeart',
     /*
     |--------------------------------------------------------------------------
     | Templates files extension
