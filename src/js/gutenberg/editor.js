@@ -21,13 +21,18 @@ import './extensions/formats';
 // Styles
 import './extensions/styles';
 
+// Custom Blocks
+import lorem from './blocks/lorem';
+import importer from './blocks/import';
+
 export default function registerWCABlocks() {
     [
-        /* import */
+        lorem,
+        importer
     ].forEach((block) => {
         if (!block) return;
-        const { name, settings } = block;
-        registerBlockType(name, { ...settings, category: 'wca' });
+        const { name, settings, category = 'wca' } = block;
+        registerBlockType(name, { ...settings, category });
     });
 }
 

@@ -27,3 +27,19 @@
 .wecodeart-tooltips-modal {
     min-width: 40rem;
 }
+
+.components-modal--wecodeart-features-import-export {
+
+	.components-modal__header,
+	.components-placeholder {
+		margin-bottom: 0;
+	}
+
+	.components-notice {
+		width: 100%;
+	}
+
+	div.components-tab-panel__tab-content {
+		padding-bottom: 0;
+	}
+}

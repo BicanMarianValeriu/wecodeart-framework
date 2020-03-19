@@ -1,5 +1,12 @@
+v4.1.53
+- Added - ...
+
 v4.1.52
-- Added - 
+- Added - New Gutenberg Block: Import Block JSON
+- Added - New Gutenberg Block: Lorem Ipsum
+- Added - New Gutenberg Plugin: Export Block as JSON
+- Fixed - Small issue with author box Twitter URL
+- Updated - Minor CSS improvements for button
 
 v4.1.51
 - Added - Buttons Gutenberg Block CSS

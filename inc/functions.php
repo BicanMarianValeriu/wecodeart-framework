@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
- * @since		4.0.1
+ * @since		4.1.5
  */
 
 namespace WeCodeArt\Functions;

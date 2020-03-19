@@ -72,11 +72,11 @@
 		flex: 1 1 auto;
 		margin-bottom: 1rem;
 
-		&__link {
-			@include hover() {
-				z-index: 1;
-			}
-			  
+		@include hover() {
+			z-index: 1;
+		}
+
+		&__link {	  
 			&:focus,
 			&:active,
 			&.active {

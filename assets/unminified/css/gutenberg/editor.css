@@ -410,4 +410,14 @@ body.wca-title-hidden .wca-hidden-title-label {
 .wecodeart-tooltips-modal {
   min-width: 40rem; }
 
+.components-modal--wecodeart-features-import-export .components-modal__header,
+.components-modal--wecodeart-features-import-export .components-placeholder {
+  margin-bottom: 0; }
+
+.components-modal--wecodeart-features-import-export .components-notice {
+  width: 100%; }
+
+.components-modal--wecodeart-features-import-export div.components-tab-panel__tab-content {
+  padding-bottom: 0; }
+
 /*# sourceMappingURL=editor.css.map */

@@ -9,7 +9,9 @@
 	"dependencies": {
 		"bootstrap": "^4.4.1",
 		"classnames": "^2.2.6",
-		"popper.js": "^1.16.1"
+		"popper.js": "^1.16.1",
+		"react": "^16.13.0",
+		"react-lorem-ipsum": "^1.4.4"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.8.7",

@@ -1,6 +1,7 @@
 /**
  * Internal dependencies
  */
+import exporter from './export';
 import markdown from './markdown';
 import codeEditor from './code-editor';
 import disableTitle from './disable-title';
@@ -11,7 +12,8 @@ import builderTemplate from './builder-template';
 const { registerPlugin } = wp.plugins;
 
 export default function registerWCAPlugins() {
-    [
+	[
+		exporter,
 		markdown,
 		codeEditor,
 		disableTitle,
@@ -19,15 +21,12 @@ export default function registerWCAPlugins() {
 		clearFormating,
 		builderTemplate
 	].forEach((block) => {
-        if (!block) return;
-		
+		if (!block) return;
+
 		const { name, render } = block;
-		
-        registerPlugin( name, {
-			icon: false,
-			render,
-		} );
-    });
+
+		registerPlugin(name, { icon: false, render });
+	});
 }
 
 registerWCAPlugins();

@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2019, WeCodeArt Framework
  * @since 		3.5
- * @version		4.1.4
+ * @version		4.1.5
  */
 
 namespace WeCodeArt\Support;
@@ -101,7 +101,7 @@ class WPSeo {
 	 * Extend Author Box with Yoast's Social
 	 *
 	 * @since	3.9.3
-	 * @since	4.1.4
+	 * @since	4.1.52
 	 *
 	 * @return 	array
 	 */
@@ -149,12 +149,14 @@ class WPSeo {
 			'social' => array_map( function( $item ) use( $author_ID, $social_icons, $config ) {
 				$item  	= strtolower( $item );
 				$icon  	= $item;
-				$value 	= get_the_author_meta( $item, $author_ID );
+				$value 	= trim( get_the_author_meta( $item, $author_ID ) );
 				$target = '_blank';
 
 				switch( $item ) {	
 					case 'twitter':
-						$value = "https://twitter.com/${value}";
+						if( ! empty( $value ) ) {
+							$value = "https://twitter.com/${value}";
+						}
 						break;
 					case 'url':
 						$icon  	= 'globe';
