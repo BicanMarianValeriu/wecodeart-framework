@@ -4,7 +4,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 4.1.52
+Version: 4.1.54
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -7890,7 +7890,7 @@ html body {
     position: relative;
     flex: 1 1 auto;
     margin-bottom: 1rem; }
-    .wp-block-buttons > .wp-block-button__link:hover {
+    .wp-block-buttons > .wp-block-button:hover {
       z-index: 1; }
     .wp-block-buttons > .wp-block-button__link:focus, .wp-block-buttons > .wp-block-button__link:active, .wp-block-buttons > .wp-block-button__link.active {
       z-index: 1; }

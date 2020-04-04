@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Comment HTML Template (Walker)
- * @copyright   Copyright (c) 2019, WeCodeArt Framework
+ * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		1.9
  * @version		4.0.2
  */

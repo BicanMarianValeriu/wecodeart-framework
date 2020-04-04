@@ -7,9 +7,9 @@
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  WeCodeArt/Config
- * @copyright   Copyright (c) 2019, WeCodeArt Framework
+ * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.9.5
- * @version		4.0.1
+ * @version		4.1.5
  */
 
 namespace WeCodeArt;

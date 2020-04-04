@@ -3,10 +3,14 @@
 		&.columns-#{ $i } {
 			.blocks-gallery-image,
 			.blocks-gallery-item {
-				@include make-col( 12 / $i );
+				@include make-col( 12 / 2 );
 
-				@include media-breakpoint-down( 'sm' ) {
-					@include make-col( 12 / 2 );
+				@include media-breakpoint-up( 'sm' ) {
+					@include make-col( 12 / 3 );
+				}
+
+				@include media-breakpoint-up( 'md' ) {
+					@include make-col( 12 / $i );
 				}
 			}
 		}

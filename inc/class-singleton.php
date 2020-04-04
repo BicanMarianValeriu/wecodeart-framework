@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework 
  * @subpackage 	Singleton
- * @copyright   Copyright (c) 2019, WeCodeArt Framework
+ * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.6.2
  */
 

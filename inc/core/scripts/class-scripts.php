@@ -7,9 +7,9 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Core\Scripts
- * @copyright   Copyright (c) 2019, WeCodeArt Framework
+ * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		1.9
- * @version		4.1.5
+ * @version		4.1.54
  */
 
 namespace WeCodeArt\Core;
@@ -41,6 +41,7 @@ class Scripts {
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			], 95 );
 		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] );
 		add_filter( 'wp_get_custom_css', 	[ $this, 'trim_customizer_css' 	] );
+		add_filter( 'wp_resource_hints', 	[ $this, 'gf_resource_hints' 	], 10, 2 ); 
 		//add_filter( 'script_loader_tag', 	[ $this, 'maybe_enable_attrs' 	], 10, 3 );
 	}
 
@@ -64,7 +65,7 @@ class Scripts {
 	 * WeCodeArt JS Object
 	 *
 	 * @since	3.2
-	 * @version	4.1.5
+	 * @version	4.1.54
 	 *
 	 * @return 	void
 	 */
@@ -83,6 +84,8 @@ class Scripts {
 		if( wecodeart_if( 'is_dev_mode' ) ) {
 			$wecodeart['isDevMode'] = true;
 		}
+
+		$wecodeart = apply_filters( 'wecodeart/filter/core/scripts/localize', $wecodeart );
 		
 		wp_localize_script( $this->make_handle(), 'wecodeart', apply_filters( 'wecodeart/filter/scripts/core/localize', $wecodeart ) );
 	}
@@ -172,7 +175,30 @@ class Scripts {
 		}
 
 		return $tag;
+	}
 
+	/**
+	 * Resource Hinds.
+	 *
+	 * @since 5.1.54
+	 *
+	 * @param 	array 	$urls    			The resource urls.
+	 * @param 	string 	$relation_type 	The type.
+	 *
+	 * @return 	array
+	 */
+	public function gf_resource_hints( $urls, $relation_type ) {
+		if ( wp_style_is( 'google-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
+			if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '>=' ) ) {
+				$urls[] = [
+					'href' => 'https://fonts.gstatic.com',
+					'crossorigin',
+				];
+			} else {
+				$urls[] = 'https://fonts.gstatic.com';
+			}
+		}
+		return $urls;
 	}
 }
 

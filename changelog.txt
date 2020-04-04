@@ -1,5 +1,13 @@
 v4.1.54
-- Added - 
+- Fixed - Gutenberg Core Blocks attributes compatability (for some of the blocks)
+- Updated - MISC: Year to 2020 if the files message
+- Updated - Set WooCommerce Columns for products via config file
+- Updated - Core Blocks CSS
+- Updated - wecodeart_if() - added 2nd paramenter for relation (AND - to match all conditions / OR - to match a single condition)
+- Updated - Config to parse keys recursively
+- Added - Scripts: gf_resource_hints for adding resource hints to Google fonts
+- Added - Scripts: New Filter "wecodeart/filter/core/scripts/localize" for fixing wrong naming (old one will be deprecated)
+- Added - Markup: New Filter "wecodeart/filter/wrap/{$context}/content" to change the wrapped content
 
 v4.1.53
 - Added - Admin Requirements Notifications moved to Template Files

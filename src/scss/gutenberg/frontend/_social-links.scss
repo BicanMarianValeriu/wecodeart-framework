@@ -1,33 +1,79 @@
 .wp-block-social-links {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: flex-start;
 	padding-left: 0;
 	padding-right: 0;
-	// Some themes give all <ul> default margin instead of padding.
-	margin-left: 0;
+	margin: 0 -5px 1.5rem;
 
-	// Some themes add underlines, false underlines (via shadows), and borders to <a>.
-	.wp-social-link a,
-	.wp-social-link a:hover {
-		text-decoration: none;
-		border-bottom: 0;
-		box-shadow: none;
+	&.aligncenter {
+		justify-content: center;
+	}
+	
+	&.is-style-pill-shape {
+		.wp-social-link {
+			a {
+				width: auto;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+		}
+	}
+
+	&.is-style-square-shape {
+		.wp-social-link {
+			a {
+				border-radius: 0;
+			}
+		}
+	}
+
+	&.is-style-logos-only {
+		.wp-social-link {
+			a {
+				background: none;
+				padding: 0;
+				height: auto;
+			}
+	
+			svg {
+				width: 28px;
+				height: 28px;
+			}
+		}
+	}
+
+	.wp-social-link {
+		padding: 0 5px;
+
+		a,
+		a:hover {
+			text-decoration: none;
+			border-bottom: 0;
+			box-shadow: none;
+		}
+
+		svg {
+			width: 1.5em;
+		}
 	}
 }
 
 .wp-social-link {
 	display: block;
-	width: 36px;
-	height: 36px;
-	border-radius: 36px; // This makes it pill-shaped instead of oval, in cases where the image fed is not perfectly sized.
-	margin-right: 8px;
-	transition: transform 0.1s ease;
-
+	
 	a {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		width: 36px;
+		height: 36px;
+		border-radius: 36px;
+		transition: all 0.3s ease;
 		padding: 6px;
-		display: block;
 		line-height: 0;
-		transition: transform 0.1s ease;
 	}
 
 	a,
@@ -44,199 +90,191 @@
 	}
 }
 
-// Center flex items. This has an equivalent in editor.scss.
-// It also needs to override some of the default classes usually applied to the centering class.
-.wp-block-social-links.aligncenter {
-	justify-content: center;
-	display: flex;
-}
-
-
 // Provide colors for a range of icons.
 .wp-block-social-links:not(.is-style-logos-only) {
 	// Generic items such as mail, feed, etc.
-	.wp-social-link {
+	.wp-social-link a {
 		background-color: #f0f0f0;
 		color: #444;
 	}
 
-	.wp-social-link-amazon {
+	.wp-social-link-amazon a {
 		background-color: #f90;
 		color: #fff;
 	}
 
-	.wp-social-link-bandcamp {
+	.wp-social-link-bandcamp a {
 		background-color: #1ea0c3;
 		color: #fff;
 	}
 
-	.wp-social-link-behance {
+	.wp-social-link-behance a {
 		background-color: #0757fe;
 		color: #fff;
 	}
 
-	.wp-social-link-codepen {
+	.wp-social-link-codepen a {
 		background-color: #1e1f26;
 		color: #fff;
 	}
 
-	.wp-social-link-deviantart {
+	.wp-social-link-deviantart a {
 		background-color: #02e49b;
 		color: #fff;
 	}
 
-	.wp-social-link-dribbble {
+	.wp-social-link-dribbble a {
 		background-color: #e94c89;
 		color: #fff;
 	}
 
-	.wp-social-link-dropbox {
+	.wp-social-link-dropbox a {
 		background-color: #4280ff;
 		color: #fff;
 	}
 
-	.wp-social-link-etsy {
+	.wp-social-link-etsy a {
 		background-color: #f45800;
 		color: #fff;
 	}
 
-	.wp-social-link-facebook {
+	.wp-social-link-facebook a {
 		background-color: #1977f2;
 		color: #fff;
 	}
 
-	.wp-social-link-fivehundredpx {
+	.wp-social-link-fivehundredpx a {
 		background-color: #000;
 		color: #fff;
 	}
 
-	.wp-social-link-flickr {
+	.wp-social-link-flickr a {
 		background-color: #0461dd;
 		color: #fff;
 	}
 
-	.wp-social-link-foursquare {
+	.wp-social-link-foursquare a {
 		background-color: #e65678;
 		color: #fff;
 	}
 
-	.wp-social-link-github {
+	.wp-social-link-github a {
 		background-color: #24292d;
 		color: #fff;
 	}
 
-	.wp-social-link-goodreads {
+	.wp-social-link-goodreads a {
 		background-color: #eceadd;
 		color: #382110;
 	}
 
-	.wp-social-link-google {
+	.wp-social-link-google a {
 		background-color: #ea4434;
 		color: #fff;
 	}
 
-	.wp-social-link-instagram {
+	.wp-social-link-instagram a {
 		background-color: #f00075;
 		color: #fff;
 	}
 
-	.wp-social-link-lastfm {
+	.wp-social-link-lastfm a {
 		background-color: #e21b24;
 		color: #fff;
 	}
 
-	.wp-social-link-linkedin {
+	.wp-social-link-linkedin a {
 		background-color: #0577b5;
 		color: #fff;
 	}
 
-	.wp-social-link-mastodon {
+	.wp-social-link-mastodon a {
 		background-color: #3288d4;
 		color: #fff;
 	}
 
-	.wp-social-link-medium {
+	.wp-social-link-medium a {
 		background-color: #02ab6c;
 		color: #fff;
 	}
 
-	.wp-social-link-meetup {
+	.wp-social-link-meetup a {
 		background-color: #f6405f;
 		color: #fff;
 	}
 
-	.wp-social-link-pinterest {
+	.wp-social-link-pinterest a {
 		background-color: #e60122;
 		color: #fff;
 	}
 
-	.wp-social-link-pocket {
+	.wp-social-link-pocket a {
 		background-color: #ef4155;
 		color: #fff;
 	}
 
-	.wp-social-link-reddit {
+	.wp-social-link-reddit a {
 		background-color: #fe4500;
 		color: #fff;
 	}
 
-	.wp-social-link-skype {
+	.wp-social-link-skype a {
 		background-color: #0478d7;
 		color: #fff;
 	}
 
-	.wp-social-link-snapchat {
+	.wp-social-link-snapchat a {
 		background-color: #fefc00;
 		color: #fff;
 		stroke: #000;
 	}
 
-	.wp-social-link-soundcloud {
+	.wp-social-link-soundcloud a {
 		background-color: #ff5600;
 		color: #fff;
 	}
 
-	.wp-social-link-spotify {
+	.wp-social-link-spotify a {
 		background-color: #1bd760;
 		color: #fff;
 	}
 
-	.wp-social-link-tumblr {
+	.wp-social-link-tumblr a {
 		background-color: #011835;
 		color: #fff;
 	}
 
-	.wp-social-link-twitch {
+	.wp-social-link-twitch a {
 		background-color: #6440a4;
 		color: #fff;
 	}
 
-	.wp-social-link-twitter {
+	.wp-social-link-twitter a {
 		background-color: #21a1f3;
 		color: #fff;
 	}
 
-	.wp-social-link-vimeo {
+	.wp-social-link-vimeo a {
 		background-color: #1eb7ea;
 		color: #fff;
 	}
 
-	.wp-social-link-vk {
+	.wp-social-link-vk a {
 		background-color: #4680c2;
 		color: #fff;
 	}
 
-	.wp-social-link-wordpress {
+	.wp-social-link-wordpress a {
 		background-color: #3499cd;
 		color: #fff;
 	}
 
-	.wp-social-link-yelp {
+	.wp-social-link-yelp a {
 		background-color: #d32422;
 		color: #fff;
 	}
 
-	.wp-social-link-youtube {
+	.wp-social-link-youtube a {
 		background-color: #ff0100;
 		color: #fff;
 	}
@@ -244,17 +282,6 @@
 
 // Treatment for logos only style.
 .wp-block-social-links.is-style-logos-only {
-	.wp-social-link {
-		background: none;
-		// Make these bigger.
-		padding: 4px;
-
-		svg {
-			width: 28px;
-			height: 28px;
-		}
-	}
-
 	.wp-social-link-amazon {
 		color: #f90;
 	}
@@ -399,17 +426,5 @@
 
 	.wp-social-link-youtube {
 		color: #ff0100;
-	}
-}
-
-// Treatment for pill shape style.
-.wp-block-social-links.is-style-pill-shape {
-	.wp-social-link {
-		width: auto;
-	}
-
-	.wp-social-link a {
-		padding-left: 16px;
-		padding-right: 16px;
 	}
 }

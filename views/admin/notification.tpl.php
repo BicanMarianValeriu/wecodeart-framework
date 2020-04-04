@@ -16,8 +16,8 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Markup;
 
 $attributes = Markup::generate_attr( 'admin-notification', [
-	'id'			=> $id,
-	'class'			=> $classes,
+	'id'			=> $id ?: '',
+	'class'			=> $classes ?: '',
 	'data-repeat' 	=> isset( $repeat ) ? $repeat : NULL
 ] ); 
 ?>

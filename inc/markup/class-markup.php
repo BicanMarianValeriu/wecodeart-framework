@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  Markup
- * @copyright   Copyright (c) 2019, WeCodeArt Framework
+ * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
  * @version		4.1.53
  */
@@ -211,6 +211,12 @@ class Markup {
 		
 		// Build the HTML.
 		$function_html = '';
+
+		/**
+		 * Filter the wrapped content before wrapping it allowing to change the function/content string
+		 * @since 4.1.5
+		 */
+		$content = apply_filters( "wecodeart/filter/wrap/{$context}/content", $content, $func_args );
 
 		if( is_callable( $content ) ) {
 			ob_start();

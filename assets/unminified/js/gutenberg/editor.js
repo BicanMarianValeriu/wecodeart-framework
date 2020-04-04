@@ -925,7 +925,7 @@ function registerWCABlocks(){[_blocks_lorem__WEBPACK_IMPORTED_MODULE_9__["defaul
  * WordPress Dependencies
  */var addFilter=wp.hooks.addFilter;var createHigherOrderComponent=wp.compose.createHigherOrderComponent;/**
  * Internal dependencies
- */var restrictedBlocks=['core/freeform','core/shortcode','core/nextpage','woocommerce/handpicked-products','woocommerce/products-by-attribute','woocommerce/products-by-tag','woocommerce/product-best-sellers','woocommerce/product-top-rated','woocommerce/product-on-sale','woocommerce/product-new'];var blocksWithFullScreen=['core/image','core/cover','core/group','core/columns','core/media-text'];var blocksWithAnchor=['core/spacer','core/separator'];var blocksWithFontSize=['core/list'];var blocksWithBackgrounds=['core/columns','core/column'];var blocksWithContainer=['core/columns'];var blocksWithColumns=['core/column'];/**
+ */var restrictedBlocks=['core/freeform','core/shortcode','core/nextpage','core/archives','core/calendar','core/tag-cloud','core/latest-comments','woocommerce/handpicked-products','woocommerce/products-by-attribute','woocommerce/products-by-tag','woocommerce/product-best-sellers','woocommerce/product-top-rated','woocommerce/product-on-sale','woocommerce/product-new'];var blocksWithFullScreen=['core/image','core/cover','core/group','core/columns','core/media-text'];var blocksWithAnchor=['core/spacer','core/separator'];var blocksWithFontSize=['core/list'];var blocksWithBackgrounds=['core/columns','core/column'];var blocksWithContainer=['core/columns'];var blocksWithColumns=['core/column'];/**
  * Filters registered block settings, extending attributes with anchor using ID
  * of the first node.
  *

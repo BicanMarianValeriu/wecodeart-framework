@@ -1,8 +1,8 @@
 .wp-block-navigation-menu {
 	& > ul {
-		position: relative;
-		max-width: none;
 		@include list-unstyled();
+		max-width: none;
+		position: relative;
 
 		ul {
 			padding-left: 0;
@@ -23,9 +23,9 @@
 			&:focus-within > ul,
 			& ul:hover,
 			& ul:focus {
-				display: block;
 				visibility: visible;
 				opacity: 1;
+				display: block;
 			}
 		}
 

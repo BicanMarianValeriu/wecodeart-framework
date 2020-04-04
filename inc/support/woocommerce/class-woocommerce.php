@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\WooCommerce
- * @copyright   Copyright (c) 2019, WeCodeArt Framework
+ * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		1.9
  * @version		4.1.4
  */
@@ -81,6 +81,7 @@ class WooCommerce implements Integration {
 		// Filters
 		add_filter( 'wecodeart/filter/header/bar/modules', 	[ $this, 'add_cart_to_header_modules' ] );
 		add_filter( 'woocommerce_add_to_cart_fragments',	[ $this, 'cart_count_fragments' ], 10, 1 );
+		add_filter( 'loop_shop_columns',                	[ $this, 'loop_columns' ], 20 );
 	}
 
 	/**
@@ -93,6 +94,17 @@ class WooCommerce implements Integration {
 		add_theme_support( 'wc-product-gallery-lightbox' );
 		add_theme_support( 'wc-product-gallery-slider' );
 	}
+
+	/**
+     * Loop Columns
+     *
+     * @param   int $cols
+     * @return  int
+     */
+    public function loop_columns( $cols ) {
+        $cols = woo_config( 'product-columns', 4 );
+        return $cols;
+    }
 	
 	/**
 	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup

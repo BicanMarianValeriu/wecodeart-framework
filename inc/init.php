@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  Init
- * @copyright   Copyright (c) 2019, WeCodeArt Framework
+ * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		1.0
  * @version		4.1.5
  */
@@ -272,23 +272,35 @@ function wecodeart_config( $key = null, $default = null ) {
  * Check if condition is met.
  *
  * @since	4.0
- * @version	4.0.9
+ * @version	4.1.5
  *
  * @param   string|array    $parameters
  *
  * @return  mixed|null|bool
  */
-function wecodeart_if( $parameters ) {
+function wecodeart_if( $parameters, $relation = 'AND' ) {
     if( empty( $parameters ) ) return true;
+
+    $return = false;
+
+    if( in_array( $relation, [ 'AND', 'OR', 'ALL', 'ONE', 'and', 'or', 'all', 'one' ] ) ) {
+        $return = in_array( $relation, [ 'OR', 'or', 'one' ] ) && true;
+    }
+
+    $one_met = true;
     
     foreach ( (array) $parameters as $conditional ) {
         if ( ! wecodeart( 'conditionals' )->has( $conditional ) ) return null;
         $class  = wecodeart( 'conditionals' )->get( $conditional );
         $is_met = ( new $class )->is_met();
-        if( ! $is_met ) return false;
+        if( $return === false && ! $is_met ) return false;
+        if( $return === true && ! $is_met && $one_met !== false ) {
+            $one_met = false;
+            continue;
+        }
     }
 
-    return true;
+    return $one_met;
 }
 
 /**
