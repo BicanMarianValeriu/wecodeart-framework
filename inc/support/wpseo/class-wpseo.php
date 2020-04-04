@@ -61,11 +61,13 @@ class WPSeo {
 	 * Send to Constructor
 	 *
 	 * @since 	3.6.2
-	 * @version	4.1.4
+	 * @version	4.1.5
 	 */
 	public function register_hooks() {
 		add_action( 'wecodeart/hook/inner/top', [ $this, 'render_yoast_breadcrumbs' ], 30 );
 		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+		
+		add_filter( 'wecodeart/filter/template/context', [ $this, 'filter_category_context' ], 10, 2 );
 		
 		if( get_prop( $this->config, 'author-social', false ) !== false ) {
 			/**
@@ -101,7 +103,7 @@ class WPSeo {
 	 * Extend Author Box with Yoast's Social
 	 *
 	 * @since	3.9.3
-	 * @since	4.1.52
+	 * @version	4.1.52
 	 *
 	 * @return 	array
 	 */
@@ -187,6 +189,25 @@ class WPSeo {
 		$args['social'] = array_filter( $args['social'], function( $item ) {
 			return( isset( $item['url'] ) && $item['url'] !== '' );
 		} );
+
+		return $args;
+	}
+
+	/**
+	 * Extend Category with Yoast's Primary Term
+	 *
+	 * @since	4.1.52
+	 *
+	 * @return 	array
+	 */
+	public function filter_category_context( $args, $name ) {
+		if( $name !== 'entry/meta/categories.php' ) {
+			return $args;
+		}
+		
+		if( $meta = get_post_meta( get_the_ID(), '_yoast_wpseo_primary_category', true ) ) {
+			$args['primary'] = (int) $meta;
+		}
 
 		return $args;
 	}

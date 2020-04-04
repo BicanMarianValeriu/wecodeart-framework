@@ -102,7 +102,7 @@ class Meta {
 	 * Entry Meta Categories Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.6
+	 * @version	4.1.5
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -111,13 +111,13 @@ class Meta {
 	 */
 	public static function categories( $args = [], $echo = true ) {
 		// Do nothing if no tags
-		if ( empty( get_the_category() ) ) {
+		if ( empty( $count = get_the_terms( null, 'category' ) ) ) {
 			return;
 		}
 
 		Markup::template( 'entry/meta/categories', wp_parse_args( $args, [
-			'primary'	=> get_post_meta( get_the_ID(), '_yoast_wpseo_primary_category', true ),
-			'post_id' 	=> get_the_ID(),
+			'post_id' 	=> (int) get_the_ID(),
+			'count'		=> (int) $count,
 			'separator' => ', ',
 		] ), $echo );
 	}

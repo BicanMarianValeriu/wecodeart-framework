@@ -9,7 +9,7 @@
  * @subpackage 	Entry\Meta\Categories
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.9.6
- * @version		4.0.1
+ * @version		4.1.5
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -19,19 +19,20 @@ use function WeCodeArt\Functions\kses_svg;
 
 /**
  * @param   int     $primary    Primary Category
+ * @param   int     $count      Amount of Categories selected
  * @param   string  $separator  Separator
  */
 
 $classnames         = [ 'entry-cats mr-2' ];
 
-if( $primary ) {
+if( isset( $primary ) ) {
     $classnames[]   = 'entry-cats--has-primary';
 }
 ?>
 <span class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
     <span class="d-inline-block mr-1"><?php
 
-        echo kses_svg( SVG::compile( (bool) $primary ? 'folder' : 'folders' ) );
+        echo kses_svg( SVG::compile( isset( $primary ) || $count === 1 ? 'folder' : 'folders' ) );
 
     ?></span>
     <span class="screen-reader-text"><?php
@@ -39,17 +40,17 @@ if( $primary ) {
         esc_html_e( 'Posted in ', 'wecodeart' );
     
     ?></span><?php
-    if( $primary ) {
-
+    if( isset( $primary ) ) {
+        
         printf( 
             '<a href="%s" rel="category tag">%s</a>', 
-            esc_url( get_category_link( $primary ) ),
+            esc_url( get_term_link( $primary ) ),
             esc_html( get_term_by( 'id', $primary, 'category' )->name )
         );
 
     } else {
 
-        get_the_category_list( $separator );
+        echo get_the_term_list( $post_id, 'category', '', $separator );
 
     }
     ?>

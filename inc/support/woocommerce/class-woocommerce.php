@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		1.9
- * @version		4.1.4
+ * @version		4.1.5
  */
 
 namespace WeCodeArt\Support;
@@ -25,6 +25,7 @@ use WeCodeArt\Support\Interfaces\Integration;
 use WeCodeArt\Support\WooCommerce\Conditional\Plugin;
 use WeCodeArt\Support\WooCommerce\Conditional\WOO_Page;
 use WeCodeArt\Support\WooCommerce\Conditional\WOO_Archive;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * The Class: Handles all necesary functions and requirements 
@@ -99,10 +100,11 @@ class WooCommerce implements Integration {
      * Loop Columns
      *
      * @param   int $cols
+	 *
      * @return  int
      */
     public function loop_columns( $cols ) {
-        $cols = woo_config( 'product-columns', 4 );
+        $cols = get_prop( wecodeart_config( 'woocommerce' ), 'product-columns', 4 );
         return $cols;
     }
 	

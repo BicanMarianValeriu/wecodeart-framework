@@ -1,3 +1,11 @@
+v4.1.56
+-
+
+v4.1.55
+- Fixed - Issue with call to undefined function woo_config() in WooCommerce Support class
+- Fixed - WPSEO (Yoast) Primary Term, moved to own fiter under Support Class and adjusted the View
+- Updated - Use get_term_link and get_term_list instead of get_the_category_list (deprecated)
+
 v4.1.54
 - Fixed - Gutenberg Core Blocks attributes compatability (for some of the blocks)
 - Updated - MISC: Year to 2020 if the files message
