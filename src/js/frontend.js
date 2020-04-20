@@ -6,10 +6,20 @@ import 'bootstrap/js/dist/popover';
 import './plugins/wecodeart-Component';
 import './plugins/wecodeart-JSManager';
 import './plugins/wecodeart-Template';
-import { createHooks } from '@wordpress/hooks';
 import createParams from './helpers/createParams';
 import parseJSONData from './helpers/parseData';
 import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar } from './helpers/HasScrollbar';
+
+const { addAction } = wp.hooks;
+
+addAction('wecodeart.route', 'wecodeart/developer/log', filterLog, 10);
+function filterLog(route, func, args) {
+	const { isDevMode = false } = wecodeart;
+	if (isDevMode) {
+		console.log('Loaded: ', route, '::', func);
+		if (args) console.log(args);
+	}
+}
 
 (function (wecodeart, $) {
 	/**
@@ -17,7 +27,6 @@ import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar } from './help
 	 * @since 3.6
 	 */
 	wecodeart.plugins = {};
-	wecodeart.hooks = createHooks();
 	wecodeart.fn = {
 		hasScrollbar: hasScrollbar,
 		createParams: createParams,

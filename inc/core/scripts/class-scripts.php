@@ -110,14 +110,16 @@ class Scripts {
 	 * Enqueue Front-End Styles
 	 *
 	 * @since	1.0
-	 * @version	3.9.5
+	 * @version	4.1.56
 	 */
 	public function front_scripts() {
 		// Enqueue Styles
 		wp_enqueue_style( $this->make_handle(), get_asset( 'css', 'style' ), [], wecodeart( 'version' ) );
 
 		// Enqueue scripts
-		wp_enqueue_script( $this->make_handle(), get_asset( 'js', 'frontend' ), [ 'jquery' ], wecodeart( 'version' ), true );
+		wp_enqueue_script( $this->make_handle(), get_asset( 'js', 'frontend' ), [
+			'jquery', 'wp-hooks'
+		], wecodeart( 'version' ), true );
 		
 		if ( ( is_page() || is_single() ) && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );

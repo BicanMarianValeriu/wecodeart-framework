@@ -15,9 +15,11 @@ export default (function (wecodeart) {
 		 * @param {string} routes		| Key name containing routes 
 		 */
 		constructor(namespace) {
-			const { routes, hooks: { doAction } } = namespace;
+			const { routes } = namespace;
+			const { doAction, applyFilters } = wp.hooks;
 			this.routes = routes;
 			this.doAction = doAction;
+			this.applyFilters = applyFilters;
 			this.extendedR = _pickBy(routes, v => v.extends && v.extends instanceof Array);
 		}
 
@@ -33,8 +35,10 @@ export default (function (wecodeart) {
 			fire = fire && typeof this.routes[route][funcname] === 'function';
 
 			if (fire) {
-				this.doAction('wecodeart.route', route, funcname);
-				return this.routes[route][funcname](args);
+				args = this.applyFilters('wecodeart.route', args, route, funcname);
+				this.routes[route][funcname](args);
+				this.doAction('wecodeart.route', route, funcname, args);
+				return;
 			}
 		}
 
