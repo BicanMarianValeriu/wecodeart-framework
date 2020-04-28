@@ -21,7 +21,7 @@ Please visit https://www.wecodeart.com/ for further theme support.
 ## Third Party License
 Font Awesome icons, Copyright Dave Gandy
 License: SIL Open Font License, version 1.1.
-Source: http://fontawesome.io/
+Source: https://fontawesome.com/license
 
 Bootstrap, Copyright Twitter
 License: MIT.
