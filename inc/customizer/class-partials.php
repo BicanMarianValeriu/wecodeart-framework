@@ -9,7 +9,7 @@
  * @subpackage 	WP-Customizer Partials
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.3
- * @version		4.0.3
+ * @version		4.1.6
  */
 
 namespace WeCodeArt\Customizer;
@@ -45,26 +45,26 @@ class Partials {
 		// Selective Refresh
 		$wp_customize->selective_refresh->add_partial( 'blogname', [
 			'selector'        => '.site-title a',
-			'render_callback' => [ $this, '_render_blogname' ],
+			'render_callback' => [ $this, 'render_blogname' ],
 		] );
 
 		$wp_customize->selective_refresh->add_partial( 'blogdescription', [
 			'selector'        => '.site-description',
-			'render_callback' => [ $this, '_render_blogdescription' ],
+			'render_callback' => [ $this, 'render_blogdescription' ],
 		] ); 
 	}
 		
 	/**
 	 * Render Partial Blog Name
 	 */
-	public static function _render_blogname() {
+	public static function render_blogname() {
 		return get_bloginfo( 'name', 'display' );
 	}
 
 	/**
 	 * Render Partial Blog Description
 	 */
-	public static function _render_blogdescription() {
+	public static function render_blogdescription() {
 		return get_bloginfo( 'description', 'display' );
 	}
 

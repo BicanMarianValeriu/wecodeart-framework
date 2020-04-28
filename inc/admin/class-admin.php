@@ -72,9 +72,9 @@ class Admin {
 	 * Admin CSS
 	 *
 	 * @since 	3.8.1
-	 * @version	3.9.7
+	 * @version	4.1.6
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'style' ), [], wecodeart( 'version' ) );
+		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'index' ), [], wecodeart( 'version' ) );
 	}
 }

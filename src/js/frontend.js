@@ -3,6 +3,7 @@ import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/tooltip';
 import 'bootstrap/js/dist/popover';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import './plugins/wecodeart-Component';
 import './plugins/wecodeart-JSManager';
 import './plugins/wecodeart-Template';
@@ -32,6 +33,7 @@ function filterLog(route, func, args) {
 		createParams: createParams,
 		getOptions: parseJSONData,
 	};
+	wecodeart.FA = library;
 	wecodeart.routes = {
 		common: {
 			init: () => {
@@ -42,6 +44,7 @@ function filterLog(route, func, args) {
 			complete: () => {
 				const { fn: { getOptions } } = wecodeart;
 
+				// Tooltips
 				$('[data-toggle="tooltip"]').tooltip();
 				const customTooltips = document.querySelectorAll('.has-tooltip');
 				for (let item of customTooltips) {
@@ -57,6 +60,9 @@ function filterLog(route, func, args) {
 						$item.tooltip(options);
 					}
 				}
+
+				// FA Watch
+				dom.watch();
 			}
 		}
 	};

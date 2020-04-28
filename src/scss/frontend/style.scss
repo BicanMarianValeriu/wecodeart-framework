@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
 Theme Name: WeCodeArt
 Theme URI: https://www.wecodeart.com/
@@ -10,4 +11,23 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
 Domain Path: /languages
 Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-menu, custom-colors, custom-logo, custom-header, flexible-header, featured-images, full-width-template, footer-widgets, theme-options, threaded-comments, translation-ready
-!*/
+*/
+
+/* Required */
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import "./../abstracts/mixins";
+@import "./../abstracts/variables";
+@import "~bootstrap/scss/bootstrap.scss";
+
+/* Base WP + WeCodeart */
+@import './base/base'; 
+@import './base/header'; 
+@import './base/author-box'; 
+@import './base/breadcrumbs'; 
+@import './base/entry'; 
+@import './base/comments'; 
+@import './base/widgets';
+@import './base/general';
+@import './base/woocommerce';
+@import './blocks';

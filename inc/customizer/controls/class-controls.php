@@ -14,8 +14,11 @@
 
 namespace WeCodeArt\Customizer;
 
-if ( ! defined( 'ABSPATH' ) ) exit(); 
+defined( 'ABSPATH' ) || exit; 
 
+/**
+ * Customizer Controls Class
+ */
 class Controls {
 
 	use \WeCodeArt\Singleton;  

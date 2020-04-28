@@ -9,7 +9,7 @@
  * @subpackage 	Core\Scripts
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		1.9
- * @version		4.1.54
+ * @version		4.1.6
  */
 
 namespace WeCodeArt\Core;
@@ -65,7 +65,7 @@ class Scripts {
 	 * WeCodeArt JS Object
 	 *
 	 * @since	3.2
-	 * @version	4.1.54
+	 * @version	4.1.6
 	 *
 	 * @return 	void
 	 */
@@ -74,20 +74,17 @@ class Scripts {
 
 		$wecodeart = [
 			'assetsEnqueue' 	=> $wp_scripts->queue, 
-			'templateDirectory' => get_template_directory_uri()
+			'templateDirectory' => get_template_directory_uri(),
+			'isDevMode'			=> wecodeart_if( 'is_dev_mode' ),
 		];
 
 		if( is_child_theme() ) {
 			$wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
 		}
 
-		if( wecodeart_if( 'is_dev_mode' ) ) {
-			$wecodeart['isDevMode'] = true;
-		}
-
 		$wecodeart = apply_filters( 'wecodeart/filter/core/scripts/localize', $wecodeart );
 		
-		wp_localize_script( $this->make_handle(), 'wecodeart', apply_filters( 'wecodeart/filter/scripts/core/localize', $wecodeart ) );
+		wp_localize_script( $this->make_handle(), 'wecodeart', $wecodeart );
 	}
 
 	/**
@@ -114,7 +111,7 @@ class Scripts {
 	 */
 	public function front_scripts() {
 		// Enqueue Styles
-		wp_enqueue_style( $this->make_handle(), get_asset( 'css', 'style' ), [], wecodeart( 'version' ) );
+		wp_enqueue_style( $this->make_handle(), get_asset( 'css', 'frontend' ), [], wecodeart( 'version' ) );
 
 		// Enqueue scripts
 		wp_enqueue_script( $this->make_handle(), get_asset( 'js', 'frontend' ), [
@@ -215,14 +212,14 @@ trait Base {
 	 * Make a script handle from the classname
 	 *
 	 * @since	3.9.5
-	 * @version	3.9.5
+	 * @version	4.1.6
 	 *
 	 * @param	string 	$name
 	 *
 	 * @return 	string
 	 */
-	protected function make_handle( $name = '' ) {
-		$handle = strtolower( str_replace( '\\', '-', __CLASS__ ) );
+	protected function make_handle( $name = '', $namespace = __CLASS__ ) {
+		$handle = strtolower( str_replace( '\\', '-', $namespace ) );
 		$handle = $name ? $handle . '-' . $name : $handle;
 		return sanitize_html_class( $handle );
 	}
@@ -231,7 +228,7 @@ trait Base {
 	 * Retrieve an asset if path structure is the same as class
 	 *
 	 * @since	3.9.5
-	 * @version	3.9.5
+	 * @version	4.1.6
 	 *
 	 * @param	string 	$type
 	 * @param	string 	$name
@@ -240,7 +237,7 @@ trait Base {
 	 * @return 	string
 	 */
 	protected function get_asset( string $type, string $name, $location = __CLASS__ ) {
-		$directories 	= array_reverse( explode( '-', strtolower( str_replace( '\\', '-', __CLASS__ ) ) ) );
+		$directories 	= array_reverse( explode( '-', strtolower( str_replace( '\\', '-', $location ) ) ) );
 		array_pop( $directories );
 		$directories	= implode( '/', array_reverse( $directories ) );
 
