@@ -9,7 +9,7 @@
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		1.6
- * @version		4.1.4
+ * @version		4.1.6
  */
 
 namespace WeCodeArt;
@@ -72,13 +72,13 @@ class Customizer {
 	 * Grab our Customizer Scripts.
 	 *
 	 * @since 	unknown
-	 * @version	3.9.5
+	 * @version	4.1.6
 	 */
 	public function enqueue_preview() {
 
 		wp_enqueue_script( 
 			$this->make_handle( 'preview' ),
-			$this->get_asset( 'js', 'preview' ),
+			$this->get_asset( 'js', 'index' ),
 			[ 'jquery', 'customize-preview' ], 
 			wecodeart( 'version' ), 
 			true 

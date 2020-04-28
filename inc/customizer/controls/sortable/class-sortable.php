@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Controls\Sortable
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.5
+ * @version		4.1.6
  */
 
 namespace WeCodeArt\Customizer\Controls;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Customizer\Controls;
 defined( 'ABSPATH' ) || exit;
 
 use WP_Customize_Control;
+use function WeCodeArt\Core\Scripts\get_asset;
 
 if ( class_exists( 'WeCodeArt\Customizer\Controls\Sortable' ) ) return NULL;
 
@@ -41,15 +42,21 @@ class Sortable extends WP_Customize_Control {
 	 * @access public
 	 *
 	 * @since	unknown
-	 * @version	3.9.5
+	 * @version	4.1.6
 	 */
 	public function enqueue() {
+		if( ! wp_style_is( $this->make_handle( null, __NAMESPACE__ ), 'enqueued' ) ) {
+			wp_enqueue_style(
+				$this->make_handle( null, __NAMESPACE__ ),
+				get_asset( 'css', 'index', 'customizer' ),
+				[],
+				wecodeart( 'version' )
+			);
+		}
 
-		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'sortable' ), [], wecodeart( 'version' ) );
-		
 		wp_enqueue_script(
             $this->make_handle(),
-			$this->get_asset( 'js', 'sortable' ),
+			$this->get_asset( 'js', 'index' ),
            	[ 'jquery', 'customize-base', 'jquery-ui-core', 'jquery-ui-sortable' ],
 			wecodeart( 'version' ),
             true

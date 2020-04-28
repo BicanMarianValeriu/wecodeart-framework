@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.0.8
+ * @version		4.1.6
  */
 
 namespace WeCodeArt\Support;
@@ -53,76 +53,72 @@ class ANR implements Integration {
 	 * Hooks
 	 *
 	 * @since   3.8.1
-	 * @version	4.0.2
+	 * @version	4.1.6
 	 *
 	 * @return  void
 	 */
 	public function register_hooks() {
-		add_action( 'init', function() {
-			$anr_instance = Captcha::init();
+		// Comments
+		if( anr_is_form_enabled( 'comment' ) && ( ! is_admin() || ! current_user_can( 'moderate_comments' ) ) ) {
+			add_action( 'init', function() {
+				$anr_instance = Captcha::init();
+				if ( ! is_user_logged_in() ) {
+					remove_action( 'comment_form_after_fields', 	[ $anr_instance, 'form_field' ], 99 );
+					add_action( 'comment_form_after_fields', 		[ $this, 'comment_field' ] );
+				} else {
+					remove_filter( 'comment_form_field_comment', 	[ $anr_instance, 'comment_form_field' ], 99 );
+					add_filter( 'comment_form_field_comment', 		[ $this, 'comment_field_return' ] );
+				}
+			} );
+		}
 
-			if ( ! is_user_logged_in() ) {
-				remove_action( 'comment_form_after_fields', 	[ $anr_instance, 'form_field' ], 99 );
-				add_action( 'comment_form_after_fields', 		[ $this, 'wrapp_form_field' ] );
-			} else {
-				remove_filter( 'comment_form_field_comment', 	[ $anr_instance, 'comment_form_field' ], 99 );
-				add_filter( 'comment_form_field_comment', 		[ $this, 'wrapp_comment_form_field' ] );
-			}
-		} );
+		// Hooks
+		do_action( 'wecodeart/action/support/anr/init' );
 	}
 
 	/**
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
-	 * @version	4.0.8
-	 * @see 	anr_captcha_form_field();
-	 * @uses	anr_captcha_class::init()->form_field();
+	 * @version	4.1.6
+	 * @uses	$this->comment_field_return();
 	 *
 	 * @return  void
 	 */
-	public function wrapp_form_field() {
-		Markup::wrap( 'comment-captcha', [ [ 
-			'tag' => 'div', 
-			'attrs' => [ 
-				'class' => 'form-group comment-form-captcha col-12 col-md-7' 
-			]
-		] ], function() { ?>
-			<label for="g-recaptcha-response"><?php esc_html_e( 'Captcha *', 'wecodeart' ); ?></label>
-			<?php
-
-			Captcha::init()->form_field(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
-		} ); // Echoes the form_field().
+	public function comment_field() {
+		echo $this->comment_field_return(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
-	 * @version	4.0.8
-	 * @see 	anr_captcha_class::init()->captcha_form_field();
-	 * @uses	anr_captcha_class::init()->captcha_form_field();
+	 * @version	4.1.6
+	 * @see 	anr_captcha_class::init()->form_field_return();
+	 * @uses	anr_captcha_class::init()->form_field_return();
 	 *
 	 * @return  void
 	 */
-	public function wrapp_comment_form_field( $defaults ) {
-		$loggedin_hide = anr_get_option( 'loggedin_hide' );
+	public function comment_field_return( $defaults = '' ) {
+		$hide	= anr_get_option( 'loggedin_hide' );
+		$ver	= anr_get_option( 'captcha_version', 'v2_checkbox' );
 
-		if ( is_user_logged_in() && $loggedin_hide  === (bool) true ) {
+		if ( is_user_logged_in() && $hide  === (bool) true ) {
 			return $defaults;
 		}
 
+		$classes = [ 'form-group', 'comment-form-captcha', 'col-12', 'col-md-7', $ver === 'v3' ? 'd-none' : '' ];
+
 		$defaults .= Markup::wrap( 'comment-captcha', [ [ 
 			'tag' 	=> 'div', 
-			'attrs' => [ 
-				'class' => 'form-group comment-form-captcha col-12 col-md-7' 
+			'attrs' => [
+				'class' => implode( ' ', array_filter( $classes ) )
 			]
 		] ], function() { ?>
 			<label for="g-recaptcha-response"><?php esc_html_e( 'Captcha *', 'wecodeart' ); ?></label>
 			<?php
 
-			echo Captcha::init()->captcha_form_field(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo Captcha::init()->form_field_return(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		
 		}, [], false );
 

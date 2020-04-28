@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Controls\Divider
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.8.5
- * @version		3.9.5
+ * @version		4.1.6
  */
 
 namespace WeCodeArt\Customizer\Controls;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Customizer\Controls;
 defined( 'ABSPATH' ) || exit;
 
 use WP_Customize_Control;
+use function WeCodeArt\Core\Scripts\get_asset;
 
 if ( class_exists( 'WeCodeArt\Customizer\Controls\Divider' ) ) return NULL;
 
@@ -57,12 +58,16 @@ class Divider extends WP_Customize_Control {
 	 * @access public
 	 *
 	 * @since 	unknown
-	 * @version	3.9.5
+	 * @version	4.1.6
 	 */
 	public function enqueue() {
-
-		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'divider' ), [], wecodeart( 'version' ) );
-
+		if( wp_style_is( $this->make_handle( null, __NAMESPACE__ ), 'enqueued' ) ) return;
+		wp_enqueue_style(
+			$this->make_handle( null, __NAMESPACE__ ),
+			get_asset( 'css', 'index', 'customizer' ),
+			[],
+			wecodeart( 'version' )
+		);
 	}
 
 	/**

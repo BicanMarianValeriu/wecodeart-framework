@@ -9,7 +9,7 @@
  * @subpackage 	Notifications
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.0.3
+ * @version		4.1.6
  */
 
 namespace WeCodeArt\Admin;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Admin;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Markup;
+use function WeCodeArt\Core\Scripts\get_asset;
 
 /**
  * Notifications
@@ -138,13 +139,13 @@ class Notifications {
 	 * Enqueue Scripts.
 	 *
 	 * @since 	3.8.6
-	 * @version	4.0.3
+	 * @version	4.1.6
 	 * @return 	void
 	 */
 	public function enqueue_scripts() {
 		wp_register_script( 
 			$this->make_handle(),
-			$this->get_asset( 'js', 'notification' ),
+			$this->get_asset( 'js', 'index' ),
 			[ 'jquery' ],
 			wecodeart( 'version' ),
 			true

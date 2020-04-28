@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Controls\Slider
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.5
+ * @version		4.1.6
  */
 
 namespace WeCodeArt\Customizer\Controls;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Customizer\Controls;
 defined( 'ABSPATH' ) || exit;
 
 use WP_Customize_Control;
+use function WeCodeArt\Core\Scripts\get_asset;
 
 if ( class_exists( 'WeCodeArt\Customizer\Controls\Slider' ) ) return NULL;
 
@@ -49,15 +50,21 @@ class Slider extends WP_Customize_Control {
 	 * @access public
 	 *
 	 * @since 	unknown
-	 * @version	3.9.5
+	 * @version	4.1.6
 	 */
 	public function enqueue() {
-		
-		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'slider' ), [], wecodeart( 'version' ) );
+		if( ! wp_style_is( $this->make_handle( null, __NAMESPACE__ ), 'enqueued' ) ) {
+			wp_enqueue_style(
+				$this->make_handle( null, __NAMESPACE__ ),
+				get_asset( 'css', 'index', 'customizer' ),
+				[],
+				wecodeart( 'version' )
+			);
+		}
 		
 		wp_enqueue_script(
             $this->make_handle(),
-			get_asset( 'js', 'slider', 'customizer/controls' ),
+			$this->get_asset( 'js', 'index' ),
            	[ 'jquery', 'customize-base' ],
 			wecodeart( 'version' ),
             true
