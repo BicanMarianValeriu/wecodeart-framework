@@ -1,9 +1,10 @@
 v4.1.6
 - Updated - CSS/JS Refactor with Webpack only setup
 - Updated - Folder structure for css/js assets and assets enqueue across various locations
-- Updated - ANR Captcha Integration improvements and added support for v3
+- Updated - ANR Captcha Integration improvements and added support for v3 Google Captcha
 - Fixed - get_asset() The location param, __CLASS__ is used by default however was not passed
 - Added - FontAwesome SVG Core library under wecodeart.FA window object
+- Added - Scripts make_handle() method 2nd parameter for changing the namespace/class to build handle from
 
 v4.1.55
 - Fixed - Issue with call to undefined function woo_config() in WooCommerce Support class
