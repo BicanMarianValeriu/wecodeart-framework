@@ -10,9 +10,6 @@ const defaultConfig = require('./node_modules/@wordpress/scripts/config/webpack.
 
 const devMode = process.env.NODE_ENV !== 'production';
 const wplib = [
-	'apiFetch',
-	'element',
-	'i18n',
 	'hooks',
 ];
 
@@ -124,9 +121,6 @@ module.exports = {
             'css/frontend.js',
             'css/frontend.asset.php',
             'css/frontend.deps.json',
-            'css/admin/index.js',
-            'css/admin/index.asset.php',
-            'css/admin/index.deps.json',
 
         ]),
         !devMode ? new DependencyExtractionWebpackPlugin({
