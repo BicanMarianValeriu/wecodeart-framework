@@ -14,7 +14,7 @@ const { getColorClassName } = wp.blockEditor;
  * @param {Object} attributes The attributes.
  * @returns {Array} The background classes.
  */
-function BackgroundClasses(attributes) {
+function getBackgroundClasses(attributes) {
 	const backgroundClass = getColorClassName('background-color', attributes.backgroundColor);
 	const backgroundSize = attributes.backgroundSize ? attributes.backgroundSize : 'cover';
 
@@ -54,4 +54,4 @@ function BackgroundClasses(attributes) {
 	return classes;
 }
 
-export default BackgroundClasses;
+export default getBackgroundClasses;

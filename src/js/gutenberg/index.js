@@ -32,7 +32,6 @@ export default function registerWCABlocks() {
     ].forEach((block) => {
         if (!block) return;
         const { name, settings, category = 'wca' } = block;
-        console.log( name );
         registerBlockType(name, { ...settings, category });
     });
 }

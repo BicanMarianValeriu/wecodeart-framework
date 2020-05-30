@@ -9,7 +9,7 @@
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		1.9
- * @version		4.0.2
+ * @version		4.1.7
  */
 
 namespace WeCodeArt\Walkers;
@@ -33,7 +33,7 @@ class Comment extends Walker_Comment {
 	 * Start Level
 	 */
 	function start_lvl( &$output, $depth = 0, $args = [] ) {
-		$output .= '<ul class="comment__children offset-md-1 unstyled pl-0">' . "\n";
+		$output .= '<ul class="comment__children offset-md-1 list-unstyled pl-0">' . "\n";
 	}
 
 	/**

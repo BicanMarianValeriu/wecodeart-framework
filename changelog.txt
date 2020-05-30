@@ -1,3 +1,7 @@
+v4.1.7
+- Updated - Add list-unstyled bootstrap class to comments listing by default
+- Added - Gutenberg Columns block variations with Bootstrap Columns
+
 v4.1.6
 - Updated - CSS/JS Refactor with Webpack only setup
 - Updated - Folder structure for css/js assets and assets enqueue across various locations

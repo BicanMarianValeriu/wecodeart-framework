@@ -2,7 +2,7 @@
  * External Dependencies
  */
 import classnames from 'classnames';
-import patterns from './patterns';
+import variations from './variations';
 
 /**
  * WordPress dependencies.
@@ -28,10 +28,10 @@ import { restrictedBlocks } from '../../extensions/attributes';
  *
  * @return 	{Object} Filtered block settings.
  */
-function addColumnsPatterns(settings) {
+function addColumnsVariations(settings) {
     const { name: blockName } = settings;
     if (!restrictedBlocks.includes(blockName) && blockName === 'core/columns') {
-        settings.patterns = patterns;
+        settings.variations = variations;
     }
 
     return settings;
@@ -144,7 +144,7 @@ function getSaveElement(element, blockType, attributes) {
  */
 function applyFilters() {
     addFilter('editor.BlockEdit', 'wecodeart/editor/columns/withColumnsControls', withColumnsControls);
-    addFilter('blocks.registerBlockType', 'wecodeart/blocks/columns/patterns', addColumnsPatterns);
+    addFilter('blocks.registerBlockType', 'wecodeart/blocks/columns/variations', addColumnsVariations);
     addFilter('blocks.getSaveElement', 'wecodeart/blocks/columns/getSaveElement', getSaveElement);
 }
 

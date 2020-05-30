@@ -9,7 +9,7 @@
  * @subpackage 	Core\Comments
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.1
+ * @version		4.1.7
  */
 
 namespace WeCodeArt\Core;
@@ -125,7 +125,7 @@ class Comments {
 	 * Render Comments List
 	 *
 	 * @since	unknown
-	 * @version 3.7.0
+	 * @version 4.1.61
 	 *
 	 * @return 	void
 	 */
@@ -135,7 +135,7 @@ class Comments {
 				'tag' 	=> 'ol',
 				'attrs' => [
 					'id' 	=> 'comments-list',
-					'class' => 'comments__list unstyled pl-0'
+					'class' => 'comments__list list-unstyled pl-0'
 				]
 			] ], function() { // Required as this to be read by theme check
 				wp_list_comments( apply_filters( 'wecodeart/filter/comments/list/args', [

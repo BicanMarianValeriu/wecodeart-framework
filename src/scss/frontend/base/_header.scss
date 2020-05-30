@@ -33,7 +33,7 @@
     }
 
     .site-description {
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down('md') {
             font-size: 12px;
         }
     }
@@ -42,7 +42,7 @@
 .header-bar { 
     &__menu,
     &__search {
-        @include media-breakpoint-down(md) { 
+        @include media-breakpoint-down('md') { 
             margin-top: 10px;
             order: 100;
             padding-top: 10px;
@@ -50,7 +50,7 @@
         }
 
         &:not(.show):not(.collapsing) {
-            @include media-breakpoint-down(md) { 
+            @include media-breakpoint-down('md') { 
                 display: none;
             }
         }
@@ -66,7 +66,7 @@
 }
 
 .no-js {
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down('md') {
         .header-bar {
             &__menu,
             &__search {
