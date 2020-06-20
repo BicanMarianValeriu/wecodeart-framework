@@ -1,3 +1,6 @@
+v4.1.8
+- Updated - 
+
 v4.1.7
 - Updated - Add list-unstyled bootstrap class to comments listing by default
 - Updated - Theme strings and errors: double check some missing translations
