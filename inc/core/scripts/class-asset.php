@@ -9,7 +9,7 @@
  * @subpackage 	Core/Scripts/Asset
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.9.5
- * @version		3.9.5
+ * @version		4.1.7
  */ 
 
 namespace WeCodeArt\Core\Scripts;
@@ -55,7 +55,7 @@ class Asset {
         if ( $this->file_exists( $file = $this->get_public_path() ) ) {
             return $this->get_public_uri();
         }
-        throw new FileNotFoundException("Asset file [$file] cannot be located.");
+        throw new FileNotFoundException( sprintf( 'Asset file [%s] cannot be located.', $file ) );
 	}
 	
     /**
@@ -67,7 +67,7 @@ class Asset {
         if ( $this->file_exists( $file = $this->get_public_path() ) ) {
             return $file;
         }
-        throw new FileNotFoundException("Asset file [$file] cannot be located.");
+        throw new FileNotFoundException( sprintf( 'Asset file [%s] cannot be located.', $file ) );
 	}
 	
     /**

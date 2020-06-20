@@ -1,5 +1,6 @@
 v4.1.7
 - Updated - Add list-unstyled bootstrap class to comments listing by default
+- Updated - Theme strings and errors: double check some missing translations
 - Added - Gutenberg Columns block variations with Bootstrap Columns
 
 v4.1.6

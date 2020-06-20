@@ -237,7 +237,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	4.0.1
+	 * @version	4.1.7
 	 *
 	 * @return 	array
 	 */
@@ -347,7 +347,7 @@ class Comments {
 				]
 			] ], function() {
 				printf( esc_html__( 'You may use these %s tags and attributes: %s.', 'wecodeart' ),
-					'<abbr data-toggle="tooltip" title="HyperText Markup Language">HTML</abbr>',
+					sprintf( '<abbr data-toggle="tooltip" title="%s">HTML</abbr>', esc_html__( 'HyperText Markup Language', 'wecodeart' ) ),
 					'<code>' . allowed_tags() . '</code>'
 				);
 			}, [], false ),

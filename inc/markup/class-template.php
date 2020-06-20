@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Template
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.7.3
- * @version     4.0.9
+ * @version     4.1.7
  */
 
 namespace WeCodeArt\Markup;
@@ -79,7 +79,9 @@ class Template {
             return;
         }
 
-        throw new FileNotFoundException("Template file [{$this->get_relative_path()}] cannot be located.");
+        throw new FileNotFoundException(
+            sprintf( 'Template file [%s] cannot be located.', $this->get_relative_path() )
+        );
     }
 
     /**

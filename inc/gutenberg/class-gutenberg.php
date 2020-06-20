@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		4.0.3
- * @version		4.1.6
+ * @version		4.1.7
  */
 
 namespace WeCodeArt;
@@ -118,7 +118,7 @@ class Gutenberg {
 		wp_add_inline_script( 'wp-codemirror', 'window.CodeMirror = wp.CodeMirror;' );
 		wp_enqueue_script(
 			$this->make_handle( 'codemirror-fs' ), 
-			get_template_directory_uri() . '/inc/gutenberg/assets/codemirror-fullscreen.js',
+			$this->get_asset( 'js', 'codemirror-fs' ),
 			[ 'wp-codemirror' ],
 			wecodeart( 'version' )
 		);

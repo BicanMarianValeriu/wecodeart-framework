@@ -9,7 +9,7 @@
  * @subpackage 	Core\Author
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.7.7
- * @version		4.1.4
+ * @version		4.1.7
  */
 
 namespace WeCodeArt\Core;
@@ -45,11 +45,10 @@ class Author {
 	 * Do author box on archive
 	 *
 	 * @since	3.7.7
-	 * @version	4.1.4
+	 * @version	4.1.7
 	 */
 	public function author_box_archive() {
 		$enabled = get_prop( $this->config, 'archive', false );
-		$enabled = apply_filters( 'wecodeart/filter/author/box/archive/enabled', $enabled ); // Deprecated.
 
 		if ( ! $enabled || ( ! is_author() || get_query_var( 'paged' ) >= 2 ) ) {
 			return;
@@ -62,11 +61,10 @@ class Author {
 	 * Do author box on single
 	 *
 	 * @since	3.7.7
-	 * @version	4.1.4
+	 * @version	4.1.7
 	 */
 	public function author_box_single() {
 		$enabled = get_prop( $this->config, 'single', false );
-		$enabled = apply_filters( 'wecodeart/filter/author/box/single/enabled', $enabled ); // Deprecated.
 
 		if ( ! $enabled || ( ! is_single() || ! post_type_supports( get_post_type(), 'author' ) ) ) {
 			return;
