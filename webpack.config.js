@@ -121,7 +121,6 @@ module.exports = {
             'css/frontend.js',
             'css/frontend.asset.php',
             'css/frontend.deps.json',
-
         ]),
         !devMode ? new DependencyExtractionWebpackPlugin({
             injectPolyfill: true
