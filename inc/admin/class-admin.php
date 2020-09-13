@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.1.53
+ * @version		4.1.8
  */
 
 namespace WeCodeArt;
@@ -36,7 +36,7 @@ class Admin {
 		Admin\Notifications::get_instance();
 
 		add_action( 'admin_notices', 			[ $this, 'register_notices' ] );
-		add_action( 'admin_enqueue_scripts', 	[ $this, 'enqueue_scripts' ] );
+		// add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 	}
 
 	/**
@@ -72,9 +72,7 @@ class Admin {
 	 * Admin CSS
 	 *
 	 * @since 	3.8.1
-	 * @version	4.1.6
+	 * @version	4.1.8
 	 */
-	public function enqueue_scripts() {
-		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'index' ), [], wecodeart( 'version' ) );
-	}
+	public function enqueue_scripts() {}
 }

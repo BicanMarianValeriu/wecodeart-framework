@@ -1,0 +1,45 @@
+{
+	"name": "wca/column",
+	"category": "wca",
+	"parent": [
+		"wca/section"
+	],
+	"attributes": {
+		"verticalAlignment": {
+			"type": "string"
+		},
+		"customWidth": {
+			"type": "number",
+			"min": 0,
+			"max": 100
+		},
+		"bootstrapColumns": {
+			"type": "object",
+			"default": {
+				"global": "col-12",
+				"sm": "col-sm",
+				"md": "",
+				"lg": "",
+				"xl": ""
+			}
+		},
+		"customBackgroundColor": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"align": [
+			"full"
+		],
+		"html": false,
+		"anchor": true,
+		"className": true,
+		"customClassName": true,
+		"reusable": false,
+		"lightBlockWrapper": true,
+		"__experimentalColor": {
+			"gradients": true,
+			"linkcolor": true
+		}
+	}
+}

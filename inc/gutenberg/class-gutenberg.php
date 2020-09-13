@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		4.0.3
- * @version		4.1.7
+ * @version		4.1.8
  */
 
 namespace WeCodeArt;
@@ -98,8 +98,8 @@ class Gutenberg {
 	 */
 	public function block_editor_assets() {
 		// Gutenberg editor assets.
-		wp_enqueue_style( 	$this->make_handle(),	$this->get_asset( 'css', 'index' ),	[], wecodeart( 'version' ) );
-		wp_enqueue_script( 	$this->make_handle(),	$this->get_asset( 'js', 'index' ), 	[
+		wp_enqueue_style( 	$this->make_handle(),	$this->get_asset( 'css', 'gutenberg' ),	[], wecodeart( 'version' ) );
+		wp_enqueue_script( 	$this->make_handle(),	$this->get_asset( 'js', 'gutenberg' ), 	[
 			'wp-blocks',
 			'wp-i18n',
 			'wp-element',

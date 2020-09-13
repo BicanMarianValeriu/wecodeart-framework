@@ -1,10 +1,4 @@
 /**
- * External Dependencies
- */
-import classnames from 'classnames';
-import variations from './variations';
-
-/**
  * WordPress dependencies.
  */
 const { __ } = wp.i18n;
@@ -12,13 +6,19 @@ const { addFilter } = wp.hooks;
 const { Fragment } = wp.element;
 const { ToggleControl, PanelBody } = wp.components;
 const { InspectorControls, InnerBlocks } = wp.blockEditor;
+const { createHigherOrderComponent } = wp.compose;
+
+/**
+ * External Dependencies
+ */
+import classnames from 'classnames';
+import variations from './variations';
 
 /**
  * Internal dependencies.
  */
-import { BackgroundVideo, BackgroundClasses, BackgroundStyles } from '../../controls/background';
+import { BackgroundVideo, getBackgroundClasses, getBackgroundStyles } from '../../controls/background';
 import { getVisibilityClasses } from '../../extensions/advanced/visibility/utils';
-import { restrictedBlocks } from '../../extensions/attributes';
 
 /**
  * Filters registered block settings, extending attributes with anchor using ID
@@ -30,7 +30,7 @@ import { restrictedBlocks } from '../../extensions/attributes';
  */
 function addColumnsVariations(settings) {
     const { name: blockName } = settings;
-    if (!restrictedBlocks.includes(blockName) && blockName === 'core/columns') {
+    if (blockName === 'core/columns') {
         settings.variations = variations;
     }
 
@@ -43,14 +43,14 @@ function addColumnsVariations(settings) {
  * @param {Function} BlockEdit Original component.
  * @return {string} Wrapped component.
  */
-function withColumnsControls(BlockEdit) {
+const withColumnsControls = createHigherOrderComponent((BlockEdit) => {
     return (props) => {
         const {
             name: blockName,
             isSelected,
         } = props;
 
-        if (!restrictedBlocks.includes(blockName) && blockName === 'core/columns' && isSelected) {
+        if (blockName === 'core/columns' && isSelected) {
 
             const { attributes, setAttributes } = props;
             const { container, gutters } = attributes;
@@ -71,7 +71,6 @@ function withColumnsControls(BlockEdit) {
                             initialOpen={false}
                             className="components-panel__body--wecodeart-panel"
                         >
-                            <br />
                             <ToggleControl
                                 label={__('Enable Container Wrapper?', 'wecodeart')}
                                 help={wraperText}
@@ -92,7 +91,7 @@ function withColumnsControls(BlockEdit) {
 
         return <BlockEdit {...props} />;
     };
-};
+}, 'withColumnsControls');
 
 /**
  * Override props assigned to save component to inject atttributes
@@ -107,10 +106,10 @@ function getSaveElement(element, blockType, attributes) {
     const { name: blockName } = blockType;
 
     if (blockName === 'core/columns') {
-        const { container, className, align, verticalAlignment, gutters } = attributes;
+        const { container, align, verticalAlignment, gutters } = attributes;
 
-        const sectionClassName = classnames('wca-section', className,
-            BackgroundClasses(attributes),
+        const sectionClassName = classnames('wca-section',
+            getBackgroundClasses(attributes),
             getVisibilityClasses(attributes)
         );
 
@@ -125,7 +124,7 @@ function getSaveElement(element, blockType, attributes) {
         });
 
         return (
-            <section className={sectionClassName} style={BackgroundStyles(attributes, {})}>
+            <section className={sectionClassName} style={getBackgroundStyles(attributes)}>
                 {BackgroundVideo(attributes)}
                 <div className={innerClassName}>
                     <div className={rowClassName}>

@@ -28,7 +28,7 @@ const restrictedBlocks = [
 const blocksWithFullScreen = ['core/image', 'core/cover', 'core/group', 'core/columns', 'core/media-text'];
 const blocksWithAnchor = ['core/spacer', 'core/separator'];
 const blocksWithFontSize = ['core/list'];
-const blocksWithBackgrounds = ['core/columns', 'core/column'];
+const blocksWithBackgrounds = ['core/columns', 'core/column', 'wca/section', 'wca/column'];
 const blocksWithContainer = ['core/columns'];
 const blocksWithColumns = ['core/column'];
 
@@ -94,7 +94,7 @@ function addAttributes(settings) {
 				settings.supports = {};
 			}
 			settings.supports = Object.assign(settings.supports, {
-				hasBackground: true,
+				withBackground: true,
 			});
 
 			settings.attributes = Object.assign(settings.attributes, BackgroundAttributes);

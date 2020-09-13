@@ -33,7 +33,7 @@ class BackgroundDropZone extends Component {
                 mediaType = 'video';
             }
 
-            this.props.setAttributes({ backgroundImg: media.url, backgroundType: mediaType });
+            this.props.setAttributes({ backgroundUrl: media.url, backgroundType: mediaType });
         }
     }
 

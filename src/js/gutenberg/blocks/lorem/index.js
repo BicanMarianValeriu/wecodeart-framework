@@ -34,9 +34,7 @@ const settings = {
                 type: 'prefix',
                 prefix: ':lorem',
                 transform() {
-                    return createBlock('core/paragraph', {
-                        content: loremIpsum(),
-                    });
+                    return createBlock('core/paragraph', { content: loremIpsum() });
                 },
             },
             ...[2, 3, 4, 5, 6, 7, 8, 9, 10].map((columns) => ({
@@ -48,9 +46,7 @@ const settings = {
                     const selectedBlock = select('core/block-editor').getSelectedBlockClientId();
 
                     for (let i = 1; i <= columns; i++) {
-                        const created = createBlock('core/paragraph', {
-                            content: loremIpsum(),
-                        });
+                        const created = createBlock('core/paragraph', { content: loremIpsum() });
 
                         dispatch('core/block-editor').insertBlocks(created, (parseInt(blockIndex.index) + i) - 1);
 
@@ -58,6 +54,7 @@ const settings = {
                             toSelect.push(created.clientId);
                         }
                     }
+
                     dispatch('core/block-editor').removeBlock(selectedBlock);
 
                     return dispatch('core/block-editor').multiSelect(toSelect[0], toSelect.reverse()[0]);
@@ -91,6 +88,7 @@ const settings = {
                             toSelect.push(created.clientId);
                         }
                     }
+                    
                     dispatch('core/block-editor').removeBlock(selectedBlock);
 
                     return dispatch('core/block-editor').multiSelect(toSelect[0], toSelect.reverse()[0]);

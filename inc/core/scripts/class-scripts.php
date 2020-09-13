@@ -9,7 +9,7 @@
  * @subpackage 	Core\Scripts
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		1.9
- * @version		4.1.6
+ * @version		4.1.8
  */
 
 namespace WeCodeArt\Core;
@@ -42,7 +42,7 @@ class Scripts {
 		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] );
 		add_filter( 'wp_get_custom_css', 	[ $this, 'trim_customizer_css' 	] );
 		add_filter( 'wp_resource_hints', 	[ $this, 'gf_resource_hints' 	], 10, 2 ); 
-		//add_filter( 'script_loader_tag', 	[ $this, 'maybe_enable_attrs' 	], 10, 3 );
+		// add_filter( 'script_loader_tag', 	[ $this, 'maybe_enable_attrs' 	], 10, 3 );
 	}
 
 	/**
@@ -228,20 +228,17 @@ trait Base {
 	 * Retrieve an asset if path structure is the same as class
 	 *
 	 * @since	3.9.5
-	 * @version	4.1.6
+	 * @version	4.1.8
 	 *
 	 * @param	string 	$type
 	 * @param	string 	$name
-	 * @param	string 	$location
 	 *
 	 * @return 	string
 	 */
-	protected function get_asset( string $type, string $name, $location = __CLASS__ ) {
-		$directories 	= array_reverse( explode( '-', strtolower( str_replace( '\\', '-', $location ) ) ) );
-		array_pop( $directories );
-		$directories	= implode( '/', array_reverse( $directories ) );
+	protected function get_asset( string $type, string $name = __CLASS__ ) {
+		$name = strtolower( str_replace( '\\', '-', $name ) );
 
-	 	return get_asset( $type, $name, $directories );
+	 	return get_asset( $type, $name );
 	}
 }
 
@@ -262,11 +259,10 @@ function asset( $file ) {
  *
  * @param  string $type 	Type of the asset file.
  * @param  string $name 	Name of the asset file.
- * @param  string $location Location subfolder of the asset file.
  *
  * @return string
  */
-function get_asset( string $type, string $name, $location = '' ) {
+function get_asset( string $type, string $name ) {
 	if( ! in_array( $type, [ 'css', 'js' ] ) ) {
 		return _doing_it_wrong( 
 			__FUNCTION__, 
@@ -276,9 +272,8 @@ function get_asset( string $type, string $name, $location = '' ) {
 	}
 
 	$file_path = wecodeart_if( 'is_dev_mode' ) ? 'unminified' : 'minified';
-	$file_path .= '/' . $type;
-	$file_path .= $location ? '/' . $location . '/' : '/';
-	$file_path .= $name . '.' . $type;
+	$file_path .= '/' . $type . '/';
+	$file_path .= wecodeart_if( 'is_dev_mode' ) ? $name . '.' . $type :  $name . '.min.' . $type;
 
     return asset( $file_path )->get_uri();
 }

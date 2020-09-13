@@ -1,0 +1,32 @@
+{
+	"name": "wca/section",
+	"category": "wca",
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "full"
+		},
+		"container": {
+			"type": "boolean",
+			"default": true
+		},
+		"gutter": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"align": [
+			"wide",
+			"full"
+		],
+		"anchor": true,
+		"className": true,
+		"customClassName": true,
+		"lightBlockWrapper": true,
+		"__experimentalColor": {
+			"gradients": true,
+			"linkcolor": true
+		}
+	}
+}

@@ -24,13 +24,13 @@ function BackgroundControls(props) {
     } = props;
 
     const {
-        backgroundImg,
+        backgroundUrl,
         openPopover,
     } = attributes;
 
     return (
         <MediaUploadCheck>
-            <Toolbar className={backgroundImg ? 'components-dropdown-menu' : ''}>
+            <Toolbar className={backgroundUrl ? 'components-dropdown-menu' : ''}>
                 {openPopover && (
                     <Popover
                         position="bottom center"
@@ -38,10 +38,10 @@ function BackgroundControls(props) {
                     >
                         <MediaUpload
                             onSelect={(media) => {
-                                setAttributes({ backgroundImg: media.url, backgroundType: media.type, openPopover: !openPopover });
+                                setAttributes({ backgroundUrl: media.url, backgroundType: media.type, openPopover: !openPopover });
                             }}
                             allowedTypes={ALLOWED_BG_MEDIA_TYPES}
-                            value={backgroundImg}
+                            value={backgroundUrl}
                             render={({ open }) => (
                                 <MenuItem
                                     className="components-dropdown-menu__menu-item"
@@ -58,7 +58,7 @@ function BackgroundControls(props) {
                             role="menuitem"
                             onClick={() => {
                                 setAttributes({
-                                    backgroundImg: '',
+                                    backgroundUrl: '',
                                     backgroundOverlay: 0,
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: '',
@@ -71,7 +71,7 @@ function BackgroundControls(props) {
                         </MenuItem>
                     </Popover>
                 )}
-                {backgroundImg ?
+                {backgroundUrl ?
                     <IconButton
                         className="components-dropdown-menu__toggle"
                         icon={icons.background}
@@ -84,10 +84,10 @@ function BackgroundControls(props) {
                     </IconButton> :
                     <MediaUpload
                         onSelect={(media) => {
-                            setAttributes({ backgroundImg: media.url, backgroundType: media.type });
+                            setAttributes({ backgroundUrl: media.url, backgroundType: media.type });
                         }}
                         allowedTypes={ALLOWED_BG_MEDIA_TYPES}
-                        value={backgroundImg}
+                        value={backgroundUrl}
                         render={({ open }) => (
                             <IconButton
                                 className="components-toolbar__control"

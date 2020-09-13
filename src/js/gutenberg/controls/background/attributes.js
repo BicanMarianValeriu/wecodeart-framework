@@ -5,9 +5,8 @@
 const BackgroundAttributes = {
 	backgroundType: {
 		type: 'string',
-		default: 'image',
 	},
-	backgroundImg: {
+	backgroundUrl: {
 		type: 'string',
 	},
 	backgroundPosition: {
@@ -24,12 +23,6 @@ const BackgroundAttributes = {
 	backgroundOverlay: {
 		type: 'number',
 		default: 0,
-	},
-	backgroundColor: {
-		type: 'string',
-	},
-	customBackgroundColor: {
-		type: 'string',
 	},
 	hasParallax: {
 		type: 'boolean',

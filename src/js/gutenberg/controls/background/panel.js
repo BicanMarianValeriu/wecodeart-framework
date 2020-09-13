@@ -12,7 +12,7 @@ import ResponsiveTabsControl from '../responsive-tabs';
  * WordPress dependencies
  */
 const { __, sprintf } = wp.i18n;
-const { Component, Fragment } = wp.element;
+const { Component, Fragment } = wp.element; 
 const {
 	SelectControl,
 	RangeControl,
@@ -20,30 +20,12 @@ const {
 	PanelBody,
 	Button,
 	FocalPointPicker,
-	ColorPalette,
-	ColorIndicator
 } = wp.components;
 
 class BackgroundPanel extends Component {
 	constructor() {
 		super(...arguments);
-		this.setBackgroundPaddingTo = this.setBackgroundPaddingTo.bind(this);
-		this.setBackgroundPaddingMobileTo = this.setBackgroundPaddingMobileTo.bind(this);
 		this.onSelectRepeat = this.onSelectRepeat.bind(this);
-	}
-
-	setBackgroundPaddingTo(value) {
-		this.props.setAttributes({ backgroundPadding: value });
-
-		if (this.props.attributes.backgroundPadding <= 0) {
-			this.props.setAttributes({
-				backgroundRadius: 0,
-			});
-		}
-	}
-
-	setBackgroundPaddingMobileTo(value) {
-		this.props.setAttributes({ backgroundPaddingMobile: value });
 	}
 
 	onSelectRepeat(value) {
@@ -63,24 +45,16 @@ class BackgroundPanel extends Component {
 
 	render() {
 		const {
-			select,
 			attributes,
-			backgroundColor,
-			setBackgroundColor,
-			hasGalleryControls,
 			hasOverlay,
 			setAttributes,
 		} = this.props;
 
 		const {
-			align,
-			backgroundImg,
+			backgroundUrl,
 			backgroundOverlay,
-			backgroundPadding,
-			backgroundPaddingMobile,
 			backgroundPosition,
-			backgroundRadius,
-			backgroundRepeat,
+			backgroundRepeat = 'no-repeat',
 			backgroundSize,
 			backgroundType = 'image',
 			focalPoint,
@@ -178,27 +152,14 @@ class BackgroundPanel extends Component {
 			},
 		];
 
-		const backgroundSizeDefault = 'cover';
-
-		const { colors } = select('core/block-editor').getSettings();
-
 		return (
 			<PanelBody
-				title={__('Background Settings', 'wecodeart')}
-				icon={<ColorIndicator colorValue={backgroundColor.color} />}
+				title={__('Background settings', 'wecodeart')}
 				initialOpen={false}
 				className="components-panel__body--wecodeart-background-panel wecodeart-background-panel"
 			>
-				<br />
-				<ColorPalette
-					colors={colors}
-					value={backgroundColor.color}
-					title={__('Background Color', 'wecodeart')}
-					onChange={setBackgroundColor}
-				/>
-				{backgroundImg && (
+				{backgroundUrl && (
 					<Fragment>
-						<hr />
 						{backgroundType === 'image' && (
 							<ToggleControl
 								label={__('Fixed Background', 'wecodeart')}
@@ -209,45 +170,20 @@ class BackgroundPanel extends Component {
 						{!hasParallax && FocalPointPicker && backgroundType === 'image' && backgroundRepeat !== 'repeat' && (
 							<FocalPointPicker
 								label={__('Focal Point', 'wecodeart')}
-								url={backgroundImg}
+								url={backgroundUrl}
 								value={focalPoint}
-								onChange={(value) => setAttributes({ focalPoint: value })}
+								onChange={(focalPoint) => setAttributes({ focalPoint })}
 								className="components-focal-point-picker--wecodeart"
 							/>
 						)}
-						{hasOverlay && (
-							<RangeControl
-								label={__('Background Opacity', 'wecodeart')}
-								value={backgroundOverlay}
-								onChange={(nextBackgroundOverlay) => setAttributes({ backgroundOverlay: nextBackgroundOverlay })}
-								min={0}
-								max={100}
-								step={10}
-							/>
-						)}
-						{hasGalleryControls && (
-							<Fragment>
-								<ResponsiveTabsControl {...this.props}
-									label={__('Padding', 'wecodeart')}
-									value={backgroundPadding}
-									valueMobile={backgroundPaddingMobile}
-									onChange={this.setBackgroundPaddingTo}
-									onChangeMobile={this.setBackgroundPaddingMobileTo}
-									min={5}
-									max={100}
-								/>
-								{((!isEmpty(backgroundImg) || !isEmpty(backgroundColor.color)) && backgroundPadding > 0) && align !== 'full' &&
-									<RangeControl
-										label={__('Rounded Corners', 'wecodeart')}
-										value={backgroundRadius}
-										onChange={(nextBackgroundRadius) => setAttributes({ backgroundRadius: nextBackgroundRadius })}
-										min={0}
-										max={20}
-										step={1}
-									/>
-								}
-							</Fragment>
-						)}
+						<RangeControl
+							label={__('Background Opacity', 'wecodeart')}
+							value={backgroundOverlay}
+							onChange={(backgroundOverlay) => setAttributes({ backgroundOverlay })}
+							min={0}
+							max={100}
+							step={10}
+						/>
 						{backgroundType === 'image' && (
 							<SelectControl
 								label={__('Repeat', 'wecodeart')}
@@ -257,20 +193,20 @@ class BackgroundPanel extends Component {
 								onChange={(nextbackgroundRepeat) => this.onSelectRepeat(nextbackgroundRepeat)}
 							/>
 						)}
-						{!FocalPointPicker && backgroundType === 'image' && (
+						{hasParallax && backgroundType === 'image' && (
 							<SelectControl
 								label={__('Position', 'wecodeart')}
 								value={backgroundPosition ? backgroundPosition : 'center center'}
 								options={backgroundPositionOptions}
-								onChange={(nextbackgroundPosition) => setAttributes({ backgroundPosition: nextbackgroundPosition })}
+								onChange={(backgroundPosition) => setAttributes({ backgroundPosition })}
 							/>
 						)}
 						{backgroundRepeat === 'no-repeat' && backgroundType === 'image' && (
 							<SelectControl
 								label={__('Display', 'wecodeart')}
-								value={backgroundSize ? backgroundSize : backgroundSizeDefault}
+								value={backgroundSize ? backgroundSize : 'zzzzzzz'}
 								options={backgroundSizeOptions}
-								onChange={(nextbackgroundSize) => setAttributes({ backgroundSize: nextbackgroundSize })}
+								onChange={(backgroundSize) => setAttributes({ backgroundSize })}
 							/>
 						)}
 						{backgroundType === 'video' && (
@@ -296,14 +232,12 @@ class BackgroundPanel extends Component {
 							label={__('Remove background', 'wecodeart')}
 							onClick={() => {
 								setAttributes({
-									backgroundImg: '',
+									backgroundUrl: '',
 									backgroundOverlay: 0,
 									backgroundRepeat: 'no-repeat',
 									backgroundPosition: '',
 									backgroundSize: 'cover',
 									hasParallax: false,
-									backgroundPadding: 0,
-									backgroundPaddingMobile: 0,
 								});
 							}}
 						>

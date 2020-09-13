@@ -2,12 +2,9 @@
  * WordPress dependencies.
  */
 const { hasBlockSupport } = wp.blocks;
-const { BlockControls, InspectorControls, withColors } = wp.blockEditor;
+const { BlockControls, InspectorControls } = wp.blockEditor;
 const { createHigherOrderComponent } = wp.compose;
-const { compose } = wp.compose;
-const { select, withSelect } = wp.data;
 const { Fragment } = wp.element;
-const { withFallbackStyles } = wp.components;
 const { addFilter } = wp.hooks;
 
 /**
@@ -19,40 +16,14 @@ import classnames from 'classnames';
  * Internal dependencies.
  */
 import {
+	getBackgroundStyles,
+	getBackgroundClasses,
 	BackgroundControls,
-	BackgroundClasses,
-	BackgroundStyles,
-	//BackgroundDropZone,
-	//BackgroundVideo,
 	BackgroundPanel,
+	// BackgroundDropZone,
+	// BackgroundVideo,
 } from '../../../controls/background';
 import { restrictedBlocks } from '../../attributes';
-
-/**
- * Override the default block element to add Font Panels.
- *
- * @param  {Function} BlockListBlock Original component
- * @return {Function} Wrapped component
- */
-const enhance = compose([
-	withSelect((select) => {
-		return {
-			selected: select('core/block-editor').getSelectedBlock(),
-			select,
-		};
-	}),
-	withColors('backgroundColor'),
-	withFallbackStyles((node, ownProps) => {
-		const { backgroundColor, customBackgroundColor } = ownProps.attributes;
-
-		const editableNode = node.querySelector('[contenteditable="true"]');
-		const computedStyles = editableNode ? getComputedStyle(editableNode) : null;
-
-		return {
-			fallbackBackgroundColor: backgroundColor || customBackgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor,
-		};
-	})
-]);
 
 /**
  * BG Controls
@@ -61,13 +32,15 @@ const enhance = compose([
  * @return {string} Wrapped component.
  */
 const withBackgroundControls = createHigherOrderComponent((BlockEdit) => {
-	return enhance((props) => {
+	return (props) => {
 		const {
 			name: blockName,
 			isSelected,
 		} = props;
 
-		if (!restrictedBlocks.includes(blockName) && hasBlockSupport(blockName, 'hasBackground') && isSelected) {
+		if (!restrictedBlocks.includes(blockName) && hasBlockSupport(blockName, 'withBackground') && isSelected) {
+			const { attributes } = props;
+			const { backgroundUrl } = attributes;
 			return (
 				<Fragment>
 					<BlockEdit {...props} />
@@ -75,47 +48,42 @@ const withBackgroundControls = createHigherOrderComponent((BlockEdit) => {
 						{BackgroundControls(props)}
 					</BlockControls>
 					<InspectorControls>
-						<BackgroundPanel {...props} hasOverlay={true} />
+						{backgroundUrl && <BackgroundPanel {...props} />}
 					</InspectorControls>
 				</Fragment>
 			);
 		}
 
 		return <BlockEdit {...props} />;
-	});
+	};
 }, 'withBackgroundControls');
 
+
 /**
- * Add custom WeCodeArt attributes to selected blocks
+ * Background Styles
  *
- * @param {Function} BlockListBlock Original component.
+ * @param {Function} BlockEdit Original component.
  * @return {string} Wrapped component.
  */
-const withBackgroundSettings = createHigherOrderComponent((BlockListBlock) => {
+const withBackgroundStyles = createHigherOrderComponent((BlockListBlock) => {
 	return (props) => {
-		let { name: blockName, wrapperProps } = props;
-		let customData = {};
+		const {
+			name: blockName,
+			className,
+		} = props;
 
-		if (!restrictedBlocks.includes(blockName) && hasBlockSupport(blockName, 'hasBackground')) {
-
+		if (!restrictedBlocks.includes(blockName) && hasBlockSupport(blockName, 'withBackground')) {
 			const { attributes } = props;
-			const { colors } = select('core/block-editor').getSettings();
-
-			const { backgroundImg } = attributes;
-			if (backgroundImg !== '') {
-				customData = { ...customData, ...{ 'data-wca-background': 1 } };
-			}
-
-			wrapperProps = {
-				...wrapperProps,
-				style: BackgroundStyles(attributes, colors),
-				...customData,
-			};
+			return <BlockListBlock {...{
+				...props,
+				className: classnames(className, getBackgroundClasses(attributes)),
+				style: getBackgroundStyles(attributes)
+			}} />;
 		}
 
-		return <BlockListBlock {...props} wrapperProps={wrapperProps} />;
+		return <BlockListBlock {...props} />;
 	};
-}, 'withBackgroundSettings');
+}, 'withBackgroundStyles');
 
 /**
  * Override props assigned to save component to inject atttributes
@@ -129,9 +97,9 @@ const withBackgroundSettings = createHigherOrderComponent((BlockListBlock) => {
 function applyExtraSettings(extraProps, blockType, attributes) {
 	const { name: blockName } = blockType;
 
-	if (!restrictedBlocks.includes(blockName) && hasBlockSupport(blockName, 'hasBackground')) {
-		extraProps.style = BackgroundStyles(attributes, {});
-		extraProps.className = classnames(extraProps.className, BackgroundClasses(attributes));
+	if (!restrictedBlocks.includes(blockName) && hasBlockSupport(blockName, 'withBackground')) {
+		extraProps.className = classnames(extraProps.className, getBackgroundClasses(attributes));
+		extraProps.style = getBackgroundStyles(attributes);
 	}
 
 	return extraProps;
@@ -141,9 +109,9 @@ function applyExtraSettings(extraProps, blockType, attributes) {
  * Apply Filters
  */
 function applyFilters() {
-	addFilter('editor.BlockEdit', 'wecodeart/editor/with-background/withBackgroundControls', withBackgroundControls);
-	addFilter('editor.BlockListBlock', 'wecodeart/editor/with-background/withBackgroundSettings', withBackgroundSettings);
-	addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/with-background/applyExtraSettings', applyExtraSettings);
+	addFilter('editor.BlockListBlock', 'wecodeart/editor/withBackgroundStyles', withBackgroundStyles);
+	addFilter('editor.BlockEdit', 'wecodeart/editor/withBackgroundControls', withBackgroundControls);
+	addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/withBackground/applyExtraSettings', applyExtraSettings);
 }
 
 applyFilters();

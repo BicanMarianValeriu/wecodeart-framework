@@ -15,20 +15,17 @@ const { addFilter } = wp.hooks;
  */
 function applyExtraSettings(extraProps, blockType, attributes) {
     const { name: blockName } = blockType;
-    
+
     if (blockName === 'core/media-text') {
         const { mediaWidth, backgroundColor, customBackgroundColor } = attributes;
         const backgroundClass = getColorClassName('background-color', backgroundColor);
-        
+
         let styles = {
             backgroundColor: backgroundClass ? undefined : customBackgroundColor,
         };
 
         if (mediaWidth !== 50) {
-            styles = {
-                ...styles,
-                [`--media-width`]: `${mediaWidth}%;`
-            };
+            styles = { ...styles, [`--media-width`]: `${mediaWidth}%;` };
         }
 
         extraProps.style = styles;

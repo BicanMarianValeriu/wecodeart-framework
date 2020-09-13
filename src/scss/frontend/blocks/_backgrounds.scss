@@ -53,9 +53,9 @@
         position: relative;
     
         &::before {
+            content: "";
             background-color: inherit;
             bottom: 0;
-            content: "";
             left: 0;
             opacity: 0.5;
             position: absolute;

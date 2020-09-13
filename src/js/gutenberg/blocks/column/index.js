@@ -3,6 +3,7 @@
  */
 const { __ } = wp.i18n;
 const { InspectorControls } = wp.blockEditor;
+const { createHigherOrderComponent } = wp.compose;
 const { PanelBody } = wp.components;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
@@ -15,7 +16,6 @@ import classnames from 'classnames';
 /**
  * Internal dependencies.
  */
-import { restrictedBlocks } from '../../extensions/attributes';
 import ResponsiveColumns from '../../controls/bootstrap-columns';
 
 /**
@@ -24,14 +24,14 @@ import ResponsiveColumns from '../../controls/bootstrap-columns';
  * @param {Function} BlockEdit Original component.
  * @return {string} Wrapped component.
  */
-function withColumnControls(BlockEdit) {
+const withColumnControls = createHigherOrderComponent((BlockEdit) => {
     return (props) => {
         const {
             name: blockName,
             isSelected,
         } = props;
 
-        if (!restrictedBlocks.includes(blockName) && blockName === 'core/column' && isSelected) {
+        if (blockName === 'core/column' && isSelected) {
             return (
                 <Fragment>
                     <BlockEdit {...props} />
@@ -53,7 +53,41 @@ function withColumnControls(BlockEdit) {
 
         return <BlockEdit {...props} />;
     };
-};
+}, 'withColumnControls');
+
+/**
+ * Column Controls
+ *
+ * @param {Function} BlockEdit Original component.
+ * @return {string} Wrapped component.
+ */
+const withColumnClasses = createHigherOrderComponent((BlockListBlock) => {
+    return (props) => {
+        const {
+            name: blockName,
+            className,
+        } = props;
+
+        if (blockName === 'core/column') {
+            const { attributes } = props;
+            const { bootstrapColumns: { global, xs, sm, md, lg, xl } } = attributes;
+            let columnClasses = ['col'];
+            if (global || xs || sm || md || lg || xl) {
+                columnClasses = [...columnClasses, ...[
+                    { [global]: global !== 'col' },
+                    { [sm]: sm },
+                    { [md]: md },
+                    { [lg]: lg },
+                    { [xl]: xl },
+                ]];
+            }
+
+            return <BlockListBlock {...props} className={classnames(className, columnClasses)} style={{}} />;
+        }
+
+        return <BlockListBlock {...props} />;
+    };
+}, 'withColumnClasses');
 
 /**
  * Override props assigned to save component to inject atttributes
@@ -90,8 +124,9 @@ function applyExtraSettings(extraProps, blockType, attributes) {
  * Apply Filters
  */
 function applyFilters() {
-    addFilter('editor.BlockEdit', 'wecodeart/editor/columns/withColumnControls', withColumnControls);
-    addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/columns/applyExtraSettings', applyExtraSettings);
+    addFilter('editor.BlockEdit', 'wecodeart/editor/column/withColumnControls', withColumnControls);
+    addFilter('editor.BlockListBlock', 'wecodeart/editor/column/withColumnClasses', withColumnClasses);
+    addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/column/applyExtraSettings', applyExtraSettings);
 }
 
 applyFilters();

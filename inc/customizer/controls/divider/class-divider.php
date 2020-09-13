@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Controls\Divider
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.8.5
- * @version		4.1.6
+ * @version		4.1.8
  */
 
 namespace WeCodeArt\Customizer\Controls;
@@ -58,13 +58,13 @@ class Divider extends WP_Customize_Control {
 	 * @access public
 	 *
 	 * @since 	unknown
-	 * @version	4.1.6
+	 * @version	4.1.8
 	 */
 	public function enqueue() {
 		if( wp_style_is( $this->make_handle( null, __NAMESPACE__ ), 'enqueued' ) ) return;
 		wp_enqueue_style(
 			$this->make_handle( null, __NAMESPACE__ ),
-			get_asset( 'css', 'index', 'customizer' ),
+			$this->get_asset( 'css', 'customizer' ),
 			[],
 			wecodeart( 'version' )
 		);

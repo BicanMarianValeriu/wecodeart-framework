@@ -9,7 +9,7 @@
  * @subpackage 	Notifications
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.1.6
+ * @version		4.1.8
  */
 
 namespace WeCodeArt\Admin;
@@ -145,7 +145,7 @@ class Notifications {
 	public function enqueue_scripts() {
 		wp_register_script( 
 			$this->make_handle(),
-			$this->get_asset( 'js', 'index' ),
+			$this->get_asset( 'js', 'admin-notification' ),
 			[ 'jquery' ],
 			wecodeart( 'version' ),
 			true

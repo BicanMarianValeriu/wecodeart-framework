@@ -11,6 +11,9 @@ import createParams from './helpers/createParams';
 import parseJSONData from './helpers/parseData';
 import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar } from './helpers/HasScrollbar';
 
+// Styles
+import './../scss/frontend/frontend.scss';
+
 const { addAction } = wp.hooks;
 
 addAction('wecodeart.route', 'wecodeart/developer/log', filterLog, 10);
