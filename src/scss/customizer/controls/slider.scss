@@ -11,10 +11,12 @@
 			box-shadow: none;
 			outline: none;
 		}
+		
 		&:hover,
 		&:focus {
 			background-color: rgba(0, 0, 0, 0.25);
 		}
+
 		&::-webkit-slider-thumb {
 			-webkit-appearance: none;
 			width: 15px;
@@ -22,6 +24,7 @@
 			border-radius: 50%; 
 			background-color: #3498D9;
 		}
+
 		&::-webkit-slider-thumb {
 			-webkit-appearance: none;
 			width: 15px;
@@ -30,6 +33,7 @@
 			border-radius: 50%;
 			background-color: #3498D9;
 		}
+
 		&::-moz-range-thumb {
 			width: 15px;
 			height: 15px;
@@ -37,6 +41,7 @@
 			border-radius: 50%;
 			background-color: #3498D9;
 		}
+
 		&::-ms-thumb {
 			width: 15px;
 			height: 15px;
@@ -44,19 +49,23 @@
 			border: 0;
 			background-color: #3498D9;
 		}
+
 		&::-moz-range-track {
 			border: inherit;
 			background: transparent;
 		}
+
 		&::-ms-track {
 			border: inherit;
 			color: transparent;
 			background: transparent;
 		}
+
 		&::-ms-fill-lower,
 		&::-ms-fill-upper {
 			background: transparent;
 		}
+
 		&::-ms-tooltip {
 			display: none;
 		}

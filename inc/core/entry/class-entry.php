@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.3
+ * @version		4.2
  */
 
 namespace WeCodeArt\Core;
@@ -134,7 +134,11 @@ class Entry {
 		}
 		
 		if ( $link && ! is_singular() ) {
-			$title = sprintf( '<a href="%s" rel="bookmark">%s</a>', esc_url( get_permalink() ), esc_html( $title ) );
+			$title = sprintf(
+				'<a href="%s" class="text-dark" rel="bookmark">%s</a>', 
+				esc_url( get_permalink() ), 
+				esc_html( $title )
+			);
 		}
 		
 		if( $echo ) {
@@ -150,7 +154,7 @@ class Entry {
 	 *
 	 * @since 	1.0
 	 * @uses	WeCodeArt\Markup::wrap()
-	 * @version 3.9.9
+	 * @version 4.2
 	 *
 	 * @return 	void
 	 */
@@ -158,7 +162,7 @@ class Entry {
 		Markup::wrap( 'entry-title', [ [
 			'tag' 	=> is_singular() ? 'h1' : 'h2',
 			'attrs' => [
-				'class' => 'entry-title'
+				'class' => 'entry-title text-break text-wrap pt-3 mb-3'
 			]
 		] ], [ $this, 'the_title' ], [ $link, $echo ], $echo );
 	}  
@@ -168,7 +172,7 @@ class Entry {
 	 *
 	 * @since	1.0
 	 * @uses	WeCodeArt\Markup::wrap()
-	 * @version	3.6.4
+	 * @version 4.2.0
 	 *
 	 * @return	void
 	 */
@@ -176,7 +180,7 @@ class Entry {
 		Markup::wrap( 'entry-content', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => is_singular() ? 'entry-content' : 'entry-excerpt'
+				'class' => is_singular() ? 'entry-content' : 'entry-excerpt text-muted'
 			]
 		] ], is_singular() ? 'the_content' : 'the_excerpt' );
 	}
@@ -208,20 +212,20 @@ class Entry {
 	 * Return the content for No Posts
 	 *
 	 * @since	2.2
-	 * @version	3.9.6
+	 * @version	4.2
 	 *
 	 * @return	string
 	 */
-	public function render_no_posts() { ?>
-		<p><?php 
-
-			echo esc_html( apply_filters( 
-				'wecodeart/filter/entry/noposts_message', 
-				__( 'There are no posts matching your criteria.', 'wecodeart' ) 
-			) );
-
-		?></p>
-		<?php
+	public function render_no_posts() {
+		Markup::wrap( 'entry-noposts', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'class' => 'noposts-message w-100'
+			]
+		] ], esc_html( apply_filters( 
+			'wecodeart/filter/entry/noposts_message', 
+			__( 'There are no posts matching your criteria.', 'wecodeart' ) 
+		) ) );
 	}
 
 	/**

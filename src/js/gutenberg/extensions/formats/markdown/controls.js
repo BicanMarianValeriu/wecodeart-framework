@@ -17,7 +17,6 @@ const { map } = lodash;
  */
 import { getActiveFormats } from './get-active-formats';
 
-
 class MarkdownControl extends Component {
 	constructor() {
 		super(...arguments);
@@ -107,9 +106,7 @@ class MarkdownControl extends Component {
 			},
 		};
 
-		map(markdowns, (markdown) => {
-			this._experimentalMarkdown(value, onChange, markdown.markdown, markdown.format);
-		});
+		map(markdowns, (item) => this._experimentalMarkdown(value, onChange, item.markdown, item.format));
 
 		return null;
 	}
@@ -126,9 +123,7 @@ export default compose(
 		instanceId,
 		identifier = instanceId,
 	}) => {
-		const {
-			selectionChange,
-		} = dispatch('core/block-editor');
+		const { selectionChange } = dispatch('core/block-editor');
 
 		return {
 			onSelectionChange(start, end) {

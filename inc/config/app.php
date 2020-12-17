@@ -111,8 +111,8 @@ return [
     'gutenberg' => [
         'editor-sizes' => [
             'default' => [
-                'default'   => '780px',
-                'wide'      => '1100px',
+                'default'   => '991px',
+                'wide'      => '1200px',
                 'full'      => 'initial',
             ]
         ],
@@ -216,9 +216,9 @@ return [
                 'slug'     => 'luminous-vivid-orange-to-vivid-red',
             ],
         ],
-        'support-default-styles'        => true,
-        'support-align-wide'            => true,
-        'support-palette-classnames'    => true,
+        'wp-block-styles'       => false,
+        'align-wide'            => true,
+        'palette-classnames'    => true,
     ],
     /*
     |--------------------------------------------------------------------------

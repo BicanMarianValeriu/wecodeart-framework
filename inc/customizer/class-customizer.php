@@ -16,6 +16,7 @@ namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Admin;
 use WeCodeArt\Utilities\Helpers;
 use WeCodeArt\Customizer\Partials;
 use WeCodeArt\Customizer\Controls;
@@ -62,10 +63,10 @@ class Customizer {
 
 		// Theme panels and configs.
 		new Configs();
-		//new Configs\Overrides();
 		new Configs\Header();
 		new Configs\Content();
 		new Configs\Footer();
+		new Configs\Typography();
 	}
 
 	/**
@@ -76,12 +77,12 @@ class Customizer {
 	 */
 	public function enqueue_preview() {
 
-		wp_enqueue_script( 
+		wp_enqueue_script(
 			$this->make_handle( 'preview' ),
 			$this->get_asset( 'js', 'customizer' ),
 			[ 'jquery', 'customize-preview' ], 
-			wecodeart( 'version' ), 
-			true 
+			wecodeart( 'version' ),
+			true
 		);
 		
 	}
@@ -171,38 +172,59 @@ class Customizer {
 	/**
 	 * Adds a value to each setting if one isn't already present.
 	 *
-	 * @uses get_defaults()
+	 * @version	4.2.0
+	 * @uses 	get_defaults()
 	 */
 	public function set_defaults() {
-		foreach( self::get_defaults() as $mod => $val ) {
-			add_filter( 'theme_mod_' . $mod, [ $this, 'get_theme_mod_value' ], 10 );
-		}
+		$options 	= array_filter( self::get_defaults(), function( $key ) {
+			preg_match_all( "/\[([^\]]*)\]/", $key, $matches );
+			return( $matches && $matches[1] );
+		}, ARRAY_FILTER_USE_KEY );
+
+		// Set Mods
+		$theme_mods = array_diff_key( self::get_defaults(), $options );
+		foreach( $theme_mods as $mod => $val ) add_filter( 'theme_mod_' . $mod, [ $this, 'get_theme_mod_value' ], 10 );
+
+		// Set Options
+		add_filter( 'option_wecodeart-settings', function( $settings ) use( $options ) {
+			foreach( $options as $key => $val ) {
+				preg_match_all( "/\[([^\]]*)\]/", $key, $matches );
+				$options[$matches[1][0]] = $val;
+				unset( $options[$key] );
+			}
+
+			return wp_parse_args( $options, $settings );
+		} );
 	}
 
 	/**
 	 * Apply Customizer setting defaults.
 	 *
 	 * @param  object $wp_customize the Customizer object.
+	 * @version	4.2.0
+	 *
 	 * @uses   get_defaults()
 	 */
 	public function apply_defaults( $wp_customize ) {
-		foreach( self::get_defaults() as $mod => $val ) $wp_customize->get_setting( $mod )->default = $val; 
+		foreach( self::get_defaults() as $mod => $val ) $wp_customize->get_setting( $mod )->default = $val;
 	}
 	
 	/**
 	 * Get theme mod value.
 	 *
 	 * @param 	string $value
+	 * @version	4.2.0
+	 *
 	 * @return 	string
 	 */
 	public function get_theme_mod_value( $value ) {
 		// Remove theme_mod_ prefix to find setting name
 		$key = substr( current_filter(), 10 );
 
-		$set_theme_mods = get_theme_mods();
+		$theme_options = get_theme_mods();
 
 		// If a value is set, return it early;
-		if ( isset( $set_theme_mods[ $key ] ) ) return $value;
+		if ( isset( $theme_options[ $key ] ) ) return $value;
 
 		// If not return the default
 		$values = $this->get_defaults();
@@ -218,7 +240,13 @@ class Customizer {
 	 * @uses 	self::get_defaults()
 	 */
 	public function get_theme_mods() {
-		return wp_parse_args( get_theme_mods(), self::get_defaults() );
+		$options 	= array_filter( self::get_defaults(), function( $key ) {
+			preg_match_all( "/\[([^\]]*)\]/", $key, $matches );
+			return( $matches && $matches[1] );
+		}, ARRAY_FILTER_USE_KEY );
+
+		$theme_mods = array_diff_key( self::get_defaults(), $options );
+		return wp_parse_args( get_theme_mods(), $theme_mods );
 	}
 
 	/**
@@ -292,24 +320,30 @@ class Customizer {
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
 	 *
 	 * @since 	3.5
-	 * @version	4.0.1
+	 * @version	4.2.0
 	 *
 	 * @return 	void
 	 */
 	private function register_control( $config, $wp_customize ) {
-		$wp_customize->add_setting(
-			get_prop( $config, 'name' ),
-			[
-				// Default of the 'default' is null if not exists since we apply it with wp filter after theme setup
-				'default'			=> get_prop( $config, 'default' ),
-				'type'              => get_prop( $config, 'datastore_type' ),
-				'transport'         => get_prop( $config, 'transport', 'refresh' ),
-				'sanitize_callback' => get_prop( $config, 'sanitize_callback', 
-					// Set Sanitize Callback Automatically
-					Customizer\Controls::get_sanitize_call( get_prop( $config, 'control' ) ) 
-				),
-			]
-		);
+		$name = get_prop( $config, 'name' );
+
+		if( get_prop( $config, 'datastore_type' ) === 'option' ) {
+			$name = sprintf( 'wecodeart-settings[%s]', implode( '-', [ 
+				get_prop( $config, 'section' ), 
+				get_prop( $config, 'name' ) 
+			] ) );
+		}
+
+		$wp_customize->add_setting( $name, [
+			// Default of the 'default' is null if not exists since we apply it with wp filter after theme setup
+			'default'			=> get_prop( $config, 'default' ),
+			'type'              => get_prop( $config, 'datastore_type' ),
+			'transport'         => get_prop( $config, 'transport', 'refresh' ),
+			'sanitize_callback' => get_prop( $config, 'sanitize_callback', 
+				// Set Sanitize Callback Automatically
+				Customizer\Controls::get_sanitize_call( get_prop( $config, 'control' ) ) 
+			),
+		] );
 
 		$instance = Customizer\Controls::get_control_instance( get_prop( $config, 'control' ) );
 
@@ -320,11 +354,9 @@ class Customizer {
 		 * Register a new custom control instance or wp default
 		 */
 		if ( false !== $instance ) {
-			$wp_customize->add_control(
-				new $instance( $wp_customize, get_prop( $config, 'name' ), $config )
-			);
+			$wp_customize->add_control( new $instance( $wp_customize, $name, $config ) );
 		} else {
-			$wp_customize->add_control( get_prop( $config, 'name' ), $config );
+			$wp_customize->add_control( $name, $config );
 		}
 
 		/**
@@ -332,7 +364,7 @@ class Customizer {
 		 */
 		if ( get_prop( $config, 'partial', false ) ) {
 			if ( isset( $wp_customize->selective_refresh ) ) {
-				$wp_customize->selective_refresh->add_partial( get_prop( $config, 'name' ), [
+				$wp_customize->selective_refresh->add_partial( $name, [
 					'selector'            => get_prop( $config['partial'], 'selector' ),
 					'container_inclusive' => get_prop( $config['partial'], 'container_inclusive' ),
 					'render_callback'     => get_prop( $config['partial'], 'render_callback' ),

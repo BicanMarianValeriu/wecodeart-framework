@@ -1,11 +1,20 @@
 /**
+ * Other Deps
+ */
+const { get } = lodash;
+
+/**
  * WordPress dependencies
  */
 const { useCallback, useMemo } = wp.element;
 const { useSelect } = wp.data;
 const { withSpokenMessages } = wp.components;
-const { getRectangleFromRange } = wp.dom;
-const { applyFormat, removeFormat, getActiveFormat } = wp.richText;
+const {
+	applyFormat,
+	removeFormat,
+	getActiveFormat,
+	// useAnchorRef,
+} = wp.richText;
 const {
 	ColorPalette,
 	URLPopover,
@@ -15,9 +24,9 @@ const {
 } = wp.blockEditor;
 
 /**
- * Other Deps
+ * Internal Deps
  */
-const { get } = lodash;
+// import { backgroundColor as settings } from './../index';
 
 export function getActiveColor(formatName, formatValue, colors) {
 	const activeColorFormat = getActiveFormat(formatValue, formatName);
@@ -34,39 +43,6 @@ export function getActiveColor(formatName, formatValue, colors) {
 		return getColorObjectByAttributeValues(colors, colorSlug).color;
 	}
 }
-
-const ColorPopoverAtLink = ({ addingColor, ...props }) => {
-	const anchorRect = useMemo(() => {
-		const selection = window.getSelection();
-		const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-
-		if (!range) {
-			return;
-		}
-
-		if (addingColor) {
-			return getRectangleFromRange(range);
-		}
-
-		let element = range.startContainer;
-		element = element.nextElementSibling || element;
-
-		while (element.nodeType !== window.Node.ELEMENT_NODE) {
-			element = element.parentNode;
-		}
-
-		const closest = element.closest('span');
-		if (closest) {
-			return closest.getBoundingClientRect();
-		}
-	}, []);
-
-	if (!anchorRect) {
-		return null;
-	}
-
-	return <URLPopover anchorRect={anchorRect} {...props} />;
-};
 
 const ColorPicker = ({ name, value, onChange }) => {
 	const colors = useSelect((select) => {
@@ -99,19 +75,19 @@ const InlineColorUI = ({
 	value,
 	onChange,
 	onClose,
-	isActive,
-	addingColor,
+	contentRef,
 }) => {
+	// const anchorRef = useAnchorRef({ ref: contentRef, value, settings });
+
 	return (
-		<ColorPopoverAtLink
+		<URLPopover
 			value={value}
-			isActive={isActive}
-			addingColor={addingColor}
 			onClose={onClose}
 			className="components-inline-color-popover"
+			anchorRef={contentRef}
 		>
 			<ColorPicker name={name} value={value} onChange={onChange} />
-		</ColorPopoverAtLink>
+		</URLPopover>
 	);
 };
 

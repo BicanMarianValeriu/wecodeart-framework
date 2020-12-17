@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Header Woo Cart
  * @since	 	3.9.5
- * @version    	4.0.7
+ * @version    	4.2.0
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -22,7 +22,7 @@ use WeCodeArt\Markup;
  */
 ?>
 <button id="mini-cart" type="button" class="dropdown-toggle"
-    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
     title="<?php esc_attr_e( 'View your shopping cart', 'wecodeart' ); ?>">
     <span class="screen-reader-text"><?php esc_html_e( 'Show Cart', 'wecodeart' ); ?></span>
     <?php

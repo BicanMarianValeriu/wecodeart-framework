@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies.
  */
-const { getColorClassName } = wp.blockEditor;
 const { addFilter } = wp.hooks;
 
 /**
@@ -17,12 +16,9 @@ function applyExtraSettings(extraProps, blockType, attributes) {
     const { name: blockName } = blockType;
 
     if (blockName === 'core/media-text') {
-        const { mediaWidth, backgroundColor, customBackgroundColor } = attributes;
-        const backgroundClass = getColorClassName('background-color', backgroundColor);
+        const { mediaWidth } = attributes;
 
-        let styles = {
-            backgroundColor: backgroundClass ? undefined : customBackgroundColor,
-        };
+        let styles = {};
 
         if (mediaWidth !== 50) {
             styles = { ...styles, [`--media-width`]: `${mediaWidth}%;` };

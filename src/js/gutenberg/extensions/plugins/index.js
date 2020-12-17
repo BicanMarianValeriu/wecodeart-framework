@@ -1,7 +1,6 @@
 /**
  * Internal dependencies
  */
-import exporter from './export';
 import markdown from './markdown';
 import codeEditor from './code-editor';
 import disableTitle from './disable-title';
@@ -13,7 +12,6 @@ const { registerPlugin } = wp.plugins;
 
 export default function registerWCAPlugins() {
 	[
-		exporter,
 		markdown,
 		codeEditor,
 		disableTitle,

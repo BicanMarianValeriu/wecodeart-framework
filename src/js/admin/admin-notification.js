@@ -47,23 +47,23 @@ import './../../scss/admin/notification/notification.scss';
 		_dismiss: function (e) {
 			e.preventDefault();
 
-			const repeat_after = $(this).parents('.wca-notice').data('repeat') || '';
-			const notice_id = $(this).parents('.wca-notice').attr('id') || '';
+			const repeatAfter = $(this).parents('.wca-notice').data('repeat') || '';
+			const noticeId = $(this).parents('.wca-notice').attr('id') || '';
 
-			Notification._ajax(notice_id, repeat_after);
+			Notification._ajax(noticeId, repeatAfter);
 		},
 
 		_dismissNew: function (e) {
 			e.preventDefault();
 
-			const repeat_after = $(this).data('repeat') || '';
-			const notice_id = $(this).parents('.wca-notice').attr('id') || '';
+			const repeatAfter = $(this).data('repeat') || '';
+			const noticeId = $(this).parents('.wca-notice').attr('id') || '';
 
 			const $el = $(this).parents('.wca-notice');
 
 			$el.fadeTo(100, 0, () => $el.slideUp(100, () => $el.remove()));
 
-			Notification._ajax(notice_id, repeat_after);
+			Notification._ajax(noticeId, repeatAfter);
 
 			const link = $(this).attr('href') || '';
 			const target = $(this).attr('target') || '';
@@ -73,9 +73,9 @@ import './../../scss/admin/notification/notification.scss';
 			}
 		},
 
-		_ajax: (notice_id, repeat_after) => {
+		_ajax: (noticeId, repeatAfter) => {
 
-			if ('' === notice_id) {
+			if ('' === noticeId) {
 				return;
 			}
 
@@ -84,8 +84,8 @@ import './../../scss/admin/notification/notification.scss';
 				type: 'POST',
 				data: {
 					action: 'wecodeart_notification_dismiss',
-					notice_id: notice_id,
-					repeat_after: parseInt(repeat_after),
+					notice_id: noticeId,
+					repeat_after: parseInt(repeatAfter),
 				},
 			});
 

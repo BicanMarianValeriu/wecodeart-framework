@@ -18,6 +18,7 @@ export default (function (wecodeart) {
 			const { routes } = namespace;
 			const { doAction, applyFilters } = wp.hooks;
 			this.routes = routes;
+			this.loaded = [];
 			this.doAction = doAction;
 			this.applyFilters = applyFilters;
 			this.extendedR = _pickBy(routes, v => v.extends && v.extends instanceof Array);
@@ -38,6 +39,7 @@ export default (function (wecodeart) {
 				args = this.applyFilters('wecodeart.route', args, route, funcname);
 				this.routes[route][funcname](args);
 				this.doAction('wecodeart.route', route, funcname, args);
+				this.loaded.push(route);
 				return;
 			}
 		}
@@ -47,6 +49,7 @@ export default (function (wecodeart) {
 		 * @info 	It handles all necessary JS init from routes
 		 */
 		sequence(route) {
+			if (this.loaded.includes(route)) return;
 			this.fireRoute(route);
 			this.fireRoute(route, 'complete');
 		}
@@ -65,6 +68,7 @@ export default (function (wecodeart) {
 				_filter(this.extendedR, (v, k) => v.extends.includes(cls) && this.sequence(k));
 			}
 			this.fireRoute('common', 'complete');
+			this.loaded.push('common');
 		}
 	}
 

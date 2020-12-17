@@ -31,14 +31,3 @@
         width: 100%;
     }
 }
-
-.search-form {
-    .btn {
-        background-color: $gray-100;
-
-        &:hover,
-        &:active {
-            background-color: darken( $gray-100, 5% );
-        }
-    }
-}

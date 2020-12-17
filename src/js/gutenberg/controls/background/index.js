@@ -1,23 +1,19 @@
 /**
  * Internal dependencies
  */
-import BackgroundAttributes from './attributes';
-import BackgroundControls from './controls';
-import BackgroundDropZone from './dropzone';
-import BackgroundPanel from './panel';
-import BackgroundTransforms from './transforms';
-import BackgroundVideo from './video';
+import attributes from './attributes';
+import Controls from './controls';
+import DropZone from './dropzone';
+import Inspector from './inspector';
 import { getBackgroundClasses, getBackgroundStyles } from './utils';
 
 export {
 	getBackgroundClasses,
 	getBackgroundStyles,
-	BackgroundAttributes,
-	BackgroundControls,
-	BackgroundDropZone,
-	BackgroundTransforms,
-	BackgroundVideo,
-	BackgroundPanel,
+	Inspector,
+	attributes,
+	Controls,
+	DropZone,
 };
 
 export const ALLOWED_BG_MEDIA_TYPES = ['image', 'video'];

@@ -2,7 +2,7 @@
  * Set the attributes for the Background Panel
  * @type {Object}
  */
-const BackgroundAttributes = {
+const attributes = {
 	backgroundType: {
 		type: 'string',
 	},
@@ -11,7 +11,7 @@ const BackgroundAttributes = {
 	},
 	backgroundPosition: {
 		type: 'string',
-		default: 'center center',
+		default: '',
 	},
 	backgroundRepeat: {
 		type: 'string',
@@ -31,18 +31,6 @@ const BackgroundAttributes = {
 	focalPoint: {
 		type: 'object',
 	},
-	videoMuted: {
-		type: 'boolean',
-		default: true,
-	},
-	videoLoop: {
-		type: 'boolean',
-		default: true,
-	},
-	openPopover: {
-		type: 'boolean',
-		default: false,
-	},
 };
 
-export default BackgroundAttributes;
+export default attributes;

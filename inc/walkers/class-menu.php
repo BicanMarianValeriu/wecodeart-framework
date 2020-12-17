@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Walkers\Menu
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
- * @since 		2.0
- * @version		4.1.5
+ * @since 		2.0.x
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Walkers;
@@ -99,7 +99,7 @@ class Menu extends Walker_Nav_Menu {
 		 * NOTE: linkmod and icon class arrays are passed by reference and
 		 * are maybe modified before being used later in this function.
 		 */
-		$classes = self::separate_linkmods_and_icons_from_classes( $classes, $linkmod_classes, $icon_classes, $depth );
+		$classes = self::pluck_special_classes( $classes, $linkmod_classes, $icon_classes, $depth );
 
 		// Join any icon classes plucked from $classes into a string.
 		$icon_class_string = join( ' ', $icon_classes );
@@ -156,12 +156,12 @@ class Menu extends Walker_Nav_Menu {
 		$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 		// If item has_children add atts to <a>.
 		if ( isset( $args->has_children ) && $args->has_children && 0 === $depth && $args->depth > 1 ) {
-			$atts['href']          = '#';
-			$atts['data-toggle']   = 'dropdown';
-			$atts['aria-haspopup'] = 'true';
-			$atts['aria-expanded'] = 'false';
-			$atts['class']         = 'dropdown-toggle nav-link';
-			$atts['id']            = 'menu-item-dropdown-' . $item->ID;
+			$atts['href']          	= '#';
+			$atts['data-bs-toggle']	= 'dropdown';
+			$atts['aria-haspopup'] 	= 'true';
+			$atts['aria-expanded'] 	= 'false';
+			$atts['class']         	= 'dropdown-toggle nav-link';
+			$atts['id']            	= 'menu-item-dropdown-' . $item->ID;
 		} else {
 			$atts['href'] = ! empty( $item->url ) ? $item->url : '#';
 			// Items in dropdowns use .dropdown-item instead of .nav-link.
@@ -343,7 +343,7 @@ class Menu extends Walker_Nav_Menu {
 
 			// If $args has 'echo' key and it's true echo, otherwise return.
 			if ( array_key_exists( 'echo', $args ) && $args['echo'] ) {
-				echo $fallback_output; // WPCS: XSS OK.
+				echo $fallback_output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			} else {
 				return $fallback_output;
 			}
@@ -368,26 +368,20 @@ class Menu extends Walker_Nav_Menu {
 	 *
 	 * @return array  $classes         a maybe modified array of classnames.
 	 */
-	private function separate_linkmods_and_icons_from_classes( $classes, &$linkmod_classes, &$icon_classes, $depth ) {
-		// Loop through $classes array to find linkmod or icon classes.
+	private function pluck_special_classes( $classes, &$linkmod_classes, &$icon_classes, $depth ) {
 		foreach ( $classes as $key => $class ) {
 			// If any special classes are found, store the class in it's
 			// holder array and and unset the item from $classes.
 			if ( preg_match( '/^disabled|^sr-only|^screen-reader-text/i', $class ) ) {
-				// Test for .disabled or .sr-only classes.
 				$linkmod_classes[] = $class;
 				unset( $classes[ $key ] );
 			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) && $depth > 0 ) {
-				// Test for .dropdown-header or .dropdown-divider and a
-				// depth greater than 0 - IE inside a dropdown.
 				$linkmod_classes[] = $class;
 				unset( $classes[ $key ] );
 			} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {
-				// Font Awesome.
 				$icon_classes[] = $class;
 				unset( $classes[ $key ] );
 			} elseif ( preg_match( '/^glyphicon-(\S*)?|^glyphicon(\s?)$/i', $class ) ) {
-				// Glyphicons.
 				$icon_classes[] = $class;
 				unset( $classes[ $key ] );
 			}
@@ -404,7 +398,7 @@ class Menu extends Walker_Nav_Menu {
 	 * @param 	array 	$linkmod_classes array of any link modifier classes. 
 	 * @return 	string	empty for default, a linkmod type string otherwise.
 	 */
-	private function get_linkmod_type( $linkmod_classes = array() ) {
+	private function get_linkmod_type( $linkmod_classes = [] ) {
 		$linkmod_type = '';
 		// Loop through array of linkmod classes to handle their $atts.
 		if ( ! empty( $linkmod_classes ) ) {
@@ -489,9 +483,9 @@ class Menu extends Walker_Nav_Menu {
 	/**
 	 * Return the correct closing tag for the linkmod element.
 	 *
-	 * @since 4.0.0 
-	 * @param string $linkmod_type a string containing a special linkmod type. 
-	 * @return string              a string with the closing tag for this linkmod type.
+	 * @since 	4.0.0 
+	 * @param 	string 	$linkmod_type a string containing a special linkmod type. 
+	 * @return 	string	a string with the closing tag for this linkmod type.
 	 */
 	private function linkmod_element_close( $linkmod_type ) {
 		$output = '';

@@ -41,7 +41,7 @@ class Footer {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	1.0
-	 * @version	3.7.0
+	 * @version	4.2.0
 	 *
 	 * @return 	HTML 
 	 */
@@ -51,8 +51,8 @@ class Footer {
 			'attrs' => [
 				'id' 		=> 'footer', 
 				'class'		=> 'footer', 
-				'itemscope' => 'itemscope',
-				'itemtype' 	=> 'http://schema.org/WPFooter'
+				'itemscope' => true,
+				'itemtype' 	=> 'https://schema.org/WPFooter'
 			]
 		] ], function() {
 			/** 
@@ -114,6 +114,7 @@ class Footer {
 	 * Footer Widgetized Area
 	 *
 	 * @since 	3.7.7
+	 * @version	4.2.0
 	 *
 	 * @return 	void 
 	 */
@@ -126,7 +127,7 @@ class Footer {
 		Markup::wrap( 'footer-column-' . (string) $index , [ [
 			'tag' 	=> 'div',
 			'attrs' => [ 
-				'class'	=> 'footer__column col-12 col-lg mb-4',
+				'class'	=> 'footer__column col-12 col-lg mb-5',
 			]
 		] ], 'dynamic_sidebar', [ 'footer-' . (string) $index ] );
 	} 
@@ -135,16 +136,13 @@ class Footer {
 	 * This function generates the columns fot the footer
 	 *
 	 * @since	1.5
-	 * @version	4.1.5
+	 * @version	4.1.8
 	 *
 	 * @return 	array
 	 */
 	public static function footer_widgets() {
-		$columns = wecodeart_config( 'footer-columns', 4 );
-		$columns = apply_filters( 'wecodeart/filter/footer/columns', $columns ); // Deprecated
-
 		$widgets = [];
-		foreach( range( 1, $columns ) as $column ) {
+		foreach( range( 1, wecodeart_config( 'footer-columns', 4 ) ) as $column ) {
 			$widgets['footer-' . (string) $column ] = [
 				'id'		=> 'footer-' . $column,
 				'label'    	=> sprintf( esc_html__( 'Footer %s', 'wecodeart' ), $column ),
@@ -164,7 +162,7 @@ class Footer {
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @uses	WeCodeArt\Markup::sortable()
 	 * @since	3.5
-	 * @version 3.7.7
+	 * @version 4.2
 	 *
 	 * @return 	void
 	 */
@@ -172,7 +170,7 @@ class Footer {
 		Markup::wrap( 'footer-widgets', [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'footer__widgets' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'footer-layout-container' ) ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row pt-4' ] ]
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row pt-5' ] ]
 		], [ Markup::get_instance(), 'sortable' ], [ 
 			self::footer_widgets(), 
 			get_theme_mod( 'footer-layout-modules' ) 

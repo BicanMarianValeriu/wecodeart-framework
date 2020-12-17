@@ -6,6 +6,7 @@ const { Fragment } = wp.element;
 const { toggleFormat } = wp.richText;
 const { RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
 const { select } = wp.data;
+import SVGIcon from './icon';
 
 /**
  * Block constants
@@ -35,7 +36,7 @@ export const underline = {
 				/>
 				{checkFormats.length === 0 && (
 					<RichTextToolbarButton
-						icon="editor-underline"
+						icon={SVGIcon}
 						title={__('Underline', 'wecodeart')}
 						onClick={onToggle}
 						isActive={isActive}

@@ -1,31 +1,33 @@
-.customize-control-wecodeart-sortable ul.ui-sortable {
-    cursor: default;
-
-    li {
-        padding: 5px 10px;
-        border: 1px solid #333;
-        background: #fff;
-        cursor: move;
-        
-        &.invisible {
-            color: #aaa;
-            border: 1px dashed #aaa;
-
-            .dashicons.visibility {
+.customize-control-wecodeart-sortable {
+    ul.ui-sortable {
+        cursor: default;
+    
+        li {
+            padding: 5px 10px;
+            border: 1px solid #333;
+            background: #fff;
+            cursor: move;
+            
+            &.invisible {
                 color: #aaa;
+                border: 1px dashed #aaa;
+    
+                .dashicons.visibility {
+                    color: #aaa;
+                }
+            }
+    
+            .dashicons.dashicons-menu {
+                float: right;
+            }
+    
+            .dashicons.visibility {
+                margin-right: 10px;
             }
         }
-
-        .dashicons.dashicons-menu {
-            float: right;
+    
+        .dashicons-visibility {
+            cursor: pointer;
         }
-
-        .dashicons.visibility {
-            margin-right: 10px;
-        }
-    }
-
-    .dashicons-visibility {
-        cursor: pointer;
     }
 }

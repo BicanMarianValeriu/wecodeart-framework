@@ -46,7 +46,7 @@
             margin-top: 10px;
             order: 100;
             padding-top: 10px;
-            border-top: 1px solid $gray-100;
+            border-top: 1px solid var(--bs-light);
         }
 
         &:not(.show):not(.collapsing) {

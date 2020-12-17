@@ -6,7 +6,7 @@
  * @subpackage 	Customizer\Formatting
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		1.6
- * @version 	3.8.1
+ * @version 	4.2.0
  */ 
 
 namespace WeCodeArt\Customizer;
@@ -19,6 +19,65 @@ defined( 'ABSPATH' ) || exit();
 final class Formatting {
 
 	use \WeCodeArt\Singleton;
+
+	/**
+	 * Sanitize font control.
+	 *
+	 * @param  	string 	$input    setting input.
+	 *
+	 * @return 	array 	choices/default.
+	 */
+	public static function sanitize_font( $input ) {
+		foreach( $input as $key => $value ) {
+			// Remove unsafe data
+			if( ! in_array( $key, [ 'fontFamily', 'fontWeights' ] ) ) {
+				unset( $input[ $key ] );
+			}
+			// Sanitize "safe" keys
+			switch ( $key ) {
+				case 'fontFamily':
+					$input['fontFamily'] = self::sanitize_text_field( $value );
+					break;
+				case 'fontWeights':
+					$input['fontWeights'] = array_filter( $input['fontWeights'], function( $i ) {
+						return in_array( $i, [
+							'100',
+							'100italic',
+							'200',
+							'200italic',
+							'300',
+							'300italic',
+							'400',
+							'400italic',
+							'500',
+							'500italic',
+							'600',
+							'600italic',
+							'700',
+							'700italic',
+							'800',
+							'800italic',
+							'900',
+							'900italic',
+						] );
+					} );
+					break;
+			}
+		};
+
+		return( is_array( $input ) ? $input : $setting->default );
+	}
+
+	/**
+	 * Sanitize text field.
+	 *
+	 * @param  	string 	$input    setting input.
+	 *
+	 * @return 	string 	safe text.
+	 */
+	public static function sanitize_text_field( $input ) {
+		return sanitize_text_field( $input );
+	}
 
 	/**
 	 * Sanitize a value for use as a linear CSS value.
@@ -36,6 +95,8 @@ final class Formatting {
 	
 	/**
 	 * Sanitize checkbox inputs.
+	 *
+	 * @param  	string 	$input    setting input.
 	 *
 	 * @return 	1/0 (enabled/disabled).
 	 */

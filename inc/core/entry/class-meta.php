@@ -38,7 +38,7 @@ class Meta {
 	 * Entry Meta Author Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.6
+	 * @version	4.2
 	 *
 	 * @param 	int		$author_id
 	 * @param 	bool	$echo
@@ -59,9 +59,13 @@ class Meta {
 		$author_name = $author ?: esc_html__( 'Author Name', 'wecodeart' );
 		
 		Markup::template( 'entry/meta/author', [
-			'author_id'		=> $author_id,
-			'author_url'	=> $author_url,
-			'author_name'	=> $author_name,
+			'author' => (object) [
+				'id' 	=> $author_id,
+				'url' 	=> $author_url,
+				'name' 	=> $author_name,
+			],
+			'author_url' 	=> $author_url,
+			'author_name' 	=> $author_name
 		], $echo );
 	}
 
@@ -285,7 +289,7 @@ class Meta {
 	 * @uses	Markup::wrap()
 	 *
 	 * @since	3.6
-	 * @version	4.0.1
+	 * @version	4.2
 	 *
 	 * @return 	void
 	 */
@@ -298,7 +302,7 @@ class Meta {
 		Markup::wrap( 'entry-meta', [ [ 
 			'tag' 	=> 'div', 
 			'attrs' => [ 
-				'class' => 'entry-meta' 
+				'class' => 'entry-meta mb-4' 
 			]
 		] ], [ 'WeCodeArt\Markup', 'sortable' ], [ self::modules(), self::get_options() ] ); 
 	}

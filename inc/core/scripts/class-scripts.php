@@ -17,8 +17,8 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
-use function WeCodeArt\Functions\trim_css;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\compress_css;
 use function WeCodeArt\Core\Scripts\get_asset;
 
 /**
@@ -49,7 +49,7 @@ class Scripts {
 	 * WeCodeArt JS Inline
 	 *
 	 * @since	4.1.5
-	 * @version	4.1.5
+	 * @version	4.1.8
 	 *
 	 * @return 	void
 	 */
@@ -107,19 +107,53 @@ class Scripts {
 	 * Enqueue Front-End Styles
 	 *
 	 * @since	1.0
-	 * @version	4.1.56
+	 * @version	4.2
 	 */
 	public function front_scripts() {
 		// Enqueue Styles
 		wp_enqueue_style( $this->make_handle(), get_asset( 'css', 'frontend' ), [], wecodeart( 'version' ) );
 
-		// Enqueue scripts
+		// Enqueue Scripts
 		wp_enqueue_script( $this->make_handle(), get_asset( 'js', 'frontend' ), [
-			'jquery', 'wp-hooks'
+	 		'wp-hooks'
 		], wecodeart( 'version' ), true );
 		
 		if ( ( is_page() || is_single() ) && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
+		}
+
+		// Enqueue Fonts
+		$fonts = [];
+		
+		$fonts_control = get_theme_mod( 'typography-fonts-primary', false );
+		if( $fonts_control ) {
+			$fonts['primary'] = count( $fonts_control['fontWeights'] ) > 0 ? implode( ':', [
+				$fonts_control['fontFamily'], 
+				join( ',', $fonts_control['fontWeights'] )
+			] ) : $fonts_control['fontFamily'];
+		}
+
+		$fonts = apply_filters( 'wecodeart/filter/scripts/fonts', $fonts );
+
+		if( count( $fonts ) > 0 ) {
+
+			$fonts_url = add_query_arg( [
+				'family' => implode( '|', $fonts ),
+				'subset' => rawurlencode( 'latin,latin-ext' ),
+			], 'https://fonts.googleapis.com/css' );
+
+			wp_enqueue_style( $this->make_handle( 'fonts' ), esc_url( $fonts_url ), [], wecodeart( 'version' ) );
+			
+			$fonts_css = "
+				:root {
+					--bs-font-sans-serif: '{$fonts_control['fontFamily']}', sans-serif;
+				}
+				body {
+					font-family: '{$fonts_control['fontFamily']}', sans-serif;
+				}
+			";
+				
+			wp_add_inline_style( $this->make_handle( 'fonts' ), compress_css( $fonts_css ) );
 		}
 	}
 
@@ -127,13 +161,16 @@ class Scripts {
 	 * Filter Customizer Custom CSS
 	 *
 	 * @since	3.9.5
-	 * @version	4.0.1
+	 * @version	4.2.0
 	 *
 	 * @param 	string $css CSS from Customizer.
 	 * @return 	string
 	 */
 	public function trim_customizer_css( $css ) {
-		return trim_css( $css );
+		if ( strpos( $_SERVER[ 'REQUEST_URI' ], '/wp-json/' ) === false ) {
+			$css = compress_css( $css );
+		}
+		return $css;
 	}
 
 	/**
@@ -272,7 +309,7 @@ function get_asset( string $type, string $name ) {
 	}
 
 	$file_path = wecodeart_if( 'is_dev_mode' ) ? 'unminified' : 'minified';
-	$file_path .= '/' . $type . '/';
+	$file_path .= '/' . strtolower( $type ) . '/';
 	$file_path .= wecodeart_if( 'is_dev_mode' ) ? $name . '.' . $type :  $name . '.min.' . $type;
 
     return asset( $file_path )->get_uri();

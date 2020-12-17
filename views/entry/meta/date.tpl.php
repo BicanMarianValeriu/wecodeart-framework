@@ -9,13 +9,12 @@
  * @subpackage 	Entry\Meta\Date
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.9.5
- * @version		4.0.1
+ * @version		4.2
  */
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup\SVG;
-use function WeCodeArt\Functions\kses_svg;
 
 /**
  * @param   array  $published   Date published
@@ -30,9 +29,9 @@ $class_published    = 'entry-date__time entry-date__time--published';
 $class_published    = isset( $modified ) ? $class_published . ' d-none' : $class_published;
 ?>
 <span class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
-    <span class="d-inline-block mr-1"><?php
+    <span class="d-inline-block me-1"><?php
 
-        echo kses_svg( SVG::compile( 'clock' ) );
+        SVG::render( 'clock' );
 
     ?></span>
     <span class="screen-reader-text"><?php
@@ -40,7 +39,7 @@ $class_published    = isset( $modified ) ? $class_published . ' d-none' : $class
         esc_html_e( 'Posted on ', 'wecodeart' );
     
     ?></span>
-    <a href="<?php echo esc_url( get_permalink() ); ?>" class="entry-date__link mr-2">
+    <a href="<?php echo esc_url( get_permalink() ); ?>" class="entry-date__link me-2">
         <time class="<?php echo esc_attr( $class_published ); ?>" datetime="<?php echo esc_attr( $published['robot'] ); ?>"><?php
 
             echo esc_html( $published['human'] );

@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
- * @version		4.1.5
+ * @version		4.2
  */
 
 namespace WeCodeArt;
@@ -52,6 +52,7 @@ class Activation {
 	
 	/**
 	 * Send to Constructor
+	 *
 	 * @since 3.6.2
 	 */
 	public function init() {
@@ -64,13 +65,16 @@ class Activation {
 			Notifications::get_instance();
 
 			// Add default error notices into admin, prevent customizer load and redirect notice.
-			add_action( 'after_switch_theme', 	array( $this, 'after_switch_theme' 	) );
-			add_action( 'load-customize.php', 	array( $this, 'customizer_notice' 	) );
-			add_action( 'template_redirect', 	array( $this, 'redirect_notice' 	) );
+			add_action( 'after_switch_theme', 	[ $this, 'after_switch_theme' ] );
+			add_action( 'load-customize.php', 	[ $this, 'customizer_notice' ] );
+			add_action( 'template_redirect', 	[ $this, 'redirect_notice' ] );
 
 			// Add Our Theme Hook.
 			do_action( 'wecodeart/hook/activation/failed' );
+			return;
 		}
+	
+		add_action( 'after_switch_theme', [ $this, 'redirect_to_admin' ] );
 	}
 
 	/**
@@ -199,5 +203,15 @@ class Activation {
 		if( isset( $_GET['preview'] ) ) {
 			wp_die( $this->messages['customizer'] );
 		}
+	}
+	
+	/**
+	 * Redirect to Admin
+	 *
+	 * @since 	4.2
+	 * @version	4.2
+	 */
+	public function redirect_to_admin() {
+		wp_redirect( esc_url_raw( add_query_arg( 'page', 'wecodeart', admin_url( 'themes.php' ) ) ) );
 	}
 }

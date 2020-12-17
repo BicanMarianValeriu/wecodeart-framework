@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		4.1.5
+ * @version		4.2
  */
 
 namespace WeCodeArt\Support;
@@ -19,14 +19,15 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Core\Content;
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
-use WeCodeArt\Support\WPSeo\Conditional\Plugin as Plugin_Condition;
+use WeCodeArt\Support\Interfaces\Integration;
+use WeCodeArt\Support\WPSeo\Conditional\Active;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\detect_plugin;
 
 /**
  * WPSEO Integration
  */
-class WPSeo {
+class WPSeo implements Integration {
 
 	use \WeCodeArt\Singleton; 
 
@@ -51,7 +52,7 @@ class WPSeo {
 	 */
 	public static function get_conditionals() {
 		wecodeart( 'conditionals' )->set( [
-			'is_yoast_active' => Plugin_Condition::class,
+			'is_yoast_active' => Active::class,
 		] );
 		
 		return [ 'is_yoast_active' ];
@@ -81,7 +82,7 @@ class WPSeo {
 	 * Yoast BreadCrumbs
 	 *
 	 * @since   3.5
-	 * @version 4.0.1
+	 * @version 4.2
 	 *
 	 * @return  void
 	 */
@@ -95,7 +96,7 @@ class WPSeo {
 		Markup::wrap( 'breadcrumbs', [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs', 'id' => 'breadcrumb' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs__list' ] ]
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs__list py-2' ] ]
 		], 'yoast_breadcrumb' );
 	}
 

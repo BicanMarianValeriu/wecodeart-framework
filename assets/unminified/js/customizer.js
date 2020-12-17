@@ -103,12 +103,67 @@ __webpack_require__.r(__webpack_exports__);
  * @author_url  https://www.wecodeart.com/about
  * @package 	WeCodeArt Framework
  * @since 		1.0
- * @version 	4.1.6
+ * @version 	4.2.0
  */
 
 
+function addCss(id) {
+  var content = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var style = document.querySelector('#' + id + '-css');
+
+  if (!style) {
+    style = document.createElement('style');
+    style.setAttribute('id', id + '-css');
+    style.setAttribute('type', 'text/css');
+    document.querySelector('head').appendChild(style);
+  }
+
+  style.innerHTML = content;
+}
+
 (function (wp, $) {
-  var api = wp.customize;
+  var api = wp.customize; // Google Fonts Preview
+
+  api.bind('preview-ready', function () {
+    api.preview.bind('font-selection', function (_ref) {
+      var controlId = _ref.controlId,
+          source = _ref.source,
+          value = _ref.value,
+          inherit = _ref.inherit;
+      var defaultFontface = inherit ? 'inherit' : 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
+      var selector = 'body';
+      selector = selector.split(',');
+      selector = selector.map(function (sel) {
+        return 'html ' + sel;
+      }).join(',');
+      var fontFamily = value.fontFamily;
+
+      if (fontFamily === false) {
+        addCss(controlId, "".concat(selector, " {font-family:").concat(defaultFontface, ";}"));
+      } else {
+        addCss(controlId, ":root {--bs-font-sans-serif:".concat(fontFamily, ";} ").concat(selector, " {font-family:").concat(fontFamily, ";}"));
+      }
+
+      if (source.toLowerCase() === 'google') {
+        var linkNode = document.querySelector('#' + controlId),
+            fontValue = fontFamily.replace(' ', '+');
+        var url = "//fonts.googleapis.com/css?family=".concat(fontValue, "%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800&display=swap\"");
+
+        if (linkNode !== null) {
+          linkNode.setAttribute('href', url);
+          return false;
+        }
+
+        var newNode = document.createElement('link');
+        newNode.setAttribute('rel', 'stylesheet');
+        newNode.setAttribute('id', controlId);
+        newNode.setAttribute('href', url);
+        newNode.setAttribute('type', 'text/css');
+        newNode.setAttribute('media', 'all');
+        document.querySelector('head').appendChild(newNode);
+      }
+    });
+  });
   api('blogname', function (value) {
     return value.bind(function (to) {
       return $('.site-title a').text(to);

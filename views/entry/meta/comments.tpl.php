@@ -9,13 +9,12 @@
  * @subpackage 	Entry\Meta\Comments
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.9.5
- * @version		4.0.1
+ * @version		4.2
  */
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup\SVG;
-use function WeCodeArt\Functions\kses_svg;
 
 /**
  * @param   array   $i18n   Contains the translatable strings
@@ -36,9 +35,9 @@ if( post_password_required() ) {
 }
 ?>
 <span class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
-    <span class="d-inline-block mr-1"><?php
+    <span class="d-inline-block me-1"><?php
     
-        echo kses_svg( SVG::compile( 'comments' ) );
+        SVG::render( 'comments' );
     
     ?></span><?php
     
@@ -46,7 +45,7 @@ if( post_password_required() ) {
             $i18n['zero'], 
             $i18n['one'], 
             $i18n['more'], 
-            'entry-comments__link', 
+            'entry-comments__link me-2', 
             $i18n['closed'] 
         );
 

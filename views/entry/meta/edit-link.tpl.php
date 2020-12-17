@@ -18,13 +18,14 @@ defined( 'ABSPATH' ) || exit();
  * @param   int     $post_id   Post ID
  * @param   array   $i18n   Array of translated strings
  */
-?>
-<span class="entry-edit float-right" title="<?php
-    echo esc_attr( sprintf( 
+
+edit_post_link(
+    esc_html__( 'Edit', 'wecodeart' ),
+    '<span class="entry-edit" data-toggle="tooltip" title="' . esc_attr( sprintf( 
         __( 'Click to edit "%s"!', 'wecodeart' ), 
         get_the_title( $post_id ) 
-    ) ); ?>"><?php
-
-    edit_post_link( esc_html__( 'Edit', 'wecodeart' ), '', '', $post_id ?: 0, 'entry-edit__link' );
-    
-?></span>
+    ) ) . '">',
+    '</span>', 
+    $post_id ?: 0, 
+    'entry-edit__link'
+);

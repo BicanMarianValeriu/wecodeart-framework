@@ -1,32 +1,27 @@
-input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
-textarea {
-    @extend .form-control;
-    width: 100%;
-}
-
-select {
-    @include custom-select();
-}
-
-label {
-    width: 100%;
-}
-
 .archive-intro,
 .content-area,
 .breadcrumbs,
 .entry-navigation,
 .footer,
 .footer__attribution {
-    border-top: 1px solid $gray-100;
+    border-top: 1px solid var(--bs-light);
 }
 
-.has-sidebar {
-    .content-area > * > * > * + * {
-        border-left: 1px solid $gray-100; 
+.content-area {
+    main,
+    aside {
+        padding-top: 1.5rem;
+    }
+}
 
-        @include media-breakpoint-down(md) {
-            border-left: 0;
+.page--has-sidebar {
+    .content__main  {
+        & + .content__sidebar {
+            border-left: 1px solid var(--bs-light); 
+    
+            @include media-breakpoint-down(md) {
+                border-left: 0;
+            }
         }
     }
 }
@@ -52,12 +47,6 @@ label {
         }
     } 
 } 
-
-.content__sidebar {
-    aside {
-        padding-top: 1.5rem;
-    }
-}
 
 hr {
     background: linear-gradient(to right, transparent, #dbdbdb, transparent);

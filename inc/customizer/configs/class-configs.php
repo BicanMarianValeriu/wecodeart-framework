@@ -96,6 +96,15 @@ class Configs extends Config {
 				'panel'    => 'footer',
 			),
 			/**
+			 * Typography
+			 */
+			array(
+				'name'     => 'typography',
+				'type'     => 'panel',
+				'priority' => 20,
+				'title'    => esc_html__( 'Typography', 'wecodeart' ) 
+			),
+			/**
 			 * Extensions
 			 */
 			array(

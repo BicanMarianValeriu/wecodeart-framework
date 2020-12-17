@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Markup;
 use function WeCodeArt\Core\Scripts\get_asset;
+\WeCodeArt\Core\Scripts::get_instance();
 
 /**
  * Notifications
@@ -47,7 +48,37 @@ class Notifications {
 		add_action( 'wp_ajax_wecodeart_notification_dismiss', [ $this, 'dismiss' ] );
 		add_filter( 'wp_kses_allowed_html', 	[ $this, 'add_data_attributes' ], 10, 2 );
 		add_action( 'admin_enqueue_scripts', 	[ $this, 'enqueue_scripts' ] );
-		add_action( 'admin_notices', 			[ $this, 'render' ], 30 );
+		add_action( 'admin_notices',			[ $this, 'register_notices' ] );
+		add_action( 'admin_notices', 			[ $this, 'render' ], 90 );
+	}
+
+	/**
+	 * Register Notices
+	 *
+	 * @since 	3.8.1
+	 * @version	4.1.53
+	 */
+	public static function register_notices() {
+		if ( false === get_transient( 'wca-notification-theme-options' ) ) {
+			self::add( [
+				'id'		=> 'wca-notification-theme-options',
+				'type'		=> '',
+				'message'	=> Markup::template( [ 'admin/notification', 'options' ], [], false ),
+				'repeat'	=> WEEK_IN_SECONDS,
+				'priority'	=> 5,
+			] );
+		}
+
+		if ( false === get_transient( 'wca-notification-theme-rate' ) ) {
+			self::add( [
+				'id'		=> 'wca-notification-theme-rate',
+				'type'		=> '',
+				'class'		=> 'wca-notice--theme-rating',
+				'message'	=> Markup::template( [ 'admin/notification', 'rating' ], [], false ),
+				'repeat'	=> WEEK_IN_SECONDS,
+				'priority'	=> 10,
+			] );
+		}
 	}
 
 	/**
@@ -172,7 +203,7 @@ class Notifications {
 		return $array1['priority'] - $array2['priority'];
 	}
 
-		/**
+	/**
 	 * Notice classes.
 	 *
 	 * @since 3.8.1

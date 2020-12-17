@@ -114,7 +114,7 @@ class Gutenberg {
 		], wecodeart( 'version' ) );
 
 		// CodeMirror assets.
-		wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
+		wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
 		wp_add_inline_script( 'wp-codemirror', 'window.CodeMirror = wp.CodeMirror;' );
 		wp_enqueue_script(
 			$this->make_handle( 'codemirror-fs' ), 
@@ -129,7 +129,7 @@ class Gutenberg {
 				'version' => wecodeart( 'version' )
 			],
 			'supports'	=> [
-				'colorPalette' => get_prop( $this->config, 'support-palette-classnames', false ),
+				'colorPalette' => get_prop( $this->config, 'palette-classnames', false ),
 			],
 		];
 		wp_add_inline_script( $this->make_handle(), 'window.wecodeartInfo = ' . wp_json_encode( $global ) . ';', 'before' );
@@ -146,13 +146,13 @@ class Gutenberg {
 		if ( is_array( $options ) && ! empty( $options ) ) {
 			add_filter( 'admin_body_class', [ $this, 'body_class_support' ] );
 			global $pagenow;
-			if ( ! empty( $pagenow ) && in_array( $pagenow, array( 'post-new.php', 'post.php', 'edit.php' ) ) ) {
+			if ( ! empty( $pagenow ) && in_array( $pagenow, [ 'post-new.php', 'post.php', 'edit.php' ] ) ) {
 				add_action( 'admin_head', [ $this, 'template_width_css' ], 100 );
 			}
 		}
 
 		// Add support for Block Styles.
-		if( get_prop( $this->config, 'support-default-styles', false ) ) {
+		if( get_prop( $this->config, 'wp-block-styles', false ) ) {
 			add_theme_support( 'wp-block-styles' );
 		} else {
 			add_action( 'wp_print_styles', function() {
@@ -162,7 +162,7 @@ class Gutenberg {
 		}
 
 		// Add support for full and wide align.
-		if( get_prop( $this->config, 'support-align-wide', false ) ) {
+		if( get_prop( $this->config, 'align-wide', false ) ) {
 			add_theme_support( 'align-wide' );
 		}
 		
@@ -180,6 +180,15 @@ class Gutenberg {
 		if( $colors = get_prop( $this->config, 'editor-gradient-presets', false ) ) {
 			add_theme_support( 'editor-gradient-presets', $colors );
 		}
+
+		// Add support for custom line height controls.
+		add_theme_support( 'custom-line-height' );
+
+		// Add support for experimental link color control.
+		add_theme_support( 'experimental-link-color' );
+
+		// Add support for experimental cover block spacing.
+		add_theme_support( 'custom-spacing' );
 	}
 
 	/**
@@ -192,10 +201,10 @@ class Gutenberg {
 	public function body_class_support( $classes ) {
 		global $post;
 
-		$classes .= 'is-wca-body-class-on ';
+		$classes .= ' is-wca-body-class-on ';
 
 		if ( isset( $post->ID ) ) {
-			$template = str_replace( array( '.', '/' ), '-', get_page_template_slug( $post->ID ) );
+			$template = str_replace( [ '.', '/' ], '-', get_page_template_slug( $post->ID ) );
 
 			if ( empty( $template ) ) {
 				$template = 'default';

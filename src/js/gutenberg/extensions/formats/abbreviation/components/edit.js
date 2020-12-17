@@ -1,13 +1,15 @@
 /**
  * WordPress dependencies
  */
+import { code } from '@wordpress/icons';
+
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { compose, ifCondition } = wp.compose;
 const { withSelect } = wp.data;
 const { RichTextToolbarButton } = wp.blockEditor;
 const { applyFormat, removeFormat, getActiveFormat } = wp.richText;
-const { Modal, Button, TextControl } = wp.components;
+const { Modal, Button, TextControl, Icon } = wp.components;
 
 const name = 'wca/abbreviation';
 
@@ -41,7 +43,7 @@ class Edit extends Component {
         return (
             <Fragment>
                 <RichTextToolbarButton
-                    icon="editor-code"
+                    icon={<Icon icon={code} />}
                     title={__('Abbreviation', 'wecodeart')}
                     onClick={this.toggle}
                     isActive={isActive}

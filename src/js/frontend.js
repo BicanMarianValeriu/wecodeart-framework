@@ -1,9 +1,13 @@
-import 'bootstrap/js/dist/util';
+// Boostrap
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/dropdown';
-import 'bootstrap/js/dist/tooltip';
-import 'bootstrap/js/dist/popover';
+import Tooltip from 'bootstrap/js/dist/tooltip';
+import Popover from 'bootstrap/js/dist/popover';
+
+// FAQ SVG
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
+
+// WeCodeArt
 import './plugins/wecodeart-Component';
 import './plugins/wecodeart-JSManager';
 import './plugins/wecodeart-Template';
@@ -25,7 +29,7 @@ function filterLog(route, func, args) {
 	}
 }
 
-(function (wecodeart, $) {
+(function (wecodeart) {
 	/**
 	 * Base WCA Functions
 	 * @since 3.6
@@ -46,27 +50,32 @@ function filterLog(route, func, args) {
 			},
 			complete: () => {
 				const { fn: { getOptions } } = wecodeart;
-
+				// We use a slightly different/cleanner approach for tooltips/popovers
 				// Tooltips
-				$('[data-toggle="tooltip"]').tooltip();
-				const customTooltips = document.querySelectorAll('.has-tooltip');
-				for (let item of customTooltips) {
-					const $item = $(item);
-					const options = getOptions(item.getAttribute('options'));
-					const { type } = options;
-					delete options.type;
-					if (type === 'popover') {
-						$item.popover(options);
-					}
+				const customTooltips = document.querySelectorAll('[data-toggle="tooltip"]');
+				[...customTooltips].map((el) => new Tooltip(el, getOptions(el.dataset.options)));
 
-					if (type === 'tooltip') {
-						$item.tooltip(options);
-					}
-				}
+				// PopOvers
+				const customPopovers = document.querySelectorAll('[data-toggle="popover"]');
+				[...customPopovers].map((el) => new Popover(el, getOptions(el.dataset.options)));
 
 				// FA Watch
 				dom.watch();
+
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				const forms = document.querySelectorAll('.needs-validation');
+
+				// Loop over them and prevent submission
+				Array.prototype.slice.call(forms).forEach((form) => {
+					form.addEventListener('submit', (e) => {
+						if (!form.checkValidity()) {
+							e.preventDefault();
+							e.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
 			}
 		}
 	};
-}).apply(this, [window.wecodeart, jQuery]);
+}).apply(this, [window.wecodeart]);

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Classes\Suggestions
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		4.0.5
- * @version		4.0.7
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Classes;
@@ -63,11 +63,19 @@ class Suggestions {
 	 * @return 	array 	Returns updated editors settings.
 	 */
 	public function font_classes( $args ) {
+		foreach( [ 'italic', 'normal' ] as $type ) {
+			$args[] = 'fst-'. $type;
+		}
+
 		foreach( [ 'normal', 'lighter', 'light', 'bold', 'bolder' ] as $weight ) {
-			$args[] = 'font-weight-'. $weight;
+			$args[] = 'fw-'. $weight;
 		}
 		
-		foreach( [ 'monospace', 'decoration-none', 'reset', 'lowercase', 'uppercase' ] as $type ) {
+		foreach( [ 'lowercase', 'uppercase', 'capitalize', 'wrap', 'nowrap', 'reset', 'break' ] as $type ) {
+			$args[] = 'text-' . $type;
+		}
+		
+		foreach( [ 'decoration-none', 'decoration-underline', 'decoration-line-through' ] as $type ) {
 			$args[] = 'text-' . $type;
 		}
 
@@ -75,14 +83,16 @@ class Suggestions {
 			$args[] = 'text-' . $color;
 		}
 
-		foreach( [ 'sm', 'md', 'lg', 'xl' ] as $break ) {
-			foreach( [ 'left', 'right', 'center', 'justify' ] as $align ) {
+		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
+			foreach( [ 'start', 'end', 'center', 'justify' ] as $align ) {
 				$args[] = 'text-' . $break . '-' . $align;
 			}
 		}
 
 		foreach( range( 1, 5 ) as $nr ) {
 			$args[] = 'display-'. $nr;
+			$args[] = 'fs-'. $nr;
+			$args[] = 'h'. $nr;
 		}
 
 		return wp_parse_args( [
@@ -91,6 +101,11 @@ class Suggestions {
 			'text-center',
 			'text-right',
 			'text-justify',
+			'font-monospace',
+			'lh-1',
+			'lh-sm',
+			'lh-base',
+			'lh-lg',
 		], $args );
 	}
 
@@ -102,7 +117,7 @@ class Suggestions {
 	 * @return 	array 	Returns updated editors settings.
 	 */
 	public function display_classes( $args ) {
-		foreach( [ 'sm', 'md', 'lg', 'xl' ] as $break ) {
+		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
 			foreach( [ 'none', 'block', 'inline-block', 'flex', 'inline-flex', 'table', 'table-cell', 'table-row' ] as $type ) {
 				$args[] = 'd-' . $break . '-' . $type;
 			}
@@ -129,12 +144,12 @@ class Suggestions {
 	 */
 	public function spacing_classes( $args ) {
 		foreach( [ 'm', 'p' ] as $space ) {
-			foreach( [ 'x', 'y', 't', 'b', 'l', 'r' ] as $dir ) {
+			foreach( [ 'x', 'y', 't', 'b', 'e', 's' ] as $dir ) {
 				foreach( [ '0', '1', '2', '3', '4', '5', 'auto' ] as $size ) {
 					if( in_array( $dir, [ 't', 'b', 'y' ] ) && $size === 'auto' ) continue;
 					$args[] = implode( '-', [ $space . $dir, $size ] );
 				}
-				foreach( [ 'sm', 'md', 'lg', 'xl' ] as $break ) {
+				foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
 					foreach( [ '0', '1', '2', '3', '4', '5', 'auto' ] as $size ) {
 						if( in_array( $dir, [ 't', 'b', 'y' ] ) && $size === 'auto' ) continue;
 						$args[] = implode( '-', [ $space . $dir, $break, $size ] );
@@ -159,7 +174,7 @@ class Suggestions {
 			$args[] = 'order-' . $column;
 		}
 		
-		foreach( [ 'sm', 'md', 'lg', 'xl' ] as $break ) {
+		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
 			foreach( range( 1, 12 ) as $column ) {
 				$args[] = 'order-' . $break . '-first';
 				$args[] = 'order-' . $break . '-last';
@@ -182,7 +197,7 @@ class Suggestions {
 	 * @return 	array 	Returns updated editors settings.
 	 */
 	public function flex_classes( $args ) {
-		foreach( [ 'sm', 'md', 'lg', 'xl' ] as $break ) {
+		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
 
 			foreach( [ 'row', 'row-reverse', 'column', 'column-reverse' ] as $dir ) {
 				$args[] = 'flex-' . $break . '-' . $dir ;
@@ -218,7 +233,7 @@ class Suggestions {
 			'flex-row-reverse',
 			'flex-column',
 			'flex-column-reverse',
-			// SIze
+			// Size
 			'flex-grow-0',
 			'flex-grow-1',
 			// Wrap

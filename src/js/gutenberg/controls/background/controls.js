@@ -3,7 +3,8 @@
  */
 const { __ } = wp.i18n;
 const { MediaUpload, MediaUploadCheck } = wp.blockEditor;
-const { Toolbar, IconButton, Popover, MenuItem } = wp.components;
+const { Toolbar, Button, Popover, MenuItem, Icon } = wp.components;
+const { useState } = wp.element;
 
 /**
  * Internal dependencies
@@ -17,44 +18,43 @@ import { ALLOWED_BG_MEDIA_TYPES } from './';
  * @param {Object} props The passed props.
  * @return {string} Component.
  */
-function BackgroundControls(props) {
+function Controls(props) {
     const {
         attributes,
         setAttributes,
     } = props;
 
-    const {
-        backgroundUrl,
-        openPopover,
-    } = attributes;
+    const { backgroundUrl } = attributes;
+    const [popover, setPopover] = useState(false);
 
     return (
         <MediaUploadCheck>
             <Toolbar className={backgroundUrl ? 'components-dropdown-menu' : ''}>
-                {openPopover && (
-                    <Popover
-                        position="bottom center"
-                        className="components-popover--wca"
-                    >
+                {popover && (
+                    <Popover position="bottom center" className="components-popover--wca">
                         <MediaUpload
                             onSelect={(media) => {
-                                setAttributes({ backgroundUrl: media.url, backgroundType: media.type, openPopover: !openPopover });
+                                setAttributes({ backgroundUrl: media.url, backgroundType: media.type });
+                                setPopover(!popover);
                             }}
                             allowedTypes={ALLOWED_BG_MEDIA_TYPES}
                             value={backgroundUrl}
                             render={({ open }) => (
                                 <MenuItem
                                     className="components-dropdown-menu__menu-item"
-                                    icon="edit"
+                                    icon={<Icon icon="edit" className="components-menu-items__item-icon" />}
                                     role="menuitem"
-                                    onClick={open} >
+                                    onClick={() => {
+                                        open();
+                                        setPopover(false);
+                                    }}>
                                     {__('Edit Background', 'wecodeart')}
                                 </MenuItem>
                             )}
                         />
                         <MenuItem
                             className="components-dropdown-menu__menu-item"
-                            icon="trash"
+                            icon={<Icon icon="trash" className="components-menu-items__item-icon" />}
                             role="menuitem"
                             onClick={() => {
                                 setAttributes({
@@ -63,25 +63,26 @@ function BackgroundControls(props) {
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: '',
                                     backgroundSize: 'cover',
+                                    focalPoint: undefined,
                                     hasParallax: false,
-                                    openPopover: !openPopover,
                                 });
+                                setPopover(false);
                             }} >
                             {__('Remove Background', 'wecodeart')}
                         </MenuItem>
                     </Popover>
                 )}
                 {backgroundUrl ?
-                    <IconButton
+                    <Button
                         className="components-dropdown-menu__toggle"
                         icon={icons.background}
                         aria-haspopup="true"
                         label={__('Background', 'wecodeart')}
                         tooltip={__('Background', 'wecodeart')}
-                        onClick={() => setAttributes({ openPopover: !openPopover })}
+                        onClick={() => setPopover(!popover)}
                     >
                         <span className="components-dropdown-menu__indicator" />
-                    </IconButton> :
+                    </Button> :
                     <MediaUpload
                         onSelect={(media) => {
                             setAttributes({ backgroundUrl: media.url, backgroundType: media.type });
@@ -89,7 +90,7 @@ function BackgroundControls(props) {
                         allowedTypes={ALLOWED_BG_MEDIA_TYPES}
                         value={backgroundUrl}
                         render={({ open }) => (
-                            <IconButton
+                            <Button
                                 className="components-toolbar__control"
                                 label={__('Background', 'wecodeart')}
                                 icon={icons.background}
@@ -104,4 +105,4 @@ function BackgroundControls(props) {
     );
 }
 
-export default BackgroundControls;
+export default Controls;

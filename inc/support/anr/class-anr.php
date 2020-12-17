@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.1.6
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Support;
@@ -19,8 +19,8 @@ defined( 'ABSPATH' ) || exit;
 use anr_captcha_class as Captcha;
 use WeCodeArt\Markup;
 use WeCodeArt\Support\Interfaces\Integration;
-use WeCodeArt\Support\ANR\Conditional\Plugin as ANR_Condition;
-use WeCodeArt\Support\ANR\Conditional\Supported as ANR_Support;
+use WeCodeArt\Support\ANR\Conditional\Active;
+use WeCodeArt\Support\ANR\Conditional\Supported;
 
 /**
  * ANR Integration
@@ -42,8 +42,8 @@ class ANR implements Integration {
 	 */
 	public static function get_conditionals() {
 		wecodeart( 'conditionals' )->set( [
-			'has_anr_support'	=> ANR_Support::class,
-			'is_anr_active'		=> ANR_Condition::class,
+			'has_anr_support'	=> Supported::class,
+			'is_anr_active'		=> Active::class,
 		] );
 
 		return [ 'is_anr_active', 'has_anr_support' ];
@@ -93,7 +93,7 @@ class ANR implements Integration {
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
-	 * @version	4.1.6
+	 * @version	4.2.0
 	 * @see 	anr_captcha_class::init()->form_field_return();
 	 * @uses	anr_captcha_class::init()->form_field_return();
 	 *
@@ -107,7 +107,7 @@ class ANR implements Integration {
 			return $defaults;
 		}
 
-		$classes = [ 'form-group', 'comment-form-captcha', 'col-12', 'col-md-7', $ver === 'v3' ? 'd-none' : '' ];
+		$classes = [ 'mb-3', 'comment-form-captcha', 'col-12', 'col-md-7', $ver === 'v3' ? 'd-none' : '' ];
 
 		$defaults .= Markup::wrap( 'comment-captcha', [ [ 
 			'tag' 	=> 'div', 

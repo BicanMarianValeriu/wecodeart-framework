@@ -8,37 +8,34 @@ import classnames from 'classnames';
  */
 const {
     blockEditor: {
-        InnerBlocks
+        InnerBlocks,
+        useBlockProps
     }
 } = wp;
 
 export default function save({ attributes }) {
     const {
         align,
-        className,
         verticalAlignment,
         container,
         gutters,
+        className,
     } = attributes;
-
-    const sectionClassName = classnames(className, 'wca-section', {
-        [`align${align}`]: align,
-    });
-
-    const containerClassName = classnames('wca-section__container', {
-        'container': container && ['full', 'wide'].includes(align) === false,
-        'container-fluid': container && ['full', 'wide'].includes(align) === true,
-    });
-
-    const rowClassName = classnames('wca-section__row', 'row', {
-        [`align-items-${verticalAlignment}`]: verticalAlignment,
-        'no-gutters': container && gutters,
-    });
-
+    
     return (
-        <div className={sectionClassName}>
-            <div className={containerClassName}>
-                <div className={rowClassName}>
+        <div {...useBlockProps.save({
+            className: classnames(className, 'wca-section', {
+                [`align${align}`]: align,
+            })
+        })}>
+            <div className={classnames('wca-section__container', {
+                'container': container && ['full', 'wide'].includes(align) === false,
+                'container-fluid': container && ['full', 'wide'].includes(align) === true,
+            })}>
+                <div className={classnames('wca-section__row', 'row', {
+                    [`align-items-${verticalAlignment}`]: verticalAlignment,
+                    'no-gutters': container && gutters,
+                })}>
                     <InnerBlocks.Content />
                 </div>
             </div>

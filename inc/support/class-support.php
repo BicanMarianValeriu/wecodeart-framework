@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
- * @version		4.1.5
+ * @version		4.2
  */
 
 namespace WeCodeArt;
@@ -51,7 +51,7 @@ class Support implements ArrayAccess {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 	1.0
-	 * @version	4.1.5
+	 * @version	4.2
 	 */
 	public function after_setup_theme() {
 		// Content width
@@ -88,7 +88,7 @@ class Support implements ArrayAccess {
 		] );
 
 		// HTML5
-		add_theme_support( 'html5', [ 'gallery', 'caption' ] );
+		add_theme_support( 'html5', [ 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ] );
 
 		// Responsive Embeds
 		add_theme_support( 'responsive-embeds' );
@@ -189,7 +189,7 @@ class Support implements ArrayAccess {
 	 * @return 	void
 	 */
 	public function register_menus() {
-		$header_modules = get_theme_mod( 'header-bar-modules', [] );
+		$header_modules = get_theme_mod( 'header-bar-modules', [ 'branding', 'menu', 'search' ] );
 
 		if( in_array( 'menu', $header_modules ) ) {
 			// Register New Menu

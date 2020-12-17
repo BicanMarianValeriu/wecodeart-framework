@@ -9,7 +9,7 @@
  * @subpackage 	Customizer/Controls
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
- * @version		3.8.5
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Customizer;
@@ -38,6 +38,29 @@ class Controls {
 	public function init() {
 		// Register our custom controls.
 		add_action( 'customize_register', [ $this, 'register_controls' ] );
+
+		/**
+		 * Register Custom Customizer Controls
+		 */
+		self::add_control( 'wecodeart-slider', [ 
+			'callback' 			=> 'WeCodeArt\Customizer\Controls\Slider',
+			'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_number' ]
+		] );
+
+		self::add_control( 'wecodeart-sortable', [ 
+			'callback' 			=> 'WeCodeArt\Customizer\Controls\Sortable',
+			'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_sortable_choices' ]
+		] );
+
+		self::add_control( 'wecodeart-divider', [ 
+			'callback' 			=> 'WeCodeArt\Customizer\Controls\Divider',
+			'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_text_field' ]
+		] );
+
+		self::add_control( 'wecodeart-fonts', [ 
+			'callback' 			=> 'WeCodeArt\Customizer\Controls\Fonts',
+			'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_font' ]
+		] );
 	}
 
 	/**
@@ -88,7 +111,7 @@ class Controls {
 	 */
 	public static function get_control( $control_type ) {
 		if ( isset( self::$controls[ $control_type ] ) ) return self::$controls[ $control_type ]; 
-		return array();
+		return [];
 	}
 
 	/**
@@ -105,22 +128,4 @@ class Controls {
 		}
 		return false;
 	}
-} 
-
-/**
- * Register Custom Customizer Controls
- */
-Controls::add_control( 'wecodeart-slider', [ 
-	'callback' 			=> 'WeCodeArt\Customizer\Controls\Slider',
-	'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_number' ]
-] );
-
-Controls::add_control( 'wecodeart-sortable', [ 
-	'callback' 			=> 'WeCodeArt\Customizer\Controls\Sortable',
-	'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_sortable_choices' ]
-] );
-
-Controls::add_control( 'wecodeart-divider', [ 
-	'callback' 			=> 'WeCodeArt\Customizer\Controls\Divider',
-	'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_text_field' ]
-] );
+}

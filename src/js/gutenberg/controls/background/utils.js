@@ -17,7 +17,7 @@ export function getBackgroundClasses(attributes) {
         backgroundSize,
         backgroundPosition,
         backgroundRepeat,
-        backgroundOverlay,
+        backgroundOverlay
     } = attributes;
 
     const classes = [

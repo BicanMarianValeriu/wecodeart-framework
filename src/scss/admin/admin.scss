@@ -1,0 +1,220 @@
+$tablet : 768px;
+$mobile : 736px;
+
+.appearance_page_wecodeart #wpcontent {
+	padding-left: 0;
+}
+
+.wecodeart-admin {
+	color: #111;
+
+	.components-panel {
+		min-height: 100vh;
+
+		.components-panel__header {
+			border: 0;
+			display: block;
+			height: auto;
+			padding: 25px 50px;
+			margin: 0 -50px;
+			background-color: #f5f6f8;
+
+			h2 {
+				font-size: 35px;
+				font-weight: 300;
+				line-height: 1;
+				margin-bottom: 10px;
+			}
+
+			code {
+				margin-left: 5px;
+				border-radius: 2px;
+				font-size: 11px;
+				font-weight: 400;
+				font-family: inherit;
+				background-color: #e5e5e5;
+				color: #000;
+				opacity: 0.7;
+			}
+
+			p {
+				color: #333;
+				font-size: 18px;
+				margin-bottom: 50px;
+			}
+
+			.wecodeart-panel__header-hint {
+				font-size: 12px;
+				opacity: 0.4;
+				margin: 0 0 40px;
+				padding: 0;
+			}
+		}
+
+		.components-panel__row {
+			margin-top: 0;
+		}
+
+		.components-panel__body {
+			padding: 0 50px 50px;
+		}
+	}
+
+	.wecodeart-tab-panel {
+		margin: 0 -50px;
+		width: calc(100% + 100px);	
+
+		.components-tab-panel {
+			&__tabs {
+				padding: 0 50px;
+				border-bottom: 1px solid #e2e4e7;
+	
+				&-item {
+					font-size: 18px;
+					padding: 10px 15px;
+					border-bottom: 5px solid transparent;
+					opacity: 0.7;
+					font-weight: 500;
+
+					@media screen and (max-width: $mobile) {
+						display: block;
+						width: 100%;
+					}
+	
+					&:hover {
+						opacity: 0.9;
+						border-color: #ccc;
+						background: #f5f6f8;
+					}
+
+					&:focus {
+						color: #0088cc;
+						outline-offset: -1px;
+						outline: 1px dotted #555d66;
+						box-shadow: none;
+					}
+	
+					&.active-tab {
+						opacity: 1;
+	
+						&,
+						&:hover {
+							border-color: #0088cc;
+							background: #fff;
+						}
+					}
+				}
+			}
+
+			&__tab {
+				&-content {
+					padding: 0 50px;
+					
+					p,
+					button {
+						font-size: 16px;
+						line-height: 1.5;
+					} 
+				}
+			}
+		}
+
+		&--vertical {
+			display: flex;
+			margin: 0 0;
+			width: auto;
+	
+			.components-tab-panel {
+				&__tabs {
+					flex-direction: column;
+					padding: 15px 0!important;
+					border-left: 1px solid #e2e4e7;
+					border-right: 1px solid #e2e4e7;
+
+					&-item {
+						border: none;
+
+						&.active-tab {
+							background-color: #e2e4e7;
+							color: #000;
+						}
+					}
+				}
+	
+				&__tab {
+					&-content {
+						flex: 1 1 auto;
+						padding-top: 15px;
+						padding-bottom: 15px;
+						border-right: 1px solid #e2e4e7;
+						border-bottom: 1px solid #e2e4e7;
+					}
+				}
+			}
+		}
+	}
+	
+	.wecodeart-button-field {
+		label {
+			display: block;
+			font-weight: bold;
+		}
+		
+		input {
+			display: block;
+			width: 100%;
+			padding: 4px 8px;
+		}
+	}
+	
+	.wecodeart-button-group {
+		display: inline-flex;
+		align-items: center;
+		margin: 0;
+	
+		.is-primary {
+			padding: 0px 20px;
+			font-size: 14px;
+			margin-right: 10px;
+			margin-bottom: 0;
+		}
+	}
+
+	.wecodeart-license-manager {
+		border: 1px solid #e2e4e7;
+		border-collapse: collapse;
+
+		td,
+		th {
+			padding: 10px;
+			
+			&:not(:first-child) {
+				border-left: 1px solid #e2e4e7;
+			}
+
+			&:first-child {
+				width: 25%;
+			}
+		}
+
+		td {
+			border-top: 1px solid #e2e4e7;
+
+			strong {
+				color: #121212;
+				font-size: 16px;
+			}
+		}
+	}
+
+	.components-editor-notices__snackbar {
+		position: fixed;
+		left: auto;
+		right: 0;
+		bottom: 20px;
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+}
+
+@import './codemirror/codemirror';

@@ -4,25 +4,25 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    height: $custom-select-height;
-    padding: $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding) $custom-select-padding-y $custom-select-padding-x;
-    background: $custom-select-bg $custom-select-background;
-    color: $custom-select-color;
-    border: $custom-select-border-width solid $custom-select-border-color;
-    font-family: $custom-select-font-family;
-    font-weight: $custom-select-font-weight;
-    line-height: $custom-select-line-height;
-    @include font-size($custom-select-font-size);
-    @include border-radius($custom-select-border-radius, 0);
-    @include box-shadow($custom-select-box-shadow);
+    height: $form-select-height;
+    padding: $form-select-padding-y ($form-select-padding-x + $form-select-indicator-padding) $form-select-padding-y $form-select-padding-x;
+    background: $form-select-bg $form-select-background;
+    color: $form-select-color;
+    border: $form-select-border-width solid $form-select-border-color;
+    font-family: $form-select-font-family;
+    font-weight: $form-select-font-weight;
+    line-height: $form-select-line-height;
+    @include font-size($form-select-font-size);
+    @include border-radius($form-select-border-radius, 0);
+    @include box-shadow($form-select-box-shadow);
 
     &:focus {
-        border-color: $custom-select-focus-border-color;
+        border-color: $form-select-focus-border-color;
         outline: 0;
         @if $enable-shadows {
-            box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow;
+            box-shadow: $form-select-box-shadow, $form-select-focus-box-shadow;
         } @else {
-            box-shadow: $custom-select-focus-box-shadow;
+            box-shadow: $form-select-focus-box-shadow;
         }
 
         &::-ms-value {
@@ -34,13 +34,13 @@
     &[multiple],
     &[size]:not([size="1"]) {
         height: auto;
-        padding-right: $custom-select-padding-x;
+        padding-right: $form-select-padding-x;
         background-image: none;
     }
 
     &:disabled {
-        color: $custom-select-disabled-color;
-        background-color: $custom-select-disabled-bg;
+        color: $form-select-disabled-color;
+        background-color: $form-select-disabled-bg;
     }
 
     // Hides the default caret in IE11
@@ -51,6 +51,6 @@
     // Remove outline from select box in FF
     &:-moz-focusring {
         color: transparent;
-        text-shadow: 0 0 0 $custom-select-color;
+        text-shadow: 0 0 0 $form-select-color;
     }
 }

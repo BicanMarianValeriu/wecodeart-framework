@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box Template
  * @since 		3.0.3
- * @version		4.0.1
+ * @version		4.2.0
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -25,7 +25,7 @@ use function WeCodeArt\Functions\kses_svg;
 				
 					echo kses_svg( SVG::compile( 'user' ) ); 
 					
-				?><span class="ml-2"><?php
+				?><span class="ms-2"><?php
 				
 					echo wp_kses_post( implode( ' ', [ $intro, $name ] ) );
 
@@ -49,10 +49,10 @@ use function WeCodeArt\Functions\kses_svg;
 				echo wp_kses_post( $description );
 				
 				if( isset( $social ) && is_array( $social ) ) { ?>
-				<div class="author-box__social"><?php
+				<div class="author-box__social d-flex"><?php
 					foreach( $social as $item ) {
 						$key = strtolower( $item['title'] );
-						$classes = [ 'author-box__social-item', 'author-box__social-item--' . $key ];
+						$classes = [ 'author-box__social-item', 'author-box__social-item--' . $key, 'mx-2' ];
 					?>
 					<a class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
 						href="<?php echo esc_url( $item['url'] ); ?>"

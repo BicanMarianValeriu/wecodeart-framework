@@ -1,4 +1,5 @@
 {
+	"apiVersion": 2,
 	"name": "wca/column",
 	"category": "wca",
 	"parent": [
@@ -7,11 +8,6 @@
 	"attributes": {
 		"verticalAlignment": {
 			"type": "string"
-		},
-		"customWidth": {
-			"type": "number",
-			"min": 0,
-			"max": 100
 		},
 		"bootstrapColumns": {
 			"type": "object",
@@ -23,23 +19,25 @@
 				"xl": ""
 			}
 		},
+		"backgroundColor": {
+			"type": "string"
+		},
 		"customBackgroundColor": {
+			"type": "string"
+		},
+		"templateLock": {
 			"type": "string"
 		}
 	},
 	"supports": {
-		"align": [
-			"full"
-		],
 		"html": false,
 		"anchor": true,
 		"className": true,
-		"customClassName": true,
 		"reusable": false,
 		"lightBlockWrapper": true,
-		"__experimentalColor": {
+		"color": {
 			"gradients": true,
-			"linkcolor": true
+			"link": true
 		}
 	}
 }

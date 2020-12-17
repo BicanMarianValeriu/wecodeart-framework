@@ -6,7 +6,7 @@ const { Fragment } = wp.element;
 const { Component } = wp.element;
 const { SelectControl, TabPanel } = wp.components;
 const { compose } = wp.compose;
-const { withSelect } = wp.data;
+const { withSelect, withDispatch } = wp.data;
 
 /**
  * Internal dependencies
@@ -20,7 +20,20 @@ class ResponsiveColumns extends Component {
     constructor() {
         super(...arguments);
         this.setColumn = this.setColumn.bind(this);
+        this.state = { selectedDevice: 'Desktop' };
     }
+
+    getDeviceType() {
+        return this.props.deviceType ? this.props.deviceType : this.state.selectedDevice;
+    }
+
+    setDeviceType(deviceType) {
+        if (this.props.deviceType) {
+            this.props.setDeviceType(deviceType);
+        } else {
+            this.setState({ selectedDevice: deviceType });
+        }
+    };
 
     setColumn(value, breakpoint = 'global') {
         const { attributes: { bootstrapColumns }, setAttributes } = this.props;
@@ -87,11 +100,34 @@ class ResponsiveColumns extends Component {
 
         if (columnsClasses === undefined) return null;
 
+        const deviceType = this.getDeviceType();
+
+        let tab = 'lg';
+
+        if (deviceType === 'Desktop') {
+            tab = 'lg';
+        } else if (deviceType === 'Tablet') {
+            tab = 'md';
+        } else if (deviceType === 'Mobile') {
+            tab = 'global';
+        }
+
         return (
             <TabPanel
                 className="components-base-control wecodeart-horizontal-tabs"
                 activeClass="is-active"
-                initialTabName="global"
+                initialTabName={tab}
+                onSelect={(tab) => {
+                    let device = 'Desktop';
+                    if (tab === 'global' || tab === 'sm') {
+                        device = 'Mobile';
+                    } else if (tab === 'md') {
+                        device = 'Tablet';
+                    } else if (tab === 'lg' || tab === 'xl') {
+                        device = 'Desktop';
+                    }
+                    this.setDeviceType(device);
+                }}
                 tabs={[
                     {
                         name: 'global',
@@ -145,12 +181,21 @@ class ResponsiveColumns extends Component {
 }
 
 export default compose(
+    withDispatch((dispatch) => ({
+        setDeviceType(type) {
+            const { __experimentalSetPreviewDeviceType } = dispatch('core/edit-post');
+
+            __experimentalSetPreviewDeviceType(type);
+        }
+    })),
     withSelect((select) => {
         const { wecodeart: { columnsClasses = undefined } = {} } = select('core/editor').getEditorSettings();
+        const { __experimentalGetPreviewDeviceType = null } = select('core/edit-post');
 
         return {
+            deviceType: __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null,
             columnsClasses,
-            select
+            select,
         };
     }),
 )(ResponsiveColumns);

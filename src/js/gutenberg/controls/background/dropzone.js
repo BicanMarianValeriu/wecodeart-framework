@@ -8,9 +8,9 @@ import { ALLOWED_BG_MEDIA_TYPES } from './';
  */
 const { Component, Fragment } = wp.element;
 const { mediaUpload } = wp.blockEditor;
-const { DropZone } = wp.components;
+const { DropZone: CoreDropzone } = wp.components;
 
-class BackgroundDropZone extends Component {
+class DropZone extends Component {
     constructor() {
         super(...arguments);
         this.addFile = this.addFile.bind(this);
@@ -40,10 +40,10 @@ class BackgroundDropZone extends Component {
     render() {
         return (
             <Fragment>
-                <DropZone onFilesDrop={this.addFile} label={this.props.label} />
+                <CoreDropzone onFilesDrop={this.addFile} label={this.props.label} />
             </Fragment>
         );
     }
 }
 
-export default BackgroundDropZone;
+export default DropZone;

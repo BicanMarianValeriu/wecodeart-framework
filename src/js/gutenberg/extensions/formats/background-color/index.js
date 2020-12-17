@@ -15,7 +15,7 @@ const name = 'wca/background';
 
 export const backgroundColor = {
 	name,
-	title: __( 'Background Color', 'wecodeart' ),
+	title: __('Background Color', 'wecodeart'),
 	tagName: 'span',
 	className: 'has-inline-background',
 	attributes: {

@@ -6,6 +6,9 @@
 			"type": "string",
 			"default": "full"
 		},
+		"verticalAlignment": {
+			"type": "string"
+		},
 		"container": {
 			"type": "boolean",
 			"default": true
@@ -13,6 +16,12 @@
 		"gutter": {
 			"type": "boolean",
 			"default": true
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"customBackgroundColor": {
+			"type": "string"
 		}
 	},
 	"supports": {
@@ -20,13 +29,13 @@
 			"wide",
 			"full"
 		],
+		"html": false,
 		"anchor": true,
 		"className": true,
-		"customClassName": true,
 		"lightBlockWrapper": true,
-		"__experimentalColor": {
+		"color": {
 			"gradients": true,
-			"linkcolor": true
+			"link": false
 		}
 	}
 }

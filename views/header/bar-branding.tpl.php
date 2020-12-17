@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Header Branding HTML
  * @since	 	3.0.5
- * @version    	4.0.5
+ * @version    	4.2.0
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -41,7 +41,7 @@ $modules = get_theme_mod( 'header-bar-modules' );
 <?php 
 	if ( in_array( 'search', $modules ) ) { ?>
 	<div class="col-auto d-lg-none">
-		<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__search" aria-expanded="false" aria-controls="bar-search">
+		<button class="btn btn-md" type="button" data-bs-toggle="collapse" data-bs-target=".header-bar__search" aria-expanded="false" aria-controls="bar-search">
 			<span class="screen-reader-text"><?php esc_html_e( 'Search', 'wecodeart' ); ?></span>
 			<?php SVG::render( 'search' ); ?>
 		</button>
@@ -49,7 +49,7 @@ $modules = get_theme_mod( 'header-bar-modules' );
 	<?php }
 	if ( in_array( 'menu', $modules ) ) { ?>
 	<div class="col-auto d-lg-none">
-		<button class="btn btn-md" type="button" data-toggle="collapse" data-target=".header-bar__menu" aria-expanded="false" aria-controls="bar-menu">
+		<button class="btn btn-md" type="button" data-bs-toggle="collapse" data-bs-target=".header-bar__menu" aria-expanded="false" aria-controls="bar-menu">
 			<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', 'wecodeart' ); ?></span>
 			<?php SVG::render( 'bars' ); ?>
 		</button>

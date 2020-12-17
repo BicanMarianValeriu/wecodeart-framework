@@ -23,8 +23,8 @@ use WeCodeArt\Markup\SVG;
 use WeCodeArt\Customizer;
 use WeCodeArt\Support\Interfaces\Integration;
 use WeCodeArt\Support\WooCommerce\Conditional\Plugin;
-use WeCodeArt\Support\WooCommerce\Conditional\WOO_Page;
-use WeCodeArt\Support\WooCommerce\Conditional\WOO_Archive;
+use WeCodeArt\Support\WooCommerce\Conditional\Page;
+use WeCodeArt\Support\WooCommerce\Conditional\Archive;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -48,8 +48,8 @@ class WooCommerce implements Integration {
 	public static function get_conditionals() {
 		wecodeart( 'conditionals' )->set( [
 			'is_woocommerce_active'		=> Plugin::class,
-			'is_woocommerce_page'		=> WOO_Page::class,
-			'is_woocommerce_archive'	=> WOO_Archive::class,
+			'is_woocommerce_page'		=> Page::class,
+			'is_woocommerce_archive'	=> Archive::class,
 		] );
 
 		return [ 'is_woocommerce_active' ];

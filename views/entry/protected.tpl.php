@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Protected Template
  * @since 	    3.5
- * @version	    4.0.5
+ * @version	    4.2
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -37,17 +37,15 @@ SVG::add_icon( 'unlock', [
         'This post is password protected. To view this post, enter the password below!',
         'wecodeart' 
     ); ?></h4>
-    <div class="input-group pt-3 pb-2">
-        <div class="input-group-prepend">
-            <span class="input-group-text text-primary"><?php 
+    <div class="input-group pt-3 pb-2"> 
+        <span class="input-group-text text-primary"><?php 
+        
+            SVG::render( 'unlock', [
+                'class' => 'fa-fw'
+            ] );
             
-                SVG::render( 'unlock', [
-                    'class' => 'fa-fw'
-                ] );
-                
-            ?></span>
-        </div>
-        <div class="flex-grow-1"><?php
+        ?></span> 
+        <span class="flex-grow-1"><?php
             
             Input::render( 'password', false, [
                 'id'            => wp_unique_id( 'pwbox-' ),
@@ -58,21 +56,19 @@ SVG::add_icon( 'unlock', [
                 'placeholder'   => esc_attr__( 'Enter password', 'wecodeart' )
             ] );
 
-        ?></div>
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-light"><?php
-                
-                SVG::render( 'key', [
-                    'class' => 'mr-2'
-                ] );
+        ?></span> 
+        <button type="submit" class="btn btn-outline-dark"><?php
+            
+            SVG::render( 'key', [
+                'class' => 'me-2'
+            ] );
 
-                ?><span><?php
+            ?><span><?php
+            
+                esc_html_e( 'Unlock', 'wecodeart' );
                 
-                    esc_html_e( 'Unlock', 'wecodeart' );
-                    
-                ?></span>
-            </button>
-        </div>
+            ?></span>
+        </button> 
     </div>
 </form>
 		

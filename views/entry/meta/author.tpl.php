@@ -9,13 +9,12 @@
  * @subpackage 	Entry\Meta\Author
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.9.5
- * @version		4.0.1
+ * @version		4.2
  */
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup\SVG;
-use function WeCodeArt\Functions\kses_svg;
 
 /**
  * @param   string  $author_name   Author Name
@@ -23,10 +22,10 @@ use function WeCodeArt\Functions\kses_svg;
  * @param   int     $author_ID     Author ID
  */
 ?>
-<span class="entry-author mr-2">
-    <span class="d-inline-block mr-1"><?php
+<span class="entry-author">
+    <span class="d-inline-block me-1"><?php
     
-    echo kses_svg( SVG::compile( 'user' ) );
+    SVG::render( 'user' );
     
     ?></span>
     <span class="screen-reader-text"><?php
@@ -34,10 +33,10 @@ use function WeCodeArt\Functions\kses_svg;
     esc_html_e( 'Posted by ', 'wecodeart' );
 
     ?></span>
-    <a href="<?php echo esc_url( $author_url ); ?>" class="entry-author-link" rel="author">
+    <a href="<?php echo esc_url( $author->url ); ?>" class="entry-author-link me-2" rel="author">
         <span class="entry-author-name"><?php
         
-        echo esc_html( $author_name ); 
+        echo esc_html( $author->name ); 
     
         ?></span>
     </a>

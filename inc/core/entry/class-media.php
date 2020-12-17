@@ -9,7 +9,7 @@
  * @subpackage 	Entry Media Class
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.6
- * @version		4.1.5
+ * @version		4.2
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -169,7 +169,7 @@ class Media {
 	 * Get Image - Return an image pulled from the media gallery. 
 	 *
 	 * @since 	3.6.4
-	 * @version	4.1.5
+	 * @version	4.2
 	 *
 	 * @param 	array	$args
 	 * @param	bool	$echo
@@ -183,7 +183,6 @@ class Media {
 			'format'   	=> 'html',
 			'size'     	=> 'large',
 			'dummy'		=> true,
-			'lazyload'	=> false,
 			'num'      	=> 0,
 			'attrs'    	=> [],
 			'fallback' 	=> 'first'
@@ -219,18 +218,7 @@ class Media {
 				$html .= self::generate_dummy_placeholder( $dummy_sizes ); 
 			}
 
-			if( (bool) $args['lazyload'] ) {
-				$template = '<img class="%s" data-lowsrc="%s" data-sizes="%s" data-src="%s" data-srcset="%s" />';
-				$html .= sprintf( $template, 
-					'entry-media__src lazyload ' . self::get_image_ratio( $id, $args['size'], $dummy_ratio ),
-					wp_get_attachment_image_src( $id, 'thumbnail' )[0],
-					wp_get_attachment_image_sizes( $id, $args['size'] ),
-					wp_get_attachment_image_src( $id, $args['size'] )[0],
-					wp_get_attachment_image_srcset( $id, $args['size'] )
-				);
-			} else {
-				$html .= wp_get_attachment_image( $id, $args['size'], false, $args['attrs'] );
-			}
+			$html .= wp_get_attachment_image( $id, $args['size'], false, $args['attrs'] );
 
 			list( $url ) = wp_get_attachment_image_src( $id, $args['size'], false );
 
@@ -302,9 +290,9 @@ class Media {
 		if ( $image ) {
 		 	echo $image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			return;
-		} else {
-			return false;
 		} 
+		
+		return false;
 	}
 
 	/**

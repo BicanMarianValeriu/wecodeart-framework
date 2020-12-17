@@ -1,6 +1,6 @@
 {
 	"name": "wecodeart",
-	"version": "4.1.8",
+	"version": "4.2.0",
 	"main": "webpack.config.js",
 	"author": "Bican Marian Valeriu",
 	"browserslist": [
@@ -9,6 +9,8 @@
 	"scripts": {
 		"build": "wp-scripts build",
 		"start": "wp-scripts start",
+		"build:admin": "wp-scripts build ./src/js/admin/admin.js --output-path=assets/minified",
+		"start:admin": "wp-scripts start ./src/js/admin/admin.js --output-path=assets/unminified",
 		"build:admin:notification": "wp-scripts build ./src/js/admin/admin-notification.js --output-path=assets/minified",
 		"start:admin:notification": "wp-scripts start ./src/js/admin/admin-notification.js --output-path=assets/unminified",
 		"build:gutenberg": "wp-scripts build ./src/js/gutenberg/gutenberg.js --output-path=assets/minified",
@@ -19,6 +21,8 @@
 		"start:customizer:slider": "wp-scripts start ./src/js/customizer/customizer-slider.js --output-path=assets/unminified",
 		"build:customizer:sortable": "wp-scripts build ./src/js/customizer/customizer-sortable.js --output-path=assets/minified",
 		"start:customizer:sortable": "wp-scripts start ./src/js/customizer/customizer-sortable.js --output-path=assets/unminified",
+		"start:customizer:fonts": "wp-scripts start ./src/js/customizer/controls/customizer-fonts.js --output-path=assets/unminified",
+		"build:customizer:fonts": "wp-scripts build ./src/js/customizer/controls/customizer-fonts.js --output-path=assets/unminified",
 		"lint:css": "wp-scripts lint-style ./src/scss",
 		"lint:js": "wp-scripts lint-js ./src/js/routes ./src/js/frontend.js",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
@@ -27,15 +31,16 @@
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^1.2.30",
+		"@popperjs/core": "^2.5.4",
 		"@wordpress/browserslist-config": "^2.7.0",
-		"@wordpress/icons": "^2.5.0",
-		"@wordpress/scripts": "^12.2.0",
-		"bootstrap": "^4.5.2",
-		"browser-sync": "^2.26.12",
+		"@wordpress/icons": "^2.8.0",
+		"@wordpress/scripts": "^12.5.0",
+		"bootstrap": "^5.0.0-beta1",
+		"browser-sync": "^2.26.13",
 		"browser-sync-webpack-plugin": "^2.2.2",
 		"classnames": "^2.2.6",
-		"popper.js": "^1.16.1",
-		"react": "^16.13.1",
-		"react-lorem-ipsum": "^1.4.5"
+		"react": "^17.0.1",
+		"react-lorem-ipsum": "^1.4.9",
+		"react-visibility-sensor": "^5.1.1"
 	}
 }

@@ -7,14 +7,13 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 const {
-    blockEditor: { InnerBlocks }
+    blockEditor: { InnerBlocks, useBlockProps }
 } = wp;
 
 export default function save({ attributes }) {
     const {
-        customWidth,
         verticalAlignment,
-        bootstrapColumns: { global, xs, sm, md, lg, xl }
+        bootstrapColumns: { global, xs, sm, md, lg, xl },
     } = attributes;
 
     let columnClasses = ['col'];
@@ -28,17 +27,12 @@ export default function save({ attributes }) {
         ]];
     }
 
-    const className = classnames('wca-column', columnClasses, {
-        [`align-self-${verticalAlignment}`]: verticalAlignment,
-    });
-
-    let style;
-    if (Number.isFinite(customWidth)) {
-        style = { flexBasis: customWidth + '%' };
-    }
-
     return (
-        <div className={className} style={style}>
+        <div {...useBlockProps.save({
+            className: classnames('wca-column', columnClasses, {
+                [`align-self-${verticalAlignment}`]: verticalAlignment,
+            }),
+        })}>
             <InnerBlocks.Content />
         </div>
     );

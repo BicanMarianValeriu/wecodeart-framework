@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs\Header
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		3.9.9
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Customizer\Configs;
@@ -47,7 +47,7 @@ class Header extends Config {
 				'choices'  		=> [
 					'container'			=> esc_html__( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-				], 
+				],
 				'priority' 		=> 5, 
 				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ], 
 				'transport' 		   => 'postMessage'

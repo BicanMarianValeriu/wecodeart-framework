@@ -18,8 +18,12 @@
     }
 
     .components-base-control {
-        .components-base-control__help {
-            margin-top: 0;
+        &__label {
+            display: block;
+        }
+        
+        &__help {
+            margin-top: 5px;
         }
     }
 }

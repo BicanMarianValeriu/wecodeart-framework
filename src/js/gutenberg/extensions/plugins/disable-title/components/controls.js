@@ -61,7 +61,7 @@ class DisableTitle extends Component {
 			<PluginPostStatusInfo>
 				<CheckboxControl
 					className="wca-post-status-label"
-					label={sprintf(__('Hide %s title on single template?', 'wecodeart'), postType)}
+					label={__('Hide title on single template?', 'wecodeart')}
 					checked={isHidden}
 					onChange={onToggle}
 					help={help}

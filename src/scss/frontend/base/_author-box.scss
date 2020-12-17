@@ -1,8 +1,8 @@
 .author-box {
     padding: 1rem 0;
     margin-bottom: 1rem;
-    border-top: 1px solid $gray-200;
-    border-bottom: 1px solid $gray-200;
+    border-top: 1px solid var(--bs-light);
+    border-bottom: 1px solid var(--bs-light);
 
     .author & {
         margin-bottom: 0!important;
@@ -23,12 +23,7 @@
     }
 
     &__social {
-        display: flex;
-        margin: 0 -5px;
-
-        &-item {
-            margin: 0 5px;
-        }
+        margin: 0 -0.5rem;
 
         svg {
             display: block;

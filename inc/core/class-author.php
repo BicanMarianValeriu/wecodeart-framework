@@ -9,7 +9,7 @@
  * @subpackage 	Core\Author
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.7.7
- * @version		4.1.7
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Core;
@@ -77,14 +77,12 @@ class Author {
 	 * Echo the Author Box
 	 *
 	 * @since	3.7.7
-	 * @version 4.1.4
+	 * @version 4.2.0
 	 *
 	 * @return 	void 
 	 */
 	public static function render_box() {
-		$enabled = apply_filters( 'wecodeart/filter/author/box/enabled', '__return_true' );
-
-		if( ! $enabled || ! self::get_data() ) return;
+		if( empty( self::get_data() ) ) return;
 
 		Markup::template( 'entry/author/box', self::get_data() );
 	}
@@ -99,7 +97,7 @@ class Author {
 	 */
 	public static function get_data() {
 		$avatar_size = apply_filters( 'wecodeart/filter/author/box/gravatar_size', 100 );
-		$avatar_alt  = sprintf( esc_html__( "%s's gravatar", 'wecodeart' ), get_the_author() );
+		$avatar_alt  = sprintf( esc_html__( "%s's gravatar", 'wecodeart' ), get_the_author_meta( 'display_name' ) );
 
 		$author = [
 			'intro' 		=> is_author() ? esc_html__( 'All articles by', 'wecodeart' ) : esc_html__( 'About', 'wecodeart' ),

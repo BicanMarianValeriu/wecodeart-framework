@@ -34,16 +34,14 @@ module.exports = {
         return externals;
     }, {
         'wp': 'wp',
+        'lodash': '_',
         'jquery': 'jQuery',
         'react': 'React',
         'react-dom': 'ReactDOM',
     }),
     plugins: [
         process.env.WP_BUNDLE_ANALYZER && new BundleAnalyzerPlugin(),
-        new MiniCssExtractPlugin({
-            esModule: false,
-            filename: devMode ? 'css/[name].css' : 'css/[name].min.css',
-        }),
+        new MiniCssExtractPlugin({ esModule: false, filename: devMode ? 'css/[name].css' : 'css/[name].min.css' }),
         !process.env.WP_NO_EXTERNALS && new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
         devMode ? new BrowserSyncPlugin({
             host: 'localhost',

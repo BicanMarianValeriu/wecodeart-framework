@@ -79,7 +79,7 @@ class Columns {
 	 * @return 	array 	Returns updated editors settings.
 	 */
 	public function breakpoints_classes( $args ) {
-		foreach( ['sm', 'md', 'lg', 'xl'] as $breakpoint ) {
+		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $breakpoint ) {
 			if( ! isset( $args[$breakpoint] ) ) {
 				$args[$breakpoint] = [];
 				$args[$breakpoint][] = 'col-' . $breakpoint;

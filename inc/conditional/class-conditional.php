@@ -9,7 +9,7 @@
  * @subpackage 	Conditional
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		4.0
- * @version		4.1.0
+ * @version		4.2.0
  */
 
 namespace WeCodeArt;
@@ -54,9 +54,11 @@ class Conditional implements ArrayAccess {
      */
     public static function get_conditionals() {
         $conditionals = apply_filters( 'wecodeart/conditional/get/before', [
-			'is_admin'          => Conditional\Admin::class,
+            'is_admin'          => Conditional\Admin::class,
+			'is_theme_admin'    => Conditional\Settings::class,
+			'is_customizer'     => Conditional\Customizer::class,
             'is_logged'         => Conditional\Logged_In::class,
-            'is_dev_mode'       => Conditional\Dev_Mode::class,
+            'is_dev_mode'       => Conditional\Debug::class,
 			'is_front_page'     => Conditional\Front_Page::class,
 			'is_full_layout'    => Conditional\Full_Layout::class,
 			'is_post_archive'   => Conditional\Post_Archive::class,
@@ -106,6 +108,18 @@ class Conditional implements ArrayAccess {
         foreach ( $keys as $key => $value ) {
             $this->items[$key] = apply_filters( "wecodeart/conditional/set/{$key}", $value );
         }
+    }
+    
+    /**
+     * Set a given conditional value.
+     *
+     * @param  array|string  $key
+     * @param  mixed   $value
+     *
+     * @return void
+     */
+    public function register( $key, $value = null ) {
+        return $this->set( $key, $value );
     }
 
     /**

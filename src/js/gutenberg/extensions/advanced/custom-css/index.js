@@ -13,6 +13,7 @@ const { addFilter } = wp.hooks;
  */
 import { restrictedBlocks } from '../../attributes';
 import CSSEditor from './components/editor';
+import './handler';
 import './inject-css';
 
 const addAttributes = (settings) => {

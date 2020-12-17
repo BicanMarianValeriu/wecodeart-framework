@@ -9,7 +9,7 @@
  * @subpackage 	Core\Comments
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
- * @version		4.1.7
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Core;
@@ -36,8 +36,10 @@ class Comments {
 	public function init() {
 		// WP Core
 		add_filter( 'comment_form_fields',	[ $this, 'comment_form_fields' 		] );
-		add_filter( 'comment_reply_link',	[ $this, 'replace_reply_link_class' ] );
 		add_filter( 'comment_form_defaults',[ $this, 'comment_form_defaults' 	] );
+		add_filter( 'comment_reply_link',	[ $this, 'replace_reply_link_class' ] );
+		add_action( 'pre_comment_on_post',  [ $this, 'validate_cookies'			] );
+
 
 		// WeCodeArt Core
 		add_action( 'wecodeart_comments', [ $this, 'render_meta'		], 10 );
@@ -68,7 +70,7 @@ class Comments {
 	 * Render Comments Info
 	 *
 	 * @since	3.7.3
-	 * @version	4.0.3
+	 * @version	4.2.0
 	 *
 	 * @return 	string
 	 */
@@ -77,7 +79,7 @@ class Comments {
 		$comments_number = intval( get_comments_number() );
 
 		$defaults = [
-			'icon' 		=> SVG::compile( 'comments' ) . ' ', // Escaped with kses inside fn.
+			'icon' 		=> SVG::compile( 'comments', [ 'class' => 'me-2' ] ), // Escaped with kses inside fn.
 			'empty' 	=> esc_html__( 'No comments', 'wecodeart' ),
 			'closed'	=> false,
 			'add_one'	=> esc_html__( 'add one', 'wecodeart' ) 
@@ -102,13 +104,11 @@ class Comments {
 		} 
 
 		// Prepare HTML output
-		$output = ''; 
-		$output .= $icon_html;
-		$output .= $header_tx; 
+		$output = sprintf( '%1$s %2$s', $icon_html, $header_tx );
 
 		// Append `add comment` link
 		if( comments_open() ) {
-			$output .= sprintf( '<a class="float-right" href="#respond" rel="nofollow">%s</a>', $args['add_one'] ); 
+			$output .= sprintf( '<a class="comments__add-new" href="#respond" rel="nofollow">%s</a>', $args['add_one'] ); 
 		}
 
 		$output = apply_filters( 'wecodeart/filter/comments/get_comments_info/output', trim( $output ) );
@@ -197,7 +197,7 @@ class Comments {
 	 * Render Comment Form.
 	 *
 	 * @since	unknown
-	 * @version 3.9.5
+	 * @version 4.2.0
 	 */
 	public function render_respond() {
 		// Bail if comments are closed for this post type.
@@ -205,11 +205,10 @@ class Comments {
 
 		$args = apply_filters( 'wecodeart/filter/comments/respond/args', [
 			'format'			 	=> 'html5',
-			'title_reply_before' 	=> '<h3 id="reply-title" class="headline"> ' . SVG::compile( 'comment-dots' ) . ' ',
+			'title_reply_before' 	=> '<h3 id="reply-title" class="comments__respond-headline">',
 			'title_reply_after'  	=> '</h3>',
-			'class_form' 			=> 'comment-form row no-gutters',
-			'cancel_reply_before' 	=> '<span class="float-right"><small>',
-			'cancel_reply_after' 	=> '</small></span>'
+			'class_container'		=> 'comments__respond mt-3 mb-5',
+			'class_form' 			=> 'comments__respond-form comment-form needs-validation',
 		] );
 
 		comment_form( $args );
@@ -219,7 +218,7 @@ class Comments {
 	 * Move Comment Field Bellow Name/Email/Website.
 	 *
 	 * @since	unknown
-	 * @version 3.5
+	 * @version 4.2.0
 	 *
 	 * @param 	array $fields
 	 *
@@ -227,9 +226,11 @@ class Comments {
 	 */
 	public function comment_form_fields( $fields ) {
 		$comment_field = $fields['comment'];
-		unset( $fields['comment'] );
+		$cookies_field = $fields['cookies'];
+		unset( $fields['comment'], $fields['cookies'] );
 		
 		$fields['comment'] = $comment_field;
+		$fields['cookies'] = $cookies_field;
 		return $fields;
 	}
 
@@ -237,7 +238,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	4.1.7
+	 * @version	4.2.0
 	 *
 	 * @return 	array
 	 */
@@ -249,7 +250,7 @@ class Comments {
 		$author_name	= Markup::wrap( 'comment-author-name', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => 'form-group comment-form-author col-12 col-md-7'
+				'class' => 'mb-3 comment-form-author col-12 col-md-7'
 			]
 		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [
 			'text',
@@ -269,7 +270,7 @@ class Comments {
 		$author_email = Markup::wrap( 'comment-author-email', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => 'form-group comment-form-email col-12 col-md-7'
+				'class' => 'mb-3 comment-form-email col-12 col-md-7'
 			]
 		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [
 			'email',
@@ -289,7 +290,7 @@ class Comments {
 		$author_url	= Markup::wrap( 'comment-author-url', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => 'form-group comment-form-url col-12 col-md-7'
+				'class' => 'mb-3 comment-form-url col-12 col-md-7'
 			]
 		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
 			'url', 
@@ -308,7 +309,7 @@ class Comments {
 		$author_comment	= Markup::wrap( 'comment-field', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => 'form-group comment-form-comment w-100'
+				'class' => 'mb-3 comment-form-comment'
 			]
 		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
 			'textarea', 
@@ -319,17 +320,42 @@ class Comments {
 				'name' 	=> 'comment',
 				'rows'	=> absint( 8 ),
 				'cols'  => absint( 45 ),
-				'aria-required'  => 'true' 
+				'required' 			=> ( $req ) ? 'required' : NULL,
+				'aria-required'  	=> 'true' 
 			]
 		], false );
 
+		// Cookies
+		$cookies = false;
+		if( $privacy_policy_page = get_option( 'wp_page_for_privacy_policy' ) ) {
+			$page_url 	= get_privacy_policy_url();
+			$page_title = get_the_title( $privacy_policy_page );
+			$page_link  = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $page_url ), esc_html( $page_title ) );
+			$cookies = Markup::wrap( 'comment-cookies', [ [
+				'tag' 	=> 'div',
+				'attrs' => [
+					'class' => 'mb-3 comment-form-cookies'
+				]
+			] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
+				'checkbox-switch', 
+				sprintf( __(  'By commenting you accept the %s.', 'wecodeart' ), $page_link ), 
+				[
+					'class'		=> false,
+					'id' 		=> 'comment-cookies',
+					'name' 		=> 'comment-cookies',
+					'required'  => true,
+					'aria-required'  => 'true',
+				]
+			], false );
+		}
+
 		$args = [
-			'title_reply' 			=> esc_html__( 'Speak Your Mind', 'wecodeart' ),
+			'title_reply' 			=> SVG::compile( 'comment-dots', [ 'class' => 'me-2' ] ) . esc_html__( 'Speak Your Mind', 'wecodeart' ),
 			'comment_field' 		=> $author_comment,
 			'comment_notes_before' 	=> Markup::wrap( 'comment-notes-before', [ [
 				'tag' 	=> 'div',
 				'attrs' => [
-					'class' => 'form-group comment-form-notes w-100'
+					'class' => 'mb-3 comment-form-notes'
 				]
 			] ], function() use ( $req ) {
 				$string = esc_html__( 'Your email address will not be published.', 'wecodeart' );
@@ -343,7 +369,7 @@ class Comments {
 			'comment_notes_after' 	=> Markup::wrap( 'comment-notes-after', [ [
 				'tag' 	=> 'div',
 				'attrs' => [
-					'class' => 'form-group comment-form-allowed-tags'
+					'class' => 'mb-3 comment-form-allowed-tags'
 				]
 			] ], function() {
 				printf( esc_html__( 'You may use these %s tags and attributes: %s.', 'wecodeart' ),
@@ -351,13 +377,16 @@ class Comments {
 					'<code>' . allowed_tags() . '</code>'
 				);
 			}, [], false ),
-			'submit_field'         	=> '<div class="form-group comment-form-submit">%1$s %2$s</div>',
-			'submit_button'         => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
-			'class_submit'         	=> 'btn btn-dark',
+			'submit_field'         	=> '<div class="mb-3 comment-form-submit">%1$s %2$s</div>',
+			'submit_button'         => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">' . SVG::compile( 'comment-dots', [
+				'class' => 'me-1'
+			] ) . '%4$s</button>',
+			'class_submit'         	=> 'btn btn-outline-dark',
 			'fields' => [
-				'author' => $author_name,
-				'email'  => $author_email,
-				'url'    => $author_url
+				'author' 	=> $author_name,
+				'email'  	=> $author_email,
+				'url'    	=> $author_url,
+				'cookies'	=> $cookies,
 			]
 		];
 
@@ -381,5 +410,26 @@ class Comments {
 	public function replace_reply_link_class( $class ) {
 		$class = str_replace( "class='comment-reply-link", "class='comment-reply-link btn btn-dark btn-sm", $class );
 		return $class;
-	} 
+	}
+
+	/**
+	 * Validate Cookie field.
+	 *
+	 * @since	4.2.0
+	 *
+	 * @param 	string $class
+	 *
+	 * @return 	string
+	 */
+	public function validate_cookies() {
+		if( $privacy_policy = get_option( 'wp_page_for_privacy_policy' ) ) {
+			$page_url 	= get_privacy_policy_url();
+			$page_title = get_the_title( $privacy_policy );
+			$page_link  = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $page_url ), esc_html( $page_title ) );
+
+			if( ! filter_input( INPUT_POST, 'comment-cookies' ) ) {
+				wp_die( sprintf( esc_html__( 'You must accept %s to comment!', 'wecodeart' ), $page_link ) );
+			}
+		}
+	}
 }

@@ -9,7 +9,7 @@ const { get } = lodash;
 const { __ } = wp.i18n;
 const { select, withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
-const { withSpokenMessages } = wp.components;
+const { withSpokenMessages, Icon } = wp.components;
 const { PluginBlockSettingsMenuItem } = wp.editPost;
 const { compose, ifCondition } = wp.compose;
 const { create, toHTMLString } = wp.richText;
@@ -27,7 +27,7 @@ class ClearBlockFormatting extends Component {
 
 		return (
 			<PluginBlockSettingsMenuItem
-				icon="editor-removeformatting"
+				icon={<Icon icon="editor-removeformatting" className="components-menu-items__item-icon" />}
 				label={__('Clear Block Formatting', 'wecodeart')}
 				onClick={() => {
 					clearBlockFormatting(blockId, blockName, toHTMLString({

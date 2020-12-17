@@ -9,7 +9,7 @@
  * @subpackage 	Core\Search
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.9.3
- * @version		4.1.2
+ * @version		4.2.0
  */ 
 
 namespace WeCodeArt\Core;
@@ -142,15 +142,10 @@ class Search {
 	protected function get_submit() {
 
 		return Markup::wrap(  'search-submit-wrap', [ [
-			'tag' 	=> 'div',
-			'attrs' => [ 
-				'class'	=> 'input-group-append',
-			]
-		], [
 			'tag' 	=> 'button',
 			'attrs' => [
 				'type'	=> 'submit',
-				'class'	=> 'btn',
+				'class'	=> 'btn btn-outline-dark',
 			]
 		] ], 'printf', [ $this->strings['button'] ], false );
 

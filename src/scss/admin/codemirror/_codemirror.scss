@@ -1,0 +1,94 @@
+.cm-s-default {
+    &.CodeMirror,
+    .CodeMirror-gutters {
+        border: none;
+        background-color: #282a36 !important;
+        color: #f8f8f2 !important;
+        padding-top: 10px;
+    }
+
+    .CodeMirror {
+        &-activeline-background {
+            background: rgba(255,255,255,0.1);
+        }
+
+        &-matchingbracket {
+            text-decoration: underline; 
+            color: white !important;
+        }
+
+        &-gutters {
+            color: #282a36;
+        }
+
+        &-cursor {
+            border-left: solid thin #f8f8f0;
+        }
+
+        &-linenumber {
+            color: #6D8A88;
+        }
+
+        &-selected {
+            background: rgba(255, 255, 255, 0.10);
+        }
+        
+        &-line {
+            &::selection,
+            > span::selection,
+            span > span::selection {
+                background: rgba(255, 255, 255, 0.10);
+            }
+            
+            &::-moz-selection,
+            > span::-moz-selection,
+            span > span::-moz-selection {
+                background: rgba(255, 255, 255, 0.10);
+            }
+        }
+    }
+
+    span {
+        &.cm-comment {
+            color: #6272a4;
+        }
+
+        &.cm-string,
+        &.cm-string-2 {
+            color: #f1fa8c;
+        }
+
+        &.cm-atom,
+        &.cm-number {
+            color: #bd93f9;
+        }
+
+        &.cm-property {
+            color: #66c8ef;
+        }
+        
+        &.cm-tag,
+        &.cm-operator,
+        &.cm-keyword {
+            color: #08eb41;
+        }
+
+        &.cm-def,
+        &.cm-attribute,
+        &.cm-builtin,
+        &.cm-qualifier {
+            color: #fae050;
+        }
+        
+        &.cm-variable,
+        &.cm-variable-2,
+        &.cm-meta {
+            color: #f8f8f2;
+        }
+        
+        &.cm-variable-3,
+        &.cm-type {
+            color: #FFF;
+        }
+    }
+}

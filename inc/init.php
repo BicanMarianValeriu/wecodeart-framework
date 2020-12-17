@@ -9,7 +9,7 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		1.0
- * @version		4.1.5
+ * @version		4.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -75,6 +75,7 @@ final class WeCodeArt implements ArrayAccess {
 		Header		::get_instance();
 		Content		::get_instance();
 		Archive		::get_instance();
+		Scripts		::get_instance();
 		Entry		::get_instance();
 		Comments	::get_instance();
 		Pagination	::get_instance();
@@ -269,6 +270,19 @@ function wecodeart_config( $key = null, $default = null ) {
 }
 
 /**
+ * Echo options from the options database.
+ *
+ * @since 4.2.0
+ *
+ * @param string $key       Option name.
+ * @param string $setting   Optional. Settings field name. Eventually defaults to 'wecodeart'.
+ * @param bool   $use_cache Optional. Whether to use the cache value or not. Default is true.
+ */
+function wecodeart_option( $key, $default = false, $setting = null, $use_cache = true ) {
+    return Admin::get_option( $key, $default, $setting, $use_cache );
+}
+
+/**
  * Check if condition is met.
  *
  * @since	4.0
@@ -316,6 +330,10 @@ $config = Config::get_config();
  */
 do_action( 'wecodeart/setup/before', $config );
 
+
+/**
+ * Load Setup
+ */
 require_once __DIR__ . '/config/setup.php';
 
 /**
@@ -328,7 +346,6 @@ do_action( 'wecodeart/setup/after', $theme );
 /**
  * Maybe Load the theme if checks are passed
  */
-Scripts::get_instance(); // Required in admin
 if( Activation::get_instance()->is_ok() ) {
     $theme->load();
     

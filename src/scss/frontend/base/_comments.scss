@@ -1,28 +1,35 @@
 .comments {
-    svg {
-        width: 30px;
-        height: 30px;
-        vertical-align: -8%;
+    &__respond-headline a,
+    &__add-new {
+        float: right;
+    }
 
-        @include media-breakpoint-down( 'sm' ) {
+    h3 {
+        svg {
             width: 20px;
             height: 20px;
+            
+            @include media-breakpoint-up( 'sm' ) {
+                width: 30px;
+                height: 30px;
+            }
         }
     }
 
-    label {
-        width: 100%;
-    }
-
-    ul,
-    ol {
-        list-style: none;
+    svg {
+        fill: currentColor;
+        vertical-align: -8%;
     }
 }
 
 .comment {
     .bypostauthor {
         color: initial;
+    }
+    
+    .comment-edit,
+    .comment-reply {
+        float: right;
     }
 
     .comment-reply {

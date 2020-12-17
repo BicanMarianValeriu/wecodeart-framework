@@ -19,8 +19,9 @@ export const tooltip = {
 	tagName: 'abbr',
 	className: 'has-tooltip',
 	attributes: {
-        title: '',
-        options: ''
+		'title': '',
+		'data-toggle': '',
+        'data-options': ''
 	},
 	edit,
 };

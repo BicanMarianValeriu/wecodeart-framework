@@ -9,7 +9,7 @@
  * @subpackage 	Core\Pagination
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.1
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Core;
@@ -43,15 +43,15 @@ class Pagination {
      * Display links to previous and next post, from a single post.
      *
      * @since	1.0.0
-     * @version 3.9.5
+     * @version 4.2.0
      *
      * @return  string HTML
      */
     public function archive() {
-        $args = array( 
+        $args = [
             'mixed' => 'array',
             'type' 	=> 'array',
-        );
+        ];
         
         $links = paginate_links( $args );
         
@@ -64,15 +64,15 @@ class Pagination {
             [
                 'tag'   => 'nav',
                 'attrs' => [
-                    'class'     => false,
-                    'itemscope' => 'itemscope',
-                    'itemtype'  => 'http://schema.org/SiteNavigationElement'
+                    'class'     => 'mb-5',
+                    'itemscope' => true,
+                    'itemtype'  => 'https://schema.org/SiteNavigationElement'
                 ]
             ],
             [
                 'tag'   => 'ul',
                 'attrs' => [
-                    'class'         => 'pagination',
+                    'class'         => 'pagination pagination-sm',
                     'aria-label'    => esc_html__( 'Pagination', 'wecodeart' )
                 ]
             ] 
@@ -95,7 +95,7 @@ class Pagination {
      * WP-Link Pages for paginated posts
      *
      * @since	unknown
-     * @version 3.9.5
+     * @version 4.2.0
      *
      * @return 	null 	Return early if not a post.
      */
@@ -112,8 +112,8 @@ class Pagination {
             'attrs' => [
                 'class'     => 'pagination pagination--entry pb-3',
                 'aria-label'=> esc_html__( 'Pagination', 'wecodeart' ),
-                'itemscope' => 'itemscope',
-                'itemtype'  => 'http://schema.org/SiteNavigationElement'
+                'itemscope' => true,
+                'itemtype'  => 'https://schema.org/SiteNavigationElement'
             ] 
         ] ], function() {
             wp_link_pages( apply_filters( 'wecodeart/filter/entry/content_nav/args', [
@@ -129,7 +129,7 @@ class Pagination {
 	 * Display links to previous and next post, from a single post.
      *
 	 * @since	1.0.0
-	 * @version	3.9.5
+	 * @version	4.2.0
      *
      * @return  null    Return early if not a post.
 	 */
@@ -145,14 +145,14 @@ class Pagination {
                 'attrs' => [ 
                     'class'         => 'entry-navigation',
                     'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
-                    'itemscope'     => 'itemscope',
-                    'itemtype'      => 'http://schema.org/SiteNavigationElement',
+                    'itemscope'     => true,
+                    'itemtype'      => 'https://schema.org/SiteNavigationElement',
                 ] 
             ],
 			[ 
                 'tag'   => 'div', 
                 'attrs' => [ 
-                    'class' => 'row pt-4' 
+                    'class' => 'row py-4' 
                 ] 
             ]
 		], function() { ?>
@@ -177,7 +177,7 @@ class Pagination {
 			Markup::wrap( 'entry-navigation-next', [ [ 
 				'tag' 	=> 'div', 
 				'attrs' => [
-                    'class' => 'col-sm-12 col-md text-md-right'
+                    'class' => 'col-sm-12 col-md text-md-end'
                 ] 
 			] ], 'next_post_link', $args_next );  
         } );  
@@ -187,7 +187,7 @@ class Pagination {
 	 * Render Coments Pagination
 	 *
 	 * @since 	3.7.0
-	 * @version	3.9.5
+	 * @version 4.2.0
 	 *
 	 * @return 	string|null
 	 */
@@ -203,8 +203,8 @@ class Pagination {
                 'attrs' => [
                     'class'         => 'comments__nav',
 					'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
-                    'itemscope'     => 'itemscope',
-                    'itemtype'      => 'http://schema.org/SiteNavigationElement',
+                    'itemscope'     => true,
+                    'itemtype'      => 'https://schema.org/SiteNavigationElement',
                 ]
             ],
 			[
@@ -231,7 +231,7 @@ class Pagination {
 			Markup::wrap( 'comments-next-link', [ [ 
 				'tag' 	=> 'div', 
 				'attrs' => [
-					'class' => 'col-sm-12 col-md text-md-right'
+					'class' => 'col-sm-12 col-md text-md-end'
 				] 
 			] ], 'next_comments_link', $args_next );  
 		} );  

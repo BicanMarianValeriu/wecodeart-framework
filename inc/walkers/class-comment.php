@@ -9,7 +9,7 @@
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		1.9
- * @version		4.1.7
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Walkers;
@@ -54,7 +54,7 @@ class Comment extends Walker_Comment {
 	 * Outputs a pingback comment.
 	 *
 	 * @since	2.0
-	 * @version	4.0.2
+	 * @version	4.2.0
 	 */
 	protected function ping( $comment, $depth, $args ) {
 		?>
@@ -66,7 +66,7 @@ class Comment extends Walker_Comment {
 				echo wp_kses_post( comment_author_link( $comment ) );
 
 				// Edit link.
-				edit_comment_link( '&#9998;', '<span class="badge badge-primary text-white float-right">', '</span>' );
+				edit_comment_link( '&#9998;', '<span class="badge bg-primary text-white">', '</span>' );
 				
 			?></div>
 		<?php 
@@ -76,20 +76,22 @@ class Comment extends Walker_Comment {
 	 * Outputs a HTML5 comment.
 	 *
 	 * @since	2.0
-	 * @version	4.0.2
+	 * @version	4.2.0
 	 *
 	 * @return 	void
 	 */
 	protected function comment( $comment, $depth, $args ) {
 		?>
-		<li class="<?php echo esc_attr( join( ' ', get_comment_class() ) ); ?>"
-			id="comment-<?php echo esc_attr( $comment->comment_ID ); ?>"
-			itemscope=""
-			itemtype="http://schema.org/Comment">
+		<li <?php echo Markup::generate_attr( 'comment', [
+			'class' 	=> implode( ' ', get_comment_class() ),
+			'id'		=> 'comment-' . $comment->comment_ID,
+			'itemscope' => true,
+			'itemtype' 	=> "https://schema.org/Comment",
+		] ); ?>>
 		<?php
 
 			// Get what we need.
-			$author_name 	= '<strong itemprop="name">' . $comment->comment_author . '</strong>';
+			$author_name 	= sprintf( '<strong itemprop="name">%s</strong>', $comment->comment_author );
 			if ( ! empty( $comment->comment_author_url ) && 'http://' !== $comment->comment_author_url ) {
 				$author_name = sprintf(
 					'<a href="%1$s" rel="external nofollow" itemprop="url">%2$s</a>', 
@@ -111,7 +113,7 @@ class Comment extends Walker_Comment {
 						$comment,
 						$args['avatar_size'],
 						'',
-						esc_html__( 'Author\'s gravatar', 'wecodeart' )
+						sprintf( esc_html__( '%s\'s gravatar', 'wecodeart' ), $comment->comment_author )
 					),
 				],
 			] );

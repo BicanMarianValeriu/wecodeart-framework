@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Input
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.1.2
- * @version		4.0.9
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Markup;
@@ -104,11 +104,11 @@ class Input {
 			 */
 			case 'checkbox' :
 			case 'checkbox-switch' :
-				$class 		= ( $type === 'checkbox-switch' ) ? 'custom-switch' : 'custom-checkbox';
-				$classes 	= array_merge( [ 'custom-control', $class, $attrs['class'] ] );
+				$class 		= ( $type === 'checkbox-switch' ) ? 'form-check form-switch' : 'form-check';
+				$classes 	= array_merge( [ $class, $attrs['class'] ] );
 				$attrs 		= wp_parse_args( [
 					'type'	=> 'checkbox',
-					'class' => 'custom-control-input',
+					'class' => 'form-check-input',
 				], $attrs ); 
 			?>
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
@@ -116,7 +116,7 @@ class Input {
 			<?php
 				if ( isset( $label['text'] ) ) {
 					printf(
-						'<label class="custom-control-label" for="%s">%s</label>',
+						'<label class="form-check-label" for="%s">%s</label>',
 						esc_attr( $attrs['id'] ),
 						wp_kses_post( $label['text'] )
 					);
@@ -147,8 +147,11 @@ class Input {
 					printf( '<label for="%s">%s</label>', esc_attr( $attrs['id'] ), wp_kses_post( $label['text'] ) );
 				}
 				$placeholder = isset( $attrs['placeholder'] ) ? $attrs['placeholder'] : false;
-				unset( $attrs['type'] );
-				unset( $attrs['placeholder'] );
+				$attrs = wp_parse_args( [
+					'class' 		=> 'form-select',
+					'type'			=> false,
+					'placeholder' 	=> false
+				], $attrs );
 			?>
 				<select <?php echo \WeCodeArt\Markup::generate_attr( 'select', $attrs ); ?>>
 					<?php if( $placeholder ) { ?>
@@ -183,7 +186,7 @@ class Input {
 
 				$classes = explode( ' ', $attrs['class'] );
 				if ( ( $key = array_search( 'form-control', $classes ) ) !== false ) unset( $classes[$key] );
-				$classes = array_merge( [ 'form-group', 'fieldset', 'fieldset--' . $ctx, 'text-left' ], $classes );
+				$classes = array_merge( [ 'mb-3', 'fieldset', 'fieldset--' . $ctx, 'text-left' ], $classes );
 				$fieldset = [ 'class' => implode( ' ', $classes ) ];
 				?>
 				<fieldset <?php echo \WeCodeArt\Markup::generate_attr( 'fieldset-' . $ctx, $fieldset ); ?>>
@@ -192,7 +195,7 @@ class Input {
 						printf( '<legend>%s</legend>', esc_html( $label['text'] ) ); 
 					}
 				foreach ( (array) $choices as $key => $label ) {
-					$wrap_args = [ 'class' => 'form-check custom-control custom-' . $ctx ];
+					$wrap_args = [ 'class' => 'form-check form-check--' . $ctx ];
 					$label = is_string( $label ) ? [ 'text' => $label ] : $label;
 				?>
 					<div <?php echo \WeCodeArt\Markup::generate_attr( 'fieldset-' . $ctx . '-wrap', $wrap_args ); ?>>
@@ -201,7 +204,7 @@ class Input {
 						'id'		=> $key,
 						'type' 		=> $ctx,
 						'value'		=> $key,
-						'class'		=> 'form-check-input custom-control-input',
+						'class'		=> 'form-check-input',
 						'name' 		=> $ctx === 'checkbox' ? $attrs['name'] . '[' . $key . ']' : $attrs['name'],
 						'checked'	=> isset( $attrs['value'] ) ? (string) $attrs['value'] === (string) $key : null,
 						'disabled'	=> isset( $label['disabled'] ) && (bool) $label['disabled'] === true ? true : null
@@ -212,7 +215,7 @@ class Input {
 					<input <?php echo $input_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>/>
 					<?php
 						printf( 
-							'<label class="form-check-label custom-control-label" for="%s">%s</label>', 
+							'<label class="form-check-label" for="%s">%s</label>', 
 							esc_attr( $input_args['id'] ), 
 							wp_kses_post( $label['text'] ) 
 						);

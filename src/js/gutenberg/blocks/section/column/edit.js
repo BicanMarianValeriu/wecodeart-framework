@@ -13,35 +13,32 @@ import { getBackgroundStyles } from './../../../controls/background';
  * WordPress dependencies
  */
 const {
-    i18n: { __ },
-    blockEditor: {
-        InnerBlocks,
-        BlockControls,
-        BlockVerticalAlignmentToolbar,
-        InspectorControls,
-        __experimentalBlock: Block,
+    i18n: {
+        __
     },
     components: {
         PanelBody,
-        RangeControl
     },
     data: {
         useSelect,
         useDispatch
-    }
+    },
+    blockEditor: {
+        BlockControls,
+        InspectorControls,
+        InnerBlocks,
+        BlockVerticalAlignmentToolbar,
+        useBlockProps,
+        __experimentalUseInnerBlocksProps: useInnerBlocksProps,
+    },
 } = wp;
 
-export default function edit(props) {
-    const {
-        attributes,
-        setAttributes,
-        clientId,
-    } = props;
+export default function Edit(props) {
+    const { className, attributes, clientId } = props;
 
     const {
-        customWidth,
         verticalAlignment,
-        bootstrapColumns: { global, xs, sm, md, lg, xl }
+        bootstrapColumns: { global, xs, sm, md, lg, xl },
     } = attributes;
 
     let columnClasses = ['col'];
@@ -55,37 +52,35 @@ export default function edit(props) {
         ]];
     }
 
-    const className = classnames('wca-column', columnClasses, {
-        [`align-self-${verticalAlignment}`]: verticalAlignment,
-    });
-
-    const { blocksCount, rootClientId } = useSelect((select) => {
-        const { getBlockOrder, getBlockRootClientId } = select('core/block-editor');
+    const { hasChildBlocks, rootClientId } = useSelect((select) => {
+        const { getBlockOrder, getBlockRootClientId } = select(
+            'core/block-editor'
+        );
 
         return {
-            blocksCount: getBlockOrder(clientId).length,
+            hasChildBlocks: getBlockOrder(clientId).length > 0,
             rootClientId: getBlockRootClientId(clientId),
         };
     }, [clientId]);
 
     const { updateBlockAttributes } = useDispatch('core/block-editor');
 
-    const updateAlignment = (verticalAlignment) => {
-        // Update own alignment.
+    const updateAlignment = (value) => {
         setAttributes({ verticalAlignment });
-        // Reset parent Columns block.
         updateBlockAttributes(rootClientId, { verticalAlignment: null });
     };
 
-    const hasWidth = Number.isFinite(customWidth);
+    const blockProps = useBlockProps({
+        className: classnames(className, columnClasses, {
+            [`align-self-${verticalAlignment}`]: verticalAlignment,
+        }),
+        style: getBackgroundStyles(attributes)
+    });
 
-    let style = {};
-
-    if (hasWidth) {
-        style = { flexBasis: customWidth + '%' };
-    }
-
-    style = { ...style, ...getBackgroundStyles(attributes) };
+    const innerBlocksProps = useInnerBlocksProps(blockProps, {
+        renderAppender: hasChildBlocks ? undefined : () => <InnerBlocks.ButtonBlockAppender />,
+        templateLock: false,
+    });
 
     return (
         <>
@@ -97,30 +92,15 @@ export default function edit(props) {
             </BlockControls>
             <InspectorControls>
                 <PanelBody title={__('Column settings')}>
-                    <RangeControl
-                        label={__('Custom Width')}
-                        value={customWidth || ''}
-                        onChange={(customWidth) => setAttributes({ customWidth })}
-                        min={0}
-                        max={100}
-                        step={1}
-                        allowReset
-                        placeholder={customWidth === undefined ? __('Auto') : undefined}
-                    />
                     <p className="components-base-control__label">{
-                        __('Bootstrap columns uses mobile-first approach.', 'wecodeart')
+                        __('Bootstrap columns uses mobile-first approach.', 'wecodeart') + ' ' +
+                        __('*Currently the preview does not work unless you resize the browser window. ', 'wecodeart') + ' ' +
+                        __('See frontend for a better preview.', 'wecodeart')
                     }</p>
                     <ResponsiveColumns {...props} />
                 </PanelBody>
             </InspectorControls>
-            <InnerBlocks
-                templateLock={false}
-                __experimentalTagName={Block.div}
-                __experimentalPassedProps={{
-                    className,
-                    style,
-                }}
-            />
+            <div {...innerBlocksProps} />
         </>
     );
-} 
+};

@@ -14,8 +14,7 @@
 		@include button-size( 
             $btn-padding-y, 
             $btn-padding-x-lg, 
-            $btn-font-size, 
-            $btn-line-height, 
+            $btn-font-size,
             $btn-border-radius 
         );
 	}

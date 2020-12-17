@@ -26,8 +26,8 @@
 	}
 
 	&__item {
-		color: theme-color( 'dark' );
-		border-color: theme-color( 'dark' );
+		color: #212121;
+		border-color: #212121;
 		background: #f3f5f6;
 		align-items: center;
 		appearance: none;
@@ -52,44 +52,44 @@
 
 		&:hover {
 			background: #f1f1f1;
-			border-color: theme-color( 'primary' );
-			color: theme-color( 'primary' );
+			border-color: var(--wp-admin-theme-color);
+			color: var(--wp-admin-theme-color);
 			text-decoration: none;
 		}
 
 		&:focus:enabled {
 			background: #f3f5f6;
-			color: theme-color( 'primary' );
-			border-color: theme-color( 'primary' );
-			box-shadow: 0 0 0 $border-width theme-color( 'primary' );
+			color: var(--wp-admin-theme-color);
+			border-color: var(--wp-admin-theme-color);
+			box-shadow: 0 0 0 $border-width var(--wp-admin-theme-color);
 			text-decoration: none;
 
 		}
 
 		&:active:enabled {
 			background: #f3f5f6;
-			color: theme-color( 'primary' );
+			color: var(--wp-admin-theme-color);
 			border-color: #7e8993;
 			box-shadow: none;
 		}
 
 		&.is-active {
-			background: theme-color( 'primary' );
-			border-color: theme-color( 'primary' );
+			background: var(--wp-admin-theme-color);
+			border-color: var(--wp-admin-theme-color);
 			color: $white;
 			text-decoration: none;
 			text-shadow: none;
 
 			&:hover,
 			&:focus:enabled {
-				background: theme-color( 'primary' );
-				border-color: theme-color( 'primary' );
+				background: var(--wp-admin-theme-color);
+				border-color: var(--wp-admin-theme-color);
 				color: $white;
 			}
 
 			&:active:enabled {
-				background: theme-color( 'primary' );
-				border-color: theme-color( 'primary' );
+				background: var(--wp-admin-theme-color);
+				border-color: var(--wp-admin-theme-color);
 				color: $white;
 			}
 		}
@@ -126,7 +126,7 @@
 	&__item {
 		flex: 1 1 auto;
 		justify-content: center;
-		color: theme-color( 'dark' );
+		color: #212121;
 		background: #FFF;
 		align-items: center;
 		appearance: none;
@@ -153,21 +153,21 @@
 		&:hover,
 		&:focus:enabled {
 			background: #f3f5f6;
-			border-color: theme-color( 'primary' );
-			color: theme-color( 'primary' );
+			border-color: var(--wp-admin-theme-color);
+			color: var(--wp-admin-theme-color);
 			text-decoration: none;
 
 		}
 
 		&:active:enabled {
 			background: #f3f5f6;
-			color: theme-color( 'primary' );
+			color: var(--wp-admin-theme-color);
 			box-shadow: none;
 		}
 
 		&.is-active {
-			background: theme-color( 'primary' );
-			border-color: theme-color( 'primary' );
+			background: var(--wp-admin-theme-color);
+			border-color: var(--wp-admin-theme-color);
 			color: $white;
 			text-decoration: none;
 			text-shadow: none;
@@ -175,8 +175,8 @@
 			&:hover,
 			&:focus:enabled,
 			&:active:enabled {
-				background: theme-color( 'primary' );
-				border-color: theme-color( 'primary' );
+				background: var(--wp-admin-theme-color);
+				border-color: var(--wp-admin-theme-color);
 				color: $white;
 			}
 

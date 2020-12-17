@@ -47,18 +47,15 @@ class Content {
 	 * Echo the opening tag markup for content
 	 *
 	 * @since 	unknown
-	 * @version	3.6.4
+	 * @version	4.2.0
 	 *
 	 * @return 	string 
 	 */
-	public function content_markup_open() { 
-		// Adds ability to filter the attributes of main content.
-		$attributes = Markup::generate_attr( 'content', [
+	public function content_markup_open() { ?>
+		<div <?php echo Markup::generate_attr( 'content', [
 			'id' 	=> 'primary',
 			'class' => 'content__main col-12 col-lg'
-		] );
-		?>
-		<div <?php echo $attributes; ?>>
+		] ); ?>>
 			<?php 
 			
 				/**
@@ -67,7 +64,10 @@ class Content {
 				do_action( 'wecodeart/hook/main/before' ); 
 
 			?>
-			<main <?php echo Markup::generate_attr( 'main', [ 'id' => 'main', 'class' => 'site-main' ] ); ?>>
+			<main <?php echo Markup::generate_attr( 'main', [
+				'id' => 'main',
+				'class' => 'site-main'
+			] ); ?>>
 		<?php
 	}
 

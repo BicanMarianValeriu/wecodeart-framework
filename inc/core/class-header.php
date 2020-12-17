@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
- * @version		4.1.4
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Core;
@@ -52,7 +52,7 @@ class Header {
 				'id' 		=> 'header', 
 				'class'		=> 'header', 
 				'itemscope' => 'itemscope',
-				'itemtype' 	=> 'http://schema.org/WPHeader'
+				'itemtype' 	=> 'https://schema.org/WPHeader'
 			]
 		] ], function() {
 			/** 
@@ -114,7 +114,6 @@ class Header {
 			]
 		] ], 'wp_nav_menu', [ apply_filters( 'wecodeart/filter/menu/main', [
 			'theme_location' => 'primary',
-			'container' 	 => 'nav',
 			'menu_class' 	 => 'menu nav justify-content-end',
 			'depth' 		 => 10,
 		] ) ] );
@@ -159,7 +158,7 @@ class Header {
 
 		$defaults = [
 			'class'		=> implode( ' ', get_body_class() ),
-			'itemscope' => 'itemscope',
+			'itemscope' => true,
 			'itemtype' 	=> 'https://schema.org/' . $itemtype
 		];
 
@@ -201,7 +200,7 @@ class Header {
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @uses	WeCodeArt\Markup::sortable()
 	 * @since 	unknown
-	 * @version	4.0.5
+	 * @version	4.2.0
 	 *
 	 * @return 	void
 	 */
@@ -212,10 +211,7 @@ class Header {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row align-items-center' ] ]
 		], 'WeCodeArt\Markup::sortable', [
 			self::nav_bar_modules(),
-			/**
-			 * @since 3.7.7
-			 */
-			apply_filters( 'wecodeart/filter/header/bar/pre', get_theme_mod( 'header-bar-modules' ) )
+			get_theme_mod( 'header-bar-modules' )
 		] );  
 	}
 

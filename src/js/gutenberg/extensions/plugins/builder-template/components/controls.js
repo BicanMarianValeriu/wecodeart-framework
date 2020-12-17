@@ -31,7 +31,7 @@ class BuilderTemplate extends Component {
 			<PluginPostStatusInfo>
 				<CheckboxControl
 					className="wca-post-status-label"
-					label={__('Enable Page Builder Template?', 'wecodeart')}
+					label={__('Enable Page Builder template?', 'wecodeart')}
 					checked={enabled}
 					onChange={onToggle}
 					help={help}

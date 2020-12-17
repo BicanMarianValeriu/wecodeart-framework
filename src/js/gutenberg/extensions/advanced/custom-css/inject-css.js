@@ -1,14 +1,11 @@
 /**
  * WordPress dependencies.
  */
-const { __ } = wp.i18n;
-
-const { parse } = wp.blocks;
-
 const {
-	select,
-	subscribe
-} = wp.data;
+	i18n: { __ },
+	blocks: { parse },
+	data: { select, subscribe }
+} = wp;
 
 const addStyle = style => {
 	let element = document.getElementById('wca-css-editor-styles');

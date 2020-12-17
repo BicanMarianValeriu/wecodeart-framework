@@ -9,7 +9,7 @@
  * @subpackage 	Core\Hooks
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.0
- * @version		4.1.2
+ * @version		4.2
  */
 
 namespace WeCodeArt\Core;
@@ -142,6 +142,7 @@ class Hooks {
 	 * Adds Walker to WP Menus by default.
 	 *
 	 * @since 	4.0.5
+	 * @version 4.2
 	 *
 	 * @param 	array 	$args.
 	 *
@@ -149,6 +150,7 @@ class Hooks {
 	 */
 	public function menu_args( $args ) {
 		return wp_parse_args( [
+			'container' 	 => 'nav',
 			'walker' 		 => new Menu,
 			'fallback_cb'	 => 'WeCodeArt\Walkers\Menu::fallback'
 		], $args );

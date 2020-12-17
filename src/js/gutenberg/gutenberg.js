@@ -4,15 +4,13 @@ const { registerBlockType } = wp.blocks;
 import './extensions/attributes';
 
 // Core Blocks
-import './blocks/columns';
-import './blocks/column';
 import './blocks/media-text';
 
 // Block Panels
 import './extensions/modules';
 import './extensions/advanced';
 
-// // Plugins
+// Plugins
 import './extensions/plugins';
 
 // Formats
@@ -23,7 +21,6 @@ import './extensions/styles';
 
 // Custom Blocks
 import lorem from './blocks/lorem';
-import importer from './blocks/import';
 import section from './blocks/section';
 import column from './blocks/section/column';
 
@@ -33,7 +30,6 @@ import './../../scss/gutenberg/gutenberg.scss';
 export default function registerWCABlocks() {
     [
         lorem,
-        importer,
         section,
         column
     ].forEach((block) => {

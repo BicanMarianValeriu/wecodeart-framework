@@ -4,7 +4,7 @@
 	th,
 	tbody td {
 		padding: 4px;
-		border: 1px solid $gray-200;
+		border: 1px solid var(--bs-light);
 	}
 
 	tfoot td {
@@ -14,11 +14,16 @@
 	table {
 		width: 100%;
 		border-collapse: collapse;
-	}
 
-	table th {
-		font-weight: 400;
-		background: $gray-300;
+		th {
+			font-weight: 400;
+			background: var(--bs-gray);
+		}
+
+		tbody,
+		caption {
+			color: var(--bs-gray-dark);
+		}
 	}
 
 	a {
@@ -26,11 +31,6 @@
 	}
 
 	tfoot a {
-		color: theme-color( 'primary' );
-	}
-
-	table tbody,
-	table caption {
-		color: $gray-500;
+		color: var(--bs-primary);
 	}
 }

@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
- * @since		4.1.5
- * @version     4.1.54
+ * @since		4.1.8
+ * @version     4.1.8
  */
 
 namespace WeCodeArt\Functions;
@@ -57,20 +57,88 @@ function detect_plugin( array $plugins ) {
  * Trim CSS
  *
  * @since 	3.7.7
+ * @version 4.2.0
  * @param 	string $css CSS content to trim.
  *
  * @return 	string
  */
-function trim_css( $css = '' ) {
-
-    // Trim white space for faster page loading.
-    if ( ! empty( $css ) ) {
-        $css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
-        $css = str_replace( [ "\r\n", "\r", "\n", "\t", '  ', '    ', '    ' ], '', $css );
-        $css = str_replace( ', ', ',', $css );
+function compress_css( $css = '' ) {
+    // Return if no CSS
+    if ( ! $css ) {
+        return '';
     }
 
+    // remove comments
+    $css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
+
+    // Normalize whitespace
+    $css = preg_replace( '/\s+/', ' ', $css );
+
+    // Remove ; before }
+    $css = preg_replace( '/;(?=\s*})/', '', $css );
+
+    // Remove space after , : ; { } */ >
+    $css = preg_replace( '/(,|:|;|\{|}|\*\/|>) /', '$1', $css );
+
+    // Remove space before , ; { }
+    $css = preg_replace( '/ (,|;|\{|})/', '$1', $css );
+
+    // Strips leading 0 on decimal values (converts 0.5px into .5px)
+    $css = preg_replace( '/(:| )0\.([0-9]+)(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
+
+    // Strips units if value is 0 (converts 0px to 0)
+    $css = preg_replace( '/(:| )(\.?)0(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}0', $css );
+
+    // Trim
+    $css = trim( $css );
+    
+    // Double call for media queries
+    $css = clean_empty_css( $css );
+    $css = clean_empty_css( $css );
+
+    // Return minified CSS
     return $css;
+}
+
+/**
+ * Get CSS without empty selector
+ * Call after minification of CSS
+ *
+ * @since   4.2.0
+ * @access  public
+ *
+ * @param   string $minified_css
+ * @return  string
+ */
+function clean_empty_css( $minified_css ) {
+    $css_explode        = explode( '}', $minified_css );
+    $result             = '';
+    $double_braces_open = false;
+    foreach ( $css_explode as $index => $item ) {
+        $is_double_braces = substr_count( $item, '{' ) > 1;
+        if ( $is_double_braces || ( $item != '' && substr( $item, -1 ) != '{' ) ) {
+            if ( $is_double_braces ) {
+                $inner_explode = explode( '{', $item );
+                $inner_item    = $inner_explode[0] . '{';
+                if ( isset( $inner_explode[2] ) && $inner_explode[2] != '' ) {
+                    $inner_item .= $inner_explode[1] . '{' . $inner_explode[2] . '}';
+                }
+                $result .= $inner_item;
+            } else {
+                $result .= $item . '}';
+            }
+
+            if ( $is_double_braces ) {
+                $double_braces_open = true;
+            }
+        }
+        if ( $double_braces_open && $item == '' ) {
+            $result            .= '}';
+            $double_braces_open = false;
+        }
+    }
+
+    return $result;
 }
 
 /**

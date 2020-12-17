@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Admin\Request
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
- * @since 		4.1.X
- * @version		4.1.X
+ * @since 		4.2.X
+ * @version		4.2.X
  */
 
 namespace WeCodeArt\Admin;
@@ -47,10 +47,7 @@ class Request {
 	 *
 	 * @var array
 	 */
-	protected $args = [
-		'blocking'  => false,
-		'timeout'   => 2,
-	];
+	protected $args = [];
 
 	/**
 	 * Holds the response error.
@@ -103,7 +100,7 @@ class Request {
 				break;
 			default:
 				/* translators: %1$s expands to the request method  */
-				$response = new WP_Error( 1, sprintf( __( 'Request method %1$s is not valid.', 'wecodeart' ), $method ) );
+				$response = new \WP_Error( 1, sprintf( __( 'Request method %1$s is not valid.', 'wecodeart' ), $method ) );
 				break;
 		}
 
@@ -136,7 +133,7 @@ class Request {
 	 * @return bool True when response is valid.
 	 */
 	protected function process_response( $response ) {
-		if ( $response instanceof WP_Error ) {
+		if ( $response instanceof \WP_Error ) {
 			$this->response_error = $response;
 
 			return false;

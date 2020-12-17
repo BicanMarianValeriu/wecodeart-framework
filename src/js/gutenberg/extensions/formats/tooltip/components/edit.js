@@ -2,228 +2,318 @@
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
-const { Component, Fragment } = wp.element;
+const { useEffect, useState, useRef } = wp.element;
 const { compose, ifCondition } = wp.compose;
 const { withSelect } = wp.data;
 const { RichTextToolbarButton } = wp.blockEditor;
 const { applyFormat, removeFormat, getActiveFormat } = wp.richText;
-const { Modal, Button, TabPanel, ToggleControl, TextareaControl } = wp.components;
+
+const {
+    components: {
+        Modal,
+        Button,
+        TabPanel,
+        TextControl,
+        ToggleControl,
+        SelectControl,
+        __experimentalNumberControl: NumberControl
+    }
+} = wp;
 
 const name = 'wca/tooltip';
 
-class Edit extends Component {
-    constructor() {
-        super(...arguments);
+const Edit = (props) => {
+    const { isActive, value, onChange } = props;
+    const activeFormat = getActiveFormat(value, name);
 
-        this.toggle = this.toggle.bind(this);
-        this.toggleEditor = this.toggleEditor.bind(this);
-        this.editor;
+    useEffect(() => {
+        if (typeof activeFormat === 'undefined') return;
 
-        this.state = {
-            title: '',
-            isOpen: false,
-            isPopover: false,
-            isEditor: false,
-            isHtml: true,
-            options: {}
-        };
-    }
+        const { type: formatName } = activeFormat;
 
-    componentDidMount() {
-        this.addCodeMirror();
-    }
+        if (formatName !== name) return;
 
-    componentDidUpdate() {
-        this.addCodeMirror();
-    }
+        const {
+            unregisteredAttributes: {
+                title = '',
+                'data-toggle': dataToggle = '',
+                'data-options': dataOptions = '{}'
+            } = {}
+        } = activeFormat;
 
-    toggle() {
-        this.setState((state) => ({
-            isOpen: !state.isOpen,
-        }));
+        setAttributes({
+            ...attributes, ...{
+                'title': title,
+                'data-toggle': dataToggle,
+                'data-options': JSON.parse(dataOptions)
+            }
+        });
+    }, [activeFormat]);
 
-        if (this.state.isEditor) {
-            this.setState({ isEditor: false });
+    const editorRef = useRef();
+    const [editorOpts, setEditorOpts] = useState({
+        mode: 'text/html',
+        lint: true,
+        tabSize: 1,
+        indentUnit: 1,
+        height: 'auto',
+        lineNumbers: true,
+        lineWrapping: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        styleActiveLine: true,
+        styleActiveSelected: true,
+        scrollbarStyle: 'null',
+        gutters: ['CodeMirror-lint-markers'],
+        extraKeys: {
+            'Ctrl-Space': 'autocomplete',
+            'Alt-F': 'findPersistent',
+            'Cmd-F': 'findPersistent'
+        },
+    });
+    const [editor, loadEditor] = useState(null);
+    const [reload, reloadEditor] = useState(true);
+    const [modal, setModal] = useState(false);
+
+    let [attributes, setAttributes] = useState({
+        'title': '',
+        'data-toggle': 'tooltip',
+        'data-options': {}
+    });
+
+    const { title, 'data-toggle': type, 'data-options': options } = attributes;
+
+    // On Tooltip Type Change
+    useEffect(() => {
+        console.log(type);
+        if (type === 'tooltip') {
+            setEditorOpts({ ...editorOpts, value: title });
         }
-    }
-
-    toggleEditor() {
-        this.setState((state) => ({
-            isHtml: !state.isHtml,
-        }));
-
-        if (this.state.isEditor && this.setState.isHtml !== true) {
-            this.setState({ isEditor: false });
+        if (type === 'popover') {
+            setEditorOpts({ ...editorOpts, value: options?.content || '' });
         }
-    }
+    }, [type]);
 
-    addCodeMirror() {
-        const { title: value, isEditor } = this.state;
+    // On Tab Change
+    useEffect(() => {
+        loadEditor(wp.CodeMirror(editorRef.current, editorOpts));
+    }, [reload, editorOpts]);
 
-        if (isEditor === false) {
-            const editorSettings = {
-                value,
-                mode: 'text/html',
-                lint: true,
-                tabSize: 1,
-                indentUnit: 1,
-                height: 'auto',
-                lineNumbers: true,
-                lineWrapping: true,
-                matchBrackets: true,
-                autoCloseBrackets: true,
-                styleActiveLine: true,
-                styleActiveSelected: true,
-                scrollbarStyle: 'null',
-                gutters: ['CodeMirror-lint-markers'],
-                extraKeys: {
-                    'Ctrl-Space': 'autocomplete',
-                    'Alt-F': 'findPersistent',
-                    'Cmd-F': 'findPersistent'
-                },
-            };
+    // On Editor Loaded
+    useEffect(() => {
+        if (editor === null) return;
 
-            const EditorContainer = document.getElementById('wecodeart-tooltip-editor');
-            if (EditorContainer) {
-                this.editor = wp.CodeMirror(EditorContainer, editorSettings);
-                this.editor.on('change', () => this.setState({ title: this.editor.getValue() }));
-                if (EditorContainer.children.length) {
-                    this.setState({ isEditor: true });
-                } else {
-                    this.setState({ isEditor: false });
+        if (type === 'tooltip') {
+            attributes = {
+                ...attributes,
+                'title': editor.getValue(),
+                'data-toggle': 'tooltip'
+            }
+        }
+
+        if (type === 'popover') {
+            attributes = {
+                ...attributes,
+                'data-toggle': 'popover',
+                'data-options': {
+                    ...options,
+                    content: editor.getValue()
                 }
             }
         }
-    }
 
-    render() {
-        const { title, isPopover, isHtml, isEditor } = this.state;
-        const { isActive, value, onChange } = this.props;
+        editor.on('change', () => setAttributes(attributes));
+    }, [editor, type, reload]);
 
-        const activeFormat = getActiveFormat(value, name);
-
-        let tabs = {};
-        tabs.content = () => {
-            return (
-                <Fragment>
-                    <ToggleControl
-                        label={__('Use HTML Content ?', 'wecodeart')}
-                        help={__('Select to enable HTML content!', 'wecodeart')}
-                        checked={isHtml}
-                        onChange={this.toggleEditor}
-                    />
-                    {!isHtml && <TextareaControl
-                        label={__('Tooltip', 'wecodeart')}
-                        value={activeFormat && !title ? activeFormat.attributes.title : title}
-                        onChange={(_title) => this.setState({ title: _title })}
-                    />}
-                    {isHtml && <div className="wecodeart-tooltip__editor" id="wecodeart-tooltip-editor" />}
-                </Fragment>
-            );
-        };
-
-        tabs.options = () => {
-            return (
-                <Fragment>
-                    <ToggleControl
-                        label={__('Popover ?', 'wecodeart')}
-                        checked={isPopover}
-                        onChange={(option) => this.setState({ isPopover: option })}
-                    />
-                </Fragment>
-            );
-        };
-
-        const onSelect = (tab) => {
-            if (tab === 'options' && isHtml && isEditor) {
-                this.setState({ isEditor: false });
-            }
-
-            if (tab === 'content' && isHtml) {
-                this.toggleEditor();
-            }
-        };
-
+    let tabs = {};
+    tabs.content = () => {
+        const shouldShowTitle = type === 'popover';
         return (
-            <Fragment>
-                <RichTextToolbarButton
-                    icon="testimonial"
-                    title={__('Tooltip', 'wecodeart')}
-                    onClick={this.toggle}
-                    isActive={isActive}
-                />
-                {this.state.isOpen && (
-                    <Modal
-                        title={__('Insert Tooltip', 'wecodeart')}
-                        className="wecodeart-tooltips-modal"
-                        onRequestClose={this.toggle}>
-                        <TabPanel
-                            className="wecodeart-horizontal-tabs wecodeart-horizontal-tabs--tooltips"
-                            activeClass="is-active"
-                            onSelect={onSelect}
-                            tabs={[
-                                {
-                                    name: 'content',
-                                    title: __('Content', 'wecodeart'),
-                                    className: 'tab-one',
-                                },
-                                {
-                                    name: 'options',
-                                    title: __('Options', 'wecodeart'),
-                                    className: 'tab-two',
-                                },
-                            ]}>
-                            {
-                                (tab) => tabs[tab.name]()
-                            }
-                        </TabPanel>
-                        <Button isPrimary isLarge onClick={() => {
-                            if (title) {
-                                const attributes = { title };
-
-                                let options = {
-                                    type: 'tooltip',
-                                };
-
-                                if (isPopover) {
-                                    options = { ...options, type: 'popover' };
-                                }
-
-                                if (isHtml) {
-                                    options = { ...options, html: true };
-                                }
-
-                                attributes.options = JSON.stringify(options);
-
-                                onChange(applyFormat(value, { type: name, attributes }));
-                            } else {
-                                onChange(removeFormat(value, name));
-                            }
-
-                            this.toggle();
-                        }}>
-                            {__('Apply', 'wecodeart')}
-                        </Button>
-                    </Modal>
-                )}
-            </Fragment>
+            <>
+                {shouldShowTitle && <TextControl
+                    label={__('Title', 'wecodeart')}
+                    value={title}
+                    onChange={(title) => setAttributes({ ...attributes, title })}
+                />}
+                <p>{__('Content', 'wecodeart')}</p>
+                <div className="wecodeart-tooltip__editor" id="wecodeart-tooltip-editor" ref={editorRef} />
+            </>
         );
-    }
-}
+    };
+
+    tabs.options = () => {
+        return (
+            <>
+                <p>
+                    <SelectControl
+                        label={__('Type', 'wecodeart')}
+                        value={type || 'tooltip'}
+                        options={[
+                            { label: __('Tooltip', 'wecodeart'), value: 'tooltip' },
+                            { label: __('Popover', 'wecodeart'), value: 'popover' },
+                        ]}
+                        onChange={(type) => setAttributes({
+                            ...attributes, 'data-toggle': type
+                        })}
+                    />
+                </p>
+                <p>
+                    <SelectControl
+                        multiple
+                        label={__('Trigger', 'wecodeart')}
+                        value={options?.trigger && options.trigger.split(' ') || ['hover', 'focus']}
+                        options={[
+                            { label: __('Hover', 'wecodeart'), value: 'hover' },
+                            { label: __('Focus', 'wecodeart'), value: 'focus' },
+                            { label: __('Click', 'wecodeart'), value: 'click' },
+                            { label: __('Manual', 'wecodeart'), value: 'manual' },
+                        ]}
+                        onChange={(triggers) => setAttributes({
+                            ...attributes,
+                            'data-options': {
+                                ...options,
+                                trigger: triggers.join(' ')
+                            }
+                        })}
+                    />
+                </p>
+                <p>
+                    <SelectControl
+                        label={__('Placement', 'wecodeart')}
+                        value={options?.placement || top}
+                        options={[
+                            { label: __('Top', 'wecodeart'), value: 'top' },
+                            { label: __('Left', 'wecodeart'), value: 'left' },
+                            { label: __('Right', 'wecodeart'), value: 'right' },
+                            { label: __('Bottom', 'wecodeart'), value: 'bottom' },
+                        ]}
+                        onChange={(placement) => setAttributes({
+                            ...attributes,
+                            'data-options': {
+                                ...options,
+                                placement
+                            }
+                        })}
+                    />
+                </p>
+                <p>
+                    <NumberControl
+                        label={__('Offset', 'wecodeart')}
+                        value={options?.offset || 0}
+                        min={0}
+                        onChange={(offset) => {
+                            setAttributes({
+                                ...attributes,
+                                'data-options': {
+                                    ...options,
+                                    offset: parseInt(offset),
+                                }
+                            });
+                        }}
+                    />
+                </p>
+                <p>
+                    <NumberControl
+                        label={__('Delay', 'wecodeart')}
+                        value={options?.delay || 0}
+                        min={0}
+                        onChange={(delay) => {
+                            setAttributes({
+                                ...attributes,
+                                'data-options': {
+                                    ...options,
+                                    delay: parseInt(delay),
+                                }
+                            });
+                        }}
+                    />
+                </p>
+                <p>
+                    <ToggleControl
+                        label={__('Allow HTML Content?', 'wecodeart')}
+                        checked={options?.html || false}
+                        onChange={(html) => {
+                            setAttributes({
+                                ...attributes,
+                                'data-options': {
+                                    ...options,
+                                    html,
+                                }
+                            });
+                        }}
+                    />
+                </p>
+            </>
+        );
+    };
+
+    return (
+        <>
+            <RichTextToolbarButton
+                icon="testimonial"
+                title={__('Tooltip', 'wecodeart')}
+                onClick={() => setModal(true)}
+                isActive={isActive}
+            />
+            {modal && (
+                <Modal
+                    title={__('Insert Tooltip', 'wecodeart')}
+                    className="wecodeart-tooltips-modal"
+                    onRequestClose={() => setModal(false)}>
+                    <TabPanel
+                        className="wecodeart-horizontal-tabs wecodeart-horizontal-tabs--tooltips"
+                        activeClass="is-active"
+                        onSelect={(tab) => {
+                            if (tab === 'options') {
+                                return reloadEditor(true);
+                            }
+                            return reloadEditor(false);
+                        }}
+                        initialTabName="options"
+                        tabs={[
+                            {
+                                name: 'content',
+                                title: __('Content', 'wecodeart'),
+                                className: 'tab-one',
+                            },
+                            {
+                                name: 'options',
+                                title: __('Options', 'wecodeart'),
+                                className: 'tab-two',
+                            },
+                        ]}>
+                        {
+                            (tab) => tabs[tab.name]()
+                        }
+                    </TabPanel>
+                    <Button isPrimary isLarge onClick={() => {
+                        if (title) {
+                            attributes = { ...attributes, ['data-options']: JSON.stringify(options) };
+                            onChange(applyFormat(value, { type: name, attributes }));
+                        } else {
+                            onChange(removeFormat(value, name));
+                        }
+
+                        setModal(false);
+                    }}>
+                        {__('Apply', 'wecodeart')}
+                    </Button>
+                </Modal>
+            )}
+        </>
+    );
+};
 
 export default compose(
-    withSelect(function (select) {
+    withSelect((select) => {
         return {
             selectedBlock: select('core/block-editor').getSelectedBlock()
         };
     }),
-    ifCondition(function (props) {
-        return (
-            props.selectedBlock &&
-            (
-                props.selectedBlock.name === 'core/paragraph' ||
-                props.selectedBlock.name === 'core/heading'
-            )
-        );
+    ifCondition((props) => {
+        const { selectedBlock } = props;
+        const { name } = selectedBlock;
+        const condition = selectedBlock && (name === 'core/paragraph' || name === 'core/heading');
+        return condition;
     })
 )(Edit);

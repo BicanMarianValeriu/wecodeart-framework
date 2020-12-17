@@ -21,6 +21,34 @@ import { restrictedBlocks } from '../../attributes';
 import { getVisibilityClasses } from './utils';
 
 /**
+ * Filters registered block settings, extending attributes with anchor using ID
+ * of the first node.
+ *
+ * @param 	{Object} settings Original block settings.
+ *
+ * @return 	{Object} Filtered block settings.
+ */
+function addAttributes(settings) {
+	const { name: blockName } = settings;
+	if (typeof settings.attributes !== 'undefined' && !restrictedBlocks.includes(blockName)) {
+		settings.attributes = Object.assign(settings.attributes, {
+			wecodeart: {
+				type: 'object',
+				default: {
+					desktop: true,
+					tablet: true,
+					mobile: true,
+					loggedin: true,
+					loggedout: true,
+				},
+			},
+		});
+	}
+
+	return settings;
+}
+
+/**
  * Add custom Controls to selected blocks
  *
  * @param {Function} BlockEdit Original component.
@@ -69,7 +97,11 @@ function applyExtraClasses(extraProps, blockType, attributes) {
 	const { wecodeart } = attributes;
 	const { name: blockName } = blockType;
 
-	if (!restrictedBlocks.includes(blockName) && typeof wecodeart !== 'undefined') {
+	if (!restrictedBlocks.includes(blockName) ) {
+		if (typeof attributes.wecodeart === 'undefined') {
+			attributes.wecodeart = Object.assign({}, attributes.wecodeart);
+		}
+		
 		if (
 			typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile ||
 			typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet ||
@@ -86,6 +118,7 @@ function applyExtraClasses(extraProps, blockType, attributes) {
  * Apply Filters
  */
 function applyFilters() {
+	addFilter('blocks.registerBlockType', 'wecodeart/blocks/visibility/attributes', addAttributes);
 	addFilter('editor.BlockEdit', 'wecodeart/editor/visibility/withVisibilityControls', withVisibilityControls);
 	addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/visibility/applyExtraClass', applyExtraClasses);
 }
