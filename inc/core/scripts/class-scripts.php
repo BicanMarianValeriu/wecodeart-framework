@@ -9,7 +9,7 @@
  * @subpackage 	Core\Scripts
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		1.9
- * @version		4.1.8
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Core;
@@ -40,8 +40,7 @@ class Scripts {
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'localize_js' 			], 90 );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			], 95 );
 		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] );
-		add_filter( 'wp_get_custom_css', 	[ $this, 'trim_customizer_css' 	] );
-		add_filter( 'wp_resource_hints', 	[ $this, 'gf_resource_hints' 	], 10, 2 ); 
+		add_filter( 'wp_get_custom_css', 	[ $this, 'trim_customizer_css' 	] ); 
 		// add_filter( 'script_loader_tag', 	[ $this, 'maybe_enable_attrs' 	], 10, 3 );
 	}
 
@@ -121,40 +120,6 @@ class Scripts {
 		if ( ( is_page() || is_single() ) && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
-
-		// Enqueue Fonts
-		$fonts = [];
-		
-		$fonts_control = get_theme_mod( 'typography-fonts-primary', false );
-		if( $fonts_control ) {
-			$fonts['primary'] = count( $fonts_control['fontWeights'] ) > 0 ? implode( ':', [
-				$fonts_control['fontFamily'], 
-				join( ',', $fonts_control['fontWeights'] )
-			] ) : $fonts_control['fontFamily'];
-		}
-
-		$fonts = apply_filters( 'wecodeart/filter/scripts/fonts', $fonts );
-
-		if( count( $fonts ) > 0 ) {
-
-			$fonts_url = add_query_arg( [
-				'family' => implode( '|', $fonts ),
-				'subset' => rawurlencode( 'latin,latin-ext' ),
-			], 'https://fonts.googleapis.com/css' );
-
-			wp_enqueue_style( $this->make_handle( 'fonts' ), esc_url( $fonts_url ), [], wecodeart( 'version' ) );
-			
-			$fonts_css = "
-				:root {
-					--bs-font-sans-serif: '{$fonts_control['fontFamily']}', sans-serif;
-				}
-				body {
-					font-family: '{$fonts_control['fontFamily']}', sans-serif;
-				}
-			";
-				
-			wp_add_inline_style( $this->make_handle( 'fonts' ), compress_css( $fonts_css ) );
-		}
 	}
 
 	/**
@@ -211,30 +176,6 @@ class Scripts {
 		}
 
 		return $tag;
-	}
-
-	/**
-	 * Resource Hinds.
-	 *
-	 * @since 5.1.54
-	 *
-	 * @param 	array 	$urls    			The resource urls.
-	 * @param 	string 	$relation_type 	The type.
-	 *
-	 * @return 	array
-	 */
-	public function gf_resource_hints( $urls, $relation_type ) {
-		if ( wp_style_is( 'google-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
-			if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '>=' ) ) {
-				$urls[] = [
-					'href' => 'https://fonts.gstatic.com',
-					'crossorigin',
-				];
-			} else {
-				$urls[] = 'https://fonts.gstatic.com';
-			}
-		}
-		return $urls;
 	}
 }
 

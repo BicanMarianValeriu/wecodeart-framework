@@ -34,7 +34,7 @@ const {
 } = wp;
 
 export default function Edit(props) {
-    const { className, attributes, clientId } = props;
+    const { clientId, className, attributes, setAttributes } = props;
 
     const {
         verticalAlignment,
@@ -65,7 +65,7 @@ export default function Edit(props) {
 
     const { updateBlockAttributes } = useDispatch('core/block-editor');
 
-    const updateAlignment = (value) => {
+    const updateAlignment = (verticalAlignment) => {
         setAttributes({ verticalAlignment });
         updateBlockAttributes(rootClientId, { verticalAlignment: null });
     };
@@ -78,7 +78,7 @@ export default function Edit(props) {
     });
 
     const innerBlocksProps = useInnerBlocksProps(blockProps, {
-        renderAppender: hasChildBlocks ? undefined : () => <InnerBlocks.ButtonBlockAppender />,
+        renderAppender: hasChildBlocks ? undefined : InnerBlocks.ButtonBlockAppender,
         templateLock: false,
     });
 

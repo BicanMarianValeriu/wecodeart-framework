@@ -10,12 +10,12 @@
 			"type": "string"
 		},
 		"container": {
-			"type": "boolean",
-			"default": true
+			"type": "string",
+			"default": "container"
 		},
 		"gutter": {
-			"type": "boolean",
-			"default": true
+			"type": "number",
+			"default": 4
 		},
 		"backgroundColor": {
 			"type": "string"

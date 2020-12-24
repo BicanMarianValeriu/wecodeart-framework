@@ -5,13 +5,13 @@ const {
     components: { SelectControl }
 } = wp;
 
+const { fonts: { Google } } = wecodeartFontsControl;
+
 const FontWeightsSelector = ({
     font,
     selected,
     onWeightChoice,
 }) => {
-    const { fonts: { Google } } = wecodeartFontsControl;
-
     const getWeightsList = () => {
         let fontWeigths = Google.filter(item => item.family.toLowerCase() === font.toLowerCase());
         if (fontWeigths.length) fontWeigths = fontWeigths.pop()?.variants;
@@ -24,19 +24,16 @@ const FontWeightsSelector = ({
     ) return null;
 
     return (
-        <div className="wecodeart-typeface-control__font-weights">
+        <div className="wca-customizer-control__font-weights">
             <hr />
             <SelectControl
                 multiple={true}
                 label={__('Select Font Weights:')}
                 value={selected && selected.length ? selected : ['regular']}
                 onChange={(values) => onWeightChoice(values)}
-                options={getWeightsList().map(i => {
-                    let value = i === 'regular' ? '400' : i;
-                    value = i === 'italic' ? '400italic' : value;
-
-                    let label = i === 'regular' ? '400' : i;
-                    label = i === 'italic' ? '400italic' : label;
+                options={getWeightsList().map(value => {
+                    let label = value === 'regular' ? '400' : value;
+                    label = value === 'italic' ? '400italic' : label;
 
                     return ({ value, label });
                 })}

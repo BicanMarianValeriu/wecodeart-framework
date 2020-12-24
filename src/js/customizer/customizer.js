@@ -32,15 +32,15 @@ function addCss(id, content = '') {
 			selector = selector.split(',');
 			selector = selector.map((sel) => 'html ' + sel).join(',');
 
-			const { fontFamily } = value;
-			if (fontFamily === false) {
+			const { family } = value;
+			if (family === false) {
 				addCss(controlId, `${selector} {font-family:${defaultFontface};}`);
 			} else {
-				addCss(controlId, `:root {--bs-font-sans-serif:${fontFamily};} ${selector} {font-family:${fontFamily};}`);
+				addCss(controlId, `:root {--bs-font-sans-serif:${family};} ${selector} {font-family:${family};}`);
 			}
 
 			if (source.toLowerCase() === 'google') {
-				const linkNode = document.querySelector('#' + controlId), fontValue = fontFamily.replace(' ', '+');
+				const linkNode = document.querySelector('#' + controlId), fontValue = family.replace(' ', '+');
 				const url = `//fonts.googleapis.com/css?family=${fontValue}%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800&display=swap"`;
 
 				if (linkNode !== null) {
@@ -74,7 +74,7 @@ function addCss(id, content = '') {
 	const contentContexts = ['blog'];
 	contentContexts.forEach(context => {
 		let apiOption = 'content-layout-container';
-		if (context.length) apiOption = [apiOption, context].join('-');
+		apiOption = [apiOption, context].join('-');
 
 		api(apiOption, function (value) {
 			value.bind(function (to) {

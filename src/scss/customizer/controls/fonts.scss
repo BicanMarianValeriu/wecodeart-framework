@@ -1,59 +1,120 @@
-.wecodeart-typeface-control {
-	border: 1px solid #ccc;
-	padding: 10px;
-	background: #fff;
+.wca-customizer-control--typeface {
+	.wca-customizer-control {
+		&__header {
+			.components-dropdown {
+				display: block;
 
-	&__font-family {
-		.popover-header {
-			position: absolute;
-			top: -40px;
-	
-			.search {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background-color: #fff;
-				box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2);
-				border-bottom: 1px solid #ccc;
-				padding: 5px;
-				width: 300px;
-				top: 0;
-				box-sizing: border-box;
-		
-				.components-base-control {
-					width: 85%;
-		
-					&__field {
-						margin-bottom: 0;
-			
-						input {
-							height: 25px;
-							width: 100%;
-						}
+				.components-popover__content {
+					overflow: hidden;
+
+					> div {
+						padding: 0;
 					}
 				}
+			}
+
+			button {
+				width: 100%;
+				border: 1px solid lightgray;
+				box-shadow: none;
+				background-color: transparent;
 		
-				.close-font-selector {
-					padding: 0 5px;
+				.ff-name {
+					width: 65%;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					line-height: 1;
+					text-align: left;
+				}
+		
+				.ff-preview {
+					line-height: 1;
 					margin-left: auto;
+					font-size: 21px;
+				}
+			}
+		
+			.select-inline {
+				margin-bottom: 10px;
+				display: flex;
+				align-items: center;
+		
+				> .customize-control-title {
+					margin: 0;
+					max-width: 35%;
+				}
+		
+				> * {
+					flex-grow: 1;
+				}
+		
+				select {
+					border-radius: 0;
+					border-color: lightgray;
+				}
+		
+				.components-base-control__field {
+					margin: 0;
 				}
 			}
 		}
+		
+		&__font-weights {
+			.components-select-control {
+				&__input {
+					height: auto!important;
+					min-height: 150px!important;
+				}
+			}
 	
-		.popover-content {
-			position: relative;
-			display: block;
-			width: 300px !important;
+			.components-input-control {
+				&__suffix {
+					display: none!important;
+				}
+			}
 		}
+	}
+
+	.wecodeart-fonts {
+		position: relative;
+
+		&__search {
+			position: absolute;
+			top: -40px;
+			left: 0;
+			right: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #fff;
+			box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2);
+			border-bottom: 1px solid #ccc;
+			padding: 5px;
+			box-sizing: border-box;
 	
-		.components-popover__content {
-			overflow: hidden !important;
+			.components-base-control {
+				width: 85%;
+	
+				&__field {
+					margin-bottom: 0;
+		
+					input {
+						height: 25px;
+						width: 100%;
+					}
+				}
+			}
+	
+			.close-font-selector {
+				padding: 0 5px;
+				margin-left: auto;
+			}
 		}
-	
-		.wecodeart-fonts-list {
-			max-height: 400px;
+
+		&__list {
 			margin-top: 40px;
-			overflow: auto;
+			overflow-y: auto;
+			max-height: 300px;
 	
 			.load-more {
 				padding: 10px 0;
@@ -86,12 +147,13 @@
 				}
 	
 				a {
-					align-items: center;
 					display: flex;
+					align-items: center;
 					padding: 5px 10px;
 					transition: .2s ease;
 					color: #333;
 					border-bottom: 1px solid #efefef;
+					cursor: pointer;
 	
 					&:hover {
 						color: #fff;
@@ -116,70 +178,5 @@
 				}
 			}
 		}
-	
-		.select-inline {
-			margin-bottom: 10px;
-			display: flex;
-			align-items: center;
-	
-			> .customize-control-title {
-				margin: 0;
-				max-width: 35%;
-			}
-	
-			> * {
-				flex-grow: 1;
-			}
-	
-			select {
-				border-radius: 0;
-				border-color: lightgray;
-			}
-	
-			.components-base-control__field {
-				margin: 0;
-			}
-		}
-	}
-
-	&__font-weights {
-		.components-select-control {
-			&__input {
-				height: auto!important;
-				min-height: 150px!important;
-			}
-		}
-
-		.components-input-control {
-			&__suffix {
-				display: none!important;
-			}
-		}
-	}
-
-	button {
-		width: 100%;
-		height: 35px;
-		align-items: center;
-		justify-content: center;
-		display: flex;
-		border: 1px solid lightgray;
-		box-shadow: none;
-		background-color: transparent;
-
-		.ff-name {
-			width: 65%;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			line-height: 1;
-			text-align: left;
-		}
-
-		.ff-preview {
-			line-height: 1;
-			margin-left: auto;
-			font-size: 21px;
-		}
 	}
 }
-

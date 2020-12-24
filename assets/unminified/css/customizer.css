@@ -1,3 +1,8 @@
+.wca-customizer-control {
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 10px; }
+
 .customize-control-wecodeart-divider__wrapper {
   margin: 0 -12px;
   padding: 14px 12px;

@@ -99,6 +99,10 @@ return [
         'footer-layout-container'   => 'container',
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
         'footer-copyright-text'     => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
+        'general-typography-primary'=> [
+            'fontFamily' => 'Bad Script',
+            'fontWeights'=> [ /* '300', '400', '700'  */]
+        ],
     ],
     /*
     |--------------------------------------------------------------------------

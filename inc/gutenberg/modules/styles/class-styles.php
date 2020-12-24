@@ -21,7 +21,7 @@ use WeCodeArt\Gutenberg;
 /**
  * Handles Gutenberg Theme CSS Functionality.
  */
-class CSS {
+class Styles {
 
 	use \WeCodeArt\Singleton;
 	use \WeCodeArt\Core\Scripts\Base;
@@ -32,14 +32,16 @@ class CSS {
 	 * @return void
 	 */
 	public function init() {
-		CSS\Handler::get_instance();
-		CSS\Frontend::get_instance();
+		// CSS Handler
+		Styles\Handler::get_instance();
+		// Enqueue Styles
+		Styles\Embed::get_instance();
 	}
 
 	/**
 	 * Get Blocks CSS
 	 *
-	 * @param 	int $post_id Post id.
+	 * @param 	int 	$post_id Post id.
 	 * @return 	string
 	 * @since   4.2.0
 	 * @access  public
@@ -84,9 +86,9 @@ class CSS {
 	/**
 	 * Cycle thorugh Static Blocks
 	 *
-	 * @param array $blocks List of blocks.
+	 * @param 	array 	$blocks List of blocks.
 	 *
-	 * @return 	string Style.
+	 * @return 	string 	Style.
 	 * @since   4.2.0
 	 * @access  public
 	 */

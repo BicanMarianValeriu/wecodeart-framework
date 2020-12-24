@@ -28,46 +28,23 @@ class Typography extends Config {
 	 *
 	 * @param 	array                $configurations 
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
-	 * @since 	3.6
+	 * @since 	4.2
 	 *
 	 * @return 	array 
 	 */
 	public function register( $configurations, $wp_customize ) {
-		// A handy class for formatting theme mods.
-		$formatting = Formatting::get_instance();
-
-		$_configs = array(
-			array(
-				'name'     => 'typography-fonts',
-				'type'     => 'section',
-				'priority' => 10,
-				'title'    => esc_html__( 'Fonts', 'wecodeart' ),
-				'panel'    => 'typography',
-			),
-			array(
-				'name'			=> 'typography-fonts-primary',
+		$_configs = [
+			[
+				'name'			=> 'general-typography-primary',
 				'type' 			=> 'control',
 				'control'  		=> 'wecodeart-fonts',
-				'section'		=> 'typography-fonts',
+				'section'		=> 'general-typography',
 				'title' 		=> esc_html__( 'Primary Font', 'wecodeart' ),
 				'description' 	=> esc_html__( 'This font is used on body and will be placed in Boostrap`s sans serif CSS variable.', 'wecodeart' ),
 				'priority' 		=> 5,
 				'transport'		=> 'postMessage'
-			),
-			// array(
-			// 	'name'			=> 'typography-fonts-fallback',
-			// 	'type' 			=> 'control',
-			// 	'control'  		=> 'wecodeart-fonts',
-			// 	'section'		=> 'typography-fonts',
-			// 	'title' 		=> esc_html__( 'Fallback Font', 'wecodeart' ),
-			// 	'description' 	=> esc_html__( 'Choose fallback font.', 'wecodeart' ),
-			// 	'priority' 		=> 10,
-			// 	'input_attrs' 	=> [
-			// 		'system' => true,
-			// 	],
-			// 	'transport'		=> 'postMessage'
-			// ),
-		);
+			],
+		];
 
 		return array_merge( $configurations, $_configs );
 	}

@@ -42,8 +42,8 @@ class Controls {
 		/**
 		 * Register Custom Customizer Controls
 		 */
-		self::add_control( 'wecodeart-slider', [ 
-			'callback' 			=> 'WeCodeArt\Customizer\Controls\Slider',
+		self::add_control( 'wecodeart-range', [ 
+			'callback' 			=> 'WeCodeArt\Customizer\Controls\Range',
 			'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_number' ]
 		] );
 
@@ -60,6 +60,11 @@ class Controls {
 		self::add_control( 'wecodeart-fonts', [ 
 			'callback' 			=> 'WeCodeArt\Customizer\Controls\Fonts',
 			'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_font' ]
+		] );
+	
+		self::add_control( 'wecodeart-color', [ 
+			'callback' 			=> 'WeCodeArt\Customizer\Controls\Color',
+			'sanitize_callback' => [ 'WeCodeArt\Customizer\Formatting', 'sanitize_text_field' ]
 		] );
 	}
 

@@ -8768,7 +8768,7 @@ applyFilters();
 /*! exports provided: name, category, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"wca/section\",\"category\":\"wca\",\"attributes\":{\"align\":{\"type\":\"string\",\"default\":\"full\"},\"verticalAlignment\":{\"type\":\"string\"},\"container\":{\"type\":\"boolean\",\"default\":true},\"gutter\":{\"type\":\"boolean\",\"default\":true},\"backgroundColor\":{\"type\":\"string\"},\"customBackgroundColor\":{\"type\":\"string\"}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false,\"anchor\":true,\"className\":true,\"lightBlockWrapper\":true,\"color\":{\"gradients\":true,\"link\":false}}}");
+module.exports = JSON.parse("{\"name\":\"wca/section\",\"category\":\"wca\",\"attributes\":{\"align\":{\"type\":\"string\",\"default\":\"full\"},\"verticalAlignment\":{\"type\":\"string\"},\"container\":{\"type\":\"string\",\"default\":\"container\"},\"gutter\":{\"type\":\"number\",\"default\":4},\"backgroundColor\":{\"type\":\"string\"},\"customBackgroundColor\":{\"type\":\"string\"}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false,\"anchor\":true,\"className\":true,\"lightBlockWrapper\":true,\"color\":{\"gradients\":true,\"link\":false}}}");
 
 /***/ }),
 
@@ -8835,9 +8835,10 @@ var _wp = wp,
     useBlockProps = _wp$blockEditor.useBlockProps,
     useInnerBlocksProps = _wp$blockEditor.__experimentalUseInnerBlocksProps;
 function Edit(props) {
-  var className = props.className,
+  var clientId = props.clientId,
+      className = props.className,
       attributes = props.attributes,
-      clientId = props.clientId;
+      setAttributes = props.setAttributes;
   var verticalAlignment = attributes.verticalAlignment,
       _attributes$bootstrap = attributes.bootstrapColumns,
       global = _attributes$bootstrap.global,
@@ -8868,7 +8869,7 @@ function Edit(props) {
   var _useDispatch = useDispatch('core/block-editor'),
       updateBlockAttributes = _useDispatch.updateBlockAttributes;
 
-  var updateAlignment = function updateAlignment(value) {
+  var updateAlignment = function updateAlignment(verticalAlignment) {
     setAttributes({
       verticalAlignment: verticalAlignment
     });
@@ -8882,9 +8883,7 @@ function Edit(props) {
     style: Object(_controls_background__WEBPACK_IMPORTED_MODULE_5__["getBackgroundStyles"])(attributes)
   });
   var innerBlocksProps = useInnerBlocksProps(blockProps, {
-    renderAppender: hasChildBlocks ? undefined : function () {
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(InnerBlocks.ButtonBlockAppender, null);
-    },
+    renderAppender: hasChildBlocks ? undefined : InnerBlocks.ButtonBlockAppender,
     templateLock: false
   });
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(BlockVerticalAlignmentToolbar, {
@@ -9055,16 +9054,17 @@ var _wp = wp,
     InnerBlocks = _wp$blockEditor.InnerBlocks,
     BlockControls = _wp$blockEditor.BlockControls,
     BlockVerticalAlignmentToolbar = _wp$blockEditor.BlockVerticalAlignmentToolbar,
-    __experimentalBlockVariationPicker = _wp$blockEditor.__experimentalBlockVariationPicker,
     useBlockProps = _wp$blockEditor.useBlockProps,
+    __experimentalBlockVariationPicker = _wp$blockEditor.__experimentalBlockVariationPicker,
+    useInnerBlocksProps = _wp$blockEditor.__experimentalUseInnerBlocksProps,
     _wp$components = _wp.components,
     PanelBody = _wp$components.PanelBody,
-    ToggleControl = _wp$components.ToggleControl,
     Button = _wp$components.Button,
     ToolbarGroup = _wp$components.ToolbarGroup,
     MenuGroup = _wp$components.MenuGroup,
     MenuItem = _wp$components.MenuItem,
     Dropdown = _wp$components.Dropdown,
+    SelectControl = _wp$components.SelectControl,
     compose = _wp.compose.compose,
     _wp$data = _wp.data,
     withSelect = _wp$data.withSelect,
@@ -9081,15 +9081,13 @@ var _wp = wp,
  * @type {string[]}
  */
 
-var ALLOWED_BLOCKS = ['wca/column']; // const wcaCBFIBT = (a) => map(a, ([name, attr, blocks = []]) => createBlock(name, attr, wcaCBFIBT(blocks)));
-// Note this uses __experimentalGetPreviewDeviceType, but has a fallback for older versions of Gutenberg.
+var ALLOWED_BLOCKS = ['wca/column']; // Note this uses __experimentalGetPreviewDeviceType, but has a fallback for older versions of Gutenberg.
 // The fallback will be removed once WordPress contains supports for __experimentalGetPreviewDeviceType
 
 function EditContainer(props) {
-  var _classnames, _classnames2;
+  var _classnames;
 
   var isSelected = props.isSelected,
-      className = props.className,
       _props$attributes = props.attributes,
       attributes = _props$attributes === void 0 ? {} : _props$attributes,
       deviceType = props.deviceType,
@@ -9099,56 +9097,23 @@ function EditContainer(props) {
   var align = attributes.align,
       verticalAlignment = attributes.verticalAlignment,
       container = attributes.container,
-      gutters = attributes.gutters;
+      gutter = attributes.gutter;
   var blockProps = useBlockProps({
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, 'wca-section', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "align".concat(align), align), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, 'wp-block-wca-layout--mobile', deviceType === 'Mobile'), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, 'wp-block-wca-layout--tablet', deviceType === 'Tablet'), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, 'wp-block-wca-layout--desktop', deviceType === 'Desktop'), _classnames)),
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wca-section', {
+      'wca-section--mobile': deviceType === 'Mobile',
+      'wca-section--tablet': deviceType === 'Tablet',
+      'wca-section--desktop': deviceType === 'Desktop'
+    }),
     style: Object(_controls_background__WEBPACK_IMPORTED_MODULE_3__["getBackgroundStyles"])(attributes)
   });
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()({
-      'wca-overlay-grid': true,
-      'wca-overlay-grid--no-gutters': container && gutters
-    })
-  }, times(Object(_constants__WEBPACK_IMPORTED_MODULE_4__["getGridWidth"])(deviceType)).map(function (i) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-      className: "wca-overlay-grid__column",
-      key: i
-    });
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wca-section__container', {
-      'container': container && ['full', 'wide'].includes(align) === false,
-      'container-fluid': container && ['full', 'wide'].includes(align) === true
-    })
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, {
-    renderAppender: isSelected ? function () {
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks.ButtonBlockAppender, null);
-    } : false,
+  var innerBlocksProps = useInnerBlocksProps({
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wca-section__row', 'row', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "gx-".concat(gutter), gutter), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "align".concat(align), align), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "align-items-".concat(verticalAlignment), verticalAlignment), _classnames))
+  }, {
     allowedBlocks: ALLOWED_BLOCKS,
     orientation: 'horizontal',
-    passedProps: {
-      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wca-section__row', 'row', (_classnames2 = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames2, "align-items-".concat(verticalAlignment), verticalAlignment), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames2, 'no-gutters', container && gutters), _classnames2))
-    }
-  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
-    title: __('Section settings', 'wecodeart'),
-    initialOpen: false,
-    className: "components-panel__body--wecodeart-panel"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToggleControl, {
-    label: __('Enable container wrapper?', 'wecodeart'),
-    checked: !!container,
-    onChange: function onChange() {
-      return setAttributes({
-        container: !container
-      });
-    }
-  }), !!container && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToggleControl, {
-    label: __('Disable gutters?', 'wecodeart'),
-    checked: !!gutters,
-    onChange: function onChange() {
-      return setAttributes({
-        gutters: !gutters
-      });
-    }
-  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockVerticalAlignmentToolbar, {
+    renderAppender: isSelected && InnerBlocks.ButtonBlockAppender
+  });
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockVerticalAlignmentToolbar, {
     onChange: updateAlignment,
     value: verticalAlignment
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Dropdown, {
@@ -9176,7 +9141,67 @@ function EditContainer(props) {
         }, layout.label);
       }));
     }
-  })));
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
+    title: __('Section settings', 'wecodeart'),
+    initialOpen: false,
+    className: "components-panel__body--wecodeart-panel"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(SelectControl, {
+    label: __('Container', 'wecodeart'),
+    value: container,
+    options: [{
+      label: 'None',
+      value: ''
+    }, {
+      label: 'Container',
+      value: 'container'
+    }, {
+      label: 'Container Fluid',
+      value: 'container-fluid'
+    }],
+    onChange: function onChange(container) {
+      return setAttributes({
+        container: container
+      });
+    }
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(SelectControl, {
+    label: __('Gutter - Horizontal', 'wecodeart'),
+    value: gutter,
+    options: [{
+      label: 'None',
+      value: 0
+    }, {
+      label: '1',
+      value: 1
+    }, {
+      label: '2',
+      value: 2
+    }, {
+      label: '3',
+      value: 3
+    }, {
+      label: '4',
+      value: 4
+    }, {
+      label: '5',
+      value: 5
+    }],
+    onChange: function onChange(gutter) {
+      return setAttributes({
+        gutter: gutter
+      });
+    }
+  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wca-section__overlay')
+  }, times(Object(_constants__WEBPACK_IMPORTED_MODULE_4__["getGridWidth"])(deviceType)).map(function (i) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+      className: "wca-section__overlay-col",
+      key: i
+    });
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({
+      'wca-section__container': true
+    }, container, container))
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", innerBlocksProps))));
 }
 
 ;
@@ -9257,14 +9282,14 @@ function Placeholder(_ref4) {
     label: get(blockType, ['title']),
     variations: variations,
     onSelect: function onSelect() {
-      var nextVariation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultVariation;
+      var next = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultVariation;
 
-      if (nextVariation.attributes) {
-        setAttributes(nextVariation.attributes);
+      if (next.attributes) {
+        setAttributes(next.attributes);
       }
 
-      if (nextVariation.innerBlocks) {
-        replaceInnerBlocks(clientId, createBlocksFromInnerBlocksTemplate(nextVariation.innerBlocks));
+      if (next.innerBlocks) {
+        replaceInnerBlocks(clientId, createBlocksFromInnerBlocksTemplate(next.innerBlocks));
       }
     },
     allowSkip: true
@@ -9316,23 +9341,20 @@ var _wp = wp,
     InnerBlocks = _wp$blockEditor.InnerBlocks,
     useBlockProps = _wp$blockEditor.useBlockProps;
 function save(_ref) {
-  var _classnames2;
+  var _classnames3;
 
   var attributes = _ref.attributes;
   var align = attributes.align,
       verticalAlignment = attributes.verticalAlignment,
       container = attributes.container,
-      gutters = attributes.gutters,
+      gutter = attributes.gutter,
       className = attributes.className;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", useBlockProps.save({
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, 'wca-section', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, "align".concat(align), align))
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wca-section__container', {
-      'container': container && ['full', 'wide'].includes(align) === false,
-      'container-fluid': container && ['full', 'wide'].includes(align) === true
-    })
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wca-section__container', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, container, container))
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wca-section__row', 'row', (_classnames2 = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames2, "align-items-".concat(verticalAlignment), verticalAlignment), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames2, 'no-gutters', container && gutters), _classnames2))
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wca-section__row', 'row', (_classnames3 = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames3, "gx-".concat(gutter), gutter), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames3, "align-items-".concat(verticalAlignment), verticalAlignment), _classnames3))
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks.Content, null))));
 }
 

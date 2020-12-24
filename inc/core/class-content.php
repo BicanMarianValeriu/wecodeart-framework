@@ -235,7 +235,7 @@ class Content {
 	 * Get Contextual Modules Options
 	 *
 	 * @since 	3.5.0
-	 * @version	4.0.2
+	 * @version	4.2.0
 	 *
 	 * @return 	array 
 	 */
@@ -246,7 +246,7 @@ class Content {
 			if( is_page( $ID ) ) { // default must be provided since we do not set in customizer
 				$modules = get_theme_mod( 'content-layout-modules-page-' . $ID, [ 'content', 'primary' ] );
 
-				if( wecodeart_if( 'is_full_layout' ) && ! empty( $modules ) ) {
+				if( ! empty( $modules ) && wecodeart_if( 'is_full_layout' ) ) {
 					$modules = [ 'content' ];
 				}
 

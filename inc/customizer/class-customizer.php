@@ -9,7 +9,7 @@
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		1.6
- * @version		4.1.8
+ * @version		4.2.0
  */
 
 namespace WeCodeArt;
@@ -38,7 +38,7 @@ class Customizer {
 	 * @since 	3.5
 	 * @var 	array
 	 */
-	private static $configurations; 
+	private static $configurations;
 	
 	/**
 	 * Send to Constructor
@@ -66,6 +66,7 @@ class Customizer {
 		new Configs\Header();
 		new Configs\Content();
 		new Configs\Footer();
+		new Configs\Colors();
 		new Configs\Typography();
 	}
 
@@ -272,7 +273,7 @@ class Customizer {
 					unset( $config['type'] );
 					$this->register_section( $config, $wp_customize );
 					break;
-				case 'control': 
+				case 'control':
 					unset( $config['type'] );
 					$this->register_control( $config, $wp_customize );
 					break;

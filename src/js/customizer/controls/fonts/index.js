@@ -7,47 +7,47 @@ const { useState } = wp.element;
 const TypefaceComponent = ({ control }) => {
 	const { setting, params } = control;
 
-	const [fontFamily, setFontFamily] = useState(setting.get().fontFamily);
-	const [fontWeights, setFontWeights] = useState(setting.get().fontWeights);
+	const [fontFamily, setFontFamily] = useState(setting.get().family);
+	const [fontWeights, setFontWeights] = useState(setting.get().variants);
 	const updateControl = (value) => setting.set({ ...setting.get(), ...value });
 	
 	const defaultParams = {
-		default_is_inherit: false,
+		inheritDefault: false,
 	};
 
-	const controlParams = params.input_attrs ? {
+	const controlParams = params.inputAttrs ? {
 		...defaultParams,
-		...JSON.parse(params.input_attrs),
+		...JSON.parse(params.inputAttrs),
 	} : defaultParams;
 
-	const onChoseFont = (fontSource, font) => {
-		setFontFamily(font);
+	const onChoseFont = (fontSource, family) => {
+		setFontFamily(family);
 		setFontWeights([400]);
-		updateControl({ fontFamily: font, fontWeights: [] });
+		updateControl({ family, variants: [] });
 		// Update Live Preview
 		wp.customize.previewer.send('font-selection', {
 			controlId: control.id,
 			value: setting.get(),
 			source: fontSource,
 			type: '\\WeCodeArt\\Customizer\\Controls\\Fonts',
-			inherit: controlParams.default_is_inherit,
+			inherit: controlParams.inheritDefault,
 		});
 	};
 
-	const onChoseWeights = (weights) => {
-		setFontWeights(weights);
-		updateControl({ fontWeights: weights });
+	const onChoseWeights = (variants) => {
+		setFontWeights(variants);
+		updateControl({ variants });
 	};
 
 	return (
 		<>
 			{params?.label && (<span className="customize-control-title">{params.label}</span>)}
 			{params?.description && (<span className="customize-control-description">{params.description}</span>)}
-			<div className="wecodeart-typeface-control">
+			<div className="wca-customizer-control wca-customizer-control--typeface">
 				<FontFamilySelector
 					selected={fontFamily}
 					onFontChoice={onChoseFont}
-					inheritDefault={controlParams.default_is_inherit}
+					inheritDefault={controlParams.inheritDefault}
 					systemFonts={controlParams.system}
 				/>
 				{fontFamily && (

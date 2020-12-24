@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 const {
     i18n: { __ },
     element: { useState },
-    components: { Popover, Button, TextControl, Icon },
+    components: { Button, TextControl, Icon, Dropdown },
 } = wp;
+
+const { fonts } = wecodeartFontsControl;
 
 const FontFamilySelector = ({
     selected,
@@ -14,8 +16,6 @@ const FontFamilySelector = ({
     inheritDefault,
     systemFonts,
 }) => {
-    const { fonts } = wecodeartFontsControl;
-    const [visible, setVisible] = useState(false);
     const [search, setSearch] = useState('');
     const [loadUntil, setLoadUntil] = useState(20);
     const [delay, setDelay] = useState(true);
@@ -45,7 +45,6 @@ const FontFamilySelector = ({
                         fontFace="default"
                         delayLoad={false}
                         onClick={() => {
-                            setVisible(false);
                             setSearch('');
                             onFontChoice('system', false);
                         }}
@@ -73,7 +72,6 @@ const FontFamilySelector = ({
                                 fontFace={family}
                                 onClick={() => {
                                     onFontChoice(key, family);
-                                    setVisible(false);
                                     setSearch('');
                                 }}
                             />
@@ -102,31 +100,28 @@ const FontFamilySelector = ({
 
         return (
             <>
-                <div className="popover-content">
-                    <div className="popover-header">
-                        <div className="search">
-                            <TextControl
-                                placeholder={__('Search', 'wecodeart') + '...'}
-                                value={search}
-                                onChange={(e) => {
-                                    setSearch(e);
-                                    setLoadUntil(20);
-                                }}
-                            />
-                            <a
-                                className="close-font-selector"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    setVisible(false);
-                                    setSearch('');
-                                }}
-                            >
-                                <Icon icon="no" />
-                            </a>
-                        </div>
+                <div className="wecodeart-fonts">
+                    <div className="wecodeart-fonts__search">
+                        <TextControl
+                            placeholder={__('Search', 'wecodeart') + '...'}
+                            value={search}
+                            onChange={(e) => {
+                                setSearch(e);
+                                setLoadUntil(20);
+                            }}
+                        />
+                        <a
+                            className="close-font-selector"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setSearch('');
+                            }}
+                        >
+                            <Icon icon="no" />
+                        </a>
                     </div>
-                    <ul className="wecodeart-fonts-list">
+                    <ul className="wecodeart-fonts__list">
                         {options.length ? (options) : (
                             <li className="no-result" key="no-results">{__('No results.', 'wecodeart')}</li>
                         )}
@@ -140,24 +135,25 @@ const FontFamilySelector = ({
     const defaultFontface = 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
 
     return (
-        <div className="wecodeart-typeface-control__font-family">
+        <div className="wca-customizer-control__header">
             <span className="customize-control-title">
                 {__('Font Family', 'wecodeart')}
             </span>
-            <Button isSecondary onClick={() => setVisible(true)} >
-                <span className="ff-name">
-                    {selected || (inheritDefault ? __('Inherit', 'wecodeart') : __('Default', 'wecodeart'))}
-                </span>
-                <span className="ff-preview" style={{ fontFamily: selected || defaultFontface }}>Abc</span>
-                {visible && (
-                    <Popover position="bottom left" onFocusOutside={() => {
-                        setVisible(false);
-                        setSearch('');
-                    }}>
-                        {fonts ? getFontList() : __('Loading…', 'wecodeart')}
-                    </Popover>
-                )}
-            </Button>
+            <Dropdown
+                position="bottom"
+                onClose={() => setSearch('')}
+                renderToggle={({ isOpen, onToggle }) => {
+                    return (
+                        <Button isSecondary onClick={onToggle} aria-expanded={isOpen} >
+                            <span className="ff-name">
+                                {selected || (inheritDefault ? __('Inherit', 'wecodeart') : __('Default', 'wecodeart'))}
+                            </span>
+                            <span className="ff-preview" style={{ fontFamily: selected || defaultFontface }}>Abc</span>
+                        </Button>
+                    );
+                }}
+                renderContent={() => (fonts ? getFontList() : __('Loading…', 'wecodeart'))}
+            />
         </div>
     );
 };

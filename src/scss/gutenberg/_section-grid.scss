@@ -18,26 +18,58 @@ $break-zoomed-in: 280px;
 /**
  * Visual grid overlay
  */
-.wp-block-wca-layout {
+.wca-section {
 	position: relative;
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
+
+	&.alignfull {
+		max-width: initial!important;
+		padding: 0 12px;
+	}
 
 	&--tablet {
-		.wca-overlay-grid,
-		.wca-resize-grid,
-		> .block-editor-inner-blocks > .block-editor-block-list__layout {
+		.wca-overlay-grid {
 			grid-template-columns: $grid-tablet;
 		}
 	}
 
 	&--mobile {
-		.wca-overlay-grid,
-		.wca-resize-grid,
-		> .block-editor-inner-blocks > .block-editor-block-list__layout {
+		.wca-overlay-grid {
 			grid-template-columns: $grid-mobile;
 		}
+	}
+
+	&.is-selected,
+	&.has-child-selected {
+		.wca-section {
+			&__overlay {
+				position: absolute;
+
+				&-col {
+					box-shadow: -($grid-gutter / 2) 0 0 0 currentColor, ($grid-gutter / 2) 0 0 0 currentColor;
+				}
+			}
+		}
+	}
+
+	&__overlay {
+		// The following rules are for Safari.
+		// A CSS grid rendering issue means the child nodes of this grid
+		// won't stretch to fit the vertical space, unless the position
+		// property is changed from absolute, to something else, and back.
+		// By being relative when unselected and absolute when selected, we
+		// constantly "refresh" this hack.
+		position: relative;
+		pointer-events: none;
+		top: 0;
+		left: 0; // -$grid-gutter;
+		right: 0; // -$grid-gutter;
+		bottom: 0;
+		display: grid;
+		grid-gap: $grid-gutter;
+		grid-template-columns: $grid-desktop;
+		color: rgba(0,0,0,0.1);
+		// Lower the z-index so it's under the block borders.
+		z-index: 0;
 	}
 
 	.wp-block-wca-section {
@@ -70,100 +102,8 @@ $break-zoomed-in: 280px;
 	.wp-block-wca-column {
 		margin: 0;
 	}
-}
 
-.wca-overlay-grid {
-	// The following rules are for Safari.
-	// A CSS grid rendering issue means the child nodes of this grid
-	// won't stretch to fit the vertical space, unless the position
-	// property is changed from absolute, to something else, and back.
-	// By being relative when unselected and absolute when selected, we
-	// constantly "refresh" this hack.
-	position: relative;
-	
-	.is-selected &,
-	.has-child-selected & {
-		position: absolute;
-	}
-
-	top: 0;
-	left: 0; // -$grid-gutter;
-	right: 0; // -$grid-gutter;
-	bottom: 0;
-	display: grid;
-	grid-gap: $grid-gutter;
-	grid-template-columns: $grid-desktop;
-	color: rgba(0,0,0,0.1);
-	// Lower the z-index so it's under the block borders.
-	z-index: 0;
-
-	&--no-gutters {
-		left: 15px;
-		right: 15px;
-	}
-
-	// Colorize for dark themes also.
-	.is-dark-theme & {
-		color: rgba(255,255,255,0.15);
-	}
-
-	// Solid gutter shading.
-	.wca-overlay-grid__column {
-		transition: border .4s ease;
-
-		// Default gutter.
-		.is-selected &,
-		.has-child-selected & {
-			box-shadow: -($grid-gutter / 2) 0 0 0 currentColor, ($grid-gutter / 2) 0 0 0 currentColor;
-		}
+	.block-list-appender {
+		max-width: 100%!important;
 	}
 }
-
-// /**
-//  * Resize Handles
-//  */
-// .wp-block-wca-layout__resize-handle,
-// .wp-block-wca-column__resize-handles {
-// 	.components-resizable-box__container {
-// 		position: relative;
-// 		user-select: auto;
-// 		width: auto;
-// 		box-sizing: border-box;
-// 	}
-
-// 	.components-resizable-box__handle {
-// 		position: absolute;
-// 		user-select: none;
-// 		cursor: col-resize;
-// 	}
-// }
-
-// .wp-block-wca-layout__resize-handle {
-// 	position: absolute;
-// 	left: 0;
-// 	top: 0;
-// 	height: 100%;
-// }
-
-// [data-type="wca/section"],
-// [data-type="wca/column"] {
-// 	&.is-selected {
-// 		.wp-block-wca-column__resize-handles {
-// 			.components-resizable-box__handle {
-// 				display: none;
-// 				z-index: 10000;
-// 			}
-// 		}
-// 	}
-// }
-
-// // [data-type="wca/section"].is-selected .wp-block-wca-layout--resizable .wp-block-wca-column__resize-handles .components-resizable-box__handle,
-// [data-type="wca/section"] .wp-block-wca-layout--resizable [data-type="wca/column"].is-selected .wp-block-wca-column__resize-handles .components-resizable-box__handle,
-// .wp-block-wca-column--resize-right.components-resizable-box__container .components-resizable-box__handle-right,
-// .wp-block-wca-column--resize-left.components-resizable-box__container .components-resizable-box__handle-left {
-// 	display: block;
-// }
-
-// body.is-resizing [data-type="wca/section"] {
-// 	overflow: inherit;
-// }

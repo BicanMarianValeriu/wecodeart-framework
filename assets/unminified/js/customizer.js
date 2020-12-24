@@ -136,17 +136,17 @@ function addCss(id) {
       selector = selector.map(function (sel) {
         return 'html ' + sel;
       }).join(',');
-      var fontFamily = value.fontFamily;
+      var family = value.family;
 
-      if (fontFamily === false) {
+      if (family === false) {
         addCss(controlId, "".concat(selector, " {font-family:").concat(defaultFontface, ";}"));
       } else {
-        addCss(controlId, ":root {--bs-font-sans-serif:".concat(fontFamily, ";} ").concat(selector, " {font-family:").concat(fontFamily, ";}"));
+        addCss(controlId, ":root {--bs-font-sans-serif:".concat(family, ";} ").concat(selector, " {font-family:").concat(family, ";}"));
       }
 
       if (source.toLowerCase() === 'google') {
         var linkNode = document.querySelector('#' + controlId),
-            fontValue = fontFamily.replace(' ', '+');
+            fontValue = family.replace(' ', '+');
         var url = "//fonts.googleapis.com/css?family=".concat(fontValue, "%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800&display=swap\"");
 
         if (linkNode !== null) {
@@ -183,7 +183,7 @@ function addCss(id) {
   var contentContexts = ['blog'];
   contentContexts.forEach(function (context) {
     var apiOption = 'content-layout-container';
-    if (context.length) apiOption = [apiOption, context].join('-');
+    apiOption = [apiOption, context].join('-');
     api(apiOption, function (value) {
       value.bind(function (to) {
         var el = $('.content .container, .content .container-fluid');

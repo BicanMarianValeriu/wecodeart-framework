@@ -1936,128 +1936,24 @@ module.exports = ReactPropTypesSecret;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fonts_Control__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fonts/Control */ "./src/js/customizer/controls/fonts/Control.js");
+/* harmony import */ var _fonts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fonts */ "./src/js/customizer/controls/fonts/index.js");
 /* harmony import */ var _scss_customizer_controls_fonts_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../scss/customizer/controls/fonts.scss */ "./src/scss/customizer/controls/fonts.scss");
 /* harmony import */ var _scss_customizer_controls_fonts_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_scss_customizer_controls_fonts_scss__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
-var render = wp.element.render;
-var _wp$customize = wp.customize,
+var _wp = wp,
+    render = _wp.element.render,
+    _wp$customize = _wp.customize,
     Control = _wp$customize.Control,
     controlConstructor = _wp$customize.controlConstructor;
 controlConstructor['wecodeart-fonts'] = Control.extend({
   renderContent: function renderContent() {
-    render(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_fonts_Control__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    render(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_fonts__WEBPACK_IMPORTED_MODULE_1__["default"], {
       control: this
     }), this.container[0]);
   }
 });
-
-/***/ }),
-
-/***/ "./src/js/customizer/controls/fonts/Control.js":
-/*!*****************************************************!*\
-  !*** ./src/js/customizer/controls/fonts/Control.js ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _FontFamilySelector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FontFamilySelector */ "./src/js/customizer/controls/fonts/FontFamilySelector.js");
-/* harmony import */ var _FontWeightsSelector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FontWeightsSelector */ "./src/js/customizer/controls/fonts/FontWeightsSelector.js");
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-
-
-
-var useState = wp.element.useState;
-
-var TypefaceComponent = function TypefaceComponent(_ref) {
-  var control = _ref.control;
-  var setting = control.setting,
-      params = control.params;
-
-  var _useState = useState(setting.get().fontFamily),
-      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
-      fontFamily = _useState2[0],
-      setFontFamily = _useState2[1];
-
-  var _useState3 = useState(setting.get().fontWeights),
-      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
-      fontWeights = _useState4[0],
-      setFontWeights = _useState4[1];
-
-  var updateControl = function updateControl(value) {
-    return setting.set(_objectSpread(_objectSpread({}, setting.get()), value));
-  };
-
-  var defaultParams = {
-    default_is_inherit: false
-  };
-  var controlParams = params.input_attrs ? _objectSpread(_objectSpread({}, defaultParams), JSON.parse(params.input_attrs)) : defaultParams;
-
-  var onChoseFont = function onChoseFont(fontSource, font) {
-    setFontFamily(font);
-    setFontWeights([400]);
-    updateControl({
-      fontFamily: font,
-      fontWeights: []
-    }); // Update Live Preview
-
-    wp.customize.previewer.send('font-selection', {
-      controlId: control.id,
-      value: setting.get(),
-      source: fontSource,
-      type: '\\WeCodeArt\\Customizer\\Controls\\Fonts',
-      inherit: controlParams.default_is_inherit
-    });
-  };
-
-  var onChoseWeights = function onChoseWeights(weights) {
-    setFontWeights(weights);
-    updateControl({
-      fontWeights: weights
-    });
-  };
-
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, (params === null || params === void 0 ? void 0 : params.label) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", {
-    className: "customize-control-title"
-  }, params.label), (params === null || params === void 0 ? void 0 : params.description) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", {
-    className: "customize-control-description"
-  }, params.description), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
-    className: "wecodeart-typeface-control"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_FontFamilySelector__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    selected: fontFamily,
-    onFontChoice: onChoseFont,
-    inheritDefault: controlParams.default_is_inherit,
-    systemFonts: controlParams.system
-  }), fontFamily && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_FontWeightsSelector__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    font: fontFamily,
-    selected: fontWeights,
-    onWeightChoice: onChoseWeights
-  })));
-};
-
-TypefaceComponent.propTypes = {
-  control: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (TypefaceComponent);
 
 /***/ }),
 
@@ -2088,38 +1984,33 @@ var _wp = wp,
     __ = _wp.i18n.__,
     useState = _wp.element.useState,
     _wp$components = _wp.components,
-    Popover = _wp$components.Popover,
     Button = _wp$components.Button,
     TextControl = _wp$components.TextControl,
-    Icon = _wp$components.Icon;
+    Icon = _wp$components.Icon,
+    Dropdown = _wp$components.Dropdown;
+var _wecodeartFontsContro = wecodeartFontsControl,
+    fonts = _wecodeartFontsContro.fonts;
 
 var FontFamilySelector = function FontFamilySelector(_ref) {
   var selected = _ref.selected,
       onFontChoice = _ref.onFontChoice,
       inheritDefault = _ref.inheritDefault,
       systemFonts = _ref.systemFonts;
-  var _wecodeartFontsContro = wecodeartFontsControl,
-      fonts = _wecodeartFontsContro.fonts;
 
-  var _useState = useState(false),
+  var _useState = useState(''),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
-      visible = _useState2[0],
-      setVisible = _useState2[1];
+      search = _useState2[0],
+      setSearch = _useState2[1];
 
-  var _useState3 = useState(''),
+  var _useState3 = useState(20),
       _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 2),
-      search = _useState4[0],
-      setSearch = _useState4[1];
+      loadUntil = _useState4[0],
+      setLoadUntil = _useState4[1];
 
-  var _useState5 = useState(20),
+  var _useState5 = useState(true),
       _useState6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState5, 2),
-      loadUntil = _useState6[0],
-      setLoadUntil = _useState6[1];
-
-  var _useState7 = useState(true),
-      _useState8 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState7, 2),
-      delay = _useState8[0],
-      setDelay = _useState8[1];
+      delay = _useState6[0],
+      setDelay = _useState6[1];
 
   var getFonts = function getFonts() {
     var result = {};
@@ -2148,7 +2039,6 @@ var FontFamilySelector = function FontFamilySelector(_ref) {
         fontFace: "default",
         delayLoad: false,
         onClick: function onClick() {
-          setVisible(false);
           setSearch('');
           onFontChoice('system', false);
         },
@@ -2177,7 +2067,6 @@ var FontFamilySelector = function FontFamilySelector(_ref) {
             fontFace: family,
             onClick: function onClick() {
               onFontChoice(key, family);
-              setVisible(false);
               setSearch('');
             }
           })));
@@ -2202,11 +2091,9 @@ var FontFamilySelector = function FontFamilySelector(_ref) {
     }
 
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-      className: "popover-content"
+      className: "wecodeart-fonts"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-      className: "popover-header"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-      className: "search"
+      className: "wecodeart-fonts__search"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TextControl, {
       placeholder: __('Search', 'wecodeart') + '...',
       value: search,
@@ -2219,13 +2106,12 @@ var FontFamilySelector = function FontFamilySelector(_ref) {
       onClick: function onClick(e) {
         e.preventDefault();
         e.stopPropagation();
-        setVisible(false);
         setSearch('');
       }
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Icon, {
       icon: "no"
-    })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("ul", {
-      className: "wecodeart-fonts-list"
+    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("ul", {
+      className: "wecodeart-fonts__list"
     }, options.length ? options : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("li", {
       className: "no-result",
       key: "no-results"
@@ -2235,28 +2121,34 @@ var FontFamilySelector = function FontFamilySelector(_ref) {
 
   var defaultFontface = 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wecodeart-typeface-control__font-family"
+    className: "wca-customizer-control__header"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
     className: "customize-control-title"
-  }, __('Font Family', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Button, {
-    isSecondary: true,
-    onClick: function onClick() {
-      return setVisible(true);
+  }, __('Font Family', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Dropdown, {
+    position: "bottom",
+    onClose: function onClose() {
+      return setSearch('');
+    },
+    renderToggle: function renderToggle(_ref2) {
+      var isOpen = _ref2.isOpen,
+          onToggle = _ref2.onToggle;
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Button, {
+        isSecondary: true,
+        onClick: onToggle,
+        "aria-expanded": isOpen
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
+        className: "ff-name"
+      }, selected || (inheritDefault ? __('Inherit', 'wecodeart') : __('Default', 'wecodeart'))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
+        className: "ff-preview",
+        style: {
+          fontFamily: selected || defaultFontface
+        }
+      }, "Abc"));
+    },
+    renderContent: function renderContent() {
+      return fonts ? getFontList() : __('Loading…', 'wecodeart');
     }
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
-    className: "ff-name"
-  }, selected || (inheritDefault ? __('Inherit', 'wecodeart') : __('Default', 'wecodeart'))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
-    className: "ff-preview",
-    style: {
-      fontFamily: selected || defaultFontface
-    }
-  }, "Abc"), visible && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Popover, {
-    position: "bottom left",
-    onFocusOutside: function onFocusOutside() {
-      setVisible(false);
-      setSearch('');
-    }
-  }, fonts ? getFontList() : __('Loading…', 'wecodeart'))));
+  }));
 };
 
 FontFamilySelector.propTypes = {
@@ -2354,13 +2246,13 @@ __webpack_require__.r(__webpack_exports__);
 var _wp = wp,
     __ = _wp.i18n.__,
     SelectControl = _wp.components.SelectControl;
+var _wecodeartFontsContro = wecodeartFontsControl,
+    Google = _wecodeartFontsContro.fonts.Google;
 
 var FontWeightsSelector = function FontWeightsSelector(_ref) {
   var font = _ref.font,
       selected = _ref.selected,
       onWeightChoice = _ref.onWeightChoice;
-  var _wecodeartFontsContro = wecodeartFontsControl,
-      Google = _wecodeartFontsContro.fonts.Google;
 
   var getWeightsList = function getWeightsList() {
     var _fontWeigths$pop;
@@ -2374,7 +2266,7 @@ var FontWeightsSelector = function FontWeightsSelector(_ref) {
 
   if (getWeightsList().length === 0 || getWeightsList().length === 1 && getWeightsList().pop() === 'regular') return null;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: "wecodeart-typeface-control__font-weights"
+    className: "wca-customizer-control__font-weights"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("hr", null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(SelectControl, {
     multiple: true,
     label: __('Select Font Weights:'),
@@ -2382,11 +2274,9 @@ var FontWeightsSelector = function FontWeightsSelector(_ref) {
     onChange: function onChange(values) {
       return onWeightChoice(values);
     },
-    options: getWeightsList().map(function (i) {
-      var value = i === 'regular' ? '400' : i;
-      value = i === 'italic' ? '400italic' : value;
-      var label = i === 'regular' ? '400' : i;
-      label = i === 'italic' ? '400italic' : label;
+    options: getWeightsList().map(function (value) {
+      var label = value === 'regular' ? '400' : value;
+      label = value === 'italic' ? '400italic' : label;
       return {
         value: value,
         label: label
@@ -2401,6 +2291,111 @@ FontWeightsSelector.propTypes = {
   selected: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (FontWeightsSelector);
+
+/***/ }),
+
+/***/ "./src/js/customizer/controls/fonts/index.js":
+/*!***************************************************!*\
+  !*** ./src/js/customizer/controls/fonts/index.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _FontFamilySelector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FontFamilySelector */ "./src/js/customizer/controls/fonts/FontFamilySelector.js");
+/* harmony import */ var _FontWeightsSelector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FontWeightsSelector */ "./src/js/customizer/controls/fonts/FontWeightsSelector.js");
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+var useState = wp.element.useState;
+
+var TypefaceComponent = function TypefaceComponent(_ref) {
+  var control = _ref.control;
+  var setting = control.setting,
+      params = control.params;
+
+  var _useState = useState(setting.get().family),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
+      fontFamily = _useState2[0],
+      setFontFamily = _useState2[1];
+
+  var _useState3 = useState(setting.get().variants),
+      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
+      fontWeights = _useState4[0],
+      setFontWeights = _useState4[1];
+
+  var updateControl = function updateControl(value) {
+    return setting.set(_objectSpread(_objectSpread({}, setting.get()), value));
+  };
+
+  var defaultParams = {
+    inheritDefault: false
+  };
+  var controlParams = params.inputAttrs ? _objectSpread(_objectSpread({}, defaultParams), JSON.parse(params.inputAttrs)) : defaultParams;
+
+  var onChoseFont = function onChoseFont(fontSource, family) {
+    setFontFamily(family);
+    setFontWeights([400]);
+    updateControl({
+      family: family,
+      variants: []
+    }); // Update Live Preview
+
+    wp.customize.previewer.send('font-selection', {
+      controlId: control.id,
+      value: setting.get(),
+      source: fontSource,
+      type: '\\WeCodeArt\\Customizer\\Controls\\Fonts',
+      inherit: controlParams.inheritDefault
+    });
+  };
+
+  var onChoseWeights = function onChoseWeights(variants) {
+    setFontWeights(variants);
+    updateControl({
+      variants: variants
+    });
+  };
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, (params === null || params === void 0 ? void 0 : params.label) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", {
+    className: "customize-control-title"
+  }, params.label), (params === null || params === void 0 ? void 0 : params.description) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", {
+    className: "customize-control-description"
+  }, params.description), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+    className: "wca-customizer-control wca-customizer-control--typeface"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_FontFamilySelector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    selected: fontFamily,
+    onFontChoice: onChoseFont,
+    inheritDefault: controlParams.inheritDefault,
+    systemFonts: controlParams.system
+  }), fontFamily && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_FontWeightsSelector__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    font: fontFamily,
+    selected: fontWeights,
+    onWeightChoice: onChoseWeights
+  })));
+};
+
+TypefaceComponent.propTypes = {
+  control: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (TypefaceComponent);
 
 /***/ }),
 

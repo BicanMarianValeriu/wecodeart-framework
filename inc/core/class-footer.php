@@ -51,7 +51,7 @@ class Footer {
 			'attrs' => [
 				'id' 		=> 'footer', 
 				'class'		=> 'footer', 
-				'itemscope' => true,
+				'itemscope' => 'itemscope',
 				'itemtype' 	=> 'https://schema.org/WPFooter'
 			]
 		] ], function() {

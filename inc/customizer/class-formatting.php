@@ -13,6 +13,8 @@ namespace WeCodeArt\Customizer;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Support\Fonts;
+
 /**
  * Customizer Sanitizers
  */
@@ -24,42 +26,26 @@ final class Formatting {
 	 * Sanitize font control.
 	 *
 	 * @param  	string 	$input    setting input.
+	 * @param  	object 	$setting  setting object.
 	 *
 	 * @return 	array 	choices/default.
 	 */
-	public static function sanitize_font( $input ) {
+	public static function sanitize_font( $input, $setting ) {
+		if ( ! is_array( $input ) ) return $setting->default;
+		
 		foreach( $input as $key => $value ) {
 			// Remove unsafe data
-			if( ! in_array( $key, [ 'fontFamily', 'fontWeights' ] ) ) {
+			if( ! in_array( $key, [ 'family', 'variants' ] ) ) {
 				unset( $input[ $key ] );
 			}
 			// Sanitize "safe" keys
 			switch ( $key ) {
-				case 'fontFamily':
-					$input['fontFamily'] = self::sanitize_text_field( $value );
+				case 'family':
+					$input['family'] = self::sanitize_text_field( $value );
 					break;
-				case 'fontWeights':
-					$input['fontWeights'] = array_filter( $input['fontWeights'], function( $i ) {
-						return in_array( $i, [
-							'100',
-							'100italic',
-							'200',
-							'200italic',
-							'300',
-							'300italic',
-							'400',
-							'400italic',
-							'500',
-							'500italic',
-							'600',
-							'600italic',
-							'700',
-							'700italic',
-							'800',
-							'800italic',
-							'900',
-							'900italic',
-						] );
+				case 'variants':
+					$input['variants'] = array_filter( $input['variants'], function( $key ) {
+						return in_array( $key, array_keys( Fonts::get_all_variants() ) );
 					} );
 					break;
 			}

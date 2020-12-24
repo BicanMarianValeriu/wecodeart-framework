@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Configs
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.9
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Customizer;
@@ -33,6 +33,29 @@ class Configs extends Config {
 	 */
 	public function register( $configurations, $wp_customize ) {
 		$configs = array(
+			/**
+			 * Colors & Typography
+			 */
+			array(
+				'name'     => 'general',
+				'type'     => 'panel',
+				'priority' => 0,
+				'title'    => esc_html__( 'General Settings', 'wecodeart' ) 
+			),
+			array(
+				'name'     => 'general-typography',
+				'type'     => 'section',
+				'priority' => 10,
+				'title'    => esc_html__( 'Typography', 'wecodeart' ),
+				'panel'    => 'general',
+			),
+			array(
+				'name'     => 'general-colors',
+				'type'     => 'section',
+				'priority' => 20,
+				'title'    => esc_html__( 'Colors', 'wecodeart' ),
+				'panel'    => 'general',
+			),
 			/**
 			 * Header 
 			 */
@@ -94,15 +117,6 @@ class Configs extends Config {
 				'priority' => 10,
 				'title'    => esc_html__( 'Copyright', 'wecodeart' ),
 				'panel'    => 'footer',
-			),
-			/**
-			 * Typography
-			 */
-			array(
-				'name'     => 'typography',
-				'type'     => 'panel',
-				'priority' => 20,
-				'title'    => esc_html__( 'Typography', 'wecodeart' ) 
 			),
 			/**
 			 * Extensions

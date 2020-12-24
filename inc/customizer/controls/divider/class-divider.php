@@ -58,12 +58,11 @@ class Divider extends WP_Customize_Control {
 	 * @access public
 	 *
 	 * @since 	unknown
-	 * @version	4.1.8
+	 * @version	4.2.0
 	 */
 	public function enqueue() {
-		if( wp_style_is( $this->make_handle( null, __NAMESPACE__ ), 'enqueued' ) ) return;
 		wp_enqueue_style(
-			$this->make_handle( null, __NAMESPACE__ ),
+			$this->make_handle(),
 			$this->get_asset( 'css', 'customizer' ),
 			[],
 			wecodeart( 'version' )

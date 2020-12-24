@@ -42,6 +42,7 @@ class Support implements ArrayAccess {
 		\add_action( 'after_setup_theme', [ $this, 'load_translations'	] );
 
 		// Register Default Integrations
+		$this->register( 'extension/fonts',		Support\Fonts::class 		);
 		$this->register( 'plugin/anr', 			Support\ANR::class 			);
 		$this->register( 'plugin/wpseo', 		Support\WPSeo::class 		);
 		$this->register( 'plugin/woocommerce', 	Support\WooCommerce::class 	);
@@ -55,7 +56,7 @@ class Support implements ArrayAccess {
 	 */
 	public function after_setup_theme() {
 		// Content width
-		$GLOBALS['content_width'] = apply_filters( 'wecodeart/filter/content_width', 1280 );
+		$GLOBALS['content_width'] = self::get_content_width();
 		
 		// Add support for Meta info for posts other than Page Type 
 		add_post_type_support( 'post', 'wecodeart-post-info' );
@@ -97,6 +98,22 @@ class Support implements ArrayAccess {
 		add_theme_support( 'amp', apply_filters( 'wecodeart/filter/support/amp', [ 
 			'paired' => true 
 		] ) );
+	}
+
+	/**
+	 * Sets up theme content width.
+	 *
+	 * @since 	4.2.0
+	 * @version	4.2.0
+	 */
+	public static function get_content_width() {
+		$content_width = 840;
+
+		if( wecodeart_if( 'is_full_layout' ) ) {
+			$content_width = 1272;
+		}
+
+		return apply_filters( 'wecodeart/filter/content_width', $content_width );
 	}
 
 	/**

@@ -12,13 +12,14 @@
  * @version		4.2.0
  */
 
-namespace WeCodeArt\Gutenberg\Modules\CSS;
+namespace WeCodeArt\Gutenberg\Modules\Styles;
 
 defined( 'ABSPATH' ) || exit();
 
 use WP_REST_Request;
 use WeCodeArt\Gutenberg;
-use WeCodeArt\Gutenberg\Modules\CSS;
+use WeCodeArt\Support\FileSystem;
+use WeCodeArt\Gutenberg\Modules\Styles;
 use function WeCodeArt\Functions\compress_css;
 
 /**
@@ -125,7 +126,7 @@ class Handler {
 		}
 
 		$post_id = $request->get_param( 'id' );
-		$css     = CSS::get_instance()->get_reusable_block_css( $post_id );
+		$css     = Styles::get_instance()->get_reusable_block_css( $post_id );
 
 		self::save_css_file( $post_id, $css );
 
@@ -140,37 +141,35 @@ class Handler {
 	 * @param int $post_id Post id.
 	 */
 	public static function generate_css_file( $post_id ) {
-		$css = CSS::get_instance()->get_blocks_css( $post_id );
+		$css = Styles::get_instance()->get_blocks_css( $post_id );
 		if( trim( $css ) ) {
-			return Handler::get_instance()->save_css_file( $post_id, $css );
+			return self::save_css_file( $post_id, $css );
 		}
-		
-		return;
 	}
 
 	/**
 	 * Get CSS url for post.
 	 *
-	 * @param   int $post_id Post id.
+	 * @param   int 	$post_id Post id.
 	 *
-	 * @return  string File url.
+	 * @return  string 	File url.
 	 */
 	public static function get_css_url( $post_id ) {
 		$file_name = get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
+
 		if ( empty( $file_name ) ) {
 			return false;
 		}
 
-		$wp_upload_dir = wp_upload_dir( null, false );
-		$baseurl       = $wp_upload_dir['baseurl'] . '/wecodeart/';
+		$fs = FileSystem::get_instance()->set_folder( 'css' );
 
-		return $baseurl . $file_name . '.css';
+		return $fs->get_file_url( $file_name . '.css', true );
 	}
 
 	/**
 	 * Check if we have a CSS file for this post.
 	 *
-	 * @param   int $post_id Post ID.
+	 * @param   int 	$post_id Post ID.
 	 *
 	 * @return  bool
 	 */
@@ -181,11 +180,9 @@ class Handler {
 			return false;
 		}
 
-		$wp_upload_dir = wp_upload_dir( null, false );
-		$basedir       = $wp_upload_dir['basedir'] . '/wecodeart/';
-		$file_path     = $basedir . $file_name . '.css';
+		$fs = FileSystem::get_instance()->set_folder( 'css' );
 
-		return is_file( $file_path );
+		return $fs->has_file( $file_name . '.css' );
 	}
 
 	/**
@@ -199,14 +196,7 @@ class Handler {
 	 * @access  public
 	 */
 	public static function save_css_file( $post_id, $css ) {
-		global $wp_filesystem;
-		require_once ABSPATH . '/wp-admin/includes/file.php';
-		WP_Filesystem();
-
-		$file_name     = 'post-' . $post_id;
-		$wp_upload_dir = wp_upload_dir( null, false );
-		$upload_dir    = $wp_upload_dir['basedir'] . '/wecodeart/';
-		$file_path     = $upload_dir . $file_name . '.css';
+		$fs = FileSystem::get_instance()->set_folder( 'css' );
 
 		$css = self::compress( wp_filter_nohtml_kses( $css ) );
 
@@ -214,32 +204,17 @@ class Handler {
 
 		do_action( 'wecodeart/gutenberg/css/handler/save', $post_id );
 
-		// Delete previous file
-		if ( is_file( $file_path ) ) {
-			self::delete_css_file( $post_id );
-		}
+		$file_name = 'post-' . $post_id;
 
-		$target_dir = $wp_filesystem->is_dir( $upload_dir );
-
-		// If not writtable, return;
-		if ( ! $wp_filesystem->is_writable( $wp_upload_dir['basedir'] ) ) {
-			return false;
-		}
-
-		// If dir does not exists, create it;
-		if ( ! $target_dir ) {
-			wp_mkdir_p( $upload_dir );
-		}
-
-		// Create the file and put CSS in it;
-		$wp_filesystem->put_contents( $file_path, $css, FS_CHMOD_FILE );
+		$fs->create_file( $file_name . '.css', $css );
 
 		// If it went successfully, update meta with the filename;
-		if ( file_exists( $file_path ) ) {
+		if ( file_exists( $fs->get_file_url( $file_name . '.css' ) ) ) {
 			update_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', $file_name );
+			return true;
 		}
-
-		return true;
+		
+		return false;
 	}
 
 	/**
@@ -252,37 +227,20 @@ class Handler {
 	 * @access  public
 	 */
 	public static function delete_css_file( $post_id ) {
-		global $wp_filesystem;
+		$fs = FileSystem::get_instance()->set_folder( 'css' );
 
 		if ( ! current_user_can( 'edit_posts' ) ) {
 			return false;
 		}
 
-		require_once ABSPATH . '/wp-admin/includes/file.php';
-		WP_Filesystem();
-
-		$wp_upload_dir = wp_upload_dir( null, false );
-
-		if ( ! $wp_filesystem->is_writable( $wp_upload_dir['basedir'] ) ) {
-			return;
-		}
-
+		// Clear Meta
 		$file_name = get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
 
 		if ( $file_name ) {
 			delete_post_meta( $post_id, '_wca_gutenberg_block_stylesheet' );
 		}
 
-		$upload_dir = $wp_upload_dir['basedir'] . '/wecodeart/';
-		$file_path  = $upload_dir . $file_name . '.css';
-
-		if ( ! file_exists( $file_path ) ) {
-			return;
-		}
-
-		$wp_filesystem->delete( $file_path, true );
-
-		return true;
+		return $fs->delete_file( $file_name . '.css' );
 	}
 
 	/**
@@ -295,6 +253,6 @@ class Handler {
 	 * @access  public
 	 */
 	public static function compress( $css ) {
-		return compress_css( htmlspecialchars_decode( $css) );
+		return compress_css( htmlspecialchars_decode( $css ) );
 	}
 }

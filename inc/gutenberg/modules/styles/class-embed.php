@@ -12,19 +12,19 @@
  * @version		4.2.0
  */
 
-namespace WeCodeArt\Gutenberg\Modules\CSS;
+namespace WeCodeArt\Gutenberg\Modules\Styles;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Gutenberg;
-use WeCodeArt\Gutenberg\Modules\CSS;
+use WeCodeArt\Gutenberg\Modules\Styles;
 
 /**
- * Class Frontend
+ * Class Embed
  *
- * Collects and enqueues the Google Fonts and styles
+ * Collects and enqueues the Styles
  */
-class Frontend {
+class Embed {
 
 	use \WeCodeArt\Singleton;
 	use \WeCodeArt\Core\Scripts\Base;
@@ -48,9 +48,9 @@ class Frontend {
 	/**
 	 * Method to start checking if excerpt exists.
 	 *
-	 * @param string $excerpt Excerpt.
+	 * @param 	string $excerpt Excerpt.
 	 *
-	 * @return string
+	 * @return 	string
 	 * @since   4.2.0
 	 * @access  public
 	 */
@@ -63,9 +63,9 @@ class Frontend {
 	/**
 	 * Method to stop checking if excerpt exists.
 	 *
-	 * @param string $excerpt Excerpt.
+	 * @param 	string $excerpt Excerpt.
 	 *
-	 * @return string
+	 * @return 	string
 	 * @since   4.2.0
 	 * @access  public
 	 */
@@ -129,7 +129,6 @@ class Frontend {
 		if ( $footer ) {
 			$location = 'wp_footer';
 		}
-		
 
 		if ( is_preview() ) {
 			add_action( $location, function () use ( $post_id ) {
@@ -187,8 +186,8 @@ class Frontend {
 	/**
 	 * Enqueue CSS file for Reusable Blocks
 	 *
-	 * @param array $blocks List of blocks.
-	 * @param bool  $footer Should we load on footer.
+	 * @param 	array $blocks List of blocks.
+	 * @param 	bool  $footer Should we load on footer.
 	 *
 	 * @since   4.2.0
 	 * @access  public
@@ -208,7 +207,7 @@ class Frontend {
 	/**
 	 * Get Post CSS
 	 *
-	 * @param string $post_id Post id.
+	 * @param 	string $post_id Post id.
 	 *
 	 * @since   4.2.0
 	 * @access  public
@@ -237,9 +236,9 @@ class Frontend {
 	/**
 	 * Get Blocks CSS from Meta
 	 *
-	 * @param int $post_id Post id.
+	 * @param 	int $post_id Post id.
 	 *
-	 * @return string
+	 * @return 	string
 	 * @since   4.2.0
 	 * @access  public
 	 */
@@ -263,39 +262,11 @@ class Frontend {
 	}
 
 	/**
-	 * Get Reusable Block Meta
-	 *
-	 * @param array $blocks List of blocks.
-	 *
-	 * @return string
-	 * @since   4.2.0
-	 * @access  public
-	 */
-	public function get_reusable_block_meta( $blocks ) {
-		$style = '';
-		foreach ( $blocks as $block ) {
-			if ( 'core/block' === $block['blockName'] && ! empty( $block['attrs']['ref'] ) ) {
-				$style .= get_post_meta( $block['attrs']['ref'], '_wca_gutenberg_block_styles', true );
-			}
-
-			if ( isset( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
-				$style .= $this->get_reusable_block_meta( $block['innerBlocks'] );
-			}
-		}
-
-		if ( empty( $style ) ) {
-			$style .= CSS::get_instance()->cycle_through_reusable_blocks( $blocks );
-		}
-
-		return $style;
-	}
-
-	/**
 	 * Get Blocks CSS Inline
 	 *
-	 * @param int $post_id Post id.
+	 * @param 	int $post_id Post id.
 	 *
-	 * @return string
+	 * @return 	string
 	 * @since   4.2.0
 	 * @access  public
 	 */
@@ -322,6 +293,34 @@ class Frontend {
 	}
 
 	/**
+	 * Get Reusable Block Meta
+	 *
+	 * @param 	array $blocks List of blocks.
+	 *
+	 * @return 	string
+	 * @since   4.2.0
+	 * @access  public
+	 */
+	public function get_reusable_block_meta( $blocks ) {
+		$style = '';
+		foreach ( $blocks as $block ) {
+			if ( 'core/block' === $block['blockName'] && ! empty( $block['attrs']['ref'] ) ) {
+				$style .= get_post_meta( $block['attrs']['ref'], '_wca_gutenberg_block_styles', true );
+			}
+
+			if ( isset( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
+				$style .= $this->get_reusable_block_meta( $block['innerBlocks'] );
+			}
+		}
+
+		if ( empty( $style ) ) {
+			$style .= Styles::get_instance()->cycle_through_reusable_blocks( $blocks );
+		}
+
+		return $style;
+	}
+
+	/**
 	 * Cycle thorugh Blocks
 	 *
 	 * @param 	array $blocks List of blocks.
@@ -332,8 +331,8 @@ class Frontend {
 	 */
 	public function cycle_through_blocks( $blocks ) {
 		$style  = '';
-		$style .= CSS::get_instance()->cycle_through_static_blocks( $blocks );
-		$style .= CSS::get_instance()->cycle_through_reusable_blocks( $blocks );
+		$style .= Styles::get_instance()->cycle_through_static_blocks( $blocks );
+		$style .= Styles::get_instance()->cycle_through_reusable_blocks( $blocks );
 
 		return $style;
 	}

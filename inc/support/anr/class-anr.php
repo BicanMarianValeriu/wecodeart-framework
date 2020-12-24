@@ -103,7 +103,7 @@ class ANR implements Integration {
 		$hide	= anr_get_option( 'loggedin_hide' );
 		$ver	= anr_get_option( 'captcha_version', 'v2_checkbox' );
 
-		if ( is_user_logged_in() && $hide  === (bool) true ) {
+		if ( is_user_logged_in() && $hide === (bool) true ) {
 			return $defaults;
 		}
 

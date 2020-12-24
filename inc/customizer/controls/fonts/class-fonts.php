@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WP_Customize_Control;
 use WeCodeArt\Admin\Request;
+use WeCodeArt\Support\Fonts as The_Fonts;
 use function WeCodeArt\Core\Scripts\get_asset;
 
 if ( class_exists( 'WeCodeArt\Customizer\Controls\Fonts' ) ) return NULL;
@@ -36,14 +37,6 @@ class Fonts extends WP_Customize_Control {
 	 * @var 	string
 	 */
 	public $type = 'wecodeart-fonts';
-
-	/**
-	 * The control type.
-	 *
-	 * @access public
-	 * @var string
-	 */
-	public $suffix = '';
 
 	/**
 	 * Additional arguments passed to JS.
@@ -81,15 +74,15 @@ class Fonts extends WP_Customize_Control {
 		wp_localize_script( $this->make_handle(), 'wecodeartFontsControl', [
 			'typekit' 	=> [],
 			'fonts' 	=> [
-				'System' => $this->get_standard_fonts(),
-				'Google' => $this->get_google_fonts(),
+				'System' => The_Fonts::get_standard_fonts(),
+				'Google' => The_Fonts::get_google_fonts(),
 			]
 		] );
 
 		wp_enqueue_style(
 			$this->make_handle( 'fonts' ),
 			add_query_arg( [
-				'family' 	=> implode( '|', wp_list_pluck( $this->get_google_fonts(), 'family' ) ),
+				'family' 	=> implode( '|', wp_list_pluck( The_Fonts::get_google_fonts(), 'family' ) ),
 				'text'		=> 'Abc',
 				'display' 	=> 'swap',
 			], '//fonts.googleapis.com/css' ),
@@ -163,38 +156,10 @@ class Fonts extends WP_Customize_Control {
 	}
 
 	/**
-	 * Get all google fonts.
-	 *
-	 * @return array
-	 */
-	public function get_google_fonts() {
-        if ( false === ( $results = get_transient( 'wecodeart/transient/google-font' ) ) ) {
-			// It wasn't there, so regenerate the data and save the transient
-			$request_url  = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBwIX97bVWr3-6AIUvGkcNnmFgirefZ6Sw';
-			$request = new Request( $request_url, [] );
-			$request->send( $request::METHOD_GET );
-
-            $results = $request->get_response_body();
-            $results = json_decode( $results );
-			$results = array_map( function( $item ) {
-                return [
-                    'family' 	=> $item->family,
-					'variants' 	=> $item->variants,
-					'subsets' 	=> $item->subsets,
-				];
-			}, (array) $results->items );
-
-			set_transient( 'wecodeart/transient/google-font', $results, 5 * MINUTE_IN_SECONDS );
-        }
-
-		return apply_filters( 'wecodeart/filter/customizer/control/fonts/google', $results );
-	}
-
-	/**
 	 * Send to JS.
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['input_attrs'] = is_array( $this->input_attrs ) ? wp_json_encode( $this->input_attrs ) : $this->input_attrs;
+		$this->json['inputAttrs'] = is_array( $this->input_attrs ) ? wp_json_encode( $this->input_attrs ) : $this->input_attrs;
 	}
 }

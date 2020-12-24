@@ -18,24 +18,25 @@ const {
         __
     },
     blocks: {
-        createBlocksFromInnerBlocksTemplate
+        createBlocksFromInnerBlocksTemplate,
     },
     blockEditor: {
         InspectorControls,
         InnerBlocks,
         BlockControls,
         BlockVerticalAlignmentToolbar,
-        __experimentalBlockVariationPicker,
         useBlockProps,
+        __experimentalBlockVariationPicker,
+        __experimentalUseInnerBlocksProps: useInnerBlocksProps,
     },
     components: {
         PanelBody,
-        ToggleControl,
         Button,
         ToolbarGroup,
         MenuGroup,
         MenuItem,
         Dropdown,
+        SelectControl
     },
     compose: {
         compose
@@ -58,14 +59,12 @@ const {
  * @type {string[]}
  */
 const ALLOWED_BLOCKS = ['wca/column'];
-// const wcaCBFIBT = (a) => map(a, ([name, attr, blocks = []]) => createBlock(name, attr, wcaCBFIBT(blocks)));
 
 // Note this uses __experimentalGetPreviewDeviceType, but has a fallback for older versions of Gutenberg.
 // The fallback will be removed once WordPress contains supports for __experimentalGetPreviewDeviceType
 function EditContainer(props) {
     const {
         isSelected,
-        className,
         attributes = {},
         deviceType,
         setDeviceType,
@@ -73,62 +72,31 @@ function EditContainer(props) {
         updateAlignment,
     } = props;
 
-    const { align, verticalAlignment, container, gutters } = attributes;
+    const { align, verticalAlignment, container, gutter } = attributes;
 
     const blockProps = useBlockProps({
-        className: classnames(className, 'wca-section', {
-            [`align${align}`]: align,
-            'wp-block-wca-layout--mobile': deviceType === 'Mobile',
-            'wp-block-wca-layout--tablet': deviceType === 'Tablet',
-            'wp-block-wca-layout--desktop': deviceType === 'Desktop',
+        className: classnames('wca-section', {
+            'wca-section--mobile': deviceType === 'Mobile',
+            'wca-section--tablet': deviceType === 'Tablet',
+            'wca-section--desktop': deviceType === 'Desktop',
         }),
         style: getBackgroundStyles(attributes),
     });
 
+    const innerBlocksProps = useInnerBlocksProps({
+        className: classnames('wca-section__row', 'row', {
+            [`gx-${gutter}`]: gutter,
+            [`align${align}`]: align,
+            [`align-items-${verticalAlignment}`]: verticalAlignment,
+        }),
+    }, {
+        allowedBlocks: ALLOWED_BLOCKS,
+        orientation: 'horizontal',
+        renderAppender: isSelected && InnerBlocks.ButtonBlockAppender,
+    });
+
     return (
         <>
-            <div {...blockProps} >
-                <div className={classnames({
-                    'wca-overlay-grid': true,
-                    'wca-overlay-grid--no-gutters': container && gutters,
-                })}>
-                    {times(getGridWidth(deviceType)).map((i) => <div className="wca-overlay-grid__column" key={i} />)}
-                </div>
-                <div className={classnames('wca-section__container', {
-                    'container': container && ['full', 'wide'].includes(align) === false,
-                    'container-fluid': container && ['full', 'wide'].includes(align) === true,
-                })}>
-                    <InnerBlocks {...{
-                        renderAppender: isSelected ? () => <InnerBlocks.ButtonBlockAppender /> : false,
-                        allowedBlocks: ALLOWED_BLOCKS,
-                        orientation: 'horizontal',
-                        passedProps: {
-                            className: classnames('wca-section__row', 'row', {
-                                [`align-items-${verticalAlignment}`]: verticalAlignment,
-                                'no-gutters': container && gutters,
-                            }),
-                        }
-                    }} />
-                </div>
-            </div>
-            <InspectorControls>
-                <PanelBody
-                    title={__('Section settings', 'wecodeart')}
-                    initialOpen={false}
-                    className="components-panel__body--wecodeart-panel"
-                >
-                    <ToggleControl
-                        label={__('Enable container wrapper?', 'wecodeart')}
-                        checked={!!container}
-                        onChange={() => setAttributes({ container: !container })}
-                    />
-                    {!!container && <ToggleControl
-                        label={__('Disable gutters?', 'wecodeart')}
-                        checked={!!gutters}
-                        onChange={() => setAttributes({ gutters: !gutters })}
-                    />}
-                </PanelBody>
-            </InspectorControls>
             <BlockControls>
                 <BlockVerticalAlignmentToolbar
                     onChange={updateAlignment}
@@ -160,6 +128,50 @@ function EditContainer(props) {
                     )}
                 />
             </BlockControls>
+            <InspectorControls>
+                <PanelBody
+                    title={__('Section settings', 'wecodeart')}
+                    initialOpen={false}
+                    className="components-panel__body--wecodeart-panel"
+                >
+                    <SelectControl
+                        label={__('Container', 'wecodeart')}
+                        value={container}
+                        options={[
+                            { label: 'None', value: '' },
+                            { label: 'Container', value: 'container' },
+                            { label: 'Container Fluid', value: 'container-fluid' },
+                        ]}
+                        onChange={(container) => setAttributes({ container })}
+                    />
+                    <SelectControl
+                        label={__('Gutter - Horizontal', 'wecodeart')}
+                        value={gutter}
+                        options={[
+                            { label: 'None', value: 0 },
+                            { label: '1', value: 1 },
+                            { label: '2', value: 2 },
+                            { label: '3', value: 3 },
+                            { label: '4', value: 4 },
+                            { label: '5', value: 5 },
+                        ]}
+                        onChange={(gutter) => setAttributes({ gutter })}
+                    />
+                </PanelBody>
+            </InspectorControls>
+            <div {...blockProps}>
+                <div className={classnames('wca-section__overlay')}>
+                    {times(getGridWidth(deviceType)).map((i) => <div className="wca-section__overlay-col" key={i} />)}
+                </div>
+                <div {...{
+                    className: classnames({
+                        'wca-section__container': true,
+                        [container]: container,
+                    })
+                }}>
+                    <div {...innerBlocksProps} />
+                </div>
+            </div>
         </>
     );
 };
@@ -218,12 +230,12 @@ function Placeholder({ clientId, name, setAttributes }) {
                 icon={get(blockType, ['icon', 'src'])}
                 label={get(blockType, ['title'])}
                 variations={variations}
-                onSelect={(nextVariation = defaultVariation) => {
-                    if (nextVariation.attributes) {
-                        setAttributes(nextVariation.attributes);
+                onSelect={(next = defaultVariation) => {
+                    if (next.attributes) {
+                        setAttributes(next.attributes);
                     }
-                    if (nextVariation.innerBlocks) {
-                        replaceInnerBlocks(clientId, createBlocksFromInnerBlocksTemplate(nextVariation.innerBlocks));
+                    if (next.innerBlocks) {
+                        replaceInnerBlocks(clientId, createBlocksFromInnerBlocksTemplate(next.innerBlocks));
                     }
                 }}
                 allowSkip

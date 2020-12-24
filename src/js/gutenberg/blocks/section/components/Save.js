@@ -18,10 +18,10 @@ export default function save({ attributes }) {
         align,
         verticalAlignment,
         container,
-        gutters,
+        gutter,
         className,
     } = attributes;
-    
+
     return (
         <div {...useBlockProps.save({
             className: classnames(className, 'wca-section', {
@@ -29,12 +29,11 @@ export default function save({ attributes }) {
             })
         })}>
             <div className={classnames('wca-section__container', {
-                'container': container && ['full', 'wide'].includes(align) === false,
-                'container-fluid': container && ['full', 'wide'].includes(align) === true,
+                [container]: container
             })}>
                 <div className={classnames('wca-section__row', 'row', {
+                    [`gx-${gutter}`]: gutter,
                     [`align-items-${verticalAlignment}`]: verticalAlignment,
-                    'no-gutters': container && gutters,
                 })}>
                     <InnerBlocks.Content />
                 </div>
