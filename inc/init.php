@@ -18,15 +18,7 @@ use WeCodeArt\Activation;
 use WeCodeArt\Customizer;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Support;
-use WeCodeArt\Core\Header;
-use WeCodeArt\Core\Content;
-use WeCodeArt\Core\Archive;
-use WeCodeArt\Core\Entry;
-use WeCodeArt\Core\Pagination;
-use WeCodeArt\Core\Footer;
-use WeCodeArt\Core\Comments;
-use WeCodeArt\Core\Hooks;
-use WeCodeArt\Core\Scripts;
+use WeCodeArt\Core;
 use WeCodeArt\Admin;
 use WeCodeArt\Config;
 use WeCodeArt\Conditional;
@@ -71,16 +63,8 @@ final class WeCodeArt implements ArrayAccess {
 	 * @since 3.6.2
 	 */
 	public function load() {
-		// Fire Core Classes
-		Header		::get_instance();
-		Content		::get_instance();
-		Archive		::get_instance();
-		Scripts		::get_instance();
-		Entry		::get_instance();
-		Comments	::get_instance();
-		Pagination	::get_instance();
-		Footer		::get_instance();
-		Hooks		::get_instance();
+		// Fire Core
+		Core		::get_instance();
 
 		// Admin Stuff
 		Admin 		::get_instance();
@@ -255,7 +239,7 @@ function wecodeart( $key = null, $parameters = [], WeCodeArt $theme = null ) {
  * @param   string|array    $key
  * @param   string|null     $default
  *
- * @return  array
+ * @return  mixed
  */
 function wecodeart_config( $key = null, $default = null ) {
     if ( null === $key ) {
@@ -267,6 +251,34 @@ function wecodeart_config( $key = null, $default = null ) {
     }
 
     return wecodeart( 'config' )->get( $key, $default );
+}
+
+/**
+ * Gets input instance.
+ *
+ * @since	4.2.0
+ * @version	4.2.0
+ *
+ * @param   string|array    $key
+ * @param   array|null      $args
+ * @param   bool            $echo
+ *
+ * @return  mixed
+ */
+function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
+    if ( null === $key ) {
+        return wecodeart( 'input' );
+    }
+
+    if ( is_array( $key ) ) {
+        return wecodeart( 'input' )->register( $key );
+    }
+
+    if( $echo ) {
+        return wecodeart( 'input' )::render( $key, $args );
+    }
+
+    return wecodeart( 'input' )::compile( $key, $args );
 }
 
 /**
@@ -286,7 +298,7 @@ function wecodeart_option( $key, $default = false, $setting = null, $use_cache =
  * Check if condition is met.
  *
  * @since	4.0
- * @version	4.1.5
+ * @version	4.2.0
  *
  * @param   string|array    $parameters
  *
@@ -298,7 +310,7 @@ function wecodeart_if( $parameters, $relation = 'AND' ) {
     $return = false;
 
     if( in_array( $relation, [ 'AND', 'OR', 'ALL', 'ONE', 'and', 'or', 'all', 'one' ] ) ) {
-        $return = in_array( $relation, [ 'OR', 'or', 'one' ] ) && true;
+        $return = in_array( $relation, [ 'OR', 'or', 'one' ] );
     }
 
     $one_met = true;
@@ -307,7 +319,9 @@ function wecodeart_if( $parameters, $relation = 'AND' ) {
         if ( ! wecodeart( 'conditionals' )->has( $conditional ) ) return null;
         $class  = wecodeart( 'conditionals' )->get( $conditional );
         $is_met = ( new $class )->is_met();
-        if( $return === false && ! $is_met ) return false;
+        if( $return === false && ! $is_met ) {
+            return false;
+        }
         if( $return === true && ! $is_met && $one_met !== false ) {
             $one_met = false;
             continue;
@@ -360,6 +374,7 @@ if( Activation::get_instance()->is_ok() ) {
      * Load Integrations
      */
     wecodeart( 'integrations' )->load();
+
 }
 
 return $theme;

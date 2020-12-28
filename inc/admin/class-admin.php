@@ -296,16 +296,6 @@ class Admin {
 				'name'  => 'block-options',
 				'label' => __( 'Block Options', 'wecodeart' ),
 				'items' => array(
-					'copy'		=> array(
-						'name'  => 'copy',
-						'label' => __( 'Copy Selected Block(s)', 'wecodeart' ),
-						'value' => true,
-					),
-					'export'	=> array(
-						'name'  => 'export',
-						'label' => __( 'Export as JSON', 'wecodeart' ),
-						'value' => true,
-					),
 					'lorem'  => array(
 						'name'  => 'lorem',
 						'label' => __( 'Lorem Ipsum Generator', 'wecodeart' ),

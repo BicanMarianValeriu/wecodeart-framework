@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Core\Content;
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
-use WeCodeArt\Support\Interfaces\Integration;
+use WeCodeArt\Integration;
 use WeCodeArt\Support\WPSeo\Conditional\Active;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\detect_plugin;

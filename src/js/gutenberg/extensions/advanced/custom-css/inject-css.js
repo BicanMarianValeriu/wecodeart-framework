@@ -28,22 +28,23 @@ let style = '';
 
 const cycleBlocks = (blocks, reusableBlocks) => {
 	blocks.forEach(block => {
-		if (block.attributes.hasCustomCSS) {
-			if (block.attributes.customCSS && (null !== block.attributes.customCSS)) {
-				style += block.attributes.customCSS + '\n';
+		const { name, attributes: { ref, hasCustomCSS, customCSS }, innerBlocks } = block;
+		if (hasCustomCSS) {
+			if (customCSS && (null !== customCSS)) {
+				style += customCSS + '\n';
 			}
 		}
 
-		if ('core/block' === block.name && null !== reusableBlocks) {
-			let reBlocks = reusableBlocks.find(i => block.attributes.ref === i.id);
+		if ('core/block' === name && null !== reusableBlocks) {
+			let reBlocks = reusableBlocks.find(i => ref === i.id);
 			if (reBlocks) {
 				reBlocks = parse(reBlocks.content.raw);
 				cycleBlocks(reBlocks, reusableBlocks);
 			};
 		}
 
-		if (undefined !== block.innerBlocks && 0 < (block.innerBlocks).length) {
-			cycleBlocks(block.innerBlocks, reusableBlocks);
+		if (undefined !== innerBlocks && 0 < (innerBlocks).length) {
+			cycleBlocks(innerBlocks, reusableBlocks);
 		}
 	});
 };

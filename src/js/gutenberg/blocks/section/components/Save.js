@@ -9,7 +9,7 @@ import classnames from 'classnames';
 const {
     blockEditor: {
         InnerBlocks,
-        useBlockProps
+        useBlockProps,
     }
 } = wp;
 
@@ -31,8 +31,7 @@ export default function save({ attributes }) {
             <div className={classnames('wca-section__container', {
                 [container]: container
             })}>
-                <div className={classnames('wca-section__row', 'row', {
-                    [`gx-${gutter}`]: gutter,
+                <div className={classnames('wca-section__row', 'row', `gx-${gutter}`, {
                     [`align-items-${verticalAlignment}`]: verticalAlignment,
                 })}>
                     <InnerBlocks.Content />

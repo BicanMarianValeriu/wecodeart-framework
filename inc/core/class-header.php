@@ -30,10 +30,12 @@ class Header {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'wp_head',	[ $this, 'meta_pingback' ] );
-		add_action( 'wp_head',	[ $this, 'meta_viewport' ] );
-		add_filter( 'wecodeart/filter/attributes/body', [ $this, 'body_attrs' ]		);
-		add_action( 'wecodeart_header_markup', 			[ $this, 'header_markup' ] 	);
+		add_action( 'wp_head',	[ $this, 'meta_charset' 	], 0 );
+		add_action( 'wp_head',	[ $this, 'meta_viewport' 	], 0 );
+		add_action( 'wp_head',	[ $this, 'meta_profile' 	], 0 );
+		add_action( 'wp_head',	[ $this, 'meta_pingback'	], 0 );
+		add_filter( 'wecodeart/filter/attributes/body', [ $this, 'body_attrs' 	] );
+		add_action( 'wecodeart/header/markup', 			[ $this, 'markup' 		] );
 	}
 	
 	/**
@@ -41,11 +43,11 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
-	 * @version	3.7.0
+	 * @version	4.2.0
 	 *
 	 * @return 	void 
 	 */
-	public function header_markup() {
+	public function markup() {
 		Markup::wrap( 'header', [ [
 			'tag' 	=> 'header',
 			'attrs' => [
@@ -236,5 +238,27 @@ class Header {
 	public function meta_viewport() {
 		$viewport = apply_filters( 'wecodeart/filter/viewport', 'width=device-width, initial-scale=1' );
 		printf( '<meta name="viewport" content="%s" />' . "\n", esc_attr( $viewport ) );
+	}
+	
+	/**
+	 * Add a meta charset printed in wp_head
+	 *
+	 * @since	4.2.0
+	 * @version 4.2.0
+	 */
+	public function meta_charset() {
+		$charset = apply_filters( 'wecodeart/filter/meta/charset', get_bloginfo( 'charset' ) );
+		printf( '<meta charset="%s" />' . "\n", esc_attr( $charset ) );
+	}
+	
+	/**
+	 * Add a meta profile printed in wp_head
+	 *
+	 * @since	4.2.0
+	 * @version 4.2.0
+	 */
+	public function meta_profile() {
+		$profile = apply_filters( 'wecodeart/filter/meta/profile', 'http://gmpg.org/xfn/11' );
+		printf( '<link rel="rel" href="%s" />' . "\n", esc_attr( $profile ) );
 	}
 }

@@ -26,9 +26,9 @@
         do_action( 'wecodeart/hook/footer/before' );    // Hook Before Footer.
 
         /**
-         * @see WeCodeArt\Core\Footer->footer_markup();
+         * @see WeCodeArt\Core\Footer->markup();
          */
-        do_action( 'wecodeart_footer_markup' );
+        do_action( 'wecodeart/footer/markup' );
 
         do_action( 'wecodeart/hook/footer/after' );	    // Hook After Footer.
         

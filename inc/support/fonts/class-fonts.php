@@ -17,8 +17,8 @@ namespace WeCodeArt\Support;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Customizer;
+use WeCodeArt\Integration;
 use WeCodeArt\Admin\Request;
-use WeCodeArt\Support\Interfaces\Integration;
 
 /**
  * The Fonts object.
@@ -242,21 +242,5 @@ final class Fonts implements Integration {
 	 */
 	public static function is_google_font( $fontname ) {
 		return ( count( wp_list_filter( self::$google_fonts, [ 'family' => $fontname ] ) ) );
-	}
-
-	/**
-	 * Gets available options for a font.
-	 *
-	 * @static
-	 * @access public
-	 * @return array
-	 */
-	public static function get_font_choices() {
-		$fonts       = self::get_all_fonts();
-		$fonts_array = [];
-		foreach ( $fonts as $key => $args ) {
-			$fonts_array[ $key ] = $key;
-		}
-		return $fonts_array;
 	}
 }

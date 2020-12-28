@@ -1158,10 +1158,10 @@
   .wca-section.alignfull {
     max-width: initial !important;
     padding: 0 12px; }
-  .wca-section--tablet .wca-overlay-grid {
+  .wca-section--tablet .wca-section__overlay {
     -ms-grid-columns: (1fr)[8];
     grid-template-columns: repeat(8, 1fr); }
-  .wca-section--mobile .wca-overlay-grid {
+  .wca-section--mobile .wca-section__overlay {
     -ms-grid-columns: (1fr)[4];
     grid-template-columns: repeat(4, 1fr); }
   .wca-section.is-selected .wca-section__overlay, .wca-section.has-child-selected .wca-section__overlay {

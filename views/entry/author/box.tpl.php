@@ -32,7 +32,7 @@ use function WeCodeArt\Functions\kses_svg;
 				?></span>
 				</h3>
 			</div>
-			<div class="author-box__gravatar col-12 col-md-auto"><?php
+			<div class="author-box__gravatar col-12 col-sm-auto"><?php
 
 				echo wp_kses( $avatar, [ 'img' => [
 					'class'  => true,
@@ -44,7 +44,7 @@ use function WeCodeArt\Functions\kses_svg;
 				] ] );
 
 			?></div>
-			<div class="author-box__description col"><?php
+			<div class="author-box__description col mt-4 mt-sm-0"><?php
 			
 				echo wp_kses_post( $description );
 				

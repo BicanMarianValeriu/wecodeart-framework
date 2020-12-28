@@ -9,7 +9,7 @@
  * @subpackage 	Core\Archive
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.1
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Core;
@@ -40,7 +40,7 @@ class Archive {
 	 * Echo the Archive Intro Markup
 	 *
 	 * @since 	unknown
-	 * @version	4.0.1
+	 * @version	4.2.0
 	 *
 	 * @return 	void 
 	 */
@@ -54,7 +54,7 @@ class Archive {
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'archive-intro' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col' ] ]
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col my-5' ] ]
 		];
 
 		Markup::wrap( 'archive-intro', $wrappers, 'the_archive_title' );
@@ -65,12 +65,14 @@ class Archive {
 	 * Filter category title
 	 *
 	 * @since	3.5
-	 * @version	3.9.5
+	 * @version	4.2.0
 	 *
 	 * @return 	string
 	 */
 	public function filter_cat_title() {
-		$output = '<span class="archive-intro__svg mr-2">' . SVG::compile( 'folder' ) . '</span> ';
+		$output = sprintf( '<span class="archive-intro__svg me-3">%s</span>', SVG::compile( 'folder' , [
+			'class' => 'me-3'
+		] ) );
 
 		$title_template = '<span class="archive-intro__title">%s</span>';
 

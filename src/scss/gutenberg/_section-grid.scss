@@ -27,14 +27,18 @@ $break-zoomed-in: 280px;
 	}
 
 	&--tablet {
-		.wca-overlay-grid {
-			grid-template-columns: $grid-tablet;
+		.wca-section {
+			&__overlay {
+				grid-template-columns: $grid-tablet;
+			}
 		}
 	}
 
 	&--mobile {
-		.wca-overlay-grid {
-			grid-template-columns: $grid-mobile;
+		.wca-section {
+			&__overlay {
+				grid-template-columns: $grid-mobile;
+			}
 		}
 	}
 

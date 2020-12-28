@@ -14,7 +14,6 @@
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Markup\SVG;
-use WeCodeArt\Markup\Input;
 
 SVG::add_icon( 'key', [
     'viewBox'	=> '0 0 512 512',
@@ -44,20 +43,19 @@ SVG::add_icon( 'unlock', [
                 'class' => 'fa-fw'
             ] );
             
-        ?></span> 
-        <span class="flex-grow-1"><?php
+        ?></span><?php
             
-            Input::render( 'password', false, [
-                'id'            => wp_unique_id( 'pwbox-' ),
-                'name'          => 'post_password',
-                'class'         => 'form-control rounded-0',
-                'size'          => 20,
-                'required'      => true,
-                'placeholder'   => esc_attr__( 'Enter password', 'wecodeart' )
+            wecodeart_input( 'password', [
+                'attrs' => [
+                    'id'            => wp_unique_id( 'pwbox-' ),
+                    'name'          => 'post_password',
+                    'size'          => 20,
+                    'required'      => true,
+                    'placeholder'   => esc_attr__( 'Enter password', 'wecodeart' )
+                ]
             ] );
 
-        ?></span> 
-        <button type="submit" class="btn btn-outline-dark"><?php
+        ?><button type="submit" class="btn btn-outline-dark"><?php
             
             SVG::render( 'key', [
                 'class' => 'me-2'

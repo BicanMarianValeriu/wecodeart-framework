@@ -295,6 +295,17 @@ class Support implements ArrayAccess {
         foreach ( $keys as $key => $value ) {
             $this->items[$key] = apply_filters( "wecodeart/integration/set/{$key}", $value );
         }
+	}
+	
+	/**
+     * Removes integration from the container.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function forget( $key ) {
+		unset( $this->items[$key] );
     }
 
     /**

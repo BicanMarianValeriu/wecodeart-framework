@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Header
  * @since       1.0.0
- * @version     4.0.1
+ * @version     4.2.0
  */
 
 use WeCodeArt\Markup;
@@ -17,10 +17,8 @@ use WeCodeArt\Markup;
 <!DOCTYPE html>
 <html class="no-js" <?php language_attributes( 'html' ); ?>>
     <head>
-        <meta charset="<?php bloginfo( 'charset' ); ?>">
-        <link rel="profile" href="http://gmpg.org/xfn/11">
         <?php wp_head(); // WP Head. ?>
-    </head>	
+    </head>
     <body <?php echo Markup::generate_attr( 'body', [
         'class' => implode( ' ', get_body_class() )
     ] ); ?>>
@@ -33,7 +31,12 @@ use WeCodeArt\Markup;
         do_action( 'wp_body_open' );
 
         do_action( 'wecodeart/hook/header/before' 	);	// Hook Before Header
-        do_action( 'wecodeart_header_markup' 		);	// WeCodeArt Header
+        
+        /**
+         * @see WeCodeArt\Core\Header->markup();
+         */
+        do_action( 'wecodeart/header/markup' 		);	// WeCodeArt Header
+        
         do_action( 'wecodeart/hook/header/after' 	);	// Hook After Header
 
         do_action( 'wecodeart/hook/inner/before' ); 	// Hook Inner Before 

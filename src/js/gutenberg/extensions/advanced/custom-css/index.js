@@ -43,9 +43,10 @@ const addAttributes = (settings) => {
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const isRestrictedBlock = !restrictedBlocks.includes(props.name);
-		const hasCustomClassName = hasBlockSupport(props.name, 'customClassName', true);
-		if (isRestrictedBlock && hasCustomClassName && props.isSelected) {
+		const { name, isSelected } = props;
+		const isRestrictedBlock = !restrictedBlocks.includes(name);
+		const hasCustomClassName = hasBlockSupport(name, 'customClassName', true);
+		if (isRestrictedBlock && hasCustomClassName && isSelected) {
 			return (
 				<Fragment>
 					<BlockEdit {...props} />

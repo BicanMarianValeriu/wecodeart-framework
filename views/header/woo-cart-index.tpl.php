@@ -21,8 +21,11 @@ use WeCodeArt\Markup;
  * @param   string $count       Escaped above - wp_kses_data
  */
 ?>
-<button id="mini-cart" type="button" class="dropdown-toggle"
-    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+<button id="mini-cart"
+    class="dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
     title="<?php esc_attr_e( 'View your shopping cart', 'wecodeart' ); ?>">
     <span class="screen-reader-text"><?php esc_html_e( 'Show Cart', 'wecodeart' ); ?></span>
     <?php

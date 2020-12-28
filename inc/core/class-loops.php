@@ -55,7 +55,7 @@ class Loops {
 				 * 
 				 * @see 	WeCodeArt\Markup::wrap()
 				 * @see		do_action(); WP Function
-				 * @hook	'wecodeart_entry' 	
+				 * @hook	'wecodeart/entry' 	
 				 * @hooked 	{
 				 * - WeCodeArt\Core\Entry->render_header()	- 20 Entry Header Hook
 				 * - WeCodeArt\Core\Entry->render_content()	- 30 Entry Content Hook 
@@ -68,7 +68,7 @@ class Loops {
 						'id' 	=> get_post_type() . '-' . $post_id, 
 						'class'	=> implode( ' ', get_post_class() ) 
 					]
-				] ], 'do_action', [ 'wecodeart_entry', $post_id, $index  ] );
+				] ], 'do_action', [ 'wecodeart/entry', $post_id, $index  ] );
 
 				do_action( 'wecodeart/hook/loop/entry/after', $post_id, $index );
 

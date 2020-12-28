@@ -76,6 +76,7 @@ function EditContainer(props) {
 
     const blockProps = useBlockProps({
         className: classnames('wca-section', {
+            [`align${align}`]: align,
             'wca-section--mobile': deviceType === 'Mobile',
             'wca-section--tablet': deviceType === 'Tablet',
             'wca-section--desktop': deviceType === 'Desktop',
@@ -86,7 +87,6 @@ function EditContainer(props) {
     const innerBlocksProps = useInnerBlocksProps({
         className: classnames('wca-section__row', 'row', {
             [`gx-${gutter}`]: gutter,
-            [`align${align}`]: align,
             [`align-items-${verticalAlignment}`]: verticalAlignment,
         }),
     }, {
@@ -155,7 +155,7 @@ function EditContainer(props) {
                             { label: '4', value: 4 },
                             { label: '5', value: 5 },
                         ]}
-                        onChange={(gutter) => setAttributes({ gutter })}
+                        onChange={(gutter) => setAttributes({ gutter: parseInt(gutter) })}
                     />
                 </PanelBody>
             </InspectorControls>

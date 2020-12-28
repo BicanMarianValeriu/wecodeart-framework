@@ -1,8 +1,10 @@
 /**
  * WordPress dependencies.
  */
-const { __ } = wp.i18n;
-const { Component, Fragment } = wp.element;
+const {
+	i18n: { __ },
+	element: { Component }
+} = wp;
 
 class CSSEditor extends Component {
 	constructor() {
@@ -16,10 +18,11 @@ class CSSEditor extends Component {
 	componentDidMount() {
 		let classes, classAr;
 
-		const uniqueId = this.props.clientId.substr(0, 8);
+		const { attributes: { className, customCSS }, setAttributes, clientId } = this.props;
+		const uniqueId = clientId.substr(0, 8);
 
-		if (this.props.attributes.className) {
-			classes = this.props.attributes.className;
+		if (className) {
+			classes = className;
 
 			if (!classes.includes('wcacss-')) {
 				classes = classes.split(' ');
@@ -34,13 +37,13 @@ class CSSEditor extends Component {
 			classAr = classes;
 		}
 
-		this.props.setAttributes({
+		setAttributes({
 			hasCustomCSS: true,
 			className: classes
 		});
 
-		if (this.props.attributes.customCSS) {
-			const generatedCSS = (this.props.attributes.customCSS).replace(/.wcacss-[^#\s]*/g, 'selector');
+		if (customCSS) {
+			const generatedCSS = (customCSS).replace(/.wcacss-[^#\s]*/g, 'selector');
 			this.customCSS = generatedCSS;
 		} else {
 			this.customCSS = 'selector {\n}\n';
@@ -70,16 +73,16 @@ class CSSEditor extends Component {
 			this.customCSS = generatedCSS;
 
 			if (('selector {\n}\n').replace(/\s+/g, '') === this.customCSS.replace(/\s+/g, '')) {
-				return this.props.setAttributes({ customCSS: null });
+				return setAttributes({ customCSS: null });
 			}
 
-			this.props.setAttributes({ customCSS: this.customCSS });
+			setAttributes({ customCSS: this.customCSS });
 		});
 	}
 
 	render() {
 		return (
-			<Fragment>
+			<>
 				<div class="wecodeart-advanced-css">
 					<hr />
 					<h2 class="wecodeart-advanced-css__title">{__('Add your custom CSS.', 'wecodeart')}</h2>
@@ -93,7 +96,7 @@ class CSSEditor extends Component {
 						<p>{__('You can also use other CSS syntax here, such as media queries.', 'wecodeart')}</p>
 					</div>
 				</div>
-			</Fragment>
+			</>
 		);
 	}
 }

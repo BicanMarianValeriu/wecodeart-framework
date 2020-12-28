@@ -6,13 +6,13 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Core\Comments
+ * @subpackage 	Core\Entry\Comments
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
  * @version		4.2.0
  */
 
-namespace WeCodeArt\Core;
+namespace WeCodeArt\Core\Entry;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -40,14 +40,13 @@ class Comments {
 		add_filter( 'comment_reply_link',	[ $this, 'replace_reply_link_class' ] );
 		add_action( 'pre_comment_on_post',  [ $this, 'validate_cookies'			] );
 
-
 		// WeCodeArt Core
-		add_action( 'wecodeart_comments', [ $this, 'render_meta'		], 10 );
-		add_action( 'wecodeart_comments', [ Pagination::get_instance(), 'comments' ], 15 ); 
-		add_action( 'wecodeart_comments', [ $this, 'render_comments'	], 20 );
-		add_action( 'wecodeart_comments', [ $this, 'render_pings'		], 30 );
-		add_action( 'wecodeart_comments', [ Pagination::get_instance(), 'comments' ], 35 ); 
-		add_action( 'wecodeart_comments', [ $this, 'render_respond'		], 40 );
+		add_action( 'wecodeart/entry/comments', [ $this, 'render_meta'		], 10 );
+		add_action( 'wecodeart/entry/comments', [ Pagination::get_instance(), 'comments' ], 15 ); 
+		add_action( 'wecodeart/entry/comments', [ $this, 'render_comments'	], 20 );
+		add_action( 'wecodeart/entry/comments', [ $this, 'render_pings'		], 30 );
+		add_action( 'wecodeart/entry/comments', [ Pagination::get_instance(), 'comments' ], 35 ); 
+		add_action( 'wecodeart/entry/comments', [ $this, 'render_respond'	], 40 );
 		
 		add_action( 'wecodeart/hook/entry/footer', [ $this, 'get_comments_template' ], 30 );
 	}
@@ -247,24 +246,58 @@ class Comments {
 		$commenter = wp_get_current_commenter();
 		$req       = get_option( 'require_name_email' );
 
+		$inputs = [
+			'name' => wecodeart_input( 'text', [
+				'label' => esc_html__( 'Name *', 'wecodeart' ),
+				'attrs' => [
+					'id' 	=> 'comment-author',
+					'name' 	=> 'author',
+					'required' 	=> ( $req ) ? 'required' : NULL,
+					'size' 		=> 30,
+					'maxlength' => 245,
+					'value' 	=> $commenter['comment_author']
+				]
+			], false ),
+			'email' => wecodeart_input( 'email', [
+				'label' => esc_html__( 'Email *', 'wecodeart' ),
+				'attrs' => [
+					'id' 	=> 'comment-email',
+					'name' 	=> 'email',
+					'required' 	=> ( $req ) ? 'required' : NULL,
+					'size' 		=> 30,
+					'maxlength' => 100,
+					'value' 	=> $commenter['comment_author_email']
+				]
+			], false ),
+			'url' => wecodeart_input( 'url', [
+				'label' => esc_html__( 'Website', 'wecodeart' ),
+				'attrs' => [
+					'id' 	=> 'comment-url',
+					'name' 	=> 'url',
+					'size' 		 => 30, 
+					'maxlength'  => 200,
+					'value' 	 => $commenter['comment_author_url']  
+				]
+			], false ),
+			'comment' => wecodeart_input( 'textarea', [
+				'label' => esc_html__( 'Comment *', 'wecodeart' ),
+				'attrs' => [
+					'id' 	=> 'comment',
+					'name' 	=> 'comment',
+					'rows'	=> 8,
+					'cols'  => 45,
+					'required'		=> ( $req ) ? 'required' : NULL,
+					'aria-required'	=> 'true'
+				]
+			], false )
+		];
+
 		$author_name	= Markup::wrap( 'comment-author-name', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
 				'class' => 'mb-3 comment-form-author col-12 col-md-7'
 			]
-		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [
-			'text',
-			esc_html__( 'Name *', 'wecodeart' ),
-			[
-				'id' 	=> 'comment-author',
-				'class'	=> 'form-control',
-				'name' 	=> 'author',
-				'required' 	=> ( $req ) ? 'required' : NULL,
-				'size' 		=> 30,
-				'maxlength' => 245,
-				'value' 	=> $commenter['comment_author']
-			]
-		], false );
+		] ], $inputs['name'], null, false );
 
 		// Author Email.
 		$author_email = Markup::wrap( 'comment-author-email', [ [
@@ -272,19 +305,7 @@ class Comments {
 			'attrs' => [
 				'class' => 'mb-3 comment-form-email col-12 col-md-7'
 			]
-		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [
-			'email',
-			esc_html__( 'Email *', 'wecodeart' ),
-			[
-				'id' 	=> 'comment-email',
-				'class'	=> 'form-control',
-				'name' 	=> 'email',
-				'required' 	=> ( $req ) ? 'required' : NULL,
-				'size' 		=> 30,
-				'maxlength' => 100,
-				'value' 	=> $commenter['comment_author_email']
-			]
-		], false );
+		] ], $inputs['email'], null, false );
 
 		// Author URL.
 		$author_url	= Markup::wrap( 'comment-author-url', [ [
@@ -292,18 +313,7 @@ class Comments {
 			'attrs' => [
 				'class' => 'mb-3 comment-form-url col-12 col-md-7'
 			]
-		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
-			'url', 
-			esc_html__( 'Website', 'wecodeart' ), 
-			[
-				'id' 	=> 'comment-url',
-				'class'	=> 'form-control',
-				'name' 	=> 'url',
-				'size' 		 => 30, 
-				'maxlength'  => 200,
-				'value' 	 => $commenter['comment_author_url']  
-			]
-		], false );
+		] ], $inputs['url'], null, false );
 
 		// The Comment.
 		$author_comment	= Markup::wrap( 'comment-field', [ [
@@ -311,19 +321,7 @@ class Comments {
 			'attrs' => [
 				'class' => 'mb-3 comment-form-comment'
 			]
-		] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
-			'textarea', 
-			esc_html__( 'Comment *', 'wecodeart' ), 
-			[
-				'id' 	=> 'comment',
-				'class'	=> 'form-control',
-				'name' 	=> 'comment',
-				'rows'	=> absint( 8 ),
-				'cols'  => absint( 45 ),
-				'required' 			=> ( $req ) ? 'required' : NULL,
-				'aria-required'  	=> 'true' 
-			]
-		], false );
+		] ], $inputs['comment'], null, false );
 
 		// Cookies
 		$cookies = false;
@@ -331,22 +329,23 @@ class Comments {
 			$page_url 	= get_privacy_policy_url();
 			$page_title = get_the_title( $privacy_policy_page );
 			$page_link  = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $page_url ), esc_html( $page_title ) );
+			
 			$cookies = Markup::wrap( 'comment-cookies', [ [
 				'tag' 	=> 'div',
 				'attrs' => [
 					'class' => 'mb-3 comment-form-cookies'
 				]
-			] ], [ 'WeCodeArt\Markup\Input', 'render' ], [ 
-				'checkbox-switch', 
-				sprintf( __(  'By commenting you accept the %s.', 'wecodeart' ), $page_link ), 
-				[
-					'class'		=> false,
+			] ], wecodeart_input( 'toggle', [
+				'type'	=> 'checkbox',
+				'label' => sprintf( __(  'By commenting you accept the %s.', 'wecodeart' ), $page_link ),
+				'attrs' => [
+					'class'		=> 'form-switch',
 					'id' 		=> 'comment-cookies',
 					'name' 		=> 'comment-cookies',
-					'required'  => true,
+					'required'  => ( $req ) ? 'required' : NULL,
 					'aria-required'  => 'true',
 				]
-			], false );
+			], false ), null, false );
 		}
 
 		$args = [

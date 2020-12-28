@@ -18,43 +18,53 @@ const savePostMeta = debounce(async () => {
 let reusableBlocks = {};
 
 export default subscribe(() => {
-    // const {
-    //     isCurrentPostPublished,
-    //     isSavingPost,
-    //     isPublishingPost,
-    //     isAutosavingPost,
-    //     __unstableGetReusableBlocks,
-    //     __unstableIsSavingReusableBlock
-    // } = select('core/editor');
+    const {
+        isCurrentPostPublished,
+        isSavingPost,
+        isPublishingPost,
+        isAutosavingPost,
+        __experimentalIsSavingReusableBlock
+    } = select('core/editor');
 
-    // const isAutoSaving = isAutosavingPost();
-    // const isPublishing = isPublishingPost();
-    // const isSaving = isSavingPost();
-    // const isSavingReusableBlock = id => __unstableIsSavingReusableBlock(id);
-    // const getReusableBlocks = __unstableGetReusableBlocks();
-    // const postPublished = isCurrentPostPublished();
+    const { __experimentalReusableBlocks } = select('core/block-editor').getSettings();
 
-    // getReusableBlocks.map(block => {
-    //     if (block) {
-    //         const isBlockSaving = isSavingReusableBlock(block.id);
+    const { isSavingEntityRecord } = select('core');
 
-    //         if (isBlockSaving && !block.isTemporary) {
-    //             reusableBlocks[block.id] = {
-    //                 id: block.id,
-    //                 isSaving: true
-    //             };
-    //         }
+    let isSavingReusableBlock;
 
-    //         if (!isBlockSaving && !block.isTemporary && !!reusableBlocks[block.id]) {
-    //             if (block.id === reusableBlocks[block.id].id && (!isBlockSaving && reusableBlocks[block.id].isSaving)) {
-    //                 reusableBlocks[block.id].isSaving = false;
-    //                 apiFetch({ path: `wecodeart/v1/save_block_meta/${block.id}`, method: 'POST' });
-    //             }
-    //         }
-    //     }
-    // });
+    if (__experimentalIsSavingReusableBlock) {
+        isSavingReusableBlock = id => __experimentalIsSavingReusableBlock(id);
+    } else {
+        isSavingReusableBlock = id => isSavingEntityRecord('postType', 'wp_block', id);
+    }
 
-    // if ((isPublishing || (postPublished && isSaving)) && !isAutoSaving && !status) {
-    //     savePostMeta();
-    // }
+    const isAutoSaving = isAutosavingPost();
+    const isPublishing = isPublishingPost();
+    const isSaving = isSavingPost();
+    const getReusableBlocks = __experimentalReusableBlocks || [];
+    const postPublished = isCurrentPostPublished();
+
+    getReusableBlocks.map(block => {
+        if (block) {
+            const isBlockSaving = isSavingReusableBlock(block.id);
+
+            if (isBlockSaving && !block.isTemporary) {
+                reusableBlocks[block.id] = {
+                    id: block.id,
+                    isSaving: true
+                };
+            }
+
+            if (!isBlockSaving && !block.isTemporary && !!reusableBlocks[block.id]) {
+                if (block.id === reusableBlocks[block.id].id && (!isBlockSaving && reusableBlocks[block.id].isSaving)) {
+                    reusableBlocks[block.id].isSaving = false;
+                    apiFetch({ path: `wecodeart/v1/save_block_meta/${block.id}`, method: 'POST' });
+                }
+            }
+        }
+    });
+
+    if ((isPublishing || (postPublished && isSaving)) && !isAutoSaving) {
+        savePostMeta();
+    }
 });

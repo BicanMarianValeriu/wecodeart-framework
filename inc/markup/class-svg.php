@@ -276,7 +276,7 @@ class SVG {
 	}
 
 	/**
-	 * Adds a social icon to the store.
+	 * Adds a icon to the store.
 	 *
 	 * @param 	string 	$key 	Icon key
 	 * @param	array	$data	Icon data

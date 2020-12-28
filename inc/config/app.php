@@ -249,6 +249,7 @@ return [
     |
     */
     'extensions' => [
+        'fonts'  => true,
         'author-box'    => [
             'archive'   => true,
             'single'    => true,

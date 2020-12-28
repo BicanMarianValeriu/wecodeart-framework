@@ -23,11 +23,21 @@ wecodeart()->bind( 'config', function () use ( $config ) {
 } );
 
 /**
+ * Bind Inputs.
+ * 
+ * @since   4.2.0
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'input', function () {
+    return WeCodeArt\Markup\Input::get_instance();
+} );
+
+/**
  * Bind Conditionals.
  *
  * @since   4.0.1
  *
- * @param   array   $conditionals   - configuration object passed earlier.
  * @return  void
  */
 wecodeart()->bind( 'conditionals', function () {
@@ -151,12 +161,11 @@ wecodeart()->bind( 'register_sidebars', function( WeCodeArt $theme, $parameters 
     }, $parameters );
 
     if( count( array_unique( $can_run ) ) !== 1  ) {
-        _doing_it_wrong(
+        return _doing_it_wrong(
             __FUNCTION__, 
             esc_html__( 'Please define a name for each of the sidebars.', 'wecodeart' ),
             '3.9.5'
         );
-        return null;
     }
 
     foreach( $parameters as $key => $sidebar ) {

@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce\Customizer
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		4.1.4
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Support\WooCommerce;
@@ -55,11 +55,9 @@ class Customizer {
 	 * Extend Customizer default options
 	 *
 	 * @since 	3.6.0
-	 * @version	4.0.7
+	 * @version	4.2.0
 	 */
 	public function extend_defaults( $defaults ) {
-		$woo_config = get_prop( wecodeart_config( 'woocommerce' ), 'customizer', [] );
-
-		return wp_parse_args( $woo_config, $defaults );
+		return wp_parse_args( get_prop( wecodeart_config( 'woocommerce' ), 'customizer', [] ), $defaults );
 	}
 }

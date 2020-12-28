@@ -1,152 +1,153 @@
-// .wp-block-buttons {
-// 	display: inline-flex;
-// 	flex-flow: row wrap;
+.wp-block-buttons {
+	display: inline-flex;
+	flex-flow: row wrap;
 	
-// 	&.is-style-default {
-// 		margin: 0 -5px;
+	&.is-style-default {
+		margin: 0 -5px;
 
-// 		> .wp-block-button {
-// 			flex-grow: 0;
-// 			padding: 0 5px;
-// 			margin-bottom: 1rem;
-// 		}
-// 	}
+		> .wp-block-button {
+			flex-grow: 0;
+			padding: 0 5px;
+			margin-bottom: 1rem;
+		}
+	}
 
-// 	&.is-style-group {
-// 		vertical-align: middle;
+	&.is-style-group {
+		vertical-align: middle;
 
-// 		> .wp-block-button {
-// 			// Prevent double borders when buttons are next to each other
-// 			&:not(:first-child) {
-// 				margin-left: -$btn-border-width;
-// 			}
+		> .wp-block-button {
+			// Prevent double borders when buttons are next to each other
+			&:not(:first-child) {
+				margin-left: -$btn-border-width;
+			}
 
-// 			// Reset rounded corners
-// 			&:not(:last-child) > .wp-block-button__link {
-// 				@include border-right-radius(0);
-// 			}
+			// Reset rounded corners
+			&:not(:last-child) > .wp-block-button__link {
+                border-top-right-radius: 0!important;
+                border-bottom-right-radius: 0!important;
+			}
 
-// 			&:not(:first-child) > .wp-block-button__link {
-// 				@include border-left-radius(0);
-// 			}
-// 		}
-// 	}
+			&:not(:first-child) > .wp-block-button__link {
+				border-top-left-radius: 0!important;
+                border-bottom-left-radius: 0!important;
+			}
+		}
+	}
 
-// 	&.is-style-vertical,
-// 	&.is-style-group-vertical {
-// 		flex-direction: column;
-// 	}
+	&.is-style-vertical,
+	&.is-style-group-vertical {
+		flex-direction: column;
+	}
 
-// 	&.is-style-group-vertical {
-// 		align-items: flex-start;
-// 		justify-content: center;
-// 		margin-bottom: 1rem;
+	&.is-style-group-vertical {
+		align-items: flex-start;
+		justify-content: center;
+		margin-bottom: 1rem;
 
-// 		& > .wp-block-button {
-// 			width: 100%;
-// 			margin-bottom: 0;
+		& > .wp-block-button {
+			width: 100%;
+			margin-bottom: 0;
 
-// 			// Prevent double borders when buttons are next to each other
-// 			&:not(:first-child) {
-// 				margin-top: -$btn-border-width;
-// 			}
+			// Prevent double borders when buttons are next to each other
+			&:not(:first-child) {
+				margin-top: -$btn-border-width;
+			}
 
-// 			// Reset rounded corners
-// 			&:not(:last-child) > .wp-block-button__link {
-// 				@include border-bottom-radius(0);
-// 			}
+			// Reset rounded corners
+			&:not(:last-child) > .wp-block-button__link {
+				@include border-bottom-radius(0);
+			}
 
-// 			&:not(:first-child) > .wp-block-button__link {
-// 				@include border-top-radius(0);
-// 			}
+			&:not(:first-child) > .wp-block-button__link {
+				@include border-top-radius(0);
+			}
 
-// 			&__link {
-// 				display: block;
-// 				width: 100%;
-// 			}
-// 		}
-// 	}
+			&__link {
+				display: block;
+				width: 100%;
+			}
+		}
+	}
 
-// 	> .wp-block-button {
-// 		position: relative;
-// 		flex: 1 1 auto;
-// 		margin-bottom: 1rem;
+	> .wp-block-button {
+		position: relative;
+		flex: 1 1 auto;
+		margin-bottom: 1rem;
 
-// 		&:hover {
-// 			z-index: 1;
-// 		}
+		&:hover {
+			z-index: 1;
+		}
 
-// 		&__link {	  
-// 			&:focus,
-// 			&:active,
-// 			&.active {
-// 				z-index: 1;
-// 			}
-// 		}
-// 	}
-// }
+		&__link {	  
+			&:focus,
+			&:active,
+			&.active {
+				z-index: 1;
+			}
+		}
+	}
+}
 
-// .wp-block-button {
-// 	color: $white;
+.wp-block-button {
+	color: $white;
 
-// 	&.aligncenter {
-// 		text-align: center;
-// 	}
+	&.aligncenter {
+		text-align: center;
+	}
 
-// 	&.alignright {
-// 		/*rtl:ignore*/
-// 		text-align: right;
-// 	}
+	&.alignright {
+		/*rtl:ignore*/
+		text-align: right;
+	}
 
-// 	&__link {
-// 		display: block;
-// 		user-select: none;
-// 		outline: none;
-// 		font-weight: $btn-font-weight;
-// 		@include button-variant( $dark, $gray-200 );
-// 		@include button-size(
-// 			$btn-padding-y,
-// 			$btn-padding-x-lg,
-// 			$btn-font-size,
-// 			$btn-border-radius
-// 		);
+	&__link {
+		display: block;
+		user-select: none;
+		outline: none;
+		@include button-variant( $dark, $gray-200 );
+		@include button-size(
+			$btn-padding-y,
+			$btn-padding-x-lg,
+			$btn-font-size,
+			$btn-border-radius
+		);
 
-// 		&.no-border-radius {
-// 			@include border-radius(0);
-// 		}
+		&.no-border-radius {
+			@include border-radius(0);
+		}
 
-// 		@each $color, $value in $theme-colors {
-// 			&.has-#{$color}-background-color {
-// 				&:hover {
-// 					color: white;
-// 					background-color: darken( $value, 10% );
-// 				}
-// 			}
-// 		}
+		@each $color, $value in $theme-colors {
+			&.has-#{$color}-background-color {
+				&:hover {
+					color: white;
+					background-color: darken( $value, 10% );
+				}
+			}
+		}
 	
-// 		.is-style-outline & {
-// 			background-color: transparent;
-// 			border: $input-btn-border-width solid currentColor;
+		.is-style-outline & {
+			background-color: transparent;
+			border: $input-btn-border-width solid currentColor;
 
-// 			&:not(.has-text-color) {
-// 				color: $dark;
-// 			}
+			&:not(.has-text-color) {
+				color: $dark;
+			}
 
-// 			@each $color, $value in $theme-colors {
-// 				&.has-#{$color}-color {
-// 					&:hover,
-// 					&:visited {
-// 						color: #{$value};
-// 					}
-// 				}
+			@each $color, $value in $theme-colors {
+				&.has-#{$color}-color {
+					&:hover,
+					&:visited {
+						color: #{$value};
+					}
+				}
 
-// 				&.has-#{$color}-color {
-// 					&:hover {
-// 						color: white;
-// 						background-color: #{$value};
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// }
+				&.has-#{$color}-color {
+					&:hover {
+						color: white;
+						background-color: #{$value};
+					}
+				}
+			}
+		}
+	}
+}

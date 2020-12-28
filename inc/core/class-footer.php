@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		4.1.5
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Core;
@@ -31,7 +31,7 @@ class Footer {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'wecodeart_footer_markup', 		[ $this, 'footer_markup' ] );
+		add_action( 'wecodeart/footer/markup', 		[ $this, 'markup' ] );
 		add_action( 'wecodeart/hook/footer/bottom', [ $this, 'attribution_markup' ], 95 );
 		add_action( 'widgets_init', 				[ $this, 'register_sidebars' ] );
 	}
@@ -45,7 +45,7 @@ class Footer {
 	 *
 	 * @return 	HTML 
 	 */
-	public function footer_markup() {
+	public function markup() {
 		Markup::wrap( 'footer', [ [
 			'tag' 	=> 'footer',
 			'attrs' => [

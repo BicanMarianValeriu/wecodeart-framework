@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use anr_captcha_class as Captcha;
 use WeCodeArt\Markup;
-use WeCodeArt\Support\Interfaces\Integration;
+use WeCodeArt\Integration;
 use WeCodeArt\Support\ANR\Conditional\Active;
 use WeCodeArt\Support\ANR\Conditional\Supported;
 

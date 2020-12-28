@@ -48,6 +48,6 @@ Markup::wrap( 'comments', [ [
 		'id' 	=> 'comments',
 		'class' => 'comments'
 	]
-] ], 'do_action', [ 'wecodeart_comments', get_post_type() ] );
+] ], 'do_action', [ 'wecodeart/entry/comments', get_post_type() ] );
 
 do_action( 'wecodeart/hook/comments/after' );

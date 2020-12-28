@@ -21,7 +21,7 @@ use WeCodeArt\Core\Pagination;
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
 use WeCodeArt\Customizer;
-use WeCodeArt\Support\Interfaces\Integration;
+use WeCodeArt\Integration;
 use WeCodeArt\Support\WooCommerce\Conditional\Plugin;
 use WeCodeArt\Support\WooCommerce\Conditional\Page;
 use WeCodeArt\Support\WooCommerce\Conditional\Archive;
@@ -82,7 +82,6 @@ class WooCommerce implements Integration {
 		// Filters
 		add_filter( 'wecodeart/filter/header/bar/modules', 	[ $this, 'add_cart_to_header_modules' ] );
 		add_filter( 'woocommerce_add_to_cart_fragments',	[ $this, 'cart_count_fragments' ], 10, 1 );
-		add_filter( 'loop_shop_columns',                	[ $this, 'loop_columns' ], 20 );
 	}
 
 	/**
@@ -95,18 +94,6 @@ class WooCommerce implements Integration {
 		add_theme_support( 'wc-product-gallery-lightbox' );
 		add_theme_support( 'wc-product-gallery-slider' );
 	}
-
-	/**
-     * Loop Columns
-     *
-     * @param   int $cols
-	 *
-     * @return  int
-     */
-    public function loop_columns( $cols ) {
-        $cols = get_prop( wecodeart_config( 'woocommerce' ), 'product-columns', 4 );
-        return $cols;
-    }
 	
 	/**
 	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup
@@ -128,11 +115,11 @@ class WooCommerce implements Integration {
 		/**
 		 * Added Attributes / can be filtered
 		 * @since 3.7.0
-		 */
-		$attributes = Markup::generate_attr( 'woocommerce-wrapper', [ 'class' => 'content-area content-area--woocommerce' ] );
-		
+		 */		
 		?>
-		<div <?php echo $attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+		<div <?php echo Markup::generate_attr( 'woocommerce-wrapper', [
+			'class' => 'content-area content-area--woocommerce'
+		] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<div class="<?php echo sanitize_html_class( $wrapper ); ?>">
 				<div class="row">
 		<?php

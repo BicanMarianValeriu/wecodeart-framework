@@ -35,9 +35,9 @@ class Entry {
 	public function init() {
 		add_filter( 'the_password_form', [ $this, 'render_pasword_protected' ] );
 
-		add_action( 'wecodeart_entry', 	[ $this, 'render_header' 	], 20 ); 
-		add_action( 'wecodeart_entry', 	[ $this, 'render_content' 	], 30 );
-		add_action( 'wecodeart_entry',	[ $this, 'render_footer' 	], 40 );  
+		add_action( 'wecodeart/entry', 	[ $this, 'render_header' 	], 20 ); 
+		add_action( 'wecodeart/entry', 	[ $this, 'render_content' 	], 30 );
+		add_action( 'wecodeart/entry',	[ $this, 'render_footer' 	], 40 );  
 		
 		add_action( 'wecodeart/hook/entry/header',	[ $this, 'render_title' 		], 10 );
 		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_read_more'		], 10 );
@@ -51,7 +51,8 @@ class Entry {
 		 * Child classes
 		 */
 		Entry\Meta::get_instance();
-		Entry\Media::get_instance(); 
+		Entry\Media::get_instance();
+		Entry\Comments::get_instance();
 	} 
 
 	/**

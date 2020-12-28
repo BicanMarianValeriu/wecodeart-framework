@@ -85,8 +85,9 @@ class Search {
 		return Markup::wrap( 'search-form', [ [
 			'tag' 	=> 'form',
 			'attrs' => [
-				'class'		=> 'search-form',
+				'class'		=> 'search-form needs-validation',
 				'role'		=> 'search',
+				'novalidate'=> 'novalidate',
 				'method'	=> 'get',
 				'action'	=> esc_url( home_url( '/' ) )
 			]
@@ -115,16 +116,20 @@ class Search {
 			]
 		] ], function() {
 
-			$args = [
+			$attrs = [
 				'id' 	=> $this->get_input_id(),
 				'class'	=> 'form-control',
 				'name' 	=> 's',
 				'required' 	=> true,
 			];
 	
-			$args[( $this->search_query === '' ) ? 'placeholder' : 'value'] = $this->strings['input'];
+			$attrs[( $this->search_query === '' ) ? 'placeholder' : 'value'] = $this->strings['input'];
 
-			$html = Input::compile( 'search', null, $args ) . $this->get_submit();
+			$html = '';
+			$html .= wecodeart_input( 'search', [
+				'attrs' => $attrs
+			], false ); 
+			$html .= $this->get_submit();
 
 			echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
@@ -141,13 +146,12 @@ class Search {
 	 */
 	protected function get_submit() {
 
-		return Markup::wrap(  'search-submit-wrap', [ [
-			'tag' 	=> 'button',
+		return wecodeart_input( 'button', [
+			'label' => $this->strings['button'],
 			'attrs' => [
-				'type'	=> 'submit',
 				'class'	=> 'btn btn-outline-dark',
 			]
-		] ], 'printf', [ $this->strings['button'] ], false );
+		], false );
 
 	}
 
