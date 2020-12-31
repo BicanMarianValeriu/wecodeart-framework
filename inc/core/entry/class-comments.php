@@ -20,7 +20,7 @@ use WeCodeArt\Core\Pagination;
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
 use WeCodeArt\Markup\Input;
-use WeCodeArt\Walkers\Comment as CommentWalker;
+use WeCodeArt\Markup\Walkers\Comment as CommentWalker;
 
 /**
  * Handles Comments Functionality

@@ -220,11 +220,11 @@ class Header {
 	/**
 	 * Add a pingback url auto-discovery wp_head for singularly identifiable articles
 	 *
-	 * @since	v2.2
-	 * @version v2.2
+	 * @since	2.2
+	 * @version	4.2.0
 	 */
 	public function meta_pingback() {
-		if ( is_singular() && pings_open() ) {
+		if ( is_singular() && pings_open( get_queried_object() ) ) {
 			printf( '<link rel="pingback" href="%s" />' . "\n", get_bloginfo( 'pingback_url' ) );
 		}
 	}
@@ -259,6 +259,6 @@ class Header {
 	 */
 	public function meta_profile() {
 		$profile = apply_filters( 'wecodeart/filter/meta/profile', 'http://gmpg.org/xfn/11' );
-		printf( '<link rel="rel" href="%s" />' . "\n", esc_attr( $profile ) );
+		printf( '<link rel="profile" href="%s" />' . "\n", esc_attr( $profile ) );
 	}
 }

@@ -17,7 +17,7 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
-use WeCodeArt\Customizer;
+use WeCodeArt\Admin\Customizer;
 
 /**
  * Handles Footer Area of the Framework

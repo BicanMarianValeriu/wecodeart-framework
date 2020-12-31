@@ -9,7 +9,7 @@
  * @subpackage 	Loops
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.1
+ * @version		4.2.0
  */ 
 
 namespace WeCodeArt\Core;
@@ -83,5 +83,19 @@ class Loops {
 		endif; // end loop.
 
 		do_action( 'wecodeart/hook/loop/after' );
+	}
+
+	/**
+	 * Content WP Loop, meant to used to render custom content.
+	 *
+	 * @since	4.2.0
+	 * @version	4.2.0
+	 *
+	 * @return 	void
+	 */
+	public static function render_content( $id ) {
+		$blocks = parse_blocks( get_post( $id )->post_content );
+		// Checking if empty is redundant anyway / echo without sanitize since is using WP function
+		foreach( $blocks as $block ) echo render_block( $block ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

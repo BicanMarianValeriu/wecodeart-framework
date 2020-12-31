@@ -325,6 +325,29 @@ class Styles {
 	}
 
 	/**
+	 * Sanitize rgba color.
+	 *
+	 * @param string $value Color in rgba format.
+	 *
+	 * @return string
+	 */
+	public function sanitize_rgba( $value ) {
+		$red   = 'rgba(0,0,0,0)';
+		$green = 'rgba(0,0,0,0)';
+		$blue  = 'rgba(0,0,0,0)';
+		$alpha = 'rgba(0,0,0,0)';   // If empty or an array return transparent
+		if ( empty( $value ) || is_array( $value ) ) {
+			return '';
+		}
+
+		// By now we know the string is formatted as an rgba color so we need to further sanitize it.
+		$value = str_replace( ' ', '', $value );
+		sscanf( $value, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
+
+		return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
+	}
+
+	/**
 	 * Parse CSS
 	 * 
 	 * @since   4.2.0

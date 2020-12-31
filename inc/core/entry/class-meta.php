@@ -31,6 +31,7 @@ class Meta {
 	 * @since 3.6.4
 	 */
 	public function init() {
+		add_post_type_support( 'post', 'wecodeart-post-info' );
 		add_action( 'wecodeart/hook/entry/header', [ $this, 'render' ], 30 ); 
 	}
 	

@@ -16,6 +16,7 @@ namespace WeCodeArt\Support\Fonts;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Request;
 use WeCodeArt\Support\FileSystem;
 
@@ -26,7 +27,7 @@ use WeCodeArt\Support\FileSystem;
  */
 class Handler {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * WCA FileSystem
@@ -35,8 +36,8 @@ class Handler {
 	 * @since 	4.2.0
 	 * @var 	mixed
 	 */
-	protected 	$FS 		= null;
-	public 		$css_file 	= '';
+	protected 	$FS		= null;
+	const 		FILE	= 'google-fonts.css';
 
 	/**
 	 * Init.
@@ -47,7 +48,6 @@ class Handler {
 	 */
 	public function init() {
 		$this->FS = FileSystem::get_instance()->set_folder( 'css' );
-		$this->css_file = 'google-fonts.css';
 	}
 
 	/**
@@ -56,7 +56,7 @@ class Handler {
 	 * @return  string File url.
 	 */
 	public function get_css_url() {
-		return $this->FS->get_file_url( $this->css_file, true );
+		return $this->FS->get_file_url( self::FILE, true );
 	}
 
 	/**
@@ -66,11 +66,11 @@ class Handler {
 	 * @return  bool
 	 */
 	public function has_css_file() {
-		return $this->FS->has_file( $this->css_file );
+		return $this->FS->has_file( self::FILE );
 	}
 
 	/**
-	 * Function to save CSS into WordPress Filesystem.
+	 * Function to save CSS into WeCodeArt Folder.
 	 *
 	 * @access  public
 	 * @since   4.2.0
@@ -78,7 +78,7 @@ class Handler {
 	 * @return  bool
 	 */
 	public function create_css_file( $css ) {
-		return $this->FS->create_file( $this->css_file, $css );
+		return $this->FS->create_file( self::FILE, $css );
 	}
 
 	/**
@@ -126,7 +126,7 @@ class Handler {
 		$this->FS->set_folder( 'fonts' );
 
 		$font_files = $this->get_files_from_css( $css );
-		$stored     = get_option( 'wecodeart_downloaded_fonts', [] );
+		$stored     = get_option( 'wecodeart-fonts', [] );
 		$change     = false; // If in the end this is true, we need to update the cache option.
 
 		foreach( $font_files as $font_family => $files ) {
@@ -161,7 +161,7 @@ class Handler {
 		}
 
 		if ( $change ) {
-			update_option( 'wecodeart_downloaded_fonts', $stored );
+			update_option( 'wecodeart-fonts', $stored );
 		}
 
 		// Revert back the Path

@@ -16,16 +16,17 @@ namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Customizer;
+use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
+use WeCodeArt\Admin\Customizer;
 
 /**
  * Admin Side Functionality
  */
 class Admin {
 
-	use \WeCodeArt\Singleton;
-	use \WeCodeArt\Core\Scripts\Base;
+	use Singleton;
+	use Scripts\Base;
 
 	/**
 	 * Send to Constructor
@@ -33,14 +34,13 @@ class Admin {
 	public function init() {
 		\add_action( 'rest_api_init', 		[ $this, 'register_routes' ] );
 		\add_action( 'rest_api_init', 		[ $this, 'register_settings' ] );
+		\add_action( 'admin_init',			[ $this, 'register_settings' ] );
+		\add_action( 'admin_menu',			[ $this, 'register_menu_page' ] );
 		\add_action( 'after_switch_theme', 	[ $this, 'insert_default_settings' ] );
 		\add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'block_editor_settings' ], 10, 2 );
-
-		if( wecodeart_if( 'is_admin' ) ) {
-			Admin\Notifications::get_instance();
-			\add_action( 'admin_init',	[ $this, 'register_settings' ] );
-			\add_action( 'admin_menu',	[ $this, 'register_menu_page' ] );
-		}
+		
+		Admin\Notifications::get_instance();
+		Customizer::get_instance();
 	}
 
 	/**
@@ -203,7 +203,7 @@ class Admin {
 
 				// Get values, updated above
 				$data 	= wp_parse_args(
-					array_merge( [ 'custom_css'=> wp_get_custom_css(), ], get_option( 'wecodeart-settings' ) ),
+					array_merge( [ 'custom_css'=> wp_get_custom_css() ], get_option( 'wecodeart-settings' ) ),
 					Customizer::get_instance()->get_theme_mods()
 				);
 

@@ -9,7 +9,7 @@
  * @subpackage 	Core\Content
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.5
- * @version		4.0.1
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Core;
@@ -37,7 +37,7 @@ class Content {
 		add_action( 'wp_body_open',					[ $this, 'skip_link' ], 0 );
 
 		// WeCodeArt.
-		add_action( 'wecodeart_inner_markup', 		[ $this, 'render_modules' 		] );
+		add_action( 'wecodeart/content/markup',		[ $this, 'render_modules' 		] );
 		add_action( 'wecodeart/hook/loop/before',	[ $this, 'content_markup_open' 	] );
 		add_action( 'wecodeart/hook/loop/after',	[ $this, 'content_markup_close' ] );
 		add_action( 'wecodeart/hook/main/after',    [ Pagination::get_instance(), 'archive' ], 10 );
@@ -51,7 +51,8 @@ class Content {
 	 *
 	 * @return 	string 
 	 */
-	public function content_markup_open() { ?>
+	public function content_markup_open() {
+		?>
 		<div <?php echo Markup::generate_attr( 'content', [
 			'id' 	=> 'primary',
 			'class' => 'content__main col-12 col-lg'
@@ -282,8 +283,8 @@ class Content {
 
 		// Everywhere/Defaults
 		return [
-			'container' => get_theme_mod( 'content-layout-container' ),
-			'modules' 	=> get_theme_mod( 'content-layout-modules' )
+			'container' => get_theme_mod( 'content-layout-container', 'container' ),
+			'modules' 	=> get_theme_mod( 'content-layout-modules', [ 'content', 'primary' ] )
 		];
 	}
 }

@@ -42,10 +42,11 @@ class Support implements ArrayAccess {
 		\add_action( 'after_setup_theme', [ $this, 'load_translations'	] );
 
 		// Register Default Integrations
-		$this->register( 'extension/fonts',		Support\Fonts::class 		);
-		$this->register( 'plugin/anr', 			Support\ANR::class 			);
-		$this->register( 'plugin/wpseo', 		Support\WPSeo::class 		);
-		$this->register( 'plugin/woocommerce', 	Support\WooCommerce::class 	);
+		$this->register( 'starter',				Support\Starter::class	);
+		$this->register( 'extension/fonts',		Support\Fonts::class	);
+		$this->register( 'plugin/anr', 			Support\Plugins\ANR::class 			);
+		$this->register( 'plugin/wpseo', 		Support\Plugins\WPSeo::class 		);
+		$this->register( 'plugin/woocommerce', 	Support\Plugins\WooCommerce::class 	);
 	}
 
 	/**
@@ -57,47 +58,12 @@ class Support implements ArrayAccess {
 	public function after_setup_theme() {
 		// Content width
 		$GLOBALS['content_width'] = self::get_content_width();
-		
-		// Add support for Meta info for posts other than Page Type 
-		add_post_type_support( 'post', 'wecodeart-post-info' );
 
-		// Starter Content
-		add_theme_support( 'starter-content', self::get_starter_content() );
-
-		// Meta Modules
-		add_theme_support( 'meta-modules', [ 'author', 'date', 'categories', 'tags', 'comments', 'edit' ] );
-
-		// Automatic Feed Links
-		add_theme_support( 'automatic-feed-links' );
-
-		// Title Tag
-		add_theme_support( 'title-tag' );
-
-		// Selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
-
-		// Thumbnails
-		add_theme_support( 'post-thumbnails' );
-
-		// Editor Style
-		add_theme_support( 'editor-style' );
-
-		// Custom Logo
-		add_theme_support( 'custom-logo', [
-			'height'      => 50,
-			'width'       => 100,
-		] );
-
-		// HTML5
-		add_theme_support( 'html5', [ 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ] );
-
-		// Responsive Embeds
-		add_theme_support( 'responsive-embeds' );
-
-		// AMP Support
-		add_theme_support( 'amp', apply_filters( 'wecodeart/filter/support/amp', [ 
-			'paired' => true 
-		] ) );
+		// Theme Support
+		foreach( array_filter( wecodeart_config( 'support', [] ) ) as $feature => $value ) {
+			if( $value === false ) continue;
+			add_theme_support( $feature, $value );
+		}
 	}
 
 	/**
@@ -114,59 +80,6 @@ class Support implements ArrayAccess {
 		}
 
 		return apply_filters( 'wecodeart/filter/content_width', $content_width );
-	}
-
-	/**
-	 * Sets up theme starter content.
-	 *
-	 * @since 	4.0.2
-	 * @version	4.0.2
-	 */
-	public static function get_starter_content() {
-		// Define and register starter content to showcase the theme on new sites.
-		$starter_content = array(
-			'widgets'     => array(
-				// Place one core-defined widgets in the first sidebar widget area.
-				'primary' => array(
-					'text_about',
-				),
-				// Place one core-defined widgets in the second footer widget areas.
-				'footer-1' => array(
-					'text_business_info',
-				),
-				'footer-2' => array(
-					'text_business_info',
-				),
-				'footer-3' => array(
-					'text_business_info',
-				),
-			),
-
-			// Default to a static front page and assign the front and posts pages.
-			'options'     => array(
-				'show_on_front'  => 'page',
-				'page_on_front'  => '{{front}}',
-				'page_for_posts' => '{{blog}}',
-			),
-
-			// Set up nav menus for each of the two areas registered in the theme.
-			'nav_menus'   => array(
-				// Assign a menu to the "primary" location.
-				'primary'  => array(
-					'name'  => __( 'Primary', 'wecodeart' ),
-					'items' => array(
-						'page_contact',
-					),
-				),
-			),
-		);
-
-		/**
-		 * Filters WeCodeArt array of starter content.
-		 *
-		 * @param array $starter_content Array of starter content.
-		 */
-		return apply_filters( 'wecodeart/support/starter_content', $starter_content );
 	}
 
 	/**

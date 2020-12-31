@@ -15,8 +15,8 @@
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Activation;
-use WeCodeArt\Customizer;
 use WeCodeArt\Gutenberg;
+use WeCodeArt\Singleton;
 use WeCodeArt\Support;
 use WeCodeArt\Core;
 use WeCodeArt\Admin;
@@ -34,7 +34,7 @@ new WeCodeArt\Autoloader();
  */
 final class WeCodeArt implements ArrayAccess {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
      * Collection of services.
@@ -65,14 +65,10 @@ final class WeCodeArt implements ArrayAccess {
 	public function load() {
 		// Fire Core
 		Core		::get_instance();
-
 		// Admin Stuff
 		Admin 		::get_instance();
-        Customizer 	::get_instance();
-        
         // Gutenberg
         Gutenberg   ::get_instance();
-
 		// Fire Support Class
 		Support		::get_instance();
 	}
@@ -374,7 +370,6 @@ if( Activation::get_instance()->is_ok() ) {
      * Load Integrations
      */
     wecodeart( 'integrations' )->load();
-
 }
 
 return $theme;

@@ -100,8 +100,8 @@ return [
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
         'footer-copyright-text'     => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
         'general-typography-primary'=> [
-            'fontFamily' => 'Bad Script',
-            'fontWeights'=> [ /* '300', '400', '700'  */]
+            'family'    => 'Bad Script',
+            'variants'  => [ /* '300', '400', '700'  */]
         ],
     ],
     /*
@@ -120,109 +120,114 @@ return [
                 'full'      => 'initial',
             ]
         ],
-        'editor-font-sizes' => [
-            [
-                'name'      => esc_html__( 'Small', 'wecodeart' ),
-				'shortName' => esc_html__( 'S', 'wecodeart' ),
-				'size'      => 13,
-				'slug'      => 'small',
+        'support' => [
+            'editor-font-sizes' => [
+                [
+                    'name'      => esc_html__( 'Small', 'wecodeart' ),
+                    'shortName' => esc_html__( 'S', 'wecodeart' ),
+                    'size'      => 13,
+                    'slug'      => 'small',
+                ],
+                [
+                    'name'      => esc_html__( 'Normal', 'wecodeart' ),
+                    'shortName' => esc_html__( 'M', 'wecodeart' ),
+                    'size'      => 16,
+                    'slug'      => 'normal',
+                ],
+                [
+                    'name'      => esc_html__( 'Large', 'wecodeart' ),
+                    'shortName' => esc_html__( 'L', 'wecodeart' ),
+                    'size'      => 36,
+                    'slug'      => 'large',
+                ],
+                [
+                    'name'      => esc_html__( 'Huge', 'wecodeart' ),
+                    'shortName' => esc_html__( 'XL', 'wecodeart' ),
+                    'size'      => 42,
+                    'slug'      => 'huge',
+                ],
             ],
-			[
-                'name'      => esc_html__( 'Normal', 'wecodeart' ),
-				'shortName' => esc_html__( 'M', 'wecodeart' ),
-				'size'      => 16,
-				'slug'      => 'normal',
+            'editor-color-palette' => [
+                [
+                    'name' 	=> esc_html__( 'Primary', 'wecodeart' ) ,
+                    'slug'	=> 'primary',
+                    'color'	=> '#2388ed',
+                ],
+                [
+                    'name' 	=> esc_html__( 'Secondary', 'wecodeart' ) ,
+                    'slug'	=> 'secondary',
+                    'color'	=> '#6c757d',
+                ],
+                [
+                    'name' 	=> esc_html__( 'Danger', 'wecodeart' ) ,
+                    'slug'	=> 'danger',
+                    'color'	=> '#dc3545',
+                ],
+                [
+                    'name' 	=> esc_html__( 'Success', 'wecodeart' ) ,
+                    'slug'	=> 'success',
+                    'color'	=> '#7dc855',
+                ],
+                [
+                    'name' 	=> esc_html__( 'Info', 'wecodeart' ) ,
+                    'slug'	=> 'info',
+                    'color'	=> '#17a2b8',
+                ],
+                [
+                    'name' 	=> esc_html__( 'Warning', 'wecodeart' ) ,
+                    'slug'	=> 'warning',
+                    'color'	=> '#ffc107',
+                ],
+                [
+                    'name' 	=> esc_html__( 'Dark', 'wecodeart' ) ,
+                    'slug'	=> 'dark',
+                    'color'	=> '#343a40',
+                ],
+                [
+                    'name' 	=> esc_html__( 'Light', 'wecodeart' ) ,
+                    'slug'	=> 'light',
+                    'color'	=> '#f1f3f7',
+                ],
+                [
+                    'name' 	=> esc_html__( 'White', 'wecodeart' ) ,
+                    'slug'	=> 'white',
+                    'color'	=> '#ffffff',
+                ],
             ],
-            [
-                'name'      => esc_html__( 'Large', 'wecodeart' ),
-				'shortName' => esc_html__( 'L', 'wecodeart' ),
-				'size'      => 36,
-				'slug'      => 'large',
+            'editor-gradient-presets' => [
+                [
+                    'name'     => __( 'Vivid cyan blue to vivid purple', 'wecodeart' ),
+                    'gradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
+                    'slug'     => 'vivid-cyan-blue-to-vivid-purple'
+                ],
+                [
+                    'name'     => __( 'Vivid green cyan to vivid cyan blue', 'wecodeart' ),
+                    'gradient' => 'linear-gradient(135deg,rgba(0,208,132,1) 0%,rgba(6,147,227,1) 100%)',
+                    'slug'     => 'vivid-green-cyan-to-vivid-cyan-blue',
+                ],
+                [
+                    'name'     => __( 'Light green cyan to vivid green cyan', 'wecodeart' ),
+                    'gradient' => 'linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%)',
+                    'slug'     => 'light-green-cyan-to-vivid-green-cyan',
+                ],
+                [
+                    'name'     => __( 'Luminous vivid amber to luminous vivid orange', 'wecodeart' ),
+                    'gradient' => 'linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)',
+                    'slug'     => 'luminous-vivid-amber-to-luminous-vivid-orange',
+                ],
+                [
+                    'name'     => __( 'Luminous vivid orange to vivid red', 'wecodeart' ),
+                    'gradient' => 'linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%)',
+                    'slug'     => 'luminous-vivid-orange-to-vivid-red',
+                ],
             ],
-			[
-                'name'      => esc_html__( 'Huge', 'wecodeart' ),
-				'shortName' => esc_html__( 'XL', 'wecodeart' ),
-				'size'      => 42,
-				'slug'      => 'huge',
-            ],
-        ],
-        'editor-color-palette' => [
-            [
-                'name' 	=> esc_html__( 'Primary', 'wecodeart' ) ,
-				'slug'	=> 'primary',
-				'color'	=> '#2388ed',
-            ],
-            [
-                'name' 	=> esc_html__( 'Secondary', 'wecodeart' ) ,
-				'slug'	=> 'secondary',
-				'color'	=> '#6c757d',
-            ],
-            [
-                'name' 	=> esc_html__( 'Danger', 'wecodeart' ) ,
-				'slug'	=> 'danger',
-				'color'	=> '#dc3545',
-            ],
-            [
-                'name' 	=> esc_html__( 'Success', 'wecodeart' ) ,
-				'slug'	=> 'success',
-				'color'	=> '#7dc855',
-            ],
-            [
-                'name' 	=> esc_html__( 'Info', 'wecodeart' ) ,
-				'slug'	=> 'info',
-				'color'	=> '#17a2b8',
-            ],
-            [
-                'name' 	=> esc_html__( 'Warning', 'wecodeart' ) ,
-				'slug'	=> 'warning',
-				'color'	=> '#ffc107',
-            ],
-            [
-                'name' 	=> esc_html__( 'Dark', 'wecodeart' ) ,
-				'slug'	=> 'dark',
-				'color'	=> '#343a40',
-            ],
-            [
-                'name' 	=> esc_html__( 'Light', 'wecodeart' ) ,
-				'slug'	=> 'light',
-				'color'	=> '#f1f3f7',
-            ],
-            [
-                'name' 	=> esc_html__( 'White', 'wecodeart' ) ,
-				'slug'	=> 'white',
-				'color'	=> '#ffffff',
-            ],
-        ],
-        'editor-gradient-presets' => [
-            [
-                'name'     => __( 'Vivid cyan blue to vivid purple', 'wecodeart' ),
-                'gradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
-                'slug'     => 'vivid-cyan-blue-to-vivid-purple'
-            ],
-            [
-                'name'     => __( 'Vivid green cyan to vivid cyan blue', 'wecodeart' ),
-                'gradient' => 'linear-gradient(135deg,rgba(0,208,132,1) 0%,rgba(6,147,227,1) 100%)',
-                'slug'     => 'vivid-green-cyan-to-vivid-cyan-blue',
-            ],
-            [
-                'name'     => __( 'Light green cyan to vivid green cyan', 'wecodeart' ),
-                'gradient' => 'linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%)',
-                'slug'     => 'light-green-cyan-to-vivid-green-cyan',
-            ],
-            [
-                'name'     => __( 'Luminous vivid amber to luminous vivid orange', 'wecodeart' ),
-                'gradient' => 'linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)',
-                'slug'     => 'luminous-vivid-amber-to-luminous-vivid-orange',
-            ],
-            [
-                'name'     => __( 'Luminous vivid orange to vivid red', 'wecodeart' ),
-                'gradient' => 'linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%)',
-                'slug'     => 'luminous-vivid-orange-to-vivid-red',
-            ],
-        ],
-        'wp-block-styles'       => false,
-        'align-wide'            => true,
-        'palette-classnames'    => true,
+            'wp-block-styles'           => false,
+            'align-wide'                => true,
+            'palette-classnames'        => true,
+            'custom-line-height'        => true,
+            'experimental-link-color'   => true,
+            'custom-spacing'            => true,
+        ]
     ],
     /*
     |--------------------------------------------------------------------------
@@ -261,5 +266,25 @@ return [
                 'url'		=> 'Website'
             ],
         ]
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Theme Support
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for theme support.
+    |
+    */
+    'support' => [
+        'customize-selective-refresh-widgets'   => true,
+        'automatic-feed-links'  => true,
+        'title-tag'             => true,
+        'post-thumbnails'       => true,
+        'editor-style'          => true,
+        'responsive-embeds'     => true,
+        'amp'                   => [ 'paired' => true ],
+        'custom-logo'           => [ 'width' => 100, 'height' => 50 ],
+        'html5'                 => [ 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ],
+        'meta-modules'          => [ 'author', 'date', 'categories', 'tags', 'comments', 'edit' ],
     ],
 ];

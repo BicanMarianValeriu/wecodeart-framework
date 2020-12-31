@@ -9,13 +9,15 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since		4.0.3
- * @version		4.1.8
+ * @version		4.2.0
  */
 
 namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Singleton;
+use WeCodeArt\Core\Scripts;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -23,8 +25,8 @@ use function WeCodeArt\Functions\get_prop;
  */
 class Gutenberg {
 
-	use \WeCodeArt\Singleton;
-	use \WeCodeArt\Core\Scripts\Base;
+	use Singleton;
+	use Scripts\Base;
 
 	/**
 	 * The Gutenberg Config.
@@ -41,6 +43,9 @@ class Gutenberg {
 	public function init() {
 		// Setup Config
 		$this->config = wecodeart_config( 'gutenberg', [] );
+
+		// Editor Size.
+		add_action( 'admin_init', 					[ $this, 'block_editor_size' ] );
 
 		// Block Categories.
 		add_filter( 'block_categories', 			[ $this, 'block_category' ], 10, 1 );
@@ -136,59 +141,42 @@ class Gutenberg {
 	}
 
 	/**
-	 * Support custom theme support for editorskit-template-block-sizes
+	 * Editor only.
 	 *
-	 * @access public
+	 * @return  void
 	 */
-	public function theme_support() {
-		// Template Width
+	public function block_editor_size() {
 		$options = get_prop( $this->config, 'editor-sizes', [] );
 		if ( is_array( $options ) && ! empty( $options ) ) {
-			add_filter( 'admin_body_class', [ $this, 'body_class_support' ] );
+			add_filter( 'admin_body_class', [ $this, 'admin_body_class' ] );
 			global $pagenow;
 			if ( ! empty( $pagenow ) && in_array( $pagenow, [ 'post-new.php', 'post.php', 'edit.php' ] ) ) {
 				add_action( 'admin_head', [ $this, 'template_width_css' ], 100 );
 			}
 		}
+	}
 
-		// Add support for Block Styles.
-		if( get_prop( $this->config, 'wp-block-styles', false ) ) {
-			add_theme_support( 'wp-block-styles' );
-		} else {
+	/**
+	 * Support custom theme support for editorskit-template-block-sizes
+	 *
+	 * @access public
+	 */
+	public function theme_support() {
+		$support = get_prop( $this->config, 'support', [] );
+
+		// Theme Support
+		foreach( array_filter( $support ) as $feature => $value ) {
+			if( $value === false ) continue;
+			add_theme_support( $feature, $value );
+		}
+
+		// Properly dequeue Blocks Styles - since setting support to false doesn't
+		if( get_prop( $support, 'wp-block-styles', false ) === false ) {
 			add_action( 'wp_print_styles', function() {
 				wp_dequeue_style( 'wp-block-library' ); 		// WordPress Core
     			wp_dequeue_style( 'wp-block-library-theme' ); 	// WordPress Core
 			}, 100 );
 		}
-
-		// Add support for full and wide align.
-		if( get_prop( $this->config, 'align-wide', false ) ) {
-			add_theme_support( 'align-wide' );
-		}
-		
-		// Add custom editor font sizes.
-		if( $sizes = get_prop( $this->config, 'editor-font-sizes', false ) ) {
-			add_theme_support( 'editor-font-sizes', $sizes );
-		}
-
-		// Add support for color palette.
-		if( $colors = get_prop( $this->config, 'editor-color-palette', false ) ) {
-			add_theme_support( 'editor-color-palette', $colors );
-		}
-		
-		// Add support for gradient palette.
-		if( $colors = get_prop( $this->config, 'editor-gradient-presets', false ) ) {
-			add_theme_support( 'editor-gradient-presets', $colors );
-		}
-
-		// Add support for custom line height controls.
-		add_theme_support( 'custom-line-height' );
-
-		// Add support for experimental link color control.
-		add_theme_support( 'experimental-link-color' );
-
-		// Add support for experimental cover block spacing.
-		add_theme_support( 'custom-spacing' );
 	}
 
 	/**
@@ -198,7 +186,7 @@ class Gutenberg {
 	 *
 	 * @return 	mixed 	Returns update body class.
 	 */
-	public function body_class_support( $classes ) {
+	public function admin_body_class( $classes ) {
 		global $post;
 
 		$classes .= ' is-wca-body-class-on ';

@@ -81,7 +81,7 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
                 /**
                  * @see - WeCodeArt\Core\Content::render_modules();
                  */
-                do_action( 'wecodeart_inner_markup' );
+                do_action( 'wecodeart/content/markup' );
                 break;
 
             case 'footer' :

@@ -16,17 +16,18 @@ namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit(); 
 
+use WeCodeArt\Singleton;
 use WeCodeArt\Core\Search;
 use WeCodeArt\Core\Content;
 use WeCodeArt\Markup\SVG;
-use WeCodeArt\Walkers\Menu;
+use WeCodeArt\Markup\Walkers\Menu;
 
 /**
  * General Hooks
  */
 class Core {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor
@@ -34,15 +35,15 @@ class Core {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_filter( 'body_class',		array( $this, 'body_classes'	) );
-		add_filter( 'post_class',		array( $this, 'post_classes'	) );
-		add_filter( 'get_search_form',	array( $this, 'search_form' 	) );
-		add_filter( 'wp_nav_menu_args',	array( $this, 'menu_args' 		) );
-		add_filter( 'wp_get_attachment_image_attributes', [ $this, 'lazy_image_loading' ], 10, 3 );
+		add_filter( 'body_class',		[ $this, 'body_classes' ] );
+		add_filter( 'post_class',		[ $this, 'post_classes' ] );
+		add_filter( 'get_search_form',	[ $this, 'search_form' 	] );
+		add_filter( 'wp_nav_menu_args', [ $this, 'menu_args' 	] );
 
 		Core\Header		::get_instance();
 		Core\Content	::get_instance();
 		Core\Archive	::get_instance();
+		Core\Blog		::get_instance();
 		Core\Scripts	::get_instance();
 		Core\Entry		::get_instance();
 		Core\Pagination	::get_instance();
@@ -151,7 +152,7 @@ class Core {
 	 * Adds Walker to WP Menus by default.
 	 *
 	 * @since 	4.0.5
-	 * @version 4.2
+	 * @version 4.2.0
 	 *
 	 * @param 	array 	$args.
 	 *
@@ -161,27 +162,7 @@ class Core {
 		return wp_parse_args( [
 			'container' 	 => 'nav',
 			'walker' 		 => new Menu,
-			'fallback_cb'	 => 'WeCodeArt\Walkers\Menu::fallback'
+			'fallback_cb'	 => 'WeCodeArt\Markup\Walkers\Menu::fallback'
 		], $args );
-	}
-
-	/**
-	 * Filter the attributes of all images retrieved with `wp_get_attachment_image`,
-	 * add `loading="lazy"` to enable lazy loading in Chrome.
-	 *
-	 * @since 4.1.2
-	 *
-	 * @param 	array $attr Attributes for the image markup.
-	 *
-	 * @return 	array The filtered $attr array.
-	 */
-	public function lazy_image_loading( $attr ) {
-		if ( ! current_theme_supports( 'wecodeart-lazy-images' ) ) {
-			return $attr;
-		}
-
-		$attr['loading'] = 'lazy';
-
-		return $attr;
 	}
 }

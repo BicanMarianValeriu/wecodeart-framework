@@ -17,6 +17,7 @@ namespace WeCodeArt\Support\Fonts;
 defined( 'ABSPATH' ) || exit(); 
 
 use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Conditional that is only met when fonts are enabled in config.
@@ -27,6 +28,6 @@ class Condition implements ConditionalInterface {
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return (bool) wecodeart_config( 'fonts', true );
+		return (bool) get_prop( wecodeart_config( 'extensions', [] ), 'fonts', true );
 	}
 }

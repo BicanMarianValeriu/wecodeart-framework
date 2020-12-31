@@ -136,8 +136,10 @@ class Pagination {
 	public function entry_prev_next() {
         // Return only on Single Post.
         $navigation_enabled = apply_filters( 'wecodeart/filter/entry/prev_next_nav/enabled', true, get_post_type() );
+
+        $navigation_none = get_previous_post_link() === '' && get_next_post_link() === '';
         
-        if ( ! is_singular() || $navigation_enabled === false ) return;
+        if ( ! is_singular() || $navigation_enabled === false || $navigation_none === true ) return;
         
 		Markup::wrap( 'entry-navigation', [ 
 			[ 
@@ -155,7 +157,8 @@ class Pagination {
                     'class' => 'row py-4' 
                 ] 
             ]
-		], function() { ?>
+		], function() {
+            ?>
             <h3 class="screen-reader-text"><?php 
                 printf( 
                     esc_html__( '%s Navigation', 'wecodeart' ), 
