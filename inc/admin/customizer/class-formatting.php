@@ -75,8 +75,7 @@ final class Formatting {
 	 */
 	public static function sanitize_linear_css( $string ) {
 		// Strip away any chars that aren't part of a linear CSS value.
-		$out = preg_replace( '/[^a-zA-Z0-9 +-_.()% ]/', '', $string );
-		return $out;
+		return preg_replace( '/[^a-zA-Z0-9 +-_.()% ]/', '', $string );
 	}
 	
 	/**

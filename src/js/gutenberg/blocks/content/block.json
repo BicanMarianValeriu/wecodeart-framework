@@ -1,0 +1,26 @@
+{
+	"name": "wca/content",
+	"category": "wca",
+	"attributes": {
+		"backgroundColor": {
+			"type": "string"
+		},
+		"customBackgroundColor": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"align": [
+			"wide",
+			"full"
+		],
+		"html": false,
+		"anchor": true,
+		"className": true,
+		"lightBlockWrapper": true,
+		"color": {
+			"gradients": true,
+			"link": false
+		}
+	}
+}

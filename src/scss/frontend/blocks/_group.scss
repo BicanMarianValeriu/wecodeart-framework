@@ -1,20 +1,20 @@
 .wp-block-group {
     &.has-background {
-      margin-top: 0;
-      margin-bottom: 0;
+		margin-top: 0;
+		margin-bottom: 0;
     }
 
     &.alignfull {
-      padding: 0;
+      	padding: 0;
     }
     
     &__inner-container {
-      @include make-container();
-      max-width: 1330px;
+		@include make-container();
+		max-width: 1330px;
 
-      .alignfull &,
-      .alignwide & {
-        max-width: initial;
-      }
+		.alignfull &,
+		.alignwide & {
+			max-width: initial;
+		}
     }
-  }
+}

@@ -8,7 +8,7 @@ const {
 } = wp;
 
 export default (props) => {
-    const { saveEntityRecord, createNotice, wecodeartSettings, isRequesting } = props;
+    const { saveEntityRecord, createNotice, wecodeartSettings = {}, isRequesting } = props;
 
     if (isRequesting) {
         return (
@@ -59,10 +59,7 @@ export default (props) => {
         const type = hasSaved ? 'success' : 'error';
         const desc = hasSaved ? __('CSS Saved.', 'wecodeart') : __('Something went wrong...', 'wecodeart');
 
-        return createNotice(type, desc, {
-            isDismissible: true,
-            type: 'snackbar'
-        });
+        return createNotice(type, desc);
     };
 
     return (
@@ -76,7 +73,7 @@ export default (props) => {
                 isPrimary
                 isLarge
                 icon={loading && <Spinner />}
-                disabled={!customCSS || loading}
+                disabled={loading}
                 onClick={() => {
                     setLoading(true);
                     saveEntityRecord('wecodeart', 'settings', {

@@ -100,8 +100,8 @@ return [
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
         'footer-copyright-text'     => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
         'general-typography-primary'=> [
-            'family'    => 'Bad Script',
-            'variants'  => [ /* '300', '400', '700'  */]
+            'family'    => 'Raleway',
+            'variants'  => [ '300', '400', '700' ]
         ],
     ],
     /*

@@ -71,7 +71,7 @@
 	&__post {
 		&-date {
 			display: block;
-			color: $gray-400;
+			color: var(--wca-dark);
 		}
 
 		&-excerpt {

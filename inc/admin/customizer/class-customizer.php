@@ -37,7 +37,7 @@ class Customizer {
 	 * @since 	3.5
 	 * @var 	array
 	 */
-	private static $configurations;
+	public static $configurations;
 	
 	/**
 	 * Send to Constructor
@@ -45,11 +45,11 @@ class Customizer {
 	 */
 	public function init() {
 		// Init Defaults.
-		add_action( 'init', array( $this, 'set_defaults' ), 10 );
+		add_action( 'init', [ $this, 'set_defaults' ], 10 );
 
 		// Register our custom settings + defaults.
-		add_action( 'customize_register', array( $this, 'register_settings'	) );
-		add_action( 'customize_register', array( $this, 'apply_defaults'	) );
+		add_action( 'customize_register', [ $this, 'register_settings' 	] );
+		add_action( 'customize_register', [ $this, 'apply_defaults' 	] );
 		
 		// Add Scripts.
 		add_action( 'customize_register', 		[ $this, 'enqueue' 			] );
@@ -141,7 +141,7 @@ class Customizer {
 	 * @since 	3.5
 	 * @return 	Array Customizer Configurations for registering Sections/Panels/Controls.
 	 */
-	private function get_configurations( $wp_customize ) {
+	public function get_configurations( $wp_customize ) {
 		if ( ! is_null( self::$configurations ) ) return self::$configurations;
 		return apply_filters( 'wecodeart/filter/customizer/configurations', [], $wp_customize );
 	}

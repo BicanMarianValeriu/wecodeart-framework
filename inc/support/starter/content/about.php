@@ -2,251 +2,186 @@
 /**
  * About starter content.
  */
-
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'About', 'Theme starter content' ),
-	'post_content' => '<!-- wp:cover {"overlayColor":"nv-site-bg","minHeight":300,"align":"full"} -->
-<div class="wp-block-cover alignfull has-nv-site-bg-background-color has-background-dim" style="min-height:300px"><div class="wp-block-cover__inner-container"><!-- wp:group -->
-<div class="wp-block-group"><div class="wp-block-group__inner-container"><!-- wp:heading {"level":1,"className":"has-text-align-left","textColor":"neve-text-color"} -->
-<h1 class="has-text-align-left has-neve-text-color-color has-text-color">About Us</h1>
-<!-- /wp:heading --></div></div>
-<!-- /wp:group --></div></div>
-<!-- /wp:cover -->
-
-<!-- wp:cover {"overlayColor":"nv-light-bg","minHeight":600,"align":"full"} -->
-<div class="wp-block-cover alignfull has-nv-light-bg-background-color has-background-dim" style="min-height:600px"><div class="wp-block-cover__inner-container"><!-- wp:group -->
-<div class="wp-block-group"><div class="wp-block-group__inner-container"><!-- wp:spacer {"height":80} -->
-<div style="height:80px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer -->
-
-<!-- wp:columns {"verticalAlignment":"center"} -->
-<div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":50} -->
-<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%"><!-- wp:image {} -->
-<figure class="wp-block-image size-large"><img src="https://picsum.photos/id/237/300/300" alt=""/></figure>
-<!-- /wp:image --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"verticalAlignment":"center","width":50} -->
-<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%"><!-- wp:heading {"textColor":"neve-text-color"} -->
-<h2 class="has-neve-text-color-color has-text-color">Our Story</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"textColor":"neve-text-color","fontSize":"medium"} -->
-<p class="has-neve-text-color-color has-text-color has-medium-font-size">Are there any leftovers in the kitchen? what are the expectations but technologically savvy.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"textColor":"neve-text-color"} -->
-<p class="has-neve-text-color-color has-text-color">Quick sync new economy onward and upward, productize the deliverables and focus on the bottom line high touch client we need to have a Come to Jesus meeting with Phil about his attitude, so where the metal hits the meat best.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
-
-<!-- wp:spacer {"height":40} -->
-<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div></div>
-<!-- /wp:group --></div></div>
-<!-- /wp:cover -->
-
-<!-- wp:cover {"overlayColor":"nv-dark-bg","minHeight":600,"align":"full"} -->
-<div class="wp-block-cover alignfull has-nv-dark-bg-background-color has-background-dim" style="min-height:600px"><div class="wp-block-cover__inner-container"><!-- wp:group -->
-<div class="wp-block-group"><div class="wp-block-group__inner-container"><!-- wp:spacer {"height":80} -->
-<div style="height:80px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer -->
-
-<!-- wp:columns {"verticalAlignment":"center"} -->
-<div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":50} -->
-<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%"><!-- wp:heading {"textColor":"nv-text-dark-bg"} -->
-<h2 class="has-nv-text-dark-bg-color has-text-color">We are driven by values</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"textColor":"nv-text-dark-bg"} -->
-<p class="has-nv-text-dark-bg-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Line high touch client we need to have a Come to Jesus meeting with Phil about his attitude, so where the.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:spacer {"height":20} -->
-<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer -->
-
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-primary"} -->
-<div class="wp-block-button is-style-primary"><a class="wp-block-button__link" href="#">LET’S TALK</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons -->
-
-<!-- wp:spacer {"height":20} -->
-<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"verticalAlignment":"center","width":50} -->
-<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%"><!-- wp:image {} -->
-<figure class="wp-block-image"><img src="https://picsum.photos/id/237/300/300" alt="" /></figure>
-<!-- /wp:image --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
-
-<!-- wp:spacer {"height":40} -->
-<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div></div>
-<!-- /wp:group --></div></div>
-<!-- /wp:cover -->
-
-<!-- wp:cover {"overlayColor":"nv-site-bg","minHeight":420,"align":"full"} -->
-<div class="wp-block-cover alignfull has-nv-site-bg-background-color has-background-dim" style="min-height:420px"><div class="wp-block-cover__inner-container"><!-- wp:spacer {"height":80} -->
-<div style="height:80px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer -->
-
-<!-- wp:columns -->
-<div class="wp-block-columns"><!-- wp:column {"className":"ticss-4ce656f1"} -->
-<div class="wp-block-column ticss-4ce656f1"><!-- wp:image {"width":48,"height":48,"className":"icon-style is-style-rounded"} -->
-<figure class="wp-block-image icon-style is-style-rounded"><img src="https://picsum.photos/id/237/200/200" alt="" width="48" height="48"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:heading {"align":"left","level":3,"className":"has-text-align-center","textColor":"neve-text-color"} -->
-<h3 class="has-text-align-left has-text-align-center has-neve-text-color-color has-text-color">Super Efficient</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"align":"left","textColor":"neve-text-color","style":{"typography":{"fontSize":15}}} -->
-<p class="has-text-align-left has-neve-text-color-color has-text-color" style="font-size:15px">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:spacer {"height":20} -->
-<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"className":"ticss-f6fc7494"} -->
-<div class="wp-block-column ticss-f6fc7494"><!-- wp:image {"width":48,"height":48,"className":"icon-style is-style-rounded"} -->
-<figure class="wp-block-image icon-style is-style-rounded"><img src="https://picsum.photos/id/237/200/200" alt="" width="48" height="48"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:heading {"align":"left","level":3,"className":"has-text-align-center","textColor":"neve-text-color"} -->
-<h3 class="has-text-align-left has-text-align-center has-neve-text-color-color has-text-color">Deeply Committed</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"align":"left","textColor":"neve-text-color","style":{"typography":{"fontSize":15}}} -->
-<p class="has-text-align-left has-neve-text-color-color has-text-color" style="font-size:15px">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:spacer {"height":20} -->
-<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"className":"ticss-a5b4df29"} -->
-<div class="wp-block-column ticss-a5b4df29"><!-- wp:image {"width":48,"height":48,"className":"icon-style is-style-rounded"} -->
-<figure class="wp-block-image icon-style is-style-rounded"><img src="https://picsum.photos/id/237/200/200" alt="" width="48" height="48"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:heading {"align":"left","level":3,"className":"has-text-align-center","textColor":"neve-text-color"} -->
-<h3 class="has-text-align-left has-text-align-center has-neve-text-color-color has-text-color">Highly Skilled</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"align":"left","textColor":"neve-text-color","style":{"typography":{"fontSize":15}}} -->
-<p class="has-text-align-left has-neve-text-color-color has-text-color" style="font-size:15px">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:spacer {"height":20} -->
-<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
-
-<!-- wp:spacer {"height":30} -->
-<div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div></div>
-<!-- /wp:cover -->
-
-<!-- wp:cover {"overlayColor":"nv-light-bg","minHeight":600,"align":"full"} -->
-<div class="wp-block-cover alignfull has-nv-light-bg-background-color has-background-dim" style="min-height:600px"><div class="wp-block-cover__inner-container"><!-- wp:group -->
-<div class="wp-block-group"><div class="wp-block-group__inner-container"><!-- wp:spacer {"height":80} -->
-<div style="height:80px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer -->
-
-<!-- wp:columns -->
-<div class="wp-block-columns"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:image {"align":"center","className":"is-style-default"} -->
-<div class="wp-block-image is-style-default"><figure class="aligncenter"><img src="https://picsum.photos/id/237/300/300" alt="" /></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:heading {"align":"center","level":3,"textColor":"neve-text-color"} -->
-<h3 class="has-text-align-center has-neve-text-color-color has-text-color">Keith Marshall</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"align":"center","textColor":"neve-text-color"} -->
-<p class="has-text-align-center has-neve-text-color-color has-text-color">Designer</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:social-links {"align":"center"} -->
-<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
-
-<!-- wp:social-link {"url":"#","service":"twitter"} /-->
-
-<!-- wp:social-link {"url":"#","service":"linkedin"} /--></ul>
-<!-- /wp:social-links -->
-
-<!-- wp:spacer {"height":40} -->
-<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div>
-<!-- /wp:column -->
-
-<!-- wp:column -->
-<div class="wp-block-column"><!-- wp:image {"align":"center","className":"is-style-default"} -->
-<div class="wp-block-image is-style-default"><figure class="aligncenter "><img src="https://picsum.photos/id/237/300/300" alt=""/></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:heading {"align":"center","level":3,"textColor":"neve-text-color"} -->
-<h3 class="has-text-align-center has-neve-text-color-color has-text-color">George Williams</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"align":"center","textColor":"neve-text-color"} -->
-<p class="has-text-align-center has-neve-text-color-color has-text-color">Developer</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:social-links {"align":"center"} -->
-<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
-
-<!-- wp:social-link {"url":"#","service":"twitter"} /-->
-
-<!-- wp:social-link {"url":"#","service":"linkedin"} /--></ul>
-<!-- /wp:social-links -->
-
-<!-- wp:spacer {"height":40} -->
-<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div>
-<!-- /wp:column -->
-
-<!-- wp:column -->
-<div class="wp-block-column"><!-- wp:image {"align":"center","className":"is-style-default"} -->
-<div class="wp-block-image is-style-default"><figure class="aligncenter "><img src="https://picsum.photos/id/237/300/300" alt="" /></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:heading {"align":"center","level":3,"textColor":"neve-text-color"} -->
-<h3 class="has-text-align-center has-neve-text-color-color has-text-color">Julia Castillo</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"align":"center","textColor":"neve-text-color"} -->
-<p class="has-text-align-center has-neve-text-color-color has-text-color">Client Service</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:social-links {"align":"center"} -->
-<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
-
-<!-- wp:social-link {"url":"#","service":"twitter"} /-->
-
-<!-- wp:social-link {"url":"#","service":"linkedin"} /--></ul>
-<!-- /wp:social-links -->
-
-<!-- wp:spacer {"height":40} -->
-<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
-
-<!-- wp:spacer {"height":40} -->
-<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div></div>
-<!-- /wp:group --></div></div>
-<!-- /wp:cover -->',
+	'post_content' => '<!-- wp:wca/section {"backgroundColor":"light","className":"wcacss-bd010bf4 py-5","hasCustomCSS":true} -->
+	<div class="wp-block-wca-section alignfull wcacss-bd010bf4 py-5 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-54d8bdf2 py-md-5","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-54d8bdf2 py-md-5"><!-- wp:heading {"level":1,"className":"has-text-align-left","textColor":"dark"} -->
+	<h1 class="has-text-align-left has-dark-color has-text-color">About Us</h1>
+	<!-- /wp:heading --></div>
+	<!-- /wp:wca/column --></div></div></div>
+	<!-- /wp:wca/section -->
+	
+	<!-- wp:wca/section {"className":"wcacss-ad84793c py-5","hasCustomCSS":true} -->
+	<div class="wp-block-wca-section alignfull wcacss-ad84793c py-5 wca-section"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4"}} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md-4"><!-- wp:image {"sizeSlug":"large","className":"wcacss-45a1b54b","hasCustomCSS":true} -->
+	<figure class="wp-block-image size-large wcacss-45a1b54b"><img src="https://picsum.photos/id/237/500/500" alt=""/></figure>
+	<!-- /wp:image --></div>
+	<!-- /wp:wca/column -->
+	
+	<!-- wp:wca/column {"verticalAlignment":"center","bootstrapColumns":{"global":"col-12","md":"col-md-8"}} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md-8 align-self-center"><!-- wp:heading -->
+	<h2>Our Story</h2>
+	<!-- /wp:heading -->
+	
+	<!-- wp:paragraph {"fontSize":"medium"} -->
+	<p class="has-medium-font-size">Are there any leftovers in the kitchen? what are the expectations but <span class="has-inline-color has-white-color"><span class="has-inline-background has-primary-background-color">technologically</span></span> savvy.</p>
+	<!-- /wp:paragraph -->
+	
+	<!-- wp:paragraph -->
+	<p>Quick sync new economy onward and upward, productize the deliverables and focus on the bottom line high touch client we need to have a Come to Jesus meeting with Phil about his attitude, so where the metal hits the meat best.</p>
+	<!-- /wp:paragraph --></div>
+	<!-- /wp:wca/column --></div></div></div>
+	<!-- /wp:wca/section -->
+	
+	<!-- wp:wca/section {"backgroundColor":"light","className":"wcacss-ad84793c py-5","hasCustomCSS":true} -->
+	<div class="wp-block-wca-section alignfull wcacss-ad84793c py-5 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"verticalAlignment":"center","bootstrapColumns":{"global":"col-12","md":"col-md-8"},"className":"wcacss-be806f2d","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md-8 align-self-center wcacss-be806f2d"><!-- wp:heading {"className":"wcacss-7f0e1046","textColor":"nv-text-dark-bg","hasCustomCSS":true} -->
+	<h2 class="wcacss-7f0e1046 has-nv-text-dark-bg-color has-text-color">We are driven by values</h2>
+	<!-- /wp:heading -->
+	
+	<!-- wp:paragraph {"textColor":"nv-text-dark-bg"} -->
+	<p class="has-nv-text-dark-bg-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Line high touch client we need to have a Come to Jesus meeting with Phil about his attitude, so where the.</p>
+	<!-- /wp:paragraph -->
+	
+	<!-- wp:spacer {"height":20} -->
+	<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
+	<!-- /wp:spacer -->
+	
+	<!-- wp:buttons -->
+	<div class="wp-block-buttons"><!-- wp:button {"borderRadius":5,"backgroundColor":"primary","className":"is-style-primary wcacss-22f8fde2","hasCustomCSS":true} -->
+	<div class="wp-block-button is-style-primary wcacss-22f8fde2"><a class="wp-block-button__link has-primary-background-color has-background" href="#" style="border-radius:5px">LET’S TALK</a></div>
+	<!-- /wp:button --></div>
+	<!-- /wp:buttons --></div>
+	<!-- /wp:wca/column -->
+	
+	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4"},"className":"wcacss-e616e36d order-first order-sm-last","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md-4 wcacss-e616e36d order-first order-sm-last"><!-- wp:image {"sizeSlug":"large","className":"wcacss-5f0a48a0","hasCustomCSS":true} -->
+	<figure class="wp-block-image size-large wcacss-5f0a48a0"><img src="https://picsum.photos/id/237/500/500" alt=""/></figure>
+	<!-- /wp:image --></div>
+	<!-- /wp:wca/column --></div></div></div>
+	<!-- /wp:wca/section -->
+	
+	<!-- wp:wca/section {"backgroundColor":"dark","className":"wcacss-7290080c py-5","textColor":"white","hasCustomCSS":true} -->
+	<div class="wp-block-wca-section alignfull wcacss-7290080c py-5 wca-section has-white-color has-dark-background-color has-text-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-c32c587f mb-5 mb-md-0","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-c32c587f mb-5 mb-md-0"><!-- wp:heading {"textAlign":"left","level":3,"className":"has-text-align-center","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<h3 class="has-text-align-left has-text-align-center">Super Efficient</h3>
+	<!-- /wp:heading -->
+	
+	<!-- wp:paragraph {"align":"left","style":{"typography":{"fontSize":15}}} -->
+	<p class="has-text-align-left" style="font-size:15px">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
+	<!-- /wp:paragraph --></div>
+	<!-- /wp:wca/column -->
+	
+	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-47299bbc mb-5 mb-md-0","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-47299bbc mb-5 mb-md-0"><!-- wp:heading {"textAlign":"left","level":3,"className":"has-text-align-center","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<h3 class="has-text-align-left has-text-align-center">Deeply Committed</h3>
+	<!-- /wp:heading -->
+	
+	<!-- wp:paragraph {"align":"left","style":{"typography":{"fontSize":15}}} -->
+	<p class="has-text-align-left" style="font-size:15px">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
+	<!-- /wp:paragraph --></div>
+	<!-- /wp:wca/column -->
+	
+	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-7cb599cc","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-7cb599cc"><!-- wp:heading {"textAlign":"left","level":3,"className":"has-text-align-center","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<h3 class="has-text-align-left has-text-align-center">Highly Skilled</h3>
+	<!-- /wp:heading -->
+	
+	<!-- wp:paragraph {"align":"left","style":{"typography":{"fontSize":15}}} -->
+	<p class="has-text-align-left" style="font-size:15px">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
+	<!-- /wp:paragraph --></div>
+	<!-- /wp:wca/column --></div></div></div>
+	<!-- /wp:wca/section -->
+	
+	<!-- wp:wca/section {"backgroundColor":"light","className":"wcacss-7290080c py-5","hasCustomCSS":true} -->
+	<div class="wp-block-wca-section alignfull wcacss-7290080c py-5 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"},"className":"wcacss-c32c587f","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg wcacss-c32c587f"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default wcacss-7a948bea","hasCustomCSS":true} -->
+	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="https://picsum.photos/id/237/350/350" alt=""/></figure></div>
+	<!-- /wp:image -->
+	
+	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<h3 class="has-text-align-center">Keith Marshall</h3>
+	<!-- /wp:heading -->
+	
+	<!-- wp:paragraph {"align":"center"} -->
+	<p class="has-text-align-center">CEO</p>
+	<!-- /wp:paragraph -->
+	
+	<!-- wp:social-links {"align":"center"} -->
+	<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
+	
+	<!-- wp:social-link {"url":"#","service":"twitter"} /-->
+	
+	<!-- wp:social-link {"url":"#","service":"linkedin"} /--></ul>
+	<!-- /wp:social-links --></div>
+	<!-- /wp:wca/column -->
+	
+	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"},"className":"wcacss-c32c587f","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg wcacss-c32c587f"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default wcacss-7a948bea","hasCustomCSS":true} -->
+	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="https://picsum.photos/id/237/350/350" alt=""/></figure></div>
+	<!-- /wp:image -->
+	
+	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<h3 class="has-text-align-center">Mark Smith</h3>
+	<!-- /wp:heading -->
+	
+	<!-- wp:paragraph {"align":"center"} -->
+	<p class="has-text-align-center">Designer</p>
+	<!-- /wp:paragraph -->
+	
+	<!-- wp:social-links {"align":"center"} -->
+	<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
+	
+	<!-- wp:social-link {"url":"#","service":"twitter"} /-->
+	
+	<!-- wp:social-link {"url":"#","service":"linkedin"} /--></ul>
+	<!-- /wp:social-links --></div>
+	<!-- /wp:wca/column -->
+	
+	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"}} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default wcacss-652c8d48","hasCustomCSS":true} -->
+	<div class="wp-block-image is-style-default wcacss-652c8d48"><figure class="aligncenter size-large"><img src="https://picsum.photos/id/237/350/350" alt=""/></figure></div>
+	<!-- /wp:image -->
+	
+	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<h3 class="has-text-align-center">George Williams</h3>
+	<!-- /wp:heading -->
+	
+	<!-- wp:paragraph {"align":"center"} -->
+	<p class="has-text-align-center">Developer</p>
+	<!-- /wp:paragraph -->
+	
+	<!-- wp:social-links {"align":"center"} -->
+	<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
+	
+	<!-- wp:social-link {"url":"#","service":"twitter"} /-->
+	
+	<!-- wp:social-link {"url":"#","service":"linkedin"} /--></ul>
+	<!-- /wp:social-links --></div>
+	<!-- /wp:wca/column -->
+	
+	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"}} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default"} -->
+	<div class="wp-block-image is-style-default"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=400&w=400" alt=""/></figure></div>
+	<!-- /wp:image -->
+	
+	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<h3 class="has-text-align-center">Julia Castillo</h3>
+	<!-- /wp:heading -->
+	
+	<!-- wp:paragraph {"align":"center"} -->
+	<p class="has-text-align-center">Client Service</p>
+	<!-- /wp:paragraph -->
+	
+	<!-- wp:social-links {"align":"center"} -->
+	<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
+	
+	<!-- wp:social-link {"url":"#","service":"twitter"} /-->
+	
+	<!-- wp:social-link {"url":"#","service":"linkedin"} /--></ul>
+	<!-- /wp:social-links --></div>
+	<!-- /wp:wca/column --></div></div></div>
+	<!-- /wp:wca/section -->',
 ];

@@ -16,8 +16,6 @@ namespace WeCodeArt\Admin\Customizer\Extender;
 
 defined( 'ABSPATH' ) || exit();
 
-if ( class_exists( 'WeCodeArt\Admin\Customizer\Extender\Section' ) ) return NULL;
-
 /**
  * Custom Section
  */
@@ -46,7 +44,7 @@ class Section extends \WP_Customize_Section {
 	 * @return 	array Exported parameters.
 	 */
 	public function json() {
-		$array                   = wp_array_slice_assoc( (array) $this, array( 'id', 'description', 'priority', 'panel', 'type', 'description_hidden', 'section' ) );
+		$array                   = wp_array_slice_assoc( (array) $this, [ 'id', 'description', 'priority', 'panel', 'type', 'description_hidden', 'section' ] );
 		$array['title']          = html_entity_decode( $this->title, ENT_QUOTES, get_bloginfo( 'charset' ) );
 		$array['content']        = $this->get_content();
 		$array['active']         = $this->active();

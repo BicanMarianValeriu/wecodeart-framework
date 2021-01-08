@@ -31,9 +31,9 @@ class Archive {
 	 * @since 3.9.3
 	 */
 	public function init() {
-		add_filter( 'get_the_archive_title', 		[ $this, 'filter_cat_title' 	] );
-		add_action( 'wecodeart/hook/inner/top',		[ $this, 'render_intro_markup' 	], 15 );
-		add_action( 'wecodeart/hook/inner/top', 	[ Author::get_instance(), 'author_box_archive' ], 20 );
+		add_filter( 'get_the_archive_title',	[ $this, 'filter_cat_title' 	] );
+		add_action( 'wecodeart/hook/inner/top',	[ $this, 'render_intro_markup' 	], 15 );
+		add_action( 'wecodeart/hook/inner/top',	[ Author::get_instance(), 'author_box_archive' ], 20 );
 	}
 	
 	/**
@@ -70,8 +70,8 @@ class Archive {
 	 * @return 	string
 	 */
 	public function filter_cat_title() {
-		$output = sprintf( '<span class="archive-intro__svg me-3">%s</span>', SVG::compile( 'folder' , [
-			'class' => 'me-3'
+		$output = sprintf( '<span class="archive-intro__svg">%s</span>', SVG::compile( 'folder' , [
+			'class' => 'd-inline-block me-3 fa-5x'
 		] ) );
 
 		$title_template = '<span class="archive-intro__title">%s</span>';

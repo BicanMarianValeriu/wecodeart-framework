@@ -16,8 +16,6 @@ namespace WeCodeArt\Admin\Customizer\Extender;
 
 defined( 'ABSPATH' ) || exit();
 
-if ( class_exists( 'WeCodeArt\Customizer\Extender\Panel' ) ) return NULL;
-
 /**
  * Custom Panel
  */
@@ -46,7 +44,7 @@ class Panel extends \WP_Customize_Panel {
 	 * @return 	array Exported parameters.
 	 */
 	public function json() {
-		$array                   = wp_array_slice_assoc( (array) $this, array( 'id', 'description', 'priority', 'type', 'panel' ) );
+		$array                   = wp_array_slice_assoc( (array) $this, [ 'id', 'description', 'priority', 'type', 'panel' ] );
 		$array['title']          = html_entity_decode( $this->title, ENT_QUOTES, get_bloginfo( 'charset' ) );
 		$array['content']        = $this->get_content();
 		$array['active']         = $this->active();

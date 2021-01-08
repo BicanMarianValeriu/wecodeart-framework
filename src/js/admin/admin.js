@@ -37,7 +37,16 @@ import './../../scss/admin/admin.scss';
 
 const WeCodeArt = () => {
 	const { currentUser, version, editorSettings: jsonSettings } = wecodeart;
-	const { createNotice } = useDispatch('core/notices');
+	const { createNotice: coreCreateNotice } = useDispatch('core/notices');
+
+	const createNotice = (type, desc, opts) => {
+		return coreCreateNotice(type, desc, {
+			isDismissible: true,
+			type: 'snackbar',
+			...opts
+		});
+	};
+
 	const {
 		editorSettings,
 		wecodeartSettings,
@@ -63,6 +72,8 @@ const WeCodeArt = () => {
 		getSettings = JSON.parse(jsonSettings).settings;
 	}
 
+	const tabProps = { saveEntityRecord, isRequesting, wecodeartSettings, createNotice };
+
 	let tabs = [{
 		name: 'wca-getting-started',
 		title: __('Getting Started', 'wecodeart'),
@@ -78,10 +89,7 @@ const WeCodeArt = () => {
 			title: __('Extensions', 'wecodeart'),
 			className: 'wca-extensions',
 			render: <Extensions {...{
-				saveEntityRecord,
-				isRequesting,
-				wecodeartSettings,
-				createNotice,
+				...tabProps,
 				extensions,
 			}} />
 		}];
@@ -93,23 +101,13 @@ const WeCodeArt = () => {
 		// 	name: 'wca-license',
 		// 	title: __('License(s)', 'wecodeart'),
 		// 	className: 'wca-license',
-		// 	render: <License {...{
-		// 		saveEntityRecord,
-		// 		wecodeartSettings,
-		// 		isRequesting,
-		// 		createNotice,
-		// 	}} />
+		// 	render: <License {...tabProps} />
 		// },
 		{
 			name: 'wca-customcss',
 			title: __('Custom CSS', 'wecodeart'),
 			className: 'wca-customcss',
-			render: <CustomCSS {...{
-				saveEntityRecord,
-				isRequesting,
-				wecodeartSettings,
-				createNotice,
-			}} />
+			render: <CustomCSS {...tabProps} />
 		}
 	];
 

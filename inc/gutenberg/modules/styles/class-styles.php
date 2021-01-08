@@ -17,6 +17,7 @@ namespace WeCodeArt\Gutenberg\Modules;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Gutenberg;
+use function WeCodeArt\Functions\hex_rgba;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
@@ -44,7 +45,6 @@ class Styles {
 	 * @param 	int 	$post_id Post id.
 	 * @return 	string
 	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function get_blocks_css( $post_id ) {
 		if ( function_exists( 'has_blocks' ) ) {
@@ -65,7 +65,6 @@ class Styles {
 	 * @param 	int 	$post_id Post id.
 	 * @return 	string
 	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function get_reusable_block_css( $post_id ) {
 		$reusable_block = get_post( $post_id );
@@ -90,7 +89,6 @@ class Styles {
 	 *
 	 * @return 	string 	Style.
 	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function cycle_through_static_blocks( $blocks ) {
 		$style = '';
@@ -108,11 +106,10 @@ class Styles {
 	/**
 	 * Cycle thorugh Reusable Blocks
 	 *
+	 * @since   4.2.0
 	 * @param 	array $blocks List of blocks.
 	 *
 	 * @return 	string Style.
-	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function cycle_through_reusable_blocks( $blocks ) {
 		$style = '';
@@ -134,8 +131,8 @@ class Styles {
 	 *
 	 * @since   4.2.0
 	 * @param 	mixed $block Block data.
+	 *
 	 * @return 	string
-	 * @access  public
 	 */
 	public function get_css_from_attributes( $block = [] ) {
 		$attr  = $block['attrs'] ?: [];
@@ -189,7 +186,6 @@ class Styles {
 	 * @param 	string $var Var to check.
 	 *
 	 * @return 	bool
-	 * @access  public
 	 */
 	public function is_empty( $var ) {
 		return empty( $var ) && 0 !== $var;
@@ -198,12 +194,11 @@ class Styles {
 	/**
 	 * Get block attribute value with default
 	 *
+	 * @since   4.2.0
 	 * @param 	mixed $attr Attributes.
 	 * @param 	mixed $default Default value.
 	 *
 	 * @return 	mixed
-	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function get_attr_value( $attr, $default = 'unset' ) {
 		if ( ! $this->is_empty( $attr ) ) {
@@ -218,8 +213,9 @@ class Styles {
 	 *
 	 * @since   4.2.0
 	 * @param  	string $value	CSS value.
-	 * @param  	string $unit		CSS unit.
+	 * @param  	string $unit	CSS unit.
 	 * @param  	string $default	CSS default font.
+	 *
 	 * @return 	mixed			CSS value depends on $unit
 	 */
 	public function get_css_value( $value = '', $unit = '', $default = '' ) {
@@ -234,7 +230,7 @@ class Styles {
 
 			case 'font':
 				if ( 'inherit' != $value ) {
-					$value   = astra_get_font_family( $value );
+					$value   = $value['family'];
 					$css_val = $value;
 				} elseif ( '' != $default ) {
 					$css_val = $default;
@@ -268,7 +264,7 @@ class Styles {
 				break;
 
 			case 'color':
-				$css_val = $this->hex2rgba( sanitize_hex_color( $value ) );
+				$css_val = hex_rgba( sanitize_hex_color( $value ) );
 				break;
 
 			default:
@@ -282,79 +278,14 @@ class Styles {
 	}
 
 	/**
-	 * Convert HEX to RGBA.
-	 *
-	 * @param 	string $color Color data.
-	 * @param 	bool   $opacity Opacity status.
-	 *
-	 * @return 	mixed
-	 * @since   4.2.0
-	 * @access  public
-	 */
-	public function hex2rgba( $color, $opacity = false ) {
-		$default = 'rgb(0,0,0)';
-
-		if ( empty( $color ) ) {
-			return $default;
-		}
-
-		if ( '#' == $color[0] ) {
-			$color = substr( $color, 1 );
-		}
-
-		if ( strlen( $color ) == 6 ) {
-			$hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
-		} elseif ( strlen( $color ) == 3 ) {
-			$hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
-		} else {
-			return $default;
-		}
-
-		$rgb = array_map( 'hexdec', $hex );
-
-		if ( $opacity ) {
-			if ( abs( $opacity ) > 1 ) {
-				$opacity = 1.0;
-			}
-			$output = 'rgba(' . implode( ',', $rgb ) . ',' . $opacity . ')';
-		} else {
-			$output = 'rgb(' . implode( ',', $rgb ) . ')';
-		}
-
-		return $output;
-	}
-
-	/**
-	 * Sanitize rgba color.
-	 *
-	 * @param string $value Color in rgba format.
-	 *
-	 * @return string
-	 */
-	public function sanitize_rgba( $value ) {
-		$red   = 'rgba(0,0,0,0)';
-		$green = 'rgba(0,0,0,0)';
-		$blue  = 'rgba(0,0,0,0)';
-		$alpha = 'rgba(0,0,0,0)';   // If empty or an array return transparent
-		if ( empty( $value ) || is_array( $value ) ) {
-			return '';
-		}
-
-		// By now we know the string is formatted as an rgba color so we need to further sanitize it.
-		$value = str_replace( ' ', '', $value );
-		sscanf( $value, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
-
-		return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
-	}
-
-	/**
 	 * Parse CSS
 	 * 
 	 * @since   4.2.0
 	 * @param  	array  $css_output Array of CSS.
 	 * @param  	string $min_media  Min Media breakpoint.
 	 * @param  	string $max_media  Max Media breakpoint.
-	 * @return 	string             Generated CSS.
+	 *
+	 * @return 	string Generated CSS.
 	 */
 	public function parse_css( $output = [], $min_media = '', $max_media = '' ) {
 

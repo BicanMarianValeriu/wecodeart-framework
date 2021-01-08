@@ -195,15 +195,19 @@ class Template {
             if ( ! $template_name ) {
                 continue;
             }
+            // In the child theme
             if ( file_exists( get_stylesheet_directory() . '/' . $template_name ) ) {
                 $located = get_stylesheet_directory() . '/' . $template_name;
                 break;
+            // In the main theme
             } elseif ( file_exists( get_template_directory() . '/' . $template_name ) ) {
                 $located = get_template_directory() . '/' . $template_name;
                 break;
+            // In the plugin, if set
             } elseif ( file_exists( $this->config['paths']['directory'] . '/' . $template_name ) ) {
                 $located = $this->config['paths']['directory'] . '/' . $template_name;
                 break;
+            // Or in theme compat if any
             } elseif ( file_exists( ABSPATH . WPINC . '/theme-compat/' . $template_name ) ) {
                 $located = ABSPATH . WPINC . '/theme-compat/' . $template_name;
                 break;

@@ -51,7 +51,8 @@ class Starter implements Integration {
 	 */
 	public function register_hooks() {
 		// Theme Support
-		\add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
+		\add_action( 'after_setup_theme', 			[ $this, 'after_setup_theme' ] );
+		\add_filter( 'get_theme_starter_content', 	[ $this, 'add_postmeta' ], 10, 2 );
 	}
 
 	/**
@@ -66,12 +67,46 @@ class Starter implements Integration {
 	}
 
 	/**
+	 * Add postmeta to starter content posts
+	 * @param  array 	$content  	the starter content array
+	 * @param  array 	$config  	[description]
+	 * @return array          		[description]
+	 */
+	public function add_postmeta( $content, $config ) { 
+		if ( isset( $content['posts'] ) ) {
+			foreach( $content['posts'] as $key => $post ) {
+				$content['posts'][$key]['meta_input'] = [
+					'_wca_builder_template' => true,
+					'_wca_title_hidden' 	=> true,
+				];
+			}
+		}
+
+		return $content;
+	}
+
+	/**
 	 * Return starter content definition.
 	 *
 	 * @return mixed|void
 	 */
 	public function get() {
 		$content = [
+			'widgets'     => [
+				'primary' => [
+					'search',
+					'text_business_info',
+				],
+				'footer-1' => [
+					'recent-posts',
+				],
+				'footer-2' => [
+					'text_about',
+				],
+				'footer-3' => [
+					'text_business_info',
+				]
+			],
 			'nav_menus'   => [
 				'primary' => [
 					'items' => [
@@ -97,17 +132,19 @@ class Starter implements Integration {
 				'page_on_front'  => '{{' . self::HOME_SLUG . '}}',
 				'page_for_posts' => '{{' . self::BLOG_SLUG . '}}',
 				'show_on_front'  => 'page',
-				'blogname'       => 'Agency',
+				'blogname'       => 'WeCodeArt',
 			],
 			'theme_mods'  => wecodeart_config( 'customizer' ),
 			'posts'       => [
-				self::HOME_SLUG  => require __DIR__ . '/content/home.php',
-				self::ABOUT_SLUG => require __DIR__ . '/content/about.php',
-				self::BLOG_SLUG  => [
+				self::HOME_SLUG  => wp_parse_args( [
+					'post_name'  => self::HOME_SLUG,
+				], require __DIR__ . '/content/home.php' ),
+				self::ABOUT_SLUG => wp_parse_args( [
+					'post_name'  => self::ABOUT_SLUG,
+				], require __DIR__ . '/content/about.php' ),
+				self::BLOG_SLUG  => wp_parse_args( [
 					'post_name'  => self::BLOG_SLUG,
-					'post_type'  => 'page',
-					'post_title' => _x( 'Blog', 'Theme starter content' ),
-				],
+				], require __DIR__ . '/content/blog.php' ),
 			],
 		];
 

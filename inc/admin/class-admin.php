@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
 use WeCodeArt\Admin\Customizer;
+use WeCodeArt\Admin\Notifications;
 
 /**
  * Admin Side Functionality
@@ -39,7 +40,7 @@ class Admin {
 		\add_action( 'after_switch_theme', 	[ $this, 'insert_default_settings' ] );
 		\add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'block_editor_settings' ], 10, 2 );
 		
-		Admin\Notifications::get_instance();
+		Notifications::get_instance();
 		Customizer::get_instance();
 	}
 
@@ -189,11 +190,9 @@ class Admin {
 
 				foreach( $update as $option => $value ) {
 					if( $option === 'custom_css' ) {
-						$post = wp_get_custom_css_post();
-						$post->post_content = $value;
-						wp_update_post( $post );
+						wp_update_custom_css_post( $value );
 					} elseif ( $is_mod ) {
-						$value = set_theme_mod( $option, $value );
+						set_theme_mod( $option, $value );
 					} else {
 						self::update_settings( [
 							"$option" => $value
@@ -215,7 +214,7 @@ class Admin {
 				return rest_ensure_response( $data );
 			},
 			'permission_callback' => function() {
-				return true || current_user_can( 'manage_options' );
+				return current_user_can( 'manage_options' );
 			},
 		] );
 	}

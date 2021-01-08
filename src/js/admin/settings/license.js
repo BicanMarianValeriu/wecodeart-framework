@@ -60,10 +60,7 @@ export const License = (props) => {
         const type = hasSaved ? 'success' : 'error';
         const desc = hasSaved ? __('API Key Saved.', 'wecodeart') : __('Something went wrong...', 'wecodeart');
 
-        return createNotice(type, desc, {
-            isDismissible: true,
-            type: 'snackbar'
-        });
+        return createNotice(type, desc);
     };
 
     doAction('wecodeart.admin.licensePanel', props);
@@ -98,7 +95,7 @@ export const License = (props) => {
                                         id={id}
                                         type="text"
                                         value={value}
-                                        disabled={value === 'FREEMIUM'}
+                                        disabled={value === 'sFREEMIUM'}
                                         placeholder={__('API Key', 'wecodeart')}
                                         onChange={(e) => onChange(e.target.value)}
                                     />
@@ -110,8 +107,8 @@ export const License = (props) => {
                                         className="wecodeart-button-group__item"
                                         isPrimary
                                         isLarge
-                                        icon={loading === true && <Spinner />}
-                                        disabled={!value || value === wecodeartSettings[id]}
+                                        icon={loading && <Spinner />}
+                                        disabled={value === wecodeartSettings[id]}
                                         onClick={() => {
                                             setLoading(true);
                                             saveEntityRecord('wecodeart', 'settings', {

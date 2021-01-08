@@ -9,7 +9,7 @@
  * @subpackage 	Notifications
  * @copyright   Copyright (c) 2020, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.1.8
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Admin;

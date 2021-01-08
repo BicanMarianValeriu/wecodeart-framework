@@ -49,6 +49,7 @@ class Embed {
 		$this->populate_fonts();
 		
 		add_action( 'customize_save',		[ $this, 'collect_css'		], 10, 1 );
+		add_action( 'after_theme_setup',	[ $this, 'collect_css'		], 10, 1 );
 		add_filter( 'wp_resource_hints', 	[ $this, 'resource_hints' 	], 10, 2 );
 		add_action( 'wp_enqueue_scripts',	[ $this, 'enqueue_scripts'	], 10 );
 	}
@@ -133,7 +134,7 @@ class Embed {
 		if( $fonts_control ) {
 			$css .= compress_css( "
 				:root {
-					--bs-font-sans-serif: '{$fonts_control['family']}', sans-serif;
+					--wca-font-sans-serif: '{$fonts_control['family']}', sans-serif;
 				}
 				body {
 					font-family: '{$fonts_control['family']}', sans-serif;

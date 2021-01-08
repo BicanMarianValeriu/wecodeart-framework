@@ -181,22 +181,21 @@ class Content {
 	 * @uses	WeCodeArt\Markup::wrap();
 	 * @uses	WeCodeArt\Markup::sortable();
 	 * @since 	unknown
-	 * @version	3.7.7
+	 * @version	4.2.0
 	 *
 	 * @return 	HTML
 	 */
 	public static function render_modules() {
 		$options = self::get_contextual_options();
 
-		$class= [ 'content-area' ];
-		if( in_array( 'primary', $options['modules'], true ) ) $class[] = 'content-area--has-primary-sidebar';
-		if( in_array( 'secondary', $options['modules'], true ) ) $class[] = 'content-area--has-secondary-sidebar'; 
-
 		Markup::wrap( 'content-wrappers',  [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => implode( ' ', $class ) ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ]
-		], [ Markup::get_instance(), 'sortable' ], [ self::content_modules(), $options['modules'] ] ); 
+				[ 'tag' => 'div', 'attrs' => [ 'class' => 'content-area' ] ],
+				[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
+				[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ]
+			],
+			[ Markup::get_instance(), 'sortable' ],
+			[ self::content_modules(), $options['modules'] ]
+		); 
 	} 
 
 	/**

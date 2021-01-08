@@ -55,11 +55,6 @@ final class Google {
 	 * The class constructor.
 	 */
 	private function init() {
-		// If we have set $$config to false then do not proceed any further.
-		if ( get_prop( wecodeart_config( 'fonts', [] ), 'google', true ) === false ) {
-			return;
-		}
-
 		// Populate the array of google fonts.
 		$this->google_fonts = Fonts::get_google_fonts();
 	}

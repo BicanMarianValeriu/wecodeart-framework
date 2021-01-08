@@ -31,11 +31,13 @@ class Suggestions {
 	public function init() {
 		// Editor Class Settings.
 		add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'set_classes' ], 10, 2 );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'font_classes' ] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'flex_classes' ] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'display_classes' ] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'spacing_classes' ] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'offset_order_classes' ] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'font_classes' 			] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'flex_classes' 			] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'display_classes'		] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'spacing_classes' 		] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'offset_order_classes' 	] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'position_classes' 		] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'extra_classes' 			] );
 	}
 
 	/**
@@ -79,8 +81,9 @@ class Suggestions {
 			$args[] = 'text-' . $type;
 		}
 
-		foreach( [ 'muted', 'primary', 'secondary', 'dark', 'light', 'warning', 'danger', 'success' ] as $color ) {
+		foreach( [ 'muted', 'primary', 'secondary', 'dark', 'light', 'warning', 'danger', 'success', 'info' ] as $color ) {
 			$args[] = 'text-' . $color;
+			$args[] = 'link-' . $color;
 		}
 
 		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
@@ -89,7 +92,7 @@ class Suggestions {
 			}
 		}
 
-		foreach( range( 1, 5 ) as $nr ) {
+		foreach( range( 1, 6 ) as $nr ) {
 			$args[] = 'display-'. $nr;
 			$args[] = 'fs-'. $nr;
 			$args[] = 'h'. $nr;
@@ -101,7 +104,9 @@ class Suggestions {
 			'text-center',
 			'text-right',
 			'text-justify',
+			'text-truncate',
 			'font-monospace',
+			'stretched-link',
 			'lh-1',
 			'lh-sm',
 			'lh-base',
@@ -234,8 +239,11 @@ class Suggestions {
 			'flex-column',
 			'flex-column-reverse',
 			// Size
+			'flex-fill',
 			'flex-grow-0',
 			'flex-grow-1',
+			'flex-shrink-0',
+			'flex-shrink-1',
 			// Wrap
 			'flex-nowrap',
 			'flex-wrap',
@@ -264,6 +272,60 @@ class Suggestions {
 			'align-content-center',
 			'align-content-around',
 			'align-content-stretch',
+		], $args );
+	}
+	
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function position_classes( $args ) {
+		foreach( [ 'static', 'relative', 'absolute', 'fixed', 'sticky' ] as $pos ) {
+			$args[] = 'position-' . $pos;
+		}
+
+		foreach( [ 'start', 'end', 'top', 'bottom' ] as $value ) {
+			foreach( [ 0, 50, 100 ] as $pos ) {
+				$args[] = $value . '-' . $pos;
+			}
+		}
+
+		return wp_parse_args( [
+			'translate-middle',
+			'translate-middle-x',
+			'translate-middle-y',
+		], $args );
+	}
+	
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function extra_classes( $args ) {
+		return wp_parse_args( [
+			'user-select-all',
+			'user-select-auto',
+			'user-select-none',
+			'pe-none',
+			'pe-auto',
+			'overflow-auto',
+			'overflow-hidden',
+			'overflow-visible',
+			'overflow-scroll',
+			'align-baseline',
+			'align-top',
+			'align-middle',
+			'align-bottom',
+			'align-text-top',
+			'align-text-bottom',
+			'visible',
+			'invisible',
 		], $args );
 	}
 }

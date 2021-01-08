@@ -16,9 +16,12 @@ import CSSEditor from './components/editor';
 import './handler';
 import './inject-css';
 
-const addAttributes = (settings) => {
-	if (!restrictedBlocks.includes(settings.name) && hasBlockSupport(settings, 'customClassName', true)) {
-		settings.attributes = assign(settings.attributes, {
+const addAttributes = (props) => {
+	const { name } = props;
+	const isRestrictedBlock = restrictedBlocks.includes(name);
+	const hasCustomClassName = hasBlockSupport(props, 'customClassName', true);
+	if (!isRestrictedBlock && hasCustomClassName) {
+		props.attributes = assign(props.attributes, {
 			hasCustomCSS: {
 				type: 'boolean',
 				default: false
@@ -30,7 +33,7 @@ const addAttributes = (settings) => {
 		});
 	}
 
-	return settings;
+	return props;
 };
 
 /**
@@ -44,9 +47,9 @@ const addAttributes = (settings) => {
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
 		const { name, isSelected } = props;
-		const isRestrictedBlock = !restrictedBlocks.includes(name);
-		const hasCustomClassName = hasBlockSupport(name, 'customClassName', true);
-		if (isRestrictedBlock && hasCustomClassName && isSelected) {
+		const isRestrictedBlock = restrictedBlocks.includes(name);
+		const hasCustomClassName = hasBlockSupport(props, 'customClassName', true);
+		if (!isRestrictedBlock && hasCustomClassName && isSelected) {
 			return (
 				<Fragment>
 					<BlockEdit {...props} />

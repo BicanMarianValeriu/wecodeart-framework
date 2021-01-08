@@ -22,6 +22,7 @@ import './extensions/styles';
 // Custom Blocks
 import lorem from './blocks/lorem';
 import section from './blocks/section';
+import content from './blocks/content';
 import column from './blocks/section/column';
 
 // SCSS
@@ -31,6 +32,7 @@ export default function registerWCABlocks() {
     [
         lorem,
         section,
+        content,
         column
     ].forEach((block) => {
         if (!block) return;
