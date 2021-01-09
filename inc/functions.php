@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework 
  * @subpackage 	Functions
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.1.8
  * @version     4.1.8
  */

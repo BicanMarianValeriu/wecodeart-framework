@@ -6,8 +6,8 @@ return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'About', 'Theme starter content' ),
 	'post_content' => '<!-- wp:wca/section {"backgroundColor":"light","className":"wcacss-bd010bf4 py-5","hasCustomCSS":true} -->
-	<div class="wp-block-wca-section alignfull wcacss-bd010bf4 py-5 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-54d8bdf2 py-md-5","hasCustomCSS":true} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-54d8bdf2 py-md-5"><!-- wp:heading {"level":1,"className":"has-text-align-left","textColor":"dark"} -->
+	<div class="wp-block-wca-section alignfull wcacss-bd010bf4 py-5 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-54d8bdf2 py-md-4","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-54d8bdf2 py-md-4"><!-- wp:heading {"level":1,"className":"has-text-align-left","textColor":"dark"} -->
 	<h1 class="has-text-align-left has-dark-color has-text-color">About Us</h1>
 	<!-- /wp:heading --></div>
 	<!-- /wp:wca/column --></div></div></div>
@@ -58,7 +58,7 @@ return [
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4"},"className":"wcacss-e616e36d order-first order-sm-last","hasCustomCSS":true} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-4 wcacss-e616e36d order-first order-sm-last"><!-- wp:image {"sizeSlug":"large","className":"wcacss-5f0a48a0","hasCustomCSS":true} -->
-	<figure class="wp-block-image size-large wcacss-5f0a48a0"><img src="https://picsum.photos/id/237/500/500" alt=""/></figure>
+	<figure class="wp-block-image size-large wcacss-5f0a48a0"><img src="https://picsum.photos/id/180/500/500" alt=""/></figure>
 	<!-- /wp:image --></div>
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
@@ -98,29 +98,29 @@ return [
 	<!-- wp:wca/section {"backgroundColor":"light","className":"wcacss-7290080c py-5","hasCustomCSS":true} -->
 	<div class="wp-block-wca-section alignfull wcacss-7290080c py-5 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"},"className":"wcacss-c32c587f","hasCustomCSS":true} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg wcacss-c32c587f"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default wcacss-7a948bea","hasCustomCSS":true} -->
-	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="https://picsum.photos/id/237/350/350" alt=""/></figure></div>
+	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt=""/></figure></div>
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<h3 class="has-text-align-center">Keith Marshall</h3>
+	<h3 class="has-text-align-center">Bican Marian</h3>
 	<!-- /wp:heading -->
 	
 	<!-- wp:paragraph {"align":"center"} -->
 	<p class="has-text-align-center">CEO</p>
 	<!-- /wp:paragraph -->
 	
-	<!-- wp:social-links {"align":"center"} -->
-	<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
+	<!-- wp:social-links {"align":"center","className":"is-style-logos-only"} -->
+	<ul class="wp-block-social-links aligncenter is-style-logos-only"><!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook"} /-->
 	
 	<!-- wp:social-link {"url":"#","service":"twitter"} /-->
 	
-	<!-- wp:social-link {"url":"#","service":"linkedin"} /--></ul>
+	<!-- wp:social-link {"url":"https://www.linkedin.com/in/marian-valeriu-bican-b12169103/","service":"linkedin"} /--></ul>
 	<!-- /wp:social-links --></div>
 	<!-- /wp:wca/column -->
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"},"className":"wcacss-c32c587f","hasCustomCSS":true} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg wcacss-c32c587f"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default wcacss-7a948bea","hasCustomCSS":true} -->
-	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="https://picsum.photos/id/237/350/350" alt=""/></figure></div>
+	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt=""/></figure></div>
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
@@ -131,8 +131,8 @@ return [
 	<p class="has-text-align-center">Designer</p>
 	<!-- /wp:paragraph -->
 	
-	<!-- wp:social-links {"align":"center"} -->
-	<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
+	<!-- wp:social-links {"align":"center","className":"is-style-logos-only"} -->
+	<ul class="wp-block-social-links aligncenter is-style-logos-only"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
 	
 	<!-- wp:social-link {"url":"#","service":"twitter"} /-->
 	
@@ -142,7 +142,7 @@ return [
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"}} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default wcacss-652c8d48","hasCustomCSS":true} -->
-	<div class="wp-block-image is-style-default wcacss-652c8d48"><figure class="aligncenter size-large"><img src="https://picsum.photos/id/237/350/350" alt=""/></figure></div>
+	<div class="wp-block-image is-style-default wcacss-652c8d48"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt=""/></figure></div>
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
@@ -153,8 +153,8 @@ return [
 	<p class="has-text-align-center">Developer</p>
 	<!-- /wp:paragraph -->
 	
-	<!-- wp:social-links {"align":"center"} -->
-	<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
+	<!-- wp:social-links {"align":"center","className":"is-style-logos-only"} -->
+	<ul class="wp-block-social-links aligncenter is-style-logos-only"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
 	
 	<!-- wp:social-link {"url":"#","service":"twitter"} /-->
 	
@@ -164,7 +164,7 @@ return [
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"}} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default"} -->
-	<div class="wp-block-image is-style-default"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=400&w=400" alt=""/></figure></div>
+	<div class="wp-block-image is-style-default"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt=""/></figure></div>
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
@@ -175,8 +175,8 @@ return [
 	<p class="has-text-align-center">Client Service</p>
 	<!-- /wp:paragraph -->
 	
-	<!-- wp:social-links {"align":"center"} -->
-	<ul class="wp-block-social-links aligncenter"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
+	<!-- wp:social-links {"align":"center","className":"is-style-logos-only"} -->
+	<ul class="wp-block-social-links aligncenter is-style-logos-only"><!-- wp:social-link {"url":"#","service":"facebook"} /-->
 	
 	<!-- wp:social-link {"url":"#","service":"twitter"} /-->
 	

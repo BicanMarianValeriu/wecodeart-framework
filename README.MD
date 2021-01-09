@@ -1,4 +1,4 @@
-## WeCodeArt Framework Copyright 2020
+## WeCodeArt Framework Copyright 2021
 ## https://www.wecodeart.com/
 
 Requires at least: WordPress 5.0
@@ -26,3 +26,6 @@ Source: https://fontawesome.com/license
 Bootstrap, Copyright Twitter
 License: MIT.
 Source: https://getbootstrap.com/docs/4.3/about/license/
+
+Pexels Images
+Source: https://www.pexels.com/license/

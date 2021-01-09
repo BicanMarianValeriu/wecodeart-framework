@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  WeCodeArt\Loadable
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.2
  * @version		4.0.2
  */

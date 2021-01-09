@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Core\Archive
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
  * @version		4.2.0
  */
@@ -17,14 +17,16 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Adds some output to archive pages
  */
 class Archive {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor
@@ -52,7 +54,7 @@ class Archive {
 
 		$wrappers = [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'archive-intro' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => get_prop( $options, 'container' ) ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col my-5' ] ]
 		];

@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Footer Template
  * @since  		1.0.0
- * @version 	4.0.1
+ * @version 	4.2.0
  */
 
         do_action( 'wecodeart/hook/inner/bottom' );     // Hook Inner Bottom

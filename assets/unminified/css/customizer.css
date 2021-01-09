@@ -1,7 +1,8 @@
 .wca-customizer-control {
   background-color: white;
   border: 1px solid lightgray;
-  padding: 10px; }
+  padding: 10px;
+}
 
 .customize-control-wecodeart-divider__wrapper {
   margin: 0 -12px;
@@ -9,8 +10,8 @@
   border-width: 0 0 0 5px;
   border-style: solid;
   border-color: #2388ed;
-  background-color: #fff; }
-
+  background-color: #fff;
+}
 .customize-control-wecodeart-divider .customize-control-title {
   display: block;
   margin: 0;
@@ -18,8 +19,8 @@
   font-weight: 600;
   letter-spacing: 0.7px;
   line-height: 1;
-  text-transform: uppercase; }
-
+  text-transform: uppercase;
+}
 .customize-control-wecodeart-divider .customize-control-caption {
   top: 50%;
   transform: translateY(-50%);
@@ -27,10 +28,10 @@
   right: 0;
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 1px; }
-
+  letter-spacing: 1px;
+}
 .customize-control-wecodeart-divider .customize-control-description {
-  margin-top: 10px; }
-
+  margin-top: 10px;
+}
 
 /*# sourceMappingURL=customizer.css.map*/

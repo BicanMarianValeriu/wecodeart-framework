@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Core\Author
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.7.7
  * @version		4.2.0
  */
@@ -17,6 +17,7 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -24,7 +25,7 @@ use function WeCodeArt\Functions\get_prop;
  */
 class Author {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
      * All of the configuration items for the extension.

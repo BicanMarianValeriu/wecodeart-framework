@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer\Configs\Content
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
  * @version		4.2.0
  */
@@ -52,8 +52,16 @@ class Content extends Config {
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 				], 
 				'priority' 		=> 5, 
-				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ],
-				'transport' 		   => 'postMessage'
+				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ],
+				'transport'			=> 'postMessage',
+				'output'			=> [
+					[
+						'element'  	=> '.content .container, .content .container-fluid',
+						'function'	=> 'html',
+						'attr'		=> 'class',
+						'value'		=> [ 'container', 'container-fluid' ]
+					]
+				]
 			),
 			array(
 				'name'			=> 'content-layout-modules',
@@ -93,10 +101,18 @@ class Content extends Config {
 						'container'			=> esc_html__( 'Container', 'wecodeart' ),
 						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 					], 
-					'priority'             => 20,
-					'default'              => 'container',
-					'active_callback'	   => function() use( $ID ) { return is_page( $ID ); },
-					'transport' 		   => 'postMessage'
+					'priority'			=> 20,
+					'default'			=> 'container',
+					'active_callback'	=> function() use( $ID ) { return is_page( $ID ); },
+					'transport'			=> 'postMessage',
+					'output'			=> [
+						[
+							'element'  	=> '.content .container, .content .container-fluid',
+							'function'	=> 'html',
+							'attr'		=> 'class',
+							'value'		=> [ 'container', 'container-fluid' ]
+						]
+					]
 				),
 				array(
 					'name'			=> 'content-layout-modules-page-' . $ID,
@@ -137,12 +153,20 @@ class Content extends Config {
 						'container'			=> esc_html__( 'Container', 'wecodeart' ),
 						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 					], 
-					'priority'             => 20, 
-					'active_callback'	   => function() use( $type ) {
+					'priority'			=> 20, 
+					'active_callback'	=> function() use( $type ) {
 						if( $type === 'post' && wecodeart_if( 'is_post_archive' ) ) return true;
 						return is_post_type_archive( $type );
 					},
-					'transport' 		   => 'postMessage'
+					'transport'			=> 'postMessage',
+					'output'			=> [
+						[
+							'element'  	=> '.content .container, .content .container-fluid',
+							'function'	=> 'html',
+							'attr'		=> 'class',
+							'value'		=> [ 'container', 'container-fluid' ]
+						]
+					]
 				),
 				array(
 					'name'			=> 'content-layout-modules-' . $type . '-archive',
@@ -159,9 +183,9 @@ class Content extends Config {
 					}, 
 					'transport'		=> 'postMessage',
 					'partial'		=> [
-						'selector'        => '.content-area',
-						'render_callback' => [ 'WeCodeArt\Core\Content', 'render_modules' ],
-						'container_inclusive' => true
+						'selector'        		=> '.content-area',
+						'render_callback'		=> [ 'WeCodeArt\Core\Content', 'render_modules' ],
+						'container_inclusive' 	=> true
 					]
 				),
 				array(
@@ -173,13 +197,21 @@ class Content extends Config {
 					'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
 					'choices'  		=> array(
 						'container'			=> esc_html__( 'Container', 'wecodeart' ),
-						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
+						'container-fluid'	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 					), 
-					'priority'             => 25, 
-					'active_callback'	   => function() use( $type ) {
+					'priority'			=> 25, 
+					'active_callback'	=> function() use( $type ) {
 						return is_singular( $type );
 					},
-					'transport' 		   => 'postMessage'
+					'transport'			=> 'postMessage',
+					'output'			=> [
+						[
+							'element'  	=> '.content .container, .content .container-fluid',
+							'function'	=> 'html',
+							'attr'		=> 'class',
+							'value'		=> [ 'container', 'container-fluid' ]
+						]
+					]
 				),
 				array(
 					'name'			=> 'content-layout-modules-' . $type . '-singular',

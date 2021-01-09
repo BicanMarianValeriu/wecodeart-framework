@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer\Configs\Colors
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.2.0
  * @version		4.2.0
  */
@@ -39,8 +39,14 @@ class Colors extends Config {
 				'control'  		=> 'wecodeart-color',
 				'section'		=> 'general-colors',
 				'title' 		=> esc_html__( 'Site Background', 'wecodeart' ),
-				'description' 	=> esc_html__( 'Choose site background color.', 'wecodeart' ),
-				'transport'		=> 'postMessage'
+				'description'	=> esc_html__( 'Choose site background color.', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => '.footer__attribution',
+						'property' => 'background-color'
+					]
+				]
 			]
 		];
 

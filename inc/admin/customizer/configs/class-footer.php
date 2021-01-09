@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer\Configs\Footer
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
  * @version		4.2.0
  */
@@ -52,8 +52,16 @@ class Footer extends Config {
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 				], 
 				'priority' 		=> 5, 
-				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ], 
-				'transport' 		   => 'postMessage'
+				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ], 
+				'transport'			=> 'postMessage',
+				'output'			=> [
+					[
+						'element'  	=> '.footer__widgets .container, .footer__widgets .container-fluid',
+						'function'	=> 'html',
+						'attr'		=> 'class',
+						'value'		=> [ 'container', 'container-fluid' ]
+					]
+				]
 			),
 			array(
 				'name'			=> 'footer-layout-modules',
@@ -83,8 +91,15 @@ class Footer extends Config {
 				'transport'		=> 'postMessage',
 				'partial'		=> [
 					'selector'        => '.attribution__copyright',
-					'render_callback' => [ 'WeCodeArt\Customizer\Partials', 'render_footer_copyright' ]
-				]	
+					'render_callback' => [ 'WeCodeArt\Admin\Customizer\Partials', 'render_footer_copyright' ]
+				],
+				'output'		=> [
+					[
+						'element'  	=> '.attribution__copyright',
+						'function' 	=> 'html',
+						'text'		=> true
+					]
+				]
 			)
 		);
 

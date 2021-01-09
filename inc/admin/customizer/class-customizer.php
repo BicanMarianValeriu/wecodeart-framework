@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		1.6
  * @version		4.2.0
  */
@@ -20,6 +20,7 @@ use WeCodeArt\Utilities\Helpers;
 use WeCodeArt\Admin\Customizer\Partials;
 use WeCodeArt\Admin\Customizer\Controls;
 use WeCodeArt\Admin\Customizer\Configs;
+use WeCodeArt\Admin\Customizer\Modules;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -52,14 +53,16 @@ class Customizer {
 		add_action( 'customize_register', [ $this, 'apply_defaults' 	] );
 		
 		// Add Scripts.
-		add_action( 'customize_register', 		[ $this, 'enqueue' 			] );
-		add_action( 'customize_preview_init', 	[ $this, 'enqueue_preview' 	] );
+		add_action( 'customize_register', [ $this, 'enqueue' ] );
 
 		// Custom Controls.
 		Controls::get_instance();
 		
 		// Selective Refresh Partials.
 		Partials::get_instance();
+
+		// Modules/Postmessage.
+		Modules\PostMessage::get_instance();
 
 		// Theme panels and configs.
 		new Configs();
@@ -68,24 +71,6 @@ class Customizer {
 		new Configs\Footer();
 		new Configs\Colors();
 		new Configs\Typography();
-	}
-
-	/**
-	 * Grab our Customizer Scripts.
-	 *
-	 * @since 	unknown
-	 * @version	4.1.8
-	 */
-	public function enqueue_preview() {
-
-		wp_enqueue_script(
-			$this->make_handle( 'preview' ),
-			$this->get_asset( 'js', 'customizer' ),
-			[ 'jquery', 'customize-preview' ], 
-			wecodeart( 'version' ),
-			true
-		);
-		
 	}
 	
 	/**

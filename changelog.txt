@@ -26,7 +26,7 @@ v4.1.55
 
 v4.1.54
 - Fixed - Gutenberg Core Blocks attributes compatability (for some of the blocks)
-- Updated - MISC: Year to 2020 if the files message
+- Updated - MISC: Year to 2021 if the files message
 - Updated - Set WooCommerce Columns for products via config file
 - Updated - Core Blocks CSS
 - Updated - wecodeart_if() - added 2nd paramenter for relation (AND - to match all conditions / OR - to match a single condition)

@@ -28,14 +28,11 @@
                 padding-right: 0;
                 flex: 0 0 100%!important;
                 flex-basis: 100%!important;
+                order: 99;
                 
                 div:not(.no-gutters) & {
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
-
-                .block-editor-button-block-appender {
-                    margin: 0;
+                    padding-left: calc(var(--bs-gutter-x) / 2);
+                    padding-right: calc(var(--bs-gutter-x) / 2);
                 }
             }
         }

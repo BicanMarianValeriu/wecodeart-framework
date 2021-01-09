@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer\Configs\Header
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
  * @version		4.2.0
  */
@@ -49,8 +49,16 @@ class Header extends Config {
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 				],
 				'priority' 		=> 5, 
-				'sanitize_callback'    => [ $formatting, 'sanitize_choices' ], 
-				'transport' 		   => 'postMessage'
+				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ], 
+				'transport'			=> 'postMessage',
+				'output'			=> [
+					[
+						'element'  	=> '.header__bar .container, .header__bar .container-fluid',
+						'function'	=> 'html',
+						'attr'		=> 'class',
+						'value'		=> [ 'container', 'container-fluid' ]
+					]
+				]
 			),
 			array(
 				'name'			=> 'header-bar-modules',

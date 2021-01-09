@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Core\Content
- * @copyright   Copyright (c) 2020, WeCodeArt Framework
+ * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
  * @version		4.2.0
  */
@@ -16,16 +16,18 @@ namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 use WeCodeArt\Core\Loops;
 use WeCodeArt\Core\Pagination;
-use WeCodeArt\Markup;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Handles Content Containers
  */
 class Content {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor
@@ -37,8 +39,8 @@ class Content {
 		add_action( 'wp_body_open',					[ $this, 'skip_link' ], 0 );
 
 		// WeCodeArt.
-		add_action( 'wecodeart/content/markup',		[ $this, 'render_modules' 		] );
 		add_action( 'wecodeart/hook/loop/before',	[ $this, 'content_markup_open' 	] );
+		add_action( 'wecodeart/content/markup',		[ $this, 'render_modules' 		] );
 		add_action( 'wecodeart/hook/loop/after',	[ $this, 'content_markup_close' ] );
 		add_action( 'wecodeart/hook/main/after',    [ Pagination::get_instance(), 'archive' ], 10 );
 	}
@@ -190,11 +192,11 @@ class Content {
 
 		Markup::wrap( 'content-wrappers',  [
 				[ 'tag' => 'div', 'attrs' => [ 'class' => 'content-area' ] ],
-				[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
+				[ 'tag' => 'div', 'attrs' => [ 'class' => get_prop( $options, 'container' ) ] ],
 				[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ]
 			],
 			[ Markup::get_instance(), 'sortable' ],
-			[ self::content_modules(), $options['modules'] ]
+			[ self::content_modules(), get_prop( $options, 'modules' ) ]
 		); 
 	} 
 
