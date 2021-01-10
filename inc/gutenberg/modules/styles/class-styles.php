@@ -16,7 +16,9 @@ namespace WeCodeArt\Gutenberg\Modules;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg;
+use WeCodeArt\Core\Scripts;
 use function WeCodeArt\Functions\hex_rgba;
 
 /**
@@ -24,8 +26,8 @@ use function WeCodeArt\Functions\hex_rgba;
  */
 class Styles {
 
-	use \WeCodeArt\Singleton;
-	use \WeCodeArt\Core\Scripts\Base;
+	use Singleton;
+	use Scripts\Base;
 
 	/**
 	 * Class Init.

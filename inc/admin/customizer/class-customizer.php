@@ -53,7 +53,8 @@ class Customizer {
 		add_action( 'customize_register', [ $this, 'apply_defaults' 	] );
 		
 		// Add Scripts.
-		add_action( 'customize_register', [ $this, 'enqueue' ] );
+		add_action( 'customize_register', 		[ $this, 'enqueue' ] );
+		add_action( 'customize_preview_init', 	[ $this, 'enqueue_preview' ], 20 );
 
 		// Custom Controls.
 		Controls::get_instance();
@@ -61,8 +62,8 @@ class Customizer {
 		// Selective Refresh Partials.
 		Partials::get_instance();
 
-		// Modules/Postmessage.
-		Modules\PostMessage::get_instance();
+		// Customizer Modules.
+		Modules::get_instance();
 
 		// Theme panels and configs.
 		new Configs();
@@ -80,14 +81,43 @@ class Customizer {
 	 * @version	4.2.0
 	 */
 	public function enqueue() {
-
 		wp_enqueue_style(
 			$this->make_handle(),
 			$this->get_asset( 'css', 'customizer' ),
 			[],
 			wecodeart( 'version' )
 		);
+	}
+
+	/**
+	 * Enqueue Preview Scripts.
+	 * 
+	 * @param  object $wp_customize An instance of the WP_Customize_Manager class.
+	 */
+	public function enqueue_preview( $wp_customize ) {
+		wp_enqueue_script(
+			$this->make_handle(),
+			$this->get_asset( 'js', 'customizer' ),
+			[ 'jquery', 'customize-preview' ],
+			wecodeart( 'version' ),
+			true
+		);
+
+		$fields = $this->get_configurations( $wp_customize );
+		$data   = [];
+		foreach ( $fields as $field ) {
+			$transport 	= isset( $field['transport'] ) && 'postMessage' === $field['transport'];
+			$has_output = isset( $field['output'] ) && ! empty( $field['output'] ) && is_array( $field['output'] );
+			if ( $transport && $has_output ) {
+				$data[] = $field;
+			}
+		}
+		wp_localize_script( $this->make_handle(), 'wecodeartPostMessageFields', $data );
 		
+		$extras = apply_filters( 'wecodeart/filter/customizer/script/preview', false );
+		if ( $extras ) {
+			wp_add_inline_script( $this->make_handle(), $extras, 'after' );
+		}
 	}
 
 	/**

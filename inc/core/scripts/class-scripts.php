@@ -20,7 +20,6 @@ use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\compress_css;
 use function WeCodeArt\Core\Scripts\get_asset;
 
 /**
@@ -41,8 +40,7 @@ class Scripts {
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'front_scripts'		] );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'localize_js' 			], 90 );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			], 95 );
-		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] );
-		add_filter( 'wp_get_custom_css', 	[ $this, 'trim_customizer_css' 	] ); 
+		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] ); 
 		// add_filter( 'script_loader_tag', 	[ $this, 'maybe_enable_attrs' 	], 10, 3 );
 	}
 
@@ -122,22 +120,6 @@ class Scripts {
 		if ( ( is_page() || is_single() ) && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
-	}
-
-	/**
-	 * Filter Customizer Custom CSS
-	 *
-	 * @since	3.9.5
-	 * @version	4.2.0
-	 *
-	 * @param 	string $css CSS from Customizer.
-	 * @return 	string
-	 */
-	public function trim_customizer_css( $css ) {
-		if ( strpos( $_SERVER[ 'REQUEST_URI' ], '/wp-json/' ) === false ) {
-			$css = compress_css( $css );
-		}
-		return $css;
 	}
 
 	/**

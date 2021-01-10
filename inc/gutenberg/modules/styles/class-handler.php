@@ -32,11 +32,22 @@ class Handler {
 	use \WeCodeArt\Singleton;
 
 	/**
+	 * The Styles Processor
+	 *
+	 * @access 	public
+	 * @var 	null|object
+	 */
+	public $styles = null;
+	
+	/**
 	 * Initialize the class
 	 */
 	public function init() {
+		$this->FS 		= FileSystem::get_instance()->set_folder( 'css' );
+		$this->styles 	= wecodeart( 'integrations' )->get( 'styles' )::get_instance();
+
 		add_action( 'rest_api_init', 		[ $this, 'register_routes' ] );
-		add_action( 'before_delete_post', 	[ __CLASS__, 'delete_css_file' ] );
+		add_action( 'before_delete_post', 	[ $this, 'delete_css_file' ] );
 	}
 
 	/**
@@ -140,8 +151,9 @@ class Handler {
 	 *
 	 * @param int $post_id Post id.
 	 */
-	public static function generate_css_file( $post_id ) {
+	public function generate_css_file( $post_id ) {
 		$css = Styles::get_instance()->get_blocks_css( $post_id );
+		
 		if( trim( $css ) ) {
 			return self::save_css_file( $post_id, $css );
 		}
@@ -154,16 +166,14 @@ class Handler {
 	 *
 	 * @return  string 	File url.
 	 */
-	public static function get_css_url( $post_id ) {
+	public function get_css_url( $post_id ) {
 		$file_name = get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
 
 		if ( empty( $file_name ) ) {
 			return false;
 		}
 
-		$fs = FileSystem::get_instance()->set_folder( 'css' );
-
-		return $fs->get_file_url( $file_name . '.css', true );
+		return $this->FS->get_file_url( $file_name . '.css', true );
 	}
 
 	/**
@@ -173,16 +183,14 @@ class Handler {
 	 *
 	 * @return  bool
 	 */
-	public static function has_css_file( $post_id ) {
+	public function has_css_file( $post_id ) {
 		$file_name = get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
 
 		if ( empty( $file_name ) ) {
 			return false;
 		}
 
-		$fs = FileSystem::get_instance()->set_folder( 'css' );
-
-		return $fs->has_file( $file_name . '.css' );
+		return $this->FS->has_file( $file_name . '.css' );
 	}
 
 	/**
@@ -195,10 +203,8 @@ class Handler {
 	 * @since   4.2.0
 	 * @access  public
 	 */
-	public static function save_css_file( $post_id, $css ) {
-		$fs = FileSystem::get_instance()->set_folder( 'css' );
-
-		$css = self::compress( wp_filter_nohtml_kses( $css ) );
+	public function save_css_file( $post_id, $css ) {
+		$css = $this->styles::compress( $css );
 
 		update_post_meta( $post_id, '_wca_gutenberg_block_styles', $css );
 
@@ -206,10 +212,10 @@ class Handler {
 
 		$file_name = 'post-' . $post_id;
 
-		$fs->create_file( $file_name . '.css', $css );
+		$this->FS->create_file( $file_name . '.css', $css );
 
 		// If it went successfully, update meta with the filename;
-		if ( file_exists( $fs->get_file_url( $file_name . '.css' ) ) ) {
+		if ( file_exists( $this->FS->get_file_url( $file_name . '.css' ) ) ) {
 			update_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', $file_name );
 			return true;
 		}
@@ -226,9 +232,7 @@ class Handler {
 	 * @since   4.2.0
 	 * @access  public
 	 */
-	public static function delete_css_file( $post_id ) {
-		$fs = FileSystem::get_instance()->set_folder( 'css' );
-
+	public function delete_css_file( $post_id ) {
 		if ( ! current_user_can( 'edit_posts' ) ) {
 			return false;
 		}
@@ -239,20 +243,7 @@ class Handler {
 		if ( $file_name ) {
 			delete_post_meta( $post_id, '_wca_gutenberg_block_stylesheet' );
 		}
-
-		return $fs->delete_file( $file_name . '.css' );
-	}
-
-	/**
-	 * Compress CSS
-	 *
-	 * @param   string $css Compress css.
-	 *
-	 * @return  string Compressed css.
-	 * @since   4.2.0
-	 * @access  public
-	 */
-	public static function compress( $css ) {
-		return compress_css( htmlspecialchars_decode( $css ) );
+		
+		return $this->FS->delete_file( $file_name . '.css' );
 	}
 }

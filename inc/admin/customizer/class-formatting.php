@@ -13,6 +13,7 @@ namespace WeCodeArt\Admin\Customizer;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Singleton;
 use WeCodeArt\Support\Fonts;
 
 /**
@@ -20,7 +21,7 @@ use WeCodeArt\Support\Fonts;
  */
 final class Formatting {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Sanitize font control.

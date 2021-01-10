@@ -16,7 +16,9 @@ namespace WeCodeArt\Gutenberg\Modules\Styles;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg;
+use WeCodeArt\Core\Scripts;
 use WeCodeArt\Gutenberg\Modules\Styles;
 
 /**
@@ -26,8 +28,8 @@ use WeCodeArt\Gutenberg\Modules\Styles;
  */
 class Embed {
 
-	use \WeCodeArt\Singleton;
-	use \WeCodeArt\Core\Scripts\Base;
+	use Singleton;
+	use Scripts\Base;
 
 	/**
 	 * The namespace to check if excerpt exists.
@@ -125,7 +127,6 @@ class Embed {
 			return;
 		}
 
-
 		if ( $footer ) {
 			$location = 'wp_footer';
 		}
@@ -138,8 +139,8 @@ class Embed {
 			return;
 		}
 
-		if ( ! Handler::has_css_file( $post_id ) ) {
-			Handler::generate_css_file( $post_id );
+		if ( ! Handler::get_instance()->has_css_file( $post_id ) ) {
+			Handler::get_instance()->generate_css_file( $post_id );
 			
 			add_action( $location, function () use ( $post_id ) {
 				return $this->get_post_css( $post_id );
@@ -148,7 +149,7 @@ class Embed {
 			return;
 		}
 
-		$file_url = Handler::get_css_url( $post_id );
+		$file_url = Handler::get_instance()->get_css_url( $post_id );
 
 		$file_name = str_replace( 'css', '', basename( $file_url ) );
 

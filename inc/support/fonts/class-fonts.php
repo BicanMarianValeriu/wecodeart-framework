@@ -36,6 +36,15 @@ final class Fonts implements Integration {
 	 * @var     null|object
 	 */
 	public static $google_fonts = null;
+	
+	/**
+	 * Google Fonts.
+	 *
+	 * @static
+	 * @access  public
+	 * @var     null|object
+	 */
+	public $google = null;
 
 	/**
 	 * Get Conditionals
@@ -52,15 +61,9 @@ final class Fonts implements Integration {
 
 	/**
 	 * Send to Constructor
-	 *
-	 * @since 	3.6.2
-	 * @version	4.1.5
 	 */
 	public function register_hooks() {
-		// Process Google Fonts
-		Fonts\Google::get_instance();
-		// Enqueue Fonts - if any
-		Fonts\Embed::get_instance();
+		$this->google = Fonts\Google::get_instance();
 	}
 
 	/**

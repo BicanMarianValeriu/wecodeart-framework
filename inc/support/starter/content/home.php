@@ -5,8 +5,8 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'Home', 'Theme starter content' ),
-	'post_content' => '<!-- wp:wca/section {"backgroundColor":"primary","className":"wcacss-ef32b8a6 py-5","hasCustomCSS":true} -->
-	<div class="wp-block-wca-section alignfull wcacss-ef32b8a6 py-5 wca-section has-primary-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-79e98a17 my-3 my-md-5 text-center","hasCustomCSS":true} -->
+	'post_content' => '<!-- wp:wca/section {"className":"wcacss-ef32b8a6 py-5","gradient":"vivid-cyan-blue-to-vivid-purple","hasCustomCSS":true} -->
+	<div class="wp-block-wca-section alignfull wcacss-ef32b8a6 py-5 wca-section has-vivid-cyan-blue-to-vivid-purple-gradient-background has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-79e98a17 my-3 my-md-5 text-center","hasCustomCSS":true} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-79e98a17 my-3 my-md-5 text-center"><!-- wp:heading {"textAlign":"center","level":1,"className":"wcacss-27ff363b display-5 mb-5","textColor":"white","hasCustomCSS":true,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
 	<h1 class="has-text-align-center wcacss-27ff363b display-5 mb-5 has-white-color has-text-color">Create and grow<br>your unique website today</h1>
 	<!-- /wp:heading -->
@@ -157,15 +157,15 @@ return [
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
 	
-	<!-- wp:cover {"minHeight":300,"customGradient":"linear-gradient(130deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)","contentPosition":"center center","align":"full","className":"wcacss-d54eef5b py-5 text-center","hasCustomCSS":true} -->
-	<div class="wp-block-cover alignfull has-background-dim has-background-gradient wcacss-d54eef5b py-5 text-center" style="background:linear-gradient(130deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);min-height:300px"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","className":"wcacss-62cbde3b mb-5 display-5","textColor":"white","hasCustomCSS":true,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<h2 class="has-text-align-center wcacss-62cbde3b mb-5 display-5 has-white-color has-text-color">Let’s work together on your <br>next web project</h2>
+	<!-- wp:cover {"minHeight":300,"gradient":"vivid-cyan-blue-to-vivid-purple","contentPosition":"center center","align":"full","className":"wcacss-d54eef5b py-5 text-center","hasCustomCSS":true,"customCSS":""} -->
+	<div class="wp-block-cover alignfull has-background-dim has-background-gradient has-vivid-cyan-blue-to-vivid-purple-gradient-background wcacss-d54eef5b py-5 text-center" style="min-height:300px"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","className":"wcacss-62cbde3b mb-5 display-5","hasCustomCSS":true,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<h2 class="has-text-align-center wcacss-62cbde3b mb-5 display-5">Let’s work together on your <br>next web project</h2>
 	<!-- /wp:heading -->
-	
+
 	<!-- wp:paragraph {"align":"center","className":"wcacss-611f7cfc lead mb-5","fontSize":"medium","hasCustomCSS":true} -->
 	<p class="has-text-align-center wcacss-611f7cfc lead mb-5 has-medium-font-size">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus <br>nec ullamcorper mattis, pulvinar dapibus leo.</p>
 	<!-- /wp:paragraph -->
-	
+
 	<!-- wp:buttons {"align":"center","className":"wcacss-5d300fef","hasCustomCSS":true} -->
 	<div class="wp-block-buttons aligncenter wcacss-5d300fef"><!-- wp:button {"backgroundColor":"white","textColor":"dark","className":"is-style-primary wcacss-9c62f0ee","hasCustomCSS":true} -->
 	<div class="wp-block-button is-style-primary wcacss-9c62f0ee"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">LEARN MORE</a></div>

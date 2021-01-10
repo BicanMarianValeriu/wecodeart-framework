@@ -42,8 +42,9 @@ class Support implements ArrayAccess {
 		\add_action( 'after_setup_theme', [ $this, 'load_translations'	] );
 
 		// Register Default Integrations
+		$this->register( 'fonts',				Support\Fonts::class	);
+		$this->register( 'styles',				Support\Styles::class	);
 		$this->register( 'starter',				Support\Starter::class	);
-		$this->register( 'extension/fonts',		Support\Fonts::class	);
 		$this->register( 'plugin/anr', 			Support\Plugins\ANR::class 			);
 		$this->register( 'plugin/wpseo', 		Support\Plugins\WPSeo::class 		);
 		$this->register( 'plugin/woocommerce', 	Support\Plugins\WooCommerce::class 	);

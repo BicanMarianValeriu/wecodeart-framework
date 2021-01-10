@@ -41,7 +41,13 @@ class Typography extends Config {
 				'title' 		=> esc_html__( 'Primary Font', 'wecodeart' ),
 				'description' 	=> esc_html__( 'This font is used on body and will be placed in Boostrap`s sans serif CSS variable.', 'wecodeart' ),
 				'priority' 		=> 5,
-				'transport'		=> 'postMessage'
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => ':root',
+						'property' => '--wca-font-sans-serif'
+					]
+				]
 			],
 		];
 

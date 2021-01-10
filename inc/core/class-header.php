@@ -17,13 +17,14 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 
 /**
  * Framework Header
  */
 class Header {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor
@@ -34,8 +35,14 @@ class Header {
 		add_action( 'wp_head',	[ $this, 'meta_viewport' 	], 0 );
 		add_action( 'wp_head',	[ $this, 'meta_profile' 	], 0 );
 		add_action( 'wp_head',	[ $this, 'meta_pingback'	], 0 );
-		add_filter( 'wecodeart/filter/attributes/body', [ $this, 'body_attrs' 	] );
+		add_filter( 'wecodeart/filter/attributes/body', [ $this, 'body_attrs'	] );
 		add_action( 'wecodeart/header/markup', 			[ $this, 'markup' 		] );
+
+		// remove_action( 'wp_head', 'wp_generator' );
+		// remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10 );
+		// remove_action( 'wp_head', 'wlwmanifest_link' );
+		// remove_action( 'wp_head', 'wp_shortlink_wp_head', 10 );
+		// remove_action( 'wp_head', 'feed_links_extra', 3 );
 	}
 	
 	/**
