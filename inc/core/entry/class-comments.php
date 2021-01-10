@@ -41,12 +41,16 @@ class Comments {
 		add_action( 'pre_comment_on_post',  [ $this, 'validate_cookies'			] );
 
 		// WeCodeArt Core
-		add_action( 'wecodeart/entry/comments', [ $this, 'render_meta'		], 10 );
-		add_action( 'wecodeart/entry/comments', [ Pagination::get_instance(), 'comments' ], 15 ); 
-		add_action( 'wecodeart/entry/comments', [ $this, 'render_comments'	], 20 );
-		add_action( 'wecodeart/entry/comments', [ $this, 'render_pings'		], 30 );
-		add_action( 'wecodeart/entry/comments', [ Pagination::get_instance(), 'comments' ], 35 ); 
-		add_action( 'wecodeart/entry/comments', [ $this, 'render_respond'	], 40 );
+		if( post_password_required() ) {
+			add_action( 'wecodeart/entry/comments', [ $this, 'render_protected' ], 20 );
+		} else {
+			add_action( 'wecodeart/entry/comments', [ $this, 'render_meta'		], 10 );
+			add_action( 'wecodeart/entry/comments', [ Pagination::get_instance(), 'comments' ], 15 ); 
+			add_action( 'wecodeart/entry/comments', [ $this, 'render_comments'	], 20 );
+			add_action( 'wecodeart/entry/comments', [ $this, 'render_pings'		], 30 );
+			add_action( 'wecodeart/entry/comments', [ Pagination::get_instance(), 'comments' ], 35 ); 
+			add_action( 'wecodeart/entry/comments', [ $this, 'render_respond'	], 40 );
+		}
 		
 		add_action( 'wecodeart/hook/entry/footer', [ $this, 'get_comments_template' ], 30 );
 	}
@@ -61,8 +65,8 @@ class Comments {
 	 */
 	public function get_comments_template() {
 		// Only if CPT supports and singular entry
-		if ( post_type_supports( get_post_type(), 'comments' ) && is_singular() ) comments_template( null, true ); 
-		return;
+		if ( ! post_type_supports( get_post_type(), 'comments' ) && ! is_singular() ) return;
+		comments_template( null, true );
 	}
 
 	/**
@@ -190,6 +194,24 @@ class Comments {
 				'class' => 'comments__headline'
 			]
 		] ], [ $this, 'get_comments_info' ] );
+	}
+	
+	/**
+	 * Render Protected
+	 *
+	 * @since	4.2.0
+	 *
+	 * @return	string	HTML
+	 */
+	public function render_protected() {  
+		Markup::wrap( 'comment-form-protected', [ [
+			'tag' 	=> 'p',
+			'attrs' => [
+				'class' => 'alert alert-danger shadow-soft'
+			]
+		] ], 'printf', [ 
+			esc_html__( 'This post is password protected. Enter the password to view comments.', 'wecodeart' )
+		] );
 	}
 
 	/**

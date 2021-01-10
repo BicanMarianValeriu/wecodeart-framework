@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry Media Class
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		3.6
- * @version		4.2
+ * @since		3.6.x
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -36,7 +36,7 @@ class Media {
 
 		// Filters.
 		add_filter( 'wecodeart/filter/media/render_image/disable', 	[ $this, 'filter_render_image' 	] );
-		add_filter( 'wecodeart/filter/media/render_image/wrappers', [ $this, 'filter_link_image' 	] );
+		add_filter( 'wecodeart/filter/wrappers/entry-media', 		[ $this, 'filter_link_image' 	] );
 	}
 	
 	/**
@@ -256,14 +256,13 @@ class Media {
 	 * Echo the Entry IMG Markup
 	 *
 	 * @since 	1.0
-	 * @version 4.1.5
+	 * @version 4.2.0
 	 *
 	 * @param 	array	$args
-	 * @param 	array	$wrappers
 	 *
 	 * @return 	mixed
 	 */
-	public function render_image( $args = [], $wrappers = [] ) {  
+	public function render_image( $args = [] ) {  
 		$disable = apply_filters( 'wecodeart/filter/media/render_image/disable', false );
 
 		if ( is_attachment() || $disable === true ) return; 
@@ -272,20 +271,14 @@ class Media {
 			'attrs' => [ 
 				'class' => 'entry-media__src' 
 			]
-		] ); 
+		] );
 
-		$wrappers = wp_parse_args( $wrappers, apply_filters( 'wecodeart/filter/media/render_image/wrappers', [ [ 
+		$image = Markup::wrap( 'entry-media', [ [ 
 			'tag' 	=> 'div', 
 			'attrs' => [ 
 				'class' => 'entry-media' 
 			] 
-		] ] ) );
-		
-		/**
-		 * Return the image wrapped into containers
-		 * @return string html
-		 */
-		$image = Markup::wrap( 'entry-media', $wrappers, [ __CLASS__, 'get_image' ], [ $args, true ], false ); 
+		] ], [ __CLASS__, 'get_image' ], [ $args, true ], false ); 
 
 		if ( $image ) {
 		 	echo $image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

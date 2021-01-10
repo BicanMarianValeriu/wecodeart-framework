@@ -17,6 +17,8 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
+use WeCodeArt\Core\Scripts;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\compress_css;
 use function WeCodeArt\Core\Scripts\get_asset;
@@ -26,8 +28,8 @@ use function WeCodeArt\Core\Scripts\get_asset;
  */
 class Scripts {
 
-	use \WeCodeArt\Singleton;
-	use \WeCodeArt\Core\Scripts\Base;
+	use Singleton;
+	use Scripts\Base;
 
 	/**
 	 * Send to Constructor
@@ -181,44 +183,6 @@ class Scripts {
 
 // Define Child NS
 namespace WeCodeArt\Core\Scripts;
-
-/**
- * Base Trait Class for implementing make_handle()
- */
-trait Base {
-	/**
-	 * Make a script handle from the classname
-	 *
-	 * @since	3.9.5
-	 * @version	4.1.6
-	 *
-	 * @param	string 	$name
-	 *
-	 * @return 	string
-	 */
-	protected function make_handle( $name = '', $namespace = __CLASS__ ) {
-		$handle = strtolower( str_replace( '\\', '-', $namespace ) );
-		$handle = $name ? $handle . '-' . $name : $handle;
-		return sanitize_html_class( $handle );
-	}
-
-	/**
-	 * Retrieve an asset if path structure is the same as class
-	 *
-	 * @since	3.9.5
-	 * @version	4.1.8
-	 *
-	 * @param	string 	$type
-	 * @param	string 	$name
-	 *
-	 * @return 	string
-	 */
-	protected function get_asset( string $type, string $name = __CLASS__ ) {
-		$name = strtolower( str_replace( '\\', '-', $name ) );
-
-	 	return get_asset( $type, $name );
-	}
-}
 
 /**
  * Gets asset instance.

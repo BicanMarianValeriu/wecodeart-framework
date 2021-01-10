@@ -8,25 +8,10 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Comments Template
  * @since 		1.0
- * @version		4.0.5
+ * @version		4.2.0
  */
 
 use WeCodeArt\Markup;
-
-if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' === basename( $_SERVER['SCRIPT_FILENAME'] ) ) {
-	die( 'Please do not load this page directly!' );
-}
-
-if ( post_password_required() ) {
-	return Markup::wrap( 'comment-form-protected', [ [
-		'tag' 	=> 'p',
-		'attrs' => [
-			'class' => 'alert alert-danger shadow-soft'
-		]
-	] ], 'printf', [ 
-		esc_html__( 'This post is password protected. Enter the password to view comments.', 'wecodeart' )
-	] );
-} 
 
 do_action( 'wecodeart/hook/comments/before' );
 
@@ -34,12 +19,13 @@ do_action( 'wecodeart/hook/comments/before' );
  * @see 	WeCodeArt\Markup::wrap()
  * @hook	'wecodeart_comments'
  * @hooked 	{
- * - WeCodeArt\Core\Comments	->render_meta()		- 10	comments intro text
- * - WeCodeArt\Core\Pagination	->comments() 		- 15	comments navigation
- * - WeCodeArt\Core\Comments	->render_comments()	- 20	comments list
- * - WeCodeArt\Core\Comments	->render_pings()	- 30	comments pings list
- * - WeCodeArt\Core\Pagination	->comments() 		- 35	comments navigation
- * - WeCodeArt\Core\Comments	->render_respond() 	- 40	comments reply form
+ * - WeCodeArt\Core\Entry\Comments	->render_meta()		- 10	comments intro text
+ * - WeCodeArt\Core\Entry\Pagination->comments() 		- 15	comments navigation
+ * - WeCodeArt\Core\Entry\Comments	->render_comments()	- 20	comments list
+ * - WeCodeArt\Core\Entry\Comments	->render_protected()- 20	comments protected (if password protected)
+ * - WeCodeArt\Core\Entry\Comments	->render_pings()	- 30	comments pings list
+ * - WeCodeArt\Core\Entry\Pagination->comments() 		- 35	comments navigation
+ * - WeCodeArt\Core\Entry\Comments	->render_respond() 	- 40	comments reply form
  * }
  */
 Markup::wrap( 'comments', [ [

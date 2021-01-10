@@ -75,6 +75,7 @@ class Starter implements Integration {
 	public function add_postmeta( $content, $config ) { 
 		if ( isset( $content['posts'] ) ) {
 			foreach( $content['posts'] as $key => $post ) {
+				if( $post['post_type'] !== 'page' ) continue; 
 				$content['posts'][$key]['meta_input'] = [
 					'_wca_builder_template' => true,
 					'_wca_title_hidden' 	=> true,
@@ -98,13 +99,13 @@ class Starter implements Integration {
 					'text_business_info',
 				],
 				'footer-1' => [
-					'recent-posts',
-				],
-				'footer-2' => [
 					'text_about',
 				],
+				'footer-2' => [
+					'recent-posts',
+				],
 				'footer-3' => [
-					'text_business_info',
+					'recent-comments',
 				]
 			],
 			'nav_menus'   => [

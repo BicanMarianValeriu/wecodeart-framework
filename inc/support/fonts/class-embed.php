@@ -34,8 +34,8 @@ class Embed {
 	 * @since 	4.2.0
 	 * @var 	array
 	 */
-	protected $fonts_to_load 	= [];
-	protected $handler 			= null;
+	protected $fonts 	= [];
+	protected $handler	= null;
 
 	/**
 	 * Init.
@@ -49,7 +49,7 @@ class Embed {
 		$this->populate_fonts();
 		
 		add_action( 'customize_save',		[ $this, 'collect_css'		], 10, 1 );
-		add_action( 'after_theme_setup',	[ $this, 'collect_css'		], 10, 1 );
+		add_action( 'after_theme_setup',	[ $this, 'collect_css'		], 90, 1 );
 		add_filter( 'wp_resource_hints', 	[ $this, 'resource_hints' 	], 10, 2 );
 		add_action( 'wp_enqueue_scripts',	[ $this, 'enqueue_scripts'	], 10 );
 	}
@@ -80,9 +80,9 @@ class Embed {
 	 * @return 	array 	$urls           URLs to print for resource hints.
 	 */
 	public function resource_hints( $urls, $relation_type ) {
-		$fonts_to_load = Google::get_instance()->fonts;
+		$fonts = Google::get_instance()->fonts;
 
-		if ( ! empty( $fonts_to_load ) && 'preconnect' === $relation_type ) {
+		if ( ! empty( $fonts ) && 'preconnect' === $relation_type ) {
 			if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '>=' ) ) {
 				$urls[] = [
 					'href' 	=> 'https://fonts.gstatic.com',
@@ -107,7 +107,7 @@ class Embed {
 		$google_fonts = Google::get_instance()->loop_fields()->process_fonts();
 
 		foreach ( $google_fonts->fonts as $font ) {
-			$this->fonts_to_load[] = wp_parse_args( [
+			$this->fonts[] = wp_parse_args( [
 				'variants' 	=> array_map( function( $val ) {
 					if ( 'italic' === $val ) return '400i';
 					return str_replace( [ 'regular', 'bold', 'italic' ], [ '400', '', 'i'  ], $val );
@@ -127,7 +127,7 @@ class Embed {
 		$css = '';
 
 		// Get Fonts
-		foreach( $this->fonts_to_load as $font ) $css .= $this->handler->get_styles( $font );
+		foreach( $this->fonts as $font ) $css .= $this->handler->get_styles( $font );
 
 		// Customizer Typography
 		$fonts_control = get_theme_mod( 'general-typography-primary', false );

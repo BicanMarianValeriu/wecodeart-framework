@@ -16,6 +16,7 @@ namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Singleton;
 use WeCodeArt\Customizer;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Request;
@@ -25,7 +26,7 @@ use WeCodeArt\Admin\Request;
  */
 final class Fonts implements Integration {
 
-    use \WeCodeArt\Singleton;
+    use Singleton;
 
 	/**
 	 * An array of our google fonts.

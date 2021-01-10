@@ -1,6 +1,6 @@
 <?php
 $required_wp_version   = '5.0';
-$required_php_version  = '5.6.2';
+$required_php_version  = '7.0';
 
 return [
     /*
@@ -100,8 +100,8 @@ return [
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
         'footer-copyright-text'     => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
         'general-typography-primary'=> [
-            'family'    => 'Raleway',
-            'variants'  => [ '300', '400', '700' ]
+            'family'    => 'Abel',
+            'variants'  => []
         ],
     ],
     /*

@@ -126,7 +126,7 @@ final class Google {
 	}
 
 	/**
-	 * Determines the vbalidity of the selected font as well as its properties.
+	 * Determines the validity of the selected font as well as its properties.
 	 * This is vital to make sure that the google-font script that we'll generate later
 	 * does not contain any invalid options.
 	 */

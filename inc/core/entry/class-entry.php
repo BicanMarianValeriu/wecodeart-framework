@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Core\Loops;
 use WeCodeArt\Core\Pagination;
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 use WeCodeArt\Markup\SVG;
 
 /**
@@ -26,7 +27,7 @@ use WeCodeArt\Markup\SVG;
  */
 class Entry {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor
