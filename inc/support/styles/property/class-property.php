@@ -23,25 +23,25 @@ abstract class Property {
 	/**
 	 * The property we're modifying.
 	 *
-	 * @access protected
-	 * @var string
+	 * @access 	protected
+	 * @var 	string
 	 */
 	protected $property;
 
 	/**
 	 * The value
 	 *
-	 * @access protected
-	 * @var string|array
+	 * @access 	protected
+	 * @var 	string|array
 	 */
 	protected $value;
 
 	/**
 	 * Constructor.
 	 *
-	 * @access public
-	 * @param string $property The CSS property we're modifying.
-	 * @param mixed  $value    The value.
+	 * @access 	public
+	 * @param 	string $property The CSS property we're modifying.
+	 * @param 	mixed  $value    The value.
 	 */
 	public function __construct( $property, $value ) {
 		$this->property = $property;

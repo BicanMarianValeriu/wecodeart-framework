@@ -63,7 +63,7 @@ class Control {
 	 * @param 	array        $field     The field.
 	 */
 	public function __construct( $field ) {
-		$this->value     = get_theme_mod( $field['name'], false );
+		$this->value     = get_theme_mod( get_prop( $field, 'name' ), false );
 		$this->output    = get_prop( $field, 'output' );
 		$this->field     = $field;
 
@@ -167,14 +167,18 @@ class Control {
 							$replacement = $replace;
 						}
 				}
+
 				$replacement = ( false === $replacement ) ? '' : $replacement;
+
 				if ( is_array( $value ) ) {
 					foreach ( $value as $k => $v ) {
 						$_val        = ( isset( $value[ $v ] ) ) ? $value[ $v ] : $v;
 						$value[ $k ] = str_replace( $search, $replacement, $_val );
 					}
+
 					return $value;
 				}
+
 				$value = str_replace( $search, $replacement, $value );
 			}
 		}
@@ -249,6 +253,7 @@ class Control {
 				// Check if this is a frontend style.
 				continue;
 			}
+
 			$this->process_output( $output, $value );
 		}
 	}
@@ -279,6 +284,7 @@ class Control {
 			'background-image',
 			'background',
 		);
+
 		if ( in_array( $output['property'], $accepts_multiple, true ) ) {
 			if (
 				isset( $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] ) && 
@@ -290,6 +296,7 @@ class Control {
 			$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ][] = $output['prefix'] . $value . $output['units'] . $output['suffix'];
 			return;
 		}
+
 		if ( is_string( $value ) || is_numeric( $value ) ) {
 			$value = $output['prefix'] . $this->process_property_value( $output['property'], $value ) . $output['units'] . $output['suffix'];
 			$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;

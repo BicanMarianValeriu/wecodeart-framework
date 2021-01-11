@@ -20,7 +20,6 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Customizer;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Request;
-use function WeCodeArt\Functions\clean_empty_css;
 
 /**
  * The Fonts object.
@@ -148,11 +147,12 @@ final class Styles implements Integration {
 
 		// Process the array of CSS properties and produce the final CSS.
 		$final_css = '';
+
 		if ( ! is_array( $css ) || empty( $css ) ) {
-			return '';
+			return $final_css;
 		}
 
-		foreach ( $css as $media_query => $selectors ) {
+		foreach( $css as $media_query => $selectors ) {
 			$final_css .= ( 'global' !== $media_query ) ? $media_query . '{' : '';
 			foreach( $selectors as $selector => $properties ) {
 				$css_for_style = '';
@@ -185,10 +185,10 @@ final class Styles implements Integration {
 	 * @return array
 	 */
 	public static function add_prefixes( $css ) {
-		if ( is_array( $css ) ) {
-			foreach ( $css as $media_query => $elements ) {
-				foreach ( $elements as $element => $style_array ) {
-					foreach ( $style_array as $property => $value ) {
+		if( is_array( $css ) ) {
+			foreach( $css as $media_query => $elements ) {
+				foreach( $elements as $element => $style_array ) {
+					foreach( $style_array as $property => $value ) {
 						// Add -webkit-* and -moz-*.
 						if ( is_string( $property ) && in_array( $property, [
 							'border-radius',

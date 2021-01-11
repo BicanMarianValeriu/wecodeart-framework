@@ -39,8 +39,8 @@ class Footer extends Config {
 		// Footer Modules Choices.
 		$widgets = wp_list_pluck( \WeCodeArt\Core\Footer::footer_widgets(), 'label' );
 
-		$_configs = array( 
-			array(
+		$_configs = [
+			[
 				'name'			=> 'footer-layout-container',
 				'type' 			=> 'control',
 				'control'  		=> 'select',
@@ -62,8 +62,8 @@ class Footer extends Config {
 						'value'		=> [ 'container', 'container-fluid' ]
 					]
 				]
-			),
-			array(
+			],
+			[
 				'name'			=> 'footer-layout-modules',
 				'type'        	=> 'control',
 				'control'  		=> 'wecodeart-sortable',
@@ -78,8 +78,8 @@ class Footer extends Config {
 					'render_callback' => [ 'WeCodeArt\Core\Footer', 'render_widgets' ],
 					'container_inclusive' => true
 				]
-			),
-			array(
+			],
+			[
 				'name'			=> 'footer-copyright-text',
 				'type'        	=> 'control',
 				'control'  		=> 'textarea',
@@ -100,8 +100,38 @@ class Footer extends Config {
 						'text'		=> true
 					]
 				]
-			)
-		);
+			],
+			[
+				'name'			=> 'footer-copyright-bg',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'footer-copyright',
+				'title' 		=> esc_html__( 'Attribution Background Color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Choose footer attribution background color.', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => '.footer__attribution',
+						'property' => 'background-color'
+					]
+				]
+			],
+			[
+				'name'			=> 'footer-copyright-color',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'footer-copyright',
+				'title' 		=> esc_html__( 'Attribution Text Color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Choose footer attribution text color.', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => '.footer__attribution',
+						'property' => 'color'
+					]
+				]
+			]
+		];
 
 		return array_merge( $configurations, $_configs );
 	}

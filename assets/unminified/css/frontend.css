@@ -5,10 +5,10 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 4.2
+Version: 4.2.0
 Requires PHP: 7.0
 Requires at least: 5.0
-Tested up to: 5.4.2
+Tested up to: 5.6
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -10147,10 +10147,6 @@ a img.aligncenter {
   display: none;
 }
 
-.no-sidebar .content__main {
-  border-right: 0;
-}
-
 .header__bar {
   padding: 10px 0;
 }
@@ -10170,7 +10166,7 @@ a img.aligncenter {
   }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
   .header-bar__menu, .header-bar__search {
     margin-top: 10px;
     order: 100;
@@ -10179,9 +10175,12 @@ a img.aligncenter {
     border-top: 1px solid var(--wca-light);
   }
 }
-@media (max-width: 767.98px) {
+.header-bar__menu:not(.show):not(.collapsing), .header-bar__search:not(.show):not(.collapsing) {
+  display: none;
+}
+@media (min-width: 992px) {
   .header-bar__menu:not(.show):not(.collapsing), .header-bar__search:not(.show):not(.collapsing) {
-    display: none;
+    display: block;
   }
 }
 .header-bar__branding svg {
@@ -10190,7 +10189,7 @@ a img.aligncenter {
   height: 20px;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
   .no-js .header-bar__menu, .no-js .header-bar__search {
     display: none;
   }

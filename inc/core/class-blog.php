@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Loops;
 use WeCodeArt\Core\Content;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * General Hooks
@@ -90,15 +91,15 @@ class Blog {
 						$args[0]['attrs']['class']
 					];
 
-					if( $attributes['backgroundColor'] ) {
+					if( get_prop( $attributes, 'backgroundColor', false ) ) {
 						$class[] = 'bg-' . $attributes['backgroundColor'];
 					}
 
-					if( $attributes['className'] ) {
+					if( get_prop( $attributes, 'className', false ) ) {
 						$class[] = $attributes['className'];
 					}
 
-					if( $attributes['align'] ) {
+					if( get_prop( $attributes, 'align', false ) ) {
 						$class[] = 'align' . $attributes['align'];
 					}
 

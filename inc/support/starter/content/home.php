@@ -71,8 +71,8 @@ return [
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
 	
-	<!-- wp:wca/section {"gutter":0,"backgroundColor":"light","className":"wcacss-f8821d50","hasCustomCSS":true} -->
-	<div class="wp-block-wca-section alignfull wcacss-f8821d50 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-0"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4","lg":"col-lg-6"},"className":"wcacss-87102bf7 mb-md-0 mb-4","hasCustomCSS":true} -->
+	<!-- wp:wca/section {"gutter":0,"backgroundColor":"light","className":"wcacss-f8811d50","hasCustomCSS":true} -->
+	<div class="wp-block-wca-section alignfull wcacss-f8811d50 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-0"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4","lg":"col-lg-6"},"className":"wcacss-87102bf7 mb-md-0 mb-4","hasCustomCSS":true} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-4 col-lg-6 wcacss-87102bf7 mb-md-0 mb-4"><!-- wp:image {"sizeSlug":"large","className":"wcacss-824d11a3 mb-0","hasCustomCSS":true} -->
 	<figure class="wp-block-image size-large wcacss-824d11a3 mb-0"><img src="https://picsum.photos/id/1/800/800" alt=""/></figure>
 	<!-- /wp:image --></div>

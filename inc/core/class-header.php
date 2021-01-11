@@ -110,7 +110,7 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
-	 * @version	4.0.5
+	 * @version	4.2.0
 	 *
 	 * @return 	void 
 	 */
@@ -119,7 +119,7 @@ class Header {
 			'tag' 	=> 'div',
 			'attrs' => [
 				'id' 	=> 'bar-menu',
-				'class' => 'header-bar__menu col-12 col-lg'
+				'class' => 'header-bar__menu col-12 col-lg d-lg-block'
 			]
 		] ], 'wp_nav_menu', [ apply_filters( 'wecodeart/filter/menu/main', [
 			'theme_location' => 'primary',
@@ -133,7 +133,7 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
-	 * @version	4.1.4
+	 * @version	4.2.0
 	 * 
 	 * @return 	void
 	 */
@@ -142,7 +142,7 @@ class Header {
 			'tag' 	=> 'div',
 			'attrs' => [
 				'id' 	=> 'bar-search',
-				'class' => 'header-bar__search col-12 col-lg-4 ml-auto'
+				'class' => 'header-bar__search col-12 col-lg-4 ml-auto d-lg-block'
 			]
 		] ], 'get_search_form' ); 
 	}

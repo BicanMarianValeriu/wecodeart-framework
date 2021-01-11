@@ -43,7 +43,7 @@ class Colors extends Config {
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[
-						'element'  => '.footer__attribution',
+						'element'  => 'body',
 						'property' => 'background-color'
 					]
 				]

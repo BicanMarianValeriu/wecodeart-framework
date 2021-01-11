@@ -45,11 +45,11 @@ class Typography extends Styles\Control {
 			'--wca-font-sans-serif',
 			'font-family',
 			'font-size',
-			'variant',
 			'font-weight',
 			'font-style',
-			'letter-spacing',
+			'variant',
 			'word-spacing',
+			'letter-spacing',
 			'line-height',
 			'text-align',
 			'text-transform',
@@ -66,14 +66,17 @@ class Typography extends Styles\Control {
 
 				// Is this italic?
 				$is_italic = ( false !== strpos( $value['variant'], 'italic' ) );
+
 				$this->styles[ $output['media_query'] ][ $output['element'] ]['font-weight'] = $font_weight;
+				
 				if ( $is_italic ) {
 					$this->styles[ $output['media_query'] ][ $output['element'] ]['font-style'] = 'italic';
 				}
+				
 				continue;
 			}
 
-			$property_value = '';
+			$property_value = ['', ''];
 			
 			if( isset( $value[ $property ] ) ) {
 				$property_value = $this->process_property_value( $property, $value[ $property ] );

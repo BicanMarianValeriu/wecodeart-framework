@@ -7,14 +7,6 @@
     }
 }
 
-.no-sidebar {
-    .content {
-        &__main {
-            border-right: 0;
-        }
-    }
-}
-
 .header {
     &__bar {
         padding: 10px 0;
@@ -42,7 +34,7 @@
 .header-bar { 
     &__menu,
     &__search {
-        @include media-breakpoint-down('md') { 
+        @include media-breakpoint-down('lg') {
             margin-top: 10px;
             order: 100;
             padding-top: 10px;
@@ -50,8 +42,10 @@
         }
 
         &:not(.show):not(.collapsing) {
-            @include media-breakpoint-down('md') { 
-                display: none;
+            display: none;
+
+            @include media-breakpoint-up('lg') {
+                display: block;
             }
         }
     }
@@ -66,10 +60,10 @@
 }
 
 .no-js {
-    @include media-breakpoint-down('md') {
-        .header-bar {
-            &__menu,
-            &__search {
+    .header-bar {
+        &__menu,
+        &__search {
+            @include media-breakpoint-down( 'lg' ) {
                 display: none;
             }
         }

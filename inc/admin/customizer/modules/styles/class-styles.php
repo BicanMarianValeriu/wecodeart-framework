@@ -63,14 +63,15 @@ class Styles {
 		$this->FS 		= FileSystem::get_instance()->set_folder( 'css' );
 		$this->fonts 	= wecodeart( 'integrations' )->get( 'fonts' )::get_instance();
 		$this->styles 	= wecodeart( 'integrations' )->get( 'styles' )::get_instance();
-
-		// Remove Customizer inline styles - we add them in our way, compressed!
-		remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
-
+		
 		// Generate styles and enqueue
+		add_action( 'customize_save_after',			[ $this, 'generate_styles' 	], 100 );
 		add_action( 'enqueue_block_editor_assets', 	[ $this, 'enqueue_styles' 	], 100 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'enqueue_styles'	], 999 );
-		add_action( 'customize_save_after',			[ $this, 'generate_styles' 	], 100 );
+		
+		if( is_admin() || is_customize_preview() ) return;
+		// Remove Customizer inline styles - we add them in our way, compressed!
+		remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
 	}
 
 	/**
