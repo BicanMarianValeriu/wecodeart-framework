@@ -57,6 +57,32 @@ abstract class Property {
 	abstract protected function process_value();
 
 	/**
+	 * Get CSS value
+	 *
+	 * @since   4.2.0
+	 * @param  	string $property	CSS property.
+	 * @param  	string $value		CSS unit.
+	 *
+	 * @return 	mixed				CSS value depends on property
+	 */
+	public static function get_property_value( $property, $value ) {
+		$properties = apply_filters( 'wecodeart/filter/styles/process/properties', [
+			'font-family' 			=> Property\Font::class,
+			'background' 			=> Property\Background::class,
+			'background-image'		=> Property\Background::class,
+			'background-position' 	=> Property\Focal::class,
+		] );
+
+		if ( array_key_exists( $property, $properties ) ) {
+			$classname = $properties[ $property ];
+			$obj = new $classname( $property, $value );
+			return $obj->get_value();
+		}
+
+		return esc_attr( $value );
+	}
+
+	/**
 	 * Gets the value.
 	 *
 	 * @access protected

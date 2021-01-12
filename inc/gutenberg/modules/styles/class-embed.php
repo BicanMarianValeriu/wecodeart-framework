@@ -50,11 +50,10 @@ class Embed {
 	/**
 	 * Method to start checking if excerpt exists.
 	 *
-	 * @param 	string $excerpt Excerpt.
+	 * @since   4.2.0
+	 * @param 	string 	$excerpt Excerpt.
 	 *
 	 * @return 	string
-	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function get_excerpt_start( $excerpt ) {
 		$this->has_excerpt = true;
@@ -65,11 +64,10 @@ class Embed {
 	/**
 	 * Method to stop checking if excerpt exists.
 	 *
-	 * @param 	string $excerpt Excerpt.
+	 * @since   4.2.0
+	 * @param 	string 	$excerpt Excerpt.
 	 *
 	 * @return 	string
-	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function get_excerpt_end( $excerpt ) {
 		$this->has_excerpt = false;
@@ -81,7 +79,6 @@ class Embed {
 	 * Render server-side CSS
 	 *
 	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function render_post_css() {
 		$id = 0;
@@ -89,7 +86,7 @@ class Embed {
 		if ( is_singular() ) {
 			// Enqueue main post attached style.
 			$id = get_the_ID();
-			$this->enqueue_styles();
+			$this->enqueue_styles( $id );
 		}
 
 		// Enqueue styles for other posts that display the_content, if any.
@@ -109,11 +106,11 @@ class Embed {
 	/**
 	 * Enqueue CSS file
 	 *
+	 * @since   4.2.0
 	 * @param 	int  	$post_id Post id.
 	 * @param 	bool 	$footer IN footer.
 	 *
-	 * @since   4.2.0
-	 * @access  public
+	 * @return 	void
 	 */
 	public function enqueue_styles( $post_id = '', $footer = false ) {
 		$post_id  = $post_id ?: get_the_ID();
@@ -187,11 +184,11 @@ class Embed {
 	/**
 	 * Enqueue CSS file for Reusable Blocks
 	 *
+	 * @since   4.2.0
 	 * @param 	array $blocks List of blocks.
 	 * @param 	bool  $footer Should we load on footer.
 	 *
-	 * @since   4.2.0
-	 * @access  public
+	 * @return 	void
 	 */
 	public function enqueue_reusable_styles( $blocks, $footer = false ) {
 		foreach ( $blocks as $block ) {
@@ -208,9 +205,10 @@ class Embed {
 	/**
 	 * Get Post CSS
 	 *
+	 * @since   4.2.0
 	 * @param 	string $post_id Post id.
 	 *
-	 * @since   4.2.0
+	 * @return 	void
 	 */
 	public function get_post_css( $post_id ) {
 		$post_id = $post_id ? $post_id : get_the_ID();
@@ -239,9 +237,9 @@ class Embed {
 	/**
 	 * Get Blocks CSS from Meta
 	 *
+	 * @since   4.2.0
 	 * @param 	int 	$post_id Post id.
 	 *
-	 * @since   4.2.0
 	 * @return 	string
 	 */
 	public function get_page_css_meta( $post_id ) {
@@ -264,9 +262,9 @@ class Embed {
 	/**
 	 * Get Blocks CSS Inline
 	 *
+	 * @since   4.2.0
 	 * @param 	int 	$post_id Post id.
 	 *
-	 * @since   4.2.0
 	 * @return 	string
 	 */
 	public function get_page_css_inline( $post_id ) {
@@ -294,9 +292,9 @@ class Embed {
 	/**
 	 * Get Reusable Block Meta
 	 *
+	 * @since   4.2.0
 	 * @param 	array 	$blocks List of blocks.
 	 *
-	 * @since   4.2.0
 	 * @return 	string
 	 */
 	public function get_reusable_block_meta( $blocks ) {
@@ -317,9 +315,9 @@ class Embed {
 	/**
 	 * Cycle thorugh Blocks
 	 *
+	 * @since   4.2.0
 	 * @param 	array 	$blocks List of blocks.
 	 *
-	 * @since   4.2.0
 	 * @return 	string 	Block styles.
 	 */
 	public function cycle_through_blocks( $blocks ) {

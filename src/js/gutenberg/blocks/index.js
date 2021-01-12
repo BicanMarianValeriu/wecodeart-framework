@@ -3,6 +3,7 @@
  */
 const { registerBlockType } = wp.blocks;
 
+import './cover';
 import './media-text';
 import lorem from './lorem';
 import section from './section';

@@ -52,9 +52,10 @@ class Styles {
 	/**
 	 * Get Blocks CSS
 	 *
-	 * @param 	int 	$post_id Post id.
-	 * @return 	string
 	 * @since   4.2.0
+	 * @param 	int 	$post_id Post id.
+	 *
+	 * @return 	string
 	 */
 	public function get_blocks_css( $post_id ) {
 		$content = get_post_field( 'post_content', $post_id );
@@ -70,9 +71,10 @@ class Styles {
 	/**
 	 * Get Reusable Blocks CSS
 	 *
-	 * @param 	int 	$post_id Post id.
-	 * @return 	string
 	 * @since   4.2.0
+	 * @param 	int 	$post_id Post id.
+	 *
+	 * @return 	string
 	 */
 	public function get_reusable_block_css( $block_id ) {
 		$reusable_block = get_post( $block_id );
@@ -93,15 +95,15 @@ class Styles {
 	/**
 	 * Cycle thorugh Static Blocks
 	 *
+	 * @since   4.2.0
 	 * @param 	array 	$blocks List of blocks.
 	 *
 	 * @return 	string 	Style.
-	 * @since   4.2.0
 	 */
 	public function cycle_through_static_blocks( $blocks ) {
 		$style = '';
 		foreach ( $blocks as $block ) {
-			$style .= $this->get_css_from_attributes( $block );
+			$style .= $this->styles::parse( $this->styles::add_prefixes( self::process_block( $block ) ) );
 
 			if ( isset( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
 				$style .= $this->cycle_through_static_blocks( $block['innerBlocks'] );
@@ -135,59 +137,29 @@ class Styles {
 	}
 
 	/**
-	 * Generate Blocks CSS
+	 * Get the CSS for a block.
 	 *
-	 * @since   4.2.0
-	 * @param 	mixed 	$block Block data.
+	 * @param 	array 	$args The block.
 	 *
-	 * @return 	string
+	 * @return 	array
 	 */
-	public function get_css_from_attributes( $block = [] ) {
-		$attr  = $block['attrs'] ?: [];
-		$style = '';
-		
-		$css_style		= isset( $attr['style'] ) ? $attr['style'] : [];
-		$block_class 	= isset( $attr['className'] ) ? explode( ' ', $attr['className'] ) : [];
-		$block_class 	= array_filter( $block_class, function( $key ) {
-			return strpos( $key, 'wcacss-' ) === 0;
-		} );
+	public static function process_block( $block = [] ) {
+		// Find the class that will handle the output for this block.
+		$classname	= Styles\Blocks::class;
+		$defaults   = [
+			'core/cover' => Styles\Blocks\Cover::class
+		];
 
-		if( count( $block_class ) === 0 ) return $style;
+		$output_classes = apply_filters( 'wecodeart/filter/gutenberg/styles/blocks', $defaults );
 
-		$block_class 	= '.' . end( $block_class );
-
-		$block_style = [];
-		$block_style['global'][$block_class] = [];
-
-		// Background Color
-		if( isset( $css_style['color'] ) && isset( $css_style['color']['background'] ) ) {
-			$block_style['global'][$block_class]['background-color'] = $this->styles::get_css_value( $css_style['color']['background'], 'color' );
-		}
-
-		// Background Image
-		if( isset( $attr['backgroundUrl'] ) && ! empty( $attr['backgroundUrl'] ) ) {
-			$block_style['global'][$block_class]['background-image'] = $this->styles::get_css_value( $attr['backgroundUrl'], 'url' );
-		}
-
-		// Background Position
-		$focal_point = isset( $attr['focalPoint'] ) ? $attr['focalPoint'] : false;
-		if( $focal_point ) {
-			$block_style['global'][$block_class]['background-position'] = $this->styles::get_css_value( $focal_point, 'focal' );
+		if ( array_key_exists( $block['blockName'], $output_classes ) ) {
+			$classname = $output_classes[ $block['blockName'] ];
 		}
 		
-		if ( isset( $attr['hasCustomCSS'] ) && $attr['hasCustomCSS'] && ! empty( $attr['customCSS'] ) ) {
-			$custom_style = wp_strip_all_tags( $this->styles::get_attr_value( $attr['customCSS'] ) );
-			$custom_style = $this->styles::break_queries( $custom_style );
-			// Combine with custom CSS
-			$block_style = array_replace_recursive( $block_style, $custom_style );
-		}
+		if( ! class_exists( $classname ) ) return [];
+	
+		$obj = new $classname( $block );
 
-		// Filter attributes that should generate styles
-		$block_style = apply_filters( 'wecodeart/gutenberg/css/attributes', $block_style, $attr );
-
-		// Parse Attributes Style
-		$style .= $this->styles::parse( $this->styles::add_prefixes( $block_style ) );
-
-		return $style;
+		return $obj->get_styles();
 	}
 }

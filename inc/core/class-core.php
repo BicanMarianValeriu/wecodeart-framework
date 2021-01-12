@@ -73,11 +73,11 @@ class Core {
 		$modules = Content::get_contextual_options()['modules'];
 
 		// Add sidebar class
-		if( in_array( 'primary', $modules, true ) || in_array( 'secondary', $modules, true ) ) {
-			$classes[] = 'page--has-sidebar';
-		} else {
-			$classes[] = 'page--no-sidebar';
-		}
+		// if( in_array( 'primary', $modules, true ) || in_array( 'secondary', $modules, true ) ) {
+		// 	$classes[] = 'page--has-sidebar';
+		// } else {
+		// 	$classes[] = 'page--no-sidebar';
+		// }
 		
 		// Singular sidebar class if gutenberg wide/full layout/
 		if( wecodeart_if( 'is_full_layout' ) ) { 

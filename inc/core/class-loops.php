@@ -17,6 +17,7 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
+use WeCodeArt\Gutenberg\Modules\Styles;
 
 /**
  * Loops
@@ -44,6 +45,18 @@ class Loops {
 			do_action( 'wecodeart/hook/loop/while/before' );
 
 			while( have_posts() ) : the_post();
+
+				$blocks = parse_blocks( get_the_content() );
+
+				foreach( $blocks as $block ) {
+					if( 'core/cover' !== $block['blockName'] ) continue; 
+					$parent = Styles::process_block( $block );
+					if( $block['innerBlocks'] ) {
+						foreach( $block['innerBlocks'] as $child ) {
+							Styles::process_block( $child );
+						}
+					}
+				}
 
 				$post_id 	= get_the_ID();
 				$index 		= $wp_query->current_post;

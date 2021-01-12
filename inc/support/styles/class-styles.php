@@ -87,9 +87,8 @@ final class Styles implements Integration {
      * Call after minification of CSS
      *
      * @since   4.2.0
-     * @access  public
-     *
      * @param   string $css
+     *
      * @return  string
      */
     public static function clean_empty( $css ) {
@@ -126,7 +125,6 @@ final class Styles implements Integration {
     /**
 	 * Gets the array of generated styles and creates the minimized, inline CSS.
 	 *
-	 * @access 	public
 	 * @param 	array   $css    The CSS definitions array.
 	 *
 	 * @return 	string          The generated CSS.
@@ -244,9 +242,11 @@ final class Styles implements Integration {
 	public static function add_prefixes( $css ) {
 		if( is_array( $css ) ) {
 			foreach( $css as $media_query => $elements ) {
-				foreach( $elements as $element => $style_array ) {
-					foreach( $style_array as $property => $value ) {
-						if( empty( $property ) ) continue;
+				if( empty( $elements ) ) continue;
+				foreach( $elements as $element => $properties ) {
+					if( empty( $properties ) ) continue;
+					foreach( $properties as $property => $value ) {
+						if( ! $property ) continue;
 						// Add -webkit-* and -moz-*.
 						if ( is_string( $property ) && in_array( $property, [
 							'border-radius',
@@ -317,79 +317,23 @@ final class Styles implements Integration {
 	 * Get CSS value
 	 *
 	 * @since   4.2.0
-	 * @param  	string $value	CSS value.
-	 * @param  	string $unit	CSS unit.
-	 * @param  	string $default	CSS default font.
+	 * @param  	string $property	CSS prop.
+	 * @param  	string $value		CSS value.
 	 *
-	 * @return 	mixed			CSS value depends on $unit
+	 * @return 	mixed				CSS value depends on $property
 	 */
-	public static function get_css_value( $value = '', $unit = '', $default = '' ) {
-		if ( '' == $value && '' == $default ) {
-			return $value;
-		}
-
-		$css_val = '';
-
-		switch ( $unit ) {
-			case 'font':
-				if ( 'inherit' != $value ) {
-					$value   = $value['family'];
-					$css_val = $value;
-				} elseif ( '' != $default ) {
-					$css_val = $default;
-				} else {
-					$css_val = '';
-				}
-				break;
-
-			case 'px':
-			case '%':
-				if ( 'inherit' === strtolower( $value ) || 'inherit' === strtolower( $default ) ) {
-					return $value;
-				}
-				$value   = ( '' != $value ) ? $value : $default;
-				$css_val = esc_attr( $value ) . $unit;
-				break;
-
-			case 'url':
-				$css_val = $unit . '(' . esc_url( $value ) . ')';
-				break;
-
-			case 'rem':
-			case 'em':
-				if ( 'inherit' === strtolower( $value ) || 'inherit' === strtolower( $default ) ) {
-					return $value;
-				}
-				$css_val = esc_attr( $value );
-				break;
-
-			case 'focal':
-				$css_val = is_array( $value ) ? $value['x'] * 100 . '% ' . $value['y'] * 100 . '%' : $default;
-				break;
-
-			case 'color':
-				$css_val = self::hex_rgba( sanitize_hex_color( $value ) );
-				break;
-
-			default:
-				$value = ( '' != $value ) ? $value : $default;
-				if ( '' != $value ) {
-					$css_val = esc_attr( $value ) . $unit;
-				}
-		}
-
-		return self::get_attr_value( $css_val, 'initial' );
+	public static function get_property_value( $property, $value ) {
+		return Styles\Property::get_property_value( $property, $value );
 	}
 
 	/**
 	 * Convert HEX to RGBA.
 	 *
+	 * @since   4.2.0
 	 * @param 	string $color   Color data.
 	 * @param 	bool   $opacity Opacity status.
 	 *
 	 * @return 	mixed
-	 * @since   4.2.0
-	 * @access  public
 	 */
 	public static function hex_rgba( $color, $opacity = false ) {
 		$default = 'rgb(0,0,0)';

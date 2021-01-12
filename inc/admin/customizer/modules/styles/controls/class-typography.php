@@ -12,20 +12,17 @@
  * @version		4.2.0
  */
 
-namespace WeCodeArt\Admin\Customizer\Modules\Styles\Control;
+namespace WeCodeArt\Admin\Customizer\Modules\Styles\Controls;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Core\Scripts;
-use WeCodeArt\Admin\Customizer;
 use WeCodeArt\Admin\Customizer\Formatting;
-use WeCodeArt\Admin\Customizer\Modules\Styles;
+use WeCodeArt\Admin\Customizer\Modules\Styles\Controls as Control_Processor;
 
 /**
  * Customizer Typography Output
  */
-class Typography extends Styles\Control {
+class Typography extends Control_Processor {
 	/**
 	 * Processes a single item from the `output` array.
 	 *
@@ -39,7 +36,7 @@ class Typography extends Styles\Control {
 		$output['prefix']      = ( isset( $output['prefix'] ) ) ? $output['prefix'] : '';
 		$output['suffix']      = ( isset( $output['suffix'] ) ) ? $output['suffix'] : '';
 
-		$value = Formatting::sanitize_font( $value, '' );
+		$value = Formatting::sanitize_font( $value );
 		
 		$properties = [
 			'--wca-font-sans-serif',
@@ -62,7 +59,7 @@ class Typography extends Styles\Control {
 			if ( 'variant' === $property && isset( $value['variant'] ) && ! empty( $value['variant'] ) ) {
 				// Get the font_weight.
 				$font_weight = str_replace( 'italic', '', $value['variant'] );
-				$font_weight = ( in_array( $font_weight, array( '', 'regular' ), true ) ) ? '400' : $font_weight;
+				$font_weight = in_array( $font_weight, [ '', 'regular' ], true ) ? '400' : $font_weight;
 
 				// Is this italic?
 				$is_italic = ( false !== strpos( $value['variant'], 'italic' ) );
@@ -76,7 +73,7 @@ class Typography extends Styles\Control {
 				continue;
 			}
 
-			$property_value = ['', ''];
+			$property_value = [ '', '' ];
 			
 			if( isset( $value[ $property ] ) ) {
 				$property_value = $this->process_property_value( $property, $value[ $property ] );

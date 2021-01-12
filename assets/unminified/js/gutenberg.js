@@ -8942,6 +8942,49 @@ var settings = _objectSpread(_objectSpread({}, blockArgs), {}, {
 
 /***/ }),
 
+/***/ "./src/js/gutenberg/blocks/cover/index.js":
+/*!************************************************!*\
+  !*** ./src/js/gutenberg/blocks/cover/index.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * WordPress dependencies.
+ */
+var addFilter = wp.hooks.addFilter;
+/**
+ * Override props assigned to save component to inject atttributes
+ *
+ * @param {Object} extraProps Additional props applied to save element.
+ * @param {Object} blockType  Block type.
+ * @param {Object} attributes Current block attributes.
+ *
+ * @return {Object} Filtered props applied to save element.
+ */
+
+function applyExtraSettings(extraProps, blockType) {
+  var blockName = blockType.name;
+
+  if (blockName === 'core/cover') {
+    extraProps.style = {};
+  }
+
+  return extraProps;
+}
+/**
+ * Apply Filters
+ */
+
+
+function applyFilters() {
+  addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/cover/applyExtraSettings', applyExtraSettings);
+}
+
+applyFilters();
+
+/***/ }),
+
 /***/ "./src/js/gutenberg/blocks/index.js":
 /*!******************************************!*\
   !*** ./src/js/gutenberg/blocks/index.js ***!
@@ -8953,11 +8996,13 @@ var settings = _objectSpread(_objectSpread({}, blockArgs), {}, {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _media_text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./media-text */ "./src/js/gutenberg/blocks/media-text/index.js");
-/* harmony import */ var _lorem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lorem */ "./src/js/gutenberg/blocks/lorem/index.js");
-/* harmony import */ var _section__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./section */ "./src/js/gutenberg/blocks/section/index.js");
-/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./content */ "./src/js/gutenberg/blocks/content/index.js");
-/* harmony import */ var _section_column__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./section/column */ "./src/js/gutenberg/blocks/section/column/index.js");
+/* harmony import */ var _cover__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cover */ "./src/js/gutenberg/blocks/cover/index.js");
+/* harmony import */ var _cover__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_cover__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _media_text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./media-text */ "./src/js/gutenberg/blocks/media-text/index.js");
+/* harmony import */ var _lorem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lorem */ "./src/js/gutenberg/blocks/lorem/index.js");
+/* harmony import */ var _section__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./section */ "./src/js/gutenberg/blocks/section/index.js");
+/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./content */ "./src/js/gutenberg/blocks/content/index.js");
+/* harmony import */ var _section_column__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./section/column */ "./src/js/gutenberg/blocks/section/column/index.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -8974,8 +9019,9 @@ var registerBlockType = wp.blocks.registerBlockType;
 
 
 
+
 function registerWCABlocks() {
-  [_lorem__WEBPACK_IMPORTED_MODULE_2__["default"], _section__WEBPACK_IMPORTED_MODULE_3__["default"], _content__WEBPACK_IMPORTED_MODULE_4__["default"], _section_column__WEBPACK_IMPORTED_MODULE_5__["default"]].forEach(function (block) {
+  [_lorem__WEBPACK_IMPORTED_MODULE_3__["default"], _section__WEBPACK_IMPORTED_MODULE_4__["default"], _content__WEBPACK_IMPORTED_MODULE_5__["default"], _section_column__WEBPACK_IMPORTED_MODULE_6__["default"]].forEach(function (block) {
     if (!block) return;
     var name = block.name,
         settings = block.settings,

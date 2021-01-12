@@ -6,66 +6,46 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	WP-Customizer Output
+ * @subpackage 	Support\Styles\Processor
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		4.2.0
  * @version		4.2.0
  */
 
-namespace WeCodeArt\Admin\Customizer\Modules\Styles;
+namespace WeCodeArt\Support\Styles;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Support\Styles\Property;
+use WeCodeArt\Support\Styles;
 use function WeCodeArt\Functions\get_prop;
 
 /**
- * Customizer Styles
+ * CSS Processor.
  */
-class Control {
+abstract class Processor {
 
 	/**
 	 * The field's `output` argument.
 	 *
-	 * @access 	protected
 	 * @var 	array
 	 */
-	protected $output = [];
+	protected 	$output = [];
 
 	/**
 	 * An array of the generated styles.
 	 *
-	 * @access 	protected
 	 * @var 	array
 	 */
-	protected $styles = [];
+	protected 	$styles = [];
 
 	/**
-	 * The field.
+	 * Constructor
 	 *
-	 * @access 	protected
-	 * @var 	array
+	 * @access  public
+	 * @param   array 	$args Args object.
 	 */
-	protected $field = [];
-
-	/**
-	 * The value.
-	 *
-	 * @access 	protected
-	 * @var 	string|array
-	 */
-	protected $value;
-
-	/**
-	 * The class constructor.
-	 *
-	 * @access 	public
-	 * @param 	array        $field     The field.
-	 */
-	public function __construct( $field ) {
-		$this->value     = get_theme_mod( get_prop( $field, 'name' ), false );
-		$this->output    = get_prop( $field, 'output' );
-		$this->field     = $field;
+	public function __construct( $args ) {
+		$this->output 	= get_prop( $args, 'output', [] );
 
 		$this->parse_output();
 	}
@@ -74,31 +54,32 @@ class Control {
 	 * If we have a sanitize_callback defined, apply it to the value.
 	 *
 	 * @param 	array        $output The output args.
-	 * @param 	string|array $value  The value.
 	 *
 	 * @return 	string|array
 	 */
-	protected function apply_sanitize_callback( $output, $value ) {
+	protected function apply_sanitize_callback( $output ) {
 		if ( isset( $output['sanitize_callback'] ) && null !== $output['sanitize_callback'] ) {
 			// If the sanitize_callback is invalid, return the value.
 			if ( ! is_callable( $output['sanitize_callback'] ) ) {
-				return $value;
+				return $output['value'];
 			}
 			
-			return call_user_func( $output['sanitize_callback'], $this->value );
+			return call_user_func( $output['sanitize_callback'], $output['value'] );
 		}
 
-		return $value;
+		return $output['value'];
 	}
 
 	/**
 	 * If we have a value_pattern defined, apply it to the value.
 	 *
-	 * @param 	array        $output The output args.
-	 * @param 	string|array $value  The value.
+	 * @param 	array        $output 	The output args.
+	 * @param 	string		 $type  	The value type.
+	 *
 	 * @return 	string|array
 	 */
-	protected function apply_value_pattern( $output, $value ) {
+	protected function apply_value_pattern( $output, $type = '' ) {
+		$value = $output['value'];
 		if ( isset( $output['value_pattern'] ) && ! empty( $output['value_pattern'] ) && is_string( $output['value_pattern'] ) ) {
 			if ( ! is_array( $value ) ) {
 				$value = str_replace( '$', $value, $output['value_pattern'] );
@@ -117,21 +98,25 @@ class Control {
 					$value[ $value_k ] = str_replace( '$', $value[ $value_k ], $output['value_pattern'] );
 				}
 			}
-			$value = $this->apply_pattern_replace( $output, $value );
+			$value = $this->apply_pattern_replace( $output, $type );
 		}
+		
 		return $value;
 	}
 
 	/**
 	 * If we have a value_pattern defined, apply it to the value.
 	 *
-	 * @param 	array        $output The output args.
-	 * @param 	string|array $value  The value.
+	 * @param 	array        $output 	The output args.
+	 * @param 	string		 $type  	The value type.
+	 *
 	 * @return 	string|array
 	 */
-	protected function apply_pattern_replace( $output, $value ) {
+	protected function apply_pattern_replace( $output, $type ) {
+		$value = $output['value'];
+
 		if ( isset( $output['pattern_replace'] ) && is_array( $output['pattern_replace'] ) ) {
-			$option_type = 'theme_mod';
+			$option_type = $type ?: 'theme_mod';
 			$option_name = 'wecodeart-settings';
 			$options     = [];
 
@@ -184,24 +169,23 @@ class Control {
 				$value = str_replace( $search, $replacement, $value );
 			}
 		}
+
 		return $value;
 	}
 
 	/**
 	 * Parses the output arguments.
 	 * Calls the process_output method for each of them.
-	 *
-	 * @access protected
 	 */
 	protected function parse_output() {
 		foreach ( $this->output as $output ) {
 			$skip = false;
 
 			// Apply any sanitization callbacks defined.
-			$value = $this->apply_sanitize_callback( $output, $this->value );
+			$value = $this->apply_sanitize_callback( $output );
 
 			// Skip if value is empty.
-			if ( '' === $this->value ) {
+			if ( '' === $output['value'] ) {
 				$skip = true;
 			}
 
@@ -236,7 +220,7 @@ class Control {
 			}
 
 			// Apply any value patterns defined.
-			$value = $this->apply_value_pattern( $output, $value );
+			$value = $this->apply_value_pattern( $output );
 
 			if ( isset( $output['element'] ) && is_array( $output['element'] ) ) {
 				$output['element'] = array_unique( $output['element'] );
@@ -263,7 +247,6 @@ class Control {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *
-	 * @access 	protected
 	 * @param 	array        $output The field output.
 	 * @param 	string|array $value  The value.
 	 *
@@ -282,63 +265,40 @@ class Control {
 		// Properties that can accept multiple values.
 		// Useful for example for gradients where all browsers use the "background-image" property
 		// and the browser prefixes go in the value_pattern arg.
-		$accepts_multiple = array(
-			'background-image',
-			'background',
-		);
+		// $accepts_multiple = array(
+		// 	'background-image',
+		// 	'background',
+		// );
 
-		if ( in_array( $output['property'], $accepts_multiple, true ) ) {
-			if (
-				isset( $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] ) && 
-				! is_array( $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] ) 
-			) {
-				$value = (array) $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ];
-				$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
-			}
-			$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ][] = $output['prefix'] . $value . $output['units'] . $output['suffix'];
-			return;
-		}
+		// if ( in_array( $output['property'], $accepts_multiple, true ) ) {
+		// 	if (
+		// 		isset( $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] ) && 
+		// 		! is_array( $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] ) 
+		// 	) {
+		// 		$value = (array) $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ];
+		// 		$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
+		// 	}
+		// 	$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ][] = $output['prefix'] . $value . $output['units'] . $output['suffix'];
+		// 	return;
+		// }
 
 		if ( is_string( $value ) || is_numeric( $value ) ) {
-			$value = $output['prefix'] . $this->process_property_value( $output['property'], $value ) . $output['units'] . $output['suffix'];
+			$value = $output['prefix'] . $value . $output['units'] . $output['suffix'];
 			$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
 		}
 	}
 
 	/**
-	 * Some CSS properties are unique.
-	 * We need to tweak the value to make everything works as expected.
-	 *
-	 * @access 	protected
-	 * @param 	string       $property The CSS property.
-	 * @param 	string|array $value    The value.
-	 *
-	 * @return 	array
-	 */
-	protected function process_property_value( $property, $value ) {
-		$properties = apply_filters( "wecodeart/filter/customizer/output/properties", [
-			'font-family' => Property\Font::class,
-		] );
-
-		if ( array_key_exists( $property, $properties ) ) {
-			$classname = $properties[ $property ];
-			return ( new $classname( $property, $value ) )->get_value();
-		}
-
-		return $value;
-	}
-
-	/**
 	 * Returns the value.
 	 *
-	 * @access 	protected
 	 * @param 	string|array $value The value.
 	 * @param 	array        $output The field "output".
+	 *
 	 * @return 	string|array
 	 */
 	protected function process_value( $value, $output ) {
 		if ( isset( $output['property'] ) ) {
-			return $this->process_property_value( $output['property'], $value );
+			return Styles::get_property_value( $output['property'], $value );
 		}
 		
 		return $value;
@@ -347,7 +307,6 @@ class Control {
 	/**
 	 * Exploses the private $styles property to the world
 	 *
-	 * @access protected
 	 * @return array
 	 */
 	public function get_styles() {

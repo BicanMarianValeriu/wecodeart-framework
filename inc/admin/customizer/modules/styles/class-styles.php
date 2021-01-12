@@ -21,6 +21,7 @@ use WeCodeArt\Core\Scripts;
 use WeCodeArt\Support\Fonts;
 use WeCodeArt\Admin\Customizer;
 use WeCodeArt\Support\FileSystem;
+use WeCodeArt\Support\Styles\Processor;
 use function WeCodeArt\Functions\compress_css;
 
 class Styles {
@@ -140,26 +141,24 @@ class Styles {
 	/**
 	 * Get the CSS for a field.
 	 *
-	 * @static
-	 * @access 	public
-	 * @param 	array $field The field.
+	 * @param 	array 	$args The field.
+	 *
 	 * @return 	array
 	 */
-	public static function process_control( $field ) {
+	public static function process_control( $args ) {
 		// Find the class that will handle the outpout for this field.
-		$classname            = 'WeCodeArt\Admin\Customizer\Modules\Styles\Control';
-
+		$classname            = Styles\Controls::class;
 		$default_classnames   = [
-			'wecodeart-fonts' => Styles\Control\Typography::class,
+			'wecodeart-fonts' => Styles\Controls\Typography::class,
 		];
 
-		$field_output_classes = apply_filters( 'wecodeart/filter/customizer/styles/fields', $default_classnames );
+		$field_output_classes = apply_filters( 'wecodeart/filter/customizer/styles/controls', $default_classnames );
 
-		if ( array_key_exists( $field['control'], $field_output_classes ) ) {
-			$classname = $field_output_classes[ $field['control'] ];
+		if ( array_key_exists( $args['control'], $field_output_classes ) ) {
+			$classname = $field_output_classes[ $args['control'] ];
 		}
 
-		$obj = new $classname( $field );
+		$obj = new $classname( $args );
 
 		return $obj->get_styles();
 	}

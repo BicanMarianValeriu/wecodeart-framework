@@ -17,10 +17,10 @@ namespace WeCodeArt\Gutenberg\Modules\Styles;
 defined( 'ABSPATH' ) || exit();
 
 use WP_REST_Request;
+use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Support\FileSystem;
 use WeCodeArt\Gutenberg\Modules\Styles;
-use function WeCodeArt\Functions\compress_css;
 
 /**
  * Class Handler
@@ -29,7 +29,7 @@ use function WeCodeArt\Functions\compress_css;
  */
 class Handler {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * The Styles Processor

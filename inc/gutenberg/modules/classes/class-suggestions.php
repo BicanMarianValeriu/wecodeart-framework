@@ -92,9 +92,12 @@ class Suggestions {
 			}
 		}
 
-		foreach( range( 1, 6 ) as $nr ) {
+		foreach( range( 1, 5 ) as $nr ) {
 			$args[] = 'display-'. $nr;
 			$args[] = 'fs-'. $nr;
+		}
+		
+		foreach( range( 1, 6 ) as $nr ) {
 			$args[] = 'h'. $nr;
 		}
 

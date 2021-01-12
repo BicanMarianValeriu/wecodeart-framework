@@ -157,8 +157,8 @@ return [
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
 	
-	<!-- wp:cover {"minHeight":300,"gradient":"vivid-cyan-blue-to-vivid-purple","contentPosition":"center center","align":"full","className":"wcacss-d54eef5b py-5 text-center","hasCustomCSS":true,"customCSS":""} -->
-	<div class="wp-block-cover alignfull has-background-dim has-background-gradient has-vivid-cyan-blue-to-vivid-purple-gradient-background wcacss-d54eef5b py-5 text-center" style="min-height:300px"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","className":"wcacss-62cbde3b mb-5 display-5","hasCustomCSS":true,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","customGradient":"linear-gradient(1deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)","align":"full","className":"wcacss-a812817b py-5 text-center","hasCustomCSS":true} -->
+	<div class="wp-block-cover alignfull has-background-dim has-background-gradient wcacss-a812817b py-5 text-center"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","className":"wcacss-62cbde3b mb-5 display-5","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true},"hasCustomCSS":true} -->
 	<h2 class="has-text-align-center wcacss-62cbde3b mb-5 display-5">Let’s work together on your <br>next web project</h2>
 	<!-- /wp:heading -->
 
