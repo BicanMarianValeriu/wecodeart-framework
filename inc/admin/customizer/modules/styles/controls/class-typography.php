@@ -16,6 +16,7 @@ namespace WeCodeArt\Admin\Customizer\Modules\Styles\Controls;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Support\Styles\Property;
 use WeCodeArt\Admin\Customizer\Formatting;
 use WeCodeArt\Admin\Customizer\Modules\Styles\Controls as Control_Processor;
 
@@ -31,66 +32,20 @@ class Typography extends Control_Processor {
 	 * @param 	array $value  The field's value.
 	 */
 	protected function process_output( $output, $value ) {
+		global $wp_customize;
+		
 		$output['media_query'] = ( isset( $output['media_query'] ) ) ? $output['media_query'] : 'global';
 		$output['element']     = ( isset( $output['element'] ) ) ? $output['element'] : 'body';
 		$output['prefix']      = ( isset( $output['prefix'] ) ) ? $output['prefix'] : '';
 		$output['suffix']      = ( isset( $output['suffix'] ) ) ? $output['suffix'] : '';
 
-		$value = Formatting::sanitize_font( $value );
-		
-		$properties = [
-			'--wca-font-sans-serif',
-			'font-family',
-			'font-size',
-			'font-weight',
-			'font-style',
-			'variant',
-			'word-spacing',
-			'letter-spacing',
-			'line-height',
-			'text-align',
-			'text-transform',
-			'text-decoration',
-			'color',
-		];
-		
-		foreach ( $properties as $property ) {
-			// Take care of variants.
-			if ( 'variant' === $property && isset( $value['variant'] ) && ! empty( $value['variant'] ) ) {
-				// Get the font_weight.
-				$font_weight = str_replace( 'italic', '', $value['variant'] );
-				$font_weight = in_array( $font_weight, [ '', 'regular' ], true ) ? '400' : $font_weight;
+		$setting	= $wp_customize->get_setting( $this->name );
+		// Sanitize with customizer (is clear anyway since this runs on Control save before adding to DB)
+		$value 		= Formatting::sanitize_font( $value, $setting );
+		// Process it and make sure is properly formatted/clear, again :)
+		$value 		= Property::get_property_value( $output['property'], $value['family'] );
+		$value 		= $output['prefix'] . $value . $output['suffix'];
 
-				// Is this italic?
-				$is_italic = ( false !== strpos( $value['variant'], 'italic' ) );
-
-				$this->styles[ $output['media_query'] ][ $output['element'] ]['font-weight'] = $font_weight;
-				
-				if ( $is_italic ) {
-					$this->styles[ $output['media_query'] ][ $output['element'] ]['font-style'] = 'italic';
-				}
-				
-				continue;
-			}
-
-			$property_value = [ '', '' ];
-			
-			if( isset( $value[ $property ] ) ) {
-				$property_value = $this->process_property_value( $property, $value[ $property ] );
-			}
-			
-			if ( $value['family'] ) {
-				$value['font-backup'] = ( isset( $value['font-backup'] ) ) ? $value['font-backup'] : '';
-				$property_value       = $this->process_property_value( $property, [
-					$value['family'],
-					$value['font-backup']
-				] );
-			}
-
-			$property       = ( isset( $output['property'] ) ) ? $output['property'] : $property;
-			$property_value = ( is_array( $property_value ) && isset( $property_value[0] ) ) ? $property_value[0] : $property_value;
-			
-			$this->styles[ $output['media_query'] ][ $output['element'] ][ $property ] = $output['prefix'] . $property_value . $output['suffix'];
-		}
+		$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
 	}
 }

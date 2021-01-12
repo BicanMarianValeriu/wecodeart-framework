@@ -31,8 +31,8 @@ final class Formatting {
 	 *
 	 * @return 	array 	choices/default.
 	 */
-	public static function sanitize_font( $input, $setting = null ) {
-		if ( ! is_array( $input ) && is_object( $setting ) ) return $setting->default;
+	public static function sanitize_font( $input, $setting ) {
+		if ( ! is_array( $input ) ) return $setting->default;
 		
 		foreach( $input as $key => $value ) {
 			// Remove unsafe data
