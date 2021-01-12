@@ -11,7 +11,6 @@ const { addFilter, removeFilter } = wp.hooks;
 const { Fragment } = wp.element;
 const { withSelect, select } = wp.data;
 const { compose, createHigherOrderComponent, withState } = wp.compose;
-const { hasBlockSupport } = wp.blocks;
 const { InspectorAdvancedControls } = wp.blockEditor;
 const { FormTokenField } = wp.components;
 
@@ -54,8 +53,6 @@ const enhance = compose(
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return enhance(({ ...props }) => {
-		const hasCustomClassName = hasBlockSupport(props.name, 'customClassName', true);
-
 		const {
 			customClassNames,
 			suggestions,
@@ -63,7 +60,7 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 			setState,
 		} = props;
 
-		if (hasCustomClassName && isSelected) {
+		if (isSelected) {
 			return (
 				<Fragment>
 					<BlockEdit {...props} />

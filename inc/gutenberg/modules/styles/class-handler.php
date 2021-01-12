@@ -114,11 +114,13 @@ class Handler {
 			return false;
 		}
 
-		$post_id = $request->get_param( 'id' );
-		self::generate_css_file( $post_id );
+		$post_id 	= $request->get_param( 'id' );
+		$file 		= $this->generate_css_file( $post_id );
 
 		return rest_ensure_response( [
-			'message' => __( 'CSS updated.', 'wecodeart' )
+			'message' 	=> __( 'CSS updated.', 'wecodeart' ),
+			'postId' 	=> $post_id,
+			'status'	=> $file ? 'updated' : 'removed'
 		] );
 	}
 
@@ -136,13 +138,21 @@ class Handler {
 			return false;
 		}
 
-		$post_id = $request->get_param( 'id' );
-		$css     = Styles::get_instance()->get_reusable_block_css( $post_id );
+		$block_id 	= $request->get_param( 'id' );
+		$css     	= Styles::get_instance()->get_reusable_block_css( $block_id );
 
-		self::save_css_file( $post_id, $css );
+		if( $css ) {
+			$this->save_css_file( $block_id, $css );
+			$status = 'updated';
+		} else {
+			$this->delete_css_file( $block_id, $css );
+			$status = 'removed';
+		}
 
 		return rest_ensure_response( [
-			'message' => __( 'CSS updated.', 'wecodeart' )
+			'message' 	=> __( 'CSS updated.', 'wecodeart' ),
+			'blockId' 	=> $block_id,
+			'status'	=> $status
 		] );
 	}
 
@@ -154,9 +164,41 @@ class Handler {
 	public function generate_css_file( $post_id ) {
 		$css = Styles::get_instance()->get_blocks_css( $post_id );
 		
-		if( trim( $css ) ) {
-			return self::save_css_file( $post_id, $css );
+		if( $css ) {
+			return $this->save_css_file( $post_id, $css );
 		}
+
+		return $this->delete_css_file( $post_id );
+	}
+
+	/**
+	 * Function to save CSS into WordPress Filesystem.
+	 *
+	 * @param   int    $post_id Post id.
+	 * @param   string $css CSS string.
+	 *
+	 * @return  bool
+	 * @since   4.2.0
+	 * @access  public
+	 */
+	public function save_css_file( $post_id, $css ) {
+		$css = $this->styles::compress( $css );
+
+		update_post_meta( $post_id, '_wca_gutenberg_block_styles', $css );
+
+		do_action( 'wecodeart/gutenberg/css/handler/save', $post_id );
+
+		$file_name = 'post-' . $post_id;
+
+		$file = $this->FS->create_file( $file_name . '.css', $css );
+
+		// If it went successfully, update meta with the filename;
+		if ( $file ) {
+			update_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', $file_name );
+			return true;
+		}
+		
+		return false;
 	}
 
 	/**
@@ -194,36 +236,6 @@ class Handler {
 	}
 
 	/**
-	 * Function to save CSS into WordPress Filesystem.
-	 *
-	 * @param   int    $post_id Post id.
-	 * @param   string $css CSS string.
-	 *
-	 * @return  bool
-	 * @since   4.2.0
-	 * @access  public
-	 */
-	public function save_css_file( $post_id, $css ) {
-		$css = $this->styles::compress( $css );
-
-		update_post_meta( $post_id, '_wca_gutenberg_block_styles', $css );
-
-		do_action( 'wecodeart/gutenberg/css/handler/save', $post_id );
-
-		$file_name = 'post-' . $post_id;
-
-		$this->FS->create_file( $file_name . '.css', $css );
-
-		// If it went successfully, update meta with the filename;
-		if ( file_exists( $this->FS->get_file_url( $file_name . '.css' ) ) ) {
-			update_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', $file_name );
-			return true;
-		}
-		
-		return false;
-	}
-
-	/**
 	 * Function to delete CSS from WordPress Filesystem.
 	 *
 	 * @param   int $post_id Post id.
@@ -237,12 +249,11 @@ class Handler {
 			return false;
 		}
 
-		// Clear Meta
 		$file_name = get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
 
-		if ( $file_name ) {
-			delete_post_meta( $post_id, '_wca_gutenberg_block_stylesheet' );
-		}
+		// Clear Meta
+		delete_post_meta( $post_id, '_wca_gutenberg_block_styles' );
+		delete_post_meta( $post_id, '_wca_gutenberg_block_stylesheet' );
 		
 		return $this->FS->delete_file( $file_name . '.css' );
 	}

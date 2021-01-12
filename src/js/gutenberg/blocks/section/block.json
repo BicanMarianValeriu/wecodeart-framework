@@ -32,6 +32,7 @@
 		"html": false,
 		"anchor": true,
 		"className": true,
+		"withBackground": true,
 		"lightBlockWrapper": true,
 		"color": {
 			"gradients": true,

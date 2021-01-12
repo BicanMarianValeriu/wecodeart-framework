@@ -47,14 +47,14 @@ export default subscribe(() => {
     getReusableBlocks.map(block => {
         if (block) {
             const isBlockSaving = isSavingReusableBlock(block.id);
-
+            
             if (isBlockSaving && !block.isTemporary) {
                 reusableBlocks[block.id] = {
                     id: block.id,
                     isSaving: true
                 };
             }
-
+            
             if (!isBlockSaving && !block.isTemporary && !!reusableBlocks[block.id]) {
                 if (block.id === reusableBlocks[block.id].id && (!isBlockSaving && reusableBlocks[block.id].isSaving)) {
                     reusableBlocks[block.id].isSaving = false;

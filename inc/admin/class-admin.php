@@ -179,6 +179,8 @@ class Admin {
 		register_rest_route( 'wecodeart/v1', '/settings', [
 			'methods'  => \WP_REST_Server::ALLMETHODS,
 			'callback' => function( $request ) {
+				global $wp_customize;
+				
 				// Unset Default Params
 				$is_mod = $request->get_param( '_mod' );
 				$params = array_filter( $request->get_params(), function( $key ) {
@@ -210,6 +212,8 @@ class Admin {
 				if( ! empty( $params ) && $request->get_param( '_filter' )) {
 					$data = array_intersect_key( $data, $params );
 				}
+
+				do_action( 'customize_save_after', $wp_customize );
 
 				return rest_ensure_response( $data );
 			},

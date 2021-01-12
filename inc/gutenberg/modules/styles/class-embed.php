@@ -109,19 +109,15 @@ class Embed {
 	/**
 	 * Enqueue CSS file
 	 *
-	 * @param int  $post_id Post id.
-	 * @param bool $footer IN footer.
+	 * @param 	int  	$post_id Post id.
+	 * @param 	bool 	$footer IN footer.
 	 *
 	 * @since   4.2.0
 	 * @access  public
 	 */
 	public function enqueue_styles( $post_id = '', $footer = false ) {
-		$post_id  = $post_id ? $post_id : get_the_ID();
+		$post_id  = $post_id ?: get_the_ID();
 		$location = 'wp_head';
-
-		if ( ! function_exists( 'has_blocks' ) ) {
-			return;
-		}
 
 		if ( ! has_blocks( $post_id ) ) {
 			return;
@@ -131,6 +127,7 @@ class Embed {
 			$location = 'wp_footer';
 		}
 
+		// If is Admin preview, just enqueue inline and bail
 		if ( is_preview() ) {
 			add_action( $location, function () use ( $post_id ) {
 				return $this->get_post_css( $post_id );
@@ -139,9 +136,15 @@ class Embed {
 			return;
 		}
 
-		if ( ! Handler::get_instance()->has_css_file( $post_id ) ) {
+		// If we have styles and we dont have a file, please generate one!
+		// Until then, enqueue meta and return, and next time move bellow!
+		if (
+			get_post_meta( $post_id, '_wca_gutenberg_block_styles', true ) && 
+			! Handler::get_instance()->has_css_file( $post_id )
+		) {
+			// Generate the file for the next time!
 			Handler::get_instance()->generate_css_file( $post_id );
-			
+
 			add_action( $location, function () use ( $post_id ) {
 				return $this->get_post_css( $post_id );
 			} );
@@ -149,13 +152,10 @@ class Embed {
 			return;
 		}
 
-		$file_url = Handler::get_instance()->get_css_url( $post_id );
-
-		$file_name = str_replace( 'css', '', basename( $file_url ) );
-
-		$content = get_post_field( 'post_content', $post_id );
-
-		$blocks = Gutenberg::parse_blocks( $content );
+		// Get Filename and URL and enqueue in footer or as usual!
+		$file_name 	= get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
+		$file_url 	= Handler::get_instance()->get_css_url( $post_id );
+		$blocks 	= Gutenberg::parse_blocks( get_post_field( 'post_content', $post_id ) );
 
 		if ( is_array( $blocks ) || ! empty( $blocks ) ) {
 			$this->enqueue_reusable_styles( $blocks, $footer );
@@ -211,11 +211,10 @@ class Embed {
 	 * @param 	string $post_id Post id.
 	 *
 	 * @since   4.2.0
-	 * @access  public
 	 */
-	public function get_post_css( $post_id = '' ) {
+	public function get_post_css( $post_id ) {
 		$post_id = $post_id ? $post_id : get_the_ID();
-		if ( function_exists( 'has_blocks' ) && has_blocks( $post_id ) ) {
+		if ( has_blocks( $post_id ) ) {
 			$css = $this->get_page_css_meta( $post_id );
 
 			if ( empty( $css ) || is_preview() ) {
@@ -230,6 +229,9 @@ class Embed {
 			$style .= $css;
 			$style .= "\n" . '</style>' . "\n";
 
+			// Note for code reviewers
+			// By this point, the content of this variable is escaped and sanitized
+			// before being inserted into DB - see class-block.php in the same folder
 			echo $style;//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
@@ -237,20 +239,17 @@ class Embed {
 	/**
 	 * Get Blocks CSS from Meta
 	 *
-	 * @param 	int $post_id Post id.
+	 * @param 	int 	$post_id Post id.
 	 *
-	 * @return 	string
 	 * @since   4.2.0
-	 * @access  public
+	 * @return 	string
 	 */
 	public function get_page_css_meta( $post_id ) {
 		$style = '';
-		if ( function_exists( 'has_blocks' ) && has_blocks( $post_id ) ) {
+		if ( has_blocks( $post_id ) ) {
 			$style .= get_post_meta( $post_id, '_wca_gutenberg_block_styles', true );
-
-			$content = get_post_field( 'post_content', $post_id );
-
-			$blocks = Gutenberg::parse_blocks( $content );
+			
+			$blocks = Gutenberg::parse_blocks( get_post_field( 'post_content', $post_id ) );
 
 			if ( ! is_array( $blocks ) || empty( $blocks ) ) {
 				return $style;
@@ -265,16 +264,15 @@ class Embed {
 	/**
 	 * Get Blocks CSS Inline
 	 *
-	 * @param 	int $post_id Post id.
+	 * @param 	int 	$post_id Post id.
 	 *
-	 * @return 	string
 	 * @since   4.2.0
-	 * @access  public
+	 * @return 	string
 	 */
 	public function get_page_css_inline( $post_id ) {
 		global $post;
 
-		if ( function_exists( 'has_blocks' ) && has_blocks( $post_id ) ) {
+		if ( has_blocks( $post_id ) ) {
 			if ( is_preview() && ( $post_id === $post->ID ) ) {
 				$content = $post->post_content;
 			} else {
@@ -296,11 +294,10 @@ class Embed {
 	/**
 	 * Get Reusable Block Meta
 	 *
-	 * @param 	array $blocks List of blocks.
+	 * @param 	array 	$blocks List of blocks.
 	 *
-	 * @return 	string
 	 * @since   4.2.0
-	 * @access  public
+	 * @return 	string
 	 */
 	public function get_reusable_block_meta( $blocks ) {
 		$style = '';
@@ -314,21 +311,16 @@ class Embed {
 			}
 		}
 
-		if ( empty( $style ) ) {
-			$style .= Styles::get_instance()->cycle_through_reusable_blocks( $blocks );
-		}
-
 		return $style;
 	}
 
 	/**
 	 * Cycle thorugh Blocks
 	 *
-	 * @param 	array $blocks List of blocks.
+	 * @param 	array 	$blocks List of blocks.
 	 *
-	 * @return 	string Block styles.
 	 * @since   4.2.0
-	 * @access  public
+	 * @return 	string 	Block styles.
 	 */
 	public function cycle_through_blocks( $blocks ) {
 		$style  = '';

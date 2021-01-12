@@ -136,6 +136,15 @@ class Gutenberg {
 			'supports'	=> [
 				'colorPalette' => get_prop( $this->config, 'palette-classnames', false ),
 			],
+			'restrictedBlocks' => apply_filters( 'wecodeart/filter/gutenberg/restricted', [
+				'core/freeform',
+				'core/shortcode',
+				'core/nextpage',
+				'core/archives',
+				'core/calendar',
+				'core/tag-cloud',
+				'core/latest-comments',
+			] )
 		];
 		wp_add_inline_script( $this->make_handle(), 'window.wecodeartInfo = ' . wp_json_encode( $global ) . ';', 'before' );
 	}

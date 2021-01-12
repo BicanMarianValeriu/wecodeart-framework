@@ -8942,6 +8942,55 @@ var settings = _objectSpread(_objectSpread({}, blockArgs), {}, {
 
 /***/ }),
 
+/***/ "./src/js/gutenberg/blocks/index.js":
+/*!******************************************!*\
+  !*** ./src/js/gutenberg/blocks/index.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _media_text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./media-text */ "./src/js/gutenberg/blocks/media-text/index.js");
+/* harmony import */ var _lorem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lorem */ "./src/js/gutenberg/blocks/lorem/index.js");
+/* harmony import */ var _section__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./section */ "./src/js/gutenberg/blocks/section/index.js");
+/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./content */ "./src/js/gutenberg/blocks/content/index.js");
+/* harmony import */ var _section_column__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./section/column */ "./src/js/gutenberg/blocks/section/column/index.js");
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+/**
+ * WP dependencies
+ */
+var registerBlockType = wp.blocks.registerBlockType;
+
+
+
+
+
+
+function registerWCABlocks() {
+  [_lorem__WEBPACK_IMPORTED_MODULE_2__["default"], _section__WEBPACK_IMPORTED_MODULE_3__["default"], _content__WEBPACK_IMPORTED_MODULE_4__["default"], _section_column__WEBPACK_IMPORTED_MODULE_5__["default"]].forEach(function (block) {
+    if (!block) return;
+    var name = block.name,
+        settings = block.settings,
+        _block$category = block.category,
+        category = _block$category === void 0 ? 'wca' : _block$category;
+    registerBlockType(name, _objectSpread(_objectSpread({}, settings), {}, {
+      category: category
+    }));
+  });
+}
+
+registerWCABlocks();
+
+/***/ }),
+
 /***/ "./src/js/gutenberg/blocks/lorem/index.js":
 /*!************************************************!*\
   !*** ./src/js/gutenberg/blocks/lorem/index.js ***!
@@ -9144,7 +9193,7 @@ applyFilters();
 /*! exports provided: name, category, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"wca/section\",\"category\":\"wca\",\"attributes\":{\"align\":{\"type\":\"string\",\"default\":\"full\"},\"verticalAlignment\":{\"type\":\"string\"},\"container\":{\"type\":\"string\",\"default\":\"container\"},\"gutter\":{\"type\":\"number\",\"default\":4},\"backgroundColor\":{\"type\":\"string\"},\"customBackgroundColor\":{\"type\":\"string\"}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false,\"anchor\":true,\"className\":true,\"lightBlockWrapper\":true,\"color\":{\"gradients\":true,\"link\":false}}}");
+module.exports = JSON.parse("{\"name\":\"wca/section\",\"category\":\"wca\",\"attributes\":{\"align\":{\"type\":\"string\",\"default\":\"full\"},\"verticalAlignment\":{\"type\":\"string\"},\"container\":{\"type\":\"string\",\"default\":\"container\"},\"gutter\":{\"type\":\"number\",\"default\":4},\"backgroundColor\":{\"type\":\"string\"},\"customBackgroundColor\":{\"type\":\"string\"}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false,\"anchor\":true,\"className\":true,\"withBackground\":true,\"lightBlockWrapper\":true,\"color\":{\"gradients\":true,\"link\":false}}}");
 
 /***/ }),
 
@@ -9155,7 +9204,7 @@ module.exports = JSON.parse("{\"name\":\"wca/section\",\"category\":\"wca\",\"at
 /*! exports provided: apiVersion, name, category, parent, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"wca/column\",\"category\":\"wca\",\"parent\":[\"wca/section\"],\"attributes\":{\"verticalAlignment\":{\"type\":\"string\"},\"bootstrapColumns\":{\"type\":\"object\",\"default\":{\"global\":\"col-12\",\"sm\":\"col-sm\",\"md\":\"\",\"lg\":\"\",\"xl\":\"\"}},\"backgroundColor\":{\"type\":\"string\"},\"customBackgroundColor\":{\"type\":\"string\"},\"templateLock\":{\"type\":\"string\"}},\"supports\":{\"html\":false,\"anchor\":true,\"className\":true,\"reusable\":false,\"lightBlockWrapper\":true,\"color\":{\"gradients\":true,\"link\":true}}}");
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"wca/column\",\"category\":\"wca\",\"parent\":[\"wca/section\"],\"attributes\":{\"verticalAlignment\":{\"type\":\"string\"},\"bootstrapColumns\":{\"type\":\"object\",\"default\":{\"global\":\"col-12\",\"sm\":\"col-sm\",\"md\":\"\",\"lg\":\"\",\"xl\":\"\"}},\"backgroundColor\":{\"type\":\"string\"},\"customBackgroundColor\":{\"type\":\"string\"},\"templateLock\":{\"type\":\"string\"}},\"supports\":{\"html\":false,\"anchor\":true,\"className\":true,\"reusable\":false,\"withBackground\":true,\"lightBlockWrapper\":true,\"color\":{\"gradients\":true,\"link\":true}}}");
 
 /***/ }),
 
@@ -11194,134 +11243,10 @@ var ResponsiveColumns = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/advanced/custom-classes/index.js":
-/*!**********************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/advanced/custom-classes/index.js ***!
-  \**********************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-/**
- * External dependencies
- */
-var _lodash = lodash,
-    split = _lodash.split,
-    replace = _lodash.replace,
-    get = _lodash.get,
-    join = _lodash.join;
-/**
- * WordPress Dependencies
- */
-
-var __ = wp.i18n.__;
-var _wp$hooks = wp.hooks,
-    addFilter = _wp$hooks.addFilter,
-    removeFilter = _wp$hooks.removeFilter;
-var Fragment = wp.element.Fragment;
-var _wp$data = wp.data,
-    withSelect = _wp$data.withSelect,
-    select = _wp$data.select;
-var _wp$compose = wp.compose,
-    compose = _wp$compose.compose,
-    createHigherOrderComponent = _wp$compose.createHigherOrderComponent,
-    withState = _wp$compose.withState;
-var hasBlockSupport = wp.blocks.hasBlockSupport;
-var InspectorAdvancedControls = wp.blockEditor.InspectorAdvancedControls;
-var FormTokenField = wp.components.FormTokenField;
-/**
- * Enhance Block
- */
-
-var enhance = compose(withState({
-  customClassNames: []
-}), withSelect(function (select, block) {
-  var selectedBlock = select('core/block-editor').getSelectedBlock();
-  var getClasses = get(selectedBlock, 'attributes.className');
-
-  if (getClasses) {
-    getClasses = replace(getClasses, ',', ' ');
-  }
-
-  if (selectedBlock && getClasses && join(block.customClassNames, ' ') !== getClasses) {
-    if (block.clientId === selectedBlock.clientId) {
-      block.setState({
-        customClassNames: split(getClasses, ' ')
-      });
-    }
-  }
-
-  var _select$getEditorSett = select('core/editor').getEditorSettings(),
-      customClasses = _select$getEditorSett.wecodeart.customClasses;
-
-  return {
-    suggestions: customClasses
-  };
-}));
-/**
- * Override the default edit UI to include a new block inspector control for
- * assigning the custom class name, if block supports custom class name.
- *
- * @param {Function} BlockEdit Original component.
- *
- * @return {string} Wrapped component.
- */
-
-var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
-  return enhance(function (_ref) {
-    var props = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, _ref);
-
-    var hasCustomClassName = hasBlockSupport(props.name, 'customClassName', true);
-    var customClassNames = props.customClassNames,
-        suggestions = props.suggestions,
-        isSelected = props.isSelected,
-        setState = props.setState;
-
-    if (hasCustomClassName && isSelected) {
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(FormTokenField, {
-        label: __('Additional CSS Class(es)', 'wecodeart'),
-        value: customClassNames,
-        suggestions: suggestions,
-        maxSuggestions: 20,
-        onChange: function onChange(val) {
-          props.setAttributes({
-            className: val !== '' ? join(val, ' ') : undefined
-          });
-          setState({
-            customClassNames: val !== '' ? val : undefined
-          });
-        }
-      })));
-    }
-
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props);
-  });
-}, 'withInspectorControl');
-/**
- * Apply Filters
- */
-
-function applyFilters() {
-  removeFilter('editor.BlockEdit', 'core/editor/custom-class-name/with-inspector-control');
-  addFilter('editor.BlockEdit', 'wecodeart/editor/custom-classes/withInspectorControl', withInspectorControl);
-}
-
-applyFilters();
-
-/***/ }),
-
-/***/ "./src/js/gutenberg/extensions/advanced/custom-css/components/editor.js":
-/*!******************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/advanced/custom-css/components/editor.js ***!
-  \******************************************************************************/
+/***/ "./src/js/gutenberg/extensions/custom-css/components/editor.js":
+/*!*********************************************************************!*\
+  !*** ./src/js/gutenberg/extensions/custom-css/components/editor.js ***!
+  \*********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11477,10 +11402,10 @@ var CSSEditor = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/advanced/custom-css/handler.js":
-/*!********************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/advanced/custom-css/handler.js ***!
-  \********************************************************************/
+/***/ "./src/js/gutenberg/extensions/custom-css/handler.js":
+/*!***********************************************************!*\
+  !*** ./src/js/gutenberg/extensions/custom-css/handler.js ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11586,10 +11511,10 @@ var reusableBlocks = {};
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/advanced/custom-css/index.js":
-/*!******************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/advanced/custom-css/index.js ***!
-  \******************************************************************/
+/***/ "./src/js/gutenberg/extensions/custom-css/index.js":
+/*!*********************************************************!*\
+  !*** ./src/js/gutenberg/extensions/custom-css/index.js ***!
+  \*********************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11597,11 +11522,10 @@ var reusableBlocks = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../attributes */ "./src/js/gutenberg/extensions/attributes/index.js");
-/* harmony import */ var _components_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/editor */ "./src/js/gutenberg/extensions/advanced/custom-css/components/editor.js");
-/* harmony import */ var _handler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./handler */ "./src/js/gutenberg/extensions/advanced/custom-css/handler.js");
-/* harmony import */ var _inject_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./inject-css */ "./src/js/gutenberg/extensions/advanced/custom-css/inject-css.js");
-/* harmony import */ var _inject_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_inject_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/editor */ "./src/js/gutenberg/extensions/custom-css/components/editor.js");
+/* harmony import */ var _handler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./handler */ "./src/js/gutenberg/extensions/custom-css/handler.js");
+/* harmony import */ var _inject_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./inject-css */ "./src/js/gutenberg/extensions/custom-css/inject-css.js");
+/* harmony import */ var _inject_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_inject_css__WEBPACK_IMPORTED_MODULE_3__);
 
 
 /**
@@ -11614,6 +11538,8 @@ var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
 var InspectorAdvancedControls = wp.blockEditor.InspectorAdvancedControls;
 var Fragment = wp.element.Fragment;
 var addFilter = wp.hooks.addFilter;
+var _wecodeartInfo = wecodeartInfo,
+    restrictedBlocks = _wecodeartInfo.restrictedBlocks;
 /**
  * Internal dependencies.
  */
@@ -11622,13 +11548,12 @@ var addFilter = wp.hooks.addFilter;
 
 
 
-
 var addAttributes = function addAttributes(props) {
   var name = props.name;
-  var isRestrictedBlock = _attributes__WEBPACK_IMPORTED_MODULE_1__["restrictedBlocks"].includes(name);
-  var hasCustomClassName = hasBlockSupport(props, 'customClassName', true);
+  var isRestrictedBlock = restrictedBlocks.includes(name);
+  var hasClassName = hasBlockSupport(name, 'className', true);
 
-  if (!isRestrictedBlock && hasCustomClassName) {
+  if (!isRestrictedBlock && hasClassName) {
     props.attributes = assign(props.attributes, {
       hasCustomCSS: {
         type: 'boolean',
@@ -11657,11 +11582,11 @@ var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
   return function (props) {
     var name = props.name,
         isSelected = props.isSelected;
-    var isRestrictedBlock = _attributes__WEBPACK_IMPORTED_MODULE_1__["restrictedBlocks"].includes(name);
-    var hasCustomClassName = hasBlockSupport(props, 'customClassName', true);
+    var isRestrictedBlock = restrictedBlocks.includes(name);
+    var hasClassName = hasBlockSupport(name, 'className', true);
 
-    if (!isRestrictedBlock && hasCustomClassName && isSelected) {
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_editor__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    if (!isRestrictedBlock && hasClassName && isSelected) {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_editor__WEBPACK_IMPORTED_MODULE_1__["default"], {
         clientId: props.clientId,
         setAttributes: props.setAttributes,
         attributes: props.attributes
@@ -11684,10 +11609,10 @@ applyFilters();
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/advanced/custom-css/inject-css.js":
-/*!***********************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/advanced/custom-css/inject-css.js ***!
-  \***********************************************************************/
+/***/ "./src/js/gutenberg/extensions/custom-css/inject-css.js":
+/*!**************************************************************!*\
+  !*** ./src/js/gutenberg/extensions/custom-css/inject-css.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -11768,18 +11693,19 @@ var subscribed = subscribe(function () {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/advanced/index.js":
-/*!*******************************************************!*\
-  !*** ./src/js/gutenberg/extensions/advanced/index.js ***!
-  \*******************************************************/
+/***/ "./src/js/gutenberg/extensions/index.js":
+/*!**********************************************!*\
+  !*** ./src/js/gutenberg/extensions/index.js ***!
+  \**********************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _custom_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./custom-classes */ "./src/js/gutenberg/extensions/advanced/custom-classes/index.js");
-/* harmony import */ var _custom_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./custom-css */ "./src/js/gutenberg/extensions/advanced/custom-css/index.js");
-/* harmony import */ var _visibility__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./visibility */ "./src/js/gutenberg/extensions/advanced/visibility/index.js");
+/* harmony import */ var _with_visibility__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./with-visibility */ "./src/js/gutenberg/extensions/with-visibility/index.js");
+/* harmony import */ var _with_background__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./with-background */ "./src/js/gutenberg/extensions/with-background/index.js");
+/* harmony import */ var _with_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./with-classes */ "./src/js/gutenberg/extensions/with-classes/index.js");
+/* harmony import */ var _custom_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./custom-css */ "./src/js/gutenberg/extensions/custom-css/index.js");
 /**
  * Internal dependencies
  */
@@ -11787,12 +11713,279 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/advanced/visibility/components/index.js":
-/*!*****************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/advanced/visibility/components/index.js ***!
-  \*****************************************************************************/
+/***/ "./src/js/gutenberg/extensions/with-background/index.js":
+/*!**************************************************************!*\
+  !*** ./src/js/gutenberg/extensions/with-background/index.js ***!
+  \**************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _controls_background__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../controls/background */ "./src/js/gutenberg/controls/background/index.js");
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+/**
+ * WordPress dependencies.
+ */
+var addFilter = wp.hooks.addFilter;
+var hasBlockSupport = wp.blocks.hasBlockSupport;
+var _wp$blockEditor = wp.blockEditor,
+    BlockControls = _wp$blockEditor.BlockControls,
+    InspectorControls = _wp$blockEditor.InspectorControls;
+var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
+var _wecodeartInfo = wecodeartInfo,
+    restrictedBlocks = _wecodeartInfo.restrictedBlocks;
+/**
+ * External Dependencies
+ */
+
+
+/**
+ * Internal dependencies.
+ */
+
+
+/**
+ * Filters registered block settings, extending attributes with anchor using ID
+ * of the first node.
+ *
+ * @param 	{Object} settings Original block settings.
+ *
+ * @return 	{Object} Filtered block settings.
+ */
+
+function addAttributes(settings) {
+  var blockName = settings.name;
+  if (restrictedBlocks.includes(blockName)) return settings;
+
+  if (hasBlockSupport(settings, 'withBackground')) {
+    settings.attributes = Object.assign(settings.attributes, _controls_background__WEBPACK_IMPORTED_MODULE_3__["attributes"]);
+  }
+
+  return settings;
+}
+/**
+ * BG Controls
+ *
+ * @param {Function} BlockEdit Original component.
+ * @return {string} Wrapped component.
+ */
+
+
+var withBackgroundControls = createHigherOrderComponent(function (BlockEdit) {
+  return function (props) {
+    var blockName = props.name,
+        isSelected = props.isSelected;
+
+    if (hasBlockSupport(blockName, 'withBackground') && isSelected) {
+      var attributes = props.attributes;
+      var backgroundUrl = attributes.backgroundUrl;
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_controls_background__WEBPACK_IMPORTED_MODULE_3__["Controls"])(props)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, backgroundUrl && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_controls_background__WEBPACK_IMPORTED_MODULE_3__["Inspector"], props)));
+    }
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props);
+  };
+}, 'withBackgroundControls');
+/**
+ * Background Styles
+ *
+ * @param {Function} BlockEdit Original component.
+ * @return {string} Wrapped component.
+ */
+
+var withBackgroundStyles = createHigherOrderComponent(function (BlockListBlock) {
+  return function (props) {
+    var blockName = props.name,
+        className = props.className;
+
+    if (hasBlockSupport(blockName, 'withBackground')) {
+      var attributes = props.attributes;
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockListBlock, _objectSpread(_objectSpread({}, props), {}, {
+        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, Object(_controls_background__WEBPACK_IMPORTED_MODULE_3__["getBackgroundClasses"])(attributes)),
+        style: Object(_controls_background__WEBPACK_IMPORTED_MODULE_3__["getBackgroundStyles"])(attributes)
+      }));
+    }
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockListBlock, props);
+  };
+}, 'withBackgroundStyles');
+/**
+ * Override props assigned to save component to inject atttributes
+ *
+ * @param {Object} extraProps Additional props applied to save element.
+ * @param {Object} blockType  Block type.
+ * @param {Object} attributes Current block attributes.
+ *
+ * @return {Object} Filtered props applied to save element.
+ */
+
+function applyExtraSettings(extraProps, blockType, attributes) {
+  var blockName = blockType.name;
+
+  if (!restrictedBlocks.includes(blockName) && hasBlockSupport(blockName, 'withBackground')) {
+    extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_2___default()(extraProps.className, Object(_controls_background__WEBPACK_IMPORTED_MODULE_3__["getBackgroundClasses"])(attributes));
+    extraProps.style = {};
+  }
+
+  return extraProps;
+}
+/**
+ * Apply Filters
+ */
+
+
+function applyFilters() {
+  addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom/attributes', addAttributes);
+  addFilter('editor.BlockListBlock', 'wecodeart/editor/withBackgroundStyles', withBackgroundStyles);
+  addFilter('editor.BlockEdit', 'wecodeart/editor/withBackgroundControls', withBackgroundControls);
+  addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/withBackground/applyExtraSettings', applyExtraSettings);
+}
+
+applyFilters();
+
+/***/ }),
+
+/***/ "./src/js/gutenberg/extensions/with-classes/index.js":
+/*!***********************************************************!*\
+  !*** ./src/js/gutenberg/extensions/with-classes/index.js ***!
+  \***********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+/**
+ * External dependencies
+ */
+var _lodash = lodash,
+    split = _lodash.split,
+    replace = _lodash.replace,
+    get = _lodash.get,
+    join = _lodash.join;
+/**
+ * WordPress Dependencies
+ */
+
+var __ = wp.i18n.__;
+var _wp$hooks = wp.hooks,
+    addFilter = _wp$hooks.addFilter,
+    removeFilter = _wp$hooks.removeFilter;
+var Fragment = wp.element.Fragment;
+var _wp$data = wp.data,
+    withSelect = _wp$data.withSelect,
+    select = _wp$data.select;
+var _wp$compose = wp.compose,
+    compose = _wp$compose.compose,
+    createHigherOrderComponent = _wp$compose.createHigherOrderComponent,
+    withState = _wp$compose.withState;
+var InspectorAdvancedControls = wp.blockEditor.InspectorAdvancedControls;
+var FormTokenField = wp.components.FormTokenField;
+/**
+ * Enhance Block
+ */
+
+var enhance = compose(withState({
+  customClassNames: []
+}), withSelect(function (select, block) {
+  var selectedBlock = select('core/block-editor').getSelectedBlock();
+  var getClasses = get(selectedBlock, 'attributes.className');
+
+  if (getClasses) {
+    getClasses = replace(getClasses, ',', ' ');
+  }
+
+  if (selectedBlock && getClasses && join(block.customClassNames, ' ') !== getClasses) {
+    if (block.clientId === selectedBlock.clientId) {
+      block.setState({
+        customClassNames: split(getClasses, ' ')
+      });
+    }
+  }
+
+  var _select$getEditorSett = select('core/editor').getEditorSettings(),
+      customClasses = _select$getEditorSett.wecodeart.customClasses;
+
+  return {
+    suggestions: customClasses
+  };
+}));
+/**
+ * Override the default edit UI to include a new block inspector control for
+ * assigning the custom class name, if block supports custom class name.
+ *
+ * @param {Function} BlockEdit Original component.
+ *
+ * @return {string} Wrapped component.
+ */
+
+var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
+  return enhance(function (_ref) {
+    var props = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, _ref);
+
+    var customClassNames = props.customClassNames,
+        suggestions = props.suggestions,
+        isSelected = props.isSelected,
+        setState = props.setState;
+
+    if (isSelected) {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(FormTokenField, {
+        label: __('Additional CSS Class(es)', 'wecodeart'),
+        value: customClassNames,
+        suggestions: suggestions,
+        maxSuggestions: 20,
+        onChange: function onChange(val) {
+          props.setAttributes({
+            className: val !== '' ? join(val, ' ') : undefined
+          });
+          setState({
+            customClassNames: val !== '' ? val : undefined
+          });
+        }
+      })));
+    }
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props);
+  });
+}, 'withInspectorControl');
+/**
+ * Apply Filters
+ */
+
+function applyFilters() {
+  removeFilter('editor.BlockEdit', 'core/editor/custom-class-name/with-inspector-control');
+  addFilter('editor.BlockEdit', 'wecodeart/editor/custom-classes/withInspectorControl', withInspectorControl);
+}
+
+applyFilters();
+
+/***/ }),
+
+/***/ "./src/js/gutenberg/extensions/with-visibility/components/index.js":
+/*!*************************************************************************!*\
+  !*** ./src/js/gutenberg/extensions/with-visibility/components/index.js ***!
+  \*************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11861,10 +12054,10 @@ var DevicesOptions = function DevicesOptions(props) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/advanced/visibility/index.js":
-/*!******************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/advanced/visibility/index.js ***!
-  \******************************************************************/
+/***/ "./src/js/gutenberg/extensions/with-visibility/index.js":
+/*!**************************************************************!*\
+  !*** ./src/js/gutenberg/extensions/with-visibility/index.js ***!
+  \**************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11874,9 +12067,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ "./src/js/gutenberg/extensions/advanced/visibility/components/index.js");
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../attributes */ "./src/js/gutenberg/extensions/attributes/index.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils */ "./src/js/gutenberg/extensions/advanced/visibility/utils.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ "./src/js/gutenberg/extensions/with-visibility/components/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./src/js/gutenberg/extensions/with-visibility/utils.js");
 
 
 /**
@@ -11888,6 +12080,8 @@ var Fragment = wp.element.Fragment;
 var InspectorControls = wp.blockEditor.InspectorControls;
 var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
 var PanelBody = wp.components.PanelBody;
+var _wecodeartInfo = wecodeartInfo,
+    restrictedBlocks = _wecodeartInfo.restrictedBlocks;
 /**
  * External Dependencies
  */
@@ -11896,7 +12090,6 @@ var PanelBody = wp.components.PanelBody;
 /**
  * Internal Dependencies
  */
-
 
 
 
@@ -11911,22 +12104,19 @@ var PanelBody = wp.components.PanelBody;
 
 function addAttributes(settings) {
   var blockName = settings.name;
-
-  if (typeof settings.attributes !== 'undefined' && !_attributes__WEBPACK_IMPORTED_MODULE_3__["restrictedBlocks"].includes(blockName)) {
-    settings.attributes = Object.assign(settings.attributes, {
-      wecodeart: {
-        type: 'object',
-        default: {
-          desktop: true,
-          tablet: true,
-          mobile: true,
-          loggedin: true,
-          loggedout: true
-        }
+  if (typeof settings.attributes === 'undefined' && restrictedBlocks.includes(blockName)) return settings;
+  settings.attributes = Object.assign(settings.attributes, {
+    wecodeart: {
+      type: 'object',
+      default: {
+        desktop: true,
+        tablet: true,
+        mobile: true,
+        loggedin: true,
+        loggedout: true
       }
-    });
-  }
-
+    }
+  });
   return settings;
 }
 /**
@@ -11942,7 +12132,7 @@ var withVisibilityControls = createHigherOrderComponent(function (BlockEdit) {
     var name = props.name,
         isSelected = props.isSelected,
         isDisabledDevices = props.isDisabledDevices;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), isSelected && !isDisabledDevices && !_attributes__WEBPACK_IMPORTED_MODULE_3__["restrictedBlocks"].includes(name) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelBody, {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), isSelected && !isDisabledDevices && !restrictedBlocks.includes(name) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelBody, {
       title: __('Visibility', 'wecodeart'),
       initialOpen: false,
       className: "wecodeart-panel"
@@ -11961,16 +12151,9 @@ var withVisibilityControls = createHigherOrderComponent(function (BlockEdit) {
 
 function applyExtraClasses(extraProps, blockType, attributes) {
   var wecodeart = attributes.wecodeart;
-  var blockName = blockType.name;
 
-  if (!_attributes__WEBPACK_IMPORTED_MODULE_3__["restrictedBlocks"].includes(blockName)) {
-    if (typeof attributes.wecodeart === 'undefined') {
-      attributes.wecodeart = Object.assign({}, attributes.wecodeart);
-    }
-
-    if (typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile || typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet || typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop) {
-      extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_1___default()(extraProps.className, Object(_utils__WEBPACK_IMPORTED_MODULE_4__["getVisibilityClasses"])(attributes));
-    }
+  if (typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile || typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet || typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop) {
+    extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_1___default()(extraProps.className, Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getVisibilityClasses"])(attributes));
   }
 
   return extraProps;
@@ -11990,10 +12173,10 @@ applyFilters();
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/advanced/visibility/utils.js":
-/*!******************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/advanced/visibility/utils.js ***!
-  \******************************************************************/
+/***/ "./src/js/gutenberg/extensions/with-visibility/utils.js":
+/*!**************************************************************!*\
+  !*** ./src/js/gutenberg/extensions/with-visibility/utils.js ***!
+  \**************************************************************/
 /*! exports provided: getVisibilityClasses */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12037,25 +12220,10 @@ var getVisibilityClasses = function getVisibilityClasses(attributes) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/attributes/index.js":
-/*!*********************************************************!*\
-  !*** ./src/js/gutenberg/extensions/attributes/index.js ***!
-  \*********************************************************/
-/*! exports provided: restrictedBlocks */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "restrictedBlocks", function() { return restrictedBlocks; });
-var restrictedBlocks = ['core/freeform', 'core/shortcode', 'core/nextpage', 'core/archives', 'core/calendar', 'core/tag-cloud', 'core/latest-comments', 'woocommerce/handpicked-products', 'woocommerce/products-by-attribute', 'woocommerce/products-by-tag', 'woocommerce/product-best-sellers', 'woocommerce/product-top-rated', 'woocommerce/product-on-sale', 'woocommerce/product-new'];
-
-
-/***/ }),
-
-/***/ "./src/js/gutenberg/extensions/formats/abbreviation/components/edit.js":
-/*!*****************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/abbreviation/components/edit.js ***!
-  \*****************************************************************************/
+/***/ "./src/js/gutenberg/formats/abbreviation/components/edit.js":
+/*!******************************************************************!*\
+  !*** ./src/js/gutenberg/formats/abbreviation/components/edit.js ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12221,17 +12389,17 @@ var Edit = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/abbreviation/index.js":
-/*!*******************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/abbreviation/index.js ***!
-  \*******************************************************************/
+/***/ "./src/js/gutenberg/formats/abbreviation/index.js":
+/*!********************************************************!*\
+  !*** ./src/js/gutenberg/formats/abbreviation/index.js ***!
+  \********************************************************/
 /*! exports provided: abbreviation */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "abbreviation", function() { return abbreviation; });
-/* harmony import */ var _components_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/edit */ "./src/js/gutenberg/extensions/formats/abbreviation/components/edit.js");
+/* harmony import */ var _components_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/edit */ "./src/js/gutenberg/formats/abbreviation/components/edit.js");
 /**
  * WordPress dependencies
  */
@@ -12260,10 +12428,10 @@ var abbreviation = {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/background-color/components/edit.js":
-/*!*********************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/background-color/components/edit.js ***!
-  \*********************************************************************************/
+/***/ "./src/js/gutenberg/formats/background-color/components/edit.js":
+/*!**********************************************************************!*\
+  !*** ./src/js/gutenberg/formats/background-color/components/edit.js ***!
+  \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12274,8 +12442,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _inline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inline */ "./src/js/gutenberg/extensions/formats/background-color/components/inline.js");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icons */ "./src/js/gutenberg/extensions/formats/background-color/components/icons.js");
+/* harmony import */ var _inline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inline */ "./src/js/gutenberg/formats/background-color/components/inline.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icons */ "./src/js/gutenberg/formats/background-color/components/icons.js");
 
 
 
@@ -12374,10 +12542,10 @@ function Edit(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/background-color/components/icons.js":
-/*!**********************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/background-color/components/icons.js ***!
-  \**********************************************************************************/
+/***/ "./src/js/gutenberg/formats/background-color/components/icons.js":
+/*!***********************************************************************!*\
+  !*** ./src/js/gutenberg/formats/background-color/components/icons.js ***!
+  \***********************************************************************/
 /*! exports provided: Format */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12410,10 +12578,10 @@ var Format = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createEleme
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/background-color/components/inline.js":
-/*!***********************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/background-color/components/inline.js ***!
-  \***********************************************************************************/
+/***/ "./src/js/gutenberg/formats/background-color/components/inline.js":
+/*!************************************************************************!*\
+  !*** ./src/js/gutenberg/formats/background-color/components/inline.js ***!
+  \************************************************************************/
 /*! exports provided: getActiveColor, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12531,17 +12699,17 @@ var InlineColorUI = function InlineColorUI(_ref2) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/background-color/index.js":
-/*!***********************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/background-color/index.js ***!
-  \***********************************************************************/
+/***/ "./src/js/gutenberg/formats/background-color/index.js":
+/*!************************************************************!*\
+  !*** ./src/js/gutenberg/formats/background-color/index.js ***!
+  \************************************************************/
 /*! exports provided: backgroundColor */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "backgroundColor", function() { return backgroundColor; });
-/* harmony import */ var _components_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/edit */ "./src/js/gutenberg/extensions/formats/background-color/components/edit.js");
+/* harmony import */ var _components_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/edit */ "./src/js/gutenberg/formats/background-color/components/edit.js");
 /**
  * WordPress dependencies
  */
@@ -12570,10 +12738,10 @@ var backgroundColor = {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/clear/controls.js":
-/*!***************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/clear/controls.js ***!
-  \***************************************************************/
+/***/ "./src/js/gutenberg/formats/clear/controls.js":
+/*!****************************************************!*\
+  !*** ./src/js/gutenberg/formats/clear/controls.js ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12593,7 +12761,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icon */ "./src/js/gutenberg/extensions/formats/clear/icon.js");
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icon */ "./src/js/gutenberg/formats/clear/icon.js");
 
 
 
@@ -12689,10 +12857,10 @@ var ClearFormatting = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/clear/icon.js":
-/*!***********************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/clear/icon.js ***!
-  \***********************************************************/
+/***/ "./src/js/gutenberg/formats/clear/icon.js":
+/*!************************************************!*\
+  !*** ./src/js/gutenberg/formats/clear/icon.js ***!
+  \************************************************/
 /*! exports provided: Format */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12743,10 +12911,10 @@ var Format = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createEleme
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/clear/index.js":
-/*!************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/clear/index.js ***!
-  \************************************************************/
+/***/ "./src/js/gutenberg/formats/clear/index.js":
+/*!*************************************************!*\
+  !*** ./src/js/gutenberg/formats/clear/index.js ***!
+  \*************************************************/
 /*! exports provided: clear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12755,7 +12923,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clear", function() { return clear; });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls */ "./src/js/gutenberg/extensions/formats/clear/controls.js");
+/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls */ "./src/js/gutenberg/formats/clear/controls.js");
 
 
 /**
@@ -12794,10 +12962,10 @@ var clear = {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/index.js":
-/*!******************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/index.js ***!
-  \******************************************************/
+/***/ "./src/js/gutenberg/formats/index.js":
+/*!*******************************************!*\
+  !*** ./src/js/gutenberg/formats/index.js ***!
+  \*******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12805,12 +12973,12 @@ var clear = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js");
 /* harmony import */ var _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _markdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./markdown */ "./src/js/gutenberg/extensions/formats/markdown/index.js");
-/* harmony import */ var _clear__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./clear */ "./src/js/gutenberg/extensions/formats/clear/index.js");
-/* harmony import */ var _abbreviation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./abbreviation */ "./src/js/gutenberg/extensions/formats/abbreviation/index.js");
-/* harmony import */ var _justify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./justify */ "./src/js/gutenberg/extensions/formats/justify/index.js");
-/* harmony import */ var _underline__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./underline */ "./src/js/gutenberg/extensions/formats/underline/index.js");
-/* harmony import */ var _background_color__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./background-color */ "./src/js/gutenberg/extensions/formats/background-color/index.js");
+/* harmony import */ var _markdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./markdown */ "./src/js/gutenberg/formats/markdown/index.js");
+/* harmony import */ var _clear__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./clear */ "./src/js/gutenberg/formats/clear/index.js");
+/* harmony import */ var _abbreviation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./abbreviation */ "./src/js/gutenberg/formats/abbreviation/index.js");
+/* harmony import */ var _justify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./justify */ "./src/js/gutenberg/formats/justify/index.js");
+/* harmony import */ var _underline__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./underline */ "./src/js/gutenberg/formats/underline/index.js");
+/* harmony import */ var _background_color__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./background-color */ "./src/js/gutenberg/formats/background-color/index.js");
 
 
 /**
@@ -12845,10 +13013,10 @@ wp.domReady(registerWeCodeArtFormats);
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/justify/controls.js":
-/*!*****************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/justify/controls.js ***!
-  \*****************************************************************/
+/***/ "./src/js/gutenberg/formats/justify/controls.js":
+/*!******************************************************!*\
+  !*** ./src/js/gutenberg/formats/justify/controls.js ***!
+  \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12965,10 +13133,10 @@ var JustifyControl = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/justify/index.js":
-/*!**************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/justify/index.js ***!
-  \**************************************************************/
+/***/ "./src/js/gutenberg/formats/justify/index.js":
+/*!***************************************************!*\
+  !*** ./src/js/gutenberg/formats/justify/index.js ***!
+  \***************************************************/
 /*! exports provided: justify */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12977,7 +13145,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "justify", function() { return justify; });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls */ "./src/js/gutenberg/extensions/formats/justify/controls.js");
+/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls */ "./src/js/gutenberg/formats/justify/controls.js");
 
 
 /**
@@ -13019,10 +13187,10 @@ var justify = {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/markdown/controls.js":
-/*!******************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/markdown/controls.js ***!
-  \******************************************************************/
+/***/ "./src/js/gutenberg/formats/markdown/controls.js":
+/*!*******************************************************!*\
+  !*** ./src/js/gutenberg/formats/markdown/controls.js ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13040,7 +13208,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _get_active_formats__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./get-active-formats */ "./src/js/gutenberg/extensions/formats/markdown/get-active-formats.js");
+/* harmony import */ var _get_active_formats__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./get-active-formats */ "./src/js/gutenberg/formats/markdown/get-active-formats.js");
 
 
 
@@ -13228,10 +13396,10 @@ var MarkdownControl = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/markdown/get-active-formats.js":
-/*!****************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/markdown/get-active-formats.js ***!
-  \****************************************************************************/
+/***/ "./src/js/gutenberg/formats/markdown/get-active-formats.js":
+/*!*****************************************************************!*\
+  !*** ./src/js/gutenberg/formats/markdown/get-active-formats.js ***!
+  \*****************************************************************/
 /*! exports provided: getActiveFormats */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13278,10 +13446,10 @@ function getActiveFormats(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/markdown/index.js":
-/*!***************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/markdown/index.js ***!
-  \***************************************************************/
+/***/ "./src/js/gutenberg/formats/markdown/index.js":
+/*!****************************************************!*\
+  !*** ./src/js/gutenberg/formats/markdown/index.js ***!
+  \****************************************************/
 /*! exports provided: markdown */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13290,7 +13458,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markdown", function() { return markdown; });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls */ "./src/js/gutenberg/extensions/formats/markdown/controls.js");
+/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls */ "./src/js/gutenberg/formats/markdown/controls.js");
 
 
 /**
@@ -13332,10 +13500,10 @@ var markdown = {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/underline/icon.js":
-/*!***************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/underline/icon.js ***!
-  \***************************************************************/
+/***/ "./src/js/gutenberg/formats/underline/icon.js":
+/*!****************************************************!*\
+  !*** ./src/js/gutenberg/formats/underline/icon.js ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13365,10 +13533,10 @@ var _wp$components = wp.components,
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/formats/underline/index.js":
-/*!****************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/formats/underline/index.js ***!
-  \****************************************************************/
+/***/ "./src/js/gutenberg/formats/underline/index.js":
+/*!*****************************************************!*\
+  !*** ./src/js/gutenberg/formats/underline/index.js ***!
+  \*****************************************************/
 /*! exports provided: underline */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13377,7 +13545,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "underline", function() { return underline; });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./icon */ "./src/js/gutenberg/extensions/formats/underline/icon.js");
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./icon */ "./src/js/gutenberg/formats/underline/icon.js");
 
 
 /**
@@ -13436,181 +13604,79 @@ var underline = {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/modules/index.js":
-/*!******************************************************!*\
-  !*** ./src/js/gutenberg/extensions/modules/index.js ***!
-  \******************************************************/
+/***/ "./src/js/gutenberg/gutenberg.js":
+/*!***************************************!*\
+  !*** ./src/js/gutenberg/gutenberg.js ***!
+  \***************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _with_background__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./with-background */ "./src/js/gutenberg/extensions/modules/with-background/index.js");
-/**
- * Internal dependencies
- */
+/* harmony import */ var _scss_gutenberg_gutenberg_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../scss/gutenberg/gutenberg.scss */ "./src/scss/gutenberg/gutenberg.scss");
+/* harmony import */ var _scss_gutenberg_gutenberg_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_gutenberg_gutenberg_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _extensions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./extensions */ "./src/js/gutenberg/extensions/index.js");
+/* harmony import */ var _blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./blocks */ "./src/js/gutenberg/blocks/index.js");
+/* harmony import */ var _plugins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins */ "./src/js/gutenberg/plugins/index.js");
+/* harmony import */ var _formats__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./formats */ "./src/js/gutenberg/formats/index.js");
+/* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles */ "./src/js/gutenberg/styles/index.js");
+// SCSS
+ // Block Panels
+
+ // Blocks
+
+ // Plugins
+
+ // Formats
+
+ // Styles
+
 
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/modules/with-background/index.js":
-/*!**********************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/modules/with-background/index.js ***!
-  \**********************************************************************/
-/*! no exports provided */
+/***/ "./src/js/gutenberg/helpers/index.js":
+/*!*******************************************!*\
+  !*** ./src/js/gutenberg/helpers/index.js ***!
+  \*******************************************/
+/*! exports provided: overlayToClass, pickRelevantMediaFiles, ALLOWED_GALLERY_MEDIA_TYPES */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _controls_background__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../controls/background */ "./src/js/gutenberg/controls/background/index.js");
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../attributes */ "./src/js/gutenberg/extensions/attributes/index.js");
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "overlayToClass", function() { return overlayToClass; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pickRelevantMediaFiles", function() { return pickRelevantMediaFiles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ALLOWED_GALLERY_MEDIA_TYPES", function() { return ALLOWED_GALLERY_MEDIA_TYPES; });
 /**
- * WordPress dependencies.
+ * External dependencies
  */
-var addFilter = wp.hooks.addFilter;
-var Fragment = wp.element.Fragment;
-var hasBlockSupport = wp.blocks.hasBlockSupport;
-var _wp$blockEditor = wp.blockEditor,
-    BlockControls = _wp$blockEditor.BlockControls,
-    InspectorControls = _wp$blockEditor.InspectorControls;
-var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
-/**
- * External Dependencies
- */
+var _lodash = lodash,
+    pick = _lodash.pick,
+    get = _lodash.get,
+    findIndex = _lodash.findIndex; // Set dim ratio.
 
+function overlayToClass(ratio) {
+  return ratio === 0 || ratio === 50 ? null : 'has-background-overlay-' + 10 * Math.round(ratio / 10);
+} // Pick image media attributes.
 
-/**
- * Internal dependencies.
- */
+var pickRelevantMediaFiles = function pickRelevantMediaFiles(image, images) {
+  var imageProps = pick(image, ['alt', 'id', 'link', 'caption', 'imgLink']);
+  imageProps.url = get(image, ['sizes', 'large', 'url']) || get(image, ['media_details', 'sizes', 'large', 'source_url']) || image.url;
+  var imgKey = findIndex(images, function (img) {
+    return img.url === imageProps.url;
+  });
+  imageProps.imgLink = imgKey >= 0 ? images[imgKey].imgLink : '';
+  return imageProps;
+}; // Define accepted media for gallery blocks.
 
-
-
-var blocksWithBackgrounds = ['core/columns', 'core/column', 'wca/section', 'wca/column'];
-/**
- * Filters registered block settings, extending attributes with anchor using ID
- * of the first node.
- *
- * @param 	{Object} settings Original block settings.
- *
- * @return 	{Object} Filtered block settings.
- */
-
-function addAttributes(settings) {
-  var blockName = settings.name;
-
-  if (typeof settings.attributes !== 'undefined' && !_attributes__WEBPACK_IMPORTED_MODULE_4__["restrictedBlocks"].includes(blockName)) {
-    if (blocksWithBackgrounds.includes(blockName)) {
-      if (!settings.supports) {
-        settings.supports = {};
-      }
-
-      settings.supports = Object.assign(settings.supports, {
-        withBackground: true
-      });
-      settings.attributes = Object.assign(settings.attributes, _controls_background__WEBPACK_IMPORTED_MODULE_3__["attributes"]);
-    }
-  }
-
-  return settings;
-}
-/**
- * BG Controls
- *
- * @param {Function} BlockEdit Original component.
- * @return {string} Wrapped component.
- */
-
-
-var withBackgroundControls = createHigherOrderComponent(function (BlockEdit) {
-  return function (props) {
-    var blockName = props.name,
-        isSelected = props.isSelected;
-
-    if (!_attributes__WEBPACK_IMPORTED_MODULE_4__["restrictedBlocks"].includes(blockName) && hasBlockSupport(blockName, 'withBackground') && isSelected) {
-      var attributes = props.attributes;
-      var backgroundUrl = attributes.backgroundUrl;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_controls_background__WEBPACK_IMPORTED_MODULE_3__["Controls"])(props)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, backgroundUrl && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_controls_background__WEBPACK_IMPORTED_MODULE_3__["Inspector"], props)));
-    }
-
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props);
-  };
-}, 'withBackgroundControls');
-/**
- * Background Styles
- *
- * @param {Function} BlockEdit Original component.
- * @return {string} Wrapped component.
- */
-
-var withBackgroundStyles = createHigherOrderComponent(function (BlockListBlock) {
-  return function (props) {
-    var blockName = props.name,
-        className = props.className;
-
-    if (!_attributes__WEBPACK_IMPORTED_MODULE_4__["restrictedBlocks"].includes(blockName) && hasBlockSupport(blockName, 'withBackground')) {
-      var attributes = props.attributes;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockListBlock, _objectSpread(_objectSpread({}, props), {}, {
-        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, Object(_controls_background__WEBPACK_IMPORTED_MODULE_3__["getBackgroundClasses"])(attributes)),
-        style: Object(_controls_background__WEBPACK_IMPORTED_MODULE_3__["getBackgroundStyles"])(attributes)
-      }));
-    }
-
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockListBlock, props);
-  };
-}, 'withBackgroundStyles');
-/**
- * Override props assigned to save component to inject atttributes
- *
- * @param {Object} extraProps Additional props applied to save element.
- * @param {Object} blockType  Block type.
- * @param {Object} attributes Current block attributes.
- *
- * @return {Object} Filtered props applied to save element.
- */
-
-function applyExtraSettings(extraProps, blockType, attributes) {
-  var blockName = blockType.name;
-
-  if (!_attributes__WEBPACK_IMPORTED_MODULE_4__["restrictedBlocks"].includes(blockName) && hasBlockSupport(blockName, 'withBackground')) {
-    extraProps.className = classnames__WEBPACK_IMPORTED_MODULE_2___default()(extraProps.className, Object(_controls_background__WEBPACK_IMPORTED_MODULE_3__["getBackgroundClasses"])(attributes));
-    extraProps.style = {};
-  }
-
-  return extraProps;
-}
-/**
- * Apply Filters
- */
-
-
-function applyFilters() {
-  addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom/attributes', addAttributes);
-  addFilter('editor.BlockListBlock', 'wecodeart/editor/withBackgroundStyles', withBackgroundStyles);
-  addFilter('editor.BlockEdit', 'wecodeart/editor/withBackgroundControls', withBackgroundControls);
-  addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/withBackground/applyExtraSettings', applyExtraSettings);
-}
-
-applyFilters();
+var ALLOWED_GALLERY_MEDIA_TYPES = ['image'];
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/builder-template/components/controls.js":
-/*!*************************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/builder-template/components/controls.js ***!
-  \*************************************************************************************/
+/***/ "./src/js/gutenberg/plugins/builder-template/components/controls.js":
+/*!**************************************************************************!*\
+  !*** ./src/js/gutenberg/plugins/builder-template/components/controls.js ***!
+  \**************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13722,16 +13788,16 @@ var BuilderTemplate = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/builder-template/index.js":
-/*!***********************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/builder-template/index.js ***!
-  \***********************************************************************/
+/***/ "./src/js/gutenberg/plugins/builder-template/index.js":
+/*!************************************************************!*\
+  !*** ./src/js/gutenberg/plugins/builder-template/index.js ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/extensions/plugins/builder-template/components/controls.js");
+/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/plugins/builder-template/components/controls.js");
 /**
  * Internal dependencies
  */
@@ -13743,10 +13809,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/clear-formatting/components/controls.js":
-/*!*************************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/clear-formatting/components/controls.js ***!
-  \*************************************************************************************/
+/***/ "./src/js/gutenberg/plugins/clear-formatting/components/controls.js":
+/*!**************************************************************************!*\
+  !*** ./src/js/gutenberg/plugins/clear-formatting/components/controls.js ***!
+  \**************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13883,16 +13949,16 @@ var ClearBlockFormatting = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/clear-formatting/index.js":
-/*!***********************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/clear-formatting/index.js ***!
-  \***********************************************************************/
+/***/ "./src/js/gutenberg/plugins/clear-formatting/index.js":
+/*!************************************************************!*\
+  !*** ./src/js/gutenberg/plugins/clear-formatting/index.js ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/extensions/plugins/clear-formatting/components/controls.js");
+/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/plugins/clear-formatting/components/controls.js");
 /**
  * Internal dependencies
  */
@@ -13904,10 +13970,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/code-editor/components/code-editor.js":
-/*!***********************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/code-editor/components/code-editor.js ***!
-  \***********************************************************************************/
+/***/ "./src/js/gutenberg/plugins/code-editor/components/code-editor.js":
+/*!************************************************************************!*\
+  !*** ./src/js/gutenberg/plugins/code-editor/components/code-editor.js ***!
+  \************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14041,16 +14107,16 @@ var CodeEditor = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/code-editor/index.js":
-/*!******************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/code-editor/index.js ***!
-  \******************************************************************/
+/***/ "./src/js/gutenberg/plugins/code-editor/index.js":
+/*!*******************************************************!*\
+  !*** ./src/js/gutenberg/plugins/code-editor/index.js ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_code_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/code-editor */ "./src/js/gutenberg/extensions/plugins/code-editor/components/code-editor.js");
+/* harmony import */ var _components_code_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/code-editor */ "./src/js/gutenberg/plugins/code-editor/components/code-editor.js");
 /**
  * Internal dependencies
  */
@@ -14062,10 +14128,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/disable-title/components/controls.js":
-/*!**********************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/disable-title/components/controls.js ***!
-  \**********************************************************************************/
+/***/ "./src/js/gutenberg/plugins/disable-title/components/controls.js":
+/*!***********************************************************************!*\
+  !*** ./src/js/gutenberg/plugins/disable-title/components/controls.js ***!
+  \***********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14215,16 +14281,16 @@ var DisableTitle = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/disable-title/index.js":
-/*!********************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/disable-title/index.js ***!
-  \********************************************************************/
+/***/ "./src/js/gutenberg/plugins/disable-title/index.js":
+/*!*********************************************************!*\
+  !*** ./src/js/gutenberg/plugins/disable-title/index.js ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/extensions/plugins/disable-title/components/controls.js");
+/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/plugins/disable-title/components/controls.js");
 /**
  * Internal dependencies
  */
@@ -14236,10 +14302,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/heading-label/components/controls.js":
-/*!**********************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/heading-label/components/controls.js ***!
-  \**********************************************************************************/
+/***/ "./src/js/gutenberg/plugins/heading-label/components/controls.js":
+/*!***********************************************************************!*\
+  !*** ./src/js/gutenberg/plugins/heading-label/components/controls.js ***!
+  \***********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14326,16 +14392,16 @@ var HeadingLabel = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/heading-label/index.js":
-/*!********************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/heading-label/index.js ***!
-  \********************************************************************/
+/***/ "./src/js/gutenberg/plugins/heading-label/index.js":
+/*!*********************************************************!*\
+  !*** ./src/js/gutenberg/plugins/heading-label/index.js ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/extensions/plugins/heading-label/components/controls.js");
+/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/plugins/heading-label/components/controls.js");
 /**
  * Internal dependencies
  */
@@ -14347,22 +14413,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/index.js":
-/*!******************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/index.js ***!
-  \******************************************************/
+/***/ "./src/js/gutenberg/plugins/index.js":
+/*!*******************************************!*\
+  !*** ./src/js/gutenberg/plugins/index.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return registerWCAPlugins; });
-/* harmony import */ var _markdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./markdown */ "./src/js/gutenberg/extensions/plugins/markdown/index.js");
-/* harmony import */ var _code_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./code-editor */ "./src/js/gutenberg/extensions/plugins/code-editor/index.js");
-/* harmony import */ var _disable_title__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./disable-title */ "./src/js/gutenberg/extensions/plugins/disable-title/index.js");
-/* harmony import */ var _heading_label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./heading-label */ "./src/js/gutenberg/extensions/plugins/heading-label/index.js");
-/* harmony import */ var _clear_formatting__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./clear-formatting */ "./src/js/gutenberg/extensions/plugins/clear-formatting/index.js");
-/* harmony import */ var _builder_template__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./builder-template */ "./src/js/gutenberg/extensions/plugins/builder-template/index.js");
+/* harmony import */ var _markdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./markdown */ "./src/js/gutenberg/plugins/markdown/index.js");
+/* harmony import */ var _code_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./code-editor */ "./src/js/gutenberg/plugins/code-editor/index.js");
+/* harmony import */ var _disable_title__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./disable-title */ "./src/js/gutenberg/plugins/disable-title/index.js");
+/* harmony import */ var _heading_label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./heading-label */ "./src/js/gutenberg/plugins/heading-label/index.js");
+/* harmony import */ var _clear_formatting__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./clear-formatting */ "./src/js/gutenberg/plugins/clear-formatting/index.js");
+/* harmony import */ var _builder_template__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./builder-template */ "./src/js/gutenberg/plugins/builder-template/index.js");
 /**
  * Internal dependencies
  */
@@ -14388,10 +14454,10 @@ registerWCAPlugins();
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/markdown/components/config.js":
-/*!***************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/markdown/components/config.js ***!
-  \***************************************************************************/
+/***/ "./src/js/gutenberg/plugins/markdown/components/config.js":
+/*!****************************************************************!*\
+  !*** ./src/js/gutenberg/plugins/markdown/components/config.js ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14439,10 +14505,10 @@ var markdownShortcuts = {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/markdown/components/menu.js":
-/*!*************************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/markdown/components/menu.js ***!
-  \*************************************************************************/
+/***/ "./src/js/gutenberg/plugins/markdown/components/menu.js":
+/*!**************************************************************!*\
+  !*** ./src/js/gutenberg/plugins/markdown/components/menu.js ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14462,7 +14528,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./config */ "./src/js/gutenberg/extensions/plugins/markdown/components/config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./config */ "./src/js/gutenberg/plugins/markdown/components/config.js");
 
 
 
@@ -14622,16 +14688,16 @@ var MarkdownFormatting = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/plugins/markdown/index.js":
-/*!***************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/plugins/markdown/index.js ***!
-  \***************************************************************/
+/***/ "./src/js/gutenberg/plugins/markdown/index.js":
+/*!****************************************************!*\
+  !*** ./src/js/gutenberg/plugins/markdown/index.js ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/menu */ "./src/js/gutenberg/extensions/plugins/markdown/components/menu.js");
+/* harmony import */ var _components_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/menu */ "./src/js/gutenberg/plugins/markdown/components/menu.js");
 /**
  * Internal dependencies
  */
@@ -14643,10 +14709,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/styles/buttons/index.js":
-/*!*************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/styles/buttons/index.js ***!
-  \*************************************************************/
+/***/ "./src/js/gutenberg/styles/buttons/index.js":
+/*!**************************************************!*\
+  !*** ./src/js/gutenberg/styles/buttons/index.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14681,16 +14747,16 @@ var buttons = {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/styles/index.js":
-/*!*****************************************************!*\
-  !*** ./src/js/gutenberg/extensions/styles/index.js ***!
-  \*****************************************************/
+/***/ "./src/js/gutenberg/styles/index.js":
+/*!******************************************!*\
+  !*** ./src/js/gutenberg/styles/index.js ***!
+  \******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _buttons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./buttons */ "./src/js/gutenberg/extensions/styles/buttons/index.js");
+/* harmony import */ var _buttons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./buttons */ "./src/js/gutenberg/styles/buttons/index.js");
 /**
  * WP dependencies
  */
@@ -14707,112 +14773,6 @@ function registerWCAStyles() {
 }
 
 registerWCAStyles();
-
-/***/ }),
-
-/***/ "./src/js/gutenberg/gutenberg.js":
-/*!***************************************!*\
-  !*** ./src/js/gutenberg/gutenberg.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return registerWCABlocks; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _extensions_attributes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./extensions/attributes */ "./src/js/gutenberg/extensions/attributes/index.js");
-/* harmony import */ var _blocks_media_text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./blocks/media-text */ "./src/js/gutenberg/blocks/media-text/index.js");
-/* harmony import */ var _extensions_modules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./extensions/modules */ "./src/js/gutenberg/extensions/modules/index.js");
-/* harmony import */ var _extensions_advanced__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./extensions/advanced */ "./src/js/gutenberg/extensions/advanced/index.js");
-/* harmony import */ var _extensions_plugins__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./extensions/plugins */ "./src/js/gutenberg/extensions/plugins/index.js");
-/* harmony import */ var _extensions_formats__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./extensions/formats */ "./src/js/gutenberg/extensions/formats/index.js");
-/* harmony import */ var _extensions_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./extensions/styles */ "./src/js/gutenberg/extensions/styles/index.js");
-/* harmony import */ var _blocks_lorem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./blocks/lorem */ "./src/js/gutenberg/blocks/lorem/index.js");
-/* harmony import */ var _blocks_section__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./blocks/section */ "./src/js/gutenberg/blocks/section/index.js");
-/* harmony import */ var _blocks_content__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./blocks/content */ "./src/js/gutenberg/blocks/content/index.js");
-/* harmony import */ var _blocks_section_column__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./blocks/section/column */ "./src/js/gutenberg/blocks/section/column/index.js");
-/* harmony import */ var _scss_gutenberg_gutenberg_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./../../scss/gutenberg/gutenberg.scss */ "./src/scss/gutenberg/gutenberg.scss");
-/* harmony import */ var _scss_gutenberg_gutenberg_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_scss_gutenberg_gutenberg_scss__WEBPACK_IMPORTED_MODULE_12__);
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-var registerBlockType = wp.blocks.registerBlockType; // Attributes
-
- // Core Blocks
-
- // Block Panels
-
-
- // Plugins
-
- // Formats
-
- // Styles
-
- // Custom Blocks
-
-
-
-
- // SCSS
-
-
-function registerWCABlocks() {
-  [_blocks_lorem__WEBPACK_IMPORTED_MODULE_8__["default"], _blocks_section__WEBPACK_IMPORTED_MODULE_9__["default"], _blocks_content__WEBPACK_IMPORTED_MODULE_10__["default"], _blocks_section_column__WEBPACK_IMPORTED_MODULE_11__["default"]].forEach(function (block) {
-    if (!block) return;
-    var name = block.name,
-        settings = block.settings,
-        _block$category = block.category,
-        category = _block$category === void 0 ? 'wca' : _block$category;
-    registerBlockType(name, _objectSpread(_objectSpread({}, settings), {}, {
-      category: category
-    }));
-  });
-}
-registerWCABlocks();
-
-/***/ }),
-
-/***/ "./src/js/gutenberg/helpers/index.js":
-/*!*******************************************!*\
-  !*** ./src/js/gutenberg/helpers/index.js ***!
-  \*******************************************/
-/*! exports provided: overlayToClass, pickRelevantMediaFiles, ALLOWED_GALLERY_MEDIA_TYPES */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "overlayToClass", function() { return overlayToClass; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pickRelevantMediaFiles", function() { return pickRelevantMediaFiles; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ALLOWED_GALLERY_MEDIA_TYPES", function() { return ALLOWED_GALLERY_MEDIA_TYPES; });
-/**
- * External dependencies
- */
-var _lodash = lodash,
-    pick = _lodash.pick,
-    get = _lodash.get,
-    findIndex = _lodash.findIndex; // Set dim ratio.
-
-function overlayToClass(ratio) {
-  return ratio === 0 || ratio === 50 ? null : 'has-background-overlay-' + 10 * Math.round(ratio / 10);
-} // Pick image media attributes.
-
-var pickRelevantMediaFiles = function pickRelevantMediaFiles(image, images) {
-  var imageProps = pick(image, ['alt', 'id', 'link', 'caption', 'imgLink']);
-  imageProps.url = get(image, ['sizes', 'large', 'url']) || get(image, ['media_details', 'sizes', 'large', 'source_url']) || image.url;
-  var imgKey = findIndex(images, function (img) {
-    return img.url === imageProps.url;
-  });
-  imageProps.imgLink = imgKey >= 0 ? images[imgKey].imgLink : '';
-  return imageProps;
-}; // Define accepted media for gallery blocks.
-
-var ALLOWED_GALLERY_MEDIA_TYPES = ['image'];
 
 /***/ }),
 

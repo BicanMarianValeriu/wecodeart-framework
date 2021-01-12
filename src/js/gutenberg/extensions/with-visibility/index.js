@@ -7,6 +7,7 @@ const { Fragment } = wp.element;
 const { InspectorControls } = wp.blockEditor;
 const { createHigherOrderComponent } = wp.compose;
 const { PanelBody } = wp.components;
+const { restrictedBlocks } = wecodeartInfo;
 
 /**
  * External Dependencies
@@ -17,7 +18,6 @@ import classnames from 'classnames';
  * Internal Dependencies
  */
 import DevicesOptions from './components';
-import { restrictedBlocks } from '../../attributes';
 import { getVisibilityClasses } from './utils';
 
 /**
@@ -30,20 +30,20 @@ import { getVisibilityClasses } from './utils';
  */
 function addAttributes(settings) {
 	const { name: blockName } = settings;
-	if (typeof settings.attributes !== 'undefined' && !restrictedBlocks.includes(blockName)) {
-		settings.attributes = Object.assign(settings.attributes, {
-			wecodeart: {
-				type: 'object',
-				default: {
-					desktop: true,
-					tablet: true,
-					mobile: true,
-					loggedin: true,
-					loggedout: true,
-				},
+	if (typeof settings.attributes === 'undefined' && restrictedBlocks.includes(blockName)) return settings;
+
+	settings.attributes = Object.assign(settings.attributes, {
+		wecodeart: {
+			type: 'object',
+			default: {
+				desktop: true,
+				tablet: true,
+				mobile: true,
+				loggedin: true,
+				loggedout: true,
 			},
-		});
-	}
+		},
+	});
 
 	return settings;
 }
@@ -95,20 +95,13 @@ const withVisibilityControls = createHigherOrderComponent((BlockEdit) => {
  */
 function applyExtraClasses(extraProps, blockType, attributes) {
 	const { wecodeart } = attributes;
-	const { name: blockName } = blockType;
 
-	if (!restrictedBlocks.includes(blockName) ) {
-		if (typeof attributes.wecodeart === 'undefined') {
-			attributes.wecodeart = Object.assign({}, attributes.wecodeart);
-		}
-		
-		if (
-			typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile ||
-			typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet ||
-			typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop
-		) {
-			extraProps.className = classnames(extraProps.className, getVisibilityClasses(attributes));
-		}
+	if (
+		typeof wecodeart.mobile !== 'undefined' && !wecodeart.mobile ||
+		typeof wecodeart.tablet !== 'undefined' && !wecodeart.tablet ||
+		typeof wecodeart.desktop !== 'undefined' && !wecodeart.desktop
+	) {
+		extraProps.className = classnames(extraProps.className, getVisibilityClasses(attributes));
 	}
 
 	return extraProps;

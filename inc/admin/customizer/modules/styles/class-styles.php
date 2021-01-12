@@ -99,14 +99,10 @@ class Styles {
 	 * @access 	public
 	 */
 	public function generate_styles( $wp_customize ) {
-		$fields = Customizer::get_instance()->get_configurations( $wp_customize );
 		$css    = [];
-
-		// Early exit if no fields are found.
-		if ( empty( $fields ) ) {
-			return;
-		}
-
+		
+		// Controls CSS
+		$fields = Customizer::get_instance()->get_configurations( $wp_customize );
 		foreach( $fields as $control ) {
 			// Only continue if $control['output'] is set.
 			if ( isset( $control['output'] ) && ! empty( $control['output'] ) ) {
@@ -117,22 +113,23 @@ class Styles {
 			}
 		}
 
+		// Custom CSS
+		$css = array_replace_recursive( $css, $this->styles::break_queries( wp_get_custom_css() ) );
+
+		// Covert CSS to string
 		if ( is_array( $css ) ) {
 			$css = $this->styles::parse( $this->styles::add_prefixes( $css ) );
 		}
 
-		// Get Font Files
+		// Google Font CSS
 		$fonts 			= '';
 		$google_fonts 	= $this->fonts->google->process_fonts();
-		foreach( $google_fonts as $font ) {
-			$fonts .= $this->fonts->google->get_styles( $font );
-		}
+		foreach( $google_fonts as $font ) $fonts .= $this->fonts->google->get_styles( $font );
 
-		// Custom CSS
-		$custom = wp_get_custom_css();
+		// Compress CSS
+		$css = $this->styles::compress( $fonts . $css );
 
-		$css = $this->styles::compress( $fonts . $css . $custom );
-
+		// Create file if we have CSS
 		if( $css ) {
 			return $this->create_css_file( $css );
 		}

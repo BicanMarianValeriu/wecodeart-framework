@@ -79,6 +79,7 @@ class WooCommerce implements Integration {
 
 		// Filters
 		add_filter( 'wecodeart/filter/header/bar/modules', 	[ $this, 'add_cart_to_header_modules' ] );
+		add_filter( 'wecodeart/filter/gutenberg/restricted',[ $this, 'restricted_gutenberg_blocks' ] );
 		add_filter( 'woocommerce_add_to_cart_fragments',	[ $this, 'cart_count_fragments' ], 10, 1 );
 	}
 
@@ -196,13 +197,15 @@ class WooCommerce implements Integration {
 				'wecodeart' 
 			),
 		] ] );
-	} 
+	}
 
 	/**
 	 * Filter - WooCommerce Header Bar Cart Module
 	 *
 	 * @since	3.5
 	 * @version	4.0.7
+	 *
+	 * @return 	array
 	 */
 	public function add_cart_to_header_modules( $modules ) {
 		$modules['cart'] = [
@@ -211,6 +214,26 @@ class WooCommerce implements Integration {
 		];
 
 		return $modules;
+	} 
+
+	/**
+	 * Filter - Restricted WooCommerce Blocks from theme code
+	 *
+	 * @since	4.2.0
+	 * @version	4.2.0
+	 *
+	 * @return 	array
+	 */
+	public function restricted_gutenberg_blocks( $blocks ) {
+		return wp_parse_args( [
+			'woocommerce/handpicked-products',
+			'woocommerce/products-by-attribute',
+			'woocommerce/products-by-tag',
+			'woocommerce/product-best-sellers',
+			'woocommerce/product-top-rated',
+			'woocommerce/product-on-sale',
+			'woocommerce/product-new',
+		], $blocks );
 	} 
 
 	/**

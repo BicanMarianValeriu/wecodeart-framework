@@ -34,6 +34,7 @@
 		"anchor": true,
 		"className": true,
 		"reusable": false,
+		"withBackground": true,
 		"lightBlockWrapper": true,
 		"color": {
 			"gradients": true,

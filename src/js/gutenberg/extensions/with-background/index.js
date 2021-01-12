@@ -2,10 +2,10 @@
  * WordPress dependencies.
  */
 const { addFilter } = wp.hooks;
-const { Fragment } = wp.element;
 const { hasBlockSupport } = wp.blocks;
 const { BlockControls, InspectorControls } = wp.blockEditor;
 const { createHigherOrderComponent } = wp.compose;
+const { restrictedBlocks } = wecodeartInfo;
 
 /**
  * External Dependencies
@@ -21,10 +21,7 @@ import {
 	attributes as BackgroundAttributes,
 	Controls,
 	Inspector,
-} from '../../../controls/background';
-import { restrictedBlocks } from '../../attributes';
-
-const blocksWithBackgrounds = ['core/columns', 'core/column', 'wca/section', 'wca/column'];
+} from './../../controls/background';
 
 /**
  * Filters registered block settings, extending attributes with anchor using ID
@@ -36,17 +33,10 @@ const blocksWithBackgrounds = ['core/columns', 'core/column', 'wca/section', 'wc
  */
 function addAttributes(settings) {
 	const { name: blockName } = settings;
-	if (typeof settings.attributes !== 'undefined' && !restrictedBlocks.includes(blockName)) {
-		if (blocksWithBackgrounds.includes(blockName)) {
-			if (!settings.supports) {
-				settings.supports = {};
-			}
-			settings.supports = Object.assign(settings.supports, {
-				withBackground: true,
-			});
+	if (restrictedBlocks.includes(blockName)) return settings;
 
-			settings.attributes = Object.assign(settings.attributes, BackgroundAttributes);
-		}
+	if (hasBlockSupport(settings, 'withBackground')) {
+		settings.attributes = Object.assign(settings.attributes, BackgroundAttributes);
 	}
 
 	return settings;
@@ -65,11 +55,11 @@ const withBackgroundControls = createHigherOrderComponent((BlockEdit) => {
 			isSelected,
 		} = props;
 
-		if (!restrictedBlocks.includes(blockName) && hasBlockSupport(blockName, 'withBackground') && isSelected) {
+		if (hasBlockSupport(blockName, 'withBackground') && isSelected) {
 			const { attributes } = props;
 			const { backgroundUrl } = attributes;
 			return (
-				<Fragment>
+				<>
 					<BlockEdit {...props} />
 					<BlockControls>
 						{Controls(props)}
@@ -77,7 +67,7 @@ const withBackgroundControls = createHigherOrderComponent((BlockEdit) => {
 					<InspectorControls>
 						{backgroundUrl && <Inspector {...props} />}
 					</InspectorControls>
-				</Fragment>
+				</>
 			);
 		}
 
@@ -99,7 +89,7 @@ const withBackgroundStyles = createHigherOrderComponent((BlockListBlock) => {
 			className,
 		} = props;
 
-		if (!restrictedBlocks.includes(blockName) && hasBlockSupport(blockName, 'withBackground')) {
+		if (hasBlockSupport(blockName, 'withBackground')) {
 			const { attributes } = props;
 			return <BlockListBlock {...{
 				...props,

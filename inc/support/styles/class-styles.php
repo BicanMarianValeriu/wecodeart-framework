@@ -20,28 +20,18 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Customizer;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Request;
+use WeCodeArt\Conditional\Traits\No_Conditionals;
 
 /**
  * The Fonts object.
  */
 final class Styles implements Integration {
 
-    use Singleton;
-
-	/**
-	 * Get Conditionals
-	 *
-	 * @return void
-	 */
-	public static function get_conditionals() {
-		return [];
-	}
+	use Singleton;
+	use No_Conditionals;
 
 	/**
 	 * Send to Constructor
-	 *
-	 * @since 	3.6.2
-	 * @version	4.1.5
 	 */
 	public function register_hooks() {}
 
@@ -136,13 +126,13 @@ final class Styles implements Integration {
     /**
 	 * Gets the array of generated styles and creates the minimized, inline CSS.
 	 *
-	 * @static
 	 * @access 	public
 	 * @param 	array   $css    The CSS definitions array.
+	 *
 	 * @return 	string          The generated CSS.
 	 */
 	public static function parse( $css = [] ) {
-		// Pass our styles from the kirki_styles_array filter.
+		// Pass our styles from filter.
 		$css = apply_filters( 'wecodeart/filter/styles/array', $css );
 
 		// Process the array of CSS properties and produce the final CSS.
@@ -156,10 +146,10 @@ final class Styles implements Integration {
 			$final_css .= ( 'global' !== $media_query ) ? $media_query . '{' : '';
 			foreach( $selectors as $selector => $properties ) {
 				$css_for_style = '';
-				foreach ( $properties as $property => $value ) {
+				foreach( $properties as $property => $value ) {
 					if ( is_string( $value ) && '' !== $value ) {
 						$css_for_style .= $property . ':' . $value . ';';
-					} elseif ( is_array( $value ) ) {
+					} elseif( is_array( $value ) ) {
 						foreach ( $value as $subvalue ) {
 							if ( is_string( $subvalue ) && '' !== $subvalue ) {
 								$css_for_style .= $property . ':' . $subvalue . ';';
@@ -177,11 +167,78 @@ final class Styles implements Integration {
 
 		return $final_css;
 	}
+	
+	/**
+	 * Gets the array of generated styles and creates the minimized, inline CSS.
+	 *
+	 * @param 	string	$css	The CSS definitions string.
+	 * @param 	bool   	$group	If true, it will group CSS into media queries.
+	 *
+	 * @return 	array          	The generated CSS array.
+	 */
+	public static function break( string $css = '' ) {
+		$results = [];
+		// preg_match_all( '/(.+?)\s?\{\s?(.+?)\s?\}/', $css, $arr );
+		// preg_match_all( '/([^\{\}]+)\{([^\}]*)\}/ims', $css, $arr );
+		
+		// Escape base64 images
+		$css = preg_replace( '/(data\:[^;]+);/i', '$1~£&#', $css );
+		// Split rules
+		preg_match_all( '/(?ims)([a-z0-9\s\,\.\:#_\-@]+)\{([^\}]*)\}/', $css, $arr );
+		foreach( $arr[0] as $i => $x ) {
+			$selector 	= trim( $arr[1][$i] );
+			$results[$selector] = [];
+			foreach( explode( ';', $arr[2][$i] ) as $attr ) {
+				if ( strlen( trim( $attr ) ) > 0) {
+					list( $name, $value ) = explode( ':', trim( $attr ), 2 );
+					$results[$selector][trim( $name )] = str_replace( '~£&#', ';', trim( $value ) );
+				}
+			}
+		}
+
+		return $results;
+	}
+
+	/**
+	 * Gets the array of CSS for media queries only.
+	 *
+	 * @param 	string   $css	The CSS definitions string.
+	 *
+	 * @return 	array          	The generated CSS array.
+	 */
+	public static function break_queries( string $css = '' ) {
+		$queries 	= [];
+		$start 		= 0;
+		$global 	= preg_replace( '/@media[^{]+\{([\s\S]+?\})\s*\}/i', '', $css );
+		$queries['global'] = self::break( $global );
+
+		while( ( $start = strpos( $css, '@media', $start ) ) !== false ) {
+			$s = [];
+			$i = strpos( $css, '{', $start );
+			if ( $i !== false ) {
+				array_push( $s, $css[$i] );
+				$i++;
+				while( ! empty( $s ) ) {
+					if ( $css[$i] === '{' ) array_push( $s, '{' ); 
+					elseif ( $css[$i] === '}' ) array_pop( $s ); 
+					$i++;
+				}
+				preg_match( '/(\@media[^\{]+)\{(.*)\}\s+/ims', substr( $css, $start, ( $i + 1 ) - $start ), $block );
+				list( , $media, $styles ) = $block;
+				$styles = self::break( $styles );
+				$queries[trim( $media)] = isset( $queries[trim( $media)] ) ? $queries[trim( $media)] + $styles : $styles;
+				$start = $i;
+			}
+		}
+		
+		return $queries;
+	}
 
 	/**
 	 * Add prefixes if necessary.
 	 *
 	 * @param  array $css The CSS definitions array.
+	 *
 	 * @return array
 	 */
 	public static function add_prefixes( $css ) {
@@ -189,6 +246,7 @@ final class Styles implements Integration {
 			foreach( $css as $media_query => $elements ) {
 				foreach( $elements as $element => $style_array ) {
 					foreach( $style_array as $property => $value ) {
+						if( empty( $property ) ) continue;
 						// Add -webkit-* and -moz-*.
 						if ( is_string( $property ) && in_array( $property, [
 							'border-radius',
@@ -225,4 +283,168 @@ final class Styles implements Integration {
 
 		return $css;
     }
+	
+	/**
+	 * Check if string is empty without accepting zero
+	 *
+	 * @since   4.2.0
+	 * @param 	string $var Var to check.
+	 *
+	 * @return 	bool
+	 */
+	public static function is_empty( $var ) {
+		return empty( $var ) && 0 !== $var;
+	}
+
+	/**
+	 * Get block attribute value with default
+	 *
+	 * @since   4.2.0
+	 * @param 	mixed $attr Attributes.
+	 * @param 	mixed $default Default value.
+	 *
+	 * @return 	mixed
+	 */
+	public static function get_attr_value( $attr, $default = 'unset' ) {
+		if ( ! self::is_empty( $attr ) ) {
+			return $attr;
+		} else {
+			return $default;
+		}
+	}
+
+	/**
+	 * Get CSS value
+	 *
+	 * @since   4.2.0
+	 * @param  	string $value	CSS value.
+	 * @param  	string $unit	CSS unit.
+	 * @param  	string $default	CSS default font.
+	 *
+	 * @return 	mixed			CSS value depends on $unit
+	 */
+	public static function get_css_value( $value = '', $unit = '', $default = '' ) {
+		if ( '' == $value && '' == $default ) {
+			return $value;
+		}
+
+		$css_val = '';
+
+		switch ( $unit ) {
+			case 'font':
+				if ( 'inherit' != $value ) {
+					$value   = $value['family'];
+					$css_val = $value;
+				} elseif ( '' != $default ) {
+					$css_val = $default;
+				} else {
+					$css_val = '';
+				}
+				break;
+
+			case 'px':
+			case '%':
+				if ( 'inherit' === strtolower( $value ) || 'inherit' === strtolower( $default ) ) {
+					return $value;
+				}
+				$value   = ( '' != $value ) ? $value : $default;
+				$css_val = esc_attr( $value ) . $unit;
+				break;
+
+			case 'url':
+				$css_val = $unit . '(' . esc_url( $value ) . ')';
+				break;
+
+			case 'rem':
+			case 'em':
+				if ( 'inherit' === strtolower( $value ) || 'inherit' === strtolower( $default ) ) {
+					return $value;
+				}
+				$css_val = esc_attr( $value );
+				break;
+
+			case 'focal':
+				$css_val = is_array( $value ) ? $value['x'] * 100 . '% ' . $value['y'] * 100 . '%' : $default;
+				break;
+
+			case 'color':
+				$css_val = self::hex_rgba( sanitize_hex_color( $value ) );
+				break;
+
+			default:
+				$value = ( '' != $value ) ? $value : $default;
+				if ( '' != $value ) {
+					$css_val = esc_attr( $value ) . $unit;
+				}
+		}
+
+		return self::get_attr_value( $css_val, 'initial' );
+	}
+
+	/**
+	 * Convert HEX to RGBA.
+	 *
+	 * @param 	string $color   Color data.
+	 * @param 	bool   $opacity Opacity status.
+	 *
+	 * @return 	mixed
+	 * @since   4.2.0
+	 * @access  public
+	 */
+	public static function hex_rgba( $color, $opacity = false ) {
+		$default = 'rgb(0,0,0)';
+
+		if ( empty( $color ) ) {
+			return $default;
+		}
+
+		if ( '#' == $color[0] ) {
+			$color = substr( $color, 1 );
+		}
+
+		if ( strlen( $color ) == 6 ) {
+			$hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+		} elseif ( strlen( $color ) == 3 ) {
+			$hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+		} else {
+			return $default;
+		}
+
+		$rgb = array_map( 'hexdec', $hex );
+
+		if ( $opacity ) {
+			if ( abs( $opacity ) > 1 ) {
+				$opacity = 1.0;
+			}
+			$output = 'rgba(' . implode( ',', $rgb ) . ',' . $opacity . ')';
+		} else {
+			$output = 'rgb(' . implode( ',', $rgb ) . ')';
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Sanitize rgba color.
+	 *
+	 * @param string $value Color in rgba format.
+	 *
+	 * @return string
+	 */
+	public static function sanitize_rgba( $value ) {
+		$red   = 'rgba(0,0,0,0)';
+		$green = 'rgba(0,0,0,0)';
+		$blue  = 'rgba(0,0,0,0)';
+		$alpha = 'rgba(0,0,0,0)'; // If empty or an array return transparent
+		
+		if ( empty( $value ) || is_array( $value ) ) {
+			return '';
+		}
+
+		// By now we know the string is formatted as an rgba color so we need to further sanitize it.
+		$value = str_replace( ' ', '', $value );
+		sscanf( $value, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
+
+		return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
+	}
 }
