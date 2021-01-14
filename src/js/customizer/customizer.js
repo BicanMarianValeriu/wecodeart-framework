@@ -211,8 +211,8 @@ const wecodeartPostMessage = {
 						let family = value['font-family'].replace(' ', '+').replace(/\"/g, '&quot;');
 						if (value['font-weight'].length) {
 							[...value['font-weight']].map(v => {
-								if ('regular' === v) v = ':400';
-								if ('italic' === v) v = ':400i';
+								if ('regular' === v) v = '400';
+								if ('italic' === v) v = '400i';
 								variants = [...variants, v.substring(0, 4)];
 							});
 							family += `:${variants.join(':')}`;

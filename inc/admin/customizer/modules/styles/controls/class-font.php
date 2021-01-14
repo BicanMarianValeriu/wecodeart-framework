@@ -25,7 +25,6 @@ class Font extends Control_Processor {
 	/**
 	 * Processes a single item from the `output` array.
 	 *
-	 * @access 	protected
 	 * @param 	array $output The `output` item.
 	 * @param 	array $value  The field's value.
 	 */

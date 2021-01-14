@@ -32,8 +32,6 @@ final class Google {
 	/**
 	 * If set to true, forces loading ALL variants.
 	 *
-	 * @static
-	 * @access 	public
 	 * @var 	bool
 	 */
 	public static $force_load_all_variants = false;
@@ -41,7 +39,6 @@ final class Google {
 	/**
 	 * WCA FileSystem
 	 *
-	 * @access 	protected
 	 * @since 	4.2.0
 	 * @var 	mixed
 	 */
@@ -50,7 +47,6 @@ final class Google {
 	/**
 	 * The array of fonts
 	 *
-	 * @access 	public
 	 * @var 	array
 	 */
 	public $fonts = [];
@@ -58,7 +54,6 @@ final class Google {
 	/**
 	 * An array of all google fonts.
 	 *
-	 * @access 	private
 	 * @var 	array
 	 */
 	private $google_fonts = [];
@@ -77,9 +72,9 @@ final class Google {
 	/**
 	 * Add preconnect for Google Fonts.
 	 *
-	 * @access 	public
 	 * @param 	array  	$urls           URLs to print for resource hints.
 	 * @param 	string 	$relation_type  The relation type the URLs are printed.
+	 *
 	 * @return 	array 	$urls           URLs to print for resource hints.
 	 */
 	public function resource_hints( $urls, $relation_type ) {
@@ -202,13 +197,13 @@ final class Google {
 	/**
 	 * Get styles from URL.
 	 *
-	 * @access 	public
 	 * @since 	4.2.0
 	 * @param 	string 		$font 	The URL.
+	 *
 	 * @return 	string
 	 */
 	public function get_styles( $font ) {
-		$url = $this->get_font_url( $font );
+		$url = self::get_font_url( $font );
 		$css = $this->get_cached_url_contents( $url );
 		return $this->get_local_font_styles( $css );
 	}
@@ -216,9 +211,9 @@ final class Google {
 	/**
 	 * Get styles with fonts downloaded locally.
 	 *
-	 * @access 	protected
 	 * @since 	4.2.0
 	 * @param 	string 		$css 	The styles.
+	 *
 	 * @return 	string
 	 */
 	protected function get_local_font_styles( $css ) {
@@ -235,9 +230,9 @@ final class Google {
 	/**
 	 * Download files mentioned in our CSS locally.
 	 *
-	 * @access 	protected
 	 * @since 	4.2.0
 	 * @param 	string		$css 	The CSS we want to parse.
+	 *
 	 * @return 	array      			Returns an array of remote URLs and their local counterparts.
 	 */
 	protected function get_local_files_from_css( $css ) {
@@ -291,9 +286,9 @@ final class Google {
 	/**
 	 * Get font files from the CSS.
 	 *
-	 * @access 	public
 	 * @since 	4.2.0
 	 * @param 	string 	$css 	The CSS we want to parse.
+	 *
 	 * @return 	array      		Returns an array of font-families and the font-files used.
 	 */
 	public function get_files_from_css( $css ) {
@@ -348,10 +343,10 @@ final class Google {
 	 * Get cached url contents.
 	 * If a cache doesn't already exist, get the URL contents from remote and cache the result.
 	 *
-	 * @access 	public
 	 * @since 	4.2.0
 	 * @param 	string 	$url        The URL we want to get the contents from.
 	 * @param 	string 	$user_agent	The user-agent to use for our request.
+	 *
 	 * @return 	string            	Returns the remote URL contents.
 	 */
 	public function get_cached_url_contents( $url = '', $user_agent = null ) {
@@ -379,10 +374,10 @@ final class Google {
 	/**
 	 * Get remote file contents.
 	 *
-	 * @access 	public
 	 * @since 	4.2.0
 	 * @param 	string 	$url		The URL we want to get the contents from.
 	 * @param 	string 	$user_agent	The user-agent to use for our request.
+	 *
 	 * @return 	string            	Returns the remote URL contents.
 	 */
 	public function get_url_contents( $url = '', $user_agent = null ) {
@@ -408,12 +403,12 @@ final class Google {
 	/**
 	 * Get remote file URL.
 	 *
-	 * @access 	public
 	 * @since 	4.2.0
 	 * @param 	array 	$font
+	 *
 	 * @return 	string	Returns the remote URL.
 	 */
-	public function get_font_url( $font ) {
+	public static function get_font_url( $font ) {
 		$_italics = array_map( function( $item ) {
 			return $item . 'i';
 		}, range( 100, 900, 100 ) );

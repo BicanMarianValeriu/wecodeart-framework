@@ -30,6 +30,7 @@ class Controls extends Processor {
 	 * @var 	string
 	 */
 	protected 	$name = '';
+	protected 	$value = null;
 
 	/**
 	 * The class constructor.
@@ -39,8 +40,9 @@ class Controls extends Processor {
 	 */
 	public function __construct( $field ) {
 		$this->name 	= get_prop( $field, 'name' );
+		$this->value 	= get_theme_mod( $this->name, false );
 		$this->output	= get_prop( $field, 'output', [] );
-
+		
 		$this->merge_value();
 		$this->parse_output();
 	}
@@ -53,7 +55,7 @@ class Controls extends Processor {
 	public function merge_value() {
 		foreach( $this->output as $i => $output ) {
 			$this->output[$i] = wp_parse_args( [
-				'value' => get_theme_mod( $this->name, false )
+				'value' => $this->value
 			], $output );
 		}
 	}

@@ -28,7 +28,6 @@ class FileSystem {
 	/**
 	 * WP FileSystem
 	 *
-	 * @access 	public
 	 * @since 	4.2.0
 	 * @var 	mixed
 	 */
@@ -45,7 +44,6 @@ class FileSystem {
 	/**
 	 * Function to set folder in WordPress Filesystem.
 	 *
-	 * @access  public
 	 * @since   4.2.0
 	 *
 	 * @return  bool
@@ -67,7 +65,6 @@ class FileSystem {
 	/**
 	 * Function to create file from WordPress Filesystem.
 	 *
-	 * @access  public
 	 * @since   4.2.0
 	 *
 	 * @return  bool
@@ -83,7 +80,6 @@ class FileSystem {
 	/**
 	 * Function to delete file from WordPress Filesystem.
 	 *
-	 * @access  public
 	 * @since   4.2.0
 	 *
 	 * @return  bool
@@ -98,7 +94,6 @@ class FileSystem {
 	/**
 	 * Check if we have a file
 	 *
-	 * @access  public
 	 * @since   4.2.0
 	 *
 	 * @return  bool
@@ -125,7 +120,6 @@ class FileSystem {
 	/**
 	 * Function to create folder in WordPress Filesystem.
 	 *
-	 * @access  public
 	 * @since   4.2.0
 	 *
 	 * @return  bool
@@ -133,15 +127,13 @@ class FileSystem {
 	public function maybe_create_folder( $folder = '' ) {
 		$dir = implode( '/', array_filter( [ $this->folder, $folder ] ) );
 		// If dir does not exists, create it;
-		if ( ! $this->get_filesystem()->is_dir( $dir ) ) {
-			return wp_mkdir_p( $dir );
-		}
+		if ( is_dir( $dir ) ) return false;
+		return wp_mkdir_p( $dir );
 	}
 
 	/**
 	 * Get the filesystem.
 	 *
-	 * @access 	public
 	 * @since 	4.2.0
 	 *
 	 * @return 	WP_Filesystem

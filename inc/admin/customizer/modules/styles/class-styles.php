@@ -21,7 +21,6 @@ use WeCodeArt\Core\Scripts;
 use WeCodeArt\Support\Fonts;
 use WeCodeArt\Admin\Customizer;
 use WeCodeArt\Support\FileSystem;
-use function WeCodeArt\Functions\compress_css;
 
 class Styles {
 
@@ -31,7 +30,6 @@ class Styles {
 	/**
 	 * The Styles Processor
 	 *
-	 * @access 	public
 	 * @var 	null|object
 	 */
 	public $styles = null;
@@ -39,7 +37,6 @@ class Styles {
 	/**
 	 * The Fonts
 	 *
-	 * @access 	public
 	 * @var 	array
 	 */
 	public $fonts = null;
@@ -47,7 +44,6 @@ class Styles {
 	/**
 	 * WCA FileSystem
 	 *
-	 * @access 	protected
 	 * @since 	4.2.0
 	 * @var 	mixed
 	 */
@@ -70,14 +66,13 @@ class Styles {
 		add_action( 'wp_enqueue_scripts',			[ $this, 'enqueue_styles'	], 999 );
 		
 		if( is_admin() || is_customize_preview() ) return;
-		// Remove Customizer inline styles - we add them in our way, compressed!
+		// Remove Customizer inline styles - we add them in our way, optimized and compressed!
 		remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
 	}
 
 	/**
 	 * Enqueue the styles.
 	 *
-	 * @access 	public
 	 * @since 	4.2.0
 	 * @return 	void
 	 */
@@ -173,7 +168,7 @@ class Styles {
 
 	/**
 	 * Check if we have a CSS file for this post.
-	 * @access  public
+	 *
 	 * @since   4.2.0
 	 *
 	 * @return  bool
@@ -185,7 +180,6 @@ class Styles {
 	/**
 	 * Function to save CSS into WeCodeArt Folder.
 	 *
-	 * @access  public
 	 * @since   4.2.0
 	 * @param   string $css CSS string.
 	 *
@@ -198,7 +192,6 @@ class Styles {
 	/**
 	 * Function to save CSS into WeCodeArt Folder.
 	 *
-	 * @access  public
 	 * @since   4.2.0
 	 *
 	 * @return  bool
