@@ -35,13 +35,6 @@ class Styles {
 	public $styles = null;
 	
 	/**
-	 * The Fonts
-	 *
-	 * @var 	array
-	 */
-	public $fonts = null;
-	
-	/**
 	 * WCA FileSystem
 	 *
 	 * @since 	4.2.0
@@ -57,7 +50,6 @@ class Styles {
 	 */
 	public function init() {
 		$this->FS 		= FileSystem::get_instance()->set_folder( 'css' );
-		$this->fonts 	= wecodeart( 'integrations' )->get( 'fonts' )::get_instance();
 		$this->styles 	= wecodeart( 'integrations' )->get( 'styles' )::get_instance();
 		
 		// Generate styles and enqueue
@@ -68,6 +60,10 @@ class Styles {
 		if( is_admin() || is_customize_preview() ) return;
 		// Remove Customizer inline styles - we add them in our way, optimized and compressed!
 		remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
+		// Generate Fonts/Styles on frontend load
+		if( wecodeart_if( 'generate_fonts_onload' ) ) {
+			add_action( 'init', [ $this, 'generate_styles' 	] );
+		}
 	}
 
 	/**
@@ -101,9 +97,6 @@ class Styles {
 		foreach( $fields as $control ) {
 			// Only continue if $control['output'] is set.
 			if ( isset( $control['output'] ) && ! empty( $control['output'] ) ) {
-				// Process Font Styles, if any
-				$this->fonts->google->generate_font( $control );
-				// Get Styles
 				$css = array_replace_recursive( $css, self::process_control( $control ) );
 			}
 		}
@@ -117,9 +110,11 @@ class Styles {
 		}
 
 		// Google Font CSS
-		$fonts 			= '';
-		$google_fonts 	= $this->fonts->google->process_fonts();
-		foreach( $google_fonts as $font ) $fonts .= $this->fonts->google->get_styles( $font );
+		$fonts = '';
+		if( wecodeart_if( 'with_fonts' ) ) {
+			$gfonts = wecodeart( 'integrations' )->get( 'fonts' )::get_instance()->google;
+			foreach( $gfonts->process_fonts() as $font ) $fonts .= $gfonts->get_styles( $font );
+		}
 
 		// Compress CSS
 		$css = $this->styles::compress( $fonts . $css );

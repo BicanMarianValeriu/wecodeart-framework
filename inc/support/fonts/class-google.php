@@ -30,13 +30,6 @@ final class Google {
 	use Singleton;
 
 	/**
-	 * If set to true, forces loading ALL variants.
-	 *
-	 * @var 	bool
-	 */
-	public static $force_load_all_variants = false;
-
-	/**
 	 * WCA FileSystem
 	 *
 	 * @since 	4.2.0
@@ -49,14 +42,14 @@ final class Google {
 	 *
 	 * @var 	array
 	 */
-	public $fonts = [];
+	public 		$fonts = [];
 
 	/**
 	 * An array of all google fonts.
 	 *
 	 * @var 	array
 	 */
-	private $google_fonts = [];
+	private 	$google_fonts = [];
 
 	/**
 	 * The class constructor.
@@ -93,69 +86,39 @@ final class Google {
 	}
 
 	/**
-	 * Processes the arguments of a field
-	 * determines if it's a typography field, then takes appropriate actions.
+	 * Adds Google Font
 	 *
-	 * @param array $args The field arguments.
+	 * @param array $value The field arguments.
 	 */
-	public function generate_font( $args ) {
-		// Process typography fields.
-		if ( isset( $args['control'] ) && 'wecodeart-fonts' === $args['control'] ) {
+	public function add_font( $value ) {
+		$key_map = [
+			'font-family' => 'family',
+			'font-weight' => 'variants',
+		];
 
-			// Get the value.
-			$value = get_theme_mod( $args['name'] );
+		$value = array_combine( array_merge( $value, $key_map ), $value );
 
-			// If we don't have a font-family then we can skip this.
-			if ( ! isset( $value['font-family'] ) || ! Fonts::is_google_font( $value['font-family'] ) ) {
-				return;
-			}
+		$value = wp_parse_args( $value, [
+			'family' 	=> '',
+			'variants' 	=> [ 'regular' ]
+		] );
 
-			// Add the requested google-font.
-			if ( ! isset( $this->fonts[ $value['font-family'] ] ) ) {
-				$this->fonts[ $value['font-family'] ] = [
-					'family' 	=> $value['font-family'],
-					'variants' 	=> $value['font-weight'] ?: [ 'regular' ],
-				];
-			}
+		// If is not a Google Font, don`t bother!
+		if( ! Fonts::is_google_font( $value['family'] ) ) return;
 
-			// Are we force-loading all variants?
-			if ( true === self::$force_load_all_variants ) {
-				$all_variants = Fonts::get_all_variants();
-				$this->fonts[ $value['font-family'] ]['variants'] = array_keys( $all_variants );
-			}
+		// If is new, just add it.
+		if ( ! isset( $this->fonts[ $value['family'] ] ) ) {
+			$this->fonts[ $value['family'] ] = [
+				'family' 	=> $value['family'],
+				'variants' 	=> ! empty( $value['variants'] ) ? (array) $value['variants'] : [ 'regular' ],
+			];
 
 			return;
 		}
 
-		// Process non-typography fields.
-		if ( isset( $args['output'] ) && is_array( $args['output'] ) ) {
-			foreach ( $args['output'] as $output ) {
-
-				// If we don't have a typography-related output argument we can skip this.
-				if ( ! isset( $output['property'] ) || ! in_array( $output['property'], [ 'font-family', 'font-weight' ], true ) ) {
-					continue;
-				}
-
-				// Get the value.
-				$value = get_theme_mod( $args['name'] );
-
-				if ( is_string( $value ) ) {
-					if ( 'font-family' === $output['property'] ) {
-						if ( ! array_key_exists( $value, $this->fonts ) ) {
-							$this->fonts[ $value ] = [
-								'family' => $value
-							];
-						}
-					} elseif ( 'font-weight' === $output['property'] ) {
-						foreach ( $this->fonts as $key => $font ) {
-							if ( ! in_array( $value, $font['variants'], true ) ) {
-								$this->fonts[ $key ]['variants'] = $value;
-							}
-						}
-					}
-				}
-			}
-		}
+		// If already exists, just update it`s variants.
+		$variants = array_merge( $this->fonts[ $value['family'] ]['variants'], $value['variants'] );
+		$this->fonts[ $value['family'] ]['variants'] = $variants;
 	}
 
 	/**
@@ -203,7 +166,9 @@ final class Google {
 	 * @return 	string
 	 */
 	public function get_styles( $font ) {
+		$css = '';
 		$url = self::get_font_url( $font );
+		if( $url === false ) return $css;
 		$css = $this->get_cached_url_contents( $url );
 		return $this->get_local_font_styles( $css );
 	}
@@ -406,9 +371,16 @@ final class Google {
 	 * @since 	4.2.0
 	 * @param 	array 	$font
 	 *
-	 * @return 	string	Returns the remote URL.
+	 * @return 	mixed 	Returns the remote URL or false if is not google font.
 	 */
 	public static function get_font_url( $font ) {
+		$font = wp_parse_args( $font, [
+			'family' 	=> '',
+			'variants' 	=> ''
+		] );
+
+		if( Fonts::is_google_font( trim( $font['family'] ) === false ) ) return false;
+
 		$_italics = array_map( function( $item ) {
 			return $item . 'i';
 		}, range( 100, 900, 100 ) );

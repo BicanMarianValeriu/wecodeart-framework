@@ -49,7 +49,7 @@ class FileSystem {
 	 * @return  bool
 	 */
 	public function set_folder( $folder = '' ) {
-		$wp_upload_dir = wp_upload_dir( null, false );
+		$wp_upload_dir = wp_get_upload_dir();
 
 		if ( ! $this->get_filesystem()->is_writable( $wp_upload_dir['basedir'] ) ) {
 			return false;
@@ -108,7 +108,7 @@ class FileSystem {
 	 * @return  string File url.
 	 */
 	public function get_file_url( $filename, $link = false ) {
-		$file = $this->folder . '/' . $filename;
+		$file = implode( '/', array_filter( [ $this->folder, $filename ] ) );
 		
 		if( $link ) {
 			$file = str_replace( WP_CONTENT_DIR, content_url(), $file );
@@ -126,9 +126,7 @@ class FileSystem {
 	 */
 	public function maybe_create_folder( $folder = '' ) {
 		$dir = implode( '/', array_filter( [ $this->folder, $folder ] ) );
-		// If dir does not exists, create it;
-		if ( is_dir( $dir ) ) return false;
-		return wp_mkdir_p( $dir );
+		return wp_mkdir_p( wp_normalize_path( $dir ) );
 	}
 
 	/**
