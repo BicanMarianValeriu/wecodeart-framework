@@ -30,8 +30,8 @@ class Font extends Styles\Property {
 	protected function process_value() {
 		$family = $this->value;
 
-		if ( is_array( $this->value ) && isset( $this->value[0] ) && isset( $this->value[1] ) ) {
-			$family = $this->value[0];
+		if ( is_array( $this->value ) && isset( $this->value['font-family'] ) ) {
+			$family = $this->value['font-family'];
 		}
 
 		// Make sure the value is a string.

@@ -29,15 +29,17 @@ class Font extends Control_Processor {
 	 * @param 	array $output The `output` item.
 	 * @param 	array $value  The field's value.
 	 */
-	protected function process_output( $output, $value ) {		
-		$output['media_query'] = ( isset( $output['media_query'] ) ) ? $output['media_query'] : 'global';
-		$output['element']     = ( isset( $output['element'] ) ) ? $output['element'] : 'body';
-		$output['prefix']      = ( isset( $output['prefix'] ) ) ? $output['prefix'] : '';
-		$output['suffix']      = ( isset( $output['suffix'] ) ) ? $output['suffix'] : '';
+	protected function process_output( $output, $value ) {
+		$output = wp_parse_args( $output, [
+			'media_query' => 'global',
+			'element'     => 'body',
+			'prefix'      => '',
+			'suffix'      => '',
+		] );
 		
 		// Value is already sanitized before being added in DB (customizer controls), however
 		// The generated styles array is sanitized again based on property/value when the CSS string is generated
-		$value = $output['prefix'] . $value['font-family'] . $output['suffix'];
+		$value = $output['prefix'] . $this->get_property_value( 'font-family', $value ) . $output['suffix'];
 
 		$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
 	}

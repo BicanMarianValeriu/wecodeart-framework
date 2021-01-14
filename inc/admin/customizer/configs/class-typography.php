@@ -46,6 +46,7 @@ class Typography extends Config {
 					[
 						'element'  	=> ':root',
 						'property' 	=> '--wca-font-sans-serif',
+						'context'	=> [ 'front' ]
 					]
 				]
 			],
@@ -66,6 +67,7 @@ class Typography extends Config {
 					[
 						'element'  	=> 'h1, h2, h3, h4, h5, h6',
 						'property' 	=> 'font-family',
+						'context'	=> [ 'front' ]
 					]
 				]
 			],
