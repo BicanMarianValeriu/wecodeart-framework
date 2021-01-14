@@ -26,7 +26,13 @@ const GlobalColorsPicker = ({ onChange, activeColor }) => {
                 </Button>
             )}
             renderContent={() => (
-                <ColorPalette colors={pallete} value={activeColor} onChange={onChange} disableCustomColors={true} />
+                <ColorPalette {...{
+                    colors: pallete,
+                    value: activeColor,
+                    disableCustomColors: true,
+                    clearable: true,
+                    onChange
+                }} />
             )}
         />
     );

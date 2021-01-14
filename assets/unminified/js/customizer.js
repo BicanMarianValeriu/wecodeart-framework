@@ -86,6 +86,123 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+
+module.exports = _arrayWithoutHoles;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArray.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableSpread;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/toConsumableArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles */ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js");
+
+var iterableToArray = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/iterableToArray.js");
+
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread */ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/typeof.js":
 /*!*******************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
@@ -113,6 +230,28 @@ module.exports = _typeof;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
+
+/***/ }),
+
 /***/ "./src/js/customizer/customizer.js":
 /*!*****************************************!*\
   !*** ./src/js/customizer/customizer.js ***!
@@ -122,11 +261,21 @@ module.exports = _typeof;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _scss_customizer_customizer_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../scss/customizer/customizer.scss */ "./src/scss/customizer/customizer.scss");
-/* harmony import */ var _scss_customizer_customizer_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_customizer_customizer_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _scss_customizer_customizer_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../scss/customizer/customizer.scss */ "./src/scss/customizer/customizer.scss");
+/* harmony import */ var _scss_customizer_customizer_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_scss_customizer_customizer_scss__WEBPACK_IMPORTED_MODULE_3__);
 
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 /**
  * This file adds some LIVE changes to WeCodeArt Framework Customizer
@@ -137,13 +286,16 @@ __webpack_require__.r(__webpack_exports__);
  * @version 	4.2.0
  */
 
+var _wecodeartCustomizePr = wecodeartCustomizePreview,
+    fields = _wecodeartCustomizePr.fields,
+    googleFonts = _wecodeartCustomizePr.googleFonts;
 var wecodeartPostMessage = {
   /**
    * The fields.
    *
    * @since 4.2.0
    */
-  fields: {},
+  fields: fields,
 
   /**
    * Common utilities.
@@ -151,6 +303,12 @@ var wecodeartPostMessage = {
    * @since 4.2.0
    */
   util: {
+    isGoogleFont: function isGoogleFont(family) {
+      return googleFonts.filter(function (v) {
+        return v.toLowerCase().includes(family.toLowerCase());
+      }).length;
+    },
+
     /**
      * A collection of methods for the <link> tags.
      *
@@ -233,29 +391,29 @@ var wecodeartPostMessage = {
      * Processes the value and applies any replacements and/or additions.
      *
      * @since 	4.2.0
-     * @param 	{Object} output - The output (js_vars) argument.
-     * @param 	{mixed}  value - The value.
-     * @param 	{string} controlType - The control-type.
-     * @returns {string|false} - Returns false if value is excluded, otherwise a string.
+     * @param 	{Object} output - The control.
+     * @param 	{mixed}  value 	- The new value.
+     *
+     * @returns {string|false} 	- Returns false if value is excluded, otherwise a string.
      */
     processValue: function processValue(output, value) {
-      var self = this,
-          settings = window.parent.wp.customize.get(),
+      var processValue = wecodeartPostMessage.util.processValue;
+      var settings = window.parent.wp.customize.get(),
           excluded = false;
 
-      if ('object' === _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(value)) {
+      if ('object' === _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2___default()(value)) {
         _.each(value, function (subValue, key) {
-          return value[key] = self.processValue(output, subValue);
+          return value[key] = processValue(output, subValue);
         });
 
         return value;
       }
 
-      output = _.defaults(output, {
+      output = _objectSpread(_objectSpread({}, output), {
         prefix: '',
         units: '',
         suffix: '',
-        value_pattern: '$',
+        pattern: '$',
         pattern_replace: {},
         exclude: []
       });
@@ -272,7 +430,7 @@ var wecodeartPostMessage = {
         return false;
       }
 
-      value = output.value_pattern.replace(new RegExp('\\$', 'g'), value);
+      value = output.pattern.replace(new RegExp('\\$', 'g'), value);
 
       _.each(output.pattern_replace, function (id, placeholder) {
         if (!_.isUndefined(settings[id])) value = value.replace(placeholder, settings[id]);
@@ -286,6 +444,7 @@ var wecodeartPostMessage = {
      *
      * @since 	4.2.0
      * @param 	{string} url - The URL.
+     *
      * @returns {string}
      */
     backgroundImageValue: function backgroundImageValue(url) {
@@ -303,15 +462,19 @@ var wecodeartPostMessage = {
      * Generates the CSS from the output (js_vars) parameter.
      *
      * @since 	4.2.0
-     * @param 	{Object} output - The output (js_vars) argument.
-     * @param 	{mixed}  value - The value.
-     * @param 	{string} controlType - The control-type.
+     * @param 	{object} field - The control.
+     * @param 	{mixed}  value - The new value.
+     *
      * @returns {string}
      */
-    fromOutput: function fromOutput(output, value, controlType) {
+    fromOutput: function fromOutput(output, value, _ref) {
+      var control = _ref.control,
+          name = _ref.name;
       var _wecodeartPostMessage = wecodeartPostMessage.util,
           processValue = _wecodeartPostMessage.processValue,
-          backgroundImageValue = _wecodeartPostMessage.backgroundImageValue;
+          backgroundImageValue = _wecodeartPostMessage.backgroundImageValue,
+          linkTag = _wecodeartPostMessage.linkTag,
+          isGoogleFont = _wecodeartPostMessage.isGoogleFont;
       var styles = '',
           mediaQuery = false,
           processedValue;
@@ -320,7 +483,47 @@ var wecodeartPostMessage = {
         value = window[output.js_callback[0]](value, output.js_callback[1]);
       }
 
-      switch (controlType) {
+      switch (control) {
+        case 'wecodeart-fonts':
+          styles += output.element + '{';
+
+          _.each(value, function (val, key) {
+            if (key === 'font-weight') return;
+
+            if (output.choice && key !== output.choice) {
+              return;
+            }
+
+            processedValue = processValue(output, val);
+
+            if (false !== processedValue) {
+              styles += output.property + ':' + processedValue + ';';
+            }
+          });
+
+          styles += '}';
+
+          if (isGoogleFont(value['font-family'])) {
+            var fontUrl = '//fonts.googleapis.com/css?family=';
+            var variants = [];
+            var family = value['font-family'].replace(' ', '+').replace(/\"/g, '&quot;');
+
+            if (value['font-weight'].length) {
+              _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(value['font-weight']).map(function (v) {
+                if ('regular' === v) v = ':400';
+                if ('italic' === v) v = ':400i';
+                variants = [].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(variants), [v.substring(0, 4)]);
+              });
+
+              family += ":".concat(variants.join(':'));
+            }
+
+            fontUrl += family + '&display=swap';
+            linkTag.setLink(name, fontUrl);
+          }
+
+          break;
+
         case 'wecodeart-background':
         case 'wecodeart-dimensions':
         case 'wecodeart-sortable':
@@ -357,7 +560,7 @@ var wecodeartPostMessage = {
           break;
 
         default:
-          if ('wecodeart-image' === controlType) {
+          if ('wecodeart-image' === control) {
             value = !_.isUndefined(value.url) ? backgroundImageValue(value.url) : backgroundImageValue(value);
           }
 
@@ -421,8 +624,9 @@ var wecodeartPostMessage = {
      * Modifies the HTML from the output (js_vars) parameter.
      *
      * @since 	4.2.0
-     * @param 	{Object} output - The output (js_vars) argument.
-     * @param 	{mixed}  value - The value.
+     * @param 	{Object} field 	- The control.
+     * @param 	{mixed}  value 	- The new value.
+     *
      * @returns {string}
      */
     fromOutput: function fromOutput(output, value) {
@@ -447,7 +651,7 @@ var wecodeartPostMessage = {
       if (output.attr) {
         if (output.attr === 'class') {
           if ('undefined' !== typeof output.value) {
-            // If is multiplce then we switch the class
+            // If is multiple then we switch the class
             if (_.isArray(output.value)) {
               $element.removeClass(output.value.join(' ')).addClass(value);
             } else {
@@ -469,9 +673,8 @@ var wecodeartPostMessage = {
 
 (function (wp, $) {
   var api = wp.customize;
-  var _wecodeartPostMessage2 = wecodeartPostMessage.util,
-      styleTag = _wecodeartPostMessage2.styleTag,
-      linkTag = _wecodeartPostMessage2.linkTag; // Blog Branding
+  var styleTag = wecodeartPostMessage.util.styleTag,
+      fields = wecodeartPostMessage.fields; // Blog Branding
 
   api('blogname', function (value) {
     return value.bind(function (to) {
@@ -482,54 +685,33 @@ var wecodeartPostMessage = {
     return value.bind(function (to) {
       return $('.site-description').text(to);
     });
-  }); // Google Fonts Preview
+  }); // Process Controls
 
-  api.bind('preview-ready', function () {
-    api.preview.bind('font-selection', function (_ref) {
-      var controlId = _ref.controlId,
-          source = _ref.source,
-          value = _ref.value,
-          inherit = _ref.inherit;
-      var defaultFontface = inherit ? 'inherit' : 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
-      var selector = 'body';
-      selector = selector.split(',');
-      selector = selector.map(function (sel) {
-        return 'html ' + sel;
-      }).join(',');
-      var family = value.family;
-
-      if (family === false) {
-        styleTag.addData(controlId, "".concat(selector, " {font-family:").concat(defaultFontface, ";}"));
-      } else {
-        styleTag.addData(controlId, ":root {--wca-font-sans-serif:".concat(family, ";} ").concat(selector, " {font-family:").concat(family, ";}"));
-      }
-
-      if (source.toLowerCase() === 'google') {
-        var fontValue = family.replace(' ', '+');
-        var url = "//fonts.googleapis.com/css?family=".concat(fontValue, "%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800&display=swap\"");
-        linkTag.setLink(controlId, url);
-      }
-    });
-  }); // Others field types
-
-  _.each(wecodeartPostMessageFields, function (field) {
-    api(field.name, function (value) {
+  _.each(fields, function (_ref2) {
+    var output = _ref2.output,
+        name = _ref2.name,
+        control = _ref2.control;
+    var args = {
+      name: name,
+      control: control
+    };
+    api(name, function (value) {
       value.bind(function (newVal) {
         var styles = '';
 
-        _.each(field.output, function (output) {
-          if (!output.function || 'undefined' === typeof wecodeartPostMessage[output.function]) {
-            output.function = 'css';
+        _.each(output, function (parse) {
+          if (!parse.function || 'undefined' === typeof wecodeartPostMessage[parse.function]) {
+            parse.function = 'css';
           }
 
-          if ('css' === output.function) {
-            styles += wecodeartPostMessage.css.fromOutput(output, newVal, field.type);
+          if ('css' === parse.function) {
+            styles += wecodeartPostMessage.css.fromOutput(parse, newVal, args);
           } else {
-            wecodeartPostMessage[output.function].fromOutput(output, newVal, field.type);
+            wecodeartPostMessage[parse.function].fromOutput(parse, newVal, args);
           }
         });
 
-        styleTag.addData(field.name, styles);
+        styleTag.addData(name, styles);
       });
     });
   });

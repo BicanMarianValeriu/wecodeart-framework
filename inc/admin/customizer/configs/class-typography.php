@@ -44,8 +44,28 @@ class Typography extends Config {
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[
-						'element'  => ':root',
-						'property' => '--wca-font-sans-serif'
+						'element'  	=> ':root',
+						'property' 	=> '--wca-font-sans-serif',
+					]
+				]
+			],
+			[
+				'name'			=> 'general-typography-headings',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-fonts',
+				'section'		=> 'general-typography',
+				'title' 		=> esc_html__( 'Headings Font', 'wecodeart' ),
+				'description' 	=> esc_html__( 'This font is used on headings and will be placed in a custom CSS variable.', 'wecodeart' ),
+				'priority' 		=> 5,
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  	=> ':root',
+						'property' 	=> '--wca-font-headings',
+					],
+					[
+						'element'  	=> 'h1, h2, h3, h4, h5, h6',
+						'property' 	=> 'font-family',
 					]
 				]
 			],

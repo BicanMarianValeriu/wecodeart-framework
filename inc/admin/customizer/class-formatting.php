@@ -36,16 +36,16 @@ final class Formatting {
 		
 		foreach( $input as $key => $value ) {
 			// Remove unsafe data
-			if( ! in_array( $key, [ 'family', 'variants' ] ) ) {
+			if( ! in_array( $key, [ 'font-family', 'font-weight' ] ) ) {
 				unset( $input[ $key ] );
 			}
 			// Sanitize "safe" keys
 			switch ( $key ) {
-				case 'family':
-					$input['family'] = self::sanitize_text_field( $value );
+				case 'font-family':
+					$input['font-family'] = self::sanitize_text_field( $value );
 					break;
-				case 'variants':
-					$input['variants'] = array_filter( $input['variants'], function( $key ) {
+				case 'font-weight':
+					$input['font-weight'] = array_filter( $input['font-weight'], function( $key ) {
 						return in_array( $key, array_keys( Fonts::get_all_variants() ) );
 					} );
 					break;

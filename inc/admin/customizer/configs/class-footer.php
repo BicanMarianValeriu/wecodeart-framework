@@ -40,6 +40,7 @@ class Footer extends Config {
 		$widgets = wp_list_pluck( \WeCodeArt\Core\Footer::footer_widgets(), 'label' );
 
 		$_configs = [
+			// Layout
 			[
 				'name'			=> 'footer-layout-container',
 				'type' 			=> 'control',
@@ -79,6 +80,7 @@ class Footer extends Config {
 					'container_inclusive' => true
 				]
 			],
+			// Copyright
 			[
 				'name'			=> 'footer-copyright-text',
 				'type'        	=> 'control',
@@ -101,13 +103,43 @@ class Footer extends Config {
 					]
 				]
 			],
+			// Design
 			[
-				'name'			=> 'footer-copyright-bg',
+				'name'			=> 'footer-design-bg',
 				'type' 			=> 'control',
 				'control'  		=> 'wecodeart-color',
-				'section'		=> 'footer-copyright',
-				'title' 		=> esc_html__( 'Attribution Background Color', 'wecodeart' ),
-				'description'	=> esc_html__( 'Choose footer attribution background color.', 'wecodeart' ),
+				'section'		=> 'footer-design',
+				'title' 		=> esc_html__( 'Footer background color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Background color of the footer wrapper.', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => 'footer.footer',
+						'property' => 'background-color'
+					]
+				]
+			],
+			[
+				'name'			=> 'footer-design-color',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'footer-design',
+				'title' 		=> esc_html__( 'Footer text color', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => 'footer.footer',
+						'property' => 'color'
+					]
+				]
+			],
+			[
+				'name'			=> 'footer-design-attribution_bg',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'footer-design',
+				'title' 		=> esc_html__( 'Attribution background color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Background color of the footer credits wrapper.', 'wecodeart' ),
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[
@@ -117,12 +149,11 @@ class Footer extends Config {
 				]
 			],
 			[
-				'name'			=> 'footer-copyright-color',
+				'name'			=> 'footer-design-attribution_color',
 				'type' 			=> 'control',
 				'control'  		=> 'wecodeart-color',
-				'section'		=> 'footer-copyright',
-				'title' 		=> esc_html__( 'Attribution Text Color', 'wecodeart' ),
-				'description'	=> esc_html__( 'Choose footer attribution text color.', 'wecodeart' ),
+				'section'		=> 'footer-design',
+				'title' 		=> esc_html__( 'Attribution text color', 'wecodeart' ),
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[

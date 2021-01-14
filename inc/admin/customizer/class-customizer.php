@@ -98,23 +98,26 @@ class Customizer {
 		wp_enqueue_script(
 			$this->make_handle(),
 			$this->get_asset( 'js', 'customizer' ),
-			[ 'jquery', 'customize-preview' ],
+			[ 'jquery', 'customize-preview', 'wp-url' ],
 			wecodeart( 'version' ),
 			true
 		);
 
 		$fields = $this->get_configurations( $wp_customize );
-		$data   = [];
+		$data   = [
+			'googleFonts'	=> wp_list_pluck( wecodeart( 'integrations' )->get( 'fonts' )::get_google_fonts(), 'family' ),
+			'fields' 		=> [],
+		];
 		foreach ( $fields as $field ) {
 			$transport 	= isset( $field['transport'] ) && 'postMessage' === $field['transport'];
 			$has_output = isset( $field['output'] ) && ! empty( $field['output'] ) && is_array( $field['output'] );
 			if ( $transport && $has_output ) {
-				$data[] = $field;
+				$data['fields'][] = wp_array_slice_assoc( $field, [ 'output', 'name', 'control' ] );
 			}
 		}
-		wp_localize_script( $this->make_handle(), 'wecodeartPostMessageFields', $data );
+		wp_localize_script( $this->make_handle(), 'wecodeartCustomizePreview', $data );
 		
-		$extras = apply_filters( 'wecodeart/filter/customizer/script/preview', false );
+		$extras = apply_filters( 'wecodeart/filter/customizer/preview/after', false );
 		if ( $extras ) {
 			wp_add_inline_script( $this->make_handle(), $extras, 'after' );
 		}

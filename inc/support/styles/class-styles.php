@@ -167,7 +167,7 @@ final class Styles implements Integration {
 	}
 	
 	/**
-	 * Gets the array of generated styles and creates the minimized, inline CSS.
+	 * Gets the array of generated styles from a string.
 	 *
 	 * @param 	string	$css	The CSS definitions string.
 	 * @param 	bool   	$group	If true, it will group CSS into media queries.
@@ -198,7 +198,7 @@ final class Styles implements Integration {
 	}
 
 	/**
-	 * Gets the array of CSS for media queries only.
+	 * Gets the array of CSS with media queries.
 	 *
 	 * @param 	string   $css	The CSS definitions string.
 	 *
@@ -300,8 +300,8 @@ final class Styles implements Integration {
 	 * Get block attribute value with default
 	 *
 	 * @since   4.2.0
-	 * @param 	mixed $attr Attributes.
-	 * @param 	mixed $default Default value.
+	 * @param 	mixed $attr 	Attributes.
+	 * @param 	mixed $default 	Default value.
 	 *
 	 * @return 	mixed
 	 */

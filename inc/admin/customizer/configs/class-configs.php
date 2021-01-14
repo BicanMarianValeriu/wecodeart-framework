@@ -112,9 +112,16 @@ class Configs extends Config {
 				'panel'    => 'footer',
 			),
 			array(
-				'name'     => 'footer-copyright',
+				'name'     => 'footer-design',
 				'type'     => 'section',
 				'priority' => 10,
+				'title'    => esc_html__( 'Design Settings', 'wecodeart' ),
+				'panel'    => 'footer',
+			),
+			array(
+				'name'     => 'footer-copyright',
+				'type'     => 'section',
+				'priority' => 15,
 				'title'    => esc_html__( 'Copyright', 'wecodeart' ),
 				'panel'    => 'footer',
 			),

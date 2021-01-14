@@ -16,12 +16,14 @@ namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Singleton;
+
 /**
- * Manages the way Google Fonts are enqueued.
+ * Manages the Theme Uploads.
  */
 class FileSystem {
 	
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * WP FileSystem
@@ -34,11 +36,7 @@ class FileSystem {
 	public	$folder		= '';
 
 	/**
-	 * Init.
-	 *
-	 * @access 	public
-	 * @since 	4.2.0
-	 * @return 	void
+	 * Send to contructor.
 	 */
 	public function init() {
 		$this->set_folder();
@@ -49,6 +47,7 @@ class FileSystem {
 	 *
 	 * @access  public
 	 * @since   4.2.0
+	 *
 	 * @return  bool
 	 */
 	public function set_folder( $folder = '' ) {
@@ -70,6 +69,7 @@ class FileSystem {
 	 *
 	 * @access  public
 	 * @since   4.2.0
+	 *
 	 * @return  bool
 	 */
 	public function create_file( $filename, $content ) {
@@ -85,6 +85,7 @@ class FileSystem {
 	 *
 	 * @access  public
 	 * @since   4.2.0
+	 *
 	 * @return  bool
 	 */
 	public function delete_file( $filename ) {
@@ -99,6 +100,7 @@ class FileSystem {
 	 *
 	 * @access  public
 	 * @since   4.2.0
+	 *
 	 * @return  bool
 	 */
 	public function has_file( $file ) {
@@ -125,6 +127,7 @@ class FileSystem {
 	 *
 	 * @access  public
 	 * @since   4.2.0
+	 *
 	 * @return  bool
 	 */
 	public function maybe_create_folder( $folder = '' ) {
@@ -140,6 +143,7 @@ class FileSystem {
 	 *
 	 * @access 	public
 	 * @since 	4.2.0
+	 *
 	 * @return 	WP_Filesystem
 	 */
 	public function get_filesystem() {

@@ -71,7 +71,7 @@ const FontFamilySelector = ({
                                 label={family}
                                 fontFace={family}
                                 onClick={() => {
-                                    onFontChoice(key, family);
+                                    onFontChoice(family, key);
                                     setSearch('');
                                 }}
                             />

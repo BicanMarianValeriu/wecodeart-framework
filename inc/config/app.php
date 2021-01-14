@@ -92,19 +92,30 @@ return [
     |
     */
     'customizer' => [
+        // Header
         'header-bar-container'      => 'container',
         'header-bar-modules'        => [ 'branding', 'menu', 'search' ],
+        // Content
         'content-layout-container'  => 'container',
         'content-layout-modules'    => [ 'content', 'primary' ],
+        // Footer
         'footer-layout-container'   => 'container',
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
         'footer-copyright-text'     => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
-        'footer-copyright-bg'       => '',
-        'footer-copyright-color'    => '',
-        'general-typography-primary'=> [
+        'footer-design-bg'          => '#f1f3f7',
+        'footer-design-color'       => '',
+        'footer-design-attribution_bg'      => '#ffffff',
+        'footer-design-attribution_color'   => '#5a5a5a',
+        // General
+        'general-typography-primary'    => [
             'family'    => 'Abel',
             'variants'  => []
         ],
+        'general-typography-headings'   => [
+            'family'    => 'Open Sans',
+            'variants'  => [ '700' ]
+        ],
+        'general-colors-site'          => '#ffffff',
     ],
     /*
     |--------------------------------------------------------------------------

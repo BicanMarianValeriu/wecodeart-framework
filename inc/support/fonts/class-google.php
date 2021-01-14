@@ -111,22 +111,22 @@ final class Google {
 			$value = get_theme_mod( $args['name'] );
 
 			// If we don't have a font-family then we can skip this.
-			if ( ! isset( $value['family'] ) || ! Fonts::is_google_font( $value['family'] ) ) {
+			if ( ! isset( $value['font-family'] ) || ! Fonts::is_google_font( $value['font-family'] ) ) {
 				return;
 			}
 
 			// Add the requested google-font.
-			if ( ! isset( $this->fonts[ $value['family'] ] ) ) {
-				$this->fonts[ $value['family'] ] = [
-					'family' 	=> $value['family'],
-					'variants' 	=> $value['variants'] ?: [ 'regular' ],
+			if ( ! isset( $this->fonts[ $value['font-family'] ] ) ) {
+				$this->fonts[ $value['font-family'] ] = [
+					'family' 	=> $value['font-family'],
+					'variants' 	=> $value['font-weight'] ?: [ 'regular' ],
 				];
 			}
 
 			// Are we force-loading all variants?
 			if ( true === self::$force_load_all_variants ) {
 				$all_variants = Fonts::get_all_variants();
-				$this->fonts[ $value['family'] ]['variants'] = array_keys( $all_variants );
+				$this->fonts[ $value['font-family'] ]['variants'] = array_keys( $all_variants );
 			}
 
 			return;

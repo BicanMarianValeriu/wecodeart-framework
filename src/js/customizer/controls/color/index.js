@@ -8,7 +8,7 @@ const ColorComponent = ({ control }) => {
 
     const { params } = control;
 
-    const onChange = (newVal) => {
+    const onChange = (newVal = '') => {
         setValue(newVal);
         control.setting.set(newVal);
     };

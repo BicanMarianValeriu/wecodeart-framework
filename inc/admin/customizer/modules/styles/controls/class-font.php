@@ -16,14 +16,12 @@ namespace WeCodeArt\Admin\Customizer\Modules\Styles\Controls;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Support\Styles\Property;
-use WeCodeArt\Admin\Customizer\Formatting;
 use WeCodeArt\Admin\Customizer\Modules\Styles\Controls as Control_Processor;
 
 /**
- * Customizer Typography Output
+ * Customizer Font Output
  */
-class Typography extends Control_Processor {
+class Font extends Control_Processor {
 	/**
 	 * Processes a single item from the `output` array.
 	 *
@@ -31,20 +29,15 @@ class Typography extends Control_Processor {
 	 * @param 	array $output The `output` item.
 	 * @param 	array $value  The field's value.
 	 */
-	protected function process_output( $output, $value ) {
-		global $wp_customize;
-		
+	protected function process_output( $output, $value ) {		
 		$output['media_query'] = ( isset( $output['media_query'] ) ) ? $output['media_query'] : 'global';
 		$output['element']     = ( isset( $output['element'] ) ) ? $output['element'] : 'body';
 		$output['prefix']      = ( isset( $output['prefix'] ) ) ? $output['prefix'] : '';
 		$output['suffix']      = ( isset( $output['suffix'] ) ) ? $output['suffix'] : '';
-
-		$setting	= $wp_customize->get_setting( $this->name );
-		// Sanitize with customizer (is clear anyway since this runs on Control save before adding to DB)
-		$value 		= Formatting::sanitize_font( $value, $setting );
-		// Process it and make sure is properly formatted/clear, again :)
-		$value 		= Property::get_property_value( $output['property'], $value['family'] );
-		$value 		= $output['prefix'] . $value . $output['suffix'];
+		
+		// Value is already sanitized before being added in DB (customizer controls), however
+		// The generated styles array is sanitized again based on property/value when the CSS string is generated
+		$value = $output['prefix'] . $value['font-family'] . $output['suffix'];
 
 		$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
 	}

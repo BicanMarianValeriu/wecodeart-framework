@@ -1523,8 +1523,9 @@ var GlobalColorsPicker = function GlobalColorsPicker(_ref) {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPalette, {
         colors: pallete,
         value: activeColor,
-        onChange: onChange,
-        disableCustomColors: true
+        disableCustomColors: true,
+        clearable: true,
+        onChange: onChange
       });
     }
   });
@@ -1568,7 +1569,8 @@ var ColorComponent = function ColorComponent(_ref) {
 
   var params = control.params;
 
-  var onChange = function onChange(newVal) {
+  var onChange = function onChange() {
+    var newVal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     setValue(newVal);
     control.setting.set(newVal);
   };
@@ -1646,13 +1648,13 @@ controlConstructor['wecodeart-color'] = Control.extend({
 /***/ }),
 
 /***/ "@wordpress/element":
-/*!******************************************!*\
-  !*** external {"this":["wp","element"]} ***!
-  \******************************************/
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-(function() { module.exports = this["wp"]["element"]; }());
+(function() { module.exports = window["wp"]["element"]; }());
 
 /***/ })
 

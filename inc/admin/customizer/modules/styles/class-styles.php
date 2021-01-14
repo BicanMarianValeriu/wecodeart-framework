@@ -21,7 +21,6 @@ use WeCodeArt\Core\Scripts;
 use WeCodeArt\Support\Fonts;
 use WeCodeArt\Admin\Customizer;
 use WeCodeArt\Support\FileSystem;
-use WeCodeArt\Support\Styles\Processor;
 use function WeCodeArt\Functions\compress_css;
 
 class Styles {
@@ -149,7 +148,7 @@ class Styles {
 		// Find the class that will handle the outpout for this field.
 		$classname            = Styles\Controls::class;
 		$default_classnames   = [
-			'wecodeart-fonts' => Styles\Controls\Typography::class,
+			'wecodeart-fonts' => Styles\Controls\Font::class,
 		];
 
 		$field_output_classes = apply_filters( 'wecodeart/filter/customizer/styles/controls', $default_classnames );

@@ -17,6 +17,7 @@ namespace WeCodeArt\Admin\Customizer\Controls;
 defined( 'ABSPATH' ) || exit;
 
 use WP_Customize_Control;
+use WeCodeArt\Core\Scripts;
 use WeCodeArt\Admin\Request;
 use WeCodeArt\Support\Fonts as The_Fonts;
 
@@ -25,7 +26,7 @@ use WeCodeArt\Support\Fonts as The_Fonts;
  */
 class Fonts extends \WP_Customize_Control {
 
-	use \WeCodeArt\Core\Scripts\Base;
+	use Scripts\Base;
 
 	/**
 	 * The control type.

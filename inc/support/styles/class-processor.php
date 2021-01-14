@@ -80,9 +80,9 @@ abstract class Processor {
 	 */
 	protected function apply_value_pattern( $output, $type = '' ) {
 		$value = $output['value'];
-		if ( isset( $output['value_pattern'] ) && ! empty( $output['value_pattern'] ) && is_string( $output['value_pattern'] ) ) {
+		if ( isset( $output['pattern'] ) && ! empty( $output['pattern'] ) && is_string( $output['pattern'] ) ) {
 			if ( ! is_array( $value ) ) {
-				$value = str_replace( '$', $value, $output['value_pattern'] );
+				$value = str_replace( '$', $value, $output['pattern'] );
 			}
 			if ( is_array( $value ) ) {
 				foreach ( array_keys( $value ) as $value_k ) {
@@ -91,11 +91,11 @@ abstract class Processor {
 					}
 					if ( isset( $output['choice'] ) ) {
 						if ( $output['choice'] === $value_k ) {
-							$value[ $output['choice'] ] = str_replace( '$', $value[ $output['choice'] ], $output['value_pattern'] );
+							$value[ $output['choice'] ] = str_replace( '$', $value[ $output['choice'] ], $output['pattern'] );
 						}
 						continue;
 					}
-					$value[ $value_k ] = str_replace( '$', $value[ $value_k ], $output['value_pattern'] );
+					$value[ $value_k ] = str_replace( '$', $value[ $value_k ], $output['pattern'] );
 				}
 			}
 			$value = $this->apply_pattern_replace( $output, $type );
@@ -130,7 +130,7 @@ abstract class Processor {
 					case 'option':
 						if ( is_array( $options ) ) {
 							if ( $option_name ) {
-								$subkey      = str_replace( array( $option_name, '[', ']' ), '', $replace );
+								$subkey      = str_replace( [ $option_name, '[', ']' ], '', $replace );
 								$replacement = ( isset( $options[ $subkey ] ) ) ? $options[ $subkey ] : '';
 								break;
 							}
@@ -289,6 +289,18 @@ abstract class Processor {
 	}
 
 	/**
+	 * Returns the property vvalue.
+	 *
+	 * @param 	string  		$property 	The CSS Property.
+	 * @param 	mixed       	$value 		The Property Value.
+	 *
+	 * @return 	string|array
+	 */
+	protected function get_property_value( $property, $value ) {
+		return Styles::get_property_value( $property, $value );
+	}
+
+	/**
 	 * Returns the value.
 	 *
 	 * @param 	string|array $value The value.
@@ -298,7 +310,7 @@ abstract class Processor {
 	 */
 	protected function process_value( $value, $output ) {
 		if ( isset( $output['property'] ) ) {
-			return Styles::get_property_value( $output['property'], $value );
+			return $this->get_property_value( $output['property'], $value );
 		}
 		
 		return $value;

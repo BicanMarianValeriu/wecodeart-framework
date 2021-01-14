@@ -9,19 +9,27 @@
 
 import './../../scss/customizer/customizer.scss';
 
+const {
+	fields,
+	googleFonts,
+} = wecodeartCustomizePreview;
+
 const wecodeartPostMessage = {
 	/**
 	 * The fields.
 	 *
 	 * @since 4.2.0
 	 */
-	fields: {},
+	fields,
 	/**
 	 * Common utilities.
 	 *
 	 * @since 4.2.0
 	 */
 	util: {
+		isGoogleFont: (family) => {
+			return (googleFonts.filter((v) => v.toLowerCase().includes(family.toLowerCase())).length);
+		},
 		/**
 		 * A collection of methods for the <link> tags.
 		 *
@@ -101,27 +109,31 @@ const wecodeartPostMessage = {
 		 * Processes the value and applies any replacements and/or additions.
 		 *
 		 * @since 	4.2.0
-		 * @param 	{Object} output - The output (js_vars) argument.
-		 * @param 	{mixed}  value - The value.
-		 * @param 	{string} controlType - The control-type.
-		 * @returns {string|false} - Returns false if value is excluded, otherwise a string.
+		 * @param 	{Object} output - The control.
+		 * @param 	{mixed}  value 	- The new value.
+		 *
+		 * @returns {string|false} 	- Returns false if value is excluded, otherwise a string.
 		 */
 		processValue: function (output, value) {
-			let self = this, settings = window.parent.wp.customize.get(), excluded = false;
+			const { util: { processValue } } = wecodeartPostMessage;
+			let settings = window.parent.wp.customize.get(), excluded = false;
 
 			if ('object' === typeof value) {
-				_.each(value, (subValue, key) => value[key] = self.processValue(output, subValue));
+				_.each(value, (subValue, key) => value[key] = processValue(output, subValue));
 				return value;
 			}
 
-			output = _.defaults(output, {
-				prefix: '',
-				units: '',
-				suffix: '',
-				value_pattern: '$',
-				pattern_replace: {},
-				exclude: []
-			});
+			output = {
+				...output,
+				... {
+					prefix: '',
+					units: '',
+					suffix: '',
+					pattern: '$',
+					pattern_replace: {},
+					exclude: []
+				}
+			};
 
 			if (1 <= output.exclude.length) {
 				_.each(output.exclude, (exclusion) => {
@@ -135,7 +147,7 @@ const wecodeartPostMessage = {
 				return false;
 			}
 
-			value = output.value_pattern.replace(new RegExp('\\$', 'g'), value);
+			value = output.pattern.replace(new RegExp('\\$', 'g'), value);
 			_.each(output.pattern_replace, (id, placeholder) => {
 				if (!_.isUndefined(settings[id])) value = value.replace(placeholder, settings[id]);
 			});
@@ -147,6 +159,7 @@ const wecodeartPostMessage = {
 		 *
 		 * @since 	4.2.0
 		 * @param 	{string} url - The URL.
+		 *
 		 * @returns {string}
 		 */
 		backgroundImageValue: function (url) {
@@ -163,20 +176,52 @@ const wecodeartPostMessage = {
 		 * Generates the CSS from the output (js_vars) parameter.
 		 *
 		 * @since 	4.2.0
-		 * @param 	{Object} output - The output (js_vars) argument.
-		 * @param 	{mixed}  value - The value.
-		 * @param 	{string} controlType - The control-type.
+		 * @param 	{object} field - The control.
+		 * @param 	{mixed}  value - The new value.
+		 *
 		 * @returns {string}
 		 */
-		fromOutput: function (output, value, controlType) {
-			const { util: { processValue, backgroundImageValue } } = wecodeartPostMessage;
+		fromOutput: function (output, value, { control, name }) {
+			const { util: { processValue, backgroundImageValue, linkTag, isGoogleFont } } = wecodeartPostMessage;
+
 			let styles = '', mediaQuery = false, processedValue;
 
 			if (output.js_callback && 'function' === typeof window[output.js_callback]) {
 				value = window[output.js_callback[0]](value, output.js_callback[1]);
 			}
 
-			switch (controlType) {
+			switch (control) {
+				case 'wecodeart-fonts':
+					styles += output.element + '{';
+					_.each(value, function (val, key) {
+						if (key === 'font-weight') return;
+						if (output.choice && key !== output.choice) {
+							return;
+						}
+						processedValue = processValue(output, val);
+						if (false !== processedValue) {
+							styles += output.property + ':' + processedValue + ';';
+						}
+					});
+					styles += '}';
+
+					if (isGoogleFont(value['font-family'])) {
+						let fontUrl = '//fonts.googleapis.com/css?family=';
+						let variants = [];
+						let family = value['font-family'].replace(' ', '+').replace(/\"/g, '&quot;');
+						if (value['font-weight'].length) {
+							[...value['font-weight']].map(v => {
+								if ('regular' === v) v = ':400';
+								if ('italic' === v) v = ':400i';
+								variants = [...variants, v.substring(0, 4)];
+							});
+							family += `:${variants.join(':')}`;
+						}
+						fontUrl += family + '&display=swap';
+						linkTag.setLink(name, fontUrl);
+					}
+
+					break;
 				case 'wecodeart-background':
 				case 'wecodeart-dimensions':
 				case 'wecodeart-sortable':
@@ -208,7 +253,7 @@ const wecodeartPostMessage = {
 					styles += '}';
 					break;
 				default:
-					if ('wecodeart-image' === controlType) {
+					if ('wecodeart-image' === control) {
 						value = (!_.isUndefined(value.url)) ? backgroundImageValue(value.url) : backgroundImageValue(value);
 					}
 
@@ -267,8 +312,9 @@ const wecodeartPostMessage = {
 		 * Modifies the HTML from the output (js_vars) parameter.
 		 *
 		 * @since 	4.2.0
-		 * @param 	{Object} output - The output (js_vars) argument.
-		 * @param 	{mixed}  value - The value.
+		 * @param 	{Object} field 	- The control.
+		 * @param 	{mixed}  value 	- The new value.
+		 *
 		 * @returns {string}
 		 */
 		fromOutput: function (output, value) {
@@ -292,7 +338,7 @@ const wecodeartPostMessage = {
 			if (output.attr) {
 				if (output.attr === 'class') {
 					if ('undefined' !== typeof output.value) {
-						// If is multiplce then we switch the class
+						// If is multiple then we switch the class
 						if (_.isArray(output.value)) {
 							$element.removeClass(output.value.join(' ')).addClass(value);
 						} else {
@@ -314,52 +360,29 @@ const wecodeartPostMessage = {
 
 (function (wp, $) {
 	const api = wp.customize;
-	const { util: { styleTag, linkTag } } = wecodeartPostMessage;
+	const { util: { styleTag }, fields } = wecodeartPostMessage;
 
 	// Blog Branding
 	api('blogname', value => value.bind(to => $('.site-title a').text(to)));
 	api('blogdescription', value => value.bind(to => $('.site-description').text(to)));
 
-	// Google Fonts Preview
-	api.bind('preview-ready', () => {
-		api.preview.bind('font-selection', ({ controlId, source, value, inherit }) => {
-			const defaultFontface = inherit ? 'inherit' : 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
-
-			let selector = 'body';
-			selector = selector.split(',');
-			selector = selector.map((sel) => 'html ' + sel).join(',');
-
-			const { family } = value;
-			if (family === false) {
-				styleTag.addData(controlId, `${selector} {font-family:${defaultFontface};}`);
-			} else {
-				styleTag.addData(controlId, `:root {--wca-font-sans-serif:${family};} ${selector} {font-family:${family};}`);
-			}
-
-			if (source.toLowerCase() === 'google') {
-				const fontValue = family.replace(' ', '+');
-				const url = `//fonts.googleapis.com/css?family=${fontValue}%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800&display=swap"`;
-				linkTag.setLink(controlId, url);
-			}
-		});
-	});
-
-	// Others field types
-	_.each(wecodeartPostMessageFields, (field) => {
-		api(field.name, (value) => {
+	// Process Controls
+	_.each(fields, ({ output, name, control }) => {
+		const args = { name, control };
+		api(name, (value) => {
 			value.bind(function (newVal) {
 				let styles = '';
-				_.each(field.output, (output) => {
-					if (!output.function || 'undefined' === typeof wecodeartPostMessage[output.function]) {
-						output.function = 'css';
+				_.each(output, (parse) => {
+					if (!parse.function || 'undefined' === typeof wecodeartPostMessage[parse.function]) {
+						parse.function = 'css';
 					}
-					if ('css' === output.function) {
-						styles += wecodeartPostMessage.css.fromOutput(output, newVal, field.type);
+					if ('css' === parse.function) {
+						styles += wecodeartPostMessage.css.fromOutput(parse, newVal, args);
 					} else {
-						wecodeartPostMessage[output.function].fromOutput(output, newVal, field.type);
+						wecodeartPostMessage[parse.function].fromOutput(parse, newVal, args);
 					}
 				});
-				styleTag.addData(field.name, styles);
+				styleTag.addData(name, styles);
 			});
 		});
 	});

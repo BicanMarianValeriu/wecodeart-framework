@@ -2066,7 +2066,7 @@ var FontFamilySelector = function FontFamilySelector(_ref) {
             label: family,
             fontFace: family,
             onClick: function onClick() {
-              onFontChoice(key, family);
+              onFontChoice(family, key);
               setSearch('');
             }
           })));
@@ -2331,12 +2331,12 @@ var TypefaceComponent = function TypefaceComponent(_ref) {
   var setting = control.setting,
       params = control.params;
 
-  var _useState = useState(setting.get().family),
+  var _useState = useState(setting.get()['font-family']),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
       fontFamily = _useState2[0],
       setFontFamily = _useState2[1];
 
-  var _useState3 = useState(setting.get().variants),
+  var _useState3 = useState(setting.get()['font-weight']),
       _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
       fontWeights = _useState4[0],
       setFontWeights = _useState4[1];
@@ -2350,27 +2350,19 @@ var TypefaceComponent = function TypefaceComponent(_ref) {
   };
   var controlParams = params.inputAttrs ? _objectSpread(_objectSpread({}, defaultParams), JSON.parse(params.inputAttrs)) : defaultParams;
 
-  var onChoseFont = function onChoseFont(fontSource, family) {
-    setFontFamily(family);
+  var onChoseFont = function onChoseFont(fontFamily) {
+    setFontFamily(fontFamily);
     setFontWeights([400]);
     updateControl({
-      family: family,
-      variants: []
-    }); // Update Live Preview
-
-    wp.customize.previewer.send('font-selection', {
-      controlId: control.id,
-      value: setting.get(),
-      source: fontSource,
-      type: '\\WeCodeArt\\Customizer\\Controls\\Fonts',
-      inherit: controlParams.inheritDefault
+      'font-family': fontFamily,
+      'font-weight': []
     });
   };
 
-  var onChoseWeights = function onChoseWeights(variants) {
-    setFontWeights(variants);
+  var onChoseWeights = function onChoseWeights(fontWeights) {
+    setFontWeights(fontWeights);
     updateControl({
-      variants: variants
+      'font-weight': fontWeights
     });
   };
 
@@ -2411,13 +2403,13 @@ TypefaceComponent.propTypes = {
 /***/ }),
 
 /***/ "@wordpress/element":
-/*!******************************************!*\
-  !*** external {"this":["wp","element"]} ***!
-  \******************************************/
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-(function() { module.exports = this["wp"]["element"]; }());
+(function() { module.exports = window["wp"]["element"]; }());
 
 /***/ }),
 

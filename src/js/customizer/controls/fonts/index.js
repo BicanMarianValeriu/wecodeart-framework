@@ -7,10 +7,10 @@ const { useState } = wp.element;
 const TypefaceComponent = ({ control }) => {
 	const { setting, params } = control;
 
-	const [fontFamily, setFontFamily] = useState(setting.get().family);
-	const [fontWeights, setFontWeights] = useState(setting.get().variants);
+	const [fontFamily, setFontFamily] = useState(setting.get()['font-family']);
+	const [fontWeights, setFontWeights] = useState(setting.get()['font-weight']);
 	const updateControl = (value) => setting.set({ ...setting.get(), ...value });
-	
+
 	const defaultParams = {
 		inheritDefault: false,
 	};
@@ -20,23 +20,15 @@ const TypefaceComponent = ({ control }) => {
 		...JSON.parse(params.inputAttrs),
 	} : defaultParams;
 
-	const onChoseFont = (fontSource, family) => {
-		setFontFamily(family);
+	const onChoseFont = (fontFamily) => {
+		setFontFamily(fontFamily);
 		setFontWeights([400]);
-		updateControl({ family, variants: [] });
-		// Update Live Preview
-		wp.customize.previewer.send('font-selection', {
-			controlId: control.id,
-			value: setting.get(),
-			source: fontSource,
-			type: '\\WeCodeArt\\Customizer\\Controls\\Fonts',
-			inherit: controlParams.inheritDefault,
-		});
+		updateControl({ 'font-family': fontFamily, 'font-weight': [] });
 	};
 
-	const onChoseWeights = (variants) => {
-		setFontWeights(variants);
-		updateControl({ variants });
+	const onChoseWeights = (fontWeights) => {
+		setFontWeights(fontWeights);
+		updateControl({ 'font-weight': fontWeights });
 	};
 
 	return (
