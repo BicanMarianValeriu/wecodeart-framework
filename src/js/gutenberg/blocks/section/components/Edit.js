@@ -2,7 +2,6 @@
  * External dependencies
  */
 import classnames from 'classnames';
-import { getBackgroundStyles } from './../../../controls/background';
 import { getLayouts, getGridWidth } from './../constants';
 
 /**
@@ -27,6 +26,7 @@ const {
         BlockVerticalAlignmentToolbar,
         useBlockProps,
         __experimentalBlockVariationPicker,
+        __experimentalGetGradientClass,
         __experimentalUseInnerBlocksProps: useInnerBlocksProps,
     },
     components: {
@@ -72,7 +72,20 @@ function EditContainer(props) {
         updateAlignment,
     } = props;
 
-    const { align, verticalAlignment, container, gutter } = attributes;
+    const {
+        align,
+        verticalAlignment,
+        container,
+        gutter,
+        gradient,
+        backgroundUrl = false,
+        backgroundOverlay = 0,
+        style: {
+            color: {
+                gradient: customGradient = false
+            } = {}
+        } = {}
+    } = attributes;
 
     const blockProps = useBlockProps({
         className: classnames('wca-section', {
@@ -81,7 +94,6 @@ function EditContainer(props) {
             'wca-section--tablet': deviceType === 'Tablet',
             'wca-section--desktop': deviceType === 'Desktop',
         }),
-        style: getBackgroundStyles(attributes),
     });
 
     const innerBlocksProps = useInnerBlocksProps({
@@ -160,6 +172,15 @@ function EditContainer(props) {
                 </PanelBody>
             </InspectorControls>
             <div {...blockProps}>
+                {backgroundUrl && (gradient || customGradient) && backgroundOverlay !== 0 && (
+                    <span {...{
+                        className: classnames('wp-block__gradient-background', __experimentalGetGradientClass(gradient)),
+                        style: customGradient
+                            ? { background: customGradient }
+                            : undefined,
+                        'aria-hidden': 'true',
+                    }} />
+                )}
                 <div className={classnames('wca-section__overlay')}>
                     {times(getGridWidth(deviceType)).map((i) => <div className="wca-section__overlay-col" key={i} />)}
                 </div>

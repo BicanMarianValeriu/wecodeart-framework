@@ -17,6 +17,7 @@ namespace WeCodeArt\Admin\Customizer\Modules\Styles\Controls;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Admin\Customizer\Modules\Styles\Controls as Control_Processor;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Customizer Font Output
@@ -25,16 +26,19 @@ class Font extends Control_Processor {
 	/**
 	 * Processes a single item from the `output` array.
 	 *
-	 * @param 	array $output The `output` item.
-	 * @param 	array $value  The field's value.
+	 * @param 	array	$output	The `output` item.
+	 *
+	 * @return 	void
 	 */
-	protected function process_output( $output, $value ) {
+	protected function process_output( $output ) {
 		$output = wp_parse_args( $output, [
 			'media_query' => 'global',
 			'element'     => 'body',
 			'prefix'      => '',
 			'suffix'      => '',
 		] );
+
+		$value = get_prop( $output, 'value' );
 		
 		// Value is already sanitized before being added in DB (customizer controls), however
 		// The generated styles array is sanitized again based on property/value when the CSS string is generated

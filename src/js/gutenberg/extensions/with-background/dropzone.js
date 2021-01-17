@@ -1,12 +1,12 @@
 /**
  * Internal dependencies
  */
-import { ALLOWED_BG_MEDIA_TYPES } from './';
+import { ALLOWED_BG_MEDIA_TYPES } from './index';
 
 /**
  * WordPress dependencies
  */
-const { Component, Fragment } = wp.element;
+const { Component } = wp.element;
 const { mediaUpload } = wp.blockEditor;
 const { DropZone: CoreDropzone } = wp.components;
 
@@ -38,11 +38,7 @@ class DropZone extends Component {
     }
 
     render() {
-        return (
-            <Fragment>
-                <CoreDropzone onFilesDrop={this.addFile} label={this.props.label} />
-            </Fragment>
-        );
+        return (<CoreDropzone onFilesDrop={this.addFile} label={this.props.label} />);
     }
 }
 

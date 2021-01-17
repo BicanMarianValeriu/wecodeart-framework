@@ -24,7 +24,7 @@ const { withSpokenMessages, Modal } = wp.components;
  */
 class MarkdownFormatting extends Component {
 	constructor() {
-		super( ...arguments );
+		super(...arguments);
 
 		this.state = {
 			isOpen: false,
@@ -33,90 +33,76 @@ class MarkdownFormatting extends Component {
 
 	render() {
 		const closeModal = () => (
-			this.setState( { isOpen: false } )
+			this.setState({ isOpen: false })
 		);
 
-		const mapKeyCombination = ( keyCombination ) => keyCombination.map( ( character, index ) => {
-			if ( character === '+' ) {
-				return (
-					<Fragment key={ index }>
-						{ character }
-					</Fragment>
-				);
+		const mapKeyCombination = (keyCombination) => keyCombination.map((character, index) => {
+			if (character === '+') {
+				return (<Fragment key={index}>{character}</Fragment>);
 			}
 
 			return (
-				<kbd
-					key={ index }
-					className="edit-post-keyboard-shortcut-help__shortcut-key"
-				>
-					{ character }
+				<kbd key={index} className="edit-post-keyboard-shortcut-help__shortcut-key">
+					{character}
 				</kbd>
 			);
-		} );
+		});
 
-		const ShortcutList = ( { shortcuts } ) => (
+		const ShortcutList = ({ shortcuts }) => (
 			<dl className="edit-post-keyboard-shortcut-help__shortcut-list">
-				{ shortcuts.map( ( { keyCombination, description, ariaLabel }, index ) => (
-					<div
-						className="edit-post-keyboard-shortcut-help__shortcut"
-						key={ index }
-					>
+				{shortcuts.map(({ keyCombination, description, ariaLabel }, index) => (
+					<div className="edit-post-keyboard-shortcut-help__shortcut" key={index}>
 						<div className="edit-post-keyboard-shortcut-help__shortcut-description">
-							{ description }
+							{description}
 						</div>
 						<div className="edit-post-keyboard-shortcut-help__shortcut-term">
-							<kbd className="edit-post-keyboard-shortcut-help__shortcut-key-combination" aria-label={ ariaLabel }>
-								{ mapKeyCombination( castArray( keyCombination ) ) }
+							<kbd className="edit-post-keyboard-shortcut-help__shortcut-key-combination" aria-label={ariaLabel}>
+								{mapKeyCombination(castArray(keyCombination))}
 							</kbd>
 						</div>
 					</div>
-				) ) }
+				))}
 			</dl>
 		);
 
-		const ShortcutSection = ( { title, shortcuts } ) => (
+		const ShortcutSection = ({ title, shortcuts }) => (
 			<section className="edit-post-keyboard-shortcut-help__section">
-				<h2 className="edit-post-keyboard-shortcut-help__section-title">{ title }</h2>
-				<ShortcutList shortcuts={ shortcuts } />
+				<h2 className="edit-post-keyboard-shortcut-help__section-title">{title}</h2>
+				<ShortcutList shortcuts={shortcuts} />
 			</section>
 		);
 
 		return (
 			<Fragment>
 				<PluginMoreMenuItem
-					icon={ null }
+					icon={null}
 					role="menuitemcheckbox"
-					onClick={ () => {
-						this.setState( { isOpen: true } );
-					} }
+					onClick={() => this.setState({ isOpen: true })}
 				>
-					{ __( 'Markdown Formatting', 'wecodeart' ) }
+					{__('Markdown Formatting', 'wecodeart')}
 				</PluginMoreMenuItem>
-				{ this.state.isOpen ?
+				{this.state.isOpen ?
 					<Modal
-						title={ __( 'Keyboard Shortcuts', 'wecodeart' ) }
-						onRequestClose={ () => closeModal() }
-						closeLabel={ __( 'Close', 'wecodeart' ) }
-						icon={ null }
+						title={__('Keyboard Shortcuts', 'wecodeart')}
+						onRequestClose={() => closeModal()}
+						closeLabel={__('Close', 'wecodeart')}
+						icon={null}
 						className="wca-modal-component components-modal--wca-markdown"
 					>
-						{ shortcutConfig.map( ( config, index ) => (
-							<ShortcutSection key={ index } { ...config } />
-						) ) }
+						{shortcutConfig.map((config, index) => (<ShortcutSection key={index} {...config} />))}
 					</Modal> :
-					null }
+					null}
 			</Fragment>
 		);
 	}
 }
 
 export default compose(
-	withSelect( () => {
+	withSelect(() => {
 		return {
 			isDisabled: false,
 		};
-	} ),
-	ifCondition( ( props ) => ! props.isDisabled ),
+	}),
+	ifCondition((props) => !props.isDisabled),
 	withSpokenMessages,
-)( MarkdownFormatting );
+)(MarkdownFormatting);

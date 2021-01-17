@@ -174,13 +174,16 @@ class Gutenberg {
 		$support = get_prop( $this->config, 'support', [] );
 
 		// Theme Support
-		foreach( array_filter( $support ) as $feature => $value ) {
-			if( $value === false ) continue;
+		foreach( $support as $feature => $value ) {
+			if( $value === 'remove' ) {
+				remove_theme_support( $feature );
+				continue;
+			};
 			add_theme_support( $feature, $value );
 		}
 
 		// Properly dequeue Blocks Styles - since setting support to false doesn't
-		if( get_prop( $support, 'wp-block-styles', false ) === false ) {
+		if( get_prop( $support, 'wp-block-styles', 'remove' ) === 'remove' ) {
 			add_action( 'wp_print_styles', function() {
 				wp_dequeue_style( 'wp-block-library' ); 		// WordPress Core
     			wp_dequeue_style( 'wp-block-library-theme' ); 	// WordPress Core

@@ -36,9 +36,9 @@
 		"reusable": false,
 		"withBackground": true,
 		"lightBlockWrapper": true,
+		"padding": true,
 		"color": {
-			"gradients": true,
-			"link": true
+			"gradients": true
 		}
 	}
 }

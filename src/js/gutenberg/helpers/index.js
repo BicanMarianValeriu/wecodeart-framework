@@ -3,11 +3,6 @@
  */
 const { pick, get, findIndex } = lodash;
 
-// Set dim ratio.
-export function overlayToClass(ratio) {
-    return (ratio === 0 || ratio === 50) ? null : 'has-background-overlay-' + (10 * Math.round(ratio / 10));
-}
-
 // Pick image media attributes.
 export const pickRelevantMediaFiles = (image, images) => {
     const imageProps = pick(image, ['alt', 'id', 'link', 'caption', 'imgLink']);

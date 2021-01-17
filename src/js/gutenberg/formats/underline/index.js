@@ -1,12 +1,13 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
-const { toggleFormat } = wp.richText;
-const { RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-const { select } = wp.data;
-import SVGIcon from './icon';
+const {
+	i18n: { __ },
+	data: { select },
+	components: { Icon, SVG, Path },
+	richText: { toggleFormat },
+	blockEditor: { RichTextToolbarButton, RichTextShortcut }
+} = wp;
 
 /**
  * Block constants
@@ -28,7 +29,7 @@ export const underline = {
 		const onToggle = () => onChange(toggleFormat(value, { type: name }));
 
 		return (
-			<Fragment>
+			<>
 				<RichTextShortcut
 					type="primary"
 					character="u"
@@ -36,7 +37,10 @@ export const underline = {
 				/>
 				{checkFormats.length === 0 && (
 					<RichTextToolbarButton
-						icon={SVGIcon}
+						icon={<Icon icon={<SVG style={{ height: 16 }} viewBox="0 0 467.765 467.765">
+							<Path d="m58.471 409.294h350.824v58.471h-350.824z" />
+							<Path d="m292.353 0v58.471h29.235v175.412c0 48.364-39.342 87.706-87.706 87.706s-87.706-39.342-87.706-87.706v-175.412h29.235v-58.471h-116.94v58.471h29.235v175.412c0 80.597 65.579 146.176 146.176 146.176s146.176-65.579 146.176-146.176v-175.412h29.235v-58.471z" />
+						</SVG>} />}
 						title={__('Underline', 'wecodeart')}
 						onClick={onToggle}
 						isActive={isActive}
@@ -44,7 +48,7 @@ export const underline = {
 						shortcutCharacter="u"
 					/>
 				)}
-			</Fragment>
+			</>
 		);
 	},
 };

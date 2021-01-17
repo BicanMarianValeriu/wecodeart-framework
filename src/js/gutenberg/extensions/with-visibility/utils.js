@@ -1,7 +1,7 @@
 const { findIndex } = lodash;
 
 const getVisibilityClasses = (attributes) => {
-    const { wecodeart } = attributes;
+    const { wecodeart = {} } = attributes;
     let classNames = [
         { [wecodeart.id]: typeof wecodeart.id !== 'undefined' },
     ];

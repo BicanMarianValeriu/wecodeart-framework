@@ -7,12 +7,14 @@ import { alignJustify } from '@wordpress/icons';
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { Component } = wp.element;
-const { compose, ifCondition } = wp.compose;
-const { select, withSelect, withDispatch } = wp.data;
-const { RichTextToolbarButton } = wp.blockEditor;
-const { Icon } = wp.components;
+const {
+	i18n: { __ },
+	components: { Icon },
+	element: { Component },
+	compose: { compose, ifCondition },
+	data: { select, withDispatch, withSelect },
+	blockEditor: { RichTextToolbarButton },
+} = wp;
 
 class JustifyControl extends Component {
 	render() {
@@ -53,8 +55,8 @@ export default compose(
 	withDispatch((dispatch) => ({
 		updateBlockAttributes: dispatch('core/block-editor').updateBlockAttributes,
 	})),
-	ifCondition((props) => {
-		const checkFormats = props.formatTypes.filter((formats) => formats.name === 'wpcom/justify');
-		return 'core/paragraph' === props.blockName && checkFormats.length === 0;
+	ifCondition(({ formatTypes, blockName }) => {
+		const checkFormats = formatTypes.filter(({ name }) => name === 'wpcom/justify');
+		return 'core/paragraph' === blockName && checkFormats.length === 0;
 	})
 )(JustifyControl);

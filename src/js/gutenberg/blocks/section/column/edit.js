@@ -7,7 +7,6 @@ import classnames from 'classnames';
  * Internal dependencies
  */
 import ResponsiveColumns from './../../../controls/bootstrap-columns';
-import { getBackgroundStyles } from './../../../controls/background';
 
 /**
  * WordPress dependencies
@@ -37,8 +36,8 @@ export default function Edit(props) {
     const { clientId, className, attributes, setAttributes } = props;
 
     const {
-        verticalAlignment,
         bootstrapColumns: { global, xs, sm, md, lg, xl },
+        verticalAlignment,
     } = attributes;
 
     let columnClasses = ['col'];
@@ -74,7 +73,7 @@ export default function Edit(props) {
         className: classnames(className, columnClasses, {
             [`align-self-${verticalAlignment}`]: verticalAlignment,
         }),
-        style: getBackgroundStyles(attributes)
+        style: {}
     });
 
     const innerBlocksProps = useInnerBlocksProps(blockProps, {

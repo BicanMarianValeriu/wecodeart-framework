@@ -34,9 +34,12 @@
 		"className": true,
 		"withBackground": true,
 		"lightBlockWrapper": true,
+		"spacing": {
+			"padding": true
+		},
+		"padding": true,
 		"color": {
-			"gradients": true,
-			"link": false
+			"gradients": true
 		}
 	}
 }

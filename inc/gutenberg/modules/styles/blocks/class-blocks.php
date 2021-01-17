@@ -29,7 +29,8 @@ class Blocks extends Processor {
 	 *
 	 * @var 	string
 	 */
-	protected 	$name = '';
+	protected 	$name 		= '';
+	protected 	$element 	= '';
 
 	/**
 	 * Block Attrs.
@@ -45,48 +46,79 @@ class Blocks extends Processor {
 	 * @param 	array 	$args The block args.
 	 */
 	public function __construct( $args ) {
-		$this->name 	= get_prop( $args, 'blockName' );
-		$this->attrs 	= get_prop( $args, 'attrs', [] );
+		$this->name		= get_prop( $args, 'blockName' );
+		$this->attrs	= get_prop( $args, 'attrs', [] );
 
+		// Set unique class
+		$this->set_element();
+		// Process CSS
 		$this->process_attributes();
 		$this->parse_output();
-		$this->process_custom_css();
+		$this->parse_custom();
 	}
 
 	/**
-	 * Parses an output and creates the styles array for it.
+	 * Setup element unique class.
 	 *
-	 * @return 	null
+	 * @return 	mixed
 	 */
-	protected function process_attributes() {
+	private function set_element() {
 		$block_class 	= explode( ' ', get_prop( $this->attrs, 'className' ) );
 		$block_class 	= array_filter( $block_class, function( $key ) {
 			return strpos( $key, 'wcacss-' ) === 0;
 		} );
 		
-		// Bail if no custom class
-		if( count( $block_class ) === 0 ) return;
-		
+		// If not unique classname, try again
+		if( count( $block_class ) === 0 ) {
+			return $this;
+		};
+
+		$this->element = '.' . sanitize_html_class( end( $block_class ) );
+	}
+
+	/**
+	 * Parses an output and creates the styles array for it.
+	 *
+	 * @return 	void
+	 */
+	protected function process_attributes() {
 		$this->output = [];
 
-		$block_class 		= '.' . end( $block_class );
 		$output 			= [];
-		$output['element'] 	= $block_class;
+		$output['element'] 	= $this->element;
 
 		// Background
-		if ( $value = get_prop( $this->attrs, 'backgroundUrl', false ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-image',
-				'value'	  	=> $value
-			], $output );
-		}
-
-		// Focal Point
-		if ( $value = get_prop( $this->attrs, 'focalPoint', false ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-position',
-				'value'	  	=> $value
-			], $output );
+		if( get_prop( $this->attrs, 'backgroundType' ) === 'image' ) {
+			if ( $value = get_prop( $this->attrs, 'backgroundUrl', false ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'background',
+					'value'	  	=> $value
+				], $output );
+			}
+	
+			// Background Position
+			if ( $value = get_prop( $this->attrs, 'focalPoint', false ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'background-position',
+					'value'	  	=> $value
+				], $output );
+			}
+			
+			// Background Size
+			if ( $value = get_prop( $this->attrs, 'backgroundSize', false ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'background-size',
+					'value'	  	=> $value
+				], $output );
+			}
+	
+			// Background Repeat
+			if ( $value = get_prop( $this->attrs, 'backgroundRepeat', false ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'background-repeat',
+					'value'	  	=> $value
+				], $output );
+			}
 		}
 		
 		// Inline Style
@@ -96,21 +128,32 @@ class Blocks extends Processor {
 				if ( $value = get_prop( $typography, 'fontSize', false ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'font-size',
-						'value'	  	=> $value
+						'value'	  	=> $value,
+						'units'	  	=> 'px'
 					], $output );
 				}
 			}
 			// Colors
 			if ( $color = get_prop( $css_style, 'color', false ) ) {
+				// Text
 				if ( $value = get_prop( $color, 'text', false ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'color',
 						'value'	  	=> $value
 					], $output );
 				}
+				// Background
 				if ( $value = get_prop( $color, 'background', false ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'background-color',
+						'value'	  	=> $value
+					], $output );
+				}
+				// Gradient
+				if ( $value = get_prop( $color, 'gradient', false ) ) {
+					$this->output[] = wp_parse_args( [
+						'element'	=> implode( ' ', [ $this->element, '.wp-block__gradient-background' ] ),
+						'property' 	=> 'background-image',
 						'value'	  	=> $value
 					], $output );
 				}
@@ -119,11 +162,11 @@ class Blocks extends Processor {
 	}
 	
 	/**
-	 * Process Custom CSS
+	 * Parses and attach Custom CSS
 	 *
-	 * @return 	null
+	 * @return 	void
 	 */
-	protected function process_custom_css() {
+	private function parse_custom() {
 		if ( $css_custom = get_prop( $this->attrs, 'customCSS', false ) ) {
 			$custom_style 	= wp_strip_all_tags( $css_custom );
 			$custom_style 	= wecodeart( 'integrations' )->get( 'styles' )::break_queries( $custom_style );

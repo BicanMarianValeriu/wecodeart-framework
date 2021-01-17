@@ -3,7 +3,8 @@
  */
 const { Icon, SVG, Path } = wp.components;
 
-export const Format = <Icon size="20" icon={<SVG
+export const Format = <Icon icon={<SVG
+	style={{ height: 18 }}
 	viewBox="0 0 512 512"
 	xmlns="http://www.w3.org/2000/svg"
 >

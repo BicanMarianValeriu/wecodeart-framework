@@ -17,6 +17,11 @@
 
 .wp-block-column {
 	@include make-col-ready();
+    width: auto;
+	
+	&:not([style]) {
+		flex-grow: 1;
+	}
 
 	&.is-vertically-aligned-top {
 		align-self: flex-start;

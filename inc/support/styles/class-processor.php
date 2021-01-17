@@ -37,6 +37,13 @@ abstract class Processor {
 	 * @var 	array
 	 */
 	protected 	$styles = [];
+	
+	/**
+	 * Processor type.
+	 *
+	 * @var 	string
+	 */
+	protected 	$processor = '';
 
 	/**
 	 * Constructor
@@ -55,7 +62,7 @@ abstract class Processor {
 	 *
 	 * @param 	array        $output The output args.
 	 *
-	 * @return 	string|array
+	 * @return 	string|array The output sanitized value
 	 */
 	protected function apply_sanitize_callback( $output ) {
 		if ( isset( $output['sanitize_callback'] ) && null !== $output['sanitize_callback'] ) {
@@ -74,16 +81,17 @@ abstract class Processor {
 	 * If we have a value_pattern defined, apply it to the value.
 	 *
 	 * @param 	array        $output 	The output args.
-	 * @param 	string		 $type  	The value type.
 	 *
-	 * @return 	string|array
+	 * @return 	string|array The output value after pattern
 	 */
-	protected function apply_value_pattern( $output, $type = '' ) {
-		$value = $output['value'];
+	protected function apply_pattern( $output ) {
+		$value = get_prop( $output, 'value' );
+		
 		if ( isset( $output['pattern'] ) && ! empty( $output['pattern'] ) && is_string( $output['pattern'] ) ) {
 			if ( ! is_array( $value ) ) {
 				$value = str_replace( '$', $value, $output['pattern'] );
 			}
+
 			if ( is_array( $value ) ) {
 				foreach ( array_keys( $value ) as $value_k ) {
 					if ( is_array( $value[ $value_k ] ) ) {
@@ -98,7 +106,8 @@ abstract class Processor {
 					$value[ $value_k ] = str_replace( '$', $value[ $value_k ], $output['pattern'] );
 				}
 			}
-			$value = $this->apply_pattern_replace( $output, $type );
+			
+			$value = $this->apply_pattern_replace( $value, $output );
 		}
 		
 		return $value;
@@ -107,16 +116,14 @@ abstract class Processor {
 	/**
 	 * If we have a value_pattern defined, apply it to the value.
 	 *
+	 * @param 	mixed        $value 	The output value.
 	 * @param 	array        $output 	The output args.
-	 * @param 	string		 $type  	The value type.
 	 *
-	 * @return 	string|array
+	 * @return 	string|array The output value replaced
 	 */
-	protected function apply_pattern_replace( $output, $type ) {
-		$value = $output['value'];
-
+	protected function apply_pattern_replace( $value, $output ) {
 		if ( isset( $output['pattern_replace'] ) && is_array( $output['pattern_replace'] ) ) {
-			$option_type = $type ?: 'theme_mod';
+			$option_type = $this->processor;
 			$option_name = 'wecodeart-settings';
 			$options     = [];
 
@@ -148,11 +155,14 @@ abstract class Processor {
 							$replacement = get_user_meta( $user_id, $replace, true );
 						}
 						break;
-					default:
+					case 'theme_mod':
 						$replacement = get_theme_mod( $replace );
 						if ( ! $replacement ) {
 							$replacement = $replace;
 						}
+						break;
+					default:
+						$replacement = $replace;
 				}
 
 				$replacement = ( false === $replacement ) ? '' : $replacement;
@@ -201,10 +211,12 @@ abstract class Processor {
 								$skip = true;
 							}
 						}
+
 						if ( isset( $output['choice'] ) && isset( $value[ $output['choice'] ] ) && $exclude == $value[ $output['choice'] ] ) { // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 							$skip = true;
 						}
 					}
+
 					if ( $skip ) {
 						continue;
 					}
@@ -215,21 +227,20 @@ abstract class Processor {
 					}
 				}
 			}
+
+			// If excluded, move on
 			if ( $skip ) {
 				continue;
 			}
 
-			// Apply any value patterns defined.
-			$value = $this->apply_value_pattern( $output );
-
+			// If element is array, combine its selectors
 			if ( isset( $output['element'] ) && is_array( $output['element'] ) ) {
 				$output['element'] = array_unique( $output['element'] );
 				sort( $output['element'] );
 				$output['element'] = implode( ',', $output['element'] );
 			}
 
-			$value = $this->process_value( $value, $output );
-
+			// Output based on context
 			if ( ( is_admin() && ! is_customize_preview() ) || ( isset( $_GET['editor'] ) && '1' === $_GET['editor'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				// Check if this is an admin style.
 				if ( ! isset( $output['context'] ) || ! in_array( 'editor', $output['context'], true ) ) {
@@ -240,19 +251,26 @@ abstract class Processor {
 				continue;
 			}
 
-			$this->process_output( $output, $value );
+			// Apply pattern
+			$output = wp_parse_args( [
+				'value' => $this->apply_pattern( $output )
+			], $output );
+
+			// Process value
+			$this->process_output( wp_parse_args( [
+				'value' => $this->process_value( $output )
+			], $output ) );
 		}
 	}
 
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *
-	 * @param 	array        $output The field output.
-	 * @param 	string|array $value  The value.
+	 * @param 	array	$output The field output.
 	 *
 	 * @return 	null
 	 */
-	protected function process_output( $output, $value ) {
+	protected function process_output( $output ) {
 		if ( ! isset( $output['element'] ) || ! isset( $output['property'] ) ) {
 			return;
 		}
@@ -264,25 +282,22 @@ abstract class Processor {
 			'suffix'      	=> '',
 		] );
 
-		// Properties that can accept multiple values.
-		// Useful for example for gradients where all browsers use the "background-image" property
-		// and the browser prefixes go in the value_pattern arg.
-		// $accepts_multiple = array(
-		// 	'background-image',
-		// 	'background',
-		// );
+		$value = get_prop( $output, 'value' );
 
-		// if ( in_array( $output['property'], $accepts_multiple, true ) ) {
-		// 	if (
-		// 		isset( $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] ) && 
-		// 		! is_array( $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] ) 
-		// 	) {
-		// 		$value = (array) $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ];
-		// 		$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
-		// 	}
-		// 	$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ][] = $output['prefix'] . $value . $output['units'] . $output['suffix'];
-		// 	return;
-		// }
+		// Properties that can accept multiple values.
+		$accepts_multiple = [ 'background-image', 'background' ];
+
+		if ( in_array( $output['property'], $accepts_multiple, true ) ) {
+			if (
+				isset( $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] ) && 
+				! is_array( $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] ) 
+			) {
+				$value = (array) $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ];
+				$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
+			}
+			$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ][] = $output['prefix'] . $value . $output['units'] . $output['suffix'];
+			return;
+		}
 
 		if ( is_string( $value ) || is_numeric( $value ) ) {
 			$value = $output['prefix'] . $value . $output['units'] . $output['suffix'];
@@ -305,17 +320,16 @@ abstract class Processor {
 	/**
 	 * Returns the value.
 	 *
-	 * @param 	string|array $value The value.
-	 * @param 	array        $output The field "output".
+	 * @param 	array        	$output 	The field "output".
 	 *
 	 * @return 	string|array
 	 */
-	protected function process_value( $value, $output ) {
+	protected function process_value( $output ) {
 		if ( isset( $output['property'] ) ) {
-			return $this->get_property_value( $output['property'], $value );
+			return $this->get_property_value( $output['property'], $output['value'] );
 		}
 		
-		return $value;
+		return $output['value'];
 	}
 
 	/**

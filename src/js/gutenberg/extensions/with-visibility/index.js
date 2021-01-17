@@ -30,7 +30,7 @@ import { getVisibilityClasses } from './utils';
  */
 function addAttributes(settings) {
 	const { name: blockName } = settings;
-	if (typeof settings.attributes === 'undefined' && restrictedBlocks.includes(blockName)) return settings;
+	if (typeof settings.attributes === 'undefined' || restrictedBlocks.includes(blockName)) return settings;
 
 	settings.attributes = Object.assign(settings.attributes, {
 		wecodeart: {

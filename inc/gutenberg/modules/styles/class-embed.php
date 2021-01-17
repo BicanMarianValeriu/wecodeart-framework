@@ -42,9 +42,9 @@ class Embed {
 	 * Initialize the class
 	 */
 	public function init() {
-		add_filter( 'get_the_excerpt', 		array( $this, 'get_excerpt_start' ), 1 );
-		add_action( 'wp', 					array( $this, 'render_post_css' ), 10 );
-		add_filter( 'get_the_excerpt', 		array( $this, 'get_excerpt_end' ), 20 );
+		add_filter( 'get_the_excerpt',	[ $this, 'get_excerpt_start'	], 1 );
+		add_action( 'init',				[ $this, 'render_post_css'		], 10 );
+		add_filter( 'get_the_excerpt',	[ $this, 'get_excerpt_end'		], 20 );
 	}
 
 	/**
@@ -86,7 +86,7 @@ class Embed {
 		if ( is_singular() ) {
 			// Enqueue main post attached style.
 			$id = get_the_ID();
-			$this->enqueue_styles( $id );
+			$this->enqueue_styles();
 		}
 
 		// Enqueue styles for other posts that display the_content, if any.
@@ -135,10 +135,7 @@ class Embed {
 
 		// If we have styles and we dont have a file, please generate one!
 		// Until then, enqueue meta and return, and next time move bellow!
-		if (
-			get_post_meta( $post_id, '_wca_gutenberg_block_styles', true ) && 
-			! Handler::get_instance()->has_css_file( $post_id )
-		) {
+		if ( ! Handler::get_instance()->has_css_file( $post_id ) ) {
 			// Generate the file for the next time!
 			Handler::get_instance()->generate_css_file( $post_id );
 
@@ -150,10 +147,11 @@ class Embed {
 		}
 
 		// Get Filename and URL and enqueue in footer or as usual!
-		$file_name 	= get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
 		$file_url 	= Handler::get_instance()->get_css_url( $post_id );
-		$blocks 	= Gutenberg::parse_blocks( get_post_field( 'post_content', $post_id ) );
+		$file_name 	= str_replace( 'css', '', basename( $file_url ) );
 
+		// Handle reusables
+		$blocks 	= Gutenberg::parse_blocks( get_post_field( 'post_content', $post_id ) );
 		if ( is_array( $blocks ) || ! empty( $blocks ) ) {
 			$this->enqueue_reusable_styles( $blocks, $footer );
 		}

@@ -234,12 +234,14 @@ return [
                     'slug'     => 'luminous-vivid-orange-to-vivid-red',
                 ],
             ],
-            'wp-block-styles'           => false,
+            'wp-block-styles'           => 'remove',
+            'core-block-patterns'       => 'remove',
             'align-wide'                => true,
             'palette-classnames'        => true,
+            'custom-units'              => ['rem', 'em', 'px'],
+            'custom-spacing'            => true,
             'custom-line-height'        => true,
             'experimental-link-color'   => true,
-            'custom-spacing'            => true,
         ]
     ],
     /*

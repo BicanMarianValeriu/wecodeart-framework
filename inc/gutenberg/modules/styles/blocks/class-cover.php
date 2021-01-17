@@ -30,33 +30,24 @@ class Cover extends Base {
 	 * @return 	null
 	 */
 	protected function process_attributes() {
-		$block_class 	= explode( ' ', get_prop( $this->attrs, 'className', '' ) );
-		$block_class 	= array_filter( $block_class, function( $key ) {
-			return strpos( $key, 'wcacss-' ) === 0;
-		} );
-		
-		// Bail if no custom class
-		if( count( $block_class ) === 0 ) return;
-		
 		$this->output = [];
-
-		$block_class 		= '.' . end( $block_class );
+		
 		$output 			= [];
-		$output['element'] 	= $block_class;
+		$output['element'] 	= $this->element;
 
 		// Block Attributes
 		if ( $value = get_prop( $this->attrs, 'minHeight', false ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'min-height',
 				'value'	  	=> $value,
-				'units'		=> 'px'
+				'units'		=> get_prop( $this->attrs, 'minHeightUnits', 'px' )
 			], $output );
 		}
 
 		if ( $value = get_prop( $this->attrs, 'url', false ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'background-image',
-				'value'	  	=> $value
+				'value'	  	=> $value,
 			], $output );
 		}
 
@@ -76,12 +67,12 @@ class Cover extends Base {
 
 		if ( $value = get_prop( $this->attrs, 'customGradient', false ) ) {
 			$this->output[] = wp_parse_args( [
-				'element'	=> implode( ', ', [
-					$block_class . '.has-background-gradient::before',
-					$block_class . '>.wp-block-cover__gradient-background'
-				]),
-				'property' 	=> 'background',
-				'value'	  	=> $value
+				'element'	=> [
+					$this->element . '.has-background-gradient::before',
+					$this->element . '>span[aria-hidden="true"]:first-child'
+				],
+				'property' 	=> 'background-image',
+				'value'	  	=> $value,
 			], $output );
 		}
 	}

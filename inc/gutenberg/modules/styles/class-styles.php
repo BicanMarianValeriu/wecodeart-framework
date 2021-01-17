@@ -147,7 +147,8 @@ class Styles {
 		// Find the class that will handle the output for this block.
 		$classname	= Styles\Blocks::class;
 		$defaults   = [
-			'core/cover' => Styles\Blocks\Cover::class
+			'core/cover' 		=> Styles\Blocks\Cover::class,
+			'core/media-text' 	=> Styles\Blocks\Media::class
 		];
 
 		$output_classes = apply_filters( 'wecodeart/filter/gutenberg/styles/blocks', $defaults );
@@ -156,10 +157,10 @@ class Styles {
 			$classname = $output_classes[ $block['blockName'] ];
 		}
 		
-		if( ! class_exists( $classname ) ) return [];
+		if( class_exists( $classname ) ) {
+			$obj = new $classname( $block );
 	
-		$obj = new $classname( $block );
-
-		return $obj->get_styles();
+			return $obj->get_styles();
+		};
 	}
 }

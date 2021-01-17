@@ -1,11 +1,13 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { useCallback, useMemo, useState } = wp.element;
-const { RichTextToolbarButton, __experimentalUseEditorFeature: useEditorFeature } = wp.blockEditor;
-const { removeFormat } = wp.richText;
-const { Icon } = wp.components;
+const {
+	i18n: { __ },
+	element: { useCallback, useMemo, useState },
+	blockEditor: { RichTextToolbarButton, __experimentalUseEditorFeature: useEditorFeature },
+	richText: { removeFormat },
+	components: { Icon }
+} = wp;
 
 /**
  * External dependencies

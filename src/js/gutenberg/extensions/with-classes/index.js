@@ -57,6 +57,7 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 			customClassNames,
 			suggestions,
 			isSelected,
+			setAttributes,
 			setState,
 		} = props;
 
@@ -71,7 +72,7 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 							suggestions={suggestions}
 							maxSuggestions={20}
 							onChange={(val) => {
-								props.setAttributes({ className: val !== '' ? join(val, ' ') : undefined });
+								setAttributes({ className: val !== '' ? join(val, ' ') : undefined });
 								setState({ customClassNames: val !== '' ? val : undefined });
 							}}
 						/>
