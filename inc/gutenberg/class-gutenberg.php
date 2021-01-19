@@ -56,6 +56,9 @@ class Gutenberg {
 		// Editor Settings.
 		add_filter( 'block_editor_settings', 		[ $this, 'block_editor_settings' ], 10, 2 );
 
+		// Reusable Theme link.
+		add_filter( 'admin_menu',  					[ $this, 'reusable_blocks_link' ] );
+
 		// Theme Support.
 		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
 
@@ -64,6 +67,21 @@ class Gutenberg {
 		Gutenberg\Modules\Title::get_instance();
 		Gutenberg\Modules\Styles::get_instance();
 		Gutenberg\Modules\Classes::get_instance();
+	}
+
+	/**
+	 * Link Reusable blocks to Appearance
+	 *
+	 * @return void
+	 */
+	public function reusable_blocks_link() {
+		add_submenu_page( 
+			'themes.php',
+			__( 'Blocks - Reusable', 'wecodeart' ),
+			__( 'Blocks - Reusable', 'wecodeart' ),
+			'edit_posts',
+			'edit.php?post_type=wp_block'
+		);
 	}
 
 	/**

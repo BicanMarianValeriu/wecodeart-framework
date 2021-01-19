@@ -17,10 +17,8 @@ namespace WeCodeArt\Support;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Customizer;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Request;
-use WeCodeArt\Conditional\Traits\No_Conditionals;
 
 /**
  * The Fonts object.
@@ -28,7 +26,19 @@ use WeCodeArt\Conditional\Traits\No_Conditionals;
 final class Styles implements Integration {
 
 	use Singleton;
-	use No_Conditionals;
+
+	/**
+	 * Get Conditionals
+	 *
+	 * @return void
+	 */
+	public static function get_conditionals() {
+		wecodeart( 'conditionals' )->set( [
+			'with_styles' => Styles\Condition::class,
+		] );
+		
+		return [ 'with_styles' ];
+	}
 
 	/**
 	 * Send to Constructor
@@ -44,7 +54,7 @@ final class Styles implements Integration {
      *
      * @return 	string
      */
-    public static function compress( $css = '' ) {
+    public static function compress( string $css = '' ) {
         // Return if no CSS
         if ( ! $css ) {
             return '';
@@ -91,7 +101,7 @@ final class Styles implements Integration {
      *
      * @return  string
      */
-    public static function clean_empty( $css ) {
+    public static function clean_empty( string $css ) {
         $css_explode        = explode( '}', $css );
         $result             = '';
         $double_braces_open = false;
@@ -129,9 +139,9 @@ final class Styles implements Integration {
 	 *
 	 * @return 	string          The generated CSS.
 	 */
-	public static function parse( $css = [] ) {
+	public static function parse( array $css = [], $context = '' ) {
 		// Pass our styles from filter.
-		$css = apply_filters( 'wecodeart/filter/styles/array', $css );
+		$css = apply_filters( 'wecodeart/filter/styles/array', $css, $context );
 
 		// Process the array of CSS properties and produce the final CSS.
 		$final_css = '';
@@ -140,30 +150,66 @@ final class Styles implements Integration {
 			return $final_css;
 		}
 
-		foreach( $css as $media_query => $selectors ) {
-			$final_css .= ( 'global' !== $media_query ) ? $media_query . '{' : '';
-			foreach( $selectors as $selector => $properties ) {
-				$css_for_style = '';
-				foreach( $properties as $property => $value ) {
-					if ( is_string( $value ) && '' !== $value ) {
-						$css_for_style .= $property . ':' . $value . ';';
-					} elseif( is_array( $value ) ) {
-						foreach ( $value as $subvalue ) {
-							if ( is_string( $subvalue ) && '' !== $subvalue ) {
-								$css_for_style .= $property . ':' . $subvalue . ';';
-							}
-						}
-					}
-					$value = ( is_string( $value ) ) ? $value : '';
-				}
-				if ( '' !== $css_for_style ) {
-					$final_css .= $selector . '{' . $css_for_style . '}';
-				}
-			}
-			$final_css .= ( 'global' !== $media_query ) ? '}' : '';
+		foreach( $css as $query => $selectors ) {
+			$final_css .= ( 'global' !== $query ) ? $query . '{' : '';
+			$final_css .= self::array_to_css( $selectors );
+			$final_css .= ( 'global' !== $query ) ? '}' : '';
 		}
 
 		return $final_css;
+	}
+
+	/**
+	 * Utility method to convert associative array to css rules.
+	 *
+	 * @param 	array 		$rules The associative rules array.
+	 * @param 	int   		$indent The indent to be used per rule.
+	 *
+	 * @return string
+	 */
+	public static function array_to_css( array $selectors = [], $indent = 0 ) {
+		$css    = '';
+		$prefix = str_repeat( '  ', $indent );
+
+		foreach( $selectors as $selector => $properties ) {
+			$css_for_style = '';
+			foreach( $properties as $property => $value ) {
+				if ( is_string( $value ) && '' !== $value ) {
+					$css_for_style .= $property . ':' . $value . ';';
+				} elseif( is_array( $value ) ) {
+					foreach ( $value as $subvalue ) {
+						if ( is_string( $subvalue ) && '' !== $subvalue ) {
+							$css_for_style .= $property . ':' . $subvalue . ';';
+						}
+					}
+				}
+				$value = ( is_string( $value ) ) ? $value : '';
+			}
+			if ( '' !== $css_for_style ) {
+				$css .= $selector . '{' . $css_for_style . '}';
+			}
+		}
+
+		// foreach ( $selectors as $key => $value ) {
+		// 	if ( is_array( $value ) ) {
+		// 		$selector   = $key;
+		// 		$properties = $value;
+
+		// 		$css .= $prefix . "$selector {\n";
+		// 		$css .= $prefix . self::array_to_css( $properties, $indent + 1 );
+		// 		$css .= $prefix . "}\n";
+		// 		continue;
+		// 	}
+
+		// 	$property 	= $key;
+		// 	$css	.= $prefix . "$property: $value;\n";
+		// }
+
+		if ( preg_match( '#</?\w+#', $css ) ) {
+			$css = '';
+		}
+
+		return $css;
 	}
 	
 	/**
@@ -239,7 +285,7 @@ final class Styles implements Integration {
 	 *
 	 * @return array
 	 */
-	public static function add_prefixes( $css ) {
+	public static function add_prefixes( array $css ) {
 		if( is_array( $css ) ) {
 			foreach( $css as $media_query => $elements ) {
 				if( empty( $elements ) ) continue;
@@ -322,7 +368,7 @@ final class Styles implements Integration {
 	 *
 	 * @return 	mixed				CSS value depends on $property
 	 */
-	public static function get_property_value( $property, $value ) {
+	public static function get_property_value( string $property, $value ) {
 		return Styles\Property::get_property_value( $property, $value );
 	}
 
@@ -335,7 +381,7 @@ final class Styles implements Integration {
 	 *
 	 * @return 	mixed
 	 */
-	public static function hex_rgba( $color, $opacity = false ) {
+	public static function hex_rgba( string $color, $opacity = false ) {
 		$default = 'rgb(0,0,0)';
 
 		if ( empty( $color ) ) {
@@ -369,13 +415,48 @@ final class Styles implements Integration {
 	}
 
 	/**
+	 * Adjust Color Brightness
+	 *
+	 * @since   4.2.0
+	 * @param 	string	$color   Color data.
+	 * @param 	integer	$opacity Opacity status.
+	 *
+	 * @return 	string
+	 */
+	public static function hex_brightness( string $hex, $steps ) {
+		// Steps should be between -255 and 255. Negative = darker, positive = lighter
+		$steps = max( -255, min( 255, $steps ) );
+	
+		// Normalize into a six character long hex string
+		$hex = str_replace( '#', '', $hex );
+		if ( strlen( $hex ) == 3 ) {
+			$hex = str_repeat( substr( $hex, 0 , 1 ), 2 );
+			$hex .= str_repeat( substr( $hex, 1, 1 ), 2 );
+			$hex .= str_repeat( substr( $hex, 2, 1 ), 2 );
+		}
+	
+		// Split into three parts: R, G and B
+		$color_parts = str_split( $hex, 2 );
+		$return = '#';
+	
+		foreach ( $color_parts as $color ) {
+			$color   = hexdec( $color ); // Convert to decimal
+			$color   = max( 0, min( 255, $color + $steps ) ); // Adjust color
+			$return .= str_pad( dechex( $color ), 2, '0', STR_PAD_LEFT ); // Make two char hex code
+		}
+	
+		return $return;
+	}
+
+	/**
 	 * Sanitize rgba color.
 	 *
-	 * @param string $value Color in rgba format.
+	 * @since   4.2.0
+	 * @param 	string $value Color in rgba format.
 	 *
-	 * @return string
+	 * @return 	string
 	 */
-	public static function sanitize_rgba( $value ) {
+	public static function sanitize_rgba( string $value ) {
 		$red   = 'rgba(0,0,0,0)';
 		$green = 'rgba(0,0,0,0)';
 		$blue  = 'rgba(0,0,0,0)';

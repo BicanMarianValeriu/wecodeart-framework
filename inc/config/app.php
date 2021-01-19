@@ -104,6 +104,7 @@ return [
         'footer-copyright-text'     => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
         'footer-design-bg'          => '#f1f3f7',
         'footer-design-color'       => '',
+        'footer-design-links'       => '',
         'footer-design-attribution_bg'      => '#ffffff',
         'footer-design-attribution_color'   => '#5a5a5a',
         // General
@@ -238,7 +239,7 @@ return [
             'core-block-patterns'       => 'remove',
             'align-wide'                => true,
             'palette-classnames'        => true,
-            'custom-units'              => ['rem', 'em', 'px'],
+            'custom-units'              => true,
             'custom-spacing'            => true,
             'custom-line-height'        => true,
             'experimental-link-color'   => true,
@@ -269,7 +270,8 @@ return [
     |
     */
     'extensions' => [
-        'fonts'  => true,
+        'fonts'         => true,
+        'styles'        => true,
         'author-box'    => [
             'archive'   => true,
             'single'    => true,

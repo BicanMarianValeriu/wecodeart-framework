@@ -31,8 +31,6 @@ final class Fonts implements Integration {
 	/**
 	 * An array of our google fonts.
 	 *
-	 * @static
-	 * @access  public
 	 * @var     null|object
 	 */
 	public static $google_fonts = null;
@@ -40,8 +38,6 @@ final class Fonts implements Integration {
 	/**
 	 * Google Fonts.
 	 *
-	 * @static
-	 * @access  public
 	 * @var     null|object
 	 */
 	public $google = null;
@@ -176,8 +172,6 @@ final class Fonts implements Integration {
 	/**
 	 * Returns an array of all available subsets.
 	 *
-	 * @static
-	 * @access public
 	 * @return array
 	 */
 	public static function get_google_font_subsets() {
@@ -204,8 +198,6 @@ final class Fonts implements Integration {
 	/**
 	 * Returns an array of all available variants.
 	 *
-	 * @static
-	 * @access public
 	 * @return array
 	 */
 	public static function get_all_variants() {
@@ -239,9 +231,8 @@ final class Fonts implements Integration {
 	/**
 	 * Determine if a font-name is a valid google font or not.
 	 *
-	 * @static
-	 * @access  public
 	 * @param   string 	$fontname The name of the font we want to check.
+	 *
 	 * @return  bool
 	 */
 	public static function is_google_font( $fontname ) {

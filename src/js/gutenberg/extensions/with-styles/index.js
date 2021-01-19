@@ -5,14 +5,13 @@ const { assign } = lodash;
 const { hasBlockSupport } = wp.blocks;
 const { createHigherOrderComponent } = wp.compose;
 const { InspectorAdvancedControls } = wp.blockEditor;
-const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { restrictedBlocks } = wecodeartInfo;
 
 /**
  * Internal dependencies.
  */
-import CSSEditor from './components/editor';
+import CSSEditor from './Editor';
 import './handler';
 import './inject-css';
 
@@ -40,9 +39,9 @@ const addAttributes = (props) => {
  * Override the default edit UI to include a new block inspector control for
  * assigning the custom class name, if block supports custom class name.
  *
- * @param {Function} BlockEdit Original component.
+ * @param 	{Function} 	BlockEdit Original component.
  *
- * @return {string} Wrapped component.
+ * @return 	{string} 	Wrapped component.
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
@@ -51,16 +50,12 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 		const hasClassName = hasBlockSupport(name, 'className', true);
 		if (!isRestrictedBlock && hasClassName && isSelected) {
 			return (
-				<Fragment>
+				<>
 					<BlockEdit {...props} />
 					<InspectorAdvancedControls>
-						<CSSEditor
-							clientId={props.clientId}
-							setAttributes={props.setAttributes}
-							attributes={props.attributes}
-						/>
+						<CSSEditor {...props} />
 					</InspectorAdvancedControls>
-				</Fragment>
+				</>
 			);
 		}
 

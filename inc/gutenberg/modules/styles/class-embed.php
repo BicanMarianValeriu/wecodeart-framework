@@ -43,7 +43,7 @@ class Embed {
 	 */
 	public function init() {
 		add_filter( 'get_the_excerpt',	[ $this, 'get_excerpt_start'	], 1 );
-		add_action( 'init',				[ $this, 'render_post_css'		], 10 );
+		add_action( 'wp',				[ $this, 'render_post_css'		], 10 );
 		add_filter( 'get_the_excerpt',	[ $this, 'get_excerpt_end'		], 20 );
 	}
 

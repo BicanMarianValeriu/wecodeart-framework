@@ -11,6 +11,7 @@ const {
 const { restrictedBlocks = [] } = wecodeartInfo || {};
 
 export const ALLOWED_BG_MEDIA_TYPES = ['image', 'video'];
+
 /**
  * External Dependencies
  */
@@ -31,13 +32,14 @@ function overlayToClass(ratio) {
 
 function getBackgroundClasses(attributes) {
 	const {
-		backgroundUrl,
-		backgroundType,
-		backgroundSize,
-		backgroundRepeat,
-		backgroundOverlay,
-		backgroundPosition,
-		hasParallax,
+		backgroundUrl = '',
+		backgroundType = '',
+		backgroundSize = '',
+		backgroundRepeat = '',
+		backgroundOverlay = 0,
+		backgroundPosition = '',
+		hasParallax = false,
+		focalPoint = undefined,
 		gradient = false,
 		style: {
 			color: {
@@ -48,15 +50,19 @@ function getBackgroundClasses(attributes) {
 
 	const showBG = backgroundUrl && backgroundType === 'image';
 	const showOverlay = backgroundUrl && backgroundOverlay !== 0;
+	const showParallax = showBG && hasParallax;
+	const showOverlayRatio = showOverlay && backgroundOverlay !== 50;
+	const showGradient = backgroundUrl && (gradient || customGradient);
+	const showPosition = showParallax || showBG && (backgroundPosition && !focalPoint);
 
-	let classes = {
+	const classes = {
 		'has-background-dim': showOverlay,
-		'has-background-gradient': backgroundUrl && (gradient || customGradient),
-		[overlayToClass(backgroundOverlay)]: showOverlay && backgroundOverlay !== 50,
-		'has-parallax': showBG && hasParallax,
+		'has-background-gradient': showGradient,
+		[overlayToClass(backgroundOverlay)]: showOverlayRatio,
+		'has-parallax': showParallax,
 		[`bg-${backgroundSize}`]: showBG && backgroundSize,
 		[`bg-${backgroundRepeat}`]: showBG && backgroundRepeat,
-		[`bg-${backgroundPosition.split(' ').join('-')}`]: showBG && backgroundPosition
+		[`bg-${backgroundPosition.split(' ').join('-')}`]: showPosition
 	};
 
 	return classes;
@@ -83,7 +89,7 @@ function addAttributes(settings) {
 		},
 		backgroundPosition: {
 			type: 'string',
-			default: '',
+			default: 'center center',
 		},
 		backgroundRepeat: {
 			type: 'string',
@@ -199,11 +205,15 @@ function applyExtraSettings(extraProps, blockType, attributes) {
 	const { name: blockName } = blockType;
 
 	if (hasBlockSupport(blockName, 'withBackground')) {
-		const { gradient } = attributes;
+		const { gradient, backgroundUrl, backgroundType } = attributes;
+		let { className } = extraProps;
 
-		// Clear gradient class from main component, we apply later on inner div in save filter
-		const gradientClass = __experimentalGetGradientClass(gradient);
-		const className = extraProps.className.split(' ').filter((i) => i !== gradientClass);
+		const showBG = backgroundUrl && backgroundType === 'image';
+		if (showBG) {
+			// Clear gradient class from main component, we apply later on inner div in save filter
+			const gradientClass = __experimentalGetGradientClass(gradient);
+			className = className.split(' ').filter((i) => i !== gradientClass);
+		}
 
 		// Custom Background Styles/Properties are generated into CSS files
 		extraProps.className = classnames(className, getBackgroundClasses(attributes));

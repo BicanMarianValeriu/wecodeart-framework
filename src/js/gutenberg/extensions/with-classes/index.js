@@ -8,7 +8,6 @@ const { split, replace, get, join } = lodash;
  */
 const { __ } = wp.i18n;
 const { addFilter, removeFilter } = wp.hooks;
-const { Fragment } = wp.element;
 const { withSelect, select } = wp.data;
 const { compose, createHigherOrderComponent, withState } = wp.compose;
 const { InspectorAdvancedControls } = wp.blockEditor;
@@ -63,7 +62,7 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 
 		if (isSelected) {
 			return (
-				<Fragment>
+				<>
 					<BlockEdit {...props} />
 					<InspectorAdvancedControls>
 						<FormTokenField
@@ -77,7 +76,7 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 							}}
 						/>
 					</InspectorAdvancedControls>
-				</Fragment>
+				</>
 			);
 		}
 

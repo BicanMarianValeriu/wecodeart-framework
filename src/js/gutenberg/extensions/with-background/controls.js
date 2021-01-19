@@ -1,10 +1,12 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { MediaUpload, MediaUploadCheck } = wp.blockEditor;
-const { Toolbar, Button, Popover, MenuItem, Icon, SVG, Path, G } = wp.components;
-const { useState } = wp.element;
+const {
+    i18n: { __ },
+    element: { useState },
+    blockEditor: { MediaUpload, MediaUploadCheck },
+    components: { Toolbar, ToolbarButton, Popover, MenuItem, Icon, SVG, Path, G },
+} = wp;
 
 /**
  * Internal dependencies
@@ -27,91 +29,88 @@ const ICON = (
 /**
  * Background image block toolbar controls.
  *
- * @param {Object} props The passed props.
- * @return {string} Component.
+ * @param   {Object} props The passed props.
+ *
+ * @return  {string} Component.
  */
-const Controls = (props) => {
-    const {
-        attributes,
-        setAttributes,
-    } = props;
-
+const Controls = ({ attributes, setAttributes }) => {
     const { backgroundUrl } = attributes;
     const [popover, setPopover] = useState(false);
 
     return (
-        <MediaUploadCheck>
-            <Toolbar className={backgroundUrl ? 'components-dropdown-menu' : ''}>
-                {popover && (
-                    <Popover position="bottom center" className="components-popover--wca">
+        <>
+            <MediaUploadCheck>
+                <Toolbar className={backgroundUrl ? 'components-dropdown-menu' : ''}>
+                    {popover && (
+                        <Popover
+                            position="bottom center"
+                            className="components-popover--wca">
+                            <MediaUpload
+                                onSelect={(media) => {
+                                    setAttributes({ backgroundUrl: media.url, backgroundType: media.type });
+                                    setPopover(!popover);
+                                }}
+                                allowedTypes={ALLOWED_BG_MEDIA_TYPES}
+                                value={backgroundUrl}
+                                render={({ open }) => (
+                                    <MenuItem
+                                        className="components-dropdown-menu__menu-item"
+                                        icon={<Icon icon="edit" className="components-menu-items__item-icon" />}
+                                        role="menuitem"
+                                        onClick={open}>
+                                        {__('Edit Background', 'wecodeart')}
+                                    </MenuItem>
+                                )}
+                            />
+                            <MenuItem
+                                className="components-dropdown-menu__menu-item"
+                                icon={<Icon icon="trash" className="components-menu-items__item-icon" />}
+                                role="menuitem"
+                                onClick={() => {
+                                    setAttributes({
+                                        backgroundUrl: '',
+                                        backgroundOverlay: 0,
+                                        backgroundRepeat: 'no-repeat',
+                                        backgroundPosition: 'center center',
+                                        backgroundSize: 'cover',
+                                        focalPoint: undefined,
+                                        hasParallax: false,
+                                    });
+                                    setPopover(false);
+                                }} >
+                                {__('Remove Background', 'wecodeart')}
+                            </MenuItem>
+                        </Popover>
+                    )}
+                    {backgroundUrl ?
+                        <ToolbarButton
+                            className="components-dropdown-menu__toggle"
+                            icon={ICON}
+                            aria-haspopup="true"
+                            label={__('Edit background', 'wecodeart')}
+                            tooltip={__('Edit background', 'wecodeart')}
+                            onClick={() => setPopover(!popover)}
+                        >
+                            <span className="components-dropdown-menu__indicator" />
+                        </ToolbarButton> :
                         <MediaUpload
-                            onSelect={(media) => {
-                                setAttributes({ backgroundUrl: media.url, backgroundType: media.type });
-                                setPopover(!popover);
-                            }}
+                            onSelect={(media) => setAttributes({ backgroundUrl: media.url, backgroundType: media.type })}
                             allowedTypes={ALLOWED_BG_MEDIA_TYPES}
                             value={backgroundUrl}
                             render={({ open }) => (
-                                <MenuItem
-                                    className="components-dropdown-menu__menu-item"
-                                    icon={<Icon icon="edit" className="components-menu-items__item-icon" />}
-                                    role="menuitem"
-                                    onClick={() => {
-                                        open();
-                                        setPopover(false);
-                                    }}>
-                                    {__('Edit Background', 'wecodeart')}
-                                </MenuItem>
+                                <ToolbarButton
+                                    className="components-toolbar__control"
+                                    label={__('Add Background', 'wecodeart')}
+                                    icon={ICON}
+                                    onClick={open}
+                                />
                             )}
                         />
-                        <MenuItem
-                            className="components-dropdown-menu__menu-item"
-                            icon={<Icon icon="trash" className="components-menu-items__item-icon" />}
-                            role="menuitem"
-                            onClick={() => {
-                                setAttributes({
-                                    backgroundUrl: '',
-                                    backgroundOverlay: 0,
-                                    backgroundRepeat: 'no-repeat',
-                                    backgroundPosition: '',
-                                    backgroundSize: 'cover',
-                                    focalPoint: undefined,
-                                    hasParallax: false,
-                                });
-                                setPopover(false);
-                            }} >
-                            {__('Remove Background', 'wecodeart')}
-                        </MenuItem>
-                    </Popover>
-                )}
-                {backgroundUrl ?
-                    <Button
-                        className="components-dropdown-menu__toggle"
-                        icon={ICON}
-                        aria-haspopup="true"
-                        label={__('Background', 'wecodeart')}
-                        tooltip={__('Background', 'wecodeart')}
-                        onClick={() => setPopover(!popover)}
-                    >
-                        <span className="components-dropdown-menu__indicator" />
-                    </Button> :
-                    <MediaUpload
-                        onSelect={(media) => setAttributes({ backgroundUrl: media.url, backgroundType: media.type })}
-                        allowedTypes={ALLOWED_BG_MEDIA_TYPES}
-                        value={backgroundUrl}
-                        render={({ open }) => (
-                            <Button
-                                className="components-toolbar__control"
-                                label={__('Background', 'wecodeart')}
-                                icon={ICON}
-                                onClick={open}
-                            />
-                        )}
-                    />
 
-                }
-            </Toolbar>
-        </MediaUploadCheck >
+                    }
+                </Toolbar>
+            </MediaUploadCheck>
+        </>
     );
 };
 

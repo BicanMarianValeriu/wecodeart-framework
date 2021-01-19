@@ -16,12 +16,14 @@ namespace WeCodeArt\Admin\Customizer\Controls;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Core\Scripts;
+
 /**
  * Simple divider control that only displays some content.
  */
 class Divider extends \WP_Customize_Control {
 
-	use \WeCodeArt\Core\Scripts\Base;
+	use Scripts\Base;
 
 	/**
 	 * The control type.

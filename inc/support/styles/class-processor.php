@@ -85,25 +85,34 @@ abstract class Processor {
 	 * @return 	string|array The output value after pattern
 	 */
 	protected function apply_pattern( $output ) {
-		$value = get_prop( $output, 'value' );
+		$value 			= get_prop( $output, 'value' );
+		$replacement 	= get_prop( $output, 'pattern', false );
 		
-		if ( isset( $output['pattern'] ) && ! empty( $output['pattern'] ) && is_string( $output['pattern'] ) ) {
-			if ( ! is_array( $value ) ) {
-				$value = str_replace( '$', $value, $output['pattern'] );
+		if ( $replacement ) {
+			if( is_callable( $replacement ) ) {
+				$replacement = call_user_func( $replacement, $value );
 			}
 
-			if ( is_array( $value ) ) {
-				foreach ( array_keys( $value ) as $value_k ) {
-					if ( is_array( $value[ $value_k ] ) ) {
-						continue;
-					}
-					if ( isset( $output['choice'] ) ) {
-						if ( $output['choice'] === $value_k ) {
-							$value[ $output['choice'] ] = str_replace( '$', $value[ $output['choice'] ], $output['pattern'] );
+			$replacement = ( false === $replacement ) ? '' : $replacement;
+
+			if( $replacement ) {
+				if ( is_string( $value ) ) {
+					$value = str_replace( '$', $value, $replacement );
+				}
+	
+				if ( is_array( $value ) ) {
+					foreach ( array_keys( $value ) as $value_k ) {
+						if ( is_array( $value[ $value_k ] ) ) {
+							continue;
 						}
-						continue;
+						if ( isset( $output['choice'] ) ) {
+							if ( $output['choice'] === $value_k ) {
+								$value[ $output['choice'] ] = str_replace( '$', $value[ $output['choice'] ], $replacement );
+							}
+							continue;
+						}
+						$value[ $value_k ] = str_replace( '$', $value[ $value_k ], $replacement );
 					}
-					$value[ $value_k ] = str_replace( '$', $value[ $value_k ], $output['pattern'] );
 				}
 			}
 			
@@ -122,7 +131,9 @@ abstract class Processor {
 	 * @return 	string|array The output value replaced
 	 */
 	protected function apply_pattern_replace( $value, $output ) {
-		if ( isset( $output['pattern_replace'] ) && is_array( $output['pattern_replace'] ) ) {
+		$pattern_replace = get_prop( $output, 'pattern_replace', [] );
+
+		if ( ! empty( $pattern_replace ) ) {
 			$option_type = $this->processor;
 			$option_name = 'wecodeart-settings';
 			$options     = [];
@@ -131,7 +142,7 @@ abstract class Processor {
 				$options = ( 'site_option' === $option_type ) ? get_site_option( $option_name ) : get_option( $option_name );
 			}
 			
-			foreach ( $output['pattern_replace'] as $search => $replace ) {
+			foreach ( $pattern_replace as $search => $replace ) {
 				$replacement = '';
 				switch ( $option_type ) {
 					case 'option':
@@ -156,13 +167,15 @@ abstract class Processor {
 						}
 						break;
 					case 'theme_mod':
-						$replacement = get_theme_mod( $replace );
-						if ( ! $replacement ) {
-							$replacement = $replace;
-						}
+						$replacement = get_theme_mod( $replace, $replace ); // Defaults to $replace variable
 						break;
 					default:
-						$replacement = $replace;
+						if( is_callable( $replace ) ) {
+							$replacement = call_user_func( $replace, $value );
+						}
+						if( is_string( $replace ) ) {
+							$replacement = $replace;
+						}
 				}
 
 				$replacement = ( false === $replacement ) ? '' : $replacement;
@@ -313,7 +326,7 @@ abstract class Processor {
 	 *
 	 * @return 	string|array
 	 */
-	protected function get_property_value( $property, $value ) {
+	protected function get_property_value( string $property, $value ) {
 		return Styles::get_property_value( $property, $value );
 	}
 

@@ -10,7 +10,7 @@
     
     &__inner-container {
 		@include make-container();
-		max-width: 1330px;
+		max-width: 1320px;
 
 		.alignfull &,
 		.alignwide & {

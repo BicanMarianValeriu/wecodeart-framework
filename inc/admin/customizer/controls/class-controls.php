@@ -16,12 +16,14 @@ namespace WeCodeArt\Admin\Customizer;
 
 defined( 'ABSPATH' ) || exit; 
 
+use WeCodeArt\Singleton;
+
 /**
  * Customizer Controls Class
  */
 class Controls {
 
-	use \WeCodeArt\Singleton;  
+	use Singleton;  
 
 	/**
 	 * Registered Controls.

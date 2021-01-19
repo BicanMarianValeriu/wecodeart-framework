@@ -116,7 +116,36 @@ class Footer extends Config {
 					[
 						'element'  => 'footer.footer',
 						'property' => 'background-color'
+					],
+					[
+						'element'  => 'footer.footer',
+						'property' => 'border-top',
+						'pattern'  => function( $value ) {
+							$pattern = '1px solid $';
+
+							if( wecodeart_if( 'with_styles' ) ) {
+								$adjusted 	= wecodeart( 'integrations' )->get( 'styles' )::hex_brightness( $value, -10 );
+								$pattern	= '15px solid ' . $adjusted;
+							}
+
+							return $pattern;
+						},
 					]
+				]
+			],
+			[
+				'name'			=> 'footer-design-links',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'footer-design',
+				'title' 		=> esc_html__( 'Footer links color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Text color of the footer links.', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => 'footer.footer a',
+						'property' => 'color'
+					],
 				]
 			],
 			[
@@ -130,7 +159,7 @@ class Footer extends Config {
 					[
 						'element'  => 'footer.footer',
 						'property' => 'color'
-					]
+					],
 				]
 			],
 			[
@@ -145,6 +174,20 @@ class Footer extends Config {
 					[
 						'element'  => '.footer__attribution',
 						'property' => 'background-color'
+					],
+					[
+						'element'  => '.footer__attribution',
+						'property' => 'border-top',
+						'pattern'  => function( $value ) {
+							$pattern = '1px solid $';
+							
+							if( wecodeart_if( 'with_styles' ) ) {
+								$adjusted 	= wecodeart( 'integrations' )->get( 'styles' )::hex_brightness( $value, -10 );
+								$pattern	= '1px solid ' . $adjusted;
+							}
+							
+							return $pattern;
+						},
 					]
 				]
 			],

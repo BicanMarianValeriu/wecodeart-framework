@@ -51,6 +51,9 @@ class Blocks extends Processor {
 
 		// Set unique class
 		$this->set_element();
+
+		if( empty( $this->element ) ) return;
+
 		// Process CSS
 		$this->process_attributes();
 		$this->parse_output();

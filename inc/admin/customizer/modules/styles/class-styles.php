@@ -42,15 +42,18 @@ class Styles {
 	 */
 	protected 	$FS		= null;
 	const 		FILE	= 'customizer.css';
-
+	
 	/**
 	 * Init.
 	 *
 	 * @access public
 	 */
 	public function init() {
+		// Bail if styles are disabled
+		if( ! wecodeart( 'integrations' )->has( 'styles' ) ) return;
+
 		$this->FS 		= FileSystem::get_instance()->set_folder( 'css' );
-		$this->styles 	= wecodeart( 'integrations' )->get( 'styles' )::get_instance();
+		$this->styles 	= wecodeart( 'integrations' )->get( 'styles' );
 		
 		// Generate styles and enqueue
 		add_action( 'customize_save_after',			[ $this, 'generate_styles' 	], 100 );

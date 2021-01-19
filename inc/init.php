@@ -32,7 +32,7 @@ new WeCodeArt\Autoloader();
 /**
  * Final Class
  */
-final class WeCodeArt implements ArrayAccess {
+final class WeCodeArt implements \ArrayAccess {
 
 	use Singleton;
 
@@ -70,7 +70,7 @@ final class WeCodeArt implements ArrayAccess {
         // Gutenberg
         Gutenberg   ::get_instance();
 		// Fire Support Class
-		Support		::get_instance();
+        Support		::get_instance();
 	}
 
 	/**
@@ -280,11 +280,12 @@ function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
 /**
  * Echo options from the options database.
  *
- * @since 4.2.0
+ * @since   4.2.0
  *
- * @param string $key       Option name.
- * @param string $setting   Optional. Settings field name. Eventually defaults to 'wecodeart'.
- * @param bool   $use_cache Optional. Whether to use the cache value or not. Default is true.
+ * @param   string  $key        Option name.
+ * @param   string  $default    Default value.
+ * @param   string  $setting    Optional. Settings field name. Eventually defaults to 'wecodeart'.
+ * @param   bool    $use_cache  Optional. Whether to use the cache value or not. Default is true.
  */
 function wecodeart_option( $key, $default = false, $setting = null, $use_cache = true ) {
     return Admin::get_option( $key, $default, $setting, $use_cache );
@@ -339,7 +340,6 @@ $config = Config::get_config();
  * @since 4.0.1
  */
 do_action( 'wecodeart/setup/before', $config );
-
 
 /**
  * Load Setup

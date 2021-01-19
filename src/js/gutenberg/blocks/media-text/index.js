@@ -81,7 +81,7 @@ function getSaveElement(element, blockType, attributes) {
                     'flex-md-row': isStackedOnMobile,
                 })}>
                     <figure className={classnames('col', 'wp-block-media-text__media', {
-                        'wp-block-media-text__media--media-fill': imageFill,
+                        'wp-block-media-text__media--media-fill': mediaType === 'image' && imageFill,
                         'order-md-last': 'right' === mediaPosition,
                         'gx-0': fullContainer,
                         'ratio': mediaType === 'video',

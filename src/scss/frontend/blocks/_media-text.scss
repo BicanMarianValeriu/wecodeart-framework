@@ -41,17 +41,25 @@
 		@include media-breakpoint-up( 'md' ) {
 			margin-bottom: 0;
 		}
-
-		&--media-fill,
+		
 		&.ratio {
-			@include media-breakpoint-up( 'md' ) {
-				margin: 0 calc(var(--wca-gutter-x) / 2);
+			@include media-breakpoint-up( 'xs' ) {
+				margin-left: calc(var(--wca-gutter-x) / 2);
+				margin-right: calc(var(--wca-gutter-x) / 2);
 			}
 		}
-	
+		
 		&--media-fill {
+			position: relative;
+			padding: 0;
+			width: auto;
 			min-height: 250px;
 			background-size: cover;
+
+			@include media-breakpoint-up( 'sm' ) {
+				margin-left: calc(var(--wca-gutter-x) / 2);
+				margin-right: calc(var(--wca-gutter-x) / 2);
+			}
 	
 			img {
 				// The image is visually hidden but accessible to assistive technologies.

@@ -65,7 +65,14 @@
 	}
 
 	li {
-		margin: 0 0 20px;
+        margin: 0 0 20px;
+        @include clearfix;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
 	}
 
 	&__post {

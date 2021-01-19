@@ -16,12 +16,14 @@ namespace WeCodeArt\Admin\Customizer\Controls;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Core\Scripts;
+
 /**
  * Range Control
  */
 class Range extends \WP_Customize_Control {
 
-	use \WeCodeArt\Core\Scripts\Base;
+	use Scripts\Base;
 
 	/**
 	 * The control type.

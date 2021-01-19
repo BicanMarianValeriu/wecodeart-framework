@@ -41,6 +41,9 @@ class Styles {
 	 * @return void
 	 */
 	public function init() {
+		// Bail if styles are disabled
+		if( ! wecodeart( 'integrations' )->has( 'styles' ) ) return;
+
 		$this->styles = wecodeart( 'integrations' )->get( 'styles' );
 
 		// CSS Handler
