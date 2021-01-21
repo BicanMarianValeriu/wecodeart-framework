@@ -112,7 +112,7 @@ class Inputs implements ArrayAccess {
             return $default;
         }
 
-        return apply_filters( "wecodeart/input/get/{$key}", $this->items[$key] );
+        return apply_filters( "wecodeart/inputs/get/{$key}", $this->items[$key] );
 	}
 	
 	/**
@@ -139,7 +139,7 @@ class Inputs implements ArrayAccess {
         $keys = is_array( $key ) ? $key : [ $key => $value ];
 
         foreach ( $keys as $key => $value ) {
-            $this->items[$key] = apply_filters( "wecodeart/input/set/{$key}", $value );
+            $this->items[$key] = apply_filters( "wecodeart/inputs/set/{$key}", $value );
         }
     }
 
