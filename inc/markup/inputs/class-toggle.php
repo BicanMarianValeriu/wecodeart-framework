@@ -66,14 +66,14 @@ class Toggle extends Base {
             $basic = new Basic( $this->type, [
                 'label'     => $this->label,
                 'attrs'     => wp_parse_args( [
-                    'class' => 'form-check-input'
+                    'class' => 'form-check-input',
+                    'id'    => get_prop( $this->attrs, 'id', $this->unique_id )
                 ], $this->attrs ),
                 'messages'  => $this->messages
             ] );
 
-            // Change label position and unique ID
-            $basic->label_position  = 'after';
-            $basic->unique_id       = $this->unique_id;
+            // Change label position
+            $basic->setLabelPosition( 'after' );
 
             // Get the Input HTML
             echo $basic->get_content();

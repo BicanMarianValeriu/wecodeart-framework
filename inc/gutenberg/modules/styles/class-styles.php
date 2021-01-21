@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg;
-use WeCodeArt\Core\Scripts;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.

@@ -130,8 +130,8 @@ abstract class Base {
     /**
      * Render the custom attributes for the control's input element.
      *
-     * @param 	array   $ommit Attributes to exclude
      * @since   4.2.0
+     * @param 	array   $ommit Attributes to exclude
      */
     public function input_attrs( $ommit = [] ) {
         $attributes = ! empty( $ommit ) ? array_diff_key( $this->attrs, array_flip( $ommit ) ) : $this->attrs;
@@ -142,6 +142,7 @@ abstract class Base {
 	 * Render the label HTML of the input
      *
      * @since   4.2.0
+     *
 	 * @return	mixed|string
 	 */
 	public function label() {
@@ -152,7 +153,7 @@ abstract class Base {
                 'tag'   => 'label',
                 'attrs' => [
                     'class' => in_array( $this->type, [ 'radio', 'checkbox' ] ) ? 'form-check-label' : 'form-label',
-                    'for'   => $this->unique_id
+                    'for'   => get_prop( $this->attrs, 'id', $this->unique_id )
                 ]
             ]
         ], $this->label );
@@ -163,6 +164,7 @@ abstract class Base {
      *
      * @since   4.2.0
 	 * @param 	bool    $echo
+     *
 	 * @return	string
 	 */
 	public function messages( $echo = true ) {
@@ -193,5 +195,16 @@ abstract class Base {
 		}
 
 		return wp_kses_post( $html );
+    }
+    
+    /**
+	 * Sets input Label Position
+     *
+     * @since   4.2.0
+     *
+	 * @return	void
+	 */
+	public function setLabelPosition( string $position = '' ) {
+        $this->label_position = in_array( $position, [ 'before', 'after' ] ) ? $position : '';
     }
 }

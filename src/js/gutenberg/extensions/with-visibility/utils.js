@@ -3,11 +3,13 @@ const { pick } = lodash;
 const omit = (arr, keys) => arr.filter(key => !keys.includes(key));
 
 const getVisibilityClasses = (attributes) => {
-    const { wecodeart = {} } = attributes;
+    const { wecodeart = undefined } = attributes;
+
+    if (wecodeart === undefined) return [];
 
     const devices = pick(wecodeart, ['mobile', 'tablet', 'desktop']);
     const allHidden = Object.keys(devices).every((k) => !devices[k]);
-    
+
     let classNames = [
         { [wecodeart.id]: wecodeart?.id },
     ];

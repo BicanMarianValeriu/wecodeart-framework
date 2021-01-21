@@ -1,5 +1,5 @@
 <?php
-$required_wp_version   = '5.0';
+$required_wp_version   = '5.5';
 $required_php_version  = '7.0';
 
 return [

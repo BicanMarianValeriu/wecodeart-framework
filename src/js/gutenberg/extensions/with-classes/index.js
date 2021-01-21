@@ -6,12 +6,15 @@ const { split, replace, get, join } = lodash;
 /**
  * WordPress Dependencies
  */
-const { __ } = wp.i18n;
-const { addFilter, removeFilter } = wp.hooks;
-const { withSelect, select } = wp.data;
-const { compose, createHigherOrderComponent, withState } = wp.compose;
-const { InspectorAdvancedControls } = wp.blockEditor;
-const { FormTokenField } = wp.components;
+const {
+	i18n: { __ },
+	hooks: { addFilter, removeFilter },
+	blocks: { hasBlockSupport },
+	compose: { compose, createHigherOrderComponent, withState },
+	data: { withSelect, select },
+	blockEditor: { InspectorAdvancedControls },
+	components: { FormTokenField }
+} = wp;
 
 /**
  * Enhance Block
@@ -51,13 +54,14 @@ const enhance = compose(
  * @return {string} Wrapped component.
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
-	return enhance(({ ...props }) => {
+	return enhance((props) => {
 		const {
 			customClassNames,
 			suggestions,
 			isSelected,
 			setAttributes,
 			setState,
+			name: blockName
 		} = props;
 
 		if (isSelected) {

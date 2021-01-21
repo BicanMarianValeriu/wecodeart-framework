@@ -29,6 +29,7 @@ const {
         BlockVerticalAlignmentToolbar,
         useBlockProps,
         __experimentalUseInnerBlocksProps: useInnerBlocksProps,
+        __experimentalGetGradientClass,
     },
 } = wp;
 
@@ -38,6 +39,16 @@ export default function Edit(props) {
     const {
         bootstrapColumns: { global, xs, sm, md, lg, xl },
         verticalAlignment,
+        // Background Support
+        gradient,
+        backgroundUrl = undefined,
+        backgroundOverlay = 0,
+        style: {
+            color: {
+                gradient: customGradient
+            } = {}
+        } = {}
+        // End Background Support
     } = attributes;
 
     let columnClasses = ['col'];
@@ -52,9 +63,7 @@ export default function Edit(props) {
     }
 
     const { hasChildBlocks, rootClientId } = useSelect((select) => {
-        const { getBlockOrder, getBlockRootClientId } = select(
-            'core/block-editor'
-        );
+        const { getBlockOrder, getBlockRootClientId } = select('core/block-editor');
 
         return {
             hasChildBlocks: getBlockOrder(clientId).length > 0,
@@ -69,14 +78,20 @@ export default function Edit(props) {
         updateBlockAttributes(rootClientId, { verticalAlignment: null });
     };
 
+    // BG Support
+    const style = {
+        background: customGradient && !backgroundUrl ? customGradient : undefined,
+    };
+    // End BG Support
+    
     const blockProps = useBlockProps({
         className: classnames(className, columnClasses, {
             [`align-self-${verticalAlignment}`]: verticalAlignment,
         }),
-        style: {}
+        style
     });
 
-    const innerBlocksProps = useInnerBlocksProps(blockProps, {
+    const innerBlocksProps = useInnerBlocksProps({}, {
         renderAppender: hasChildBlocks ? undefined : InnerBlocks.ButtonBlockAppender,
         templateLock: false,
     });
@@ -84,13 +99,10 @@ export default function Edit(props) {
     return (
         <>
             <BlockControls>
-                <BlockVerticalAlignmentToolbar
-                    onChange={updateAlignment}
-                    value={verticalAlignment}
-                />
+                <BlockVerticalAlignmentToolbar onChange={updateAlignment} value={verticalAlignment} />
             </BlockControls>
             <InspectorControls>
-                <PanelBody title={__('Column settings')}>
+                <PanelBody title={__('Column settings')} initialOpen={false}>
                     <p className="components-base-control__label">{
                         __('Bootstrap columns uses mobile-first approach.', 'wecodeart') + ' ' +
                         __('*Currently the preview does not work unless you resize the browser window. ', 'wecodeart') + ' ' +
@@ -99,7 +111,16 @@ export default function Edit(props) {
                     <ResponsiveColumns {...props} />
                 </PanelBody>
             </InspectorControls>
-            <div {...innerBlocksProps} />
+            <div {...blockProps} style={{ ...style, ...blockProps.style }}>
+                {backgroundUrl && (gradient || customGradient) && backgroundOverlay !== 0 && (
+                    <span {...{
+                        className: classnames('wp-block__gradient-background', __experimentalGetGradientClass(gradient)),
+                        style: customGradient ? { background: customGradient } : undefined,
+                        'aria-hidden': 'true',
+                    }} />
+                )}
+                <div {...innerBlocksProps} />
+            </div>
         </>
     );
 };

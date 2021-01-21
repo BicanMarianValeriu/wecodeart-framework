@@ -78,14 +78,18 @@ function EditContainer(props) {
         container,
         gutter,
         gradient,
-        backgroundUrl = false,
+        backgroundUrl = undefined,
         backgroundOverlay = 0,
         style: {
             color: {
-                gradient: customGradient = false
+                gradient: customGradient
             } = {}
         } = {}
     } = attributes;
+
+    const style = {
+        background: customGradient && !backgroundUrl ? customGradient : undefined,
+    };
 
     const blockProps = useBlockProps({
         className: classnames('wca-section', {
@@ -94,6 +98,7 @@ function EditContainer(props) {
             'wca-section--tablet': deviceType === 'Tablet',
             'wca-section--desktop': deviceType === 'Desktop',
         }),
+        style
     });
 
     const innerBlocksProps = useInnerBlocksProps({
@@ -110,10 +115,7 @@ function EditContainer(props) {
     return (
         <>
             <BlockControls>
-                <BlockVerticalAlignmentToolbar
-                    onChange={updateAlignment}
-                    value={verticalAlignment}
-                />
+                <BlockVerticalAlignmentToolbar onChange={updateAlignment} value={verticalAlignment} />
                 <Dropdown
                     renderToggle={({ isOpen, onToggle }) => (
                         <ToolbarGroup>
@@ -171,13 +173,11 @@ function EditContainer(props) {
                     />
                 </PanelBody>
             </InspectorControls>
-            <div {...blockProps}>
+            <div {...blockProps} style={{ ...style, ...blockProps.style }}>
                 {backgroundUrl && (gradient || customGradient) && backgroundOverlay !== 0 && (
                     <span {...{
                         className: classnames('wp-block__gradient-background', __experimentalGetGradientClass(gradient)),
-                        style: customGradient
-                            ? { background: customGradient }
-                            : undefined,
+                        style: customGradient ? { background: customGradient } : undefined,
                         'aria-hidden': 'true',
                     }} />
                 )}

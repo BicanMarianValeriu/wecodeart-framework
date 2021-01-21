@@ -16,13 +16,13 @@ namespace WeCodeArt\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup\Inputs\Base;
+use WeCodeArt\Markup\Inputs\Basic;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Standard Inputs Markup
  */
-class TextArea extends Base {
+class TextArea extends Basic {
 
     /**
      * Input's Type.
@@ -38,11 +38,7 @@ class TextArea extends Base {
 	public function __construct( string $type = 'textarea', array $args = [] ) {
         $this->unique_id    = wp_unique_id( 'textarea-' );
         $this->label        = get_prop( $args, 'label', '' );
-        $this->attrs        = wp_parse_args( get_prop( $args, 'attrs', [] ), [
-            'name'  => $this->unique_id,
-            'id'    => $this->unique_id,
-            'class' => 'form-control'
-        ] );
+        $this->attrs        = get_prop( $args, 'attrs', [] );
         $this->messages     = get_prop( $args, 'messages', [] );
     }
 

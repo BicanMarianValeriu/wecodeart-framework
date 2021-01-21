@@ -48,9 +48,7 @@ class Fieldset extends Base {
         $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? $type : 'checkbox';
         $this->unique_id    = wp_unique_id( 'fieldset-' );
         $this->label        = get_prop( $args, 'label', '' );
-        $this->attrs        = wp_parse_args( get_prop( $args, 'attrs', [] ), [
-            'name'  => $this->unique_id,
-        ] );
+        $this->attrs        = get_prop( $args, 'attrs', [] );
         $this->choices      = get_prop( $args, 'choices', [] );
         $this->messages     = get_prop( $args, 'messages', [] );
     }
@@ -89,9 +87,6 @@ class Fieldset extends Base {
                     ]
                 ] );
 
-                // Change the unique ID
-                $basic->unique_id = $this->get_option_id( $key );
-
                 // Get the Input HTML
                 $fields .= $basic->get_content();
             }
@@ -124,8 +119,8 @@ class Fieldset extends Base {
 	 * @return	string
 	 */
 	public function get_option_name( string $item ) {
-        if( $this->type === 'checkbox' ) $value = $this->attrs['name'] . '[' . $item . ']';
-        if( $this->type === 'radio' ) $value = $this->attrs['name'];
+        if( $this->type === 'checkbox' ) $value = get_prop( $this->attrs, 'name', $this->unique_id ) . '[' . $item . ']';
+        if( $this->type === 'radio' ) $value = get_prop( $this->attrs, 'name', $this->unique_id );
         return $value;
     }
 
@@ -136,7 +131,7 @@ class Fieldset extends Base {
 	 * @return	string
 	 */
 	public function get_option_id( string $item ) {
-        $value = $this->attrs['name'] . '-' . $item;
+        $value = get_prop( $this->attrs, 'name', $this->unique_id ) . '-' . $item;
         return $value;
     }
 
@@ -148,16 +143,12 @@ class Fieldset extends Base {
 	 */
 	public function checked_option( string $value ) {
         if( isset( $this->attrs['value'] ) ) {
-            if( is_array( $this->attrs['value'] ) ) {
-                if( in_array( $value, $this->attrs['value'] ) ) {
-                    return true;
-                }
+            if( is_array( $this->attrs['value'] ) && in_array( $value, $this->attrs['value'] ) ) {
+                return true;
             }
 
-            if( is_string( $this->attrs['value'] ) ) {
-                if( $this->attrs['value'] === (string) $value ) {
-                    return true;
-                }
+            if( is_string( $this->attrs['value'] ) && $this->attrs['value'] === $value ) {
+                return true;
             }
         }
     }

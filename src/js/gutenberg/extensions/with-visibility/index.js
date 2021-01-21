@@ -1,15 +1,17 @@
 /**
- * WordPress Dependencies
- */
-const { __ } = wp.i18n;
-const { addFilter } = wp.hooks;
-const { createHigherOrderComponent } = wp.compose;
-const { restrictedBlocks } = wecodeartInfo;
-
-/**
  * External Dependencies
  */
 import classnames from 'classnames';
+
+/**
+ * WordPress Dependencies
+ */
+const {
+	hooks: { addFilter },
+	blocks: { hasBlockSupport },
+	compose: { createHigherOrderComponent },
+} = wp;
+const { restrictedBlocks } = wecodeartInfo;
 
 /**
  * Internal Dependencies
@@ -27,7 +29,11 @@ import { getVisibilityClasses } from './utils';
  */
 function addAttributes(settings) {
 	const { name: blockName } = settings;
-	if (typeof settings.attributes === undefined || restrictedBlocks.includes(blockName)) return settings;
+	if (
+		restrictedBlocks.includes(blockName) ||
+		typeof settings.attributes === undefined ||
+		!hasBlockSupport(settings, 'withVisibility', true)
+	) return settings;
 
 	settings.attributes = Object.assign(settings.attributes, {
 		wecodeart: {
@@ -53,9 +59,12 @@ function addAttributes(settings) {
  */
 const withVisibilityControls = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const { name } = props;
+		const { name: blockName } = props;
 
-		if (restrictedBlocks.includes(name)) {
+		if (
+			restrictedBlocks.includes(blockName) ||
+			!hasBlockSupport(blockName, 'withVisibility', true)
+		) {
 			return (<BlockEdit {...props} />);
 		}
 
@@ -78,11 +87,12 @@ const withVisibilityControls = createHigherOrderComponent((BlockEdit) => {
  * @return 	{Object} 	Filtered props applied to save element.
  */
 function applyExtraClasses(extraProps, blockType, attributes) {
-	const { wecodeart } = attributes;
-	
-	if (typeof wecodeart === undefined) return extraProps;
-
+	const { wecodeart = undefined} = attributes;
 	const { className } = extraProps;
+
+	if (typeof wecodeart === undefined) {
+		return extraProps;
+	}
 
 	extraProps = { ...extraProps, className: classnames(className, ...getVisibilityClasses(attributes)) };
 

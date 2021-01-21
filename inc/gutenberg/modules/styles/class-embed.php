@@ -89,6 +89,11 @@ class Embed {
 			$this->enqueue_styles();
 		}
 
+		if( is_home() ) {
+			$id = get_option( 'page_for_posts' );
+			$this->enqueue_styles( $id );
+		}
+
 		// Enqueue styles for other posts that display the_content, if any.
 		add_filter( 'the_content', function ( $content ) use ( $id ) {
 			$post_id = get_the_ID();
@@ -113,7 +118,7 @@ class Embed {
 	 * @return 	void
 	 */
 	public function enqueue_styles( $post_id = '', $footer = false ) {
-		$post_id  = $post_id ?: get_the_ID();
+		$post_id  = (int) $post_id ?: get_the_ID();
 		$location = 'wp_head';
 
 		if ( ! has_blocks( $post_id ) ) {

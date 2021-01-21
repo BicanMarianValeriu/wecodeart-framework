@@ -83,7 +83,7 @@ class Blog {
 		$block_json = $block_json ? json_decode( $block_json, true ) : [];
 
 		register_block_type( 'wca/content', [
-			'attributes'      => $block_json['attributes'],
+			'attributes'      => get_prop( $block_json, 'attributes', [] ),
 			'render_callback' => function( $attributes ) {
 				$closure = function( $args ) use( $attributes ) {
 					$class = [
@@ -101,6 +101,7 @@ class Blog {
 
 					if( get_prop( $attributes, 'align', false ) ) {
 						$class[] = 'align' . $attributes['align'];
+						$args[1]['attrs']['class'] = 'container-fluid';
 					}
 
 					$args[0]['attrs']['class'] = implode( ' ', $class );
