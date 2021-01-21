@@ -209,12 +209,12 @@ final class Google {
 
 		foreach( $font_files as $font_family => $files ) {
 			// The folder path for this font-family.
-			$this->FS->set_folder( 'fonts/' . $font_family );
+			$this->FS->set_folder( join( '/', [ 'fonts', $font_family ] ) );
 
 			foreach ( $files as $url ) {
-				// Get the filename.
+				// Get the filename and build path.
 				$filename  = basename( wp_parse_url( $url, PHP_URL_PATH ) );
-				$font_path = $this->FS->folder . '/' . $filename;
+				$font_path = join( '/', [ $this->FS->folder, $filename ] );
 
 				if ( file_exists( $font_path ) ) {
 					// Skip if already cached.

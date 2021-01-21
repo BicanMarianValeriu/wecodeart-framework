@@ -35,16 +35,24 @@ class Styles {
 	public $styles = null;
 
 	/**
-	 * Class Init.
+	 * Init.
 	 *
-	 * @return void
+	 * @access public
 	 */
 	public function init() {
-		// Bail if styles are disabled
-		if( ! wecodeart( 'integrations' )->has( 'styles' ) ) return;
+		add_action( 'wecodeart/support/styles/init', [ $this, 'register_hooks' ] );
+	}
 
-		$this->styles = wecodeart( 'integrations' )->get( 'styles' );
-
+	/**
+	 * Register Hooks - into styles processor action if enabled
+	 *
+	 * @since 	4.2.0
+	 *
+	 * @return 	void
+	 */
+	public function register_hooks( $styles ) {
+		$this->styles = $styles;
+		
 		// CSS Handler
 		Styles\Handler::get_instance();
 		// Enqueue Styles

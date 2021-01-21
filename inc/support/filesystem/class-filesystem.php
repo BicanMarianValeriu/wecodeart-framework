@@ -57,7 +57,7 @@ class FileSystem {
 
 		$this->folder = implode( '/', array_filter( [ $wp_upload_dir['basedir'], 'wecodeart', $folder ] ) );
 
-		$this->maybe_create_folder( $this->folder );
+		wp_mkdir_p( wp_normalize_path( $this->folder ) );
 
 		return $this;
 	}
@@ -115,18 +115,6 @@ class FileSystem {
 		}
 
 		return $file;
-	}
-
-	/**
-	 * Function to create folder in WordPress Filesystem.
-	 *
-	 * @since   4.2.0
-	 *
-	 * @return  bool
-	 */
-	public function maybe_create_folder( $folder = '' ) {
-		$dir = implode( '/', array_filter( [ $this->folder, $folder ] ) );
-		return wp_mkdir_p( wp_normalize_path( $dir ) );
 	}
 
 	/**
