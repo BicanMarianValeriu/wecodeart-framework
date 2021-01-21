@@ -29,8 +29,8 @@ wecodeart()->bind( 'config', function () use ( $config ) {
  *
  * @return  void
  */
-wecodeart()->bind( 'input', function () {
-    return WeCodeArt\Markup\Input::get_instance();
+wecodeart()->bind( 'inputs', function () {
+    return WeCodeArt\Markup\Inputs::get_instance();
 } );
 
 /**

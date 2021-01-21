@@ -77,7 +77,7 @@ class Admin {
 	 * Values pulled from the database are cached on each request, so a second request for the same value won't cause a
 	 * second DB interaction.
 	 *
-	 * @since 4.2.0
+	 * @since 	4.2.0
 	 *
 	 * @param   string  $key       	Option name.
 	 * @param   string  $setting   	Optional. Settings field name. Eventually defaults to `wecodeart` if not
@@ -147,7 +147,7 @@ class Admin {
 	/**
 	 * Inserts the default WeCodeArt settings values into the options table, if they don't already exist.
 	 *
-	 * @since 4.2.0
+	 * @since 	4.2.0
 	 *
 	 * @return bool True of setting added, false otherwise.
 	 */
@@ -161,9 +161,9 @@ class Admin {
 	/**
 	 * Register the default WeCodeArt settings.
 	 *
-	 * @since 4.2.0
+	 * @since 	4.2.0
 	 *
-	 * @return bool True of setting added, false otherwise.
+	 * @return 	bool True of setting added, false otherwise.
 	 */
 	public function register_settings() {
 		return register_setting( 'wecodeart-settings', 'wecodeart-settings' );
@@ -173,7 +173,6 @@ class Admin {
 	 * Register Rest Routes
 	 *
 	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function register_routes() {
 		register_rest_route( 'wecodeart/v1', '/settings', [
@@ -227,7 +226,6 @@ class Admin {
 	 * Register Admin Page
 	 *
 	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function register_menu_page() {
 		$page_hook_suffix = add_theme_page(
@@ -245,7 +243,6 @@ class Admin {
 	 * Register Admin Page
 	 *
 	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function menu_callback() {
 		echo '<div id="wecodeart" class="wecodeart-admin"></div>';
@@ -255,7 +252,6 @@ class Admin {
 	 * Load assets for option page.
 	 *
 	 * @since   1.2.0
-	 * @access  public
 	 */
 	public function enqueue_assets() {
 		$version = wecodeart( 'version' );

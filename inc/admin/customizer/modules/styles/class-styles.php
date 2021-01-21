@@ -49,11 +49,19 @@ class Styles {
 	 * @access public
 	 */
 	public function init() {
-		// Bail if styles are disabled
-		if( ! wecodeart( 'integrations' )->has( 'styles' ) ) return;
+		add_action( 'wecodeart/support/styles/init', [ $this, 'register_hooks' ] );
+	}
 
+	/**
+	 * Register Hooks - into styles processor action if enabled
+	 *
+	 * @since 	4.2.0
+	 *
+	 * @return 	void
+	 */
+	public function register_hooks( $styles ) {
 		$this->FS 		= FileSystem::get_instance()->set_folder( 'css' );
-		$this->styles 	= wecodeart( 'integrations' )->get( 'styles' );
+		$this->styles 	= $styles;
 		
 		// Generate styles and enqueue
 		add_action( 'customize_save_after',			[ $this, 'generate_styles' 	], 100 );
@@ -64,8 +72,8 @@ class Styles {
 		// Remove Customizer inline styles - we add them in our way, optimized and compressed!
 		remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
 		// Generate Fonts/Styles on frontend load
-		if( wecodeart_if( 'generate_fonts_onload' ) ) {
-			add_action( 'init', [ $this, 'generate_styles' 	] );
+		if( wecodeart_if( 'dynamic_styles_onload' ) && $this->has_css_file() === false ) {
+			add_action( 'wp', [ $this, 'generate_styles' ] );
 		}
 	}
 
@@ -119,8 +127,8 @@ class Styles {
 			foreach( $gfonts->process_fonts() as $font ) $fonts .= $gfonts->get_styles( $font );
 		}
 
-		// Compress CSS
-		$css = $this->styles::compress( $fonts . $css );
+		// Combine with fonts CSS
+		$css = $fonts . $css;
 
 		// Create file if we have CSS
 		if( $css ) {
@@ -184,7 +192,7 @@ class Styles {
 	 * @return  bool
 	 */
 	public function create_css_file( $css ) {
-		return $this->FS->create_file( self::FILE, $css );
+		return $this->FS->create_file( self::FILE, $this->styles::compress( $css ) );
 	}
 
 	/**

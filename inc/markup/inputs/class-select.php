@@ -6,18 +6,18 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework 
- * @subpackage 	Markup\Input
+ * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.2.0
  * @version		4.2.0
  */
 
-namespace WeCodeArt\Markup\Input;
+namespace WeCodeArt\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
-use WeCodeArt\Markup\Input\Base;
+use WeCodeArt\Markup\Inputs\Base;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -63,7 +63,7 @@ class Select extends Base {
 	 * @version	4.2.0
 	 */
 	public function content() {
-        $placeholder = isset( $this->attrs['placeholder'] ) ? $this->attrs['placeholder'] : false;
+        $placeholder = get_prop( $this->attrs, 'placeholder', false );
         
         ?>
         <select <?php $this->input_attrs( [ 'value', 'placeholder' ] ); ?>>

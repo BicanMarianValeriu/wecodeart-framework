@@ -263,18 +263,18 @@ function wecodeart_config( $key = null, $default = null ) {
  */
 function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
     if ( null === $key ) {
-        return wecodeart( 'input' );
+        return wecodeart( 'inputs' );
     }
 
     if ( is_array( $key ) ) {
-        return wecodeart( 'input' )->register( $key );
+        return wecodeart( 'inputs' )->register( $key );
     }
 
     if( $echo ) {
-        return wecodeart( 'input' )::render( $key, $args );
+        return wecodeart( 'inputs' )::render( $key, $args );
     }
 
-    return wecodeart( 'input' )::compile( $key, $args );
+    return wecodeart( 'inputs' )::compile( $key, $args );
 }
 
 /**

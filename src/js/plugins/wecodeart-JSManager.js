@@ -1,5 +1,3 @@
-import _pickBy from 'lodash/pickBy';
-import _filter from 'lodash/filter';
 import camelCase from '../helpers/camelCase';
 
 /**
@@ -21,7 +19,7 @@ export default (function (wecodeart) {
 			this.loaded = [];
 			this.doAction = doAction;
 			this.applyFilters = applyFilters;
-			this.extendedR = _pickBy(routes, v => v.extends && v.extends instanceof Array);
+			this.extendedR = Object.keys(routes).filter(k => routes[k]?.extends && routes[k].extends instanceof Array);
 		}
 
 		/**
@@ -34,7 +32,7 @@ export default (function (wecodeart) {
 			fire = route !== '';
 			fire = fire && this.routes[route];
 			fire = fire && typeof this.routes[route][funcname] === 'function';
-
+			
 			if (fire) {
 				args = this.applyFilters('wecodeart.route', args, route, funcname);
 				this.routes[route][funcname](args);
@@ -65,7 +63,7 @@ export default (function (wecodeart) {
 				// Fire Manual Routes
 				this.sequence(route);
 				// Additional Extended Routes 
-				_filter(this.extendedR, (v, k) => v.extends.includes(cls) && this.sequence(k));
+				this.extendedR.filter(k => this.routes[k].extends.includes(cls) && this.sequence(k));
 			}
 			this.fireRoute('common', 'complete');
 			this.loaded.push('common');

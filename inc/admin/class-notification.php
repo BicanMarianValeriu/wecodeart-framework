@@ -17,6 +17,7 @@ namespace WeCodeArt\Admin\Notifications;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 
 /**
  * Notification
@@ -25,7 +26,7 @@ use WeCodeArt\Markup;
  */
 class Notification {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Type of capability check.

@@ -17,6 +17,7 @@ namespace WeCodeArt\Core\Entry;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Core\Pagination;
+use WeCodeArt\Singleton;
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
 use WeCodeArt\Markup\Input;
@@ -27,7 +28,7 @@ use WeCodeArt\Markup\Walkers\Comment as CommentWalker;
  */
 class Comments {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor

@@ -40,8 +40,8 @@ class Blog {
 	 */
 	public function init() {
 		$this->blog_ID = (int) get_option( 'page_for_posts' );
-		add_action( 'init',			[ $this, 'register_block' 	] );
-		add_action( 'wp_body_open', [ $this, 'layout_hooks' 	] );
+		add_action( 'init',	[ $this, 'register_block' 	] );
+		add_action( 'wp', 	[ $this, 'layout_hooks' 	] );
 	}
 	
 	/**

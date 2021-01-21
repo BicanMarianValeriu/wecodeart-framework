@@ -6,13 +6,13 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework 
- * @subpackage 	Markup\Input
+ * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.2.0
  * @version		4.2.0
  */
 
-namespace WeCodeArt\Markup\Input;
+namespace WeCodeArt\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -105,9 +105,9 @@ abstract class Base {
     /**
      * Get the control's content.
      *
-     * @since 4.1.0
+     * @since   4.2.0
      *
-     * @return string Contents of the control.
+     * @return  string Contents of the control.
      */
     final public function get_content() {
         ob_start();
@@ -118,7 +118,7 @@ abstract class Base {
     /**
      * Renders the control wrapper and calls $this->content() for the internals.
      *
-     * @since 4.2.0
+     * @since   4.2.0
      */
     protected function render() {
         if( $this->label_position === 'before' ) $this->label();

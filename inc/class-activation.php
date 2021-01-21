@@ -17,6 +17,7 @@ namespace WeCodeArt;
 defined( 'ABSPATH' ) || exit(); 
 
 use WeCodeArt\Config;
+use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Notifications;
 
 /**
@@ -24,7 +25,7 @@ use WeCodeArt\Admin\Notifications;
  */
 class Activation {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Requirements

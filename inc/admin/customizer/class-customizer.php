@@ -16,11 +16,13 @@ namespace WeCodeArt\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Singleton;
+use WeCodeArt\Core\Scripts;
 use WeCodeArt\Utilities\Helpers;
-use WeCodeArt\Admin\Customizer\Partials;
-use WeCodeArt\Admin\Customizer\Controls;
 use WeCodeArt\Admin\Customizer\Configs;
 use WeCodeArt\Admin\Customizer\Modules;
+use WeCodeArt\Admin\Customizer\Controls;
+use WeCodeArt\Admin\Customizer\Partials;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -28,8 +30,8 @@ use function WeCodeArt\Functions\get_prop;
  */
 class Customizer {
 
-	use \WeCodeArt\Singleton;
-	use \WeCodeArt\Core\Scripts\Base;
+	use Singleton;
+	use Scripts\Base;
 
 	/**
 	 * Customizer Configurations.
@@ -157,6 +159,7 @@ class Customizer {
 	 *
 	 * @param 	WP_Customize_Manager $wp_customize Reference to WP_Customize_Manager.
 	 * @since 	3.5
+	 *
 	 * @return 	Array Customizer Configurations for registering Sections/Panels/Controls.
 	 */
 	public function get_configurations( $wp_customize ) {

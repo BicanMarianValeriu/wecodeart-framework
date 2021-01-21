@@ -48,7 +48,6 @@ abstract class Processor {
 	/**
 	 * Constructor
 	 *
-	 * @access  public
 	 * @param   array 	$args Args object.
 	 */
 	public function __construct( $args ) {
@@ -134,31 +133,18 @@ abstract class Processor {
 		$pattern_replace = get_prop( $output, 'pattern_replace', [] );
 
 		if ( ! empty( $pattern_replace ) ) {
-			$option_type = $this->processor;
+			$option_type = get_prop( $output, 'pattern_source', $this->processor );
 			$option_name = 'wecodeart-settings';
-			$options     = [];
-
-			if ( $option_name ) {
-				$options = ( 'site_option' === $option_type ) ? get_site_option( $option_name ) : get_option( $option_name );
-			}
 			
 			foreach ( $pattern_replace as $search => $replace ) {
 				$replacement = '';
 				switch ( $option_type ) {
 					case 'option':
-						if ( is_array( $options ) ) {
-							if ( $option_name ) {
-								$subkey      = str_replace( [ $option_name, '[', ']' ], '', $replace );
-								$replacement = ( isset( $options[ $subkey ] ) ) ? $options[ $subkey ] : '';
-								break;
-							}
-							$replacement = ( isset( $options[ $replace ] ) ) ? $options[ $replace ] : '';
-							break;
-						}
-						$replacement = get_option( $replace );
+						$replacement 	= wecodeart_option( $replace );
 						break;
 					case 'site_option':
-						$replacement = ( is_array( $options ) && isset( $options[ $replace ] ) ) ? $options[ $replace ] : get_site_option( $replace );
+						$options 		= get_site_option( $option_name );
+						$replacement 	= ( is_array( $options ) && isset( $options[ $replace ] ) ) ? $options[ $replace ] : get_site_option( $replace );
 						break;
 					case 'user_meta':
 						$user_id = get_current_user_id();

@@ -18,13 +18,14 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
+use WeCodeArt\Singleton;
 
 /**
  * Handles Entry Media output
  */
 class Media {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor

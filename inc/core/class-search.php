@@ -17,7 +17,6 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
-use WeCodeArt\Markup\Input;
 
 /**
  * Framework Search

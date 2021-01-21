@@ -42,18 +42,7 @@ class Conditional implements ArrayAccess {
      * @return void
      */
     public function init() {
-        foreach( self::get_conditionals() as $key => $condition ) {
-            $this->set( $key, $condition );
-        }
-    }
-
-	/**
-     * Get all conditionals array.
-     *
-     * @return array The conditionals classes.
-     */
-    public static function get_conditionals() {
-        $conditionals = apply_filters( 'wecodeart/conditional/get/before', [
+        foreach( apply_filters( 'wecodeart/filter/conditionals', [
             'is_admin'          => Conditional\Admin::class,
 			'is_theme_admin'    => Conditional\Settings::class,
 			'is_customizer'     => Conditional\Customizer::class,
@@ -62,10 +51,10 @@ class Conditional implements ArrayAccess {
 			'is_front_page'     => Conditional\Front_Page::class,
 			'is_full_layout'    => Conditional\Full_Layout::class,
 			'is_post_archive'   => Conditional\Post_Archive::class,
-		] );
-
-        return (array) $conditionals;
-	}
+		] ) as $key => $condition ) {
+            $this->register( $key, $condition );
+        }
+    }
 	
     /**
      * Determine if the given conditional value exists.

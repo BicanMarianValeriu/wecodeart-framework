@@ -43,7 +43,9 @@ final class Styles implements Integration {
 	/**
 	 * Send to Constructor
 	 */
-	public function register_hooks() {}
+	public function register_hooks() {
+		do_action( 'wecodeart/support/styles/init', $this );
+	}
 
     /**
      * Trim CSS

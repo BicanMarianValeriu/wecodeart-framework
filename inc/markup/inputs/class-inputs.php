@@ -6,7 +6,7 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework 
- * @subpackage 	Markup\Input
+ * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.1.2
  * @version		4.2.0
@@ -17,13 +17,14 @@ namespace WeCodeArt\Markup;
 defined( 'ABSPATH' ) || exit();
 
 use ArrayAccess;
+use WeCodeArt\Singleton;
 
 /**
  * Standard Inputs Markup
  */
-class Input implements ArrayAccess {
+class Inputs implements ArrayAccess {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
      * All of the configuration items.
@@ -37,14 +38,14 @@ class Input implements ArrayAccess {
 	 */
 	public function init() {
 		// Register Default Inputs
-		$this->register( 'basic',		Input\Basic::class 		);
-		$this->register( 'button',		Input\Button::class 	);
-		$this->register( 'select',		Input\Select::class 	);
-		$this->register( 'textarea',	Input\TextArea::class 	);
-		$this->register( 'toggle',		Input\Toggle::class 	);
-		$this->register( 'radio',		Input\Toggle::class 	);
-		$this->register( 'checkbox',	Input\Toggle::class 	);
-        $this->register( 'fieldset',	Input\Fieldset::class 	);
+		$this->register( 'basic',		Inputs\Basic::class 		);
+		$this->register( 'button',		Inputs\Button::class 	);
+		$this->register( 'select',		Inputs\Select::class 	);
+		$this->register( 'textarea',	Inputs\TextArea::class 	);
+		$this->register( 'toggle',		Inputs\Toggle::class 	);
+		$this->register( 'radio',		Inputs\Toggle::class 	);
+		$this->register( 'checkbox',	Inputs\Toggle::class 	);
+        $this->register( 'fieldset',	Inputs\Fieldset::class 	);
 	}
 
 	/**
@@ -73,13 +74,13 @@ class Input implements ArrayAccess {
 	 * @return	string
 	 */
 	public static function compile( string $type = 'hidden', ...$input_args ) {
-		if( in_array( $type, Input\Basic::get_types() ) ) {
+		if( in_array( $type, Inputs\Basic::get_types() ) ) {
 			$class_type = 'basic';
 		} else {
 			$class_type = $type;
 		}
 
-		$storage = Input::get_instance(); 
+		$storage = Inputs::get_instance(); 
 		$input_class = $storage->get( $class_type );
 		if( $input_class ) {
 			$input = new $input_class( $type, ...$input_args );

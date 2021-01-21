@@ -75,7 +75,7 @@ function filterLog(route, func, args) {
 						form.classList.add('was-validated');
 					}, false);
 				});
-			}
+			},
 		}
 	};
 }).apply(this, [window.wecodeart]);

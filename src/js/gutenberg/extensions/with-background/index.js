@@ -165,7 +165,8 @@ const withBackgroundStyles = createHigherOrderComponent((BlockListBlock) => {
 		} = props;
 
 		if (hasBlockSupport(blockName, 'withBackground')) {
-			const { attributes } = props;
+			const { attributes, wrapperProps } = props;
+			console.log(wrapperProps);
 			const {
 				backgroundType,
 				backgroundUrl,

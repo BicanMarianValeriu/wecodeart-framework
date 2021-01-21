@@ -16,6 +16,7 @@ namespace WeCodeArt\Core\Entry;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Singleton;
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
 
@@ -24,7 +25,7 @@ use WeCodeArt\Markup\SVG;
  */
 class Meta {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor
