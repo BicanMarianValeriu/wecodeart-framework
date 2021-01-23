@@ -32,11 +32,11 @@
 		"test:unit": "wp-scripts test-unit-js"
 	},
 	"dependencies": {
-		"@fortawesome/fontawesome-svg-core": "^1.2.30",
+		"@fortawesome/fontawesome-svg-core": "^1.2.34",
 		"@popperjs/core": "^2.6.0",
-		"@wordpress/browserslist-config": "^2.7.0",
+		"@wordpress/browserslist-config": "^3.0.0",
 		"@wordpress/icons": "^2.9.0",
-		"@wordpress/scripts": "^12.6.0",
+		"@wordpress/scripts": "^13.0.0",
 		"bootstrap": "^5.0.0-beta1",
 		"browser-sync": "^2.26.13",
 		"browser-sync-webpack-plugin": "^2.3.0",

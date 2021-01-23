@@ -409,14 +409,15 @@ var wecodeartPostMessage = {
         return value;
       }
 
-      output = _objectSpread(_objectSpread({}, output), {
+      console.log(output);
+      output = _objectSpread({
         prefix: '',
         units: '',
         suffix: '',
         pattern: '$',
         pattern_replace: {},
         exclude: []
-      });
+      }, output);
 
       if (1 <= output.exclude.length) {
         _.each(output.exclude, function (exclusion) {
@@ -428,13 +429,21 @@ var wecodeartPostMessage = {
 
       if (excluded) {
         return false;
+      } // Apply Pattern
+
+
+      if (typeof output.pattern === 'string') {
+        value = output.pattern.replace(new RegExp('\\$', 'g'), value);
+      } // Apply Pattern replace
+
+
+      if (output.pattern_replace.length) {
+        _.each(output.pattern_replace, function (id, placeholder) {
+          if (!_.isUndefined(settings[id])) {
+            value = value.replace(placeholder, settings[id]);
+          }
+        });
       }
-
-      value = output.pattern.replace(new RegExp('\\$', 'g'), value);
-
-      _.each(output.pattern_replace, function (id, placeholder) {
-        if (!_.isUndefined(settings[id])) value = value.replace(placeholder, settings[id]);
-      });
 
       return output.prefix + value + output.units + output.suffix;
     },
@@ -510,8 +519,8 @@ var wecodeartPostMessage = {
 
             if (value['font-weight'].length) {
               _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(value['font-weight']).map(function (v) {
-                if ('regular' === v) v = ':400';
-                if ('italic' === v) v = ':400i';
+                if ('regular' === v) v = '400';
+                if ('italic' === v) v = '400i';
                 variants = [].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(variants), [v.substring(0, 4)]);
               });
 

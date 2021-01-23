@@ -66,11 +66,13 @@ class Cover extends Base {
 		}
 
 		if ( $value = get_prop( $this->attrs, 'customGradient', false ) ) {
+			$element = get_prop( $this->attrs, 'url' ) ? [
+				$this->element . '.has-background-gradient::before',
+				$this->element . '>span[aria-hidden="true"]:first-child'
+			] : $this->element . '.has-background-gradient';
+
 			$this->output[] = wp_parse_args( [
-				'element'	=> [
-					$this->element . '.has-background-gradient::before',
-					$this->element . '>span[aria-hidden="true"]:first-child'
-				],
+				'element'	=> $element,
 				'property' 	=> 'background-image',
 				'value'	  	=> $value,
 			], $output );

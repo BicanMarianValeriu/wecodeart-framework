@@ -16,12 +16,14 @@ namespace WeCodeArt\Gutenberg\Modules\Classes;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Singleton;
+
 /**
  * Handles Gutenberg Theme Custom Classes Functionality.
  */
 class Suggestions {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Class Init.

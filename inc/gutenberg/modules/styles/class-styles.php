@@ -18,11 +18,12 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg;
+use WeCodeArt\Integration;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
  */
-class Styles {
+class Styles implements Integration {
 
 	use Singleton;
 
@@ -35,12 +36,16 @@ class Styles {
 	public $styles = null;
 
 	/**
-	 * Init.
+	 * Get Conditionals
 	 *
-	 * @access public
+	 * @return void
 	 */
-	public function init() {
-		add_action( 'wecodeart/support/styles/init', [ $this, 'register_hooks' ] );
+	public static function get_conditionals() {
+		wecodeart( 'conditionals' )->set( [
+			'with_blocks_styles' => Styles\Condition::class,
+		] );
+
+		return [ 'with_blocks_styles' ];
 	}
 
 	/**
@@ -50,8 +55,8 @@ class Styles {
 	 *
 	 * @return 	void
 	 */
-	public function register_hooks( $styles ) {
-		$this->styles = $styles;
+	public function register_hooks() {
+		$this->styles = wecodeart( 'integrations' )->get( 'styles' );
 		
 		// CSS Handler
 		Styles\Handler::get_instance();

@@ -79,7 +79,7 @@ class Blog {
 	 * @return 	void
 	 */
 	public function register_block() {
-		$block_json = file_get_contents( get_stylesheet_directory_uri() . '/src/js/gutenberg/blocks/content/block.json' );
+		$block_json = file_get_contents( get_parent_theme_file_path( '/src/js/gutenberg/blocks/content/block.json' ) );
 		$block_json = $block_json ? json_decode( $block_json, true ) : [];
 
 		register_block_type( 'wca/content', [

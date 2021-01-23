@@ -63,9 +63,9 @@ class Gutenberg {
 		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
 
 		// Modules
+		Gutenberg\Modules::get_instance();
 		Gutenberg\Modules\Page::get_instance();
 		Gutenberg\Modules\Title::get_instance();
-		Gutenberg\Modules\Styles::get_instance();
 		Gutenberg\Modules\Classes::get_instance();
 	}
 

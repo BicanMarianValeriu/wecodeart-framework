@@ -134,7 +134,7 @@ return [
                 'full'      => 'initial',
             ]
         ],
-        'support' => [
+        'support'   => [
             'editor-font-sizes' => [
                 [
                     'name'      => esc_html__( 'Small', 'wecodeart' ),
@@ -243,7 +243,10 @@ return [
             'custom-spacing'            => true,
             'custom-line-height'        => true,
             'experimental-link-color'   => true,
-        ]
+        ],
+        'styles'    => true,
+        'classes'   => true,
+        'patterns'  => true,
     ],
     /*
     |--------------------------------------------------------------------------

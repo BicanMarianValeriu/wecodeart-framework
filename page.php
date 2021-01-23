@@ -18,8 +18,8 @@ use WeCodeArt\Core\Content;
 $modules = [ 'header', 'content', 'footer' ];
 
 if( get_post_meta( get_the_ID(), '_wca_builder_template', true ) ) {
-    remove_action( 'wecodeart/hook/loop/before', [ Content::get_instance(), 'content_markup_open' ] );
-    remove_action( 'wecodeart/hook/loop/after', [ Content::get_instance(), 'content_markup_close' ] );
+    remove_action( 'wecodeart/hook/loop/before',    [ Content::get_instance(), 'content_markup_open'    ] );
+    remove_action( 'wecodeart/hook/loop/after',     [ Content::get_instance(), 'content_markup_close'   ] );
     $modules = [
         'header', // Header
         function() {
@@ -31,8 +31,8 @@ if( get_post_meta( get_the_ID(), '_wca_builder_template', true ) ) {
             Markup::wrap( 'main', [ [
                 'tag' => 'main',
                 'attrs' => [
-                    'id' 	=> 'main', 
-                    'class'	=> 'site-main' 
+                    'id' 	=> 'main',
+                    'class'	=> 'site-main'
                 ]
             ] ], [ Loops::get_instance(), 'default' ] );
 

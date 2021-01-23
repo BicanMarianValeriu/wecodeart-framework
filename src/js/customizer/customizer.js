@@ -123,16 +123,16 @@ const wecodeartPostMessage = {
 				return value;
 			}
 
+			console.log(output);
+
 			output = {
-				...output,
-				... {
-					prefix: '',
-					units: '',
-					suffix: '',
-					pattern: '$',
-					pattern_replace: {},
-					exclude: []
-				}
+				prefix: '',
+				units: '',
+				suffix: '',
+				pattern: '$',
+				pattern_replace: {},
+				exclude: [],
+				...output
 			};
 
 			if (1 <= output.exclude.length) {
@@ -147,10 +147,19 @@ const wecodeartPostMessage = {
 				return false;
 			}
 
-			value = output.pattern.replace(new RegExp('\\$', 'g'), value);
-			_.each(output.pattern_replace, (id, placeholder) => {
-				if (!_.isUndefined(settings[id])) value = value.replace(placeholder, settings[id]);
-			});
+			// Apply Pattern
+			if (typeof output.pattern === 'string') {
+				value = output.pattern.replace(new RegExp('\\$', 'g'), value);
+			}
+
+			// Apply Pattern replace
+			if (output.pattern_replace.length) {
+				_.each(output.pattern_replace, (id, placeholder) => {
+					if (!_.isUndefined(settings[id])) {
+						value = value.replace(placeholder, settings[id]);
+					}
+				});
+			}
 
 			return output.prefix + value + output.units + output.suffix;
 		},
