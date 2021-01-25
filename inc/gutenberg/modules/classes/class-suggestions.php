@@ -32,7 +32,6 @@ class Suggestions {
 	 */
 	public function init() {
 		// Editor Class Settings.
-		add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'set_classes' ], 10, 2 );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'font_classes' 			] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'flex_classes' 			] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'display_classes'		] );
@@ -40,23 +39,6 @@ class Suggestions {
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'offset_order_classes' 	] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'position_classes' 		] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'extra_classes' 			] );
-	}
-
-	/**
-	 * Add new block editor settings for custom classes.
-	 *
-	 * @param array  $settings 	The editor settings.
-	 * @param object $post 		The post being edited.
-	 *
-	 * @return array Returns updated editors customClasses settings.
-	 */
-	public function set_classes( $settings, $post ) {
-		if ( ! isset( $settings[ 'customClasses' ] ) ) {
-			$classes  = apply_filters( 'wecodeart/filter/gutenberg/settings/custom_classes', [], $post );
-			$settings[ 'customClasses' ] = array_map( 'sanitize_html_class', $classes );
-		}
-
-		return $settings;
 	}
 
 	/**

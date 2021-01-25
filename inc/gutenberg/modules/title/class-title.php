@@ -9,28 +9,35 @@
  * @subpackage  Gutenberg\Title
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		4.0.3
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Singleton;
+use WeCodeArt\Integration;
+use WeCodeArt\Conditional\Traits\No_Conditionals;
+
 /**
  * Handles Gutenberg Hidden entry title functionality.
  */
-class Title {
+class Title implements Integration {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
+	use No_Conditionals;
 
 	/**
-	 * Class Init.
+	 * Register Hooks - into styles processor action if enabled
 	 *
-	 * @return void
+	 * @since 	4.2.0
+	 *
+	 * @return 	void
 	 */
-	public function init() {
+	public function register_hooks() {
 		// Post Meta
-		add_action( 'init',	[ $this, 'register_meta' ] );
+		$this->register_meta();
 
 		// Hidden Singular Page Title
 		add_filter( 'wecodeart/filter/entry/title/disabled', 	[ $this, 'disable_title' ], 10, 2 );
@@ -82,7 +89,7 @@ class Title {
 				$hidden = get_post_meta( $post->ID, '_wca_title_hidden', true );
 
 				if ( $hidden ) {
-					$classes[] = get_post_type() . '--title-hidden';
+					$classes[] = 'has-title-hidden';
 				}
 			}
 		}

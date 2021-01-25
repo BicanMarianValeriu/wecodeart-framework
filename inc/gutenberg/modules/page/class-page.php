@@ -9,29 +9,34 @@
  * @subpackage  Gutenberg\Title
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		4.0.5
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Singleton;
+use WeCodeArt\Integration;
+use WeCodeArt\Conditional\Traits\No_Conditionals;
+
 /**
  * Handles Gutenberg Page Builder functionality.
  */
 class Page {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
+	use No_Conditionals;
 
 	/**
 	 * Class Init.
 	 *
 	 * @return void
 	 */
-	public function init() {
+	public function register_hooks() {
 		// Post Meta
-		add_action( 'init',	[ $this, 'register_meta' ] );
-
+		$this->register_meta();
+		
 		// Body Class
 		add_filter( 'body_class', [ $this, 'body_class' ] );
 	}
@@ -67,7 +72,7 @@ class Page {
 			$enabled = get_post_meta( $post->ID, '_wca_builder_template', true );
 
 			if ( $enabled ) {
-				$classes[] = 'page--full-width';
+				$classes[] = 'has-full-width';
 			}
 		}
 

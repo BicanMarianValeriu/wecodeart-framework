@@ -6,9 +6,9 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package		WeCodeArt Framework
- * @subpackage  Gutenberg Modules
+ * @subpackage  Gutenberg Blocks Registry
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.0.3
+ * @since		4.2.0
  * @version		4.2.0
  */
 
@@ -20,16 +20,16 @@ use WeCodeArt\Singleton;
 use function WeCodeArt\Functions\get_prop;
 
 /**
- * Handles Gutenberg Modules.
+ * Gutenberg Blocks Registry.
  */
-class Modules implements \ArrayAccess {
+class Blocks implements \ArrayAccess {
 
 	use Singleton;
 
 	/**
-	 * The registered modules.
+	 * The registered Blocks.
 	 *
-	 * @var Modules[]
+	 * @var Blocks[]
 	 */
 	protected $items = [];
 
@@ -37,11 +37,7 @@ class Modules implements \ArrayAccess {
 	 * Send to Constructor
 	 */
 	public function init() {
-		$this->register( 'title',       Modules\Title::class    );
-		$this->register( 'builder',     Modules\Page::class     );
-		$this->register( 'styles',      Modules\Styles::class   );
-		$this->register( 'classes',     Modules\Classes::class  );
-		$this->register( 'patterns',    Modules\Patterns::class );
+		$this->register( 'wca/content',	Blocks\Content::class );
         
         add_action( 'init', [ $this, 'load' ] );
 	}
@@ -52,22 +48,7 @@ class Modules implements \ArrayAccess {
 	 * @return void
 	 */
 	public function load() {
-		foreach ( $this->items as $class ) {
-			if ( ! $this->conditionals_are_met( $class ) ) continue;
-			$class::get_instance()->register_hooks();
-		}
-	}
-
-	/**
-	 * Checks if all conditionals of a given integration are met.
-	 *
-	 * @param 	Integration $class The class name of the integration.
-	 *
-	 * @return 	bool Whether or not all conditionals of the integration are met.
-	 */
-	protected function conditionals_are_met( $class ) {
-		$conditionals = $class::get_conditionals();
-		return wecodeart_if( $conditionals );
+		foreach( $this->items as $class ) $class::get_instance()->register_block_type();
 	}
 
 	/**
@@ -94,12 +75,12 @@ class Modules implements \ArrayAccess {
         $keys = is_array( $key ) ? $key : [ $key => $value ];
 
         foreach ( $keys as $key => $value ) {
-            $this->items[$key] = apply_filters( "wecodeart/gutenberg/modules/set/{$key}", $value );
+            $this->items[$key] = apply_filters( "wecodeart/gutenberg/blocks/set/{$key}", $value );
         }
 	}
 
 	/**
-     * Determine if the given module value exists.
+     * Determine if the given Blocks value exists.
      *
      * @param  string  $key
      *
@@ -110,7 +91,7 @@ class Modules implements \ArrayAccess {
     }
 
     /**
-     * Get the specified module value.
+     * Get the specified Blocks value.
      *
      * @param  string  $key
      * @param  mixed   $default
@@ -122,7 +103,7 @@ class Modules implements \ArrayAccess {
             return $default;
         }
 
-        return apply_filters( "wecodeart/gutenberg/modules/get/{$key}", $this->items[$key] );
+        return apply_filters( "wecodeart/gutenberg/blocks/get/{$key}", $this->items[$key] );
     }
 	
 	/**

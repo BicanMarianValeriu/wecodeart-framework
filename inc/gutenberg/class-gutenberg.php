@@ -62,11 +62,11 @@ class Gutenberg {
 		// Theme Support.
 		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
 
-		// Modules
+		// Modules.
 		Gutenberg\Modules::get_instance();
-		Gutenberg\Modules\Page::get_instance();
-		Gutenberg\Modules\Title::get_instance();
-		Gutenberg\Modules\Classes::get_instance();
+		
+		// Blocks.
+		Gutenberg\Blocks::get_instance();
 	}
 
 	/**
@@ -147,7 +147,7 @@ class Gutenberg {
 		);
 
 		// Inline
-		$global = [
+		wp_add_inline_script( $this->make_handle(), 'window.wecodeartInfo = ' . wp_json_encode( [
 			'theme' 	=> [
 				'version' => wecodeart( 'version' )
 			],
@@ -163,8 +163,7 @@ class Gutenberg {
 				'core/tag-cloud',
 				'core/latest-comments',
 			] )
-		];
-		wp_add_inline_script( $this->make_handle(), 'window.wecodeartInfo = ' . wp_json_encode( $global ) . ';', 'before' );
+		] ) . ';', 'before' );
 	}
 
 	/**

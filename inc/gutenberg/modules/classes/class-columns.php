@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Classes\Columns
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		4.0.6
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Classes;
@@ -30,25 +30,8 @@ class Columns {
 	 */
 	public function init() {
 		// Editor Class Settings.
-		add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'set_classes' ], 10, 2 );
 		add_filter( 'wecodeart/filter/gutenberg/settings/columns_classes', [ $this, 'global_classes' ] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/columns_classes', [ $this, 'breakpoints_classes' ] );
-	}
-
-	/**
-	 * Add new block editor settings for custom classes.
-	 *
-	 * @param array  $settings 	The editor settings.
-	 * @param object $post 		The post being edited.
-	 *
-	 * @return array Returns updated editors customClasses settings.
-	 */
-	public function set_classes( $settings, $post ) {
-		if ( ! isset( $settings[ 'columnsClasses' ] ) ) {
-			$settings['columnsClasses'] = apply_filters( 'wecodeart/filter/gutenberg/settings/columns_classes', [], $post );
-		}
-
-		return $settings;
 	}
 
 	/**

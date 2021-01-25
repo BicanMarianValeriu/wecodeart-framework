@@ -55,10 +55,6 @@ class Patterns implements Integration {
 		$this->register_taxonomy();
 		$this->load_block_patterns();
 		$this->load_categories();
-		// add_action( 'init', [ $this, 'register_type' 		] );
-		// add_action( 'init', [ $this, 'register_taxonomy' 	] );
-		// add_action( 'init', [ $this, 'load_block_patterns' 	] );
-		// add_action( 'init', [ $this, 'load_categories' 		] );
 		add_action( 'rest_insert_' . self::POST_TYPE, [ $this, 'rest_insert_wca_pattern' ], 10, 2 );
 	}
 

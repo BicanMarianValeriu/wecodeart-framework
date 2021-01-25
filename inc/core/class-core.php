@@ -21,6 +21,7 @@ use WeCodeArt\Core\Search;
 use WeCodeArt\Core\Content;
 use WeCodeArt\Markup\SVG;
 use WeCodeArt\Markup\Walkers\Menu;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * General Hooks
@@ -70,19 +71,18 @@ class Core {
 			$classes[] = 'group-blog';
 		}
 		
-		$modules = Content::get_contextual_options()['modules'];
-
+		$modules = get_prop( Content::get_contextual_options(), 'modules', [] );
+	
 		// Add sidebar class
-		// if( in_array( 'primary', $modules, true ) || in_array( 'secondary', $modules, true ) ) {
-		// 	$classes[] = 'page--has-sidebar';
-		// } else {
-		// 	$classes[] = 'page--no-sidebar';
-		// }
+		if( in_array( 'primary', $modules, true ) || in_array( 'secondary', $modules, true ) ) {
+			$classes[] = 'has-sidebar';
+		}
 		
 		// Singular sidebar class if gutenberg wide/full layout/
 		if( wecodeart_if( 'is_full_layout' ) ) { 
-			$classes = array_diff( $classes, [ 'has-sidebar', 'page--has-sidebar' ] );
-			$classes[] = 'page--full-width';
+			$classes = array_diff( $classes, [ 'has-sidebar' ] );
+			$classes[] = 'has-no-sidebar';
+			$classes[] = 'has-full-width';
 		} 
 
 		// Return Classes.

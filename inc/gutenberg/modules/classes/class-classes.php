@@ -9,27 +9,71 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		4.0.5
+ * @version		4.2.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Singleton;
+use WeCodeArt\Integration;
+use WeCodeArt\Conditional\Traits\No_Conditionals;
+
 /**
  * Handles Gutenberg Theme Custom Classes Functionality.
  */
 class Classes {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
+	use No_Conditionals;
 
 	/**
-	 * Class Init.
+	 * Register Hooks - into styles processor action if enabled
 	 *
-	 * @return void
+	 * @since 	4.2.0
+	 *
+	 * @return 	void
 	 */
-	public function init() {
+	public function register_hooks() {
+		add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'set_columns_classes' ], 10, 2 );
+		add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'set_suggest_classes' ], 10, 2 );
+
 		Classes\Columns::get_instance();
 		Classes\Suggestions::get_instance();
+	}
+
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param array  $settings 	The editor settings.
+	 * @param object $post 		The post being edited.
+	 *
+	 * @return array Returns updated editors column classes.
+	 */
+	public function set_columns_classes( $settings, $post ) {
+		if ( ! isset( $settings[ 'columnsClasses' ] ) ) {
+			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/columns_classes', [], $post );
+			$settings['columnsClasses'] = array_map( 'sanitize_html_class', $classes );
+		}
+
+		return $settings;
+	}
+
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param array  $settings 	The editor settings.
+	 * @param object $post 		The post being edited.
+	 *
+	 * @return array Returns updated editors classes suggestions.
+	 */
+	public function set_suggest_classes( $settings, $post ) {
+		if ( ! isset( $settings[ 'customClasses' ] ) ) {
+			$classes  = apply_filters( 'wecodeart/filter/gutenberg/settings/custom_classes', [], $post );
+			$settings[ 'customClasses' ] = array_map( 'sanitize_html_class', $classes );
+		}
+
+		return $settings;
 	}
 }

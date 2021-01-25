@@ -40,8 +40,7 @@ class Blog {
 	 */
 	public function init() {
 		$this->blog_ID = (int) get_option( 'page_for_posts' );
-		add_action( 'init',	[ $this, 'register_block' 	] );
-		add_action( 'wp', 	[ $this, 'layout_hooks' 	] );
+		add_action( 'wp', [ $this, 'layout_hooks' ] );
 	}
 	
 	/**
@@ -69,52 +68,5 @@ class Blog {
 	 */
 	public function render_content() {
 		Loops::render_content( $this->blog_ID );
-	}
-
-	/**
-	 * Content render.
-	 *
-	 * @since	4.2.0
-	 *
-	 * @return 	void
-	 */
-	public function register_block() {
-		$block_json = file_get_contents( get_parent_theme_file_path( '/src/js/gutenberg/blocks/content/block.json' ) );
-		$block_json = $block_json ? json_decode( $block_json, true ) : [];
-
-		register_block_type( 'wca/content', [
-			'attributes'      => get_prop( $block_json, 'attributes', [] ),
-			'render_callback' => function( $attributes ) {
-				$closure = function( $args ) use( $attributes ) {
-					$class = [
-						'wp-block-wca-content',
-						$args[0]['attrs']['class']
-					];
-
-					if( get_prop( $attributes, 'backgroundColor', false ) ) {
-						$class[] = 'bg-' . $attributes['backgroundColor'];
-					}
-
-					if( get_prop( $attributes, 'className', false ) ) {
-						$class[] = $attributes['className'];
-					}
-
-					if( get_prop( $attributes, 'align', false ) ) {
-						$class[] = 'align' . $attributes['align'];
-						$args[1]['attrs']['class'] = 'container-fluid';
-					}
-
-					$args[0]['attrs']['class'] = implode( ' ', $class );
-					
-					return $args;
-				};
-
-				ob_start();
-				add_filter( 'wecodeart/filter/wrappers/content-wrappers', $closure );
-				Content::get_instance()::render_modules();
-				remove_filter( 'wecodeart/filter/wrappers/content-wrappers', $closure );
-				return ob_get_clean();
-			},
-		] );
 	}
 }
