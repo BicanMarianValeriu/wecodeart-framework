@@ -17,7 +17,6 @@ namespace WeCodeArt\Core\Entry;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
-use WeCodeArt\Markup\SVG;
 use WeCodeArt\Singleton;
 
 /**
@@ -32,14 +31,67 @@ class Media {
 	 * @since 3.6.4
 	 */
 	public function init() {
-		// Actions.
-		add_action( 'wecodeart/hook/entry/header', [ $this, 'render_image' ], 20 );
-
 		// Filters.
 		add_filter( 'wecodeart/filter/media/render_image/disable', 	[ $this, 'filter_render_image' 	] );
-		add_filter( 'wecodeart/filter/wrappers/entry-media', 		[ $this, 'filter_link_image' 	] );
+		add_filter( 'wecodeart/filter/wrappers/get-media', 			[ $this, 'filter_link_image' 	] );
 	}
-	
+
+	/**
+	 * Pull an attachment ID from a post, if one exists.
+	 *
+	 * @since 	3.6.4
+	 * @version	3.9.5
+	 *
+	 * @param 	int 		$index   	Optional. 	Index of which image to return from a post. Default is 0.
+	 * @param 	int 		$post_id 	Optional. 	Post ID. Default is `get_the_ID()`.
+	 *
+	 * @return 	int|bool 	Image ID, or `false` if image with given index does not exist.
+	 */
+	public static function get_media_id( $type = 'image', $index = 0, $post_id = null ) {
+
+		$media_ids = array_keys( get_attached_media( $type, $post_id ?: get_the_ID() ) );
+
+		if ( isset( $media_ids[ $index ] ) ) return $media_ids[ $index ]; 
+
+		return false;
+	}
+
+	/**
+	 * Get Image Ratio
+	 *
+	 * @since 	3.7.6
+	 * @version	3.9.5
+	 *
+	 * @param  	int		$id
+	 * @param	string	$size
+	 * @param 	int 	$dummy ratio
+	 *
+	 * @return 	mixed
+	 */
+	public static function get_image_ratio( $id, $size, $dummy_ratio ) {
+		$real_sizes = wp_get_attachment_metadata( $id );
+		$real_sizes = $real_sizes ?: []; 
+		$real_ratio = 1; // 1 by default
+
+		if( array_key_exists( 'sizes', $real_sizes ) ) {
+			if( array_key_exists( $size, $real_sizes['sizes'] ) ) {
+				$real_sizes = $real_sizes['sizes'][$size]; 
+			} 
+		}
+
+		if( ! empty( $real_sizes ) ) {
+			if( empty( $real_sizes['height'] ) ) $real_sizes['height'] = $real_sizes['width']; 
+			$real_ratio = $real_sizes['width'] / $real_sizes['height'];
+		}
+
+		if( $real_ratio > $dummy_ratio ) $ratio_class = 'wider';
+		if( $real_ratio < $dummy_ratio ) $ratio_class = 'taller';
+		if( $real_ratio === $dummy_ratio ) $ratio_class = 'match';
+
+		if( isset( $ratio_class ) ) return $ratio_class;
+		return null;
+	}
+
 	/**
 	 * Get information about available image sizes
 	 *
@@ -85,92 +137,10 @@ class Media {
 	}
 
 	/**
-	 * Pull an attachment ID from a post, if one exists.
-	 *
-	 * @since 	3.6.4
-	 * @version	3.9.5
-	 *
-	 * @param 	int 		$index   	Optional. 	Index of which image to return from a post. Default is 0.
-	 * @param 	int 		$post_id 	Optional. 	Post ID. Default is `get_the_ID()`.
-	 *
-	 * @return 	int|bool 	Image ID, or `false` if image with given index does not exist.
-	 */
-	public static function get_media_id( $type = 'image', $index = 0, $post_id = null ) {
-
-		$media_ids = array_keys( get_attached_media( $type, $post_id ?: get_the_ID() ) ); 
-
-		if ( isset( $media_ids[ $index ] ) ) return $media_ids[ $index ]; 
-
-		return false;
-	}
-
-	/**
-	 * Generate a Dummy Placeholder
-	 *
-	 * @since	3.6.4
-	 *
-	 * @param 	array 	$args 	- must have an width and height key
-	 *
-	 * @return 	string 	$html
-	 */
-	public static function generate_dummy_placeholder( $args ) { 
-
-		$args = apply_filters( 'wecodeart/filter/media/dummy/args', wp_parse_args( $args, [
-			'width'		=> 768,
-			'height'	=> 768, 
-			'padding' 	=> number_format( absint( $args['height'] ) / absint( $args['width'] ) * 100, 7 )
-		] ), $args ); 
-
-		$html = '<div ' . Markup::generate_attr( 'media-dummy', [ 
-			'aria-hidden' 	=> 'true', 
-			'class'			=> 'entry-media__dummy',
-			'style'			=> 'padding-bottom:' .  $args['padding'] . '%;'
-		] ) . '></div>';
-
-		return $html;
-	}
-
-	/**
-	 * Get Image Ratio
-	 *
-	 * @since 	3.7.6
-	 * @version	3.9.5
-	 *
-	 * @param  	int		$id
-	 * @param	string	$size
-	 * @param 	int 	$dummy ratio
-	 *
-	 * @return 	mixed
-	 */
-	public static function get_image_ratio( $id, $size, $dummy_ratio ) {
-		$real_sizes = wp_get_attachment_metadata( $id );
-		$real_sizes = $real_sizes ?: []; 
-		$real_ratio = 1; // 1 by default
-
-		if( array_key_exists( 'sizes', $real_sizes ) ) {
-			if( array_key_exists( $size, $real_sizes['sizes'] ) ) {
-				$real_sizes = $real_sizes['sizes'][$size]; 
-			} 
-		}
-
-		if( ! empty( $real_sizes ) ) {
-			if( empty( $real_sizes['height'] ) ) $real_sizes['height'] = $real_sizes['width']; 
-			$real_ratio = $real_sizes['width'] / $real_sizes['height'];
-		}
-
-		if( $real_ratio > $dummy_ratio ) $ratio_class = 'wider';
-		if( $real_ratio < $dummy_ratio ) $ratio_class = 'taller';
-		if( $real_ratio === $dummy_ratio ) $ratio_class = 'match';
-
-		if( isset( $ratio_class ) ) return $ratio_class;
-		return null;
-	}
-
-	/**
 	 * Get Image - Return an image pulled from the media gallery. 
 	 *
 	 * @since 	3.6.4
-	 * @version	4.2
+	 * @version	4.2.0
 	 *
 	 * @param 	array	$args
 	 * @param	bool	$echo
@@ -182,11 +152,12 @@ class Media {
 			'post_id'	=> null,
 			'media_id'	=> null,
 			'format'   	=> 'html',
-			'size'     	=> 'large',
-			'dummy'		=> true,
+			'size'     	=> 'medium',
 			'num'      	=> 0,
 			'attrs'    	=> [],
-			'fallback' 	=> 'first'
+			'fallback' 	=> [
+				'html' 	=>	'<img data-src="%s" />',
+			]
 		];  
 
 		$args = apply_filters( 'wecodeart/filter/media/get_image/args', wp_parse_args( $args, $defaults ), get_post_type() );
@@ -208,36 +179,40 @@ class Media {
 		} 
 
 		// If we have an id, get the HTML and URL.
+		$dummy_sizes	= self::get_image_sizes( $args['size'] );
+		$dummy_ratio	= absint( $dummy_sizes['width'] ) / absint( $dummy_sizes['height'] );
+		$html 			= '';
+
 		if ( isset( $id ) ) {	
-			$html = '';
-
-			$dummy_sizes = self::get_image_sizes( $args['size'] );
-			$dummy_ratio = absint( $dummy_sizes['width'] ) / absint( $dummy_sizes['height'] );
-			
-			if( (bool) $args['dummy'] ) {
-				$args['attrs']['class'] .= ' ' . self::get_image_ratio( $id, $args['size'], $dummy_ratio );
-				$html .= self::generate_dummy_placeholder( $dummy_sizes ); 
-			}
-
+			$args['attrs']['class'] .= ' ' . self::get_image_ratio( $id, $args['size'], $dummy_ratio );
 			$html .= wp_get_attachment_image( $id, $args['size'], false, $args['attrs'] );
-
 			list( $url ) = wp_get_attachment_image_src( $id, $args['size'], false );
-
 		} elseif ( is_array( $args['fallback'] ) ) { 
-
-			$id   = 0;
-			$html = $args['fallback']['html'];
-			$url  = $args['fallback']['url'];
-
+			$id		= 0;
+			$img	= sprintf( 'holder.js/%s?auto=yes&text=www.wecodeart.com', join( 'x', [ $dummy_sizes['width'], $dummy_sizes['height'] ] ) );
+			$url	= isset( $args['fallback']['url'] ) ? esc_url( $args['fallback']['url'] ) : $img;
+			$html	= sprintf( $args['fallback']['html'], $url, $dummy_sizes['width'], $dummy_sizes['height'] );
 		} else return false; 
 
 		// Source path, relative to the root.
 		$src = str_replace( home_url(), '', $url );
 
 		// Determine output.
-		if ( 'html' === mb_strtolower( $args['format'] ) ) $output = $html;
-		elseif ( 'url' === mb_strtolower( $args['format'] ) ) $output = $url;
-		else $output = $src; 
+		if( 'html' === mb_strtolower( $args['format'] ) ) {
+			$output = Markup::wrap( 'get-media', [
+				[
+					'tag' 	=> 'div',
+					'attrs'	=> [
+						'class'	=> 'ratio',
+						'style'	=> sprintf( '--aspect-ratio:%s;', number_format( $dummy_ratio * 100, 3 ) . '%' )
+					]
+				]
+			], $html );
+		} elseif ( 'url' === mb_strtolower( $args['format'] ) ) {
+			$output = $url;
+		} else {
+			$output = $src;
+		};
 
 		// Return false if $url is blank.
 		if ( empty( $url ) ) $output = false; 
@@ -261,32 +236,23 @@ class Media {
 	 *
 	 * @param 	array	$args
 	 *
-	 * @return 	mixed
+	 * @return 	string
 	 */
 	public function render_image( $args = [] ) {  
 		$disable = apply_filters( 'wecodeart/filter/media/render_image/disable', false );
 
-		if ( is_attachment() || $disable === true ) return; 
-		
-		$args = wp_parse_args( $args, [ 
-			'attrs' => [ 
-				'class' => 'entry-media__src' 
-			]
-		] );
+		if ( is_attachment() || $disable === true ) return;
 
-		$image = Markup::wrap( 'entry-media', [ [ 
-			'tag' 	=> 'div', 
-			'attrs' => [ 
-				'class' => 'entry-media' 
+		Markup::wrap( 'entry-media', [ [
+			'tag' 	=> 'div',
+			'attrs' => [
+				'class' => 'entry-media position-relative overflow-hidden rounded shadow mb-4 me-sm-3',
 			] 
-		] ], [ __CLASS__, 'get_image' ], [ $args, true ], false ); 
-
-		if ( $image ) {
-		 	echo $image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			return;
-		} 
-		
-		return false;
+		] ], [ __CLASS__, 'get_image' ], [ wp_parse_args( $args, [
+			'attrs' => [
+				'class' => 'entry-media__src'
+			]
+		] ), true ] );
 	}
 
 	/**
@@ -310,20 +276,17 @@ class Media {
 	 * Filter to add link on image on archives
 	 *
 	 * @since	4.1.5
+	 * @version	4.2.0
 	 *
 	 * @param 	boolean	$wrappers
 	 *
 	 * @return 	boolean
 	 */
 	public function filter_link_image( $wrappers ) {
-		if ( ! is_singular() ) {
-			$wrappers[] = [
-				'tag' 	=> 'a',
-				'attrs' => [
-					'href'	=> esc_url( get_permalink() ),
-					'class' => 'entry-media__link'  
-				]
-			];
+		if ( ! is_singular() && count( $wrappers ) >= 1 ) {
+			$wrappers[0]['tag'] = 'a';
+			$wrappers[0]['attrs']['href'] = get_permalink();
+			$wrappers[0]['attrs']['class'] .= ' d-block';
 		}
 
 		return $wrappers;

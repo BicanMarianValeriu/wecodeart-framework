@@ -101,7 +101,7 @@ class Content {
 	 * Generate Sidebar
 	 *
 	 * @since	3.7.7
-	 * @version	3.9.5
+	 * @version	4.2.0
 	 *
 	 * @return	void
 	 */
@@ -130,8 +130,6 @@ class Content {
 				'tag' 	=> 'aside',
 				'attrs' => [ 
 					'class'		=> $index . '-sidebar',
-					'itemscope' => '',
-					'itemtype'	=> 'https://schema.org/WPSideBar'
 				]
 			] ], 'dynamic_sidebar', [ $index ] );
 			

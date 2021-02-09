@@ -45,6 +45,7 @@ class Support implements ArrayAccess {
 		$this->register( 'fonts',				Support\Fonts::class	);
 		$this->register( 'styles',				Support\Styles::class	);
 		$this->register( 'starter',				Support\Starter::class	);
+		$this->register( 'schema',				Support\Schema::class	);
 		$this->register( 'plugin/anr', 			Support\Plugins\ANR::class 			);
 		$this->register( 'plugin/wpseo', 		Support\Plugins\WPSeo::class 		);
 		$this->register( 'plugin/woocommerce', 	Support\Plugins\WooCommerce::class 	);

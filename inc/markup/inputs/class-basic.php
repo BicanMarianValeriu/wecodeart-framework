@@ -32,6 +32,7 @@ class Basic extends Base {
         $this->type         = in_array( $type, self::get_types() ) ? $type : 'hidden';
         $this->unique_id    = wp_unique_id( 'input-' );
         $this->label        = get_prop( $args, 'label', '' );
+        $this->label_position   = get_prop( $args, '_label', 'before' );
         $this->attrs        = get_prop( $args, 'attrs', [] );
         $this->messages     = get_prop( $args, 'messages', [] );
     }

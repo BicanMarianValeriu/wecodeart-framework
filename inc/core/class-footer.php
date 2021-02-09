@@ -17,6 +17,7 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Customizer;
 
 /**
@@ -24,7 +25,7 @@ use WeCodeArt\Admin\Customizer;
  */
 class Footer {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor
@@ -50,9 +51,7 @@ class Footer {
 			'tag' 	=> 'footer',
 			'attrs' => [
 				'id' 		=> 'footer', 
-				'class'		=> 'footer', 
-				'itemscope' => 'itemscope',
-				'itemtype' 	=> 'https://schema.org/WPFooter'
+				'class'		=> 'footer',
 			]
 		] ], function() {
 			/** 

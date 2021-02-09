@@ -270,45 +270,54 @@ class Comments {
 		$req       = get_option( 'require_name_email' );
 
 		$inputs = [
-			'name' => wecodeart_input( 'text', [
+			'name' => wecodeart_input( 'floating', [
+				'type' 	=> 'text',
 				'label' => esc_html__( 'Name *', 'wecodeart' ),
 				'attrs' => [
 					'id' 	=> 'comment-author',
 					'name' 	=> 'author',
-					'required' 	=> ( $req ) ? 'required' : NULL,
-					'size' 		=> 30,
-					'maxlength' => 245,
-					'value' 	=> $commenter['comment_author']
+					'required' 		=> ( $req ) ? 'required' : NULL,
+					'size' 			=> 30,
+					'maxlength' 	=> 245,
+					'placeholder'	=> 'John Doe',
+					'value' 		=> $commenter['comment_author']
 				]
 			], false ),
-			'email' => wecodeart_input( 'email', [
+			'email' => wecodeart_input( 'floating', [
+				'type' 	=> 'email',
 				'label' => esc_html__( 'Email *', 'wecodeart' ),
 				'attrs' => [
 					'id' 	=> 'comment-email',
 					'name' 	=> 'email',
-					'required' 	=> ( $req ) ? 'required' : NULL,
-					'size' 		=> 30,
-					'maxlength' => 100,
-					'value' 	=> $commenter['comment_author_email']
+					'required' 		=> ( $req ) ? 'required' : NULL,
+					'size' 			=> 30,
+					'maxlength' 	=> 100,
+					'placeholder'	=> 'name@example.com',
+					'value' 		=> $commenter['comment_author_email']
 				]
 			], false ),
-			'url' => wecodeart_input( 'url', [
+			'url' => wecodeart_input( 'floating', [
+				'type' 	=> 'url',
 				'label' => esc_html__( 'Website', 'wecodeart' ),
 				'attrs' => [
 					'id' 	=> 'comment-url',
 					'name' 	=> 'url',
 					'size' 		 => 30, 
 					'maxlength'  => 200,
+					'placeholder'=> 'www.example.com',
 					'value' 	 => $commenter['comment_author_url']  
 				]
 			], false ),
-			'comment' => wecodeart_input( 'textarea', [
+			'comment' => wecodeart_input( 'floating', [
+				'type'	=> 'textarea',
 				'label' => esc_html__( 'Comment *', 'wecodeart' ),
 				'attrs' => [
 					'id' 	=> 'comment',
 					'name' 	=> 'comment',
 					'rows'	=> 8,
 					'cols'  => 45,
+					'style'	=> 'min-height:150px;',
+					'placeholder'	=> esc_html__( 'Comment *', 'wecodeart' ),
 					'required'		=> ( $req ) ? 'required' : NULL,
 					'aria-required'	=> 'true'
 				]

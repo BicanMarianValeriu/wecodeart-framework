@@ -75,7 +75,7 @@ class Fieldset extends Base {
             $fields = '';
             foreach( $this->choices as $key => $label ) {
                 // Create a basic input
-                $basic = new Toggle( $this->type, [
+                $fields .= ( new Toggle( $this->type, [
                     'type'  => $this->type,
                     'label' => $label,
                     'attrs' => [
@@ -85,10 +85,7 @@ class Fieldset extends Base {
                         'id'        => $this->get_option_id( $key ),
                         'checked'	=> $this->checked_option( $key ),
                     ]
-                ] );
-
-                // Get the Input HTML
-                $fields .= $basic->get_content();
+                ] ) )->get_content();
             }
 
             // Already escaped in the Basic Input and its methods

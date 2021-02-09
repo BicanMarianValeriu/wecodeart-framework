@@ -17,13 +17,13 @@ use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\kses_svg;
 
 ?>
-<div id="author-box" class="author-box py-4 mb-5">
+<div id="author-box" class="author-box py-4 mb-5 border-top border-bottom border-light">
 	<div class="<?php echo esc_attr( $container ); ?>">
 		<div class="row">
 			<div class="author-box__name col-12">
 				<h3 class="author-box__headline mb-3"><?php
 				
-					echo kses_svg( SVG::compile( 'user' ) ); 
+					SVG::render( 'user' );
 					
 				?><span class="ms-2"><?php
 				

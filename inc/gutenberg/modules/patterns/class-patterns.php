@@ -53,7 +53,7 @@ class Patterns implements Integration {
 	public function register_hooks() {
 		$this->register_type();
 		$this->register_taxonomy();
-		$this->load_block_patterns();
+		$this->load_patterns();
 		$this->load_categories();
 		add_action( 'rest_insert_' . self::POST_TYPE, [ $this, 'rest_insert_wca_pattern' ], 10, 2 );
 	}
@@ -79,7 +79,7 @@ class Patterns implements Integration {
 				'not_found'             => __( 'Not found', 'wecodeart' ),
 				'not_found_in_trash'    => __( 'Not found in Trash', 'wecodeart' ),
 			],
-			'description'       => __( 'Description', 'wecodeart' ),
+			'description'       => __( 'Manage Gutenberg block patterns.', 'wecodeart' ),
 			'supports'          => [ 'title', 'editor', 'excerpt' ],
 			'taxonomies'        => [ self::TYPE_TAXONOMY, self::CATEGORY_TAXONOMY ],
 			'show_ui'           => true,
@@ -147,8 +147,10 @@ class Patterns implements Integration {
 
 	/**
 	 * Register custom post type posts (with the 'pattern' type) as block patterns.
+	 *
+	 * @return 	void
 	 */
-	public function load_block_patterns() {
+	public function load_patterns() {
 		$block_patterns_query = new \WP_Query( [
 			'post_type'              => self::POST_TYPE,
 			'no_found_rows'          => true,

@@ -83,9 +83,10 @@ abstract class Base {
 	 * Constructor 
 	 */
 	public function __construct( $type = '', array $args = [] ) {
-        $this->unique_id    = wp_unique_id( 'input-' );
-        $this->label        = get_prop( $args, 'label', '' );
-        $this->attrs        = wp_parse_args( get_prop( $args, 'attrs', [] ), [
+        $this->unique_id        = wp_unique_id( 'input-' );
+        $this->label            = get_prop( $args, 'label', '' );
+        $this->label_position   = get_prop( $args, '_label', 'before' );
+        $this->attrs            = wp_parse_args( get_prop( $args, 'attrs', [] ), [
             'type'  => $this->type,
             'name'  => $this->unique_id,
             'id'    => $this->unique_id,
@@ -195,16 +196,5 @@ abstract class Base {
 		}
 
 		return wp_kses_post( $html );
-    }
-    
-    /**
-	 * Sets input Label Position
-     *
-     * @since   4.2.0
-     *
-	 * @return	void
-	 */
-	public function setLabelPosition( string $position = '' ) {
-        $this->label_position = in_array( $position, [ 'before', 'after' ] ) ? $position : '';
     }
 }

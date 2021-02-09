@@ -35,8 +35,7 @@ class Header {
 		add_action( 'wp_head',	[ $this, 'meta_viewport' 	], 0 );
 		add_action( 'wp_head',	[ $this, 'meta_profile' 	], 0 );
 		add_action( 'wp_head',	[ $this, 'meta_pingback'	], 0 );
-		add_filter( 'wecodeart/filter/attributes/body', [ $this, 'body_attrs'	] );
-		add_action( 'wecodeart/header/markup', 			[ $this, 'markup' 		] );
+		add_action( 'wecodeart/header/markup',	[ $this, 'markup'	] );
 
 		// remove_action( 'wp_head', 'wp_generator' );
 		// remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10 );
@@ -58,10 +57,8 @@ class Header {
 		Markup::wrap( 'header', [ [
 			'tag' 	=> 'header',
 			'attrs' => [
-				'id' 		=> 'header', 
-				'class'		=> 'header', 
-				'itemscope' => 'itemscope',
-				'itemtype' 	=> 'https://schema.org/WPHeader'
+				'id' 		=> 'header',
+				'class'		=> 'header',
 			]
 		] ], function() {
 			/** 
@@ -145,35 +142,6 @@ class Header {
 				'class' => 'header-bar__search col-12 col-lg-4 ml-auto d-lg-block'
 			]
 		] ], 'get_search_form' ); 
-	}
-
-	/**
-	 * Generate Body Attrs
-	 *
-	 * @since 	3.5
-	 * @version 3.5
-	 *
-	 * @return 	array 
-	 */
-	public function body_attrs( $args = [] ) {
-		// Set up blog variable.
-		$blog = ( is_home() || is_archive() || is_attachment() || is_tax() || is_single() ) ? true : false;
-		// Set up default itemtype.
-		$itemtype = 'WebPage';
-		// Get itemtype for the blog.
-		$itemtype = ( $blog ) ? 'Blog' : $itemtype;
-		// Get itemtype for search results.
-		$itemtype = ( is_search() ) ? 'SearchResultsPage' : $itemtype;
-
-		$defaults = [
-			'class'		=> implode( ' ', get_body_class() ),
-			'itemscope' => true,
-			'itemtype' 	=> 'https://schema.org/' . $itemtype
-		];
-
-		$args = wp_parse_args( $args, $defaults );
-
-		return $args;
 	}
 
 	/**

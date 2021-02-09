@@ -39,8 +39,8 @@ class Toggle extends Base {
 	 * Constructor 
 	 */
     public function __construct( string $type = 'toggle', array $args = [] ) {
-        $type               = get_prop( $args, 'type', '' );
-        $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? $type : 'radio';
+        $type               = get_prop( $args, 'type' );
+        $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? get_prop( $args, 'type' ) : 'radio';
         $this->unique_id    = wp_unique_id( 'toggle-' );
         $this->label        = get_prop( $args, 'label', '' );
         $this->attrs        = get_prop( $args, 'attrs', [] );
@@ -63,20 +63,15 @@ class Toggle extends Base {
             ]
         ], function() {
             // Create a basic input
-            $basic = new Basic( $this->type, [
+            echo ( new Basic( $this->type, [
                 'label'     => $this->label,
+                '_label'    => 'after',
                 'attrs'     => wp_parse_args( [
                     'class' => 'form-check-input',
                     'id'    => get_prop( $this->attrs, 'id', $this->unique_id )
                 ], $this->attrs ),
                 'messages'  => $this->messages
-            ] );
-
-            // Change label position
-            $basic->setLabelPosition( 'after' );
-
-            // Get the Input HTML
-            echo $basic->get_content();
+            ] ) )->get_content();
         } ); 
     }
 }

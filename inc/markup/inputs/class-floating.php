@@ -16,33 +16,32 @@ namespace WeCodeArt\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Markup;
 use WeCodeArt\Markup\Inputs\Basic;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Standard Inputs Markup
  */
-class TextArea extends Basic {
+class Floating extends Basic {
 
     /**
-     * Input's Type.
+     * Input's Type / Label Position.
      *
      * @since   4.2.0
      * @var     string
      */
-    public $type = 'textarea';
-    
+    public $type            = 'floating';
+    public $label_position  = 'none';
+
     /**
 	 * Constructor 
 	 */
-	public function __construct( string $type = 'textarea', array $args = [] ) {
-        $this->unique_id    = wp_unique_id( 'textarea-' );
-        $this->label        = get_prop( $args, 'label', '' );
-        $this->label_position   = get_prop( $args, '_label', 'before' );
-        $this->attrs        = get_prop( $args, 'attrs', [] );
-        $this->messages     = get_prop( $args, 'messages', [] );
+	public function __construct( string $type = 'floating', array $args = [] ) {
+        $this->type = get_prop( $args, 'type', 'text' );
+        $this->args = $args;
     }
-
+	
 	/**
 	 * Create HTML Inputs
 	 *
@@ -50,8 +49,15 @@ class TextArea extends Basic {
 	 * @version	4.2.0
 	 */
 	public function content() {
-        ?>
-        <textarea <?php $this->input_attrs(); ?>></textarea>
-        <?php
+        Markup::wrap( 'form-floating', [
+            [
+                'tag' => 'div',
+                'attrs' => [
+                    'class'     => 'form-floating',
+                ]
+            ]
+        ], 'wecodeart_input', [ $this->type, wp_parse_args( [
+            '_label' => 'after'
+        ], $this->args ) ] );
     }
 }

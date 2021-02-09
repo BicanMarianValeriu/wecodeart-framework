@@ -17,26 +17,16 @@
     
     /* Media Image */
     &-media {
-        position: relative;
         float: left;
-        margin: 0 15px 35px 0;
-        overflow: hidden;
-        border: 1px solid var(--wca-light);
-        border-radius: 3px;
         width: 100%;
-        max-width: 200px;
-
-        @include media-breakpoint-down(sm) {
-            max-width: 100%;
-            margin-right: 0;
-        }
-    
-        &__link {
-            display: block;
+        
+        @include media-breakpoint-up( 'sm' ) {
+            max-width: 200px;
         }
     
         .ls-blur-up-img,
-        &__src {
+        &__src,
+        img {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -82,15 +72,5 @@
         .hfeed & {
             text-align: right;
         }
-    }
-}
-
-.page--title-hiden {
-    .site-main {
-        margin-top: 0;
-    }
-
-    .entry {
-        margin-bottom: 0;
     }
 }

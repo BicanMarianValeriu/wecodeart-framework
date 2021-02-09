@@ -3,6 +3,8 @@
  * @author 	Bican Marian Valeriu
  * @version 1.0.0
  */
+const destruct = (obj, ...keys) => keys.reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
+
 export default (function (wecodeart) {
 
 	const { Component } = wecodeart;

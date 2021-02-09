@@ -5,11 +5,11 @@
  *
  * @package WeCodeArt
  * @since 	v3.3
- * @version v4.1.6
+ * @version v4.2.0
  * 
  */
 
-import './../../scss/customizer/controls/sortable.scss';
+import './../../../scss/customizer/controls/sortable.scss';
 
 (function (wp, $) {
 	const api = wp.customize;

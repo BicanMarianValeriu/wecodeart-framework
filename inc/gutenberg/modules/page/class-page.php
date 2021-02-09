@@ -55,6 +55,23 @@ class Page {
 				return current_user_can( 'edit_posts' );
 			},
 		] );
+
+		register_meta( 'post', '_wca_content_modules', [
+			'show_in_rest'  => true,
+			'single'        => true,
+			'type'  		=> 'array',
+			'show_in_rest' 	=> [
+				'schema' => [
+					'type'  => 'array',
+					'items' => [
+						'type' => 'string',
+					],
+				]
+			],
+			'auth_callback' => function() {
+				return current_user_can( 'edit_posts' );
+			},
+		] );
 	}
 
 	/**

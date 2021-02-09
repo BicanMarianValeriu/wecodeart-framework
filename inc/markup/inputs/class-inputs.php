@@ -38,7 +38,7 @@ class Inputs implements ArrayAccess {
 	 */
 	public function init() {
 		// Register Default Inputs
-		$this->register( 'basic',		Inputs\Basic::class 		);
+		$this->register( 'basic',		Inputs\Basic::class     );
 		$this->register( 'button',		Inputs\Button::class 	);
 		$this->register( 'select',		Inputs\Select::class 	);
 		$this->register( 'textarea',	Inputs\TextArea::class 	);
@@ -46,6 +46,7 @@ class Inputs implements ArrayAccess {
 		$this->register( 'radio',		Inputs\Toggle::class 	);
 		$this->register( 'checkbox',	Inputs\Toggle::class 	);
         $this->register( 'fieldset',	Inputs\Fieldset::class 	);
+        $this->register( 'floating',	Inputs\Floating::class 	);
 	}
 
 	/**

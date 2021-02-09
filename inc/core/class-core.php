@@ -37,7 +37,6 @@ class Core {
 	 */
 	public function init() {
 		add_filter( 'body_class',		[ $this, 'body_classes' ] );
-		add_filter( 'post_class',		[ $this, 'post_classes' ] );
 		add_filter( 'get_search_form',	[ $this, 'search_form' 	] );
 		add_filter( 'wp_nav_menu_args', [ $this, 'menu_args' 	] );
 
@@ -88,27 +87,6 @@ class Core {
 		// Return Classes.
 		$classes = array_map( 'sanitize_html_class', $classes );
 
-		return $classes;
-	}
-	
-	/**
-	 * Filter classes to the array of post classes.
-	 *
-	 * @param 	array $classes Classes for the post.
-	 * 
-	 * @return 	array
-	 */
-	public function post_classes( $classes ) {
-		if ( is_admin() ) {
-			return $classes;
-		}
-		
-		// Add "entry" to the post class array.
-		$classes[] = 'entry';
-
-		// Remove "hentry" from post class array.
-		$classes = array_diff( $classes, [ 'hentry' ] );
-		
 		return $classes;
 	}
 	

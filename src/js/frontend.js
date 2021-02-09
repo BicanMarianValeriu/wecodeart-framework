@@ -6,6 +6,7 @@ import Popover from 'bootstrap/js/dist/popover';
 
 // FAQ SVG
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import 'holderjs';
 
 // WeCodeArt
 import './plugins/wecodeart-Component';

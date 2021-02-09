@@ -47,6 +47,7 @@ class Select extends Base {
 	public function __construct( string $type = 'select', array $args = [] ) {
         $this->unique_id    = wp_unique_id( 'select-' );
         $this->label        = get_prop( $args, 'label', '' );
+        $this->label_position   = get_prop( $args, '_label', 'before' );
         $this->attrs        = wp_parse_args( get_prop( $args, 'attrs', [] ), [
             'name'  => $this->unique_id,
             'id'    => $this->unique_id,

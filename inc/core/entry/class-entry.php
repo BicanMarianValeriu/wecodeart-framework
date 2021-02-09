@@ -34,13 +34,16 @@ class Entry {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_filter( 'the_password_form', [ $this, 'render_pasword_protected' ] );
+		add_filter( 'the_password_form',	[ $this, 'render_pasword_protected' ] );
+		add_filter( 'post_class',			[ $this, 'post_classes' ] );
 
 		add_action( 'wecodeart/entry', 	[ $this, 'render_header' 	], 20 ); 
 		add_action( 'wecodeart/entry', 	[ $this, 'render_content' 	], 30 );
 		add_action( 'wecodeart/entry',	[ $this, 'render_footer' 	], 40 );  
 		
+		
 		add_action( 'wecodeart/hook/entry/header',	[ $this, 'render_title' 		], 10 );
+		add_action( 'wecodeart/hook/entry/header', 	[ Entry\Media::get_instance(), 	'render_image' 		], 20 );
 		add_action( 'wecodeart/hook/entry/footer', 	[ $this, 'render_read_more'		], 10 );
         add_action( 'wecodeart/hook/entry/footer',  [ Pagination::get_instance(), 	'entry_content'		], 10 );
 		add_action( 'wecodeart/hook/entry/footer', 	[ Author::get_instance(),		'author_box_single'	], 20 );
@@ -54,7 +57,7 @@ class Entry {
 		Entry\Meta::get_instance();
 		Entry\Media::get_instance();
 		Entry\Comments::get_instance();
-	} 
+	}
 
 	/**
 	 * Render Header
@@ -243,5 +246,26 @@ class Entry {
 		$template = trim( preg_replace( '/\s+/', ' ', $template ) );
 		$template = preg_replace( '/>\s*</', '><', $template );
 		return $template;
+	}
+
+	/**
+	 * Filter classes to the array of post classes.
+	 *
+	 * @param 	array $classes Classes for the post.
+	 * 
+	 * @return 	array
+	 */
+	public function post_classes( $classes ) {
+		if ( is_admin() ) {
+			return $classes;
+		}
+		
+		// Add "entry" to the post class array.
+		$classes[] = 'entry';
+
+		// Remove "hentry" from post class array.
+		$classes = array_diff( $classes, [ 'hentry' ] );
+		
+		return $classes;
 	}
 }

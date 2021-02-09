@@ -34,7 +34,7 @@
 .header-bar { 
     &__menu,
     &__search {
-        @include media-breakpoint-down('lg') {
+        @include media-breakpoint-down( 'lg' ) {
             margin-top: 10px;
             order: 100;
             padding-top: 10px;
@@ -44,7 +44,7 @@
         &:not(.show):not(.collapsing) {
             display: none;
 
-            @include media-breakpoint-up('lg') {
+            @include media-breakpoint-up( 'lg' ) {
                 display: block;
             }
         }
