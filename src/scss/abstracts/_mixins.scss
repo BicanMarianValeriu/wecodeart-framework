@@ -1,8 +1,6 @@
 @mixin custom-select() {
     display: inline-block;
     vertical-align: middle;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     height: $form-select-height;
     padding: $form-select-padding-y ($form-select-padding-x + $form-select-indicator-padding) $form-select-padding-y $form-select-padding-x;

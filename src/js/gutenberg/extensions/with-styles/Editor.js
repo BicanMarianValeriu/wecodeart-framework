@@ -15,7 +15,8 @@ const CSSEditor = ({
 
 	useEffect(() => {
 		if (customCSS) {
-			const generatedCSS = (customCSS).replace(/.wcacss-[a-zA-Z0-9_-]*/g, 'selector');
+			const regex = new RegExp('.' + classArRef.current, 'g');
+			const generatedCSS = (customCSS).replace(regex, 'selector');
 			customCSSRef.current = generatedCSS;
 		} else {
 			customCSSRef.current = 'selector {\n}\n';
@@ -104,6 +105,7 @@ const CSSEditor = ({
 				<div className="wecodeart-advanced-css__editor" id="wecodeart-css-editor" />
 				<div class="wecodeart-advanced-css__content">
 					<p>{__('Use', 'wecodeart')} <code>selector</code> {__('to target block wrapper.', 'wecodeart')}</p>
+					<p>{__('If you generate a new one just replace old selector with "selector" keyword for a new one.', 'wecodeart')}</p>
 					<p>{__('Example:', 'wecodeart')}</p>
 					<pre className="wecodeart-advanced-css__help">
 						{'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'}

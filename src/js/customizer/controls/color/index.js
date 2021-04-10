@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import ColorControl from './ColorControl';
+import ColorControl from './../../common/ColorControl';
 
 const { useState, useEffect } = wp.element;
+const { __ } = wp.i18n;
 
 const ColorComponent = ({ control }) => {
     const [value, setValue] = useState(control.setting.get());
@@ -27,7 +28,7 @@ const ColorComponent = ({ control }) => {
             {params?.description && (<span className="customize-control-description">{params.description}</span>)}
             <div className="wca-customizer-control wca-customizer-control--color">
                 <ColorControl
-                    label={false}
+                    label={__('Color', 'wecodeart')}
                     selectedColor={value}
                     defaultValue={params.default}
                     alphaDisabled={params.disableAlpha}

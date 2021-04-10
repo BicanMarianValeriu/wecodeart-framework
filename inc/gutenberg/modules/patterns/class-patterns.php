@@ -125,6 +125,13 @@ class Patterns implements Integration {
 				'slug' 			=> 'layout'
 			] );
 		}
+		
+		if( ! term_exists( 'core', self::CATEGORY_TAXONOMY ) ) {
+			wp_insert_term( 'Core', self::CATEGORY_TAXONOMY, [
+				'description'	=> __( 'Core', 'wecodeart' ),
+				'slug' 			=> 'core'
+			] );
+		}
 	}
 
 	/**

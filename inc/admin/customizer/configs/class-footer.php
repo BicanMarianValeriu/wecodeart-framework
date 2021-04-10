@@ -125,7 +125,7 @@ class Footer extends Config {
 
 							if( wecodeart_if( 'with_styles' ) ) {
 								$adjusted 	= wecodeart( 'integrations' )->get( 'styles' )::hex_brightness( $value, -10 );
-								$pattern	= '15px solid ' . $adjusted;
+								$pattern	= '1px solid ' . $adjusted;
 							}
 
 							return $pattern;
@@ -154,6 +154,7 @@ class Footer extends Config {
 				'control'  		=> 'wecodeart-color',
 				'section'		=> 'footer-design',
 				'title' 		=> esc_html__( 'Footer text color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Defaults to CSS color.', 'wecodeart' ),
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[
@@ -168,7 +169,7 @@ class Footer extends Config {
 				'control'  		=> 'wecodeart-color',
 				'section'		=> 'footer-design',
 				'title' 		=> esc_html__( 'Attribution background color', 'wecodeart' ),
-				'description'	=> esc_html__( 'Background color of the footer credits wrapper.', 'wecodeart' ),
+				'description'	=> esc_html__( 'Background color of the footer credits wrapper. Defaults to CSS color.', 'wecodeart' ),
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[
@@ -197,6 +198,7 @@ class Footer extends Config {
 				'control'  		=> 'wecodeart-color',
 				'section'		=> 'footer-design',
 				'title' 		=> esc_html__( 'Attribution text color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Defaults to CSS color.', 'wecodeart' ),
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[

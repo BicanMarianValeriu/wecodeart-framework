@@ -74,3 +74,38 @@
         }
     }
 }
+
+.comments {
+    &__respond-headline {
+        a {
+            float: right;
+        }
+    }
+
+    h3 {
+        svg {
+            width: 20px;
+            height: 20px;
+            
+            @include media-breakpoint-up( 'sm' ) {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+
+    svg {
+        fill: currentColor;
+        vertical-align: -8%;
+    }
+}
+
+.comment {
+    .bypostauthor {
+        color: initial;
+    }
+
+    .comment-reply {
+        margin-top: -1rem;
+    }
+}

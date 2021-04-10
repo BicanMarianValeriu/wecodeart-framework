@@ -73,9 +73,14 @@ class Color extends \WP_Customize_Control {
             true
 		);
 
-		wp_localize_script( $this->make_handle(), 'wecodeartColorControl', [
-			'pallete' 	=> current( get_theme_support( 'editor-color-palette' ) )
-		] );
+		static $localized;
+
+		if ( is_null( $localized ) ) {
+			wp_localize_script( $this->make_handle(), 'wecodeartColorControl', [
+				'palette' 	=> current( get_theme_support( 'editor-color-palette' ) )
+			] );
+			$localized = true;
+		}
     }
     
 	/**
@@ -83,7 +88,10 @@ class Color extends \WP_Customize_Control {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['default']      = $this->default;
+		$this->json['default'] = $this->setting->default;
+		if ( isset( $this->default ) ) {
+			$this->json['default'] = $this->default;
+		}
 		$this->json['disableAlpha'] = $this->disable_alpha;
 	}
 }

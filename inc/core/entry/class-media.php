@@ -156,7 +156,8 @@ class Media {
 			'num'      	=> 0,
 			'attrs'    	=> [],
 			'fallback' 	=> [
-				'html' 	=>	'<img data-src="%s" />',
+				'html' 	=> '<img src="%s" />',
+				'url'	=> get_template_directory_uri() . '/assets/images/placeholder.svg'
 			]
 		];  
 
@@ -204,7 +205,7 @@ class Media {
 					'tag' 	=> 'div',
 					'attrs'	=> [
 						'class'	=> 'ratio',
-						'style'	=> sprintf( '--aspect-ratio:%s;', number_format( $dummy_ratio * 100, 3 ) . '%' )
+						'style'	=> sprintf( '--wca-aspect-ratio:%s;', number_format( $dummy_ratio * 100, 3 ) . '%' )
 					]
 				]
 			], $html );

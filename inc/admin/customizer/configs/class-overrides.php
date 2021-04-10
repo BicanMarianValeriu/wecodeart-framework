@@ -41,7 +41,7 @@ class Overrides extends Config {
 				'capability'	=> 'edit_theme_options',
 				'title' 		=> esc_html__( 'Page for 404', 'wecodeart' ),
 				'description' 	=> esc_html__( 'Select your custom page that will show on 404 error.', 'wecodeart' ),
-				'priority' 		=> 50,
+				'priority' 		=> 0,
 				'transport'		=> 'postMessage',
 				'sanitize_callback' 	=> 'absint',
 				'sanitize_js_callback' 	=> 'absint'

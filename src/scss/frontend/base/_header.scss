@@ -1,29 +1,15 @@
-.wp-custom-logo {
-    .header {
-        .site-title,
-        .site-description {
+.header {
+    .site-title,
+    .site-description {
+        .wp-custom-logo & {
             display: none;
         }
-    }
-}
-
-.header {
-    &__bar {
-        padding: 10px 0;
     }
 
     .site-title {
         font-size: .9rem;
-        font-weight: 900;
-        text-transform: uppercase;
-        margin-bottom: 0;
     }
-
-    .site-description,
-    .input-group {
-        margin-bottom: 0;
-    }
-
+    
     .site-description {
         @include media-breakpoint-down('md') {
             font-size: 12px;
@@ -31,7 +17,16 @@
     }
 }
 
-.header-bar { 
+.header-bar {
+    &__menu,
+    &__search {
+        .no-js & {
+            @include media-breakpoint-down( 'lg' ) {
+                display: none;
+            }
+        }
+    }
+
     &__menu,
     &__search {
         @include media-breakpoint-down( 'lg' ) {
@@ -57,15 +52,4 @@
             height: 20px;
         }
     }
-}
-
-.no-js {
-    .header-bar {
-        &__menu,
-        &__search {
-            @include media-breakpoint-down( 'lg' ) {
-                display: none;
-            }
-        }
-    }
-}
+}   

@@ -155,6 +155,7 @@ class Styles {
 		$classname            = Styles\Controls::class;
 		$default_classnames   = [
 			'wecodeart-fonts' => Styles\Controls\Font::class,
+			'wecodeart-palette' => Styles\Controls\Palette::class,
 		];
 
 		$field_output_classes = apply_filters( 'wecodeart/filter/customizer/styles/controls', $default_classnames );

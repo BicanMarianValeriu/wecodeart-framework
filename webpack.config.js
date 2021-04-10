@@ -4,6 +4,7 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const defaultConfig = require('./node_modules/@wordpress/scripts/config/webpack.config.js');
+const FixStyle = require('./node_modules/@wordpress/scripts/config/fix-style-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -23,7 +24,6 @@ module.exports = {
     },
     optimization: {
         ...defaultConfig.optimization,
-        splitChunks: {},
         namedChunks: true,
     },
     externals: wplib.reduce((externals, lib) => {
@@ -42,6 +42,7 @@ module.exports = {
     plugins: [
         process.env.WP_BUNDLE_ANALYZER && new BundleAnalyzerPlugin(),
         new MiniCssExtractPlugin({ esModule: false, filename: devMode ? 'css/[name].css' : 'css/[name].min.css' }),
+        new FixStyle(),
         !process.env.WP_NO_EXTERNALS && new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
         devMode ? new BrowserSyncPlugin({
             host: 'localhost',

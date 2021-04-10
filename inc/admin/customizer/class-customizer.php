@@ -72,7 +72,7 @@ class Customizer {
 		new Configs\Header();
 		new Configs\Content();
 		new Configs\Footer();
-		new Configs\Colors();
+		new Configs\Design();
 		new Configs\Typography();
 	}
 	

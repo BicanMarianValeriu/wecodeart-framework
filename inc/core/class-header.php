@@ -183,7 +183,7 @@ class Header {
 	 */
 	public static function render_header_bar() {
 		Markup::wrap( 'header-bar', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'header__bar header-bar', 'id' => 'header-bar' ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'header__bar header-bar py-2', 'id' => 'header-bar' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'header-bar-container' ) ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row align-items-center' ] ]
 		], 'WeCodeArt\Markup::sortable', [

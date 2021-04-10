@@ -104,6 +104,7 @@ function _arrayLikeToArray(arr, len) {
 }
 
 module.exports = _arrayLikeToArray;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
@@ -119,6 +120,7 @@ function _arrayWithHoles(arr) {
 }
 
 module.exports = _arrayWithHoles;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
@@ -157,6 +159,7 @@ function _iterableToArrayLimit(arr, i) {
 }
 
 module.exports = _iterableToArrayLimit;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
@@ -172,6 +175,7 @@ function _nonIterableRest() {
 }
 
 module.exports = _nonIterableRest;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
@@ -182,19 +186,20 @@ module.exports = _nonIterableRest;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles */ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js");
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js");
 
-var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit */ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js");
+var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js");
 
-var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
 
-var nonIterableRest = __webpack_require__(/*! ./nonIterableRest */ "./node_modules/@babel/runtime/helpers/nonIterableRest.js");
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ "./node_modules/@babel/runtime/helpers/nonIterableRest.js");
 
 function _slicedToArray(arr, i) {
   return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
 }
 
 module.exports = _slicedToArray;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
@@ -205,7 +210,7 @@ module.exports = _slicedToArray;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
 
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
@@ -217,6 +222,7 @@ function _unsupportedIterableToArray(o, minLen) {
 }
 
 module.exports = _unsupportedIterableToArray;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
@@ -1361,10 +1367,10 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./src/js/customizer/controls/color/ColorControl.js":
-/*!**********************************************************!*\
-  !*** ./src/js/customizer/controls/color/ColorControl.js ***!
-  \**********************************************************/
+/***/ "./src/js/customizer/common/ColorControl.js":
+/*!**************************************************!*\
+  !*** ./src/js/customizer/common/ColorControl.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1376,7 +1382,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _GlobalColorPicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./GlobalColorPicker */ "./src/js/customizer/controls/color/GlobalColorPicker.js");
+/* harmony import */ var _GlobalColors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./GlobalColors */ "./src/js/customizer/common/GlobalColors.js");
 
 
 
@@ -1389,7 +1395,8 @@ var _wp = wp,
     Dropdown = _wp$components.Dropdown;
 
 var ColorControl = function ColorControl(_ref) {
-  var selectedColor = _ref.selectedColor,
+  var label = _ref.label,
+      selectedColor = _ref.selectedColor,
       onChange = _ref.onChange,
       defaultValue = _ref.defaultValue,
       disableGlobal = _ref.disableGlobal;
@@ -1419,9 +1426,9 @@ var ColorControl = function ColorControl(_ref) {
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(['wca-color-component', {
       'wca-color-component--allows-global': !disableGlobal
     }])
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+  }, label && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
     className: "wca-color-component__label"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, __('Color', 'wecodeart'), ":")), !disableGlobal && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_GlobalColorPicker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, label, ":")), !disableGlobal && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_GlobalColors__WEBPACK_IMPORTED_MODULE_3__["default"], {
     activeColor: selectedColor,
     onChange: onChange
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Dropdown, {
@@ -1462,7 +1469,7 @@ ColorControl.defaultProps = {
 ColorControl.propTypes = {
   label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  selectedColor: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  selectedColor: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   defaultValue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   disableGlobal: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 };
@@ -1470,10 +1477,10 @@ ColorControl.propTypes = {
 
 /***/ }),
 
-/***/ "./src/js/customizer/controls/color/GlobalColorPicker.js":
-/*!***************************************************************!*\
-  !*** ./src/js/customizer/controls/color/GlobalColorPicker.js ***!
-  \***************************************************************/
+/***/ "./src/js/customizer/common/GlobalColors.js":
+/*!**************************************************!*\
+  !*** ./src/js/customizer/common/GlobalColors.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1492,13 +1499,13 @@ var _wp = wp,
     Icon = _wp$components.Icon,
     ColorPalette = _wp$components.ColorPalette;
 var _wecodeartColorContro = wecodeartColorControl,
-    _wecodeartColorContro2 = _wecodeartColorContro.pallete,
-    pallete = _wecodeartColorContro2 === void 0 ? [] : _wecodeartColorContro2;
+    _wecodeartColorContro2 = _wecodeartColorContro.palette,
+    palette = _wecodeartColorContro2 === void 0 ? [] : _wecodeartColorContro2;
 
 var GlobalColorsPicker = function GlobalColorsPicker(_ref) {
   var onChange = _ref.onChange,
       activeColor = _ref.activeColor;
-  var isGlobal = pallete.filter(function (_ref2) {
+  var isGlobal = palette.filter(function (_ref2) {
     var color = _ref2.color;
     return color === activeColor;
   }).length;
@@ -1521,7 +1528,7 @@ var GlobalColorsPicker = function GlobalColorsPicker(_ref) {
     },
     renderContent: function renderContent() {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPalette, {
-        colors: pallete,
+        colors: palette,
         value: activeColor,
         disableCustomColors: true,
         clearable: true,
@@ -1550,7 +1557,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _ColorControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ColorControl */ "./src/js/customizer/controls/color/ColorControl.js");
+/* harmony import */ var _common_ColorControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../common/ColorControl */ "./src/js/customizer/common/ColorControl.js");
 
 
 
@@ -1558,6 +1565,7 @@ __webpack_require__.r(__webpack_exports__);
 var _wp$element = wp.element,
     useState = _wp$element.useState,
     useEffect = _wp$element.useEffect;
+var __ = wp.i18n.__;
 
 var ColorComponent = function ColorComponent(_ref) {
   var control = _ref.control;
@@ -1588,8 +1596,8 @@ var ColorComponent = function ColorComponent(_ref) {
     className: "customize-control-description"
   }, params.description), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wca-customizer-control wca-customizer-control--color"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_ColorControl__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    label: false,
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_common_ColorControl__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Color', 'wecodeart'),
     selectedColor: value,
     defaultValue: params.default,
     alphaDisabled: params.disableAlpha,

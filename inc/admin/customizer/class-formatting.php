@@ -15,6 +15,8 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Support\Fonts;
+use WeCodeArt\Support\Styles;
+use function WeCodeArt\Functions\get_color_palette;
 
 /**
  * Customizer Sanitizers
@@ -148,5 +150,32 @@ final class Formatting {
 		}
 
 		return is_numeric( $val ) ? $val : 0;
+	}
+
+	/**
+	 * Sanitize Global Colors Setting
+	 *
+	 * @param 	array $value recieved value.
+	 *
+	 * @return 	array
+	 */
+	public static function sanitize_palette( $value ) {
+		// `flag` key is used to trigger setting change on deep state changes inside the palettes.
+		if ( isset( $value['flag'] ) ) {
+			unset( $value['flag'] );
+		}
+
+		$default = get_color_palette();
+		if ( ! isset( $value['activePalette'] ) || ! isset( $value['palettes'] ) ) {
+			return $default;
+		}
+
+		foreach ( $value['palettes'] as $slug => $args ) {
+			foreach ( $args['colors'] as $key => $val ) {
+				$value['palettes'][ $slug ]['colors'][ $key ] = Styles::sanitize_color( $val );
+			}
+		}
+
+		return $value;
 	}
 }

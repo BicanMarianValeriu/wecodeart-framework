@@ -31,13 +31,14 @@ SVG::add_icon( 'unlock', [
  */
 ?>
 <form action="<?php echo esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ); ?>"
-    method="post" class="alert alert-light border-soft shadow-soft py-4">
-    <h4><?php esc_html_e( 
-        'This post is password protected. To view this post, enter the password below!',
-        'wecodeart' 
-    ); ?></h4>
+    method="post" class="alert border-soft shadow-soft py-4">
+    <h4><?php
+    
+        esc_html_e( 'This post is password protected. To view this post, enter the password below!', 'wecodeart' );
+        
+    ?></h4>
     <div class="input-group pt-3 pb-2"> 
-        <span class="input-group-text text-primary"><?php 
+        <span class="input-group-text"><?php 
         
             SVG::render( 'unlock', [
                 'class' => 'fa-fw'

@@ -140,7 +140,7 @@ const FontFamilySelector = ({
                 {__('Font Family', 'wecodeart')}
             </span>
             <Dropdown
-                position="bottom"
+                position="bottom center"
                 onClose={() => setSearch('')}
                 renderToggle={({ isOpen, onToggle }) => {
                     return (

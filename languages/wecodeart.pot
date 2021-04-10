@@ -1,0 +1,1018 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: WeCodeArt\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-10 12:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.0; wp-5.6.1\n"
+"X-Domain: wecodeart"
+
+#: inc/core/entry/class-meta.php:179
+msgid "% Comments"
+msgstr ""
+
+#. %s: Taxonomy singular name
+#: inc/core/class-archive.php:114
+#, php-format
+msgid "%s Archives"
+msgstr ""
+
+#: inc/core/class-pagination.php:164
+#, php-format
+msgid "%s Navigation"
+msgstr ""
+
+#: inc/core/class-content.php:166
+#, php-format
+msgid "%s Sidebar"
+msgstr ""
+
+#: inc/core/class-author.php:101 inc/markup/walkers/class-comment.php:116
+#, php-format
+msgid "%s's gravatar"
+msgstr ""
+
+#: inc/core/entry/class-meta.php:180
+msgid "1 Comment"
+msgstr ""
+
+#. Description of the theme
+msgid ""
+"A simple WordPress Theme Framework focused on SEO, Speed and code simplicity."
+" Is realy fast, fully customizable &amp; beautiful theme suitable for blog, "
+"personal portfolio, business website and WooCommerce storefront. Now is "
+"Gutenberg ready."
+msgstr ""
+
+#: inc/core/class-author.php:104
+msgid "About"
+msgstr ""
+
+#: inc/markup/walkers/class-menu.php:338
+msgid "Add a menu"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:72
+msgid "Add New"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:71
+msgid "Add New Pattern"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:89
+msgid "add one"
+msgstr ""
+
+#: inc/core/class-author.php:104
+msgid "All articles by"
+msgstr ""
+
+#: inc/core/class-archive.php:116
+msgid "Archives"
+msgstr ""
+
+#: inc/core/scripts/class-scripts.php:193
+msgid "Asset must of type CSS/JS."
+msgstr ""
+
+#: views/entry/comment.tpl.php:82
+msgid "at"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:170
+msgid "Attribution background color"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:199
+msgid "Attribution text color"
+msgstr ""
+
+#: inc/core/entry/class-meta.php:252
+msgid "Author"
+msgstr ""
+
+#: inc/core/entry/class-meta.php:61
+msgid "Author Name"
+msgstr ""
+
+#: views/admin/notification-options.tpl.php:31
+msgid "Awesome, show me the options"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:171
+msgid "Background color of the footer credits wrapper."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:113
+msgid "Background color of the footer wrapper."
+msgstr ""
+
+#. Author of the theme
+msgid "Bican Marian Valeriu @wecodeart"
+msgstr ""
+
+#: inc/admin/class-admin.php:296
+msgid "Block Options"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:66
+msgid "Block Patterns"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:70
+msgid "Blocks - Patterns"
+msgstr ""
+
+#: inc/gutenberg/class-gutenberg.php:80 inc/gutenberg/class-gutenberg.php:81
+msgid "Blocks - Reusable"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:220
+msgid "Bold 700"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:221
+msgid "Bold 700 Italic"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:210
+msgid "Book 300"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:211
+msgid "Book 300 Italic"
+msgstr ""
+
+#: inc/core/class-footer.php:103
+#, php-format
+msgid "Built on %1$s."
+msgstr ""
+
+#: inc/core/entry/class-comments.php:372
+#, php-format
+msgid "By commenting you accept the %s."
+msgstr ""
+
+#: inc/support/plugins/anr/class-anr.php:115
+msgid "Captcha *"
+msgstr ""
+
+#: inc/core/entry/class-meta.php:260
+msgid "Categories"
+msgstr ""
+
+#: inc/core/class-archive.php:87
+#, php-format
+msgid "Category Archives: %s"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-colors.php:42
+msgid "Choose site background color."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:49
+#: inc/admin/customizer/configs/class-content.php:99
+#: inc/admin/customizer/configs/class-content.php:151
+#: inc/admin/customizer/configs/class-content.php:197
+#: inc/admin/customizer/configs/class-footer.php:50
+#: inc/admin/customizer/configs/class-header.php:46
+msgid "Choose the type of the container class."
+msgstr ""
+
+#: views/entry/meta/edit-link.tpl.php:25
+#, php-format
+msgid "Click to edit \"%s\"!"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:56
+msgid "Colors"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:313 inc/core/entry/class-comments.php:320
+msgid "Comment *"
+msgstr ""
+
+#: inc/core/entry/class-meta.php:268
+msgid "Comments"
+msgstr ""
+
+#: inc/core/entry/class-meta.php:182
+msgid "Comments are Closed"
+msgstr ""
+
+#: inc/core/class-pagination.php:221
+msgid "Comments Navigation"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:100
+#, php-format
+msgctxt "comments title"
+msgid "%1$s comment"
+msgid_plural "%1$s comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/admin/customizer/configs/class-content.php:51
+#: inc/admin/customizer/configs/class-content.php:101
+#: inc/admin/customizer/configs/class-content.php:153
+#: inc/admin/customizer/configs/class-content.php:199
+#: inc/admin/customizer/configs/class-footer.php:52
+#: inc/admin/customizer/configs/class-header.php:48
+msgid "Container"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:52
+#: inc/admin/customizer/configs/class-content.php:102
+#: inc/admin/customizer/configs/class-content.php:154
+#: inc/admin/customizer/configs/class-content.php:200
+#: inc/admin/customizer/configs/class-footer.php:53
+#: inc/admin/customizer/configs/class-header.php:49
+msgid "Container Fluid"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:48
+msgid "Container Type"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:98
+#, php-format
+msgid "Container Type: %s"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:150
+#, php-format
+msgid "Container Type: %s Archive"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:196
+#, php-format
+msgid "Container Type: %s Single"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:122
+#, php-format
+msgid "Content Modules: %s"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:176
+#, php-format
+msgid "Content Modules: %s Archive"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:221
+#, php-format
+msgid "Content Modules: %s Single"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:71
+msgid "Content Modules: Default"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:82
+msgid "Content Settings"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:125
+msgid "Copyright"
+msgstr ""
+
+#: inc/config/app.php:104
+#, php-format
+msgid "Copyright %s - All rights reserved."
+msgstr ""
+
+#: views/admin/notification-rating.tpl.php:29
+msgid ""
+"Could you please do me a BIG favor and give it a 5-star rating on WordPress? "
+"This would boost my motivation and help other users make a comfortable "
+"decision while choosing the WeCodeArt Framework."
+msgstr ""
+
+#: inc/gutenberg/modules/styles/class-handler.php:121
+#: inc/gutenberg/modules/styles/class-handler.php:153
+msgid "CSS updated."
+msgstr ""
+
+#: inc/core/class-archive.php:105
+#, php-format
+msgid "Daily Archives: %s"
+msgstr ""
+
+#: inc/config/app.php:176
+msgid "Danger"
+msgstr ""
+
+#: inc/config/app.php:196
+msgid "Dark"
+msgstr ""
+
+#: inc/core/entry/class-meta.php:256
+msgid "Date"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:118
+msgid "Design Settings"
+msgstr ""
+
+#: inc/admin/class-admin.php:280
+msgid "Developer Mode"
+msgstr ""
+
+#: views/admin/notification-options.tpl.php:19
+msgid "Did you know? WeCodeArt Framework uses Customizer to manage options!"
+msgstr ""
+
+#: views/entry/comment.tpl.php:61 views/entry/meta/edit-link.tpl.php:23
+msgid "Edit"
+msgstr ""
+
+#: inc/core/entry/class-meta.php:272
+msgid "Edit Link"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:74
+msgid "Edit Pattern"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:288
+msgid "Email *"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:73
+msgid "Enable and reorder Footer Columns."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-header.php:69
+msgid "Enable and reorder Header Bar modules."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:72
+msgid "Enable and reorder Site Inner modules."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:123
+#: inc/admin/customizer/configs/class-content.php:177
+#: inc/admin/customizer/configs/class-content.php:222
+msgid ""
+"Enable and reorder Site Inner modules. This will affect only the page you "
+"are currently viewing."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:258
+msgid ""
+"Enable/Disable/Reorder Entry Meta information modules for current post type -"
+" archive."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:278
+msgid ""
+"Enable/Disable/Reorder Entry Meta information modules for current post type -"
+" single."
+msgstr ""
+
+#: inc/core/class-search.php:61
+#, php-format
+msgid "Enter keyword %s"
+msgstr ""
+
+#: views/entry/protected.tpl.php:54
+msgid "Enter password"
+msgstr ""
+
+#: inc/core/class-content.php:156
+msgid "Entry Content"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:95
+msgid "Entry Settings"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:135
+msgid "Extensions"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:222 inc/support/fonts/class-fonts.php:223
+msgid "Extra-Bold 800"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:224
+msgid "Extra-Bold 800 Italic"
+msgstr ""
+
+#: inc/core/class-footer.php:147
+#, php-format
+msgid "Footer %s"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:112
+msgid "Footer background color"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:72
+msgid "Footer Columns"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:89
+msgid "Footer Copyright Text"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:141
+msgid "Footer links color"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:105
+msgid "Footer Settings"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:156
+msgid "Footer text color"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:43
+msgid "General Settings"
+msgstr ""
+
+#: views/admin/notification-options.tpl.php:25
+msgid ""
+"Go to WP Customizer and see the options. Each CPT has it's own options, "
+"based on page/archive you are currently viewing in customizer."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:49
+#: inc/admin/customizer/configs/class-header.php:45
+msgid "Grid Type"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:72
+msgid "Header Bar"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-header.php:68
+msgid "Header Bar Modules"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:66
+msgid "Header Settings"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-typography.php:58
+msgid "Headings Font"
+msgstr ""
+
+#: views/admin/notification-rating.tpl.php:23
+msgid ""
+"Hello! I'm glad you use WeCodeArt Framework to build this website - Thanks a "
+"ton!"
+msgstr ""
+
+#. URI of the theme
+msgid "https://www.wecodeart.com/"
+msgstr ""
+
+#. Author URI of the theme
+msgid "https://www.wecodeart.com/about/"
+msgstr ""
+
+#: inc/config/app.php:158
+msgid "Huge"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:407
+msgid "HyperText Markup Language"
+msgstr ""
+
+#: views/admin/notification-rating.tpl.php:47
+msgid "I already did"
+msgstr ""
+
+#: inc/gutenberg/modules/styles/class-handler.php:70
+msgid "ID of the Post."
+msgstr ""
+
+#: inc/gutenberg/modules/styles/class-handler.php:90
+msgid "ID of the Reusable Block."
+msgstr ""
+
+#: inc/config/app.php:186
+msgid "Info"
+msgstr ""
+
+#: inc/config/app.php:153
+msgid "L"
+msgstr ""
+
+#: inc/config/app.php:152
+msgid "Large"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:124
+msgid "Layout"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:88
+#: inc/admin/customizer/configs/class-configs.php:111
+msgid "Layout Settings"
+msgstr ""
+
+#: inc/core/entry/class-meta.php:181
+msgid "Leave a Comment"
+msgstr ""
+
+#: inc/config/app.php:201
+msgid "Light"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:208
+msgid "Light 200"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:209
+msgid "Light 200 Italic"
+msgstr ""
+
+#: inc/config/app.php:223
+msgid "Light green cyan to vivid green cyan"
+msgstr ""
+
+#: inc/admin/class-admin.php:300
+msgid "Lorem Ipsum Generator"
+msgstr ""
+
+#: inc/config/app.php:228
+msgid "Luminous vivid amber to luminous vivid orange"
+msgstr ""
+
+#: inc/config/app.php:233
+msgid "Luminous vivid orange to vivid red"
+msgstr ""
+
+#: inc/config/app.php:147
+msgid "M"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:82
+msgid "Manage Gutenberg block patterns."
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:215
+msgid "Medium 500"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:216
+msgid "Medium 500 Italic"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:257
+#, php-format
+msgid "Meta Modules: %s Archive"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-content.php:277
+#, php-format
+msgid "Meta Modules: %s Single"
+msgstr ""
+
+#: inc/core/class-archive.php:101
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr ""
+
+#: inc/core/class-archive.php:100
+#, php-format
+msgid "Monthly Archives: %s"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:275
+msgid "Name *"
+msgstr ""
+
+#: inc/core/class-pagination.php:149 inc/core/class-pagination.php:208
+msgid "Navigation"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:73
+msgid "New Pattern"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:87
+msgid "No comments"
+msgstr ""
+
+#: inc/config/app.php:146
+msgid "Normal"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:212 inc/support/fonts/class-fonts.php:213
+msgid "Normal 400"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:214
+msgid "Normal 400 Italic"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:79
+msgid "Not found"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:80
+msgid "Not found in Trash"
+msgstr ""
+
+#: views/admin/notification-rating.tpl.php:35
+msgid "Ok, you deserve it"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-overrides.php:42
+msgid "Page for 404"
+msgstr ""
+
+#: inc/core/class-pagination.php:76 inc/core/class-pagination.php:114
+msgid "Pagination"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:117
+msgid "Pattern"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:109
+msgid "Pattern Category"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:102
+msgid "Pattern Type"
+msgstr ""
+
+#: inc/markup/class-markup.php:137
+msgid "Please define a callback function for each of the modules."
+msgstr ""
+
+#: inc/config/setup.php:166
+msgid "Please define a name for each of the sidebars."
+msgstr ""
+
+#: views/entry/comment.tpl.php:72
+msgid "Post Author"
+msgstr ""
+
+#: inc/core/class-archive.php:109
+#, php-format
+msgid "Post Type Archives: %s"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:68
+msgctxt "Post Type General Name"
+msgid "Block Patterns"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:69
+msgctxt "Post Type Singular Name"
+msgid "Block Pattern"
+msgstr ""
+
+#: views/entry/meta/date.tpl.php:52
+#, php-format
+msgid "Post updated on %s."
+msgstr ""
+
+#: views/entry/meta/author.tpl.php:33
+msgid "Posted by "
+msgstr ""
+
+#: views/entry/meta/categories.tpl.php:39
+msgid "Posted in"
+msgstr ""
+
+#: views/entry/meta/date.tpl.php:39
+msgid "Posted on "
+msgstr ""
+
+#: inc/config/app.php:166
+msgid "Primary"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-typography.php:41
+msgid "Primary Font"
+msgstr ""
+
+#: inc/core/class-header.php:162 inc/support/class-support.php:129
+#: views/header/bar-branding.tpl.php:52
+msgid "Primary Menu"
+msgstr ""
+
+#: views/entry/read-more.tpl.php:23
+msgid "Read More"
+msgstr ""
+
+#: views/admin/notification-rating.tpl.php:41
+msgid "Remind me later"
+msgstr ""
+
+#. %1$s expands to the request method
+#: inc/admin/class-request.php:103
+#, php-format
+msgid "Request method %1$s is not valid."
+msgstr ""
+
+#: inc/core/entry/class-comments.php:394
+#, php-format
+msgid "Required fiels are marked \"%s\"."
+msgstr ""
+
+#: inc/config/app.php:141
+msgid "S"
+msgstr ""
+
+#: inc/core/class-search.php:59 views/header/bar-branding.tpl.php:44
+msgid "Search"
+msgstr ""
+
+#: inc/core/class-header.php:166
+msgid "Search Form"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:78
+msgid "Search Pattern"
+msgstr ""
+
+#: inc/core/class-archive.php:83
+#, php-format
+msgid "Search Results for \"%s\""
+msgstr ""
+
+#: inc/core/class-search.php:60
+msgid "Search this website"
+msgstr ""
+
+#: inc/core/class-core.php:112
+#, php-format
+msgid "Search this website %s"
+msgstr ""
+
+#: inc/config/app.php:171
+msgid "Secondary"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-overrides.php:43
+msgid "Select your custom page that will show on 404 error."
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:217 inc/support/fonts/class-fonts.php:218
+msgid "Semi-Bold 600"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:219
+msgid "Semi-Bold 600 Italic"
+msgstr ""
+
+#: inc/support/plugins/woocommerce/class-woocommerce.php:194
+msgid "Shop Sidebar"
+msgstr ""
+
+#: views/header/woo-cart-index.tpl.php:30
+msgid "Show Cart"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-colors.php:41
+msgid "Site Background"
+msgstr ""
+
+#: inc/core/class-header.php:158
+msgid "Site Branding"
+msgstr ""
+
+#: inc/core/class-content.php:230
+msgid "Skip to content"
+msgstr ""
+
+#: inc/config/app.php:140
+msgid "Small"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:384
+msgid "Speak Your Mind"
+msgstr ""
+
+#: inc/config/app.php:181
+msgid "Success"
+msgstr ""
+
+#: inc/core/class-archive.php:91
+#, php-format
+msgid "Tag Archives: %s"
+msgstr ""
+
+#: views/entry/meta/tags.tpl.php:32
+msgid "Tagged with "
+msgstr ""
+
+#: inc/core/entry/class-meta.php:264
+msgid "Tags"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:142
+msgid "Text color of the footer links."
+msgstr ""
+
+#: views/admin/notification-options.tpl.php:36
+msgid "Thanks, but I already know"
+msgstr ""
+
+#: inc/admin/class-admin.php:232 inc/admin/class-admin.php:233
+msgid "Theme Options"
+msgstr ""
+
+#: inc/core/entry/class-entry.php:232
+msgid "There are no posts matching your criteria."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-typography.php:42
+msgid ""
+"This font is used on body and will be placed in Boostrap`s sans serif CSS "
+"variable."
+msgstr ""
+
+#: inc/admin/customizer/configs/class-typography.php:59
+msgid ""
+"This font is used on headings and will be placed in a custom CSS variable."
+msgstr ""
+
+#: inc/config/setup.php:180
+#, php-format
+msgid "This is the %s."
+msgstr ""
+
+#: inc/support/plugins/woocommerce/class-woocommerce.php:195
+msgid ""
+"This is the Shop Sidebar - it will replace Primary Sidebar on WooCommerce "
+"Pages."
+msgstr ""
+
+#: inc/core/entry/class-comments.php:214
+msgid "This post is password protected. Enter the password to view comments."
+msgstr ""
+
+#: views/entry/protected.tpl.php:35
+msgid ""
+"This post is password protected. To view this post, enter the password below!"
+msgstr ""
+
+#: views/header/bar-toggle.tpl.php:24
+msgid "Toggle navigation"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-configs.php:49
+msgid "Typography"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:225 inc/support/fonts/class-fonts.php:226
+msgid "Ultra-Bold 900"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:227
+msgid "Ultra-Bold 900 Italic"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:205 inc/support/fonts/class-fonts.php:206
+msgid "Ultra-Light 100"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:207
+msgid "Ultra-Light 100 Italic"
+msgstr ""
+
+#: views/entry/protected.tpl.php:66
+msgid "Unlock"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:75
+msgid "Update Pattern"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:76
+msgid "View Pattern"
+msgstr ""
+
+#: inc/gutenberg/modules/patterns/class-patterns.php:77
+msgid "View Patterns"
+msgstr ""
+
+#: views/header/woo-cart-index.tpl.php:29
+msgid "View your shopping cart"
+msgstr ""
+
+#: inc/config/app.php:213
+msgid "Vivid cyan blue to vivid purple"
+msgstr ""
+
+#: inc/config/app.php:218
+msgid "Vivid green cyan to vivid cyan blue"
+msgstr ""
+
+#: inc/config/app.php:191
+msgid "Warning"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:301
+msgid "Website"
+msgstr ""
+
+#. Name of the theme
+#: inc/gutenberg/class-gutenberg.php:97
+msgid "WeCodeArt"
+msgstr ""
+
+#: inc/config/app.php:27
+#, php-format
+msgid ""
+"WeCodeArt Framework requires PHP version %1$s or higher. You are using "
+"version %2$s. Please <a href=\"%3$s\">upgrade PHP</a> to use WeCodeArt "
+"Framework."
+msgstr ""
+
+#: inc/config/app.php:19
+#, php-format
+msgid ""
+"WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
+"version %2$s. Please upgrade WordPress to use WeCodeArt Framework."
+msgstr ""
+
+#: inc/markup/class-svg.php:297
+#, php-format
+msgid ""
+"When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
+msgstr ""
+
+#: inc/admin/customizer/class-config.php:34
+#, php-format
+msgid ""
+"When extending %s, you must create a `register` method, merging existing "
+"arguments with new ones."
+msgstr ""
+
+#: inc/config/app.php:206
+msgid "White"
+msgstr ""
+
+#: inc/support/plugins/woocommerce/class-woocommerce.php:212
+msgid "WooCommerce Cart"
+msgstr ""
+
+#: inc/markup/class-markup.php:206
+#, php-format
+msgid ""
+"Wrappers are not properly defined for \"%s\". Please check your theme code."
+msgstr ""
+
+#: inc/config/app.php:159
+msgid "XL"
+msgstr ""
+
+#: inc/core/class-archive.php:96
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr ""
+
+#: inc/core/class-archive.php:95
+#, php-format
+msgid "Yearly Archives: %s"
+msgstr ""
+
+#: inc/admin/customizer/configs/class-footer.php:90
+msgid ""
+"You can use <code>[copy]</code> and <code>[year]</code> to output copyright "
+"symbol and current year."
+msgstr ""
+
+#: inc/core/entry/class-comments.php:406
+#, php-format
+msgid "You may use these %s tags and attributes: %s."
+msgstr ""
+
+#: inc/core/entry/class-comments.php:462
+#, php-format
+msgid "You must accept %s to comment!"
+msgstr ""
+
+#: inc/markup/walkers/class-comment.php:105
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: inc/core/entry/class-comments.php:392
+msgid "Your email address will not be published."
+msgstr ""
+
+#: inc/class-activation.php:108
+msgid ""
+"Your WordPress installation does not meet the minimum requirements to run "
+"WeCodeArt Framework. Please upgrade and try again."
+msgstr ""

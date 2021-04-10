@@ -2,6 +2,7 @@
   display: block;
 }
 .wca-customizer-control--typeface .wca-customizer-control__header .components-dropdown .components-popover__content {
+  min-width: 230px;
   overflow: hidden;
 }
 .wca-customizer-control--typeface .wca-customizer-control__header .components-dropdown .components-popover__content > div {

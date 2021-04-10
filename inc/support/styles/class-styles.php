@@ -458,7 +458,7 @@ final class Styles implements Integration {
 	 *
 	 * @return 	string
 	 */
-	public static function sanitize_rgba( string $value ) {
+	public static function sanitize_rgba( string $value = '' ) {
 		$red   = 'rgba(0,0,0,0)';
 		$green = 'rgba(0,0,0,0)';
 		$blue  = 'rgba(0,0,0,0)';
@@ -473,5 +473,41 @@ final class Styles implements Integration {
 		sscanf( $value, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
 
 		return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
+	}
+	
+	/**
+	 * Sanitize hex color.
+	 *
+	 * @since   4.2.0
+	 * @param 	string $value Color in hex format.
+	 *
+	 * @return 	string
+	 */
+	public static function sanitize_hex( string $value = '' ) {
+		return sanitize_hex_color( $value );
+	}
+
+	/**
+	 * Sanitize color.
+	 *
+	 * @param 	string $value recieved value.
+	 *
+	 * @return 	string
+	 */
+	public static function sanitize_color( string $value = '' ) {
+		$is_var = ( strpos( $value, 'var' ) !== false );
+	
+		if ( $is_var ) {
+			return sanitize_text_field( $value );
+		}
+	
+		// Is this an rgba color or a hex?
+		$mode = ( false === strpos( $value, 'rgba' ) ) ? 'hex' : 'rgba';
+	
+		if ( 'rgba' === $mode ) {
+			return self::sanitize_rgba( $value );
+		} else {
+			return self::sanitize_hex( $value );
+		}
 	}
 }

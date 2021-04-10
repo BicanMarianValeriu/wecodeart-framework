@@ -8,13 +8,63 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.1.8
- * @version     4.1.8
+ * @since		4.2.0
+ * @version     4.2.0
  */
 
 namespace WeCodeArt\Functions;
 
 defined( 'ABSPATH' ) || exit();
+
+/**
+ * Get Global Colors Default
+ *
+ * @return 	array
+ */
+function get_color_palette() {
+	$palette 	= current( get_theme_support( 'editor-color-palette' ) );
+	$_1	= current( wp_list_filter( $palette, [ 'slug' => 'primary' ] ) );
+	$_2	= current( wp_list_filter( $palette, [ 'slug' => 'secondary' ] ) );
+	$_3	= current( wp_list_filter( $palette, [ 'slug' => 'light' ] ) );
+	$_4	= current( wp_list_filter( $palette, [ 'slug' => 'dark' ] ) );
+	$_5	= current( wp_list_filter( $palette, [ 'slug' => 'white' ] ) );
+
+	return [
+		'activePalette' => 'base',
+		'palettes'      => [
+			'base'      => [
+				'name'          => __( 'Base', 'wecodeart' ),
+				'allowDeletion' => false,
+				'colors'        => [
+					'primary'   => $_1['color'],
+					'secondary' => $_2['color'],
+					'light'     => $_3['color'],
+					'dark'      => $_4['color'],
+					'site'		=> $_5['color'],
+					'text'	    => $_4['color'],
+					'text-dark'	=> $_5['color'],
+					'heading'	=> $_4['color'],
+					'link'	    => $_1['color'],
+				],
+			],
+			'dark'  => [
+				'name'          => __( 'Dark Mode', 'wecodeart' ),
+				'allowDeletion' => false,
+				'colors'        => [
+					'primary'   => $_1['color'],
+					'secondary' => $_2['color'],
+					'light'     => $_3['color'],
+					'dark'      => $_4['color'],
+					'site'      => $_4['color'],
+					'text'	    => $_5['color'],
+					'text-dark'	=> $_5['color'],
+                    'heading'	=> $_5['color'],
+					'link'	    => $_1['color'],
+				],
+			],
+		],
+	];
+}
 
 /**
  * Helper function to encode an array to an excaped json string

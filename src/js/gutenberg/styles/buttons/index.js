@@ -15,17 +15,9 @@ const buttons = {
             isDefault: true,
         },
         {
-            name: 'vertical',
-            label: __('Vertical', 'wecodeart'),
-        },
-        {
             name: 'group',
             label: __('Group', 'wecodeart'),
         },
-        {
-            name: 'group-vertical',
-            label: __('Group Vertical', 'wecodeart'),
-        }
     ]
 };
 

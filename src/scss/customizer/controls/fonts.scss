@@ -3,8 +3,9 @@
 		&__header {
 			.components-dropdown {
 				display: block;
-
+				
 				.components-popover__content {
+					min-width: 230px;
 					overflow: hidden;
 
 					> div {

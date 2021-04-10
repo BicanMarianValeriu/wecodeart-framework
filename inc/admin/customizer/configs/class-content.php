@@ -293,6 +293,60 @@ class Content extends Config {
 			$configurations = array_merge( $configurations, $meta_config );
 		}
 
+		$design_config = [
+			[
+				'name'			=> 'content-design-bg',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'content-design',
+				'priority'   	=> 5, 
+				'title' 		=> esc_html__( 'Content Container', 'wecodeart' ),
+				'description'	=> esc_html__( 'Color of the entire content area wrapper (.content).', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => '.content',
+						'property' => 'background-color'
+					],
+				]
+			],
+			[
+				'name'			=> 'content-design-main-bg',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'content-design',
+				'priority'   	=> 15, 
+				'title' 		=> esc_html__( 'Main Content', 'wecodeart' ),
+				'description'	=> esc_html__( 'Color of the main content wrapper (.content__main).', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => '.content__main',
+						'property' => 'background-color'
+					],
+				]
+			],
+			[
+				'name'			=> 'content-design-side-bg',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'content-design',
+				'priority'   	=> 15, 
+				'title' 		=> esc_html__( 'Sidebar Container', 'wecodeart' ),
+				'description'	=> esc_html__( 'Color of the sidebar wrappers (.content__sidebar).', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => '.content__sidebar',
+						'property' => 'background-color'
+					],
+				]
+			],
+		];
+
+		// Merge to main config
+		$configurations = array_merge( $configurations, $design_config );
+
 		return $configurations;
 	}
 }

@@ -128,7 +128,7 @@ return [
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-180bc89e","hasCustomCSS":true} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-180bc89e"><!-- wp:image {"width":80,"height":80,"className":"is-style-rounded wcacss-fb19bf29","hasCustomCSS":true,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<figure class="wp-block-image is-resized is-style-rounded wcacss-fb19bf29"><img src="https://picsum.photos/id/237/500/500" alt="" width="80" height="80"/></figure>
+	<figure class="wp-block-image is-resized is-style-rounded wcacss-fb19bf29"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="80" height="80"/></figure>
 	<!-- /wp:image -->
 	
 	<!-- wp:quote {"className":"wcacss-c5501c10 is-style-default","hasCustomCSS":true} -->
@@ -138,7 +138,7 @@ return [
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md"><!-- wp:image {"width":80,"height":80,"className":"wcacss-f95d08d1 is-style-rounded","hasCustomCSS":true,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<figure class="wp-block-image is-resized wcacss-f95d08d1 is-style-rounded"><img src="https://picsum.photos/id/237/500/500" alt="" width="80" height="80"/></figure>
+	<figure class="wp-block-image is-resized wcacss-f95d08d1 is-style-rounded"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="80" height="80"/></figure>
 	<!-- /wp:image -->
 	
 	<!-- wp:quote {"className":"wcacss-6f72fa12 is-style-default","hasCustomCSS":true} -->
@@ -148,7 +148,7 @@ return [
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md"><!-- wp:image {"width":80,"height":80,"className":"is-style-rounded","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<figure class="wp-block-image is-resized is-style-rounded"><img src="https://picsum.photos/id/237/500/500" alt="" width="80" height="80"/></figure>
+	<figure class="wp-block-image is-resized is-style-rounded"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="80" height="80"/></figure>
 	<!-- /wp:image -->
 	
 	<!-- wp:quote {"className":"wcacss-d2dfb966 is-style-default","hasCustomCSS":true} -->

@@ -41,7 +41,22 @@ class Comments {
 		add_filter( 'comment_reply_link',	[ $this, 'replace_reply_link_class' ] );
 		add_action( 'pre_comment_on_post',  [ $this, 'validate_cookies'			] );
 
-		// WeCodeArt Core
+		// WeCodeArt Core		
+		add_action( 'wecodeart/hook/entry/footer', [ $this, 'get_comments_template' ], 30 );
+	}
+	
+	/**
+	 * Get the comments template
+	 *
+	 * @since 	unknown
+	 * @version	4.2.0
+	 *
+	 * @return 	void 
+	 */
+	public function get_comments_template() {
+		// Only if CPT supports and singular entry
+		if ( ! post_type_supports( get_post_type(), 'comments' ) && ! is_singular() ) return;
+
 		if( post_password_required() ) {
 			add_action( 'wecodeart/entry/comments', [ $this, 'render_protected' ], 20 );
 		} else {
@@ -52,21 +67,7 @@ class Comments {
 			add_action( 'wecodeart/entry/comments', [ Pagination::get_instance(), 'comments' ], 35 ); 
 			add_action( 'wecodeart/entry/comments', [ $this, 'render_respond'	], 40 );
 		}
-		
-		add_action( 'wecodeart/hook/entry/footer', [ $this, 'get_comments_template' ], 30 );
-	}
-	
-	/**
-	 * Get the comments template
-	 *
-	 * @since 	unknown
-	 * @version	3.7.0
-	 *
-	 * @return 	void 
-	 */
-	public function get_comments_template() {
-		// Only if CPT supports and singular entry
-		if ( ! post_type_supports( get_post_type(), 'comments' ) && ! is_singular() ) return;
+
 		comments_template( null, true );
 	}
 
@@ -112,7 +113,7 @@ class Comments {
 
 		// Append `add comment` link
 		if( comments_open() ) {
-			$output .= sprintf( '<a class="comments__add-new" href="#respond" rel="nofollow">%s</a>', $args['add_one'] ); 
+			$output .= sprintf( '<a class="comments__add-new float-end" href="#respond" rel="nofollow">%s</a>', $args['add_one'] ); 
 		}
 
 		$output = apply_filters( 'wecodeart/filter/comments/get_comments_info/output', trim( $output ) );
@@ -211,7 +212,7 @@ class Comments {
 				'class' => 'alert alert-danger shadow-soft'
 			]
 		] ], 'printf', [ 
-			esc_html__( 'This post is password protected. Enter the password to view comments.', 'wecodeart' )
+			esc_html__( 'This post is password protected. Enter the password to view comments or leave a comment.', 'wecodeart' )
 		] );
 	}
 

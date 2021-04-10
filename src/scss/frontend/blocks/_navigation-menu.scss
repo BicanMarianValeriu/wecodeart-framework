@@ -1,8 +1,8 @@
 .wp-block-navigation-menu {
 	& > ul {
-		@include list-unstyled();
-		max-width: none;
 		position: relative;
+		max-width: none;
+		@include list-unstyled();
 
 		ul {
 			padding-left: 0;

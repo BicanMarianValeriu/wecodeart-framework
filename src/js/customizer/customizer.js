@@ -123,8 +123,6 @@ const wecodeartPostMessage = {
 				return value;
 			}
 
-			console.log(output);
-
 			output = {
 				prefix: '',
 				units: '',
@@ -230,6 +228,14 @@ const wecodeartPostMessage = {
 						linkTag.setLink(name, fontUrl);
 					}
 
+					break;
+				case 'wecodeart-palette':
+					const { activePalette, palettes } = value;
+					const { colors } = palettes[activePalette];
+					processedValue = processValue(output, colors[output.key]);
+					if (false !== processedValue) {
+						styles += output.element + '{' + output.property + ':' + processedValue + ';}';
+					}
 					break;
 				case 'wecodeart-background':
 				case 'wecodeart-dimensions':

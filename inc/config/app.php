@@ -95,6 +95,9 @@ return [
         // Header
         'header-bar-container'      => 'container',
         'header-bar-modules'        => [ 'branding', 'menu', 'search' ],
+        'header-design-bg'          => '',
+        'header-design-color'       => '',
+        'header-design-links'       => '',
         // Content
         'content-layout-container'  => 'container',
         'content-layout-modules'    => [ 'content', 'primary' ],
@@ -102,21 +105,21 @@ return [
         'footer-layout-container'   => 'container',
         'footer-layout-modules'     => [ 'footer-1', 'footer-2', 'footer-3' ],
         'footer-copyright-text'     => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
-        'footer-design-bg'          => '#f1f3f7',
+        'footer-design-bg'          => '',
         'footer-design-color'       => '',
         'footer-design-links'       => '',
-        'footer-design-attribution_bg'      => '#ffffff',
-        'footer-design-attribution_color'   => '#5a5a5a',
+        'footer-design-attribution_bg'      => '',
+        'footer-design-attribution_color'   => '',
         // General
         'general-typography-primary'    => [
-            'family'    => 'Abel',
-            'variants'  => []
+            'font-family'   => 'Abel',
+            'font-weight'   => []
         ],
         'general-typography-headings'   => [
-            'family'    => 'Open Sans',
-            'variants'  => [ '700' ]
+            'font-family'   => 'Open Sans',
+            'font-weight'  => [ '700' ]
         ],
-        'general-colors-site'          => '#ffffff',
+        // Colors - they have default set
     ],
     /*
     |--------------------------------------------------------------------------

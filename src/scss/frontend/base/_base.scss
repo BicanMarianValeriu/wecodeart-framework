@@ -96,7 +96,7 @@ a {
         border-radius: 3px;
         box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
         clip: auto !important;
-        color: #21759b;
+        color: var(--wca-primary);
         display: block;
         font-size: 14px;
         font-size: 0.875rem;
@@ -112,9 +112,27 @@ a {
     }
 }
 
-.logged-in.admin-bar {
-    .header-bar.sticky {
-        margin-top: 32px!important;
+/* Default Widgets */
+.widget_archive,
+.widget_meta,
+.widget_pages,
+.widget_categories,
+.widget_nav_menu,
+.widget_recent_comments,
+.widget_recent_entries {
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+
+        a {
+            padding: 0;
+        }
+    }
+}
+
+.widget_calendar {
+    table {
+        width: 100%;
     }
 }
 
@@ -124,39 +142,29 @@ a {
 .breadcrumbs,
 .entry-navigation,
 .footer,
-.footer__attribution {
-    border-top: 1px solid var(--wca-light);
-}
-
-.content__sidebar {
-    padding-top: 1.5rem;
+.footer__attribution,
+.wp-block-wca-section:first-child {
+    border-top: 1px solid rgba(0,0,0,.1);
 }
 
 .has-sidebar {
-    .content__main  {
-        & + .content__sidebar {
-            @include media-breakpoint-up( 'md' ) {
-                border-left: 1px solid var(--wca-light);
-            }
+    .content__sidebar + .content__main,
+    .content__main + .content__sidebar {
+        @include media-breakpoint-up( 'md' ) {
+            border-left: 1px solid rgba(0,0,0,.1);
         }
     }
 }
 
-.archive-intro {  
-    &__svg,
-    &__title {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    &__title {
-        font-size: 30px;
-    }
-
+.archive-intro {
     &__svg {
         svg {
             width: 50px;
             height: 50px;
+
+            .theme-is-dark & {
+                fill: white;
+            }
         }
     } 
 }
@@ -191,14 +199,10 @@ a {
 }
 
 hr {
-    background: linear-gradient(to right, transparent, #dbdbdb, transparent);
+    background: linear-gradient(to right, transparent, rgba(0,0,0,.10), transparent);
     border: 0;
     height: 1px;
     margin: 25px 0;
-
-    &--tall {
-        margin: 50px 0;
-    }
 }
 
 svg,
@@ -215,12 +219,45 @@ svg,
 
 .border {
     &-soft {
-        border-color: #F3F7FA !important;
+        border-color: rgba(0, 0, 0, 0.1) !important;
     }
 }
 
 .shadow {
     &-soft {
-        box-shadow: 0 0.25rem 1.875rem rgba(42, 53, 79, 0.08) !important;        
+        box-shadow: 0 0.25rem 1.875rem rgba(0, 0, 0, 0.1) !important;        
+    }
+}
+
+/* Dark Theme */
+:root {
+    .theme-is-dark {
+        .form-control,
+        .input-group-text,
+        .btn-outline-dark {
+            color: white;
+            border-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .input-group-text,
+        .form-control {
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+
+        .form-floating {
+            .form-control {
+                &::placeholder {
+                    color: transparent;
+                }
+                
+                &:-moz-placeholder {
+                    color: transparent;
+                }
+        
+                &::-webkit-input-placeholder {
+                    color: transparent;
+                }
+            }
+        }
     }
 }

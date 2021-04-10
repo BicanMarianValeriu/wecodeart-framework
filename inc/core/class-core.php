@@ -84,6 +84,13 @@ class Core {
 			$classes[] = 'has-full-width';
 		} 
 
+		// Theme
+		$theme = wecodeart( 'name' );
+		$classes[] = 'theme-' . $theme;
+
+		$palette = get_theme_mod( 'general-colors-palette' ) ? get_theme_mod( 'general-colors-palette' )['activePalette']: 'base';
+		$classes[] = 'theme-is-' . strtolower( $palette );
+
 		// Return Classes.
 		$classes = array_map( 'sanitize_html_class', $classes );
 

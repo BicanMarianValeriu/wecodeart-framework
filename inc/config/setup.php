@@ -148,6 +148,7 @@ wecodeart()->bind( 'version', function () {
  * Bind Register Sidebars.
  *
  * @since   3.9.5
+ * @version 4.2.0
  *
  * @param   array $parameters
  *
@@ -178,9 +179,9 @@ wecodeart()->bind( 'register_sidebars', function( WeCodeArt $theme, $parameters 
             'name'          => esc_html( $label ),
             'class'         => sanitize_html_class( $class, 'wecodeart-sidebar' ),
             'description'   => $desc ?: sprintf( esc_html__( 'This is the %s.', 'wecodeart' ), $label ),
-            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'before_widget' => '<div id="%1$s" class="widget %2$s mb-3">',
             'after_widget'  => '</div>',
-            'before_title'  => '<h4 class="widget__title">',
+            'before_title'  => '<h4 class="widget__title pt-3 h5 text-uppercase">',
             'after_title'   => '</h4>',
         ] );
     }

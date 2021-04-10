@@ -36,8 +36,8 @@ class Header extends Config {
 		// A handy class for formatting theme mods.
 		$formatting = Formatting::get_instance();
 
-		$_configs = array( 
-			array(
+		$_configs = [
+			[
 				'name'			=> 'header-bar-container',
 				'type' 			=> 'control',
 				'control'  		=> 'select',
@@ -59,8 +59,8 @@ class Header extends Config {
 						'value'		=> [ 'container', 'container-fluid' ]
 					]
 				]
-			),
-			array(
+			],
+			[
 				'name'			=> 'header-bar-modules',
 				'type'        	=> 'control',
 				'control'  		=> 'wecodeart-sortable',
@@ -75,8 +75,56 @@ class Header extends Config {
 					'render_callback' 		=> [ 'WeCodeArt\Core\Header', 'render_header_bar' ],
 					'container_inclusive' 	=> true
 				]
-			)
-		);
+			],
+			[
+				'name'			=> 'header-design-bg',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'header-design',
+				'priority'   	=> 15, 
+				'title' 		=> esc_html__( 'Header background color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Background color of the header wrapper. Defaults to CSS color.', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => 'header.header',
+						'property' => 'background-color'
+					],
+				]
+			],
+			[
+				'name'			=> 'header-design-color',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'header-design',
+				'priority'   	=> 20, 
+				'title' 		=> esc_html__( 'Header text color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Color of the header text. Defaults to CSS color.', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => 'header.header',
+						'property' => 'color'
+					],
+				]
+			],
+			[
+				'name'			=> 'header-design-links',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'header-design',
+				'priority'   	=> 25, 
+				'title' 		=> esc_html__( 'Header links color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Color of the header links. Defaults to CSS color.', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => 'header.header a',
+						'property' => 'color'
+					],
+				]
+			],
+		];
 
 		return array_merge( $configurations, $_configs );
 	}

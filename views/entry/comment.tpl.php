@@ -58,7 +58,7 @@ SVG::add_icon( 'pencil', [
 
                 edit_comment_link( 
                     SVG::compile( 'pencil' ),
-                    '<span class="comment-edit" data-toggle="tooltip" title="' . esc_html__( 'Edit', 'wecodeart' ) . '">', '</span>'
+                    '<span class="comment-edit float-end" data-toggle="tooltip" title="' . esc_html__( 'Edit', 'wecodeart' ) . '">', '</span>'
                 );
             
             ?>
@@ -100,7 +100,7 @@ SVG::add_icon( 'pencil', [
             
                 comment_reply_link( array_merge( $args, [
                     'depth'  => $depth,
-                    'before' => '<span class="comment-reply float-right">',
+                    'before' => '<span class="comment-reply float-end me-3">',
                     'after'  => '</span>',
                 ] ) );
 

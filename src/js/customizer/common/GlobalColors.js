@@ -4,10 +4,10 @@ const {
     components: { Dropdown, Button, Icon, ColorPalette }
 } = wp;
 
-const { pallete = [] } = wecodeartColorControl;
+const { palette = [] } = wecodeartColorControl;
 
 const GlobalColorsPicker = ({ onChange, activeColor }) => {
-    const isGlobal = pallete.filter(({ color }) => color === activeColor).length;
+    const isGlobal = palette.filter(({ color }) => color === activeColor).length;
 
     return (
         <Dropdown
@@ -27,7 +27,7 @@ const GlobalColorsPicker = ({ onChange, activeColor }) => {
             )}
             renderContent={() => (
                 <ColorPalette {...{
-                    colors: pallete,
+                    colors: palette,
                     value: activeColor,
                     disableCustomColors: true,
                     clearable: true,

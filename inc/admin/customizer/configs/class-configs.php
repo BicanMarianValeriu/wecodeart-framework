@@ -50,10 +50,10 @@ class Configs extends Config {
 				'panel'    => 'general',
 			),
 			array(
-				'name'     => 'general-colors',
+				'name'     => 'general-design',
 				'type'     => 'section',
 				'priority' => 20,
-				'title'    => esc_html__( 'Colors', 'wecodeart' ),
+				'title'    => esc_html__( 'Design Settings', 'wecodeart' ),
 				'panel'    => 'general',
 			),
 			/**
@@ -70,6 +70,13 @@ class Configs extends Config {
 				'type'     => 'section',
 				'priority' => 5,
 				'title'    => esc_html__( 'Header Bar', 'wecodeart' ),
+				'panel'    => 'header',
+			),
+			array(
+				'name'     => 'header-design',
+				'type'     => 'section',
+				'priority' => 10,
+				'title'    => esc_html__( 'Design Settings', 'wecodeart' ),
 				'panel'    => 'header',
 			),
 			/**
@@ -93,6 +100,13 @@ class Configs extends Config {
 				'type'     => 'section',
 				'priority' => 10,
 				'title'    => esc_html__( 'Entry Settings', 'wecodeart' ),
+				'panel'    => 'content',
+			),
+			array(
+				'name'     => 'content-design',
+				'type'     => 'section',
+				'priority' => 15,
+				'title'    => esc_html__( 'Design Settings', 'wecodeart' ),
 				'panel'    => 'content',
 			),
 			/**

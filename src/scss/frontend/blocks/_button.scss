@@ -1,13 +1,14 @@
+$button-margin: 10px;
+
 .wp-block-buttons {
-	display: inline-flex;
+	display: flex;
 	flex-flow: row wrap;
 	
 	&.is-style-default {
-		margin: 0 -5px;
+		margin: 0 #{-$button-margin};
 
 		> .wp-block-button {
-			flex-grow: 0;
-			padding: 0 5px;
+			padding: 0 $button-margin;
 			margin-bottom: 1rem;
 		}
 	}
@@ -15,39 +16,34 @@
 	&.is-style-group {
 		vertical-align: middle;
 
-		> .wp-block-button {
-			// Prevent double borders when buttons are next to each other
-			&:not(:first-child) {
-				margin-left: -$btn-border-width;
+		&:not(.is-vertical) {
+			> .wp-block-button {
+				// Reset rounded corners
+				&:not(:last-child) > .wp-block-button__link {
+					border-top-right-radius: 0;
+					border-bottom-right-radius: 0;
+				}
+	
+				&:not(:first-child) > .wp-block-button__link {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+				}
 			}
+		}
 
-			// Reset rounded corners
-			&:not(:last-child) > .wp-block-button__link {
-                border-top-right-radius: 0!important;
-                border-bottom-right-radius: 0!important;
-			}
-
-			&:not(:first-child) > .wp-block-button__link {
-				border-top-left-radius: 0!important;
-                border-bottom-left-radius: 0!important;
+		&.is-vertical {
+			> .wp-block-button {
+				margin: 0;
 			}
 		}
 	}
-
-	&.is-style-vertical,
-	&.is-style-group-vertical {
+	
+	&.is-vertical {
 		flex-direction: column;
-	}
-
-	&.is-style-group-vertical {
 		align-items: flex-start;
 		justify-content: center;
-		margin-bottom: 1rem;
 
 		& > .wp-block-button {
-			width: 100%;
-			margin-bottom: 0;
-
 			// Prevent double borders when buttons are next to each other
 			&:not(:first-child) {
 				margin-top: -$btn-border-width;
@@ -55,11 +51,13 @@
 
 			// Reset rounded corners
 			&:not(:last-child) > .wp-block-button__link {
-				@include border-bottom-radius(0);
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
 			}
 
 			&:not(:first-child) > .wp-block-button__link {
-				@include border-top-radius(0);
+				border-top-left-radius: 0;
+                border-top-right-radius: 0;
 			}
 
 			&__link {
@@ -69,9 +67,37 @@
 		}
 	}
 
+	&.is-content-justification-left {
+		justify-content: flex-start;
+
+		&.is-vertical {
+			align-items: flex-start;
+		}
+	}
+
+	&.is-content-justification-center {
+		justify-content: center;
+
+		&.is-vertical {
+			align-items: center;
+		}
+	}
+
+	&.is-content-justification-right {
+		justify-content: flex-end;
+
+		&.is-vertical {
+			align-items: flex-end;
+		}
+	}
+
+	&.is-content-justification-space-between {
+		justify-content: space-between;
+	}
+
 	> .wp-block-button {
 		position: relative;
-		flex: 1 1 auto;
+		display: inline-block;
 		margin-bottom: 1rem;
 
 		&:hover {
@@ -90,6 +116,30 @@
 
 .wp-block-button {
 	color: $white;
+	
+	&.has-custom-width {
+		max-width: none;
+
+		.wp-block-button__link {
+			min-width: 100%;
+		}
+	}
+
+	&.wp-block-button__width-25 {
+		min-width: calc(25% - #{ $button-margin });
+	}
+
+	&.wp-block-button__width-50 {
+		min-width: calc(50% - #{ $button-margin });
+	}
+
+	&.wp-block-button__width-75 {
+		min-width: calc(75% - #{ $button-margin });
+	}
+
+	&.wp-block-button__width-100 {
+		min-width: 100%;
+	}
 
 	&.aligncenter {
 		text-align: center;

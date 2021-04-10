@@ -5,10 +5,10 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'About', 'Theme starter content' ),
-	'post_content' => '<!-- wp:wca/section {"backgroundColor":"light","className":"wcacss-bd010bf4 py-5","hasCustomCSS":true} -->
-	<div class="wp-block-wca-section alignfull wcacss-bd010bf4 py-5 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-54d8bdf2 py-md-4","hasCustomCSS":true} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-54d8bdf2 py-md-4"><!-- wp:heading {"level":1,"className":"has-text-align-left","textColor":"dark"} -->
-	<h1 class="has-text-align-left has-dark-color has-text-color">About Us</h1>
+	'post_content' => '<!-- wp:wca/section {"backgroundColor":"light","className":"py-5 wcacss-e25d5b2a","textColor":"dark","hasCustomCSS":true,"customCSS":".wcacss-e25d5b2a {\n}\n"} -->
+	<div class="wp-block-wca-section alignfull py-5 wcacss-e25d5b2a wca-section has-dark-color has-light-background-color has-text-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-54d8bdf2 py-md-4","hasCustomCSS":true} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-54d8bdf2 py-md-4"><!-- wp:heading {"level":1,"className":"has-text-align-left"} -->
+	<h1 class="has-text-align-left">About Us</h1>
 	<!-- /wp:heading --></div>
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
@@ -98,7 +98,7 @@ return [
 	<!-- wp:wca/section {"backgroundColor":"light","className":"wcacss-7290080c py-5","hasCustomCSS":true} -->
 	<div class="wp-block-wca-section alignfull wcacss-7290080c py-5 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"},"className":"wcacss-c32c587f","hasCustomCSS":true} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg wcacss-c32c587f"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default wcacss-7a948bea","hasCustomCSS":true} -->
-	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt=""/></figure></div>
+	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/man-circle.png" alt="" width="250" height="250"/></figure></div>
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
@@ -112,15 +112,15 @@ return [
 	<!-- wp:social-links {"align":"center","className":"is-style-logos-only"} -->
 	<ul class="wp-block-social-links aligncenter is-style-logos-only"><!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook"} /-->
 	
-	<!-- wp:social-link {"url":"#","service":"twitter"} /-->
+	<!-- wp:social-link {"url":"https://twitter.com/mvbican","service":"twitter"} /-->
 	
-	<!-- wp:social-link {"url":"https://www.linkedin.com/in/marian-valeriu-bican-b12169103/","service":"linkedin"} /--></ul>
+	<!-- wp:social-link {"url":"https://www.linkedin.com/in/mvbican/","service":"linkedin"} /--></ul>
 	<!-- /wp:social-links --></div>
 	<!-- /wp:wca/column -->
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"},"className":"wcacss-c32c587f","hasCustomCSS":true} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg wcacss-c32c587f"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default wcacss-7a948bea","hasCustomCSS":true} -->
-	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt=""/></figure></div>
+	<div class="wp-block-image is-style-default wcacss-7a948bea"><figure class="aligncenter size-large"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="250" height="250"/></figure></div>
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
@@ -142,7 +142,7 @@ return [
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"}} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default wcacss-652c8d48","hasCustomCSS":true} -->
-	<div class="wp-block-image is-style-default wcacss-652c8d48"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt=""/></figure></div>
+	<div class="wp-block-image is-style-default wcacss-652c8d48"><figure class="aligncenter size-large"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="250" height="250"/></figure></div>
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
@@ -164,7 +164,7 @@ return [
 	
 	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-6","lg":"col-lg"}} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-6 col-lg"><!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default"} -->
-	<div class="wp-block-image is-style-default"><figure class="aligncenter size-large"><img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt=""/></figure></div>
+	<div class="wp-block-image is-style-default"><figure class="aligncenter size-large"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="250" height="250"/></figure></div>
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","level":3,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->

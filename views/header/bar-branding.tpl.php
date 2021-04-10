@@ -25,7 +25,7 @@ $modules = get_theme_mod( 'header-bar-modules' );
 
 		// Title
 		printf(
-			'<%1$s class="site-title"><a href="%2$s" rel="home">%3$s</a></%1$s>',
+			'<%1$s class="site-title fw-bold text-uppercase mb-0"><a href="%2$s" rel="home">%3$s</a></%1$s>',
 			is_front_page() ? 'h1' : 'p',
 			esc_url( home_url( '/' ) ),
 			get_bloginfo( 'name' ) 
@@ -34,7 +34,7 @@ $modules = get_theme_mod( 'header-bar-modules' );
 		// Description
 		$description = get_bloginfo( 'description', 'display' );
 		if ( $description || is_customize_preview() ) : ?>
-		<p class="site-description"><?php echo wp_kses_post( $description ); ?></p><?php
+		<p class="site-description mb-0"><?php echo wp_kses_post( $description ); ?></p><?php
 		endif;
 	?>
 </div>

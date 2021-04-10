@@ -36,7 +36,10 @@
 		"reusable": false,
 		"withBackground": true,
 		"lightBlockWrapper": true,
-		"padding": true,
+		"spacing": {
+			"padding": true,
+			"margin": true
+		},
 		"color": {
 			"gradients": true
 		}

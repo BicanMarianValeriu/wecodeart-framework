@@ -139,9 +139,11 @@ class Entry {
 		}
 		
 		if ( $link && ! is_singular() ) {
+			$class = get_theme_mod( 'general-colors-palette' )['activePalette'] === 'dark' ? 'text-light' : 'text-dark';
 			$title = sprintf(
-				'<a href="%s" class="text-dark" rel="bookmark">%s</a>', 
-				esc_url( get_permalink() ), 
+				'<a href="%s" class="%s" rel="bookmark">%s</a>', 
+				esc_url( get_permalink() ),
+				esc_attr( $class ),
 				esc_html( $title )
 			);
 		}
@@ -182,10 +184,16 @@ class Entry {
 	 * @return	void
 	 */
 	public function render_content() {
+		$pallete = get_theme_mod( 'general-colors-palette' )['activePalette'] ?: 'base';
+
+		$classes = [];
+		$classes[] = is_singular() ? 'entry-content' : 'entry-excerpt';
+		$classes[] = $pallete === 'dark' ? 'text-light' : 'text-muted';
+
 		Markup::wrap( 'entry-content', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => is_singular() ? 'entry-content' : 'entry-excerpt text-muted'
+				'class' => implode( ' ', $classes )
 			]
 		] ], is_singular() ? 'the_content' : 'the_excerpt' );
 	}
@@ -194,7 +202,7 @@ class Entry {
 	 * Entry Meta Read More Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.6
+	 * @version	4.2.0
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo

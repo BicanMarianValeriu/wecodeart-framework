@@ -68,7 +68,7 @@ class Content {
 
 			?>
 			<main <?php echo Markup::generate_attr( 'main', [
-				'id' => 'main',
+				'id' 	=> 'main',
 				'class' => 'site-main'
 			] ); ?>>
 		<?php
@@ -122,19 +122,16 @@ class Content {
 				'class'	=> 'content__sidebar col-12 col-lg-4',
 			]
 		] ], function() use ( $index ) {
-			$class = $index . '-sidebar';
-
 			do_action( "wecodeart/hook/sidebar/{$index}/before" );
 
 			Markup::wrap( $index . '-sidebar', [ [
 				'tag' 	=> 'aside',
 				'attrs' => [ 
-					'class'		=> $index . '-sidebar',
+					'class'	=> 'sidebar sidebar--' . $index . ' h-100',
 				]
 			] ], 'dynamic_sidebar', [ $index ] );
 			
 			do_action( "wecodeart/hook/sidebar/{$index}/after" );
-
 		} );  
 	}
 

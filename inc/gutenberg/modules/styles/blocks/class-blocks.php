@@ -56,6 +56,9 @@ class Blocks extends Processor {
 
 		// Process CSS
 		$this->process_attributes();
+		if( method_exists( $this, 'process_extra' ) ) {
+			$this->process_extra();
+		}
 		$this->parse_output();
 		$this->parse_custom();
 	}
@@ -159,6 +162,29 @@ class Blocks extends Processor {
 						'property' 	=> 'background-image',
 						'value'	  	=> $value
 					], $output );
+				}
+			}
+			// Spacing
+			if( $spacing = get_prop( $css_style, 'spacing', false ) ) {
+				if ( $padding = get_prop( $spacing, 'padding', [] ) ) {
+					if( ! empty( $padding ) ) {
+						foreach( $padding as $dir => $val ) {
+							$this->output[] = wp_parse_args( [
+								'property' 	=> 'padding-' . $dir,
+								'value'	  	=> $val
+							], $output );
+						}
+					}
+				}
+				if ( $margin = get_prop( $spacing, 'margin', [] ) ) {
+					if( ! empty( $margin ) ) {
+						foreach( $margin as $dir => $val ) {
+							$this->output[] = wp_parse_args( [
+								'property' 	=> 'margin-' . $dir,
+								'value'	  	=> $val
+							], $output );
+						}
+					}
 				}
 			}
 		}
