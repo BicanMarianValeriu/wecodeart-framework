@@ -53,7 +53,7 @@ class Floating extends Basic {
             [
                 'tag' => 'div',
                 'attrs' => [
-                    'class'     => 'form-floating',
+                    'class' => 'form-floating',
                 ]
             ]
         ], 'wecodeart_input', [ $this->type, wp_parse_args( [

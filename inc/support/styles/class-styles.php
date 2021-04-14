@@ -417,6 +417,52 @@ final class Styles implements Integration {
 	}
 
 	/**
+	 * RGB to HSL
+	 *
+	 * @since   4.2.0
+	 * @param  	string $RGB	CSS Color.
+	 *
+	 * @return 	array
+	 */
+	public static function rgb_hsl( $RGB ) {
+		$r = 0xFF & ( $RGB >> 0x10 );
+		$g = 0xFF & ( $RGB >> 0x8 );
+		$b = 0xFF & $RGB;
+
+		$r = ( (float) $r ) / 255.0;
+		$g = ( (float) $g ) / 255.0;
+		$b = ( (float) $b ) / 255.0;
+
+		$maxC = max( $r, $g, $b );
+		$minC = min( $r, $g, $b );
+
+		$l = ( $maxC + $minC ) / 2.0;
+
+		if( $maxC == $minC ) {
+			$s = 0;
+			$h = 0;
+		} else {
+			if( $l < .5 ) {
+				$s = ( $maxC - $minC ) / ( $maxC + $minC );
+			} else {
+				$s = ( $maxC - $minC ) / ( 2.0 - $maxC - $minC );
+			}
+
+			if( $r == $maxC ) $h = ( $g - $b ) / ( $maxC - $minC );
+			if( $g == $maxC ) $h = 2.0 + ( $b - $r ) / ( $maxC - $minC );
+			if( $b == $maxC ) $h = 4.0 + ( $r - $g ) / ( $maxC - $minC );
+
+			$h = $h / 6.0; 
+		}
+
+		$h = (int) round( 255.0 * $h );
+		$s = (int) round( 255.0 * $s );
+		$l = (int) round( 255.0 * $l );
+
+		return (object) Array( 'hue' => $h, 'saturation' => $s, 'lightness' => $l );
+	}
+
+	/**
 	 * Adjust Color Brightness
 	 *
 	 * @since   4.2.0

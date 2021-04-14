@@ -26,10 +26,14 @@ export default function hasScrollbar(el) {
 	return (contentOverflows && overflowShown) || (alwaysShowScroll);
 };
 
+const handleDocumentScrolled = () => {
+	const html = document.documentElement;
+	html.classList[window.scrollY > 1 ? 'add' : 'remove']('has-scrolled');
+};
+
 const handleDocumentScrollbar = () => {
 	const html = document.documentElement;
-	if (hasScrollbar()) html.classList.add('has-scrollbar');
-	else html.classList.remove('has-scrollbar');
+	html.classList[hasScrollbar() ? 'add' : 'remove']('has-scrollbar');
 };
 
 const handleBodyJSClass = () => {
@@ -38,4 +42,4 @@ const handleBodyJSClass = () => {
 	html.classList.add('js');
 };
 
-export { handleBodyJSClass, handleDocumentScrollbar }; 
+export { handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled };

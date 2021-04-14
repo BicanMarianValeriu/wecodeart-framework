@@ -93,8 +93,10 @@ return [
     */
     'customizer' => [
         // Header
+        'header-bar-position'       => '',
+        'header-bar-toggle'         => 'collapse',
         'header-bar-container'      => 'container',
-        'header-bar-modules'        => [ 'branding', 'menu', 'search' ],
+        'header-bar-modules'        => [ 'branding', 'collapse' ],
         'header-design-bg'          => '',
         'header-design-color'       => '',
         'header-design-links'       => '',

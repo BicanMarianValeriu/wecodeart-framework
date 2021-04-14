@@ -79,7 +79,7 @@ class Footer {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	1.0
-	 * @version 4.0.3
+	 * @version 4.2.0
 	 *
 	 * @return 	void
 	 */
@@ -87,7 +87,7 @@ class Footer {
 
 		Markup::wrap( 'footer-attribution', [ 
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'footer__attribution attribution' ] ], 
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'container-fluid' ] ], 
+			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'footer-layout-container' ) ] ], 
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row py-3' ] ], 
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col text-center' ] ] 
 		], function() {

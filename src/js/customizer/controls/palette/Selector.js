@@ -8,7 +8,7 @@ const {
 } = wp;
 
 const PaletteSelector = ({ values, save }) => {
-    const { palettes, activePalette } = values;
+    const { palettes, active = 'base' } = values;
 
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [willDelete, setWillDelete] = useState('');
@@ -22,8 +22,8 @@ const PaletteSelector = ({ values, save }) => {
 
     const deletePalette = () => {
         const nextValues = { ...values };
-        if (activePalette === willDelete) {
-            nextValues.activePalette = 'base';
+        if (active === willDelete) {
+            nextValues.active = 'base';
         }
         delete nextValues.palettes[willDelete];
         setIsOpenModal(false);
@@ -33,7 +33,7 @@ const PaletteSelector = ({ values, save }) => {
 
     const setActivePalette = (id) => {
         const nextValues = { ...values };
-        nextValues.activePalette = id;
+        nextValues.active = id;
         save(nextValues);
     };
 
@@ -102,7 +102,7 @@ const PaletteSelector = ({ values, save }) => {
                         )}
                         <button
                             className={classnames(['wecodeart-palette-options__button', {
-                                active: activePalette === id,
+                                active: active === id,
                             }])}
                             onClick={(e) => {
                                 e.preventDefault();

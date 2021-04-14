@@ -449,18 +449,18 @@ class Comments {
 	 *
 	 * @since	4.2.0
 	 *
-	 * @param 	string $class
-	 *
-	 * @return 	string
+	 * @return 	void
 	 */
 	public function validate_cookies() {
 		if( $privacy_policy = get_option( 'wp_page_for_privacy_policy' ) ) {
-			$page_url 	= get_privacy_policy_url();
-			$page_title = get_the_title( $privacy_policy );
-			$page_link  = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $page_url ), esc_html( $page_title ) );
-
-			if( ! filter_input( INPUT_POST, 'comment-cookies' ) ) {
-				wp_die( sprintf( esc_html__( 'You must accept %s to comment!', 'wecodeart' ), $page_link ) );
+			if( is_user_logged_in() === false ) {
+				$page_url 	= get_privacy_policy_url();
+				$page_title = get_the_title( $privacy_policy );
+				$page_link  = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $page_url ), esc_html( $page_title ) );
+	
+				if( ! filter_input( INPUT_POST, 'comment-cookies' ) ) {
+					wp_die( sprintf( esc_html__( 'You must accept %s to comment!', 'wecodeart' ), $page_link ) );
+				}
 			}
 		}
 	}

@@ -34,7 +34,7 @@ const PaletteForm = ({ values, save, disabled }) => {
 			allowDeletion: true,
 			colors: { ...nextValue.palettes[paletteFrom].colors },
 		};
-		nextValue.activePalette = paletteSlug;
+		nextValue.active = paletteSlug;
 		save(nextValue);
 		toggleAdding();
 	};

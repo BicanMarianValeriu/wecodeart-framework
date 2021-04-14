@@ -166,7 +166,7 @@ final class Formatting {
 		}
 
 		$default = get_color_palette();
-		if ( ! isset( $value['activePalette'] ) || ! isset( $value['palettes'] ) ) {
+		if ( ! isset( $value['active'] ) || ! isset( $value['palettes'] ) ) {
 			return $default;
 		}
 

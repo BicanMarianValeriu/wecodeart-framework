@@ -72,7 +72,7 @@ class Archive {
 	 * @return 	string
 	 */
 	public function filter_cat_title() {
-		$output = sprintf( '<span class="archive-intro__svg d-inline-block align-middle h2">%s</span>', SVG::compile( 'folder' , [
+		$output = sprintf( '<span class="archive-intro__svg d-inline-block align-middle">%s</span>', SVG::compile( 'folder' , [
 			'class' => 'd-block me-3 fa-5x'
 		] ) );
 

@@ -17,7 +17,6 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Markup\SVG;
 
 /**
- * @param   array   $i18n   Contains the translatable strings
  * @param   int     $number Contains the comments number
  */
 $classnames = [ 'entry-comments' ];
@@ -42,11 +41,11 @@ if( post_password_required() ) {
     ?></span><?php
     
         comments_popup_link( 
-            $i18n['zero'], 
-            $i18n['one'], 
-            $i18n['more'], 
+            esc_html__( 'Leave a Comment',  'wecodeart' ), 
+            esc_html__( '1 Comment',        'wecodeart' ), 
+            esc_html__( '% Comments',       'wecodeart' ), 
             'entry-comments__link me-2', 
-            $i18n['closed'] 
+            esc_html__( 'Comments are Closed', 	'wecodeart' )
         );
 
 ?></span>

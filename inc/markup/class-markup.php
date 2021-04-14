@@ -16,12 +16,14 @@ namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit();
 
+use \WeCodeArt\Singleton; 
+
 /**
  * Markup Utilities Parent Class
  */
 class Markup {
 
-	use \WeCodeArt\Singleton; 
+	use Singleton; 
 
 	/**
 	 * Merge array of attributes with defaults, and apply contextual filter on array.

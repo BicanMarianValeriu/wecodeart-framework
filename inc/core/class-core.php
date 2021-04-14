@@ -82,14 +82,15 @@ class Core {
 			$classes = array_diff( $classes, [ 'has-sidebar' ] );
 			$classes[] = 'has-no-sidebar';
 			$classes[] = 'has-full-width';
-		} 
+		}
+
+		if( get_theme_mod( 'header-bar-position' ) === 'fixed-top' ) {
+			$classes[] = 'has-fixed-header';
+		}
 
 		// Theme
-		$theme = wecodeart( 'name' );
-		$classes[] = 'theme-' . $theme;
-
-		$palette = get_theme_mod( 'general-colors-palette' ) ? get_theme_mod( 'general-colors-palette' )['activePalette']: 'base';
-		$classes[] = 'theme-is-' . strtolower( $palette );
+		$classes[] = 'theme-' . wecodeart( 'name' );
+		$classes[] = 'theme-is-' . strtolower( get_theme_mod( 'general-design-palette' )['active'] );
 
 		// Return Classes.
 		$classes = array_map( 'sanitize_html_class', $classes );

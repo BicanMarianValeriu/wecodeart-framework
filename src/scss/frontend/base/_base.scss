@@ -150,9 +150,30 @@ a {
 .has-sidebar {
     .content__sidebar + .content__main,
     .content__main + .content__sidebar {
-        @include media-breakpoint-up( 'md' ) {
+        @include media-breakpoint-up( 'lg' ) {
             border-left: 1px solid rgba(0,0,0,.1);
         }
+    }
+}
+
+.navbar {
+    .has-scrolled & {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .site-title,
+    .site-description {
+        .wp-custom-logo & {
+            display: none;
+        }
+    }
+
+    .site-title {
+        font-size: .9rem;
+    }
+    
+    .site-description {
+        font-size: .8rem;
     }
 }
 

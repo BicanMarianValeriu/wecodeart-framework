@@ -3,10 +3,6 @@
 		margin-top: 0;
 		margin-bottom: 0;
     }
-
-    &.alignfull {
-      	padding: 0;
-    }
     
     &__inner-container {
 		@include make-container();
@@ -17,4 +13,11 @@
 			max-width: initial;
 		}
     }
+}
+
+.wca-section {
+	&__container {
+		position: relative;
+		z-index: 1;
+	}
 }

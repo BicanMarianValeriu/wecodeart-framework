@@ -230,8 +230,8 @@ const wecodeartPostMessage = {
 
 					break;
 				case 'wecodeart-palette':
-					const { activePalette, palettes } = value;
-					const { colors } = palettes[activePalette];
+					const { active = 'base', palettes } = value;
+					const { colors } = palettes[active];
 					processedValue = processValue(output, colors[output.key]);
 					if (false !== processedValue) {
 						styles += output.element + '{' + output.property + ':' + processedValue + ';}';

@@ -30,9 +30,9 @@ function get_color_palette() {
 	$_5	= current( wp_list_filter( $palette, [ 'slug' => 'white' ] ) );
 
 	return [
-		'activePalette' => 'base',
-		'palettes'      => [
-			'base'      => [
+		'active'    => 'base',
+		'palettes'  => [
+			'base'  => [
 				'name'          => __( 'Base', 'wecodeart' ),
 				'allowDeletion' => false,
 				'colors'        => [

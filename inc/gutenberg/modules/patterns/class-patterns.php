@@ -99,17 +99,23 @@ class Patterns implements Integration {
 	 */
 	public function register_taxonomy() {
 		register_taxonomy( self::TYPE_TAXONOMY, [ self::POST_TYPE  ], [
-			'label'        => __( 'Pattern Type', 'wecodeart' ),
-			'hierarchical' => true,
-			'rewrite'      => false,
-			'show_in_rest' => true,
+			'label'        	=> __( 'Pattern Type', 'wecodeart' ),
+			'hierarchical' 	=> true,
+			'rewrite'      	=> false,
+			'show_ui'		=> true,
+			'show_in_rest' 	=> true,
+			'show_admin_column'	=> true,
+			'show_in_nav_menus'	=> true,
 		] );
 
 		register_taxonomy( self::CATEGORY_TAXONOMY, [ self::POST_TYPE ], [
-			'label'        => __( 'Pattern Category', 'wecodeart' ),
-			'hierarchical' => true,
-			'rewrite'      => false,
-			'show_in_rest' => true,
+			'label'        	=> __( 'Pattern Category', 'wecodeart' ),
+			'hierarchical' 	=> true,
+			'rewrite'      	=> false,
+			'show_ui'		=> true,
+			'show_in_rest' 	=> true,
+			'show_admin_column'	=> true,
+			'show_in_nav_menus'	=> true,
 		] );
 
 		if( ! term_exists( 'pattern', self::TYPE_TAXONOMY ) ) {

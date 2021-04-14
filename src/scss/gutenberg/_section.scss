@@ -3,6 +3,11 @@
     margin-bottom: 0;
     
     .wca-section {
+        &__container {
+            position: relative;
+            z-index: 1;
+        }
+        
         &__row {
             .wp-block {
                 &.wp-block-wca-column {

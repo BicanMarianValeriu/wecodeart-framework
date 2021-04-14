@@ -21,6 +21,7 @@ use WeCodeArt\Core\Pagination;
 use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Handles WP CPT outputs
@@ -122,7 +123,7 @@ class Entry {
 	 * Retrieve entry title with link
 	 *
 	 * @since 	3.6.4
-	 * @version	3.9.5
+	 * @version	4.2.0
 	 *
 	 * @param	bool	$link
 	 * @param 	bool 	$echo 
@@ -139,7 +140,7 @@ class Entry {
 		}
 		
 		if ( $link && ! is_singular() ) {
-			$class = get_theme_mod( 'general-colors-palette' )['activePalette'] === 'dark' ? 'text-light' : 'text-dark';
+			$class = get_theme_mod( 'general-design-palette' )['active'] === 'dark' ? 'text-light' : 'text-dark';
 			$title = sprintf(
 				'<a href="%s" class="%s" rel="bookmark">%s</a>', 
 				esc_url( get_permalink() ),
@@ -184,7 +185,7 @@ class Entry {
 	 * @return	void
 	 */
 	public function render_content() {
-		$pallete = get_theme_mod( 'general-colors-palette' )['activePalette'] ?: 'base';
+		$pallete = get_prop( get_theme_mod( 'general-design-palette' ), 'active', 'base' );
 
 		$classes = [];
 		$classes[] = is_singular() ? 'entry-content' : 'entry-excerpt';
@@ -231,9 +232,9 @@ class Entry {
 	 */
 	public function render_no_posts() {
 		Markup::wrap( 'entry-noposts', [ [
-			'tag' 	=> 'div',
+			'tag' 	=> 'p',
 			'attrs' => [
-				'class' => 'noposts-message w-100'
+				'class' => 'alert alert-light border border-light my-3'
 			]
 		] ], esc_html( apply_filters( 
 			'wecodeart/filter/entry/noposts_message', 

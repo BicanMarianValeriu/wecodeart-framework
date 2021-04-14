@@ -35,7 +35,8 @@ class Header {
 		add_action( 'wp_head',	[ $this, 'meta_viewport' 	], 0 );
 		add_action( 'wp_head',	[ $this, 'meta_profile' 	], 0 );
 		add_action( 'wp_head',	[ $this, 'meta_pingback'	], 0 );
-		add_action( 'wecodeart/header/markup',	[ $this, 'markup'	] );
+		add_action( 'wecodeart/header/markup',		[ $this, 'markup'	] );
+		add_action( 'wecodeart/hook/header/before',	[ __CLASS__, 'display_offcanvas' ] );
 
 		// remove_action( 'wp_head', 'wp_generator' );
 		// remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10 );
@@ -54,11 +55,16 @@ class Header {
 	 * @return 	void 
 	 */
 	public function markup() {
+		$classes = [ 'header' ];
+		if( $position = get_theme_mod( 'header-bar-position' ) ) {
+			$classes[] = $position;
+		}
+
 		Markup::wrap( 'header', [ [
 			'tag' 	=> 'header',
 			'attrs' => [
 				'id' 		=> 'header',
-				'class'		=> 'header',
+				'class'		=> implode( ' ', array_filter( $classes ) ),
 			]
 		] ], function() {
 			/** 
@@ -69,7 +75,7 @@ class Header {
 			/**
 			 * Render Header Bar
 			 */
-			self::render_header_bar();
+			self::render_navbar();
 
 			/** 
 			 * @hook	'wecodeart/hook/header/bottom'
@@ -83,27 +89,20 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	???
-	 * @version	4.0.6
+	 * @version	4.2.0
 	 *
 	 * @return 	void
 	 */
 	public static function display_branding() {
-		Markup::wrap( 'header-branding', [ [
-			'tag' 	=> 'div',
-			'attrs' => [
-				'id' 	=> 'bar-branding',
-				'class' => 'header-bar__branding col col-lg-auto'
-			] 
-		], [
-			'tag' 	=> 'div',
-			'attrs' => [
-				'class' => 'row no-gutters align-items-center'
-			]
-		] ], 'WeCodeArt\Markup::template', [ 'header/bar-branding' ] );
+		$toggle = get_theme_mod( 'header-bar-toggle' );
+
+		Markup::template( 'header/branding', [
+			'toggle' => $toggle
+		] );
 	}
 
 	/**
-	 * Header Menu View
+	 * Header Collapsible
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
@@ -111,60 +110,56 @@ class Header {
 	 *
 	 * @return 	void 
 	 */
-	public static function display_menu() { 
-		Markup::wrap( 'header-menu', [ [
+	public static function display_collapse() { 
+		Markup::wrap( 'header-collapse', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'id' 	=> 'bar-menu',
-				'class' => 'header-bar__menu col-12 col-lg d-lg-block'
+				'id' 	=> 'navbar-collapse',
+				'class' => 'collapse navbar-collapse'
 			]
-		] ], 'wp_nav_menu', [ apply_filters( 'wecodeart/filter/menu/main', [
-			'theme_location' => 'primary',
-			'menu_class' 	 => 'menu nav justify-content-end',
-			'depth' 		 => 10,
-		] ) ] );
+		] ], 'WeCodeArt\Markup::template', [ 'header/collapse' ] );
 	}
 
 	/**
-	 * Header Search View
+	 * Header Offcanvas
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
-	 * @since 	unknown
+	 * @since 	4.2.0
 	 * @version	4.2.0
-	 * 
+	 *
 	 * @return 	void
 	 */
-	public static function display_search() { 
-		Markup::wrap( 'header-search', [ [
+	public static function display_offcanvas() {
+		if( get_theme_mod( 'header-bar-toggle' ) === 'collapse' ) return;
+		
+		Markup::wrap( 'offcanvas', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'id' 	=> 'bar-search',
-				'class' => 'header-bar__search col-12 col-lg-4 ml-auto d-lg-block'
+				'class' => 'offcanvas offcanvas-start',
+				'id' 	=> 'navbar-offcanvas',
+				'data-bs-backdrop'	=> 'true',
+				'data-bs-scroll'	=> 'true'
 			]
-		] ], 'get_search_form' ); 
+		] ], 'WeCodeArt\Markup::template', [ 'header/offcanvas' ] );  
 	}
 
 	/**
 	 * Variable that holds the Header Modules and Options
 	 *
 	 * @since	1.5
-	 * @version	3.9.9
+	 * @version	4.2.0
 	 *
 	 * @return 	array
 	 */
-	public static function nav_bar_modules() {
+	public static function navbar_modules() {
 		$defaults = [
 			'branding' => [
 				'label'    => esc_html__( 'Site Branding', 'wecodeart' ),
 				'callback' => [ __CLASS__, 'display_branding' ]
 			],
-			'menu' => [
-				'label'    => esc_html__( 'Primary Menu', 'wecodeart' ),
-				'callback' => [ __CLASS__, 'display_menu' ]
-			],
-			'search' => [
-				'label'    => esc_html__( 'Search Form', 'wecodeart' ),
-				'callback' => [ __CLASS__, 'display_search' ]
+			'collapse' => [
+				'label'    => esc_html__( 'Collapse', 'wecodeart' ),
+				'callback' => [ __CLASS__, 'display_collapse' ]
 			],
 		];
 
@@ -181,13 +176,12 @@ class Header {
 	 *
 	 * @return 	void
 	 */
-	public static function render_header_bar() {
-		Markup::wrap( 'header-bar', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'header__bar header-bar py-2', 'id' => 'header-bar' ] ],
+	public static function render_navbar() {
+		Markup::wrap( 'navbar', [
+			[ 'tag' => 'div', 'attrs' => [ 'class' => 'navbar navbar-expand-lg navbar-light', 'id' => 'navbar' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'header-bar-container' ) ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row align-items-center' ] ]
 		], 'WeCodeArt\Markup::sortable', [
-			self::nav_bar_modules(),
+			self::navbar_modules(),
 			get_theme_mod( 'header-bar-modules' )
 		] );  
 	}

@@ -12,21 +12,21 @@ const {
 } = wp;
 
 const PaletteColors = ({ values, defaults, save }) => {
-	const { palettes, activePalette } = values;
-	const palette = palettes[activePalette];
+	const { palettes, active = 'base' } = values;
+	const palette = palettes[active];
 	const { colors, allowDeletion } = palette;
 
-	const defaultColors = defaults.palettes[activePalette] ? { ...defaults.palettes[activePalette].colors, } : {};
+	const defaultColors = defaults.palettes[active] ? { ...defaults.palettes[active].colors, } : {};
 
 	const updateColorInPalette = (colorSlug, val) => {
 		const nextValues = { ...values };
-		nextValues.palettes[activePalette].colors[colorSlug] = val;
+		nextValues.palettes[active].colors[colorSlug] = val;
 		save(nextValues);
 	};
 
 	const resetPalette = () => {
 		const nextValues = { ...values };
-		nextValues.palettes[activePalette].colors = defaultColors;
+		nextValues.palettes[active].colors = defaultColors;
 		save(nextValues);
 	};
 
@@ -45,7 +45,7 @@ const PaletteColors = ({ values, defaults, save }) => {
 										key={slug}
 										label={group[slug]}
 										selectedColor={colors[slug]}
-										defaultValue={defaults.palettes[activePalette] ? defaults.palettes[activePalette].colors[slug] : '#FFFFFF'}
+										defaultValue={defaults.palettes[active] ? defaults.palettes[active].colors[slug] : '#FFFFFF'}
 										onChange={debounce((value) => updateColorInPalette(slug, value), 100)}
 									/>
 								);

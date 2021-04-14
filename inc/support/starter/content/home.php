@@ -5,27 +5,25 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'Home', 'Theme starter content' ),
-	'post_content' => '<!-- wp:wca/section {"className":"wcacss-ef32b8a6 py-5","gradient":"vivid-cyan-blue-to-vivid-purple","hasCustomCSS":true} -->
-	<div class="wp-block-wca-section alignfull wcacss-ef32b8a6 py-5 wca-section has-vivid-cyan-blue-to-vivid-purple-gradient-background has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-79e98a17 my-3 my-md-5 text-center","hasCustomCSS":true} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-79e98a17 my-3 my-md-5 text-center"><!-- wp:heading {"textAlign":"center","level":1,"className":"wcacss-27ff363b display-5 mb-5","textColor":"white","hasCustomCSS":true,"wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<h1 class="has-text-align-center wcacss-27ff363b display-5 mb-5 has-white-color has-text-color">Create and grow<br>your unique website today</h1>
+	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","customGradient":"linear-gradient(1deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)","contentPosition":"center center","align":"full","className":"py-5 text-center wcacss-978c3242","hasCustomCSS":true,"customCSS":".wcacss-978c3242 {\n}\n"} -->
+	<div class="wp-block-cover alignfull has-background-dim has-background-gradient py-5 text-center wcacss-978c3242"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","level":1,"className":"wcacss-62cbde3c mb-5 display-5","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true},"hasCustomCSS":true} -->
+	<h1 class="has-text-align-center wcacss-62cbde3c mb-5 display-5">Create and grow<br>your unique website today</h1>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph {"align":"center","className":"wcacss-e7d42885 lead mb-5","textColor":"white","hasCustomCSS":true} -->
-	<p class="has-text-align-center wcacss-e7d42885 lead mb-5 has-white-color has-text-color">Programmatically work but low hanging fruit so new economy cross-pollination. Quick sync new <br>economy onward and upward.</p>
+	<!-- wp:paragraph {"align":"center","className":"wcacss-611f7cfc lead mb-5","hasCustomCSS":true} -->
+	<p class="has-text-align-center wcacss-611f7cfc lead mb-5">Programmatically work but low hanging fruit so new economy cross-pollination. Quick sync new<br>economy onward and upward.</p>
 	<!-- /wp:paragraph -->
 	
-	<!-- wp:buttons {"align":"center","className":"wcacss-b0686033 is-style-default","hasCustomCSS":true} -->
-	<div class="wp-block-buttons aligncenter wcacss-b0686033 is-style-default"><!-- wp:button {"backgroundColor":"white","textColor":"dark","className":"is-style-fill wcacss-f5d44c10","hasCustomCSS":true} -->
-	<div class="wp-block-button is-style-fill wcacss-f5d44c10"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
+	<!-- wp:buttons {"contentJustification":"center","className":"wcacss-5d300fef is-style-default","wecodeart":{"mobile":true,"tablet":true,"desktop":true,"loggedin":true,"loggedout":true},"hasCustomCSS":true} -->
+	<div class="wp-block-buttons is-content-justification-center wcacss-5d300fef is-style-default"><!-- wp:button {"backgroundColor":"white","textColor":"dark","className":"is-style-primary wcacss-9c62f0ee","hasCustomCSS":true} -->
+	<div class="wp-block-button is-style-primary wcacss-9c62f0ee"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button -->
 	
-	<!-- wp:button {"backgroundColor":"white","textColor":"dark","className":"wcacss-3df744ef is-style-fill","hasCustomCSS":true} -->
-	<div class="wp-block-button wcacss-3df744ef is-style-fill"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">HIRE US</a></div>
+	<!-- wp:button {"backgroundColor":"white","textColor":"dark"} -->
+	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">HIRE US</a></div>
 	<!-- /wp:button --></div>
-	<!-- /wp:buttons --></div>
-	<!-- /wp:wca/column --></div></div></div>
-	<!-- /wp:wca/section -->
+	<!-- /wp:buttons --></div></div>
+	<!-- /wp:cover -->
 	
 	<!-- wp:wca/section {"className":"wcacss-63c3226a py-5","hasCustomCSS":true} -->
 	<div class="wp-block-wca-section alignfull wcacss-63c3226a py-5 wca-section"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->

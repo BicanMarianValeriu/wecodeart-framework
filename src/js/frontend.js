@@ -1,5 +1,6 @@
 // Boostrap
 import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/offcanvas';
 import 'bootstrap/js/dist/dropdown';
 import Tooltip from 'bootstrap/js/dist/tooltip';
 import Popover from 'bootstrap/js/dist/popover';
@@ -13,7 +14,7 @@ import './plugins/wecodeart-JSManager';
 import './plugins/wecodeart-Template';
 import createParams from './helpers/createParams';
 import parseJSONData from './helpers/parseData';
-import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar } from './helpers/HasScrollbar';
+import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled } from './helpers/HasScrollbar';
 
 // Styles
 import './../scss/frontend/frontend.scss';
@@ -47,6 +48,7 @@ function filterLog(route, func, args) {
 				handleBodyJSClass();
 				handleDocumentScrollbar();
 				window.onresize = handleDocumentScrollbar;
+				window.onscroll = handleDocumentScrolled;
 			},
 			complete: () => {
 				const { fn: { getOptions } } = wecodeart;

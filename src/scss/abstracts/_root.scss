@@ -113,12 +113,8 @@
                 left: 0;
                 bottom: 0;
                 right: 0;
-                z-index: 0;
+                z-index: 1;
                 opacity: 0.5;
-            }
-    
-            & > * {
-                position: relative;
             }
     
             // Gradient levels
@@ -154,7 +150,7 @@
 
 	.has-inline-background {
 		@include border-radius();
-		padding: .10rem .2rem;
+		padding: .20rem .8rem;
 		margin: 0 .2rem;
 	}
 

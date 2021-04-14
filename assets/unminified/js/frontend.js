@@ -7876,6 +7876,525 @@ function within(min, value, max) {
 
 /***/ }),
 
+/***/ "./node_modules/bootstrap/js/dist/offcanvas.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/bootstrap/js/dist/offcanvas.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+  * Bootstrap offcanvas.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+(function (global, factory) {
+   true ? module.exports = factory(__webpack_require__(/*! ./dom/selector-engine.js */ "./node_modules/bootstrap/js/dist/dom/selector-engine.js"), __webpack_require__(/*! ./dom/manipulator.js */ "./node_modules/bootstrap/js/dist/dom/manipulator.js"), __webpack_require__(/*! ./dom/data.js */ "./node_modules/bootstrap/js/dist/dom/data.js"), __webpack_require__(/*! ./dom/event-handler.js */ "./node_modules/bootstrap/js/dist/dom/event-handler.js"), __webpack_require__(/*! ./base-component.js */ "./node_modules/bootstrap/js/dist/base-component.js")) :
+  undefined;
+}(this, (function (SelectorEngine, Manipulator, Data, EventHandler, BaseComponent) { 'use strict';
+
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var SelectorEngine__default = /*#__PURE__*/_interopDefaultLegacy(SelectorEngine);
+  var Manipulator__default = /*#__PURE__*/_interopDefaultLegacy(Manipulator);
+  var Data__default = /*#__PURE__*/_interopDefaultLegacy(Data);
+  var EventHandler__default = /*#__PURE__*/_interopDefaultLegacy(EventHandler);
+  var BaseComponent__default = /*#__PURE__*/_interopDefaultLegacy(BaseComponent);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.0.0-beta3): util/index.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+  const MILLISECONDS_MULTIPLIER = 1000;
+
+  const toType = obj => {
+    if (obj === null || obj === undefined) {
+      return `${obj}`;
+    }
+
+    return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
+  };
+
+  const getSelector = element => {
+    let selector = element.getAttribute('data-bs-target');
+
+    if (!selector || selector === '#') {
+      let hrefAttr = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
+      // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
+      // `document.querySelector` will rightfully complain it is invalid.
+      // See https://github.com/twbs/bootstrap/issues/32273
+
+      if (!hrefAttr || !hrefAttr.includes('#') && !hrefAttr.startsWith('.')) {
+        return null;
+      } // Just in case some CMS puts out a full URL with the anchor appended
+
+
+      if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
+        hrefAttr = '#' + hrefAttr.split('#')[1];
+      }
+
+      selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
+    }
+
+    return selector;
+  };
+
+  const getSelectorFromElement = element => {
+    const selector = getSelector(element);
+
+    if (selector) {
+      return document.querySelector(selector) ? selector : null;
+    }
+
+    return null;
+  };
+
+  const getElementFromSelector = element => {
+    const selector = getSelector(element);
+    return selector ? document.querySelector(selector) : null;
+  };
+
+  const getTransitionDurationFromElement = element => {
+    if (!element) {
+      return 0;
+    } // Get transition-duration of the element
+
+
+    let {
+      transitionDuration,
+      transitionDelay
+    } = window.getComputedStyle(element);
+    const floatTransitionDuration = Number.parseFloat(transitionDuration);
+    const floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
+
+    if (!floatTransitionDuration && !floatTransitionDelay) {
+      return 0;
+    } // If multiple durations are defined, take the first
+
+
+    transitionDuration = transitionDuration.split(',')[0];
+    transitionDelay = transitionDelay.split(',')[0];
+    return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
+  };
+
+  const isElement = obj => (obj[0] || obj).nodeType;
+
+  const typeCheckConfig = (componentName, config, configTypes) => {
+    Object.keys(configTypes).forEach(property => {
+      const expectedTypes = configTypes[property];
+      const value = config[property];
+      const valueType = value && isElement(value) ? 'element' : toType(value);
+
+      if (!new RegExp(expectedTypes).test(valueType)) {
+        throw new TypeError(`${componentName.toUpperCase()}: ` + `Option "${property}" provided type "${valueType}" ` + `but expected type "${expectedTypes}".`);
+      }
+    });
+  };
+
+  const isVisible = element => {
+    if (!element) {
+      return false;
+    }
+
+    if (element.style && element.parentNode && element.parentNode.style) {
+      const elementStyle = getComputedStyle(element);
+      const parentNodeStyle = getComputedStyle(element.parentNode);
+      return elementStyle.display !== 'none' && parentNodeStyle.display !== 'none' && elementStyle.visibility !== 'hidden';
+    }
+
+    return false;
+  };
+
+  const isDisabled = element => {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      return true;
+    }
+
+    if (element.classList.contains('disabled')) {
+      return true;
+    }
+
+    if (typeof element.disabled !== 'undefined') {
+      return element.disabled;
+    }
+
+    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+  };
+
+  const getjQuery = () => {
+    const {
+      jQuery
+    } = window;
+
+    if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
+      return jQuery;
+    }
+
+    return null;
+  };
+
+  const onDOMContentLoaded = callback => {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', callback);
+    } else {
+      callback();
+    }
+  };
+
+  const defineJQueryPlugin = (name, plugin) => {
+    onDOMContentLoaded(() => {
+      const $ = getjQuery();
+      /* istanbul ignore if */
+
+      if ($) {
+        const JQUERY_NO_CONFLICT = $.fn[name];
+        $.fn[name] = plugin.jQueryInterface;
+        $.fn[name].Constructor = plugin;
+
+        $.fn[name].noConflict = () => {
+          $.fn[name] = JQUERY_NO_CONFLICT;
+          return plugin.jQueryInterface;
+        };
+      }
+    });
+  };
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.0.0-beta3): util/scrollBar.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+  const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed';
+  const SELECTOR_STICKY_CONTENT = '.sticky-top';
+
+  const getWidth = () => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
+    const documentWidth = document.documentElement.clientWidth;
+    return Math.abs(window.innerWidth - documentWidth);
+  };
+
+  const hide = (width = getWidth()) => {
+    document.body.style.overflow = 'hidden';
+
+    _setElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight', calculatedValue => calculatedValue + width);
+
+    _setElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight', calculatedValue => calculatedValue - width);
+
+    _setElementAttributes('body', 'paddingRight', calculatedValue => calculatedValue + width);
+  };
+
+  const _setElementAttributes = (selector, styleProp, callback) => {
+    const scrollbarWidth = getWidth();
+    SelectorEngine__default['default'].find(selector).forEach(element => {
+      if (element !== document.body && window.innerWidth > element.clientWidth + scrollbarWidth) {
+        return;
+      }
+
+      const actualValue = element.style[styleProp];
+      const calculatedValue = window.getComputedStyle(element)[styleProp];
+      Manipulator__default['default'].setDataAttribute(element, styleProp, actualValue);
+      element.style[styleProp] = callback(Number.parseFloat(calculatedValue)) + 'px';
+    });
+  };
+
+  const reset = () => {
+    document.body.style.overflow = 'auto';
+
+    _resetElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight');
+
+    _resetElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight');
+
+    _resetElementAttributes('body', 'paddingRight');
+  };
+
+  const _resetElementAttributes = (selector, styleProp) => {
+    SelectorEngine__default['default'].find(selector).forEach(element => {
+      const value = Manipulator__default['default'].getDataAttribute(element, styleProp);
+
+      if (typeof value === 'undefined' && element === document.body) {
+        element.style.removeProperty(styleProp);
+      } else {
+        Manipulator__default['default'].removeDataAttribute(element, styleProp);
+        element.style[styleProp] = value;
+      }
+    });
+  };
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.0.0-beta3): offcanvas.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  const NAME = 'offcanvas';
+  const DATA_KEY = 'bs.offcanvas';
+  const EVENT_KEY = `.${DATA_KEY}`;
+  const DATA_API_KEY = '.data-api';
+  const EVENT_LOAD_DATA_API = `load${EVENT_KEY}${DATA_API_KEY}`;
+  const ESCAPE_KEY = 'Escape';
+  const Default = {
+    backdrop: true,
+    keyboard: true,
+    scroll: false
+  };
+  const DefaultType = {
+    backdrop: 'boolean',
+    keyboard: 'boolean',
+    scroll: 'boolean'
+  };
+  const CLASS_NAME_BACKDROP_BODY = 'offcanvas-backdrop';
+  const CLASS_NAME_SHOW = 'show';
+  const CLASS_NAME_TOGGLING = 'offcanvas-toggling';
+  const OPEN_SELECTOR = '.offcanvas.show';
+  const ACTIVE_SELECTOR = `${OPEN_SELECTOR}, .${CLASS_NAME_TOGGLING}`;
+  const EVENT_SHOW = `show${EVENT_KEY}`;
+  const EVENT_SHOWN = `shown${EVENT_KEY}`;
+  const EVENT_HIDE = `hide${EVENT_KEY}`;
+  const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
+  const EVENT_FOCUSIN = `focusin${EVENT_KEY}`;
+  const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
+  const EVENT_CLICK_DISMISS = `click.dismiss${EVENT_KEY}`;
+  const SELECTOR_DATA_DISMISS = '[data-bs-dismiss="offcanvas"]';
+  const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="offcanvas"]';
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
+
+  class Offcanvas extends BaseComponent__default['default'] {
+    constructor(element, config) {
+      super(element);
+      this._config = this._getConfig(config);
+      this._isShown = false;
+
+      this._addEventListeners();
+    } // Getters
+
+
+    static get Default() {
+      return Default;
+    }
+
+    static get DATA_KEY() {
+      return DATA_KEY;
+    } // Public
+
+
+    toggle(relatedTarget) {
+      return this._isShown ? this.hide() : this.show(relatedTarget);
+    }
+
+    show(relatedTarget) {
+      if (this._isShown) {
+        return;
+      }
+
+      const showEvent = EventHandler__default['default'].trigger(this._element, EVENT_SHOW, {
+        relatedTarget
+      });
+
+      if (showEvent.defaultPrevented) {
+        return;
+      }
+
+      this._isShown = true;
+      this._element.style.visibility = 'visible';
+
+      if (this._config.backdrop) {
+        document.body.classList.add(CLASS_NAME_BACKDROP_BODY);
+      }
+
+      if (!this._config.scroll) {
+        hide();
+      }
+
+      this._element.classList.add(CLASS_NAME_TOGGLING);
+
+      this._element.removeAttribute('aria-hidden');
+
+      this._element.setAttribute('aria-modal', true);
+
+      this._element.setAttribute('role', 'dialog');
+
+      this._element.classList.add(CLASS_NAME_SHOW);
+
+      const completeCallBack = () => {
+        this._element.classList.remove(CLASS_NAME_TOGGLING);
+
+        EventHandler__default['default'].trigger(this._element, EVENT_SHOWN, {
+          relatedTarget
+        });
+
+        this._enforceFocusOnElement(this._element);
+      };
+
+      setTimeout(completeCallBack, getTransitionDurationFromElement(this._element));
+    }
+
+    hide() {
+      if (!this._isShown) {
+        return;
+      }
+
+      const hideEvent = EventHandler__default['default'].trigger(this._element, EVENT_HIDE);
+
+      if (hideEvent.defaultPrevented) {
+        return;
+      }
+
+      this._element.classList.add(CLASS_NAME_TOGGLING);
+
+      EventHandler__default['default'].off(document, EVENT_FOCUSIN);
+
+      this._element.blur();
+
+      this._isShown = false;
+
+      this._element.classList.remove(CLASS_NAME_SHOW);
+
+      const completeCallback = () => {
+        this._element.setAttribute('aria-hidden', true);
+
+        this._element.removeAttribute('aria-modal');
+
+        this._element.removeAttribute('role');
+
+        this._element.style.visibility = 'hidden';
+
+        if (this._config.backdrop) {
+          document.body.classList.remove(CLASS_NAME_BACKDROP_BODY);
+        }
+
+        if (!this._config.scroll) {
+          reset();
+        }
+
+        EventHandler__default['default'].trigger(this._element, EVENT_HIDDEN);
+
+        this._element.classList.remove(CLASS_NAME_TOGGLING);
+      };
+
+      setTimeout(completeCallback, getTransitionDurationFromElement(this._element));
+    } // Private
+
+
+    _getConfig(config) {
+      config = { ...Default,
+        ...Manipulator__default['default'].getDataAttributes(this._element),
+        ...(typeof config === 'object' ? config : {})
+      };
+      typeCheckConfig(NAME, config, DefaultType);
+      return config;
+    }
+
+    _enforceFocusOnElement(element) {
+      EventHandler__default['default'].off(document, EVENT_FOCUSIN); // guard against infinite focus loop
+
+      EventHandler__default['default'].on(document, EVENT_FOCUSIN, event => {
+        if (document !== event.target && element !== event.target && !element.contains(event.target)) {
+          element.focus();
+        }
+      });
+      element.focus();
+    }
+
+    _addEventListeners() {
+      EventHandler__default['default'].on(this._element, EVENT_CLICK_DISMISS, SELECTOR_DATA_DISMISS, () => this.hide());
+      EventHandler__default['default'].on(document, 'keydown', event => {
+        if (this._config.keyboard && event.key === ESCAPE_KEY) {
+          this.hide();
+        }
+      });
+      EventHandler__default['default'].on(document, EVENT_CLICK_DATA_API, event => {
+        const target = SelectorEngine__default['default'].findOne(getSelectorFromElement(event.target));
+
+        if (!this._element.contains(event.target) && target !== this._element) {
+          this.hide();
+        }
+      });
+    } // Static
+
+
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Data__default['default'].get(this, DATA_KEY) || new Offcanvas(this, typeof config === 'object' ? config : {});
+
+        if (typeof config !== 'string') {
+          return;
+        }
+
+        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+
+        data[config](this);
+      });
+    }
+
+  }
+  /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */
+
+
+  EventHandler__default['default'].on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
+    const target = getElementFromSelector(this);
+
+    if (['A', 'AREA'].includes(this.tagName)) {
+      event.preventDefault();
+    }
+
+    if (isDisabled(this)) {
+      return;
+    }
+
+    EventHandler__default['default'].one(target, EVENT_HIDDEN, () => {
+      // focus on trigger when it is closed
+      if (isVisible(this)) {
+        this.focus();
+      }
+    }); // avoid conflict when clicking a toggler of an offcanvas, while another is open
+
+    const allReadyOpen = SelectorEngine__default['default'].findOne(ACTIVE_SELECTOR);
+
+    if (allReadyOpen && allReadyOpen !== target) {
+      return;
+    }
+
+    const data = Data__default['default'].get(target, DATA_KEY) || new Offcanvas(target);
+    data.toggle(this);
+  });
+  EventHandler__default['default'].on(window, EVENT_LOAD_DATA_API, () => {
+    SelectorEngine__default['default'].find(OPEN_SELECTOR).forEach(el => (Data__default['default'].get(el, DATA_KEY) || new Offcanvas(el)).show());
+  });
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  defineJQueryPlugin(NAME, Offcanvas);
+
+  return Offcanvas;
+
+})));
+//# sourceMappingURL=offcanvas.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/js/dist/popover.js":
 /*!***************************************************!*\
   !*** ./node_modules/bootstrap/js/dist/popover.js ***!
@@ -9679,23 +10198,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap/js/dist/collapse */ "./node_modules/bootstrap/js/dist/collapse.js");
 /* harmony import */ var bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap/js/dist/dropdown */ "./node_modules/bootstrap/js/dist/dropdown.js");
-/* harmony import */ var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var bootstrap_js_dist_tooltip__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap/js/dist/tooltip */ "./node_modules/bootstrap/js/dist/tooltip.js");
-/* harmony import */ var bootstrap_js_dist_tooltip__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_tooltip__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var bootstrap_js_dist_popover__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap/js/dist/popover */ "./node_modules/bootstrap/js/dist/popover.js");
-/* harmony import */ var bootstrap_js_dist_popover__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_popover__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/plugins/wecodeart-Component.js");
-/* harmony import */ var _plugins_wecodeart_JSManager__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./plugins/wecodeart-JSManager */ "./src/js/plugins/wecodeart-JSManager.js");
-/* harmony import */ var _plugins_wecodeart_Template__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./plugins/wecodeart-Template */ "./src/js/plugins/wecodeart-Template.js");
-/* harmony import */ var _helpers_createParams__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./helpers/createParams */ "./src/js/helpers/createParams.js");
-/* harmony import */ var _helpers_parseData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helpers/parseData */ "./src/js/helpers/parseData.js");
-/* harmony import */ var _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./helpers/HasScrollbar */ "./src/js/helpers/HasScrollbar.js");
-/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
-/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var bootstrap_js_dist_offcanvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap/js/dist/offcanvas */ "./node_modules/bootstrap/js/dist/offcanvas.js");
+/* harmony import */ var bootstrap_js_dist_offcanvas__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_offcanvas__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap/js/dist/dropdown */ "./node_modules/bootstrap/js/dist/dropdown.js");
+/* harmony import */ var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var bootstrap_js_dist_tooltip__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap/js/dist/tooltip */ "./node_modules/bootstrap/js/dist/tooltip.js");
+/* harmony import */ var bootstrap_js_dist_tooltip__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_tooltip__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var bootstrap_js_dist_popover__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! bootstrap/js/dist/popover */ "./node_modules/bootstrap/js/dist/popover.js");
+/* harmony import */ var bootstrap_js_dist_popover__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_popover__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/plugins/wecodeart-Component.js");
+/* harmony import */ var _plugins_wecodeart_JSManager__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./plugins/wecodeart-JSManager */ "./src/js/plugins/wecodeart-JSManager.js");
+/* harmony import */ var _plugins_wecodeart_Template__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./plugins/wecodeart-Template */ "./src/js/plugins/wecodeart-Template.js");
+/* harmony import */ var _helpers_createParams__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helpers/createParams */ "./src/js/helpers/createParams.js");
+/* harmony import */ var _helpers_parseData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./helpers/parseData */ "./src/js/helpers/parseData.js");
+/* harmony import */ var _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./helpers/HasScrollbar */ "./src/js/helpers/HasScrollbar.js");
+/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
+/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_13__);
 
 // Boostrap
+
 
 
 
@@ -9732,17 +10254,18 @@ function filterLog(route, func, args) {
    */
   wecodeart.plugins = {};
   wecodeart.fn = {
-    hasScrollbar: _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_11__["default"],
-    createParams: _helpers_createParams__WEBPACK_IMPORTED_MODULE_9__["default"],
-    getOptions: _helpers_parseData__WEBPACK_IMPORTED_MODULE_10__["default"]
+    hasScrollbar: _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_12__["default"],
+    createParams: _helpers_createParams__WEBPACK_IMPORTED_MODULE_10__["default"],
+    getOptions: _helpers_parseData__WEBPACK_IMPORTED_MODULE_11__["default"]
   };
-  wecodeart.FA = _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["library"];
+  wecodeart.FA = _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_6__["library"];
   wecodeart.routes = {
     common: {
       init: function init() {
-        Object(_helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_11__["handleBodyJSClass"])();
-        Object(_helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_11__["handleDocumentScrollbar"])();
-        window.onresize = _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_11__["handleDocumentScrollbar"];
+        Object(_helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_12__["handleBodyJSClass"])();
+        Object(_helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_12__["handleDocumentScrollbar"])();
+        window.onresize = _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_12__["handleDocumentScrollbar"];
+        window.onscroll = _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_12__["handleDocumentScrolled"];
       },
       complete: function complete() {
         var getOptions = wecodeart.fn.getOptions; // We use a slightly different/cleanner approach for tooltips/popovers
@@ -9751,18 +10274,18 @@ function filterLog(route, func, args) {
         var customTooltips = document.querySelectorAll('[data-toggle="tooltip"]');
 
         _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(customTooltips).map(function (el) {
-          return new bootstrap_js_dist_tooltip__WEBPACK_IMPORTED_MODULE_3___default.a(el, getOptions(el.dataset.options));
+          return new bootstrap_js_dist_tooltip__WEBPACK_IMPORTED_MODULE_4___default.a(el, getOptions(el.dataset.options));
         }); // PopOvers
 
 
         var customPopovers = document.querySelectorAll('[data-toggle="popover"]');
 
         _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(customPopovers).map(function (el) {
-          return new bootstrap_js_dist_popover__WEBPACK_IMPORTED_MODULE_4___default.a(el, getOptions(el.dataset.options));
+          return new bootstrap_js_dist_popover__WEBPACK_IMPORTED_MODULE_5___default.a(el, getOptions(el.dataset.options));
         }); // FA Watch
 
 
-        _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["dom"].watch(); // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_6__["dom"].watch(); // Fetch all the forms we want to apply custom Bootstrap validation styles to
 
         var forms = document.querySelectorAll('.needs-validation'); // Loop over them and prevent submission
 
@@ -9787,7 +10310,7 @@ function filterLog(route, func, args) {
 /*!****************************************!*\
   !*** ./src/js/helpers/HasScrollbar.js ***!
   \****************************************/
-/*! exports provided: default, handleBodyJSClass, handleDocumentScrollbar */
+/*! exports provided: default, handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9795,6 +10318,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return hasScrollbar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleBodyJSClass", function() { return handleBodyJSClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleDocumentScrollbar", function() { return handleDocumentScrollbar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleDocumentScrolled", function() { return handleDocumentScrolled; });
 function hasScrollbar(el) {
   // The Modern solution
   if (typeof window.innerWidth === 'number') return window.innerWidth > document.documentElement.clientWidth; // Elem for quirksmode
@@ -9815,9 +10339,14 @@ function hasScrollbar(el) {
 }
 ;
 
+var handleDocumentScrolled = function handleDocumentScrolled() {
+  var html = document.documentElement;
+  html.classList[window.scrollY > 1 ? 'add' : 'remove']('has-scrolled');
+};
+
 var handleDocumentScrollbar = function handleDocumentScrollbar() {
   var html = document.documentElement;
-  if (hasScrollbar()) html.classList.add('has-scrollbar');else html.classList.remove('has-scrollbar');
+  html.classList[hasScrollbar() ? 'add' : 'remove']('has-scrollbar');
 };
 
 var handleBodyJSClass = function handleBodyJSClass() {

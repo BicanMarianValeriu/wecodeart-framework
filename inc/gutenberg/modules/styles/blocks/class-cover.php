@@ -29,9 +29,7 @@ class Cover extends Base {
 	 *
 	 * @return 	null
 	 */
-	protected function process_attributes() {
-		$this->output = [];
-		
+	protected function process_extra() {		
 		$output 			= [];
 		$output['element'] 	= $this->element;
 
@@ -40,7 +38,7 @@ class Cover extends Base {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'min-height',
 				'value'	  	=> $value,
-				'units'		=> get_prop( $this->attrs, 'minHeightUnits', 'px' )
+				'units'		=> get_prop( $this->attrs, 'minHeightUnit', 'px' )
 			], $output );
 		}
 
@@ -48,13 +46,6 @@ class Cover extends Base {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'background-image',
 				'value'	  	=> $value,
-			], $output );
-		}
-
-		if ( $value = get_prop( $this->attrs, 'focalPoint', false ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-position',
-				'value'	  	=> $value
 			], $output );
 		}
 

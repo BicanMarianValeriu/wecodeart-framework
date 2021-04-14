@@ -546,9 +546,10 @@ var wecodeartPostMessage = {
 
         case 'wecodeart-palette':
           var _value = value,
-              activePalette = _value.activePalette,
+              _value$active = _value.active,
+              active = _value$active === void 0 ? 'base' : _value$active,
               palettes = _value.palettes;
-          var colors = palettes[activePalette].colors;
+          var colors = palettes[active].colors;
           processedValue = processValue(output, colors[output.key]);
 
           if (false !== processedValue) {

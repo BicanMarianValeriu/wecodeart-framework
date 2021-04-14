@@ -155,7 +155,7 @@ class Meta {
 	 * Entry Meta Comments Template
 	 *
 	 * @since	1.0
-	 * @version	3.9.6
+	 * @version	4.2.0
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -175,12 +175,6 @@ class Meta {
 
 		Markup::template( 'entry/meta/comments', wp_parse_args( $args, [
 			'number'	=> (int) get_comments_number( get_the_ID() ),
-			'i18n' 		=> [
-				'more'		=> esc_html__( '% Comments', 			'wecodeart' ),
-				'one'		=> esc_html__( '1 Comment', 			'wecodeart' ),
-				'zero'		=> esc_html__( 'Leave a Comment', 		'wecodeart' ),
-				'closed'	=> esc_html__( 'Comments are Closed', 	'wecodeart' )
-			]
 		] ), $echo );
 	}
 

@@ -118,10 +118,6 @@ class Menu extends Walker_Nav_Menu {
 			$classes[] = 'dropdown';
 		}
 
-		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
-			$classes[] = 'active';
-		}
-
 		// Add some additional default classes to the item.
 		$classes[] = 'menu-item-' . $item->ID;
 		$classes[] = 'nav-item';
@@ -170,6 +166,11 @@ class Menu extends Walker_Nav_Menu {
 			} else {
 				$atts['class'] = 'nav-link';
 			}
+		}
+
+		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
+			$atts['class'] .= ' active';
+			$atts['aria-current']	= 'page';
 		}
 
 		// Set title from item to the $atts array - if title is empty then default to item title.
@@ -433,6 +434,7 @@ class Menu extends Walker_Nav_Menu {
 				if ( ! empty( $link_class ) ) { 
 					if ( 'sr-only' !== $link_class ) $atts['class'] .= ' ' . esc_attr( $link_class );  
 					if ( 'disabled' === $link_class ) { 
+						$atts['aria-disabled'] = 'true';
 						$atts['href'] = '#';
 						unset( $atts['target'] ); 
 					} elseif ( in_array( $link_class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-item-text' ] ) ) { 
