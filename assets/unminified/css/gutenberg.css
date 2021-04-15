@@ -6364,81 +6364,6 @@ div:not(.no-gutters) .wp-block-wca-section .wca-section__row > .block-list-appen
   max-width: 100% !important;
 }
 
-.wp-block-wca-google-fonts-popover:not(.is-mobile).is-bottom {
-  z-index: 9999999;
-}
-.wp-block-wca-google-fonts-popover .components-popover__content {
-  overflow-y: hidden;
-}
-.wp-block-wca-google-fonts-popover .components-popover__content .components-menu-group {
-  padding: 7px;
-}
-.wp-block-wca-google-fonts-popover .components-popover__content .components-popover__items {
-  max-height: 300px;
-  overflow-y: auto;
-}
-.wp-block-wca-google-fonts-popover .components-popover__content .components-popover__items button.is-selected {
-  background: #f8f9f9;
-}
-.wp-block-wca-google-fonts-popover .components-popover__content .components-popover__items button i {
-  margin-right: 5px;
-}
-
-.wp-block-wca-google-fonts-control .components-dropdown {
-  display: flex;
-}
-.wp-block-wca-google-fonts-control .wp-block-wca-google-fonts-button {
-  background: transparent;
-  position: relative;
-  width: 100%;
-  height: auto;
-  line-height: 28px;
-  padding: 0 12px 2px;
-  box-shadow: 0 0 0 transparent;
-  transition: box-shadow 0.1s linear;
-  border-radius: 4px;
-  border: 1px solid #8d96a0;
-}
-.wp-block-wca-google-fonts-control .wp-block-wca-google-fonts-button.is-button {
-  background: transparent;
-}
-.wp-block-wca-google-fonts-control .wp-block-wca-google-fonts-button:hover {
-  background: #fafafa;
-  border-color: #999;
-  box-shadow: inset 0 -1px 0 #999;
-  color: #23282d;
-  text-decoration: none;
-}
-.wp-block-wca-google-fonts-control .wp-block-wca-google-fonts-button:focus {
-  border: 1px solid black;
-}
-.wp-block-wca-google-fonts-control .wp-block-wca-google-fonts-button:after {
-  content: "";
-  pointer-events: none;
-  display: block;
-  width: 0;
-  height: 0;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-top: 5px solid currentColor;
-  margin-left: 4px;
-  margin-right: 2px;
-  right: 8px;
-  top: 12px;
-  position: absolute;
-}
-.wp-block-wca-google-fonts-control .wp-block-wca-control-panel-control {
-  padding: 0;
-}
-
-@media (max-width: 782px) {
-  .wp-block-wca-google-fonts-control .wp-block-wca-google-fonts-button {
-    padding: 5px 24px 5px 8px;
-  }
-  .wp-block-wca-google-fonts-control .wp-block-wca-google-fonts-button:after {
-    top: 16px;
-  }
-}
 /*--------------------------------------------------------------
 # Text Colors
 --------------------------------------------------------------*/
@@ -6791,17 +6716,6 @@ body.wca-title-hidden .wca-hidden-title-label {
 
 .wecodeart-tooltips-modal {
   min-width: 40rem;
-}
-
-.components-modal--wecodeart-features-import-export .components-modal__header,
-.components-modal--wecodeart-features-import-export .components-placeholder {
-  margin-bottom: 0;
-}
-.components-modal--wecodeart-features-import-export .components-notice {
-  width: 100%;
-}
-.components-modal--wecodeart-features-import-export div.components-tab-panel__tab-content {
-  padding-bottom: 0;
 }
 
 /*# sourceMappingURL=gutenberg.css.map*/

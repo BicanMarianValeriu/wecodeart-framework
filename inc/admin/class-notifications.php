@@ -17,6 +17,8 @@ namespace WeCodeArt\Admin;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
+use WeCodeArt\Core\Scripts;
 use function WeCodeArt\Core\Scripts\get_asset;
 \WeCodeArt\Core\Scripts::get_instance();
 
@@ -27,8 +29,8 @@ use function WeCodeArt\Core\Scripts\get_asset;
  */
 class Notifications {
 
-	use \WeCodeArt\Singleton;
-	use \WeCodeArt\Core\Scripts\Base;
+	use Singleton;
+	use Scripts\Base;
 
 	/**
 	 * Notices

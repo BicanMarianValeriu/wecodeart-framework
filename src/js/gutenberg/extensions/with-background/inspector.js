@@ -191,7 +191,7 @@ class Inspector extends Component {
 						onChange={(value) => this.onSelectRepeat(value)}
 					/>
 				)}
-				{ backgroundType === 'image' && hasParallax && (
+				{backgroundType === 'image' && hasParallax && (
 					<SelectControl
 						label={__('Position', 'wecodeart')}
 						value={backgroundPosition ? backgroundPosition : 'center center'}

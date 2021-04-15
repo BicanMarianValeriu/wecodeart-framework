@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Page PHP
  * @since 	    3.5
- * @version	    4.0.5
+ * @version	    4.2.0
  */
 
 use WeCodeArt\Markup;
@@ -21,26 +21,12 @@ if( get_post_meta( get_the_ID(), '_wca_builder_template', true ) ) {
     remove_action( 'wecodeart/hook/loop/before',    [ Content::get_instance(), 'content_markup_open'    ] );
     remove_action( 'wecodeart/hook/loop/after',     [ Content::get_instance(), 'content_markup_close'   ] );
     $modules = [
-        'header', // Header
-        function() {
-
-            // Hook Main Before
-            do_action( 'wecodeart/hook/main/before' );
-
-            // Main Content
-            Markup::wrap( 'main', [ [
-                'tag' => 'main',
-                'attrs' => [
-                    'id' 	=> 'main',
-                    'class'	=> 'site-main'
-                ]
-            ] ], [ Loops::get_instance(), 'default' ] );
-
-            // Hook Main After
-            do_action( 'wecodeart/hook/main/after' );
-
-        },
-        'footer' // Footer
+        // Header
+        'header',
+        // Content
+        [ Loops::get_instance(), 'render_content' ],
+        // Footer
+        'footer'
     ];
 }
 

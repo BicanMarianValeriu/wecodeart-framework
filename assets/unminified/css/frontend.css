@@ -8,7 +8,7 @@ Description: A simple WordPress Theme Framework focused on SEO, Speed and code s
 Version: 4.2.0
 Requires PHP: 7.0
 Requires at least: 5.5
-Tested up to: 5.6
+Tested up to: 5.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -11910,6 +11910,7 @@ html body {
   padding-left: calc(var(--wca-gutter-x) / 2);
   margin-top: var(--wca-gutter-y);
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: center;
 }
@@ -11974,6 +11975,231 @@ html body {
 }
 .wp-block-gallery.aligncenter .blocks-gallery-item figure {
   justify-content: center;
+}
+
+.gallery {
+  --wca-gutter-x: 20px;
+  --wca-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--wca-gutter-y) * -1);
+  margin-right: calc(var(--wca-gutter-x) / -2);
+  margin-left: calc(var(--wca-gutter-x) / -2);
+}
+.gallery.gallery-columns-1 .gallery-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wca-gutter-x) / 2);
+  padding-left: calc(var(--wca-gutter-x) / 2);
+  margin-top: var(--wca-gutter-y);
+  flex: 0 0 auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 576px) {
+  .gallery.gallery-columns-1 .gallery-item {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
+.gallery.gallery-columns-2 .gallery-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wca-gutter-x) / 2);
+  padding-left: calc(var(--wca-gutter-x) / 2);
+  margin-top: var(--wca-gutter-y);
+  flex: 0 0 auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 576px) {
+  .gallery.gallery-columns-2 .gallery-item {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+}
+.gallery.gallery-columns-3 .gallery-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wca-gutter-x) / 2);
+  padding-left: calc(var(--wca-gutter-x) / 2);
+  margin-top: var(--wca-gutter-y);
+  flex: 0 0 auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 576px) {
+  .gallery.gallery-columns-3 .gallery-item {
+    flex: 0 0 auto;
+    width: 33.3333333333%;
+  }
+}
+.gallery.gallery-columns-4 .gallery-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wca-gutter-x) / 2);
+  padding-left: calc(var(--wca-gutter-x) / 2);
+  margin-top: var(--wca-gutter-y);
+  flex: 0 0 auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 576px) {
+  .gallery.gallery-columns-4 .gallery-item {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+}
+.gallery.gallery-columns-5 .gallery-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wca-gutter-x) / 2);
+  padding-left: calc(var(--wca-gutter-x) / 2);
+  margin-top: var(--wca-gutter-y);
+  flex: 0 0 auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 576px) {
+  .gallery.gallery-columns-5 .gallery-item {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+}
+.gallery.gallery-columns-6 .gallery-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wca-gutter-x) / 2);
+  padding-left: calc(var(--wca-gutter-x) / 2);
+  margin-top: var(--wca-gutter-y);
+  flex: 0 0 auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 576px) {
+  .gallery.gallery-columns-6 .gallery-item {
+    flex: 0 0 auto;
+    width: 16.6666666667%;
+  }
+}
+.gallery.gallery-columns-7 .gallery-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wca-gutter-x) / 2);
+  padding-left: calc(var(--wca-gutter-x) / 2);
+  margin-top: var(--wca-gutter-y);
+  flex: 0 0 auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 576px) {
+  .gallery.gallery-columns-7 .gallery-item {
+    flex: 0 0 auto;
+    width: 14.2857142857%;
+  }
+}
+.gallery.gallery-columns-8 .gallery-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wca-gutter-x) / 2);
+  padding-left: calc(var(--wca-gutter-x) / 2);
+  margin-top: var(--wca-gutter-y);
+  flex: 0 0 auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 576px) {
+  .gallery.gallery-columns-8 .gallery-item {
+    flex: 0 0 auto;
+    width: 12.5%;
+  }
+}
+.gallery.gallery-columns-9 .gallery-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wca-gutter-x) / 2);
+  padding-left: calc(var(--wca-gutter-x) / 2);
+  margin-top: var(--wca-gutter-y);
+  flex: 0 0 auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 576px) {
+  .gallery.gallery-columns-9 .gallery-item {
+    flex: 0 0 auto;
+    width: 11.1111111111%;
+  }
+}
+.gallery .gallery-icon {
+  height: 100%;
+}
+@supports (position: sticky) {
+  .gallery .gallery-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.gallery img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+@supports (position: sticky) {
+  .gallery img {
+    width: auto;
+  }
+}
+.gallery figcaption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0, rgba(0, 0, 0, 0.15) 70%, transparent);
+}
+.gallery figcaption img {
+  display: inline;
 }
 
 .wp-block-group.has-background {
