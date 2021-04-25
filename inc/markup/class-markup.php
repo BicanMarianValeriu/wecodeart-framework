@@ -9,14 +9,14 @@
  * @subpackage  Markup
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		4.1.53
+ * @version		4.2.0
  */
 
 namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit();
 
-use \WeCodeArt\Singleton; 
+use WeCodeArt\Singleton; 
 
 /**
  * Markup Utilities Parent Class
@@ -225,7 +225,7 @@ class Markup {
 			call_user_func_array( $content, $func_args );
 			$function_html .= ob_get_clean();
 		} else {
-			$function_html .= $content;
+			$function_html .= (string) $content;
 		}
 
 		if( empty( $function_html ) ) return;
@@ -241,14 +241,8 @@ class Markup {
 		}
 
 		$html .= $function_html;
-		
-		/**
-		 * Close the wrappers in reverse order
-		 * @since 3.7.2
-		 */
-		$_args = array_reverse( $args );
 
-		foreach( $_args as $key => $elem ) {
+		foreach( array_reverse( $args ) as $key => $elem ) {
 			$html .= '</' . esc_html( $elem['tag'] ) . '>';
 		}
 

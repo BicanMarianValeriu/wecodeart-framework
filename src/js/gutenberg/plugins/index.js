@@ -3,10 +3,11 @@
  */
 import markdown from './markdown';
 import codeEditor from './code-editor';
-import disableTitle from './disable-title';
 import headingLabel from './heading-label';
 import clearFormating from './clear-formatting';
-import builderTemplate from './builder-template';
+import pageTitle from './page-title';
+import pageTemplate from './page-template';
+import contentModules from './content-modules';
 
 const { registerPlugin } = wp.plugins;
 
@@ -14,10 +15,11 @@ export default function registerWCAPlugins() {
 	[
 		markdown,
 		codeEditor,
-		disableTitle,
 		headingLabel,
 		clearFormating,
-		builderTemplate
+		pageTitle,
+		pageTemplate,
+		contentModules
 	].forEach((block) => {
 		if (!block) return;
 

@@ -135,7 +135,7 @@ class Footer {
 	 * This function generates the columns fot the footer
 	 *
 	 * @since	1.5
-	 * @version	4.1.8
+	 * @version	4.2.0
 	 *
 	 * @return 	array
 	 */
@@ -152,7 +152,7 @@ class Footer {
 		}
 		
 		// Filter the generated array.
-		return apply_filters( 'wecodeart/filter/footer/widgets', (array) $widgets );
+		return (array) apply_filters( 'wecodeart/filter/footer/widgets', $widgets );
 	} 
 
 	/**

@@ -70,6 +70,10 @@ class Core {
 			$classes[] = 'group-blog';
 		}
 		
+		// Theme
+		$classes[] = 'theme-' . wecodeart( 'name' );
+		$classes[] = 'theme-is-' . strtolower( get_prop( get_theme_mod( 'general-design-palette' ), 'active', 'base' ) );
+
 		$modules = get_prop( Content::get_contextual_options(), 'modules', [] );
 	
 		// Add sidebar class
@@ -79,18 +83,19 @@ class Core {
 		
 		// Singular sidebar class if gutenberg wide/full layout/
 		if( wecodeart_if( 'is_full_layout' ) ) { 
-			$classes = array_diff( $classes, [ 'has-sidebar' ] );
-			$classes[] = 'has-no-sidebar';
-			$classes[] = 'has-full-width';
+			$classes[] = 'has-full-align';
+
+			// On pages, we remove sidebar if full align is detected
+			if( is_page() ) {
+				$classes = array_diff( $classes, [ 'has-sidebar' ] );
+				$classes[] = 'has-removed-sidebar';
+			}
 		}
 
+		// Add fixed header class
 		if( get_theme_mod( 'header-bar-position' ) === 'fixed-top' ) {
 			$classes[] = 'has-fixed-header';
 		}
-
-		// Theme
-		$classes[] = 'theme-' . wecodeart( 'name' );
-		$classes[] = 'theme-is-' . strtolower( get_theme_mod( 'general-design-palette' )['active'] );
 
 		// Return Classes.
 		$classes = array_map( 'sanitize_html_class', $classes );

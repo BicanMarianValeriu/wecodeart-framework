@@ -9,6 +9,9 @@
 		"verticalAlignment": {
 			"type": "string"
 		},
+		"horizontalAlignment": {
+			"type": "string"
+		},
 		"bootstrapColumns": {
 			"type": "object",
 			"default": {
@@ -19,14 +22,9 @@
 				"xl": ""
 			}
 		},
-		"backgroundColor": {
-			"type": "string"
-		},
-		"customBackgroundColor": {
-			"type": "string"
-		},
 		"templateLock": {
-			"type": "string"
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"supports": {
@@ -37,8 +35,7 @@
 		"withBackground": true,
 		"lightBlockWrapper": true,
 		"spacing": {
-			"padding": true,
-			"margin": true
+			"padding": true
 		},
 		"color": {
 			"gradients": true

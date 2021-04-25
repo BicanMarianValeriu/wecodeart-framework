@@ -28,6 +28,6 @@ class Condition implements ConditionalInterface {
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return \is_wp_version_compatible( '5.5' );
+		return \is_wp_version_compatible( '5.5' ) && get_prop( wecodeart_config( 'gutenberg', [] ), 'patterns' );
 	}
 }

@@ -74,11 +74,11 @@ final class Google {
 		if ( 'preconnect' === $relation_type ) {
 			if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '>=' ) ) {
 				$urls[] = [
-					'href' 	=> 'https://fonts.gstatic.com',
+					'href' 	=> '//fonts.gstatic.com',
 					'crossorigin',
 				];
 			} else {
-				$urls[] = 'https://fonts.gstatic.com';
+				$urls[] = '//fonts.gstatic.com';
 			}
 		}
 

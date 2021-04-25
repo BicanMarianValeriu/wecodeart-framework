@@ -39,7 +39,7 @@ class Typography extends Config {
 				'control'  		=> 'wecodeart-fonts',
 				'section'		=> 'general-typography',
 				'title' 		=> esc_html__( 'Primary Font', 'wecodeart' ),
-				'description' 	=> esc_html__( 'This font is used on body and will be placed in Boostrap`s sans serif CSS variable.', 'wecodeart' ),
+				'description' 	=> esc_html__( 'This font is used on body and it will be placed in Boostrap`s sans serif CSS variable.', 'wecodeart' ),
 				'priority' 		=> 5,
 				'transport'		=> 'postMessage',
 				'output'		=> [
@@ -55,7 +55,7 @@ class Typography extends Config {
 				'control'  		=> 'wecodeart-fonts',
 				'section'		=> 'general-typography',
 				'title' 		=> esc_html__( 'Headings Font', 'wecodeart' ),
-				'description' 	=> esc_html__( 'This font is used on headings and will be placed in a custom CSS variable.', 'wecodeart' ),
+				'description' 	=> esc_html__( 'This font is used on headings and it will be placed in a custom CSS variable.', 'wecodeart' ),
 				'priority' 		=> 5,
 				'transport'		=> 'postMessage',
 				'output'		=> [

@@ -17,6 +17,7 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 
 /**
  * Handles Paginations
@@ -29,7 +30,7 @@ use WeCodeArt\Markup;
  */
 class Pagination {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor

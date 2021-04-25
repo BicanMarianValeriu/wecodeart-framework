@@ -8,7 +8,7 @@ const {
 	blockEditor: { BlockControls, InspectorControls, __experimentalGetGradientClass }
 } = wp;
 
-const { restrictedBlocks = [] } = wecodeartInfo || {};
+const { restrictedBlocks = [] } = wecodeartGutenberg || {};
 
 export const ALLOWED_BG_MEDIA_TYPES = ['image', 'video'];
 

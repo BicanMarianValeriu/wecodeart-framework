@@ -98,7 +98,7 @@ class Loops {
 		if( is_null( $post_id ) ) {
 			global $post_id;
 		}
-		$blocks = parse_blocks( get_post( $post_id )->post_content );
+		$blocks = parse_blocks( get_post( (int) $post_id )->post_content );
 		// Checking if empty is redundant anyway / echo without sanitize since is using WP function
 		foreach( $blocks as $block ) echo render_block( $block ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}

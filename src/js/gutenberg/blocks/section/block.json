@@ -9,6 +9,9 @@
 		"verticalAlignment": {
 			"type": "string"
 		},
+		"horizontalAlignment": {
+			"type": "string"
+		},
 		"container": {
 			"type": "string",
 			"default": "container"
@@ -16,12 +19,6 @@
 		"gutter": {
 			"type": "number",
 			"default": 4
-		},
-		"backgroundColor": {
-			"type": "string"
-		},
-		"customBackgroundColor": {
-			"type": "string"
 		}
 	},
 	"supports": {

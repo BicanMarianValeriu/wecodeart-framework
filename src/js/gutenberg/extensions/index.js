@@ -1,7 +1,6 @@
 /**
  * Internal dependencies
  */
-// import './with-visibility';
+// import './with-styles'; // Loaded as a module
+// import './with-classes'; // Loaded as a module
 import './with-background';
-import './with-classes';
-import './with-styles';

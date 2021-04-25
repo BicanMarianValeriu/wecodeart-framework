@@ -21,13 +21,10 @@
 
 	&__content,
 	&__media {
-		flex: 0 0 auto;
-		flex-basis: auto;
+		flex: 0 0 0%;
 	}
 	
 	&__content {
-		width: auto;
-		flex-basis: 0;
 		flex-grow: 1;
 
 		@include media-breakpoint-up( 'md' ) {
@@ -50,10 +47,16 @@
 			}
 		}
 		
-		&--media-fill {
+		img,
+		video {
+			display: block;
+			width: 100%;
+			object-fit: cover;
+		}
+		
+		&--fill {
 			position: relative;
 			padding: 0;
-			width: auto;
 			min-height: 250px;
 			background-size: cover;
 
@@ -73,13 +76,6 @@
 				clip: rect(0, 0, 0, 0);
 				border: 0;
 			}
-		}
-
-		img,
-		video {
-			display: block;
-			width: 100%;
-			object-fit: cover;
 		}
 	}
 }

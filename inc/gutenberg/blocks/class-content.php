@@ -74,16 +74,4 @@ class Content extends Dynamic {
 
 		return $content;
 	}
-
-	/**
-	 * Get block attributes.
-	 *
-	 * @return 	array
-	 */
-	protected function get_attributes() {
-		$block_json = file_get_contents( get_parent_theme_file_path( '/src/js/gutenberg/blocks/content/block.json' ) );
-		$block_json = $block_json ? json_decode( $block_json, true ) : [];
-
-		return array_merge( parent::get_attributes(), get_prop( $block_json, 'attributes', [] ) );
-	}
 }

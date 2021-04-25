@@ -13,8 +13,8 @@ return [
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
 	
-	<!-- wp:wca/section {"className":"wcacss-ad84793c py-5","hasCustomCSS":true} -->
-	<div class="wp-block-wca-section alignfull wcacss-ad84793c py-5 wca-section"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4"}} -->
+	<!-- wp:wca/section {"className":"wcacss-ad84792b my-5","hasCustomCSS":true} -->
+	<div class="wp-block-wca-section alignfull wcacss-ad84792b py-5 wca-section"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4"}} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-4"><!-- wp:image {"sizeSlug":"large","className":"wcacss-45a1b54b","hasCustomCSS":true} -->
 	<figure class="wp-block-image size-large wcacss-45a1b54b"><img src="https://picsum.photos/id/237/500/500" alt=""/></figure>
 	<!-- /wp:image --></div>
@@ -35,14 +35,14 @@ return [
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
 	
-	<!-- wp:wca/section {"backgroundColor":"light","className":"wcacss-ad84793c py-5","hasCustomCSS":true} -->
+	<!-- wp:wca/section {"backgroundColor":"light","className":"wcacss-ad84793c my-5","hasCustomCSS":true} -->
 	<div class="wp-block-wca-section alignfull wcacss-ad84793c py-5 wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"verticalAlignment":"center","bootstrapColumns":{"global":"col-12","md":"col-md-8"},"className":"wcacss-be806f2d","hasCustomCSS":true} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md-8 align-self-center wcacss-be806f2d"><!-- wp:heading {"className":"wcacss-7f0e1046","textColor":"nv-text-dark-bg","hasCustomCSS":true} -->
-	<h2 class="wcacss-7f0e1046 has-nv-text-dark-bg-color has-text-color">We are driven by values</h2>
+	<div class="wp-block-wca-column wca-column col col-12 col-md-8 align-self-center wcacss-be806f2d"><!-- wp:heading {"className":"wcacss-7f0e1046","hasCustomCSS":true} -->
+	<h2 class="wcacss-7f0e1046">We are driven by values</h2>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph {"textColor":"nv-text-dark-bg"} -->
-	<p class="has-nv-text-dark-bg-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Line high touch client we need to have a Come to Jesus meeting with Phil about his attitude, so where the.</p>
+	<!-- wp:paragraph -->
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Line high touch client we need to have a Come to Jesus meeting with Phil about his attitude, so where the.</p>
 	<!-- /wp:paragraph -->
 	
 	<!-- wp:spacer {"height":20} -->
@@ -63,34 +63,34 @@ return [
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
 	
-	<!-- wp:wca/section {"backgroundColor":"dark","className":"wcacss-7290080c py-5","textColor":"white","hasCustomCSS":true} -->
-	<div class="wp-block-wca-section alignfull wcacss-7290080c py-5 wca-section has-white-color has-dark-background-color has-text-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-c32c587f mb-5 mb-md-0","hasCustomCSS":true} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-c32c587f mb-5 mb-md-0"><!-- wp:heading {"textAlign":"left","level":3,"className":"has-text-align-center","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<h3 class="has-text-align-left has-text-align-center">Super Efficient</h3>
+	<!-- wp:wca/section {"className":"wcacss-7290080c py-5","backgroundColor":"dark","textColor":"white"} -->
+	<div class="wp-block-wca-section alignfull wcacss-7290080c py-5 wca-section has-white-color has-dark-background-color has-text-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-c32c587f mb-5 mb-md-0"} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-c32c587f mb-5 mb-md-0"><!-- wp:heading {"textAlign":"left","level":3,"textColor":"white","className":"has-text-align-center"} -->
+	<h3 class="has-text-align-left has-text-align-center has-white-color has-text-color">Super Efficient</h3>
 	<!-- /wp:heading -->
-	
-	<!-- wp:paragraph {"align":"left","style":{"typography":{"fontSize":15}}} -->
-	<p class="has-text-align-left" style="font-size:15px">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
+
+	<!-- wp:paragraph {"align":"left"} -->
+	<p class="has-text-align-left">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
 	<!-- /wp:paragraph --></div>
 	<!-- /wp:wca/column -->
-	
-	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-47299bbc mb-5 mb-md-0","hasCustomCSS":true} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-47299bbc mb-5 mb-md-0"><!-- wp:heading {"textAlign":"left","level":3,"className":"has-text-align-center","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<h3 class="has-text-align-left has-text-align-center">Deeply Committed</h3>
+
+	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-47299bbc mb-5 mb-md-0"} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-47299bbc mb-5 mb-md-0"><!-- wp:heading {"textAlign":"left","level":3,"textColor":"white","className":"has-text-align-center"} -->
+	<h3 class="has-text-align-left has-text-align-center has-white-color has-text-color">Deeply Committed</h3>
 	<!-- /wp:heading -->
-	
-	<!-- wp:paragraph {"align":"left","style":{"typography":{"fontSize":15}}} -->
-	<p class="has-text-align-left" style="font-size:15px">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
+
+	<!-- wp:paragraph {"align":"left"} -->
+	<p class="has-text-align-left">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
 	<!-- /wp:paragraph --></div>
 	<!-- /wp:wca/column -->
-	
-	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-7cb599cc","hasCustomCSS":true} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-7cb599cc"><!-- wp:heading {"textAlign":"left","level":3,"className":"has-text-align-center","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<h3 class="has-text-align-left has-text-align-center">Highly Skilled</h3>
+
+	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"},"className":"wcacss-7cb599cc"} -->
+	<div class="wp-block-wca-column wca-column col col-12 col-md wcacss-7cb599cc"><!-- wp:heading {"textAlign":"left","level":3,"textColor":"white","className":"has-text-align-center"} -->
+	<h3 class="has-text-align-left has-text-align-center has-white-color has-text-color">Highly Skilled</h3>
 	<!-- /wp:heading -->
-	
-	<!-- wp:paragraph {"align":"left","style":{"typography":{"fontSize":15}}} -->
-	<p class="has-text-align-left" style="font-size:15px">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
+
+	<!-- wp:paragraph {"align":"left"} -->
+	<p class="has-text-align-left">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
 	<!-- /wp:paragraph --></div>
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->

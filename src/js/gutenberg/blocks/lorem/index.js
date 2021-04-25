@@ -6,9 +6,11 @@ import { loremIpsum } from 'react-lorem-ipsum';
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { createBlock } = wp.blocks;
-const { select, dispatch } = wp.data;
+const {
+    i18n: { __ },
+    blocks: { createBlock },
+    data: { select, dispatch }
+} = wp;
 
 /**
  * Block constants
@@ -88,7 +90,7 @@ const settings = {
                             toSelect.push(created.clientId);
                         }
                     }
-                    
+
                     dispatch('core/block-editor').removeBlock(selectedBlock);
 
                     return dispatch('core/block-editor').multiSelect(toSelect[0], toSelect.reverse()[0]);

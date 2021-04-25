@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Integration;
+use WeCodeArt\Core\Scripts;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
@@ -26,6 +27,7 @@ use WeCodeArt\Integration;
 class Styles implements Integration {
 
 	use Singleton;
+	use Scripts\Base;
 
 	/**
 	 * The Styles Processor
@@ -62,6 +64,37 @@ class Styles implements Integration {
 		Styles\Handler::get_instance();
 		// Enqueue Styles
 		Styles\Embed::get_instance();
+		// Admin
+		add_action( 'enqueue_block_editor_assets', 			[ $this, 'block_editor_assets' 	] );
+		add_filter( 'wecodeart/filter/gutenberg/localize',	[ $this, 'filter_inline_js' 	] );
+	}
+
+	/**
+	 * Editor only.
+	 *
+	 * @return  void
+	 */
+	public function block_editor_assets() {
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg-styles' ), [
+			'wecodeart-gutenberg'
+		], wecodeart( 'version' ) );
+	}
+
+	/**
+	 * Filter Inline JS.
+	 *
+	 * @param	array $data
+	 *
+	 * @return  array
+	 */
+	public function filter_inline_js( $data ) {
+		return array_merge( $data, [
+			'removeStyles' => [
+				'core/group',
+				'core/cover',
+				'core/media-text',
+			]
+		] );
 	}
 
 	/**

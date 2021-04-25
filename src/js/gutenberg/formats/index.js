@@ -1,12 +1,12 @@
 /**
  * Internal dependencies
  */
-import { markdown } from './markdown';
 import { clear } from './clear';
-import { abbreviation } from './abbreviation';
 import { justify } from './justify';
 import { underline } from './underline';
-import { backgroundColor } from './background-color';
+import { highlight } from './highlight';
+import { abbreviation } from './abbreviation';
+// import { markdown } from './markdown';
 // import { tooltip } from './tooltip';
 
 /**
@@ -16,12 +16,12 @@ const { registerFormatType } = wp.richText;
 
 function registerWeCodeArtFormats() {
 	[
-		markdown,
 		clear,
-		abbreviation,
 		justify,
 		underline,
-		backgroundColor,
+		highlight,
+		abbreviation,
+		// markdown,
 		// tooltip,
 	].forEach(({ name, ...settings }) => {
 		if (name) {

@@ -87,7 +87,12 @@ class Design extends Config {
 						'element'  	=> 'a',
 						'property' 	=> 'color',
 						'key'		=> 'link'
-					]
+					],
+				],
+				'partial'		=> [
+					'selector'        => '.navbar#navbar',
+					'render_callback' => [ 'WeCodeArt\Core\Header', 'render_navbar' ],
+					'container_inclusive' => true
 				]
 			],
 		];

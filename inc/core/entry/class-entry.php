@@ -140,11 +140,9 @@ class Entry {
 		}
 		
 		if ( $link && ! is_singular() ) {
-			$class = get_theme_mod( 'general-design-palette' )['active'] === 'dark' ? 'text-light' : 'text-dark';
 			$title = sprintf(
-				'<a href="%s" class="%s" rel="bookmark">%s</a>', 
+				'<a href="%s" rel="bookmark">%s</a>', 
 				esc_url( get_permalink() ),
-				esc_attr( $class ),
 				esc_html( $title )
 			);
 		}
@@ -185,16 +183,10 @@ class Entry {
 	 * @return	void
 	 */
 	public function render_content() {
-		$pallete = get_prop( get_theme_mod( 'general-design-palette' ), 'active', 'base' );
-
-		$classes = [];
-		$classes[] = is_singular() ? 'entry-content' : 'entry-excerpt';
-		$classes[] = $pallete === 'dark' ? 'text-light' : 'text-muted';
-
 		Markup::wrap( 'entry-content', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => implode( ' ', $classes )
+				'class' => is_singular() ? 'entry-content' : 'entry-excerpt'
 			]
 		] ], is_singular() ? 'the_content' : 'the_excerpt' );
 	}

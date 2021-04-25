@@ -417,49 +417,18 @@ final class Styles implements Integration {
 	}
 
 	/**
-	 * RGB to HSL
+	 * Color lightness
 	 *
 	 * @since   4.2.0
-	 * @param  	string $RGB	CSS Color.
+	 * @param  	string 	$color  Color in HEX/RGB/RGBA format
 	 *
-	 * @return 	array
+	 * @return 	string
 	 */
-	public static function rgb_hsl( $RGB ) {
-		$r = 0xFF & ( $RGB >> 0x10 );
-		$g = 0xFF & ( $RGB >> 0x8 );
-		$b = 0xFF & $RGB;
-
-		$r = ( (float) $r ) / 255.0;
-		$g = ( (float) $g ) / 255.0;
-		$b = ( (float) $b ) / 255.0;
-
-		$maxC = max( $r, $g, $b );
-		$minC = min( $r, $g, $b );
-
-		$l = ( $maxC + $minC ) / 2.0;
-
-		if( $maxC == $minC ) {
-			$s = 0;
-			$h = 0;
-		} else {
-			if( $l < .5 ) {
-				$s = ( $maxC - $minC ) / ( $maxC + $minC );
-			} else {
-				$s = ( $maxC - $minC ) / ( 2.0 - $maxC - $minC );
-			}
-
-			if( $r == $maxC ) $h = ( $g - $b ) / ( $maxC - $minC );
-			if( $g == $maxC ) $h = 2.0 + ( $b - $r ) / ( $maxC - $minC );
-			if( $b == $maxC ) $h = 4.0 + ( $r - $g ) / ( $maxC - $minC );
-
-			$h = $h / 6.0; 
-		}
-
-		$h = (int) round( 255.0 * $h );
-		$s = (int) round( 255.0 * $s );
-		$l = (int) round( 255.0 * $l );
-
-		return (object) Array( 'hue' => $h, 'saturation' => $s, 'lightness' => $l );
+	public static function color_lightness( string $color ) {
+		$mode 	= ( false === strpos( $color, 'rgba' ) ) ? 'hex' : 'rgba';
+		$color 	= $mode === 'hex' ? self::hex_rgba( $color ) : $color; 
+		preg_match_all( "/\(([^\]]*)\)/" , $color, $matches );
+		return intval( array_sum( explode( ',', current( $matches[1] ) ) ) );
 	}
 
 	/**

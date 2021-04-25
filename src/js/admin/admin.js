@@ -112,20 +112,11 @@ const WeCodeArt = () => {
 	];
 
 	const [initialTab, setInitialTab] = useState('');
+	
 	useEffect(() => {
 		const { hash = '' } = document.location;
 		setInitialTab(hash.replace('#', ''));
 	}, [wecodeartSettings]);
-
-	const SettingsPanel = () => (
-		<TabPanel className="wecodeart-tab-panel"
-			activeClass="active-tab"
-			initialTabName={initialTab}
-			onSelect={(tab) => document.location.hash = tab}
-			tabs={tabs}>
-			{(tab) => tab.render}
-		</TabPanel>
-	);
 
 	const MainPanel = () => (
 		<Panel>
@@ -136,7 +127,13 @@ const WeCodeArt = () => {
 					<p>{__(`Congratulations ${currentUser}! You\'ve just unlocked more Gutenberg block editor tools for easier editing and better workflow.`, 'wecodeart')}</p>
 				</div>
 				<PanelRow>
-					<SettingsPanel />
+					<TabPanel className="wecodeart-tab-panel"
+						activeClass="active-tab"
+						initialTabName={initialTab}
+						onSelect={(tab) => document.location.hash = tab}
+						tabs={tabs}>
+						{({ render }) => render}
+					</TabPanel>
 				</PanelRow>
 			</PanelBody>
 		</Panel>

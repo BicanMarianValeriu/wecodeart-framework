@@ -37,10 +37,9 @@ class Modules implements \ArrayAccess {
 	 * Send to Constructor
 	 */
 	public function init() {
-		$this->register( 'title',       Modules\Title::class    );
-		$this->register( 'builder',     Modules\Page::class     );
-		$this->register( 'styles',      Modules\Styles::class   );
+		$this->register( 'entry',       Modules\Entry::class    );
 		$this->register( 'classes',     Modules\Classes::class  );
+		$this->register( 'styles',      Modules\Styles::class   );
 		$this->register( 'patterns',    Modules\Patterns::class );
         
         add_action( 'init', [ $this, 'load' ] );

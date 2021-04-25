@@ -16,6 +16,7 @@ namespace WeCodeArt\Admin\Customizer\Configs;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Core\Entry\Meta;
 use WeCodeArt\Admin\Customizer\Config;
 use WeCodeArt\Admin\Customizer\Formatting;
 
@@ -39,13 +40,13 @@ class Content extends Config {
 		// Content Modules Choices.
 		$c_modules = wp_list_pluck( \WeCodeArt\Core\Content::content_modules(), 'label' );
 
-		$_configs = array( 
-			array(
+		$_configs = [
+			[
 				'name'			=> 'content-layout-container',
 				'type' 			=> 'control',
 				'control'  		=> 'select',
 				'section'		=> 'content-layout',
-				'title' 		=> esc_html__( 'Container Type', 'wecodeart' ),
+				'title' 		=> esc_html__( 'Container Type: Default', 'wecodeart' ),
 				'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
 				'choices'  		=> [
 					'container'			=> esc_html__( 'Container', 'wecodeart' ),
@@ -62,8 +63,8 @@ class Content extends Config {
 						'value'		=> [ 'container', 'container-fluid' ]
 					]
 				]
-			),
-			array(
+			],
+			[
 				'name'			=> 'content-layout-modules',
 				'type'        	=> 'control',
 				'control'  		=> 'wecodeart-sortable',
@@ -78,63 +79,11 @@ class Content extends Config {
 					'render_callback' 		=> [ 'WeCodeArt\Core\Content', 'render_modules' ],
 					'container_inclusive' 	=> true
 				]
-			),
-		);
+			],
+		];
 
+		// Merge to main config
 		$configurations = array_merge( $configurations, $_configs );
-
-		// Page specific Mods
-		$pages = get_pages();
-		
-		foreach( $pages as $page ) {
-			$title = $page->post_title;
-			$ID = $page->ID;
-			$config = array(
-				array(
-					'name'			=> 'content-layout-container-page-' . $ID,
-					'type'        	=> 'control',
-					'control'  		=> 'select',
-					'section'		=> 'content-layout',
-					'title' 		=> sprintf( esc_html__( 'Container Type: %s', 'wecodeart' ), $title ),
-					'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
-					'choices'  		=> [
-						'container'			=> esc_html__( 'Container', 'wecodeart' ),
-						'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-					], 
-					'priority'			=> 20,
-					'default'			=> 'container',
-					'active_callback'	=> function() use( $ID ) { return is_page( $ID ); },
-					'transport'			=> 'postMessage',
-					'output'			=> [
-						[
-							'element'  	=> '.content .container, .content .container-fluid',
-							'function'	=> 'html',
-							'attr'		=> 'class',
-							'value'		=> [ 'container', 'container-fluid' ]
-						]
-					]
-				),
-				array(
-					'name'			=> 'content-layout-modules-page-' . $ID,
-					'type'        	=> 'control',
-					'control'  		=> 'wecodeart-sortable',
-					'section'		=> 'content-layout',
-					'title'			=> sprintf( esc_html__( 'Content Modules: %s', 'wecodeart' ), $title ),
-					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
-					'priority'		=> 30,
-					'default'		=> [ 'content', 'primary' ],
-					'choices'		=> $c_modules,
-					'active_callback'	=> function() use( $ID ) { return is_page( $ID ); },
-					'transport'		=> 'postMessage',
-					'partial'		=> [
-						'selector'        		=> '.content-area',
-						'render_callback' 		=> [ 'WeCodeArt\Core\Content', 'render_modules' ],
-						'container_inclusive'	=> true
-					]
-				) 	 	
-			);
-			$configurations = array_merge( $configurations, $config );
-		}
 
 		// Post Types Archives And Singular Context Mods 
 		$public_posts = wecodeart( 'public_post_types' );
@@ -142,7 +91,7 @@ class Content extends Config {
 		foreach( $public_posts as $type ) {
 			$type_label = get_post_type_object( $type )->labels->singular_name;
 			$config = array(
-				array(
+				[
 					'name'			=> 'content-layout-container-' . $type . '-archive',
 					'type'        	=> 'control',
 					'control'  		=> 'select',
@@ -167,19 +116,19 @@ class Content extends Config {
 							'value'		=> [ 'container', 'container-fluid' ]
 						]
 					]
-				),
-				array(
+				],
+				[
 					'name'			=> 'content-layout-modules-' . $type . '-archive',
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-layout',
 					'title'			=> sprintf( esc_html__( 'Content Modules: %s Archive', 'wecodeart' ), $type_label ),
-					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
+					'description'	=> esc_html__( 'This will affect only the page you are currently viewing - is overwritten by entry modules meta (in Gutenberg Editor).', 'wecodeart' ),
 					'priority'		=> 30, 
 					'choices'		=> $c_modules,
 					'active_callback'	=> function() use( $type ) {
 						if( $type === 'post' && wecodeart_if( 'is_post_archive' ) ) return true;
-						return is_post_type_archive( $type ); 
+						return is_post_type_archive( $type );
 					}, 
 					'transport'		=> 'postMessage',
 					'partial'		=> [
@@ -187,8 +136,8 @@ class Content extends Config {
 						'render_callback'		=> [ 'WeCodeArt\Core\Content', 'render_modules' ],
 						'container_inclusive' 	=> true
 					]
-				),
-				array(
+				],
+				[
 					'name'			=> 'content-layout-container-' . $type . '-singular',
 					'type'        	=> 'control',
 					'control'  		=> 'select',
@@ -212,14 +161,14 @@ class Content extends Config {
 							'value'		=> [ 'container', 'container-fluid' ]
 						]
 					]
-				),
-				array(
+				],
+				[
 					'name'			=> 'content-layout-modules-' . $type . '-singular',
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
 					'section'		=> 'content-layout',
 					'title'			=> sprintf( esc_html__( 'Content Modules: %s Single', 'wecodeart' ), $type_label ),
-					'description'	=> esc_html__( 'Enable and reorder Site Inner modules. This will affect only the page you are currently viewing.', 'wecodeart' ),
+					'description'	=> esc_html__( 'This will affect only the page you are currently viewing - is overwritten by entry modules meta (in Gutenberg Editor).', 'wecodeart' ),
 					'priority'		=> 35, 
 					'choices'		=> $c_modules,
 					'active_callback'	=> function() use( $type ) {
@@ -231,8 +180,10 @@ class Content extends Config {
 						'render_callback' 		=> [ 'WeCodeArt\Core\Content', 'render_modules' ],
 						'container_inclusive' 	=> true
 					]
-				)	 	
+				]	 	
 			);
+
+			// Merge to main config
 			$configurations = array_merge( $configurations, $config );
 		}
 		
@@ -240,7 +191,7 @@ class Content extends Config {
 		 * Entry Configurable Meta Info
 		 * @since 3.6 
 		 */
-		$meta_modules = wp_list_pluck( \WeCodeArt\Core\Entry\Meta::modules(), 'label' );
+		$meta_modules = wp_list_pluck( Meta::modules(), 'label' );
 
 		foreach( $public_posts as $type ) { 
 			if( ! post_type_supports( $type, 'wecodeart-post-info' ) ) {
@@ -248,8 +199,8 @@ class Content extends Config {
 			}
 
 			$type_label = get_post_type_object( $type )->labels->singular_name;
-			$meta_config = array(  
-				array(
+			$meta_config = [
+				[
 					'name'			=> 'content-entry-meta-' . $type . '-archive',
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
@@ -265,11 +216,11 @@ class Content extends Config {
 					},
 					'partial'		=> [
 						'selector'        		=> '.entry-meta',
-						'render_callback' 		=> [ 'WeCodeArt\Core\Entry\Meta', 'render' ],
+						'render_callback' 		=> [ Meta::get_instance(), 'render' ],
 						'container_inclusive' 	=> true
 					]
-				),
-				array(
+				],
+				[
 					'name'			=> 'content-entry-meta-' . $type . '-singular',
 					'type'        	=> 'control',
 					'control'  		=> 'wecodeart-sortable',
@@ -284,11 +235,12 @@ class Content extends Config {
 					},
 					'partial'		=> [
 						'selector'        		=> '.entry-meta',
-						'render_callback' 		=> [ 'WeCodeArt\Core\Entry\Meta', 'render' ],
+						'render_callback' 		=> [ Meta::get_instance(), 'render' ],
 						'container_inclusive' 	=> true
 					]
-				)
-			); 
+				]
+			];
+
 			// Merge to main config
 			$configurations = array_merge( $configurations, $meta_config );
 		}

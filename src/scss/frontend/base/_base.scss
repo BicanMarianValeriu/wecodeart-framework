@@ -156,6 +156,10 @@ a {
     }
 }
 
+.header {
+    background-color: inherit;   
+}
+
 .navbar {
     .has-scrolled & {
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);

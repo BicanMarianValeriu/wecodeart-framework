@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
+use WeCodeArt\Support\Styles;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Framework Header
@@ -31,18 +33,33 @@ class Header {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'wp_head',	[ $this, 'meta_charset' 	], 0 );
-		add_action( 'wp_head',	[ $this, 'meta_viewport' 	], 0 );
-		add_action( 'wp_head',	[ $this, 'meta_profile' 	], 0 );
-		add_action( 'wp_head',	[ $this, 'meta_pingback'	], 0 );
 		add_action( 'wecodeart/header/markup',		[ $this, 'markup'	] );
 		add_action( 'wecodeart/hook/header/before',	[ __CLASS__, 'display_offcanvas' ] );
 
-		// remove_action( 'wp_head', 'wp_generator' );
-		// remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10 );
-		// remove_action( 'wp_head', 'wlwmanifest_link' );
-		// remove_action( 'wp_head', 'wp_shortlink_wp_head', 10 );
-		// remove_action( 'wp_head', 'feed_links_extra', 3 );
+		add_action( 'wp_head',	[ $this, 'meta_charset' 	], 0 );
+		add_action( 'wp_head',	[ $this, 'meta_viewport' 	], 0 );
+		add_action( 'wp_head',	[ $this, 'meta_pingback'	], 0 );
+
+		if( wecodeart_config( 'clean-head' ) === true ) {
+			remove_action( 'wp_head', 'wp_generator' );
+			remove_action( 'wp_head', 'rsd_link' );
+			remove_action( 'wp_head', 'feed_links', 2 );
+			remove_action( 'wp_head', 'feed_links_extra', 3 );
+			remove_action( 'wp_head', 'wlwmanifest_link' );
+			remove_action( 'wp_head', 'index_rel_link' );
+			remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 );
+			remove_action( 'wp_head', 'start_post_rel_link', 10, 0 );
+			remove_action( 'wp_head', 'adjacent_posts_rel_link', 10, 0 );
+			remove_action( 'wp_head', 'rest_output_link_wp_head' );
+			remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+			remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+			remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+			remove_action( 'wp_print_styles', 'print_emoji_styles' );
+			remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+			return;
+		}
+
+		add_action( 'wp_head',	[ $this, 'meta_profile' 	], 0 );
 	}
 	
 	/**
@@ -135,7 +152,7 @@ class Header {
 		Markup::wrap( 'offcanvas', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => 'offcanvas offcanvas-start',
+				'class' => 'offcanvas offcanvas-' . get_theme_mod( 'header-offcanvas-dir' ),
 				'id' 	=> 'navbar-offcanvas',
 				'data-bs-backdrop'	=> 'true',
 				'data-bs-scroll'	=> 'true'
@@ -177,8 +194,17 @@ class Header {
 	 * @return 	void
 	 */
 	public static function render_navbar() {
+		$classes = [ 'navbar', 'navbar-expand-lg' ];
+
+		if( $custom = get_theme_mod( 'header-design-bg' ) ) {
+			$classes[] 	= ( Styles::color_lightness( $custom ) > 380 ) ? 'navbar-light' : 'navbar-dark';
+		} else {
+			$pallete 	= get_prop( get_theme_mod( 'general-design-palette' ), 'active', 'base' );
+			$classes[] 	= $pallete === 'dark' ? 'navbar-dark' : 'navbar-light';
+		}
+
 		Markup::wrap( 'navbar', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'navbar navbar-expand-lg navbar-light', 'id' => 'navbar' ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => implode( ' ', $classes ), 'id' => 'navbar' ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'header-bar-container' ) ] ],
 		], 'WeCodeArt\Markup::sortable', [
 			self::navbar_modules(),
@@ -197,17 +223,6 @@ class Header {
 			printf( '<link rel="pingback" href="%s" />' . "\n", get_bloginfo( 'pingback_url' ) );
 		}
 	}
-
-	/**
-	 * Add a meta viewport printed in wp_head
-	 *
-	 * @since	2.2.x
-	 * @version 3.9.5
-	 */
-	public function meta_viewport() {
-		$viewport = apply_filters( 'wecodeart/filter/viewport', 'width=device-width, initial-scale=1' );
-		printf( '<meta name="viewport" content="%s" />' . "\n", esc_attr( $viewport ) );
-	}
 	
 	/**
 	 * Add a meta charset printed in wp_head
@@ -216,8 +231,19 @@ class Header {
 	 * @version 4.2.0
 	 */
 	public function meta_charset() {
-		$charset = apply_filters( 'wecodeart/filter/meta/charset', get_bloginfo( 'charset' ) );
+		$charset = (string) apply_filters( 'wecodeart/filter/meta/charset', get_bloginfo( 'charset' ) );
 		printf( '<meta charset="%s" />' . "\n", esc_attr( $charset ) );
+	}
+
+	/**
+	 * Add a meta viewport printed in wp_head
+	 *
+	 * @since	2.2.x
+	 * @version 4.2.0
+	 */
+	public function meta_viewport() {
+		$viewport = (string) apply_filters( 'wecodeart/filter/viewport', 'width=device-width, initial-scale=1' );
+		printf( '<meta name="viewport" content="%s" />' . "\n", esc_attr( $viewport ) );
 	}
 	
 	/**
@@ -227,7 +253,7 @@ class Header {
 	 * @version 4.2.0
 	 */
 	public function meta_profile() {
-		$profile = apply_filters( 'wecodeart/filter/meta/profile', 'http://gmpg.org/xfn/11' );
+		$profile = (string) apply_filters( 'wecodeart/filter/meta/profile', 'http://gmpg.org/xfn/11' );
 		printf( '<link rel="profile" href="%s" />' . "\n", esc_attr( $profile ) );
 	}
 }

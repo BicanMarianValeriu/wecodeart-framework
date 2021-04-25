@@ -1,10 +1,5 @@
-v4.2.0
-- Updated - Background control
-- Updated - Simplified scripts folder structure / npm packages (github version) / Scripts paths and the new naming.
-- Updated - Gutenberg CSS module now generates CSS files into uploads folder.
-- Updated - Bootstrap v5
-- Removed - Import/Export and couple of other Gutenberg plugins
-- Added - Gutenberg Section/Columns custom section.
+v5.0.0
+- Too many changes to be tracked!!!
 
 v4.1.7
 - Updated - Add list-unstyled bootstrap class to comments listing by default

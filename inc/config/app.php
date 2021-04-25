@@ -95,6 +95,7 @@ return [
         // Header
         'header-bar-position'       => '',
         'header-bar-toggle'         => 'collapse',
+        'header-offcanvas-dir'      => 'start',
         'header-bar-container'      => 'container',
         'header-bar-modules'        => [ 'branding', 'collapse' ],
         'header-design-bg'          => '',
@@ -312,4 +313,5 @@ return [
         'html5'                 => [ 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ],
         'meta-modules'          => [ 'author', 'date', 'categories', 'tags', 'comments', 'edit' ],
     ],
+    'clean-head' => false,
 ];

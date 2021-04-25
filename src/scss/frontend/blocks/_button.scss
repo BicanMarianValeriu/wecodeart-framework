@@ -154,7 +154,8 @@ $button-margin: 10px;
 		display: block;
 		user-select: none;
 		outline: none;
-		@include button-variant( $dark, $gray-200 );
+		border: 1px solid transparent;
+		@include button-variant( $dark, transparent );
 		@include button-size(
 			$btn-padding-y,
 			$btn-padding-x-lg,
@@ -177,7 +178,7 @@ $button-margin: 10px;
 	
 		.is-style-outline & {
 			background-color: transparent;
-			border: $input-btn-border-width solid currentColor;
+			border-color: currentColor;
 
 			&:not(.has-text-color) {
 				color: $dark;
@@ -187,14 +188,8 @@ $button-margin: 10px;
 				&.has-#{$color}-color {
 					&:hover,
 					&:visited {
-						color: #{$value};
-					}
-				}
-
-				&.has-#{$color}-color {
-					&:hover {
-						color: white;
 						background-color: #{$value};
+						border-color: #{$value};
 					}
 				}
 			}

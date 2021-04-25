@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Conditional\Traits\No_Conditionals;
+use WeCodeArt\Core\Scripts;
 
 /**
  * Handles Gutenberg Theme Custom Classes Functionality.
@@ -27,6 +28,7 @@ class Classes {
 
 	use Singleton;
 	use No_Conditionals;
+	use Scripts\Base;
 
 	/**
 	 * Register Hooks - into styles processor action if enabled
@@ -36,11 +38,25 @@ class Classes {
 	 * @return 	void
 	 */
 	public function register_hooks() {
-		add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'set_columns_classes' ], 10, 2 );
-		add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'set_suggest_classes' ], 10, 2 );
+		// Admin
+		add_action( 'enqueue_block_editor_assets', 			[ $this, 'block_editor_assets' ] );
+		add_filter( 'wecodeart/filter/gutenberg/settings', 	[ $this, 'set_columns_classes' ], 10, 2 );
+		add_filter( 'wecodeart/filter/gutenberg/settings', 	[ $this, 'set_suggest_classes' ], 10, 2 );
 
+		// Child Classes
 		Classes\Columns::get_instance();
 		Classes\Suggestions::get_instance();
+	}
+
+	/**
+	 * Editor only.
+	 *
+	 * @return  void
+	 */
+	public function block_editor_assets() {
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg-classes' ), [
+			'wecodeart-gutenberg'
+		], wecodeart( 'version' ) );
 	}
 
 	/**

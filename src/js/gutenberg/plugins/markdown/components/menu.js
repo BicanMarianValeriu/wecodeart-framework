@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-//import { castArray } from 'lodash';
 const { castArray } = lodash;
 
 /**

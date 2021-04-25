@@ -74,8 +74,10 @@ class Styles {
 		add_action( 'wp_enqueue_scripts',			[ $this, 'enqueue_styles'	], 999 );
 		
 		if( is_admin() || is_customize_preview() ) return;
+
 		// Remove Customizer inline styles - we add them in our way, optimized and compressed!
 		remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
+		
 		// Generate Fonts/Styles on frontend load
 		if( $this->has_css_file() === false ) {
 			add_action( 'wp', [ $this, 'generate_styles' ] );

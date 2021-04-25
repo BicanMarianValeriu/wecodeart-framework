@@ -6,38 +6,35 @@ const { get } = lodash;
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { select, withSelect, withDispatch } = wp.data;
-const { Component } = wp.element;
-const { withSpokenMessages, Icon } = wp.components;
-const { PluginBlockSettingsMenuItem } = wp.editPost;
-const { compose, ifCondition } = wp.compose;
-const { create, toHTMLString } = wp.richText;
+const {
+	i18n: { __ },
+	data: { select, withSelect, withDispatch },
+	components: { withSpokenMessages, Icon },
+	editPost: { PluginBlockSettingsMenuItem },
+	compose: { compose, ifCondition },
+	richText: { create, toHTMLString }
+} = wp;
 
 const allowedBlocks = ['core/paragraph', 'core/heading'];
 
 /**
  * Render plugin
  */
-class ClearBlockFormatting extends Component {
-	render() {
-		const { blockId, blockName, blockContent, clearBlockFormatting } = this.props;
+const Control = ({ blockId, blockName, blockContent, clearBlockFormatting }) => {
+	const record = create({ html: blockContent });
 
-		const record = create({ html: blockContent });
-
-		return (
-			<PluginBlockSettingsMenuItem
-				icon={<Icon icon="editor-removeformatting" className="components-menu-items__item-icon" />}
-				label={__('Clear Block Formatting', 'wecodeart')}
-				onClick={() => {
-					clearBlockFormatting(blockId, blockName, toHTMLString({
-						value: { ...record, formats: Array(record.formats.length) },
-					}));
-				}}
-			/>
-		);
-	}
-}
+	return (
+		<PluginBlockSettingsMenuItem
+			icon={<Icon icon="editor-removeformatting" className="components-menu-items__item-icon" />}
+			label={__('Clear Block Formatting', 'wecodeart')}
+			onClick={() => {
+				clearBlockFormatting(blockId, blockName, toHTMLString({
+					value: { ...record, formats: Array(record.formats.length) },
+				}));
+			}}
+		/>
+	);
+};
 
 export default compose(
 	withSelect(() => {
@@ -59,8 +56,6 @@ export default compose(
 			},
 		};
 	}),
-	ifCondition((props) => {
-		return allowedBlocks.includes(props.blockName);
-	}),
+	ifCondition(({ blockName }) => allowedBlocks.includes(blockName)),
 	withSpokenMessages,
-)(ClearBlockFormatting);
+)(Control);

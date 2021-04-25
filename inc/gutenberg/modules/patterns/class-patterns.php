@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
+use WeCodeArt\Core\Scripts;
 
 /**
  * Handles Gutenberg Theme Patterns Functionality.
@@ -25,6 +26,7 @@ use WeCodeArt\Integration;
 class Patterns implements Integration {
 
 	use Singleton;
+	use Scripts\Base;
 
 	const POST_TYPE         = 'wca_pattern';
 	const TYPE_TAXONOMY     = 'wca_pattern_type';
@@ -55,7 +57,19 @@ class Patterns implements Integration {
 		$this->register_taxonomy();
 		$this->load_patterns();
 		$this->load_categories();
-		add_action( 'rest_insert_' . self::POST_TYPE, [ $this, 'rest_insert_wca_pattern' ], 10, 2 );
+		add_action( 'rest_insert_' . self::POST_TYPE, 	[ $this, 'rest_insert_wca_pattern' ], 10, 2 );
+		add_action( 'enqueue_block_editor_assets', 		[ $this, 'block_editor_assets' ] );
+	}
+
+	/**
+	 * Editor only.
+	 *
+	 * @return  void
+	 */
+	public function block_editor_assets() {
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg-patterns' ), [
+			'wecodeart-gutenberg'
+		], wecodeart( 'version' ) );
 	}
 
 	/**
@@ -100,6 +114,18 @@ class Patterns implements Integration {
 	public function register_taxonomy() {
 		register_taxonomy( self::TYPE_TAXONOMY, [ self::POST_TYPE  ], [
 			'label'        	=> __( 'Pattern Type', 'wecodeart' ),
+			'labels'		=> [
+				'name'			=> _x( 'Pattern Types', 'Pattern Types General Name', 'wecodeart' ),
+				'singular_name'	=> _x( 'Pattern Type', 'Pattern Type Singular Name', 'wecodeart' ),
+				'add_new_item'	=> __( 'Add New Pattern Type', 'wecodeart' ),
+				'all_items'		=> __( 'All Pattern Types', 'wecodeart' ),
+				'parent_item'		=> __( 'Parent Pattern Type', 'wecodeart' ),
+				'parent_item_colon'	=> __( 'Parent Pattern Type:', 'wecodeart' ),
+				'new_item_name'	=> __( 'New Pattern Type', 'wecodeart' ),
+				'edit_item'		=> __( 'Edit Pattern Type', 'wecodeart' ),
+				'update_item'	=> __( 'Update Pattern Type', 'wecodeart' ),
+				'view_item'		=> __( 'View Pattern Type', 'wecodeart' ),
+			],
 			'hierarchical' 	=> true,
 			'rewrite'      	=> false,
 			'show_ui'		=> true,

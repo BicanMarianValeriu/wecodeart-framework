@@ -237,50 +237,45 @@ class Content {
 	 * @return 	array 
 	 */
 	public static function get_contextual_options() {
-		// Page Specific Mods
-		foreach( get_pages() as $page ) {		
-			$ID = $page->ID;
-			if( is_page( $ID ) ) { // default must be provided since we do not set in customizer
-				$modules = get_theme_mod( 'content-layout-modules-page-' . $ID, [ 'content', 'primary' ] );
-
-				if( ! empty( $modules ) && wecodeart_if( 'is_full_layout' ) ) {
-					$modules = [ 'content' ];
-				}
-
-				return [
-					'container' => get_theme_mod( 'content-layout-container-page-' . $ID, 'container' ),
-					'modules' 	=> $modules,
-				];
-			}
+		$default_container 	= get_theme_mod( 'content-layout-container' );
+		$default_modules 	= get_theme_mod( 'content-layout-modules' );
+		
+		// Pages
+		if( is_page() ) {
+			return [
+				'container' => $default_container,
+				'modules' 	=> wecodeart_if( 'is_full_layout' ) ? [ 'content' ] : get_post_meta( get_the_ID(), '_wca_content_modules', true ),
+			];
 		}
 
 		// Post Types Archives And Singular Context Mods.
 		foreach( wecodeart( 'public_post_types' ) as $type ) { 
-			if( is_singular( $type ) ) {  
-				$modules 	= get_theme_mod( 'content-layout-modules-' . $type . '-singular' );
-				
-				if( wecodeart_if( 'is_full_layout' ) ) {
-					$modules = [ 'content' ];
-				}
-				
+			if( is_singular( $type ) ) {				
 				return [
 					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular' ),
-					'modules' 	=> $modules
+					'modules' 	=> get_post_meta( get_the_ID(), '_wca_content_modules', true ) ?: get_theme_mod( 'content-layout-modules-' . $type . '-singular' )
 				];
-			} 
-			
-			if( wecodeart_if( 'is_post_archive' ) || is_post_type_archive( $type ) ) {
+			}
+
+			if( is_post_type_archive( $type ) ) {
 				return [
 					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive' ),
-					'modules' 	=> get_theme_mod( 'content-layout-modules-' . $type . '-archive' )
+					'modules' 	=> get_theme_mod( 'content-layout-modules-' . $type . '-archive' ),
+				]; 
+			}
+
+			if( wecodeart_if( 'is_post_archive' ) ) {
+				return [
+					'container' => get_theme_mod( 'content-layout-container-post-archive' ),
+					'modules' 	=> get_post_meta( get_option( 'page_for_posts' ), '_wca_content_modules', true ) ?: get_theme_mod( 'content-layout-modules-post-archive' ),
 				]; 
 			}
 		} 
 
 		// Everywhere/Defaults
 		return [
-			'container' => get_theme_mod( 'content-layout-container', 'container' ),
-			'modules' 	=> get_theme_mod( 'content-layout-modules', [ 'content', 'primary' ] )
+			'container' => $default_container,
+			'modules' 	=> $default_modules
 		];
 	}
 }

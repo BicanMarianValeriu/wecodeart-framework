@@ -124,7 +124,7 @@ class Footer extends Config {
 							$pattern = '1px solid $';
 
 							if( wecodeart_if( 'with_styles' ) ) {
-								$adjusted 	= wecodeart( 'integrations' )->get( 'styles' )::hex_brightness( $value, -10 );
+								$adjusted 	= wecodeart( 'integrations' )->get( 'styles' )::hex_brightness( $value, -20 );
 								$pattern	= '1px solid ' . $adjusted;
 							}
 
@@ -183,7 +183,7 @@ class Footer extends Config {
 							$pattern = '1px solid $';
 							
 							if( wecodeart_if( 'with_styles' ) ) {
-								$adjusted 	= wecodeart( 'integrations' )->get( 'styles' )::hex_brightness( $value, -10 );
+								$adjusted 	= wecodeart( 'integrations' )->get( 'styles' )::hex_brightness( $value, -20 );
 								$pattern	= '1px solid ' . $adjusted;
 							}
 							

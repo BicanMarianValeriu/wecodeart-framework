@@ -1,6 +1,6 @@
 import { rotateLeft } from '@wordpress/icons';
-import Accordion from '../../common/Accordion';
-import ColorControl from '../../common/ColorControl';
+import AccordionControl from '../../common/Accordion';
+import ColorControl from '../../common/Color';
 
 const { debounce } = lodash;
 const { colors: globalPaletteColors } = wecodeartPaletteControl;
@@ -33,7 +33,7 @@ const PaletteColors = ({ values, defaults, save }) => {
 	const paletteHasDefaults = Object.keys(defaultColors).filter((k) => defaultColors[k] !== colors[k]).length < 1;
 
 	return (
-		<Accordion label={__('Palette Colors', 'wecodeart')}>
+		<AccordionControl label={__('Palette Colors', 'wecodeart')}>
 			<div className="wecodeart-palette-colors">
 				{globalPaletteColors.map((group, index) => {
 					return (
@@ -62,7 +62,7 @@ const PaletteColors = ({ values, defaults, save }) => {
 					</>
 				)}
 			</div>
-		</Accordion>
+		</AccordionControl>
 	);
 };
 

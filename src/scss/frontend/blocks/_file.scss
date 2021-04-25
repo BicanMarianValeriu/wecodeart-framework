@@ -26,13 +26,13 @@
 		&:focus,
 		&:active {
 			box-shadow: none;
-			color: $white;
+			color: white;
 			opacity: 0.85;
 			text-decoration: none;
 		}
 	}
 
 	* + .wp-block-file__button {
-		margin-left: 0.75em;
+		margin-left: 0.75rem;
 	}
 }

@@ -358,11 +358,9 @@ class Comments {
 
 		// Cookies
 		$cookies = false;
-		if( $privacy_policy_page = get_option( 'wp_page_for_privacy_policy' ) ) {
-			$page_url 	= get_privacy_policy_url();
-			$page_title = get_the_title( $privacy_policy_page );
-			$page_link  = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $page_url ), esc_html( $page_title ) );
-			
+		$privacy_policy = get_option( 'wp_page_for_privacy_policy' );
+
+		if( $privacy_policy && get_post_status( $privacy_policy ) === 'publish' ) {
 			$cookies = Markup::wrap( 'comment-cookies', [ [
 				'tag' 	=> 'div',
 				'attrs' => [
@@ -370,7 +368,11 @@ class Comments {
 				]
 			] ], wecodeart_input( 'toggle', [
 				'type'	=> 'checkbox',
-				'label' => sprintf( __(  'By commenting you accept the %s.', 'wecodeart' ), $page_link ),
+				'label' => sprintf( __(  'By commenting you accept the %s.', 'wecodeart' ), sprintf(
+					'<a href="%1$s">%2$s</a>',
+					esc_url( get_privacy_policy_url() ),
+					esc_html( get_the_title( $privacy_policy ) ) )
+				),
 				'attrs' => [
 					'class'		=> 'form-switch',
 					'id' 		=> 'comment-cookies',
@@ -409,11 +411,11 @@ class Comments {
 					'<code>' . allowed_tags() . '</code>'
 				);
 			}, [], false ),
-			'submit_field'         	=> '<div class="mb-3 comment-form-submit">%1$s %2$s</div>',
-			'submit_button'         => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">' . SVG::compile( 'comment-dots', [
+			'submit_field'	=> '<div class="mb-3 comment-form-submit">%1$s %2$s</div>',
+			'submit_button'	=> '<button name="%1$s" type="submit" id="%2$s" class="%3$s">' . SVG::compile( 'comment-dots', [
 				'class' => 'me-1'
 			] ) . '%4$s</button>',
-			'class_submit'         	=> 'btn btn-outline-dark',
+			'class_submit'	=> 'btn btn-outline-dark',
 			'fields' => [
 				'author' 	=> $author_name,
 				'email'  	=> $author_email,
@@ -452,16 +454,16 @@ class Comments {
 	 * @return 	void
 	 */
 	public function validate_cookies() {
-		if( $privacy_policy = get_option( 'wp_page_for_privacy_policy' ) ) {
-			if( is_user_logged_in() === false ) {
-				$page_url 	= get_privacy_policy_url();
-				$page_title = get_the_title( $privacy_policy );
-				$page_link  = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $page_url ), esc_html( $page_title ) );
-	
-				if( ! filter_input( INPUT_POST, 'comment-cookies' ) ) {
-					wp_die( sprintf( esc_html__( 'You must accept %s to comment!', 'wecodeart' ), $page_link ) );
-				}
-			}
+		$privacy_policy = get_option( 'wp_page_for_privacy_policy' );
+
+		if( get_post_status( $privacy_policy ) !== 'publish' || is_user_logged_in() === false ) return;
+
+		if( ! filter_input( INPUT_POST, 'comment-cookies' ) ) {
+			wp_die( sprintf( esc_html__( 'You must accept %s to comment!', 'wecodeart' ), sprintf(
+				'<a href="%1$s">%2$s</a>',
+				esc_url( get_privacy_policy_url() ),
+				esc_html( get_the_title( $privacy_policy ) )
+			) ) );
 		}
 	}
 }

@@ -200,15 +200,13 @@ class Media {
 
 		// Determine output.
 		if( 'html' === mb_strtolower( $args['format'] ) ) {
-			$output = Markup::wrap( 'get-media', [
-				[
-					'tag' 	=> 'div',
-					'attrs'	=> [
-						'class'	=> 'ratio',
-						'style'	=> sprintf( '--wca-aspect-ratio:%s;', number_format( $dummy_ratio * 100, 3 ) . '%' )
-					]
+			$output = Markup::wrap( 'get-media', [ [
+				'tag' 	=> 'div',
+				'attrs'	=> [
+					'class'	=> 'ratio',
+					'style'	=> sprintf( '--wca-aspect-ratio:%s;', number_format( $dummy_ratio * 100, 3 ) . '%' )
 				]
-			], $html );
+			] ], $html );
 		} elseif ( 'url' === mb_strtolower( $args['format'] ) ) {
 			$output = $url;
 		} else {
@@ -240,7 +238,7 @@ class Media {
 	 * @return 	string
 	 */
 	public function render_image( $args = [] ) {  
-		$disable = apply_filters( 'wecodeart/filter/media/render_image/disable', false );
+		$disable = (bool) apply_filters( 'wecodeart/filter/media/render_image/disable', false );
 
 		if ( is_attachment() || $disable === true ) return;
 

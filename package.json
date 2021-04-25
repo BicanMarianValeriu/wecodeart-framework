@@ -15,6 +15,12 @@
 		"start:admin:notification": "wp-scripts start ./src/js/admin/admin-notification.js --output-path=assets/unminified",
 		"build:gutenberg": "wp-scripts build ./src/js/gutenberg/gutenberg.js --output-path=assets/minified",
 		"start:gutenberg": "wp-scripts start ./src/js/gutenberg/gutenberg.js --output-path=assets/unminified",
+		"start:gutenberg:patterns": "wp-scripts start ./src/js/gutenberg/extensions/with-patterns/gutenberg-patterns.js --output-path=assets/unminified",
+		"build:gutenberg:patterns": "wp-scripts build ./src/js/gutenberg/extensions/with-patterns/gutenberg-patterns.js --output-path=assets/minified",
+		"start:gutenberg:styles": "wp-scripts start ./src/js/gutenberg/extensions/with-styles/gutenberg-styles.js --output-path=assets/unminified",
+		"build:gutenberg:styles": "wp-scripts build ./src/js/gutenberg/extensions/with-styles/gutenberg-styles.js --output-path=assets/minified",
+		"start:gutenberg:classes": "wp-scripts start ./src/js/gutenberg/extensions/with-classes/gutenberg-classes.js --output-path=assets/unminified",
+		"build:gutenberg:classes": "wp-scripts build ./src/js/gutenberg/extensions/with-classes/gutenberg-classes.js --output-path=assets/minified",
 		"build:customizer": "wp-scripts build ./src/js/customizer/customizer.js --output-path=assets/minified",
 		"start:customizer": "wp-scripts start ./src/js/customizer/customizer.js --output-path=assets/unminified",
 		"build:customizer:range": "wp-scripts build ./src/js/customizer/controls/customizer-range.js --output-path=assets/minified",
@@ -39,6 +45,7 @@
 		"@wordpress/browserslist-config": "^3.0.1",
 		"@wordpress/icons": "^2.9.1",
 		"@wordpress/scripts": "^14.0.1",
+		"array-move": "^3.0.1",
 		"bootstrap": "^5.0.0-beta1",
 		"browser-sync": "^2.26.14",
 		"browser-sync-webpack-plugin": "^2.3.0",
@@ -47,6 +54,7 @@
 		"holderjs": "^2.9.9",
 		"react": "^17.0.1",
 		"react-lorem-ipsum": "^1.4.9",
+		"react-sortable-hoc": "^2.0.0",
 		"react-visibility-sensor": "^5.1.1"
 	}
 }

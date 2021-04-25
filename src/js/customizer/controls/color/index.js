@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ColorControl from './../../common/ColorControl';
+import ColorControl from './../../common/Color';
 
 const { useState, useEffect } = wp.element;
 const { __ } = wp.i18n;

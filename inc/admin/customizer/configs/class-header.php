@@ -76,6 +76,24 @@ class Header extends Config {
 				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ],
 			],
 			[
+				'name'			=> 'header-offcanvas-dir',
+				'type' 			=> 'control',
+				'control'  		=> 'select',
+				'section'		=> 'header-bar',
+				'title' 		=> esc_html__( 'OffCanvas Direction', 'wecodeart' ),
+				'description' 	=> esc_html__( 'Choose the direction from where the offcanvas should slide.', 'wecodeart' ),
+				'active_callback'	=> function() {
+					return ( get_theme_mod( 'header-bar-toggle' ) === 'offcanvas' );
+				}, 
+				'choices'  		=> [
+					'start'		=> esc_html__( 'Left', 'wecodeart' ),
+					'end'		=> esc_html__( 'Right', 'wecodeart' ),
+					'bottom'	=> esc_html__( 'Bottom', 'wecodeart' ),
+				],
+				'priority' 		=> 10, 
+				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ],
+			],
+			[
 				'name'			=> 'header-bar-container',
 				'type' 			=> 'control',
 				'control'  		=> 'select',
@@ -86,7 +104,7 @@ class Header extends Config {
 					'container'			=> esc_html__( 'Container', 'wecodeart' ),
 					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
 				],
-				'priority' 		=> 10, 
+				'priority' 		=> 15, 
 				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ], 
 				'transport'			=> 'postMessage',
 				'output'			=> [
@@ -105,7 +123,7 @@ class Header extends Config {
 				'section'		=> 'header-bar',
 				'title'        	=> esc_html__( 'Header Bar Modules', 'wecodeart' ),
 				'description'	=> esc_html__( 'Enable and reorder Header Bar modules.', 'wecodeart' ),
-				'priority'   	=> 15, 
+				'priority'   	=> 20, 
 				'choices'		=> wp_list_pluck( \WeCodeArt\Core\Header::navbar_modules(), 'label' ),
 				'transport'		=> 'postMessage',
 				'partial'		=> [
@@ -119,7 +137,7 @@ class Header extends Config {
 				'type' 			=> 'control',
 				'control'  		=> 'wecodeart-color',
 				'section'		=> 'header-design',
-				'priority'   	=> 20, 
+				'priority'   	=> 25, 
 				'title' 		=> esc_html__( 'Header background color', 'wecodeart' ),
 				'description'	=> esc_html__( 'Background color of the header wrapper. Defaults to CSS color.', 'wecodeart' ),
 				'transport'		=> 'postMessage',
@@ -128,6 +146,11 @@ class Header extends Config {
 						'element'  => 'header.header',
 						'property' => 'background-color'
 					],
+				],
+				'partial'		=> [
+					'selector'        		=> '.navbar#navbar',
+					'render_callback' 		=> [ 'WeCodeArt\Core\Header', 'render_navbar' ],
+					'container_inclusive' 	=> true
 				]
 			],
 			[
@@ -135,7 +158,7 @@ class Header extends Config {
 				'type' 			=> 'control',
 				'control'  		=> 'wecodeart-color',
 				'section'		=> 'header-design',
-				'priority'   	=> 25, 
+				'priority'   	=> 30, 
 				'title' 		=> esc_html__( 'Header text color', 'wecodeart' ),
 				'description'	=> esc_html__( 'Color of the header text. Defaults to CSS color.', 'wecodeart' ),
 				'transport'		=> 'postMessage',
@@ -151,7 +174,7 @@ class Header extends Config {
 				'type' 			=> 'control',
 				'control'  		=> 'wecodeart-color',
 				'section'		=> 'header-design',
-				'priority'   	=> 30, 
+				'priority'   	=> 35, 
 				'title' 		=> esc_html__( 'Header links color', 'wecodeart' ),
 				'description'	=> esc_html__( 'Color of the header links. Defaults to CSS color.', 'wecodeart' ),
 				'transport'		=> 'postMessage',

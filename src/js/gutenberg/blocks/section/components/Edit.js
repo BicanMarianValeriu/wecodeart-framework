@@ -158,7 +158,7 @@ function EditContainer(props) {
                         ]}
                         onChange={(container) => setAttributes({ container })}
                     />
-                    <SelectControl
+                    {(container !== '') && <SelectControl
                         label={__('Gutter - Horizontal', 'wecodeart')}
                         value={gutter}
                         options={[
@@ -170,7 +170,7 @@ function EditContainer(props) {
                             { label: '5', value: 5 },
                         ]}
                         onChange={(gutter) => setAttributes({ gutter: parseInt(gutter) })}
-                    />
+                    />}
                 </PanelBody>
             </InspectorControls>
             <div {...blockProps} style={{ ...style, ...blockProps.style }}>
@@ -217,12 +217,12 @@ const EditWrapper = compose([
             }
         };
     }),
-    withSelect((select, { clientId }) => {
-        const { getBlockCount } = select('core/block-editor');
+    withSelect((select/* , { clientId } */) => {
+        // const { getBlockCount } = select('core/block-editor');
         const { __experimentalGetPreviewDeviceType = null } = select('core/edit-post');
 
         return {
-            columns: getBlockCount(clientId),
+            // columns: getBlockCount(clientId),
             deviceType: __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null,
         };
     }),

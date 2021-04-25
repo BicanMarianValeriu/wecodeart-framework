@@ -58,19 +58,9 @@ class Notifications {
 	 * Register Notices
 	 *
 	 * @since 	3.8.1
-	 * @version	4.1.53
+	 * @version	4.2.0
 	 */
 	public static function register_notices() {
-		if ( false === get_transient( 'wca-notification-theme-options' ) ) {
-			self::add( [
-				'id'		=> 'wca-notification-theme-options',
-				'type'		=> '',
-				'message'	=> Markup::template( [ 'admin/notification', 'options' ], [], false ),
-				'repeat'	=> WEEK_IN_SECONDS,
-				'priority'	=> 5,
-			] );
-		}
-
 		if ( false === get_transient( 'wca-notification-theme-rate' ) ) {
 			self::add( [
 				'id'		=> 'wca-notification-theme-rate',
@@ -78,7 +68,7 @@ class Notifications {
 				'class'		=> 'wca-notice--theme-rating',
 				'message'	=> Markup::template( [ 'admin/notification', 'rating' ], [], false ),
 				'repeat'	=> WEEK_IN_SECONDS,
-				'priority'	=> 10,
+				'priority'	=> 5,
 			] );
 		}
 	}

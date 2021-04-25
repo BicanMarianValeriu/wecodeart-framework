@@ -1,14 +1,7 @@
 {
 	"name": "wca/content",
 	"category": "wca",
-	"attributes": {
-		"backgroundColor": {
-			"type": "string"
-		},
-		"customBackgroundColor": {
-			"type": "string"
-		}
-	},
+	"attributes": {},
 	"supports": {
 		"align": [
 			"full"

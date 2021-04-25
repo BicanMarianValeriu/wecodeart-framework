@@ -4,6 +4,25 @@
         display: table;
         clear: both;
     }
+
+    /* Title */
+    &-title {
+        .theme-is-dark & {
+            color: white;
+        }
+
+        a {
+            color: inherit;
+        }
+    }
+
+    /* Content */
+    &-content,
+    &-excerpt {
+        .theme-is-dark & {
+            color: var( --wca-gray );
+        }
+    }
     
     /* Meta */
     &-meta {
@@ -11,7 +30,7 @@
             width: 15px;
             height: 15px;
             vertical-align: -8%;
-            fill: #949494;
+            fill: var( --wca-gray );
         }
     }
     

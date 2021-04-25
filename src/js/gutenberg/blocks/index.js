@@ -1,15 +1,13 @@
+import './media-text';
+import lorem from './lorem';
+import content from './content';
+import section from './section';
+import column from './section/column';
+
 /**
  * WP dependencies
  */
 const { registerBlockType } = wp.blocks;
-
-import './cover';
-import './group';
-import './media-text';
-import lorem from './lorem';
-import section from './section';
-import content from './content';
-import column from './section/column';
 
 function registerWCABlocks() {
     [

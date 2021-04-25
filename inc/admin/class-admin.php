@@ -33,13 +33,12 @@ class Admin {
 	 * Send to Constructor
 	 */
 	public function init() {
-		\add_action( 'rest_api_init', 		[ $this, 'register_routes' ] );
-		\add_action( 'rest_api_init', 		[ $this, 'register_settings' ] );
-		\add_action( 'admin_init',			[ $this, 'register_settings' ] );
-		\add_action( 'admin_menu',			[ $this, 'register_menu_page' ] );
-		\add_action( 'after_switch_theme', 	[ $this, 'insert_default_settings' ] );
-		\add_filter( 'wecodeart/filter/gutenberg/settings', [ $this, 'block_editor_settings' ], 10, 2 );
-		
+		\add_action( 'rest_api_init', 			[ $this, 'register_routes' ] );
+		\add_action( 'rest_api_init', 			[ $this, 'register_settings' ] );
+		\add_action( 'admin_init',				[ $this, 'register_settings' ] );
+		\add_action( 'admin_menu',				[ $this, 'register_menu_page' ] );
+		\add_action( 'after_switch_theme', 		[ $this, 'insert_default_settings' ] );
+
 		Notifications::get_instance();
 		Customizer::get_instance();
 	}
@@ -276,7 +275,7 @@ class Admin {
 
 		wp_localize_script( $this->make_handle(), 'wecodeart', [
 			'currentUser'		=> wp_get_current_user()->display_name,
-			'editorSettings' 	=> wp_json_encode( $this->block_editor_settings( [], 'wecodeart' ) ),
+			'editorSettings' 	=> wp_json_encode( $this->block_editor_settings( [], 'admin' ) ),
 			'version' 			=> wecodeart_if( 'is_dev_mode' ) ? esc_html__( 'Developer Mode', 'wecodeart' ) : $version,
 		] );
 	}
@@ -284,25 +283,25 @@ class Admin {
 	/**
 	 * Filters the settings to pass to the block editor.
 	 *
-	 * @param 	array  	$editor_settings The editor settings.
-	 * @param 	object 	$post The post being edited.
+	 * @param 	array  	$editor_settings 	The editor settings.
+	 * @param 	object 	$post 				The post being edited.
 	 *
 	 * @return 	array 	Returns updated editors settings.
 	 */
-	public function block_editor_settings( $settings, $post ) { 
-		$settings['settings'] = array(
-			'options'	=> array(
-				'name'  => 'block-options',
+	public function block_editor_settings( $settings, $post ) {
+		$settings['wecodeart'] = [
+			'blocks'	=> [
+				'name'  => 'blocks',
 				'label' => __( 'Block Options', 'wecodeart' ),
-				'items' => array(
-					'lorem'  => array(
+				'items' => [
+					'lorem'  => [
 						'name'  => 'lorem',
 						'label' => __( 'Lorem Ipsum Generator', 'wecodeart' ),
-						'value' => true,
-					),
-				),
-			), 
-		); 
+						'value' => false,
+					]
+				]
+			]
+		];
 
 		return $settings;
 	}

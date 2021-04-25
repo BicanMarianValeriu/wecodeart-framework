@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
+use WeCodeArt\Core\Content;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -57,7 +58,7 @@ class Gutenberg {
 		add_filter( 'block_editor_settings', 		[ $this, 'block_editor_settings' ], 10, 2 );
 
 		// Reusable Theme link.
-		add_filter( 'admin_menu',  					[ $this, 'reusable_blocks_link' ] );
+		add_filter( 'admin_menu',  					[ $this, 'reusable_blocks_link' ], 0 );
 
 		// Theme Support.
 		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
@@ -136,23 +137,10 @@ class Gutenberg {
 			'lodash'
 		], wecodeart( 'version' ) );
 
-		// CodeMirror assets.
-		wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
-		wp_add_inline_script( 'wp-codemirror', 'window.CodeMirror = wp.CodeMirror;' );
-		wp_enqueue_script(
-			$this->make_handle( 'codemirror-fs' ), 
-			$this->get_asset( 'js', 'codemirror-fs' ),
-			[ 'wp-codemirror' ],
-			wecodeart( 'version' )
-		);
-
 		// Inline
-		wp_add_inline_script( $this->make_handle(), 'window.wecodeartInfo = ' . wp_json_encode( [
+		$data = apply_filters( 'wecodeart/filter/gutenberg/localize', [
 			'theme' 	=> [
 				'version' => wecodeart( 'version' )
-			],
-			'supports'	=> [
-				'colorPalette' => get_prop( $this->config, 'palette-classnames', false ),
 			],
 			'restrictedBlocks' => apply_filters( 'wecodeart/filter/gutenberg/restricted', [
 				'core/freeform',
@@ -162,8 +150,21 @@ class Gutenberg {
 				'core/calendar',
 				'core/tag-cloud',
 				'core/latest-comments',
-			] )
-		] ) . ';', 'before' );
+			] ),
+			'contentModules' => wp_list_pluck( Content::content_modules(), 'label' ),
+		] );
+		
+		wp_add_inline_script( $this->make_handle(), 'window.wecodeartGutenberg = ' . wp_json_encode( $data ) . ';', 'before' );
+
+		// CodeMirror assets.
+		wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
+		wp_add_inline_script( 'wp-codemirror', 'window.CodeMirror = wp.CodeMirror;' );
+		wp_enqueue_script(
+			$this->make_handle( 'codemirror-fs' ), 
+			$this->get_asset( 'js', 'codemirror-fs' ),
+			[ 'wp-codemirror' ],
+			wecodeart( 'version' )
+		);
 	}
 
 	/**

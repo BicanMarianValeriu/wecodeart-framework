@@ -12,7 +12,7 @@ const { withSpokenMessages } = wp.components;
  */
 class CodeEditor extends Component {
 	constructor() {
-		super( ...arguments );
+		super(...arguments);
 
 		// this.addCodeMirror = this.addCodeMirror.bind( this );
 
@@ -35,14 +35,14 @@ class CodeEditor extends Component {
 			editorMode,
 		} = this.props;
 
-		if ( isDisabled ) {
+		if (isDisabled) {
 			return null;
 		}
 
-		if ( editorMode === 'text' && ! this.state.isLoaded ) {
-			const editorSettings = wp.codeEditor.defaultSettings ? _.clone( wp.codeEditor.defaultSettings ) : {};
+		if (editorMode === 'text' && !this.state.isLoaded) {
+			const editorSettings = wp.codeEditor.defaultSettings ? _.clone(wp.codeEditor.defaultSettings) : {};
 
-			document.body.classList.add( 'wca-editor-loaded' );
+			document.body.classList.add('wca-editor-loaded');
 
 			editorSettings.codemirror = _.extend(
 				{},
@@ -58,24 +58,24 @@ class CodeEditor extends Component {
 				}
 			);
 
-			const textEditor = document.querySelector( '.editor-post-text-editor' );
-			const checkChanges = wp.codeEditor.initialize( textEditor, editorSettings );
+			const textEditor = document.querySelector('.editor-post-text-editor');
+			const checkChanges = wp.codeEditor.initialize(textEditor, editorSettings);
 
-			checkChanges.codemirror.on( 'change', function( params ) {
+			checkChanges.codemirror.on('change', function (params) {
 				const content = params.getValue();
 				textEditor.innerHTML = content;
-				dispatch( 'core/editor' ).editPost( { content } );
-			} );
+				dispatch('core/editor').editPost({ content });
+			});
 
-			checkChanges.codemirror.on( 'blur', function( params ) {
+			checkChanges.codemirror.on('blur', function (params) {
 				const content = params.getValue();
-				const blocks = parse( content );
-				dispatch( 'core/editor' ).resetEditorBlocks( blocks );
-			} );
+				const blocks = parse(content);
+				dispatch('core/editor').resetEditorBlocks(blocks);
+			});
 
-			this.setState( { isLoaded: true } );
-		} else if ( editorMode === 'visual' && this.state.isLoaded ) {
-			this.setState( { isLoaded: false } );
+			this.setState({ isLoaded: true });
+		} else if (editorMode === 'visual' && this.state.isLoaded) {
+			this.setState({ isLoaded: false });
 		}
 	}
 
@@ -84,11 +84,11 @@ class CodeEditor extends Component {
 	}
 }
 
-export default compose( [
-	withSelect( ( select ) => ( {
+export default compose([
+	withSelect((select) => ({
 		readyState: document.readyState,
 		isDisabled: false,
-		editorMode: select( 'core/edit-post' ).getEditorMode(),
-	} ) ),
+		editorMode: select('core/edit-post').getEditorMode(),
+	})),
 	withSpokenMessages,
-] )( CodeEditor );
+])(CodeEditor);

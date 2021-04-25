@@ -46,6 +46,10 @@ const markdownShortcuts = {
 			keyCombination: [ '`code`' ],
 			description: __( 'Code', 'wecodeart' ),
 		},
+		{
+			keyCombination: [ ':lorem' ],
+			description: __( 'Lorem ipsum paragraph', 'wecodeart' ),
+		},
 	],
 };
 
