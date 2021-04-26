@@ -38,7 +38,7 @@ class Header {
 
 		add_action( 'wp_head',	[ $this, 'meta_charset' 	], 0 );
 		add_action( 'wp_head',	[ $this, 'meta_viewport' 	], 0 );
-		add_action( 'wp_head',	[ $this, 'meta_pingback'	], 0 );
+		add_action( 'wp_head',	[ $this, 'meta_pingback' 	], 0 );
 
 		if( wecodeart_config( 'clean-head' ) === true ) {
 			remove_action( 'wp_head', 'wp_generator' );
@@ -59,7 +59,7 @@ class Header {
 			return;
 		}
 
-		add_action( 'wp_head',	[ $this, 'meta_profile' 	], 0 );
+		add_action( 'wp_head',	[ $this, 'meta_profile' ], 0 );
 	}
 	
 	/**

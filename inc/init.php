@@ -288,6 +288,10 @@ function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
  * @param   bool    $use_cache  Optional. Whether to use the cache value or not. Default is true.
  */
 function wecodeart_option( $key, $default = false, $setting = null, $use_cache = true ) {
+    if ( is_array( $key ) ) {
+        return Admin::update_options( $key, $setting );
+    }
+
     return Admin::get_option( $key, $default, $setting, $use_cache );
 }
 

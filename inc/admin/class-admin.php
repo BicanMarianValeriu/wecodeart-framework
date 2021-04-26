@@ -52,7 +52,7 @@ class Admin {
 	 * @param 	string       	$setting	Optional. Settings field name. Default is 'wecodeart-settings'.
 	 * @return 	bool 						`true` if option was updated, `false` otherwise.
 	 */
-	public static function update_settings( $new = '', $setting = 'wecodeart-settings' ) {
+	public static function update_options( $new = '', $setting = 'wecodeart-settings' ) {
 
 		$old = get_option( $setting );
 
@@ -194,7 +194,7 @@ class Admin {
 					} elseif ( $is_mod ) {
 						set_theme_mod( $option, $value );
 					} else {
-						self::update_settings( [
+						self::update_options( [
 							"$option" => $value
 						] );
 					}
@@ -251,6 +251,7 @@ class Admin {
 	 * Load assets for option page.
 	 *
 	 * @since   1.2.0
+	 * @version	4.2.0
 	 */
 	public function enqueue_assets() {
 		$version = wecodeart( 'version' );
@@ -274,9 +275,10 @@ class Admin {
 		);
 
 		wp_localize_script( $this->make_handle(), 'wecodeart', [
-			'currentUser'		=> wp_get_current_user()->display_name,
-			'editorSettings' 	=> wp_json_encode( $this->block_editor_settings( [], 'admin' ) ),
 			'version' 			=> wecodeart_if( 'is_dev_mode' ) ? esc_html__( 'Developer Mode', 'wecodeart' ) : $version,
+			'currentUser'		=> wp_get_current_user()->display_name,
+			'adminUrl'			=> untrailingslashit( esc_url_raw( admin_url() ) ),
+			'editorSettings' 	=> wp_json_encode( $this->block_editor_settings( [], 'admin' ) ),
 		] );
 	}
 

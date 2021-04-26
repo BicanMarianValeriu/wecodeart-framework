@@ -369,10 +369,7 @@ class Customizer {
 		$name = get_prop( $config, 'name' );
 
 		if( get_prop( $config, 'datastore_type' ) === 'option' ) {
-			$name = sprintf( 'wecodeart-settings[%s]', implode( '-', [ 
-				get_prop( $config, 'section' ), 
-				get_prop( $config, 'name' ) 
-			] ) );
+			$name = sprintf( 'wecodeart-settings[%s]', $name );
 		}
 
 		$wp_customize->add_setting( $name, [

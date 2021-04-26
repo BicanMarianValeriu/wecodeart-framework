@@ -368,7 +368,7 @@ class Comments {
 				]
 			] ], wecodeart_input( 'toggle', [
 				'type'	=> 'checkbox',
-				'label' => sprintf( __(  'By commenting you accept the %s.', 'wecodeart' ), sprintf(
+				'label' => sprintf( __( 'By commenting you accept the %s.', 'wecodeart' ), sprintf(
 					'<a href="%1$s">%2$s</a>',
 					esc_url( get_privacy_policy_url() ),
 					esc_html( get_the_title( $privacy_policy ) ) )
