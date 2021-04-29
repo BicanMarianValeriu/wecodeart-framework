@@ -21,6 +21,9 @@ use function WeCodeArt\Functions\get_prop;
 
 /**
  * Block CSS Processor
+ *
+ * This class handles all the Gutenberg Core styles from attributes found under style object or theme customs.
+ * Any extends of this class, should use process_extra() method for extending the attributes processor.
  */
 class Blocks extends Processor {
 
@@ -71,7 +74,7 @@ class Blocks extends Processor {
 	private function set_element() {
 		$block_class 	= explode( ' ', get_prop( $this->attrs, 'className' ) );
 		$block_class 	= array_filter( $block_class, function( $key ) {
-			return strpos( $key, 'wcacss-' ) === 0;
+			return strpos( $key, 'css-' ) === 0;
 		} );
 		
 		// If not unique classname, try again
@@ -136,6 +139,12 @@ class Blocks extends Processor {
 						'property' 	=> 'font-size',
 						'value'	  	=> $value,
 						'units'	  	=> 'px'
+					], $output );
+				}
+				if ( $value = get_prop( $typography, 'lineHeight', false ) ) {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'line-height',
+						'value'	  	=> $value,
 					], $output );
 				}
 			}

@@ -13,7 +13,6 @@ const {
     element: {
         RawHTML,
         useState,
-        Fragment,
     },
     components: {
         withFilters,
@@ -33,7 +32,7 @@ export const License = (props) => {
         wecodeartSettings,
     } = props;
 
-    if (isRequesting) {
+    if (isRequesting || !wecodeartSettings) {
         return (
             <Placeholder {...{
                 style: { marginTop: 20 },
@@ -49,8 +48,8 @@ export const License = (props) => {
     const LicenseFields = applyFilters('wecodeart.admin.licensePanel.fields', [
         {
             id: 'theme_api_key',
-            label: __('WeCodeArt Framework', 'wecodeart'),
-            externalUrl: 'https://www.wecodeart.com/product/wecodeart-framework/'
+            label: 'WeCodeArt Framework',
+            externalUrl: '//www.wecodeart.com/product/wecodeart-framework/'
         }
     ], props);
 
@@ -66,11 +65,11 @@ export const License = (props) => {
     doAction('wecodeart.admin.licensePanel', props);
 
     return (
-        <Fragment>
+        <>
             <p>
                 <RawHTML>
                     {sprintf(
-                        __('Enter your license keys here to receive updates. If your license keys has expired, please %1$srenew your licenses%2$s.', 'wecodeart'),
+                        __('Enter your license keys here to receive updates. If your license keys are expired, please %1$srenew your licenses%2$s.', 'wecodeart'),
                         '<a href="https://www.wecodeart.com/" target="_blank">',
                         '</a>'
                     )}
@@ -83,7 +82,7 @@ export const License = (props) => {
                     <th>{__('Actions', 'wecodeart')}</th>
                     <th>{__('Status', 'wecodeart')}</th>
                 </tr>
-                {LicenseFields.map(({ id, label, externalUrl }) => {
+                {LicenseFields.map(({ id, label, externalUrl = '' }) => {
                     const [value, onChange] = useState(wecodeartSettings[id]);
 
                     return (
@@ -95,7 +94,7 @@ export const License = (props) => {
                                         id={id}
                                         type="text"
                                         value={value}
-                                        disabled={value === 'sFREEMIUM'}
+                                        disabled={value === 'FREEMIUM'}
                                         placeholder={__('API Key', 'wecodeart')}
                                         onChange={(e) => onChange(e.target.value)}
                                     />
@@ -132,7 +131,7 @@ export const License = (props) => {
                     );
                 })}
             </table>
-        </Fragment>
+        </>
     );
 };
 

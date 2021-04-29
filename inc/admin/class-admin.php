@@ -202,7 +202,7 @@ class Admin {
 
 				// Get values, updated above
 				$data 	= wp_parse_args(
-					array_merge( [ 'custom_css'=> wp_get_custom_css() ], get_option( 'wecodeart-settings' ) ),
+					get_option( 'wecodeart-settings' ),
 					Customizer::get_instance()->get_theme_mods()
 				);
 

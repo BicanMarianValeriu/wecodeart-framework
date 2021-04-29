@@ -121,11 +121,7 @@ class Template {
      * @return string
      */
     public function get_relative_path() {
-        $views = $this->config['directories']['views'];
-
-        $extension = $this->config['views']['extension'];
-
-        return $views . '/' . $this->get_file_name( $extension );
+        return $this->config['directories']['views'] . '/' . $this->get_file_name( $this->config['views']['extension'] );
     }
 
     /**

@@ -40,16 +40,12 @@ SVG::add_icon( 'pencil', [
         <div class="col-auto">
             <figure class="comment__gravatar gravatar rounded shadow shadow-soft border border-soft p-1 mb-0"><?php
             
-                echo wp_kses( $author['gravatar'], [
-                    'img' => [
-                        'class'     => true,
-                        'alt'  	    => true,
-                        'src'       => true,
-                        'srcset'    => true,
-                        'width'     => true,
-                        'height'    => true,
-                    ],
-                ] );
+                echo get_avatar(
+                    $comment,
+                    $args['avatar_size'],
+                    '',
+                    sprintf( esc_html__( '%s\'s gravatar', 'wecodeart' ), $comment->comment_author )
+                );
                 
             ?></figure>
         </div>
@@ -64,7 +60,7 @@ SVG::add_icon( 'pencil', [
             ?>
             <div class="comment__author"><?php
                 
-                echo wp_kses_post( $author['name'] ); 
+                echo wp_kses_post( $author ); 
             
                 if( (bool) $by_author )
                     printf(
@@ -87,7 +83,7 @@ SVG::add_icon( 'pencil', [
             <?php if ( ! $comment->comment_approved ) : ?>
             <p class="callout"><?php
             
-                echo esc_html( $awaiting );
+                esc_html_e( 'Your comment is awaiting moderation.', 'wecodeart' );
                 
             ?></p>
             <?php endif; ?>

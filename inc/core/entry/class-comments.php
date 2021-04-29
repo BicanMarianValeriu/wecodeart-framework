@@ -95,14 +95,14 @@ class Comments {
 		$icon_html 	= '';
 		$header_tx 	= '';
 		if( comments_open() || $comments_number !== 0 ) {
-			$icon_html = $args['icon'];
+			$icon_html = (string) $args['icon'];
 			if ( 0 !== $comments_number ) {
 				$header_tx = sprintf(
 					_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
 					number_format_i18n( $comments_number )
 				);
 			} else {
-				$header_tx = $args['empty']; 
+				$header_tx = (string) $args['empty']; 
 			} 
 		} else {
 			if( $args['closed'] !== false && is_string( $args['closed'] ) ) $header_tx = $args['closed']; 
@@ -113,7 +113,10 @@ class Comments {
 
 		// Append `add comment` link
 		if( comments_open() ) {
-			$output .= sprintf( '<a class="comments__add-new float-end" href="#respond" rel="nofollow">%s</a>', $args['add_one'] ); 
+			$output .= sprintf(
+				'<a class="comments__add-new float-end" href="#respond" rel="nofollow">%s</a>',
+				(string) $args['add_one']
+			); 
 		}
 
 		$output = apply_filters( 'wecodeart/filter/comments/get_comments_info/output', trim( $output ) );

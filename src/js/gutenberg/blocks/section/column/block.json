@@ -30,6 +30,8 @@
 	"supports": {
 		"html": false,
 		"anchor": true,
+		"fontSize": true,
+		"lineHeight": true,
 		"className": true,
 		"reusable": false,
 		"withBackground": true,

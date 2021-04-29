@@ -1,37 +1,40 @@
 /**
  * WordPress dependencies
  */
-const { debounce } = lodash;
 const {
     apiFetch,
     data: {
         select,
-        subscribe
+        subscribe,
+        dispatch
     },
 } = wp;
 
-const savePostMeta = debounce(async () => {
-    const { getCurrentPostId } = select('core/editor');
-    await apiFetch({ path: `wecodeart/v1/save_post_meta/${getCurrentPostId()}`, method: 'POST' });
-}, 1000);
+const handleNotice = ({ message }) => {
+    const { createNotice } = dispatch('core/notices');
 
+    return createNotice('success', message, {
+        isDismissible: true,
+        type: 'snackbar',
+    });
+};
+
+let checked = true;
 let reusableBlocks = {};
 
 export default subscribe(() => {
+    const { __experimentalReusableBlocks } = select('core/block-editor').getSettings();
     const {
-        isCurrentPostPublished,
+        getCurrentPostId,
         isSavingPost,
         isPublishingPost,
         isAutosavingPost,
+        isCurrentPostPublished,
         __experimentalIsSavingReusableBlock
     } = select('core/editor');
-
-    const { __experimentalReusableBlocks } = select('core/block-editor').getSettings();
-
     const { isSavingEntityRecord } = select('core');
 
     let isSavingReusableBlock;
-
     if (__experimentalIsSavingReusableBlock) {
         isSavingReusableBlock = id => __experimentalIsSavingReusableBlock(id);
     } else {
@@ -44,27 +47,35 @@ export default subscribe(() => {
     const getReusableBlocks = __experimentalReusableBlocks || [];
     const postPublished = isCurrentPostPublished();
 
-    getReusableBlocks.map(block => {
-        if (block) {
-            const isBlockSaving = isSavingReusableBlock(block.id);
-            
-            if (isBlockSaving && !block.isTemporary) {
-                reusableBlocks[block.id] = {
-                    id: block.id,
-                    isSaving: true
-                };
+    /**
+     * Handle Reusable Blocks
+     */
+    getReusableBlocks.map(({ id, isTemporary }) => {
+        if (id) {
+            const isBlockSaving = isSavingReusableBlock(id);
+
+            if (isBlockSaving && !isTemporary) {
+                reusableBlocks[id] = { id, isSaving: true };
             }
-            
-            if (!isBlockSaving && !block.isTemporary && !!reusableBlocks[block.id]) {
-                if (block.id === reusableBlocks[block.id].id && (!isBlockSaving && reusableBlocks[block.id].isSaving)) {
-                    reusableBlocks[block.id].isSaving = false;
-                    apiFetch({ path: `wecodeart/v1/save_block_meta/${block.id}`, method: 'POST' });
+
+            if (!isBlockSaving && !isTemporary && !!reusableBlocks[id]) {
+                if (id === reusableBlocks[id].id && (!isBlockSaving && reusableBlocks[id].isSaving)) {
+                    reusableBlocks[id].isSaving = false;
+                    apiFetch({ path: `wecodeart/v1/save_block_meta/${id}`, method: 'POST' }).then(handleNotice);
                 }
             }
         }
     });
 
+    /**
+     * Handle Normal Blocks
+     */
     if ((isPublishing || (postPublished && isSaving)) && !isAutoSaving) {
-        savePostMeta();
+        checked = false;
+    } else {
+        if (!checked) {
+            apiFetch({ path: `wecodeart/v1/save_post_meta/${getCurrentPostId()}`, method: 'POST' }).then(handleNotice);
+            checked = true;
+        }
     }
 });

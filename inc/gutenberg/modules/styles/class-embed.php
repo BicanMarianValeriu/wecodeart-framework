@@ -248,7 +248,7 @@ class Embed {
 	public function get_page_css_meta( $post_id ) {
 		$style = '';
 		if ( has_blocks( $post_id ) ) {
-			$style .= get_post_meta( $post_id, '_wca_gutenberg_block_styles', true );
+			$style .= get_post_meta( $post_id, '_wca_blocks_styles', true );
 			
 			$blocks = Gutenberg::parse_blocks( get_post_field( 'post_content', $post_id ) );
 
@@ -304,7 +304,7 @@ class Embed {
 		$style = '';
 		foreach ( $blocks as $block ) {
 			if ( 'core/block' === $block['blockName'] && ! empty( $block['attrs']['ref'] ) ) {
-				$style .= get_post_meta( $block['attrs']['ref'], '_wca_gutenberg_block_styles', true );
+				$style .= get_post_meta( $block['attrs']['ref'], '_wca_blocks_styles', true );
 			}
 
 			if ( isset( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {

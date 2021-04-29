@@ -5,9 +5,9 @@ const {
 	i18n: {
 		__,
 	},
-	blockLibrary: {
-		registerCoreBlocks
-	},
+	// blockLibrary: {
+	// 	registerCoreBlocks
+	// },
 	hooks: {
 		applyFilters
 	},
@@ -29,14 +29,14 @@ const {
 	}
 } = wp;
 
+const { currentUser, version } = wecodeart;
+
 /* Settings */
-import { License, CustomCSS } from './settings';
-import { GettingStarted, Extensions, Notices } from './components';
+import { GettingStarted, Extensions, Licenses, Notices } from './components';
 
 import './../../scss/admin/admin.scss';
 
 const WeCodeArt = () => {
-	const { currentUser, version, editorSettings: jsonSettings } = wecodeart;
 	const { createNotice: coreCreateNotice } = useDispatch('core/notices');
 
 	const createNotice = (type, desc, opts) => {
@@ -48,7 +48,6 @@ const WeCodeArt = () => {
 	};
 
 	const {
-		editorSettings,
 		wecodeartSettings,
 		saveEntityRecord,
 		isRequesting,
@@ -62,15 +61,8 @@ const WeCodeArt = () => {
 			isRequesting,
 			saveEntityRecord,
 			wecodeartSettings: getEntityRecord('wecodeart', 'settings'),
-			editorSettings: select('core/editor').getEditorSettings(),
 		};
 	});
-
-	let getSettings = editorSettings.wecodeart;
-
-	if (typeof getSettings === 'undefined' && typeof jsonSettings !== 'undefined') {
-		getSettings = JSON.parse(jsonSettings).settings;
-	}
 
 	const tabProps = { saveEntityRecord, isRequesting, wecodeartSettings, createNotice };
 
@@ -97,17 +89,11 @@ const WeCodeArt = () => {
 
 	tabs = [
 		...tabs,
-		// {
-		// 	name: 'wca-license',
-		// 	title: __('License(s)', 'wecodeart'),
-		// 	className: 'wca-license',
-		// 	render: <License {...tabProps} />
-		// },
 		{
-			name: 'wca-customcss',
-			title: __('Custom CSS', 'wecodeart'),
-			className: 'wca-customcss',
-			render: <CustomCSS {...tabProps} />
+			name: 'wca-license',
+			title: __('License(s)', 'wecodeart'),
+			className: 'wca-license',
+			render: <Licenses {...tabProps} />
 		}
 	];
 
@@ -122,7 +108,7 @@ const WeCodeArt = () => {
 		<Panel>
 			<PanelBody opened={true}>
 				<div className="components-panel__header">
-					<p className="wecodeart-panel__header-hint">{__('Appearance → WeCodeArt', 'wecodeart')}</p>
+					<p className="wecodeart-panel__header-hint">{__('Appearance', 'wecodeart')} → WeCodeArt</p>
 					<h2>{__('Getting Started with', 'wecodeart')} <strong>WeCodeArt Framework</strong><code>{version}</code></h2>
 					<p>{__(`Congratulations ${currentUser}! You\'ve just unlocked more Gutenberg block editor tools for easier editing and better workflow.`, 'wecodeart')}</p>
 				</div>
@@ -162,7 +148,7 @@ wp.domReady(() => {
 		}
 	]);
 	// Register Core Blocks
-	registerCoreBlocks();
+	// registerCoreBlocks();
 	// Render Admin
 	render(<WeCodeArt />, document.getElementById('wecodeart'));
 });

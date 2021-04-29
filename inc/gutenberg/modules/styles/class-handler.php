@@ -105,9 +105,9 @@ class Handler {
 	 *
 	 * @param 	\WP_REST_Request $request Rest request.
 	 *
-	 * @return 	mixed
 	 * @since   4.2.0
-	 * @access  public
+	 *
+	 * @return 	mixed
 	 */
 	public function save_post_meta( \WP_REST_Request $request ) {
 		if ( ! current_user_can( 'edit_posts' ) ) {
@@ -116,11 +116,12 @@ class Handler {
 
 		$post_id 	= $request->get_param( 'id' );
 		$file 		= $this->generate_css_file( $post_id );
+		$status 	= $file ? 'updated' : 'removed';
 
 		return rest_ensure_response( [
-			'message' 	=> __( 'CSS updated.', 'wecodeart' ),
+			'message' 	=> sprintf( __( 'Blocks CSS %s.', 'wecodeart' ), $status ),
 			'postId' 	=> $post_id,
-			'status'	=> $file ? 'updated' : 'removed'
+			'status'	=> $status
 		] );
 	}
 
@@ -129,9 +130,9 @@ class Handler {
 	 *
 	 * @param   \WP_REST_Request $request Rest request.
 	 *
-	 * @return  mixed
 	 * @since   4.2.0
-	 * @access  public
+	 *
+	 * @return  mixed
 	 */
 	public function save_block_meta( \WP_REST_Request $request ) {
 		if ( ! current_user_can( 'edit_posts' ) ) {
@@ -150,7 +151,7 @@ class Handler {
 		}
 
 		return rest_ensure_response( [
-			'message' 	=> __( 'CSS updated.', 'wecodeart' ),
+			'message' 	=> sprintf( __( 'Reusable Blocks CSS %s.', 'wecodeart' ), $status ),
 			'blockId' 	=> $block_id,
 			'status'	=> $status
 		] );
@@ -177,14 +178,14 @@ class Handler {
 	 * @param   int    $post_id Post id.
 	 * @param   string $css CSS string.
 	 *
-	 * @return  bool
 	 * @since   4.2.0
-	 * @access  public
+	 *
+	 * @return  bool
 	 */
 	public function save_css_file( $post_id, $css ) {
 		$css = $this->styles::compress( $css );
 
-		update_post_meta( $post_id, '_wca_gutenberg_block_styles', $css );
+		update_post_meta( $post_id, '_wca_blocks_styles', $css );
 
 		do_action( 'wecodeart/gutenberg/css/handler/save', $post_id );
 
@@ -194,7 +195,7 @@ class Handler {
 
 		// If it went successfully, update meta with the filename;
 		if ( $file ) {
-			update_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', $file_name );
+			update_post_meta( $post_id, '_wca_blocks_stylesheet', $file_name );
 			return true;
 		}
 		
@@ -209,7 +210,7 @@ class Handler {
 	 * @return  string 	File url.
 	 */
 	public function get_css_url( $post_id ) {
-		$file_name = get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
+		$file_name = get_post_meta( $post_id, '_wca_blocks_stylesheet', true );
 
 		if ( empty( $file_name ) ) {
 			return false;
@@ -226,7 +227,7 @@ class Handler {
 	 * @return  bool
 	 */
 	public function has_css_file( $post_id ) {
-		$file_name = get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
+		$file_name = get_post_meta( $post_id, '_wca_blocks_stylesheet', true );
 
 		if ( empty( $file_name ) ) {
 			return false;
@@ -238,22 +239,22 @@ class Handler {
 	/**
 	 * Function to delete CSS from WordPress Filesystem.
 	 *
-	 * @param   int $post_id Post id.
+	 * @param   int 	$post_id Post id.
+	 *
+	 * @since   4.2.0
 	 *
 	 * @return  bool
-	 * @since   4.2.0
-	 * @access  public
 	 */
 	public function delete_css_file( $post_id ) {
 		if ( ! current_user_can( 'edit_posts' ) ) {
 			return false;
 		}
 
-		$file_name = get_post_meta( $post_id, '_wca_gutenberg_block_stylesheet', true );
+		$file_name = get_post_meta( $post_id, '_wca_blocks_stylesheet', true );
 
 		// Clear Meta
-		delete_post_meta( $post_id, '_wca_gutenberg_block_styles' );
-		delete_post_meta( $post_id, '_wca_gutenberg_block_stylesheet' );
+		delete_post_meta( $post_id, '_wca_blocks_styles' );
+		delete_post_meta( $post_id, '_wca_blocks_stylesheet' );
 		
 		return $this->FS->delete_file( $file_name . '.css' );
 	}

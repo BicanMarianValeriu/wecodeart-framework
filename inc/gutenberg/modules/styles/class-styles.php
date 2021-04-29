@@ -90,6 +90,8 @@ class Styles implements Integration {
 	public function filter_inline_js( $data ) {
 		return array_merge( $data, [
 			'removeStyles' => [
+				// 'core/heading',
+				// 'core/paragraph',
 				'core/group',
 				'core/cover',
 				'core/media-text',

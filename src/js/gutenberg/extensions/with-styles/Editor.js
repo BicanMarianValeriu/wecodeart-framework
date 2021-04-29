@@ -13,7 +13,23 @@ const CSSEditor = ({
 }) => {
 	const { customCSS, className } = attributes;
 
+	const editorRef = useRef(null);
+	const customCSSRef = useRef(null);
+	const classArRef = useRef(null);
+
 	useEffect(() => {
+		setAttributes({
+			className: getClassName(),
+			hasCustomCSS: true,
+		});
+	}, [attributes]);
+
+	useEffect(() => {
+		setAttributes({
+			className: getClassName(),
+			hasCustomCSS: true,
+		});
+
 		if (customCSS) {
 			const regex = new RegExp('.' + classArRef.current, 'g');
 			const generatedCSS = (customCSS).replace(regex, 'selector');
@@ -53,15 +69,6 @@ const CSSEditor = ({
 		});
 	}, []);
 
-	useEffect(() => {
-		let classes = getClassName();
-
-		setAttributes({
-			className: classes,
-			hasCustomCSS: true,
-		});
-	}, [attributes]);
-
 	const getClassName = () => {
 		let classes;
 
@@ -77,25 +84,21 @@ const CSSEditor = ({
 		if (className) {
 			classes = className;
 
-			if (!classes.includes('wcacss-')) {
+			if (!classes.includes('css-')) {
 				classes = classes.split(' ');
-				classes.push(`wcacss-${uniqueId}`);
+				classes.push(`css-${uniqueId}`);
 				classes = classes.join(' ');
 			}
 
 			classArRef.current = classes.split(' ');
-			classArRef.current = classArRef.current.find(i => i.includes('wcacss'));
+			classArRef.current = classArRef.current.find(i => i.includes('css-'));
 		} else {
-			classes = `wcacss-${uniqueId}`;
+			classes = `css-${uniqueId}`;
 			classArRef.current = classes;
 		}
 
 		return classes;
 	};
-
-	const editorRef = useRef(null);
-	const customCSSRef = useRef(null);
-	const classArRef = useRef(null);
 
 	return (
 		<>

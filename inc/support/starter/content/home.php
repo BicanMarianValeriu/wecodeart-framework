@@ -165,7 +165,7 @@ return [
 	<!-- /wp:paragraph -->
 
 	<!-- wp:buttons {"align":"center","className":"wcacss-5d300fef","hasCustomCSS":true} -->
-	<div class="wp-block-buttons aligncenter wcacss-5d300fef"><!-- wp:button {"backgroundColor":"white","textColor":"dark","className":"is-style-primary wcacss-9c62f0ee","hasCustomCSS":true} -->
+	<div class="wp-block-buttons is-content-justification-center wcacss-5d300fef"><!-- wp:button {"backgroundColor":"white","textColor":"dark","className":"is-style-primary wcacss-9c62f0ee","hasCustomCSS":true} -->
 	<div class="wp-block-button is-style-primary wcacss-9c62f0ee"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div></div>

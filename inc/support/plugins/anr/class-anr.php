@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use anr_captcha_class as Captcha;
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 
 /**
@@ -26,7 +27,7 @@ use WeCodeArt\Integration;
  */
 class ANR implements Integration {
 
-	use \WeCodeArt\Singleton;
+	use Singleton;
 
 	/**
 	 * Send to Constructor

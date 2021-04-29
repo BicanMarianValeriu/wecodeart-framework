@@ -6271,7 +6271,7 @@
   background: #f5f6f8;
 }
 .wecodeart-admin .wecodeart-tab-panel .components-tab-panel__tabs-item:focus {
-  color: #0088cc;
+  color: var(--wp-admin-theme-color);
   outline-offset: -1px;
   outline: 1px dotted #555d66;
   box-shadow: none;
@@ -6280,16 +6280,11 @@
   opacity: 1;
 }
 .wecodeart-admin .wecodeart-tab-panel .components-tab-panel__tabs-item.active-tab, .wecodeart-admin .wecodeart-tab-panel .components-tab-panel__tabs-item.active-tab:hover {
-  border-color: #0088cc;
+  border-color: var(--wp-admin-theme-color);
   background: #fff;
 }
 .wecodeart-admin .wecodeart-tab-panel .components-tab-panel__tab-content {
   padding: 0 50px;
-}
-.wecodeart-admin .wecodeart-tab-panel .components-tab-panel__tab-content p,
-.wecodeart-admin .wecodeart-tab-panel .components-tab-panel__tab-content button {
-  font-size: 16px;
-  line-height: 1.5;
 }
 .wecodeart-admin .wecodeart-tab-panel--vertical {
   display: flex;

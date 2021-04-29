@@ -150,6 +150,7 @@ class Gutenberg {
 				'core/calendar',
 				'core/tag-cloud',
 				'core/latest-comments',
+				'core/block',
 			] ),
 			'contentModules' => wp_list_pluck( Content::content_modules(), 'label' ),
 		] );

@@ -452,10 +452,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings */ "./src/js/admin/settings/index.js");
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components */ "./src/js/admin/components/index.js");
-/* harmony import */ var _scss_admin_admin_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../scss/admin/admin.scss */ "./src/scss/admin/admin.scss");
-/* harmony import */ var _scss_admin_admin_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_scss_admin_admin_scss__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components */ "./src/js/admin/components/index.js");
+/* harmony import */ var _scss_admin_admin_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../scss/admin/admin.scss */ "./src/scss/admin/admin.scss");
+/* harmony import */ var _scss_admin_admin_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_scss_admin_admin_scss__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -470,7 +469,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  */
 var _wp = wp,
     __ = _wp.i18n.__,
-    registerCoreBlocks = _wp.blockLibrary.registerCoreBlocks,
     applyFilters = _wp.hooks.applyFilters,
     _wp$data = _wp.data,
     useSelect = _wp$data.useSelect,
@@ -485,18 +483,15 @@ var _wp = wp,
     Panel = _wp$components.Panel,
     PanelBody = _wp$components.PanelBody,
     PanelRow = _wp$components.PanelRow;
+var _wecodeart = wecodeart,
+    currentUser = _wecodeart.currentUser,
+    version = _wecodeart.version;
 /* Settings */
 
 
 
 
-
 var WeCodeArt = function WeCodeArt() {
-  var _wecodeart = wecodeart,
-      currentUser = _wecodeart.currentUser,
-      version = _wecodeart.version,
-      jsonSettings = _wecodeart.editorSettings;
-
   var _useDispatch = useDispatch('core/notices'),
       coreCreateNotice = _useDispatch.createNotice;
 
@@ -521,20 +516,12 @@ var WeCodeArt = function WeCodeArt() {
     return {
       isRequesting: isRequesting,
       saveEntityRecord: saveEntityRecord,
-      wecodeartSettings: getEntityRecord('wecodeart', 'settings'),
-      editorSettings: select('core/editor').getEditorSettings()
+      wecodeartSettings: getEntityRecord('wecodeart', 'settings')
     };
   }),
-      editorSettings = _useSelect.editorSettings,
       wecodeartSettings = _useSelect.wecodeartSettings,
       saveEntityRecord = _useSelect.saveEntityRecord,
       isRequesting = _useSelect.isRequesting;
-
-  var getSettings = editorSettings.wecodeart;
-
-  if (typeof getSettings === 'undefined' && typeof jsonSettings !== 'undefined') {
-    getSettings = JSON.parse(jsonSettings).settings;
-  }
 
   var tabProps = {
     saveEntityRecord: saveEntityRecord,
@@ -546,7 +533,7 @@ var WeCodeArt = function WeCodeArt() {
     name: 'wca-getting-started',
     title: __('Getting Started', 'wecodeart'),
     className: 'wca-getting-started',
-    render: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_components__WEBPACK_IMPORTED_MODULE_5__["GettingStarted"], null)
+    render: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_components__WEBPACK_IMPORTED_MODULE_4__["GettingStarted"], null)
   }];
   var extensions = applyFilters('wecodeart.admin.extensions', []);
 
@@ -555,23 +542,17 @@ var WeCodeArt = function WeCodeArt() {
       name: 'wca-extensions',
       title: __('Extensions', 'wecodeart'),
       className: 'wca-extensions',
-      render: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_components__WEBPACK_IMPORTED_MODULE_5__["Extensions"], _objectSpread(_objectSpread({}, tabProps), {}, {
+      render: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_components__WEBPACK_IMPORTED_MODULE_4__["Extensions"], _objectSpread(_objectSpread({}, tabProps), {}, {
         extensions: extensions
       }))
     }]);
   }
 
-  tabs = [].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1___default()(tabs), [// {
-  // 	name: 'wca-license',
-  // 	title: __('License(s)', 'wecodeart'),
-  // 	className: 'wca-license',
-  // 	render: <License {...tabProps} />
-  // },
-  {
-    name: 'wca-customcss',
-    title: __('Custom CSS', 'wecodeart'),
-    className: 'wca-customcss',
-    render: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_settings__WEBPACK_IMPORTED_MODULE_4__["CustomCSS"], tabProps)
+  tabs = [].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1___default()(tabs), [{
+    name: 'wca-license',
+    title: __('License(s)', 'wecodeart'),
+    className: 'wca-license',
+    render: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_components__WEBPACK_IMPORTED_MODULE_4__["Licenses"], tabProps)
   }]);
 
   var _useState = useState(''),
@@ -592,7 +573,7 @@ var WeCodeArt = function WeCodeArt() {
       className: "components-panel__header"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("p", {
       className: "wecodeart-panel__header-hint"
-    }, __('Appearance → WeCodeArt', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("h2", null, __('Getting Started with', 'wecodeart'), " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("strong", null, "WeCodeArt Framework"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("code", null, version)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("p", null, __("Congratulations ".concat(currentUser, "! You've just unlocked more Gutenberg block editor tools for easier editing and better workflow."), 'wecodeart'))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(TabPanel, {
+    }, __('Appearance', 'wecodeart'), " \u2192 WeCodeArt"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("h2", null, __('Getting Started with', 'wecodeart'), " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("strong", null, "WeCodeArt Framework"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("code", null, version)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("p", null, __("Congratulations ".concat(currentUser, "! You've just unlocked more Gutenberg block editor tools for easier editing and better workflow."), 'wecodeart'))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(TabPanel, {
       className: "wecodeart-tab-panel",
       activeClass: "active-tab",
       initialTabName: initialTab,
@@ -606,7 +587,7 @@ var WeCodeArt = function WeCodeArt() {
     }))));
   };
 
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(MainPanel, null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_components__WEBPACK_IMPORTED_MODULE_5__["Notices"], null));
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(MainPanel, null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_components__WEBPACK_IMPORTED_MODULE_4__["Notices"], null));
 };
 
 wp.domReady(function () {
@@ -626,8 +607,8 @@ wp.domReady(function () {
     baseURL: '/wecodeart/v1/settings' // API path without /wp-json
 
   }]); // Register Core Blocks
-
-  registerCoreBlocks(); // Render Admin
+  // registerCoreBlocks();
+  // Render Admin
 
   render(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(WeCodeArt, null), document.getElementById('wecodeart'));
 });
@@ -749,7 +730,7 @@ var _wecodeart = wecodeart,
     className: "card-title"
   }, __('Customizer Options', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("p", {
     className: "card-text"
-  }, "WeCodeArt Framework uses WP Customizer API to manage its options. Head over there to see the available customizations and setup starter content."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", {
+  }, "WeCodeArt Framework uses WP Customizer API to manage its front-end options. Head over there to see the available customizations and/or setup starter content."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", {
     href: adminUrl + '/customize.php',
     class: "button button-primary is-primary"
   }, __('View Options', 'wecodeart')))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
@@ -790,7 +771,7 @@ var _wecodeart = wecodeart,
 /*!******************************************!*\
   !*** ./src/js/admin/components/index.js ***!
   \******************************************/
-/*! exports provided: Notices, Extensions, GettingStarted */
+/*! exports provided: Notices, Licenses, Extensions, GettingStarted */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -798,15 +779,157 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _notices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notices */ "./src/js/admin/components/notices.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Notices", function() { return _notices__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-/* harmony import */ var _extensions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./extensions */ "./src/js/admin/components/extensions.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Extensions", function() { return _extensions__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+/* harmony import */ var _licenses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./licenses */ "./src/js/admin/components/licenses.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Licenses", function() { return _licenses__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
-/* harmony import */ var _gettingStarted__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gettingStarted */ "./src/js/admin/components/gettingStarted.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GettingStarted", function() { return _gettingStarted__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+/* harmony import */ var _extensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./extensions */ "./src/js/admin/components/extensions.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Extensions", function() { return _extensions__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _gettingStarted__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gettingStarted */ "./src/js/admin/components/gettingStarted.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GettingStarted", function() { return _gettingStarted__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
 
 
 
+
+
+/***/ }),
+
+/***/ "./src/js/admin/components/licenses.js":
+/*!*********************************************!*\
+  !*** ./src/js/admin/components/licenses.js ***!
+  \*********************************************/
+/*! exports provided: License, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "License", function() { return License; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+/**
+ * WordPress dependencies
+ */
+var _wp = wp,
+    _wp$i18n = _wp.i18n,
+    __ = _wp$i18n.__,
+    sprintf = _wp$i18n.sprintf,
+    _wp$hooks = _wp.hooks,
+    doAction = _wp$hooks.doAction,
+    applyFilters = _wp$hooks.applyFilters,
+    _wp$element = _wp.element,
+    RawHTML = _wp$element.RawHTML,
+    useState = _wp$element.useState,
+    _wp$components = _wp.components,
+    withFilters = _wp$components.withFilters,
+    BaseControl = _wp$components.BaseControl,
+    ExternalLink = _wp$components.ExternalLink,
+    Button = _wp$components.Button,
+    Spinner = _wp$components.Spinner,
+    Placeholder = _wp$components.Placeholder;
+var License = function License(props) {
+  var isRequesting = props.isRequesting,
+      createNotice = props.createNotice,
+      saveEntityRecord = props.saveEntityRecord,
+      wecodeartSettings = props.wecodeartSettings;
+
+  if (isRequesting || !wecodeartSettings) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Placeholder, {
+      style: {
+        marginTop: 20
+      },
+      icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Spinner, null),
+      label: __('Loading', 'wecodeart'),
+      instructions: __('Please wait, loading settings...', 'wecodeart')
+    });
+  }
+
+  var _useState = useState(null),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
+      loading = _useState2[0],
+      setLoading = _useState2[1];
+
+  var LicenseFields = applyFilters('wecodeart.admin.licensePanel.fields', [{
+    id: 'theme_api_key',
+    label: 'WeCodeArt Framework',
+    externalUrl: '//www.wecodeart.com/product/wecodeart-framework/'
+  }], props);
+
+  var handleNotice = function handleNotice(r, id, val) {
+    setLoading(false);
+    var hasSaved = r && r[id] === val;
+    var type = hasSaved ? 'success' : 'error';
+    var desc = hasSaved ? __('API Key Saved.', 'wecodeart') : __('Something went wrong...', 'wecodeart');
+    return createNotice(type, desc);
+  };
+
+  doAction('wecodeart.admin.licensePanel', props);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("p", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RawHTML, null, sprintf(__('Enter your license keys here to receive updates. If your license keys are expired, please %1$srenew your licenses%2$s.', 'wecodeart'), '<a href="https://www.wecodeart.com/" target="_blank">', '</a>'))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("table", {
+    className: "wecodeart-license-manager table",
+    style: {
+      width: '100%'
+    }
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("tr", {
+    style: {
+      textAlign: 'left'
+    }
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", null, __('Product', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", null, __('License Key', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", null, __('Actions', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", null, __('Status', 'wecodeart'))), LicenseFields.map(function (_ref) {
+    var id = _ref.id,
+        label = _ref.label,
+        _ref$externalUrl = _ref.externalUrl,
+        externalUrl = _ref$externalUrl === void 0 ? '' : _ref$externalUrl;
+
+    var _useState3 = useState(wecodeartSettings[id]),
+        _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
+        value = _useState4[0],
+        _onChange = _useState4[1];
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("tr", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("td", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("strong", null, label)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("td", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(BaseControl, {
+      className: "wecodeart-button-field",
+      id: id,
+      key: id
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("input", {
+      id: id,
+      type: "text",
+      value: value,
+      disabled: value === 'FREEMIUM',
+      placeholder: __('API Key', 'wecodeart'),
+      onChange: function onChange(e) {
+        return _onChange(e.target.value);
+      }
+    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("td", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "wecodeart-button-group"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Button, {
+      className: "wecodeart-button-group__item",
+      isPrimary: true,
+      isLarge: true,
+      icon: loading && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Spinner, null),
+      disabled: value === wecodeartSettings[id],
+      onClick: function onClick() {
+        setLoading(true);
+        saveEntityRecord('wecodeart', 'settings', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, id, value)).then(function (res) {
+          return handleNotice(res, id, value);
+        });
+      }
+    }, loading ? __('Saving...', 'wecodeart') : __('Save', 'wecodeart')), externalUrl !== '' && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ExternalLink, {
+      href: externalUrl,
+      className: "wecodeart-button-group__item"
+    }, __('Get API Key', 'wecodeart')))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("td", {
+      style: {
+        backgroundColor: 'rgb(137 255 128)'
+      }
+    }, sprintf(__('Days: %s', 'wecodeart'), __('Unlimited', 'wecodeart'))));
+  })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (withFilters('wecodeart.admin.licensePanel')(License));
 
 /***/ }),
 
@@ -846,292 +969,6 @@ var SnackbarList = wp.components.SnackbarList;
     onRemove: removeNotice
   });
 });
-
-/***/ }),
-
-/***/ "./src/js/admin/settings/customCSS.js":
-/*!********************************************!*\
-  !*** ./src/js/admin/settings/customCSS.js ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-/**
- * WordPress dependencies.
- */
-var _wp = wp,
-    __ = _wp.i18n.__,
-    _wp$element = _wp.element,
-    useEffect = _wp$element.useEffect,
-    useState = _wp$element.useState,
-    useRef = _wp$element.useRef,
-    _wp$components = _wp.components,
-    Button = _wp$components.Button,
-    Spinner = _wp$components.Spinner,
-    Placeholder = _wp$components.Placeholder;
-/* harmony default export */ __webpack_exports__["default"] = (function (props) {
-  var saveEntityRecord = props.saveEntityRecord,
-      createNotice = props.createNotice,
-      _props$wecodeartSetti = props.wecodeartSettings,
-      wecodeartSettings = _props$wecodeartSetti === void 0 ? {} : _props$wecodeartSetti,
-      isRequesting = props.isRequesting;
-
-  if (isRequesting) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Placeholder, {
-      style: {
-        marginTop: 20
-      },
-      icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Spinner, null),
-      label: __('Loading Custom CSS', 'wecodeart'),
-      instructions: __('Please wait, loading settings...', 'wecodeart')
-    });
-  }
-
-  var _wecodeartSettings$cu = wecodeartSettings.custom_css,
-      custom_css = _wecodeartSettings$cu === void 0 ? '' : _wecodeartSettings$cu;
-  var refContainer = useRef(null);
-
-  var _useState = useState(custom_css),
-      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
-      customCSS = _useState2[0],
-      setCustomCSS = _useState2[1];
-
-  var _useState3 = useState(null),
-      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 2),
-      editor = _useState4[0],
-      loadEditor = _useState4[1];
-
-  var _useState5 = useState(false),
-      _useState6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState5, 2),
-      loading = _useState6[0],
-      setLoading = _useState6[1];
-
-  useEffect(function () {
-    loadEditor(wp.CodeMirror(refContainer.current, {
-      value: customCSS,
-      autoCloseBrackets: true,
-      continueComments: true,
-      lineNumbers: true,
-      lineWrapping: true,
-      matchBrackets: true,
-      lint: true,
-      gutters: ['CodeMirror-lint-markers'],
-      styleActiveLine: true,
-      styleActiveSelected: true,
-      extraKeys: {
-        'Ctrl-Space': 'autocomplete',
-        'Alt-F': 'findPersistent',
-        'Cmd-F': 'findPersistent'
-      }
-    }));
-  }, []);
-  useEffect(function () {
-    if (editor === null) return;
-    editor.on('change', function () {
-      return setCustomCSS(editor.getValue());
-    });
-  }, [editor]);
-
-  var handleNotice = function handleNotice(r, id, val) {
-    setLoading(false);
-    var hasSaved = r && r[id] === val;
-    var type = hasSaved ? 'success' : 'error';
-    var desc = hasSaved ? __('CSS Saved.', 'wecodeart') : __('Something went wrong...', 'wecodeart');
-    return createNotice(type, desc);
-  };
-
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    class: "wecodeart-custom-css"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h2", {
-    class: "wecodeart-custom-css__title"
-  }, __('Add your custom CSS.', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    ref: refContainer,
-    className: "wecodeart-custom-css__editor",
-    id: "wecodeart-css-editor"
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    class: "wecodeart-custom-css__content"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("p", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("small", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("em", null, __('This will also be updated in WP Customizer.', 'wecodeart'))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Button, {
-    isPrimary: true,
-    isLarge: true,
-    icon: loading && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Spinner, null),
-    disabled: loading,
-    onClick: function onClick() {
-      setLoading(true);
-      saveEntityRecord('wecodeart', 'settings', {
-        custom_css: customCSS
-      }).then(function (res) {
-        return handleNotice(res, 'custom_css', customCSS);
-      });
-    }
-  }, loading ? __('Saving...', 'wecodeart') : __('Save', 'wecodeart')));
-});
-
-/***/ }),
-
-/***/ "./src/js/admin/settings/index.js":
-/*!****************************************!*\
-  !*** ./src/js/admin/settings/index.js ***!
-  \****************************************/
-/*! exports provided: License, CustomCSS */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _license__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./license */ "./src/js/admin/settings/license.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "License", function() { return _license__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _customCSS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./customCSS */ "./src/js/admin/settings/customCSS.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CustomCSS", function() { return _customCSS__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
-
-
-
-/***/ }),
-
-/***/ "./src/js/admin/settings/license.js":
-/*!******************************************!*\
-  !*** ./src/js/admin/settings/license.js ***!
-  \******************************************/
-/*! exports provided: License, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "License", function() { return License; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-
-/**
- * WordPress dependencies
- */
-var _wp = wp,
-    _wp$i18n = _wp.i18n,
-    __ = _wp$i18n.__,
-    sprintf = _wp$i18n.sprintf,
-    _wp$hooks = _wp.hooks,
-    doAction = _wp$hooks.doAction,
-    applyFilters = _wp$hooks.applyFilters,
-    _wp$element = _wp.element,
-    RawHTML = _wp$element.RawHTML,
-    useState = _wp$element.useState,
-    Fragment = _wp$element.Fragment,
-    _wp$components = _wp.components,
-    withFilters = _wp$components.withFilters,
-    BaseControl = _wp$components.BaseControl,
-    ExternalLink = _wp$components.ExternalLink,
-    Button = _wp$components.Button,
-    Spinner = _wp$components.Spinner,
-    Placeholder = _wp$components.Placeholder;
-var License = function License(props) {
-  var isRequesting = props.isRequesting,
-      createNotice = props.createNotice,
-      saveEntityRecord = props.saveEntityRecord,
-      wecodeartSettings = props.wecodeartSettings;
-
-  if (isRequesting) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Placeholder, {
-      style: {
-        marginTop: 20
-      },
-      icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Spinner, null),
-      label: __('Loading', 'wecodeart'),
-      instructions: __('Please wait, loading settings...', 'wecodeart')
-    });
-  }
-
-  var _useState = useState(null),
-      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
-      loading = _useState2[0],
-      setLoading = _useState2[1];
-
-  var LicenseFields = applyFilters('wecodeart.admin.licensePanel.fields', [{
-    id: 'theme_api_key',
-    label: __('WeCodeArt Framework', 'wecodeart'),
-    externalUrl: 'https://www.wecodeart.com/product/wecodeart-framework/'
-  }], props);
-
-  var handleNotice = function handleNotice(r, id, val) {
-    setLoading(false);
-    var hasSaved = r && r[id] === val;
-    var type = hasSaved ? 'success' : 'error';
-    var desc = hasSaved ? __('API Key Saved.', 'wecodeart') : __('Something went wrong...', 'wecodeart');
-    return createNotice(type, desc);
-  };
-
-  doAction('wecodeart.admin.licensePanel', props);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("p", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RawHTML, null, sprintf(__('Enter your license keys here to receive updates. If your license keys has expired, please %1$srenew your licenses%2$s.', 'wecodeart'), '<a href="https://www.wecodeart.com/" target="_blank">', '</a>'))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("table", {
-    className: "wecodeart-license-manager table",
-    style: {
-      width: '100%'
-    }
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("tr", {
-    style: {
-      textAlign: 'left'
-    }
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", null, __('Product', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", null, __('License Key', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", null, __('Actions', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", null, __('Status', 'wecodeart'))), LicenseFields.map(function (_ref) {
-    var id = _ref.id,
-        label = _ref.label,
-        externalUrl = _ref.externalUrl;
-
-    var _useState3 = useState(wecodeartSettings[id]),
-        _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
-        value = _useState4[0],
-        _onChange = _useState4[1];
-
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("tr", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("td", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("strong", null, label)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("td", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(BaseControl, {
-      className: "wecodeart-button-field",
-      id: id,
-      key: id
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("input", {
-      id: id,
-      type: "text",
-      value: value,
-      disabled: value === 'sFREEMIUM',
-      placeholder: __('API Key', 'wecodeart'),
-      onChange: function onChange(e) {
-        return _onChange(e.target.value);
-      }
-    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("td", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
-      className: "wecodeart-button-group"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Button, {
-      className: "wecodeart-button-group__item",
-      isPrimary: true,
-      isLarge: true,
-      icon: loading && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Spinner, null),
-      disabled: value === wecodeartSettings[id],
-      onClick: function onClick() {
-        setLoading(true);
-        saveEntityRecord('wecodeart', 'settings', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, id, value)).then(function (res) {
-          return handleNotice(res, id, value);
-        });
-      }
-    }, loading ? __('Saving...', 'wecodeart') : __('Save', 'wecodeart')), externalUrl !== '' && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ExternalLink, {
-      href: externalUrl,
-      className: "wecodeart-button-group__item"
-    }, __('Get API Key', 'wecodeart')))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("td", {
-      style: {
-        backgroundColor: 'rgb(137 255 128)'
-      }
-    }, sprintf(__('Days: %s', 'wecodeart'), __('Unlimited', 'wecodeart'))));
-  })));
-};
-/* harmony default export */ __webpack_exports__["default"] = (withFilters('wecodeart.admin.licensePanel')(License));
 
 /***/ }),
 

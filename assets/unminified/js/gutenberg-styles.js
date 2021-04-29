@@ -86,54 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-module.exports = _asyncToGenerator;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
 /***/ "./src/js/gutenberg/extensions/with-styles/Editor.js":
 /*!***********************************************************!*\
   !*** ./src/js/gutenberg/extensions/with-styles/Editor.js ***!
@@ -162,7 +114,21 @@ var CSSEditor = function CSSEditor(_ref) {
       clientId = _ref.clientId;
   var customCSS = attributes.customCSS,
       className = attributes.className;
+  var editorRef = useRef(null);
+  var customCSSRef = useRef(null);
+  var classArRef = useRef(null);
   useEffect(function () {
+    setAttributes({
+      className: getClassName(),
+      hasCustomCSS: true
+    });
+  }, [attributes]);
+  useEffect(function () {
+    setAttributes({
+      className: getClassName(),
+      hasCustomCSS: true
+    });
+
     if (customCSS) {
       var regex = new RegExp('.' + classArRef.current, 'g');
       var generatedCSS = customCSS.replace(regex, 'selector');
@@ -204,13 +170,6 @@ var CSSEditor = function CSSEditor(_ref) {
       });
     });
   }, []);
-  useEffect(function () {
-    var classes = getClassName();
-    setAttributes({
-      className: classes,
-      hasCustomCSS: true
-    });
-  }, [attributes]);
 
   var getClassName = function getClassName() {
     var classes;
@@ -223,27 +182,24 @@ var CSSEditor = function CSSEditor(_ref) {
     if (className) {
       classes = className;
 
-      if (!classes.includes('wcacss-')) {
+      if (!classes.includes('css-')) {
         classes = classes.split(' ');
-        classes.push("wcacss-".concat(uniqueId));
+        classes.push("css-".concat(uniqueId));
         classes = classes.join(' ');
       }
 
       classArRef.current = classes.split(' ');
       classArRef.current = classArRef.current.find(function (i) {
-        return i.includes('wcacss');
+        return i.includes('css-');
       });
     } else {
-      classes = "wcacss-".concat(uniqueId);
+      classes = "css-".concat(uniqueId);
       classArRef.current = classes;
     }
 
     return classes;
   };
 
-  var editorRef = useRef(null);
-  var customCSSRef = useRef(null);
-  var classArRef = useRef(null);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     class: "wecodeart-advanced-css"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("hr", null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", {
@@ -275,8 +231,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Editor */ "./src/js/gutenberg/extensions/with-styles/Editor.js");
 /* harmony import */ var _handler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./handler */ "./src/js/gutenberg/extensions/with-styles/handler.js");
-/* harmony import */ var _inject_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./inject-css */ "./src/js/gutenberg/extensions/with-styles/inject-css.js");
-/* harmony import */ var _inject_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_inject_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./injector */ "./src/js/gutenberg/extensions/with-styles/injector.js");
+/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_injector__WEBPACK_IMPORTED_MODULE_3__);
 
 
 /**
@@ -388,58 +344,44 @@ applyFilters();
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
 /**
  * WordPress dependencies
  */
-var _lodash = lodash,
-    debounce = _lodash.debounce;
 var _wp = wp,
     apiFetch = _wp.apiFetch,
     _wp$data = _wp.data,
     select = _wp$data.select,
-    subscribe = _wp$data.subscribe;
-var savePostMeta = debounce( /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee() {
-  var _select, getCurrentPostId;
+    subscribe = _wp$data.subscribe,
+    dispatch = _wp$data.dispatch;
 
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          _select = select('core/editor'), getCurrentPostId = _select.getCurrentPostId;
-          _context.next = 3;
-          return apiFetch({
-            path: "wecodeart/v1/save_post_meta/".concat(getCurrentPostId()),
-            method: 'POST'
-          });
+var handleNotice = function handleNotice(_ref) {
+  var message = _ref.message;
 
-        case 3:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _callee);
-})), 1000);
+  var _dispatch = dispatch('core/notices'),
+      createNotice = _dispatch.createNotice;
+
+  return createNotice('success', message, {
+    isDismissible: true,
+    type: 'snackbar'
+  });
+};
+
+var checked = true;
 var reusableBlocks = {};
 /* harmony default export */ __webpack_exports__["default"] = (subscribe(function () {
-  var _select2 = select('core/editor'),
-      isCurrentPostPublished = _select2.isCurrentPostPublished,
-      isSavingPost = _select2.isSavingPost,
-      isPublishingPost = _select2.isPublishingPost,
-      isAutosavingPost = _select2.isAutosavingPost,
-      __experimentalIsSavingReusableBlock = _select2.__experimentalIsSavingReusableBlock;
-
   var _select$getSettings = select('core/block-editor').getSettings(),
       __experimentalReusableBlocks = _select$getSettings.__experimentalReusableBlocks;
 
-  var _select3 = select('core'),
-      isSavingEntityRecord = _select3.isSavingEntityRecord;
+  var _select = select('core/editor'),
+      getCurrentPostId = _select.getCurrentPostId,
+      isSavingPost = _select.isSavingPost,
+      isPublishingPost = _select.isPublishingPost,
+      isAutosavingPost = _select.isAutosavingPost,
+      isCurrentPostPublished = _select.isCurrentPostPublished,
+      __experimentalIsSavingReusableBlock = _select.__experimentalIsSavingReusableBlock;
+
+  var _select2 = select('core'),
+      isSavingEntityRecord = _select2.isSavingEntityRecord;
 
   var isSavingReusableBlock;
 
@@ -458,40 +400,58 @@ var reusableBlocks = {};
   var isSaving = isSavingPost();
   var getReusableBlocks = __experimentalReusableBlocks || [];
   var postPublished = isCurrentPostPublished();
-  getReusableBlocks.map(function (block) {
-    if (block) {
-      var isBlockSaving = isSavingReusableBlock(block.id);
+  /**
+   * Handle Reusable Blocks
+   */
 
-      if (isBlockSaving && !block.isTemporary) {
-        reusableBlocks[block.id] = {
-          id: block.id,
+  getReusableBlocks.map(function (_ref2) {
+    var id = _ref2.id,
+        isTemporary = _ref2.isTemporary;
+
+    if (id) {
+      var isBlockSaving = isSavingReusableBlock(id);
+
+      if (isBlockSaving && !isTemporary) {
+        reusableBlocks[id] = {
+          id: id,
           isSaving: true
         };
       }
 
-      if (!isBlockSaving && !block.isTemporary && !!reusableBlocks[block.id]) {
-        if (block.id === reusableBlocks[block.id].id && !isBlockSaving && reusableBlocks[block.id].isSaving) {
-          reusableBlocks[block.id].isSaving = false;
+      if (!isBlockSaving && !isTemporary && !!reusableBlocks[id]) {
+        if (id === reusableBlocks[id].id && !isBlockSaving && reusableBlocks[id].isSaving) {
+          reusableBlocks[id].isSaving = false;
           apiFetch({
-            path: "wecodeart/v1/save_block_meta/".concat(block.id),
+            path: "wecodeart/v1/save_block_meta/".concat(id),
             method: 'POST'
-          });
+          }).then(handleNotice);
         }
       }
     }
   });
+  /**
+   * Handle Normal Blocks
+   */
 
   if ((isPublishing || postPublished && isSaving) && !isAutoSaving) {
-    savePostMeta();
+    checked = false;
+  } else {
+    if (!checked) {
+      apiFetch({
+        path: "wecodeart/v1/save_post_meta/".concat(getCurrentPostId()),
+        method: 'POST'
+      }).then(handleNotice);
+      checked = true;
+    }
   }
 }));
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/extensions/with-styles/inject-css.js":
-/*!***************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/with-styles/inject-css.js ***!
-  \***************************************************************/
+/***/ "./src/js/gutenberg/extensions/with-styles/injector.js":
+/*!*************************************************************!*\
+  !*** ./src/js/gutenberg/extensions/with-styles/injector.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -508,12 +468,12 @@ var _lodash = lodash,
     flattenDeep = _lodash.flattenDeep;
 
 var addStyle = function addStyle(style) {
-  var element = document.getElementById('wca-css-editor-styles');
+  var element = document.getElementById('wecodeart-blocks-dynamic-styles');
 
   if (null === element) {
     element = document.createElement('style');
     element.setAttribute('type', 'text/css');
-    element.setAttribute('id', 'wca-css-editor-styles');
+    element.setAttribute('id', 'wecodeart-blocks-dynamic-styles');
     document.getElementsByTagName('head')[0].appendChild(element);
   }
 
@@ -590,17 +550,6 @@ var subscribed = subscribe(function () {
   var blocksStyle = getCustomCssFromBlocks(blocks, reusableBlocks);
   addStyle(blocksStyle);
 });
-
-/***/ }),
-
-/***/ "@babel/runtime/regenerator":
-/*!*************************************!*\
-  !*** external "regeneratorRuntime" ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["regeneratorRuntime"]; }());
 
 /***/ }),
 

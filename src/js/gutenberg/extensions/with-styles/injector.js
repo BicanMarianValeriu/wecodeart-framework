@@ -7,17 +7,15 @@ const {
 	data: { select, subscribe }
 } = wp;
 
-const {
-	flattenDeep
-} = lodash;
+const { flattenDeep } = lodash;
 
 const addStyle = style => {
-	let element = document.getElementById('wca-css-editor-styles');
+	let element = document.getElementById('wecodeart-blocks-dynamic-styles');
 
 	if (null === element) {
 		element = document.createElement('style');
 		element.setAttribute('type', 'text/css');
-		element.setAttribute('id', 'wca-css-editor-styles');
+		element.setAttribute('id', 'wecodeart-blocks-dynamic-styles');
 		document.getElementsByTagName('head')[0].appendChild(element);
 	}
 

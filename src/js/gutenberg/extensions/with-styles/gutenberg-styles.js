@@ -16,7 +16,7 @@ const { restrictedBlocks, removeStyles = [] } = wecodeartGutenberg;
  */
 import CSSEditor from './Editor';
 import './handler';
-import './inject-css';
+import './injector';
 
 const addAttributes = (props) => {
 	const { name } = props;

@@ -102,20 +102,11 @@ class Comment extends Walker_Comment {
 
 			// Comment body template.
 			Markup::template( 'entry/comment', [
-				'awaiting'	=> esc_html__( 'Your comment is awaiting moderation.', 'wecodeart' ),
 				'by_author' => in_array( 'bypostauthor', get_comment_class() ),
 				'comment' 	=> $comment,
 				'depth'		=> $depth,
 				'args'		=> $args,
-				'author' 	=> [
-					'name'		=> $author_name,
-					'gravatar' 	=> get_avatar(
-						$comment,
-						$args['avatar_size'],
-						'',
-						sprintf( esc_html__( '%s\'s gravatar', 'wecodeart' ), $comment->comment_author )
-					),
-				],
+				'author' 	=> $author_name,
 			] );
 	}
 }

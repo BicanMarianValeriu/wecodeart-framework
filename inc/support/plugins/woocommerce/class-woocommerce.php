@@ -249,7 +249,7 @@ class WooCommerce implements Integration {
 			'tag' 	=> 'div',
 			'attrs' => [
 				'id' 	=> 'bar-cart',
-				'class' => 'header-bar__cart col-auto align-self-stretch dropdown'
+				'class' => 'header-bar__cart dropdown'
 			] 
 		] ], [ 'WeCodeArt\Markup', 'template' ], [ [ 'header/woo-cart', 'index' ], [
 			'subtotal' 	=> wp_kses_post( WC()->cart->get_cart_subtotal() ),

@@ -28,6 +28,8 @@
 		],
 		"html": false,
 		"anchor": true,
+		"fontSize": true,
+		"lineHeight": true,
 		"className": true,
 		"withBackground": true,
 		"lightBlockWrapper": true,

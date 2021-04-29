@@ -1,2 +1,1 @@
-export { default as License } from './license';
-export { default as CustomCSS } from './customCSS';
+export { default as CSS } from './css';

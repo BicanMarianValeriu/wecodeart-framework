@@ -206,7 +206,7 @@ class Media {
 					'class'	=> 'ratio',
 					'style'	=> sprintf( '--wca-aspect-ratio:%s;', number_format( $dummy_ratio * 100, 3 ) . '%' )
 				]
-			] ], $html );
+			] ], $html, null, false );
 		} elseif ( 'url' === mb_strtolower( $args['format'] ) ) {
 			$output = $url;
 		} else {
