@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Page PHP
  * @since 	    3.5
- * @version	    4.2.0
+ * @version	    5.0.0
  */
 
 use WeCodeArt\Markup;

@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	WP-Customizer Output
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2.0
- * @version		4.2.0
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Admin\Customizer\Modules;
@@ -38,7 +38,7 @@ class Styles {
 	/**
 	 * WCA FileSystem
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @var 	mixed
 	 */
 	protected 	$FS		= null;
@@ -60,7 +60,7 @@ class Styles {
 	/**
 	 * Register Hooks - into styles processor action if enabled
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -87,7 +87,7 @@ class Styles {
 	/**
 	 * Enqueue the styles.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @return 	void
 	 */
 	public function enqueue_styles() {
@@ -183,7 +183,7 @@ class Styles {
 	/**
 	 * Check if we have a CSS file for this post.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return  bool
 	 */
@@ -194,7 +194,7 @@ class Styles {
 	/**
 	 * Function to save CSS into WeCodeArt Folder.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param   string $css CSS string.
 	 *
 	 * @return  bool
@@ -206,7 +206,7 @@ class Styles {
 	/**
 	 * Function to save CSS into WeCodeArt Folder.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return  bool
 	 */

@@ -9,7 +9,7 @@
  * @subpackage 	Entry\Meta\Date
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		4.2
+ * @version		5.0.0
  */
 
 defined( 'ABSPATH' ) || exit();

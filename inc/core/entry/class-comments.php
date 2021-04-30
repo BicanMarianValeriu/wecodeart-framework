@@ -223,7 +223,7 @@ class Comments {
 	 * Render Comment Form.
 	 *
 	 * @since	unknown
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 */
 	public function render_respond() {
 		// Bail if comments are closed for this post type.
@@ -244,7 +244,7 @@ class Comments {
 	 * Move Comment Field Bellow Name/Email/Website.
 	 *
 	 * @since	unknown
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 *
 	 * @param 	array $fields
 	 *

@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer\Configs\Typography
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2.0
- * @version		4.2.0
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Admin\Customizer\Configs;
@@ -27,7 +27,7 @@ class Typography extends Config {
 	 *
 	 * @param 	array                $configurations 
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
-	 * @since 	4.2
+	 * @since 	5.0.0
 	 *
 	 * @return 	array 
 	 */

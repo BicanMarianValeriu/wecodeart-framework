@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Header Branding HTML
  * @since	 	3.0.5
- * @version    	4.2.0
+ * @version    	5.0.0
  */
 
 defined( 'ABSPATH' ) || exit();

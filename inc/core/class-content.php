@@ -9,7 +9,7 @@
  * @subpackage 	Core\Content
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core;
@@ -49,7 +49,7 @@ class Content {
 	 * Echo the opening tag markup for content
 	 *
 	 * @since 	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	string 
 	 */
@@ -101,7 +101,7 @@ class Content {
 	 * Generate Sidebar
 	 *
 	 * @since	3.7.7
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return	void
 	 */
@@ -178,7 +178,7 @@ class Content {
 	 * @uses	WeCodeArt\Markup::wrap();
 	 * @uses	WeCodeArt\Markup::sortable();
 	 * @since 	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	HTML
 	 */
@@ -232,13 +232,13 @@ class Content {
 	 * Get Contextual Modules Options
 	 *
 	 * @since 	3.5.0
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	array 
 	 */
 	public static function get_contextual_options() {
-		$default_container 	= get_theme_mod( 'content-layout-container' );
-		$default_modules 	= get_theme_mod( 'content-layout-modules' );
+		$default_container 	= get_theme_mod( 'content-layout-container', 'container' );
+		$default_modules 	= get_theme_mod( 'content-layout-modules', [ 'content', 'primary' ] );
 		
 		// Pages
 		if( is_page() ) {

@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Support\Starter
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2
- * @version		4.2
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support;

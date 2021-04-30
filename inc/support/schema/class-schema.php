@@ -58,7 +58,7 @@ class Schema implements Integration {
 	 * Generate Body Attrs
 	 *
 	 * @since 	3.5
-	 * @version 4.2
+	 * @version 5.0.0
 	 *
 	 * @param 	array $attrs
 	 *

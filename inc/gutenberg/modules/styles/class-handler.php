@@ -8,8 +8,8 @@
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Handler
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2.0
- * @version		4.2.0
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -53,7 +53,7 @@ class Handler {
 	/**
 	 * Register REST API route
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @access  public
 	 */
 	public function register_routes() {
@@ -105,7 +105,7 @@ class Handler {
 	 *
 	 * @param 	\WP_REST_Request $request Rest request.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return 	mixed
 	 */
@@ -130,7 +130,7 @@ class Handler {
 	 *
 	 * @param   \WP_REST_Request $request Rest request.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return  mixed
 	 */
@@ -178,7 +178,7 @@ class Handler {
 	 * @param   int    $post_id Post id.
 	 * @param   string $css CSS string.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return  bool
 	 */
@@ -241,7 +241,7 @@ class Handler {
 	 *
 	 * @param   int 	$post_id Post id.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return  bool
 	 */

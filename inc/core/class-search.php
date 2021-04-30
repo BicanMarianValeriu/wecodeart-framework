@@ -9,7 +9,7 @@
  * @subpackage 	Core\Search
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.3
- * @version		4.2.0
+ * @version		5.0.0
  */ 
 
 namespace WeCodeArt\Core;

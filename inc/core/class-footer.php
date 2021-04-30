@@ -79,7 +79,7 @@ class Footer {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	1.0
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -161,7 +161,7 @@ class Footer {
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @uses	WeCodeArt\Markup::sortable()
 	 * @since	3.5
-	 * @version 4.2
+	 * @version 5.0.0
 	 *
 	 * @return 	void
 	 */

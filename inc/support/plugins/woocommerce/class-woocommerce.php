@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		1.9
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -219,8 +219,8 @@ class WooCommerce implements Integration {
 	/**
 	 * Filter - Restricted WooCommerce Blocks from theme code
 	 *
-	 * @since	4.2.0
-	 * @version	4.2.0
+	 * @since	5.0.0
+	 * @version	5.0.0
 	 *
 	 * @return 	array
 	 */

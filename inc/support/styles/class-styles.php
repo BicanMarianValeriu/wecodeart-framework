@@ -51,7 +51,7 @@ final class Styles implements Integration {
      * Trim CSS
      *
      * @since 	3.7.7
-     * @version 4.2.0
+     * @version 5.0.0
      * @param 	string $css CSS content to trim.
      *
      * @return 	string

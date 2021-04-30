@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Styles\Property
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2.0
- * @version		4.2.0
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -59,7 +59,7 @@ abstract class Property {
 	/**
 	 * Get CSS value
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param  	string $property	CSS property.
 	 * @param  	string $value		CSS unit.
 	 *

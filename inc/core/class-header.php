@@ -228,7 +228,7 @@ class Header {
 	 * Add a meta charset printed in wp_head
 	 *
 	 * @since	4.2.0
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 */
 	public function meta_charset() {
 		$charset = (string) apply_filters( 'wecodeart/filter/meta/charset', get_bloginfo( 'charset' ) );
@@ -239,7 +239,7 @@ class Header {
 	 * Add a meta viewport printed in wp_head
 	 *
 	 * @since	2.2.x
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 */
 	public function meta_viewport() {
 		$viewport = (string) apply_filters( 'wecodeart/filter/viewport', 'width=device-width, initial-scale=1' );
@@ -250,7 +250,7 @@ class Header {
 	 * Add a meta profile printed in wp_head
 	 *
 	 * @since	4.2.0
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 */
 	public function meta_profile() {
 		$profile = (string) apply_filters( 'wecodeart/filter/meta/profile', 'http://gmpg.org/xfn/11' );

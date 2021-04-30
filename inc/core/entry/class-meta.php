@@ -40,7 +40,7 @@ class Meta {
 	 * Entry Meta Author Template
 	 *
 	 * @since	1.0
-	 * @version	4.2
+	 * @version	5.0.0
 	 *
 	 * @param 	int		$author_id
 	 * @param 	bool	$echo
@@ -155,7 +155,7 @@ class Meta {
 	 * Entry Meta Comments Template
 	 *
 	 * @since	1.0
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 * 
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -285,7 +285,7 @@ class Meta {
 	 * @uses	Markup::wrap()
 	 *
 	 * @since	3.6
-	 * @version	4.2
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */

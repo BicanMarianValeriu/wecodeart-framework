@@ -44,7 +44,7 @@ class Pagination {
      * Display links to previous and next post, from a single post.
      *
      * @since	1.0.0
-     * @version 4.2.0
+     * @version 5.0.0
      *
      * @return  string HTML
      */
@@ -96,7 +96,7 @@ class Pagination {
      * WP-Link Pages for paginated posts
      *
      * @since	unknown
-     * @version 4.2.0
+     * @version 5.0.0
      *
      * @return 	null 	Return early if not a post.
      */
@@ -191,7 +191,7 @@ class Pagination {
 	 * Render Coments Pagination
 	 *
 	 * @since 	3.7.0
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 *
 	 * @return 	string|null
 	 */

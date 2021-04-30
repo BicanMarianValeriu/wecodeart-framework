@@ -9,7 +9,7 @@
  * @subpackage 	Notifications
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Admin;
@@ -58,7 +58,7 @@ class Notifications {
 	 * Register Notices
 	 *
 	 * @since 	3.8.1
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public static function register_notices() {
 		return;

@@ -7,8 +7,8 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  Header Toggler HTML
- * @since	 	4.2.0
- * @version    	4.2.0
+ * @since	 	5.0.0
+ * @version    	5.0.0
  */
 
 defined( 'ABSPATH' ) || exit();

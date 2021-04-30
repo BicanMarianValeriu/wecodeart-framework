@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Notifications\Notification
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2
- * @version		4.2
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Admin\Notifications;
@@ -22,7 +22,7 @@ use WeCodeArt\Singleton;
 /**
  * Notification
  *
- * @since 4.2
+ * @since 5.0.0
  */
 class Notification {
 

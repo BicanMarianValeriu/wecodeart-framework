@@ -143,7 +143,7 @@ class Core {
 	 * Adds Walker to WP Menus by default.
 	 *
 	 * @since 	4.0.5
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 *
 	 * @param 	array 	$args.
 	 *

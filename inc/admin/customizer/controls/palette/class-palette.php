@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer\Controls\Pallete
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2.0
- * @version		4.2.0
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Admin\Customizer\Controls;
@@ -46,7 +46,7 @@ class Palette extends \WP_Customize_Control {
 	 * @access public
 	 *
 	 * @since 	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function enqueue() {
 		wp_enqueue_style(

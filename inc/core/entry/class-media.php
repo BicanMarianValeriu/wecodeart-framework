@@ -231,7 +231,7 @@ class Media {
 	 * Echo the Entry IMG Markup
 	 *
 	 * @since 	1.0
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 *
 	 * @param 	array	$args
 	 *

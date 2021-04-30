@@ -9,7 +9,7 @@
  * @subpackage 	Customizer\Controls\Sortable
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Admin\Customizer\Controls;
@@ -39,7 +39,7 @@ class Sortable extends \WP_Customize_Control {
 	 * @access public
 	 *
 	 * @since	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function enqueue() {
 		wp_enqueue_style(

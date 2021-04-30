@@ -81,7 +81,7 @@ class WPSeo implements Integration {
 	 * Yoast BreadCrumbs
 	 *
 	 * @since   3.5
-	 * @version 4.2
+	 * @version 5.0.0
 	 *
 	 * @return  void
 	 */

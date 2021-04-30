@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Protected Template
  * @since 	    3.5
- * @version	    4.2
+ * @version	    5.0.0
  */
 
 defined( 'ABSPATH' ) || exit;

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -53,7 +53,7 @@ class Styles implements Integration {
 	/**
 	 * Register Hooks - into styles processor action if enabled
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -102,7 +102,7 @@ class Styles implements Integration {
 	/**
 	 * Get Blocks CSS
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	int 	$post_id Post id.
 	 *
 	 * @return 	string
@@ -121,7 +121,7 @@ class Styles implements Integration {
 	/**
 	 * Get Reusable Blocks CSS
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	int 	$post_id Post id.
 	 *
 	 * @return 	string
@@ -145,7 +145,7 @@ class Styles implements Integration {
 	/**
 	 * Cycle thorugh Static Blocks
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	array 	$blocks List of blocks.
 	 *
 	 * @return 	string 	Style.
@@ -166,7 +166,7 @@ class Styles implements Integration {
 	/**
 	 * Cycle thorugh Reusable Blocks
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	array 	$blocks List of blocks.
 	 *
 	 * @return 	string 	Style.

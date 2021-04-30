@@ -8,8 +8,8 @@
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2.0
- * @version		4.2.0
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -50,7 +50,7 @@ class Embed {
 	/**
 	 * Method to start checking if excerpt exists.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	string 	$excerpt Excerpt.
 	 *
 	 * @return 	string
@@ -64,7 +64,7 @@ class Embed {
 	/**
 	 * Method to stop checking if excerpt exists.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	string 	$excerpt Excerpt.
 	 *
 	 * @return 	string
@@ -78,7 +78,7 @@ class Embed {
 	/**
 	 * Render server-side CSS
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 */
 	public function render_post_css() {
 		$id = 0;
@@ -111,7 +111,7 @@ class Embed {
 	/**
 	 * Enqueue CSS file
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	int  	$post_id Post id.
 	 * @param 	bool 	$footer IN footer.
 	 *
@@ -187,7 +187,7 @@ class Embed {
 	/**
 	 * Enqueue CSS file for Reusable Blocks
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	array $blocks List of blocks.
 	 * @param 	bool  $footer Should we load on footer.
 	 *
@@ -208,7 +208,7 @@ class Embed {
 	/**
 	 * Get Post CSS
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	string $post_id Post id.
 	 *
 	 * @return 	void
@@ -240,7 +240,7 @@ class Embed {
 	/**
 	 * Get Blocks CSS from Meta
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	int 	$post_id Post id.
 	 *
 	 * @return 	string
@@ -265,7 +265,7 @@ class Embed {
 	/**
 	 * Get Blocks CSS Inline
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	int 	$post_id Post id.
 	 *
 	 * @return 	string
@@ -295,7 +295,7 @@ class Embed {
 	/**
 	 * Get Reusable Block Meta
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	array 	$blocks List of blocks.
 	 *
 	 * @return 	string
@@ -318,7 +318,7 @@ class Embed {
 	/**
 	 * Cycle thorugh Blocks
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	array 	$blocks List of blocks.
 	 *
 	 * @return 	string 	Block styles.

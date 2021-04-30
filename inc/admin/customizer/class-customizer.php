@@ -9,7 +9,7 @@
  * @subpackage 	Customizer
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		1.6
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Admin;
@@ -80,7 +80,7 @@ class Customizer {
 	 * Enqueue Scripts.
 	 *
 	 * @since 	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function enqueue() {
 		wp_enqueue_style(
@@ -213,7 +213,7 @@ class Customizer {
 	/**
 	 * Adds a value to each setting if one isn't already present.
 	 *
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 * @uses 	get_defaults()
 	 */
 	public function set_defaults() {
@@ -242,7 +242,7 @@ class Customizer {
 	 * Apply Customizer setting defaults.
 	 *
 	 * @param  object $wp_customize the Customizer object.
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @uses   get_defaults()
 	 */
@@ -254,7 +254,7 @@ class Customizer {
 	 * Get theme mod value.
 	 *
 	 * @param 	string $value
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	string
 	 */
@@ -361,7 +361,7 @@ class Customizer {
 	 * @param 	WP_Customize_Manager $wp_customize instance of WP_Customize_Manager.
 	 *
 	 * @since 	3.5
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */

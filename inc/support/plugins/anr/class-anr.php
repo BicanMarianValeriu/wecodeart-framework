@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.8.1
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -91,7 +91,7 @@ class ANR implements Integration {
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 * @see 	anr_captcha_class::init()->form_field_return();
 	 * @uses	anr_captcha_class::init()->form_field_return();
 	 *

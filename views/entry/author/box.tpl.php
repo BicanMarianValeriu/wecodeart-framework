@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box Template
  * @since 		3.0.3
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 defined( 'ABSPATH' ) || exit();

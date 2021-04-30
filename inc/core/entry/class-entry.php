@@ -38,10 +38,9 @@ class Entry {
 		add_filter( 'the_password_form',	[ $this, 'render_pasword_protected' ] );
 		add_filter( 'post_class',			[ $this, 'post_classes' ] );
 
-		add_action( 'wecodeart/entry', 	[ $this, 'render_header' 	], 20 ); 
+		add_action( 'wecodeart/entry', 	[ $this, 'render_header' 	], 20 );
 		add_action( 'wecodeart/entry', 	[ $this, 'render_content' 	], 30 );
-		add_action( 'wecodeart/entry',	[ $this, 'render_footer' 	], 40 );  
-		
+		add_action( 'wecodeart/entry',	[ $this, 'render_footer' 	], 40 );
 		
 		add_action( 'wecodeart/hook/entry/header',	[ $this, 'render_title' 		], 10 );
 		add_action( 'wecodeart/hook/entry/header', 	[ Entry\Media::get_instance(), 	'render_image' 		], 20 );
@@ -140,11 +139,7 @@ class Entry {
 		}
 		
 		if ( $link && ! is_singular() ) {
-			$title = sprintf(
-				'<a href="%s" rel="bookmark">%s</a>', 
-				esc_url( get_permalink() ),
-				esc_html( $title )
-			);
+			$title = sprintf( '<a href="%s" rel="bookmark">%s</a>', esc_url( get_permalink() ), esc_html( $title ) );
 		}
 		
 		if( $echo ) {
@@ -160,7 +155,7 @@ class Entry {
 	 *
 	 * @since 	1.0
 	 * @uses	WeCodeArt\Markup::wrap()
-	 * @version 4.2
+	 * @version 5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -178,7 +173,7 @@ class Entry {
 	 *
 	 * @since	1.0
 	 * @uses	WeCodeArt\Markup::wrap()
-	 * @version 4.2.0
+	 * @version 5.0.0
 	 *
 	 * @return	void
 	 */

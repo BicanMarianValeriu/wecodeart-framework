@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Classes\Suggestions
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Classes;

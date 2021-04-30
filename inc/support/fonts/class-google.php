@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Fonts
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2.0
- * @version		4.2.0
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support\Fonts;
@@ -32,7 +32,7 @@ final class Google {
 	/**
 	 * WCA FileSystem
 	 *
-	 * @since 	4.2.0
+	 * @since  	5.0.0
 	 * @var 	mixed
 	 */
 	protected 	$FS		= null;
@@ -160,7 +160,7 @@ final class Google {
 	/**
 	 * Get styles from URL.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @param 	string 		$font 	The URL.
 	 *
 	 * @return 	string
@@ -176,7 +176,7 @@ final class Google {
 	/**
 	 * Get styles with fonts downloaded locally.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @param 	string 		$css 	The styles.
 	 *
 	 * @return 	string
@@ -195,7 +195,7 @@ final class Google {
 	/**
 	 * Download files mentioned in our CSS locally.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @param 	string		$css 	The CSS we want to parse.
 	 *
 	 * @return 	array      			Returns an array of remote URLs and their local counterparts.
@@ -251,7 +251,7 @@ final class Google {
 	/**
 	 * Get font files from the CSS.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @param 	string 	$css 	The CSS we want to parse.
 	 *
 	 * @return 	array      		Returns an array of font-families and the font-files used.
@@ -308,7 +308,7 @@ final class Google {
 	 * Get cached url contents.
 	 * If a cache doesn't already exist, get the URL contents from remote and cache the result.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @param 	string 	$url        The URL we want to get the contents from.
 	 * @param 	string 	$user_agent	The user-agent to use for our request.
 	 *
@@ -339,7 +339,7 @@ final class Google {
 	/**
 	 * Get remote file contents.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @param 	string 	$url		The URL we want to get the contents from.
 	 * @param 	string 	$user_agent	The user-agent to use for our request.
 	 *
@@ -368,7 +368,7 @@ final class Google {
 	/**
 	 * Get remote file URL.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @param 	array 	$font
 	 *
 	 * @return 	mixed 	Returns the remote URL or false if is not google font.

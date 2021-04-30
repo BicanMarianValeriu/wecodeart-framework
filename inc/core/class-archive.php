@@ -9,7 +9,7 @@
  * @subpackage 	Core\Archive
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core;
@@ -42,7 +42,7 @@ class Archive {
 	 * Echo the Archive Intro Markup
 	 *
 	 * @since 	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void 
 	 */
@@ -67,7 +67,7 @@ class Archive {
 	 * Filter category title
 	 *
 	 * @since	3.5
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	string
 	 */

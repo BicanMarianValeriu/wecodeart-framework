@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Customizer/Extends
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		v3.5
- * @version		4.2.0
+ * @since 		3.5
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Admin\Customizer\Extender;

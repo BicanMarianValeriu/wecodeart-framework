@@ -209,8 +209,8 @@ class Activation {
 	/**
 	 * Redirect to Admin
 	 *
-	 * @since 	4.2.0
-	 * @version	4.2.0
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 */
 	public function redirect_to_admin() {
 		wp_redirect( esc_url_raw( add_query_arg( 'page', 'wecodeart', admin_url( 'themes.php' ) ) ) );

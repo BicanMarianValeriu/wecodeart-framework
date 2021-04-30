@@ -33,7 +33,7 @@ class Comment extends Walker_Comment {
 	 * Start Level
 	 */
 	function start_lvl( &$output, $depth = 0, $args = [] ) {
-		$output .= '<ul class="comment__children offset-md-1 list-unstyled pl-0">' . "\n";
+		$output .= '<ul class="comment__children offset-md-1 list-unstyled">' . "\n";
 	}
 
 	/**

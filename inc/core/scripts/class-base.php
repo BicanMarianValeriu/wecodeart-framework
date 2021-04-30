@@ -9,7 +9,7 @@
  * @subpackage 	Core\Scripts\Base
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		1.9
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core\Scripts;

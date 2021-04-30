@@ -9,7 +9,7 @@
  * @subpackage 	Loops
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */ 
 
 namespace WeCodeArt\Core;
@@ -89,8 +89,8 @@ class Loops {
 	/**
 	 * Content WP Loop, meant to used to render custom content.
 	 *
-	 * @since	4.2.0
-	 * @version	4.2.0
+	 * @since	5.0.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */

@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Admin\Request
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2.X
- * @version		4.2.X
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Admin;

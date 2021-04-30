@@ -1,1 +1,6 @@
-<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" preserveAspectRatio="none"><defs><style type="text/css">#holder_177e6f7af10 text { fill:#AAAAAA;font-weight:bold;font-family:Arial, Helvetica, Open Sans, sans-serif, monospace;font-size:15pt } </style></defs><g id="holder_177e6f7af10"><rect width="300" height="300" fill="#EEEEEE"></rect><g><text x="38.0703125" y="154.5">www.wecodeart.com</text></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" preserveAspectRatio="none">
+  <path fill="#EEE" d="M0 0h300v300H0z"/>
+  <text x="38.07" y="154.5" fill="#aaa" font-family="Arial,Helvetica,Open Sans,sans-serif,monospace" font-size="20" font-weight="700">
+    www.wecodeart.com
+  </text>
+</svg>

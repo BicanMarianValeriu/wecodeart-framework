@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -33,7 +33,7 @@ class Classes {
 	/**
 	 * Register Hooks - into styles processor action if enabled
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 *
 	 * @return 	void
 	 */

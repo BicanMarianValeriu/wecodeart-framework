@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Comment Body Template
  * @since 	    4.0.2
- * @version	    4.2.0
+ * @version	    5.0.0
  */
 
 defined( 'ABSPATH' ) || exit;

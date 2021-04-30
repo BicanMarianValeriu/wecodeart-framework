@@ -9,7 +9,7 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		1.0
- * @version		4.2
+ * @version		5.0.0
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -252,8 +252,8 @@ function wecodeart_config( $key = null, $default = null ) {
 /**
  * Gets input instance.
  *
- * @since	4.2.0
- * @version	4.2.0
+ * @since	5.0.0
+ * @version	5.0.0
  *
  * @param   string|array    $key
  * @param   array|null      $args
@@ -280,7 +280,7 @@ function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
 /**
  * Echo options from the options database.
  *
- * @since   4.2.0
+ * @since   5.0.0
  *
  * @param   string  $key        Option name.
  * @param   string  $default    Default value.
@@ -299,7 +299,7 @@ function wecodeart_option( $key, $default = false, $setting = null, $use_cache =
  * Check if condition is met.
  *
  * @since	4.0
- * @version	4.2.0
+ * @version	5.0.0
  *
  * @param   string|array    $parameters
  *

@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\FileSystem
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2.0
- * @version		4.2.0
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support;
@@ -28,7 +28,7 @@ class FileSystem {
 	/**
 	 * WP FileSystem
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 * @var 	mixed
 	 */
 	public	$filesystem	= null;
@@ -44,7 +44,7 @@ class FileSystem {
 	/**
 	 * Function to set folder in WordPress Filesystem.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return  bool
 	 */
@@ -65,7 +65,7 @@ class FileSystem {
 	/**
 	 * Function to create file from WordPress Filesystem.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return  bool
 	 */
@@ -80,7 +80,7 @@ class FileSystem {
 	/**
 	 * Function to delete file from WordPress Filesystem.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return  bool
 	 */
@@ -94,7 +94,7 @@ class FileSystem {
 	/**
 	 * Check if we have a file
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 *
 	 * @return  bool
 	 */
@@ -120,7 +120,7 @@ class FileSystem {
 	/**
 	 * Get the filesystem.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 *
 	 * @return 	WP_Filesystem
 	 */

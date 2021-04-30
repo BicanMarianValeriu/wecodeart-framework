@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Core\Blog
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2.0
- * @version		4.2.0
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core;
@@ -46,7 +46,7 @@ class Blog {
 	/**
 	 * Blog Page Hooks.
 	 *
-	 * @since	4.2.0
+	 * @since	5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -62,7 +62,7 @@ class Blog {
 	/**
 	 * Blog Page render.
 	 *
-	 * @since	4.2.0
+	 * @since	5.0.0
 	 *
 	 * @return 	void
 	 */
