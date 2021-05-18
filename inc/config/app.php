@@ -79,7 +79,7 @@ return [
     |
     */
     'directories' => [
-        'views'     => 'views',
+        'views'     => 'block-views',
         'assets'    => 'assets',
         'languages' => 'languages',
     ],
@@ -242,7 +242,7 @@ return [
                 ],
             ],
             'wp-block-styles'           => 'remove',
-            'core-block-patterns'       => 'remove',
+            'core-block-patterns'       => true,
             'align-wide'                => true,
             'palette-classnames'        => true,
             'custom-units'              => true,
@@ -268,6 +268,12 @@ return [
             'content-layout-modules-product-archive'    => [ 'content', 'primary' ],
             'content-layout-container-product-singular' => 'container',
             'content-layout-modules-product-singular'   => [ 'content', 'primary' ],
+        ],
+        'support'   => [
+            'woocommerce'                   => true,
+            'wc-product-gallery-zoom'       => true,
+            'wc-product-gallery-lightbox'   => true,
+            'wc-product-gallery-slider'     => true,
         ]
     ],
     /*
@@ -281,6 +287,7 @@ return [
     'extensions' => [
         'fonts'         => true,
         'styles'        => true,
+        'schema'        => true,
         'author-box'    => [
             'archive'   => true,
             'single'    => true,

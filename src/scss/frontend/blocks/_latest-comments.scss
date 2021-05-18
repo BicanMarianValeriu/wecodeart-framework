@@ -2,7 +2,7 @@
 	@include list-unstyled();
 
 	&__comment {
-		margin-bottom: 1rem;
+		margin-bottom: $spacer;
 	
 		.has-avatars & {
 			min-height: 40px;

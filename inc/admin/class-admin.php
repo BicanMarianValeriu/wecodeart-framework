@@ -46,7 +46,7 @@ class Admin {
 	/**
 	 * Takes an array of new settings, merges them with the old settings, and pushes them into the database.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 *
 	 * @param 	string|array 	$new		New settings. Can be a string, or an array.
 	 * @param 	string       	$setting	Optional. Settings field name. Default is 'wecodeart-settings'.
@@ -76,7 +76,7 @@ class Admin {
 	 * Values pulled from the database are cached on each request, so a second request for the same value won't cause a
 	 * second DB interaction.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 *
 	 * @param   string  $key       	Option name.
 	 * @param   string  $setting   	Optional. Settings field name. Eventually defaults to `wecodeart` if not
@@ -146,7 +146,7 @@ class Admin {
 	/**
 	 * Inserts the default WeCodeArt settings values into the options table, if they don't already exist.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 *
 	 * @return bool True of setting added, false otherwise.
 	 */
@@ -160,7 +160,7 @@ class Admin {
 	/**
 	 * Register the default WeCodeArt settings.
 	 *
-	 * @since 	4.2.0
+	 * @since 	5.0.0
 	 *
 	 * @return 	bool True of setting added, false otherwise.
 	 */
@@ -171,7 +171,7 @@ class Admin {
 	/**
 	 * Register Rest Routes
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 */
 	public function register_routes() {
 		register_rest_route( 'wecodeart/v1', '/settings', [
@@ -187,24 +187,16 @@ class Admin {
 			
 				// Update if params with values
 				$update = array_filter( $params );
-
 				foreach( $update as $option => $value ) {
-					if( $option === 'custom_css' ) {
-						wp_update_custom_css_post( $value );
-					} elseif ( $is_mod ) {
+					if ( $is_mod ) {
 						set_theme_mod( $option, $value );
 					} else {
-						self::update_options( [
-							"$option" => $value
-						] );
+						self::update_options( [ "$option" => $value ] );
 					}
 				}
 
 				// Get values, updated above
-				$data 	= wp_parse_args(
-					get_option( 'wecodeart-settings' ),
-					Customizer::get_instance()->get_theme_mods()
-				);
+				$data = wp_parse_args( get_option( 'wecodeart-settings' ), Customizer::get_instance()->get_theme_mods() );
 
 				// If params provided, return only their values
 				if( ! empty( $params ) && $request->get_param( '_filter' )) {
@@ -224,7 +216,7 @@ class Admin {
 	/**
 	 * Register Admin Page
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 */
 	public function register_menu_page() {
 		$page_hook_suffix = add_theme_page(
@@ -241,7 +233,7 @@ class Admin {
 	/**
 	 * Register Admin Page
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 */
 	public function menu_callback() {
 		echo '<div id="wecodeart" class="wecodeart-admin"></div>';
@@ -251,7 +243,7 @@ class Admin {
 	 * Load assets for option page.
 	 *
 	 * @since   1.2.0
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function enqueue_assets() {
 		$version = wecodeart( 'version' );

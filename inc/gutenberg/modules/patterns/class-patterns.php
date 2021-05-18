@@ -192,6 +192,7 @@ class Patterns implements Integration {
 	public function load_patterns() {
 		$block_patterns_query = new \WP_Query( [
 			'post_type'              => self::POST_TYPE,
+			'posts_per_page'		 => -1,
 			'no_found_rows'          => true,
 			'update_post_meta_cache' => false,
 			'update_post_term_cache' => false,
@@ -251,6 +252,7 @@ class Patterns implements Integration {
 	public function load_layouts( $layouts ) {
 		$block_patterns_query = new \WP_Query( [
 			'post_type'              => self::POST_TYPE,
+			'posts_per_page'		 => -1,
 			'no_found_rows'          => true,
 			'update_post_meta_cache' => false,
 			'update_post_term_cache' => false,

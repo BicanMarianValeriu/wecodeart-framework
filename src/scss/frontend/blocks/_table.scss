@@ -1,15 +1,8 @@
-$subtle-light-gray: #fafafa;
 $subtle-pale-green: #e9fbe5;
 $subtle-pale-blue: #e7f5fe;
 $subtle-pale-pink: #fcf0ef;
 
 .wp-block-table {
-	overflow-x: auto;
-
-	table {
-		width: 100%;
-	}
-
 	// Fixed layout toggle
 	.has-fixed-layout {
 		table-layout: fixed;
@@ -34,7 +27,7 @@ $subtle-pale-pink: #fcf0ef;
 	}
 
 	.has-subtle-light-gray-background-color {
-		background-color: $subtle-light-gray;
+		background-color: var( --wca-light );
 	}
 
 	.has-subtle-pale-green-background-color {
@@ -51,18 +44,9 @@ $subtle-pale-pink: #fcf0ef;
 
 	// "Stripes" style variation.
 	&.is-style-stripes {
-		border-spacing: 0;
-		border-collapse: inherit;
-		border-bottom: 1px solid $gray-200;
-		background-color: transparent;
-
-		tbody tr:nth-child(odd) {
-			background-color: $gray-200;
-		}
-
 		&.has-subtle-light-gray-background-color {
 			tbody tr:nth-child(odd) {
-				background-color: $subtle-light-gray;
+				background-color: var( --wca-light )
 			}
 		}
 
@@ -82,12 +66,6 @@ $subtle-pale-pink: #fcf0ef;
 			tbody tr:nth-child(odd) {
 				background-color: $subtle-pale-pink;
 			}
-		}
-
-		th,
-		td {
-			padding: 10px;
-			border-color: transparent;
 		}
 	}
 }

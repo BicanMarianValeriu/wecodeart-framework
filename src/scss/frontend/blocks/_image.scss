@@ -1,14 +1,7 @@
 .wp-block-image {
-	max-width: 100%;
-	margin-bottom: 1.5rem;
-
 	img {
 		max-width: 100%;
 		height: auto;
-	}
-
-	&.aligncenter {
-		text-align: center;
 	}
 
 	&.alignfull img,
@@ -23,44 +16,10 @@
 	&.is-resized {
 		display: table;
 
-		// The figure is born with left and right margin.
-		// We remove this by default, and then customize it for left, right, and center.
-		margin-left: 0;
-		margin-right: 0;
-
 		> figcaption {
 			display: table-caption;
 			caption-side: bottom;
 		}
-	}
-
-	.alignleft {
-		/*rtl:ignore*/
-		float: left;
-		/*rtl:ignore*/
-		margin-right: 1em;
-	}
-
-	.alignright {
-		/*rtl:ignore*/
-		float: right;
-		/*rtl:ignore*/
-		margin-left: 1em;
-	}
-
-	.aligncenter {
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	// Supply caption styles to images, even if the theme hasn't opted in.
-	// Reason being: the new markup, <figcaptions>, are not likely to be styled in the majority of existing themes,
-	// so we supply the styles so as to not appear broken or unstyled in those themes.
-	figcaption {
-		font-style: italic;
-		text-align: center;
-		margin: 5px 0 10px;
-		font-size: 80%;
 	}
 
 	&.is-style-circle-mask,

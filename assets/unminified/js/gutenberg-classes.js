@@ -146,11 +146,15 @@ var enhance = compose(withState({
         customClassNames: split(getClasses, ' ')
       });
     }
-  }
+  } // Defaults for FSE
+
 
   var _select$getEditorSett = select('core/editor').getEditorSettings(),
-      customClasses = _select$getEditorSett.wecodeart.customClasses;
+      _select$getEditorSett2 = _select$getEditorSett.wecodeart;
 
+  _select$getEditorSett2 = _select$getEditorSett2 === void 0 ? {} : _select$getEditorSett2;
+  var _select$getEditorSett3 = _select$getEditorSett2.customClasses,
+      customClasses = _select$getEditorSett3 === void 0 ? [] : _select$getEditorSett3;
   return {
     suggestions: customClasses
   };
@@ -166,13 +170,15 @@ var enhance = compose(withState({
 
 var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
   return enhance(function (props) {
-    var customClassNames = props.customClassNames,
+    var name = props.name,
+        customClassNames = props.customClassNames,
         suggestions = props.suggestions,
         isSelected = props.isSelected,
         setAttributes = props.setAttributes,
         setState = props.setState;
+    var hasClassName = hasBlockSupport(name, 'className', true);
 
-    if (isSelected) {
+    if (hasClassName && isSelected) {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(FormTokenField, {
         label: __('Additional CSS Class(es)', 'wecodeart'),
         value: customClassNames,

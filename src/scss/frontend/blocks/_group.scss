@@ -1,9 +1,4 @@
 .wp-block-group {
-    &.has-background {
-		margin-top: 0;
-		margin-bottom: 0;
-    }
-    
     &__inner-container {
 		@include make-container();
 		@each $breakpoint, $container-max-width in $container-max-widths {
@@ -17,11 +12,4 @@
 			max-width: initial;
 		}
     }
-}
-
-.wca-section {
-	&__container {
-		position: relative;
-		z-index: 1;
-	}
 }

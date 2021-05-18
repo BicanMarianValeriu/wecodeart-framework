@@ -9,7 +9,7 @@ const {
 	blockEditor: { InspectorAdvancedControls },
 } = wp;
 
-const { restrictedBlocks, removeStyles = [] } = wecodeartGutenberg;
+const { restrictedBlocks } = wecodeartGutenberg;
 
 /**
  * Internal dependencies.
@@ -26,7 +26,7 @@ const addAttributes = (props) => {
 		props.attributes = assign(props.attributes, {
 			hasCustomCSS: {
 				type: 'boolean',
-				default: false
+				default: true // Defaults to true
 			},
 			customCSS: {
 				type: 'string',
@@ -37,25 +37,6 @@ const addAttributes = (props) => {
 
 	return props;
 };
-
-/**
- * Override props assigned to save component to inject atttributes
- *
- * @param   {Object}    extraProps Additional props applied to save element.
- * @param   {Object}    blockType  Block type.
- * @param   {Object}    attributes Current block attributes.
- *
- * @return  {Object}    Filtered props applied to save element.
- */
-function applyExtraSettings(extraProps, blockType) {
-	const { name: blockName } = blockType;
-
-	if (removeStyles.includes(blockName)) {
-		extraProps.style = {};
-	}
-
-	return extraProps;
-}
 
 /**
  * Override the default edit UI to include a new block inspector control for
@@ -90,7 +71,6 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
  */
 function applyFilters() {
 	addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
-	addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/custom-css/applyExtraSettings', applyExtraSettings);
 	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl);
 }
 

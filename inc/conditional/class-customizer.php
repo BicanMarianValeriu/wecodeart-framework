@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Conditional\Customizer
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2
- * @version		4.2
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Conditional;

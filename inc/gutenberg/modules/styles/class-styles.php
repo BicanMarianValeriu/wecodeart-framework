@@ -20,6 +20,7 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
@@ -65,8 +66,8 @@ class Styles implements Integration {
 		// Enqueue Styles
 		Styles\Embed::get_instance();
 		// Admin
-		add_action( 'enqueue_block_editor_assets', 			[ $this, 'block_editor_assets' 	] );
-		add_filter( 'wecodeart/filter/gutenberg/localize',	[ $this, 'filter_inline_js' 	] );
+		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	] );
+		add_filter( 'render_block',					[ $this, 'filter_render' ], 20, 2 );
 	}
 
 	/**
@@ -81,22 +82,38 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Filter Inline JS.
+	 * Filter Blocks markup to remove styles
 	 *
-	 * @param	array $data
+	 * @param	string 	$block_content
+	 * @param	array 	$block
 	 *
-	 * @return  array
+	 * @return 	string 	HTML
 	 */
-	public function filter_inline_js( $data ) {
-		return array_merge( $data, [
-			'removeStyles' => [
-				// 'core/heading',
-				// 'core/paragraph',
-				'core/group',
-				'core/cover',
-				'core/media-text',
-			]
-		] );
+	public function filter_render( $content, $block ) {		
+		if ( in_array( $block['blockName'], (array) apply_filters( 'wecodeart/filter/gutenberg/styles/remove', [
+			'core/group',
+			'core/cover',
+			'core/media-text',
+			'core/pullquote',
+		], true ) ) ) {
+			// We use this approach to avoid invalid blocks or patterns, as well as on theme change
+			$doc = new \DOMDocument();
+			// See https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/table-of-contents/index.php
+			// And this is using markup from Gutenberg blocks so is kinda safe anyway
+			libxml_use_internal_errors( true );
+			$doc->loadHTML( htmlspecialchars_decode(
+				utf8_decode( htmlentities( '<html><body>' . $content . '</body></html>', ENT_COMPAT, 'UTF-8', false ) ),
+				ENT_COMPAT
+			) );
+			libxml_use_internal_errors( false );
+			
+			$elements = $doc->getElementsByTagName( '*' );
+			foreach( $elements as $el ) $el->removeAttribute( 'style' );
+	
+			return $doc->saveHTML();
+		}
+		
+		return $content;
 	}
 
 	/**
@@ -198,7 +215,10 @@ class Styles implements Integration {
 		$classname	= Styles\Blocks::class;
 		$defaults   = [
 			'core/cover' 		=> Styles\Blocks\Cover::class,
-			'core/media-text' 	=> Styles\Blocks\Media::class
+			'core/media-text' 	=> Styles\Blocks\Media::class,
+			'core/button' 		=> Styles\Blocks\Button::class,
+			'core/separator' 	=> Styles\Blocks\Separator::class,
+			'core/pullquote' 	=> Styles\Blocks\PullQuote::class
 		];
 
 		$output_classes = apply_filters( 'wecodeart/filter/gutenberg/styles/blocks', $defaults );

@@ -62,6 +62,8 @@ class Blocks extends Processor {
 		if( method_exists( $this, 'process_extra' ) ) {
 			$this->process_extra();
 		}
+
+		// Parse CSS
 		$this->parse_output();
 		$this->parse_custom();
 	}

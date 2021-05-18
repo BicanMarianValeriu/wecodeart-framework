@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core;
@@ -34,7 +34,7 @@ class Footer {
 	public function init() {
 		add_action( 'wecodeart/footer/markup', 		[ $this, 'markup' ] );
 		add_action( 'wecodeart/hook/footer/bottom', [ $this, 'attribution_markup' ], 95 );
-		add_action( 'widgets_init', 				[ $this, 'register_sidebars' ] );
+		add_action( 'widgets_init', 				[ $this, 'register_sidebars' ], 50 );
 	}
 	
 	/**
@@ -42,7 +42,7 @@ class Footer {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	1.0
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	HTML 
 	 */
@@ -113,7 +113,7 @@ class Footer {
 	 * Footer Widgetized Area
 	 *
 	 * @since 	3.7.7
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void 
 	 */
@@ -135,7 +135,7 @@ class Footer {
 	 * This function generates the columns fot the footer
 	 *
 	 * @since	1.5
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	array
 	 */
@@ -180,15 +180,15 @@ class Footer {
 	 * Register Sidebars Based on Active Options
 	 *
 	 * @since	unknown
-	 * @version	3.9.7
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */
 	public function register_sidebars() {
 		// Get Default Footer Columns.
+		$theme_mod	= 'footer-layout-modules';
 		$columns 	= self::footer_widgets();
-		$options	= get_theme_mod( 'footer-layout-modules', Customizer::get_defaults( 'footer-layout-modules' ) );
-
+		$options	= get_theme_mod( $theme_mod, Customizer::get_defaults( $theme_mod ) );
 		$active 	= array_intersect_key( $options, array_keys( $columns ) );
 
 		if( empty( $active ) ) {

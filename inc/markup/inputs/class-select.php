@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2.0
- * @version		4.2.0
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup\Inputs;
@@ -28,7 +28,7 @@ class Select extends Base {
     /**
      * Input's Type.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     string
      */
     public $type = 'select';
@@ -36,7 +36,7 @@ class Select extends Base {
     /**
      * All choices tied to the control.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     array
      */
     public $choices = [];
@@ -61,7 +61,7 @@ class Select extends Base {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function content() {
         $placeholder = get_prop( $this->attrs, 'placeholder', false );
@@ -104,10 +104,10 @@ class Select extends Base {
     /**
 	 * Selected Option
      *
-     * @since   4.2.0
+     * @since   5.0.0
 	 * @return	boolean
 	 */
 	public function selected_option( string $value ) {
-        return isset( $this->attrs['value'] ) ? (string) $this->attrs['value'] === (string) $value : null;
+        return isset( $this->attrs['value'] ) ? in_array( $value, (array) $this->attrs['value'], true ) : null;
     }
 }

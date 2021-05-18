@@ -49,7 +49,7 @@ class Content extends Dynamic {
 			];
 
 			if( get_prop( $attributes, 'backgroundColor', false ) ) {
-				$class[] = 'bg-' . $attributes['backgroundColor'];
+				$class[] = 'has-' . $attributes['backgroundColor'] . '-background-color';
 			}
 
 			if( get_prop( $attributes, 'className', false ) ) {

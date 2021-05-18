@@ -1,0 +1,188 @@
+{
+	"global": {
+		"settings": {
+			"color": {
+				"gradients": [ ],
+				"link": true,
+				"palette": []
+			},
+			"typography": {
+				"customLineHeight": true,
+				"fontFamilies": [ 
+					{
+						"fontFamily": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif",
+						"slug": "system-fonts",
+						"name": "System Fonts"
+					},
+					{
+						"fontFamily": "Consolas, \"Andale Mono WT\", \"Andale Mono\", \"Lucida Console\", \"Lucida Sans Typewriter\", \"DejaVu Sans Mono\", \"Bitstream Vera Sans Mono\", \"Liberation Mono\", \"Nimbus Mono L\", Monaco, \"Courier New\", Courier, monospace",
+						"name": "Monospace",
+						"slug": "monospace"
+					},
+					{
+						"fontFamily": "Helvetica Neue, Helvetica, Arial, sans-serif",
+						"slug": "helvetica-arial"
+					},
+					{
+						"fontFamily": "Geneva, Tahoma, Verdana, sans-serif",
+						"slug": "geneva-verdana"
+					},
+					{
+						"fontFamily": "Cambria, Georgia, serif",
+						"slug": "cambria-georgia"
+					},
+					{
+						"fontFamily": "Hoefler Text, Baskerville Old Face, Garamond, Times New Roman, serif",
+						"slug": "hoefler-times-new-roman"
+					}
+				],
+				"fontSizes": [
+					{
+						"slug": "small",
+						"size": "14px",
+						"name": "Small"
+					},
+					{
+						"slug": "normal",
+						"size": "16px",
+						"name": "Normal"
+					},
+					{
+						"slug": "large",
+						"size": "20px",
+						"name": "Large"
+					},
+					{
+						"slug": "x-large",
+						"size": "24px",
+						"name": "Extra large"
+					},
+					{
+						"slug": "huge",
+						"size": "30px",
+						"name": "Huge"
+					}
+				],
+				"fontStyles": [
+					{
+						"name": "Regular",
+						"slug": "normal",
+						"value": "normal"
+					},
+					{
+						"name": "Italic",
+						"slug": "italic",
+						"value": "italic"
+					}
+				],
+				"fontWeights": [
+					{
+						"slug": "200",
+						"value": "200",
+						"name": "Thin"
+					},
+					{
+						"slug": "300",
+						"value": "300",
+						"name": "Light"
+					},
+					{
+						"slug": "400",
+						"value": "400",
+						"name": "Regular"
+					},
+					{
+						"slug": "500",
+						"value": "500",
+						"name": "Medium"
+					},
+					{
+						"slug": "600",
+						"value": "600",
+						"name": "Semibold"
+					},
+					{
+						"slug": "700",
+						"value": "700",
+						"name": "Bold"
+					},
+					{
+						"slug": "800",
+						"value": "800",
+						"name": "Heavy"
+					},
+					{
+						"slug": "900",
+						"value": "900",
+						"name": "Black"
+					}
+				],
+				"textTransforms": [
+					{
+						"name": "AB",
+						"slug": "uppercase"
+					},
+					{
+						"name": "ab",
+						"slug": "lowercase"
+					},
+					{
+						"name": "Ab",
+						"slug": "capitalize"
+					}
+				],
+				"textDecorations": [
+					{
+						"name": "Underline",
+						"slug": "underline",
+						"value": "underline"
+					},
+					{
+						"name": "Strikethrough",
+						"slug": "strikethrough",
+						"value": "line-through"
+					}
+				],
+				"spacing": {
+					"customPadding": true
+				}
+			},
+			"custom": {
+				"width": {
+					"default": "840px",
+					"wide": "1100px"
+				},
+				"margin": {
+					"horizontal": "14px"
+				}
+			}
+		},
+		"styles": {
+			"color": {
+				"background": "var(--wp--preset--color--white)",
+				"text": "var(--wp--preset--color--black)",
+				"link": "var(--wp--preset--color--dark-blue)"
+			},
+			"typography": {
+				"fontSize": "var(--wp--preset--font-size--normal)",
+				"fontFamily": "var(--wp--preset--font-family--system-fonts)",
+				"lineHeight": "1.7"
+			}
+		}
+	},
+	"core/site-title": {
+		"styles": {
+			"typography": {
+				"fontSize": "var(--wp--preset--font-size--small)",
+				"fontWeight": "var(--wp--preset--font-weight--300)"
+			}
+		}
+	},
+	"core/site-tagline": {
+		"styles": {
+			"typography": {
+				"fontSize": "var(--wp--preset--font-size--small)"
+			}
+		}
+	}
+}

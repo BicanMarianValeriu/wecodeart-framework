@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry\Comments
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -49,7 +49,7 @@ class Comments {
 	 * Get the comments template
 	 *
 	 * @since 	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void 
 	 */
@@ -75,7 +75,7 @@ class Comments {
 	 * Render Comments Info
 	 *
 	 * @since	3.7.3
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	string
 	 */
@@ -204,7 +204,7 @@ class Comments {
 	/**
 	 * Render Protected
 	 *
-	 * @since	4.2.0
+	 * @since	5.0.0
 	 *
 	 * @return	string	HTML
 	 */
@@ -264,7 +264,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	array
 	 */
@@ -452,7 +452,7 @@ class Comments {
 	/**
 	 * Validate Cookie field.
 	 *
-	 * @since	4.2.0
+	 * @since	5.0.0
 	 *
 	 * @return 	void
 	 */

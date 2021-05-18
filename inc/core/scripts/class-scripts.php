@@ -190,7 +190,7 @@ function get_asset( string $type, string $name ) {
 	if( ! in_array( $type, [ 'css', 'js' ] ) ) {
 		return _doing_it_wrong( 
 			__FUNCTION__, 
-			esc_html__( 'Asset must of type CSS/JS.', 'wecodeart' ), 
+			esc_html__( 'The file must be of type CSS/JS.', 'wecodeart' ), 
 			wecodeart( 'version' ) 
 		);
 	}

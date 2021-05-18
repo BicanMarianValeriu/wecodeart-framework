@@ -1,4 +1,3 @@
-import './media-text';
 import lorem from './lorem';
 import content from './content';
 import section from './section';

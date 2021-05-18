@@ -18,11 +18,11 @@ const {
 const { contentModules } = wecodeartGutenberg;
 
 const Control = ({ updateMeta, entryMeta, postType }) => {
-    if (['wp_block', 'wca_pattern'].includes(postType)) {
+    if (['wp_block', 'wp_template', 'wca_pattern'].includes(postType)) {
         return false;
     }
 
-    const { _wca_content_modules: value } = entryMeta;
+    const { _wca_content_modules: value = [] } = entryMeta;
 
     const contentKeys = Object.keys(contentModules);
 
@@ -87,6 +87,6 @@ export default compose(
             updateMeta: (value) => dispatch('core/editor').editPost({ meta: { _wca_content_modules: value } }),
         };
     }),
-    ifCondition((props) => props?.entryMeta?._wca_builder_template !== true),
+    ifCondition((props) => props?.entryMeta && props?.entryMeta?._wca_builder_template !== true),
     withSpokenMessages,
 )(Control);

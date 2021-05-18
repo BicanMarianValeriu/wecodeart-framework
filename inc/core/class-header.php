@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core;
@@ -67,7 +67,7 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void 
 	 */
@@ -106,7 +106,7 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	???
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -123,7 +123,7 @@ class Header {
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void 
 	 */
@@ -141,8 +141,8 @@ class Header {
 	 * Header Offcanvas
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
-	 * @since 	4.2.0
-	 * @version	4.2.0
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -164,7 +164,7 @@ class Header {
 	 * Variable that holds the Header Modules and Options
 	 *
 	 * @since	1.5
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	array
 	 */
@@ -189,7 +189,7 @@ class Header {
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @uses	WeCodeArt\Markup::sortable()
 	 * @since 	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -204,8 +204,19 @@ class Header {
 		}
 
 		Markup::wrap( 'navbar', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => implode( ' ', $classes ), 'id' => 'navbar' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'header-bar-container' ) ] ],
+			[
+				'tag' 	=> 'div',
+				'attrs' => [
+					'id' 	=> 'navbar',
+					'class' => implode( ' ', $classes ),
+				]
+			],
+			[
+				'tag' 	=> 'div',
+				'attrs' => [
+					'class' => get_theme_mod( 'header-bar-container' )
+				]
+			],
 		], 'WeCodeArt\Markup::sortable', [
 			self::navbar_modules(),
 			get_theme_mod( 'header-bar-modules' )
@@ -216,7 +227,7 @@ class Header {
 	 * Add a pingback url auto-discovery wp_head for singularly identifiable articles
 	 *
 	 * @since	2.2
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function meta_pingback() {
 		if ( is_singular() && pings_open( get_queried_object() ) ) {
@@ -227,7 +238,7 @@ class Header {
 	/**
 	 * Add a meta charset printed in wp_head
 	 *
-	 * @since	4.2.0
+	 * @since	5.0.0
 	 * @version 5.0.0
 	 */
 	public function meta_charset() {
@@ -249,7 +260,7 @@ class Header {
 	/**
 	 * Add a meta profile printed in wp_head
 	 *
-	 * @since	4.2.0
+	 * @since	5.0.0
 	 * @version 5.0.0
 	 */
 	public function meta_profile() {

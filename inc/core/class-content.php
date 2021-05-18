@@ -215,17 +215,23 @@ class Content {
 	}
 
 	/**
-	 * Skip to Content Link
+	 * Skip Links
 	 *
 	 * @since	3.8.3
-	 * @version	3.9.5
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */
 	public function skip_link() {
-		?><a class="skip-link screen-reader-text" href="#content"><?php 
-			esc_html_e( 'Skip to content', 'wecodeart' ); 
-		?></a> <?php
+		$links = (array) apply_filters( 'wecodeart/filter/skip_links', [ 
+			'content' => esc_html__( 'Skip to content', 'wecodeart' )
+		] );
+		
+		if( empty( $links ) ) return;
+
+		foreach( $links as $key => $value ) {
+			printf( '<a class="skip-link screen-reader-text" href="#%s">%s</a>', esc_attr( $key ), esc_html( $value ) );
+		}
 	}
 
 	/**

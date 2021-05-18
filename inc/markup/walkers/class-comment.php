@@ -9,7 +9,7 @@
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		1.9
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup\Walkers;
@@ -54,7 +54,7 @@ class Comment extends Walker_Comment {
 	 * Outputs a pingback comment.
 	 *
 	 * @since	2.0
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	protected function ping( $comment, $depth, $args ) {
 		?>
@@ -76,7 +76,7 @@ class Comment extends Walker_Comment {
 	 * Outputs a HTML5 comment.
 	 *
 	 * @since	2.0
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -85,8 +85,6 @@ class Comment extends Walker_Comment {
 		<li <?php echo Markup::generate_attr( 'comment', [
 			'class' 	=> implode( ' ', get_comment_class() ),
 			'id'		=> 'comment-' . $comment->comment_ID,
-			'itemscope' => true,
-			'itemtype' 	=> "https://schema.org/Comment",
 		] ); ?>>
 		<?php
 

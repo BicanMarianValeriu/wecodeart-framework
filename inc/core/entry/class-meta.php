@@ -53,12 +53,9 @@ class Meta {
 			return;
 		}
 
-		$author_id 	= $author_id ?: get_the_author_meta( 'ID' );
-		$author		= get_the_author_meta( 'display_name', $author_id );
-		$author_url = get_author_posts_url( $author_id );
-
-		// In order to render something when ajax refreshed in customizer.
-		$author_name = $author ?: esc_html__( 'Author Name', 'wecodeart' );
+		$author_id 		= $author_id ?: get_the_author_meta( 'ID' );
+		$author_name	= get_the_author_meta( 'display_name', $author_id ) ?: esc_html__( 'Author Name', 'wecodeart' );
+		$author_url 	= get_author_posts_url( $author_id );
 		
 		Markup::template( 'entry/meta/author', [
 			'author' => (object) [
@@ -66,8 +63,6 @@ class Meta {
 				'url' 	=> $author_url,
 				'name' 	=> $author_name,
 			],
-			'author_url' 	=> $author_url,
-			'author_name' 	=> $author_name
 		], $echo );
 	}
 

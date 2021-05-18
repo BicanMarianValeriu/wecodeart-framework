@@ -9,7 +9,7 @@
  * @subpackage 	Support\WPSeo\Conditional\is_yoast_active
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		4.0.2
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support\Plugins\WPSeo;

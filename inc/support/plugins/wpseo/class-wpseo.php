@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -64,11 +64,14 @@ class WPSeo implements Integration {
 	 * @version	4.1.5
 	 */
 	public function register_hooks() {
-		add_action( 'wecodeart/hook/inner/top', [ $this, 'render_yoast_breadcrumbs' ], 30 );
+		add_action( 'wecodeart/hook/inner/top', [ $this, 'render_breadcrumbs' ], 30 );
 		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
-		
+
+		// Restricted Blocks
+		add_filter( 'wecodeart/filter/gutenberg/restricted',[ $this, 'restricted_gutenberg_blocks' ] );
+
+		// Template Context
 		add_filter( 'wecodeart/filter/template/context', [ $this, 'filter_category_context' ], 10, 2 );
-		
 		if( get_prop( $this->config, 'author-social', false ) !== false ) {
 			/**
 			 * Extend Author box data with Social
@@ -85,16 +88,16 @@ class WPSeo implements Integration {
 	 *
 	 * @return  void
 	 */
-	public function render_yoast_breadcrumbs() {
-		if( wecodeart_if( 'is_front_page' ) ) {
+	public function render_breadcrumbs() {
+		if( wecodeart_if( 'is_front_page' ) || get_post_meta( get_the_ID(), '_wca_builder_template', true ) ) {
 			return;
 		}
 
-		$options = Content::get_contextual_options();
+		$container = get_prop( Content::get_contextual_options(), 'container' );
 		
 		Markup::wrap( 'breadcrumbs', [
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs', 'id' => 'breadcrumb' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => $options['container'] ] ],
+			[ 'tag' => 'div', 'attrs' => [ 'class' => $container ] ],
 			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs__list py-2' ] ]
 		], 'yoast_breadcrumb' );
 	}
@@ -210,5 +213,19 @@ class WPSeo implements Integration {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Filter - Restricted Yoast Blocks from theme code
+	 *
+	 * @since	5.0.0
+	 * @version	5.0.0
+	 *
+	 * @return 	array
+	 */
+	public function restricted_gutenberg_blocks( $blocks ) {
+		return wp_parse_args( [
+			'yoast-seo/breadcrumbs',
+		], $blocks );
 	}
 }

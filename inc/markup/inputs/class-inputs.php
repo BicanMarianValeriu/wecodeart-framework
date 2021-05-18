@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.1.2
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup;
@@ -67,7 +67,7 @@ class Inputs implements ArrayAccess {
 	 *
 	 * @access 	public
 	 * @since	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @param 	string 		$type		text/number/etc
 	 * @param 	array 		$args		Input Args

@@ -15,12 +15,12 @@ return [
 	<!-- /wp:paragraph -->
 	
 	<!-- wp:buttons {"contentJustification":"center","className":"css-5d300fef is-style-default","wecodeart":{"mobile":true,"tablet":true,"desktop":true,"loggedin":true,"loggedout":true},"hasCustomCSS":true} -->
-	<div class="wp-block-buttons is-content-justification-center css-5d300fef is-style-default"><!-- wp:button {"backgroundColor":"white","textColor":"dark","className":"is-style-primary css-9c62f0ee","hasCustomCSS":true} -->
-	<div class="wp-block-button is-style-primary css-9c62f0ee"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
+	<div class="wp-block-buttons is-content-justification-center css-5d300fef is-style-default"><!-- wp:button {"backgroundColor":"white","textColor":"dark","className":"css-9c62f0ee","hasCustomCSS":true} -->
+	<div class="wp-block-button css-9c62f0ee"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button -->
 	
-	<!-- wp:button {"backgroundColor":"white","textColor":"dark"} -->
-	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">HIRE US</a></div>
+	<!-- wp:button {"backgroundColor":"light","textColor":"dark"} -->
+	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">HIRE US</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div></div>
 	<!-- /wp:cover -->
@@ -86,8 +86,8 @@ return [
 	<!-- /wp:paragraph -->
 	
 	<!-- wp:buttons {"align":"left"} -->
-	<div class="wp-block-buttons alignleft"><!-- wp:button {"backgroundColor":"primary","className":"is-style-primary"} -->
-	<div class="wp-block-button is-style-primary"><a class="wp-block-button__link has-primary-background-color has-background" href="#">LEARN MORE</a></div>
+	<div class="wp-block-buttons alignleft"><!-- wp:button {"backgroundColor":"primary"} -->
+	<div class="wp-block-button"><a class="wp-block-button__link has-primary-background-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div>
 	<!-- /wp:wca/column --></div></div></div>
@@ -104,8 +104,8 @@ return [
 	<!-- /wp:paragraph -->
 	
 	<!-- wp:buttons {"align":"left"} -->
-	<div class="wp-block-buttons alignleft"><!-- wp:button {"backgroundColor":"primary","className":"is-style-primary"} -->
-	<div class="wp-block-button is-style-primary"><a class="wp-block-button__link has-primary-background-color has-background" href="#">LEARN MORE</a></div>
+	<div class="wp-block-buttons alignleft"><!-- wp:button {"backgroundColor":"primary"} -->
+	<div class="wp-block-button"><a class="wp-block-button__link has-primary-background-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div>
 	<!-- /wp:wca/column -->
@@ -165,8 +165,8 @@ return [
 	<!-- /wp:paragraph -->
 
 	<!-- wp:buttons {"align":"center","className":"css-5d300fef","hasCustomCSS":true} -->
-	<div class="wp-block-buttons is-content-justification-center css-5d300fef"><!-- wp:button {"backgroundColor":"white","textColor":"dark","className":"is-style-primary css-9c62f0ee","hasCustomCSS":true} -->
-	<div class="wp-block-button is-style-primary css-9c62f0ee"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
+	<div class="wp-block-buttons is-content-justification-center css-5d300fef"><!-- wp:button {"backgroundColor":"light","textColor":"dark","className":"ccss-9c62f0ee","hasCustomCSS":true} -->
+	<div class="wp-block-button css-9c62f0ee"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div></div>
 	<!-- /wp:cover -->',

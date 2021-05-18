@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since 		4.2.0
- * @version		4.2.0
+ * @since 		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support;
@@ -98,7 +98,7 @@ final class Styles implements Integration {
      * Get CSS without empty selector
      * Call after minification of CSS
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @param   string $css
      *
      * @return  string
@@ -335,7 +335,7 @@ final class Styles implements Integration {
 	/**
 	 * Check if string is empty without accepting zero
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	string $var Var to check.
 	 *
 	 * @return 	bool
@@ -347,7 +347,7 @@ final class Styles implements Integration {
 	/**
 	 * Get block attribute value with default
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	mixed $attr 	Attributes.
 	 * @param 	mixed $default 	Default value.
 	 *
@@ -364,7 +364,7 @@ final class Styles implements Integration {
 	/**
 	 * Get CSS value
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param  	string $property	CSS prop.
 	 * @param  	string $value		CSS value.
 	 *
@@ -377,7 +377,7 @@ final class Styles implements Integration {
 	/**
 	 * Convert HEX to RGBA.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	string $color   Color data.
 	 * @param 	bool   $opacity Opacity status.
 	 *
@@ -419,7 +419,7 @@ final class Styles implements Integration {
 	/**
 	 * Color lightness
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param  	string 	$color  Color in HEX/RGB/RGBA format
 	 *
 	 * @return 	string
@@ -434,7 +434,7 @@ final class Styles implements Integration {
 	/**
 	 * Adjust Color Brightness
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	string	$color   Color data.
 	 * @param 	integer	$opacity Opacity status.
 	 *
@@ -468,7 +468,7 @@ final class Styles implements Integration {
 	/**
 	 * Sanitize rgba color.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	string $value Color in rgba format.
 	 *
 	 * @return 	string
@@ -493,7 +493,7 @@ final class Styles implements Integration {
 	/**
 	 * Sanitize hex color.
 	 *
-	 * @since   4.2.0
+	 * @since   5.0.0
 	 * @param 	string $value Color in hex format.
 	 *
 	 * @return 	string

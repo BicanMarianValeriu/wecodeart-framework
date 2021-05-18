@@ -9,7 +9,7 @@
  * @subpackage 	Entry Media Class
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.6.x
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -140,7 +140,7 @@ class Media {
 	 * Get Image - Return an image pulled from the media gallery. 
 	 *
 	 * @since 	3.6.4
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @param 	array	$args
 	 * @param	bool	$echo
@@ -275,7 +275,7 @@ class Media {
 	 * Filter to add link on image on archives
 	 *
 	 * @since	4.1.5
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 *
 	 * @param 	boolean	$wrappers
 	 *

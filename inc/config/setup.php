@@ -12,10 +12,13 @@
  * @version		5.0.0
  */
 
+use function WeCodeArt\Functions\get_prop;
+
 /**
  * Bind Config.
  *
  * @param   array   $config     - configuration object passed earlier.
+ *
  * @return  void
  */
 wecodeart()->bind( 'config', function () use ( $config ) {
@@ -23,9 +26,20 @@ wecodeart()->bind( 'config', function () use ( $config ) {
 } );
 
 /**
+ * Bind Template.
+ *
+ * @since   5.0.0
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'template', function () {
+    return new WeCodeArt\Markup\Template( wecodeart_config() );
+} );
+
+/**
  * Bind Inputs.
  * 
- * @since   4.2.0
+ * @since   5.0.0
  *
  * @return  void
  */
@@ -49,7 +63,6 @@ wecodeart()->bind( 'conditionals', function () {
  *
  * @since   4.1.0
  *
- * @param   array   $conditionals   - configuration object passed earlier.
  * @return  void
  */
 wecodeart()->bind( 'integrations', function () {
@@ -155,6 +168,8 @@ wecodeart()->bind( 'version', function () {
  * @return  void
  */
 wecodeart()->bind( 'register_sidebars', function( WeCodeArt $theme, $parameters ) {
+    // Data should be sanitized/escaped before passing args to this function
+    // Core theme function calls does that, keep in mind for the child themes
     if( empty( $parameters ) ) return null;
 
     $can_run = array_map( function( $item ) {
@@ -170,15 +185,14 @@ wecodeart()->bind( 'register_sidebars', function( WeCodeArt $theme, $parameters 
     }
 
     foreach( $parameters as $key => $sidebar ) {
-        $label  = isset( $sidebar['name'] ) ? $sidebar['name'] : $sidebar['label'];
-        $desc   = isset( $sidebar['description'] ) ? esc_html( $sidebar['description'] ) : false;
-        $class  = isset( $sidebar['class'] ) ? $sidebar['class'] : $key;
+        // Get name or fallback to label, if both are missing, uppercase the $key
+        $label  = get_prop( $sidebar, 'name', get_prop( $sidebar, 'label', ucfirst( $key ) ) );
         // We can continue now.
         register_sidebar( [
-            'id'            => esc_attr( isset( $sidebar['id'] ) ? $sidebar['id'] : $key ),
-            'name'          => esc_html( $label ),
-            'class'         => sanitize_html_class( $class, 'wecodeart-sidebar' ),
-            'description'   => $desc ?: sprintf( esc_html__( 'This is the %s.', 'wecodeart' ), $label ),
+            'id'            => get_prop( $sidebar, 'id', $key ),
+            'name'          => $label,
+            'class'         => get_prop( $sidebar, 'class', $key ),
+            'description'   => get_prop( $sidebar, 'description', sprintf( esc_html__( 'This is the %s.', 'wecodeart' ), $label ) ),
             'before_widget' => '<div id="%1$s" class="widget %2$s mb-3">',
             'after_widget'  => '</div>',
             'before_title'  => '<h4 class="widget__title pt-3 h5 text-uppercase">',

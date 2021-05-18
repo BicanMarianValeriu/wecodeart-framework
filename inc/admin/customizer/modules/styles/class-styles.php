@@ -156,7 +156,7 @@ class Styles {
 		// Find the class that will handle the outpout for this field.
 		$classname            = Styles\Controls::class;
 		$default_classnames   = [
-			'wecodeart-fonts' => Styles\Controls\Font::class,
+			'wecodeart-fonts' 	=> Styles\Controls\Font::class,
 			'wecodeart-palette' => Styles\Controls\Palette::class,
 		];
 

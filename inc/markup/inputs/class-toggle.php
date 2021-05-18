@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2.0
- * @version		4.2.0
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup\Inputs;
@@ -29,7 +29,7 @@ class Toggle extends Base {
     /**
      * Input's Vars.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     string
      */
     public $label_position  = 'none';
@@ -51,7 +51,7 @@ class Toggle extends Base {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function content() {  
         Markup::wrap( $this->type, [
@@ -61,17 +61,14 @@ class Toggle extends Base {
                     'class' => implode( ' ', array_filter( [ 'form-check', $this->attrs['class'] ] ) ),
                 ]
             ]
-        ], function() {
-            // Create a basic input
-            echo ( new Basic( $this->type, [
-                'label'     => $this->label,
-                '_label'    => 'after',
-                'attrs'     => wp_parse_args( [
-                    'class' => 'form-check-input',
-                    'id'    => get_prop( $this->attrs, 'id', $this->unique_id )
-                ], $this->attrs ),
-                'messages'  => $this->messages
-            ] ) )->get_content();
-        } ); 
+        ], 'wecodeart_input', [ $this->type, [
+            'label'     => $this->label,
+            '_label'    => 'after',
+            'attrs'     => wp_parse_args( [
+                'class' => 'form-check-input',
+                'id'    => get_prop( $this->attrs, 'id', $this->unique_id )
+            ], $this->attrs ),
+            'messages'  => $this->messages
+        ] ] ); 
     }
 }

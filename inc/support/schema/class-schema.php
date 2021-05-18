@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Support\Schema
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2
- * @version		4.2
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Support;
@@ -42,16 +42,24 @@ class Schema implements Integration {
 	/**
 	 * Send to Constructor
 	 *
-	 * @since 	4.2.0
-	 * @version	4.2.0
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 */
 	public function register_hooks() {
 		// General
 		\add_filter( 'wecodeart/filter/attributes/body', 	[ $this, 'body'		] );
 		\add_filter( 'wecodeart/filter/attributes/header', 	[ $this, 'header' 	] );
 		\add_filter( 'wecodeart/filter/attributes/footer', 	[ $this, 'footer' 	] );
-		\add_filter( 'wecodeart/filter/attributes/primary-sidebar',		[ $this, 'sidebar' 	] );
-		\add_filter( 'wecodeart/filter/attributes/secondary-sidebar',	[ $this, 'sidebar' 	] );
+		\add_filter( 'wecodeart/filter/attributes/comment',	[ $this, 'comment' 	] );
+		\add_filter( 'wecodeart/filter/attributes/menu-item-wrap',		[ $this, 'navigation_menu' 	] );
+		\add_filter( 'wecodeart/filter/attributes/pagination',			[ $this, 'navigation' 	], 10, 2 );
+		\add_filter( 'wecodeart/filter/attributes/comments-nav',		[ $this, 'navigation' 	], 10, 2 );
+		\add_filter( 'wecodeart/filter/attributes/entry-pagination',	[ $this, 'navigation' 	], 10, 2 );
+		\add_filter( 'wecodeart/filter/attributes/entry-navigation',	[ $this, 'navigation'	], 10, 2 );
+		
+		foreach( apply_filters( 'wecodeart/filter/content/sidebars', [
+			'primary'
+		] ) as $key ) \add_filter( "wecodeart/filter/attributes/{$key}-sidebar",	[ $this, 'sidebar' 	] );
 	}
 
 	/**
@@ -88,8 +96,8 @@ class Schema implements Integration {
 	/**
 	 * Header
 	 *
-	 * @since 	4.2.0
-	 * @version	4.2.0
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 *
 	 * @param 	array $attrs
 	 *
@@ -104,8 +112,8 @@ class Schema implements Integration {
 	/**
 	 * Footer
 	 *
-	 * @since 	4.2.0
-	 * @version	4.2.0
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 *
 	 * @param 	array $attrs
 	 *
@@ -120,8 +128,8 @@ class Schema implements Integration {
 	/**
 	 * Sidebar
 	 *
-	 * @since 	4.2.0
-	 * @version	4.2.0
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 *
 	 * @param 	array $attrs
 	 *
@@ -130,6 +138,53 @@ class Schema implements Integration {
 	public function sidebar( $attrs ) {
 		$attrs['itemscope'] = true;
 		$attrs['itemtype'] 	= 'https://schema.org/WPSideBar';
+		return $attrs;
+	}
+
+	/**
+	 * Comment
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 *
+	 * @param 	array $attrs
+	 *
+	 * @return 	array
+	 */
+	public function comment( $attrs ) {
+		$attrs['itemscope'] = true;
+		$attrs['itemtype'] 	= 'https://schema.org/Comment';
+		return $attrs;
+	}
+
+	/**
+	 * Navigation
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 *
+	 * @param 	array $attrs
+	 *
+	 * @return 	array
+	 */
+	public function navigation( $attrs, $index ) {
+		if( $index !== 0 ) return $attrs;
+		return $this->navigation_menu( $attrs );
+	}
+
+	/**
+	 * Navigation
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 *
+	 * @param 	array $attrs
+	 *
+	 * @return 	array
+	 */
+	public function navigation_menu( $attrs ) {
+		$attrs['itemscope'] = true;
+		$attrs['itemtype'] 	= 'https://schema.org/SiteNavigationElement';
 		return $attrs;
 	}
 }

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 00:28+0000\n"
+"POT-Creation-Date: 2021-05-11 23:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "%s Archives"
 msgstr ""
 
-#: inc/core/class-pagination.php:165
+#: inc/core/class-pagination.php:159
 #, php-format
 msgid "%s Navigation"
 msgstr ""
@@ -56,7 +56,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: inc/markup/walkers/class-menu.php:339
+#: inc/markup/walkers/class-menu.php:326
 msgid "Add a menu"
 msgstr ""
 
@@ -88,10 +88,6 @@ msgstr ""
 msgid "Archives"
 msgstr ""
 
-#: inc/core/scripts/class-scripts.php:193
-msgid "Asset must of type CSS/JS."
-msgstr ""
-
 #: views/entry/comment.tpl.php:78
 msgid "at"
 msgstr ""
@@ -104,11 +100,11 @@ msgstr ""
 msgid "Attribution text color"
 msgstr ""
 
-#: inc/core/entry/class-meta.php:246
+#: inc/core/entry/class-meta.php:241
 msgid "Author"
 msgstr ""
 
-#: inc/core/entry/class-meta.php:61
+#: inc/core/entry/class-meta.php:57
 msgid "Author Name"
 msgstr ""
 
@@ -144,7 +140,7 @@ msgstr ""
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr ""
 
-#: inc/admin/class-admin.php:297
+#: inc/admin/class-admin.php:289
 msgid "Block Options"
 msgstr ""
 
@@ -199,7 +195,7 @@ msgstr ""
 msgid "Captcha *"
 msgstr ""
 
-#: inc/core/entry/class-meta.php:254
+#: inc/core/entry/class-meta.php:249
 msgid "Categories"
 msgstr ""
 
@@ -262,7 +258,7 @@ msgstr ""
 msgid "Comment *"
 msgstr ""
 
-#: inc/core/entry/class-meta.php:262
+#: inc/core/entry/class-meta.php:257
 msgid "Comments"
 msgstr ""
 
@@ -270,7 +266,7 @@ msgstr ""
 msgid "Comments are Closed"
 msgstr ""
 
-#: inc/core/class-pagination.php:222
+#: inc/core/class-pagination.php:214
 msgid "Comments Navigation"
 msgstr ""
 
@@ -364,7 +360,7 @@ msgstr ""
 msgid "Dark Mode"
 msgstr ""
 
-#: inc/core/entry/class-meta.php:250
+#: inc/core/entry/class-meta.php:245
 msgid "Date"
 msgstr ""
 
@@ -384,7 +380,7 @@ msgstr ""
 msgid "Design Settings"
 msgstr ""
 
-#: inc/admin/class-admin.php:278
+#: inc/admin/class-admin.php:270
 msgid "Developer Mode"
 msgstr ""
 
@@ -392,7 +388,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: inc/core/entry/class-meta.php:266
+#: inc/core/entry/class-meta.php:261
 msgid "Edit Link"
 msgstr ""
 
@@ -612,7 +608,7 @@ msgstr ""
 msgid "Link Text Color"
 msgstr ""
 
-#: inc/admin/class-admin.php:301
+#: inc/admin/class-admin.php:293
 msgid "Lorem Ipsum Generator"
 msgstr ""
 
@@ -676,7 +672,7 @@ msgstr ""
 msgid "Name *"
 msgstr ""
 
-#: inc/core/class-pagination.php:150 inc/core/class-pagination.php:209
+#: inc/core/class-pagination.php:146 inc/core/class-pagination.php:203
 msgid "Navigation"
 msgstr ""
 
@@ -724,7 +720,7 @@ msgstr ""
 msgid "Page for 404"
 msgstr ""
 
-#: inc/core/class-pagination.php:77 inc/core/class-pagination.php:115
+#: inc/core/class-pagination.php:75 inc/core/class-pagination.php:113
 msgid "Pagination"
 msgstr ""
 
@@ -762,7 +758,7 @@ msgstr ""
 msgid "Please define a callback function for each of the modules."
 msgstr ""
 
-#: inc/config/setup.php:167
+#: inc/config/setup.php:182
 msgid "Please define a name for each of the sidebars."
 msgstr ""
 
@@ -790,7 +786,7 @@ msgstr ""
 msgid "Post updated on %s."
 msgstr ""
 
-#: views/entry/meta/author.tpl.php:33
+#: views/entry/meta/author.tpl.php:31
 msgid "Posted by "
 msgstr ""
 
@@ -811,12 +807,17 @@ msgstr ""
 msgid "Primary Font"
 msgstr ""
 
-#: inc/support/class-support.php:126
+#: inc/support/class-support.php:127
 msgid "Primary Menu"
 msgstr ""
 
 #: views/entry/read-more.tpl.php:23
 msgid "Read More"
+msgstr ""
+
+#: inc/gutenberg/modules/styles/class-handler.php:119
+#: inc/gutenberg/modules/styles/class-handler.php:150
+msgid "removed"
 msgstr ""
 
 #. %1$s expands to the request method
@@ -882,7 +883,11 @@ msgstr ""
 msgid "Semi-Bold 600 Italic"
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:194
+#: inc/support/plugins/cf7/modules/class-submit.php:63
+msgid "Send"
+msgstr ""
+
+#: inc/support/plugins/woocommerce/class-woocommerce.php:195
 msgid "Shop Sidebar"
 msgstr ""
 
@@ -931,7 +936,7 @@ msgstr ""
 msgid "Tagged with "
 msgstr ""
 
-#: inc/core/entry/class-meta.php:258
+#: inc/core/entry/class-meta.php:253
 msgid "Tags"
 msgstr ""
 
@@ -947,11 +952,15 @@ msgstr ""
 msgid "Text color of the footer links."
 msgstr ""
 
-#: inc/admin/class-admin.php:231 inc/admin/class-admin.php:232
+#: inc/core/scripts/class-scripts.php:193
+msgid "The file must be of type CSS/JS."
+msgstr ""
+
+#: inc/admin/class-admin.php:223 inc/admin/class-admin.php:224
 msgid "Theme Options"
 msgstr ""
 
-#: inc/core/entry/class-entry.php:229
+#: inc/core/entry/class-entry.php:228
 msgid "There are no posts matching your criteria."
 msgstr ""
 
@@ -966,12 +975,12 @@ msgid ""
 "This font is used on headings and it will be placed in a custom CSS variable."
 msgstr ""
 
-#: inc/config/setup.php:181
+#: inc/config/setup.php:195
 #, php-format
 msgid "This is the %s."
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:195
+#: inc/support/plugins/woocommerce/class-woocommerce.php:196
 msgid ""
 "This is the Shop Sidebar - it will replace Primary Sidebar on WooCommerce "
 "Pages."
@@ -1029,6 +1038,11 @@ msgstr ""
 
 #: inc/gutenberg/modules/patterns/class-patterns.php:126
 msgid "Update Pattern Type"
+msgstr ""
+
+#: inc/gutenberg/modules/styles/class-handler.php:119
+#: inc/gutenberg/modules/styles/class-handler.php:147
+msgid "updated"
 msgstr ""
 
 #: inc/gutenberg/modules/patterns/class-patterns.php:90
@@ -1089,6 +1103,11 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
+#: inc/support/plugins/cf7/modules/class-module.php:52
+#, php-format
+msgid "When extending %s, you must create a `get_html` method."
+msgstr ""
+
 #: inc/admin/customizer/class-config.php:34
 #, php-format
 msgid ""
@@ -1100,7 +1119,7 @@ msgstr ""
 msgid "White"
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:212
+#: inc/support/plugins/woocommerce/class-woocommerce.php:213
 msgid "WooCommerce Cart"
 msgstr ""
 

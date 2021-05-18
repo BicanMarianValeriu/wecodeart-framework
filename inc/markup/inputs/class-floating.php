@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2.0
- * @version		4.2.0
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup\Inputs;
@@ -28,7 +28,7 @@ class Floating extends Basic {
     /**
      * Input's Type / Label Position.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     string
      */
     public $type            = 'floating';
@@ -46,7 +46,7 @@ class Floating extends Basic {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function content() {
         Markup::wrap( 'form-floating', [

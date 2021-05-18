@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		4.2
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core;
@@ -122,7 +122,7 @@ class Entry {
 	 * Retrieve entry title with link
 	 *
 	 * @since 	3.6.4
-	 * @version	4.2.0
+	 * @version	5.0.0.0
 	 *
 	 * @param	bool	$link
 	 * @param 	bool 	$echo 
@@ -190,7 +190,7 @@ class Entry {
 	 * Entry Meta Read More Template
 	 *
 	 * @since	1.0
-	 * @version	4.2.0
+	 * @version	5.0.0.0
 	 *
 	 * @param 	array	$args
 	 * @param 	bool	$echo
@@ -213,7 +213,7 @@ class Entry {
 	 * Return the content for No Posts
 	 *
 	 * @since	2.2
-	 * @version	4.2
+	 * @version	5.0.0
 	 *
 	 * @return	string
 	 */

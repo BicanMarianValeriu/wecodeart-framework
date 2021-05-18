@@ -28,6 +28,6 @@ class Condition implements ConditionalInterface {
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return get_prop( wecodeart_config( 'extensions', [] ), 'schema', true );
+		return get_prop( wecodeart_config( 'extensions', [] ), 'schema', false );
 	}
 }

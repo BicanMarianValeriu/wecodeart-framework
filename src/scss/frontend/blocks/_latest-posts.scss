@@ -1,16 +1,6 @@
 .wp-block-latest-posts {
 	@include list-unstyled();
 
-	&.alignleft {
-		/*rtl:ignore*/
-		margin-right: 2em;
-	}
-
-	&.alignright {
-		/*rtl:ignore*/
-		margin-left: 2em;
-	}
-
 	&.is-grid {
 		@include make-row();
 
@@ -65,7 +55,7 @@
 	}
 
 	li {
-        margin: 0 0 20px;
+        margin: 0 0 $spacer;
         @include clearfix;
 
         img {
@@ -83,7 +73,7 @@
 
 		&-excerpt {
 			margin-top: 10px;
-			margin-bottom: 30px;
+			margin-bottom: $spacer;
 		}
 	}
 }

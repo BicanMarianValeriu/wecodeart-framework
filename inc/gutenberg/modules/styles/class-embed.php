@@ -230,10 +230,8 @@ class Embed {
 			$style .= $css;
 			$style .= "\n" . '</style>' . "\n";
 
-			// Note for code reviewers
-			// By this point, the content of this variable is escaped and sanitized
-			// before being inserted into DB - see class-block.php in the same folder
-			echo $style;//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			// CSS is escaped before anyway before this step!
+			echo wp_strip_all_tags( $style );
 		}
 	}
 
@@ -286,7 +284,7 @@ class Embed {
 				return '';
 			}
 
-			$css = $this->cycle_through_blocks( $blocks );
+			$css = $this->collect_css( $blocks );
 		}
 
 		return $css;
@@ -316,14 +314,14 @@ class Embed {
 	}
 
 	/**
-	 * Cycle thorugh Blocks
+	 * Cycle thorugh Blocks and collect CSS
 	 *
 	 * @since   5.0.0
 	 * @param 	array 	$blocks List of blocks.
 	 *
 	 * @return 	string 	Block styles.
 	 */
-	public function cycle_through_blocks( $blocks ) {
+	public function collect_css( $blocks ) {
 		$style  = '';
 		$style .= Styles::get_instance()->cycle_through_static_blocks( $blocks );
 		$style .= Styles::get_instance()->cycle_through_reusable_blocks( $blocks );

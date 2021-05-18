@@ -19,14 +19,19 @@ $button-margin: 10px;
 		&:not(.is-vertical) {
 			> .wp-block-button {
 				// Reset rounded corners
-				&:not(:last-child) > .wp-block-button__link {
-					border-top-right-radius: 0;
-					border-bottom-right-radius: 0;
+				&:not(:last-child)  {
+					& > .wp-block-button__link {
+						border-top-right-radius: 0;
+						border-bottom-right-radius: 0;
+					}
 				}
 	
-				&:not(:first-child) > .wp-block-button__link {
-					border-top-left-radius: 0;
-					border-bottom-left-radius: 0;
+				&:not(:first-child)  {
+					> .wp-block-button__link {
+						border-left: 0;
+						border-top-left-radius: 0;
+						border-bottom-left-radius: 0;
+					}
 				}
 			}
 		}
@@ -34,6 +39,21 @@ $button-margin: 10px;
 		&.is-vertical {
 			> .wp-block-button {
 				margin: 0;
+
+				&:not(:first-child) {
+					margin-top: -$btn-border-width;
+				}
+	
+				// Reset rounded corners
+				&:not(:last-child) > .wp-block-button__link {
+					border-bottom-left-radius: 0;
+					border-bottom-right-radius: 0;
+				}
+	
+				&:not(:first-child) > .wp-block-button__link {
+					border-top-left-radius: 0;
+					border-top-right-radius: 0;
+				}
 			}
 		}
 	}
@@ -42,29 +62,7 @@ $button-margin: 10px;
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: center;
-
-		& > .wp-block-button {
-			// Prevent double borders when buttons are next to each other
-			&:not(:first-child) {
-				margin-top: -$btn-border-width;
-			}
-
-			// Reset rounded corners
-			&:not(:last-child) > .wp-block-button__link {
-                border-bottom-left-radius: 0;
-                border-bottom-right-radius: 0;
-			}
-
-			&:not(:first-child) > .wp-block-button__link {
-				border-top-left-radius: 0;
-                border-top-right-radius: 0;
-			}
-
-			&__link {
-				display: block;
-				width: 100%;
-			}
-		}
+		margin-bottom: $spacer;
 	}
 
 	&.is-content-justification-left {
@@ -115,8 +113,6 @@ $button-margin: 10px;
 }
 
 .wp-block-button {
-	color: $white;
-	
 	&.has-custom-width {
 		max-width: none;
 
@@ -126,15 +122,15 @@ $button-margin: 10px;
 	}
 
 	&.wp-block-button__width-25 {
-		min-width: calc(25% - #{ $button-margin });
+		min-width: 25%;
 	}
 
 	&.wp-block-button__width-50 {
-		min-width: calc(50% - #{ $button-margin });
+		min-width: 50%;
 	}
 
 	&.wp-block-button__width-75 {
-		min-width: calc(75% - #{ $button-margin });
+		min-width: 75%;
 	}
 
 	&.wp-block-button__width-100 {
@@ -152,47 +148,22 @@ $button-margin: 10px;
 
 	&__link {
 		display: block;
-		user-select: none;
-		outline: none;
-		border: 1px solid transparent;
-		@include button-variant( $dark, transparent );
-		@include button-size(
-			$btn-padding-y,
-			$btn-padding-x-lg,
-			$btn-font-size,
-			$btn-border-radius
-		);
+		
+		&:not([class*="btn-"]) {
+			.is-style-outline & {
+				border-color: currentColor;
+
+				&:hover,
+				&:focus {
+					background-color: var( --wca-color );
+					border-color: var( --wca-color );
+					color: white
+				}
+			}
+		}
 
 		&.no-border-radius {
 			@include border-radius(0);
-		}
-
-		@each $color, $value in $theme-colors {
-			&.has-#{$color}-background-color {
-				&:hover {
-					color: white;
-					background-color: darken( $value, 10% );
-				}
-			}
-		}
-	
-		.is-style-outline & {
-			background-color: transparent;
-			border-color: currentColor;
-
-			&:not(.has-text-color) {
-				color: $dark;
-			}
-
-			@each $color, $value in $theme-colors {
-				&.has-#{$color}-color {
-					&:hover,
-					&:visited {
-						background-color: #{$value};
-						border-color: #{$value};
-					}
-				}
-			}
 		}
 	}
 }

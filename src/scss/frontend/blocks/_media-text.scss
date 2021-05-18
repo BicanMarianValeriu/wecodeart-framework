@@ -1,5 +1,11 @@
 .wp-block-media-text {
+	display: flex;
+	flex-flow: column;
+	--wca-gutter-x: 30px;
+
 	@include media-breakpoint-up( 'md' ) {
+		flex-flow: row nowrap;
+		
 		&.is-vertically-aligned-top {
 			.wp-block-media-text__content {
 				align-self: flex-start;
@@ -26,6 +32,7 @@
 	
 	&__content {
 		flex-grow: 1;
+		padding: calc(var(--wca-gutter-x) / 2);
 
 		@include media-breakpoint-up( 'md' ) {
 			align-self: center;
@@ -40,13 +47,6 @@
 			margin-bottom: 0;
 		}
 		
-		&.ratio {
-			@include media-breakpoint-up( 'xs' ) {
-				margin-left: calc(var(--wca-gutter-x) / 2);
-				margin-right: calc(var(--wca-gutter-x) / 2);
-			}
-		}
-		
 		img,
 		video {
 			display: block;
@@ -54,16 +54,11 @@
 			object-fit: cover;
 		}
 		
-		&--fill {
+		.is-image-fill & {
 			position: relative;
 			padding: 0;
 			min-height: 250px;
 			background-size: cover;
-
-			@include media-breakpoint-up( 'sm' ) {
-				margin-left: calc(var(--wca-gutter-x) / 2);
-				margin-right: calc(var(--wca-gutter-x) / 2);
-			}
 	
 			img {
 				// The image is visually hidden but accessible to assistive technologies.

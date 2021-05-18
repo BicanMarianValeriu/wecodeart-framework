@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2.0
- * @version		4.2.0
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup\Inputs;
@@ -27,7 +27,7 @@ class Fieldset extends Base {
     /**
      * Input's Label - disabled.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     string
      */
     public $label_position = 'none';
@@ -35,7 +35,7 @@ class Fieldset extends Base {
     /**
      * All choices tied to the control.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     array
      */
     public $choices = [];
@@ -48,6 +48,7 @@ class Fieldset extends Base {
         $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? $type : 'checkbox';
         $this->unique_id    = wp_unique_id( 'fieldset-' );
         $this->label        = get_prop( $args, 'label', '' );
+        $this->exclusive    = get_prop( $args, 'exclusive', false );
         $this->attrs        = get_prop( $args, 'attrs', [] );
         $this->choices      = get_prop( $args, 'choices', [] );
         $this->messages     = get_prop( $args, 'messages', [] );
@@ -57,7 +58,7 @@ class Fieldset extends Base {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function content() {
         Markup::wrap( 'fieldset-' . $this->type, [
@@ -75,17 +76,16 @@ class Fieldset extends Base {
             $fields = '';
             foreach( $this->choices as $key => $label ) {
                 // Create a basic input
-                $fields .= ( new Toggle( $this->type, [
+                $fields .= wecodeart_input( 'toggle', [
                     'type'  => $this->type,
                     'label' => $label,
-                    'attrs' => [
+                    'attrs' => wp_parse_args( [
                         'value'		=> $key,
-                        'class'     => $this->attrs['class'],
                         'name' 		=> $this->get_option_name( $key ),
                         'id'        => $this->get_option_id( $key ),
                         'checked'	=> $this->checked_option( $key ),
-                    ]
-                ] ) )->get_content();
+                    ], $this->attrs )
+                ], false );
             }
 
             // Already escaped in the Basic Input and its methods
@@ -96,7 +96,7 @@ class Fieldset extends Base {
     /**
 	 * Render the label HTML of the input
      *
-     * @since   4.2.0
+     * @since   5.0.0
 	 * @return	mixed|string
 	 */
 	public function label() {
@@ -105,6 +105,9 @@ class Fieldset extends Base {
         Markup::wrap( 'fieldset-label', [
             [
                 'tag'   => 'legend',
+                'attrs' => [
+                    'class' => 'fs-6'
+                ]
             ]
         ], $this->label );
     }
@@ -112,11 +115,11 @@ class Fieldset extends Base {
     /**
 	 * Get Item Name
      *
-     * @since   4.2.0
+     * @since   5.0.0
 	 * @return	string
 	 */
 	public function get_option_name( string $item ) {
-        if( $this->type === 'checkbox' ) $value = get_prop( $this->attrs, 'name', $this->unique_id ) . '[' . $item . ']';
+        if( $this->type === 'checkbox' ) $value = get_prop( $this->attrs, 'name', $this->unique_id ) . ( $this->exclusive ? '[]' : '' );
         if( $this->type === 'radio' ) $value = get_prop( $this->attrs, 'name', $this->unique_id );
         return $value;
     }
@@ -124,18 +127,18 @@ class Fieldset extends Base {
     /**
 	 * Get Item ID
      *
-     * @since   4.2.0
+     * @since   5.0.0
 	 * @return	string
 	 */
 	public function get_option_id( string $item ) {
-        $value = get_prop( $this->attrs, 'name', $this->unique_id ) . '-' . $item;
+        $value = get_prop( $this->attrs, 'name', $this->unique_id ) . '-' . sanitize_title_with_dashes( $item );
         return $value;
     }
 
     /**
 	 * Checked Option
      *
-     * @since   4.2.0
+     * @since   5.0.0
 	 * @return	mixed|string
 	 */
 	public function checked_option( string $value ) {

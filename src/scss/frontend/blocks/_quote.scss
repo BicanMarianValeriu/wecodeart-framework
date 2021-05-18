@@ -1,19 +1,58 @@
+// Quote
 .wp-block-quote {
-	&.is-style-large,
-	&.is-large {
-		margin: 0 0 16px;
-		padding: 0 1em;
+	border-left: 4px solid var( --wca-primary );
+	padding-left: 1rem;
 
-		p {
-			font-size: 24px;
-			font-style: italic;
-			line-height: 1.6;
+	&.is-style-large {
+		.blockquote {
+			font-size: 2rem;
 		}
 
-		cite,
-		footer {
-			font-size: 18px;
-			text-align: right;
+		.blockquote-footer {
+			font-size: 1.5rem;
 		}
+	}
+
+	.blockquote-footer {
+		text-align: left;
+	}
+}
+
+// Pullquote
+.wp-block-pullquote {
+	padding: 3rem 0;
+	text-align: center;
+
+	&:not(.is-style-solid-color) {
+		border-top-width: 4px;
+		border-bottom-width: 4px;
+		border-top-style: solid;
+		border-bottom-style: solid;
+
+		cite {
+			font-style: normal;
+			text-transform: uppercase;
+		}
+	}
+
+	&.is-style-solid-color {
+		blockquote {
+			margin: 0 auto 0;
+			text-align: left;
+			max-width: max( 400px, 60% );
+	
+			p {
+				font-size: 2.5rem;
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	blockquote {
+		padding: 0 $spacer;
+	}
+	
+	p {
+		font-size: 1.5rem;
 	}
 }

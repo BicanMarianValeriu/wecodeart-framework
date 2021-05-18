@@ -276,7 +276,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /***/ (function(module, exports) {
 
 function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
 module.exports = _iterableToArray;
@@ -5990,22 +5990,23 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap base-component.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap base-component.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-   true ? module.exports = factory(__webpack_require__(/*! ./dom/data.js */ "./node_modules/bootstrap/js/dist/dom/data.js")) :
+   true ? module.exports = factory(__webpack_require__(/*! ./dom/data.js */ "./node_modules/bootstrap/js/dist/dom/data.js"), __webpack_require__(/*! ./dom/event-handler.js */ "./node_modules/bootstrap/js/dist/dom/event-handler.js")) :
   undefined;
-}(this, (function (Data) { 'use strict';
+}(this, (function (Data, EventHandler) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
   var Data__default = /*#__PURE__*/_interopDefaultLegacy(Data);
+  var EventHandler__default = /*#__PURE__*/_interopDefaultLegacy(EventHandler);
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): base-component.js
+   * Bootstrap (v5.0.0): base-component.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -6015,7 +6016,7 @@ function within(min, value, max) {
    * ------------------------------------------------------------------------
    */
 
-  const VERSION = '5.0.0-beta3';
+  const VERSION = '5.0.0';
 
   class BaseComponent {
     constructor(element) {
@@ -6031,6 +6032,7 @@ function within(min, value, max) {
 
     dispose() {
       Data__default['default'].remove(this._element, this.constructor.DATA_KEY);
+      EventHandler__default['default'].off(this._element, `.${this.constructor.DATA_KEY}`);
       this._element = null;
     }
     /** Static */
@@ -6062,7 +6064,7 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap collapse.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap collapse.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -6081,7 +6083,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): util/index.js
+   * Bootstrap (v5.0.0): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -6111,7 +6113,7 @@ function within(min, value, max) {
 
 
       if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
-        hrefAttr = '#' + hrefAttr.split('#')[1];
+        hrefAttr = `#${hrefAttr.split('#')[1]}`;
       }
 
       selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
@@ -6189,7 +6191,7 @@ function within(min, value, max) {
       const valueType = value && isElement(value) ? 'element' : toType(value);
 
       if (!new RegExp(expectedTypes).test(valueType)) {
-        throw new TypeError(`${componentName.toUpperCase()}: ` + `Option "${property}" provided type "${valueType}" ` + `but expected type "${expectedTypes}".`);
+        throw new TypeError(`${componentName.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
       }
     });
   };
@@ -6236,7 +6238,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): collapse.js
+   * Bootstrap (v5.0.0): collapse.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -6623,7 +6625,7 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap data.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap data.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -6634,7 +6636,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): dom/data.js
+   * Bootstrap (v5.0.0): dom/data.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -6702,7 +6704,7 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap event-handler.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap event-handler.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -6713,7 +6715,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): util/index.js
+   * Bootstrap (v5.0.0): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -6732,7 +6734,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): dom/event-handler.js
+   * Bootstrap (v5.0.0): dom/event-handler.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -6752,6 +6754,7 @@ function within(min, value, max) {
     mouseenter: 'mouseover',
     mouseleave: 'mouseout'
   };
+  const customEventsRegex = /^(mouseenter|mouseleave)/i;
   const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
   /**
    * ------------------------------------------------------------------------
@@ -6795,7 +6798,7 @@ function within(min, value, max) {
 
             if (handler.oneOff) {
               // eslint-disable-next-line unicorn/consistent-destructuring
-              EventHandler.off(element, event.type, fn);
+              EventHandler.off(element, event.type, selector, fn);
             }
 
             return fn.apply(target, [event]);
@@ -6824,15 +6827,8 @@ function within(min, value, max) {
 
   function normalizeParams(originalTypeEvent, handler, delegationFn) {
     const delegation = typeof handler === 'string';
-    const originalHandler = delegation ? delegationFn : handler; // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
-
-    let typeEvent = originalTypeEvent.replace(stripNameRegex, '');
-    const custom = customEvents[typeEvent];
-
-    if (custom) {
-      typeEvent = custom;
-    }
-
+    const originalHandler = delegation ? delegationFn : handler;
+    let typeEvent = getTypeEvent(originalTypeEvent);
     const isNative = nativeEvents.has(typeEvent);
 
     if (!isNative) {
@@ -6850,6 +6846,24 @@ function within(min, value, max) {
     if (!handler) {
       handler = delegationFn;
       delegationFn = null;
+    } // in case of mouseenter or mouseleave wrap the handler within a function that checks for its DOM position
+    // this prevents the handler from being dispatched the same way as mouseover or mouseout does
+
+
+    if (customEventsRegex.test(originalTypeEvent)) {
+      const wrapFn = fn => {
+        return function (event) {
+          if (!event.relatedTarget || event.relatedTarget !== event.delegateTarget && !event.delegateTarget.contains(event.relatedTarget)) {
+            return fn.call(this, event);
+          }
+        };
+      };
+
+      if (delegationFn) {
+        delegationFn = wrapFn(delegationFn);
+      } else {
+        handler = wrapFn(handler);
+      }
     }
 
     const [delegation, originalHandler, typeEvent] = normalizeParams(originalTypeEvent, handler, delegationFn);
@@ -6891,6 +6905,12 @@ function within(min, value, max) {
         removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
       }
     });
+  }
+
+  function getTypeEvent(event) {
+    // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
+    event = event.replace(stripNameRegex, '');
+    return customEvents[event] || event;
   }
 
   const EventHandler = {
@@ -6945,7 +6965,7 @@ function within(min, value, max) {
       }
 
       const $ = getjQuery();
-      const typeEvent = event.replace(stripNameRegex, '');
+      const typeEvent = getTypeEvent(event);
       const inNamespace = event !== typeEvent;
       const isNative = nativeEvents.has(typeEvent);
       let jQueryEvent;
@@ -7017,7 +7037,7 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap manipulator.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap manipulator.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -7028,7 +7048,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): dom/manipulator.js
+   * Bootstrap (v5.0.0): dom/manipulator.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -7116,7 +7136,7 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap selector-engine.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap selector-engine.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -7127,7 +7147,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): dom/selector-engine.js
+   * Bootstrap (v5.0.0): dom/selector-engine.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -7212,7 +7232,7 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap dropdown.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap dropdown.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -7252,7 +7272,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): util/index.js
+   * Bootstrap (v5.0.0): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -7280,7 +7300,7 @@ function within(min, value, max) {
 
 
       if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
-        hrefAttr = '#' + hrefAttr.split('#')[1];
+        hrefAttr = `#${hrefAttr.split('#')[1]}`;
       }
 
       selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
@@ -7303,7 +7323,7 @@ function within(min, value, max) {
       const valueType = value && isElement(value) ? 'element' : toType(value);
 
       if (!new RegExp(expectedTypes).test(valueType)) {
-        throw new TypeError(`${componentName.toUpperCase()}: ` + `Option "${property}" provided type "${valueType}" ` + `but expected type "${expectedTypes}".`);
+        throw new TypeError(`${componentName.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
       }
     });
   };
@@ -7322,7 +7342,23 @@ function within(min, value, max) {
     return false;
   };
 
-  const noop = () => function () {};
+  const isDisabled = element => {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      return true;
+    }
+
+    if (element.classList.contains('disabled')) {
+      return true;
+    }
+
+    if (typeof element.disabled !== 'undefined') {
+      return element.disabled;
+    }
+
+    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+  };
+
+  const noop = () => {};
 
   const getjQuery = () => {
     const {
@@ -7366,7 +7402,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): dropdown.js
+   * Bootstrap (v5.0.0): dropdown.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -7396,7 +7432,6 @@ function within(min, value, max) {
   const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
   const EVENT_KEYDOWN_DATA_API = `keydown${EVENT_KEY}${DATA_API_KEY}`;
   const EVENT_KEYUP_DATA_API = `keyup${EVENT_KEY}${DATA_API_KEY}`;
-  const CLASS_NAME_DISABLED = 'disabled';
   const CLASS_NAME_SHOW = 'show';
   const CLASS_NAME_DROPUP = 'dropup';
   const CLASS_NAME_DROPEND = 'dropend';
@@ -7417,14 +7452,16 @@ function within(min, value, max) {
     boundary: 'clippingParents',
     reference: 'toggle',
     display: 'dynamic',
-    popperConfig: null
+    popperConfig: null,
+    autoClose: true
   };
   const DefaultType = {
     offset: '(array|string|function)',
     boundary: '(string|element)',
     reference: '(string|element|object)',
     display: 'string',
-    popperConfig: '(null|object|function)'
+    popperConfig: '(null|object|function)',
+    autoClose: '(boolean|string)'
   };
   /**
    * ------------------------------------------------------------------------
@@ -7458,15 +7495,14 @@ function within(min, value, max) {
 
 
     toggle() {
-      if (this._element.disabled || this._element.classList.contains(CLASS_NAME_DISABLED)) {
+      if (isDisabled(this._element)) {
         return;
       }
 
       const isActive = this._element.classList.contains(CLASS_NAME_SHOW);
 
-      Dropdown.clearMenus();
-
       if (isActive) {
+        this.hide();
         return;
       }
 
@@ -7474,7 +7510,7 @@ function within(min, value, max) {
     }
 
     show() {
-      if (this._element.disabled || this._element.classList.contains(CLASS_NAME_DISABLED) || this._menu.classList.contains(CLASS_NAME_SHOW)) {
+      if (isDisabled(this._element) || this._menu.classList.contains(CLASS_NAME_SHOW)) {
         return;
       }
 
@@ -7525,7 +7561,7 @@ function within(min, value, max) {
 
 
       if ('ontouchstart' in document.documentElement && !parent.closest(SELECTOR_NAVBAR_NAV)) {
-        [].concat(...document.body.children).forEach(elem => EventHandler__default['default'].on(elem, 'mouseover', null, noop()));
+        [].concat(...document.body.children).forEach(elem => EventHandler__default['default'].on(elem, 'mouseover', noop));
       }
 
       this._element.focus();
@@ -7540,33 +7576,18 @@ function within(min, value, max) {
     }
 
     hide() {
-      if (this._element.disabled || this._element.classList.contains(CLASS_NAME_DISABLED) || !this._menu.classList.contains(CLASS_NAME_SHOW)) {
+      if (isDisabled(this._element) || !this._menu.classList.contains(CLASS_NAME_SHOW)) {
         return;
       }
 
       const relatedTarget = {
         relatedTarget: this._element
       };
-      const hideEvent = EventHandler__default['default'].trigger(this._element, EVENT_HIDE, relatedTarget);
 
-      if (hideEvent.defaultPrevented) {
-        return;
-      }
-
-      if (this._popper) {
-        this._popper.destroy();
-      }
-
-      this._menu.classList.toggle(CLASS_NAME_SHOW);
-
-      this._element.classList.toggle(CLASS_NAME_SHOW);
-
-      Manipulator__default['default'].removeDataAttribute(this._menu, 'popper');
-      EventHandler__default['default'].trigger(this._element, EVENT_HIDDEN, relatedTarget);
+      this._completeHide(relatedTarget);
     }
 
     dispose() {
-      EventHandler__default['default'].off(this._element, EVENT_KEY);
       this._menu = null;
 
       if (this._popper) {
@@ -7592,6 +7613,33 @@ function within(min, value, max) {
         event.preventDefault();
         this.toggle();
       });
+    }
+
+    _completeHide(relatedTarget) {
+      const hideEvent = EventHandler__default['default'].trigger(this._element, EVENT_HIDE, relatedTarget);
+
+      if (hideEvent.defaultPrevented) {
+        return;
+      } // If this is a touch-enabled device we remove the extra
+      // empty mouseover listeners we added for iOS support
+
+
+      if ('ontouchstart' in document.documentElement) {
+        [].concat(...document.body.children).forEach(elem => EventHandler__default['default'].off(elem, 'mouseover', noop));
+      }
+
+      if (this._popper) {
+        this._popper.destroy();
+      }
+
+      this._menu.classList.remove(CLASS_NAME_SHOW);
+
+      this._element.classList.remove(CLASS_NAME_SHOW);
+
+      this._element.setAttribute('aria-expanded', 'false');
+
+      Manipulator__default['default'].removeDataAttribute(this._menu, 'popper');
+      EventHandler__default['default'].trigger(this._element, EVENT_HIDDEN, relatedTarget);
     }
 
     _getConfig(config) {
@@ -7680,6 +7728,29 @@ function within(min, value, max) {
       return { ...defaultBsPopperConfig,
         ...(typeof this._config.popperConfig === 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig)
       };
+    }
+
+    _selectMenuItem(event) {
+      const items = SelectorEngine__default['default'].find(SELECTOR_VISIBLE_ITEMS, this._menu).filter(isVisible);
+
+      if (!items.length) {
+        return;
+      }
+
+      let index = items.indexOf(event.target); // Up
+
+      if (event.key === ARROW_UP_KEY && index > 0) {
+        index--;
+      } // Down
+
+
+      if (event.key === ARROW_DOWN_KEY && index < items.length - 1) {
+        index++;
+      } // index is -1 if the first keydown is an ArrowUp
+
+
+      index = index === -1 ? 0 : index;
+      items[index].focus();
     } // Static
 
 
@@ -7713,7 +7784,7 @@ function within(min, value, max) {
           return;
         }
 
-        if (/input|select|textarea|form/i.test(event.target.tagName)) {
+        if (/input|select|option|textarea|form/i.test(event.target.tagName)) {
           return;
         }
       }
@@ -7722,58 +7793,38 @@ function within(min, value, max) {
 
       for (let i = 0, len = toggles.length; i < len; i++) {
         const context = Data__default['default'].get(toggles[i], DATA_KEY);
+
+        if (!context || context._config.autoClose === false) {
+          continue;
+        }
+
+        if (!context._element.classList.contains(CLASS_NAME_SHOW)) {
+          continue;
+        }
+
         const relatedTarget = {
-          relatedTarget: toggles[i]
+          relatedTarget: context._element
         };
 
-        if (event && event.type === 'click') {
-          relatedTarget.clickEvent = event;
-        }
-
-        if (!context) {
-          continue;
-        }
-
-        const dropdownMenu = context._menu;
-
-        if (!toggles[i].classList.contains(CLASS_NAME_SHOW)) {
-          continue;
-        }
-
         if (event) {
-          // Don't close the menu if the clicked element or one of its parents is the dropdown button
-          if ([context._element].some(element => event.composedPath().includes(element))) {
+          const composedPath = event.composedPath();
+          const isMenuTarget = composedPath.includes(context._menu);
+
+          if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
             continue;
           } // Tab navigation through the dropdown menu shouldn't close the menu
 
 
-          if (event.type === 'keyup' && event.key === TAB_KEY && dropdownMenu.contains(event.target)) {
+          if (event.type === 'keyup' && event.key === TAB_KEY && context._menu.contains(event.target)) {
             continue;
+          }
+
+          if (event.type === 'click') {
+            relatedTarget.clickEvent = event;
           }
         }
 
-        const hideEvent = EventHandler__default['default'].trigger(toggles[i], EVENT_HIDE, relatedTarget);
-
-        if (hideEvent.defaultPrevented) {
-          continue;
-        } // If this is a touch-enabled device we remove the extra
-        // empty mouseover listeners we added for iOS support
-
-
-        if ('ontouchstart' in document.documentElement) {
-          [].concat(...document.body.children).forEach(elem => EventHandler__default['default'].off(elem, 'mouseover', null, noop()));
-        }
-
-        toggles[i].setAttribute('aria-expanded', 'false');
-
-        if (context._popper) {
-          context._popper.destroy();
-        }
-
-        dropdownMenu.classList.remove(CLASS_NAME_SHOW);
-        toggles[i].classList.remove(CLASS_NAME_SHOW);
-        Manipulator__default['default'].removeDataAttribute(dropdownMenu, 'popper');
-        EventHandler__default['default'].trigger(toggles[i], EVENT_HIDDEN, relatedTarget);
+        context._completeHide(relatedTarget);
       }
     }
 
@@ -7793,26 +7844,29 @@ function within(min, value, max) {
         return;
       }
 
-      event.preventDefault();
-      event.stopPropagation();
+      const isActive = this.classList.contains(CLASS_NAME_SHOW);
 
-      if (this.disabled || this.classList.contains(CLASS_NAME_DISABLED)) {
+      if (!isActive && event.key === ESCAPE_KEY) {
         return;
       }
 
-      const parent = Dropdown.getParentFromElement(this);
-      const isActive = this.classList.contains(CLASS_NAME_SHOW);
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (isDisabled(this)) {
+        return;
+      }
+
+      const getToggleButton = () => this.matches(SELECTOR_DATA_TOGGLE) ? this : SelectorEngine__default['default'].prev(this, SELECTOR_DATA_TOGGLE)[0];
 
       if (event.key === ESCAPE_KEY) {
-        const button = this.matches(SELECTOR_DATA_TOGGLE) ? this : SelectorEngine__default['default'].prev(this, SELECTOR_DATA_TOGGLE)[0];
-        button.focus();
+        getToggleButton().focus();
         Dropdown.clearMenus();
         return;
       }
 
       if (!isActive && (event.key === ARROW_UP_KEY || event.key === ARROW_DOWN_KEY)) {
-        const button = this.matches(SELECTOR_DATA_TOGGLE) ? this : SelectorEngine__default['default'].prev(this, SELECTOR_DATA_TOGGLE)[0];
-        button.click();
+        getToggleButton().click();
         return;
       }
 
@@ -7821,26 +7875,7 @@ function within(min, value, max) {
         return;
       }
 
-      const items = SelectorEngine__default['default'].find(SELECTOR_VISIBLE_ITEMS, parent).filter(isVisible);
-
-      if (!items.length) {
-        return;
-      }
-
-      let index = items.indexOf(event.target); // Up
-
-      if (event.key === ARROW_UP_KEY && index > 0) {
-        index--;
-      } // Down
-
-
-      if (event.key === ARROW_DOWN_KEY && index < items.length - 1) {
-        index++;
-      } // index is -1 if the first keydown is an ArrowUp
-
-
-      index = index === -1 ? 0 : index;
-      items[index].focus();
+      Dropdown.getInstance(getToggleButton())._selectMenuItem(event);
     }
 
   }
@@ -7884,7 +7919,7 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap offcanvas.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap offcanvas.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -7903,11 +7938,12 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): util/index.js
+   * Bootstrap (v5.0.0): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
   const MILLISECONDS_MULTIPLIER = 1000;
+  const TRANSITION_END = 'transitionend'; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
 
   const toType = obj => {
     if (obj === null || obj === undefined) {
@@ -7932,23 +7968,13 @@ function within(min, value, max) {
 
 
       if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
-        hrefAttr = '#' + hrefAttr.split('#')[1];
+        hrefAttr = `#${hrefAttr.split('#')[1]}`;
       }
 
       selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
     }
 
     return selector;
-  };
-
-  const getSelectorFromElement = element => {
-    const selector = getSelector(element);
-
-    if (selector) {
-      return document.querySelector(selector) ? selector : null;
-    }
-
-    return null;
   };
 
   const getElementFromSelector = element => {
@@ -7979,7 +8005,29 @@ function within(min, value, max) {
     return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
   };
 
+  const triggerTransitionEnd = element => {
+    element.dispatchEvent(new Event(TRANSITION_END));
+  };
+
   const isElement = obj => (obj[0] || obj).nodeType;
+
+  const emulateTransitionEnd = (element, duration) => {
+    let called = false;
+    const durationPadding = 5;
+    const emulatedDuration = duration + durationPadding;
+
+    function listener() {
+      called = true;
+      element.removeEventListener(TRANSITION_END, listener);
+    }
+
+    element.addEventListener(TRANSITION_END, listener);
+    setTimeout(() => {
+      if (!called) {
+        triggerTransitionEnd(element);
+      }
+    }, emulatedDuration);
+  };
 
   const typeCheckConfig = (componentName, config, configTypes) => {
     Object.keys(configTypes).forEach(property => {
@@ -7988,7 +8036,7 @@ function within(min, value, max) {
       const valueType = value && isElement(value) ? 'element' : toType(value);
 
       if (!new RegExp(expectedTypes).test(valueType)) {
-        throw new TypeError(`${componentName.toUpperCase()}: ` + `Option "${property}" provided type "${valueType}" ` + `but expected type "${expectedTypes}".`);
+        throw new TypeError(`${componentName.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
       }
     });
   };
@@ -8022,6 +8070,8 @@ function within(min, value, max) {
 
     return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
   };
+
+  const reflow = element => element.offsetHeight;
 
   const getjQuery = () => {
     const {
@@ -8061,13 +8111,19 @@ function within(min, value, max) {
     });
   };
 
+  const execute = callback => {
+    if (typeof callback === 'function') {
+      callback();
+    }
+  };
+
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): util/scrollBar.js
+   * Bootstrap (v5.0.0): util/scrollBar.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
-  const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed';
+  const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
   const SELECTOR_STICKY_CONTENT = '.sticky-top';
 
   const getWidth = () => {
@@ -8077,13 +8133,25 @@ function within(min, value, max) {
   };
 
   const hide = (width = getWidth()) => {
-    document.body.style.overflow = 'hidden';
+    _disableOverFlow(); // give padding to element to balances the hidden scrollbar width
+
+
+    _setElementAttributes('body', 'paddingRight', calculatedValue => calculatedValue + width); // trick: We adjust positive paddingRight and negative marginRight to sticky-top elements, to keep shown fullwidth
+
 
     _setElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight', calculatedValue => calculatedValue + width);
 
     _setElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight', calculatedValue => calculatedValue - width);
+  };
 
-    _setElementAttributes('body', 'paddingRight', calculatedValue => calculatedValue + width);
+  const _disableOverFlow = () => {
+    const actualValue = document.body.style.overflow;
+
+    if (actualValue) {
+      Manipulator__default['default'].setDataAttribute(document.body, 'overflow', actualValue);
+    }
+
+    document.body.style.overflow = 'hidden';
   };
 
   const _setElementAttributes = (selector, styleProp, callback) => {
@@ -8096,25 +8164,25 @@ function within(min, value, max) {
       const actualValue = element.style[styleProp];
       const calculatedValue = window.getComputedStyle(element)[styleProp];
       Manipulator__default['default'].setDataAttribute(element, styleProp, actualValue);
-      element.style[styleProp] = callback(Number.parseFloat(calculatedValue)) + 'px';
+      element.style[styleProp] = `${callback(Number.parseFloat(calculatedValue))}px`;
     });
   };
 
   const reset = () => {
-    document.body.style.overflow = 'auto';
+    _resetElementAttributes('body', 'overflow');
+
+    _resetElementAttributes('body', 'paddingRight');
 
     _resetElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight');
 
     _resetElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight');
-
-    _resetElementAttributes('body', 'paddingRight');
   };
 
   const _resetElementAttributes = (selector, styleProp) => {
     SelectorEngine__default['default'].find(selector).forEach(element => {
       const value = Manipulator__default['default'].getDataAttribute(element, styleProp);
 
-      if (typeof value === 'undefined' && element === document.body) {
+      if (typeof value === 'undefined') {
         element.style.removeProperty(styleProp);
       } else {
         Manipulator__default['default'].removeDataAttribute(element, styleProp);
@@ -8125,7 +8193,135 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): offcanvas.js
+   * Bootstrap (v5.0.0): util/backdrop.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+  const Default$1 = {
+    isVisible: true,
+    // if false, we use the backdrop helper without adding any element to the dom
+    isAnimated: false,
+    rootElement: document.body,
+    // give the choice to place backdrop under different elements
+    clickCallback: null
+  };
+  const DefaultType$1 = {
+    isVisible: 'boolean',
+    isAnimated: 'boolean',
+    rootElement: 'element',
+    clickCallback: '(function|null)'
+  };
+  const NAME$1 = 'backdrop';
+  const CLASS_NAME_BACKDROP = 'modal-backdrop';
+  const CLASS_NAME_FADE = 'fade';
+  const CLASS_NAME_SHOW$1 = 'show';
+  const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$1}`;
+
+  class Backdrop {
+    constructor(config) {
+      this._config = this._getConfig(config);
+      this._isAppended = false;
+      this._element = null;
+    }
+
+    show(callback) {
+      if (!this._config.isVisible) {
+        execute(callback);
+        return;
+      }
+
+      this._append();
+
+      if (this._config.isAnimated) {
+        reflow(this._getElement());
+      }
+
+      this._getElement().classList.add(CLASS_NAME_SHOW$1);
+
+      this._emulateAnimation(() => {
+        execute(callback);
+      });
+    }
+
+    hide(callback) {
+      if (!this._config.isVisible) {
+        execute(callback);
+        return;
+      }
+
+      this._getElement().classList.remove(CLASS_NAME_SHOW$1);
+
+      this._emulateAnimation(() => {
+        this.dispose();
+        execute(callback);
+      });
+    } // Private
+
+
+    _getElement() {
+      if (!this._element) {
+        const backdrop = document.createElement('div');
+        backdrop.className = CLASS_NAME_BACKDROP;
+
+        if (this._config.isAnimated) {
+          backdrop.classList.add(CLASS_NAME_FADE);
+        }
+
+        this._element = backdrop;
+      }
+
+      return this._element;
+    }
+
+    _getConfig(config) {
+      config = { ...Default$1,
+        ...(typeof config === 'object' ? config : {})
+      };
+      typeCheckConfig(NAME$1, config, DefaultType$1);
+      return config;
+    }
+
+    _append() {
+      if (this._isAppended) {
+        return;
+      }
+
+      this._config.rootElement.appendChild(this._getElement());
+
+      EventHandler__default['default'].on(this._getElement(), EVENT_MOUSEDOWN, () => {
+        execute(this._config.clickCallback);
+      });
+      this._isAppended = true;
+    }
+
+    dispose() {
+      if (!this._isAppended) {
+        return;
+      }
+
+      EventHandler__default['default'].off(this._element, EVENT_MOUSEDOWN);
+
+      this._getElement().parentNode.removeChild(this._element);
+
+      this._isAppended = false;
+    }
+
+    _emulateAnimation(callback) {
+      if (!this._config.isAnimated) {
+        execute(callback);
+        return;
+      }
+
+      const backdropTransitionDuration = getTransitionDurationFromElement(this._getElement());
+      EventHandler__default['default'].one(this._getElement(), 'transitionend', () => execute(callback));
+      emulateTransitionEnd(this._getElement(), backdropTransitionDuration);
+    }
+
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.0.0): offcanvas.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -8151,11 +8347,8 @@ function within(min, value, max) {
     keyboard: 'boolean',
     scroll: 'boolean'
   };
-  const CLASS_NAME_BACKDROP_BODY = 'offcanvas-backdrop';
   const CLASS_NAME_SHOW = 'show';
-  const CLASS_NAME_TOGGLING = 'offcanvas-toggling';
   const OPEN_SELECTOR = '.offcanvas.show';
-  const ACTIVE_SELECTOR = `${OPEN_SELECTOR}, .${CLASS_NAME_TOGGLING}`;
   const EVENT_SHOW = `show${EVENT_KEY}`;
   const EVENT_SHOWN = `shown${EVENT_KEY}`;
   const EVENT_HIDE = `hide${EVENT_KEY}`;
@@ -8163,6 +8356,7 @@ function within(min, value, max) {
   const EVENT_FOCUSIN = `focusin${EVENT_KEY}`;
   const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
   const EVENT_CLICK_DISMISS = `click.dismiss${EVENT_KEY}`;
+  const EVENT_KEYDOWN_DISMISS = `keydown.dismiss${EVENT_KEY}`;
   const SELECTOR_DATA_DISMISS = '[data-bs-dismiss="offcanvas"]';
   const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="offcanvas"]';
   /**
@@ -8176,6 +8370,7 @@ function within(min, value, max) {
       super(element);
       this._config = this._getConfig(config);
       this._isShown = false;
+      this._backdrop = this._initializeBackDrop();
 
       this._addEventListeners();
     } // Getters
@@ -8210,15 +8405,13 @@ function within(min, value, max) {
       this._isShown = true;
       this._element.style.visibility = 'visible';
 
-      if (this._config.backdrop) {
-        document.body.classList.add(CLASS_NAME_BACKDROP_BODY);
-      }
+      this._backdrop.show();
 
       if (!this._config.scroll) {
         hide();
-      }
 
-      this._element.classList.add(CLASS_NAME_TOGGLING);
+        this._enforceFocusOnElement(this._element);
+      }
 
       this._element.removeAttribute('aria-hidden');
 
@@ -8229,16 +8422,14 @@ function within(min, value, max) {
       this._element.classList.add(CLASS_NAME_SHOW);
 
       const completeCallBack = () => {
-        this._element.classList.remove(CLASS_NAME_TOGGLING);
-
         EventHandler__default['default'].trigger(this._element, EVENT_SHOWN, {
           relatedTarget
         });
-
-        this._enforceFocusOnElement(this._element);
       };
 
-      setTimeout(completeCallBack, getTransitionDurationFromElement(this._element));
+      const transitionDuration = getTransitionDurationFromElement(this._element);
+      EventHandler__default['default'].one(this._element, 'transitionend', completeCallBack);
+      emulateTransitionEnd(this._element, transitionDuration);
     }
 
     hide() {
@@ -8252,8 +8443,6 @@ function within(min, value, max) {
         return;
       }
 
-      this._element.classList.add(CLASS_NAME_TOGGLING);
-
       EventHandler__default['default'].off(document, EVENT_FOCUSIN);
 
       this._element.blur();
@@ -8261,6 +8450,8 @@ function within(min, value, max) {
       this._isShown = false;
 
       this._element.classList.remove(CLASS_NAME_SHOW);
+
+      this._backdrop.hide();
 
       const completeCallback = () => {
         this._element.setAttribute('aria-hidden', true);
@@ -8271,20 +8462,25 @@ function within(min, value, max) {
 
         this._element.style.visibility = 'hidden';
 
-        if (this._config.backdrop) {
-          document.body.classList.remove(CLASS_NAME_BACKDROP_BODY);
-        }
-
         if (!this._config.scroll) {
           reset();
         }
 
         EventHandler__default['default'].trigger(this._element, EVENT_HIDDEN);
-
-        this._element.classList.remove(CLASS_NAME_TOGGLING);
       };
 
-      setTimeout(completeCallback, getTransitionDurationFromElement(this._element));
+      const transitionDuration = getTransitionDurationFromElement(this._element);
+      EventHandler__default['default'].one(this._element, 'transitionend', completeCallback);
+      emulateTransitionEnd(this._element, transitionDuration);
+    }
+
+    dispose() {
+      this._backdrop.dispose();
+
+      super.dispose();
+      EventHandler__default['default'].off(document, EVENT_FOCUSIN);
+      this._config = null;
+      this._backdrop = null;
     } // Private
 
 
@@ -8295,6 +8491,15 @@ function within(min, value, max) {
       };
       typeCheckConfig(NAME, config, DefaultType);
       return config;
+    }
+
+    _initializeBackDrop() {
+      return new Backdrop({
+        isVisible: this._config.backdrop,
+        isAnimated: true,
+        rootElement: this._element.parentNode,
+        clickCallback: () => this.hide()
+      });
     }
 
     _enforceFocusOnElement(element) {
@@ -8310,15 +8515,8 @@ function within(min, value, max) {
 
     _addEventListeners() {
       EventHandler__default['default'].on(this._element, EVENT_CLICK_DISMISS, SELECTOR_DATA_DISMISS, () => this.hide());
-      EventHandler__default['default'].on(document, 'keydown', event => {
+      EventHandler__default['default'].on(this._element, EVENT_KEYDOWN_DISMISS, event => {
         if (this._config.keyboard && event.key === ESCAPE_KEY) {
-          this.hide();
-        }
-      });
-      EventHandler__default['default'].on(document, EVENT_CLICK_DATA_API, event => {
-        const target = SelectorEngine__default['default'].findOne(getSelectorFromElement(event.target));
-
-        if (!this._element.contains(event.target) && target !== this._element) {
           this.hide();
         }
       });
@@ -8367,10 +8565,10 @@ function within(min, value, max) {
       }
     }); // avoid conflict when clicking a toggler of an offcanvas, while another is open
 
-    const allReadyOpen = SelectorEngine__default['default'].findOne(ACTIVE_SELECTOR);
+    const allReadyOpen = SelectorEngine__default['default'].findOne(OPEN_SELECTOR);
 
     if (allReadyOpen && allReadyOpen !== target) {
-      return;
+      Offcanvas.getInstance(allReadyOpen).hide();
     }
 
     const data = Data__default['default'].get(target, DATA_KEY) || new Offcanvas(target);
@@ -8403,7 +8601,7 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap popover.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap popover.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -8420,7 +8618,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): util/index.js
+   * Bootstrap (v5.0.0): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -8465,7 +8663,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): popover.js
+   * Bootstrap (v5.0.0): popover.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -8629,7 +8827,7 @@ function within(min, value, max) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap tooltip.js v5.0.0-beta3 (https://getbootstrap.com/)
+  * Bootstrap tooltip.js v5.0.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -8669,7 +8867,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): util/index.js
+   * Bootstrap (v5.0.0): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -8753,7 +8951,7 @@ function within(min, value, max) {
       const valueType = value && isElement(value) ? 'element' : toType(value);
 
       if (!new RegExp(expectedTypes).test(valueType)) {
-        throw new TypeError(`${componentName.toUpperCase()}: ` + `Option "${property}" provided type "${valueType}" ` + `but expected type "${expectedTypes}".`);
+        throw new TypeError(`${componentName.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
       }
     });
   };
@@ -8781,7 +8979,7 @@ function within(min, value, max) {
     return findShadowRoot(element.parentNode);
   };
 
-  const noop = () => function () {};
+  const noop = () => {};
 
   const getjQuery = () => {
     const {
@@ -8825,7 +9023,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): util/sanitizer.js
+   * Bootstrap (v5.0.0): util/sanitizer.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -8938,7 +9136,7 @@ function within(min, value, max) {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta3): tooltip.js
+   * Bootstrap (v5.0.0): tooltip.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -9113,7 +9311,6 @@ function within(min, value, max) {
 
     dispose() {
       clearTimeout(this._timeout);
-      EventHandler__default['default'].off(this._element, this.constructor.EVENT_KEY);
       EventHandler__default['default'].off(this._element.closest(`.${CLASS_NAME_MODAL}`), 'hide.bs.modal', this._hideModalHandler);
 
       if (this.tip && this.tip.parentNode) {
@@ -9198,7 +9395,7 @@ function within(min, value, max) {
 
       if ('ontouchstart' in document.documentElement) {
         [].concat(...document.body.children).forEach(element => {
-          EventHandler__default['default'].on(element, 'mouseover', noop());
+          EventHandler__default['default'].on(element, 'mouseover', noop);
         });
       }
 
@@ -9397,7 +9594,6 @@ function within(min, value, max) {
         modifiers: [{
           name: 'flip',
           options: {
-            altBoundary: true,
             fallbackPlacements: this.config.fallbackPlacements
           }
         }, {
@@ -10287,8 +10483,7 @@ function filterLog(route, func, args) {
 
         _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_6__["dom"].watch(); // Fetch all the forms we want to apply custom Bootstrap validation styles to
 
-        var forms = document.querySelectorAll('.needs-validation'); // Loop over them and prevent submission
-
+        var forms = document.querySelectorAll('.needs-validation');
         Array.prototype.slice.call(forms).forEach(function (form) {
           form.addEventListener('submit', function (e) {
             if (!form.checkValidity()) {
@@ -10546,7 +10741,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -10704,7 +10899,7 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 

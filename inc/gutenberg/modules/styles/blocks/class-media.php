@@ -29,9 +29,7 @@ class Media extends Base {
 	 *
 	 * @return 	null
 	 */
-	protected function process_attributes() {
-		$this->output = [];
-
+	protected function process_extra() {
 		$output 			= [];
 		$output['element'] 	= $this->element;
 

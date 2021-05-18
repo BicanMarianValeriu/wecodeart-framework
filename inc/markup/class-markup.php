@@ -9,7 +9,7 @@
  * @subpackage  Markup
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt;
@@ -169,7 +169,7 @@ class Markup {
      * Wrapper method for any html
 	 *
 	 * @since 	unknown
-	 * @version	4.1.53
+	 * @version	5.0.0
 	 *
 	 * @param	string	context		required ( used by generate_attr's dynamic filter )
 	 * @param 	mixed	function	required ( the function called to be wrapped )
@@ -234,9 +234,7 @@ class Markup {
 		
 		foreach( $args as $key => $elem ) {
 			$attrs 		= isset( $elem['attrs'] ) ? ( array ) $elem['attrs'] : [];
-			$open_tag 	= trim( implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $context, $attrs, [
-				'index' => $key
-			] ) ] ) );
+			$open_tag 	= trim( implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $context, $attrs, $key ) ] ) );
 			$html .= '<' . $open_tag . '>';
 		}
 
@@ -278,7 +276,7 @@ class Markup {
 	 * Renders template file with data.
 	 *
 	 * @since	3.7.3
-	 * @version	4.0.9
+	 * @version	5.0.0
 	 *
 	 * @param  string $file Relative path to the template file.
 	 * @param  array  $data Dataset for the template.
@@ -286,8 +284,7 @@ class Markup {
 	 * @return void
 	 */
 	public static function template( $file, $data = [], $echo = true ) {
-		$template = new Markup\Template( wecodeart_config() );
-		$template->set_file( $file );
+		$template = wecodeart( 'template' )->set_file( $file );
 
 		if( $echo ) {
 			return $template->render( $data );

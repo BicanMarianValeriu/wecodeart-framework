@@ -46,8 +46,8 @@ class Starter implements Integration {
 	/**
 	 * Send to Constructor
 	 *
-	 * @since 	4.2.0
-	 * @version	4.2.0
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 */
 	public function register_hooks() {
 		// Theme Support
@@ -58,8 +58,8 @@ class Starter implements Integration {
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
-	 * @since 	4.2.0
-	 * @version	4.2.0
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 */
 	public function after_setup_theme() {
 		// Starter Content

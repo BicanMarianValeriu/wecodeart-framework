@@ -88,10 +88,11 @@ class WooCommerce implements Integration {
 	 * @since	unknown
 	 */
 	public function after_setup_theme() {
-		add_theme_support( 'woocommerce' );
-		add_theme_support( 'wc-product-gallery-zoom' );
-		add_theme_support( 'wc-product-gallery-lightbox' );
-		add_theme_support( 'wc-product-gallery-slider' );
+		$support = get_prop( wecodeart_config( 'woocommerce' ), 'support', [] );
+		// Theme Support
+		foreach( array_filter( $support ) as $feature => $value ) {
+			add_theme_support( $feature, $value );
+		}
 	}
 	
 	/**
@@ -234,7 +235,7 @@ class WooCommerce implements Integration {
 			'woocommerce/product-on-sale',
 			'woocommerce/product-new',
 		], $blocks );
-	} 
+	}
 
 	/**
 	 * Render Header Bar Cart Module

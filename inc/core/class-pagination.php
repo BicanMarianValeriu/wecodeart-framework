@@ -9,7 +9,7 @@
  * @subpackage 	Core\Pagination
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Core;
@@ -66,8 +66,6 @@ class Pagination {
                 'tag'   => 'nav',
                 'attrs' => [
                     'class'     => 'mb-5',
-                    'itemscope' => true,
-                    'itemtype'  => 'https://schema.org/SiteNavigationElement'
                 ]
             ],
             [
@@ -113,8 +111,6 @@ class Pagination {
             'attrs' => [
                 'class'     => 'pagination pagination--entry pb-3',
                 'aria-label'=> esc_html__( 'Pagination', 'wecodeart' ),
-                'itemscope' => true,
-                'itemtype'  => 'https://schema.org/SiteNavigationElement'
             ] 
         ] ], function() {
             wp_link_pages( apply_filters( 'wecodeart/filter/entry/content_nav/args', [
@@ -130,7 +126,7 @@ class Pagination {
 	 * Display links to previous and next post, from a single post.
      *
 	 * @since	1.0.0
-	 * @version	4.2.0
+	 * @version	5.0.0
      *
      * @return  null    Return early if not a post.
 	 */
@@ -148,8 +144,6 @@ class Pagination {
                 'attrs' => [ 
                     'class'         => 'entry-navigation',
                     'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
-                    'itemscope'     => true,
-                    'itemtype'      => 'https://schema.org/SiteNavigationElement',
                 ] 
             ],
 			[ 
@@ -207,8 +201,6 @@ class Pagination {
                 'attrs' => [
                     'class'         => 'comments__nav',
 					'aria-label'    => esc_html__( 'Navigation', 'wecodeart' ),
-                    'itemscope'     => true,
-                    'itemtype'      => 'https://schema.org/SiteNavigationElement',
                 ]
             ],
 			[

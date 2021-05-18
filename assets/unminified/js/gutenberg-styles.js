@@ -246,9 +246,7 @@ var _wp = wp,
     createHigherOrderComponent = _wp.compose.createHigherOrderComponent,
     InspectorAdvancedControls = _wp.blockEditor.InspectorAdvancedControls;
 var _wecodeartGutenberg = wecodeartGutenberg,
-    restrictedBlocks = _wecodeartGutenberg.restrictedBlocks,
-    _wecodeartGutenberg$r = _wecodeartGutenberg.removeStyles,
-    removeStyles = _wecodeartGutenberg$r === void 0 ? [] : _wecodeartGutenberg$r;
+    restrictedBlocks = _wecodeartGutenberg.restrictedBlocks;
 /**
  * Internal dependencies.
  */
@@ -266,7 +264,8 @@ var addAttributes = function addAttributes(props) {
     props.attributes = assign(props.attributes, {
       hasCustomCSS: {
         type: 'boolean',
-        default: false
+        default: true // Defaults to true
+
       },
       customCSS: {
         type: 'string',
@@ -277,26 +276,6 @@ var addAttributes = function addAttributes(props) {
 
   return props;
 };
-/**
- * Override props assigned to save component to inject atttributes
- *
- * @param   {Object}    extraProps Additional props applied to save element.
- * @param   {Object}    blockType  Block type.
- * @param   {Object}    attributes Current block attributes.
- *
- * @return  {Object}    Filtered props applied to save element.
- */
-
-
-function applyExtraSettings(extraProps, blockType) {
-  var blockName = blockType.name;
-
-  if (removeStyles.includes(blockName)) {
-    extraProps.style = {};
-  }
-
-  return extraProps;
-}
 /**
  * Override the default edit UI to include a new block inspector control for
  * assigning the custom class name, if block supports custom class name.
@@ -327,7 +306,6 @@ var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
 
 function applyFilters() {
   addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
-  addFilter('blocks.getSaveContent.extraProps', 'wecodeart/blocks/custom-css/applyExtraSettings', applyExtraSettings);
   addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl);
 }
 

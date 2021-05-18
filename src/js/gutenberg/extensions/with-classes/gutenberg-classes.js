@@ -37,7 +37,8 @@ const enhance = compose(
 			}
 		}
 
-		const { wecodeart: { customClasses } } = select('core/editor').getEditorSettings();
+		// Defaults for FSE
+		const { wecodeart: { customClasses = [] } = {} } = select('core/editor').getEditorSettings();
 
 		return {
 			suggestions: customClasses,
@@ -56,6 +57,7 @@ const enhance = compose(
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return enhance((props) => {
 		const {
+			name,
 			customClassNames,
 			suggestions,
 			isSelected,
@@ -63,7 +65,9 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 			setState,
 		} = props;
 
-		if (isSelected) {
+		const hasClassName = hasBlockSupport(name, 'className', true);
+
+		if (hasClassName && isSelected) {
 			return (
 				<>
 					<BlockEdit {...props} />

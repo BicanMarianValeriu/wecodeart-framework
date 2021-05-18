@@ -47,7 +47,7 @@ class Handler {
 		$this->styles 	= wecodeart( 'integrations' )->get( 'styles' )::get_instance();
 
 		add_action( 'rest_api_init', 		[ $this, 'register_routes' ] );
-		add_action( 'before_delete_post', 	[ $this, 'delete_css_file' ] );
+		add_action( 'before_delete_post', 	[ $this, 'delete_css' ] );
 	}
 
 	/**
@@ -59,45 +59,45 @@ class Handler {
 	public function register_routes() {
 		$namespace = 'wecodeart/v1';
 
-		register_rest_route( $namespace, '/save_post_meta/(?P<id>\d+)', array(
-			array(
+		register_rest_route( $namespace, '/save_post_meta/(?P<id>\d+)', [
+			[
 				'methods'             => \WP_REST_Server::EDITABLE,
-				'callback'            => array( $this, 'save_post_meta' ),
-				'args'                => array(
-					'id' => array(
+				'callback'            => [ $this, 'save_post_meta' ],
+				'args'                => [
+					'id' => [
 						'type'              => 'intval',
 						'required'          => true,
 						'description'       => __( 'ID of the Post.', 'wecodeart' ),
 						'validate_callback' => function ( $param, $request, $key ) {
 							return is_numeric( $param );
 						},
-					),
-				),
+					],
+				],
 				'permission_callback' => function () {
 					return current_user_can( 'publish_posts' );
 				},
-			),
-		) );
+			]
+		] );
 
-		register_rest_route( $namespace, '/save_block_meta/(?P<id>\d+)', array(
-			array(
+		register_rest_route( $namespace, '/save_block_meta/(?P<id>\d+)', [
+			[
 				'methods'             => \WP_REST_Server::EDITABLE,
-				'callback'            => array( $this, 'save_block_meta' ),
-				'args'                => array(
-					'id' => array(
+				'callback'            => [ $this, 'save_block_meta' ],
+				'args'                => [
+					'id' => [
 						'type'              => 'intval',
 						'required'          => true,
 						'description'       => __( 'ID of the Reusable Block.', 'wecodeart' ),
 						'validate_callback' => function ( $param, $request, $key ) {
 							return is_numeric( $param );
 						},
-					),
-				),
+					],
+				],
 				'permission_callback' => function () {
 					return current_user_can( 'publish_posts' );
 				},
-			),
-		) );
+			]
+		] );
 	}
 
 	/**
@@ -116,7 +116,7 @@ class Handler {
 
 		$post_id 	= $request->get_param( 'id' );
 		$file 		= $this->generate_css_file( $post_id );
-		$status 	= $file ? 'updated' : 'removed';
+		$status 	= $file ? esc_html__( 'updated', 'wecodeart' ) : esc_html__( 'removed', 'wecodeart' );
 
 		return rest_ensure_response( [
 			'message' 	=> sprintf( __( 'Blocks CSS %s.', 'wecodeart' ), $status ),
@@ -144,10 +144,10 @@ class Handler {
 
 		if( $css ) {
 			$this->save_css_file( $block_id, $css );
-			$status = 'updated';
+			$status = esc_html__( 'updated', 'wecodeart' );
 		} else {
-			$this->delete_css_file( $block_id, $css );
-			$status = 'removed';
+			$this->delete_css( $block_id, $css );
+			$status = esc_html__( 'removed', 'wecodeart' );
 		}
 
 		return rest_ensure_response( [
@@ -169,7 +169,7 @@ class Handler {
 			return $this->save_css_file( $post_id, $css );
 		}
 
-		return $this->delete_css_file( $post_id );
+		return $this->delete_css( $post_id );
 	}
 
 	/**
@@ -245,7 +245,7 @@ class Handler {
 	 *
 	 * @return  bool
 	 */
-	public function delete_css_file( $post_id ) {
+	public function delete_css( $post_id ) {
 		if ( ! current_user_can( 'edit_posts' ) ) {
 			return false;
 		}

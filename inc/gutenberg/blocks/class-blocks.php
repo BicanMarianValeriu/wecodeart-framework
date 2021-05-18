@@ -37,7 +37,14 @@ class Blocks implements \ArrayAccess {
 	 * Send to Constructor
 	 */
 	public function init() {
-		$this->register( 'wca/content',	Blocks\Content::class );
+		$this->register( 'core/file',	    Blocks\File::class );
+        $this->register( 'core/table',	    Blocks\Table::class );
+		$this->register( 'core/search',	    Blocks\Search::class );
+		$this->register( 'core/quote',	    Blocks\Quote::class );
+		$this->register( 'core/buttons',    Blocks\Buttons::class );
+		$this->register( 'core/calendar',   Blocks\Calendar::class );
+		$this->register( 'core/site-title', Blocks\Site_Title::class );
+		$this->register( 'wca/content',	    Blocks\Content::class );
         
         add_action( 'init', [ $this, 'load' ] );
 	}

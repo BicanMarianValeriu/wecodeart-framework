@@ -2,38 +2,38 @@
 --------------------------------------------------------------- */ 
 /* 1.0 = WordPress Core */
 .alignnone {
-    margin: 5px 0px 20px 0;
+    margin: 0 0px $spacer 0;
 }
 
 .aligncenter {
     display: block;
-    margin: 5px auto 5px auto;
+    margin: 0 auto 0 auto;
 }
 
 .alignright {
     float: right;
-    margin: 5px 0 20px 20px;
+    margin: 0 0 $spacer $spacer;
 }
 
 .alignleft {
     float: left;
-    margin: 5px 20px 20px 0;
+    margin: 0 $spacer $spacer 0;
 }
 
 a {
     img {
         &.alignright {
             float: right;
-            margin: 5px 0 20px 20px;
+            margin: 0 0 $spacer $spacer;
         }
 
         &.alignnone {
-            margin: 5px 20px 20px 0;
+            margin: 0 $spacer $spacer 0;
         }
 
         &.alignleft {
             float: left;
-            margin: 5px 20px 20px 0;
+            margin: 0 $spacer $spacer 0;
         }
 
         &.aligncenter {
@@ -44,24 +44,12 @@ a {
     }
 }
 
+figcaption,
 .wp-caption {
-    background: #fff;
-    border: 1px solid #f0f0f0;
-    max-width: 100%;
+    font-size: small;
+    font-style: italic;
     padding: 5px 3px 10px;
     text-align: center;
-
-    &.alignnone {
-        margin: 5px 0px 20px 0;
-    }
-
-    &.alignright {
-        margin: 5px 0 20px 20px;
-    }
-
-    &.alignleft {
-        margin: 5px 20px 20px 0;
-    }
 
     img {
         border: 0 none;
@@ -73,8 +61,7 @@ a {
     }
 
     p.wp-caption-text {
-        font-size: 11px;
-        line-height: 17px;
+        font-size: smaller;
         margin: 0;
         padding: 0 4px 5px;
     }
@@ -84,6 +71,7 @@ a {
     display: block;
 }
 
+.screen-reader-response,
 .screen-reader-text {
     clip: rect(1px, 1px, 1px, 1px);
     position: absolute !important;
@@ -221,13 +209,6 @@ a {
             fill: currentColor;
         }
     }
-}
-
-hr {
-    background: linear-gradient(to right, transparent, rgba(0,0,0,.10), transparent);
-    border: 0;
-    height: 1px;
-    margin: 25px 0;
 }
 
 svg,

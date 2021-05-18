@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		4.2
+ * @version		5.0.0
  */
 
 namespace WeCodeArt;
@@ -47,6 +47,7 @@ class Support implements ArrayAccess {
 		$this->register( 'starter',				Support\Starter::class	);
 		$this->register( 'schema',				Support\Schema::class	);
 		$this->register( 'plugin/anr', 			Support\Plugins\ANR::class 			);
+		$this->register( 'plugin/cf7', 			Support\Plugins\CF7::class 			);
 		$this->register( 'plugin/wpseo', 		Support\Plugins\WPSeo::class 		);
 		$this->register( 'plugin/woocommerce', 	Support\Plugins\WooCommerce::class 	);
 	}
@@ -55,7 +56,7 @@ class Support implements ArrayAccess {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 	1.0
-	 * @version	4.2
+	 * @version	5.0.0
 	 */
 	public function after_setup_theme() {
 		// Content width
@@ -71,8 +72,8 @@ class Support implements ArrayAccess {
 	/**
 	 * Sets up theme content width.
 	 *
-	 * @since 	4.2.0
-	 * @version	4.2.0
+	 * @since 	5.0.0.0
+	 * @version	5.0.0.0
 	 */
 	public static function get_content_width() {
 		$content_width = 840;
@@ -116,7 +117,7 @@ class Support implements ArrayAccess {
 	 * Register Menus
 	 *
 	 * @since	3.9.5
-	 * @version	4.2.0
+	 * @version	5.0.0.0
 	 *
 	 * @return 	void
 	 */

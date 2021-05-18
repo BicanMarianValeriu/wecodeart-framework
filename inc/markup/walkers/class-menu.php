@@ -9,7 +9,7 @@
  * @subpackage 	Walkers\Menu
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		2.0.x
- * @version		4.2.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup\Walkers;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Markup\Walkers;
 defined( 'ABSPATH' ) || exit();
 
 use Walker_Nav_Menu;
+use WeCodeArt\Markup;
 use function WeCodeArt\Functions\get_prop;
 
 /** 
@@ -122,13 +123,6 @@ class Menu extends Walker_Nav_Menu {
 		$classes[] = 'menu-item-' . $item->ID;
 		$classes[] = 'nav-item';
 
-		// Allow filtering the classes.
-		$classes = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth );
-
-		// Form a string of classes in format: class="class_names".
-		$class_names = join( ' ', $classes );
-		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
-
 		/**
 		 * Filters the ID applied to a menu item's list item element.
 		 *
@@ -140,10 +134,10 @@ class Menu extends Walker_Nav_Menu {
 		 * @param stdClass $args    An object of wp_nav_menu() arguments.
 		 * @param int      $depth   Depth of menu item. Used for padding.
 		 */
-		$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
-		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
-
-		$output .= $indent . '<li' . $id . $class_names . ' itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement">';
+		$output .= $indent . '<li ' . Markup::generate_attr( 'menu-item-wrap', [
+			'id'		=> apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth ),
+			'class' 	=> join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) ),
+		] ) . '>';
 
 		// Initialize array for holding the $atts for the link item.
 		$atts = array();
@@ -180,19 +174,12 @@ class Menu extends Walker_Nav_Menu {
 			$atts['title'] = $item->attr_title;
 		}
 
-		// update atts of this item based on any custom linkmod classes.
+		// Update atts of this item based on any custom linkmod classes.
 		$atts = self::update_atts_for_linkmod_type( $atts, $linkmod_classes );
-		// Allow filtering of the $atts array before using it.
 		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
 
 		// Build a string of html containing all the atts for the item.
-		$attributes = '';
-		foreach ( $atts as $attr => $value ) {
-			if ( ! empty( $value ) ) {
-				$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
-				$attributes .= ' ' . $attr . '="' . $value . '"';
-			}
-		}
+		$attributes = ' ' . Markup::generate_attr( 'menu-item', $atts );
 
 		/**
 		 * Set a typeflag to easily test if this is a linkmod or not.

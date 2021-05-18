@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2.0
- * @version		4.2.0
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup\Inputs;
@@ -41,7 +41,7 @@ class Basic extends Base {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	public function content() {
         ?>
@@ -52,7 +52,7 @@ class Basic extends Base {
     /**
      * Get types.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      */
     public static function get_types() {
         return [
@@ -66,6 +66,7 @@ class Basic extends Base {
             'submit',
             'radio',
             'checkbox',
+            'date',
             'file',
             'color',
             'hidden'
@@ -76,7 +77,7 @@ class Basic extends Base {
      * Render the custom attributes for the control's input element.
      *
      * @param 	array   $ommit Attributes to exclude
-     * @since   4.2.0
+     * @since   5.0.0
      */
     public function input_attrs( $ommit = [] ) {
         $attributes = wp_parse_args( $this->attrs, [
@@ -86,6 +87,7 @@ class Basic extends Base {
             'class' => $this->input_class()
         ] );
         $attributes = ! empty( $ommit ) ? array_diff_key( $attributes, array_flip( $ommit ) ) : $attributes;
+        // Note to code reviews, generate_attr already escapes attrs
         echo Markup::generate_attr( $this->type, $attributes );
     }
 
@@ -93,7 +95,7 @@ class Basic extends Base {
      * Get input's class.
      *
      * @param 	array
-     * @since   4.2.0
+     * @since   5.0.0
      */
     public function input_class() {
         $class = 'form-control';

@@ -13,8 +13,8 @@ return [
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
 	
-	<!-- wp:wca/section {"className":"py-5 css-5f043eae"} -->
-	<div class="wp-block-wca-section alignfull py-5 css-5f043eae wca-section"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4"}} -->
+	<!-- wp:wca/section {"className":"pm-5 css-5f043eae"} -->
+	<div class="wp-block-wca-section alignfull my-5 css-5f043eae wca-section"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4"}} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-4"><!-- wp:image {"sizeSlug":"large","hasCustomCSS":true} -->
 	<figure class="wp-block-image size-large"><img src="https://picsum.photos/id/237/500/500" alt=""/></figure>
 	<!-- /wp:image --></div>
@@ -35,8 +35,8 @@ return [
 	<!-- /wp:wca/column --></div></div></div>
 	<!-- /wp:wca/section -->
 	
-	<!-- wp:wca/section {"className":"py-5 css-9cdb1e2d","backgroundColor":"light"} -->
-	<div class="wp-block-wca-section alignfull py-5 css-9cdb1e2d wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"verticalAlignment":"center","bootstrapColumns":{"global":"col-12","md":"col-md-8"}} -->
+	<!-- wp:wca/section {"className":"my-5 css-9cdb1e2d","backgroundColor":"light"} -->
+	<div class="wp-block-wca-section alignfull my-5 css-9cdb1e2d wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"verticalAlignment":"center","bootstrapColumns":{"global":"col-12","md":"col-md-8"}} -->
 	<div class="wp-block-wca-column wca-column col col-12 col-md-8 align-self-center"><!-- wp:heading {"textColor":"nv-text-dark-bg","hasCustomCSS":true} -->
 	<h2 class="has-nv-text-dark-bg-color has-text-color">We are driven by values</h2>
 	<!-- /wp:heading -->
@@ -50,8 +50,8 @@ return [
 	<!-- /wp:spacer -->
 	
 	<!-- wp:buttons -->
-	<div class="wp-block-buttons"><!-- wp:button {"borderRadius":5,"backgroundColor":"primary","className":"is-style-primary","hasCustomCSS":true} -->
-	<div class="wp-block-button is-style-primary"><a class="wp-block-button__link has-primary-background-color has-background" href="#" style="border-radius:5px">LET’S TALK</a></div>
+	<div class="wp-block-buttons"><!-- wp:button {"borderRadius":5,"backgroundColor":"primary","hasCustomCSS":true} -->
+	<div class="wp-block-button"><a class="wp-block-button__link has-primary-background-color has-background" href="#" style="border-radius:5px">LET’S TALK</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div>
 	<!-- /wp:wca/column -->

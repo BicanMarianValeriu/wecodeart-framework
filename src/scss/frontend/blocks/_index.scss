@@ -15,7 +15,7 @@ html {
     }
 }
 
-.site-container {
+.site-container { 
 	@include media-breakpoint-up( 'lg' ) {
 		.alignfull,
         .alignwide {
@@ -38,31 +38,17 @@ html {
 }
 
 @import "./../abstracts/root";
-@import "./blocks/audio";
 @import "./blocks/button";
-@import "./blocks/calendar";
-@import "./blocks/categories";
-@import "./blocks/code";
 @import "./blocks/columns";
 @import "./blocks/cover";
-@import "./blocks/embed";
-@import "./blocks/file";
 @import "./blocks/gallery";
-@import "./blocks/group";
+@import "./blocks/group"; // Remove
 @import "./blocks/image";
 @import "./blocks/latest-comments";
 @import "./blocks/latest-posts";
 @import "./blocks/media-text";
-@import "./blocks/navigation-menu";
-@import "./blocks/paragraph";
-@import "./blocks/pullquote";
+@import "./blocks/misc";
+@import "./blocks/navigation-menu"; // Remove
 @import "./blocks/quote";
-@import "./blocks/rss";
-@import "./blocks/search";
-@import "./blocks/separator";
 @import "./blocks/social-links";
-@import "./blocks/spacer";
-@import "./blocks/subhead";
 @import "./blocks/table";
-@import "./blocks/verse";
-@import "./blocks/video";

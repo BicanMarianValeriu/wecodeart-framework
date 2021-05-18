@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
- * @since		4.2.0
- * @version		4.2.0
+ * @since		5.0.0
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup\Inputs;
@@ -27,7 +27,7 @@ abstract class Base {
     /**
      * Input's Type.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     string
      */
     public $type = '';
@@ -42,7 +42,7 @@ abstract class Base {
     /**
      * Input's Label Position.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     string
      */
     public $label_position = 'before';
@@ -50,7 +50,7 @@ abstract class Base {
     /**
      * Input's Label.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     string
      */
     public $label = '';
@@ -58,7 +58,7 @@ abstract class Base {
     /**
      * All Attrs tied to the control.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     array
      */
     public $attrs = [];
@@ -66,7 +66,7 @@ abstract class Base {
     /**
      * All Messages tied to the control.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     array
      */
     public $messages = [];
@@ -74,7 +74,7 @@ abstract class Base {
     /**
      * Input's Messages.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @var     string
      */
     public $with_messages = true;
@@ -99,14 +99,14 @@ abstract class Base {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	4.2.0
+	 * @version	5.0.0
 	 */
 	abstract function content();
     
     /**
      * Get the control's content.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      *
      * @return  string Contents of the control.
      */
@@ -119,7 +119,7 @@ abstract class Base {
     /**
      * Renders the control wrapper and calls $this->content() for the internals.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      */
     protected function render() {
         if( $this->label_position === 'before' ) $this->label();
@@ -131,7 +131,7 @@ abstract class Base {
     /**
      * Render the custom attributes for the control's input element.
      *
-     * @since   4.2.0
+     * @since   5.0.0
      * @param 	array   $ommit Attributes to exclude
      */
     public function input_attrs( $ommit = [] ) {
@@ -142,7 +142,7 @@ abstract class Base {
     /**
 	 * Render the label HTML of the input
      *
-     * @since   4.2.0
+     * @since   5.0.0
      *
 	 * @return	mixed|string
 	 */
@@ -163,7 +163,7 @@ abstract class Base {
     /**
 	 * Render the messages HTML of the input
      *
-     * @since   4.2.0
+     * @since   5.0.0
 	 * @param 	bool    $echo
      *
 	 * @return	string
@@ -171,11 +171,9 @@ abstract class Base {
 	public function messages( $echo = true ) {
 		if( empty( $this->messages ) ) return;
         
-		$html = '';
-        $messages = $this->messages;
-        
-		$help = isset( $messages['help'] ) ? $messages['help'] : false;
-		if( isset( $messages['help'] ) ) unset( $messages['help'] );
+		$html       = '';
+        $messages   = wp_array_slice_assoc( $this->messages, [ 'valid', 'invalid' ] );
+		$help       = isset( $this->messages['help'] ) ? (string) $this->messages['help'] : false;
 
 		if( is_string( $help ) ) {
 			$html .= sprintf( '<small class="help-text">%s</small>', $help );
@@ -183,10 +181,11 @@ abstract class Base {
 
 		if( $messages ) {
 			foreach( $messages as $key => $msg ) {
+                if( empty( $msg ) ) continue;
 				$data 		= is_string( $msg ) ? [ 'text' => $msg ] : $msg;
 				$message 	= isset( $data['text'] ) ? $data['text'] : '';
 				$class		= isset( $data['class'] ) ? $data['class'] : $key . '-tooltip';
-				$html .= sprintf( '<div class="%s">%s</div>', esc_attr( $class ), $message );
+				$html .= sprintf( '<span class="%s">%s</span>', esc_attr( $class ), $message );
 			}
 		}
 
