@@ -62,6 +62,26 @@ abstract class Dynamic {
 	abstract public function render( $attributes = [], $content = '' );
 
 	/**
+	 * Load and manipulate HTML with DOMDocument.
+	 *
+	 * @param 	string $content    Block content. 		Default empty string.
+	 * 
+	 * @return 	object $doc.
+	 */
+	protected function load_html( $content = '' ) {
+		$doc = new \DOMDocument();
+		// See https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/table-of-contents/index.php
+		libxml_use_internal_errors( true );
+		$doc->loadHTML( htmlspecialchars_decode(
+			utf8_decode( htmlentities( '<html><body>' . $content . '</body></html>', ENT_COMPAT, 'UTF-8', false ) ),
+			ENT_COMPAT
+		) );
+		libxml_use_internal_errors( false );
+
+		return $doc;
+	}
+
+	/**
 	 * Get block attributes.
 	 *
 	 * @return array

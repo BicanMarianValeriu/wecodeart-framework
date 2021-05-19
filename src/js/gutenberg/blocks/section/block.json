@@ -38,6 +38,11 @@
 		},
 		"color": {
 			"gradients": true
-		}
+		},
+		"__experimentalFontFamily": true,
+		"__experimentalFontStyle": true,
+		"__experimentalFontWeight": true,
+		"__experimentalTextDecoration": true,
+		"__experimentalTextTransform": true
 	}
 }

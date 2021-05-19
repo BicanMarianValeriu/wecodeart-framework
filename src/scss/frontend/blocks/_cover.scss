@@ -32,7 +32,7 @@
 		}
 	}
 
-	.wp-block-cover__inner-container {
+	&__inner-container {
 		@include make-container();
 		@each $breakpoint, $container-max-width in $container-max-widths {
 			@include media-breakpoint-up($breakpoint, $grid-breakpoints) {
@@ -40,6 +40,36 @@
 			}
 		}
 		z-index: 2;
+
+		.alignfull & {
+			max-width: 100%;
+		}
+
+		.has-custom-content-position & {
+			display: flex;
+			flex-direction: column;
+		}
+
+		// Position: Left
+		.is-position-top-left &,
+		.is-position-center-left &,
+		.is-position-bottom-left & {
+			align-items: flex-start;
+		}
+
+		// Position: Center
+		.is-position-top-center &,
+		.is-position-center-center &,
+		.is-position-bottom-center & {
+			align-items: center;
+		}
+
+		// Position: Right
+		.is-position-top-right &,
+		.is-position-center-right &,
+		.is-position-bottom-right & {
+			align-items: flex-end;
+		}
 	}
 
 	p,
@@ -55,52 +85,24 @@
 	}
 
 	// Position: Top
-	&.is-position-top-left {
-		align-items: flex-start;
-		justify-content: flex-start;
-	}
-	&.is-position-top-center {
-		align-items: flex-start;
-		justify-content: center;
-	}
+	&.is-position-top-left,
+	&.is-position-top-center,
 	&.is-position-top-right {
 		align-items: flex-start;
-		justify-content: flex-end;
 	}
 	
 	// Position: Center
-	&.is-position-center-left {
-		align-items: center;
-		justify-content: flex-start;
-	}
-	&.is-position-center-center {
-		align-items: center;
-		justify-content: center;
-	}
+	&.is-position-center-left,
+	&.is-position-center-center,
 	&.is-position-center-right {
 		align-items: center;
-		justify-content: flex-end;
 	}
 
 	// Position: Bottom
-	&.is-position-bottom-left {
-		align-items: flex-end;
-		justify-content: flex-start;
-	}
-	&.is-position-bottom-center {
-		align-items: flex-end;
-		justify-content: center;
-	}
+	&.is-position-bottom-left,
+	&.is-position-bottom-center,
 	&.is-position-bottom-right {
 		align-items: flex-end;
-		justify-content: flex-end;
-	}
-
-	&.has-custom-content-position.has-custom-content-position {
-		.wp-block-cover__inner-container {
-			margin: 0;
-			width: auto;
-		}
 	}
 
 	&__image-background,

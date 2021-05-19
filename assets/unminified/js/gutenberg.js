@@ -12263,7 +12263,7 @@ var settings = {
 /*! exports provided: name, category, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"wca/section\",\"category\":\"wca\",\"attributes\":{\"align\":{\"type\":\"string\",\"default\":\"full\"},\"verticalAlignment\":{\"type\":\"string\"},\"horizontalAlignment\":{\"type\":\"string\"},\"container\":{\"type\":\"string\",\"default\":\"container\"},\"gutter\":{\"type\":\"number\",\"default\":4}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false,\"anchor\":true,\"fontSize\":true,\"lineHeight\":true,\"className\":true,\"withBackground\":true,\"lightBlockWrapper\":true,\"spacing\":{\"padding\":true},\"color\":{\"gradients\":true}}}");
+module.exports = JSON.parse("{\"name\":\"wca/section\",\"category\":\"wca\",\"attributes\":{\"align\":{\"type\":\"string\",\"default\":\"full\"},\"verticalAlignment\":{\"type\":\"string\"},\"horizontalAlignment\":{\"type\":\"string\"},\"container\":{\"type\":\"string\",\"default\":\"container\"},\"gutter\":{\"type\":\"number\",\"default\":4}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false,\"anchor\":true,\"fontSize\":true,\"lineHeight\":true,\"className\":true,\"withBackground\":true,\"lightBlockWrapper\":true,\"spacing\":{\"padding\":true},\"color\":{\"gradients\":true},\"__experimentalFontFamily\":true,\"__experimentalFontStyle\":true,\"__experimentalFontWeight\":true,\"__experimentalTextDecoration\":true,\"__experimentalTextTransform\":true}}");
 
 /***/ }),
 
@@ -12359,30 +12359,22 @@ var ResponsiveColumns = /*#__PURE__*/function (_Component) {
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, ResponsiveColumns);
 
     _this = _super.apply(this, arguments);
-    _this.setColumn = _this.setColumn.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
-    _this.state = {
-      selectedDevice: 'Desktop'
-    };
+    _this.setColumn = _this.setColumn.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this)); // this.state = { selectedDevice: 'Desktop' };
+
     return _this;
-  }
+  } // getDeviceType() {
+  // 	return this.props.deviceType ? this.props.deviceType : this.state.selectedDevice;
+  // }
+  // setDeviceType(deviceType) {
+  // 	if (this.props.deviceType) {
+  // 		this.props.setDeviceType(deviceType);
+  // 	} else {
+  // 		this.setState({ selectedDevice: deviceType });
+  // 	}
+  // };
+
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(ResponsiveColumns, [{
-    key: "getDeviceType",
-    value: function getDeviceType() {
-      return this.props.deviceType ? this.props.deviceType : this.state.selectedDevice;
-    }
-  }, {
-    key: "setDeviceType",
-    value: function setDeviceType(deviceType) {
-      if (this.props.deviceType) {
-        this.props.setDeviceType(deviceType);
-      } else {
-        this.setState({
-          selectedDevice: deviceType
-        });
-      }
-    }
-  }, {
     key: "setColumn",
     value: function setColumn(value) {
       var breakpoint = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'global';
@@ -12463,18 +12455,15 @@ var ResponsiveColumns = /*#__PURE__*/function (_Component) {
           columnsClasses = _this$props2.columnsClasses,
           bootstrapColumns = _this$props2.attributes.bootstrapColumns;
 
-      console.log(columnsClasses);
-      if (columnsClasses === undefined) return null;
-      var deviceType = this.getDeviceType();
-      var tab = 'lg';
+      if (columnsClasses === undefined) return null; // const deviceType = this.getDeviceType();
 
-      if (deviceType === 'Desktop') {
-        tab = 'lg';
-      } else if (deviceType === 'Tablet') {
-        tab = 'md';
-      } else if (deviceType === 'Mobile') {
-        tab = 'global';
-      }
+      var tab = 'lg'; // if (deviceType === 'Desktop') {
+      // 	tab = 'lg';
+      // } else if (deviceType === 'Tablet') {
+      // 	tab = 'md';
+      // } else if (deviceType === 'Mobile') {
+      // 	tab = 'global';
+      // }
 
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(TabPanel, {
         className: "components-base-control wecodeart-horizontal-tabs",
@@ -12489,9 +12478,8 @@ var ResponsiveColumns = /*#__PURE__*/function (_Component) {
             device = 'Tablet';
           } else if (tab === 'lg' || tab === 'xl') {
             device = 'Desktop';
-          }
+          } // this.setDeviceType(device);
 
-          _this2.setDeviceType(device);
         },
         tabs: [{
           name: 'global',
@@ -12535,16 +12523,13 @@ var ResponsiveColumns = /*#__PURE__*/function (_Component) {
   return ResponsiveColumns;
 }(Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (compose(withDispatch(function (dispatch) {
-  return {
-    setDeviceType: function setDeviceType(type) {
-      var _dispatch = dispatch('core/edit-post'),
-          __experimentalSetPreviewDeviceType = _dispatch.__experimentalSetPreviewDeviceType;
-
-      __experimentalSetPreviewDeviceType(type);
-    }
-  };
-}), withSelect(function (select) {
+/* harmony default export */ __webpack_exports__["default"] = (compose( // withDispatch((dispatch) => ({
+// 	setDeviceType(type) {
+// 		const { __experimentalSetPreviewDeviceType } = dispatch('core/edit-post');
+// 		__experimentalSetPreviewDeviceType(type);
+// 	}
+// })),
+withSelect(function (select) {
   var _select$getEditorSett = select('core/editor').getEditorSettings(),
       _select$getEditorSett2 = _select$getEditorSett.wecodeart;
 

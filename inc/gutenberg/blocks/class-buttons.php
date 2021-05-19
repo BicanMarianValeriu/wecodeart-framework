@@ -59,14 +59,7 @@ class Buttons extends Dynamic {
 	public function render( $attributes = [], $content = '' ) {
 		$classes = explode( ' ', get_prop( $attributes, 'className', '' ) );
 
-		$doc = new \DOMDocument();
-		// See https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/table-of-contents/index.php
-		libxml_use_internal_errors( true );
-		$doc->loadHTML( htmlspecialchars_decode(
-			utf8_decode( htmlentities( '<html><body>' . $content . '</body></html>', ENT_COMPAT, 'UTF-8', false ) ),
-			ENT_COMPAT
-		) );
-		libxml_use_internal_errors( false );
+		$doc = $this->load_html( $content );
 
 		$gb_palette = wp_list_pluck( current( get_theme_support( 'editor-color-palette' ) ), 'slug' );
 		$color_cls	= [ 'has-background' ];
