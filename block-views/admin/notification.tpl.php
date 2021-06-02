@@ -8,26 +8,24 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Notification Template
  * @since 		3.8.1
- * @version		4.0.1
+ * @version		5.0.0
  */
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
 
-$attributes = Markup::generate_attr( 'admin-notification', [
-	'id'			=> $id ?: '',
-	'class'			=> $classes ?: '',
-	'data-repeat' 	=> isset( $repeat ) ? $repeat : NULL
-] ); 
 ?>
-<div <?php echo $attributes; // WPCS ok - attributes escaped with fn above. ?>>
-	<div class="wca-notice__container"><?php
+<div <?php echo Markup::generate_attr( 'admin-notification', $attributes ); // WPCS ok - attributes escaped with fn above. ?>>
+	<div class="wca-notice__branding"><?php
 
-		do_action( "wecodeart/hook/admin/notification/{$id}" );
+		printf( '<img src="%s" />', wecodeart_config( 'paths' )['uri'] . '/assets/images/logo.png' );
+ 
+	?></div>
+	<div class="wca-notice__container"><?php
 
 		echo wp_kses_post( $message );
  
 	?></div>
 </div>
-<!-- /notification #<?php echo esc_attr( $id ); ?> -->
+<!-- /wecodeart-notification -->

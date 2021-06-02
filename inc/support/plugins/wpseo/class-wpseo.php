@@ -21,6 +21,8 @@ use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Markup\SVG;
 use WeCodeArt\Integration;
+use WeCodeArt\Admin\Notifications;
+use WeCodeArt\Admin\Notifications\Notification;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -29,6 +31,8 @@ use function WeCodeArt\Functions\get_prop;
 class WPSeo implements Integration {
 
 	use Singleton; 
+
+	const NOTICE_ID = 'wecodeart-yoast-notice';
 
 	/**
      * All of the configuration items for the extension.
@@ -64,19 +68,50 @@ class WPSeo implements Integration {
 	 * @version	4.1.5
 	 */
 	public function register_hooks() {
-		add_action( 'wecodeart/hook/inner/top', [ $this, 'render_breadcrumbs' ], 30 );
-		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+		add_action( 'admin_notices',						[ $this, 'manage_notice' ] );
+
+		add_action( 'wecodeart/hook/inner/top', 			[ $this, 'render_breadcrumbs' ], 30 );
+		remove_action( 'woocommerce_before_main_content', 	'woocommerce_breadcrumb', 20, 0 );
 
 		// Restricted Blocks
 		add_filter( 'wecodeart/filter/gutenberg/restricted',[ $this, 'restricted_gutenberg_blocks' ] );
 
 		// Template Context
-		add_filter( 'wecodeart/filter/template/context', [ $this, 'filter_category_context' ], 10, 2 );
+		add_filter( 'wecodeart/filter/template/context', 	[ $this, 'filter_category_context' ], 10, 2 );
 		if( get_prop( $this->config, 'author-social', false ) !== false ) {
 			/**
 			 * Extend Author box data with Social
 			 */
 			add_filter( 'wecodeart/filter/template/context', [ $this, 'filter_author_context' ], 10, 2 );
+		}
+	}
+
+	/**
+	 * Manage Notice
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 */
+	public function manage_notice() {
+		$notification = new Notification(
+			esc_html__( 'YoastSEO support is enabled! Our theme works seamlessly with the best SEO plugin.', 'wecodeart' ),
+			[
+				'id'			=> self::NOTICE_ID,
+				'type'     		=> Notification::INFO,
+				'priority' 		=> 1,
+				'class'			=> 'notice is-dismissible',
+				'capabilities' 	=> 'activate_plugins',
+			]
+		);
+
+		if( get_user_option( self::NOTICE_ID ) === 'seen' ) {
+			Notifications::get_instance()->remove_notification( $notification );
+			set_transient( self::NOTICE_ID, true, WEEK_IN_SECONDS );
+			return;
+		}
+
+		if( get_transient( self::NOTICE_ID ) === false ) {
+			Notifications::get_instance()->add_notification( $notification );
 		}
 	}
 

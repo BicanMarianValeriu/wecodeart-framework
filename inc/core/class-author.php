@@ -85,7 +85,7 @@ class Author {
 	public static function render_box() {
 		if( empty( self::get_data() ) ) return;
 
-		Markup::template( 'entry/author/box', self::get_data() );
+		Markup::template( 'entry/author-box', self::get_data() );
 	}
 
 	/**

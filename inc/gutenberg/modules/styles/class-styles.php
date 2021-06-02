@@ -66,8 +66,9 @@ class Styles implements Integration {
 		// Enqueue Styles
 		Styles\Embed::get_instance();
 		// Admin
-		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	] );
-		add_filter( 'render_block',					[ $this, 'filter_render' ], 20, 2 );
+		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' ], 0 );
+		add_filter( 'render_block',					[ $this, 'filter_render' ], 10, 2 );
+		add_filter( 'block_default_classname',		[ $this, 'filter_classname' ], 20, 2 );
 	}
 
 	/**
@@ -77,8 +78,21 @@ class Styles implements Integration {
 	 */
 	public function block_editor_assets() {
 		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg-styles' ), [
-			'wecodeart-gutenberg'
+			'wecodeart-gutenberg-inline'
 		], wecodeart( 'version' ) );
+	}
+
+	/**
+	 * Filter Blocks Classname
+	 *
+	 * @param	string 	$classname
+	 * @param	string 	$block
+	 *
+	 * @return 	string 	HTML
+	 */
+	public function filter_classname( $classname, $block ) {
+		// $classname = 'test';
+		return $classname;
 	}
 
 	/**
@@ -89,29 +103,41 @@ class Styles implements Integration {
 	 *
 	 * @return 	string 	HTML
 	 */
-	public function filter_render( $content, $block ) {		
+	public function filter_render( $content, $block ) {
+		// We use this approach to avoid invalid blocks or patterns, as well as on theme change
+		$doc = new \DOMDocument();
+		// See https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/table-of-contents/index.php
+		// And this is using markup from Gutenberg blocks so is kinda safe anyway
+		libxml_use_internal_errors( true );
+		$doc->loadHTML( htmlspecialchars_decode(
+			utf8_decode( htmlentities( '<html><body>' . $content . '</body></html>', ENT_COMPAT, 'UTF-8', false ) ),
+			ENT_COMPAT
+		) );
+		libxml_use_internal_errors( false );
+
+		// Append CSS class
+		$xpath 	= new \DomXPath( $doc );
+		$domEls	= $xpath->query('//div[starts-with(@class,"wp-block-")]');
+		if( $domEls->length >= 1 ) {
+			$domEl  = $domEls->item(0);
+			$cssid  = 'css-' . substr( get_prop( $block['attrs'], 'customCSSId' ), 0, 8 );
+			$class 	= join( ' ', [ $domEl->getAttribute( 'class' ), $cssid ] );
+			$domEl->setAttribute( 'class', $class );
+		}
+
+		// Remove styles, where needed
 		if ( in_array( $block['blockName'], (array) apply_filters( 'wecodeart/filter/gutenberg/styles/remove', [
 			'core/group',
 			'core/cover',
 			'core/media-text',
 			'core/pullquote',
 		], true ) ) ) {
-			// We use this approach to avoid invalid blocks or patterns, as well as on theme change
-			$doc = new \DOMDocument();
-			// See https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/table-of-contents/index.php
-			// And this is using markup from Gutenberg blocks so is kinda safe anyway
-			libxml_use_internal_errors( true );
-			$doc->loadHTML( htmlspecialchars_decode(
-				utf8_decode( htmlentities( '<html><body>' . $content . '</body></html>', ENT_COMPAT, 'UTF-8', false ) ),
-				ENT_COMPAT
-			) );
-			libxml_use_internal_errors( false );
-			
 			$elements = $doc->getElementsByTagName( '*' );
 			foreach( $elements as $el ) $el->removeAttribute( 'style' );
-	
-			return $doc->saveHTML();
 		}
+
+		// Save new HTML
+		$content = $doc->saveHTML();
 		
 		return $content;
 	}

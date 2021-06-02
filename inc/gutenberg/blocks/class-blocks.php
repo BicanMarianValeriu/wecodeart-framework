@@ -43,8 +43,6 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/quote',	    Blocks\Quote::class );
 		$this->register( 'core/buttons',    Blocks\Buttons::class );
 		$this->register( 'core/calendar',   Blocks\Calendar::class );
-		$this->register( 'core/site-title', Blocks\Site_Title::class );
-		$this->register( 'wca/content',	    Blocks\Content::class );
         
         add_action( 'init', [ $this, 'load' ] );
 	}

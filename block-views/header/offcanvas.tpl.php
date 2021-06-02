@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Markup;
 
 ?>
-<div class="offcanvas-header py-4">
+<div class="offcanvas-header py-3">
 	<h5 class="offcanvas-title"><?php esc_html_e( 'Menu', 'wecodeart' ); ?></h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>

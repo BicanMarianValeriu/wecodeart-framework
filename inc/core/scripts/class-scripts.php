@@ -20,7 +20,6 @@ use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Core\Scripts\get_asset;
 
 /**
  * Framework Assets
@@ -110,10 +109,10 @@ class Scripts {
 	 */
 	public function front_scripts() {
 		// Enqueue Styles
-		wp_enqueue_style( $this->make_handle(), get_asset( 'css', 'frontend' ), [], wecodeart( 'version' ) );
+		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'frontend' ), [], wecodeart( 'version' ) );
 
 		// Enqueue Scripts
-		wp_enqueue_script( $this->make_handle(), get_asset( 'js', 'frontend' ), [
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'frontend' ), [
 	 		'wp-hooks'
 		], wecodeart( 'version' ), true );
 		
@@ -161,43 +160,4 @@ class Scripts {
 
 		return $tag;
 	}
-}
-
-// Define Child NS
-namespace WeCodeArt\Core\Scripts;
-
-/**
- * Gets asset instance.
- *
- * @param  string $file Relative file path to the asset file.
- *
- * @return \WeCodeArt\Core\Scripts\Asset
- */
-function asset( $file ) {
-    $asset = new Asset( wecodeart_config() );
-    return $asset->set_file( $file );
-}
-
-/**
- * Gets asset file from public directory.
- *
- * @param  string $type 	Type of the asset file.
- * @param  string $name 	Name of the asset file.
- *
- * @return string
- */
-function get_asset( string $type, string $name ) {
-	if( ! in_array( $type, [ 'css', 'js' ] ) ) {
-		return _doing_it_wrong( 
-			__FUNCTION__, 
-			esc_html__( 'The file must be of type CSS/JS.', 'wecodeart' ), 
-			wecodeart( 'version' ) 
-		);
-	}
-
-	$file_path = wecodeart_if( 'is_dev_mode' ) ? 'unminified' : 'minified';
-	$file_path .= '/' . strtolower( $type ) . '/';
-	$file_path .= wecodeart_if( 'is_dev_mode' ) ? $name . '.' . $type :  $name . '.min.' . $type;
-
-    return asset( $file_path )->get_uri();
 }

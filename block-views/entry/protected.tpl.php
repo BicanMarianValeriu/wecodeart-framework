@@ -30,8 +30,8 @@ SVG::add_icon( 'unlock', [
  * @param   string  $unique_id      Contains the input unique ID
  */
 ?>
-<form action="<?php echo esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ); ?>"
-    method="post" class="alert border-soft shadow-soft py-4">
+<form action="<?php echo esc_url( home_url( 'wp-login.php?action=postpass', 'login_post' ) ); ?>"
+    method="post" class="alert border-light shadow py-4">
     <h4><?php
     
         esc_html_e( 'This post is password protected. To view this post, enter the password below!', 'wecodeart' );

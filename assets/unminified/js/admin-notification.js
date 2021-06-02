@@ -96,7 +96,6 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_admin_notification_notification_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../scss/admin/notification/notification.scss */ "./src/scss/admin/notification/notification.scss");
-/* harmony import */ var _scss_admin_notification_notification_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_admin_notification_notification_scss__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * WeCodeArt Framework.
  *
@@ -107,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
  * @subpackage 	Admin/Notifications
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.8.1
- * @version		3.8.1
+ * @version		5.0.0
  */
 
 
@@ -124,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
      * @since 	3.8.1
      * @method 	init
      */
-    init: function init() {
+    init: function () {
       this._bind();
     },
 
@@ -135,56 +134,52 @@ __webpack_require__.r(__webpack_exports__);
      * @access 	private
      * @method 	_bind
      */
-    _bind: function _bind() {
+    _bind: () => {
       $(document).on('click', '.wca-notice__close', Notification._dismissNew);
       $(document).on('click', '.wca-notice .notice-dismiss', Notification._dismiss);
     },
-    _dismiss: function _dismiss(e) {
+    _dismiss: function (e) {
       e.preventDefault();
-      var repeat_after = $(this).parents('.wca-notice').data('repeat') || '';
-      var notice_id = $(this).parents('.wca-notice').attr('id') || '';
+      const noticeId = $(this).parents('.wca-notice').attr('id') || '';
 
-      Notification._ajax(notice_id, repeat_after);
+      Notification._ajax(noticeId);
     },
-    _dismissNew: function _dismissNew(e) {
+    _dismissNew: function (e) {
       e.preventDefault();
-      var repeat_after = $(this).data('repeat') || '';
-      var notice_id = $(this).parents('.wca-notice').attr('id') || '';
-      var $el = $(this).parents('.wca-notice');
-      $el.fadeTo(100, 0, function () {
-        return $el.slideUp(100, function () {
-          return $el.remove();
-        });
-      });
+      const noticeId = $(this).parents('.wca-notice').attr('id') || '';
+      const $el = $(this).parents('.wca-notice');
+      $el.fadeTo(100, 0, () => $el.slideUp(100, () => $el.remove()));
 
-      Notification._ajax(notice_id, repeat_after);
+      Notification._ajax(noticeId);
 
-      var link = $(this).attr('href') || '';
-      var target = $(this).attr('target') || '';
+      const link = $(this).attr('href') || '';
+      const target = $(this).attr('target') || '';
 
       if ('' !== link && '_blank' === target) {
         window.open(link, '_blank');
       }
     },
-    _ajax: function _ajax(notice_id, repeat_after) {
-      if ('' === notice_id) {
+    _ajax: notification => {
+      if ('' === notification) {
         return;
       }
 
+      const container = document.getElementById(notification);
+      const {
+        nonce
+      } = container.dataset;
       $.ajax({
         url: ajaxurl,
         type: 'POST',
         data: {
-          action: 'wecodeart_notification_dismiss',
-          notice_id: notice_id,
-          repeat_after: parseInt(repeat_after)
+          action: 'wca_dismiss_notification',
+          notification,
+          nonce
         }
       });
     }
   };
-  $(function () {
-    return Notification.init();
-  });
+  $(() => Notification.init());
 })(jQuery);
 
 /***/ }),
@@ -193,10 +188,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./src/scss/admin/notification/notification.scss ***!
   \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
+
 
 /***/ })
 

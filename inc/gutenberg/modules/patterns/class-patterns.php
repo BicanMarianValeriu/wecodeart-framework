@@ -59,6 +59,23 @@ class Patterns implements Integration {
 		$this->load_categories();
 		add_action( 'rest_insert_' . self::POST_TYPE, 	[ $this, 'rest_insert_wca_pattern' ], 10, 2 );
 		add_action( 'enqueue_block_editor_assets', 		[ $this, 'block_editor_assets' ] );
+		// Reusable Theme link.
+		add_filter( 'admin_menu', [ $this, 'reusable_blocks_link' ], 0 );
+	}
+
+	/**
+	 * Link Reusable blocks to Appearance
+	 *
+	 * @return void
+	 */
+	public function reusable_blocks_link() {
+		add_submenu_page( 
+			'themes.php',
+			__( 'Blocks - Reusable', 'wecodeart' ),
+			__( 'Blocks - Reusable', 'wecodeart' ),
+			'edit_posts',
+			'edit.php?post_type=wp_block'
+		);
 	}
 
 	/**

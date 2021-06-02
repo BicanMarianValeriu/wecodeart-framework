@@ -400,12 +400,12 @@ class Customizer {
 		/**
 		 * Add support to define partial inside our custom config
 		 */
-		if ( get_prop( $config, 'partial', false ) ) {
-			if ( isset( $wp_customize->selective_refresh ) ) {
+		if ( isset( $wp_customize->selective_refresh ) ) {
+			if ( $partial = get_prop( $config, 'partial', false ) ) {
 				$wp_customize->selective_refresh->add_partial( $name, [
-					'selector'            => get_prop( $config['partial'], 'selector' ),
-					'container_inclusive' => get_prop( $config['partial'], 'container_inclusive' ),
-					'render_callback'     => get_prop( $config['partial'], 'render_callback' ),
+					'selector'            => get_prop( $partial, 'selector' ),
+					'container_inclusive' => get_prop( $partial, 'container_inclusive' ),
+					'render_callback'     => get_prop( $partial, 'render_callback' ),
 				] );
 			}
 		}

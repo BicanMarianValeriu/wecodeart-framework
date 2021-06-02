@@ -20,6 +20,8 @@ use anr_captcha_class as Captcha;
 use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
+use WeCodeArt\Admin\Notifications;
+use WeCodeArt\Admin\Notifications\Notification;
 
 /**
  * ANR Integration
@@ -28,6 +30,8 @@ use WeCodeArt\Integration;
 class ANR implements Integration {
 
 	use Singleton;
+
+	const NOTICE_ID = 'wecodeart-anr-notice';
 
 	/**
 	 * Send to Constructor
@@ -51,11 +55,13 @@ class ANR implements Integration {
 	 * Hooks
 	 *
 	 * @since   3.8.1
-	 * @version	4.1.6
+	 * @version	5.0.0
 	 *
 	 * @return  void
 	 */
 	public function register_hooks() {
+		add_action( 'admin_notices',	[ $this, 'manage_notice' ] );
+
 		// Comments
 		if( anr_is_form_enabled( 'comment' ) && ( ! is_admin() || ! current_user_can( 'moderate_comments' ) ) ) {
 			add_action( 'init', function() {
@@ -72,6 +78,35 @@ class ANR implements Integration {
 
 		// Hooks
 		do_action( 'wecodeart/action/support/anr/init' );
+	}
+
+	/**
+	 * Manage Notice
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 */
+	public function manage_notice() {
+		$notification = new Notification(
+			esc_html__( 'ANR Captcha support is enabled!', 'wecodeart' ),
+			[
+				'id'			=> self::NOTICE_ID,
+				'type'     		=> Notification::INFO,
+				'priority' 		=> 1,
+				'class'			=> 'notice is-dismissible',
+				'capabilities' 	=> 'activate_plugins',
+			]
+		);
+
+		if( get_user_option( self::NOTICE_ID ) === 'seen' ) {
+			Notifications::get_instance()->remove_notification( $notification );
+			set_transient( self::NOTICE_ID, true, WEEK_IN_SECONDS );
+			return;
+		}
+
+		if( get_transient( self::NOTICE_ID ) === false ) {
+			Notifications::get_instance()->add_notification( $notification );
+		}
 	}
 
 	/**

@@ -50,22 +50,26 @@ class Typography extends Config {
 				]
 			],
 			[
-				'name'			=> 'general-typography-headings',
+				'name'			=> 'general-typography-secondary',
 				'type' 			=> 'control',
 				'control'  		=> 'wecodeart-fonts',
 				'section'		=> 'general-typography',
-				'title' 		=> esc_html__( 'Headings Font', 'wecodeart' ),
+				'title' 		=> esc_html__( 'Secondary Font', 'wecodeart' ),
 				'description' 	=> esc_html__( 'This font is used on headings and it will be placed in a custom CSS variable.', 'wecodeart' ),
 				'priority' 		=> 5,
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[
 						'element'  	=> ':root',
-						'property' 	=> '--wca-font-headings',
+						'property' 	=> '--wca-font-secondary',
 					],
 					[
 						'element'  	=> 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6',
 						'property' 	=> 'font-family',
+						'pattern'  => function( $value ) {
+							$value = sprintf( 'var(--wca-font-secondary, %s)', $value['font-family'] );
+							return $value;
+						},
 					]
 				]
 			],

@@ -16,9 +16,6 @@ namespace WeCodeArt\Core\Scripts;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-use function WeCodeArt\Core\Scripts\get_asset;
-
 /**
  * Base Trait Class for implementing make_handle()
  */
@@ -43,7 +40,7 @@ trait Base {
 	 * Retrieve an asset if path structure is the same as class
 	 *
 	 * @since	3.9.5
-	 * @version	4.1.8
+	 * @version	5.0.0
 	 *
 	 * @param	string 	$type
 	 * @param	string 	$name
@@ -51,8 +48,6 @@ trait Base {
 	 * @return 	string
 	 */
 	protected function get_asset( string $type, string $name = __CLASS__ ) {
-		$name = strtolower( str_replace( '\\', '-', $name ) );
-
-	 	return get_asset( $type, $name );
+	 	return wecodeart_get_asset( $type, strtolower( str_replace( '\\', '-', $name ) ) );
 	}
 }

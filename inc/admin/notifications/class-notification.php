@@ -17,7 +17,7 @@ namespace WeCodeArt\Admin\Notifications;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Markup;
-use WeCodeArt\Singleton;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Notification
@@ -25,8 +25,6 @@ use WeCodeArt\Singleton;
  * @since 5.0.0
  */
 class Notification {
-
-	use Singleton;
 
 	/**
 	 * Type of capability check.
@@ -41,6 +39,13 @@ class Notification {
 	 * @var string
 	 */
 	const MATCH_ANY = 'any';
+
+	/**
+	 * Notification type.
+	 *
+	 * @var string
+	 */
+	const SUCCESS = 'success';
 
 	/**
 	 * Notification type.
@@ -62,6 +67,13 @@ class Notification {
 	 * @var string
 	 */
 	const UPDATED = 'updated';
+
+	/**
+	 * Notification type.
+	 *
+	 * @var string
+	 */
+	const INFO = 'info';
 
 	/**
 	 * Options of this Notification.
@@ -86,7 +98,7 @@ class Notification {
 	 * @var array
 	 */
 	private $defaults = [
-		'type'             => self::UPDATED,
+		'type'             => self::SUCCESS,
 		'id'               => '',
 		'user'             => null,
 		'nonce'            => null,
@@ -127,17 +139,15 @@ class Notification {
 	/**
 	 * Notice classes.
 	 *
-	 * @since 4.0
-	 *
 	 * @param  array 	$notice Notice arguments.
 	 * @return array
 	 */
-	public function get_classes() {
-		$classes   = [ 'wca-notice', 'is-dismissible' ];
-		$classes[] = $this->options['class'];
+	public function get_classname() {
+		$classes   = [ 'wca-notice' ];
+		$classes[] = get_prop( $this->options, 'class', null );
 
-		if ( isset( $this->options['type'] ) && '' !== $this->options['type'] ) {
-			$classes[] = 'notice-' . $this->options['type'];
+		if ( $type = get_prop( $this->options, 'type', false ) ) {
+			$classes[] = 'notice-' . $type;
 		}
 
 		// Maintain WordPress visualisation of alerts when they are not persistent.
@@ -146,7 +156,7 @@ class Notification {
 			$classes[] = $this->get_type();
 		}
 
-		return esc_attr( implode( ' ', $classes ) );
+		return esc_attr( implode( ' ', array_filter( $classes ) ) );
 	}
 
 	/**
@@ -342,18 +352,15 @@ class Notification {
 	 * @return string The rendered notification.
 	 */
 	public function render() {
-		$attributes = [];
-		$attributes['class'] = $this->get_classes();
-
-		$message = null;
-
-		if ( $message === null ) {
-			$message = wpautop( $this->message );
-        }
+		$attributes = [
+			'id'			=> $this->get_id(),
+			'class'			=> $this->get_classname(),
+			'data-nonce'	=> $this->get_nonce(),
+		];
 
 	    return Markup::template( 'admin/notification', [
             'attributes' => $attributes,
-            'message'    => $message
+            'message'    => wpautop( $this->message )
         ], false );
 	}
 

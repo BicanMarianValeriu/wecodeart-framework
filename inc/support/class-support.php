@@ -67,6 +67,10 @@ class Support implements ArrayAccess {
 			if( $value === false ) continue;
 			add_theme_support( $feature, $value );
 		}
+
+		// Theme check required.
+		add_theme_support( 'title-tag' );
+		add_theme_support( 'automatic-feed-links' );
 	}
 
 	/**

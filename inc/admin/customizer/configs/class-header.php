@@ -117,22 +117,6 @@ class Header extends Config {
 				]
 			],
 			[
-				'name'			=> 'header-bar-modules',
-				'type'        	=> 'control',
-				'control'  		=> 'wecodeart-sortable',
-				'section'		=> 'header-bar',
-				'title'        	=> esc_html__( 'Header Bar Modules', 'wecodeart' ),
-				'description'	=> esc_html__( 'Enable and reorder Header Bar modules.', 'wecodeart' ),
-				'priority'   	=> 20, 
-				'choices'		=> wp_list_pluck( \WeCodeArt\Core\Header::navbar_modules(), 'label' ),
-				'transport'		=> 'postMessage',
-				'partial'		=> [
-					'selector'        		=> '.navbar#navbar',
-					'render_callback' 		=> [ 'WeCodeArt\Core\Header', 'render_navbar' ],
-					'container_inclusive' 	=> true
-				]
-			],
-			[
 				'name'			=> 'header-design-bg',
 				'type' 			=> 'control',
 				'control'  		=> 'wecodeart-color',

@@ -7,6 +7,7 @@ const {
 	blocks: { hasBlockSupport },
 	compose: { createHigherOrderComponent },
 	blockEditor: { InspectorAdvancedControls },
+	element: { useEffect }
 } = wp;
 
 const { restrictedBlocks } = wecodeartGutenberg;
@@ -24,9 +25,9 @@ const addAttributes = (props) => {
 	const hasClassName = hasBlockSupport(name, 'className', true);
 	if (!isRestrictedBlock && hasClassName) {
 		props.attributes = assign(props.attributes, {
-			hasCustomCSS: {
-				type: 'boolean',
-				default: true // Defaults to true
+			customCSSId: {
+				type: 'string',
+				default: null
 			},
 			customCSS: {
 				type: 'string',
@@ -48,10 +49,12 @@ const addAttributes = (props) => {
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const { name, isSelected } = props;
+		const { name, isSelected, clientId, setAttributes } = props;
 		const isRestrictedBlock = restrictedBlocks.includes(name);
 		const hasClassName = hasBlockSupport(name, 'className', true);
 		if (!isRestrictedBlock && hasClassName && isSelected) {
+			useEffect(() => setAttributes({ customCSSId: clientId }), []);
+
 			return (
 				<>
 					<BlockEdit {...props} />
@@ -69,9 +72,5 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 /**
  * Apply Filters
  */
-function applyFilters() {
-	addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
-	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl);
-}
-
-applyFilters();
+addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
+addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl, 90);

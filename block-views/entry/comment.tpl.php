@@ -38,7 +38,7 @@ SVG::add_icon( 'pencil', [
     ?>
     <div class="row">
         <div class="col-auto">
-            <figure class="comment__gravatar gravatar rounded shadow shadow-soft border border-soft p-1 mb-0"><?php
+            <figure class="comment__gravatar gravatar rounded shadow border border-light p-1 mb-0"><?php
             
                 echo get_avatar(
                     $comment,
@@ -87,7 +87,7 @@ SVG::add_icon( 'pencil', [
                 
             ?></p>
             <?php endif; ?>
-            <div class="comment__content p-3 border border-soft shadow-soft rounded" itemprop="text"><?php
+            <div class="comment__content p-3 border border-light rounded" itemprop="text"><?php
 
                 echo wp_kses_post( $comment->comment_content );
 

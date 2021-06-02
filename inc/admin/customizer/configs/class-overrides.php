@@ -31,23 +31,7 @@ class Overrides extends Config {
 	 *
 	 * @return 	array 
 	 */
-	public function register( $configurations, $wp_customize ) {  
-		$_configs = [
-			[
-				'name'			=> 'page_for_404',
-				'type' 			=> 'control',
-				'control'  		=> 'dropdown-pages',
-				'section'		=> 'static_front_page',
-				'capability'	=> 'edit_theme_options',
-				'title' 		=> esc_html__( 'Page for 404', 'wecodeart' ),
-				'description' 	=> esc_html__( 'Select your custom page that will show on 404 error.', 'wecodeart' ),
-				'priority' 		=> 0,
-				'transport'		=> 'postMessage',
-				'sanitize_callback' 	=> 'absint',
-				'sanitize_js_callback' 	=> 'absint'
-			]
-		];
-
+	public function register( $configurations, $wp_customize ) {
 		$_configs = [];
 
 		return array_merge( $configurations, $_configs );

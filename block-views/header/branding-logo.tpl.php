@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit();
 	<?php
 	// Logo
 	if ( has_custom_logo() ) {
-		echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'full' );;
+		echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'full' );
 	}
 
 	// Title

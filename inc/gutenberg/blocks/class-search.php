@@ -60,8 +60,8 @@ class Search extends Dynamic {
 		static $instance_id = 0;
 
 		$attributes = wp_parse_args( $attributes, [
-			'label'      => __( 'Search' ),
-			'buttonText' => __( 'Search' ),
+			'label'      => __( 'Search', 'wecodeart' ),
+			'buttonText' => __( 'Search', 'wecodeart' ),
 		] );
 
 		$input_id 	= 'wp-block-search__input-' . ++$instance_id;

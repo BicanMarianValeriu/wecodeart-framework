@@ -37,18 +37,18 @@ html {
     }
 }
 
-@import "./../abstracts/root";
-@import "./blocks/button";
-@import "./blocks/columns";
-@import "./blocks/cover";
-@import "./blocks/gallery";
-@import "./blocks/group"; // Remove
-@import "./blocks/image";
-@import "./blocks/latest-comments";
-@import "./blocks/latest-posts";
-@import "./blocks/media-text";
-@import "./blocks/misc";
-@import "./blocks/navigation-menu"; // Remove
-@import "./blocks/quote";
-@import "./blocks/social-links";
-@import "./blocks/table";
+@import "./../../abstracts/root";
+@import "./button";
+@import "./columns";
+@import "./cover";
+@import "./gallery";
+@import "./group"; // Remove
+@import "./image";
+@import "./latest-comments";
+@import "./latest-posts";
+@import "./media-text";
+@import "./misc";
+@import "./navigation-menu"; // Remove
+@import "./quote";
+@import "./social-links";
+@import "./table";

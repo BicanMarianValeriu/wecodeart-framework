@@ -143,9 +143,11 @@ class Starter implements Integration {
 				self::ABOUT_SLUG => wp_parse_args( [
 					'post_name'  => self::ABOUT_SLUG,
 				], require __DIR__ . '/content/about.php' ),
-				self::BLOG_SLUG  => wp_parse_args( [
-					'post_name'  => self::BLOG_SLUG,
-				], require __DIR__ . '/content/blog.php' ),
+				self::BLOG_SLUG  => [
+					'post_name'		=> self::BLOG_SLUG,
+					'post_type'		=> 'page',
+					'post_title'	=> _x( 'Blog', 'Theme starter content', 'wecodeart' ),
+				],
 			],
 		];
 

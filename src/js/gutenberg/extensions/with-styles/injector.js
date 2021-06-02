@@ -26,7 +26,7 @@ const addStyle = style => {
 	return element.textContent = style;
 };
 
-const getCustomCssFromBlocks = (blocks, reusableBlocks) => {
+const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
 	if (!blocks) {
 		return '';
 	}
@@ -53,10 +53,9 @@ const getCustomCssFromBlocks = (blocks, reusableBlocks) => {
 
 	// Transform the deply nested array in a simple one and then get the `customCss` value where it is the case
 	const extractCustomCss = flattenDeep(allBlocks).map((block) => {
-		if (block.attributes && block.attributes.hasCustomCSS) {
-			if (block.attributes.customCSS && (null !== block.attributes.customCSS)) {
-				return block.attributes.customCSS + '\n';
-			}
+		if (block?.attributes && null !== block.attributes?.customCSS) {
+			const blockId = block.attributes.customCSSId;
+			return block.attributes.customCSS.replace('selector', `*[data-block="${blockId}"]`) + '\n';
 		}
 		return '';
 	});
@@ -76,6 +75,6 @@ const subscribed = subscribe(() => {
 	const { getBlocks } = select('core/block-editor') || select('core/editor');
 	const blocks = getBlocks();
 	const reusableBlocks = select('core').getEntityRecords('postType', 'wp_block');
-	const blocksStyle = getCustomCssFromBlocks(blocks, reusableBlocks);
+	const blocksStyle = getCustomCSSFromBlocks(blocks, reusableBlocks);
 	addStyle(blocksStyle);
 });

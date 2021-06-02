@@ -39,27 +39,7 @@ class Header {
 		add_action( 'wp_head',	[ $this, 'meta_charset' 	], 0 );
 		add_action( 'wp_head',	[ $this, 'meta_viewport' 	], 0 );
 		add_action( 'wp_head',	[ $this, 'meta_pingback' 	], 0 );
-
-		if( wecodeart_config( 'clean-head' ) === true ) {
-			remove_action( 'wp_head', 'wp_generator' );
-			remove_action( 'wp_head', 'rsd_link' );
-			remove_action( 'wp_head', 'feed_links', 2 );
-			remove_action( 'wp_head', 'feed_links_extra', 3 );
-			remove_action( 'wp_head', 'wlwmanifest_link' );
-			remove_action( 'wp_head', 'index_rel_link' );
-			remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 );
-			remove_action( 'wp_head', 'start_post_rel_link', 10, 0 );
-			remove_action( 'wp_head', 'adjacent_posts_rel_link', 10, 0 );
-			remove_action( 'wp_head', 'rest_output_link_wp_head' );
-			remove_action( 'wp_head', 'wp_shortlink_wp_head' );
-			remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
-			remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-			remove_action( 'wp_print_styles', 'print_emoji_styles' );
-			remove_action( 'template_redirect', 'rest_output_link_header', 11 );
-			return;
-		}
-
-		add_action( 'wp_head',	[ $this, 'meta_profile' ], 0 );
+		add_action( 'wp_head',	[ $this, 'meta_profile' 	], 0 );
 	}
 	
 	/**
@@ -161,29 +141,6 @@ class Header {
 	}
 
 	/**
-	 * Variable that holds the Header Modules and Options
-	 *
-	 * @since	1.5
-	 * @version	5.0.0
-	 *
-	 * @return 	array
-	 */
-	public static function navbar_modules() {
-		$defaults = [
-			'branding' => [
-				'label'    => esc_html__( 'Site Branding', 'wecodeart' ),
-				'callback' => [ __CLASS__, 'display_branding' ]
-			],
-			'collapse' => [
-				'label'    => esc_html__( 'Collapse', 'wecodeart' ),
-				'callback' => [ __CLASS__, 'display_collapse' ]
-			],
-		];
-
-		return apply_filters( 'wecodeart/filter/header/bar/modules', $defaults ); 
-	}
-
-	/**
 	 * Returns the inner markp with wrapper based on user options
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
@@ -217,10 +174,10 @@ class Header {
 					'class' => get_theme_mod( 'header-bar-container' )
 				]
 			],
-		], 'WeCodeArt\Markup::sortable', [
-			self::navbar_modules(),
-			get_theme_mod( 'header-bar-modules' )
-		] );  
+		], function() {
+			self::display_branding();
+			self::display_collapse();
+		} );  
 	}
 
 	/**

@@ -46,7 +46,6 @@ class Conditional implements ArrayAccess {
             'is_admin'          => Conditional\Admin::class,
 			'is_theme_admin'    => Conditional\Settings::class,
 			'is_customizer'     => Conditional\Customizer::class,
-            'is_logged'         => Conditional\Logged_In::class,
             'is_dev_mode'       => Conditional\Debug::class,
 			'is_front_page'     => Conditional\Front_Page::class,
 			'is_full_layout'    => Conditional\Full_Layout::class,

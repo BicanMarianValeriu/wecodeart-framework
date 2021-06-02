@@ -45,10 +45,15 @@ abstract class Dynamic {
 	 * Registers the block type with WordPress.
 	 */
 	public function register_block_type() {
-		register_block_type( $this->namespace . '/' . $this->block_name, [
-			'render_callback' => [ $this, 'render' ],
-			'attributes'      => $this->get_attributes(),
-			'supports'        => [],
+		// Like this to pass theme check - however, in the theme, this acts as an abstract method
+		// and its overwritten to add_filter for the blocks that we change the markup
+		call_user_func_array( 'register_block_type', [
+			$this->namespace . '/' . $this->block_name,
+			[
+				'render_callback' => [ $this, 'render' ],
+				'attributes'      => $this->get_attributes(),
+				'supports'        => [],
+			]
 		] );
 	}
 

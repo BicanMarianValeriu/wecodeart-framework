@@ -68,7 +68,7 @@ abstract class Property {
 	public static function get_property_value( $property, $value ) {
 		$properties = apply_filters( 'wecodeart/filter/styles/process/properties', [
 			'--wca-font-sans-serif'	=> Property\Font::class,
-			'--wca-font-headings'	=> Property\Font::class,
+			'--wca-font-secondary'	=> Property\Font::class,
 			'font-family' 			=> Property\Font::class,
 			'background' 			=> Property\Background::class,
 			'background-image'		=> Property\Background::class,

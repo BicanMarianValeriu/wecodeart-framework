@@ -119,7 +119,7 @@ class Handler {
 		$status 	= $file ? esc_html__( 'updated', 'wecodeart' ) : esc_html__( 'removed', 'wecodeart' );
 
 		return rest_ensure_response( [
-			'message' 	=> sprintf( __( 'Blocks CSS %s.', 'wecodeart' ), $status ),
+			'message' 	=> sprintf( __( 'Blocks styles %s.', 'wecodeart' ), $status ),
 			'postId' 	=> $post_id,
 			'status'	=> $status
 		] );
@@ -151,7 +151,7 @@ class Handler {
 		}
 
 		return rest_ensure_response( [
-			'message' 	=> sprintf( __( 'Reusable Blocks CSS %s.', 'wecodeart' ), $status ),
+			'message' 	=> sprintf( __( 'Reusable Blocks styles %s.', 'wecodeart' ), $status ),
 			'blockId' 	=> $block_id,
 			'status'	=> $status
 		] );

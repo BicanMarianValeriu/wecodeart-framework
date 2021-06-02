@@ -1,30 +1,13 @@
-$block-padding: 14px;
 $grid-desktop: repeat(12, 1fr); // Same as 12 instances of 1fr.
 $grid-tablet: repeat(8, 1fr);
 $grid-mobile: repeat(4, 1fr);
-
 $grid-gutter: 1px;
-
-// Standard Gutenberg Breakpoints
-$break-huge: 1440px;
-$break-wide: 1280px;
-$break-xlarge: 1080px;
-$break-large: 960px;	// admin sidebar auto folds
-$break-medium: 782px;	// adminbar goes big
-$break-small: 600px;
-$break-mobile: 480px;
-$break-zoomed-in: 280px;
 
 /**
  * Visual grid overlay
  */
 .wca-section {
 	position: relative;
-
-	&.alignfull {
-		max-width: initial!important;
-		padding: 0 12px;
-	}
 
 	&--tablet {
 		.wca-section {
@@ -74,40 +57,5 @@ $break-zoomed-in: 280px;
 		color: rgba(0,0,0,0.1);
 		// Lower the z-index so it's under the block borders.
 		z-index: 0;
-	}
-
-	.wp-block-wca-section {
-		margin-top: 0;
-		margin-bottom: 0;
-
-		& > .block-editor-inner-blocks > .block-editor-block-list__layout {
-			// Prevent long unbroken words from overflowing.
-			word-break: break-word; // For back-compat.
-			overflow-wrap: break-word; // New standard.
-			// Reset inherited negative margins.
-			// These margins are in the block editor to compensate for the 14px block padding on all blocks.
-			// They don't play well with CSS Grid, so we reset them, and re-apply them later.
-			margin-left: 0;
-			margin-right: 0;
-		
-			// Every block, including nested blocks, are born with an intrinsic minimum margin.
-			// This resets that for the containers, which aren't meant to have that intrinsically.
-			> .wp-block > .block-editor-block-list__block-edit > [data-block] {
-				margin-top: 0;
-				margin-bottom: 0;
-			}
-		
-			.wp-block {
-				max-width: 100%;
-			}
-		}
-	}
-
-	.wp-block-wca-column {
-		margin: 0;
-	}
-
-	.block-list-appender {
-		max-width: 100%!important;
 	}
 }

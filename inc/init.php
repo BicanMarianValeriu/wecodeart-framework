@@ -295,6 +295,49 @@ function wecodeart_option( $key, $default = false, $setting = null, $use_cache =
     return Admin::get_option( $key, $default, $setting, $use_cache );
 }
 
+
+/**
+ * Gets asset instance.
+ * 
+ * @since	5.0.0
+ * @version	5.0.0
+ *
+ * @param  string $file Relative file path to the asset file.
+ *
+ * @return \WeCodeArt\Core\Scripts\Asset
+ */
+function wecodeart_asset( $file ) {
+    $asset = new Core\Scripts\Asset( wecodeart_config() );
+    return $asset->set_file( $file );
+}
+
+/**
+ * Gets asset file from public directory.
+ *
+ * @since	5.0.0
+ * @version	5.0.0
+ *
+ * @param  string $type 	Type of the asset file.
+ * @param  string $name 	Name of the asset file.
+ *
+ * @return string
+ */
+function wecodeart_get_asset( string $type, string $name ) {
+	if( ! in_array( $type, [ 'css', 'js' ] ) ) {
+		return _doing_it_wrong( 
+			__FUNCTION__, 
+			esc_html__( 'The file must be of type CSS/JS.', 'wecodeart' ), 
+			wecodeart( 'version' ) 
+		);
+	}
+
+	$file_path = wecodeart_if( 'is_dev_mode' ) ? 'unminified' : 'minified';
+	$file_path .= '/' . strtolower( $type ) . '/';
+	$file_path .= wecodeart_if( 'is_dev_mode' ) ? $name . '.' . $type :  $name . '.min.' . $type;
+
+    return wecodeart_asset( $file_path )->get_uri();
+}
+
 /**
  * Check if condition is met.
  *

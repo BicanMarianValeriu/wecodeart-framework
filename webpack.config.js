@@ -41,7 +41,7 @@ module.exports = {
     }),
     plugins: [
         process.env.WP_BUNDLE_ANALYZER && new BundleAnalyzerPlugin(),
-        new MiniCssExtractPlugin({ esModule: false, filename: devMode ? 'css/[name].css' : 'css/[name].min.css' }),
+        new MiniCssExtractPlugin({ filename: devMode ? 'css/[name].css' : 'css/[name].min.css' }),
         new FixStyle(),
         !process.env.WP_NO_EXTERNALS && new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
         devMode ? new BrowserSyncPlugin({

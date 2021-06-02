@@ -55,8 +55,6 @@ class Blocks extends Processor {
 		// Set unique class
 		$this->set_element();
 
-		if( empty( $this->element ) ) return;
-
 		// Process CSS
 		$this->process_attributes();
 		if( method_exists( $this, 'process_extra' ) ) {
@@ -74,17 +72,8 @@ class Blocks extends Processor {
 	 * @return 	mixed
 	 */
 	private function set_element() {
-		$block_class 	= explode( ' ', get_prop( $this->attrs, 'className' ) );
-		$block_class 	= array_filter( $block_class, function( $key ) {
-			return strpos( $key, 'css-' ) === 0;
-		} );
-		
-		// If not unique classname, try again
-		if( count( $block_class ) === 0 ) {
-			return $this;
-		};
-
-		$this->element = '.' . sanitize_html_class( end( $block_class ) );
+		$block_class 	= substr( get_prop( $this->attrs, 'customCSSId' ), 0, 8 );
+		$this->element = '.css-' . sanitize_html_class( $block_class );
 	}
 
 	/**
@@ -209,6 +198,7 @@ class Blocks extends Processor {
 	private function parse_custom() {
 		if ( $css_custom = get_prop( $this->attrs, 'customCSS', false ) ) {
 			$custom_style 	= wp_strip_all_tags( $css_custom );
+			$custom_style 	= str_replace( 'selector', $this->element, $custom_style );
 			$custom_style 	= wecodeart( 'integrations' )->get( 'styles' )::break_queries( $custom_style );
 			$this->styles 	= array_replace_recursive( $this->styles, $custom_style );
 		}

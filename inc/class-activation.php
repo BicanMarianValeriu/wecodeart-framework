@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Config;
 use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Notifications;
+use WeCodeArt\Admin\Notifications\Notification;
 
 /**
  * Activation - runs first before any other class to make sure user meets the requirements
@@ -164,16 +165,17 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	3.9.5
+	 * @version	5.0.0
 	 */
 	public function admin_notice() {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
 			if( $val['failed'] === true ) {
-				Notifications::add( [
-					'type' 		=> 'error',
-					'message' 	=> wpautop( $val['i18n'] )
-				] );
+				Notifications::get_instance()->add_notification(
+					new Notification( wpautop( $val['i18n'] ), [
+						'type' => Notification::ERROR
+					] )
+				);
 			}
 		}	
 	}

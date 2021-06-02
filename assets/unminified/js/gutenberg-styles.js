@@ -102,39 +102,31 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * WordPress dependencies.
  */
-var _wp = wp,
-    __ = _wp.i18n.__,
-    _wp$element = _wp.element,
-    useEffect = _wp$element.useEffect,
-    useRef = _wp$element.useRef;
+const {
+  i18n: {
+    __
+  },
+  element: {
+    useEffect,
+    useRef
+  }
+} = wp;
 
-var CSSEditor = function CSSEditor(_ref) {
-  var attributes = _ref.attributes,
-      setAttributes = _ref.setAttributes,
-      clientId = _ref.clientId;
-  var customCSS = attributes.customCSS,
-      className = attributes.className;
-  var editorRef = useRef(null);
-  var customCSSRef = useRef(null);
-  var classArRef = useRef(null);
-  useEffect(function () {
-    setAttributes({
-      className: getClassName(),
-      hasCustomCSS: true
-    });
-  }, [attributes]);
-  useEffect(function () {
-    setAttributes({
-      className: getClassName(),
-      hasCustomCSS: true
-    });
+const CSSEditor = ({
+  attributes,
+  setAttributes
+}) => {
+  const {
+    customCSS
+  } = attributes;
+  const editorRef = useRef(null);
+  const customCSSRef = useRef(null);
+  const defaultValue = 'selector {\n}\n';
+  useEffect(() => {
+    customCSSRef.current = defaultValue;
 
     if (customCSS) {
-      var regex = new RegExp('.' + classArRef.current, 'g');
-      var generatedCSS = customCSS.replace(regex, 'selector');
-      customCSSRef.current = generatedCSS;
-    } else {
-      customCSSRef.current = 'selector {\n}\n';
+      customCSSRef.current = customCSS;
     }
 
     editorRef.current = wp.CodeMirror(document.getElementById('wecodeart-css-editor'), {
@@ -154,12 +146,10 @@ var CSSEditor = function CSSEditor(_ref) {
         'Cmd-F': 'findPersistent'
       }
     });
-    editorRef.current.on('change', function () {
-      var regex = new RegExp('selector', 'g');
-      var generatedCSS = editorRef.current.getValue().replace(regex, ".".concat(classArRef.current));
-      customCSSRef.current = generatedCSS;
+    editorRef.current.on('change', () => {
+      customCSSRef.current = editorRef.current.getValue();
 
-      if ('selector {\n}\n'.replace(/\s+/g, '') === customCSSRef.current.replace(/\s+/g, '')) {
+      if (defaultValue.replace(/\s+/g, '') === customCSSRef.current.replace(/\s+/g, '')) {
         return setAttributes({
           customCSS: null
         });
@@ -170,36 +160,6 @@ var CSSEditor = function CSSEditor(_ref) {
       });
     });
   }, []);
-
-  var getClassName = function getClassName() {
-    var classes;
-    var uniqueId = clientId.substr(0, 8);
-
-    if (null !== customCSSRef.current && 'selector {\n}\n'.replace(/\s+/g, '') === customCSSRef.current.replace(/\s+/g, '')) {
-      return className;
-    }
-
-    if (className) {
-      classes = className;
-
-      if (!classes.includes('css-')) {
-        classes = classes.split(' ');
-        classes.push("css-".concat(uniqueId));
-        classes = classes.join(' ');
-      }
-
-      classArRef.current = classes.split(' ');
-      classArRef.current = classArRef.current.find(function (i) {
-        return i.includes('css-');
-      });
-    } else {
-      classes = "css-".concat(uniqueId);
-      classArRef.current = classes;
-    }
-
-    return classes;
-  };
-
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     class: "wecodeart-advanced-css"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("hr", null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", {
@@ -209,7 +169,7 @@ var CSSEditor = function CSSEditor(_ref) {
     id: "wecodeart-css-editor"
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     class: "wecodeart-advanced-css__content"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, __('Use', 'wecodeart'), " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("code", null, "selector"), " ", __('to target block wrapper.', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, __('If you generate a new one just replace old selector with "selector" keyword for a new one.', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, __('Example:', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("pre", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, __('Use', 'wecodeart'), " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("code", null, "selector"), " ", __('to target block wrapper.', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, __('Example', 'wecodeart'), ":"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("pre", {
     className: "wecodeart-advanced-css__help"
   }, 'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, __('You can also use other CSS syntax here, such as media queries.', 'wecodeart')))));
 };
@@ -238,15 +198,29 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * WordPress dependencies.
  */
-var _lodash = lodash,
-    assign = _lodash.assign;
-var _wp = wp,
-    addFilter = _wp.hooks.addFilter,
-    hasBlockSupport = _wp.blocks.hasBlockSupport,
-    createHigherOrderComponent = _wp.compose.createHigherOrderComponent,
-    InspectorAdvancedControls = _wp.blockEditor.InspectorAdvancedControls;
-var _wecodeartGutenberg = wecodeartGutenberg,
-    restrictedBlocks = _wecodeartGutenberg.restrictedBlocks;
+const {
+  assign
+} = lodash;
+const {
+  hooks: {
+    addFilter
+  },
+  blocks: {
+    hasBlockSupport
+  },
+  compose: {
+    createHigherOrderComponent
+  },
+  blockEditor: {
+    InspectorAdvancedControls
+  },
+  element: {
+    useEffect
+  }
+} = wp;
+const {
+  restrictedBlocks
+} = wecodeartGutenberg;
 /**
  * Internal dependencies.
  */
@@ -255,17 +229,18 @@ var _wecodeartGutenberg = wecodeartGutenberg,
 
 
 
-var addAttributes = function addAttributes(props) {
-  var name = props.name;
-  var isRestrictedBlock = restrictedBlocks.includes(name);
-  var hasClassName = hasBlockSupport(name, 'className', true);
+const addAttributes = props => {
+  const {
+    name
+  } = props;
+  const isRestrictedBlock = restrictedBlocks.includes(name);
+  const hasClassName = hasBlockSupport(name, 'className', true);
 
   if (!isRestrictedBlock && hasClassName) {
     props.attributes = assign(props.attributes, {
-      hasCustomCSS: {
-        type: 'boolean',
-        default: true // Defaults to true
-
+      customCSSId: {
+        type: 'string',
+        default: null
       },
       customCSS: {
         type: 'string',
@@ -286,14 +261,21 @@ var addAttributes = function addAttributes(props) {
  */
 
 
-var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
-  return function (props) {
-    var name = props.name,
-        isSelected = props.isSelected;
-    var isRestrictedBlock = restrictedBlocks.includes(name);
-    var hasClassName = hasBlockSupport(name, 'className', true);
+const withInspectorControl = createHigherOrderComponent(BlockEdit => {
+  return props => {
+    const {
+      name,
+      isSelected,
+      clientId,
+      setAttributes
+    } = props;
+    const isRestrictedBlock = restrictedBlocks.includes(name);
+    const hasClassName = hasBlockSupport(name, 'className', true);
 
     if (!isRestrictedBlock && hasClassName && isSelected) {
+      useEffect(() => setAttributes({
+        customCSSId: clientId
+      }), []);
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Editor__WEBPACK_IMPORTED_MODULE_1__["default"], props)));
     }
 
@@ -304,12 +286,8 @@ var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
  * Apply Filters
  */
 
-function applyFilters() {
-  addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
-  addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl);
-}
-
-applyFilters();
+addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
+addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl, 90);
 
 /***/ }),
 
@@ -325,73 +303,71 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * WordPress dependencies
  */
-var _wp = wp,
-    apiFetch = _wp.apiFetch,
-    _wp$data = _wp.data,
-    select = _wp$data.select,
-    subscribe = _wp$data.subscribe,
-    dispatch = _wp$data.dispatch;
+const {
+  apiFetch,
+  data: {
+    select,
+    subscribe,
+    dispatch
+  }
+} = wp;
 
-var handleNotice = function handleNotice(_ref) {
-  var message = _ref.message;
-
-  var _dispatch = dispatch('core/notices'),
-      createNotice = _dispatch.createNotice;
-
+const handleNotice = ({
+  message
+}) => {
+  const {
+    createNotice
+  } = dispatch('core/notices');
   return createNotice('success', message, {
     isDismissible: true,
     type: 'snackbar'
   });
 };
 
-var checked = true;
-var reusableBlocks = {};
-/* harmony default export */ __webpack_exports__["default"] = (subscribe(function () {
-  var _select$getSettings = select('core/block-editor').getSettings(),
-      __experimentalReusableBlocks = _select$getSettings.__experimentalReusableBlocks;
-
-  var _select = select('core/editor'),
-      getCurrentPostId = _select.getCurrentPostId,
-      isSavingPost = _select.isSavingPost,
-      isPublishingPost = _select.isPublishingPost,
-      isAutosavingPost = _select.isAutosavingPost,
-      isCurrentPostPublished = _select.isCurrentPostPublished,
-      __experimentalIsSavingReusableBlock = _select.__experimentalIsSavingReusableBlock;
-
-  var _select2 = select('core'),
-      isSavingEntityRecord = _select2.isSavingEntityRecord;
-
-  var isSavingReusableBlock;
+let checked = true;
+let reusableBlocks = {};
+/* harmony default export */ __webpack_exports__["default"] = (subscribe(() => {
+  const {
+    __experimentalReusableBlocks
+  } = select('core/block-editor').getSettings();
+  const {
+    getCurrentPostId,
+    isSavingPost,
+    isPublishingPost,
+    isAutosavingPost,
+    isCurrentPostPublished,
+    __experimentalIsSavingReusableBlock
+  } = select('core/editor');
+  const {
+    isSavingEntityRecord
+  } = select('core');
+  let isSavingReusableBlock;
 
   if (__experimentalIsSavingReusableBlock) {
-    isSavingReusableBlock = function isSavingReusableBlock(id) {
-      return __experimentalIsSavingReusableBlock(id);
-    };
+    isSavingReusableBlock = id => __experimentalIsSavingReusableBlock(id);
   } else {
-    isSavingReusableBlock = function isSavingReusableBlock(id) {
-      return isSavingEntityRecord('postType', 'wp_block', id);
-    };
+    isSavingReusableBlock = id => isSavingEntityRecord('postType', 'wp_block', id);
   }
 
-  var isAutoSaving = isAutosavingPost();
-  var isPublishing = isPublishingPost();
-  var isSaving = isSavingPost();
-  var getReusableBlocks = __experimentalReusableBlocks || [];
-  var postPublished = isCurrentPostPublished();
+  const isAutoSaving = isAutosavingPost();
+  const isPublishing = isPublishingPost();
+  const isSaving = isSavingPost();
+  const getReusableBlocks = __experimentalReusableBlocks || [];
+  const postPublished = isCurrentPostPublished();
   /**
    * Handle Reusable Blocks
    */
 
-  getReusableBlocks.map(function (_ref2) {
-    var id = _ref2.id,
-        isTemporary = _ref2.isTemporary;
-
+  getReusableBlocks.map(({
+    id,
+    isTemporary
+  }) => {
     if (id) {
-      var isBlockSaving = isSavingReusableBlock(id);
+      const isBlockSaving = isSavingReusableBlock(id);
 
       if (isBlockSaving && !isTemporary) {
         reusableBlocks[id] = {
-          id: id,
+          id,
           isSaving: true
         };
       }
@@ -400,7 +376,7 @@ var reusableBlocks = {};
         if (id === reusableBlocks[id].id && !isBlockSaving && reusableBlocks[id].isSaving) {
           reusableBlocks[id].isSaving = false;
           apiFetch({
-            path: "wecodeart/v1/save_block_meta/".concat(id),
+            path: `wecodeart/v1/save_block_meta/${id}`,
             method: 'POST'
           }).then(handleNotice);
         }
@@ -416,7 +392,7 @@ var reusableBlocks = {};
   } else {
     if (!checked) {
       apiFetch({
-        path: "wecodeart/v1/save_post_meta/".concat(getCurrentPostId()),
+        path: `wecodeart/v1/save_post_meta/${getCurrentPostId()}`,
         method: 'POST'
       }).then(handleNotice);
       checked = true;
@@ -436,17 +412,24 @@ var reusableBlocks = {};
 /**
  * WordPress dependencies.
  */
-var _wp = wp,
-    __ = _wp.i18n.__,
-    parse = _wp.blocks.parse,
-    _wp$data = _wp.data,
-    select = _wp$data.select,
-    subscribe = _wp$data.subscribe;
-var _lodash = lodash,
-    flattenDeep = _lodash.flattenDeep;
+const {
+  i18n: {
+    __
+  },
+  blocks: {
+    parse
+  },
+  data: {
+    select,
+    subscribe
+  }
+} = wp;
+const {
+  flattenDeep
+} = lodash;
 
-var addStyle = function addStyle(style) {
-  var element = document.getElementById('wecodeart-blocks-dynamic-styles');
+const addStyle = style => {
+  let element = document.getElementById('wecodeart-blocks-dynamic-styles');
 
   if (null === element) {
     element = document.createElement('style');
@@ -462,56 +445,47 @@ var addStyle = function addStyle(style) {
   return element.textContent = style;
 };
 
-var getCustomCssFromBlocks = function getCustomCssFromBlocks(blocks, reusableBlocks) {
+const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
   if (!blocks) {
     return '';
   } // Return the children of the block. The result is an array deeply nested that match the structure of the block in the editor.
 
 
-  var getChildrenFromBlock = function getChildrenFromBlock(block) {
-    var childrends = [];
+  const getChildrenFromBlock = block => {
+    const childrends = [];
 
     if ('core/block' === block.name && null !== reusableBlocks) {
-      var reBlocks = reusableBlocks.find(function (i) {
-        return block.attributes.ref === i.id;
-      });
+      const reBlocks = reusableBlocks.find(i => block.attributes.ref === i.id);
 
       if (reBlocks && reBlocks.content) {
-        childrends.push(parse(reBlocks.content.raw || reBlocks.content).map(function (child) {
-          return [child, getChildrenFromBlock(child)];
-        }));
+        childrends.push(parse(reBlocks.content.raw || reBlocks.content).map(child => [child, getChildrenFromBlock(child)]));
       }
 
       ;
     }
 
     if (undefined !== block.innerBlocks && 0 < block.innerBlocks.length) {
-      childrends.push(block.innerBlocks.map(function (child) {
-        return [child, getChildrenFromBlock(child)];
-      }));
+      childrends.push(block.innerBlocks.map(child => [child, getChildrenFromBlock(child)]));
     }
 
     return childrends;
   }; // Get all the blocks and their children
 
 
-  var allBlocks = blocks.map(function (block) {
-    return [block, getChildrenFromBlock(block)];
-  }); // Transform the deply nested array in a simple one and then get the `customCss` value where it is the case
+  const allBlocks = blocks.map(block => [block, getChildrenFromBlock(block)]); // Transform the deply nested array in a simple one and then get the `customCss` value where it is the case
 
-  var extractCustomCss = flattenDeep(allBlocks).map(function (block) {
-    if (block.attributes && block.attributes.hasCustomCSS) {
-      if (block.attributes.customCSS && null !== block.attributes.customCSS) {
-        return block.attributes.customCSS + '\n';
-      }
+  const extractCustomCss = flattenDeep(allBlocks).map(block => {
+    var _block$attributes;
+
+    if (block !== null && block !== void 0 && block.attributes && null !== ((_block$attributes = block.attributes) === null || _block$attributes === void 0 ? void 0 : _block$attributes.customCSS)) {
+      const blockId = block.attributes.customCSSId;
+      return block.attributes.customCSS.replace('selector', `*[data-block="${blockId}"]`) + '\n';
     }
 
     return '';
   }); // Build the global style
 
-  var style = extractCustomCss.reduce(function (acc, localStyle) {
-    return acc + localStyle;
-  }, ''); // For debugging
+  const style = extractCustomCss.reduce((acc, localStyle) => acc + localStyle, ''); // For debugging
   // console.log( 'Get all the block', allBlocks );
   // console.log( 'Extract customCss', extractCustomCss );
   // console.log( 'Final Result\n', style );
@@ -519,13 +493,13 @@ var getCustomCssFromBlocks = function getCustomCssFromBlocks(blocks, reusableBlo
   return style;
 };
 
-var subscribed = subscribe(function () {
-  var _ref = select('core/block-editor') || select('core/editor'),
-      getBlocks = _ref.getBlocks;
-
-  var blocks = getBlocks();
-  var reusableBlocks = select('core').getEntityRecords('postType', 'wp_block');
-  var blocksStyle = getCustomCssFromBlocks(blocks, reusableBlocks);
+const subscribed = subscribe(() => {
+  const {
+    getBlocks
+  } = select('core/block-editor') || select('core/editor');
+  const blocks = getBlocks();
+  const reusableBlocks = select('core').getEntityRecords('postType', 'wp_block');
+  const blocksStyle = getCustomCSSFromBlocks(blocks, reusableBlocks);
   addStyle(blocksStyle);
 });
 

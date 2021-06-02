@@ -97,7 +97,6 @@ return [
         'header-bar-toggle'         => 'collapse',
         'header-offcanvas-dir'      => 'start',
         'header-bar-container'      => 'container',
-        'header-bar-modules'        => [ 'branding', 'collapse' ],
         'header-design-bg'          => '',
         'header-design-color'       => '',
         'header-design-links'       => '',
@@ -118,9 +117,9 @@ return [
             'font-family'   => 'Abel',
             'font-weight'   => []
         ],
-        'general-typography-headings'   => [
+        'general-typography-secondary'  => [
             'font-family'   => 'Open Sans',
-            'font-weight'  => [ '700' ]
+            'font-weight'   => [ '700' ]
         ],
         // Colors - they have default set
     ],
@@ -310,8 +309,6 @@ return [
     */
     'support' => [
         'customize-selective-refresh-widgets'   => true,
-        'automatic-feed-links'  => true,
-        'title-tag'             => true,
         'editor-style'          => true,
         'responsive-embeds'     => true,
         'post-thumbnails'       => [ 'post', 'page' ],
@@ -320,5 +317,4 @@ return [
         'html5'                 => [ 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ],
         'meta-modules'          => [ 'author', 'date', 'categories', 'tags', 'comments', 'edit' ],
     ],
-    'clean-head' => false,
 ];

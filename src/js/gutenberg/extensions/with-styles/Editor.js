@@ -9,33 +9,18 @@ const {
 const CSSEditor = ({
 	attributes,
 	setAttributes,
-	clientId
 }) => {
-	const { customCSS, className } = attributes;
+	const { customCSS } = attributes;
 
 	const editorRef = useRef(null);
 	const customCSSRef = useRef(null);
-	const classArRef = useRef(null);
+	const defaultValue = 'selector {\n}\n';
 
 	useEffect(() => {
-		setAttributes({
-			className: getClassName(),
-			hasCustomCSS: true,
-		});
-	}, [attributes]);
-
-	useEffect(() => {
-		setAttributes({
-			className: getClassName(),
-			hasCustomCSS: true,
-		});
+		customCSSRef.current = defaultValue;
 
 		if (customCSS) {
-			const regex = new RegExp('.' + classArRef.current, 'g');
-			const generatedCSS = (customCSS).replace(regex, 'selector');
-			customCSSRef.current = generatedCSS;
-		} else {
-			customCSSRef.current = 'selector {\n}\n';
+			customCSSRef.current = customCSS;
 		}
 
 		editorRef.current = wp.CodeMirror(document.getElementById('wecodeart-css-editor'), {
@@ -57,48 +42,15 @@ const CSSEditor = ({
 		});
 
 		editorRef.current.on('change', () => {
-			const regex = new RegExp('selector', 'g');
-			const generatedCSS = editorRef.current.getValue().replace(regex, `.${classArRef.current}`);
-			customCSSRef.current = generatedCSS;
+			customCSSRef.current = editorRef.current.getValue();
 
-			if (('selector {\n}\n').replace(/\s+/g, '') === customCSSRef.current.replace(/\s+/g, '')) {
+			if ((defaultValue).replace(/\s+/g, '') === customCSSRef.current.replace(/\s+/g, '')) {
 				return setAttributes({ customCSS: null });
 			}
 
 			setAttributes({ customCSS: customCSSRef.current });
 		});
 	}, []);
-
-	const getClassName = () => {
-		let classes;
-
-		const uniqueId = clientId.substr(0, 8);
-
-		if (
-			null !== customCSSRef.current &&
-			('selector {\n}\n').replace(/\s+/g, '') === customCSSRef.current.replace(/\s+/g, '')
-		) {
-			return className;
-		}
-
-		if (className) {
-			classes = className;
-
-			if (!classes.includes('css-')) {
-				classes = classes.split(' ');
-				classes.push(`css-${uniqueId}`);
-				classes = classes.join(' ');
-			}
-
-			classArRef.current = classes.split(' ');
-			classArRef.current = classArRef.current.find(i => i.includes('css-'));
-		} else {
-			classes = `css-${uniqueId}`;
-			classArRef.current = classes;
-		}
-
-		return classes;
-	};
 
 	return (
 		<>
@@ -108,8 +60,7 @@ const CSSEditor = ({
 				<div className="wecodeart-advanced-css__editor" id="wecodeart-css-editor" />
 				<div class="wecodeart-advanced-css__content">
 					<p>{__('Use', 'wecodeart')} <code>selector</code> {__('to target block wrapper.', 'wecodeart')}</p>
-					<p>{__('If you generate a new one just replace old selector with "selector" keyword for a new one.', 'wecodeart')}</p>
-					<p>{__('Example:', 'wecodeart')}</p>
+					<p>{__('Example', 'wecodeart')}:</p>
 					<pre className="wecodeart-advanced-css__help">
 						{'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'}
 					</pre>

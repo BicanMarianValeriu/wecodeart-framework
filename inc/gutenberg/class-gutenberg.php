@@ -52,13 +52,10 @@ class Gutenberg {
 		add_filter( 'block_categories', 			[ $this, 'block_category' ], 10, 1 );
 		
 		// Editor Assets.
-		add_action( 'enqueue_block_editor_assets', 	[ $this, 'block_editor_assets' ] );
+		add_action( 'enqueue_block_editor_assets', 	[ $this, 'block_editor_assets' ], 10 );
 		
 		// Editor Settings.
 		add_filter( 'block_editor_settings', 		[ $this, 'block_editor_settings' ], 10, 2 );
-
-		// Reusable Theme link.
-		add_filter( 'admin_menu',  					[ $this, 'reusable_blocks_link' ], 0 );
 
 		// Theme Support.
 		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
@@ -68,21 +65,6 @@ class Gutenberg {
 		
 		// Blocks.
 		Gutenberg\Blocks::get_instance();
-	}
-
-	/**
-	 * Link Reusable blocks to Appearance
-	 *
-	 * @return void
-	 */
-	public function reusable_blocks_link() {
-		add_submenu_page( 
-			'themes.php',
-			__( 'Blocks - Reusable', 'wecodeart' ),
-			__( 'Blocks - Reusable', 'wecodeart' ),
-			'edit_posts',
-			'edit.php?post_type=wp_block'
-		);
 	}
 
 	/**
@@ -121,22 +103,6 @@ class Gutenberg {
 	 * @return  void
 	 */
 	public function block_editor_assets() {
-		// Gutenberg editor assets.
-		wp_enqueue_style( 	$this->make_handle(),	$this->get_asset( 'css', 'gutenberg' ),	[], wecodeart( 'version' ) );
-		wp_enqueue_script( 	$this->make_handle(),	$this->get_asset( 'js', 'gutenberg' ), 	[
-			'wp-blocks',
-			'wp-i18n',
-			'wp-element',
-			'wp-plugins',
-			'wp-components',
-			'wp-compose',
-			'wp-edit-post',
-			'wp-api',
-			'wp-editor',
-			'wp-hooks',
-			'lodash'
-		], wecodeart( 'version' ) );
-
 		// Inline
 		$data = apply_filters( 'wecodeart/filter/gutenberg/localize', [
 			'theme' 	=> [
@@ -154,9 +120,27 @@ class Gutenberg {
 			] ),
 			'contentModules' => wp_list_pluck( Content::content_modules(), 'label' ),
 		] );
-		
-		wp_add_inline_script( $this->make_handle(), 'window.wecodeartGutenberg = ' . wp_json_encode( $data ) . ';', 'before' );
+		wp_register_script( $this->make_handle( 'inline' ), '' );
+		wp_enqueue_script( $this->make_handle( 'inline' ) );
+		wp_add_inline_script( $this->make_handle( 'inline' ), 'window.wecodeartGutenberg = ' . wp_json_encode( $data ) . ';', 'before' );
 
+		// Gutenberg editor assets.
+		wp_enqueue_style( 	$this->make_handle(),	$this->get_asset( 'css', 'gutenberg' ),	[], wecodeart( 'version' ) );
+		wp_enqueue_script( 	$this->make_handle(),	$this->get_asset( 'js', 'gutenberg' ), 	[
+			'wp-blocks',
+			'wp-i18n',
+			'wp-element',
+			'wp-plugins',
+			'wp-components',
+			'wp-compose',
+			'wp-edit-post',
+			'wp-api',
+			'wp-editor',
+			'wp-hooks',
+			'lodash',
+			$this->make_handle( 'inline' )
+		], wecodeart( 'version' ) );
+		
 		// CodeMirror assets.
 		wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
 		wp_add_inline_script( 'wp-codemirror', 'window.CodeMirror = wp.CodeMirror;' );

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-05-11 23:32+0000\n"
+"PO-Revision-Date: 2021-05-22 01:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.2; wp-5.7.1\n"
+"X-Loco-Version: 2.5.2; wp-5.7.2\n"
 "X-Domain: wecodeart"
 
 #: views/entry/meta/comments.tpl.php:46
@@ -110,7 +110,7 @@ msgstr "Nume autor"
 
 #: inc/admin/customizer/configs/class-footer.php:172
 msgid "Background color of the footer credits wrapper. Defaults to CSS color."
-msgstr ""
+msgstr "Culoarea de fundal a subsolului . Implicit la culoarea CSS."
 
 #: inc/admin/customizer/configs/class-footer.php:113
 msgid "Background color of the footer wrapper."
@@ -664,7 +664,7 @@ msgstr ""
 #: inc/core/class-archive.php:101
 msgctxt "monthly archives date format"
 msgid "F Y"
-msgstr ""
+msgstr "F Y"
 
 #: inc/core/class-archive.php:100
 #, php-format
@@ -1024,7 +1024,7 @@ msgstr ""
 
 #: views/header/branding-toggle.tpl.php:24
 msgid "Toggle navigation"
-msgstr ""
+msgstr "Comutare navigare"
 
 #: inc/admin/customizer/configs/class-configs.php:49
 msgid "Typography"
@@ -1114,6 +1114,9 @@ msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
 "version %2$s. Please upgrade WordPress to use WeCodeArt Framework."
 msgstr ""
+"WeCodeArt Framework necesită versiunea WordPress %1$s sau mai mare. "
+"Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
+"WeCodeArt Framework."
 
 #: inc/markup/class-svg.php:297
 #, php-format

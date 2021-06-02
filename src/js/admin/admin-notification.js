@@ -8,7 +8,7 @@
  * @subpackage 	Admin/Notifications
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.8.1
- * @version		3.8.1
+ * @version		5.0.0
  */
 
 import './../../scss/admin/notification/notification.scss';
@@ -46,24 +46,20 @@ import './../../scss/admin/notification/notification.scss';
 
 		_dismiss: function (e) {
 			e.preventDefault();
-
-			const repeatAfter = $(this).parents('.wca-notice').data('repeat') || '';
 			const noticeId = $(this).parents('.wca-notice').attr('id') || '';
-
-			Notification._ajax(noticeId, repeatAfter);
+			Notification._ajax(noticeId);
 		},
 
 		_dismissNew: function (e) {
 			e.preventDefault();
 
-			const repeatAfter = $(this).data('repeat') || '';
 			const noticeId = $(this).parents('.wca-notice').attr('id') || '';
 
 			const $el = $(this).parents('.wca-notice');
 
 			$el.fadeTo(100, 0, () => $el.slideUp(100, () => $el.remove()));
 
-			Notification._ajax(noticeId, repeatAfter);
+			Notification._ajax(noticeId);
 
 			const link = $(this).attr('href') || '';
 			const target = $(this).attr('target') || '';
@@ -73,22 +69,23 @@ import './../../scss/admin/notification/notification.scss';
 			}
 		},
 
-		_ajax: (noticeId, repeatAfter) => {
-
-			if ('' === noticeId) {
+		_ajax: (notification) => {
+			if ('' === notification) {
 				return;
 			}
+
+			const container = document.getElementById(notification);
+			const { nonce } = container.dataset;
 
 			$.ajax({
 				url: ajaxurl,
 				type: 'POST',
 				data: {
-					action: 'wecodeart_notification_dismiss',
-					notice_id: noticeId,
-					repeat_after: parseInt(repeatAfter),
+					action: 'wca_dismiss_notification',
+					notification,
+					nonce,
 				},
 			});
-
 		}
 	};
 

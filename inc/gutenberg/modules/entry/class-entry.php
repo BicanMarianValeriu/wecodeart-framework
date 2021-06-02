@@ -117,6 +117,7 @@ class Entry {
 			if ( is_page() ) {
 				if ( get_post_meta( $post->ID, '_wca_builder_template', true ) ) {
 					$classes[] = 'has-builder-template';
+					$classes = array_diff( $classes, [ 'has-sidebar' ] );
 				}
 			}
 

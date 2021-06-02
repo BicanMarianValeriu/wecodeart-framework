@@ -16,7 +16,6 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Support\Fonts;
 use WeCodeArt\Support\Styles;
-use function WeCodeArt\Functions\get_color_palette;
 
 /**
  * Customizer Sanitizers
@@ -32,15 +31,18 @@ final class Formatting {
 	 *
 	 * @return 	array
 	 */
-	public static function sanitize_palette( $value ) {
+	public static function sanitize_palette( $value, $setting  ) {
+		if ( ! is_array( $value ) ) {
+			return $setting->default;
+		}
+
 		// `flag` key is used to trigger setting change on deep state changes inside the palettes.
 		if ( isset( $value['flag'] ) ) {
 			unset( $value['flag'] );
 		}
-
-		$default = get_color_palette();
+		
 		if ( ! isset( $value['active'] ) || ! isset( $value['palettes'] ) ) {
-			return $default;
+			return $setting->default;
 		}
 
 		foreach ( $value['palettes'] as $slug => $args ) {

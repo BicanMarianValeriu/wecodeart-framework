@@ -21,6 +21,8 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
 use WeCodeArt\Support\Plugins\CF7\Modules;
+use WeCodeArt\Admin\Notifications;
+use WeCodeArt\Admin\Notifications\Notification;
 
 /**
  * CF7 Integration
@@ -30,6 +32,8 @@ class CF7 implements Integration {
 
 	use Singleton;
 	use Scripts\Base;
+
+	const NOTICE_ID = 'wecodeart-cf7-notice';
 
 	/**
 	 * Get Conditionals
@@ -53,6 +57,8 @@ class CF7 implements Integration {
 	 * @return  void
 	 */
 	public function register_hooks() {
+		add_action( 'admin_notices',				[ $this, 'manage_notice' ] );
+
 		add_filter( 'wpcf7_load_css', 				'__return_false' );
 		add_filter( 'wpcf7_form_response_output', 	[ $this, 'form_response_output' ], 10, 3 );
 		add_filter( 'wpcf7_form_class_attr', 		[ $this, 'form_class_output' 	], 10, 1 );
@@ -60,6 +66,35 @@ class CF7 implements Integration {
 
 		// Load Modules
 		Modules::get_instance();
+	}
+
+	/**
+	 * Manage Notice
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 */
+	public function manage_notice() {
+		$notification = new Notification(
+			esc_html__( 'Contact Form 7 support is enabled. Enjoy properly styled forms based on your theme!', 'wecodeart' ),
+			[
+				'id'			=> self::NOTICE_ID,
+				'type'     		=> Notification::INFO,
+				'priority' 		=> 1,
+				'class'			=> 'notice is-dismissible',
+				'capabilities' 	=> 'activate_plugins',
+			]
+		);
+		
+		if( get_user_option( self::NOTICE_ID ) === 'seen' ) {
+			Notifications::get_instance()->remove_notification( $notification );
+			set_transient( self::NOTICE_ID, true, WEEK_IN_SECONDS );
+			return;
+		}
+
+		if( get_transient( self::NOTICE_ID ) === false ) {
+			Notifications::get_instance()->add_notification( $notification );
+		}
 	}
 
 	/**
