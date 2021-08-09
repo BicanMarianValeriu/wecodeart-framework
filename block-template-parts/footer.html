@@ -1,45 +1,30 @@
-<!-- wp:wca/section {"className":"css-7e37035e py-5","backgroundColor":"light"} -->
-<div class="wp-block-wca-section alignfull css-7e37035e py-5 wca-section has-light-background-color has-background">
-	<div class="wca-section__container container">
-		<div class="wca-section__row row gx-4">
-			<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
-			<div class="wp-block-wca-column wca-column col col-12 col-md">
-				<!-- wp:latest-posts /-->
-			</div>
-			<!-- /wp:wca/column -->
-
-			<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
-			<div class="wp-block-wca-column wca-column col col-12 col-md">
-				<!-- wp:paragraph -->
-				<p><strong>Never miss the latest news</strong></p>
-				<!-- /wp:paragraph -->
-
-				<!-- wp:buttons -->
-				<div class="wp-block-buttons">
-					<!-- wp:button {"backgroundColor":"primary"} -->
-					<div class="wp-block-button">
-						<a class="wp-block-button__link has-primary-background-color has-background">Join our mailing list</a>
-					</div>
-					<!-- /wp:button -->
-				</div>
-				<!-- /wp:buttons -->
-			</div>
-			<!-- /wp:wca/column -->
-
-			<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
-			<div class="wp-block-wca-column wca-column col col-12 col-md">
-				<!-- wp:social-links {"align":"center"} -->
-				<ul class="wp-block-social-links aligncenter">
-					<!-- wp:social-link {"url":"#","service":"facebook"} /-->
-
-					<!-- wp:social-link {"url":"#","service":"twitter"} /-->
-
-					<!-- wp:social-link {"url":"#","service":"instagram"} /-->
-				</ul>
-				<!-- /wp:social-links -->
-			</div>
-			<!-- /wp:wca/column -->
-		</div>
+<!-- wp:columns {"className":"flex-column flex-md-row pt-5"} -->
+<div class="wp-block-columns flex-column flex-md-row pt-5">
+	<!-- wp:column {"className":"mb-5"} -->
+	<div class="wp-block-column mb-5">
+		<!-- wp:heading {"level":4} -->
+		<h4>ABOUT THIS SITE</h4>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph -->
+		<p>This may be a good place to introduce yourself and your site or include some credits.</p>
+		<!-- /wp:paragraph -->
 	</div>
+	<!-- /wp:column -->
+	<!-- wp:column {"className":"mb-5"} -->
+	<div class="wp-block-column mb-5">
+		<!-- wp:heading {"level":4} -->
+		<h4>RECENT POSTS</h4>
+		<!-- /wp:heading -->
+		<!-- wp:latest-posts /-->
+	</div>
+	<!-- /wp:column -->
+	<!-- wp:column {"className":"mb-5"} -->
+	<div class="wp-block-column mb-5">
+		<!-- wp:heading {"level":4} -->
+		<h4>RECENT COMMENTS</h4>
+		<!-- /wp:heading -->
+		<!-- wp:latest-comments {"commentsToShow":3} /-->
+	</div>
+	<!-- /wp:column -->
 </div>
-<!-- /wp:wca/section -->
+<!-- /wp:columns -->

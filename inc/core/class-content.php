@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Loops;
-use WeCodeArt\Core\Pagination;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -34,15 +33,24 @@ class Content {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		// WP.
-		add_action( 'widgets_init', 				[ $this, 'register_sidebars' 	] );
-		add_action( 'wp_body_open',					[ $this, 'skip_link' ], 0 );
-
-		// WeCodeArt.
+		// Fallback for plugins
 		add_action( 'wecodeart/hook/loop/before',	[ $this, 'content_markup_open' 	] );
 		add_action( 'wecodeart/content/markup',		[ $this, 'render_modules' 		] );
 		add_action( 'wecodeart/hook/loop/after',	[ $this, 'content_markup_close' ] );
-		add_action( 'wecodeart/hook/main/after',    [ Pagination::get_instance(), 'archive' ], 10 );
+		add_action( 'widgets_init',					[ $this, 'widgets_init' ] );
+	}
+
+	/**
+	 * Add a sidebar.
+	 */
+	public function widgets_init() {
+		register_sidebar( [
+			'name'          => __( 'Main Sidebar', 'wecodeart' ),
+			'id'            => 'sidebar',
+			'description'   => __( 'Widgets in this area will be shown where this sidebar is rendered.', 'wecodeart' ),
+			'before_widget' => '',
+			'after_widget'  => '',
+		] );
 	}
 	
 	/**
@@ -54,24 +62,15 @@ class Content {
 	 * @return 	string 
 	 */
 	public function content_markup_open() {
-		?>
-		<div <?php echo Markup::generate_attr( 'content', [
-			'id' 	=> 'primary',
-			'class' => 'content__main col-12 col-lg'
-		] ); ?>>
-			<?php 
-			
-				/**
-				 * @hooked - none
-				 */
-				do_action( 'wecodeart/hook/main/before' ); 
+		/**
+		 * @hooked - none
+		 */
+		do_action( 'wecodeart/hook/main/before' ); 
 
-			?>
-			<main <?php echo Markup::generate_attr( 'main', [
-				'id' 	=> 'main',
-				'class' => 'site-main'
-			] ); ?>>
-		<?php
+		?><main <?php echo Markup::generate_attr( 'main', [
+			'id' 	=> 'main',
+			'class' => 'site-main col-12 col-lg'
+		] ); ?>><?php
 	}
 
 	/**
@@ -83,56 +82,11 @@ class Content {
 	 * @return 	string
 	 */
 	public function content_markup_close() {	
-		?>
-			</main>
-			<?php 
-				
-				/**
-				 * @hooked WeCodeArt\Core\Pagination\numeric_posts_nav() - 10 
-				 */
-				do_action( 'wecodeart/hook/main/after' ); 
-				
-			?>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Generate Sidebar
-	 *
-	 * @since	3.7.7
-	 * @version	5.0.0
-	 *
-	 * @return	void
-	 */
-	public static function render_sidebar( string $index ) {
-		$index = strtolower( $index );
-
-		if( ! is_active_sidebar( $index ) ) {
-			return;
-		}
-
+		?></main><?php 
 		/**
-		 * @see WP function `dynamic_sidebar`
-		 * @see WeCodeArt\Markup::wrap()
+		 * @hooked WeCodeArt\Core\Pagination\numeric_posts_nav() - 10 
 		 */
-		Markup::wrap( $index . '-sidebar-container', [ [
-			'tag' 	=> 'div',
-			'attrs' => [ 
-				'class'	=> 'content__sidebar col-12 col-lg-4',
-			]
-		] ], function() use ( $index ) {
-			do_action( "wecodeart/hook/sidebar/{$index}/before" );
-
-			Markup::wrap( $index . '-sidebar', [ [
-				'tag' 	=> 'aside',
-				'attrs' => [ 
-					'class'	=> 'sidebar sidebar--' . $index . ' h-100',
-				]
-			] ], 'dynamic_sidebar', [ $index ] );
-			
-			do_action( "wecodeart/hook/sidebar/{$index}/after" );
-		} );  
+		do_action( 'wecodeart/hook/main/after' );
 	}
 
 	/**
@@ -145,14 +99,13 @@ class Content {
 	 */
 	public static function content_modules() {
 		$sides = (array) apply_filters( 'wecodeart/filter/content/sidebars', [
-			'primary'
+			'sidebar'
 		] );
 
 		$modules = [
 			'content' => [
 				'label'    	=> esc_html__( 'Entry Content', 'wecodeart' ),
 				'callback' 	=> [ Loops::get_instance(), 'default' ],
-				'sidebar'	=> false
 			]
 		];
 
@@ -162,7 +115,7 @@ class Content {
 				$modules[$side] = [
 					'label'    	=> sprintf( esc_html__( '%s Sidebar', 'wecodeart' ), ucfirst( $side ) ),
 					'callback' 	=> function() use ( $side ) {
-						self::render_sidebar( $side );
+						self::render_sidebar( [ 'slug' => $side ] );
 					}
 				];
 			}  
@@ -183,105 +136,30 @@ class Content {
 	 * @return 	HTML
 	 */
 	public static function render_modules() {
-		$options = self::get_contextual_options();
-
-		Markup::wrap( 'content-wrappers',  [
-				[ 'tag' => 'div', 'attrs' => [ 'class' => 'content-area' ] ],
-				[ 'tag' => 'div', 'attrs' => [ 'class' => get_prop( $options, 'container' ) ] ],
+		Markup::wrap( 'site-content',  [
+				[ 'tag' => 'div', 'attrs' => [ 'class' => 'site-content wp-block-template-part' ] ],
+				[ 'tag' => 'div', 'attrs' => [ 'class' => 'container' ] ],
 				[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ]
 			],
 			[ Markup::get_instance(), 'sortable' ],
-			[ self::content_modules(), get_prop( $options, 'modules' ) ]
+			[ self::content_modules(), [ 'content', 'sidebar' ] ]
 		); 
-	} 
-
-	/**
-	 * Registers Content Sidebars
-	 *
-	 * @uses	self::content_modules();
-	 * @since	1.0
-	 * @version	3.9.5
-	 *
-	 * @return 	void
-	 */
-	public function register_sidebars() {
-		// Register Sidebar for each active footer columns.
-		$sidebars 	= wp_list_filter( self::content_modules(), [ 
-			'sidebar' => false 
-		], 'NOT' );
-
-		// Register Sidebar for each active footer columns.
-		wecodeart( 'register_sidebars', $sidebars );
 	}
 
 	/**
-	 * Skip Links
+	 * Generate Sidebar
 	 *
-	 * @since	3.8.3
+	 * @since	3.7.7
 	 * @version	5.0.0
 	 *
-	 * @return 	void
+	 * @return	void
 	 */
-	public function skip_link() {
-		$links = (array) apply_filters( 'wecodeart/filter/skip_links', [ 
-			'content' => esc_html__( 'Skip to content', 'wecodeart' )
-		] );
-		
-		if( empty( $links ) ) return;
-
-		foreach( $links as $key => $value ) {
-			printf( '<a class="skip-link screen-reader-text" href="#%s">%s</a>', esc_attr( $key ), esc_html( $value ) );
-		}
-	}
-
-	/**
-	 * Get Contextual Modules Options
-	 *
-	 * @since 	3.5.0
-	 * @version	5.0.0
-	 *
-	 * @return 	array 
-	 */
-	public static function get_contextual_options() {
-		$default_container 	= get_theme_mod( 'content-layout-container', 'container' );
-		$default_modules 	= get_theme_mod( 'content-layout-modules', [ 'content', 'primary' ] );
-		
-		// Pages
-		if( is_page() ) {
-			return [
-				'container' => $default_container,
-				'modules' 	=> wecodeart_if( 'is_full_layout' ) ? [ 'content' ] : get_post_meta( get_the_ID(), '_wca_content_modules', true ),
-			];
-		}
-
-		// Post Types Archives And Singular Context Mods.
-		foreach( wecodeart( 'public_post_types' ) as $type ) { 
-			if( is_singular( $type ) ) {				
-				return [
-					'container' => get_theme_mod( 'content-layout-container-' . $type . '-singular' ),
-					'modules' 	=> get_post_meta( get_the_ID(), '_wca_content_modules', true ) ?: get_theme_mod( 'content-layout-modules-' . $type . '-singular' )
-				];
-			}
-
-			if( is_post_type_archive( $type ) ) {
-				return [
-					'container' => get_theme_mod( 'content-layout-container-' . $type . '-archive' ),
-					'modules' 	=> get_theme_mod( 'content-layout-modules-' . $type . '-archive' ),
-				]; 
-			}
-
-			if( wecodeart_if( 'is_post_archive' ) ) {
-				return [
-					'container' => get_theme_mod( 'content-layout-container-post-archive' ),
-					'modules' 	=> get_post_meta( get_option( 'page_for_posts' ), '_wca_content_modules', true ) ?: get_theme_mod( 'content-layout-modules-post-archive' ),
-				]; 
-			}
-		} 
-
-		// Everywhere/Defaults
-		return [
-			'container' => $default_container,
-			'modules' 	=> $default_modules
-		];
+	public static function render_sidebar( $name = 'sidebar' ) {
+		Markup::wrap( $name, [ [
+			'tag' 	=> 'aside',
+			'attrs' => [
+				'class'	=> 'sidebar col-12 col-lg-3',
+			]
+		] ], 'dynamic_sidebar', [ $name ] );
 	}
 }

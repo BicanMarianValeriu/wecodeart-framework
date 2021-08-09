@@ -4,7 +4,7 @@
 const {
 	i18n: { __ },
 	element: { useCallback, useMemo, useState },
-	blockEditor: { RichTextToolbarButton, __experimentalUseEditorFeature: useEditorFeature },
+	blockEditor: { RichTextToolbarButton, __experimentalUseEditorFeature, useSetting },
 	richText: { removeFormat },
 	components: { Icon }
 } = wp;
@@ -21,10 +21,11 @@ import { default as InlineColorUI, getActiveColor } from './inline';
 import { Format as SVGIcon } from './icons';
 
 const name = 'wca/background';
-const title = __('Highlight Color', 'wecodeart');
+const title = __('Highlight color', 'wecodeart');
 const EMPTY_ARRAY = [];
 
 export default function Edit({ value, onChange, isActive, activeAttributes, contentRef }) {
+	const useEditorFeature = useSetting || __experimentalUseEditorFeature;
 	const allowCustomControl = useEditorFeature('color.custom');
 	const colors = useEditorFeature('color.palette') || EMPTY_ARRAY;
 	const [isAddingColor, setIsAddingColor] = useState(false);
@@ -77,4 +78,4 @@ export default function Edit({ value, onChange, isActive, activeAttributes, cont
 			)}
 		</>
 	);
-}; 
+};

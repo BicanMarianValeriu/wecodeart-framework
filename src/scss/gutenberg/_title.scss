@@ -1,32 +1,13 @@
 /*--------------------------------------------------------------
 # Hide Title
 --------------------------------------------------------------*/
-body {
-	&.wca-title-hidden {
-		.editor-post-title {
-			&__block {
-				.editor-post-title {
-					&__input {
-						opacity: 0.5;
-					}
+.theme-wecodeart--hidden-title {
+	.editor-post-title {
+		&__block {
+			.editor-post-title {
+				&__input {
+					opacity: 0.5;
 				}
-			}
-		}
-
-		.wca-hidden-title-label {
-			display: block;
-		}
-	}
-}
-
-.wca-post-status-label {
-	&.components-base-control {
-		.components-base-control {
-			&__help {
-				margin: 5px 0 0;
-				padding: 0;
-				font-size: 12px;
-				font-style: italic;
 			}
 		}
 	}

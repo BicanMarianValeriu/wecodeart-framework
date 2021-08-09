@@ -33,53 +33,7 @@ class Footer extends Config {
 	 * @return 	array 
 	 */
 	public function register( $configurations, $wp_customize ) {
-		// A handy class for formatting theme mods.
-		$formatting = Formatting::get_instance();
-
-		// Footer Modules Choices.
-		$widgets = wp_list_pluck( \WeCodeArt\Core\Footer::footer_widgets(), 'label' );
-
 		$_configs = [
-			// Layout
-			[
-				'name'			=> 'footer-layout-container',
-				'type' 			=> 'control',
-				'control'  		=> 'select',
-				'section'		=> 'footer-layout',
-				'title' 		=> esc_html__( 'Grid Type', 'wecodeart' ),
-				'description' 	=> esc_html__( 'Choose the type of the container class.', 'wecodeart' ),
-				'choices'  		=> [
-					'container'			=> esc_html__( 'Container', 'wecodeart' ),
-					'container-fluid' 	=> esc_html__( 'Container Fluid', 'wecodeart' ),
-				], 
-				'priority' 		=> 5, 
-				'sanitize_callback'	=> [ $formatting, 'sanitize_choices' ], 
-				'transport'			=> 'postMessage',
-				'output'			=> [
-					[
-						'element'  	=> '.footer__widgets .container, .footer__widgets .container-fluid',
-						'function'	=> 'html',
-						'attr'		=> 'class',
-						'value'		=> [ 'container', 'container-fluid' ]
-					]
-				]
-			],
-			[
-				'name'			=> 'footer-layout-modules',
-				'type'        	=> 'control',
-				'control'  		=> 'wecodeart-sortable',
-				'section'		=> 'footer-layout',
-				'title'			=> esc_html__( 'Footer Columns', 'wecodeart' ),
-				'description'	=> esc_html__( 'Enable and reorder Footer Columns.', 'wecodeart' ),
-				'priority'   	=> 10, 
-				'choices'		=> $widgets,
-				'transport'		=> 'postMessage',
-				'partial'		=> [
-					'selector'        => '.footer__widgets',
-					'render_callback' => [ 'WeCodeArt\Core\Footer', 'render_widgets' ],
-					'container_inclusive' => true
-				]
-			],
 			// Copyright
 			[
 				'name'			=> 'footer-copyright-text',
@@ -92,77 +46,18 @@ class Footer extends Config {
 				'sanitize_callback'	=> 'sanitize_text_field', 
 				'transport'		=> 'postMessage',
 				'partial'		=> [
-					'selector'        => '.attribution__copyright',
+					'selector'        => '.wp-site-credits__text',
 					'render_callback' => [ 'WeCodeArt\Admin\Customizer\Partials', 'render_footer_copyright' ]
 				],
 				'output'		=> [
 					[
-						'element'  	=> '.attribution__copyright',
+						'element'  	=> '.wp-site-credits__text',
 						'function' 	=> 'html',
 						'text'		=> true
 					]
 				]
 			],
 			// Design
-			[
-				'name'			=> 'footer-design-bg',
-				'type' 			=> 'control',
-				'control'  		=> 'wecodeart-color',
-				'section'		=> 'footer-design',
-				'title' 		=> esc_html__( 'Footer background color', 'wecodeart' ),
-				'description'	=> esc_html__( 'Background color of the footer wrapper.', 'wecodeart' ),
-				'transport'		=> 'postMessage',
-				'output'		=> [
-					[
-						'element'  => 'footer.footer',
-						'property' => 'background-color'
-					],
-					[
-						'element'  => 'footer.footer',
-						'property' => 'border-top',
-						'pattern'  => function( $value ) {
-							$pattern = '1px solid $';
-
-							if( wecodeart_if( 'with_styles' ) ) {
-								$adjusted 	= wecodeart( 'integrations' )->get( 'styles' )::hex_brightness( $value, -20 );
-								$pattern	= '1px solid ' . $adjusted;
-							}
-
-							return $pattern;
-						},
-					]
-				]
-			],
-			[
-				'name'			=> 'footer-design-links',
-				'type' 			=> 'control',
-				'control'  		=> 'wecodeart-color',
-				'section'		=> 'footer-design',
-				'title' 		=> esc_html__( 'Footer links color', 'wecodeart' ),
-				'description'	=> esc_html__( 'Text color of the footer links.', 'wecodeart' ),
-				'transport'		=> 'postMessage',
-				'output'		=> [
-					[
-						'element'  => 'footer.footer a',
-						'property' => 'color'
-					],
-				]
-			],
-			[
-				'name'			=> 'footer-design-color',
-				'type' 			=> 'control',
-				'control'  		=> 'wecodeart-color',
-				'section'		=> 'footer-design',
-				'title' 		=> esc_html__( 'Footer text color', 'wecodeart' ),
-				'description'	=> esc_html__( 'Defaults to CSS color.', 'wecodeart' ),
-				'transport'		=> 'postMessage',
-				'output'		=> [
-					[
-						'element'  => 'footer.footer',
-						'property' => 'color'
-					],
-				]
-			],
 			[
 				'name'			=> 'footer-design-attribution_bg',
 				'type' 			=> 'control',
@@ -173,11 +68,11 @@ class Footer extends Config {
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[
-						'element'  => '.footer__attribution',
+						'element'  => '.wp-site-credits',
 						'property' => 'background-color'
 					],
 					[
-						'element'  => '.footer__attribution',
+						'element'  => '.wp-site-credits',
 						'property' => 'border-top',
 						'pattern'  => function( $value ) {
 							$pattern = '1px solid $';
@@ -202,7 +97,22 @@ class Footer extends Config {
 				'transport'		=> 'postMessage',
 				'output'		=> [
 					[
-						'element'  => '.footer__attribution',
+						'element'  => '.wp-site-credits',
+						'property' => 'color'
+					]
+				]
+			],
+			[
+				'name'			=> 'footer-design-attribution_links',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-color',
+				'section'		=> 'footer-design',
+				'title' 		=> esc_html__( 'Attribution links color', 'wecodeart' ),
+				'description'	=> esc_html__( 'Defaults to CSS color.', 'wecodeart' ),
+				'transport'		=> 'postMessage',
+				'output'		=> [
+					[
+						'element'  => '.wp-site-credits a',
 						'property' => 'color'
 					]
 				]

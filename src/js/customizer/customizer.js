@@ -12,6 +12,7 @@ import './../../scss/customizer/customizer.scss';
 const {
 	fields,
 	googleFonts,
+	palettes
 } = wecodeartCustomizePreview;
 
 const wecodeartPostMessage = {
@@ -230,8 +231,7 @@ const wecodeartPostMessage = {
 
 					break;
 				case 'wecodeart-palette':
-					const { active = 'base', palettes } = value;
-					const { colors } = palettes[active];
+					const { colors } = palettes.filter(({ slug }) => slug === value).pop();
 					processedValue = processValue(output, colors[output.key]);
 					if (false !== processedValue) {
 						styles += output.element + '{' + output.property + ':' + processedValue + ';}';

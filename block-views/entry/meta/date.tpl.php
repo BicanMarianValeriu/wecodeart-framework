@@ -15,38 +15,46 @@
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\get_prop;
 
-/**
- * @param   array  $published   Date published
- * @param   array  $modified   Date modified
- */
+$classnames = [ 'wp-block-post-date' ];
 
-$classnames         = [ 'entry-date' ];
 if( isset( $modified ) ) {
-    $classnames[] = 'entry-date--updated';
+    $classnames[] = 'updated';
 }
-$class_published    = 'entry-date__time entry-date__time--published';
-$class_published    = isset( $modified ) ? $class_published . ' d-none' : $class_published;
+
+if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+    $classnames[] = 'text-' . $value;
+}
+
+if( $value = get_prop( $attributes, 'className', false ) ) {
+    $classnames[] = $value;
+}
+
 ?>
-<span class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
-    <span class="d-inline-block me-1"><?php
+<div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
 
-        SVG::render( 'clock' );
+    SVG::render( 'clock', [
+        'class' => 'wp-block-post-date__icon d-inline-block me-1'
+    ] );
 
-    ?></span>
+    ?>
     <span class="screen-reader-text"><?php
 
         esc_html_e( 'Posted on ', 'wecodeart' );
     
     ?></span>
-    <a href="<?php echo esc_url( get_permalink() ); ?>" class="entry-date__link me-2">
-        <time class="<?php echo esc_attr( $class_published ); ?>" datetime="<?php echo esc_attr( $published['robot'] ); ?>"><?php
+    <?php if ( get_prop( $attributes, [ 'isLink' ], false ) ) : ?>
+    <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>" class="wp-block-post-date__link me-2">
+    <?php endif; ?>
+        <time class="wp-block-post-date__published<?php echo isset( $modified ) ? ' d-none' : ''; ?>"
+            datetime="<?php echo esc_attr( $published['robot'] ); ?>"><?php
 
             echo esc_html( $published['human'] );
 
         ?></time>
         <?php if( isset( $modified ) ) : ?>
-        <time class="entry-date__time entry-date__time--updated"
+        <time class="wp-block-post-date__updated"
             datetime="<?php echo esc_attr( $modified['robot'] ); ?>"
             title="<?php echo esc_attr( sprintf(
                 esc_html__( 'Post updated on %s.', 'wecodeart' ),
@@ -57,5 +65,7 @@ $class_published    = isset( $modified ) ? $class_published . ' d-none' : $class
 
         ?></time>
         <?php endif; ?>
+    <?php if ( get_prop( $attributes, [ 'isLink' ], false ) ) : ?>
     </a>
-</span>
+    <?php endif; ?>
+</div>

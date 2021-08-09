@@ -1,48 +1,49 @@
-.wp-block-wca-section {
-    margin-top: 0;
-    margin-bottom: 0;
-    
-    .wca-section {
-        &__container {
-            position: relative;
-            z-index: 1;
-        }
-        
-        &__row {
-            .wp-block {
-                &.wp-block-wca-column {
-                    max-width: 100%;
-                    margin: 0;
-    
-                    .wp-block {
-                        max-width: 100%;
-                    }
-                }
-
-                &[data-align="full"] {
-                    max-width: initial!important;
-                    flex: 1 1 auto;
-                    margin-left: -15px;
-                    margin-right: -15px;
-                }
-            }
-
-            > .block-list-appender {
-                @include make-col-ready();
-                padding-left: 0;
-                padding-right: 0;
-                flex: 0 0 100%!important;
-                flex-basis: 100%!important;
-                max-width: 100%!important;
-                order: 99;
-                
-                div:not(.no-gutters) & {
-                    padding-left: calc(var(--bs-gutter-x) / 2);
-                    padding-right: calc(var(--bs-gutter-x) / 2);
-                }
-            }
-        }
-    }
+.wp-block-group {
+	&.has-background {
+		padding: 0;
+	}
 }
 
-@import './section-grid';
+.wp-block-columns {
+	@include make-container(0);
+	flex-wrap: wrap;
+	margin-bottom: 0;
+	box-sizing: border-box;
+	
+	&.has-background {
+		padding: 0;
+	}
+
+	&.is-selected,
+	&.has-child-selected {
+		padding-bottom: 10px;
+		
+		&::before {
+			position: absolute;
+		}
+	}
+
+	&::before {
+		content: '';
+		position: relative;
+		pointer-events: none;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		color: rgba(0,0,0,0.1);
+		z-index: 0;
+		background-image: repeating-linear-gradient(to right, currentColor, currentColor 1px, transparent 1px, transparent);
+		background-size: 8.33%;
+	}
+}
+
+.wp-block-column {
+	--bs-gutter-x: 1.5rem;
+    padding-right: calc(var(--bs-gutter-x) / 2);
+    padding-left: calc(var(--bs-gutter-x) / 2);
+
+	& ~ .wp-block-column {
+		margin-left: 0!important;
+	}
+}

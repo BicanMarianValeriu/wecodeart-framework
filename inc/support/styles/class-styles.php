@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Request;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * The Fonts object.
@@ -56,14 +57,21 @@ final class Styles implements Integration {
      *
      * @return 	string
      */
-    public static function compress( string $css = '' ) {
+    public static function compress( string $css = '', $options = [] ) {
         // Return if no CSS
         if ( ! $css ) {
             return '';
         }
 
-        // remove comments
-        $css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
+		$options = wp_parse_args( $options, [
+			'comments' => false,
+			'zeroUnit' => false,
+		] );
+
+		if( get_prop( $options, 'comments' ) ) {
+			// remove comments
+			$css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
+		}
 
         // Normalize whitespace
         $css = preg_replace( '/\s+/', ' ', $css );
@@ -80,8 +88,10 @@ final class Styles implements Integration {
         // Strips leading 0 on decimal values (converts 0.5px into .5px)
         $css = preg_replace( '/(:| )0\.([0-9]+)(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
 
-        // Strips units if value is 0 (converts 0px to 0)
-        $css = preg_replace( '/(:| )(\.?)0(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}0', $css );
+		if( get_prop( $options, 'zeroUnit' ) ) {
+			// Strips units if value is 0 (converts 0px to 0)
+			$css = preg_replace( '/(:| )(\.?)0(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}0', $css );
+		}
 
         // Trim
         $css = trim( $css );

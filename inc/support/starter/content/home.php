@@ -5,167 +5,159 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'Home', 'Theme starter content', 'wecodeart' ),
-	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","customGradient":"linear-gradient(1deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)","contentPosition":"center center","align":"full","className":"py-5 text-center"} -->
-	<div class="wp-block-cover alignfull has-background-dim has-background-gradient py-5 text-center"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","level":1,"className":"mb-5 display-5","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","gradient":"vivid-cyan-blue-to-vivid-purple","contentPosition":"center center","align":"full","className":"py-5 text-center","customCSSId":"3447c6bb-002c-4275-a1b9-257c7b9ff822"} -->
+	<div class="wp-block-cover alignfull has-background-dim has-background-gradient has-vivid-cyan-blue-to-vivid-purple-gradient-background py-5 text-center" style="min-height:100vh"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","level":1,"className":"mb-5 display-5"} -->
 	<h1 class="has-text-align-center mb-5 display-5">Create and grow<br>your unique website today</h1>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph {"align":"center","className":"lead mb-5"} -->
+	<!-- wp:paragraph {"align":"center","className":"lead mb-5","customCSSId":"bbafa1cb-c623-48d1-8ff1-46ee0f2508e6"} -->
 	<p class="has-text-align-center lead mb-5">Programmatically work but low hanging fruit so new economy cross-pollination. Quick sync new<br>economy onward and upward.</p>
 	<!-- /wp:paragraph -->
 	
-	<!-- wp:buttons {"contentJustification":"center","className":"is-style-default","wecodeart":{"mobile":true,"tablet":true,"desktop":true,"loggedin":true,"loggedout":true}} -->
-	<div class="wp-block-buttons is-content-justification-center is-style-default"><!-- wp:button {"backgroundColor":"white","textColor":"dark"} -->
-	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-white-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
+	<!-- wp:buttons {"contentJustification":"center","className":"is-style-default","customCSSId":"49c9cd31-3239-481b-9faf-be2db4eaf85f"} -->
+	<div class="wp-block-buttons is-content-justification-center is-style-default"><!-- wp:button {"backgroundColor":"light","textColor":"dark","customCSSId":"82810404-a5ea-4f24-ae57-0145e989e410"} -->
+	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button -->
 	
-	<!-- wp:button {"backgroundColor":"light","textColor":"dark"} -->
+	<!-- wp:button {"backgroundColor":"light","textColor":"dark","customCSSId":"53df8ea9-c659-432f-98d3-cb2758ee3707"} -->
 	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">HIRE US</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div></div>
 	<!-- /wp:cover -->
 	
-	<!-- wp:wca/section {"className":"py-5"} -->
-	<div class="wp-block-wca-section alignfull py-5 wca-section"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md"><!-- wp:image {"align":"center","width":64,"height":64} -->
-	<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/calculator.svg" alt="" width="64" height="64"/></figure></div>
+	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"36705f8d-d33b-4c1d-a857-2c54ef5ae3fd"} -->
+	<div class="wp-block-group my-5"><!-- wp:columns {"align":"full","style":{"color":{"text":"#000000","background":"#ffffff"}},"className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
+	<div class="wp-block-columns alignfull flex-column flex-md-row has-text-color has-background" style="background-color:#ffffff;color:#000000"><!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
+	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"fe797173-3ba3-4f69-9313-77ef04bccf26"} -->
+	<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/calculator.svg" alt="" width="65" height="65"/></figure></div>
 	<!-- /wp:image -->
 	
-	<!-- wp:heading {"level":3,"className":"has-text-align-center has-text-color"} -->
-	<h3 class="has-text-align-center has-text-color">Fixed Price Projects</h3>
+	<!-- wp:heading {"textAlign":"center","level":3,"customCSSId":"39382e17-6b0f-4158-b420-9542f61bcf3c"} -->
+	<h3 class="has-text-align-center">Fixed Price Projects</h3>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph {"align":"center"} -->
+	<!-- wp:paragraph {"align":"center","customCSSId":"cb51d812-c54b-4a84-9cf7-9ad72e4bc9d6"} -->
 	<p class="has-text-align-center">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
 	<!-- /wp:paragraph --></div>
-	<!-- /wp:wca/column -->
+	<!-- /wp:column -->
 	
-	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md"><!-- wp:image {"align":"center","width":64,"height":64} -->
-	<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/clock.svg" alt="" width="64" height="64"/></figure></div>
+	<!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"d08919b0-bc3a-4bb9-9693-548d0f7b572a"} -->
+	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"38f71f14-639f-4298-a0ae-06398205f0b4"} -->
+	<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/clock.svg" alt="" width="65" height="65"/></figure></div>
 	<!-- /wp:image -->
 	
-	<!-- wp:heading {"level":3,"className":"has-text-align-center has-text-color"} -->
-	<h3 class="has-text-align-center has-text-color">Receive on time</h3>
+	<!-- wp:heading {"textAlign":"center","level":3,"customCSSId":"e4e0c759-181f-476e-b553-82b5a09faf53"} -->
+	<h3 class="has-text-align-center">Receive on time</h3>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph {"align":"center"} -->
+	<!-- wp:paragraph {"align":"center","customCSSId":"976d5ea4-0585-41c4-b445-ef937214897c"} -->
 	<p class="has-text-align-center">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
 	<!-- /wp:paragraph --></div>
-	<!-- /wp:wca/column -->
+	<!-- /wp:column -->
 	
-	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md"><!-- wp:image {"align":"center","width":64,"height":64} -->
-	<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/delivery.svg" alt="" width="64" height="64"/></figure></div>
+	<!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"06fa0ffd-90c8-4393-aeaf-578718388f09"} -->
+	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"0eb2eefc-860a-415b-a610-bdf051561877"} -->
+	<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/delivery.svg" alt="" width="65" height="65"/></figure></div>
 	<!-- /wp:image -->
 	
-	<!-- wp:heading {"level":3,"className":"has-text-align-center has-text-color"} -->
-	<h3 class="has-text-align-center has-text-color">Fast work turnaround</h3>
+	<!-- wp:heading {"textAlign":"center","level":3,"customCSSId":"3797f1e2-bfa3-4a0b-9f78-229bc670076f"} -->
+	<h3 class="has-text-align-center">Fast work turnaround</h3>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph {"align":"center"} -->
+	<!-- wp:paragraph {"align":"center","customCSSId":"f147fedf-20f8-4d2f-b453-2871cfd6e994"} -->
 	<p class="has-text-align-center">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
 	<!-- /wp:paragraph --></div>
-	<!-- /wp:wca/column --></div></div></div>
-	<!-- /wp:wca/section -->
+	<!-- /wp:column --></div>
+	<!-- /wp:columns --></div>
+	<!-- /wp:group -->
 	
-	<!-- wp:wca/section {"gutter":0,"backgroundColor":"light"} -->
-	<div class="wp-block-wca-section alignfull wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-0"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4","lg":"col-lg-6"},"className":"mb-md-0 mb-4"} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md-4 col-lg-6 mb-md-0 mb-4"><!-- wp:image {"sizeSlug":"large","className":"mb-0"} -->
-	<figure class="wp-block-image size-large mb-0"><img src="https://picsum.photos/id/1/800/800" alt=""/></figure>
-	<!-- /wp:image --></div>
-	<!-- /wp:wca/column -->
-	
-	<!-- wp:wca/column {"verticalAlignment":"center","bootstrapColumns":{"global":"col-12","md":"col-md-8","lg":"col-lg-6"},"className":"ps-md-5"} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md-8 col-lg-6 align-self-center ps-md-5"><!-- wp:heading {"textAlign":"left","className":"has-text-color","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<h2 class="has-text-align-left has-text-color">Web Design</h2>
+	<!-- wp:group {"className":"bg-light","layout":{"inherit":true},"customCSSId":"c43b5384-22fe-47e5-afea-f0314a3020dc"} -->
+	<div class="wp-block-group bg-light"><!-- wp:media-text {"mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","customCSSId":"36630e35-f690-4e56-9888-ea818333e9bb"} -->
+	<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure><div class="wp-block-media-text__content"><!-- wp:heading -->
+	<h2>Web Design</h2>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph {"align":"left","className":"has-text-color"} -->
-	<p class="has-text-align-left has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+	<!-- wp:paragraph {"customCSSId":"643cfc2b-a629-496e-90b2-25c8c7b79b02"} -->
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
 	<!-- /wp:paragraph -->
 	
-	<!-- wp:buttons {"align":"left"} -->
-	<div class="wp-block-buttons alignleft"><!-- wp:button {"backgroundColor":"primary"} -->
-	<div class="wp-block-button"><a class="wp-block-button__link has-primary-background-color has-background" href="#">LEARN MORE</a></div>
+	<!-- wp:buttons {"customCSSId":"c732c8ee-955b-43d9-894c-722bcb2611be"} -->
+	<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"primary","textColor":"white","customCSSId":"23fab749-d1c3-42c2-bd35-fca979929de7"} -->
+	<div class="wp-block-button"><a class="wp-block-button__link has-white-color has-primary-background-color has-text-color has-background" href="#">Learn More</a></div>
 	<!-- /wp:button --></div>
-	<!-- /wp:buttons --></div>
-	<!-- /wp:wca/column --></div></div></div>
-	<!-- /wp:wca/section -->
+	<!-- /wp:buttons --></div></div>
+	<!-- /wp:media-text -->
 	
-	<!-- wp:wca/section {"gutter":0,"backgroundColor":"light"} -->
-	<div class="wp-block-wca-section alignfull wca-section has-light-background-color has-background"><div class="wca-section__container container"><div class="wca-section__row row gx-0"><!-- wp:wca/column {"verticalAlignment":"center","bootstrapColumns":{"global":"col-12","md":"col-md-8","lg":"col-lg-6"},"className":"pe-md-5"} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md-8 col-lg-6 align-self-center  pe-md-5"><!-- wp:heading {"textAlign":"left","className":"has-text-color","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<h2 class="has-text-align-left has-text-color">Branding</h2>
+	<!-- wp:media-text {"mediaPosition":"right","mediaLink":"https://picsum.photos/id/119/800/800","mediaType":"image","customCSSId":"31e3f184-797b-4d48-909f-453483c346b3"} -->
+	<div class="wp-block-media-text alignwide has-media-on-the-right is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/119/800/800" alt="" /></figure><div class="wp-block-media-text__content"><!-- wp:heading {"customCSSId":"3273f366-e3e7-4b85-91cb-643de41e4651"} -->
+	<h2>Branding</h2>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph {"align":"left","className":"has-text-color"} -->
-	<p class="has-text-align-left has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+	<!-- wp:paragraph {"customCSSId":"06dc14fe-135f-4af4-9b2f-fcd1645c0b38"} -->
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
 	<!-- /wp:paragraph -->
 	
-	<!-- wp:buttons {"align":"left"} -->
-	<div class="wp-block-buttons alignleft"><!-- wp:button {"backgroundColor":"primary"} -->
-	<div class="wp-block-button"><a class="wp-block-button__link has-primary-background-color has-background" href="#">LEARN MORE</a></div>
+	<!-- wp:buttons {"customCSSId":"98258933-cabc-4aa6-9b88-43980b4b3dc9"} -->
+	<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"primary","textColor":"white","customCSSId":"e7d8f043-ed63-4b89-a8d4-627ef69091f5"} -->
+	<div class="wp-block-button"><a class="wp-block-button__link has-white-color has-primary-background-color has-text-color has-background" href="#">Learn More</a></div>
 	<!-- /wp:button --></div>
-	<!-- /wp:buttons --></div>
-	<!-- /wp:wca/column -->
+	<!-- /wp:buttons --></div></div>
+	<!-- /wp:media-text --></div>
+	<!-- /wp:group -->
 	
-	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md-4","lg":"col-lg-6"},"className":"order-first order-md-last mb-md-0 mb-4"} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md-4 col-lg-6 order-first order-md-last mb-md-0 mb-4"><!-- wp:image {"sizeSlug":"large","className":"mb-0"} -->
-	<figure class="wp-block-image size-large mb-0"><img src="https://picsum.photos/id/119/800/800" alt=""/></figure>
-	<!-- /wp:image --></div>
-	<!-- /wp:wca/column --></div></div></div>
-	<!-- /wp:wca/section -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"a8c3da0a-0a16-4e29-9278-9a2693c72cdf"} -->
+	<div class="wp-block-group my-5"><!-- wp:heading {"textAlign":"center","customCSSId":"4bcbe270-a9d3-4670-a094-d2ed35c5a4c1"} -->
+	<h2 class="has-text-align-center">What Client\'s Say</h2>
+	<!-- /wp:heading -->
 	
-	<!-- wp:wca/section {"className":"py-5"} -->
-	<div class="wp-block-wca-section alignfull py-5 wca-section"><div class="wca-section__container container"><div class="wca-section__row row gx-4"><!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","sm":"col-sm-12","md":"","lg":"","xl":""}} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-sm-12"><!-- wp:heading {"textAlign":"center","className":"mb-5 display-5"} -->
-	<h2 class="has-text-align-center mb-5 display-5">What Client\'s Say</h2>
-	<!-- /wp:heading --></div>
-	<!-- /wp:wca/column -->
+	<!-- wp:separator {"color":"primary","className":"is-style-dots","customCSSId":"81b6a877-199c-43de-82c8-882d5ffaae4b"} -->
+	<hr class="wp-block-separator has-text-color has-background has-primary-background-color has-primary-color is-style-dots"/>
+	<!-- /wp:separator -->
 	
-	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md"><!-- wp:image {"width":80,"height":80,"className":"is-style-rounded","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<figure class="wp-block-image is-resized is-style-rounded"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="80" height="80"/></figure>
+	<!-- wp:columns {"className":"flex-column flex-lg-row","customCSSId":"f33ab325-d656-492e-a80f-d78c1986cc45"} -->
+	<div class="wp-block-columns flex-column flex-lg-row"><!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"94cc5be7-5b81-42e5-ae99-eb9002054c16"} -->
+	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"width":65,"height":65,"sizeSlug":"large","customCSSId":"2a82f246-4866-4037-87c8-810923ee9fea"} -->
+	<figure class="wp-block-image size-large is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="65" height="65"/></figure>
 	<!-- /wp:image -->
 	
-	<!-- wp:quote {"className":"is-style-default"} -->
-	<blockquote class="wp-block-quote is-style-default"><p>“What is the point of being alive if you don’t at least try to do something remarkable?”</p><cite>JANET MORRIS</cite></blockquote>
+	<!-- wp:quote {"customCSSId":"44c3daf3-9001-4e2c-bebf-397a7cef5059"} -->
+	<blockquote class="wp-block-quote"><p>“What is the point of being alive if you don’t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
 	<!-- /wp:quote --></div>
-	<!-- /wp:wca/column -->
+	<!-- /wp:column -->
 	
-	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md"><!-- wp:image {"width":80,"height":80,"className":"is-style-rounded","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<figure class="wp-block-image is-resized is-style-rounded"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="80" height="80"/></figure>
+	<!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"f746234d-d66a-49cf-85ff-88cb4afa343c"} -->
+	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"width":65,"height":65,"sizeSlug":"large","customCSSId":"424e578c-292f-4861-bbf1-7856c1704de7"} -->
+	<figure class="wp-block-image size-large is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="65" height="65"/></figure>
 	<!-- /wp:image -->
 	
-	<!-- wp:quote {"className":"is-style-default"} -->
-	<blockquote class="wp-block-quote is-style-default"><p>“What is the point of being alive if you don’t at least try to do something remarkable?”</p><cite>WILLIE BROWN</cite></blockquote>
+	<!-- wp:quote {"customCSSId":"44c3daf3-9001-4e2c-bebf-397a7cef5059"} -->
+	<blockquote class="wp-block-quote"><p>“What is the point of being alive if you don’t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
 	<!-- /wp:quote --></div>
-	<!-- /wp:wca/column -->
+	<!-- /wp:column -->
 	
-	<!-- wp:wca/column {"bootstrapColumns":{"global":"col-12","md":"col-md"}} -->
-	<div class="wp-block-wca-column wca-column col col-12 col-md"><!-- wp:image {"width":80,"height":80,"className":"is-style-rounded","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
-	<figure class="wp-block-image is-resized is-style-rounded"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="80" height="80"/></figure>
+	<!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"47bfa84f-e3f7-40f1-a3da-d107da88d9ec"} -->
+	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"width":65,"height":65,"sizeSlug":"large","customCSSId":"fbba09f3-840c-4f61-9154-9cd1f6d476a3"} -->
+	<figure class="wp-block-image size-large is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="65" height="65"/></figure>
 	<!-- /wp:image -->
 	
-	<!-- wp:quote {"className":"is-style-default"} -->
-	<blockquote class="wp-block-quote is-style-default"><p>“What is the point of being alive if you don’t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
+	<!-- wp:quote {"customCSSId":"44c3daf3-9001-4e2c-bebf-397a7cef5059"} -->
+	<blockquote class="wp-block-quote"><p>“What is the point of being alive if you don’t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
 	<!-- /wp:quote --></div>
-	<!-- /wp:wca/column --></div></div></div>
-	<!-- /wp:wca/section -->
+	<!-- /wp:column --></div>
+	<!-- /wp:columns --></div>
+	<!-- /wp:group -->
 	
-	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","customGradient":"linear-gradient(1deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)","align":"full","className":"py-5 text-center"} -->
-	<div class="wp-block-cover alignfull has-background-dim has-background-gradient py-5 text-center"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","className":"mb-5 display-5","wecodeart":{"desktop":true,"tablet":true,"mobile":true,"loggedin":true,"loggedout":true}} -->
+	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","gradient":"vivid-cyan-blue-to-vivid-purple","align":"full","className":"py-5 text-center","customCSSId":"cccf23e4-fc00-48fa-bf29-d8b08437b8a9"} -->
+	<div class="wp-block-cover alignfull has-background-dim has-background-gradient has-vivid-cyan-blue-to-vivid-purple-gradient-background py-5 text-center" style="min-height:555px"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","className":"mb-5 display-5"} -->
 	<h2 class="has-text-align-center mb-5 display-5">Let’s work together on your <br>next web project</h2>
 	<!-- /wp:heading -->
-
+	
 	<!-- wp:paragraph {"align":"center","className":"lead mb-5","fontSize":"medium"} -->
 	<p class="has-text-align-center lead mb-5 has-medium-font-size">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus <br>nec ullamcorper mattis, pulvinar dapibus leo.</p>
 	<!-- /wp:paragraph -->
-
-	<!-- wp:buttons {"align":"center","className":"} -->
-	<div class="wp-block-buttons is-content-justification-center ><!-- wp:button {"backgroundColor":"light","textColor":"dark","className":""} -->
+	
+	<!-- wp:buttons {"contentJustification":"center","customCSSId":"b61222af-bb70-40dd-9512-243ecce41f4d"} -->
+	<div class="wp-block-buttons is-content-justification-center"><!-- wp:button {"backgroundColor":"light","textColor":"dark"} -->
 	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div></div>

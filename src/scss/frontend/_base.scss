@@ -1,0 +1,92 @@
+/* 	= Base
+--------------------------------------------------------------- */
+html {
+    body {
+        overflow-x: hidden;
+    }
+}
+
+/* 1.0 = WordPress Core */
+.alignnone {
+    margin: 0 0 $spacer 0;
+}
+
+.aligncenter {
+    display: block;
+    margin: 0 auto $spacer;
+}
+
+.alignright {
+    float: right;
+    margin: 0 0 $spacer $spacer;
+}
+
+.alignleft {
+    float: left;
+    margin: 0 $spacer $spacer 0;
+}
+
+svg,
+.svg-inline {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1rem;
+    height: 1rem;
+
+    .fa-secondary {
+        opacity: .4;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    backface-visibility: hidden;
+}
+
+figcaption,
+.wp-caption {
+    font-size: var(--wp--preset--font-size--small);
+    font-style: italic;
+    padding: 5px 3px 10px;
+    text-align: center;
+
+    img {
+        border: 0 none;
+        height: auto;
+        margin: 0;
+        max-width: 98.5%;
+        padding: 0;
+        width: auto;
+    }
+
+    p.wp-caption-text {
+        font-size: var(--wp--preset--font-size--small);
+        margin: 0;
+        padding: 0 4px 5px;
+    }
+}
+
+/* Default Widgets */
+.widget_archive,
+.widget_meta,
+.widget_pages,
+.widget_categories,
+.widget_nav_menu,
+.widget_recent_comments,
+.widget_recent_entries {
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+
+        a {
+            padding: 0;
+        }
+    }
+}
+
+.widget_calendar {
+    table {
+        width: 100%;
+    }
+}

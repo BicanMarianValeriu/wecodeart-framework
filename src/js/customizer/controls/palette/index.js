@@ -5,31 +5,27 @@ import Form from './Form';
 const { useState } = wp.element;
 
 const Component = ({ control }) => {
-	const { label, default: defaultValues } = control.params;
+	const { label, palette, paletteTheme, choices: values, inputAttrs = {} } = control.params;
+	const { allowAdd } = inputAttrs;
 
-	const [values, setValues] = useState({ ...control.setting.get() });
+	const [value, setValue] = useState(control.setting.get());
+	const [choices, setChoices] = useState(values);
 
 	const save = (nextValue) => {
 		// State
-		setValues(nextValue);
-
-		// Customize
-		if (nextValue.flag) {
-			delete nextValue.flag;
-		} else {
-			nextValue.flag = true;
-		}
-
+		setValue(nextValue);
 		// Save
 		control.setting.set(nextValue);
 	};
 
+	const objectProps = { value, choices, setChoices, save, palette, paletteTheme, inputAttrs };
+
 	return (
 		<>
 			{label && <span className="customize-control-title">{label}</span>}
-			<Selector values={values} save={save} />
-			<Form values={values} save={save} disabled={Object.keys(values.palettes).length > 4} />
-			<Colors values={values} save={save} defaults={defaultValues} />
+			<Selector {...objectProps} />
+			{allowAdd && <Form {...objectProps} disabled={choices.length > 4} />}
+			<Colors {...objectProps} />
 		</>
 	);
 };

@@ -40,11 +40,9 @@ class Classes {
 	public function register_hooks() {
 		// Admin
 		add_action( 'enqueue_block_editor_assets', 			[ $this, 'block_editor_assets' ] );
-		add_filter( 'wecodeart/filter/gutenberg/settings', 	[ $this, 'set_columns_classes' ], 10, 2 );
 		add_filter( 'wecodeart/filter/gutenberg/settings', 	[ $this, 'set_suggest_classes' ], 10, 2 );
 
 		// Child Classes
-		Classes\Columns::get_instance();
 		Classes\Suggestions::get_instance();
 	}
 
@@ -57,23 +55,6 @@ class Classes {
 		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg-classes' ), [
 			'wecodeart-gutenberg'
 		], wecodeart( 'version' ) );
-	}
-
-	/**
-	 * Add new block editor settings for custom classes.
-	 *
-	 * @param array  $settings 	The editor settings.
-	 * @param object $post 		The post being edited.
-	 *
-	 * @return array Returns updated editors column classes.
-	 */
-	public function set_columns_classes( $settings, $post ) {
-		if ( ! isset( $settings[ 'columnsClasses' ] ) ) {
-			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/columns_classes', [], $post );
-			$settings['columnsClasses'] = array_map( 'sanitize_html_class', $classes );
-		}
-
-		return $settings;
 	}
 
 	/**

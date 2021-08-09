@@ -1,6 +1,22 @@
 {
 	"version": 1,
-	"customTemplates": [],
+	"customTemplates": [
+		{
+			"name": "page-sidebar",
+			"title": "Page - Sidebar",
+			"postTypes": [
+				"page"
+			]
+		},
+		{
+			"name": "page-full",
+			"title": "Page - Full",
+			"postTypes": [
+				"page",
+				"post"
+			]
+		}
+	],
 	"templateParts": [
 		{
 			"name": "header",
@@ -31,77 +47,72 @@
 					"name": "Secondary"
 				},
 				{
-					"slug": "danger",
-					"color": "#dc3545",
-					"name": "Danger"
-				},
-				{
-					"slug": "success",
-					"color": "#7dc855",
-					"name": "Success"
-				},
-				{
-					"slug": "info",
-					"color": "#17a2b8",
-					"name": "Info"
-				},
-				{
-					"slug": "warning",
-					"color": "#ffc107",
-					"name": "Warning"
-				},
-				{
-					"slug": "dark",
-					"color": "#343a40",
-					"name": "Dark"
-				},
-				{
-					"slug": "light",
-					"color": "#f1f3f7",
-					"name": "Light"
-				},
-				{
-					"slug": "white",
+					"slug": "background",
 					"color": "#ffffff",
-					"name": "White"
+					"name": "Background"
 				},
 				{
-					"slug": "black",
-					"color": "#000000",
-					"name": "Black"
-				}
-			],
-			"duotone": [
-				{
-					"colors": [ "#1d1f35", "#6cace4" ],
-					"slug": "dark-blue-and-light-blue",
-					"name": "Dark blue and light blue"
+					"slug": "foreground",
+					"color": "#343a40",
+					"name": "Foreground"
 				},
 				{
-					"colors": [ "#1d1f35", "#c7c0af" ],
-					"slug": "dark-blue-and-beige",
-					"name": "Dark blue and beige"
+					"slug": "selection",
+					"color": "#ebe9eb",
+					"name": "Selection"
 				}
 			],
+			"gradients": [],
 			"link": true,
 			"custom": true,
 			"customGradient": true
 		},
 		"custom": {
-			"width": {
-				"default": "840px",
-				"wide": "1100px"
-			}
+			"container": {
+				"sm": "540px",
+				"md": "720px",
+				"lg": "960px",
+				"xl": "1140px",
+				"xxl": "1320px"
+			},
+			"colorPalettes": [
+				{
+					"label": "Base",
+					"slug": "base",
+					"allowDeletion": false,
+					"colors": {
+						"primary": "#2388ed",
+						"secondary": "#6c757d",
+						"background": "#ffffff",
+						"foreground": "#343a40",
+						"selection": "#ebe9eb"
+					}
+				},
+				{
+					"label": "Dark Mode",
+					"slug": "dark",
+					"allowDeletion": false,
+					"colors": {
+						"primary": "#7dc855",
+						"secondary": "#2388ed",
+						"background": "#343a40",
+						"foreground": "#fafafa",
+						"selection": "#ebe9eb"
+					}
+				}
+			],
+			"wideMultiplier": "1.15"
 		},
 		"layout": {
-			"contentSize": "620px",
-			"wideSize": "1000px"
+			"contentSize": "1320px",
+			"wideSize": "1440px"
 		},
 		"spacing": {
 			"customMargin": true,
 			"customPadding": true,
 			"units": [
 				"px",
+				"%",
 				"em",
 				"rem",
 				"vh",
@@ -111,7 +122,7 @@
 		"typography": {
 			"dropCap": true,
 			"customFontSize": true,
-			"customLineHeight": false,
+			"customLineHeight": true,
 			"customFontStyle": true,
 			"customFontWeight": true,
 			"customTextTransforms": true,
@@ -235,7 +246,7 @@
 	"styles": {
 		"color": {
 			"background": "var(--wp--preset--color--white)",
-			"text": "var(--wp--preset--color--dark)"
+			"text": "var(--wp--preset--color--foreground)"
 		},
 		"typography": {
 			"fontSize": "var(--wp--preset--font-size--normal)",
@@ -250,7 +261,7 @@
 			},
 			"h1": {
 				"color": {
-					"text": "var(--wp--preset--color--dark)"
+					"text": "var(--wp--preset--color--foreground)"
 				},
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--headings)"
@@ -258,14 +269,14 @@
 			}
 		},
 		"blocks": {
-			"core/post-title": {
-				"typography": {
-					"fontSize": "var(--wp--preset--font-size--large)"
-				}
-			},
 			"core/paragraph": {
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--normal)"
+				}
+			},
+			"core/post-author": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--small)"
 				}
 			},
 			"core/post-date": {
@@ -278,13 +289,18 @@
 					"fontSize": "var(--wp--preset--font-size--small)"
 				}
 			},
+			"core/post-comments-link": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--small)"
+				}
+			},
 			"core/button": {
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--headings)"
 				},
 				"border": {
-					"width": "0px",
-					"radius": "4px"
+					"width": "1px",
+					"radius": "0.25rem"
 				}
 			}
 		}

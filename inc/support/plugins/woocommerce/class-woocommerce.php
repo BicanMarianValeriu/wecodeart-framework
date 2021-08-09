@@ -63,8 +63,8 @@ class WooCommerce implements Integration {
 		WooCommerce\Customizer::get_instance();
 
 		// Add support for WooCommerce / Widgets
+		add_action( 'widgets_init', 		[ $this, 'widgets_init' ] );
 		add_action( 'after_setup_theme', 	[ $this, 'after_setup_theme' ] );
-		add_action( 'widgets_init',  		[ $this, 'register_sidebars' ] );
 
 		// Widgets and Hook into Sidebar
 		remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar'	);
@@ -78,9 +78,7 @@ class WooCommerce implements Integration {
 		add_action( 'woocommerce_after_main_content',    	[ $this, 'after_content_wrapp' ],  	10 );
 
 		// Filters
-		add_filter( 'wecodeart/filter/header/bar/modules', 	[ $this, 'add_cart_to_header_modules' ] );
 		add_filter( 'wecodeart/filter/gutenberg/restricted',[ $this, 'restricted_gutenberg_blocks' ] );
-		add_filter( 'woocommerce_add_to_cart_fragments',	[ $this, 'cart_count_fragments' ], 10, 1 );
 	}
 
 	/**
@@ -90,39 +88,48 @@ class WooCommerce implements Integration {
 	public function after_setup_theme() {
 		$support = get_prop( wecodeart_config( 'woocommerce' ), 'support', [] );
 		// Theme Support
-		foreach( array_filter( $support ) as $feature => $value ) {
-			add_theme_support( $feature, $value );
-		}
+		foreach( $support as $feature => $value ) add_theme_support( $feature, $value );
+	}
+
+	/**
+	 * Add a sidebar.
+	 *
+	 * @since   3.5
+	 * @version 5.0.0
+	 *
+	 * @return  void
+	 */
+	public function widgets_init() {
+		register_sidebar( [
+			'name'          => __( 'Shop Sidebar', 'wecodeart' ),
+			'id'            => 'shop',
+			'description'   => __( 'Widgets in this area will be shown on all shop pages.', 'wecodeart' ),
+			'before_widget' => '',
+			'after_widget'  => '',
+		] );
 	}
 	
 	/**
 	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup
 	 *
 	 * @since   3.5
-	 * @version 4.1.4
+	 * @version 5.0.0
 	 *
 	 * @return  void
 	 */
 	public function before_content_wrapp() {
-		if( wecodeart_if( 'is_woocommerce_archive' ) ) {
-			$wrapper = get_theme_mod( 'content-layout-container-product-archive' );
-		} elseif( is_product() ) {
-			$wrapper = get_theme_mod( 'content-layout-container-product-singular' );
-		} else {
-			$wrapper = get_theme_mod( 'content-layout-container' );
-		} 
-
 		/**
 		 * Added Attributes / can be filtered
 		 * @since 3.7.0
 		 */		
 		?>
-		<div <?php echo Markup::generate_attr( 'woocommerce-wrapper', [
-			'class' => 'content-area content-area--woocommerce'
+		<div <?php echo Markup::generate_attr( 'woocommerce', [
+			'class' => 'site-content py-5 wp-block-template-part'
 		] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-			<div class="<?php echo sanitize_html_class( $wrapper ); ?>">
+			<div class="container">
 				<div class="row">
 		<?php
+
 				self::sort_modules( 'before' );
 
 				Content::get_instance()->content_markup_open();
@@ -138,10 +145,13 @@ class WooCommerce implements Integration {
 	public function after_content_wrapp() {
 				Content::get_instance()->content_markup_close();
 
-				self::sort_modules( 'after' ); ?>
+				self::sort_modules( 'after' );
+				
+		?>
 				</div>
 			</div>
 		</div>
+		<!-- /.woocommerce @filter = `wecodeart/filter/wrappers/woocommerce` -->
 		<?php
 	}
 	
@@ -156,22 +166,21 @@ class WooCommerce implements Integration {
 	 * @return 	void
 	 */
 	public static function sort_modules( string $position ) {
-		if( wecodeart_if( 'is_woocommerce_archive' ) ) {
-			$modules = get_theme_mod( 'content-layout-modules-product-archive' ); 
-		} elseif( is_product() ) {
-			$modules = get_theme_mod( 'content-layout-modules-product-singular' ); 
-		} else {
-			$modules = get_theme_mod( 'content-layout-modules' );
-		}
+		$modules = [ 'content', 'sidebar' ];
 
 		$index = array_search( 'content', $modules );
 		if( $position === 'after' ) $elements = array_slice( $modules, $index + 1 );
 		if( $position === 'before') $elements = array_slice( $modules, 0, $index, false );
 
 		$sortable = wp_parse_args( [
-			'primary' => [
+			'sidebar' => [
 				'callback' => function() {
-					Content::render_sidebar( 'shop' );
+					Markup::wrap( 'shop', [ [
+						'tag' 	=> 'aside',
+						'attrs' => [
+							'class'	=> 'sidebar col-12 col-lg-3',
+						]
+					] ], 'dynamic_sidebar', [ 'shop' ] );
 				}
 			]
 		], Content::content_modules() );
@@ -179,43 +188,6 @@ class WooCommerce implements Integration {
 		// Sort the modules based on context.
 		Markup::sortable( $sortable, $elements );
 	}
-
-	/**
-	 * Register WooCommerce Shop Sidebar
-	 *
-	 * @since	3.3
-	 * @version	3.9.5
-	 *
-	 * @return 	void
-	 */
-	public function register_sidebars() {
-		wecodeart( 'register_sidebars', [ [
-			'id'            => 'shop',
-			'class'         => 'shop',
-			'name'          => esc_html__( 'Shop Sidebar', 'wecodeart' ),
-			'description'   => esc_html__( 
-				'This is the Shop Sidebar - it will replace Primary Sidebar on WooCommerce Pages.', 
-				'wecodeart' 
-			),
-		] ] );
-	}
-
-	/**
-	 * Filter - WooCommerce Header Bar Cart Module
-	 *
-	 * @since	3.5
-	 * @version	4.0.7
-	 *
-	 * @return 	array
-	 */
-	public function add_cart_to_header_modules( $modules ) {
-		$modules['cart'] = [
-			'label'    => esc_html__( 'WooCommerce Cart', 'wecodeart' ),
-			'callback' => [ $this, 'display_cart_module' ],
-		];
-
-		return $modules;
-	} 
 
 	/**
 	 * Filter - Restricted WooCommerce Blocks from theme code
@@ -236,74 +208,4 @@ class WooCommerce implements Integration {
 			'woocommerce/product-new',
 		], $blocks );
 	}
-
-	/**
-	 * Render Header Bar Cart Module
-	 *
-	 * @since   3.5
-	 * @version 4.0.7
-	 *
-	 * @return  void
-	 */
-	public function display_cart_module() {
-		Markup::wrap( 'header-cart', [ [
-			'tag' 	=> 'div',
-			'attrs' => [
-				'id' 	=> 'bar-cart',
-				'class' => 'header-bar__cart dropdown'
-			] 
-		] ], [ 'WeCodeArt\Markup', 'template' ], [ [ 'header/woo-cart', 'index' ], [
-			'subtotal' 	=> wp_kses_post( WC()->cart->get_cart_subtotal() ),
-			'count'		=> wp_kses_data( WC()->cart->get_cart_contents_count() )
-		] ] );
-	}
-
-	/**
-	 * Filter - Cart Fragments
-	 *
-	 * @since 	3.5
-	 * @version	4.0.7
-	 *
-	 * @param 	array	fragments
-	 *
-	 * @return	array
-	 */
-	public function cart_count_fragments( $fragments ) {
-		$subtotal = Markup::template( [ 'header/woo-cart', 'subtotal' ], [
-            'subtotal' => WC()->cart->get_cart_subtotal(),
-		], false );
-
-		$doc = new \DOMDocument();
-		$doc->loadHTML( $subtotal );
-		$body = $doc->getElementsByTagName('body');
-		
-		if( $body && 0 < $body->length ) {
-			$body = $body->item(0);
-			$body_els = $body->getElementsByTagName('*');
-
-			if( $body_els && 0 < $body_els->length ) {
-				$first_child = $body_els->item(0);
-				$fragments["{$first_child->tagName}.{$first_child->getAttribute('class')}"] = $subtotal;
-			}
-		}
-
-		$count = Markup::template( [ 'header/woo-cart', 'count' ], [
-            'count'  => WC()->cart->get_cart_contents_count(),
-		], false );
-
-		$doc->loadHTML( $count );
-		$body = $doc->getElementsByTagName('body');
-		
-		if( $body && 0 < $body->length ) {
-			$body = $body->item(0);
-			$body_els = $body->getElementsByTagName('*');
-
-			if( $body_els && 0 < $body_els->length ) {
-				$first_child = $body_els->item(0);
-				$fragments["{$first_child->tagName}.{$first_child->getAttribute('class')}"] = $count;
-			}
-		}
-
-		return $fragments;
-	} 
 }

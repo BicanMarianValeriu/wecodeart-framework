@@ -17,7 +17,6 @@ namespace WeCodeArt\Admin\Customizer\Configs;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Admin\Customizer\Config;
-use function WeCodeArt\Functions\get_color_palette;
 
 /**
  * Customizer Config Design
@@ -41,57 +40,22 @@ class Design extends Config {
 				'section'		=> 'general-design',
 				'title' 		=> esc_html__( 'Site Palette', 'wecodeart' ),
 				'transport'		=> 'postMessage',
-				'default' 		=> get_color_palette(),
+				'input_attrs'	=> [
+					'readOnly'		=> false,
+					'allowAdd'		=> true,
+					'disableGlobal'	=> true,
+				],
+				'default' 		=> 'base',
 				'output'		=> [
 					[
-						'element'  	=> 'body',
+						'element'  	=> '::selection',
 						'property' 	=> 'background-color',
-						'key'		=> 'site'
-					],
-					[
-						'element'  	=> 'body',
-						'property' 	=> 'color',
-						'key'		=> 'text'
-					],
-					[
-						'element'  	=> ':root .has-dark-background-color',
-						'property' 	=> 'color',
-						'key'		=> 'text-dark'
-					],
-					[
-						'element'  	=> ':root .has-dark-background-color',
-						'property' 	=> 'background-color',
-						'key'		=> 'dark'
-					],
-					[
-						'element'  	=> ':root .has-light-background-color',
-						'property' 	=> 'background-color',
-						'key'		=> 'light'
-					],
-					[
-						'element'  	=> ':root',
-						'property' 	=> '--wca-primary',
-						'key'		=> 'primary'
-					],
-					[
-						'element'  	=> ':root',
-						'property' 	=> '--wca-secondary',
-						'key'		=> 'secondary'
-					],
-					[
-						'element'  	=> 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6',
-						'property' 	=> 'color',
-						'key'		=> 'heading'
-					],
-					[
-						'element'  	=> 'a',
-						'property' 	=> 'color',
-						'key'		=> 'link'
-					],
+						'key'		=> 'selection'
+					]
 				],
 				'partial'		=> [
-					'selector'        => '.navbar#navbar',
-					'render_callback' => [ 'WeCodeArt\Core\Header', 'render_navbar' ],
+					'selector'        => 'header.site-header',
+					'render_callback' => [ 'WeCodeArt\Core\Header', 'markup' ],
 					'container_inclusive' => true
 				]
 			],

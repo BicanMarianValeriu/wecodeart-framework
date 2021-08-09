@@ -102,63 +102,44 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * External dependencies
  */
-var _lodash = lodash,
-    split = _lodash.split,
-    replace = _lodash.replace,
-    get = _lodash.get,
-    join = _lodash.join;
+const {
+  split,
+  replace,
+  get,
+  join
+} = lodash;
 /**
  * WordPress Dependencies
  */
 
-var _wp = wp,
-    __ = _wp.i18n.__,
-    _wp$hooks = _wp.hooks,
-    addFilter = _wp$hooks.addFilter,
-    removeFilter = _wp$hooks.removeFilter,
-    hasBlockSupport = _wp.blocks.hasBlockSupport,
-    _wp$compose = _wp.compose,
-    compose = _wp$compose.compose,
-    createHigherOrderComponent = _wp$compose.createHigherOrderComponent,
-    withState = _wp$compose.withState,
-    _wp$data = _wp.data,
-    withSelect = _wp$data.withSelect,
-    select = _wp$data.select,
-    InspectorAdvancedControls = _wp.blockEditor.InspectorAdvancedControls,
-    FormTokenField = _wp.components.FormTokenField;
-/**
- * Enhance Block
- */
-
-var enhance = compose(withState({
-  customClassNames: []
-}), withSelect(function (select, block) {
-  var selectedBlock = select('core/block-editor').getSelectedBlock();
-  var getClasses = get(selectedBlock, 'attributes.className');
-
-  if (getClasses) {
-    getClasses = replace(getClasses, ',', ' ');
+const {
+  i18n: {
+    __
+  },
+  hooks: {
+    addFilter,
+    removeFilter
+  },
+  blocks: {
+    hasBlockSupport
+  },
+  compose: {
+    createHigherOrderComponent
+  },
+  data: {
+    useSelect
+  },
+  blockEditor: {
+    InspectorAdvancedControls,
+    store: blockEditorStore
+  },
+  components: {
+    FormTokenField
+  },
+  element: {
+    useState
   }
-
-  if (selectedBlock && getClasses && join(block.customClassNames, ' ') !== getClasses) {
-    if (block.clientId === selectedBlock.clientId) {
-      block.setState({
-        customClassNames: split(getClasses, ' ')
-      });
-    }
-  } // Defaults for FSE
-
-
-  var _select$getEditorSett = select('core/editor').getEditorSettings(),
-      _select$getEditorSett2 = _select$getEditorSett.wecodeart;
-
-  _select$getEditorSett2 = _select$getEditorSett2 === void 0 ? {} : _select$getEditorSett2;
-  var _select$getEditorSett3 = _select$getEditorSett2.customClasses,
-      customClasses = _select$getEditorSett3 === void 0 ? [] : _select$getEditorSett3;
-  return {
-    suggestions: customClasses
-  };
-}));
+} = wp;
 /**
  * Override the default edit UI to include a new block inspector control for
  * assigning the custom class name, if block supports custom class name.
@@ -168,15 +149,40 @@ var enhance = compose(withState({
  * @return {string} Wrapped component.
  */
 
-var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
-  return enhance(function (props) {
-    var name = props.name,
-        customClassNames = props.customClassNames,
-        suggestions = props.suggestions,
-        isSelected = props.isSelected,
-        setAttributes = props.setAttributes,
-        setState = props.setState;
-    var hasClassName = hasBlockSupport(name, 'className', true);
+const withInspectorControl = createHigherOrderComponent(BlockEdit => {
+  return props => {
+    const {
+      name,
+      isSelected,
+      setAttributes
+    } = props;
+    const [customClassNames, setCustomClassNames] = useState([]);
+    const {
+      suggestions
+    } = useSelect((select, block) => {
+      const selectedBlock = select(blockEditorStore).getSelectedBlock();
+      const {
+        wecodeart: {
+          customClasses = []
+        } = {}
+      } = select('core/editor').getEditorSettings();
+      let getClasses = get(selectedBlock, 'attributes.className');
+
+      if (getClasses) {
+        getClasses = replace(getClasses, ',', ' ');
+      }
+
+      if (selectedBlock && getClasses && join(customClassNames, ' ') !== getClasses) {
+        if (block.clientId === selectedBlock.clientId) {
+          setCustomClassNames(split(getClasses, ' '));
+        }
+      }
+
+      return {
+        suggestions: customClasses
+      };
+    });
+    const hasClassName = hasBlockSupport(name, 'className', true);
 
     if (hasClassName && isSelected) {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(FormTokenField, {
@@ -184,19 +190,17 @@ var withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
         value: customClassNames,
         suggestions: suggestions,
         maxSuggestions: 20,
-        onChange: function onChange(val) {
+        onChange: val => {
           setAttributes({
             className: val !== '' ? join(val, ' ') : undefined
           });
-          setState({
-            customClassNames: val !== '' ? val : undefined
-          });
+          setCustomClassNames(val !== '' ? val : undefined);
         }
       })));
     }
 
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
-  });
+  };
 }, 'withInspectorControl');
 /**
  * Apply Filters

@@ -19,33 +19,38 @@ use WeCodeArt\Markup\SVG;
 /**
  * @param   int     $number Contains the comments number
  */
-$classnames = [ 'entry-comments' ];
+$classnames = [ 'wp-block-post-comments-link' ];
 
 if( 0 === $number ) {
-    $classnames[] = 'entry-comments--none';
+    $classnames[] = 'none';
 } elseif ( 1 === $number ) {
-    $classnames[] = 'entry-comments--one';
+    $classnames[] = 'one';
 } elseif ( 1 < $number ) {
-    $classnames[] = 'entry-comments--multiple';
+    $classnames[] = 'multiple';
 }
 
 if( post_password_required() ) {
-    $classnames[] = 'entry-comments--protected';
+    $classnames[] = 'protected';
 }
 ?>
-<span class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
-    <span class="d-inline-block me-1"><?php
+<div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
     
-        SVG::render( 'comments' );
-    
-    ?></span><?php
-    
-        comments_popup_link( 
-            esc_html__( 'Leave a Comment',  'wecodeart' ), 
-            esc_html__( '1 Comment',        'wecodeart' ), 
-            esc_html__( '% Comments',       'wecodeart' ), 
-            'entry-comments__link me-2', 
-            esc_html__( 'Comments are Closed', 	'wecodeart' )
-        );
+    SVG::render( 'comments', [
+        'class' => 'wp-block-post-comments-link__icon d-inline-block me-1'
+    ] ); 
 
-?></span>
+    comments_popup_link( 
+        esc_html__( 'Leave a Comment',  'wecodeart' ), 
+        esc_html__( '1 Comment',        'wecodeart' ), 
+        esc_html__( '% Comments',       'wecodeart' ), 
+        '', 
+        esc_html__( 'Comments are Closed', 	'wecodeart' )
+    );
+
+    ?>
+    <span class="screen-reader-text"><?php
+    
+        printf( esc_html__( ' on %s', 'wecodeart' ), get_the_title( $post_id ) );
+
+    ?></span>
+</div>

@@ -36,6 +36,7 @@ class Suggestions {
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'flex_classes' 			] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'display_classes'		] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'spacing_classes' 		] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'grid_classes' 			] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'offset_order_classes' 	] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'position_classes' 		] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'extra_classes' 			] );
@@ -147,6 +148,32 @@ class Suggestions {
 						$args[] = implode( '-', [ $space . $dir, $break, $size ] );
 					}
 				}
+			}
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function grid_classes( $args ) {
+		$args[] = 'col-auto';
+
+		foreach( range( 1, 12 ) as $number ) {
+			$args[] = 'col-' . $number;
+		}
+
+		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $breakpoint ) {
+			$args[] = 'col-' . $breakpoint;
+			$args[] = 'col-' . $breakpoint . '-auto';
+
+			foreach( range( 1, 12 ) as $number ) {
+				$args[] = 'col-'. $breakpoint . '-' . $number;
 			}
 		}
 

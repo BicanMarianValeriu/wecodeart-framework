@@ -58,33 +58,6 @@ class Entry {
 				return current_user_can( 'edit_posts' );
 			},
 		] );
-
-		register_meta( 'post', '_wca_builder_template', [
-			'show_in_rest'  => true,
-			'single'        => true,
-			'type'          => 'boolean',
-			'auth_callback' => function() {
-				return current_user_can( 'edit_posts' );
-			},
-		] );
-
-		register_meta( 'post', '_wca_content_modules', [
-			'show_in_rest'  => true,
-			'single'        => true,
-			'type'  		=> 'array',
-			// 'default'		=> get_theme_mod( 'content-layout-modules' ),
-			'show_in_rest' 	=> [
-				'schema' => [
-					'type'  => 'array',
-					'items' => [
-						'type' => 'string',
-					],
-				]
-			],
-			'auth_callback' => function() {
-				return current_user_can( 'edit_posts' );
-			},
-		] );
 	}
 
 	/**
@@ -109,17 +82,9 @@ class Entry {
 	 */
 	public function body_class( $classes ) {
 		if ( is_admin() ) return $classes;
-
 		
 		if( is_singular() ) {			
 			global $post;
-
-			if ( is_page() ) {
-				if ( get_post_meta( $post->ID, '_wca_builder_template', true ) ) {
-					$classes[] = 'has-builder-template';
-					$classes = array_diff( $classes, [ 'has-sidebar' ] );
-				}
-			}
 
 			if ( get_post_meta( $post->ID, '_wca_title_hidden', true ) ) {
 				$classes[] = 'has-title-hidden';

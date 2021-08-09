@@ -12,8 +12,10 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import './plugins/wecodeart-Component';
 import './plugins/wecodeart-JSManager';
 import './plugins/wecodeart-Template';
+import loadJs from 'loadjs';
+import requireJs from './helpers/requireJs';
 import createParams from './helpers/createParams';
-import parseJSONData from './helpers/parseData';
+import getOptions from './helpers/parseData';
 import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled } from './helpers/HasScrollbar';
 
 // Styles
@@ -37,11 +39,39 @@ function filterLog(route, func, args) {
 	 */
 	wecodeart.plugins = {};
 	wecodeart.fn = {
-		hasScrollbar: hasScrollbar,
-		createParams: createParams,
-		getOptions: parseJSONData,
+		hasScrollbar,
+		createParams,
+		getOptions,
+		requireJs,
+		loadJs
 	};
 	wecodeart.FA = library;
+	/**
+	 * @description
+	 * Setup JS URLs that are lazy loaded from CDN/Theme with IDs to easly load them later
+	 * without using multiple sources and/or npm packages
+	 * This helps us to avoid updating multiple files and/or use multiple sources of the same script
+	 * @see example under common key and below
+	 */
+	wecodeart.lazyJs = {
+		// Use for popups
+		'sweetalert': [
+			'//unpkg.com/sweetalert2@11.0.19/dist/sweetalert2.min.css',
+			'//unpkg.com/sweetalert2@11.0.19/dist/sweetalert2.min.js',
+		],
+		// Use for tooltips
+		'tooltips': [
+			'//unpkg.com/@popperjs/core@2',
+			'//unpkg.com/tippy.js@6',
+		],
+		// Use for lighbox galleries
+		'photoswipe': [
+			'//unpkg.com/photoswipe@4.1.3/dist/default-skin/default-skin.css',
+			'//unpkg.com/photoswipe@4.1.3/dist/photoswipe.css',
+			'//unpkg.com/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js',
+			'//unpkg.com/photoswipe@4.1.3/dist/photoswipe.min.js',
+		]
+	};
 	wecodeart.routes = {
 		common: {
 			init: () => {
@@ -76,6 +106,16 @@ function filterLog(route, func, args) {
 					}, false);
 				});
 			},
+		},
+		home: {
+			init: () => { },
+			lazy: {
+				id: ['tooltips'],
+				callback: () => {
+					console.log('From Lazy');
+				}
+			},
+			extends: ['page-id-12','page']
 		}
 	};
 }).apply(this, [window.wecodeart]);

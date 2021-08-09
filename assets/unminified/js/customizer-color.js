@@ -86,146 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-
-module.exports = _arrayLikeToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-module.exports = _arrayWithHoles;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _iterableToArrayLimit(arr, i) {
-  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-module.exports = _iterableToArrayLimit;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/nonIterableRest.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-module.exports = _nonIterableRest;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/slicedToArray.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js");
-
-var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js");
-
-var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
-
-var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ "./node_modules/@babel/runtime/helpers/nonIterableRest.js");
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-
-module.exports = _slicedToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
-}
-
-module.exports = _unsupportedIterableToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
 /***/ "./node_modules/classnames/index.js":
 /*!******************************************!*\
   !*** ./node_modules/classnames/index.js ***!
@@ -234,7 +94,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2017 Jed Watson.
+  Copyright (c) 2018 Jed Watson.
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
 */
@@ -245,7 +105,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 	var hasOwn = {}.hasOwnProperty;
 
-	function classNames () {
+	function classNames() {
 		var classes = [];
 
 		for (var i = 0; i < arguments.length; i++) {
@@ -256,16 +116,22 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 			if (argType === 'string' || argType === 'number') {
 				classes.push(arg);
-			} else if (Array.isArray(arg) && arg.length) {
-				var inner = classNames.apply(null, arg);
-				if (inner) {
-					classes.push(inner);
+			} else if (Array.isArray(arg)) {
+				if (arg.length) {
+					var inner = classNames.apply(null, arg);
+					if (inner) {
+						classes.push(inner);
+					}
 				}
 			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
+				if (arg.toString === Object.prototype.toString) {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
 					}
+				} else {
+					classes.push(arg.toString());
 				}
 			}
 		}
@@ -1367,10 +1233,10 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./src/js/customizer/common/ColorControl.js":
-/*!**************************************************!*\
-  !*** ./src/js/customizer/common/ColorControl.js ***!
-  \**************************************************/
+/***/ "./src/js/customizer/common/Color.js":
+/*!*******************************************!*\
+  !*** ./src/js/customizer/common/Color.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1387,55 +1253,55 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _wp = wp,
-    __ = _wp.i18n.__,
-    _wp$components = _wp.components,
-    ColorPicker = _wp$components.ColorPicker,
-    Button = _wp$components.Button,
-    Dropdown = _wp$components.Dropdown;
+const {
+  i18n: {
+    __
+  },
+  components: {
+    ColorPicker,
+    Button,
+    Dropdown
+  }
+} = wp;
 
-var ColorControl = function ColorControl(_ref) {
-  var label = _ref.label,
-      selectedColor = _ref.selectedColor,
-      onChange = _ref.onChange,
-      defaultValue = _ref.defaultValue,
-      disableGlobal = _ref.disableGlobal;
-  var toggle = null;
+const ColorControl = ({
+  label,
+  selectedColor,
+  onChange,
+  defaultValue,
+  palette = [],
+  disableGlobal,
+  readOnly
+}) => {
+  let toggle = null;
 
-  var handleChange = function handleChange(value) {
-    var _value$rgb = value.rgb,
-        r = _value$rgb.r,
-        g = _value$rgb.g,
-        b = _value$rgb.b,
-        a = _value$rgb.a;
+  const handleChange = value => {
+    const {
+      r,
+      g,
+      b,
+      a
+    } = value.rgb;
 
     if (a < 1) {
-      onChange("rgba(".concat(r, ", ").concat(g, ", ").concat(b, ", ").concat(a, ")"));
+      onChange(`rgba(${r}, ${g}, ${b}, ${a})`);
       return false;
     }
 
     onChange(value.hex);
   };
 
-  var handleClear = function handleClear() {
+  const handleClear = () => {
     onChange(defaultValue || '');
     toggle();
   };
 
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(['wca-color-component', {
-      'wca-color-component--allows-global': !disableGlobal
-    }])
-  }, label && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
-    className: "wca-color-component__label"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, label, ":")), !disableGlobal && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_GlobalColors__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    activeColor: selectedColor,
-    onChange: onChange
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Dropdown, {
-    position: "left",
-    renderToggle: function renderToggle(_ref2) {
-      var isOpen = _ref2.isOpen,
-          onToggle = _ref2.onToggle;
+  let dropdownProps = {
+    position: 'left',
+    renderToggle: ({
+      isOpen,
+      onToggle
+    }) => {
       toggle = onToggle;
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
         isSecondary: true,
@@ -1449,29 +1315,50 @@ var ColorControl = function ColorControl(_ref) {
       }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
         className: "gradient"
       }));
-    },
-    renderContent: function renderContent() {
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPicker, {
+    }
+  };
+
+  if (readOnly === false) {
+    dropdownProps = { ...dropdownProps,
+      renderContent: () => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPicker, {
         color: selectedColor,
         onChangeComplete: handleChange
       }), selectedColor && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
         isPrimary: true,
         className: "clear",
         onClick: handleClear
-      }, __('Clear', 'wecodeart')));
-    }
-  }));
+      }, __('Clear', 'wecodeart')))
+    };
+  } else {
+    dropdownProps = { ...dropdownProps,
+      renderContent: e => null
+    };
+  }
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(['wca-color-component', {
+      'wca-color-component--allows-global': !disableGlobal
+    }])
+  }, label && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+    className: "wca-color-component__label"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, label, ":")), !disableGlobal && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_GlobalColors__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    activeColor: selectedColor,
+    onChange: onChange,
+    palette: palette
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Dropdown, dropdownProps));
 };
 
 ColorControl.defaultProps = {
-  disableGlobal: false
+  disableGlobal: false,
+  readOnly: false
 };
 ColorControl.propTypes = {
   label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   selectedColor: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   defaultValue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  disableGlobal: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
+  disableGlobal: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  readOnly: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 };
 /* harmony default export */ __webpack_exports__["default"] = (ColorControl);
 
@@ -1492,49 +1379,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var _wp = wp,
-    _wp$components = _wp.components,
-    Dropdown = _wp$components.Dropdown,
-    Button = _wp$components.Button,
-    Icon = _wp$components.Icon,
-    ColorPalette = _wp$components.ColorPalette;
-var _wecodeartColorContro = wecodeartColorControl,
-    _wecodeartColorContro2 = _wecodeartColorContro.palette,
-    palette = _wecodeartColorContro2 === void 0 ? [] : _wecodeartColorContro2;
+const {
+  components: {
+    Dropdown,
+    Button,
+    Icon,
+    ColorPalette
+  }
+} = wp;
 
-var GlobalColorsPicker = function GlobalColorsPicker(_ref) {
-  var onChange = _ref.onChange,
-      activeColor = _ref.activeColor;
-  var isGlobal = palette.filter(function (_ref2) {
-    var color = _ref2.color;
-    return color === activeColor;
-  }).length;
+const GlobalColorsPicker = ({
+  onChange,
+  activeColor,
+  palette = []
+}) => {
+  const isGlobal = palette.filter(({
+    color
+  }) => color === activeColor).length;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Dropdown, {
     position: "left",
-    renderToggle: function renderToggle(_ref3) {
-      var isOpen = _ref3.isOpen,
-          onToggle = _ref3.onToggle;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
-        onClick: onToggle,
-        "aria-expanded": isOpen,
-        role: "button",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(['global-color-picker', {
-          active: isGlobal
-        }])
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Icon, {
-        size: 16,
-        icon: "admin-site-alt3"
-      }));
-    },
-    renderContent: function renderContent() {
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPalette, {
-        colors: palette,
-        value: activeColor,
-        disableCustomColors: true,
-        clearable: true,
-        onChange: onChange
-      });
-    }
+    renderToggle: ({
+      isOpen,
+      onToggle
+    }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+      onClick: onToggle,
+      "aria-expanded": isOpen,
+      role: "button",
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(['global-color-picker', {
+        active: isGlobal
+      }])
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Icon, {
+      size: 16,
+      icon: "admin-site-alt3"
+    })),
+    renderContent: () => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPalette, {
+      colors: palette,
+      value: activeColor,
+      disableCustomColors: true,
+      clearable: true,
+      onChange
+    })
   });
 };
 
@@ -1551,62 +1435,68 @@ var GlobalColorsPicker = function GlobalColorsPicker(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _common_ColorControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../common/ColorControl */ "./src/js/customizer/common/ColorControl.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _common_Color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../common/Color */ "./src/js/customizer/common/Color.js");
 
 
 
+const {
+  useState,
+  useEffect
+} = wp.element;
+const {
+  __
+} = wp.i18n;
 
-var _wp$element = wp.element,
-    useState = _wp$element.useState,
-    useEffect = _wp$element.useEffect;
-var __ = wp.i18n.__;
+const ColorComponent = ({
+  control
+}) => {
+  const [value, setValue] = useState(control.setting.get());
+  const {
+    params: {
+      label,
+      description,
+      default: defaultValue,
+      inputAttrs: {
+        alphaDisabled
+      },
+      palette
+    }
+  } = control;
 
-var ColorComponent = function ColorComponent(_ref) {
-  var control = _ref.control;
-
-  var _useState = useState(control.setting.get()),
-      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
-      value = _useState2[0],
-      setValue = _useState2[1];
-
-  var params = control.params;
-
-  var onChange = function onChange() {
-    var newVal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  const onChange = (newVal = '') => {
     setValue(newVal);
     control.setting.set(newVal);
   };
 
-  useEffect(function () {
-    document.addEventListener('wecodeart-changed-customizer-value', function (e) {
+  useEffect(() => {
+    document.addEventListener('wecodeart-changed-customizer-value', e => {
       if (!e.detail) return false;
       if (e.detail.id !== control.id) return false;
       onChange(e.detail.value);
     });
   }, []);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, (params === null || params === void 0 ? void 0 : params.label) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, label && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
     className: "customize-control-title"
-  }, params.label), (params === null || params === void 0 ? void 0 : params.description) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
+  }, label), description && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
     className: "customize-control-description"
-  }, params.description), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+  }, description), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "wca-customizer-control wca-customizer-control--color"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_common_ColorControl__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_common_Color__WEBPACK_IMPORTED_MODULE_2__["default"], {
     label: __('Color', 'wecodeart'),
     selectedColor: value,
-    defaultValue: params.default,
-    alphaDisabled: params.disableAlpha,
-    onChange: onChange
+    defaultValue: defaultValue,
+    alphaDisabled: alphaDisabled,
+    onChange: onChange,
+    palette: palette
   })));
 };
 
 ColorComponent.propTypes = {
-  control: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object.isRequired
+  control: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (ColorComponent);
 
@@ -1625,15 +1515,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./color */ "./src/js/customizer/controls/color/index.js");
 /* harmony import */ var _scss_customizer_controls_color_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../scss/customizer/controls/color.scss */ "./src/scss/customizer/controls/color.scss");
-/* harmony import */ var _scss_customizer_controls_color_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_scss_customizer_controls_color_scss__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
-var _wp = wp,
-    render = _wp.element.render,
-    _wp$customize = _wp.customize,
-    Control = _wp$customize.Control,
-    controlConstructor = _wp$customize.controlConstructor;
+const {
+  element: {
+    render
+  },
+  customize: {
+    Control,
+    controlConstructor
+  }
+} = wp;
 controlConstructor['wecodeart-color'] = Control.extend({
   renderContent: function renderContent() {
     render(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_color__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1648,10 +1541,13 @@ controlConstructor['wecodeart-color'] = Control.extend({
 /*!*************************************************!*\
   !*** ./src/scss/customizer/controls/color.scss ***!
   \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
+
 
 /***/ }),
 

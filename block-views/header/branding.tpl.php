@@ -6,21 +6,29 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage  Header Branding HTML
- * @since	 	3.0.5
+ * @subpackage  Header Logo HTML
+ * @since	 	5.0.0
  * @version    	5.0.0
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-
-// Branding
-Markup::template( [ 'header/branding', 'logo' ] );
-
-// Toggle
-Markup::template( [ 'header/branding', 'toggle' ], [
-    'toggle' => $toggle
-] );
-
 ?>
+<a class="d-block my-2" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+	<?php
+
+	// Title
+	printf(
+		'<%1$s class="site-title fw-bold fs-6 text-uppercase mb-0">%2$s</%1$s>',
+		is_front_page() ? 'h1' : 'p',
+		get_bloginfo( 'name' ) 
+	);
+
+	// Description
+	$description = get_bloginfo( 'description', 'display' );
+	if ( $description ) : ?>
+	<p class="site-description fs-6 mb-0"><?php echo wp_kses_post( $description ); ?></p><?php
+	endif;
+
+	?>
+</a>

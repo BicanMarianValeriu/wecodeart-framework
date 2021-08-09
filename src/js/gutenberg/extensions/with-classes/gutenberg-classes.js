@@ -10,41 +10,12 @@ const {
 	i18n: { __ },
 	hooks: { addFilter, removeFilter },
 	blocks: { hasBlockSupport },
-	compose: { compose, createHigherOrderComponent, withState },
-	data: { withSelect, select },
-	blockEditor: { InspectorAdvancedControls },
-	components: { FormTokenField }
+	compose: { createHigherOrderComponent },
+	data: { useSelect },
+	blockEditor: { InspectorAdvancedControls, store: blockEditorStore },
+	components: { FormTokenField },
+	element: { useState }
 } = wp;
-
-/**
- * Enhance Block
- */
-const enhance = compose(
-	withState({
-		customClassNames: [],
-	}),
-	withSelect((select, block) => {
-		const selectedBlock = select('core/block-editor').getSelectedBlock();
-		let getClasses = get(selectedBlock, 'attributes.className');
-
-		if (getClasses) {
-			getClasses = replace(getClasses, ',', ' ');
-		}
-
-		if (selectedBlock && getClasses && join(block.customClassNames, ' ') !== getClasses) {
-			if (block.clientId === selectedBlock.clientId) {
-				block.setState({ customClassNames: split(getClasses, ' ') });
-			}
-		}
-
-		// Defaults for FSE
-		const { wecodeart: { customClasses = [] } = {} } = select('core/editor').getEditorSettings();
-
-		return {
-			suggestions: customClasses,
-		};
-	}),
-);
 
 /**
  * Override the default edit UI to include a new block inspector control for
@@ -55,15 +26,35 @@ const enhance = compose(
  * @return {string} Wrapped component.
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
-	return enhance((props) => {
+	return ((props) => {
 		const {
 			name,
-			customClassNames,
-			suggestions,
 			isSelected,
 			setAttributes,
-			setState,
 		} = props;
+
+		const [customClassNames, setCustomClassNames] = useState([]);
+
+		const { suggestions } = useSelect((select, block) => {
+			const selectedBlock = select(blockEditorStore).getSelectedBlock();
+			
+			const { wecodeart: { customClasses = [] } = {} } = select('core/editor').getEditorSettings();
+
+			let getClasses = get(selectedBlock, 'attributes.className');
+			if (getClasses) {
+				getClasses = replace(getClasses, ',', ' ');
+			}
+
+			if (selectedBlock && getClasses && join(customClassNames, ' ') !== getClasses) {
+				if (block.clientId === selectedBlock.clientId) {
+					setCustomClassNames(split(getClasses, ' '));
+				}
+			}
+
+			return {
+				suggestions: customClasses,
+			};
+		});
 
 		const hasClassName = hasBlockSupport(name, 'className', true);
 
@@ -79,7 +70,7 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 							maxSuggestions={20}
 							onChange={(val) => {
 								setAttributes({ className: val !== '' ? join(val, ' ') : undefined });
-								setState({ customClassNames: val !== '' ? val : undefined });
+								setCustomClassNames(val !== '' ? val : undefined);
 							}}
 						/>
 					</InspectorAdvancedControls>

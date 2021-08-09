@@ -1,25 +1,17 @@
 /**
  * Internal dependencies
  */
-import markdown from './markdown';
+import entryTitle from './entry-title';
 import codeEditor from './code-editor';
-import headingLabel from './heading-label';
 import clearFormating from './clear-formatting';
-import pageTitle from './page-title';
-import pageTemplate from './page-template';
-import contentModules from './content-modules';
 
 const { registerPlugin } = wp.plugins;
 
 export default function registerWCAPlugins() {
 	[
-		markdown,
+		entryTitle,
 		codeEditor,
-		headingLabel,
 		clearFormating,
-		pageTitle,
-		pageTemplate,
-		contentModules
 	].forEach((block) => {
 		if (!block) return;
 

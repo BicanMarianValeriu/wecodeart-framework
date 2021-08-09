@@ -36,7 +36,7 @@ class Scripts {
 	 */
 	public function init() {
 		// All starts here
-		add_action( 'wp_enqueue_scripts', 	[ $this, 'front_scripts'		] );
+		add_action( 'wp_enqueue_scripts', 	[ $this, 'front_scripts'		], 0 );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'localize_js' 			], 90 );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			], 95 );
 		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] ); 
@@ -115,10 +115,6 @@ class Scripts {
 		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'frontend' ), [
 	 		'wp-hooks'
 		], wecodeart( 'version' ), true );
-		
-		if ( ( is_page() || is_single() ) && comments_open() && get_option( 'thread_comments' ) ) {
-			wp_enqueue_script( 'comment-reply' );
-		}
 	}
 
 	/**

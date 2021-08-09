@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-05-22 01:52+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2021-06-06 00:02+0000\n"
+"Last-Translator: Bican\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 :(((n%100>19)||(( n%100==0)&&(n!"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Loco-Version: 2.5.2; wp-5.7.2\n"
 "X-Domain: wecodeart"
 
-#: views/entry/meta/comments.tpl.php:46
+#: block-views/entry/meta/comments.tpl.php:46
 msgid "% Comments"
 msgstr "% Comentarii"
 
@@ -35,12 +35,12 @@ msgstr "% Navigare"
 msgid "%s Sidebar"
 msgstr "Deja am făcut asta"
 
-#: inc/core/class-author.php:101 views/entry/comment.tpl.php:47
+#: block-views/entry/comment.tpl.php:47 inc/core/class-author.php:101
 #, php-format
 msgid "%s's gravatar"
 msgstr "Gravatarul lui %s"
 
-#: views/entry/meta/comments.tpl.php:45
+#: block-views/entry/meta/comments.tpl.php:45
 msgid "1 Comment"
 msgstr "1 Comentariu"
 
@@ -51,6 +51,10 @@ msgid ""
 "personal portfolio, business website and WooCommerce storefront. Now is "
 "Gutenberg ready."
 msgstr ""
+"Un cadru tematic WordPress simplu axat pe SEO, viteză și simplitatea codului."
+" Este foarte rapid, complet personalizabilă și temă frumoasă, potrivită "
+"pentru blog, portofoliu personal, site web pentru afaceri și vitrina "
+"magazinului WooCommerce. Acum este pregătită Gutenberg."
 
 #: inc/core/class-author.php:104
 msgid "About"
@@ -60,18 +64,6 @@ msgstr "Despre"
 msgid "Add a menu"
 msgstr "Adaugă un meniu"
 
-#: inc/gutenberg/modules/patterns/class-patterns.php:86
-msgid "Add New"
-msgstr "Adaugă nou"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:85
-msgid "Add New Pattern"
-msgstr "Adăugați un model nou"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:120
-msgid "Add New Pattern Type"
-msgstr "Adăugați un tip de model nou"
-
 #: inc/core/entry/class-comments.php:90
 msgid "add one"
 msgstr "adaugă unul"
@@ -80,15 +72,15 @@ msgstr "adaugă unul"
 msgid "All articles by"
 msgstr "Toate articolele de"
 
-#: inc/gutenberg/modules/patterns/class-patterns.php:121
-msgid "All Pattern Types"
-msgstr "Toate tipurile de modele"
+#: inc/support/plugins/anr/class-anr.php:91
+msgid "ANR Captcha support is enabled!"
+msgstr "Suportul ANR Captcha este activat!"
 
 #: inc/core/class-archive.php:115
 msgid "Archives"
 msgstr "Arhive"
 
-#: views/entry/comment.tpl.php:78
+#: block-views/entry/comment.tpl.php:78
 msgid "at"
 msgstr "la"
 
@@ -116,7 +108,7 @@ msgstr "Culoarea de fundal a subsolului . Implicit la culoarea CSS."
 msgid "Background color of the footer wrapper."
 msgstr "Culoarea de fundal a subsolului."
 
-#: inc/admin/customizer/configs/class-header.php:142
+#: inc/admin/customizer/configs/class-header.php:126
 msgid "Background color of the header wrapper. Defaults to CSS color."
 msgstr "Culoarea de fundal a antetului. Implicit la culoarea CSS."
 
@@ -144,23 +136,10 @@ msgstr "Bican Marian Valeriu @wecodeart"
 msgid "Block Options"
 msgstr "Opțiuni modul"
 
-#: inc/gutenberg/modules/patterns/class-patterns.php:80
-msgid "Block Patterns"
-msgstr ""
-"Modele de blocuri\n"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:84
-msgid "Blocks - Patterns"
-msgstr "Blocuri - Modele"
-
-#: inc/gutenberg/class-gutenberg.php:81 inc/gutenberg/class-gutenberg.php:82
-msgid "Blocks - Reusable"
-msgstr "Blocuri - Reutilizabile"
-
 #: inc/gutenberg/modules/styles/class-handler.php:122
 #, php-format
-msgid "Blocks CSS %s."
-msgstr "CSS Blocuri %s"
+msgid "Blocks styles %s."
+msgstr "Stilurile elementelor %s."
 
 #: inc/support/fonts/class-fonts.php:220
 msgid "Bold 700"
@@ -180,7 +159,7 @@ msgstr "Book 300 Italic"
 
 #: inc/admin/customizer/configs/class-header.php:91
 msgid "Bottom"
-msgstr ""
+msgstr "Jos"
 
 #: inc/core/class-footer.php:103
 #, php-format
@@ -192,7 +171,7 @@ msgstr "Creat pe %1$s."
 msgid "By commenting you accept the %s."
 msgstr "Comentand vei accepta %s."
 
-#: inc/support/plugins/anr/class-anr.php:116
+#: inc/support/plugins/anr/class-anr.php:151
 msgid "Captcha *"
 msgstr "Captcha *"
 
@@ -225,12 +204,11 @@ msgstr ""
 msgid "Choose the type of the header."
 msgstr "Alegeți tipul antetului."
 
-#: views/entry/meta/edit-link.tpl.php:25
+#: block-views/entry/meta/edit-link.tpl.php:25
 #, php-format
 msgid "Click to edit \"%s\"!"
 msgstr "Faceți clic pentru a edita %s\"!"
 
-#: inc/core/class-header.php:178
 #: inc/admin/customizer/configs/class-header.php:72
 msgid "Collapse"
 msgstr "Colaps"
@@ -239,11 +217,11 @@ msgstr "Colaps"
 msgid "Color of the entire content area wrapper (.content)."
 msgstr ""
 
-#: inc/admin/customizer/configs/class-header.php:179
+#: inc/admin/customizer/configs/class-header.php:163
 msgid "Color of the header links. Defaults to CSS color."
 msgstr "Culoarea legăturilor antet. Implicit la culoarea CSS."
 
-#: inc/admin/customizer/configs/class-header.php:163
+#: inc/admin/customizer/configs/class-header.php:147
 msgid "Color of the header text. Defaults to CSS color."
 msgstr "Culoarea textului antetului. Implicit la culoarea CSS."
 
@@ -263,7 +241,7 @@ msgstr "Comentariu"
 msgid "Comments"
 msgstr "Comentarii"
 
-#: views/entry/meta/comments.tpl.php:48
+#: block-views/entry/meta/comments.tpl.php:48
 msgid "Comments are Closed"
 msgstr "Comentariile sunt inchise"
 
@@ -279,6 +257,14 @@ msgid_plural "%1$s comments"
 msgstr[0] "%1$s comentariu"
 msgstr[1] "%1$s comentarii"
 msgstr[2] ""
+
+#: inc/support/plugins/cf7/class-cf7.php:79
+msgid ""
+"Contact Form 7 support is enabled. Enjoy properly styled forms based on your "
+"theme!"
+msgstr ""
+"Asistența pentru Formularul de contact 7 este activată. Bucurați-vă de forme "
+"stilate corespunzător bazat pe tema dvs.!"
 
 #: inc/admin/customizer/configs/class-content.php:52
 #: inc/admin/customizer/configs/class-content.php:102
@@ -336,25 +322,21 @@ msgstr "Setări continut"
 msgid "Copyright"
 msgstr "Drepturi de autor"
 
-#: inc/config/app.php:110
+#: inc/config/app.php:80
 #, php-format
 msgid "Copyright %s - All rights reserved."
 msgstr "Drepturi de autor %s - Toate drepturile reservate."
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:163
-msgid "Core"
-msgstr "Nucleu"
 
 #: inc/core/class-archive.php:105
 #, php-format
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
 
-#: inc/config/app.php:182
+#: inc/config/app.php:152
 msgid "Danger"
 msgstr "Pericol"
 
-#: inc/config/app.php:202
+#: inc/config/app.php:172
 msgid "Dark"
 msgstr "Intunecat"
 
@@ -386,7 +368,8 @@ msgstr "Setări de design"
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
-#: views/entry/comment.tpl.php:57 views/entry/meta/edit-link.tpl.php:23
+#: block-views/entry/comment.tpl.php:57
+#: block-views/entry/meta/edit-link.tpl.php:23
 msgid "Edit"
 msgstr "Editează"
 
@@ -394,24 +377,12 @@ msgstr "Editează"
 msgid "Edit Link"
 msgstr "Editează Link"
 
-#: inc/gutenberg/modules/patterns/class-patterns.php:88
-msgid "Edit Pattern"
-msgstr "Editați modelul"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:125
-msgid "Edit Pattern Type"
-msgstr "Editați tipul de model"
-
 #: inc/core/entry/class-comments.php:292
 msgid "Email *"
 msgstr "Email *"
 
 #: inc/admin/customizer/configs/class-footer.php:73
 msgid "Enable and reorder Footer Columns."
-msgstr ""
-
-#: inc/admin/customizer/configs/class-header.php:125
-msgid "Enable and reorder Header Bar modules."
 msgstr ""
 
 #: inc/admin/customizer/configs/class-content.php:73
@@ -435,7 +406,7 @@ msgstr ""
 msgid "Enter keyword %s"
 msgstr "Introduceți cuvant cheie %s"
 
-#: views/entry/protected.tpl.php:55
+#: block-views/entry/protected.tpl.php:55
 msgid "Enter password"
 msgstr "Introduceți parola"
 
@@ -500,9 +471,9 @@ msgstr "Setări Generale"
 #: inc/admin/customizer/configs/class-footer.php:49
 #: inc/admin/customizer/configs/class-header.php:101
 msgid "Grid Type"
-msgstr ""
+msgstr "Tipul grilei"
 
-#: inc/admin/customizer/configs/class-header.php:141
+#: inc/admin/customizer/configs/class-header.php:125
 msgid "Header background color"
 msgstr "Culoarea fundalului antetului"
 
@@ -510,11 +481,7 @@ msgstr "Culoarea fundalului antetului"
 msgid "Header Bar"
 msgstr "Bară de Antet"
 
-#: inc/admin/customizer/configs/class-header.php:124
-msgid "Header Bar Modules"
-msgstr "Module Bară de Antet"
-
-#: inc/admin/customizer/configs/class-header.php:178
+#: inc/admin/customizer/configs/class-header.php:162
 msgid "Header links color"
 msgstr "Culoare legături antet"
 
@@ -526,17 +493,13 @@ msgstr "Poziționare Antet"
 msgid "Header Settings"
 msgstr "Setări Antet"
 
-#: inc/admin/customizer/configs/class-header.php:162
+#: inc/admin/customizer/configs/class-header.php:146
 msgid "Header text color"
 msgstr "Coloare text antet"
 
 #: inc/admin/customizer/controls/palette/class-palette.php:82
 msgid "Heading Text Color"
 msgstr "Culoare text antet"
-
-#: inc/admin/customizer/configs/class-typography.php:57
-msgid "Headings Font"
-msgstr "Font titluri"
 
 #. URI of the theme
 msgid "https://www.wecodeart.com/"
@@ -546,7 +509,7 @@ msgstr "https://www.wecodeart.com/"
 msgid "https://www.wecodeart.com/about/"
 msgstr "https://www.wecodeart.com/about/"
 
-#: inc/config/app.php:164
+#: inc/config/app.php:134
 msgid "Huge"
 msgstr "Imens"
 
@@ -562,28 +525,24 @@ msgstr "ID-ul postării."
 msgid "ID of the Reusable Block."
 msgstr "ID-ul blocului reutilizabil."
 
-#: inc/config/app.php:192
+#: inc/config/app.php:162
 msgid "Info"
 msgstr "Informație"
 
-#: inc/config/app.php:159
+#: inc/config/app.php:129
 msgid "L"
 msgstr "L"
 
-#: inc/config/app.php:158
+#: inc/config/app.php:128
 msgid "Large"
 msgstr "Mare"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:156
-msgid "Layout"
-msgstr "Aspect"
 
 #: inc/admin/customizer/configs/class-configs.php:95
 #: inc/admin/customizer/configs/class-configs.php:125
 msgid "Layout Settings"
 msgstr "Setări aspect"
 
-#: views/entry/meta/comments.tpl.php:44
+#: block-views/entry/meta/comments.tpl.php:44
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
@@ -591,7 +550,7 @@ msgstr "Lasă un comentariu"
 msgid "Left"
 msgstr "Stanga"
 
-#: inc/config/app.php:207
+#: inc/config/app.php:177
 msgid "Light"
 msgstr "Light"
 
@@ -603,7 +562,7 @@ msgstr "Light 200"
 msgid "Light 200 Italic"
 msgstr "Light 200 Italic"
 
-#: inc/config/app.php:229
+#: inc/config/app.php:199
 msgid "Light green cyan to vivid green cyan"
 msgstr ""
 
@@ -615,25 +574,21 @@ msgstr "Culoare text link"
 msgid "Lorem Ipsum Generator"
 msgstr "Generator de text lorem ipsum"
 
-#: inc/config/app.php:234
+#: inc/config/app.php:204
 msgid "Luminous vivid amber to luminous vivid orange"
 msgstr ""
 
-#: inc/config/app.php:239
+#: inc/config/app.php:209
 msgid "Luminous vivid orange to vivid red"
 msgstr ""
 
-#: inc/config/app.php:153
+#: inc/config/app.php:123
 msgid "M"
 msgstr "M"
 
 #: inc/admin/customizer/configs/class-content.php:271
 msgid "Main Content"
 msgstr "Conținut pricipal"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:96
-msgid "Manage Gutenberg block patterns."
-msgstr "Gestionați tiparele blocurilor Gutenberg."
 
 #: inc/support/fonts/class-fonts.php:215
 msgid "Medium 500"
@@ -643,7 +598,7 @@ msgstr "Medium 500"
 msgid "Medium 500 Italic"
 msgstr "Medium 500 Italic"
 
-#: views/header/offcanvas.tpl.php:20
+#: block-views/header/offcanvas.tpl.php:20
 msgid "Menu"
 msgstr "Meniu"
 
@@ -679,19 +634,11 @@ msgstr "Nume *"
 msgid "Navigation"
 msgstr "Navigație"
 
-#: inc/gutenberg/modules/patterns/class-patterns.php:87
-msgid "New Pattern"
-msgstr "Model now"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:124
-msgid "New Pattern Type"
-msgstr "Tip de model nou"
-
 #: inc/core/entry/class-comments.php:88
 msgid "No comments"
 msgstr "Fără comentarii"
 
-#: inc/config/app.php:152
+#: inc/config/app.php:122
 msgid "Normal"
 msgstr "Normal"
 
@@ -704,14 +651,6 @@ msgstr ""
 msgid "Normal 400 Italic"
 msgstr "Normal 400 Italic"
 
-#: inc/gutenberg/modules/patterns/class-patterns.php:93
-msgid "Not found"
-msgstr "Negăsit"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:94
-msgid "Not found in Trash"
-msgstr "Negăsit in coș de gunoi"
-
 #: inc/admin/customizer/configs/class-header.php:73
 msgid "OffCanvas"
 msgstr ""
@@ -720,43 +659,9 @@ msgstr ""
 msgid "OffCanvas Direction"
 msgstr ""
 
-#: inc/admin/customizer/configs/class-overrides.php:42
-msgid "Page for 404"
-msgstr "Pagină pentru 404"
-
 #: inc/core/class-pagination.php:75 inc/core/class-pagination.php:113
 msgid "Pagination"
 msgstr "Paginare"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:122
-msgid "Parent Pattern Type"
-msgstr "Tip de model părinte"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:123
-msgid "Parent Pattern Type:"
-msgstr "Tip de model părinte:"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:149
-msgid "Pattern"
-msgstr "Model"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:138
-msgid "Pattern Category"
-msgstr "Categoria modelului"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:116
-msgid "Pattern Type"
-msgstr "Tipul modelului"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:119
-msgctxt "Pattern Type Singular Name"
-msgid "Pattern Type"
-msgstr "Tipul modelului"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:118
-msgctxt "Pattern Types General Name"
-msgid "Pattern Types"
-msgstr "Tipulurile modelului"
 
 #: inc/markup/class-markup.php:139
 msgid "Please define a callback function for each of the modules."
@@ -766,7 +671,7 @@ msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 msgid "Please define a name for each of the sidebars."
 msgstr "Vă rugăm să definiți un nume pentru fiecare dintre barele laterale."
 
-#: views/entry/comment.tpl.php:68
+#: block-views/entry/comment.tpl.php:68
 msgid "Post Author"
 msgstr "Autorul postării"
 
@@ -775,34 +680,24 @@ msgstr "Autorul postării"
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
 
-#: inc/gutenberg/modules/patterns/class-patterns.php:82
-msgctxt "Post Type General Name"
-msgid "Block Patterns"
-msgstr "Modele de bloc"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:83
-msgctxt "Post Type Singular Name"
-msgid "Block Pattern"
-msgstr "Model de bloc"
-
-#: views/entry/meta/date.tpl.php:52
+#: block-views/entry/meta/date.tpl.php:52
 #, php-format
 msgid "Post updated on %s."
 msgstr "Postare actualizată la %s."
 
-#: views/entry/meta/author.tpl.php:31
+#: block-views/entry/meta/author.tpl.php:31
 msgid "Posted by "
 msgstr "Postat de"
 
-#: views/entry/meta/categories.tpl.php:39
+#: block-views/entry/meta/categories.tpl.php:39
 msgid "Posted in"
 msgstr "Postat in"
 
-#: views/entry/meta/date.tpl.php:39
+#: block-views/entry/meta/date.tpl.php:39
 msgid "Posted on "
 msgstr "Postat pe"
 
-#: inc/config/app.php:172
+#: inc/config/app.php:142
 #: inc/admin/customizer/controls/palette/class-palette.php:75
 msgid "Primary"
 msgstr "Primar"
@@ -811,11 +706,11 @@ msgstr "Primar"
 msgid "Primary Font"
 msgstr "Font primar"
 
-#: inc/support/class-support.php:127
+#: inc/support/class-support.php:131
 msgid "Primary Menu"
 msgstr "Meniu primar"
 
-#: views/entry/read-more.tpl.php:23
+#: block-views/entry/read-more.tpl.php:23
 msgid "Read More"
 msgstr "Citeste mai mult"
 
@@ -829,7 +724,7 @@ msgstr ""
 #: inc/admin/class-request.php:103
 #, php-format
 msgid "Request method %1$s is not valid."
-msgstr ""
+msgstr "Metoda de solicitare %1$s nu este validă."
 
 #: inc/core/entry/class-comments.php:400
 #, php-format
@@ -838,24 +733,22 @@ msgstr "Fișele obligatorii sunt marcate cu %s\"."
 
 #: inc/gutenberg/modules/styles/class-handler.php:154
 #, php-format
-msgid "Reusable Blocks CSS %s."
+#| msgid "Reusable Blocks CSS %s."
+msgid "Reusable Blocks styles %s."
 msgstr "CSS-ul blocurilor reutilizabile %s."
 
 #: inc/admin/customizer/configs/class-header.php:90
 msgid "Right"
 msgstr "Dreapta"
 
-#: inc/config/app.php:147
+#: inc/config/app.php:117
 msgid "S"
 msgstr "S"
 
-#: inc/core/class-search.php:59
+#: inc/core/class-search.php:59 inc/gutenberg/blocks/class-search.php:63
+#: inc/gutenberg/blocks/class-search.php:64
 msgid "Search"
 msgstr "Caută"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:92
-msgid "Search Pattern"
-msgstr "Căutare model"
 
 #: inc/core/class-archive.php:83
 #, php-format
@@ -871,14 +764,14 @@ msgstr "Caută pe site"
 msgid "Search this website %s"
 msgstr "Caută pe site %s"
 
-#: inc/config/app.php:177
+#: inc/config/app.php:147
 #: inc/admin/customizer/controls/palette/class-palette.php:76
 msgid "Secondary"
 msgstr "Secundar"
 
-#: inc/admin/customizer/configs/class-overrides.php:43
-msgid "Select your custom page that will show on 404 error."
-msgstr "Selectați pagina personalizată care va apărea la eroarea 404."
+#: inc/admin/customizer/configs/class-typography.php:57
+msgid "Secondary Font"
+msgstr "Font secundar"
 
 #: inc/support/fonts/class-fonts.php:217 inc/support/fonts/class-fonts.php:218
 msgid "Semi-Bold 600"
@@ -898,7 +791,7 @@ msgstr "Trimite"
 msgid "Shop Sidebar"
 msgstr "Bara laterală magazin"
 
-#: views/header/woo-cart-index.tpl.php:30
+#: block-views/header/woo-cart-index.tpl.php:30
 msgid "Show Cart"
 msgstr "Afișați coșul"
 
@@ -906,19 +799,15 @@ msgstr "Afișați coșul"
 msgid "Sidebar Container"
 msgstr ""
 
-#: inc/core/class-header.php:174
-msgid "Site Branding"
-msgstr "Marcă site"
-
 #: inc/admin/customizer/configs/class-design.php:42
 msgid "Site Palette"
-msgstr ""
+msgstr "Paleta site-ului"
 
 #: inc/core/class-content.php:227
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
-#: inc/config/app.php:146
+#: inc/config/app.php:116
 msgid "Small"
 msgstr "Mic"
 
@@ -928,9 +817,9 @@ msgstr "Vorbesc din mintea ta"
 
 #: inc/admin/customizer/configs/class-header.php:49
 msgid "Sticky"
-msgstr ""
+msgstr "Lipicios"
 
-#: inc/config/app.php:187
+#: inc/config/app.php:157
 msgid "Success"
 msgstr "Success"
 
@@ -939,7 +828,7 @@ msgstr "Success"
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
 
-#: views/entry/meta/tags.tpl.php:32
+#: block-views/entry/meta/tags.tpl.php:32
 msgid "Tagged with "
 msgstr ""
 "Etichetat cu\n"
@@ -960,13 +849,28 @@ msgstr ""
 msgid "Text color of the footer links."
 msgstr "Culoare text a linkurilor din footer"
 
-#: inc/core/scripts/class-scripts.php:193
+#: inc/init.php:329
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
 #: inc/admin/class-admin.php:223 inc/admin/class-admin.php:224
 msgid "Theme Options"
 msgstr "Opțiuni temă"
+
+#: inc/support/starter/content/about.php:7
+msgctxt "Theme starter content"
+msgid "About"
+msgstr "Despre"
+
+#: inc/support/starter/class-starter.php:149
+msgctxt "Theme starter content"
+msgid "Blog"
+msgstr "Blog"
+
+#: inc/support/starter/content/home.php:7
+msgctxt "Theme starter content"
+msgid "Home"
+msgstr "Acasă"
 
 #: inc/core/entry/class-entry.php:228
 msgid "There are no posts matching your criteria."
@@ -1006,7 +910,7 @@ msgstr ""
 "Această postare este protejată prin parolă. Introduceți parola pentru a "
 "vizualiza comentarii sau a lăsa un comentariu."
 
-#: views/entry/protected.tpl.php:37
+#: block-views/entry/protected.tpl.php:37
 msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
@@ -1022,7 +926,7 @@ msgstr ""
 "Acest lucru va afecta doar pagina pe care o vizualizați în prezent - este "
 "suprascrisă de meta modulele de postare (în Gutenberg Editor)."
 
-#: views/header/branding-toggle.tpl.php:24
+#: block-views/header/branding-toggle.tpl.php:24
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
@@ -1046,48 +950,32 @@ msgstr "Ultra-Light 100"
 msgid "Ultra-Light 100 Italic"
 msgstr "Ultra-Light 100 Italic"
 
-#: views/entry/protected.tpl.php:67
+#: block-views/entry/protected.tpl.php:62
 msgid "Unlock"
 msgstr "Deblochează"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:89
-msgid "Update Pattern"
-msgstr "Actualizați modelul"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:126
-msgid "Update Pattern Type"
-msgstr "Actualizați tipul modelului"
 
 #: inc/gutenberg/modules/styles/class-handler.php:119
 #: inc/gutenberg/modules/styles/class-handler.php:147
 msgid "updated"
 msgstr "actualizat"
 
-#: inc/gutenberg/modules/patterns/class-patterns.php:90
-msgid "View Pattern"
-msgstr "Vezi Model"
+#: inc/class-activation.php:151
+msgid "upgrade PHP"
+msgstr "actualizați PHP"
 
-#: inc/gutenberg/modules/patterns/class-patterns.php:127
-msgid "View Pattern Type"
-msgstr "Vezi tip model"
-
-#: inc/gutenberg/modules/patterns/class-patterns.php:91
-msgid "View Patterns"
-msgstr "Vezi modeluri"
-
-#: views/header/woo-cart-index.tpl.php:29
+#: block-views/header/woo-cart-index.tpl.php:29
 msgid "View your shopping cart"
 msgstr "Vizualizați coșul de cumpărături"
 
-#: inc/config/app.php:219
+#: inc/config/app.php:189
 msgid "Vivid cyan blue to vivid purple"
 msgstr ""
 
-#: inc/config/app.php:224
+#: inc/config/app.php:194
 msgid "Vivid green cyan to vivid cyan blue"
 msgstr ""
 
-#: inc/config/app.php:197
+#: inc/config/app.php:167
 msgid "Warning"
 msgstr "Atenție"
 
@@ -1096,19 +984,20 @@ msgid "Website"
 msgstr "Site"
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:98
+#: inc/gutenberg/class-gutenberg.php:80
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/config/app.php:27
+#: inc/class-activation.php:148
 #, php-format
 msgid ""
 "WeCodeArt Framework requires PHP version %1$s or higher. You are using "
-"version %2$s. Please <a href=\"%3$s\">upgrade PHP</a> to use WeCodeArt "
-"Framework."
+"version %2$s. Please %3$s to use WeCodeArt Framework."
 msgstr ""
+"WeCodeArt Framework necesită versiunea PHP %1$s sau mai mare. Folosiți "
+"versiunea %2$s. Vă rugăm să %3$s pentru a utiliza WeCodeArt Framework."
 
-#: inc/config/app.php:19
+#: inc/class-activation.php:139
 #, php-format
 msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
@@ -1140,13 +1029,13 @@ msgstr ""
 "Când extindeți %s, trebuie să creați o metodă `register`, combinând "
 "argumentele existente cu cele noi."
 
-#: inc/config/app.php:212
+#: inc/config/app.php:182
 msgid "White"
 msgstr "Alb"
 
 #: inc/support/plugins/woocommerce/class-woocommerce.php:213
 msgid "WooCommerce Cart"
-msgstr ""
+msgstr "Coș de cumpărături WooCommerce"
 
 #: inc/markup/class-markup.php:208
 #, php-format
@@ -1156,7 +1045,7 @@ msgstr ""
 "Împachetările nu sunt definite corect pentru „% s”. Vă rugăm să verificați "
 "codul temei."
 
-#: inc/config/app.php:165
+#: inc/config/app.php:135
 msgid "XL"
 msgstr "XL"
 
@@ -1169,6 +1058,14 @@ msgstr "Y"
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr "Arhive Anuale"
+
+#: inc/support/plugins/wpseo/class-wpseo.php:97
+msgid ""
+"YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
+"plugin."
+msgstr ""
+"Suportul YoastSEO este activat! Tema noastră funcționează perfect cu cel mai "
+"bun plugin SEO."
 
 #: inc/admin/customizer/configs/class-footer.php:90
 msgid ""
@@ -1188,7 +1085,7 @@ msgstr "Puteți utiliza aceste etichete (%s) și atribute (%s)."
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"
 
-#: views/entry/comment.tpl.php:86
+#: block-views/entry/comment.tpl.php:86
 msgid "Your comment is awaiting moderation."
 msgstr "Comentariul tău asteaptă moderarea."
 
@@ -1196,7 +1093,7 @@ msgstr "Comentariul tău asteaptă moderarea."
 msgid "Your email address will not be published."
 msgstr "Emailul tău nu va fi publicat."
 
-#: inc/class-activation.php:108
+#: inc/class-activation.php:117
 msgid ""
 "Your WordPress installation does not meet the minimum requirements to run "
 "WeCodeArt Framework. Please upgrade and try again."

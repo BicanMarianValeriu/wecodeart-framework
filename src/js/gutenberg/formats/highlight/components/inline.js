@@ -6,27 +6,30 @@ const { get } = lodash;
 /**
  * WordPress dependencies
  */
-const { useCallback, useMemo } = wp.element;
-const { useSelect } = wp.data;
-const { withSpokenMessages } = wp.components;
 const {
-	applyFormat,
-	removeFormat,
-	getActiveFormat,
-	// useAnchorRef,
-} = wp.richText;
-const {
-	ColorPalette,
-	URLPopover,
-	getColorClassName,
-	getColorObjectByColorValue,
-	getColorObjectByAttributeValues
-} = wp.blockEditor;
+	data: { useSelect },
+	element: { useCallback, useMemo },
+	components: { withSpokenMessages },
+	richText: {
+		applyFormat,
+		removeFormat,
+		getActiveFormat,
+		useAnchorRef,
+	},
+	blockEditor: {
+		ColorPalette,
+		URLPopover,
+		getColorClassName,
+		getColorObjectByColorValue,
+		getColorObjectByAttributeValues,
+		store: blockEditorStore,
+	},
+} = wp;
 
 /**
  * Internal Deps
  */
-// import { backgroundColor as settings } from './../index';
+import { highlight as settings } from './../index';
 
 export function getActiveColor(formatName, formatValue, colors) {
 	const activeColorFormat = getActiveFormat(formatValue, formatName);
@@ -46,7 +49,7 @@ export function getActiveColor(formatName, formatValue, colors) {
 
 const ColorPicker = ({ name, value, onChange }) => {
 	const colors = useSelect((select) => {
-		const { getSettings } = select('core/block-editor');
+		const { getSettings } = select(blockEditorStore);
 		return get(getSettings(), ['colors'], []);
 	});
 
@@ -77,14 +80,14 @@ const InlineColorUI = ({
 	onClose,
 	contentRef,
 }) => {
-	// const anchorRef = useAnchorRef({ ref: contentRef, value, settings });
+	const anchorRef = useAnchorRef({ ref: contentRef, value, settings });
 
 	return (
 		<URLPopover
 			value={value}
 			onClose={onClose}
 			className="components-inline-color-popover"
-			anchorRef={contentRef}
+			anchorRef={anchorRef}
 		>
 			<ColorPicker name={name} value={value} onChange={onChange} />
 		</URLPopover>

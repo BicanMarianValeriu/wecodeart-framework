@@ -36,7 +36,31 @@ class Styles implements Integration {
 	 * @access 	public
 	 * @var 	null|object
 	 */
-	public $styles = null;
+	public $styles 			= null;
+
+	/**
+	 * The blocks styles
+	 *
+	 * @access 	public
+	 * @var 	string
+	 */
+	public $blocks_styles	= '';
+
+	/**
+	 * The blocks duotone
+	 *
+	 * @access 	public
+	 * @var 	string
+	 */
+	public $blocks_duotone	= '';
+
+	/**
+	 * Current processed blocks
+	 *
+	 * @access 	public
+	 * @var 	string
+	 */
+	public $processed		= [];
 
 	/**
 	 * Get Conditionals
@@ -60,15 +84,20 @@ class Styles implements Integration {
 	 */
 	public function register_hooks() {
 		$this->styles = wecodeart( 'integrations' )->get( 'styles' );
-		
-		// CSS Handler
-		Styles\Handler::get_instance();
-		// Enqueue Styles
-		Styles\Embed::get_instance();
-		// Admin
-		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' ], 0 );
-		add_filter( 'render_block',					[ $this, 'filter_render' ], 10, 2 );
-		add_filter( 'block_default_classname',		[ $this, 'filter_classname' ], 20, 2 );
+
+		// Hooks
+		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
+		add_filter( 'render_block',					[ $this, 'filter_render' 		], 10, 2 );
+		add_action( 'wp_enqueue_scripts',			[ $this, 'enqueue_styles'		], 10, 1 );
+		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 10, 1 );
+
+		// Remove WP/GB plugins hooks
+		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
+		remove_filter( 'render_block', 'wp_render_elements_support', 	10, 2 );
+		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
+		remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
+		remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
+		remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
 	}
 
 	/**
@@ -83,19 +112,6 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Filter Blocks Classname
-	 *
-	 * @param	string 	$classname
-	 * @param	string 	$block
-	 *
-	 * @return 	string 	HTML
-	 */
-	public function filter_classname( $classname, $block ) {
-		// $classname = 'test';
-		return $classname;
-	}
-
-	/**
 	 * Filter Blocks markup to remove styles
 	 *
 	 * @param	string 	$block_content
@@ -104,129 +120,118 @@ class Styles implements Integration {
 	 * @return 	string 	HTML
 	 */
 	public function filter_render( $content, $block ) {
-		// We use this approach to avoid invalid blocks or patterns, as well as on theme change
-		$doc = new \DOMDocument();
-		// See https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/table-of-contents/index.php
-		// And this is using markup from Gutenberg blocks so is kinda safe anyway
-		libxml_use_internal_errors( true );
-		$doc->loadHTML( htmlspecialchars_decode(
-			utf8_decode( htmlentities( '<html><body>' . $content . '</body></html>', ENT_COMPAT, 'UTF-8', false ) ),
-			ENT_COMPAT
-		) );
-		libxml_use_internal_errors( false );
+		$block_id = get_prop( $block['attrs'], 'customCSSId', false );
 
-		// Append CSS class
-		$xpath 	= new \DomXPath( $doc );
-		$domEls	= $xpath->query('//div[starts-with(@class,"wp-block-")]');
-		if( $domEls->length >= 1 ) {
-			$domEl  = $domEls->item(0);
-			$cssid  = 'css-' . substr( get_prop( $block['attrs'], 'customCSSId' ), 0, 8 );
-			$class 	= join( ' ', [ $domEl->getAttribute( 'class' ), $cssid ] );
-			$domEl->setAttribute( 'class', $class );
-		}
+		if( in_array( $block_id, $this->processed ) || $block_id === false ) return $content;
 
 		// Remove styles, where needed
 		if ( in_array( $block['blockName'], (array) apply_filters( 'wecodeart/filter/gutenberg/styles/remove', [
+			'core/list',
 			'core/group',
 			'core/cover',
-			'core/media-text',
+			'core/table',
+			'core/verse',
+			'core/quote',
+			'core/spacer',
+			'core/image',
 			'core/pullquote',
+			'core/media-text',
 		], true ) ) ) {
-			$elements = $doc->getElementsByTagName( '*' );
-			foreach( $elements as $el ) $el->removeAttribute( 'style' );
+			$content 	= preg_replace( '/(<[^>]+) style=".*?"/i', '$1', $content, 1 );
 		}
 
-		// Save new HTML
-		$content = $doc->saveHTML();
-		
+		// Add necessary class
+		$cssid		= substr( $block_id, 0, 8 );
+		$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="css-' . $cssid . ' ', $content, 1 );
+
+		// Process CSS, add prefixes and convert to string!
+		$this->blocks_styles .= $this->styles::parse( $this->styles::add_prefixes( self::process_block( $block ) ) );
+
+		// Process Duotone SVG filters
+		$this->blocks_duotone .= $this->get_duotone( $block['attrs'], $block_id );
+
+		// This is processed so next time we skipp it (avoid issues like multiple calls of this filter: Yoast SEO)
+		$this->processed[] = $block_id;
+
 		return $content;
 	}
 
 	/**
-	 * Get Blocks CSS
-	 *
-	 * @since   5.0.0
-	 * @param 	int 	$post_id Post id.
+	 * Output styles in header.
 	 *
 	 * @return 	string
 	 */
-	public function get_blocks_css( $post_id ) {
-		$content = get_post_field( 'post_content', $post_id );
-		$blocks  = Gutenberg::parse_blocks( $content );
-
-		if ( ! is_array( $blocks ) || empty( $blocks ) ) {
-			return;
-		}
-
-		return $this->cycle_through_static_blocks( $blocks );
+	public function enqueue_styles() {
+		if( empty( $this->blocks_styles ) ) return;
+		$style = $this->styles::compress( $this->blocks_styles );
+		
+		// Escaping is not really necessary since each property value is already escaped by the CSS processor.
+		wp_register_style( 'wecodeart-blocks-entry', false, [], true, true );
+		wp_add_inline_style( 'wecodeart-blocks-entry', $style );
+		wp_enqueue_style( 'wecodeart-blocks-entry' );
 	}
 
 	/**
-	 * Get Reusable Blocks CSS
-	 *
-	 * @since   5.0.0
-	 * @param 	int 	$post_id Post id.
+	 * Output duotone in footer.
 	 *
 	 * @return 	string
 	 */
-	public function get_reusable_block_css( $block_id ) {
-		$reusable_block = get_post( $block_id );
-
-		if ( ! $reusable_block || 'wp_block' !== $reusable_block->post_type ) {
-			return;
-		}
-
-		if ( 'publish' !== $reusable_block->post_status || ! empty( $reusable_block->post_password ) ) {
-			return;
-		}
-
-		$blocks = Gutenberg::parse_blocks( $reusable_block->post_content );
-
-		return $this->cycle_through_static_blocks( $blocks );
+	public function output_duotone() {
+		if( empty( $this->blocks_duotone ) ) return;
+		?>
+		<svg
+			xmlns:xlink="http://www.w3.org/1999/xlink"
+			viewBox="0 0 0 0"
+			focusable="false"
+			role="none"
+			style="visibility: hidden; position: absolute; left: -9999px; width: 0; height: 0; overflow: hidden;"
+		>
+			<defs><?php echo $this->blocks_duotone; ?></defs>
+		</svg>
+		<?php
 	}
 
 	/**
-	 * Cycle thorugh Static Blocks
+	 * Output styles in footer.
 	 *
-	 * @since   5.0.0
-	 * @param 	array 	$blocks List of blocks.
-	 *
-	 * @return 	string 	Style.
+	 * @return 	void
 	 */
-	public function cycle_through_static_blocks( $blocks ) {
-		$style = '';
-		foreach ( $blocks as $block ) {
-			$style .= $this->styles::parse( $this->styles::add_prefixes( self::process_block( $block ) ) );
+	public function get_duotone( $attrs, $block_id ) {
+		$duotone 		= '';
+		$duotone_colors = get_prop( $attrs, [ 'style', 'color', 'duotone' ], false );
 
-			if ( isset( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
-				$style .= $this->cycle_through_static_blocks( $block['innerBlocks'] );
+		if( $duotone_colors ) {
+			$duotone_values = [
+				'r' => array(),
+				'g' => array(),
+				'b' => array(),
+			];
+
+			foreach ( $duotone_colors as $color_str ) {
+				$color = gutenberg_tinycolor_string_to_rgb( $color_str );
+	
+				$duotone_values['r'][] = $color['r'] / 255;
+				$duotone_values['g'][] = $color['g'] / 255;
+				$duotone_values['b'][] = $color['b'] / 255;
 			}
+	
+			ob_start();
+
+			?>
+			<filter id="<?php echo esc_attr( substr( $block_id, 0, 8 ) ); ?>">
+				<feColorMatrix type="matrix" values=".299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 0 0 0 1 0" />
+				<feComponentTransfer color-interpolation-filters="sRGB" >
+					<feFuncR type="table" tableValues="<?php echo esc_attr( implode( ' ', $duotone_values['r'] ) ); ?>" />
+					<feFuncG type="table" tableValues="<?php echo esc_attr( implode( ' ', $duotone_values['g'] ) ); ?>" />
+					<feFuncB type="table" tableValues="<?php echo esc_attr( implode( ' ', $duotone_values['b'] ) ); ?>" />
+				</feComponentTransfer>
+			</filter>
+			<?php
+
+			$duotone = ob_get_clean();
 		}
 
-		return $style;
-	}
-
-	/**
-	 * Cycle thorugh Reusable Blocks
-	 *
-	 * @since   5.0.0
-	 * @param 	array 	$blocks List of blocks.
-	 *
-	 * @return 	string 	Style.
-	 */
-	public function cycle_through_reusable_blocks( $blocks ) {
-		$style = '';
-		foreach ( $blocks as $block ) {
-			if ( 'core/block' === $block['blockName'] && ! empty( $block['attrs']['ref'] ) ) {
-				$style .= $this->get_reusable_block_css( $block['attrs']['ref'] );
-			}
-
-			if ( isset( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
-				$style .= $this->cycle_through_reusable_blocks( $block['innerBlocks'] );
-			}
-		}
-
-		return $style;
+		return $duotone;
 	}
 
 	/**
@@ -243,6 +248,9 @@ class Styles implements Integration {
 			'core/cover' 		=> Styles\Blocks\Cover::class,
 			'core/media-text' 	=> Styles\Blocks\Media::class,
 			'core/button' 		=> Styles\Blocks\Button::class,
+			'core/image' 		=> Styles\Blocks\Image::class,
+			'core/spacer' 		=> Styles\Blocks\Spacer::class,
+			'core/column' 		=> Styles\Blocks\Column::class,
 			'core/separator' 	=> Styles\Blocks\Separator::class,
 			'core/pullquote' 	=> Styles\Blocks\PullQuote::class
 		];

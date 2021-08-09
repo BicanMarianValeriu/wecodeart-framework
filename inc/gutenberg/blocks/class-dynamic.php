@@ -40,6 +40,13 @@ abstract class Dynamic {
 	 * @var string
 	 */
 	protected $block_name = '';
+	
+	/**
+	 * Block styles enqueued.
+	 *
+	 * @var string
+	 */
+	protected $enqueued_styles = false;
 
 	/**
 	 * Registers the block type with WordPress.
@@ -47,14 +54,11 @@ abstract class Dynamic {
 	public function register_block_type() {
 		// Like this to pass theme check - however, in the theme, this acts as an abstract method
 		// and its overwritten to add_filter for the blocks that we change the markup
-		call_user_func_array( 'register_block_type', [
-			$this->namespace . '/' . $this->block_name,
-			[
-				'render_callback' => [ $this, 'render' ],
-				'attributes'      => $this->get_attributes(),
-				'supports'        => [],
-			]
-		] );
+		call_user_func_array( 'register_block_type', [ $this->get_block_type(), [
+			'render_callback' => [ $this, 'get_render_callback' ],
+			'attributes'      => [ $this, 'get_attributes' ],
+			'supports'        => [],
+		] ] );
 	}
 
 	/**
@@ -64,7 +68,18 @@ abstract class Dynamic {
 	 * @param 	string $content    Block content. 		Default empty string.
 	 * @return 	string Rendered block type output.
 	 */
-	abstract public function render( $attributes = [], $content = '' );
+	abstract public function render( $attributes = [], $content = '', $block = null );
+	
+	/**
+	 * Block styles.
+	 *
+	 * @param 	array  $attributes Block attributes. 	Default empty array.
+	 *
+	 * @return 	string Block CSS.
+	 */
+	protected function styles( $attributes = [] ) {
+		return '';
+	}
 
 	/**
 	 * Load and manipulate HTML with DOMDocument.
@@ -84,6 +99,56 @@ abstract class Dynamic {
 		libxml_use_internal_errors( false );
 
 		return $doc;
+	}
+
+	/**
+	 * Register/enqueue scripts used for this block on the frontend, during render.
+	 *
+	 * @return void
+	 */
+	public function enqueue_styles() {
+		if ( $this->enqueued_styles || ! has_block( $this->get_block_type() ) ) {
+			return;
+		}
+		
+		add_action( 'wp_enqueue_scripts', function() {
+			wp_add_inline_style( 'wecodeart-blocks', $this->get_styles() );
+		} );
+		
+		$this->enqueued_styles = true;
+	}
+
+	/**
+	 * Get block styles
+	 * 
+	 * @return 	string.
+	 */
+	protected function get_styles() {
+		if( wecodeart_if( 'with_blocks_styles' ) ) {
+			$processor 	= wecodeart( 'integrations' )->get( 'styles' );
+			return $processor::compress( $this->styles() );
+		}
+
+		return $this->styles();
+	}
+
+	/**
+	 * Get the block type.
+	 *
+	 * @return string
+	 */
+	protected function get_block_type() {
+		return $this->namespace . '/' . $this->block_name;
+	}
+
+	/**
+	 * Get block render_callback
+	 * 
+	 * @return 	string.
+	 */
+	protected function get_render_callback() {
+		$this->enqueue_styles();
+		$this->render();
 	}
 
 	/**

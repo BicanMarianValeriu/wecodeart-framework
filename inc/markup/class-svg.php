@@ -9,7 +9,7 @@
  * @subpackage  Markup\SVG
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		4.0.2
+ * @version		5.0.0
  */
 
 namespace WeCodeArt\Markup;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Markup;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Markup;
+use WeCodeArt\Singleton;
 use function WeCodeArt\Functions\kses_svg;
 
 /**
@@ -24,7 +25,7 @@ use function WeCodeArt\Functions\kses_svg;
  */
 class SVG {
 
-	use \WeCodeArt\Singleton;  
+	use Singleton;  
 
 	/**
 	 * Social icons – svg names.

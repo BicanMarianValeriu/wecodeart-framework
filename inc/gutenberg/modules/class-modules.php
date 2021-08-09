@@ -40,6 +40,7 @@ class Modules implements \ArrayAccess {
 		$this->register( 'entry',       Modules\Entry::class    );
 		$this->register( 'classes',     Modules\Classes::class  );
 		$this->register( 'styles',      Modules\Styles::class   );
+		$this->register( 'patterns',    Modules\Patterns::class );
         
         add_action( 'init', [ $this, 'load' ] );
 	}

@@ -43,13 +43,10 @@ class Conditional implements ArrayAccess {
      */
     public function init() {
         foreach( apply_filters( 'wecodeart/filter/conditionals', [
-            'is_admin'          => Conditional\Admin::class,
 			'is_theme_admin'    => Conditional\Settings::class,
 			'is_customizer'     => Conditional\Customizer::class,
             'is_dev_mode'       => Conditional\Debug::class,
-			'is_front_page'     => Conditional\Front_Page::class,
-			'is_full_layout'    => Conditional\Full_Layout::class,
-			'is_post_archive'   => Conditional\Post_Archive::class,
+			'is_front_page'     => Conditional\Front::class,
 		] ) as $key => $condition ) {
             $this->register( $key, $condition );
         }

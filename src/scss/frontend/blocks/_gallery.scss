@@ -17,13 +17,13 @@
 	}
 
 	.blocks-gallery-grid {
-		@include make-row( 20px );
+		@include make-row();
 		@include list-unstyled();
 	}
 
 	.blocks-gallery-image,
 	.blocks-gallery-item {
-		@include make-col-ready( 20px );
+		@include make-col-ready();
 		display: flex;
 		flex-grow: 1;
 		flex-direction: column;

@@ -12,22 +12,25 @@
  */
 
 use WeCodeArt\Markup;
-
-do_action( 'wecodeart/hook/comments/before' );
+use WeCodeArt\Core\Entry\Comments;
 
 /**
- * @see 	WeCodeArt\Markup::wrap()
- * @hook	'wecodeart_comments'
- * @hooked 	{
- * - WeCodeArt\Core\Entry\Comments	->render_meta()		- 10	comments intro text
- * - WeCodeArt\Core\Entry\Pagination->comments() 		- 15	comments navigation
- * - WeCodeArt\Core\Entry\Comments	->render_comments()	- 20	comments list
- * - WeCodeArt\Core\Entry\Comments	->render_protected()- 20	comments protected (if password protected)
- * - WeCodeArt\Core\Entry\Comments	->render_pings()	- 30	comments pings list
- * - WeCodeArt\Core\Entry\Pagination->comments() 		- 35	comments navigation
- * - WeCodeArt\Core\Entry\Comments	->render_respond() 	- 40	comments reply form
- * }
+ * Hooks
  */
+if( post_password_required() ) {
+	add_action( 'wecodeart/entry/comments', [ Comments::get_instance(),	'render_protected' 	], 20 );
+} else {
+	add_action( 'wecodeart/entry/comments', [ Comments::get_instance(),	'render_meta'		], 10 );
+	add_action( 'wecodeart/entry/comments', [ Comments::get_instance(),	'render_pagination'	], 15 ); 
+	add_action( 'wecodeart/entry/comments', [ Comments::get_instance(),	'render_comments'	], 20 );
+	add_action( 'wecodeart/entry/comments', [ Comments::get_instance(),	'render_pings'		], 30 );
+	add_action( 'wecodeart/entry/comments', [ Comments::get_instance(),	'render_pagination'	], 35 );
+}
+
+// Before Hook
+do_action( 'wecodeart/hook/comments/before' );
+
+// Comments
 Markup::wrap( 'comments', [ [
 	'tag' 	=> 'div',
 	'attrs' => [
@@ -36,4 +39,5 @@ Markup::wrap( 'comments', [ [
 	]
 ] ], 'do_action', [ 'wecodeart/entry/comments', get_post_type() ] );
 
+// After Hook
 do_action( 'wecodeart/hook/comments/after' );

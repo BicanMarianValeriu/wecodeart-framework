@@ -16,7 +16,6 @@ namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\get_prop;
@@ -30,38 +29,10 @@ class Archive {
 
 	/**
 	 * Send to Constructor
-	 * @since 3.9.3
 	 */
 	public function init() {
-		add_filter( 'get_the_archive_title',	[ $this, 'filter_cat_title' 	] );
-		add_action( 'wecodeart/hook/inner/top',	[ $this, 'render_intro_markup' 	], 15 );
-		add_action( 'wecodeart/hook/inner/top',	[ Author::get_instance(), 'author_box_archive' ], 20 );
+		add_filter( 'get_the_archive_title', [ $this, 'filter_cat_title' ] );
 	}
-	
-	/**
-	 * Echo the Archive Intro Markup
-	 *
-	 * @since 	unknown
-	 * @version	5.0.0
-	 *
-	 * @return 	void 
-	 */
-	public function render_intro_markup() {
-		// Don't enable on author archive / WooCommerce.
-		if( ! is_archive() && ! is_search() || is_author() || wecodeart_if( 'is_woocommerce_archive' ) ) return;
-
-		$options = Content::get_contextual_options(); 
-
-		$wrappers = [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'archive-intro' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => get_prop( $options, 'container' ) ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col my-5' ] ]
-		];
-
-		Markup::wrap( 'archive-intro', $wrappers, 'the_archive_title' );
-		
-	} 
 
 	/**
 	 * Filter category title
@@ -80,15 +51,23 @@ class Archive {
 
 		if ( is_search() ) {
 			$output = sprintf( $title_template, sprintf( 
-				esc_html__( 'Search Results for "%s"', 'wecodeart' ), '<span>' .  get_search_query() . '</span>' 
+				esc_html__( 'Search Results for "%s"', 'wecodeart' ),
+				'<span>' .  get_search_query() . '</span>' 
 			) );
 		} elseif ( is_category() ) {
 			$output .= sprintf( $title_template, sprintf(
-				esc_html__( 'Category Archives: %s', 'wecodeart' ), single_cat_title( '', false ) 
+				esc_html__( 'Category Archives: %s', 'wecodeart' ),
+				single_cat_title( '', false ) 
 			) );
 		} elseif ( is_tag() ) {
 			$output .= sprintf( $title_template, sprintf(
-				esc_html__( 'Tag Archives: %s', 'wecodeart' ), single_tag_title( '', false ) 
+				esc_html__( 'Tag Archives: %s', 'wecodeart' ),
+				single_tag_title( '', false ) 
+			) );
+		} elseif( is_author() ) {
+			$output .= sprintf( $title_template, sprintf(
+				esc_html__( 'Author Archives: %s', 'wecodeart' ),
+				get_the_author_meta( 'display_name' )
 			) );
 		} elseif ( is_year() ) {
 			$output .= sprintf( $title_template, sprintf(

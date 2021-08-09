@@ -1,5 +1,5 @@
 v5.0.0
-- Too many changes to be tracked!!!
+- Complete rework to block based theme!!!
 
 v4.1.7
 - Updated - Add list-unstyled bootstrap class to comments listing by default

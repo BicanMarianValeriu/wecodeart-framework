@@ -29,6 +29,14 @@ class Activation {
 	use Singleton;
 
 	/**
+	 * Constants
+	 *
+	 * @var		string
+	 */
+	const REQUIRED_WP = '5.5';
+	const REQUIRED_PHP = '7.0';
+
+	/**
 	 * Requirements
 	 *
 	 * @access 	protected
@@ -119,10 +127,30 @@ class Activation {
 	 * Set Requirements
 	 *
 	 * @since 	3.5
-	 * @version	4.1.5
+	 * @version	5.0.0
 	 */
 	public function set_requirements( $args = [] ) {
-		return $this->requirements = wp_parse_args( $args, wecodeart_config( 'requirements' ) );	
+		return $this->requirements = wp_parse_args( $args, [
+			'wordpress' => [
+				'required'  => self::REQUIRED_WP,
+				'installed' => $GLOBALS['wp_version'],
+				'i18n'      => sprintf(
+					__( 'WeCodeArt Framework requires WordPress version %1$s or higher. You are using version %2$s. Please upgrade WordPress to use WeCodeArt Framework.', 'wecodeart' ),
+					self::REQUIRED_WP,
+					$GLOBALS['wp_version']
+				),
+			],
+			'php'       => [
+				'required'  => self::REQUIRED_PHP,
+				'installed' => PHP_VERSION,
+				'i18n'      => sprintf(
+					__( 'WeCodeArt Framework requires PHP version %1$s or higher. You are using version %2$s. Please %3$s to use WeCodeArt Framework.', 'wecodeart' ), 
+					self::REQUIRED_PHP,
+					PHP_VERSION,
+					sprintf( '<a href="https://wordpress.org/support/upgrade-php/">%s</a>', esc_html__( 'upgrade PHP', 'wecodeart' ) )
+				),
+			],
+		] );	
 	}
 
 	/**
@@ -171,11 +199,9 @@ class Activation {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
 			if( $val['failed'] === true ) {
-				Notifications::get_instance()->add_notification(
-					new Notification( wpautop( $val['i18n'] ), [
-						'type' => Notification::ERROR
-					] )
-				);
+				$notification = new Notification( wpautop( $val['i18n'] ), [ 'type' => Notification::ERROR ] );
+			
+				Notifications::get_instance()->add_notification( $notification );
 			}
 		}	
 	}

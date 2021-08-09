@@ -1,11 +1,12 @@
 // Required
 @import "~bootstrap/scss/functions";
+@import "./../abstracts/variables";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
-@import "./../abstracts/variables";
 // Grid / Utilities
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/helpers";
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/utilities/api";
 
@@ -15,8 +16,13 @@
 @import './section';
 @import './colors';
 @import './title';
-@import './tabs';
 @import './editor';
 @import './labels';
 @import './tooltips';
-@import './modules';
+
+.editor-styles-wrapper {
+    .wp-block-heading,
+    .wp-block-paragraph {
+        margin-top: 0;
+    }
+}

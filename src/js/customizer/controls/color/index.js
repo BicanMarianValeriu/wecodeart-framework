@@ -7,7 +7,7 @@ const { __ } = wp.i18n;
 const ColorComponent = ({ control }) => {
     const [value, setValue] = useState(control.setting.get());
 
-    const { params } = control;
+    const { params: { label, description, default: defaultValue, inputAttrs: { alphaDisabled }, palette } } = control;
 
     const onChange = (newVal = '') => {
         setValue(newVal);
@@ -24,15 +24,16 @@ const ColorComponent = ({ control }) => {
 
     return (
         <>
-            {params?.label && (<span className="customize-control-title">{params.label}</span>)}
-            {params?.description && (<span className="customize-control-description">{params.description}</span>)}
+            {label && (<span className="customize-control-title">{label}</span>)}
+            {description && (<span className="customize-control-description">{description}</span>)}
             <div className="wca-customizer-control wca-customizer-control--color">
                 <ColorControl
                     label={__('Color', 'wecodeart')}
                     selectedColor={value}
-                    defaultValue={params.default}
-                    alphaDisabled={params.disableAlpha}
+                    defaultValue={defaultValue}
+                    alphaDisabled={alphaDisabled}
                     onChange={onChange}
+                    palette={palette}
                 />
             </div>
         </>

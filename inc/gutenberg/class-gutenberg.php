@@ -45,18 +45,15 @@ class Gutenberg {
 		// Setup Config
 		$this->config = wecodeart_config( 'gutenberg', [] );
 
-		// Editor Size.
-		add_action( 'admin_init', 					[ $this, 'block_editor_size' ] );
-
 		// Block Categories.
-		add_filter( 'block_categories', 			[ $this, 'block_category' ], 10, 1 );
-		
-		// Editor Assets.
-		add_action( 'enqueue_block_editor_assets', 	[ $this, 'block_editor_assets' ], 10 );
+		add_filter( 'block_categories_all',			[ $this, 'block_category' 			], 10, 1 );
 		
 		// Editor Settings.
-		add_filter( 'block_editor_settings', 		[ $this, 'block_editor_settings' ], 10, 2 );
-
+		add_filter( 'block_editor_settings_all',	[ $this, 'block_editor_settings' 	], 10, 2 );
+		
+		// Editor Assets.
+		add_action( 'enqueue_block_editor_assets', 	[ $this, 'block_editor_assets' 		], 10, 1 );
+		
 		// Theme Support.
 		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
 
@@ -153,22 +150,6 @@ class Gutenberg {
 	}
 
 	/**
-	 * Editor only.
-	 *
-	 * @return  void
-	 */
-	public function block_editor_size() {
-		$options = get_prop( $this->config, 'editor-sizes', [] );
-		if ( is_array( $options ) && ! empty( $options ) ) {
-			add_filter( 'admin_body_class', [ $this, 'admin_body_class' ] );
-			global $pagenow;
-			if ( ! empty( $pagenow ) && in_array( $pagenow, [ 'post-new.php', 'post.php', 'edit.php' ] ) ) {
-				add_action( 'admin_head', [ $this, 'template_width_css' ], 100 );
-			}
-		}
-	}
-
-	/**
 	 * Support custom theme support for editorskit-template-block-sizes
 	 *
 	 * @access public
@@ -192,86 +173,5 @@ class Gutenberg {
     			wp_dequeue_style( 'wp-block-library-theme' ); 	// WordPress Core
 			}, 100 );
 		}
-	}
-
-	/**
-	 * Add custom body class.
-	 *
-	 * @param 	string 	$classes The body classes.
-	 *
-	 * @return 	mixed 	Returns update body class.
-	 */
-	public function admin_body_class( $classes ) {
-		global $post;
-
-		$classes .= ' is-wca-body-class-on ';
-
-		if ( isset( $post->ID ) ) {
-			$template = str_replace( [ '.', '/' ], '-', get_page_template_slug( $post->ID ) );
-
-			if ( empty( $template ) ) {
-				$template = 'default';
-			}
-
-			$classes .= $post->post_type . '-template-' . $template . ' ';
-		}
-
-		return $classes;
-	}
-
-	/**
-	 * Add custom css for template width.
-	 *
-	 * @since	4.1.5
-	 *
-	 * @return	void
-	 */
-	public function template_width_css() {
-		global $post;
-
-		if ( ! isset( $post->ID ) ) {
-			return;
-		}
-
-		$script_handle = 'editor-sizes';
-
-		wp_register_style( $this->make_handle( $script_handle ), false, [], wecodeart( 'version' ) );
-		wp_enqueue_style( $this->make_handle( $script_handle ) );
-
-		$templates 	= get_prop( $this->config, 'editor-sizes', [] );
-		$selector	= ' .editor-styles-wrapper .wp-block';
-		$style		= '';
-
-		if ( is_array( $templates ) && ! empty( $templates ) ) {
-			foreach ( $templates as $template => $sizes ) {
-				$block = '.' . $post->post_type . '-template-' . str_replace( [ '.', '/' ], '-', $template ) . $selector;
-				
-				if ( is_array( $sizes ) && ! empty( $sizes ) ) {
-					foreach ( $sizes as $size => $width ) {
-						if ( 'default' === $size ) {
-							$style .= $block . '{ max-width: ' . $width . '; }';
-						} else {
-							$style .= $block . '[data-align="' . $size . '"]{ max-width: ' . $width . '; }';
-						}
-					}
-				}
-			}
-		}
-
-		wp_add_inline_style( $this->make_handle( $script_handle ), $style );
-	}
-
-	/**
-	 * Parse Blocks for Gutenberg and WordPress 5.0
-	 * 
-	 * @since   4.0.3
-	 * @access  public
-	 */
-	public static function parse_blocks( $content ) {
-		if ( ! function_exists( 'parse_blocks' ) ) {
-			return gutenberg_parse_blocks( $content );
-		}
-
-		return parse_blocks( $content );
 	}
 }

@@ -65,20 +65,6 @@ class Configs extends Config {
 				'priority' => 5,
 				'title'    => esc_html__( 'Header Settings', 'wecodeart' ) 
 			),
-			array(
-				'name'     => 'header-bar',
-				'type'     => 'section',
-				'priority' => 5,
-				'title'    => esc_html__( 'Header Bar', 'wecodeart' ),
-				'panel'    => 'header',
-			),
-			array(
-				'name'     => 'header-design',
-				'type'     => 'section',
-				'priority' => 10,
-				'title'    => esc_html__( 'Design Settings', 'wecodeart' ),
-				'panel'    => 'header',
-			),
 			/**
 			 * Content
 			 */
@@ -87,27 +73,6 @@ class Configs extends Config {
 				'type'     => 'panel',
 				'priority' => 10,
 				'title'    => esc_html__( 'Content Settings', 'wecodeart' ) 
-			),
-			array(
-				'name'     => 'content-layout',
-				'type'     => 'section',
-				'priority' => 5,
-				'title'    => esc_html__( 'Layout Settings', 'wecodeart' ),
-				'panel'    => 'content',
-			),
-			array(
-				'name'     => 'content-entry',
-				'type'     => 'section',
-				'priority' => 10,
-				'title'    => esc_html__( 'Entry Settings', 'wecodeart' ),
-				'panel'    => 'content',
-			),
-			array(
-				'name'     => 'content-design',
-				'type'     => 'section',
-				'priority' => 15,
-				'title'    => esc_html__( 'Design Settings', 'wecodeart' ),
-				'panel'    => 'content',
 			),
 			/**
 			 * Footer
@@ -119,24 +84,17 @@ class Configs extends Config {
 				'title'    => esc_html__( 'Footer Settings', 'wecodeart' ) 
 			),
 			array(
-				'name'     => 'footer-layout',
+				'name'     => 'footer-copyright',
 				'type'     => 'section',
 				'priority' => 5,
-				'title'    => esc_html__( 'Layout Settings', 'wecodeart' ),
+				'title'    => esc_html__( 'Copyright', 'wecodeart' ),
 				'panel'    => 'footer',
 			),
 			array(
 				'name'     => 'footer-design',
 				'type'     => 'section',
 				'priority' => 10,
-				'title'    => esc_html__( 'Design Settings', 'wecodeart' ),
-				'panel'    => 'footer',
-			),
-			array(
-				'name'     => 'footer-copyright',
-				'type'     => 'section',
-				'priority' => 15,
-				'title'    => esc_html__( 'Copyright', 'wecodeart' ),
+				'title'    => esc_html__( 'Design', 'wecodeart' ),
 				'panel'    => 'footer',
 			),
 			/**

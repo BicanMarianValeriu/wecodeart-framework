@@ -25,36 +25,6 @@ final class Formatting {
 	use Singleton;
 
 	/**
-	 * Sanitize Global Colors Setting
-	 *
-	 * @param 	array $value recieved value.
-	 *
-	 * @return 	array
-	 */
-	public static function sanitize_palette( $value, $setting  ) {
-		if ( ! is_array( $value ) ) {
-			return $setting->default;
-		}
-
-		// `flag` key is used to trigger setting change on deep state changes inside the palettes.
-		if ( isset( $value['flag'] ) ) {
-			unset( $value['flag'] );
-		}
-		
-		if ( ! isset( $value['active'] ) || ! isset( $value['palettes'] ) ) {
-			return $setting->default;
-		}
-
-		foreach ( $value['palettes'] as $slug => $args ) {
-			foreach ( $args['colors'] as $key => $val ) {
-				$value['palettes'][ $slug ]['colors'][ $key ] = Styles::sanitize_color( $val );
-			}
-		}
-
-		return $value;
-	}
-
-	/**
 	 * Sanitize font control.
 	 *
 	 * @param  	string 	$input    setting input.

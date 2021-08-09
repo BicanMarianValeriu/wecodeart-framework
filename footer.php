@@ -11,32 +11,17 @@
  * @version 	5.0.0
  */
 
-        do_action( 'wecodeart/hook/inner/bottom' );     // Hook Inner Bottom
+        do_action( 'wecodeart/footer' ); // WCA Fallback Footer
 
-        echo '</div>';
+    ?>
+    </div>
+    <?php
 
-        if( wecodeart_if( 'is_dev_mode' ) ) {
-            ?>
-            <!-- /.content @filter = `wecodeart/filter/attributes/content` -->
-            <?php 
-        }
-
-        do_action( 'wecodeart/hook/inner/after' ); 	    // Hook Inner After.
-
-        do_action( 'wecodeart/hook/footer/before' );    // Hook Before Footer.
-
-        /**
-         * @see WeCodeArt\Core\Footer->markup();
-         */
-        do_action( 'wecodeart/footer/markup' );
-
-        do_action( 'wecodeart/hook/footer/after' );	    // Hook After Footer.
-        
         /**
          * WP Footer
          */
         wp_footer();
 
-    ?>
+        ?>
     </body>
 </html>

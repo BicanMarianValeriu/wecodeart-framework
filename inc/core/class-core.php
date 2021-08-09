@@ -37,16 +37,15 @@ class Core {
 	 */
 	public function init() {
 		add_filter( 'body_class',		[ $this, 'body_classes' ] );
+		add_filter( 'get_custom_logo',	[ $this, 'custom_logo'	] );
 		add_filter( 'get_search_form',	[ $this, 'search_form' 	] );
 		add_filter( 'wp_nav_menu_args', [ $this, 'menu_args' 	] );
 
-		Core\Header		::get_instance();
-		Core\Content	::get_instance();
-		Core\Archive	::get_instance();
-		Core\Blog		::get_instance();
 		Core\Scripts	::get_instance();
+		Core\Header		::get_instance();
+		Core\Archive	::get_instance();
+		Core\Content	::get_instance();
 		Core\Entry		::get_instance();
-		Core\Pagination	::get_instance();
 		Core\Footer		::get_instance();
 	}
 	
@@ -72,33 +71,7 @@ class Core {
 		
 		// Theme
 		$classes[] = 'theme-' . wecodeart( 'name' );
-		$classes[] = 'theme-is-' . strtolower( get_prop( get_theme_mod( 'general-design-palette' ), 'active', 'base' ) );
-
-		$modules = get_prop( Content::get_contextual_options(), 'modules', [] );
-	
-		// Add sidebar class
-		if( in_array( 'primary', $modules, true ) || in_array( 'secondary', $modules, true ) ) {
-			$classes[] = 'has-sidebar';
-		}
-		
-		// Singular sidebar class if gutenberg wide/full layout/
-		if( wecodeart_if( 'is_full_layout' ) ) { 
-			$classes[] = 'has-full-align';
-
-			// On pages, we remove sidebar if full align is detected
-			if( is_page() ) {
-				$classes = array_diff( $classes, [ 'has-sidebar' ] );
-				$classes[] = 'has-removed-sidebar';
-			}
-		}
-
-		// Add fixed header class
-		if( get_theme_mod( 'header-bar-position' ) === 'fixed-top' ) {
-			$classes[] = 'has-fixed-header';
-		}
-
-		// Return Classes.
-		$classes = array_map( 'sanitize_html_class', $classes );
+		$classes[] = 'theme-is-' . strtolower( get_theme_mod( 'general-design-palette' ) );
 
 		return $classes;
 	}
@@ -155,5 +128,18 @@ class Core {
 			'walker' 		 => new Menu,
 			'fallback_cb'	 => 'WeCodeArt\Markup\Walkers\Menu::fallback'
 		], $args );
+	}
+
+	/**
+	 * Filter Custom Logo
+	 * 
+	 * @since  	5.0.0
+	 * 
+	 * @return 	string $html
+	 */
+	public function custom_logo( $html ) {
+		$search 	= '/' . preg_quote( 'class="custom-logo-link', '/' ) . '/';
+		$replace 	= 'class="navbar-brand d-block custom-logo-link';
+		return preg_replace( $search, $replace, $html, 1 );
 	}
 }

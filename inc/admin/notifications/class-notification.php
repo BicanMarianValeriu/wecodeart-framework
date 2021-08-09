@@ -16,7 +16,6 @@ namespace WeCodeArt\Admin\Notifications;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Markup;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -358,7 +357,7 @@ class Notification {
 			'data-nonce'	=> $this->get_nonce(),
 		];
 
-	    return Markup::template( 'admin/notification', [
+	    return wecodeart_template( 'admin/notification', [
             'attributes' => $attributes,
             'message'    => wpautop( $this->message )
         ], false );

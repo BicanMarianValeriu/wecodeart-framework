@@ -21,7 +21,9 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Customizer;
 
 /**
- * Handles Footer Area of the Framework
+ * This file serves as fallback for old PHP of way of building themes
+ * and plugins who calls footer.php template. Uses WP_Query to render a
+ * PHP version of the template from the /block-template-parts/ into footer
  */
 class Footer {
 
@@ -29,16 +31,15 @@ class Footer {
 
 	/**
 	 * Send to Constructor
-	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'wecodeart/footer/markup', 		[ $this, 'markup' ] );
-		add_action( 'wecodeart/hook/footer/bottom', [ $this, 'attribution_markup' ], 95 );
-		add_action( 'widgets_init', 				[ $this, 'register_sidebars' ], 50 );
+		add_action( 'wecodeart/footer',	[ $this, 'markup' ] );
+		add_action( 'wp_footer',		[ $this, 'markup_credits' ], 0 );
 	}
 	
 	/**
 	 * Output FOOTER markup function
+	 * Plugin PHP fallback
 	 *
 	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	1.0
@@ -46,164 +47,43 @@ class Footer {
 	 *
 	 * @return 	HTML 
 	 */
-	public function markup() {
-		Markup::wrap( 'footer', [ [
-			'tag' 	=> 'footer',
-			'attrs' => [
-				'id' 		=> 'footer', 
-				'class'		=> 'footer',
-			]
-		] ], function() {
-			/** 
-			 * @hook	'wecodeart/hook/footer/top'
-			 */ 
-			do_action( 'wecodeart/hook/footer/top' );
-			
-			/**
-			 * Render the sidebars
-			 */
-			self::render_widgets();
-			
-			/** 
-			 * @hook	'wecodeart/hook/footer/bottom' 	
-			 * @hooked 	{
-			 * - WeCodeArt\Core\Footer->attribution_markup()	- 95	Attribution 
-			 * }
-			 */ 
-			do_action( 'wecodeart/hook/footer/bottom' ); 
-		} ); 
+	public function markup( $args = [] ) {
+		$args 	= wp_parse_args( $args, [
+			'theme' 	=> wecodeart( 'name' ),
+			'slug' 		=> 'footer',
+			'tagName' 	=> 'footer',
+		] );
+
+		Markup::wrap( 'footer', [
+			[
+				'tag' 	=> $args['tagName'],
+				'attrs' => [
+					'id'	=> $args['slug'],
+					'class'	=> 'site-footer wp-block-template-part',
+				]
+			], [
+				'tag' 	=> 'div',
+				'attrs' => [
+					'class'	=> 'container',
+				]
+			] ], 'gutenberg_block_footer_area' ); 
 	}
 
 	/**
-	 * Footer Attribution
+	 * Footer Credits
 	 *
-	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	1.0
 	 * @version 5.0.0
 	 *
 	 * @return 	void
 	 */
-	public function attribution_markup() { 
+	public function markup_credits() {
+		$copyright = get_theme_mod( 'footer-copyright-text' );
+		$copyright = str_replace( '[copy]', '&copy;', $copyright );
+		$copyright = str_replace( '[year]', date( 'Y' ), $copyright );
 
-		Markup::wrap( 'footer-attribution', [ 
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'footer__attribution attribution' ] ], 
-			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'footer-layout-container' ) ] ], 
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row py-3' ] ], 
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'col text-center' ] ] 
-		], function() {
-
-			$copyright = get_theme_mod( 'footer-copyright-text' );
-			$copyright = str_replace( '[copy]', '&copy;', $copyright );
-			$copyright = str_replace( '[year]', date( 'Y' ), $copyright );
-
-			?>
-			<span class="attribution__copyright"><?php echo wp_kses_post( $copyright ); ?></span>
-			<span class="attribution__credits"><?php
-				printf( 
-					esc_html__( 'Built on %1$s.', 'wecodeart' ), 
-					'<a href="https://www.wecodeart.com/" target="_blank">WeCodeArt Framework</a>' 
-				);
-			?></span>
-			<?php
-		} );  
-		
-	}
-
-	/**
-	 * Footer Widgetized Area
-	 *
-	 * @since 	3.7.7
-	 * @version	5.0.0
-	 *
-	 * @return 	void 
-	 */
-	public static function render_column( int $index ) {
-		if( ! is_active_sidebar( 'footer-' . $index ) ) return;
-		/**
-		 * @see WP function `dynamic_sidebar`
-		 * @see WeCodeArt\Markup::wrap()
-		 */
-		Markup::wrap( 'footer-column-' . (string) $index , [ [
-			'tag' 	=> 'div',
-			'attrs' => [ 
-				'class'	=> 'footer__column col-12 col-lg mb-5',
-			]
-		] ], 'dynamic_sidebar', [ 'footer-' . (string) $index ] );
-	} 
-
-	/**
-	 * This function generates the columns fot the footer
-	 *
-	 * @since	1.5
-	 * @version	5.0.0
-	 *
-	 * @return 	array
-	 */
-	public static function footer_widgets() {
-		$widgets = [];
-		foreach( range( 1, wecodeart_config( 'footer-columns', 4 ) ) as $column ) {
-			$widgets['footer-' . (string) $column ] = [
-				'id'		=> 'footer-' . $column,
-				'label'    	=> sprintf( esc_html__( 'Footer %s', 'wecodeart' ), $column ),
-				'callback' 	=> function() use ( $column ) {
-					self::render_column( $column );
-				}
-			];
-		}
-		
-		// Filter the generated array.
-		return (array) apply_filters( 'wecodeart/filter/footer/widgets', $widgets );
-	} 
-
-	/**
-	 * Return the Footer final widgets HTML with modules selected by user
-	 *
-	 * @uses	WeCodeArt\Markup::wrap()
-	 * @uses	WeCodeArt\Markup::sortable()
-	 * @since	3.5
-	 * @version 5.0.0
-	 *
-	 * @return 	void
-	 */
-	public static function render_widgets() {  
-		Markup::wrap( 'footer-widgets', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'footer__widgets' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => get_theme_mod( 'footer-layout-container' ) ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'row pt-5' ] ]
-		], [ Markup::get_instance(), 'sortable' ], [ 
-			self::footer_widgets(), 
-			get_theme_mod( 'footer-layout-modules' ) 
-		] ); 
-	}
-
-	/**
-	 * Register Sidebars Based on Active Options
-	 *
-	 * @since	unknown
-	 * @version	5.0.0
-	 *
-	 * @return 	void
-	 */
-	public function register_sidebars() {
-		// Get Default Footer Columns.
-		$theme_mod	= 'footer-layout-modules';
-		$columns 	= self::footer_widgets();
-		$options	= get_theme_mod( $theme_mod, Customizer::get_defaults( $theme_mod ) );
-		$active 	= array_intersect_key( $options, array_keys( $columns ) );
-
-		if( empty( $active ) ) {
-			return;
-		}
-
-		// Register Sidebar for each active footer columns.
-		$filtered = array_filter( $columns, function( $item ) use( $active ) {
-			return in_array( $item['id'], $active );
-		} );
-
-		$sidebars = wp_list_filter( $filtered, [ 
-			'sidebar' => false
-		], 'NOT' );
-
-		wecodeart( 'register_sidebars', $sidebars );
+		wecodeart_template( 'footer/credits', [
+			'copyright' => $copyright
+		] );
 	}
 }

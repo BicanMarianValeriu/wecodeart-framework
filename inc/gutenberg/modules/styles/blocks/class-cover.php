@@ -55,6 +55,13 @@ class Cover extends Base {
 				'value'	  	=> $value
 			], $output );
 		}
+		
+		if ( $value = get_prop( $this->attrs, 'hasParallax', false ) ) {
+			$this->output[] = wp_parse_args( [
+				'property' 	=> 'background-attachment',
+				'value'	  	=> 'fixed'
+			], $output );
+		}
 
 		if ( $value = get_prop( $this->attrs, 'customGradient', false ) ) {
 			$element = get_prop( $this->attrs, 'url' ) ? [

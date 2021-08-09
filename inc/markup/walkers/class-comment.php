@@ -90,7 +90,7 @@ class Comment extends Walker_Comment {
 
 			// Get what we need.
 			$author_name 	= sprintf( '<strong itemprop="name">%s</strong>', $comment->comment_author );
-			if ( ! empty( $comment->comment_author_url ) && 'http://' !== $comment->comment_author_url ) {
+			if ( ! empty( $comment->comment_author_url ) ) {
 				$author_name = sprintf(
 					'<a href="%1$s" rel="external nofollow" itemprop="url">%2$s</a>', 
 					esc_url( $comment->comment_author_url ),
@@ -99,12 +99,17 @@ class Comment extends Walker_Comment {
 			}
 
 			// Comment body template.
-			Markup::template( 'entry/comment', [
+			wecodeart_template( 'entry/comment', [
 				'by_author' => in_array( 'bypostauthor', get_comment_class() ),
 				'comment' 	=> $comment,
 				'depth'		=> $depth,
 				'args'		=> $args,
 				'author' 	=> $author_name,
+				'attributes'=> [
+					'displayAvatar' => true,
+					'displayDate' 	=> true,
+					'displayExcerpt'=> true,
+				]
 			] );
 	}
 }

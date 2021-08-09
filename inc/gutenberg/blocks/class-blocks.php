@@ -37,14 +37,60 @@ class Blocks implements \ArrayAccess {
 	 * Send to Constructor
 	 */
 	public function init() {
-		$this->register( 'core/file',	    Blocks\File::class );
-        $this->register( 'core/table',	    Blocks\Table::class );
-		$this->register( 'core/search',	    Blocks\Search::class );
-		$this->register( 'core/quote',	    Blocks\Quote::class );
-		$this->register( 'core/buttons',    Blocks\Buttons::class );
-		$this->register( 'core/calendar',   Blocks\Calendar::class );
+        // Media Blocks
+		$this->register( 'core/media-text', Blocks\Media\Text::class );
+		$this->register( 'core/file',	    Blocks\Media\File::class );
+        $this->register( 'core/image',	    Blocks\Media\Image::class );
+        $this->register( 'core/audio',	    Blocks\Media\Audio::class );
+        $this->register( 'core/video',	    Blocks\Media\Video::class );
+        $this->register( 'core/embed',	    Blocks\Media\Embed::class );
+        $this->register( 'core/cover',	    Blocks\Media\Cover::class );
+        // Text Blocks
+        $this->register( 'core/code',	    Blocks\Text\Code::class );
+        $this->register( 'core/table',	    Blocks\Text\Table::class );
+		$this->register( 'core/quote',	    Blocks\Text\Quote::class );
+		$this->register( 'core/pullquote',  Blocks\Text\Pullquote::class );
+        // Design Blocks
+		$this->register( 'core/group',	    Blocks\Design\Group::class );
+		$this->register( 'core/buttons',    Blocks\Design\Buttons::class );
+		$this->register( 'core/button',     Blocks\Design\Button::class );
+		$this->register( 'core/separator',  Blocks\Design\Separator::class );
+        // Widget Blocks
+		$this->register( 'core/search',	            Blocks\Widgets\Search::class );
+		$this->register( 'core/calendar',           Blocks\Widgets\Calendar::class );
+	    $this->register( 'core/latest-posts',       Blocks\Widgets\Posts::class );
+	    $this->register( 'core/rss',                Blocks\Widgets\RSS::class );
+		$this->register( 'core/latest-comments',    Blocks\Widgets\Comments::class );
+        // Navigation Blocks
+		$this->register( 'core/navigation',         Blocks\Navigation::class );
+		$this->register( 'core/navigation-link',    Blocks\Navigation\Link::class );
+        // Post Blocks
+		$this->register( 'core/post-date',          Blocks\Post\Date::class );
+		$this->register( 'core/post-title',         Blocks\Post\Title::class );
+		$this->register( 'core/post-image',         Blocks\Post\Image::class );
+		$this->register( 'core/post-terms',         Blocks\Post\Terms::class );
+		$this->register( 'core/post-author',        Blocks\Post\Author::class );
+		$this->register( 'core/post-excerpt',       Blocks\Post\Excerpt::class );
+		$this->register( 'core/post-content',       Blocks\Post\Content::class );
+		$this->register( 'core/post-template',      Blocks\Post\Template::class );
+		$this->register( 'core/post-comments-link', Blocks\Post\Comments\Link::class );
+        // Query Blocks
+		$this->register( 'core/query',	                    Blocks\Query::class );
+		$this->register( 'core/template-part',              Blocks\Query\Template::class );
+		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         
-        add_action( 'init', [ $this, 'load' ] );
+        add_action( 'init',                 [ $this, 'load' ] );
+        add_action( 'wp_enqueue_scripts',   [ $this, 'enqueue_styles' ] );
+	}
+
+    /**
+	 * Register/enqueue scripts used for this block on the frontend, during render.
+	 *
+	 * @return void
+	 */
+	public function enqueue_styles() {
+		wp_register_style( 'wecodeart-blocks', false, [], true, true );
+        wp_enqueue_style( 'wecodeart-blocks' );
 	}
 
 	/**
@@ -53,7 +99,10 @@ class Blocks implements \ArrayAccess {
 	 * @return void
 	 */
 	public function load() {
-		foreach( $this->items as $class ) $class::get_instance()->register_block_type();
+		foreach( $this->items as $class ) {
+            $class::get_instance()->register_block_type();
+            $class::get_instance()->enqueue_styles();
+        }
 	}
 
 	/**

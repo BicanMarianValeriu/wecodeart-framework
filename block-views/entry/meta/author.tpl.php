@@ -15,27 +15,51 @@
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * @param   object  $author Author
  */
+
+$classnames = [ 'wp-block-post-author' ];
+
+if( $value = get_prop( $attributes, 'className', false ) ) {
+    $classnames[] = $value;
+}
+
+if( $value = get_prop( $attributes, 'itemsJustification', false ) ) {
+    $classnames[] = 'justify-content-' . $value;
+}
+
+if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+    $classnames[] = 'text-' . $value;
+}
+
 ?>
-<span class="entry-author">
-    <span class="d-inline-block me-1"><?php
+<div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
+    <?php
+
+    SVG::render( 'user', [
+        'class' => 'wp-block-post-author__icon d-inline-block me-1'
+    ] );
+
+    ?>
+    <?php if( $byline = get_prop( $attributes, 'byline', false ) ) : ?>
+    <span class="wp-block-post-author__byline screen-reader-text"><?php
     
-    SVG::render( 'user' );
-    
-    ?></span>
-    <span class="screen-reader-text"><?php
-    
-    esc_html_e( 'Posted by ', 'wecodeart' );
+    echo esc_html( $byline );
 
     ?></span>
-    <a href="<?php echo esc_url( $author->url ); ?>" class="entry-author-link me-2" rel="author">
-        <span class="entry-author-name"><?php
+    <?php endif; ?>
+    <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
+    <a class="wp-block-post-author__link" href="<?php echo esc_url( $author->url ); ?>" rel="author">
+    <?php endif; ?>
+        <span class="wp-block-post-author__name"><?php
         
         echo esc_html( $author->name ); 
     
         ?></span>
+    <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
     </a>
-</span>
+    <?php endif; ?>
+</div>

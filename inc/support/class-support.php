@@ -37,15 +37,14 @@ class Support implements ArrayAccess {
 	 */
 	public function init() {
 		// Theme Support
-		\add_action( 'after_setup_theme', [ $this, 'register_menus'		] );
 		\add_action( 'after_setup_theme', [ $this, 'after_setup_theme'	] );
 		\add_action( 'after_setup_theme', [ $this, 'load_translations'	] );
 
 		// Register Default Integrations
+		$this->register( 'fse',					Support\FSE::class		);
 		$this->register( 'fonts',				Support\Fonts::class	);
 		$this->register( 'styles',				Support\Styles::class	);
 		$this->register( 'starter',				Support\Starter::class	);
-		$this->register( 'schema',				Support\Schema::class	);
 		$this->register( 'plugin/anr', 			Support\Plugins\ANR::class 			);
 		$this->register( 'plugin/cf7', 			Support\Plugins\CF7::class 			);
 		$this->register( 'plugin/wpseo', 		Support\Plugins\WPSeo::class 		);
@@ -71,22 +70,20 @@ class Support implements ArrayAccess {
 		// Theme check required.
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'automatic-feed-links' );
+		// This theme has one menu location.
+		register_nav_menus( [
+			'primary' => __( 'Primary Navigation', 'wecodeart' ),
+		] );
 	}
 
 	/**
 	 * Sets up theme content width.
 	 *
-	 * @since 	5.0.0.0
-	 * @version	5.0.0.0
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 */
 	public static function get_content_width() {
-		$content_width = 840;
-
-		if( wecodeart_if( 'is_full_layout' ) ) {
-			$content_width = 1272;
-		}
-
-		return apply_filters( 'wecodeart/filter/content_width', $content_width );
+		return apply_filters( 'wecodeart/filter/content_width', 1320 );
 	}
 
 	/**
@@ -115,21 +112,6 @@ class Support implements ArrayAccess {
 			'wecodeart',
 			trailingslashit( wecodeart_config( 'paths' )['directory'] ) . wecodeart_config( 'directories' )['languages']
 		);
-	}
-
-	/**
-	 * Register Menus
-	 *
-	 * @since	3.9.5
-	 * @version	5.0.0.0
-	 *
-	 * @return 	void
-	 */
-	public function register_menus() {
-		// Register New Menu
-		register_nav_menus( [ 
-			'primary' => esc_html__( 'Primary Menu', 'wecodeart' ) 
-		] );
 	}
 
 	/**

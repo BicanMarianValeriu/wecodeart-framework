@@ -27,6 +27,8 @@ class Styles {
 
 	use Singleton;
 	use Scripts\Base;
+	
+	const FILE = 'customizer.css';
 
 	/**
 	 * The Styles Processor
@@ -41,8 +43,7 @@ class Styles {
 	 * @since 	5.0.0
 	 * @var 	mixed
 	 */
-	protected 	$FS		= null;
-	const 		FILE	= 'customizer.css';
+	protected $FS = null;
 
 	/**
 	 * Get Conditionals

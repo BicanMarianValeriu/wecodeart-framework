@@ -94,7 +94,6 @@ export const License = (props) => {
                                         id={id}
                                         type="text"
                                         value={value}
-                                        disabled={value === 'FREEMIUM'}
                                         placeholder={__('API Key', 'wecodeart')}
                                         onChange={(e) => onChange(e.target.value)}
                                     />
@@ -115,7 +114,7 @@ export const License = (props) => {
                                             }).then((res) => handleNotice(res, id, value));
                                         }}
                                     >
-                                        {loading ? __('Saving...', 'wecodeart') : __('Save', 'wecodeart')}
+                                        {loading ? '' : __('Save', 'wecodeart')}
                                     </Button>
                                     {externalUrl !== '' &&
                                         <ExternalLink href={externalUrl} className="wecodeart-button-group__item">

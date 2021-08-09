@@ -17,6 +17,7 @@ namespace WeCodeArt\Admin\Customizer;
 defined( 'ABSPATH' ) || exit; 
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Admin\Customizer\Controls\Palette;
 
 /**
  * Customizer Controls Class
@@ -73,7 +74,7 @@ class Controls {
 		
 		self::add_control( 'wecodeart-palette', [ 
 			'callback' 			=> Controls\Palette::class,
-			'sanitize_callback' => [ $formatting, 'sanitize_palette' ]
+			'sanitize_callback' => [ $formatting, 'sanitize_text_field' ]
 		] );
 	}
 

@@ -30,7 +30,7 @@ class Loops {
 	 * Standard WP Loop, meant to be executed anywhere needed in templates.
 	 *
 	 * @since	1.0
-	 * @version	3.9.5
+	 * @version	5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -56,12 +56,7 @@ class Loops {
 				 * 
 				 * @see 	WeCodeArt\Markup::wrap()
 				 * @see		do_action(); WP Function
-				 * @hook	'wecodeart/entry' 	
-				 * @hooked 	{
-				 * - WeCodeArt\Core\Entry->render_header()	- 20 Entry Header Hook
-				 * - WeCodeArt\Core\Entry->render_content()	- 30 Entry Content Hook 
-				 * - WeCodeArt\Core\Entry->render_footer()	- 40 Entry Footer Hook
-				 * }
+				 * @hook	'wecodeart/entry'
 				 */
 				Markup::wrap( 'entry', [ [
 					'tag' 	=> 'article',
@@ -69,7 +64,9 @@ class Loops {
 						'id' 	=> get_post_type() . '-' . $post_id, 
 						'class'	=> implode( ' ', get_post_class() ) 
 					]
-				] ], 'do_action', [ 'wecodeart/entry', $post_id, $index  ] );
+				] ], function( $post_id ) {
+					self::render_content( $post_id );
+				}, [ $post_id ] );
 
 				do_action( 'wecodeart/hook/loop/entry/after', $post_id, $index );
 

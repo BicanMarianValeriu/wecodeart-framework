@@ -16,6 +16,7 @@ namespace WeCodeArt\Support\Plugins\WooCommerce;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Singleton;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -23,32 +24,14 @@ use function WeCodeArt\Functions\get_prop;
  */
 class Customizer {
 
-	use \WeCodeArt\Singleton; 
-
+	use Singleton;
+	
 	/**
 	 * Send to Constructor
 	 * @since 3.6.2
 	 */
 	public function init() {
 		add_filter( 'wecodeart/filter/customizer/defaults', [ $this, 'extend_defaults' ] );
-		add_action( 'customize_register', 					[ $this, 'register' ], 960 );
-	}
-
-	/**
-	 * Add our Selective Refresh Partials.
-	 *
-	 * @since 	4.1.4
-	 *
-	 * @param  	object $wp_customize An instance of the WP_Customize_Manager class.
-	 */
-	public function register( $wp_customize ) {
-		foreach( [ 'singular', 'archive' ] as $type ) {
-			$wp_customize->selective_refresh->add_partial( "content-layout-modules-product-{$type}", [
-				'selector'        => '.content-area',
-				'render_callback' => [ Customizer\Partials::get_instance(), 'render_content' ],
-				'container_inclusive' => true
-			] ); 
-		}
 	}
 
 	/**
@@ -58,6 +41,12 @@ class Customizer {
 	 * @version	5.0.0
 	 */
 	public function extend_defaults( $defaults ) {
-		return wp_parse_args( get_prop( wecodeart_config( 'woocommerce' ), 'customizer', [] ), $defaults );
+		$configs = get_prop( wecodeart_config( 'woocommerce' ), 'customizer', [] );
+
+		if( empty( $configs ) ) {
+			return $defaults;
+		}
+
+		return wp_parse_args( $configs, $defaults );
 	}
 }

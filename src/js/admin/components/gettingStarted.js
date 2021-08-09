@@ -6,7 +6,7 @@ const {
 const { adminUrl } = wecodeart;
 
 export default () => {
-    const notesUrl = '//raw.githubusercontent.com/BicanMarianValeriu/wecodeart-framework/master/notifications.json';
+    const notesUrl = 'https://raw.githubusercontent.com/BicanMarianValeriu/wecodeart-framework/master/notifications.json';
     const [notes, setNotes] = useState([]);
 
     useEffect(() => {
@@ -26,8 +26,8 @@ export default () => {
                         <div className="card-body">
                             <h3 className="card-title">{__('Customizer Options', 'wecodeart')}</h3>
                             <p className="card-text">
-                                WeCodeArt Framework uses WP Customizer API to manage its front-end options.
-                                Head over there to see the available customizations and/or setup starter content.
+                                WeCodeArt Framework still uses WP Customizer API to manage its front-end options.
+                                Head over there to see the available customizations.
                             </p>
                             <a href={adminUrl + '/customize.php'} class="button button-primary is-primary">{
                                 __('View Options', 'wecodeart')

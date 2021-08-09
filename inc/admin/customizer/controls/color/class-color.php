@@ -17,6 +17,7 @@ namespace WeCodeArt\Admin\Customizer\Controls;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Core\Scripts;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Sortable control (uses checkboxes).
@@ -72,15 +73,6 @@ class Color extends \WP_Customize_Control {
 			wecodeart( 'version' ),
             true
 		);
-
-		static $localized;
-
-		if ( is_null( $localized ) ) {
-			wp_localize_script( $this->make_handle(), 'wecodeartColorControl', [
-				'palette' 	=> current( get_theme_support( 'editor-color-palette' ) )
-			] );
-			$localized = true;
-		}
     }
     
 	/**
@@ -88,10 +80,11 @@ class Color extends \WP_Customize_Control {
 	 */
 	public function to_json() {
 		parent::to_json();
+		$this->json['palette'] = wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
 		$this->json['default'] = $this->setting->default;
 		if ( isset( $this->default ) ) {
 			$this->json['default'] = $this->default;
 		}
-		$this->json['disableAlpha'] = $this->disable_alpha;
+		$this->json['inputAttrs'] = $this->input_attrs ?: [ $this->disable_alpha ];
 	}
 }

@@ -29,6 +29,8 @@ class Admin {
 	use Singleton;
 	use Scripts\Base;
 
+	const NAMESPACE = 'wecodeart/v1';
+
 	/**
 	 * Send to Constructor
 	 */
@@ -174,36 +176,26 @@ class Admin {
 	 * @since   5.0.0
 	 */
 	public function register_routes() {
-		register_rest_route( 'wecodeart/v1', '/settings', [
+		register_rest_route( self::NAMESPACE, '/settings', [
 			'methods'  => \WP_REST_Server::ALLMETHODS,
 			'callback' => function( $request ) {
-				global $wp_customize;
-				
 				// Unset Default Params
-				$is_mod = $request->get_param( '_mod' );
 				$params = array_filter( $request->get_params(), function( $key ) {
-					return( ! in_array( $key, [ 'context', '_locale', '_mod', '_filter' ] ) );
+					return( ! in_array( $key, [ 'context', '_locale', '_filter' ] ) );
 				}, ARRAY_FILTER_USE_KEY );
 			
 				// Update if params with values
-				$update = array_filter( $params );
-				foreach( $update as $option => $value ) {
-					if ( $is_mod ) {
-						set_theme_mod( $option, $value );
-					} else {
-						self::update_options( [ "$option" => $value ] );
-					}
+				if( ! empty( $params ) ) {
+					self::update_options( array_filter( $params ) );
 				}
 
 				// Get values, updated above
-				$data = wp_parse_args( get_option( 'wecodeart-settings' ), Customizer::get_instance()->get_theme_mods() );
+				$data = get_option( 'wecodeart-settings' );
 
 				// If params provided, return only their values
-				if( ! empty( $params ) && $request->get_param( '_filter' )) {
+				if( $request->get_param( '_filter' ) ) {
 					$data = array_intersect_key( $data, $params );
 				}
-
-				do_action( 'customize_save_after', $wp_customize );
 
 				return rest_ensure_response( $data );
 			},
@@ -248,8 +240,8 @@ class Admin {
 	public function enqueue_assets() {
 		$version = wecodeart( 'version' );
 		
-		wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
-		wp_add_inline_script( 'wp-codemirror', 'window.CodeMirror = wp.CodeMirror;' );
+		// wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
+		// wp_add_inline_script( 'wp-codemirror', 'window.CodeMirror = wp.CodeMirror;' );
 
 		wp_enqueue_style(
 			$this->make_handle(),
@@ -270,33 +262,6 @@ class Admin {
 			'version' 			=> wecodeart_if( 'is_dev_mode' ) ? esc_html__( 'Developer Mode', 'wecodeart' ) : $version,
 			'currentUser'		=> wp_get_current_user()->display_name,
 			'adminUrl'			=> untrailingslashit( esc_url_raw( admin_url() ) ),
-			'editorSettings' 	=> wp_json_encode( $this->block_editor_settings( [], 'admin' ) ),
 		] );
-	}
-
-	/**
-	 * Filters the settings to pass to the block editor.
-	 *
-	 * @param 	array  	$editor_settings 	The editor settings.
-	 * @param 	object 	$post 				The post being edited.
-	 *
-	 * @return 	array 	Returns updated editors settings.
-	 */
-	public function block_editor_settings( $settings, $post ) {
-		$settings['wecodeart'] = [
-			'blocks'	=> [
-				'name'  => 'blocks',
-				'label' => __( 'Block Options', 'wecodeart' ),
-				'items' => [
-					'lorem'  => [
-						'name'  => 'lorem',
-						'label' => __( 'Lorem Ipsum Generator', 'wecodeart' ),
-						'value' => false,
-					]
-				]
-			]
-		];
-
-		return $settings;
 	}
 }

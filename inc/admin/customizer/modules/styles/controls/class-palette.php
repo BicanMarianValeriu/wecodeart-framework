@@ -41,7 +41,12 @@ class Palette extends Control_Processor {
 		$__key = get_prop( $output, 'key', false );
 
 		if( $__key ) {
-			$value = $this->value['palettes'][$this->value['active']]['colors'][$__key];	
+			$palettes 	= wecodeart_json( [ 'settings', 'custom', 'colorPalettes' ], [] );
+			$value 		= $this->value;
+			$selected 	= current( array_filter( $palettes, function( $item ) use( $value ) {
+				return $item['slug'] === $value;
+			}));
+			$value = get_prop( $selected, [ 'colors', $__key ] );
 			$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
 		}	
 	}

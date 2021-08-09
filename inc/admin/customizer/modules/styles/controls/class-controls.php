@@ -100,10 +100,10 @@ class Controls extends Processor {
 					] );
 				} elseif ( 'font-weight' === $output['property'] ) {
 					foreach ( $gfonts->fonts as $key => $font ) {
-						if ( ! in_array( $value, $font['variants'], true ) ) {
+						if ( ! in_array( $this->value, $font['variants'], true ) ) {
 							$gfonts->add_font( [
 								'font-family'  	=> $key ,
-								'font-weight'	=> [ $value ]
+								'font-weight'	=> [ $this->value ]
 							] );
 						}
 					}

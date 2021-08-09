@@ -1,24 +1,16 @@
 /*--------------------------------------------------------------
 # Code Editor
 --------------------------------------------------------------*/
-.edit-post-text-editor {
-	max-width: 99% !important;
-	
+.edit-post-text-editor {	
 	&__body {
-		.editor-post-title {
-			&__block {
-				max-width: 100% !important;
-			}
-		}
-	
-		.CodeMirror { /* stylelint-disable-line selector-class-pattern */
+		.CodeMirror {
 			height: auto;
 	
-			&.CodeMirror-wrap { /* stylelint-disable-line selector-class-pattern */
-				border: 1px solid #ddd;
+			&.CodeMirror-wrap {
+				border: 1px solid #949494;
 			}
 	
-			.CodeMirror-scroll { /* stylelint-disable-line selector-class-pattern */
+			.CodeMirror-scroll {
 				height: auto !important;
 				overflow: visible !important;
 			}
@@ -26,7 +18,7 @@
 	}
 }
 
-.wca-editor-loaded {
+.theme-wecodeart--codemirror-loaded {
 	.edit-post-text-editor,
 	.edit-post-visual-editor {
 		animation: slide-up 0.4s ease;

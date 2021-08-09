@@ -190,9 +190,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Editor */ "./src/js/gutenberg/extensions/with-styles/Editor.js");
-/* harmony import */ var _handler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./handler */ "./src/js/gutenberg/extensions/with-styles/handler.js");
-/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./injector */ "./src/js/gutenberg/extensions/with-styles/injector.js");
-/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_injector__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./injector */ "./src/js/gutenberg/extensions/with-styles/injector.js");
+/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_injector__WEBPACK_IMPORTED_MODULE_2__);
 
 
 /**
@@ -228,15 +227,13 @@ const {
 
 
 
-
 const addAttributes = props => {
   const {
     name
   } = props;
   const isRestrictedBlock = restrictedBlocks.includes(name);
-  const hasClassName = hasBlockSupport(name, 'className', true);
 
-  if (!isRestrictedBlock && hasClassName) {
+  if (!isRestrictedBlock) {
     props.attributes = assign(props.attributes, {
       customCSSId: {
         type: 'string',
@@ -265,14 +262,13 @@ const withInspectorControl = createHigherOrderComponent(BlockEdit => {
   return props => {
     const {
       name,
-      isSelected,
       clientId,
       setAttributes
     } = props;
     const isRestrictedBlock = restrictedBlocks.includes(name);
     const hasClassName = hasBlockSupport(name, 'className', true);
 
-    if (!isRestrictedBlock && hasClassName && isSelected) {
+    if (!isRestrictedBlock && hasClassName) {
       useEffect(() => setAttributes({
         customCSSId: clientId
       }), []);
@@ -288,117 +284,6 @@ const withInspectorControl = createHigherOrderComponent(BlockEdit => {
 
 addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
 addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl, 90);
-
-/***/ }),
-
-/***/ "./src/js/gutenberg/extensions/with-styles/handler.js":
-/*!************************************************************!*\
-  !*** ./src/js/gutenberg/extensions/with-styles/handler.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/**
- * WordPress dependencies
- */
-const {
-  apiFetch,
-  data: {
-    select,
-    subscribe,
-    dispatch
-  }
-} = wp;
-
-const handleNotice = ({
-  message
-}) => {
-  const {
-    createNotice
-  } = dispatch('core/notices');
-  return createNotice('success', message, {
-    isDismissible: true,
-    type: 'snackbar'
-  });
-};
-
-let checked = true;
-let reusableBlocks = {};
-/* harmony default export */ __webpack_exports__["default"] = (subscribe(() => {
-  const {
-    __experimentalReusableBlocks
-  } = select('core/block-editor').getSettings();
-  const {
-    getCurrentPostId,
-    isSavingPost,
-    isPublishingPost,
-    isAutosavingPost,
-    isCurrentPostPublished,
-    __experimentalIsSavingReusableBlock
-  } = select('core/editor');
-  const {
-    isSavingEntityRecord
-  } = select('core');
-  let isSavingReusableBlock;
-
-  if (__experimentalIsSavingReusableBlock) {
-    isSavingReusableBlock = id => __experimentalIsSavingReusableBlock(id);
-  } else {
-    isSavingReusableBlock = id => isSavingEntityRecord('postType', 'wp_block', id);
-  }
-
-  const isAutoSaving = isAutosavingPost();
-  const isPublishing = isPublishingPost();
-  const isSaving = isSavingPost();
-  const getReusableBlocks = __experimentalReusableBlocks || [];
-  const postPublished = isCurrentPostPublished();
-  /**
-   * Handle Reusable Blocks
-   */
-
-  getReusableBlocks.map(({
-    id,
-    isTemporary
-  }) => {
-    if (id) {
-      const isBlockSaving = isSavingReusableBlock(id);
-
-      if (isBlockSaving && !isTemporary) {
-        reusableBlocks[id] = {
-          id,
-          isSaving: true
-        };
-      }
-
-      if (!isBlockSaving && !isTemporary && !!reusableBlocks[id]) {
-        if (id === reusableBlocks[id].id && !isBlockSaving && reusableBlocks[id].isSaving) {
-          reusableBlocks[id].isSaving = false;
-          apiFetch({
-            path: `wecodeart/v1/save_block_meta/${id}`,
-            method: 'POST'
-          }).then(handleNotice);
-        }
-      }
-    }
-  });
-  /**
-   * Handle Normal Blocks
-   */
-
-  if ((isPublishing || postPublished && isSaving) && !isAutoSaving) {
-    checked = false;
-  } else {
-    if (!checked) {
-      apiFetch({
-        path: `wecodeart/v1/save_post_meta/${getCurrentPostId()}`,
-        method: 'POST'
-      }).then(handleNotice);
-      checked = true;
-    }
-  }
-}));
 
 /***/ }),
 
@@ -475,11 +360,15 @@ const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
   const allBlocks = blocks.map(block => [block, getChildrenFromBlock(block)]); // Transform the deply nested array in a simple one and then get the `customCss` value where it is the case
 
   const extractCustomCss = flattenDeep(allBlocks).map(block => {
-    var _block$attributes;
+    const {
+      attributes: {
+        customCSS = null,
+        customCSSId = null
+      } = {}
+    } = block;
 
-    if (block !== null && block !== void 0 && block.attributes && null !== ((_block$attributes = block.attributes) === null || _block$attributes === void 0 ? void 0 : _block$attributes.customCSS)) {
-      const blockId = block.attributes.customCSSId;
-      return block.attributes.customCSS.replace('selector', `*[data-block="${blockId}"]`) + '\n';
+    if (customCSSId && customCSS) {
+      return customCSS.replace('selector', `[data-block="${customCSSId}"]`) + '\n';
     }
 
     return '';

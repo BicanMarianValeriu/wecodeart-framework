@@ -20,6 +20,7 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Customizer;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Request;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * The Fonts object.
@@ -31,14 +32,14 @@ final class Fonts implements Integration {
 	/**
 	 * An array of our google fonts.
 	 *
-	 * @var     null|object
+	 * @var	array
 	 */
-	public static $google_fonts = null;
+	public static $google_fonts = [];
 	
 	/**
 	 * Google Fonts.
 	 *
-	 * @var     null|object
+	 * @var	null|object
 	 */
 	public $google = null;
 
@@ -152,16 +153,15 @@ final class Fonts implements Integration {
 			$request->send( $request::METHOD_GET );
 
             $results = $request->get_response_body();
-            $results = json_decode( $results );
-			$results = array_map( function( $item ) {
-                return [
-                    'family' 	=> $item->family,
-					'variants' 	=> $item->variants,
-					'subsets' 	=> $item->subsets,
-				];
-			}, (array) $results->items );
+            $results = json_decode( $results, true );
 
-            set_transient( 'wecodeart/fonts/google', $results, WEEK_IN_SECONDS );   
+			if( json_last_error() === JSON_ERROR_NONE ) {
+				$results = array_map( function( $item ) {
+					return wp_array_slice_assoc( $item, [ 'family', 'variants', 'subsets' ] );
+				}, get_prop( $results, 'items', [] ) );
+	
+				set_transient( 'wecodeart/fonts/google', $results, WEEK_IN_SECONDS );   
+			}
         }
 
         self::$google_fonts = apply_filters( 'wecodeart/filter/fonts/google', $results );

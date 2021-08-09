@@ -1,0 +1,47 @@
+/* Align */
+// *[class*="wp-block-"] {
+// 	@each $breakpoint, $container-max-width in $container-max-widths {
+// 		@include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+// 			.container > .alignwide {
+// 				max-width: initial;
+// 				margin-left: calc( ((var(--wp--custom--container--#{$breakpoint}, #{$container-max-width}) * var(--wp--custom--wide-multiplier, 1.1) - #{$container-max-width} ) / 2) / 2 * -1);
+// 				margin-right: calc( ((var(--wp--custom--container--#{$breakpoint}, #{$container-max-width}) * var(--wp--custom--wide-multiplier, 1.1) - #{$container-max-width} ) / 2) / 2 * -1);
+// 			}
+// 		}
+// 	}
+// }
+
+/* Columns / Row */
+.wp-block-columns {
+	@include make-row();
+	
+	&.are-vertically-aligned-top {
+		align-items: flex-start;
+	}
+
+	&.are-vertically-aligned-center {
+		align-items: center;
+	}
+
+	&.are-vertically-aligned-bottom {
+		align-items: flex-end;
+	}
+}
+
+/* Column / Col */
+.wp-block-column {
+	@include make-col-ready();
+    flex: 1 0 0%;
+
+	&.is-vertically-aligned-top {
+		align-self: flex-start;
+	}
+
+	&.is-vertically-aligned-center {
+		align-self: center;
+	}
+
+	&.is-vertically-aligned-bottom {
+		align-self: flex-end;
+	}
+}

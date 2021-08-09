@@ -6,7 +6,6 @@ import { justify } from './justify';
 import { underline } from './underline';
 import { highlight } from './highlight';
 import { abbreviation } from './abbreviation';
-// import { markdown } from './markdown';
 // import { tooltip } from './tooltip';
 
 /**
@@ -21,7 +20,6 @@ function registerWeCodeArtFormats() {
 		underline,
 		highlight,
 		abbreviation,
-		// markdown,
 		// tooltip,
 	].forEach(({ name, ...settings }) => {
 		if (name) {

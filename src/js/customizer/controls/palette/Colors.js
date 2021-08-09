@@ -1,64 +1,93 @@
-import { rotateLeft } from '@wordpress/icons';
+import { rotateLeft, update } from '@wordpress/icons';
 import AccordionControl from '../../common/Accordion';
 import ColorControl from '../../common/Color';
 
 const { debounce } = lodash;
-const { colors: globalPaletteColors } = wecodeartPaletteControl;
 
 const {
-	components: { Button },
-	element: { Fragment },
-	i18n: { __ }
+	element: { useState },
+	components: { Button, ButtonGroup },
+	i18n: { __ },
 } = wp;
 
-const PaletteColors = ({ values, defaults, save }) => {
-	const { palettes, active = 'base' } = values;
-	const palette = palettes[active];
-	const { colors, allowDeletion } = palette;
+const Colors = ({ value, choices, setChoices, save, palette, paletteTheme, inputAttrs }) => {
+	const { disableGlobal, readOnly } = inputAttrs;
+	const activePalette = choices.filter(({ slug }) => slug === value).pop();
+	const { colors } = activePalette;
+	const [hasUpdates, setHasUpdates] = useState(false);
 
-	const defaultColors = defaults.palettes[active] ? { ...defaults.palettes[active].colors, } : {};
+	const updatePalette = () => {
+		let newColors = [];
+		for (let i in palette) {
+			let updated = palette[i];
+			updated.color = colors[palette[i].slug];
+			newColors[i] = updated;
+		}
 
-	const updateColorInPalette = (colorSlug, val) => {
-		const nextValues = { ...values };
-		nextValues.palettes[active].colors[colorSlug] = val;
-		save(nextValues);
+		const formData = new FormData();
+		formData.append('action', 'wca_update_colors');
+		formData.append('palette', value);
+		formData.append('colors', JSON.stringify(newColors));
+
+		return fetch(wp.ajax.settings.url, {
+			method: 'POST',
+			body: formData
+		}).then(() => {
+			save(value);
+			setHasUpdates(false);
+		}).catch((err) => console.log(JSON.stringify(err)));
 	};
 
-	const resetPalette = () => {
-		const nextValues = { ...values };
-		nextValues.palettes[active].colors = defaultColors;
-		save(nextValues);
+	const updateColor = (_slug, val) => {
+		let index = choices.findIndex(({ slug }) => slug === value);
+		choices[index].colors[_slug] = val;
+		setChoices([...choices]);
+		setHasUpdates(true);
+
+		save(value);
 	};
 
-	const paletteHasDefaults = Object.keys(defaultColors).filter((k) => defaultColors[k] !== colors[k]).length < 1;
+	const resetChanges = () => {
+		const index = choices.findIndex(({ slug }) => slug === value);
+		let _colors = [];
+		for (let i in paletteTheme) _colors[paletteTheme[i].slug] = paletteTheme[i].color;
+		choices[index].colors = _colors;
+		setChoices([...choices]);
+		setHasUpdates(true);
+
+		save(value);
+	};
+
+	const hasDefaults = paletteTheme.filter(({ slug, color }) => color !== colors[slug]).length < 1;
 
 	return (
 		<AccordionControl label={__('Palette Colors', 'wecodeart')}>
 			<div className="wecodeart-palette-colors">
-				{globalPaletteColors.map((group, index) => {
+				{palette.map(({ slug, name, color }) => {
 					return (
-						<Fragment key={index}>
-							{index > 0 && <hr />}
-							{Object.keys(group).map((slug) => {
-								return (
-									<ColorControl
-										key={slug}
-										label={group[slug]}
-										selectedColor={colors[slug]}
-										defaultValue={defaults.palettes[active] ? defaults.palettes[active].colors[slug] : '#FFFFFF'}
-										onChange={debounce((value) => updateColorInPalette(slug, value), 100)}
-									/>
-								);
-							})}
-						</Fragment>
+						<ColorControl
+							key={slug}
+							label={name}
+							selectedColor={colors[slug]}
+							defaultValue={color}
+							onChange={debounce((value) => updateColor(slug, value), 100)}
+							palette={palette}
+							disableGlobal={disableGlobal}
+							readOnly={readOnly}
+						/>
 					);
 				})}
-				{!allowDeletion && (
+				{!readOnly && (
 					<>
 						<hr />
-						<Button isLink className="wecodeart-palette-colors__reset" onClick={resetPalette} disabled={paletteHasDefaults} icon={rotateLeft}>
-							{__('Reset all to default', 'wecodeart')}
-						</Button>
+						<ButtonGroup>
+							<Button className="wecodeart-palette-colors__reset" onClick={updatePalette} disabled={!hasUpdates} icon={update}>
+								{__('Update Palette', 'wecodeart')}
+							</Button>
+							<Button className="wecodeart-palette-colors__reset" onClick={resetChanges} disabled={hasDefaults} icon={rotateLeft}>
+								{__('Theme Default', 'wecodeart')}
+							</Button>
+						</ButtonGroup>
 					</>
 				)}
 			</div>
@@ -66,4 +95,4 @@ const PaletteColors = ({ values, defaults, save }) => {
 	);
 };
 
-export default PaletteColors;
+export default Colors;

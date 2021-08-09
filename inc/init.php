@@ -63,13 +63,13 @@ final class WeCodeArt implements \ArrayAccess {
 	 * @since 3.6.2
 	 */
 	public function load() {
-		// Fire Core
+		// Core
 		Core		::get_instance();
-		// Admin Stuff
+		// Admin
 		Admin 		::get_instance();
         // Gutenberg
         Gutenberg   ::get_instance();
-		// Fire Support Class
+		// Support
         Support		::get_instance();
 	}
 
@@ -227,6 +227,25 @@ function wecodeart( $key = null, $parameters = [], WeCodeArt $theme = null ) {
 }
 
 /**
+ * Gets theme JSON instance.
+ *
+ * @since	5.0.0
+ * @version	5.0.0
+ *
+ * @param   string|array    $key
+ * @param   string|null     $default
+ *
+ * @return  mixed
+ */
+function wecodeart_json( $key = null, $default = null ) {
+    if ( null === $key ) {
+        return wecodeart( 'JSON' );
+    }
+
+    return _wp_array_get( wecodeart( 'JSON' ), $key, $default );
+}
+
+/**
  * Gets theme config instance.
  *
  * @since	3.9.5
@@ -275,6 +294,28 @@ function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
     }
 
     return wecodeart( 'inputs' )::compile( $key, $args );
+}
+
+/**
+ * Gets template instance.
+ *
+ * @since	5.0.0
+ * @version	5.0.0
+ *
+ * @param   string|array    $file
+ * @param   array|null      $data
+ * @param   bool            $echo
+ *
+ * @return  mixed
+ */
+function wecodeart_template( $file, $data = [], $echo = true ) {
+    $template = wecodeart( 'template' )->set_file( $file );
+
+    if( $echo ) {
+        return $template->render( $data );
+    }
+
+    return $template->compile( $data );
 }
 
 /**
@@ -363,9 +404,11 @@ function wecodeart_if( $parameters, $relation = 'AND' ) {
         if ( ! wecodeart( 'conditionals' )->has( $conditional ) ) return null;
         $class  = wecodeart( 'conditionals' )->get( $conditional );
         $is_met = ( new $class )->is_met();
+        
         if( $return === false && ! $is_met ) {
             return false;
         }
+
         if( $return === true && ! $is_met && $one_met !== false ) {
             $one_met = false;
             continue;
@@ -391,7 +434,7 @@ do_action( 'wecodeart/setup/before', $config );
 /**
  * Load Setup
  */
-require_once __DIR__ . '/config/setup.php';
+require_once __DIR__ . '/setup.php';
 
 /**
  * After Setup Hook

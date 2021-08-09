@@ -8,8 +8,7 @@ const {
 	i18n: { __ }
 } = wp;
 
-const PaletteForm = ({ values, save, disabled }) => {
-	const { palettes } = values;
+const PaletteForm = ({ value, choices, setChoices, save, disabled }) => {
 	const [isAdding, setIsAdding] = useState(false);
 	const [newPaletteName, setNewPaletteName] = useState('');
 	const [paletteFrom, setPaletteFrom] = useState('base');
@@ -19,24 +18,33 @@ const PaletteForm = ({ values, save, disabled }) => {
 		setNewPaletteName('');
 	};
 
-	const setBasePalette = (e) => {
-		setPaletteFrom(e.target.value);
-	};
+	const setBasePalette = ({ target: { value } }) => setPaletteFrom(value);
 
-	const paletteExists = () => Object.keys(palettes).filter((i) => camelCase(newPaletteName) === i).length > 0;
+	const paletteExists = () => choices.filter(({ slug }) => camelCase(newPaletteName) === slug).length > 0;
 
 	const addNewPalette = (e) => {
 		e.preventDefault();
-		const nextValue = { ...values };
-		const paletteSlug = camelCase(newPaletteName);
-		nextValue.palettes[paletteSlug] = {
-			name: newPaletteName,
+		const nextValue = value;
+		const palette = {
+			label: newPaletteName,
+			slug: camelCase(newPaletteName),
 			allowDeletion: true,
-			colors: { ...nextValue.palettes[paletteFrom].colors },
+			colors: choices.filter(({ slug }) => slug === paletteFrom).pop().colors,
 		};
-		nextValue.active = paletteSlug;
+
+		setChoices([...choices, palette]);
 		save(nextValue);
 		toggleAdding();
+
+		const formData = new FormData();
+		formData.append('action', 'wca_update_choices');
+		formData.append('type', 'add');
+		formData.append('palette', JSON.stringify(palette));
+
+		return fetch(wp.ajax.settings.url, {
+			method: 'POST',
+			body: formData
+		}).then((d) => console.log(d)).catch((err) => console.log(JSON.stringify(err)));
 	};
 
 	if (!isAdding) {
@@ -68,7 +76,7 @@ const PaletteForm = ({ values, save, disabled }) => {
 				{__('Extend from:', 'wecodeart')}
 			</span>
 			<select value={paletteFrom} onChange={setBasePalette} onBlur={setBasePalette}>
-				{Object.keys(palettes).map((k, i) => (<option key={i} value={k}>{palettes[k].name}</option>))}
+				{choices.map(({ slug, label }) => (<option key={slug} value={slug}>{label}</option>))}
 			</select>
 			<div className="actions">
 				<Button

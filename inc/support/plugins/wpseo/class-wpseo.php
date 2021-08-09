@@ -68,16 +68,20 @@ class WPSeo implements Integration {
 	 * @version	4.1.5
 	 */
 	public function register_hooks() {
-		add_action( 'admin_notices',						[ $this, 'manage_notice' ] );
+		// WP Title
+		remove_action( 'wp_head', '_wp_render_title_tag', 1 );
+		remove_action( 'wp_head', '_block_template_render_title_tag', 1 );
 
-		add_action( 'wecodeart/hook/inner/top', 			[ $this, 'render_breadcrumbs' ], 30 );
-		remove_action( 'woocommerce_before_main_content', 	'woocommerce_breadcrumb', 20, 0 );
+		// Notices
+		add_action( 'admin_notices',	[ $this, 'manage_notice' ] );
 
 		// Restricted Blocks
-		add_filter( 'wecodeart/filter/gutenberg/restricted',[ $this, 'restricted_gutenberg_blocks' ] );
+		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_gutenberg_blocks' ] );
 
-		// Template Context
+		// Terms Template Context
 		add_filter( 'wecodeart/filter/template/context', 	[ $this, 'filter_category_context' ], 10, 2 );
+
+		// Author Template Context
 		if( get_prop( $this->config, 'author-social', false ) !== false ) {
 			/**
 			 * Extend Author box data with Social
@@ -116,47 +120,25 @@ class WPSeo implements Integration {
 	}
 
 	/**
-	 * Yoast BreadCrumbs
-	 *
-	 * @since   3.5
-	 * @version 5.0.0
-	 *
-	 * @return  void
-	 */
-	public function render_breadcrumbs() {
-		if( wecodeart_if( 'is_front_page' ) || get_post_meta( get_the_ID(), '_wca_builder_template', true ) ) {
-			return;
-		}
-
-		$container = get_prop( Content::get_contextual_options(), 'container' );
-		
-		Markup::wrap( 'breadcrumbs', [
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs', 'id' => 'breadcrumb' ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => $container ] ],
-			[ 'tag' => 'div', 'attrs' => [ 'class' => 'breadcrumbs__list py-2' ] ]
-		], 'yoast_breadcrumb' );
-	}
-
-	/**
 	 * Extend Author Box with Yoast's Social
 	 *
 	 * @since	3.9.3
-	 * @version	4.1.52
+	 * @version 5.0.0
 	 *
 	 * @return 	array
 	 */
 	public function filter_author_context( $args, $name ) {
-		if( $name !== 'entry/author/box.php' ) {
+		$config	= get_prop( $this->config, 'author-social', false );
+
+		if( $name !== 'entry/meta/author-box.php' || $config === false ) {
 			return $args;
 		}
 
-		$author_ID  = get_the_author_meta( 'ID' );
-		$config 	= get_prop( $this->config, 'author-social', false );
-		$config 	= apply_filters( 'wecodeart/filter/support/yoast/author/social', $config, $author_ID );
+		$args['attributes'] = wp_parse_args( [
+			'avatarSize' =>  90
+		], $args['attributes'] );
 
-		if( $config === false ) {
-			return $args;
-		}
+		$author	= get_prop( $args, [ 'author' ] );
 
 		$social_icons = [
 			'facebook' => [
@@ -186,10 +168,10 @@ class WPSeo implements Integration {
 		];
 
 		$args = wp_parse_args( [
-			'social' => array_map( function( $item ) use( $author_ID, $social_icons, $config ) {
+			'social' => array_map( function( $item ) use( $author, $social_icons, $config ) {
 				$item  	= strtolower( $item );
 				$icon  	= $item;
-				$value 	= trim( get_the_author_meta( $item, $author_ID ) );
+				$value 	= trim( get_the_author_meta( $item, $author->id ) );
 				$target = '_blank';
 
 				switch( $item ) {	
@@ -201,7 +183,7 @@ class WPSeo implements Integration {
 					case 'url':
 						$icon  	= 'globe';
 						$target	= $value ? $target : '_self';
-						$value 	= $value ?: get_author_posts_url( $author_ID );
+						$value 	= $value ?: $author->url;
 						break;
 				}
 
@@ -215,9 +197,9 @@ class WPSeo implements Integration {
 				}
 
 				return [
-					'title' 	=> esc_attr( $config[$item] ),
-					'url'		=> esc_url( $value ),
-					'icon'		=> SVG::compile( $icon ),
+					'title' 	=> $config[$item],
+					'url'		=> $value,
+					'icon'		=> $icon,
 					'target'	=> $target
 				];
 
@@ -235,15 +217,16 @@ class WPSeo implements Integration {
 	 * Extend Category with Yoast's Primary Term
 	 *
 	 * @since	4.1.52
+	 * @version	5.0.0
 	 *
 	 * @return 	array
 	 */
 	public function filter_category_context( $args, $name ) {
-		if( $name !== 'entry/meta/categories.php' ) {
+		if( $name !== 'entry/meta/terms.php' ) {
 			return $args;
 		}
 		
-		if( $meta = get_post_meta( get_the_ID(), '_yoast_wpseo_primary_category', true ) ) {
+		if( $meta = get_post_meta( get_prop( $args, 'post_id' ), '_yoast_wpseo_primary_category', true ) ) {
 			$args['primary'] = (int) $meta;
 		}
 

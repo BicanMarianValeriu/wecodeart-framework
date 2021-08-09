@@ -19,6 +19,8 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
+use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\wp_parse_args_r;
 
 /**
  * Handles Gutenberg Theme Patterns Functionality.
@@ -28,9 +30,19 @@ class Patterns implements Integration {
 	use Singleton;
 	use Scripts\Base;
 
-	const POST_TYPE         = 'wca_pattern';
-	const TYPE_TAXONOMY     = 'wca_pattern_type';
-	const CATEGORY_TAXONOMY = 'wca_pattern_category';
+	/**
+	 * Folder.
+	 *
+	 * @var string
+	 */
+	const FOLDER	= 'block-patterns';
+
+	/**
+	 * Config.
+	 *
+	 * @var array
+	 */
+	public $config = [];
 
 	/**
 	 * Get Conditionals
@@ -53,29 +65,12 @@ class Patterns implements Integration {
 	 * @return 	void
 	 */
 	public function register_hooks() {
-		$this->register_type();
-		$this->register_taxonomy();
-		$this->load_patterns();
-		$this->load_categories();
-		add_action( 'rest_insert_' . self::POST_TYPE, 	[ $this, 'rest_insert_wca_pattern' ], 10, 2 );
-		add_action( 'enqueue_block_editor_assets', 		[ $this, 'block_editor_assets' ] );
-		// Reusable Theme link.
-		add_filter( 'admin_menu', [ $this, 'reusable_blocks_link' ], 0 );
-	}
-
-	/**
-	 * Link Reusable blocks to Appearance
-	 *
-	 * @return void
-	 */
-	public function reusable_blocks_link() {
-		add_submenu_page( 
-			'themes.php',
-			__( 'Blocks - Reusable', 'wecodeart' ),
-			__( 'Blocks - Reusable', 'wecodeart' ),
-			'edit_posts',
-			'edit.php?post_type=wp_block'
-		);
+		// Editor Assets.
+		// add_action( 'enqueue_block_editor_assets', [ $this, 'block_editor_assets' ], 10 );
+		// Register.
+		$this->set_config();
+		$this->register_categories();
+		$this->register_patterns();
 	}
 
 	/**
@@ -90,209 +85,153 @@ class Patterns implements Integration {
 	}
 
 	/**
-	 * Register the Custom Post Type.
+	 * Set config.
+	 *
+	 * @return  void
 	 */
-	public function register_type() { 
-		register_post_type( self::POST_TYPE, [
-			'label'             => __( 'Block Patterns', 'wecodeart' ),
-			'labels'			=> [
-				'name'					=> _x( 'Block Patterns', 'Post Type General Name', 'wecodeart' ),
-				'singular_name'			=> _x( 'Block Pattern', 'Post Type Singular Name', 'wecodeart' ),
-				'menu_name'				=> __( 'Blocks - Patterns', 'wecodeart' ),
-				'add_new_item'          => __( 'Add New Pattern', 'wecodeart' ),
-				'add_new'               => __( 'Add New', 'wecodeart' ),
-				'new_item'              => __( 'New Pattern', 'wecodeart' ),
-				'edit_item'             => __( 'Edit Pattern', 'wecodeart' ),
-				'update_item'           => __( 'Update Pattern', 'wecodeart' ),
-				'view_item'             => __( 'View Pattern', 'wecodeart' ),
-				'view_items'            => __( 'View Patterns', 'wecodeart' ),
-				'search_items'          => __( 'Search Pattern', 'wecodeart' ),
-				'not_found'             => __( 'Not found', 'wecodeart' ),
-				'not_found_in_trash'    => __( 'Not found in Trash', 'wecodeart' ),
-			],
-			'description'       => __( 'Manage Gutenberg block patterns.', 'wecodeart' ),
-			'supports'          => [ 'title', 'editor', 'excerpt' ],
-			'taxonomies'        => [ self::TYPE_TAXONOMY, self::CATEGORY_TAXONOMY ],
-			'show_ui'           => true,
-			'rewrite'           => false,
-			'menu_position'		=> 15,
-			'show_in_rest'      => true,
-			'show_in_menu'      => 'themes.php',
-			'show_in_admin_bar' => false,
-		] );
+	public function set_config() {
+		$this->config = get_prop( wecodeart_config( 'gutenberg' ), 'patterns', [] );
 	}
 
 	/**
-	 * Registers the "type" custom taxonomy.
-	 *
-	 * @uses self::TYPE_TAXONOMY 		= Can be block pattern or full page layout
-	 * @uses self::CATEGORY_TAXONOMY 	= Pattern category
-	 */
-	public function register_taxonomy() {
-		register_taxonomy( self::TYPE_TAXONOMY, [ self::POST_TYPE  ], [
-			'label'        	=> __( 'Pattern Type', 'wecodeart' ),
-			'labels'		=> [
-				'name'			=> _x( 'Pattern Types', 'Pattern Types General Name', 'wecodeart' ),
-				'singular_name'	=> _x( 'Pattern Type', 'Pattern Type Singular Name', 'wecodeart' ),
-				'add_new_item'	=> __( 'Add New Pattern Type', 'wecodeart' ),
-				'all_items'		=> __( 'All Pattern Types', 'wecodeart' ),
-				'parent_item'		=> __( 'Parent Pattern Type', 'wecodeart' ),
-				'parent_item_colon'	=> __( 'Parent Pattern Type:', 'wecodeart' ),
-				'new_item_name'	=> __( 'New Pattern Type', 'wecodeart' ),
-				'edit_item'		=> __( 'Edit Pattern Type', 'wecodeart' ),
-				'update_item'	=> __( 'Update Pattern Type', 'wecodeart' ),
-				'view_item'		=> __( 'View Pattern Type', 'wecodeart' ),
-			],
-			'hierarchical' 	=> true,
-			'rewrite'      	=> false,
-			'show_ui'		=> true,
-			'show_in_rest' 	=> true,
-			'show_admin_column'	=> true,
-			'show_in_nav_menus'	=> true,
-		] );
-
-		register_taxonomy( self::CATEGORY_TAXONOMY, [ self::POST_TYPE ], [
-			'label'        	=> __( 'Pattern Category', 'wecodeart' ),
-			'hierarchical' 	=> true,
-			'rewrite'      	=> false,
-			'show_ui'		=> true,
-			'show_in_rest' 	=> true,
-			'show_admin_column'	=> true,
-			'show_in_nav_menus'	=> true,
-		] );
-
-		if( ! term_exists( 'pattern', self::TYPE_TAXONOMY ) ) {
-			wp_insert_term( 'Pattern', self::TYPE_TAXONOMY, [
-				'description'	=> __( 'Pattern', 'wecodeart' ),
-				'slug' 			=> 'pattern'
-			] );
-		}
-		
-		if( ! term_exists( 'layout', self::TYPE_TAXONOMY ) ) {
-			wp_insert_term( 'Layout', self::TYPE_TAXONOMY, [
-				'description'	=> __( 'Layout', 'wecodeart' ),
-				'slug' 			=> 'layout'
-			] );
-		}
-		
-		if( ! term_exists( 'core', self::CATEGORY_TAXONOMY ) ) {
-			wp_insert_term( 'Core', self::CATEGORY_TAXONOMY, [
-				'description'	=> __( 'Core', 'wecodeart' ),
-				'slug' 			=> 'core'
-			] );
-		}
-	}
-
-	/**
-	 * Set custom taxonomies relationships with the REST API.
-	 *
-	 * @param 	WP_Post         $post     Inserted or updated post object.
-	 * @param 	WP_REST_Request $request  Request object.
+	 * Register block patterns categories.
 	 *
 	 * @return 	void
 	 */
-	public function rest_insert_wca_pattern( $post, $request ) {
-		$params = $request->get_json_params();
+	public function register_categories() {
+		( new Patterns\Categories( get_prop( $this->config, 'categories', [] ) ) )->register();
+	}
 
-		if ( array_key_exists( 'terms', $params ) ) {
-			foreach ( $params['terms'] as $taxonomy => $terms ) {
-				wp_set_object_terms( $post->ID, $terms, $taxonomy );
+	/**
+	 * Register block patterns.
+	 *
+	 * @return 	void
+	 */
+	public function register_patterns() {
+		$query = $this->get_files();
+
+		if( empty( $query ) ) return;
+
+		foreach( $query as $pattern ) $this->get_pattern_from_file( $pattern['slug'] );
+	}
+
+	/**
+	 * Link Reusable blocks to Appearance
+	 *
+	 * @return void
+	 */
+	public function get_paths( $base_directory ) {
+		$path_list = array();
+		if ( file_exists( $base_directory ) ) {
+			$nested_files      = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $base_directory ) );
+			$nested_html_files = new \RegexIterator( $nested_files, '/^.+\.html$/i', \RecursiveRegexIterator::GET_MATCH );
+			foreach ( $nested_html_files as $path => $file ) {
+				$path_list[] = $path;
 			}
 		}
+		return $path_list;
 	}
 
 	/**
-	 * Register custom post type posts (with the 'pattern' type) as block patterns.
+	 * Retrieves the template files from  the theme.
 	 *
-	 * @return 	void
+	 * @return 	array 	Template.
 	 */
-	public function load_patterns() {
-		$block_patterns_query = new \WP_Query( [
-			'post_type'              => self::POST_TYPE,
-			'posts_per_page'		 => -1,
-			'no_found_rows'          => true,
-			'update_post_meta_cache' => false,
-			'update_post_term_cache' => false,
-			'tax_query'              => [
-				[
-					'taxonomy' => self::TYPE_TAXONOMY,
-					'field'    => 'slug',
-					'terms'    => 'pattern',
-				]
-			],
-		] );
-	
-		wp_reset_postdata();
+	public function get_files() {
+		$themes = [
+			get_stylesheet() => get_prop( wecodeart_config( 'paths' ), 'child' ),
+			get_template()   => get_prop( wecodeart_config( 'paths' ), 'directory' ),
+		];
 
-		if ( $block_patterns_query->have_posts() ) {
-			foreach( $block_patterns_query->posts as $block_pattern ) {
-				$categories = get_the_terms( $block_pattern->ID, self::CATEGORY_TAXONOMY );
-	
-				register_block_pattern( self::POST_TYPE . '/' . $block_pattern->post_name, [
-					'title'       => $block_pattern->post_title,
-					'content'     => $block_pattern->post_content,
-					'categories'  => empty( $categories ) ? [] : wp_list_pluck( $categories, 'slug' ),
-					'description' => $block_pattern->post_excerpt,
-				] );
+		$template_files = [];
+		foreach ( $themes as $theme_slug => $theme_dir ) {
+			$theme_files = $this->get_paths( $theme_dir . '/' . self::FOLDER );
+			foreach ( $theme_files as $file ) {
+				$template_slug      = substr(
+					$file,
+					// Starting position of slug.
+					strpos( $file, self::FOLDER . DIRECTORY_SEPARATOR ) + 1 + strlen( self::FOLDER ),
+					// Subtract ending '.html'.
+					-5
+				);
+
+				$template_files[] = [
+					'slug'  => $template_slug,
+					'path'  => $file,
+					'theme' => $theme_slug,
+				];
 			}
 		}
+		
+		return $template_files;
 	}
 
 	/**
-	 * Merge our "category" taxonomy with the categories already defined elsewhere.
+	 * Retrieves the template file from the theme for a given slug.
 	 *
-	 * @return 	void
+	 * @access 	private
+	 *
+	 * @param 	string 	$slug template slug.
+	 *
+	 * @return 	array 	Template.
 	 */
-	public function load_categories() {
-		$pattern_categories           	= get_terms( self::CATEGORY_TAXONOMY );
-		$pattern_categories_flattened 	= wp_list_pluck( $pattern_categories, 'name', 'slug' );
+	public function get_file( $slug ) {
+		$themes = [
+			get_stylesheet() => get_prop( wecodeart_config( 'paths' ), 'child' ),
+			get_template()   => get_prop( wecodeart_config( 'paths' ), 'directory' ),
+		];
 
-		$registry = \WP_Block_Pattern_Categories_Registry::get_instance();
+		foreach ( $themes as $theme_slug => $theme_dir ) {
+			$file_path = wp_normalize_path( $theme_dir . '/' . self::FOLDER . '/' . $slug . '.html' );
+			if ( file_exists( $file_path ) ) {
+				$new_template_item = [
+					'slug'  => $slug,
+					'path'  => $file_path,
+					'theme' => $theme_slug
+				];
 
-		foreach( $pattern_categories_flattened as $slug => $label ) {
-			// Move on if is registered
-			if( $registry->is_registered( $slug ) ) continue;
-			// Register new pattern category
-			register_block_pattern_category( $slug, [
-				'label' => $label
-			] );
+				return $new_template_item;
+			}
 		}
+
+		return null;
 	}
 
 	/**
-	 * Merge our custom post type posts (with the 'layout' type) with the layouts already defined elsewhere.
+	 * Build a unified template object based on a theme file.
 	 *
-	 * @param 	array $layouts The existing layouts.
+	 * @param 	array 	$template_file Theme file.
 	 *
-	 * @return 	array
+	 * @return 	WP_Block_Template Template.
 	 */
-	public function load_layouts( $layouts ) {
-		$block_patterns_query = new \WP_Query( [
-			'post_type'              => self::POST_TYPE,
-			'posts_per_page'		 => -1,
-			'no_found_rows'          => true,
-			'update_post_meta_cache' => false,
-			'update_post_term_cache' => false,
-			'tax_query'              => [
-				[
-					'taxonomy' => self::TYPE_TAXONOMY,
-					'field'    => 'slug',
-					'terms'    => 'layout',
-				]
-			],
-		] );
+	public function register_from_file( $template_file ) {
+		$template_content	= file_get_contents( $template_file['path'] );
 
-		wp_reset_postdata();
+		$template			= new Patterns\Pattern();
+		$template->name		= $template_file['slug'];
+		$template->title	= ucfirst( implode( ' ', explode( '-', $template_file['slug'] ) ) );
+		$template->content	= $template_content;
+		$template->slug		= $template_file['slug'];
+		$template->theme	= 'wecodeart';
 
-		foreach ( $block_patterns_query->posts as $block_pattern ) {
-			$categories = get_the_terms( $block_pattern->ID, self::CATEGORY_TAXONOMY );
+		return $template->register();
+	}
 
-			$layouts[] = [
-				'category'    => wp_list_pluck( $categories, 'slug' )[0],
-				'postContent' => $block_pattern->post_content,
-			];
+	/**
+	 * Retrieves a single unified template object using its id.
+	 * Retrieves the file template.
+	 *
+	 * @param 	string 	$slug Template unique identifier (example: template_slug).
+	 *
+	 * @return 	WP_Block_Template|null File template.
+	 */
+	public function get_pattern_from_file( $slug ) {
+		$template_file = $this->get_file( $slug );
+
+		if ( null !== $template_file ) {
+			return $this->register_from_file( $template_file );
 		}
 
-		return $layouts;
+		return null;
 	}
 }

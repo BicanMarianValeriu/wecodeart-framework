@@ -20,9 +20,6 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
 use WeCodeArt\Utilities\Helpers;
 use WeCodeArt\Admin\Customizer\Configs;
-use WeCodeArt\Admin\Customizer\Modules;
-use WeCodeArt\Admin\Customizer\Controls;
-use WeCodeArt\Admin\Customizer\Partials;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -59,18 +56,19 @@ class Customizer {
 		add_action( 'customize_preview_init', 	[ $this, 'enqueue_preview' ], 20 );
 
 		// Custom Controls.
-		Controls::get_instance();
+		Customizer\Controls::get_instance();
 		
 		// Selective Refresh Partials.
-		Partials::get_instance();
+		Customizer\Partials::get_instance();
 
 		// Customizer Modules.
-		Modules::get_instance();
+		Customizer\Modules::get_instance();
 
+		// Ajax.
+		Customizer\Requests::get_instance();
+		
 		// Theme panels and configs.
 		new Configs();
-		new Configs\Header();
-		new Configs\Content();
 		new Configs\Footer();
 		new Configs\Design();
 		new Configs\Typography();
@@ -108,6 +106,7 @@ class Customizer {
 		$fields = $this->get_configurations( $wp_customize );
 		$data   = [
 			'googleFonts'	=> wp_list_pluck( wecodeart( 'integrations' )->get( 'fonts' )::get_google_fonts(), 'family' ),
+			'palettes'		=> wecodeart_json( [ 'settings', 'custom', 'colorPalettes' ], [] ),
 			'fields' 		=> [],
 		];
 		
@@ -173,32 +172,12 @@ class Customizer {
 	 * Grab our Customizer Defaults.
 	 *
 	 * @param 	string 		mod_name
-	 * @version	3.9.9
+	 * @version	5.0.0
 	 *
 	 * @return 	mixed/array
 	 */
 	public static function get_defaults( $mod_name = '' ) {
 		$defaults = wecodeart_config( 'customizer' );
-
-		/**
-		 * Added post type defaults for Entry Meta and Container/Modules (singular/archive page types)
-		 *
-		 * @since 3.6.0
-		 */
-		// Customizer defaults for Post Types
-		foreach( wecodeart( 'public_post_types' ) as $type ) {
-			// Entry Meta
-			if( post_type_supports( $type, 'wecodeart-post-info' ) ) {
-				$defaults['content-entry-meta-' . $type . '-archive'] 	= [ 'author', 'date', 'comments' ];
-				$defaults['content-entry-meta-' . $type . '-singular'] 	= [ 'author', 'date', 'comments' ];
-			}
-
-			// Custom Container and Modules
-			$defaults['content-layout-container-' . $type . '-archive']		= 'container';
-			$defaults['content-layout-modules-' . $type . '-archive'] 		= [ 'content', 'primary' ];
-			$defaults['content-layout-container-' . $type . '-singular'] 	= 'container';
-			$defaults['content-layout-modules-' . $type . '-singular'] 		= [ 'content', 'primary' ];
-		}
 		
 		$args = apply_filters( 'wecodeart/filter/customizer/defaults', $defaults );
 		
@@ -241,10 +220,10 @@ class Customizer {
 	/**
 	 * Apply Customizer setting defaults.
 	 *
-	 * @param  object $wp_customize the Customizer object.
+	 * @param  	object $wp_customize the Customizer object.
 	 * @version	5.0.0
 	 *
-	 * @uses   get_defaults()
+	 * @uses   	get_defaults()
 	 */
 	public function apply_defaults( $wp_customize ) {
 		foreach( self::get_defaults() as $mod => $val ) $wp_customize->get_setting( $mod )->default = $val;
@@ -333,9 +312,7 @@ class Customizer {
 	 * @return 	void
 	 */
 	private function register_panel( $config, $wp_customize ) {
-		$wp_customize->add_panel( 
-			new Customizer\Extender\Panel( $wp_customize, get_prop( $config, 'name' ), $config ) 
-		);
+		$wp_customize->add_panel( new Customizer\Extender\Panel( $wp_customize, get_prop( $config, 'name' ), $config ) );
 	}
 
 	/**

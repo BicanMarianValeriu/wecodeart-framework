@@ -4,9 +4,7 @@ const {
     components: { Dropdown, Button, Icon, ColorPalette }
 } = wp;
 
-const { palette = [] } = wecodeartColorControl;
-
-const GlobalColorsPicker = ({ onChange, activeColor }) => {
+const GlobalColorsPicker = ({ onChange, activeColor, palette = [] }) => {
     const isGlobal = palette.filter(({ color }) => color === activeColor).length;
 
     return (

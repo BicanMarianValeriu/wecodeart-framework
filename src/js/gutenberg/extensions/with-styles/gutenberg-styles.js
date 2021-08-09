@@ -16,14 +16,12 @@ const { restrictedBlocks } = wecodeartGutenberg;
  * Internal dependencies.
  */
 import CSSEditor from './Editor';
-import './handler';
 import './injector';
 
 const addAttributes = (props) => {
 	const { name } = props;
 	const isRestrictedBlock = restrictedBlocks.includes(name);
-	const hasClassName = hasBlockSupport(name, 'className', true);
-	if (!isRestrictedBlock && hasClassName) {
+	if (!isRestrictedBlock) {
 		props.attributes = assign(props.attributes, {
 			customCSSId: {
 				type: 'string',
@@ -49,10 +47,12 @@ const addAttributes = (props) => {
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const { name, isSelected, clientId, setAttributes } = props;
+		const { name, clientId, setAttributes } = props;
 		const isRestrictedBlock = restrictedBlocks.includes(name);
 		const hasClassName = hasBlockSupport(name, 'className', true);
-		if (!isRestrictedBlock && hasClassName && isSelected) {
+
+		if (!isRestrictedBlock && hasClassName) {
+
 			useEffect(() => setAttributes({ customCSSId: clientId }), []);
 
 			return (

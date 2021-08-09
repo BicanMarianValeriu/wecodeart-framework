@@ -79,19 +79,19 @@ class Notifications {
 	 * Constructor
 	 */
 	public function init() {
-		add_action( 'admin_enqueue_scripts', 		[ $this, 'enqueue_scripts' ] );
-		add_action( 'admin_init',					[ $this, 'setup_current_notifications' ], 1 );
-		add_action( 'all_admin_notices',			[ $this, 'display_notifications' ] );
-		add_action( 'shutdown', 					[ $this, 'update_storage' ] );
-		add_action( 'wp_ajax_wca_get_notifications',	[ $this, 'get_notifications_ajax'		] );
-		add_action( 'wp_ajax_wca_dismiss_notification', [ $this, 'dismiss_notification_ajax'	] );
+		add_action( 'admin_enqueue_scripts',	[ $this, 'enqueue_scripts' ] );
+		add_action( 'admin_init',				[ $this, 'setup_current_notifications' ], 1 );
+		add_action( 'all_admin_notices',		[ $this, 'display_notifications' ] );
+		add_action( 'shutdown',					[ $this, 'update_storage' ] );
+		
+		new Notifications\Ajax();
 	}
 	
 	/**
 	 * Check if the user has dismissed a notification.
 	 *
 	 * @param 	Notification $notification The notification to check for dismissal.
-	 * @param 	int|null           $user_id      User ID to check on.
+	 * @param 	int|null	$user_id	User ID to check on.
 	 *
 	 * @return 	bool
 	 */
@@ -169,35 +169,6 @@ class Notifications {
 	public static function dismiss_notification( Notification $notification, $meta_value = 'seen' ) {
 		// Dismiss notification.
 		return update_user_option( get_current_user_id(), $notification->get_dismissal_key(), $meta_value ) !== false;
-	}
-
-	/**
-	 * Dismiss a notification.
-	 */
-	public static function dismiss_notification_ajax() {
-		$notification_center = self::get_instance();
-		
-		$notification_id = filter_input( INPUT_POST, 'notification' );
-
-		if ( empty( $notification_id ) ) {
-			die( '-1' );
-		}
-
-		$notification = $notification_center->get_notification_by_id( $notification_id );
-		if ( ( $notification instanceof Notification ) === false ) {
-			// Permit legacy.
-			$options      = [
-				'id'            => $notification_id,
-				'dismissal_key' => $notification_id,
-			];
-			$notification = new Notification( '', $options );
-		}
-
-		if ( self::maybe_dismiss_notification( $notification ) ) {
-			die( '1' );
-		}
-
-		die( '-1' );
 	}
 
 	/**
@@ -703,19 +674,6 @@ class Notifications {
 	 */
 	public function get_new_notifications() {
 		return array_map( [ $this, 'get_notification_by_id' ], $this->new );
-	}
-
-	/**
-	 * AJAX display notifications.
-	 */
-	public function get_notifications_ajax() {
-		$echo = filter_input( INPUT_POST, 'version' ) === '2';
-
-		// Display the notices.
-		$this->display_notifications( $echo );
-
-		// AJAX die.
-		exit;
 	}
 
 	/**

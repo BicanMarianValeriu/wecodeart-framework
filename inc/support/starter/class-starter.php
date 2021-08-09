@@ -77,7 +77,6 @@ class Starter implements Integration {
 			foreach( $content['posts'] as $key => $post ) {
 				if( $post['post_type'] !== 'page' ) continue; 
 				$content['posts'][$key]['meta_input'] = [
-					'_wca_builder_template' => true,
 					'_wca_title_hidden' 	=> true,
 				];
 			}
@@ -93,47 +92,11 @@ class Starter implements Integration {
 	 */
 	public function get() {
 		$content = [
-			'widgets'     => [
-				'primary' => [
-					'search',
-					'text_business_info',
-				],
-				'footer-1' => [
-					'text_about',
-				],
-				'footer-2' => [
-					'recent-posts',
-				],
-				'footer-3' => [
-					'recent-comments',
-				]
-			],
-			'nav_menus'   => [
-				'primary' => [
-					'items' => [
-						'home'       => [
-							'type'      => 'post_type',
-							'object'    => 'page',
-							'object_id' => '{{' . self::HOME_SLUG . '}}',
-						],
-						'page_about' => [
-							'type'      => 'post_type',
-							'object'    => 'page',
-							'object_id' => '{{' . self::ABOUT_SLUG . '}}',
-						],
-						'page_blog'  => [
-							'type'      => 'post_type',
-							'object'    => 'page',
-							'object_id' => '{{' . self::BLOG_SLUG . '}}',
-						],
-					],
-				],
-			],
 			'options'     => [
 				'page_on_front'  => '{{' . self::HOME_SLUG . '}}',
 				'page_for_posts' => '{{' . self::BLOG_SLUG . '}}',
 				'show_on_front'  => 'page',
-				'blogname'       => 'WeCodeArt',
+				'blogname'       => 'WeCodeArt Framework',
 			],
 			'theme_mods'  => wecodeart_config( 'customizer' ),
 			'posts'       => [

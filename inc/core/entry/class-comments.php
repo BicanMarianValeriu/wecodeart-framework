@@ -16,7 +16,6 @@ namespace WeCodeArt\Core\Entry;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Core\Pagination;
 use WeCodeArt\Singleton;
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
@@ -36,39 +35,10 @@ class Comments {
 	 */
 	public function init() {
 		// WP Core
-		add_filter( 'comment_form_fields',	[ $this, 'comment_form_fields' 		] );
-		add_filter( 'comment_form_defaults',[ $this, 'comment_form_defaults' 	] );
-		add_filter( 'comment_reply_link',	[ $this, 'replace_reply_link_class' ] );
-		add_action( 'pre_comment_on_post',  [ $this, 'validate_cookies'			] );
-
-		// WeCodeArt Core		
-		add_action( 'wecodeart/hook/entry/footer', [ $this, 'get_comments_template' ], 30 );
-	}
-	
-	/**
-	 * Get the comments template
-	 *
-	 * @since 	unknown
-	 * @version	5.0.0
-	 *
-	 * @return 	void 
-	 */
-	public function get_comments_template() {
-		// Only if CPT supports and singular entry
-		if ( ! post_type_supports( get_post_type(), 'comments' ) && ! is_singular() ) return;
-
-		if( post_password_required() ) {
-			add_action( 'wecodeart/entry/comments', [ $this, 'render_protected' ], 20 );
-		} else {
-			add_action( 'wecodeart/entry/comments', [ $this, 'render_meta'		], 10 );
-			add_action( 'wecodeart/entry/comments', [ Pagination::get_instance(), 'comments' ], 15 ); 
-			add_action( 'wecodeart/entry/comments', [ $this, 'render_comments'	], 20 );
-			add_action( 'wecodeart/entry/comments', [ $this, 'render_pings'		], 30 );
-			add_action( 'wecodeart/entry/comments', [ Pagination::get_instance(), 'comments' ], 35 ); 
-			add_action( 'wecodeart/entry/comments', [ $this, 'render_respond'	], 40 );
-		}
-
-		comments_template( null, true );
+		add_filter( 'comment_form_fields',		[ $this, 'comment_form_fields' 		], 90 );
+		add_filter( 'comment_form_defaults',	[ $this, 'comment_form_defaults' 	], 90 );
+		add_filter( 'comment_reply_link',		[ $this, 'replace_reply_link_class' ] );
+		add_action( 'pre_comment_on_post',  	[ $this, 'validate_cookies'			] );
 	}
 
 	/**
@@ -114,7 +84,7 @@ class Comments {
 		// Append `add comment` link
 		if( comments_open() ) {
 			$output .= sprintf(
-				'<a class="comments__add-new float-end" href="#respond" rel="nofollow">%s</a>',
+				'<a class="comments__add-new float-end has-small-font-size my-2" href="#respond" rel="nofollow">%s</a>',
 				(string) $args['add_one']
 			); 
 		}
@@ -188,6 +158,7 @@ class Comments {
 	 * Render Comments Info
 	 *
 	 * @since	3.7.0
+	 * @version	5.0.0
 	 *
 	 * @return	string	HTML
 	 */
@@ -196,10 +167,60 @@ class Comments {
 			'tag' 	=> 'h3',
 			'attrs' => [
 				'id' 	=> 'comments-title',
-				'class' => 'comments__headline'
+				'class' => 'comments__headline mb-3'
 			]
 		] ], [ $this, 'get_comments_info' ] );
 	}
+
+	
+	/**
+	 * Render Coments Pagination
+	 *
+	 * @since 	5.0.0
+	 * @version 5.0.0
+	 *
+	 * @return 	string|null
+	 */
+	public function render_pagination() {
+		/**
+		 * Early Break
+		 */
+		if( empty( get_previous_comments_link() || get_next_comments_link() ) ) return;
+
+		Markup::wrap( 'comments-nav', [
+			[
+                'tag'   => 'nav',
+                'attrs' => [
+                    'class'         => 'comments__nav',
+					'aria-label'    => esc_html__( 'Comments Navigation', 'wecodeart' ),
+                ]
+            ],
+			[
+                'tag'   => 'div',
+                'attrs' => [
+                    'class' => 'row pb-3'
+                ]
+            ]
+		], function() {
+			?>
+            <h3 class="screen-reader-text"><?php esc_html_e( 'Comments Navigation', 'wecodeart' ); ?></h3>
+			<?php
+
+			Markup::wrap( 'comments-prev-link', [ [
+				'tag' 	=> 'div',
+				'attrs' => [ 
+					'class' => 'col-sm-12 col-md'
+				] 
+			] ], 'previous_comments_link' );
+	
+			Markup::wrap( 'comments-next-link', [ [
+				'tag' 	=> 'div',
+				'attrs' => [
+					'class' => 'col-sm-12 col-md text-md-end'
+				] 
+			] ], 'next_comments_link' );
+		} );  
+    }
 	
 	/**
 	 * Render Protected
@@ -218,27 +239,6 @@ class Comments {
 			esc_html__( 'This post is password protected. Enter the password to view comments or leave a comment.', 'wecodeart' )
 		] );
 	}
-
-	/**
-	 * Render Comment Form.
-	 *
-	 * @since	unknown
-	 * @version 5.0.0
-	 */
-	public function render_respond() {
-		// Bail if comments are closed for this post type.
-		if ( ( is_singular() && ! comments_open() ) ) return;
-
-		$args = apply_filters( 'wecodeart/filter/comments/respond/args', [
-			'format'			 	=> 'html5',
-			'title_reply_before' 	=> '<h3 id="reply-title" class="comments__respond-headline">',
-			'title_reply_after'  	=> '</h3>',
-			'class_container'		=> 'comments__respond mt-3 mb-5',
-			'class_form' 			=> 'comments__respond-form comment-form needs-validation',
-		] );
-
-		comment_form( $args );
-	} 
 
 	/**
 	 * Move Comment Field Bellow Name/Email/Website.
@@ -387,7 +387,15 @@ class Comments {
 		}
 
 		$args = [
-			'title_reply' 			=> SVG::compile( 'comment-dots', [ 'class' => 'me-2' ] ) . esc_html__( 'Speak Your Mind', 'wecodeart' ),
+			'format'			 	=> 'html5',
+			'class_container'		=> 'wp-block-post-comments-form__wrap mt-3 mb-5',
+			'class_form' 			=> 'wp-block-post-comments-form__form comment-form needs-validation',
+			'title_reply' 			=> SVG::compile( 'comment-dots', [ 'class' => 'fa-2x me-2' ] ) . esc_html__( 'Speak Your Mind', 'wecodeart' ),
+			'title_reply_before' 	=> '<h3 id="reply-title" class="wp-block-post-comments-form__headline mb-3">',
+			'title_reply_after'  	=> '</h3>',
+			'cancel_reply_before'  => '<span class="has-small-font-size my-2 float-end">',
+			'cancel_reply_after'   => '</span>',
+			'cancel_reply_link'    => __( 'Cancel reply' ),
 			'comment_field' 		=> $author_comment,
 			'comment_notes_before' 	=> Markup::wrap( 'comment-notes-before', [ [
 				'tag' 	=> 'div',
@@ -403,21 +411,10 @@ class Comments {
 				}
 				echo wp_kses_post( $string );
 			}, [], false ),
-			'comment_notes_after' 	=> Markup::wrap( 'comment-notes-after', [ [
-				'tag' 	=> 'div',
-				'attrs' => [
-					'class' => 'mb-3 comment-form-allowed-tags'
-				]
-			] ], function() {
-				printf( esc_html__( 'You may use these %s tags and attributes: %s.', 'wecodeart' ),
-					sprintf( '<abbr data-toggle="tooltip" title="%s">HTML</abbr>', esc_html__( 'HyperText Markup Language', 'wecodeart' ) ),
-					'<code>' . allowed_tags() . '</code>'
-				);
-			}, [], false ),
 			'submit_field'	=> '<div class="mb-3 comment-form-submit">%1$s %2$s</div>',
 			'submit_button'	=> '<button name="%1$s" type="submit" id="%2$s" class="%3$s">' . SVG::compile( 'comment-dots', [
 				'class' => 'me-1'
-			] ) . '%4$s</button>',
+			] ) . '<span>%4$s</span></button>',
 			'class_submit'	=> 'btn btn-outline-dark',
 			'fields' => [
 				'author' 	=> $author_name,
@@ -427,26 +424,23 @@ class Comments {
 			]
 		];
 
-		// Merge $args with $defaults
-		$args = wp_parse_args( $args, $defaults );
-
-		// Return filterable array of $args, along with other optional variables
-		return apply_filters( 'wecodeart/filter/comments/form/args', $args, $commenter, $req );
+		return wp_parse_args( $args, $defaults );
 	}
 
 	/**
 	 * Replace Comment Reply Button class.
 	 *
 	 * @since	unknown
-	 * @version 3.7.7
+	 * @version 5.0.0
 	 *
-	 * @param 	string $class
+	 * @param 	string $html
 	 *
 	 * @return 	string
 	 */
-	public function replace_reply_link_class( $class ) {
-		$class = str_replace( "class='comment-reply-link", "class='comment-reply-link btn btn-dark btn-sm", $class );
-		return $class;
+	public function replace_reply_link_class( $html ) {
+		$search 	= '/' . preg_quote( "class='comment-reply-link'", '/' ) . '/';
+		$replace 	= 'class="comment-reply-link btn btn-dark btn-sm"';
+		return preg_replace( $search, $replace, $html, 1 );
 	}
 
 	/**

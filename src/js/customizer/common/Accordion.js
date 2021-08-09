@@ -16,8 +16,8 @@ const Accordion = ({ children, label, initiallyExpanded = false }) => {
 
     return (
         <>
-            <button className={classnames(['wecodeart-accordion', { expanded }])} onClick={toggle}>
-                <h4 className="wecodeart-accordion__title">
+            <button className={classnames(['wca-accordion-component', { expanded }])} onClick={toggle}>
+                <h4 className="wca-accordion-component__title">
                     <span>{label}</span>
                     <Icon size={30} icon={expanded ? chevronUp : chevronDown} />
                 </h4>

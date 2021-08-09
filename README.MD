@@ -7,14 +7,6 @@ Version: 5.0+
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-## Widget Areas
-
-* Primary Sidebar - This is the primary sidebar that can be enabled, disabled and reordered.
-* Secondary Sidebar - Can be activated via filter
-* Shop Sidebar - Will show when WooCommerce is Installed and Active
-* Main Content - Website main content area that holds the post/page template.
-* Unlimited Footer Columns - Posibility to enable Footer Widgetized Columns/Sidebars. Disable them to not use WP Sidebars and use hooks instead.
-
 ## Support
 Please visit https://www.wecodeart.com/ for further theme support.
 

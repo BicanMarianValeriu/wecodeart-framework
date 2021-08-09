@@ -51,13 +51,13 @@ class Config implements ConfigInterface, ArrayAccess {
      * search the parent for the config file.
      *
      * @since   3.9.5
-     * @version 4.1.5
+     * @version 5.0.0
      *
-     * @param string $config The config file to look for (not including .php file extension).
-     * @return array The config data.
+     * @param   string  $config The config file to look for (not including .php file extension).
+     * @return  array   The config data.
      */
     public static function get_config( $config = 'app' ) {
-        $parent_file = sprintf( '%s/inc/config/%s.php', get_template_directory(), $config );
+        $parent_file = sprintf( '%s/inc/%s.php',    get_template_directory(),   $config );
         $child_file  = sprintf( '%s/config/%s.php', get_stylesheet_directory(), $config );
 
         $data = [];
