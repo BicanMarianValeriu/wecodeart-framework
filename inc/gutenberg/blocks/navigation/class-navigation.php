@@ -57,13 +57,13 @@ class Navigation extends Dynamic {
 	 * @param	array 	$data
 	 */
 	public function filter_render( $settings, $data ) {
-		if ( 'core/navigation' !== $data['name'] ) {
-			return $settings;
+		if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => [ $this, 'render' ]
+			], $settings );
 		}
-
-		return wp_parse_args( [
-			'render_callback' => [ $this, 'render' ]
-		], $settings );
+		
+		return $settings;
 	}
 
 	/**
@@ -76,8 +76,6 @@ class Navigation extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $attributes = [], $content = '', $block = null ) {
-		$this->enqueue_styles( $attributes );
-
 		if ( $color = get_prop( $attributes, 'rgbTextColor' ) ) {
 			$attributes['customTextColor'] = $color;
 		}
@@ -269,16 +267,21 @@ class Navigation extends Dynamic {
 		$blocks = [];
 
 		foreach ( $menu_items as $item ) {
-			$block = [
-				'blockName' => 'core/navigation-link',
-				'attrs'     => [
-					'label' 		=> $item->title,
-					'title' 		=> $item->attr_title,
-					'url'   		=> $item->url,
-					'opensInNewTab'	=> $item->target === '_blank' ? true : false,
-					'className' 	=> $item->classes
-				],
-			];
+			if( isset( $item->content ) ) {
+				$block = current( parse_blocks( $item->content ) );
+			} else {
+				$block = [
+					'blockName' => 'core/navigation-link',
+					'attrs'     => [
+						'label' 		=> $item->title,
+						'title' 		=> $item->attr_title,
+						'url'   		=> $item->url,
+						'opensInNewTab'	=> $item->target === '_blank' ? true : false,
+						'className' 	=> $item->classes
+					],
+					'innerBlocks' => []
+				];
+			}
 
 			$block['innerBlocks'] = $this->parse_menu( isset( $parent[ $item->ID ] ) ? $parent[ $item->ID ] : [], $parent );
 
@@ -370,7 +373,7 @@ class Navigation extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles( $attributes = [] ) {
+	public function styles() {
 		return '
 		.wp-block-navigation {
 			height: 100%;
@@ -418,7 +421,7 @@ class Navigation extends Dynamic {
 				transform: rotate(270deg);
 			}
 		}
-		@media (max-width: 992px) {
+		@media (max-width: 991px) {
 			.wp-block-navigation.navbar-dark .offcanvas {
 				background-color: var(--wca-dark);
 			}

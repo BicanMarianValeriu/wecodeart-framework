@@ -29,10 +29,24 @@ class Terms extends Dynamic {
 	use Singleton;
 
 	/**
+	 * Block namespace.
+	 *
+	 * @var string
+	 */
+	protected $namespace = 'core';
+
+	/**
+	 * Block name.
+	 *
+	 * @var string
+	 */
+	protected $block_name = 'post-terms';
+
+	/**
 	 * Shortcircuit Register
 	 */
 	public function register_block_type() {
-		add_filter( 'block_type_metadata_settings',	[ $this, 'filter_render' ], 10, 2 );
+		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -42,13 +56,13 @@ class Terms extends Dynamic {
 	 * @param	array 	$data
 	 */
 	public function filter_render( $settings, $data ) {
-		if ( 'core/post-terms' !== $data['name'] ) {
-			return $settings;
+		if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => [ $this, 'render' ]
+			], $settings );
 		}
-
-		return wp_parse_args( [
-			'render_callback' => [ $this, 'render' ]
-		], $settings );
+		
+		return $settings;
 	}
 
 	/**

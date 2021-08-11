@@ -36,7 +36,7 @@ class Group extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */
@@ -63,8 +63,6 @@ class Group extends Dynamic {
 		if ( 1 === preg_match( $container_regex, $content ) ) {
 			return $content;
 		}
-
-		$this->enqueue_styles();
 
 		$attributes = get_prop( $block, 'attrs', [] );
 
@@ -104,7 +102,7 @@ class Group extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles( $attributes = [] ) {
+	public function styles() {
 		return "
 		.wp-block-group.alignfull .container {
 			max-width: initial;

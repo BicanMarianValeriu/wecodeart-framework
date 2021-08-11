@@ -40,13 +40,6 @@ abstract class Dynamic {
 	 * @var string
 	 */
 	protected $block_name = '';
-	
-	/**
-	 * Block styles enqueued.
-	 *
-	 * @var string
-	 */
-	protected $enqueued_styles = false;
 
 	/**
 	 * Registers the block type with WordPress.
@@ -64,20 +57,16 @@ abstract class Dynamic {
 	/**
 	 * Include and render a dynamic block.
 	 *
-	 * @param 	array  $attributes Block attributes. 	Default empty array.
-	 * @param 	string $content    Block content. 		Default empty string.
-	 * @return 	string Rendered block type output.
+	 * @return	string Block Markup.
 	 */
-	abstract public function render( $attributes = [], $content = '', $block = null );
-	
+	public function render() {}
+
 	/**
 	 * Block styles.
 	 *
-	 * @param 	array  $attributes Block attributes. 	Default empty array.
-	 *
 	 * @return 	string Block CSS.
 	 */
-	protected function styles( $attributes = [] ) {
+	public function styles() {
 		return '';
 	}
 
@@ -102,42 +91,6 @@ abstract class Dynamic {
 	}
 
 	/**
-	 * Register/enqueue scripts used for this block on the frontend, during render.
-	 *
-	 * @param 	array  $attributes Block attributes. 	Default empty array.
-	 *
-	 * @return void
-	 */
-	public function enqueue_styles( $attributes = [] ) {
-		// If already enqueued or we are in the loop and we dont have the block, bail!
-		if ( $this->enqueued_styles || ( in_the_loop() && ! has_block( $this->get_block_type() ) ) ) {
-			return;
-		}
-		
-		add_action( 'wp_enqueue_scripts', function() use( $attributes ) {
-			wp_add_inline_style( 'wecodeart-blocks', $this->get_styles( $attributes ) );
-		} );
-		
-		$this->enqueued_styles = true;
-	}
-
-	/**
-	 * Get block styles
-	 *
-	 * @param 	array  $attributes Block attributes. 	Default empty array.
-	 * 
-	 * @return 	string.
-	 */
-	protected function get_styles( $attributes = [] ) {
-		if( wecodeart_if( 'with_blocks_styles' ) ) {
-			$processor 	= wecodeart( 'integrations' )->get( 'styles' );
-			return $processor::compress( $this->styles( $attributes ) );
-		}
-
-		return $this->styles( $attributes );
-	}
-
-	/**
 	 * Get the block type.
 	 *
 	 * @return string
@@ -152,7 +105,7 @@ abstract class Dynamic {
 	 * @return 	string.
 	 */
 	protected function get_render_callback() {
-		$this->render();
+		return [ $this, 'render' ];
 	}
 
 	/**
@@ -195,6 +148,7 @@ abstract class Dynamic {
 	 * Get the schema for a boolean value.
 	 *
 	 * @param  string	$default  The default value.
+	 *
 	 * @return array 	Property definition.
 	 */
 	protected function get_schema_boolean( $default = true ) {
@@ -208,6 +162,7 @@ abstract class Dynamic {
 	 * Get the schema for a numeric value.
 	 *
 	 * @param  string 	$default  The default value.
+	 *
 	 * @return array 	Property definition.
 	 */
 	protected function get_schema_number( $default ) {
@@ -221,6 +176,7 @@ abstract class Dynamic {
 	 * Get the schema for a string value.
 	 *
 	 * @param  string 	$default  The default value.
+	 *s
 	 * @return array 	Property definition.
 	 */
 	protected function get_schema_string( $default = '' ) {

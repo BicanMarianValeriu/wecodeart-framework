@@ -35,7 +35,7 @@ class Query extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */

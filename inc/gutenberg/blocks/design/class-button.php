@@ -37,7 +37,7 @@ class Button extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */
@@ -59,7 +59,6 @@ class Button extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
-		$this->enqueue_styles();
 		$doc = $this->load_html( $content );
 		$attributes = get_prop( $block, 'attrs', [] );
 		
@@ -100,7 +99,7 @@ class Button extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles( $attributes = [] ) {
+	public function styles() {
 		return "
 		.wp-block-button.has-custom-width {
 			max-width: none;

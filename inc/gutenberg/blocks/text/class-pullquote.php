@@ -36,7 +36,7 @@ class Pullquote extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */
@@ -45,30 +45,14 @@ class Pullquote extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register_block_type() {
-		add_filter( 'render_block_core/pullquote', [ $this, 'render' ], 10, 2 );
-	}
-
-	/**
-	 * Dynamically renders the `core/pullquote` block.
-	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		$this->enqueue_styles();
-
-		return $content;
-	}
+	public function register_block_type() {}
 
 	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles( $attributes = [] ) {
+	public function styles() {
 		return "
 		.wp-block-pullquote {
 			padding: 3rem 0;

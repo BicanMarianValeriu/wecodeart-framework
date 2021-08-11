@@ -37,7 +37,7 @@ class Search extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */
@@ -60,9 +60,7 @@ class Search extends Dynamic {
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
 		static $instance_id = 0;
-		
-		$this->enqueue_styles();
-		
+				
 		$attributes = get_prop( $block, 'attrs', [] );
 		$attributes = wp_parse_args( $attributes, [
 			'label'      => __( 'Search', 'wecodeart' ),
@@ -140,36 +138,6 @@ class Search extends Dynamic {
 	}
 
 	/**
-	 * Block styles
-	 *
-	 * @return 	string 	The block styles.
-	 */
-	public function styles( $attributes = [] ) {
-		return "
-		.wp-block-search {
-			margin-bottom: 1rem;
-		}
-		.navbar-dark .wp-block-search__input {
-			background-color: rgba( #FFF, .15 );
-			border-color: rgba( #FFF, .15 );
-			color: white;
-		}
-		.navbar-dark .wp-block-search__input::placeholder {
-			color: rgba( #FFF, .75 );
-		}
-		.navbar-dark .wp-block-search__button {
-			color: rgba( #FFF, .35 );
-			border-color: currentColor;
-		}
-		@media (min-width: 992px) {
-			.navbar .wp-block-search:not(:last-child) {
-				margin-right: 10px;
-			}
-		}
-		";
-	}
-
-	/**
 	 * Builds the correct top level classnames for the 'core/search' block.
 	 *
 	 * @param 	array 	$attributes The block attributes.
@@ -218,5 +186,31 @@ class Search extends Dynamic {
 		}
 
 		return implode( ' ', $classnames );
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.wp-block-search {
+			margin-bottom: 1rem;
+		}
+		.navbar .wp-block-search {
+			margin-top: 10px;
+			margin-bottom: 0;
+		}
+		@media (min-width: 992px) {
+			.navbar .wp-block-search {
+				margin-top: 0;
+				margin-left: 10px;
+			}
+			.navbar .wp-block-search:not(:last-child) {
+				margin-right: 10px;
+			}
+		}
+		";
 	}
 }

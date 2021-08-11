@@ -36,7 +36,7 @@ class Table extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */
@@ -58,8 +58,6 @@ class Table extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
-		$this->enqueue_styles();
-
 		$attributes = get_prop( $block, 'attrs', [] );
 
 		$exclude = [
@@ -123,7 +121,7 @@ class Table extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles( $attributes = [] ) {
+	public function styles() {
 		return "
 		.wp-block-table.alignleft,
 		.wp-block-table.aligncenter,

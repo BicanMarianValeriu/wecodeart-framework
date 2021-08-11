@@ -37,7 +37,7 @@ class Buttons extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */
@@ -56,23 +56,7 @@ class Buttons extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register_block_type() {
-		add_filter( 'render_block_core/buttons', [ $this, 'render' ], 10, 2 );
-	}
-
-	/**
-	 * Dynamically renders the `core/button` block.
-	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		$this->enqueue_styles();
-		
-		return $content;
-	}
+	public function register_block_type() {}
 
 	/**
 	 * Block styles
@@ -150,7 +134,10 @@ class Buttons extends Dynamic {
 			padding: 0 var(--wca-button-gutter);
 			margin-bottom: 1rem;
 		}
-		.wp-block-buttons .wp-block-button:hover, .wp-block-buttons .wp-block-button__link:focus, .wp-block-buttons .wp-block-button__link:active, .wp-block-buttons .wp-block-button__link.active {
+		.wp-block-buttons .wp-block-button:hover,
+		.wp-block-buttons .wp-block-button__link:focus,
+		.wp-block-buttons .wp-block-button__link:active,
+		.wp-block-buttons .wp-block-button__link.active {
 			z-index: 1;
 		}
 		";

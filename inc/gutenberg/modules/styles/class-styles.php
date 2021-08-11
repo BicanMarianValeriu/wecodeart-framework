@@ -36,7 +36,7 @@ class Styles implements Integration {
 	 * @access 	public
 	 * @var 	null|object
 	 */
-	public $styles 			= null;
+	public $CSS		= null;
 
 	/**
 	 * The blocks styles
@@ -44,7 +44,7 @@ class Styles implements Integration {
 	 * @access 	public
 	 * @var 	string
 	 */
-	public $blocks_styles	= '';
+	public $styles		= '';
 
 	/**
 	 * The blocks duotone
@@ -52,7 +52,7 @@ class Styles implements Integration {
 	 * @access 	public
 	 * @var 	string
 	 */
-	public $blocks_duotone	= '';
+	public $filters		= [];
 
 	/**
 	 * Current processed blocks
@@ -60,7 +60,7 @@ class Styles implements Integration {
 	 * @access 	public
 	 * @var 	string
 	 */
-	public $processed		= [];
+	public static $processed = [];
 
 	/**
 	 * Get Conditionals
@@ -83,13 +83,12 @@ class Styles implements Integration {
 	 * @return 	void
 	 */
 	public function register_hooks() {
-		$this->styles = wecodeart( 'integrations' )->get( 'styles' );
+		$this->CSS = wecodeart( 'integrations' )->get( 'styles' );
 
 		// Hooks
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 10, 2 );
-		add_action( 'wp_enqueue_scripts',			[ $this, 'enqueue_styles'		], 10, 1 );
-		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 10, 1 );
+		add_action( 'wp_footer',					[ $this, 'output_styles'		], 10, 1 );
 
 		// Remove WP/GB plugins hooks
 		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
@@ -112,7 +111,7 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Filter Blocks markup to remove styles
+	 * Filter render_block
 	 *
 	 * @param	string 	$block_content
 	 * @param	array 	$block
@@ -122,7 +121,7 @@ class Styles implements Integration {
 	public function filter_render( $content, $block ) {
 		$block_id = get_prop( $block['attrs'], 'customCSSId', false );
 
-		if( in_array( $block_id, $this->processed ) || $block_id === false ) return $content;
+		if( in_array( $block_id, self::$processed ) || $block_id === false ) return $content;
 
 		// Remove styles, where needed
 		if ( in_array( $block['blockName'], (array) apply_filters( 'wecodeart/filter/gutenberg/styles/remove', [
@@ -144,40 +143,38 @@ class Styles implements Integration {
 		$cssid		= substr( $block_id, 0, 8 );
 		$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="css-' . $cssid . ' ', $content, 1 );
 
+		// Process a block
+		$processed 	= self::process_block( $block );
+		$styles 	= $processed->get_styles();
+		$filters	= $processed->get_duotone();
+
 		// Process CSS, add prefixes and convert to string!
-		$this->blocks_styles .= $this->styles::parse( $this->styles::add_prefixes( self::process_block( $block ) ) );
+		$this->styles .= $this->CSS::parse( $this->CSS::add_prefixes( $styles ) );
 
 		// Process Duotone SVG filters
-		$this->blocks_duotone .= $this->get_duotone( $block['attrs'], $block_id );
+		if( $filters ) {
+			$this->filters[$cssid] = $filters;
+		}
 
 		// This is processed so next time we skipp it (avoid issues like multiple calls of this filter, if any)
-		$this->processed[] = $block_id;
+		self::$processed[] = $block_id;
 
 		return $content;
 	}
 
 	/**
-	 * Output styles in header.
+	 * Output styles in footer.
 	 *
 	 * @return 	string
 	 */
-	public function enqueue_styles() {
-		if( empty( $this->blocks_styles ) ) return;
-		$style = $this->styles::compress( $this->blocks_styles );
-		
-		// Escaping is not really necessary since each property value is already escaped by the CSS processor.
-		wp_register_style( 'wecodeart-blocks-entry', false, [], true, true );
-		wp_add_inline_style( 'wecodeart-blocks-entry', $style );
-		wp_enqueue_style( 'wecodeart-blocks-entry' );
-	}
+	public function output_styles() {
+		if( ! empty( $this->styles ) ) {
+			$inline_css = $this->CSS::compress( $this->styles );
+			// Escaping is not really necessary since CSS processor does that already!
+			printf( '<style id="wecodeart-blocks-custom-css">%s</style>', wp_strip_all_tags( $inline_css ) );
+		}
 
-	/**
-	 * Output duotone in footer.
-	 *
-	 * @return 	string
-	 */
-	public function output_duotone() {
-		if( empty( $this->blocks_duotone ) ) return;
+		if( empty( $this->filters ) ) return;
 		?>
 		<svg
 			xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -186,60 +183,30 @@ class Styles implements Integration {
 			role="none"
 			style="visibility: hidden; position: absolute; left: -9999px; width: 0; height: 0; overflow: hidden;"
 		>
-			<defs><?php echo $this->blocks_duotone; ?></defs>
+			<defs><?php
+			
+			foreach( $this->filters as $block_id => $filter ) : ?>
+				<filter id="<?php echo esc_attr( $block_id ); ?>">
+					<feColorMatrix type="matrix" values=".299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 0 0 0 1 0" />
+					<feComponentTransfer color-interpolation-filters="sRGB">
+						<?php foreach( $filter as $value ) : ?>
+						<feFuncR type="table" tableValues="<?php echo esc_attr( implode( ' ', $value ) ); ?>" />
+						<?php endforeach; ?>
+					</feComponentTransfer>
+				</filter>
+			<?php endforeach;
+			
+			?></defs>
 		</svg>
 		<?php
 	}
 
 	/**
-	 * Output styles in footer.
+	 * Process a block.
 	 *
-	 * @return 	void
-	 */
-	public function get_duotone( $attrs, $block_id ) {
-		$duotone 		= '';
-		$duotone_colors = get_prop( $attrs, [ 'style', 'color', 'duotone' ], false );
-
-		if( $duotone_colors ) {
-			$duotone_values = [
-				'r' => array(),
-				'g' => array(),
-				'b' => array(),
-			];
-
-			foreach ( $duotone_colors as $color_str ) {
-				$color = gutenberg_tinycolor_string_to_rgb( $color_str );
-	
-				$duotone_values['r'][] = $color['r'] / 255;
-				$duotone_values['g'][] = $color['g'] / 255;
-				$duotone_values['b'][] = $color['b'] / 255;
-			}
-	
-			ob_start();
-
-			?>
-			<filter id="<?php echo esc_attr( substr( $block_id, 0, 8 ) ); ?>">
-				<feColorMatrix type="matrix" values=".299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 0 0 0 1 0" />
-				<feComponentTransfer color-interpolation-filters="sRGB" >
-					<feFuncR type="table" tableValues="<?php echo esc_attr( implode( ' ', $duotone_values['r'] ) ); ?>" />
-					<feFuncG type="table" tableValues="<?php echo esc_attr( implode( ' ', $duotone_values['g'] ) ); ?>" />
-					<feFuncB type="table" tableValues="<?php echo esc_attr( implode( ' ', $duotone_values['b'] ) ); ?>" />
-				</feComponentTransfer>
-			</filter>
-			<?php
-
-			$duotone = ob_get_clean();
-		}
-
-		return $duotone;
-	}
-
-	/**
-	 * Get the CSS for a block.
+	 * @param 	array 	$block 	The block data.
 	 *
-	 * @param 	array 	$args The block.
-	 *
-	 * @return 	array
+	 * @return 	object
 	 */
 	public static function process_block( $block = [] ) {
 		// Find the class that will handle the output for this block.
@@ -262,9 +229,7 @@ class Styles implements Integration {
 		}
 		
 		if( class_exists( $classname ) ) {
-			$obj = new $classname( $block );
-	
-			return $obj->get_styles();
+			return ( new $classname( $block ) );
 		};
 	}
 }

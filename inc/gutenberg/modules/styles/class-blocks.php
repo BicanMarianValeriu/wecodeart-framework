@@ -72,13 +72,13 @@ class Blocks extends Processor {
 	 *
 	 * @return 	mixed
 	 */
-	private function set_element() {
+	protected function set_element() {
 		$block_class 	= substr( get_prop( $this->attrs, 'customCSSId' ), 0, 8 );
 		$this->element = '.css-' . sanitize_html_class( $block_class );
 	}
 
 	/**
-	 * Parses an output and creates the styles array for it.
+	 * Parses attributes and creates the styles array for them.
 	 *
 	 * @return 	void
 	 */
@@ -284,16 +284,43 @@ class Blocks extends Processor {
 	}
 	
 	/**
-	 * Parses and attach Custom CSS
+	 * Parses custom CSS.
 	 *
 	 * @return 	void
 	 */
-	private function parse_custom() {
+	protected function parse_custom() {
 		if ( $css_custom = get_prop( $this->attrs, 'customCSS', false ) ) {
 			$custom_style 	= wp_strip_all_tags( $css_custom );
 			$custom_style 	= str_replace( 'selector', $this->element, $custom_style );
 			$custom_style 	= wecodeart( 'integrations' )->get( 'styles' )::break_queries( $custom_style );
 			$this->styles 	= array_replace_recursive( $this->styles, $custom_style );
 		}
+	}
+
+	/**
+	 * Get duotone.
+	 *
+	 * @return 	void
+	 */
+	public function get_duotone() {
+		$return 	= false;
+		$duotone 	= get_prop( $this->attrs, [ 'style', 'color', 'duotone' ], false );
+
+		if( $duotone ) {
+			$return = [
+				'r' => [],
+				'g' => [],
+				'b' => [],
+			];
+
+			foreach ( $duotone as $color ) {
+				$color = gutenberg_tinycolor_string_to_rgb( $color );
+				$return['r'][] = $color['r'] / 255;
+				$return['g'][] = $color['g'] / 255;
+				$return['b'][] = $color['b'] / 255;
+			}
+		}
+
+		return $return;
 	}
 }

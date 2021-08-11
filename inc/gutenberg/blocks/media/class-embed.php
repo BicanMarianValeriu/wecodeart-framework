@@ -36,7 +36,7 @@ class Embed extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */
@@ -45,30 +45,14 @@ class Embed extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register_block_type() {
-		add_filter( 'render_block_core/embed', [ $this, 'render' ], 10, 2 );
-	}
-
-	/**
-	 * Dynamically renders the `core/embed` block.
-	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		$this->enqueue_styles();
-
-		return $content;
-	}
+	public function register_block_type() {}
 
 	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles( $attributes = [] ) {
+	public function styles() {
 		return '
 		.wp-block-embed {
 			margin-bottom: 1rem;

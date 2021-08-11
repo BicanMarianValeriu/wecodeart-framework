@@ -86,7 +86,7 @@ class Pattern {
 		
         register_block_pattern( self::NAMESPACE . '/' . sanitize_text_field( $this->name ), [
             'title'       => sanitize_text_field( $this->title ),
-            'content'     => wp_kses_post( $this->content ),
+            'content'     => serialize_blocks( parse_blocks( $this->content ) ),
             'categories'  => ! empty( $this->categories ) ? array_map( 'sanitize_title', $this->categories ) : [ $this->theme ],
             'description' => sanitize_text_field( $this->description ),
         ] );

@@ -61,8 +61,6 @@ class Cover extends Dynamic {
 		
 		$attributes = get_prop( $block, 'attrs', [] );
 
-		$this->enqueue_styles( $attributes );
-
 		$container = [ 'wp-block-cover__inner-container' ];
 		if( get_prop( $attributes, 'align', false ) === 'full' ) {
 			$container[] = 'container-fluid';
@@ -82,7 +80,7 @@ class Cover extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles( $attributes = [] ) {
+	public function styles() {
 		return '
 		.wp-block-cover {
 			position: relative;

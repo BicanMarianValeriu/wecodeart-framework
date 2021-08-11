@@ -33,6 +33,16 @@ class Blocks implements \ArrayAccess {
 	 */
 	protected $items = [];
 
+    /**
+	 * An array of blocks used in this page.
+	 *
+	 * @static
+	 * @access private
+	 * @since 1.0.2
+	 * @var array
+	 */
+	private static $blocks = [];
+
 	/**
 	 * Send to Constructor
 	 */
@@ -54,6 +64,7 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/group',	    Blocks\Design\Group::class );
 		$this->register( 'core/buttons',    Blocks\Design\Buttons::class );
 		$this->register( 'core/button',     Blocks\Design\Button::class );
+		$this->register( 'core/spacer',     Blocks\Design\Spacer::class );
 		$this->register( 'core/separator',  Blocks\Design\Separator::class );
         // Widget Blocks
 		$this->register( 'core/search',	            Blocks\Widgets\Search::class );
@@ -79,18 +90,51 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/template-part',              Blocks\Query\Template::class );
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         
-        add_action( 'init',                 [ $this, 'load' ] );
-        add_action( 'wp_enqueue_scripts',   [ $this, 'enqueue_styles' ] );
+        // Hooks
+        add_action( 'init',         [ $this, 'load' ] );
+        add_filter( 'render_block', [ $this, 'collect_blocks' ], 10, 2 );
+        add_action( 'wp_footer',    [ $this, 'output_styles' ] );
 	}
 
     /**
-	 * Register/enqueue scripts used for this block on the frontend, during render.
+	 * Filters the content of a single block.
+     *
+	 * @param   string  $block_content The block content about to be appended.
+	 * @param   array   $block         The full block, including name and attributes.
+     *
+	 * @return  string
+	 */
+	public function collect_blocks( $block_content, $block ) {
+		if ( $name = get_prop( $block, 'blockName' ) ) {
+			self::$blocks[] = $name;
+		}
+
+		return $block_content;
+	}
+
+    /**
+	 * Output styles on the frontend, during render.
 	 *
 	 * @return void
 	 */
-	public function enqueue_styles() {
-		wp_register_style( 'wecodeart-blocks', false, [], true, true );
-        wp_enqueue_style( 'wecodeart-blocks' );
+	public function output_styles() {
+        if( empty( self::$blocks ) ) return;
+
+        $inline_css = '';
+
+        foreach( array_unique( self::$blocks ) as $block ) {
+            if( ! $this->has( $block ) ) continue;
+            $inline_css .= $this->get( $block )::get_instance()->styles();
+        }
+
+        if( wecodeart_if( 'with_styles' ) ) {
+            $inline_css = wecodeart( 'integrations' )->get( 'styles' )::compress( $inline_css );
+        }
+        
+        if( empty( $inline_css ) ) return;
+
+        // Escaping is not really necessary since CSS processor does that already!
+        printf( '<style id="wecodeart-blocks-inline-css">%s</style>', wp_strip_all_tags( $inline_css ) );
 	}
 
 	/**
@@ -99,7 +143,9 @@ class Blocks implements \ArrayAccess {
 	 * @return void
 	 */
 	public function load() {
-		foreach( $this->items as $class ) $class::get_instance()->register_block_type();
+		foreach( $this->items as $class ) {
+            $class::get_instance()->register_block_type();
+        }
 	}
 
 	/**

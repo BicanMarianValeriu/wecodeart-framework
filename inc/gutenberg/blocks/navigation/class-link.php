@@ -30,6 +30,20 @@ class Link extends Dynamic {
 	use Singleton;
 
 	/**
+	 * Block namespace.
+	 *
+	 * @var string
+	 */
+	protected $namespace = 'core';
+
+	/**
+	 * Block name.
+	 *
+	 * @var string
+	 */
+	protected $block_name = 'navigation-link';
+
+	/**
 	 * Shortcircuit Register
 	 */
 	public function register_block_type() {
@@ -43,13 +57,13 @@ class Link extends Dynamic {
 	 * @param	array 	$data
 	 */
 	public function filter_render( $settings, $data ) {
-		if ( 'core/navigation-link' !== $data['name'] ) {
-			return $settings;
+		if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => [ $this, 'render' ]
+			], $settings );
 		}
-
-		return wp_parse_args( [
-			'render_callback' => [ $this, 'render' ]
-		], $settings );
+		
+		return $settings;
 	}
 
 	/**

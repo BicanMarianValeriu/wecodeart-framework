@@ -36,14 +36,14 @@ class Core {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_filter( 'body_class',		[ $this, 'body_classes' ] );
-		add_filter( 'get_custom_logo',	[ $this, 'custom_logo'	] );
-		add_filter( 'get_search_form',	[ $this, 'search_form' 	] );
-		add_filter( 'wp_nav_menu_args', [ $this, 'menu_args' 	] );
+		add_filter( 'wp_nav_menu_args',	 		[ $this, 'menu_args' 		] );
+		add_filter( 'body_class',				[ $this, 'body_classes' 	] );
+		add_filter( 'get_custom_logo',			[ $this, 'custom_logo'		] );
+		add_filter( 'get_search_form',			[ $this, 'search_form' 		] );
+		add_filter( 'get_the_archive_title',	[ $this, 'archive_title' 	] );
 
 		Core\Scripts	::get_instance();
 		Core\Header		::get_instance();
-		Core\Archive	::get_instance();
 		Core\Content	::get_instance();
 		Core\Entry		::get_instance();
 		Core\Footer		::get_instance();
@@ -77,12 +77,30 @@ class Core {
 	}
 	
 	/**
+	 * Adds Walker to WP Menus by default.
+	 *
+	 * @since 	4.0.5
+	 * @version 5.0.0
+	 *
+	 * @param 	array 	$args.
+	 *
+	 * @return 	array
+	 */
+	public function menu_args( $args ) {
+		return wp_parse_args( [
+			'container' 	 => 'nav',
+			'walker' 		 => new Menu,
+			'fallback_cb'	 => 'WeCodeArt\Markup\Walkers\Menu::fallback'
+		], $args );
+	}
+	
+	/**
 	 * Filter Search form HTML Markup.
 	 * 
 	 * @since 	unknown
 	 * @version 3.9.5
 	 * 
-	 * @return 	string $form
+	 * @return 	string
 	 */
 	public function search_form() {
 		/**
@@ -113,33 +131,77 @@ class Core {
 	}
 
 	/**
-	 * Adds Walker to WP Menus by default.
-	 *
-	 * @since 	4.0.5
-	 * @version 5.0.0
-	 *
-	 * @param 	array 	$args.
-	 *
-	 * @return 	array
-	 */
-	public function menu_args( $args ) {
-		return wp_parse_args( [
-			'container' 	 => 'nav',
-			'walker' 		 => new Menu,
-			'fallback_cb'	 => 'WeCodeArt\Markup\Walkers\Menu::fallback'
-		], $args );
-	}
-
-	/**
 	 * Filter Custom Logo
 	 * 
 	 * @since  	5.0.0
 	 * 
-	 * @return 	string $html
+	 * @return 	string
 	 */
 	public function custom_logo( $html ) {
 		$search 	= '/' . preg_quote( 'class="custom-logo-link', '/' ) . '/';
 		$replace 	= 'class="navbar-brand d-block custom-logo-link';
 		return preg_replace( $search, $replace, $html, 1 );
 	}
+
+	/**
+	 * Archives Title
+	 *
+	 * @version	5.0.0
+	 *
+	 * @return 	string
+	 */
+	public function archive_title() {
+		$output = sprintf( '<span class="archive-intro__svg">%s</span>', SVG::compile( 'folder' , [
+			'class' => 'me-3'
+		] ) );
+
+		$title_template = '<span class="archive-intro__title">%s</span>';
+
+		if ( is_search() ) {
+			$output = sprintf( $title_template, sprintf( 
+				esc_html__( 'Search Results for "%s"', 'wecodeart' ),
+				'<span>' .  get_search_query() . '</span>' 
+			) );
+		} elseif ( is_category() ) {
+			$output .= sprintf( $title_template, sprintf(
+				esc_html__( 'Category Archives: %s', 'wecodeart' ),
+				single_cat_title( '', false ) 
+			) );
+		} elseif ( is_tag() ) {
+			$output .= sprintf( $title_template, sprintf(
+				esc_html__( 'Tag Archives: %s', 'wecodeart' ),
+				single_tag_title( '', false ) 
+			) );
+		} elseif( is_author() ) {
+			$output .= sprintf( $title_template, sprintf(
+				esc_html__( 'Author Archives: %s', 'wecodeart' ),
+				get_the_author_meta( 'display_name' )
+			) );
+		} elseif ( is_year() ) {
+			$output .= sprintf( $title_template, sprintf(
+				esc_html__( 'Yearly Archives: %s', 'wecodeart' ), 
+				get_the_date( _x( 'Y', 'yearly archives date format', 'wecodeart' ) ) 
+			) );
+		} elseif ( is_month() ) {
+			$output .= sprintf( $title_template, sprintf(
+				esc_html__( 'Monthly Archives: %s', 'wecodeart' ), 
+				get_the_date( _x( 'F Y', 'monthly archives date format', 'wecodeart' ) ) 
+			) );
+		} elseif ( is_day() ) {
+			$output .= sprintf( $title_template, sprintf(
+				esc_html__( 'Daily Archives: %s', 'wecodeart' ),
+				get_the_date()
+			) );
+		} elseif ( is_tax() ) {
+			$output .= sprintf( esc_html__( '%s Archives', 'wecodeart' ), single_term_title( '', false ) );
+		} elseif ( is_post_type_archive() ) {
+			$output .= sprintf( $title_template, sprintf(
+				esc_html__( 'Post Type Archives: %s', 'wecodeart' ), post_type_archive_title( '', false ) 
+			) );
+		} else {
+			$output .= esc_html__( 'Archives', 'wecodeart' );
+		} 
+
+		return trim( $output );
+	} 
 }

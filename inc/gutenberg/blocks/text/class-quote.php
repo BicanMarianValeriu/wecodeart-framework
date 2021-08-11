@@ -57,9 +57,7 @@ class Quote extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		$this->enqueue_styles();
-		
+	public function render( $content = '', $block = [], $data = null ) {		
 		$doc = $this->load_html( $content );
 		
 		// Quote Changes
@@ -89,7 +87,7 @@ class Quote extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles( $attributes = [] ) {
+	public function styles() {
 		return "
 		.wp-block-quote {
 			border-left: 4px solid var( --wp--preset--color--primary );

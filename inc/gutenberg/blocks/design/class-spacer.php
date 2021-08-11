@@ -12,7 +12,7 @@
  * @version		5.0.0
  */
 
-namespace WeCodeArt\Gutenberg\Blocks\Media;
+namespace WeCodeArt\Gutenberg\Blocks\Design;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -22,9 +22,9 @@ use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
 /**
- * Gutenberg Image block.
+ * Gutenberg Spacer block.
  */
-class Image extends Dynamic {
+class Spacer extends Dynamic {
 
 	use Singleton;
 
@@ -40,7 +40,7 @@ class Image extends Dynamic {
 	 *
 	 * @var string
 	 */
-	protected $block_name = 'image';
+	protected $block_name = 'spacer';
 
 	/**
 	 * Shortcircuit Register
@@ -54,18 +54,8 @@ class Image extends Dynamic {
 	 */
 	public function styles() {
 		return '
-		.wp-block-image.alignfull, .wp-block-image.alignfull img, .wp-block-image.alignwide img {
-			width: 100%;
-		}
-		.wp-block-image.alignfull, .wp-block-image.alignwide, .wp-block-image.is-resized, .wp-block-image figure {
-			display: table;
-		}
-		.wp-block-image.alignfull figcaption, .wp-block-image.alignwide figcaption, .wp-block-image.is-resized figcaption {
-			display: table-caption;
-			caption-side: bottom;
-		}
-		.wp-block-image.is-style-circle-mask, .wp-block-image.is-style-rounded img {
-			border-radius: 9999px;
+		.wp-block-spacer {
+			clear: both;
 		}
 		';
 	}

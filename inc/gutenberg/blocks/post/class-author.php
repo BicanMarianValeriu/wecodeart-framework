@@ -36,7 +36,7 @@ class Author extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */
@@ -56,13 +56,13 @@ class Author extends Dynamic {
 	 * @param	array 	$data
 	 */
 	public function filter_render( $settings, $data ) {
-		if ( 'core/post-author' !== $data['name'] ) {
-			return $settings;
+		if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => [ $this, 'render' ]
+			], $settings );
 		}
-
-		return wp_parse_args( [
-			'render_callback' => [ $this, 'render' ]
-		], $settings );
+		
+		return $settings;
 	}
 
 	/**
@@ -80,8 +80,6 @@ class Author extends Dynamic {
 		if ( empty( $author_id = get_post_field( 'post_author', $block->context['postId'] ) ) ) {
 			return '';
 		}
-
-		$this->enqueue_styles();
 
 		$template = 'entry/meta/author';
 
@@ -101,26 +99,5 @@ class Author extends Dynamic {
 		];
 
 		return wecodeart_template( $template, $args, false );
-	}
-
-	/**
-	 * Block styles
-	 *
-	 * @return 	string 	The block styles.
-	 */
-	public function styles( $attributes = [] ) {
-		return "
-		.wp-block-post-author__headline svg {
-			width: 20px;
-			height: 20px;
-			vertical-align: -8%;
-		}
-		@media and (min-width: 540px) {
-			.wp-block-post-author__headline svg {
-				width: 30px;
-				height: 30px;
-			}
-		}
-		";
 	}
 }
