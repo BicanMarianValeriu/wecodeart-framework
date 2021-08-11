@@ -76,6 +76,26 @@
 .wca-color-component .components-dropdown:first-of-type {
   margin-left: auto;
 }
+.wca-color-component .components-dropdown > .components-button {
+  position: relative;
+  padding: 0 !important;
+  min-width: 35px;
+}
+.wca-color-component .components-dropdown > .components-button .color,
+.wca-color-component .components-dropdown > .components-button .gradient {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.wca-color-component .components-dropdown > .components-button .color {
+  z-index: 1;
+}
+.wca-color-component .components-dropdown > .components-button .gradient {
+  background-image: linear-gradient(45deg, #fff 0%, #ccc 0%, #ccc 10%, #fff 10%, #fff 20%, #ccc 20%, #ccc 30%, #fff 30%, #fff 40%, #ccc 40%, #ccc 50%, #fff 50%, #fff 60%, #ccc 60%, #ccc 70%, #fff 70%, #fff 80%, #ccc 80%, #ccc 90%, #fff 90%, #fff 100%, #ccc 100%) !important;
+}
 .wca-color-component .components-circular-option-picker__option {
   border: 1px solid lightgray;
   outline: none;
@@ -111,26 +131,6 @@
 }
 .wca-color-component__label {
   text-transform: uppercase;
-}
-.wca-color-component__button {
-  position: relative;
-  padding: 0 !important;
-  min-width: 35px;
-}
-.wca-color-component__button .color,
-.wca-color-component__button .gradient {
-  position: absolute;
-  display: block;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-}
-.wca-color-component__button .color {
-  z-index: 1;
-}
-.wca-color-component__button .gradient {
-  background-image: linear-gradient(45deg, #fff 0%, #ccc 0%, #ccc 10%, #fff 10%, #fff 20%, #ccc 20%, #ccc 30%, #fff 30%, #fff 40%, #ccc 40%, #ccc 50%, #fff 50%, #fff 60%, #ccc 60%, #ccc 70%, #fff 70%, #fff 80%, #ccc 80%, #ccc 90%, #fff 90%, #fff 100%, #ccc 100%) !important;
 }
 
 .customize-control-wecodeart-divider__wrapper {

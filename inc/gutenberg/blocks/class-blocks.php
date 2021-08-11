@@ -99,10 +99,7 @@ class Blocks implements \ArrayAccess {
 	 * @return void
 	 */
 	public function load() {
-		foreach( $this->items as $class ) {
-            $class::get_instance()->register_block_type();
-            $class::get_instance()->enqueue_styles();
-        }
+		foreach( $this->items as $class ) $class::get_instance()->register_block_type();
 	}
 
 	/**

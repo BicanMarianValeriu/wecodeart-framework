@@ -150,7 +150,7 @@ class Gutenberg {
 	}
 
 	/**
-	 * Support custom theme support for editorskit-template-block-sizes
+	 * Support
 	 *
 	 * @access public
 	 */

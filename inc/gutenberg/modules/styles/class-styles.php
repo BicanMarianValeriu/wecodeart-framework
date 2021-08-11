@@ -150,7 +150,7 @@ class Styles implements Integration {
 		// Process Duotone SVG filters
 		$this->blocks_duotone .= $this->get_duotone( $block['attrs'], $block_id );
 
-		// This is processed so next time we skipp it (avoid issues like multiple calls of this filter: Yoast SEO)
+		// This is processed so next time we skipp it (avoid issues like multiple calls of this filter, if any)
 		$this->processed[] = $block_id;
 
 		return $content;

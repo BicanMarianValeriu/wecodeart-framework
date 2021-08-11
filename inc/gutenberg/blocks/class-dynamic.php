@@ -104,15 +104,18 @@ abstract class Dynamic {
 	/**
 	 * Register/enqueue scripts used for this block on the frontend, during render.
 	 *
+	 * @param 	array  $attributes Block attributes. 	Default empty array.
+	 *
 	 * @return void
 	 */
-	public function enqueue_styles() {
-		if ( $this->enqueued_styles || ! has_block( $this->get_block_type() ) ) {
+	public function enqueue_styles( $attributes = [] ) {
+		// If already enqueued or we are in the loop and we dont have the block, bail!
+		if ( $this->enqueued_styles || ( in_the_loop() && ! has_block( $this->get_block_type() ) ) ) {
 			return;
 		}
 		
-		add_action( 'wp_enqueue_scripts', function() {
-			wp_add_inline_style( 'wecodeart-blocks', $this->get_styles() );
+		add_action( 'wp_enqueue_scripts', function() use( $attributes ) {
+			wp_add_inline_style( 'wecodeart-blocks', $this->get_styles( $attributes ) );
 		} );
 		
 		$this->enqueued_styles = true;
@@ -120,16 +123,18 @@ abstract class Dynamic {
 
 	/**
 	 * Get block styles
+	 *
+	 * @param 	array  $attributes Block attributes. 	Default empty array.
 	 * 
 	 * @return 	string.
 	 */
-	protected function get_styles() {
+	protected function get_styles( $attributes = [] ) {
 		if( wecodeart_if( 'with_blocks_styles' ) ) {
 			$processor 	= wecodeart( 'integrations' )->get( 'styles' );
-			return $processor::compress( $this->styles() );
+			return $processor::compress( $this->styles( $attributes ) );
 		}
 
-		return $this->styles();
+		return $this->styles( $attributes );
 	}
 
 	/**
@@ -147,7 +152,6 @@ abstract class Dynamic {
 	 * @return 	string.
 	 */
 	protected function get_render_callback() {
-		$this->enqueue_styles();
 		$this->render();
 	}
 

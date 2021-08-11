@@ -26,12 +26,29 @@ html {
     margin: 0 $spacer $spacer 0;
 }
 
+p {
+    &.has-drop-cap:not(:focus)::after {
+        content: "";
+        display: table;
+        clear: both;
+        padding-top: 15px;
+    }
+
+    &.has-text-color a {
+        color: inherit;
+    }
+
+    &.has-background {
+        padding: .5rem .8rem;
+    }
+}
+
 svg,
 .svg-inline {
     display: inline-block;
-    vertical-align: middle;
-    width: 1rem;
-    height: 1rem;
+    vertical-align: -0.125em;
+    fill: currentColor;
+    height: 1em;
 
     .fa-secondary {
         opacity: .4;
@@ -67,7 +84,7 @@ figcaption,
     }
 }
 
-/* Default Widgets */
+/* 2.0 = Widgets */
 .widget_archive,
 .widget_meta,
 .widget_pages,
@@ -88,5 +105,65 @@ figcaption,
 .widget_calendar {
     table {
         width: 100%;
+    }
+}
+
+/* 3.0 = Blocks */
+.wp-block-featured-image {
+    .ls-blur-up-img,
+    .ratio > *,
+    &__src,
+    img {
+        display: block;
+        top: 50%!important;
+        left: 50%!important;
+        min-width: 100%;
+        min-height: 100%;
+        transform: translate3d(-50%,-50%,0);
+        /* only if you want to change the blur-up option from always to auto or want to use blur up effect without a lowsrc image. */
+        font-family: "blur-up: auto", "object-fit: cover";
+        max-width: none;
+        object-fit: cover;
+
+        &.match {
+            width: 100%; 
+            height: 100%;
+        }
+
+        &.taller {
+            width: 100%; 
+            height: auto;
+        }
+
+        &.wider {
+            width: auto;
+            height: 100%;
+        }
+
+        &.ls-blur-up-is-loading,
+        &.lazyload:not([src]) {
+            visibility: hidden;
+        }
+    }
+
+    .ls-blur-up-img {
+        filter: blur(10px);
+        opacity: 1;
+        transition: opacity 1000ms, filter 1500ms;
+    }
+
+    .ls-blur-up-img.ls-inview.ls-original-loaded {
+        opacity: 0;
+        filter: blur(5px);
+    }
+}
+
+div[class*="wp-block-post-comments"] {
+    textarea {
+        min-height: 150px;
+    }
+
+    .comment-reply {
+        margin-top: -1rem;
     }
 }

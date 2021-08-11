@@ -26,8 +26,8 @@ return [
 	<!-- /wp:cover -->
 	
 	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"36705f8d-d33b-4c1d-a857-2c54ef5ae3fd"} -->
-	<div class="wp-block-group my-5"><!-- wp:columns {"align":"full","style":{"color":{"text":"#000000","background":"#ffffff"}},"className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
-	<div class="wp-block-columns alignfull flex-column flex-md-row has-text-color has-background" style="background-color:#ffffff;color:#000000"><!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
+	<div class="wp-block-group my-5"><!-- wp:columns {"align":"full","className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
+	<div class="wp-block-columns alignfull flex-column flex-md-row"><!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
 	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"fe797173-3ba3-4f69-9313-77ef04bccf26"} -->
 	<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/calculator.svg" alt="" width="65" height="65"/></figure></div>
 	<!-- /wp:image -->

@@ -36,7 +36,7 @@ class Cover extends Dynamic {
 	protected $namespace = 'core';
 
 	/**
-	 * Block namespace.
+	 * Block name.
 	 *
 	 * @var string
 	 */
@@ -58,9 +58,10 @@ class Cover extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
-		$this->enqueue_styles();
-
+		
 		$attributes = get_prop( $block, 'attrs', [] );
+
+		$this->enqueue_styles( $attributes );
 
 		$container = [ 'wp-block-cover__inner-container' ];
 		if( get_prop( $attributes, 'align', false ) === 'full' ) {
@@ -81,7 +82,7 @@ class Cover extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public function styles( $attributes = [] ) {
 		return '
 		.wp-block-cover {
 			position: relative;

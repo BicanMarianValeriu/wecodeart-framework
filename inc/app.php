@@ -64,6 +64,7 @@ return [
     */
     'customizer' => [
         // General
+        'general-design-palette'        => 'base',
         'general-typography-primary'    => [
             'font-family'   => 'Abel',
             'font-weight'   => []
@@ -74,7 +75,7 @@ return [
         ],
         // Footer
         'footer-copyright-text'             => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
-        'footer-design-attribution_bg'      => '#fafafa',
+        'footer-design-attribution_bg'      => '',
         'footer-design-attribution_color'   => '',
         'footer-design-attribution_links'   => '',
     ],
@@ -90,6 +91,7 @@ return [
         'support'   => [
             'wp-block-styles'   => 'remove',
             'block-templates'   => true,
+            'block-nav-menus'   => true,
         ],
         'styles'    => true,
         'classes'   => true,

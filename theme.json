@@ -151,6 +151,11 @@
 					"name": "Normal"
 				},
 				{
+					"slug": "medium",
+					"size": "1.3rem",
+					"name": "Medium"
+				},
+				{
 					"slug": "large",
 					"size": "1.5rem",
 					"name": "Large"
@@ -245,7 +250,7 @@
 	},
 	"styles": {
 		"color": {
-			"background": "var(--wp--preset--color--white)",
+			"background": "var(--wp--preset--color--background)",
 			"text": "var(--wp--preset--color--foreground)"
 		},
 		"typography": {
@@ -257,14 +262,6 @@
 			"link": {
 				"color": {
 					"text": "var(--wp--preset--color--primary)"
-				}
-			},
-			"h1": {
-				"color": {
-					"text": "var(--wp--preset--color--foreground)"
-				},
-				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--headings)"
 				}
 			}
 		},

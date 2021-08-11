@@ -57,7 +57,7 @@ class Header {
 				'tag' 	=> $args['tagName'],
 				'attrs' => [
 					'id'	=> $args['slug'],
-					'class'	=> 'has-background has-white-background-color site-header wp-block-template-part sticky-top',
+					'class'	=> 'site-header sticky-top wp-block-template-part',
 				]
 			], 
 			[ 

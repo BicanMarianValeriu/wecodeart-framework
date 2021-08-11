@@ -45,7 +45,6 @@ class Design extends Config {
 					'allowAdd'		=> true,
 					'disableGlobal'	=> true,
 				],
-				'default' 		=> 'base',
 				'output'		=> [
 					[
 						'element'  	=> '::selection',

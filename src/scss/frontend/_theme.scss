@@ -1,26 +1,25 @@
 /* Global */
+.wp-site-blocks,
+.wp-site-credits,
+.site-header,
+.site-footer {
+    background-color: inherit;
+}
+
+.site-footer,
+.wp-site-credits {
+    border-top: 1px solid rgba( black, 0.05 );
+}
+
 .site-header {
     position: relative;
-    background-color: inherit;
-    border-bottom: 1px solid var(--wca-light);
+    border-bottom: 1px solid rgba( black, 0.05 );
     z-index: 15;
 
     .has-scrolled & {
-        box-shadow: 0 0 5px 3px var(--wca-gray-300);
+        border-bottom: 0;
+        box-shadow: 0 0 5px 3px rgba( black, 0.15 );
     }
-}
-
-.archive-intro {
-    &__svg {
-        svg {
-            width: 50px;
-            height: 50px;
-
-            .theme-is-dark & {
-                fill: white;
-            }
-        }
-    } 
 }
 
 :root {

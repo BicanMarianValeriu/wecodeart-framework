@@ -78,7 +78,7 @@ class Link extends Dynamic {
 		}
 
 		$has_submenu 	= count( $block->inner_blocks ) > 0;
-		$is_active   	= ! empty( $attributes['id'] ) && ( get_the_ID() === $attributes['id'] );
+		$is_active   	= ! empty( $attributes['id'] ) && ( (int) get_the_ID() === (int) $attributes['id'] );
 		
 		$classes		= [ 'wp-block-navigation-link', 'nav-item' ];
 		$class_name 	= ! empty( $attributes['className'] ) ? implode( ' ', (array) $attributes['className'] ) : false;
@@ -119,10 +119,10 @@ class Link extends Dynamic {
 			$linkmod_type 	= $this->get_linkmod_type( $link_classes );
 			$attrs 			= $this->update_attrs_for_linkmod_type( [
 				'class' 	=> join( ' ', $classes ),
-				'href'		=> isset( $attributes['url'] ) ? $attributes['url'] : null,
-				'target' 	=> isset( $attributes['opensInNewTab'] ) && true === $attributes['opensInNewTab'] ? '_blank' : null,
-				'rel'		=> isset( $attributes['rel'] ) ? $attributes['rel'] : isset( $attributes['nofollow'] ) && $attributes['nofollow'] ? 'nofollow' : null,
-				'title'		=> isset( $attributes['title'] ) ? $attributes['title'] : null,
+				'href'		=> get_prop( $attributes, 'url', null ),
+				'target' 	=> get_prop( $attributes, 'opensInNewTab' ) === true ? '_blank' : null,
+				'rel'		=> get_prop( $attributes, 'rel', get_prop( $attributes, 'nofollow', null ) === 'nofollow' ? 'nofollow' : null ),
+				'title'		=> get_prop( $attributes, 'title', null ),
 				'data-bs-toggle' 	=> $has_submenu ? 'dropdown' : null,
 				'data-bs-auto-close'=> $has_submenu ? 'outside' : null,
 				'aria-haspopup' 	=> $has_submenu ? 'true' : null,
@@ -182,12 +182,20 @@ class Link extends Dynamic {
 
 				// Background Lightness
 				$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
-				$background = get_prop( $block->context, [ 'style', 'color', 'background' ], false );
-				if( $background === false ) {
+				$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
+				$background = get_prop( $block->context, [ 'style', 'color', 'background' ] );
+
+				// If not custom, get named
+				if( $background === null ) {
 					$background = get_prop( $block->context, 'backgroundColor', $background );
 					$background	= get_prop( current( wp_list_filter( $palette, [
 						'slug' => $background,
 					] ) ), 'color', false );
+				}
+
+				// If not named, get body @todo
+				if( $background === false ) {
+					$background = '#363636';
 				}
 				
 				if( ( Styles::color_lightness( $background ?: '#ffffff' ) < 380 ) ) {
