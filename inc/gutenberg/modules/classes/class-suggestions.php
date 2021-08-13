@@ -39,6 +39,7 @@ class Suggestions {
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'grid_classes' 			] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'offset_order_classes' 	] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'position_classes' 		] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'color_classes' 			] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'extra_classes' 			] );
 	}
 
@@ -58,6 +59,16 @@ class Suggestions {
 			$args[] = 'fw-'. $weight;
 		}
 		
+		foreach( [ 'start', 'center', 'end', 'justify', 'truncate' ] as $type ) {
+			$args[] = 'text-' . $type;
+		}
+
+		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
+			foreach( [ 'start', 'center', 'end', 'justify' ] as $align ) {
+				$args[] = 'text-' . $break . '-' . $align;
+			}
+		}
+
 		foreach( [ 'lowercase', 'uppercase', 'capitalize', 'wrap', 'nowrap', 'reset', 'break' ] as $type ) {
 			$args[] = 'text-' . $type;
 		}
@@ -71,12 +82,6 @@ class Suggestions {
 			$args[] = 'link-' . $color;
 		}
 
-		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
-			foreach( [ 'start', 'end', 'center', 'justify' ] as $align ) {
-				$args[] = 'text-' . $break . '-' . $align;
-			}
-		}
-
 		foreach( range( 1, 5 ) as $nr ) {
 			$args[] = 'display-'. $nr;
 			$args[] = 'fs-'. $nr;
@@ -88,13 +93,10 @@ class Suggestions {
 
 		return wp_parse_args( [
 			'lead',
-			'text-left',
-			'text-center',
-			'text-right',
-			'text-justify',
-			'text-truncate',
 			'font-monospace',
 			'stretched-link',
+			'align-text-top',
+			'align-text-bottom',
 			'lh-1',
 			'lh-sm',
 			'lh-base',
@@ -136,12 +138,19 @@ class Suggestions {
 	 * @return 	array 	Returns updated editors settings.
 	 */
 	public function spacing_classes( $args ) {
+		// Type
 		foreach( [ 'm', 'p' ] as $space ) {
+			// Direction
 			foreach( [ 'x', 'y', 't', 'b', 'e', 's' ] as $dir ) {
+				// Sizes
 				foreach( [ '0', '1', '2', '3', '4', '5', 'auto' ] as $size ) {
+					if( $size !== 'auto' ) {
+						$args[] = implode( '-', [ $dir, $space ] );
+					}
 					if( in_array( $dir, [ 't', 'b', 'y' ] ) && $size === 'auto' ) continue;
 					$args[] = implode( '-', [ $space . $dir, $size ] );
 				}
+				// Sizes for Breakpoints
 				foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
 					foreach( [ '0', '1', '2', '3', '4', '5', 'auto' ] as $size ) {
 						if( in_array( $dir, [ 't', 'b', 'y' ] ) && $size === 'auto' ) continue;
@@ -166,14 +175,17 @@ class Suggestions {
 
 		foreach( range( 1, 12 ) as $number ) {
 			$args[] = 'col-' . $number;
+			$args[] = 'row-cols-' . $number;
 		}
 
 		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $breakpoint ) {
 			$args[] = 'col-' . $breakpoint;
 			$args[] = 'col-' . $breakpoint . '-auto';
+			$args[] = 'row-cols-' . $breakpoint . '-auto';
 
 			foreach( range( 1, 12 ) as $number ) {
 				$args[] = 'col-'. $breakpoint . '-' . $number;
+				$args[] = 'row-cols-'. $breakpoint . '-' . $number;
 			}
 		}
 
@@ -321,13 +333,26 @@ class Suggestions {
 	 *
 	 * @return 	array 	Returns updated editors settings.
 	 */
+	public function color_classes( $args ) {
+		foreach( [ 'primary', 'secondary', 'dark', 'light', 'warning', 'danger', 'success', 'info' ] as $color ) {
+			$args[] = 'bg-' . $color;
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
 	public function extra_classes( $args ) {
 		return wp_parse_args( [
 			'user-select-all',
 			'user-select-auto',
 			'user-select-none',
-			'pe-none',
-			'pe-auto',
 			'overflow-auto',
 			'overflow-hidden',
 			'overflow-visible',
@@ -336,10 +361,14 @@ class Suggestions {
 			'align-top',
 			'align-middle',
 			'align-bottom',
-			'align-text-top',
-			'align-text-bottom',
 			'visible',
 			'invisible',
+			'visually-hidden',
+			'pe-none',
+			'pe-auto',
+			'hstack',
+			'vstack',
+			'vr'
 		], $args );
 	}
 }

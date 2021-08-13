@@ -28,37 +28,35 @@ const {
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return ((props) => {
 		const {
-			name,
+			clientId,
 			isSelected,
 			setAttributes,
 		} = props;
 
-		const [customClassNames, setCustomClassNames] = useState([]);
+		if (isSelected) {
+			const [customClassNames, setCustomClassNames] = useState([]);
 
-		const { suggestions } = useSelect((select, block) => {
-			const selectedBlock = select(blockEditorStore).getSelectedBlock();
-			
-			const { wecodeart: { customClasses = [] } = {} } = select('core/editor').getEditorSettings();
-
-			let getClasses = get(selectedBlock, 'attributes.className');
-			if (getClasses) {
-				getClasses = replace(getClasses, ',', ' ');
-			}
-
-			if (selectedBlock && getClasses && join(customClassNames, ' ') !== getClasses) {
-				if (block.clientId === selectedBlock.clientId) {
-					setCustomClassNames(split(getClasses, ' '));
+			const { suggestions } = useSelect((select) => {
+				const selectedBlock = select(blockEditorStore).getSelectedBlock();
+	
+				const { wecodeart: { customClasses: suggestions = [] } = {} } = select('core/editor').getEditorSettings();
+	
+				let getClasses = get(selectedBlock, 'attributes.className');
+				if (getClasses) {
+					getClasses = replace(getClasses, ',', ' ');
 				}
-			}
-
-			return {
-				suggestions: customClasses,
-			};
-		});
-
-		const hasClassName = hasBlockSupport(name, 'className', true);
-
-		if (hasClassName && isSelected) {
+				
+				if (selectedBlock && getClasses && getClasses !== join(customClassNames, ' ')) {
+					if (clientId === selectedBlock.clientId) {
+						setCustomClassNames(split(getClasses, ' '));
+					}
+				}
+	
+				return {
+					suggestions,
+				};
+			});
+			
 			return (
 				<>
 					<BlockEdit {...props} />

@@ -152,39 +152,38 @@ const {
 const withInspectorControl = createHigherOrderComponent(BlockEdit => {
   return props => {
     const {
-      name,
+      clientId,
       isSelected,
       setAttributes
     } = props;
-    const [customClassNames, setCustomClassNames] = useState([]);
-    const {
-      suggestions
-    } = useSelect((select, block) => {
-      const selectedBlock = select(blockEditorStore).getSelectedBlock();
+
+    if (isSelected) {
+      const [customClassNames, setCustomClassNames] = useState([]);
       const {
-        wecodeart: {
-          customClasses = []
-        } = {}
-      } = select('core/editor').getEditorSettings();
-      let getClasses = get(selectedBlock, 'attributes.className');
+        suggestions
+      } = useSelect(select => {
+        const selectedBlock = select(blockEditorStore).getSelectedBlock();
+        const {
+          wecodeart: {
+            customClasses: suggestions = []
+          } = {}
+        } = select('core/editor').getEditorSettings();
+        let getClasses = get(selectedBlock, 'attributes.className');
 
-      if (getClasses) {
-        getClasses = replace(getClasses, ',', ' ');
-      }
-
-      if (selectedBlock && getClasses && join(customClassNames, ' ') !== getClasses) {
-        if (block.clientId === selectedBlock.clientId) {
-          setCustomClassNames(split(getClasses, ' '));
+        if (getClasses) {
+          getClasses = replace(getClasses, ',', ' ');
         }
-      }
 
-      return {
-        suggestions: customClasses
-      };
-    });
-    const hasClassName = hasBlockSupport(name, 'className', true);
+        if (selectedBlock && getClasses && getClasses !== join(customClassNames, ' ')) {
+          if (clientId === selectedBlock.clientId) {
+            setCustomClassNames(split(getClasses, ' '));
+          }
+        }
 
-    if (hasClassName && isSelected) {
+        return {
+          suggestions
+        };
+      });
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(FormTokenField, {
         label: __('Additional CSS Class(es)', 'wecodeart'),
         value: customClassNames,

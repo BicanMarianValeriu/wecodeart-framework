@@ -71,8 +71,8 @@ return [
 	<!-- /wp:columns --></div>
 	<!-- /wp:group -->
 	
-	<!-- wp:group {"className":"bg-light","layout":{"inherit":true},"customCSSId":"c43b5384-22fe-47e5-afea-f0314a3020dc"} -->
-	<div class="wp-block-group bg-light"><!-- wp:media-text {"mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","customCSSId":"36630e35-f690-4e56-9888-ea818333e9bb"} -->
+	<!-- wp:group {"layout":{"inherit":true},"customCSSId":"c43b5384-22fe-47e5-afea-f0314a3020dc"} -->
+	<div class="wp-block-group"><!-- wp:media-text {"mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","customCSSId":"36630e35-f690-4e56-9888-ea818333e9bb"} -->
 	<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure><div class="wp-block-media-text__content"><!-- wp:heading -->
 	<h2>Web Design</h2>
 	<!-- /wp:heading -->

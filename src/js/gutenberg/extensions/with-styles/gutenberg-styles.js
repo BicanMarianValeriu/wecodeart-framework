@@ -4,7 +4,6 @@
 const { assign } = lodash;
 const {
 	hooks: { addFilter },
-	blocks: { hasBlockSupport },
 	compose: { createHigherOrderComponent },
 	blockEditor: { InspectorAdvancedControls },
 	element: { useEffect }
@@ -49,9 +48,8 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
 		const { name, clientId, setAttributes } = props;
 		const isRestrictedBlock = restrictedBlocks.includes(name);
-		const hasClassName = hasBlockSupport(name, 'className', true);
 
-		if (!isRestrictedBlock && hasClassName) {
+		if (!isRestrictedBlock) {
 
 			useEffect(() => setAttributes({ customCSSId: clientId }), []);
 

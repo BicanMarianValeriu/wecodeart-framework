@@ -93,6 +93,9 @@ class Cover extends Dynamic {
 			background-position: center center;
 			overflow: hidden;
 		}
+		.single-post .wp-block-cover {
+			margin-bottom: 1rem;
+		}
 		.wp-block-cover.alignleft, wp-block-cover.alignright {
 			margin-top: 0;
 			margin-left: 0;

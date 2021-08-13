@@ -55,6 +55,7 @@ class Blocks implements \ArrayAccess {
         $this->register( 'core/video',	    Blocks\Media\Video::class );
         $this->register( 'core/embed',	    Blocks\Media\Embed::class );
         $this->register( 'core/cover',	    Blocks\Media\Cover::class );
+        $this->register( 'core/gallery',    Blocks\Media\Gallery::class );
         // Text Blocks
         $this->register( 'core/code',	    Blocks\Text\Code::class );
         $this->register( 'core/table',	    Blocks\Text\Table::class );
@@ -72,6 +73,7 @@ class Blocks implements \ArrayAccess {
 	    $this->register( 'core/latest-posts',       Blocks\Widgets\Posts::class );
 	    $this->register( 'core/rss',                Blocks\Widgets\RSS::class );
 		$this->register( 'core/latest-comments',    Blocks\Widgets\Comments::class );
+		$this->register( 'core/social-links',       Blocks\Widgets\Social::class );
         // Navigation Blocks
 		$this->register( 'core/navigation',         Blocks\Navigation::class );
 		$this->register( 'core/navigation-link',    Blocks\Navigation\Link::class );

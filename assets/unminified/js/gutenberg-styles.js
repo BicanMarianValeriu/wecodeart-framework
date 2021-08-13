@@ -204,9 +204,6 @@ const {
   hooks: {
     addFilter
   },
-  blocks: {
-    hasBlockSupport
-  },
   compose: {
     createHigherOrderComponent
   },
@@ -266,9 +263,8 @@ const withInspectorControl = createHigherOrderComponent(BlockEdit => {
       setAttributes
     } = props;
     const isRestrictedBlock = restrictedBlocks.includes(name);
-    const hasClassName = hasBlockSupport(name, 'className', true);
 
-    if (!isRestrictedBlock && hasClassName) {
+    if (!isRestrictedBlock) {
       useEffect(() => setAttributes({
         customCSSId: clientId
       }), []);

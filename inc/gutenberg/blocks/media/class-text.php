@@ -53,11 +53,18 @@ class Text extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
+		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$tablet		= get_prop( $breaks, 'md', '768px' );
+		$desktop	= get_prop( $breaks, 'lg', '992px' );
 		return "
 		.wp-block-media-text {
 			display: flex;
 			flex-flow: column;
 			--wca-gutter-x: 40px;
+		}
+		.wp-block-media-text.has-background .wp-block-media-text__content {
+			padding-left: calc(var(--wca-gutter-x) / 2);
+			padding-right: calc(var(--wca-gutter-x) / 2);
 		}
 		.wp-block-media-text__content {
 			flex: 1 0 0%;
@@ -67,7 +74,8 @@ class Text extends Dynamic {
 			flex: 0 0 auto;
 			flex-basis: 50%;
 		}
-		.wp-block-media-text__media img, .wp-block-media-text__media video {
+		.wp-block-media-text__media img,
+		.wp-block-media-text__media video {
 			display: block;
 			width: 100%;
 			object-fit: cover;
@@ -88,7 +96,7 @@ class Text extends Dynamic {
 			clip: rect(0, 0, 0, 0);
 			border: 0;
 		}
-		@media (min-width: 768px) {
+		@media (min-width: $tablet) {
 			.wp-block-media-text {
 				flex-flow: row nowrap;
 			}
@@ -110,11 +118,17 @@ class Text extends Dynamic {
 			.wp-block-media-text.is-vertically-aligned-bottom .wp-block-media-text__content {
 				align-self: flex-end;
 			}
+			.wp-block-media-text.has-media-on-the-right.has-background .wp-block-media-text__content {
+				padding-left: calc(var(--wca-gutter-x) / 2);
+			}
+			.wp-block-media-text.has-background .wp-block-media-text__content {
+				padding-right: calc(var(--wca-gutter-x) / 2);
+			}
 			.wp-block-media-text__media {
 				margin-bottom: 0;
 			}
 		}
-		@media (min-width: 992px) {
+		@media (min-width: $desktop) {
 			.wp-block-media-text {
 				--wca-gutter-x: 60px;
 			}

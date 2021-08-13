@@ -89,6 +89,7 @@ return [
     */
     'gutenberg' => [
         'support'   => [
+            'align-wide'        => 'remove',
             'wp-block-styles'   => 'remove',
             'block-templates'   => true,
             'block-nav-menus'   => true,

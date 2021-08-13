@@ -41,6 +41,7 @@ class Core {
 		add_filter( 'get_custom_logo',			[ $this, 'custom_logo'		] );
 		add_filter( 'get_search_form',			[ $this, 'search_form' 		] );
 		add_filter( 'get_the_archive_title',	[ $this, 'archive_title' 	] );
+		add_filter( 'excerpt_length',			[ $this, 'excerpt_length' 	] );
 
 		Core\Scripts	::get_instance();
 		Core\Header		::get_instance();
@@ -49,6 +50,24 @@ class Core {
 		Core\Footer		::get_instance();
 	}
 	
+	/**
+	 * Filter the excerpt length.
+	 *
+	 * @since	5.0.0
+	 *
+	 * @param 	int 	$length
+	 *
+	 * @return 	string
+	 */
+	public function excerpt_length( $length ) {
+		$custom = 30;
+		if( $custom !== '' ) {
+			$length = intval( $custom );
+		}
+
+		return $length;
+	}
+
 	/**
 	 * Adds custom classes to the array of body classes.
 	 *
@@ -150,7 +169,7 @@ class Core {
 	 *
 	 * @return 	string
 	 */
-	public function archive_title() {
+	public function archive_title( $content ) {
 		$output = sprintf( '<span class="archive-intro__svg">%s</span>', SVG::compile( 'folder' , [
 			'class' => 'me-3'
 		] ) );

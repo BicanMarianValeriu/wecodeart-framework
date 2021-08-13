@@ -75,10 +75,13 @@ class Starter implements Integration {
 	public function add_postmeta( $content, $config ) { 
 		if ( isset( $content['posts'] ) ) {
 			foreach( $content['posts'] as $key => $post ) {
-				if( $post['post_type'] !== 'page' ) continue; 
-				$content['posts'][$key]['meta_input'] = [
-					'_wca_title_hidden' 	=> true,
-				];
+				if( $post['post_type'] !== 'page') continue;
+				if( $post['post_name'] === self::HOME_SLUG ) {
+					$content['posts'][$key]['meta_input'] = [
+						'_wca_title_hidden'	=> true,
+					];
+					break;
+				}
 			}
 		}
 

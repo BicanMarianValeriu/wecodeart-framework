@@ -114,7 +114,7 @@ class Navigation extends Dynamic {
 
 		// If not custom, get named
 		if( $background === null ) {
-			$background = get_prop( $attributes, 'backgroundColor', [] );
+			$background = get_prop( $attributes, 'backgroundColor' );
 			$background	= get_prop( current( wp_list_filter( $palette, [
 				'slug' => $background,
 			] ) ), 'color', false );
@@ -122,10 +122,19 @@ class Navigation extends Dynamic {
 		
 		// If not named, get body
 		if( $background === false ) {
-			$background = '#363636';
+			$styles 	= wecodeart_json( [ 'styles', 'color', 'background' ], false );
+			if( strpos( $styles, '#' ) === 0 ) {
+				$background = $styles;
+			} else {
+				$slug = explode( '--', $styles );
+				$slug = str_replace( ')', '', end( $slug ) );
+				$background	= get_prop( current( wp_list_filter( $palette, [
+					'slug' => $slug,
+				] ) ), 'color', '#ffffff' );
+			}
 		}
 		
-		$classes[] 	= ( Styles::color_lightness( $background ?: '#ffffff' ) > 380 ) ? 'navbar-light' : 'navbar-dark';
+		$classes[] 	= ( Styles::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
 
 		if( get_prop( $attributes, 'orientation', false ) === 'horizontal' ) {
 			$classes[] = 'navbar-expand';
@@ -169,7 +178,7 @@ class Navigation extends Dynamic {
 				$wrappers = [ [
 					'tag' 	=> 'div',
 					'attrs' => [
-						'class' => 'offcanvas offcanvas-start',
+						'class' => join( ' ', [ 'offcanvas', 'offcanvas-start' ] ),
 						'id'	=> 'navbar-' . $block_id,
 					]
 				] ];
@@ -273,6 +282,7 @@ class Navigation extends Dynamic {
 				$block = [
 					'blockName' => 'core/navigation-link',
 					'attrs'     => [
+						'id'			=> url_to_postid( $item->url ),
 						'label' 		=> $item->title,
 						'title' 		=> $item->attr_title,
 						'url'   		=> $item->url,
@@ -374,7 +384,10 @@ class Navigation extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return '
+		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$desktop	= get_prop( $breaks, 'lg', '992px' );
+
+		return "
 		.wp-block-navigation {
 			height: 100%;
 		}
@@ -385,7 +398,7 @@ class Navigation extends Dynamic {
 		.wp-block-navigation.hide-dropdown-icon .dropdown-toggle::after {
 			content: none;
 		}
-		.wp-block-navigation[class*="navbar-expand-"] .offcanvas {
+		.wp-block-navigation[class*='navbar-expand-'] .offcanvas {
 			width: initial;
 			min-width: 320px;
 		}
@@ -395,9 +408,9 @@ class Navigation extends Dynamic {
 		.wp-block-navigation .offcanvas-start .btn-close {
 			margin-left: auto;
 		}
-		.wp-block-navigation-link__content:not([data-bs-toggle="dropdown"]):hover ~ .dropdown-menu,
-		.wp-block-navigation-link__content:not([data-bs-toggle="dropdown"]):focus ~ .dropdown-menu,
-		.wp-block-navigation-link__content:not([data-bs-toggle="dropdown"]):focus-within ~ .dropdown-menu{
+		.wp-block-navigation-link__content:not([data-bs-toggle='dropdown']):hover ~ .dropdown-menu,
+		.wp-block-navigation-link__content:not([data-bs-toggle='dropdown']):focus ~ .dropdown-menu,
+		.wp-block-navigation-link__content:not([data-bs-toggle='dropdown']):focus-within ~ .dropdown-menu {
 			display: block;
 			visibility: visible;
 			opacity: 1;
@@ -416,8 +429,8 @@ class Navigation extends Dynamic {
 			top: 0;
 			left: 100%;
 		}
-		@media (min-width: 992px) {
-			.wp-block-navigation .dropdown-toggle .dropdown-toggle::after {
+		@media (min-width: $desktop) {
+			.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
 				transform: rotate(270deg);
 			}
 		}
@@ -426,6 +439,6 @@ class Navigation extends Dynamic {
 				background-color: var(--wca-dark);
 			}
 		}
-		';
+		";
 	}
 }

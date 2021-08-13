@@ -90,7 +90,7 @@ class Styles implements Integration {
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 10, 2 );
 		add_action( 'wp_footer',					[ $this, 'output_styles'		], 10, 1 );
 
-		// Remove WP/GB plugins hooks
+		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
 		remove_filter( 'render_block', 'wp_render_elements_support', 	10, 2 );
 		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
@@ -135,6 +135,7 @@ class Styles implements Integration {
 			'core/image',
 			'core/pullquote',
 			'core/media-text',
+			'core/social-link',
 		], true ) ) ) {
 			$content 	= preg_replace( '/(<[^>]+) style=".*?"/i', '$1', $content, 1 );
 		}
@@ -176,13 +177,7 @@ class Styles implements Integration {
 
 		if( empty( $this->filters ) ) return;
 		?>
-		<svg
-			xmlns:xlink="http://www.w3.org/1999/xlink"
-			viewBox="0 0 0 0"
-			focusable="false"
-			role="none"
-			style="visibility: hidden; position: absolute; left: -9999px; width: 0; height: 0; overflow: hidden;"
-		>
+		<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 0 0" focusable="false" role="none" class="visually-hidden">
 			<defs><?php
 			
 			foreach( $this->filters as $block_id => $filter ) : ?>

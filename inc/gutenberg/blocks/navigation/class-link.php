@@ -74,6 +74,8 @@ class Link extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $attributes = [], $content = '', $block = null ) {
+		global $wp;
+
 		$link_has_id 	= isset( $attributes['id'] ) && is_numeric( $attributes['id'] );
 		$is_post_type	= isset( $attributes['kind'] ) && 'post-type' === $attributes['kind'];
 		$is_post_type	= $is_post_type || isset( $attributes['type'] ) && ( 'post' === $attributes['type'] || 'page' === $attributes['type'] );
@@ -92,7 +94,7 @@ class Link extends Dynamic {
 		}
 
 		$has_submenu 	= count( $block->inner_blocks ) > 0;
-		$is_active   	= ! empty( $attributes['id'] ) && ( (int) get_the_ID() === (int) $attributes['id'] );
+		$is_active   	= trailingslashit( home_url( $wp->request ) ) === trailingslashit( $attributes['url'] );
 		
 		$classes		= [ 'wp-block-navigation-link', 'nav-item' ];
 		$class_name 	= ! empty( $attributes['className'] ) ? implode( ' ', (array) $attributes['className'] ) : false;
@@ -133,7 +135,7 @@ class Link extends Dynamic {
 			$linkmod_type 	= $this->get_linkmod_type( $link_classes );
 			$attrs 			= $this->update_attrs_for_linkmod_type( [
 				'class' 	=> join( ' ', $classes ),
-				'href'		=> get_prop( $attributes, 'url', null ),
+				'href'		=> $has_submenu ? '#' : get_prop( $attributes, 'url', '#' ),
 				'target' 	=> get_prop( $attributes, 'opensInNewTab' ) === true ? '_blank' : null,
 				'rel'		=> get_prop( $attributes, 'rel', get_prop( $attributes, 'nofollow', null ) === 'nofollow' ? 'nofollow' : null ),
 				'title'		=> get_prop( $attributes, 'title', null ),
@@ -207,12 +209,21 @@ class Link extends Dynamic {
 					] ) ), 'color', false );
 				}
 
-				// If not named, get body @todo
+				// If not named, get body
 				if( $background === false ) {
-					$background = '#363636';
+					$styles 	= wecodeart_json( [ 'styles', 'color', 'background' ], false );
+					if( strpos( $styles, '#' ) === 0 ) {
+						$background = $styles;
+					} else {
+						$slug = explode( '--', $styles );
+						$slug = str_replace( ')', '', end( $slug ) );
+						$background	= get_prop( current( wp_list_filter( $palette, [
+							'slug' => $slug,
+						] ) ), 'color', '#ffffff' );
+					}
 				}
 				
-				if( ( Styles::color_lightness( $background ?: '#ffffff' ) < 380 ) ) {
+				if( ( Styles::color_lightness( $background ) < 380 ) ) {
 					$classes[] = 'dropdown-menu-dark';
 				}
 
@@ -322,8 +333,9 @@ class Link extends Dynamic {
 				if ( ! empty( $link_class ) ) { 
 					if ( 'sr-only' !== $link_class ) $attrs['class'] .= ' ' . esc_attr( $link_class );  
 					if ( 'disabled' === $link_class ) { 
-						$attrs['aria-disabled'] = 'true';
 						$attrs['href'] = '#';
+						$attrs['tabindex'] = '-1';
+						$attrs['aria-disabled'] = 'true';
 						unset( $attrs['target'] ); 
 					} elseif ( in_array( $link_class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-item-text' ] ) ) {
 						unset( $attrs['href'] );

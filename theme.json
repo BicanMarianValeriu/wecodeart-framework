@@ -47,19 +47,44 @@
 					"name": "Secondary"
 				},
 				{
-					"slug": "background",
+					"slug": "success",
+					"color": "#7dc855",
+					"name": "Success"
+				},
+				{
+					"slug": "warning",
+					"color": "#ffc107",
+					"name": "Warning"
+				},
+				{
+					"slug": "danger",
+					"color": "#dc3545",
+					"name": "Danger"
+				},
+				{
+					"slug": "info",
+					"color": "#0dcaf0",
+					"name": "Info"
+				},
+				{
+					"slug": "white",
 					"color": "#ffffff",
-					"name": "Background"
+					"name": "White"
 				},
 				{
-					"slug": "foreground",
+					"slug": "light",
+					"color": "#f8f9fa",
+					"name": "Light"
+				},
+				{
+					"slug": "dark",
 					"color": "#343a40",
-					"name": "Foreground"
+					"name": "Dark"
 				},
 				{
-					"slug": "selection",
-					"color": "#ebe9eb",
-					"name": "Selection"
+					"slug": "black",
+					"color": "#000000",
+					"name": "Black"
 				}
 			],
 			"gradients": [],
@@ -83,9 +108,14 @@
 					"colors": {
 						"primary": "#2388ed",
 						"secondary": "#6c757d",
-						"background": "#ffffff",
-						"foreground": "#343a40",
-						"selection": "#ebe9eb"
+						"success": "#7dc855",
+						"warning": "#ffc107",
+						"danger": "#dc3545",
+						"info": "#0dcaf0",
+						"white": "#ffffff",
+						"light": "#f8f9fa",
+						"dark": "#343a40",
+						"black": "#000000"
 					}
 				},
 				{
@@ -94,10 +124,15 @@
 					"allowDeletion": false,
 					"colors": {
 						"primary": "#7dc855",
-						"secondary": "#2388ed",
-						"background": "#343a40",
-						"foreground": "#fafafa",
-						"selection": "#ebe9eb"
+						"secondary": "#6c757d",
+						"success": "#2388ed",
+						"warning": "#dc3545",
+						"danger": "#ffc107",
+						"info": "#0dcaf0",
+						"white": "#ffffff",
+						"light": "#f8f9fa",
+						"dark": "#343a40",
+						"black": "#000000"
 					}
 				}
 			],
@@ -250,8 +285,8 @@
 	},
 	"styles": {
 		"color": {
-			"background": "var(--wp--preset--color--background)",
-			"text": "var(--wp--preset--color--foreground)"
+			"background": "var(--wp--preset--color--white)",
+			"text": "var(--wp--preset--color--dark)"
 		},
 		"typography": {
 			"fontSize": "var(--wp--preset--font-size--normal)",

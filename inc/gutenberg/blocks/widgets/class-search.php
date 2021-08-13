@@ -194,6 +194,8 @@ class Search extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
+		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$desktop	= get_prop( $breaks, 'lg', '992px' );
 		return "
 		.wp-block-search {
 			margin-bottom: 1rem;
@@ -202,7 +204,7 @@ class Search extends Dynamic {
 			margin-top: 10px;
 			margin-bottom: 0;
 		}
-		@media (min-width: 992px) {
+		@media (min-width: $desktop) {
 			.navbar .wp-block-search {
 				margin-top: 0;
 				margin-left: 10px;

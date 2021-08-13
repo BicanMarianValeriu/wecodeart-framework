@@ -127,12 +127,16 @@ class FSE implements Integration {
 	public function remove_site_editor_admin_link() {
 		global $menu;
 		// Remove Site Editor.
-		foreach ( $menu as $index => $menu_item ) {
-			if ( ! empty( $menu_item[5] ) && false !== strpos( $menu_item[5], 'toplevel_page_gutenberg-edit-site' ) ) {
-				$site_editor_index = $index;
+		$site_editor_index = false;
+		if( ! empty( $menu ) ) {
+			foreach ( $menu as $index => $menu_item ) {
+				if ( ! empty( $menu_item[5] ) && false !== strpos( $menu_item[5], 'toplevel_page_gutenberg-edit-site' ) ) {
+					$site_editor_index = $index;
+				}
 			}
 		}
-	
-		unset( $menu[ $site_editor_index ] );
+		if( $site_editor_index ) {
+			unset( $menu[ $site_editor_index ] );
+		}
 	}
 }

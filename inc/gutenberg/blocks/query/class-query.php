@@ -56,7 +56,7 @@ class Query extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
+	public function render( $content = '', $block = [] ) {
 		$container_regex = '/(^\s*<.+?\b[^>]*wp-block-query(\s|")[^>]*>)(\s*<div\b[^>]*container(\s|")[^>]*>)((.|\S|\s)*)/';
 
 		if ( 1 === preg_match( $container_regex, $content ) ) {

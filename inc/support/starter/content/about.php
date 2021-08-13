@@ -5,13 +5,8 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'About', 'Theme starter content', 'wecodeart' ),
-	'post_content' => '<!-- wp:group {"backgroundColor":"light","className":"pt-5","layout":{"inherit":true},"customCSSId":"b6119cf6-3f2d-46e3-801d-bd6b2e9ed30c"} -->
-	<div class="wp-block-group pt-5 has-light-background-color has-background"><!-- wp:heading {"level":1,"customCSSId":"6f65fdc6-6ddd-498d-80e2-86d21c0c7a03"} -->
-	<h1>About Us</h1>
-	<!-- /wp:heading --></div>
-	<!-- /wp:group -->
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"87bf1a83-fdb6-42fd-9a26-3752d8ddb580"} -->
-	<div class="wp-block-group my-5"><!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/237/500/500","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"e6e8d1f8-c885-4e8b-8e0f-4642cae91bd0"} -->
+	'post_content' => '<!-- wp:group {"className":"mb-5","layout":{"inherit":false},"customCSSId":"87bf1a83-fdb6-42fd-9a26-3752d8ddb580"} -->
+	<div class="wp-block-group mb-5"><!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/237/500/500","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"e6e8d1f8-c885-4e8b-8e0f-4642cae91bd0"} -->
 	<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:35% auto"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/237/500/500" alt=""/></figure><div class="wp-block-media-text__content"><!-- wp:heading {"customCSSId":"dad02bc8-1c7b-4022-bc26-2716ac345f62"} -->
 	<h2>Our Story</h2>
 	<!-- /wp:heading -->
@@ -23,7 +18,7 @@ return [
 	<!-- /wp:paragraph --></div></div>
 	<!-- /wp:media-text --></div>
 	<!-- /wp:group -->
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"52d87aca-e656-45b7-8fe7-86e7e16730e4"} -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"52d87aca-e656-45b7-8fe7-86e7e16730e4"} -->
 	<div class="wp-block-group my-5"><!-- wp:media-text {"align":"","mediaPosition":"right","mediaLink":"https://picsum.photos/id/180/500/500","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"f2e4a249-c2cf-460f-8117-41e8c96c8c8a"} -->
 	<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="grid-template-columns:auto 35%"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/180/500/500" alt=""/></figure><div class="wp-block-media-text__content"><!-- wp:heading {"customCSSId":"bab33db5-7863-4c4c-92b7-1d0c2f45112a"} -->
 	<h2>We are driven by values</h2>
@@ -38,8 +33,8 @@ return [
 	<!-- /wp:buttons --></div></div>
 	<!-- /wp:media-text --></div>
 	<!-- /wp:group -->
-	<!-- wp:group {"backgroundColor":"dark","className":"pt-5","layout":{"inherit":true},"customCSSId":"c4ffdb61-20e7-41ae-a4f4-759e5fa55e84"} -->
-	<div class="wp-block-group pt-5 has-dark-background-color has-background"><!-- wp:columns {"className":"flex-column flex-md-row","customCSSId":"d3555087-6def-44e0-9276-e90e777e2df9"} -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"c4ffdb61-20e7-41ae-a4f4-759e5fa55e84"} -->
+	<div class="wp-block-group my-5"><!-- wp:columns {"className":"flex-column flex-md-row","customCSSId":"d3555087-6def-44e0-9276-e90e777e2df9"} -->
 	<div class="wp-block-columns flex-column flex-md-row"><!-- wp:column {"className":"mb-4","customCSSId":"45343961-7014-40f0-877a-87a77317d581"} -->
 	<div class="wp-block-column mb-4"><!-- wp:heading {"level":3,"textColor":"white","customCSSId":"7c14b92a-ee0d-491a-a213-9fee57ca7525"} -->
 	<h3 class="has-white-color has-text-color">Super Efficient</h3>
@@ -66,9 +61,9 @@ return [
 	<!-- /wp:column --></div>
 	<!-- /wp:columns --></div>
 	<!-- /wp:group -->
-	<!-- wp:group {"layout":{"inherit":true},"customCSSId":"b61d3af6-a7d8-4b0c-b829-14ffd016b055"} -->
-	<div class="wp-block-group"><!-- wp:columns {"className":"pt-5 flex-column flex-sm-row","customCSSId":"f92b20e9-6d7b-41ed-bfc5-289a4763d69d"} -->
-	<div class="wp-block-columns pt-5 flex-column flex-sm-row"><!-- wp:column {"className":"mb-4 col-sm-6 col-lg-3","customCSSId":"4305cb9c-0b09-440d-be1f-1e915e5ad897"} -->
+	<!-- wp:group {"layout":{"inherit":false},"customCSSId":"b61d3af6-a7d8-4b0c-b829-14ffd016b055"} -->
+	<div class="wp-block-group"><!-- wp:columns {"className":"flex-column flex-sm-row","customCSSId":"f92b20e9-6d7b-41ed-bfc5-289a4763d69d"} -->
+	<div class="wp-block-columns flex-column flex-sm-row"><!-- wp:column {"className":"mb-4 col-sm-6 col-lg-3","customCSSId":"4305cb9c-0b09-440d-be1f-1e915e5ad897"} -->
 	<div class="wp-block-column mb-4 col-sm-6 col-lg-3"><!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3","customCSSId":"d5ef4181-8da7-4688-aedb-a5d7c9d9c3b6"} -->
 	<div class="wp-block-image is-style-default mb-3"><figure class="aligncenter size-thumbnail"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" /></figure></div>
 	<!-- /wp:image -->

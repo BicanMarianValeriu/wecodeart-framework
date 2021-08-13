@@ -63,7 +63,7 @@ class Buttons extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles( $attributes = [] ) {
+	public function styles() {
 		return "
 		.wp-block-buttons {
 			display: flex;
