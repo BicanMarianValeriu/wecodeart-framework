@@ -43,7 +43,7 @@ class Design extends Config {
 				'input_attrs'	=> [
 					'readOnly'		=> false,
 					'allowAdd'		=> true,
-					'disableGlobal'	=> true,
+					'allowGlobal'	=> true,
 				],
 				'output'		=> [
 					[

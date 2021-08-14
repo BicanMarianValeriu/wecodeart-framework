@@ -126,13 +126,19 @@ class Navigation extends Dynamic {
 			if( strpos( $styles, '#' ) === 0 ) {
 				$background = $styles;
 			} else {
-				$slug = explode( '--', $styles );
-				$slug = str_replace( ')', '', end( $slug ) );
+				if( mb_strpos( $styles, '|' ) !== false ) {
+					$slug = explode( '|', $styles );
+					$slug = end( $slug );
+				} elseif( mb_strpos( $styles, '--' ) !== false ) {
+					$slug = explode( '--', $styles );
+					$slug = str_replace( ')', '', end( $slug ) );
+				}
 				$background	= get_prop( current( wp_list_filter( $palette, [
 					'slug' => $slug,
 				] ) ), 'color', '#ffffff' );
 			}
 		}
+
 		
 		$classes[] 	= ( Styles::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
 

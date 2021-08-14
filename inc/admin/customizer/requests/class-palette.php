@@ -18,13 +18,14 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Request\Async;
+use WeCodeArt\Admin\Customizer\Requests;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\set_settings_array;
 
 /**
  * This class handles a post request being send to a given endpoint.
  */
-class Choices extends Async {
+class Palette extends Async {
 
     /**
      * Prefix
@@ -40,7 +41,7 @@ class Choices extends Async {
      * @var     string
      * @access  protected
      */
-    protected $action = 'update_choices';
+    protected $action = 'update_palette';
 
     /**
      * Handle
@@ -49,6 +50,7 @@ class Choices extends Async {
      */
     protected function handle() {
         $action     = filter_input( INPUT_POST, 'type', FILTER_SANITIZE_STRING );
+        $value      = filter_input( INPUT_POST, 'value', FILTER_SANITIZE_STRING );
         $palette    = filter_input( INPUT_POST, 'palette' );
         
 		if ( empty( $palette ) ) {
@@ -56,29 +58,31 @@ class Choices extends Async {
                 'message' => esc_html__( 'Missing palette.', 'wecodeart' )
             ] );
         }
-            
-        $user_custom_post_type_id     = \WP_Theme_JSON_Resolver_Gutenberg::get_user_custom_post_type_id();
-		$user_theme_json_post         = get_post( $user_custom_post_type_id );
-		$user_theme_json_post_content = json_decode( $user_theme_json_post->post_content );
 
-        $custom_palettes    = wecodeart_json( [ 'settings', 'custom', 'colorPalettes' ], [] );
-        if( $action === 'remove' ) {
-            $custom_palettes = wp_list_filter( $custom_palettes, [ 'slug' => $palette ], 'NOT' );
-        } else if( $action === 'add' ) {
-            $custom_palettes[]  = json_decode( $palette );
-        }
+        $_updated = wecodeart_json( [ 'settings', 'custom', 'colorPalettes' ], [] );
+        
+        switch( $action ) :
+            case 'update' : 
+            // All new palettes: array of objects
+                $_updated = json_decode( $palette, true );
+            break;
+            // Palette slug to remove: string
+            case 'remove' : 
+                $_updated = wp_list_filter( $_updated, [ 'slug' => $palette ], 'NOT' );
+            break; 
+            // Single new palette: object
+            case 'add' :
+                $_updated[] = json_decode( $palette, true );
+            break;
+        endswitch;
 
-		$user_theme_json_post_content = set_settings_array(
-			$user_theme_json_post_content,
-			[ 'settings', 'custom', 'colorPalettes' ],
-			$custom_palettes
-		);
-
-		// Update the theme.json with the new settings.
-		$user_theme_json_post->post_content = json_encode( $user_theme_json_post_content );
-        $updated = wp_update_post( $user_theme_json_post );
-
-		if( $updated ) wp_send_json_success();
-        wp_send_json_error();
+        // Update new palette
+        Requests::update_palette( null, $_updated, $value );
+        
+        return wp_send_json_success( [
+            'type'      => $action,
+            'value'     => $value,
+            'palette'   => $_updated
+        ] );
     }
 }

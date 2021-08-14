@@ -7,7 +7,7 @@ const {
     i18n: { __, sprintf }
 } = wp;
 
-const PaletteSelector = ({ value, choices, setChoices, save, palette, inputAttrs }) => {
+const PaletteSelector = ({ value, save, choices, setChoices, inputAttrs }) => {
     const { allowAdd } = inputAttrs;
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [willDelete, setWillDelete] = useState('');
@@ -23,8 +23,9 @@ const PaletteSelector = ({ value, choices, setChoices, save, palette, inputAttrs
         save(newValue);
         if (allowAdd) {
             const formData = new FormData();
-            formData.append('action', 'wca_update_choices');
+            formData.append('action', 'wca_update_palette');
             formData.append('type', 'remove');
+            formData.append('value', newValue);
             formData.append('palette', willDelete);
 
             return fetch(wp.ajax.settings.url, {
@@ -103,10 +104,10 @@ const PaletteSelector = ({ value, choices, setChoices, save, palette, inputAttrs
                             }}
                             key={slug}
                         >
-                            {palette.slice(0, 4).map(({ slug }) => {
+                            {Object.keys(colors).slice(0, 4).map((key) => {
                                 return (
-                                    <div className="wecodeart-palette-options__button-color" key={slug} style={{
-                                        backgroundColor: colors[slug],
+                                    <div className="wecodeart-palette-options__button-color" key={key} style={{
+                                        backgroundColor: colors[key],
                                     }} />
                                 );
                             })}

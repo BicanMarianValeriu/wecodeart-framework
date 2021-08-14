@@ -1,78 +1,55 @@
-import { rotateLeft, update } from '@wordpress/icons';
+import { update } from '@wordpress/icons';
 import AccordionControl from '../../common/Accordion';
 import ColorControl from '../../common/Color';
 
-const { debounce } = lodash;
+const { debounce, capitalize } = lodash;
 
 const {
 	element: { useState },
-	components: { Button, ButtonGroup },
+	components: { Button },
 	i18n: { __ },
 } = wp;
 
-const Colors = ({ value, choices, setChoices, save, palette, paletteTheme, inputAttrs }) => {
-	const { disableGlobal, readOnly } = inputAttrs;
-	const activePalette = choices.filter(({ slug }) => slug === value).pop();
-	const { colors } = activePalette;
+const Colors = ({ value, choices, setChoices, palette, inputAttrs }) => {
+	const { allowGlobal = false, readOnly } = inputAttrs;
+	const { colors = {} } = choices.find(({ slug }) => slug === value);
 	const [hasUpdates, setHasUpdates] = useState(false);
 
 	const updatePalette = () => {
-		let newColors = [];
-		for (let i in palette) {
-			let updated = palette[i];
-			updated.color = colors[palette[i].slug];
-			newColors[i] = updated;
-		}
-
 		const formData = new FormData();
-		formData.append('action', 'wca_update_colors');
-		formData.append('palette', value);
-		formData.append('colors', JSON.stringify(newColors));
+		formData.append('action', 'wca_update_palette');
+		formData.append('type', 'update');
+		formData.append('value', value);
+		formData.append('palette', JSON.stringify(choices));
 
 		return fetch(wp.ajax.settings.url, {
 			method: 'POST',
 			body: formData
 		}).then(() => {
-			save(value);
 			setHasUpdates(false);
 		}).catch((err) => console.log(JSON.stringify(err)));
 	};
 
-	const updateColor = (_slug, val) => {
-		let index = choices.findIndex(({ slug }) => slug === value);
-		choices[index].colors[_slug] = val;
+	const updateColor = (slug, val) => {
+		const index = [...choices].findIndex(({ slug }) => slug === value);
+		choices[index].colors[slug] = val;
 		setChoices([...choices]);
 		setHasUpdates(true);
-
-		save(value);
 	};
-
-	const resetChanges = () => {
-		const index = choices.findIndex(({ slug }) => slug === value);
-		let _colors = [];
-		for (let i in paletteTheme) _colors[paletteTheme[i].slug] = paletteTheme[i].color;
-		choices[index].colors = _colors;
-		setChoices([...choices]);
-		setHasUpdates(true);
-
-		save(value);
-	};
-
-	const hasDefaults = paletteTheme.filter(({ slug, color }) => color !== colors[slug]).length < 1;
 
 	return (
 		<AccordionControl label={__('Palette Colors', 'wecodeart')}>
 			<div className="wecodeart-palette-colors">
-				{palette.map(({ slug, name, color }) => {
+				{Object.keys(colors).map(key => {
 					return (
 						<ColorControl
-							key={slug}
-							label={name}
-							selectedColor={colors[slug]}
-							defaultValue={color}
-							onChange={debounce((value) => updateColor(slug, value), 100)}
+							key={key}
+							label={capitalize(key)}
+							selectedColor={colors[key]}
+							defaultValue={'#ffffff'}
+							onChange={debounce((value) => updateColor(key, value), 100)}
 							palette={palette}
-							disableGlobal={disableGlobal}
+							allowGlobal={allowGlobal}
 							readOnly={readOnly}
 						/>
 					);
@@ -80,14 +57,9 @@ const Colors = ({ value, choices, setChoices, save, palette, paletteTheme, input
 				{!readOnly && (
 					<>
 						<hr />
-						<ButtonGroup>
-							<Button className="wecodeart-palette-colors__reset" onClick={updatePalette} disabled={!hasUpdates} icon={update}>
-								{__('Update Palette', 'wecodeart')}
-							</Button>
-							<Button className="wecodeart-palette-colors__reset" onClick={resetChanges} disabled={hasDefaults} icon={rotateLeft}>
-								{__('Theme Default', 'wecodeart')}
-							</Button>
-						</ButtonGroup>
+						<Button className="wecodeart-palette-colors__reset" onClick={updatePalette} disabled={!hasUpdates} icon={update}>
+							{__('Update palette and save', 'wecodeart')}
+						</Button>
 					</>
 				)}
 			</div>

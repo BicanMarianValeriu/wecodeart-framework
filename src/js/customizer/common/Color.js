@@ -13,8 +13,8 @@ const ColorControl = ({
 	onChange,
 	defaultValue,
 	palette = [],
-	disableGlobal,
-	readOnly,
+	allowGlobal = true,
+	readOnly = false,
 }) => {
 	let toggle = null;
 
@@ -35,10 +35,10 @@ const ColorControl = ({
 	return (
 		<div className={classnames([
 			'wca-color-component',
-			{ 'wca-color-component--allows-global': !disableGlobal },
+			{ 'wca-color-component--allows-global': allowGlobal },
 		])}>
 			{label && (<span className="wca-color-component__label"><strong>{label}</strong></span>)}
-			{!disableGlobal && (<GlobalColorsPicker activeColor={selectedColor} onChange={onChange} palette={palette} />)}
+			{allowGlobal && (<GlobalColorsPicker activeColor={selectedColor} onChange={onChange} palette={palette} />)}
 			{readOnly ? (
 				<Button className="wca-color-component__button" isSecondary>
 					<span className="color" style={{ backgroundColor: selectedColor }} />
@@ -70,7 +70,7 @@ const ColorControl = ({
 };
 
 ColorControl.defaultProps = {
-	disableGlobal: false,
+	allowGlobal: true,
 	readOnly: false,
 };
 
@@ -79,7 +79,7 @@ ColorControl.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	selectedColor: PropTypes.string,
 	defaultValue: PropTypes.string,
-	disableGlobal: PropTypes.bool,
+	allowGlobal: PropTypes.bool,
 	readOnly: PropTypes.bool,
 };
 

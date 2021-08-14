@@ -1270,8 +1270,8 @@ const ColorControl = ({
   onChange,
   defaultValue,
   palette = [],
-  disableGlobal,
-  readOnly
+  allowGlobal = true,
+  readOnly = false
 }) => {
   let toggle = null;
 
@@ -1296,14 +1296,35 @@ const ColorControl = ({
     toggle();
   };
 
-  let dropdownProps = {
-    position: 'left',
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(['wca-color-component', {
+      'wca-color-component--allows-global': allowGlobal
+    }])
+  }, label && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+    className: "wca-color-component__label"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, label)), allowGlobal && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_GlobalColors__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    activeColor: selectedColor,
+    onChange: onChange,
+    palette: palette
+  }), readOnly ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+    className: "wca-color-component__button",
+    isSecondary: true
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+    className: "color",
+    style: {
+      backgroundColor: selectedColor
+    }
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+    className: "gradient"
+  })) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Dropdown, {
+    position: "left",
     renderToggle: ({
       isOpen,
       onToggle
     }) => {
       toggle = onToggle;
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+        className: "wca-color-component__button",
         isSecondary: true,
         onClick: onToggle,
         "aria-expanded": isOpen
@@ -1315,41 +1336,20 @@ const ColorControl = ({
       }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
         className: "gradient"
       }));
-    }
-  };
-
-  if (readOnly === false) {
-    dropdownProps = { ...dropdownProps,
-      renderContent: () => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPicker, {
-        color: selectedColor,
-        onChangeComplete: handleChange
-      }), selectedColor && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
-        isPrimary: true,
-        className: "clear",
-        onClick: handleClear
-      }, __('Clear', 'wecodeart')))
-    };
-  } else {
-    dropdownProps = { ...dropdownProps,
-      renderContent: e => null
-    };
-  }
-
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(['wca-color-component', {
-      'wca-color-component--allows-global': !disableGlobal
-    }])
-  }, label && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
-    className: "wca-color-component__label"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, label, ":")), !disableGlobal && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_GlobalColors__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    activeColor: selectedColor,
-    onChange: onChange,
-    palette: palette
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Dropdown, dropdownProps));
+    },
+    renderContent: () => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPicker, {
+      color: selectedColor,
+      onChangeComplete: handleChange
+    }), selectedColor && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+      isPrimary: true,
+      className: "clear",
+      onClick: handleClear
+    }, __('Clear', 'wecodeart')))
+  }));
 };
 
 ColorControl.defaultProps = {
-  disableGlobal: false,
+  allowGlobal: true,
   readOnly: false
 };
 ColorControl.propTypes = {
@@ -1357,7 +1357,7 @@ ColorControl.propTypes = {
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   selectedColor: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   defaultValue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  disableGlobal: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  allowGlobal: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   readOnly: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 };
 /* harmony default export */ __webpack_exports__["default"] = (ColorControl);
@@ -1444,12 +1444,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const {
-  useState,
-  useEffect
-} = wp.element;
-const {
-  __
-} = wp.i18n;
+  i18n: {
+    __
+  },
+  element: {
+    useState
+  }
+} = wp;
 
 const ColorComponent = ({
   control
@@ -1461,7 +1462,7 @@ const ColorComponent = ({
       description,
       default: defaultValue,
       inputAttrs: {
-        alphaDisabled
+        alphaDisabled = false
       },
       palette
     }
@@ -1472,13 +1473,6 @@ const ColorComponent = ({
     control.setting.set(newVal);
   };
 
-  useEffect(() => {
-    document.addEventListener('wecodeart-changed-customizer-value', e => {
-      if (!e.detail) return false;
-      if (e.detail.id !== control.id) return false;
-      onChange(e.detail.value);
-    });
-  }, []);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, label && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
     className: "customize-control-title"
   }, label), description && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {

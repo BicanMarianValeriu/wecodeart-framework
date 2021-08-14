@@ -4,21 +4,21 @@ import Form from './Form';
 
 const { useState } = wp.element;
 
-const Component = ({ control }) => {
-	const { label, palette, paletteTheme, choices: values, inputAttrs = {} } = control.params;
+const Component = ({ control: { setting, params } }) => {
+	const { label, palette, choices: values, inputAttrs = {} } = params;
 	const { allowAdd } = inputAttrs;
 
-	const [value, setValue] = useState(control.setting.get());
+	const [value, setValue] = useState(setting.get());
 	const [choices, setChoices] = useState(values);
 
 	const save = (nextValue) => {
 		// State
 		setValue(nextValue);
-		// Save
-		control.setting.set(nextValue);
+		// Value
+		setting.set(nextValue);
 	};
 
-	const objectProps = { value, choices, setChoices, save, palette, paletteTheme, inputAttrs };
+	const objectProps = { value, choices, setChoices, save, palette, inputAttrs };
 
 	return (
 		<>

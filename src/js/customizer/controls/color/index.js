@@ -1,26 +1,20 @@
 import PropTypes from 'prop-types';
 import ColorControl from './../../common/Color';
 
-const { useState, useEffect } = wp.element;
-const { __ } = wp.i18n;
+const {
+    i18n: { __ },
+    element: { useState }
+} = wp;
 
 const ColorComponent = ({ control }) => {
     const [value, setValue] = useState(control.setting.get());
 
-    const { params: { label, description, default: defaultValue, inputAttrs: { alphaDisabled }, palette } } = control;
+    const { params: { label, description, default: defaultValue, inputAttrs: { alphaDisabled = false }, palette } } = control;
 
     const onChange = (newVal = '') => {
         setValue(newVal);
         control.setting.set(newVal);
     };
-
-    useEffect(() => {
-        document.addEventListener('wecodeart-changed-customizer-value', (e) => {
-            if (!e.detail) return false;
-            if (e.detail.id !== control.id) return false;
-            onChange(e.detail.value);
-        });
-    }, []);
 
     return (
         <>

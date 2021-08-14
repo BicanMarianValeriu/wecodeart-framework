@@ -1,6 +1,6 @@
 import { plusCircleFilled } from '@wordpress/icons';
 
-const { camelCase } = lodash;
+const { camelCase, find } = lodash;
 
 const {
 	components: { Button },
@@ -8,7 +8,7 @@ const {
 	i18n: { __ }
 } = wp;
 
-const PaletteForm = ({ value, choices, setChoices, save, disabled }) => {
+const PaletteForm = ({ value, save, choices, setChoices, disabled }) => {
 	const [isAdding, setIsAdding] = useState(false);
 	const [newPaletteName, setNewPaletteName] = useState('');
 	const [paletteFrom, setPaletteFrom] = useState('base');
@@ -24,21 +24,23 @@ const PaletteForm = ({ value, choices, setChoices, save, disabled }) => {
 
 	const addNewPalette = (e) => {
 		e.preventDefault();
-		const nextValue = value;
+
+		const { colors: fromColors } = choices.find(({ slug }) => slug === paletteFrom);
+
 		const palette = {
+			allowDeletion: true,
 			label: newPaletteName,
 			slug: camelCase(newPaletteName),
-			allowDeletion: true,
-			colors: choices.filter(({ slug }) => slug === paletteFrom).pop().colors,
+			colors: { ...fromColors },
 		};
 
 		setChoices([...choices, palette]);
-		save(nextValue);
 		toggleAdding();
 
 		const formData = new FormData();
-		formData.append('action', 'wca_update_choices');
+		formData.append('action', 'wca_update_palette');
 		formData.append('type', 'add');
+		formData.append('value', value);
 		formData.append('palette', JSON.stringify(palette));
 
 		return fetch(wp.ajax.settings.url, {

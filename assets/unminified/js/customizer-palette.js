@@ -8629,8 +8629,8 @@ const ColorControl = ({
   onChange,
   defaultValue,
   palette = [],
-  disableGlobal,
-  readOnly
+  allowGlobal = true,
+  readOnly = false
 }) => {
   let toggle = null;
 
@@ -8657,11 +8657,11 @@ const ColorControl = ({
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(['wca-color-component', {
-      'wca-color-component--allows-global': !disableGlobal
+      'wca-color-component--allows-global': allowGlobal
     }])
   }, label && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
     className: "wca-color-component__label"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, label)), !disableGlobal && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_GlobalColors__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, label)), allowGlobal && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_GlobalColors__WEBPACK_IMPORTED_MODULE_3__["default"], {
     activeColor: selectedColor,
     onChange: onChange,
     palette: palette
@@ -8708,7 +8708,7 @@ const ColorControl = ({
 };
 
 ColorControl.defaultProps = {
-  disableGlobal: false,
+  allowGlobal: true,
   readOnly: false
 };
 ColorControl.propTypes = {
@@ -8716,7 +8716,7 @@ ColorControl.propTypes = {
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   selectedColor: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   defaultValue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  disableGlobal: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  allowGlobal: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   readOnly: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 };
 /* harmony default export */ __webpack_exports__["default"] = (ColorControl);
@@ -8839,15 +8839,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const {
-  debounce
+  debounce,
+  capitalize
 } = lodash;
 const {
   element: {
     useState
   },
   components: {
-    Button,
-    ButtonGroup
+    Button
   },
   i18n: {
     __
@@ -8858,103 +8858,64 @@ const Colors = ({
   value,
   choices,
   setChoices,
-  save,
   palette,
-  paletteTheme,
   inputAttrs
 }) => {
   const {
-    disableGlobal,
+    allowGlobal = false,
     readOnly
   } = inputAttrs;
-  const activePalette = choices.filter(({
-    slug
-  }) => slug === value).pop();
   const {
-    colors
-  } = activePalette;
+    colors = {}
+  } = choices.find(({
+    slug
+  }) => slug === value);
   const [hasUpdates, setHasUpdates] = useState(false);
 
   const updatePalette = () => {
-    let newColors = [];
-
-    for (let i in palette) {
-      let updated = palette[i];
-      updated.color = colors[palette[i].slug];
-      newColors[i] = updated;
-    }
-
     const formData = new FormData();
-    formData.append('action', 'wca_update_colors');
-    formData.append('palette', value);
-    formData.append('colors', JSON.stringify(newColors));
+    formData.append('action', 'wca_update_palette');
+    formData.append('type', 'update');
+    formData.append('value', value);
+    formData.append('palette', JSON.stringify(choices));
     return fetch(wp.ajax.settings.url, {
       method: 'POST',
       body: formData
     }).then(() => {
-      save(value);
       setHasUpdates(false);
     }).catch(err => console.log(JSON.stringify(err)));
   };
 
-  const updateColor = (_slug, val) => {
-    let index = choices.findIndex(({
+  const updateColor = (slug, val) => {
+    const index = [...choices].findIndex(({
       slug
     }) => slug === value);
-    choices[index].colors[_slug] = val;
+    choices[index].colors[slug] = val;
     setChoices([...choices]);
     setHasUpdates(true);
-    save(value);
   };
 
-  const resetChanges = () => {
-    const index = choices.findIndex(({
-      slug
-    }) => slug === value);
-    let _colors = [];
-
-    for (let i in paletteTheme) _colors[paletteTheme[i].slug] = paletteTheme[i].color;
-
-    choices[index].colors = _colors;
-    setChoices([...choices]);
-    setHasUpdates(true);
-    save(value);
-  };
-
-  const hasDefaults = paletteTheme.filter(({
-    slug,
-    color
-  }) => color !== colors[slug]).length < 1;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_common_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"], {
     label: __('Palette Colors', 'wecodeart')
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "wecodeart-palette-colors"
-  }, palette.map(({
-    slug,
-    name,
-    color
-  }) => {
+  }, Object.keys(colors).map(key => {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_common_Color__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      key: slug,
-      label: name,
-      selectedColor: colors[slug],
-      defaultValue: color,
-      onChange: debounce(value => updateColor(slug, value), 100),
+      key: key,
+      label: capitalize(key),
+      selectedColor: colors[key],
+      defaultValue: '#ffffff',
+      onChange: debounce(value => updateColor(key, value), 100),
       palette: palette,
-      disableGlobal: disableGlobal,
+      allowGlobal: allowGlobal,
       readOnly: readOnly
     });
-  }), !readOnly && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("hr", null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ButtonGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+  }), !readOnly && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("hr", null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
     className: "wecodeart-palette-colors__reset",
     onClick: updatePalette,
     disabled: !hasUpdates,
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_1__["update"]
-  }, __('Update Palette', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
-    className: "wecodeart-palette-colors__reset",
-    onClick: resetChanges,
-    disabled: hasDefaults,
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_1__["rotateLeft"]
-  }, __('Theme Default', 'wecodeart'))))));
+  }, __('Update palette and save', 'wecodeart')))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Colors);
@@ -8976,7 +8937,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const {
-  camelCase
+  camelCase,
+  find
 } = lodash;
 const {
   components: {
@@ -8992,9 +8954,9 @@ const {
 
 const PaletteForm = ({
   value,
+  save,
   choices,
   setChoices,
-  save,
   disabled
 }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -9018,21 +8980,24 @@ const PaletteForm = ({
 
   const addNewPalette = e => {
     e.preventDefault();
-    const nextValue = value;
+    const {
+      colors: fromColors
+    } = choices.find(({
+      slug
+    }) => slug === paletteFrom);
     const palette = {
+      allowDeletion: true,
       label: newPaletteName,
       slug: camelCase(newPaletteName),
-      allowDeletion: true,
-      colors: choices.filter(({
-        slug
-      }) => slug === paletteFrom).pop().colors
+      colors: { ...fromColors
+      }
     };
     setChoices([...choices, palette]);
-    save(nextValue);
     toggleAdding();
     const formData = new FormData();
-    formData.append('action', 'wca_update_choices');
+    formData.append('action', 'wca_update_palette');
     formData.append('type', 'add');
+    formData.append('value', value);
     formData.append('palette', JSON.stringify(palette));
     return fetch(wp.ajax.settings.url, {
       method: 'POST',
@@ -9128,10 +9093,9 @@ const {
 
 const PaletteSelector = ({
   value,
+  save,
   choices,
   setChoices,
-  save,
-  palette,
   inputAttrs
 }) => {
   const {
@@ -9156,8 +9120,9 @@ const PaletteSelector = ({
 
     if (allowAdd) {
       const formData = new FormData();
-      formData.append('action', 'wca_update_choices');
+      formData.append('action', 'wca_update_palette');
       formData.append('type', 'remove');
+      formData.append('value', newValue);
       formData.append('palette', willDelete);
       return fetch(wp.ajax.settings.url, {
         method: 'POST',
@@ -9217,14 +9182,12 @@ const PaletteSelector = ({
         save(slug);
       },
       key: slug
-    }, palette.slice(0, 4).map(({
-      slug
-    }) => {
+    }, Object.keys(colors).slice(0, 4).map(key => {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
         className: "wecodeart-palette-options__button-color",
-        key: slug,
+        key: key,
         style: {
-          backgroundColor: colors[slug]
+          backgroundColor: colors[key]
         }
       });
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
@@ -9263,26 +9226,28 @@ const {
 } = wp.element;
 
 const Component = ({
-  control
+  control: {
+    setting,
+    params
+  }
 }) => {
   const {
     label,
     palette,
-    paletteTheme,
     choices: values,
     inputAttrs = {}
-  } = control.params;
+  } = params;
   const {
     allowAdd
   } = inputAttrs;
-  const [value, setValue] = useState(control.setting.get());
+  const [value, setValue] = useState(setting.get());
   const [choices, setChoices] = useState(values);
 
   const save = nextValue => {
     // State
-    setValue(nextValue); // Save
+    setValue(nextValue); // Value
 
-    control.setting.set(nextValue);
+    setting.set(nextValue);
   };
 
   const objectProps = {
@@ -9291,7 +9256,6 @@ const Component = ({
     setChoices,
     save,
     palette,
-    paletteTheme,
     inputAttrs
   };
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, label && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {

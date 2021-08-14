@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Core\Scripts;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\set_settings_array;
 
 /**
  * Sortable control (uses checkboxes).
@@ -34,13 +33,6 @@ class Palette extends \WP_Customize_Control {
 	 * @var 	string
 	 */
 	public $type = 'wecodeart-palette';
-       
-    /**
-	 * Default values.
-	 *
-	 * @var string
-	 */
-	public $default = '';
 
 	/**
 	 * Enqueue control related scripts/styles.
@@ -76,39 +68,6 @@ class Palette extends \WP_Customize_Control {
 		$palette_user 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette_theme );
 			
 		$this->json['palette'] 		= $palette_user;
-		$this->json['paletteTheme']	= $palette_theme;
 		$this->json['choices'] 		= wecodeart_json( [ 'settings', 'custom', 'colorPalettes' ], [] );
-	}
-}
-
-// add_action( 'customize_save_after', __NAMESPACE__ . '\\update_palette' );
-function update_palette() {
-	global $wp_customize;
-	$setting = $wp_customize->get_setting( 'general-design-palette' );
-	if ( null !== $setting->post_value() ) {
-		$user_custom_post_type_id     = \WP_Theme_JSON_Resolver_Gutenberg::get_user_custom_post_type_id();
-		$user_theme_json_post         = get_post( $user_custom_post_type_id );
-		$user_theme_json_post_content = json_decode( $user_theme_json_post->post_content );
-
-		$palette_theme 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
-		$palette_user 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette_theme );
-
-		$choices = wecodeart_json( [ 'settings', 'custom', 'colorPalettes' ], [] );
-		$colors = current( wp_list_filter( $choices, [ 'slug' => $setting->post_value() ] ) );
-
-		$colors = array_map( function( $item ) use ( $colors ) {
-			$item['color'] = $colors[$item['slug']];
-			return $item;
-		}, $palette_user );
-
-		$user_theme_json_post_content = set_settings_array(
-            $user_theme_json_post_content,
-            [ 'settings', 'color', 'palette' ],
-            $colors
-        );
-
-		// Update the theme.json with the new settings.
-		$user_theme_json_post->post_content = json_encode( $user_theme_json_post_content );
-        $updated = wp_update_post( $user_theme_json_post );
 	}
 }

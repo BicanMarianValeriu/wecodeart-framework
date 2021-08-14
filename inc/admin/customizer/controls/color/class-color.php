@@ -40,13 +40,6 @@ class Color extends \WP_Customize_Control {
 	 * @var string
 	 */
     public $default = '';
-    
-	/**
-	 * Disable Alpha in colorpicker.
-	 *
-	 * @var bool
-	 */
-    public $disable_alpha = false;
 
 	/**
 	 * Enqueue control related scripts/styles.
@@ -80,11 +73,12 @@ class Color extends \WP_Customize_Control {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['palette'] = wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
 		$this->json['default'] = $this->setting->default;
-		if ( isset( $this->default ) ) {
-			$this->json['default'] = $this->default;
-		}
-		$this->json['inputAttrs'] = $this->input_attrs ?: [ $this->disable_alpha ];
+		$this->json['inputAttrs'] = $this->input_attrs;
+		
+		$palette_theme 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
+		$palette_user 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette_theme );
+
+		$this->json['palette'] = $palette_user;
 	}
 }
