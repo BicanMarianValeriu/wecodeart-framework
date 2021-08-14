@@ -37,13 +37,6 @@ class Fonts extends \WP_Customize_Control {
 	public $type = 'wecodeart-fonts';
 
 	/**
-	 * Additional arguments passed to JS.
-	 *
-	 * @var array
-	 */
-	public $input_attrs = [];
-
-	/**
 	 * Enqueue control related scripts/styles.
 	 *
 	 * @access public
@@ -94,6 +87,7 @@ class Fonts extends \WP_Customize_Control {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['inputAttrs'] = is_array( $this->input_attrs ) ? wp_json_encode( $this->input_attrs ) : $this->input_attrs;
+		$this->json['default'] 		= $this->setting->default;
+		$this->json['inputAttrs'] 	= wp_json_encode( $this->input_attrs );
 	}
 }

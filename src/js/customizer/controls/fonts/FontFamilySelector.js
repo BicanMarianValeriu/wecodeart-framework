@@ -45,8 +45,8 @@ const FontFamilySelector = ({
                         fontFace="default"
                         delayLoad={false}
                         onClick={() => {
-                            setSearch('');
                             onFontChoice('system', false);
+                            setSearch('');
                         }}
                         label={inheritDefault ? __('Inherit', 'wecodeart') : __('Default', 'wecodeart')}
                     />
