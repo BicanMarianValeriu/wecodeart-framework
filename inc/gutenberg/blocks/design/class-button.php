@@ -47,7 +47,7 @@ class Button extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register_block_type() {
-		// add_filter( 'render_block_core/button', [ $this, 'render' ], 10, 2 );
+		add_filter( 'render_block_core/button', [ $this, 'render' ], 10, 2 );
 	}
 
 	/**
@@ -64,6 +64,7 @@ class Button extends Dynamic {
 		
 		// Button Changes
 		$link	= $doc->getElementsByTagName( 'a' )->item(0);
+		
 		if( $link ) {
 			$classes 	= explode( ' ', get_prop( $attributes, 'className', '' ) );
 			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
