@@ -101,7 +101,7 @@ class Comments extends Dynamic {
 	
 			foreach ( $comments as $comment ) {
 				$list_items_markup .= '<li class="wp-block-latest-comments__comment">';
-				$list_items_markup .= '<article class="row gx-3">';
+				$list_items_markup .= '<div class="row gx-3">';
 				// Avatar
 				if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
 					$avatar = get_avatar( $comment, 50, '', '', [
@@ -147,7 +147,7 @@ class Comments extends Dynamic {
 				}
 
 				$list_items_markup .= '</div>';
-				$list_items_markup .= '</article>';
+				$list_items_markup .= '</div>';
 				$list_items_markup .= '</li>';
 			}
 	
