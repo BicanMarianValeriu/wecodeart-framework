@@ -126,7 +126,7 @@ class Posts extends Dynamic {
 			foreach ( $posts as $post ) {
 				$post_link = esc_url( get_permalink( $post ) );
 				$list_items_markup .= '<li class="wp-block-posts__post mb-3">';
-				$list_items_markup .= '<article class="row flex-column flex-sm-row gx-3">';
+				$list_items_markup .= '<div class="row flex-column flex-sm-row gx-3">';
 
 				// Image
 				if ( $display_image ) {
@@ -238,7 +238,7 @@ class Posts extends Dynamic {
 				}
 
 				$list_items_markup .= "</div>\n";
-				$list_items_markup .= "</article>\n";
+				$list_items_markup .= "</div>\n";
 				$list_items_markup .= "</li>\n";
 			}
 

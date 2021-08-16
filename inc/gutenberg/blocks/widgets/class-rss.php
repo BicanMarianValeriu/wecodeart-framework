@@ -113,7 +113,7 @@ class RSS extends Dynamic {
 
 			foreach ( $posts as $item ) {
 				$list_items_markup .= '<li class="wp-block-posts__post mb-3">';
-				$list_items_markup .= '<article>';
+				$list_items_markup .= '<div>';
 
 				// Title
 				$title = esc_html( trim( strip_tags( $item->get_title() ) ) );
@@ -178,7 +178,7 @@ class RSS extends Dynamic {
 					$list_items_markup .= sprintf( '<div class="%1$s">%2$s</div>', 'wp-block-post-excerpt', $excerpt );
 				}
 
-				$list_items_markup .= "</article>\n";
+				$list_items_markup .= "</div>\n";
 				$list_items_markup .= "</li>\n";
 			}
 

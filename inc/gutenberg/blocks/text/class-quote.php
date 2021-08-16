@@ -77,9 +77,10 @@ class Quote extends Dynamic {
 			$caption->setAttribute( 'class', 'blockquote-footer' );
 			$cite->parentNode->replaceChild( $caption, $cite );
 			$caption->appendChild( $cite );
+			$figure->appendChild( $caption );
 		}
 
-		return $doc->saveHTML();
+		return $this->save_html( $doc->saveHTML() );
 	}
 
 	/**

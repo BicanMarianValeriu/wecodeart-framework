@@ -92,7 +92,7 @@ class Button extends Dynamic {
 			$link->setAttribute( 'class', join( ' ', $classname ) );
 		}
 
-		return $doc->saveHTML();
+		return $this->save_html( $doc->saveHTML() );
 	}
 
 	/**

@@ -113,7 +113,7 @@ class Table extends Dynamic {
 		// Set Table Classname
 		$table->setAttribute( 'class', join( ' ', $table_cls ) );
 
-		return $doc->saveHTML();
+		return $this->save_html( $doc->saveHTML() );
 	}
 
 	/**
