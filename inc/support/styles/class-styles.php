@@ -427,21 +427,6 @@ final class Styles implements Integration {
 	}
 
 	/**
-	 * Color lightness
-	 *
-	 * @since   5.0.0
-	 * @param  	string 	$color  Color in HEX/RGB/RGBA format
-	 *
-	 * @return 	string
-	 */
-	public static function color_lightness( string $color ) {
-		$mode 	= ( false === strpos( $color, 'rgba' ) ) ? 'hex' : 'rgba';
-		$color 	= $mode === 'hex' ? self::hex_rgba( $color ) : $color; 
-		preg_match_all( "/\(([^\]]*)\)/" , $color, $matches );
-		return intval( array_sum( explode( ',', current( $matches[1] ) ) ) );
-	}
-
-	/**
 	 * Adjust Color Brightness
 	 *
 	 * @since   5.0.0
@@ -473,6 +458,21 @@ final class Styles implements Integration {
 		}
 	
 		return $return;
+	}
+	
+	/**
+	 * Color lightness
+	 *
+	 * @since   5.0.0
+	 * @param  	string 	$color  Color in HEX/RGB/RGBA format
+	 *
+	 * @return 	string
+	 */
+	public static function color_lightness( string $color ) {
+		$mode 	= ( false === strpos( $color, 'rgba' ) ) ? 'hex' : 'rgba';
+		$color 	= $mode === 'hex' ? self::hex_rgba( $color ) : $color; 
+		preg_match_all( "/\(([^\]]*)\)/" , $color, $matches );
+		return intval( array_sum( explode( ',', current( $matches[1] ) ) ) );
 	}
 
 	/**

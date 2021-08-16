@@ -46,7 +46,7 @@ class Calendar extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register_block_type() {
-		// add_filter( 'render_block_core/calendar', [ $this, 'render' ], 10, 2 );
+		add_filter( 'render_block_core/calendar', [ $this, 'render' ], 10, 2 );
 	}
 
 	/**
@@ -58,16 +58,11 @@ class Calendar extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
-		$doc = $this->load_html( $content );
-		
-		// Table Changes
-		$table 		= $doc->getElementsByTagName( 'table' )->item(0);
-		$table_cls  = [ $table->getAttribute( 'class' ), 'table', 'table-bordered', 'table-hover' ];
-		
-		// Set Table Attributes
-		$table->removeAttribute( 'id' );
-		$table->setAttribute( 'class', join( ' ', array_filter( $table_cls ) ) );
+		// Remove ID
+		$content = preg_replace( '/(<[^>]+) id=".*?"/i', '$1', $content, 1 );
+		// Add Bootstrap Classes
+		$content = preg_replace( '/' . preg_quote( 'table class="', '/' ) . '/', 'table class="table table-bordered table-hover ', $content, 1 );
 
-		return $doc->saveHTML();
+		return $content;
 	}
 }
