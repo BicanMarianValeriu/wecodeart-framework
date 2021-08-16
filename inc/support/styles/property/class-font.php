@@ -28,10 +28,10 @@ class Font extends Styles\Property {
 	 * @access protected
 	 */
 	protected function process_value() {
-		$processed = '';
+		$processed = $this->value;
 
-		if ( is_array( $this->value ) && isset( $this->value['font-family'] ) ) {
-			$processed = $this->value['font-family'];
+		if ( is_array( $processed ) && isset( $processed['font-family'] ) ) {
+			$processed = $processed['font-family'];
 		}
 
 		// Make sure the value is a string, if not, then early exit.

@@ -66,10 +66,6 @@ class Typography extends Config {
 					[
 						'element'  	=> 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6',
 						'property' 	=> 'font-family',
-						'pattern'  => function( $value ) {
-							$value = sprintf( 'var(--wca-font-secondary, %s)', $value['font-family'] );
-							return $value;
-						},
 					]
 				]
 			],
