@@ -81,6 +81,7 @@ abstract class Dynamic {
 		$doc = new \DOMDocument();
 		// See https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/table-of-contents/index.php
 		libxml_use_internal_errors( true );
+		// As of PHP 5.4 there is a simpler approach to load HTML without doctype/html/body tags
 		$doc->loadHTML( $content, LIBXML_HTML_NOIMPLIED );
 		libxml_use_internal_errors( false );
 
