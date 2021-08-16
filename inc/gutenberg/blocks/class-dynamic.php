@@ -82,7 +82,7 @@ abstract class Dynamic {
 		// See https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/table-of-contents/index.php
 		libxml_use_internal_errors( true );
 		$doc->loadHTML( htmlspecialchars_decode(
-			utf8_decode( htmlentities( $content, ENT_COMPAT, 'UTF-8', false ) ),
+			utf8_decode( htmlentities( '<html><body>' . $content . '</body></html>', ENT_COMPAT, 'UTF-8', false ) ),
 			LIBXML_HTML_NOIMPLIED
 		) );
 		libxml_use_internal_errors( false );
