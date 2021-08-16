@@ -92,9 +92,7 @@ class Button extends Dynamic {
 			$link->setAttribute( 'class', join( ' ', $classname ) );
 		}
 
-		$content = str_replace( [ '<html>', '</html>' ], '' , $doc->saveHTML() );
-
-		return $content;
+		return $doc->saveHTML();
 	}
 
 	/**
