@@ -83,8 +83,8 @@ abstract class Dynamic {
 		libxml_use_internal_errors( true );
 		$doc->loadHTML( htmlspecialchars_decode(
 			utf8_decode( htmlentities( '<html><body>' . $content . '</body></html>', ENT_COMPAT, 'UTF-8', false ) ),
-			LIBXML_HTML_NOIMPLIED
-		) );
+			ENT_COMPAT
+		), LIBXML_HTML_NOIMPLIED );
 		libxml_use_internal_errors( false );
 
 		return $doc;
