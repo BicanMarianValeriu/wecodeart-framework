@@ -153,7 +153,6 @@ figcaption,
         transition: opacity 1000ms, filter 1500ms;
     }
 
-    img[data-lazyloaded]:not(.litespeed-loaded),
     .ls-blur-up-img.ls-inview.ls-original-loaded {
         transition: opacity 1000ms, filter 1500ms;
         opacity: 0;

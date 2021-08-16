@@ -81,7 +81,7 @@ abstract class Property {
 			return $obj->get_value();
 		}
 
-		return esc_attr( safecss_filter_attr( $value ) );
+		return esc_attr( $value );
 	}
 
 	/**
