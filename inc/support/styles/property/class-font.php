@@ -28,25 +28,25 @@ class Font extends Styles\Property {
 	 * @access protected
 	 */
 	protected function process_value() {
-		$family = $this->value;
+		$processed = '';
 
-		if ( is_array( $family ) && isset( $family['font-family'] ) ) {
-			$family = $family['font-family'];
+		if ( is_array( $this->value ) && isset( $this->value['font-family'] ) ) {
+			$processed = $this->value['font-family'];
 		}
 
 		// Make sure the value is a string, if not, then early exit.
-		if ( ! is_string( $family ) ) {
+		if ( ! is_string( $processed ) ) {
 			return;
 		}
 
 		// Hack for standard fonts.
-		$family = str_replace( '&quot;', '"', $family );
+		$processed = str_replace( '&quot;', '"', $processed );
 
 		// Add double quotes if needed.
-		if ( false !== strpos( $family, ' ' ) && false === strpos( $family, '"' ) ) {
-			$this->value = '"' . $family . '"';
+		if ( false !== strpos( $processed, ' ' ) && false === strpos( $processed, '"' ) ) {
+			$processed = '"' . $processed . '"';
 		}
 
-		$this->value = html_entity_decode( $family, ENT_QUOTES );
+		$this->value = html_entity_decode( $processed, ENT_QUOTES );
 	}
 }

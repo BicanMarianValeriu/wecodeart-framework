@@ -31,15 +31,16 @@ class Background extends Styles\Property {
 		$processed = ''; 
 
 		if ( $this->value ) {
+			// If is array, make sure it has url
 			if ( is_array( $this->value ) && isset( $this->value['url'] ) ) {
 				$this->value = $this->value['url'];
 			}
 			// If is URL
 			if( filter_var( $this->value, FILTER_VALIDATE_URL ) ) {
-				$processed = sprintf( 'url(%s)', set_url_scheme( $this->value ) );
+				$processed = sprintf( 'url(%s)', esc_url( set_url_scheme( $this->value ) ) );
 			// If is image ID
 			} elseif ( preg_match( '/^\d+$/', $this->value ) ) {
-				$processed = sprintf( 'url(%s)', set_url_scheme( wp_get_attachment_url( $this->value ) ) );
+				$processed = sprintf( 'url(%s)', esc_url( set_url_scheme( wp_get_attachment_url( $this->value ) ) ) );
 			// else is a gradient/string
 			} else {
 				$processed = filter_var( $this->value, FILTER_SANITIZE_STRING );
