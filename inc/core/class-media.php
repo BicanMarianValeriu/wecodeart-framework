@@ -146,7 +146,7 @@ class Media {
 			'num'      	=> 0,
 			'attrs'    	=> [],
 			'fallback' 	=> [
-				'html' 	=> '<img class="%2$s" src="%1$s" width="%3$s" height="%4$s" />',
+				'html' 	=> '<img class="%2$s" src="%1$s" width="%3$s" height="%4$s" alt="%5$s"/>',
 				'url'	=> get_template_directory_uri() . '/assets/images/placeholder.svg'
 			]
 		];  
@@ -186,7 +186,14 @@ class Media {
 			$id		= 0;
 			$img	= sprintf( 'holder.js/%s?auto=yes&text=www.wecodeart.com', join( 'x', [ $dummy_sizes['width'], $dummy_sizes['height'] ] ) );
 			$url	= isset( $args['fallback']['url'] ) ? esc_url( $args['fallback']['url'] ) : $img;
-			$html	= sprintf( $args['fallback']['html'], $url, join( ' ', $src_classes ), $dummy_sizes['width'], $dummy_sizes['height'] );
+			$html	= sprintf(
+				$args['fallback']['html'],
+				$url,
+				join( ' ', $src_classes ),
+				$dummy_sizes['width'],
+				$dummy_sizes['height'],
+				esc_html__( 'Placeholder image', 'wecodeart' )
+			);
 		} else return false; 
 
 		// Source path, relative to the root.

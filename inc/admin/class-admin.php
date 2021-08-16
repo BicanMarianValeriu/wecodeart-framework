@@ -154,7 +154,7 @@ class Admin {
 	 */
 	public function insert_default_settings() {
 		return add_option( 'wecodeart-settings', [
-			'theme_api_key'	=> 'FREEMIUM',
+			'theme_api_key'	=> 'EARLY_ACCESS',
 			'theme_version'	=> wecodeart( 'version' ),
 		], '', true );
 	}
