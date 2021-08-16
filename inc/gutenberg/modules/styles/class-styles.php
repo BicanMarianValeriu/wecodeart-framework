@@ -135,9 +135,10 @@ class Styles implements Integration {
 			'core/image',
 			'core/pullquote',
 			'core/media-text',
+			'core/social-links',
 			'core/social-link',
 		], true ) ) ) {
-			$content 	= preg_replace( '/(<[^>]+) style=".*?"/i', '$1', $content, 1 );
+			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, 1 );
 		}
 
 		// Add necessary class
@@ -213,6 +214,7 @@ class Styles implements Integration {
 			'core/image' 		=> Styles\Blocks\Image::class,
 			'core/spacer' 		=> Styles\Blocks\Spacer::class,
 			'core/column' 		=> Styles\Blocks\Column::class,
+			'core/social-links'	=> Styles\Blocks\Social::class,
 			'core/separator' 	=> Styles\Blocks\Separator::class,
 			'core/pullquote' 	=> Styles\Blocks\PullQuote::class
 		];

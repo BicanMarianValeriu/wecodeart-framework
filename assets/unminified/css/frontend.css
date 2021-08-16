@@ -5414,6 +5414,7 @@ svg,
   display: inline-block;
   vertical-align: -0.125em;
   fill: currentColor;
+  width: 1em;
   height: 1em;
 }
 svg .fa-secondary,
@@ -5517,12 +5518,14 @@ figcaption p.wp-caption-text,
 .wp-block-featured-image img.lazyload:not([src]) {
   visibility: hidden;
 }
+.wp-block-featured-image .litespeed-loading,
 .wp-block-featured-image .ls-blur-up-img {
   filter: blur(10px);
   opacity: 1;
   transition: opacity 1000ms, filter 1500ms;
 }
 .wp-block-featured-image .ls-blur-up-img.ls-inview.ls-original-loaded {
+  transition: opacity 1000ms, filter 1500ms;
   opacity: 0;
   filter: blur(5px);
 }

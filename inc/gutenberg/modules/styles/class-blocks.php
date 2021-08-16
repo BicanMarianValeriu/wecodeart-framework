@@ -275,6 +275,12 @@ class Blocks extends Processor {
 									'property' 	=> 'color',
 									'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $name )
 								], $output );
+							} else {
+								$this->output[] = wp_parse_args( [
+									'element'	=> implode( ' ', [ $this->element, 'a' ] ),
+									'property' 	=> 'color',
+									'value'	  	=> $value
+								], $output );
 							}
 						}
 					}

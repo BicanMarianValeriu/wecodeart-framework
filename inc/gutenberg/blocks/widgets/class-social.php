@@ -92,10 +92,12 @@ class Social extends Dynamic {
 		.navbar .wp-block-social-links {
 			margin-top: 1rem;
 		}
-		.wp-block-social-links.is-style-pill-shape .wp-social-link a {
+		.wp-block-social-links.is-style-pill-shape {
 			width: auto;
-			padding-left: 20px;
-			padding-right: 20px;
+		}
+		.wp-block-social-links.is-style-pill-shape .wp-social-link a {
+			padding-left: calc((2.5/3) * 1em);
+			padding-right: calc((2.5/3) * 1em);
 		}
 		.wp-block-social-links.is-style-square-shape .wp-social-link a {
 			border-radius: 0;
@@ -106,9 +108,10 @@ class Social extends Dynamic {
 		}
 		.wp-social-link {
 			display: block;
+			background-color: transparent!important;
 		}
 		.wp-social-link:not(:last-child) {
-			margin-right: 10px;
+			margin-right: calc((2.5/3) * 1em);
 		}
 		.wp-social-link a {
 			display: flex;
@@ -118,7 +121,7 @@ class Social extends Dynamic {
 			text-align: center;
 			border-radius: 9999px;
 			transition: all 0.1s ease;
-			padding: 6px;
+			padding: 0.35em;
 			line-height: 0;
 			text-decoration: none;
 			border: none;
