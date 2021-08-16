@@ -184,14 +184,13 @@ class Media {
 			list( $url ) = wp_get_attachment_image_src( $id, $args['size'], false );
 		} elseif ( is_array( $args['fallback'] ) ) { 
 			$id		= 0;
-			$img	= sprintf( 'holder.js/%s?auto=yes&text=www.wecodeart.com', join( 'x', [ $dummy_sizes['width'], $dummy_sizes['height'] ] ) );
-			$url	= isset( $args['fallback']['url'] ) ? esc_url( $args['fallback']['url'] ) : $img;
+			$url	= $args['fallback']['url'];
 			$html	= sprintf(
 				$args['fallback']['html'],
-				$url,
+				esc_url( $url ),
 				join( ' ', $src_classes ),
-				$dummy_sizes['width'],
-				$dummy_sizes['height'],
+				intval( $dummy_sizes['width'] ),
+				intval( $dummy_sizes['height'] ),
 				esc_html__( 'Placeholder image', 'wecodeart' )
 			);
 		} else return false; 
