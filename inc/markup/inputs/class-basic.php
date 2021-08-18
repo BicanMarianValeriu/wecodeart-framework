@@ -57,6 +57,7 @@ class Basic extends Base {
     public static function get_types() {
         return [
             'url',
+            'tel',
             'text',
             'search',
             'email',

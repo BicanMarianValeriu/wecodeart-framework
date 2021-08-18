@@ -195,7 +195,7 @@ class Posts extends Dynamic {
 							],
 							'author' 	=> (object) [
 								'name'  => get_the_author_meta( 'display_name', $post->post_author ),
-								'url'	=> get_the_author_meta( 'url', $post->post_author ) ?: get_the_author_posts_link( $post->post_author )
+								'url'	=> get_author_posts_url( $post->post_author )
 							]
 						], false );
 					}

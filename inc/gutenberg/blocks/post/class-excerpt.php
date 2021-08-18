@@ -79,11 +79,18 @@ class Excerpt extends Dynamic {
 
 		$post_id = $block->context['postId'];
 
+		// Buton based on link color
+		$button = wecodeart_json( [ 'styles', 'elements', 'link', 'color', 'text' ], 'primary' );
+		if ( mb_strpos( $button, '|' ) !== false ) {
+			$button = explode( '|', $button );
+			$button = end( $button );
+		}
+
 		$more_text = Markup::wrap( 'entry-more', [
 			[
 				'tag' 	=> 'a',
 				'attrs' => [
-					'class' => 'wp-block-post-excerpt__more-btn btn btn-outline-primary',
+					'class' => 'wp-block-post-excerpt__more-btn btn btn-outline-' . $button,
 					'href'	=> esc_url( get_the_permalink( $post_id ) )
 				]
 			]
