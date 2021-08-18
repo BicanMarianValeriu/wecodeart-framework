@@ -9,7 +9,8 @@ import { loremIpsum } from 'react-lorem-ipsum';
 const {
     i18n: { __ },
     blocks: { createBlock },
-    data: { select, dispatch }
+    data: { select, dispatch },
+    blockEditor: { store: blockEditorStore },
 } = wp;
 
 /**
@@ -44,22 +45,22 @@ const settings = {
                 prefix: Array(columns + 1).join(':') + 'lorem',
                 transform() {
                     const toSelect = [];
-                    const blockIndex = select('core/block-editor').getBlockInsertionPoint();
-                    const selectedBlock = select('core/block-editor').getSelectedBlockClientId();
+                    const blockIndex = select(blockEditorStore).getBlockInsertionPoint();
+                    const selectedBlock = select(blockEditorStore).getSelectedBlockClientId();
 
                     for (let i = 1; i <= columns; i++) {
                         const created = createBlock('core/paragraph', { content: loremIpsum() });
 
-                        dispatch('core/block-editor').insertBlocks(created, (parseInt(blockIndex.index) + i) - 1);
+                        dispatch(blockEditorStore).insertBlocks(created, (parseInt(blockIndex.index) + i) - 1);
 
                         if (typeof created !== 'undefined') {
                             toSelect.push(created.clientId);
                         }
                     }
 
-                    dispatch('core/block-editor').removeBlock(selectedBlock);
+                    dispatch(blockEditorStore).removeBlock(selectedBlock);
 
-                    return dispatch('core/block-editor').multiSelect(toSelect[0], toSelect.reverse()[0]);
+                    return dispatch(blockEditorStore).multiSelect(toSelect[0], toSelect.reverse()[0]);
                 },
             })),
             {
@@ -76,24 +77,24 @@ const settings = {
                 prefix: Array(columns + 1).join(':') + 'hlorem',
                 transform() {
                     const toSelect = [];
-                    const blockIndex = select('core/block-editor').getBlockInsertionPoint();
-                    const selectedBlock = select('core/block-editor').getSelectedBlockClientId();
+                    const blockIndex = select(blockEditorStore).getBlockInsertionPoint();
+                    const selectedBlock = select(blockEditorStore).getSelectedBlockClientId();
 
                     for (let i = 1; i <= columns; i++) {
                         const created = createBlock('core/heading', {
                             content: loremIpsum({ avgSentencesPerParagraph: 1, startWithLoremIpsum: false, avgWordsPerSentence: 6 })[0].split('.')[0],
                         });
 
-                        dispatch('core/block-editor').insertBlocks(created, (parseInt(blockIndex.index) + i) - 1);
+                        dispatch(blockEditorStore).insertBlocks(created, (parseInt(blockIndex.index) + i) - 1);
 
                         if (typeof created !== 'undefined') {
                             toSelect.push(created.clientId);
                         }
                     }
 
-                    dispatch('core/block-editor').removeBlock(selectedBlock);
+                    dispatch(blockEditorStore).removeBlock(selectedBlock);
 
-                    return dispatch('core/block-editor').multiSelect(toSelect[0], toSelect.reverse()[0]);
+                    return dispatch(blockEditorStore).multiSelect(toSelect[0], toSelect.reverse()[0]);
                 },
             })),
         ],

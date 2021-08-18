@@ -6,7 +6,7 @@ const { __ } = wp.i18n;
 /**
  * Internal dependencies
  */
-import JustifyControl from './controls';
+import Control from './components/controls';
 
 /**
  * Block constants
@@ -23,7 +23,7 @@ export const justify = {
 	},
 	edit({ isActive, value, onChange, activeAttributes }) {
 		return (
-			<JustifyControl
+			<Control
 				name={name}
 				isActive={isActive}
 				value={value}

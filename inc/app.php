@@ -89,8 +89,6 @@ return [
     */
     'gutenberg' => [
         'support'   => [
-            'align-wide'        => 'remove',
-            'wp-block-styles'   => 'remove',
             'block-templates'   => true,
             'block-nav-menus'   => true,
         ],
@@ -130,10 +128,8 @@ return [
     |
     */
     'extensions' => [
-        'amp'           => false,
         'fonts'         => true,
         'styles'        => true,
-        'schema'        => true,
         'wpseo' => [
             'author-social' => [
                 'url'		=> 'Website',
@@ -154,9 +150,7 @@ return [
         'html5'                 => [ 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ],
         'post-thumbnails'       => [ 'post', 'page' ],
         'custom-logo'           => [ 'width' => 100, 'height' => 50 ],
-        'amp'                   => [ 'paired' => true ],
         'responsive-embeds'     => true,
-        'block-nav-menus'       => true,
         'customize-selective-refresh-widgets'   => true,
     ],
 ];

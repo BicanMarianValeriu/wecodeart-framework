@@ -74,14 +74,14 @@ class File extends Module {
             $attrs['required'] = true;
             $attrs['aria-required'] = 'true';
         }
-    
+
         $html = Markup::wrap( 'cf7-file-field', [ [
             'tag' 	=> 'span',
             'attrs' => [
                 'class' => self::get_wrap_class( $tag )
             ]
         ] ], 'wecodeart_input', [ 'file', [
-            'label' 	=> $tag->content ?: false,
+            'label' 	=> null,
             'attrs' 	=> $attrs,
             'messages' 	=> [
                 'invalid' => $validation_error

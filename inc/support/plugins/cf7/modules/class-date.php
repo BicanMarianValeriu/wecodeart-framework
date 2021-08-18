@@ -87,7 +87,7 @@ class Date extends Module {
         }
     
         $label = $tag->has_option( 'first_as_label' ) ? (string) reset( $tag->values ) : false;
-        $value = count( $tag->values ) > 1 ? (string) end( $tag->values ) : '';
+        $value = count( $tag->values ) > 1 ? (string) end( $tag->values ) : reset( $tag->values );
     
         if ( $tag->has_option( 'placeholder' ) or $tag->has_option( 'watermark' ) ) {
             $attrs['placeholder'] = $value;

@@ -11,6 +11,7 @@ const {
 	data: { useSelect, useDispatch },
 	components: { withSpokenMessages, Icon },
 	editPost: { PluginBlockSettingsMenuItem },
+	blockEditor: { store: blockEditorStore },
 	compose: { compose },
 	richText: { create, toHTMLString }
 } = wp;
@@ -20,9 +21,9 @@ const allowedBlocks = ['core/paragraph', 'core/heading'];
 /**
  * Render plugin
  */
-const Control = () => {
+const Controls = () => {
 	const { blockId, blockName, blockContent } = useSelect((select) => {
-		const selectedBlock = select('core/block-editor').getSelectedBlock();
+		const selectedBlock = select(blockEditorStore).getSelectedBlock();
 
 		if (selectedBlock) {
 			return {
@@ -38,7 +39,7 @@ const Control = () => {
 	if (allowedBlocks.includes(blockName)) {
 		const record = create({ html: blockContent });
 
-		const { updateBlockAttributes } = useDispatch('core/block-editor', [blockId, record]);
+		const { updateBlockAttributes } = useDispatch(blockEditorStore, [blockId, record]);
 
 		return (
 			<PluginBlockSettingsMenuItem
@@ -56,4 +57,4 @@ const Control = () => {
 	return null;
 };
 
-export default compose(withSpokenMessages)(Control);
+export default compose(withSpokenMessages)(Controls);

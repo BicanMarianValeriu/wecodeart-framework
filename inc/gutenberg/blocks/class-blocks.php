@@ -93,9 +93,10 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         
         // Hooks
-        add_action( 'init',         [ $this, 'load' ] );
-        add_filter( 'render_block', [ $this, 'collect_blocks' ], 10, 2 );
-        add_action( 'wp_footer',    [ $this, 'output_styles' ] );
+        add_action( 'init',             [ $this, 'load' ] );
+        add_filter( 'render_block',     [ $this, 'collect_blocks' ], 10, 2 );
+        add_action( 'wp_footer',        [ $this, 'output_styles' ] );
+        add_action( 'wp_print_styles',  [ $this, 'remove_styles' ], 100 );
 	}
 
     /**
@@ -135,8 +136,18 @@ class Blocks implements \ArrayAccess {
         
         if( empty( $inline_css ) ) return;
 
-        // Escaping is not really necessary since CSS processor does that already!
-        printf( '<style id="wecodeart-blocks-inline-css">%s</style>', wp_strip_all_tags( $inline_css ) );
+        // Escaping is not necessary since CSS processor does that already for each property!
+        printf( '<style id="wecodeart-blocks-inline-css">%s</style>', $inline_css );
+	}
+
+    /**
+	 * Remove default styles
+	 *
+	 * @return void
+	 */
+	public function remove_styles() {
+        wp_dequeue_style( 'wp-block-library' );         // WordPress Core
+        wp_dequeue_style( 'wp-block-library-theme' );   // WordPress Core
 	}
 
 	/**

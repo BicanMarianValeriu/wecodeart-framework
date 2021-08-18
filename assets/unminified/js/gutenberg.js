@@ -8993,6 +8993,9 @@ const {
   data: {
     select,
     dispatch
+  },
+  blockEditor: {
+    store: blockEditorStore
   }
 } = wp;
 /**
@@ -9030,22 +9033,22 @@ const settings = {
 
       transform() {
         const toSelect = [];
-        const blockIndex = select('core/block-editor').getBlockInsertionPoint();
-        const selectedBlock = select('core/block-editor').getSelectedBlockClientId();
+        const blockIndex = select(blockEditorStore).getBlockInsertionPoint();
+        const selectedBlock = select(blockEditorStore).getSelectedBlockClientId();
 
         for (let i = 1; i <= columns; i++) {
           const created = createBlock('core/paragraph', {
             content: Object(react_lorem_ipsum__WEBPACK_IMPORTED_MODULE_0__["loremIpsum"])()
           });
-          dispatch('core/block-editor').insertBlocks(created, parseInt(blockIndex.index) + i - 1);
+          dispatch(blockEditorStore).insertBlocks(created, parseInt(blockIndex.index) + i - 1);
 
           if (typeof created !== 'undefined') {
             toSelect.push(created.clientId);
           }
         }
 
-        dispatch('core/block-editor').removeBlock(selectedBlock);
-        return dispatch('core/block-editor').multiSelect(toSelect[0], toSelect.reverse()[0]);
+        dispatch(blockEditorStore).removeBlock(selectedBlock);
+        return dispatch(blockEditorStore).multiSelect(toSelect[0], toSelect.reverse()[0]);
       }
 
     })), {
@@ -9068,8 +9071,8 @@ const settings = {
 
       transform() {
         const toSelect = [];
-        const blockIndex = select('core/block-editor').getBlockInsertionPoint();
-        const selectedBlock = select('core/block-editor').getSelectedBlockClientId();
+        const blockIndex = select(blockEditorStore).getBlockInsertionPoint();
+        const selectedBlock = select(blockEditorStore).getSelectedBlockClientId();
 
         for (let i = 1; i <= columns; i++) {
           const created = createBlock('core/heading', {
@@ -9079,15 +9082,15 @@ const settings = {
               avgWordsPerSentence: 6
             })[0].split('.')[0]
           });
-          dispatch('core/block-editor').insertBlocks(created, parseInt(blockIndex.index) + i - 1);
+          dispatch(blockEditorStore).insertBlocks(created, parseInt(blockIndex.index) + i - 1);
 
           if (typeof created !== 'undefined') {
             toSelect.push(created.clientId);
           }
         }
 
-        dispatch('core/block-editor').removeBlock(selectedBlock);
-        return dispatch('core/block-editor').multiSelect(toSelect[0], toSelect.reverse()[0]);
+        dispatch(blockEditorStore).removeBlock(selectedBlock);
+        return dispatch(blockEditorStore).multiSelect(toSelect[0], toSelect.reverse()[0]);
       }
 
     }))]
@@ -9782,10 +9785,10 @@ wp.domReady(registerWeCodeArtFormats);
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/formats/justify/controls.js":
-/*!******************************************************!*\
-  !*** ./src/js/gutenberg/formats/justify/controls.js ***!
-  \******************************************************/
+/***/ "./src/js/gutenberg/formats/justify/components/controls.js":
+/*!*****************************************************************!*\
+  !*** ./src/js/gutenberg/formats/justify/components/controls.js ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9812,38 +9815,55 @@ const {
     __
   },
   components: {
-    Icon
-  },
-  element: {
-    Component
+    Icon,
+    withSpokenMessages
   },
   compose: {
-    compose,
-    ifCondition
+    compose
   },
   data: {
-    select,
-    withDispatch,
-    withSelect
+    useSelect,
+    useDispatch
   },
   blockEditor: {
-    RichTextToolbarButton
+    RichTextToolbarButton,
+    store: blockEditorStore
   }
 } = wp;
+const allowedBlocks = ['core/paragraph', 'core/heading'];
 
-class JustifyControl extends Component {
-  render() {
+const Control = () => {
+  const {
+    blockId,
+    blockName,
+    isBlockJustified,
+    formatTypes = []
+  } = useSelect(select => {
+    const selectedBlock = select(blockEditorStore).getSelectedBlock();
+
+    if (selectedBlock) {
+      return {
+        blockId: selectedBlock.clientId,
+        blockName: selectedBlock.name,
+        isBlockJustified: 'justify' === get(selectedBlock, 'attributes.align'),
+        formatTypes: select('core/rich-text').getFormatTypes()
+      };
+    }
+
+    return {};
+  });
+  const checkFormats = formatTypes.filter(({
+    name
+  }) => name === 'wpcom/justify');
+
+  if (allowedBlocks.includes(blockName) && checkFormats.length === 0) {
     const {
-      blockId,
-      isBlockJustified,
       updateBlockAttributes
-    } = this.props;
+    } = useDispatch(blockEditorStore, [blockId]);
 
-    const onToggle = () => {
-      updateBlockAttributes(blockId, {
-        align: isBlockJustified ? null : 'justify'
-      });
-    };
+    const onToggle = () => updateBlockAttributes(blockId, {
+      align: isBlockJustified ? null : 'justify'
+    });
 
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichTextToolbarButton, {
       icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Icon, {
@@ -9855,32 +9875,10 @@ class JustifyControl extends Component {
     });
   }
 
-}
+  return null;
+};
 
-/* harmony default export */ __webpack_exports__["default"] = (compose(withSelect(() => {
-  const selectedBlock = select('core/block-editor').getSelectedBlock();
-
-  if (!selectedBlock) {
-    return {};
-  }
-
-  return {
-    blockId: selectedBlock.clientId,
-    blockName: selectedBlock.name,
-    isBlockJustified: 'justify' === get(selectedBlock, 'attributes.align'),
-    formatTypes: select('core/rich-text').getFormatTypes()
-  };
-}), withDispatch(dispatch => ({
-  updateBlockAttributes: dispatch('core/block-editor').updateBlockAttributes
-})), ifCondition(({
-  formatTypes,
-  blockName
-}) => {
-  const checkFormats = formatTypes.filter(({
-    name
-  }) => name === 'wpcom/justify');
-  return 'core/paragraph' === blockName && checkFormats.length === 0;
-}))(JustifyControl));
+/* harmony default export */ __webpack_exports__["default"] = (compose(withSpokenMessages)(Control));
 
 /***/ }),
 
@@ -9896,7 +9894,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "justify", function() { return justify; });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls */ "./src/js/gutenberg/formats/justify/controls.js");
+/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/formats/justify/components/controls.js");
 
 
 /**
@@ -9930,7 +9928,7 @@ const justify = {
     onChange,
     activeAttributes
   }) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_controls__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: name,
       isActive: isActive,
       value: value,
@@ -10097,6 +10095,9 @@ const {
   editPost: {
     PluginBlockSettingsMenuItem
   },
+  blockEditor: {
+    store: blockEditorStore
+  },
   compose: {
     compose
   },
@@ -10110,13 +10111,13 @@ const allowedBlocks = ['core/paragraph', 'core/heading'];
  * Render plugin
  */
 
-const Control = () => {
+const Controls = () => {
   const {
     blockId,
     blockName,
     blockContent
   } = useSelect(select => {
-    const selectedBlock = select('core/block-editor').getSelectedBlock();
+    const selectedBlock = select(blockEditorStore).getSelectedBlock();
 
     if (selectedBlock) {
       return {
@@ -10135,7 +10136,7 @@ const Control = () => {
     });
     const {
       updateBlockAttributes
-    } = useDispatch('core/block-editor', [blockId, record]);
+    } = useDispatch(blockEditorStore, [blockId, record]);
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PluginBlockSettingsMenuItem, {
       icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Icon, {
         icon: "editor-removeformatting",
@@ -10155,7 +10156,7 @@ const Control = () => {
   return null;
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (compose(withSpokenMessages)(Control));
+/* harmony default export */ __webpack_exports__["default"] = (compose(withSpokenMessages)(Controls));
 
 /***/ }),
 
@@ -10320,7 +10321,7 @@ const {
   }
 } = wp;
 
-const DisableTitle = () => {
+const Controls = () => {
   const {
     postType,
     postMeta
@@ -10332,7 +10333,7 @@ const DisableTitle = () => {
   });
 
   if (['wp_block', 'wp_template', 'wp_template_part'].includes(postType)) {
-    return false;
+    return null;
   }
 
   const {
@@ -10366,7 +10367,7 @@ const DisableTitle = () => {
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (compose(withSpokenMessages)(DisableTitle));
+/* harmony default export */ __webpack_exports__["default"] = (compose(withSpokenMessages)(Controls));
 
 /***/ }),
 

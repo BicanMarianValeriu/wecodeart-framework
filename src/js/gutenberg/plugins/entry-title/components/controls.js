@@ -10,7 +10,7 @@ const {
 	components: { withSpokenMessages, CheckboxControl }
 } = wp;
 
-const DisableTitle = () => {
+const Controls = () => {
 	const { postType, postMeta } = useSelect((select) => {
 		return {
 			postType: select('core/editor').getEditedPostAttribute('type'),
@@ -19,7 +19,7 @@ const DisableTitle = () => {
 	});
 
 	if (['wp_block', 'wp_template', 'wp_template_part'].includes(postType)) {
-		return false;
+		return null;
 	}
 
 	const { _wca_title_hidden: value = false } = postMeta || {};
@@ -50,4 +50,4 @@ const DisableTitle = () => {
 	);
 };
 
-export default compose(withSpokenMessages)(DisableTitle);
+export default compose(withSpokenMessages)(Controls);

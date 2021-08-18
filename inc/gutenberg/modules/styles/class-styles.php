@@ -172,8 +172,8 @@ class Styles implements Integration {
 	public function output_styles() {
 		if( ! empty( $this->styles ) ) {
 			$inline_css = $this->CSS::compress( $this->styles );
-			// Escaping is not really necessary since CSS processor does that already!
-			printf( '<style id="wecodeart-blocks-custom-css">%s</style>', wp_strip_all_tags( $inline_css ) );
+			// Escaping is not necessary since CSS processor does that already for each property!
+			printf( '<style id="wecodeart-blocks-custom-css">%s</style>', $inline_css );
 		}
 
 		if( empty( $this->filters ) ) return;

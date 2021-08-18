@@ -165,13 +165,5 @@ class Gutenberg {
 			};
 			add_theme_support( $feature, $value );
 		}
-
-		// Properly dequeue Blocks Styles - since setting support to false doesn't
-		if( get_prop( $support, 'wp-block-styles', 'remove' ) === 'remove' ) {
-			add_action( 'wp_print_styles', function() {
-				wp_dequeue_style( 'wp-block-library' ); 		// WordPress Core
-    			wp_dequeue_style( 'wp-block-library-theme' ); 	// WordPress Core
-			}, 100 );
-		}
 	}
 }
