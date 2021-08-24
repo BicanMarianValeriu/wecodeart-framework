@@ -8,37 +8,34 @@ const {
     components: { Button, TextControl, Icon, Dropdown },
 } = wp;
 
-const { fonts } = wecodeartFontsControl;
-
 const FontFamilySelector = ({
     selected,
     onFontChoice,
     inheritDefault,
-    systemFonts,
+    systemOnly,
+    fonts,
 }) => {
     const [search, setSearch] = useState('');
     const [loadUntil, setLoadUntil] = useState(20);
     const [delay, setDelay] = useState(true);
 
     const getFonts = () => {
-        const result = {};
+        const r = {};
 
         if (!search) {
             return fonts;
         }
 
-        Object.keys(fonts).map((key) => {
-            result[key] = fonts[key].filter((v) => v.family.toLowerCase().includes(search.toLowerCase()));
-        });
+        Object.keys(fonts).map((key) => r[key] = fonts[key].filter((v) => v.family.toLowerCase().includes(search.toLowerCase())));
 
-        return result;
+        return r;
     };
 
     const getFontList = () => {
         const groups = getFonts();
         const options = [];
 
-        if (!systemFonts) {
+        if (!systemOnly) {
             options.push(
                 <li key="default" className={'default-value ' + !selected ? 'selected' : ''}>
                     <FontPreviewLink
@@ -55,10 +52,6 @@ const FontFamilySelector = ({
         }
 
         Object.keys(groups).map((key) => {
-            if (systemFonts && key !== 'System') {
-                return null;
-            }
-
             groups[key].length > 0 && options.push(<li className="font-group-header" key={key}>{key}</li>);
 
             groups[key].map((font, index) => {
@@ -159,8 +152,10 @@ const FontFamilySelector = ({
 };
 
 FontFamilySelector.propTypes = {
-    onFontChoice: PropTypes.func.isRequired,
     inheritDefault: PropTypes.bool.isRequired,
+    systemOnly: PropTypes.bool.isRequired,
+    fonts: PropTypes.array.isRequired,
+    onFontChoice: PropTypes.func.isRequired,
     selected: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 

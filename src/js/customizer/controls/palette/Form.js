@@ -1,6 +1,6 @@
 import { plusCircleFilled } from '@wordpress/icons';
 
-const { camelCase, find } = lodash;
+const { camelCase } = lodash;
 
 const {
 	components: { Button },
@@ -28,7 +28,7 @@ const PaletteForm = ({ value, save, choices, setChoices, disabled }) => {
 		const { colors: fromColors } = choices.find(({ slug }) => slug === paletteFrom);
 
 		const palette = {
-			allowDeletion: true,
+			allowDeletion: 1,
 			label: newPaletteName,
 			slug: camelCase(newPaletteName),
 			colors: { ...fromColors },

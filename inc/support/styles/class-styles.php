@@ -29,6 +29,14 @@ final class Styles implements Integration {
 	use Singleton;
 
 	/**
+	 * Sanitize
+	 *
+	 * @since  	5.0.0
+	 * @var 	object
+	 */
+	protected 	$sanitize	= null;
+
+	/**
 	 * Get Conditionals
 	 *
 	 * @return void
@@ -43,6 +51,13 @@ final class Styles implements Integration {
 
 	/**
 	 * Send to Constructor
+	 */
+	public function init() {
+		$this->sanitize = Styles\Sanitize::get_instance();
+	}
+
+	/**
+	 * Register hooks
 	 */
 	public function register_hooks() {
 		do_action( 'wecodeart/support/styles/init', $this );
@@ -473,66 +488,5 @@ final class Styles implements Integration {
 		$color 	= $mode === 'hex' ? self::hex_rgba( $color ) : $color; 
 		preg_match_all( "/\(([^\]]*)\)/" , $color, $matches );
 		return intval( array_sum( explode( ',', current( $matches[1] ) ) ) );
-	}
-
-	/**
-	 * Sanitize rgba color.
-	 *
-	 * @since   5.0.0
-	 * @param 	string $value Color in rgba format.
-	 *
-	 * @return 	string
-	 */
-	public static function sanitize_rgba( string $value = '' ) {
-		$red   = 'rgba(0,0,0,0)';
-		$green = 'rgba(0,0,0,0)';
-		$blue  = 'rgba(0,0,0,0)';
-		$alpha = 'rgba(0,0,0,0)'; // If empty or an array return transparent
-		
-		if ( empty( $value ) || is_array( $value ) ) {
-			return '';
-		}
-
-		// By now we know the string is formatted as an rgba color so we need to further sanitize it.
-		$value = str_replace( ' ', '', $value );
-		sscanf( $value, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
-
-		return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
-	}
-	
-	/**
-	 * Sanitize hex color.
-	 *
-	 * @since   5.0.0
-	 * @param 	string $value Color in hex format.
-	 *
-	 * @return 	string
-	 */
-	public static function sanitize_hex( string $value = '' ) {
-		return sanitize_hex_color( $value );
-	}
-
-	/**
-	 * Sanitize color.
-	 *
-	 * @param 	string $value recieved value.
-	 *
-	 * @return 	string
-	 */
-	public static function sanitize_color( string $value = '' ) {
-		$is_var = ( strpos( $value, 'var' ) !== false );
-	
-		if ( $is_var ) {
-			return sanitize_text_field( $value );
-		}
-	
-		// Is this an rgba color or a hex?
-		$mode = ( false === strpos( $value, 'rgba' ) ) ? 'hex' : 'rgba';
-	
-		if ( 'rgba' === $mode ) {
-			return self::sanitize_rgba( $value );
-		} else {
-			return self::sanitize_hex( $value );
-		}
 	}
 }

@@ -40,10 +40,10 @@ const PaletteSelector = ({ value, save, choices, setChoices, inputAttrs }) => {
 
     return (
         <div className="wecodeart-palette-options">
-            {orderedPalettes.map(({ colors, allowDeletion, label, slug }) => {
+            {orderedPalettes.map(({ colors, allowDeletion = 0, label, slug }) => {
                 return (
                     <div key={slug} className="wecodeart-palette-options__item">
-                        {allowDeletion && (
+                        {allowDeletion !== 0 && (
                             <>
                                 <Button
                                     isLink

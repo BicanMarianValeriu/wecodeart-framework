@@ -89,6 +89,7 @@ class Styles implements Integration {
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 10, 2 );
 		add_action( 'wp_footer',					[ $this, 'output_styles'		], 10, 1 );
+		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 10, 1 );
 
 		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
@@ -195,6 +196,36 @@ class Styles implements Integration {
 			?></defs>
 		</svg>
 		<?php
+	}
+	
+	/**
+	 * Add link styles.
+	 *
+	 * @return 	string
+	 */
+	public function add_link_styles() {
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
+		$link_color = wecodeart_json( [ 'styles', 'elements', 'link', 'color', 'text' ], false );
+
+		// Is WP way of saved color
+		if( mb_strpos( $link_color, '|' ) !== false ) {
+			$slug = explode( '|', $link_color );
+			$slug = end( $slug );
+		// Or is a CSS variable
+		} elseif( mb_strpos( $link_color, '--' ) !== false ) {
+			$slug = explode( '--', $link_color );
+			$slug = str_replace( ')', '', end( $slug ) );
+		}
+		// Otherwhise is a normal Hex color
+		$link_color	= get_prop( current( wp_list_filter( $palette, [
+			'slug' => $slug,
+		] ) ), 'color', '#0088cc' );
+
+		// Darken the color
+		$link_color = $this->CSS::hex_brightness( $link_color, -25 );
+
+		wp_add_inline_style( 'global-styles', "a:hover{color:${link_color};}" );
 	}
 
 	/**

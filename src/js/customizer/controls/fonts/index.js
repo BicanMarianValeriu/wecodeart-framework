@@ -5,7 +5,7 @@ import FontWeightsSelector from './FontWeightsSelector';
 const { useState } = wp.element;
 
 const TypefaceComponent = ({ control }) => {
-	const { setting, params } = control;
+	const { setting, params: { label, description, fonts = [], inputAttrs = false } } = control;
 
 	const [fontFamily, setFontFamily] = useState(setting.get()['font-family']);
 	const [fontWeights, setFontWeights] = useState(setting.get()['font-weight']);
@@ -13,11 +13,13 @@ const TypefaceComponent = ({ control }) => {
 
 	const defaultParams = {
 		inheritDefault: false,
+		systemOnly: false,
+		fonts,
 	};
 
-	const controlParams = params.inputAttrs ? {
+	const controlParams = inputAttrs ? {
 		...defaultParams,
-		...JSON.parse(params.inputAttrs),
+		...JSON.parse(inputAttrs),
 	} : defaultParams;
 
 	const onChoseFont = (fontFamily) => {
@@ -33,17 +35,19 @@ const TypefaceComponent = ({ control }) => {
 
 	return (
 		<>
-			{params?.label && (<span className="customize-control-title">{params.label}</span>)}
-			{params?.description && (<span className="customize-control-description">{params.description}</span>)}
+			{label && (<span className="customize-control-title">{label}</span>)}
+			{description && (<span className="customize-control-description">{description}</span>)}
 			<div className="wca-customizer-control wca-customizer-control--typeface">
 				<FontFamilySelector
+					fonts={controlParams.fonts}
 					selected={fontFamily}
 					onFontChoice={onChoseFont}
 					inheritDefault={controlParams.inheritDefault}
-					systemFonts={controlParams.system}
+					systemOnly={controlParams.systemOnly}
 				/>
 				{fontFamily && (
 					<FontWeightsSelector
+						fonts={controlParams.fonts}
 						font={fontFamily}
 						selected={fontWeights}
 						onWeightChoice={onChoseWeights}

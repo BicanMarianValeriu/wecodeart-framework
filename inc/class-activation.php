@@ -33,8 +33,9 @@ class Activation {
 	 *
 	 * @var		string
 	 */
-	const REQUIRED_WP = '5.5';
-	const REQUIRED_PHP = '7.0';
+	const REQUIRED_WP 	= '5.5';
+	const REQUIRED_GB 	= '11.3.0';
+	const REQUIRED_PHP 	= '7.0';
 
 	/**
 	 * Requirements
@@ -62,29 +63,15 @@ class Activation {
 	
 	/**
 	 * Send to Constructor
-	 *
-	 * @since 3.6.2
 	 */
 	public function init() {
 		$this->set_i18n();
 		$this->set_requirements();
-		$this->compare_requirements();
+		$this->set_deactivation_hooks();
 
-		if( $this->is_ok() === false ) {
-			// Init notifications system on Activation Check.
-			Notifications::get_instance();
-
-			// Add default error notices into admin, prevent customizer load and redirect notice.
-			add_action( 'after_switch_theme', 	[ $this, 'after_switch_theme' ] );
-			add_action( 'load-customize.php', 	[ $this, 'customizer_notice' ] );
-			add_action( 'template_redirect', 	[ $this, 'redirect_notice' ] );
-
-			// Add Our Theme Hook.
-			do_action( 'wecodeart/hook/activation/failed' );
-			return;
-		}
-	
-		add_action( 'after_switch_theme', [ $this, 'redirect_to_admin' ] );
+		add_action( 'after_switch_theme', 	[ $this, 'after_switch_theme' 	] );
+		add_action( 'load-customize.php', 	[ $this, 'load_customize' 		] );
+		add_action( 'template_redirect', 	[ $this, 'template_redirect' 	] );
 	}
 
 	/**
@@ -97,7 +84,7 @@ class Activation {
 		if( ! $this->requirements ) return true;
 
 		foreach( $this->requirements as $val ) {
-			if( $val['failed'] === true ) {
+			if( isset( $val['failed'] ) && $val['failed'] === true ) {
 				$this->status = false;
 				break;
 			}
@@ -150,20 +137,30 @@ class Activation {
 					sprintf( '<a href="https://wordpress.org/support/upgrade-php/">%s</a>', esc_html__( 'upgrade PHP', 'wecodeart' ) )
 				),
 			],
+			'gutenberg'	=> [
+				'plugin'	=> true,
+				'required' 	=> 'gutenberg/gutenberg.php',
+				'i18n'      => sprintf( 
+					__( 'WeCodeArt Framework requires Gutenberg version %1$s or higher. Please install Gutenberg to use WeCodeArt Framework.', 'wecodeart' ),
+					self::REQUIRED_GB
+				), 
+			],
 		] );	
 	}
 
 	/**
-	 * Compare Requirements
+	 * Requirements deactivated?
 	 *
-	 * @since 	3.5
-	 * @version	4.1.5
+	 * @since 	5.0.0
+	 * @version	5.0.0
 	 */
-	public function compare_requirements() {
+	public function set_deactivation_hooks() {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
-			if( isset( $val['installed'] ) && isset( $val['required'] ) ) {
-				$this->requirements[$key]['failed'] = version_compare( $val['installed'], $val['required'], '<=' );
+			if( isset( $val['plugin'] ) && (bool) $val['plugin'] === true ) {
+				// Simply switch theme on plugin deactivation, beautiful!!!
+				register_deactivation_hook( $val['required'], [ $this, 'switch_theme' ] );
+				continue;
 			}
 		}
 	}
@@ -172,21 +169,113 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	3.9.5
+	 * @version	5.0.0
 	 */
 	public function after_switch_theme() {
+		// Compare if requirements are met!
+		$this->compare_requirements();
+
+		// If not, why bother to load the theme?
+		if( $this->is_ok() === false ) {
+			// Switch to old theme
+			$this->switch_theme();
+
+			// Show what's failed validation
+			$this->admin_notice();
+
+			do_action( 'wecodeart/hook/activation/failed' );
+
+			return;
+		}
+
+		// Everything is good at this point, redirect to admin!
+		$this->redirect_to_admin();
+	}
+
+		/**
+	 * Show an error notice box on WP Customizer
+	 *
+	 * @since 	1.8
+	 * @version	5.0.0
+	 */
+	public function load_customize() {
+		if( ! $this->requirements ) return;
+
+		$this->compare_requirements();
+
+		foreach( $this->requirements as $key => $val ) {
+			if( isset( $val['failed'] ) && $val['failed'] === true ) {
+				wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
+				break;
+			}
+		}
+	}
+
+	/**
+	 * Prevents the Theme Preview from being loaded.
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 */
+	public function template_redirect() {
+		if( ! $this->requirements ) return;
+
+		if( isset( $_GET['preview'] ) ) {
+			$this->compare_requirements();
+
+			foreach( $this->requirements as $key => $val ) {
+				if( isset( $val['failed'] ) && $val['failed'] === true ) {
+					wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
+					break;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Compare Requirements
+	 *
+	 * @since 	3.5
+	 * @version	5.0.0
+	 */
+	public function compare_requirements() {
+		if( ! $this->requirements ) return;
+		foreach( $this->requirements as $key => $val ) {
+			if( isset( $val['plugin'] ) && (bool) $val['plugin'] === true ) {
+				// If we have plugin, activate it and move on!
+				if( $this->check_plugin_installed( $val['required'] ) ) {
+					\activate_plugin( $val['required'] );
+					continue;
+				}
+				// If we dont, simply return true on the failed key, it means we dont have it
+				$this->requirements[$key]['failed'] = \is_plugin_active( $val['required'] ) === false;
+				continue;
+			}
+
+			if( isset( $val['installed'] ) && isset( $val['required'] ) ) {
+				$this->requirements[$key]['failed'] = \version_compare( $val['installed'], $val['required'], '<=' );
+			}
+		}
+	}
+
+	/**
+	 * Switch to old theme
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 */
+	public function switch_theme() {
 		unset( $_GET['activated'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		$old_theme = wp_get_theme( get_option( 'theme_switched' ) );
-		if ( $old_theme->exists() && strpos( $old_theme->get_stylesheet(), 'wecodeart' ) === false ) {
+		if ( $old_theme->exists() && strpos( $old_theme->get_stylesheet(), 'am2' ) === false ) {
 			$fallback_stylesheet = $old_theme->get_stylesheet();
 		} else {
 			$fallback_stylesheet = WP_DEFAULT_THEME;
 		}
 	
+		// Switch to old theme
 		switch_theme( $fallback_stylesheet );
-
-		$this->admin_notice(); 
 	}
 
 	/**
@@ -198,40 +287,12 @@ class Activation {
 	public function admin_notice() {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
-			if( $val['failed'] === true ) {
+			if( isset( $val['failed'] ) && $val['failed'] === true ) {
 				$notification = new Notification( wpautop( $val['i18n'] ), [ 'type' => Notification::ERROR ] );
 			
 				Notifications::get_instance()->add_notification( $notification );
 			}
 		}	
-	}
-
-	/**
-	 * Show an error notice box on WP Customizer
-	 *
-	 * @since 	1.8
-	 * @version	3.9.5
-	 */
-	public function customizer_notice() {
-		if( ! $this->requirements ) return;
-		foreach( $this->requirements as $key => $val ) {
-			if( $val['failed'] === true ) {
-				wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
-				break;
-			}
-		}
-	}
-
-	/**
-	 * Prevents the Theme Preview from being loaded.
-	 *
-	 * @since 	1.8
-	 * @version	3.5
-	 */
-	public function redirect_notice() {
-		if( isset( $_GET['preview'] ) ) {
-			wp_die( $this->messages['customizer'] );
-		}
 	}
 	
 	/**
@@ -242,5 +303,21 @@ class Activation {
 	 */
 	public function redirect_to_admin() {
 		wp_redirect( esc_url_raw( add_query_arg( 'page', 'wecodeart', admin_url( 'themes.php' ) ) ) );
+	}
+
+	/**
+	 * Check if plugin is installed by getting all plugins from the plugins dir
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 *
+	 * @param 	$slug
+	 *
+	 * @return 	bool
+	 */
+	public function check_plugin_installed( $slug ) {
+		$installed = get_plugins();
+
+		return array_key_exists( $slug, $installed ) || in_array( $slug, $installed, true );
 	}
 }

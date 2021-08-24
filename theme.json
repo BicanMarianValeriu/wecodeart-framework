@@ -104,7 +104,7 @@
 				{
 					"label": "Base",
 					"slug": "base",
-					"allowDeletion": 1,
+					"allowDeletion": 0,
 					"colors": {
 						"background": "#ffffff",
 						"text": "#343a40",
@@ -115,7 +115,7 @@
 				{
 					"label": "Dark Mode",
 					"slug": "dark",
-					"allowDeletion": 1,
+					"allowDeletion": 0,
 					"colors": {
 						"background": "#343a40",
 						"text": "#ffffff",

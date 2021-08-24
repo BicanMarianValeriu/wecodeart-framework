@@ -62,14 +62,6 @@ class Fonts extends \WP_Customize_Control {
             true
 		);
 
-		wp_localize_script( $this->make_handle(), 'wecodeartFontsControl', [
-			'typekit' 	=> [],
-			'fonts' 	=> [
-				'System' => The_Fonts::get_standard_fonts(),
-				'Google' => The_Fonts::get_google_fonts(),
-			]
-		] );
-
 		wp_enqueue_style(
 			$this->make_handle( 'fonts' ),
 			add_query_arg( [
@@ -88,6 +80,10 @@ class Fonts extends \WP_Customize_Control {
 	public function to_json() {
 		parent::to_json();
 		$this->json['default'] 		= $this->setting->default;
-		$this->json['inputAttrs'] 	= wp_json_encode( $this->input_attrs );
+		$this->json['inputAttrs'] 	= wp_json_encode( $this->input_attrs ?: [] );
+		$this->json['fonts'] 		= [
+			'System' => The_Fonts::get_standard_fonts(),
+			'Google' => The_Fonts::get_google_fonts(),
+		];
 	}
 }

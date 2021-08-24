@@ -63,15 +63,8 @@ class WPSeo implements Integration {
 
 	/**
 	 * Send to Constructor
-	 *
-	 * @since 	3.6.2
-	 * @version	4.1.5
 	 */
 	public function register_hooks() {
-		// WP Title
-		remove_action( 'wp_head', '_wp_render_title_tag', 1 );
-		remove_action( 'wp_head', '_block_template_render_title_tag', 1 );
-
 		// Notices
 		add_action( 'admin_notices',	[ $this, 'manage_notice' ] );
 

@@ -5,13 +5,14 @@ const {
     components: { SelectControl }
 } = wp;
 
-const { fonts: { Google } } = wecodeartFontsControl;
-
 const FontWeightsSelector = ({
-    font,
-    selected,
     onWeightChoice,
+    selected,
+    fonts,
+    font,
 }) => {
+    const { Google = [] } = fonts || [];
+
     const getWeightsList = () => {
         let fontWeigths = Google.filter(item => item.family.toLowerCase() === font.toLowerCase());
         if (fontWeigths.length) fontWeigths = fontWeigths.pop()?.variants;
@@ -44,8 +45,9 @@ const FontWeightsSelector = ({
 
 FontWeightsSelector.propTypes = {
     onWeightChoice: PropTypes.func.isRequired,
-    font: PropTypes.string.isRequired,
     selected: PropTypes.array.isRequired,
+    fonts: PropTypes.array.isRequired,
+    font: PropTypes.string.isRequired,
 };
 
 export default FontWeightsSelector;

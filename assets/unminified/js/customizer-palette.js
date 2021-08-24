@@ -8937,8 +8937,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const {
-  camelCase,
-  find
+  camelCase
 } = lodash;
 const {
   components: {
@@ -8986,7 +8985,7 @@ const PaletteForm = ({
       slug
     }) => slug === paletteFrom);
     const palette = {
-      allowDeletion: true,
+      allowDeletion: 1,
       label: newPaletteName,
       slug: camelCase(newPaletteName),
       colors: { ...fromColors
@@ -9137,14 +9136,14 @@ const PaletteSelector = ({
     className: "wecodeart-palette-options"
   }, orderedPalettes.map(({
     colors,
-    allowDeletion,
+    allowDeletion = 0,
     label,
     slug
   }) => {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       key: slug,
       className: "wecodeart-palette-options__item"
-    }, allowDeletion && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+    }, allowDeletion !== 0 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
       isLink: true,
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["trash"],
       iconSize: 21,
