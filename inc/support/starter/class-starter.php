@@ -95,13 +95,32 @@ class Starter implements Integration {
 	 */
 	public function get() {
 		$content = [
+			'attachments' => [
+				'logo' => [
+					'post_title' 	=> _x( 'Logo', 'Theme starter content', 'wecodeart' ),
+					'post_excerpt' 	=> 'WeCodeArt',
+					'file' 			=> 'assets/images/logo.png',
+				],
+			],
 			'options'     => [
 				'page_on_front'  => '{{' . self::HOME_SLUG . '}}',
 				'page_for_posts' => '{{' . self::BLOG_SLUG . '}}',
 				'show_on_front'  => 'page',
 				'blogname'       => 'WeCodeArt Framework',
 			],
-			'theme_mods'  => wecodeart_config( 'customizer' ),
+			'nav_menus' => [
+				'primary' => [
+					'name' 	=> esc_html__( 'Primary Menu', 'wecodeart' ),
+					'items' => [
+						'page_home',
+						'page_about',
+						'page_blog',
+					],
+				],
+			],
+			'theme_mods'  => wp_parse_args( [
+				'custom_logo' => '{{logo}}',
+			], wecodeart_config( 'customizer' ) ),
 			'posts'       => [
 				self::HOME_SLUG  => wp_parse_args( [
 					'post_name'  => self::HOME_SLUG,

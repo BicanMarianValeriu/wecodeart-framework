@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-25 14:32+0000\n"
+"POT-Creation-Date: 2021-08-25 17:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -68,6 +68,14 @@ msgstr ""
 
 #: inc/core/entry/class-comments.php:60
 msgid "add one"
+msgstr ""
+
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:79
+msgid "Adjust the order of content modules on product page."
+msgstr ""
+
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:63
+msgid "Adjust the order of content modules on shop page."
 msgstr ""
 
 #: inc/support/plugins/anr/class-anr.php:91
@@ -176,6 +184,10 @@ msgstr[1] ""
 msgid ""
 "Contact Form 7 support is enabled. Enjoy properly styled forms based on your "
 "theme!"
+msgstr ""
+
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:46
+msgid "Content"
 msgstr ""
 
 #: inc/admin/customizer/configs/class-configs.php:82
@@ -386,12 +398,20 @@ msgstr ""
 msgid "Posted on "
 msgstr ""
 
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:47
+msgid "Primary"
+msgstr ""
+
 #: inc/admin/customizer/configs/class-typography.php:41
 msgid "Primary Font"
 msgstr ""
 
 #: inc/support/class-support.php:75
 msgid "Primary Navigation"
+msgstr ""
+
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:78
+msgid "Product page modules"
 msgstr ""
 
 #. %1$s expands to the request method
@@ -441,7 +461,11 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:104
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:62
+msgid "Shop page modules"
+msgstr ""
+
+#: inc/support/plugins/woocommerce/class-woocommerce.php:100
 msgid "Shop Sidebar"
 msgstr ""
 
@@ -587,7 +611,7 @@ msgid ""
 "arguments with new ones."
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:106
+#: inc/support/plugins/woocommerce/class-woocommerce.php:102
 msgid "Widgets in this area will be shown on all shop pages."
 msgstr ""
 

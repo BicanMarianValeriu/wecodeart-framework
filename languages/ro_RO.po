@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-08-25 14:35+0000\n"
+"PO-Revision-Date: 2021-08-25 17:40+0000\n"
 "Last-Translator: Bican\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -73,6 +73,14 @@ msgstr "Adaugă un meniu"
 #: inc/core/entry/class-comments.php:60
 msgid "add one"
 msgstr "adaugă unul"
+
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:79
+msgid "Adjust the order of content modules on product page."
+msgstr "Ajustați ordinea modulelor de conținut de pe pagina produsului."
+
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:63
+msgid "Adjust the order of content modules on shop page."
+msgstr "Ajustați ordinea modulelor de conținut de pe pagina magazinului."
 
 #: inc/support/plugins/anr/class-anr.php:91
 msgid "ANR Captcha support is enabled!"
@@ -187,6 +195,10 @@ msgid ""
 msgstr ""
 "Asistența pentru Formularul de contact 7 este activată. Bucurați-vă de forme "
 "stilate corespunzător bazat pe tema dvs.!"
+
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:46
+msgid "Content"
+msgstr "Conţinut"
 
 #: inc/admin/customizer/configs/class-configs.php:82
 msgid "Content Settings"
@@ -398,6 +410,10 @@ msgstr "Postat in"
 msgid "Posted on "
 msgstr "Postat pe"
 
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:47
+msgid "Primary"
+msgstr "Bara laterală primară"
+
 #: inc/admin/customizer/configs/class-typography.php:41
 msgid "Primary Font"
 msgstr "Font primar"
@@ -405,6 +421,10 @@ msgstr "Font primar"
 #: inc/support/class-support.php:75
 msgid "Primary Navigation"
 msgstr "Navigație principală"
+
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:78
+msgid "Product page modules"
+msgstr "Modulele paginii produsului"
 
 #. %1$s expands to the request method
 #: inc/admin/request/class-request.php:103
@@ -455,7 +475,11 @@ msgstr ""
 msgid "Send"
 msgstr "Trimite"
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:104
+#: inc/support/plugins/woocommerce/customizer/class-customizer.php:62
+msgid "Shop page modules"
+msgstr "Modulele paginii magazinului"
+
+#: inc/support/plugins/woocommerce/class-woocommerce.php:100
 msgid "Shop Sidebar"
 msgstr "Bara laterală magazin"
 
@@ -620,7 +644,7 @@ msgstr ""
 "Când extindeți %s, trebuie să creați o metodă `register`, combinând "
 "argumentele existente cu cele noi."
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:106
+#: inc/support/plugins/woocommerce/class-woocommerce.php:102
 msgid "Widgets in this area will be shown on all shop pages."
 msgstr ""
 "Widgeturile din această zonă vor fi afișate pe toate paginile magazinului."
