@@ -1,11 +1,8 @@
-// Boostrap
-import 'bootstrap/js/dist/collapse';
+// Boostrap - navigation will be used 99.999% of the times so we include by default!
 import 'bootstrap/js/dist/offcanvas';
 import 'bootstrap/js/dist/dropdown';
-import Tooltip from 'bootstrap/js/dist/tooltip';
-import Popover from 'bootstrap/js/dist/popover';
 
-// FAQ SVG
+// FA SVG
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 
 // WeCodeArt
@@ -81,16 +78,6 @@ function filterLog(route, func, args) {
 				window.onscroll = handleDocumentScrolled;
 			},
 			complete: () => {
-				const { fn: { getOptions } } = wecodeart;
-				// We use a slightly different/cleanner approach for tooltips/popovers
-				// Tooltips
-				const customTooltips = document.querySelectorAll('[data-toggle="tooltip"]');
-				[...customTooltips].map((el) => new Tooltip(el, getOptions(el.dataset.options)));
-
-				// PopOvers
-				const customPopovers = document.querySelectorAll('[data-toggle="popover"]');
-				[...customPopovers].map((el) => new Popover(el, getOptions(el.dataset.options)));
-
 				// FA Watch
 				dom.watch();
 
@@ -103,19 +90,13 @@ function filterLog(route, func, args) {
 							e.stopPropagation();
 						}
 						form.classList.add('was-validated');
+						const timeout = setTimeout(() => {
+							form.classList.remove('was-validated');
+							clearTimeout(timeout);
+						}, 5000);
 					}, false);
 				});
 			},
 		},
-		home: {
-			init: () => { },
-			lazy: {
-				id: ['tooltips'],
-				callback: () => {
-					console.log('From Lazy');
-				}
-			},
-			extends: ['page-id-12','page']
-		}
 	};
 }).apply(this, [window.wecodeart]);

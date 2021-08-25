@@ -25,7 +25,6 @@ export default (function (wecodeart) {
 					form.addEventListener('wpcf7invalid', ({ detail }) => {
 						const { apiResponse: { invalid_fields } } = detail;
 						form.classList.add('was-validated');
-						console.log(invalid_fields);
 						invalid_fields.map(({ into, error_id }) => {
 							// Add invalid fields class
 							const fields = form.querySelectorAll(`${into} .form-control, ${into} fieldset`);

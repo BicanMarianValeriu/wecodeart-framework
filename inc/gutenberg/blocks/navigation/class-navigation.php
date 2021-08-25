@@ -96,8 +96,7 @@ class Navigation extends Dynamic {
 	
 			$sorted_items 	= $this->sort_menu( $menu_items );
 			$parsed_blocks 	= $this->parse_menu( $sorted_items[0], $sorted_items );
-			
-			$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
+			$inner_blocks 	= new \WP_Block_List( $parsed_blocks, $attributes );
 		}
 		
 		if ( empty( $inner_blocks ) ) {
@@ -106,40 +105,9 @@ class Navigation extends Dynamic {
 
 		$colors     = $this->css_colors( $attributes );
 		$font_sizes = $this->css_font_sizes( $attributes );
+		$background = self::get_background( $attributes );
+
 		$classes 	= [ 'wp-block-navigation', 'navbar' ];
-		
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
-		$background = get_prop( $attributes, [ 'style', 'color', 'background' ] );
-
-		// If not custom, get named
-		if( $background === null ) {
-			$background = get_prop( $attributes, 'backgroundColor' );
-			$background	= get_prop( current( wp_list_filter( $palette, [
-				'slug' => $background,
-			] ) ), 'color', false );
-		}
-		
-		// If not named, get body
-		if( $background === false ) {
-			$styles 	= wecodeart_json( [ 'styles', 'color', 'background' ], false );
-			if( strpos( $styles, '#' ) === 0 ) {
-				$background = $styles;
-			} else {
-				if( mb_strpos( $styles, '|' ) !== false ) {
-					$slug = explode( '|', $styles );
-					$slug = end( $slug );
-				} elseif( mb_strpos( $styles, '--' ) !== false ) {
-					$slug = explode( '--', $styles );
-					$slug = str_replace( ')', '', end( $slug ) );
-				}
-				$background	= get_prop( current( wp_list_filter( $palette, [
-					'slug' => $slug,
-				] ) ), 'color', '#ffffff' );
-			}
-		}
-
-		
 		$classes[] 	= ( Styles::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
 
 		if( get_prop( $attributes, 'orientation', false ) === 'horizontal' ) {
@@ -305,6 +273,50 @@ class Navigation extends Dynamic {
 		}
 
 		return $blocks;
+	}
+
+	/**
+	 * Get Background.
+	 *
+	 * @since 	5.0.0
+	 * @param 	array 	$context	Block Context
+	 * 
+	 * @return 	string
+	 */
+	public static function get_background( $context ) {
+		// Background Lightness
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
+		$background = get_prop( $context, [ 'style', 'color', 'background' ] );
+
+		// If not custom, get named
+		if( $background === null ) {
+			$background = get_prop( $context, 'backgroundColor', $background );
+			$background	= get_prop( current( wp_list_filter( $palette, [
+				'slug' => $background,
+			] ) ), 'color', false );
+		}
+
+		// If not named, get body
+		if( $background === false ) {
+			$styles 	= wecodeart_json( [ 'styles', 'color', 'background' ], false );
+			if( strpos( $styles, '#' ) === 0 ) {
+				$background = $styles;
+			} else {
+				if( mb_strpos( $styles, '|' ) !== false ) {
+					$slug = explode( '|', $styles );
+					$slug = end( $slug );
+				} elseif( mb_strpos( $styles, '--' ) !== false ) {
+					$slug = explode( '--', $styles );
+					$slug = str_replace( ')', '', end( $slug ) );
+				}
+				$background	= get_prop( current( wp_list_filter( $palette, [
+					'slug' => $slug,
+				] ) ), 'color', '#ffffff' );
+			}
+		}
+
+		return $background;
 	}
 
 	/**

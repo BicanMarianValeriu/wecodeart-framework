@@ -109,12 +109,12 @@ class Search extends Dynamic {
 			// Add search input
 			wecodeart_input( 'search', [
 				'attrs' => [
-					'id' 		=> $input_id,
-					'name'		=> 's',
-					'class' 	=> $this->get_classname( $attributes, 'field' ),
-					'value'		=> get_search_query(),
-					'placeholder' => get_prop( $attributes, 'placeholder', false ),
-					'required' 	=> true,
+					'id' 			=> $input_id,
+					'name'			=> 's',
+					'class' 		=> $this->get_classname( $attributes, 'field' ),
+					'value'			=> get_search_query(),
+					'placeholder' 	=> get_prop( $attributes, 'placeholder', false ),
+					'required' 		=> true,
 				]
 			] );
 

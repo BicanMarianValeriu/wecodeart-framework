@@ -20,6 +20,7 @@ use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Support\Styles;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use WeCodeArt\Gutenberg\Blocks\Navigation;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -110,8 +111,8 @@ class Link extends Dynamic {
 			$classes[] = 'dropdown';
 		}
 
-		$link_classes 	= array();
-		$icon_classes	= array();
+		$link_classes 	= [];
+		$icon_classes	= [];
 
 		// Get an updated $classes array without linkmod or icon classes.
 		$classes = $this->pluck_special_classes( $classes, $link_classes, $icon_classes );
@@ -135,7 +136,7 @@ class Link extends Dynamic {
 			$linkmod_type 	= $this->get_linkmod_type( $link_classes );
 			$attrs 			= $this->update_attrs_for_linkmod_type( [
 				'class' 	=> join( ' ', $classes ),
-				'href'		=> $has_submenu ? '#' : get_prop( $attributes, 'url', '#' ),
+				'href'		=> $has_submenu ? 'javascript:void(0);' : get_prop( $attributes, 'url', '#' ),
 				'target' 	=> get_prop( $attributes, 'opensInNewTab' ) === true ? '_blank' : null,
 				'rel'		=> get_prop( $attributes, 'rel', get_prop( $attributes, 'nofollow', null ) === 'nofollow' ? 'nofollow' : null ),
 				'title'		=> get_prop( $attributes, 'title', null ),
@@ -190,44 +191,14 @@ class Link extends Dynamic {
 
 			// Nav Submenu
 			if ( $has_submenu ) {
-				$classes 	= [ 'wp-block-navigation-link__container', 'dropdown-menu' ];
 				$inner_html = '';
 				foreach ( $block->inner_blocks as $inner_block ) $inner_html .= $inner_block->render();
 				$inner_html = str_replace( 'nav-item ', '', $inner_html );
 				$inner_html = str_replace( 'nav-link', 'dropdown-item', $inner_html );
-
-				// Background Lightness
-				$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
-				$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
-				$background = get_prop( $block->context, [ 'style', 'color', 'background' ] );
-
-				// If not custom, get named
-				if( $background === null ) {
-					$background = get_prop( $block->context, 'backgroundColor', $background );
-					$background	= get_prop( current( wp_list_filter( $palette, [
-						'slug' => $background,
-					] ) ), 'color', false );
-				}
-
-				// If not named, get body
-				if( $background === false ) {
-					$styles 	= wecodeart_json( [ 'styles', 'color', 'background' ], false );
-					if( strpos( $styles, '#' ) === 0 ) {
-						$background = $styles;
-					} else {
-						if( mb_strpos( $styles, '|' ) !== false ) {
-							$slug = explode( '|', $styles );
-							$slug = end( $slug );
-						} elseif( mb_strpos( $styles, '--' ) !== false ) {
-							$slug = explode( '--', $styles );
-							$slug = str_replace( ')', '', end( $slug ) );
-						}
-						$background	= get_prop( current( wp_list_filter( $palette, [
-							'slug' => $slug,
-						] ) ), 'color', '#ffffff' );
-					}
-				}
 				
+				$background = Navigation::get_background( $block->context );
+				
+				$classes 	= [ 'wp-block-navigation-link__container', 'dropdown-menu' ];
 				if( ( Styles::color_lightness( $background ) < 380 ) ) {
 					$classes[] = 'dropdown-menu-dark';
 				}
