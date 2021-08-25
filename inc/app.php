@@ -73,6 +73,7 @@ return [
             'font-family'   => 'Open Sans',
             'font-weight'   => [ '700' ]
         ],
+        'general-performance-head'      => 0,
         // Footer
         'footer-copyright-text'             => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
         'footer-design-attribution_bg'      => '',

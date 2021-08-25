@@ -32,81 +32,88 @@ class Configs extends Config {
 	 * @return 	array 
 	 */
 	public function register( $configurations, $wp_customize ) {
-		$configs = array(
+		$configs = [
 			/**
 			 * Colors & Typography
 			 */
-			array(
+			[
 				'name'     => 'general',
 				'type'     => 'panel',
 				'priority' => 0,
 				'title'    => esc_html__( 'General Settings', 'wecodeart' ) 
-			),
-			array(
+			],
+			[
 				'name'     => 'general-typography',
 				'type'     => 'section',
 				'priority' => 10,
-				'title'    => esc_html__( 'Typography', 'wecodeart' ),
+				'title'    => esc_html__( 'Typography Settings', 'wecodeart' ),
 				'panel'    => 'general',
-			),
-			array(
+			],
+			[
 				'name'     => 'general-design',
 				'type'     => 'section',
 				'priority' => 20,
 				'title'    => esc_html__( 'Design Settings', 'wecodeart' ),
 				'panel'    => 'general',
-			),
+			],
+			[
+				'name'     => 'general-performance',
+				'type'     => 'section',
+				'priority' => 30,
+				'title'    => esc_html__( 'Performance Settings', 'wecodeart' ),
+				'panel'    => 'general',
+			],
 			/**
 			 * Header 
 			 */
-			array(
+			[
 				'name'     => 'header',
 				'type'     => 'panel',
 				'priority' => 5,
 				'title'    => esc_html__( 'Header Settings', 'wecodeart' ) 
-			),
+			],
 			/**
 			 * Content
 			 */
-			array(
+			[
 				'name'     => 'content',
 				'type'     => 'panel',
 				'priority' => 10,
 				'title'    => esc_html__( 'Content Settings', 'wecodeart' ) 
-			),
+			],
 			/**
 			 * Footer
 			 */
-			array(
+			[
 				'name'     => 'footer',
 				'type'     => 'panel',
 				'priority' => 15,
 				'title'    => esc_html__( 'Footer Settings', 'wecodeart' ) 
-			),
-			array(
+			],
+			[
 				'name'     => 'footer-copyright',
 				'type'     => 'section',
 				'priority' => 5,
 				'title'    => esc_html__( 'Copyright', 'wecodeart' ),
 				'panel'    => 'footer',
-			),
-			array(
+			],
+			[
 				'name'     => 'footer-design',
 				'type'     => 'section',
 				'priority' => 10,
 				'title'    => esc_html__( 'Design', 'wecodeart' ),
 				'panel'    => 'footer',
-			),
+			],
 			/**
 			 * Extensions
 			 */
-			array(
+			[
 				'name'     => 'extensions',
 				'type'     => 'panel',
 				'priority' => 25,
 				'title'    => esc_html__( 'Extensions', 'wecodeart' ) 
-			),
-		);
+			],
+		];
 
 		return array_merge( $configurations, $configs );
 	}

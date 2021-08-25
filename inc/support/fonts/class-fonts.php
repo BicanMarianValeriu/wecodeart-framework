@@ -71,7 +71,7 @@ final class Fonts implements Integration {
 	public static function get_all_fonts() {
 		$standard_fonts = self::get_standard_fonts();
 		$google_fonts   = self::get_google_fonts();
-		return apply_filters( 'wecodeart/filter/fonts', array_merge( $standard_fonts, $google_fonts ) );
+		return apply_filters( 'wecodeart/filter/support/fonts', array_merge( $standard_fonts, $google_fonts ) );
 	}
 
 	/**

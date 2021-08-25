@@ -72,6 +72,7 @@ class Customizer {
 		new Configs\Footer();
 		new Configs\Design();
 		new Configs\Typography();
+		new Configs\Performance();
 	}
 	
 	/**
