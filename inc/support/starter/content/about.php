@@ -70,8 +70,8 @@ return [
 	<!-- wp:heading {"textAlign":"center","level":4,"customCSSId":"da39c48e-3839-41d4-8029-7c2546eaf5fa"} -->
 	<h4 class="has-text-align-center">Bican Marian</h4>
 	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center","fontSize":"large","customCSSId":"a1a8e84e-0f59-41f4-ae79-6923bc7f03af"} -->
-	<p class="has-text-align-center has-large-font-size">CEO</p>
+	<!-- wp:paragraph {"align":"center","customCSSId":"a1a8e84e-0f59-41f4-ae79-6923bc7f03af"} -->
+	<p class="has-text-align-center">CEO</p>
 	<!-- /wp:paragraph -->
 	<!-- wp:social-links {"iconColor":"white","iconColorValue":"#ffffff","openInNewTab":true,"size":"has-normal-icon-size","align":"center","className":"is-style-default","customCSSId":"3d2411e1-7400-4621-8e70-507426783cd0"} -->
 	<ul class="wp-block-social-links aligncenter has-normal-icon-size has-icon-color items-justified-center is-style-default"><!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook","customCSSId":"677cae64-5418-4753-84bc-ee5e03bbf12a"} /-->
@@ -86,8 +86,8 @@ return [
 	<!-- wp:heading {"textAlign":"center","level":4,"customCSSId":"9b5e7d33-ac57-4a22-8ff2-5c8a33a41632"} -->
 	<h4 class="has-text-align-center">Mark Smith</h4>
 	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center","fontSize":"large","customCSSId":"e313903c-ed7d-4ea9-8db3-fb09df7b534f"} -->
-	<p class="has-text-align-center has-large-font-size">Designer</p>
+	<!-- wp:paragraph {"align":"center","customCSSId":"e313903c-ed7d-4ea9-8db3-fb09df7b534f"} -->
+	<p class="has-text-align-center">Designer</p>
 	<!-- /wp:paragraph -->
 	<!-- wp:social-links {"iconColor":"white","iconColorValue":"#ffffff","openInNewTab":true,"size":"has-normal-icon-size","align":"center","className":"is-style-default","customCSSId":"3d2411e1-7400-4621-8e70-507426783cd0"} -->
 	<ul class="wp-block-social-links aligncenter has-normal-icon-size has-icon-color items-justified-center is-style-default"><!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook","customCSSId":"677cae64-5418-4753-84bc-ee5e03bbf12a"} /-->
@@ -102,8 +102,8 @@ return [
 	<!-- wp:heading {"textAlign":"center","level":4,"customCSSId":"29ff670a-9002-4335-af9e-9550076a72b5"} -->
 	<h4 class="has-text-align-center">George Williams</h4>
 	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center","fontSize":"large","customCSSId":"eea01e8a-7d9f-4d99-b83c-8fd3b114a9aa"} -->
-	<p class="has-text-align-center has-large-font-size">Developer</p>
+	<!-- wp:paragraph {"align":"center","customCSSId":"eea01e8a-7d9f-4d99-b83c-8fd3b114a9aa"} -->
+	<p class="has-text-align-center">Developer</p>
 	<!-- /wp:paragraph -->
 	<!-- wp:social-links {"iconColor":"white","iconColorValue":"#ffffff","openInNewTab":true,"size":"has-normal-icon-size","align":"center","className":"is-style-default","customCSSId":"3d2411e1-7400-4621-8e70-507426783cd0"} -->
 	<ul class="wp-block-social-links aligncenter has-normal-icon-size has-icon-color items-justified-center is-style-default"><!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook","customCSSId":"677cae64-5418-4753-84bc-ee5e03bbf12a"} /-->
@@ -118,8 +118,8 @@ return [
 	<!-- wp:heading {"textAlign":"center","level":4,"customCSSId":"313ba318-9c94-4a69-87c6-ce7f744de2e1"} -->
 	<h4 class="has-text-align-center">Julia Castillo</h4>
 	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center","fontSize":"large","customCSSId":"8621b3f8-fc51-47e1-936e-170ac48ca196"} -->
-	<p class="has-text-align-center has-large-font-size">Client Service</p>
+	<!-- wp:paragraph {"align":"center","customCSSId":"8621b3f8-fc51-47e1-936e-170ac48ca196"} -->
+	<p class="has-text-align-center">Client Service</p>
 	<!-- /wp:paragraph -->
 	<!-- wp:social-links {"iconColor":"white","iconColorValue":"#ffffff","openInNewTab":true,"size":"has-normal-icon-size","align":"center","className":"is-style-default","customCSSId":"3d2411e1-7400-4621-8e70-507426783cd0"} -->
 	<ul class="wp-block-social-links aligncenter has-normal-icon-size has-icon-color items-justified-center is-style-default"><!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook","customCSSId":"677cae64-5418-4753-84bc-ee5e03bbf12a"} /-->

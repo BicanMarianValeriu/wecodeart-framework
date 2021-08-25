@@ -31,12 +31,7 @@ use function WeCodeArt\Functions\get_prop;
  */
 class WooCommerce implements Integration {
 
-	use Singleton; 
-
-	/**
-	 * Send to Constructor
-	 */
-	public function init() {}
+	use Singleton;
 	
 	/**
 	 * Get Conditionals
@@ -79,6 +74,7 @@ class WooCommerce implements Integration {
 
 		// Filters
 		add_filter( 'wecodeart/filter/gutenberg/restricted',[ $this, 'restricted_gutenberg_blocks' ] );
+		add_filter( 'woocommerce_locate_template',			[ $this, 'woocommerce_locate_template' ], 10, 2 );
 	}
 
 	/**
@@ -139,6 +135,7 @@ class WooCommerce implements Integration {
 	 * After Content - Wraps all WooCommerce content in wrappers which match the theme markup
 	 *
 	 * @since   3.5
+	 * @version 5.0.0
 	 *
 	 * @return  void
 	 */
@@ -159,7 +156,7 @@ class WooCommerce implements Integration {
 	 * Sort Content Modules based on position
 	 *
 	 * @since 	unknown
-	 * @version	4.1.4
+	 * @version	5.0.0
 	 *
 	 * @param 	string 	$position Accepts before/after - render sorted modules before/after woocommerce content.
 	 *
@@ -207,5 +204,28 @@ class WooCommerce implements Integration {
 			'woocommerce/product-on-sale',
 			'woocommerce/product-new',
 		], $blocks );
+	}
+
+	/**
+	 * Filter - WOO locate template for basic files
+	 *
+	 * @since	5.0.0
+	 * @version	5.0.0
+	 *
+	 * @param	string	$template
+	 * @param	string	$name
+	 *
+	 * @return 	string
+	 */
+	public function woocommerce_locate_template( $template, $name ) {
+		// If is a plugin file, please replace it with our own
+		// If not, please use the one from plugin/theme/child theme
+		if( strpos( wp_normalize_path( $template ), 'plugins/woocommerce' ) ) {
+			if( in_array( $name, [ 'loop/orderby.php', 'global/quantity-input.php' ] ) ) {
+				$template = wecodeart_config( 'paths' )['directory'] . '/inc/support/plugins/woocommerce/templates/' . $name;
+			}
+		}
+
+		return $template;
 	}
 }

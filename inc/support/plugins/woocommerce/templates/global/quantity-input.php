@@ -18,7 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
-<div class="quantity">
+<div class="quantity me-3">
 <?php if ( $max_value && $min_value === $max_value ) {
 
     wecodeart_input( 'hidden', [
