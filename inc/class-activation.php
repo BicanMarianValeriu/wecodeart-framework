@@ -155,7 +155,7 @@ class Activation {
 	 * @return	boolean
 	 */
 	public function is_ok() {
-		if( empty( $this->requirements ) ) return true;
+		if( empty( $this->requirements ) || ! is_admin() ) return true;
 
 		$this->compare_requirements();
 
@@ -302,7 +302,7 @@ class Activation {
 	 * @return 	bool
 	 */
 	public function is_plugin_installed( $slug ) {
-		$installed = get_plugins();
+		$installed = \get_plugins();
 
 		return array_key_exists( $slug, $installed ) || in_array( $slug, $installed, true );
 	}

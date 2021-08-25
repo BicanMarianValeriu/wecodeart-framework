@@ -443,23 +443,18 @@ require_once __DIR__ . '/setup.php';
  */
 do_action( 'wecodeart/setup/after', $theme );
 
-/**
- * Maybe Load the theme if checks are passed
- */
-if( Activation::get_instance()->is_ok() ) {
-    $theme->load();
+$theme->load();
     
-    /**
-     * Theme Loaded Hook
-     *
-     * @since 4.0.9
-     */
-    do_action( 'wecodeart/theme/loaded' );
+/**
+ * Theme Loaded Hook
+ *
+ * @since 4.0.9
+ */
+do_action( 'wecodeart/theme/loaded' );
 
-    /**
-     * Load Integrations
-     */
-    wecodeart( 'integrations' )->load();
-}
+/**
+ * Load Integrations
+ */
+wecodeart( 'integrations' )->load();
 
 return $theme;
