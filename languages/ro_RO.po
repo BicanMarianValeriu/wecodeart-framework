@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-08-09 19:23+0000\n"
+"PO-Revision-Date: 2021-08-25 14:35+0000\n"
 "Last-Translator: Bican\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -25,7 +25,7 @@ msgstr "la %s"
 msgid "% Comments"
 msgstr "% Comentarii"
 
-#: inc/core/class-archive.php:88
+#: inc/core/class-core.php:215
 #, php-format
 msgid "%s Archives"
 msgstr "%s Arhivă"
@@ -78,7 +78,7 @@ msgstr "adaugă unul"
 msgid "ANR Captcha support is enabled!"
 msgstr "Suportul ANR Captcha este activat!"
 
-#: inc/core/class-archive.php:94
+#: inc/core/class-core.php:221
 msgid "Archives"
 msgstr "Arhive"
 
@@ -98,7 +98,7 @@ msgstr "Culoarea legăturilor din atribuire"
 msgid "Attribution text color"
 msgstr "Culoare text subsol"
 
-#: inc/core/class-archive.php:69
+#: inc/core/class-core.php:196
 #, php-format
 msgid "Author Archives: %s"
 msgstr "Arhive autor"
@@ -142,10 +142,22 @@ msgstr "Comentand vei accepta %s."
 msgid "Captcha *"
 msgstr "Captcha *"
 
-#: inc/core/class-archive.php:59
+#: inc/core/class-core.php:186
 #, php-format
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
+
+#: inc/admin/customizer/configs/class-performance.php:43
+msgid ""
+"Check this box if you want to clean the header of stuff like Emoji, REST "
+"links, Feeds etc."
+msgstr ""
+"Bifați această casetă dacă doriți să curățați antetul de lucruri precum "
+"Emoji, link-uri REST, Feed-uri etc."
+
+#: inc/admin/customizer/configs/class-performance.php:42
+msgid "Clean Head"
+msgstr "Curăță Antet"
 
 #: inc/core/entry/class-comments.php:317 inc/core/entry/class-comments.php:324
 msgid "Comment *"
@@ -176,15 +188,15 @@ msgstr ""
 "Asistența pentru Formularul de contact 7 este activată. Bucurați-vă de forme "
 "stilate corespunzător bazat pe tema dvs.!"
 
-#: inc/admin/customizer/configs/class-configs.php:75
+#: inc/admin/customizer/configs/class-configs.php:82
 msgid "Content Settings"
 msgstr "Setări continut"
 
-#: inc/admin/customizer/configs/class-configs.php:90
+#: inc/admin/customizer/configs/class-configs.php:97
 msgid "Copyright"
 msgstr "Drepturi de autor"
 
-#: inc/app.php:76
+#: inc/app.php:78
 #, php-format
 msgid "Copyright %s - All rights reserved."
 msgstr "Drepturi de autor %s - Toate drepturile reservate."
@@ -193,7 +205,7 @@ msgstr "Drepturi de autor %s - Toate drepturile reservate."
 msgid "Customize"
 msgstr "Personalizați"
 
-#: inc/core/class-archive.php:84
+#: inc/core/class-core.php:211
 #, php-format
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
@@ -203,7 +215,7 @@ msgstr "Arhive zilnice: %s"
 msgid "Defaults to CSS color."
 msgstr "Implicit la culoarea CSS."
 
-#: inc/admin/customizer/configs/class-configs.php:97
+#: inc/admin/customizer/configs/class-configs.php:104
 msgid "Design"
 msgstr "Design"
 
@@ -236,7 +248,7 @@ msgstr "Introduceți parola"
 msgid "Entry Content"
 msgstr "Conținutul intrării"
 
-#: inc/admin/customizer/configs/class-configs.php:107
+#: inc/admin/customizer/configs/class-configs.php:114
 msgid "Extensions"
 msgstr "Extensii"
 
@@ -261,7 +273,7 @@ msgstr "Notificarea nu a putut fi respinsă"
 msgid "Footer Copyright Text"
 msgstr "Textul drepturilor de autor din subsol"
 
-#: inc/admin/customizer/configs/class-configs.php:84
+#: inc/admin/customizer/configs/class-configs.php:91
 msgid "Footer Settings"
 msgstr "Setări subsol"
 
@@ -273,7 +285,7 @@ msgstr "Setări Generale"
 msgid "Group"
 msgstr "Grupare"
 
-#: inc/admin/customizer/configs/class-configs.php:66
+#: inc/admin/customizer/configs/class-configs.php:73
 msgid "Header Settings"
 msgstr "Setări Antet"
 
@@ -313,16 +325,16 @@ msgstr "Medium 500 Italic"
 msgid "Missing notification id"
 msgstr "ID-ul notificării lipsește"
 
-#: inc/admin/customizer/requests/class-choices.php:56
+#: inc/admin/customizer/requests/class-palette.php:58
 msgid "Missing palette."
 msgstr "Paleta lipsă."
 
-#: inc/core/class-archive.php:80
+#: inc/core/class-core.php:207
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: inc/core/class-archive.php:79
+#: inc/core/class-core.php:206
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr "Arhive lunare: %s"
@@ -352,6 +364,14 @@ msgstr "Notificare respinsă"
 msgid "Pagination"
 msgstr "Paginare"
 
+#: inc/admin/customizer/configs/class-configs.php:63
+msgid "Performance Settings"
+msgstr "Setări Performanță"
+
+#: inc/core/class-media.php:194
+msgid "Placeholder image"
+msgstr "Imagine substituent"
+
 #: inc/markup/class-markup.php:139
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
@@ -360,7 +380,7 @@ msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 msgid "Post Author"
 msgstr "Autorul postării"
 
-#: inc/core/class-archive.php:91
+#: inc/core/class-core.php:218
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
@@ -398,12 +418,12 @@ msgid "Required fiels are marked \"%s\"."
 msgstr "Fișele obligatorii sunt marcate cu %s\"."
 
 #: inc/core/class-search.php:59
-#: inc/gutenberg/blocks/widgets/class-search.php:68
-#: inc/gutenberg/blocks/widgets/class-search.php:69
+#: inc/gutenberg/blocks/widgets/class-search.php:66
+#: inc/gutenberg/blocks/widgets/class-search.php:67
 msgid "Search"
 msgstr "Caută"
 
-#: inc/core/class-archive.php:54
+#: inc/core/class-core.php:181
 #, php-format
 msgid "Search Results for \"%s\""
 msgstr "Rezultate cautare pentru \"%s\""
@@ -412,7 +432,7 @@ msgstr "Rezultate cautare pentru \"%s\""
 msgid "Search this website"
 msgstr "Caută pe site"
 
-#: inc/core/class-core.php:98
+#: inc/core/class-core.php:135
 #, php-format
 msgid "Search this website %s"
 msgstr "Caută pe site %s"
@@ -447,7 +467,7 @@ msgstr "Paleta site-ului"
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
-#: inc/core/class-archive.php:64
+#: inc/core/class-core.php:191
 #, php-format
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
@@ -465,7 +485,7 @@ msgctxt "Theme starter content"
 msgid "About"
 msgstr "Despre"
 
-#: inc/support/starter/class-starter.php:112
+#: inc/support/starter/class-starter.php:115
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Blog"
@@ -514,8 +534,8 @@ msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
 #: inc/admin/customizer/configs/class-configs.php:49
-msgid "Typography"
-msgstr "Tipografie"
+msgid "Typography Settings"
+msgstr "Setări Tipografie"
 
 #: inc/support/fonts/class-fonts.php:225 inc/support/fonts/class-fonts.php:226
 msgid "Ultra-Bold 900"
@@ -537,7 +557,7 @@ msgstr "Ultra-Light 100 Italic"
 msgid "Unlock"
 msgstr "Deblochează"
 
-#: inc/class-activation.php:150
+#: inc/class-activation.php:118
 msgid "upgrade PHP"
 msgstr "actualizați PHP"
 
@@ -550,7 +570,16 @@ msgstr "Site"
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/class-activation.php:147
+#: inc/class-activation.php:125
+#, php-format
+msgid ""
+"WeCodeArt Framework requires Gutenberg version %1$s or higher. Please "
+"install Gutenberg to use WeCodeArt Framework."
+msgstr ""
+"WeCodeArt Framework necesită versiunea Gutenberg %1$s sau mai mare. Vă rugăm "
+"să instalați Gutenberg pentru a utiliza WeCodeArt Framework."
+
+#: inc/class-activation.php:115
 #, php-format
 msgid ""
 "WeCodeArt Framework requires PHP version %1$s or higher. You are using "
@@ -559,7 +588,7 @@ msgstr ""
 "WeCodeArt Framework necesită versiunea PHP %1$s sau mai mare. Folosiți "
 "versiunea %2$s. Vă rugăm să %3$s pentru a utiliza WeCodeArt Framework."
 
-#: inc/class-activation.php:138
+#: inc/class-activation.php:106
 #, php-format
 msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
@@ -610,17 +639,17 @@ msgstr ""
 "Împachetările nu sunt definite corect pentru „% s”. Vă rugăm să verificați "
 "codul temei."
 
-#: inc/core/class-archive.php:75
+#: inc/core/class-core.php:202
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y"
 
-#: inc/core/class-archive.php:74
+#: inc/core/class-core.php:201
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr "Arhive Anuale"
 
-#: inc/support/plugins/wpseo/class-wpseo.php:101
+#: inc/support/plugins/wpseo/class-wpseo.php:94
 msgid ""
 "YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
 "plugin."
@@ -649,7 +678,7 @@ msgstr "Comentariul tău asteaptă moderarea."
 msgid "Your email address will not be published."
 msgstr "Emailul tău nu va fi publicat."
 
-#: inc/class-activation.php:117
+#: inc/class-activation.php:85
 msgid ""
 "Your WordPress installation does not meet the minimum requirements to run "
 "WeCodeArt Framework. Please upgrade and try again."
