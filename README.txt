@@ -1,8 +1,8 @@
 ## WeCodeArt Framework Copyright 2021
 ## https://www.wecodeart.com/
 
-Requires at least: WordPress 5.0
-Tested up to: WordPress 5.7.1
+Requires at least: WordPress 5.8.0
+Tested up to: WordPress 5.8.0
 Version: 5.0+
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,3 +18,7 @@ Source: https://fontawesome.com/license
 Bootstrap, Copyright Twitter
 License: MIT.
 Source: https://getbootstrap.com/docs/5.0/about/license/
+
+Google Fonts
+License: SIL Open Font License
+Source: https://fonts.google.com/attribution
