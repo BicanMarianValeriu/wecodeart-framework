@@ -72,14 +72,11 @@ final class Google {
 	 */
 	public function resource_hints( $urls, $relation_type ) {
 		if ( 'preconnect' === $relation_type ) {
-			if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '>=' ) ) {
-				$urls[] = [
-					'href' 	=> '//fonts.gstatic.com',
-					'crossorigin',
-				];
-			} else {
-				$urls[] = '//fonts.gstatic.com';
-			}
+			$urls[] = [
+				'rel'	=> 'preconnect',
+				'href' 	=> '//fonts.gstatic.com',
+				'crossorigin',
+			];
 		}
 
 		return $urls;
