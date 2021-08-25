@@ -17,6 +17,7 @@ namespace WeCodeArt\Support\Plugins\WooCommerce;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Admin\Customizer\Formatting;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -28,10 +29,64 @@ class Customizer {
 	
 	/**
 	 * Send to Constructor
-	 * @since 3.6.2
 	 */
 	public function init() {
-		add_filter( 'wecodeart/filter/customizer/defaults', [ $this, 'extend_defaults' ] );
+		add_filter( 'wecodeart/filter/customizer/configurations', 	[ $this, 'extend_configurations' 	] );
+		add_filter( 'wecodeart/filter/customizer/defaults', 		[ $this, 'extend_defaults' 			] );
+	}
+
+	/**
+	 * Extend Customizer configurations
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 */
+	public function extend_configurations( $configurations ) {
+		$modules = [
+			'content' => esc_html__( 'Content', 'wecodeart' ),
+			'primary' => esc_html__( 'Primary', 'wecodeart' ),
+		];
+
+		$partial = [
+			'selector'       	 	=> '.site-content.wp-block-template-part',
+			'container_inclusive' 	=> true,
+			'render_callback' 		=> [ Customizer\Partials::get_instance(), 'render_content' ]
+		];
+
+		$configs = [
+			[
+				'name'			=> 'content-layout-woo-archive',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-sortable',
+				'section'		=> 'woocommerce_product_catalog',
+				'title' 		=> esc_html__( 'Shop page modules', 'wecodeart' ),
+				'description' 	=> esc_html__( 'Adjust the order of content modules on shop page.', 'wecodeart' ),
+				'priority' 		=> 5,
+				'transport'		=> 'postMessage',
+				'choices'		=> $modules,
+				'partial'		=> $partial,
+				'sanitize_callback'	=> [ Formatting::get_instance(), 'sanitize_sortable_choices' ],
+				'active_callback' 	=> function() {
+					return wecodeart_if( 'is_woocommerce_archive' );
+				},
+			],
+			[
+				'name'			=> 'content-layout-woo-singular',
+				'type' 			=> 'control',
+				'control'  		=> 'wecodeart-sortable',
+				'section'		=> 'woocommerce_product_catalog',
+				'title' 		=> esc_html__( 'Product page modules', 'wecodeart' ),
+				'description' 	=> esc_html__( 'Adjust the order of content modules on product page.', 'wecodeart' ),
+				'priority' 		=> 5,
+				'transport'		=> 'postMessage',
+				'choices'		=> $modules,
+				'partial'		=> $partial,
+				'sanitize_callback'	=> [ Formatting::get_instance(), 'sanitize_sortable_choices' ],
+				'active_callback' 	=> 'is_product',
+			],
+		];
+
+		return wp_parse_args( $configs, $configurations );
 	}
 
 	/**

@@ -16,18 +16,14 @@ namespace WeCodeArt\Support\Plugins\WooCommerce\Customizer;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Singleton;
+
 /**
  * Customizer Partials
  */
 class Partials {
 
-	use \WeCodeArt\Singleton; 
-
-	/**
-	 * Send to Constructor
-	 * @since x.x.x
-	 */
-	public function init() {}
+	use Singleton;
 		
 	/**
 	 * A function to render woo content with hooks in it

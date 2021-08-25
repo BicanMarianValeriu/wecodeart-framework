@@ -29,7 +29,7 @@ import './../../../scss/customizer/controls/sortable.scss';
 				stop: () => control.updateValue()
 			}).disableSelection().find('li').each(function () {
 				$(this).find('i.visibility').click(function () {
-					$(this).toggleClass('dashicons-visibility-faint').parents('li:eq(0)').toggleClass('invisible');
+					$(this).toggleClass('dashicons-visibility-faint').parents('li:eq(0)').toggleClass('is-invisible');
 				});
 			}).click(() => control.updateValue());
 		},
@@ -43,7 +43,7 @@ import './../../../scss/customizer/controls/sortable.scss';
 			const control = this, newValue = [];
 
 			this.sortableContainer.find('li').each(function () {
-				if (!$(this).is('.invisible')) newValue.push($(this).data('value'));
+				if (!$(this).is('.is-invisible')) newValue.push($(this).data('value'));
 			});
 
 			control.setting.set(newValue);

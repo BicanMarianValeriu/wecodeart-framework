@@ -81,22 +81,21 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/customizer/customizer-sortable.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/customizer/controls/customizer-sortable.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/customizer/customizer-sortable.js":
-/*!**************************************************!*\
-  !*** ./src/js/customizer/customizer-sortable.js ***!
-  \**************************************************/
+/***/ "./src/js/customizer/controls/customizer-sortable.js":
+/*!***********************************************************!*\
+  !*** ./src/js/customizer/controls/customizer-sortable.js ***!
+  \***********************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _scss_customizer_controls_sortable_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../scss/customizer/controls/sortable.scss */ "./src/scss/customizer/controls/sortable.scss");
-/* harmony import */ var _scss_customizer_controls_sortable_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_customizer_controls_sortable_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _scss_customizer_controls_sortable_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../../scss/customizer/controls/sortable.scss */ "./src/scss/customizer/controls/sortable.scss");
 /**
  * File sortable.js
  *
@@ -104,45 +103,41 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @package WeCodeArt
  * @since 	v3.3
- * @version v4.1.6
+ * @version v4.2.0
  * 
  */
 
 
 (function (wp, $) {
-  var api = wp.customize;
+  const api = wp.customize;
   api.controlConstructor['wecodeart-sortable'] = api.Control.extend({
-    ready: function ready() {
+    ready: function () {
       'use strict';
 
-      var control = this; // Set the sortable container.
+      const control = this; // Set the sortable container.
 
       control.sortableContainer = control.container.find('ul.wecodeart-sortable__list').first(); // Init sortable.
 
       control.sortableContainer.sortable({
         // Update value when we stop sorting.
-        stop: function stop() {
-          return control.updateValue();
-        }
+        stop: () => control.updateValue()
       }).disableSelection().find('li').each(function () {
         $(this).find('i.visibility').click(function () {
-          $(this).toggleClass('dashicons-visibility-faint').parents('li:eq(0)').toggleClass('invisible');
+          $(this).toggleClass('dashicons-visibility-faint').parents('li:eq(0)').toggleClass('is-invisible');
         });
-      }).click(function () {
-        return control.updateValue();
-      });
+      }).click(() => control.updateValue());
     },
 
     /**
      * Updates the sorting list
      */
-    updateValue: function updateValue() {
+    updateValue: function () {
       'use strict';
 
-      var control = this,
-          newValue = [];
+      const control = this,
+            newValue = [];
       this.sortableContainer.find('li').each(function () {
-        if (!$(this).is('.invisible')) newValue.push($(this).data('value'));
+        if (!$(this).is('.is-invisible')) newValue.push($(this).data('value'));
       });
       control.setting.set(newValue);
     }
@@ -155,10 +150,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./src/scss/customizer/controls/sortable.scss ***!
   \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
+
 
 /***/ })
 

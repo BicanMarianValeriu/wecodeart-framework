@@ -163,14 +163,22 @@ class WooCommerce implements Integration {
 	 * @return 	void
 	 */
 	public static function sort_modules( string $position ) {
-		$modules = [ 'content', 'sidebar' ];
+		$modules = [ 'content', 'primary' ];
+
+		if( wecodeart_if( 'is_woocommerce_archive' ) ) {
+			$modules = get_theme_mod( 'content-layout-woo-archive' );
+		}
+		
+		if( is_product() ) {
+			$modules = get_theme_mod( 'content-layout-woo-singular' );
+		}
 
 		$index = array_search( 'content', $modules );
 		if( $position === 'after' ) $elements = array_slice( $modules, $index + 1 );
 		if( $position === 'before') $elements = array_slice( $modules, 0, $index, false );
 
 		$sortable = wp_parse_args( [
-			'sidebar' => [
+			'primary' => [
 				'callback' => function() {
 					Markup::wrap( 'shop', [ [
 						'tag' 	=> 'aside',
