@@ -36,24 +36,24 @@ return [
 	<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"c4ffdb61-20e7-41ae-a4f4-759e5fa55e84"} -->
 	<div class="wp-block-group my-5"><!-- wp:columns {"className":"flex-column flex-md-row","customCSSId":"d3555087-6def-44e0-9276-e90e777e2df9"} -->
 	<div class="wp-block-columns flex-column flex-md-row"><!-- wp:column {"className":"mb-4","customCSSId":"45343961-7014-40f0-877a-87a77317d581"} -->
-	<div class="wp-block-column mb-4"><!-- wp:heading {"level":3,"textColor":"white","customCSSId":"7c14b92a-ee0d-491a-a213-9fee57ca7525"} -->
-	<h3 class="has-white-color has-text-color">Super Efficient</h3>
+	<div class="wp-block-column mb-4"><!-- wp:heading {"level":3,"customCSSId":"7c14b92a-ee0d-491a-a213-9fee57ca7525"} -->
+	<h3>Super Efficient</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph {"customCSSId":"d6e923fe-2ddb-4cde-abab-367cd2f04647"} -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
 	<!-- /wp:paragraph --></div>
 	<!-- /wp:column -->
 	<!-- wp:column {"className":"mb-4","customCSSId":"b7a61012-fb12-4ad0-b0c7-de2e611ceb77"} -->
-	<div class="wp-block-column mb-4"><!-- wp:heading {"level":3,"textColor":"white","customCSSId":"557e6910-c04a-4b75-a096-7201de5ea8bd"} -->
-	<h3 class="has-white-color has-text-color">Deeply Commited</h3>
+	<div class="wp-block-column mb-4"><!-- wp:heading {"level":3,"customCSSId":"557e6910-c04a-4b75-a096-7201de5ea8bd"} -->
+	<h3>Deeply Commited</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph {"customCSSId":"414cac30-2cd8-4caf-9b1b-78455a834b59"} -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. </p>
 	<!-- /wp:paragraph --></div>
 	<!-- /wp:column -->
 	<!-- wp:column {"className":"mb-4","customCSSId":"63705583-261d-4f69-862a-5043fb9f6222"} -->
-	<div class="wp-block-column mb-4"><!-- wp:heading {"level":3,"textColor":"white","customCSSId":"0ccef683-c7c5-46b6-bc60-dadb656e3c3b"} -->
-	<h3 class="has-white-color has-text-color">Highly Skilled</h3>
+	<div class="wp-block-column mb-4"><!-- wp:heading {"level":3,"customCSSId":"0ccef683-c7c5-46b6-bc60-dadb656e3c3b"} -->
+	<h3>Highly Skilled</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph {"customCSSId":"e2f7b2d9-c871-4a30-a2ef-58dfa6b7b454"} -->
 	<p> Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. </p>
