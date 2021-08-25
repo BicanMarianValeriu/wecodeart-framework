@@ -12,5 +12,3 @@
  */
 
 require_once( get_template_directory() . '/inc/init.php' );
-// remove_theme_mod( 'general-design-palette' );
-// wp_delete_post( \WP_Theme_JSON_Resolver_Gutenberg::get_user_custom_post_type_id() );
