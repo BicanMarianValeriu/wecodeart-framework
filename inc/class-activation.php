@@ -75,25 +75,6 @@ class Activation {
 	}
 
 	/**
-	 * Get Activation Validation Status
-	 *
-	 * @since 	3.5
-	 * @version	3.6.2
-	 */
-	public function is_ok() {
-		if( ! $this->requirements ) return true;
-
-		foreach( $this->requirements as $val ) {
-			if( isset( $val['failed'] ) && $val['failed'] === true ) {
-				$this->status = false;
-				break;
-			}
-		}
-
-		return $this->status;
-	}
-
-	/**
 	 * Set Translation Messages
 	 *
 	 * @since 	3.7.9
@@ -166,15 +147,62 @@ class Activation {
 	}
 
 	/**
+	 * Get Activation Validation Status
+	 *
+	 * @since 	3.5
+	 * @version	5.0.0
+	 *
+	 * @return	boolean
+	 */
+	public function is_ok() {
+		if( empty( $this->requirements ) ) return true;
+
+		$this->compare_requirements();
+
+		foreach( $this->requirements as $val ) {
+			if( isset( $val['failed'] ) && $val['failed'] === true ) {
+				$this->status = false;
+				break;
+			}
+		}
+
+		return $this->status;
+	}
+
+	/**
+	 * Compare Requirements
+	 *
+	 * @since 	3.5
+	 * @version	5.0.0
+	 */
+	public function compare_requirements() {
+		if( ! $this->requirements ) return;
+		foreach( $this->requirements as $key => $val ) {
+			if( isset( $val['plugin'] ) && (bool) $val['plugin'] === true ) {
+				// If we have plugin, activate it and move on!
+				if( $this->is_plugin_installed( $val['required'] ) ) {
+					\activate_plugin( $val['required'] );
+					continue;
+				}
+				// If we dont, simply return true on the failed key, it means we dont have it
+				$this->requirements[$key]['failed'] = \is_plugin_active( $val['required'] ) === false;
+				continue;
+			}
+
+			if( isset( $val['installed'] ) && isset( $val['required'] ) ) {
+				$this->requirements[$key]['failed'] = \version_compare( $val['installed'], $val['required'], '<=' );
+			}
+		}
+	}
+
+
+	/**
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
 	 * @version	5.0.0
 	 */
 	public function after_switch_theme() {
-		// Compare if requirements are met!
-		$this->compare_requirements();
-
 		// If not, why bother to load the theme?
 		if( $this->is_ok() === false ) {
 			// Switch to old theme
@@ -199,16 +227,8 @@ class Activation {
 	 * @version	5.0.0
 	 */
 	public function load_customize() {
-		if( ! $this->requirements ) return;
-
-		$this->compare_requirements();
-
-		foreach( $this->requirements as $key => $val ) {
-			if( isset( $val['failed'] ) && $val['failed'] === true ) {
-				wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
-				break;
-			}
-		}
+		if( $this->is_ok() ) return;
+		wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
 	}
 
 	/**
@@ -218,43 +238,9 @@ class Activation {
 	 * @version	5.0.0
 	 */
 	public function template_redirect() {
-		if( ! $this->requirements ) return;
-
+		if( $this->is_ok() ) return;
 		if( isset( $_GET['preview'] ) ) {
-			$this->compare_requirements();
-
-			foreach( $this->requirements as $key => $val ) {
-				if( isset( $val['failed'] ) && $val['failed'] === true ) {
-					wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
-					break;
-				}
-			}
-		}
-	}
-
-	/**
-	 * Compare Requirements
-	 *
-	 * @since 	3.5
-	 * @version	5.0.0
-	 */
-	public function compare_requirements() {
-		if( ! $this->requirements ) return;
-		foreach( $this->requirements as $key => $val ) {
-			if( isset( $val['plugin'] ) && (bool) $val['plugin'] === true ) {
-				// If we have plugin, activate it and move on!
-				if( $this->check_plugin_installed( $val['required'] ) ) {
-					\activate_plugin( $val['required'] );
-					continue;
-				}
-				// If we dont, simply return true on the failed key, it means we dont have it
-				$this->requirements[$key]['failed'] = \is_plugin_active( $val['required'] ) === false;
-				continue;
-			}
-
-			if( isset( $val['installed'] ) && isset( $val['required'] ) ) {
-				$this->requirements[$key]['failed'] = \version_compare( $val['installed'], $val['required'], '<=' );
-			}
+			wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
 		}
 	}
 
@@ -268,7 +254,7 @@ class Activation {
 		unset( $_GET['activated'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		$old_theme = wp_get_theme( get_option( 'theme_switched' ) );
-		if ( $old_theme->exists() && strpos( $old_theme->get_stylesheet(), 'am2' ) === false ) {
+		if ( $old_theme->exists() && strpos( $old_theme->get_stylesheet(), wecodeart( 'name' ) ) === false ) {
 			$fallback_stylesheet = $old_theme->get_stylesheet();
 		} else {
 			$fallback_stylesheet = WP_DEFAULT_THEME;
@@ -315,7 +301,7 @@ class Activation {
 	 *
 	 * @return 	bool
 	 */
-	public function check_plugin_installed( $slug ) {
+	public function is_plugin_installed( $slug ) {
 		$installed = get_plugins();
 
 		return array_key_exists( $slug, $installed ) || in_array( $slug, $installed, true );

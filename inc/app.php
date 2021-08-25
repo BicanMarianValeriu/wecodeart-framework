@@ -113,6 +113,10 @@ return [
     |
     */
     'woocommerce' => [
+        'customizer' => [
+            // 'content-layout-woo-singular'   => [ 'content', 'primary' ],
+            // 'content-layout-woo-archive'    => [ 'content', 'primary' ],
+        ],
         'support'   => [
             'woocommerce'                   => true,
             'wc-product-gallery-zoom'       => true,

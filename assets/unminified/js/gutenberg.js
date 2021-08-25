@@ -9131,119 +9131,96 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 const {
-  __
-} = wp.i18n;
-const {
-  Component,
-  Fragment
-} = wp.element;
-const {
-  compose,
-  ifCondition
-} = wp.compose;
-const {
-  withSelect
-} = wp.data;
-const {
-  RichTextToolbarButton
-} = wp.blockEditor;
-const {
-  applyFormat,
-  removeFormat,
-  getActiveFormat
-} = wp.richText;
-const {
-  Modal,
-  Button,
-  TextControl,
-  Icon
-} = wp.components;
+  i18n: {
+    __
+  },
+  element: {
+    useState,
+    useEffect
+  },
+  components: {
+    Modal,
+    Button,
+    TextControl,
+    Icon
+  },
+  richText: {
+    applyFormat,
+    removeFormat,
+    getActiveFormat
+  },
+  blockEditor: {
+    RichTextToolbarButton
+  }
+} = wp;
 const name = 'wca/abbreviation';
 
-class Edit extends Component {
-  constructor() {
-    super(...arguments);
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false,
-      title: '',
-      lang: ''
-    };
-  }
+const Edit = ({
+  isActive,
+  value,
+  onChange
+}) => {
+  const activeFormat = getActiveFormat(value, name);
+  const {
+    attributes = {}
+  } = activeFormat || {};
+  const [isOpen, setIsOpen] = useState(false);
+  const [state, setState] = useState({ ...attributes
+  });
+  useEffect(() => setState({ ...attributes
+  }), [activeFormat]);
 
-  toggle() {
-    this.setState(state => ({
-      isOpen: !state.isOpen
-    }));
-  }
+  const toggle = () => setIsOpen(!isOpen);
 
-  render() {
-    const {
-      title,
-      lang
-    } = this.state;
-    const {
-      isActive,
-      value,
-      onChange
-    } = this.props;
-    const activeColorFormat = getActiveFormat(value, name);
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichTextToolbarButton, {
-      icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Icon, {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_1__["code"]
-      }),
-      title: __('Abbreviation', 'wecodeart'),
-      onClick: this.toggle,
-      isActive: isActive
-    }), this.state.isOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Modal, {
-      title: __('Insert Abbreviation', 'wecodeart'),
-      onRequestClose: this.toggle
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(TextControl, {
-      label: __('Title', 'wecodeart'),
-      value: activeColorFormat && !title ? activeColorFormat.attributes.title : title,
-      onChange: newTitle => this.setState({
-        title: newTitle
-      })
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(TextControl, {
-      label: __('Language (optional)', 'wecodeart'),
-      value: activeColorFormat && !lang ? activeColorFormat.attributes.lang : lang,
-      help: __('Example: fr, en, de, etc. Use it only if the abbreviation’s language is different from page main language.', 'wecodeart'),
-      onChange: newLang => this.setState({
-        lang: newLang
-      })
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
-      isPrimary: true,
-      isLarge: true,
-      onClick: () => {
-        if (title) {
-          const attributes = {
-            title
-          };
+  const {
+    title,
+    lang
+  } = state;
 
-          if (lang) {
-            attributes.lang = lang;
-          }
+  const onClick = () => {
+    if (title) {
+      onChange(applyFormat(value, {
+        type: name,
+        attributes: state
+      }));
+    } else {
+      onChange(removeFormat(value, name));
+    }
 
-          onChange(applyFormat(value, {
-            type: name,
-            attributes
-          }));
-        } else {
-          onChange(removeFormat(value, name));
-        }
-
-        this.toggle();
-      }
-    }, __('Apply', 'wecodeart'))));
-  }
-
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (compose(withSelect(select => {
-  return {
-    isDisabled: false
+    toggle();
   };
-}), ifCondition(props => !props.isDisabled))(Edit));
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichTextToolbarButton, {
+    icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Icon, {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_1__["code"]
+    }),
+    title: __('Abbreviation', 'wecodeart'),
+    onClick: toggle,
+    isActive: isActive
+  }), isOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Modal, {
+    title: __('Insert Abbreviation', 'wecodeart'),
+    onRequestClose: toggle
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(TextControl, {
+    label: __('Title', 'wecodeart'),
+    value: title,
+    onChange: title => setState({ ...state,
+      title
+    })
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(TextControl, {
+    label: __('Language (optional)', 'wecodeart'),
+    value: lang,
+    help: __('Example: fr, en, de, etc. Use it only if the abbreviation’s language is different from page main language.', 'wecodeart'),
+    onChange: lang => setState({ ...state,
+      lang
+    })
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+    isPrimary: true,
+    isLarge: true,
+    onClick: onClick
+  }, title ? __('Apply', 'wecodeart') : __('Remove', 'wecodeart'))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Edit);
 
 /***/ }),
 

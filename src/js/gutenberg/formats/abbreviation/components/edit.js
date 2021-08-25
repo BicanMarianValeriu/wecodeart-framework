@@ -3,97 +3,67 @@
  */
 import { code } from '@wordpress/icons';
 
-const { __ } = wp.i18n;
-const { Component, Fragment } = wp.element;
-const { compose, ifCondition } = wp.compose;
-const { withSelect } = wp.data;
-const { RichTextToolbarButton } = wp.blockEditor;
-const { applyFormat, removeFormat, getActiveFormat } = wp.richText;
-const { Modal, Button, TextControl, Icon } = wp.components;
+const {
+    i18n: { __ },
+    element: { useState, useEffect },
+    components: { Modal, Button, TextControl, Icon },
+    richText: { applyFormat, removeFormat, getActiveFormat },
+    blockEditor: { RichTextToolbarButton }
+} = wp;
 
 const name = 'wca/abbreviation';
 
-class Edit extends Component {
-    constructor() {
-        super(...arguments);
+const Edit = ({ isActive, value, onChange }) => {
+    const activeFormat = getActiveFormat(value, name);
+    const { attributes = {} } = activeFormat || {};
 
-        this.toggle = this.toggle.bind(this);
+    const [isOpen, setIsOpen] = useState(false);
+    const [state, setState] = useState({ ...attributes });
 
-        this.state = {
-            isOpen: false,
-            title: '',
-            lang: '',
-        };
-    }
+    useEffect(() => setState({ ...attributes }), [activeFormat]);
 
-    toggle() {
-        this.setState((state) => ({ isOpen: !state.isOpen }));
-    }
+    const toggle = () => setIsOpen(!isOpen);
 
-    render() {
-        const { title, lang } = this.state;
-        const {
-            isActive,
-            value,
-            onChange,
-        } = this.props;
+    const { title, lang } = state;
 
-        const activeColorFormat = getActiveFormat(value, name);
+    const onClick = () => {
+        if (title) {
+            onChange(applyFormat(value, { type: name, attributes: state }));
+        } else {
+            onChange(removeFormat(value, name));
+        }
 
-        return (
-            <Fragment>
-                <RichTextToolbarButton
-                    icon={<Icon icon={code} />}
-                    title={__('Abbreviation', 'wecodeart')}
-                    onClick={this.toggle}
-                    isActive={isActive}
-                />
-                {this.state.isOpen && (
-                    <Modal
-                        title={__('Insert Abbreviation', 'wecodeart')}
-                        onRequestClose={this.toggle}>
-                        <TextControl
-                            label={__('Title', 'wecodeart')}
-                            value={activeColorFormat && !title ? activeColorFormat.attributes.title : title}
-                            onChange={(newTitle) => this.setState({ title: newTitle })}
-                        />
-                        <TextControl
-                            label={__('Language (optional)', 'wecodeart')}
-                            value={activeColorFormat && !lang ? activeColorFormat.attributes.lang : lang}
-                            help={__('Example: fr, en, de, etc. Use it only if the abbreviation’s language is different from page main language.', 'wecodeart')}
-                            onChange={(newLang) => this.setState({ lang: newLang })}
-                        />
+        toggle();
+    };
 
-                        <Button isPrimary isLarge onClick={() => {
-                            if (title) {
-                                const attributes = { title };
+    return (
+        <>
+            <RichTextToolbarButton
+                icon={<Icon icon={code} />}
+                title={__('Abbreviation', 'wecodeart')}
+                onClick={toggle}
+                isActive={isActive}
+            />
+            {isOpen && (
+                <Modal title={__('Insert Abbreviation', 'wecodeart')} onRequestClose={toggle}>
+                    <TextControl
+                        label={__('Title', 'wecodeart')}
+                        value={title}
+                        onChange={(title) => setState({ ...state, title })}
+                    />
+                    <TextControl
+                        label={__('Language (optional)', 'wecodeart')}
+                        value={lang}
+                        help={__('Example: fr, en, de, etc. Use it only if the abbreviation’s language is different from page main language.', 'wecodeart')}
+                        onChange={(lang) => setState({ ...state, lang })}
+                    />
+                    <Button isPrimary isLarge onClick={onClick}>
+                        {title ? __('Apply', 'wecodeart') : __('Remove', 'wecodeart')}
+                    </Button>
+                </Modal>
+            )}
+        </>
+    );
+};
 
-                                if (lang) {
-                                    attributes.lang = lang;
-                                }
-
-                                onChange(applyFormat(value, { type: name, attributes }));
-                            } else {
-                                onChange(removeFormat(value, name));
-                            }
-
-                            this.toggle();
-                        }}>
-                            {__('Apply', 'wecodeart')}
-                        </Button>
-                    </Modal>
-
-                )}
-            </Fragment>
-        );
-    }
-}
-
-export default compose(
-    withSelect((select) => {
-        return {
-            isDisabled: false,
-        };
-    }),
-    ifCondition((props) => !props.isDisabled),
-)(Edit);
+export default Edit;

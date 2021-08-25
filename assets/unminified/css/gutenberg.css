@@ -6346,15 +6346,25 @@
   z-index: 100000;
   /* Above WP toolbar. */
 }
+:root .theme-is-dark .form-select,
 :root .theme-is-dark .form-control,
+:root .theme-is-dark .form-check-input,
 :root .theme-is-dark .input-group-text,
 :root .theme-is-dark .btn-outline-dark {
   color: white;
   border-color: rgba(0, 0, 0, 0.3);
 }
+:root .theme-is-dark .form-select,
+:root .theme-is-dark .form-check-input,
 :root .theme-is-dark .input-group-text,
 :root .theme-is-dark .form-control {
   background-color: rgba(0, 0, 0, 0.15);
+}
+:root .theme-is-dark .form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+:root .theme-is-dark .form-select option {
+  color: var(--wca-dark);
 }
 :root .theme-is-dark .form-floating .form-control::placeholder {
   color: transparent;
