@@ -81,17 +81,24 @@ class Excerpt extends Dynamic {
 
 		// Buton based on link color
 		$button = wecodeart_json( [ 'styles', 'elements', 'link', 'color', 'text' ], 'primary' );
+		$button_classes = [ 'wp-block-post-excerpt__more-btn', 'btn' ];
+		$style = null;
 		if ( mb_strpos( $button, '|' ) !== false ) {
 			$button = explode( '|', $button );
 			$button = end( $button );
+			$button_classes[] = 'btn-outline-' . $button;
+		} else {
+			$style = 'color:' . $button . ';border-color:currentColor';
+			$button_classes[] = 'btn-outline-custom';
 		}
 
 		$more_text = Markup::wrap( 'entry-more', [
 			[
 				'tag' 	=> 'a',
 				'attrs' => [
-					'class' => 'wp-block-post-excerpt__more-btn btn btn-outline-' . $button,
-					'href'	=> esc_url( get_the_permalink( $post_id ) )
+					'class' => join( ' ', $button_classes ),
+					'href'	=> esc_url( get_the_permalink( $post_id ) ),
+					'style' => $style
 				]
 			]
 		], function( $attributes, $key, $default ) {
