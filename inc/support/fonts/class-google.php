@@ -221,6 +221,10 @@ final class Google {
 				}
 
 				// Download file to temporary location.
+				if ( ! function_exists( 'download_url' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/file.php';
+				}
+				
 				$tmp_path = download_url( $url );
 
 				// Make sure there were no errors.
