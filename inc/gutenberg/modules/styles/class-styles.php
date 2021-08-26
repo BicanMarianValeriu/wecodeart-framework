@@ -217,10 +217,13 @@ class Styles implements Integration {
 			$slug = explode( '--', $link_color );
 			$slug = str_replace( ')', '', end( $slug ) );
 		}
-		// Otherwhise is a normal Hex color
-		$link_color	= get_prop( current( wp_list_filter( $palette, [
-			'slug' => $slug,
-		] ) ), 'color', '#0088cc' );
+		
+		if ( isset( $slug  ) ) {
+			// Otherwhise is a normal Hex color
+			$link_color	= get_prop( current( wp_list_filter( $palette, [
+				'slug' => $slug,
+			] ) ), 'color', '#0088cc' );
+		}
 
 		// Darken the color
 		$link_color = $this->CSS::hex_brightness( $link_color, -25 );
