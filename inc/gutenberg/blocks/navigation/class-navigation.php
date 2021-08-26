@@ -416,9 +416,8 @@ class Navigation extends Dynamic {
 		.wp-block-navigation.hide-dropdown-icon .dropdown-toggle::after {
 			content: none;
 		}
-		.wp-block-navigation[class*='navbar-expand-'] .offcanvas {
+		.wp-block-navigation[class*='navbar-expand-'] .offcanvas:not([aria-modal='true']) {
 			width: initial;
-			min-width: 320px;
 		}
 		.wp-block-navigation.navbar-dark .btn-close {
 			background-color: var(--wca-white);
