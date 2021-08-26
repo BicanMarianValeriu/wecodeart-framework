@@ -32,7 +32,7 @@ const {
 const { currentUser, version } = wecodeart;
 
 /* Settings */
-import { GettingStarted, Extensions, Licenses, Notices } from './components';
+import { GettingStarted, Extensions, /* Licenses,  */Notices } from './components';
 
 import './../../scss/admin/admin.scss';
 
@@ -87,15 +87,15 @@ const WeCodeArt = () => {
 		}];
 	}
 
-	tabs = [
-		...tabs,
-		{
-			name: 'wca-license',
-			title: __('License(s)', 'wecodeart'),
-			className: 'wca-license',
-			render: <Licenses {...tabProps} />
-		}
-	];
+	// tabs = [
+	// 	...tabs,
+	// 	{
+	// 		name: 'wca-license',
+	// 		title: __('License(s)', 'wecodeart'),
+	// 		className: 'wca-license',
+	// 		render: <Licenses {...tabProps} />
+	// 	}
+	// ];
 
 	const [initialTab, setInitialTab] = useState('');
 	

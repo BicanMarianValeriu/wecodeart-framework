@@ -231,14 +231,17 @@ const WeCodeArt = () => {
         extensions
       }))
     }];
-  }
+  } // tabs = [
+  // 	...tabs,
+  // 	{
+  // 		name: 'wca-license',
+  // 		title: __('License(s)', 'wecodeart'),
+  // 		className: 'wca-license',
+  // 		render: <Licenses {...tabProps} />
+  // 	}
+  // ];
 
-  tabs = [...tabs, {
-    name: 'wca-license',
-    title: __('License(s)', 'wecodeart'),
-    className: 'wca-license',
-    render: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_components__WEBPACK_IMPORTED_MODULE_2__["Licenses"], tabProps)
-  }];
+
   const [initialTab, setInitialTab] = useState('');
   useEffect(() => {
     const {
@@ -378,7 +381,7 @@ const {
     className: "card-title"
   }, __('Customizer Options', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
     className: "card-text"
-  }, "WeCodeArt Framework still uses WP Customizer API to manage its front-end options. Head over there to see the available customizations."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+  }, "WeCodeArt Framework uses WP Customizer API to manage its front-end options. Head over there to see the available customizations."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
     href: adminUrl + '/customize.php',
     class: "button button-primary is-primary"
   }, __('View Options', 'wecodeart')))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
