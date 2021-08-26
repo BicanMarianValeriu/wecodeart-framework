@@ -45,7 +45,7 @@ class Numbers extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register_block_type() {
+	public function register() {
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 

@@ -157,7 +157,7 @@ class Blocks implements \ArrayAccess {
 	 */
 	public function load() {
 		foreach( $this->items as $class ) {
-            $class::get_instance()->register_block_type();
+            $class::get_instance()->register();
         }
 	}
 

@@ -45,7 +45,7 @@ class Cover extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register_block_type() {
+	public function register() {
 		add_filter( 'render_block_core/cover', [ $this, 'render' ], 10, 2 );
 	}
 

@@ -44,7 +44,7 @@ abstract class Dynamic {
 	/**
 	 * Registers the block type with WordPress.
 	 */
-	public function register_block_type() {
+	public function register() {
 		// Like this to pass theme check - however, in the theme, this acts as an abstract method
 		// and its overwritten to add_filter for the blocks that we change the markup
 		call_user_func_array( 'register_block_type', [ $this->get_block_type(), [
