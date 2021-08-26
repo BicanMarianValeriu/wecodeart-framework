@@ -83,7 +83,7 @@ class Content extends Dynamic {
 		if ( isset( $seen_ids[ $post_id ] ) ) {
 			$is_debug = defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY;
 
-			return $is_debug ? __( '[block rendering halted]' ) : '';
+			return $is_debug ? esc_html__( '[block rendering halted]', 'wecodeart' ) : '';
 		}
 
 		$seen_ids[ $post_id ] = true;

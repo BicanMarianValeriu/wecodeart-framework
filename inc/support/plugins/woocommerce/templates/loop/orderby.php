@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'attrs'		=> [
 			'name'			=> 'orderby',
 			'class'			=> 'form-select orderby',
-			'aria-label'	=> __( 'Shop order', 'woocommerce' ),
+			'aria-label'	=> esc_html__( 'Shop order', 'wecodeart' ),
 			'value'			=> wc_clean( filter_input( INPUT_GET, 'orderby' ) ),
 		],
 		'choices'	=> $catalog_orderby_options

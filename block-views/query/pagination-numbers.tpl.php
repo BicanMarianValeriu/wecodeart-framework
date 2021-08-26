@@ -14,7 +14,7 @@
 defined( 'ABSPATH' ) || exit();
 
 ?>
-<ul class="pagination pagination-sm justify-content-center mb-0" aria-label="<?php esc_html_e( 'Pagination', 'wecodeart' ); ?>"><?php
+<ul class="pagination pagination-sm justify-content-center mb-0" aria-label="<?php esc_attr_e( 'Pagination', 'wecodeart' ); ?>"><?php
 
     foreach( $links as $key => $link ) :
         $class = [ 'page-item', 'pagination__item' ];

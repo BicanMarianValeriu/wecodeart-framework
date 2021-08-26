@@ -51,7 +51,7 @@ class FileSystem {
 	public function set_folder( $folder = '' ) {
 		$wp_upload_dir = wp_get_upload_dir();
 
-		if ( ! $this->get_filesystem()->is_writable( $wp_upload_dir['basedir'] ) ) {
+		if ( ! is_writable( $wp_upload_dir['basedir'] ) ) {
 			return false;
 		}
 
@@ -74,7 +74,7 @@ class FileSystem {
 		$this->delete_file( $filename );
 
 		// Create new file
-		return $this->get_filesystem()->put_contents( $this->get_file_url( $filename ), $content, FS_CHMOD_FILE );
+		return file_put_contents( $this->get_file_url( $filename ), $content );
 	}
 
 	/**
@@ -87,7 +87,7 @@ class FileSystem {
 	public function delete_file( $filename ) {
 		// If no specific file, bail
 		if ( $this->has_file( $filename ) ) {
-			return $this->get_filesystem()->delete( $this->get_file_url( $filename ), true );
+			return unlink( $this->get_file_url( $filename ) );
 		}
 	}
 
@@ -115,24 +115,5 @@ class FileSystem {
 		}
 
 		return $file;
-	}
-
-	/**
-	 * Get the filesystem.
-	 *
-	 * @since 	5.0.0
-	 *
-	 * @return 	WP_Filesystem
-	 */
-	public function get_filesystem() {
-		global $wp_filesystem;
-		if ( ! $wp_filesystem ) {
-			if ( ! function_exists( 'WP_Filesystem' ) ) {
-				require_once wp_normalize_path( ABSPATH . '/wp-admin/includes/file.php' );
-			}
-			WP_Filesystem();
-		}
-
-		return $wp_filesystem;
 	}
 }

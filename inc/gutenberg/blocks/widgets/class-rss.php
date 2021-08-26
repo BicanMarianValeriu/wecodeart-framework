@@ -64,11 +64,11 @@ class RSS extends Dynamic {
 		$rss = fetch_feed( $attributes['feedURL'] );
 
 		if ( is_wp_error( $rss ) ) {
-			return '<div class="components-placeholder"><div class="notice notice-error"><strong>' . __( 'RSS Error:' ) . '</strong> ' . $rss->get_error_message() . '</div></div>';
+			return '<div class="components-placeholder"><div class="notice notice-error"><strong>' . esc_html__( 'RSS Error', 'wecodeart' ) . ':</strong> ' . $rss->get_error_message() . '</div></div>';
 		}
 
 		if ( ! $rss->get_item_quantity() ) {
-			return '<div class="components-placeholder"><div class="notice notice-error">' . __( 'An error has occurred, which probably means the feed is down. Try again later.' ) . '</div></div>';
+			return '<div class="components-placeholder"><div class="notice notice-error">' . esc_html__( 'An error has occurred, which probably means the feed is down. Try again later.', 'wecodeart' ) . '</div></div>';
 		}
 
 		$rss_items  = $rss->get_items( 0, get_prop( $attributes, [ 'itemsToShow' ], 5 ) );
@@ -118,7 +118,7 @@ class RSS extends Dynamic {
 				// Title
 				$title = esc_html( trim( strip_tags( $item->get_title() ) ) );
 				if ( empty( $title ) ) {
-					$title = __( '(no title)' );
+					$title = esc_html__( '(no title)', 'wecodeart' );
 				}
 				$link = esc_url( $item->get_link() );
 				if ( $link ) {

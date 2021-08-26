@@ -52,12 +52,12 @@ class FSE implements Integration {
 	public function admin_init() {
 		add_settings_field(
 			'full-site-editor',
-			__( 'Site Editor', 'gutenberg' ),
+			esc_html__( 'Site Editor', 'wecodeart' ),
 			'gutenberg_display_experiment_field',
 			'gutenberg-experiments',
 			'gutenberg_experiments_section',
 			[
-				'label' => __( 'Enable Site Editor', 'gutenberg' ),
+				'label' => esc_html__( 'Enable Site Editor', 'wecodeart' ),
 				'id'    => 'full-site-editor',
 			]
 		);
@@ -107,8 +107,8 @@ class FSE implements Integration {
 				// Add Widgets back to the admin menu.
 				if ( ! $has_widgets_menu ) {
 					add_theme_page(
-						__( 'Widgets', 'gutenberg' ),
-						__( 'Widgets', 'gutenberg' ),
+						esc_html__( 'Widgets', 'wecodeart' ),
+						esc_html__( 'Widgets', 'wecodeart' ),
 						'edit_theme_options',
 						'gutenberg-widgets',
 						'the_gutenberg_widgets',

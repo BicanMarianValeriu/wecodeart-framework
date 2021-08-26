@@ -129,7 +129,7 @@ class Comments extends Dynamic {
 				}
 
 				$post_title = '<a class="wp-block-latest-comments__comment-post" href="' . esc_url( get_comment_link( $comment ) ) . '">' . wp_latest_comments_draft_or_post_title( $comment->comment_post_ID ) . '</a>';
-				$list_items_markup .= sprintf( __( '%1$s on %2$s' ), $author_markup, $post_title );
+				$list_items_markup .= sprintf( __( '%1$s on %2$s', 'wecodeart' ), $author_markup, $post_title );
 
 				// Date
 				if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {

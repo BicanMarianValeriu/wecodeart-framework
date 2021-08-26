@@ -395,7 +395,7 @@ class Comments {
 			'title_reply_after'  	=> '</h3>',
 			'cancel_reply_before'  => '<span class="has-small-font-size my-2 float-end">',
 			'cancel_reply_after'   => '</span>',
-			'cancel_reply_link'    => __( 'Cancel reply' ),
+			'cancel_reply_link'    => esc_html__( 'Cancel reply', 'wecodeart' ),
 			'comment_field' 		=> $author_comment,
 			'comment_notes_before' 	=> Markup::wrap( 'comment-notes-before', [ [
 				'tag' 	=> 'div',

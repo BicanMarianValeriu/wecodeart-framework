@@ -227,7 +227,7 @@ final class Google {
 				if ( is_wp_error( $tmp_path ) ) continue;
 
 				// Move temp file to final destination.
-				$success = $this->FS->get_filesystem()->move( $tmp_path, $font_path, true );
+				$success = rename( $tmp_path, $font_path );
 				if ( $success ) {
 					$stored[ $url ] = $font_path;
 					$change         = true;
