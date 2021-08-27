@@ -170,16 +170,16 @@ class Core {
 	 * @return 	string
 	 */
 	public function archive_title( $content ) {
-		$output = sprintf( '<span class="archive-intro__svg">%s</span>', SVG::compile( 'folder' , [
+		$output = SVG::compile( 'folder' , [
 			'class' => 'me-3'
-		] ) );
+		] );
 
-		$title_template = '<span class="archive-intro__title">%s</span>';
+		$title_template = '<span>%s</span>';
 
 		if ( is_search() ) {
-			$output = sprintf( '<span class="archive-intro__svg">%s</span>', SVG::compile( 'search' , [
+			$output = SVG::compile( 'search' , [
 				'class' => 'me-3'
-			] ) );
+			] );
 			$output .= sprintf( $title_template, sprintf( 
 				esc_html__( 'Search Results for "%s".', 'wecodeart' ),
 				'<span>' .  get_search_query() . '</span>' 
