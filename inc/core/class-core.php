@@ -177,8 +177,11 @@ class Core {
 		$title_template = '<span class="archive-intro__title">%s</span>';
 
 		if ( is_search() ) {
-			$output = sprintf( $title_template, sprintf( 
-				esc_html__( 'Search Results for "%s"', 'wecodeart' ),
+			$output = sprintf( '<span class="archive-intro__svg">%s</span>', SVG::compile( 'search' , [
+				'class' => 'me-3'
+			] ) );
+			$output .= sprintf( $title_template, sprintf( 
+				esc_html__( 'Search Results for "%s".', 'wecodeart' ),
 				'<span>' .  get_search_query() . '</span>' 
 			) );
 		} elseif ( is_category() ) {
@@ -221,6 +224,6 @@ class Core {
 			$output .= esc_html__( 'Archives', 'wecodeart' );
 		} 
 
-		return trim( $output );
+		return $output;
 	} 
 }

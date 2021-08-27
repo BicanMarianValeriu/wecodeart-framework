@@ -89,6 +89,7 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/post-comments-link', Blocks\Post\Comments\Link::class );
         // Query Blocks
 		$this->register( 'core/query',	                    Blocks\Query::class );
+		$this->register( 'core/query-title',	            Blocks\Query\Title::class );
 		$this->register( 'core/template-part',              Blocks\Query\Template::class );
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         

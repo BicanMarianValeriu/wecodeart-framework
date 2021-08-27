@@ -73,29 +73,37 @@ class Template extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $attributes = [], $content = '', $block = null ) {
-		$page_key = isset( $block->context['queryId'] ) ? 'query-' . $block->context['queryId'] . '-page' : 'query-page';
-		$page     = empty( $_GET[ $page_key ] ) ? 1 : (int) $_GET[ $page_key ];
+		$page 	= isset( $block->context['queryId'] ) ? 'query-' . $block->context['queryId'] . '-page' : 'query-page';
+		$page	= (int) get_prop( $_GET, $page, 1 );
+		$args	= build_query_vars_from_query_block( $block, $page );
 
-		$query_args = build_query_vars_from_query_block( $block, $page );
 		// Override the custom query with the global query if needed.
-		$use_global_query = ( isset( $block->context['query']['inherit'] ) && $block->context['query']['inherit'] );
-		if ( $use_global_query ) {
+		if ( get_prop( $block->context, [ 'query', 'inherit' ], false ) ) {
 			global $wp_query;
 			if ( $wp_query && isset( $wp_query->query_vars ) && is_array( $wp_query->query_vars ) ) {
 				// Unset `offset` because if is set, $wp_query overrides/ignores the paged parameter and breaks pagination.
-				unset( $query_args['offset'] );
-				$query_args = wp_parse_args( $wp_query->query_vars, $query_args );
+				unset( $args['offset'] );
+				$args = wp_parse_args( $wp_query->query_vars, $args );
 
-				if ( empty( $query_args['post_type'] ) && is_singular() ) {
-					$query_args['post_type'] = get_post_type( get_the_ID() );
+				if ( empty( $args['post_type'] ) && is_singular() ) {
+					$args['post_type'] = get_post_type( get_the_ID() );
 				}
 			}
 		}
 
-		$query = new \WP_Query( $query_args );
+		$query = new \WP_Query( $args );
 
 		if ( ! $query->have_posts() ) {
-			return '';
+			return Markup::wrap( 'wp-block-query-message', [
+				[
+					'tag' 	=> 'div',
+					'attrs'	=> [
+						'class' => 'wp-block-query__message my-5'
+					]
+				]
+			], function() {
+				esc_html_e( 'Nothing found matching your criteria.', 'wecodeart' );
+			}, [], false );
 		}
 
 		$classnames = [ 'wp-block-post-template' ];
@@ -125,7 +133,7 @@ class Template extends Dynamic {
 				]
 			]
 		], function( $query, $block ) {
-			
+
 			while ( $query->have_posts() ) {
 				$query->the_post();
 
