@@ -220,6 +220,8 @@ class Core {
 			$output .= sprintf( $title_template, sprintf(
 				esc_html__( 'Post Type Archives: %s', 'wecodeart' ), post_type_archive_title( '', false ) 
 			) );
+		} elseif ( is_home() ) {
+			$output = sprintf( $title_template, esc_html__( 'Blog', 'wecodeart' ) );
 		} else {
 			$output .= esc_html__( 'Archives', 'wecodeart' );
 		} 

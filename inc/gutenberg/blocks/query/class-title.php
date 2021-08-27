@@ -74,7 +74,7 @@ class Title extends Dynamic {
 	 */
 	public function render( $attributes = [], $content = '', $block = null ) {
         $type       = get_prop( $attributes, 'type' );
-        $is_archive = is_archive() || is_search();
+        $is_archive = is_archive() || is_search() || is_home();
 
         if ( ! $type || ( 'archive' === $type && ! $is_archive ) ) {
             return '';
