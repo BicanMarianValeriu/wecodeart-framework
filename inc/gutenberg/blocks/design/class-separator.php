@@ -83,7 +83,7 @@ class Separator extends Dynamic {
 		.wp-block-separator.is-style-dots::before {
 			content: "\00b7 \00b7 \00b7";
 			color: currentColor;
-			font-size: 20px;
+			font-size: 1.5rem;
 			letter-spacing: 2em;
 			padding-left: 2em;
 			font-family: serif;
