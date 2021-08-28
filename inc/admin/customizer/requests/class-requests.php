@@ -51,9 +51,10 @@ class Requests {
 		// 1 - Customizer: post_value()
 		// 2 - Others: from args or fallback to what is currently set.
 		// 3 - If slug value is not provided it will only update the colors.
-		$value 		= $wp_customize ? $wp_customize->get_setting( $setting )->post_value() : $value ?: get_theme_mod( $setting );
+		$value 		= $value ? $value : get_theme_mod( $setting );
+		$value 		= $wp_customize ? $wp_customize->get_setting( $setting )->post_value() : $value;
 		// Get Choices: via argument or from theme JSON fallback
-		$choices 	= $choices ?: wecodeart_json( [ 'settings', 'custom', 'colorPalettes' ], false );
+		$choices 	= $choices ? $choices : wecodeart_json( [ 'settings', 'custom', 'colorPalettes' ], false );
 
 		// Bail early
 		if( $choices === false ) return;
