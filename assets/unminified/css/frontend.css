@@ -5488,7 +5488,6 @@ figcaption p.wp-caption-text,
 }
 
 /* 3.0 = Blocks */
-.wp-block-featured-image .ls-blur-up-img,
 .wp-block-featured-image .ratio > *, .wp-block-featured-image__src,
 .wp-block-featured-image img {
   display: block;
@@ -5497,47 +5496,33 @@ figcaption p.wp-caption-text,
   min-width: 100%;
   min-height: 100%;
   transform: translate3d(-50%, -50%, 0);
-  /* only if you want to change the blur-up option from always to auto or want to use blur up effect without a lowsrc image. */
-  font-family: "blur-up: auto", "object-fit: cover";
   max-width: none;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.wp-block-featured-image .ls-blur-up-img.match,
 .wp-block-featured-image .ratio > *.match, .wp-block-featured-image__src.match,
 .wp-block-featured-image img.match {
   width: 100%;
   height: 100%;
 }
-.wp-block-featured-image .ls-blur-up-img.taller,
 .wp-block-featured-image .ratio > *.taller, .wp-block-featured-image__src.taller,
 .wp-block-featured-image img.taller {
   width: 100%;
   height: auto;
 }
-.wp-block-featured-image .ls-blur-up-img.wider,
 .wp-block-featured-image .ratio > *.wider, .wp-block-featured-image__src.wider,
 .wp-block-featured-image img.wider {
   width: auto;
   height: 100%;
 }
-.wp-block-featured-image .ls-blur-up-img.ls-blur-up-is-loading, .wp-block-featured-image .ls-blur-up-img.lazyload:not([src]),
-.wp-block-featured-image .ratio > *.ls-blur-up-is-loading,
-.wp-block-featured-image .ratio > *.lazyload:not([src]), .wp-block-featured-image__src.ls-blur-up-is-loading, .wp-block-featured-image__src.lazyload:not([src]),
-.wp-block-featured-image img.ls-blur-up-is-loading,
-.wp-block-featured-image img.lazyload:not([src]) {
-  visibility: hidden;
-}
-.wp-block-featured-image .litespeed-loading,
-.wp-block-featured-image .ls-blur-up-img {
-  filter: blur(10px);
-  opacity: 1;
-  transition: opacity 1000ms, filter 1500ms;
-}
-.wp-block-featured-image .ls-blur-up-img.ls-inview.ls-original-loaded {
-  transition: opacity 1000ms, filter 1500ms;
-  opacity: 0;
+.wp-block-featured-image .ratio > *[data-placeholder-resp], .wp-block-featured-image__src[data-placeholder-resp],
+.wp-block-featured-image img[data-placeholder-resp] {
+  transition: filter 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
   filter: blur(5px);
+}
+.wp-block-featured-image .ratio > *.litespeed-loaded, .wp-block-featured-image__src.litespeed-loaded,
+.wp-block-featured-image img.litespeed-loaded {
+  filter: none;
 }
 
 div[class*=wp-block-post-comments] textarea {

@@ -111,7 +111,6 @@ figcaption,
 
 /* 3.0 = Blocks */
 .wp-block-featured-image {
-    .ls-blur-up-img,
     .ratio > *,
     &__src,
     img {
@@ -121,8 +120,6 @@ figcaption,
         min-width: 100%;
         min-height: 100%;
         transform: translate3d(-50%,-50%,0);
-        /* only if you want to change the blur-up option from always to auto or want to use blur up effect without a lowsrc image. */
-        font-family: "blur-up: auto", "object-fit: cover";
         max-width: none;
         object-fit: cover;
 
@@ -141,23 +138,14 @@ figcaption,
             height: 100%;
         }
 
-        &.ls-blur-up-is-loading,
-        &.lazyload:not([src]) {
-            visibility: hidden;
+        &[data-placeholder-resp] {
+            transition: filter .5s cubic-bezier(.6,-.28,.735,.045);
+            filter: blur(5px);
         }
-    }
-
-    .litespeed-loading,
-    .ls-blur-up-img {
-        filter: blur(10px);
-        opacity: 1;
-        transition: opacity 1000ms, filter 1500ms;
-    }
-
-    .ls-blur-up-img.ls-inview.ls-original-loaded {
-        transition: opacity 1000ms, filter 1500ms;
-        opacity: 0;
-        filter: blur(5px);
+        
+        &.litespeed-loaded {
+            filter: none;
+        }
     }
 }
 
