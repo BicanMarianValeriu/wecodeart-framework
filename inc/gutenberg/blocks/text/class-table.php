@@ -67,7 +67,7 @@ class Table extends Dynamic {
 			'table-sm',
 			'table-lg',
 			'table-striped',
-			'table-hover'
+			'table-hover',
 		];
 		
 		$classes = explode( ' ', get_prop( $attributes, 'className', '' ) );
@@ -81,14 +81,12 @@ class Table extends Dynamic {
 
 		// Wrapper Changes
 		$wrapper	= $doc->getElementsByTagName( 'figure' )->item(0);
-		$caption 	= $wrapper->getElementsByTagName( 'figcaption' )->item(0);
-		$wrapper->removeChild( $caption );
-		$wrapper->setAttribute( 'class', join( ' ', array_filter( array_merge( [ 'wp-block-table' ], $ommited ) ) ) );
+		$classname 	= $wrapper->getAttribute( 'class' );
+		$wrapper->setAttribute( 'class', join( ' ', array_filter( array_merge( explode( ' ', $classname ), $ommited ) ) ) );
 		
 		// Table Changes
 		$table 		= $wrapper->getElementsByTagName( 'table' )->item(0);
 		$table_cls  = [ 'table' ];
-		$table->appendChild( $doc->createElement( 'caption', $caption->textContent ) );
 		
 		if( $value = get_prop( $border, 'style', 'none' ) ) {
 			$table_cls[] = $value === 'none' ? 'table-borderless' : 'table-bordered';
@@ -135,9 +133,9 @@ class Table extends Dynamic {
 		.wp-block-table thead,
 		.wp-block-table tbody,
 		.wp-block-table tfoot,
-		.wp-block-table tr,
-		.wp-block-table td,
-		.wp-block-table th {
+		.wp-block-table .table-bordered > :not(caption) > *,
+		.wp-block-table .table-bordered > :not(caption) > * > * {
+			border-color: inherit;
 			border-style: inherit;
 			border-width: inherit;
 		}

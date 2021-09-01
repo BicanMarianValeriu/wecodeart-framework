@@ -246,6 +246,7 @@ class Styles implements Integration {
 			'core/media-text' 	=> Styles\Blocks\Media::class,
 			'core/button' 		=> Styles\Blocks\Button::class,
 			'core/image' 		=> Styles\Blocks\Image::class,
+			'core/table' 		=> Styles\Blocks\Table::class,
 			'core/spacer' 		=> Styles\Blocks\Spacer::class,
 			'core/column' 		=> Styles\Blocks\Column::class,
 			'core/social-links'	=> Styles\Blocks\Social::class,

@@ -102,6 +102,7 @@ class Gallery extends Dynamic {
 		}
 		.wp-block-gallery .blocks-gallery-image figure,
 		.wp-block-gallery .blocks-gallery-item figure {
+			position: relative;
 			height: 100%;
 		}
 		.wp-block-gallery .blocks-gallery-image img,
