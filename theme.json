@@ -304,7 +304,8 @@
 					"text": "var:preset|color|dark"
 				},
 				"typography": {
-					"fontFamily": "var:preset|font-family|headings"
+					"fontFamily": "var:preset|font-family|headings",
+					"fontSize": "var:preset|font-size|normal"
 				},
 				"border": {
 					"width": "1px",

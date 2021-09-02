@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-08-25 17:40+0000\n"
+"PO-Revision-Date: 2021-09-02 10:53+0000\n"
 "Last-Translator: Bican\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -25,10 +25,21 @@ msgstr "la %s"
 msgid "% Comments"
 msgstr "% Comentarii"
 
-#: inc/core/class-core.php:215
+#: inc/gutenberg/blocks/widgets/class-comments.php:132
+#, php-format
+msgid "%1$s on %2$s"
+msgstr "%1$s pe %2$s"
+
+#: inc/core/class-core.php:218
 #, php-format
 msgid "%s Archives"
 msgstr "%s Arhivă"
+
+#. %s: Quantity.
+#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
+#, php-format
+msgid "%s quantity"
+msgstr "%s cantitate"
 
 #: inc/core/class-content.php:116
 #, php-format
@@ -45,9 +56,17 @@ msgstr "Gravatarul lui %s"
 msgid "%s`s avatar"
 msgstr "Avatarul lui %s"
 
+#: inc/gutenberg/blocks/widgets/class-rss.php:121
+msgid "(no title)"
+msgstr "(fără titlu)"
+
 #: block-views/entry/meta/comments.tpl.php:44
 msgid "1 Comment"
 msgstr "1 Comentariu"
+
+#: inc/gutenberg/blocks/post/class-content.php:86
+msgid "[block rendering halted]"
+msgstr "[redării blocului a fost oprită]"
 
 #. Description of the theme
 msgid ""
@@ -82,11 +101,19 @@ msgstr "Ajustați ordinea modulelor de conținut de pe pagina produsului."
 msgid "Adjust the order of content modules on shop page."
 msgstr "Ajustați ordinea modulelor de conținut de pe pagina magazinului."
 
+#: inc/gutenberg/blocks/widgets/class-rss.php:71
+msgid ""
+"An error has occurred, which probably means the feed is down. Try again "
+"later."
+msgstr ""
+"A apărut o eroare, ceea ce înseamnă probabil că fluxul este oprit. Încercați "
+"mai târziu."
+
 #: inc/support/plugins/anr/class-anr.php:91
 msgid "ANR Captcha support is enabled!"
 msgstr "Suportul ANR Captcha este activat!"
 
-#: inc/core/class-core.php:221
+#: inc/core/class-core.php:226
 msgid "Archives"
 msgstr "Arhive"
 
@@ -106,7 +133,7 @@ msgstr "Culoarea legăturilor din atribuire"
 msgid "Attribution text color"
 msgstr "Culoare text subsol"
 
-#: inc/core/class-core.php:196
+#: inc/core/class-core.php:199
 #, php-format
 msgid "Author Archives: %s"
 msgstr "Arhive autor"
@@ -118,6 +145,10 @@ msgstr "Culoarea de fundal a subsolului . Implicit la culoarea CSS."
 #. Author of the theme
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr "Bican Marian Valeriu @wecodeart"
+
+#: inc/core/class-core.php:224
+msgid "Blog"
+msgstr "Blog"
 
 #: inc/support/fonts/class-fonts.php:220
 msgid "Bold 700"
@@ -146,11 +177,15 @@ msgstr "Creat pe %1s."
 msgid "By commenting you accept the %s."
 msgstr "Comentand vei accepta %s."
 
+#: inc/core/entry/class-comments.php:398
+msgid "Cancel reply"
+msgstr "Anulați răspunsul"
+
 #: inc/support/plugins/anr/class-anr.php:151
 msgid "Captcha *"
 msgstr "Captcha *"
 
-#: inc/core/class-core.php:186
+#: inc/core/class-core.php:189
 #, php-format
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
@@ -217,7 +252,7 @@ msgstr "Drepturi de autor %s - Toate drepturile reservate."
 msgid "Customize"
 msgstr "Personalizați"
 
-#: inc/core/class-core.php:211
+#: inc/core/class-core.php:214
 #, php-format
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
@@ -246,6 +281,10 @@ msgstr "Editează"
 #: inc/core/entry/class-comments.php:292
 msgid "Email *"
 msgstr "Email *"
+
+#: inc/support/fse/class-fse.php:60
+msgid "Enable Site Editor"
+msgstr "Activați Editorul site-ului"
 
 #: inc/core/class-search.php:61
 #, php-format
@@ -341,12 +380,12 @@ msgstr "ID-ul notificării lipsește"
 msgid "Missing palette."
 msgstr "Paleta lipsă."
 
-#: inc/core/class-core.php:207
+#: inc/core/class-core.php:210
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: inc/core/class-core.php:206
+#: inc/core/class-core.php:209
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr "Arhive lunare: %s"
@@ -367,6 +406,10 @@ msgstr ""
 #: inc/support/fonts/class-fonts.php:214
 msgid "Normal 400 Italic"
 msgstr "Normal 400 Italic"
+
+#: inc/gutenberg/blocks/post/class-template.php:105
+msgid "Nothing found matching your criteria."
+msgstr "Nu s-a găsit nimic care să corespundă criteriilor dvs."
 
 #: inc/admin/notifications/class-ajax.php:74
 msgid "Notification dismissed"
@@ -392,7 +435,7 @@ msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 msgid "Post Author"
 msgstr "Autorul postării"
 
-#: inc/core/class-core.php:218
+#: inc/core/class-core.php:221
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
@@ -418,6 +461,10 @@ msgstr "Bara laterală primară"
 msgid "Primary Font"
 msgstr "Font primar"
 
+#: inc/support/starter/class-starter.php:113
+msgid "Primary Menu"
+msgstr "Meniu Principal"
+
 #: inc/support/class-support.php:75
 msgid "Primary Navigation"
 msgstr "Navigație principală"
@@ -425,6 +472,15 @@ msgstr "Navigație principală"
 #: inc/support/plugins/woocommerce/customizer/class-customizer.php:78
 msgid "Product page modules"
 msgstr "Modulele paginii produsului"
+
+#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:49
+msgctxt "Product quantity input tooltip"
+msgid "Qty"
+msgstr "Cantitate"
+
+#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
+msgid "Quantity"
+msgstr "Cantitate"
 
 #. %1$s expands to the request method
 #: inc/admin/request/class-request.php:103
@@ -437,16 +493,21 @@ msgstr "Metoda de solicitare %1$s nu este validă."
 msgid "Required fiels are marked \"%s\"."
 msgstr "Fișele obligatorii sunt marcate cu %s\"."
 
+#: inc/gutenberg/blocks/widgets/class-rss.php:67
+msgid "RSS Error"
+msgstr "Eroare RSS"
+
 #: inc/core/class-search.php:59
 #: inc/gutenberg/blocks/widgets/class-search.php:66
 #: inc/gutenberg/blocks/widgets/class-search.php:67
 msgid "Search"
 msgstr "Caută"
 
-#: inc/core/class-core.php:181
+#: inc/core/class-core.php:184
 #, php-format
-msgid "Search Results for \"%s\""
-msgstr "Rezultate cautare pentru \"%s\""
+#| msgid "Search Results for \"%s\""
+msgid "Search Results for \"%s\"."
+msgstr "Rezultate căutare pentru \"%s\""
 
 #: inc/core/class-search.php:60
 msgid "Search this website"
@@ -475,6 +536,10 @@ msgstr ""
 msgid "Send"
 msgstr "Trimite"
 
+#: inc/support/plugins/woocommerce/templates/loop/orderby.php:29
+msgid "Shop order"
+msgstr "Comandă magazin"
+
 #: inc/support/plugins/woocommerce/customizer/class-customizer.php:62
 msgid "Shop page modules"
 msgstr "Modulele paginii magazinului"
@@ -482,6 +547,10 @@ msgstr "Modulele paginii magazinului"
 #: inc/support/plugins/woocommerce/class-woocommerce.php:100
 msgid "Shop Sidebar"
 msgstr "Bara laterală magazin"
+
+#: inc/support/fse/class-fse.php:55
+msgid "Site Editor"
+msgstr "Editor Site"
 
 #: inc/admin/customizer/configs/class-design.php:41
 msgid "Site Palette"
@@ -491,7 +560,7 @@ msgstr "Paleta site-ului"
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
-#: inc/core/class-core.php:191
+#: inc/core/class-core.php:194
 #, php-format
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
@@ -509,7 +578,7 @@ msgctxt "Theme starter content"
 msgid "About"
 msgstr "Despre"
 
-#: inc/support/starter/class-starter.php:115
+#: inc/support/starter/class-starter.php:134
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Blog"
@@ -518,6 +587,11 @@ msgstr "Blog"
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr "Acasă"
+
+#: inc/support/starter/class-starter.php:100
+msgctxt "Theme starter content"
+msgid "Logo"
+msgstr "Logo"
 
 #: inc/gutenberg/blocks/widgets/class-posts.php:221
 msgid "This content is password protected."
@@ -644,6 +718,10 @@ msgstr ""
 "Când extindeți %s, trebuie să creați o metodă `register`, combinând "
 "argumentele existente cu cele noi."
 
+#: inc/support/fse/class-fse.php:110 inc/support/fse/class-fse.php:111
+msgid "Widgets"
+msgstr "Widgeturi"
+
 #: inc/support/plugins/woocommerce/class-woocommerce.php:102
 msgid "Widgets in this area will be shown on all shop pages."
 msgstr ""
@@ -663,12 +741,12 @@ msgstr ""
 "Împachetările nu sunt definite corect pentru „% s”. Vă rugăm să verificați "
 "codul temei."
 
-#: inc/core/class-core.php:202
+#: inc/core/class-core.php:205
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y"
 
-#: inc/core/class-core.php:201
+#: inc/core/class-core.php:204
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr "Arhive Anuale"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-25 17:37+0000\n"
+"POT-Creation-Date: 2021-09-02 10:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,9 +25,20 @@ msgstr ""
 msgid "% Comments"
 msgstr ""
 
-#: inc/core/class-core.php:215
+#: inc/gutenberg/blocks/widgets/class-comments.php:132
+#, php-format
+msgid "%1$s on %2$s"
+msgstr ""
+
+#: inc/core/class-core.php:218
 #, php-format
 msgid "%s Archives"
+msgstr ""
+
+#. %s: Quantity.
+#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
+#, php-format
+msgid "%s quantity"
 msgstr ""
 
 #: inc/core/class-content.php:116
@@ -45,8 +56,16 @@ msgstr ""
 msgid "%s`s avatar"
 msgstr ""
 
+#: inc/gutenberg/blocks/widgets/class-rss.php:121
+msgid "(no title)"
+msgstr ""
+
 #: block-views/entry/meta/comments.tpl.php:44
 msgid "1 Comment"
+msgstr ""
+
+#: inc/gutenberg/blocks/post/class-content.php:86
+msgid "[block rendering halted]"
 msgstr ""
 
 #. Description of the theme
@@ -78,11 +97,17 @@ msgstr ""
 msgid "Adjust the order of content modules on shop page."
 msgstr ""
 
+#: inc/gutenberg/blocks/widgets/class-rss.php:71
+msgid ""
+"An error has occurred, which probably means the feed is down. Try again "
+"later."
+msgstr ""
+
 #: inc/support/plugins/anr/class-anr.php:91
 msgid "ANR Captcha support is enabled!"
 msgstr ""
 
-#: inc/core/class-core.php:221
+#: inc/core/class-core.php:226
 msgid "Archives"
 msgstr ""
 
@@ -102,7 +127,7 @@ msgstr ""
 msgid "Attribution text color"
 msgstr ""
 
-#: inc/core/class-core.php:196
+#: inc/core/class-core.php:199
 #, php-format
 msgid "Author Archives: %s"
 msgstr ""
@@ -113,6 +138,10 @@ msgstr ""
 
 #. Author of the theme
 msgid "Bican Marian Valeriu @wecodeart"
+msgstr ""
+
+#: inc/core/class-core.php:224
+msgid "Blog"
 msgstr ""
 
 #: inc/support/fonts/class-fonts.php:220
@@ -141,11 +170,15 @@ msgstr ""
 msgid "By commenting you accept the %s."
 msgstr ""
 
+#: inc/core/entry/class-comments.php:398
+msgid "Cancel reply"
+msgstr ""
+
 #: inc/support/plugins/anr/class-anr.php:151
 msgid "Captcha *"
 msgstr ""
 
-#: inc/core/class-core.php:186
+#: inc/core/class-core.php:189
 #, php-format
 msgid "Category Archives: %s"
 msgstr ""
@@ -207,7 +240,7 @@ msgstr ""
 msgid "Customize"
 msgstr ""
 
-#: inc/core/class-core.php:211
+#: inc/core/class-core.php:214
 #, php-format
 msgid "Daily Archives: %s"
 msgstr ""
@@ -235,6 +268,10 @@ msgstr ""
 
 #: inc/core/entry/class-comments.php:292
 msgid "Email *"
+msgstr ""
+
+#: inc/support/fse/class-fse.php:60
+msgid "Enable Site Editor"
 msgstr ""
 
 #: inc/core/class-search.php:61
@@ -330,12 +367,12 @@ msgstr ""
 msgid "Missing palette."
 msgstr ""
 
-#: inc/core/class-core.php:207
+#: inc/core/class-core.php:210
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr ""
 
-#: inc/core/class-core.php:206
+#: inc/core/class-core.php:209
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr ""
@@ -354,6 +391,10 @@ msgstr ""
 
 #: inc/support/fonts/class-fonts.php:214
 msgid "Normal 400 Italic"
+msgstr ""
+
+#: inc/gutenberg/blocks/post/class-template.php:105
+msgid "Nothing found matching your criteria."
 msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:74
@@ -380,7 +421,7 @@ msgstr ""
 msgid "Post Author"
 msgstr ""
 
-#: inc/core/class-core.php:218
+#: inc/core/class-core.php:221
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr ""
@@ -406,12 +447,25 @@ msgstr ""
 msgid "Primary Font"
 msgstr ""
 
+#: inc/support/starter/class-starter.php:113
+msgid "Primary Menu"
+msgstr ""
+
 #: inc/support/class-support.php:75
 msgid "Primary Navigation"
 msgstr ""
 
 #: inc/support/plugins/woocommerce/customizer/class-customizer.php:78
 msgid "Product page modules"
+msgstr ""
+
+#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:49
+msgctxt "Product quantity input tooltip"
+msgid "Qty"
+msgstr ""
+
+#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
+msgid "Quantity"
 msgstr ""
 
 #. %1$s expands to the request method
@@ -425,15 +479,19 @@ msgstr ""
 msgid "Required fiels are marked \"%s\"."
 msgstr ""
 
+#: inc/gutenberg/blocks/widgets/class-rss.php:67
+msgid "RSS Error"
+msgstr ""
+
 #: inc/core/class-search.php:59
 #: inc/gutenberg/blocks/widgets/class-search.php:66
 #: inc/gutenberg/blocks/widgets/class-search.php:67
 msgid "Search"
 msgstr ""
 
-#: inc/core/class-core.php:181
+#: inc/core/class-core.php:184
 #, php-format
-msgid "Search Results for \"%s\""
+msgid "Search Results for \"%s\"."
 msgstr ""
 
 #: inc/core/class-search.php:60
@@ -461,12 +519,20 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
+#: inc/support/plugins/woocommerce/templates/loop/orderby.php:29
+msgid "Shop order"
+msgstr ""
+
 #: inc/support/plugins/woocommerce/customizer/class-customizer.php:62
 msgid "Shop page modules"
 msgstr ""
 
 #: inc/support/plugins/woocommerce/class-woocommerce.php:100
 msgid "Shop Sidebar"
+msgstr ""
+
+#: inc/support/fse/class-fse.php:55
+msgid "Site Editor"
 msgstr ""
 
 #: inc/admin/customizer/configs/class-design.php:41
@@ -477,7 +543,7 @@ msgstr ""
 msgid "Speak Your Mind"
 msgstr ""
 
-#: inc/core/class-core.php:191
+#: inc/core/class-core.php:194
 #, php-format
 msgid "Tag Archives: %s"
 msgstr ""
@@ -495,7 +561,7 @@ msgctxt "Theme starter content"
 msgid "About"
 msgstr ""
 
-#: inc/support/starter/class-starter.php:115
+#: inc/support/starter/class-starter.php:134
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr ""
@@ -503,6 +569,11 @@ msgstr ""
 #: inc/support/starter/content/home.php:7
 msgctxt "Theme starter content"
 msgid "Home"
+msgstr ""
+
+#: inc/support/starter/class-starter.php:100
+msgctxt "Theme starter content"
+msgid "Logo"
 msgstr ""
 
 #: inc/gutenberg/blocks/widgets/class-posts.php:221
@@ -611,6 +682,10 @@ msgid ""
 "arguments with new ones."
 msgstr ""
 
+#: inc/support/fse/class-fse.php:110 inc/support/fse/class-fse.php:111
+msgid "Widgets"
+msgstr ""
+
 #: inc/support/plugins/woocommerce/class-woocommerce.php:102
 msgid "Widgets in this area will be shown on all shop pages."
 msgstr ""
@@ -625,12 +700,12 @@ msgid ""
 "Wrappers are not properly defined for \"%s\". Please check your theme code."
 msgstr ""
 
-#: inc/core/class-core.php:202
+#: inc/core/class-core.php:205
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr ""
 
-#: inc/core/class-core.php:201
+#: inc/core/class-core.php:204
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr ""
