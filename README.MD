@@ -1,9 +1,11 @@
-## WeCodeArt Framework Copyright 2021
+## WeCodeArt Copyright 2021
 ## https://www.wecodeart.com/
 
-Requires at least: WordPress 5.8.0
-Tested up to: WordPress 5.8.0
 Version: 5.0+
+Contributors: vbmv
+Requires at least: WordPress 5.8
+Tested up to: WordPress 5.8
+Requires PHP: 5.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

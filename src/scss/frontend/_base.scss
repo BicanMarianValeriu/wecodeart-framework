@@ -149,6 +149,15 @@ figcaption,
     }
 }
 
+.wp-block-post-excerpt,
+.wp-block-post-content {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
 div[class*="wp-block-post-comments"] {
     textarea {
         min-height: 150px;

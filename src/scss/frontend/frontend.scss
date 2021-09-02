@@ -5,10 +5,10 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 5.0.0
+Version: 5.0.3
 Requires PHP: 7.0
 Requires at least: 5.8
-Tested up to: 5.8.0
+Tested up to: 5.8
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wecodeart
@@ -54,11 +54,11 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import "~bootstrap/scss/alert";
 @import "~bootstrap/scss/list-group";
 @import "~bootstrap/scss/close";
-@import "~bootstrap/scss/tooltip";
 @import "~bootstrap/scss/popover";
 @import "~bootstrap/scss/spinners";
 @import "~bootstrap/scss/offcanvas";
 @import "~bootstrap/scss/placeholders";
+// @import "~bootstrap/scss/tooltip";
 // @import "~bootstrap/scss/accordion";
 // @import "~bootstrap/scss/progress";
 // @import "~bootstrap/scss/toasts";

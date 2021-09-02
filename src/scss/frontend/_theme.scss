@@ -54,4 +54,25 @@
     }
 }
 
+input:not([type="radio"]):not([type="checkbox"]) {
+    @extend .form-control;
+}
+
+input[type="range"] {
+    @extend .form-range;
+}
+
+select {
+    @extend .form-select;
+}
+
+button {
+    @extend .btn;
+    @extend .btn-dark;
+}
+
+table {
+    @extend .table;
+}
+
 @import './../abstracts/root';
