@@ -130,7 +130,7 @@ class Comments {
 	 * Render Pings List.
 	 *
 	 * @since	unknown
-	 * @version 3.7.8
+	 * @version 5.0.0
 	 *
 	 * @return 	void
 	 */
@@ -143,7 +143,7 @@ class Comments {
 				'tag' 	=> 'ol',
 				'attrs' => [
 					'id' 	=> 'pings-list',
-					'class' => 'comments__pings unstyled pl-0 pings-list'
+					'class' => 'comments__pings list-unstyled pl-0 pings-list'
 				]
 			] ], 'wp_list_comments', [ apply_filters( 'wecodeart/filter/comments/pings/args', [
 				'type' 		 => 'pings',

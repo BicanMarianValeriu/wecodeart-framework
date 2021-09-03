@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use Walker_Comment;
 use WeCodeArt\Markup;
+use WeCodeArt\Markup\SVG;
 
 /**
  * Comment Walker Class
@@ -66,7 +67,9 @@ class Comment extends Walker_Comment {
 				echo wp_kses_post( comment_author_link( $comment ) );
 
 				// Edit link.
-				edit_comment_link( '&#9998;', '<span class="badge bg-primary text-white">', '</span>' );
+				edit_comment_link( SVG::compile( 'pencil', [
+					'class' => 'mb-0 ms-3'
+				] ) );
 				
 			?></div>
 		<?php 

@@ -56,8 +56,13 @@ svg,
     }
 }
 
+figure,
+iframe,
 img {
     max-width: 100%;
+}
+
+img {
     height: auto;
     backface-visibility: hidden;
 }
@@ -166,4 +171,26 @@ div[class*="wp-block-post-comments"] {
     .comment-reply {
         margin-top: -1rem;
     }
+}
+
+/* 4.0 = Core */
+input:not([type="radio"]):not([type="checkbox"]) {
+    @extend .form-control;
+}
+
+input[type="range"] {
+    @extend .form-range;
+}
+
+select {
+    @extend .form-select;
+}
+
+button {
+    @extend .btn;
+    @extend .btn-dark;
+}
+
+table {
+    @extend .table;
 }

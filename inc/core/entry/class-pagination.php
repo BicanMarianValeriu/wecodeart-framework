@@ -80,7 +80,7 @@ class Pagination {
      * @return  string
      */
     public function wp_link_pages_link( $link ) {
-        $link = str_replace( 'post-page-numbers', 'page-item', $link );
+        $link = str_replace( 'post-page-numbers', 'page-item text-decoration-none', $link );
         $link = str_replace( 'current', 'active', $link );
         return $link;
     }

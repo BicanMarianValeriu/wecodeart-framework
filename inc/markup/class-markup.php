@@ -234,14 +234,14 @@ class Markup {
 		
 		foreach( $args as $key => $elem ) {
 			$attrs 		= isset( $elem['attrs'] ) ? ( array ) $elem['attrs'] : [];
-			$open_tag 	= trim( implode( ' ', [ esc_html( $elem['tag'] ), self::generate_attr( $context, $attrs, $key ) ] ) );
+			$open_tag 	= trim( implode( ' ', [ tag_escape( $elem['tag'] ), self::generate_attr( $context, $attrs, $key ) ] ) );
 			$html .= '<' . $open_tag . '>';
 		}
 
 		$html .= $function_html;
 
 		foreach( array_reverse( $args ) as $key => $elem ) {
-			$html .= '</' . esc_html( $elem['tag'] ) . '>';
+			$html .= '</' . tag_escape( $elem['tag'] ) . '>';
 		}
 
 		/**

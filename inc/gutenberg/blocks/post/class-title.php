@@ -111,7 +111,7 @@ class Title extends Dynamic {
 			$wrappers[] = [
 				'tag' 	=> 'a',
 				'attrs' => [
-					'class'		=> 'wp-block-post-title__link text-decoration-none',
+					'class'		=> 'wp-block-post-title__link text-decoration-none text-wrap',
 					'target' 	=> get_prop( $attributes, 'linkTarget', null ),
 					'href'		=> get_permalink( $block->context['postId'] )
 				]
