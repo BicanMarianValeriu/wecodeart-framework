@@ -331,7 +331,7 @@ class Comments {
 		$author_name	= Markup::wrap( 'comment-author-name', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => 'mb-3 comment-form-author col-12 col-md-7'
+				'class' => 'mb-3 comment-form-author col-md-7'
 			]
 		] ], $inputs['name'], null, false );
 
@@ -339,7 +339,7 @@ class Comments {
 		$author_email = Markup::wrap( 'comment-author-email', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => 'mb-3 comment-form-email col-12 col-md-7'
+				'class' => 'mb-3 comment-form-email col-md-7'
 			]
 		] ], $inputs['email'], null, false );
 
@@ -347,7 +347,7 @@ class Comments {
 		$author_url	= Markup::wrap( 'comment-author-url', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => 'mb-3 comment-form-url col-12 col-md-7'
+				'class' => 'mb-3 comment-form-url col-md-7'
 			]
 		] ], $inputs['url'], null, false );
 
@@ -447,6 +447,7 @@ class Comments {
 	 * Validate Cookie field.
 	 *
 	 * @since	5.0.0
+	 * @since	5.0.5
 	 *
 	 * @return 	void
 	 */
@@ -457,7 +458,7 @@ class Comments {
 
 		if( ! filter_input( INPUT_POST, 'comment-cookies' ) ) {
 			wp_die( sprintf( esc_html__( 'You must accept %s to comment!', 'wecodeart' ), sprintf(
-				'<a href="%1$s">%2$s</a>',
+				'<a href="%1$s" target="_blank">%2$s</a>',
 				esc_url( get_privacy_policy_url() ),
 				esc_html( get_the_title( $privacy_policy ) )
 			) ) );
