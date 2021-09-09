@@ -164,7 +164,7 @@ class Navigation extends Dynamic {
 
 				Markup::wrap( 'navbar-offcanvas', $wrappers, function( $inner_blocks, $classes ) {
 					$html = '';
-					foreach ( $inner_blocks as $inner_block ) $html .= $inner_block->render();
+					foreach ( $inner_blocks as $inner_block ) $html .= $this->render_menu_block( $inner_block );
 					wecodeart_template( 'general/offcanvas', [
 						'content' => sprintf( '<ul class="%s">%s</ul>', join( ' ', $classes ), $html ),
 					] );
@@ -174,10 +174,41 @@ class Navigation extends Dynamic {
 			}
 
 			Markup::wrap( 'navbar-inner', $wrappers, function( $inner_blocks ) {
-				foreach ( $inner_blocks as $inner_block ) echo $inner_block->render();
+				foreach ( $inner_blocks as $inner_block ) echo $this->render_menu_block( $inner_block );
 			}, [ $inner_blocks ] );
 
 		}, [ $attributes, $inner_blocks ], false );
+
+		return $html;
+	}
+
+	/**
+	 * Renders menu item wrapper.
+	 *
+	 * @param 	object 	$block.
+	 *
+	 * @return 	string 	Rendered block with wrapper block
+	 */
+	public function render_menu_block( $block ) {
+		$html = $block->render();
+		
+		// For this specific blocks, please wrap them in a <li> for valid markup
+		if( in_array( get_prop( $block->parsed_block, 'blockName', '' ), [
+			'core/search',
+			'core/social-links',
+			'core/site-title',
+			'core/site-logo'
+		] ) ) {
+			$classes	= [ 'wp-block-navigation-link', 'nav-item' ];
+			$classes[]  = 'nav-item--' . join( '-', explode( '/', get_prop( $block->parsed_block, 'blockName' ) ) );
+
+			return Markup::wrap( 'nav-item', [ [
+				'tag' 	=> 'li',
+				'attrs'	=> [
+					'class'	=> join( ' ', $classes ),
+				]
+			] ], $html, [], false );
+		}
 
 		return $html;
 	}

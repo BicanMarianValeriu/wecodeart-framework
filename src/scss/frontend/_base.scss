@@ -186,11 +186,6 @@ select {
     @extend .form-select;
 }
 
-button {
-    @extend .btn;
-    @extend .btn-dark;
-}
-
 table {
     @extend .table;
 }

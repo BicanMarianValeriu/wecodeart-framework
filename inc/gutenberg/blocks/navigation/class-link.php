@@ -320,6 +320,7 @@ class Link extends Dynamic {
 				}
 			}
 		}
+	
 		return $attrs;
 	}
 }
