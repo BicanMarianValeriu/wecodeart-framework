@@ -115,6 +115,13 @@ class Scripts {
 		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'frontend' ), [
 	 		'wp-hooks'
 		], wecodeart( 'version' ), true );
+
+		// Developer Scripts
+		if( wecodeart_if( 'is_dev_mode' ) ) {
+			// @todo - autocheck if livereload has open connection
+			$live_reload 	= '//localhost:35729/livereload.js';
+			wp_enqueue_script( $this->make_handle( 'livereload' ), $live_reload );
+		}
 	}
 
 	/**

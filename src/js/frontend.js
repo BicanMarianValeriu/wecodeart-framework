@@ -1,10 +1,6 @@
 // Boostrap - navigation will be used 99.999% of the times so we include by default!
 import 'bootstrap/js/dist/offcanvas';
 import 'bootstrap/js/dist/dropdown';
-
-// FA SVG
-import { library, dom } from '@fortawesome/fontawesome-svg-core';
-
 // WeCodeArt
 import './plugins/wecodeart-Component';
 import './plugins/wecodeart-JSManager';
@@ -42,7 +38,6 @@ function filterLog(route, func, args) {
 		requireJs,
 		loadJs
 	};
-	wecodeart.FA = library;
 	/**
 	 * @description
 	 * Setup JS URLs that are lazy loaded from CDN/Theme with IDs to easly load them later
@@ -78,9 +73,6 @@ function filterLog(route, func, args) {
 				window.onscroll = handleDocumentScrolled;
 			},
 			complete: () => {
-				// FA Watch
-				dom.watch();
-
 				// Fetch all the forms we want to apply custom Bootstrap validation styles to
 				const forms = document.querySelectorAll('.needs-validation');
 				Array.prototype.slice.call(forms).forEach((form) => {

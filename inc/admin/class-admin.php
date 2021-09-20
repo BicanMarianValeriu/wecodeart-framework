@@ -42,7 +42,6 @@ class Admin {
 		\add_action( 'after_switch_theme', 		[ $this, 'insert_default_settings' ] );
 
 		Notifications::get_instance();
-		Customizer::get_instance();
 	}
 
 	/**
@@ -228,7 +227,7 @@ class Admin {
 	 * @since   5.0.0
 	 */
 	public function menu_callback() {
-		echo '<div id="wecodeart" class="wecodeart-admin"></div>';
+		?><div id="wecodeart" class="wecodeart-admin"></div><?php
 	}
 
 	/**

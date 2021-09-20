@@ -11,7 +11,7 @@
  * @version		5.0.0
  */
 
-import './../../scss/admin/notification/notification.scss';
+import './../../../scss/admin/notification/notification.scss';
 
 (function ($) {
 

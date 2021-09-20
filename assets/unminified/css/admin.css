@@ -4,8 +4,8 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(var(--wca-gutter-y) * -1);
-  margin-right: calc(var(--wca-gutter-x) * -.5);
-  margin-left: calc(var(--wca-gutter-x) * -.5);
+  margin-right: calc(var(--wca-gutter-x) * -0.5);
+  margin-left: calc(var(--wca-gutter-x) * -0.5);
 }
 .row > * {
   flex-shrink: 0;
@@ -2457,7 +2457,7 @@
 
 .text-body {
   --wca-text-opacity: 1;
-  color: rgba(var(--wca-body-rgb), var(--wca-text-opacity)) !important;
+  color: rgba(var(--wca-body-color-rgb), var(--wca-text-opacity)) !important;
 }
 
 .text-muted {
@@ -2548,7 +2548,7 @@
 
 .bg-body {
   --wca-bg-opacity: 1;
-  background-color: rgba(var(--wca-body-rgb), var(--wca-bg-opacity)) !important;
+  background-color: rgba(var(--wca-body-bg-rgb), var(--wca-bg-opacity)) !important;
 }
 
 .bg-transparent {

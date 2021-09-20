@@ -26,11 +26,10 @@ export default () => {
                         <div className="card-body">
                             <h3 className="card-title">{__('Customizer Options', 'wecodeart')}</h3>
                             <p className="card-text">
-                                WeCodeArt Framework uses WP Customizer API to manage its front-end options.
-                                Head over there to see the available customizations.
+                                WeCodeArt Framework still uses WP Customizer API to manage logo, favicon, menus, set home or blog page. You can also add your own custom CSS.
                             </p>
                             <a href={adminUrl + '/customize.php'} class="button button-primary is-primary">{
-                                __('View Options', 'wecodeart')
+                                __('Legacy Options', 'wecodeart')
                             }</a>
                         </div>
                     </div>

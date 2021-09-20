@@ -17,7 +17,11 @@ defined( 'ABSPATH' ) || exit();
 <div class="wp-site-credits">
     <div class="container">
         <div class="py-3 text-center">
-            <span class="wp-site-credits__text"><?php echo wp_kses_post( $copyright ); ?></span>
+            <span class="wp-site-credits__text"><?php
+                
+                echo wp_kses_post( sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy; ' . date( 'Y' ) ) );
+                
+            ?></span>
             <span class="wp-site-credits__theme"><?php
 
                 printf(

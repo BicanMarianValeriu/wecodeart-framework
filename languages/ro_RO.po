@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-09-02 10:53+0000\n"
+"PO-Revision-Date: 2021-09-20 22:54+0000\n"
 "Last-Translator: Bican\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -30,7 +30,7 @@ msgstr "% Comentarii"
 msgid "%1$s on %2$s"
 msgstr "%1$s pe %2$s"
 
-#: inc/core/class-core.php:218
+#: inc/core/class-core.php:219
 #, php-format
 msgid "%s Archives"
 msgstr "%s Arhivă"
@@ -93,14 +93,6 @@ msgstr "Adaugă un meniu"
 msgid "add one"
 msgstr "adaugă unul"
 
-#: inc/support/plugins/woocommerce/customizer/class-customizer.php:79
-msgid "Adjust the order of content modules on product page."
-msgstr "Ajustați ordinea modulelor de conținut de pe pagina produsului."
-
-#: inc/support/plugins/woocommerce/customizer/class-customizer.php:63
-msgid "Adjust the order of content modules on shop page."
-msgstr "Ajustați ordinea modulelor de conținut de pe pagina magazinului."
-
 #: inc/gutenberg/blocks/widgets/class-rss.php:71
 msgid ""
 "An error has occurred, which probably means the feed is down. Try again "
@@ -113,7 +105,7 @@ msgstr ""
 msgid "ANR Captcha support is enabled!"
 msgstr "Suportul ANR Captcha este activat!"
 
-#: inc/core/class-core.php:226
+#: inc/core/class-core.php:227
 msgid "Archives"
 msgstr "Arhive"
 
@@ -121,32 +113,16 @@ msgstr "Arhive"
 msgid "at"
 msgstr "la"
 
-#: inc/admin/customizer/configs/class-footer.php:66
-msgid "Attribution background color"
-msgstr "Culoare fundal subsol"
-
-#: inc/admin/customizer/configs/class-footer.php:110
-msgid "Attribution links color"
-msgstr "Culoarea legăturilor din atribuire"
-
-#: inc/admin/customizer/configs/class-footer.php:95
-msgid "Attribution text color"
-msgstr "Culoare text subsol"
-
-#: inc/core/class-core.php:199
+#: inc/core/class-core.php:200
 #, php-format
 msgid "Author Archives: %s"
 msgstr "Arhive autor"
-
-#: inc/admin/customizer/configs/class-footer.php:67
-msgid "Background color of the footer credits wrapper. Defaults to CSS color."
-msgstr "Culoarea de fundal a subsolului . Implicit la culoarea CSS."
 
 #. Author of the theme
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr "Bican Marian Valeriu @wecodeart"
 
-#: inc/core/class-core.php:224
+#: inc/core/class-core.php:225
 msgid "Blog"
 msgstr "Blog"
 
@@ -166,7 +142,7 @@ msgstr "Book 300"
 msgid "Book 300 Italic"
 msgstr "Book 300 Italic"
 
-#: block-views/footer/credits.tpl.php:24
+#: block-views/footer/credits.tpl.php:28
 #, php-format
 #| msgid "Built on %1$s."
 msgid "Built on %1s."
@@ -185,22 +161,10 @@ msgstr "Anulați răspunsul"
 msgid "Captcha *"
 msgstr "Captcha *"
 
-#: inc/core/class-core.php:189
+#: inc/core/class-core.php:190
 #, php-format
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
-
-#: inc/admin/customizer/configs/class-performance.php:43
-msgid ""
-"Check this box if you want to clean the header of stuff like Emoji, REST "
-"links, Feeds etc."
-msgstr ""
-"Bifați această casetă dacă doriți să curățați antetul de lucruri precum "
-"Emoji, link-uri REST, Feed-uri etc."
-
-#: inc/admin/customizer/configs/class-performance.php:42
-msgid "Clean Head"
-msgstr "Curăță Antet"
 
 #: inc/core/entry/class-comments.php:317 inc/core/entry/class-comments.php:324
 msgid "Comment *"
@@ -231,46 +195,17 @@ msgstr ""
 "Asistența pentru Formularul de contact 7 este activată. Bucurați-vă de forme "
 "stilate corespunzător bazat pe tema dvs.!"
 
-#: inc/support/plugins/woocommerce/customizer/class-customizer.php:46
-msgid "Content"
-msgstr "Conţinut"
-
-#: inc/admin/customizer/configs/class-configs.php:82
-msgid "Content Settings"
-msgstr "Setări continut"
-
-#: inc/admin/customizer/configs/class-configs.php:97
-msgid "Copyright"
-msgstr "Drepturi de autor"
-
-#: inc/app.php:78
+#: block-views/footer/credits.tpl.php:22
 #, php-format
 msgid "Copyright %s - All rights reserved."
 msgstr "Drepturi de autor %s - Toate drepturile reservate."
 
-#: inc/support/fse/class-fse.php:87
-msgid "Customize"
-msgstr "Personalizați"
-
-#: inc/core/class-core.php:214
+#: inc/core/class-core.php:215
 #, php-format
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
 
-#: inc/admin/customizer/configs/class-footer.php:96
-#: inc/admin/customizer/configs/class-footer.php:111
-msgid "Defaults to CSS color."
-msgstr "Implicit la culoarea CSS."
-
-#: inc/admin/customizer/configs/class-configs.php:104
-msgid "Design"
-msgstr "Design"
-
-#: inc/admin/customizer/configs/class-configs.php:56
-msgid "Design Settings"
-msgstr "Setări de design"
-
-#: inc/admin/class-admin.php:262
+#: inc/admin/class-admin.php:261
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -299,10 +234,6 @@ msgstr "Introduceți parola"
 msgid "Entry Content"
 msgstr "Conținutul intrării"
 
-#: inc/admin/customizer/configs/class-configs.php:114
-msgid "Extensions"
-msgstr "Extensii"
-
 #: inc/support/fonts/class-fonts.php:222 inc/support/fonts/class-fonts.php:223
 msgid "Extra-Bold 800"
 msgstr "Extra-Bold 800"
@@ -320,25 +251,9 @@ msgstr "Estompat"
 msgid "Failed to dismiss notification"
 msgstr "Notificarea nu a putut fi respinsă"
 
-#: inc/admin/customizer/configs/class-footer.php:43
-msgid "Footer Copyright Text"
-msgstr "Textul drepturilor de autor din subsol"
-
-#: inc/admin/customizer/configs/class-configs.php:91
-msgid "Footer Settings"
-msgstr "Setări subsol"
-
-#: inc/admin/customizer/configs/class-configs.php:43
-msgid "General Settings"
-msgstr "Setări Generale"
-
 #: inc/gutenberg/blocks/design/class-buttons.php:52
 msgid "Group"
 msgstr "Grupare"
-
-#: inc/admin/customizer/configs/class-configs.php:73
-msgid "Header Settings"
-msgstr "Setări Antet"
 
 #. URI of the theme
 msgid "https://www.wecodeart.com/"
@@ -376,16 +291,12 @@ msgstr "Medium 500 Italic"
 msgid "Missing notification id"
 msgstr "ID-ul notificării lipsește"
 
-#: inc/admin/customizer/requests/class-palette.php:58
-msgid "Missing palette."
-msgstr "Paleta lipsă."
-
-#: inc/core/class-core.php:210
+#: inc/core/class-core.php:211
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: inc/core/class-core.php:209
+#: inc/core/class-core.php:210
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr "Arhive lunare: %s"
@@ -419,10 +330,6 @@ msgstr "Notificare respinsă"
 msgid "Pagination"
 msgstr "Paginare"
 
-#: inc/admin/customizer/configs/class-configs.php:63
-msgid "Performance Settings"
-msgstr "Setări Performanță"
-
 #: inc/core/class-media.php:194
 msgid "Placeholder image"
 msgstr "Imagine substituent"
@@ -435,7 +342,7 @@ msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 msgid "Post Author"
 msgstr "Autorul postării"
 
-#: inc/core/class-core.php:221
+#: inc/core/class-core.php:222
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
@@ -453,14 +360,6 @@ msgstr "Postat in"
 msgid "Posted on "
 msgstr "Postat pe"
 
-#: inc/support/plugins/woocommerce/customizer/class-customizer.php:47
-msgid "Primary"
-msgstr "Bara laterală primară"
-
-#: inc/admin/customizer/configs/class-typography.php:41
-msgid "Primary Font"
-msgstr "Font primar"
-
 #: inc/support/starter/class-starter.php:113
 msgid "Primary Menu"
 msgstr "Meniu Principal"
@@ -468,10 +367,6 @@ msgstr "Meniu Principal"
 #: inc/support/class-support.php:75
 msgid "Primary Navigation"
 msgstr "Navigație principală"
-
-#: inc/support/plugins/woocommerce/customizer/class-customizer.php:78
-msgid "Product page modules"
-msgstr "Modulele paginii produsului"
 
 #: inc/support/plugins/woocommerce/templates/global/quantity-input.php:49
 msgctxt "Product quantity input tooltip"
@@ -503,7 +398,7 @@ msgstr "Eroare RSS"
 msgid "Search"
 msgstr "Caută"
 
-#: inc/core/class-core.php:184
+#: inc/core/class-core.php:185
 #, php-format
 #| msgid "Search Results for \"%s\""
 msgid "Search Results for \"%s\"."
@@ -513,14 +408,10 @@ msgstr "Rezultate căutare pentru \"%s\""
 msgid "Search this website"
 msgstr "Caută pe site"
 
-#: inc/core/class-core.php:135
+#: inc/core/class-core.php:136
 #, php-format
 msgid "Search this website %s"
 msgstr "Caută pe site %s"
-
-#: inc/admin/customizer/configs/class-typography.php:57
-msgid "Secondary Font"
-msgstr "Font secundar"
 
 #: inc/support/fonts/class-fonts.php:217 inc/support/fonts/class-fonts.php:218
 msgid "Semi-Bold 600"
@@ -540,11 +431,7 @@ msgstr "Trimite"
 msgid "Shop order"
 msgstr "Comandă magazin"
 
-#: inc/support/plugins/woocommerce/customizer/class-customizer.php:62
-msgid "Shop page modules"
-msgstr "Modulele paginii magazinului"
-
-#: inc/support/plugins/woocommerce/class-woocommerce.php:100
+#: inc/support/plugins/woocommerce/class-woocommerce.php:97
 msgid "Shop Sidebar"
 msgstr "Bara laterală magazin"
 
@@ -552,15 +439,11 @@ msgstr "Bara laterală magazin"
 msgid "Site Editor"
 msgstr "Editor Site"
 
-#: inc/admin/customizer/configs/class-design.php:41
-msgid "Site Palette"
-msgstr "Paleta site-ului"
-
 #: inc/core/entry/class-comments.php:393
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
-#: inc/core/class-core.php:194
+#: inc/core/class-core.php:195
 #, php-format
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
@@ -569,7 +452,7 @@ msgstr "Arhive etichetă: %s"
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
-#: inc/admin/class-admin.php:215 inc/admin/class-admin.php:216
+#: inc/admin/class-admin.php:214 inc/admin/class-admin.php:215
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -597,21 +480,6 @@ msgstr "Logo"
 msgid "This content is password protected."
 msgstr "Acest conținut este protejat prin parolă."
 
-#: inc/admin/customizer/configs/class-typography.php:42
-msgid ""
-"This font is used on body and it will be placed in Boostrap`s sans serif CSS "
-"variable."
-msgstr ""
-"Acest font este folosit pe `body` și va fi plasat în variabila CSS "
-"Boostrap`s sans serif."
-
-#: inc/admin/customizer/configs/class-typography.php:58
-msgid ""
-"This font is used on headings and it will be placed in a custom CSS variable."
-msgstr ""
-"Acest font este utilizat pe titluri și va fi plasat într-o variabilă CSS "
-"personalizată."
-
 #: inc/core/entry/class-comments.php:239
 msgid ""
 "This post is password protected. Enter the password to view comments or "
@@ -630,10 +498,6 @@ msgstr ""
 #: block-views/general/toggler.tpl.php:17
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
-
-#: inc/admin/customizer/configs/class-configs.php:49
-msgid "Typography Settings"
-msgstr "Setări Tipografie"
 
 #: inc/support/fonts/class-fonts.php:225 inc/support/fonts/class-fonts.php:226
 msgid "Ultra-Bold 900"
@@ -709,20 +573,7 @@ msgstr ""
 msgid "When extending %s, you must create a `get_html` method."
 msgstr "Când extindeți %s, trebuie să creați o metodă `get_html`."
 
-#: inc/admin/customizer/class-config.php:34
-#, php-format
-msgid ""
-"When extending %s, you must create a `register` method, merging existing "
-"arguments with new ones."
-msgstr ""
-"Când extindeți %s, trebuie să creați o metodă `register`, combinând "
-"argumentele existente cu cele noi."
-
-#: inc/support/fse/class-fse.php:110 inc/support/fse/class-fse.php:111
-msgid "Widgets"
-msgstr "Widgeturi"
-
-#: inc/support/plugins/woocommerce/class-woocommerce.php:102
+#: inc/support/plugins/woocommerce/class-woocommerce.php:99
 msgid "Widgets in this area will be shown on all shop pages."
 msgstr ""
 "Widgeturile din această zonă vor fi afișate pe toate paginile magazinului."
@@ -741,12 +592,12 @@ msgstr ""
 "Împachetările nu sunt definite corect pentru „% s”. Vă rugăm să verificați "
 "codul temei."
 
-#: inc/core/class-core.php:205
+#: inc/core/class-core.php:206
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y"
 
-#: inc/core/class-core.php:204
+#: inc/core/class-core.php:205
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr "Arhive Anuale"
@@ -759,15 +610,7 @@ msgstr ""
 "Suportul YoastSEO este activat! Tema noastră funcționează perfect cu cel mai "
 "bun plugin SEO."
 
-#: inc/admin/customizer/configs/class-footer.php:44
-msgid ""
-"You can use <code>[copy]</code> and <code>[year]</code> to output copyright "
-"symbol and current year."
-msgstr ""
-"Puteți utiliza <code>[copy]</code> și <code>[year]</code> pentru a afișa "
-"simbolul dreptului de autor și anul curent."
-
-#: inc/core/entry/class-comments.php:459
+#: inc/core/entry/class-comments.php:460
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"

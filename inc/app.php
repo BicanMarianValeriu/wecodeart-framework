@@ -56,32 +56,6 @@ return [
     ],
     /*
     |--------------------------------------------------------------------------
-    | Theme Customizer
-    |--------------------------------------------------------------------------
-    |
-    | This array of options will be used as defaults for customizer options.
-    |
-    */
-    'customizer' => [
-        // General
-        'general-design-palette'        => 'base',
-        'general-typography-primary'    => [
-            'font-family'   => 'Abel',
-            'font-weight'   => []
-        ],
-        'general-typography-secondary'  => [
-            'font-family'   => 'Open Sans',
-            'font-weight'   => [ '700' ]
-        ],
-        'general-performance-head'      => 0,
-        // Footer
-        'footer-copyright-text'             => sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '[copy] [year]' ),
-        'footer-design-attribution_bg'      => '',
-        'footer-design-attribution_color'   => '',
-        'footer-design-attribution_links'   => '',
-    ],
-    /*
-    |--------------------------------------------------------------------------
     | Theme Gutenberg
     |--------------------------------------------------------------------------
     |
@@ -113,10 +87,6 @@ return [
     |
     */
     'woocommerce' => [
-        'customizer' => [
-            'content-layout-woo-singular'   => [ 'content', 'primary' ],
-            'content-layout-woo-archive'    => [ 'content', 'primary' ],
-        ],
         'support'   => [
             'woocommerce'                   => true,
             'wc-product-gallery-zoom'       => true,

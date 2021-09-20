@@ -4,8 +4,8 @@ import FontWeightsSelector from './FontWeightsSelector';
 
 const { useState } = wp.element;
 
-const TypefaceComponent = ({ control }) => {
-	const { setting, params: { label, description, fonts = [], inputAttrs = false } } = control;
+const TypefaceComponent = ({ control, settings }) => {
+	const { params: { label, description, fonts = [], inputAttrs = false } } = control;
 
 	const [fontFamily, setFontFamily] = useState(setting.get()['font-family']);
 	const [fontWeights, setFontWeights] = useState(setting.get()['font-weight']);

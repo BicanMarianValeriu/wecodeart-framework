@@ -76,7 +76,7 @@ class Header {
 	 * @return void
 	 */
 	public function clean_head() {
-		if( get_theme_mod( 'general-performance-head' ) === 0 ) return;
+		if( apply_filters( 'wecodeart/filter/head/clean', false ) ) return;
 
 		remove_action( 'wp_head', 'wp_generator' );
 		remove_action( 'wp_head', 'rsd_link' );

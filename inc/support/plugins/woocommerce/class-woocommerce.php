@@ -54,9 +54,6 @@ class WooCommerce implements Integration {
 	 * @return void
 	 */
 	public function register_hooks() {
-		// Customizer Options
-		WooCommerce\Customizer::get_instance();
-
 		// Add support for WooCommerce / Widgets
 		add_action( 'widgets_init', 		[ $this, 'widgets_init' ] );
 		add_action( 'after_setup_theme', 	[ $this, 'after_setup_theme' ] );
@@ -166,11 +163,11 @@ class WooCommerce implements Integration {
 		$modules = [ 'content', 'primary' ];
 
 		if( wecodeart_if( 'is_woocommerce_archive' ) ) {
-			$modules = get_theme_mod( 'content-layout-woo-archive' );
+			$modules = apply_filters( 'wecodeart/filter/woocommerce/modules/archive', [ 'content', 'primary' ] );
 		}
 		
 		if( is_product() ) {
-			$modules = get_theme_mod( 'content-layout-woo-singular' );
+			$modules = apply_filters( 'wecodeart/filter/woocommerce/modules/single', [ 'content', 'primary' ] );
 		}
 
 		$index = array_search( 'content', $modules );

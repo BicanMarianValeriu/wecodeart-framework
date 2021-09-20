@@ -91,7 +91,7 @@ class Core {
 		
 		// Theme
 		$classes[] = 'theme-' . wecodeart( 'name' );
-		$classes[] = 'theme-is-' . strtolower( get_theme_mod( 'general-design-palette' ) );
+		$classes[] = 'theme-is-' . strtolower( 'base' ); // @todo: move to option
 
 		return $classes;
 	}

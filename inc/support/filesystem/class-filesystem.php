@@ -26,13 +26,12 @@ class FileSystem {
 	use Singleton;
 
 	/**
-	 * WP FileSystem
+	 * Current folder
 	 *
 	 * @since 	5.0.0
-	 * @var 	mixed
+	 * @var 	string
 	 */
-	public	$filesystem	= null;
-	public	$folder		= '';
+	public	$folder = '';
 
 	/**
 	 * Send to contructor.
