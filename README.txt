@@ -9,6 +9,9 @@ Requires PHP: 5.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+WeCodeArt WordPress Theme, Copyright 2021 by Bican Marian Valeriu
+WeCodeArt is distributed under the terms of the GNU General Public License v2
+
 ## Support
 Please visit https://www.wecodeart.com/ for further theme support.
 
