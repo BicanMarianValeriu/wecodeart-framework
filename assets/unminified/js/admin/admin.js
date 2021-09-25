@@ -189,74 +189,6 @@ function Extensions(props) {
 
 /***/ }),
 
-/***/ "./src/js/admin/components/general.js":
-/*!********************************************!*\
-  !*** ./src/js/admin/components/general.js ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return General; });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-
-
-/**
- * WordPress dependencies
- */
-const {
-  i18n: {
-    __,
-    sprintf
-  },
-  element: {
-    RawHTML,
-    useState
-  },
-  components: {
-    BaseControl,
-    ExternalLink,
-    Button,
-    Spinner,
-    Placeholder
-  }
-} = wp;
-function General(props) {
-  const {
-    isRequesting,
-    createNotice,
-    saveEntityRecord,
-    wecodeartSettings
-  } = props;
-
-  if (isRequesting || !wecodeartSettings) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Placeholder, {
-      style: {
-        marginTop: 20
-      },
-      icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Spinner, null),
-      label: __('Loading', 'wecodeart'),
-      instructions: __('Please wait, loading settings...', 'wecodeart')
-    });
-  }
-
-  const [loading, setLoading] = useState(null);
-
-  const handleNotice = (r, id, val) => {
-    setLoading(false);
-    const hasSaved = r && r[id] === val;
-    const type = hasSaved ? 'success' : 'error';
-    const desc = hasSaved ? __('Settings saved.', 'wecodeart') : __('Something went wrong...', 'wecodeart');
-    return createNotice(type, desc);
-  };
-
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, __('Body Font', 'wecodeart'))));
-}
-
-/***/ }),
-
 /***/ "./src/js/admin/components/gettingStarted.js":
 /*!***************************************************!*\
   !*** ./src/js/admin/components/gettingStarted.js ***!
@@ -350,7 +282,7 @@ const {
 /*!******************************************!*\
   !*** ./src/js/admin/components/index.js ***!
   \******************************************/
-/*! exports provided: Notices, General, Licenses, Extensions, GettingStarted */
+/*! exports provided: Notices, Licenses, Extensions, GettingStarted */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -358,18 +290,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_notices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/notices */ "./src/js/admin/components/common/notices.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Notices", function() { return _common_notices__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-/* harmony import */ var _general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./general */ "./src/js/admin/components/general.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "General", function() { return _general__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+/* harmony import */ var _licenses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./licenses */ "./src/js/admin/components/licenses.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Licenses", function() { return _licenses__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
-/* harmony import */ var _licenses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./licenses */ "./src/js/admin/components/licenses.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Licenses", function() { return _licenses__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+/* harmony import */ var _extensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./extensions */ "./src/js/admin/components/extensions.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Extensions", function() { return _extensions__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
-/* harmony import */ var _extensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./extensions */ "./src/js/admin/components/extensions.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Extensions", function() { return _extensions__WEBPACK_IMPORTED_MODULE_3__["default"]; });
-
-/* harmony import */ var _gettingStarted__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gettingStarted */ "./src/js/admin/components/gettingStarted.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GettingStarted", function() { return _gettingStarted__WEBPACK_IMPORTED_MODULE_4__["default"]; });
-
+/* harmony import */ var _gettingStarted__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gettingStarted */ "./src/js/admin/components/gettingStarted.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GettingStarted", function() { return _gettingStarted__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
 
 
@@ -519,7 +447,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ "./src/js/admin/components/index.js");
-/* harmony import */ var _scss_admin_admin_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../scss/admin/admin.scss */ "./src/scss/admin/admin.scss");
+/* harmony import */ var _scss_admin_index_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../scss/admin/index.scss */ "./src/scss/admin/index.scss");
 
 
 
@@ -622,12 +550,6 @@ const WeCodeArt = () => {
   }
 
   tabs = [...tabs // {
-  // 	name: 'wca-general',
-  // 	title: __('General Settings', 'wecodeart'),
-  // 	className: 'wca-general',
-  // 	render: <General {...tabProps} />
-  // },
-  // {
   // 	name: 'wca-license',
   // 	title: __('License(s)', 'wecodeart'),
   // 	className: 'wca-license',
@@ -686,9 +608,9 @@ wp.domReady(() => {
 
 /***/ }),
 
-/***/ "./src/scss/admin/admin.scss":
+/***/ "./src/scss/admin/index.scss":
 /*!***********************************!*\
-  !*** ./src/scss/admin/admin.scss ***!
+  !*** ./src/scss/admin/index.scss ***!
   \***********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {

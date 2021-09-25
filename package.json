@@ -9,8 +9,8 @@
 	"scripts": {
 		"build": "wp-scripts build",
 		"start": "wp-scripts start",
-		"build:admin": "wp-scripts build admin=./src/js/admin/index.js --output-path=assets/minified",
-		"start:admin": "wp-scripts start admin=./src/js/admin/index.js --output-path=assets/unminified",
+		"build:admin": "wp-scripts build admin/admin=./src/js/admin/index.js --output-path=assets/minified",
+		"start:admin": "wp-scripts start admin/admin=./src/js/admin/index.js --output-path=assets/unminified",
 		"build:admin:notification": "wp-scripts build admin/notification=./src/js/admin/notification/index.js --output-path=assets/minified",
 		"start:admin:notification": "wp-scripts start admin/notification=./src/js/admin/notification/index.js --output-path=assets/unminified",
 		"build:gutenberg": "wp-scripts build gutenberg/editor=./src/js/gutenberg/index.js --output-path=assets/minified",

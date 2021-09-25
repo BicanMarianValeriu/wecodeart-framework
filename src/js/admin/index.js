@@ -32,7 +32,7 @@ const {
 const { currentUser, version } = wecodeart;
 
 /* Settings */
-import { GettingStarted, Extensions, /* General, Licenses, */ Notices } from './components';
+import { GettingStarted, Extensions, /*Licenses, */ Notices } from './components';
 
 import './../../scss/admin/index.scss';
 
@@ -89,12 +89,6 @@ const WeCodeArt = () => {
 
 	tabs = [
 		...tabs,
-		// {
-		// 	name: 'wca-general',
-		// 	title: __('General Settings', 'wecodeart'),
-		// 	className: 'wca-general',
-		// 	render: <General {...tabProps} />
-		// },
 		// {
 		// 	name: 'wca-license',
 		// 	title: __('License(s)', 'wecodeart'),
