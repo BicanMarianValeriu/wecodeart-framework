@@ -9,7 +9,7 @@
  * @subpackage 	Support\CF7
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.0.6
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -101,12 +101,12 @@ class CF7 implements Integration {
 	 * Enqueue Scripts.
 	 *
 	 * @since 	5.0.0
-	 * @version	5.0.0
+	 * @version	5.0.6
 	 */
 	public function enqueue() {
 		wp_enqueue_script(
 			$this->make_handle(),
-			$this->get_asset( 'js', 'support-cf7' ),
+			$this->get_asset( 'js', 'plugins/cf7' ),
 			[ 'wecodeart-core-scripts', 'contact-form-7' ],
 			wecodeart( 'version' ),
 			true

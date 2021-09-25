@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Modules
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.0.0
+ * @version		5.0.6
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -37,9 +37,8 @@ class Modules implements \ArrayAccess {
 	 * Send to Constructor
 	 */
 	public function init() {
-		$this->register( 'entry',       Modules\Entry::class    );
-		$this->register( 'classes',     Modules\Classes::class  );
 		$this->register( 'styles',      Modules\Styles::class   );
+		$this->register( 'classes',     Modules\Classes::class  );
 		$this->register( 'patterns',    Modules\Patterns::class );
         
         add_action( 'init', [ $this, 'load' ] );

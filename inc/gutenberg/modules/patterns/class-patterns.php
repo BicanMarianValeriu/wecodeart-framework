@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Patterns
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.0.6
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -79,7 +79,7 @@ class Patterns implements Integration {
 	 * @return  void
 	 */
 	public function block_editor_assets() {
-		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg-patterns' ), [
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-patterns' ), [
 			'wecodeart-gutenberg'
 		], wecodeart( 'version' ) );
 	}
@@ -145,7 +145,7 @@ class Patterns implements Integration {
 
 		$template_files = [];
 		foreach ( $themes as $theme_slug => $theme_dir ) {
-			$theme_files = $this->get_paths( $theme_dir . '/' . self::FOLDER );
+			$theme_files = $this->get_paths( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER );
 			foreach ( $theme_files as $file ) {
 				$template_slug      = substr(
 					$file,
@@ -182,7 +182,7 @@ class Patterns implements Integration {
 		];
 
 		foreach ( $themes as $theme_slug => $theme_dir ) {
-			$file_path = wp_normalize_path( $theme_dir . '/' . self::FOLDER . '/' . $slug . '.html' );
+			$file_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . $slug . '.html' );
 			if ( file_exists( $file_path ) ) {
 				$new_template_item = [
 					'slug'  => $slug,

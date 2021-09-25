@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.0.0
+ * @version		5.0.6
  */
 
 namespace WeCodeArt;
@@ -234,7 +234,7 @@ class Admin {
 	 * Load assets for option page.
 	 *
 	 * @since   1.2.0
-	 * @version	5.0.0
+	 * @version	5.0.6
 	 */
 	public function enqueue_assets() {
 		$version = wecodeart( 'version' );
@@ -244,14 +244,14 @@ class Admin {
 
 		wp_enqueue_style(
 			$this->make_handle(),
-			$this->get_asset( 'css', 'admin' ),
+			$this->get_asset( 'css', 'admin/admin' ),
 			[ 'wp-components' ],
 			$version
 		);
 
 		wp_enqueue_script(
 			$this->make_handle(),
-			$this->get_asset( 'js', 'admin' ),
+			$this->get_asset( 'js', 'admin/admin' ),
 			[ 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-plugins', 'wp-components', 'wp-edit-post', 'wp-api', 'wp-editor', 'wp-hooks', 'lodash' ],
 			$version,
 			true

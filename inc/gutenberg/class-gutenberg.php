@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.0.0
+ * @version		5.0.6
  */
 
 namespace WeCodeArt;
@@ -57,11 +57,70 @@ class Gutenberg {
 		// Theme Support.
 		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
 
+		// Meta.
+		add_filter( 'init',							[ $this, 'register_meta' ] );
+
+		// Body Class.
+		add_filter( 'body_class', 					[ $this, 'body_class' ] );
+
+		// Hidden Singular Page Title.
+		add_filter( 'wecodeart/filter/entry/title/disabled', [ $this, 'disable_title' ], 10, 2 );
+
 		// Modules.
 		Gutenberg\Modules::get_instance();
 		
 		// Blocks.
 		Gutenberg\Blocks::get_instance();
+	}
+
+	/**
+	 * Register meta.
+	 *
+	 * @return 	void
+	 */
+	public function register_meta() {
+		register_meta( 'post', '_wca_title_hidden', [
+			'show_in_rest'  => true,
+			'single'        => true,
+			'type'          => 'boolean',
+			'auth_callback' => function() {
+				return current_user_can( 'edit_posts' );
+			},
+		] );
+	}
+
+	/**
+	 * Maybe Disable Title
+	 *
+	 * @return 	bool
+	 */
+	public function disable_title( $disabled, $post_id ) {
+		if( is_singular() && get_post_meta( $post_id, '_wca_title_hidden', true ) ) {
+			$disabled = true;
+		}
+		
+		return $disabled;
+	}
+
+	/**
+	 * Replace title with blank
+	 *
+	 * @param 	array $classes The body classes.
+	 *
+	 * @return 	array Returns the new body classes.
+	 */
+	public function body_class( $classes ) {
+		if ( is_admin() ) return $classes;
+		
+		if( is_singular() ) {			
+			global $post;
+
+			if ( get_post_meta( $post->ID, '_wca_title_hidden', true ) ) {
+				$classes[] = 'has-title-hidden';
+			}
+		}
+
+		return $classes;
 	}
 
 	/**
@@ -115,15 +174,15 @@ class Gutenberg {
 				'core/latest-comments',
 				'core/block',
 			] ),
-			'contentModules' => wp_list_pluck( Content::content_modules(), 'label' ),
 		] );
+		
 		wp_register_script( $this->make_handle( 'inline' ), '' );
 		wp_enqueue_script( $this->make_handle( 'inline' ) );
 		wp_add_inline_script( $this->make_handle( 'inline' ), 'window.wecodeartGutenberg = ' . wp_json_encode( $data ) . ';', 'before' );
 
 		// Gutenberg editor assets.
-		wp_enqueue_style( 	$this->make_handle(),	$this->get_asset( 'css', 'gutenberg' ),	[], wecodeart( 'version' ) );
-		wp_enqueue_script( 	$this->make_handle(),	$this->get_asset( 'js', 'gutenberg' ), 	[
+		wp_enqueue_style( 	$this->make_handle(),	$this->get_asset( 'css', 'gutenberg/editor' ),	[], wecodeart( 'version' ) );
+		wp_enqueue_script( 	$this->make_handle(),	$this->get_asset( 'js', 'gutenberg/editor' ), 	[
 			'wp-blocks',
 			'wp-i18n',
 			'wp-element',
@@ -143,7 +202,7 @@ class Gutenberg {
 		wp_add_inline_script( 'wp-codemirror', 'window.CodeMirror = wp.CodeMirror;' );
 		wp_enqueue_script(
 			$this->make_handle( 'codemirror-fs' ), 
-			$this->get_asset( 'js', 'codemirror-fs' ),
+			$this->get_asset( 'js', 'admin/codemirror-fs' ),
 			[ 'wp-codemirror' ],
 			wecodeart( 'version' )
 		);

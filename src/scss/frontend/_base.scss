@@ -187,6 +187,11 @@ input[type="range"] {
     @extend .form-range;
 }
 
+textarea {
+    @extend .form-control;
+    min-height: 200px;
+}
+
 select {
     @extend .form-select;
 }

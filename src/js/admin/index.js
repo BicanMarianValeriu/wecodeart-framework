@@ -34,7 +34,7 @@ const { currentUser, version } = wecodeart;
 /* Settings */
 import { GettingStarted, Extensions, /* General, Licenses, */ Notices } from './components';
 
-import './../../scss/admin/admin.scss';
+import './../../scss/admin/index.scss';
 
 const WeCodeArt = () => {
 	const { createNotice: coreCreateNotice } = useDispatch('core/notices');

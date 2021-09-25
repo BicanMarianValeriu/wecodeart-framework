@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.0.0
+ * @version		5.0.6
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -52,7 +52,7 @@ class Classes {
 	 * @return  void
 	 */
 	public function block_editor_assets() {
-		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg-classes' ), [
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-classes' ), [
 			'wecodeart-gutenberg'
 		], wecodeart( 'version' ) );
 	}

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.0.0
+ * @version		5.0.6
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -106,7 +106,7 @@ class Styles implements Integration {
 	 * @return  void
 	 */
 	public function block_editor_assets() {
-		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg-styles' ), [
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-styles' ), [
 			'wecodeart-gutenberg-inline'
 		], wecodeart( 'version' ) );
 	}

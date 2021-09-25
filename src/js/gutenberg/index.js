@@ -1,5 +1,5 @@
 // SCSS
-import './../../scss/gutenberg/gutenberg.scss';
+import './../../scss/gutenberg/index.scss';
 
 // Blocks
 import './blocks';
