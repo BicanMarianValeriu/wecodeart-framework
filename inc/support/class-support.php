@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.0.0
+ * @version		5.0.6
  */
 
 namespace WeCodeArt;
@@ -42,7 +42,6 @@ class Support implements ArrayAccess {
 
 		// Register Default Integrations
 		$this->register( 'fse',					Support\FSE::class		);
-		$this->register( 'fonts',				Support\Fonts::class	);
 		$this->register( 'styles',				Support\Styles::class	);
 		$this->register( 'starter',				Support\Starter::class	);
 		$this->register( 'plugin/anr', 			Support\Plugins\ANR::class 			);
@@ -55,12 +54,9 @@ class Support implements ArrayAccess {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 	1.0
-	 * @version	5.0.0
+	 * @version	5.0.6
 	 */
 	public function after_setup_theme() {
-		// Content width
-		$GLOBALS['content_width'] = self::get_content_width();
-
 		// Theme Support
 		foreach( array_filter( wecodeart_config( 'support', [] ) ) as $feature => $value ) {
 			if( $value === false ) continue;
@@ -70,20 +66,11 @@ class Support implements ArrayAccess {
 		// Theme check required.
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'automatic-feed-links' );
+
 		// This theme has one menu location.
 		register_nav_menus( [
 			'primary' => __( 'Primary Navigation', 'wecodeart' ),
 		] );
-	}
-
-	/**
-	 * Sets up theme content width.
-	 *
-	 * @since 	5.0.0
-	 * @version	5.0.0
-	 */
-	public static function get_content_width() {
-		return apply_filters( 'wecodeart/filter/content_width', 1320 );
 	}
 
 	/**

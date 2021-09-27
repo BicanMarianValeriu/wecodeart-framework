@@ -2,6 +2,7 @@ v5.0.6
 - Cleanup - Customizer assets / Admin JS
 - Updated - Better CSS/JS naming and folder structure
 - Fixed - Textarea CSS
+- Fixed - Activation Requirements
 
 v5.0.0
 - Complete rework to block based theme!!!

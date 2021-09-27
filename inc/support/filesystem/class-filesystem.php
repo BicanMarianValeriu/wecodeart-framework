@@ -54,13 +54,38 @@ class FileSystem {
 			return false;
 		}
 
-		$this->folder = implode( '/', array_filter( [ $wp_upload_dir['basedir'], 'wecodeart', $folder ] ) );
+		$this->folder = implode( DIRECTORY_SEPARATOR, array_filter( [ $wp_upload_dir['basedir'], 'wecodeart', $folder ] ) );
 
 		wp_mkdir_p( wp_normalize_path( $this->folder ) );
 
 		return $this;
 	}
 
+	/**
+	 * Function to delete folder from WordPress Filesystem.
+	 *
+	 * @since   5.0.6
+	 *
+	 * @return  boolean
+	 */
+	public function clean_folder( $path = '' ) {
+		$folder = wp_normalize_path( implode( DIRECTORY_SEPARATOR, array_filter( [ $this->folder, $path ] ) ) );
+		
+		if( is_dir( $folder ) ) {
+			$objects = scandir( $folder );
+			foreach ( $objects as $object ) { 
+				if ( $object !== '.' && $object !== '..' ) {
+					$path = implode( DIRECTORY_SEPARATOR, [ $folder, $object ] );
+					if ( is_dir( $path ) && ! is_link( $path ) ) rmdir( $path );
+					else unlink( $path ); 
+				}
+			}
+			return rmdir( $folder );
+		}
+
+		return true;
+	}
+	
 	/**
 	 * Function to create file from WordPress Filesystem.
 	 *
@@ -107,7 +132,7 @@ class FileSystem {
 	 * @return  string File url.
 	 */
 	public function get_file_url( $filename, $link = false ) {
-		$file = implode( '/', array_filter( [ $this->folder, $filename ] ) );
+		$file = implode( DIRECTORY_SEPARATOR, array_filter( [ $this->folder, $filename ] ) );
 		
 		if( $link ) {
 			$file = str_replace( WP_CONTENT_DIR, content_url(), $file );
