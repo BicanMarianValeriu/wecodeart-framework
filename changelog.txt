@@ -4,6 +4,7 @@ v5.0.7
 - Fixed - Post title visual representation when is hidden on single template (Gubenberg Plugin)
 - Fixed - Post title bottom margin (when blockGap is set to 0 - as we use it)
 - Updated - Gallery Block: CSS support for upcomming image innerBlocks
+- Added - Theme starter content notification for "fresh sites"
 
 v5.0.6
 - Cleanup - Customizer assets / Admin JS

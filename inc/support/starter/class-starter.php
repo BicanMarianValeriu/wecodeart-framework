@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
+use WeCodeArt\Admin\Notifications;
+use WeCodeArt\Admin\Notifications\Notification;
 
 /**
  * Class Starter
@@ -26,9 +28,10 @@ class Starter implements Integration {
 
 	use Singleton;
 
-	const HOME_SLUG  = 'home';
-	const BLOG_SLUG  = 'blog';
-	const ABOUT_SLUG = 'about';
+	const HOME_SLUG  	= 'home';
+	const BLOG_SLUG  	= 'blog';
+	const ABOUT_SLUG 	= 'about';
+	const NOTICE_ID 	= 'wecodeart-starter-notice';
 
 	/**
 	 * Get Conditionals
@@ -51,8 +54,40 @@ class Starter implements Integration {
 	 */
 	public function register_hooks() {
 		// Theme Support
+		\add_action( 'admin_notices',				[ $this, 'manage_notice' ] );
 		\add_action( 'after_setup_theme', 			[ $this, 'after_setup_theme' ] );
 		\add_filter( 'get_theme_starter_content', 	[ $this, 'add_postmeta' ], 10, 2 );
+	}
+
+	/**
+	 * Manage Notice
+	 *
+	 * @since 	5.0.7
+	 * @version	5.0.7
+	 */
+	public function manage_notice() {
+		$notification = new Notification(
+			sprintf(
+				esc_html__( 'Don`t know where to start? Go to %s to setup starter content. There you can find a couple of pages and section examples created with WeCodeArt Framework.', 'wecodeart' ),
+				sprintf( '<a href="%s">%s</a>', esc_url_raw( admin_url( '/customize.php' ) ), __( 'Customizer', 'wecodeart' ) )
+			),
+			[
+				'id'			=> self::NOTICE_ID,
+				'type'     		=> Notification::INFO,
+				'priority' 		=> 1,
+				'class'			=> 'notice is-dismissible',
+			]
+		);
+
+		if( get_user_option( self::NOTICE_ID ) === 'seen' ) {
+			Notifications::get_instance()->remove_notification( $notification );
+			set_transient( self::NOTICE_ID, true, WEEK_IN_SECONDS );
+			return;
+		}
+
+		if( get_transient( self::NOTICE_ID ) === false ) {
+			Notifications::get_instance()->add_notification( $notification );
+		}
 	}
 
 	/**
