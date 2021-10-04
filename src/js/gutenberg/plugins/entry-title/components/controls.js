@@ -28,7 +28,7 @@ const Controls = () => {
 	const status = value === true ? __('hidden', 'wecodeart') : __('shown', 'wecodeart');
 
 	useEffect(() => {
-		const titleBlock = document.querySelector('.editor-post-title__block');
+		const titleBlock = document.querySelector('.editor-post-title');
 		if (titleBlock && value) {
 			document.body.classList.add('theme-wecodeart--hidden-title');
 		}
@@ -40,7 +40,7 @@ const Controls = () => {
 	return (
 		<PluginPostStatusInfo>
 			<CheckboxControl
-				className="wca-post-status-label"
+				className="wecodeart-gb-plugin wecodeart-gb-plugin--post-title"
 				label={__('Hide title on single template?', 'wecodeart')}
 				checked={value}
 				onChange={(newValue) => editPost({ meta: { _wca_title_hidden: newValue } })}

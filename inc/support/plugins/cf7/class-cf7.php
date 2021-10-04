@@ -58,11 +58,11 @@ class CF7 implements Integration {
 	 */
 	public function register_hooks() {
 		add_action( 'admin_notices',				[ $this, 'manage_notice' ] );
+		add_action( 'wp_enqueue_scripts', 			[ $this, 'enqueue' ], 50 );
 
 		add_filter( 'wpcf7_load_css', 				'__return_false' );
 		add_filter( 'wpcf7_form_response_output', 	[ $this, 'form_response_output' ], 10, 3 );
 		add_filter( 'wpcf7_form_class_attr', 		[ $this, 'form_class_output' 	], 10, 1 );
-		add_action( 'wp_enqueue_scripts', 			[ $this, 'enqueue' ], 50 );
 
 		// Load Modules
 		Modules::get_instance();

@@ -1,3 +1,10 @@
+v5.0.7
+- Cleanup - Some old Gutenberg unused CSS
+- Cleanup - Starter content: remove customizer defaults for wp_parse_args (since it was removed)
+- Fixed - Post title visual representation when is hidden on single template (Gubenberg Plugin)
+- Fixed - Post title bottom margin (when blockGap is set to 0 - as we use it)
+- Updated - Gallery Block: CSS support for upcomming image innerBlocks
+
 v5.0.6
 - Cleanup - Customizer assets / Admin JS
 - Updated - Better CSS/JS naming and folder structure

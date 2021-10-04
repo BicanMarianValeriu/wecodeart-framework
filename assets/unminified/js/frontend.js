@@ -6074,7 +6074,22 @@ function filterLog(route, func, args) {
               clearTimeout(timeout);
             }, 5000);
           }, false);
-        });
+        }); // LiveReload
+
+        const {
+          isDevMode,
+          fn: {
+            loadJs
+          }
+        } = wecodeart;
+
+        if (isDevMode) {
+          const checkFor = '//localhost:35729/livereload.js';
+          loadJs(checkFor, {
+            success: () => console.log('DEV Server: Livereload::running!'),
+            error: () => console.log('DEV Server: Livereload::paused!')
+          });
+        }
       }
     }
   };

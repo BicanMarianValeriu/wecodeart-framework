@@ -9,7 +9,7 @@
  * @subpackage  Support\Starter
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.0.7
  */
 
 namespace WeCodeArt\Support;
@@ -118,9 +118,9 @@ class Starter implements Integration {
 					],
 				],
 			],
-			'theme_mods'  => wp_parse_args( [
+			'theme_mods'  => [
 				'custom_logo' => '{{logo}}',
-			], wecodeart_config( 'customizer' ) ),
+			],
 			'posts'       => [
 				self::HOME_SLUG  => wp_parse_args( [
 					'post_name'  => self::HOME_SLUG,

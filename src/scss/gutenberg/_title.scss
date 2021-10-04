@@ -1,14 +1,18 @@
 /*--------------------------------------------------------------
 # Hide Title
 --------------------------------------------------------------*/
-.theme-wecodeart--hidden-title {
+.edit-post-visual-editor__post-title-wrapper {
 	.editor-post-title {
-		&__block {
-			.editor-post-title {
-				&__input {
-					opacity: 0.5;
-				}
-			}
+		--wp--style--block-gap: 1.5rem;
+
+		.theme-wecodeart--hidden-title & {
+			opacity: 0.5;
 		}
+	}
+}
+
+.wecodeart-gb-plugin--post-title {
+	.components-base-control__field {
+		margin-bottom: 0.5rem!important;
 	}
 }

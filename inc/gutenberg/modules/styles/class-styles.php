@@ -134,6 +134,8 @@ class Styles implements Integration {
 			'core/quote',
 			'core/spacer',
 			'core/image',
+			'core/heading',
+			'core/paragraph',
 			'core/pullquote',
 			'core/media-text',
 			'core/social-links',

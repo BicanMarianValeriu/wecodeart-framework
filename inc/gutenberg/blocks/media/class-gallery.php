@@ -63,10 +63,15 @@ class Gallery extends Dynamic {
 
 		// Replace grid class
 		$search 	= '/' . preg_quote( 'class="blocks-gallery-grid', '/' ) . '/';
-		$replace 	= 'class="blocks-gallery-grid row row-cols-2 row-cols-md-' . get_prop( $attributes, 'columns', 2 );
+		$replace 	= 'class="blocks-gallery-grid row row-cols-2 row-cols-md-' . get_prop( $attributes, 'columns', '2' );
+		$content 	= preg_replace( $search, $replace, $content, 1 );
+		
+		// Replace nested images
+		$search 	= '/' . preg_quote( 'has-nested-images', '/' ) . '/';
+		$replace 	= 'has-nested-images row row-cols-2 row-cols-md-' . get_prop( $attributes, 'columns', '2' );
+		$content 	= preg_replace( $search, $replace, $content, 1 );
 
-		$content = preg_replace( $search, $replace, $content, 1 );
-		$content = preg_replace( '/( columns-)\w+/', '', $content, 1 );
+		$content 	= preg_replace( '/( columns-)\w+/', '', $content, 1 );
 
 		return $content;
 	}
@@ -80,6 +85,9 @@ class Gallery extends Dynamic {
 		return "
 		.wp-block-gallery {
 			margin-bottom: 0;
+		}
+		.wp-block-gallery.has-nested-images {
+			max-width: initial;
 		}
 		.wp-block-gallery.alignleft,
 		.wp-block-gallery.alignright {
@@ -128,6 +136,8 @@ class Gallery extends Dynamic {
 		.wp-block-gallery .blocks-gallery-item figcaption img {
 			display: inline;
 		}
+		.wp-block-gallery.is-cropped .wp-block-image a,
+		.wp-block-gallery.is-cropped .wp-block-image img,
 		.wp-block-gallery.is-cropped .blocks-gallery-image a,
 		.wp-block-gallery.is-cropped .blocks-gallery-image img,
 		.wp-block-gallery.is-cropped .blocks-gallery-item a,
@@ -145,6 +155,8 @@ class Gallery extends Dynamic {
 			.wp-block-gallery .blocks-gallery-item img {
 				width: auto;
 			}
+			.wp-block-gallery.is-cropped .wp-block-image a,
+			.wp-block-gallery.is-cropped .wp-block-image img,
 			.wp-block-gallery.is-cropped .blocks-gallery-image a,
 			.wp-block-gallery.is-cropped .blocks-gallery-image img,
 			.wp-block-gallery.is-cropped .blocks-gallery-item a,

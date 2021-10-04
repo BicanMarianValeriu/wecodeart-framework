@@ -10696,7 +10696,7 @@ const underline = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _scss_gutenberg_gutenberg_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../scss/gutenberg/gutenberg.scss */ "./src/scss/gutenberg/gutenberg.scss");
+/* harmony import */ var _scss_gutenberg_index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../scss/gutenberg/index.scss */ "./src/scss/gutenberg/index.scss");
 /* harmony import */ var _blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./blocks */ "./src/js/gutenberg/blocks/index.js");
 /* harmony import */ var _plugins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins */ "./src/js/gutenberg/plugins/index.js");
 /* harmony import */ var _formats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./formats */ "./src/js/gutenberg/formats/index.js");
@@ -10998,7 +10998,7 @@ const Controls = () => {
   } = useDispatch('core/editor', [value]);
   const status = value === true ? __('hidden', 'wecodeart') : __('shown', 'wecodeart');
   useEffect(() => {
-    const titleBlock = document.querySelector('.editor-post-title__block');
+    const titleBlock = document.querySelector('.editor-post-title');
 
     if (titleBlock && value) {
       document.body.classList.add('theme-wecodeart--hidden-title');
@@ -11009,7 +11009,7 @@ const Controls = () => {
     };
   }, [value]);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PluginPostStatusInfo, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(CheckboxControl, {
-    className: "wca-post-status-label",
+    className: "wecodeart-gb-plugin wecodeart-gb-plugin--post-title",
     label: __('Hide title on single template?', 'wecodeart'),
     checked: value,
     onChange: newValue => editPost({
@@ -11085,10 +11085,10 @@ registerWCAPlugins();
 
 /***/ }),
 
-/***/ "./src/scss/gutenberg/gutenberg.scss":
-/*!*******************************************!*\
-  !*** ./src/scss/gutenberg/gutenberg.scss ***!
-  \*******************************************/
+/***/ "./src/scss/gutenberg/index.scss":
+/*!***************************************!*\
+  !*** ./src/scss/gutenberg/index.scss ***!
+  \***************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
