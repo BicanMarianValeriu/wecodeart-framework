@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-09-20 22:54+0000\n"
+"PO-Revision-Date: 2021-10-04 00:37+0000\n"
 "Last-Translator: Bican\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -126,22 +126,6 @@ msgstr "Bican Marian Valeriu @wecodeart"
 msgid "Blog"
 msgstr "Blog"
 
-#: inc/support/fonts/class-fonts.php:220
-msgid "Bold 700"
-msgstr "Bold 700"
-
-#: inc/support/fonts/class-fonts.php:221
-msgid "Bold 700 Italic"
-msgstr "Bold 700 Italic"
-
-#: inc/support/fonts/class-fonts.php:210
-msgid "Book 300"
-msgstr "Book 300"
-
-#: inc/support/fonts/class-fonts.php:211
-msgid "Book 300 Italic"
-msgstr "Book 300 Italic"
-
 #: block-views/footer/credits.tpl.php:28
 #, php-format
 #| msgid "Built on %1$s."
@@ -200,6 +184,10 @@ msgstr ""
 msgid "Copyright %s - All rights reserved."
 msgstr "Drepturi de autor %s - Toate drepturile reservate."
 
+#: inc/support/starter/class-starter.php:72
+msgid "Customizer"
+msgstr "Customizer"
+
 #: inc/core/class-core.php:215
 #, php-format
 msgid "Daily Archives: %s"
@@ -208,6 +196,16 @@ msgstr "Arhive zilnice: %s"
 #: inc/admin/class-admin.php:261
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
+
+#: inc/support/starter/class-starter.php:71
+#, php-format
+msgid ""
+"Don`t know where to start? Go to %s to setup starter content. There you can "
+"find a couple of pages and section examples created with WeCodeArt Framework."
+msgstr ""
+"Nu știi de unde să începi? Accesați %s pentru a configura conținutul de "
+"pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
+"WeCodeArt Framework."
 
 #: block-views/entry/comment.tpl.php:57
 msgid "Edit"
@@ -234,14 +232,6 @@ msgstr "Introduceți parola"
 msgid "Entry Content"
 msgstr "Conținutul intrării"
 
-#: inc/support/fonts/class-fonts.php:222 inc/support/fonts/class-fonts.php:223
-msgid "Extra-Bold 800"
-msgstr "Extra-Bold 800"
-
-#: inc/support/fonts/class-fonts.php:224
-msgid "Extra-Bold 800 Italic"
-msgstr "Extra-Bold 800 Italic"
-
 #: inc/gutenberg/blocks/design/class-separator.php:51
 #| msgid "Fixed"
 msgid "Faded"
@@ -267,25 +257,9 @@ msgstr "https://www.wecodeart.com/about/"
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
-#: inc/support/fonts/class-fonts.php:208
-msgid "Light 200"
-msgstr "Light 200"
-
-#: inc/support/fonts/class-fonts.php:209
-msgid "Light 200 Italic"
-msgstr "Light 200 Italic"
-
 #: inc/core/class-content.php:48
 msgid "Main Sidebar"
 msgstr "Bară laterală principală"
-
-#: inc/support/fonts/class-fonts.php:215
-msgid "Medium 500"
-msgstr "Medium 500"
-
-#: inc/support/fonts/class-fonts.php:216
-msgid "Medium 500 Italic"
-msgstr "Medium 500 Italic"
 
 #: inc/admin/notifications/class-ajax.php:55
 msgid "Missing notification id"
@@ -308,15 +282,6 @@ msgstr "Nume *"
 #: inc/core/entry/class-comments.php:58
 msgid "No comments"
 msgstr "Fără comentarii"
-
-#: inc/support/fonts/class-fonts.php:212 inc/support/fonts/class-fonts.php:213
-msgid "Normal 400"
-msgstr ""
-"Normal 400\n"
-
-#: inc/support/fonts/class-fonts.php:214
-msgid "Normal 400 Italic"
-msgstr "Normal 400 Italic"
 
 #: inc/gutenberg/blocks/post/class-template.php:105
 msgid "Nothing found matching your criteria."
@@ -360,11 +325,11 @@ msgstr "Postat in"
 msgid "Posted on "
 msgstr "Postat pe"
 
-#: inc/support/starter/class-starter.php:113
+#: inc/support/starter/class-starter.php:148
 msgid "Primary Menu"
 msgstr "Meniu Principal"
 
-#: inc/support/class-support.php:75
+#: inc/support/class-support.php:72
 msgid "Primary Navigation"
 msgstr "Navigație principală"
 
@@ -413,16 +378,6 @@ msgstr "Caută pe site"
 msgid "Search this website %s"
 msgstr "Caută pe site %s"
 
-#: inc/support/fonts/class-fonts.php:217 inc/support/fonts/class-fonts.php:218
-msgid "Semi-Bold 600"
-msgstr ""
-"Semi-Bold 600\n"
-
-#: inc/support/fonts/class-fonts.php:219
-msgid "Semi-Bold 600 Italic"
-msgstr ""
-"Semi-Bold 600 Italic\n"
-
 #: inc/support/plugins/cf7/modules/class-submit.php:63
 msgid "Send"
 msgstr "Trimite"
@@ -448,7 +403,7 @@ msgstr "Vorbesc din mintea ta"
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
 
-#: inc/init.php:370
+#: inc/init.php:371
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
@@ -461,7 +416,7 @@ msgctxt "Theme starter content"
 msgid "About"
 msgstr "Despre"
 
-#: inc/support/starter/class-starter.php:134
+#: inc/support/starter/class-starter.php:169
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Blog"
@@ -471,7 +426,7 @@ msgctxt "Theme starter content"
 msgid "Home"
 msgstr "Acasă"
 
-#: inc/support/starter/class-starter.php:100
+#: inc/support/starter/class-starter.php:135
 msgctxt "Theme starter content"
 msgid "Logo"
 msgstr "Logo"
@@ -499,22 +454,6 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
-#: inc/support/fonts/class-fonts.php:225 inc/support/fonts/class-fonts.php:226
-msgid "Ultra-Bold 900"
-msgstr "Ultra-Bold 900"
-
-#: inc/support/fonts/class-fonts.php:227
-msgid "Ultra-Bold 900 Italic"
-msgstr "Ultra-Bold 900 Italic"
-
-#: inc/support/fonts/class-fonts.php:205 inc/support/fonts/class-fonts.php:206
-msgid "Ultra-Light 100"
-msgstr "Ultra-Light 100"
-
-#: inc/support/fonts/class-fonts.php:207
-msgid "Ultra-Light 100 Italic"
-msgstr "Ultra-Light 100 Italic"
-
 #: block-views/entry/protected.tpl.php:62
 msgid "Unlock"
 msgstr "Deblochează"
@@ -528,7 +467,7 @@ msgid "Website"
 msgstr "Site"
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:77
+#: inc/gutenberg/class-gutenberg.php:136
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 

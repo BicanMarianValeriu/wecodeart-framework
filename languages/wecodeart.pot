@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-20 22:53+0000\n"
+"POT-Creation-Date: 2021-10-04 00:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -120,22 +120,6 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: inc/support/fonts/class-fonts.php:220
-msgid "Bold 700"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:221
-msgid "Bold 700 Italic"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:210
-msgid "Book 300"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:211
-msgid "Book 300 Italic"
-msgstr ""
-
 #: block-views/footer/credits.tpl.php:28
 #, php-format
 msgid "Built on %1s."
@@ -190,6 +174,10 @@ msgstr ""
 msgid "Copyright %s - All rights reserved."
 msgstr ""
 
+#: inc/support/starter/class-starter.php:72
+msgid "Customizer"
+msgstr ""
+
 #: inc/core/class-core.php:215
 #, php-format
 msgid "Daily Archives: %s"
@@ -197,6 +185,13 @@ msgstr ""
 
 #: inc/admin/class-admin.php:261
 msgid "Developer Mode"
+msgstr ""
+
+#: inc/support/starter/class-starter.php:71
+#, php-format
+msgid ""
+"Don`t know where to start? Go to %s to setup starter content. There you can "
+"find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
 #: block-views/entry/comment.tpl.php:57
@@ -224,14 +219,6 @@ msgstr ""
 msgid "Entry Content"
 msgstr ""
 
-#: inc/support/fonts/class-fonts.php:222 inc/support/fonts/class-fonts.php:223
-msgid "Extra-Bold 800"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:224
-msgid "Extra-Bold 800 Italic"
-msgstr ""
-
 #: inc/gutenberg/blocks/design/class-separator.php:51
 msgid "Faded"
 msgstr ""
@@ -256,24 +243,8 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr ""
 
-#: inc/support/fonts/class-fonts.php:208
-msgid "Light 200"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:209
-msgid "Light 200 Italic"
-msgstr ""
-
 #: inc/core/class-content.php:48
 msgid "Main Sidebar"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:215
-msgid "Medium 500"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:216
-msgid "Medium 500 Italic"
 msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:55
@@ -296,14 +267,6 @@ msgstr ""
 
 #: inc/core/entry/class-comments.php:58
 msgid "No comments"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:212 inc/support/fonts/class-fonts.php:213
-msgid "Normal 400"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:214
-msgid "Normal 400 Italic"
 msgstr ""
 
 #: inc/gutenberg/blocks/post/class-template.php:105
@@ -348,11 +311,11 @@ msgstr ""
 msgid "Posted on "
 msgstr ""
 
-#: inc/support/starter/class-starter.php:113
+#: inc/support/starter/class-starter.php:148
 msgid "Primary Menu"
 msgstr ""
 
-#: inc/support/class-support.php:75
+#: inc/support/class-support.php:72
 msgid "Primary Navigation"
 msgstr ""
 
@@ -400,14 +363,6 @@ msgstr ""
 msgid "Search this website %s"
 msgstr ""
 
-#: inc/support/fonts/class-fonts.php:217 inc/support/fonts/class-fonts.php:218
-msgid "Semi-Bold 600"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:219
-msgid "Semi-Bold 600 Italic"
-msgstr ""
-
 #: inc/support/plugins/cf7/modules/class-submit.php:63
 msgid "Send"
 msgstr ""
@@ -433,7 +388,7 @@ msgstr ""
 msgid "Tag Archives: %s"
 msgstr ""
 
-#: inc/init.php:370
+#: inc/init.php:371
 msgid "The file must be of type CSS/JS."
 msgstr ""
 
@@ -446,7 +401,7 @@ msgctxt "Theme starter content"
 msgid "About"
 msgstr ""
 
-#: inc/support/starter/class-starter.php:134
+#: inc/support/starter/class-starter.php:169
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr ""
@@ -456,7 +411,7 @@ msgctxt "Theme starter content"
 msgid "Home"
 msgstr ""
 
-#: inc/support/starter/class-starter.php:100
+#: inc/support/starter/class-starter.php:135
 msgctxt "Theme starter content"
 msgid "Logo"
 msgstr ""
@@ -480,22 +435,6 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
-#: inc/support/fonts/class-fonts.php:225 inc/support/fonts/class-fonts.php:226
-msgid "Ultra-Bold 900"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:227
-msgid "Ultra-Bold 900 Italic"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:205 inc/support/fonts/class-fonts.php:206
-msgid "Ultra-Light 100"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:207
-msgid "Ultra-Light 100 Italic"
-msgstr ""
-
 #: block-views/entry/protected.tpl.php:62
 msgid "Unlock"
 msgstr ""
@@ -509,7 +448,7 @@ msgid "Website"
 msgstr ""
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:77
+#: inc/gutenberg/class-gutenberg.php:136
 msgid "WeCodeArt"
 msgstr ""
 
