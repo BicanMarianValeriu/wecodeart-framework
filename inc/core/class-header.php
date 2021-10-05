@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.0.0
+ * @version		5.0.7
  */
 
 namespace WeCodeArt\Core;
@@ -73,25 +73,35 @@ class Header {
 	/**
 	 * Clean WP_Head of unwanted of stuff
 	 *
+	 * This approach tricks the theme check plugin in WP.org but...
+	 * I'm aware about plugin teritoriality so I will keep this disabled
+	 * However, user can use this filter to reduce <head> bloat to minimum
+	 *
 	 * @return void
 	 */
 	public function clean_head() {
-		if( apply_filters( 'wecodeart/filter/head/clean', false ) ) return;
+		if( apply_filters( 'wecodeart/filter/head/clean', false ) === false ) return;
 
-		remove_action( 'wp_head', 'wp_generator' );
-		remove_action( 'wp_head', 'rsd_link' );
-		remove_action( 'wp_head', 'feed_links', 2 );
-		remove_action( 'wp_head', 'feed_links_extra', 3 );
-		remove_action( 'wp_head', 'wlwmanifest_link' );
-		remove_action( 'wp_head', 'index_rel_link' );
-		remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 );
-		remove_action( 'wp_head', 'start_post_rel_link', 10, 0 );
-		remove_action( 'wp_head', 'adjacent_posts_rel_link', 10, 0 );
-		remove_action( 'wp_head', 'rest_output_link_wp_head' );
-		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
-		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
-		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-		remove_action( 'wp_print_styles', 'print_emoji_styles' );
-		remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+		$actions = apply_filters( 'wecodeart/filter/head/clean/actions', [
+			[ 'wp_head', 'wp_generator' ],
+			[ 'wp_head', 'rsd_link' ],
+			[ 'wp_head', 'feed_links', 2 ],
+			[ 'wp_head', 'feed_links_extra', 3 ],
+			[ 'wp_head', 'wlwmanifest_link' ],
+			[ 'wp_head', 'index_rel_link' ],
+			[ 'wp_head', 'parent_post_rel_link', 10, 0 ],
+			[ 'wp_head', 'start_post_rel_link', 10, 0 ],
+			[ 'wp_head', 'adjacent_posts_rel_link', 10, 0 ],
+			[ 'wp_head', 'rest_output_link_wp_head' ],
+			[ 'wp_head', 'wp_shortlink_wp_head' ],
+			[ 'wp_head', 'wp_oembed_add_discovery_links' ],
+			[ 'wp_head', 'print_emoji_detection_script', 7 ],
+			[ 'wp_print_styles', 'print_emoji_styles', 7 ],
+			[ 'template_redirect', 'rest_output_link_header', 11 ],
+		] );
+
+		if( empty( $actions ) ) return;
+		
+		foreach( $actions as $args ) call_user_func( 'remove_action', ...$args );
 	}
 }
