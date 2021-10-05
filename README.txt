@@ -23,7 +23,3 @@ Source: https://fontawesome.com/license
 Bootstrap, Copyright Twitter
 License: MIT.
 Source: https://getbootstrap.com/docs/5.0/about/license/
-
-Google Fonts
-License: SIL Open Font License
-Source: https://fonts.google.com/attribution
