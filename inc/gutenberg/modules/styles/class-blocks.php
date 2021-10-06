@@ -181,7 +181,6 @@ class Blocks extends Processor {
 				// Gradient
 				if ( $value = get_prop( $color, 'gradient', false ) ) {
 					$this->output[] = wp_parse_args( [
-						'element'	=> implode( '>', [ $this->element, '.wp-block__gradient-background' ] ),
 						'property' 	=> 'background-image',
 						'value'	  	=> $value
 					], $output );

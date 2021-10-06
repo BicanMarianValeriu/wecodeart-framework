@@ -141,7 +141,7 @@ class Styles implements Integration {
 			'core/social-links',
 			'core/social-link',
 		], true ) ) ) {
-			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, 1 );
+			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, 2 );
 		}
 
 		// Add necessary class

@@ -5,12 +5,21 @@
 			"name": "page-sidebar",
 			"title": "Page - Sidebar",
 			"postTypes": [
-				"page"
+				"page",
+				"post"
 			]
 		},
 		{
 			"name": "page-full",
 			"title": "Page - Full",
+			"postTypes": [
+				"page",
+				"post"
+			]
+		},
+		{
+			"name": "content-only",
+			"title": "Content Only",
 			"postTypes": [
 				"page",
 				"post"

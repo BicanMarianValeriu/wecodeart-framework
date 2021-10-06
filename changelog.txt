@@ -1,3 +1,7 @@
+v5.0.8
+- Fixed - Blocks custom gradient style output
+- Added - Content Only post/page template (for landing pages)
+
 v5.0.7
 - Cleanup - Some old Gutenberg unused CSS
 - Cleanup - Starter content: remove customizer defaults for wp_parse_args (since it was removed)
