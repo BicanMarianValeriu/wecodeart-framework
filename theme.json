@@ -96,7 +96,38 @@
 					"name": "Black"
 				}
 			],
-			"gradients": [],
+			"gradients": [
+				{
+					"slug": "primary-to-success",
+					"gradient": "linear-gradient(160deg, var(--wp--preset--color--primary), var(--wp--preset--color--success))",
+					"name": "Primary to Success"
+				},
+				{
+					"slug": "primary-to-vivid-purple",
+					"gradient": "linear-gradient(160deg, var(--wp--preset--color--primary), var(--wp--preset--color--vivid-purple))",
+					"name": "Primary to Purple"
+				},
+				{
+					"slug": "success-to-warning",
+					"gradient": "linear-gradient(160deg, var(--wp--preset--color--success), var(--wp--preset--color--warning))",
+					"name": "Success to Warning"
+				},
+				{
+					"slug": "danger-to-warning",
+					"gradient": "linear-gradient(160deg, var(--wp--preset--color--danger), var(--wp--preset--color--warning))",
+					"name": "Danger to Warning"
+				},
+				{
+					"slug": "secondary-to-light",
+					"gradient": "linear-gradient(160deg, var(--wp--preset--color--secondary), var(--wp--preset--color--light))",
+					"name": "Secondary to Light"
+				},
+				{
+					"slug": "light-to-white",
+					"gradient": "linear-gradient(160deg, var(--wp--preset--color--light), var(--wp--preset--color--white))",
+					"name": "Light to White"
+				}
+			],
 			"link": true,
 			"custom": true,
 			"customGradient": true
@@ -334,7 +365,7 @@
 			"text": "var:preset|color|dark"
 		},
 		"spacing": {
-			"blockGap": 0
+			"blockGap": null
 		},
 		"typography": {
 			"fontSize": "var:preset|font-size|normal",

@@ -1,6 +1,14 @@
+v5.1.1
+- Added - Function to programatically update About page on WP.org
+
+v5.1.0
+- Added - Function to programatically update Homepage on WP.org
+
 v5.0.8
 - Fixed - Blocks custom gradient style output
+- Added - Blocks sample gradients in theme.json
 - Added - Content Only post/page template (for landing pages)
+- Updated - blockGap to null to avoid outputing this
 
 v5.0.7
 - Cleanup - Some old Gutenberg unused CSS

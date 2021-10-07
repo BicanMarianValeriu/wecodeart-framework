@@ -5,7 +5,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 5.0.6
+Version: 5.0.9
 Requires PHP: 7.0
 Requires at least: 5.8
 Tested up to: 5.8
@@ -4752,7 +4752,7 @@ hr:not([size]) {
 
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -5354,39 +5354,6 @@ progress {
   text-decoration: none;
   z-index: 100000;
   /* Above WP toolbar. */
-}
-:root .theme-is-dark .form-select, :root .theme-is-dark select,
-:root .theme-is-dark .form-control,
-:root .theme-is-dark textarea,
-:root .theme-is-dark input:not([type=radio]):not([type=checkbox]),
-:root .theme-is-dark .form-check-input,
-:root .theme-is-dark .input-group-text,
-:root .theme-is-dark .btn-outline-dark {
-  color: white;
-  border-color: rgba(0, 0, 0, 0.3);
-}
-:root .theme-is-dark .form-select, :root .theme-is-dark select,
-:root .theme-is-dark .form-check-input,
-:root .theme-is-dark .input-group-text,
-:root .theme-is-dark .form-control,
-:root .theme-is-dark textarea,
-:root .theme-is-dark input:not([type=radio]):not([type=checkbox]) {
-  background-color: rgba(0, 0, 0, 0.15);
-}
-:root .theme-is-dark .form-select, :root .theme-is-dark select {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
-}
-:root .theme-is-dark .form-select option, :root .theme-is-dark select option {
-  color: var(--wca-dark);
-}
-:root .theme-is-dark .form-floating .form-control::placeholder, :root .theme-is-dark .form-floating textarea::placeholder, :root .theme-is-dark .form-floating input:not([type=radio]):not([type=checkbox])::placeholder {
-  color: transparent;
-}
-:root .theme-is-dark .form-floating .form-control:-moz-placeholder, :root .theme-is-dark .form-floating textarea:-moz-placeholder, :root .theme-is-dark .form-floating input:-moz-placeholder:not([type=radio]):not([type=checkbox]) {
-  color: transparent;
-}
-:root .theme-is-dark .form-floating .form-control::-webkit-input-placeholder, :root .theme-is-dark .form-floating textarea::-webkit-input-placeholder, :root .theme-is-dark .form-floating input:not([type=radio]):not([type=checkbox])::-webkit-input-placeholder {
-  color: transparent;
 }
 
 /* 	= Base
