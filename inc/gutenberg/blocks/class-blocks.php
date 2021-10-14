@@ -34,6 +34,13 @@ class Blocks implements \ArrayAccess {
 	protected $items = [];
 
     /**
+	 * The CSS ID for registered style.
+	 *
+	 * @var string
+	 */
+    const CSS_ID = 'wecodeart-blocks';
+
+    /**
 	 * An array of blocks used in this page.
 	 *
 	 * @static
@@ -77,6 +84,7 @@ class Blocks implements \ArrayAccess {
         // Navigation Blocks
 		$this->register( 'core/navigation',         Blocks\Navigation::class );
 		$this->register( 'core/navigation-link',    Blocks\Navigation\Link::class );
+		$this->register( 'core/navigation-submenu', Blocks\Navigation\Menu::class );
 		$this->register( 'core/home-link',          Blocks\Navigation\Home::class );
         // Post Blocks
 		$this->register( 'core/post-date',          Blocks\Post\Date::class );
@@ -95,10 +103,10 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         
         // Hooks
-        add_action( 'init',             [ $this, 'load' ] );
-        add_filter( 'render_block',     [ $this, 'collect_blocks' ], 10, 2 );
-        add_action( 'wp_footer',        [ $this, 'output_styles' ] );
-        add_action( 'wp_print_styles',  [ $this, 'remove_styles' ], 100 );
+        add_action( 'init',                 [ $this, 'load' ] );
+        add_filter( 'render_block',         [ $this, 'collect_blocks' ], 10, 2 );
+        add_action( 'wp_enqueue_scripts',   [ $this, 'register_styles' ], 20, 1 );
+        add_action( 'wp_print_styles',      [ $this, 'remove_styles' ], 100 );
 	}
 
     /**
@@ -122,7 +130,7 @@ class Blocks implements \ArrayAccess {
 	 *
 	 * @return void
 	 */
-	public function output_styles() {
+	public function register_styles() {
         if( empty( self::$blocks ) ) return;
 
         $inline_css = '';
@@ -137,9 +145,10 @@ class Blocks implements \ArrayAccess {
         }
         
         if( empty( $inline_css ) ) return;
-
-        // Escaping is not necessary since CSS processor does that already for each property!
-        printf( '<style id="wecodeart-blocks-inline-css">%s</style>', $inline_css );
+        
+        wp_register_style( self::CSS_ID, false, [], true, true );
+        wp_add_inline_style( self::CSS_ID, $inline_css );
+        wp_enqueue_style( self::CSS_ID );
 	}
 
     /**

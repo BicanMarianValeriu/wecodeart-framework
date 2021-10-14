@@ -103,50 +103,19 @@ class Navigation extends Dynamic {
 			return '';
 		}
 
-		$colors     = $this->css_colors( $attributes );
-		$font_sizes = $this->css_font_sizes( $attributes );
-		$background = self::get_background( $attributes );
-
-		$classes 	= [ 'wp-block-navigation', 'navbar' ];
-		$classes[] 	= ( Styles::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
-
-		if( get_prop( $attributes, 'orientation', false ) === 'horizontal' ) {
-			$classes[] = 'navbar-expand';
-		}
-
-		if( get_prop( $attributes, 'isResponsive', false ) === true ) {
-			$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
-			$classes[] 	= 'navbar-expand-lg';
-		}
-		
-		if( get_prop( $attributes, 'showSubmenuIcon', false ) === false ) {
-			$classes[] 	= 'hide-dropdown-icon';
-		}
-
-		if( $align = get_prop( $attributes, 'itemsJustification' ) ) {
-			$classes[] = 'justify-content-' . ( $align === 'right' ? 'end' : $align );
-		}
-
-		$classes    	= array_merge( $classes, $colors['css_classes'], $font_sizes['css_classes'] );
-		$block_styles 	= get_prop( $attributes, 'styles', '' );
-		$block_id		= uniqid();
+		$block_id	= uniqid();
 
 		$html = Markup::wrap( 'navbar-nav', [ [
 			'tag' 	=> 'nav',
-			'attrs'	=> [
-				'class'	=> join( ' ', $classes ),
-				'style'	=> $block_styles . $colors['inline_styles'] . $font_sizes['inline_styles'],
-			]
+			'attrs'	=> $this->get_wrapper_attributes( $attributes )
 		] ], function( $attributes, $inner_blocks ) use ( $block_id ) {
 			$classes 	= [ 'wp-block-navigation__container', 'nav', 'navbar-nav' ];
-			$wrappers 	= [
-				[
-					'tag' 	=> 'ul',
-					'attrs' => [
-						'class' => implode( ' ', $classes ),
-					]
+			$wrappers 	= [ [
+				'tag' 	=> 'ul',
+				'attrs' => [
+					'class' => join( ' ', $classes ),
 				]
-			];
+			] ];
 
 			if( get_prop( $attributes, 'isResponsive', false ) ===  true ) {
 				$wrappers = [ [
@@ -273,7 +242,7 @@ class Navigation extends Dynamic {
 	 *
 	 * @return 	array	An array of parsed block data.
 	 */
-	public function parse_menu( $menu_items, $parent ) {
+	public function parse_menu( $menu_items, $parent, $top = true ) {
 		if ( empty( $menu_items ) ) {
 			return [];
 		}
@@ -281,24 +250,20 @@ class Navigation extends Dynamic {
 		$blocks = [];
 
 		foreach ( $menu_items as $item ) {
-			if( isset( $item->content ) ) {
-				$block = current( parse_blocks( $item->content ) );
-			} else {
-				$block = [
-					'blockName' => 'core/navigation-link',
-					'attrs'     => [
-						'id'			=> url_to_postid( $item->url ),
-						'label' 		=> $item->title,
-						'title' 		=> $item->attr_title,
-						'url'   		=> $item->url,
-						'opensInNewTab'	=> $item->target === '_blank' ? true : false,
-						'className' 	=> $item->classes
-					],
-					'innerBlocks' => []
-				];
-			}
+			$block = [
+				'blockName' => 'core/navigation-link',
+				'attrs'     => [
+					'id'			=> url_to_postid( $item->url ),
+					'label' 		=> $item->title,
+					'title' 		=> $item->attr_title,
+					'url'   		=> $item->url,
+					'opensInNewTab'	=> $item->target === '_blank' ? true : false,
+					'className' 	=> implode( ' ', $item->classes ),
+					'isTopLevelLink'=> $top,
+				],
+			];
 
-			$block['innerBlocks'] = $this->parse_menu( isset( $parent[ $item->ID ] ) ? $parent[ $item->ID ] : [], $parent );
+			$block['innerBlocks'] = $this->parse_menu( isset( $parent[ $item->ID ] ) ? $parent[ $item->ID ] : [], $parent, false );
 
 			$blocks[] = $block;
 		}
@@ -358,10 +323,10 @@ class Navigation extends Dynamic {
 	 * @return array  	 			CSS classes and inline styles.
 	 */
 	public function css_colors( $attributes ) {
-		$colors = array(
+		$colors = [
 			'css_classes'   => [],
 			'inline_styles' => '',
-		);
+		];
 	
 		// Text color.
 		$has_named_text_color  = get_prop( $attributes, 'textColor', false );
@@ -409,7 +374,7 @@ class Navigation extends Dynamic {
 	 * @param  array $attributes 	Navigation block context.
 	 * @return array 				Font size CSS classes and inline styles.
 	 */
-	public function css_font_sizes( $attributes ) {
+	public function css_typography( $attributes ) {
 		// CSS classes.
 		$font_sizes = [
 			'css_classes'   => [],
@@ -425,6 +390,45 @@ class Navigation extends Dynamic {
 		}
 
 		return $font_sizes;
+	}
+
+	/**
+	 * Return an array of wrapper attributes.
+	 * 
+	 * @return 	array
+	 */
+	public function get_wrapper_attributes( $attributes ) {
+		$colors     = $this->css_colors( $attributes );
+		$typography = $this->css_typography( $attributes );
+		$background = self::get_background( $attributes );
+
+		$classes 	= [ 'wp-block-navigation', 'navbar' ];
+		$classes[] 	= ( Styles::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
+
+		if( get_prop( $attributes, 'orientation', false ) === 'horizontal' ) {
+			$classes[] = 'navbar-expand';
+		}
+
+		if( get_prop( $attributes, 'isResponsive', false ) === true ) {
+			$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
+			$classes[] 	= 'navbar-expand-lg';
+		}
+		
+		if( get_prop( $attributes, 'showSubmenuIcon', false ) === false ) {
+			$classes[] 	= 'hide-dropdown-icon';
+		}
+
+		if( $align = get_prop( $attributes, 'itemsJustification' ) ) {
+			$classes[] = 'justify-content-' . ( $align === 'right' ? 'end' : $align );
+		}
+
+		$classes    	= array_merge( $classes, $colors['css_classes'], $typography['css_classes'] );
+		$block_styles 	= get_prop( $attributes, 'styles', '' );
+
+		return [
+			'class'	=> join( ' ', array_filter( $classes ) ),
+			'style'	=> $block_styles . $colors['inline_styles'] . $typography['inline_styles'],
+		];
 	}
 
 	/**
@@ -453,8 +457,17 @@ class Navigation extends Dynamic {
 		.wp-block-navigation.navbar-dark .btn-close {
 			background-color: var(--wca-white);
 		}
+		.wp-block-navigation .offcanvas,
+		.wp-block-navigation .offcanvas-body {
+			justify-content: inherit;
+		}
 		.wp-block-navigation .offcanvas-start .btn-close {
 			margin-left: auto;
+		}
+		.wp-block-navigation-link__content.nav-link,
+		.wp-block-navigation-link__content.dropdown-item {
+			display: flex;
+			align-items: center;
 		}
 		.wp-block-navigation-link__content:not([data-bs-toggle='dropdown']):hover ~ .dropdown-menu,
 		.wp-block-navigation-link__content:not([data-bs-toggle='dropdown']):focus ~ .dropdown-menu,
@@ -463,10 +476,8 @@ class Navigation extends Dynamic {
 			visibility: visible;
 			opacity: 1;
 		}
-		.wp-block-navigation-link__content.nav-link,
-		.wp-block-navigation-link__content.dropdown-item {
-			display: flex;
-			align-items: center;
+		.wp-block-navigation-link__icon {
+			margin-right: .5rem;
 		}
 		.wp-block-navigation-link__label {
 			flex: 1 1 auto;

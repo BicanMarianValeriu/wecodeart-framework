@@ -1,3 +1,14 @@
+v5.1.2
+- Fixed - Header classnames extra space 
+- Fixed - Duotone output RGB SVG filter (was RRR)
+- Fixed - Buttons border radius updated style output from normalized attributes
+- Fixed - Fixed typography inline styles for font size, style and weight
+- Added - Navigation Submenu for rendering Gutenberg submenu block with Boostrap markup
+- Added - Ability to use FA/Glyphicons into navigation menus
+- Updated - Masive improvements to Navigation menu functionality and code
+- Updated - Gutenberg Blocks Styles into wp_enqueue_scripts hook instead of footer
+- Updated - credits.tpl.php moved to "general" views folder
+
 v5.1.1
 - Added - Function to programatically update About page on WP.org
 

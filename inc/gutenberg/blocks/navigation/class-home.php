@@ -21,6 +21,7 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Support\Styles;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use WeCodeArt\Gutenberg\Blocks\Navigation;
+use WeCodeArt\Gutenberg\Blocks\Navigation\Link;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -68,7 +69,7 @@ class Home extends Dynamic {
 	}
 
 	/**
-	 * Dynamically renders the `core/navigation-link` block.
+	 * Dynamically renders the `core/home-link` block.
 	 *
 	 * @param 	array 	$attributes The block attributes.
 	 *
@@ -80,24 +81,14 @@ class Home extends Dynamic {
 			return '';
 		}
 		
-		$classes		= [ 'wp-block-navigation-link', 'wp-block-navigation-link--home', 'nav-item' ];
-		$class_name 	= ! empty( $attributes['className'] ) ? implode( ' ', (array) $attributes['className'] ) : false;
-
-		// Fallback - to do, if styles extension is disabled.
-		$inline_style 	= '';
-
-		if ( false !== $class_name ) {
-			$classes[] = $class_name;
-		}
+		$icons = [];
+		$attrs 	= $this->get_wrapper_attributes( $attributes, $block, $icons );
 
 		return Markup::wrap( 'nav-item', [ [
 			'tag' 	=> 'li',
-			'attrs'	=> [
-				'class'	=> join( ' ', $classes ),
-				'style'	=> $inline_style,
-			]
-		] ], function( $attributes ) {
-			$is_active 	= is_front_page();
+			'attrs'	=> $attrs
+		] ], function( $attributes, $icons ) {
+			$is_active 	= wecodeart_if( 'is_front_page' );
 			$classes 	= [ 'wp-block-navigation-link__content', 'nav-link' ];
 
 			if( $is_active ) {
@@ -112,34 +103,66 @@ class Home extends Dynamic {
 					'href'			=> esc_url( trailingslashit( home_url() ) ),
 					'aria-current'	=> $is_active ? 'page' : null,
 				],
-			] ], function( $attributes ) {
+			] ], function( $attributes, $icons ) {
+
+				// Icon
+				Link::render_icon( $icons );
+
 				// Label
-				Markup::wrap( 'nav-label', [ [
-					'tag' 	=> 'span',
-					'attrs'	=> [
-						'class' => 'wp-block-navigation-link__label'
-					]
-				] ], function( $attributes ) {
-					// Removed redundant isset() since we already checking for empty above
-					// So is pointless to double check here, off course isset if it passes that
-					echo wp_kses( $attributes['label'], [
-						'code'   => [],
-						'em'     => [],
-						'img'    => [
-							'scale' => [],
-							'class' => [],
-							'style' => [],
-							'src'   => [],
-							'alt'   => [],
-						],
-						's'      => [],
-						'span'   => [
-							'style' => [],
-						],
-						'strong' => [],
-					] );
-				}, [ $attributes ] );
-			}, [ $attributes ] );
-		}, [ $attributes ], false );
+				Link::render_label( $attributes );
+
+			}, [ $attributes, $icons ] );
+		}, [ $attributes, $icons ], false );
+	}
+
+	/**
+	 * Return an array of wrapper attributes.
+	 * 
+	 * @return 	array
+	 */
+	public function get_wrapper_attributes( $attributes, $block, &$icons ) {
+		$classes		= [ 'wp-block-navigation-link', 'wp-block-navigation-link--home', 'nav-item' ];
+		$class_names	= ! empty( $attributes['className'] ) ? explode( ' ', $attributes['className'] ) : false;
+
+		// Fallback - to do, if styles extension is disabled.
+		$inline_style 	= '';
+
+		if ( ! empty( $class_names ) ) {
+			$classes = array_merge( $classes, $class_names );
+		}
+		
+		$classes = $this->pluck_icon_classes( $classes, $icons );
+
+		return [
+			'class'	=> join( ' ', array_filter( $classes ) ),
+			'style'	=> $inline_style,
+		];
+	}
+
+	/**
+	 * Find any custom linkmod or icon classes and store in their holder
+	 *
+	 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider, .sr-only
+	 * Supported iconsets: Font Awesome 4/5, Glypicons
+	 *
+	 * @param array   $classes		an array of classes currently assigned to the item.
+	 * @param array   $icons		an array to hold linkmod classes.
+	 *
+	 * @return array  $classes		a maybe modified array of classnames.
+	 */
+	private function pluck_icon_classes( $classes, &$icons ) {
+		foreach ( $classes as $key => $class ) {
+			// If any special classes are found, store the class in it's
+			// holder array and and unset the item from $classes.
+			if ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {
+				$extras[] = $class;
+				unset( $classes[ $key ] );
+			} elseif ( preg_match( '/^glyphicon-(\S*)?|^glyphicon(\s?)$/i', $class ) ) {
+				$extras[] = $class;
+				unset( $classes[ $key ] );
+			}
+		}
+
+		return $classes;
 	}
 }

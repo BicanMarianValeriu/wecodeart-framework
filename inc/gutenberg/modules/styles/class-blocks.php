@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -90,7 +90,7 @@ class Blocks extends Processor {
 
 		// Layout
 		// if( $layout = get_prop( $this->attrs, 'layout', false ) ) {
-		// 	if ( isset( $layout['inherit'] ) && $layout['inherit'] ) {
+		// 	if ( get_prop( $layout, 'inherit', null ) ) {
 		// 		$default_layout = wecodeart_json( [ 'settings', 'layout' ], false );
 		// 		if ( $default_layout ) {
 		// 			$layout = $default_layout;
@@ -127,13 +127,19 @@ class Blocks extends Processor {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'font-size',
 						'value'	  	=> $value,
-						'units'	  	=> 'px'
 					], $output );
 				}
 	
-				if ( $value = get_prop( $typography, 'fontStyle', false ) ) {
+				if ( $value = get_prop( $typography, 'fontWeight', false ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'font-weight',
+						'value'	  	=> $value
+					], $output );
+				}
+
+				if ( $value = get_prop( $typography, 'fontStyle', false ) ) {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'font-style',
 						'value'	  	=> $value
 					], $output );
 				}
@@ -186,7 +192,7 @@ class Blocks extends Processor {
 					], $output );
 				}
 				
-				// Duotone
+				// Duotone - temporary disable until I combine them into our styles
 				if ( $value = get_prop( $color, 'duotone', false ) ) {
 					$block_type = \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
 

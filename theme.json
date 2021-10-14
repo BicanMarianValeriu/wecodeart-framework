@@ -44,6 +44,18 @@
 			"customWidth": true
 		},
 		"color": {
+			"duotone": [
+				{
+					"name":  "Dark grayscale" ,
+					"colors": [ "#000000", "#7f7f7f" ],
+					"slug": "dark-grayscale"
+				},
+				{
+					"name":  "Grayscale" ,
+					"colors": [ "#000000", "#ffffff" ],
+					"slug": "grayscale"
+				}
+			],
 			"palette": [
 				{
 					"slug": "primary",
@@ -140,35 +152,10 @@
 				"xl": "1140px",
 				"xxl": "1320px"
 			},
-			"colorPalettes": [
-				{
-					"label": "Base",
-					"slug": "base",
-					"allowDeletion": 0,
-					"colors": {
-						"background": "#ffffff",
-						"text": "#343a40",
-						"link": "#2388ed",
-						"selection": "rgba(109,118,126,0.35)"
-					}
-				},
-				{
-					"label": "Dark Mode",
-					"slug": "dark",
-					"allowDeletion": 0,
-					"colors": {
-						"background": "#343a40",
-						"text": "#ffffff",
-						"link": "#dc3545",
-						"selection": "#ffc107"
-					}
-				}
-			],
 			"wideMultiplier": "1.15"
 		},
 		"layout": {
-			"contentSize": "1320px",
-			"wideSize": "1440px"
+			"contentSize": "1320px"
 		},
 		"spacing": {
 			"customMargin": true,
@@ -339,10 +326,6 @@
 				}
 			},
 			"core/button": {
-				"color": {
-					"background": "var:preset|color|light",
-					"text": "var:preset|color|dark"
-				},
 				"typography": {
 					"fontFamily": "var:preset|font-family|headings",
 					"fontSize": "var:preset|font-size|normal"

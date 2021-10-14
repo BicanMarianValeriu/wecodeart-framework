@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -34,27 +34,28 @@ class Button extends Base {
 		$output 			= [];
 		$output['element'] 	= join( '>', [ $this->element, '.wp-block-button__link' ] );
 
-		// Border-radius
-		if ( $value = get_prop( $this->attrs, 'borderRadius', false ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'border-radius',
-				'value'	  	=> $value,
-				'suffix'	=> 'px'
-			], $output );
-		}
-
 		// Inline Style
 		if( $css_style = get_prop( $this->attrs, 'style', false ) ) {
+			// Border
+			if( $border = get_prop( $css_style, 'border', [] ) ) {
+				if ( $value = get_prop( $border, 'radius', false ) ) {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'border-radius',
+						'value'	  	=> $value
+					], $output );
+				}
+			}
+
 			// Colors
 			if ( $color = get_prop( $css_style, 'color', false ) ) {
 				// Text
 				if ( $value = get_prop( $color, 'text', false ) ) {
 					$this->output[] = wp_parse_args( [
-						'property' 	=> 'color',
+						'property' 	=> '--wca-color',
 						'value'	  	=> $value
 					], $output );
 					$this->output[] = wp_parse_args( [
-						'property' 	=> '--wca-color',
+						'property' 	=> 'color',
 						'value'	  	=> $value
 					], $output );
 				}

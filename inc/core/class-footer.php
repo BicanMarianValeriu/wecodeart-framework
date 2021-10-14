@@ -73,17 +73,11 @@ class Footer {
 	 * Footer Credits
 	 *
 	 * @since 	1.0
-	 * @version 5.0.0
+	 * @version 5.1.2
 	 *
 	 * @return 	void
 	 */
 	public function markup_credits() {
-		$copyright = get_theme_mod( 'footer-copyright-text' );
-		$copyright = str_replace( '[copy]', '&copy;', $copyright );
-		$copyright = str_replace( '[year]', date( 'Y' ), $copyright );
-
-		wecodeart_template( 'footer/credits', [
-			'copyright' => $copyright
-		] );
+		wecodeart_template( 'general/credits' );
 	}
 }

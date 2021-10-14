@@ -68,15 +68,15 @@ class Template extends Dynamic {
 
 		// Layout
 		if( $layout = get_prop( $attributes, 'layout', false ) ) {
-			if ( isset( $layout['inherit'] ) && $layout['inherit'] ) {
+			if ( get_prop( $layout, 'inherit' ) ) {
 				$default_layout = wecodeart_json( [ 'settings', 'layout' ], false );
 				if ( $default_layout ) {
 					$layout = $default_layout;
 				}
 			}
 
-			$size_default 	= get_prop( $layout, 'contentSize', null );
-			$size_wide    	= get_prop( $layout, 'wideSize', null );
+			$size_default 	= get_prop( $layout, 'contentSize' );
+			$size_wide    	= get_prop( $layout, 'wideSize' );
 
 			$size_default 	= $size_default ?: $size_wide;
 			$size_wide 		= $size_wide ?: $size_default;

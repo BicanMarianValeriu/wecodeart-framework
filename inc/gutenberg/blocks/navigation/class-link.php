@@ -80,7 +80,7 @@ class Link extends Dynamic {
 		$link_has_id 	= isset( $attributes['id'] ) && is_numeric( $attributes['id'] );
 		$is_post_type	= isset( $attributes['kind'] ) && 'post-type' === $attributes['kind'];
 		$is_post_type	= $is_post_type || isset( $attributes['type'] ) && ( 'post' === $attributes['type'] || 'page' === $attributes['type'] );
-
+		
 		// Don't render the block's subtree if it is a draft.
 		if ( $is_post_type && $link_has_id ) {
 			$post = get_post( $attributes['id'] );
@@ -94,233 +94,263 @@ class Link extends Dynamic {
 			return '';
 		}
 
-		$has_submenu 	= count( $block->inner_blocks ) > 0;
-		$is_active   	= trailingslashit( home_url( $wp->request ) ) === trailingslashit( $attributes['url'] );
-		
-		$classes		= [ 'wp-block-navigation-link', 'nav-item' ];
-		$class_name 	= ! empty( $attributes['className'] ) ? implode( ' ', (array) $attributes['className'] ) : false;
+		// Extra classes
+		$extras = [
+			'mod' 	=> [],
+			'icon' 	=> [],
+		];
 
-		// Fallback - to do, if styles extension is disabled.
-		$inline_style 	= '';
-
-		if ( false !== $class_name ) {
-			$classes[] = $class_name;
-		}
-
-		if( $has_submenu ) {
-			$classes[] = 'dropdown';
-		}
-
-		$link_classes 	= [];
-		$icon_classes	= [];
-
-		// Get an updated $classes array without linkmod or icon classes.
-		$classes = $this->pluck_special_classes( $classes, $link_classes, $icon_classes );
+		$attrs 	= self::get_wrapper_attributes( $attributes, $block, $extras );
 
 		return Markup::wrap( 'nav-item', [ [
 			'tag' 	=> 'li',
-			'attrs'	=> [
-				'class'	=> join( ' ', $classes ),
-				'style'	=> $inline_style,
-			]
-		] ], function( $attributes, $block, $is_active, $has_submenu, $link_classes, $icon_classes ) {
-			$classes = [ 'wp-block-navigation-link__content', 'nav-link' ];
-			if( $is_active ) {
-				$classes[] = 'active';
-			}
-			
-			if( $has_submenu ) {
-				$classes[] = 'dropdown-toggle';
-			}
-
-			$linkmod_type 	= $this->get_linkmod_type( $link_classes );
-			$attrs 			= $this->update_attrs_for_linkmod_type( [
-				'class' 	=> join( ' ', $classes ),
-				'href'		=> $has_submenu ? 'javascript:void(0);' : get_prop( $attributes, 'url', '#' ),
-				'target' 	=> get_prop( $attributes, 'opensInNewTab' ) === true ? '_blank' : null,
-				'rel'		=> get_prop( $attributes, 'rel', get_prop( $attributes, 'nofollow', null ) === 'nofollow' ? 'nofollow' : null ),
-				'title'		=> get_prop( $attributes, 'title', null ),
-				'data-bs-toggle' 	=> $has_submenu ? 'dropdown' : null,
-				'data-bs-auto-close'=> $has_submenu ? 'outside' : null,
-				'aria-haspopup' 	=> $has_submenu ? 'true' : null,
-				'aria-expanded' 	=> $has_submenu ? 'false' : null,
-				'aria-current'		=> $is_active ? 'page' : null,
-			], $link_classes );
+			'attrs'	=> $attrs,
+		] ], function( $attributes, $block, $extras ) {
 
 			// Nav Link
 			Markup::wrap( 'nav-link', [ [
-				'tag' 	=> $this->get_linkmod_tag( $linkmod_type ),
-				'attrs'	=> $attrs,
-			] ], function( $attributes, $is_active, $icon_classes ) {
-				// Icon
-				$icon_classname = join( ' ', $icon_classes );
-				if ( ! empty( $icon_classname ) ) { ?>
-				<span class="wp-block-navigation-link__icon me-1">
-					<i class="<?php echo esc_attr( $icon_classname ); ?>" aria-hidden="true"></i>
-				</span>
-				<?php
+				'tag' 	=> self::get_link_tag( self::get_link_type( $extras['mod'] ) ),
+				'attrs'	=> self::get_link_attributes( $attributes, $block, $extras ),
+			] ], function( $attributes, $extras ) {
+				if( in_array( 'dropdown-divider', $extras['mod' ] ) ) {
+					echo '&nbsp';
+					return;
 				}
+
+				// Icon
+				self::render_icon( $extras['icon'] );
 
 				// Label
-				Markup::wrap( 'nav-label', [ [
-					'tag' 	=> 'span',
-					'attrs'	=> [
-						'class' => 'wp-block-navigation-link__label'
-					]
-				] ], function( $attributes ) {
-					if ( isset( $attributes['label'] ) ) {
-						echo wp_kses( $attributes['label'], [
-							'code'   => [],
-							'em'     => [],
-							'img'    => [
-								'scale' => [],
-								'class' => [],
-								'style' => [],
-								'src'   => [],
-								'alt'   => [],
-							],
-							's'      => [],
-							'span'   => [
-								'style' => [],
-							],
-							'strong' => [],
-						] );
-					}
-				}, [ $attributes ] );
-			}, [ $attributes, $is_active, $icon_classes ] );
+				self::render_label( $attributes );
+
+			}, [ $attributes, $extras ] );
 
 			// Nav Submenu
-			if ( $has_submenu ) {
-				$inner_html = '';
-				foreach ( $block->inner_blocks as $inner_block ) $inner_html .= $inner_block->render();
-				$inner_html = str_replace( 'nav-item ', '', $inner_html );
-				$inner_html = str_replace( 'nav-link', 'dropdown-item', $inner_html );
-				
-				$background = Navigation::get_background( $block->context );
-				
-				$classes 	= [ 'wp-block-navigation-link__container', 'dropdown-menu' ];
-				if( ( Styles::color_lightness( $background ) < 380 ) ) {
-					$classes[] = 'dropdown-menu-dark';
-				}
+			self::render_submenu( $block );
 
-				Markup::wrap( 'nav-dropdown', [ [
-					'tag' 	=> 'ul',
-					'attrs'	=> [
-						'class' => join( ' ', $classes ),
-					]
-				] ], $inner_html );
-			}
-		}, [ $attributes, $block, $is_active, $has_submenu, $link_classes, $icon_classes ], false );
+		}, [ $attributes, $block, $extras ], false );
 	}
 
-	/**
-	 * Find any custom linkmod or icon classes and store in their holder.
-	 *
-	 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider, .sr-only
-	 * Supported iconsets: Font Awesome 4/5, Glypicons
-	 *
-	 * @since 5.0.0
-	 *
-	 * @param array   $classes         an array of classes currently assigned to the item.
-	 * @param array   $link_classes an array to hold linkmod classes.
-	 * @param array   $icon_classes    an array to hold icon classes.
-	 * @param integer $depth           an integer holding current depth level.
-	 *
-	 * @return array  $classes         a maybe modified array of classnames.
-	 */
-	public function pluck_special_classes( $classes, &$link_classes, &$icon_classes ) {
-		foreach ( $classes as $key => $class ) {
-			// If any special classes are found, store the class in it's
-			// holder array and and unset the item from $classes.
-			if ( preg_match( '/^disabled|^sr-only|^screen-reader-text/i', $class ) ) {
-				$link_classes[] = $class;
-				unset( $classes[ $key ] );
-			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) ) {
-				$link_classes[] = $class;
-				unset( $classes[ $key ] );
-			} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {
-				$icon_classes[] = $class;
-				unset( $classes[ $key ] );
-			} elseif ( preg_match( '/^glyphicon-(\S*)?|^glyphicon(\s?)$/i', $class ) ) {
-				$icon_classes[] = $class;
-				unset( $classes[ $key ] );
-			}
+	// Renders
+	public static function render_icon( $classes ) {
+		if( empty( $classes ) ) return;
+		printf( '<i class="wp-block-navigation-link__icon %s"></i>', esc_attr( join( ' ', $classes ) ) );
+	}
+
+	public static function render_label( $attributes ) {
+		Markup::wrap( 'nav-label', [ [
+			'tag' 	=> 'span',
+			'attrs'	=> [
+				'class' => 'wp-block-navigation-link__label'
+			]
+		] ], function( $attributes ) { 
+				echo wp_kses( $attributes['label'], [
+					'code'   => [],
+					'em'     => [],
+					'img'    => [
+						'scale' => [],
+						'class' => [],
+						'style' => [],
+						'src'   => [],
+						'alt'   => [],
+					],
+					's'      => [],
+					'span'   => [
+						'style' => [],
+					],
+					'strong' => [],
+				] );
+		}, [ $attributes ] );
+	}
+
+	public static function render_submenu( $block ) {
+		if( count( $block->inner_blocks ) === 0 ) return;
+
+		$inner_html = '';
+		foreach ( $block->inner_blocks as $inner_block ) $inner_html .= $inner_block->render();
+		
+		$background = Navigation::get_background( $block->context );
+		
+		$classes 	= [ 'wp-block-navigation-link__dropdown', 'dropdown-menu' ];
+		if( ( Styles::color_lightness( $background ) < 380 ) ) {
+			$classes[] = 'dropdown-menu-dark';
 		}
 
-		return $classes;
+		Markup::wrap( 'nav-dropdown', [ [
+			'tag' 	=> 'ul',
+			'attrs'	=> [
+				'class' => join( ' ', $classes ),
+			]
+		] ], $inner_html );
 	}
 
 	/**
 	 * Return a string containing a linkmod type and update $atts array
-	 * accordingly depending on the decided.
-	 *
-	 * @since 	5.0.0
-	 * @param 	array 	$link_classes array of any link modifier classes.
 	 * 
-	 * @return 	string	empty for default, a linkmod type string otherwise.
+	 * @return 	string
 	 */
-	public function get_linkmod_type( $link_classes = [] ) {
+	public static function get_link_type( $classes = [] ) {
 		$linkmod_type = '';
 		// Loop through array of linkmod classes to handle their $atts.
-		if ( ! empty( $link_classes ) ) {
-			foreach ( $link_classes as $link_class ) {
-				if ( ! empty( $link_class ) ) {
-					if ( 'dropdown-header' === $link_class ) {
-						$linkmod_type = 'dropdown-header';
-					} elseif ( 'dropdown-divider' === $link_class ) {
-						$linkmod_type = 'dropdown-divider';
-					} elseif ( 'dropdown-item-text' === $link_class ) {
-						$linkmod_type = 'dropdown-item-text';
-					}
-				}
+		if ( empty( $classes ) ) return $linkmod_type;
+
+		foreach ( $classes as $class ) {
+			if ( empty( $class ) ) continue;
+
+			if ( 'dropdown-header' === $class ) {
+				$linkmod_type = 'dropdown-header';
+			} elseif ( 'dropdown-divider' === $class ) {
+				$linkmod_type = 'dropdown-divider';
+			} elseif ( 'dropdown-item-text' === $class ) {
+				$linkmod_type = 'dropdown-item-text';
 			}
 		}
+
 		return $linkmod_type;
 	}
 
 	/**
 	 * Return a string containing a linkmod span.
-	 *
-	 * @since 	5.0.0
-	 * @param 	string 	$linkmod_type
 	 * 
 	 * @return 	string
 	 */
-	public function get_linkmod_tag( $linkmod_type ) {
+	public static function get_link_tag( $type ) {
 		$output = 'a';
-		if ( 'dropdown-header' === $linkmod_type || 'dropdown-item-text' === $linkmod_type ) $output = 'span';
-		elseif ( 'dropdown-divider' === $linkmod_type ) $output = 'div';
+		if ( 'dropdown-header' === $type || 'dropdown-item-text' === $type ) $output = 'span';
+		elseif ( 'dropdown-divider' === $type ) $output = 'div';
 		return $output;
 	}
 
 	/**
-	 * Update the attributes of a nav item depending on the limkmod classes.
-	 *
-	 * @since 	5.0.0
-	 *
-	 * @param 	array $atts            array of atts for the current link in nav item.
-	 * @param 	array $link_classes an array of classes that modify link or nav item behaviors or displays.
-	 *
+	 * Return an array of link attributes.
+	 * 
 	 * @return 	array
 	 */
-	public function update_attrs_for_linkmod_type( $attrs = [], $link_classes = [] ) {
-		if ( ! empty( $link_classes ) ) {
-			foreach ( $link_classes as $link_class ) {
-				if ( ! empty( $link_class ) ) { 
-					if ( 'sr-only' !== $link_class ) $attrs['class'] .= ' ' . esc_attr( $link_class );  
-					if ( 'disabled' === $link_class ) { 
-						$attrs['href'] = '#';
-						$attrs['tabindex'] = '-1';
-						$attrs['aria-disabled'] = 'true';
-						unset( $attrs['target'] ); 
-					} elseif ( in_array( $link_class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-item-text' ] ) ) {
-						unset( $attrs['href'] );
-						unset( $attrs['target'] );
-					}
-				}
+	public static function get_link_attributes( $attributes, $block, $extras ) {
+		global $wp;
+
+		$is_active 		= trailingslashit( home_url( $wp->request ) ) === trailingslashit( $attributes['url'] );
+		$has_submenu 	= count( $block->inner_blocks ) > 0;
+		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
+
+		$classes = [ 'wp-block-navigation-link__content' ];
+		$classes[] =  $is_sub_menu ? 'dropdown-item' : 'nav-link' ;
+			
+		if( $is_active ) {
+			$classes[] = 'active';
+		}
+
+		if( $has_submenu ) {
+			$classes[] = 'dropdown-toggle';
+		}
+
+		$attrs 			= [
+			'class' 	=> join( ' ', array_filter( $classes )),
+			'href'		=> get_prop( $attributes, 'url', '#' ),
+			'target' 	=> get_prop( $attributes, 'opensInNewTab' ) === true ? '_blank' : null,
+			'rel'		=> get_prop( $attributes, 'rel', get_prop( $attributes, 'nofollow', null ) === 'nofollow' ? 'nofollow' : null ),
+			'title'		=> get_prop( $attributes, 'title', null ),
+			'aria-current'	=> $is_active ? 'page' : null,
+		];
+
+		if( $has_submenu ) {
+			$attrs = wp_parse_args( [
+				'href'				=> '#',
+				'data-bs-toggle' 	=> 'dropdown',
+				'data-bs-auto-close'=> 'outside',
+				'aria-haspopup' 	=> 'true',
+				'aria-expanded' 	=> 'false',
+			], $attrs );
+		}
+
+		$extras = array_merge( $extras['icon'], $extras['mod'] );
+
+		foreach ( $extras as $class ) {
+			if ( empty( $class ) ) continue;
+
+			if ( 'disabled' === $class ) {
+				$attrs['href'] = '#';
+				$attrs['tabindex'] = '-1';
+				$attrs['aria-disabled'] = 'true';
+				unset( $attrs['target'] );
+			}
+
+			// This applies only for submenus
+			if( $is_sub_menu === false ) continue;
+			
+			if ( in_array( $class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-item-text' ] ) ) {
+				$attrs['class'] = str_replace( 'dropdown-item', $class, $attrs['class'] );
+				unset( $attrs['href'] );
+				unset( $attrs['target'] );
 			}
 		}
-	
+
 		return $attrs;
+	}
+
+	/**
+	 * Return an array of wrapper attributes.
+	 * 
+	 * @return 	array
+	 */
+	public static function get_wrapper_attributes( $attributes, $block, &$extras ) {
+		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
+		$classes		= [ 'wp-block-navigation-link' ];
+		$class_names	= ! empty( $attributes['className'] ) ? explode( ' ', $attributes['className'] ) : false;
+
+		// Fallback - to do, if styles extension is disabled.
+		$inline_style 	= '';
+
+		if( $is_sub_menu === false ) {
+			$classes[] = 'nav-item';
+		}
+
+		if ( ! empty( $class_names ) ) {
+			$classes = array_merge( $classes, $class_names );
+		}
+
+		if( count( $block->inner_blocks ) > 0 ) {
+			$classes[] = 'dropdown';
+		}
+		
+		$classes = self::pluck_special_classes( $classes, $extras );
+
+		return [
+			'class'	=> join( ' ', array_filter( $classes ) ),
+			'style'	=> $inline_style,
+		];
+	}
+
+	/**
+	 * Find any custom linkmod or icon classes and store in their holder
+	 *
+	 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider, .sr-only
+	 * Supported iconsets: Font Awesome 4/5, Glypicons
+	 *
+	 * @param array   $classes	an array of classes currently assigned to the item.
+	 * @param array   $extras	an array to hold linkmod classes.
+	 *
+	 * @return array  $classes	a maybe modified array of classnames.
+	 */
+	private static function pluck_special_classes( $classes, &$extras ) {
+		foreach ( $classes as $key => $class ) {
+			// If any special classes are found, store the class in it's
+			// holder array and and unset the item from $classes.
+			if ( preg_match( '/^disabled|^sr-only|^screen-reader-text/i', $class ) ) {
+				$extras['mod'][] = $class;
+				unset( $classes[ $key ] );
+			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) ) {
+				$extras['mod'][] = $class;
+				unset( $classes[ $key ] );
+			} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {
+				$extras['icon'][] = $class;
+				unset( $classes[ $key ] );
+			} elseif ( preg_match( '/^glyphicon-(\S*)?|^glyphicon(\s?)$/i', $class ) ) {
+				$extras['icon'][] = $class;
+				unset( $classes[ $key ] );
+			}
+		}
+
+		return $classes;
 	}
 }

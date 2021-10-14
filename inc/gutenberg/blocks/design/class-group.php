@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -68,15 +68,15 @@ class Group extends Dynamic {
 
 		// Layout
 		if( $layout = get_prop( $attributes, 'layout', false ) ) {
-			if ( isset( $layout['inherit'] ) && $layout['inherit'] ) {
+			if ( get_prop( $layout, 'inherit' ) ) {
 				$default_layout = wecodeart_json( ['settings', 'layout' ], false );
 				if ( $default_layout ) {
 					$layout = $default_layout;
 				}
 			}
 
-			$size_default 	= get_prop( $layout, 'contentSize', null );
-			$size_wide    	= get_prop( $layout, 'wideSize', null );
+			$size_default 	= get_prop( $layout, 'contentSize' );
+			$size_wide    	= get_prop( $layout, 'wideSize' );
 
 			$size_default 	= $size_default ?: $size_wide;
 			$size_wide 		= $size_wide ?: $size_default;
