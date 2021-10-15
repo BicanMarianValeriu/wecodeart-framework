@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -105,50 +105,44 @@ class Navigation extends Dynamic {
 
 		$block_id	= uniqid();
 
-		$html = Markup::wrap( 'navbar-nav', [ [
+		return Markup::wrap( 'navbar', [ [
 			'tag' 	=> 'nav',
 			'attrs'	=> $this->get_wrapper_attributes( $attributes )
 		] ], function( $attributes, $inner_blocks ) use ( $block_id ) {
-			$classes 	= [ 'wp-block-navigation__container', 'nav', 'navbar-nav' ];
-			$wrappers 	= [ [
+
+			// Navbar List HTML
+			$html = Markup::wrap( 'navbar-nav', [ [
 				'tag' 	=> 'ul',
 				'attrs' => [
-					'class' => join( ' ', $classes ),
+					'class' => 'wp-block-navigation__container nav navbar-nav',
 				]
-			] ];
+			] ], function( $inner_blocks ) {
+				foreach( $inner_blocks as $inner_block ) echo $this->render_menu_block( $inner_block );
+			}, [ $inner_blocks ], false );
 
+			// Is responsive?
 			if( get_prop( $attributes, 'isResponsive', false ) ===  true ) {
-				$wrappers = [ [
-					'tag' 	=> 'div',
-					'attrs' => [
-						'class' => join( ' ', [ 'offcanvas', 'offcanvas-start' ] ),
-						'id'	=> 'navbar-' . $block_id,
-					]
-				] ];
 
+				// Toggler
 				wecodeart_template( 'general/toggler', [
 					'id'		=> 'navbar-' . $block_id,
 					'toggle' 	=> 'offcanvas',
 				] );
 
-				Markup::wrap( 'navbar-offcanvas', $wrappers, function( $inner_blocks, $classes ) {
-					$html = '';
-					foreach ( $inner_blocks as $inner_block ) $html .= $this->render_menu_block( $inner_block );
-					wecodeart_template( 'general/offcanvas', [
-						'content' => sprintf( '<ul class="%s">%s</ul>', join( ' ', $classes ), $html ),
-					] );
-				}, [ $inner_blocks, $classes ] );
+				// OffCanvas
+				wecodeart_template( 'general/offcanvas', [
+					'id'		=> 'navbar-' . $block_id,
+					'classes'	=> [ 'offcanvas-start' ],
+					'content' 	=> $html,
+				] );
 
 				return;
 			}
 
-			Markup::wrap( 'navbar-inner', $wrappers, function( $inner_blocks ) {
-				foreach ( $inner_blocks as $inner_block ) echo $this->render_menu_block( $inner_block );
-			}, [ $inner_blocks ] );
+			// Is ok, we use the WP block rendering
+			echo $html;
 
 		}, [ $attributes, $inner_blocks ], false );
-
-		return $html;
 	}
 
 	/**
@@ -322,46 +316,54 @@ class Navigation extends Dynamic {
 	 * @param  array $attributes 	Navigation block context.
 	 * @return array  	 			CSS classes and inline styles.
 	 */
-	public function css_colors( $attributes ) {
+	public function get_colors( $attributes ) {
 		$colors = [
-			'css_classes'   => [],
-			'inline_styles' => '',
+			'classes'   => [],
+			'styles' 	=> '',
 		];
 	
 		// Text color.
 		$has_named_text_color  = get_prop( $attributes, 'textColor', false );
 		$has_custom_text_color = get_prop( $attributes, 'customTextColor', false );
-	
-		// If has text color.
-		if ( $has_custom_text_color || $has_named_text_color ) {
-			// Add has-text-color class.
-			$colors['css_classes'][] = 'has-text-color';
-		}
-	
-		if ( $has_named_text_color ) {
-			// Add the color class.
-			$colors['css_classes'][] = sprintf( 'has-%s-color', $has_named_text_color );
-		} elseif ( $has_custom_text_color ) {
-			// Add the custom color inline style.
-			$colors['inline_styles'] .= sprintf( 'color: %s;', $has_custom_text_color );
-		}
-	
+
+		// Overlays - to do
+		// $has_overlay_text_color  		= get_prop( $attributes, 'overlayTextColor', false );
+		// $has_custom_overlay_text_color 	= get_prop( $attributes, 'customOverlayTextColor', false );
+		// $has_overlay_bg_color  			= get_prop( $attributes, 'overlayBackgroundColor', false );
+		// $has_custom_overlay_bg_color 	= get_prop( $attributes, 'customOverlayBackgroundColor', false );
+		
 		// Background color.
 		$has_named_background_color  = get_prop( $attributes, 'backgroundColor', false );
 		$has_custom_background_color = get_prop( $attributes, 'customBackgroundColor', false );
 	
+		// If has text color.
+		if ( $has_custom_text_color || $has_named_text_color ) {
+			// Add has-text-color class.
+			$colors['classes'][] = 'has-text-color';
+		}
+	
+		if ( $has_named_text_color ) {
+			// Add the color class.
+			$colors['classes'][] = sprintf( 'has-%s-color', $has_named_text_color );
+		} elseif ( $has_custom_text_color ) {
+			// Add the custom color inline style.
+			$colors['styles'] .= sprintf( 'color: %s;', $has_custom_text_color );
+			$colors['styles'] .= sprintf( '--wp--custom--color: %s;', $has_custom_text_color );
+		}
+	
 		// If has background color.
 		if ( $has_custom_background_color || $has_named_background_color ) {
 			// Add has-background class.
-			$colors['css_classes'][] = 'has-background';
+			$colors['classes'][] = 'has-background';
 		}
 	
 		if ( $has_named_background_color ) {
 			// Add the background-color class.
-			$colors['css_classes'][] = sprintf( 'has-%s-background-color', $has_named_background_color );
+			$colors['classes'][] = sprintf( 'has-%s-background-color', $has_named_background_color );
 		} elseif ( $has_custom_background_color ) {
 			// Add the custom background-color inline style.
-			$colors['inline_styles'] .= sprintf( 'background-color: %s;', $has_custom_background_color );
+			$colors['styles'] .= sprintf( 'background-color: %s;', $has_custom_background_color );
+			$colors['styles'] .= sprintf( '--wp--custom--background-color: %s;', $has_custom_background_color );
 		}
 	
 		return $colors;
@@ -374,22 +376,22 @@ class Navigation extends Dynamic {
 	 * @param  array $attributes 	Navigation block context.
 	 * @return array 				Font size CSS classes and inline styles.
 	 */
-	public function css_typography( $attributes ) {
+	public function get_typography( $attributes ) {
 		// CSS classes.
-		$font_sizes = [
-			'css_classes'   => [],
-			'inline_styles' => '',
+		$typography = [
+			'classes'   => [],
+			'styles' 	=> '',
 		];
 
 		if ( $value = get_prop( $attributes, 'fontSize' ) ) {
 			// Add the font size class.
-			$font_sizes['css_classes'][] = sprintf( 'has-%s-font-size', $value );
+			$typography['classes'][] = sprintf( 'has-%s-font-size', $value );
 		} elseif ( $value = get_prop( $attributes, 'customFontSize' ) ) {
 			// Add the custom font size inline style.
-			$font_sizes['inline_styles'] = sprintf( 'font-size: %spx;', $value );
+			$typography['styles'] = sprintf( 'font-size: %spx;--wp--custom--font-size: %spx;', $value, $value );
 		}
 
-		return $font_sizes;
+		return $typography;
 	}
 
 	/**
@@ -398,8 +400,8 @@ class Navigation extends Dynamic {
 	 * @return 	array
 	 */
 	public function get_wrapper_attributes( $attributes ) {
-		$colors     = $this->css_colors( $attributes );
-		$typography = $this->css_typography( $attributes );
+		$colors     = $this->get_colors( $attributes );
+		$typography = $this->get_typography( $attributes );
 		$background = self::get_background( $attributes );
 
 		$classes 	= [ 'wp-block-navigation', 'navbar' ];
@@ -409,11 +411,18 @@ class Navigation extends Dynamic {
 			$classes[] = 'navbar-expand';
 		}
 
-		if( get_prop( $attributes, 'isResponsive', false ) === true ) {
+		$is_responsive = get_prop( $attributes, 'isResponsive', false ) === true;
+		$is_responsive = get_prop( $attributes, 'overlayMenu' ) !== 'never' || $is_responsive;
+
+		if( $is_responsive ) {
 			$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
 			$classes[] 	= 'navbar-expand-lg';
 		}
 		
+		if( get_prop( $attributes, 'openSubmenusOnClick', false ) === false ) {
+			$classes[] 	= 'with-hover';
+		}
+
 		if( get_prop( $attributes, 'showSubmenuIcon', false ) === false ) {
 			$classes[] 	= 'hide-dropdown-icon';
 		}
@@ -422,12 +431,12 @@ class Navigation extends Dynamic {
 			$classes[] = 'justify-content-' . ( $align === 'right' ? 'end' : $align );
 		}
 
-		$classes    	= array_merge( $classes, $colors['css_classes'], $typography['css_classes'] );
+		$classes    	= array_merge( $classes, $colors['classes'], $typography['classes'] );
 		$block_styles 	= get_prop( $attributes, 'styles', '' );
 
 		return [
 			'class'	=> join( ' ', array_filter( $classes ) ),
-			'style'	=> $block_styles . $colors['inline_styles'] . $typography['inline_styles'],
+			'style'	=> $block_styles . $colors['styles'] . $typography['styles'],
 		];
 	}
 
@@ -451,6 +460,13 @@ class Navigation extends Dynamic {
 		.wp-block-navigation.hide-dropdown-icon .dropdown-toggle::after {
 			content: none;
 		}
+		.wp-block-navigation.with-hover .dropdown:hover .dropdown-menu,
+		.wp-block-navigation.with-hover .dropdown:focus .dropdown-menu,
+		.wp-block-navigation.with-hover .dropdown:focus-within .dropdown-menu {
+			display: block;
+			visibility: visible;
+			opacity: 1;
+		}
 		.wp-block-navigation[class*='navbar-expand-'] .offcanvas:not([aria-modal='true']) {
 			width: initial;
 		}
@@ -469,13 +485,6 @@ class Navigation extends Dynamic {
 			display: flex;
 			align-items: center;
 		}
-		.wp-block-navigation-link__content:not([data-bs-toggle='dropdown']):hover ~ .dropdown-menu,
-		.wp-block-navigation-link__content:not([data-bs-toggle='dropdown']):focus ~ .dropdown-menu,
-		.wp-block-navigation-link__content:not([data-bs-toggle='dropdown']):focus-within ~ .dropdown-menu {
-			display: block;
-			visibility: visible;
-			opacity: 1;
-		}
 		.wp-block-navigation-link__icon {
 			margin-right: .5rem;
 		}
@@ -493,7 +502,7 @@ class Navigation extends Dynamic {
 				transform: rotate(270deg);
 			}
 		}
-		@media (max-width: 991px) {
+		@media (max-width: 991.7px) {
 			.wp-block-navigation.navbar-dark .offcanvas {
 				background-color: var(--wca-dark);
 			}

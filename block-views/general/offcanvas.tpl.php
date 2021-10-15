@@ -8,20 +8,33 @@
  * @package		WeCodeArt Framework
  * @subpackage  OffCanvas
  * @since		5.0.0
- * @version    	5.0.0
+ * @version    	5.1.3
  */
 
 defined( 'ABSPATH' ) || exit();
 
+$classnames = [ 'offcanvas' ];
+
+if( isset( $classes ) && is_array( $classes ) ) {
+	$classnames = array_merge( $classnames, $classes );
+}
+
+if( ! isset( $id ) ) {
+	$id = uniqid();
+}
+
 ?>
-<div class="offcanvas-header">
-	<?php if( isset( $title ) ) : ?>
-    <h5 class="offcanvas-title"><?php echo esc_html( $title ); ?></h5>
-	<?php endif; ?>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div class="<?php echo esc_attr( join( ' ', $classnames ) ); ?>" id="<?php echo esc_attr( $id ); ?>">
+	<div class="offcanvas-header">
+		<?php if( isset( $title ) ) : ?>
+		<h5 class="offcanvas-title"><?php echo esc_html( $title ); ?></h5>
+		<?php endif; ?>
+		<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	</div>
+	<div class="offcanvas-body"><?php
+
+		// Is Ok, we render Navigation blocks here
+		echo $content;
+
+	?></div>
 </div>
-<div class="offcanvas-body"><?php
-
-	echo $content;
-
-?></div>
