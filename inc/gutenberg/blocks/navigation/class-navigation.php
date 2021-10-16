@@ -412,7 +412,7 @@ class Navigation extends Dynamic {
 		}
 
 		$is_responsive = get_prop( $attributes, 'isResponsive', false ) === true;
-		$is_responsive = get_prop( $attributes, 'overlayMenu' ) !== 'never' || $is_responsive;
+		$is_responsive = get_prop( $attributes, 'overlayMenu', 'never' ) !== 'never' || $is_responsive;
 
 		if( $is_responsive ) {
 			$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
