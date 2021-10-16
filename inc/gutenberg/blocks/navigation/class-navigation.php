@@ -460,9 +460,9 @@ class Navigation extends Dynamic {
 		.wp-block-navigation.hide-dropdown-icon .dropdown-toggle::after {
 			content: none;
 		}
-		.wp-block-navigation.with-hover .dropdown:hover .dropdown-menu,
-		.wp-block-navigation.with-hover .dropdown:focus .dropdown-menu,
-		.wp-block-navigation.with-hover .dropdown:focus-within .dropdown-menu {
+		.wp-block-navigation.with-hover .dropdown:hover > .dropdown-toggle ~ .dropdown-menu,
+		.wp-block-navigation.with-hover .dropdown:focus > .dropdown-toggle ~ .dropdown-menu,
+		.wp-block-navigation.with-hover .dropdown:focus-within > .dropdown-toggle ~ .dropdown-menu {
 			display: block;
 			visibility: visible;
 			opacity: 1;
@@ -493,13 +493,19 @@ class Navigation extends Dynamic {
 			word-break: normal;
 			overflow-wrap: break-word;
 		}
+		.wp-block-navigation .dropdown-menu[data-bs-popper] {
+			margin-top: 0;
+		}
 		.wp-block-navigation .dropdown-menu .dropdown-menu {
 			top: 0;
 			left: 100%;
 		}
 		@media (min-width: $desktop) {
 			.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
-				transform: rotate(270deg);
+				border-top: 0.3em solid transparent;
+				border-right: 0;
+				border-bottom: 0.3em solid transparent;
+				border-left: 0.3em solid;
 			}
 		}
 		@media (max-width: 991.7px) {
