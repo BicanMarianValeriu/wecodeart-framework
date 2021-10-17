@@ -9,7 +9,7 @@
  * @subpackage 	Core
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.0
- * @version		5.0.0
+ * @version		5.1.3
  */
 
 namespace WeCodeArt;
@@ -36,10 +36,8 @@ class Core {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_filter( 'wp_nav_menu_args',	 		[ $this, 'menu_args' 		] );
 		add_filter( 'body_class',				[ $this, 'body_classes' 	] );
 		add_filter( 'get_custom_logo',			[ $this, 'custom_logo'		] );
-		add_filter( 'get_search_form',			[ $this, 'search_form' 		] );
 		add_filter( 'get_the_archive_title',	[ $this, 'archive_title' 	] );
 		add_filter( 'excerpt_length',			[ $this, 'excerpt_length' 	] );
 		add_filter( 'post_gallery',				[ $this, 'post_gallery' 	], 10, 2 );
@@ -90,82 +88,30 @@ class Core {
 		}
 		
 		// Theme
+		$classes[] = is_child_theme() ? 'theme-is-skin' : 'theme-is-base'; 
 		$classes[] = 'theme-' . wecodeart( 'name' );
-		$classes[] = 'theme-is-' . strtolower( 'base' ); // @todo: move to option
 
 		return $classes;
-	}
-	
-	/**
-	 * Adds Walker to WP Menus by default.
-	 *
-	 * @since 	4.0.5
-	 * @version 5.0.0
-	 *
-	 * @param 	array 	$args.
-	 *
-	 * @return 	array
-	 */
-	public function menu_args( $args ) {
-		return wp_parse_args( [
-			'container' 	 => 'nav',
-			'walker' 		 => new Menu,
-			'fallback_cb'	 => 'WeCodeArt\Markup\Walkers\Menu::fallback'
-		], $args );
-	}
-	
-	/**
-	 * Filter Search form HTML Markup.
-	 * 
-	 * @since 	unknown
-	 * @version 3.9.5
-	 * 
-	 * @return 	string
-	 */
-	public function search_form() {
-		/**
-		 * Allow the default form args to be filtered.
-		 *
-		 * @since 	3.9.3
-		 * @version	3.9.5
-		 *
-		 * @param string The form args.
-		 */
-		$query_or_placeholder = esc_attr(
-			apply_filters( 'the_search_query', get_search_query() )
-		) ?: sprintf( __( 'Search this website %s', 'wecodeart' ), '&#x02026;' );
-
-		$form = new Search( apply_filters( 'wecodeart/filter/search_form/i18n', [
-			'input'		=> $query_or_placeholder,
-			'button'	=> SVG::compile( 'search' ),
-		] ) );
-
-		/**
-		 * Allow the form output to be filtered.
-		 *
-		 * @since 3.9.3
-		 *
-		 * @param string The form markup.
-		 */
-		return apply_filters( 'wecodeart/filter/search_form/html', $form->get_form() );
 	}
 
 	/**
 	 * Filter Custom Logo
 	 * 
 	 * @since  	5.0.0
+	 * @version	5.1.3
 	 * 
 	 * @return 	string
 	 */
 	public function custom_logo( $html ) {
 		$search 	= '/' . preg_quote( 'class="custom-logo-link', '/' ) . '/';
-		$replace 	= 'class="navbar-brand d-block custom-logo-link';
+		$replace 	= 'class="navbar-brand d-block wp-block-site-logo__link';
 		return preg_replace( $search, $replace, $html, 1 );
 	}
 
 	/**
 	 * Archives Title
 	 *
+	 * @since 	unknown
 	 * @version	5.0.0
 	 *
 	 * @return 	string
@@ -233,6 +179,7 @@ class Core {
 	/**
 	 * Gallery Shortcode
 	 *
+	 * @since	5.0.0
 	 * @version	5.0.0
 	 *
 	 * @return 	string

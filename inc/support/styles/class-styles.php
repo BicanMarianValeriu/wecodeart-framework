@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Request;
+use WeCodeArt\Conditional\Traits\No_Conditionals;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -27,6 +28,7 @@ use function WeCodeArt\Functions\get_prop;
 final class Styles implements Integration {
 
 	use Singleton;
+	use No_Conditionals;
 
 	/**
 	 * Sanitize
@@ -35,19 +37,6 @@ final class Styles implements Integration {
 	 * @var 	object
 	 */
 	protected 	$sanitize	= null;
-
-	/**
-	 * Get Conditionals
-	 *
-	 * @return void
-	 */
-	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->set( [
-			'with_styles' => Styles\Condition::class,
-		] );
-		
-		return [ 'with_styles' ];
-	}
 
 	/**
 	 * Send to Constructor

@@ -245,3 +245,25 @@ function set_settings_array( $target, $array, $value ) {
 	$current->{ $key } = $value;
 	return $target;
 }
+
+/**
+ * Flattens a multidimensional array to a simple array.
+ *
+ * @param   array $array a multidimensional array.
+ *
+ * @return  array a simple array
+ */
+function flatten( $array ) {
+    $result = [];
+    
+    foreach ( $array as $element ) {
+        if( empty( $element ) ) continue;
+        if ( is_array( $element ) ) {
+            array_push( $result, ...flatten( $element ) );
+        } else {
+            $result[] = $element;
+        }
+    }
+
+    return $result;
+}

@@ -138,12 +138,10 @@ class Blocks implements \ArrayAccess {
         foreach( array_unique( self::$blocks ) as $block ) {
             if( ! $this->has( $block ) ) continue;
             $inline_css .= $this->get( $block )::get_instance()->styles();
-        }
-
-        if( wecodeart_if( 'with_styles' ) ) {
-            $inline_css = wecodeart( 'integrations' )->get( 'styles' )::compress( $inline_css );
-        }
+        } 
         
+        $inline_css = wecodeart( 'integrations' )->get( 'styles' )::compress( $inline_css );
+
         if( empty( $inline_css ) ) return;
         
         wp_register_style( self::CSS_ID, false, [], true, true );

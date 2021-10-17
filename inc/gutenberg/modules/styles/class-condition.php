@@ -9,7 +9,7 @@
  * @subpackage 	Gutenberg\Modules\Styles
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.1.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -28,6 +28,6 @@ class Condition implements ConditionalInterface {
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return wecodeart_if( 'with_styles' ) && get_prop( wecodeart_config( 'gutenberg', [] ), 'styles' );
+		return get_prop( wecodeart_config( 'gutenberg', [] ), 'styles' );
 	}
 }

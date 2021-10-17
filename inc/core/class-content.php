@@ -34,10 +34,10 @@ class Content {
 	 */
 	public function init() {
 		// Fallback for plugins
+		add_action( 'widgets_init',					[ $this, 'widgets_init' 		] );
 		add_action( 'wecodeart/hook/loop/before',	[ $this, 'content_markup_open' 	] );
 		add_action( 'wecodeart/content/markup',		[ $this, 'render_modules' 		] );
 		add_action( 'wecodeart/hook/loop/after',	[ $this, 'content_markup_close' ] );
-		add_action( 'widgets_init',					[ $this, 'widgets_init' ] );
 	}
 
 	/**

@@ -66,6 +66,8 @@ return [
         'support'   => [
             'block-templates'   => true,
             'block-nav-menus'   => true,
+            'block-nav-menus'   => true,
+            'widgets-block-editor'  => true,
         ],
         'styles'    => true,
         'classes'   => true,
@@ -103,8 +105,6 @@ return [
     |
     */
     'extensions' => [
-        'fonts'         => true,
-        'styles'        => true,
         'wpseo' => [
             'author-social' => [
                 'url'		=> 'Website',

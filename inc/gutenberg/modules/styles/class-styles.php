@@ -185,11 +185,15 @@ class Styles implements Integration {
 	 * @return 	string
 	 */
 	public function register_styles() {
-		if( ! empty( $this->styles ) ) {
-			wp_register_style( self::CSS_ID, false, [], true, true );
-			wp_add_inline_style( self::CSS_ID, $this->CSS::compress( $this->styles ) );
-			wp_enqueue_style( self::CSS_ID );
-		}
+		if( empty( $this->styles ) ) return;
+
+		$inline_css = $this->CSS::compress( $this->styles );
+
+		if( empty( $inline_css ) ) return;
+
+		wp_register_style( self::CSS_ID, false, [], true, true );
+		wp_add_inline_style( self::CSS_ID, $inline_css );
+		wp_enqueue_style( self::CSS_ID );
 	}
 	
 	/**
@@ -201,9 +205,8 @@ class Styles implements Integration {
 		if( empty( $this->filters ) ) return;
 		?>
 		<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 0 0" focusable="false" role="none" class="visually-hidden">
-			<defs><?php
-			
-			foreach( $this->filters as $block_id => $filter ) : ?>
+			<defs>
+			<?php foreach( $this->filters as $block_id => $filter ) : ?>
 				<filter id="<?php echo esc_attr( $block_id ); ?>">
 					<feColorMatrix
 						type="matrix"
@@ -215,9 +218,8 @@ class Styles implements Integration {
 						<feFuncB type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['b'] ) ); ?>" />
 					</feComponentTransfer>
 				</filter>
-			<?php endforeach;
-			
-			?></defs>
+			<?php endforeach; ?>
+			</defs>
 		</svg>
 		<?php
 	}

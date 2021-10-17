@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-04 00:36+0000\n"
+"POT-Creation-Date: 2021-10-17 03:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "%1$s on %2$s"
 msgstr ""
 
-#: inc/core/class-core.php:219
+#: inc/core/class-core.php:165
 #, php-format
 msgid "%s Archives"
 msgstr ""
@@ -81,10 +81,6 @@ msgstr ""
 msgid "About %s"
 msgstr ""
 
-#: inc/markup/walkers/class-menu.php:326
-msgid "Add a menu"
-msgstr ""
-
 #: inc/core/entry/class-comments.php:60
 msgid "add one"
 msgstr ""
@@ -99,7 +95,7 @@ msgstr ""
 msgid "ANR Captcha support is enabled!"
 msgstr ""
 
-#: inc/core/class-core.php:227
+#: inc/core/class-core.php:173
 msgid "Archives"
 msgstr ""
 
@@ -107,7 +103,7 @@ msgstr ""
 msgid "at"
 msgstr ""
 
-#: inc/core/class-core.php:200
+#: inc/core/class-core.php:146
 #, php-format
 msgid "Author Archives: %s"
 msgstr ""
@@ -116,11 +112,11 @@ msgstr ""
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr ""
 
-#: inc/core/class-core.php:225
+#: inc/core/class-core.php:171
 msgid "Blog"
 msgstr ""
 
-#: block-views/footer/credits.tpl.php:28
+#: block-views/general/credits.tpl.php:28
 #, php-format
 msgid "Built on %1s."
 msgstr ""
@@ -138,7 +134,7 @@ msgstr ""
 msgid "Captcha *"
 msgstr ""
 
-#: inc/core/class-core.php:190
+#: inc/core/class-core.php:136
 #, php-format
 msgid "Category Archives: %s"
 msgstr ""
@@ -169,7 +165,7 @@ msgid ""
 "theme!"
 msgstr ""
 
-#: block-views/footer/credits.tpl.php:22
+#: block-views/general/credits.tpl.php:22
 #, php-format
 msgid "Copyright %s - All rights reserved."
 msgstr ""
@@ -178,7 +174,7 @@ msgstr ""
 msgid "Customizer"
 msgstr ""
 
-#: inc/core/class-core.php:215
+#: inc/core/class-core.php:161
 #, php-format
 msgid "Daily Archives: %s"
 msgstr ""
@@ -204,11 +200,6 @@ msgstr ""
 
 #: inc/support/fse/class-fse.php:60
 msgid "Enable Site Editor"
-msgstr ""
-
-#: inc/core/class-search.php:61
-#, php-format
-msgid "Enter keyword %s"
 msgstr ""
 
 #: block-views/entry/protected.tpl.php:55
@@ -251,12 +242,12 @@ msgstr ""
 msgid "Missing notification id"
 msgstr ""
 
-#: inc/core/class-core.php:211
+#: inc/core/class-core.php:157
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr ""
 
-#: inc/core/class-core.php:210
+#: inc/core/class-core.php:156
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr ""
@@ -293,7 +284,7 @@ msgstr ""
 msgid "Post Author"
 msgstr ""
 
-#: inc/core/class-core.php:222
+#: inc/core/class-core.php:168
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr ""
@@ -343,24 +334,14 @@ msgstr ""
 msgid "RSS Error"
 msgstr ""
 
-#: inc/core/class-search.php:59
 #: inc/gutenberg/blocks/widgets/class-search.php:66
 #: inc/gutenberg/blocks/widgets/class-search.php:67
 msgid "Search"
 msgstr ""
 
-#: inc/core/class-core.php:185
+#: inc/core/class-core.php:131
 #, php-format
 msgid "Search Results for \"%s\"."
-msgstr ""
-
-#: inc/core/class-search.php:60
-msgid "Search this website"
-msgstr ""
-
-#: inc/core/class-core.php:136
-#, php-format
-msgid "Search this website %s"
 msgstr ""
 
 #: inc/support/plugins/cf7/modules/class-submit.php:63
@@ -383,7 +364,7 @@ msgstr ""
 msgid "Speak Your Mind"
 msgstr ""
 
-#: inc/core/class-core.php:195
+#: inc/core/class-core.php:141
 #, php-format
 msgid "Tag Archives: %s"
 msgstr ""
@@ -498,12 +479,12 @@ msgid ""
 "Wrappers are not properly defined for \"%s\". Please check your theme code."
 msgstr ""
 
-#: inc/core/class-core.php:206
+#: inc/core/class-core.php:152
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr ""
 
-#: inc/core/class-core.php:205
+#: inc/core/class-core.php:151
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr ""

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -22,6 +22,7 @@ use WeCodeArt\Support\Styles;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use WeCodeArt\Gutenberg\Blocks\Navigation;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\flatten;
 
 /**
  * Gutenberg Navigation Link block.
@@ -263,7 +264,7 @@ class Link extends Dynamic {
 			], $attrs );
 		}
 
-		$extras = array_merge( $extras['icon'], $extras['mod'] );
+		$extras = flatten( $extras );
 
 		foreach ( $extras as $class ) {
 			if ( empty( $class ) ) continue;
@@ -313,7 +314,7 @@ class Link extends Dynamic {
 			$classes[] = 'dropdown';
 		}
 		
-		$classes = self::pluck_special_classes( $classes, $extras );
+		$classes = self::pluck_special_classes( $classes, $is_sub_menu, $extras );
 
 		return [
 			'class'	=> join( ' ', array_filter( $classes ) ),
@@ -324,22 +325,23 @@ class Link extends Dynamic {
 	/**
 	 * Find any custom linkmod or icon classes and store in their holder
 	 *
-	 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider, .sr-only
-	 * Supported iconsets: Font Awesome 4/5, Glypicons
+	 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider
+	 * Supported iconsets: Font Awesome 4/5/6, Glypicons
 	 *
-	 * @param array   $classes	an array of classes currently assigned to the item.
-	 * @param array   $extras	an array to hold linkmod classes.
+	 * @param 	array   $classes		an array of classes currently assigned to the item.
+	 * @param 	bool   	$is_sub_menu	is dropdown link.
+	 * @param 	array   $extras			an array to hold linkmod classes.
 	 *
-	 * @return array  $classes	a maybe modified array of classnames.
+	 * @return 	array  $classes	a maybe modified array of classnames.
 	 */
-	private static function pluck_special_classes( $classes, &$extras ) {
+	private static function pluck_special_classes( $classes, $is_sub_menu, &$extras ) {
 		foreach ( $classes as $key => $class ) {
 			// If any special classes are found, store the class in it's
 			// holder array and and unset the item from $classes.
 			if ( preg_match( '/^disabled|^sr-only|^screen-reader-text/i', $class ) ) {
 				$extras['mod'][] = $class;
 				unset( $classes[ $key ] );
-			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) ) {
+			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) && $is_sub_menu ) {
 				$extras['mod'][] = $class;
 				unset( $classes[ $key ] );
 			} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {

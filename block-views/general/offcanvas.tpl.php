@@ -19,10 +19,6 @@ if( isset( $classes ) && is_array( $classes ) ) {
 	$classnames = array_merge( $classnames, $classes );
 }
 
-if( ! isset( $id ) ) {
-	$id = uniqid();
-}
-
 ?>
 <div class="<?php echo esc_attr( join( ' ', $classnames ) ); ?>" id="<?php echo esc_attr( $id ); ?>">
 	<div class="offcanvas-header">
@@ -33,7 +29,7 @@ if( ! isset( $id ) ) {
 	</div>
 	<div class="offcanvas-body"><?php
 
-		// Is Ok, we render Navigation blocks here
+		// Is Ok, we render Navigation Gutenberg blocks here
 		echo $content;
 
 	?></div>

@@ -88,7 +88,7 @@ class Blocks extends Processor {
 		$output 			= [];
 		$output['element'] 	= $this->element;
 
-		// Layout
+		// Layout - we do not support wide align yet but it will be enabled in a future version!
 		// if( $layout = get_prop( $this->attrs, 'layout', false ) ) {
 		// 	if ( get_prop( $layout, 'inherit', null ) ) {
 		// 		$default_layout = wecodeart_json( [ 'settings', 'layout' ], false );
@@ -325,7 +325,7 @@ class Blocks extends Processor {
 			];
 
 			foreach ( $duotone as $color ) {
-				$color = gutenberg_tinycolor_string_to_rgb( $color );
+				$color = wp_tinycolor_string_to_rgb( $color );
 				$return['r'][] = $color['r'] / 255;
 				$return['g'][] = $color['g'] / 255;
 				$return['b'][] = $color['b'] / 255;

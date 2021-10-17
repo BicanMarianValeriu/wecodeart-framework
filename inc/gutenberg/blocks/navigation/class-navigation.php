@@ -120,7 +120,7 @@ class Navigation extends Dynamic {
 				foreach( $inner_blocks as $inner_block ) echo $this->render_menu_block( $inner_block );
 			}, [ $inner_blocks ], false );
 
-			// Is responsive?
+			// Is responsive? Render in offcanvas container
 			if( get_prop( $attributes, 'isResponsive', false ) ===  true ) {
 
 				// Toggler

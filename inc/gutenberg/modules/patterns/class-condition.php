@@ -9,7 +9,7 @@
  * @subpackage 	Gutenberg\Modules\Patterns
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.1.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Patterns;
@@ -28,6 +28,6 @@ class Condition implements ConditionalInterface {
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return \is_wp_version_compatible( '5.5' ) && get_prop( wecodeart_config( 'gutenberg', [] ), 'patterns' );
+		return get_prop( wecodeart_config( 'gutenberg', [] ), 'patterns' );
 	}
 }
