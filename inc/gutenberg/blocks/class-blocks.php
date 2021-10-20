@@ -77,8 +77,8 @@ class Blocks implements \ArrayAccess {
         // Widget Blocks
 		$this->register( 'core/search',	            Blocks\Widgets\Search::class );
 		$this->register( 'core/calendar',           Blocks\Widgets\Calendar::class );
-	    $this->register( 'core/latest-posts',       Blocks\Widgets\Posts::class );
 	    $this->register( 'core/rss',                Blocks\Widgets\RSS::class );
+	    $this->register( 'core/latest-posts',       Blocks\Widgets\Posts::class );
 		$this->register( 'core/latest-comments',    Blocks\Widgets\Comments::class );
 		$this->register( 'core/social-links',       Blocks\Widgets\Social::class );
         // Navigation Blocks

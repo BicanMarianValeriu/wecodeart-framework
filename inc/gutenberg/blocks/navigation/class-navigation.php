@@ -428,7 +428,16 @@ class Navigation extends Dynamic {
 		}
 
 		if( $align = get_prop( $attributes, 'itemsJustification' ) ) {
-			$classes[] = 'justify-content-' . ( $align === 'right' ? 'end' : $align );
+			$justify_options = [
+				'left'          => 'start',
+				'right'         => 'end',
+				'center'        => 'center',
+				'space-between' => 'space-between',
+			];
+
+			if ( array_key_exists( $align, $justify_options ) ) {
+				$classes[] = 'justify-content-' . $justify_options[$align];
+			}
 		}
 
 		$classes    	= array_merge( $classes, $colors['classes'], $typography['classes'] );

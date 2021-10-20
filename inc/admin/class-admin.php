@@ -18,7 +18,8 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
-use WeCodeArt\Admin\Customizer;
+// use WeCodeArt\Admin\Customizer;
+use WeCodeArt\Admin\Activation;
 use WeCodeArt\Admin\Notifications;
 
 /**
@@ -41,6 +42,7 @@ class Admin {
 		\add_action( 'admin_menu',				[ $this, 'register_menu_page' ] );
 		\add_action( 'after_switch_theme', 		[ $this, 'insert_default_settings' ] );
 
+		Activation::get_instance();
 		Notifications::get_instance();
 	}
 

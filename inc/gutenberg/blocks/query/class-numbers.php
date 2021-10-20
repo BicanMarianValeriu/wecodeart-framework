@@ -125,8 +125,23 @@ class Numbers extends Dynamic {
                     'class' => 'wp-block-query-pagination-numbers mb-5',
                 ]
             ],
-        ], 'wecodeart_template', [ [ 'query/pagination', 'numbers' ], [
-            'links' => $content
-        ] ], false ); 
+        ], function( $content ) {
+            ?>
+            <ul class="pagination pagination-sm justify-content-center mb-0" aria-label="<?php esc_attr_e( 'Pagination', 'wecodeart' ); ?>"><?php
+
+                foreach( $content as $key => $link ) :
+                    $class = [ 'page-item', 'pagination__item' ];
+                    if( strpos( $link, 'current' ) !== false ) $class[] = 'pagination__item--current active';
+                ?>
+                <li class="<?php echo esc_attr( trim( implode( ' ', $class ) ) ); ?>">
+                    <?php echo str_replace( 'page-numbers', 'page-link', $link ); ?>
+                </li>
+                <?php
+                endforeach;
+
+            ?>
+            </ul>
+            <?php
+        }, [ $content ], false );
 	}
 }

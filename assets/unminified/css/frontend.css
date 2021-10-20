@@ -5,7 +5,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 5.0.9
+Version: 5.1.3
 Requires PHP: 7.0
 Requires at least: 5.8
 Tested up to: 5.8
@@ -5136,55 +5136,7 @@ progress {
   display: none !important;
 }
 
-/* Global */
-.wp-site-blocks,
-.wp-site-credits,
-.site-header,
-.site-footer {
-  background-color: inherit;
-}
-
-.site-footer,
-.wp-site-credits {
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.site-header {
-  position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  z-index: 15;
-}
-.has-scrolled .site-header {
-  border-bottom: 0;
-  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.15);
-}
-
-:root .btn-outline-primary:hover,
-:root .btn-outline-primary:active,
-:root .btn-outline-primary.active,
-:root .btn-outline-primary.dropdown-toggle.show,
-:root .btn-primary,
-:root .btn-primary:hover,
-:root .btn-primary:active,
-:root .btn-primary.active,
-:root .btn-primary.dropdown-toggle.show {
-  background-color: var(--wp--preset--color--primary, var(--wca-primary));
-  border-color: var(--wp--preset--color--primary, var(--wca-primary));
-}
-:root .btn-outline-primary {
-  color: var(--wp--preset--color--primary, var(--wca-primary));
-  border-color: var(--wp--preset--color--primary, var(--wca-primary));
-}
-:root .border-primary {
-  border-color: var(--wp--preset--color--primary, var(--wca-primary)) !important;
-}
-:root .text-primary {
-  color: var(--wp--preset--color--primary, var(--wca-primary)) !important;
-}
-:root .bg-primary {
-  background-color: var(--wp--preset--color--primary, var(--wca-primary)) !important;
-}
-
+/* Root */
 :root {
   /*lint-enable function-comma-space-after */
 }
@@ -5354,6 +5306,55 @@ progress {
   text-decoration: none;
   z-index: 100000;
   /* Above WP toolbar. */
+}
+
+/* Global */
+.wp-site-blocks,
+.wp-site-credits,
+.site-header,
+.site-footer {
+  background-color: inherit;
+}
+
+.site-footer,
+.wp-site-credits {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.site-header {
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  z-index: 15;
+}
+.has-scrolled .site-header {
+  border-bottom: 0;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.15);
+}
+
+:root .btn-outline-primary:hover,
+:root .btn-outline-primary:active,
+:root .btn-outline-primary.active,
+:root .btn-outline-primary.dropdown-toggle.show,
+:root .btn-primary,
+:root .btn-primary:hover,
+:root .btn-primary:active,
+:root .btn-primary.active,
+:root .btn-primary.dropdown-toggle.show {
+  background-color: var(--wp--preset--color--primary, var(--wca-primary));
+  border-color: var(--wp--preset--color--primary, var(--wca-primary));
+}
+:root .btn-outline-primary {
+  color: var(--wp--preset--color--primary, var(--wca-primary));
+  border-color: var(--wp--preset--color--primary, var(--wca-primary));
+}
+:root .border-primary {
+  border-color: var(--wp--preset--color--primary, var(--wca-primary)) !important;
+}
+:root .text-primary {
+  color: var(--wp--preset--color--primary, var(--wca-primary)) !important;
+}
+:root .bg-primary {
+  background-color: var(--wp--preset--color--primary, var(--wca-primary)) !important;
 }
 
 /* 	= Base

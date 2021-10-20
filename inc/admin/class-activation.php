@@ -9,10 +9,10 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.0.0
+ * @version		5.1.3
  */
 
-namespace WeCodeArt;
+namespace WeCodeArt\Admin;
 
 defined( 'ABSPATH' ) || exit(); 
 
@@ -33,7 +33,7 @@ class Activation {
 	 *
 	 * @var		string
 	 */
-	const REQUIRED_WP 	= '5.5';
+	const REQUIRED_WP 	= '5.8';
 	const REQUIRED_GB 	= '11.3.0';
 	const REQUIRED_PHP 	= '7.0';
 

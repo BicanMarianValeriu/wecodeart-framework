@@ -12,25 +12,3 @@
  */
 
 require_once( get_template_directory() . '/inc/init.php' );
-
-if( filter_input( INPUT_GET, 'insert-home', FILTER_VALIDATE_BOOLEAN ) ) {
-    $home_id = get_option( 'page_on_front' );
-    $content = require_once( get_parent_theme_file_path( '/inc/support/starter/content/home.php' ) );
-    wp_update_post( wp_parse_args( [
-        'ID' => $home_id
-    ], $content ) );
-
-    update_post_meta( $home_id, '_wca_title_hidden', true );
-    update_post_meta( $home_id, '_wp_page_template', 'page-full' );
-}
-
-if( filter_input( INPUT_GET, 'insert-about', FILTER_VALIDATE_BOOLEAN ) ) {
-    $about_id = 2;
-    $content = require_once( get_parent_theme_file_path( '/inc/support/starter/content/about.php' ) );
-    wp_update_post( wp_parse_args( [
-        'ID' => $about_id
-    ], $content ) );
-
-    update_post_meta( $about_id, '_wca_title_hidden', true );
-    update_post_meta( $about_id, '_wp_page_template', 'page-full' );
-}

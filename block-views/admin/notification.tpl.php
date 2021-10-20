@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Notification Template
  * @since 		3.8.1
- * @version		5.0.0
+ * @version		5.1.3
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -22,7 +22,7 @@ use WeCodeArt\Markup;
 		printf( '<img src="%s" />', wecodeart_config( 'paths' )['uri'] . '/assets/images/logo.png' );
  
 	?></div>
-	<div class="wca-notice__container"><?php
+	<div class="wca-notice__container" style="padding-left: 60px;"><?php
 
 		echo wp_kses_post( $message );
  

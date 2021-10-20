@@ -9,17 +9,17 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		1.0
- * @version		5.0.6
+ * @version		5.1.3
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Activation;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Singleton;
 use WeCodeArt\Support;
 use WeCodeArt\Core;
 use WeCodeArt\Admin;
+use WeCodeArt\Admin\Activation;
 use WeCodeArt\Config;
 use WeCodeArt\Config\Exceptions\BindingResolutionException;
 
@@ -27,8 +27,6 @@ use WeCodeArt\Config\Exceptions\BindingResolutionException;
 require_once( get_parent_theme_file_path( '/inc/class-autoloader.php' ) );
 require_once( get_parent_theme_file_path( '/inc/functions.php' ) );
 new WeCodeArt\Autoloader();
-
-if( Activation::get_instance()->is_ok() === false ) return;
 
 /**
  * Final Class

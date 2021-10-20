@@ -1,3 +1,6 @@
+/* Root */
+@import './../abstracts/root';
+
 /* Global */
 .wp-site-blocks,
 .wp-site-credits,
@@ -53,5 +56,3 @@
         background-color: var(--wp--preset--color--primary, var(--wca-primary))!important;
     }
 }
-
-@import './../abstracts/root';
