@@ -113,27 +113,7 @@ figcaption,
     }
 }
 
-/* 3.0 = Blocks */
-.wp-block-post-excerpt,
-.wp-block-post-content {
-    &::after {
-        content: '';
-        display: table;
-        clear: both;
-    }
-}
-
-div[class*="wp-block-post-comments"] {
-    textarea {
-        min-height: 150px;
-    }
-
-    .comment-reply {
-        margin-top: -1rem;
-    }
-}
-
-/* 4.0 = Core */
+/* 3.0 = Core */
 input:not([type="radio"]):not([type="checkbox"]) {
     @extend .form-control;
 }

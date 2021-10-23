@@ -24,3 +24,40 @@
         box-shadow: 0 0 5px 3px rgba( black, 0.15 );
     }
 }
+
+/* Blocks */
+.wp-block-site-logo {
+    &:where(.alignleft,.aligncenter,.alignright) {
+        margin-bottom: 0;
+
+        .navbar-brand {
+            margin: 0;
+        }
+    }
+
+    &.aligncenter {
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}
+
+.wp-block-post-excerpt,
+.wp-block-post-content {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+div[class*="wp-block-post-comments"] {
+    textarea {
+        min-height: 150px;
+    }
+
+    .comment-reply {
+        margin-top: -1rem;
+    }
+}

@@ -5244,22 +5244,7 @@ figcaption p.wp-caption-text,
   padding: 0;
 }
 
-/* 3.0 = Blocks */
-.wp-block-post-excerpt::after,
-.wp-block-post-content::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-div[class*=wp-block-post-comments] textarea {
-  min-height: 150px;
-}
-div[class*=wp-block-post-comments] .comment-reply {
-  margin-top: -1rem;
-}
-
-/* 4.0 = Core */
+/* 3.0 = Core */
 textarea {
   min-height: 200px;
 }
@@ -5497,6 +5482,32 @@ textarea {
 .has-scrolled .site-header {
   border-bottom: 0;
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Blocks */
+.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) {
+  margin-bottom: 0;
+}
+.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) .navbar-brand {
+  margin: 0;
+}
+.wp-block-site-logo.aligncenter img {
+  display: block;
+  margin: 0 auto;
+}
+
+.wp-block-post-excerpt::after,
+.wp-block-post-content::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div[class*=wp-block-post-comments] textarea {
+  min-height: 150px;
+}
+div[class*=wp-block-post-comments] .comment-reply {
+  margin-top: -1rem;
 }
 
 .lead {
