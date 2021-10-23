@@ -5,7 +5,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 5.1.3
+Version: 5.1.4
 Requires PHP: 7.0
 Requires at least: 5.8
 Tested up to: 5.8
@@ -5142,7 +5142,6 @@ html body {
   overflow-x: hidden;
 }
 
-/* 1.0 = WordPress Core */
 .alignnone {
   margin: 0 0 1rem 0;
 }
@@ -5223,28 +5222,6 @@ figcaption p.wp-caption-text,
   padding: 0 4px 5px;
 }
 
-/* 2.0 = Widgets */
-.widget_archive ul,
-.widget_meta ul,
-.widget_pages ul,
-.widget_categories ul,
-.widget_nav_menu ul,
-.widget_recent_comments ul,
-.widget_recent_entries ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-.widget_archive ul a,
-.widget_meta ul a,
-.widget_pages ul a,
-.widget_categories ul a,
-.widget_nav_menu ul a,
-.widget_recent_comments ul a,
-.widget_recent_entries ul a {
-  padding: 0;
-}
-
-/* 3.0 = Core */
 textarea {
   min-height: 200px;
 }
@@ -6993,43 +6970,6 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #141619;
   border-color: #141619;
-}
-
-.fade {
-  transition: opacity 0.15s linear;
-}
-@media (prefers-reduced-motion: reduce) {
-  .fade {
-    transition: none;
-  }
-}
-.fade:not(.show) {
-  opacity: 0;
-}
-
-.collapse:not(.show) {
-  display: none;
-}
-
-.collapsing {
-  height: 0;
-  overflow: hidden;
-  transition: height 0.35s ease;
-}
-@media (prefers-reduced-motion: reduce) {
-  .collapsing {
-    transition: none;
-  }
-}
-.collapsing.collapse-horizontal {
-  width: 0;
-  height: auto;
-  transition: width 0.35s ease;
-}
-@media (prefers-reduced-motion: reduce) {
-  .collapsing.collapse-horizontal {
-    transition: none;
-  }
 }
 
 .container,
@@ -10197,6 +10137,43 @@ textarea.form-control-lg {
 }
 .alert-dark .alert-link {
   color: #101214;
+}
+
+.fade {
+  transition: opacity 0.15s linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    transition: none;
+  }
+}
+.fade:not(.show) {
+  opacity: 0;
+}
+
+.collapse:not(.show) {
+  display: none;
+}
+
+.collapsing {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .collapsing {
+    transition: none;
+  }
+}
+.collapsing.collapse-horizontal {
+  width: 0;
+  height: auto;
+  transition: width 0.35s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .collapsing.collapse-horizontal {
+    transition: none;
+  }
 }
 
 .clearfix::after {

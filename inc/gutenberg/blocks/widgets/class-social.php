@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Markup;
 use WeCodeArt\Markup\SVG;
 use WeCodeArt\Singleton;
+use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -70,14 +71,12 @@ class Social extends Dynamic {
 				return strpos( $val, 'is-style-' ) === 0;
 			} );
 
-			foreach( $services as $service ) {
-				$inline_css .= $this->get_inline_style( current( $classnames ), $service );
-			}
+			foreach( $services as $service ) $inline_css .= $this->get_inline_style( current( $classnames ), $service );
 			
-			add_action( 'wp_enqueue_scripts', function() use ( $inline_css ) {
-				wp_add_inline_style( 'wecodeart-blocks', $inline_css );
-				wp_enqueue_style( 'wecodeart-blocks' );
-			}, 20 );
+			add_action( 'wp_print_styles', function() use ( $inline_css ) {
+				wp_add_inline_style( Blocks::CSS_ID, $inline_css );
+				wp_enqueue_style( Blocks::CSS_ID );
+			} );
 		}
 
 		return $content;
