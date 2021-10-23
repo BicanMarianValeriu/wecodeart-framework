@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.0.6
+ * @version		5.1.4
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -150,6 +150,7 @@ class Styles implements Integration {
 			'core/media-text',
 			'core/social-links',
 			'core/social-link',
+			'core/navigation'
 		], true ) ) ) {
 			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, 2 );
 		}
@@ -277,7 +278,8 @@ class Styles implements Integration {
 			'core/column' 		=> Styles\Blocks\Column::class,
 			'core/social-links'	=> Styles\Blocks\Social::class,
 			'core/separator' 	=> Styles\Blocks\Separator::class,
-			'core/pullquote' 	=> Styles\Blocks\PullQuote::class
+			'core/pullquote' 	=> Styles\Blocks\PullQuote::class,
+			'core/navigation' 	=> Styles\Blocks\Navigation::class
 		];
 
 		$output_classes = apply_filters( 'wecodeart/filter/gutenberg/styles/blocks', $defaults );

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.3
+ * @version		5.1.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -266,32 +266,42 @@ class Navigation extends Dynamic {
 	}
 
 	/**
-	 * Get Background.
+	 * Get Class Color.
 	 *
-	 * @since 	5.0.0
 	 * @param 	array 	$context	Block Context
+	 * @param 	string 	$key		Attribute name
 	 * 
-	 * @return 	string
+	 * @return 	string 	HEX color code for pallete class
 	 */
-	public static function get_background( $context ) {
-		// Background Lightness
+	public static function get_class_color( $context, $key = 'background' ) {
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
-		$background = get_prop( $context, [ 'style', 'color', 'background' ] );
+		
+		$_keys 		= [
+			'overlay-background' 	=> 'overlayBackgroundColor',
+			'overlay-text' 			=> 'overlayTextColor',
+			'custom-background'		=> 'customBackgroundColor',
+			'background' 			=> 'backgroundColor',
+			'text'		 			=> 'textColor',
+		];
 
+		// Real attribute name
+		$attribute 	= isset( $_keys[$key] ) ? $_keys[$key] : $key;
+
+		// Get custom
+		$color 		= get_prop( $context, [ 'style', 'color', $attribute ] );
+		
 		// If not custom, get named
-		if( $background === null ) {
-			$background = get_prop( $context, 'backgroundColor', $background );
-			$background	= get_prop( current( wp_list_filter( $palette, [
-				'slug' => $background,
-			] ) ), 'color', false );
+		if( $color === null ) {
+			$color = get_prop( $context, $attribute, $color );
+			$color = get_prop( current( wp_list_filter( $palette, [ 'slug' => $color ] ) ), 'color', false );
 		}
 
-		// If not named, get body
-		if( $background === false ) {
-			$styles 	= wecodeart_json( [ 'styles', 'color', 'background' ], false );
+		// If named not found, fallback to body
+		if( $color === false ) {
+			$styles 	= wecodeart_json( [ 'styles', 'color', $key ], '' );
 			if( strpos( $styles, '#' ) === 0 ) {
-				$background = $styles;
+				$color = $styles;
 			} else {
 				if( mb_strpos( $styles, '|' ) !== false ) {
 					$slug = explode( '|', $styles );
@@ -300,13 +310,13 @@ class Navigation extends Dynamic {
 					$slug = explode( '--', $styles );
 					$slug = str_replace( ')', '', end( $slug ) );
 				}
-				$background	= get_prop( current( wp_list_filter( $palette, [
+				$color	= get_prop( current( wp_list_filter( $palette, [
 					'slug' => $slug,
 				] ) ), 'color', '#ffffff' );
 			}
 		}
 
-		return $background;
+		return $color;
 	}
 
 	/**
@@ -326,7 +336,7 @@ class Navigation extends Dynamic {
 		$has_named_text_color  = get_prop( $attributes, 'textColor', false );
 		$has_custom_text_color = get_prop( $attributes, 'customTextColor', false );
 
-		// Overlays - to do
+		// Overlays - to be added via CSS because of extra specificity
 		// $has_overlay_text_color  		= get_prop( $attributes, 'overlayTextColor', false );
 		// $has_custom_overlay_text_color 	= get_prop( $attributes, 'customOverlayTextColor', false );
 		// $has_overlay_bg_color  			= get_prop( $attributes, 'overlayBackgroundColor', false );
@@ -402,7 +412,7 @@ class Navigation extends Dynamic {
 	public function get_wrapper_attributes( $attributes ) {
 		$colors     = $this->get_colors( $attributes );
 		$typography = $this->get_typography( $attributes );
-		$background = self::get_background( $attributes );
+		$background = get_prop( $attributes, 'customBackgroundColor', self::get_class_color( $attributes ) );
 
 		$classes 	= [ 'wp-block-navigation', 'navbar' ];
 		$classes[] 	= ( Styles::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
@@ -416,7 +426,7 @@ class Navigation extends Dynamic {
 
 		if( $is_responsive ) {
 			$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
-			$classes[] 	= 'navbar-expand-lg';
+			$classes[] 	= apply_filters( 'wecodeart/filter/navigation/responsive', 'navbar-expand-lg' );
 		}
 		
 		if( get_prop( $attributes, 'openSubmenusOnClick', false ) === false ) {
@@ -424,7 +434,7 @@ class Navigation extends Dynamic {
 		}
 
 		if( get_prop( $attributes, 'showSubmenuIcon', false ) === false ) {
-			$classes[] 	= 'hide-dropdown-icon';
+			$classes[] 	= 'hide-toggle';
 		}
 
 		if( $align = get_prop( $attributes, 'itemsJustification' ) ) {
@@ -459,19 +469,17 @@ class Navigation extends Dynamic {
 		$desktop	= get_prop( $breaks, 'lg', '992px' );
 
 		return "
-		.wp-block-navigation {
-			height: 100%;
-		}
-		.offcanvas .wp-block-navigation {
+		:is(.site-header,.offcanvs) .wp-block-navigation {
 			padding-top: 0;
 			padding-bottom: 0;
 		}
-		.wp-block-navigation.hide-dropdown-icon .dropdown-toggle::after {
+		.wp-block-navigation.has-text-color .nav-link {
+			color: inherit;
+		}
+		.wp-block-navigation.hide-toggle .dropdown-toggle::after {
 			content: none;
 		}
-		.wp-block-navigation.with-hover .dropdown:hover > .dropdown-toggle ~ .dropdown-menu,
-		.wp-block-navigation.with-hover .dropdown:focus > .dropdown-toggle ~ .dropdown-menu,
-		.wp-block-navigation.with-hover .dropdown:focus-within > .dropdown-toggle ~ .dropdown-menu {
+		.wp-block-navigation.with-hover .dropdown:where(:hover,:focus,:focus-within) > .dropdown-toggle ~ .dropdown-menu {
 			display: block;
 			visibility: visible;
 			opacity: 1;
@@ -482,15 +490,14 @@ class Navigation extends Dynamic {
 		.wp-block-navigation.navbar-dark .btn-close {
 			background-color: var(--wca-white);
 		}
-		.wp-block-navigation .offcanvas,
-		.wp-block-navigation .offcanvas-body {
+		.wp-block-navigation :where(.offcanvas,.offcanvas-body) {
 			justify-content: inherit;
+			background-color: inherit;
 		}
 		.wp-block-navigation .offcanvas-start .btn-close {
 			margin-left: auto;
 		}
-		.wp-block-navigation-link__content.nav-link,
-		.wp-block-navigation-link__content.dropdown-item {
+		.wp-block-navigation-link__content:where(.nav-link,.dropdown-item) {
 			display: flex;
 			align-items: center;
 		}
@@ -515,11 +522,6 @@ class Navigation extends Dynamic {
 				border-right: 0;
 				border-bottom: 0.3em solid transparent;
 				border-left: 0.3em solid;
-			}
-		}
-		@media (max-width: 991.7px) {
-			.wp-block-navigation.navbar-dark .offcanvas {
-				background-color: var(--wca-dark);
 			}
 		}
 		";

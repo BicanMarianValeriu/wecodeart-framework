@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -104,12 +104,35 @@ class Home extends Dynamic {
 					'aria-current'	=> $is_active ? 'page' : null,
 				],
 			] ], function( $attributes, $icons ) {
-
 				// Icon
-				Link::render_icon( $icons );
-
+				if( ! empty( $icons ) ) {
+					printf( '<i class="wp-block-navigation-link__icon %s"></i>', esc_attr( join( ' ', $icons ) ) );
+				}
+		
 				// Label
-				Link::render_label( $attributes );
+				Markup::wrap( 'nav-label', [ [
+					'tag' 	=> 'span',
+					'attrs'	=> [
+						'class' => 'wp-block-navigation-link__label'
+					]
+				] ], function( $attributes ) { 
+						echo wp_kses( $attributes['label'], [
+							'code'   => [],
+							'em'     => [],
+							'img'    => [
+								'scale' => [],
+								'class' => [],
+								'style' => [],
+								'src'   => [],
+								'alt'   => [],
+							],
+							's'      => [],
+							'span'   => [
+								'style' => [],
+							],
+							'strong' => [],
+						] );
+				}, [ $attributes ] );
 
 			}, [ $attributes, $icons ] );
 		}, [ $attributes, $icons ], false );

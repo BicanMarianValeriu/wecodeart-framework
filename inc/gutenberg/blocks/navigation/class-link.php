@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.3
+ * @version		5.1.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -101,7 +101,7 @@ class Link extends Dynamic {
 			'icon' 	=> [],
 		];
 
-		$attrs 	= self::get_wrapper_attributes( $attributes, $block, $extras );
+		$attrs 	= $this->get_wrapper_attributes( $attributes, $block, $extras );
 
 		return Markup::wrap( 'nav-item', [ [
 			'tag' 	=> 'li',
@@ -109,68 +109,81 @@ class Link extends Dynamic {
 		] ], function( $attributes, $block, $extras ) {
 
 			// Nav Link
-			Markup::wrap( 'nav-link', [ [
-				'tag' 	=> self::get_link_tag( self::get_link_type( $extras['mod'] ) ),
-				'attrs'	=> self::get_link_attributes( $attributes, $block, $extras ),
-			] ], function( $attributes, $extras ) {
-				if( in_array( 'dropdown-divider', $extras['mod' ] ) ) {
-					echo '&nbsp';
-					return;
-				}
-
-				// Icon
-				self::render_icon( $extras['icon'] );
-
-				// Label
-				self::render_label( $attributes );
-
-			}, [ $attributes, $extras ] );
+			$this->render_link( $attributes, $block, $extras );
 
 			// Nav Submenu
-			self::render_submenu( $block );
+			$this->render_submenu( $block );
 
 		}, [ $attributes, $block, $extras ], false );
 	}
 
-	// Renders
-	public static function render_icon( $classes ) {
-		if( empty( $classes ) ) return;
-		printf( '<i class="wp-block-navigation-link__icon %s"></i>', esc_attr( join( ' ', $classes ) ) );
+	/**
+	 * Renders the link
+	 *
+	 * @param	array 	$attributes
+	 * @param	array 	$extras
+	 *
+	 * @return	string 	HTML
+	 */
+	public function render_link( $attributes, $block, $extras ) {
+		Markup::wrap( 'nav-link', [ [
+			'tag' 	=> $this->get_link_tag( $this->get_link_type( get_prop( $extras, 'mod', [] ) ) ),
+			'attrs'	=> $this->get_link_attributes( $attributes, $block, $extras ),
+		] ], function( $attributes, $extras ) {
+			if( in_array( 'dropdown-divider', get_prop( $extras, 'mod', [] ) ) ) {
+				echo '&nbsp';
+				return;
+			}
+	
+			// Icon
+			if( ! empty( $icon = get_prop( $extras, 'icon', [] ) ) ) {
+				printf( '<i class="wp-block-navigation-link__icon %s"></i>', esc_attr( join( ' ', $icon ) ) );
+			}
+	
+			// Label
+			Markup::wrap( 'nav-label', [ [
+				'tag' 	=> 'span',
+				'attrs'	=> [
+					'class' => 'wp-block-navigation-link__label'
+				]
+			] ], function( $attributes ) { 
+					echo wp_kses( $attributes['label'], [
+						'code'   => [],
+						'em'     => [],
+						'img'    => [
+							'scale' => [],
+							'class' => [],
+							'style' => [],
+							'src'   => [],
+							'alt'   => [],
+						],
+						's'      => [],
+						'span'   => [
+							'style' => [],
+						],
+						'strong' => [],
+					] );
+			}, [ $attributes ] );
+		}, [ $attributes, $extras ] );
 	}
 
-	public static function render_label( $attributes ) {
-		Markup::wrap( 'nav-label', [ [
-			'tag' 	=> 'span',
-			'attrs'	=> [
-				'class' => 'wp-block-navigation-link__label'
-			]
-		] ], function( $attributes ) { 
-				echo wp_kses( $attributes['label'], [
-					'code'   => [],
-					'em'     => [],
-					'img'    => [
-						'scale' => [],
-						'class' => [],
-						'style' => [],
-						'src'   => [],
-						'alt'   => [],
-					],
-					's'      => [],
-					'span'   => [
-						'style' => [],
-					],
-					'strong' => [],
-				] );
-		}, [ $attributes ] );
-	}
-
-	public static function render_submenu( $block ) {
+	/**
+	 * Renders dropdown
+	 *
+	 * @param 	array 	$block
+	 *
+	 * @return 	string	HTML
+	 */
+	public function render_submenu( $block ) {
 		if( count( $block->inner_blocks ) === 0 ) return;
 
 		$inner_html = '';
 		foreach ( $block->inner_blocks as $inner_block ) $inner_html .= $inner_block->render();
 		
-		$background = Navigation::get_background( $block->context );
+		// Use overlay first, fallback to nav background (or body)
+		$color_type = get_prop( $block->context, 'overlayBackgroundColor' );
+		$key_name 	= $color_type ? 'overlay-background' : 'background';
+		$background = Navigation::get_class_color( $block->context, $key_name );
 		
 		$classes 	= [ 'wp-block-navigation-link__dropdown', 'dropdown-menu' ];
 		if( ( Styles::color_lightness( $background ) < 380 ) ) {
@@ -190,24 +203,24 @@ class Link extends Dynamic {
 	 * 
 	 * @return 	string
 	 */
-	public static function get_link_type( $classes = [] ) {
-		$linkmod_type = '';
+	public function get_link_type( $classes = [] ) {
+		$mod = '';
 		// Loop through array of linkmod classes to handle their $atts.
-		if ( empty( $classes ) ) return $linkmod_type;
+		if ( empty( $classes ) ) return $mod;
 
 		foreach ( $classes as $class ) {
 			if ( empty( $class ) ) continue;
 
 			if ( 'dropdown-header' === $class ) {
-				$linkmod_type = 'dropdown-header';
+				$mod = 'dropdown-header';
 			} elseif ( 'dropdown-divider' === $class ) {
-				$linkmod_type = 'dropdown-divider';
+				$mod = 'dropdown-divider';
 			} elseif ( 'dropdown-item-text' === $class ) {
-				$linkmod_type = 'dropdown-item-text';
+				$mod = 'dropdown-item-text';
 			}
 		}
 
-		return $linkmod_type;
+		return $mod;
 	}
 
 	/**
@@ -215,7 +228,7 @@ class Link extends Dynamic {
 	 * 
 	 * @return 	string
 	 */
-	public static function get_link_tag( $type ) {
+	public function get_link_tag( $type ) {
 		$output = 'a';
 		if ( 'dropdown-header' === $type || 'dropdown-item-text' === $type ) $output = 'span';
 		elseif ( 'dropdown-divider' === $type ) $output = 'div';
@@ -227,7 +240,7 @@ class Link extends Dynamic {
 	 * 
 	 * @return 	array
 	 */
-	public static function get_link_attributes( $attributes, $block, $extras ) {
+	public function get_link_attributes( $attributes, $block, $extras ) {
 		global $wp;
 
 		$is_active 		= trailingslashit( home_url( $wp->request ) ) === trailingslashit( $attributes['url'] );
@@ -294,7 +307,7 @@ class Link extends Dynamic {
 	 * 
 	 * @return 	array
 	 */
-	public static function get_wrapper_attributes( $attributes, $block, &$extras ) {
+	public function get_wrapper_attributes( $attributes, $block, &$extras ) {
 		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
 		$classes		= [ 'wp-block-navigation-link' ];
 		$class_names	= ! empty( $attributes['className'] ) ? explode( ' ', $attributes['className'] ) : false;
@@ -314,7 +327,7 @@ class Link extends Dynamic {
 			$classes[] = 'dropdown';
 		}
 		
-		$classes = self::pluck_special_classes( $classes, $is_sub_menu, $extras );
+		$classes = $this->pluck_special_classes( $classes, $is_sub_menu, $extras );
 
 		return [
 			'class'	=> join( ' ', array_filter( $classes ) ),

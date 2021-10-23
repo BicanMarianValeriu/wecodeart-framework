@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -20,9 +20,7 @@ use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Support\Styles;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use WeCodeArt\Gutenberg\Blocks\Navigation;
 use WeCodeArt\Gutenberg\Blocks\Navigation\Link;
-use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Navigation Submenu block.
@@ -61,74 +59,10 @@ class Menu extends Dynamic {
 	public function filter_render( $settings, $data ) {
 		if ( $this->get_block_type() === $data['name'] ) {
 			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
+				'render_callback' => [ Link::get_instance(), 'render' ]
 			], $settings );
 		}
 		
 		return $settings;
-	}
-
-	/**
-	 * Dynamically renders the `core/navigation-link` block.
-	 *
-	 * @param 	array 	$attributes The block attributes.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function render( $attributes = [], $content = '', $block = null ) {
-		global $wp;
-
-		$link_has_id 	= isset( $attributes['id'] ) && is_numeric( $attributes['id'] );
-		$is_post_type	= isset( $attributes['kind'] ) && 'post-type' === $attributes['kind'];
-		$is_post_type	= $is_post_type || isset( $attributes['type'] ) && ( 'post' === $attributes['type'] || 'page' === $attributes['type'] );
-		
-		// Don't render the block's subtree if it is a draft.
-		if ( $is_post_type && $link_has_id ) {
-			$post = get_post( $attributes['id'] );
-			if ( 'publish' !== $post->post_status ) {
-				return '';
-			}
-		}
-
-		// Don't render the block's subtree if it has no label.
-		if ( empty( $attributes['label'] ) ) {
-			return '';
-		}
-
-		// Extra classes
-		$extras = [
-			'mod' 	=> [],
-			'icon' 	=> [],
-		];
-
-		$attrs 	= Link::get_wrapper_attributes( $attributes, $block, $extras );
-
-		return Markup::wrap( 'nav-item', [ [
-			'tag' 	=> 'li',
-			'attrs'	=> $attrs,
-		] ], function( $attributes, $block, $extras ) {
-
-			// Nav Link
-			Markup::wrap( 'nav-link', [ [
-				'tag' 	=> Link::get_link_tag( Link::get_link_type( $extras['mod'] ) ),
-				'attrs'	=> Link::get_link_attributes( $attributes, $block, $extras ),
-			] ], function( $attributes, $extras ) {
-				if( in_array( 'dropdown-divider', $extras['mod' ] ) ) {
-					echo '&nbsp';
-					return;
-				}
-
-				// Icon
-				Link::render_icon( $extras['icon'] );
-
-				// Label
-				Link::render_label( $attributes );
-
-			}, [ $attributes, $extras ] );
-
-			// Nav Submenu
-			Link::render_submenu( $block );
-
-		}, [ $attributes, $block, $extras ], false );
 	}
 }
