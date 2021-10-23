@@ -89,12 +89,12 @@ class Blocks implements \ArrayAccess {
         // Post Blocks
 		$this->register( 'core/post-date',          Blocks\Post\Date::class );
 		$this->register( 'core/post-title',         Blocks\Post\Title::class );
-		$this->register( 'core/post-image',         Blocks\Post\Image::class );
 		$this->register( 'core/post-terms',         Blocks\Post\Terms::class );
 		$this->register( 'core/post-author',        Blocks\Post\Author::class );
 		$this->register( 'core/post-excerpt',       Blocks\Post\Excerpt::class );
 		$this->register( 'core/post-content',       Blocks\Post\Content::class );
 		$this->register( 'core/post-template',      Blocks\Post\Template::class );
+		$this->register( 'core/post-featured-image',Blocks\Post\Image::class );
 		$this->register( 'core/post-comments-link', Blocks\Post\Comments\Link::class );
         // Query Blocks
 		$this->register( 'core/query',	                    Blocks\Query::class );

@@ -490,14 +490,14 @@ class Navigation extends Dynamic {
 		.wp-block-navigation.navbar-dark .btn-close {
 			background-color: var(--wca-white);
 		}
+		.wp-block-navigation .offcanvas-start .btn-close {
+			margin-left: auto;
+		}
 		.wp-block-navigation :where(.offcanvas,.offcanvas-body) {
 			justify-content: inherit;
 			background-color: inherit;
 		}
-		.wp-block-navigation .offcanvas-start .btn-close {
-			margin-left: auto;
-		}
-		.wp-block-navigation-link__content:where(.nav-link,.dropdown-item) {
+		.wp-block-navigation :where(.nav-link,.dropdown-item) {
 			display: flex;
 			align-items: center;
 		}

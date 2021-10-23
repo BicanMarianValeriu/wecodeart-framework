@@ -51,7 +51,7 @@ class Social extends Dynamic {
 	}
 
 	/**
-	 * Dynamically renders the `core/social-links` block.
+	 * Dynamically renders the `core/button` block.
 	 *
 	 * @param 	string 	$content 	The block markup.
 	 * @param 	array 	$block 		The parsed block.
@@ -61,13 +61,133 @@ class Social extends Dynamic {
 	public function render( $content = '', $block = [], $data = null ) {
 		$attributes = get_prop( $block, 'attrs', [] );
 
-		// Replace justification class
-		// $content = preg_replace( '/(?=\S*[-])([a-zA-Z-justified]+)/', '', $content, 1 );
-		
-		// Replace icon size with font size class
-		// $content = preg_replace( "/(?=\S*['-])([a-zA-Z'-icon-size]+)/", get_prop( $attributes, 'size' ), $content, 1 );
+		$services = wp_list_pluck( wp_list_pluck( get_prop( $block, 'innerBlocks', [] ), 'attrs' ), 'service' );
+		if( ! empty( $services ) ) {
+			$inline_css = '';
+			
+			$classnames = explode( ' ', get_prop( $attributes, 'className', '' ) );
+			$classnames = array_filter( $classnames, function( $val ) {
+				return strpos( $val, 'is-style-' ) === 0;
+			} );
+
+			foreach( $services as $service ) {
+				$inline_css .= $this->get_inline_style( current( $classnames ), $service );
+			}
+			
+			add_action( 'wp_enqueue_scripts', function() use ( $inline_css ) {
+				wp_add_inline_style( 'wecodeart-blocks', $inline_css );
+				wp_enqueue_style( 'wecodeart-blocks' );
+			}, 20 );
+		}
 
 		return $content;
+	}
+
+	/**
+	 * Get Styles
+	 */
+	public function get_inline_style( string $style = 'default', string $service = '' ) {
+		$inline_css = '';
+
+		if( empty( $service ) ) return $inline_css;
+
+		$colors = [
+			'amazon' 	=> '#f90',
+			'bandcamp' 	=> '#1ea0c3',
+			'behance' 	=> '#0757fe',
+			'codepen' 	=> '#1e1f26',
+			'deviantart'=> '#02e49b',
+			'dribbble' 	=> '#e94c89',
+			'dropbox' 	=> '#4280ff',
+			'etsy' 		=> '#f45800',
+			'facebook' 	=> '#1977f2',
+			'fivehundredpx'	=> '#000',
+			'flickr' 	=> '#0461dd',
+			'foursquare'=> '#e65678',
+			'github' 	=> '#24292d',
+			'goodreads'	=> '#eceadd',
+			'google' 	=> '#ea4434',
+			'instagram'	=> '#f00075',
+			'lastfm' 	=> '#e21b24',
+			'linkedin' 	=> '#0577b5',
+			'mastodon' 	=> '#3288d4',
+			'meetup' 	=> '#02ab6c',
+			'pinterest'	=> '#e60122',
+			'pocket' 	=> '#ef4155',
+			'reddit' 	=> '#fe4500',
+			'skype' 	=> '#0478d7',
+			'snapchat' 	=> '#fefc00',
+			'soundcloud'=> '#ff5600',
+			'spotify' 	=> '#1bd760',
+			'tumblr' 	=> '#011835',
+			'twitch' 	=> '#6440a4',
+			'twitter' 	=> '#21a1f3',
+			'vk' 		=> '#4680c2',
+			'vimeo' 	=> '#1eb7ea',
+			'wordpress'	=> '#3499cd',
+			'yelp' 		=> '#d32422',
+			'youtube'	=> '#ff0100',
+		];
+
+		$selector 	= '.wp-block-social-links a';
+		$properties = [
+			'color' => isset( $colors[$service] ) ? $colors[$service] : 'inherit'
+		];
+
+		// Logos Only
+		if( $style === 'is-style-logos-only' ) {
+			$selector = '.wp-block-social-links.is-style-logos-only .wp-social-link-' . $service . ' a';
+			$properties = [
+				'color'	=> $colors[$service]
+			];
+
+			if( $service === 'goodreads' ) {
+				$properties = wp_parse_args( [
+					'color' => '#382110'
+				], $properties );
+			}
+
+			if( $service === 'snapchat' ) {
+				$properties = wp_parse_args( [
+					'color' 	=> 'white',
+				], $properties );
+			}
+			
+			if( $service === 'yelp' ) {
+				$properties = wp_parse_args( [
+					'background-color' => $colors[$service],
+					'color' => 'white',
+				], $properties );
+			}
+		// Default style
+		} else {
+			$selector = '.wp-block-social-links:not(.is-style-logos-only) .wp-social-link-' . $service . ' a';
+			$properties = [
+				'background-color' => $colors[$service],
+				'color'	=> '#fff'
+			];
+
+			if( $service === 'goodreads' ) {
+				$properties = wp_parse_args( [
+					'color' => '#382110'
+				], $properties );
+			}
+		}
+		
+		// Snapchat has 2 pair ping-pong balls :D
+		if( $service === 'snapchat' ) {
+			$properties = wp_parse_args( [
+				'stroke' => '#000'
+			], $properties );
+		}
+
+		$css_array = [];
+		$css_array['global'][$selector] = $properties;
+
+		$inline_css = wecodeart( 'integrations' )->get( 'styles' )::parse( $css_array, 'wp-social-link-' . $service );
+		$inline_css = wecodeart( 'integrations' )->get( 'styles' )::compress( $inline_css );
+
+		return $inline_css;
 	}
 
 	/**
@@ -76,6 +196,9 @@ class Social extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
+		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$desktop	= get_prop( $breaks, 'lg', '992px' );
+
 		return "
 		.wp-block-social-links {
 			display: flex;
@@ -92,7 +215,7 @@ class Social extends Dynamic {
 		.navbar .wp-block-social-links {
 			margin-top: 1rem;
 		}
-		.wp-block-social-links.is-style-pill-shape {
+		.wp-block-social-links.is-style-pill-shape .wp-social-link {
 			width: auto;
 		}
 		.wp-block-social-links.is-style-pill-shape .wp-social-link a {
@@ -108,7 +231,7 @@ class Social extends Dynamic {
 		}
 		.wp-social-link {
 			display: block;
-			background-color: transparent!important;
+			background-color: transparent;
 		}
 		.wp-social-link:not(:last-child) {
 			margin-right: calc((2.5/3) * 1em);
@@ -127,7 +250,7 @@ class Social extends Dynamic {
 			border: none;
 			box-shadow: none;
 		}
-		@media (min-width: 992px) {
+		@media (min-width: $desktop) {
 			.navbar .wp-block-social-links {
 				margin-top: 0;
 			  	margin-bottom: 0;

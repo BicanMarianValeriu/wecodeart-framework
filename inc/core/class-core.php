@@ -88,8 +88,8 @@ class Core {
 		}
 		
 		// Theme
-		$classes[] = is_child_theme() ? 'theme-is-skin' : 'theme-is-base'; 
 		$classes[] = 'theme-' . wecodeart( 'name' );
+		$classes[] = is_child_theme() ? 'theme-is-skin' : 'theme-is-base'; 
 
 		return $classes;
 	}

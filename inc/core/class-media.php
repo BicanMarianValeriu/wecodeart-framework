@@ -9,7 +9,7 @@
  * @subpackage 	Entry Media Class
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.6.x
- * @version		5.0.0
+ * @version		5.1.4
  */
 
 namespace WeCodeArt\Core;
@@ -204,7 +204,7 @@ class Media {
 				'tag' 	=> 'figure',
 				'attrs'	=> wp_parse_args( $args['attrs'], [
 					'class'	=> 'wp-block-featured-image ratio overflow-hidden',
-					'style'	=> sprintf( '--wca-aspect-ratio:%s;', number_format( $dummy_ratio * 100, 3 ) . '%' )
+					'style'	=> sprintf( '--wp--aspect-ratio:%s;', number_format( $dummy_ratio * 100, 3 ) . '%' )
 				] )
 			] ], $html, null, false );
 		} elseif ( 'url' === mb_strtolower( $args['format'] ) ) {

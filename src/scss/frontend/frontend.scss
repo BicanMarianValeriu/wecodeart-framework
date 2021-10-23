@@ -29,36 +29,39 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import "~bootstrap/scss/reboot";
 
 // Theme
-@import './theme';
 @import './base';
 @import './grid';
-@import './social-links';
+@import './theme';
 
 // BS Layout & components
 @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/images";
-@import "~bootstrap/scss/containers";
-@import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/tables";
 @import "~bootstrap/scss/forms";
-@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/list-group";
 @import "~bootstrap/scss/transitions";
-@import "~bootstrap/scss/dropdown";
+// Grid
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+// Buttons
+@import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/button-group";
+// Nav
 @import "~bootstrap/scss/nav";
 @import "~bootstrap/scss/navbar";
-@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/offcanvas";
+// Misc
 @import "~bootstrap/scss/breadcrumb";
 @import "~bootstrap/scss/pagination";
 @import "~bootstrap/scss/badge";
 @import "~bootstrap/scss/alert";
-@import "~bootstrap/scss/list-group";
-@import "~bootstrap/scss/close";
-@import "~bootstrap/scss/popover";
-@import "~bootstrap/scss/spinners";
-@import "~bootstrap/scss/offcanvas";
-@import "~bootstrap/scss/placeholders";
+// @import "~bootstrap/scss/spinners";
+// @import "~bootstrap/scss/placeholders";
+// @import "~bootstrap/scss/card";
 // @import "~bootstrap/scss/tooltip";
+// @import "~bootstrap/scss/popover";
 // @import "~bootstrap/scss/accordion";
 // @import "~bootstrap/scss/progress";
 // @import "~bootstrap/scss/toasts";

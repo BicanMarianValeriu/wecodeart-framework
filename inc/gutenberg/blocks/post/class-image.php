@@ -115,4 +115,43 @@ class Image extends Dynamic {
 
 		return $image;
 	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.wp-block-featured-image :where(.ratio > *, img) {
+			display: block;
+			top: 50%;
+			left: 50%;
+			min-width: 100%;
+			min-height: 100%;
+			transform: translate3d(-50%,-50%,0);
+			max-width: none;
+			object-fit: cover;
+		}
+		.wp-block-featured-image :where(.ratio > *,img).match {
+			width: 100%; 
+			height: 100%;
+		}
+		.wp-block-featured-image :where(.ratio > *,img).taller {
+			width: 100%; 
+			height: auto;
+		}
+		.wp-block-featured-image :where(.ratio > *,img).wider {
+			width: auto;
+			height: 100%;
+		}
+		.wp-block-featured-image :where(.ratio > *,img)[data-placeholder-resp] {
+			transition: filter .5s cubic-bezier(.6,-.28,.735,.045);
+			filter: blur(5px);
+		}	
+		.wp-block-featured-image :where(.ratio > *,img).litespeed-loaded {
+			filter: none;
+		}
+		";
+	}
 }

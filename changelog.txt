@@ -1,7 +1,11 @@
 v5.1.4
+- Updated - Post featured image styles moved to PHP (micro optimization) from global CSS
+- Updated - Social links styles moved to PHP (micro optimization) from global CSS
+- Updated - Generate inline CSS only for used social services + style (micro optimization) / shaved 13kb minified CSS
 - Updated - Navigation global styles improvements
 - Updated - Navigation now generates customizable styles for container and dropdowns based on attributes
 - Updated - Navigation menu (submenu) now uses 'navigation-link' render function (they are the same in WP as well but duplicated)
+- Updated - Bootstrap variable names to --wp--{name} to follow their standard (they dont overlap WP Core ones)
 - Added - New filter for navigation responsive breakpoint: 'wecodeart/filter/navigation/responsive'
 
 v5.1.3
