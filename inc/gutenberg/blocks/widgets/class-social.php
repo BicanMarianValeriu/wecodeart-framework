@@ -84,6 +84,11 @@ class Social extends Dynamic {
 
 	/**
 	 * Get Styles
+	 *
+	 * @param 	string  $style		CSS classname
+	 * @param 	string  $service 	Social Service name
+	 *
+	 * @return 	string 	Sanitized/Compressed CSS
 	 */
 	public function get_inline_style( string $style = 'default', string $service = '' ) {
 		$inline_css = '';
@@ -133,7 +138,7 @@ class Social extends Dynamic {
 			'color' => isset( $colors[$service] ) ? $colors[$service] : 'inherit'
 		];
 
-		// Logos Only
+		// Logos only
 		if( $style === 'is-style-logos-only' ) {
 			$selector = '.wp-block-social-links.is-style-logos-only .wp-social-link-' . $service . ' a';
 			$properties = [
