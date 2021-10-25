@@ -12,16 +12,13 @@
 
 // Custom
 @import './../abstracts/root';
-@import './css';
 @import './section';
-@import './colors';
 @import './title';
-@import './editor';
 @import './labels';
 
-.editor-styles-wrapper {
-    .wp-block-heading,
-    .wp-block-paragraph {
-        margin-top: 0;
-    }
+// Text
+.wp-block-heading,
+.wp-block-paragraph,
+.wp-block-list {
+    margin-top: 0;
 }

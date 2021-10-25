@@ -126,6 +126,7 @@ return [
         'post-thumbnails'       => [ 'post', 'page' ],
         'custom-logo'           => [ 'width' => 100, 'height' => 50 ],
         'responsive-embeds'     => true,
+        'editor-styles'         => true,
         'customize-selective-refresh-widgets'   => true,
     ],
 ];

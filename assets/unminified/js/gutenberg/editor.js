@@ -10060,338 +10060,6 @@ const clear = {
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/formats/highlight/components/edit.js":
-/*!***************************************************************!*\
-  !*** ./src/js/gutenberg/formats/highlight/components/edit.js ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Edit; });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _inline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inline */ "./src/js/gutenberg/formats/highlight/components/inline.js");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./icons */ "./src/js/gutenberg/formats/highlight/components/icons.js");
-
-
-/**
- * WordPress dependencies
- */
-const {
-  i18n: {
-    __
-  },
-  element: {
-    useCallback,
-    useMemo,
-    useState
-  },
-  blockEditor: {
-    RichTextToolbarButton,
-    __experimentalUseEditorFeature,
-    useSetting
-  },
-  richText: {
-    removeFormat
-  },
-  components: {
-    Icon
-  }
-} = wp;
-/**
- * External dependencies
- */
-
-const {
-  isEmpty
-} = lodash;
-/**
- * Internal dependencies
- */
-
-
-
-const name = 'wca/background';
-
-const title = __('Highlight color', 'wecodeart');
-
-const EMPTY_ARRAY = [];
-function Edit({
-  value,
-  onChange,
-  isActive,
-  activeAttributes,
-  contentRef
-}) {
-  const useEditorFeature = useSetting || __experimentalUseEditorFeature;
-  const allowCustomControl = useEditorFeature('color.custom');
-  const colors = useEditorFeature('color.palette') || EMPTY_ARRAY;
-  const [isAddingColor, setIsAddingColor] = useState(false);
-  const enableIsAddingColor = useCallback(() => setIsAddingColor(true), [setIsAddingColor]);
-  const disableIsAddingColor = useCallback(() => setIsAddingColor(false), [setIsAddingColor]);
-  const colorIndicatorStyle = useMemo(() => {
-    const activeColor = Object(_inline__WEBPACK_IMPORTED_MODULE_1__["getActiveColor"])(name, value, colors);
-
-    if (!activeColor) {
-      return undefined;
-    }
-
-    return {
-      backgroundColor: activeColor
-    };
-  }, [value, colors]);
-  const hasColorsToChoose = !isEmpty(colors) || !allowCustomControl;
-
-  if (!hasColorsToChoose && !isActive) {
-    return null;
-  }
-
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichTextToolbarButton, {
-    key: isActive ? 'text-color' : 'text-color-not-active',
-    className: "format-library-text-color-button",
-    name: isActive ? 'text-color' : undefined,
-    icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Icon, {
-      icon: _icons__WEBPACK_IMPORTED_MODULE_2__["Format"]
-    }), isActive && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
-      className: "format-library-text-color-button__indicator",
-      style: colorIndicatorStyle
-    })),
-    title: title // If has no colors to choose but a color is active remove the color onClick
-    ,
-    onClick: hasColorsToChoose ? enableIsAddingColor : () => onChange(removeFormat(value, name))
-  }), isAddingColor && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_inline__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    name: name,
-    onClose: disableIsAddingColor,
-    activeAttributes: activeAttributes,
-    value: value,
-    onChange: onChange,
-    contentRef: contentRef
-  }));
-}
-;
-
-/***/ }),
-
-/***/ "./src/js/gutenberg/formats/highlight/components/icons.js":
-/*!****************************************************************!*\
-  !*** ./src/js/gutenberg/formats/highlight/components/icons.js ***!
-  \****************************************************************/
-/*! exports provided: Format */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Format", function() { return Format; });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-
-
-/**
- * Custom icon
- */
-const {
-  Icon,
-  SVG,
-  Path
-} = wp.components;
-const Format = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Icon, {
-  icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(SVG, {
-    style: {
-      height: 18
-    },
-    viewBox: "0 0 512 512",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Path, {
-    d: "M240.2,369.1 C244.39999999999998,373.3 251.2,373 255.10000000000002,368.6 L465.7,125.4 C474.5,115.3 474,100.2 464.5,90.7 L426.3,52.5 C416.8,43 401.7,42.5 391.6,51.3 L148.4,262 C143.9,265.9 143.7,272.7 147.9,276.9 L240.2,369.1 z",
-    id: "svg_2"
-  }), " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("path", {
-    d: "M48.2,449.7 L86.5,462.5 L104.5,444.5 L172.1,444.5 C174.8,444.5 177.4,443.4 179.3,441.5 L205.1,415.7 C209.1,411.7 209.1,405.3 205.1,401.3 L111.6,308 C107.6,304 101.19999999999999,304 97.19999999999999,308 L71.4,333.8 C69.5,335.7 68.4,338.3 68.4,341 L68.4,404.4 C68.4,407.1 67.3,409.7 65.4,411.6 L44.099999999999994,432.9 C38.900000000000006,438.2 41.099999999999994,447.3 48.2,449.7 z"
-  }))
-});
-
-/***/ }),
-
-/***/ "./src/js/gutenberg/formats/highlight/components/inline.js":
-/*!*****************************************************************!*\
-  !*** ./src/js/gutenberg/formats/highlight/components/inline.js ***!
-  \*****************************************************************/
-/*! exports provided: getActiveColor, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getActiveColor", function() { return getActiveColor; });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../index */ "./src/js/gutenberg/formats/highlight/index.js");
-
-
-/**
- * Other Deps
- */
-const {
-  get
-} = lodash;
-/**
- * WordPress dependencies
- */
-
-const {
-  data: {
-    useSelect
-  },
-  element: {
-    useCallback,
-    useMemo
-  },
-  components: {
-    withSpokenMessages
-  },
-  richText: {
-    applyFormat,
-    removeFormat,
-    getActiveFormat,
-    useAnchorRef
-  },
-  blockEditor: {
-    ColorPalette,
-    URLPopover,
-    getColorClassName,
-    getColorObjectByColorValue,
-    getColorObjectByAttributeValues,
-    store: blockEditorStore
-  }
-} = wp;
-/**
- * Internal Deps
- */
-
-
-function getActiveColor(formatName, formatValue, colors) {
-  const activeColorFormat = getActiveFormat(formatValue, formatName);
-
-  if (!activeColorFormat) {
-    return;
-  }
-
-  const styleColor = activeColorFormat.attributes.style;
-
-  if (styleColor) {
-    return styleColor.replace(new RegExp(`^background-color:\\s*`), '');
-  }
-
-  const currentClass = activeColorFormat.attributes.class;
-
-  if (currentClass) {
-    const colorSlug = currentClass.replace(/.*has-(.*?)-background-color.*/, '$1');
-    return getColorObjectByAttributeValues(colors, colorSlug).color;
-  }
-}
-
-const ColorPicker = ({
-  name,
-  value,
-  onChange
-}) => {
-  const colors = useSelect(select => {
-    const {
-      getSettings
-    } = select(blockEditorStore);
-    return get(getSettings(), ['colors'], []);
-  });
-  const onColorChange = useCallback(color => {
-    if (color) {
-      const colorObject = getColorObjectByColorValue(colors, color);
-      onChange(applyFormat(value, {
-        type: name,
-        attributes: colorObject ? {
-          class: getColorClassName('background-color', colorObject.slug)
-        } : {
-          style: `background-color:${color}`
-        }
-      }));
-    } else {
-      onChange(removeFormat(value, name));
-    }
-  }, [colors, onChange]);
-  const activeColor = useMemo(() => getActiveColor(name, value, colors), [name, value, colors]);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPalette, {
-    value: activeColor,
-    onChange: onColorChange
-  });
-};
-
-const InlineColorUI = ({
-  name,
-  value,
-  onChange,
-  onClose,
-  contentRef
-}) => {
-  const anchorRef = useAnchorRef({
-    ref: contentRef,
-    value,
-    settings: _index__WEBPACK_IMPORTED_MODULE_1__["highlight"]
-  });
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(URLPopover, {
-    value: value,
-    onClose: onClose,
-    className: "components-inline-color-popover",
-    anchorRef: anchorRef
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPicker, {
-    name: name,
-    value: value,
-    onChange: onChange
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (withSpokenMessages(InlineColorUI));
-
-/***/ }),
-
-/***/ "./src/js/gutenberg/formats/highlight/index.js":
-/*!*****************************************************!*\
-  !*** ./src/js/gutenberg/formats/highlight/index.js ***!
-  \*****************************************************/
-/*! exports provided: highlight */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "highlight", function() { return highlight; });
-/* harmony import */ var _components_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/edit */ "./src/js/gutenberg/formats/highlight/components/edit.js");
-/**
- * WordPress dependencies
- */
-const {
-  __
-} = wp.i18n;
-/**
- * Internal dependencies
- */
-
-
-/**
- * Block constants
- */
-
-const name = 'wca/background';
-const highlight = {
-  name,
-  title: __('Background Color', 'wecodeart'),
-  tagName: 'span',
-  className: 'has-inline-background',
-  attributes: {
-    style: 'style',
-    class: 'class'
-  },
-  edit: _components_edit__WEBPACK_IMPORTED_MODULE_0__["default"]
-};
-
-/***/ }),
-
 /***/ "./src/js/gutenberg/formats/index.js":
 /*!*******************************************!*\
   !*** ./src/js/gutenberg/formats/index.js ***!
@@ -10404,16 +10072,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _clear__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clear */ "./src/js/gutenberg/formats/clear/index.js");
 /* harmony import */ var _justify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./justify */ "./src/js/gutenberg/formats/justify/index.js");
 /* harmony import */ var _underline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./underline */ "./src/js/gutenberg/formats/underline/index.js");
-/* harmony import */ var _highlight__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./highlight */ "./src/js/gutenberg/formats/highlight/index.js");
-/* harmony import */ var _abbreviation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./abbreviation */ "./src/js/gutenberg/formats/abbreviation/index.js");
+/* harmony import */ var _abbreviation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./abbreviation */ "./src/js/gutenberg/formats/abbreviation/index.js");
 /**
  * Internal dependencies
  */
 
 
 
-
- // import { tooltip } from './tooltip';
+ // import { highlight } from './highlight';
+// import { tooltip } from './tooltip';
 
 /**
  * WordPress dependencies
@@ -10424,7 +10091,8 @@ const {
 } = wp.richText;
 
 function registerWeCodeArtFormats() {
-  [_clear__WEBPACK_IMPORTED_MODULE_0__["clear"], _justify__WEBPACK_IMPORTED_MODULE_1__["justify"], _underline__WEBPACK_IMPORTED_MODULE_2__["underline"], _highlight__WEBPACK_IMPORTED_MODULE_3__["highlight"], _abbreviation__WEBPACK_IMPORTED_MODULE_4__["abbreviation"] // tooltip,
+  [_clear__WEBPACK_IMPORTED_MODULE_0__["clear"], _justify__WEBPACK_IMPORTED_MODULE_1__["justify"], _underline__WEBPACK_IMPORTED_MODULE_2__["underline"], _abbreviation__WEBPACK_IMPORTED_MODULE_3__["abbreviation"] // highlight,
+  // tooltip,
   ].forEach(({
     name,
     ...settings
@@ -11001,11 +10669,11 @@ const Controls = () => {
     const titleBlock = document.querySelector('.editor-post-title');
 
     if (titleBlock && value) {
-      document.body.classList.add('theme-wecodeart--hidden-title');
+      titleBlock.classList.add('editor-post-title--hidden');
     }
 
     return () => {
-      document.body.classList.remove('theme-wecodeart--hidden-title');
+      titleBlock.classList.remove('editor-post-title--hidden');
     };
   }, [value]);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PluginPostStatusInfo, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(CheckboxControl, {

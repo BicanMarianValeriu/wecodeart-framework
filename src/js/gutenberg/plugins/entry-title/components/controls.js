@@ -30,10 +30,10 @@ const Controls = () => {
 	useEffect(() => {
 		const titleBlock = document.querySelector('.editor-post-title');
 		if (titleBlock && value) {
-			document.body.classList.add('theme-wecodeart--hidden-title');
+			titleBlock.classList.add('editor-post-title--hidden');
 		}
 		return () => {
-			document.body.classList.remove('theme-wecodeart--hidden-title');
+			titleBlock.classList.remove('editor-post-title--hidden');
 		};
 	}, [value]);
 
