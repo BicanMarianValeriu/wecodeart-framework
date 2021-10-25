@@ -2,6 +2,11 @@
 	"version": "5.0.0",
 	"items": [
 		{
+			"type": "warning",
+			"title": "Important Notice!",
+			"content": "Please update to a version above 5.1.4 if not already. There are major updates to Navigation and Social Links blocks (micro optimization)."
+		},
+		{
 			"type": "info",
 			"title": "Is a FSE beta - have patience!",
 			"content": "WeCodeArt version 5.0 is a Full Site Editing theme which means it will have API changes - please have patience and do not use on production!"
