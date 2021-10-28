@@ -4,6 +4,7 @@ v5.1.5
 - Updated - Clear more redundant CSS (comment reply, textarea) in favor of BS Classes
 - Updated - Blocks inline CSS variables naming (old to new --wp-- prefix)
 - Updated - Duotones filter ids prefixed with "wp-duotone" (to fix a HTML Validation warning)
+- Updated - Cover styles updated to be compatable with Gutenberg 11.8
 - Removed - Unnecessary theme supports for FSE themes
 - Added - should_load_separate_core_block_assets disable in upcomming Gutenberg support for WP 5.9, we use or own approach
 
