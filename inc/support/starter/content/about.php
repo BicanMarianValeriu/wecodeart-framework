@@ -5,7 +5,7 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'About', 'Theme starter content', 'wecodeart' ),
-	'post_content' => '<!-- wp:group {"className":"mb-5","layout":{"inherit":true},"customCSSId":"87bf1a83-fdb6-42fd-9a26-3752d8ddb580"} -->
+	'post_content' => '<!-- wp:group {"className":"mb-5","layout":{"inherit":false},"customCSSId":"87bf1a83-fdb6-42fd-9a26-3752d8ddb580"} -->
 	<div class="wp-block-group mb-5"><!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"e6e8d1f8-c885-4e8b-8e0f-4642cae91bd0"} -->
 	<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:35% auto"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt=""/></figure><div class="wp-block-media-text__content"><!-- wp:heading {"customCSSId":"dad02bc8-1c7b-4022-bc26-2716ac345f62"} -->
 	<h2>Our Story</h2>
@@ -18,7 +18,7 @@ return [
 	<!-- /wp:paragraph --></div></div>
 	<!-- /wp:media-text --></div>
 	<!-- /wp:group -->
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"52d87aca-e656-45b7-8fe7-86e7e16730e4"} -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"52d87aca-e656-45b7-8fe7-86e7e16730e4"} -->
 	<div class="wp-block-group my-5"><!-- wp:media-text {"align":"","mediaPosition":"right","mediaLink":"https://picsum.photos/id/180/500/500","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"f2e4a249-c2cf-460f-8117-41e8c96c8c8a"} -->
 	<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="grid-template-columns:auto 35%"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/180/500/500" alt=""/></figure><div class="wp-block-media-text__content"><!-- wp:heading {"customCSSId":"bab33db5-7863-4c4c-92b7-1d0c2f45112a"} -->
 	<h2>We are driven by values</h2>
@@ -33,7 +33,7 @@ return [
 	<!-- /wp:buttons --></div></div>
 	<!-- /wp:media-text --></div>
 	<!-- /wp:group -->
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"c4ffdb61-20e7-41ae-a4f4-759e5fa55e84"} -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"c4ffdb61-20e7-41ae-a4f4-759e5fa55e84"} -->
 	<div class="wp-block-group my-5"><!-- wp:columns {"className":"flex-column flex-md-row","customCSSId":"d3555087-6def-44e0-9276-e90e777e2df9"} -->
 	<div class="wp-block-columns flex-column flex-md-row"><!-- wp:column {"className":"mb-4","customCSSId":"45343961-7014-40f0-877a-87a77317d581"} -->
 	<div class="wp-block-column mb-4"><!-- wp:heading {"level":3,"customCSSId":"7c14b92a-ee0d-491a-a213-9fee57ca7525"} -->
@@ -61,7 +61,7 @@ return [
 	<!-- /wp:column --></div>
 	<!-- /wp:columns --></div>
 	<!-- /wp:group -->
-	<!-- wp:group {"backgroundColor":"dark","textColor":"white","className":"pt-5","layout":{"inherit":true},"customCSSId":"b61d3af6-a7d8-4b0c-b829-14ffd016b055"} -->
+	<!-- wp:group {"backgroundColor":"dark","textColor":"white","className":"pt-5","layout":{"inherit":false},"customCSSId":"b61d3af6-a7d8-4b0c-b829-14ffd016b055"} -->
 	<div class="wp-block-group has-background has-dark-background-color has-text-color has-white-color pt-5">
 	<!-- wp:heading {"textAlign":"center","customCSSId":"fd074fe8-8152-4a2e-8d3b-54d1e7bae78d"} -->
 	<h2 class="has-text-align-center">Our Awesome Members</h2>

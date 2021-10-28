@@ -5,27 +5,27 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'Home', 'Theme starter content', 'wecodeart' ),
-	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","gradient":"vivid-cyan-blue-to-vivid-purple","contentPosition":"center center","align":"full","className":"py-5 text-center","customCSSId":"3447c6bb-002c-4275-a1b9-257c7b9ff822"} -->
-	<div class="wp-block-cover alignfull has-background-dim has-background-gradient has-vivid-cyan-blue-to-vivid-purple-gradient-background py-5 text-center" style="min-height:100vh"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","level":1,"className":"mb-5 display-5"} -->
-	<h1 class="has-text-align-center mb-5 display-5">Create and grow<br>your unique website today</h1>
+	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","gradient":"primary-to-vivid-purple","contentPosition":"center center","isDark":false,"align":"full","className":"py-5 text-center","customCSSId":"5c3f5504-7409-4196-80dc-3625af0dc243"} -->
+	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:100vh"><span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","level":1,"textColor":"white","className":"mb-5 display-5","customCSSId":"6f32fffb-10df-4767-8ad8-d8ab6aba53e8"} -->
+	<h1 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="create-and-growyour-unique-website-today">Create and grow<br>your unique website today</h1>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph {"align":"center","className":"lead mb-5","customCSSId":"bbafa1cb-c623-48d1-8ff1-46ee0f2508e6"} -->
-	<p class="has-text-align-center lead mb-5">Programmatically work but low hanging fruit so new economy cross-pollination. Quick sync new<br>economy onward and upward.</p>
+	<!-- wp:paragraph {"align":"center","textColor":"white","className":"lead mb-5","customCSSId":"c38d2388-c00c-44ee-8802-5e65b994e157"} -->
+	<p class="has-text-align-center lead mb-5 has-white-color has-text-color">Programmatically work but low hanging fruit so new economy cross-pollination. Quick sync new<br>economy onward and upward.</p>
 	<!-- /wp:paragraph -->
 	
-	<!-- wp:buttons {"contentJustification":"center","className":"is-style-default","customCSSId":"49c9cd31-3239-481b-9faf-be2db4eaf85f"} -->
-	<div class="wp-block-buttons is-content-justification-center is-style-default"><!-- wp:button {"backgroundColor":"light","textColor":"dark","customCSSId":"82810404-a5ea-4f24-ae57-0145e989e410"} -->
+	<!-- wp:buttons {"contentJustification":"center","className":"is-style-default","customCSSId":"63cc6392-da1e-4fe3-8110-ecf7256a6576"} -->
+	<div class="wp-block-buttons is-content-justification-center is-style-default"><!-- wp:button {"backgroundColor":"light","textColor":"dark","customCSSId":"e27fcc07-0007-46f7-a55e-154287aab0e2"} -->
 	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button -->
 	
-	<!-- wp:button {"backgroundColor":"light","textColor":"dark","customCSSId":"53df8ea9-c659-432f-98d3-cb2758ee3707"} -->
+	<!-- wp:button {"backgroundColor":"light","textColor":"dark","customCSSId":"1c039914-4ea3-4875-b368-b1b86885769b"} -->
 	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">HIRE US</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div></div>
 	<!-- /wp:cover -->
 	
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"36705f8d-d33b-4c1d-a857-2c54ef5ae3fd"} -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"36705f8d-d33b-4c1d-a857-2c54ef5ae3fd"} -->
 	<div class="wp-block-group my-5"><!-- wp:columns {"align":"full","className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
 	<div class="wp-block-columns alignfull flex-column flex-md-row"><!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
 	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"fe797173-3ba3-4f69-9313-77ef04bccf26"} -->
@@ -71,7 +71,7 @@ return [
 	<!-- /wp:columns --></div>
 	<!-- /wp:group -->
 	
-	<!-- wp:group {"layout":{"inherit":true},"customCSSId":"c43b5384-22fe-47e5-afea-f0314a3020dc"} -->
+	<!-- wp:group {"layout":{"inherit":false},"customCSSId":"c43b5384-22fe-47e5-afea-f0314a3020dc"} -->
 	<div class="wp-block-group"><!-- wp:media-text {"mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","customCSSId":"36630e35-f690-4e56-9888-ea818333e9bb"} -->
 	<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure><div class="wp-block-media-text__content"><!-- wp:heading -->
 	<h2>Web Design</h2>
@@ -105,7 +105,7 @@ return [
 	<!-- /wp:media-text --></div>
 	<!-- /wp:group -->
 	
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"a8c3da0a-0a16-4e29-9278-9a2693c72cdf"} -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"a8c3da0a-0a16-4e29-9278-9a2693c72cdf"} -->
 	<div class="wp-block-group my-5"><!-- wp:heading {"textAlign":"center","customCSSId":"4bcbe270-a9d3-4670-a094-d2ed35c5a4c1"} -->
 	<h2 class="has-text-align-center">What Client\'s Say</h2>
 	<!-- /wp:heading -->
@@ -147,17 +147,17 @@ return [
 	<!-- /wp:columns --></div>
 	<!-- /wp:group -->
 	
-	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","gradient":"vivid-cyan-blue-to-vivid-purple","align":"full","className":"py-5 text-center","customCSSId":"cccf23e4-fc00-48fa-bf29-d8b08437b8a9"} -->
-	<div class="wp-block-cover alignfull has-background-dim has-background-gradient has-vivid-cyan-blue-to-vivid-purple-gradient-background py-5 text-center" style="min-height:555px"><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","className":"mb-5 display-5"} -->
-	<h2 class="has-text-align-center mb-5 display-5">Let’s work together on your <br>next web project</h2>
+	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","gradient":"primary-to-vivid-purple","isDark":false,"align":"full","className":"py-5 text-center","customCSSId":"ce643b4d-4dc2-4752-9934-ba1bdfc6b5f4"} -->
+	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:555px"><span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","textColor":"white","className":"mb-5 display-5","customCSSId":"e5e24151-c1ac-4413-a84c-e2241084da18"} -->
+	<h2 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="let-s-work-together-on-your-next-web-project">Let’s work together on your <br>next web project</h2>
 	<!-- /wp:heading -->
-	
-	<!-- wp:paragraph {"align":"center","className":"lead mb-5","fontSize":"medium"} -->
-	<p class="has-text-align-center lead mb-5 has-medium-font-size">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus <br>nec ullamcorper mattis, pulvinar dapibus leo.</p>
+
+	<!-- wp:paragraph {"align":"center","textColor":"white","className":"lead mb-5","fontSize":"medium","customCSSId":"b4d53c25-b736-4a37-a0db-58328ce011a1"} -->
+	<p class="has-text-align-center lead mb-5 has-white-color has-text-color has-medium-font-size">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus <br>nec ullamcorper mattis, pulvinar dapibus leo.</p>
 	<!-- /wp:paragraph -->
-	
-	<!-- wp:buttons {"contentJustification":"center","customCSSId":"b61222af-bb70-40dd-9512-243ecce41f4d"} -->
-	<div class="wp-block-buttons is-content-justification-center"><!-- wp:button {"backgroundColor":"light","textColor":"dark"} -->
+
+	<!-- wp:buttons {"contentJustification":"center","customCSSId":"11deff61-8310-4703-8fc2-994c93ccd872"} -->
+	<div class="wp-block-buttons is-content-justification-center"><!-- wp:button {"backgroundColor":"light","textColor":"dark","customCSSId":"8932e358-f24e-4cf3-bf5d-895fc7fc7907"} -->
 	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
 	<!-- /wp:button --></div>
 	<!-- /wp:buttons --></div></div>

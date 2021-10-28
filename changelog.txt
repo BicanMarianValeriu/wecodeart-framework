@@ -1,10 +1,17 @@
+v5.1.6
+- Updated - Theme starter content (due to cover updates in Gutenberg plugin)
+- Fixed - Added back theme support for custom-logo (to be managed in WP Customizer as well + starter content logo fails to be set )
+- Fixed - Social links in header.html (block template part)
+- Removed - Theme page meta set in starter content
+- Removed - Google Fonts license mention in style.css (was removed in FSE theme update 5.0)
+
 v5.1.5
 - Updated - Spacer GB block styles + CSS var to reduce height on bellow "lg" breakpoint
 - Updated - Theme description and missing feature tags + RO translation files
 - Updated - Clear more redundant CSS (comment reply, textarea) in favor of BS Classes
 - Updated - Blocks inline CSS variables naming (old to new --wp-- prefix)
 - Updated - Duotones filter ids prefixed with "wp-duotone" (to fix a HTML Validation warning)
-- Updated - Cover styles updated to be compatable with Gutenberg 11.8
+- Updated - Cover styles updated to be compatible with Gutenberg 11.8
 - Removed - Unnecessary theme supports for FSE themes
 - Added - should_load_separate_core_block_assets disable in upcomming Gutenberg support for WP 5.9, we use or own approach
 

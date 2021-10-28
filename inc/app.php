@@ -121,6 +121,11 @@ return [
     |
     */
     'support' => [
+        'custom-logo' => [
+            'height'               => 50,
+            'width'                => 50,
+            'flex-height'          => true,
+        ],
         'customize-selective-refresh-widgets' => true,
     ],
 ];

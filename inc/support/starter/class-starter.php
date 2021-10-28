@@ -9,7 +9,7 @@
  * @subpackage  Support\Starter
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.7
+ * @version		5.1.6
  */
 
 namespace WeCodeArt\Support;
@@ -50,13 +50,12 @@ class Starter implements Integration {
 	 * Send to Constructor
 	 *
 	 * @since 	5.0.0
-	 * @version	5.0.0
+	 * @version	5.1.6
 	 */
 	public function register_hooks() {
 		// Theme Support
-		\add_action( 'admin_notices',				[ $this, 'manage_notice' ] );
-		\add_action( 'after_setup_theme', 			[ $this, 'after_setup_theme' ] );
-		\add_filter( 'get_theme_starter_content', 	[ $this, 'add_postmeta' ], 10, 2 );
+		\add_action( 'admin_notices',		[ $this, 'manage_notice' ] );
+		\add_action( 'after_setup_theme',	[ $this, 'after_setup_theme' ] );
 	}
 
 	/**
@@ -99,28 +98,6 @@ class Starter implements Integration {
 	public function after_setup_theme() {
 		// Starter Content
 		\add_theme_support( 'starter-content', $this->get() );
-	}
-
-	/**
-	 * Add postmeta to starter content posts
-	 * @param  array 	$content  	the starter content array
-	 * @param  array 	$config  	[description]
-	 * @return array          		[description]
-	 */
-	public function add_postmeta( $content, $config ) { 
-		if ( isset( $content['posts'] ) ) {
-			foreach( $content['posts'] as $key => $post ) {
-				if( $post['post_type'] !== 'page') continue;
-				if( $post['post_name'] === self::HOME_SLUG ) {
-					$content['posts'][$key]['meta_input'] = [
-						'_wca_title_hidden'	=> true,
-					];
-					break;
-				}
-			}
-		}
-
-		return $content;
 	}
 
 	/**
