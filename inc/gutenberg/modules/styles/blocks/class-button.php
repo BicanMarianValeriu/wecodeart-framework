@@ -51,7 +51,7 @@ class Button extends Base {
 				// Text
 				if ( $value = get_prop( $color, 'text', false ) ) {
 					$this->output[] = wp_parse_args( [
-						'property' 	=> '--wca-color',
+						'property' 	=> '--wp--color',
 						'value'	  	=> $value
 					], $output );
 					$this->output[] = wp_parse_args( [

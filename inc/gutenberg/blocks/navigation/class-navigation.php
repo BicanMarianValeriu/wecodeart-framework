@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.4
+ * @version		5.1.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -488,7 +488,7 @@ class Navigation extends Dynamic {
 			width: initial;
 		}
 		.wp-block-navigation.navbar-dark .btn-close {
-			background-color: var(--wca-white);
+			background-color: var(--wp--white);
 		}
 		.wp-block-navigation .offcanvas-start .btn-close {
 			margin-left: auto;

@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles\Property
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.1.5
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -67,8 +67,8 @@ abstract class Property {
 	 */
 	public static function get_property_value( $property, $value ) {
 		$properties = apply_filters( 'wecodeart/filter/styles/process/properties', [
-			'--wca-font-sans-serif'	=> Property\Font::class,
-			'--wca-font-secondary'	=> Property\Font::class,
+			'--wp--font-sans-serif'	=> Property\Font::class,
+			'--wp--font-secondary'	=> Property\Font::class,
 			'font-family' 			=> Property\Font::class,
 			'background' 			=> Property\Background::class,
 			'background-image'		=> Property\Background::class,

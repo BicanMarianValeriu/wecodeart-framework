@@ -1,11 +1,13 @@
 /*--------------------------------------------------------------
 # Hide Title
 --------------------------------------------------------------*/
-.editor-post-title {
-	--wp--style--block-gap: 1.5rem;
-
-	&--hidden  {
+.edit-post-visual-editor__post-title-wrapper {
+	&.is-disabled  {
 		opacity: 0.5;
+	}
+
+	.editor-post-title {
+		--wp--style--block-gap: 1.5rem;
 	}
 }
 

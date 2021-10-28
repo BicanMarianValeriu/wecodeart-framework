@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.0.6
+ * @version		5.1.5
  */
 
 namespace WeCodeArt;
@@ -54,7 +54,7 @@ class Support implements ArrayAccess {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 	1.0
-	 * @version	5.0.6
+	 * @version	5.1.5
 	 */
 	public function after_setup_theme() {
 		// Theme Support
@@ -64,8 +64,8 @@ class Support implements ArrayAccess {
 		}
 
 		// Theme check required.
-		add_theme_support( 'title-tag' );
-		add_theme_support( 'automatic-feed-links' );
+		// add_theme_support( 'title-tag' );            // Disabled, is FSE theme, kept for theme check warnings.
+		// add_theme_support( 'automatic-feed-links' ); // Enabled by default in FSE theme, same as above.
 
 		// This theme has one menu location.
 		register_nav_menus( [

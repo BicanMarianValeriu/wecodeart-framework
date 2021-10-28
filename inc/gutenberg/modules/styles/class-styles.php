@@ -208,7 +208,7 @@ class Styles implements Integration {
 		<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 0 0" focusable="false" role="none" class="visually-hidden">
 			<defs>
 			<?php foreach( $this->filters as $block_id => $filter ) : ?>
-				<filter id="<?php echo esc_attr( $block_id ); ?>">
+				<filter id="wp-duotone-<?php echo esc_attr( $block_id ); ?>">
 					<feColorMatrix
 						type="matrix"
 						values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 0 0 0 1 0"

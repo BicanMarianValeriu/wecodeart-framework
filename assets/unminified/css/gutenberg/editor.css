@@ -3,9 +3,9 @@
   --wp--gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(var(--wp--gutter-y) * -1);
-  margin-right: calc(var(--wp--gutter-x) * -0.5);
-  margin-left: calc(var(--wp--gutter-x) * -0.5);
+  margin-top: calc(-1 * var(--wp--gutter-y));
+  margin-right: calc(-0.5 * var(--wp--gutter-x));
+  margin-left: calc(-0.5 * var(--wp--gutter-x));
 }
 .row > * {
   flex-shrink: 0;
@@ -6396,11 +6396,11 @@
 /*--------------------------------------------------------------
 # Hide Title
 --------------------------------------------------------------*/
-.editor-post-title {
-  --wp--style--block-gap: 1.5rem;
-}
-.editor-post-title--hidden {
+.edit-post-visual-editor__post-title-wrapper.is-disabled {
   opacity: 0.5;
+}
+.edit-post-visual-editor__post-title-wrapper .editor-post-title {
+  --wp--style--block-gap: 1.5rem;
 }
 
 .wecodeart-gb-plugin--post-title .components-base-control__field {

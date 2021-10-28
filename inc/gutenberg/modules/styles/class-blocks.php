@@ -208,7 +208,7 @@ class Blocks extends Processor {
 								return implode( ' ', [ $this->element, trim( $selector ) ] );
 							}, explode( ',', $duotone_support ) ) ),
 							'property' 	=> 'filter',
-							'value'	  	=> sprintf( 'url(#%s)', end( $selector_array ) )
+							'value'	  	=> sprintf( 'url(#wp-duotone-%s)', end( $selector_array ) )
 						], $output );
 					}
 				}

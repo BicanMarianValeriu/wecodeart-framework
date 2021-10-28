@@ -48,18 +48,7 @@
 			"customWidth": true
 		},
 		"color": {
-			"duotone": [
-				{
-					"name":  "Dark grayscale" ,
-					"colors": [ "#000000", "#7f7f7f" ],
-					"slug": "dark-grayscale"
-				},
-				{
-					"name":  "Grayscale" ,
-					"colors": [ "#000000", "#ffffff" ],
-					"slug": "grayscale"
-				}
-			],
+			"duotone": [],
 			"palette": [
 				{
 					"slug": "primary",
@@ -183,12 +172,12 @@
 			"customTextDecorations": true,
 			"fontFamilies": [
 				{
-					"fontFamily": "var(--wca-font-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif)",
+					"fontFamily": "var(--wp--font-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif)",
 					"slug": "base",
 					"name": "Base"
 				},
 				{
-					"fontFamily": "var(--wca-font-secondary, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif)",
+					"fontFamily": "var(--wp--font-secondary, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif)",
 					"slug": "headings",
 					"name": "Headings"
 				}

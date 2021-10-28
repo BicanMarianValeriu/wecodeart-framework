@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Comment Body Template
  * @since 	    4.0.2
- * @version	    5.0.0
+ * @version	    5.1.5
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -96,7 +96,7 @@ SVG::add_icon( 'pencil', [
             
                 comment_reply_link( array_merge( $args, [
                     'depth'  => $depth,
-                    'before' => '<span class="comment-reply float-end me-3">',
+                    'before' => '<span class="comment-reply float-end translate-middle">',
                     'after'  => '</span>',
                 ] ) );
 

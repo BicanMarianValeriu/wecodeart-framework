@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -144,7 +144,7 @@ class Table extends Dynamic {
 			word-break: break-word;
 		}
 		.wp-block-table .table-striped tbody tr {
-			--wca-table-striped-color: inherit;
+			--wp--table-striped-color: inherit;
 		}
 		";
 	}

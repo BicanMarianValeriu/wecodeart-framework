@@ -66,14 +66,14 @@ class Buttons extends Dynamic {
 	public function styles() {
 		return "
 		.wp-block-buttons {
+			--wp--button-gutter: 10px;
 			display: flex;
 			flex-flow: row wrap;
-			--wca-button-gutter: 10px;
-			margin: 0 calc( var(--wca-button-gutter) * -1 );
+			margin: 0 calc( var(--wp--button-gutter) * -1 );
 		}
 		.wp-block-buttons.is-style-group {
+			--wp--button-gutter: 0;
 			vertical-align: middle;
-			--wca-button-gutter: 0;
 		}
 		.wp-block-buttons.is-style-group:not(.is-vertical) .wp-block-button:not(:first-child) .wp-block-button__link {
 			border-left: 0;
@@ -131,7 +131,7 @@ class Buttons extends Dynamic {
 		.wp-block-buttons .wp-block-button {
 			position: relative;
 			display: inline-block;
-			padding: 0 var(--wca-button-gutter);
+			padding: 0 var(--wp--button-gutter);
 			margin-bottom: 1rem;
 		}
 		.wp-block-buttons .wp-block-button:hover,

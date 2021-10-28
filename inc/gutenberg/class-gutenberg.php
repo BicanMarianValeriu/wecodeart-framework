@@ -180,11 +180,6 @@ class Gutenberg {
 		wp_enqueue_script( $this->make_handle( 'inline' ) );
 		wp_add_inline_script( $this->make_handle( 'inline' ), 'window.wecodeartGutenberg = ' . wp_json_encode( $data ) . ';', 'before' );
 
-		$code_mirror = ''; // Adds a border to CodeMirror to match WP.
-		$code_mirror .= '.CodeMirror{height:auto;margin-bottom:1rem;}';
-		$code_mirror .= '.CodeMirror.CodeMirror-wrap{border:1px solid #949494;}';
-		wp_add_inline_style( 'wp-editor', $code_mirror );
-
 		// Gutenberg editor assets.
 		wp_enqueue_script( 	$this->make_handle(),	$this->get_asset( 'js', 'gutenberg/editor' ), 	[
 			'wp-blocks',
@@ -210,6 +205,11 @@ class Gutenberg {
 			[ 'wp-codemirror' ],
 			wecodeart( 'version' )
 		);
+		
+		$code_mirror = ''; // Adds a border to CodeMirror to match WP.
+		$code_mirror .= '.CodeMirror{height:auto;margin-bottom:1rem;}';
+		$code_mirror .= '.CodeMirror.CodeMirror-wrap{border:1px solid #949494;}';
+		wp_add_inline_style( 'wp-editor', $code_mirror );
 	}
 
 	/**
@@ -231,5 +231,10 @@ class Gutenberg {
 		
 		// Editor Style
 		add_editor_style( $this->get_asset( 'css', 'gutenberg/editor' ) );
+
+		// Frontend Style
+		if( get_prop( $this->config, 'styles' ) ) {
+			add_filter( 'should_load_separate_core_block_assets', '__return_false' );
+		}
 	}
 }

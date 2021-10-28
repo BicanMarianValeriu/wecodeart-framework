@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -57,7 +57,7 @@ class Code extends Dynamic {
 		.wp-block-code {
 			padding: 1rem;
 			border: 1px solid;
-			color: var(--wp--preset--color--foreground, #212529);
+			color: var(--wp--preset--color--dark, #212529);
 			background-color: var(--wp--preset--color--white, white);
 			border-color: var(--wp--preset--color--cyan-bluish-gray, #dee2e6);
 			border-radius: var(--wca-border-radius, 0.25rem);

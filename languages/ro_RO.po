@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-10-17 03:40+0000\n"
-"Last-Translator: Bican\n"
-"Language-Team: Romanian\n"
+"PO-Revision-Date: 2021-10-27 22:24+0000\n"
+"Last-Translator: \n"
+"Language-Team: Română\n"
 "Language: ro_RO\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 :(((n%100>19)||(( n%100==0)&&(n!"
 "=0)))? 2 : 1));\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.3; wp-5.8\n"
+"X-Loco-Version: 2.5.5; wp-5.8.1\n"
 "X-Domain: wecodeart"
 
 #: block-views/entry/meta/comments.tpl.php:53
@@ -70,15 +70,24 @@ msgstr "[redării blocului a fost oprită]"
 
 #. Description of the theme
 msgid ""
-"A simple WordPress Theme Framework focused on SEO, Speed and code simplicity."
-" Is realy fast, fully customizable &amp; beautiful theme suitable for blog, "
-"personal portfolio, business website and WooCommerce storefront. Now is "
-"Gutenberg ready."
+"A simple WordPress Theme Framework focused on SEO and speed (perfect 100% "
+"PageSpeed scores). Is realy fast (300ms), fully customizable &amp; beautiful "
+"theme suitable for blog, personal portfolio, business website and "
+"WooCommerce storefront. Take full control over your site with the new Full "
+"Site Editor feature. The theme also works perfectly with all page builder "
+"plugins (Elementor, Brizy, Beaver Builder, Visual Composer, SiteOrigin, Divi)"
+" and it's core blocks are also optimized using Bootstrap's markup - the "
+"perfect tool for any developer."
 msgstr ""
-"Un cadru tematic WordPress simplu axat pe SEO, viteză și simplitatea codului."
-" Este foarte rapid, complet personalizabilă și temă frumoasă, potrivită "
-"pentru blog, portofoliu personal, site web pentru afaceri și vitrina "
-"magazinului WooCommerce. Acum este pregătită Gutenberg."
+"O temă WordPress simplă, axată pe SEO și viteză (viteză pagină cu scoruri "
+"perfecte de 100%). Este foarte rapidă (300 ms), complet personalizabilă și "
+"frumoasă, potrivită pentru blog, portofoliu personal, site web de afaceri și "
+"magazin WooCommerce. Preluați controlul deplin asupra site-ului dvs. cu noua "
+"funcție Full Site Editor. De asemenea, tema funcționează perfect cu toate "
+"pluginurile de generare a paginilor (Elementor, Brizy, Beaver Builder, "
+"Visual Composer, SiteOrigin, Divi) și blocurile sale de bază sunt, de "
+"asemenea, optimizate folosind marcajul Bootstrap - instrumentul perfect "
+"pentru orice dezvoltator."
 
 #: block-views/entry/meta/author-box.tpl.php:40
 #, php-format
@@ -189,7 +198,7 @@ msgstr "Customizer"
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
 
-#: inc/admin/class-admin.php:261
+#: inc/admin/class-admin.php:263
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -282,7 +291,7 @@ msgstr "Nu s-a găsit nimic care să corespundă criteriilor dvs."
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
 
-#: block-views/query/pagination-numbers.tpl.php:17
+#: inc/gutenberg/blocks/query/class-numbers.php:130
 msgid "Pagination"
 msgstr "Paginare"
 
@@ -384,11 +393,11 @@ msgstr "Vorbesc din mintea ta"
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
 
-#: inc/init.php:371
+#: inc/init.php:369
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
-#: inc/admin/class-admin.php:214 inc/admin/class-admin.php:215
+#: inc/admin/class-admin.php:216 inc/admin/class-admin.php:217
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -439,7 +448,7 @@ msgstr "Comutare navigare"
 msgid "Unlock"
 msgstr "Deblochează"
 
-#: inc/class-activation.php:118
+#: inc/admin/class-activation.php:118
 msgid "upgrade PHP"
 msgstr "actualizați PHP"
 
@@ -452,7 +461,7 @@ msgstr "Site"
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/class-activation.php:125
+#: inc/admin/class-activation.php:125
 #, php-format
 msgid ""
 "WeCodeArt Framework requires Gutenberg version %1$s or higher. Please "
@@ -461,7 +470,7 @@ msgstr ""
 "WeCodeArt Framework necesită versiunea Gutenberg %1$s sau mai mare. Vă rugăm "
 "să instalați Gutenberg pentru a utiliza WeCodeArt Framework."
 
-#: inc/class-activation.php:115
+#: inc/admin/class-activation.php:115
 #, php-format
 msgid ""
 "WeCodeArt Framework requires PHP version %1$s or higher. You are using "
@@ -470,7 +479,7 @@ msgstr ""
 "WeCodeArt Framework necesită versiunea PHP %1$s sau mai mare. Folosiți "
 "versiunea %2$s. Vă rugăm să %3$s pentru a utiliza WeCodeArt Framework."
 
-#: inc/class-activation.php:106
+#: inc/admin/class-activation.php:106
 #, php-format
 msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
@@ -543,7 +552,7 @@ msgstr "Comentariul tău asteaptă moderarea."
 msgid "Your email address will not be published."
 msgstr "Emailul tău nu va fi publicat."
 
-#: inc/class-activation.php:85
+#: inc/admin/class-activation.php:85
 msgid ""
 "Your WordPress installation does not meet the minimum requirements to run "
 "WeCodeArt Framework. Please upgrade and try again."

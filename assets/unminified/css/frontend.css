@@ -5,7 +5,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 5.1.4
+Version: 5.1.5
 Requires PHP: 7.0
 Requires at least: 5.8
 Tested up to: 5.8
@@ -5222,166 +5222,115 @@ figcaption p.wp-caption-text,
   padding: 0 4px 5px;
 }
 
+.bypostauthor,
+.gallery-caption {
+  color: inherit;
+}
+
 textarea {
   min-height: 200px;
-}
-
-/* Columns / Row */
-.wp-block-columns {
-  --wp--gutter-x: 1.5rem;
-  --wp--gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--wp--gutter-y) * -1);
-  margin-right: calc(var(--wp--gutter-x) * -0.5);
-  margin-left: calc(var(--wp--gutter-x) * -0.5);
-}
-.wp-block-columns.are-vertically-aligned-top {
-  align-items: flex-start;
-}
-.wp-block-columns.are-vertically-aligned-center {
-  align-items: center;
-}
-.wp-block-columns.are-vertically-aligned-bottom {
-  align-items: flex-end;
-}
-
-/* Column / Col */
-.wp-block-column {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--wp--gutter-x) * .5);
-  padding-left: calc(var(--wp--gutter-x) * .5);
-  margin-top: var(--wp--gutter-y);
-  flex: 1 0 0%;
-}
-.wp-block-column.is-vertically-aligned-top {
-  align-self: flex-start;
-}
-.wp-block-column.is-vertically-aligned-center {
-  align-self: center;
-}
-.wp-block-column.is-vertically-aligned-bottom {
-  align-self: flex-end;
 }
 
 /* Root */
 :root {
   /*lint-enable function-comma-space-after */
 }
-:root div[class*=has-background].bg-transparent {
+:root .bg-transparent {
   background-color: transparent !important;
 }
-:root div[class*=has-background].bg-repeat {
+:root .bg-repeat {
   background-repeat: repeat;
 }
-:root div[class*=has-background].bg-no-repeat {
+:root .bg-no-repeat {
   background-repeat: no-repeat;
 }
-:root div[class*=has-background].bg-repeat-x {
+:root .bg-repeat-x {
   background-repeat: repeat-x;
 }
-:root div[class*=has-background].bg-repeat-y {
+:root .bg-repeat-y {
   background-repeat: repeat-y;
 }
-:root div[class*=has-background].bg-cover {
+:root .bg-cover {
   background-size: cover;
 }
-:root div[class*=has-background].bg-auto {
+:root .bg-auto {
   background-size: auto;
 }
-:root div[class*=has-background].bg-contain {
+:root .bg-contain {
   background-size: contain;
 }
-:root div[class*=has-background].bg-top-left {
+:root .bg-top-left {
   background-position: top left;
 }
-:root div[class*=has-background].bg-top-center {
+:root .bg-top-center {
   background-position: top center;
 }
-:root div[class*=has-background].bg-top-right {
+:root .bg-top-right {
   background-position: top right;
 }
-:root div[class*=has-background].bg-center-left {
+:root .bg-center-left {
   background-position: center left;
 }
-:root div[class*=has-background].bg-center-center {
+:root .bg-center-center {
   background-position: center center;
 }
-:root div[class*=has-background].bg-center-right {
+:root .bg-center-right {
   background-position: center right;
 }
-:root div[class*=has-background].bg-bottom-left {
+:root .bg-bottom-left {
   background-position: bottom left;
 }
-:root div[class*=has-background].bg-bottom-center {
+:root .bg-bottom-center {
   background-position: bottom center;
 }
-:root div[class*=has-background].bg-bottom-right {
+:root .bg-bottom-right {
   background-position: bottom right;
 }
-:root div[class*=has-background].has-parallax {
+:root .bg-parallax {
   background-attachment: fixed;
 }
 @supports (-webkit-overflow-scrolling: touch) {
-  :root div[class*=has-background].has-parallax {
+  :root .bg-parallax {
     background-attachment: scroll;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  :root div[class*=has-background].has-parallax {
+  :root .bg-parallax {
     background-attachment: scroll;
   }
 }
-:root div[class*=has-background].is-repeated {
-  background-repeat: repeat;
-  background-size: auto;
-}
-:root div[class*=has-background].has-background-dim {
-  position: relative;
-}
-:root div[class*=has-background].has-background-dim:not(.has-background-gradient)::before {
-  content: "";
-  background-color: inherit;
-}
-:root div[class*=has-background].has-background-dim:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim > span[aria-hidden=true] {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
+:root .has-background-dim {
   opacity: 0.5;
+  z-index: 1;
 }
-:root div[class*=has-background].has-background-dim-10:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-10 > span[aria-hidden=true] {
+:root .has-background-dim-10 {
   opacity: 0.1;
 }
-:root div[class*=has-background].has-background-dim-20:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-20 > span[aria-hidden=true] {
+:root .has-background-dim-20 {
   opacity: 0.2;
 }
-:root div[class*=has-background].has-background-dim-30:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-30 > span[aria-hidden=true] {
+:root .has-background-dim-30 {
   opacity: 0.3;
 }
-:root div[class*=has-background].has-background-dim-40:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-40 > span[aria-hidden=true] {
+:root .has-background-dim-40 {
   opacity: 0.4;
 }
-:root div[class*=has-background].has-background-dim-50:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-50 > span[aria-hidden=true] {
+:root .has-background-dim-50 {
   opacity: 0.5;
 }
-:root div[class*=has-background].has-background-dim-60:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-60 > span[aria-hidden=true] {
+:root .has-background-dim-60 {
   opacity: 0.6;
 }
-:root div[class*=has-background].has-background-dim-70:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-70 > span[aria-hidden=true] {
+:root .has-background-dim-70 {
   opacity: 0.7;
 }
-:root div[class*=has-background].has-background-dim-80:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-80 > span[aria-hidden=true] {
+:root .has-background-dim-80 {
   opacity: 0.8;
 }
-:root div[class*=has-background].has-background-dim-90:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-90 > span[aria-hidden=true] {
+:root .has-background-dim-90 {
   opacity: 0.9;
 }
-:root div[class*=has-background].has-background-dim-100:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-100 > span[aria-hidden=true] {
+:root .has-background-dim-100 {
   opacity: 1;
 }
 :root .has-inline-background {
@@ -5448,20 +5397,57 @@ textarea {
 
 .site-footer,
 .wp-site-credits {
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
 }
 
 .site-header {
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
   z-index: 15;
 }
 .has-scrolled .site-header {
-  border-bottom: 0;
-  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 /* Blocks */
+.wp-block-columns {
+  --wp--gutter-x: 1.5rem;
+  --wp--gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--wp--gutter-y));
+  margin-right: calc(-0.5 * var(--wp--gutter-x));
+  margin-left: calc(-0.5 * var(--wp--gutter-x));
+}
+.wp-block-columns.are-vertically-aligned-top {
+  align-items: flex-start;
+}
+.wp-block-columns.are-vertically-aligned-center {
+  align-items: center;
+}
+.wp-block-columns.are-vertically-aligned-bottom {
+  align-items: flex-end;
+}
+
+.wp-block-column {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--wp--gutter-x) * .5);
+  padding-left: calc(var(--wp--gutter-x) * .5);
+  margin-top: var(--wp--gutter-y);
+  flex: 1 0 0%;
+}
+.wp-block-column.is-vertically-aligned-top {
+  align-self: flex-start;
+}
+.wp-block-column.is-vertically-aligned-center {
+  align-self: center;
+}
+.wp-block-column.is-vertically-aligned-bottom {
+  align-self: flex-end;
+}
+
 .wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) {
   margin-bottom: 0;
 }
@@ -5478,13 +5464,6 @@ textarea {
   content: "";
   display: table;
   clear: both;
-}
-
-div[class*=wp-block-post-comments] textarea {
-  min-height: 150px;
-}
-div[class*=wp-block-post-comments] .comment-reply {
-  margin-top: -1rem;
 }
 
 .lead {
@@ -5653,8 +5632,8 @@ div[class*=wp-block-post-comments] .comment-reply {
 .table > thead, table > thead {
   vertical-align: bottom;
 }
-.table > :not(:last-child) > :last-child > *, table > :not(:last-child) > :last-child > * {
-  border-bottom-color: currentColor;
+.table > :not(:first-child), table > :not(:first-child) {
+  border-top: 2px solid currentColor;
 }
 
 .caption-top {
@@ -5675,8 +5654,11 @@ div[class*=wp-block-post-comments] .comment-reply {
 .table-borderless > :not(caption) > * > * {
   border-bottom-width: 0;
 }
+.table-borderless > :not(:first-child) {
+  border-top-width: 0;
+}
 
-.table-striped > tbody > tr:nth-of-type(odd) {
+.table-striped > tbody > tr:nth-of-type(odd) > * {
   --wp--table-accent-bg: var(--wp--table-striped-bg);
   color: var(--wp--table-striped-color);
 }
@@ -5686,7 +5668,7 @@ div[class*=wp-block-post-comments] .comment-reply {
   color: var(--wp--table-active-color);
 }
 
-.table-hover > tbody > tr:hover {
+.table-hover > tbody > tr:hover > * {
   --wp--table-accent-bg: var(--wp--table-hover-bg);
   color: var(--wp--table-hover-color);
 }
@@ -6109,6 +6091,7 @@ textarea.form-control-lg {
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
   font-size: 0.875rem;
+  border-radius: 0.2rem;
 }
 
 .form-select-lg {
@@ -6116,6 +6099,7 @@ textarea.form-control-lg {
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   font-size: 1.25rem;
+  border-radius: 0.3rem;
 }
 
 .form-check {
@@ -7016,9 +7000,9 @@ textarea.form-control-lg {
   --wp--gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(var(--wp--gutter-y) * -1);
-  margin-right: calc(var(--wp--gutter-x) * -0.5);
-  margin-left: calc(var(--wp--gutter-x) * -0.5);
+  margin-top: calc(-1 * var(--wp--gutter-y));
+  margin-right: calc(-0.5 * var(--wp--gutter-x));
+  margin-left: calc(-0.5 * var(--wp--gutter-x));
 }
 .row > * {
   flex-shrink: 0;

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -96,6 +96,10 @@ class Cover extends Dynamic {
 		.single-post .wp-block-cover {
 			margin-bottom: 1rem;
 		}
+		.wp-block-cover.is-repeated {
+			background-repeat: repeat;
+			background-size: auto;
+		}
 		.wp-block-cover.alignleft, wp-block-cover.alignright {
 			margin-top: 0;
 			margin-left: 0;
@@ -114,19 +118,18 @@ class Cover extends Dynamic {
 		.wp-block-cover[class*="-right"] .wp-block-cover__inner-container {
 			align-items: flex-end;
 		}
-		.wp-block-cover:after {
-			content: "";
-			display: block;
-			font-size: 0;
-			min-height: inherit;
-		}
 		.wp-block-cover__inner-container {
 			z-index: 2;
+			color: var(--wp--white);
+		}
+		.wp-block-cover.is-light .wp-block-cover__inner-container {
+			color: var(--wp--dark);
 		}
 		.has-custom-content-position .wp-block-cover__inner-container {
 			display: flex;
 			flex-direction: column;
 		}
+		.wp-block-cover__gradient-background,
 		.wp-block-cover__image-background,
 		.wp-block-cover__video-background {
 			position: absolute;
@@ -144,14 +147,10 @@ class Cover extends Dynamic {
 			outline: none;
 			border: none;
 			box-shadow: none;
+			background-color: inherit;
 		}
 		.wp-block-cover :is(p, ul, ol, hr, h1, h2, h3, h4, h5, h6):not(.has-text-color) {
-			color: white;
-		}
-		@supports (position: sticky) {
-			.wp-block-cover:after {
-				content: none;
-			}
+			color: inherit;
 		}
 		';
 	}

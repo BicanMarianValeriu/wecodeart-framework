@@ -2,9 +2,9 @@
 	"version": "5.0.0",
 	"items": [
 		{
-			"type": "warning",
-			"title": "Important Notice!",
-			"content": "Please update to a version above 5.1.4 if not already. There are major updates to Navigation and Social Links blocks (micro optimization)."
+			"type": "success",
+			"title": "11.8.0 compatability update!",
+			"content": "Gutenberg 11.8 introduced some major changes so WeCodeArt 5.1.5 will align with those updates - please update to latest version."
 		},
 		{
 			"type": "info",

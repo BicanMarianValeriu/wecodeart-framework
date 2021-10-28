@@ -10666,14 +10666,14 @@ const Controls = () => {
   } = useDispatch('core/editor', [value]);
   const status = value === true ? __('hidden', 'wecodeart') : __('shown', 'wecodeart');
   useEffect(() => {
-    const titleBlock = document.querySelector('.editor-post-title');
+    const titleBlock = document.querySelector('.edit-post-visual-editor__post-title-wrapper');
 
     if (titleBlock && value) {
-      titleBlock.classList.add('editor-post-title--hidden');
+      titleBlock.classList.add('is-disabled');
     }
 
     return () => {
-      titleBlock.classList.remove('editor-post-title--hidden');
+      titleBlock.classList.remove('is-disabled');
     };
   }, [value]);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PluginPostStatusInfo, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(CheckboxControl, {

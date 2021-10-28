@@ -2,84 +2,83 @@
 // to assure colors take effect over another base class color, mainly to let
 // the colors override the added specificity by link states such as :hover.
 :root {
-	div[class*="has-background"] {
-        &.bg {
-            // Background transparency
-            &-transparent {
-                background-color: transparent !important;
-            }
-        
-            // Background repeat
-            &-repeat {
-                background-repeat: repeat;
-            }
-        
-            &-no-repeat {
-                background-repeat: no-repeat;
-            }
-        
-            &-repeat-x {
-                background-repeat: repeat-x;
-            }
-        
-            &-repeat-y {
-                background-repeat: repeat-y;
-            }
-        
-            // Background size
-            &-cover {
-                background-size: cover;
-            }
-        
-            &-auto {
-                background-size: auto;
-            }
-        
-            &-contain {
-                background-size: contain;
-            }
-        
-            // Background position
-            &-top-left {
-                background-position: top left;
-            }
-        
-            &-top-center {
-                background-position: top center;
-            }
-        
-            &-top-right {
-                background-position: top right;
-            }
-        
-            &-center-left {
-                background-position: center left;
-            }
-        
-            &-center-center {
-                background-position: center center;
-            }
-        
-            &-center-right {
-                background-position: center right;
-            }
-        
-            &-bottom-left {
-                background-position: bottom left;
-            }
-        
-            &-bottom-center {
-                background-position: bottom center;
-            }
-        
-            &-bottom-right {
-                background-position: bottom right;
-            }
+	.bg {
+        // Background transparency
+        &-transparent {
+            background-color: transparent !important;
         }
-        
-        &.has-parallax {
+    
+        // Background repeat
+        &-repeat {
+            background-repeat: repeat;
+        }
+    
+        &-no-repeat {
+            background-repeat: no-repeat;
+        }
+    
+        &-repeat-x {
+            background-repeat: repeat-x;
+        }
+    
+        &-repeat-y {
+            background-repeat: repeat-y;
+        }
+    
+        // Background size
+        &-cover {
+            background-size: cover;
+        }
+    
+        &-auto {
+            background-size: auto;
+        }
+    
+        &-contain {
+            background-size: contain;
+        }
+    
+        // Background position
+        &-top-left {
+            background-position: top left;
+        }
+    
+        &-top-center {
+            background-position: top center;
+        }
+    
+        &-top-right {
+            background-position: top right;
+        }
+    
+        &-center-left {
+            background-position: center left;
+        }
+    
+        &-center-center {
+            background-position: center center;
+        }
+    
+        &-center-right {
+            background-position: center right;
+        }
+    
+        &-bottom-left {
+            background-position: bottom left;
+        }
+    
+        &-bottom-center {
+            background-position: bottom center;
+        }
+    
+        &-bottom-right {
+            background-position: bottom right;
+        }
+
+        // Parallax
+        &-parallax {
             background-attachment: fixed;
-        
+
             // Mobile Safari does not support fixed background attachment properly.
             // See also https://stackoverflow.com/questions/24154666/background-size-cover-not-working-on-ios
             // Chrome on Android does not appear to support the attachment at all: https://issuetracker.google.com/issues/36908439
@@ -90,44 +89,20 @@
             // Remove the appearance of scrolling based on OS-level animation preferences.
             @media (prefers-reduced-motion: reduce) {
                 background-attachment: scroll;
-            }
+            } 
         }
-        
-        &.is-repeated {
-            background-repeat: repeat;
-            background-size: auto;
-        }
-        
-        &.has-background-dim {
-            position: relative;
+    }
     
-            &:not(.has-background-gradient)::before {
-                content: "";
-                background-color: inherit;
-            }
+    .has-background-dim {
+        opacity: 0.5;
+        z-index: 1;
         
-            &:not(.has-background-gradient)::before,
-            & > span[aria-hidden="true"] {
-                position: absolute;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                right: 0;
-                z-index: 1;
-                opacity: 0.5;
-            }
-    
-            // Gradient levels
-            @for $i from 1 through 10 {
-                &-#{ $i * 10 } {
-                    &:not(.has-background-gradient)::before,
-                    & > span[aria-hidden="true"] {
-                        opacity: $i * 0.1;
-                    }
-                }
+        @for $i from 1 through 10 {
+            &-#{ $i * 10 } { 
+                opacity: $i * 0.1;
             }
         }
-	}
+    }
 
 	.has-inline-background {
 		@include border-radius();

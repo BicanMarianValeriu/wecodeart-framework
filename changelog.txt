@@ -1,3 +1,12 @@
+v5.1.5
+- Updated - Spacer GB block styles + CSS var to reduce height on bellow "lg" breakpoint
+- Updated - Theme description and missing feature tags + RO translation files
+- Updated - Clear more redundant CSS (comment reply, textarea) in favor of BS Classes
+- Updated - Blocks inline CSS variables naming (old to new --wp-- prefix)
+- Updated - Duotones filter ids prefixed with "wp-duotone" (to fix a HTML Validation warning)
+- Removed - Unnecessary theme supports for FSE themes
+- Added - should_load_separate_core_block_assets disable in upcomming Gutenberg support for WP 5.9, we use or own approach
+
 v5.1.4
 - Updated - Properly add Gutenberg Editor styles
 - Updated - Post featured image styles moved to PHP (micro optimization) from global CSS
