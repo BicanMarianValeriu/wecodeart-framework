@@ -102,6 +102,7 @@ class Home extends Dynamic {
 					'class' 		=> join( ' ', $classes ),
 					'href'			=> esc_url( trailingslashit( home_url() ) ),
 					'aria-current'	=> $is_active ? 'page' : null,
+					'rel'			=> 'home',
 				],
 			] ], function( $attributes, $icons ) {
 				// Icon

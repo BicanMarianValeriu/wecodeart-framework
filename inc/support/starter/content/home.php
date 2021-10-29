@@ -4,6 +4,7 @@
  */
 return [
 	'post_type'    => 'page',
+	'template'     => 'page-full',
 	'post_title'   => _x( 'Home', 'Theme starter content', 'wecodeart' ),
 	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","gradient":"primary-to-vivid-purple","contentPosition":"center center","isDark":false,"align":"full","className":"py-5 text-center","customCSSId":"5c3f5504-7409-4196-80dc-3625af0dc243"} -->
 	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:100vh"><span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","level":1,"textColor":"white","className":"mb-5 display-5","customCSSId":"6f32fffb-10df-4767-8ad8-d8ab6aba53e8"} -->
@@ -25,7 +26,7 @@ return [
 	<!-- /wp:buttons --></div></div>
 	<!-- /wp:cover -->
 	
-	<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"36705f8d-d33b-4c1d-a857-2c54ef5ae3fd"} -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"36705f8d-d33b-4c1d-a857-2c54ef5ae3fd"} -->
 	<div class="wp-block-group my-5"><!-- wp:columns {"align":"full","className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
 	<div class="wp-block-columns alignfull flex-column flex-md-row"><!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
 	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"fe797173-3ba3-4f69-9313-77ef04bccf26"} -->
@@ -71,7 +72,7 @@ return [
 	<!-- /wp:columns --></div>
 	<!-- /wp:group -->
 	
-	<!-- wp:group {"layout":{"inherit":false},"customCSSId":"c43b5384-22fe-47e5-afea-f0314a3020dc"} -->
+	<!-- wp:group {"layout":{"inherit":true},"customCSSId":"c43b5384-22fe-47e5-afea-f0314a3020dc"} -->
 	<div class="wp-block-group"><!-- wp:media-text {"mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","customCSSId":"36630e35-f690-4e56-9888-ea818333e9bb"} -->
 	<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure><div class="wp-block-media-text__content"><!-- wp:heading -->
 	<h2>Web Design</h2>
@@ -105,7 +106,7 @@ return [
 	<!-- /wp:media-text --></div>
 	<!-- /wp:group -->
 	
-	<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"a8c3da0a-0a16-4e29-9278-9a2693c72cdf"} -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"a8c3da0a-0a16-4e29-9278-9a2693c72cdf"} -->
 	<div class="wp-block-group my-5"><!-- wp:heading {"textAlign":"center","customCSSId":"4bcbe270-a9d3-4670-a094-d2ed35c5a4c1"} -->
 	<h2 class="has-text-align-center">What Client\'s Say</h2>
 	<!-- /wp:heading -->

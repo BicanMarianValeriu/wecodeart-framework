@@ -98,6 +98,30 @@ class Starter implements Integration {
 	public function after_setup_theme() {
 		// Starter Content
 		\add_theme_support( 'starter-content', $this->get() );
+		\add_filter( 'get_theme_starter_content', [ $this, 'add_postmeta' ], 10, 2 );
+	}
+
+	/**
+	 * Add postmeta to starter content posts
+	 *
+	 * @param  array 	$content  	the starter content array
+	 * @param  array 	$config  	[description]
+	 * @return array          		[description]
+	 */
+	public function add_postmeta( $content, $config ) { 
+		if ( isset( $content['posts'] ) ) {
+			foreach( $content['posts'] as $key => $post ) {
+				if( $post['post_type'] !== 'page' ) continue;
+				if( $post['post_name'] === self::HOME_SLUG ) {
+					$content['posts'][$key]['meta_input'] = [
+						'_wca_title_hidden'	=> true,
+					];
+					break;
+				}
+			}
+		}
+
+		return $content;
 	}
 
 	/**
@@ -136,6 +160,9 @@ class Starter implements Integration {
 			'posts'       => [
 				self::HOME_SLUG  => wp_parse_args( [
 					'post_name'  => self::HOME_SLUG,
+					'meta_input' => [
+						'_wca_title_hidden'	=> true,
+					]
 				], require __DIR__ . '/content/home.php' ),
 				self::ABOUT_SLUG => wp_parse_args( [
 					'post_name'  => self::ABOUT_SLUG,

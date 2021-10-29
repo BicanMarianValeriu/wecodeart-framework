@@ -1,3 +1,8 @@
+v5.1.7
+- Updated - Add rel home to home-link block
+- Updated - Starter content page templates to default page / add back filter for starter content meta
+- Fixed - File block wrapped into Dynamic -> save_html method (for valid markup)
+
 v5.1.6
 - Updated - Theme starter content (due to cover updates in Gutenberg plugin)
 - Fixed - Added back theme support for custom-logo (to be managed in WP Customizer as well + starter content logo fails to be set )

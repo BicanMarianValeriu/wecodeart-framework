@@ -76,6 +76,7 @@ class WooCommerce implements Integration {
 
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
+	 *
 	 * @since	unknown
 	 */
 	public function after_setup_theme() {

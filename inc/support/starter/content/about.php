@@ -4,6 +4,7 @@
  */
 return [
 	'post_type'    => 'page',
+	'template'     => 'page',
 	'post_title'   => _x( 'About', 'Theme starter content', 'wecodeart' ),
 	'post_content' => '<!-- wp:group {"className":"mb-5","layout":{"inherit":false},"customCSSId":"87bf1a83-fdb6-42fd-9a26-3752d8ddb580"} -->
 	<div class="wp-block-group mb-5"><!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"e6e8d1f8-c885-4e8b-8e0f-4642cae91bd0"} -->
@@ -61,13 +62,13 @@ return [
 	<!-- /wp:column --></div>
 	<!-- /wp:columns --></div>
 	<!-- /wp:group -->
-	<!-- wp:group {"backgroundColor":"dark","textColor":"white","className":"pt-5","layout":{"inherit":false},"customCSSId":"b61d3af6-a7d8-4b0c-b829-14ffd016b055"} -->
-	<div class="wp-block-group has-background has-dark-background-color has-text-color has-white-color pt-5">
+	<!-- wp:group {"backgroundColor":"light","className":"pt-5","layout":{"inherit":false},"customCSSId":"b61d3af6-a7d8-4b0c-b829-14ffd016b055"} -->
+	<div class="wp-block-group has-background has-light-background-color pt-5">
 	<!-- wp:heading {"textAlign":"center","customCSSId":"fd074fe8-8152-4a2e-8d3b-54d1e7bae78d"} -->
 	<h2 class="has-text-align-center">Our Awesome Members</h2>
 	<!-- /wp:heading -->
-	<!-- wp:separator {"className":"is-style-faded mb-5","customCSSId":"a1609609-4e6c-4149-a857-f04ab54008bd"} -->
-	<hr class="wp-block-separator is-style-faded mb-5"/>
+	<!-- wp:separator {"color":"primary","className":"mb-5 is-style-dots","customCSSId":"30cb9716-3636-4919-ad20-ae800b243f9c"} -->
+	<hr class="wp-block-separator has-text-color has-background has-primary-background-color has-primary-color mb-5 is-style-dots"/>
 	<!-- /wp:separator -->
 	<!-- wp:columns {"className":"flex-column flex-sm-row","customCSSId":"f92b20e9-6d7b-41ed-bfc5-289a4763d69d"} -->
 	<div class="wp-block-columns flex-column flex-sm-row"><!-- wp:column {"className":"mb-4 col-sm-6 col-lg-3","customCSSId":"4305cb9c-0b09-440d-be1f-1e915e5ad897"} -->

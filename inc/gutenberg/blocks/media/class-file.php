@@ -103,6 +103,6 @@ class File extends Dynamic {
 			}
 		}
 
-		return $doc->saveHTML();
+		return $this->save_html( $doc->saveHTML() );
 	}
 }
