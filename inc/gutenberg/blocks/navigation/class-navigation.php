@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.5
+ * @version		5.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -121,7 +121,7 @@ class Navigation extends Dynamic {
 			}, [ $inner_blocks ], false );
 
 			// Is responsive? Render in offcanvas container
-			if( get_prop( $attributes, 'isResponsive', false ) ===  true ) {
+			if( get_prop( $attributes, 'overlayMenu' ) !== 'never' ) {
 
 				// Toggler
 				wecodeart_template( 'general/toggler', [
@@ -421,12 +421,13 @@ class Navigation extends Dynamic {
 			$classes[] = 'navbar-expand';
 		}
 
-		$is_responsive = get_prop( $attributes, 'isResponsive', false ) === true;
-		$is_responsive = get_prop( $attributes, 'overlayMenu', 'never' ) !== 'never' || $is_responsive;
-
-		if( $is_responsive ) {
-			$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
-			$classes[] 	= apply_filters( 'wecodeart/filter/navigation/responsive', 'navbar-expand-lg' );
+		if( $value = get_prop( $attributes, 'overlayMenu' ) ) {
+			if( $value !== 'never' ) {
+				$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
+				if( $value === 'mobile' ) {
+					$classes[] 	= apply_filters( 'wecodeart/filter/navigation/responsive', 'navbar-expand-lg' );
+				}
+			}
 		}
 		
 		if( get_prop( $attributes, 'openSubmenusOnClick', false ) === false ) {

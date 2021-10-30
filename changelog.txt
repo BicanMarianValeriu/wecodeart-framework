@@ -1,7 +1,15 @@
 v5.1.7
+- Removed - FSE class used to hide/show Customizer/Site editor links in admin
+- Updated - Enable FSE Admin link by default with developer mode control (to easily disable, eg: production)
 - Updated - Add rel home to home-link block
 - Updated - Starter content page templates to default page / add back filter for starter content meta
-- Fixed - File block wrapped into Dynamic -> save_html method (for valid markup)
+- Updated - New navigation offcanvas option (off/mobile/allways)
+- Fixed - File block wrapped into Dynamic's CLASS save_html method (for valid markup)
+- Fixed - Query Pagination numbers WP_Query namespacing fatal error and template part HTML
+- Fixed - Media / Text image fill generated styles
+- Fixed - Admin welcome screen vars
+- Added - Letter Spacing style generation from block attributes
+- Added - Filter pagination arguments with 'wecodeart/filter/query/pagination/args'
 
 v5.1.6
 - Updated - Theme starter content (due to cover updates in Gutenberg plugin)

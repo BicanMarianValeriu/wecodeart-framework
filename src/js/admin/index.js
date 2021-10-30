@@ -4,6 +4,7 @@
 const {
 	i18n: {
 		__,
+		sprintf
 	},
 	// blockLibrary: {
 	// 	registerCoreBlocks
@@ -29,7 +30,7 @@ const {
 	}
 } = wp;
 
-const { currentUser, version } = wecodeart;
+const { currentUser, theme: { version: themeVersion, name: themeName } } = wecodeart;
 
 /* Settings */
 import { GettingStarted, Extensions, /*Licenses, */ Notices } from './components';
@@ -98,7 +99,7 @@ const WeCodeArt = () => {
 	];
 
 	const [initialTab, setInitialTab] = useState('');
-	
+
 	useEffect(() => {
 		const { hash = '' } = document.location;
 		setInitialTab(hash.replace('#', ''));
@@ -109,8 +110,11 @@ const WeCodeArt = () => {
 			<PanelBody opened={true}>
 				<div className="components-panel__header">
 					<p className="wecodeart-panel__header-hint">{__('Appearance', 'wecodeart')} → WeCodeArt</p>
-					<h2>{__('Getting Started with', 'wecodeart')} <strong>WeCodeArt Framework</strong><code>{version}</code></h2>
-					<p>{__(`Congratulations ${currentUser}! You\'ve just unlocked more Gutenberg block editor tools for easier editing and better workflow.`, 'wecodeart')}</p>
+					<h2>{__('Getting Started with', 'wecodeart')} <strong>WeCodeArt Framework</strong><code>{themeVersion}</code></h2>
+					<p>{sprintf(
+						__('Congratulations %s! You`ve just unlocked more Gutenberg block editor tools for easier editing and better workflow.', 'wecodeart'),
+						currentUser
+					)}</p>
 				</div>
 				<PanelRow>
 					<TabPanel className="wecodeart-tab-panel"

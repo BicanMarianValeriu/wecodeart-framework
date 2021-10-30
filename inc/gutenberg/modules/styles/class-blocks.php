@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.2
+ * @version		5.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -161,6 +161,13 @@ class Blocks extends Processor {
 				if ( $value = get_prop( $typography, 'textDecoration', false ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'text-decoration',
+						'value'	  	=> $value
+					], $output );
+				}
+				
+				if ( $value = get_prop( $typography, 'letterSpacing', false ) ) {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'letter-spacing',
 						'value'	  	=> $value
 					], $output );
 				}

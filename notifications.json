@@ -4,7 +4,7 @@
 		{
 			"type": "success",
 			"title": "11.8.0 compatability update!",
-			"content": "Gutenberg 11.8 introduced some major changes so WeCodeArt 5.1.5 will align with those updates - please update to latest version."
+			"content": "Gutenberg 11.8 introduced some major changes so WeCodeArt 5.1.5+ will align with those updates - please update to latest version."
 		},
 		{
 			"type": "info",

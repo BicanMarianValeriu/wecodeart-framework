@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -51,6 +51,12 @@ class Media extends Base {
 						'element'	=> implode( ' ', [ $this->element, '.wp-block-media-text__media' ] ),
 						'property' 	=> 'background-image',
 						'value'	  	=> wp_get_attachment_image_url( $value, get_prop( $this->attrs, 'mediaSizeSlug', 'full' ) )
+					], $output );
+				} elseif ( $value = get_prop( $this->attrs, 'mediaLink', false ) ) {
+					$this->output[] = wp_parse_args( [
+						'element'	=> implode( ' ', [ $this->element, '.wp-block-media-text__media' ] ),
+						'property' 	=> 'background-image',
+						'value'	  	=> $value
 					], $output );
 				}
 		

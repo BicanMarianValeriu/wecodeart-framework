@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.1.4
+ * @version		5.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -101,13 +101,15 @@ class Styles implements Integration {
 
 		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
-		remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
-
 		remove_filter( 'render_block', 'wp_render_elements_support', 	10, 2 );
-		remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
-		
 		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
-		remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
+
+		// Eventually it will be removed - 1 check since they are all from GB.
+		if( function_exists( 'gutenberg_render_layout_support_flag' ) ) {
+			remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
+			remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
+			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
+		}
 	}
 
 	/**
@@ -134,7 +136,9 @@ class Styles implements Integration {
 
 		if( in_array( $block_id, self::$processed ) || $block_id === false ) return $content;
 
-		// Remove styles, where needed
+		// Remove styles, where needed.
+		// I'm not happy with this way but there is no other way to remove style attributes that I know, on PHP.
+		// It would be ok with JS but that breaks the blocks / other way that could work would be rest renderer.
 		if ( in_array( $block['blockName'], (array) apply_filters( 'wecodeart/filter/gutenberg/styles/remove', [
 			'core/list',
 			'core/group',
@@ -152,7 +156,9 @@ class Styles implements Integration {
 			'core/social-link',
 			'core/navigation'
 		], true ) ) ) {
-			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, 2 );
+			$passes 	= 1;
+			if( in_array( $block['blockName'], [ 'core/cover', 'core/media-text' ] ) ) $passes = 2;
+			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, $passes );
 		}
 
 		// Add necessary class

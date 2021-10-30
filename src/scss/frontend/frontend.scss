@@ -51,21 +51,21 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import "~bootstrap/scss/close";
 @import "~bootstrap/scss/offcanvas";
 // Misc
-@import "~bootstrap/scss/breadcrumb";
-@import "~bootstrap/scss/pagination";
-@import "~bootstrap/scss/badge";
 @import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/pagination";
 @import "~bootstrap/scss/transitions";
-// @import "~bootstrap/scss/spinners";
-// @import "~bootstrap/scss/placeholders";
-// @import "~bootstrap/scss/card";
-// @import "~bootstrap/scss/tooltip";
-// @import "~bootstrap/scss/popover";
 // @import "~bootstrap/scss/accordion";
-// @import "~bootstrap/scss/progress";
-// @import "~bootstrap/scss/toasts";
-// @import "~bootstrap/scss/modal";
 // @import "~bootstrap/scss/carousel";
+// @import "~bootstrap/scss/modal";
+// @import "~bootstrap/scss/popover";
+// @import "~bootstrap/scss/progress";
+// @import "~bootstrap/scss/placeholders";
+// @import "~bootstrap/scss/toasts";
+// @import "~bootstrap/scss/tooltip";
+// @import "~bootstrap/scss/spinners";
 
 // BS Helpers
 @import "~bootstrap/scss/helpers";

@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.1.5
+ * @version		5.1.7
  */
 
 namespace WeCodeArt;
@@ -41,7 +41,6 @@ class Support implements ArrayAccess {
 		\add_action( 'after_setup_theme', [ $this, 'load_translations'	] );
 
 		// Register Default Integrations
-		$this->register( 'fse',					Support\FSE::class		);
 		$this->register( 'styles',				Support\Styles::class	);
 		$this->register( 'starter',				Support\Starter::class	);
 		$this->register( 'plugin/anr', 			Support\Plugins\ANR::class 			);

@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.0.6
+ * @version		5.1.7
  */
 
 namespace WeCodeArt;
@@ -236,7 +236,7 @@ class Admin {
 	 * Load assets for option page.
 	 *
 	 * @since   1.2.0
-	 * @version	5.0.6
+	 * @version	5.1.7
 	 */
 	public function enqueue_assets() {
 		$version = wecodeart( 'version' );
@@ -260,9 +260,12 @@ class Admin {
 		);
 
 		wp_localize_script( $this->make_handle(), 'wecodeart', [
-			'version' 			=> wecodeart_if( 'is_dev_mode' ) ? esc_html__( 'Developer Mode', 'wecodeart' ) : $version,
-			'currentUser'		=> wp_get_current_user()->display_name,
-			'adminUrl'			=> untrailingslashit( esc_url_raw( admin_url() ) ),
+			'theme'			=> [
+				'name'		=> wecodeart( 'name' ),
+				'version'	=> wecodeart_if( 'is_dev_mode' ) ? esc_html__( 'Developer Mode', 'wecodeart' ) : $version,
+			],
+			'currentUser'	=> wp_get_current_user()->display_name,
+			'adminUrl'		=> untrailingslashit( esc_url_raw( admin_url() ) ),
 		] );
 	}
 }

@@ -63,6 +63,7 @@ return [
     |
     */
     'gutenberg' => [
+        'editor'    => true,
         'support'   => [
             'block-templates'   => true,
             'block-nav-menus'   => true,

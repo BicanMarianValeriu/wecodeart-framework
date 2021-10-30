@@ -80,13 +80,13 @@ class Text extends Dynamic {
 			width: 100%;
 			object-fit: cover;
 		}
-		.is-style-fill .wp-block-media-text__media {
+		.is-image-fill .wp-block-media-text__media {
 			position: relative;
 			padding: 0;
 			min-height: 250px;
 			background-size: cover;
 		}
-		.is-style-fill .wp-block-media-text__media img {
+		.is-image-fill .wp-block-media-text__media img {
 			position: absolute;
 			width: 1px;
 			height: 1px;

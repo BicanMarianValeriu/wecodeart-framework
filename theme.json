@@ -34,10 +34,6 @@
 		{
 			"name": "footer",
 			"area": "footer"
-		},
-		{
-			"name": "sidebar",
-			"area": "sidebar"
 		}
 	],
 	"settings": {

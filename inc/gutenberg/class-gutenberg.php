@@ -60,6 +60,9 @@ class Gutenberg {
 		// Meta.
 		add_filter( 'init',							[ $this, 'register_meta' ] );
 
+		// Admin.
+		add_action( 'admin_init', 					[ $this, 'admin_init' ] );
+
 		// Body Class.
 		add_filter( 'body_class', 					[ $this, 'body_class' ] );
 
@@ -162,7 +165,8 @@ class Gutenberg {
 		// Inline
 		$data = apply_filters( 'wecodeart/filter/gutenberg/localize', [
 			'theme' 	=> [
-				'version' => wecodeart( 'version' )
+				'name'		=> wecodeart( 'name' ),
+				'version' 	=> wecodeart( 'version' )
 			],
 			'restrictedBlocks' => apply_filters( 'wecodeart/filter/gutenberg/restricted', [
 				'core/freeform',
@@ -235,6 +239,36 @@ class Gutenberg {
 		// Frontend Style
 		if( get_prop( $this->config, 'styles' ) ) {
 			add_filter( 'should_load_separate_core_block_assets', '__return_false' );
+		}
+	}
+
+	/**
+	 * Removes the Site Editor link from the admin.
+	 *
+	 * @return void
+	 */
+	public function admin_init() {
+		global $menu;
+		
+		// Developer mode will allways have access to FSE.
+		if( wecodeart_if( 'is_dev_mode' ) ) return;
+
+		// Developers can turn off FSE admin (eg: on production).
+		if( ! get_prop( wecodeart_config( 'gutenberg' ), 'editor' ) ) {
+			// Remove Site Editor.
+			$site_editor_index = false;
+			
+			if( ! empty( $menu ) ) {
+				foreach ( $menu as $index => $menu_item ) {
+					if ( ! empty( $menu_item[5] ) && false !== strpos( $menu_item[5], 'toplevel_page_gutenberg-edit-site' ) ) {
+						$site_editor_index = $index;
+					}
+				}
+			}
+	
+			if( $site_editor_index ) {
+				unset( $menu[ $site_editor_index ] );
+			}
 		}
 	}
 }

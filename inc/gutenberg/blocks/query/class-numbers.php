@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -79,36 +79,44 @@ class Numbers extends Dynamic {
         $page       = empty( $_GET[ $page_key ] ) ? 1 : (int) $_GET[ $page_key ];
         $max_page   = isset( $block->context['query']['pages'] ) ? (int) $block->context['query']['pages'] : 0;
         $content    = [];
+
+        $paginate_args = apply_filters( 'wecodeart/filter/query/pagination/args', [
+            'mixed'     => 'array',
+            'type' 	    => 'array',
+            'prev_next' => true,
+        ] );
         
         if ( isset( $block->context['query']['inherit'] ) && $block->context['query']['inherit'] ) {
             // Take into account if we have set a bigger `max page` than what the query has.
-            $total         = ! $max_page || $max_page > $wp_query->max_num_pages ? $wp_query->max_num_pages : $max_page;
-            $content       = paginate_links( [
-                'mixed'     => 'array',
-                'type' 	    => 'array',
-                'prev_next' => true,
-                'total'     => $total,
-            ] );
+            $total      = ! $max_page || $max_page > $wp_query->max_num_pages ? $wp_query->max_num_pages : $max_page;
+            $content    = paginate_links( wp_parse_args( [
+                'total' => $total,
+            ], $paginate_args ) );
         } else {
-            $block_query = new WP_Query( build_query_vars_from_query_block( $block, $page ) );
+            $block_query = new \WP_Query( build_query_vars_from_query_block( $block, $page ) );
+
             // `paginate_links` works with the global $wp_query, so we have to temporarily switch it with our custom query.
-            $prev_wp_query = $wp_query;
-            $wp_query      = $block_query;
-            $total         = ! $max_page || $max_page > $wp_query->max_num_pages ? $wp_query->max_num_pages : $max_page;
-            $paginate_args = [
-                'mixed'     => 'array',
-                'type' 	    => 'array',
+            $prev_wp_query  = $wp_query;
+            $wp_query       = $block_query;
+            $total          = ! $max_page || $max_page > $wp_query->max_num_pages ? $wp_query->max_num_pages : $max_page;
+            $paginate_args  = wp_parse_args( [
                 'base'      => '%_%',
                 'format'    => "?$page_key=%#%",
                 'current'   => max( 1, $page ),
                 'total'     => $total,
-                'prev_next' => true,
-            ];
+            ], $paginate_args );
+            
+            // https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/query-pagination-numbers/index.php
+            if ( 1 !== $page ) {
+                $paginate_args['add_args'] = [ 'cst' => '' ];
+            }
+
             // We still need to preserve `paged` query param if exists.
             $paged = empty( $_GET['paged'] ) ? null : (int) $_GET['paged'];
             if ( $paged ) {
                 $paginate_args['add_args'] = [ 'paged' => $paged ];
             }
+
             $content = paginate_links( $paginate_args );
             wp_reset_postdata(); // Restore original Post Data.
             $wp_query = $prev_wp_query;
@@ -122,7 +130,7 @@ class Numbers extends Dynamic {
             [
                 'tag'   => 'nav',
                 'attrs' => [
-                    'class' => 'wp-block-query-pagination-numbers mb-5',
+                    'class' => 'wp-block-query-pagination__numbers mb-5',
                 ]
             ],
         ], function( $content ) {

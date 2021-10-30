@@ -49,7 +49,7 @@ export default () => {
                 <div className="alert alert-warning">
                     <RawHTML>
                         {sprintf(
-                            __('If you have any questions or suggestion, let us know through our %1$sFacebook community %3$s. Also, %2$ssubscribe to our newsletter%3$s if you want to stay up to date with what\'s new and upcoming features.', 'wecodeart'),
+                            __('If you have any questions or suggestion, let us know through our %1$sFacebook community %3$s. Also, %2$ssubscribe to our newsletter%3$s if you want to stay up to date with what`s new and upcoming features.', 'wecodeart'),
                             '<a href="https://www.facebook.com/wecodeart" target="_blank">',
                             '<a href="https://www.wecodeart.com/" target="_blank">',
                             '</a>'
@@ -60,7 +60,7 @@ export default () => {
             <div className="col col-md-4 offset-md-1">
                 <h2 className="d-flex justify-content-between">
                     <span>{__('What`s next?', 'wecodeart')}</span>
-                    <span class="badge rounded-pill bg-dark">{__('Developer Diaries', 'wecodeart')}</span>
+                    <span class="badge rounded-pill bg-dark">{__('Developer news', 'wecodeart')}</span>
                 </h2>
                 {notes.map(({ title, content, type = 'info' }) => {
                     return (
