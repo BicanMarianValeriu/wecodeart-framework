@@ -289,11 +289,6 @@
 	},
 	"styles": {
 		"blocks": {
-			"core/paragraph": {
-				"typography": {
-					"fontSize": "var:preset|font-size|normal"
-				}
-			},
 			"core/post-author": {
 				"typography": {
 					"fontSize": "var:preset|font-size|small"

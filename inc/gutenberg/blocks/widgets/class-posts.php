@@ -178,8 +178,11 @@ class Posts extends Dynamic {
 				$list_items_markup .= '<div class="col-12 col-sm">';
 
 				// Title
-				$list_items_markup .= Title::get_instance()->render( [ 'isLink' => true ], '', (object) [
-					'context' => [
+				$list_items_markup .= Title::get_instance()->render( [
+					'className' => 'mb-1',
+					'isLink' 	=> true,
+				], '', (object) [
+					'context' 	=> [
 						'postId' => $post->ID,
 					]
 				] );
@@ -218,20 +221,20 @@ class Posts extends Dynamic {
 
 				// Content
 				if ( $display_content ) {
-					$post_protected	= esc_html__( 'This content is password protected.', 'wecodeart' );
 					$content_html 	= '<div class="%1$s">%2$s</div>';
+					
 					if( $content_type === 'excerpt' ) {
 						$content 	= wpautop( get_the_excerpt( $post ) );
 						$classname 	= 'wp-block-post-excerpt';
 					}
-
+					
 					if( $content_type === 'full_post' ) {
 						$content = wp_kses_post( html_entity_decode( $post->post_content, ENT_QUOTES, get_option( 'blog_charset' ) ) );
 						$classname 	= 'wp-block-post-content';
 					}
 					
 					if ( post_password_required( $post ) ) {
-						$content = wpautop( $post_protected );
+						$content = wpautop( esc_html__( 'This content is password protected.', 'wecodeart' ) );
 					}
 
 					$list_items_markup .= sprintf( $content_html, $classname, $content );

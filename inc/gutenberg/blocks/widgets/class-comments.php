@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -101,7 +101,7 @@ class Comments extends Dynamic {
 	
 			foreach ( $comments as $comment ) {
 				$list_items_markup .= '<li class="wp-block-latest-comments__comment">';
-				$list_items_markup .= '<div class="row gx-3">';
+				$list_items_markup .= '<div class="wp-block-latest-comments__comment-head row gx-3 mb-3">';
 				// Avatar
 				if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
 					$avatar = get_avatar( $comment, 50, '', '', [
@@ -112,16 +112,16 @@ class Comments extends Dynamic {
 					}
 				}
 
-				$list_items_markup .= '<div class="col">';
 				// Meta
-				$list_items_markup .= '<div class="wp-block-latest-comments__comment-meta">';
-				$author_url         = get_comment_author_url( $comment );
+				$list_items_markup .= '<div class="col">';
+
+				// Author
+				$author_markup 	= '';
+				$author_url		= get_comment_author_url( $comment );
 				if ( empty( $author_url ) && ! empty( $comment->user_id ) ) {
 					$author_url = get_author_posts_url( $comment->user_id );
 				}
 
-				// Author
-				$author_markup = '';
 				if ( $author_url ) {
 					$author_markup .= '<a class="wp-block-latest-comments__comment-author" href="' . esc_url( $author_url ) . '">' . get_comment_author( $comment ) . '</a>';
 				} else {
@@ -140,14 +140,11 @@ class Comments extends Dynamic {
 					);
 				}
 				$list_items_markup .= '</div>';
-				
+				$list_items_markup .= '</div>';
 				// Excerpt
 				if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
 					$list_items_markup .= '<div class="wp-block-latest-comments__comment-excerpt">' . wpautop( get_comment_excerpt( $comment ) ) . '</div>';
-				}
-
-				$list_items_markup .= '</div>';
-				$list_items_markup .= '</div>';
+				}				
 				$list_items_markup .= '</li>';
 			}
 	

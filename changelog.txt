@@ -2,6 +2,7 @@ v5.1.8
 - Removed - Base input styles - we use Bootstrap so let's stick to that
 - Updated - Comment Walker and template - prepare block-views structure for upcomming comments query
 - Updated - Post meta block-views structure changed
+- Updated - Latest Posts/Comments widgets markup (Gubenberg blocks)
 - Fixed - Header pattern navigation attribute for overlay/offcanvas
 
 v5.1.7

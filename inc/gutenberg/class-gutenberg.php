@@ -175,6 +175,7 @@ class Gutenberg {
 				'core/archives',
 				'core/calendar',
 				'core/tag-cloud',
+				'core/page-list',
 				'core/latest-comments',
 				'core/block',
 			] ),
