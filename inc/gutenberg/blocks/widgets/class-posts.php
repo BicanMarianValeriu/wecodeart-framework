@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -189,7 +189,7 @@ class Posts extends Dynamic {
 					$list_items_markup .= '<div class="wp-block-posts__post-meta d-flex align-items-center text-muted mb-3">';
 					// Author
 					if ( $display_author ) {
-						$list_items_markup .= wecodeart_template( 'entry/meta/author', [
+						$list_items_markup .= wecodeart_template( 'meta/author', [
 							'attributes'=> [
 								'className' => 'd-inline-flex me-3',
 							],
@@ -202,7 +202,7 @@ class Posts extends Dynamic {
 
 					// Date
 					if ( $display_date ) {
-						$list_items_markup .= wecodeart_template( 'entry/meta/date', [
+						$list_items_markup .= wecodeart_template( 'meta/date', [
 							'post_id'	=> $post->ID,
 							'attributes'=> [
 								'className' => 'd-inline-flex me-3',

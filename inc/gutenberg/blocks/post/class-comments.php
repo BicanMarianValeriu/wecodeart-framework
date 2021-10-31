@@ -9,10 +9,10 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.8
  */
 
-namespace WeCodeArt\Gutenberg\Blocks\Post\Comments;
+namespace WeCodeArt\Gutenberg\Blocks\Post;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -22,9 +22,9 @@ use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
 /**
- * Gutenberg Site Date block.
+ * Gutenberg Post Comments link block.
  */
-class Link extends Dynamic {
+class Comments extends Dynamic {
 
 	use Singleton;
 
@@ -87,6 +87,6 @@ class Link extends Dynamic {
 			'number'		=> (int) get_comments_number( $block->context['postId'] ),
 		];
 		
-		return wecodeart_template( 'entry/meta/comments', $args, false );
+		return wecodeart_template( 'meta/comments', $args, false );
 	}
 }

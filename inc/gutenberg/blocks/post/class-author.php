@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -81,10 +81,10 @@ class Author extends Dynamic {
 			return '';
 		}
 
-		$template = 'entry/meta/author';
+		$template = 'meta/author';
 
 		if( get_prop( $attributes, 'showAvatar', false ) && get_prop( $attributes, 'showBio', false ) ) {
-			$template = [ 'entry/meta/author', 'box' ];
+			$template = [ 'meta/author', 'box' ];
 		}
 
 		$args = [

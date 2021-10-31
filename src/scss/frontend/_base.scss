@@ -93,24 +93,3 @@ figcaption,
 .gallery-caption {
     color: inherit;
 }
-
-input:not([type="radio"]):not([type="checkbox"]) {
-    @extend .form-control;
-}
-
-input[type="range"] {
-    @extend .form-range;
-}
-
-textarea {
-    @extend .form-control;
-    min-height: 200px;
-}
-
-select {
-    @extend .form-select;
-}
-
-table {
-    @extend .table;
-}

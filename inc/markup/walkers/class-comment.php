@@ -9,7 +9,7 @@
  * @subpackage 	Comment HTML Template (Walker)
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		1.9
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Markup\Walkers;
@@ -79,14 +79,14 @@ class Comment extends Walker_Comment {
 	 * Outputs a HTML5 comment.
 	 *
 	 * @since	2.0
-	 * @version	5.0.0
+	 * @version	5.1.8
 	 *
 	 * @return 	void
 	 */
 	protected function comment( $comment, $depth, $args ) {
 		?>
 		<li <?php echo Markup::generate_attr( 'comment', [
-			'class' 	=> implode( ' ', get_comment_class() ),
+			'class' 	=> implode( ' ', get_comment_class( 'wp-block-post-comment' ) ),
 			'id'		=> 'comment-' . $comment->comment_ID,
 		] ); ?>>
 		<?php
@@ -102,7 +102,7 @@ class Comment extends Walker_Comment {
 			}
 
 			// Comment body template.
-			wecodeart_template( 'entry/comment', [
+			wecodeart_template( 'comment/comment', [
 				'by_author' => in_array( 'bypostauthor', get_comment_class() ),
 				'comment' 	=> $comment,
 				'depth'		=> $depth,

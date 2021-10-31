@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -91,7 +91,7 @@ class Terms extends Dynamic {
 			'terms'			=> get_the_term_list( $block->context['postId'], $attributes['term'], '', ', ' ),
 		];
 
-		$template = wecodeart_template( 'entry/meta/terms', $args, false );
+		$template = wecodeart_template( 'meta/terms', $args, false );
 
 		remove_filter( 'wecodeart/filter/template/context',	[ $this, 'filter_tags_context' ], 10 );
 

@@ -27,7 +27,7 @@ SVG::add_icon( 'pencil', [
  * @param   int     $depth
  */
 ?>
-<div class="comment__body mb-3">
+<div class="wp-block-post-comment__inner mb-3">
     <?php
 
     /**
@@ -38,7 +38,7 @@ SVG::add_icon( 'pencil', [
     ?>
     <div class="row">
         <div class="col-auto">
-            <figure class="comment__gravatar rounded shadow-sm border border-light p-1 mb-0"><?php
+            <figure class="wp-block-post-comment__gravatar rounded shadow-sm border border-light p-1 mb-0"><?php
             
                 echo get_avatar(
                     $comment,
@@ -58,7 +58,7 @@ SVG::add_icon( 'pencil', [
                 );
             
             ?>
-            <div class="comment__author"><?php
+            <div class="wp-block-post-comment__author"><?php
                 
                 echo wp_kses_post( $author ); 
             
@@ -69,7 +69,7 @@ SVG::add_icon( 'pencil', [
                     );
 
             ?></div>
-            <time class="comment__date text-muted" itemprop="dateCreated" datetime="<?php
+            <time class="wp-block-post-comment__date text-muted" itemprop="dateCreated" datetime="<?php
 
                 echo esc_attr( get_comment_date( DATE_W3C ) );
 
@@ -87,7 +87,7 @@ SVG::add_icon( 'pencil', [
                 
             ?></p>
             <?php endif; ?>
-            <div class="comment__content p-3 border rounded" itemprop="text"><?php
+            <div class="wp-block-post-comment__content p-3 border rounded" itemprop="text"><?php
 
                 echo wp_kses_post( $comment->comment_content );
 

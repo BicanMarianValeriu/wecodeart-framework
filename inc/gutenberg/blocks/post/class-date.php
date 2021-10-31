@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -97,6 +97,6 @@ class Date extends Dynamic {
 			], $args );
 		}
 
-		return wecodeart_template( 'entry/meta/date', $args, false );
+		return wecodeart_template( 'meta/date', $args, false );
 	}
 }

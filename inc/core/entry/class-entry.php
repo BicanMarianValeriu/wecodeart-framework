@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Core;
@@ -50,12 +50,14 @@ class Entry {
 	 * Return the content for No Posts
 	 *
 	 * @since	3.5
-	 * @version	5.0.0
+	 * @version	5.1.8
 	 *
-	 * @return 	void
+	 * @return 	string
 	 */
 	public function render_pasword_protected( $template ) {
-		$template = wecodeart_template( 'entry/protected', [], false );
+		$template = wecodeart_template( 'general/protected', [
+			'action' => home_url( 'wp-login.php?action=postpass', 'login_post' )
+		], false );
 		$template = trim( preg_replace( '/\s+/', ' ', $template ) );
 		$template = preg_replace( '/>\s*</', '><', $template );
 		return $template;

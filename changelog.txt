@@ -1,3 +1,9 @@
+v5.1.8
+- Removed - Base input styles - we use Bootstrap so let's stick to that
+- Updated - Comment Walker and template - prepare block-views structure for upcomming comments query
+- Updated - Post meta block-views structure changed
+- Fixed - Header pattern navigation attribute for overlay/offcanvas
+
 v5.1.7
 - Removed - FSE class used to hide/show Customizer/Site editor links in admin
 - Updated - Enable FSE Admin link by default with developer mode control (to easily disable, eg: production)

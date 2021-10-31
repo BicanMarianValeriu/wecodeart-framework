@@ -75,11 +75,14 @@
     }
 }
 
-.wp-block-post-excerpt,
-.wp-block-post-content {
+:where(.wp-block-post-excerpt, .wp-block-post-content, .wp-block-post-comment__content) {
     &::after {
         content: '';
         display: table;
         clear: both;
+    }
+
+    a:not([class]) {
+        text-decoration: underline;
     }
 }

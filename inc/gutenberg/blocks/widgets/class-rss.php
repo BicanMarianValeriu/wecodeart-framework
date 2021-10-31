@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -136,7 +136,7 @@ class RSS extends Dynamic {
 							$author = $author->get_name();
 						}
 
-						$list_items_markup .= wecodeart_template( 'entry/meta/author', [
+						$list_items_markup .= wecodeart_template( 'meta/author', [
 							'attributes'=> [
 								'isLink'	=> false,
 								'className' => 'd-inline-flex me-3',
@@ -150,7 +150,7 @@ class RSS extends Dynamic {
 					// Date
 					if ( $display_date ) {
 						$date = $item->get_date( 'U' );
-						$list_items_markup .= wecodeart_template( 'entry/meta/date', [
+						$list_items_markup .= wecodeart_template( 'meta/date', [
 							'attributes'=> [
 								'className' => 'd-inline-flex me-3',
 							],

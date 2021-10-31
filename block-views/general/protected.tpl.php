@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Protected Template
  * @since 	    3.5
- * @version	    5.0.0
+ * @version	    5.1.8
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -26,12 +26,10 @@ SVG::add_icon( 'unlock', [
 ] );
 
 /**
- * @param   string  $headline       Contains the translatable string
- * @param   string  $unique_id      Contains the input unique ID
+ * @param   string  $action       Contains the form action url
  */
 ?>
-<form action="<?php echo esc_url( home_url( 'wp-login.php?action=postpass', 'login_post' ) ); ?>"
-    method="post" class="alert border-light shadow py-4">
+<form action="<?php echo esc_url( $action ); ?>" method="post" class="alert border-light shadow py-4">
     <h4><?php
     
         esc_html_e( 'This post is password protected. To view this post, enter the password below!', 'wecodeart' );
@@ -57,9 +55,7 @@ SVG::add_icon( 'unlock', [
         ] );
 
         wecodeart_input( 'button', [
-            'label' => SVG::compile( 'key', [
-                'class' => 'me-2'
-            ] ) . sprintf( '<span>%s</span>', esc_html__( 'Unlock', 'wecodeart' ) ),
+            'label' => SVG::compile( 'key', [ 'class' => 'me-2' ] ) . sprintf( '<span>%s</span>', esc_html__( 'Unlock', 'wecodeart' ) ),
             'attrs' => [
                 'class' => 'btn btn-outline-dark',
             ]
