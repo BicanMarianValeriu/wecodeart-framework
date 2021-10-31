@@ -67,8 +67,8 @@ class Classes {
 	 */
 	public function set_suggest_classes( $settings, $post ) {
 		if ( ! isset( $settings[ 'customClasses' ] ) ) {
-			$classes  = apply_filters( 'wecodeart/filter/gutenberg/settings/custom_classes', [], $post );
-			$settings[ 'customClasses' ] = array_map( 'sanitize_html_class', $classes );
+			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/classes', [], $post );
+			$settings['customClasses'] = array_map( 'sanitize_html_class', $classes );
 		}
 
 		return $settings;

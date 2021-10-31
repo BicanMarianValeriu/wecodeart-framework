@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Classes\Suggestions
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Classes;
@@ -25,6 +25,8 @@ class Suggestions {
 
 	use Singleton;
 
+	const BREAKPOINTS = [ 'sm', 'md', 'lg', 'xl', 'xxl' ];
+
 	/**
 	 * Class Init.
 	 *
@@ -32,15 +34,15 @@ class Suggestions {
 	 */
 	public function init() {
 		// Editor Class Settings.
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'font_classes' 			] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'flex_classes' 			] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'display_classes'		] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'spacing_classes' 		] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'grid_classes' 			] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'offset_order_classes' 	] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'position_classes' 		] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'color_classes' 			] );
-		add_filter( 'wecodeart/filter/gutenberg/settings/custom_classes', [ $this, 'extra_classes' 			] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'background_classes'	] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'text_classes' 			] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'display_classes'		] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'flex_classes' 			] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'spacing_classes' 		] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'grid_classes' 			] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'position_classes' 		] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'card_classes' 			] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'extra_classes'			] );
 	}
 
 	/**
@@ -50,7 +52,24 @@ class Suggestions {
 	 *
 	 * @return 	array 	Returns updated editors settings.
 	 */
-	public function font_classes( $args ) {
+	public function background_classes( $args ) {
+		foreach( [
+			'primary', 'secondary', 'dark', 'light', 'warning', 'danger', 'success', 'info', 'transparent', 'white', 'gradient'
+		] as $color ) {
+			$args[] = 'bg-' . $color;
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function text_classes( $args ) {
 		foreach( [ 'italic', 'normal' ] as $type ) {
 			$args[] = 'fst-'. $type;
 		}
@@ -63,7 +82,7 @@ class Suggestions {
 			$args[] = 'text-' . $type;
 		}
 
-		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
+		foreach( self::BREAKPOINTS as $break ) {
 			foreach( [ 'start', 'center', 'end', 'justify' ] as $align ) {
 				$args[] = 'text-' . $break . '-' . $align;
 			}
@@ -77,7 +96,9 @@ class Suggestions {
 			$args[] = 'text-' . $type;
 		}
 
-		foreach( [ 'muted', 'primary', 'secondary', 'dark', 'light', 'warning', 'danger', 'success', 'info' ] as $color ) {
+		foreach( [
+			'muted', 'primary', 'secondary', 'dark', 'light', 'warning', 'danger', 'success', 'info', 'transparent', 'white', 'gradient'
+		] as $color ) {
 			$args[] = 'text-' . $color;
 			$args[] = 'link-' . $color;
 		}
@@ -112,8 +133,10 @@ class Suggestions {
 	 * @return 	array 	Returns updated editors settings.
 	 */
 	public function display_classes( $args ) {
-		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
-			foreach( [ 'none', 'block', 'inline-block', 'flex', 'inline-flex', 'table', 'table-cell', 'table-row' ] as $type ) {
+		foreach( self::BREAKPOINTS as $break ) {
+			foreach( [
+				'none', 'block', 'inline-block', 'flex', 'grid', 'inline-flex', 'table', 'table-cell', 'table-row'
+			] as $type ) {
 				$args[] = 'd-' . $break . '-' . $type;
 			}
 		}
@@ -137,98 +160,8 @@ class Suggestions {
 	 *
 	 * @return 	array 	Returns updated editors settings.
 	 */
-	public function spacing_classes( $args ) {
-		// Type
-		foreach( [ 'm', 'p' ] as $space ) {
-			// Direction
-			foreach( [ 'x', 'y', 't', 'b', 'e', 's' ] as $dir ) {
-				// Sizes
-				foreach( [ '0', '1', '2', '3', '4', '5', 'auto' ] as $size ) {
-					if( $size !== 'auto' ) {
-						$args[] = implode( '-', [ $dir, $space ] );
-					}
-					if( in_array( $dir, [ 't', 'b', 'y' ] ) && $size === 'auto' ) continue;
-					$args[] = implode( '-', [ $space . $dir, $size ] );
-				}
-				// Sizes for Breakpoints
-				foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
-					foreach( [ '0', '1', '2', '3', '4', '5', 'auto' ] as $size ) {
-						if( in_array( $dir, [ 't', 'b', 'y' ] ) && $size === 'auto' ) continue;
-						$args[] = implode( '-', [ $space . $dir, $break, $size ] );
-					}
-				}
-			}
-		}
-
-		return $args;
-	}
-
-	/**
-	 * Add new block editor settings for custom classes.
-	 *
-	 * @param 	array  	$args
-	 *
-	 * @return 	array 	Returns updated editors settings.
-	 */
-	public function grid_classes( $args ) {
-		$args[] = 'col-auto';
-
-		foreach( range( 1, 12 ) as $number ) {
-			$args[] = 'col-' . $number;
-			$args[] = 'row-cols-' . $number;
-		}
-
-		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $breakpoint ) {
-			$args[] = 'col-' . $breakpoint;
-			$args[] = 'col-' . $breakpoint . '-auto';
-			$args[] = 'row-cols-' . $breakpoint . '-auto';
-
-			foreach( range( 1, 12 ) as $number ) {
-				$args[] = 'col-'. $breakpoint . '-' . $number;
-				$args[] = 'row-cols-'. $breakpoint . '-' . $number;
-			}
-		}
-
-		return $args;
-	}
-
-	/**
-	 * Add new block editor settings for custom classes.
-	 *
-	 * @param 	array  	$args
-	 *
-	 * @return 	array 	Returns updated editors settings.
-	 */
-	public function offset_order_classes( $args ) {
-		foreach( range( 1, 12 ) as $column ) {
-			$args[] = 'offset-' . $column;
-			$args[] = 'order-' . $column;
-		}
-		
-		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
-			foreach( range( 1, 12 ) as $column ) {
-				$args[] = 'order-' . $break . '-first';
-				$args[] = 'order-' . $break . '-last';
-				$args[] = 'order-' . $break . '-' . $column;
-				$args[] = 'offset-' . $break . '-' . $column;
-			}
-		}
-
-		return wp_parse_args( [
-			'order-first',
-			'order-last'
-		], $args );
-	}
-
-	/**
-	 * Add new block editor settings for custom classes.
-	 *
-	 * @param 	array  	$args
-	 *
-	 * @return 	array 	Returns updated editors settings.
-	 */
 	public function flex_classes( $args ) {
-		foreach( [ 'sm', 'md', 'lg', 'xl', 'xxl' ] as $break ) {
+		foreach( self::BREAKPOINTS as $break ) {
 
 			foreach( [ 'row', 'row-reverse', 'column', 'column-reverse' ] as $dir ) {
 				$args[] = 'flex-' . $break . '-' . $dir ;
@@ -300,6 +233,77 @@ class Suggestions {
 			'align-content-stretch',
 		], $args );
 	}
+
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function spacing_classes( $args ) {
+		// Type
+		foreach( [ 'm', 'p' ] as $space ) {
+			// Direction
+			foreach( [ 'x', 'y', 't', 'b', 'e', 's' ] as $dir ) {
+				// Sizes
+				foreach( [ '0', '1', '2', '3', '4', '5', 'auto' ] as $size ) {
+					if( $size !== 'auto' ) {
+						$args[] = implode( '-', [ $dir, $space ] );
+					}
+					if( in_array( $dir, [ 't', 'b', 'y' ] ) && $size === 'auto' ) continue;
+					$args[] = implode( '-', [ $space . $dir, $size ] );
+				}
+				// Sizes for Breakpoints
+				foreach( self::BREAKPOINTS as $break ) {
+					foreach( [ '0', '1', '2', '3', '4', '5', 'auto' ] as $size ) {
+						if( in_array( $dir, [ 't', 'b', 'y' ] ) && $size === 'auto' ) continue;
+						$args[] = implode( '-', [ $space . $dir, $break, $size ] );
+					}
+				}
+			}
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Add new block editor settings for custom classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function grid_classes( $args ) {
+		$args[] = 'col-auto';
+
+		foreach( range( 1, 12 ) as $number ) {
+			$args[] = 'col-' . $number;
+			$args[] = 'row-cols-' . $number;
+			$args[] = 'offset-' . $number;
+			$args[] = 'order-' . $number;
+		}
+
+		foreach( self::BREAKPOINTS as $breakpoint ) {
+			$args[] = 'col-' . $breakpoint;
+			$args[] = 'col-' . $breakpoint . '-auto';
+			$args[] = 'row-cols-' . $breakpoint . '-auto';
+
+			foreach( range( 1, 12 ) as $number ) {
+				$args[] = 'col-'. $breakpoint . '-' . $number;
+				$args[] = 'row-cols-'. $breakpoint . '-' . $number;
+				$args[] = 'order-' . $breakpoint . '-first';
+				$args[] = 'order-' . $breakpoint . '-last';
+				$args[] = 'order-' . $breakpoint . '-' . $number;
+				$args[] = 'offset-' . $breakpoint . '-' . $number;
+			}
+		}
+
+		return wp_parse_args( [
+			'order-first',
+			'order-last'
+		], $args );
+	}
 	
 	/**
 	 * Add new block editor settings for custom classes.
@@ -325,7 +329,7 @@ class Suggestions {
 			'translate-middle-y',
 		], $args );
 	}
-	
+
 	/**
 	 * Add new block editor settings for custom classes.
 	 *
@@ -333,12 +337,22 @@ class Suggestions {
 	 *
 	 * @return 	array 	Returns updated editors settings.
 	 */
-	public function color_classes( $args ) {
-		foreach( [ 'primary', 'secondary', 'dark', 'light', 'warning', 'danger', 'success', 'info' ] as $color ) {
-			$args[] = 'bg-' . $color;
-		}
-
-		return $args;
+	public function card_classes( $args ) {
+		return wp_parse_args( [
+			'card',
+			'card-title',
+			'card-subtitle',
+			'card-text',
+			'card-link',
+			'card-img',
+			'card-img-top',
+			'card-img-bottom',
+			'card-img-overlay',
+			'card-header',
+			'card-header-tabs',
+			'card-header-pills',
+			'card-body',
+		], $args );
 	}
 
 	/**
@@ -350,25 +364,68 @@ class Suggestions {
 	 */
 	public function extra_classes( $args ) {
 		return wp_parse_args( [
+			// Interaction
 			'user-select-all',
 			'user-select-auto',
 			'user-select-none',
+			'pe-none',
+			'pe-auto',
+			// Overflow
 			'overflow-auto',
 			'overflow-hidden',
 			'overflow-visible',
 			'overflow-scroll',
+			// Sizing
+			'w-25',
+			'w-50',
+			'w-75',
+			'w-100',
+			'w-auto',
+			'h-25',
+			'h-50',
+			'h-75',
+			'h-100',
+			'h-auto',
+			'min-vw-100',
+			'min-vh-100',
+			'mw-100',
+			'mh-100',
+			'vh-100',
+			'vw-100',
+			// Align
 			'align-baseline',
 			'align-top',
 			'align-middle',
 			'align-bottom',
+			// Visibility
 			'visible',
 			'invisible',
 			'visually-hidden',
-			'pe-none',
-			'pe-auto',
+			'visually-hidden-focusable',
+			// Opacity
+			'opacity-0',
+			'opacity-25',
+			'opacity-50',
+			'opacity-75',
+			'opacity-100',
+			// Ratio
+			'ratio',
+			'ratio-1x1',
+			'ratio-4x3',
+			'ratio-16x9',
+			'ratio-21x9',
+			// Shadow
+			'shadow',
+			'shadow-none',
+			'shadow-sm',
+			'shadow-lg',
+			// Misc
+			'stretched-link',
+			'disabled',
+			'badge',
 			'hstack',
 			'vstack',
-			'vr'
+			'vr',
 		], $args );
 	}
 }
