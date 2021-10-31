@@ -36,6 +36,20 @@ class Button extends Base {
 
 		// Inline Style
 		if( $css_style = get_prop( $this->attrs, 'style', false ) ) {
+			// Spacing
+			if( $spacing = get_prop( $css_style, 'spacing', false ) ) {
+				if ( $padding = get_prop( $spacing, 'padding', [] ) ) {
+					if( ! empty( $padding ) ) {
+						foreach( $padding as $dir => $val ) {
+							$this->output[] = wp_parse_args( [
+								'property' 	=> 'padding-' . $dir,
+								'value'	  	=> $val
+							], $output );
+						}
+					}
+				}
+			}
+
 			// Border
 			if( $border = get_prop( $css_style, 'border', [] ) ) {
 				if ( $value = get_prop( $border, 'radius', false ) ) {
