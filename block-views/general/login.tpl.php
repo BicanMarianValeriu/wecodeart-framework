@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  * @param   array   $args   Contains the form args
  */
 ?>
-<form action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post" class="alert border-light">
+<form action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post" class="alert border">
     <?php
     
         // WP Filter
