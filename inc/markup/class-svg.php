@@ -25,24 +25,7 @@ use function WeCodeArt\Functions\kses_svg;
  */
 class SVG {
 
-	use Singleton;  
-
-	/**
-	 * Social icons – svg names.
-	 *
-	 * @var array
-	 */
-	protected static $social = [
-		'facebook',
-		'twitter',
-		'instagram',
-		'linkedin',
-		'youtube',
-		'pinterest',
-		'myspace',
-		'soundcloud',
-		'tumbir',
-	];
+	use Singleton;
 
 	/**
 	 * Default icons – svg sources.

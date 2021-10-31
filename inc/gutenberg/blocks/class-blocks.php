@@ -81,6 +81,7 @@ class Blocks implements \ArrayAccess {
 	    $this->register( 'core/latest-posts',       Blocks\Widgets\Posts::class );
 		$this->register( 'core/latest-comments',    Blocks\Widgets\Comments::class );
 		$this->register( 'core/social-links',       Blocks\Widgets\Social::class );
+		$this->register( 'core/loginout',           Blocks\Widgets\Login::class );
         // Navigation Blocks
 		$this->register( 'core/navigation',         Blocks\Navigation::class );
 		$this->register( 'core/navigation-link',    Blocks\Navigation\Link::class );

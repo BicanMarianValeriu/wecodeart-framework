@@ -50,7 +50,7 @@ class Calendar extends Dynamic {
 	}
 
 	/**
-	 * Dynamically renders the `core/table` block.
+	 * Dynamically renders the `core/calendar` block.
 	 *
 	 * @param 	string 	$content 	The block markup.
 	 * @param 	array 	$block 		The parsed block.

@@ -64,20 +64,13 @@ return [
     */
     'gutenberg' => [
         'editor'    => true,
+        'styles'    => true,
+        'classes'   => true,
+        'patterns'  => true,
         'support'   => [
             'block-templates'   => true,
             'block-nav-menus'   => true,
             'widgets-block-editor'  => true,
-        ],
-        'styles'    => true,
-        'classes'   => true,
-        'patterns'  => [
-            'categories' => [
-                [
-                    'name'  => 'wecodeart',
-                    'label' => 'WeCodeArt',
-                ]
-            ]
         ],
     ],
     /*

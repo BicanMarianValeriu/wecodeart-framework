@@ -33,7 +33,7 @@ class Categories {
 	 * @var array
 	 */
 	const VALID_PROPERTIES = [
-		'name',
+		'slug',
 		'label',
 	];
 
@@ -81,9 +81,9 @@ class Categories {
 	public function register() {
 		foreach( $this->theme_json as $category ) {
 			// Skip registered
-			if( \WP_Block_Pattern_Categories_Registry::get_instance()->is_registered( $category['name'] ) ) continue;
+			if( \WP_Block_Pattern_Categories_Registry::get_instance()->is_registered( $category['slug'] ) ) continue;
 			// Register pattern
-			register_block_pattern_category( $category['name'], wp_array_slice_assoc( $category, [ 'label' ] ) );
+			register_block_pattern_category( $category['slug'], wp_array_slice_assoc( $category, [ 'label' ] ) );
 		}
 	}
 }

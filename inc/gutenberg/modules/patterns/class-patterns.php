@@ -35,14 +35,7 @@ class Patterns implements Integration {
 	 *
 	 * @var string
 	 */
-	const FOLDER	= 'block-patterns';
-
-	/**
-	 * Config.
-	 *
-	 * @var array
-	 */
-	public $config = [];
+	const FOLDER = 'block-patterns';
 
 	/**
 	 * Get Conditionals
@@ -65,32 +58,9 @@ class Patterns implements Integration {
 	 * @return 	void
 	 */
 	public function register_hooks() {
-		// Editor Assets.
-		// add_action( 'enqueue_block_editor_assets', [ $this, 'block_editor_assets' ], 10 );
 		// Register.
-		$this->set_config();
 		$this->register_categories();
 		$this->register_patterns();
-	}
-
-	/**
-	 * Editor only.
-	 *
-	 * @return  void
-	 */
-	public function block_editor_assets() {
-		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-patterns' ), [
-			'wecodeart-gutenberg'
-		], wecodeart( 'version' ) );
-	}
-
-	/**
-	 * Set config.
-	 *
-	 * @return  void
-	 */
-	public function set_config() {
-		$this->config = get_prop( wecodeart_config( 'gutenberg' ), 'patterns', [] );
 	}
 
 	/**
@@ -99,7 +69,33 @@ class Patterns implements Integration {
 	 * @return 	void
 	 */
 	public function register_categories() {
-		( new Patterns\Categories( get_prop( $this->config, 'categories', [] ) ) )->register();
+		$query = $this->get_categories();
+
+		if( empty( $query ) ) return;
+
+		( new Patterns\Categories( $query ) )->register();
+	}
+
+	/**
+	 * Get Categories
+	 *
+	 * @return array
+	 */
+	public function get_categories() {
+		$themes = [
+			get_stylesheet() => get_prop( wecodeart_config( 'paths' ), 'child' ),
+			get_template()   => get_prop( wecodeart_config( 'paths' ), 'directory' ),
+		];
+
+		$data = [];
+		foreach ( $themes as $theme_slug => $theme_dir ) {
+			$file_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . 'categories.json' );
+			if ( file_exists( $file_path ) ) {
+				$data = array_merge( $data, json_decode( file_get_contents( $file_path ), true ) );
+			}
+		}
+
+		return $data;
 	}
 
 	/**
@@ -121,7 +117,7 @@ class Patterns implements Integration {
 	 * @return void
 	 */
 	public function get_paths( $base_directory ) {
-		$path_list = array();
+		$path_list = [];
 		if ( file_exists( $base_directory ) ) {
 			$nested_files      = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $base_directory ) );
 			$nested_html_files = new \RegexIterator( $nested_files, '/^.+\.html$/i', \RecursiveRegexIterator::GET_MATCH );
@@ -183,14 +179,13 @@ class Patterns implements Integration {
 
 		foreach ( $themes as $theme_slug => $theme_dir ) {
 			$file_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . $slug . '.html' );
+			
 			if ( file_exists( $file_path ) ) {
-				$new_template_item = [
+				return [
 					'slug'  => $slug,
 					'path'  => $file_path,
 					'theme' => $theme_slug
 				];
-
-				return $new_template_item;
 			}
 		}
 
@@ -212,7 +207,7 @@ class Patterns implements Integration {
 		$template->title	= ucfirst( implode( ' ', explode( '-', $template_file['slug'] ) ) );
 		$template->content	= $template_content;
 		$template->slug		= $template_file['slug'];
-		$template->theme	= 'wecodeart';
+		$template->theme	= $template_file['theme'];
 
 		return $template->register();
 	}

@@ -69,7 +69,7 @@ class Comments extends Dynamic {
 			] )
 		);
 
-		if ( empty( $comments ) ) return '';
+		if ( count( $comments ) === 0 ) return '';
 
 		// Prime the cache for associated posts. This is copied from \WP_Widget_Recent_Comments::widget().
 		$post_ids = array_unique( wp_list_pluck( $comments, 'comment_post_ID' ) );
@@ -97,8 +97,20 @@ class Comments extends Dynamic {
 				]
 			]
 		], function( $comments, $attributes ) {
-			$list_items_markup = '';
+
+			// $content = '';
+
+			// foreach ( $comments as $comment ) {
+			// 	$block_content = ( new \WP_Block( $block->parsed_block, [
+			// 		'commentId' => $comment->comment_ID
+			// 	] ) )->render( [ 'dynamic' => false ] );
+			// 	$content .= '<li>' . $block_content . '</li>';
+			// }
+
+			// echo $content;
 	
+			$list_items_markup = '';
+			
 			foreach ( $comments as $comment ) {
 				$list_items_markup .= '<li class="wp-block-latest-comments__comment">';
 				$list_items_markup .= '<div class="wp-block-latest-comments__comment-head row gx-3 mb-3">';

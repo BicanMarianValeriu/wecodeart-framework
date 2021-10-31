@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 22:20+0000\n"
+"POT-Creation-Date: 2021-10-31 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,16 +16,16 @@ msgstr ""
 "X-Loco-Version: 2.5.0; wp-5.6.1\n"
 "X-Domain: wecodeart"
 
-#: block-views/entry/meta/comments.tpl.php:53
+#: block-views/meta/comments.tpl.php:53
 #, php-format
 msgid " on %s"
 msgstr ""
 
-#: block-views/entry/meta/comments.tpl.php:45
+#: block-views/meta/comments.tpl.php:45
 msgid "% Comments"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-comments.php:132
+#: inc/gutenberg/blocks/widgets/class-comments.php:144
 #, php-format
 msgid "%1$s on %2$s"
 msgstr ""
@@ -46,12 +46,12 @@ msgstr ""
 msgid "%s Sidebar"
 msgstr ""
 
-#: block-views/entry/comment.tpl.php:47
+#: block-views/comment/comment.tpl.php:47
 #, php-format
 msgid "%s's gravatar"
 msgstr ""
 
-#: block-views/entry/meta/author-box.tpl.php:56
+#: block-views/meta/author-box.tpl.php:56
 #, php-format
 msgid "%s`s avatar"
 msgstr ""
@@ -60,7 +60,7 @@ msgstr ""
 msgid "(no title)"
 msgstr ""
 
-#: block-views/entry/meta/comments.tpl.php:44
+#: block-views/meta/comments.tpl.php:44
 msgid "1 Comment"
 msgstr ""
 
@@ -80,7 +80,7 @@ msgid ""
 "perfect tool for any developer."
 msgstr ""
 
-#: block-views/entry/meta/author-box.tpl.php:40
+#: block-views/meta/author-box.tpl.php:40
 #, php-format
 msgid "About %s"
 msgstr ""
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Archives"
 msgstr ""
 
-#: block-views/entry/comment.tpl.php:78
+#: block-views/comment/comment.tpl.php:78
 msgid "at"
 msgstr ""
 
@@ -147,7 +147,7 @@ msgstr ""
 msgid "Comment *"
 msgstr ""
 
-#: block-views/entry/meta/comments.tpl.php:47
+#: block-views/meta/comments.tpl.php:47
 msgid "Comments are Closed"
 msgstr ""
 
@@ -174,7 +174,7 @@ msgstr ""
 msgid "Copyright %s - All rights reserved."
 msgstr ""
 
-#: inc/support/starter/class-starter.php:72
+#: inc/support/starter/class-starter.php:71
 msgid "Customizer"
 msgstr ""
 
@@ -183,18 +183,18 @@ msgstr ""
 msgid "Daily Archives: %s"
 msgstr ""
 
-#: inc/admin/class-admin.php:263
+#: inc/admin/class-admin.php:265
 msgid "Developer Mode"
 msgstr ""
 
-#: inc/support/starter/class-starter.php:71
+#: inc/support/starter/class-starter.php:70
 #, php-format
 msgid ""
 "Don`t know where to start? Go to %s to setup starter content. There you can "
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
-#: block-views/entry/comment.tpl.php:57
+#: block-views/comment/comment.tpl.php:57
 msgid "Edit"
 msgstr ""
 
@@ -202,11 +202,7 @@ msgstr ""
 msgid "Email *"
 msgstr ""
 
-#: inc/support/fse/class-fse.php:60
-msgid "Enable Site Editor"
-msgstr ""
-
-#: block-views/entry/protected.tpl.php:55
+#: block-views/general/protected.tpl.php:53
 msgid "Enter password"
 msgstr ""
 
@@ -234,8 +230,12 @@ msgstr ""
 msgid "https://www.wecodeart.com/about/"
 msgstr ""
 
-#: block-views/entry/meta/comments.tpl.php:43
+#: block-views/meta/comments.tpl.php:43
 msgid "Leave a Comment"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/class-login.php:101
+msgid "Log In"
 msgstr ""
 
 #: inc/core/class-content.php:48
@@ -272,19 +272,23 @@ msgstr ""
 msgid "Notification dismissed"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-numbers.php:130
+#: inc/gutenberg/blocks/query/class-numbers.php:138
 msgid "Pagination"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/class-login.php:99
+msgid "Password"
 msgstr ""
 
 #: inc/core/class-media.php:194
 msgid "Placeholder image"
 msgstr ""
 
-#: inc/markup/class-markup.php:139
+#: inc/markup/class-markup.php:140
 msgid "Please define a callback function for each of the modules."
 msgstr ""
 
-#: block-views/entry/comment.tpl.php:68
+#: block-views/comment/comment.tpl.php:68
 msgid "Post Author"
 msgstr ""
 
@@ -293,24 +297,24 @@ msgstr ""
 msgid "Post Type Archives: %s"
 msgstr ""
 
-#: block-views/entry/meta/date.tpl.php:60
+#: block-views/meta/date.tpl.php:60
 #, php-format
 msgid "Post updated on %s."
 msgstr ""
 
-#: block-views/entry/meta/terms.tpl.php:54
+#: block-views/meta/terms.tpl.php:54
 msgid "Posted in"
 msgstr ""
 
-#: block-views/entry/meta/date.tpl.php:44
+#: block-views/meta/date.tpl.php:44
 msgid "Posted on "
 msgstr ""
 
-#: inc/support/starter/class-starter.php:148
+#: inc/support/starter/class-starter.php:149
 msgid "Primary Menu"
 msgstr ""
 
-#: inc/support/class-support.php:72
+#: inc/support/class-support.php:71
 msgid "Primary Navigation"
 msgstr ""
 
@@ -321,6 +325,10 @@ msgstr ""
 
 #: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
 msgid "Quantity"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/class-login.php:100
+msgid "Remember Me"
 msgstr ""
 
 #. %1$s expands to the request method
@@ -356,12 +364,8 @@ msgstr ""
 msgid "Shop order"
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:97
+#: inc/support/plugins/woocommerce/class-woocommerce.php:98
 msgid "Shop Sidebar"
-msgstr ""
-
-#: inc/support/fse/class-fse.php:55
-msgid "Site Editor"
 msgstr ""
 
 #: inc/core/entry/class-comments.php:393
@@ -381,27 +385,27 @@ msgstr ""
 msgid "Theme Options"
 msgstr ""
 
-#: inc/support/starter/content/about.php:7
+#: inc/support/starter/content/about.php:8
 msgctxt "Theme starter content"
 msgid "About"
 msgstr ""
 
-#: inc/support/starter/class-starter.php:169
+#: inc/support/starter/class-starter.php:173
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr ""
 
-#: inc/support/starter/content/home.php:7
+#: inc/support/starter/content/home.php:8
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr ""
 
-#: inc/support/starter/class-starter.php:135
+#: inc/support/starter/class-starter.php:136
 msgctxt "Theme starter content"
 msgid "Logo"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-posts.php:221
+#: inc/gutenberg/blocks/widgets/class-posts.php:237
 msgid "This content is password protected."
 msgstr ""
 
@@ -411,7 +415,7 @@ msgid ""
 "leave a comment."
 msgstr ""
 
-#: block-views/entry/protected.tpl.php:37
+#: block-views/general/protected.tpl.php:35
 msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
@@ -420,7 +424,7 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
-#: block-views/entry/protected.tpl.php:62
+#: block-views/general/protected.tpl.php:58
 msgid "Unlock"
 msgstr ""
 
@@ -428,12 +432,16 @@ msgstr ""
 msgid "upgrade PHP"
 msgstr ""
 
+#: inc/gutenberg/blocks/widgets/class-login.php:98
+msgid "Username or Email Address"
+msgstr ""
+
 #: inc/core/entry/class-comments.php:305
 msgid "Website"
 msgstr ""
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:136
+#: inc/gutenberg/class-gutenberg.php:139
 msgid "WeCodeArt"
 msgstr ""
 
@@ -458,7 +466,7 @@ msgid ""
 "version %2$s. Please upgrade WordPress to use WeCodeArt Framework."
 msgstr ""
 
-#: inc/markup/class-svg.php:298
+#: inc/markup/class-svg.php:281
 #, php-format
 msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
@@ -469,7 +477,7 @@ msgstr ""
 msgid "When extending %s, you must create a `get_html` method."
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:99
+#: inc/support/plugins/woocommerce/class-woocommerce.php:100
 msgid "Widgets in this area will be shown on all shop pages."
 msgstr ""
 
@@ -477,7 +485,7 @@ msgstr ""
 msgid "Widgets in this area will be shown where this sidebar is rendered."
 msgstr ""
 
-#: inc/markup/class-markup.php:208
+#: inc/markup/class-markup.php:209
 #, php-format
 msgid ""
 "Wrappers are not properly defined for \"%s\". Please check your theme code."
@@ -504,7 +512,7 @@ msgstr ""
 msgid "You must accept %s to comment!"
 msgstr ""
 
-#: block-views/entry/comment.tpl.php:86
+#: block-views/comment/comment.tpl.php:86
 msgid "Your comment is awaiting moderation."
 msgstr ""
 

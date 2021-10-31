@@ -3,7 +3,10 @@ v5.1.8
 - Updated - Comment Walker and template - prepare block-views structure for upcomming comments query
 - Updated - Post meta block-views structure changed
 - Updated - Latest Posts/Comments widgets markup (Gubenberg blocks)
+- Updated - RO translations
+- Updated - Gutenberg pattern categories registering via JSON file under /block-patterns/categories.json
 - Fixed - Header pattern navigation attribute for overlay/offcanvas
+- Added - Login/out Gutenberg block custom markup
 
 v5.1.7
 - Removed - FSE class used to hide/show Customizer/Site editor links in admin

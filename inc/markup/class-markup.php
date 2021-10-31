@@ -87,6 +87,7 @@ class Markup {
 	 * @param 	array|string	$elements   Elements that $attributes should be stripped from.
 	 * @param 	array|string 	$attributes Attributes that should be stripped from $elements.
 	 * @param 	bool         	$two_passes Whether the function should allow two passes.
+	 *
 	 * @return 	string			HTML markup with attributes stripped.
 	 */
 	public static function strip_attr( $text, $elements, $attributes, $two_passes = true ) {

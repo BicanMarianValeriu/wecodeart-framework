@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-10-27 22:24+0000\n"
+"PO-Revision-Date: 2021-10-31 09:46+0000\n"
 "Last-Translator: \n"
-"Language-Team: Română\n"
+"Language-Team: Romanian\n"
 "Language: ro_RO\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 :(((n%100>19)||(( n%100==0)&&(n!"
 "=0)))? 2 : 1));\n"
@@ -16,16 +16,16 @@ msgstr ""
 "X-Loco-Version: 2.5.5; wp-5.8.1\n"
 "X-Domain: wecodeart"
 
-#: block-views/entry/meta/comments.tpl.php:53
+#: block-views/meta/comments.tpl.php:53
 #, php-format
 msgid " on %s"
 msgstr "la %s"
 
-#: block-views/entry/meta/comments.tpl.php:45
+#: block-views/meta/comments.tpl.php:45
 msgid "% Comments"
 msgstr "% Comentarii"
 
-#: inc/gutenberg/blocks/widgets/class-comments.php:132
+#: inc/gutenberg/blocks/widgets/class-comments.php:144
 #, php-format
 msgid "%1$s on %2$s"
 msgstr "%1$s pe %2$s"
@@ -46,12 +46,12 @@ msgstr "%s cantitate"
 msgid "%s Sidebar"
 msgstr "Deja am făcut asta"
 
-#: block-views/entry/comment.tpl.php:47
+#: block-views/comment/comment.tpl.php:47
 #, php-format
 msgid "%s's gravatar"
 msgstr "Gravatarul lui %s"
 
-#: block-views/entry/meta/author-box.tpl.php:56
+#: block-views/meta/author-box.tpl.php:56
 #, php-format
 msgid "%s`s avatar"
 msgstr "Avatarul lui %s"
@@ -60,7 +60,7 @@ msgstr "Avatarul lui %s"
 msgid "(no title)"
 msgstr "(fără titlu)"
 
-#: block-views/entry/meta/comments.tpl.php:44
+#: block-views/meta/comments.tpl.php:44
 msgid "1 Comment"
 msgstr "1 Comentariu"
 
@@ -89,7 +89,7 @@ msgstr ""
 "asemenea, optimizate folosind marcajul Bootstrap - instrumentul perfect "
 "pentru orice dezvoltator."
 
-#: block-views/entry/meta/author-box.tpl.php:40
+#: block-views/meta/author-box.tpl.php:40
 #, php-format
 msgid "About %s"
 msgstr "Despre %s"
@@ -114,7 +114,7 @@ msgstr "Suportul ANR Captcha este activat!"
 msgid "Archives"
 msgstr "Arhive"
 
-#: block-views/entry/comment.tpl.php:78
+#: block-views/comment/comment.tpl.php:78
 msgid "at"
 msgstr "la"
 
@@ -159,7 +159,7 @@ msgstr "Arhivă Categorie: %s"
 msgid "Comment *"
 msgstr "Comentariu"
 
-#: block-views/entry/meta/comments.tpl.php:47
+#: block-views/meta/comments.tpl.php:47
 msgid "Comments are Closed"
 msgstr "Comentariile sunt inchise"
 
@@ -189,7 +189,7 @@ msgstr ""
 msgid "Copyright %s - All rights reserved."
 msgstr "Drepturi de autor %s - Toate drepturile reservate."
 
-#: inc/support/starter/class-starter.php:72
+#: inc/support/starter/class-starter.php:71
 msgid "Customizer"
 msgstr "Customizer"
 
@@ -198,11 +198,11 @@ msgstr "Customizer"
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
 
-#: inc/admin/class-admin.php:263
+#: inc/admin/class-admin.php:265
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
-#: inc/support/starter/class-starter.php:71
+#: inc/support/starter/class-starter.php:70
 #, php-format
 msgid ""
 "Don`t know where to start? Go to %s to setup starter content. There you can "
@@ -212,7 +212,7 @@ msgstr ""
 "pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
 "WeCodeArt Framework."
 
-#: block-views/entry/comment.tpl.php:57
+#: block-views/comment/comment.tpl.php:57
 msgid "Edit"
 msgstr "Editează"
 
@@ -220,11 +220,7 @@ msgstr "Editează"
 msgid "Email *"
 msgstr "Email *"
 
-#: inc/support/fse/class-fse.php:60
-msgid "Enable Site Editor"
-msgstr "Activați Editorul site-ului"
-
-#: block-views/entry/protected.tpl.php:55
+#: block-views/general/protected.tpl.php:53
 msgid "Enter password"
 msgstr "Introduceți parola"
 
@@ -253,9 +249,13 @@ msgstr "https://www.wecodeart.com/"
 msgid "https://www.wecodeart.com/about/"
 msgstr "https://www.wecodeart.com/about/"
 
-#: block-views/entry/meta/comments.tpl.php:43
+#: block-views/meta/comments.tpl.php:43
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
+
+#: inc/gutenberg/blocks/widgets/class-login.php:101
+msgid "Log In"
+msgstr "Autentificare"
 
 #: inc/core/class-content.php:48
 msgid "Main Sidebar"
@@ -291,19 +291,23 @@ msgstr "Nu s-a găsit nimic care să corespundă criteriilor dvs."
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
 
-#: inc/gutenberg/blocks/query/class-numbers.php:130
+#: inc/gutenberg/blocks/query/class-numbers.php:138
 msgid "Pagination"
 msgstr "Paginare"
+
+#: inc/gutenberg/blocks/widgets/class-login.php:99
+msgid "Password"
+msgstr "Parolă"
 
 #: inc/core/class-media.php:194
 msgid "Placeholder image"
 msgstr "Imagine substituent"
 
-#: inc/markup/class-markup.php:139
+#: inc/markup/class-markup.php:140
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 
-#: block-views/entry/comment.tpl.php:68
+#: block-views/comment/comment.tpl.php:68
 msgid "Post Author"
 msgstr "Autorul postării"
 
@@ -312,24 +316,24 @@ msgstr "Autorul postării"
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
 
-#: block-views/entry/meta/date.tpl.php:60
+#: block-views/meta/date.tpl.php:60
 #, php-format
 msgid "Post updated on %s."
 msgstr "Postare actualizată la %s."
 
-#: block-views/entry/meta/terms.tpl.php:54
+#: block-views/meta/terms.tpl.php:54
 msgid "Posted in"
 msgstr "Postat in"
 
-#: block-views/entry/meta/date.tpl.php:44
+#: block-views/meta/date.tpl.php:44
 msgid "Posted on "
 msgstr "Postat pe"
 
-#: inc/support/starter/class-starter.php:148
+#: inc/support/starter/class-starter.php:149
 msgid "Primary Menu"
 msgstr "Meniu Principal"
 
-#: inc/support/class-support.php:72
+#: inc/support/class-support.php:71
 msgid "Primary Navigation"
 msgstr "Navigație principală"
 
@@ -341,6 +345,10 @@ msgstr "Cantitate"
 #: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
 msgid "Quantity"
 msgstr "Cantitate"
+
+#: inc/gutenberg/blocks/widgets/class-login.php:100
+msgid "Remember Me"
+msgstr "Ține-mă minte"
 
 #. %1$s expands to the request method
 #: inc/admin/request/class-request.php:103
@@ -376,13 +384,9 @@ msgstr "Trimite"
 msgid "Shop order"
 msgstr "Comandă magazin"
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:97
+#: inc/support/plugins/woocommerce/class-woocommerce.php:98
 msgid "Shop Sidebar"
 msgstr "Bara laterală magazin"
-
-#: inc/support/fse/class-fse.php:55
-msgid "Site Editor"
-msgstr "Editor Site"
 
 #: inc/core/entry/class-comments.php:393
 msgid "Speak Your Mind"
@@ -401,27 +405,27 @@ msgstr "Fișierul trebuie să fie de tip CSS/JS."
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
-#: inc/support/starter/content/about.php:7
+#: inc/support/starter/content/about.php:8
 msgctxt "Theme starter content"
 msgid "About"
 msgstr "Despre"
 
-#: inc/support/starter/class-starter.php:169
+#: inc/support/starter/class-starter.php:173
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Blog"
 
-#: inc/support/starter/content/home.php:7
+#: inc/support/starter/content/home.php:8
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr "Acasă"
 
-#: inc/support/starter/class-starter.php:135
+#: inc/support/starter/class-starter.php:136
 msgctxt "Theme starter content"
 msgid "Logo"
 msgstr "Logo"
 
-#: inc/gutenberg/blocks/widgets/class-posts.php:221
+#: inc/gutenberg/blocks/widgets/class-posts.php:237
 msgid "This content is password protected."
 msgstr "Acest conținut este protejat prin parolă."
 
@@ -433,7 +437,7 @@ msgstr ""
 "Această postare este protejată prin parolă. Introduceți parola pentru a "
 "vizualiza comentarii sau a lăsa un comentariu."
 
-#: block-views/entry/protected.tpl.php:37
+#: block-views/general/protected.tpl.php:35
 msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
@@ -444,7 +448,7 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
-#: block-views/entry/protected.tpl.php:62
+#: block-views/general/protected.tpl.php:58
 msgid "Unlock"
 msgstr "Deblochează"
 
@@ -452,12 +456,16 @@ msgstr "Deblochează"
 msgid "upgrade PHP"
 msgstr "actualizați PHP"
 
+#: inc/gutenberg/blocks/widgets/class-login.php:98
+msgid "Username or Email Address"
+msgstr "Nume de utilizator sau adresă de e-mail"
+
 #: inc/core/entry/class-comments.php:305
 msgid "Website"
 msgstr "Site"
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:136
+#: inc/gutenberg/class-gutenberg.php:139
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
@@ -489,7 +497,7 @@ msgstr ""
 "Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
 "WeCodeArt Framework."
 
-#: inc/markup/class-svg.php:298
+#: inc/markup/class-svg.php:281
 #, php-format
 msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
@@ -502,7 +510,7 @@ msgstr ""
 msgid "When extending %s, you must create a `get_html` method."
 msgstr "Când extindeți %s, trebuie să creați o metodă `get_html`."
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:99
+#: inc/support/plugins/woocommerce/class-woocommerce.php:100
 msgid "Widgets in this area will be shown on all shop pages."
 msgstr ""
 "Widgeturile din această zonă vor fi afișate pe toate paginile magazinului."
@@ -513,7 +521,7 @@ msgstr ""
 "Widgeturile din această zonă vor fi afișate acolo unde este redată această "
 "bară laterală."
 
-#: inc/markup/class-markup.php:208
+#: inc/markup/class-markup.php:209
 #, php-format
 msgid ""
 "Wrappers are not properly defined for \"%s\". Please check your theme code."
@@ -544,7 +552,7 @@ msgstr ""
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"
 
-#: block-views/entry/comment.tpl.php:86
+#: block-views/comment/comment.tpl.php:86
 msgid "Your comment is awaiting moderation."
 msgstr "Comentariul tău asteaptă moderarea."
 

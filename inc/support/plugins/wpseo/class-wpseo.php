@@ -72,7 +72,7 @@ class WPSeo implements Integration {
 		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_gutenberg_blocks' ] );
 
 		// Terms Template Context
-		add_filter( 'wecodeart/filter/template/context', 	[ $this, 'filter_category_context' ], 10, 2 );
+		add_filter( 'wecodeart/filter/template/context', 		[ $this, 'filter_category_context' ], 10, 2 );
 
 		// Author Template Context
 		if( get_prop( $this->config, 'author-social', false ) !== false ) {

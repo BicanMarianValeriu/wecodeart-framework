@@ -40,7 +40,7 @@ class Toggle extends Base {
 	 */
     public function __construct( string $type = 'toggle', array $args = [] ) {
         $type               = get_prop( $args, 'type' );
-        $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? get_prop( $args, 'type' ) : 'radio';
+        $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? $type : 'radio';
         $this->unique_id    = wp_unique_id( 'toggle-' );
         $this->label        = get_prop( $args, 'label', '' );
         $this->attrs        = get_prop( $args, 'attrs', [] );
