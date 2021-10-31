@@ -168,14 +168,14 @@
 			"customTextDecorations": true,
 			"fontFamilies": [
 				{
-					"fontFamily": "var(--wp--font-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif)",
+					"fontFamily": "var(--wp--font-sans-serif)",
 					"slug": "base",
 					"name": "Base"
 				},
 				{
-					"fontFamily": "var(--wp--font-secondary, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif)",
-					"slug": "headings",
-					"name": "Headings"
+					"fontFamily": "var(--wp--font-monospace)",
+					"slug": "monospace",
+					"name": "Monospace"
 				}
 			],
 			"fontSizes": [
