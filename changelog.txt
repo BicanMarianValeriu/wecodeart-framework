@@ -1,11 +1,14 @@
 v5.1.8
+- Removed - Gutenberg 'block-templates' support declaration - is added by default for block based themes
 - Removed - Base input styles - we use Bootstrap so let's stick to that
 - Updated - Comment Walker and template - prepare block-views structure for upcomming comments query
 - Updated - Post meta block-views structure changed
 - Updated - Latest Posts/Comments widgets markup (Gubenberg blocks)
 - Updated - RO translations
 - Updated - Gutenberg pattern categories registering via JSON file under /block-patterns/categories.json
+- Updated - Default skip links hooks replaced (to fix invalid markup)
 - Fixed - Header pattern navigation attribute for overlay/offcanvas
+- Fixed - TextArea input markup - remove type[textarea] and aria-required (HTML Validation)
 - Added - Login/out Gutenberg block custom markup
 
 v5.1.7

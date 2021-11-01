@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Markup\Inputs;
@@ -47,11 +47,11 @@ class TextArea extends Basic {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	5.0.0
+	 * @version	5.1.8
 	 */
 	public function content() {
         ?>
-        <textarea <?php $this->input_attrs(); ?>><?php
+        <textarea <?php $this->input_attrs( [ 'type' ] ); ?>><?php
 
             echo isset( $this->attrs['value'] ) ? esc_textarea( $this->attrs['value'] ) : '';
 

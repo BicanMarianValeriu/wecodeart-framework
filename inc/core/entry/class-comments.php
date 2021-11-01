@@ -9,7 +9,7 @@
  * @subpackage 	Core\Entry\Comments
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.0.0
+ * @version		5.1.8
  */
 
 namespace WeCodeArt\Core\Entry;
@@ -264,7 +264,7 @@ class Comments {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	5.0.0
+	 * @version	5.1.8
 	 *
 	 * @return 	array
 	 */
@@ -323,7 +323,6 @@ class Comments {
 					'style'	=> 'min-height:150px;',
 					'placeholder'	=> esc_html__( 'Comment *', 'wecodeart' ),
 					'required'		=> ( $req ) ? 'required' : NULL,
-					'aria-required'	=> 'true'
 				]
 			], false )
 		];
