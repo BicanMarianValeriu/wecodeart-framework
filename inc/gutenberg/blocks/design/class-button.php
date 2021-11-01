@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.1.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -106,19 +106,31 @@ class Button extends Dynamic {
 			max-width: none;
 		}
 		.wp-block-button.has-custom-width .wp-block-button__link {
-			min-width: 100%;
+			width: 100%;
 		} 
+		.wp-block-button.has-custom-font-size .wp-block-button__link {
+			font-size: inherit;
+		}
 		.wp-block-button.wp-block-button__width-25 {
-			min-width: 25%;
+			width: calc(25% - (var(--wp--style--block-gap, .5em) * 0.75));
 		}
 		.wp-block-button.wp-block-button__width-50 {
-			min-width: 50%;
+			width: calc(50% - (var(--wp--style--block-gap, .5em) * 0.5));
 		}
 		.wp-block-button.wp-block-button__width-75 {
-			min-width: 75%;
+			width: calc(75% - (var(--wp--style--block-gap, .5em) * 0.25));
 		}
 		.wp-block-button.wp-block-button__width-100 {
-			min-width: 100%;
+			width: 100%;
+		}
+		.wp-block-buttons.is-vertical > .wp-block-button.wp-block-button__width-25 {
+			width: 25%;
+		}
+		.wp-block-buttons.is-vertical > .wp-block-button.wp-block-button__width-50 {
+			width: 50%;
+		}
+		.wp-block-buttons.is-vertical > .wp-block-button.wp-block-button__width-75 {
+			width: 75%;
 		}
 		.wp-block-button.aligncenter {
 			text-align: center;

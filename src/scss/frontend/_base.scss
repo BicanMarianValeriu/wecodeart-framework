@@ -25,21 +25,16 @@ html {
     margin: 0 $spacer $spacer 0;
 }
 
-p {
-    &.has-drop-cap:not(:focus)::after {
-        content: "";
-        display: table;
-        clear: both;
-        padding-top: 15px;
-    }
+p.has-background {
+    padding: .5rem .8rem;
+}
 
-    &.has-text-color a {
-        color: inherit;
-    }
+p.has-drop-cap.has-background {
+	overflow: hidden;
+}
 
-    &.has-background {
-        padding: .5rem .8rem;
-    }
+:where(p.has-text-color:not(.has-link-color)) a {
+	color: inherit;
 }
 
 svg,

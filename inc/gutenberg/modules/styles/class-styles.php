@@ -132,14 +132,15 @@ class Styles implements Integration {
 	 * @return 	string 	HTML
 	 */
 	public function filter_render( $content, $block ) {
-		$block_id = get_prop( $block['attrs'], 'customCSSId', false );
+		$block_id 	= get_prop( $block['attrs'], 'customCSSId', false );
+		$block_name	= get_prop( $block, 'blockName' );
 
 		if( in_array( $block_id, self::$processed ) || $block_id === false ) return $content;
 
 		// Remove styles, where needed.
 		// I'm not happy with this way but there is no other way to remove style attributes that I know, on PHP.
 		// It would be ok with JS but that breaks the blocks / other way that could work would be rest renderer.
-		if ( in_array( $block['blockName'], (array) apply_filters( 'wecodeart/filter/gutenberg/styles/remove', [
+		if ( in_array( $block_name, (array) apply_filters( 'wecodeart/filter/gutenberg/styles/remove', [
 			'core/list',
 			'core/group',
 			'core/cover',
@@ -152,13 +153,28 @@ class Styles implements Integration {
 			'core/paragraph',
 			'core/pullquote',
 			'core/media-text',
+			'core/columns',
+			'core/column',
 			'core/social-links',
 			'core/social-link',
 			'core/navigation'
 		], true ) ) ) {
+			// Target anything for most of the blocks.
+			$regex		= '/(<[^>]+) style="([^"]*)"/i';
 			$passes 	= 1;
-			if( in_array( $block['blockName'], [ 'core/cover', 'core/media-text' ] ) ) $passes = 2;
-			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, $passes );
+			
+			// Remove multiple style attrs (for first child elements also) on some blocks.
+			if( in_array( $block_name, [ 'core/cover', 'core/media-text' ] ) ) {
+				$passes	= 2;
+			}
+
+			// Target only main wrapper for specific blocks - especialy the ones that can have innerBlocks.
+			if( in_array( $block_name, [ 'core/group', 'core/columns', 'core/column' ] ) ) {
+				$block_ = explode( '/', $block_name );
+				$regex 	= '/(<[^>]*wp-block-' . end( $block_ ) . '[^"]*") style="([^"]*)"/i';
+			}
+
+			$content 	= preg_replace( $regex, '$1', $content, $passes );
 		}
 
 		// Add necessary class

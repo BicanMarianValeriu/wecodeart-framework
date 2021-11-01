@@ -5,7 +5,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 5.1.5
+Version: 5.1.8
 Requires PHP: 7.0
 Requires at least: 5.8
 Tested up to: 5.8
@@ -5161,17 +5161,16 @@ html body {
   margin: 0 1rem 1rem 0;
 }
 
-p.has-drop-cap:not(:focus)::after {
-  content: "";
-  display: table;
-  clear: both;
-  padding-top: 15px;
-}
-p.has-text-color a {
-  color: inherit;
-}
 p.has-background {
   padding: 0.5rem 0.8rem;
+}
+
+p.has-drop-cap.has-background {
+  overflow: hidden;
+}
+
+:where(p.has-text-color:not(.has-link-color)) a {
+  color: inherit;
 }
 
 svg,
@@ -5462,6 +5461,16 @@ figcaption p.wp-caption-text,
 }
 :where(.wp-block-post-excerpt, .wp-block-post-content, .wp-block-post-comment__content) a:not([class]) {
   text-decoration: underline;
+}
+
+.has-drop-cap:not(:focus)::first-letter {
+  float: left;
+  font-size: 8em;
+  font-weight: 100;
+  font-style: normal;
+  line-height: 0.7;
+  text-transform: uppercase;
+  margin: 0.05em 0.1em 0 0;
 }
 
 .lead {

@@ -86,3 +86,13 @@
         text-decoration: underline;
     }
 }
+
+.has-drop-cap:not(:focus)::first-letter {
+	float: left;
+	font-size: 8em;
+	font-weight: 100;
+	font-style: normal;
+	line-height: 0.7;
+	text-transform: uppercase;
+	margin: 0.05em 0.1em 0 0;
+}

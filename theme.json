@@ -311,7 +311,7 @@
 			},
 			"core/button": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|headings",
+					"fontFamily": "var:preset|font-family|button",
 					"fontSize": "var:preset|font-size|normal"
 				},
 				"border": {
