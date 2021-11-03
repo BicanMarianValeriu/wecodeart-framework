@@ -93,8 +93,9 @@ class Styles implements Integration {
 		$this->CSS = wecodeart( 'integrations' )->get( 'styles' );
 
 		// Hooks
-		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 10, 2 );
+		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
+		add_action( 'wp_loaded', 					[ $this, 'add_attributes' 		] );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 10, 1 );
 		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 10, 1 );
@@ -347,6 +348,27 @@ class Styles implements Integration {
 			'core/verse',
 			'core/video',
 		] );
+	}
+
+	/**
+	 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes`
+	 * error in Gutenberg.
+	 *
+	 * @since   5.1.9
+	 */
+	public function add_attributes() {
+		$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+
+		foreach ( $registered_blocks as $name => $block ) {
+			$block->attributes['customCSSId'] = array(
+				'type'    => 'string',
+			);
+
+			$block->attributes['customCSS'] = array(
+				'type'    => 'string',
+				'default' => '',
+			);
+		}
 	}
 
 	/**

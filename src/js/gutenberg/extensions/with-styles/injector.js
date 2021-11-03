@@ -53,9 +53,9 @@ const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
 
 	// Transform the deply nested array in a simple one and then get the `customCss` value where it is the case
 	const extractCustomCss = flattenDeep(allBlocks).map((block) => {
-		const { attributes: { customCSS = null, customCSSId = null } = {} } = block;
-		if (customCSSId && customCSS) {
-			return customCSS.replace('selector', `[data-block="${customCSSId}"]`) + '\n';
+		const { attributes: { customCSS = null } = {}, clientId } = block;
+		if (customCSS) {
+			return customCSS.replace('selector', `[data-block="${clientId}"]`) + '\n';
 		}
 		return '';
 	});

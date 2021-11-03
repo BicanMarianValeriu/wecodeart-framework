@@ -113,15 +113,23 @@ const {
 } = wp;
 
 const CSSEditor = ({
+  clientId,
   attributes,
   setAttributes
 }) => {
   const {
-    customCSS
+    customCSS,
+    customCSSId
   } = attributes;
   const editorRef = useRef(null);
   const customCSSRef = useRef(null);
   const defaultValue = 'selector {\n}\n';
+  useEffect(() => {
+    if (clientId === customCSSId) return;
+    setAttributes({
+      customCSSId: clientId
+    });
+  }, [clientId]);
   useEffect(() => {
     customCSSRef.current = defaultValue;
 
@@ -258,16 +266,11 @@ const addAttributes = props => {
 const withInspectorControl = createHigherOrderComponent(BlockEdit => {
   return props => {
     const {
-      name,
-      clientId,
-      setAttributes
+      name
     } = props;
     const isRestrictedBlock = restrictedBlocks.includes(name);
 
     if (!isRestrictedBlock) {
-      useEffect(() => setAttributes({
-        customCSSId: clientId
-      }), []);
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Editor__WEBPACK_IMPORTED_MODULE_1__["default"], props)));
     }
 
@@ -358,13 +361,13 @@ const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
   const extractCustomCss = flattenDeep(allBlocks).map(block => {
     const {
       attributes: {
-        customCSS = null,
-        customCSSId = null
-      } = {}
+        customCSS = null
+      } = {},
+      clientId
     } = block;
 
-    if (customCSSId && customCSS) {
-      return customCSS.replace('selector', `[data-block="${customCSSId}"]`) + '\n';
+    if (customCSS) {
+      return customCSS.replace('selector', `[data-block="${clientId}"]`) + '\n';
     }
 
     return '';

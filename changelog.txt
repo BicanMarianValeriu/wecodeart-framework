@@ -7,6 +7,7 @@ v5.1.9
 - Fixed - WPSEO template name for author box
 - Fixed - Issue with navigation link not adding active class when on Blog page
 - Fixed - Post Author block duotone and show avatar if set (or icon if not)
+- Fixed - A bug with Gutenberg Block Styles extension causing FSE screen to crash when viewving templates
 
 v5.1.8
 - Removed - Gutenberg 'block-templates' support declaration - is added by default for block based themes

@@ -6,7 +6,6 @@ const {
 	hooks: { addFilter },
 	compose: { createHigherOrderComponent },
 	blockEditor: { InspectorAdvancedControls },
-	element: { useEffect }
 } = wp;
 
 const { restrictedBlocks } = wecodeartGutenberg;
@@ -46,13 +45,10 @@ const addAttributes = (props) => {
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const { name, clientId, setAttributes } = props;
+		const { name } = props;
 		const isRestrictedBlock = restrictedBlocks.includes(name);
 
 		if (!isRestrictedBlock) {
-
-			useEffect(() => setAttributes({ customCSSId: clientId }), []);
-
 			return (
 				<>
 					<BlockEdit {...props} />
