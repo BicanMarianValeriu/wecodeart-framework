@@ -1,5 +1,6 @@
 v5.1.9
-- Updated - Add extra menu items attributes
+- Updated - Gubenberg Style extension to remove styles for all core blocks
+- Updated - Add missing menu items attributes
 - Updated - Button styles with block-gap support and proper BEM ussage / added button blocks to inline style removal
 - Fixed - inline style removal for columns/column/group to avoid removing for child elements (fixes issue where you need to have inline style)
 - Fixed - CSS dropcap for paragraph

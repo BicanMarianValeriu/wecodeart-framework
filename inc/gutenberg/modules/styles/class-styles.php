@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.1.7
+ * @version		5.1.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -51,7 +51,7 @@ class Styles implements Integration {
 	 * @access 	public
 	 * @var 	string
 	 */
-	public $styles		= '';
+	public $styles	= '';
 
 	/**
 	 * The blocks duotone
@@ -59,7 +59,7 @@ class Styles implements Integration {
 	 * @access 	public
 	 * @var 	string
 	 */
-	public $filters		= [];
+	public $filters	= [];
 
 	/**
 	 * Current processed blocks
@@ -139,42 +139,22 @@ class Styles implements Integration {
 
 		// Remove styles, where needed.
 		// I'm not happy with this way but there is no other way to remove style attributes that I know, on PHP.
-		// It would be ok with JS but that breaks the blocks / other way that could work would be rest renderer.
-		if ( in_array( $block_name, (array) apply_filters( 'wecodeart/filter/gutenberg/styles/remove', [
-			'core/list',
-			'core/group',
-			'core/cover',
-			'core/table',
-			'core/verse',
-			'core/quote',
-			'core/spacer',
-			'core/image',
-			'core/heading',
-			'core/paragraph',
-			'core/pullquote',
-			'core/media-text',
-			'core/buttons',
-			'core/button',
-			'core/columns',
-			'core/column',
-			'core/social-links',
-			'core/social-link',
-			'core/navigation',
-			'core/navigation-link',
-		], true ) ) ) {
+		// It would be ok with JS but that breaks the blocks.
+		// Other way that could work would be rest renderer but you need to unset pretty much all attributes.
+		if ( in_array( $block_name, self::core_blocks() ) ) {
 			// Target anything for most of the blocks.
 			$regex		= '/(<[^>]+) style="([^"]*)"/i';
 			$passes 	= 1;
 			
-			// Remove multiple style attrs (for first child elements also) on some blocks.
-			if( in_array( $block_name, [ 'core/cover', 'core/media-text' ] ) ) {
-				$passes	= 2;
-			}
-
 			// Target only main wrapper for specific blocks - especialy the ones that can have innerBlocks.
-			if( in_array( $block_name, [ 'core/group', 'core/columns', 'core/column' ] ) ) {
+			if( in_array( $block_name, [ 'core/group', 'core/columns', 'core/column', 'core/cover' ] ) ) {
 				$block_ = explode( '/', $block_name );
 				$regex 	= '/(<[^>]*wp-block-' . end( $block_ ) . '[^"]*") style="([^"]*)"/i';
+			}
+
+			// Remove style attrs for first child elements on some blocks.
+			if( in_array( $block_name, [ 'core/cover', 'core/media-text' ] ) ) {
+				$passes	= 2;
 			}
 
 			$content 	= preg_replace( $regex, '$1', $content, $passes );
@@ -284,6 +264,92 @@ class Styles implements Integration {
 	}
 
 	/**
+	 * Core blocks.
+	 *
+	 * @return 	array
+	 */
+	public static function core_blocks() {
+		return apply_filters( 'wecodeart/filter/gutenberg/styles/core', [
+			'core/archive',
+			'core/audio',
+			'core/buttons',
+			'core/button',
+			'core/calendar',
+			'core/categories',
+			'core/code',
+			'core/columns',
+			'core/column',
+			'core/cover',
+			'core/embed',
+			'core/file',
+			// 'core/freeform',
+			'core/gallery',
+			'core/group',
+			'core/heading',
+			'core/home-link',
+			// 'core/html',
+			'core/image',
+			'core/latest-comments',
+			'core/latest-posts',
+			'core/list',
+			'core/loginout',
+			'core/media-text',
+			'core/navigation',
+			'core/navigation-link',
+			'core/navigation-submenu',
+			'core/page-list',
+			'core/paragraph',
+			'core/preformatted',
+			'core/pullquote',
+			'core/post-author',
+			'core/post-title',
+			'core/post-terms',
+			'core/post-date',
+			'core/post-excerpt',
+			'core/post-content',
+			'core/post-featured-image',
+			'core/post-navigation-link',
+			'core/post-template',
+			'core/post-comments',
+			'core/post-comments-link',
+			'core/post-comments-form',
+			'core/post-comments-count',
+			'core/post-comment',
+			'core/post-comment-author',
+			'core/post-comment-reply-link',
+			'core/post-comment-author-avatar',
+			'core/post-comment-date',
+			'core/post-comment-content',
+			'core/post-comment-edit',
+			'core/query',
+			'core/query-title',
+			'core/query-pagination',
+			'core/query-pagination-next',
+			'core/query-pagination-prev',
+			'core/query-pagination-numbers',
+			'core/quote',
+			'core/rss',
+			'core/search',
+			'core/separator',
+			// 'core/shortcode',
+			'core/site-logo',
+			'core/site-title',
+			'core/site-tagline',
+			'core/social-links',
+			'core/social-link',
+			'core/spacer',
+			'core/table',
+			'core/table-of-contents',
+			'core/tag-cloud',
+			'core/template-part',
+			'core/term-description',
+			'core/text-columns',
+			'core/verse',
+			'core/video',
+		] );
+	}
+
+	/**
 	 * Process a block.
 	 *
 	 * @param 	array 	$block 	The block data.
@@ -294,20 +360,20 @@ class Styles implements Integration {
 		// Find the class that will handle the output for this block.
 		$classname	= Styles\Blocks::class;
 		$defaults   = [
-			'core/cover' 		=> Styles\Blocks\Cover::class,
-			'core/media-text' 	=> Styles\Blocks\Media::class,
 			'core/button' 		=> Styles\Blocks\Button::class,
-			'core/image' 		=> Styles\Blocks\Image::class,
-			'core/table' 		=> Styles\Blocks\Table::class,
-			'core/spacer' 		=> Styles\Blocks\Spacer::class,
+			'core/cover' 		=> Styles\Blocks\Cover::class,
 			'core/column' 		=> Styles\Blocks\Column::class,
+			'core/image' 		=> Styles\Blocks\Image::class,
+			'core/media-text' 	=> Styles\Blocks\Media::class,
+			'core/navigation' 	=> Styles\Blocks\Navigation::class,
+			'core/pullquote' 	=> Styles\Blocks\PullQuote::class,
 			'core/social-links'	=> Styles\Blocks\Social::class,
 			'core/separator' 	=> Styles\Blocks\Separator::class,
-			'core/pullquote' 	=> Styles\Blocks\PullQuote::class,
-			'core/navigation' 	=> Styles\Blocks\Navigation::class
+			'core/spacer' 		=> Styles\Blocks\Spacer::class,
+			'core/table' 		=> Styles\Blocks\Table::class,
 		];
 
-		$output_classes = apply_filters( 'wecodeart/filter/gutenberg/styles/blocks', $defaults );
+		$output_classes = apply_filters( 'wecodeart/filter/gutenberg/styles/processor', $defaults );
 
 		if ( array_key_exists( $block['blockName'], $output_classes ) ) {
 			$classname = $output_classes[ $block['blockName'] ];
