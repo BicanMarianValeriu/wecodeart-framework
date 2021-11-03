@@ -253,7 +253,7 @@ class Navigation extends Dynamic {
 					'title' 		=> $item->attr_title,
 					'type'          => $item->object,
 					'description'   => $item->description,
-					'className' 	=> implode( ' ', $item->classes ),
+					'className' 	=> implode( ' ', (array) $item->classes ),
 					'rel' 			=> ( null !== $item->xfn && '' !== $item->xfn ) ? $item->xfn : null,
 					'kind' 			=> null !== $item->type ? str_replace( '_', '-', $item->type ) : 'custom',
 					'opensInNewTab'	=> null !== $item->target && '_blank' === $item->target,

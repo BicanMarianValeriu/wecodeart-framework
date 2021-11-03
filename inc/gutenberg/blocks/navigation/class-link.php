@@ -243,7 +243,8 @@ class Link extends Dynamic {
 	public function get_link_attributes( $attributes, $block, $extras ) {
 		global $wp;
 
-		$is_active   	= ! empty( $attributes['id'] ) && ( get_the_ID() === $attributes['id'] );
+		$current_id 	= is_home() ? get_option( 'page_for_posts' ) : get_the_ID();
+		$is_active   	= ! empty( $attributes['id'] ) && ( (int) $current_id === (int) $attributes['id'] );
 		$has_submenu 	= count( $block->inner_blocks ) > 0;
 		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
 

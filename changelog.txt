@@ -5,6 +5,7 @@ v5.1.9
 - Fixed - inline style removal for columns/column/group to avoid removing for child elements (fixes issue where you need to have inline style)
 - Fixed - CSS dropcap for paragraph
 - Fixed - WPSEO template name for author box
+- Fixed - Issue with navigation link not adding active class when on Blog page
 - Fixed - Post Author block duotone and show avatar if set (or icon if not)
 
 v5.1.8
