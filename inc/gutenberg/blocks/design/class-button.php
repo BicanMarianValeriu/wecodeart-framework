@@ -92,7 +92,11 @@ class Button extends Dynamic {
 			$link->setAttribute( 'class', join( ' ', $classname ) );
 		}
 
-		return $this->save_html( $doc->saveHTML() );
+		// Convert to BEM - I know that JSON cannot allow use it but we can do it in PHP
+		$html = str_replace( '__width', '--width', $doc->saveHTML() );
+
+		// Remove the Doctype output
+		return $this->save_html( $html );
 	}
 
 	/**
@@ -111,25 +115,25 @@ class Button extends Dynamic {
 		.wp-block-button.has-custom-font-size .wp-block-button__link {
 			font-size: inherit;
 		}
-		.wp-block-button.wp-block-button__width-25 {
-			width: calc(25% - (var(--wp--style--block-gap, .5em) * 0.75));
+		.wp-block-button--width-25 {
+			width: calc(25% - (var(--wp--style--block-gap, 1em) * 0.75));
 		}
-		.wp-block-button.wp-block-button__width-50 {
-			width: calc(50% - (var(--wp--style--block-gap, .5em) * 0.5));
+		.wp-block-button--width-50 {
+			width: calc(50% - (var(--wp--style--block-gap, 1em) * 0.5));
 		}
-		.wp-block-button.wp-block-button__width-75 {
-			width: calc(75% - (var(--wp--style--block-gap, .5em) * 0.25));
+		.wp-block-button--width-75 {
+			width: calc(75% - (var(--wp--style--block-gap, 1em) * 0.25));
 		}
-		.wp-block-button.wp-block-button__width-100 {
+		.wp-block-button--width-100 {
 			width: 100%;
 		}
-		.wp-block-buttons.is-vertical > .wp-block-button.wp-block-button__width-25 {
+		.wp-block-buttons.is-vertical > .wp-block-button--width-25 {
 			width: 25%;
 		}
-		.wp-block-buttons.is-vertical > .wp-block-button.wp-block-button__width-50 {
+		.wp-block-buttons.is-vertical > .wp-block-button--width-50 {
 			width: 50%;
 		}
-		.wp-block-buttons.is-vertical > .wp-block-button.wp-block-button__width-75 {
+		.wp-block-buttons.is-vertical > .wp-block-button--width-75 {
 			width: 75%;
 		}
 		.wp-block-button.aligncenter {

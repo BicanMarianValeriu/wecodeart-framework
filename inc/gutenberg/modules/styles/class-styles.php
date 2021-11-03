@@ -153,11 +153,14 @@ class Styles implements Integration {
 			'core/paragraph',
 			'core/pullquote',
 			'core/media-text',
+			'core/buttons',
+			'core/button',
 			'core/columns',
 			'core/column',
 			'core/social-links',
 			'core/social-link',
-			'core/navigation'
+			'core/navigation',
+			'core/navigation-link',
 		], true ) ) ) {
 			// Target anything for most of the blocks.
 			$regex		= '/(<[^>]+) style="([^"]*)"/i';

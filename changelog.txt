@@ -1,6 +1,6 @@
 v5.1.9
 - Updated - Add extra menu items attributes
-- Updated - Button styles with block-gap support
+- Updated - Button styles with block-gap support and proper BEM ussage / added button blocks to inline style removal
 - Fixed - inline style removal for columns/column/group to avoid removing for child elements (fixes issue where you need to have inline style)
 - Fixed - CSS dropcap for paragraph
 - Fixed - WPSEO template name for author box
