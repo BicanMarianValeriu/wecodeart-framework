@@ -47,7 +47,7 @@ if( $value = get_prop( $attributes, 'textAlign', false ) ) {
 		?></span>
 	</h3>
 	<div class="row">
-		<div class="wp-block-post-author__gravatar col-12 col-sm-auto"><?php
+		<div class="wp-block-post-author__avatar col-12 col-sm-auto"><?php
 
 			echo get_avatar(
 				$author->id,

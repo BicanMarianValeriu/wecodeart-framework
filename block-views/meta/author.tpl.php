@@ -9,7 +9,7 @@
  * @subpackage 	Entry\Meta\Author
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		5.0.0
+ * @version		5.1.9
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -37,14 +37,30 @@ if( $value = get_prop( $attributes, 'textAlign', false ) ) {
 
 ?>
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
-    <?php
+    <?php if( get_prop( $attributes, 'showAvatar', false ) ) : ?>
+    <span class="wp-block-post-author__avatar"><?php
 
+    echo get_avatar(
+        $author->id,
+        get_prop( $attributes, 'avatarSize', 45 ), 
+        '',
+        sprintf( esc_html__( '%s`s avatar', 'wecodeart' ), $author->name ),
+        [
+            'class' => 'img-thumbnail shadow-sm rounded-circle'
+        ]
+    );
+
+    ?></span><?php
+    
+    else : 
+    
     SVG::render( 'user', [
         'class' => 'wp-block-post-author__icon d-inline-block me-1'
     ] );
 
-    ?>
-    <?php if( $byline = get_prop( $attributes, 'byline', false ) ) : ?>
+    endif; 
+    
+    if( $byline = get_prop( $attributes, 'byline', false ) ) : ?>
     <span class="wp-block-post-author__byline screen-reader-text"><?php
     
     echo esc_html( $byline );
@@ -57,7 +73,7 @@ if( $value = get_prop( $attributes, 'textAlign', false ) ) {
         <span class="wp-block-post-author__name"><?php
         
         echo esc_html( $author->name ); 
-    
+
         ?></span>
     <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
     </a>
