@@ -334,7 +334,7 @@ class Gutenberg {
 			skipLink = document.createElement( 'a' );
 			skipLink.classList.add( 'skip-link', 'screen-reader-text' );
 			skipLink.href = '#' + skipLinkTargetID;
-			skipLink.innerHTML = '<?php esc_html_e( 'Skip to content', 'gutenberg' ); ?>';
+			skipLink.innerHTML = '<?php esc_html_e( 'Skip to content', 'wecodeart' ); ?>';
 
 			// Inject the skip link.
 			sibling.parentElement.insertBefore( skipLink, sibling );
