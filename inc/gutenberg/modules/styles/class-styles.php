@@ -148,7 +148,15 @@ class Styles implements Integration {
 			$passes 	= 1;
 			
 			// Target only main wrapper for specific blocks - especialy the ones that can have innerBlocks.
-			if( in_array( $block_name, [ 'core/group', 'core/columns', 'core/column', 'core/cover' ] ) ) {
+			if( in_array( $block_name, [
+				'core/cover',
+				'core/column',
+				'core/columns',
+				'core/group',
+				'core/media-text',
+				'core/template-part',
+				'core/post-comments-form',
+			] ) ) {
 				$block_ = explode( '/', $block_name );
 				$regex 	= '/(<[^>]*wp-block-' . end( $block_ ) . '[^"]*") style="([^"]*)"/i';
 			}
