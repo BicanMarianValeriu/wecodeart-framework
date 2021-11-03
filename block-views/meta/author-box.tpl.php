@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box Template
  * @since 		3.0.3
- * @version		5.0.0
+ * @version		5.1.9
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -28,14 +28,16 @@ if( $value = get_prop( $attributes, 'textAlign', false ) ) {
 
 ?>
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
-	<h3 class="wp-block-post-author__headline mb-3"><?php
+	<h3 class="wp-block-post-author__headline"><?php
 			
 		SVG::render( 'user' );
 		
 		?><span class="ms-2"><?php
 		
 			if( $byline = get_prop( $attributes, 'byline', false ) ) {
+
 				echo wp_kses_post( $byline );
+
 			} else {
 				printf( esc_html__( 'About %s', 'wecodeart' ), sprintf(
 					'<a href="%s" rel="author">%s</a>',
@@ -66,6 +68,7 @@ if( $value = get_prop( $attributes, 'textAlign', false ) ) {
 			
 			if( isset( $social ) && is_array( $social ) ) {
 				$classnames = [ 'wp-block-post-author__social', 'row', 'gx-2' ];
+
 				if( $value = get_prop( $attributes, 'textAlign', false ) ) {
 					$classnames[] = 'justify-content-' . $value;
 				}
