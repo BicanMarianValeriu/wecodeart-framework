@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		5.0.0
+ * @version		5.1.9
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -116,14 +116,14 @@ class WPSeo implements Integration {
 	 * Extend Author Box with Yoast's Social
 	 *
 	 * @since	3.9.3
-	 * @version 5.0.0
+	 * @version 5.1.9
 	 *
 	 * @return 	array
 	 */
 	public function filter_author_context( $args, $name ) {
 		$config	= get_prop( $this->config, 'author-social', false );
 
-		if( $name !== 'entry/meta/author-box.php' || $config === false ) {
+		if( $name !== 'meta/author-box.php' || $config === false ) {
 			return $args;
 		}
 

@@ -1,7 +1,9 @@
 v5.1.9
+- Updated - Add extra menu items attributes
 - Updated - Button styles with block-gap support
 - Fixed - inline style removal for columns/column/group to avoid removing for child elements (fixes issue where you need to have inline style)
 - Fixed - CSS dropcap for paragraph
+- Fixed - WPSEO template name for author box
 
 v5.1.8
 - Removed - Gutenberg 'block-templates' support declaration - is added by default for block based themes

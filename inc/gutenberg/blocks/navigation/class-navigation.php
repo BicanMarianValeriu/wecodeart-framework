@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.7
+ * @version		5.1.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -247,12 +247,16 @@ class Navigation extends Dynamic {
 			$block = [
 				'blockName' => 'core/navigation-link',
 				'attrs'     => [
-					'id'			=> url_to_postid( $item->url ),
+					'id'			=> ( null !== $item->object_id && 'custom' !== $item->object ) ? $item->object_id : null,
+					'url'   		=> $item->url,
 					'label' 		=> $item->title,
 					'title' 		=> $item->attr_title,
-					'url'   		=> $item->url,
-					'opensInNewTab'	=> $item->target === '_blank' ? true : false,
+					'type'          => $item->object,
+					'description'   => $item->description,
 					'className' 	=> implode( ' ', $item->classes ),
+					'rel' 			=> ( null !== $item->xfn && '' !== $item->xfn ) ? $item->xfn : null,
+					'kind' 			=> null !== $item->type ? str_replace( '_', '-', $item->type ) : 'custom',
+					'opensInNewTab'	=> null !== $item->target && '_blank' === $item->target,
 					'isTopLevelLink'=> $top,
 				],
 			];
@@ -336,11 +340,7 @@ class Navigation extends Dynamic {
 		$has_named_text_color  = get_prop( $attributes, 'textColor', false );
 		$has_custom_text_color = get_prop( $attributes, 'customTextColor', false );
 
-		// Overlays - to be added via CSS because of extra specificity
-		// $has_overlay_text_color  		= get_prop( $attributes, 'overlayTextColor', false );
-		// $has_custom_overlay_text_color 	= get_prop( $attributes, 'customOverlayTextColor', false );
-		// $has_overlay_bg_color  			= get_prop( $attributes, 'overlayBackgroundColor', false );
-		// $has_custom_overlay_bg_color 	= get_prop( $attributes, 'customOverlayBackgroundColor', false );
+		// Overlays - added via CSS because of extra specificity
 		
 		// Background color.
 		$has_named_background_color  = get_prop( $attributes, 'backgroundColor', false );

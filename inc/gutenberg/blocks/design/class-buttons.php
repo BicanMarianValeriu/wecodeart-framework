@@ -66,10 +66,9 @@ class Buttons extends Dynamic {
 	public function styles() {
 		return "
 		.wp-block-buttons {
-			--wp--style--block-gap: 10px;
 			display: flex;
 			flex-flow: row wrap;
-			gap: var(--wp--style--block-gap, .5em);
+			gap: var(--wp--style--block-gap, 1em);
 		}
 		.wp-block-buttons.is-style-group {
 			--wp--style--block-gap: 0;
