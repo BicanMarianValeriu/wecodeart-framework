@@ -149,12 +149,15 @@ class Styles implements Integration {
 			
 			// Target only main wrapper for specific blocks - especialy the ones that can have innerBlocks.
 			if( in_array( $block_name, [
+				// Blocks with innerBlocks
 				'core/cover',
 				'core/column',
 				'core/columns',
 				'core/group',
 				'core/media-text',
+				// Blocks that render others
 				'core/template-part',
+				// Here we need "cancel reply" link to be hidden
 				'core/post-comments-form',
 			] ) ) {
 				$block_ = explode( '/', $block_name );
