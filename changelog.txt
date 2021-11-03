@@ -1,3 +1,9 @@
+v5.2.1
+- Updated - Gubenberg Editor columns grid highlight: add top/bottom border for better visuals and remove padding bottom
+
+v5.2.0
+- Fixed - Double textdomain
+
 v5.1.9
 - Updated - Gubenberg Style extension to remove styles for all core blocks
 - Updated - Add missing menu items attributes

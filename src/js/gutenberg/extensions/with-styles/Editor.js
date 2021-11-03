@@ -65,7 +65,7 @@ const CSSEditor = ({
 				<h2 class="wecodeart-advanced-css__title">{__('Add your custom CSS.', 'wecodeart')}</h2>
 				<div className="wecodeart-advanced-css__editor" id="wecodeart-css-editor" />
 				<div class="wecodeart-advanced-css__content">
-					<p>{__('Use', 'wecodeart')} <code>selector</code> {__('to target block wrapper.', 'wecodeart')}</p>
+					<p>{__('Use', 'wecodeart')} <code>selector</code> {__('to target the block class.', 'wecodeart')}</p>
 					<p>{__('Example', 'wecodeart')}:</p>
 					<pre className="wecodeart-advanced-css__help">
 						{'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'}

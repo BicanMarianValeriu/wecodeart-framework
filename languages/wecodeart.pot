@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-31 09:43+0000\n"
+"POT-Creation-Date: 2021-11-03 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -46,12 +46,12 @@ msgstr ""
 msgid "%s Sidebar"
 msgstr ""
 
-#: block-views/comment/comment.tpl.php:47
+#: block-views/comment/comment.tpl.php:48
 #, php-format
 msgid "%s's gravatar"
 msgstr ""
 
-#: block-views/meta/author-box.tpl.php:56
+#: block-views/meta/author-box.tpl.php:58 block-views/meta/author.tpl.php:47
 #, php-format
 msgid "%s`s avatar"
 msgstr ""
@@ -80,7 +80,7 @@ msgid ""
 "perfect tool for any developer."
 msgstr ""
 
-#: block-views/meta/author-box.tpl.php:40
+#: block-views/meta/author-box.tpl.php:42
 #, php-format
 msgid "About %s"
 msgstr ""
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Archives"
 msgstr ""
 
-#: block-views/comment/comment.tpl.php:78
+#: block-views/comment/comment.tpl.php:79
 msgid "at"
 msgstr ""
 
@@ -125,12 +125,12 @@ msgstr ""
 msgid "Built on %1s."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:374
+#: inc/core/entry/class-comments.php:373
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:398
+#: inc/core/entry/class-comments.php:397
 msgid "Cancel reply"
 msgstr ""
 
@@ -194,7 +194,7 @@ msgid ""
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
-#: block-views/comment/comment.tpl.php:57
+#: block-views/comment/comment.tpl.php:58
 msgid "Edit"
 msgstr ""
 
@@ -220,6 +220,13 @@ msgstr ""
 
 #: inc/gutenberg/blocks/design/class-buttons.php:52
 msgid "Group"
+msgstr ""
+
+#: inc/markup/class-markup.php:209
+#, php-format
+msgid ""
+"HTML wrappers are not properly defined for \"%s\". Please check your theme "
+"code."
 msgstr ""
 
 #. URI of the theme
@@ -288,7 +295,7 @@ msgstr ""
 msgid "Please define a callback function for each of the modules."
 msgstr ""
 
-#: block-views/comment/comment.tpl.php:68
+#: block-views/comment/comment.tpl.php:69
 msgid "Post Author"
 msgstr ""
 
@@ -337,7 +344,7 @@ msgstr ""
 msgid "Request method %1$s is not valid."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:408
+#: inc/core/entry/class-comments.php:407
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr ""
@@ -368,7 +375,11 @@ msgstr ""
 msgid "Shop Sidebar"
 msgstr ""
 
-#: inc/core/entry/class-comments.php:393
+#: inc/gutenberg/class-gutenberg.php:337
+msgid "Skip to content"
+msgstr ""
+
+#: inc/core/entry/class-comments.php:392
 msgid "Speak Your Mind"
 msgstr ""
 
@@ -441,7 +452,7 @@ msgid "Website"
 msgstr ""
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:139
+#: inc/gutenberg/class-gutenberg.php:144
 msgid "WeCodeArt"
 msgstr ""
 
@@ -485,12 +496,6 @@ msgstr ""
 msgid "Widgets in this area will be shown where this sidebar is rendered."
 msgstr ""
 
-#: inc/markup/class-markup.php:209
-#, php-format
-msgid ""
-"Wrappers are not properly defined for \"%s\". Please check your theme code."
-msgstr ""
-
 #: inc/core/class-core.php:152
 msgctxt "yearly archives date format"
 msgid "Y"
@@ -507,16 +512,16 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:460
+#: inc/core/entry/class-comments.php:459
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr ""
 
-#: block-views/comment/comment.tpl.php:86
+#: block-views/comment/comment.tpl.php:87
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:406
+#: inc/core/entry/class-comments.php:405
 msgid "Your email address will not be published."
 msgstr ""
 

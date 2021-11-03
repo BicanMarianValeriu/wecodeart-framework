@@ -6179,118 +6179,102 @@
 :root {
   /*lint-enable function-comma-space-after */
 }
-:root div[class*=has-background].bg-transparent {
+:root .bg-transparent {
   background-color: transparent !important;
 }
-:root div[class*=has-background].bg-repeat {
+:root .bg-repeat {
   background-repeat: repeat;
 }
-:root div[class*=has-background].bg-no-repeat {
+:root .bg-no-repeat {
   background-repeat: no-repeat;
 }
-:root div[class*=has-background].bg-repeat-x {
+:root .bg-repeat-x {
   background-repeat: repeat-x;
 }
-:root div[class*=has-background].bg-repeat-y {
+:root .bg-repeat-y {
   background-repeat: repeat-y;
 }
-:root div[class*=has-background].bg-cover {
+:root .bg-cover {
   background-size: cover;
 }
-:root div[class*=has-background].bg-auto {
+:root .bg-auto {
   background-size: auto;
 }
-:root div[class*=has-background].bg-contain {
+:root .bg-contain {
   background-size: contain;
 }
-:root div[class*=has-background].bg-top-left {
+:root .bg-top-left {
   background-position: top left;
 }
-:root div[class*=has-background].bg-top-center {
+:root .bg-top-center {
   background-position: top center;
 }
-:root div[class*=has-background].bg-top-right {
+:root .bg-top-right {
   background-position: top right;
 }
-:root div[class*=has-background].bg-center-left {
+:root .bg-center-left {
   background-position: center left;
 }
-:root div[class*=has-background].bg-center-center {
+:root .bg-center-center {
   background-position: center center;
 }
-:root div[class*=has-background].bg-center-right {
+:root .bg-center-right {
   background-position: center right;
 }
-:root div[class*=has-background].bg-bottom-left {
+:root .bg-bottom-left {
   background-position: bottom left;
 }
-:root div[class*=has-background].bg-bottom-center {
+:root .bg-bottom-center {
   background-position: bottom center;
 }
-:root div[class*=has-background].bg-bottom-right {
+:root .bg-bottom-right {
   background-position: bottom right;
 }
-:root div[class*=has-background].has-parallax {
+:root .bg-parallax {
   background-attachment: fixed;
 }
 @supports (-webkit-overflow-scrolling: touch) {
-  :root div[class*=has-background].has-parallax {
+  :root .bg-parallax {
     background-attachment: scroll;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  :root div[class*=has-background].has-parallax {
+  :root .bg-parallax {
     background-attachment: scroll;
   }
 }
-:root div[class*=has-background].is-repeated {
-  background-repeat: repeat;
-  background-size: auto;
-}
-:root div[class*=has-background].has-background-dim {
-  position: relative;
-}
-:root div[class*=has-background].has-background-dim:not(.has-background-gradient)::before {
-  content: "";
-  background-color: inherit;
-}
-:root div[class*=has-background].has-background-dim:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim > span[aria-hidden=true] {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
+:root .has-background-dim {
   opacity: 0.5;
+  z-index: 1;
 }
-:root div[class*=has-background].has-background-dim-10:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-10 > span[aria-hidden=true] {
+:root .has-background-dim-10 {
   opacity: 0.1;
 }
-:root div[class*=has-background].has-background-dim-20:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-20 > span[aria-hidden=true] {
+:root .has-background-dim-20 {
   opacity: 0.2;
 }
-:root div[class*=has-background].has-background-dim-30:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-30 > span[aria-hidden=true] {
+:root .has-background-dim-30 {
   opacity: 0.3;
 }
-:root div[class*=has-background].has-background-dim-40:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-40 > span[aria-hidden=true] {
+:root .has-background-dim-40 {
   opacity: 0.4;
 }
-:root div[class*=has-background].has-background-dim-50:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-50 > span[aria-hidden=true] {
+:root .has-background-dim-50 {
   opacity: 0.5;
 }
-:root div[class*=has-background].has-background-dim-60:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-60 > span[aria-hidden=true] {
+:root .has-background-dim-60 {
   opacity: 0.6;
 }
-:root div[class*=has-background].has-background-dim-70:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-70 > span[aria-hidden=true] {
+:root .has-background-dim-70 {
   opacity: 0.7;
 }
-:root div[class*=has-background].has-background-dim-80:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-80 > span[aria-hidden=true] {
+:root .has-background-dim-80 {
   opacity: 0.8;
 }
-:root div[class*=has-background].has-background-dim-90:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-90 > span[aria-hidden=true] {
+:root .has-background-dim-90 {
   opacity: 0.9;
 }
-:root div[class*=has-background].has-background-dim-100:not(.has-background-gradient)::before, :root div[class*=has-background].has-background-dim-100 > span[aria-hidden=true] {
+:root .has-background-dim-100 {
   opacity: 1;
 }
 :root .has-inline-background {
@@ -6364,9 +6348,6 @@
 .wp-block-columns.has-background {
   padding: 0;
 }
-.wp-block-columns.is-selected, .wp-block-columns.has-child-selected {
-  padding-bottom: 10px;
-}
 .wp-block-columns.is-selected::before, .wp-block-columns.has-child-selected::before {
   position: absolute;
 }
@@ -6382,6 +6363,8 @@
   z-index: 0;
   background-image: repeating-linear-gradient(to right, currentColor, currentColor 1px, transparent 1px, transparent);
   background-size: 8.33%;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
 }
 
 .wp-block-column {

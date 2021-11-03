@@ -16,7 +16,7 @@
 
 	&.is-selected,
 	&.has-child-selected {
-		padding-bottom: 10px;
+		// padding-bottom: 10px;
 		
 		&::before {
 			position: absolute;
@@ -35,6 +35,8 @@
 		z-index: 0;
 		background-image: repeating-linear-gradient(to right, currentColor, currentColor 1px, transparent 1px, transparent);
 		background-size: 8.33%;
+		border-top: 1px solid #efefef;
+    	border-bottom: 1px solid #efefef;
 	}
 }
 

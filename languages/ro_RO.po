@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-10-31 09:46+0000\n"
+"PO-Revision-Date: 2021-11-03 14:24+0000\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -46,12 +46,12 @@ msgstr "%s cantitate"
 msgid "%s Sidebar"
 msgstr "Deja am făcut asta"
 
-#: block-views/comment/comment.tpl.php:47
+#: block-views/comment/comment.tpl.php:48
 #, php-format
 msgid "%s's gravatar"
 msgstr "Gravatarul lui %s"
 
-#: block-views/meta/author-box.tpl.php:56
+#: block-views/meta/author-box.tpl.php:58 block-views/meta/author.tpl.php:47
 #, php-format
 msgid "%s`s avatar"
 msgstr "Avatarul lui %s"
@@ -89,7 +89,7 @@ msgstr ""
 "asemenea, optimizate folosind marcajul Bootstrap - instrumentul perfect "
 "pentru orice dezvoltator."
 
-#: block-views/meta/author-box.tpl.php:40
+#: block-views/meta/author-box.tpl.php:42
 #, php-format
 msgid "About %s"
 msgstr "Despre %s"
@@ -114,7 +114,7 @@ msgstr "Suportul ANR Captcha este activat!"
 msgid "Archives"
 msgstr "Arhive"
 
-#: block-views/comment/comment.tpl.php:78
+#: block-views/comment/comment.tpl.php:79
 msgid "at"
 msgstr "la"
 
@@ -137,12 +137,12 @@ msgstr "Blog"
 msgid "Built on %1s."
 msgstr "Creat pe %1s."
 
-#: inc/core/entry/class-comments.php:374
+#: inc/core/entry/class-comments.php:373
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr "Comentand vei accepta %s."
 
-#: inc/core/entry/class-comments.php:398
+#: inc/core/entry/class-comments.php:397
 msgid "Cancel reply"
 msgstr "Anulați răspunsul"
 
@@ -212,7 +212,7 @@ msgstr ""
 "pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
 "WeCodeArt Framework."
 
-#: block-views/comment/comment.tpl.php:57
+#: block-views/comment/comment.tpl.php:58
 msgid "Edit"
 msgstr "Editează"
 
@@ -240,6 +240,18 @@ msgstr "Notificarea nu a putut fi respinsă"
 #: inc/gutenberg/blocks/design/class-buttons.php:52
 msgid "Group"
 msgstr "Grupare"
+
+#: inc/markup/class-markup.php:209
+#, php-format
+#| msgid ""
+#| "Wrappers are not properly defined for \"%s\". Please check your theme "
+#| "code."
+msgid ""
+"HTML wrappers are not properly defined for \"%s\". Please check your theme "
+"code."
+msgstr ""
+"Wrapper-urile HTML nu sunt definite corect pentru „%s”. Vă rugăm să "
+"verificați codul temei."
 
 #. URI of the theme
 msgid "https://www.wecodeart.com/"
@@ -307,7 +319,7 @@ msgstr "Imagine substituent"
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 
-#: block-views/comment/comment.tpl.php:68
+#: block-views/comment/comment.tpl.php:69
 msgid "Post Author"
 msgstr "Autorul postării"
 
@@ -356,7 +368,7 @@ msgstr "Ține-mă minte"
 msgid "Request method %1$s is not valid."
 msgstr "Metoda de solicitare %1$s nu este validă."
 
-#: inc/core/entry/class-comments.php:408
+#: inc/core/entry/class-comments.php:407
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr "Fișele obligatorii sunt marcate cu %s\"."
@@ -388,7 +400,11 @@ msgstr "Comandă magazin"
 msgid "Shop Sidebar"
 msgstr "Bara laterală magazin"
 
-#: inc/core/entry/class-comments.php:393
+#: inc/gutenberg/class-gutenberg.php:337
+msgid "Skip to content"
+msgstr "Sari la conținut"
+
+#: inc/core/entry/class-comments.php:392
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
@@ -465,7 +481,7 @@ msgid "Website"
 msgstr "Site"
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:139
+#: inc/gutenberg/class-gutenberg.php:144
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
@@ -521,14 +537,6 @@ msgstr ""
 "Widgeturile din această zonă vor fi afișate acolo unde este redată această "
 "bară laterală."
 
-#: inc/markup/class-markup.php:209
-#, php-format
-msgid ""
-"Wrappers are not properly defined for \"%s\". Please check your theme code."
-msgstr ""
-"Împachetările nu sunt definite corect pentru „% s”. Vă rugăm să verificați "
-"codul temei."
-
 #: inc/core/class-core.php:152
 msgctxt "yearly archives date format"
 msgid "Y"
@@ -547,16 +555,16 @@ msgstr ""
 "Suportul YoastSEO este activat! Tema noastră funcționează perfect cu cel mai "
 "bun plugin SEO."
 
-#: inc/core/entry/class-comments.php:460
+#: inc/core/entry/class-comments.php:459
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"
 
-#: block-views/comment/comment.tpl.php:86
+#: block-views/comment/comment.tpl.php:87
 msgid "Your comment is awaiting moderation."
 msgstr "Comentariul tău asteaptă moderarea."
 
-#: inc/core/entry/class-comments.php:406
+#: inc/core/entry/class-comments.php:405
 msgid "Your email address will not be published."
 msgstr "Emailul tău nu va fi publicat."
 

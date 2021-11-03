@@ -9,7 +9,7 @@
  * @subpackage  Markup
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.0.0
+ * @version		5.2.1
  */
 
 namespace WeCodeArt;
@@ -206,7 +206,7 @@ class Markup {
 			$args = $defaults;
 			new \WP_Error( 'wecodeart_markup_wrap_fallback', 
 				sprintf( 
-					__( 'Wrappers are not properly defined for "%s". Please check your theme code.', 'wecodeart' ),
+					__( 'HTML wrappers are not properly defined for "%s". Please check your theme code.', 'wecodeart' ),
 					$context
 				)
 			);
