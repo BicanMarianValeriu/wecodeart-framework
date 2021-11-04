@@ -113,23 +113,15 @@ const {
 } = wp;
 
 const CSSEditor = ({
-  clientId,
   attributes,
   setAttributes
 }) => {
   const {
-    customCSS,
-    customCSSId
+    customCSS
   } = attributes;
   const editorRef = useRef(null);
   const customCSSRef = useRef(null);
   const defaultValue = 'selector {\n}\n';
-  useEffect(() => {
-    if (clientId === customCSSId) return;
-    setAttributes({
-      customCSSId: clientId
-    });
-  }, [clientId]);
   useEffect(() => {
     customCSSRef.current = defaultValue;
 
@@ -263,11 +255,22 @@ const addAttributes = props => {
 const withInspectorControl = createHigherOrderComponent(BlockEdit => {
   return props => {
     const {
-      name
+      name,
+      clientId,
+      attributes: {
+        customCSSId
+      },
+      setAttributes
     } = props;
     const isRestrictedBlock = restrictedBlocks.includes(name);
 
     if (!isRestrictedBlock) {
+      if (!customCSSId) {
+        setAttributes({
+          customCSSId: clientId
+        });
+      }
+
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Editor__WEBPACK_IMPORTED_MODULE_1__["default"], props)));
     }
 

@@ -7,20 +7,14 @@ const {
 } = wp;
 
 const CSSEditor = ({
-	clientId,
 	attributes,
 	setAttributes,
 }) => {
-	const { customCSS, customCSSId } = attributes;
+	const { customCSS } = attributes;
 
 	const editorRef = useRef(null);
 	const customCSSRef = useRef(null);
 	const defaultValue = 'selector {\n}\n';
-
-	useEffect(() => {
-		if (clientId === customCSSId) return;
-		setAttributes({ customCSSId: clientId });
-	}, [clientId]);
 
 	useEffect(() => {
 		customCSSRef.current = defaultValue;

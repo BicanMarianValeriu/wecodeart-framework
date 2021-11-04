@@ -45,10 +45,14 @@ const addAttributes = (props) => {
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const { name } = props;
+		const { name, clientId, attributes: { customCSSId }, setAttributes } = props;
 		const isRestrictedBlock = restrictedBlocks.includes(name);
 
 		if (!isRestrictedBlock) {
+			if (!customCSSId) {
+				setAttributes({ customCSSId: clientId });
+			}
+
 			return (
 				<>
 					<BlockEdit {...props} />
