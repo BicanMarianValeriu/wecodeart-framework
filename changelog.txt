@@ -1,5 +1,6 @@
 v5.2.1
 - Updated - Gubenberg Editor columns grid highlight: add top/bottom border for better visuals and remove padding bottom
+- Fix - A but with Gutenberg Styles extension not adding clientId when block is added
 
 v5.2.0
 - Fixed - Double textdomain

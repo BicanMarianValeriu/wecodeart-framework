@@ -419,6 +419,9 @@ class Suggestions {
 			'shadow-none',
 			'shadow-sm',
 			'shadow-lg',
+			// Img
+			'img-fluid',
+			'img-thumbnail',
 			// Misc
 			'stretched-link',
 			'disabled',
