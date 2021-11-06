@@ -2,17 +2,6 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Theme Textdomain
-    |--------------------------------------------------------------------------
-    |
-    | Determines a textdomain for your theme. Should be used to dynamically set
-    | namespace for gettext strings across theme. Remember, this value must
-    | be in sync with `Text Domain:` entry inside style.css theme file.
-    |
-    */
-    'domain' => 'wecodeart',
-    /*
-    |--------------------------------------------------------------------------
     | Templates files extension
     |--------------------------------------------------------------------------
     |
@@ -51,6 +40,7 @@ return [
     */
     'directories' => [
         'views'     => 'block-views',
+        'patterns'  => 'block-patterns',
         'assets'    => 'assets',
         'languages' => 'languages',
     ],

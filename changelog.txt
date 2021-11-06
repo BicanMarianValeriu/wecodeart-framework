@@ -1,3 +1,7 @@
+v5.2.2
+- Updated - Gutenberg remove from theme activation check - WP does that automatically until 5.9 for FSE themes.
+- Updated - Pattern to use spacing attributes instead of BootStrap's classes
+
 v5.2.1
 - Updated - Gubenberg Editor columns grid highlight: add top/bottom border for better visuals and remove padding bottom
 - Fix - A but with Gutenberg Styles extension not adding clientId when block is added

@@ -135,7 +135,7 @@ class Styles implements Integration {
 	public function filter_render( $content, $block ) {
 		$block_id 	= get_prop( $block['attrs'], 'customCSSId', false );
 		$block_name	= get_prop( $block, 'blockName' );
-
+		
 		if( in_array( $block_id, self::$processed ) || $block_id === false ) return $content;
 
 		// Remove styles, where needed.
@@ -365,20 +365,23 @@ class Styles implements Integration {
 	 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes`
 	 * error in Gutenberg.
 	 *
-	 * @since   5.1.9
+	 * @since   5.2.2
 	 */
 	public function add_attributes() {
 		$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
 
 		foreach ( $registered_blocks as $name => $block ) {
-			$block->attributes['customCSSId'] = array(
-				'type'    => 'string',
-			);
+			if( ! in_array( $name, self::core_blocks() ) ) continue;
 
-			$block->attributes['customCSS'] = array(
+			$block->attributes['customCSSId'] = [
 				'type'    => 'string',
-				'default' => '',
-			);
+				'default' => null,
+			];
+
+			$block->attributes['customCSS'] = [
+				'type'    => 'string',
+				'default' => null,
+			];
 		}
 	}
 

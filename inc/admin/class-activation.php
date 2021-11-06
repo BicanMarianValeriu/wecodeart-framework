@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.1.3
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Admin;
@@ -34,7 +34,6 @@ class Activation {
 	 * @var		string
 	 */
 	const REQUIRED_WP 	= '5.8';
-	const REQUIRED_GB 	= '11.3.0';
 	const REQUIRED_PHP 	= '7.0';
 
 	/**
@@ -95,7 +94,7 @@ class Activation {
 	 * Set Requirements
 	 *
 	 * @since 	3.5
-	 * @version	5.0.0
+	 * @version	5.2.2
 	 */
 	public function set_requirements( $args = [] ) {
 		return $this->requirements = wp_parse_args( $args, [
@@ -117,14 +116,6 @@ class Activation {
 					PHP_VERSION,
 					sprintf( '<a href="https://wordpress.org/support/upgrade-php/">%s</a>', esc_html__( 'upgrade PHP', 'wecodeart' ) )
 				),
-			],
-			'gutenberg'	=> [
-				'plugin'	=> true,
-				'required' 	=> 'gutenberg/gutenberg.php',
-				'i18n'      => sprintf( 
-					__( 'WeCodeArt Framework requires Gutenberg version %1$s or higher. Please install Gutenberg to use WeCodeArt Framework.', 'wecodeart' ),
-					self::REQUIRED_GB
-				), 
 			],
 		] );	
 	}

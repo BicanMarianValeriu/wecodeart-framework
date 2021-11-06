@@ -6,8 +6,8 @@ return [
 	'post_type'    => 'page',
 	'template'     => 'page',
 	'post_title'   => _x( 'About', 'Theme starter content', 'wecodeart' ),
-	'post_content' => '<!-- wp:group {"className":"mb-5","layout":{"inherit":false},"customCSSId":"87bf1a83-fdb6-42fd-9a26-3752d8ddb580"} -->
-	<div class="wp-block-group mb-5"><!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"e6e8d1f8-c885-4e8b-8e0f-4642cae91bd0"} -->
+	'post_content' => '<!-- wp:group {"className":"my-5","layout":{"inherit":false},"customCSSId":"87bf1a83-fdb6-42fd-9a26-3752d8ddb580"} -->
+	<div class="wp-block-group my-5"><!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"e6e8d1f8-c885-4e8b-8e0f-4642cae91bd0"} -->
 	<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:35% auto"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt=""/></figure><div class="wp-block-media-text__content"><!-- wp:heading {"customCSSId":"dad02bc8-1c7b-4022-bc26-2716ac345f62"} -->
 	<h2>Our Story</h2>
 	<!-- /wp:heading -->
