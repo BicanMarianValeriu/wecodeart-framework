@@ -9,7 +9,7 @@
  * @subpackage 	Core
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.0
- * @version		5.1.3
+ * @version		5.2.2
  */
 
 namespace WeCodeArt;
@@ -17,10 +17,7 @@ namespace WeCodeArt;
 defined( 'ABSPATH' ) || exit(); 
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Core\Search;
-use WeCodeArt\Core\Content;
 use WeCodeArt\Markup\SVG;
-use WeCodeArt\Markup\Walkers\Menu;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -36,16 +33,19 @@ class Core {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_filter( 'body_class',				[ $this, 'body_classes' 	] );
-		add_filter( 'get_custom_logo',			[ $this, 'custom_logo'		] );
-		add_filter( 'get_the_archive_title',	[ $this, 'archive_title' 	] );
-		add_filter( 'excerpt_length',			[ $this, 'excerpt_length' 	] );
-		add_filter( 'post_gallery',				[ $this, 'post_gallery' 	], 10, 2 );
+		add_filter( 'body_class',				[ $this, 'body_classes' 		] );
+		add_filter( 'excerpt_length',			[ $this, 'excerpt_length'		] );
+        add_filter( 'the_content',          	[ $this, 'post_pagination' 		] );
+		add_filter( 'wp_link_pages_args',   	[ $this, 'wp_link_pages_args' 	] );
+        add_filter( 'wp_link_pages_link',  	 	[ $this, 'wp_link_pages_link' 	] );
+		add_filter( 'the_password_form',		[ $this, 'the_password_form' 	] );
+		add_filter( 'get_the_archive_title',	[ $this, 'archive_title' 		] );
+		add_filter( 'post_gallery',				[ $this, 'post_gallery'			], 10, 2 );
 
 		Core\Scripts	::get_instance();
 		Core\Header		::get_instance();
 		Core\Content	::get_instance();
-		Core\Entry		::get_instance();
+		Core\Comments	::get_instance();
 		Core\Footer		::get_instance();
 	}
 	
@@ -95,18 +95,71 @@ class Core {
 	}
 
 	/**
-	 * Filter Custom Logo
-	 * 
-	 * @since  	5.0.0
-	 * @version	5.1.3
-	 * 
+	 * Return the content for No Posts
+	 *
+	 * @since	3.5
+	 * @version	5.1.8
+	 *
 	 * @return 	string
 	 */
-	public function custom_logo( $html ) {
-		$search 	= '/' . preg_quote( 'class="custom-logo-link', '/' ) . '/';
-		$replace 	= 'class="navbar-brand d-block wp-block-site-logo__link';
-		return preg_replace( $search, $replace, $html, 1 );
+	public function the_password_form( $template ) {
+		$template = wecodeart_template( 'general/protected', [
+			'action' => home_url( 'wp-login.php?action=postpass', 'login_post' )
+		], false );
+		$template = trim( preg_replace( '/\s+/', ' ', $template ) );
+		$template = preg_replace( '/>\s*</', '><', $template );
+		return $template;
 	}
+
+	/**
+     * WP-Link Pages for single
+     *
+     * @since	unknown
+     * @version 5.0.0
+     *
+     * @return  string
+     */
+    public function post_pagination( $content ) {
+        global $multipage;
+
+        if( is_singular() && 0 !== $multipage ) {
+            $content .= wp_link_pages();
+        }
+
+        return $content;
+    }
+
+    /**
+     * WP-Link Pages for paginated posts
+     *
+     * @since	unknown
+     * @version 5.0.0
+     *
+     * @return  array
+     */
+    public function wp_link_pages_args( $args ) {
+        return wp_parse_args( [
+            'before'        => '<nav class="pagination pagination-sm pagination--entry mb-3">',
+            'after'         => '</nav>',
+            'link_before'   => '<span class="page-link">',
+            'link_after'    => '</span>',
+            'echo'          => false,
+        ], $args );
+    }
+
+    /**
+     * WP-Link Pages link
+     *
+     * @since	5.0.0
+     * @version 5.2.2
+     *
+     * @return  string
+     */
+    public function wp_link_pages_link( $link ) {
+        $link = str_replace( 'post-page-numbers', 'page-item', $link );
+        $link = str_replace( 'current', 'active', $link );
+        return $link;
+    }
 
 	/**
 	 * Archives Title

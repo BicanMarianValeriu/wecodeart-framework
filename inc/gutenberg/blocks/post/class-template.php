@@ -46,7 +46,8 @@ class Template extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		add_filter( 'post_class',					[ $this, 'post_classes' 	] );
+		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' 	], 10, 2 );
 	}
 
 	/**
@@ -155,5 +156,26 @@ class Template extends Dynamic {
 			wp_reset_postdata();
 
 		}, [ $query, $block ], false );
+	}
+
+	/**
+	 * Filter classes to the array of post classes.
+	 *
+	 * @param 	array $classes Classes for the post.
+	 * 
+	 * @return 	array
+	 */
+	public function post_classes( $classes ) {
+		if ( is_admin() ) {
+			return $classes;
+		}
+		
+		// Add 'entry to the post class array.
+		$classes[] = 'entry';
+
+		// Remove 'hentry' from post class array.
+		$classes = array_diff( $classes, [ 'hentry' ] );
+		
+		return $classes;
 	}
 }

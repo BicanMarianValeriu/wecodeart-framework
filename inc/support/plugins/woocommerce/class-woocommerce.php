@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		1.9
- * @version		5.0.0
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -54,24 +54,20 @@ class WooCommerce implements Integration {
 	 * @return void
 	 */
 	public function register_hooks() {
-		// Add support for WooCommerce / Widgets
-		add_action( 'widgets_init', 		[ $this, 'widgets_init' ] );
+		// Add support for WooCommerce 
 		add_action( 'after_setup_theme', 	[ $this, 'after_setup_theme' ] );
 
-		// Widgets and Hook into Sidebar
+		// Remove Sidebar
 		remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar'	);
-		// Pagination - we use our own hooks and we have numeric pagination
-		remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10 ); 
 
 		// Content Wrappers
-		remove_action( 'woocommerce_before_main_content', 	'woocommerce_output_content_wrapper',		10 );
-		add_action( 'woocommerce_before_main_content',    	[ $this, 'before_content_wrapp' ], 	10 );
-		remove_action( 'woocommerce_after_main_content',  	'woocommerce_output_content_wrapper_end',	10 );
-		add_action( 'woocommerce_after_main_content',    	[ $this, 'after_content_wrapp' ],  	10 );
+		remove_action( 'woocommerce_before_main_content', 		'woocommerce_output_content_wrapper',		10 );
+		add_action( 'woocommerce_before_main_content',    		[ $this, 'before_content_wrapp' ], 	10 );
+		remove_action( 'woocommerce_after_main_content',  		'woocommerce_output_content_wrapper_end',	10 );
+		add_action( 'woocommerce_after_main_content',    		[ $this, 'after_content_wrapp' ],  	10 );
 
 		// Filters
-		add_filter( 'wecodeart/filter/gutenberg/restricted',[ $this, 'restricted_gutenberg_blocks' ] );
-		add_filter( 'woocommerce_locate_template',			[ $this, 'woocommerce_locate_template' ], 10, 2 );
+		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_gutenberg_blocks' ] );
 	}
 
 	/**
@@ -84,30 +80,12 @@ class WooCommerce implements Integration {
 		// Theme Support
 		foreach( $support as $feature => $value ) add_theme_support( $feature, $value );
 	}
-
-	/**
-	 * Add a sidebar.
-	 *
-	 * @since   3.5
-	 * @version 5.0.0
-	 *
-	 * @return  void
-	 */
-	public function widgets_init() {
-		register_sidebar( [
-			'name'          => __( 'Shop Sidebar', 'wecodeart' ),
-			'id'            => 'shop',
-			'description'   => __( 'Widgets in this area will be shown on all shop pages.', 'wecodeart' ),
-			'before_widget' => '',
-			'after_widget'  => '',
-		] );
-	}
 	
 	/**
 	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup
 	 *
 	 * @since   3.5
-	 * @version 5.0.0
+	 * @version 5.2.2
 	 *
 	 * @return  void
 	 */
@@ -121,75 +99,23 @@ class WooCommerce implements Integration {
 			'class' => 'site-content py-5 wp-block-template-part'
 		] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<div class="container">
-				<div class="row">
 		<?php
-
-				self::sort_modules( 'before' );
-
-				Content::get_instance()->content_markup_open();
 	}
 
 	/**
 	 * After Content - Wraps all WooCommerce content in wrappers which match the theme markup
 	 *
 	 * @since   3.5
-	 * @version 5.0.0
+	 * @version 5.2.2
 	 *
 	 * @return  void
 	 */
 	public function after_content_wrapp() {
-				Content::get_instance()->content_markup_close();
-
-				self::sort_modules( 'after' );
-				
 		?>
-				</div>
 			</div>
 		</div>
 		<!-- /.woocommerce @filter = `wecodeart/filter/wrappers/woocommerce` -->
 		<?php
-	}
-	
-	/**
-	 * Sort Content Modules based on position
-	 *
-	 * @since 	unknown
-	 * @version	5.0.0
-	 *
-	 * @param 	string 	$position Accepts before/after - render sorted modules before/after woocommerce content.
-	 *
-	 * @return 	void
-	 */
-	public static function sort_modules( string $position ) {
-		$modules = [ 'content', 'primary' ];
-
-		if( wecodeart_if( 'is_woocommerce_archive' ) ) {
-			$modules = apply_filters( 'wecodeart/filter/woocommerce/modules/archive', [ 'content', 'primary' ] );
-		}
-		
-		if( is_product() ) {
-			$modules = apply_filters( 'wecodeart/filter/woocommerce/modules/single', [ 'content', 'primary' ] );
-		}
-
-		$index = array_search( 'content', $modules );
-		if( $position === 'after' ) $elements = array_slice( $modules, $index + 1 );
-		if( $position === 'before') $elements = array_slice( $modules, 0, $index, false );
-
-		$sortable = wp_parse_args( [
-			'primary' => [
-				'callback' => function() {
-					Markup::wrap( 'shop', [ [
-						'tag' 	=> 'aside',
-						'attrs' => [
-							'class'	=> 'sidebar col-12 col-lg-3',
-						]
-					] ], 'dynamic_sidebar', [ 'shop' ] );
-				}
-			]
-		], Content::content_modules() );
-
-		// Sort the modules based on context.
-		Markup::sortable( $sortable, $elements );
 	}
 
 	/**
@@ -210,28 +136,5 @@ class WooCommerce implements Integration {
 			'woocommerce/product-on-sale',
 			'woocommerce/product-new',
 		], $blocks );
-	}
-
-	/**
-	 * Filter - WOO locate template for basic files
-	 *
-	 * @since	5.0.0
-	 * @version	5.0.0
-	 *
-	 * @param	string	$template
-	 * @param	string	$name
-	 *
-	 * @return 	string
-	 */
-	public function woocommerce_locate_template( $template, $name ) {
-		// If is a plugin file, please replace it with our own
-		// If not, please use the one from plugin/theme/child theme
-		if( strpos( wp_normalize_path( $template ), 'plugins/woocommerce' ) ) {
-			if( in_array( $name, [ 'loop/orderby.php', 'global/quantity-input.php' ] ) ) {
-				$template = wecodeart_config( 'paths' )['directory'] . '/inc/support/plugins/woocommerce/templates/' . $name;
-			}
-		}
-
-		return $template;
 	}
 }

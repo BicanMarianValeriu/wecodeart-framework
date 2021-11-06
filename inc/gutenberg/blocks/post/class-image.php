@@ -47,6 +47,7 @@ class Image extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		add_image_size( 'wca_featured', 500, 300, false );
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 

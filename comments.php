@@ -12,7 +12,7 @@
  */
 
 use WeCodeArt\Markup;
-use WeCodeArt\Core\Entry\Comments;
+use WeCodeArt\Core\Comments;
 
 /**
  * Hooks

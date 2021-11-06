@@ -1,6 +1,9 @@
 v5.2.2
-- Updated - Gutenberg remove from theme activation check - WP does that automatically until 5.9 for FSE themes.
+- Updated - Gutenberg remove from theme activation check - WP does that automatically until 5.9 for FSE themes
 - Updated - Pattern to use spacing attributes instead of BootStrap's classes
+- Updated - Reduce WooCoomerce starter support to minimum / eventually all support extensions will be moved to own plugin
+- Removed - Widgets - sidebar registration
+- Added - Site logo block wrapper (move custom logo filter to it and added styles)
 
 v5.2.1
 - Updated - Gubenberg Editor columns grid highlight: add top/bottom border for better visuals and remove padding bottom

@@ -9,10 +9,10 @@
  * @subpackage 	Core\Entry\Comments
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.1.8
+ * @version		5.2.2
  */
 
-namespace WeCodeArt\Core\Entry;
+namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 

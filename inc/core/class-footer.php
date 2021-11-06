@@ -66,7 +66,8 @@ class Footer {
 				'attrs' => [
 					'class'	=> 'container',
 				]
-			] ], 'gutenberg_block_footer_area' ); 
+			]
+		], 'gutenberg_block_footer_area' ); 
 	}
 
 	/**
