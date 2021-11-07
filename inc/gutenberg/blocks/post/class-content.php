@@ -45,6 +45,10 @@ class Content extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+        add_filter( 'wp_link_pages_link',  	 		[ $this, 'wp_link_pages_link' 	] );
+		add_filter( 'wp_link_pages_args',   		[ $this, 'wp_link_pages_args' 	] );
+		add_filter( 'the_password_form',			[ $this, 'the_password_form' 	] );
+		add_filter( 'the_content',          		[ $this, 'post_pagination'], 100 );
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -111,5 +115,74 @@ class Content extends Dynamic {
 				]
 			]
 		], $content, [], false );
+	}
+
+	/**
+     * WP-Link Pages for single
+     *
+     * @since	unknown
+     * @version 5.0.0
+     *
+     * @return  string
+     */
+    public function post_pagination( $content ) {
+        global $multipage;
+
+        if( is_singular() && 0 !== $multipage ) {
+            $content .= wp_link_pages();
+        }
+
+        return $content;
+    }
+
+    /**
+     * WP-Link Pages for paginated posts
+     *
+     * @since	unknown
+     * @version 5.0.0
+     *
+     * @return  array
+     */
+    public function wp_link_pages_args( $args ) {
+        return wp_parse_args( [
+            'before'        => '<nav class="pagination pagination-sm pagination--entry mb-3">',
+            'after'         => '</nav>',
+            'link_before'   => '<span class="page-link">',
+            'link_after'    => '</span>',
+            'echo'          => false,
+        ], $args );
+    }
+
+    /**
+     * WP-Link Pages link
+     *
+     * @since	5.0.0
+     * @version 5.2.2
+     *
+     * @return  string
+     */
+    public function wp_link_pages_link( $link ) {
+        $link = str_replace( 'post-page-numbers', 'page-item', $link );
+        $link = str_replace( 'current', 'active', $link );
+        return $link;
+    }
+
+	/**
+	 * Return the content for No Posts
+	 *
+	 * @since	3.5
+	 * @version	5.1.8
+	 *
+	 * @return 	string
+	 */
+	public function the_password_form( $template ) {
+		$template = wecodeart_template( 'general/protected', [
+			'action' => home_url( 'wp-login.php?action=postpass', 'login_post' )
+		], false );
+
+		$template = trim( preg_replace( '/\s+/', ' ', $template ) );
+		$template = preg_replace( '/>\s*</', '><', $template );
+
+		return $template;
 	}
 }

@@ -3,6 +3,9 @@ v5.2.2
 - Updated - Pattern to use spacing attributes instead of BootStrap's classes
 - Updated - Reduce WooCoomerce starter support to minimum / eventually all support extensions will be moved to own plugin
 - Removed - Widgets - sidebar registration
+- Removed - Comment Walker in favor of Gutenberg block
+- Removed - comments.php
+- Added - Gutenberg Comment Template/Form blocks
 - Added - Site logo block wrapper (move custom logo filter to it and added styles)
 
 v5.2.1

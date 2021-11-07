@@ -58,23 +58,6 @@
 	}
 }
 
-.wp-block-site-logo {
-    &:where(.alignleft,.aligncenter,.alignright) {
-        margin-bottom: 0;
-
-        .navbar-brand {
-            margin: 0;
-        }
-    }
-
-    &.aligncenter {
-        img {
-            display: block;
-            margin: 0 auto;
-        }
-    }
-}
-
 :where(.wp-block-post-excerpt, .wp-block-post-content, .wp-block-post-comment__content) {
     &::after {
         content: '';

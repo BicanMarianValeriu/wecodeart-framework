@@ -44,7 +44,7 @@ class Content {
 	 * @return 	HTML
 	 */
 	public static function render_content() {
-		$file = get_parent_theme_file_path( 'block-template-parts/query.html' );
+		$file = get_parent_theme_file_path( 'block-templates/content-only.html' );
 
 		if( file_exists( $file ) === false ) return;
 			

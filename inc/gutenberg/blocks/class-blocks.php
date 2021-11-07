@@ -97,6 +97,9 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/post-template',      Blocks\Post\Template::class );
 		$this->register( 'core/post-featured-image',Blocks\Post\Image::class );
 		$this->register( 'core/post-comments-link', Blocks\Post\Comments::class );
+        // Comments
+		$this->register( 'core/post-comments-form', Blocks\Comment\Form::class );
+		$this->register( 'core/comment-template',   Blocks\Comment\Template::class );
         // Query Blocks
 		$this->register( 'core/query',	                    Blocks\Query::class );
 		$this->register( 'core/query-title',	            Blocks\Query\Title::class );

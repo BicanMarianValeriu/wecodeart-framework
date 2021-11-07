@@ -74,7 +74,7 @@ return [
 	
 	<!-- wp:group {"layout":{"inherit":true},"customCSSId":"c43b5384-22fe-47e5-afea-f0314a3020dc"} -->
 	<div class="wp-block-group"><!-- wp:media-text {"mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","customCSSId":"36630e35-f690-4e56-9888-ea818333e9bb"} -->
-	<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure><div class="wp-block-media-text__content"><!-- wp:heading -->
+	<div class="wp-block-media-text is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure><div class="wp-block-media-text__content"><!-- wp:heading -->
 	<h2>Web Design</h2>
 	<!-- /wp:heading -->
 	
@@ -90,7 +90,7 @@ return [
 	<!-- /wp:media-text -->
 	
 	<!-- wp:media-text {"mediaPosition":"right","mediaLink":"https://picsum.photos/id/119/800/800","mediaType":"image","customCSSId":"31e3f184-797b-4d48-909f-453483c346b3"} -->
-	<div class="wp-block-media-text alignwide has-media-on-the-right is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/119/800/800" alt="" /></figure><div class="wp-block-media-text__content"><!-- wp:heading {"customCSSId":"3273f366-e3e7-4b85-91cb-643de41e4651"} -->
+	<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/119/800/800" alt="" /></figure><div class="wp-block-media-text__content"><!-- wp:heading {"customCSSId":"3273f366-e3e7-4b85-91cb-643de41e4651"} -->
 	<h2>Branding</h2>
 	<!-- /wp:heading -->
 	

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.1.4
+ * @version		5.2.2
  */
 
 namespace WeCodeArt;
@@ -254,27 +254,12 @@ class Gutenberg {
 	 * @return void
 	 */
 	public function admin_init() {
-		global $menu;
-		
 		// Developer mode will allways have access to FSE.
 		if( wecodeart_if( 'is_dev_mode' ) ) return;
 
 		// Developers can turn off FSE admin (eg: on production).
 		if( ! get_prop( wecodeart_config( 'gutenberg' ), 'editor' ) ) {
-			// Remove Site Editor.
-			$site_editor_index = false;
-			
-			if( ! empty( $menu ) ) {
-				foreach ( $menu as $index => $menu_item ) {
-					if ( ! empty( $menu_item[5] ) && false !== strpos( $menu_item[5], 'toplevel_page_gutenberg-edit-site' ) ) {
-						$site_editor_index = $index;
-					}
-				}
-			}
-	
-			if( $site_editor_index ) {
-				unset( $menu[ $site_editor_index ] );
-			}
+			remove_submenu_page( 'themes.php', 'gutenberg-edit-site' );
 		}
 	}
 

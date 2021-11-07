@@ -72,13 +72,23 @@ class Logo extends Dynamic {
 		.wp-block-site-logo {
             line-height: 0;
         }
-        .wp-block-site-logo.aligncenter {
-            display: table;
-        }
-        .wp-block-site-logo.is-default-size img {
+		.wp-block-site-logo.is-default-size img {
             max-width: 120px;
             height: auto;
         }
+        .wp-block-site-logo.aligncenter {
+            display: table;
+        }
+        .wp-block-site-logo.aligncenter img {
+            display: block;
+            margin: 0 auto;
+        }
+		.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) {
+			margin-bottom: 0;
+		}
+		.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) .navbar-brand {
+			margin: 0;
+		}
         .wp-block-site-logo :where(a,img) {
             border-radius: inherit;
         }

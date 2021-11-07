@@ -33,44 +33,21 @@ class Core {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_filter( 'body_class',				[ $this, 'body_classes' 		] );
-		add_filter( 'excerpt_length',			[ $this, 'excerpt_length'		] );
-        add_filter( 'the_content',          	[ $this, 'post_pagination' 		] );
-		add_filter( 'wp_link_pages_args',   	[ $this, 'wp_link_pages_args' 	] );
-        add_filter( 'wp_link_pages_link',  	 	[ $this, 'wp_link_pages_link' 	] );
-		add_filter( 'the_password_form',		[ $this, 'the_password_form' 	] );
-		add_filter( 'get_the_archive_title',	[ $this, 'archive_title' 		] );
-		add_filter( 'post_gallery',				[ $this, 'post_gallery'			], 10, 2 );
+		add_filter( 'body_class',				[ $this, 'body_classes'		] );
+		add_filter( 'get_the_archive_title',	[ $this, 'archive_title'	] );
+		add_filter( 'post_gallery',				[ $this, 'post_gallery'		], 10, 2 );
 
 		Core\Scripts	::get_instance();
 		Core\Header		::get_instance();
 		Core\Content	::get_instance();
-		Core\Comments	::get_instance();
 		Core\Footer		::get_instance();
-	}
-	
-	/**
-	 * Filter the excerpt length.
-	 *
-	 * @since	5.0.0
-	 *
-	 * @param 	int 	$length
-	 *
-	 * @return 	string
-	 */
-	public function excerpt_length( $length ) {
-		$custom = 30;
-		if( $custom !== '' ) {
-			$length = intval( $custom );
-		}
-
-		return $length;
 	}
 
 	/**
 	 * Adds custom classes to the array of body classes.
 	 *
-	 * @version 4.0.6
+	 * @since	4.0.6
+	 * @version 5.2.2
 	 *
 	 * @param 	array 	$classes Classes for the body element.
 	 *
@@ -78,7 +55,7 @@ class Core {
 	 */
 	public function body_classes( $classes ) {
 		// Add a class of hfeed to non-singular pages.
-		if ( ! is_singular() ) {
+		if ( ! is_singular() && ! is_404() ) {
 			$classes[] = 'hfeed';
 		}
 		
@@ -93,73 +70,6 @@ class Core {
 
 		return $classes;
 	}
-
-	/**
-	 * Return the content for No Posts
-	 *
-	 * @since	3.5
-	 * @version	5.1.8
-	 *
-	 * @return 	string
-	 */
-	public function the_password_form( $template ) {
-		$template = wecodeart_template( 'general/protected', [
-			'action' => home_url( 'wp-login.php?action=postpass', 'login_post' )
-		], false );
-		$template = trim( preg_replace( '/\s+/', ' ', $template ) );
-		$template = preg_replace( '/>\s*</', '><', $template );
-		return $template;
-	}
-
-	/**
-     * WP-Link Pages for single
-     *
-     * @since	unknown
-     * @version 5.0.0
-     *
-     * @return  string
-     */
-    public function post_pagination( $content ) {
-        global $multipage;
-
-        if( is_singular() && 0 !== $multipage ) {
-            $content .= wp_link_pages();
-        }
-
-        return $content;
-    }
-
-    /**
-     * WP-Link Pages for paginated posts
-     *
-     * @since	unknown
-     * @version 5.0.0
-     *
-     * @return  array
-     */
-    public function wp_link_pages_args( $args ) {
-        return wp_parse_args( [
-            'before'        => '<nav class="pagination pagination-sm pagination--entry mb-3">',
-            'after'         => '</nav>',
-            'link_before'   => '<span class="page-link">',
-            'link_after'    => '</span>',
-            'echo'          => false,
-        ], $args );
-    }
-
-    /**
-     * WP-Link Pages link
-     *
-     * @since	5.0.0
-     * @version 5.2.2
-     *
-     * @return  string
-     */
-    public function wp_link_pages_link( $link ) {
-        $link = str_replace( 'post-page-numbers', 'page-item', $link );
-        $link = str_replace( 'current', 'active', $link );
-        return $link;
-    }
 
 	/**
 	 * Archives Title
