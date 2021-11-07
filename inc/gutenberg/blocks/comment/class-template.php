@@ -150,8 +150,8 @@ class Template extends Dynamic {
 	/**
 	 * Render Comments Info
 	 *
-	 * @since	3.7.3
-	 * @version	5.0.0
+	 * @since	5.2.2
+	 * @version	5.2.2
 	 *
 	 * @return 	string
 	 */
@@ -205,8 +205,8 @@ class Template extends Dynamic {
 	/**
 	 * Render Comments Pagination - not working yet but it will be implemented.
 	 *
-	 * @since 	5.0.0
-	 * @version 5.0.0
+	 * @since 	5.2.2
+	 * @version 5.2.2
 	 *
 	 * @return 	string|null
 	 */
@@ -263,7 +263,8 @@ class Template extends Dynamic {
 	 */
 	public function reply_class( $html ) {
 		$search 	= '/' . preg_quote( "class='comment-reply-link'", '/' ) . '/';
-		$replace 	= 'class="comment-reply-link btn btn-dark btn-sm"';
+		$replace 	= 'class="comment-reply-link btn btn-primary btn-sm rounded-pill text-white"';
+
 		return preg_replace( $search, $replace, $html, 1 );
 	}
 }

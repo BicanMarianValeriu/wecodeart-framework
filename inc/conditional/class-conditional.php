@@ -9,7 +9,7 @@
  * @subpackage 	Conditional
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		4.0
- * @version		5.0.0
+ * @version		5.2.2
  */
 
 namespace WeCodeArt;
@@ -44,9 +44,8 @@ class Conditional implements ArrayAccess {
     public function init() {
         foreach( apply_filters( 'wecodeart/filter/conditionals', [
 			'is_theme_admin'    => Conditional\Settings::class,
-			'is_customizer'     => Conditional\Customizer::class,
-            'is_dev_mode'       => Conditional\Debug::class,
 			'is_front_page'     => Conditional\Front::class,
+            'is_dev_mode'       => Conditional\Debug::class,
 		] ) as $key => $condition ) {
             $this->register( $key, $condition );
         }

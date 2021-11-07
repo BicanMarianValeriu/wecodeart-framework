@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Login Template
  * @since 	    5.1.8
- * @version	    5.1.8
+ * @version	    5.2.2
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  * @param   array   $args   Contains the form args
  */
 ?>
-<form action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post" class="alert border">
+<form action="<?php echo esc_url( $action ); ?>" method="post" class="alert border">
     <?php
     
         // WP Filter

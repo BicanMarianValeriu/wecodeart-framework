@@ -81,7 +81,6 @@ class Blocks implements \ArrayAccess {
 	    $this->register( 'core/latest-posts',       Blocks\Widgets\Posts::class );
 		$this->register( 'core/latest-comments',    Blocks\Widgets\Comments::class );
 		$this->register( 'core/social-links',       Blocks\Widgets\Social::class );
-		$this->register( 'core/loginout',           Blocks\Widgets\Login::class );
         // Navigation Blocks
 		$this->register( 'core/navigation',         Blocks\Navigation::class );
 		$this->register( 'core/navigation-link',    Blocks\Navigation\Link::class );
@@ -106,7 +105,8 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/template-part',              Blocks\Query\Template::class );
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         // Site
-		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
+		$this->register( 'core/site-logo',  Blocks\Site\Logo::class );
+		$this->register( 'core/loginout',   Blocks\Site\Login::class );
         
         // Hooks
         add_action( 'init',                 [ $this, 'load' ] );

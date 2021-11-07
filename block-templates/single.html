@@ -7,7 +7,7 @@
         <div class="wp-block-column col col-lg-9">
             <!-- wp:group {"tagName":"main","layout":{"inherit":false}} -->
             <main class="wp-block-group">
-                <!-- wp:post-title {"style":{"spacing":{"margin":{"bottom":"2rem"}}},"customCSSId":"f06ba800-3252-401f-8030-0ac44e9f9a2d"} /-->
+                <!-- wp:post-title /-->
                 <!-- wp:template-part {"slug":"entry-meta","className":"d-flex flex-wrap align-items-center mb-3"} /-->
                 <!-- wp:post-content /-->
                 <!-- wp:post-terms {"term":"post_tag","className":"d-block mb-3"} /-->
@@ -26,13 +26,13 @@
                 </div>
                 <!-- /wp:columns -->
                 <!-- wp:post-author {"className":"py-4 mb-5 border-top border-bottom","showAvatar":true,"showBio":true} /-->
-                <!-- wp:comments-query-loop -->
+                <!-- wp:comments-query-loop {"queryPerPage":10} -->
                 <div class="wp-block-comments-query-loop">
                     <!-- wp:comment-template -->
                     <!-- wp:comment-author-avatar {"className":"img-thumbnail float-start rounded-circle me-3","width":50,"height":50} /-->
                     <!-- wp:comment-edit-link {"className":"float-end","fontSize":"small"} /-->
                     <!-- wp:comment-author-name {"isLink":true} /-->
-                    <!-- wp:comment-date {"className":"text-muted","format":"F j, Y g:i a"} /-->
+                    <!-- wp:comment-date {"className":"text-muted has-small-font-size","format":"F j, Y g:i a"} /-->
                     <!-- wp:comment-content {"className":"alert border mt-3 mb-0"} /-->
                     <!-- wp:comment-reply-link {"className":"float-end translate-middle"} /-->
                     <!-- /wp:comment-template -->

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-11-03 14:24+0000\n"
+"PO-Revision-Date: 2021-11-07 22:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -30,26 +30,10 @@ msgstr "% Comentarii"
 msgid "%1$s on %2$s"
 msgstr "%1$s pe %2$s"
 
-#: inc/core/class-core.php:165
+#: inc/core/class-core.php:128
 #, php-format
 msgid "%s Archives"
 msgstr "%s Arhivă"
-
-#. %s: Quantity.
-#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
-#, php-format
-msgid "%s quantity"
-msgstr "%s cantitate"
-
-#: inc/core/class-content.php:116
-#, php-format
-msgid "%s Sidebar"
-msgstr "Deja am făcut asta"
-
-#: block-views/comment/comment.tpl.php:48
-#, php-format
-msgid "%s's gravatar"
-msgstr "Gravatarul lui %s"
 
 #: block-views/meta/author-box.tpl.php:58 block-views/meta/author.tpl.php:47
 #, php-format
@@ -64,7 +48,7 @@ msgstr "(fără titlu)"
 msgid "1 Comment"
 msgstr "1 Comentariu"
 
-#: inc/gutenberg/blocks/post/class-content.php:86
+#: inc/gutenberg/blocks/post/class-content.php:90
 msgid "[block rendering halted]"
 msgstr "[redării blocului a fost oprită]"
 
@@ -94,7 +78,7 @@ msgstr ""
 msgid "About %s"
 msgstr "Despre %s"
 
-#: inc/core/entry/class-comments.php:60
+#: inc/gutenberg/blocks/comment/class-template.php:163
 msgid "add one"
 msgstr "adaugă unul"
 
@@ -110,15 +94,11 @@ msgstr ""
 msgid "ANR Captcha support is enabled!"
 msgstr "Suportul ANR Captcha este activat!"
 
-#: inc/core/class-core.php:173
+#: inc/core/class-core.php:136
 msgid "Archives"
 msgstr "Arhive"
 
-#: block-views/comment/comment.tpl.php:79
-msgid "at"
-msgstr "la"
-
-#: inc/core/class-core.php:146
+#: inc/core/class-core.php:109
 #, php-format
 msgid "Author Archives: %s"
 msgstr "Arhive autor"
@@ -127,7 +107,7 @@ msgstr "Arhive autor"
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr "Bican Marian Valeriu @wecodeart"
 
-#: inc/core/class-core.php:171
+#: inc/core/class-core.php:134
 msgid "Blog"
 msgstr "Blog"
 
@@ -137,12 +117,14 @@ msgstr "Blog"
 msgid "Built on %1s."
 msgstr "Creat pe %1s."
 
-#: inc/core/entry/class-comments.php:373
+#: inc/core/class-comments.php:173
+#: inc/gutenberg/blocks/comment/class-form.php:225
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr "Comentand vei accepta %s."
 
-#: inc/core/entry/class-comments.php:397
+#: inc/core/class-comments.php:197
+#: inc/gutenberg/blocks/comment/class-form.php:96
 msgid "Cancel reply"
 msgstr "Anulați răspunsul"
 
@@ -150,12 +132,14 @@ msgstr "Anulați răspunsul"
 msgid "Captcha *"
 msgstr "Captcha *"
 
-#: inc/core/class-core.php:136
+#: inc/core/class-core.php:99
 #, php-format
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
 
-#: inc/core/entry/class-comments.php:317 inc/core/entry/class-comments.php:324
+#: inc/core/class-comments.php:117 inc/core/class-comments.php:124
+#: inc/gutenberg/blocks/comment/class-form.php:194
+#: inc/gutenberg/blocks/comment/class-form.php:201
 msgid "Comment *"
 msgstr "Comentariu"
 
@@ -163,11 +147,12 @@ msgstr "Comentariu"
 msgid "Comments are Closed"
 msgstr "Comentariile sunt inchise"
 
-#: inc/core/entry/class-comments.php:195 inc/core/entry/class-comments.php:206
+#: inc/gutenberg/blocks/comment/class-template.php:224
+#: inc/gutenberg/blocks/comment/class-template.php:235
 msgid "Comments Navigation"
 msgstr "Navigație comentarii"
 
-#: inc/core/entry/class-comments.php:71
+#: inc/gutenberg/blocks/comment/class-template.php:176
 #, php-format
 msgctxt "comments title"
 msgid "%1$s comment"
@@ -193,7 +178,7 @@ msgstr "Drepturi de autor %s - Toate drepturile reservate."
 msgid "Customizer"
 msgstr "Customizer"
 
-#: inc/core/class-core.php:161
+#: inc/core/class-core.php:124
 #, php-format
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
@@ -212,21 +197,14 @@ msgstr ""
 "pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
 "WeCodeArt Framework."
 
-#: block-views/comment/comment.tpl.php:58
-msgid "Edit"
-msgstr "Editează"
-
-#: inc/core/entry/class-comments.php:292
+#: inc/core/class-comments.php:92
+#: inc/gutenberg/blocks/comment/class-form.php:153
 msgid "Email *"
 msgstr "Email *"
 
 #: block-views/general/protected.tpl.php:53
 msgid "Enter password"
 msgstr "Introduceți parola"
-
-#: inc/core/class-content.php:107
-msgid "Entry Content"
-msgstr "Conținutul intrării"
 
 #: inc/gutenberg/blocks/design/class-separator.php:51
 #| msgid "Fixed"
@@ -265,37 +243,34 @@ msgstr "https://www.wecodeart.com/about/"
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
-#: inc/gutenberg/blocks/widgets/class-login.php:101
+#: inc/gutenberg/blocks/site/class-login.php:101
 msgid "Log In"
 msgstr "Autentificare"
-
-#: inc/core/class-content.php:48
-msgid "Main Sidebar"
-msgstr "Bară laterală principală"
 
 #: inc/admin/notifications/class-ajax.php:55
 msgid "Missing notification id"
 msgstr "ID-ul notificării lipsește"
 
-#: inc/core/class-core.php:157
+#: inc/core/class-core.php:120
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: inc/core/class-core.php:156
+#: inc/core/class-core.php:119
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr "Arhive lunare: %s"
 
-#: inc/core/entry/class-comments.php:279
+#: inc/core/class-comments.php:79
+#: inc/gutenberg/blocks/comment/class-form.php:132
 msgid "Name *"
 msgstr "Nume *"
 
-#: inc/core/entry/class-comments.php:58
+#: inc/gutenberg/blocks/comment/class-template.php:161
 msgid "No comments"
 msgstr "Fără comentarii"
 
-#: inc/gutenberg/blocks/post/class-template.php:105
+#: inc/gutenberg/blocks/post/class-template.php:106
 msgid "Nothing found matching your criteria."
 msgstr "Nu s-a găsit nimic care să corespundă criteriilor dvs."
 
@@ -307,7 +282,7 @@ msgstr "Notificare respinsă"
 msgid "Pagination"
 msgstr "Paginare"
 
-#: inc/gutenberg/blocks/widgets/class-login.php:99
+#: inc/gutenberg/blocks/site/class-login.php:99
 msgid "Password"
 msgstr "Parolă"
 
@@ -319,11 +294,7 @@ msgstr "Imagine substituent"
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 
-#: block-views/comment/comment.tpl.php:69
-msgid "Post Author"
-msgstr "Autorul postării"
-
-#: inc/core/class-core.php:168
+#: inc/core/class-core.php:131
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
@@ -349,16 +320,7 @@ msgstr "Meniu Principal"
 msgid "Primary Navigation"
 msgstr "Navigație principală"
 
-#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:49
-msgctxt "Product quantity input tooltip"
-msgid "Qty"
-msgstr "Cantitate"
-
-#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
-msgid "Quantity"
-msgstr "Cantitate"
-
-#: inc/gutenberg/blocks/widgets/class-login.php:100
+#: inc/gutenberg/blocks/site/class-login.php:100
 msgid "Remember Me"
 msgstr "Ține-mă minte"
 
@@ -368,7 +330,8 @@ msgstr "Ține-mă minte"
 msgid "Request method %1$s is not valid."
 msgstr "Metoda de solicitare %1$s nu este validă."
 
-#: inc/core/entry/class-comments.php:407
+#: inc/core/class-comments.php:207
+#: inc/gutenberg/blocks/comment/class-form.php:262
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr "Fișele obligatorii sunt marcate cu %s\"."
@@ -382,7 +345,7 @@ msgstr "Eroare RSS"
 msgid "Search"
 msgstr "Caută"
 
-#: inc/core/class-core.php:131
+#: inc/core/class-core.php:94
 #, php-format
 #| msgid "Search Results for \"%s\""
 msgid "Search Results for \"%s\"."
@@ -392,23 +355,16 @@ msgstr "Rezultate căutare pentru \"%s\""
 msgid "Send"
 msgstr "Trimite"
 
-#: inc/support/plugins/woocommerce/templates/loop/orderby.php:29
-msgid "Shop order"
-msgstr "Comandă magazin"
-
-#: inc/support/plugins/woocommerce/class-woocommerce.php:98
-msgid "Shop Sidebar"
-msgstr "Bara laterală magazin"
-
-#: inc/gutenberg/class-gutenberg.php:337
+#: inc/gutenberg/class-gutenberg.php:322
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
-#: inc/core/entry/class-comments.php:392
+#: inc/core/class-comments.php:192
+#: inc/gutenberg/blocks/comment/class-form.php:91
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
-#: inc/core/class-core.php:141
+#: inc/core/class-core.php:104
 #, php-format
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
@@ -445,7 +401,7 @@ msgstr "Logo"
 msgid "This content is password protected."
 msgstr "Acest conținut este protejat prin parolă."
 
-#: inc/core/entry/class-comments.php:239
+#: inc/gutenberg/blocks/comment/class-template.php:92
 msgid ""
 "This post is password protected. Enter the password to view comments or "
 "leave a comment."
@@ -468,15 +424,16 @@ msgstr "Comutare navigare"
 msgid "Unlock"
 msgstr "Deblochează"
 
-#: inc/admin/class-activation.php:118
+#: inc/admin/class-activation.php:117
 msgid "upgrade PHP"
 msgstr "actualizați PHP"
 
-#: inc/gutenberg/blocks/widgets/class-login.php:98
+#: inc/gutenberg/blocks/site/class-login.php:98
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
-#: inc/core/entry/class-comments.php:305
+#: inc/core/class-comments.php:105
+#: inc/gutenberg/blocks/comment/class-form.php:174
 msgid "Website"
 msgstr "Site"
 
@@ -485,16 +442,7 @@ msgstr "Site"
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/admin/class-activation.php:125
-#, php-format
-msgid ""
-"WeCodeArt Framework requires Gutenberg version %1$s or higher. Please "
-"install Gutenberg to use WeCodeArt Framework."
-msgstr ""
-"WeCodeArt Framework necesită versiunea Gutenberg %1$s sau mai mare. Vă rugăm "
-"să instalați Gutenberg pentru a utiliza WeCodeArt Framework."
-
-#: inc/admin/class-activation.php:115
+#: inc/admin/class-activation.php:114
 #, php-format
 msgid ""
 "WeCodeArt Framework requires PHP version %1$s or higher. You are using "
@@ -503,7 +451,7 @@ msgstr ""
 "WeCodeArt Framework necesită versiunea PHP %1$s sau mai mare. Folosiți "
 "versiunea %2$s. Vă rugăm să %3$s pentru a utiliza WeCodeArt Framework."
 
-#: inc/admin/class-activation.php:106
+#: inc/admin/class-activation.php:105
 #, php-format
 msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
@@ -526,23 +474,12 @@ msgstr ""
 msgid "When extending %s, you must create a `get_html` method."
 msgstr "Când extindeți %s, trebuie să creați o metodă `get_html`."
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:100
-msgid "Widgets in this area will be shown on all shop pages."
-msgstr ""
-"Widgeturile din această zonă vor fi afișate pe toate paginile magazinului."
-
-#: inc/core/class-content.php:50
-msgid "Widgets in this area will be shown where this sidebar is rendered."
-msgstr ""
-"Widgeturile din această zonă vor fi afișate acolo unde este redată această "
-"bară laterală."
-
-#: inc/core/class-core.php:152
+#: inc/core/class-core.php:115
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y"
 
-#: inc/core/class-core.php:151
+#: inc/core/class-core.php:114
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr "Arhive Anuale"
@@ -555,20 +492,18 @@ msgstr ""
 "Suportul YoastSEO este activat! Tema noastră funcționează perfect cu cel mai "
 "bun plugin SEO."
 
-#: inc/core/entry/class-comments.php:459
+#: inc/core/class-comments.php:243
+#: inc/gutenberg/blocks/comment/class-form.php:286
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"
 
-#: block-views/comment/comment.tpl.php:87
-msgid "Your comment is awaiting moderation."
-msgstr "Comentariul tău asteaptă moderarea."
-
-#: inc/core/entry/class-comments.php:405
+#: inc/core/class-comments.php:205
+#: inc/gutenberg/blocks/comment/class-form.php:259
 msgid "Your email address will not be published."
 msgstr "Emailul tău nu va fi publicat."
 
-#: inc/admin/class-activation.php:85
+#: inc/admin/class-activation.php:84
 msgid ""
 "Your WordPress installation does not meet the minimum requirements to run "
 "WeCodeArt Framework. Please upgrade and try again."

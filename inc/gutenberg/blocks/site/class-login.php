@@ -9,10 +9,10 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.1.8
- * @version		5.1.8
+ * @version		5.2.2
  */
 
-namespace WeCodeArt\Gutenberg\Blocks\Widgets;
+namespace WeCodeArt\Gutenberg\Blocks\Site;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -63,12 +63,12 @@ class Login extends Dynamic {
 		$current_url 	= ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		$contents 		= wp_loginout( get_prop( $attributes, [ 'redirectToCurrent' ] ) ? $current_url : '', false );
 		$classnames 	= [ 'wp-block-login' ];
-		$classnames[] 	= is_user_logged_in() ? 'wp-block-login--logged-in' : 'wp-block-login--logged-out';
+		$classnames[] 	= is_user_logged_in() ? 'wp-block-login--is-in' : 'wp-block-login--is-out';
 
 		// If logged-out and displayLoginAsForm is true, show the login form.
 		if ( ! is_user_logged_in() && get_prop( $attributes, [ 'displayLoginAsForm' ] ) ) {
 			// Add a class.
-			$classnames[] 	= 'wp-block-login--has-login-form';
+			$classnames[] 	= 'wp-block-login--has-form';
 			// Get the form.
 			$contents 		= $this->render_form( [], false );
 		}
@@ -110,7 +110,8 @@ class Login extends Dynamic {
 
 		// We use same filters as WP - plugins will hook into those.
 		return wecodeart_template( 'general/login', [
-			'args'	=> wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) )
+			'action' 	=> home_url( 'wp-login.php', 'login_post' ),
+			'args'		=> wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) )
 		], $echo );
 	}
 }

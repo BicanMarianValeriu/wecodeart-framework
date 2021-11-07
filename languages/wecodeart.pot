@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-03 14:22+0000\n"
+"POT-Creation-Date: 2021-11-07 22:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -30,25 +30,9 @@ msgstr ""
 msgid "%1$s on %2$s"
 msgstr ""
 
-#: inc/core/class-core.php:165
+#: inc/core/class-core.php:128
 #, php-format
 msgid "%s Archives"
-msgstr ""
-
-#. %s: Quantity.
-#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
-#, php-format
-msgid "%s quantity"
-msgstr ""
-
-#: inc/core/class-content.php:116
-#, php-format
-msgid "%s Sidebar"
-msgstr ""
-
-#: block-views/comment/comment.tpl.php:48
-#, php-format
-msgid "%s's gravatar"
 msgstr ""
 
 #: block-views/meta/author-box.tpl.php:58 block-views/meta/author.tpl.php:47
@@ -64,7 +48,7 @@ msgstr ""
 msgid "1 Comment"
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-content.php:86
+#: inc/gutenberg/blocks/post/class-content.php:90
 msgid "[block rendering halted]"
 msgstr ""
 
@@ -85,7 +69,7 @@ msgstr ""
 msgid "About %s"
 msgstr ""
 
-#: inc/core/entry/class-comments.php:60
+#: inc/gutenberg/blocks/comment/class-template.php:163
 msgid "add one"
 msgstr ""
 
@@ -99,15 +83,11 @@ msgstr ""
 msgid "ANR Captcha support is enabled!"
 msgstr ""
 
-#: inc/core/class-core.php:173
+#: inc/core/class-core.php:136
 msgid "Archives"
 msgstr ""
 
-#: block-views/comment/comment.tpl.php:79
-msgid "at"
-msgstr ""
-
-#: inc/core/class-core.php:146
+#: inc/core/class-core.php:109
 #, php-format
 msgid "Author Archives: %s"
 msgstr ""
@@ -116,7 +96,7 @@ msgstr ""
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr ""
 
-#: inc/core/class-core.php:171
+#: inc/core/class-core.php:134
 msgid "Blog"
 msgstr ""
 
@@ -125,12 +105,14 @@ msgstr ""
 msgid "Built on %1s."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:373
+#: inc/core/class-comments.php:173
+#: inc/gutenberg/blocks/comment/class-form.php:225
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:397
+#: inc/core/class-comments.php:197
+#: inc/gutenberg/blocks/comment/class-form.php:96
 msgid "Cancel reply"
 msgstr ""
 
@@ -138,12 +120,14 @@ msgstr ""
 msgid "Captcha *"
 msgstr ""
 
-#: inc/core/class-core.php:136
+#: inc/core/class-core.php:99
 #, php-format
 msgid "Category Archives: %s"
 msgstr ""
 
-#: inc/core/entry/class-comments.php:317 inc/core/entry/class-comments.php:324
+#: inc/core/class-comments.php:117 inc/core/class-comments.php:124
+#: inc/gutenberg/blocks/comment/class-form.php:194
+#: inc/gutenberg/blocks/comment/class-form.php:201
 msgid "Comment *"
 msgstr ""
 
@@ -151,11 +135,12 @@ msgstr ""
 msgid "Comments are Closed"
 msgstr ""
 
-#: inc/core/entry/class-comments.php:195 inc/core/entry/class-comments.php:206
+#: inc/gutenberg/blocks/comment/class-template.php:224
+#: inc/gutenberg/blocks/comment/class-template.php:235
 msgid "Comments Navigation"
 msgstr ""
 
-#: inc/core/entry/class-comments.php:71
+#: inc/gutenberg/blocks/comment/class-template.php:176
 #, php-format
 msgctxt "comments title"
 msgid "%1$s comment"
@@ -178,7 +163,7 @@ msgstr ""
 msgid "Customizer"
 msgstr ""
 
-#: inc/core/class-core.php:161
+#: inc/core/class-core.php:124
 #, php-format
 msgid "Daily Archives: %s"
 msgstr ""
@@ -194,20 +179,13 @@ msgid ""
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
-#: block-views/comment/comment.tpl.php:58
-msgid "Edit"
-msgstr ""
-
-#: inc/core/entry/class-comments.php:292
+#: inc/core/class-comments.php:92
+#: inc/gutenberg/blocks/comment/class-form.php:153
 msgid "Email *"
 msgstr ""
 
 #: block-views/general/protected.tpl.php:53
 msgid "Enter password"
-msgstr ""
-
-#: inc/core/class-content.php:107
-msgid "Entry Content"
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-separator.php:51
@@ -241,37 +219,34 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-login.php:101
+#: inc/gutenberg/blocks/site/class-login.php:101
 msgid "Log In"
-msgstr ""
-
-#: inc/core/class-content.php:48
-msgid "Main Sidebar"
 msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:55
 msgid "Missing notification id"
 msgstr ""
 
-#: inc/core/class-core.php:157
+#: inc/core/class-core.php:120
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr ""
 
-#: inc/core/class-core.php:156
+#: inc/core/class-core.php:119
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr ""
 
-#: inc/core/entry/class-comments.php:279
+#: inc/core/class-comments.php:79
+#: inc/gutenberg/blocks/comment/class-form.php:132
 msgid "Name *"
 msgstr ""
 
-#: inc/core/entry/class-comments.php:58
+#: inc/gutenberg/blocks/comment/class-template.php:161
 msgid "No comments"
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-template.php:105
+#: inc/gutenberg/blocks/post/class-template.php:106
 msgid "Nothing found matching your criteria."
 msgstr ""
 
@@ -283,7 +258,7 @@ msgstr ""
 msgid "Pagination"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-login.php:99
+#: inc/gutenberg/blocks/site/class-login.php:99
 msgid "Password"
 msgstr ""
 
@@ -295,11 +270,7 @@ msgstr ""
 msgid "Please define a callback function for each of the modules."
 msgstr ""
 
-#: block-views/comment/comment.tpl.php:69
-msgid "Post Author"
-msgstr ""
-
-#: inc/core/class-core.php:168
+#: inc/core/class-core.php:131
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr ""
@@ -325,16 +296,7 @@ msgstr ""
 msgid "Primary Navigation"
 msgstr ""
 
-#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:49
-msgctxt "Product quantity input tooltip"
-msgid "Qty"
-msgstr ""
-
-#: inc/support/plugins/woocommerce/templates/global/quantity-input.php:35
-msgid "Quantity"
-msgstr ""
-
-#: inc/gutenberg/blocks/widgets/class-login.php:100
+#: inc/gutenberg/blocks/site/class-login.php:100
 msgid "Remember Me"
 msgstr ""
 
@@ -344,7 +306,8 @@ msgstr ""
 msgid "Request method %1$s is not valid."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:407
+#: inc/core/class-comments.php:207
+#: inc/gutenberg/blocks/comment/class-form.php:262
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr ""
@@ -358,7 +321,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: inc/core/class-core.php:131
+#: inc/core/class-core.php:94
 #, php-format
 msgid "Search Results for \"%s\"."
 msgstr ""
@@ -367,23 +330,16 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: inc/support/plugins/woocommerce/templates/loop/orderby.php:29
-msgid "Shop order"
-msgstr ""
-
-#: inc/support/plugins/woocommerce/class-woocommerce.php:98
-msgid "Shop Sidebar"
-msgstr ""
-
-#: inc/gutenberg/class-gutenberg.php:337
+#: inc/gutenberg/class-gutenberg.php:322
 msgid "Skip to content"
 msgstr ""
 
-#: inc/core/entry/class-comments.php:392
+#: inc/core/class-comments.php:192
+#: inc/gutenberg/blocks/comment/class-form.php:91
 msgid "Speak Your Mind"
 msgstr ""
 
-#: inc/core/class-core.php:141
+#: inc/core/class-core.php:104
 #, php-format
 msgid "Tag Archives: %s"
 msgstr ""
@@ -420,7 +376,7 @@ msgstr ""
 msgid "This content is password protected."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:239
+#: inc/gutenberg/blocks/comment/class-template.php:92
 msgid ""
 "This post is password protected. Enter the password to view comments or "
 "leave a comment."
@@ -439,15 +395,16 @@ msgstr ""
 msgid "Unlock"
 msgstr ""
 
-#: inc/admin/class-activation.php:118
+#: inc/admin/class-activation.php:117
 msgid "upgrade PHP"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-login.php:98
+#: inc/gutenberg/blocks/site/class-login.php:98
 msgid "Username or Email Address"
 msgstr ""
 
-#: inc/core/entry/class-comments.php:305
+#: inc/core/class-comments.php:105
+#: inc/gutenberg/blocks/comment/class-form.php:174
 msgid "Website"
 msgstr ""
 
@@ -456,21 +413,14 @@ msgstr ""
 msgid "WeCodeArt"
 msgstr ""
 
-#: inc/admin/class-activation.php:125
-#, php-format
-msgid ""
-"WeCodeArt Framework requires Gutenberg version %1$s or higher. Please "
-"install Gutenberg to use WeCodeArt Framework."
-msgstr ""
-
-#: inc/admin/class-activation.php:115
+#: inc/admin/class-activation.php:114
 #, php-format
 msgid ""
 "WeCodeArt Framework requires PHP version %1$s or higher. You are using "
 "version %2$s. Please %3$s to use WeCodeArt Framework."
 msgstr ""
 
-#: inc/admin/class-activation.php:106
+#: inc/admin/class-activation.php:105
 #, php-format
 msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
@@ -488,20 +438,12 @@ msgstr ""
 msgid "When extending %s, you must create a `get_html` method."
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:100
-msgid "Widgets in this area will be shown on all shop pages."
-msgstr ""
-
-#: inc/core/class-content.php:50
-msgid "Widgets in this area will be shown where this sidebar is rendered."
-msgstr ""
-
-#: inc/core/class-core.php:152
+#: inc/core/class-core.php:115
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr ""
 
-#: inc/core/class-core.php:151
+#: inc/core/class-core.php:114
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr ""
@@ -512,20 +454,18 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: inc/core/entry/class-comments.php:459
+#: inc/core/class-comments.php:243
+#: inc/gutenberg/blocks/comment/class-form.php:286
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr ""
 
-#: block-views/comment/comment.tpl.php:87
-msgid "Your comment is awaiting moderation."
-msgstr ""
-
-#: inc/core/entry/class-comments.php:405
+#: inc/core/class-comments.php:205
+#: inc/gutenberg/blocks/comment/class-form.php:259
 msgid "Your email address will not be published."
 msgstr ""
 
-#: inc/admin/class-activation.php:85
+#: inc/admin/class-activation.php:84
 msgid ""
 "Your WordPress installation does not meet the minimum requirements to run "
 "WeCodeArt Framework. Please upgrade and try again."

@@ -133,11 +133,11 @@ class Form extends Dynamic {
 					'attrs' => [
 						'id' 	=> 'comment-author',
 						'name' 	=> 'author',
-						'required' 		=> ( $req ) ? 'required' : NULL,
 						'size' 			=> 30,
 						'maxlength' 	=> 245,
 						'placeholder'	=> 'John Doe',
-						'value' 		=> $commenter['comment_author']
+						'value' 		=> $commenter['comment_author'],
+						'required' 		=> ( $req ) ? 'required' : NULL,
 					]
 				] ], false );
 			break;
@@ -154,11 +154,11 @@ class Form extends Dynamic {
 					'attrs' => [
 						'id' 	=> 'comment-email',
 						'name' 	=> 'email',
-						'required' 		=> ( $req ) ? 'required' : NULL,
 						'size' 			=> 30,
 						'maxlength' 	=> 100,
 						'placeholder'	=> 'name@example.com',
-						'value' 		=> $commenter['comment_author_email']
+						'value' 		=> $commenter['comment_author_email'],
+						'required' 		=> ( $req ) ? 'required' : NULL,
 					]
 				] ], false );
 			break;
@@ -178,7 +178,7 @@ class Form extends Dynamic {
 						'size' 		 => 30, 
 						'maxlength'  => 200,
 						'placeholder'=> 'www.example.com',
-						'value' 	 => $commenter['comment_author_url']  
+						'value' 	 => $commenter['comment_author_url'] ,
 					]
 				] ], false );
 			break;
@@ -208,7 +208,13 @@ class Form extends Dynamic {
 				$content = '';
 				$privacy = get_option( 'wp_page_for_privacy_policy' );
 
-				if( $privacy && get_post_status( $privacy ) === 'publish' ) {
+				if( (bool) $privacy && get_post_status( $privacy ) === 'publish' ) {
+					$permalink = sprintf(
+						'<a href="%1$s">%2$s</a>',
+						esc_url( get_privacy_policy_url() ),
+						esc_html( get_the_title( $privacy ) )
+					);
+					
 					$content = Markup::wrap( 'comment-cookies', [ [
 						'tag' 	=> 'div',
 						'attrs' => [
@@ -216,17 +222,12 @@ class Form extends Dynamic {
 						]
 					] ], 'wecodeart_input', [ 'toggle', [
 						'type'	=> 'checkbox',
-						'label' => sprintf( __( 'By commenting you accept the %s.', 'wecodeart' ), sprintf(
-							'<a href="%1$s">%2$s</a>',
-							esc_url( get_privacy_policy_url() ),
-							esc_html( get_the_title( $privacy ) ) )
-						),
+						'label' => sprintf( __( 'By commenting you accept the %s.', 'wecodeart' ), $permalink ),
 						'attrs' => [
 							'class'		=> 'form-switch',
 							'id' 		=> 'comment-cookies',
 							'name' 		=> 'comment-cookies',
 							'required'  => ( $req ) ? 'required' : NULL,
-							'aria-required'  => 'true',
 						]
 					] ], false );
 				}
