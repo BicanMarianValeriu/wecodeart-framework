@@ -228,13 +228,16 @@ class Styles implements Integration {
 				<filter id="wp-duotone-<?php echo esc_attr( $block_id ); ?>">
 					<feColorMatrix
 						type="matrix"
-						values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 0 0 0 1 0"
+						color-interpolation-filters="sRGB"
+						values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0"
 					/>
 					<feComponentTransfer color-interpolation-filters="sRGB">
 						<feFuncR type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['r'] ) ); ?>" />
 						<feFuncG type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['g'] ) ); ?>" />
 						<feFuncB type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['b'] ) ); ?>" />
+						<feFuncA type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['a'] ) ); ?>" />
 					</feComponentTransfer>
+					<feComposite in2="SourceGraphic" operator="in" />
 				</filter>
 			<?php endforeach; ?>
 			</defs>
@@ -362,10 +365,11 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes`
-	 * error in Gutenberg.
+	 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes` error.
 	 *
 	 * @since   5.2.2
+	 *
+	 * @return 	void
 	 */
 	public function add_attributes() {
 		$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();

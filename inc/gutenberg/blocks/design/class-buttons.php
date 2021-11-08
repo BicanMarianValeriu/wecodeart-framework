@@ -69,6 +69,7 @@ class Buttons extends Dynamic {
 			display: flex;
 			flex-flow: row wrap;
 			gap: var(--wp--style--block-gap, 1em);
+			margin-bottom: 1rem;
 		}
 		.wp-block-buttons.is-style-group {
 			--wp--style--block-gap: 0;
@@ -120,7 +121,6 @@ class Buttons extends Dynamic {
 		.wp-block-buttons .wp-block-button {
 			position: relative;
 			display: inline-block;
-			margin: 0;
 		}
 		.wp-block-buttons .wp-block-button:hover,
 		.wp-block-buttons .wp-block-button__link:focus,

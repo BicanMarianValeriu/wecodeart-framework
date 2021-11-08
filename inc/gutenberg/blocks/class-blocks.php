@@ -110,9 +110,9 @@ class Blocks implements \ArrayAccess {
         
         // Hooks
         add_action( 'init',                 [ $this, 'load' ] );
-        add_filter( 'render_block',         [ $this, 'collect_blocks' ], 10, 2 );
-        add_action( 'wp_enqueue_scripts',   [ $this, 'register_styles' ], 20, 1 );
-        add_action( 'wp_print_styles',      [ $this, 'remove_styles' ], 100 );
+        add_filter( 'render_block',         [ $this, 'collect_blocks'   ], 10, 2 );
+        add_action( 'wp_enqueue_scripts',   [ $this, 'register_styles'  ], 20, 1 );
+        add_action( 'wp_print_styles',      [ $this, 'remove_styles'    ], 100 );
 	}
 
     /**

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.7
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -89,24 +89,84 @@ class Blocks extends Processor {
 		$output['element'] 	= $this->element;
 
 		// Layout - we do not support wide align yet but it will be enabled in a future version!
-		// if( $layout = get_prop( $this->attrs, 'layout', false ) ) {
-		// 	if ( get_prop( $layout, 'inherit', null ) ) {
-		// 		$default_layout = wecodeart_json( [ 'settings', 'layout' ], false );
-		// 		if ( $default_layout ) {
-		// 			$layout = $default_layout;
-		// 		}
-		// 	}
+		if( $layout = get_prop( $this->attrs, 'layout', false ) ) {
+			$type = get_prop( $layout, 'type', 'default' );
+			// if ( get_prop( $layout, 'inherit', null ) ) {
+			// 	$default_layout = wecodeart_json( [ 'settings', 'layout' ], false );
+			// 	if ( $default_layout ) {
+			// 		$layout = $default_layout;
+			// 	}
+			// }
 
-		// 	$size_default 	= get_prop( $layout, 'contentSize', null );
-		// 	$size_wide    	= get_prop( $layout, 'wideSize', null );
-		// 	$size_default 	= $size_default ?: $size_wide;
-		// 	$size_wide 		= $size_wide ?: $size_default;
+			// $size_default 	= get_prop( $layout, 'contentSize', null );
+			// $size_wide    	= get_prop( $layout, 'wideSize', null );
+			// $size_default 	= $size_default ?: $size_wide;
+			// $size_wide 		= $size_wide ?: $size_default;
 
-		// 	if( $size_default || $size_wide ) {
-		// 		$this->styles["@media (min-width: {$size_default})"][$this->element . '>div[class*="container"]']['max-width'] = $size_default;
-		// 		$this->styles["@media (min-width: {$size_default})"][$this->element . ' .alignwide']['max-width'] = $size_wide;
-		// 	}
-		// }
+			// if( $size_default || $size_wide ) {
+			// 	$this->styles["@media (min-width: {$size_default})"][$this->element . '>div[class*="container"]']['max-width'] = $size_default;
+			// 	$this->styles["@media (min-width: {$size_default})"][$this->element . ' .alignwide']['max-width'] = $size_wide;
+			// }
+
+			if( $type === 'flex' ) {
+				$orientation	= get_prop( $layout, 'orientation', 'horizontal' );
+				$justification 	= get_prop( $layout, 'justifyContent' );
+
+				$justify_options 	= [
+					'left'   => 'flex-start',
+					'right'  => 'flex-end',
+					'center' => 'center',
+				];
+
+				if ( 'horizontal' === $orientation ) {
+					$justify_options += [ 'space-between' => 'space-between' ];
+				}
+				
+				$wrap_options 	= [ 'wrap', 'nowrap' ];
+				$flex_wrap 		= get_prop( $layout, 'flexWrap', 'wrap' );
+				$flex_wrap 		= in_array( $flex_wrap, $wrap_options ) ? $flex_wrap : 'wrap';
+
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'display',
+					'value'	  	=> 'flex'
+				], $output );
+
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'flex-wrap',
+					'value'	  	=> $flex_wrap
+				], $output );
+				
+				if ( 'horizontal' === $orientation ) {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'align-items',
+						'value'	  	=> 'center'
+					], $output );
+
+					$backwards = 'justify-content';
+				} else {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'flex-direction',
+						'value'	  	=> 'column'
+					], $output );
+
+					$backwards = 'align-items';
+				}
+
+				// Backwards
+				if ( ! empty( $justification ) && array_key_exists( $justification, $justify_options ) ) {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> $backwards,
+						'value'	  	=> $justify_options[ $justification ]
+					], $output );
+				}
+
+				$this->output[] = wp_parse_args( [
+					'element'	=> join( '>', [ $this->element, '*' ] ),
+					'property' 	=> 'margin',
+					'value'	  	=> '0'
+				], $output );
+			}
+		}
 		
 		// Inline Style
 		if( $css_style = get_prop( $this->attrs, 'style', false ) ) {
@@ -329,13 +389,20 @@ class Blocks extends Processor {
 				'r' => [],
 				'g' => [],
 				'b' => [],
+				'a' => [],
 			];
 
 			foreach ( $duotone as $color ) {
-				$color = wp_tinycolor_string_to_rgb( $color );
+				$function = 'wp_tinycolor_string_to_rgb';
+				if( function_exists( 'gutenberg_tinycolor_string_to_rgb' ) ) {
+					$function = 'gutenberg_tinycolor_string_to_rgb';
+				}
+
+				$color = $function( $color );
 				$return['r'][] = $color['r'] / 255;
 				$return['g'][] = $color['g'] / 255;
 				$return['b'][] = $color['b'] / 255;
+				$return['a'][] = $color['a'];
 			}
 		}
 
