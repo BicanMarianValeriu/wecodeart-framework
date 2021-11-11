@@ -91,24 +91,50 @@ class Blocks extends Processor {
 		// Layout - we do not support wide align yet but it will be enabled in a future version!
 		if( $layout = get_prop( $this->attrs, 'layout', false ) ) {
 			$type = get_prop( $layout, 'type', 'default' );
-			// if ( get_prop( $layout, 'inherit', null ) ) {
-			// 	$default_layout = wecodeart_json( [ 'settings', 'layout' ], false );
-			// 	if ( $default_layout ) {
-			// 		$layout = $default_layout;
-			// 	}
-			// }
 
-			// $size_default 	= get_prop( $layout, 'contentSize', null );
-			// $size_wide    	= get_prop( $layout, 'wideSize', null );
-			// $size_default 	= $size_default ?: $size_wide;
-			// $size_wide 		= $size_wide ?: $size_default;
+			if( $type === 'default' ) {
+				if( get_prop( $layout, 'inherit', null ) ) {
+					$default_layout = wecodeart_json( [ 'settings', 'layout' ], false );
+					if ( $default_layout ) {
+						$layout = $default_layout;
+					}
+				}
 
-			// if( $size_default || $size_wide ) {
-			// 	$this->styles["@media (min-width: {$size_default})"][$this->element . '>div[class*="container"]']['max-width'] = $size_default;
-			// 	$this->styles["@media (min-width: {$size_default})"][$this->element . ' .alignwide']['max-width'] = $size_wide;
-			// }
+				if( $layout ) { 
+					$size_default 	= get_prop( $layout, 'contentSize', null );
+					$size_wide    	= get_prop( $layout, 'wideSize', null );
+					$size_default 	= $size_default ?: $size_wide;
+					$size_wide 		= $size_wide ?: $size_default;
 
-			if( $type === 'flex' ) {
+					if( $size_default || $size_wide ) {
+						$this->output[] = wp_parse_args( [
+							'element'	=> join( '>', [ $this->element, '*' ] ),
+							'property' 	=> 'max-width',
+							'value'	  	=> $size_default
+						], $output );
+						$this->output[] = wp_parse_args( [
+							'element'	=> join( '>', [ $this->element, '*' ] ),
+							'property' 	=> 'margin-left',
+							'value'	  	=> 'auto!important'
+						], $output );
+						$this->output[] = wp_parse_args( [
+							'element'	=> join( '>', [ $this->element, '*' ] ),
+							'property' 	=> 'margin-right',
+							'value'	  	=> 'auto!important'
+						], $output );
+						$this->output[] = wp_parse_args( [
+							'element'	=> join( '>', [ $this->element, '.alignwide' ] ),
+							'property' 	=> 'max-width',
+							'value'	  	=> $size_wide
+						], $output );
+						$this->output[] = wp_parse_args( [
+							'element'	=> join( '>', [ $this->element, '.alignfull' ] ),
+							'property' 	=> 'max-width',
+							'value'	  	=> 'none'
+						], $output );
+					}
+				}
+			} elseif( $type === 'flex' ) {
 				$orientation	= get_prop( $layout, 'orientation', 'horizontal' );
 				$justification 	= get_prop( $layout, 'justifyContent' );
 
@@ -142,20 +168,20 @@ class Blocks extends Processor {
 						'value'	  	=> 'center'
 					], $output );
 
-					$backwards = 'justify-content';
+					$direction = 'justify-content';
 				} else {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'flex-direction',
 						'value'	  	=> 'column'
 					], $output );
 
-					$backwards = 'align-items';
+					$direction = 'align-items';
 				}
 
 				// Backwards
 				if ( ! empty( $justification ) && array_key_exists( $justification, $justify_options ) ) {
 					$this->output[] = wp_parse_args( [
-						'property' 	=> $backwards,
+						'property' 	=> $direction,
 						'value'	  	=> $justify_options[ $justification ]
 					], $output );
 				}

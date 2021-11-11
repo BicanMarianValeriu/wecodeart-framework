@@ -5406,13 +5406,8 @@ figcaption p.wp-caption-text,
 
 /* Blocks */
 .wp-block-columns {
-  --wp--gutter-x: 1.5rem;
-  --wp--gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(-1 * var(--wp--gutter-y));
-  margin-right: calc(-0.5 * var(--wp--gutter-x));
-  margin-left: calc(-0.5 * var(--wp--gutter-x));
 }
 .wp-block-columns.are-vertically-aligned-top {
   align-items: flex-start;
@@ -5425,12 +5420,8 @@ figcaption p.wp-caption-text,
 }
 
 .wp-block-column {
-  flex-shrink: 0;
   width: 100%;
   max-width: 100%;
-  padding-right: calc(var(--wp--gutter-x) * .5);
-  padding-left: calc(var(--wp--gutter-x) * .5);
-  margin-top: var(--wp--gutter-y);
   flex: 1 0 0%;
 }
 .wp-block-column.is-vertically-aligned-top {

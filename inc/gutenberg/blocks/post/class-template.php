@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -110,13 +110,7 @@ class Template extends Dynamic {
 		$classnames = [ 'wp-block-post-template' ];
 		if ( isset( $block->context['displayLayout'] ) && isset( $block->context['query'] ) ) {
 			if ( isset( $block->context['displayLayout']['type'] ) && 'flex' === $block->context['displayLayout']['type'] ) {
-				$classnames = array_merge( $classnames, [
-					'wp-block-post-template--grid',
-					'row',
-					'row-cols-1',
-					'row-cols-md-2',
-					"row-cols-lg-{$block->context['displayLayout']['columns']}"
-				] );
+				$classnames = array_merge( $classnames, [ 'wp-block-post-template--grid', 'grid', 'px-3' ] );
 			}
 		}
 
@@ -138,11 +132,15 @@ class Template extends Dynamic {
 			while ( $query->have_posts() ) {
 				$query->the_post();
 
+				$columns 	= ( 12 / $block->context['displayLayout']['columns'] );
+				$item_class = 'wp-block-post mb-5 g-col-12 g-col-md-6 g-col-lg-' . $columns;
+				$item_class = implode( ' ', get_post_class( $item_class ) );
+
 				Markup::wrap( 'wp-block-post', [
 					[
 						'tag' 	=> 'li',
 						'attrs'	=> [
-							'class' => implode( ' ', get_post_class( 'wp-block-post mb-5' ) )
+							'class' => $item_class
 						]
 					]
 				], function( $block ) {

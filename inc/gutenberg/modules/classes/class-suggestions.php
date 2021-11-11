@@ -292,6 +292,7 @@ class Suggestions {
 	public function grid( $args ) {
 		foreach( range( 1, 12 ) as $number ) {
 			$args[] = 'col-' . $number;
+			$args[] = 'g-col-' . $number;
 			$args[] = 'row-cols-' . $number;
 			$args[] = 'offset-' . $number;
 			$args[] = 'order-' . $number;
@@ -299,6 +300,7 @@ class Suggestions {
 
 		foreach( self::BREAKPOINTS as $breakpoint ) {
 			$args[] = 'col-' . $breakpoint;
+			$args[] = 'g-col-' . $breakpoint;
 			$args[] = 'col-' . $breakpoint . '-auto';
 			$args[] = 'row-cols-' . $breakpoint . '-auto';
 
@@ -315,7 +317,10 @@ class Suggestions {
 		return wp_parse_args( [
 			'col-auto',
 			'order-first',
-			'order-last'
+			'order-last',
+			'container',
+			'grid',
+			'row'
 		], $args );
 	}
 	

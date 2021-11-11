@@ -10,14 +10,6 @@
 			]
 		},
 		{
-			"name": "page-full",
-			"title": "Page - Full",
-			"postTypes": [
-				"page",
-				"post"
-			]
-		},
-		{
 			"name": "content-only",
 			"title": "Content Only",
 			"postTypes": [
@@ -144,7 +136,8 @@
 			"wideMultiplier": "1.15"
 		},
 		"layout": {
-			"contentSize": "1320px"
+			"contentSize": "1320px",
+			"wideSize": "1440px"
 		},
 		"spacing": {
 			"customMargin": true,
@@ -309,6 +302,11 @@
 					"fontSize": "var:preset|font-size|small"
 				}
 			},
+			"core/quote": {
+				"typography": {
+					"fontSize": "var:preset|font-size|normal"
+				}
+			},
 			"core/button": {
 				"typography": {
 					"fontFamily": "var:preset|font-family|button",
@@ -317,6 +315,14 @@
 				"border": {
 					"width": "1px",
 					"radius": "0.25rem"
+				}
+			},
+			"core/column": {
+				"spacing": {
+					"padding": {
+						"left": "1rem",
+						"right": "1rem"
+					}
 				}
 			}
 		},

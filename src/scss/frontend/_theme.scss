@@ -26,7 +26,8 @@
 
 /* Blocks */
 .wp-block-columns {
-	@include make-row();
+	display: flex;
+    flex-wrap: wrap;
 	
 	&.are-vertically-aligned-top {
 		align-items: flex-start;
@@ -42,7 +43,8 @@
 }
 
 .wp-block-column {
-	@include make-col-ready();
+    width: 100%;
+    max-width: 100%;
     flex: 1 0 0%;
 
 	&.is-vertically-aligned-top {

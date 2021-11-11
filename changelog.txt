@@ -4,12 +4,16 @@ v5.2.2
 - Updated - Reduce WooCoomerce starter support to minimum / eventually all support extensions will be moved to own plugin
 - Updated - Duotone support transparency
 - Updated - BEM class naming for some post meta block views
+- Updated - Updated starter content
+- Updated - Updated page templates
 - Removed - Widgets - sidebar registration
 - Removed - Comment Walker in favor of Gutenberg block
 - Removed - comments.php
+- Removed - page-full.html
 - Added - Gutenberg Flex layout support
 - Added - Gutenberg Comment Template/Form blocks
 - Added - Site logo block wrapper (move custom logo filter to it and added styles)
+- Added - Align wide support / refactored couple of blocks with this support
 
 v5.2.1
 - Updated - Gubenberg Editor columns grid highlight: add top/bottom border for better visuals and remove padding bottom

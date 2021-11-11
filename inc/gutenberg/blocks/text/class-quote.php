@@ -99,7 +99,10 @@ class Quote extends Dynamic {
 		}
 		.wp-block-quote .is-style-large .blockquote-footer {
 			font-size: 1.5rem;
-		}		
+		}
+		.wp-block-quote .blockquote {
+			font-size: inherit;
+		}
 		.wp-block-quote .blockquote-footer {
 			text-align: left;
 		}

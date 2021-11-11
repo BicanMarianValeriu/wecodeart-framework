@@ -45,57 +45,7 @@ class Group extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {
-		add_filter( 'render_block_core/group', [ $this, 'render' ], 10, 2 );
-	}
-
-	/**
-	 * Dynamically renders the `core/group` block.
-	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		$container_regex = '/(^\s*<.+?\b[^>]*wp-block-group(\s|")[^>]*>)(\s*<div\b[^>]*container(\s|")[^>]*>)((.|\S|\s)*)/';
-
-		if ( 1 === preg_match( $container_regex, $content ) ) {
-			return $content;
-		}
-
-		$attributes = get_prop( $block, 'attrs', [] );
-
-		// Layout
-		if( $layout = get_prop( $attributes, 'layout', false ) ) {
-			if ( get_prop( $layout, 'inherit' ) ) {
-				$default_layout = wecodeart_json( ['settings', 'layout' ], false );
-				if ( $default_layout ) {
-					$layout = $default_layout;
-				}
-			}
-
-			$size_default 	= get_prop( $layout, 'contentSize' );
-			$size_wide    	= get_prop( $layout, 'wideSize' );
-
-			$size_default 	= $size_default ?: $size_wide;
-			$size_wide 		= $size_wide ?: $size_default;
-
-			if( $size_default || $size_wide ) {
-				$container = 'container';
-				if( get_prop( $attributes, 'align', false ) === 'full' ) {
-					$container = 'container-fluid';
-				}
-				
-				$replace_regex   = '/(^\s*<.+?\b[^>]*wp-block-group[^>]*>)(.*)(<\/.+?>\s*$)/ms';
-				$content = preg_replace_callback( $replace_regex, function( $matches ) use ( $container ) {
-					return $matches[1] . '<div class="' . $container . '">' . $matches[2] . '</div>' . $matches[3];
-				}, $content );
-			}
-		}
-
-		return $content;
-	}
+	public function register() {}
 
 	/**
 	 * Block styles

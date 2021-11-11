@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Post Content block.
@@ -107,11 +108,21 @@ class Content extends Dynamic {
 			return '';
 		}
 
+		$classnames = [ 'wp-block-post-content' ];
+
+		if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+			$classnames[] = 'text-' . $value;
+		}
+
+		if( $value = get_prop( $attributes, 'className', false ) ) {
+			$classnames[] = $value;
+		}
+
 		return Markup::wrap( 'entry-content', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => [
-					'class' => 'wp-block-post-content'
+					'class' => implode( ' ', $classnames )
 				]
 			]
 		], $content, [], false );

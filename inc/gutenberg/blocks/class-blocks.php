@@ -69,7 +69,6 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/quote',	    Blocks\Text\Quote::class );
 		$this->register( 'core/pullquote',  Blocks\Text\Pullquote::class );
         // Design Blocks
-		$this->register( 'core/group',	    Blocks\Design\Group::class );
 		$this->register( 'core/buttons',    Blocks\Design\Buttons::class );
 		$this->register( 'core/button',     Blocks\Design\Button::class );
 		$this->register( 'core/spacer',     Blocks\Design\Spacer::class );
@@ -100,9 +99,7 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/post-comments-form', Blocks\Comment\Form::class );
 		$this->register( 'core/comment-template',   Blocks\Comment\Template::class );
         // Query Blocks
-		$this->register( 'core/query',	                    Blocks\Query::class );
 		$this->register( 'core/query-title',	            Blocks\Query\Title::class );
-		$this->register( 'core/template-part',              Blocks\Query\Template::class );
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         // Site
 		$this->register( 'core/site-logo',  Blocks\Site\Logo::class );

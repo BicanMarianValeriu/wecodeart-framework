@@ -68,6 +68,7 @@ class Text extends Dynamic {
 		}
 		.wp-block-media-text__content {
 			flex: 1 0 0%;
+			padding: 1rem;
 		}
 		.wp-block-media-text__media {
 			overflow: hidden;
@@ -99,6 +100,10 @@ class Text extends Dynamic {
 		@media (min-width: $tablet) {
 			.wp-block-media-text {
 				flex-flow: row nowrap;
+			}
+			.wp-block-media-text:not(.has-background) .wp-block-media-text__content {
+				padding-top: 0;
+				padding-bottom: 0;
 			}
 			.wp-block-media-text .wp-block-media-text__content {
 				align-self: center;
