@@ -124,6 +124,32 @@ class Styles implements Integration {
 		], wecodeart( 'version' ) );
 	}
 
+	
+	/**
+	 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes` error.
+	 *
+	 * @since   5.2.2
+	 *
+	 * @return 	void
+	 */
+	public function add_attributes() {
+		$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+
+		foreach ( $registered_blocks as $name => $block ) {
+			if( ! in_array( $name, self::core_blocks() ) ) continue;
+
+			$block->attributes['customCSSId'] = [
+				'type'    => 'string',
+				'default' => null,
+			];
+
+			$block->attributes['customCSS'] = [
+				'type'    => 'string',
+				'default' => null,
+			];
+		}
+	}
+
 	/**
 	 * Filter render_block
 	 *
@@ -362,31 +388,6 @@ class Styles implements Integration {
 			'core/verse',
 			'core/video',
 		] );
-	}
-
-	/**
-	 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes` error.
-	 *
-	 * @since   5.2.2
-	 *
-	 * @return 	void
-	 */
-	public function add_attributes() {
-		$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
-
-		foreach ( $registered_blocks as $name => $block ) {
-			if( ! in_array( $name, self::core_blocks() ) ) continue;
-
-			$block->attributes['customCSSId'] = [
-				'type'    => 'string',
-				'default' => null,
-			];
-
-			$block->attributes['customCSS'] = [
-				'type'    => 'string',
-				'default' => null,
-			];
-		}
 	}
 
 	/**

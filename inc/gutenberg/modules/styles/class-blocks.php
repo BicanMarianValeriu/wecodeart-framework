@@ -402,7 +402,7 @@ class Blocks extends Processor {
 				$return['r'][] = $color['r'] / 255;
 				$return['g'][] = $color['g'] / 255;
 				$return['b'][] = $color['b'] / 255;
-				$return['a'][] = $color['a'];
+				$return['a'][] = isset( $color['a'] ) ? $color['a'] : 1;
 			}
 		}
 

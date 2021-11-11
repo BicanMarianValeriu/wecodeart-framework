@@ -9,7 +9,7 @@
  * @subpackage 	Entry\Meta\Date
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		5.0.0
+ * @version		5.2.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -20,7 +20,7 @@ use function WeCodeArt\Functions\get_prop;
 $classnames = [ 'wp-block-post-date' ];
 
 if( isset( $modified ) ) {
-    $classnames[] = 'updated';
+    $classnames[] = 'wp-block-post-date--updated';
 }
 
 if( $value = get_prop( $attributes, 'textAlign', false ) ) {

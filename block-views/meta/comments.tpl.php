@@ -9,7 +9,7 @@
  * @subpackage 	Entry\Meta\Comments
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		5.0.0
+ * @version		5.2.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -22,15 +22,15 @@ use WeCodeArt\Markup\SVG;
 $classnames = [ 'wp-block-post-comments-link' ];
 
 if( 0 === $number ) {
-    $classnames[] = 'none';
+    $classnames[] = 'wp-block-post-comments-link--none';
 } elseif ( 1 === $number ) {
-    $classnames[] = 'one';
+    $classnames[] = 'wp-block-post-comments-link--one';
 } elseif ( 1 < $number ) {
-    $classnames[] = 'multiple';
+    $classnames[] = 'wp-block-post-comments-link--multiple';
 }
 
 if( post_password_required() ) {
-    $classnames[] = 'protected';
+    $classnames[] = 'wp-block-post-comments-link--protected';
 }
 ?>
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php

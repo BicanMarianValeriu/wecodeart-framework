@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box Template
  * @since 		3.0.3
- * @version		5.1.9
+ * @version		5.2.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\get_prop;
 
-$classnames = [ 'wp-block-post-author' ];
+$classnames = [ 'wp-block-post-author', 'wp-block-post-author--wide' ];
 
 if( $value = get_prop( $attributes, 'className', false ) ) {
     $classnames[] = $value;

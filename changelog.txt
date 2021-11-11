@@ -3,6 +3,7 @@ v5.2.2
 - Updated - Pattern to use spacing attributes instead of BootStrap's classes
 - Updated - Reduce WooCoomerce starter support to minimum / eventually all support extensions will be moved to own plugin
 - Updated - Duotone support transparency
+- Updated - BEM class naming for some post meta block views
 - Removed - Widgets - sidebar registration
 - Removed - Comment Walker in favor of Gutenberg block
 - Removed - comments.php

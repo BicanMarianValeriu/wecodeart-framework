@@ -82,13 +82,22 @@ class Pattern {
      * @return void
      */
     public function register() {
-		if ( \WP_Block_Patterns_Registry::get_instance()->is_registered( self::NAMESPACE . '/' . $this->name ) ) return;
+		if ( \WP_Block_Patterns_Registry::get_instance()->is_registered( $this->get_name() ) ) return;
 		
-        register_block_pattern( self::NAMESPACE . '/' . sanitize_text_field( $this->name ), [
+        register_block_pattern( $this->get_name(), [
             'title'       => sanitize_text_field( $this->title ),
             'content'     => serialize_blocks( parse_blocks( $this->content ) ),
             'categories'  => ! empty( $this->categories ) ? array_map( 'sanitize_title', $this->categories ) : [ $this->theme ],
             'description' => sanitize_text_field( $this->description ),
         ] );
     }
+
+	/**
+     * Get Name
+     *
+     * @return string
+     */
+	public function get_name() {
+		return join( '/', [ self::NAMESPACE, sanitize_text_field( $this->name ) ] );
+	}
 }
