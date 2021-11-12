@@ -1,31 +1,25 @@
 .wp-block-group {
 	&.has-background {
-		padding: 0;
+		padding: 5px;
 	}
 }
 
 .wp-block-columns {
-	@include make-container(0);
-	flex-wrap: wrap;
 	margin-bottom: 0;
-	box-sizing: border-box;
 	
 	&.has-background {
-		padding: 0;
+		padding: 5px;
 	}
 
 	&.is-selected,
 	&.has-child-selected {
-		// padding-bottom: 10px;
-		
 		&::before {
+			content: '';
 			position: absolute;
 		}
 	}
 
 	&::before {
-		content: '';
-		position: relative;
 		pointer-events: none;
 		top: 0;
 		left: 0;
@@ -41,10 +35,6 @@
 }
 
 .wp-block-column {
-	--bs-gutter-x: 1.5rem;
-    padding-right: calc(var(--bs-gutter-x) / 2);
-    padding-left: calc(var(--bs-gutter-x) / 2);
-
 	& ~ .wp-block-column {
 		margin-left: 0!important;
 	}

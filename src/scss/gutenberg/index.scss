@@ -16,6 +16,14 @@
 @import './title';
 @import './labels';
 
+// Core
+.wp-site-blocks,
+.wp-site-credits,
+.site-header,
+.site-footer {
+    background-color: inherit;
+}
+
 // Text
 .wp-block-heading,
 .wp-block-paragraph,
