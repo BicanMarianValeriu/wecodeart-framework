@@ -255,7 +255,7 @@ class Template extends Dynamic {
 	 * Replace Comment Reply Button class.
 	 *
 	 * @since	unknown
-	 * @version 5.0.0
+	 * @version 5.2.2
 	 *
 	 * @param 	string $html
 	 *
