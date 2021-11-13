@@ -1,3 +1,6 @@
+v5.2.3
+- Updated 
+
 v5.2.2
 - Updated - Gutenberg remove from theme activation check - WP does that automatically until 5.9 for FSE themes
 - Updated - Pattern to use spacing attributes instead of BootStrap's classes

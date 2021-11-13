@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-11-07 22:28+0000\n"
+"PO-Revision-Date: 2021-11-13 17:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -48,7 +48,7 @@ msgstr "(fără titlu)"
 msgid "1 Comment"
 msgstr "1 Comentariu"
 
-#: inc/gutenberg/blocks/post/class-content.php:90
+#: inc/gutenberg/blocks/post/class-content.php:91
 msgid "[block rendering halted]"
 msgstr "[redării blocului a fost oprită]"
 
@@ -117,14 +117,12 @@ msgstr "Blog"
 msgid "Built on %1s."
 msgstr "Creat pe %1s."
 
-#: inc/core/class-comments.php:173
-#: inc/gutenberg/blocks/comment/class-form.php:225
+#: inc/gutenberg/blocks/comment/class-form.php:237
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr "Comentand vei accepta %s."
 
-#: inc/core/class-comments.php:197
-#: inc/gutenberg/blocks/comment/class-form.php:96
+#: inc/gutenberg/blocks/comment/class-form.php:95
 msgid "Cancel reply"
 msgstr "Anulați răspunsul"
 
@@ -137,9 +135,8 @@ msgstr "Captcha *"
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
 
-#: inc/core/class-comments.php:117 inc/core/class-comments.php:124
-#: inc/gutenberg/blocks/comment/class-form.php:194
-#: inc/gutenberg/blocks/comment/class-form.php:201
+#: inc/gutenberg/blocks/comment/class-form.php:193
+#: inc/gutenberg/blocks/comment/class-form.php:200
 msgid "Comment *"
 msgstr "Comentariu"
 
@@ -197,8 +194,7 @@ msgstr ""
 "pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
 "WeCodeArt Framework."
 
-#: inc/core/class-comments.php:92
-#: inc/gutenberg/blocks/comment/class-form.php:153
+#: inc/gutenberg/blocks/comment/class-form.php:152
 msgid "Email *"
 msgstr "Email *"
 
@@ -215,7 +211,7 @@ msgstr "Estompat"
 msgid "Failed to dismiss notification"
 msgstr "Notificarea nu a putut fi respinsă"
 
-#: inc/gutenberg/blocks/design/class-buttons.php:52
+#: inc/gutenberg/blocks/design/class-buttons.php:51
 msgid "Group"
 msgstr "Grupare"
 
@@ -243,6 +239,10 @@ msgstr "https://www.wecodeart.com/about/"
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
+#: inc/gutenberg/blocks/design/class-button.php:52
+msgid "Link"
+msgstr "Legătură"
+
 #: inc/gutenberg/blocks/site/class-login.php:101
 msgid "Log In"
 msgstr "Autentificare"
@@ -261,8 +261,7 @@ msgstr "F Y"
 msgid "Monthly Archives: %s"
 msgstr "Arhive lunare: %s"
 
-#: inc/core/class-comments.php:79
-#: inc/gutenberg/blocks/comment/class-form.php:132
+#: inc/gutenberg/blocks/comment/class-form.php:131
 msgid "Name *"
 msgstr "Nume *"
 
@@ -278,7 +277,7 @@ msgstr "Nu s-a găsit nimic care să corespundă criteriilor dvs."
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
 
-#: inc/gutenberg/blocks/query/class-numbers.php:138
+#: inc/gutenberg/blocks/query/class-numbers.php:142
 msgid "Pagination"
 msgstr "Paginare"
 
@@ -330,8 +329,7 @@ msgstr "Ține-mă minte"
 msgid "Request method %1$s is not valid."
 msgstr "Metoda de solicitare %1$s nu este validă."
 
-#: inc/core/class-comments.php:207
-#: inc/gutenberg/blocks/comment/class-form.php:262
+#: inc/gutenberg/blocks/comment/class-form.php:274
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr "Fișele obligatorii sunt marcate cu %s\"."
@@ -359,8 +357,7 @@ msgstr "Trimite"
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
-#: inc/core/class-comments.php:192
-#: inc/gutenberg/blocks/comment/class-form.php:91
+#: inc/gutenberg/blocks/comment/class-form.php:90
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
@@ -432,8 +429,7 @@ msgstr "actualizați PHP"
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
-#: inc/core/class-comments.php:105
-#: inc/gutenberg/blocks/comment/class-form.php:174
+#: inc/gutenberg/blocks/comment/class-form.php:173
 msgid "Website"
 msgstr "Site"
 
@@ -492,14 +488,12 @@ msgstr ""
 "Suportul YoastSEO este activat! Tema noastră funcționează perfect cu cel mai "
 "bun plugin SEO."
 
-#: inc/core/class-comments.php:243
-#: inc/gutenberg/blocks/comment/class-form.php:286
+#: inc/gutenberg/blocks/comment/class-form.php:298
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"
 
-#: inc/core/class-comments.php:205
-#: inc/gutenberg/blocks/comment/class-form.php:259
+#: inc/gutenberg/blocks/comment/class-form.php:271
 msgid "Your email address will not be published."
 msgstr "Emailul tău nu va fi publicat."
 

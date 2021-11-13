@@ -43,7 +43,6 @@ svg,
     vertical-align: -0.125em;
     fill: currentColor;
     width: 1em;
-    height: 1em;
 
     .fa-secondary {
         opacity: .4;
@@ -87,4 +86,14 @@ figcaption,
 .bypostauthor,
 .gallery-caption {
     color: inherit;
+}
+
+.has-drop-cap:not(:focus)::first-letter {
+	float: left;
+	font-size: 8em;
+	font-weight: 100;
+	font-style: normal;
+	line-height: 0.7;
+	text-transform: uppercase;
+	margin: 0.05em 0.1em 0 0;
 }

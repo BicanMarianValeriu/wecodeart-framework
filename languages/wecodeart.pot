@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-07 22:28+0000\n"
+"POT-Creation-Date: 2021-11-13 17:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -48,7 +48,7 @@ msgstr ""
 msgid "1 Comment"
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-content.php:90
+#: inc/gutenberg/blocks/post/class-content.php:91
 msgid "[block rendering halted]"
 msgstr ""
 
@@ -105,14 +105,12 @@ msgstr ""
 msgid "Built on %1s."
 msgstr ""
 
-#: inc/core/class-comments.php:173
-#: inc/gutenberg/blocks/comment/class-form.php:225
+#: inc/gutenberg/blocks/comment/class-form.php:237
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr ""
 
-#: inc/core/class-comments.php:197
-#: inc/gutenberg/blocks/comment/class-form.php:96
+#: inc/gutenberg/blocks/comment/class-form.php:95
 msgid "Cancel reply"
 msgstr ""
 
@@ -125,9 +123,8 @@ msgstr ""
 msgid "Category Archives: %s"
 msgstr ""
 
-#: inc/core/class-comments.php:117 inc/core/class-comments.php:124
-#: inc/gutenberg/blocks/comment/class-form.php:194
-#: inc/gutenberg/blocks/comment/class-form.php:201
+#: inc/gutenberg/blocks/comment/class-form.php:193
+#: inc/gutenberg/blocks/comment/class-form.php:200
 msgid "Comment *"
 msgstr ""
 
@@ -179,8 +176,7 @@ msgid ""
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
-#: inc/core/class-comments.php:92
-#: inc/gutenberg/blocks/comment/class-form.php:153
+#: inc/gutenberg/blocks/comment/class-form.php:152
 msgid "Email *"
 msgstr ""
 
@@ -196,7 +192,7 @@ msgstr ""
 msgid "Failed to dismiss notification"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-buttons.php:52
+#: inc/gutenberg/blocks/design/class-buttons.php:51
 msgid "Group"
 msgstr ""
 
@@ -219,6 +215,10 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr ""
 
+#: inc/gutenberg/blocks/design/class-button.php:52
+msgid "Link"
+msgstr ""
+
 #: inc/gutenberg/blocks/site/class-login.php:101
 msgid "Log In"
 msgstr ""
@@ -237,8 +237,7 @@ msgstr ""
 msgid "Monthly Archives: %s"
 msgstr ""
 
-#: inc/core/class-comments.php:79
-#: inc/gutenberg/blocks/comment/class-form.php:132
+#: inc/gutenberg/blocks/comment/class-form.php:131
 msgid "Name *"
 msgstr ""
 
@@ -254,7 +253,7 @@ msgstr ""
 msgid "Notification dismissed"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-numbers.php:138
+#: inc/gutenberg/blocks/query/class-numbers.php:142
 msgid "Pagination"
 msgstr ""
 
@@ -306,8 +305,7 @@ msgstr ""
 msgid "Request method %1$s is not valid."
 msgstr ""
 
-#: inc/core/class-comments.php:207
-#: inc/gutenberg/blocks/comment/class-form.php:262
+#: inc/gutenberg/blocks/comment/class-form.php:274
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr ""
@@ -334,8 +332,7 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: inc/core/class-comments.php:192
-#: inc/gutenberg/blocks/comment/class-form.php:91
+#: inc/gutenberg/blocks/comment/class-form.php:90
 msgid "Speak Your Mind"
 msgstr ""
 
@@ -403,8 +400,7 @@ msgstr ""
 msgid "Username or Email Address"
 msgstr ""
 
-#: inc/core/class-comments.php:105
-#: inc/gutenberg/blocks/comment/class-form.php:174
+#: inc/gutenberg/blocks/comment/class-form.php:173
 msgid "Website"
 msgstr ""
 
@@ -454,14 +450,12 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: inc/core/class-comments.php:243
-#: inc/gutenberg/blocks/comment/class-form.php:286
+#: inc/gutenberg/blocks/comment/class-form.php:298
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr ""
 
-#: inc/core/class-comments.php:205
-#: inc/gutenberg/blocks/comment/class-form.php:259
+#: inc/gutenberg/blocks/comment/class-form.php:271
 msgid "Your email address will not be published."
 msgstr ""
 

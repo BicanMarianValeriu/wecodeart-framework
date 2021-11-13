@@ -48,7 +48,7 @@ class Suggestions {
 	 */
 	public function init() {
 		// Editor Class Settings.
-		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'background'	] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'colors'		] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'typography'	] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'display'		] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'flex' 			] );
@@ -66,9 +66,11 @@ class Suggestions {
 	 *
 	 * @return 	array 	Returns updated editors settings.
 	 */
-	public function background( $args ) {
+	public function colors( $args ) {
 		foreach( self::COLORS as $color ) {
 			$args[] = 'bg-' . $color;
+			$args[] = 'text-' . $color;
+			$args[] = 'link-' . $color;
 		}
 
 		return $args;
@@ -82,14 +84,17 @@ class Suggestions {
 	 * @return 	array 	Returns updated editors settings.
 	 */
 	public function typography( $args ) {
+		// Style
 		foreach( [ 'italic', 'normal' ] as $type ) {
 			$args[] = 'fst-'. $type;
 		}
 
+		// Weight
 		foreach( [ 'normal', 'lighter', 'light', 'bold', 'bolder' ] as $weight ) {
 			$args[] = 'fw-'. $weight;
 		}
 		
+		// Align
 		foreach( [ 'start', 'center', 'end', 'justify', 'truncate' ] as $type ) {
 			$args[] = 'text-' . $type;
 		}
@@ -100,19 +105,17 @@ class Suggestions {
 			}
 		}
 
+		// Transform
 		foreach( [ 'lowercase', 'uppercase', 'capitalize', 'wrap', 'nowrap', 'reset', 'break' ] as $type ) {
 			$args[] = 'text-' . $type;
 		}
 		
+		// Decoration
 		foreach( [ 'decoration-none', 'decoration-underline', 'decoration-line-through' ] as $type ) {
 			$args[] = 'text-' . $type;
 		}
 
-		foreach( self::COLORS as $color ) {
-			$args[] = 'text-' . $color;
-			$args[] = 'link-' . $color;
-		}
-
+		// Sizes
 		foreach( range( 1, 5 ) as $nr ) {
 			$args[] = 'display-'. $nr;
 			$args[] = 'fs-'. $nr;
@@ -122,10 +125,10 @@ class Suggestions {
 			$args[] = 'h'. $nr;
 		}
 
+		// Misc
 		return wp_parse_args( [
 			'lead',
 			'font-monospace',
-			'stretched-link',
 			'align-text-top',
 			'align-text-bottom',
 			'lh-1',
