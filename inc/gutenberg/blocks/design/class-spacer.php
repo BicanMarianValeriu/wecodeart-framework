@@ -63,7 +63,7 @@ class Spacer extends Dynamic {
 		}
 		@media (min-width: $desktop) {
 			.wp-block-spacer {
-				height: var(--wp--spacer-height, 100px);
+				--wp--spacer-ratio: 1;
 			}
 		}
 		";

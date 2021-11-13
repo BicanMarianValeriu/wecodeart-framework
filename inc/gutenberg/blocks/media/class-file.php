@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -17,7 +17,6 @@ namespace WeCodeArt\Gutenberg\Blocks\Media;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
-use WeCodeArt\Markup\SVG;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -60,14 +59,22 @@ class File extends Dynamic {
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
 		$exclude = [
-			'btn-primary',
-			'btn-secondary',
-			'btn-success',
-			'btn-danger',
-			'btn-warning',
-			'btn-light',
-			'btn-dark',
-			'btn-info',
+			'bg-primary',
+			'bg-secondary',
+			'bg-success',
+			'bg-danger',
+			'bg-warning',
+			'bg-light',
+			'bg-dark',
+			'bg-info',
+			'text-primary',
+			'text-secondary',
+			'text-success',
+			'text-danger',
+			'text-warning',
+			'text-light',
+			'text-dark',
+			'text-info',
 		];
 
 		$attributes = get_prop( $block, 'attrs', [] );
@@ -81,7 +88,7 @@ class File extends Dynamic {
 
 		// Wrapper Changes
 		$wrapper	= $doc->getElementsByTagName( 'div' )->item(0);
-		$classname 	= implode( ' ', array_merge( [ 'wp-block-file', 'btn-group' ], array_filter( $ommited ) ) );
+		$classname 	= implode( ' ', array_merge( [ 'wp-block-file', 'd-flex', 'align-items-center' ], array_filter( $ommited ) ) );
 		
 		$wrapper->setAttribute( 'class', $classname );
 		
@@ -89,17 +96,17 @@ class File extends Dynamic {
 		$links	= $wrapper->getElementsByTagName( 'a' );
 		foreach( $links as $link ) {
 			if( $link->getAttribute( 'class' ) === 'wp-block-file__button' ) {
-				$btn_class  = [ 'wp-block-file__button', 'btn' ];
+				$btn_class  = [ 'wp-block-file__button', 'ms-3', 'py-1', 'px-3', 'rounded-pill' ];
 	
 				if( ! empty( $matched ) ) {
 					$btn_class = array_merge( $btn_class, $matched );
 				} else {
-					$btn_class[] = 'btn-dark';
+					$btn_class = array_merge( $btn_class, [ 'bg-dark', 'text-white' ] );
 				}
 
 				$link->setAttribute( 'class', join( ' ', $btn_class ) );
 			} else {
-				$link->setAttribute( 'class', join( ' ', [ 'wp-block-file__button', 'btn', 'btn-outline-dark' ] ) );
+				$link->setAttribute( 'class', join( ' ', [ 'wp-block-file__link' ] ) );
 			}
 		}
 

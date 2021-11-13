@@ -114,7 +114,7 @@ class Template extends Dynamic {
 				'tag' 	=> 'ul',
 				'attrs'	=> [
 					'id'	=> 'comments',
-					'class' => 'wp-block-comments-query-loop__list list-unstyled pl-0'
+					'class' => 'wp-block-comments-query-loop__list list-unstyled'
 				]
 			]
 		], function( $comments, $block ) {
