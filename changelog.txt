@@ -6,10 +6,14 @@ v5.2.2
 - Updated - BEM class naming for some post meta block views
 - Updated - Updated starter content
 - Updated - Updated page templates
+- Updated - Block Table CSS from SASS to block class (enqueued when needed)
+- Updated - Block Button CSS from SASS to block class (enqueued when needed)
+- Updated - Block Buttons CSS from SASS to block class (enqueued when needed)
 - Removed - Widgets - sidebar registration
 - Removed - Comment Walker in favor of Gutenberg block
 - Removed - comments.php
 - Removed - page-full.html
+- Removed - Removed unnecessary Boostrap CSS
 - Added - Gutenberg Flex layout support
 - Added - Gutenberg Comment Template/Form blocks
 - Added - Site logo block wrapper (move custom logo filter to it and added styles)

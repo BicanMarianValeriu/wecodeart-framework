@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.5
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -121,6 +121,67 @@ class Table extends Dynamic {
 	 */
 	public function styles() {
 		return "
+		table {
+			--wp--table-border-width: 1px;
+			--wp--table-padding-x: .5rem;
+			--wp--table-padding-y: .5rem;
+			--wp--table-bg: transparent;
+			--wp--table-accent-bg: transparent;
+			--wp--table-striped-color: var(--wp--dark);
+			--wp--table-striped-bg: rgba(0, 0, 0, 0.05);
+			--wp--table-active-color: var(--wp--dark);
+			--wp--table-active-bg: rgba(0, 0, 0, 0.1);
+			--wp--table-hover-color: var(--wp--dark);
+			--wp--table-hover-bg: rgba(0, 0, 0, 0.075);
+		  
+			width: 100%;
+			margin-bottom: 1rem;
+			vertical-align: middle;
+			border-color: var(--wp--light);
+		}
+		table > thead {
+			vertical-align: inherit;
+		}
+		table > tbody {
+			vertical-align: inherit;
+		}
+		table > :not(caption) > * > * {
+			padding: var(wp--table-padding-y) var(wp--table-padding-x);
+			background-color: var(--wp--table-bg);
+			border-bottom-width: var(--wp--table-border-width);
+			box-shadow: inset 0 0 0 9999px var(--wp--table-accent-bg);
+		}
+		table > :not(:first-child) {
+			border-top: calc(2 * 1px) solid currentColor;
+		}
+		.table-bordered > :not(caption) > * {
+			border-width: var(--wp--table-border-width) 0;
+		}
+		.table-bordered > :not(caption) > * > * {
+			border-width: 0 var(--wp--table-border-width);
+		}
+		.table-borderless > :not(caption) > * {
+			border-bottom-width: 0;
+		}
+		.table-borderless > :not(:first-child) {
+			border-top-width: 0;
+		}
+		.table-striped > tbody > tr:nth-of-type(2n) > * {
+			--wp--table-accent-bg: var(--wp--table-striped-bg);
+			color: var(--wp--table-striped-color);
+		}
+		.table-active {
+			--wp--table-accent-bg: var(--wp--table-active-bg);
+			color: var(--wp--table-active-color);
+		}
+		.table-hover > tbody > tr:hover > * {
+			--wp--table-accent-bg: var(--wp--table-hover-bg);
+			color: var(--wp--table-hover-color);
+		}
+		.caption-top {
+			caption-side: top;
+		}
+
 		.wp-block-table.alignleft,
 		.wp-block-table.aligncenter,
 		.wp-block-table.alignright {

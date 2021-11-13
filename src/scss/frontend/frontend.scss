@@ -23,8 +23,6 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/utilities/api";
-
-// Root
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
 
@@ -32,40 +30,47 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import './base';
 @import './theme';
 
-// BS Layout & components
-@import "~bootstrap/scss/type";
-@import "~bootstrap/scss/images";
-@import "~bootstrap/scss/tables";
-@import "~bootstrap/scss/forms";
-@import "~bootstrap/scss/list-group";
-// Grid
-@import "~bootstrap/scss/containers";
-@import "~bootstrap/scss/grid";
-// Buttons
-@import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/button-group";
-// Nav
-@import "~bootstrap/scss/nav";
-@import "~bootstrap/scss/navbar";
-@import "~bootstrap/scss/dropdown";
-@import "~bootstrap/scss/close";
-@import "~bootstrap/scss/offcanvas";
-// Misc
-@import "~bootstrap/scss/alert";
-@import "~bootstrap/scss/badge";
-@import "~bootstrap/scss/breadcrumb";
-@import "~bootstrap/scss/card";
-@import "~bootstrap/scss/pagination";
-@import "~bootstrap/scss/transitions";
-// @import "~bootstrap/scss/accordion";
-// @import "~bootstrap/scss/carousel";
-// @import "~bootstrap/scss/modal";
-// @import "~bootstrap/scss/popover";
-// @import "~bootstrap/scss/progress";
-// @import "~bootstrap/scss/placeholders";
-// @import "~bootstrap/scss/toasts";
-// @import "~bootstrap/scss/tooltip";
-// @import "~bootstrap/scss/spinners";
+// This will allways be in the theme - core CSS
+@import "~bootstrap/scss/type";         // X
+@import "~bootstrap/scss/forms";        // X
+@import "~bootstrap/scss/containers";   // X
+@import "~bootstrap/scss/grid";         // X
+// Nav/Misc
+@import "~bootstrap/scss/nav";          // X
+@import "~bootstrap/scss/navbar";       // X
+@import "~bootstrap/scss/dropdown";     // X
+@import "~bootstrap/scss/close";        // X
+@import "~bootstrap/scss/offcanvas";    // X
+@import "~bootstrap/scss/transitions";  // X
+
+// This will be added as utilities
+// @import "~bootstrap/scss/alert";         // XX ToDO as utility
+// @import "~bootstrap/scss/badge";         // XX ToDO as utility
+// @import "~bootstrap/scss/card";          // XX ToDO as utility
+// @import "~bootstrap/scss/list-group";    // XX ToDO as utility
+
+// This is added as a block style
+// @import "~bootstrap/scss/button-group";  // XX Block
+// @import "~bootstrap/scss/buttons";       // XX Block
+// @import "~bootstrap/scss/tables";        // XX Block
+// @import "~bootstrap/scss/pagination";    // XX Block
+
+// This will be added as extension - requires JS
+// @import "~bootstrap/scss/accordion";     // XX Extension
+// @import "~bootstrap/scss/carousel";      // XX Extension
+// @import "~bootstrap/scss/popover";       // XX Extension
+// @import "~bootstrap/scss/tooltip";       // XX Extension
+
+// This should be included in a skin
+// @import "~bootstrap/scss/modal";         // XX Skin
+// @import "~bootstrap/scss/progress";      // XX Skin
+// @import "~bootstrap/scss/placeholders";  // XX Skin
+// @import "~bootstrap/scss/spinners";      // XX Skin
+// @import "~bootstrap/scss/toasts";        // XX Skin
+
+// This will never be added
+// @import "~bootstrap/scss/images";        // XX No Add
+// @import "~bootstrap/scss/breadcrumb";    // XX No Add
 
 // BS Helpers
-@import "~bootstrap/scss/helpers";
+@import "~bootstrap/scss/helpers";          // XX ToDO as utility

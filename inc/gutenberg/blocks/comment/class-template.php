@@ -114,7 +114,7 @@ class Template extends Dynamic {
 				'tag' 	=> 'ul',
 				'attrs'	=> [
 					'id'	=> 'comments',
-					'class' => implode( ' ', [ 'wp-block-comments-query-loop__list list-unstyled pl-0' ] )
+					'class' => 'wp-block-comments-query-loop__list list-unstyled pl-0'
 				]
 			]
 		], function( $comments, $block ) {
@@ -263,7 +263,7 @@ class Template extends Dynamic {
 	 */
 	public function reply_class( $html ) {
 		$search 	= '/' . preg_quote( "class='comment-reply-link'", '/' ) . '/';
-		$replace 	= 'class="comment-reply-link btn btn-primary btn-sm rounded-pill text-white"';
+		$replace 	= 'class="comment-reply-link wp-block-button__link py-1 rounded-pill text-white"';
 
 		return preg_replace( $search, $replace, $html, 1 );
 	}

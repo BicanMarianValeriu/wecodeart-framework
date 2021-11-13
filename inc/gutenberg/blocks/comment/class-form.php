@@ -81,14 +81,13 @@ class Form extends Dynamic {
 	 * @return 	array
 	 */
 	public function comment_form_defaults( $defaults ) {
-		$dots_1 = SVG::compile( 'comment-dots', [ 'class' => 'fa-2x me-2' ] );
-		$dots_2 = SVG::compile( 'comment-dots', [ 'class' => 'me-1' ] );
+		$dots= SVG::compile( 'comment-dots', [ 'class' => 'fa-2x me-2' ] );
 
 		return wp_parse_args( [
 			'format'			 	=> 'html5',
 			'class_container'		=> 'wp-block-post-comments-form__wrap',
 			'class_form' 			=> 'wp-block-post-comments-form__form comment-form needs-validation',
-			'title_reply' 			=> $dots_1 . esc_html__( 'Speak Your Mind', 'wecodeart' ),
+			'title_reply' 			=> $dots . esc_html__( 'Speak Your Mind', 'wecodeart' ),
 			'title_reply_before' 	=> '<h3 class="wp-block-post-comments-form__headline" id="reply-title">',
 			'title_reply_after'  	=> '</h3>',
 			'cancel_reply_before'  	=> '<span class="has-small-font-size my-2 float-end">',
@@ -97,8 +96,8 @@ class Form extends Dynamic {
 			'comment_field' 		=> $this->get_input( 'comment' ),
 			'comment_notes_before' 	=> $this->get_form_notes(),
 			'submit_field'			=> '<div class="mb-3 comment-form-submit">%1$s %2$s</div>',
-			'submit_button'			=> '<button name="%1$s" type="submit" id="%2$s" class="%3$s">' . $dots_2 . '<span>%4$s</span></button>',
-			'class_submit'			=> 'btn btn-outline-dark',
+			'submit_button'			=> $this->get_input( 'submit' ),
+			'class_submit'			=> 'wp-block-button__link',
 			'fields' 				=> [
 				'author' 	=> $this->get_input( 'name' ),
 				'email'  	=> $this->get_input( 'email' ),
@@ -202,6 +201,19 @@ class Form extends Dynamic {
 						'required'		=> ( $req ) ? 'required' : NULL,
 					]
 				] ], false );
+			break;
+
+			case 'submit':
+				$markup = '';
+
+				$markup .= '<div class="wp-block-button wp-block-button--comment is-style-outline">';
+				$markup .= '<button name="%1$s" type="submit" id="%2$s" class="%3$s">';
+				$markup .= SVG::compile( 'comment-dots', [ 'class' => 'wp-block-button__icon me-1' ] );
+				$markup .= '<span class="wp-block-button__label">%4$s</span>';
+				$markup .= '</button>';
+				$markup .= '</div>';
+
+				return apply_filters( 'wecodeart/filter/comments/submit', $markup );
 			break;
 
 			case 'cookies':

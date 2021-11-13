@@ -20,11 +20,15 @@ return [
 	
 	<!-- wp:buttons {"contentJustification":"center","className":"is-style-default","customCSSId":"63cc6392-da1e-4fe3-8110-ecf7256a6576"} -->
 	<div class="wp-block-buttons is-content-justification-center is-style-default"><!-- wp:button {"backgroundColor":"light","textColor":"dark","customCSSId":"e27fcc07-0007-46f7-a55e-154287aab0e2"} -->
-	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
+	<div class="wp-block-button">
+	<a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">LEARN MORE</a>
+	</div>
 	<!-- /wp:button -->
 	
 	<!-- wp:button {"backgroundColor":"light","textColor":"dark","customCSSId":"1c039914-4ea3-4875-b368-b1b86885769b"} -->
-	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">HIRE US</a></div>
+	<div class="wp-block-button">
+	<a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">HIRE US</a>
+	</div>
 	<!-- /wp:button -->
 	</div>
 	<!-- /wp:buttons -->
@@ -36,16 +40,17 @@ return [
 	<div class="wp-block-group my-5">
 	<!-- wp:columns {"className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
-	<!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
-	<div class="wp-block-column mb-3 mb-lg-0">
+	<!-- wp:column {"className":"mt-5 shadow-sm rounded","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
+	<div class="wp-block-column mt-5 shadow-sm rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"fe797173-3ba3-4f69-9313-77ef04bccf26"} -->
-	<div class="wp-block-image"><figure class="aligncenter size-large is-resized">
+	<div class="wp-block-image">
+	<figure class="aligncenter size-large is-resized">
 	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/calculator.svg" alt="" width="65" height="65"/>
 	</figure></div>
 	<!-- /wp:image -->
 	
-	<!-- wp:heading {"textAlign":"center","level":3,"customCSSId":"39382e17-6b0f-4158-b420-9542f61bcf3c"} -->
-	<h3 class="has-text-align-center">Fixed Price Projects</h3>
+	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3,"customCSSId":"39382e17-6b0f-4158-b420-9542f61bcf3c"} -->
+	<h3 class="has-text-align-center has-primary-color has-text-color">Fixed Price Projects</h3>
 	<!-- /wp:heading -->
 	
 	<!-- wp:paragraph {"align":"center","customCSSId":"cb51d812-c54b-4a84-9cf7-9ad72e4bc9d6"} -->
@@ -54,13 +59,18 @@ return [
 	</div>
 	<!-- /wp:column -->
 	
-	<!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"d08919b0-bc3a-4bb9-9693-548d0f7b572a"} -->
-	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"38f71f14-639f-4298-a0ae-06398205f0b4"} -->
-	<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/clock.svg" alt="" width="65" height="65"/></figure></div>
+	<!-- wp:column {"className":"my-5 mt-md-0 shadow rounded","customCSSId":"d08919b0-bc3a-4bb9-9693-548d0f7b572a"} -->
+	<div class="wp-block-column my-5 mt-md-0 shadow rounded">
+	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"38f71f14-639f-4298-a0ae-06398205f0b4"} -->
+	<div class="wp-block-image">
+	<figure class="aligncenter size-large is-resized">
+	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/clock.svg" alt="" width="65" height="65"/>
+	</figure>
+	</div>
 	<!-- /wp:image -->
 	
-	<!-- wp:heading {"textAlign":"center","level":3,"customCSSId":"e4e0c759-181f-476e-b553-82b5a09faf53"} -->
-	<h3 class="has-text-align-center">Receive on time</h3>
+	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3,"customCSSId":"e4e0c759-181f-476e-b553-82b5a09faf53"} -->
+	<h3 class="has-text-align-center has-primary-color has-text-color">Receive on time</h3>
 	<!-- /wp:heading -->
 	
 	<!-- wp:paragraph {"align":"center","customCSSId":"976d5ea4-0585-41c4-b445-ef937214897c"} -->
@@ -69,13 +79,18 @@ return [
 	</div>
 	<!-- /wp:column -->
 	
-	<!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"06fa0ffd-90c8-4393-aeaf-578718388f09"} -->
-	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"0eb2eefc-860a-415b-a610-bdf051561877"} -->
-	<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/delivery.svg" alt="" width="65" height="65"/></figure></div>
+	<!-- wp:column {"className":"mt-5 shadow-sm rounded","customCSSId":"06fa0ffd-90c8-4393-aeaf-578718388f09"} -->
+	<div class="wp-block-column mt-5 shadow-sm rounded">
+	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"0eb2eefc-860a-415b-a610-bdf051561877"} -->
+	<div class="wp-block-image">
+	<figure class="aligncenter size-large is-resized">
+	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/delivery.svg" alt="" width="65" height="65"/>
+	</figure>
+	</div>
 	<!-- /wp:image -->
 	
-	<!-- wp:heading {"textAlign":"center","level":3,"customCSSId":"3797f1e2-bfa3-4a0b-9f78-229bc670076f"} -->
-	<h3 class="has-text-align-center">Fast work turnaround</h3>
+	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3,"customCSSId":"3797f1e2-bfa3-4a0b-9f78-229bc670076f"} -->
+	<h3 class="has-text-align-center has-primary-color has-text-color">Fast work turnaround</h3>
 	<!-- /wp:heading -->
 	
 	<!-- wp:paragraph {"align":"center","customCSSId":"f147fedf-20f8-4d2f-b453-2871cfd6e994"} -->

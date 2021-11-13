@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.7
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -130,26 +130,97 @@ class Numbers extends Dynamic {
             [
                 'tag'   => 'nav',
                 'attrs' => [
-                    'class' => 'wp-block-query-pagination__numbers mb-5',
+                    'class' => 'wp-block-query-pagination__numbers px-3 mb-5',
                 ]
             ],
         ], function( $content ) {
-            ?>
-            <ul class="pagination pagination-sm justify-content-center mb-0" aria-label="<?php esc_attr_e( 'Pagination', 'wecodeart' ); ?>"><?php
+            Markup::wrap( 'pagination-numbers-list', [
+                [
+                    'tag'   => 'ul',
+                    'attrs' => [
+                        'class'     => 'pagination mb-0',
+                        'aria-label'=> esc_attr__( 'Pagination', 'wecodeart' )
+                    ]
+                ],
+            ], function( $content ) {
 
                 foreach( $content as $key => $link ) :
-                    $class = [ 'page-item', 'pagination__item' ];
-                    if( strpos( $link, 'current' ) !== false ) $class[] = 'pagination__item--current active';
-                ?>
-                <li class="<?php echo esc_attr( trim( implode( ' ', $class ) ) ); ?>">
-                    <?php echo str_replace( 'page-numbers', 'page-link', $link ); ?>
-                </li>
-                <?php
+
+                    $class = [ 'pagination__item' ];
+
+                    if( strpos( $link, 'current' ) !== false ) {
+                        $class[] = 'pagination__item--current';
+                    }
+
+                    ?>
+                    <li class="<?php echo esc_attr( implode( ' ', $class ) ); ?>">
+                        <?php echo str_replace( 'page-numbers', 'pagination__link', $link ); ?>
+                    </li>
+                    <?php
+
                 endforeach;
 
-            ?>
-            </ul>
-            <?php
+            }, [ $content ] );
         }, [ $content ], false );
+	}
+
+    /**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+        .pagination {
+            display: flex;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .pagination__link {
+            position: relative;
+            display: block;
+            color: var(--wp--primary);
+            text-decoration: none;
+            background-color: white;
+            padding: 0.375rem 0.75rem;
+            border: 1px solid currentColor;
+        }
+        .pagination__link:hover {
+            z-index: 2;
+            color: var(--wp--primary);
+            background-color: var(--wp--light);
+            border-color: currentColor;
+        }
+        .pagination__link:focus {
+            z-index: 3;
+            color: var(--wp--primary);
+            background-color: var(--wp--light);
+            outline: none;
+            box-shadow: 0 0 0 1px var(--wp--primary);
+        }
+        .pagination__item:first-child .pagination__link {
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+        .pagination__item:not(:first-child) .pagination__link {
+            margin-left: -1px;
+        }
+        .pagination__item:last-child .pagination__link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+        .pagination__item--current .pagination__link {
+            z-index: 3;
+            color: white;
+            background-color: var(--wp--primary);
+            border-color: var(--wp--primary);
+        } 
+        .pagination__item--disabled .pagination__link {
+            color: var(--wp--gray);
+            pointer-events: none;
+            background-color: var(--wp--gray-100);
+            border-color: currentColor;
+        }
+		";
 	}
 }

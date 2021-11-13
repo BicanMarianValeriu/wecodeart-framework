@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -79,26 +79,12 @@ class Excerpt extends Dynamic {
 
 		$post_id = $block->context['postId'];
 
-		// Buton based on link color
-		$button = wecodeart_json( [ 'styles', 'elements', 'link', 'color', 'text' ], 'primary' );
-		$button_classes = [ 'wp-block-post-excerpt__more-btn', 'btn' ];
-		$style = null;
-		if ( mb_strpos( $button, '|' ) !== false ) {
-			$button = explode( '|', $button );
-			$button = end( $button );
-			$button_classes[] = 'btn-outline-' . $button;
-		} else {
-			$style = 'color:' . $button . ';border-color:currentColor';
-			$button_classes[] = 'btn-outline-custom';
-		}
-
 		$more_text = Markup::wrap( 'entry-more', [
 			[
 				'tag' 	=> 'a',
 				'attrs' => [
-					'class' => join( ' ', $button_classes ),
+					'class' => 'wp-block-post-excerpt__more-btn',
 					'href'	=> esc_url( get_the_permalink( $post_id ) ),
-					'style' => $style
 				]
 			]
 		], function( $attributes, $key, $default ) {

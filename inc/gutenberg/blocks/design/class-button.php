@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.9
+ * @version		5.2.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -44,6 +44,16 @@ class Button extends Dynamic {
 	protected $block_name = 'button';
 
 	/**
+	 * Init
+	 */
+	public function init() {
+		register_block_style( $this->get_block_type(), [
+			'name' 	=> 'link',
+            'label'	=> __( 'Link', 'wecodeart' ),
+		] );
+	}
+
+	/**
 	 * Shortcircuit Register
 	 */
 	public function register() {
@@ -59,44 +69,9 @@ class Button extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
-		$doc = $this->load_html( $content );
 		$attributes = get_prop( $block, 'attrs', [] );
-		
-		// Button Changes
-		$link	= $doc->getElementsByTagName( 'a' )->item(0);
-		
-		if( $link ) {
-			$classes 	= explode( ' ', get_prop( $attributes, 'className', '' ) );
-			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
-			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
-			$palette 	= wp_list_pluck( $palette, 'slug' );
-			
-			$color_cls	= [ 'has-background' ];
-			foreach( $palette as $slug ) $color_cls[] = 'has-' . $slug . '-background-color';
 
-			$color 		= get_prop( $attributes, 'backgroundColor', false );
-			$classname  = array_merge( explode( ' ', $link->getAttribute( 'class' ) ), [ 'btn' ] );
-	
-			if( in_array( 'is-style-outline', $classes ) ) {
-				$color_cls[] = 'has-text-color';
-				$color 	= get_prop( $attributes, 'textColor', false );
-				if( $color ) {
-					foreach( $palette as $slug ) $color_cls[] = 'has-' . $slug . '-color';
-					$classname[] = 'btn-outline-' . $color;
-				}
-			} elseif( $color ) {
-				$classname[] = 'btn-' . $color;
-			}
-			
-			$classname	= array_diff( $classname, $color_cls );
-			$link->setAttribute( 'class', join( ' ', $classname ) );
-		}
-
-		// Convert to BEM - I know that JSON cannot allow use it but we can do it in PHP
-		$html = str_replace( '__width', '--width', $doc->saveHTML() );
-
-		// Remove the Doctype output
-		return $this->save_html( $html );
+		return str_replace( '-button__width', '-button--width', $content );
 	}
 
 	/**
@@ -142,11 +117,68 @@ class Button extends Dynamic {
 		.wp-block-button.alignright {
 			text-align: right;
 		}
-		.wp-block-button__link {
-			display: block;
+		.is-style-outline .wp-block-button__link {
+			--wp--bg-opacity: 0;
+			background-color: rgba(var(--wp--dark-rgb), var(--wp--bg-opacity));
+			border-color: currentColor;
+			color: var(--wp--dark);
+		}
+		.is-style-outline .wp-block-button__link:hover {
+			--wp--bg-opacity: 1;
+			border-color: var(--wp--dark);
+			color: white;
 		}
 		.wp-block-button__link.no-border-radius {
 			border-radius: 0;
+		}
+		.wp-block-button__link {
+			display: inline-block;
+			vertical-align: middle;
+			padding: 0.5rem 0.75rem;
+			color: var(--wp--white);
+			font-size: 1rem;
+			font-weight: 400;
+			text-align: center;
+			line-height: 1.5;
+			background-color: var(--wp--dark);
+			border: 1px solid transparent;
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+			user-select: none;
+			cursor: pointer;
+		}
+		.wp-block-button__link:hover {
+			color: var(--wp--white);
+			text-decoration: none;
+		}
+		.btn-check:focus + .wp-block-button__link,
+		.wp-block-button__link:focus {
+			outline: 0;
+    		box-shadow: 0 0 0 1px #000;
+		}
+		.btn-check:checked + .wp-block-button__link,
+		.btn-check:active + .wp-block-button__link,
+		.wp-block-button__link:active,
+		.wp-block-button__link.active {
+			box-shadow: 0 0 0 1px var(--wp--primary);
+		}
+		.btn-check:checked + .wp-block-button__link,
+		.btn-check:active + .wp-block-button__link,
+		.wp-block-button__link:active,
+		.wp-block-button__link.active {
+			box-shadow: 0 0 0 1px var(--wp--primary);
+		}
+		.btn-check:checked + .wp-block-button__link:focus,
+		.btn-check:active + .wp-block-button__link:focus,
+		.wp-block-button__link:active:focus,
+		.wp-block-button__link.active:focus {
+			box-shadow: 0 0 0 1px var(--wp--primary);
+		}
+		.wp-block-button__link:disabled,
+		.wp-block-button__link.disabled,
+		fieldset:disabled .wp-block-button__link {
+			pointer-events: none;
+			opacity: .7;
+			box-shadow: none;
 		}
 		";
 	}
