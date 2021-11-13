@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.5
+ * @version		5.2.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -54,16 +54,22 @@ class Spacer extends Dynamic {
 	 */
 	public function styles() {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$tablet		= get_prop( $breaks, 'md', '768px' );
 		$desktop	= get_prop( $breaks, 'lg', '992px' );
 
 		return "
 		.wp-block-spacer {
-			height: calc(var(--wp--spacer-height, 100px) * var(--wp--spacer-ratio, .7));
+			height: calc(var(--wp--spacer-height, 100px) * var(--wp--spacer-mobile, .5));
 			clear: both;
+		}
+		@media (min-width: $tablet) {
+			.wp-block-spacer {
+				height: calc(var(--wp--spacer-height, 100px) * var(--wp--spacer-tablet, .7));
+			}
 		}
 		@media (min-width: $desktop) {
 			.wp-block-spacer {
-				--wp--spacer-ratio: 1;
+				height: var(--wp--spacer-height, 100px);
 			}
 		}
 		";
