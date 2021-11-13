@@ -1,5 +1,8 @@
+v5.2.4
+- Fixed - Social links svg height
+
 v5.2.3
-- Updated 
+- Fixed - Starter content conflict with WordPress default pages.
 
 v5.2.2
 - Updated - Gutenberg remove from theme activation check - WP does that automatically until 5.9 for FSE themes

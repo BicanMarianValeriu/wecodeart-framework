@@ -30,7 +30,7 @@ class Starter implements Integration {
 
 	const HOME_SLUG  	= 'home';
 	const BLOG_SLUG  	= 'blog';
-	const ABOUT_SLUG 	= 'about';
+	const ABOUT_SLUG 	= 'about_us';
 	const NOTICE_ID 	= 'wecodeart-starter-notice';
 
 	/**
@@ -149,8 +149,12 @@ class Starter implements Integration {
 					'name' 	=> esc_html__( 'Primary Menu', 'wecodeart' ),
 					'items' => [
 						'page_home',
-						'page_about',
 						'page_blog',
+						'page_about_us' => [
+							'type' 		=> 'post_type',
+							'object' 	=> 'page',
+							'object_id' => '{{' . self::ABOUT_SLUG . '}}',
+						],
 					],
 				],
 			],
@@ -160,9 +164,6 @@ class Starter implements Integration {
 			'posts'       => [
 				self::HOME_SLUG  => wp_parse_args( [
 					'post_name'  => self::HOME_SLUG,
-					'meta_input' => [
-						'_wca_title_hidden'	=> true,
-					]
 				], require __DIR__ . '/content/home.php' ),
 				self::ABOUT_SLUG => wp_parse_args( [
 					'post_name'  => self::ABOUT_SLUG,

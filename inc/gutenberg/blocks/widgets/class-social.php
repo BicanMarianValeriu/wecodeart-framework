@@ -254,6 +254,10 @@ class Social extends Dynamic {
 			border: none;
 			box-shadow: none;
 		}
+		.wp-social-link svg {
+			width: 1em;
+			height: 1em;
+		}
 		@media (min-width: $desktop) {
 			.navbar .wp-block-social-links {
 				margin-top: 0;
