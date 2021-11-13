@@ -263,7 +263,7 @@ class Template extends Dynamic {
 	 */
 	public function reply_class( $html ) {
 		$search 	= '/' . preg_quote( "class='comment-reply-link'", '/' ) . '/';
-		$replace 	= 'class="comment-reply-link py-1 px-2 rounded-pill bg-primary text-white"';
+		$replace 	= 'class="comment-reply-link py-1 px-2 rounded-pill bg-primary shadow-sm text-white"';
 
 		return preg_replace( $search, $replace, $html, 1 );
 	}
