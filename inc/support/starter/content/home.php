@@ -40,8 +40,8 @@ return [
 	<div class="wp-block-group my-5">
 	<!-- wp:columns {"className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
-	<!-- wp:column {"className":"mt-5 shadow-sm rounded","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
-	<div class="wp-block-column mt-5 shadow-sm rounded">
+	<!-- wp:column {"style":{"spacing":{"padding":{"top":"20px"}}},"className":"mt-5 shadow-sm rounded","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
+	<div class="wp-block-column mt-5 shadow-sm rounded" style="padding-top:20px">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"fe797173-3ba3-4f69-9313-77ef04bccf26"} -->
 	<div class="wp-block-image">
 	<figure class="aligncenter size-large is-resized">
@@ -59,8 +59,8 @@ return [
 	</div>
 	<!-- /wp:column -->
 	
-	<!-- wp:column {"className":"my-5 mt-md-0 shadow rounded","customCSSId":"d08919b0-bc3a-4bb9-9693-548d0f7b572a"} -->
-	<div class="wp-block-column my-5 mt-md-0 shadow rounded">
+	<!-- wp:column {"style":{"spacing":{"padding":{"top":"20px"}}},"className":"my-5 mt-md-0 shadow rounded","customCSSId":"d08919b0-bc3a-4bb9-9693-548d0f7b572a"} -->
+	<div class="wp-block-column my-5 mt-md-0 shadow rounded" style="padding-top:20px">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"38f71f14-639f-4298-a0ae-06398205f0b4"} -->
 	<div class="wp-block-image">
 	<figure class="aligncenter size-large is-resized">
@@ -79,8 +79,8 @@ return [
 	</div>
 	<!-- /wp:column -->
 	
-	<!-- wp:column {"className":"mt-5 shadow-sm rounded","customCSSId":"06fa0ffd-90c8-4393-aeaf-578718388f09"} -->
-	<div class="wp-block-column mt-5 shadow-sm rounded">
+	<!-- wp:column {"style":{"spacing":{"padding":{"top":"20px"}}},"className":"mt-5 shadow-sm rounded","customCSSId":"06fa0ffd-90c8-4393-aeaf-578718388f09"} -->
+	<div class="wp-block-column mt-5 shadow-sm rounded" style="padding-top:20px">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"0eb2eefc-860a-415b-a610-bdf051561877"} -->
 	<div class="wp-block-image">
 	<figure class="aligncenter size-large is-resized">
