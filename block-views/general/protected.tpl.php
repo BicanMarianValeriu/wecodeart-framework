@@ -29,7 +29,7 @@ SVG::add_icon( 'unlock', [
  * @param   string  $action       Contains the form action url
  */
 ?>
-<form action="<?php echo esc_url( $action ); ?>" method="post" class="alert border-light shadow py-4">
+<form action="<?php echo esc_url( $action ); ?>" method="post" class="border-light rounded shadow-sm p-3">
     <h4><?php
     
         esc_html_e( 'This post is password protected. To view this post, enter the password below!', 'wecodeart' );

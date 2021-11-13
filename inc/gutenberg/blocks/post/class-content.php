@@ -150,15 +150,15 @@ class Content extends Dynamic {
      * WP-Link Pages for paginated posts
      *
      * @since	unknown
-     * @version 5.0.0
+     * @version 5.2.2
      *
      * @return  array
      */
     public function wp_link_pages_args( $args ) {
         return wp_parse_args( [
-            'before'        => '<nav class="pagination pagination-sm pagination--entry mb-3">',
+            'before'        => '<nav class="pagination pagination--entry mb-3">',
             'after'         => '</nav>',
-            'link_before'   => '<span class="page-link">',
+            'link_before'   => '<span class="pagination__link">',
             'link_after'    => '</span>',
             'echo'          => false,
         ], $args );
@@ -173,8 +173,8 @@ class Content extends Dynamic {
      * @return  string
      */
     public function wp_link_pages_link( $link ) {
-        $link = str_replace( 'post-page-numbers', 'page-item', $link );
-        $link = str_replace( 'current', 'active', $link );
+        $link = str_replace( 'post-page-numbers', 'pagination__item', $link );
+        $link = str_replace( 'current', 'pagination__item--current', $link );
         return $link;
     }
 
