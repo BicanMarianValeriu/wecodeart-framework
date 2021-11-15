@@ -67,6 +67,7 @@ class Blocks implements \ArrayAccess {
         $this->register( 'core/code',	    Blocks\Text\Code::class );
         $this->register( 'core/table',	    Blocks\Text\Table::class );
 		$this->register( 'core/quote',	    Blocks\Text\Quote::class );
+		$this->register( 'core/paragraph',  Blocks\Text\Paragraph::class );
 		$this->register( 'core/pullquote',  Blocks\Text\Pullquote::class );
         // Design Blocks
 		$this->register( 'core/columns',    Blocks\Design\Columns::class );

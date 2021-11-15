@@ -4,7 +4,7 @@
 		{
 			"type": "success",
 			"title": "11.9.0 compatability update!",
-			"content": "Next update (v5.2.4) will include huge improvements to styles generation: utility classes CSS only loaded if used on page, eg: if your blocks will have a specific utility class."
+			"content": "Next update (v5.2.4) will include huge improvements to styles generation: utility classes CSS only loaded if used on page, eg: if your blocks will have a specific utility class (mb-5, shadow, rounded etc)."
 		},
 		{
 			"type": "success",

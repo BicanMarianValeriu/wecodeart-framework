@@ -611,18 +611,6 @@ html body {
   /* Above WP toolbar. */
 }
 
-p.has-background {
-  padding: 0.5rem 0.8rem;
-}
-
-p.has-drop-cap.has-background {
-  overflow: hidden;
-}
-
-:where(p.has-text-color:not(.has-link-color)) a {
-  color: inherit;
-}
-
 svg,
 .svg-inline {
   display: inline-block;
@@ -675,16 +663,6 @@ figcaption p.wp-caption-text,
   color: inherit;
 }
 
-.has-drop-cap:not(:focus)::first-letter {
-  float: left;
-  font-size: 8em;
-  font-weight: 100;
-  font-style: normal;
-  line-height: 0.7;
-  text-transform: uppercase;
-  margin: 0.05em 0.1em 0 0;
-}
-
 .wp-site-blocks,
 .wp-site-credits,
 .site-header,
@@ -713,6 +691,10 @@ figcaption p.wp-caption-text,
 .wp-block-column {
   width: 100%;
   flex: 1 0 0%;
+}
+
+.wp-block-post-meta {
+  margin-bottom: 0.5rem;
 }
 
 :where(.wp-block-post-excerpt, .wp-block-post-content, .wp-block-post-comment-content)::after {
