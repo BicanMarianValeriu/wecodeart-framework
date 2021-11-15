@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -91,7 +91,7 @@ class Image extends Dynamic {
 						'tag' 	=> 'a',
 						'attrs'	=> [
 							'href' 	=> get_permalink( $post_ID ),
-							'class'	=> 'd-block ratio overflow-hidden',
+							'class'	=> 'ratio',
 						]
 					]
 				] );
@@ -124,6 +124,12 @@ class Image extends Dynamic {
 	 */
 	public function styles() {
 		return "
+		.wp-block-featured-image .ration {
+			overflow: hidden;
+		}
+		.wp-block-featured-image a {
+			display: block;
+		}
 		.wp-block-featured-image :where(.ratio > *, img) {
 			display: block;
 			top: 50%;

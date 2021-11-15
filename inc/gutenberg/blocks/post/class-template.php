@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.2
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -94,23 +94,10 @@ class Template extends Dynamic {
 
 		$query = new \WP_Query( $args );
 
-		if ( ! $query->have_posts() ) {
-			return Markup::wrap( 'wp-block-query-message', [
-				[
-					'tag' 	=> 'div',
-					'attrs'	=> [
-						'class' => 'wp-block-query__message my-5'
-					]
-				]
-			], function() {
-				esc_html_e( 'Nothing found matching your criteria.', 'wecodeart' );
-			}, [], false );
-		}
-
 		$classnames = [ 'wp-block-post-template' ];
 		if ( isset( $block->context['displayLayout'] ) && isset( $block->context['query'] ) ) {
 			if ( isset( $block->context['displayLayout']['type'] ) && 'flex' === $block->context['displayLayout']['type'] ) {
-				$classnames = array_merge( $classnames, [ 'wp-block-post-template--grid', 'grid', 'px-3' ] );
+				$classnames = array_merge( $classnames, [ 'wp-block-post-template--grid', 'grid' ] );
 			}
 		}
 
@@ -118,7 +105,18 @@ class Template extends Dynamic {
 			$classnames[] = $value;
 		}
 
-		$classnames = array_merge( $classnames, [ 'list-unstyled', 'mt-5', 'mb-0' ] );
+		if ( ! $query->have_posts() ) {
+			return Markup::wrap( 'wp-block-query-message', [
+				[
+					'tag' 	=> 'div',
+					'attrs'	=> [
+						'class' => implode( ' ', array_merge( $classnames, [ 'wp-block-post-template--none' ] ) )
+					]
+				]
+			], function() {
+				esc_html_e( 'Nothing found matching your criteria.', 'wecodeart' );
+			}, [], false );
+		}
 
 		return Markup::wrap( 'wp-block-query', [
 			[
@@ -133,7 +131,7 @@ class Template extends Dynamic {
 				$query->the_post();
 
 				$columns 	= ( 12 / $block->context['displayLayout']['columns'] );
-				$item_class = 'wp-block-post mb-5 g-col-12 g-col-md-6 g-col-lg-' . $columns;
+				$item_class = 'wp-block-post g-col-12 g-col-md-6 g-col-lg-' . $columns;
 				$item_class = implode( ' ', get_post_class( $item_class ) );
 
 				Markup::wrap( 'wp-block-post', [

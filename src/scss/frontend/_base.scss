@@ -25,6 +25,73 @@ html {
     margin: 0 $spacer $spacer 0;
 }
 
+.has-background-dim {
+    opacity: 0.5;
+    z-index: 1;
+    
+    @for $i from 1 through 10 {
+        &-#{ $i * 10 } { 
+            opacity: $i * 0.1;
+        }
+    }
+}
+
+.has-inline-background {
+    @include border-radius();
+    padding: .20rem .8rem;
+    margin: 0 .2rem;
+}
+
+.has-text-align-center {
+    text-align: center;
+}
+
+.has-text-align-right {
+    text-align: right;
+}
+
+.has-text-align-justify {
+    text-align: justify;
+}
+
+.has-underline {
+    text-decoration: underline;
+}
+
+.screen-reader-response,
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px,1px,1px,1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal;
+
+    &:focus {
+        background-color: var(--wp--preset--color--primary, #eee);
+        border-radius: 3px;
+        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+        clip: auto !important;
+        clip-path: none;
+        color: var(--wp--preset--color--white, #444);
+        display: block;
+        width: auto;
+        height: auto;
+        left: 5px;
+        top: 5px;
+        padding: 15px 23px 14px;
+        font-size: 1rem;
+        font-weight: bold;
+        line-height: normal;
+        text-decoration: none;
+        z-index: 100000; /* Above WP toolbar. */
+    }
+}
+
 p.has-background {
     padding: .5rem .8rem;
 }
@@ -96,4 +163,43 @@ figcaption,
 	line-height: 0.7;
 	text-transform: uppercase;
 	margin: 0.05em 0.1em 0 0;
+}
+
+.wp-site-blocks,
+.wp-site-credits,
+.site-header,
+.site-footer {
+    background-color: inherit;
+}
+
+.site-footer,
+.wp-site-credits {
+    box-shadow: 0 0 1px 0 rgba( black, 0.15 );
+}
+
+.site-header {
+    position: relative;
+    box-shadow: 0 0 1px 0 rgba( black, 0.15 );
+    z-index: 15;
+
+    .has-scrolled & {
+        box-shadow: 0 0 1px 1px rgba( black, 0.05 );
+    }
+}
+
+.wp-block-column {
+    width: 100%;
+    flex: 1 0 0%;
+}
+
+:where(.wp-block-post-excerpt, .wp-block-post-content, .wp-block-post-comment-content) {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    a:not([class]) {
+        text-decoration: underline;
+    }
 }

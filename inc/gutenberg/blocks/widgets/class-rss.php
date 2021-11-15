@@ -128,7 +128,7 @@ class RSS extends Dynamic {
 
 				// Meta
 				if( $display_author || $display_date ) {
-					$list_items_markup .= '<div class="wp-block-posts__post-meta d-flex align-items-center text-muted mb-3">';
+					$list_items_markup .= '<div class="wp-block-posts__post-meta d-flex align-items-center mb-3">';
 					// Author
 					if ( $display_author ) {
 						$author = $item->get_author();

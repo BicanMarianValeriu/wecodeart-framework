@@ -9,7 +9,7 @@
  * @subpackage 	Entry\Meta\Date
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		5.2.2
+ * @version		5.2.4
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -24,7 +24,7 @@ if( isset( $modified ) ) {
 }
 
 if( $value = get_prop( $attributes, 'textAlign', false ) ) {
-    $classnames[] = 'text-' . $value;
+    $classnames[] = 'has-text-align-' . $value;
 }
 
 if( $value = get_prop( $attributes, 'className', false ) ) {
@@ -35,7 +35,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
 
     SVG::render( 'clock', [
-        'class' => 'wp-block-post-date__icon d-inline-block me-1'
+        'class' => 'wp-block-post-date__icon'
     ] );
 
     ?>
@@ -47,7 +47,10 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
     <?php if ( get_prop( $attributes, [ 'isLink' ], false ) ) : ?>
     <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>" class="wp-block-post-date__link me-2">
     <?php endif; ?>
-        <time class="wp-block-post-date__published<?php echo isset( $modified ) ? ' d-none' : ''; ?>"
+        <time class="wp-block-post-date__published"
+            <?php if( isset( $modified ) ) : ?>
+            style="display:none;"
+            <?php endif; ?>
             datetime="<?php echo esc_attr( $published['robot'] ); ?>"><?php
 
             echo esc_html( $published['human'] );

@@ -7,11 +7,8 @@
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/containers";
 @import "~bootstrap/scss/helpers";
-@import "~bootstrap/scss/utilities";
-@import "~bootstrap/scss/utilities/api";
 
 // Custom
-@import './../abstracts/root';
 @import './section';
 @import './title';
 @import './labels';

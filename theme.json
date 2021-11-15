@@ -36,7 +36,6 @@
 			"customWidth": true
 		},
 		"color": {
-			"duotone": [],
 			"palette": [
 				{
 					"slug": "primary",
@@ -126,12 +125,24 @@
 			"customGradient": true
 		},
 		"custom": {
-			"container": {
-				"sm": "540px",
-				"md": "720px",
-				"lg": "960px",
-				"xl": "1140px",
-				"xxl": "1320px"
+			"shadows": {
+				"sm": "0 1px 0.5rem 0 rgba(0,0,0,.10)",
+				"lg": "0 3px 1rem .25rem rgba(0,0,0,.10)"
+			},
+			"breakpoints": {
+				"sm": "640px",
+				"md": "768px",
+				"lg": "992px",
+				"xl": "1200px",
+				"xxl": "1440px"
+			},
+			"spacers": {
+				"0": "0",
+				"1": ".5rem",
+				"2": ".75rem",
+				"3": "1rem",
+				"4": "2rem",
+				"5": "3rem"
 			},
 			"wideMultiplier": "1.15"
 		},
@@ -319,6 +330,7 @@
 			},
 			"core/column": {
 				"spacing": {
+					"blockGap": "1rem",
 					"padding": {
 						"left": "1rem",
 						"right": "1rem"

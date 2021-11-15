@@ -46,10 +46,18 @@ class Media extends Base {
 		if( get_prop( $this->attrs, 'mediaType' ) === 'image' ) {
 			if( get_prop( $this->attrs, 'imageFill', false ) ) {
 				if ( $value = get_prop( $this->attrs, 'mediaId', false ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'background-image',
-						'value'	  	=> wp_get_attachment_image_url( $value, get_prop( $this->attrs, 'mediaSizeSlug', 'full' ) )
-					], $output );
+					if( $media = wp_get_attachment_image_url( $value, get_prop( $this->attrs, 'mediaSizeSlug', 'full' ) ) ) {
+						$this->output[] = wp_parse_args( [
+							'property' 	=> 'background-image',
+							'value'	  	=> $media
+						], $output );
+					// Fallback to WP.org patterns (however some of them have wp.org page url instead of a media file)
+					} elseif ( $value = get_prop( $this->attrs, 'mediaLink', false ) ) {
+						$this->output[] = wp_parse_args( [
+							'property' 	=> 'background-image',
+							'value'	  	=> $value
+						], $output );
+					}
 				} elseif ( $value = get_prop( $this->attrs, 'mediaLink', false ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'background-image',

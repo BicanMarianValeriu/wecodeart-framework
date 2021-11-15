@@ -1,5 +1,8 @@
 v5.2.4
 - Fixed - Social links svg height
+- Updated - block-templates/block-patterns
+- Updated - Columns styles to block (conditionaly when used)
+- Added - Block gap support to Gutenberg Styles extension
 
 v5.2.3
 - Fixed - Starter content conflict with WordPress default pages.

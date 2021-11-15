@@ -23,16 +23,12 @@ use function WeCodeArt\Functions\get_prop;
 
 $classnames = [ 'wp-block-post-author' ];
 
+if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+    $classnames[] = 'has-text-align-' . $value;
+}
+
 if( $value = get_prop( $attributes, 'className', false ) ) {
     $classnames[] = $value;
-}
-
-if( $value = get_prop( $attributes, 'itemsJustification', false ) ) {
-    $classnames[] = 'justify-content-' . $value;
-}
-
-if( $value = get_prop( $attributes, 'textAlign', false ) ) {
-    $classnames[] = 'text-' . $value;
 }
 
 ?>
@@ -55,7 +51,7 @@ if( $value = get_prop( $attributes, 'textAlign', false ) ) {
     else : 
     
     SVG::render( 'user', [
-        'class' => 'wp-block-post-author__icon d-inline-block me-1'
+        'class' => 'wp-block-post-author__icon'
     ] );
 
     endif; 

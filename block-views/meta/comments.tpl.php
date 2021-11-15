@@ -9,12 +9,13 @@
  * @subpackage 	Entry\Meta\Comments
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		5.2.2
+ * @version		5.2.4
  */
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup\SVG;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * @param   int     $number Contains the comments number
@@ -29,6 +30,10 @@ if( 0 === $number ) {
     $classnames[] = 'wp-block-post-comments-link--multiple';
 }
 
+if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+    $classnames[] = 'has-text-align-' . $value;
+}
+
 if( post_password_required() ) {
     $classnames[] = 'wp-block-post-comments-link--protected';
 }
@@ -36,8 +41,8 @@ if( post_password_required() ) {
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
     
     SVG::render( 'comments', [
-        'class' => 'wp-block-post-comments-link__icon d-inline-block me-1'
-    ] ); 
+        'class' => 'wp-block-post-comments-link__icon'
+    ] );
 
     comments_popup_link( 
         esc_html__( 'Leave a Comment',  'wecodeart' ), 

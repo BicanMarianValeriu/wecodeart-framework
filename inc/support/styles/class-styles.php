@@ -308,6 +308,7 @@ final class Styles implements Integration {
 				foreach( $elements as $element => $properties ) {
 					if( empty( $properties ) ) continue;
 					foreach( $properties as $property => $value ) {
+						// Missing then skip.
 						if( ! $property ) continue;
 						// Add -webkit-* and -moz-*.
 						if ( is_string( $property ) && in_array( $property, [

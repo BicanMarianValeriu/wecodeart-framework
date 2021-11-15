@@ -309,6 +309,7 @@ class Blocks extends Processor {
 
 			// Spacing
 			if( $spacing = get_prop( $css_style, 'spacing', false ) ) {
+				// Padding
 				if ( $padding = get_prop( $spacing, 'padding', [] ) ) {
 					if( ! empty( $padding ) ) {
 						foreach( $padding as $dir => $val ) {
@@ -320,6 +321,7 @@ class Blocks extends Processor {
 					}
 				}
 
+				// Margin
 				if ( $margin = get_prop( $spacing, 'margin', [] ) ) {
 					if( ! empty( $margin ) ) {
 						foreach( $margin as $dir => $val ) {
@@ -329,6 +331,16 @@ class Blocks extends Processor {
 							], $output );
 						}
 					}
+				}
+
+				// Block Gap
+				$block_type      = \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
+				$has_gap_support = gutenberg_block_has_support( $block_type, [ 'spacing', 'blockGap' ], false );
+				if ( $has_gap_support && $gap = get_prop( $spacing, 'blockGap', false ) ) {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> '--wp--style--block-gap',
+						'value'	  	=> $gap
+					], $output );
 				}
 			}
 
@@ -404,7 +416,7 @@ class Blocks extends Processor {
 	/**
 	 * Get duotone.
 	 *
-	 * @return 	void
+	 * @return 	array
 	 */
 	public function get_duotone() {
 		$return 	= false;
@@ -433,5 +445,14 @@ class Blocks extends Processor {
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Get classnames.
+	 *
+	 * @return 	array
+	 */
+	public function get_classes() {
+		return array_filter( explode( ' ', get_prop( $this->attrs, 'className', '' ) ) );
 	}
 }

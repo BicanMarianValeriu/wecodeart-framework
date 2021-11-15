@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.1.9
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -20,7 +20,9 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
+use WeCodeArt\Gutenberg\Modules\Styles\Utilities;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Gutenberg\Modules\Styles\register_utility;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
@@ -49,23 +51,31 @@ class Styles implements Integration {
 	 * The blocks styles
 	 *
 	 * @access 	public
-	 * @var 	string
+	 * @var 	array
 	 */
-	public $styles	= '';
+	public $styles	= [];
 
 	/**
 	 * The blocks duotone
 	 *
 	 * @access 	public
-	 * @var 	string
+	 * @var 	array
 	 */
 	public $filters	= [];
+
+	/**
+	 * The blocks classes
+	 *
+	 * @access 	public
+	 * @var 	array
+	 */
+	public $classes	= [];
 
 	/**
 	 * Current processed blocks
 	 *
 	 * @access 	public
-	 * @var 	string
+	 * @var 	array
 	 */
 	public static $processed = [];
 
@@ -90,12 +100,14 @@ class Styles implements Integration {
 	 * @return 	void
 	 */
 	public function register_hooks() {
-		$this->CSS = wecodeart( 'integrations' )->get( 'styles' );
+		$this->CSS 			= wecodeart( 'integrations' )->get( 'styles' );
+		$this->Utilities 	= Utilities::get_instance();
 
 		// Hooks
-		add_filter( 'render_block',					[ $this, 'filter_render' 		], 10, 2 );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
-		add_action( 'wp_loaded', 					[ $this, 'add_attributes' 		] );
+		add_filter( 'render_block',					[ $this, 'filter_render' 		], 10, 2 );
+		add_action( 'wp_loaded', 					[ $this, 'add_attributes' 		], 10, 1 );
+		add_action( 'wp_enqueue_scripts',  			[ $this, 'template_styles' 		], 10, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 10, 1 );
 		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 10, 1 );
@@ -119,12 +131,29 @@ class Styles implements Integration {
 	 * @return  void
 	 */
 	public function block_editor_assets() {
+		// Javascript
 		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-styles' ), [
 			'wecodeart-gutenberg-inline'
 		], wecodeart( 'version' ) );
+
+		// Stylesheet
+		$inline_css = '';
+		$array_css 	= [];
+
+		foreach( $this->Utilities->all() as $utility ) $array_css = array_merge_recursive( $array_css, $utility );
+
+		if( ! empty( $array_css ) ) {
+			$processed 	= $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
+			$inline_css .= $this->CSS::compress( $processed );
+		}
+
+		if( empty( $inline_css ) ) return;
+
+		wp_register_style( $this->make_handle(), false, [], true, true );
+		wp_add_inline_style( $this->make_handle(), $inline_css );
+		wp_enqueue_style( $this->make_handle() );
 	}
 
-	
 	/**
 	 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes` error.
 	 *
@@ -204,17 +233,24 @@ class Styles implements Integration {
 
 		// Process a block
 		$processed 	= self::process_block( $block );
+		
 		$styles 	= $processed->get_styles();
+		$classes	= $processed->get_classes();
 		$filters	= $processed->get_duotone();
 
 		// Process CSS, add prefixes and convert to string!
 		if( $styles ) {
-			$this->styles .= $this->CSS::parse( $this->CSS::add_prefixes( $styles ) );
+			$this->styles[$cssid] = $styles;
 		}
-
+		
 		// Process Duotone SVG filters
 		if( $filters ) {
 			$this->filters[$cssid] = $filters;
+		}
+		
+		// Utilities CSS
+		if( $classes ) {
+			$this->classes = wp_parse_args( $classes, $this->classes );
 		}
 
 		// This is processed so next time we skipp it (avoid issues like multiple calls of this filter, if any)
@@ -224,14 +260,52 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Output styles in footer.
+	 * Collect template styles.
+	 *
+	 * @return 	void
+	 */
+	public function template_styles() {
+		global $_wp_current_template_content;
+		$blocks = parse_blocks( $_wp_current_template_content );
+
+		$this->classes = wp_parse_args( self::collect_classes( $blocks ), $this->classes );
+	}
+
+	/**
+	 * Output styles.
 	 *
 	 * @return 	string
 	 */
 	public function register_styles() {
-		if( empty( $this->styles ) ) return;
+		$inline_css = '';
+		$array_css	= [];
 
-		$inline_css = $this->CSS::compress( $this->styles );
+		// Process Utilities
+		if( ! empty( $this->classes ) ) {
+			foreach( $this->classes as $utility ) {
+				// If we dont have utility, move on.
+				if( ! $this->Utilities->has( $utility ) ) continue;
+				// Get utility styles array.
+				$utility_css	= $this->Utilities->get( $utility );
+				// Merge breakpoints.
+				$breakpoint		= current( array_keys( $utility_css ) );
+				$existing 		= isset( $array_css[$breakpoint] ) ? $array_css[$breakpoint] : [];
+				$array_css[$breakpoint] = array_merge( $existing, $utility_css[$breakpoint] );
+			}
+			
+			if( ! empty( $array_css ) ) {
+				$processed 	= $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
+				$inline_css .= $this->CSS::compress( $processed );
+			}
+		}
+
+		// Process Attributes
+		if( ! empty( $this->styles ) ) {
+			foreach( $this->styles as $styles ) {
+				$processed 	= $this->CSS::parse( $styles );
+				$inline_css .= $this->CSS::compress( $processed );
+			}
+		}
 
 		if( empty( $inline_css ) ) return;
 
@@ -241,7 +315,7 @@ class Styles implements Integration {
 	}
 	
 	/**
-	 * Output styles in footer.
+	 * Output duotone in footer.
 	 *
 	 * @return 	string
 	 */
@@ -388,6 +462,31 @@ class Styles implements Integration {
 			'core/verse',
 			'core/video',
 		] );
+	}
+
+	/**
+	 * Recursive classNames.
+	 *
+	 * @return 	array
+	 */
+	public static function collect_classes( array $blocks = [] ) {
+		$return = [];
+
+		foreach( $blocks as $block ) {
+			$classes	= get_prop( $block, [ 'attrs', 'className' ] );
+			$classes 	= array_filter( explode( ' ', $classes ) );
+			$inner		= get_prop( $block, [ 'innerBlocks' ] );
+
+			if( ! empty( $inner ) ) {
+				$classes = array_merge( $classes, self::collect_classes( $inner ) );
+			}
+
+			if( ! empty( $classes ) ) {
+				$return = wp_parse_args( $classes, $return );
+			}
+		}
+
+		return array_unique( $return );
 	}
 
 	/**

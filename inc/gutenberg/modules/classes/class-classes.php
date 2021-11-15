@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.0.6
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -18,8 +18,9 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
-use WeCodeArt\Conditional\Traits\No_Conditionals;
 use WeCodeArt\Core\Scripts;
+use WeCodeArt\Conditional\Traits\No_Conditionals;
+use WeCodeArt\Gutenberg\Modules\Styles\Utilities;
 
 /**
  * Handles Gutenberg Theme Custom Classes Functionality.
@@ -39,11 +40,10 @@ class Classes {
 	 */
 	public function register_hooks() {
 		// Admin
-		add_action( 'enqueue_block_editor_assets', 			[ $this, 'block_editor_assets' ] );
-		add_filter( 'wecodeart/filter/gutenberg/settings', 	[ $this, 'set_suggest_classes' ], 10, 2 );
-
-		// Child Classes
-		Classes\Suggestions::get_instance();
+		add_action( 'enqueue_block_editor_assets', 					[ $this, 'block_editor_assets' ] );
+		add_filter( 'wecodeart/filter/gutenberg/settings', 			[ $this, 'set_suggest_classes' ], 10, 2 );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'grid'		] );
+		add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'helpers'	] );
 	}
 
 	/**
@@ -67,10 +67,106 @@ class Classes {
 	 */
 	public function set_suggest_classes( $settings, $post ) {
 		if ( ! isset( $settings[ 'customClasses' ] ) ) {
-			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/classes', [], $post );
+			$classes = [];	
+			$classes = array_merge( array_keys( Utilities::get_instance()->all() ), $classes );
+			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/classes', $classes, $post );
 			$settings['customClasses'] = array_map( 'sanitize_html_class', array_unique( $classes ) );
 		}
 
 		return $settings;
+	}
+
+	/**
+	 * Add new classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function grid( $args ) {
+		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'container' ], [] );
+		$breakpoints	= array_keys( $breakpoints );
+
+		foreach( range( 1, 12 ) as $number ) {
+			$args[] = 'col-' . $number;
+			$args[] = 'g-col-' . $number;
+			$args[] = 'row-cols-' . $number;
+			$args[] = 'offset-' . $number;
+		}
+
+		foreach( $breakpoints as $breakpoint ) {
+			$args[] = 'container-' . $breakpoint;
+			$args[] = 'col-' . $breakpoint;
+			$args[] = 'g-col-' . $breakpoint;
+			$args[] = 'col-' . $breakpoint . '-auto';
+			$args[] = 'row-cols-' . $breakpoint . '-auto';
+			
+			foreach( range( 1, 12 ) as $number ) {
+				$args[] = 'col-' . $breakpoint . '-' . $number;
+				$args[] = 'g-col-' . $breakpoint . '-' . $number;
+				$args[] = 'row-cols-'. $breakpoint . '-' . $number;
+				$args[] = 'offset-' . $breakpoint . '-' . $number;
+			}
+		}
+
+		return wp_parse_args( [
+			'container',
+			'row',
+			'grid',
+			'col-auto',
+		], $args );
+	}
+
+	/**
+	 * Add new classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function helpers( $args ) {
+		// Sizes
+		foreach( range( 1, 5 ) as $nr ) {
+			$args[] = 'display-'. $nr;
+			$args[] = 'fs-'. $nr;
+		}
+		
+		foreach( range( 1, 6 ) as $nr ) {
+			$args[] = 'h'. $nr;
+		}
+
+		return wp_parse_args( [
+			// Misc
+			'alert',
+			'alert-link',
+			'alert-heading',
+			'alert-dismissible',
+			'badge',
+			'card',
+			'card-title',
+			'card-subtitle',
+			'card-text',
+			'card-link',
+			'card-img',
+			'card-img-top',
+			'card-img-bottom',
+			'card-img-overlay',
+			'card-header',
+			'card-header-tabs',
+			'card-header-pills',
+			'card-body',
+			'stretched-link',
+			'disabled',
+			'hstack',
+			'vstack',
+			'vr',
+			'visually-hidden',
+			'visually-hidden-focusable',
+			'ratio',
+			'ratio-1x1',
+			'ratio-4x3',
+			'ratio-16x9',
+			'ratio-21x9',
+		], $args );
 	}
 }

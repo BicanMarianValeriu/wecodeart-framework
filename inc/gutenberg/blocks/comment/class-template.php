@@ -47,7 +47,6 @@ class Template extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'comment_reply_link',			[ $this, 'reply_class' 		] );
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' 	], 10, 2 );
 	}
 
@@ -250,21 +249,4 @@ class Template extends Dynamic {
 			] ], 'next_comments_link' );
 		}, [], false );
     }
-
-	/**
-	 * Replace Comment Reply Button class.
-	 *
-	 * @since	unknown
-	 * @version 5.2.2
-	 *
-	 * @param 	string $html
-	 *
-	 * @return 	string
-	 */
-	public function reply_class( $html ) {
-		$search 	= '/' . preg_quote( "class='comment-reply-link'", '/' ) . '/';
-		$replace 	= 'class="comment-reply-link py-1 px-2 rounded-pill bg-primary shadow-sm text-white"';
-
-		return preg_replace( $search, $replace, $html, 1 );
-	}
 }

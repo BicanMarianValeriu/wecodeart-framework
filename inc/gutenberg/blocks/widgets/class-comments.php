@@ -146,7 +146,7 @@ class Comments extends Dynamic {
 				// Date
 				if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {
 					$list_items_markup .= sprintf(
-						'<time datetime="%1$s" class="wp-block-latest-comments__comment-date d-block text-muted fs-6">%2$s</time>',
+						'<time datetime="%1$s" class="wp-block-latest-comments__comment-date has-small-font-size">%2$s</time>',
 						esc_attr( get_comment_date( 'c', $comment ) ),
 						date_i18n( get_option( 'date_format' ), get_comment_date( 'U', $comment ) )
 					);

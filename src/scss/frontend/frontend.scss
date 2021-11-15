@@ -5,7 +5,7 @@ Theme URI: https://www.wecodeart.com/
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 5.2.2
+Version: 5.2.4
 Requires PHP: 7.0
 Requires at least: 5.8
 Tested up to: 5.8
@@ -21,29 +21,40 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import "./../abstracts/variables";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/utilities";
-@import "~bootstrap/scss/utilities/api";
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
 
 // Theme
 @import './base';
-@import './theme';
 
 // This will allways be in the theme - core CSS
 @import "~bootstrap/scss/type";         // X
 @import "~bootstrap/scss/forms";        // X
 @import "~bootstrap/scss/containers";   // X
 @import "~bootstrap/scss/grid";         // X
-// Nav/Misc
+@import "~bootstrap/scss/transitions";  // X
+
+// Nav/Misc - to be chunked into a custom file
 @import "~bootstrap/scss/nav";          // X
 @import "~bootstrap/scss/navbar";       // X
 @import "~bootstrap/scss/dropdown";     // X
-@import "~bootstrap/scss/close";        // X
 @import "~bootstrap/scss/offcanvas";    // X
-@import "~bootstrap/scss/transitions";  // X
+@import "~bootstrap/scss/close";        // X
+
+// BS Helpers
+@import "~bootstrap/scss/helpers/clearfix";
+@import "~bootstrap/scss/helpers/colored-links";
+@import "~bootstrap/scss/helpers/ratio";
+@import "~bootstrap/scss/helpers/position";
+@import "~bootstrap/scss/helpers/stacks";
+@import "~bootstrap/scss/helpers/visually-hidden";
+@import "~bootstrap/scss/helpers/stretched-link";
+@import "~bootstrap/scss/helpers/text-truncation";
+@import "~bootstrap/scss/helpers/vr";
 
 // This will be added as utilities
+@import "~bootstrap/scss/utilities";     // XX Done as utility
+// @import "~bootstrap/scss/utilities/api"; // XX Done as utility
 // @import "~bootstrap/scss/alert";         // XX ToDO as utility
 // @import "~bootstrap/scss/badge";         // XX ToDO as utility
 // @import "~bootstrap/scss/card";          // XX ToDO as utility
@@ -71,6 +82,3 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 // This will never be added
 // @import "~bootstrap/scss/images";        // XX No Add
 // @import "~bootstrap/scss/breadcrumb";    // XX No Add
-
-// BS Helpers
-@import "~bootstrap/scss/helpers";          // XX ToDO as utility

@@ -30,7 +30,7 @@ class Starter implements Integration {
 
 	const HOME_SLUG  	= 'home';
 	const BLOG_SLUG  	= 'blog';
-	const ABOUT_SLUG 	= 'about_us';
+	const ABOUT_SLUG 	= 'about-us';
 	const NOTICE_ID 	= 'wecodeart-starter-notice';
 
 	/**

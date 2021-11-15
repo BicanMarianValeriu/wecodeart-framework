@@ -150,25 +150,18 @@ class Button extends Dynamic {
 			color: var(--wp--white);
 			text-decoration: none;
 		}
-		.btn-check:focus + .wp-block-button__link,
 		.wp-block-button__link:focus {
 			outline: 0;
     		box-shadow: 0 0 0 1px #000;
 		}
-		.btn-check:checked + .wp-block-button__link,
-		.btn-check:active + .wp-block-button__link,
 		.wp-block-button__link:active,
 		.wp-block-button__link.active {
 			box-shadow: 0 0 0 1px var(--wp--primary);
 		}
-		.btn-check:checked + .wp-block-button__link,
-		.btn-check:active + .wp-block-button__link,
 		.wp-block-button__link:active,
 		.wp-block-button__link.active {
 			box-shadow: 0 0 0 1px var(--wp--primary);
 		}
-		.btn-check:checked + .wp-block-button__link:focus,
-		.btn-check:active + .wp-block-button__link:focus,
 		.wp-block-button__link:active:focus,
 		.wp-block-button__link.active:focus {
 			box-shadow: 0 0 0 1px var(--wp--primary);

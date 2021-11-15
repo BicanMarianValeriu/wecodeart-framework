@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box Template
  * @since 		3.0.3
- * @version		5.2.2
+ * @version		5.2.4
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -18,12 +18,12 @@ use function WeCodeArt\Functions\get_prop;
 
 $classnames = [ 'wp-block-post-author', 'wp-block-post-author--wide' ];
 
-if( $value = get_prop( $attributes, 'className', false ) ) {
-    $classnames[] = $value;
+if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+    $classnames[] = 'has-text-align-' . $value;
 }
 
-if( $value = get_prop( $attributes, 'textAlign', false ) ) {
-    $classnames[] = 'text-' . $value;
+if( $value = get_prop( $attributes, 'className', false ) ) {
+    $classnames[] = $value;
 }
 
 ?>
