@@ -20,6 +20,8 @@ use function WeCodeArt\Functions\get_prop;
 /**
  * @param   int     $number Contains the comments number
  */
+
+$attributes = isset( $attributes ) ? $attributes : [];
 $classnames = [ 'wp-block-post-comments-link' ];
 
 if( 0 === $number ) {

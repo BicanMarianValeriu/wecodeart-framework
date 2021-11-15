@@ -22,6 +22,7 @@ use function WeCodeArt\Functions\get_prop;
  * @param   array   $attributes
  */
 
+$attributes = isset( $attributes ) ? $attributes : [];
 $classnames         = [ 'wp-block-post-terms' ];
 
 if( isset( $primary ) ) {

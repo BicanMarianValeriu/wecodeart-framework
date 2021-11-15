@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -111,7 +111,7 @@ class Title extends Dynamic {
 			$wrappers[] = [
 				'tag' 	=> 'a',
 				'attrs' => [
-					'class'		=> 'wp-block-post-title__link text-decoration-none text-break',
+					'class'		=> 'wp-block-post-title__link',
 					'target' 	=> get_prop( $attributes, 'linkTarget', null ),
 					'href'		=> get_permalink( $block->context['postId'] )
 				]

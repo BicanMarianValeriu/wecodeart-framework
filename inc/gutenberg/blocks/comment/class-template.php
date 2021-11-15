@@ -156,7 +156,7 @@ class Template extends Dynamic {
 	 */
 	public function get_head() {
 		$defaults = [
-			'icon' 		=> SVG::compile( 'comments', [ 'class' => 'me-2' ] ), // Escaped with kses inside fn.
+			'icon' 		=> SVG::compile( 'comments' ), // Escaped with kses inside fn.
 			'empty' 	=> esc_html__( 'No comments', 'wecodeart' ),
 			'closed'	=> false,
 			'add_one'	=> esc_html__( 'add one', 'wecodeart' ) 
@@ -188,7 +188,7 @@ class Template extends Dynamic {
 		// Append `add comment` link
 		if( comments_open() ) {
 			$output .= sprintf(
-				'<a class="comments__add-new float-end has-small-font-size my-2" href="#respond" rel="nofollow">%s</a>',
+				'<a class="comments__add-new float-end has-small-font-size" href="#respond" rel="nofollow">%s</a>',
 				(string) $args['add_one']
 			); 
 		}
@@ -249,4 +249,20 @@ class Template extends Dynamic {
 			] ], 'next_comments_link' );
 		}, [], false );
     }
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.comments__add-new {
+			margin: .5rem 0;
+		}
+		.wp-block-comments-query-loop__head svg {
+			margin-right: .5rem;
+		}
+		";
+	}
 }

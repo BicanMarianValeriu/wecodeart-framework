@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\get_prop;
 
+$attributes = isset( $attributes ) ? $attributes : [];
 $classnames = [ 'wp-block-post-date' ];
 
 if( isset( $modified ) ) {

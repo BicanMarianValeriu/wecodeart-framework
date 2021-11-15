@@ -16,6 +16,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\get_prop;
 
+$attributes = isset( $attributes ) ? $attributes : [];
 $classnames = [ 'wp-block-post-author', 'wp-block-post-author--wide' ];
 
 if( $value = get_prop( $attributes, 'textAlign', false ) ) {
@@ -32,7 +33,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 			
 		SVG::render( 'user' );
 		
-		?><span class="ms-2"><?php
+		?><span style="margin-left:0.5em;"><?php
 		
 			if( $byline = get_prop( $attributes, 'byline', false ) ) {
 
@@ -48,21 +49,18 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 
 		?></span>
 	</h3>
-	<div class="row">
-		<div class="wp-block-post-author__avatar col-12 col-sm-auto"><?php
+	<div class="row gx-2 gx-lg-3">
+		<div class="wp-block-post-author__avatar col-auto"><?php
 
 			echo get_avatar(
 				$author->id,
 				get_prop( $attributes, 'avatarSize', 90 ), 
 				'',
-				sprintf( esc_html__( '%s`s avatar', 'wecodeart' ), $author->name ),
-				[
-					'class' => 'img-thumbnail shadow-sm'
-				]
+				sprintf( esc_html__( '%s`s avatar', 'wecodeart' ), $author->name )
 			);
 
 		?></div>
-		<div class="wp-block-post-author__description col mt-4 mt-sm-0"><?php
+		<div class="wp-block-post-author__description col"><?php
 		
 			echo wp_kses_post( $author->description );
 			

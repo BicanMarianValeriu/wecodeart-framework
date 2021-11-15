@@ -697,6 +697,10 @@ figcaption p.wp-caption-text,
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
 }
 
+.wp-site-credits {
+  padding: 1rem 0;
+}
+
 .site-header {
   position: relative;
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);

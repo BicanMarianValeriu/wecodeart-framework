@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.2.2
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -81,7 +81,7 @@ class Form extends Dynamic {
 	 * @return 	array
 	 */
 	public function comment_form_defaults( $defaults ) {
-		$dots= SVG::compile( 'comment-dots', [ 'class' => 'fa-2x me-2' ] );
+		$dots= SVG::compile( 'comment-dots' );
 
 		return wp_parse_args( [
 			'format'			 	=> 'html5',
@@ -90,14 +90,14 @@ class Form extends Dynamic {
 			'title_reply' 			=> $dots . esc_html__( 'Speak Your Mind', 'wecodeart' ),
 			'title_reply_before' 	=> '<h3 class="wp-block-post-comments-form__headline" id="reply-title">',
 			'title_reply_after'  	=> '</h3>',
-			'cancel_reply_before'  	=> '<span class="has-small-font-size my-2 float-end">',
+			'cancel_reply_before'  	=> '<span class="has-small-font-size float-end">',
 			'cancel_reply_after'   	=> '</span>',
 			'cancel_reply_link'    	=> esc_html__( 'Cancel reply', 'wecodeart' ),
 			'comment_field' 		=> $this->get_input( 'comment' ),
 			'comment_notes_before' 	=> $this->get_form_notes(),
-			'submit_field'			=> '<div class="mb-3 comment-form-submit">%1$s %2$s</div>',
+			'submit_field'			=> '<div class="comment-form-field">%1$s %2$s</div>',
 			'submit_button'			=> $this->get_input( 'submit' ),
-			'class_submit'			=> 'wp-block-button__link',
+			'class_submit'			=> 'comment-form-submit',
 			'fields' 				=> [
 				'author' 	=> $this->get_input( 'name' ),
 				'email'  	=> $this->get_input( 'email' ),
@@ -111,7 +111,7 @@ class Form extends Dynamic {
 	 * Get Name Input
 	 *
 	 * @since	5.2.2
-	 * @since	5.2.2
+	 * @since	5.2.4
 	 *
 	 * @return 	void
 	 */
@@ -124,7 +124,7 @@ class Form extends Dynamic {
 				return Markup::wrap( 'comment-author-name', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
-						'class' => 'mb-3 comment-form-author col-md-7'
+						'class' => 'comment-form-field comment-form-author col-md-7'
 					]
 				] ], 'wecodeart_input', [ 'floating', [
 					'type' 	=> 'text',
@@ -145,7 +145,7 @@ class Form extends Dynamic {
 				return Markup::wrap( 'comment-author-email', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
-						'class' => 'mb-3 comment-form-email col-md-7'
+						'class' => 'comment-form-field comment-form-email col-md-7'
 					]
 				] ], 'wecodeart_input', [ 'floating', [
 					'type' 	=> 'email',
@@ -166,7 +166,7 @@ class Form extends Dynamic {
 				return Markup::wrap( 'comment-author-url', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
-						'class' => 'mb-3 comment-form-url col-md-7'
+						'class' => 'comment-form-field comment-form-url col-md-7'
 					]
 				] ], 'wecodeart_input', [ 'floating', [
 					'type' 	=> 'url',
@@ -186,7 +186,7 @@ class Form extends Dynamic {
 				return Markup::wrap( 'comment-author-comment', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
-						'class' => 'mb-3 comment-form-comment'
+						'class' => 'comment-form-field comment-form-comment'
 					]
 				] ], 'wecodeart_input', [ 'floating', [
 					'type'	=> 'textarea',
@@ -206,12 +206,10 @@ class Form extends Dynamic {
 			case 'submit':
 				$markup = '';
 
-				$markup .= '<div class="wp-block-button wp-block-button--comment is-style-outline">';
 				$markup .= '<button name="%1$s" type="submit" id="%2$s" class="%3$s">';
-				$markup .= SVG::compile( 'comment-dots', [ 'class' => 'wp-block-button__icon me-1' ] );
-				$markup .= '<span class="wp-block-button__label">%4$s</span>';
+				$markup .= SVG::compile( 'comment-dots' );
+				$markup .= '<span>%4$s</span>';
 				$markup .= '</button>';
-				$markup .= '</div>';
 
 				return apply_filters( 'wecodeart/filter/comments/submit', $markup );
 			break;
@@ -230,7 +228,7 @@ class Form extends Dynamic {
 					$content = Markup::wrap( 'comment-cookies', [ [
 						'tag' 	=> 'div',
 						'attrs' => [
-							'class' => 'mb-3 comment-form-cookies'
+							'class' => 'comment-form-field comment-form-cookies'
 						]
 					] ], 'wecodeart_input', [ 'toggle', [
 						'type'	=> 'checkbox',
@@ -256,7 +254,7 @@ class Form extends Dynamic {
 	 * Get Form Notes
 	 *
 	 * @since	5.2.2
-	 * @since	5.2.2
+	 * @since	5.2.4
 	 *
 	 * @return 	void
 	 */
@@ -264,7 +262,7 @@ class Form extends Dynamic {
 		return Markup::wrap( 'comment-notes-before', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
-				'class' => 'mb-3 comment-form-notes'
+				'class' => 'comment-form-field comment-form-notes'
 			]
 		] ], function() {
 
@@ -301,5 +299,38 @@ class Form extends Dynamic {
 				esc_html( get_the_title( $privacy ) )
 			) ) );
 		}
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.comment-form-field {
+			margin-bottom: 1rem;
+		}
+		.comment-form-submit {
+			display: inline-block;
+			vertical-align: middle;
+			padding: 0.5rem 0.75rem;
+			color: var(--wp--white);
+			font-size: 1rem;
+			font-weight: 400;
+			text-align: center;
+			line-height: 1.5;
+			background-color: var(--wp--dark);
+			border: 1px solid transparent;
+			border-radius: .25rem;
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+			user-select: none;
+			cursor: pointer;
+		}
+		.wp-block-post-comments-form__headline svg,
+		.comment-form-submit svg {
+			margin-right: .5rem;
+		}
+		";
 	}
 }

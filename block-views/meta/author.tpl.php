@@ -9,7 +9,7 @@
  * @subpackage 	Entry\Meta\Author
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		5.1.9
+ * @version		5.2.4
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -21,6 +21,7 @@ use function WeCodeArt\Functions\get_prop;
  * @param   object  $author Author
  */
 
+$attributes = isset( $attributes ) ? $attributes : [];
 $classnames = [ 'wp-block-post-author' ];
 
 if( $value = get_prop( $attributes, 'textAlign', false ) ) {
@@ -40,10 +41,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
         $author->id,
         get_prop( $attributes, 'avatarSize', 45 ), 
         '',
-        sprintf( esc_html__( '%s`s avatar', 'wecodeart' ), $author->name ),
-        [
-            'class' => 'img-thumbnail shadow-sm rounded-circle'
-        ]
+        sprintf( esc_html__( '%s`s avatar', 'wecodeart' ), $author->name )
     );
 
     ?></span><?php

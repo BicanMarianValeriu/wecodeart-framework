@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.8
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -97,35 +97,24 @@ class Comments extends Dynamic {
 				]
 			]
 		], function( $comments, $attributes ) {
-
-			// $content = '';
-
-			// foreach ( $comments as $comment ) {
-			// 	$block_content = ( new \WP_Block( $block->parsed_block, [
-			// 		'commentId' => $comment->comment_ID
-			// 	] ) )->render( [ 'dynamic' => false ] );
-			// 	$content .= '<li>' . $block_content . '</li>';
-			// }
-
-			// echo $content;
 	
 			$list_items_markup = '';
 			
 			foreach ( $comments as $comment ) {
 				$list_items_markup .= '<li class="wp-block-latest-comments__comment">';
-				$list_items_markup .= '<div class="wp-block-latest-comments__comment-head row gx-3 mb-3">';
+				$list_items_markup .= '<p class="wp-block-latest-comments__comment-head row gx-3">';
 				// Avatar
 				if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
 					$avatar = get_avatar( $comment, 50, '', '', [
-						'class' => 'wp-block-latest-comments__comment-avatar d-block p-1 border shadow-sm',
+						'class' => 'wp-block-latest-comments__comment-avatar',
 					] );
 					if ( $avatar ) {
-						$list_items_markup .= sprintf( '<div class="col-auto">%s</div>', $avatar );
+						$list_items_markup .= sprintf( '<span class="col-auto">%s</span>', $avatar );
 					}
 				}
 
 				// Meta
-				$list_items_markup .= '<div class="col">';
+				$list_items_markup .= '<span class="col">';
 
 				// Author
 				$author_markup 	= '';
@@ -146,16 +135,16 @@ class Comments extends Dynamic {
 				// Date
 				if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {
 					$list_items_markup .= sprintf(
-						'<time datetime="%1$s" class="wp-block-latest-comments__comment-date has-small-font-size">%2$s</time>',
+						'<time datetime="%1$s" class="wp-block-latest-comments__comment-date has-small-font-size" style="display:block;">%2$s</time>',
 						esc_attr( get_comment_date( 'c', $comment ) ),
 						date_i18n( get_option( 'date_format' ), get_comment_date( 'U', $comment ) )
 					);
 				}
-				$list_items_markup .= '</div>';
-				$list_items_markup .= '</div>';
+				$list_items_markup .= '</span>';
+				$list_items_markup .= '</p>';
 				// Excerpt
 				if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
-					$list_items_markup .= '<div class="wp-block-latest-comments__comment-excerpt">' . wpautop( get_comment_excerpt( $comment ) ) . '</div>';
+					$list_items_markup .= '<p class="wp-block-latest-comments__comment-excerpt">' . get_comment_excerpt( $comment ) . '</p>';
 				}				
 				$list_items_markup .= '</li>';
 			}

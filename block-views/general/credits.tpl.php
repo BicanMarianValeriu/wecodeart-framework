@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Footer Credits
  * @since	 	5.0.0
- * @version    	5.0.0
+ * @version    	5.2.4
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit();
 ?>
 <div class="wp-site-credits">
     <div class="container">
-        <div class="py-3 text-center">
+        <div class="has-text-align-center">
             <span class="wp-site-credits__text"><?php
                 
                 echo wp_kses_post( sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy; ' . date( 'Y' ) ) );

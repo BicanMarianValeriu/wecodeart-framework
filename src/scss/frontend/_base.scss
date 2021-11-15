@@ -177,6 +177,10 @@ figcaption,
     box-shadow: 0 0 1px 0 rgba( black, 0.15 );
 }
 
+.wp-site-credits {
+    padding: 1rem 0;
+}
+
 .site-header {
     position: relative;
     box-shadow: 0 0 1px 0 rgba( black, 0.15 );
@@ -190,6 +194,10 @@ figcaption,
 .wp-block-column {
     width: 100%;
     flex: 1 0 0%;
+}
+
+.wp-block-post-meta {
+    margin-bottom: .5rem;
 }
 
 :where(.wp-block-post-excerpt, .wp-block-post-content, .wp-block-post-comment-content) {

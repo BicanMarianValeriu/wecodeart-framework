@@ -92,19 +92,21 @@ class Posts extends Dynamic {
 		if ( get_prop( $attributes, [ 'displayAuthor' ], true ) ) {
 			$classnames[] = 'has-avatars';
 		}
+
 		if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {
 			$classnames[] = 'has-dates';
 		}
+
 		if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
 			$classnames[] = 'has-excerpts';
 		}
+
 		if ( get_prop( $attributes, [ 'postLayout' ], false ) ) {
 			$cols = get_prop( $attributes, [ 'columns' ], '3' );
 			$classnames[] = 'is-grid row row-cols-md-2 row-cols-lg-' . $cols;
 		}
 
 		$classnames[] = 'list-unstyled';
-		$classnames[] = 'mb-0';
 
 		$content = Markup::wrap( 'wp-block-latest-posts', [
 			[
@@ -125,13 +127,14 @@ class Posts extends Dynamic {
 
 			foreach ( $posts as $post ) {
 				$post_link = esc_url( get_permalink( $post ) );
-				$list_items_markup .= '<li class="wp-block-posts__post mb-3">';
-				$list_items_markup .= '<div class="row flex-column flex-sm-row gx-3">';
+				$list_items_markup .= '<li class="wp-block-posts__post">';
+				$list_items_markup .= '<div class="row gx-3">';
 
 				// Image
 				if ( $display_image ) {
-					$image_classes	= [ 'wp-block-posts__post-image', 'ratio', 'overflow-hidden' ];
+					$image_classes	= [ 'wp-block-posts__post-image', 'ratio' ];
 					$image_column 	= 'col-12';
+					
 					if ( $image_align = get_prop( $attributes, 'featuredImageAlign', 'center' ) ) {
 						if( in_array( $image_align, [ 'left', 'right' ] ) ) {
 							$image_column .= ' col-sm-4';
@@ -149,7 +152,8 @@ class Posts extends Dynamic {
 									'tag' 	=> 'a',
 									'attrs'	=> [
 										'href' 	=> $post_link,
-										'class'	=> 'd-block ratio overflow-hidden',
+										'class'	=> 'ratio',
+										'style' => 'display:block;'
 									]
 								]
 							] );
@@ -179,7 +183,6 @@ class Posts extends Dynamic {
 
 				// Title
 				$list_items_markup .= Title::get_instance()->render( [
-					'className' => 'mb-1',
 					'isLink' 	=> true,
 				], '', (object) [
 					'context' 	=> [
@@ -189,13 +192,10 @@ class Posts extends Dynamic {
 
 				// Meta
 				if( $display_author || $display_date ) {
-					$list_items_markup .= '<div class="wp-block-posts__post-meta d-flex align-items-center mb-3">';
+					$list_items_markup .= '<div class="wp-block-post-meta">';
 					// Author
 					if ( $display_author ) {
 						$list_items_markup .= wecodeart_template( 'meta/author', [
-							'attributes'=> [
-								'className' => 'd-inline-flex me-3',
-							],
 							'author' 	=> (object) [
 								'name'  => get_the_author_meta( 'display_name', $post->post_author ),
 								'url'	=> get_author_posts_url( $post->post_author )
@@ -207,9 +207,6 @@ class Posts extends Dynamic {
 					if ( $display_date ) {
 						$list_items_markup .= wecodeart_template( 'meta/date', [
 							'post_id'	=> $post->ID,
-							'attributes'=> [
-								'className' => 'd-inline-flex me-3',
-							],
 							'published'	=> [
 								'robot'	=> get_the_date( DATE_W3C, $post ),
 								'human'	=> get_the_date( '', $post )
