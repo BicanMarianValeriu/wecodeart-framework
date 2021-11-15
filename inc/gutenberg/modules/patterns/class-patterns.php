@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Patterns
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.6
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -89,7 +89,7 @@ class Patterns implements Integration {
 
 		$data = [];
 		foreach ( $themes as $theme_slug => $theme_dir ) {
-			$file_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . 'categories.json' );
+			$file_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . '_categories.json' );
 			if ( file_exists( $file_path ) ) {
 				$data = array_merge( $data, json_decode( file_get_contents( $file_path ), true ) );
 			}
