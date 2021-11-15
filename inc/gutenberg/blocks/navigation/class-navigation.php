@@ -438,6 +438,7 @@ class Navigation extends Dynamic {
 			$classes[] 	= 'hide-toggle';
 		}
 
+		// Deprecated - uses flex layout support
 		if( $align = get_prop( $attributes, 'itemsJustification' ) ) {
 			$justify_options = [
 				'left'          => 'start',
@@ -450,6 +451,7 @@ class Navigation extends Dynamic {
 				$classes[] = 'justify-content-' . $justify_options[$align];
 			}
 		}
+		// End deprecated
 
 		$classes    	= array_merge( $classes, $colors['classes'], $typography['classes'] );
 		$block_styles 	= get_prop( $attributes, 'styles', '' );
