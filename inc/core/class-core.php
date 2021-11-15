@@ -9,7 +9,7 @@
  * @subpackage 	Core
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.0
- * @version		5.2.2
+ * @version		5.2.4
  */
 
 namespace WeCodeArt;
@@ -75,14 +75,12 @@ class Core {
 	 * Archives Title
 	 *
 	 * @since 	unknown
-	 * @version	5.0.0
+	 * @version	5.2.4
 	 *
 	 * @return 	string
 	 */
 	public function archive_title( $content ) {
-		$output = SVG::compile( 'folder' , [
-			'class' => 'me-3'
-		] );
+		$output = SVG::compile( 'folder' );
 
 		$title_template = '<span>%s</span>';
 

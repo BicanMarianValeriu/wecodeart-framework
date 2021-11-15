@@ -472,7 +472,7 @@ class Navigation extends Dynamic {
 		$desktop	= get_prop( $breaks, 'lg', '992px' );
 
 		return "
-		:is(.site-header,.offcanvs) .wp-block-navigation {
+		:is(.site-header,.offcanvas) .wp-block-navigation {
 			padding-top: 0;
 			padding-bottom: 0;
 		}

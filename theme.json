@@ -125,16 +125,16 @@
 			"customGradient": true
 		},
 		"custom": {
-			"shadows": {
-				"sm": "0 1px 0.5rem 0 rgba(0,0,0,.10)",
-				"lg": "0 3px 1rem .25rem rgba(0,0,0,.10)"
-			},
 			"breakpoints": {
 				"sm": "640px",
 				"md": "768px",
 				"lg": "992px",
 				"xl": "1200px",
 				"xxl": "1440px"
+			},
+			"shadows": {
+				"sm": "0 0.125rem 0.25rem rgba(0,0,0,.08)",
+				"lg": "0 3px 1rem .25rem rgba(0,0,0,.10)"
 			},
 			"spacers": {
 				"0": "0",

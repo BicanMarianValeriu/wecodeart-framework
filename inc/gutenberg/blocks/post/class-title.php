@@ -91,7 +91,7 @@ class Title extends Dynamic {
 		$classnames = [ 'wp-block-post-title' ];
 
 		if( $value = get_prop( $attributes, 'textAlign', false ) ) {
-			$classnames[] = 'text-' . $value;
+			$classnames[] = 'has-text-align-' . $value;
 		}
 
 		if( $value = get_prop( $attributes, 'className', false ) ) {

@@ -228,7 +228,7 @@ class Form extends Dynamic {
 					$content = Markup::wrap( 'comment-cookies', [ [
 						'tag' 	=> 'div',
 						'attrs' => [
-							'class' => 'comment-form-field comment-form-cookies'
+							'class' => 'comment-form-field comment-form-cookies-consent'
 						]
 					] ], 'wecodeart_input', [ 'toggle', [
 						'type'	=> 'checkbox',

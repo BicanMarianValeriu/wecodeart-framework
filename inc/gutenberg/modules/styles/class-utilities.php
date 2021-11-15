@@ -173,10 +173,15 @@ function register_utility( $args = [] ) {
 
 	$values = (array) get_prop( $args, 'values', [] );
 	
+    // Bail if no values.
 	if( empty( $values ) ) return;
 	
 	$properties	= (array) get_prop( $args, 'property' );
 	$class 		= get_prop( $args, 'class', $properties[0] );
+
+    // Bail if no class.
+    if( ! $class ) return;
+
 	$media		= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 	$responsive = get_prop( $args, 'responsive' ) && ! empty( $media );
 
@@ -222,7 +227,7 @@ function register_utility( $args = [] ) {
 // Theme Shadows
 $shadows    = wecodeart_json( [ 'settings', 'custom', 'shadows' ], [] );
 $shadows    = array_merge( $shadows, [
-    null    => '0 .5rem 1rem rgba(0,0,0, .15)',
+    null    => '0 .3rem .75rem rgba(0,0,0, .15)',
     'none'  => 'none'
 ] );
 

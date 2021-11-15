@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.2
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -111,7 +111,7 @@ class Content extends Dynamic {
 		$classnames = [ 'wp-block-post-content' ];
 
 		if( $value = get_prop( $attributes, 'textAlign', false ) ) {
-			$classnames[] = 'text-' . $value;
+			$classnames[] = 'has-text-align-' . $value;
 		}
 
 		if( $value = get_prop( $attributes, 'className', false ) ) {

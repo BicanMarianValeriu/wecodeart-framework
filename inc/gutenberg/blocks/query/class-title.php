@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query;
@@ -89,7 +89,7 @@ class Title extends Dynamic {
         $classes = [ 'wp-block-query-title' ];
 
         if( $align = get_prop( $attributes, 'textAlign' ) ) {
-            $classes[] = 'text-' . $align;
+            $classes[] = 'has-text-align-' . $align;
         }
 
 		if( $classname = get_prop( $attributes, 'className' ) ) {
@@ -104,5 +104,18 @@ class Title extends Dynamic {
                 ]
             ]
         ], $title, [], false );
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+        .wp-block-query-title svg {
+			margin-right: 1rem;
+		}
+		";
 	}
 }
