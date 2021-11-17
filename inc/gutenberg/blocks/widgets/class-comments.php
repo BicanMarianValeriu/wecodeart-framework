@@ -141,7 +141,7 @@ class Comments extends Dynamic {
 					[
 						'tag' 	=> 'li',
 						'attrs'	=> [
-							'class' => implode( ' ', get_comment_class( null, $comment ) )
+							'class' => implode( ' ', get_comment_class( 'wp-block-latest-comments__comment', $comment ) )
 						]
 					]
 				], function( $blocks ) {
