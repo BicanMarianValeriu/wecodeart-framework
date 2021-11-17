@@ -199,8 +199,8 @@ final class Styles implements Integration {
 						}
 					}
 				}
-				$value = ( is_string( $value ) ) ? $value : '';
 			}
+			
 			if ( '' !== $css_for_style ) {
 				$css .= $selector . '{' . $css_for_style . '}';
 			}

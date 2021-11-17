@@ -282,7 +282,7 @@ foreach( [
         ],
     ],
     [
-        'property'  => 'border-start',
+        'property'  => 'border-left',
         'class'		=> 'border-start',
         'values'	=> [
             null    => '1px solid lightgray',
@@ -290,7 +290,7 @@ foreach( [
         ],
     ],
     [
-        'property'  => 'border-end',
+        'property'  => 'border-right',
         'class'		=> 'border-end',
         'values'	=> [
             null    => '1px solid lightgray',
@@ -329,7 +329,7 @@ foreach( [
             'inline-block'  => 'inline-flex',
             'grid'          => 'grid',
             'table'         => 'table',
-            'table-cel'     => 'table-cell',
+            'table-cell'    => 'table-cell',
             'table-row'     => 'table-row',
         ],
     ],

@@ -102,8 +102,7 @@ class Posts extends Dynamic {
 		}
 
 		if ( get_prop( $attributes, [ 'postLayout' ], false ) ) {
-			$cols = get_prop( $attributes, [ 'columns' ], '3' );
-			$classnames[] = 'is-grid row row-cols-md-2 row-cols-lg-' . $cols;
+			$classnames[] = 'grid';
 		}
 
 		$classnames[] = 'list-unstyled';
@@ -123,11 +122,15 @@ class Posts extends Dynamic {
 			$display_date		= get_prop( $attributes, [ 'displayPostDate' ], false );
 			$display_content	= get_prop( $attributes, [ 'displayPostContent' ], false );
 			$content_type		= get_prop( $attributes, [ 'displayPostContentRadio' ], 'excerpt' );
+			$columns 			= ( 12 / get_prop( $attributes, [ 'columns' ], 3 ) );
 			$list_items_markup 	= '';
 
 			foreach ( $posts as $post ) {
 				$post_link = esc_url( get_permalink( $post ) );
-				$list_items_markup .= '<li class="wp-block-posts__post">';
+				$item_class = 'wp-block-posts__post g-col-12 g-col-md-6 g-col-lg-' . $columns;
+				$item_class = implode( ' ', get_post_class( $item_class, $post ) );
+
+				$list_items_markup .= '<li class="' . $item_class . '">';
 				$list_items_markup .= '<div class="row gx-3">';
 
 				// Image

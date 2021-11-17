@@ -20,6 +20,7 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
+use WeCodeArt\Support\FileSystem;
 use WeCodeArt\Gutenberg\Modules\Styles\Utilities;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Gutenberg\Modules\Styles\register_utility;
@@ -37,7 +38,8 @@ class Styles implements Integration {
 	 *
 	 * @var string
 	 */
-    const CSS_ID = 'wecodeart-blocks-custom';
+    const CSS_ID 	= 'wecodeart-blocks-custom';
+    const UTILITIES = 'utilities.css';
 
 	/**
 	 * The Styles Processor
@@ -105,6 +107,7 @@ class Styles implements Integration {
 
 		// Hooks
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
+		add_action( 'admin_init',					[ $this, 'admin_init'			], 10, 2 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 10, 2 );
 		add_action( 'wp_loaded', 					[ $this, 'add_attributes' 		], 10, 1 );
 		add_action( 'wp_enqueue_scripts',  			[ $this, 'template_styles' 		], 10, 1 );
@@ -126,16 +129,11 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Editor only.
+	 * Generate Utilities CSS on admin.
 	 *
 	 * @return  void
 	 */
-	public function block_editor_assets() {
-		// Javascript
-		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-styles' ), [
-			'wecodeart-gutenberg-inline'
-		], wecodeart( 'version' ) );
-
+	public function admin_init() {
 		// Stylesheet
 		$inline_css = '';
 		$array_css 	= [];
@@ -148,10 +146,30 @@ class Styles implements Integration {
 		}
 
 		if( empty( $inline_css ) ) return;
+		
+		$filesystem = FileSystem::get_instance();
+		$filesystem->set_folder( 'css' );
 
-		wp_register_style( $this->make_handle(), false, [], true, true );
-		wp_add_inline_style( $this->make_handle(), $inline_css );
-		wp_enqueue_style( $this->make_handle() );
+		$has_cached = $filesystem->has_file( self::UTILITIES );
+
+		if( ! $has_cached || false === get_transient( 'wecodeart/gutenberg/utilities' ) ) {
+			$filesystem->create_file( self::UTILITIES, $inline_css );
+			set_transient( 'wecodeart/gutenberg/utilities', true, 5 * MINUTE_IN_SECONDS );
+		}
+
+		add_editor_style( $filesystem->get_file_url( self::UTILITIES ) );
+	}
+
+	/**
+	 * Editor only.
+	 *
+	 * @return  void
+	 */
+	public function block_editor_assets() {
+		// Javascript
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-styles' ), [
+			'wecodeart-gutenberg-inline'
+		], wecodeart( 'version' ) );
 	}
 
 	/**
