@@ -1992,7 +1992,7 @@
 }
 
 .wp-block-column ~ .wp-block-column {
-  margin-left: 0 !important;
+  --wp--style--block-gap: 0;
 }
 
 /*--------------------------------------------------------------
