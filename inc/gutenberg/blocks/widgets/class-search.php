@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -95,7 +95,7 @@ class Search extends Dynamic {
 			],
 		], function() use( $attributes, $input_id ) {
 			$wrapper   = [ 'wp-block-search__fields' ];
-			$wrapper[] = get_prop( $attributes, 'buttonPosition' ) === 'button-inside' ? 'input-group' : 'd-flex';
+			$wrapper[] = get_prop( $attributes, 'buttonPosition' ) === 'button-inside' ? 'input-group' : '';
 			// Add Label
 			if ( get_prop( $attributes, 'showLabel' ) !== false && ! empty( $label = get_prop( $attributes, 'label' ) ) ) {
 			?>
@@ -103,7 +103,7 @@ class Search extends Dynamic {
 			<?php
 			}
 			?>
-			<div class="<?php echo esc_attr( implode( ' ', $wrapper ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', array_filter( $wrapper ) ) ); ?>">
 			<?php
 
 			// Add search input
@@ -160,26 +160,23 @@ class Search extends Dynamic {
 		}
 
 		if( $wrapper === 'button' ) {
-			$classnames = [ 'wp-block-search__button', 'btn' ];
-			if( $value = get_prop( $attributes, [ 'backgroundColor' ], false ) ) {
-				$classnames[] = 'btn-' . $value;
-			} else if( $value = get_prop( $attributes, [ 'borderColor' ], 'dark' ) ) {
-				$classnames[] = 'btn-outline-' . $value;
+			$classnames = [ 'wp-block-search__button' ];
+			if( $value = get_prop( $attributes, [ 'backgroundColor' ] ) ) {
+				$classnames[] = 'has-' . $value . '-background-color';
+			} else if( $value = get_prop( $attributes, [ 'borderColor' ] ) ) {
+				$classnames[] = 'border';
+				$classnames[] = 'border-' . $value;
 			}
 
-			if( $value = get_prop( $attributes, [ 'textColor' ], false ) ) {
+			if( $value = get_prop( $attributes, [ 'textColor' ] ) ) {
 				$classnames[] = 'has-text-color';
 				$classnames[] = 'has-' . $value . '-color';
-			}
-
-			if( get_prop( $attributes, [ 'buttonPosition' ], 'button-outside' ) === 'button-outside' ) {
-				$classnames[] = 'ms-3';
 			}
 		}
 		
 		if( $wrapper === 'field' ) {
 			$classnames = [ 'wp-block-search__input', 'form-control' ];
-			if( $value = get_prop( $attributes, [ 'borderColor' ], false ) ) {
+			if( $value = get_prop( $attributes, [ 'borderColor' ] ) ) {
 				$classnames[] = 'border';
 				$classnames[] = 'border-' . $value;
 			}
@@ -196,9 +193,33 @@ class Search extends Dynamic {
 	public function styles() {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$desktop	= get_prop( $breaks, 'lg', '992px' );
+
 		return "
 		.wp-block-search {
 			margin-bottom: 1rem;
+		}
+		.wp-block-search--button-outside .wp-block-search__button {
+			margin-left: .5rem;
+		}
+		.wp-block-search__fields {
+			display: flex;
+		}
+		.wp-block-search__button {
+			display: inline-block;
+			vertical-align: middle;
+			padding: 0.5rem 0.75rem;
+			color: var(--wp--white);
+			font-size: 1rem;
+			font-weight: 400;
+			text-align: center;
+			line-height: 1.5;
+			background-color: var(--wp--dark);
+			border: 1px solid transparent;
+			border-radius: .25rem;
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+			user-select: none;
+			cursor: pointer;
+			margin-left: 1rem;
 		}
 		.navbar .wp-block-search {
 			margin-top: 10px;
