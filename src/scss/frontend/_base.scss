@@ -36,12 +36,6 @@ html {
     }
 }
 
-.has-inline-background {
-    @include border-radius();
-    padding: .20rem .8rem;
-    margin: 0 .2rem;
-}
-
 .has-text-align-center {
     text-align: center;
 }
@@ -115,6 +109,12 @@ img {
     backface-visibility: hidden;
 }
 
+mark.has-inline-color {
+    border-radius: .25rem;
+    padding: .20rem .5rem;
+    margin: 0 .3rem;
+}
+
 figcaption,
 .wp-caption {
     font-size: var(--wp--preset--font-size--small);
@@ -176,6 +176,14 @@ figcaption,
 
 .wp-block-post-meta {
     margin-bottom: .5rem;
+}
+
+:where(.wp-block-post-author, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) {
+    color: var(--wp--gray-600);
+
+    svg {
+        margin-right: .5rem;
+    }
 }
 
 :where(.wp-block-post-excerpt, .wp-block-post-content, .wp-block-post-comment-content) {

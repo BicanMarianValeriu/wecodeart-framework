@@ -84,7 +84,7 @@ class Classes {
 	 * @return 	array 	Returns updated editors settings.
 	 */
 	public function grid( $args ) {
-		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'container' ], [] );
+		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$breakpoints	= array_keys( $breakpoints );
 
 		foreach( range( 1, 12 ) as $number ) {
@@ -155,11 +155,12 @@ class Classes {
 			'card-header-tabs',
 			'card-header-pills',
 			'card-body',
-			'stretched-link',
-			'disabled',
+			'vr',
 			'hstack',
 			'vstack',
-			'vr',
+			'lead',
+			'disabled',
+			'stretched-link',
 			'visually-hidden',
 			'visually-hidden-focusable',
 			'ratio',

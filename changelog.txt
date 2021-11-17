@@ -2,7 +2,9 @@ v5.2.4
 - Fixed - Social links svg height
 - Updated - block-templates/block-patterns
 - Updated - Columns styles to block (conditionaly when used)
+- Updated - Navigation styles/scripts to chunks loaded only when used.
 - Added - Block gap support to Gutenberg Styles extension
+- Added - New Utilities PHP styles extension (removed BootStrap`s utilities) / loaded when used
 
 v5.2.3
 - Fixed - Starter content conflict with WordPress default pages.

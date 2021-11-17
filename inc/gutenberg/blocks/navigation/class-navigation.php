@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.9
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
+use WeCodeArt\Core\Scripts;
 use WeCodeArt\Support\Styles;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -28,6 +29,7 @@ use function WeCodeArt\Functions\get_prop;
 class Navigation extends Dynamic {
 
 	use Singleton;
+	use Scripts\Base;
 
 	/**
 	 * Block namespace.
@@ -88,6 +90,7 @@ class Navigation extends Dynamic {
 
 		$inner_blocks = $block->inner_blocks;
 
+		// If `__unstableLocation` is defined, create inner blocks from the classic menu assigned to that location.
 		if ( empty( $inner_blocks ) && array_key_exists( '__unstableLocation', $attributes ) ) {
 			$menu_items = $this->get_menu_items( $attributes['__unstableLocation'] );
 			if ( empty( $menu_items ) ) {
@@ -98,12 +101,45 @@ class Navigation extends Dynamic {
 			$parsed_blocks 	= $this->parse_menu( $sorted_items[0], $sorted_items );
 			$inner_blocks 	= new \WP_Block_List( $parsed_blocks, $attributes );
 		}
+
+		if ( ! empty( $block->context['navigationArea'] ) ) {
+			$area    = $block->context['navigationArea'];
+			$mapping = get_option( 'wp_navigation_areas', [] );
+			if ( ! empty( $mapping[ $area ] ) ) {
+				$attributes['navigationMenuId'] = $mapping[ $area ];
+			}
+		}
+	
+		// Load inner blocks from the navigation post.
+		if ( array_key_exists( 'navigationMenuId', $attributes ) ) {
+			$navigation_post = get_post( $attributes['navigationMenuId'] );
+			if ( ! isset( $navigation_post ) ) {
+				return '';
+			}
+	
+			$parsed_blocks = parse_blocks( $navigation_post->post_content );
+	
+			// 'parse_blocks' includes a null block with '\n\n' as the content when
+			// it encounters whitespace. This code strips it.
+			$compacted_blocks = array_filter( $parsed_blocks, function( $block ) {
+				return isset( $block['blockName'] );
+			} );
+	
+			// TODO - this uses the full navigation block attributes for the
+			// context which could be refined.
+			$inner_blocks = new WP_Block_List( $compacted_blocks, $attributes );
+		}
 		
 		if ( empty( $inner_blocks ) ) {
 			return '';
 		}
 
 		$block_id	= uniqid();
+
+		// Styles
+		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [
+			'wecodeart-core-scripts'
+		], wecodeart( 'version' ) );
 
 		return Markup::wrap( 'navbar', [ [
 			'tag' 	=> 'nav',
@@ -122,6 +158,11 @@ class Navigation extends Dynamic {
 
 			// Is responsive? Render in offcanvas container
 			if( get_prop( $attributes, 'overlayMenu' ) !== 'never' ) {
+
+				// Scripts
+				wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/navigation' ), [
+					'wecodeart-core-scripts'
+				], wecodeart( 'version' ), true );
 
 				// Toggler
 				wecodeart_template( 'general/toggler', [

@@ -33,24 +33,7 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import "~bootstrap/scss/containers";   // X
 @import "~bootstrap/scss/grid";         // X
 @import "~bootstrap/scss/transitions";  // X
-
-// Nav/Misc - to be chunked into a custom file
-@import "~bootstrap/scss/nav";          // X
-@import "~bootstrap/scss/navbar";       // X
-@import "~bootstrap/scss/dropdown";     // X
-@import "~bootstrap/scss/offcanvas";    // X
-@import "~bootstrap/scss/close";        // X
-
-// BS Helpers
-@import "~bootstrap/scss/helpers/clearfix";
-@import "~bootstrap/scss/helpers/colored-links";
-@import "~bootstrap/scss/helpers/ratio";
-@import "~bootstrap/scss/helpers/position";
-@import "~bootstrap/scss/helpers/stacks";
-@import "~bootstrap/scss/helpers/visually-hidden";
-@import "~bootstrap/scss/helpers/stretched-link";
-@import "~bootstrap/scss/helpers/text-truncation";
-@import "~bootstrap/scss/helpers/vr";
+@import "~bootstrap/scss/helpers";      // X
 
 // This will be added as utilities
 // @import "~bootstrap/scss/utilities";     // XX Done as utility
@@ -61,6 +44,11 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 // @import "~bootstrap/scss/list-group";    // XX ToDO as utility
 
 // This is added as a block style
+// @import "~bootstrap/scss/nav";           // XX Block
+// @import "~bootstrap/scss/navbar";        // XX Block
+// @import "~bootstrap/scss/dropdown";      // XX Block
+// @import "~bootstrap/scss/offcanvas";     // XX Block
+// @import "~bootstrap/scss/close";         // XX Block
 // @import "~bootstrap/scss/button-group";  // XX Block
 // @import "~bootstrap/scss/buttons";       // XX Block
 // @import "~bootstrap/scss/tables";        // XX Block
