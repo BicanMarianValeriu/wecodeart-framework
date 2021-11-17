@@ -33,7 +33,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 			
 		SVG::render( 'user' );
 		
-		?><span style="margin-left:0.5em;"><?php
+		?><span><?php
 		
 			if( $byline = get_prop( $attributes, 'byline', false ) ) {
 

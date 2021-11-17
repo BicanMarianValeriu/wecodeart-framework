@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.8
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -77,43 +77,49 @@ class RSS extends Dynamic {
 		$display_date		= get_prop( $attributes, [ 'displayDate' ], false );
 		$display_excerpt	= get_prop( $attributes, [ 'displayExcerpt' ], false );
 
-		$classnames = [ 'wp-block-posts', 'wp-block-posts--rss' ];
+		$classnames = [ 'wp-block-rss' ];
 
 		if ( $display_author ) {
 			$classnames[] = 'has-avatars';
 		}
+		
 		if ( $display_date ) {
 			$classnames[] = 'has-dates';
 		}
+
 		if ( $display_excerpt ) {
 			$classnames[] = 'has-excerpts';
 		}
+
 		if ( get_prop( $attributes, [ 'blockLayout' ], false ) ) {
-			$cols = get_prop( $attributes, [ 'columns' ], '2' );
-			$classnames[] = 'is-grid row row-cols-md-2 row-cols-lg-' . $cols;
+			$classnames[] = 'grid';
 		}
 
 		$classnames[] = 'list-unstyled';
-		$classnames[] = 'mb-0';
 
 		$content = Markup::wrap( 'wp-block-rss', [
 			[
 				'tag' 	=> 'ul',
 				'attrs'	=> [
-					'class' => implode( ' ', $classnames )
+					'class' => implode( ' ', $classnames ),
+					'style' => '--wp--columns:' . get_prop( $attributes, [ 'columns' ], '2' )
 				]
 			]
-		], function( $posts, $attributes) {
+		], function( $posts, $attributes ) {
 			
 			$display_author		= get_prop( $attributes, [ 'displayAuthor' ], false );
 			$display_date		= get_prop( $attributes, [ 'displayDate' ], false );
 			$display_excerpt	= get_prop( $attributes, [ 'displayExcerpt' ], false );
+			$columns 			= get_prop( $attributes, [ 'columns' ], 2 );
 			
 			$list_items_markup 	= '';
 
+			$item_class = [ 'wp-block-rss__item' ];
+			$item_class[] = 'g-col-' . $columns;
+			$item_class[] = 'g-col-lg-1';
+
 			foreach ( $posts as $item ) {
-				$list_items_markup .= '<li class="wp-block-posts__post mb-3">';
-				$list_items_markup .= '<div>';
+				$list_items_markup .= '<li class="' . implode( ' ', $item_class ) . '">';
 
 				// Title
 				$title = esc_html( trim( strip_tags( $item->get_title() ) ) );
@@ -124,43 +130,50 @@ class RSS extends Dynamic {
 				if ( $link ) {
 					$title = "<a href='{$link}'>{$title}</a>";
 				}
-				$list_items_markup .= "<h3 class='wp-block-post-title'>{$title}</h3>";
+				$list_items_markup .= "<h3 class='wp-block-post-title wp-block-rss__item-title'>{$title}</h3>";
 
-				// Meta
-				if( $display_author || $display_date ) {
-					$list_items_markup .= '<div class="wp-block-posts__post-meta d-flex align-items-center mb-3">';
-					// Author
-					if ( $display_author ) {
-						$author = $item->get_author();
-						if ( is_object( $author ) ) {
-							$author = $author->get_name();
-						}
-
-						$list_items_markup .= wecodeart_template( 'meta/author', [
-							'attributes'=> [
-								'isLink'	=> false,
-								'className' => 'd-inline-flex me-3',
-							],
-							'author' 	=> (object) [
-								'name'  => $author,
-							]
-						], false );
+				// Author
+				if ( $display_author ) {
+					$author = $item->get_author();
+					if ( is_object( $author ) ) {
+						$author = $author->get_name();
 					}
 
-					// Date
-					if ( $display_date ) {
-						$date = $item->get_date( 'U' );
-						$list_items_markup .= wecodeart_template( 'meta/date', [
-							'attributes'=> [
-								'className' => 'd-inline-flex me-3',
-							],
-							'published'	=> [
-								'robot'	=> date_i18n( get_option( 'c' ), $date ),
-								'human'	=> date_i18n( get_option( 'date_format' ), $date )
-							]
-						], false );
+					$author_template = wecodeart_template( 'meta/author', [
+						'attributes'=> [
+							'isLink'	=> false,
+							'className' => 'wp-block-rss__item-author'
+						],
+						'author' 	=> (object) [
+							'name'  => $author,
+						]
+					], false );
+
+					if( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+						$author_template = strip_tags( $author_template, '<div><span>' );
 					}
-					$list_items_markup .= '</div>';
+
+					$list_items_markup .= $author_template;
+				}
+
+				// Date
+				if ( $display_date ) {
+					$date = $item->get_date( 'U' );
+					$date_template = wecodeart_template( 'meta/date', [
+						'attributes'=> [
+							'className' => 'wp-block-rss__item-publish-date'
+						],
+						'published'	=> [
+							'robot'	=> date_i18n( get_option( 'c' ), $date ),
+							'human'	=> date_i18n( get_option( 'date_format' ), $date )
+						]
+					], false );
+
+					if( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+						$date_template = strip_tags( $date_template, '<div><span>' );
+					}
+
+					$list_items_markup .= $date_template;
 				}
 
 				// Excerpt
@@ -175,10 +188,9 @@ class RSS extends Dynamic {
 
 					$excerpt = wpautop( esc_html( $excerpt ) );
 
-					$list_items_markup .= sprintf( '<div class="%1$s">%2$s</div>', 'wp-block-post-excerpt', $excerpt );
+					$list_items_markup .= sprintf( '<div class="%1$s">%2$s</div>', 'wp-block-post-excerpt wp-block-rss__item-excerpt', $excerpt );
 				}
 
-				$list_items_markup .= "</div>\n";
 				$list_items_markup .= "</li>\n";
 			}
 

@@ -179,8 +179,6 @@ figcaption,
 }
 
 :where(.wp-block-post-author, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) {
-    color: var(--wp--gray-600);
-
     svg {
         margin-right: .5rem;
     }

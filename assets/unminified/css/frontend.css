@@ -697,9 +697,6 @@ figcaption p.wp-caption-text,
   margin-bottom: 0.5rem;
 }
 
-:where(.wp-block-post-author, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) {
-  color: var(--wp--gray-600);
-}
 :where(.wp-block-post-author, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) svg {
   margin-right: 0.5rem;
 }
