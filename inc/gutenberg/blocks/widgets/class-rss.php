@@ -73,9 +73,10 @@ class RSS extends Dynamic {
 
 		$rss_items  = $rss->get_items( 0, get_prop( $attributes, [ 'itemsToShow' ], 5 ) );
 
-		$display_author		= get_prop( $attributes, [ 'displayAuthor' ], false );
-		$display_date		= get_prop( $attributes, [ 'displayDate' ], false );
-		$display_excerpt	= get_prop( $attributes, [ 'displayExcerpt' ], false );
+		$display_author		= get_prop( $attributes, [ 'displayAuthor' ] );
+		$display_date		= get_prop( $attributes, [ 'displayDate' ] );
+		$display_excerpt	= get_prop( $attributes, [ 'displayExcerpt' ] );
+		$is_grid_layout		= get_prop( $attributes, [ 'blockLayout' ] );
 
 		$classnames = [ 'wp-block-rss' ];
 
@@ -91,7 +92,7 @@ class RSS extends Dynamic {
 			$classnames[] = 'has-excerpts';
 		}
 
-		if ( get_prop( $attributes, [ 'blockLayout' ], false ) ) {
+		if ( $is_grid_layout ) {
 			$classnames[] = 'grid';
 		}
 
@@ -102,21 +103,24 @@ class RSS extends Dynamic {
 				'tag' 	=> 'ul',
 				'attrs'	=> [
 					'class' => implode( ' ', $classnames ),
-					'style' => '--wp--columns:' . get_prop( $attributes, [ 'columns' ], '2' )
+					'style' => $is_grid_layout ? '--wp--columns:' . get_prop( $attributes, [ 'columns' ], '2' ) : null
 				]
 			]
 		], function( $posts, $attributes ) {
 			
-			$display_author		= get_prop( $attributes, [ 'displayAuthor' ], false );
-			$display_date		= get_prop( $attributes, [ 'displayDate' ], false );
-			$display_excerpt	= get_prop( $attributes, [ 'displayExcerpt' ], false );
+			$display_author		= get_prop( $attributes, [ 'displayAuthor' ] );
+			$display_date		= get_prop( $attributes, [ 'displayDate' ] );
+			$display_excerpt	= get_prop( $attributes, [ 'displayExcerpt' ] );
 			$columns 			= get_prop( $attributes, [ 'columns' ], 2 );
 			
 			$list_items_markup 	= '';
 
 			$item_class = [ 'wp-block-rss__item' ];
-			$item_class[] = 'g-col-' . $columns;
-			$item_class[] = 'g-col-lg-1';
+
+			if ( get_prop( $attributes, [ 'blockLayout' ], false ) ) {
+				$item_class[] = 'g-col-' . $columns;
+				$item_class[] = 'g-col-lg-1';
+			}
 
 			foreach ( $posts as $item ) {
 				$list_items_markup .= '<li class="' . implode( ' ', $item_class ) . '">';
