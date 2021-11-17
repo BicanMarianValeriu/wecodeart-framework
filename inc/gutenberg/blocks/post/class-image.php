@@ -83,6 +83,10 @@ class Image extends Dynamic {
 		$link 		= get_prop( $attributes, 'isLink', false );
 		$classnames = [ 'wp-block-featured-image', 'ratio', 'overflow-hidden' ];
 
+		if( $align = get_prop( $attributes, 'align' ) ) {
+			$classnames[] = 'align' . $align;
+		}
+
 		if( $link ) {
 			$classnames = array_diff( $classnames, [ 'ratio', 'overflow-hidden' ] );
 			$filter = function( $wrappers ) use ( $post_ID ) {
@@ -124,7 +128,11 @@ class Image extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-featured-image .ration {
+		.wp-block-featured-image {
+			min-width: 150px;
+			--wp--aspect-ratio: 60%;
+		}
+		.wp-block-featured-image .ratio {
 			overflow: hidden;
 		}
 		.wp-block-featured-image a {

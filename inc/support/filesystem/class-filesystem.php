@@ -9,7 +9,7 @@
  * @subpackage 	Support\FileSystem
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Support;
@@ -48,13 +48,13 @@ class FileSystem {
 	 * @return  bool
 	 */
 	public function set_folder( $folder = '' ) {
-		$wp_upload_dir = wp_get_upload_dir();
+		$theme_dir = wecodeart_config( 'paths' )['directory'];
 
-		if ( ! is_writable( $wp_upload_dir['basedir'] ) ) {
+		if ( ! is_writable( $theme_dir ) ) {
 			return false;
 		}
 
-		$this->folder = implode( DIRECTORY_SEPARATOR, array_filter( [ $wp_upload_dir['basedir'], 'wecodeart', $folder ] ) );
+		$this->folder = implode( DIRECTORY_SEPARATOR, array_filter( [ $theme_dir, 'assets', $folder ] ) );
 
 		wp_mkdir_p( wp_normalize_path( $this->folder ) );
 
@@ -135,7 +135,9 @@ class FileSystem {
 		$file = implode( DIRECTORY_SEPARATOR, array_filter( [ $this->folder, $filename ] ) );
 		
 		if( $link ) {
-			$file = str_replace( WP_CONTENT_DIR, content_url(), $file );
+			$paths = wecodeart_config( 'paths' );
+
+			$file = wp_normalize_path( str_replace( $paths['directory'], $paths['uri'], $file ) );
 		}
 
 		return $file;

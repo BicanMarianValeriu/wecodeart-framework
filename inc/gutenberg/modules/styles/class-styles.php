@@ -106,15 +106,16 @@ class Styles implements Integration {
 		$this->Utilities 	= Utilities::get_instance();
 
 		// Hooks
+		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
-		add_action( 'admin_init',					[ $this, 'admin_init'			], 10, 2 );
-		add_filter( 'render_block',					[ $this, 'filter_render' 		], 10, 2 );
-		add_action( 'wp_loaded', 					[ $this, 'add_attributes' 		], 10, 1 );
+		add_action( 'init', 						[ $this, 'setup_utilities' 		], 100 );
+		add_filter( 'render_block',					[ $this, 'filter_render' 		], 30, 2 );
+		add_action( 'wp_loaded', 					[ $this, 'add_attributes'		], 10, 1 );
 		add_action( 'wp_enqueue_scripts',  			[ $this, 'template_styles' 		], 10, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 10, 1 );
 		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 10, 1 );
-
+		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
 		remove_filter( 'render_block', 'wp_render_elements_support', 	10, 2 );
@@ -133,7 +134,10 @@ class Styles implements Integration {
 	 *
 	 * @return  void
 	 */
-	public function admin_init() {
+	public function setup_utilities() {
+		// Load Utilities
+		require_once( __DIR__ . '/utilities.php' );
+
 		// Stylesheet
 		$inline_css = '';
 		$array_css 	= [];
@@ -148,16 +152,18 @@ class Styles implements Integration {
 		if( empty( $inline_css ) ) return;
 		
 		$filesystem = FileSystem::get_instance();
-		$filesystem->set_folder( 'css' );
+		$filesystem->set_folder( 'cache' );
 
 		$has_cached = $filesystem->has_file( self::UTILITIES );
 
 		if( ! $has_cached || false === get_transient( 'wecodeart/gutenberg/utilities' ) ) {
-			$filesystem->create_file( self::UTILITIES, $inline_css );
+			$filesystem->create_file( self::UTILITIES, wp_strip_all_tags( $inline_css ) );
 			set_transient( 'wecodeart/gutenberg/utilities', true, 5 * MINUTE_IN_SECONDS );
 		}
 
-		add_editor_style( $filesystem->get_file_url( self::UTILITIES ) );
+		add_editor_style( $filesystem->get_file_url( self::UTILITIES, true ) );
+		
+		$filesystem->set_folder( '' );
 	}
 
 	/**
@@ -180,6 +186,7 @@ class Styles implements Integration {
 	 * @return 	void
 	 */
 	public function add_attributes() {
+		// Add Attributes
 		$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
 
 		foreach ( $registered_blocks as $name => $block ) {
@@ -230,6 +237,7 @@ class Styles implements Integration {
 				'core/media-text',
 				// Blocks that render others
 				'core/template-part',
+				'core/post-template',
 				// Here we need "cancel reply" link to be hidden
 				'core/post-comments-form',
 			] ) ) {

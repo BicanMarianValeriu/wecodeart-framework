@@ -77,14 +77,20 @@ class Comments extends Dynamic {
 
 		$classnames = [ 'wp-block-latest-comments' ];
 
-		if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
+		if( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
 			$classnames[] = 'has-avatars';
 		}
-		if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {
+
+		if( get_prop( $attributes, [ 'displayDate' ], true ) ) {
 			$classnames[] = 'has-dates';
 		}
-		if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
+
+		if( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
 			$classnames[] = 'has-excerpts';
+		}
+		
+		if( $classname = get_prop( $attributes, [ 'className' ], '' ) ) {
+			$classnames[] = array_merge( $classnames, explode( ' ', $classname ) );
 		}
 
 		$classnames[] = 'list-unstyled';
@@ -97,59 +103,60 @@ class Comments extends Dynamic {
 				]
 			]
 		], function( $comments, $attributes ) {
-	
-			$list_items_markup = '';
-			
-			foreach ( $comments as $comment ) {
-				$list_items_markup .= '<li class="wp-block-latest-comments__comment">';
-				$list_items_markup .= '<p class="wp-block-latest-comments__comment-head row gx-3">';
-				// Avatar
-				if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
-					$avatar = get_avatar( $comment, 50, '', '', [
-						'class' => 'wp-block-latest-comments__comment-avatar',
-					] );
-					if ( $avatar ) {
-						$list_items_markup .= sprintf( '<span class="col-auto">%s</span>', $avatar );
-					}
-				}
+			$content 	= '';
+			$template 	= '';
 
-				// Meta
-				$list_items_markup .= '<span class="col">';
-
-				// Author
-				$author_markup 	= '';
-				$author_url		= get_comment_author_url( $comment );
-				if ( empty( $author_url ) && ! empty( $comment->user_id ) ) {
-					$author_url = get_author_posts_url( $comment->user_id );
-				}
-
-				if ( $author_url ) {
-					$author_markup .= '<a class="wp-block-latest-comments__comment-author" href="' . esc_url( $author_url ) . '">' . get_comment_author( $comment ) . '</a>';
-				} else {
-					$author_markup .= '<span class="wp-block-latest-comments__comment-author">' . get_comment_author( $comment ) . '</span>';
-				}
-
-				$post_title = '<a class="wp-block-latest-comments__comment-post" href="' . esc_url( get_comment_link( $comment ) ) . '">' . wp_latest_comments_draft_or_post_title( $comment->comment_post_ID ) . '</a>';
-				$list_items_markup .= sprintf( __( '%1$s on %2$s', 'wecodeart' ), $author_markup, $post_title );
-
-				// Date
-				if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {
-					$list_items_markup .= sprintf(
-						'<time datetime="%1$s" class="wp-block-latest-comments__comment-date has-small-font-size" style="display:block;">%2$s</time>',
-						esc_attr( get_comment_date( 'c', $comment ) ),
-						date_i18n( get_option( 'date_format' ), get_comment_date( 'U', $comment ) )
-					);
-				}
-				$list_items_markup .= '</span>';
-				$list_items_markup .= '</p>';
-				// Excerpt
-				if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
-					$list_items_markup .= '<p class="wp-block-latest-comments__comment-excerpt">' . get_comment_excerpt( $comment ) . '</p>';
-				}				
-				$list_items_markup .= '</li>';
+			// Comment Author Avatar
+			if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
+				$template .= '<!-- wp:comment-author-avatar {"backgroundColor":"white","className":"float-start rounded-circle me-3","width":50,"height":50,"customCSSId":"5cbsss36-62f1-4fcf-b02d-630eba697bf9"} /-->';
 			}
-	
-			echo $list_items_markup;
+			
+			$template .= '<!-- wp:group {"className":"gap-1 clearfix","customCSSId":"5cb4e436-62f1-4fcf-b02d-630eba697bf9"} -->';
+			$template .= '<div class="wp-block-group gap-1 clearfix">';
+
+			// Comment Author
+			$template .= '<!-- wp:comment-author-name {"isLink":true} /-->';
+
+			// Comment Date
+			if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {
+				$template .= '<!-- wp:comment-date {"format":"F j, Y g:i a"} /-->';
+			}
+			$template .= '</div>';
+			$template .= '<!-- /wp:group -->';
+
+			// Comment Content
+			if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
+				$template .= '<!-- wp:comment-content {"backgroundColor":"white","className":"p-3 my-3 border rounded","customCSSId":"5c64e436-62f1-4fcf-b02d-630eba697bf9"} /-->';
+			}
+
+			// Allow users to change this template
+			$template = apply_filters( 'wecodeart/filter/latest-comments/template', parse_blocks( $template ) );
+			
+			foreach( $comments as $comment ) {
+				$blocks = new \WP_Block_List( $template, [
+					'commentId' => $comment->comment_ID
+				] );
+
+				$content      .= Markup::wrap( 'wp-block-latest-comments-item', [
+					[
+						'tag' 	=> 'li',
+						'attrs'	=> [
+							'class' => implode( ' ', get_comment_class( null, $comment ) )
+						]
+					]
+				], function( $blocks ) {
+					
+					$content = '';
+
+					foreach( $blocks as $block ) $content .= $block->render( $block );
+
+					echo $content;
+
+				}, [ $blocks ], false );
+			}
+
+			echo $content;
+
 		}, [ $comments, $attributes ], false );
 	}
 }

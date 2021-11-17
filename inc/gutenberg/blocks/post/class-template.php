@@ -96,7 +96,7 @@ class Template extends Dynamic {
 
 		$classnames = [ 'wp-block-post-template' ];
 		if ( isset( $block->context['displayLayout'] ) && isset( $block->context['query'] ) ) {
-			if ( isset( $block->context['displayLayout']['type'] ) && 'flex' === $block->context['displayLayout']['type'] ) {
+			if ( get_prop( $block->context, [ 'displayLayout', 'type' ], false ) === 'flex' ) {
 				$classnames = array_merge( $classnames, [ 'wp-block-post-template--grid', 'grid' ] );
 			}
 		}
@@ -104,6 +104,8 @@ class Template extends Dynamic {
 		if( $value = get_prop( $attributes, 'className' ) ) {
 			$classnames[] = $value;
 		}
+
+		$classnames[] = 'list-unstyled';
 
 		if ( ! $query->have_posts() ) {
 			return Markup::wrap( 'wp-block-query-message', [
@@ -130,15 +132,17 @@ class Template extends Dynamic {
 			while ( $query->have_posts() ) {
 				$query->the_post();
 
-				$columns 	= ( 12 / $block->context['displayLayout']['columns'] );
-				$item_class = 'wp-block-post g-col-12 g-col-md-6 g-col-lg-' . $columns;
-				$item_class = implode( ' ', get_post_class( $item_class ) );
+				$item_class = [ 'wp-block-post' ];
+				if( get_prop( $block->context, [ 'displayLayout', 'columns' ], false ) ) {
+					$columns 	= ( 12 / get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
+					$item_class = array_merge( $item_class, [ 'g-col-12', 'g-col-md-6', 'g-col-lg-' . $columns ] );
+				}
 
 				Markup::wrap( 'wp-block-post', [
 					[
 						'tag' 	=> 'li',
 						'attrs'	=> [
-							'class' => $item_class
+							'class' => implode( ' ', get_post_class( implode( ' ', $item_class ) ) )
 						]
 					]
 				], function( $block ) {

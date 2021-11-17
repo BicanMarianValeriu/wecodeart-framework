@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.8
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -60,195 +60,97 @@ class Posts extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
-		global $post, $block_core_latest_posts_excerpt_length;
+		global $block_core_latest_posts_excerpt_length;
 
 		$attributes = get_prop( $block, 'attrs', [] );
 
 		$args = [
-			'post_status'      => 'publish',
-			'posts_per_page'   => get_prop( $attributes, 'postsToShow', 5 ),
-			'order'            => get_prop( $attributes, 'order' ),
-			'orderby'          => get_prop( $attributes, 'orderBy' ),
-			'suppress_filters' => false,
+			'queryId'	=> '7',
+			'displayLayout' => get_prop( $attributes, [ 'postLayout' ] ) ? [
+				'columns'	=> get_prop( $attributes, [ 'columns' ], null ),
+				'type' 		=> get_prop( $attributes, [ 'postLayout' ], 'list' ) === 'grid' ? 'flex' : 'list' 
+			] : null,
+			'query' 	=> [
+				'post_type' => 'post',
+				'perPage' 	=> get_prop( $attributes, 'postsToShow', 5 ),
+				'pages'		=> 0,
+				'offset'	=> 0,
+				'order'		=> get_prop( $attributes, 'order' ),
+				'orderBy'	=> get_prop( $attributes, 'orderBy' ),
+				'author'		=> get_prop( $attributes, 'selectedAuthor', '' ),
+				'categoryIds' 	=> get_prop( $attributes, 'categories', [] ),
+				'search'	=> '',
+				'exclude'	=> '',
+				'sticky'	=> '',
+				'inherit'	=> false
+			],
 		];
 
-		$block_core_latest_posts_excerpt_length = get_prop( $attributes, 'excerptLength', 55 );
-		add_filter( 'excerpt_length', 'block_core_latest_posts_get_excerpt_length', 20 );
+		$display_author		= get_prop( $attributes, [ 'displayAuthor' ], false );
+		$display_image		= get_prop( $attributes, [ 'displayFeaturedImage' ], false );
+		$display_date		= get_prop( $attributes, [ 'displayPostDate' ], false );
+		$display_content	= get_prop( $attributes, [ 'displayPostContent' ], false );
 
-		if ( $categories = get_prop( $attributes, 'categories', false ) ) {
-			$args['category__in'] = array_column( $categories, 'id' );
+		// Start Template
+		$template = '<!-- wp:query ' . wp_json_encode( $args ) . ' -->';
+		$template .= '<div class="wp-block-query">';
+		$template .= '<!-- wp:post-template {"className":"wp-block-post-template--latest list-unstyled"} -->';
+		
+		// Image
+		if ( $display_image ) {
+			$align	= (string) get_prop( $attributes, [ 'featuredImageAlign' ], 'none' );
+			$linked	= (string) get_prop( $attributes, [ 'addLinkToFeaturedImage' ], 'false' );
+			$template .= '<!-- wp:post-featured-image {"align":"' . $align . '","isLink":' . $linked . '} /-->';
 		}
 
-		if ( $selected_author = get_prop( $attributes, 'selectedAuthor', false ) ) {
-			$args['author'] = $selected_author;
-		}
+		$template .= '<!-- wp:post-title {"level":3,"isLink":true} /-->';
+		
+		// Meta
+		if( $display_author || $display_date ) {
+			$template .= '<!-- wp:group {"className":"gap-1 mb-1","layout":{"type":"flex","allowOrientation":false},"customCSSId":"5aa4e436-62f1-4fcf-b02d-630eba697bf9"} -->';
+			$template .= '<div class="wp-block-group gap-1 mb-1">';
 
-		$recent_posts = get_posts( $args );
-
-		if ( empty( $recent_posts ) ) return '';
-
-		$classnames = [ 'wp-block-posts' ];
-
-		if ( get_prop( $attributes, [ 'displayAuthor' ], true ) ) {
-			$classnames[] = 'has-avatars';
-		}
-
-		if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {
-			$classnames[] = 'has-dates';
-		}
-
-		if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
-			$classnames[] = 'has-excerpts';
-		}
-
-		if ( get_prop( $attributes, [ 'postLayout' ], false ) ) {
-			$classnames[] = 'grid';
-		}
-
-		$classnames[] = 'list-unstyled';
-
-		$content = Markup::wrap( 'wp-block-latest-posts', [
-			[
-				'tag' 	=> 'ul',
-				'attrs'	=> [
-					'class' => implode( ' ', $classnames )
-				]
-			]
-		], function( $posts, $attributes ) {
-
-			$link_image 		= get_prop( $attributes, [ 'addLinkToFeaturedImage' ], false );
-			$display_author		= get_prop( $attributes, [ 'displayAuthor' ], false );
-			$display_image		= get_prop( $attributes, [ 'displayFeaturedImage' ], false );
-			$display_date		= get_prop( $attributes, [ 'displayPostDate' ], false );
-			$display_content	= get_prop( $attributes, [ 'displayPostContent' ], false );
-			$content_type		= get_prop( $attributes, [ 'displayPostContentRadio' ], 'excerpt' );
-			$columns 			= ( 12 / get_prop( $attributes, [ 'columns' ], 3 ) );
-			$list_items_markup 	= '';
-
-			foreach ( $posts as $post ) {
-				$post_link = esc_url( get_permalink( $post ) );
-				$item_class = 'wp-block-posts__post g-col-12 g-col-md-6 g-col-lg-' . $columns;
-				$item_class = implode( ' ', get_post_class( $item_class, $post ) );
-
-				$list_items_markup .= '<li class="' . $item_class . '">';
-				$list_items_markup .= '<div class="row gx-3">';
-
-				// Image
-				if ( $display_image ) {
-					$image_classes	= [ 'wp-block-posts__post-image', 'ratio' ];
-					$image_column 	= 'col-12';
-					
-					if ( $image_align = get_prop( $attributes, 'featuredImageAlign', 'center' ) ) {
-						if( in_array( $image_align, [ 'left', 'right' ] ) ) {
-							$image_column .= ' col-sm-4';
-						}
-						if( $image_align === 'right' ) {
-							$image_column .= ' order-sm-last';
-						}
-					}
-
-					if ( $link_image ) {
-						$image_classes = array_diff( $image_classes, [ 'ratio' ] );
-						$filter = function( $wrappers ) use ( $post_link ) {
-							$wrappers = array_merge( $wrappers, [
-								[
-									'tag' 	=> 'a',
-									'attrs'	=> [
-										'href' 	=> $post_link,
-										'class'	=> 'ratio',
-										'style' => 'display:block;'
-									]
-								]
-							] );
-			
-							return $wrappers;
-						};
-			
-						add_filter( 'wecodeart/filter/wrappers/get-media', $filter );
-					}
-
-					$featured_image = Media::get_image( [
-						'post_id' 	=> $post->ID,
-						'size'		=> get_prop( $attributes, 'featuredImageSizeSlug', 'thumbnail' ),
-						'attrs' 	=> [
-							'class' => implode( ' ', $image_classes )
-						]
-					], false );
-
-					if( $link_image ) {
-						remove_filter( 'wecodeart/filter/wrappers/get-media', $filter );
-					}
-
-					$list_items_markup .= sprintf( '<div class="%1$s">%2$s</div>', $image_column, $featured_image );
-				}
-
-				$list_items_markup .= '<div class="col-12 col-sm">';
-
-				// Title
-				$list_items_markup .= Title::get_instance()->render( [
-					'isLink' 	=> true,
-				], '', (object) [
-					'context' 	=> [
-						'postId' => $post->ID,
-					]
-				] );
-
-				// Meta
-				if( $display_author || $display_date ) {
-					$list_items_markup .= '<div class="wp-block-post-meta">';
-					// Author
-					if ( $display_author ) {
-						$list_items_markup .= wecodeart_template( 'meta/author', [
-							'author' 	=> (object) [
-								'name'  => get_the_author_meta( 'display_name', $post->post_author ),
-								'url'	=> get_author_posts_url( $post->post_author )
-							]
-						], false );
-					}
-
-					// Date
-					if ( $display_date ) {
-						$list_items_markup .= wecodeart_template( 'meta/date', [
-							'post_id'	=> $post->ID,
-							'published'	=> [
-								'robot'	=> get_the_date( DATE_W3C, $post ),
-								'human'	=> get_the_date( '', $post )
-							]
-						], false );
-					}
-					$list_items_markup .= '</div>';
-				}
-
-				// Content
-				if ( $display_content ) {
-					$content_html 	= '<div class="%1$s">%2$s</div>';
-					
-					if( $content_type === 'excerpt' ) {
-						$content 	= wpautop( get_the_excerpt( $post ) );
-						$classname 	= 'wp-block-post-excerpt';
-					}
-					
-					if( $content_type === 'full_post' ) {
-						$content = wp_kses_post( html_entity_decode( $post->post_content, ENT_QUOTES, get_option( 'blog_charset' ) ) );
-						$classname 	= 'wp-block-post-content';
-					}
-					
-					if ( post_password_required( $post ) ) {
-						$content = wpautop( esc_html__( 'This content is password protected.', 'wecodeart' ) );
-					}
-
-					$list_items_markup .= sprintf( $content_html, $classname, $content );
-				}
-
-				$list_items_markup .= "</div>\n";
-				$list_items_markup .= "</div>\n";
-				$list_items_markup .= "</li>\n";
+			// Author
+			if ( $display_author ) {
+				$template .= '<!-- wp:post-author {"showAvatar":false} /-->';
 			}
 
-			echo $list_items_markup;
+			// Date
+			if ( $display_date ) {
+				$template .= '<!-- wp:post-date /-->';
+			}
 
-		}, [ $recent_posts, $attributes ], false );
+			$template .= '</div>';
+			$template .= '<!-- /wp:group -->';
+		}
 
+		// Content
+		if ( $display_content ) {
+			$content_type	= get_prop( $attributes, [ 'displayPostContentRadio' ], 'excerpt' );
+			if( $content_type === 'excerpt' ) {
+				$length	= (string) get_prop( $attributes, 'excerptLength', 55 );
+				$template .= '<!-- wp:post-excerpt {"moreText":"Continue reading","textColor":"secondary"} /-->';
+			}
+			if( $content_type === 'full_post' ) {
+				$template .= '<!-- wp:post-content /-->';
+			}
+		}
+		
+		$template .= '<!-- /wp:post-template -->';
+		$template .= '</div>';
+		$template .= '<!-- /wp:query -->';
+
+		// Allow users to change this template
+		$template = apply_filters( 'wecodeart/filter/latest-posts/template', parse_blocks( $template ) );
+		// End Template
+		
+		$blocks = new \WP_Block_List( $template, $args );
+		
+		$content = '';
+
+		$block_core_latest_posts_excerpt_length = get_prop( $attributes, 'excerptLength', 55 );
+        add_filter( 'excerpt_length', 'block_core_latest_posts_get_excerpt_length', 20 );
+		foreach( $blocks as $block ) $content .= $block->render( $block );
 		remove_filter( 'excerpt_length', 'block_core_latest_posts_get_excerpt_length', 20 );
 
 		return $content;

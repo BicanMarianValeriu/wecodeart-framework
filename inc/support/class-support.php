@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.1.7
+ * @version		5.2.4
  */
 
 namespace WeCodeArt;
@@ -53,12 +53,15 @@ class Support implements ArrayAccess {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 	1.0
-	 * @version	5.1.5
+	 * @version	5.2.4
 	 */
 	public function after_setup_theme() {
 		// Theme Support
 		foreach( array_filter( wecodeart_config( 'support', [] ) ) as $feature => $value ) {
-			if( $value === false ) continue;
+			if( $value === 'remove' ) {
+                remove_theme_support( $feature );
+                continue;
+            }
 			add_theme_support( $feature, $value );
 		}
 

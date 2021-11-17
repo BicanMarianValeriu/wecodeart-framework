@@ -241,11 +241,6 @@ class Gutenberg {
 		
 		// Editor Style
 		add_editor_style( $this->get_asset( 'css', 'gutenberg/editor' ) );
-
-		// Frontend Style
-		if( get_prop( $this->config, 'styles' ) ) {
-			add_filter( 'should_load_separate_core_block_assets', '__return_false' );
-		}
 	}
 
 	/**

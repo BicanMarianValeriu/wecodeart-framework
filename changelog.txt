@@ -4,8 +4,13 @@ v5.2.4
 - Updated - Search block markup/styles
 - Updated - Columns styles to block (conditionaly when used)
 - Updated - Navigation styles/scripts to chunks loaded only when used.
+- Updated - WP Block Latest Posts - normalized to use Query Template to inherit the loop styles (with CSS modifier)
+- Updated - WP Block Latest Comments - normalized to use Comment Query Template to inherit the loop styles (with CSS modifier)
+- Updated - WeCodeArt\Support\FileSystem is now pointing to /assets/ folder
+- Added - /cache/ folder for caching certain assets like utilities.css editor style
 - Added - Block gap support to Gutenberg Styles extension
 - Added - New Utilities PHP styles extension (removed BootStrap`s utilities) / loaded when used
+- Added - wecodeart/filter/latest-comments/template to filter the latest comments widget block template (takes an array of blocks)
 
 v5.2.3
 - Fixed - Starter content conflict with WordPress default pages.

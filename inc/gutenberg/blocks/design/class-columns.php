@@ -55,7 +55,7 @@ class Columns extends Dynamic {
 	 */
 	public function styles() {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$tablet		= get_prop( $breaks, 'sm', '640px' );
+		$mobile		= get_prop( $breaks, 'sm', '640px' );
 
 		return "
 		.wp-block-columns {
@@ -83,7 +83,7 @@ class Columns extends Dynamic {
 		.wp-block-column.is-vertically-aligned-bottom {
 			align-self: flex-end;
 		}
-		@media (max-width: $tablet) {
+		@media (max-width: $mobile) {
 			.wp-block-columns:not(.is-not-stacked-on-mobile) {
 				flex-direction: column;
 			}
