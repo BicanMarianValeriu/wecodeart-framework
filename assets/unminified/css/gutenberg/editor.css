@@ -1997,9 +1997,6 @@
   flex-grow: 0;
   flex-basis: auto;
 }
-.wp-block-columns .wp-block-column ~ .wp-block-column {
-  --wp--style--block-gap: 0;
-}
 
 /*--------------------------------------------------------------
 # Hide Title

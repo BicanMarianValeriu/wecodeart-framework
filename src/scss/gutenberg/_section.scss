@@ -40,9 +40,5 @@
 			flex-grow: 0;
 			flex-basis: auto;
 		}
-		
-		& ~ .wp-block-column {
-			--wp--style--block-gap: 0;
-		}
 	}
 }
