@@ -7,7 +7,12 @@ return [
 	'template'     => 'page',
 	'post_title'   => _x( 'About', 'Theme starter content', 'wecodeart' ),
 	'post_content' => '<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"87bf1a83-fdb6-42fd-9a26-3752d8ddb580"} -->
-	<div class="wp-block-group my-5"><!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"e6e8d1f8-c885-4e8b-8e0f-4642cae91bd0"} -->
+	<div class="wp-block-group my-5">
+	<!-- wp:columns {"customCSSId":"1afa8850-b671-41f4-be8d-cbe45f28dacd"} -->
+	<div class="wp-block-columns">
+	<!-- wp:column {"customCSSId":"7379fb22-79d8-4a2a-a1c0-75ac174e4e94"} -->
+	<div class="wp-block-column">
+	<!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"e6e8d1f8-c885-4e8b-8e0f-4642cae91bd0"} -->
 	<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:35% auto"><figure class="wp-block-media-text__media">
 	<img src="https://picsum.photos/id/1/800/800" alt=""/></figure><div class="wp-block-media-text__content"><!-- wp:heading {"customCSSId":"dad02bc8-1c7b-4022-bc26-2716ac345f62"} -->
 	<h2>Our Story</h2>
@@ -22,9 +27,17 @@ return [
 	</div>
 	<!-- /wp:media-text -->
 	</div>
+	<!-- /wp:column -->
+	</div>
+	<!-- /wp:columns -->
+	</div>
 	<!-- /wp:group -->
 	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"52d87aca-e656-45b7-8fe7-86e7e16730e4"} -->
 	<div class="wp-block-group my-5">
+	<!-- wp:columns {"customCSSId":"1afa8850-b671-41f4-be8d-cbe45f28dacd"} -->
+	<div class="wp-block-columns">
+	<!-- wp:column {"customCSSId":"7779fb22-79d8-4a2a-a1c0-75ac174e4e94"} -->
+	<div class="wp-block-column">
 	<!-- wp:media-text {"align":"","mediaPosition":"right","mediaLink":"https://picsum.photos/id/180/500/500","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large","customCSSId":"f2e4a249-c2cf-460f-8117-41e8c96c8c8a"} -->
 	<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="grid-template-columns:auto 35%">
 	<figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/180/500/500" alt=""/></figure>
@@ -46,6 +59,10 @@ return [
 	</div>
 	</div>
 	<!-- /wp:media-text -->
+	</div>
+	<!-- /wp:column -->
+	</div>
+	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
 	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"c4ffdb61-20e7-41ae-a4f4-759e5fa55e84"} -->

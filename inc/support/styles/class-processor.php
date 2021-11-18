@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles\Processor
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -294,7 +294,8 @@ abstract class Processor {
 				$value = (array) $this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ];
 				$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ] = $value;
 			}
-			$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ][] = $output['prefix'] . $value . $output['units'] . $output['suffix'];
+			$value = $output['prefix'] . $value . $output['units'] . $output['suffix'];
+			$this->styles[ $output['media_query'] ][ $output['element'] ][ $output['property'] ][] = $value;
 			return;
 		}
 

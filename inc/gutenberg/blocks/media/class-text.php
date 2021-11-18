@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.5
+ * @version		5.2.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -68,7 +68,6 @@ class Text extends Dynamic {
 		}
 		.wp-block-media-text__content {
 			flex: 1 0 0%;
-			padding: 1rem;
 		}
 		.wp-block-media-text__media {
 			overflow: hidden;

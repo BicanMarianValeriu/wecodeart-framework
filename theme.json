@@ -151,6 +151,7 @@
 			"wideSize": "1440px"
 		},
 		"spacing": {
+			"blockGap": true,
 			"customMargin": true,
 			"customPadding": true,
 			"units": [
@@ -328,9 +329,13 @@
 					"radius": "0.25rem"
 				}
 			},
-			"core/column": {
+			"core/buttons": {
 				"spacing": {
-					"blockGap": "1rem",
+					"blockGap": "1rem"
+				}
+			},
+			"core/columns": {
+				"spacing": {
 					"padding": {
 						"left": "1rem",
 						"right": "1rem"

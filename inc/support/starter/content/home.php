@@ -36,12 +36,12 @@ return [
 	</div>
 	<!-- /wp:cover -->
 	
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true},"customCSSId":"36705f8d-d33b-4c1d-a857-2c54ef5ae3fd"} -->
-	<div class="wp-block-group my-5">
+	<!-- wp:group {"className":"my-md-5","layout":{"inherit":true},"customCSSId":"36705f8d-d33b-4c1d-a857-2c54ef5ae3fd"} -->
+	<div class="wp-block-group my-md-5">
 	<!-- wp:columns {"className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
-	<!-- wp:column {"style":{"spacing":{"padding":{"top":"20px"}}},"className":"mt-5 shadow-sm rounded","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
-	<div class="wp-block-column mt-5 shadow-sm rounded" style="padding-top:20px">
+	<!-- wp:column {"className":"p-2 mt-5 shadow-sm rounded","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
+	<div class="wp-block-column p-2 mt-5 shadow-sm rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"fe797173-3ba3-4f69-9313-77ef04bccf26"} -->
 	<div class="wp-block-image">
 	<figure class="aligncenter size-large is-resized">
@@ -50,17 +50,17 @@ return [
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3,"customCSSId":"39382e17-6b0f-4158-b420-9542f61bcf3c"} -->
-	<h3 class="has-text-align-center has-primary-color has-text-color">Fixed Price Projects</h3>
+	<h3 class="has-text-align-center has-primary-color has-text-color">Is FREE! Forever</h3>
 	<!-- /wp:heading -->
 	
 	<!-- wp:paragraph {"align":"center","customCSSId":"cb51d812-c54b-4a84-9cf7-9ad72e4bc9d6"} -->
-	<p class="has-text-align-center">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
+	<p class="has-text-align-center">WeCodeArt Framework will allways be free as long as I can maitain it.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
 	
-	<!-- wp:column {"style":{"spacing":{"padding":{"top":"20px"}}},"className":"my-5 mt-md-0 shadow rounded","customCSSId":"d08919b0-bc3a-4bb9-9693-548d0f7b572a"} -->
-	<div class="wp-block-column my-5 mt-md-0 shadow rounded" style="padding-top:20px">
+	<!-- wp:column {"className":"p-2 my-5 mt-md-0 shadow rounded","customCSSId":"d08919b0-bc3a-4bb9-9693-548d0f7b572a"} -->
+	<div class="wp-block-column p-2 my-5 mt-md-0 shadow rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"38f71f14-639f-4298-a0ae-06398205f0b4"} -->
 	<div class="wp-block-image">
 	<figure class="aligncenter size-large is-resized">
@@ -70,17 +70,17 @@ return [
 	<!-- /wp:image -->
 	
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3,"customCSSId":"e4e0c759-181f-476e-b553-82b5a09faf53"} -->
-	<h3 class="has-text-align-center has-primary-color has-text-color">Receive on time</h3>
+	<h3 class="has-text-align-center has-primary-color has-text-color">Unparalleled speed</h3>
 	<!-- /wp:heading -->
 	
 	<!-- wp:paragraph {"align":"center","customCSSId":"976d5ea4-0585-41c4-b445-ef937214897c"} -->
-	<p class="has-text-align-center">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
+	<p class="has-text-align-center">Fastest loading times of all WP.org themes. See for yourself by doing a speedtest.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
 	
-	<!-- wp:column {"style":{"spacing":{"padding":{"top":"20px"}}},"className":"mt-5 shadow-sm rounded","customCSSId":"06fa0ffd-90c8-4393-aeaf-578718388f09"} -->
-	<div class="wp-block-column mt-5 shadow-sm rounded" style="padding-top:20px">
+	<!-- wp:column {"className":"p-2 mt-md-5 mb-5 mb-md-0 shadow-sm rounded","customCSSId":"06fa0ffd-90c8-4393-aeaf-578718388f09"} -->
+	<div class="wp-block-column p-2 mt-md-5 mb-5 mb-md-0 shadow-sm rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large","customCSSId":"0eb2eefc-860a-415b-a610-bdf051561877"} -->
 	<div class="wp-block-image">
 	<figure class="aligncenter size-large is-resized">
@@ -94,7 +94,7 @@ return [
 	<!-- /wp:heading -->
 	
 	<!-- wp:paragraph {"align":"center","customCSSId":"f147fedf-20f8-4d2f-b453-2871cfd6e994"} -->
-	<p class="has-text-align-center">Lorem ipsum dolor sit amet elit do, consectetur adipiscing, sed eiusmod tempor.</p>
+	<p class="has-text-align-center">Build simple sites in no time with Gutenberg pagebuilder. No extra plugins are required.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
@@ -105,6 +105,10 @@ return [
 	
 	<!-- wp:group {"layout":{"inherit":true},"customCSSId":"c43b5384-22fe-47e5-afea-f0314a3020dc"} -->
 	<div class="wp-block-group">
+	<!-- wp:columns {"customCSSId":"1afa8850-b671-41f4-be8d-cbe45f28dacd"} -->
+	<div class="wp-block-columns">
+	<!-- wp:column {"customCSSId":"7779fb22-79d8-4a2a-a1c0-75ac174e4e94"} -->
+	<div class="wp-block-column">
 	<!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","customCSSId":"36630e35-f690-4e56-9888-ea818333e9bb"} -->
 	<div class="wp-block-media-text is-stacked-on-mobile">
 	<figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure>
@@ -148,6 +152,10 @@ return [
 	</div>
 	</div>
 	<!-- /wp:media-text -->
+	</div>
+	<!-- /wp:column -->
+	</div>
+	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
 	
