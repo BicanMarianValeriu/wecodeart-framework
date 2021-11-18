@@ -54,7 +54,7 @@ return [
 	<!-- /wp:heading -->
 	
 	<!-- wp:paragraph {"align":"center","customCSSId":"cb51d812-c54b-4a84-9cf7-9ad72e4bc9d6"} -->
-	<p class="has-text-align-center">WeCodeArt Framework will allways be free as long as I can maitain it.</p>
+	<p class="has-text-align-center">WeCodeArt Framework will allways be free with all future updates.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
@@ -168,7 +168,7 @@ return [
 	<hr class="wp-block-separator has-text-color has-background has-primary-background-color has-primary-color is-style-dots"/>
 	<!-- /wp:separator -->
 	
-	<!-- wp:columns {"className":"flex-column flex-lg-row","customCSSId":"f33ab325-d656-492e-a80f-d78c1986cc45"} -->
+	<!-- wp:columns {"style":{"spacing":{"blockGap":"1rem"}},"className":"flex-column flex-lg-row","customCSSId":"f33ab325-d656-492e-a80f-d78c1986cc45"} -->
 	<div class="wp-block-columns flex-column flex-lg-row">
 	<!-- wp:column {"className":"mb-3 mb-lg-0","customCSSId":"94cc5be7-5b81-42e5-ae99-eb9002054c16"} -->
 	<div class="wp-block-column mb-3 mb-lg-0">
