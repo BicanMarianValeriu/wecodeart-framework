@@ -251,6 +251,9 @@ class Styles implements Integration {
 			}
 
 			$content 	= preg_replace( $regex, '$1', $content, $passes );
+			
+			// Reset and clean once more - the ones with style then class attribute!
+			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, 1 );
 		}
 
 		// Add necessary class
