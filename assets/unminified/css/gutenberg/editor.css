@@ -1990,8 +1990,14 @@
   border-top: 1px solid #efefef;
   border-bottom: 1px solid #efefef;
 }
-
-.wp-block-column ~ .wp-block-column {
+.wp-block-columns .wp-block-column {
+  flex: 1 0 0%;
+}
+.wp-block-columns .wp-block-column[class*=col-] {
+  flex-grow: 0;
+  flex-basis: auto;
+}
+.wp-block-columns .wp-block-column ~ .wp-block-column {
   --wp--style--block-gap: 0;
 }
 
