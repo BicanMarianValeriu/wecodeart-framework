@@ -38,7 +38,7 @@ return [
 	
 	<!-- wp:group {"className":"my-md-5","layout":{"inherit":true},"customCSSId":"36705f8d-d33b-4c1d-a857-2c54ef5ae3fd"} -->
 	<div class="wp-block-group my-md-5">
-	<!-- wp:columns {"className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
+	<!-- wp:columns {"style":{"spacing":{"blockGap":"1rem"}},"className":"flex-column flex-md-row","customCSSId":"900c11d0-2587-4c04-88c0-b142dc389f17"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
 	<!-- wp:column {"className":"p-2 mt-5 shadow-sm rounded","customCSSId":"b784755a-9248-4e48-af08-681538544412"} -->
 	<div class="wp-block-column p-2 mt-5 shadow-sm rounded">
