@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles\Processor
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.2.4
+ * @version		5.2.6
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Support\Styles;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Support\Styles;
+use WeCodeArt\Support\Styles\Property;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -314,7 +315,22 @@ abstract class Processor {
 	 * @return 	string|array
 	 */
 	protected function get_property_value( string $property, $value ) {
-		return Styles::get_property_value( $property, $value );
+		$properties = apply_filters( 'wecodeart/filter/styles/process/properties', [
+			'--wp--font-sans-serif'	=> Property\Font::class,
+			'--wp--font-secondary'	=> Property\Font::class,
+			'font-family' 			=> Property\Font::class,
+			'background' 			=> Property\Background::class,
+			'background-image'		=> Property\Background::class,
+			'background-position' 	=> Property\Focal::class,
+		] );
+
+		if ( array_key_exists( $property, $properties ) ) {
+			$classname = $properties[ $property ];
+			$obj = new $classname( $property, $value );
+			return $obj->get_value();
+		}
+
+		return esc_attr( $value );
 	}
 
 	/**
@@ -329,6 +345,7 @@ abstract class Processor {
 			return $this->get_property_value( $output['property'], $output['value'] );
 		}
 		
+		// Unfiltered for rare cases
 		return $output['value'];
 	}
 

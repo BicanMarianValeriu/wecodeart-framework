@@ -21,10 +21,6 @@ const addAttributes = (props) => {
 	const isRestrictedBlock = restrictedBlocks.includes(name);
 	if (!isRestrictedBlock) {
 		props.attributes = assign(props.attributes, {
-			customCSSId: {
-				type: 'string',
-				default: null
-			},
 			customCSS: {
 				type: 'string',
 				default: null
@@ -45,14 +41,10 @@ const addAttributes = (props) => {
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const { name, clientId, attributes: { customCSSId }, setAttributes } = props;
+		const { name } = props;
 		const isRestrictedBlock = restrictedBlocks.includes(name);
 
 		if (!isRestrictedBlock) {
-			if (!customCSSId) {
-				setAttributes({ customCSSId: clientId });
-			}
-
 			return (
 				<>
 					<BlockEdit {...props} />

@@ -229,10 +229,6 @@ const addAttributes = props => {
 
   if (!isRestrictedBlock) {
     props.attributes = assign(props.attributes, {
-      customCSSId: {
-        type: 'string',
-        default: null
-      },
       customCSS: {
         type: 'string',
         default: null
@@ -255,22 +251,11 @@ const addAttributes = props => {
 const withInspectorControl = createHigherOrderComponent(BlockEdit => {
   return props => {
     const {
-      name,
-      clientId,
-      attributes: {
-        customCSSId
-      },
-      setAttributes
+      name
     } = props;
     const isRestrictedBlock = restrictedBlocks.includes(name);
 
     if (!isRestrictedBlock) {
-      if (!customCSSId) {
-        setAttributes({
-          customCSSId: clientId
-        });
-      }
-
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorAdvancedControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Editor__WEBPACK_IMPORTED_MODULE_1__["default"], props)));
     }
 

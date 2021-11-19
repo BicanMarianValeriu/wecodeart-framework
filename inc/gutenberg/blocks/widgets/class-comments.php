@@ -108,10 +108,10 @@ class Comments extends Dynamic {
 
 			// Comment Author Avatar
 			if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
-				$template .= '<!-- wp:comment-author-avatar {"backgroundColor":"white","className":"float-start rounded-circle me-3","width":50,"height":50,"customCSSId":"5cbsss36-62f1-4fcf-b02d-630eba697bf9"} /-->';
+				$template .= '<!-- wp:comment-author-avatar {"backgroundColor":"white","className":"float-start rounded-circle me-3","width":50,"height":50} /-->';
 			}
 			
-			$template .= '<!-- wp:group {"className":"gap-1 clearfix","customCSSId":"5cb4e436-62f1-4fcf-b02d-630eba697bf9"} -->';
+			$template .= '<!-- wp:group {"className":"gap-1 clearfix"} -->';
 			$template .= '<div class="wp-block-group gap-1 clearfix">';
 
 			// Comment Author
@@ -126,18 +126,18 @@ class Comments extends Dynamic {
 
 			// Comment Content
 			if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
-				$template .= '<!-- wp:comment-content {"backgroundColor":"white","className":"p-3 my-3 border rounded","customCSSId":"5c64e436-62f1-4fcf-b02d-630eba697bf9"} /-->';
+				$template .= '<!-- wp:comment-content {"backgroundColor":"white","className":"p-3 my-3 border rounded"} /-->';
 			}
 
 			// Allow users to change this template
-			$template = apply_filters( 'wecodeart/filter/latest-comments/template', parse_blocks( $template ) );
+			$template = apply_filters( 'wecodeart/filter/gutenberg/latest-comments/template', parse_blocks( $template ) );
 			
 			foreach( $comments as $comment ) {
-				$blocks = new \WP_Block_List( $template, [
+				$blocks 	= new \WP_Block_List( $template, [
 					'commentId' => $comment->comment_ID
 				] );
 
-				$content      .= Markup::wrap( 'wp-block-latest-comments-item', [
+				$content	.= Markup::wrap( 'wp-block-latest-comments-item', [
 					[
 						'tag' 	=> 'li',
 						'attrs'	=> [

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.2.4
+ * @version		5.2.6
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -105,24 +105,30 @@ class Styles implements Integration {
 		$this->CSS 			= wecodeart( 'integrations' )->get( 'styles' );
 		$this->Utilities 	= Utilities::get_instance();
 
+		// Custom Style Attributes support
+		\WP_Block_Supports::get_instance()->register( 'styleCustom', [
+			'register_attribute' => [ $this, 'register_attribute' ],
+		] );
+
 		// Hooks
 		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
-		add_action( 'init', 						[ $this, 'setup_utilities' 		], 100 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 30, 2 );
-		add_action( 'wp_loaded', 					[ $this, 'add_attributes'		], 10, 1 );
 		add_action( 'wp_enqueue_scripts',  			[ $this, 'template_styles' 		], 10, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 10, 1 );
 		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 10, 1 );
+		add_action( 'init', 						[ $this, 'setup_utilities' 		], 100 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
+		remove_filter( 'render_block', 'wp_render_spacing_gap_support', 10, 2 );
 		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
 		remove_filter( 'render_block', 'wp_render_elements_support', 	10, 2 );
 		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
 
 		// Eventually it will be removed - 1 check since they are all from GB.
 		if( function_exists( 'gutenberg_render_layout_support_flag' ) ) {
+			remove_filter( 'render_block', 'gutenberg_render_spacing_gap_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
@@ -157,7 +163,7 @@ class Styles implements Integration {
 		$has_cached = $filesystem->has_file( self::UTILITIES );
 
 		if( ! $has_cached || false === get_transient( 'wecodeart/gutenberg/utilities' ) ) {
-			$filesystem->create_file( self::UTILITIES, wp_strip_all_tags( $inline_css ) );
+			$filesystem->create_file( self::UTILITIES, $inline_css );
 			set_transient( 'wecodeart/gutenberg/utilities', true, 5 * MINUTE_IN_SECONDS );
 		}
 
@@ -179,29 +185,20 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes` error.
+	 * Adds the `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes` error.
 	 *
-	 * @since   5.2.2
+	 * @since   5.2.
 	 *
 	 * @return 	void
 	 */
-	public function add_attributes() {
-		// Add Attributes
-		$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+	public function register_attribute( $block ) {
+		// Currently we suport only core blocks
+		if( ! in_array( $block->name, self::core_blocks() ) ) return;
 
-		foreach ( $registered_blocks as $name => $block ) {
-			if( ! in_array( $name, self::core_blocks() ) ) continue;
-
-			$block->attributes['customCSSId'] = [
-				'type'    => 'string',
-				'default' => null,
-			];
-
-			$block->attributes['customCSS'] = [
-				'type'    => 'string',
-				'default' => null,
-			];
-		}
+		$block->attributes['customCSS'] = [
+			'type'    => 'string',
+			'default' => null,
+		];
 	}
 
 	/**
@@ -213,15 +210,21 @@ class Styles implements Integration {
 	 * @return 	string 	HTML
 	 */
 	public function filter_render( $content, $block ) {
-		$block_id 	= get_prop( $block['attrs'], 'customCSSId', false );
-		$block_name	= get_prop( $block, 'blockName' );
-		
-		if( in_array( $block_id, self::$processed ) || $block_id === false ) return $content;
+		// Process a block
+		$processed 	= self::process_block( $block );
 
+		$block_id	= ltrim( $processed->get_element(), '.' );
+
+		$styles 	= $processed->get_styles();
+		$classes	= $processed->get_classes();
+		$filters	= $processed->get_duotone();
+
+		if( in_array( $block_id, self::$processed ) ) return $content;
+
+		$block_name	= get_prop( $block, 'blockName' );
 		// Remove styles, where needed.
 		// I'm not happy with this way but there is no other way to remove style attributes that I know, on PHP.
 		// It would be ok with JS but that breaks the blocks.
-		// Other way that could work would be rest renderer but you need to unset pretty much all attributes.
 		if ( in_array( $block_name, self::core_blocks() ) ) {
 			// Target anything for most of the blocks.
 			$regex		= '/(<[^>]+) style="([^"]*)"/i';
@@ -252,29 +255,21 @@ class Styles implements Integration {
 
 			$content 	= preg_replace( $regex, '$1', $content, $passes );
 			
-			// Reset and clean once more - the ones with style then class attribute!
+			// Reset and clean once more - any leftovers!
 			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, 1 );
 		}
 
 		// Add necessary class
-		$cssid		= substr( $block_id, 0, 8 );
-		$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="css-' . $cssid . ' ', $content, 1 );
-
-		// Process a block
-		$processed 	= self::process_block( $block );
-		
-		$styles 	= $processed->get_styles();
-		$classes	= $processed->get_classes();
-		$filters	= $processed->get_duotone();
+		$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="' . $block_id . ' ', $content, 1 );
 
 		// Process CSS, add prefixes and convert to string!
 		if( $styles ) {
-			$this->styles[$cssid] = $styles;
+			$this->styles[$block_id] = $styles;
 		}
 		
 		// Process Duotone SVG filters
 		if( $filters ) {
-			$this->filters[$cssid] = $filters;
+			$this->filters[$block_id] = $filters;
 		}
 		
 		// Utilities CSS
@@ -331,7 +326,7 @@ class Styles implements Integration {
 		// Process Attributes
 		if( ! empty( $this->styles ) ) {
 			foreach( $this->styles as $styles ) {
-				$processed 	= $this->CSS::parse( $styles );
+				$processed 	= $this->CSS::parse( $this->CSS::add_prefixes( $styles ) );
 				$inline_css .= $this->CSS::compress( $processed );
 			}
 		}
@@ -380,7 +375,8 @@ class Styles implements Integration {
 	 * @return 	string
 	 */
 	public function add_link_styles() {
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
 		$link_color = wecodeart_json( [ 'styles', 'elements', 'link', 'color', 'text' ], false );
 

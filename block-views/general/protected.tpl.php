@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Protected Template
  * @since 	    3.5
- * @version	    5.1.8
+ * @version	    5.2.6
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -29,13 +29,13 @@ SVG::add_icon( 'unlock', [
  * @param   string  $action       Contains the form action url
  */
 ?>
-<form action="<?php echo esc_url( $action ); ?>" method="post" class="border-light rounded shadow-sm p-3">
+<form action="<?php echo esc_url( $action ); ?>" method="post">
     <h4><?php
     
         esc_html_e( 'This post is password protected. To view this post, enter the password below!', 'wecodeart' );
         
     ?></h4>
-    <div class="input-group pt-3 pb-2"> 
+    <div class="input-group"> 
         <span class="input-group-text"><?php 
         
             SVG::render( 'unlock', [
@@ -55,7 +55,7 @@ SVG::add_icon( 'unlock', [
         ] );
 
         wecodeart_input( 'button', [
-            'label' => SVG::compile( 'key', [ 'class' => 'me-2' ] ) . sprintf( '<span>%s</span>', esc_html__( 'Unlock', 'wecodeart' ) ),
+            'label' => SVG::compile( 'key' ) . sprintf( '<span>%s</span>', esc_html__( 'Unlock', 'wecodeart' ) ),
             'attrs' => [
                 'class' => 'btn btn-outline-dark',
             ]

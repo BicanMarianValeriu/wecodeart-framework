@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.2
+ * @version		5.2.6
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -73,8 +73,8 @@ class Blocks extends Processor {
 	 * @return 	mixed
 	 */
 	protected function set_element() {
-		$block_class 	= substr( get_prop( $this->attrs, 'customCSSId' ), 0, 8 );
-		$this->element = '.css-' . sanitize_html_class( $block_class );
+		$element = wp_unique_id( '.css-' );
+		$this->element = apply_filters( 'wecodeart/filter/gutenberg/styles/element', $element, $this->name );
 	}
 
 	/**
@@ -295,13 +295,12 @@ class Blocks extends Processor {
 					}
 
 					if( $duotone_support ) {
-						$selector_array = explode( '-', $this->element );
 						$this->output[] = wp_parse_args( [
 							'element'	=> implode( ', ', array_map( function ( $selector ) {
 								return implode( ' ', [ $this->element, trim( $selector ) ] );
 							}, explode( ',', $duotone_support ) ) ),
 							'property' 	=> 'filter',
-							'value'	  	=> sprintf( 'url(#wp-duotone-%s)', end( $selector_array ) )
+							'value'	  	=> sprintf( 'url(#wp-duotone-%s)', ltrim( $this->element, '.' ) )
 						], $output );
 					}
 				}
@@ -408,7 +407,8 @@ class Blocks extends Processor {
 		if ( $css_custom = get_prop( $this->attrs, 'customCSS', false ) ) {
 			$custom_style 	= wp_strip_all_tags( $css_custom );
 			$custom_style 	= str_replace( 'selector', $this->element, $custom_style );
-			$custom_style 	= wecodeart( 'integrations' )->get( 'styles' )::break_queries( $custom_style );
+			$custom_style 	= wecodeart( 'integrations' )->get( 'styles' )::string_to_array_query( $custom_style );
+			// Array replace existing CSS rules - custom overwrites everything
 			$this->styles 	= array_replace_recursive( $this->styles, $custom_style );
 		}
 	}
@@ -453,6 +453,15 @@ class Blocks extends Processor {
 	 * @return 	array
 	 */
 	public function get_classes() {
-		return array_filter( explode( ' ', get_prop( $this->attrs, 'className', '' ) ) );
+		return array_unique( array_filter( explode( ' ', get_prop( $this->attrs, 'className', '' ) ) ) );
+	}
+	
+	/**
+	 * Get uniqueID.
+	 *
+	 * @return 	array
+	 */
+	public function get_element() {
+		return $this->element;
 	}
 }

@@ -168,7 +168,7 @@ final class Styles implements Integration {
 
 		foreach( $css as $query => $selectors ) {
 			$final_css .= ( 'global' !== $query ) ? $query . '{' : '';
-			$final_css .= self::array_to_css( $selectors );
+			$final_css .= self::array_to_string( $selectors );
 			$final_css .= ( 'global' !== $query ) ? '}' : '';
 		}
 
@@ -183,7 +183,7 @@ final class Styles implements Integration {
 	 *
 	 * @return string
 	 */
-	public static function array_to_css( array $selectors = [], $indent = 0 ) {
+	public static function array_to_string( array $selectors = [], $indent = 0 ) {
 		$css    = '';
 		$prefix = str_repeat( '  ', $indent );
 
@@ -236,15 +236,13 @@ final class Styles implements Integration {
 	 *
 	 * @return 	array          	The generated CSS array.
 	 */
-	public static function break( string $css = '' ) {
+	public static function string_to_array( string $css = '' ) {
 		$results = [];
-		// preg_match_all( '/(.+?)\s?\{\s?(.+?)\s?\}/', $css, $arr );
-		// preg_match_all( '/([^\{\}]+)\{([^\}]*)\}/ims', $css, $arr );
-		
 		// Escape base64 images
 		$css = preg_replace( '/(data\:[^;]+);/i', '$1~£&#', $css );
 		// Split rules
 		preg_match_all( '/(?ims)([a-z0-9\s\,\.\:#_\-@]+)\{([^\}]*)\}/', $css, $arr );
+
 		foreach( $arr[0] as $i => $x ) {
 			$selector 	= trim( $arr[1][$i] );
 			$results[$selector] = [];
@@ -266,11 +264,11 @@ final class Styles implements Integration {
 	 *
 	 * @return 	array          	The generated CSS array.
 	 */
-	public static function break_queries( string $css = '' ) {
+	public static function string_to_array_query( string $css = '' ) {
 		$queries 	= [];
 		$start 		= 0;
 		$global 	= preg_replace( '/@media[^{]+\{([\s\S]+?\})\s*\}/i', '', $css );
-		$queries['global'] = self::break( $global );
+		$queries['global'] = self::string_to_array( $global );
 
 		while( ( $start = strpos( $css, '@media', $start ) ) !== false ) {
 			$s = [];
@@ -285,7 +283,7 @@ final class Styles implements Integration {
 				}
 				preg_match( '/(\@media[^\{]+)\{(.*)\}\s+/ims', substr( $css, $start, ( $i + 1 ) - $start ), $block );
 				list( , $media, $styles ) = $block;
-				$styles = self::break( $styles );
+				$styles = self::string_to_array( $styles );
 				$queries[trim( $media)] = isset( $queries[trim( $media)] ) ? $queries[trim( $media)] + $styles : $styles;
 				$start = $i;
 			}
@@ -346,48 +344,6 @@ final class Styles implements Integration {
 
 		return $css;
     }
-	
-	/**
-	 * Check if string is empty without accepting zero
-	 *
-	 * @since   5.0.0
-	 * @param 	string $var Var to check.
-	 *
-	 * @return 	bool
-	 */
-	public static function is_empty( $var ) {
-		return empty( $var ) && 0 !== $var;
-	}
-
-	/**
-	 * Get block attribute value with default
-	 *
-	 * @since   5.0.0
-	 * @param 	mixed $attr 	Attributes.
-	 * @param 	mixed $default 	Default value.
-	 *
-	 * @return 	mixed
-	 */
-	public static function get_attr_value( $attr, $default = 'unset' ) {
-		if ( ! self::is_empty( $attr ) ) {
-			return $attr;
-		} else {
-			return $default;
-		}
-	}
-
-	/**
-	 * Get CSS value
-	 *
-	 * @since   5.0.0
-	 * @param  	string $property	CSS prop.
-	 * @param  	string $value		CSS value.
-	 *
-	 * @return 	mixed				CSS value depends on $property
-	 */
-	public static function get_property_value( string $property, $value ) {
-		return Styles\Property::get_property_value( $property, $value );
-	}
 
 	/**
 	 * Convert HEX to RGBA.
@@ -398,7 +354,7 @@ final class Styles implements Integration {
 	 *
 	 * @return 	mixed
 	 */
-	public static function hex_rgba( string $color, $opacity = false ) {
+	public static function hex_to_rgba( string $color, $opacity = false ) {
 		$default = 'rgb(0,0,0)';
 
 		if ( empty( $color ) ) {
@@ -475,7 +431,7 @@ final class Styles implements Integration {
 	 */
 	public static function color_lightness( string $color ) {
 		$mode 	= ( false === strpos( $color, 'rgba' ) ) ? 'hex' : 'rgba';
-		$color 	= $mode === 'hex' ? self::hex_rgba( $color ) : $color; 
+		$color 	= $mode === 'hex' ? self::hex_to_rgba( $color ) : $color; 
 		preg_match_all( "/\(([^\]]*)\)/" , $color, $matches );
 		return intval( array_sum( explode( ',', current( $matches[1] ) ) ) );
 	}

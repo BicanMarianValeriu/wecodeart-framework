@@ -1,3 +1,10 @@
+v5.2.6
+- Updated - Gutenberg Styles extension will process all blocks / customCSSId block attribute is not required anymore
+- Updated - Styles extension better method naming
+- Removed - Styles extension unnecessary methods
+- Removed - customCSSId attribute from starter content
+- Added - Gutenberg Styles extension filter CSS element (class or ID) via 
+
 v5.2.5
 - Fixed - Fatal error caused by Navigation WP_Block_List namespacing
 

@@ -107,7 +107,7 @@ class Posts extends Dynamic {
 		
 		// Meta
 		if( $display_author || $display_date ) {
-			$template .= '<!-- wp:group {"className":"gap-1 mb-1","layout":{"type":"flex","allowOrientation":false},"customCSSId":"5aa4e436-62f1-4fcf-b02d-630eba697bf9"} -->';
+			$template .= '<!-- wp:group {"className":"gap-1 mb-1","layout":{"type":"flex","allowOrientation":false}} -->';
 			$template .= '<div class="wp-block-group gap-1 mb-1">';
 
 			// Author
@@ -141,7 +141,7 @@ class Posts extends Dynamic {
 		$template .= '<!-- /wp:query -->';
 
 		// Allow users to change this template
-		$template = apply_filters( 'wecodeart/filter/latest-posts/template', parse_blocks( $template ) );
+		$template = apply_filters( 'wecodeart/filter/gutenberg/latest-posts/template', parse_blocks( $template ) );
 		// End Template
 		
 		$blocks = new \WP_Block_List( $template, $args );

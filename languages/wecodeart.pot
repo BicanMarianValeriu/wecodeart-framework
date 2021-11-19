@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-13 17:33+0000\n"
+"POT-Creation-Date: 2021-11-19 17:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,35 +16,30 @@ msgstr ""
 "X-Loco-Version: 2.5.0; wp-5.6.1\n"
 "X-Domain: wecodeart"
 
-#: block-views/meta/comments.tpl.php:53
+#: block-views/meta/comments.tpl.php:60
 #, php-format
 msgid " on %s"
 msgstr ""
 
-#: block-views/meta/comments.tpl.php:45
+#: block-views/meta/comments.tpl.php:52
 msgid "% Comments"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-comments.php:144
-#, php-format
-msgid "%1$s on %2$s"
-msgstr ""
-
-#: inc/core/class-core.php:128
+#: inc/core/class-core.php:126
 #, php-format
 msgid "%s Archives"
 msgstr ""
 
-#: block-views/meta/author-box.tpl.php:58 block-views/meta/author.tpl.php:47
+#: block-views/meta/author-box.tpl.php:59 block-views/meta/author.tpl.php:44
 #, php-format
 msgid "%s`s avatar"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-rss.php:121
+#: inc/gutenberg/blocks/widgets/class-rss.php:131
 msgid "(no title)"
 msgstr ""
 
-#: block-views/meta/comments.tpl.php:44
+#: block-views/meta/comments.tpl.php:51
 msgid "1 Comment"
 msgstr ""
 
@@ -64,12 +59,12 @@ msgid ""
 "perfect tool for any developer."
 msgstr ""
 
-#: block-views/meta/author-box.tpl.php:42
+#: block-views/meta/author-box.tpl.php:43
 #, php-format
 msgid "About %s"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:163
+#: inc/gutenberg/blocks/comment/class-template.php:162
 msgid "add one"
 msgstr ""
 
@@ -83,11 +78,11 @@ msgstr ""
 msgid "ANR Captcha support is enabled!"
 msgstr ""
 
-#: inc/core/class-core.php:136
+#: inc/core/class-core.php:134
 msgid "Archives"
 msgstr ""
 
-#: inc/core/class-core.php:109
+#: inc/core/class-core.php:107
 #, php-format
 msgid "Author Archives: %s"
 msgstr ""
@@ -96,7 +91,7 @@ msgstr ""
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr ""
 
-#: inc/core/class-core.php:134
+#: inc/core/class-core.php:132
 msgid "Blog"
 msgstr ""
 
@@ -105,7 +100,7 @@ msgstr ""
 msgid "Built on %1s."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:237
+#: inc/gutenberg/blocks/comment/class-form.php:235
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr ""
@@ -114,11 +109,11 @@ msgstr ""
 msgid "Cancel reply"
 msgstr ""
 
-#: inc/support/plugins/anr/class-anr.php:151
+#: inc/support/plugins/anr/class-anr.php:152
 msgid "Captcha *"
 msgstr ""
 
-#: inc/core/class-core.php:99
+#: inc/core/class-core.php:97
 #, php-format
 msgid "Category Archives: %s"
 msgstr ""
@@ -128,16 +123,16 @@ msgstr ""
 msgid "Comment *"
 msgstr ""
 
-#: block-views/meta/comments.tpl.php:47
+#: block-views/meta/comments.tpl.php:54
 msgid "Comments are Closed"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:224
-#: inc/gutenberg/blocks/comment/class-template.php:235
+#: inc/gutenberg/blocks/comment/class-template.php:223
+#: inc/gutenberg/blocks/comment/class-template.php:234
 msgid "Comments Navigation"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:176
+#: inc/gutenberg/blocks/comment/class-template.php:175
 #, php-format
 msgctxt "comments title"
 msgid "%1$s comment"
@@ -160,7 +155,7 @@ msgstr ""
 msgid "Customizer"
 msgstr ""
 
-#: inc/core/class-core.php:124
+#: inc/core/class-core.php:122
 #, php-format
 msgid "Daily Archives: %s"
 msgstr ""
@@ -211,7 +206,7 @@ msgstr ""
 msgid "https://www.wecodeart.com/about/"
 msgstr ""
 
-#: block-views/meta/comments.tpl.php:43
+#: block-views/meta/comments.tpl.php:50
 msgid "Leave a Comment"
 msgstr ""
 
@@ -227,12 +222,12 @@ msgstr ""
 msgid "Missing notification id"
 msgstr ""
 
-#: inc/core/class-core.php:120
+#: inc/core/class-core.php:118
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr ""
 
-#: inc/core/class-core.php:119
+#: inc/core/class-core.php:117
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr ""
@@ -241,11 +236,11 @@ msgstr ""
 msgid "Name *"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:161
+#: inc/gutenberg/blocks/comment/class-template.php:160
 msgid "No comments"
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-template.php:106
+#: inc/gutenberg/blocks/post/class-template.php:119
 msgid "Nothing found matching your criteria."
 msgstr ""
 
@@ -269,21 +264,21 @@ msgstr ""
 msgid "Please define a callback function for each of the modules."
 msgstr ""
 
-#: inc/core/class-core.php:131
+#: inc/core/class-core.php:129
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr ""
 
-#: block-views/meta/date.tpl.php:60
+#: block-views/meta/date.tpl.php:64
 #, php-format
 msgid "Post updated on %s."
 msgstr ""
 
-#: block-views/meta/terms.tpl.php:54
+#: block-views/meta/terms.tpl.php:55
 msgid "Posted in"
 msgstr ""
 
-#: block-views/meta/date.tpl.php:44
+#: block-views/meta/date.tpl.php:45
 msgid "Posted on "
 msgstr ""
 
@@ -291,7 +286,7 @@ msgstr ""
 msgid "Primary Menu"
 msgstr ""
 
-#: inc/support/class-support.php:71
+#: inc/support/class-support.php:74
 msgid "Primary Navigation"
 msgstr ""
 
@@ -305,7 +300,7 @@ msgstr ""
 msgid "Request method %1$s is not valid."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:274
+#: inc/gutenberg/blocks/comment/class-form.php:272
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr ""
@@ -319,7 +314,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: inc/core/class-core.php:94
+#: inc/core/class-core.php:92
 #, php-format
 msgid "Search Results for \"%s\"."
 msgstr ""
@@ -328,7 +323,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: inc/gutenberg/class-gutenberg.php:322
+#: inc/gutenberg/class-gutenberg.php:317
 msgid "Skip to content"
 msgstr ""
 
@@ -336,7 +331,7 @@ msgstr ""
 msgid "Speak Your Mind"
 msgstr ""
 
-#: inc/core/class-core.php:104
+#: inc/core/class-core.php:102
 #, php-format
 msgid "Tag Archives: %s"
 msgstr ""
@@ -354,7 +349,7 @@ msgctxt "Theme starter content"
 msgid "About"
 msgstr ""
 
-#: inc/support/starter/class-starter.php:173
+#: inc/support/starter/class-starter.php:174
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr ""
@@ -369,11 +364,7 @@ msgctxt "Theme starter content"
 msgid "Logo"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-posts.php:237
-msgid "This content is password protected."
-msgstr ""
-
-#: inc/gutenberg/blocks/comment/class-template.php:92
+#: inc/gutenberg/blocks/comment/class-template.php:91
 msgid ""
 "This post is password protected. Enter the password to view comments or "
 "leave a comment."
@@ -434,12 +425,12 @@ msgstr ""
 msgid "When extending %s, you must create a `get_html` method."
 msgstr ""
 
-#: inc/core/class-core.php:115
+#: inc/core/class-core.php:113
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr ""
 
-#: inc/core/class-core.php:114
+#: inc/core/class-core.php:112
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr ""
@@ -450,12 +441,12 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:298
+#: inc/gutenberg/blocks/comment/class-form.php:296
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:271
+#: inc/gutenberg/blocks/comment/class-form.php:269
 msgid "Your email address will not be published."
 msgstr ""
 

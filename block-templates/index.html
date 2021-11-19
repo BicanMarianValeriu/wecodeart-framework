@@ -1,14 +1,14 @@
-<!-- wp:template-part {"slug":"header","tagName":"header","className":"site-header sticky-top","layout":{"inherit":true},"customCSSId":"cd6395ch-7306-4043-bfcc-8e98adb06715"} /-->
-<!-- wp:group {"tagName":"main","layout":{"inherit":true},"customCSSId":"cd6343cm-7306-4043-bfcc-8e98adb06715"} -->
+<!-- wp:template-part {"slug":"header","tagName":"header","className":"site-header sticky-top","layout":{"inherit":true}} /-->
+<!-- wp:group {"tagName":"main","layout":{"inherit":true}} -->
 <main class="wp-block-group">
-    <!-- wp:query {"queryId":1,"query":{"inherit":true},"displayLayout":{"type":"flex","columns":3}} -->
-    <div class="wp-block-query">
-        <!-- wp:query-title {"type":"archive","style":{"spacing":{"margin":{"top":"3rem","bottom":"3rem"},"padding":{"left":"1rem","right":"1rem"}}},"customCSSId":"cd6395ca-7306-4043-bfcc-8e98adb06715"} /-->
+    <!-- wp:query {"queryId":1,"query":{"perPage":0,"pages":0,"offset":0,"postType":"post","categoryIds":[],"tagIds":[],"order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"displayLayout":{"type":"flex","columns":3},"className":"px-3"} -->
+    <div class="wp-block-query px-3">
+        <!-- wp:query-title {"type":"archive","className":"my-5"} /-->
         <!-- wp:term-description /-->
-        <!-- wp:post-template {"className":"px-3 my-5"} -->
+        <!-- wp:post-template {"className":"my-5"} -->
         <!-- wp:post-featured-image {"isLink":true,"className":"mb-3 mb-md-0"} /-->
         <!-- wp:post-title {"level":3,"isLink":true} /-->
-        <!-- wp:template-part {"slug":"entry-meta","className":"has-small-font-size d-flex flex-wrap align-items-center gap-1 mb-3"} /-->
+        <!-- wp:template-part {"slug":"entry-meta","className":"d-flex flex-wrap align-items-center gap-1 mb-3"} /-->
         <!-- wp:post-excerpt {"moreText":"Continue reading","excerptLength":10,"textColor":"secondary"} /-->
         <!-- /wp:post-template -->
         <!-- wp:query-pagination -->
@@ -18,4 +18,4 @@
     <!-- /wp:query -->
 </main>
 <!-- /wp:group -->
-<!-- wp:template-part {"slug":"footer","tagName":"footer","className":"site-footer","layout":{"inherit":true},"customCSSId":"cd6395cf-7306-4043-bfcc-8e98adb06715"} /-->
+<!-- wp:template-part {"slug":"footer","tagName":"footer","className":"site-footer","layout":{"inherit":true}} /-->
