@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.4
+ * @version		5.2.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -127,7 +127,7 @@ class Navigation extends Dynamic {
 	
 			// TODO - this uses the full navigation block attributes for the
 			// context which could be refined.
-			$inner_blocks = new WP_Block_List( $compacted_blocks, $attributes );
+			$inner_blocks = new \WP_Block_List( $compacted_blocks, $attributes );
 		}
 		
 		if ( empty( $inner_blocks ) ) {

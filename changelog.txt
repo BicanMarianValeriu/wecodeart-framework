@@ -1,3 +1,6 @@
+v5.2.5
+- Fixed - Fatal error caused by Navigation WP_Block_List namespacing
+
 v5.2.4
 - Fixed - Social links svg height
 - Updated - block-templates/block-patterns
