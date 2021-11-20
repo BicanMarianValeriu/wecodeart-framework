@@ -1,3 +1,9 @@
+v5.2.7
+- Removed - Redirect to admin about screen after switch theme
+- Updated - Code cleanup
+- Updated - Navigation add core color pallete
+- Fixed - Double post dates (with updated posts)
+
 v5.2.6
 - Updated - Gutenberg Styles extension will process all blocks / customCSSId block attribute is not required anymore
 - Updated - Styles extension better method naming

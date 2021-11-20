@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.2.6
+ * @version		5.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -224,7 +224,7 @@ class Styles implements Integration {
 		$block_name	= get_prop( $block, 'blockName' );
 		// Remove styles, where needed.
 		// I'm not happy with this way but there is no other way to remove style attributes that I know, on PHP.
-		// It would be ok with JS but that breaks the blocks.
+		// It would be ok with JS but that is time consuming to manage deprecation etc.
 		if ( in_array( $block_name, self::core_blocks() ) ) {
 			// Target anything for most of the blocks.
 			$regex		= '/(<[^>]+) style="([^"]*)"/i';
@@ -254,9 +254,6 @@ class Styles implements Integration {
 			}
 
 			$content 	= preg_replace( $regex, '$1', $content, $passes );
-			
-			// Reset and clean once more - any leftovers!
-			$content 	= preg_replace( '/(<[^>]+) style="([^"]*)"/i', '$1', $content, 1 );
 		}
 
 		// Add necessary class
@@ -284,7 +281,7 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Collect template styles.
+	 * Collect template utilities styles.
 	 *
 	 * @return 	void
 	 */

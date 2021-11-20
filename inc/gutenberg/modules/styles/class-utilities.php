@@ -155,6 +155,37 @@ class Utilities implements \ArrayAccess {
 }
 
 /**
+ * Generate breakpoint class
+ *
+ * @param  string   $class
+ * @param  string   $key
+ * @param  bool     $responsive
+ *
+ * @return string
+ */
+function generate_class( string $class = '', $key = '', $responsive = false ) {
+    if( $responsive === false ) {
+        $_class = $key === null ? '' : $class;
+		$return	= rtrim( $_class === '' ? $class : join( '-', [ $_class, $key ] ), '-' );
+
+        return $return;
+    }
+
+    $_class_ = explode( '-', $class );
+
+    if( count( $_class_ ) >= 2 ) {
+        $_last  = array_pop( $_class_ );
+        $return = array_merge( $_class_, [ $key, $_last ] );
+    } else {
+        $return = [ $_class_[0], $key ];
+    }
+
+    $return = rtrim( join( '-', $return ), '-' );
+
+    return $return;
+}
+
+/**
  * Register CSS utility to be parsed by CSS module.
  *
  * @param  array  $args
@@ -187,8 +218,7 @@ function register_utility( $args = [] ) {
     $container  = Utilities::get_instance();
 
 	foreach( $values as $key => $value ) {
-		$_class = $key === null ? '' : $class;
-		$_class	= rtrim( $_class === '' ? $class : join( '-', [ $_class, $key ] ), '-' );
+		$_class	= generate_class( $class, $key );
         $value  = (string) $value;
 
 		$output = [];
@@ -204,14 +234,7 @@ function register_utility( $args = [] ) {
 		if( ! $responsive ) continue;
 
 		foreach( $media as $key => $breakpoint ) {
-			$_class_ = explode( '-', $_class );
-            if( count( $_class_ ) >= 2 ) {
-                $_last      = array_pop( $_class_ );
-                $_class_    = array_merge( $_class_, [ $key, $_last ] );
-            } else {
-                $_class_    = [ $_class_[0], $key ];
-            }
-			$_class_ = rtrim( join( '-', $_class_ ), '-' );
+			$_class_ = generate_class( $_class, $key, true );
 			
 			$output = [];
             foreach( $properties as $property ) {

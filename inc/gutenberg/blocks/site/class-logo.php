@@ -52,13 +52,13 @@ class Logo extends Dynamic {
 	 * Filter Custom Logo
 	 * 
 	 * @since  	5.0.0
-	 * @version	5.1.3
+	 * @version	5.2.7
 	 * 
 	 * @return 	string
 	 */
 	public function custom_logo( $html ) {
 		$search 	= '/' . preg_quote( 'class="custom-logo-link', '/' ) . '/';
-		$replace 	= 'class="navbar-brand d-block wp-block-site-logo__link';
+		$replace 	= 'class="navbar-brand wp-block-site-logo__link';
 		return preg_replace( $search, $replace, $html, 1 );
 	}
 

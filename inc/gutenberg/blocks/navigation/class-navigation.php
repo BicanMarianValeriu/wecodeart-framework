@@ -319,7 +319,8 @@ class Navigation extends Dynamic {
 	 * @return 	string 	HEX color code for pallete class
 	 */
 	public static function get_class_color( $context, $key = 'background' ) {
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
 		
 		$_keys 		= [
@@ -466,7 +467,7 @@ class Navigation extends Dynamic {
 			if( $value !== 'never' ) {
 				$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
 				if( $value === 'mobile' ) {
-					$classes[] 	= apply_filters( 'wecodeart/filter/navigation/responsive', 'navbar-expand-lg' );
+					$classes[] 	= $this->get_mobile_breakpoint();
 				}
 			}
 		}
@@ -504,13 +505,23 @@ class Navigation extends Dynamic {
 	}
 
 	/**
+	 * Return filter mobile breakpoint class.
+	 * 
+	 * @return 	array
+	 */
+	public function get_mobile_breakpoint() {
+		return sanitize_html_class( 'navbar-expand-' . wecodeart_json( [ 'settings', 'custom', 'navbarBreakpoint' ], 'lg' ) );
+	}
+
+	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$desktop	= get_prop( $breaks, 'lg', '992px' );
+		$filter		= explode( '-', $this->get_mobile_breakpoint() );
+		$breakpoint	= get_prop( $breaks, end( $filter ), '992px' );
 
 		return "
 		:is(.site-header,.offcanvas) .wp-block-navigation {
@@ -560,7 +571,7 @@ class Navigation extends Dynamic {
 			top: 0;
 			left: 100%;
 		}
-		@media (min-width: $desktop) {
+		@media (min-width: $breakpoint) {
 			.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
 				border-top: 0.3em solid transparent;
 				border-right: 0;

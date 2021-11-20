@@ -144,7 +144,7 @@
 				"4": "2rem",
 				"5": "3rem"
 			},
-			"wideMultiplier": "1.15"
+			"navbarBreakpoint": "lg"
 		},
 		"layout": {
 			"contentSize": "1320px",

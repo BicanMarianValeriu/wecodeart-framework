@@ -75,7 +75,7 @@ class Core {
 	 * Archives Title
 	 *
 	 * @since 	unknown
-	 * @version	5.2.4
+	 * @version	5.2.7
 	 *
 	 * @return 	string
 	 */
@@ -85,9 +85,7 @@ class Core {
 		$title_template = '<span>%s</span>';
 
 		if ( is_search() ) {
-			$output = SVG::compile( 'search' , [
-				'class' => 'me-3'
-			] );
+			$output = SVG::compile( 'search' );
 			$output .= sprintf( $title_template, sprintf( 
 				esc_html__( 'Search Results for "%s".', 'wecodeart' ),
 				'<span>' .  get_search_query() . '</span>' 

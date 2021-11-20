@@ -101,7 +101,8 @@ class Navigation extends Base {
 
 		// Dropdown active state
 		if( $named_color !== null ) {
-			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], [] );
+			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
+			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
 			$hex_color	= get_prop( current( wp_list_filter( $palette, [ 'slug' => $named_color ] ) ), 'color' );
 		}

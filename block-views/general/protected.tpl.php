@@ -56,9 +56,6 @@ SVG::add_icon( 'unlock', [
 
         wecodeart_input( 'button', [
             'label' => SVG::compile( 'key' ) . sprintf( '<span>%s</span>', esc_html__( 'Unlock', 'wecodeart' ) ),
-            'attrs' => [
-                'class' => 'btn btn-outline-dark',
-            ]
         ] );
 
         ?>

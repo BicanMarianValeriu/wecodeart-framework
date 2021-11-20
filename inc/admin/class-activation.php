@@ -191,7 +191,7 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	5.0.0
+	 * @version	5.2.7
 	 */
 	public function after_switch_theme() {
 		// If not, why bother to load the theme?
@@ -206,9 +206,6 @@ class Activation {
 
 			return;
 		}
-
-		// Everything is good at this point, redirect to admin!
-		$this->redirect_to_admin();
 	}
 
 		/**
@@ -270,16 +267,6 @@ class Activation {
 				Notifications::get_instance()->add_notification( $notification );
 			}
 		}	
-	}
-	
-	/**
-	 * Redirect to Admin
-	 *
-	 * @since 	5.0.0
-	 * @version	5.0.0
-	 */
-	public function redirect_to_admin() {
-		wp_redirect( esc_url_raw( add_query_arg( 'page', 'wecodeart', admin_url( 'themes.php' ) ) ) );
 	}
 
 	/**
