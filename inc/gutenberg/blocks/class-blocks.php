@@ -107,11 +107,11 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/site-logo',  Blocks\Site\Logo::class );
 		$this->register( 'core/loginout',   Blocks\Site\Login::class );
         
+        $this->load();
+
         // Hooks
-        add_action( 'init',                     [ $this, 'load' ] );
-        // add_filter( 'register_block_type_args', [ $this, 'register_args'    ], 10, 2 );
         add_filter( 'render_block',             [ $this, 'collect_blocks'   ], 10, 2 );
-        add_action( 'wp_enqueue_scripts',       [ $this, 'register_styles'  ], 10, 1 );
+        add_action( 'wp_enqueue_scripts',       [ $this, 'register_styles'  ], 0, 1 );
         add_action( 'wp_print_styles',          [ $this, 'remove_styles'    ], 100 );
 	}
 
@@ -129,31 +129,6 @@ class Blocks implements \ArrayAccess {
 		}
 
 		return $block_content;
-	}
-
-    /**
-	 * Register args.
-	 *
-	 * @param 	string 	$args 	The block args.
-	 * @param 	array 	$name	The block name.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function register_args( $args, $name ) {
-        if ( name === 'core/button' && isset( $args['supports']['__experimentalSelector'] ) ) {
-			$existing 	= (array) $args['supports']['__experimentalSelector'];
-			$extra 		= [
-				'.wp-block-search__button',
-				'.wp-block-file__button',
-				'.comment-form-field .comment-form-submit'
-			];
-	
-            $new_selectors = join( ', ', array_filter( array_merge( $existing, $extra ) ) );
-
-			$args['supports']['__experimentalSelector'] = $new_selectors;
-		}
-	
-		return $args;
 	}
 
     /**

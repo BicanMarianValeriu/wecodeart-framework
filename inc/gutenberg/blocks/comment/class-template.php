@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.2.2
+ * @version		5.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -84,9 +84,6 @@ class Template extends Dynamic {
 		if( post_password_required( $post_id ) ) {
 			return Markup::wrap( 'comment-form-protected', [ [
 				'tag' 	=> 'p',
-				'attrs' => [
-					'class' => 'alert alert-danger shadow-soft'
-				]
 			] ], 'printf', [ 
 				esc_html__( 'This post is password protected. Enter the password to view comments or leave a comment.', 'wecodeart' )
 			], false );
@@ -259,6 +256,9 @@ class Template extends Dynamic {
 		return "
 		.comments__add-new {
 			margin: .5rem 0;
+		}
+		.wp-block-comments-query-loop:empty {
+			display: none;
 		}
 		.wp-block-comments-query-loop__head svg {
 			margin-right: .5rem;

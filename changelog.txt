@@ -1,3 +1,9 @@
+v5.2.8
+- Updated - Pagination class updated to block-templates/template-parts to be picked up by Utilitiy feature
+- Updated - Pagination to inherit button border radius
+- Updated - Buttons selector to extend couple of other blocks button
+- Updated - Minor updates to code structure (moved some code to its Gutenberg block)
+
 v5.2.7
 - Removed - Redirect to admin about screen after switch theme
 - Updated - Code cleanup

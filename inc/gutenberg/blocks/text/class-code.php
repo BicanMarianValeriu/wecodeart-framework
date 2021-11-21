@@ -60,7 +60,7 @@ class Code extends Dynamic {
 			background-color: var(--wp--preset--color--white, white);
 			border: 1px solid;
 			border-color: var(--wp--preset--color--cyan-bluish-gray, #dee2e6);
-			border-radius: var(--wp-border-radius, 0.25rem);
+			border-radius: var(--wp--border-radius, 0.25rem);
 		}
 		";
 	}

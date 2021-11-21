@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.0.7
+ * @version		5.2.8
  */
 
 namespace WeCodeArt\Core;
@@ -32,8 +32,9 @@ class Header {
 	 * Send to Constructor
 	 */
 	public function init() {
-		add_action( 'wecodeart/header',	[ __CLASS__, 'markup' ] );
-		add_action( 'init', 			[ $this, 'clean_head' ] );
+		add_action( 'wecodeart/header',	[ __CLASS__, 'markup' 	] );
+		add_action( 'init', 			[ $this, 'clean_head' 	] );
+		add_filter( 'body_class',		[ $this, 'body_classes'	] );
 	}
 	
 	/**
@@ -68,6 +69,34 @@ class Header {
 				] 
 			]
 		], 'gutenberg_block_header_area' );
+	}
+
+	/**
+	 * Adds custom classes to the array of body classes.
+	 *
+	 * @since	4.0.6
+	 * @version 5.2.2
+	 *
+	 * @param 	array 	$classes Classes for the body element.
+	 *
+	 * @return 	array
+	 */
+	public function body_classes( $classes ) {
+		// Add a class of hfeed to non-singular pages.
+		if ( ! is_singular() && ! is_404() ) {
+			$classes[] = 'hfeed';
+		}
+		
+		// Adds a class of group-blog to blogs with more than 1 published author.
+		if ( is_multi_author() ) {
+			$classes[] = 'group-blog';
+		}
+		
+		// Theme
+		$classes[] = 'theme-' . wecodeart( 'name' );
+		$classes[] = is_child_theme() ? 'theme-is-skin' : 'theme-is-base'; 
+
+		return $classes;
 	}
 
 	/**

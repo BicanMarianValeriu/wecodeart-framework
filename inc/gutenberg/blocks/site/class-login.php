@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.1.8
- * @version		5.2.2
+ * @version		5.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -113,5 +113,30 @@ class Login extends Dynamic {
 			'action' 	=> home_url( 'wp-login.php', 'login_post' ),
 			'args'		=> wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) )
 		], $echo );
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.wp-block-login__button {
+			display: inline-block;
+			vertical-align: middle;
+			padding: 0.5rem 0.75rem;
+			color: var(--wp--preset--color--white);
+			font-size: 1rem;
+			font-weight: 400;
+			text-align: center;
+			line-height: 1.5;
+			background-color: var(--wp--preset--color--dark);
+			border: 1px solid transparent;
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+			user-select: none;
+			cursor: pointer;
+		}
+		";
 	}
 }

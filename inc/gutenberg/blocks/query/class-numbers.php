@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.2
+ * @version		5.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -130,7 +130,7 @@ class Numbers extends Dynamic {
             [
                 'tag'   => 'nav',
                 'attrs' => [
-                    'class' => 'wp-block-query-pagination__numbers px-3 mb-5',
+                    'class' => 'wp-block-query-pagination__numbers',
                 ]
             ],
         ], function( $content ) {
@@ -138,7 +138,7 @@ class Numbers extends Dynamic {
                 [
                     'tag'   => 'ul',
                     'attrs' => [
-                        'class'     => 'pagination mb-0',
+                        'class'     => 'pagination',
                         'aria-label'=> esc_attr__( 'Pagination', 'wecodeart' )
                     ]
                 ],
@@ -170,50 +170,57 @@ class Numbers extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
+        $button_css = wecodeart_json( [ 'styles', 'blocks', 'core/button' ] );
+        $width      = get_prop( $button_css, [ 'border', 'width' ], '1px' );
+        $style      = get_prop( $button_css, [ 'border', 'style' ], 'solid' );
+        $color      = get_prop( $button_css, [ 'border', 'color' ], 'currentColor' );
+        $radius     = get_prop( $button_css, [ 'border', 'radius' ], '.25rem' );
+        
 		return "
         .pagination {
             display: flex;
             list-style-type: none;
             padding-left: 0;
+            margin-bottom: 0;
         }
         .pagination__link {
             position: relative;
             display: block;
-            color: var(--wp--primary);
+            color: var(--wp--preset--color--primary);
             text-decoration: none;
             background-color: white;
-            padding: 0.375rem 0.75rem;
-            border: 1px solid currentColor;
+            padding: 0.35rem 0.75rem;
+            border: $width $style $color;
         }
         .pagination__link:hover {
             z-index: 2;
-            color: var(--wp--primary);
+            color: var(--wp--preset--color--primary);
             background-color: var(--wp--light);
-            border-color: currentColor;
+            border-color: $color;
         }
         .pagination__link:focus {
             z-index: 3;
-            color: var(--wp--primary);
+            color: var(--wp--preset--color--primary);
             background-color: var(--wp--light);
             outline: none;
-            box-shadow: 0 0 0 1px var(--wp--primary);
+            box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
         }
         .pagination__item:first-child .pagination__link {
-            border-top-left-radius: 0.25rem;
-            border-bottom-left-radius: 0.25rem;
+            border-top-left-radius: $radius;
+            border-bottom-left-radius: $radius;
         }
         .pagination__item:not(:first-child) .pagination__link {
             margin-left: -1px;
         }
         .pagination__item:last-child .pagination__link {
-            border-top-right-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
+            border-top-right-radius: $radius;
+            border-bottom-right-radius: $radius;
         }
         .pagination__item--current .pagination__link {
             z-index: 3;
             color: white;
-            background-color: var(--wp--primary);
-            border-color: var(--wp--primary);
+            background-color: var(--wp--preset--color--primary);
+            border-color: var(--wp--preset--color--primary);
         } 
         .pagination__item--disabled .pagination__link {
             color: var(--wp--gray);

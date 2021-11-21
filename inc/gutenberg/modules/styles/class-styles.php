@@ -495,6 +495,9 @@ class Styles implements Integration {
 		$return = [];
 
 		foreach( $blocks as $block ) {
+			// Dont bother with empty blocks from parse_blocks
+			if( ! get_prop( $block, [ 'blockName' ] ) ) continue;
+
 			$classes	= get_prop( $block, [ 'attrs', 'className' ] );
 			$classes 	= array_filter( explode( ' ', $classes ) );
 			$inner		= get_prop( $block, [ 'innerBlocks' ] );

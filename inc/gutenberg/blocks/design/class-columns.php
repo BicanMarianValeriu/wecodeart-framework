@@ -54,8 +54,7 @@ class Columns extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$mobile		= get_prop( $breaks, 'sm', '640px' );
+		$mobile	= wecodeart_json( [ 'settings', 'custom', 'breakpoints', 'sm' ], '640px' );
 
 		return "
 		.wp-block-columns {

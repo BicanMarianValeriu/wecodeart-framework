@@ -48,16 +48,44 @@ class Button extends Dynamic {
 	 */
 	public function init() {
 		register_block_style( $this->get_block_type(), [
-			'name' 	=> 'link',
-            'label'	=> __( 'Link', 'wecodeart' ),
+			'name' 			=> 'link',
+            'label'			=> __( 'Link', 'wecodeart' ),
+			'inline_style' 	=> '.is-style-link .wp-block-button__link{background:transparent;border:none;padding:0;color:var(--wp--preset--color--primary);}'
 		] );
 	}
-
+	
 	/**
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/button', [ $this, 'render' ], 10, 2 );
+		add_filter( 'render_block_core/button',	[ $this, 'render'			], 10, 2 );
+		add_filter( 'register_block_type_args',	[ $this, 'register_args'	], 10, 2 );
+	}
+
+	/**
+	 * Filter register args
+	 *
+	 * @param	array 	$settings
+	 * @param	array 	$data
+	 */
+	public function register_args( $args, $name ) {
+		if ( $this->get_block_type() === $name ) {
+			if ( isset( $args['supports']['__experimentalSelector'] ) ) {
+				$existing 	= (array) $args['supports']['__experimentalSelector'];
+				$extra 		= [
+					'.wp-block-file__button',
+					'.wp-block-login__button',
+					'.wp-block-search__button',
+					'.comment-form-field .comment-form-submit'
+				];
+		
+				$new_selectors = join( ', ', array_filter( array_merge( $existing, $extra ) ) );
+		
+				$args['supports']['__experimentalSelector'] = $new_selectors;
+			}
+		}
+		
+		return $args;
 	}
 
 	/**
@@ -117,6 +145,51 @@ class Button extends Dynamic {
 		.wp-block-button.alignright {
 			text-align: right;
 		}
+		.wp-block-button__link.no-border-radius {
+			border-radius: 0;
+		}
+		.wp-block-button__link {
+			display: inline-block;
+			vertical-align: middle;
+			padding: 0.5rem 0.75rem;
+			color: var(--wp--preset--color--white);
+			font-size: 1rem;
+			font-weight: 400;
+			text-align: center;
+			line-height: 1.5;
+			background-color: var(--wp--preset--color--dark);
+			border: 1px solid transparent;
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+			user-select: none;
+			cursor: pointer;
+		}
+		.wp-block-button__link:hover {
+			color: var(--wp--preset--color--white);
+			text-decoration: none;
+		}
+		.wp-block-button__link:focus {
+			outline: 0;
+    		box-shadow: 0 0 0 1px #000;
+		}
+		.wp-block-button__link:active,
+		.wp-block-button__link.active {
+			box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
+		}
+		.wp-block-button__link:active,
+		.wp-block-button__link.active {
+			box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
+		}
+		.wp-block-button__link:active:focus,
+		.wp-block-button__link.active:focus {
+			box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
+		}
+		.wp-block-button__link:disabled,
+		.wp-block-button__link.disabled,
+		fieldset:disabled .wp-block-button__link {
+			pointer-events: none;
+			opacity: .7;
+			box-shadow: none;
+		}
 		.is-style-outline .wp-block-button__link {
 			--wp--bg-opacity: 0;
 			background-color: rgba(var(--wp--dark-rgb), var(--wp--bg-opacity));
@@ -128,49 +201,14 @@ class Button extends Dynamic {
 			border-color: var(--wp--dark);
 			color: white;
 		}
-		.wp-block-button__link.no-border-radius {
-			border-radius: 0;
+		.is-style-link .wp-block-button__link {
+			padding: 0;
+			background: transparent;
+			border: none;
+			color: var(--wp--preset--color--primary);
 		}
-		.wp-block-button__link {
-			display: inline-block;
-			vertical-align: middle;
-			padding: 0.5rem 0.75rem;
-			color: var(--wp--white);
-			font-size: 1rem;
-			font-weight: 400;
-			text-align: center;
-			line-height: 1.5;
-			background-color: var(--wp--dark);
-			border: 1px solid transparent;
-			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-			user-select: none;
-			cursor: pointer;
-		}
-		.wp-block-button__link:hover {
-			color: var(--wp--white);
-			text-decoration: none;
-		}
-		.wp-block-button__link:focus {
-			outline: 0;
-    		box-shadow: 0 0 0 1px #000;
-		}
-		.wp-block-button__link:active,
-		.wp-block-button__link.active {
-			box-shadow: 0 0 0 1px var(--wp--primary);
-		}
-		.wp-block-button__link:active,
-		.wp-block-button__link.active {
-			box-shadow: 0 0 0 1px var(--wp--primary);
-		}
-		.wp-block-button__link:active:focus,
-		.wp-block-button__link.active:focus {
-			box-shadow: 0 0 0 1px var(--wp--primary);
-		}
-		.wp-block-button__link:disabled,
-		.wp-block-button__link.disabled,
-		fieldset:disabled .wp-block-button__link {
-			pointer-events: none;
-			opacity: .7;
+		.is-style-link .wp-block-button__link:hover {
+			color: var(--wp--preset--color--primary);
 			box-shadow: none;
 		}
 		";

@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Login Template
  * @since 	    5.1.8
- * @version	    5.2.2
+ * @version	    5.2.8
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -80,7 +80,7 @@ defined( 'ABSPATH' ) || exit;
                 'name'  => false,
                 'id'    => 'wp-submit',
                 'value' => $args['label_log_in'],
-                'class' => 'btn btn-outline-dark',
+                'class' => 'wp-block-login__button',
             ]
         ] );
 

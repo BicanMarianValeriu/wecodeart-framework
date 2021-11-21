@@ -254,7 +254,7 @@ class Form extends Dynamic {
 	 * Get Form Notes
 	 *
 	 * @since	5.2.2
-	 * @since	5.2.4
+	 * @since	5.2.8
 	 *
 	 * @return 	void
 	 */
@@ -270,7 +270,7 @@ class Form extends Dynamic {
 
 			if( get_option( 'require_name_email' ) ) {
 				$string .= ' ' . sprintf( esc_html__( 'Required fiels are marked "%s".', 'wecodeart' ), 
-					'<span class="required text-danger">*</span>' 
+					'<span class="required">*</span>' 
 				);
 			}
 

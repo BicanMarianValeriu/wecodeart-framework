@@ -203,7 +203,7 @@ class Media {
 			$output = Markup::wrap( 'get-media', [ [
 				'tag' 	=> 'figure',
 				'attrs'	=> wp_parse_args( $args['attrs'], [
-					'class'	=> 'wp-block-featured-image ratio overflow-hidden',
+					'class'	=> 'wp-block-featured-image ratio',
 					'style'	=> sprintf( '--wp--aspect-ratio:%s;', number_format( $dummy_ratio * 100, 3 ) . '%' )
 				] )
 			] ], $html, null, false );
