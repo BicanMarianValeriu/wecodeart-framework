@@ -355,7 +355,7 @@
 			"text": "var:preset|color|dark"
 		},
 		"spacing": {
-			"blockGap": null
+			"blockGap": 0
 		},
 		"typography": {
 			"fontSize": "var:preset|font-size|normal",

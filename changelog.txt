@@ -5,7 +5,6 @@ v5.2.8
 - Updated - Minor updates to code structure (moved some code to its Gutenberg block)
 - Updated - Sanitize link hover color output in global styles
 - Updated - Gutenberg Styles extension: normalized hooks priorioty (20 for all hooks / 10 is for WP)
-- Updated - Gutenberg Styles extension: generate Utilities cache on after_setup_theme hook instead of init (while using add_editor_style)
 
 v5.2.7
 - Removed - Redirect to admin about screen after switch theme

@@ -113,12 +113,12 @@ class Styles implements Integration {
 		// Hooks
 		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
-		add_action( 'after_setup_theme',			[ $this, 'setup_utilities' 		], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',  			[ $this, 'template_styles' 		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 20, 1 );
 		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 20, 1 );
+		add_action( 'init',							[ $this, 'setup_utilities' 		], 20, 1 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_spacing_gap_support', 10, 2 );
@@ -526,17 +526,18 @@ class Styles implements Integration {
 		// Find the class that will handle the output for this block.
 		$classname	= Styles\Blocks::class;
 		$defaults   = [
-			'core/button' 		=> Styles\Blocks\Button::class,
-			'core/cover' 		=> Styles\Blocks\Cover::class,
-			'core/column' 		=> Styles\Blocks\Column::class,
-			'core/image' 		=> Styles\Blocks\Image::class,
-			'core/media-text' 	=> Styles\Blocks\Media::class,
-			'core/navigation' 	=> Styles\Blocks\Navigation::class,
-			'core/pullquote' 	=> Styles\Blocks\PullQuote::class,
-			'core/social-links'	=> Styles\Blocks\Social::class,
-			'core/separator' 	=> Styles\Blocks\Separator::class,
-			'core/spacer' 		=> Styles\Blocks\Spacer::class,
-			'core/table' 		=> Styles\Blocks\Table::class,
+			'core/button' 			=> Styles\Blocks\Button::class,
+			'core/cover' 			=> Styles\Blocks\Cover::class,
+			'core/column' 			=> Styles\Blocks\Column::class,
+			'core/image' 			=> Styles\Blocks\Image::class,
+			'core/media-text' 		=> Styles\Blocks\Media::class,
+			'core/navigation' 		=> Styles\Blocks\Navigation::class,
+			'core/pullquote' 		=> Styles\Blocks\PullQuote::class,
+			'core/social-links'		=> Styles\Blocks\Social::class,
+			'core/separator' 		=> Styles\Blocks\Separator::class,
+			'core/spacer' 			=> Styles\Blocks\Spacer::class,
+			'core/table' 			=> Styles\Blocks\Table::class,
+			'core/post-featured-image'	=> Styles\Blocks\Featured::class,
 		];
 
 		$output_classes = apply_filters( 'wecodeart/filter/gutenberg/styles/processor', $defaults );
