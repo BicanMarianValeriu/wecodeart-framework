@@ -5,6 +5,10 @@ v5.2.8
 - Updated - Minor updates to code structure (moved some code to its Gutenberg block)
 - Updated - Sanitize link hover color output in global styles
 - Updated - Gutenberg Styles extension: normalized hooks priorioty (20 for all hooks / 10 is for WP)
+- Updated - Post featured image refactor/merge with Media class (from core) and style attributes will reflect on frontend
+- Added - wecodeart/filter/gutenberg/featured/ratio filter (boolean) for using aspect ratio calc function or real size
+- Added - wecodeart/filter/gutenberg/featured/placeholder filter (string) for changing placeholder text
+- Added - Post featured image block on single template
 
 v5.2.7
 - Removed - Redirect to admin about screen after switch theme

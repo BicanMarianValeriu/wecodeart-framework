@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" preserveAspectRatio="none">
 	<path fill="#EEE" d="M0 0h300v300H0z"/>
-	<text x="40" y="157" fill="#aaa" font-family="Arial,Helvetica,Open Sans,sans-serif,monospace" font-size="22" font-weight="700">
+	<text x="50%" y="50%" fill="#aaa" dominant-baseline="middle" text-anchor="middle" font-family="Arial,Helvetica,Open Sans,sans-serif,monospace" font-size="22" font-weight="700">
 		www.wecodeart.com
 	</text>
 </svg>

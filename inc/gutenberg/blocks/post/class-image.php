@@ -158,12 +158,13 @@ class Image extends Dynamic {
 	 */
 	public function filter_html( $html, $post, $post_thumbnail_id ) {
 		if( $html === '' && $post_thumbnail_id === 0 ) {
+			$placeholder_text	= apply_filters( 'wecodeart/filter/gutenberg/featured/placeholder', untrailingslashit( home_url() ) );
 			$placeholder_html 	= '<img class="%2$s" src="%1$s" alt="%3$s"/>';
-			$placeholder_url 	= get_template_directory_uri() . '/assets/images/placeholder.svg';
+			$placeholder_url 	= "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' preserveAspectRatio='none'%3E%3Cpath fill='%23EEE' d='M0 0h300v300H0z'/%3E%3Ctext x='50%25' y='50%25' fill='%23aaa' dominant-baseline='middle' text-anchor='middle' font-family='Arial,Helvetica,Open Sans,sans-serif,monospace' font-size='20' font-weight='700'%3E $placeholder_text %3C/text%3E%3C/svg%3E";
 
 			$html = sprintf(
 				$placeholder_html,
-				esc_url( $placeholder_url ),
+				$placeholder_url,
 				'wp-block-post-featured-image__src',
 				esc_html__( 'Placeholder image', 'wecodeart' )
 			);
