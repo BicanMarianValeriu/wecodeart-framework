@@ -150,14 +150,14 @@ class Image extends Dynamic {
 	/**
 	 * Add placeholder
 	 *
-	 * @param 	string 	$html 	The image HTML.
-	 * @param 	string 	$post 	The post ID.
-	 * @param 	string 	$html 	The thumbnail ID.
+	 * @param 	string 	$html 		The image HTML.
+	 * @param 	string 	$post 		The post ID.
+	 * @param 	string 	$thumbnail 	The thumbnail ID.
 	 *
 	 * @return 	string 	The placeholder markup.
 	 */
-	public function filter_html( $html, $post, $post_thumbnail_id ) {
-		if( $html === '' && $post_thumbnail_id === 0 ) {
+	public function filter_html( $html, $post, $thumbnail ) {
+		if( $html === '' && $thumbnail === 0 ) {
 			$placeholder_text	= apply_filters( 'wecodeart/filter/gutenberg/featured/placeholder', untrailingslashit( home_url() ) );
 			$placeholder_html 	= '<img class="%2$s" src="%1$s" alt="%3$s"/>';
 			$placeholder_url 	= "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' preserveAspectRatio='none'%3E%3Cpath fill='%23EEE' d='M0 0h300v300H0z'/%3E%3Ctext x='50%25' y='50%25' fill='%23aaa' dominant-baseline='middle' text-anchor='middle' font-family='Arial,Helvetica,Open Sans,sans-serif,monospace' font-size='20' font-weight='700'%3E $placeholder_text %3C/text%3E%3C/svg%3E";

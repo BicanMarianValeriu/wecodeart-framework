@@ -118,7 +118,7 @@ class Styles implements Integration {
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 20, 1 );
 		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 20, 1 );
-		add_action( 'init',							[ $this, 'setup_utilities' 		], 20, 1 );
+		add_action( 'init',							[ $this, 'setup_utilities' 		], 100 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_spacing_gap_support', 10, 2 );
