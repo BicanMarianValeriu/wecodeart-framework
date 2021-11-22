@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.2.7
+ * @version		5.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -102,7 +102,7 @@ class Styles implements Integration {
 	 * @return 	void
 	 */
 	public function register_hooks() {
-		$this->CSS 			= wecodeart( 'integrations' )->get( 'styles' );
+		$this->CSS 			= wecodeart( 'integrations' )->get( 'styles' )::get_instance();
 		$this->Utilities 	= Utilities::get_instance();
 
 		// Custom Style Attributes support
@@ -112,13 +112,13 @@ class Styles implements Integration {
 
 		// Hooks
 		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
-		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 0 );
-		add_filter( 'render_block',					[ $this, 'filter_render' 		], 30, 2 );
-		add_action( 'wp_enqueue_scripts',  			[ $this, 'template_styles' 		], 10, 1 );
+		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
+		add_action( 'after_setup_theme',			[ $this, 'setup_utilities' 		], 20, 1 );
+		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
+		add_action( 'wp_enqueue_scripts',  			[ $this, 'template_styles' 		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
-		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 10, 1 );
-		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 10, 1 );
-		add_action( 'init', 						[ $this, 'setup_utilities' 		], 100 );
+		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 20, 1 );
+		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 20, 1 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_spacing_gap_support', 10, 2 );
@@ -369,7 +369,7 @@ class Styles implements Integration {
 	/**
 	 * Add link styles.
 	 *
-	 * @return 	string
+	 * @return 	void
 	 */
 	public function add_link_styles() {
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
@@ -394,8 +394,9 @@ class Styles implements Integration {
 			] ) ), 'color', '#0088cc' );
 		}
 
-		// Darken the color
-		$link_color = $this->CSS::hex_brightness( $link_color, -25 );
+		// Darken the pallete link color (hex) on hover
+		// Sanitized because we are not using CSS::parse method which does that by default (for arrays)
+		$link_color = $this->CSS::hex_brightness( $this->CSS->sanitize::color( $link_color ), -25 );
 
 		wp_add_inline_style( 'global-styles', "a:hover{color:${link_color};}" );
 	}

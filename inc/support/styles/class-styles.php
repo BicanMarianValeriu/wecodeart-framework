@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.2.8
  */
 
 namespace WeCodeArt\Support;
@@ -36,7 +36,7 @@ final class Styles implements Integration {
 	 * @since  	5.0.0
 	 * @var 	object
 	 */
-	protected 	$sanitize	= null;
+	public 	$sanitize	= null;
 
 	/**
 	 * Send to Constructor
