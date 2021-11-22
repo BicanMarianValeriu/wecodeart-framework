@@ -53,7 +53,7 @@ class Link extends Dynamic {
 	}
 
 	/**
-	 * Filter table markup
+	 * Filter navigation link markup
 	 *
 	 * @param	array 	$settings
 	 * @param	array 	$data

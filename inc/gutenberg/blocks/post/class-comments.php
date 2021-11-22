@@ -50,7 +50,7 @@ class Comments extends Dynamic {
 	}
 
 	/**
-	 * Filter table markup
+	 * Filter block markup
 	 *
 	 * @param	array 	$settings
 	 * @param	array 	$data

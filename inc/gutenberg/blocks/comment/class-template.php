@@ -51,7 +51,7 @@ class Template extends Dynamic {
 	}
 
 	/**
-	 * Filter table markup
+	 * Filter template markup
 	 *
 	 * @param	array 	$settings
 	 * @param	array 	$data

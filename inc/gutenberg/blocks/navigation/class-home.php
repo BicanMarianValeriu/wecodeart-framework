@@ -53,7 +53,7 @@ class Home extends Dynamic {
 	}
 
 	/**
-	 * Filter table markup
+	 * Filter home link markup
 	 *
 	 * @param	array 	$settings
 	 * @param	array 	$data

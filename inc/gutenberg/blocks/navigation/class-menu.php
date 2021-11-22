@@ -51,7 +51,7 @@ class Menu extends Dynamic {
 	}
 
 	/**
-	 * Filter table markup
+	 * Filter submenu markup
 	 *
 	 * @param	array 	$settings
 	 * @param	array 	$data
