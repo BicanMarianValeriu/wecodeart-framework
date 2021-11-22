@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-11-19 17:38+0000\n"
+"PO-Revision-Date: 2021-11-22 20:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -25,7 +25,7 @@ msgstr "la %s"
 msgid "% Comments"
 msgstr "% Comentarii"
 
-#: inc/core/class-core.php:126
+#: inc/gutenberg/blocks/query/class-title.php:161
 #, php-format
 msgid "%s Archives"
 msgstr "%s Arhivă"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "About %s"
 msgstr "Despre %s"
 
-#: inc/gutenberg/blocks/comment/class-template.php:162
+#: inc/gutenberg/blocks/comment/class-template.php:159
 msgid "add one"
 msgstr "adaugă unul"
 
@@ -89,11 +89,11 @@ msgstr ""
 msgid "ANR Captcha support is enabled!"
 msgstr "Suportul ANR Captcha este activat!"
 
-#: inc/core/class-core.php:134
+#: inc/gutenberg/blocks/query/class-title.php:169
 msgid "Archives"
 msgstr "Arhive"
 
-#: inc/core/class-core.php:107
+#: inc/gutenberg/blocks/query/class-title.php:142
 #, php-format
 msgid "Author Archives: %s"
 msgstr "Arhive autor"
@@ -102,7 +102,7 @@ msgstr "Arhive autor"
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr "Bican Marian Valeriu @wecodeart"
 
-#: inc/core/class-core.php:132
+#: inc/gutenberg/blocks/query/class-title.php:167
 msgid "Blog"
 msgstr "Blog"
 
@@ -125,7 +125,7 @@ msgstr "Anulați răspunsul"
 msgid "Captcha *"
 msgstr "Captcha *"
 
-#: inc/core/class-core.php:97
+#: inc/gutenberg/blocks/query/class-title.php:132
 #, php-format
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
@@ -139,12 +139,12 @@ msgstr "Comentariu"
 msgid "Comments are Closed"
 msgstr "Comentariile sunt inchise"
 
-#: inc/gutenberg/blocks/comment/class-template.php:223
-#: inc/gutenberg/blocks/comment/class-template.php:234
+#: inc/gutenberg/blocks/comment/class-template.php:220
+#: inc/gutenberg/blocks/comment/class-template.php:231
 msgid "Comments Navigation"
 msgstr "Navigație comentarii"
 
-#: inc/gutenberg/blocks/comment/class-template.php:175
+#: inc/gutenberg/blocks/comment/class-template.php:172
 #, php-format
 msgctxt "comments title"
 msgid "%1$s comment"
@@ -170,7 +170,7 @@ msgstr "Drepturi de autor %s - Toate drepturile reservate."
 msgid "Customizer"
 msgstr "Customizer"
 
-#: inc/core/class-core.php:122
+#: inc/gutenberg/blocks/query/class-title.php:157
 #, php-format
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
@@ -246,12 +246,12 @@ msgstr "Autentificare"
 msgid "Missing notification id"
 msgstr "ID-ul notificării lipsește"
 
-#: inc/core/class-core.php:118
+#: inc/gutenberg/blocks/query/class-title.php:153
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: inc/core/class-core.php:117
+#: inc/gutenberg/blocks/query/class-title.php:152
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr "Arhive lunare: %s"
@@ -260,7 +260,7 @@ msgstr "Arhive lunare: %s"
 msgid "Name *"
 msgstr "Nume *"
 
-#: inc/gutenberg/blocks/comment/class-template.php:160
+#: inc/gutenberg/blocks/comment/class-template.php:157
 msgid "No comments"
 msgstr "Fără comentarii"
 
@@ -280,7 +280,11 @@ msgstr "Paginare"
 msgid "Password"
 msgstr "Parolă"
 
-#: inc/core/class-media.php:194
+#: inc/gutenberg/blocks/post/class-image.php:161
+msgid "Placeholder"
+msgstr "Substituent"
+
+#: inc/gutenberg/blocks/post/class-image.php:169
 msgid "Placeholder image"
 msgstr "Imagine substituent"
 
@@ -288,7 +292,7 @@ msgstr "Imagine substituent"
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 
-#: inc/core/class-core.php:129
+#: inc/gutenberg/blocks/query/class-title.php:164
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
@@ -338,7 +342,7 @@ msgstr "Eroare RSS"
 msgid "Search"
 msgstr "Caută"
 
-#: inc/core/class-core.php:92
+#: inc/gutenberg/blocks/query/class-title.php:127
 #, php-format
 #| msgid "Search Results for \"%s\""
 msgid "Search Results for \"%s\"."
@@ -356,7 +360,7 @@ msgstr "Sari la conținut"
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
-#: inc/core/class-core.php:102
+#: inc/gutenberg/blocks/query/class-title.php:137
 #, php-format
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
@@ -389,7 +393,7 @@ msgctxt "Theme starter content"
 msgid "Logo"
 msgstr "Logo"
 
-#: inc/gutenberg/blocks/comment/class-template.php:91
+#: inc/gutenberg/blocks/comment/class-template.php:88
 msgid ""
 "This post is password protected. Enter the password to view comments or "
 "leave a comment."
@@ -461,12 +465,12 @@ msgstr ""
 msgid "When extending %s, you must create a `get_html` method."
 msgstr "Când extindeți %s, trebuie să creați o metodă `get_html`."
 
-#: inc/core/class-core.php:113
+#: inc/gutenberg/blocks/query/class-title.php:148
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y"
 
-#: inc/core/class-core.php:112
+#: inc/gutenberg/blocks/query/class-title.php:147
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr "Arhive Anuale"

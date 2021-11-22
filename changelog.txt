@@ -1,4 +1,7 @@
 v5.2.8
+- Updated - Placeholder from site url to "Placeholder" text
+
+v5.2.8
 - Updated - Pagination class updated to block-templates/template-parts to be picked up by Utilitiy feature
 - Updated - Pagination to inherit button border radius
 - Updated - Buttons selector to extend couple of other blocks buttons
