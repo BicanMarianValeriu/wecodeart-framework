@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.4
+ * @version		5.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -205,10 +205,10 @@ class Social extends Dynamic {
 		.wp-block-social-links {
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: flex-start;
 			align-items: center;
 			padding-left: 0;
 			padding-right: 0;
+			gap: var(--wp--style--block-gap,1em);
 		}
 		.wp-block-social-links.aligncenter {
 			display: flex;
@@ -234,9 +234,6 @@ class Social extends Dynamic {
 		.wp-social-link {
 			display: block;
 			background-color: transparent;
-		}
-		.wp-social-link:not(:last-child) {
-			margin-right: calc((2.5/3) * 1em);
 		}
 		.wp-social-link a {
 			display: flex;

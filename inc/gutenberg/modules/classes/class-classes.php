@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.2.4
+ * @version		5.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -159,10 +159,23 @@ class Classes {
 			'hstack',
 			'vstack',
 			'lead',
+			'small',
+			'mark',
 			'disabled',
+			'clearfix',
 			'stretched-link',
+			'text-truncate',
 			'visually-hidden',
 			'visually-hidden-focusable',
+			'fixed-top',
+			'fixed-bottom',
+			'sticky-sm-top',
+			'sticky-md-top',
+			'sticky-lg-top',
+			'sticky-xl-top',
+			'sticky-xxl-top',
+			'list-unstyled',
+			'list-inline',
 			'ratio',
 			'ratio-1x1',
 			'ratio-4x3',

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.4
+ * @version		5.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -192,7 +192,8 @@ class Search extends Dynamic {
 	 */
 	public function styles() {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$desktop	= get_prop( $breaks, 'lg', '992px' );
+		$filter		= wecodeart_json( [ 'settings', 'custom', 'navbarBreakpoint' ], 'lg' );
+		$breakpoint	= get_prop( $breaks, $filter, '992px' );
 
 		return "
 		.wp-block-search {
@@ -225,7 +226,7 @@ class Search extends Dynamic {
 			margin-top: 10px;
 			margin-bottom: 0;
 		}
-		@media (min-width: $desktop) {
+		@media (min-width: $breakpoint) {
 			.navbar .wp-block-search {
 				margin-top: 0;
 				margin-left: 10px;

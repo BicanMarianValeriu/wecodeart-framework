@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.4
+ * @version		5.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -94,7 +94,7 @@ class Posts extends Dynamic {
 		// Start Template
 		$template = '<!-- wp:query ' . wp_json_encode( $args ) . ' -->';
 		$template .= '<div class="wp-block-query">';
-		$template .= '<!-- wp:post-template {"className":"wp-block-post-template--latest list-unstyled"} -->';
+		$template .= '<!-- wp:post-template {"className":"wp-block-post-template--latest"} -->';
 		
 		// Image
 		if ( $display_image ) {

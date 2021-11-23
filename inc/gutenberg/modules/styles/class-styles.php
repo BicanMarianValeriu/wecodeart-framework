@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.2.8
+ * @version		5.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -210,6 +210,11 @@ class Styles implements Integration {
 	 * @return 	string 	HTML
 	 */
 	public function filter_render( $content, $block ) {
+		$block_name	= get_prop( $block, 'blockName' );
+
+		// Skip nulls
+		if( ! $block_name ) return $content;
+
 		// Process a block
 		$processed 	= self::process_block( $block );
 
@@ -220,8 +225,7 @@ class Styles implements Integration {
 		$filters	= $processed->get_duotone();
 
 		if( in_array( $block_id, self::$processed ) ) return $content;
-
-		$block_name	= get_prop( $block, 'blockName' );
+		
 		// Remove styles, where needed.
 		// I'm not happy with this way but there is no other way to remove style attributes that I know, on PHP.
 		// It would be ok with JS but that is time consuming to manage deprecation etc.

@@ -1,5 +1,8 @@
-v5.2.8
+v5.2.9
 - Updated - Placeholder from site url to "Placeholder" text
+- Updated - Gutenberg styles extension to skip blocks with null blockName
+- Updated - WP Social Links add blockGap CSS support
+- Fixed - Latest Posts block double "list-unstyled" class
 
 v5.2.8
 - Updated - Pagination class updated to block-templates/template-parts to be picked up by Utilitiy feature
