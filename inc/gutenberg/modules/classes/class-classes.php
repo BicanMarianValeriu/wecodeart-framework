@@ -40,8 +40,8 @@ class Classes {
 	 */
 	public function register_hooks() {
 		// Admin
-		add_action( 'enqueue_block_editor_assets', 					[ $this, 'block_editor_assets' ] );
-		add_filter( 'wecodeart/filter/gutenberg/settings', 			[ $this, 'set_suggest_classes' ], 10, 2 );
+		add_action( 'enqueue_block_editor_assets', 					[ $this, 'block_editor_assets'	] );
+		add_filter( 'wecodeart/filter/gutenberg/settings', 			[ $this, 'set_suggestions' 	], 10, 2 );
 		add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'grid'		] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'helpers'	] );
 	}
@@ -65,7 +65,7 @@ class Classes {
 	 *
 	 * @return array Returns updated editors classes suggestions.
 	 */
-	public function set_suggest_classes( $settings, $post ) {
+	public function set_suggestions( $settings, $post ) {
 		if ( ! isset( $settings[ 'customClasses' ] ) ) {
 			$classes = [];	
 			$classes = array_merge( array_keys( Utilities::get_instance()->all() ), $classes );
@@ -125,18 +125,23 @@ class Classes {
 	 * @return 	array 	Returns updated editors settings.
 	 */
 	public function helpers( $args ) {
-		// Sizes
-		foreach( range( 1, 5 ) as $nr ) {
-			$args[] = 'display-'. $nr;
-			$args[] = 'fs-'. $nr;
+		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$breakpoints	= array_keys( $breakpoints );
+
+		// Sticky top - currently it must match the ones from CSS
+		// In the future, helpers will be moved to dynamic CSS
+		foreach( $breakpoints as $breakpoint ) {
+			$args[] = 'sticky-' . $breakpoint . '-top';
 		}
-		
+
+		// Typography extra sizes
 		foreach( range( 1, 6 ) as $nr ) {
-			$args[] = 'h'. $nr;
+			$args[] = 'display-' . $nr;
+			$args[] = 'h' . $nr;
 		}
 
 		return wp_parse_args( [
-			// Misc
+			// Misc - this classes should be optin in a skin!
 			// 'alert',
 			// 'alert-link',
 			// 'alert-heading',
@@ -169,11 +174,6 @@ class Classes {
 			'visually-hidden-focusable',
 			'fixed-top',
 			'fixed-bottom',
-			'sticky-sm-top',
-			'sticky-md-top',
-			'sticky-lg-top',
-			'sticky-xl-top',
-			'sticky-xxl-top',
 			'list-unstyled',
 			'list-inline',
 			'ratio',
