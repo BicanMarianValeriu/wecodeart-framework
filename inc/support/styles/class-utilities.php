@@ -132,7 +132,7 @@ class Utilities implements \ArrayAccess {
 		$filesystem = FileSystem::get_instance();
 		$filesystem->set_folder( 'cache' );
 
-        $has_cached = $filesystem->has_file( $cache_file );
+        $has_cached = $filesystem->has_file( self::CACHE );
 
 		if( ! $has_cached || false === get_transient( 'wecodeart/gutenberg/utilities' ) ) {
 			$filesystem->create_file( self::CACHE, $inline_css );
