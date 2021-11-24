@@ -81,31 +81,17 @@ final class Styles implements Integration {
 	 * Generate breakpoint class
 	 *
 	 * @param  string   $class
-	 * @param  string   $key
-	 * @param  bool     $responsive
+	 * @param  string   $value
+	 * @param  bool     $break
 	 *
 	 * @return string
 	 */
-	public static function generate_class( string $class = '', $key = '', $responsive = false ) {
-		if( $responsive === false ) {
-			$_class = $key === null ? '' : $class;
-			$return	= rtrim( $_class === '' ? $class : join( '-', [ $_class, $key ] ), '-' );
+	public static function generate_class( string $class = '', $value = '', $break = '' ) {
+		$return = join( '-', array_filter( [ $class, $break, $value ], function( $i ) {
+			return $i !== '';
+		} ) );
 
-			return $return;
-		}
-
-		$_class_ = explode( '-', $class );
-
-		if( count( $_class_ ) >= 2 ) {
-			$_last  = array_pop( $_class_ );
-			$return = array_merge( $_class_, [ $key, $_last ] );
-		} else {
-			$return = [ $_class_[0], $key ];
-		}
-
-		$return = rtrim( join( '-', $return ), '-' );
-
-		return $return;
+		return sanitize_html_class( $return );
 	}
 
 	/**
@@ -156,8 +142,8 @@ final class Styles implements Integration {
 			// Move on if not responsive
 			if( ! $responsive ) continue;
 
-			foreach( $media as $key => $breakpoint ) {
-				$_class_ = self::generate_class( $_class, $key, true );
+			foreach( $media as $break => $query ) {
+				$_class_ = self::generate_class( $class, $key, $break );
 				
 				$output = [];
 				foreach( $properties as $property ) {
@@ -165,7 +151,7 @@ final class Styles implements Integration {
 				}
 
 				$container->register( $_class_, [
-					"@media (min-width:{$breakpoint})" => $output
+					"@media (min-width:{$query})" => $output
 				] );
 			}
 		}

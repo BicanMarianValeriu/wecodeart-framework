@@ -112,11 +112,10 @@ foreach( [
         'values'	=> [
             'none'          => 'none',
             'inline'        => 'inline',
-            'inline-block'  => 'inline-block',
             'block'         => 'block',
             'inline-block'  => 'inline-block',
             'flex'          => 'flex',
-            'inline-block'  => 'inline-flex',
+            'inline-flex'   => 'inline-flex',
             'grid'          => 'grid',
             'table'         => 'table',
             'table-cell'    => 'table-cell',
@@ -139,6 +138,21 @@ foreach( [
         'class'		=> 'font',
         'values'	=> [
             'monospace' => 'var(--wp--font-monospace)',
+        ],
+    ],
+    [
+        'property'  => 'font-weight',
+        'class'		=> 'fw',
+        'values'	=> [
+            100 => '100',
+            200 => '200',
+            300 => '300',
+            400 => '400',
+            500 => '500',
+            600 => '600',
+            700 => '700',
+            800 => '800',
+            900 => '900',
         ],
     ],
     [
@@ -196,21 +210,12 @@ foreach( [
         ],
     ],
     [
-        'property'  => 'flex-grow',
-        'class'		=> 'flex',
-        'responsive'=> true,
-        'values'	=> [
-            'grow-0'    => 0,
-            'grow-1'    => 1,
-        ],
-    ],
-    [
         'property'  => 'flex-shrink',
         'class'		=> 'flex',
         'responsive'=> true,
         'values'	=> [
-            'grow-0'    => 0,
-            'grow-1'    => 1,
+            'shrink-0'  => 0,
+            'shrink-1'  => 1,
         ],
     ],
     [
