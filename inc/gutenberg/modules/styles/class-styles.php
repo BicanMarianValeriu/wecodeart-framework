@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.2.9
+ * @version		5.3.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -21,7 +21,7 @@ use WeCodeArt\Gutenberg;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
 use WeCodeArt\Support\FileSystem;
-use WeCodeArt\Gutenberg\Modules\Styles\Utilities;
+use WeCodeArt\Support\Styles\Utilities;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Gutenberg\Modules\Styles\register_utility;
 
@@ -39,7 +39,6 @@ class Styles implements Integration {
 	 * @var string
 	 */
     const CSS_ID 	= 'wecodeart-blocks-custom';
-    const UTILITIES = 'utilities.css';
 
 	/**
 	 * The Styles Processor
@@ -102,8 +101,7 @@ class Styles implements Integration {
 	 * @return 	void
 	 */
 	public function register_hooks() {
-		$this->CSS 			= wecodeart( 'integrations' )->get( 'styles' )::get_instance();
-		$this->Utilities 	= Utilities::get_instance();
+		$this->CSS	= wecodeart( 'integrations' )->get( 'styles' )::get_instance();
 
 		// Custom Style Attributes support
 		\WP_Block_Supports::get_instance()->register( 'styleCustom', [
@@ -118,7 +116,8 @@ class Styles implements Integration {
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 20, 1 );
 		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 20, 1 );
-		add_action( 'init',							[ $this, 'setup_utilities' 		], 100 );
+		// On 90 priority we register all utilities so we add editor styles after this.
+		add_action( 'init',							[ $this, 'editor_styles' 		], 100 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_spacing_gap_support', 10, 2 );
@@ -140,34 +139,11 @@ class Styles implements Integration {
 	 *
 	 * @return  void
 	 */
-	public function setup_utilities() {
-		// Load Utilities
-		require_once( __DIR__ . '/utilities.php' );
-
-		// Stylesheet
-		$inline_css = '';
-		$array_css 	= [];
-
-		foreach( $this->Utilities->all() as $utility ) $array_css = array_merge_recursive( $array_css, $utility );
-
-		if( ! empty( $array_css ) ) {
-			$processed 	= $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
-			$inline_css .= $this->CSS::compress( $processed );
-		}
-
-		if( empty( $inline_css ) ) return;
-		
+	public function editor_styles() {
 		$filesystem = FileSystem::get_instance();
 		$filesystem->set_folder( 'cache' );
 
-		$has_cached = $filesystem->has_file( self::UTILITIES );
-
-		if( ! $has_cached || false === get_transient( 'wecodeart/gutenberg/utilities' ) ) {
-			$filesystem->create_file( self::UTILITIES, $inline_css );
-			set_transient( 'wecodeart/gutenberg/utilities', true, 5 * MINUTE_IN_SECONDS );
-		}
-
-		add_editor_style( $filesystem->get_file_url( self::UTILITIES, true ) );
+		add_editor_style( $filesystem->get_file_url( $this->CSS->Utilities::CACHE, true ) );
 		
 		$filesystem->set_folder( '' );
 	}
@@ -303,25 +279,10 @@ class Styles implements Integration {
 	 */
 	public function register_styles() {
 		$inline_css = '';
-		$array_css	= [];
 
 		// Process Utilities
 		if( ! empty( $this->classes ) ) {
-			foreach( $this->classes as $utility ) {
-				// If we dont have utility, move on.
-				if( ! $this->Utilities->has( $utility ) ) continue;
-				// Get utility styles array.
-				$utility_css	= $this->Utilities->get( $utility );
-				// Merge breakpoints.
-				$breakpoint		= current( array_keys( $utility_css ) );
-				$existing 		= isset( $array_css[$breakpoint] ) ? $array_css[$breakpoint] : [];
-				$array_css[$breakpoint] = array_merge( $existing, $utility_css[$breakpoint] );
-			}
-			
-			if( ! empty( $array_css ) ) {
-				$processed 	= $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
-				$inline_css .= $this->CSS::compress( $processed );
-			}
+			$this->CSS->Utilities->load( $this->classes );
 		}
 
 		// Process Attributes
@@ -400,7 +361,7 @@ class Styles implements Integration {
 
 		// Darken the pallete link color (hex) on hover
 		// Sanitized because we are not using CSS::parse method which does that by default (for arrays)
-		$link_color = $this->CSS::hex_brightness( $this->CSS->sanitize::color( $link_color ), -25 );
+		$link_color = $this->CSS::hex_brightness( $this->CSS->Sanitize::color( $link_color ), -25 );
 
 		wp_add_inline_style( 'global-styles', "a:hover{color:${link_color};}" );
 	}

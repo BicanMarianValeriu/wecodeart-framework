@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.2.9
+ * @version		5.3.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -19,8 +19,8 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
+use WeCodeArt\Support\Styles\Utilities;
 use WeCodeArt\Conditional\Traits\No_Conditionals;
-use WeCodeArt\Gutenberg\Modules\Styles\Utilities;
 
 /**
  * Handles Gutenberg Theme Custom Classes Functionality.

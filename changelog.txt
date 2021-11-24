@@ -1,3 +1,8 @@
+v5.3.0
+- Updated - theme.json blockGap back to null (issues with 0 set on main block wrappers)
+- Updated - Styles Extension: Move Gutenberg utilities to Styles extension
+- Updated - Utilities now will generate own inline CSS / method to load any utility programatically
+
 v5.2.9
 - Updated - Placeholder from site url to "Placeholder" text
 - Updated - Gutenberg styles extension to skip blocks with null blockName

@@ -6,21 +6,22 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package		WeCodeArt Framework
- * @subpackage  Gutenberg Utilities
+ * @subpackage  Styles Utilities
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.2.4
+ * @version		5.3.0
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles;
+namespace WeCodeArt\Support\Styles;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Support\FileSystem;
 use function WeCodeArt\Functions\get_prop;
 
 /**
- * Handles Gutenberg Utilities.
+ * Handles Utilities.
  */
 class Utilities implements \ArrayAccess {
 
@@ -31,7 +32,114 @@ class Utilities implements \ArrayAccess {
 	 *
 	 * @var Utilities[]
 	 */
-	protected $items = [];
+	protected $items    = [];
+
+    /**
+	 * The utilities classes to load
+	 *
+	 * @access 	public
+	 * @var 	array
+	 */
+	protected $classes  = [];
+
+    /**
+	 * The CSS ID for registered style.
+	 *
+	 * @var string
+	 */
+    const CSS_ID    = 'wecodeart-utilities';
+
+    /**
+	 * The CSS cache file.
+	 *
+	 * @var string
+	 */
+    const CACHE     = 'utilities.css';
+
+    /**
+	 * Send to Constructor
+	 */
+	public function init() {
+		$this->CSS = wecodeart( 'integrations' )->get( 'styles' );
+
+        // Generate CSS
+        add_action( 'wp_print_styles', [ $this, 'generate' ], 20, 1 );
+	}
+
+    /**
+     * Load.
+     *
+     * @param  string|array
+     *
+     * @return void
+     */
+    public function load( $key ) {
+        return $this->classes = wp_parse_args( (array) $key, $this->classes );
+	}
+
+    /**
+	 * Output styles.
+	 *
+	 * @return 	string
+	 */
+	public function generate() {
+        if( empty( $this->classes ) ) return;
+
+		$inline_css = '';
+		$array_css	= [];
+
+		foreach( array_unique( $this->classes ) as $utility ) {
+            // If we dont have utility, move on.
+            if( ! $this->has( $utility ) ) continue;
+            // Merge breakpoints.
+            $array_css = array_merge_recursive( $array_css, $this->get( $utility ) );
+        }
+        
+        if( ! empty( $array_css ) ) {
+            $processed 	= $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
+            $inline_css .= $this->CSS::compress( $processed );
+        }
+
+		if( empty( $inline_css ) ) return;
+
+		wp_register_style( self::CSS_ID, false, [], true, true );
+		wp_add_inline_style( self::CSS_ID, $inline_css );
+		wp_enqueue_style( self::CSS_ID );
+	}
+
+    /**
+	 * Generate Utilities CSS on admin.
+	 *
+	 * @return  void
+	 */
+	public function cache() {
+		// Stylesheet
+		$inline_css = '';
+		$array_css 	= [];
+
+		foreach( $this->all() as $utility ) {
+			$array_css = array_merge_recursive( $array_css, $utility );
+		}
+
+		if( ! empty( $array_css ) ) {
+			$processed 	= $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
+			$inline_css .= $this->CSS::compress( $processed );
+		}
+
+		if( empty( $inline_css ) ) return;
+		
+		$filesystem = FileSystem::get_instance();
+		$filesystem->set_folder( 'cache' );
+
+        $has_cached = $filesystem->has_file( $cache_file );
+
+		if( ! $has_cached || false === get_transient( 'wecodeart/gutenberg/utilities' ) ) {
+			$filesystem->create_file( self::CACHE, $inline_css );
+			set_transient( 'wecodeart/gutenberg/utilities', true, 5 * MINUTE_IN_SECONDS );
+		}
+
+		$filesystem->set_folder( '' );
+	}
 
 	/**
      * Set a given module value.
@@ -152,98 +260,4 @@ class Utilities implements \ArrayAccess {
     public function offsetUnset( $key ) {
         $this->set( $key, null );
     }
-}
-
-/**
- * Generate breakpoint class
- *
- * @param  string   $class
- * @param  string   $key
- * @param  bool     $responsive
- *
- * @return string
- */
-function generate_class( string $class = '', $key = '', $responsive = false ) {
-    if( $responsive === false ) {
-        $_class = $key === null ? '' : $class;
-		$return	= rtrim( $_class === '' ? $class : join( '-', [ $_class, $key ] ), '-' );
-
-        return $return;
-    }
-
-    $_class_ = explode( '-', $class );
-
-    if( count( $_class_ ) >= 2 ) {
-        $_last  = array_pop( $_class_ );
-        $return = array_merge( $_class_, [ $key, $_last ] );
-    } else {
-        $return = [ $_class_[0], $key ];
-    }
-
-    $return = rtrim( join( '-', $return ), '-' );
-
-    return $return;
-}
-
-/**
- * Register CSS utility to be parsed by CSS module.
- *
- * @param  array  $args
- *
- * @return void
- */
-function register_utility( $args = [] ) {
-	$defaults = [
-		'property' 	=> '',
-		'class'		=> '',
-		'values'	=> [],
-		'responsive'=> false,
-	];
-
-	$args 	= wp_parse_args( $args, $defaults );
-
-	$values = (array) get_prop( $args, 'values', [] );
-	
-    // Bail if no values.
-	if( empty( $values ) ) return;
-	
-	$properties	= (array) get_prop( $args, 'property' );
-	$class 		= get_prop( $args, 'class', $properties[0] );
-
-    // Bail if no class.
-    if( ! $class ) return;
-
-	$media		= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-	$responsive = get_prop( $args, 'responsive' ) && ! empty( $media );
-    $container  = Utilities::get_instance();
-
-	foreach( $values as $key => $value ) {
-		$_class	= generate_class( $class, $key );
-        $value  = (string) $value;
-
-		$output = [];
-        foreach( $properties as $property ) {
-            $output['.' . $_class][$property] = "$value!important";
-        }
-	
-		$container->register( $_class, [
-			'global' => $output
-		] );
-		
-		// Move on if not responsive
-		if( ! $responsive ) continue;
-
-		foreach( $media as $key => $breakpoint ) {
-			$_class_ = generate_class( $_class, $key, true );
-			
-			$output = [];
-            foreach( $properties as $property ) {
-                $output['.' . $_class_][$property] = "$value!important";
-            }
-
-			$container->register( $_class_, [
-				"@media (min-width:{$breakpoint})" => $output
-			] );
-		}
-	}
 }

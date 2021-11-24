@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.2.8
+ * @version		5.3.0
  */
 
 namespace WeCodeArt\Support;
@@ -36,20 +36,139 @@ final class Styles implements Integration {
 	 * @since  	5.0.0
 	 * @var 	object
 	 */
-	public 	$sanitize	= null;
+	public 	$Sanitize	= null;
+	
+	/**
+	 * Utilities
+	 *
+	 * @since  	5.0.0
+	 * @var 	object
+	 */
+	public 	$Utilities	= null;
 
 	/**
 	 * Send to Constructor
 	 */
 	public function init() {
-		$this->sanitize = Styles\Sanitize::get_instance();
+		$this->Sanitize 	= Styles\Sanitize::get_instance();
+		$this->Utilities 	= Styles\Utilities::get_instance();
 	}
 
 	/**
 	 * Register hooks
 	 */
 	public function register_hooks() {
+		// Styles init action
 		do_action( 'wecodeart/support/styles/init', $this );
+		
+		// Require utilities
+		add_action( 'init', [ $this, 'require_utils' ], 90 );
+	}
+
+	/**
+     * Load Utils
+     *
+     * @since 	5.3.0
+     * @version 5.3.0
+     *
+     * @return 	void
+     */
+    public function require_utils() {
+		require_once( __DIR__ . '/utilities.php' );
+    }
+
+	/**
+	 * Generate breakpoint class
+	 *
+	 * @param  string   $class
+	 * @param  string   $key
+	 * @param  bool     $responsive
+	 *
+	 * @return string
+	 */
+	public static function generate_class( string $class = '', $key = '', $responsive = false ) {
+		if( $responsive === false ) {
+			$_class = $key === null ? '' : $class;
+			$return	= rtrim( $_class === '' ? $class : join( '-', [ $_class, $key ] ), '-' );
+
+			return $return;
+		}
+
+		$_class_ = explode( '-', $class );
+
+		if( count( $_class_ ) >= 2 ) {
+			$_last  = array_pop( $_class_ );
+			$return = array_merge( $_class_, [ $key, $_last ] );
+		} else {
+			$return = [ $_class_[0], $key ];
+		}
+
+		$return = rtrim( join( '-', $return ), '-' );
+
+		return $return;
+	}
+
+	/**
+	 * Register CSS utility to be parsed by CSS module.
+	 *
+	 * @param  array  $args
+	 *
+	 * @return void
+	 */
+	public static function register_utility( $args = [] ) {
+		$defaults = [
+			'property' 	=> '',
+			'class'		=> '',
+			'values'	=> [],
+			'responsive'=> false,
+		];
+
+		$args 	= wp_parse_args( $args, $defaults );
+
+		$values = (array) get_prop( $args, 'values', [] );
+		
+		// Bail if no values.
+		if( empty( $values ) ) return;
+		
+		$properties	= (array) get_prop( $args, 'property' );
+		$class 		= get_prop( $args, 'class', $properties[0] );
+
+		// Bail if no class.
+		if( ! $class ) return;
+
+		$media		= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$responsive = get_prop( $args, 'responsive' ) && ! empty( $media );
+		$container  = Styles::get_instance()->Utilities;
+
+		foreach( $values as $key => $value ) {
+			$_class	= self::generate_class( $class, $key );
+			$value  = (string) $value;
+
+			$output = [];
+			foreach( $properties as $property ) {
+				$output['.' . $_class][$property] = "$value!important";
+			}
+		
+			$container->register( $_class, [
+				'global' => $output
+			] );
+			
+			// Move on if not responsive
+			if( ! $responsive ) continue;
+
+			foreach( $media as $key => $breakpoint ) {
+				$_class_ = self::generate_class( $_class, $key, true );
+				
+				$output = [];
+				foreach( $properties as $property ) {
+					$output['.' . $_class_][$property] = "$value!important";
+				}
+
+				$container->register( $_class_, [
+					"@media (min-width:{$breakpoint})" => $output
+				] );
+			}
+		}
 	}
 
     /**
@@ -57,6 +176,7 @@ final class Styles implements Integration {
      *
      * @since 	3.7.7
      * @version 5.0.0
+	 * 
      * @param 	string $css CSS content to trim.
      *
      * @return 	string

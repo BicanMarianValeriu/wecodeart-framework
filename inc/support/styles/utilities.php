@@ -9,10 +9,10 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.2.4
+ * @version		5.3.0
  */
 
-use function WeCodeArt\Gutenberg\Modules\Styles\register_utility;
+use WeCodeArt\Support\Styles;
 
 // Theme Shadows
 $shadows    = wecodeart_json( [ 'settings', 'custom', 'shadows' ], [] );
@@ -645,4 +645,4 @@ foreach( [
             'hidden'    => 'hidden'
         ],
     ],
-] as $utility ) register_utility( $utility );
+] as $utility ) Styles::register_utility( $utility );
