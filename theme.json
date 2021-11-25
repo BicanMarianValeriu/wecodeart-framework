@@ -122,7 +122,9 @@
 			],
 			"link": true,
 			"custom": true,
-			"customGradient": true
+			"customGradient": true,
+			"corePalette": false,
+			"coreGradients": false
 		},
 		"custom": {
 			"breakpoints": {
@@ -144,7 +146,7 @@
 				"4": "2rem",
 				"5": "3rem"
 			},
-			"navbarBreakpoint": "lg"
+			"mobileBreakpoint": "lg"
 		},
 		"layout": {
 			"contentSize": "1320px",

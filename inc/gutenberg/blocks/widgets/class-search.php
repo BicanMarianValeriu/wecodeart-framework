@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.9
+ * @version		5.3.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -192,7 +192,7 @@ class Search extends Dynamic {
 	 */
 	public function styles() {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$filter		= wecodeart_json( [ 'settings', 'custom', 'navbarBreakpoint' ], 'lg' );
+		$filter		= wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' );
 		$breakpoint	= get_prop( $breaks, $filter, '992px' );
 
 		return "

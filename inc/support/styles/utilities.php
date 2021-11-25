@@ -527,6 +527,7 @@ foreach( [
         'class'		=> 'rounded-top',
         'values'	=> [
             null    => '.25rem',
+            0       => 0,
         ],
     ],
     [
@@ -534,6 +535,7 @@ foreach( [
         'class'		=> 'rounded-bottom',
         'values'	=> [
             null    => '.25rem',
+            0       => 0,
         ],
     ],
     [
@@ -541,6 +543,7 @@ foreach( [
         'class'		=> 'rounded-start',
         'values'	=> [
             null    => '.25rem',
+            0       => 0,
         ],
     ],
     [
@@ -548,6 +551,7 @@ foreach( [
         'class'		=> 'rounded-end',
         'values'	=> [
             null    => '.25rem',
+            0       => 0,
         ],
     ],
     // Shadow

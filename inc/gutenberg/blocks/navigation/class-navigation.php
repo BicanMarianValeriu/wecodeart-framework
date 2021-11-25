@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.5
+ * @version		5.3.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -510,7 +510,7 @@ class Navigation extends Dynamic {
 	 * @return 	array
 	 */
 	public function get_mobile_breakpoint() {
-		return sanitize_html_class( 'navbar-expand-' . wecodeart_json( [ 'settings', 'custom', 'navbarBreakpoint' ], 'lg' ) );
+		return sanitize_html_class( 'navbar-expand-' . wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' ) );
 	}
 
 	/**
