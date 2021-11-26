@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-11-22 20:44+0000\n"
+"PO-Revision-Date: 2021-11-26 01:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -154,12 +154,8 @@ msgstr[1] "%1$s comentarii"
 msgstr[2] ""
 
 #: inc/support/plugins/cf7/class-cf7.php:79
-msgid ""
-"Contact Form 7 support is enabled. Enjoy properly styled forms based on your "
-"theme!"
-msgstr ""
-"Asistența pentru Formularul de contact 7 este activată. Bucurați-vă de forme "
-"stilate corespunzător bazat pe tema dvs.!"
+msgid "Contact Form 7 support is enabled!"
+msgstr "Asistența Formular de contact 7 este activată!"
 
 #: block-views/general/credits.tpl.php:22
 #, php-format
@@ -210,18 +206,6 @@ msgstr "Notificarea nu a putut fi respinsă"
 msgid "Group"
 msgstr "Grupare"
 
-#: inc/markup/class-markup.php:209
-#, php-format
-#| msgid ""
-#| "Wrappers are not properly defined for \"%s\". Please check your theme "
-#| "code."
-msgid ""
-"HTML wrappers are not properly defined for \"%s\". Please check your theme "
-"code."
-msgstr ""
-"Wrapper-urile HTML nu sunt definite corect pentru „%s”. Vă rugăm să "
-"verificați codul temei."
-
 #. URI of the theme
 msgid "https://www.wecodeart.com/"
 msgstr "https://www.wecodeart.com/"
@@ -229,6 +213,11 @@ msgstr "https://www.wecodeart.com/"
 #. Author URI of the theme
 msgid "https://www.wecodeart.com/about/"
 msgstr "https://www.wecodeart.com/about/"
+
+#: inc/markup/class-markup.php:209
+#, php-format
+msgid "Invalid HTML wrappers for \"%s\"."
+msgstr "Wrapper HTML nevalid pentru „%s”."
 
 #: block-views/meta/comments.tpl.php:50
 msgid "Leave a Comment"
@@ -284,7 +273,7 @@ msgstr "Parolă"
 msgid "Placeholder"
 msgstr "Substituent"
 
-#: inc/gutenberg/blocks/post/class-image.php:169
+#: inc/gutenberg/blocks/post/class-image.php:168
 msgid "Placeholder image"
 msgstr "Imagine substituent"
 

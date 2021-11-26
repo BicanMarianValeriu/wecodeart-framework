@@ -9,7 +9,7 @@
  * @subpackage  Markup
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.2.1
+ * @version		5.3.0
  */
 
 namespace WeCodeArt;
@@ -170,7 +170,7 @@ class Markup {
      * Wrapper method for any html
 	 *
 	 * @since 	unknown
-	 * @version	5.0.0
+	 * @version	5.3.0
 	 *
 	 * @param	string	context		required ( used by generate_attr's dynamic filter )
 	 * @param 	mixed	function	required ( the function called to be wrapped )
@@ -185,7 +185,7 @@ class Markup {
 			[
 				'tag' 	=> 'div',
 				'attrs' => [
-					'class' => esc_attr( $context )
+					'class' => $context
 				]
 			]
 		];
@@ -204,11 +204,9 @@ class Markup {
 		// Make sure $args are an array.
 		if ( empty( $args ) || ( ! empty( $args ) && count( array_unique( $_wrappers ) ) !== 1 ) ) {
 			$args = $defaults;
+
 			new \WP_Error( 'wecodeart_markup_wrap_fallback', 
-				sprintf( 
-					__( 'HTML wrappers are not properly defined for "%s". Please check your theme code.', 'wecodeart' ),
-					$context
-				)
+				sprintf( __( 'Invalid HTML wrappers for "%s".', 'wecodeart' ), $context )
 			);
 		}
 		

@@ -4,6 +4,10 @@ v5.3.0
 - Updated - Utilities now will generate own inline CSS / method to load any utility programatically
 - Updated - Added couple more missing utilities
 - Updated - JSON custom navbarBreakpoint to mobileBreakpoint rename (it is used on multiple places not just navbar)
+- Updated - Markup::wrap error wording
+- Updated - CF7 Support extension notification wording
+- Updated - Prepare CORE/Navigation block for upcomming GB plugin update
+- Updated - Local RO translations
 - Fixed - Utilities responsive classes (generating wrong classnames for breakpoints)
 - Fixed - Search post spacing issue - added post bottom margin
 - Added - Opt out from the core colors and gradients

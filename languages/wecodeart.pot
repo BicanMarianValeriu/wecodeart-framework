@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 20:43+0000\n"
+"POT-Creation-Date: 2021-11-26 01:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -141,9 +141,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/support/plugins/cf7/class-cf7.php:79
-msgid ""
-"Contact Form 7 support is enabled. Enjoy properly styled forms based on your "
-"theme!"
+msgid "Contact Form 7 support is enabled!"
 msgstr ""
 
 #: block-views/general/credits.tpl.php:22
@@ -191,19 +189,17 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: inc/markup/class-markup.php:209
-#, php-format
-msgid ""
-"HTML wrappers are not properly defined for \"%s\". Please check your theme "
-"code."
-msgstr ""
-
 #. URI of the theme
 msgid "https://www.wecodeart.com/"
 msgstr ""
 
 #. Author URI of the theme
 msgid "https://www.wecodeart.com/about/"
+msgstr ""
+
+#: inc/markup/class-markup.php:209
+#, php-format
+msgid "Invalid HTML wrappers for \"%s\"."
 msgstr ""
 
 #: block-views/meta/comments.tpl.php:50
@@ -260,7 +256,7 @@ msgstr ""
 msgid "Placeholder"
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-image.php:169
+#: inc/gutenberg/blocks/post/class-image.php:168
 msgid "Placeholder image"
 msgstr ""
 

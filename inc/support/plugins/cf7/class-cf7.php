@@ -9,7 +9,7 @@
  * @subpackage 	Support\CF7
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.6
+ * @version		5.3.0
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -76,7 +76,7 @@ class CF7 implements Integration {
 	 */
 	public function manage_notice() {
 		$notification = new Notification(
-			esc_html__( 'Contact Form 7 support is enabled. Enjoy properly styled forms based on your theme!', 'wecodeart' ),
+			esc_html__( 'Contact Form 7 support is enabled!', 'wecodeart' ),
 			[
 				'id'			=> self::NOTICE_ID,
 				'type'     		=> Notification::INFO,
