@@ -180,14 +180,20 @@ class Link extends Dynamic {
 		$inner_html = '';
 		foreach ( $block->inner_blocks as $inner_block ) $inner_html .= $inner_block->render();
 		
-		// Use overlay first, fallback to nav background (or body)
+		// Use overlay first, fallback to nav background (or body).
 		$color_type = get_prop( $block->context, 'overlayBackgroundColor' );
 		$key_name 	= $color_type ? 'overlay-background' : 'background';
 		$background = Navigation::get_class_color( $block->context, $key_name );
 		
 		$classes 	= [ 'wp-block-navigation-link__dropdown', 'dropdown-menu' ];
+
 		if( ( Styles::color_lightness( $background ) < 380 ) ) {
 			$classes[] = 'dropdown-menu-dark';
+		}
+
+		// This should be temporary until the API gets stable and we can properly see when is a dropdown.
+		if( strpos( $inner_html, 'nav-link' ) ) {
+			$inner_html = str_replace( 'nav-link', 'dropdown-item', $inner_html );
 		}
 
 		Markup::wrap( 'nav-dropdown', [ [

@@ -536,7 +536,8 @@ class Navigation extends Dynamic {
 	public function styles() {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$filter		= explode( '-', $this->get_mobile_breakpoint() );
-		$breakpoint	= get_prop( $breaks, end( $filter ), '992px' );
+		$filter		= end( $filter );
+		$breakpoint	= get_prop( $breaks, $filter, '992px' );
 
 		return "
 		:is(.site-header,.offcanvas) .wp-block-navigation {
@@ -587,6 +588,10 @@ class Navigation extends Dynamic {
 			left: 100%;
 		}
 		@media (min-width: $breakpoint) {
+			.wp-block-navigation.navbar-expand-{$filter} :is(.nav-link,.dropdown-item) {
+				padding-left: var(--wp--style--block-gap, .5rem);
+				padding-right: var(--wp--style--block-gap, .5rem);
+			}
 			.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
 				border-top: 0.3em solid transparent;
 				border-right: 0;

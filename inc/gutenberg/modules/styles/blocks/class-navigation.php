@@ -34,7 +34,7 @@ class Navigation extends Base {
 		$output['element'] 	= $this->element;
 		
 		// Navigation background
-		if ( $value = get_prop( $this->attrs, 'customBackgroundColor', '#ffffff' ) ) {
+		if ( $value = get_prop( $this->attrs, 'customBackgroundColor' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'background-color',
 				'value'	  	=> $value
@@ -42,7 +42,7 @@ class Navigation extends Base {
 		}
 
 		// Navigation item color
-		if ( $value = get_prop( $this->attrs, 'customTextColor', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'customTextColor' ) ) {
 			$this->output[] = wp_parse_args( [
 				'element'	=> join( ' ', [ $this->element, '.navbar-nav', '.nav-link' ] ),
 				'property' 	=> 'color',
@@ -50,18 +50,75 @@ class Navigation extends Base {
 			], $output );
 		}
 		
-		// Dropdowns item color
-		if ( $value = get_prop( $this->attrs, 'overlayTextColor', false ) ) {
+		// Dropdowns items
+		$output['element'] = join( ' ', [ $this->element, '.dropdown-item' ] );
+		if ( $value = get_prop( $this->attrs, 'fontSize' ) ) {
 			$this->output[] = wp_parse_args( [
-				'element'	=> join( ' ', [ $this->element, '.dropdown-item' ] ),
+				'property' 	=> 'font-size',
+				'value'	  	=> sprintf( 'var(--wp--preset--font-size--%s)', $value )
+			], $output );
+		}
+		
+		if ( $typography = get_prop( $this->attrs, [ 'style', 'typography' ], [] ) ) {
+			if ( $value = get_prop( $typography, [ 'fontFamily' ] ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'font-family',
+					'value'	  	=> sprintf( 'var(--wp--preset--font-family--%s)', $value )
+				], $output );
+			}
+
+			if ( $value = get_prop( $typography, [ 'fontSize' ] ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'font-size',
+					'value'	  	=> $value
+				], $output );
+			}
+
+			if ( $value = get_prop( $typography, [ 'fontStyle' ] ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'font-style',
+					'value'	  	=> $value
+				], $output );
+			}
+
+			if ( $value = get_prop( $typography, [ 'fontWeight' ] ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'font-weight',
+					'value'	  	=> $value
+				], $output );
+			}
+
+			if ( $value = get_prop( $typography, [ 'lineHeight' ] ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'line-height',
+					'value'	  	=> $value
+				], $output );
+			}
+
+			if ( $value = get_prop( $typography, [ 'textTransform' ] ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'text-transform',
+					'value'	  	=> $value
+				], $output );
+			}
+
+			if ( $value = get_prop( $typography, [ 'textDecoration' ] ) ) {
+				$this->output[] = wp_parse_args( [
+					'property' 	=> 'text-decoration',
+					'value'	  	=> $value
+				], $output );
+			}
+		}
+
+		if ( $value = get_prop( $this->attrs, 'overlayTextColor' ) ) {
+			$this->output[] = wp_parse_args( [
 				'property' 	=> 'color',
 				'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $value )
 			], $output );
 		}
 		
-		if ( $value = get_prop( $this->attrs, 'customOverlayTextColor', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'customOverlayTextColor' ) ) {
 			$this->output[] = wp_parse_args( [
-				'element'	=> join( ' ', [ $this->element, '.dropdown-item' ] ),
 				'property' 	=> 'color',
 				'value'	  	=> $value
 			], $output );
@@ -71,7 +128,7 @@ class Navigation extends Base {
 		$hex_color 		= null;
 		$named_color 	= null;
 
-		if ( $value = get_prop( $this->attrs, 'overlayBackgroundColor', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'overlayBackgroundColor' ) ) {
 			$named_color = $value;
 			$this->output[] = wp_parse_args( [
 				'element'	=> join( ' ', [ $this->element, ':where(.dropdown-menu, .dropdown-item)' ] ),
@@ -85,7 +142,7 @@ class Navigation extends Base {
 			], $output );
 		}
 
-		if ( $value = get_prop( $this->attrs, 'customOverlayBackgroundColor', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'customOverlayBackgroundColor' ) ) {
 			$hex_color = $value;
 			$this->output[] = wp_parse_args( [
 				'element'	=> join( ' ', [ $this->element, ':where(.dropdown-menu, .dropdown-item)' ] ),

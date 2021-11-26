@@ -1,3 +1,9 @@
+v5.3.1
+- Updated - Site logo width on header template part
+- Updated - CORE/Navigation - improved styleing for dropdowns
+- Updated - CORE/Navigation - blockGap support
+- Fixed - CORE/Navigation - temporary fix for the (hopefully temporary) issue with dropdown-item class for submenu
+
 v5.3.0
 - Updated - theme.json blockGap back to null (issues with 0 set on main block wrappers)
 - Updated - Styles Extension: Move Gutenberg utilities to Styles extension
