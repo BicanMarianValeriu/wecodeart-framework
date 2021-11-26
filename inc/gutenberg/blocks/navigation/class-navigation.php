@@ -137,14 +137,13 @@ class Navigation extends Dynamic {
 		// If there are no inner blocks then fallback to rendering an appropriate fallback.
 		// if ( empty( $inner_blocks ) ) {
 		// 	$is_fallback                      = true; // indicate we are rendering the fallback.
-		// 	$attributes['__unstableMaxPages'] = 4; // set value to be passed as context to Page List block.
 
 		// 	$parsed_blocks = block_core_navigation_get_fallback_blocks();
 
-		// 	// May be empty if core/navigation or core/page list are not registered.
-		// 	if ( empty( $parsed_blocks ) ) {
-		// 		return '';
-		// 	}
+		// Fallback my have been filtered so do basic test for validity.
+		// if ( empty( $parsed_blocks ) || ! is_array( $parsed_blocks ) ) {
+		// 	return '';
+		// }
 
 		// 	$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
 		// }
