@@ -93,6 +93,7 @@ class Navigation extends Dynamic {
 		// If `__unstableLocation` is defined, create inner blocks from the classic menu assigned to that location.
 		if ( empty( $inner_blocks ) && array_key_exists( '__unstableLocation', $attributes ) ) {
 			$menu_items = $this->get_menu_items( $attributes['__unstableLocation'] );
+
 			if ( empty( $menu_items ) ) {
 				return '';
 			}
@@ -105,34 +106,48 @@ class Navigation extends Dynamic {
 		if ( ! empty( $block->context['navigationArea'] ) ) {
 			$area    = $block->context['navigationArea'];
 			$mapping = get_option( 'wp_navigation_areas', [] );
+
 			if ( ! empty( $mapping[ $area ] ) ) {
 				$attributes['navigationMenuId'] = $mapping[ $area ];
 			}
 		}
+
+		// Ensure that blocks saved with the legacy ref attribute name (navigationMenuId) continue to render.
+		if ( array_key_exists( 'navigationMenuId', $attributes ) ) {
+			$attributes['ref'] = $attributes['navigationMenuId'];
+		}
 	
 		// Load inner blocks from the navigation post.
-		if ( array_key_exists( 'navigationMenuId', $attributes ) ) {
-			$navigation_post = get_post( $attributes['navigationMenuId'] );
+		if ( array_key_exists( 'ref', $attributes ) ) {
+			$navigation_post = get_post( $attributes['ref'] );
+			
 			if ( ! isset( $navigation_post ) ) {
 				return '';
 			}
-	
+
 			$parsed_blocks = parse_blocks( $navigation_post->post_content );
-	
-			// 'parse_blocks' includes a null block with '\n\n' as the content when
-			// it encounters whitespace. This code strips it.
-			$compacted_blocks = array_filter( $parsed_blocks, function( $block ) {
+			$parsed_blocks = array_values( array_filter( $parsed_blocks, function( $block ) {
 				return isset( $block['blockName'] );
-			} );
-	
-			// TODO - this uses the full navigation block attributes for the
-			// context which could be refined.
-			$inner_blocks = new \WP_Block_List( $compacted_blocks, $attributes );
+			} ) );
+
+			// TODO - this uses the full navigation block attributes for the context which could be refined.
+			$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
 		}
 		
-		if ( empty( $inner_blocks ) ) {
-			return '';
-		}
+		// If there are no inner blocks then fallback to rendering an appropriate fallback.
+		// if ( empty( $inner_blocks ) ) {
+		// 	$is_fallback                      = true; // indicate we are rendering the fallback.
+		// 	$attributes['__unstableMaxPages'] = 4; // set value to be passed as context to Page List block.
+
+		// 	$parsed_blocks = block_core_navigation_get_fallback_blocks();
+
+		// 	// May be empty if core/navigation or core/page list are not registered.
+		// 	if ( empty( $parsed_blocks ) ) {
+		// 		return '';
+		// 	}
+
+		// 	$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
+		// }
 
 		$block_id	= uniqid();
 
