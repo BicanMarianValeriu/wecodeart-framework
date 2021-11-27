@@ -41,12 +41,10 @@ class Blocks implements \ArrayAccess {
     const CSS_ID = 'wecodeart-blocks';
 
     /**
-	 * An array of blocks used in this page.
-	 *
-	 * @static
-	 * @access private
-	 * @since 1.0.2
-	 * @var array
+	 * An array of blocks used in current page.
+     *
+	 * @access  private
+	 * @var     array
 	 */
 	private static $blocks = [];
 
