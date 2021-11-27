@@ -49,6 +49,7 @@ class Separator extends Dynamic {
 		register_block_style( $this->get_block_type(), [
 			'name' 	=> 'faded',
             'label'	=> __( 'Faded', 'wecodeart' ),
+			'inline_style' => '.is-style-faded {background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;opacity:1;border:none;height:1px;}'
 		] );
 	}
 
@@ -64,14 +65,21 @@ class Separator extends Dynamic {
 	 */
 	public function styles() {
 		return '
+		.wp-block-separator {
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 100px;
+		}
 		.wp-block-separator.is-style-faded {
-			background: linear-gradient(to right, transparent, currentColor, transparent)!important;
+			background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
 			opacity: 1;
 		}
 		.wp-block-separator.is-style-wide {
-			border-bottom-width: 1px;
+			max-width: initial;
 		}
 		.wp-block-separator.is-style-dots {
+			--wp--separator-gap: 2em;
+			--wp--separator-icon: "\00b7 \00b7 \00b7";
 			background: none !important;
 			border: none;
 			text-align: center;
@@ -81,11 +89,11 @@ class Separator extends Dynamic {
 			opacity: 1;
 		}
 		.wp-block-separator.is-style-dots::before {
-			content: "\00b7 \00b7 \00b7";
+			content: var(--wp--separator-icon);
 			color: currentColor;
 			font-size: 1.5rem;
-			letter-spacing: 2em;
-			padding-left: 2em;
+			letter-spacing: var(--wp--separator-gap);
+			padding-left: var(--wp--separator-gap);
 			font-family: serif;
 		}
 		';
