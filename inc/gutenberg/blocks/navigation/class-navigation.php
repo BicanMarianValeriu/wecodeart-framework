@@ -539,7 +539,7 @@ class Navigation extends Dynamic {
 		$breakpoint	= get_prop( $breaks, $filter, '992px' );
 
 		return "
-		:is(.site-header,.offcanvas) .wp-block-navigation {
+		:is(.site-header,.site-footer) .wp-block-navigation {
 			padding-top: 0;
 			padding-bottom: 0;
 		}
