@@ -9,16 +9,14 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.2.8
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
-use WeCodeArt\Support\Styles;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -38,10 +36,8 @@ class Header {
 	}
 	
 	/**
-	 * Output HEADER markup function
-	 * Plugin PHP fallback
+	 * Output HEADER markup function Plugin PHP fallback
 	 *
-	 * @uses	WeCodeArt\Markup::wrap()
 	 * @since 	unknown
 	 * @version	5.0.0
 	 *
@@ -54,7 +50,7 @@ class Header {
 			'tagName' 	=> 'header',
 		] );
 
-		Markup::wrap( 'header', [
+		wecodeart( 'markup' )::wrap( 'header', [
 			[
 				'tag' 	=> $args['tagName'],
 				'attrs' => [

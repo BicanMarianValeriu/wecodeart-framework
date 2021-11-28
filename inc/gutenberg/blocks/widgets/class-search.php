@@ -9,15 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.0
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-use WeCodeArt\Markup\SVG;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -76,7 +74,7 @@ class Search extends Dynamic {
 			}
 		}
 
-		return Markup::wrap( 'search-block', [
+		return wecodeart( 'markup' )::wrap( 'search-block', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => [
@@ -121,7 +119,7 @@ class Search extends Dynamic {
 			// Maybe add submit button
 			if ( get_prop( $attributes, 'buttonPosition', 'button-outside' ) !== 'no-button' ) {
 				$icon  = get_prop( $attributes, 'buttonUseIcon', false );
-				$label = $icon ? SVG::compile( 'search' ) : get_prop( $attributes, 'buttonText' );
+				$label = $icon ? wecodeart( 'markup' )->SVG::compile( 'search' ) : get_prop( $attributes, 'buttonText' );
 
 				wecodeart_input( 'button', [
 					'label' => $label,

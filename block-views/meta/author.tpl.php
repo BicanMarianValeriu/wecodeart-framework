@@ -9,12 +9,11 @@
  * @subpackage 	Entry\Meta\Author
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -48,7 +47,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
     
     else : 
     
-    SVG::render( 'user', [
+    wecodeart( 'markup' )->SVG::render( 'user', [
         'class' => 'wp-block-post-author__icon'
     ] );
 

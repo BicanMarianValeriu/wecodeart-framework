@@ -105,9 +105,9 @@ return [
     */
     'support' => [
         'custom-logo' => [
-            'height'               => 60,
-            'width'                => 60,
-            'flex-height'          => true,
+            'height'        => 60,
+            'width'         => 60,
+            'flex-height'   => true,
         ],
         'customize-selective-refresh-widgets' => true,
     ],

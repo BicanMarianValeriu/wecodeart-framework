@@ -9,12 +9,11 @@
  * @subpackage 	Entry\Meta\Comments
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -42,7 +41,7 @@ if( post_password_required() ) {
 ?>
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
     
-    SVG::render( 'comments', [
+    wecodeart( 'markup' )->SVG::render( 'comments', [
         'class' => 'wp-block-post-comments-link__icon'
     ] );
 

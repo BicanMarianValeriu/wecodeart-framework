@@ -9,15 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.8
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-use WeCodeArt\Markup\SVG;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -98,7 +96,7 @@ class Title extends Dynamic {
 			$classes = array_merge( $classes, explode( ' ', $classname ) );
 		}
 
-        return Markup::wrap( 'wp-block-query-title', [
+        return wecodeart( 'markup' )::wrap( 'wp-block-query-title', [
             [
                 'tag' 	=> 'h' . get_prop( $attributes, 'level', '1' ),
                 'attrs'	=> [
@@ -112,17 +110,17 @@ class Title extends Dynamic {
 	 * Archives Title
 	 *
 	 * @since 	unknown
-	 * @version	5.2.7
+	 * @version	5.3.1
 	 *
 	 * @return 	string
 	 */
 	public function filter_title( $content ) {
-		$output = SVG::compile( 'folder' );
+		$output = wecodeart( 'markup' )->SVG::compile( 'folder' );
 
 		$title_template = '<span>%s</span>';
 
 		if ( is_search() ) {
-			$output = SVG::compile( 'search' );
+			$output = wecodeart( 'markup' )->SVG::compile( 'search' );
 			$output .= sprintf( $title_template, sprintf( 
 				esc_html__( 'Search Results for "%s".', 'wecodeart' ),
 				'<span>' .  get_search_query() . '</span>' 

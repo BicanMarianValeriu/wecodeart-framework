@@ -9,16 +9,16 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.3.1
  */
 
-namespace WeCodeArt\Markup\Inputs;
+namespace WeCodeArt\Support\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-use WeCodeArt\Markup\Inputs\Base;
-use WeCodeArt\Markup\Inputs\Basic;
+use WeCodeArt\Support\Markup;
+use WeCodeArt\Support\Markup\Inputs\Base;
+use WeCodeArt\Support\Markup\Inputs\Basic;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -54,7 +54,7 @@ class Toggle extends Base {
 	 * @version	5.0.0
 	 */
 	public function content() {  
-        Markup::wrap( $this->type, [
+        wecodeart( 'markup' )::wrap( $this->type, [
             [
                 'tag'   => 'div',
                 'attrs' => [

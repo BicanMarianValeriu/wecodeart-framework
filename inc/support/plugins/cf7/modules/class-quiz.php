@@ -16,7 +16,6 @@ namespace WeCodeArt\Support\Plugins\CF7\Modules;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 
 /**
@@ -91,7 +90,7 @@ class Quiz extends Module {
     
         $answer = wpcf7_canonicalize( $answer );
 
-        $html = Markup::wrap( 'cf7-quiz-field', [ [
+        $html = wecodeart( 'markup' )::wrap( 'cf7-quiz-field', [ [
             'tag' 	=> 'span',
             'attrs' => [
                 'class' => self::get_wrap_class( $tag, 'input-group' )

@@ -9,15 +9,15 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.3.1
  */
 
-namespace WeCodeArt\Markup\Inputs;
+namespace WeCodeArt\Support\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-use WeCodeArt\Markup\Inputs\Base;
+use WeCodeArt\Support\Markup;
+use WeCodeArt\Support\Markup\Inputs\Base;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -70,7 +70,7 @@ class Select extends Base {
         <select <?php $this->input_attrs( [ 'value', 'placeholder' ] ); ?>>
             <?php if( $placeholder ) {
             
-                Markup::wrap( 'select-placeholder', [
+                wecodeart( 'markup' )::wrap( 'select-placeholder', [
                     [
                         'tag' => 'option',
                         'attrs' => [
@@ -85,7 +85,7 @@ class Select extends Base {
             } ?>
             <?php foreach( $this->choices as $value => $label ) {
             
-                Markup::wrap( 'select-option', [
+                wecodeart( 'markup' )::wrap( 'select-option', [
                     [
                         'tag' => 'option',
                         'attrs' => [

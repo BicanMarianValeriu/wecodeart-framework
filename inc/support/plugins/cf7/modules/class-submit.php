@@ -9,14 +9,13 @@
  * @subpackage 	Support\CF7\Modules\Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Support\Plugins\CF7\Modules;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 
 /**
@@ -42,13 +41,13 @@ class Submit extends Module {
 	 * @return  string Rendered field output.
 	 */
 	public function get_html( $tag ) {
-		$class = wpcf7_form_controls_class( $tag->type ) . ' btn';
+		$class = wpcf7_form_controls_class( $tag->type ) . ' wp-block-button';
         $class = array_filter( explode( ' ', $tag->get_class_option( $class ) ) );
 
         if( ! count( array_filter( $class, function( $i ) {
-            return substr( $i, 0, 4 ) === 'btn-';
+            return substr( $i, 0, 9 ) === 'wp-block-';
         } ) ) ) {
-            $class[] = 'btn-primary';
+            $class[] = 'wp-block-button__link';
         }
 
         $attrs = [];

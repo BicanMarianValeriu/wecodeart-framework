@@ -16,7 +16,7 @@ namespace WeCodeArt\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Markup;
+use WeCodeArt\Support\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
 use WeCodeArt\Admin\Notifications\Notification;

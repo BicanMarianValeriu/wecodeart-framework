@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.8
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -126,7 +125,7 @@ class Numbers extends Dynamic {
             return '';
         }
 		
-		return Markup::wrap( 'pagination-numbers', [
+		return wecodeart( 'markup' )::wrap( 'pagination-numbers', [
             [
                 'tag'   => 'nav',
                 'attrs' => [
@@ -134,7 +133,7 @@ class Numbers extends Dynamic {
                 ]
             ],
         ], function( $content ) {
-            Markup::wrap( 'pagination-numbers-list', [
+            wecodeart( 'markup' )::wrap( 'pagination-numbers-list', [
                 [
                     'tag'   => 'ul',
                     'attrs' => [

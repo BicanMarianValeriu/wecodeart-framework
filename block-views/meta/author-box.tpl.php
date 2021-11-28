@@ -8,12 +8,11 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box Template
  * @since 		3.0.3
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\get_prop;
 
 $attributes = isset( $attributes ) ? $attributes : [];
@@ -31,7 +30,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
 	<h3 class="wp-block-post-author__headline"><?php
 			
-		SVG::render( 'user' );
+		wecodeart( 'markup' )->SVG::render( 'user' );
 		
 		?><span><?php
 		
@@ -81,7 +80,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 					target="<?php echo esc_attr( $item['target'] ); ?>"
 					rel="<?php echo ( $item['target'] === '_self' ) ? 'follow' : 'nofollow' ; ?>"><?php 
 					
-					SVG::render( $item['icon'] );
+					wecodeart( 'markup' )->SVG::render( $item['icon'] );
 
 				?></a>
 				<?php } ?>

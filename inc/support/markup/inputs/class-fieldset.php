@@ -9,14 +9,14 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.3.1
  */
 
-namespace WeCodeArt\Markup\Inputs;
+namespace WeCodeArt\Support\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
+use WeCodeArt\Support\Markup;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -61,7 +61,7 @@ class Fieldset extends Base {
 	 * @version	5.0.0
 	 */
 	public function content() {
-        Markup::wrap( 'fieldset-' . $this->type, [
+        wecodeart( 'markup' )::wrap( 'fieldset-' . $this->type, [
             [
                 'tag'   => 'fieldset',
                 'attrs' => [
@@ -102,7 +102,7 @@ class Fieldset extends Base {
 	public function label() {
         if( empty( $this->label ) ) return;
 
-        Markup::wrap( 'fieldset-label', [
+        wecodeart( 'markup' )::wrap( 'fieldset-label', [
             [
                 'tag'   => 'legend',
                 'attrs' => [

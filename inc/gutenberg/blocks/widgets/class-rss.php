@@ -9,16 +9,14 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
-use WeCodeArt\Core\Media;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -98,7 +96,7 @@ class RSS extends Dynamic {
 
 		$classnames[] = 'list-unstyled';
 
-		$content = Markup::wrap( 'wp-block-rss', [
+		$content = wecodeart( 'markup' )::wrap( 'wp-block-rss', [
 			[
 				'tag' 	=> 'ul',
 				'attrs'	=> [

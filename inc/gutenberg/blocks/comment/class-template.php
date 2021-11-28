@@ -9,15 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.2.8
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-use WeCodeArt\Markup\SVG;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -82,7 +80,7 @@ class Template extends Dynamic {
         }
 
 		if( post_password_required( $post_id ) ) {
-			return Markup::wrap( 'comment-form-protected', [ [
+			return wecodeart( 'markup' )::wrap( 'comment-form-protected', [ [
 				'tag' 	=> 'p',
 			] ], 'printf', [ 
 				esc_html__( 'This post is password protected. Enter the password to view comments or leave a comment.', 'wecodeart' )
@@ -105,7 +103,7 @@ class Template extends Dynamic {
 		$content .= $this->get_head();
 
 		// List
-        $content .= Markup::wrap( 'wp-block-comments-list', [
+        $content .= wecodeart( 'markup' )::wrap( 'wp-block-comments-list', [
 			[
 				'tag' 	=> 'ul',
 				'attrs'	=> [
@@ -117,7 +115,7 @@ class Template extends Dynamic {
 
 			foreach ( $comments as $comment ) {
 
-				Markup::wrap( 'wp-block-comment', [
+				wecodeart( 'markup' )::wrap( 'wp-block-comment', [
 					[
 						'tag' 	=> 'li',
 						'attrs'	=> [
@@ -147,13 +145,13 @@ class Template extends Dynamic {
 	 * Render Comments Info
 	 *
 	 * @since	5.2.2
-	 * @version	5.2.2
+	 * @version	5.3.1
 	 *
 	 * @return 	string
 	 */
 	public function get_head() {
 		$defaults = [
-			'icon' 		=> SVG::compile( 'comments' ), // Escaped with kses inside fn.
+			'icon' 		=> wecodeart( 'markup' )->SVG::compile( 'comments' ), // Escaped with kses inside fn.
 			'empty' 	=> esc_html__( 'No comments', 'wecodeart' ),
 			'closed'	=> false,
 			'add_one'	=> esc_html__( 'add one', 'wecodeart' ) 
@@ -190,7 +188,7 @@ class Template extends Dynamic {
 			); 
 		}
 
-		return Markup::wrap( 'wp-block-comments-head', [ [
+		return wecodeart( 'markup' )::wrap( 'wp-block-comments-head', [ [
 			'tag' 	=> 'h3',
 			'attrs' => [
 				'class' => 'wp-block-comments-query-loop__head'
@@ -202,7 +200,7 @@ class Template extends Dynamic {
 	 * Render Comments Pagination - not working yet but it will be implemented.
 	 *
 	 * @since 	5.2.2
-	 * @version 5.2.2
+	 * @version 5.3.1
 	 *
 	 * @return 	string|null
 	 */
@@ -212,7 +210,7 @@ class Template extends Dynamic {
 		 */
 		if( empty( get_previous_comments_link() || get_next_comments_link() ) ) return;
 
-		return Markup::wrap( 'wp-block-comments-nav', [
+		return wecodeart( 'markup' )::wrap( 'wp-block-comments-nav', [
 			[
                 'tag'   => 'nav',
                 'attrs' => [
@@ -231,14 +229,14 @@ class Template extends Dynamic {
             <h3 class="screen-reader-text"><?php esc_html_e( 'Comments Navigation', 'wecodeart' ); ?></h3>
 			<?php
 
-			Markup::wrap( 'comments-prev-link', [ [
+			wecodeart( 'markup' )::wrap( 'comments-prev-link', [ [
 				'tag' 	=> 'div',
 				'attrs' => [ 
 					'class' => 'col-sm-12 col-md'
 				] 
 			] ], 'previous_comments_link' );
 	
-			Markup::wrap( 'comments-next-link', [ [
+			wecodeart( 'markup' )::wrap( 'comments-next-link', [ [
 				'tag' 	=> 'div',
 				'attrs' => [
 					'class' => 'col-sm-12 col-md text-md-end'

@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.9.5
- * @version		5.0.0
+ * @version		5.3.1
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -35,28 +35,6 @@ wecodeart()->bind( 'config', function () use ( $config ) {
 } );
 
 /**
- * Bind Template.
- *
- * @since   5.0.0
- *
- * @return  void
- */
-wecodeart()->bind( 'template', function () {
-    return new WeCodeArt\Markup\Template( wecodeart_config() );
-} );
-
-/**
- * Bind Inputs.
- * 
- * @since   5.0.0
- *
- * @return  void
- */
-wecodeart()->bind( 'inputs', function () {
-    return WeCodeArt\Markup\Inputs::get_instance();
-} );
-
-/**
  * Bind Conditionals.
  *
  * @since   4.0.1
@@ -79,44 +57,25 @@ wecodeart()->bind( 'integrations', function () {
 } );
 
 /**
- * Bind Layout.
- *
- * @param   array   $parameters  Array of strings/functions - accepts `header/content/footer` and callable function as keys
+ * Bind markup.
+ * 
+ * @since   5.3.1
  *
  * @return  void
  */
-wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
-    if( empty( $parameters ) ) {
-        $parameters = [ 'header', 'content', 'footer' ];
-    }
+wecodeart()->bind( 'markup', function () {
+    return wecodeart( 'integrations' )->get( 'markup' )::get_instance();
+} );
 
-    array_map( function( $partial ) {
-        switch( $partial ) {
-            case 'header' :
-                /**
-                 * @see - https://developer.wordpress.org/reference/functions/get_header/
-                 */
-                get_header();
-                break;
-
-            case 'content' :
-                /**
-                 * @see - WeCodeArt\Core\Content::render_modules();
-                 */
-                do_action( 'wecodeart/content/markup' );
-                break;
-
-            case 'footer' :
-                /**
-                 * @see - https://developer.wordpress.org/reference/functions/get_footer/
-                 */
-                get_footer();
-                break;
-
-            default: 
-                return is_callable( $partial ) && call_user_func( $partial );
-        }
-    }, $parameters );
+/**
+ * Bind styles.
+ * 
+ * @since   5.3.1
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'styles', function () {
+    return wecodeart( 'integrations' )->get( 'styles' )::get_instance();
 } );
 
 /**
@@ -164,4 +123,45 @@ wecodeart()->bind( 'version', function () {
 	}
 
 	return $version;
+} );
+
+/**
+ * Bind Layout.
+ *
+ * @param   array   $parameters  Array of strings/functions - accepts `header/content/footer` and callable function as keys
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
+    if( empty( $parameters ) ) {
+        $parameters = [ 'header', 'content', 'footer' ];
+    }
+
+    array_map( function( $partial ) {
+        switch( $partial ) {
+            case 'header' :
+                /**
+                 * @see - https://developer.wordpress.org/reference/functions/get_header/
+                 */
+                get_header();
+                break;
+
+            case 'content' :
+                /**
+                 * @see - WeCodeArt\Core\Content::render_modules();
+                 */
+                do_action( 'wecodeart/content/markup' );
+                break;
+
+            case 'footer' :
+                /**
+                 * @see - https://developer.wordpress.org/reference/functions/get_footer/
+                 */
+                get_footer();
+                break;
+
+            default: 
+                return is_callable( $partial ) && call_user_func( $partial );
+        }
+    }, $parameters );
 } );

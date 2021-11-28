@@ -8,10 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Header
  * @since       1.0.0
- * @version     5.0.0
+ * @version     5.3.1
  */
-
-use WeCodeArt\Markup;
 
 ?>	
 <!DOCTYPE html>
@@ -19,10 +17,10 @@ use WeCodeArt\Markup;
     <head>
         <?php wp_head(); // WP Head. ?>
     </head>
-    <body <?php echo Markup::generate_attr( 'body', [
+    <body <?php echo wecodeart( 'markup' )::generate_attr( 'body', [
         'class' => implode( ' ', get_body_class() )
     ] ); ?>>
-        <div <?php echo Markup::generate_attr( 'wp-site-blocks', [
+        <div <?php echo wecodeart( 'markup' )::generate_attr( 'wp-site-blocks', [
                 'class' => 'wp-site-blocks',
             ] ); ?>>
             <?php

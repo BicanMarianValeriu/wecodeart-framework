@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -17,7 +17,6 @@ namespace WeCodeArt\Support\Plugins;
 defined( 'ABSPATH' ) || exit;
 
 use anr_captcha_class as Captcha;
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Notifications;
@@ -126,7 +125,7 @@ class ANR implements Integration {
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
-	 * @version	5.2.4
+	 * @version	5.3.1
 	 * @see 	anr_captcha_class::init()->form_field_return();
 	 * @uses	anr_captcha_class::init()->form_field_return();
 	 *
@@ -142,7 +141,7 @@ class ANR implements Integration {
 
 		$classes = [ 'mb-3', 'comment-form-captcha', 'col-12', 'col-md-7' ];
 
-		$defaults .= Markup::wrap( 'comment-captcha', [ [ 
+		$defaults .= wecodeart( 'markup' )::wrap( 'comment-captcha', [ [ 
 			'tag' 	=> 'div', 
 			'attrs' => [
 				'class' => implode( ' ', array_filter( $classes ) ),

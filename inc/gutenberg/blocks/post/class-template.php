@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -108,7 +107,7 @@ class Template extends Dynamic {
 		$classnames[] = 'list-unstyled';
 
 		if ( ! $query->have_posts() ) {
-			return Markup::wrap( 'wp-block-query-message', [
+			return wecodeart( 'markup' )::wrap( 'wp-block-query-message', [
 				[
 					'tag' 	=> 'div',
 					'attrs'	=> [
@@ -120,7 +119,7 @@ class Template extends Dynamic {
 			}, [], false );
 		}
 
-		return Markup::wrap( 'wp-block-query', [
+		return wecodeart( 'markup' )::wrap( 'wp-block-query', [
 			[
 				'tag' 	=> 'ul',
 				'attrs'	=> [
@@ -138,7 +137,7 @@ class Template extends Dynamic {
 					$item_class = array_merge( $item_class, [ 'g-col-12', 'g-col-md-6', 'g-col-lg-' . $columns ] );
 				}
 
-				Markup::wrap( 'wp-block-post', [
+				wecodeart( 'markup' )::wrap( 'wp-block-post', [
 					[
 						'tag' 	=> 'li',
 						'attrs'	=> [

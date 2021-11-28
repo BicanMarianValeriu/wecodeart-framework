@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.4
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Support\Styles;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
@@ -103,7 +102,7 @@ class Link extends Dynamic {
 
 		$attrs 	= $this->get_wrapper_attributes( $attributes, $block, $extras );
 
-		return Markup::wrap( 'nav-item', [ [
+		return wecodeart( 'markup' )::wrap( 'nav-item', [ [
 			'tag' 	=> 'li',
 			'attrs'	=> $attrs,
 		] ], function( $attributes, $block, $extras ) {
@@ -126,7 +125,7 @@ class Link extends Dynamic {
 	 * @return	string 	HTML
 	 */
 	public function render_link( $attributes, $block, $extras ) {
-		Markup::wrap( 'nav-link', [ [
+		wecodeart( 'markup' )::wrap( 'nav-link', [ [
 			'tag' 	=> $this->get_link_tag( $this->get_link_type( get_prop( $extras, 'mod', [] ) ) ),
 			'attrs'	=> $this->get_link_attributes( $attributes, $block, $extras ),
 		] ], function( $attributes, $extras ) {
@@ -141,7 +140,7 @@ class Link extends Dynamic {
 			}
 	
 			// Label
-			Markup::wrap( 'nav-label', [ [
+			wecodeart( 'markup' )::wrap( 'nav-label', [ [
 				'tag' 	=> 'span',
 				'attrs'	=> [
 					'class' => 'wp-block-navigation-link__label'
@@ -196,7 +195,7 @@ class Link extends Dynamic {
 			$inner_html = str_replace( 'nav-link', 'dropdown-item', $inner_html );
 		}
 
-		Markup::wrap( 'nav-dropdown', [ [
+		wecodeart( 'markup' )::wrap( 'nav-dropdown', [ [
 			'tag' 	=> 'ul',
 			'attrs'	=> [
 				'class' => join( ' ', $classes ),

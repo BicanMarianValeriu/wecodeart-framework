@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.0
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
 use WeCodeArt\Support\Styles;
@@ -155,13 +154,13 @@ class Navigation extends Dynamic {
 			'wecodeart-core-scripts'
 		], wecodeart( 'version' ) );
 
-		return Markup::wrap( 'navbar', [ [
+		return wecodeart( 'markup' )::wrap( 'navbar', [ [
 			'tag' 	=> 'nav',
 			'attrs'	=> $this->get_wrapper_attributes( $attributes )
 		] ], function( $attributes, $inner_blocks ) use ( $block_id ) {
 
 			// Navbar List HTML
-			$html = Markup::wrap( 'navbar-nav', [ [
+			$html = wecodeart( 'markup' )::wrap( 'navbar-nav', [ [
 				'tag' 	=> 'ul',
 				'attrs' => [
 					'class' => 'wp-block-navigation__container nav navbar-nav',
@@ -220,7 +219,7 @@ class Navigation extends Dynamic {
 			$classes	= [ 'wp-block-navigation-link', 'nav-item' ];
 			$classes[]  = 'nav-item--' . join( '-', explode( '/', get_prop( $block->parsed_block, 'blockName' ) ) );
 
-			return Markup::wrap( 'nav-item', [ [
+			return wecodeart( 'markup' )::wrap( 'nav-item', [ [
 				'tag' 	=> 'li',
 				'attrs'	=> [
 					'class'	=> join( ' ', $classes ),

@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.9
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
@@ -186,8 +185,8 @@ class Social extends Dynamic {
 		$css_array = [];
 		$css_array['global'][$selector] = $properties;
 
-		$inline_css = wecodeart( 'integrations' )->get( 'styles' )::parse( $css_array, 'wp-social-link-' . $service );
-		$inline_css = wecodeart( 'integrations' )->get( 'styles' )::compress( $inline_css );
+		$inline_css = wecodeart( 'styles' )::parse( $css_array, 'wp-social-link-' . $service );
+		$inline_css = wecodeart( 'styles' )::compress( $inline_css );
 
 		return $inline_css;
 	}

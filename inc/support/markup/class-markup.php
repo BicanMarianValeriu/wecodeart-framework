@@ -9,21 +9,62 @@
  * @subpackage  Markup
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.3.0
+ * @version		5.3.1
  */
 
-namespace WeCodeArt;
+namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton; 
+use WeCodeArt\Singleton;
+use WeCodeArt\Integration;
+use WeCodeArt\Conditional\Traits\No_Conditionals;
 
 /**
  * Markup Utilities Parent Class
  */
-class Markup {
+class Markup implements Integration {
 
-	use Singleton; 
+	use Singleton;
+	use No_Conditionals;
+
+	/**
+	 * SVG
+	 *
+	 * @since  	5.0.0
+	 * @var 	object
+	 */
+	public 	$SVG	= null;
+	
+	/**
+	 * Inputs
+	 *
+	 * @since  	5.0.0
+	 * @var 	object
+	 */
+	public 	$Inputs	= null;
+	
+	/**
+	 * Template
+	 *
+	 * @since  	5.0.0
+	 * @var 	object
+	 */
+	public 	$Template	= null;
+
+	/**
+	 * Send to Constructor
+	 */
+	public function init() {
+		$this->SVG 		= Markup\SVG::get_instance();
+		$this->Inputs 	= Markup\Inputs::get_instance();
+		$this->Template	= ( new Markup\Template( wecodeart_config() ) );
+	}
+
+	/**
+	 * Register hooks
+	 */
+	public function register_hooks() {}
 
 	/**
 	 * Merge array of attributes with defaults, and apply contextual filter on array.
@@ -269,26 +310,5 @@ class Markup {
 		}
 		
 		return $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Renders template file with data.
-	 *
-	 * @since	3.7.3
-	 * @version	5.0.0
-	 *
-	 * @param  string $file Relative path to the template file.
-	 * @param  array  $data Dataset for the template.
-	 *
-	 * @return void
-	 */
-	public static function template( $file, $data = [], $echo = true ) {
-		$template = wecodeart( 'template' )->set_file( $file );
-
-		if( $echo ) {
-			return $template->render( $data );
-		}
-
-		return $template->compile( $data );
 	}
 }

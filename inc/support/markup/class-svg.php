@@ -9,14 +9,13 @@
  * @subpackage  Markup\SVG
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.0.0
+ * @version		5.3.1
  */
 
-namespace WeCodeArt\Markup;
+namespace WeCodeArt\Support\Markup;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use function WeCodeArt\Functions\kses_svg;
 
@@ -198,7 +197,7 @@ class SVG {
 				$attrs['class'] .= ' ' . $args['class'];
 			}
 
-			$attributes = Markup::generate_attr( $icon, $attrs );
+			$attributes = wecodeart( 'markup' )::generate_attr( $icon, $attrs );
 
 			// Begin SVG markup.
 			$svg = '<svg ' . $attributes . '>';

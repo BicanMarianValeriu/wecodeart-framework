@@ -271,7 +271,7 @@ function wecodeart_config( $key = null, $default = null ) {
  * Gets input instance.
  *
  * @since	5.0.0
- * @version	5.0.0
+ * @version	5.3.1
  *
  * @param   string|array    $key
  * @param   array|null      $args
@@ -280,26 +280,28 @@ function wecodeart_config( $key = null, $default = null ) {
  * @return  mixed
  */
 function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
+    $instance = wecodeart( 'markup' )->Inputs;
+
     if ( null === $key ) {
-        return wecodeart( 'inputs' );
+        return $instance;
     }
 
     if ( is_array( $key ) ) {
-        return wecodeart( 'inputs' )->register( $key );
+        return $instance->register( $key );
     }
 
     if( $echo ) {
-        return wecodeart( 'inputs' )::render( $key, $args );
+        return $instance::render( $key, $args );
     }
 
-    return wecodeart( 'inputs' )::compile( $key, $args );
+    return $instance::compile( $key, $args );
 }
 
 /**
  * Gets template instance.
  *
  * @since	5.0.0
- * @version	5.0.0
+ * @version	5.3.1
  *
  * @param   string|array    $file
  * @param   array|null      $data
@@ -308,7 +310,7 @@ function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
  * @return  mixed
  */
 function wecodeart_template( $file, $data = [], $echo = true ) {
-    $template = wecodeart( 'template' )->set_file( $file );
+    $template = wecodeart( 'markup' )->Template->set_file( $file );
 
     if( $echo ) {
         return $template->render( $data );

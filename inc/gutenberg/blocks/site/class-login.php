@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.1.8
- * @version		5.2.8
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -73,7 +72,7 @@ class Login extends Dynamic {
 			$contents 		= $this->render_form( [], false );
 		}
 
-		return Markup::wrap( 'wp-block-login', [
+		return wecodeart( 'markup' )::wrap( 'wp-block-login', [
 			[
 				'tag' 	=> 'div',
 				'attrs'	=> [

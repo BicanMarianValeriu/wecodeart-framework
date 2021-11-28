@@ -407,7 +407,7 @@ class Blocks extends Processor {
 		if ( $css_custom = get_prop( $this->attrs, 'customCSS', false ) ) {
 			$custom_style 	= wp_strip_all_tags( $css_custom );
 			$custom_style 	= str_replace( 'selector', $this->element, $custom_style );
-			$custom_style 	= wecodeart( 'integrations' )->get( 'styles' )::string_to_array_query( $custom_style );
+			$custom_style 	= wecodeart( 'styles' )::string_to_array_query( $custom_style );
 			// Array replace existing CSS rules - custom overwrites everything
 			$this->styles 	= array_replace_recursive( $this->styles, $custom_style );
 		}

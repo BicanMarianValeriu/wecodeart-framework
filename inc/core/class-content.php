@@ -9,14 +9,13 @@
  * @subpackage 	Core\Content
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		5.2.2
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use function WeCodeArt\Functions\get_prop;
 

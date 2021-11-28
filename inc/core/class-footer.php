@@ -9,14 +9,13 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		5.0.0
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Customizer;
 
@@ -38,12 +37,10 @@ class Footer {
 	}
 	
 	/**
-	 * Output FOOTER markup function
-	 * Plugin PHP fallback
-	 *
-	 * @uses	WeCodeArt\Markup::wrap()
+	 * Output FOOTER markup function Plugin PHP fallback
+	 * 
 	 * @since 	1.0
-	 * @version	5.0.0
+	 * @version	5.3.1
 	 *
 	 * @return 	HTML 
 	 */
@@ -54,7 +51,7 @@ class Footer {
 			'tagName' 	=> 'footer',
 		] );
 
-		Markup::wrap( 'footer', [
+		wecodeart( 'markup' )::wrap( 'footer', [
 			[
 				'tag' 	=> $args['tagName'],
 				'attrs' => [

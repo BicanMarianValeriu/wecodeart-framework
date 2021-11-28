@@ -9,12 +9,11 @@
  * @subpackage 	Entry\Meta\Terms
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -45,7 +44,7 @@ if( isset( $icon ) ) {
 ?>
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
 
-    SVG::render( $icon_name, [
+    wecodeart( 'markup' )->SVG::render( $icon_name, [
         'class' => 'wp-block-post-terms__icon'
     ] );
 

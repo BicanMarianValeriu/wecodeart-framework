@@ -9,18 +9,15 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.9
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
-use WeCodeArt\Core\Media;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use WeCodeArt\Gutenberg\Blocks\Post\Title;
 use function WeCodeArt\Functions\get_prop;
 
 /**

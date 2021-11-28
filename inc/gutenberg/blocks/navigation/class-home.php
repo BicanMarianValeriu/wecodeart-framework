@@ -9,19 +9,15 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.1.4
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
-use WeCodeArt\Support\Styles;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use WeCodeArt\Gutenberg\Blocks\Navigation;
-use WeCodeArt\Gutenberg\Blocks\Navigation\Link;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -84,7 +80,7 @@ class Home extends Dynamic {
 		$icons = [];
 		$attrs 	= $this->get_wrapper_attributes( $attributes, $block, $icons );
 
-		return Markup::wrap( 'nav-item', [ [
+		return wecodeart( 'markup' )::wrap( 'nav-item', [ [
 			'tag' 	=> 'li',
 			'attrs'	=> $attrs
 		] ], function( $attributes, $icons ) {
@@ -96,7 +92,7 @@ class Home extends Dynamic {
 			}
 
 			// Nav Link
-			Markup::wrap( 'nav-link', [ [
+			wecodeart( 'markup' )::wrap( 'nav-link', [ [
 				'tag' 	=> 'a',
 				'attrs'	=>	[
 					'class' 		=> join( ' ', $classes ),
@@ -111,7 +107,7 @@ class Home extends Dynamic {
 				}
 		
 				// Label
-				Markup::wrap( 'nav-label', [ [
+				wecodeart( 'markup' )::wrap( 'nav-label', [ [
 					'tag' 	=> 'span',
 					'attrs'	=> [
 						'class' => 'wp-block-navigation-link__label'

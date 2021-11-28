@@ -16,7 +16,6 @@ namespace WeCodeArt\Support\Plugins\CF7\Modules;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 
 /**
@@ -107,7 +106,7 @@ class Date extends Module {
     
         $attrs['value'] = $value;
     
-        $html = Markup::wrap( 'cf7-date-field', [ [
+        $html = wecodeart( 'markup' )::wrap( 'cf7-date-field', [ [
             'tag' 	=> 'span',
             'attrs' => [
                 'class' => self::get_wrap_class( $tag )

@@ -66,12 +66,12 @@ abstract class Module {
 	 * Get Tag wrap classname
 	 *
 	 * @since   5.0.0
-	 * @version	5.0.0
+	 * @version	5.3.1
 	 *
 	 * @return  string
 	 */
 	public static function get_wrap_class( $tag, $extra = '' ) {
-		$defaults = [ 'wpcf7-form-control-wrap', 'position-relative', 'mb-3', $tag->name ];
+		$defaults = [ 'wpcf7-form-control-wrap', 'position-relative', $tag->name ];
 
 		if( strpos( $extra, 'input-group' ) === false ) {
 			$defaults[] = 'd-block';

@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -95,7 +94,7 @@ class Comments extends Dynamic {
 
 		$classnames[] = 'list-unstyled';
 
-		return Markup::wrap( 'wp-block-latest-comments', [
+		return wecodeart( 'markup' )::wrap( 'wp-block-latest-comments', [
 			[
 				'tag' 	=> 'ul',
 				'attrs'	=> [
@@ -137,7 +136,7 @@ class Comments extends Dynamic {
 					'commentId' => $comment->comment_ID
 				] );
 
-				$content	.= Markup::wrap( 'wp-block-latest-comments-item', [
+				$content	.= wecodeart( 'markup' )::wrap( 'wp-block-latest-comments-item', [
 					[
 						'tag' 	=> 'li',
 						'attrs'	=> [

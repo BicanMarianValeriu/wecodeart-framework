@@ -9,12 +9,11 @@
  * @subpackage 	Entry\Meta\Date
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.9.5
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup\SVG;
 use function WeCodeArt\Functions\get_prop;
 
 $attributes = isset( $attributes ) ? $attributes : [];
@@ -35,7 +34,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 ?>
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
 
-    SVG::render( 'clock', [
+    wecodeart( 'markup' )->SVG::render( 'clock', [
         'class' => 'wp-block-post-date__icon'
     ] );
 

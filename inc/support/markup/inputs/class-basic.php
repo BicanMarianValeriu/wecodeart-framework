@@ -9,15 +9,15 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.3.1
  */
 
-namespace WeCodeArt\Markup\Inputs;
+namespace WeCodeArt\Support\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-use WeCodeArt\Markup\Inputs\Base;
+use WeCodeArt\Support\Markup;
+use WeCodeArt\Support\Markup\Inputs\Base;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -106,7 +106,7 @@ class Basic extends Base {
         }
 
         if( in_array( $this->type, [ 'submit', 'button' ] ) ) {
-            $class = 'btn btn-primary';
+            $class = 'wp-block-button__link';
         }
         
         if( $this->type === 'range' ) {

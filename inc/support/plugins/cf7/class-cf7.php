@@ -16,7 +16,6 @@ namespace WeCodeArt\Support\Plugins;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;

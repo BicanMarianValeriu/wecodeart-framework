@@ -144,7 +144,7 @@ class Blocks implements \ArrayAccess {
             $inline_css .= $this->get( $block )::get_instance()->styles();
         } 
         
-        $inline_css = wecodeart( 'integrations' )->get( 'styles' )::compress( $inline_css );
+        $inline_css = wecodeart( 'styles' )::compress( $inline_css );
 
         if( empty( $inline_css ) ) return;
         

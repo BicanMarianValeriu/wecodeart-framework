@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.3.0
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -17,13 +17,10 @@ namespace WeCodeArt\Gutenberg\Modules;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
 use WeCodeArt\Support\FileSystem;
-use WeCodeArt\Support\Styles\Utilities;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Gutenberg\Modules\Styles\register_utility;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
@@ -101,7 +98,7 @@ class Styles implements Integration {
 	 * @return 	void
 	 */
 	public function register_hooks() {
-		$this->CSS	= wecodeart( 'integrations' )->get( 'styles' )::get_instance();
+		$this->CSS	= wecodeart( 'styles' );
 
 		// Custom Style Attributes support
 		\WP_Block_Supports::get_instance()->register( 'styleCustom', [

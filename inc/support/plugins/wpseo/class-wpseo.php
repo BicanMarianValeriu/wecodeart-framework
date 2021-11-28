@@ -9,17 +9,14 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		5.1.9
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Support\Plugins;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Core\Content;
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
-use WeCodeArt\Markup\SVG;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
@@ -186,7 +183,7 @@ class WPSeo implements Integration {
 					 *
 					 * @since	3.9.4
 					 */
-					SVG::add_icon( $item, $social_icons[$item] );
+					wecodeart( 'markup' )->SVG::add_icon( $item, $social_icons[$item] );
 				}
 
 				return [

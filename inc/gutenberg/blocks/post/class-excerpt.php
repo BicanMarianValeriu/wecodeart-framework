@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.2
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -79,7 +78,7 @@ class Excerpt extends Dynamic {
 
 		$post_id = $block->context['postId'];
 
-		$more_text = Markup::wrap( 'entry-more', [
+		$more_text = wecodeart( 'markup' )::wrap( 'entry-more', [
 			[
 				'tag' 	=> 'a',
 				'attrs' => [
@@ -104,7 +103,7 @@ class Excerpt extends Dynamic {
 		}
 		remove_filter( 'excerpt_more', $filter_excerpt_more );
 
-		return Markup::wrap( 'entry-excerpt', [
+		return wecodeart( 'markup' )::wrap( 'entry-excerpt', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => [

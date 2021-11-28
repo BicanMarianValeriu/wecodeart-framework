@@ -9,19 +9,14 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		1.9
- * @version		5.2.2
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Support\Plugins;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Core\Content;
-use WeCodeArt\Core\Pagination;
 use WeCodeArt\Singleton;
-use WeCodeArt\Markup;
-use WeCodeArt\Markup\SVG;
-use WeCodeArt\Customizer;
 use WeCodeArt\Integration;
 use function WeCodeArt\Functions\get_prop;
 
@@ -95,7 +90,7 @@ class WooCommerce implements Integration {
 		 * @since 3.7.0
 		 */		
 		?>
-		<div <?php echo Markup::generate_attr( 'woocommerce', [
+		<div <?php echo wecodeart( 'markup' )::generate_attr( 'woocommerce', [
 			'class' => 'site-content py-5 wp-block-template-part'
 		] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<div class="container">

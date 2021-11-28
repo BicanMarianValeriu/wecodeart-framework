@@ -8,15 +8,13 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Notification Template
  * @since 		3.8.1
- * @version		5.1.3
+ * @version		5.3.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-
 ?>
-<div <?php echo Markup::generate_attr( 'admin-notification', $attributes ); // WPCS ok - attributes escaped with fn above. ?>>
+<div <?php echo wecodeart( 'markup' )::generate_attr( 'admin-notification', $attributes ); // WPCS ok - attributes escaped with fn above. ?>>
 	<div class="wca-notice__branding"><?php
 
 		printf( '<img src="%s" />', wecodeart_config( 'paths' )['uri'] . '/assets/images/logo.png' );

@@ -9,14 +9,13 @@
  * @subpackage 	Support\CF7\Modules\Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Support\Plugins\CF7\Modules;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 
 /**
@@ -105,7 +104,7 @@ class Basic extends Module {
             
         $attrs['value'] = wpcf7_get_hangover( $tag->name, $tag->get_default_option( $value ) );
     
-        $html = Markup::wrap( 'cf7-basic-field', [ [
+        $html = wecodeart( 'markup' )::wrap( 'cf7-basic-field', [ [
             'tag' 	=> 'span',
             'attrs' => [
                 'class' => self::get_wrap_class( $tag )

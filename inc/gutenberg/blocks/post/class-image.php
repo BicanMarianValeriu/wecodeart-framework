@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.9
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -132,7 +131,7 @@ class Image extends Dynamic {
 			add_filter( 'wecodeart/filter/wrappers/' . $context, $filter );
 		}
 
-		$image = Markup::wrap( $context, [ [
+		$image = wecodeart( 'markup' )::wrap( $context, [ [
 			'tag' 	=> 'figure',
 			'attrs' => [
 				'class' => join( ' ', $classnames ),

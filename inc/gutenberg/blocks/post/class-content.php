@@ -9,14 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -118,7 +117,7 @@ class Content extends Dynamic {
 			$classnames[] = $value;
 		}
 
-		return Markup::wrap( 'entry-content', [
+		return wecodeart( 'markup' )::wrap( 'entry-content', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => [

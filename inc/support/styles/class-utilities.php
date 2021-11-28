@@ -9,7 +9,7 @@
  * @subpackage  Styles Utilities
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.3.0
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -60,6 +60,7 @@ class Utilities implements \ArrayAccess {
 	 * Send to Constructor
 	 */
 	public function init() {
+        // Avoid get_instance() due to infinite loop - we only need static methods.
 		$this->CSS = wecodeart( 'integrations' )->get( 'styles' );
 
         // Generate CSS

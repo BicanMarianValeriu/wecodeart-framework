@@ -9,14 +9,13 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.3.1
  */
 
-namespace WeCodeArt\Markup\Inputs;
+namespace WeCodeArt\Support\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -136,7 +135,7 @@ abstract class Base {
      */
     public function input_attrs( $ommit = [] ) {
         $attributes = ! empty( $ommit ) ? array_diff_key( $this->attrs, array_flip( $ommit ) ) : $this->attrs;
-        echo Markup::generate_attr( $this->type, $attributes );
+        echo wecodeart( 'markup' )::generate_attr( $this->type, $attributes );
     }
 
     /**
@@ -149,7 +148,7 @@ abstract class Base {
 	public function label() {
         if( empty( $this->label ) ) return;
 
-        Markup::wrap( $this->type . '-label', [
+        wecodeart( 'markup' )::wrap( $this->type . '-label', [
             [
                 'tag'   => 'label',
                 'attrs' => [

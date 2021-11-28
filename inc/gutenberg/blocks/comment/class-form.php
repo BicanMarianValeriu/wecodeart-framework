@@ -9,15 +9,13 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.2.4
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
-use WeCodeArt\Markup\SVG;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -76,12 +74,12 @@ class Form extends Dynamic {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	5.2.2
+	 * @version	5.3.1
 	 *
 	 * @return 	array
 	 */
 	public function comment_form_defaults( $defaults ) {
-		$dots= SVG::compile( 'comment-dots' );
+		$dots= wecodeart( 'markup' )->SVG::compile( 'comment-dots' );
 
 		return wp_parse_args( [
 			'format'			 	=> 'html5',
@@ -111,7 +109,7 @@ class Form extends Dynamic {
 	 * Get Name Input
 	 *
 	 * @since	5.2.2
-	 * @since	5.2.4
+	 * @since	5.3.1
 	 *
 	 * @return 	void
 	 */
@@ -121,7 +119,7 @@ class Form extends Dynamic {
 
 		switch( $type ) {
 			case 'name':
-				return Markup::wrap( 'comment-author-name', [ [
+				return wecodeart( 'markup' )::wrap( 'comment-author-name', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
 						'class' => 'comment-form-field comment-form-author col-md-7'
@@ -142,7 +140,7 @@ class Form extends Dynamic {
 			break;
 
 			case 'email':
-				return Markup::wrap( 'comment-author-email', [ [
+				return wecodeart( 'markup' )::wrap( 'comment-author-email', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
 						'class' => 'comment-form-field comment-form-email col-md-7'
@@ -163,7 +161,7 @@ class Form extends Dynamic {
 			break;
 
 			case 'url':
-				return Markup::wrap( 'comment-author-url', [ [
+				return wecodeart( 'markup' )::wrap( 'comment-author-url', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
 						'class' => 'comment-form-field comment-form-url col-md-7'
@@ -183,7 +181,7 @@ class Form extends Dynamic {
 			break;
 
 			case 'comment':
-				return Markup::wrap( 'comment-author-comment', [ [
+				return wecodeart( 'markup' )::wrap( 'comment-author-comment', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
 						'class' => 'comment-form-field comment-form-comment'
@@ -207,7 +205,7 @@ class Form extends Dynamic {
 				$markup = '';
 
 				$markup .= '<button name="%1$s" type="submit" id="%2$s" class="%3$s">';
-				$markup .= SVG::compile( 'comment-dots' );
+				$markup .= wecodeart( 'markup' )->SVG::compile( 'comment-dots' );
 				$markup .= '<span>%4$s</span>';
 				$markup .= '</button>';
 
@@ -225,7 +223,7 @@ class Form extends Dynamic {
 						esc_html( get_the_title( $privacy ) )
 					);
 					
-					$content = Markup::wrap( 'comment-cookies', [ [
+					$content = wecodeart( 'markup' )::wrap( 'comment-cookies', [ [
 						'tag' 	=> 'div',
 						'attrs' => [
 							'class' => 'comment-form-field comment-form-cookies-consent'
@@ -254,12 +252,12 @@ class Form extends Dynamic {
 	 * Get Form Notes
 	 *
 	 * @since	5.2.2
-	 * @since	5.2.8
+	 * @since	5.3.1
 	 *
 	 * @return 	void
 	 */
 	public function get_form_notes() {
-		return Markup::wrap( 'comment-notes-before', [ [
+		return wecodeart( 'markup' )::wrap( 'comment-notes-before', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
 				'class' => 'comment-form-field comment-form-notes'

@@ -5,6 +5,8 @@ v5.3.1
 - Fixed - CORE/Navigation - temporary fix for the (hopefully temporary) issue with dropdown-item class for submenu
 - Fixed - Content/Sidebar page template column class
 - Fixed - Single template column class to match attribute
+- Added - wecodeart( 'markup' ) API - moved all Markup class calls.
+- Added - wecodeart( 'styles' ) API - moved all Styles class calls.
 
 v5.3.0
 - Updated - theme.json blockGap back to null (issues with 0 set on main block wrappers)
@@ -356,7 +358,7 @@ v4.0.1
 - Added - WeCodeArt\Functions with functions from previous WeCodeArt\Utilities\Helpers
 - Added - Action: 'wecodeart/setup/before' and 'wecodeart/setup/after' - Runs before setting the theme and loading the files
 - Added - Filter: 'wecodeart/conditional/get/before' to add conditionals before setup them on main theme
-- Updated - Breaking change: WeCodeArt\Utilities\Markup to WeCodeArt\Markup
+- Updated - Breaking change: WeCodeArt\Utilities\Markup to WeCodeArt\Support\Markup
 - Updated - WooCommerce Conditionals to new API.
 - Updated - Breaking change: WeCodeArt\Utilities\Helpers to WeCodeArt\Functions
 - Updated - Conditionals bound to new $theme key: 'conditionals' and refactored to new folder

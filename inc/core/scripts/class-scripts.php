@@ -9,14 +9,13 @@
  * @subpackage 	Core\Scripts
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		1.9
- * @version		5.0.7
+ * @version		5.3.1
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Markup;
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
 use function WeCodeArt\Functions\get_prop;
@@ -148,7 +147,7 @@ class Scripts {
 
 				$new_src = esc_url( remove_query_arg( $attr, $decoded_src ) );
 
-				$tag = Markup::strip_attr( $tag, 'script', $attr );
+				$tag = wecodeart( 'markup' )::strip_attr( $tag, 'script', $attr );
 				$tag = str_replace( ' src=', ' ' . esc_attr( $attr ) . ' src=', $tag );
 				$tag = str_replace( $src, $new_src, $tag );
 			}

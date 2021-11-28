@@ -168,7 +168,7 @@ class Navigation extends Base {
 			$this->output[] = wp_parse_args( [
 				'element'	=> join( ' ', [ $this->element, '.dropdown-item:is(.active,:active,:hover,:focus)' ] ),
 				'property' 	=> 'background-color',
-				'value'	  	=> wecodeart( 'integrations' )->get( 'styles' )::hex_brightness( $hex_color, -25 )
+				'value'	  	=> wecodeart( 'styles' )::hex_brightness( $hex_color, -25 )
 			], $output );
 		}
 	}
