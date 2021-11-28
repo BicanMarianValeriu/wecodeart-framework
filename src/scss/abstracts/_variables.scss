@@ -17,5 +17,6 @@ $variable-prefix: wp-- !default;
 $link-decoration: none!default;
 $headings-margin-bottom: 1.5rem;
 
-// Enable grid
+// Grid
+$container-padding-x: 1rem;
 $enable-cssgrid: true;
