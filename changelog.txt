@@ -1,3 +1,6 @@
+v5.3.2
+- Fixed - Navigation offcanvas background inheritance
+
 v5.3.1
 - Updated - Site logo width on header template part
 - Updated - CORE/Navigation - improved styleing for dropdowns

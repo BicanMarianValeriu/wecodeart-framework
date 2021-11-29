@@ -335,7 +335,7 @@ class Navigation extends Dynamic {
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
-		
+				
 		$_keys 		= [
 			'overlay-background' 	=> 'overlayBackgroundColor',
 			'overlay-text' 			=> 'overlayTextColor',
@@ -564,6 +564,8 @@ class Navigation extends Dynamic {
 		}
 		.wp-block-navigation :where(.offcanvas,.offcanvas-body) {
 			justify-content: inherit;
+		}
+		.wp-block-navigation[class*='has-background'] :where(.offcanvas,.offcanvas-body) {
 			background-color: inherit;
 		}
 		.wp-block-navigation :where(.nav-link,.dropdown-item) {
