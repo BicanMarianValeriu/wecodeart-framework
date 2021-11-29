@@ -10610,7 +10610,7 @@ const {
     toHTMLString
   }
 } = wp;
-const allowedBlocks = ['core/paragraph', 'core/heading'];
+const allowedBlocks = ['core/paragraph', 'core/heading', 'core/list'];
 /**
  * Render plugin
  */
@@ -10738,14 +10738,14 @@ const CodeEditor = () => {
       });
       const textEditor = document.querySelector('.editor-post-text-editor');
       const checkChanges = wp.codeEditor.initialize(textEditor, editorSettings);
-      checkChanges.codemirror.on('change', function (params) {
+      checkChanges.codemirror.on('change', params => {
         const content = params.getValue();
         textEditor.innerHTML = content;
         dispatch('core/editor').editPost({
           content
         });
       });
-      checkChanges.codemirror.on('blur', function (params) {
+      checkChanges.codemirror.on('blur', params => {
         const content = params.getValue();
         const blocks = parse(content);
         dispatch('core/editor').resetEditorBlocks(blocks);
@@ -10785,117 +10785,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/gutenberg/plugins/entry-title/components/controls.js":
-/*!*********************************************************************!*\
-  !*** ./src/js/gutenberg/plugins/entry-title/components/controls.js ***!
-  \*********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-
-
-/**
- * WordPress dependencies
- */
-const {
-  i18n: {
-    __,
-    sprintf
-  },
-  compose: {
-    compose
-  },
-  editPost: {
-    PluginPostStatusInfo
-  },
-  data: {
-    useSelect,
-    useDispatch
-  },
-  element: {
-    useEffect
-  },
-  components: {
-    withSpokenMessages,
-    CheckboxControl
-  }
-} = wp;
-
-const Controls = () => {
-  const {
-    postType,
-    postMeta
-  } = useSelect(select => {
-    return {
-      postType: select('core/editor').getEditedPostAttribute('type'),
-      postMeta: select('core/editor').getEditedPostAttribute('meta')
-    };
-  });
-
-  if (['wp_block', 'wp_template', 'wp_template_part'].includes(postType)) {
-    return null;
-  }
-
-  const {
-    _wca_title_hidden: value = false
-  } = postMeta || {};
-  const {
-    editPost
-  } = useDispatch('core/editor', [value]);
-  const status = value === true ? __('hidden', 'wecodeart') : __('shown', 'wecodeart');
-  useEffect(() => {
-    const titleBlock = document.querySelector('.edit-post-visual-editor__post-title-wrapper');
-
-    if (titleBlock && value) {
-      titleBlock.classList.add('is-disabled');
-    }
-
-    return () => {
-      titleBlock.classList.remove('is-disabled');
-    };
-  }, [value]);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PluginPostStatusInfo, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(CheckboxControl, {
-    className: "wecodeart-gb-plugin wecodeart-gb-plugin--post-title",
-    label: __('Hide title on single template?', 'wecodeart'),
-    checked: value,
-    onChange: newValue => editPost({
-      meta: {
-        _wca_title_hidden: newValue
-      }
-    }),
-    help: sprintf(__('Title is %s.', 'wecodeart'), status)
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (compose(withSpokenMessages)(Controls));
-
-/***/ }),
-
-/***/ "./src/js/gutenberg/plugins/entry-title/index.js":
-/*!*******************************************************!*\
-  !*** ./src/js/gutenberg/plugins/entry-title/index.js ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/controls */ "./src/js/gutenberg/plugins/entry-title/components/controls.js");
-/**
- * Internal dependencies
- */
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'wca-disable-title',
-  render: _components_controls__WEBPACK_IMPORTED_MODULE_0__["default"]
-});
-
-/***/ }),
-
 /***/ "./src/js/gutenberg/plugins/index.js":
 /*!*******************************************!*\
   !*** ./src/js/gutenberg/plugins/index.js ***!
@@ -10906,20 +10795,18 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return registerWCAPlugins; });
-/* harmony import */ var _entry_title__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entry-title */ "./src/js/gutenberg/plugins/entry-title/index.js");
-/* harmony import */ var _code_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./code-editor */ "./src/js/gutenberg/plugins/code-editor/index.js");
-/* harmony import */ var _clear_formatting__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./clear-formatting */ "./src/js/gutenberg/plugins/clear-formatting/index.js");
+/* harmony import */ var _code_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./code-editor */ "./src/js/gutenberg/plugins/code-editor/index.js");
+/* harmony import */ var _clear_formatting__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./clear-formatting */ "./src/js/gutenberg/plugins/clear-formatting/index.js");
 /**
  * Internal dependencies
  */
-
 
 
 const {
   registerPlugin
 } = wp.plugins;
 function registerWCAPlugins() {
-  [_entry_title__WEBPACK_IMPORTED_MODULE_0__["default"], _code_editor__WEBPACK_IMPORTED_MODULE_1__["default"], _clear_formatting__WEBPACK_IMPORTED_MODULE_2__["default"]].forEach(block => {
+  [_code_editor__WEBPACK_IMPORTED_MODULE_0__["default"], _clear_formatting__WEBPACK_IMPORTED_MODULE_1__["default"]].forEach(block => {
     if (!block) return;
     const {
       name,

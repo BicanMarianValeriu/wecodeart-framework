@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.2.2
+ * @version		5.3.2
  */
 
 namespace WeCodeArt;
@@ -57,78 +57,19 @@ class Gutenberg {
 		// Theme Support.
 		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
 
-		// Meta.
-		add_filter( 'init',							[ $this, 'register_meta' ] );
-
 		// Admin.
 		add_action( 'admin_init', 					[ $this, 'admin_init' ] );
-
-		// Body Class.
-		add_filter( 'body_class', 					[ $this, 'body_class' ] );
 
 		// Skip links.
 		remove_action( 'wp_footer', 				'the_block_template_skip_link' );
 		remove_action( 'wp_footer', 				'gutenberg_the_skip_link' );
 		add_action( 'wp_footer', 					[ $this, 'the_skip_link' ] );
 
-		// Hidden Singular Page Title.
-		add_filter( 'wecodeart/filter/entry/title/disabled', [ $this, 'disable_title' ], 10, 2 );
-
 		// Modules.
 		Gutenberg\Modules::get_instance();
 		
 		// Blocks.
 		Gutenberg\Blocks::get_instance();
-	}
-
-	/**
-	 * Register meta.
-	 *
-	 * @return 	void
-	 */
-	public function register_meta() {
-		register_meta( 'post', '_wca_title_hidden', [
-			'show_in_rest'  => true,
-			'single'        => true,
-			'type'          => 'boolean',
-			'auth_callback' => function() {
-				return current_user_can( 'edit_posts' );
-			},
-		] );
-	}
-
-	/**
-	 * Maybe Disable Title
-	 *
-	 * @return 	bool
-	 */
-	public function disable_title( $disabled, $post_id ) {
-		if( is_singular() && get_post_meta( $post_id, '_wca_title_hidden', true ) ) {
-			$disabled = true;
-		}
-		
-		return $disabled;
-	}
-
-	/**
-	 * Replace title with blank
-	 *
-	 * @param 	array $classes The body classes.
-	 *
-	 * @return 	array Returns the new body classes.
-	 */
-	public function body_class( $classes ) {
-		if ( is_admin() ) return $classes;
-		
-		if( is_singular() ) {			
-			global $post;
-
-			if ( get_post_meta( $post->ID, '_wca_title_hidden', true ) ) {
-				$classes[] = 'has-title-hidden';
-			}
-		}
-
-		return $classes;
 	}
 
 	/**
@@ -216,9 +157,8 @@ class Gutenberg {
 			wecodeart( 'version' )
 		);
 		
-		$code_mirror = ''; // Adds a border to CodeMirror to match WP.
-		$code_mirror .= '.CodeMirror{height:auto;margin-bottom:1rem;}';
-		$code_mirror .= '.CodeMirror.CodeMirror-wrap{border:1px solid #949494;}';
+		$code_mirror = ''; // Adds a border to CodeMirror to match WP and fixes height.
+		$code_mirror .= '.CodeMirror.CodeMirror-wrap{height:auto;margin-bottom:1rem;border:1px solid #949494;}';
 		wp_add_inline_style( 'wp-editor', $code_mirror );
 	}
 

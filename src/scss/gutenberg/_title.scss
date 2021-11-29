@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------
-# Hide Title
+# Title
 --------------------------------------------------------------*/
 .edit-post-visual-editor__post-title-wrapper {
 	&.is-disabled  {
@@ -8,11 +8,6 @@
 
 	.editor-post-title {
 		--wp--style--block-gap: 1.5rem;
-	}
-}
-
-.wecodeart-gb-plugin--post-title {
-	.components-base-control__field {
-		margin-bottom: 0.5rem!important;
+		margin-bottom: var(--wp--style--block-gap);
 	}
 }

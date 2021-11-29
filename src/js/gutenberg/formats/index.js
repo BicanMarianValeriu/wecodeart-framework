@@ -24,6 +24,4 @@ function registerWeCodeArtFormats() {
 	});
 }
 
-wp.domReady(
-	registerWeCodeArtFormats
-);
+wp.domReady(registerWeCodeArtFormats);

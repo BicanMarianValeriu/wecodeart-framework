@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.3.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -29,8 +29,7 @@ class Image extends Base {
 	 *
 	 * @return 	null
 	 */
-	protected function process_extra() {
-		$this->output 		= []; // Reset output	
+	protected function process_extra() {	
 		$output 			= [];
 		$output['element'] 	= $this->element;
 

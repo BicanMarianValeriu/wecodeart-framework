@@ -40,13 +40,13 @@ const CodeEditor = () => {
 			const textEditor = document.querySelector('.editor-post-text-editor');
 			const checkChanges = wp.codeEditor.initialize(textEditor, editorSettings);
 
-			checkChanges.codemirror.on('change', function (params) {
+			checkChanges.codemirror.on('change', (params) => {
 				const content = params.getValue();
 				textEditor.innerHTML = content;
 				dispatch('core/editor').editPost({ content });
 			});
 
-			checkChanges.codemirror.on('blur', function (params) {
+			checkChanges.codemirror.on('blur', (params) => {
 				const content = params.getValue();
 				const blocks = parse(content);
 				dispatch('core/editor').resetEditorBlocks(blocks);
