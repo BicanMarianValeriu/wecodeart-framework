@@ -3,6 +3,7 @@ v5.3.2
 - Fixed - Navigation offcanvas background inheritance
 - Fixed - Height of Gutenberg Editor mode with Codemirror
 - Fixed - Core/Image block attributes parsing for styles (output was reset when processing border radius)
+- Added - Core/Template Part filter support to maintain experimental layout after upcomming Gutenberg plugin update (avoid additional group wrapper)
 
 v5.3.1
 - Updated - Site logo width on header template part

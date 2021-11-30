@@ -102,8 +102,9 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/query-title',	            Blocks\Query\Title::class );
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         // Site Blocks
-		$this->register( 'core/site-logo',  Blocks\Site\Logo::class );
-		$this->register( 'core/loginout',   Blocks\Site\Login::class );
+		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
+		$this->register( 'core/loginout',       Blocks\Site\Login::class );
+		$this->register( 'core/template-part',  Blocks\Site\Part::class );
         
         $this->load();
 
