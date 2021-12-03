@@ -20,10 +20,12 @@
 	],
 	"templateParts": [
 		{
+			"title": "Header",
 			"name": "header",
 			"area": "header"
 		},
 		{
+			"title": "Footer",
 			"name": "footer",
 			"area": "footer"
 		}
@@ -210,86 +212,6 @@
 					"slug": "huge",
 					"size": "2rem",
 					"name": "Huge"
-				}
-			],
-			"fontStyles": [
-				{
-					"name": "Regular",
-					"slug": "normal",
-					"value": "normal"
-				},
-				{
-					"name": "Italic",
-					"slug": "italic",
-					"value": "italic"
-				}
-			],
-			"fontWeights": [
-				{
-					"slug": "200",
-					"value": "200",
-					"name": "Thin"
-				},
-				{
-					"slug": "300",
-					"value": "300",
-					"name": "Light"
-				},
-				{
-					"slug": "400",
-					"value": "400",
-					"name": "Regular"
-				},
-				{
-					"slug": "500",
-					"value": "500",
-					"name": "Medium"
-				},
-				{
-					"slug": "600",
-					"value": "600",
-					"name": "Semibold"
-				},
-				{
-					"slug": "700",
-					"value": "700",
-					"name": "Bold"
-				},
-				{
-					"slug": "800",
-					"value": "800",
-					"name": "Heavy"
-				},
-				{
-					"slug": "900",
-					"value": "900",
-					"name": "Black"
-				}
-			],
-			"textTransforms": [
-				{
-					"name": "AB",
-					"slug": "uppercase"
-				},
-				{
-					"name": "ab",
-					"slug": "lowercase"
-				},
-				{
-					"name": "Ab",
-					"slug": "capitalize"
-				}
-			],
-			"textDecorations": [
-				{
-					"name": "Underline",
-					"slug": "underline",
-					"value": "underline"
-				},
-				{
-					"name": "Strikethrough",
-					"slug": "strikethrough",
-					"value": "line-through"
 				}
 			]
 		}

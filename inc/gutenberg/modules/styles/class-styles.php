@@ -140,7 +140,7 @@ class Styles implements Integration {
 		$filesystem = FileSystem::get_instance();
 		$filesystem->set_folder( 'cache' );
 
-		add_editor_style( $filesystem->get_file_url( $this->CSS->Utilities::CACHE, true ) );
+		add_editor_style( $filesystem->get_file_url( $this->CSS->Utilities::CACHE_FILE, true ) );
 		
 		$filesystem->set_folder( '' );
 	}

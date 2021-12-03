@@ -3,18 +3,13 @@
 	"items": [
 		{
 			"type": "info",
+			"title": "Out of Beta - Soon!",
+			"content": "WeCodeArt version 5+ will be soon out of Beta - as soon as WP 5.9 will launch in January."
+		},
+		{
+			"type": "info",
 			"title": "Is a FSE beta - have patience!",
 			"content": "WeCodeArt version 5.0 is a Full Site Editing theme which means it will have API changes - please have patience and do not use on production!"
-		},
-		{
-			"type": "success",
-			"title": "11.9.0 compatability update!",
-			"content": "Next update (v5.2.4) will include huge improvements to styles generation: utility classes CSS only loaded if used on page, eg: if your blocks will have a specific utility class (mb-5, shadow, rounded etc)."
-		},
-		{
-			"type": "success",
-			"title": "11.8.0 compatability update!",
-			"content": "Gutenberg 11.8 introduced some major changes so WeCodeArt 5.1.5+ will align with those updates - please update to latest version."
 		},
 		{
 			"type": "info",

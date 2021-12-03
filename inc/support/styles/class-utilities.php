@@ -9,7 +9,7 @@
  * @subpackage  Styles Utilities
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -54,7 +54,8 @@ class Utilities implements \ArrayAccess {
 	 *
 	 * @var string
 	 */
-    const CACHE     = 'utilities.css';
+    const CACHE_FILE    = 'utilities.css';
+    const CACHE_KEY     = 'wecodeart/gutenberg/utilities';
 
     /**
 	 * Send to Constructor
@@ -66,6 +67,9 @@ class Utilities implements \ArrayAccess {
         // Generate CSS
         add_action( 'init',             [ $this, 'cache'    ], 100 );
         add_action( 'wp_print_styles',  [ $this, 'generate' ], 20, 1 );
+
+        // Add to editor Advanced class suggestion
+        add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'suggestions' ] );
 	}
 
     /**
@@ -133,14 +137,25 @@ class Utilities implements \ArrayAccess {
 		$filesystem = FileSystem::get_instance();
 		$filesystem->set_folder( 'cache' );
 
-        $has_cached = $filesystem->has_file( self::CACHE );
+        $has_cached = $filesystem->has_file( self::CACHE_FILE );
 
-		if( ! $has_cached || false === get_transient( 'wecodeart/gutenberg/utilities' ) ) {
-			$filesystem->create_file( self::CACHE, $inline_css );
-			set_transient( 'wecodeart/gutenberg/utilities', true, 5 * MINUTE_IN_SECONDS );
+		if( ! $has_cached || false === get_transient( self::CACHE_KEY ) ) {
+			$filesystem->create_file( self::CACHE_FILE, $inline_css );
+			set_transient( self::CACHE_KEY, true, 5 * MINUTE_IN_SECONDS );
 		}
 
 		$filesystem->set_folder( '' );
+	}
+
+	/**
+	 * Add new classes.
+	 *
+	 * @param 	array  	$classes
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function suggestions( $classes ) {
+		return array_merge( array_keys( $this->all() ), $classes );
 	}
 
 	/**
@@ -167,7 +182,7 @@ class Utilities implements \ArrayAccess {
         $keys = is_array( $key ) ? $key : [ $key => $value ];
 
         foreach ( $keys as $key => $value ) {
-            $this->items[$key] = apply_filters( "wecodeart/gutenberg/utilities/set/{$key}", $value );
+            $this->items[$key] = apply_filters( "wecodeart/styles/utilities/set/{$key}", $value );
         }
 	}
 
@@ -195,7 +210,7 @@ class Utilities implements \ArrayAccess {
             return $default;
         }
 
-        return apply_filters( "wecodeart/gutenberg/utilities/get/{$key}", $this->items[$key] );
+        return apply_filters( "wecodeart/styles/utilities/get/{$key}", $this->items[$key] );
     }
 	
 	/**

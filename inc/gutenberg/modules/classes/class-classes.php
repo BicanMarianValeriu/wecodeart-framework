@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.3.0
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -19,13 +19,12 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
-use WeCodeArt\Support\Styles\Utilities;
 use WeCodeArt\Conditional\Traits\No_Conditionals;
 
 /**
  * Handles Gutenberg Theme Custom Classes Functionality.
  */
-class Classes {
+class Classes implements Integration {
 
 	use Singleton;
 	use No_Conditionals;
@@ -67,9 +66,7 @@ class Classes {
 	 */
 	public function set_suggestions( $settings, $post ) {
 		if ( ! isset( $settings[ 'customClasses' ] ) ) {
-			$classes = [];	
-			$classes = array_merge( array_keys( Utilities::get_instance()->all() ), $classes );
-			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/classes', $classes, $post );
+			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/classes', [], $post );
 			$settings['customClasses'] = array_map( 'sanitize_html_class', array_unique( $classes ) );
 		}
 

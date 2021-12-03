@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -76,12 +76,6 @@ class Title extends Dynamic {
 			return '';
 		}
 
-		$disabled = apply_filters( 'wecodeart/filter/entry/title/disabled', false, $block->context['postId'] );
-		
-		if ( $disabled ) {
-			return '';
-		}
-
 		$tag_name	= 'h2';
 		if ( $value = get_prop( $attributes, 'level', false ) ) {
 			$tag_name = 0 === $value ? 'p' : 'h' . $value;
@@ -111,7 +105,7 @@ class Title extends Dynamic {
 				'tag' 	=> 'a',
 				'attrs' => [
 					'class'		=> 'wp-block-post-title__link',
-					'target' 	=> get_prop( $attributes, 'linkTarget', null ),
+					'target' 	=> get_prop( $attributes, 'linkTarget' ),
 					'href'		=> get_permalink( $block->context['postId'] )
 				]
 			];
