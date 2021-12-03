@@ -87,6 +87,7 @@ class Classes implements Integration {
 		foreach( range( 1, 12 ) as $number ) {
 			$args[] = 'col-' . $number;
 			$args[] = 'g-col-' . $number;
+			$args[] = 'g-start-' . $number;
 			$args[] = 'row-cols-' . $number;
 			$args[] = 'offset-' . $number;
 		}
@@ -101,6 +102,7 @@ class Classes implements Integration {
 			foreach( range( 1, 12 ) as $number ) {
 				$args[] = 'col-' . $breakpoint . '-' . $number;
 				$args[] = 'g-col-' . $breakpoint . '-' . $number;
+				$args[] = 'g-start-' . $breakpoint . '-' . $number;
 				$args[] = 'row-cols-'. $breakpoint . '-' . $number;
 				$args[] = 'offset-' . $breakpoint . '-' . $number;
 			}
