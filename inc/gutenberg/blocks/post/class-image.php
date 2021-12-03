@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -255,9 +255,8 @@ class Image extends Dynamic {
 		.wp-block-post-featured-image__link {
 			display: block;
 		}
-		.wp-block-post-featured-image :where(img) {
+		.wp-block-post-featured-image img {
 			width: 100%;
-			height: 100%;
 			object-fit: cover;
 		}
 		.wp-block-post-featured-image img[data-placeholder-resp] {
