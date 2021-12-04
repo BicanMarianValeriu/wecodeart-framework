@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Patterns
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.4
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -20,7 +20,6 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Core\Scripts;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\wp_parse_args_r;
 
 /**
  * Handles Gutenberg Theme Patterns Functionality.
@@ -36,6 +35,13 @@ class Patterns implements Integration {
 	 * @var string
 	 */
 	const FOLDER = 'block-patterns';
+
+	/**
+	 * The indexed patterns.
+	 *
+	 * @var 	array
+	 */
+	private $patterns	= [];
 
 	/**
 	 * Get Conditionals
@@ -107,6 +113,13 @@ class Patterns implements Integration {
 		$query = $this->get_files();
 
 		if( empty( $query ) ) return;
+
+		$theme_dir 	= wecodeart_config( 'paths' )['directory'];
+		$index_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . '_index.json' );
+
+		if ( file_exists( $index_path ) ) {
+			$this->patterns = json_decode( file_get_contents( $index_path ), true );
+		}
 
 		foreach( $query as $pattern ) $this->get_pattern_from_file( $pattern['slug'] );
 	}
@@ -195,19 +208,27 @@ class Patterns implements Integration {
 	/**
 	 * Build a unified template object based on a theme file.
 	 *
-	 * @param 	array 	$template_file Theme file.
+	 * @param 	array 	$file 	Theme file.
 	 *
-	 * @return 	WP_Block_Template Template.
+	 * @return 	Patterns\Pattern Template.
 	 */
-	public function register_from_file( $template_file ) {
-		$template_content	= file_get_contents( $template_file['path'] );
+	public function register_from_file( $file ) {
+		$template	= file_get_contents( $file['path'] );
 
-		$template			= new Patterns\Pattern();
-		$template->name		= $template_file['slug'];
-		$template->title	= ucfirst( implode( ' ', explode( '-', $template_file['slug'] ) ) );
-		$template->content	= $template_content;
-		$template->slug		= $template_file['slug'];
-		$template->theme	= $template_file['theme'];
+		$args = [
+			'title' 	=> ucfirst( implode( ' ', explode( '-', $file['slug'] ) ) ),
+			'content' 	=> $template,
+			'slug'		=> $file['slug'],
+			'theme'		=> $file['theme'],
+		];
+
+		$has_json = current( wp_list_filter( $this->patterns, [ 'slug' => $file['slug'] ] ) );
+		
+		if( $has_json ) {
+			$args = wp_parse_args( $has_json, $args );
+		}
+
+		$template = new Patterns\Pattern( $args );
 
 		return $template->register();
 	}
@@ -218,7 +239,7 @@ class Patterns implements Integration {
 	 *
 	 * @param 	string 	$slug Template unique identifier (example: template_slug).
 	 *
-	 * @return 	WP_Block_Template|null File template.
+	 * @return 	Patterns\Pattern|null File template.
 	 */
 	public function get_pattern_from_file( $slug ) {
 		$template_file = $this->get_file( $slug );

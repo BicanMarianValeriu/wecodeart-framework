@@ -1,0 +1,48 @@
+[
+    {
+        "slug": "header-default",
+        "title": "Header (default)",
+        "description": "WeCodeArt Framework default header.",
+        "blockTypes": [
+            "core/template-part/header"
+        ]
+    },
+    {
+        "slug": "header-left",
+        "title": "Header (Left Logo)",
+        "description": "WeCodeArt Framework header with left positioned logo.",
+        "blockTypes": [
+            "core/template-part/header"
+        ]
+    },
+    {
+        "slug": "footer-default",
+        "title": "Footer (default)",
+        "description": "WeCodeArt Framework default footer.",
+        "blockTypes": [
+            "core/template-part/footer"
+        ]
+    },
+    {
+        "slug": "query-default",
+        "title": "Query (default)",
+        "description": "WeCodeArt Framework default query template.",
+        "blockTypes": [
+            "core/query"
+        ],
+        "categories": [
+            "wecodeart", "query"
+        ]
+    },
+    {
+        "slug": "query-list",
+        "title": "Query (list)",
+        "description": "WeCodeArt Framework query template as a list.",
+        "blockTypes": [
+            "core/query"
+        ],
+        "categories": [
+            "wecodeart", "query"
+        ]
+    }
+]

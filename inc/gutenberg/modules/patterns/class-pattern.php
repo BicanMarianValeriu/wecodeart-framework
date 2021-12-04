@@ -28,6 +28,13 @@ class Pattern {
     const NAMESPACE = 'wecodeart';
 
 	/**
+	 * Container of valid json properties.
+	 *
+	 * @var array
+	 */
+	const VALID_PROPERTIES = [ 'slug', 'title', 'content', 'description', 'categories', 'blockTypes', 'theme' ];
+
+	/**
 	 * Template slug.
 	 *
 	 * @var string
@@ -67,7 +74,7 @@ class Pattern {
 	 *
 	 * @var array
 	 */
-	public $block_types = [];
+	public $blockTypes = [];
 
 	/**
 	 * Theme.
@@ -83,6 +90,18 @@ class Pattern {
 	 */
 	public $source = 'theme';
 
+	/**
+	 * Construct template.
+	 *
+	 * @param 	array	$args	Pattern attributes
+	 */
+	public function __construct( $args = [] ) {
+		$valid = wp_array_slice_assoc( $args, self::VALID_PROPERTIES );
+		$valid = self::translate( $valid );
+
+		foreach( $valid as $key => $value ) $this->{ $key } = $value;
+	}
+
     /**
      * Register Template
      *
@@ -90,31 +109,14 @@ class Pattern {
      */
     public function register() {
 		if ( \WP_Block_Patterns_Registry::get_instance()->is_registered( $this->get_name() ) ) return;
-		
+
 		$args = [
-            'title'       => sanitize_text_field( $this->title ),
-            'content'     => serialize_blocks( parse_blocks( $this->content ) ),
-            'categories'  => ! empty( $this->categories ) ? array_map( 'sanitize_title', $this->categories ) : [ $this->theme ],
-            'description' => sanitize_text_field( $this->description ),
+            'title'       	=> sanitize_text_field( $this->title ),
+            'content'     	=> serialize_blocks( parse_blocks( $this->content ) ),
+            'categories'  	=> ! empty( $this->categories ) ? array_map( 'sanitize_title', $this->categories ) : [ $this->theme ],
+            'description' 	=> sanitize_text_field( $this->description ),
+			'blockTypes' 	=> array_map( 'sanitize_text_field', $this->blockTypes ),
         ];
-
-		if( strpos( $this->get_name(), 'footer' ) ) {
-			$args = wp_parse_args( [
-				'blockTypes' => [ 'core/template-part/footer' ]
-			], $args );
-		}
-		
-		if( strpos( $this->get_name(), 'header' ) ) {
-			$args = wp_parse_args( [
-				'blockTypes' => [ 'core/template-part/header' ]
-			], $args );
-		}
-
-		if( strpos( $this->get_name(), 'query' ) ) {
-			$args = wp_parse_args( [
-				'blockTypes' => [ 'core/query' ]
-			], $args );
-		}
 
         register_block_pattern( $this->get_name(), $args );
     }
@@ -125,6 +127,18 @@ class Pattern {
      * @return string
      */
 	public function get_name() {
-		return join( '/', [ self::NAMESPACE, sanitize_text_field( $this->name ) ] );
+		return join( '/', [ self::NAMESPACE, sanitize_text_field( $this->slug ) ] );
+	}
+
+	/**
+     * Translate
+     *
+     * @return array
+     */
+	private static function translate( $json = [] ) {
+		return translate_settings_using_i18n_schema( (object) [
+			'title' 		=> 'pattern title',
+			'description' 	=> 'pattern description',
+		], $json, wp_get_theme()->get( 'TextDomain' ) );
 	}
 }

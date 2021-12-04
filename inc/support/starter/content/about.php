@@ -113,10 +113,10 @@ return [
 	<!-- wp:separator {"color":"primary","className":"mb-5 is-style-dots"} -->
 	<hr class="wp-block-separator has-text-color has-background has-primary-background-color has-primary-color mb-5 is-style-dots"/>
 	<!-- /wp:separator -->
-	<!-- wp:columns {"className":"flex-column flex-sm-row"} -->
-	<div class="wp-block-columns flex-column flex-sm-row">
-	<!-- wp:column {"className":"mb-4 col-sm-6 col-lg-3"} -->
-	<div class="wp-block-column mb-4 col-sm-6 col-lg-3">
+	<!-- wp:columns {"className":"row-cols-sm-2 row-cols-lg-4"} -->
+	<div class="wp-block-columns row-cols-sm-2 row-cols-lg-4">
+	<!-- wp:column {"className":"mb-4 px-3"} -->
+	<div class="wp-block-column mb-4 px-3">
 	<!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3"} -->
 	<div class="wp-block-image is-style-default mb-3">
 	<figure class="aligncenter size-thumbnail">
@@ -139,8 +139,8 @@ return [
 	<!-- /wp:social-links -->
 	</div>
 	<!-- /wp:column -->
-	<!-- wp:column {"className":"mb-4 col-sm-6 col-lg-3"} -->
-	<div class="wp-block-column mb-4 col-sm-6 col-lg-3">
+	<!-- wp:column {"className":"mb-4 px-3"} -->
+	<div class="wp-block-column mb-4 px-3">
 	<!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3"} -->
 	<div class="wp-block-image is-style-default mb-3">
 	<figure class="aligncenter size-thumbnail">
@@ -163,8 +163,8 @@ return [
 	<!-- /wp:social-links -->
 	</div>
 	<!-- /wp:column -->
-	<!-- wp:column {"className":"mb-4 col-sm-6 col-lg-3"} -->
-	<div class="wp-block-column mb-4 col-sm-6 col-lg-3">
+	<!-- wp:column {"className":"mb-4 px-3"} -->
+	<div class="wp-block-column mb-4 px-3">
 	<!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3"} -->
 	<div class="wp-block-image is-style-default mb-3">
 	<figure class="aligncenter size-thumbnail">
@@ -187,8 +187,8 @@ return [
 	<!-- /wp:social-links -->
 	</div>
 	<!-- /wp:column -->
-	<!-- wp:column {"className":"mb-4 col-sm-6 col-lg-3"} -->
-	<div class="wp-block-column mb-4 col-sm-6 col-lg-3"><!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3"} -->
+	<!-- wp:column {"className":"mb-4 px-3"} -->
+	<div class="wp-block-column mb-4 px-3"><!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3"} -->
 	<div class="wp-block-image is-style-default mb-3">
 	<figure class="aligncenter size-thumbnail">
 	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" />
