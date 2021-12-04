@@ -159,7 +159,7 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
 
             case 'content' :
                 /**
-                 * @see - WeCodeArt\Core\Content::render_modules();
+                 * @see - WeCodeArt\Core\Content::render_content();
                  */
                 do_action( 'wecodeart/content/markup' );
                 break;

@@ -1,5 +1,5 @@
 {
-	"version": 1,
+	"version": 2,
 	"customTemplates": [
 		{
 			"name": "page-sidebar",
@@ -41,6 +41,7 @@
 		}
 	],
 	"settings": {
+		"appearanceTools": true,
 		"border": {
 			"customColor": true,
 			"customRadius": true,
