@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -127,73 +127,50 @@ abstract class Dynamic {
 	protected function get_attributes() {
 		return [];
 	}
-
+	
 	/**
-	 * Get the schema for the alignment property.
-	 *
-	 * @return array Property definition for align.
-	 */
-	protected function get_schema_align() {
-		return [
-			'type' => 'string',
-			'enum' => [ 'left', 'center', 'right', 'wide', 'full' ],
-		];
-	}
-
-	/**
-	 * Get the schema for a list of IDs.
-	 *
-	 * @return array Property definition for a list of numeric ids.
-	 */
-	protected function get_schema_list_ids() {
-		return [
-			'type'    => 'array',
-			'items'   => [
-				'type' => 'number',
-			],
-			'default' => [],
-		];
-	}
-
-	/**
-	 * Get the schema for a boolean value.
-	 *
-	 * @param  string	$default  The default value.
-	 *
-	 * @return array 	Property definition.
-	 */
-	protected function get_schema_boolean( $default = true ) {
-		return [
-			'type'    => 'boolean',
-			'default' => $default,
-		];
-	}
-
-	/**
-	 * Get the schema for a numeric value.
-	 *
-	 * @param  string 	$default  The default value.
-	 *
-	 * @return array 	Property definition.
-	 */
-	protected function get_schema_number( $default ) {
-		return [
-			'type'    => 'number',
-			'default' => $default,
-		];
-	}
-
-	/**
-	 * Get the schema for a string value.
+	 * Get the schema for a value.
 	 *
 	 * @param  string 	$default  The default value.
 	 *s
 	 * @return array 	Property definition.
 	 */
-	protected function get_schema_string( $default = '' ) {
-		return [
-			'type'    => 'string',
-			'default' => $default,
+	protected function get_schema( string $type, $default ) {
+		$type 	= in_array( $type, [ 'string', 'number', 'boolean', 'list', 'align' ] ) ? $type : 'string';
+
+		$schema = [
+			'type'	=> $type,
 		];
+
+		switch( $type ) :
+			case 'boolean':
+				$schema = wp_parse_args( [
+					'default' => $default ?: true
+				], $schema );
+			break;
+			case 'string':
+				$schema = wp_parse_args( [
+					'default' => $default ?: ''
+				], $schema );
+			break;
+			case 'align':
+				$schema = wp_parse_args( [
+					'type' => 'string',
+					'enum' => [ 'left', 'center', 'right', 'wide', 'full' ],
+				], $schema );
+			break;
+			case 'list':
+				$schema = wp_parse_args( [
+					'type'    => 'array',
+					'items'   => [
+						'type' => 'number',
+					],
+					'default' => $default ?: []
+				], $schema );
+			break;
+			default;
+		endswitch;
+
+		return $schema;
 	}
 }

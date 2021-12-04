@@ -65,23 +65,58 @@ class Numbers extends Dynamic {
 	}
 
 	/**
-	 * Dynamically renders the `core/post-template` block.
+	 * Dynamically renders the `core/comments-pagination-numbers` block.
 	 *
 	 * @param 	array 	$attributes The block attributes.
 	 *
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $attributes = [], $content = '', $block = null ) {
-		
+		// Get the post ID from which comments should be retrieved.
+		$post_id = get_prop( $block->context, [ 'postId' ], get_the_id() );
 
-		return $content;
+		if ( ! $post_id ) {
+			return '';
+		}
+
+		// Get the 'comments per page' setting.
+		$per_page = get_prop( $block->context, [ 'queryPerPage' ], get_option( 'comments_per_page' ) );
+
+		// Get the total number of pages.
+		$comments = get_approved_comments( $post_id );
+		$total    = get_comment_pages_count( $comments, $per_page );
+
+		// Get the number of the default page.
+		$default_page = 'newest' === get_option( 'default_comments_page' ) ? $total : 1;
+
+		// Get the current comment page from the URL.
+		$current = get_query_var( 'cpage' ) ?: $default_page;
+
+		// Render links.
+		$content = paginate_comments_links( [
+			'total'     => $total,
+			'current'   => $current,
+			'prev_next' => false,
+			'echo'      => false,
+		] );
+
+		if ( empty( $content ) ) {
+			return '';
+		}
+
+		return wecodeart( 'markup' )::wrap( $this->block_name, [ [
+			'tag' 	=> 'div',
+			'attrs' => [ 
+				'class' => ''
+			] 
+		] ], $content, [], false );
 	}
 
 	/**
 	 * Render Comments Pagination - not working yet but it will be implemented.
 	 *
-	 * @since 	5.2.2
-	 * @version 5.3.1
+	 * @since 	5.3.3
+	 * @version 5.3.3
 	 *
 	 * @return 	string|null
 	 */
@@ -132,16 +167,6 @@ class Numbers extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
-		.comments__add-new {
-			margin: .5rem 0;
-		}
-		.wp-block-comments-query-loop:empty {
-			display: none;
-		}
-		.wp-block-comments-query-loop__head svg {
-			margin-right: .5rem;
-		}
-		";
+		return "";
 	}
 }

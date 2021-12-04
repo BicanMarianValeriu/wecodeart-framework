@@ -55,7 +55,7 @@ class Buttons extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/buttons', [ $this, 'render' ], 10, 2 );
+		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
 	/**

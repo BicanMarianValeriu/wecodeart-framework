@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -45,7 +45,7 @@ class Cover extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/cover', [ $this, 'render' ], 10, 2 );
+		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
 	/**

@@ -45,7 +45,7 @@ class Gallery extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/gallery', [ $this, 'render' ], 10, 2 );
+		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
 	/**

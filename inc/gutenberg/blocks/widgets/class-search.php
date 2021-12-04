@@ -45,7 +45,7 @@ class Search extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/search', [ $this, 'render' ], 10, 2 );
+		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Search extends Dynamic {
 			}
 		}
 
-		return wecodeart( 'markup' )::wrap( 'search-block', [
+		return wecodeart( 'markup' )::wrap( 'wp-block-search', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => [

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Blocks Registry
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.2
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -100,11 +100,11 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/comment-template',   Blocks\Comment\Template::class );
         // Query Blocks
 		$this->register( 'core/query-title',	            Blocks\Query\Title::class );
+		$this->register( 'core/template-part',              Blocks\Query\Template::class );
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         // Site Blocks
 		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
 		$this->register( 'core/loginout',       Blocks\Site\Login::class );
-		$this->register( 'core/template-part',  Blocks\Site\Part::class );
         
         $this->load();
 

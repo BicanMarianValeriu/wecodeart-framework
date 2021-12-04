@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -46,7 +46,7 @@ class Social extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/social-links', [ $this, 'render' ], 10, 2 );
+		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
 	/**
@@ -59,8 +59,8 @@ class Social extends Dynamic {
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
 		$attributes = get_prop( $block, 'attrs', [] );
-
-		$services = wp_list_pluck( wp_list_pluck( get_prop( $block, 'innerBlocks', [] ), 'attrs' ), 'service' );
+		$services 	= wp_list_pluck( wp_list_pluck( get_prop( $block, 'innerBlocks', [] ), 'attrs' ), 'service' );
+		
 		if( ! empty( $services ) ) {
 			$inline_css = '';
 			
@@ -197,9 +197,6 @@ class Social extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$desktop	= get_prop( $breaks, 'lg', '992px' );
-
 		return "
 		.wp-block-social-links {
 			display: flex;
@@ -212,9 +209,6 @@ class Social extends Dynamic {
 		.wp-block-social-links.aligncenter {
 			display: flex;
 			justify-content: center;
-		}
-		.navbar .wp-block-social-links {
-			margin-top: 1rem;
 		}
 		.wp-block-social-links.is-style-pill-shape .wp-social-link {
 			width: auto;
@@ -252,14 +246,9 @@ class Social extends Dynamic {
 			width: 1em;
 			height: 1em;
 		}
-		@media (min-width: $desktop) {
-			.navbar .wp-block-social-links {
-				margin-top: 0;
-			  	margin-bottom: 0;
-			}
-			.navbar .wp-block-social-links:not(:last-child) {
-			  	margin-right: 10px;
-			}
+		.navbar .wp-block-social-links {
+			margin-top: 0;
+			margin-bottom: 0;
 		}
 		";
 	}

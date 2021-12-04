@@ -9,10 +9,10 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.2
+ * @version		5.3.3
  */
 
-namespace WeCodeArt\Gutenberg\Blocks\Site;
+namespace WeCodeArt\Gutenberg\Blocks\Query;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -23,7 +23,7 @@ use function WeCodeArt\Functions\get_prop;
 /**
  * Gutenberg Query Template Part block.
  */
-class Part extends Dynamic {
+class Template extends Dynamic {
 
 	use Singleton;
 
@@ -57,7 +57,7 @@ class Part extends Dynamic {
 	public function filter( $settings, $data ) {
         if ( $this->get_block_type() === $data['name'] ) {
 			$settings = wp_parse_args( [
-				'supports' => array_merge( isset( $settings['supports'] ) ? $settings['supports'] : [], [
+				'supports' => array_merge( get_prop( $settings, [ 'supports' ], [] ), [
                     '__experimentalLayout' => true,
                 ] )
 			], $settings );
