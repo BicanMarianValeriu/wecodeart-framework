@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -17,7 +17,6 @@ namespace WeCodeArt\Gutenberg\Blocks\Navigation;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Support\Styles;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use WeCodeArt\Gutenberg\Blocks\Navigation;
 use function WeCodeArt\Functions\get_prop;
@@ -186,13 +185,8 @@ class Link extends Dynamic {
 		
 		$classes 	= [ 'wp-block-navigation-link__dropdown', 'dropdown-menu' ];
 
-		if( ( Styles::color_lightness( $background ) < 380 ) ) {
+		if( ( wecodeart( 'styles' )::color_lightness( $background ) < 380 ) ) {
 			$classes[] = 'dropdown-menu-dark';
-		}
-
-		// This should be temporary until the API gets stable and we can properly see when is a dropdown.
-		if( strpos( $inner_html, 'nav-link' ) ) {
-			$inner_html = str_replace( 'nav-link', 'dropdown-item', $inner_html );
 		}
 
 		wecodeart( 'markup' )::wrap( 'nav-dropdown', [ [

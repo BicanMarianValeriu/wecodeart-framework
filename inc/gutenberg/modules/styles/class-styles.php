@@ -137,7 +137,7 @@ class Styles implements Integration {
 	 * @return  void
 	 */
 	public function editor_styles() {
-		$filesystem = FileSystem::get_instance();
+		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 
 		add_editor_style( $filesystem->get_file_url( $this->CSS->Utilities::CACHE_FILE, true ) );

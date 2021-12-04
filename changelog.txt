@@ -1,6 +1,7 @@
 v5.3.3
 - Updated - Global cleanup / JSON cleanup / Clean old changelog before block-based update
 - Updated - CSS utilities class suggestion added to Gutenberg Class extentsion from Styles\Utilities class
+- Updated - Core/Navigation and Core/Navigation-Link cleanup and styles
 - Removed - Navigation Area block used in header (deprecated until WP 5.9)
 - Fixed - Header/Footer template parts titles to uppercase
 

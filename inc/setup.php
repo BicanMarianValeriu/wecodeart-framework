@@ -79,6 +79,17 @@ wecodeart()->bind( 'styles', function () {
 } );
 
 /**
+ * Bind FS.
+ * 
+ * @since   5.3.3
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'files', function () {
+    return wecodeart( 'integrations' )->get( 'files' )::get_instance();
+} );
+
+/**
  * Bind ThemeName.
  *
  * @since   3.9.5

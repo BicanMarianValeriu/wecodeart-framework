@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
-use WeCodeArt\Support\Styles;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -90,15 +89,19 @@ class Navigation extends Dynamic {
 		$inner_blocks = $block->inner_blocks;
 
 		// If `__unstableLocation` is defined, create inner blocks from the classic menu assigned to that location.
-		if ( empty( $inner_blocks ) && array_key_exists( '__unstableLocation', $attributes ) ) {
-			$menu_items = $this->get_menu_items( $attributes['__unstableLocation'] );
+		if (
+			array_key_exists( '__unstableLocation', $attributes ) &&
+			! array_key_exists( 'navigationMenuId', $attributes ) &&
+			! empty( gutenberg_get_menu_items_at_location( $attributes['__unstableLocation'] ) )
+		) {
+			$menu_items = gutenberg_get_menu_items_at_location( $attributes['__unstableLocation'] );
 
 			if ( empty( $menu_items ) ) {
 				return '';
 			}
 	
-			$sorted_items 	= $this->sort_menu( $menu_items );
-			$parsed_blocks 	= $this->parse_menu( $sorted_items[0], $sorted_items );
+			$sorted_items 	= gutenberg_sort_menu_items_by_parent_id( $menu_items );
+			$parsed_blocks 	= gutenberg_parse_blocks_from_menu_items( $sorted_items[0], $sorted_items );
 			$inner_blocks 	= new \WP_Block_List( $parsed_blocks, $attributes );
 		}
 
@@ -149,7 +152,7 @@ class Navigation extends Dynamic {
 
 		$block_id	= uniqid();
 
-		// Styles
+		// w
 		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [
 			'wecodeart-core-scripts'
 		], wecodeart( 'version' ) );
@@ -211,10 +214,11 @@ class Navigation extends Dynamic {
 		
 		// For this specific blocks, please wrap them in a <li> for valid markup
 		if( in_array( get_prop( $block->parsed_block, 'blockName', '' ), [
+			'core/spacer',
 			'core/search',
 			'core/social-links',
 			'core/site-title',
-			'core/site-logo'
+			'core/site-logo',
 		] ) ) {
 			$classes	= [ 'wp-block-navigation-link', 'nav-item' ];
 			$classes[]  = 'nav-item--' . join( '-', explode( '/', get_prop( $block->parsed_block, 'blockName' ) ) );
@@ -228,99 +232,6 @@ class Navigation extends Dynamic {
 		}
 
 		return $html;
-	}
-
-	/**
-	 * Returns the menu items for a WordPress menu location.
-	 *
-	 * @param 	string 	$location The menu location.
-	 * @return 	array 	Menu items for the location.
-	 */
-	public function get_menu_items( $location ) {
-		if ( empty( $location ) ) {
-			return;
-		}
-		
-		$locations = get_nav_menu_locations();
-		if ( ! isset( $locations[ $location ] ) ) {
-			return;
-		}
-		
-		$menu = wp_get_nav_menu_object( $locations[ $location ] );
-		if ( ! $menu || is_wp_error( $menu ) ) {
-			return;
-		}
-
-		$menu_items = wp_get_nav_menu_items( $menu->term_id, [ 'update_post_term_cache' => false ] );
-
-		_wp_menu_item_classes_by_context( $menu_items );
-
-		return $menu_items;
-	}
-
-	/**
-	 * Sorts a standard array of menu items into a nested structure keyed by the
-	 * id of the parent menu.
-	 *
-	 * @param 	array 	$menu_items Menu items to sort.
-	 * @return 	array 	An array keyed by the id of the parent menu where each element
-	 *               	is an array of menu items that belong to that parent.
-	 */
-	public function sort_menu( $menu_items ) {
-		$sorted_menu_items = [];
-		foreach ( (array) $menu_items as $menu_item ) {
-			$sorted_menu_items[ $menu_item->menu_order ] = $menu_item;
-		}
-		unset( $menu_items, $menu_item );
-
-		$sorted = [];
-
-		foreach ( $sorted_menu_items as $menu_item ) {
-			$sorted[ $menu_item->menu_item_parent ][] = $menu_item;
-		}
-
-		return $sorted;
-	}
-
-	/**
-	 * Turns menu item data into a nested array of parsed blocks
-	 *
-	 * @param 	array 	$menu_items
-	 * @param 	array 	$parent
-	 *
-	 * @return 	array	An array of parsed block data.
-	 */
-	public function parse_menu( $menu_items, $parent, $top = true ) {
-		if ( empty( $menu_items ) ) {
-			return [];
-		}
-
-		$blocks = [];
-
-		foreach ( $menu_items as $item ) {
-			$block = [
-				'blockName' => 'core/navigation-link',
-				'attrs'     => [
-					'id'			=> ( null !== $item->object_id && 'custom' !== $item->object ) ? $item->object_id : null,
-					'url'   		=> $item->url,
-					'label' 		=> $item->title,
-					'title' 		=> $item->attr_title,
-					'type'          => $item->object,
-					'description'   => $item->description,
-					'className' 	=> implode( ' ', (array) $item->classes ),
-					'rel' 			=> ( null !== $item->xfn && '' !== $item->xfn ) ? $item->xfn : null,
-					'kind' 			=> null !== $item->type ? str_replace( '_', '-', $item->type ) : 'custom',
-					'opensInNewTab'	=> null !== $item->target && '_blank' === $item->target,
-					'isTopLevelLink'=> $top,
-				],
-			];
-
-			$block['innerBlocks'] = $this->parse_menu( isset( $parent[ $item->ID ] ) ? $parent[ $item->ID ] : [], $parent, false );
-
-			$blocks[] = $block;
-		}
-
-		return $blocks;
 	}
 
 	/**
@@ -470,7 +381,7 @@ class Navigation extends Dynamic {
 		$background = get_prop( $attributes, 'customBackgroundColor', self::get_class_color( $attributes ) );
 
 		$classes 	= [ 'wp-block-navigation', 'navbar' ];
-		$classes[] 	= ( Styles::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
+		$classes[] 	= ( wecodeart( 'styles' )::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
 
 		if( get_prop( $attributes, 'orientation', false ) === 'horizontal' ) {
 			$classes[] = 'navbar-expand';
@@ -545,6 +456,10 @@ class Navigation extends Dynamic {
 		.wp-block-navigation.has-text-color .nav-link {
 			color: inherit;
 		}
+		.wp-block-navigation .wp-block-spacer {
+			width: 100%;
+			height: var(--wp--spacer-width);
+		}
 		.wp-block-navigation.hide-toggle .dropdown-toggle::after {
 			content: none;
 		}
@@ -568,7 +483,7 @@ class Navigation extends Dynamic {
 		.wp-block-navigation[class*='has-background'] :where(.offcanvas,.offcanvas-body) {
 			background-color: inherit;
 		}
-		.wp-block-navigation :where(.nav-link,.dropdown-item) {
+		.wp-block-navigation-link__content {
 			display: flex;
 			align-items: center;
 		}
@@ -587,10 +502,16 @@ class Navigation extends Dynamic {
 			top: 0;
 			left: 100%;
 		}
+		.wp-block-navigation.navbar-expand-{$filter} .nav {
+			gap: var(--wp--style--block-gap, .5rem) 0;
+		}
 		@media (min-width: $breakpoint) {
-			.wp-block-navigation.navbar-expand-{$filter} :is(.nav-link,.dropdown-item) {
-				padding-left: var(--wp--style--block-gap, .5rem);
-				padding-right: var(--wp--style--block-gap, .5rem);
+			.wp-block-navigation.navbar-expand-{$filter} .nav {
+				gap: 0 var(--wp--style--block-gap, .5rem);
+			}
+			.wp-block-navigation.navbar-expand-{$filter} .wp-block-spacer {
+				height: 100%;
+				width: var(--wp--spacer-width);
 			}
 			.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
 				border-top: 0.3em solid transparent;

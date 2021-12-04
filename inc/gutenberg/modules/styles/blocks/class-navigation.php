@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.1.3
- * @version		5.1.4
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -51,7 +51,7 @@ class Navigation extends Base {
 		}
 		
 		// Dropdowns items
-		$output['element'] = join( ' ', [ $this->element, '.dropdown-item' ] );
+		$output['element'] = join( ' ', [ $this->element, '.wp-block-navigation-link__content' ] );
 		if ( $value = get_prop( $this->attrs, 'fontSize' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'font-size',

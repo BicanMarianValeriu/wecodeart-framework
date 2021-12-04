@@ -134,12 +134,10 @@ class Utilities implements \ArrayAccess {
 
 		if( empty( $inline_css ) ) return;
 		
-		$filesystem = FileSystem::get_instance();
+		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 
-        $has_cached = $filesystem->has_file( self::CACHE_FILE );
-
-		if( ! $has_cached || false === get_transient( self::CACHE_KEY ) ) {
+		if( ! $filesystem->has_file( self::CACHE_FILE ) || false === get_transient( self::CACHE_KEY ) ) {
 			$filesystem->create_file( self::CACHE_FILE, $inline_css );
 			set_transient( self::CACHE_KEY, true, 5 * MINUTE_IN_SECONDS );
 		}

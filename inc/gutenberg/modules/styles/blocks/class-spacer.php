@@ -41,5 +41,13 @@ class Spacer extends Base {
 				'value'	  	=> $value . 'px',
 			], $output );
 		}
+		
+		if ( $value = get_prop( $this->attrs, 'width' ) ) {
+			// Mobile Spacer can be reduced using custom CSS variable
+			$this->output[] = wp_parse_args( [
+				'property' 	=> '--wp--spacer-width',
+				'value'	  	=> $value . 'px',
+			], $output );
+		}
 	}
 }

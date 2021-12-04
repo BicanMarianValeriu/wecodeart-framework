@@ -9,7 +9,7 @@
  * @subpackage 	Support\FileSystem
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.2.4
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Support;
@@ -17,13 +17,16 @@ namespace WeCodeArt\Support;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Integration;
+use WeCodeArt\Conditional\Traits\No_Conditionals;
 
 /**
  * Manages the Theme Uploads.
  */
-class FileSystem {
-	
+class FileSystem implements Integration {
+
 	use Singleton;
+	use No_Conditionals;
 
 	/**
 	 * Current folder
@@ -39,6 +42,11 @@ class FileSystem {
 	public function init() {
 		$this->set_folder();
 	}
+
+	/**
+	 * Register hooks
+	 */
+	public function register_hooks() {}
 
 	/**
 	 * Function to set folder in WordPress Filesystem.
