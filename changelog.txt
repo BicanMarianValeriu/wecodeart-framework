@@ -6,6 +6,7 @@ v5.3.3
 - Updated - Comment blocks naming in Gutenberg Styles extension (remove previous "post" prefix)
 - Updated - theme.json template parts naming
 - Updated - gutenberg_ prefixed functions renamed to wp_ (in progress)
+- Updated - Normalized some filters usage / block wrap context (to block classname)
 - Removed - Navigation Area block used in header (will be deprecated until WP 5.9)
 - Added - Header/Footer/Query patterns and show them into block types
 - Added - Comments Pagination
