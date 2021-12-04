@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.6
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -334,7 +334,7 @@ class Blocks extends Processor {
 
 				// Block Gap
 				$block_type      = \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
-				$has_gap_support = gutenberg_block_has_support( $block_type, [ 'spacing', 'blockGap' ], false );
+				$has_gap_support = block_has_support( $block_type, [ 'spacing', 'blockGap' ], false );
 				if ( $has_gap_support && $gap = get_prop( $spacing, 'blockGap', false ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> '--wp--style--block-gap',
@@ -431,12 +431,8 @@ class Blocks extends Processor {
 			];
 
 			foreach ( $duotone as $color ) {
-				$function = 'wp_tinycolor_string_to_rgb';
-				if( function_exists( 'gutenberg_tinycolor_string_to_rgb' ) ) {
-					$function = 'gutenberg_tinycolor_string_to_rgb';
-				}
+				$color = wp_tinycolor_string_to_rgb( $color );
 
-				$color = $function( $color );
 				$return['r'][] = $color['r'] / 255;
 				$return['g'][] = $color['g'] / 255;
 				$return['b'][] = $color['b'] / 255;

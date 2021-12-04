@@ -2,8 +2,13 @@ v5.3.3
 - Updated - Global cleanup / JSON cleanup / Clean old changelog before block-based update
 - Updated - CSS utilities class suggestion added to Gutenberg Class extentsion from Styles\Utilities class
 - Updated - Core/Navigation and Core/Navigation-Link cleanup and styles
-- Removed - Navigation Area block used in header (deprecated until WP 5.9)
-- Fixed - Header/Footer template parts titles to uppercase
+- Updated - Header/Footer template parts will now use pattern block
+- Updated - Comment blocks naming in Gutenberg Styles extension (remove previous "post" prefix)
+- Updated - theme.json template parts naming
+- Updated - gutenberg_ prefixed functions renamed to wp_ (in progress)
+- Removed - Navigation Area block used in header (will be deprecated until WP 5.9)
+- Added - Header/Footer/Query patterns and show them into block types
+- Added - Comments Pagination
 
 v5.3.2
 - Removed - Gutenberg hide title plugin (and related PHP code) - not necessary in a FSE theme

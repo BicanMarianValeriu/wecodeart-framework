@@ -132,34 +132,31 @@ class Numbers extends Dynamic {
                     'class' => 'wp-block-query-pagination__numbers',
                 ]
             ],
+            [
+                'tag'   => 'ul',
+                'attrs' => [
+                    'class'     => 'pagination',
+                    'aria-label'=> esc_attr__( 'Pagination', 'wecodeart' )
+                ]
+            ],
         ], function( $content ) {
-            wecodeart( 'markup' )::wrap( 'pagination-numbers-list', [
-                [
-                    'tag'   => 'ul',
-                    'attrs' => [
-                        'class'     => 'pagination',
-                        'aria-label'=> esc_attr__( 'Pagination', 'wecodeart' )
-                    ]
-                ],
-            ], function( $content ) {
+            
+            foreach( $content as $key => $link ) :
 
-                foreach( $content as $key => $link ) :
+                $class = [ 'pagination__item' ];
 
-                    $class = [ 'pagination__item' ];
+                if( strpos( $link, 'current' ) !== false ) {
+                    $class[] = 'pagination__item--current';
+                }
 
-                    if( strpos( $link, 'current' ) !== false ) {
-                        $class[] = 'pagination__item--current';
-                    }
+                ?>
+                <li class="<?php echo esc_attr( implode( ' ', $class ) ); ?>">
+                    <?php echo str_replace( 'page-numbers', 'pagination__link', $link ); ?>
+                </li>
+                <?php
 
-                    ?>
-                    <li class="<?php echo esc_attr( implode( ' ', $class ) ); ?>">
-                        <?php echo str_replace( 'page-numbers', 'pagination__link', $link ); ?>
-                    </li>
-                    <?php
+            endforeach;
 
-                endforeach;
-
-            }, [ $content ] );
         }, [ $content ], false );
 	}
 

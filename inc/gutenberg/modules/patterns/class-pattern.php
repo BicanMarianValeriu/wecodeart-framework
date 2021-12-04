@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Pattern
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Patterns;
@@ -21,11 +21,11 @@ defined( 'ABSPATH' ) || exit();
  */
 class Pattern {
     /**
-	 * Namespace: wca
+	 * Namespace: wecodeart
 	 *
 	 * @var string
 	 */
-    const NAMESPACE = 'wca';
+    const NAMESPACE = 'wecodeart';
 
 	/**
 	 * Template slug.
@@ -61,6 +61,13 @@ class Pattern {
 	 * @var array
 	 */
 	public $categories = [];
+    
+	/**
+	 * Block Types.
+	 *
+	 * @var array
+	 */
+	public $block_types = [];
 
 	/**
 	 * Theme.
@@ -84,12 +91,32 @@ class Pattern {
     public function register() {
 		if ( \WP_Block_Patterns_Registry::get_instance()->is_registered( $this->get_name() ) ) return;
 		
-        register_block_pattern( $this->get_name(), [
+		$args = [
             'title'       => sanitize_text_field( $this->title ),
             'content'     => serialize_blocks( parse_blocks( $this->content ) ),
             'categories'  => ! empty( $this->categories ) ? array_map( 'sanitize_title', $this->categories ) : [ $this->theme ],
             'description' => sanitize_text_field( $this->description ),
-        ] );
+        ];
+
+		if( strpos( $this->get_name(), 'footer' ) ) {
+			$args = wp_parse_args( [
+				'blockTypes' => [ 'core/template-part/footer' ]
+			], $args );
+		}
+		
+		if( strpos( $this->get_name(), 'header' ) ) {
+			$args = wp_parse_args( [
+				'blockTypes' => [ 'core/template-part/header' ]
+			], $args );
+		}
+
+		if( strpos( $this->get_name(), 'query' ) ) {
+			$args = wp_parse_args( [
+				'blockTypes' => [ 'core/query' ]
+			], $args );
+		}
+
+        register_block_pattern( $this->get_name(), $args );
     }
 
 	/**

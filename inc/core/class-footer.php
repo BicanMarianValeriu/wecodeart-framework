@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.5
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Core;
@@ -40,7 +40,7 @@ class Footer {
 	 * Output FOOTER markup function Plugin PHP fallback
 	 * 
 	 * @since 	1.0
-	 * @version	5.3.1
+	 * @version	5.3.3
 	 *
 	 * @return 	HTML 
 	 */

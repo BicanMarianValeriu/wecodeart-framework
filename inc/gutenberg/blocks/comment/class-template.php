@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -135,9 +135,6 @@ class Template extends Dynamic {
 
 		}, [ $comments, $block ], false );
 
-		// Pagination
-		$content .= $this->get_pagination();
-
 		return $content;
 	}
 
@@ -195,55 +192,6 @@ class Template extends Dynamic {
 			]
 		] ], $output, [], false );
 	}
-	
-	/**
-	 * Render Comments Pagination - not working yet but it will be implemented.
-	 *
-	 * @since 	5.2.2
-	 * @version 5.3.1
-	 *
-	 * @return 	string|null
-	 */
-	public function get_pagination() {
-		/**
-		 * Early Break
-		 */
-		if( empty( get_previous_comments_link() || get_next_comments_link() ) ) return;
-
-		return wecodeart( 'markup' )::wrap( 'wp-block-comments-nav', [
-			[
-                'tag'   => 'nav',
-                'attrs' => [
-					'class' 		=> 'wp-block-comments-query-loop__pagination',
-					'aria-label'    => esc_html__( 'Comments Navigation', 'wecodeart' ),
-                ]
-            ],
-			[
-                'tag'   => 'div',
-                'attrs' => [
-                    'class' => 'row pb-3'
-                ]
-            ]
-		], function() {
-			?>
-            <h3 class="screen-reader-text"><?php esc_html_e( 'Comments Navigation', 'wecodeart' ); ?></h3>
-			<?php
-
-			wecodeart( 'markup' )::wrap( 'comments-prev-link', [ [
-				'tag' 	=> 'div',
-				'attrs' => [ 
-					'class' => 'col-sm-12 col-md'
-				] 
-			] ], 'previous_comments_link' );
-	
-			wecodeart( 'markup' )::wrap( 'comments-next-link', [ [
-				'tag' 	=> 'div',
-				'attrs' => [
-					'class' => 'col-sm-12 col-md text-md-end'
-				] 
-			] ], 'next_comments_link' );
-		}, [], false );
-    }
 
 	/**
 	 * Block styles
