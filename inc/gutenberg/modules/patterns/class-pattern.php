@@ -97,7 +97,7 @@ class Pattern {
 	 */
 	public function __construct( $args = [] ) {
 		$valid = wp_array_slice_assoc( $args, self::VALID_PROPERTIES );
-		$valid = self::translate( $valid );
+		$valid = self::translate( self::sanitize( $valid ) );
 
 		foreach( $valid as $key => $value ) $this->{ $key } = $value;
 	}
@@ -111,11 +111,11 @@ class Pattern {
 		if ( \WP_Block_Patterns_Registry::get_instance()->is_registered( $this->get_name() ) ) return;
 
 		$args = [
-            'title'       	=> sanitize_text_field( $this->title ),
+            'title'       	=> $this->title,
             'content'     	=> serialize_blocks( parse_blocks( $this->content ) ),
-            'categories'  	=> ! empty( $this->categories ) ? array_map( 'sanitize_title', $this->categories ) : [ $this->theme ],
-            'description' 	=> sanitize_text_field( $this->description ),
-			'blockTypes' 	=> array_map( 'sanitize_text_field', $this->blockTypes ),
+            'categories'  	=> ! empty( $this->categories ) ? $this->categories : [ $this->theme ],
+            'description' 	=> $this->description,
+			'blockTypes' 	=> $this->blockTypes,
         ];
 
         register_block_pattern( $this->get_name(), $args );
@@ -131,9 +131,45 @@ class Pattern {
 	}
 
 	/**
-     * Translate
+     * Sanitize
+	 *
+	 * @param	array $json
      *
-     * @return array
+     * @return 	array
+     */
+	private static function sanitize( $json = [] ) {
+		$sanitized = [];
+
+		foreach( $json as $key => $value ) {
+			switch( $key ) :
+				// Strings
+				case 'slug':
+				case 'title':
+				case 'theme':
+				case 'description':
+					$sanitized[$key] = sanitize_text_field( $value );
+				break;
+				// Arrays
+				case 'categories':
+				case 'blockTypes':
+					$sanitized[$key] = array_map( 'sanitize_text_field', $value );
+				break;
+				// Content -> return as is.
+				default:
+					$sanitized[$key] = $value;
+				break;
+			endswitch;
+		}
+
+		return $sanitized;
+	}
+
+	/**
+     * Translate
+	 *
+	 * @param	array $json
+     *
+     * @return 	array
      */
 	private static function translate( $json = [] ) {
 		return translate_settings_using_i18n_schema( (object) [

@@ -8,6 +8,14 @@
         ]
     },
     {
+        "slug": "header-dark",
+        "title": "Header (dark)",
+        "description": "WeCodeArt Framework dark header.",
+        "blockTypes": [
+            "core/template-part/header"
+        ]
+    },
+    {
         "slug": "header-left",
         "title": "Header (Left Logo)",
         "description": "WeCodeArt Framework header with left positioned logo.",
@@ -19,6 +27,14 @@
         "slug": "footer-default",
         "title": "Footer (default)",
         "description": "WeCodeArt Framework default footer.",
+        "blockTypes": [
+            "core/template-part/footer"
+        ]
+    },
+    {
+        "slug": "footer-dark",
+        "title": "Footer (dark)",
+        "description": "WeCodeArt Framework dark footer.",
         "blockTypes": [
             "core/template-part/footer"
         ]
