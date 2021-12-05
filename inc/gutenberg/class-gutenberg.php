@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
-use WeCodeArt\Core\Content;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -206,11 +205,7 @@ class Gutenberg {
 	 * @return void
 	 */
 	public function the_skip_link() {
-		// Early exit if not a block theme.
-		if ( ! gutenberg_supports_block_templates() ) {
-			return;
-		}
-
+		// This is a block theme so we skip the other check.
 		// Early exit if not a block template.
 		global $_wp_current_template_content;
 		if ( ! $_wp_current_template_content ) {

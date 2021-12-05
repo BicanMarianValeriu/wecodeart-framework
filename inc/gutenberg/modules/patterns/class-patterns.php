@@ -50,10 +50,10 @@ class Patterns implements Integration {
 	 */
 	public static function get_conditionals() {
 		wecodeart( 'conditionals' )->set( [
-			'with_gutenberg_patterns' => Patterns\Condition::class,
+			'with_block_patterns' => Patterns\Condition::class,
 		] );
 
-		return [ 'with_gutenberg_patterns' ];
+		return [ 'with_block_patterns' ];
 	}
 
 	/**
