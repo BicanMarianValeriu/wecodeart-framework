@@ -9,7 +9,7 @@
  * @subpackage  Markup
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Support;
@@ -211,7 +211,7 @@ class Markup implements Integration {
      * Wrapper method for any html
 	 *
 	 * @since 	unknown
-	 * @version	5.3.0
+	 * @version	5.3.3
 	 *
 	 * @param	string	context		required ( used by generate_attr's dynamic filter )
 	 * @param 	mixed	function	required ( the function called to be wrapped )
@@ -259,6 +259,7 @@ class Markup implements Integration {
 		 * @since 4.1.5
 		 */
 		$content = apply_filters( "wecodeart/filter/wrap/{$context}/content", $content, $func_args );
+		$content = apply_filters( "wecodeart/filter/wrappers/{$context}/content", $content, $func_args );
 
 		if( is_callable( $content ) ) {
 			ob_start();
@@ -302,6 +303,7 @@ class Markup implements Integration {
 		 * @since 3.6.0
 		 */
 		$output = apply_filters( "wecodeart/filter/wrap/{$context}/output", $html, $context );
+		$output = apply_filters( "wecodeart/filter/wrappers/{$context}/output", $output, $context );
 
 		// Return the output.
 		if( $echo ) {

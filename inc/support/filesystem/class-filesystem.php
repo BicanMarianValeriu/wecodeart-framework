@@ -81,13 +81,16 @@ class FileSystem implements Integration {
 		
 		if( is_dir( $folder ) ) {
 			$objects = scandir( $folder );
+
 			foreach ( $objects as $object ) { 
 				if ( $object !== '.' && $object !== '..' ) {
 					$path = implode( DIRECTORY_SEPARATOR, [ $folder, $object ] );
+					
 					if ( is_dir( $path ) && ! is_link( $path ) ) rmdir( $path );
 					else unlink( $path ); 
 				}
 			}
+
 			return rmdir( $folder );
 		}
 

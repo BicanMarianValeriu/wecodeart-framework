@@ -58,7 +58,7 @@ const PatternsModal = ({
 					...getSettings().__experimentalBlockPatterns,
 					{
 						title: name,
-						name: `wca_pattern/${name}`,
+						name: `wecodeart/${name}`,
 						content: serialize(selectedBlocks),
 						description,
 						categories: [category],
