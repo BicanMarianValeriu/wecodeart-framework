@@ -9,17 +9,15 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		1.0
- * @version		5.1.3
+ * @version		5.3.3
  */
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Singleton;
-use WeCodeArt\Support;
 use WeCodeArt\Core;
 use WeCodeArt\Admin;
-use WeCodeArt\Admin\Activation;
 use WeCodeArt\Config;
 use WeCodeArt\Config\Exceptions\BindingResolutionException;
 
@@ -68,8 +66,6 @@ final class WeCodeArt implements \ArrayAccess {
 		Admin 		::get_instance();
         // Gutenberg
         Gutenberg   ::get_instance();
-		// Support
-        Support		::get_instance();
 	}
 
 	/**
@@ -337,7 +333,6 @@ function wecodeart_option( $key, $default = false, $setting = null, $use_cache =
     return Admin::get_option( $key, $default, $setting, $use_cache );
 }
 
-
 /**
  * Gets asset instance.
  * 
@@ -454,7 +449,7 @@ $theme->load();
 do_action( 'wecodeart/theme/loaded' );
 
 /**
- * Load Integrations
+ * Load Support/Integrations
  */
 wecodeart( 'integrations' )->load();
 
