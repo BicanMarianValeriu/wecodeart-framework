@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.1.7
+ * @version		5.3.3
  */
 
 namespace WeCodeArt;
@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Core\Scripts;
-// use WeCodeArt\Admin\Customizer;
 use WeCodeArt\Admin\Activation;
 use WeCodeArt\Admin\Notifications;
 
