@@ -4,7 +4,6 @@
  */
 return [
 	'post_type'    => 'page',
-	'template'     => 'page',
 	'post_title'   => _x( 'About', 'Theme starter content', 'wecodeart' ),
 	'post_content' => '<!-- wp:group {"className":"my-5","layout":{"inherit":true}} -->
 	<div class="wp-block-group my-5">

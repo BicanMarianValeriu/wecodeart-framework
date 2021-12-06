@@ -4,7 +4,6 @@
  */
 return [
 	'post_type'    => 'page',
-	'template'     => 'page-full',
 	'post_title'   => _x( 'Home', 'Theme starter content', 'wecodeart' ),
 	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","gradient":"primary-to-vivid-purple","contentPosition":"center center","isDark":false,"align":"full","className":"py-5 text-center","customCSS":"selector {\n  min-height: calc(100vh - 70px);\n}\n"} -->
 	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:100vh">
