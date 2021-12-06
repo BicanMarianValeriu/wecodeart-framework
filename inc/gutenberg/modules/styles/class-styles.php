@@ -193,11 +193,11 @@ class Styles implements Integration {
 
 		$block_id	= ltrim( $processed->get_element(), '.' );
 
+		if( in_array( $block_id, self::$processed ) ) return $content;
+
 		$styles 	= $processed->get_styles();
 		$classes	= $processed->get_classes();
 		$filters	= $processed->get_duotone();
-
-		if( in_array( $block_id, self::$processed ) ) return $content;
 		
 		// Remove styles, where needed.
 		// I'm not happy with this way but there is no other way to remove style attributes that I know, on PHP.
