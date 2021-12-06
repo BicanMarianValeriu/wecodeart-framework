@@ -21,18 +21,18 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import "./../abstracts/variables";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/root";
-@import "~bootstrap/scss/reboot";
 // Theme
+@import './root';
+@import './reboot';
 @import './base';
 
 // This will allways be in the theme - core CSS
-@import "~bootstrap/scss/type";         // X
 @import "~bootstrap/scss/forms";        // X
 @import "~bootstrap/scss/containers";   // X
 @import "~bootstrap/scss/grid";         // X
 @import "~bootstrap/scss/transitions";  // X
 @import "~bootstrap/scss/helpers";      // X
+// @import "~bootstrap/scss/type";      // XX Reboot
 
 // This will be added as utilities
 // @import "~bootstrap/scss/utilities";     // XX Done as utility

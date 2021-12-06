@@ -102,17 +102,6 @@ svg,
     }
 }
 
-figure,
-iframe,
-img {
-    max-width: 100%;
-}
-
-img {
-    height: auto;
-    backface-visibility: hidden;
-}
-
 mark.has-inline-color {
     border-radius: .25rem;
     padding: .20rem .5rem;
