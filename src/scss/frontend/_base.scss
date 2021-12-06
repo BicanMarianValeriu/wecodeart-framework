@@ -96,6 +96,10 @@ svg,
     .fa-secondary {
         opacity: .4;
     }
+
+    &.fa-fw {
+        width: 1em;
+    }
 }
 
 figure,

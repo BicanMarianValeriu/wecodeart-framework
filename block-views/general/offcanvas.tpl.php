@@ -8,7 +8,7 @@
  * @package		WeCodeArt Framework
  * @subpackage  OffCanvas
  * @since		5.0.0
- * @version    	5.1.3
+ * @version    	5.3.3
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -25,7 +25,7 @@ if( isset( $classes ) && is_array( $classes ) ) {
 		<?php if( isset( $title ) ) : ?>
 		<h5 class="offcanvas-title"><?php echo esc_html( $title ); ?></h5>
 		<?php endif; ?>
-		<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	</div>
 	<div class="offcanvas-body"><?php
 

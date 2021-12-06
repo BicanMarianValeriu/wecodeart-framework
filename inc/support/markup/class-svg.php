@@ -9,7 +9,7 @@
  * @subpackage  Markup\SVG
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Support\Markup;
@@ -22,7 +22,7 @@ use function WeCodeArt\Functions\kses_svg;
 /**
  * SVG Rendering
  */
-class SVG {
+class SVG implements \ArrayAccess {
 
 	use Singleton;
 
@@ -31,7 +31,7 @@ class SVG {
 	 *
 	 * @var array
 	 */
-	protected static $icons = [
+	protected $items = [
 		'user' => [
 			'viewBox' 	=> '0 0 448 512',
 			'paths'  	=> [
@@ -134,6 +134,50 @@ class SVG {
 	];
 
 	/**
+	 * Adds a icon to the store.
+	 *
+	 * @param 	string 	$key 	Icon key
+	 * @param	array	$data	Icon data
+	 *
+	 * @return 	void
+	 */
+	public static function add( string $key, array $data ) {
+		$storage = SVG::get_instance();
+
+		if( $storage->has( $key ) ) {
+			return;
+		}
+
+		if( isset( $data['viewBox'] ) && isset( $data['paths'] ) ) {
+			return $storage->set( $key, $data );
+		}
+		
+		return _doing_it_wrong(
+			__CLASS__, 
+			sprintf( 
+				esc_html__( 
+					'When adding an SVG Icon with %s you must define `viewBox` and `paths` keys.', 
+					'wecodeart'
+				),
+				__FUNCTION__
+			),
+			'3.9.4'
+		);
+	}
+
+	/**
+	 * Adds a icon to the store.
+	 *
+	 * @param 	string 	$key 	Icon key
+	 * @param	array	$data	Icon data
+	 *
+	 * @return 	void
+	 */
+	public static function add_icon( string $key, array $data ) {
+		return self::add( $key, $data );
+	}
+
+	/**
 	 * Render an SVG Icon
 	 *
 	 * @param	string	$icon
@@ -166,7 +210,7 @@ class SVG {
 		// Parse args.
 		$args = wp_parse_args( $args, $defaults );
 
-		$icons = self::$icons;
+		$icons = SVG::get_instance()->all();
 
 		if ( array_key_exists( $icon, $icons ) ) {
 
@@ -225,7 +269,6 @@ class SVG {
 		}
 
 		return null;
-
 	}
 
 	/**
@@ -259,33 +302,110 @@ class SVG {
 	}
 
 	/**
-	 * Adds a icon to the store.
-	 *
-	 * @param 	string 	$key 	Icon key
-	 * @param	array	$data	Icon data
-	 *
-	 * @return 	null
-	 */
-	public static function add_icon( string $key, array $data ) {
-		if( isset( self::$icons[$key] ) ) {
-			return;
-		}
+     * Determine if the given configuration value exists.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function has( $key ) {
+        return isset( $this->items[$key] );
+    }
 
-		if( isset( $data['viewBox'] ) && isset( $data['paths'] ) ) {
-			return self::$icons[$key] = $data;
-		} else {
-			_doing_it_wrong(
-				__CLASS__, 
-				sprintf( 
-					esc_html__( 
-						'When adding an SVG Icon with %s you must define `viewBox` and `paths` keys.', 
-						'wecodeart'
-					),
-					__FUNCTION__
-				),
-				'3.9.4'
-			);
-		}
-		return null;
+    /**
+     * Get the specified configuration value.
+     *
+     * @param  string  $key
+     * @param  mixed   $default
+     *
+     * @return mixed
+     */
+    public function get( $key, $default = null ) {
+        if ( ! isset( $this->items[$key] ) ) {
+            return $default;
+        }
+
+        return apply_filters( "wecodeart/svg/get/{$key}", $this->items[$key] );
 	}
+
+    /**
+     * Set a given configuration value.
+     *
+     * @param  array|string  $key
+     * @param  mixed   $value
+     *
+     * @return void
+     */
+    public function set( $key, $value = null ) {
+        $keys = is_array( $key ) ? $key : [ $key => $value ];
+
+        foreach ( $keys as $key => $value ) {
+            $this->items[$key] = apply_filters( "wecodeart/svg/set/{$key}", $value );
+        }
+    }
+
+    /**
+     * Forget a given configuration value.
+     *
+     * @param string  $key
+     *
+     * @return void
+     */
+    public function forget( $key ) {
+        unset( $this->items[$key] );
+    }
+
+    /**
+     * Get all of the configuration items for the application.
+     *
+     * @return array
+     */
+    public function all() {
+        return $this->items;
+    }
+
+    /**
+     * Determine if the given configuration option exists.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function offsetExists( $key ) {
+        return $this->has( $key );
+    }
+
+    /**
+     * Get a configuration option.
+     *
+     * @param  string  $key
+     *
+     * @return mixed
+     */
+    public function offsetGet( $key ) {
+        return $this->get( $key );
+    }
+
+    /**
+     * Set a configuration option.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     *
+     * @return void
+     */
+    public function offsetSet( $key, $value ) {
+        $this->set( $key, $value );
+    }
+
+    /**
+     * Unset a configuration option.
+     *
+     * @param  string  $key
+     *
+     * @return void
+     */
+    public function offsetUnset( $key ) {
+        $this->set( $key, null );
+    }
 }

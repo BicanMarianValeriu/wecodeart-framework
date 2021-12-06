@@ -616,6 +616,10 @@ svg .fa-secondary,
 .svg-inline .fa-secondary {
   opacity: 0.4;
 }
+svg.fa-fw,
+.svg-inline.fa-fw {
+  width: 1em;
+}
 
 figure,
 iframe,

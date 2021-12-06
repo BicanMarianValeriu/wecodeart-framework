@@ -33,11 +33,11 @@ defined( 'ABSPATH' ) || exit;
         wecodeart_input( 'text', [
             'label' => $args['label_username'],
             'attrs' => [
-                'id'            => $args['id_username'],
-                'name'          => 'log',
-                'value'         => $args['value_username'],
-                'size'          => 20,
-                'required'      => true,
+                'id'        => $args['id_username'],
+                'name'      => 'log',
+                'value'     => $args['value_username'],
+                'size'      => 20,
+                'required'  => true,
             ]
         ] );
 
@@ -47,10 +47,10 @@ defined( 'ABSPATH' ) || exit;
         wecodeart_input( 'password', [
             'label' => $args['label_password'],
             'attrs' => [
-                'id'            => $args['id_password'],
-                'name'          => 'pwd',
-                'size'          => 20,
-                'required'      => true,
+                'id'        => $args['id_password'],
+                'name'      => 'pwd',
+                'size'      => 20,
+                'required'  => true,
             ]
         ] );
 
@@ -65,11 +65,11 @@ defined( 'ABSPATH' ) || exit;
             'type'  => 'checkbox',
             'label' => esc_html( $args['label_remember'] ),
             'attrs' => [
-                'id'    => $args['id_remember'],
-                'name'  => 'rememberme',
-                'value' => 'forever',
-                'class' => 'form-switch mb-3',
-                'checked' => (bool) $args['value_remember']
+                'id'        => $args['id_remember'],
+                'name'      => 'rememberme',
+                'value'     => 'forever',
+                'class'     => 'form-switch mb-3',
+                'checked'   => (bool) $args['value_remember']
             ]
         ] );
     

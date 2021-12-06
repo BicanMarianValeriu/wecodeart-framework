@@ -81,7 +81,7 @@ class Inputs implements ArrayAccess {
 			$class_type = $type;
 		}
 
-		$storage = Inputs::get_instance(); 
+		$storage = Inputs::get_instance();
 		$input_class = $storage->get( $class_type );
 		if( $input_class ) {
 			$input = new $input_class( $type, ...$input_args );

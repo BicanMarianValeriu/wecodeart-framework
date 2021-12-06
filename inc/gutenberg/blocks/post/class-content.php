@@ -174,6 +174,7 @@ class Content extends Dynamic {
     public function wp_link_pages_link( $link ) {
         $link = str_replace( 'post-page-numbers', 'pagination__item', $link );
         $link = str_replace( 'current', 'pagination__item--current', $link );
+		
         return $link;
     }
 
