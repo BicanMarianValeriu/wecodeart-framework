@@ -31,11 +31,6 @@
 			"area": "footer"
 		},
 		{
-			"title": "Entry Meta",
-			"name": "entry-meta",
-			"area": "uncategorized"
-		},
-		{
 			"title": "Main Sidebar",
 			"name": "sidebar",
 			"area": "uncategorized"
