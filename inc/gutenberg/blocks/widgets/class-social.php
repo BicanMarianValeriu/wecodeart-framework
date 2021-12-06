@@ -93,6 +93,7 @@ class Social extends Dynamic {
 		if( empty( $service ) ) return $inline_css;
 
 		$colors = [
+			'link'		=> '#f0f0f0',
 			'amazon' 	=> '#f90',
 			'bandcamp' 	=> '#1ea0c3',
 			'behance' 	=> '#0757fe',
@@ -205,6 +206,7 @@ class Social extends Dynamic {
 			padding-left: 0;
 			padding-right: 0;
 			gap: var(--wp--style--block-gap,1em);
+			font-size: 1.25rem;
 		}
 		.wp-block-social-links.aligncenter {
 			display: flex;

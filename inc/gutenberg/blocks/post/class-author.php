@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -40,6 +40,16 @@ class Author extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'post-author';
+
+	/**
+	 * Init
+	 */
+	public function init() {
+		register_block_style( $this->get_block_type(), [
+			'name' 	=> 'box',
+            'label'	=> __( 'Wide Box', 'wecodeart' ),
+		] );
+	}
 
 	/**
 	 * Shortcircuit Register
@@ -82,8 +92,11 @@ class Author extends Dynamic {
 
 		$template = 'meta/author';
 
-		if( get_prop( $attributes, 'showAvatar', false ) && get_prop( $attributes, 'showBio', false ) ) {
-			$template = [ 'meta/author', 'box' ];
+		if( $value = get_prop( $attributes, 'className' ) ) {
+			if( strpos( $value, 'is-style-box' ) ) {
+				// @todo - change to regex dynamic
+				$template = [ 'meta/author', 'box' ];
+			}
 		}
 
 		$args = [

@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Author Box Template
  * @since 		3.0.3
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit();
 use function WeCodeArt\Functions\get_prop;
 
 $attributes = isset( $attributes ) ? $attributes : [];
-$classnames = [ 'wp-block-post-author', 'wp-block-post-author--wide' ];
+$classnames = [ 'wp-block-post-author' ];
 
 if( $value = get_prop( $attributes, 'textAlign', false ) ) {
     $classnames[] = 'has-text-align-' . $value;
@@ -63,29 +63,11 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 		
 			echo wp_kses_post( $author->description );
 			
-			if( isset( $social ) && is_array( $social ) ) {
-				$classnames = [ 'wp-block-post-author__social', 'row', 'gx-2' ];
+			if( isset( $social ) && ! empty( $social ) ) {
+				echo $social;
+			}
 
-				if( $value = get_prop( $attributes, 'textAlign', false ) ) {
-					$classnames[] = 'justify-content-' . $value;
-				}
 			?>
-			<div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
-				foreach( $social as $item ) {
-					$key = strtolower( $item['title'] );
-					$classes = [ 'wp-block-post-author__social-item', 'wp-block-post-author__social-item--' . $key, 'col-auto' ];
-				?>
-				<a class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
-					href="<?php echo esc_url( $item['url'] ); ?>"
-					target="<?php echo esc_attr( $item['target'] ); ?>"
-					rel="<?php echo ( $item['target'] === '_self' ) ? 'follow' : 'nofollow' ; ?>"><?php 
-					
-					wecodeart( 'markup' )->SVG::render( $item['icon'] );
-
-				?></a>
-				<?php } ?>
-			</div>
-			<?php } ?>
 		</div>
 	</div>
 </div>

@@ -86,15 +86,7 @@ return [
     | This array of options will be used as defaults for extensions.
     |
     */
-    'extensions' => [
-        'wpseo' => [
-            'author-social' => [
-                'url'		=> 'Website',
-                'facebook' 	=> 'Facebook',
-                'twitter' 	=> 'Twitter',
-            ],
-        ]
-    ],
+    'extensions' => [],
     /*
     |--------------------------------------------------------------------------
     | Theme Support

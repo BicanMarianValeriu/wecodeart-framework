@@ -1,4 +1,5 @@
 {
+	"$schema": "http://schemas.wp.org/trunk/theme.json",
 	"version": 2,
 	"customTemplates": [
 		{
@@ -42,12 +43,6 @@
 	],
 	"settings": {
 		"appearanceTools": true,
-		"border": {
-			"customColor": true,
-			"customRadius": true,
-			"customStyle": true,
-			"customWidth": true
-		},
 		"color": {
 			"palette": [
 				{
@@ -167,8 +162,6 @@
 		},
 		"spacing": {
 			"blockGap": true,
-			"customMargin": true,
-			"customPadding": true,
 			"units": [
 				"px",
 				"%",
@@ -181,11 +174,6 @@
 		"typography": {
 			"dropCap": true,
 			"customFontSize": true,
-			"customLineHeight": true,
-			"customFontStyle": true,
-			"customFontWeight": true,
-			"customTextTransforms": true,
-			"customTextDecorations": true,
 			"fontFamilies": [
 				{
 					"fontFamily": "var(--wp--font-sans-serif)",
@@ -290,7 +278,7 @@
 			"text": "var:preset|color|dark"
 		},
 		"spacing": {
-			"blockGap": null
+			"blockGap": ""
 		},
 		"typography": {
 			"fontSize": "var:preset|font-size|normal",

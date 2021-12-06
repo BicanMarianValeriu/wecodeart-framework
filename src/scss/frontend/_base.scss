@@ -91,7 +91,7 @@ svg,
     display: inline-block;
     vertical-align: -0.125em;
     fill: currentColor;
-    width: 1em;
+    height: 1em;
 
     .fa-secondary {
         opacity: .4;
@@ -179,7 +179,7 @@ figcaption,
 }
 
 :where(.wp-block-post-author, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) {
-    svg {
+    .svg-inline {
         margin-right: .5rem;
     }
 }
