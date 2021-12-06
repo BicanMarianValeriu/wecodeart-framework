@@ -128,27 +128,24 @@ class Navigation extends Dynamic {
 			}
 
 			$parsed_blocks = parse_blocks( $navigation_post->post_content );
-			$parsed_blocks = array_values( array_filter( $parsed_blocks, function( $block ) {
-				return isset( $block['blockName'] );
-			} ) );
+			$parsed_blocks = block_core_navigation_filter_out_empty_blocks( $parsed_blocks );
 
 			// TODO - this uses the full navigation block attributes for the context which could be refined.
 			$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
 		}
 		
 		// If there are no inner blocks then fallback to rendering an appropriate fallback.
-		// if ( empty( $inner_blocks ) ) {
-		// 	$is_fallback                      = true; // indicate we are rendering the fallback.
+		if ( empty( $inner_blocks ) ) {
+			$is_fallback	= true; // indicate we are rendering the fallback.
+			$parsed_blocks 	= block_core_navigation_get_fallback_blocks();
 
-		// 	$parsed_blocks = block_core_navigation_get_fallback_blocks();
+			// Fallback my have been filtered so do basic test for validity.
+			if ( empty( $parsed_blocks ) || ! is_array( $parsed_blocks ) ) {
+				return '';
+			}
 
-		// Fallback my have been filtered so do basic test for validity.
-		// if ( empty( $parsed_blocks ) || ! is_array( $parsed_blocks ) ) {
-		// 	return '';
-		// }
-
-		// 	$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
-		// }
+			$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
+		}
 
 		$block_id	= uniqid();
 

@@ -39,7 +39,7 @@ class Header {
 	 * Output HEADER markup function Plugin PHP fallback
 	 *
 	 * @since 	unknown
-	 * @version	5.0.0
+	 * @version	5.3.3
 	 *
 	 * @return 	void 
 	 */
@@ -64,7 +64,7 @@ class Header {
 					'class'	=> 'container',
 				] 
 			]
-		], 'gutenberg_block_header_area' );
+		], 'block_header_area' );
 	}
 
 	/**
