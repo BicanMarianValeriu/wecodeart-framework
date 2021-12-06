@@ -160,7 +160,7 @@ class Styles implements Integration {
 	/**
 	 * Adds the `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes` error.
 	 *
-	 * @since   5.2.
+	 * @since   5.2.x
 	 *
 	 * @return 	void
 	 */
