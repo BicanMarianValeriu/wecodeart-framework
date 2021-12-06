@@ -152,7 +152,7 @@ class Navigation extends Dynamic {
 
 		$block_id	= uniqid();
 
-		// w
+		// Styles
 		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [
 			'wecodeart-core-scripts'
 		], wecodeart( 'version' ) );

@@ -11,6 +11,8 @@
 		"start": "wp-scripts start",
 		"build:admin": "wp-scripts build admin/admin=./src/js/admin/index.js --output-path=assets/minified",
 		"start:admin": "wp-scripts start admin/admin=./src/js/admin/index.js --output-path=assets/unminified",
+		"build:forms": "wp-scripts build blocks/forms=./src/js/forms/index.js --output-path=assets/minified",
+		"start:forms": "wp-scripts start blocks/forms=./src/js/forms/index.js --output-path=assets/unminified",
 		"build:navigation": "wp-scripts build blocks/navigation=./src/js/navigation/index.js --output-path=assets/minified",
 		"start:navigation": "wp-scripts start blocks/navigation=./src/js/navigation/index.js --output-path=assets/unminified",
 		"build:admin:notification": "wp-scripts build admin/notification=./src/js/admin/notification/index.js --output-path=assets/minified",

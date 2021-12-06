@@ -34,22 +34,20 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 		
 		?><span><?php
 		
-			if( $byline = get_prop( $attributes, 'byline', false ) ) {
+			if( $byline = get_prop( $attributes, 'byline', esc_html__( 'About', 'wecodeart' ) ) ) {
 
-				echo wp_kses_post( $byline );
-
-			} else {
-				printf( esc_html__( 'About %s', 'wecodeart' ), sprintf(
+				printf( esc_html__( '%s %s', 'wecodeart' ), $byline, sprintf(
 					'<a href="%s" rel="author">%s</a>',
 					$author->url,
 					$author->name
 				) );
+
 			}
 
 		?></span>
 	</h3>
-	<div class="row gx-2 gx-lg-3">
-		<div class="wp-block-post-author__avatar col-auto"><?php
+	<div class="grid">
+		<div class="wp-block-post-author__avatar g-col-3 g-col-sm-2"><?php
 
 			echo get_avatar(
 				$author->id,
@@ -59,7 +57,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 			);
 
 		?></div>
-		<div class="wp-block-post-author__description col"><?php
+		<div class="wp-block-post-author__description g-col-9 g-col-sm-10"><?php
 		
 			echo wp_kses_post( $author->description );
 			
