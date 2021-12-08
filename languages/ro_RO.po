@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2021-11-26 01:20+0000\n"
+"PO-Revision-Date: 2021-12-08 02:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -16,34 +16,34 @@ msgstr ""
 "X-Loco-Version: 2.5.5; wp-5.8.1\n"
 "X-Domain: wecodeart"
 
-#: block-views/meta/comments.tpl.php:60
+#: block-views/meta/comments.tpl.php:59
 #, php-format
 msgid " on %s"
 msgstr "la %s"
 
-#: block-views/meta/comments.tpl.php:52
+#: block-views/meta/comments.tpl.php:51
 msgid "% Comments"
 msgstr "% Comentarii"
 
-#: inc/gutenberg/blocks/query/class-title.php:161
+#: inc/gutenberg/blocks/query/class-title.php:159
 #, php-format
 msgid "%s Archives"
 msgstr "%s Arhivă"
 
-#: block-views/meta/author-box.tpl.php:59 block-views/meta/author.tpl.php:44
+#: block-views/meta/author-box.tpl.php:52 block-views/meta/author.tpl.php:43
 #, php-format
 msgid "%s`s avatar"
 msgstr "Avatarul lui %s"
 
-#: inc/gutenberg/blocks/widgets/class-rss.php:131
+#: inc/gutenberg/blocks/widgets/class-rss.php:129
 msgid "(no title)"
 msgstr "(fără titlu)"
 
-#: block-views/meta/comments.tpl.php:51
+#: block-views/meta/comments.tpl.php:50
 msgid "1 Comment"
 msgstr "1 Comentariu"
 
-#: inc/gutenberg/blocks/post/class-content.php:91
+#: inc/gutenberg/blocks/post/class-content.php:90
 msgid "[block rendering halted]"
 msgstr "[redării blocului a fost oprită]"
 
@@ -68,16 +68,15 @@ msgstr ""
 "asemenea, optimizate folosind marcajul Bootstrap - instrumentul perfect "
 "pentru orice dezvoltator."
 
-#: block-views/meta/author-box.tpl.php:43
-#, php-format
-msgid "About %s"
-msgstr "Despre %s"
+#: block-views/meta/author-box.tpl.php:37
+msgid "About"
+msgstr "Despre"
 
-#: inc/gutenberg/blocks/comment/class-template.php:159
+#: inc/gutenberg/blocks/comment/class-template.php:119
 msgid "add one"
 msgstr "adaugă unul"
 
-#: inc/gutenberg/blocks/widgets/class-rss.php:71
+#: inc/gutenberg/blocks/widgets/class-rss.php:69
 msgid ""
 "An error has occurred, which probably means the feed is down. Try again "
 "later."
@@ -85,15 +84,15 @@ msgstr ""
 "A apărut o eroare, ceea ce înseamnă probabil că fluxul este oprit. Încercați "
 "mai târziu."
 
-#: inc/support/plugins/anr/class-anr.php:91
+#: inc/support/plugins/anr/class-anr.php:90
 msgid "ANR Captcha support is enabled!"
 msgstr "Suportul ANR Captcha este activat!"
 
-#: inc/gutenberg/blocks/query/class-title.php:169
+#: inc/gutenberg/blocks/query/class-title.php:167
 msgid "Archives"
 msgstr "Arhive"
 
-#: inc/gutenberg/blocks/query/class-title.php:142
+#: inc/gutenberg/blocks/query/class-title.php:140
 #, php-format
 msgid "Author Archives: %s"
 msgstr "Arhive autor"
@@ -102,7 +101,7 @@ msgstr "Arhive autor"
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr "Bican Marian Valeriu @wecodeart"
 
-#: inc/gutenberg/blocks/query/class-title.php:167
+#: inc/gutenberg/blocks/query/class-title.php:165
 msgid "Blog"
 msgstr "Blog"
 
@@ -121,11 +120,11 @@ msgstr "Comentand vei accepta %s."
 msgid "Cancel reply"
 msgstr "Anulați răspunsul"
 
-#: inc/support/plugins/anr/class-anr.php:152
+#: inc/support/plugins/anr/class-anr.php:151
 msgid "Captcha *"
 msgstr "Captcha *"
 
-#: inc/gutenberg/blocks/query/class-title.php:132
+#: inc/gutenberg/blocks/query/class-title.php:130
 #, php-format
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
@@ -135,16 +134,11 @@ msgstr "Arhivă Categorie: %s"
 msgid "Comment *"
 msgstr "Comentariu"
 
-#: block-views/meta/comments.tpl.php:54
+#: block-views/meta/comments.tpl.php:53
 msgid "Comments are Closed"
 msgstr "Comentariile sunt inchise"
 
-#: inc/gutenberg/blocks/comment/class-template.php:220
-#: inc/gutenberg/blocks/comment/class-template.php:231
-msgid "Comments Navigation"
-msgstr "Navigație comentarii"
-
-#: inc/gutenberg/blocks/comment/class-template.php:172
+#: inc/gutenberg/blocks/comment/class-template.php:109
 #, php-format
 msgctxt "comments title"
 msgid "%1$s comment"
@@ -153,7 +147,7 @@ msgstr[0] "%1$s comentariu"
 msgstr[1] "%1$s comentarii"
 msgstr[2] ""
 
-#: inc/support/plugins/cf7/class-cf7.php:79
+#: inc/support/plugins/cf7/class-cf7.php:78
 msgid "Contact Form 7 support is enabled!"
 msgstr "Asistența Formular de contact 7 este activată!"
 
@@ -166,12 +160,12 @@ msgstr "Drepturi de autor %s - Toate drepturile reservate."
 msgid "Customizer"
 msgstr "Customizer"
 
-#: inc/gutenberg/blocks/query/class-title.php:157
+#: inc/gutenberg/blocks/query/class-title.php:155
 #, php-format
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
 
-#: inc/admin/class-admin.php:265
+#: inc/admin/class-admin.php:264
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -193,7 +187,7 @@ msgstr "Email *"
 msgid "Enter password"
 msgstr "Introduceți parola"
 
-#: inc/gutenberg/blocks/design/class-separator.php:51
+#: inc/gutenberg/blocks/design/class-separator.php:50
 #| msgid "Fixed"
 msgid "Faded"
 msgstr "Estompat"
@@ -202,7 +196,7 @@ msgstr "Estompat"
 msgid "Failed to dismiss notification"
 msgstr "Notificarea nu a putut fi respinsă"
 
-#: inc/gutenberg/blocks/design/class-buttons.php:51
+#: inc/gutenberg/blocks/design/class-buttons.php:50
 msgid "Group"
 msgstr "Grupare"
 
@@ -214,20 +208,20 @@ msgstr "https://www.wecodeart.com/"
 msgid "https://www.wecodeart.com/about/"
 msgstr "https://www.wecodeart.com/about/"
 
-#: inc/markup/class-markup.php:209
+#: inc/support/markup/class-markup.php:250
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr "Wrapper HTML nevalid pentru „%s”."
 
-#: block-views/meta/comments.tpl.php:50
+#: block-views/meta/comments.tpl.php:49
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
-#: inc/gutenberg/blocks/design/class-button.php:52
+#: inc/gutenberg/blocks/design/class-button.php:50
 msgid "Link"
 msgstr "Legătură"
 
-#: inc/gutenberg/blocks/site/class-login.php:101
+#: inc/gutenberg/blocks/site/class-login.php:100
 msgid "Log In"
 msgstr "Autentificare"
 
@@ -235,12 +229,12 @@ msgstr "Autentificare"
 msgid "Missing notification id"
 msgstr "ID-ul notificării lipsește"
 
-#: inc/gutenberg/blocks/query/class-title.php:153
+#: inc/gutenberg/blocks/query/class-title.php:151
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: inc/gutenberg/blocks/query/class-title.php:152
+#: inc/gutenberg/blocks/query/class-title.php:150
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr "Arhive lunare: %s"
@@ -249,11 +243,11 @@ msgstr "Arhive lunare: %s"
 msgid "Name *"
 msgstr "Nume *"
 
-#: inc/gutenberg/blocks/comment/class-template.php:157
+#: inc/gutenberg/blocks/comment/class-template.php:106
 msgid "No comments"
 msgstr "Fără comentarii"
 
-#: inc/gutenberg/blocks/post/class-template.php:119
+#: inc/gutenberg/blocks/post/class-template.php:118
 msgid "Nothing found matching your criteria."
 msgstr "Nu s-a găsit nimic care să corespundă criteriilor dvs."
 
@@ -261,53 +255,53 @@ msgstr "Nu s-a găsit nimic care să corespundă criteriilor dvs."
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
 
-#: inc/gutenberg/blocks/query/class-numbers.php:142
+#: inc/gutenberg/blocks/query/class-numbers.php:139
 msgid "Pagination"
 msgstr "Paginare"
 
-#: inc/gutenberg/blocks/site/class-login.php:99
+#: inc/gutenberg/blocks/site/class-login.php:98
 msgid "Password"
 msgstr "Parolă"
 
-#: inc/gutenberg/blocks/post/class-image.php:161
+#: inc/gutenberg/blocks/post/class-image.php:160
 msgid "Placeholder"
 msgstr "Substituent"
 
-#: inc/gutenberg/blocks/post/class-image.php:168
+#: inc/gutenberg/blocks/post/class-image.php:167
 msgid "Placeholder image"
 msgstr "Imagine substituent"
 
-#: inc/markup/class-markup.php:140
+#: inc/support/markup/class-markup.php:181
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 
-#: inc/gutenberg/blocks/query/class-title.php:164
+#: inc/gutenberg/blocks/query/class-title.php:162
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
 
-#: block-views/meta/date.tpl.php:64
+#: block-views/meta/date.tpl.php:63
 #, php-format
 msgid "Post updated on %s."
 msgstr "Postare actualizată la %s."
 
-#: block-views/meta/terms.tpl.php:55
+#: block-views/meta/terms.tpl.php:54
 msgid "Posted in"
 msgstr "Postat in"
 
-#: block-views/meta/date.tpl.php:45
+#: block-views/meta/date.tpl.php:44
 msgid "Posted on "
 msgstr "Postat pe"
 
-#: inc/support/starter/class-starter.php:149
+#: inc/support/starter/class-starter.php:125
 msgid "Primary Menu"
 msgstr "Meniu Principal"
 
-#: inc/support/class-support.php:74
+#: inc/support/class-support.php:77
 msgid "Primary Navigation"
 msgstr "Navigație principală"
 
-#: inc/gutenberg/blocks/site/class-login.php:100
+#: inc/gutenberg/blocks/site/class-login.php:99
 msgid "Remember Me"
 msgstr "Ține-mă minte"
 
@@ -322,26 +316,26 @@ msgstr "Metoda de solicitare %1$s nu este validă."
 msgid "Required fiels are marked \"%s\"."
 msgstr "Fișele obligatorii sunt marcate cu %s\"."
 
-#: inc/gutenberg/blocks/widgets/class-rss.php:67
+#: inc/gutenberg/blocks/widgets/class-rss.php:65
 msgid "RSS Error"
 msgstr "Eroare RSS"
 
-#: inc/gutenberg/blocks/widgets/class-search.php:66
-#: inc/gutenberg/blocks/widgets/class-search.php:67
+#: inc/gutenberg/blocks/widgets/class-search.php:64
+#: inc/gutenberg/blocks/widgets/class-search.php:65
 msgid "Search"
 msgstr "Caută"
 
-#: inc/gutenberg/blocks/query/class-title.php:127
+#: inc/gutenberg/blocks/query/class-title.php:125
 #, php-format
 #| msgid "Search Results for \"%s\""
 msgid "Search Results for \"%s\"."
 msgstr "Rezultate căutare pentru \"%s\""
 
-#: inc/support/plugins/cf7/modules/class-submit.php:63
+#: inc/support/plugins/cf7/modules/class-submit.php:62
 msgid "Send"
 msgstr "Trimite"
 
-#: inc/gutenberg/class-gutenberg.php:317
+#: inc/gutenberg/class-gutenberg.php:252
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
@@ -349,40 +343,40 @@ msgstr "Sari la conținut"
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
-#: inc/gutenberg/blocks/query/class-title.php:137
+#: inc/gutenberg/blocks/query/class-title.php:135
 #, php-format
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
 
-#: inc/init.php:369
+#: inc/init.php:366
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
-#: inc/admin/class-admin.php:216 inc/admin/class-admin.php:217
+#: inc/admin/class-admin.php:215 inc/admin/class-admin.php:216
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
-#: inc/support/starter/content/about.php:8
+#: inc/support/starter/content/about.php:7
 msgctxt "Theme starter content"
 msgid "About"
 msgstr "Despre"
 
-#: inc/support/starter/class-starter.php:174
+#: inc/support/starter/class-starter.php:150
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Blog"
 
-#: inc/support/starter/content/home.php:8
+#: inc/support/starter/content/home.php:7
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr "Acasă"
 
-#: inc/support/starter/class-starter.php:136
+#: inc/support/starter/class-starter.php:112
 msgctxt "Theme starter content"
 msgid "Logo"
 msgstr "Logo"
 
-#: inc/gutenberg/blocks/comment/class-template.php:88
+#: inc/gutenberg/blocks/comment/class-template.php:86
 msgid ""
 "This post is password protected. Enter the password to view comments or "
 "leave a comment."
@@ -409,7 +403,7 @@ msgstr "Deblochează"
 msgid "upgrade PHP"
 msgstr "actualizați PHP"
 
-#: inc/gutenberg/blocks/site/class-login.php:98
+#: inc/gutenberg/blocks/site/class-login.php:97
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
@@ -418,7 +412,7 @@ msgid "Website"
 msgstr "Site"
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:144
+#: inc/gutenberg/class-gutenberg.php:84
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
@@ -441,7 +435,7 @@ msgstr ""
 "Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
 "WeCodeArt Framework."
 
-#: inc/markup/class-svg.php:281
+#: inc/support/markup/class-svg.php:158
 #, php-format
 msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
@@ -454,17 +448,21 @@ msgstr ""
 msgid "When extending %s, you must create a `get_html` method."
 msgstr "Când extindeți %s, trebuie să creați o metodă `get_html`."
 
-#: inc/gutenberg/blocks/query/class-title.php:148
+#: inc/gutenberg/blocks/post/class-author.php:50
+msgid "Wide Box"
+msgstr "Cutie largă"
+
+#: inc/gutenberg/blocks/query/class-title.php:146
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y"
 
-#: inc/gutenberg/blocks/query/class-title.php:147
+#: inc/gutenberg/blocks/query/class-title.php:145
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr "Arhive Anuale"
 
-#: inc/support/plugins/wpseo/class-wpseo.php:94
+#: inc/support/plugins/wpseo/class-wpseo.php:72
 msgid ""
 "YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
 "plugin."

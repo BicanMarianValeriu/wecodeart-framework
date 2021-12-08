@@ -36,11 +36,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 		
 			if( $byline = get_prop( $attributes, 'byline', esc_html__( 'About', 'wecodeart' ) ) ) {
 
-				printf( esc_html__( '%s %s', 'wecodeart' ), $byline, sprintf(
-					'<a href="%s" rel="author">%s</a>',
-					$author->url,
-					$author->name
-				) );
+				printf( '%s %s', $byline, sprintf( '<a href="%s" rel="author">%s</a>', $author->url, $author->name ) );
 
 			}
 

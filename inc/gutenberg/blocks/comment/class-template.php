@@ -111,7 +111,7 @@ class Template extends Dynamic {
 			);
 		}
 
-		$output = sprintf( '%1$s %2$s', $output, $header );
+		$output = sprintf( '%s %s', $output, $header );
 
 		if( $allow_comments ) {
 			$output .= sprintf(
