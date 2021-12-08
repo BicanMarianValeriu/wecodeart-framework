@@ -9,6 +9,7 @@ v5.3.3
 - Updated - Normalized some filters usage / block wrap context (to block classname)
 - Removed - Navigation Area block used in header (will be deprecated until WP 5.9)
 - Added - Header/Footer/Query patterns and show them into block types
+- Added - Threaded Comments Template
 - Added - Comments Pagination
 - Added - Block Patterns index.json to extend glob registration with custom pattern attributes (description, name etc)
 

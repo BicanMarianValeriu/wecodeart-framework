@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -47,14 +47,14 @@ class Form extends Dynamic {
 	public function register() {
 		add_filter( 'comment_form_fields',		[ $this, 'comment_form_fields' 		], 90 );
 		add_filter( 'comment_form_defaults',	[ $this, 'comment_form_defaults' 	], 90 );
-		add_action( 'pre_comment_on_post',  	[ $this, 'validate_cookies'			] );
+		add_action( 'pre_comment_on_post',  	[ $this, 'validate_privacy'			] );
 	}
 
 	/**
 	 * Move Comment Field Bellow Name/Email/Website.
 	 *
 	 * @since	unknown
-	 * @version 5.0.0
+	 * @version 5.3.3
 	 *
 	 * @param 	array $fields
 	 *
@@ -62,11 +62,13 @@ class Form extends Dynamic {
 	 */
 	public function comment_form_fields( $fields ) {
 		$comment_field = $fields['comment'];
-		$cookies_field = $fields['cookies'];
-		unset( $fields['comment'], $fields['cookies'] );
+		$privacy_field = $fields['privacy'];
+
+		unset( $fields['comment'], $fields['privacy'] );
 		
 		$fields['comment'] = $comment_field;
-		$fields['cookies'] = $cookies_field;
+		$fields['privacy'] = $privacy_field;
+
 		return $fields;
 	}
 
@@ -74,7 +76,7 @@ class Form extends Dynamic {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	5.3.1
+	 * @version	5.3.3
 	 *
 	 * @return 	array
 	 */
@@ -100,7 +102,7 @@ class Form extends Dynamic {
 				'author' 	=> $this->get_input( 'name' ),
 				'email'  	=> $this->get_input( 'email' ),
 				'url'    	=> $this->get_input( 'url' ),
-				'cookies'	=> $this->get_input( 'cookies' ),
+				'privacy'	=> $this->get_input( 'privacy' ),
 			]
 		], $defaults );
 	}
@@ -109,7 +111,7 @@ class Form extends Dynamic {
 	 * Get Name Input
 	 *
 	 * @since	5.2.2
-	 * @since	5.3.1
+	 * @since	5.3.3
 	 *
 	 * @return 	void
 	 */
@@ -212,7 +214,7 @@ class Form extends Dynamic {
 				return apply_filters( 'wecodeart/filter/comments/submit', $markup );
 			break;
 
-			case 'cookies':
+			case 'privacy':
 				$content = '';
 				$privacy = get_option( 'wp_page_for_privacy_policy' );
 
@@ -223,18 +225,18 @@ class Form extends Dynamic {
 						esc_html( get_the_title( $privacy ) )
 					);
 					
-					$content = wecodeart( 'markup' )::wrap( 'comment-cookies', [ [
+					$content = wecodeart( 'markup' )::wrap( 'comment-privacy', [ [
 						'tag' 	=> 'div',
 						'attrs' => [
-							'class' => 'comment-form-field comment-form-cookies-consent'
+							'class' => 'comment-form-field comment-form-privacy-consent'
 						]
 					] ], 'wecodeart_input', [ 'toggle', [
 						'type'	=> 'checkbox',
 						'label' => sprintf( __( 'By commenting you accept the %s.', 'wecodeart' ), $permalink ),
 						'attrs' => [
 							'class'		=> 'form-switch',
-							'id' 		=> 'comment-cookies',
-							'name' 		=> 'comment-cookies',
+							'id' 		=> 'comment-privacy',
+							'name' 		=> 'comment-privacy',
 							'required'  => ( $req ) ? 'required' : NULL,
 						]
 					] ], false );
@@ -281,16 +283,16 @@ class Form extends Dynamic {
 	 * Validate Cookie field.
 	 *
 	 * @since	5.0.0
-	 * @since	5.0.5
+	 * @since	5.3.3
 	 *
 	 * @return 	void
 	 */
-	public function validate_cookies() {
+	public function validate_privacy() {
 		$privacy = get_option( 'wp_page_for_privacy_policy' );
 
 		if( get_post_status( $privacy ) !== 'publish' || is_user_logged_in() === false ) return;
 
-		if( ! filter_input( INPUT_POST, 'comment-cookies' ) ) {
+		if( ! filter_input( INPUT_POST, 'comment-privacy' ) ) {
 			wp_die( sprintf( esc_html__( 'You must accept %s to comment!', 'wecodeart' ), sprintf(
 				'<a href="%1$s" target="_blank">%2$s</a>',
 				esc_url( get_privacy_policy_url() ),

@@ -89,20 +89,46 @@ class Template extends Dynamic {
 
 		$number = $block->context['queryPerPage'];
 
-        // Get an array of comments for the current post.
-        $comments = get_approved_comments( $post_id, [
+        // Get what we need about comments for the current post.
+		$allow_comments		= comments_open();
+		$comments_number 	= intval( get_comments_number() );
+        $comments 			= get_approved_comments( $post_id, [
 			'hierarchical' 	=> get_option( 'thread_comments' ) ? 'threaded' : false,
 			'number' 		=> $number,
 		] );
 
 		// Required Utilities
 		wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5', 'mb-5', 'my-1' ] );
+		
+		$output	= wecodeart( 'markup' )->SVG::compile( 'comments' );
+		
+		if ( 0 === $comments_number ) {
+			$header	= esc_html__( 'No comments', 'wecodeart' );
+		} else {
+			$header = sprintf(
+				_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
+				number_format_i18n( $comments_number )
+			);
+		}
 
-		// Content
+		$output = sprintf( '%1$s %2$s', $output, $header );
+
+		if( $allow_comments ) {
+			$output .= sprintf(
+				'<a class="comments__add-new float-end my-1 has-small-font-size" href="#respond" rel="nofollow">%s</a>',
+				esc_html__( 'add one', 'wecodeart' )
+			);
+		}
+		
 		$content = '';
-
+		
 		// Head
-		$content .= $this->get_head();
+		$content .= wecodeart( 'markup' )::wrap( 'wp-block-comments-head', [ [
+			'tag' 	=> 'h3',
+			'attrs' => [
+				'class' => 'wp-block-comments-query-loop__head'
+			]
+		] ], $output, [], false );
 
 		// List
         $content .= wecodeart( 'markup' )::wrap( 'wp-block-comments-list', [
@@ -162,64 +188,6 @@ class Template extends Dynamic {
 	
 		// This is ok, we render gutenberg blocks here.
 		echo $content;
-	}
-
-	/**
-	 * Render Comments Info
-	 *
-	 * @since	5.2.2
-	 * @version	5.3.3
-	 *
-	 * @return 	string
-	 */
-	public function get_head() {
-		$defaults = [
-			'icon' 		=> wecodeart( 'markup' )->SVG::compile( 'comments' ), // Escaped with kses inside fn.
-			'empty' 	=> esc_html__( 'No comments', 'wecodeart' ),
-			'closed'	=> false,
-			'add_one'	=> esc_html__( 'add one', 'wecodeart' )
-		]; 
-
-		$args = apply_filters( 'wecodeart/filter/comments/head/args', $defaults, get_post_type() );
-
-		$icon 	= '';
-		$head 	= '';
-
-		$allow_comments		= comments_open();
-		$comments_number 	= intval( get_comments_number() );
-		
-		if( $allow_comments ) {
-			$icon	= (string) $args['icon'];
-			$head 	= (string) $args['empty'];
-		} else if( $args['closed'] !== false && is_string( $args['closed'] ) ) {
-			$icon 	= (string) $args['icon'];
-			$head 	= $args['closed'];
-		}
-
-		if ( 0 !== $comments_number ) {
-			$head = sprintf(
-				_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
-				number_format_i18n( $comments_number )
-			);
-		}
-
-		// Prepare HTML output
-		$output = trim( sprintf( '%1$s %2$s', $icon, $head ) );
-
-		// Append `add comment` link
-		if( $allow_comments ) {
-			$output .= sprintf(
-				'<a class="comments__add-new float-end my-1 has-small-font-size" href="#respond" rel="nofollow">%s</a>',
-				(string) $args['add_one']
-			); 
-		}
-
-		return wecodeart( 'markup' )::wrap( 'wp-block-comments-head', [ [
-			'tag' 	=> 'h3',
-			'attrs' => [
-				'class' => 'wp-block-comments-query-loop__head'
-			]
-		] ], $output, [], false );
 	}
 
 	/**
