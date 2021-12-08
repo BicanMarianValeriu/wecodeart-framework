@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -30,6 +30,14 @@ abstract class Base {
      * @var     string
      */
     public $type = '';
+    
+    /**
+     * Input's Style.
+     *
+     * @since   5.3.3
+     * @var     string
+     */
+    public $style = 'default';
 
     /**
 	 * Unique ID for this search field.
@@ -44,7 +52,7 @@ abstract class Base {
      * @since   5.0.0
      * @var     string
      */
-    public $label_position = 'before';
+    public $_label = 'before';
 
     /**
      * Input's Label.
@@ -82,37 +90,17 @@ abstract class Base {
 	 * Constructor 
 	 */
 	public function __construct( $type = '', array $args = [] ) {
-        $this->unique_id        = wp_unique_id( 'input-' );
-        $this->label            = get_prop( $args, 'label', '' );
-        $this->label_position   = get_prop( $args, '_label', 'before' );
-        $this->attrs            = wp_parse_args( get_prop( $args, 'attrs', [] ), [
+        $this->unique_id    = wp_unique_id( 'input-' );
+        $this->style        = get_prop( $args, 'style', 'default' );
+        $this->label        = get_prop( $args, 'label', '' );
+        $this->_label       = get_prop( $args, '_label', 'before' );
+        $this->attrs        = wp_parse_args( get_prop( $args, 'attrs', [] ), [
             'type'  => $this->type,
             'name'  => $this->unique_id,
             'id'    => $this->unique_id,
             'class' => $this->input_class()
         ] );
         $this->messages     = get_prop( $args, 'messages', [] );
-    }
-	
-	/**
-	 * Create HTML Inputs
-	 *
-	 * @since	unknown
-	 * @version	5.0.0
-	 */
-	abstract function content();
-    
-    /**
-     * Get the control's content.
-     *
-     * @since   5.0.0
-     *
-     * @return  string Contents of the control.
-     */
-    final public function get_content() {
-        ob_start();
-        $this->render();
-        return trim( ob_get_clean() );
     }
 
     /**
@@ -121,34 +109,39 @@ abstract class Base {
      * @since   5.0.0
      */
     protected function render() {
-        if( $this->label_position === 'before' ) $this->label();
-        $this->content();
-        if( $this->label_position === 'after' ) $this->label();
-        if( $this->with_messages ) $this->messages();
+        echo $this->get_content();
     }
 
     /**
-     * Render the custom attributes for the control's input element.
+     * Get the control's content.
      *
      * @since   5.0.0
-     * @param 	array   $ommit Attributes to exclude
+     * @version 5.3.3
+     *
+     * @return  string Contents of the control.
      */
-    public function input_attrs( $ommit = [] ) {
-        $attributes = ! empty( $ommit ) ? array_diff_key( $this->attrs, array_flip( $ommit ) ) : $this->attrs;
-        echo wecodeart( 'markup' )::generate_attr( $this->type, $attributes );
+    final public function get_content() {
+        $content = '';
+        if( $this->_label === 'before' ) $content .= $this->get_label();
+        $content .= $this->content();
+        if( $this->_label === 'after' ) $content .= $this->get_label();
+        if( $this->with_messages ) $content .= $this->get_messages();
+
+        return $content; // Is ok, we use markup wrap method which escapes all attributes.
     }
 
     /**
 	 * Render the label HTML of the input
      *
      * @since   5.0.0
+     * @version 5.3.3
      *
 	 * @return	mixed|string
 	 */
-	public function label() {
+	public function get_label() {
         if( empty( $this->label ) ) return;
 
-        wecodeart( 'markup' )::wrap( $this->type . '-label', [
+        return wecodeart( 'markup' )::wrap( $this->type . '-label', [
             [
                 'tag'   => 'label',
                 'attrs' => [
@@ -163,11 +156,12 @@ abstract class Base {
 	 * Render the messages HTML of the input
      *
      * @since   5.0.0
+     * @version 5.3.3
 	 * @param 	bool    $echo
      *
 	 * @return	string
 	 */
-	public function messages( $echo = true ) {
+	public function get_messages( $echo = false ) {
 		if( empty( $this->messages ) ) return;
         
 		$html       = '';
@@ -195,4 +189,23 @@ abstract class Base {
 
 		return wp_kses_post( $html );
     }
+
+    /**
+     * Render the custom attributes for the control's input element.
+     *
+     * @since   5.0.0
+     * @param 	array   $ommit Attributes to exclude
+     */
+    public function input_attrs( $ommit = [] ) {
+        $attributes = ! empty( $ommit ) ? array_diff_key( $this->attrs, array_flip( $ommit ) ) : $this->attrs;
+        echo wecodeart( 'markup' )::generate_attr( $this->type, $attributes );
+    }
+    	
+	/**
+	 * Create HTML Inputs
+	 *
+	 * @since	unknown
+	 * @version	5.0.0
+	 */
+	abstract function content();
 }

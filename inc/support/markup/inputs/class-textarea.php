@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -37,8 +37,9 @@ class TextArea extends Basic {
 	 */
 	public function __construct( string $type = 'textarea', array $args = [] ) {
         $this->unique_id    = wp_unique_id( 'textarea-' );
+        $this->style        = get_prop( $args, 'style', 'default' );
         $this->label        = get_prop( $args, 'label', '' );
-        $this->label_position   = get_prop( $args, '_label', 'before' );
+        $this->_label       = get_prop( $args, '_label', 'before' );
         $this->attrs        = get_prop( $args, 'attrs', [] );
         $this->messages     = get_prop( $args, 'messages', [] );
     }

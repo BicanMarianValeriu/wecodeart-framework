@@ -30,9 +30,10 @@ class Basic extends Base {
 	 */
 	public function __construct( string $type = 'hidden', array $args = [] ) {
         $this->type         = in_array( $type, self::get_types() ) ? $type : 'hidden';
+        $this->style        = get_prop( $args, 'style', 'default' );
         $this->unique_id    = wp_unique_id( 'input-' );
         $this->label        = get_prop( $args, 'label', '' );
-        $this->label_position   = get_prop( $args, '_label', 'before' );
+        $this->_label       = get_prop( $args, '_label', 'before' );
         $this->attrs        = get_prop( $args, 'attrs', [] );
         $this->messages     = get_prop( $args, 'messages', [] );
     }
@@ -87,7 +88,9 @@ class Basic extends Base {
             'id'    => $this->unique_id,
             'class' => $this->input_class()
         ] );
+        
         $attributes = ! empty( $ommit ) ? array_diff_key( $attributes, array_flip( $ommit ) ) : $attributes;
+
         // Note to code reviews, generate_attr already escapes attrs
         echo Markup::generate_attr( $this->type, $attributes );
     }

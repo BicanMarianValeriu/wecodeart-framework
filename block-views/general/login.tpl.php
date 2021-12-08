@@ -8,10 +8,12 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Login Template
  * @since 	    5.1.8
- * @version	    5.2.8
+ * @version	    5.3.3
  */
 
 defined( 'ABSPATH' ) || exit;
+
+wecodeart( 'styles' )->Utilities->load( 'mb-3' );
 
 // Escaping attrs is not necessary with wecodeart_input()
 // Is already done inside the function via esc_attr()
@@ -28,9 +30,10 @@ defined( 'ABSPATH' ) || exit;
         echo apply_filters( 'login_form_top', '', $args );
     
     ?>
-    <p><?php
+    <?php
             
-        wecodeart_input( 'text', [
+        wecodeart_input( 'floating', [
+            'type'  => 'text',
             'label' => $args['label_username'],
             'attrs' => [
                 'id'        => $args['id_username'],
@@ -38,23 +41,23 @@ defined( 'ABSPATH' ) || exit;
                 'value'     => $args['value_username'],
                 'size'      => 20,
                 'required'  => true,
+                'class'     => 'form-control mb-3',
+                'placeholder' => ' ',
             ]
         ] );
-
-    ?></p>
-    <p><?php
-            
-        wecodeart_input( 'password', [
+                
+        wecodeart_input( 'floating', [
+            'type'  => 'password',
             'label' => $args['label_password'],
             'attrs' => [
                 'id'        => $args['id_password'],
                 'name'      => 'pwd',
                 'size'      => 20,
                 'required'  => true,
+                'class'     => 'form-control mb-3',
+                'placeholder' => ' ',
             ]
         ] );
-
-    ?></p><?php
     
         // WP Filter
         echo apply_filters( 'login_form_middle', '', $args );

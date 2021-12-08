@@ -30,7 +30,7 @@ class Fieldset extends Base {
      * @since   5.0.0
      * @var     string
      */
-    public $label_position = 'none';
+    public $_label = 'none';
 
     /**
      * All choices tied to the control.
@@ -45,8 +45,8 @@ class Fieldset extends Base {
 	 */
 	public function __construct( string $class = 'fieldset', array $args = [] ) {
         $type               = get_prop( $args, 'type', 'checkbox' );
-        $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? $type : 'checkbox';
         $this->unique_id    = wp_unique_id( 'fieldset-' );
+        $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? $type : 'checkbox';
         $this->label        = get_prop( $args, 'label', '' );
         $this->exclusive    = get_prop( $args, 'exclusive', false );
         $this->attrs        = get_prop( $args, 'attrs', [] );

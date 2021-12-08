@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -30,8 +30,8 @@ class Button extends Basic {
      * @since   5.0.0
      * @var     string
      */
-    public $type            = 'submit';
-    public $label_position  = 'none';
+    public $type    = 'submit';
+    public $_label  = 'none';
 
     /**
 	 * Constructor 

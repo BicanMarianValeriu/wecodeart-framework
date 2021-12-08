@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -46,8 +46,9 @@ class Select extends Base {
 	 */
 	public function __construct( string $type = 'select', array $args = [] ) {
         $this->unique_id    = wp_unique_id( 'select-' );
+        $this->style        = get_prop( $args, 'style', 'default' );
         $this->label        = get_prop( $args, 'label', '' );
-        $this->label_position   = get_prop( $args, '_label', 'before' );
+        $this->_label       = get_prop( $args, '_label', 'before' );
         $this->attrs        = wp_parse_args( get_prop( $args, 'attrs', [] ), [
             'name'  => $this->unique_id,
             'id'    => $this->unique_id,

@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -32,7 +32,7 @@ class Toggle extends Base {
      * @since   5.0.0
      * @var     string
      */
-    public $label_position  = 'none';
+    public $_label          = 'none';
     public $with_messages   = false;
 
     /**
@@ -40,8 +40,8 @@ class Toggle extends Base {
 	 */
     public function __construct( string $type = 'toggle', array $args = [] ) {
         $type               = get_prop( $args, 'type' );
-        $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? $type : 'radio';
         $this->unique_id    = wp_unique_id( 'toggle-' );
+        $this->type         = in_array( $type, [ 'radio', 'checkbox' ] ) ? $type : 'radio';
         $this->label        = get_prop( $args, 'label', '' );
         $this->attrs        = get_prop( $args, 'attrs', [] );
         $this->messages     = get_prop( $args, 'messages', [] );
@@ -62,8 +62,8 @@ class Toggle extends Base {
                 ]
             ]
         ], 'wecodeart_input', [ $this->type, [
-            'label'     => $this->label,
             '_label'    => 'after',
+            'label'     => $this->label,
             'attrs'     => wp_parse_args( [
                 'class' => 'form-check-input',
                 'id'    => get_prop( $this->attrs, 'id', $this->unique_id )
