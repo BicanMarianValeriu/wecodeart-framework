@@ -169,7 +169,7 @@ class Template extends Dynamic {
 					[
 						'tag' 	=> 'ol',
 						'attrs'	=> [
-							'class' => 'wp-block-comments-query-loop__children ps-3 ps-md-5 mt-5 list-unstyled'
+							'class' => 'comment__children list-unstyled ps-3 ps-md-5 mt-5'
 						]
 					]
 				], [ $this, 'render_comments' ], [ $children, $block ], false );
