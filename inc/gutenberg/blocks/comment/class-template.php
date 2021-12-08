@@ -95,10 +95,6 @@ class Template extends Dynamic {
 			'number' 		=> $number,
 		] );
 
-        if ( count( $comments ) === 0 ) {
-            return '';
-        }
-
 		// Required Utilities
 		wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5', 'mb-5', 'my-1' ] );
 
@@ -181,34 +177,37 @@ class Template extends Dynamic {
 			'icon' 		=> wecodeart( 'markup' )->SVG::compile( 'comments' ), // Escaped with kses inside fn.
 			'empty' 	=> esc_html__( 'No comments', 'wecodeart' ),
 			'closed'	=> false,
-			'add_one'	=> esc_html__( 'add one', 'wecodeart' ) 
+			'add_one'	=> esc_html__( 'add one', 'wecodeart' )
 		]; 
 
 		$args = apply_filters( 'wecodeart/filter/comments/head/args', $defaults, get_post_type() );
 
-		$comments_number = intval( get_comments_number() );
+		$icon 	= '';
+		$head 	= '';
 
-		$icon_html 	= '';
-		$header_tx 	= '';
-		if( comments_open() || $comments_number !== 0 ) {
-			$icon_html = (string) $args['icon'];
-			if ( 0 !== $comments_number ) {
-				$header_tx = sprintf(
-					_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
-					number_format_i18n( $comments_number )
-				);
-			} else {
-				$header_tx = (string) $args['empty']; 
-			} 
-		} else {
-			if( $args['closed'] !== false && is_string( $args['closed'] ) ) $header_tx = $args['closed']; 
-		} 
+		$allow_comments		= comments_open();
+		$comments_number 	= intval( get_comments_number() );
+		
+		if( $allow_comments ) {
+			$icon	= (string) $args['icon'];
+			$head 	= (string) $args['empty'];
+		} else if( $args['closed'] !== false && is_string( $args['closed'] ) ) {
+			$icon 	= (string) $args['icon'];
+			$head 	= $args['closed'];
+		}
+
+		if ( 0 !== $comments_number ) {
+			$head = sprintf(
+				_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
+				number_format_i18n( $comments_number )
+			);
+		}
 
 		// Prepare HTML output
-		$output = sprintf( '%1$s %2$s', $icon_html, $header_tx );
+		$output = trim( sprintf( '%1$s %2$s', $icon, $head ) );
 
 		// Append `add comment` link
-		if( comments_open() ) {
+		if( $allow_comments ) {
 			$output .= sprintf(
 				'<a class="comments__add-new float-end my-1 has-small-font-size" href="#respond" rel="nofollow">%s</a>',
 				(string) $args['add_one']
