@@ -65,7 +65,7 @@ class Template extends Dynamic {
 	}
 
 	/**
-	 * Dynamically renders the `core/post-template` block.
+	 * Dynamically renders the `core/comment-template` block.
 	 *
 	 * @param 	array 	$attributes The block attributes.
 	 *
@@ -80,7 +80,7 @@ class Template extends Dynamic {
         }
 
 		if( post_password_required( $post_id ) ) {
-			return wecodeart( 'markup' )::wrap( 'comment-form-protected', [ [
+			return wecodeart( 'markup' )::wrap( 'wp-block-comments-protected', [ [
 				'tag' 	=> 'p',
 			] ], 'printf', [ 
 				esc_html__( 'This post is password protected. Enter the password to view comments or leave a comment.', 'wecodeart' )
@@ -90,11 +90,17 @@ class Template extends Dynamic {
 		$number = $block->context['queryPerPage'];
 
         // Get an array of comments for the current post.
-        $comments = get_approved_comments( $post_id, [ 'number' => $number ] );
+        $comments = get_approved_comments( $post_id, [
+			'hierarchical' 	=> get_option( 'thread_comments' ) ? 'threaded' : false,
+			'number' 		=> $number,
+		] );
 
         if ( count( $comments ) === 0 ) {
             return '';
         }
+
+		// Required Utilities
+		wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5', 'mb-5', 'my-1' ] );
 
 		// Content
 		$content = '';
@@ -111,38 +117,62 @@ class Template extends Dynamic {
 					'class' => 'wp-block-comments-query-loop__list list-unstyled'
 				]
 			]
-		], function( $comments, $block ) {
-
-			foreach ( $comments as $comment ) {
-
-				wecodeart( 'markup' )::wrap( 'wp-block-comment', [
-					[
-						'tag' 	=> 'li',
-						'attrs'	=> [
-							'id'	=> 'comment-' . $comment->comment_ID,
-							'class' => implode( ' ', get_comment_class( 'mb-5', $comment ) )
-						]
-					]
-				], function( $block, $comment ) {
-
-					echo ( new \WP_Block( $block->parsed_block, [ 
-                        'commentId' => $comment->comment_ID
-                    ] ) )->render( [ 'dynamic' => false ] );
-
-				}, [ $block, $comment ] );
-
-			}
-
-		}, [ $comments, $block ], false );
+		], [ $this, 'render_comments' ], [ $comments, $block ], false );
 
 		return $content;
+	}
+
+	/**
+	 * Render Threaded Comments
+	 *
+	 * @since	5.3.3
+	 * @version	5.3.3
+	 *
+	 * @return 	string
+	 */
+	public function render_comments( $comments, $block ) {
+		$content = '';
+
+		foreach ( $comments as $comment ) {
+	
+			$block_content = ( new \WP_Block( $block->parsed_block, [
+				'commentId' => $comment->comment_ID,
+			] ) )->render( [ 'dynamic' => false ] );
+	
+			$children = $comment->get_children();
+	
+			// If the comment has children, recurse to create the HTML for the nested comments.
+			if ( ! empty( $children ) ) {
+				$block_content .= wecodeart( 'markup' )::wrap( 'wp-block-comments-query-children', [
+					[
+						'tag' 	=> 'ol',
+						'attrs'	=> [
+							'class' => 'wp-block-comments-query-loop__children ps-3 ps-md-5 mt-5 list-unstyled'
+						]
+					]
+				], [ $this, 'render_comments' ], [ $children, $block ], false );
+			}
+	
+			$content .= wecodeart( 'markup' )::wrap( 'wp-block-comment', [
+				[
+					'tag' 	=> 'li',
+					'attrs'	=> [
+						'id'	=> 'comment-' . $comment->comment_ID,
+						'class' => implode( ' ', get_comment_class( 'mb-5', $comment ) )
+					]
+				]
+			], $block_content, [], false );
+		}
+	
+		// This is ok, we render gutenberg blocks here.
+		echo $content;
 	}
 
 	/**
 	 * Render Comments Info
 	 *
 	 * @since	5.2.2
-	 * @version	5.3.1
+	 * @version	5.3.3
 	 *
 	 * @return 	string
 	 */
@@ -180,7 +210,7 @@ class Template extends Dynamic {
 		// Append `add comment` link
 		if( comments_open() ) {
 			$output .= sprintf(
-				'<a class="comments__add-new float-end has-small-font-size" href="#respond" rel="nofollow">%s</a>',
+				'<a class="comments__add-new float-end my-1 has-small-font-size" href="#respond" rel="nofollow">%s</a>',
 				(string) $args['add_one']
 			); 
 		}
@@ -200,9 +230,6 @@ class Template extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.comments__add-new {
-			margin: .5rem 0;
-		}
 		.wp-block-comments-query-loop:empty {
 			display: none;
 		}
