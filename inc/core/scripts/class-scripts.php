@@ -56,10 +56,7 @@ class Scripts {
 
 		// Scripts
 		// -- Core
-		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'frontend' ), [
-	 		'wp-hooks',
-		], wecodeart( 'version' ), true );
-
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'frontend' ), [ 'wp-hooks' ], wecodeart( 'version' ), true );
 		// --LiveReload - only in developer enviroment
 		if ( wecodeart_if( 'is_dev_mode' ) ) {
 			$lr_url = 'http://localhost:35729/livereload.js';
