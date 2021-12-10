@@ -45,16 +45,32 @@ class Scripts {
 	 * Enqueue Front-End Styles
 	 *
 	 * @since	1.0
-	 * @version	5.0.0
+	 * @version	5.3.3
 	 */
 	public function front_scripts() {
-		// Enqueue Styles
+		// Styles
+		// --Core
 		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'frontend' ), [], wecodeart( 'version' ) );
+		// --Forms
+		wp_register_style( $this->make_handle( 'forms' ), $this->get_asset( 'css', 'blocks/forms' ), [], wecodeart( 'version' ) );
 
-		// Enqueue Scripts
+		// Scripts
+		// -- Core
 		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'frontend' ), [
 	 		'wp-hooks',
 		], wecodeart( 'version' ), true );
+
+		// --LiveReload - only in developer enviroment
+		if ( wecodeart_if( 'is_dev_mode' ) ) {
+			$lr_url = 'http://localhost:35729/livereload.js';
+			$lr_url = set_url_scheme( $lr_url );
+
+			$response = wp_remote_get( $lr_url );
+
+			if ( wp_remote_retrieve_response_code( $response ) === 200 ) {
+				wp_enqueue_script( $this->make_handle( 'livereload' ), $lr_url, [], wecodeart( 'version' ) );
+			}
+		}
 	}
 
 	/**

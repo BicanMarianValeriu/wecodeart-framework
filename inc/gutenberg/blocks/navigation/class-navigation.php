@@ -150,9 +150,7 @@ class Navigation extends Dynamic {
 		$block_id	= uniqid();
 
 		// Styles
-		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [
-			'wecodeart-core-scripts'
-		], wecodeart( 'version' ) );
+		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [], wecodeart( 'version' ) );
 
 		return wecodeart( 'markup' )::wrap( 'navbar', [ [
 			'tag' 	=> 'nav',
@@ -173,9 +171,7 @@ class Navigation extends Dynamic {
 			if( get_prop( $attributes, 'overlayMenu' ) !== 'never' ) {
 
 				// Scripts
-				wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/navigation' ), [
-					'wecodeart-core-scripts'
-				], wecodeart( 'version' ), true );
+				wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/navigation' ), [], wecodeart( 'version' ), true );
 
 				// Toggler
 				wecodeart_template( 'general/toggler', [

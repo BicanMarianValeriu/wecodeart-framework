@@ -72,6 +72,8 @@ class Login extends Dynamic {
 			$contents 		= $this->render_form( [], false );
 		}
 
+		wp_enqueue_style( 'wecodeart-core-scripts-forms' );
+
 		return wecodeart( 'markup' )::wrap( 'wp-block-login', [
 			[
 				'tag' 	=> 'div',

@@ -27,7 +27,6 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import './base';
 
 // This will allways be in the theme - core CSS
-@import "~bootstrap/scss/forms";        // X
 @import "~bootstrap/scss/containers";   // X
 @import "~bootstrap/scss/grid";         // X
 @import "~bootstrap/scss/transitions";  // X
@@ -51,6 +50,7 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 // @import "~bootstrap/scss/button-group";  // XX Block
 // @import "~bootstrap/scss/buttons";       // XX Block
 // @import "~bootstrap/scss/tables";        // XX Block
+// @import "~bootstrap/scss/forms";         // XX Block
 // @import "~bootstrap/scss/pagination";    // XX Block
 
 // This will be added as extension - requires JS

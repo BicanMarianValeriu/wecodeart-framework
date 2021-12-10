@@ -513,20 +513,9 @@ function filterLog(route, func, args) {
           }, false);
         }); // LiveReload
 
-        const {
-          isDevMode,
-          fn: {
-            loadJs
-          }
-        } = wecodeart;
-
-        if (isDevMode) {
-          const checkFor = '//localhost:35729/livereload.js';
-          loadJs(checkFor, {
-            success: () => console.log('DEV Server: Livereload::running!'),
-            error: () => console.log('DEV Server: Livereload::paused!')
-          });
-        }
+        if (document.getElementById('wecodeart-core-scripts-livereload-js')) {
+          console.log('DEV Server: Livereload::running!');
+        } else console.log('DEV Server: Livereload::paused!');
       }
     }
   };

@@ -3,4 +3,4 @@ import 'bootstrap/js/dist/offcanvas';
 import 'bootstrap/js/dist/dropdown';
 
 // Styles
-import './../../scss/frontend/navigation.scss';
+import './../../../scss/frontend/navigation.scss';

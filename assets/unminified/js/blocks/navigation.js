@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/navigation/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/blocks/navigation/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -5641,10 +5641,10 @@ function within(min, value, max) {
 
 /***/ }),
 
-/***/ "./src/js/navigation/index.js":
-/*!************************************!*\
-  !*** ./src/js/navigation/index.js ***!
-  \************************************/
+/***/ "./src/js/blocks/navigation/index.js":
+/*!*******************************************!*\
+  !*** ./src/js/blocks/navigation/index.js ***!
+  \*******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5654,7 +5654,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_js_dist_offcanvas__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_offcanvas__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap/js/dist/dropdown */ "./node_modules/bootstrap/js/dist/dropdown.js");
 /* harmony import */ var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _scss_frontend_navigation_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../scss/frontend/navigation.scss */ "./src/scss/frontend/navigation.scss");
+/* harmony import */ var _scss_frontend_navigation_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../scss/frontend/navigation.scss */ "./src/scss/frontend/navigation.scss");
 // Boostrap - navigation will be used 99.999% of the times so we include by default!
 
  // Styles
