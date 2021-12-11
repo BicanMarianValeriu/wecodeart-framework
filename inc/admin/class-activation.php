@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.2.2
+ * @version		5.3.3
  */
 
 namespace WeCodeArt\Admin;
