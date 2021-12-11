@@ -33,7 +33,7 @@ class Activation {
 	 *
 	 * @var		string
 	 */
-	const REQUIRED_WP 	= '5.8';
+	const REQUIRED_WP 	= '5.9-beta2';
 	const REQUIRED_PHP 	= '7.0';
 
 	/**

@@ -1,3 +1,6 @@
+v5.3.4
+- Updated - Minimum required WP version to 5.9-beta2 failsafe to theme updates on WP 5.8.2+
+
 v5.3.3
 - Updated - Global cleanup / JSON cleanup / Clean old changelog before block-based update
 - Updated - CSS utilities class suggestion added to Gutenberg Class extentsion from Styles\Utilities class

@@ -3,6 +3,11 @@
 	"items": [
 		{
 			"type": "info",
+			"title": "WP 5.8.2 vs Latest update!",
+			"content": "Before updating to latest version please install WP 5.9.2-beta version and update your Gutenberg plugin as well - otherwise the site will break."
+		},
+		{
+			"type": "info",
 			"title": "Out of Beta - Soon!",
 			"content": "WeCodeArt version 5+ will be soon out of Beta - as soon as WP 5.9 will launch on 25 January."
 		},
