@@ -136,6 +136,7 @@ figcaption,
     color: inherit;
 }
 
+// Containers
 .wp-site-blocks,
 .wp-site-credits,
 .site-header,
@@ -162,6 +163,7 @@ figcaption,
     }
 }
 
+// Blocks
 .wp-block-column {
     width: 100%;
     flex: 1 0 0%;
@@ -186,5 +188,32 @@ figcaption,
 
     a:not([class]) {
         text-decoration: underline;
+    }
+}
+
+// Transitions
+.fade {
+    @include transition($transition-fade);
+
+    &:not(.show) {
+        opacity: 0;
+    }
+}
+
+.collapse {
+    &:not(.show) {
+        display: none;
+    }
+}
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    @include transition($transition-collapse);
+
+    &.collapse-horizontal {
+        width: 0;
+        height: auto;
+        @include transition($transition-collapse-width);
     }
 }

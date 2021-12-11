@@ -27,11 +27,11 @@ Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar,
 @import './base';
 
 // This will allways be in the theme - core CSS
-@import "~bootstrap/scss/containers";   // X
-@import "~bootstrap/scss/grid";         // X
-@import "~bootstrap/scss/transitions";  // X
-@import "~bootstrap/scss/helpers";      // X
-// @import "~bootstrap/scss/type";      // XX Reboot
+@import "~bootstrap/scss/containers";       // X
+@import "~bootstrap/scss/grid";             // X
+@import "~bootstrap/scss/helpers";          // X
+// @import "~bootstrap/scss/transitions";   // XX Base
+// @import "~bootstrap/scss/type";          // XX Reboot
 
 // This will be added as utilities
 // @import "~bootstrap/scss/utilities";     // XX Done as utility

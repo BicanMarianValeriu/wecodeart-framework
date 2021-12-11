@@ -1,6 +1,5 @@
 // stylelint-disable declaration-no-important, selector-no-qualifying-type, property-no-vendor-prefix
 
-
 // Reboot
 //
 // Normalization of HTML elements, manually forked from Normalize.css to remove
@@ -8,11 +7,9 @@
 //
 // Normalize is licensed MIT. https://github.com/necolas/normalize.css
 
-
 // Document
 //
 // Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
-
 *,
 *::before,
 *::after {
@@ -25,7 +22,7 @@
 // null by default, thus nothing is generated.
 :root {
 	@if $font-size-root != null {
-		font-size: var(--#{$variable-prefix}root-font-size);
+		font-size: var(--wp--root-font-size);
 	}
 
 	@if $enable-smooth-scroll {
@@ -44,18 +41,17 @@
 // scss-docs-start reboot-body-rules
 body {
 	margin: 0; // 1
-	font-family: var(--#{$variable-prefix}body-font-family);
-	@include font-size(var(--#{$variable-prefix}body-font-size));
-	font-weight: var(--#{$variable-prefix}body-font-weight);
-	line-height: var(--#{$variable-prefix}body-line-height);
-	color: var(--#{$variable-prefix}body-color);
-	text-align: var(--#{$variable-prefix}body-text-align);
-	background-color: var(--#{$variable-prefix}body-bg); // 2
+	font-family: var(--wp--body-font-family);
+	@include font-size(var(--wp--body-font-size));
+	font-weight: var(--wp--body-font-weight);
+	line-height: var(--wp--body-line-height);
+	color: var(--wp--body-color);
+	text-align: var(--wp--body-text-align);
+	background-color: var(--wp--body-bg); // 2
 	-webkit-text-size-adjust: 100%; // 3
 	-webkit-tap-highlight-color: rgba($black, 0); // 4
 }
 // scss-docs-end reboot-body-rules
-
 
 // Content grouping
 //
@@ -73,13 +69,11 @@ hr:not([size]) {
   	height: $hr-height; // 2
 }
 
-
 // Typography
 //
 // 1. Remove top margins from headings
 //    By default, `<h1>`-`<h6>` all receive top and bottom margins. We nuke the top
 //    margin for easier control within type scales as it avoids margin collapsing.
-
 %heading {
 	margin-top: 0; // 1
 	margin-bottom: $headings-margin-bottom;
