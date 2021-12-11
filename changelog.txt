@@ -7,6 +7,7 @@ v5.3.3
 - Updated - theme.json template parts naming
 - Updated - gutenberg_ prefixed functions renamed to wp_ (in progress)
 - Updated - Normalized some filters usage / block wrap context (to block classname)
+- Updated - Forms.css to chunk, loaded only by blocks with inputs (comment form, search and login form)
 - Removed - Navigation Area block used in header (will be deprecated until WP 5.9)
 - Added - Header/Footer/Query patterns and show them into block types
 - Added - Threaded Comments Template
