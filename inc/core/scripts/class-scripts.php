@@ -51,8 +51,6 @@ class Scripts {
 		// Styles
 		// --Core
 		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'frontend' ), [], wecodeart( 'version' ) );
-		// --Forms
-		wp_register_style( $this->make_handle( 'forms' ), $this->get_asset( 'css', 'blocks/forms' ), [], wecodeart( 'version' ) );
 
 		// Scripts
 		// -- Core

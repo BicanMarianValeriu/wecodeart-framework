@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use ArrayAccess;
 use WeCodeArt\Singleton;
+use WeCodeArt\Core\Scripts;
 
 /**
  * Standard Inputs Markup
@@ -25,6 +26,7 @@ use WeCodeArt\Singleton;
 class Inputs implements ArrayAccess {
 
 	use Singleton;
+    use Scripts\Base;
 
 	/**
      * All of the configuration items.
@@ -47,12 +49,13 @@ class Inputs implements ArrayAccess {
 		$this->register( 'checkbox',	Inputs\Toggle::class 	);
         $this->register( 'fieldset',	Inputs\Fieldset::class 	);
         $this->register( 'floating',	Inputs\Floating::class 	);
+
+        add_action( 'wp_enqueue_scripts',   [ $this, 'assets'   ], -10 );
 	}
 
 	/**
 	 * Render the HTML of the input
 	 *
-	 * @access 	public
 	 * @param 	string 		$type		text/number/etc
 	 * @param 	array 		$args		Input Args
 	 *
@@ -65,9 +68,8 @@ class Inputs implements ArrayAccess {
 	/**
 	 * Get the HTML of the input
 	 *
-	 * @access 	public
 	 * @since	unknown
-	 * @version	5.0.0
+	 * @version	5.3.3
 	 *
 	 * @param 	string 		$type		text/number/etc
 	 * @param 	array 		$args		Input Args
@@ -81,12 +83,29 @@ class Inputs implements ArrayAccess {
 			$class_type = $type;
 		}
 
-		$storage = Inputs::get_instance();
-		$input_class = $storage->get( $class_type );
-		if( $input_class ) {
-			$input = new $input_class( $type, ...$input_args );
-			return $input->get_content(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		$storage    = Inputs::get_instance();
+		$class      = $storage->get( $class_type );
+
+		if( $class ) {
+
+            if( ! wp_style_is( $storage->make_handle() ) ) {
+                wp_enqueue_style( $storage->make_handle() );
+            }
+
+			$input = new $class( $type, ...$input_args );
+			
+            return $input->get_content(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
+	}
+
+    /**
+	 * Enqueue Front-End Assets
+	 *
+	 * @since	5.3.3
+	 * @version	5.3.3
+	 */
+	public function assets() {
+		wp_register_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/forms' ), [], wecodeart( 'version' ) );
 	}
 	
 	/**

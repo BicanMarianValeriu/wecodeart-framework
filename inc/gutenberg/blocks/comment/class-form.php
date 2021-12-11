@@ -45,24 +45,9 @@ class Form extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' 	], 10, 2 );
 		add_filter( 'comment_form_fields',		[ $this, 'comment_form_fields' 		], 90 );
 		add_filter( 'comment_form_defaults',	[ $this, 'comment_form_defaults' 	], 90 );
 		add_action( 'pre_comment_on_post',  	[ $this, 'validate_privacy'			] );
-	}
-
-	/**
-	 * Dynamically renders the `core/post-comments-form` block.
-	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		wp_enqueue_style( 'wecodeart-core-scripts-forms' );
-
-		return $content;
 	}
 
 	/**

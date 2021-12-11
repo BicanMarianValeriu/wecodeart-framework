@@ -264,9 +264,10 @@ class Styles implements Integration {
 	 */
 	public function template_styles() {
 		global $_wp_current_template_content;
-		$blocks = parse_blocks( $_wp_current_template_content );
+		$blocks 	= _flatten_blocks( parse_blocks( $_wp_current_template_content ) );
+		$classes 	= self::collect_classes( $blocks );
 
-		$this->classes = wp_parse_args( self::collect_classes( $blocks ), $this->classes );
+		$this->classes = wp_parse_args( $classes, $this->classes );
 	}
 
 	/**
@@ -454,7 +455,9 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Recursive classNames.
+	 * Get classNames.
+	 *
+	 * @param	array	$blocks  List with all blocks
 	 *
 	 * @return 	array
 	 */
@@ -468,10 +471,6 @@ class Styles implements Integration {
 			$classes	= get_prop( $block, [ 'attrs', 'className' ] );
 			$classes 	= array_filter( explode( ' ', $classes ) );
 			$inner		= get_prop( $block, [ 'innerBlocks' ] );
-
-			if( ! empty( $inner ) ) {
-				$classes = array_merge( $classes, self::collect_classes( $inner ) );
-			}
 
 			if( ! empty( $classes ) ) {
 				$return = wp_parse_args( $classes, $return );

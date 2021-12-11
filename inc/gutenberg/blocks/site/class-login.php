@@ -66,8 +66,6 @@ class Login extends Dynamic {
 
 		// If logged-out and displayLoginAsForm is true, show the login form.
 		if ( ! is_user_logged_in() && get_prop( $attributes, [ 'displayLoginAsForm' ] ) ) {
-			// Forms styles
-			wp_enqueue_style( 'wecodeart-core-scripts-forms' );
 			// Add a class.
 			$classnames[] 	= 'wp-block-login--has-form';
 			// Get the form.

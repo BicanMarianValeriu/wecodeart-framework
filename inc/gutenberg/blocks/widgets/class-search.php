@@ -74,8 +74,6 @@ class Search extends Dynamic {
 			}
 		}
 
-		wp_enqueue_style( 'wecodeart-core-scripts-forms' );
-
 		return wecodeart( 'markup' )::wrap( 'wp-block-search', [
 			[
 				'tag' 	=> 'div',

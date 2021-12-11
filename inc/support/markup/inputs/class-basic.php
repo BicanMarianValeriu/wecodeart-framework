@@ -16,7 +16,6 @@ namespace WeCodeArt\Support\Markup\Inputs;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Support\Markup;
 use WeCodeArt\Support\Markup\Inputs\Base;
 use function WeCodeArt\Functions\get_prop;
 
@@ -92,7 +91,7 @@ class Basic extends Base {
         $attributes = ! empty( $ommit ) ? array_diff_key( $attributes, array_flip( $ommit ) ) : $attributes;
 
         // Note to code reviews, generate_attr already escapes attrs
-        echo Markup::generate_attr( $this->type, $attributes );
+        echo wecodeart( 'markup' )::generate_attr( $this->type, $attributes );
     }
 
     /**
