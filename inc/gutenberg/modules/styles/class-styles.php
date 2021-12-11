@@ -264,8 +264,8 @@ class Styles implements Integration {
 	 */
 	public function template_styles() {
 		global $_wp_current_template_content;
-		$blocks 	= _flatten_blocks( parse_blocks( $_wp_current_template_content ) );
-		$classes 	= self::collect_classes( $blocks );
+		$blocks 	= parse_blocks( $_wp_current_template_content );
+		$classes 	= self::collect_classes( _flatten_blocks( $blocks ) );
 
 		$this->classes = wp_parse_args( $classes, $this->classes );
 	}
