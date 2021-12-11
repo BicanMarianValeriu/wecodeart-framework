@@ -171,7 +171,9 @@ class Navigation extends Dynamic {
 			if( get_prop( $attributes, 'overlayMenu' ) !== 'never' ) {
 
 				// Scripts
-				wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/navigation' ), [], wecodeart( 'version' ), true );
+				wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/navigation' ), [
+					'wecodeart-core-scripts'
+				], wecodeart( 'version' ), true );
 
 				// Toggler
 				wecodeart_template( 'general/toggler', [
