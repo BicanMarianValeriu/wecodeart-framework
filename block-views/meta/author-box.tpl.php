@@ -26,6 +26,8 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
     $classnames[] = $value;
 }
 
+wecodeart( 'styles' )->Utilities->load( 'gap-3' );
+
 ?>
 <div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>">
 	<h3 class="wp-block-post-author__headline"><?php
@@ -42,8 +44,8 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 
 		?></span>
 	</h3>
-	<div class="grid">
-		<div class="wp-block-post-author__avatar g-col-3 g-col-sm-2"><?php
+	<div class="row gx-0 gap-3">
+		<div class="wp-block-post-author__avatar col-auto"><?php
 
 			echo get_avatar(
 				$author->id,
@@ -53,7 +55,7 @@ if( $value = get_prop( $attributes, 'className', false ) ) {
 			);
 
 		?></div>
-		<div class="wp-block-post-author__description g-col-9 g-col-sm-10"><?php
+		<div class="wp-block-post-author__description col"><?php
 		
 			echo wp_kses_post( $author->description );
 			
