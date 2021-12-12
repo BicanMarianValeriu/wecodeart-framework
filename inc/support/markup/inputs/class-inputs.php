@@ -102,10 +102,12 @@ class Inputs implements ArrayAccess {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	5.3.3
+	 * @version	5.3.5
 	 */
 	public function assets() {
-		wp_register_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/forms' ), [], wecodeart( 'version' ) );
+		wp_register_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/forms' ), [
+            'wecodeart-core-scripts'
+        ], wecodeart( 'version' ) );
 	}
 	
 	/**

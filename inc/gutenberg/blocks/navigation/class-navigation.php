@@ -150,7 +150,9 @@ class Navigation extends Dynamic {
 		$block_id	= uniqid();
 
 		// Styles
-		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [], wecodeart( 'version' ) );
+		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [
+			'wecodeart-core-scripts'
+		], wecodeart( 'version' ) );
 
 		return wecodeart( 'markup' )::wrap( 'navbar', [ [
 			'tag' 	=> 'nav',
