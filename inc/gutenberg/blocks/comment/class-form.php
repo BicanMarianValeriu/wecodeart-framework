@@ -280,7 +280,7 @@ class Form extends Dynamic {
 	}
 
 	/**
-	 * Validate Cookie field.
+	 * Validate Privacy field.
 	 *
 	 * @since	5.0.0
 	 * @since	5.3.3

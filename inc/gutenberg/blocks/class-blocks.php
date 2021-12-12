@@ -100,6 +100,7 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/comment-template',   Blocks\Comment\Template::class );
         // Query Blocks
 		$this->register( 'core/query-title',	            Blocks\Query\Title::class );
+		$this->register( 'core/pattern',                    Blocks\Query\Pattern::class );
 		$this->register( 'core/template-part',              Blocks\Query\Template::class );
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         // Site Blocks

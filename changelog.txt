@@ -1,5 +1,6 @@
 v5.3.5
 - Updated - FSE Folder naming updated to match upcoming WP 5.9
+- Fixed - Temporary fixed Core/Pattern block to render shortcodes/emoji (submitted bug report)
 
 v5.3.4
 - Updated - Minimum required WP version to 5.9-beta2 failsafe to theme updates on WP 5.8.2+
