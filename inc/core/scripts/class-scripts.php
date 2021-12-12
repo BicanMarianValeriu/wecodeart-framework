@@ -9,7 +9,7 @@
  * @subpackage 	Core\Scripts
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		1.9
- * @version		5.3.3
+ * @version		5.3.5
  */
 
 namespace WeCodeArt\Core;
@@ -72,7 +72,7 @@ class Scripts {
 	 * WeCodeArt JS Object
 	 *
 	 * @since	3.2
-	 * @version	5.3.3
+	 * @version	5.3.5
 	 *
 	 * @return 	void
 	 */
@@ -89,7 +89,6 @@ class Scripts {
 			$wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
 		}
 
-		$wecodeart = apply_filters( 'wecodeart/filter/core/scripts/localize', $wecodeart );
 		$wecodeart = apply_filters( 'wecodeart/filter/scripts/localize', $wecodeart );
 		
 		wp_localize_script( $this->make_handle(), 'wecodeart', $wecodeart );

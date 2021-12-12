@@ -1,3 +1,10 @@
+/*!
+Theme Name: WeCodeArt
+Theme URI: https://www.wecodeart.com/
+Package: Navigation CSS
+Author: Bican Marian Valeriu @wecodeart
+Author URI: https://www.wecodeart.com/about/
+*/
 .nav {
   display: flex;
   flex-wrap: wrap;

@@ -39,8 +39,8 @@ return [
     |
     */
     'directories' => [
-        'views'     => 'block-views',
-        'patterns'  => 'block-patterns',
+        'views'     => 'views',
+        'patterns'  => 'patterns',
         'assets'    => 'assets',
         'languages' => 'languages',
     ],

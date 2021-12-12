@@ -34,7 +34,7 @@ class Patterns implements Integration {
 	 *
 	 * @var string
 	 */
-	const FOLDER = 'block-patterns';
+	const FOLDER = 'patterns';
 
 	/**
 	 * The indexed patterns.

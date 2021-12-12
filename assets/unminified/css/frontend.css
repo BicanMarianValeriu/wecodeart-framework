@@ -2,18 +2,9 @@
 /*!
 Theme Name: WeCodeArt
 Theme URI: https://www.wecodeart.com/
+Package: Core CSS
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
-Description: A simple WordPress Theme Framework focused on SEO, Speed and code simplicity. Is realy fast, fully customizable & beautiful theme suitable for blog, personal portfolio, business website and WooCommerce storefront. Now is Gutenberg ready.
-Version: 5.3.3
-Requires PHP: 7.0
-Requires at least: 5.8
-Tested up to: 5.9
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: wecodeart
-Domain Path: /languages
-Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-menu, custom-colors, custom-logo, custom-header, flexible-header, featured-images, full-width-template, footer-widgets, theme-options, threaded-comments, translation-ready
 */
 :root {
   --wp--blue: #2388ed;
