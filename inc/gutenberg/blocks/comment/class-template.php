@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.3.3
+ * @version		5.3.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -79,7 +79,7 @@ class Template extends Dynamic {
             return '';
         }
 
-		if( post_password_required( $post_id ) ) {
+		if( $post_id !== 0 && post_password_required( $post_id ) ) {
 			return wecodeart( 'markup' )::wrap( 'wp-block-comments-protected', [ [
 				'tag' 	=> 'p',
 			] ], 'printf', [ 
@@ -87,15 +87,10 @@ class Template extends Dynamic {
 			], false );
 		}
 
-		$number = $block->context['queryPerPage'];
-
         // Get what we need about comments for the current post.
-		$allow_comments		= comments_open();
-		$comments_number 	= intval( get_comments_number() );
-        $comments 			= get_approved_comments( $post_id, [
-			'hierarchical' 	=> get_option( 'thread_comments' ) ? 'threaded' : false,
-			'number' 		=> $number,
-		] );
+		$comments_query		= new \WP_Comment_Query( self::build_args( $block ) );
+        $comments 			= $comments_query->get_comments();
+		$comments_number 	= count( $comments );
 
 		// Required Utilities
 		wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5', 'mb-5', 'my-1' ] );
@@ -113,7 +108,7 @@ class Template extends Dynamic {
 
 		$output = sprintf( '%s %s', $output, $header );
 
-		if( $allow_comments ) {
+		if( comments_open( $post_id ) ) {
 			$output .= sprintf(
 				'<a class="comments__add-new float-end my-1 has-small-font-size" href="#respond" rel="nofollow">%s</a>',
 				esc_html__( 'add one', 'wecodeart' )
@@ -139,7 +134,7 @@ class Template extends Dynamic {
 					'class' => 'wp-block-comments-query-loop__list list-unstyled'
 				]
 			]
-		], [ $this, 'render_comments' ], [ $comments, $block ], false );
+		], [ __CLASS__, 'render_comments' ], [ $comments, $block ], false );
 
 		return $content;
 	}
@@ -148,11 +143,11 @@ class Template extends Dynamic {
 	 * Render Threaded Comments
 	 *
 	 * @since	5.3.3
-	 * @version	5.3.3
+	 * @version	5.3.5
 	 *
 	 * @return 	string
 	 */
-	public function render_comments( $comments, $block ) {
+	public static function render_comments( $comments, $block ) {
 		$content = '';
 
 		foreach ( $comments as $comment ) {
@@ -172,7 +167,7 @@ class Template extends Dynamic {
 							'class' => 'comment__children list-unstyled ps-3 ps-md-5 mt-5'
 						]
 					]
-				], [ $this, 'render_comments' ], [ $children, $block ], false );
+				], [ __CLASS__, 'render_comments' ], [ $children, $block ], false );
 			}
 	
 			$content .= wecodeart( 'markup' )::wrap( 'wp-block-comment', [
@@ -188,6 +183,51 @@ class Template extends Dynamic {
 	
 		// This is ok, we render gutenberg blocks here.
 		echo $content;
+	}
+
+	/**
+	 * Temporary until WP 5.9
+	 *
+	 * @return 	array
+	 */
+	public static function build_args( $block ) {
+		$comment_args = array(
+			'orderby'                   => 'comment_date_gmt',
+			'order'                     => 'ASC',
+			'status'                    => 'approve',
+			'no_found_rows'             => false,
+			'update_comment_meta_cache' => false, // We lazy-load comment meta for performance.
+		);
+		
+		if ( ! empty( $block->context['postId'] ) ) {
+			$comment_args['post_id'] = (int) $block->context['postId'];
+		}
+
+		if ( get_option( 'thread_comments' ) ) {
+			$comment_args['hierarchical'] = 'threaded';
+		} else {
+			$comment_args['hierarchical'] = false;
+		}
+
+		$per_page = ! empty( $block->context['comments/perPage'] ) ? (int) $block->context['comments/perPage'] : 0;
+		if ( 0 === $per_page && get_option( 'page_comments' ) ) {
+			$per_page = (int) get_query_var( 'comments_per_page' );
+			if ( 0 === $per_page ) {
+				$per_page = (int) get_option( 'comments_per_page' );
+			}
+		}
+		if ( $per_page > 0 ) {
+			$comment_args['number'] = $per_page;
+			$page                   = (int) get_query_var( 'cpage' );
+
+			if ( $page ) {
+				$comment_args['offset'] = ( $page - 1 ) * $per_page;
+			} elseif ( 'oldest' === get_option( 'default_comments_page' ) ) {
+				$comment_args['offset'] = 0;
+			}
+		}
+
+		return $comment_args;
 	}
 
 	/**

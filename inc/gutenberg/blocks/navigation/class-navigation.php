@@ -87,38 +87,30 @@ class Navigation extends Dynamic {
 		unset( $attributes['rgbTextColor'], $attributes['rgbBackgroundColor'] );
 
 		$inner_blocks = $block->inner_blocks;
-
+		
+		// Ensure that blocks saved with the legacy ref attribute name (navigationMenuId) continue to render.
+		if ( array_key_exists( 'navigationMenuId', $attributes ) ) {
+			$attributes['ref'] = $attributes['navigationMenuId'];
+		}
+		
 		// If `__unstableLocation` is defined, create inner blocks from the classic menu assigned to that location.
 		if (
+			defined( 'IS_GUTENBERG_PLUGIN' ) && IS_GUTENBERG_PLUGIN &&
 			array_key_exists( '__unstableLocation', $attributes ) &&
-			! array_key_exists( 'navigationMenuId', $attributes ) &&
-			! empty( gutenberg_get_menu_items_at_location( $attributes['__unstableLocation'] ) )
+			! array_key_exists( 'ref', $attributes ) &&
+			! empty( block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] ) )
 		) {
-			$menu_items = gutenberg_get_menu_items_at_location( $attributes['__unstableLocation'] );
+			$menu_items 	= block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] );
 
 			if ( empty( $menu_items ) ) {
 				return '';
 			}
 	
-			$sorted_items 	= gutenberg_sort_menu_items_by_parent_id( $menu_items );
-			$parsed_blocks 	= gutenberg_parse_blocks_from_menu_items( $sorted_items[0], $sorted_items );
+			$sorted_items 	= block_core_navigation_sort_menu_items_by_parent_id( $menu_items );
+			$parsed_blocks 	= block_core_navigation_parse_blocks_from_menu_items( $sorted_items[0], $sorted_items );
 			$inner_blocks 	= new \WP_Block_List( $parsed_blocks, $attributes );
 		}
 
-		if ( ! empty( $block->context['navigationArea'] ) ) {
-			$area    = $block->context['navigationArea'];
-			$mapping = get_option( 'wp_navigation_areas', [] );
-
-			if ( ! empty( $mapping[ $area ] ) ) {
-				$attributes['navigationMenuId'] = $mapping[ $area ];
-			}
-		}
-
-		// Ensure that blocks saved with the legacy ref attribute name (navigationMenuId) continue to render.
-		if ( array_key_exists( 'navigationMenuId', $attributes ) ) {
-			$attributes['ref'] = $attributes['navigationMenuId'];
-		}
-	
 		// Load inner blocks from the navigation post.
 		if ( array_key_exists( 'ref', $attributes ) ) {
 			$navigation_post = get_post( $attributes['ref'] );

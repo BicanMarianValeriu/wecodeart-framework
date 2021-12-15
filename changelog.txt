@@ -1,6 +1,8 @@
 v5.3.5
 - Updated - FSE Folder naming updated to match upcoming WP 5.9
-- Fixed - Temporary fixed Core/Pattern block to render shortcodes/emoji (submitted bug report)
+- Updated - Navigation block PHP render to WP 5.9
+- Updated - Latest Comments PHP render to WP 5.9 - it might be changed to query-comments-loop if it will be properly done (similar to Latest Posts render)
+- Fixed - Temporary fixed Core/Pattern block to render shortcodes/emoji (submitted bug report to WP Gutenberg github)
 
 v5.3.4
 - Updated - Minimum required WP version to 5.9-beta2 failsafe to theme updates on WP 5.8.2+

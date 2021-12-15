@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use WeCodeArt\Gutenberg\Blocks\Comment\Template;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -79,18 +80,12 @@ class Numbers extends Dynamic {
 			return '';
 		}
 
-		// Get the 'comments per page' setting.
-		$per_page = get_prop( $block->context, [ 'queryPerPage' ], get_option( 'comments_per_page' ) );
-
-		// Get the total number of pages.
-		$comments = get_approved_comments( $post_id );
-		$total    = get_comment_pages_count( $comments, $per_page );
-
-		// Get the number of the default page.
-		$default_page = 'newest' === get_option( 'default_comments_page' ) ? $total : 1;
+		// Get the what we need.
+		$comments 	= new \WP_Comment_Query( Template::build_query( $block ) );
+		$total    	= $comments->max_num_pages;
 
 		// Get the current comment page from the URL.
-		$current = get_query_var( 'cpage' ) ?: $default_page;
+		$current 	= get_query_var( 'cpage' ) ?: 'newest' === get_option( 'default_comments_page' ) ? $total : 1;
 
 		return wecodeart( 'markup' )::wrap( 'wp-block-comments-pagination-numbers', [ [
 			'tag' 	=> 'div',

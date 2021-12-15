@@ -94,6 +94,35 @@ class Comments extends Dynamic {
 
 		$classnames[] = 'list-unstyled';
 
+		// Template
+		$template 	= '';
+
+		// Comment Author Avatar
+		if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
+			$template .= '<!-- wp:comment-author-avatar {"backgroundColor":"white","className":"float-start rounded-circle me-3","width":50,"height":50} /-->';
+		}
+		
+		$template .= '<!-- wp:group {"className":"gap-1 clearfix"} -->';
+		$template .= '<div class="wp-block-group gap-1 clearfix">';
+
+		// Comment Author
+		$template .= '<!-- wp:comment-author-name {"isLink":true} /-->';
+
+		// Comment Date
+		if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {
+			$template .= '<!-- wp:comment-date {"format":"F j, Y g:i a"} /-->';
+		}
+		$template .= '</div>';
+		$template .= '<!-- /wp:group -->';
+
+		// Comment Content
+		if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
+			$template .= '<!-- wp:comment-content {"backgroundColor":"white","className":"p-3 my-3 border rounded"} /-->';
+		}
+
+		// Allow users to change this template
+		$template = apply_filters( 'wecodeart/filter/gutenberg/latest-comments/template', parse_blocks( $template ) );
+
 		return wecodeart( 'markup' )::wrap( 'wp-block-latest-comments', [
 			[
 				'tag' 	=> 'ul',
@@ -101,46 +130,23 @@ class Comments extends Dynamic {
 					'class' => implode( ' ', $classnames )
 				]
 			]
-		], function( $comments, $attributes ) {
+		], function( $comments, $template ) {
 			$content 	= '';
-			$template 	= '';
-
-			// Comment Author Avatar
-			if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
-				$template .= '<!-- wp:comment-author-avatar {"backgroundColor":"white","className":"float-start rounded-circle me-3","width":50,"height":50} /-->';
-			}
-			
-			$template .= '<!-- wp:group {"className":"gap-1 clearfix"} -->';
-			$template .= '<div class="wp-block-group gap-1 clearfix">';
-
-			// Comment Author
-			$template .= '<!-- wp:comment-author-name {"isLink":true} /-->';
-
-			// Comment Date
-			if ( get_prop( $attributes, [ 'displayDate' ], true ) ) {
-				$template .= '<!-- wp:comment-date {"format":"F j, Y g:i a"} /-->';
-			}
-			$template .= '</div>';
-			$template .= '<!-- /wp:group -->';
-
-			// Comment Content
-			if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
-				$template .= '<!-- wp:comment-content {"backgroundColor":"white","className":"p-3 my-3 border rounded"} /-->';
-			}
-
-			// Allow users to change this template
-			$template = apply_filters( 'wecodeart/filter/gutenberg/latest-comments/template', parse_blocks( $template ) );
 			
 			foreach( $comments as $comment ) {
 				$blocks 	= new \WP_Block_List( $template, [
 					'commentId' => $comment->comment_ID
 				] );
 
-				$content	.= wecodeart( 'markup' )::wrap( 'wp-block-latest-comments-item', [
+				// Same context as default comment block for filters
+				$content	.= wecodeart( 'markup' )::wrap( 'wp-block-comment', [
 					[
 						'tag' 	=> 'li',
 						'attrs'	=> [
-							'class' => implode( ' ', get_comment_class( 'wp-block-latest-comments__comment', $comment ) )
+							// To avoid duplicate ID if used on same post with latest comment
+							// We will give a different ID with "lcomment-" prefix
+							'id'	=> 'lcomment-' . $comment->comment_ID,
+							'class' => implode( ' ', get_comment_class( '', $comment ) )
 						]
 					]
 				], function( $blocks ) {
@@ -156,6 +162,6 @@ class Comments extends Dynamic {
 
 			echo $content;
 
-		}, [ $comments, $attributes ], false );
+		}, [ $comments, $template ], false );
 	}
 }
