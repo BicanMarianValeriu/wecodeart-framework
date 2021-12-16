@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.3.6
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -93,21 +93,26 @@ class Navigation extends Dynamic {
 			$attributes['ref'] = $attributes['navigationMenuId'];
 		}
 		
-		// If `__unstableLocation` is defined, create inner blocks from the classic menu assigned to that location.
+		// If:
+		// - the gutenberg plugin is active
+		// - `__unstableLocation` is defined
+		// - we have menu items at the defined location
+		// - we don't have a relationship to a `wp_navigation` Post (via `ref`).
+		// ...then create inner blocks from the classic menu assigned to that location.
 		if (
 			defined( 'IS_GUTENBERG_PLUGIN' ) && IS_GUTENBERG_PLUGIN &&
 			array_key_exists( '__unstableLocation', $attributes ) &&
 			! array_key_exists( 'ref', $attributes ) &&
 			! empty( block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] ) )
 		) {
-			$menu_items 	= block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] );
+			$menu_items 	= gutenberg_get_menu_items_at_location( $attributes['__unstableLocation'] );
 
 			if ( empty( $menu_items ) ) {
 				return '';
 			}
 	
-			$sorted_items 	= block_core_navigation_sort_menu_items_by_parent_id( $menu_items );
-			$parsed_blocks 	= block_core_navigation_parse_blocks_from_menu_items( $sorted_items[0], $sorted_items );
+			$sorted_items 	= gutenberg_sort_menu_items_by_parent_id( $menu_items );
+			$parsed_blocks 	= gutenberg_parse_blocks_from_menu_items( $sorted_items[0], $sorted_items );
 			$inner_blocks 	= new \WP_Block_List( $parsed_blocks, $attributes );
 		}
 
@@ -115,21 +120,26 @@ class Navigation extends Dynamic {
 		if ( array_key_exists( 'ref', $attributes ) ) {
 			$navigation_post = get_post( $attributes['ref'] );
 			
-			if ( ! isset( $navigation_post ) ) {
-				return '';
+			if ( isset( $navigation_post ) ) { 
+				$parsed_blocks = parse_blocks( $navigation_post->post_content );
+				$parsed_blocks = block_core_navigation_filter_out_empty_blocks( $parsed_blocks );
+				
+				$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
 			}
-
-			$parsed_blocks = parse_blocks( $navigation_post->post_content );
-			$parsed_blocks = block_core_navigation_filter_out_empty_blocks( $parsed_blocks );
-
-			// TODO - this uses the full navigation block attributes for the context which could be refined.
-			$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
 		}
 		
 		// If there are no inner blocks then fallback to rendering an appropriate fallback.
 		if ( empty( $inner_blocks ) ) {
 			$is_fallback	= true; // indicate we are rendering the fallback.
-			$parsed_blocks 	= block_core_navigation_get_fallback_blocks();
+
+			// Temporary fallback to classic menu - since we insert it with theme starter content
+			$parsed_blocks 	= gutenberg_get_menu_items_at_location( $attributes['__unstableLocation'] );
+			if( empty( $parsed_blocks ) ) {
+				$parsed_blocks 	= block_core_navigation_get_fallback_blocks();
+			} else {
+				$parsed_blocks 	= gutenberg_sort_menu_items_by_parent_id( $parsed_blocks );
+				$parsed_blocks 	= gutenberg_parse_blocks_from_menu_items( $parsed_blocks[0], $parsed_blocks );
+			}
 
 			// Fallback my have been filtered so do basic test for validity.
 			if ( empty( $parsed_blocks ) || ! is_array( $parsed_blocks ) ) {

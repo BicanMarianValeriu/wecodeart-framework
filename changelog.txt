@@ -1,3 +1,6 @@
+v5.3.6
+- Fixed - Temporary fallback after updating Navigation: fallback first to Classic Menu - since we insert it with theme starter content
+
 v5.3.5
 - Updated - FSE Folder naming updated to match upcoming WP 5.9
 - Updated - Navigation block PHP render to WP 5.9
