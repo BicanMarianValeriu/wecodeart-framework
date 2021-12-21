@@ -39,9 +39,10 @@ export default (function (wecodeart) {
 				args = this.applyFilters('wecodeart.route', args, route, funcname);
 
 				if (typeof this.routes[route][funcname] === 'object') {
-					const { id: bundleIds = [], callback = () => { } } = this.routes[route][funcname];
+					const { id: bundleIds = [], callback = () => { }, condition = true } = this.routes[route][funcname];
+					const condMeet = typeof condition === 'function' ? condition() !== false : condition;
 					const hasBundle = [...bundleIds].filter(k => Object.keys(this.lazyJs).includes(k));
-					if(hasBundle.length) {
+					if (condMeet && hasBundle.length) {
 						requireJs(this.lazyJs, bundleIds, () => {
 							callback(args);
 							this.doAction('wecodeart.route', route, 'lazy', args);
@@ -49,7 +50,6 @@ export default (function (wecodeart) {
 						this.loaded.push(route);
 						return;
 					}
-					console.log('Bundle IDs not found!');
 					return;
 				}
 

@@ -6,7 +6,7 @@ import loadJs from 'loadjs';
 import requireJs from './helpers/requireJs';
 import createParams from './helpers/createParams';
 import getOptions from './helpers/parseData';
-import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled } from './helpers/HasScrollbar';
+import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled } from './helpers/hasScrollbar';
 
 // Styles
 import './../scss/frontend/frontend.scss';
@@ -65,31 +65,18 @@ function filterLog(route, func, args) {
 		common: {
 			init: () => {
 				handleBodyJSClass();
+				handleDocumentScrolled();
 				handleDocumentScrollbar();
 				window.onresize = handleDocumentScrollbar;
 				window.onscroll = handleDocumentScrolled;
 			},
 			complete: () => {
-				// Fetch all the forms we want to apply custom Bootstrap validation styles to
-				const forms = document.querySelectorAll('.needs-validation');
-				Array.prototype.slice.call(forms).forEach((form) => {
-					form.addEventListener('submit', (e) => {
-						if (!form.checkValidity()) {
-							e.preventDefault();
-							e.stopPropagation();
-						}
-						form.classList.add('was-validated');
-						const timeout = setTimeout(() => {
-							form.classList.remove('was-validated');
-							clearTimeout(timeout);
-						}, 5000);
-					}, false);
-				});
-
 				// LiveReload
 				if (document.getElementById('wecodeart-core-scripts-livereload-js')) {
 					console.log('DEV Server: Livereload::running!');
-				} else console.log('DEV Server: Livereload::paused!');
+				} else {
+					console.log('DEV Server: Livereload::paused!');
+				}
 			},
 		},
 	};

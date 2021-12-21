@@ -1,3 +1,7 @@
+v5.3.7
+- Updated - Forms/Inputs validation JS as a chunk loaded in "common" route
+- Fixed - Logged in Privacy Policy commenting Validation
+
 v5.3.6
 - Fixed - Temporary fallback after updating Navigation: fallback first to Classic Menu - since we insert it with theme starter content
 

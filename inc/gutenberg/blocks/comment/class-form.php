@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.3.3
+ * @version		5.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -283,14 +283,14 @@ class Form extends Dynamic {
 	 * Validate Privacy field.
 	 *
 	 * @since	5.0.0
-	 * @since	5.3.3
+	 * @since	5.3.7
 	 *
 	 * @return 	void
 	 */
 	public function validate_privacy() {
 		$privacy = get_option( 'wp_page_for_privacy_policy' );
 
-		if( get_post_status( $privacy ) !== 'publish' || is_user_logged_in() === false ) return;
+		if( get_post_status( $privacy ) !== 'publish' || is_user_logged_in() ) return;
 
 		if( ! filter_input( INPUT_POST, 'comment-privacy' ) ) {
 			wp_die( sprintf( esc_html__( 'You must accept %s to comment!', 'wecodeart' ), sprintf(

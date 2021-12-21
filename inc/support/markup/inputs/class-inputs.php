@@ -69,7 +69,7 @@ class Inputs implements ArrayAccess {
 	 * Get the HTML of the input
 	 *
 	 * @since	unknown
-	 * @version	5.3.3
+	 * @version	5.3.7
 	 *
 	 * @param 	string 		$type		text/number/etc
 	 * @param 	array 		$args		Input Args
@@ -92,6 +92,10 @@ class Inputs implements ArrayAccess {
                 wp_enqueue_style( $storage->make_handle() );
             }
 
+            if( ! wp_script_is( $storage->make_handle() ) ) {
+                wp_enqueue_script( $storage->make_handle() );
+            }
+
 			$input = new $class( $type, ...$input_args );
 			
             return $input->get_content(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -102,12 +106,16 @@ class Inputs implements ArrayAccess {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	5.3.5
+	 * @version	5.3.7
 	 */
 	public function assets() {
 		wp_register_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/forms' ), [
             'wecodeart-core-scripts'
         ], wecodeart( 'version' ) );
+
+		wp_register_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/forms' ), [
+            'wecodeart-core-scripts'
+        ], wecodeart( 'version' ), true );
 	}
 	
 	/**

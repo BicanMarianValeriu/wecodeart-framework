@@ -429,7 +429,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_requireJs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/requireJs */ "./src/js/helpers/requireJs.js");
 /* harmony import */ var _helpers_createParams__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./helpers/createParams */ "./src/js/helpers/createParams.js");
 /* harmony import */ var _helpers_parseData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/parseData */ "./src/js/helpers/parseData.js");
-/* harmony import */ var _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helpers/HasScrollbar */ "./src/js/helpers/HasScrollbar.js");
+/* harmony import */ var _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helpers/hasScrollbar */ "./src/js/helpers/hasScrollbar.js");
 /* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
 // WeCodeArt
 
@@ -465,7 +465,7 @@ function filterLog(route, func, args) {
    */
   wecodeart.plugins = {};
   wecodeart.fn = {
-    hasScrollbar: _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_7__["default"],
+    hasScrollbar: _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["default"],
     createParams: _helpers_createParams__WEBPACK_IMPORTED_MODULE_5__["default"],
     getOptions: _helpers_parseData__WEBPACK_IMPORTED_MODULE_6__["default"],
     requireJs: _helpers_requireJs__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -490,32 +490,19 @@ function filterLog(route, func, args) {
   wecodeart.routes = {
     common: {
       init: () => {
-        Object(_helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleBodyJSClass"])();
-        Object(_helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"])();
-        window.onresize = _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"];
-        window.onscroll = _helpers_HasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrolled"];
+        Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleBodyJSClass"])();
+        Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrolled"])();
+        Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"])();
+        window.onresize = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"];
+        window.onscroll = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrolled"];
       },
       complete: () => {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation');
-        Array.prototype.slice.call(forms).forEach(form => {
-          form.addEventListener('submit', e => {
-            if (!form.checkValidity()) {
-              e.preventDefault();
-              e.stopPropagation();
-            }
-
-            form.classList.add('was-validated');
-            const timeout = setTimeout(() => {
-              form.classList.remove('was-validated');
-              clearTimeout(timeout);
-            }, 5000);
-          }, false);
-        }); // LiveReload
-
+        // LiveReload
         if (document.getElementById('wecodeart-core-scripts-livereload-js')) {
           console.log('DEV Server: Livereload::running!');
-        } else console.log('DEV Server: Livereload::paused!');
+        } else {
+          console.log('DEV Server: Livereload::paused!');
+        }
       }
     }
   };
@@ -523,9 +510,55 @@ function filterLog(route, func, args) {
 
 /***/ }),
 
-/***/ "./src/js/helpers/HasScrollbar.js":
+/***/ "./src/js/helpers/camelCase.js":
+/*!*************************************!*\
+  !*** ./src/js/helpers/camelCase.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * camelCase
+ * @param {string} str String that isn't camel-case, e.g., CAMeL_CaSEiS-harD
+ * @return {string} String converted to camel-case, e.g., camelCaseIsHard
+ */
+/* harmony default export */ __webpack_exports__["default"] = (str => `${str.charAt(0).toLowerCase()}${str.replace(/[\W_]/g, '|').split('|').map(part => `${part.charAt(0).toUpperCase()}${part.slice(1)}`).join('').slice(1)}`);
+
+/***/ }),
+
+/***/ "./src/js/helpers/createParams.js":
 /*!****************************************!*\
-  !*** ./src/js/helpers/HasScrollbar.js ***!
+  !*** ./src/js/helpers/createParams.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Generate String Params
+ * @param   object 
+ * @return  {string}
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (query) {
+  let params = '';
+
+  for (let key in query) {
+    if (params !== '') params += '&';
+    params += key + '=' + encodeURIComponent(query[key]);
+  }
+
+  return params;
+});
+;
+
+/***/ }),
+
+/***/ "./src/js/helpers/hasScrollbar.js":
+/*!****************************************!*\
+  !*** ./src/js/helpers/hasScrollbar.js ***!
   \****************************************/
 /*! exports provided: default, handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -573,52 +606,6 @@ const handleBodyJSClass = () => {
 };
 
 
-
-/***/ }),
-
-/***/ "./src/js/helpers/camelCase.js":
-/*!*************************************!*\
-  !*** ./src/js/helpers/camelCase.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/**
- * camelCase
- * @param {string} str String that isn't camel-case, e.g., CAMeL_CaSEiS-harD
- * @return {string} String converted to camel-case, e.g., camelCaseIsHard
- */
-/* harmony default export */ __webpack_exports__["default"] = (str => `${str.charAt(0).toLowerCase()}${str.replace(/[\W_]/g, '|').split('|').map(part => `${part.charAt(0).toUpperCase()}${part.slice(1)}`).join('').slice(1)}`);
-
-/***/ }),
-
-/***/ "./src/js/helpers/createParams.js":
-/*!****************************************!*\
-  !*** ./src/js/helpers/createParams.js ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/**
- * Generate String Params
- * @param   object 
- * @return  {string}
- */
-/* harmony default export */ __webpack_exports__["default"] = (function (query) {
-  let params = '';
-
-  for (let key in query) {
-    if (params !== '') params += '&';
-    params += key + '=' + encodeURIComponent(query[key]);
-  }
-
-  return params;
-});
-;
 
 /***/ }),
 
@@ -819,11 +806,13 @@ __webpack_require__.r(__webpack_exports__);
         if (typeof this.routes[route][funcname] === 'object') {
           const {
             id: bundleIds = [],
-            callback = () => {}
+            callback = () => {},
+            condition = true
           } = this.routes[route][funcname];
+          const condMeet = typeof condition === 'function' ? condition() !== false : condition;
           const hasBundle = [...bundleIds].filter(k => Object.keys(this.lazyJs).includes(k));
 
-          if (hasBundle.length) {
+          if (condMeet && hasBundle.length) {
             Object(_helpers_requireJs__WEBPACK_IMPORTED_MODULE_1__["default"])(this.lazyJs, bundleIds, () => {
               callback(args);
               this.doAction('wecodeart.route', route, 'lazy', args);
@@ -832,7 +821,6 @@ __webpack_require__.r(__webpack_exports__);
             return;
           }
 
-          console.log('Bundle IDs not found!');
           return;
         }
 
