@@ -1,3 +1,7 @@
+v5.3.8
+- Removed - Classic Menus support.
+- Fixed - Gutenberg Editor admin columns widths overflowing with custom "col-" classes
+
 v5.3.7
 - Updated - Forms/Inputs validation JS as a chunk loaded in "common" route
 - Fixed - Navigation fatal error after Gutenberg Plugin update

@@ -33,11 +33,16 @@
     	border-bottom: 1px solid #efefef;
 	}
 	
-	.wp-block-column {
+	& > .wp-block-column {
 		flex: 1 0 0%;
+
+		&:not(:first-child) {
+			margin: 0;
+		}
 
 		&[class*="col-"] {
 			flex-grow: 0;
+			flex-shrink: 1;
 			flex-basis: auto;
 		}
 	}

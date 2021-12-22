@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.2.4
+ * @version		5.3.8
  */
 
 namespace WeCodeArt;
@@ -67,15 +67,6 @@ class Support implements ArrayAccess {
             }
 			add_theme_support( $feature, $value );
 		}
-
-		// Theme check required.
-		// add_theme_support( 'title-tag' );            // Disabled, is FSE theme, kept for theme check warnings.
-		// add_theme_support( 'automatic-feed-links' ); // Enabled by default in FSE theme, same as above.
-
-		// This theme has one menu location.
-		register_nav_menus( [
-			'primary' => __( 'Primary Navigation', 'wecodeart' ),
-		] );
 	}
 
 	/**

@@ -1990,11 +1990,15 @@
   border-top: 1px solid #efefef;
   border-bottom: 1px solid #efefef;
 }
-.wp-block-columns .wp-block-column {
+.wp-block-columns > .wp-block-column {
   flex: 1 0 0%;
 }
-.wp-block-columns .wp-block-column[class*=col-] {
+.wp-block-columns > .wp-block-column:not(:first-child) {
+  margin: 0;
+}
+.wp-block-columns > .wp-block-column[class*=col-] {
   flex-grow: 0;
+  flex-shrink: 1;
   flex-basis: auto;
 }
 
