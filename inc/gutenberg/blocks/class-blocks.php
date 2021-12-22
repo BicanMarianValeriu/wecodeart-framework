@@ -85,6 +85,7 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/navigation-link',    Blocks\Navigation\Link::class );
 		$this->register( 'core/navigation-submenu', Blocks\Navigation\Menu::class );
 		$this->register( 'core/home-link',          Blocks\Navigation\Home::class );
+		$this->register( 'core/page-list',          Blocks\Navigation\Pages::class );
         // Post Blocks
 		$this->register( 'core/post-date',          Blocks\Post\Date::class );
 		$this->register( 'core/post-title',         Blocks\Post\Title::class );

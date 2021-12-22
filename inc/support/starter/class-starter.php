@@ -9,7 +9,7 @@
  * @subpackage  Support\Starter
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.3.7
  */
 
 namespace WeCodeArt\Support;
@@ -119,20 +119,6 @@ class Starter implements Integration {
 				'page_for_posts' => '{{' . self::BLOG_SLUG . '}}',
 				'show_on_front'  => 'page',
 				'blogname'       => 'WeCodeArt Framework',
-			],
-			'nav_menus' => [
-				'primary' => [
-					'name' 	=> esc_html__( 'Primary Menu', 'wecodeart' ),
-					'items' => [
-						'page_home',
-						'page_blog',
-						'page_about_us' => [
-							'type' 		=> 'post_type',
-							'object' 	=> 'page',
-							'object_id' => '{{' . self::ABOUT_SLUG . '}}',
-						],
-					],
-				],
 			],
 			'theme_mods'  => [
 				'custom_logo' => '{{logo}}',

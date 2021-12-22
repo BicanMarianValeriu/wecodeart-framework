@@ -105,14 +105,14 @@ class Navigation extends Dynamic {
 			! array_key_exists( 'ref', $attributes ) &&
 			! empty( block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] ) )
 		) {
-			$menu_items 	= gutenberg_get_menu_items_at_location( $attributes['__unstableLocation'] );
+			$menu_items 	= block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] );
 
 			if ( empty( $menu_items ) ) {
 				return '';
 			}
 	
-			$sorted_items 	= gutenberg_sort_menu_items_by_parent_id( $menu_items );
-			$parsed_blocks 	= gutenberg_parse_blocks_from_menu_items( $sorted_items[0], $sorted_items );
+			$sorted_items 	= block_core_navigation_sort_menu_items_by_parent_id( $menu_items );
+			$parsed_blocks 	= block_core_navigation_parse_blocks_from_menu_items( $sorted_items[0], $sorted_items );
 			$inner_blocks 	= new \WP_Block_List( $parsed_blocks, $attributes );
 		}
 
@@ -133,13 +133,7 @@ class Navigation extends Dynamic {
 			$is_fallback	= true; // indicate we are rendering the fallback.
 
 			// Temporary fallback to classic menu - since we insert it with theme starter content
-			$parsed_blocks 	= gutenberg_get_menu_items_at_location( $attributes['__unstableLocation'] );
-			if( empty( $parsed_blocks ) ) {
-				$parsed_blocks 	= block_core_navigation_get_fallback_blocks();
-			} else {
-				$parsed_blocks 	= gutenberg_sort_menu_items_by_parent_id( $parsed_blocks );
-				$parsed_blocks 	= gutenberg_parse_blocks_from_menu_items( $parsed_blocks[0], $parsed_blocks );
-			}
+			$parsed_blocks 	= block_core_navigation_get_fallback_blocks();
 
 			// Fallback my have been filtered so do basic test for validity.
 			if ( empty( $parsed_blocks ) || ! is_array( $parsed_blocks ) ) {
