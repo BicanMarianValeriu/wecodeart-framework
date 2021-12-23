@@ -6,6 +6,7 @@
 
 .wp-block-columns {
 	margin-bottom: 0;
+	gap: var(--wp--style--block-gap, 0);
 	
 	&.has-background {
 		padding: 5px;
@@ -37,7 +38,7 @@
 		flex: 1 0 0%;
 
 		&:not(:first-child) {
-			margin: 0;
+			margin-left: 0;
 		}
 
 		&[class*="col-"] {
