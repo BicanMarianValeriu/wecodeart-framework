@@ -56,7 +56,7 @@ class Support implements ArrayAccess {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 	1.0
-	 * @version	5.2.4
+	 * @version	5.3.8
 	 */
 	public function after_setup_theme() {
 		// Theme Support

@@ -130,12 +130,9 @@ class Navigation extends Dynamic {
 		
 		// If there are no inner blocks then fallback to rendering an appropriate fallback.
 		if ( empty( $inner_blocks ) ) {
-			$is_fallback	= true; // indicate we are rendering the fallback.
-
-			// Temporary fallback to classic menu - since we insert it with theme starter content
 			$parsed_blocks 	= block_core_navigation_get_fallback_blocks();
 
-			// Fallback my have been filtered so do basic test for validity.
+			// Fallback might have been filtered so do basic test for validity.
 			if ( empty( $parsed_blocks ) || ! is_array( $parsed_blocks ) ) {
 				return '';
 			}

@@ -1,3 +1,6 @@
+v5.3.9
+- Updated - Headers Navigation pattern updated
+
 v5.3.8
 - Removed - Classic Menus support.
 - Updated - Header/Footer containers for non-FSE pages + adjustments to filters names/logic
