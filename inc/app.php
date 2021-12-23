@@ -80,13 +80,18 @@ return [
     ],
     /*
     |--------------------------------------------------------------------------
-    | Theme Extensions
+    | Theme Header/Footer
     |--------------------------------------------------------------------------
     |
-    | This array of options will be used as defaults for extensions.
+    | This array of options will be used as defaults for header/footer.
     |
     */
-    'extensions' => [],
+    'header' => [
+        'clean'     => false
+    ],
+    'footer' => [
+        'jquery'    => false
+    ],
     /*
     |--------------------------------------------------------------------------
     | Theme Support

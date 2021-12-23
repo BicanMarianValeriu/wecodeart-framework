@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.3.3
+ * @version		5.3.8
  */
 
 namespace WeCodeArt\Core;
@@ -39,7 +39,7 @@ class Header {
 	 * Output HEADER markup function Plugin PHP fallback
 	 *
 	 * @since 	unknown
-	 * @version	5.3.3
+	 * @version	5.3.8
 	 *
 	 * @return 	void 
 	 */
@@ -57,13 +57,7 @@ class Header {
 					'id'	=> $args['slug'],
 					'class'	=> 'site-header sticky-top wp-block-template-part',
 				]
-			], 
-			[ 
-				'tag' 	=> 'div',
-				'attrs' => [
-					'class'	=> 'container',
-				] 
-			]
+			],
 		], 'block_header_area' );
 	}
 
@@ -105,7 +99,9 @@ class Header {
 	 * @return void
 	 */
 	public function clean_head() {
-		if( apply_filters( 'wecodeart/filter/head/clean', false ) === false ) return;
+		$config = wecodeart_config( 'header' );
+
+		if( get_prop( $config, 'clean' ) !== true ) return;
 
 		$actions = apply_filters( 'wecodeart/filter/head/clean/actions', [
 			[ 'wp_head', 'wp_generator' ],

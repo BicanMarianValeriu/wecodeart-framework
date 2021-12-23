@@ -1,5 +1,6 @@
 v5.3.8
 - Removed - Classic Menus support.
+- Updated - Header/Footer containers for non-FSE pages + adjustments to filters names/logic
 - Fixed - Gutenberg Editor admin columns widths overflowing with custom "col-" classes
 
 v5.3.7

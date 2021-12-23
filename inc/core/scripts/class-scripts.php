@@ -9,7 +9,7 @@
  * @subpackage 	Core\Scripts
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		1.9
- * @version		5.3.5
+ * @version		5.3.8
  */
 
 namespace WeCodeArt\Core;
@@ -114,15 +114,15 @@ class Scripts {
 	 * jQuery to Footer
 	 *
 	 * @since	3.1.2
-	 * @version	4.1.5
+	 * @version	5.3.8
 	 */
 	public function jquery_to_footer( $wp_scripts ) {
-		$config = wecodeart_config( 'scripts', [] );
+		$config = wecodeart_config( 'footer' );
 
-		if ( ! is_admin() && get_prop( $config, 'footer', false ) ) {
-			$wp_scripts->add_data( 'jquery', 			'group', 1 );
-			$wp_scripts->add_data( 'jquery-core', 		'group', 1 );
-			$wp_scripts->add_data( 'jquery-migrate', 	'group', 1 );
-		}
+		if ( is_admin() && get_prop( $config, 'jquery' ) !== false ) return;
+
+		$wp_scripts->add_data( 'jquery', 			'group', 1 );
+		$wp_scripts->add_data( 'jquery-core', 		'group', 1 );
+		$wp_scripts->add_data( 'jquery-migrate', 	'group', 1 );
 	}
 }

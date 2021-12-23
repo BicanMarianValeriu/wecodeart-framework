@@ -121,14 +121,6 @@ class Styles implements Integration {
 		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
 		remove_filter( 'render_block', 'wp_render_elements_support', 	10, 2 );
 		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
-
-		// Eventually it will be removed - 1 check since they are all from GB.
-		if( function_exists( 'gutenberg_render_layout_support_flag' ) ) {
-			remove_filter( 'render_block', 'gutenberg_render_spacing_gap_support', 	10, 2 );
-			remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
-			remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
-			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
-		}
 	}
 
 	/**

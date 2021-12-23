@@ -99,22 +99,22 @@ class Navigation extends Dynamic {
 		// - we have menu items at the defined location
 		// - we don't have a relationship to a `wp_navigation` Post (via `ref`).
 		// ...then create inner blocks from the classic menu assigned to that location.
-		if (
-			defined( 'IS_GUTENBERG_PLUGIN' ) && IS_GUTENBERG_PLUGIN &&
-			array_key_exists( '__unstableLocation', $attributes ) &&
-			! array_key_exists( 'ref', $attributes ) &&
-			! empty( block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] ) )
-		) {
-			$menu_items 	= block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] );
+		// if (
+		// 	defined( 'IS_GUTENBERG_PLUGIN' ) && IS_GUTENBERG_PLUGIN &&
+		// 	array_key_exists( '__unstableLocation', $attributes ) &&
+		// 	! array_key_exists( 'ref', $attributes ) &&
+		// 	! empty( block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] ) )
+		// ) {
+		// 	$menu_items 	= block_core_navigation_get_menu_items_at_location( $attributes['__unstableLocation'] );
 
-			if ( empty( $menu_items ) ) {
-				return '';
-			}
+		// 	if ( empty( $menu_items ) ) {
+		// 		return '';
+		// 	}
 	
-			$sorted_items 	= block_core_navigation_sort_menu_items_by_parent_id( $menu_items );
-			$parsed_blocks 	= block_core_navigation_parse_blocks_from_menu_items( $sorted_items[0], $sorted_items );
-			$inner_blocks 	= new \WP_Block_List( $parsed_blocks, $attributes );
-		}
+		// 	$sorted_items 	= block_core_navigation_sort_menu_items_by_parent_id( $menu_items );
+		// 	$parsed_blocks 	= block_core_navigation_parse_blocks_from_menu_items( $sorted_items[0], $sorted_items );
+		// 	$inner_blocks 	= new \WP_Block_List( $parsed_blocks, $attributes );
+		// }
 
 		// Load inner blocks from the navigation post.
 		if ( array_key_exists( 'ref', $attributes ) ) {

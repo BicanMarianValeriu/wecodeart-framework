@@ -61,7 +61,6 @@ class Gutenberg {
 
 		// Skip links.
 		remove_action( 'wp_footer', 				'the_block_template_skip_link' );
-		remove_action( 'wp_footer', 				'gutenberg_the_skip_link' );
 		add_action( 'wp_footer', 					[ $this, 'the_skip_link' ] );
 
 		// Modules.
