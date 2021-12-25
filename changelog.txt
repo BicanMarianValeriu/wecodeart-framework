@@ -1,3 +1,6 @@
+v5.4.1
+- Fixed
+
 v5.4.0
 - Updated - Revert back the removal of GB Block support hooks
 
