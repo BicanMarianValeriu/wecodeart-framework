@@ -1,3 +1,6 @@
+v5.4.0
+- Updated - Revert back the removal of GB Block support hooks
+
 v5.3.9
 - Updated - Headers Navigation pattern updated
 
