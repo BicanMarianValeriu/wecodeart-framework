@@ -1,5 +1,10 @@
+v5.4.2
+- Updated -
+
 v5.4.1
-- Fixed
+- Updated - Bump required WP version to 5.9-beta4
+- Updated - Post Excerpt custom classname and text align support
+- Fixed - CSS Splitting string issue with ending "}" when having media queries
 
 v5.4.0
 - Updated - Revert back the removal of GB Block support hooks

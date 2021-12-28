@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -103,11 +103,21 @@ class Excerpt extends Dynamic {
 		}
 		remove_filter( 'excerpt_more', $filter_excerpt_more );
 
+		$classnames = [ 'wp-block-post-excerpt' ];
+
+		if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+			$classnames[] = 'has-text-align-' . $value;
+		}
+
+		if( $value = get_prop( $attributes, 'className', false ) ) {
+			$classnames[] = $value;
+		}
+
 		return wecodeart( 'markup' )::wrap( 'wp-block-post-excerpt', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => [
-					'class' => 'wp-block-post-excerpt'
+					'class' => implode( ' ', $classnames )
 				]
 			]
 		], $html, [], false );

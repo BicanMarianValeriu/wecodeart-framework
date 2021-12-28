@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		3.5
- * @version		5.3.3
+ * @version		5.4.1
  */
 
 namespace WeCodeArt\Admin;
@@ -33,7 +33,7 @@ class Activation {
 	 *
 	 * @var		string
 	 */
-	const REQUIRED_WP 	= '5.9-beta2';
+	const REQUIRED_WP 	= '5.9-beta4';
 	const REQUIRED_PHP 	= '7.0';
 
 	/**

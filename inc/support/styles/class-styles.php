@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.3.0
+ * @version		5.4.1
  */
 
 namespace WeCodeArt\Support;
@@ -387,10 +387,11 @@ final class Styles implements Integration {
 					elseif ( $css[$i] === '}' ) array_pop( $s ); 
 					$i++;
 				}
-				preg_match( '/(\@media[^\{]+)\{(.*)\}\s+/ims', substr( $css, $start, ( $i + 1 ) - $start ), $block );
-				list( , $media, $styles ) = $block;
-				$styles = self::string_to_array( $styles );
-				$queries[trim( $media)] = isset( $queries[trim( $media)] ) ? $queries[trim( $media)] + $styles : $styles;
+				preg_match( '/(\@media[^\{]+)\{(.*)\s+/ims', substr( $css, $start, ( $i + 1 ) - $start ), $block );
+				list( , $media, $style ) = $block;
+				$query 	= trim( $media );
+				$styles	= self::string_to_array( $style );
+				$queries[$query] = isset( $queries[$query] ) ? $queries[$query] + $styles : $styles;
 				$start = $i;
 			}
 		}
