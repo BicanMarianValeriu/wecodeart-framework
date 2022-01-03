@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.2
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -116,14 +116,16 @@ abstract class Base {
      * Get the control's content.
      *
      * @since   5.0.0
-     * @version 5.3.3
+     * @version 5.4.2
      *
      * @return  string Contents of the control.
      */
     final public function get_content() {
         $content = '';
         if( $this->_label === 'before' ) $content .= $this->get_label();
-        $content .= $this->content();
+        ob_start();
+        $this->content();
+        $content .= ob_get_clean();
         if( $this->_label === 'after' ) $content .= $this->get_label();
         if( $this->with_messages ) $content .= $this->get_messages();
 

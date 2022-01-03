@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.4.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -73,6 +73,7 @@ class Separator extends Dynamic {
 			background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
 			opacity: 1;
 		}
+		.wp-block-separator.is-style-faded,
 		.wp-block-separator.is-style-wide {
 			max-width: initial;
 		}

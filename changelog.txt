@@ -1,5 +1,7 @@
 v5.4.2
-- Updated -
+- Fixed - Inputs get_content() method to return HTML instead of echoing it
+- Fixed - Faded separator to max-width styleing
+- Updated - CF7 Submit module wrapper to .wp-block-button and button default background + color to primary
 
 v5.4.1
 - Updated - Bump required WP version to 5.9-beta4
