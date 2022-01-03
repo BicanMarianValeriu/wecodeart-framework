@@ -21,14 +21,10 @@
 // Ability to the value of the root font sizes, affecting the value of `rem`.
 // null by default, thus nothing is generated.
 :root {
-	@if $font-size-root != null {
-		font-size: var(--wp--root-font-size);
-	}
+	font-size: var(--wp--root-font-size);
 
-	@if $enable-smooth-scroll {
-		@media (prefers-reduced-motion: no-preference) {
-			scroll-behavior: smooth;
-		}
+	@media (prefers-reduced-motion: no-preference) {
+		scroll-behavior: smooth;
 	}
 }
 
@@ -523,12 +519,11 @@ button,
 [type="button"], // 1
 [type="reset"],
 [type="submit"] {
+	border: 1px solid transparent;
 	-webkit-appearance: button; // 2
 
-	@if $enable-button-pointers {
-		&:not(:disabled) {
+	&:not(:disabled) {
 		cursor: pointer; // 3
-		}
 	}
 }
 

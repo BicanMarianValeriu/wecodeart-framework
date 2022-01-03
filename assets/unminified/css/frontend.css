@@ -66,6 +66,9 @@ Author URI: https://www.wecodeart.com/about/
   box-sizing: border-box;
 }
 
+:root {
+  font-size: var(--wp--root-font-size);
+}
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -499,6 +502,7 @@ button,
 [type=button],
 [type=reset],
 [type=submit] {
+  border: 1px solid transparent;
   -webkit-appearance: button;
 }
 button:not(:disabled),
