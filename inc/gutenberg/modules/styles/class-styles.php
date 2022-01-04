@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.3.1
+ * @version		5.4.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -233,8 +233,10 @@ class Styles implements Integration {
 			$content 	= preg_replace( $regex, '$1', $content, $passes );
 		}
 
-		// Add necessary class
-		$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="' . $block_id . ' ', $content, 1 );
+		// Add necessary class - exclude blocks without wrappers, eg wp:pattern
+		if( ! in_array( $block_name, [ 'core/pattern', 'core/shortcode', 'core/html', 'core/freeform' ] ) ) {
+			$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="' . $block_id . ' ', $content, 1 );
+		}
 
 		// Process CSS, add prefixes and convert to string!
 		if( $styles ) {
@@ -398,7 +400,7 @@ class Styles implements Integration {
 			'core/navigation',
 			'core/navigation-link',
 			'core/navigation-submenu',
-			'core/pattern',
+			// 'core/pattern',
 			'core/page-list',
 			'core/paragraph',
 			'core/preformatted',

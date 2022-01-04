@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -96,7 +96,7 @@ class Content extends Dynamic {
 			the_post();
 		}
 
-		$content = get_the_content( null, false, $post_id );
+		$content = get_the_content();
 		/**
 		 * This filter is documented in wp-includes/post-template.php 
 		 */

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.3.5
+ * @version		5.4.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -239,6 +239,9 @@ class Template extends Dynamic {
 		return "
 		.wp-block-comments-query-loop:empty {
 			display: none;
+		}
+		.wp-block-comments-query-loop__head:only-child {
+			margin-bottom: 0;
 		}
 		.wp-block-comments-query-loop__head svg {
 			margin-right: .5rem;
