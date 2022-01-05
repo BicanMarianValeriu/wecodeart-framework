@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Core/Scripts/Asset
- * @copyright   Copyright (c) 2021, WeCodeArt Framework
+ * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.9.5
  * @version		4.1.7
  */ 

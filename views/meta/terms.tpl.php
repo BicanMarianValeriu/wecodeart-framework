@@ -7,7 +7,6 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Terms
- * @copyright   Copyright (c) 2021, WeCodeArt Framework
  * @since 		5.0.0
  * @version		5.3.1
  */

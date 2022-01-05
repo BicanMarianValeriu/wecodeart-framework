@@ -104,7 +104,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @package 	WeCodeArt FrameWork
  * @subpackage 	Admin/Notifications
- * @copyright   Copyright (c) 2021, WeCodeArt Framework
+ * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.8.1
  * @version		5.0.0
  */

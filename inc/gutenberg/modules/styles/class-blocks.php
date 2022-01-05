@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Frontend
- * @copyright   Copyright (c) 2021, WeCodeArt Framework
+ * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -333,9 +333,7 @@ class Blocks extends Processor {
 				}
 
 				// Block Gap
-				$block_type      = \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
-				$has_gap_support = block_has_support( $block_type, [ 'spacing', 'blockGap' ], false );
-				if ( $has_gap_support && $gap = get_prop( $spacing, 'blockGap', false ) ) {
+				if ( $gap = get_prop( $spacing, 'blockGap' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> '--wp--style--block-gap',
 						'value'	  	=> $gap
