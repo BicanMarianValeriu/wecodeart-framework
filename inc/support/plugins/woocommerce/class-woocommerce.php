@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		1.9
- * @version		5.3.1
+ * @version		5.4.4
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -80,7 +80,7 @@ class WooCommerce implements Integration {
 	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup
 	 *
 	 * @since   3.5
-	 * @version 5.2.2
+	 * @version 5.4.4
 	 *
 	 * @return  void
 	 */
@@ -91,9 +91,8 @@ class WooCommerce implements Integration {
 		 */		
 		?>
 		<div <?php echo wecodeart( 'markup' )::generate_attr( 'woocommerce', [
-			'class' => 'site-content py-5 wp-block-template-part'
+			'class' => 'w-block-template-part'
 		] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-			<div class="container">
 		<?php
 	}
 
@@ -101,13 +100,12 @@ class WooCommerce implements Integration {
 	 * After Content - Wraps all WooCommerce content in wrappers which match the theme markup
 	 *
 	 * @since   3.5
-	 * @version 5.2.2
+	 * @version 5.4.4
 	 *
 	 * @return  void
 	 */
 	public function after_content_wrapp() {
 		?>
-			</div>
 		</div>
 		<!-- /.woocommerce @filter = `wecodeart/filter/wrappers/woocommerce` -->
 		<?php
@@ -117,7 +115,7 @@ class WooCommerce implements Integration {
 	 * Filter - Restricted WooCommerce Blocks from theme code
 	 *
 	 * @since	5.0.0
-	 * @version	5.0.0
+	 * @version	5.4.4
 	 *
 	 * @return 	array
 	 */
@@ -126,6 +124,7 @@ class WooCommerce implements Integration {
 			'woocommerce/handpicked-products',
 			'woocommerce/products-by-attribute',
 			'woocommerce/products-by-tag',
+			'woocommerce/product-categories',
 			'woocommerce/product-best-sellers',
 			'woocommerce/product-top-rated',
 			'woocommerce/product-on-sale',

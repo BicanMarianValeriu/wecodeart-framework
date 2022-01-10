@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.9.5
- * @version		5.3.3
+ * @version		5.4.4
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -152,23 +152,23 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
         switch( $partial ) {
             case 'header' :
                 /**
-                 * @see - https://developer.wordpress.org/reference/functions/get_header/
+                 * @see - WeCodeArt\Core\Header::markup();
                  */
-                get_header();
+                do_action( 'wecodeart/header' );
                 break;
 
             case 'content' :
                 /**
-                 * @see - WeCodeArt\Core\Content::render_content();
+                 * @see - WeCodeArt\Core\Content::markup();
                  */
-                do_action( 'wecodeart/content/markup' );
+                do_action( 'wecodeart/content' );
                 break;
 
             case 'footer' :
                 /**
-                 * @see - https://developer.wordpress.org/reference/functions/get_footer/
+                * @see - WeCodeArt\Core\Footer::markup();
                  */
-                get_footer();
+                do_action( 'wecodeart/footer' );
                 break;
 
             default: 

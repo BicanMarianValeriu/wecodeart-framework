@@ -9,7 +9,7 @@
  * @subpackage 	Core\Content
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.5
- * @version		5.3.1
+ * @version		5.4.4
  */
 
 namespace WeCodeArt\Core;
@@ -31,18 +31,18 @@ class Content {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'wecodeart/content/markup',	[ $this, 'render_content' ] );
+		add_action( 'wecodeart/content',	[ $this, 'markup' ] );
 	}
 
 	/**
 	 * Returns the inner markp with wrapper based on user options
 	 *
 	 * @since 	unknown
-	 * @version	5.2.2
+	 * @version	5.4.4
 	 *
 	 * @return 	HTML
 	 */
-	public static function render_content() {
+	public static function markup() {
 		$file = get_parent_theme_file_path( 'block-templates/content-only.html' );
 
 		if( file_exists( $file ) === false ) return;

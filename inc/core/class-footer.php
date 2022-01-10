@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.5
- * @version		5.3.8
+ * @version		5.4.4
  */
 
 namespace WeCodeArt\Core;
@@ -17,7 +17,6 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Admin\Customizer;
 
 /**
  * This file serves as fallback for old PHP of way of building themes
@@ -40,7 +39,7 @@ class Footer {
 	 * Output FOOTER markup function Plugin PHP fallback
 	 * 
 	 * @since 	1.0
-	 * @version	5.3.9
+	 * @version	5.4.4
 	 *
 	 * @return 	HTML 
 	 */
@@ -51,15 +50,9 @@ class Footer {
 			'tagName' 	=> 'footer',
 		] );
 
-		wecodeart( 'markup' )::wrap( 'footer', [
-			[
-				'tag' 	=> $args['tagName'],
-				'attrs' => [
-					'id'	=> $args['slug'],
-					'class'	=> 'site-footer wp-block-template-part',
-				]
-			]
-		], 'block_footer_area' ); 
+		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"site-footer","theme":"' . $args['theme'] . '"} /-->';
+
+		echo do_blocks( $content ); 
 	}
 
 	/**

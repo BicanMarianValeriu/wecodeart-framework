@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.3.7
+ * @version		5.4.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -62,7 +62,7 @@ class Form extends Dynamic {
 	 */
 	public function comment_form_fields( $fields ) {
 		$comment_field = $fields['comment'];
-		$privacy_field = $fields['privacy'];
+		$privacy_field = isset( $fields['privacy'] ) ? $fields['privacy'] : null;
 
 		unset( $fields['comment'], $fields['privacy'] );
 		

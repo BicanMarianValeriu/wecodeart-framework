@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.3.8
+ * @version		5.4.4
  */
 
 namespace WeCodeArt\Core;
@@ -39,7 +39,7 @@ class Header {
 	 * Output HEADER markup function Plugin PHP fallback
 	 *
 	 * @since 	unknown
-	 * @version	5.3.8
+	 * @version	5.4.4
 	 *
 	 * @return 	void 
 	 */
@@ -50,15 +50,9 @@ class Header {
 			'tagName' 	=> 'header',
 		] );
 
-		wecodeart( 'markup' )::wrap( 'header', [
-			[
-				'tag' 	=> $args['tagName'],
-				'attrs' => [
-					'id'	=> $args['slug'],
-					'class'	=> 'site-header sticky-top wp-block-template-part',
-				]
-			],
-		], 'block_header_area' );
+		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"site-header","theme":"' . $args['theme'] . '"} /-->';
+
+		echo do_blocks( $content );
 	}
 
 	/**

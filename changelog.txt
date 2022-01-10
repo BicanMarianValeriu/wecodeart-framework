@@ -1,3 +1,8 @@
+v5.4.4
+- Updated - Header/Footer/Content PHP fallbacks
+- Updated - Adjusted WooCoomerce wrapper on legacy template
+- Fixed - a notice on WooCoomerce Leave a Review form regarding Privacy Policy field
+
 v5.4.3
 - Updated - Post content remove get_the_content args
 - Updated - Post comments message margin bottom to 0 when there are no comments
