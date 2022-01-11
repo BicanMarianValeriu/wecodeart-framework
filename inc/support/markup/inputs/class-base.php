@@ -136,7 +136,7 @@ abstract class Base {
 	 * Render the label HTML of the input
      *
      * @since   5.0.0
-     * @version 5.3.3
+     * @version 5.4.4
      *
 	 * @return	mixed|string
 	 */
@@ -151,7 +151,7 @@ abstract class Base {
                     'for'   => get_prop( $this->attrs, 'id', $this->unique_id )
                 ]
             ]
-        ], $this->label );
+        ], $this->label, [], false );
     }
 
     /**

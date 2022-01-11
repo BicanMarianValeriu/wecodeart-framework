@@ -17,6 +17,12 @@ addAction('wecodeart.route', 'wecodeart/developer/log', filterLog, 10);
 function filterLog(route, func, args) {
 	const { isDevMode = false } = wecodeart;
 	if (isDevMode) {
+		if (document.getElementById('wecodeart-core-scripts-livereload-js')) {
+			console.log('DEV Server: Livereload::running!');
+		} else {
+			console.log('DEV Server: Livereload::paused!');
+		}
+
 		console.log('Loaded: ', route, '::', func);
 		if (args) console.log(args);
 	}
@@ -45,13 +51,8 @@ function filterLog(route, func, args) {
 	wecodeart.lazyJs = {
 		// Use for popups
 		'sweetalert': [
-			'//unpkg.com/sweetalert2@11.0.19/dist/sweetalert2.min.css',
-			'//unpkg.com/sweetalert2@11.0.19/dist/sweetalert2.min.js',
-		],
-		// Use for tooltips
-		'tooltips': [
-			'//unpkg.com/@popperjs/core@2',
-			'//unpkg.com/tippy.js@6',
+			'//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.css',
+			'//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.js',
 		],
 		// Use for lighbox galleries
 		'photoswipe': [
@@ -69,14 +70,6 @@ function filterLog(route, func, args) {
 				handleDocumentScrollbar();
 				window.onresize = handleDocumentScrollbar;
 				window.onscroll = handleDocumentScrolled;
-			},
-			complete: () => {
-				// LiveReload
-				if (document.getElementById('wecodeart-core-scripts-livereload-js')) {
-					console.log('DEV Server: Livereload::running!');
-				} else {
-					console.log('DEV Server: Livereload::paused!');
-				}
 			},
 		},
 	};

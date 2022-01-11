@@ -308,6 +308,13 @@ class Form extends Dynamic {
 	 */
 	public function styles() {
 		return "
+		.wp-block-post-comments-form:empty {
+			display: none;
+		}
+		.wp-block-post-comments-form__headline svg,
+		.comment-form-submit svg {
+			margin-right: .5rem;
+		}
 		.comment-form-field {
 			margin-bottom: 1rem;
 		}
@@ -326,10 +333,6 @@ class Form extends Dynamic {
 			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 			user-select: none;
 			cursor: pointer;
-		}
-		.wp-block-post-comments-form__headline svg,
-		.comment-form-submit svg {
-			margin-right: .5rem;
 		}
 		";
 	}

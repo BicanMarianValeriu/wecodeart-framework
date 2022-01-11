@@ -91,7 +91,7 @@ class WooCommerce implements Integration {
 		 */		
 		?>
 		<div <?php echo wecodeart( 'markup' )::generate_attr( 'woocommerce', [
-			'class' => 'w-block-template-part'
+			'class' => 'wp-block-template-part'
 		] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 		<?php
 	}

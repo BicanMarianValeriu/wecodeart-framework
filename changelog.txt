@@ -1,7 +1,10 @@
 v5.4.4
 - Updated - Header/Footer/Content PHP fallbacks
 - Updated - Adjusted WooCoomerce wrapper on legacy template
+- Updated - Adjusted Single Post comment form margins
+- Updated - JS logging only when developer mode is enabled
 - Fixed - a notice on WooCoomerce Leave a Review form regarding Privacy Policy field
+- Fixed - Inputs label return vs echo bug (visible on comment form)
 
 v5.4.3
 - Updated - Post content remove get_the_content args

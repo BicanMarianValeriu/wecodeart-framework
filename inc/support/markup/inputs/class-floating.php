@@ -37,7 +37,6 @@ class Floating extends Basic {
 	 * Constructor 
 	 */
 	public function __construct( string $type = 'floating', array $args = [] ) {
-        $this->type = get_prop( $args, 'type', 'text' );
         $this->args = $args;
     }
 	
@@ -55,7 +54,7 @@ class Floating extends Basic {
                     'class' => 'form-floating',
                 ]
             ]
-        ], 'wecodeart_input', [ $this->type, wp_parse_args( [
+        ], 'wecodeart_input', [ get_prop( $this->args, 'type', 'text' ), wp_parse_args( [
             '_label' => 'after'
         ], $this->args ) ] );
     }

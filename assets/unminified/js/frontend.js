@@ -453,6 +453,12 @@ function filterLog(route, func, args) {
   } = wecodeart;
 
   if (isDevMode) {
+    if (document.getElementById('wecodeart-core-scripts-livereload-js')) {
+      console.log('DEV Server: Livereload::running!');
+    } else {
+      console.log('DEV Server: Livereload::paused!');
+    }
+
     console.log('Loaded: ', route, '::', func);
     if (args) console.log(args);
   }
@@ -481,9 +487,7 @@ function filterLog(route, func, args) {
 
   wecodeart.lazyJs = {
     // Use for popups
-    'sweetalert': ['//unpkg.com/sweetalert2@11.0.19/dist/sweetalert2.min.css', '//unpkg.com/sweetalert2@11.0.19/dist/sweetalert2.min.js'],
-    // Use for tooltips
-    'tooltips': ['//unpkg.com/@popperjs/core@2', '//unpkg.com/tippy.js@6'],
+    'sweetalert': ['//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.css', '//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.js'],
     // Use for lighbox galleries
     'photoswipe': ['//unpkg.com/photoswipe@4.1.3/dist/default-skin/default-skin.css', '//unpkg.com/photoswipe@4.1.3/dist/photoswipe.css', '//unpkg.com/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js', '//unpkg.com/photoswipe@4.1.3/dist/photoswipe.min.js']
   };
@@ -495,14 +499,6 @@ function filterLog(route, func, args) {
         Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"])();
         window.onresize = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"];
         window.onscroll = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrolled"];
-      },
-      complete: () => {
-        // LiveReload
-        if (document.getElementById('wecodeart-core-scripts-livereload-js')) {
-          console.log('DEV Server: Livereload::running!');
-        } else {
-          console.log('DEV Server: Livereload::paused!');
-        }
       }
     }
   };
