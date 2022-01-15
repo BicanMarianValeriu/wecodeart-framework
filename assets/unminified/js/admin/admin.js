@@ -406,7 +406,7 @@ const License = props => {
       type: "text",
       value: formData[id],
       placeholder: __('API Key', 'wecodeart'),
-      disabled: wecodeartSettings[id] === 'EARLY_ACCESS',
+      disabled: wecodeartSettings[id] === 'FREEMIUM',
       onChange: ({
         target: {
           value
