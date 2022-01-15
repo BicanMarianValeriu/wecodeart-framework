@@ -9,7 +9,7 @@ import getOptions from './helpers/parseData';
 import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled } from './helpers/hasScrollbar';
 
 // Styles
-import './../scss/frontend/frontend.scss';
+import './../../scss/frontend/frontend.scss';
 
 const { addAction } = wp.hooks;
 

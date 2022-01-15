@@ -3,8 +3,8 @@
 
 Version: 5.0+
 Contributors: vbmv
-Requires at least: WordPress 5.8
-Tested up to: WordPress 5.8
+Requires at least: WordPress 5.9
+Tested up to: WordPress 5.9
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

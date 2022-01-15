@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.3.3
+ * @version		5.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -140,25 +140,6 @@ class Classes implements Integration {
 		}
 
 		return wp_parse_args( [
-			// Misc - this classes should be optin in a skin!
-			// 'alert',
-			// 'alert-link',
-			// 'alert-heading',
-			// 'alert-dismissible',
-			// 'badge',
-			// 'card',
-			// 'card-title',
-			// 'card-subtitle',
-			// 'card-text',
-			// 'card-link',
-			// 'card-img',
-			// 'card-img-top',
-			// 'card-img-bottom',
-			// 'card-img-overlay',
-			// 'card-header',
-			// 'card-header-tabs',
-			// 'card-header-pills',
-			// 'card-body',
 			'vr',
 			'hstack',
 			'vstack',
@@ -176,24 +157,6 @@ class Classes implements Integration {
 			'list-unstyled',
 			'list-inline',
 			'list-inline-item',
-			'form-label',
-			'form-text',
-			'form-control',
-			'form-control-sm',
-			'form-control-lg',
-			'form-select',
-			'form-select-sm',
-			'form-select-lg',
-			'form-range',
-			'form-floating',
-			'input-group',
-			'input-group-sm',
-			'input-group-lg',
-			'input-group-text',
-			'valid-feedback',
-			'valid-tooltip',
-			'invalid-feedback',
-			'invalid-tooltip',
 			'ratio',
 			'ratio-1x1',
 			'ratio-4x3',

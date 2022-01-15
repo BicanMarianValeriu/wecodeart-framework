@@ -14,15 +14,15 @@ const wplib = [
 
 // Livereload plugin
 const getLiveReloadPort = (inputPort) => {
-	const parsedPort = parseInt(inputPort, 10);
+    const parsedPort = parseInt(inputPort, 10);
 
-	return Number.isInteger(parsedPort) ? parsedPort : 35729;
+    return Number.isInteger(parsedPort) ? parsedPort : 35729;
 };
 
 module.exports = {
     ...defaultConfig,
     entry: {
-        'frontend': path.resolve(process.cwd(), 'src', 'js', 'frontend.js'),
+        'frontend': path.resolve(process.cwd(), 'src', 'js', 'frontend', 'index.js'),
     },
     output: {
         path: path.resolve(process.cwd(), `assets/${devMode ? 'unminified' : 'minified'}`),

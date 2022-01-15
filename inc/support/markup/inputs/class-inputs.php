@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.1.2
- * @version		5.3.1
+ * @version		5.4.5
  */
 
 namespace WeCodeArt\Support\Markup;
@@ -50,7 +50,8 @@ class Inputs implements ArrayAccess {
         $this->register( 'fieldset',	Inputs\Fieldset::class 	);
         $this->register( 'floating',	Inputs\Floating::class 	);
 
-        add_action( 'wp_enqueue_scripts',   [ $this, 'assets'   ], -10 );
+        add_action( 'wp_enqueue_scripts',                           [ $this, 'assets'   ], -10 );
+        add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'classes'  ] );
 	}
 
 	/**
@@ -116,6 +117,36 @@ class Inputs implements ArrayAccess {
 		wp_register_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/forms' ), [
             'wecodeart-core-scripts'
         ], wecodeart( 'version' ), true );
+	}
+
+    /**
+	 * Add new classes.
+	 *
+	 * @param 	array  	$classes
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function classes( $classes ) {
+		return wp_parse_args( [
+			'form-label',
+			'form-text',
+			'form-control',
+			'form-control-sm',
+			'form-control-lg',
+			'form-select',
+			'form-select-sm',
+			'form-select-lg',
+			'form-range',
+			'form-floating',
+			'input-group',
+			'input-group-sm',
+			'input-group-lg',
+			'input-group-text',
+			'valid-feedback',
+			'valid-tooltip',
+			'invalid-feedback',
+			'invalid-tooltip',
+		], $classes );
 	}
 	
 	/**

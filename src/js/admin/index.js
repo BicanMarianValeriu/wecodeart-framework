@@ -6,9 +6,6 @@ const {
 		__,
 		sprintf
 	},
-	// blockLibrary: {
-	// 	registerCoreBlocks
-	// },
 	hooks: {
 		applyFilters
 	},
@@ -30,10 +27,10 @@ const {
 	}
 } = wp;
 
-const { currentUser, theme: { version: themeVersion, name: themeName } } = wecodeart;
+const { currentUser, theme: { version: themeVersion } } = wecodeart;
 
 /* Settings */
-import { GettingStarted, Extensions, /*Licenses, */ Notices } from './components';
+import { GettingStarted, Extensions, Licenses, Notices } from './components';
 
 import './../../scss/admin/index.scss';
 
@@ -55,7 +52,7 @@ const WeCodeArt = () => {
 	} = useSelect(select => {
 		const { getEntityRecord } = select('core');
 		const { isResolving } = select('core/data');
-		const { saveEntityRecord } = dispatch('core');
+		const { saveEntityRecord, editEntityRecord, deleteEntityRecord } = dispatch('core');
 		const isRequesting = isResolving('core', 'getEntityRecord', ['wecodeart', 'settings']);
 
 		return {
@@ -90,12 +87,12 @@ const WeCodeArt = () => {
 
 	tabs = [
 		...tabs,
-		// {
-		// 	name: 'wca-license',
-		// 	title: __('License(s)', 'wecodeart'),
-		// 	className: 'wca-license',
-		// 	render: <Licenses {...tabProps} />
-		// }
+		{
+			name: 'wca-license',
+			title: __('License(s)', 'wecodeart'),
+			className: 'wca-license',
+			render: <Licenses {...tabProps} />
+		}
 	];
 
 	const [initialTab, setInitialTab] = useState('');
@@ -151,8 +148,6 @@ wp.domReady(() => {
 			baseURL: '/wecodeart/v1/settings'  // API path without /wp-json
 		}
 	]);
-	// Register Core Blocks
-	// registerCoreBlocks();
 	// Render Admin
 	render(<WeCodeArt />, document.getElementById('wecodeart'));
 });

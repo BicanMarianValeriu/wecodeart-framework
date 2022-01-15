@@ -9,6 +9,7 @@
 @import "~bootstrap/scss/containers";
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/utilities/api";
+@import "~bootstrap/scss/tables";
 @import "~bootstrap/scss/alert";
 @import "~bootstrap/scss/badge";
 @import "~bootstrap/scss/card";
@@ -125,14 +126,11 @@
 
 		&--vertical {
 			display: flex;
-			margin: 0 0;
-			width: auto;
 	
 			.components-tab-panel {
 				&__tabs {
 					flex-direction: column;
-					padding: 15px 0!important;
-					border-left: 1px solid #e2e4e7;
+					padding: 15px 0;
 					border-right: 1px solid #e2e4e7;
 
 					&-item {
@@ -148,9 +146,7 @@
 				&__tab {
 					&-content {
 						flex: 1 1 auto;
-						padding-top: 15px;
-						padding-bottom: 15px;
-						border-right: 1px solid #e2e4e7;
+						padding: 15px;
 						border-bottom: 1px solid #e2e4e7;
 					}
 				}
@@ -184,13 +180,13 @@
 		}
 	}
 
-	.wecodeart-license-manager {
+	.wecodeart-table {
 		border: 1px solid #e2e4e7;
 		border-collapse: collapse;
 
 		td,
 		th {
-			padding: 10px;
+			vertical-align: middle;
 			
 			&:not(:first-child) {
 				border-left: 1px solid #e2e4e7;
@@ -220,5 +216,3 @@
 		padding-right: 16px;
 	}
 }
-
-@import './codemirror/codemirror';
