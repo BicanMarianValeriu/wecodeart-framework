@@ -1,7 +1,8 @@
 v5.4.5
 - Updated - Starter content blockGap to group since it was disabled on columns (we might enable it on the theme)
 - Updated - Inputs to add form classes to Gutenberg Class suggestion extension
-- Updated - Admin styleing / show Licenses tab for upcoming extensions
+- Updated - Admin style improvements / show Licenses tab for upcoming extensions
+- Updated - Pass $attributes to Comments/Latest Posts Blocks (widgets) template filter
 
 v5.4.4
 - Updated - Header/Footer/Content PHP fallbacks

@@ -138,7 +138,7 @@ class Posts extends Dynamic {
 		$template .= '<!-- /wp:query -->';
 
 		// Allow users to change this template
-		$template = apply_filters( 'wecodeart/filter/gutenberg/latest-posts/template', parse_blocks( $template ) );
+		$template = apply_filters( 'wecodeart/filter/gutenberg/latest-posts/template', parse_blocks( $template ), $attributes );
 		// End Template
 		
 		$blocks = new \WP_Block_List( $template, $args );

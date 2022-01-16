@@ -516,6 +516,8 @@ const WeCodeArt = () => {
   const {
     wecodeartSettings,
     saveEntityRecord,
+    editEntityRecord,
+    deleteEntityRecord,
     isRequesting
   } = useSelect(select => {
     const {
@@ -533,11 +535,15 @@ const WeCodeArt = () => {
     return {
       isRequesting,
       saveEntityRecord,
+      editEntityRecord,
+      deleteEntityRecord,
       wecodeartSettings: getEntityRecord('wecodeart', 'settings')
     };
   });
   const tabProps = {
     saveEntityRecord,
+    editEntityRecord,
+    deleteEntityRecord,
     isRequesting,
     wecodeartSettings,
     createNotice

@@ -48,6 +48,8 @@ const WeCodeArt = () => {
 	const {
 		wecodeartSettings,
 		saveEntityRecord,
+		editEntityRecord,
+		deleteEntityRecord,
 		isRequesting,
 	} = useSelect(select => {
 		const { getEntityRecord } = select('core');
@@ -58,11 +60,13 @@ const WeCodeArt = () => {
 		return {
 			isRequesting,
 			saveEntityRecord,
+			editEntityRecord,
+			deleteEntityRecord,
 			wecodeartSettings: getEntityRecord('wecodeart', 'settings'),
 		};
 	});
 
-	const tabProps = { saveEntityRecord, isRequesting, wecodeartSettings, createNotice };
+	const tabProps = { saveEntityRecord, editEntityRecord, deleteEntityRecord, isRequesting, wecodeartSettings, createNotice };
 
 	let tabs = [{
 		name: 'wca-getting-started',

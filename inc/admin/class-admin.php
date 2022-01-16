@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.3.3
+ * @version		5.4.5
  */
 
 namespace WeCodeArt;
@@ -79,6 +79,7 @@ class Admin {
 	 * second DB interaction.
 	 *
 	 * @since 	5.0.0
+	 * @version 5.4.5
 	 *
 	 * @param   string  $key       	Option name.
 	 * @param   string  $setting   	Optional. Settings field name. Eventually defaults to `wecodeart` if not
@@ -92,14 +93,9 @@ class Admin {
 		$setting = $setting ?: 'wecodeart-settings';
 
 		// Allow child theme to short circuit this function.
-		$pre = apply_filters( "wecodeart/get_options/{$key}", null, $setting );
+		$pre = apply_filters( "wecodeart/options/{$key}", null, $setting );
 		if ( null !== $pre ) {
 			return $pre;
-		}
-
-		// Bypass cache if viewing site in Customizer.
-		if ( wecodeart_if( 'is_customizer' ) ) {
-			$use_cache = false;
 		}
 
 		// If we need to bypass the cache.
@@ -163,11 +159,12 @@ class Admin {
 	 * Register the default WeCodeArt settings.
 	 *
 	 * @since 	5.0.0
+	 * @version	5.4.5
 	 *
 	 * @return 	bool True of setting added, false otherwise.
 	 */
 	public function register_settings() {
-		return register_setting( 'wecodeart-settings', 'wecodeart-settings' );
+		return register_setting( 'wecodeart', 'wecodeart-settings' );
 	}
 
 	/**
