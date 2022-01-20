@@ -33,9 +33,9 @@ return [
 	</div>
 	<!-- /wp:cover -->
 	
-	<!-- wp:group {"style":{"spacing":{"blockGap":"1rem"}},"className":"my-md-5","layout":{"inherit":true}} -->
+	<!-- wp:group {"className":"my-md-5","layout":{"inherit":true}} -->
 	<div class="wp-block-group my-md-5">
-	<!-- wp:columns {"className":"flex-column flex-md-row"} -->
+	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}},"className":"flex-column flex-md-row"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
 	<!-- wp:column {"className":"p-2 mt-5 shadow-sm rounded"} -->
 	<div class="wp-block-column p-2 mt-5 shadow-sm rounded">
@@ -145,7 +145,7 @@ return [
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"style":{"spacing":{"blockGap":"1rem"}},"className":"my-5","layout":{"inherit":true}} -->
+	<!-- wp:group {"className":"my-5","layout":{"inherit":true}} -->
 	<div class="wp-block-group my-5">
 	<!-- wp:heading {"textAlign":"center"} -->
 	<h2 class="has-text-align-center">What Client\'s Say</h2>
@@ -153,7 +153,7 @@ return [
 	<!-- wp:separator {"color":"primary","className":"is-style-dots"} -->
 	<hr class="wp-block-separator has-text-color has-background has-primary-background-color has-primary-color is-style-dots"/>
 	<!-- /wp:separator -->
-	<!-- wp:columns {"className":"flex-column flex-lg-row"} -->
+	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}},"className":"flex-column flex-lg-row"} -->
 	<div class="wp-block-columns flex-column flex-lg-row">
 	<!-- wp:column {"className":"mb-3 mb-lg-0"} -->
 	<div class="wp-block-column mb-3 mb-lg-0">
