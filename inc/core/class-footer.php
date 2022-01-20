@@ -39,7 +39,7 @@ class Footer {
 	 * Output FOOTER markup function Plugin PHP fallback
 	 * 
 	 * @since 	1.0
-	 * @version	5.4.4
+	 * @version	5.4.5
 	 *
 	 * @return 	HTML 
 	 */
@@ -48,9 +48,10 @@ class Footer {
 			'theme' 	=> wecodeart( 'name' ),
 			'slug' 		=> 'footer',
 			'tagName' 	=> 'footer',
+			'className' => 'site-footer'
 		] );
 
-		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"site-footer","theme":"' . $args['theme'] . '"} /-->';
+		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '"} /-->';
 
 		echo do_blocks( $content ); 
 	}

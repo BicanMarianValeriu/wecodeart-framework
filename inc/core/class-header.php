@@ -39,7 +39,7 @@ class Header {
 	 * Output HEADER markup function Plugin PHP fallback
 	 *
 	 * @since 	unknown
-	 * @version	5.4.4
+	 * @version	5.4.5
 	 *
 	 * @return 	void 
 	 */
@@ -48,9 +48,10 @@ class Header {
 			'theme' 	=> wecodeart( 'name' ),
 			'slug' 		=> 'header',
 			'tagName' 	=> 'header',
+			'className'	=> 'site-footer'
 		] );
 
-		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"site-header","theme":"' . $args['theme'] . '"} /-->';
+		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '"} /-->';
 
 		echo do_blocks( $content );
 	}

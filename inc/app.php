@@ -119,6 +119,5 @@ return [
             'width'         => 60,
             'flex-height'   => true,
         ],
-        'customize-selective-refresh-widgets' => true,
     ],
 ];
