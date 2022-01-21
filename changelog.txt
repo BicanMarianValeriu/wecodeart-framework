@@ -3,6 +3,8 @@ v5.4.5
 - Updated - Inputs to add form classes to Gutenberg Class suggestion extension
 - Updated - Admin style improvements / show Licenses tab for upcoming extensions
 - Updated - Pass $attributes to Comments/Latest Posts Blocks (widgets) template filter
+- Removed - 2nd post-author with box style from single.html template
+- Removed - CF7 Plugin integration - it will be re-made as an extension
 
 v5.4.4
 - Updated - Header/Footer/Content PHP fallbacks

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-11 10:44+0000\n"
+"POT-Creation-Date: 2022-01-21 04:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -65,6 +65,10 @@ msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-template.php:114
 msgid "add one"
+msgstr ""
+
+#: inc/support/plugins/cf7/class-cf7.php:69
+msgid "Amazing news!"
 msgstr ""
 
 #: inc/gutenberg/blocks/widgets/class-rss.php:69
@@ -134,10 +138,6 @@ msgid_plural "%1$s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/support/plugins/cf7/class-cf7.php:78
-msgid "Contact Form 7 support is enabled!"
-msgstr ""
-
 #: views/general/credits.tpl.php:22
 #, php-format
 msgid "Copyright %s - All rights reserved."
@@ -152,7 +152,7 @@ msgstr ""
 msgid "Daily Archives: %s"
 msgstr ""
 
-#: inc/admin/class-admin.php:264
+#: inc/admin/class-admin.php:261
 msgid "Developer Mode"
 msgstr ""
 
@@ -181,6 +181,10 @@ msgstr ""
 
 #: inc/gutenberg/blocks/design/class-buttons.php:50
 msgid "Group"
+msgstr ""
+
+#: inc/support/plugins/cf7/class-cf7.php:72
+msgid "here"
 msgstr ""
 
 #. URI of the theme
@@ -305,10 +309,6 @@ msgstr ""
 msgid "Search Results for \"%s\"."
 msgstr ""
 
-#: inc/support/plugins/cf7/modules/class-submit.php:62
-msgid "Send"
-msgstr ""
-
 #: inc/gutenberg/class-gutenberg.php:251
 msgid "Skip to content"
 msgstr ""
@@ -326,7 +326,7 @@ msgstr ""
 msgid "The file must be of type CSS/JS."
 msgstr ""
 
-#: inc/admin/class-admin.php:215 inc/admin/class-admin.php:216
+#: inc/admin/class-admin.php:212 inc/admin/class-admin.php:213
 msgid "Theme Options"
 msgstr ""
 
@@ -377,6 +377,13 @@ msgstr ""
 msgid "Username or Email Address"
 msgstr ""
 
+#: inc/support/plugins/cf7/class-cf7.php:71
+#, php-format
+msgid ""
+"We have an extension that integrates our theme with Contact Form 7 plugin! "
+"You can get it (soon) from %s."
+msgstr ""
+
 #: inc/gutenberg/blocks/comment/class-form.php:173
 msgid "Website"
 msgstr ""
@@ -404,11 +411,6 @@ msgstr ""
 #, php-format
 msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
-msgstr ""
-
-#: inc/support/plugins/cf7/modules/class-module.php:52
-#, php-format
-msgid "When extending %s, you must create a `get_html` method."
 msgstr ""
 
 #: inc/gutenberg/blocks/post/class-author.php:50

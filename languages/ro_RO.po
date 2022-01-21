@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-01-11 10:45+0000\n"
+"PO-Revision-Date: 2022-01-21 04:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -76,6 +76,10 @@ msgstr "Despre"
 msgid "add one"
 msgstr "adaugă unul"
 
+#: inc/support/plugins/cf7/class-cf7.php:69
+msgid "Amazing news!"
+msgstr "Vesti uimitoare!"
+
 #: inc/gutenberg/blocks/widgets/class-rss.php:69
 msgid ""
 "An error has occurred, which probably means the feed is down. Try again "
@@ -147,10 +151,6 @@ msgstr[0] "%1$s comentariu"
 msgstr[1] "%1$s comentarii"
 msgstr[2] ""
 
-#: inc/support/plugins/cf7/class-cf7.php:78
-msgid "Contact Form 7 support is enabled!"
-msgstr "Asistența Formular de contact 7 este activată!"
-
 #: views/general/credits.tpl.php:22
 #, php-format
 msgid "Copyright %s - All rights reserved."
@@ -165,7 +165,7 @@ msgstr "Customizer"
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
 
-#: inc/admin/class-admin.php:264
+#: inc/admin/class-admin.php:261
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -199,6 +199,10 @@ msgstr "Notificarea nu a putut fi respinsă"
 #: inc/gutenberg/blocks/design/class-buttons.php:50
 msgid "Group"
 msgstr "Grupare"
+
+#: inc/support/plugins/cf7/class-cf7.php:72
+msgid "here"
+msgstr "aici"
 
 #. URI of the theme
 msgid "https://www.wecodeart.com/"
@@ -323,10 +327,6 @@ msgstr "Caută"
 msgid "Search Results for \"%s\"."
 msgstr "Rezultate căutare pentru \"%s\""
 
-#: inc/support/plugins/cf7/modules/class-submit.php:62
-msgid "Send"
-msgstr "Trimite"
-
 #: inc/gutenberg/class-gutenberg.php:251
 msgid "Skip to content"
 msgstr "Sari la conținut"
@@ -344,7 +344,7 @@ msgstr "Arhive etichetă: %s"
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
-#: inc/admin/class-admin.php:215 inc/admin/class-admin.php:216
+#: inc/admin/class-admin.php:212 inc/admin/class-admin.php:213
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -399,6 +399,15 @@ msgstr "actualizați PHP"
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
+#: inc/support/plugins/cf7/class-cf7.php:71
+#, php-format
+msgid ""
+"We have an extension that integrates our theme with Contact Form 7 plugin! "
+"You can get it (soon) from %s."
+msgstr ""
+"Avem o extensie care integrează tema noastră cu pluginul Contact Form 7! Îl "
+"puteți obține (în curând) de la %s."
+
 #: inc/gutenberg/blocks/comment/class-form.php:173
 msgid "Website"
 msgstr "Site"
@@ -434,11 +443,6 @@ msgid ""
 msgstr ""
 "Când adăugați o pictogramă SVG cu %s, trebuie să definiți cheile `viewBox` "
 "și `paths`."
-
-#: inc/support/plugins/cf7/modules/class-module.php:52
-#, php-format
-msgid "When extending %s, you must create a `get_html` method."
-msgstr "Când extindeți %s, trebuie să creați o metodă `get_html`."
 
 #: inc/gutenberg/blocks/post/class-author.php:50
 msgid "Wide Box"
