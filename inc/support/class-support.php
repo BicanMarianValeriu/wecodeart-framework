@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.3.8
+ * @version		5.4.5
  */
 
 namespace WeCodeArt;
@@ -38,12 +38,13 @@ class Support implements ArrayAccess {
 	public function init() {
 		// Theme Support
 		\add_action( 'after_setup_theme', [ $this, 'after_setup_theme'	] );
-		\add_action( 'after_setup_theme', [ $this, 'load_translations'	] );
 
 		// Register Default Integrations
 		$this->register( 'starter',				Support\Starter::class	    );
 		$this->register( 'markup',				Support\Markup::class	    );
+		$this->register( 'assets',				Support\Assets::class	    );
 		$this->register( 'styles',				Support\Styles::class	    );
+		$this->register( 'locale',				Support\Locale::class	    );
 		$this->register( 'files',				Support\FileSystem::class	);
         // Plugin Integrations
 		$this->register( 'plugin/anr', 			Support\Plugins\ANR::class 			);
@@ -67,34 +68,6 @@ class Support implements ArrayAccess {
             }
 			add_theme_support( $feature, $value );
 		}
-	}
-
-	/**
-	 * Load Translations
-	 *
-	 * @since	4.0.2
-	 * @version 4.0.2
-	 *
-	 * @return 	void
-	 */
-	public function load_translations() {
-		// Loads wp-content/languages/themes/wecodeart-it_IT.mo.
-		load_theme_textdomain(
-			'wecodeart',
-			trailingslashit( WP_LANG_DIR ) . 'themes' 
-		);
-
-		// Loads wp-content/themes/child-theme-name/languages/it_IT.mo.
-		load_theme_textdomain(
-			'wecodeart',
-			trailingslashit( wecodeart_config( 'paths' )['child'] ) . wecodeart_config( 'directories' )['languages']
-		);
-
-		// Loads wp-content/themes/wecodeart/languages/it_IT.mo.
-		load_theme_textdomain(
-			'wecodeart',
-			trailingslashit( wecodeart_config( 'paths' )['directory'] ) . wecodeart_config( 'directories' )['languages']
-		);
 	}
 
 	/**

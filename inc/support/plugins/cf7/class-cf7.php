@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
-use WeCodeArt\Core\Scripts;
+use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
 
@@ -29,7 +29,7 @@ use WeCodeArt\Admin\Notifications\Notification;
 class CF7 implements Integration {
 
 	use Singleton;
-	use Scripts\Base;
+	use Asset;
 
 	const NOTICE_ID = 'wecodeart-cf7-notice';
 

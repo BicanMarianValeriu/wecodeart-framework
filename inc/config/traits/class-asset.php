@@ -6,25 +6,25 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Core\Scripts\Base
+ * @subpackage 	Config\Asset
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
- * @since 		1.9
- * @version		5.0.0
+ * @since 		5.4.5
+ * @version		5.4.5
  */
 
-namespace WeCodeArt\Core\Scripts;
+namespace WeCodeArt\Config\Traits;
 
 defined( 'ABSPATH' ) || exit();
 
 /**
  * Base Trait Class for implementing make_handle()
  */
-trait Base {
+trait Asset {
 	/**
 	 * Make a script handle from the classname
 	 *
-	 * @since	3.9.5
-	 * @version	4.1.6
+	 * @since	5.4.5
+ 	 * @version	5.4.5
 	 *
 	 * @param	string 	$name
 	 *
@@ -33,14 +33,15 @@ trait Base {
 	protected function make_handle( $name = '', $namespace = __CLASS__ ) {
 		$handle = strtolower( str_replace( '\\', '-', $namespace ) );
 		$handle = $name ? $handle . '-' . $name : $handle;
+		
 		return sanitize_html_class( $handle );
 	}
 
 	/**
 	 * Retrieve an asset if path structure is the same as class
 	 *
-	 * @since	3.9.5
-	 * @version	5.0.0
+	 * @since	5.4.5
+ 	* @version	5.4.5
 	 *
 	 * @param	string 	$type
 	 * @param	string 	$name
@@ -48,6 +49,6 @@ trait Base {
 	 * @return 	string
 	 */
 	protected function get_asset( string $type, string $name = __CLASS__ ) {
-	 	return wecodeart_get_asset( $type, strtolower( str_replace( '\\', '-', $name ) ) );
+	 	return wecodeart_asset( $type, strtolower( str_replace( '\\', '-', $name ) ) );
 	}
 }

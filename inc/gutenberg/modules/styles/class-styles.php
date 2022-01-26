@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.4.3
+ * @version		5.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -18,8 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
-use WeCodeArt\Core\Scripts;
-use WeCodeArt\Support\FileSystem;
+use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -28,7 +27,7 @@ use function WeCodeArt\Functions\get_prop;
 class Styles implements Integration {
 
 	use Singleton;
-	use Scripts\Base;
+	use Asset;
 
 	/**
 	 * The CSS ID for registered style.

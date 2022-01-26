@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.3.3
+ * @version		5.4.5
  */
 
 namespace WeCodeArt;
@@ -17,7 +17,7 @@ namespace WeCodeArt;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Core\Scripts;
+use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -26,7 +26,7 @@ use function WeCodeArt\Functions\get_prop;
 class Gutenberg {
 
 	use Singleton;
-	use Scripts\Base;
+	use Asset;
 
 	/**
 	 * The Gutenberg Config.

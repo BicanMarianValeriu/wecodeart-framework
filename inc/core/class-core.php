@@ -9,7 +9,7 @@
  * @subpackage 	Core
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.0
- * @version		5.2.8
+ * @version		5.4.5
  */
 
 namespace WeCodeArt;
@@ -31,7 +31,6 @@ class Core {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		Core\Scripts	::get_instance();
 		Core\Header		::get_instance();
 		Core\Content	::get_instance();
 		Core\Footer		::get_instance();

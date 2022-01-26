@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.9.5
- * @version		5.4.4
+ * @version		5.4.5
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -65,6 +65,17 @@ wecodeart()->bind( 'integrations', function () {
  */
 wecodeart()->bind( 'markup', function () {
     return wecodeart( 'integrations' )->get( 'markup' )::get_instance();
+} );
+
+/**
+ * Bind assets.
+ * 
+ * @since   5.4.5
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'assets', function () {
+    return wecodeart( 'integrations' )->get( 'assets' )::get_instance();
 } );
 
 /**

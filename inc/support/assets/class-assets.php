@@ -6,39 +6,54 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Core\Scripts
+ * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
- * @since 		1.9
- * @version		5.3.8
+ * @since 		5.4.0
+ * @version		5.4.5
  */
 
-namespace WeCodeArt\Core;
+namespace WeCodeArt\Support;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Core\Scripts;
+use WeCodeArt\Integration;
+use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Conditional\Traits\No_Conditionals;
 use function WeCodeArt\Functions\get_prop;
 
 /**
- * Framework Assets
+ * The Fonts object.
  */
-class Scripts {
+final class Assets implements Integration {
 
 	use Singleton;
-	use Scripts\Base;
+	use Asset;
+	use No_Conditionals;
+
+	/**
+	 * Asset
+	 *
+	 * @since  	5.4.5
+	 * @var 	object
+	 */
+	public 	$Asset	= null;
 
 	/**
 	 * Send to Constructor
-	 *
-	 * @since 3.6.2
 	 */
 	public function init() {
-		// All starts here
+		$this->Asset	= ( new Assets\Asset( wecodeart_config() ) );
+	}
+
+	/**
+	 * Register hooks
+	 */
+	public function register_hooks() {
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'front_scripts'		], 0 );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'localize_js' 			], 90 );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			], 95 );
-		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] ); 
+		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] );
 	}
 
 	/**

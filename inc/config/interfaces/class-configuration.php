@@ -6,10 +6,10 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework.
- * @subpackage  WeCodeArt/Config/Interfaces/ConfigInterface
+ * @subpackage  WeCodeArt/Config/Interfaces/Config
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.9.5
- * @version		3.9.5
+ * @version		5.4.5
  */
 
 namespace WeCodeArt\Config\Interfaces;
@@ -19,7 +19,7 @@ namespace WeCodeArt\Config\Interfaces;
  *
  * @author     Bican Marian Valeriu <marianvaleriubican@gmail.com>
  */
-interface ConfigInterface {
+interface Configuration {
     /**
      * Get all of the configuration items for the application.
      *

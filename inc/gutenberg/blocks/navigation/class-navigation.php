@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.6
+ * @version		5.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -17,7 +17,7 @@ namespace WeCodeArt\Gutenberg\Blocks;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Core\Scripts;
+use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -27,7 +27,7 @@ use function WeCodeArt\Functions\get_prop;
 class Navigation extends Dynamic {
 
 	use Singleton;
-	use Scripts\Base;
+	use Asset;
 
 	/**
 	 * Block namespace.
@@ -143,9 +143,11 @@ class Navigation extends Dynamic {
 		$block_id	= uniqid();
 
 		// Styles
-		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [
-			'wecodeart-core-scripts'
-		], wecodeart( 'version' ) );
+		if( ! wp_style_is( $this->make_handle() ) ) {
+			wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [
+				'wecodeart-support-assets'
+			], wecodeart( 'version' ) );
+		}
 
 		return wecodeart( 'markup' )::wrap( 'navbar', [ [
 			'tag' 	=> 'nav',
@@ -166,9 +168,11 @@ class Navigation extends Dynamic {
 			if( get_prop( $attributes, 'overlayMenu' ) !== 'never' ) {
 
 				// Scripts
-				wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/navigation' ), [
-					'wecodeart-core-scripts'
-				], wecodeart( 'version' ), true );
+				if( ! wp_script_is( $this->make_handle() ) ) {
+					wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/navigation' ), [
+						'wecodeart-support-assets'
+					], wecodeart( 'version' ), true );
+				}
 
 				// Toggler
 				wecodeart_template( 'general/toggler', [

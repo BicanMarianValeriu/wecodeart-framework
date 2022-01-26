@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use ArrayAccess;
 use WeCodeArt\Singleton;
-use WeCodeArt\Core\Scripts;
+use WeCodeArt\Config\Traits\Asset;
 
 /**
  * Standard Inputs Markup
@@ -26,7 +26,7 @@ use WeCodeArt\Core\Scripts;
 class Inputs implements ArrayAccess {
 
 	use Singleton;
-    use Scripts\Base;
+    use Asset;
 
 	/**
      * All of the configuration items.
@@ -107,15 +107,15 @@ class Inputs implements ArrayAccess {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	5.3.7
+	 * @version	5.4.5
 	 */
 	public function assets() {
 		wp_register_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/forms' ), [
-            'wecodeart-core-scripts'
+            'wecodeart-support-assets'
         ], wecodeart( 'version' ) );
 
 		wp_register_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/forms' ), [
-            'wecodeart-core-scripts'
+            'wecodeart-support-assets'
         ], wecodeart( 'version' ), true );
 	}
 

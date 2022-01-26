@@ -9,14 +9,14 @@
  * @subpackage 	Markup\Template
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.7.3
- * @version     5.3.1
+ * @version     5.4.5
  */
 
 namespace WeCodeArt\Support\Markup;
 
 defined( 'ABSPATH' ) || exit(); 
 
-use WeCodeArt\Config\Interfaces\ConfigInterface;
+use WeCodeArt\Config\Interfaces\Configuration;
 use WeCodeArt\Config\Exceptions\FileNotFoundException;
 
 /**
@@ -42,7 +42,7 @@ class Template {
      *
      * @param $config
      */
-    public function __construct( ConfigInterface $config ) {
+    public function __construct( Configuration $config ) {
         $this->config = $config;
     }
 

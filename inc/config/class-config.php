@@ -9,7 +9,7 @@
  * @subpackage  WeCodeArt/Config
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.9.5
- * @version		4.1.5
+ * @version		5.4.5
  */
 
 namespace WeCodeArt;
@@ -17,7 +17,7 @@ namespace WeCodeArt;
 defined( 'ABSPATH' ) || exit();
 
 use ArrayAccess;
-use WeCodeArt\Config\Interfaces\ConfigInterface;
+use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\wp_parse_args_r;
 
 /**
@@ -25,7 +25,7 @@ use function WeCodeArt\Functions\wp_parse_args_r;
  *
  * @author     Bican Marian Valeriu <marianvaleriubican@gmail.com>
  */
-class Config implements ConfigInterface, ArrayAccess {
+class Config implements Configuration, ArrayAccess {
     /**
      * All of the configuration items.
      *

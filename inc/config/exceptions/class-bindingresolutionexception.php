@@ -13,6 +13,7 @@
  */
 
 namespace WeCodeArt\Config\Exceptions;
+
 use Exception;
 
 /**

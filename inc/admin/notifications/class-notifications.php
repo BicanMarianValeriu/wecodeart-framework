@@ -9,18 +9,16 @@
  * @subpackage 	Notifications
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.0.6
+ * @version		5.4.5
  */
 
 namespace WeCodeArt\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Support\Markup;
 use WeCodeArt\Singleton;
-use WeCodeArt\Core\Scripts;
+use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Admin\Notifications\Notification;
-use function WeCodeArt\Core\Scripts\get_asset;
 use function WeCodeArt\Functions\calc as wecodeart_calc;
 
 /**
@@ -31,7 +29,7 @@ use function WeCodeArt\Functions\calc as wecodeart_calc;
 class Notifications {
 
 	use Singleton;
-	use Scripts\Base;
+	use Asset;
 
 	/**
 	 * Option name to store notifications on.

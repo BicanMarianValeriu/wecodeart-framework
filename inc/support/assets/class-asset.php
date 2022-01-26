@@ -6,17 +6,17 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Core/Scripts/Asset
+ * @subpackage 	Support/Assets/Asset
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
- * @since 		3.9.5
- * @version		4.1.7
+ * @since 		5.4.5
+ * @version		5.4.5
  */ 
 
-namespace WeCodeArt\Core\Scripts;
+namespace WeCodeArt\Support\Assets;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Config\Interfaces\ConfigInterface;
+use WeCodeArt\Config\Interfaces\Configuration;
 use WeCodeArt\Config\Exceptions\FileNotFoundException;
 
 /**
@@ -27,7 +27,7 @@ class Asset {
 	/**
      * Theme config instance.
      *
-     * @var \WeCodeArt\Config\Interfaces\ConfigInterface
+     * @var \WeCodeArt\Config\Interfaces\Configuration
      */
 	protected $config;
 	
@@ -41,11 +41,12 @@ class Asset {
     /**
      * Construct asset.
      *
-     * @param \WeCodeArt\Config\Interfaces\ConfigInterface $config
+     * @param \WeCodeArt\Config\Interfaces\Configuration $config
      */
-    public function __construct( ConfigInterface $config ) {
+    public function __construct( Configuration $config ) {
         $this->config = $config;
 	}
+    
 	/**
      * Get asset file URI.
      *

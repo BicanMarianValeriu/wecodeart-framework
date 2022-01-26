@@ -17,7 +17,7 @@ namespace WeCodeArt;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Core\Scripts;
+use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Admin\Activation;
 use WeCodeArt\Admin\Notifications;
 
@@ -27,7 +27,7 @@ use WeCodeArt\Admin\Notifications;
 class Admin {
 
 	use Singleton;
-	use Scripts\Base;
+	use Asset;
 
 	const NAMESPACE = 'wecodeart/v1';
 

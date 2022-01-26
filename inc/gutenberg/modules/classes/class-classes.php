@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
-use WeCodeArt\Core\Scripts;
+use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Conditional\Traits\No_Conditionals;
 
 /**
@@ -28,7 +28,7 @@ class Classes implements Integration {
 
 	use Singleton;
 	use No_Conditionals;
-	use Scripts\Base;
+	use Asset;
 
 	/**
 	 * Register Hooks - into styles processor action if enabled
