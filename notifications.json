@@ -3,13 +3,8 @@
 	"items": [
 		{
 			"type": "info",
-			"title": "Out of Beta - Soon!",
-			"content": "WeCodeArt version 5+ will be soon out of Beta - as soon as WP 5.9 will launch on 25 January."
-		},
-		{
-			"type": "info",
-			"title": "Is a FSE beta - have patience!",
-			"content": "WeCodeArt version 5.0 is a Full Site Editing theme which means it will have API changes - please have patience and do not use on production!"
+			"title": "Where is the comments template?",
+			"content": "Please install Gutenberg Plugin - comments related blocks did not landed in WP 5.9 yet. If you are not using comments you can remove them from single.html template."
 		}
 	]
 }

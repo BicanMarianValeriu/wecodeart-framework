@@ -1,8 +1,9 @@
 v5.4.5
-- Updated - Starter content blockGap to group since it was disabled on columns (we might enable it on the theme)
 - Updated - Inputs to add form classes to Gutenberg Class suggestion extension
 - Updated - Admin style improvements / show Licenses tab for upcoming extensions
 - Updated - Pass $attributes to Comments/Latest Posts Blocks (widgets) template filter
+- Updated - Scripts to wecodeart( 'assets' ) refactored as extension
+- Updated - Locale integration moved from Support to own extension
 - Removed - 2nd post-author with box style from single.html template
 - Removed - CF7 Plugin integration - it will be re-made as an extension
 
