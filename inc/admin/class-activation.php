@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.4.5
+ * @version		5.4.6
  */
 
 namespace WeCodeArt\Admin;
@@ -141,7 +141,7 @@ class Activation {
 	 * Get Activation Validation Status
 	 *
 	 * @since 	3.5
-	 * @version	5.0.0
+	 * @version	5.4.6
 	 *
 	 * @return	boolean
 	 */
@@ -151,7 +151,7 @@ class Activation {
 		$this->compare_requirements();
 
 		foreach( $this->requirements as $val ) {
-			if( isset( $val['failed'] ) && $val['failed'] === true ) {
+			if( isset( $val['condition'] ) && $val['condition'] === false ) {
 				$this->status = false;
 				break;
 			}
@@ -176,12 +176,12 @@ class Activation {
 					continue;
 				}
 				// If we dont, simply return true on the failed key, it means we dont have it
-				$this->requirements[$key]['failed'] = \is_plugin_active( $val['required'] ) === false;
+				$this->requirements[$key]['condition'] = \is_plugin_active( $val['required'] ) === false;
 				continue;
 			}
 
 			if( isset( $val['installed'] ) && isset( $val['required'] ) ) {
-				$this->requirements[$key]['failed'] = \version_compare( $val['installed'], $val['required'], '<=' );
+				$this->requirements[$key]['condition'] = \version_compare( $val['installed'], $val['required'], '>=' );
 			}
 		}
 	}
@@ -256,12 +256,12 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	5.0.0
+	 * @version	5.4.6
 	 */
 	public function admin_notice() {
 		if( ! $this->requirements ) return;
 		foreach( $this->requirements as $key => $val ) {
-			if( isset( $val['failed'] ) && $val['failed'] === true ) {
+			if( isset( $val['condition'] ) && $val['condition'] === false ) {
 				$notification = new Notification( wpautop( $val['i18n'] ), [ 'type' => Notification::ERROR ] );
 			
 				Notifications::get_instance()->add_notification( $notification );

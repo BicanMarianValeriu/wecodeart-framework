@@ -30,7 +30,7 @@ const {
 const { currentUser, theme: { version: themeVersion } } = wecodeart;
 
 /* Settings */
-import { GettingStarted, Extensions, Licenses, Notices } from './components';
+import { GettingStarted, Extensions, Licenses, Notices, Donate } from './components';
 
 import './../../scss/admin/index.scss';
 
@@ -116,6 +116,7 @@ const WeCodeArt = () => {
 						__('Congratulations %s! You`ve just unlocked more Gutenberg block editor tools for easier editing and better workflow.', 'wecodeart'),
 						currentUser
 					)}</p>
+					<Donate />
 				</div>
 				<PanelRow>
 					<TabPanel className="wecodeart-tab-panel"

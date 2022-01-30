@@ -1,3 +1,7 @@
+v5.4.6
+- Added - Admin Donate button on admin page
+- Fixed - Admin Activation issue with wrong version_compare implementation
+
 v5.4.5
 - Updated - Inputs to add form classes to Gutenberg Class suggestion extension
 - Updated - Admin style improvements / show Licenses tab for upcoming extensions

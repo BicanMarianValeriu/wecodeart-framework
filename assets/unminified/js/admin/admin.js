@@ -154,6 +154,50 @@ const {
 
 /***/ }),
 
+/***/ "./src/js/admin/components/donate.js":
+/*!*******************************************!*\
+  !*** ./src/js/admin/components/donate.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const donate = () => {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "mb-3"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("form", {
+    action: "https://www.paypal.com/donate",
+    method: "post",
+    target: "_top"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
+    type: "hidden",
+    name: "hosted_button_id",
+    value: "PV9A4JDX84Z3W"
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
+    type: "image",
+    src: "https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif",
+    border: "0",
+    name: "submit",
+    title: "Support the development of WeCodeArt Framework!",
+    alt: "Donate with PayPal button"
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+    alt: "",
+    border: "0",
+    src: "https://www.paypal.com/en_US/i/scr/pixel.gif",
+    width: "1",
+    height: "1"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (donate);
+
+/***/ }),
+
 /***/ "./src/js/admin/components/extensions.js":
 /*!***********************************************!*\
   !*** ./src/js/admin/components/extensions.js ***!
@@ -282,7 +326,7 @@ const {
 /*!******************************************!*\
   !*** ./src/js/admin/components/index.js ***!
   \******************************************/
-/*! exports provided: Notices, Licenses, Extensions, GettingStarted */
+/*! exports provided: Notices, Licenses, Extensions, GettingStarted, Donate */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -298,6 +342,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _gettingStarted__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gettingStarted */ "./src/js/admin/components/gettingStarted.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GettingStarted", function() { return _gettingStarted__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _donate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./donate */ "./src/js/admin/components/donate.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Donate", function() { return _donate__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
 
 
 
@@ -587,7 +635,7 @@ const WeCodeArt = () => {
     className: "components-panel__header"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("p", {
     className: "wecodeart-panel__header-hint"
-  }, __('Appearance', 'wecodeart'), " \u2192 WeCodeArt"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h2", null, __('Getting Started with', 'wecodeart'), " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("strong", null, "WeCodeArt Framework"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("code", null, themeVersion)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("p", null, sprintf(__('Congratulations %s! You`ve just unlocked more Gutenberg block editor tools for easier editing and better workflow.', 'wecodeart'), currentUser))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TabPanel, {
+  }, __('Appearance', 'wecodeart'), " \u2192 WeCodeArt"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h2", null, __('Getting Started with', 'wecodeart'), " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("strong", null, "WeCodeArt Framework"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("code", null, themeVersion)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("p", null, sprintf(__('Congratulations %s! You`ve just unlocked more Gutenberg block editor tools for easier editing and better workflow.', 'wecodeart'), currentUser)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_components__WEBPACK_IMPORTED_MODULE_2__["Donate"], null)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TabPanel, {
     className: "wecodeart-tab-panel",
     activeClass: "active-tab",
     initialTabName: initialTab,
