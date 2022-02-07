@@ -158,7 +158,7 @@ abstract class Base {
 	 * Render the messages HTML of the input
      *
      * @since   5.0.0
-     * @version 5.3.3
+     * @version 5.4.7
 	 * @param 	bool    $echo
      *
 	 * @return	string
@@ -177,10 +177,17 @@ abstract class Base {
 		if( $messages ) {
 			foreach( $messages as $key => $msg ) {
                 if( empty( $msg ) ) continue;
-				$data 		= is_string( $msg ) ? [ 'text' => $msg ] : $msg;
-				$message 	= isset( $data['text'] ) ? $data['text'] : '';
-				$class		= isset( $data['class'] ) ? $data['class'] : $key . '-tooltip';
-				$html .= sprintf( '<span class="%s">%s</span>', esc_attr( $class ), $message );
+
+				$data   = is_string( $msg ) ? [ 'text' => $msg ] : $msg;
+                $data   = array_map( 'trim', $data );
+
+                if( empty( $data['text'] ) ) continue;
+                
+				$html .= sprintf(
+                    '<span class="%s">%s</span>',
+                    isset( $data['class'] ) ? $data['class'] : $key . '-tooltip',
+                    $data['text']
+                );
 			}
 		}
 

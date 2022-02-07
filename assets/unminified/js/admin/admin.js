@@ -173,7 +173,7 @@ const donate = () => {
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("form", {
     action: "https://www.paypal.com/donate",
     method: "post",
-    target: "_top"
+    target: "_blank"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
     type: "hidden",
     name: "hosted_button_id",
@@ -186,11 +186,11 @@ const donate = () => {
     title: "Support the development of WeCodeArt Framework!",
     alt: "Donate with PayPal button"
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
-    alt: "",
-    border: "0",
     src: "https://www.paypal.com/en_US/i/scr/pixel.gif",
     width: "1",
-    height: "1"
+    height: "1",
+    alt: "",
+    border: "0"
   })));
 };
 

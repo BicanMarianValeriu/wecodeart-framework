@@ -93,7 +93,7 @@ class Social extends Dynamic {
 		if( empty( $service ) ) return $inline_css;
 
 		$colors = [
-			'link'		=> '#f0f0f0',
+			'link'		=> 'currentColor',
 			'amazon' 	=> '#f90',
 			'bandcamp' 	=> '#1ea0c3',
 			'behance' 	=> '#0757fe',

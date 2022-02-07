@@ -125,9 +125,10 @@
 			],
 			"link": true,
 			"custom": true,
+			"customDuotone": true,
 			"customGradient": true,
-			"corePalette": false,
-			"coreGradients": false
+			"defaultGradients": false,
+			"defaultPalette": false
 		},
 		"custom": {
 			"breakpoints": {

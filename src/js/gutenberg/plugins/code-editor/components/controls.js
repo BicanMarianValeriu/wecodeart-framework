@@ -2,10 +2,23 @@
  * WordPress dependencies
  */
 const {
-	compose: { compose },
-	data: { useSelect, dispatch },
-	element: { useState, useEffect },
-	components: { withSpokenMessages }
+	compose: {
+		compose
+	},
+	data: {
+		useSelect,
+		dispatch
+	},
+	blocks: {
+		parse,
+	},
+	element: {
+		useState,
+		useEffect
+	},
+	components: {
+		withSpokenMessages
+	}
 } = wp;
 
 const CodeEditor = () => {
@@ -40,15 +53,14 @@ const CodeEditor = () => {
 			const textEditor = document.querySelector('.editor-post-text-editor');
 			const checkChanges = wp.codeEditor.initialize(textEditor, editorSettings);
 
-			checkChanges.codemirror.on('change', (params) => {
-				const content = params.getValue();
+			checkChanges.codemirror.on('change', ({ getValue }) => {
+				const content = getValue();
 				textEditor.innerHTML = content;
 				dispatch('core/editor').editPost({ content });
 			});
 
-			checkChanges.codemirror.on('blur', (params) => {
-				const content = params.getValue();
-				const blocks = parse(content);
+			checkChanges.codemirror.on('blur', ({ getValue }) => {
+				const blocks = parse(getValue());
 				dispatch('core/editor').resetEditorBlocks(blocks);
 			});
 

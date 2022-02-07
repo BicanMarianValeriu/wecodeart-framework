@@ -1,3 +1,19 @@
+v5.4.7
+- Updated - Input validation message trim() text before skipping empty
+- Updated - Admin donate link form click on new tab
+- Updated - Temporary remove "gutenberg_experimental_global_styles_render_svg_filters"
+- Updated - Propery disabled default color palette and gradients
+- Updated - Inputs markup for checkbox/radio groups wrapper from fieldset to span
+- Updated - Post Content block pagination implementation to be the same as core
+- Updated - Styles Extension to use Focal property parser for "object-position" css property (same as background-position)
+- Removed - Yoast custom author box template / will be replaced by a block pattern with post-author blocks
+- Fixed - Cover Block bug with custom gradient (Styles Extension)
+- Fixed - Cover Block bug with object position (Styles Extension)
+- Fixed - Issue with Codemirror when switching between Code Editor/Visual Editor views in Gutenberg
+- Fixed - Issue with Core frontend JS routing inline callback hooking into "un-registered" script (used core handle by default)
+- Added - Yoast shortcode for author social profiles: [yoast-socials]
+- Added - Base dark style variation (requires Gutenberg plugin until it lands in WP 6.0)
+
 v5.4.6
 - Added - Admin Donate button on admin page
 - Fixed - Admin Activation issue with wrong version_compare implementation

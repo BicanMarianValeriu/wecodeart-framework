@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.4.7
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -63,14 +63,14 @@ class Fieldset extends Base {
 	public function content() {
         wecodeart( 'markup' )::wrap( 'fieldset-' . $this->type, [
             [
-                'tag'   => 'fieldset',
+                'tag'   => 'span',
                 'attrs' => [
-                    'class' => implode( ' ', [ 'fieldset', 'fieldset--' . $this->type ] ),
+                    'class' => get_prop( $this->attrs, [ 'class' ] ),
                 ]
             ]
         ], function() {
             // Legend
-            $this->label();
+            $this->get_label();
             
             // Fields
             $fields = '';
@@ -88,6 +88,9 @@ class Fieldset extends Base {
                 ], false );
             }
 
+            // Messages
+            $fields .= $this->get_messages();
+
             // Already escaped in the Basic Input and its methods
             echo $fields; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         } );
@@ -99,7 +102,7 @@ class Fieldset extends Base {
      * @since   5.0.0
 	 * @return	mixed|string
 	 */
-	public function label() {
+	public function get_label() {
         if( empty( $this->label ) ) return;
 
         wecodeart( 'markup' )::wrap( 'fieldset-label', [

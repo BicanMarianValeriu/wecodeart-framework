@@ -1,0 +1,17 @@
+{
+	"$schema": "http://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"styles": {
+		"elements": {
+			"link": {
+				"color": {
+					"text": "var:preset|color|primary"
+				}
+			}
+		},
+		"color": {
+			"background": "var:preset|color|dark",
+			"text": "var:preset|color|white"
+		}
+	}
+}

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.3
+ * @version		5.4.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -48,7 +48,6 @@ class Content extends Dynamic {
         add_filter( 'wp_link_pages_link',  	 		[ $this, 'wp_link_pages_link' 	] );
 		add_filter( 'wp_link_pages_args',   		[ $this, 'wp_link_pages_args' 	] );
 		add_filter( 'the_password_form',			[ $this, 'the_password_form' 	] );
-		add_filter( 'the_content',          		[ $this, 'post_pagination'], 100 );
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -97,6 +96,12 @@ class Content extends Dynamic {
 		}
 
 		$content = get_the_content();
+
+		// Check for nextpage to display page links for paginated posts.
+		if ( has_block( 'core/nextpage' ) ) {
+			$content .= wp_link_pages( [ 'echo' => 0 ] );
+		}
+		
 		/**
 		 * This filter is documented in wp-includes/post-template.php 
 		 */
@@ -109,11 +114,11 @@ class Content extends Dynamic {
 
 		$classnames = [ 'wp-block-post-content' ];
 
-		if( $value = get_prop( $attributes, 'textAlign', false ) ) {
-			$classnames[] = 'has-text-align-' . $value;
-		}
+		// if( $value = get_prop( $attributes, 'textAlign' ) ) {
+		// 	$classnames[] = 'has-text-align-' . $value;
+		// }
 
-		if( $value = get_prop( $attributes, 'className', false ) ) {
+		if( $value = get_prop( $attributes, 'className' ) ) {
 			$classnames[] = $value;
 		}
 
@@ -126,24 +131,6 @@ class Content extends Dynamic {
 			]
 		], $content, [], false );
 	}
-
-	/**
-     * WP-Link Pages for single
-     *
-     * @since	unknown
-     * @version 5.0.0
-     *
-     * @return  string
-     */
-    public function post_pagination( $content ) {
-        global $multipage;
-
-        if( is_singular() && 0 !== $multipage ) {
-            $content .= wp_link_pages();
-        }
-
-        return $content;
-    }
 
     /**
      * WP-Link Pages for paginated posts

@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.4.0
- * @version		5.4.5
+ * @version		5.4.7
  */
 
 namespace WeCodeArt\Support;
@@ -113,16 +113,17 @@ final class Assets implements Integration {
 	 * WeCodeArt JS Inline
 	 *
 	 * @since	4.1.5
-	 * @version	4.1.8
+	 * @version	5.4.7
 	 *
 	 * @return 	void
 	 */
 	public function inline_js() {
-		global $wp_scripts;
 		$data = 'document.addEventListener("DOMContentLoaded",function(){';
-		$data .= 'var _wjs = new wecodeart.JSM(wecodeart);_wjs.loadEvents();';
+		$data .= 'var _wjs = new wecodeart.JSM(wecodeart);';
+		$data .= '_wjs.loadEvents();';
 		$data .= '});';
-		wp_add_inline_script( $wp_scripts->queue[ count( $wp_scripts->queue ) - 1 ], $data );
+
+		wp_add_inline_script( $this->make_handle(), $data );
 	}
 
 	/**

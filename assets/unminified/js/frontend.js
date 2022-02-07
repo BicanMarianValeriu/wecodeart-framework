@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/frontend.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/frontend/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -412,104 +412,10 @@ return loadjs;
 
 /***/ }),
 
-/***/ "./src/js/frontend.js":
-/*!****************************!*\
-  !*** ./src/js/frontend.js ***!
-  \****************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/plugins/wecodeart-Component.js");
-/* harmony import */ var _plugins_wecodeart_JSManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./plugins/wecodeart-JSManager */ "./src/js/plugins/wecodeart-JSManager.js");
-/* harmony import */ var _plugins_wecodeart_Template__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/wecodeart-Template */ "./src/js/plugins/wecodeart-Template.js");
-/* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! loadjs */ "./node_modules/loadjs/dist/loadjs.umd.js");
-/* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(loadjs__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _helpers_requireJs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/requireJs */ "./src/js/helpers/requireJs.js");
-/* harmony import */ var _helpers_createParams__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./helpers/createParams */ "./src/js/helpers/createParams.js");
-/* harmony import */ var _helpers_parseData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/parseData */ "./src/js/helpers/parseData.js");
-/* harmony import */ var _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helpers/hasScrollbar */ "./src/js/helpers/hasScrollbar.js");
-/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
-// WeCodeArt
-
-
-
-
-
-
-
- // Styles
-
-
-const {
-  addAction
-} = wp.hooks;
-addAction('wecodeart.route', 'wecodeart/developer/log', filterLog, 10);
-
-function filterLog(route, func, args) {
-  const {
-    isDevMode = false
-  } = wecodeart;
-
-  if (isDevMode) {
-    if (document.getElementById('wecodeart-core-scripts-livereload-js')) {
-      console.log('DEV Server: Livereload::running!');
-    } else {
-      console.log('DEV Server: Livereload::paused!');
-    }
-
-    console.log('Loaded: ', route, '::', func);
-    if (args) console.log(args);
-  }
-}
-
-(function (wecodeart) {
-  /**
-   * Base WCA Functions
-   * @since 3.6
-   */
-  wecodeart.plugins = {};
-  wecodeart.fn = {
-    hasScrollbar: _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["default"],
-    createParams: _helpers_createParams__WEBPACK_IMPORTED_MODULE_5__["default"],
-    getOptions: _helpers_parseData__WEBPACK_IMPORTED_MODULE_6__["default"],
-    requireJs: _helpers_requireJs__WEBPACK_IMPORTED_MODULE_4__["default"],
-    loadJs: (loadjs__WEBPACK_IMPORTED_MODULE_3___default())
-  };
-  /**
-   * @description
-   * Setup JS URLs that are lazy loaded from CDN/Theme with IDs to easly load them later
-   * without using multiple sources and/or npm packages
-   * This helps us to avoid updating multiple files and/or use multiple sources of the same script
-   * @see example under common key and below
-   */
-
-  wecodeart.lazyJs = {
-    // Use for popups
-    'sweetalert': ['//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.css', '//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.js'],
-    // Use for lighbox galleries
-    'photoswipe': ['//unpkg.com/photoswipe@4.1.3/dist/default-skin/default-skin.css', '//unpkg.com/photoswipe@4.1.3/dist/photoswipe.css', '//unpkg.com/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js', '//unpkg.com/photoswipe@4.1.3/dist/photoswipe.min.js']
-  };
-  wecodeart.routes = {
-    common: {
-      init: () => {
-        Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleBodyJSClass"])();
-        Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrolled"])();
-        Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"])();
-        window.onresize = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"];
-        window.onscroll = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrolled"];
-      }
-    }
-  };
-}).apply(undefined, [window.wecodeart]);
-
-/***/ }),
-
-/***/ "./src/js/helpers/camelCase.js":
-/*!*************************************!*\
-  !*** ./src/js/helpers/camelCase.js ***!
-  \*************************************/
+/***/ "./src/js/frontend/helpers/camelCase.js":
+/*!**********************************************!*\
+  !*** ./src/js/frontend/helpers/camelCase.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -524,10 +430,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/helpers/createParams.js":
-/*!****************************************!*\
-  !*** ./src/js/helpers/createParams.js ***!
-  \****************************************/
+/***/ "./src/js/frontend/helpers/createParams.js":
+/*!*************************************************!*\
+  !*** ./src/js/frontend/helpers/createParams.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -552,10 +458,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/helpers/hasScrollbar.js":
-/*!****************************************!*\
-  !*** ./src/js/helpers/hasScrollbar.js ***!
-  \****************************************/
+/***/ "./src/js/frontend/helpers/hasScrollbar.js":
+/*!*************************************************!*\
+  !*** ./src/js/frontend/helpers/hasScrollbar.js ***!
+  \*************************************************/
 /*! exports provided: default, handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -605,10 +511,10 @@ const handleBodyJSClass = () => {
 
 /***/ }),
 
-/***/ "./src/js/helpers/parseData.js":
-/*!*************************************!*\
-  !*** ./src/js/helpers/parseData.js ***!
-  \*************************************/
+/***/ "./src/js/frontend/helpers/parseData.js":
+/*!**********************************************!*\
+  !*** ./src/js/frontend/helpers/parseData.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -637,10 +543,10 @@ function parseData(opts) {
 
 /***/ }),
 
-/***/ "./src/js/helpers/requireJs.js":
-/*!*************************************!*\
-  !*** ./src/js/helpers/requireJs.js ***!
-  \*************************************/
+/***/ "./src/js/frontend/helpers/requireJs.js":
+/*!**********************************************!*\
+  !*** ./src/js/frontend/helpers/requireJs.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -662,10 +568,109 @@ function require(bundles, bundleIds, callbackFn) {
 
 /***/ }),
 
-/***/ "./src/js/plugins/wecodeart-Component.js":
-/*!***********************************************!*\
-  !*** ./src/js/plugins/wecodeart-Component.js ***!
-  \***********************************************/
+/***/ "./src/js/frontend/index.js":
+/*!**********************************!*\
+  !*** ./src/js/frontend/index.js ***!
+  \**********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/frontend/plugins/wecodeart-Component.js");
+/* harmony import */ var _plugins_wecodeart_JSManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./plugins/wecodeart-JSManager */ "./src/js/frontend/plugins/wecodeart-JSManager.js");
+/* harmony import */ var _plugins_wecodeart_Template__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/wecodeart-Template */ "./src/js/frontend/plugins/wecodeart-Template.js");
+/* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! loadjs */ "./node_modules/loadjs/dist/loadjs.umd.js");
+/* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(loadjs__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _helpers_requireJs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/requireJs */ "./src/js/frontend/helpers/requireJs.js");
+/* harmony import */ var _helpers_createParams__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./helpers/createParams */ "./src/js/frontend/helpers/createParams.js");
+/* harmony import */ var _helpers_parseData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/parseData */ "./src/js/frontend/helpers/parseData.js");
+/* harmony import */ var _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helpers/hasScrollbar */ "./src/js/frontend/helpers/hasScrollbar.js");
+/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
+// WeCodeArt
+
+
+
+
+
+
+
+ // Styles
+
+
+const {
+  addAction
+} = wp.hooks;
+addAction('wecodeart.route', 'wecodeart/developer/log', filterLog, 10);
+let liveReloadLoad;
+
+function filterLog(route, func, args) {
+  const {
+    isDevMode = false
+  } = wecodeart;
+
+  if (isDevMode) {
+    if (!liveReloadLoad) {
+      if (document.getElementById('wecodeart-support-assets-livereload-js')) {
+        console.log('DEV Server: Livereload::running!');
+      } else {
+        console.log('DEV Server: Livereload::paused!');
+      }
+
+      liveReloadLoad = true;
+    }
+
+    console.log('Loaded: ', route, '::', func);
+    if (args) console.log(args);
+  }
+}
+
+(function (wecodeart) {
+  /**
+   * Base WCA Functions
+   * @since 3.6
+   */
+  wecodeart.plugins = {};
+  wecodeart.fn = {
+    hasScrollbar: _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["default"],
+    createParams: _helpers_createParams__WEBPACK_IMPORTED_MODULE_5__["default"],
+    getOptions: _helpers_parseData__WEBPACK_IMPORTED_MODULE_6__["default"],
+    requireJs: _helpers_requireJs__WEBPACK_IMPORTED_MODULE_4__["default"],
+    loadJs: (loadjs__WEBPACK_IMPORTED_MODULE_3___default())
+  };
+  /**
+   * @description
+   * Setup JS URLs that are lazy loaded from CDN/Theme with IDs to easly load them later
+   * without using multiple sources and/or npm packages
+   * This helps us to avoid updating multiple files and/or use multiple sources of the same script
+   * @see example under common key and below
+   */
+
+  wecodeart.lazyJs = {
+    // Use for popups
+    'sweetalert': ['//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.css', '//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.js'],
+    // Use for lighbox galleries
+    'photoswipe': ['//unpkg.com/photoswipe@4.1.3/dist/default-skin/default-skin.css', '//unpkg.com/photoswipe@4.1.3/dist/photoswipe.css', '//unpkg.com/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js', '//unpkg.com/photoswipe@4.1.3/dist/photoswipe.min.js']
+  };
+  wecodeart.routes = {
+    common: {
+      init: () => {
+        Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleBodyJSClass"])();
+        Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrolled"])();
+        Object(_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"])();
+        window.onresize = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrollbar"];
+        window.onscroll = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_7__["handleDocumentScrolled"];
+      }
+    }
+  };
+}).apply(undefined, [window.wecodeart]);
+
+/***/ }),
+
+/***/ "./src/js/frontend/plugins/wecodeart-Component.js":
+/*!********************************************************!*\
+  !*** ./src/js/frontend/plugins/wecodeart-Component.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -738,17 +743,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/plugins/wecodeart-JSManager.js":
-/*!***********************************************!*\
-  !*** ./src/js/plugins/wecodeart-JSManager.js ***!
-  \***********************************************/
+/***/ "./src/js/frontend/plugins/wecodeart-JSManager.js":
+/*!********************************************************!*\
+  !*** ./src/js/frontend/plugins/wecodeart-JSManager.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_camelCase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/camelCase */ "./src/js/helpers/camelCase.js");
-/* harmony import */ var _helpers_requireJs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/requireJs */ "./src/js/helpers/requireJs.js");
+/* harmony import */ var _helpers_camelCase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/camelCase */ "./src/js/frontend/helpers/camelCase.js");
+/* harmony import */ var _helpers_requireJs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/requireJs */ "./src/js/frontend/helpers/requireJs.js");
 
 
 /**
@@ -871,10 +876,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/plugins/wecodeart-Template.js":
-/*!**********************************************!*\
-  !*** ./src/js/plugins/wecodeart-Template.js ***!
-  \**********************************************/
+/***/ "./src/js/frontend/plugins/wecodeart-Template.js":
+/*!*******************************************************!*\
+  !*** ./src/js/frontend/plugins/wecodeart-Template.js ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

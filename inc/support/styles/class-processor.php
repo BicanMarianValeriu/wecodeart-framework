@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles\Processor
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.2.6
+ * @version		5.4.7
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -322,6 +322,7 @@ abstract class Processor {
 			'background' 			=> Property\Background::class,
 			'background-image'		=> Property\Background::class,
 			'background-position' 	=> Property\Focal::class,
+			'object-position' 		=> Property\Focal::class,
 		] );
 
 		if ( array_key_exists( $property, $properties ) ) {

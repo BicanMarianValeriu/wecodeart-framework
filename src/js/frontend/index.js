@@ -14,13 +14,17 @@ import './../../scss/frontend/frontend.scss';
 const { addAction } = wp.hooks;
 
 addAction('wecodeart.route', 'wecodeart/developer/log', filterLog, 10);
+let liveReloadLoad;
 function filterLog(route, func, args) {
 	const { isDevMode = false } = wecodeart;
 	if (isDevMode) {
-		if (document.getElementById('wecodeart-core-scripts-livereload-js')) {
-			console.log('DEV Server: Livereload::running!');
-		} else {
-			console.log('DEV Server: Livereload::paused!');
+		if(!liveReloadLoad) {
+			if (document.getElementById('wecodeart-support-assets-livereload-js')) {
+				console.log('DEV Server: Livereload::running!');
+			} else {
+				console.log('DEV Server: Livereload::paused!');
+			}
+			liveReloadLoad = true;
 		}
 
 		console.log('Loaded: ', route, '::', func);

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.4.5
+ * @version		5.4.7
  */
 
 namespace WeCodeArt;
@@ -62,6 +62,11 @@ class Gutenberg {
 		// Skip links.
 		remove_action( 'wp_footer', 				'the_block_template_skip_link' );
 		add_action( 'wp_footer', 					[ $this, 'the_skip_link' ] );
+
+		// Remove GB plugin unnecessary functions
+		if( function_exists( 'gutenberg_experimental_global_styles_render_svg_filters' ) ) {
+			remove_action( 'wp_body_open', 'gutenberg_experimental_global_styles_render_svg_filters' );
+		}
 
 		// Modules.
 		Gutenberg\Modules::get_instance();
@@ -156,7 +161,7 @@ class Gutenberg {
 		);
 		
 		$code_mirror = ''; // Adds a border to CodeMirror to match WP and fixes height.
-		$code_mirror .= '.CodeMirror.CodeMirror-wrap{height:auto;margin-bottom:1rem;border:1px solid #949494;}';
+		$code_mirror .= '.CodeMirror.CodeMirror-wrap{height:auto;margin-bottom:1rem;border:1px solid #949494;z-index:0;}';
 		wp_add_inline_style( 'wp-editor', $code_mirror );
 	}
 
