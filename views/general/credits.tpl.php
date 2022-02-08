@@ -8,10 +8,15 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Footer Credits
  * @since	 	5.0.0
- * @version    	5.2.4
+ * @version    	5.4.8
  */
 
 defined( 'ABSPATH' ) || exit();
+
+/**
+ * @param   string  $year   Current Year
+ * @param   string  $copy   Copy Symbol
+ */
 
 ?>
 <div class="wp-site-credits">
@@ -19,7 +24,7 @@ defined( 'ABSPATH' ) || exit();
         <div class="has-text-align-center">
             <span class="wp-site-credits__text"><?php
                 
-                echo wp_kses_post( sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), '&copy; ' . date( 'Y' ) ) );
+                echo wp_kses_post( sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), join( ' ', [ $copy, $year ] ) ) );
                 
             ?></span>
             <span class="wp-site-credits__theme"><?php

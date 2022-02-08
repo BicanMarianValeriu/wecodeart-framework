@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -93,7 +93,7 @@ class Social extends Dynamic {
 		if( empty( $service ) ) return $inline_css;
 
 		$colors = [
-			'link'		=> 'currentColor',
+			'link'		=> '', // Preserve link color
 			'amazon' 	=> '#f90',
 			'bandcamp' 	=> '#1ea0c3',
 			'behance' 	=> '#0757fe',

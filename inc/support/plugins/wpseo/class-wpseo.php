@@ -58,8 +58,9 @@ class WPSeo implements Integration {
 		add_filter( 'wecodeart/filter/template/context', 		[ $this, 'filter_category_context' 	], 10, 2 );
 
 		// Author Social - note for code reviewers
-		// This will be eventually removed as soon as I figure out another way (maybe patterns)
-		// Its only used when Yoast SEO plugin is installed and enabled to show author profiles
+		// This will be eventually removed as soon as I figure out another way (maybe PHP patterns?)
+		// Its only used when Yoast SEO plugin is installed and enabled.
+		// Renders author social profiles using core/social-links block markup
 		add_action( 'init', [ $this, 'register_social' ] );
 	}
 
@@ -96,26 +97,31 @@ class WPSeo implements Integration {
 	 * Register Social Profiles
 	 *
 	 * @since	5.4.7
-	 * @version 5.4.7
+	 * @version 5.4.8
 	 *
 	 * @return 	array
 	 */
 	public function register_social() {
 		global $shortcode_tags;
-
-		$shortcode_tags['yoast-socials'] = [ $this, 'render_social' ];
+		
+		// Bail if the author of the plugin decides to create one.
+		if( ! isset( $shortcode_tags['yoast-author-social'] ) ) {
+			$shortcode_tags['yoast-author-social'] = [ $this, 'render_social' ];
+		}
 	}
 
 	/**
 	 * Yoast's Author Social
 	 *
 	 * @since	5.4.7
-	 * @version 5.4.7
+	 * @version 5.4.8
 	 *
 	 * @return 	array
 	 */
 	public function render_social( $atts ) {
 		global $post;
+
+		if( ! is_object( $post ) ) return;
 
 		$class_names	= [ 'wp-block-social-links' ];
 
@@ -124,7 +130,6 @@ class WPSeo implements Integration {
 			'color' 		=> 'customIconColor',
 			'background'	=> 'customIconBackgroundColor',
 			'blank'			=> 'openInNewTab',
-			'labels'		=> 'showLabels',
 			'size'			=> 'size',
 		];
 
@@ -133,53 +138,25 @@ class WPSeo implements Integration {
 			'color'			=> '',
 			'background' 	=> '',
 			'blank'			=> true,
-			'labels'		=> true,
 			'size'			=> ''
 		];
 
 		// Convert to shortcode attributes.
-		$attrs = array_combine( array_keys( $map_attrs ), array_values( $default_atts ) );
+		$attrs 	= array_combine( array_keys( $map_attrs ), array_values( $default_atts ) );
 
-		$a = shortcode_atts( wp_parse_args( [
+		$atts 	= shortcode_atts( wp_parse_args( [
 			'ID'	=> $post->post_author,
 		], $attrs ), $atts );
 
 		// Save author ID.
-		$author_id 	= get_prop( $a, [ 'ID' ] );
-		unset( $a['ID'] );
+		$author_id 	= get_prop( $atts, [ 'ID' ] );
 
-		// Convert to block attributes.
-		$block_attrs = array_combine( array_values( $map_attrs ), array_values( $a ) );
+		// Bail early if no author ID.
+		if( ! $author_id ) return;
 
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
+		unset( $atts['ID'] );
 
-		if( $color = get_prop( $a, [ 'color' ] ) ) {
-			$named = get_prop( current( wp_list_filter( $palette, [ 'color' => $color ] ) ), 'slug' );
-			if( $named ) {
-				unset( $block_attrs['customIconColor'] );
-				$block_attrs['iconColor'] = $named;
-				$map_attrs[] = 'iconColor';
-			}
-
-			$class_names[] = 'has-icon-color';
-		}
-		
-		if( $color = get_prop( $a, [ 'background' ] ) ) {
-			$named = get_prop( current( wp_list_filter( $palette, [ 'color' => $color ] ) ), 'slug' );
-			if( $named ) {
-				unset( $block_attrs['customIconBackgroundColor'] );
-				$block_attrs['customIconBackgroundColor'] = $named;
-				$map_attrs[] = 'customIconBackgroundColor';
-			}
-
-			$class_names[] = 'has-icon-background-color';
-		}
-
-		$class_names[] = get_prop( $a, [ 'class' ], '' );
-		$class_names[] = get_prop( $a, [ 'labels' ] ) ? 'has-visible-labels' : false;
-
+		// Collect Yoast's author meta.
 		$socials = [];
 		foreach( [
 			'url',
@@ -206,12 +183,39 @@ class WPSeo implements Integration {
 			$socials[$key] = $value;
 		}
 
+		// Bail early if author meta is empty.
 		if( empty( $socials ) ) return;
 
-		// Setup vars.
-		$inline_attrs	= wp_json_encode( array_filter( wp_array_slice_assoc( $block_attrs, array_values( $map_attrs ) ) ) );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
 
-		$social_html = '<!-- wp:social-links ' . $inline_attrs . ' -->';
+		if( $color = get_prop( $atts, [ 'color' ] ) ) {
+			$named = get_prop( current( wp_list_filter( $palette, [ 'color' => $color ] ) ), 'slug' );
+			if( $named ) {
+				$atts['iconColor'] = $named;
+				$map_attrs[] = 'iconColor';
+			}
+			
+			$class_names[] = 'has-icon-color';
+		}
+		
+		if( $color = get_prop( $atts, [ 'background' ] ) ) {
+			$named = get_prop( current( wp_list_filter( $palette, [ 'color' => $color ] ) ), 'slug' );
+			if( $named ) {
+				$atts['iconBackgroundColor'] = $named;
+				$map_attrs[] = 'iconBackgroundColor';
+			}
+
+			$class_names[] = 'has-icon-background-color';
+		}
+
+		$class_names[] = get_prop( $atts, [ 'class' ], '' );
+
+		// Convert to block attributes again while filtering the empty ones.
+		$inline_attrs	= array_filter( array_combine( array_values( $map_attrs ), array_values( $atts ) ) );
+
+		$social_html = '<!-- wp:social-links ' . wp_json_encode( $inline_attrs ) . ' -->';
 		$social_html .= '<ul class="' . join( ' ', array_filter( $class_names ) ) . '">';
 
 		foreach( $socials as $key => $value ) {

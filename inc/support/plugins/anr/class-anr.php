@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.3.1
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -83,11 +83,11 @@ class ANR implements Integration {
 	 * Manage Notice
 	 *
 	 * @since 	5.0.0
-	 * @version	5.0.0
+	 * @version	5.4.8
 	 */
 	public function manage_notice() {
 		$notification = new Notification(
-			esc_html__( 'ANR Captcha support is enabled!', 'wecodeart' ),
+			esc_html__( 'Captcha 4WP support is enabled!', 'wecodeart' ),
 			[
 				'id'			=> self::NOTICE_ID,
 				'type'     		=> Notification::INFO,
@@ -125,9 +125,9 @@ class ANR implements Integration {
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
-	 * @version	5.3.1
-	 * @see 	anr_captcha_class::init()->form_field_return();
-	 * @uses	anr_captcha_class::init()->form_field_return();
+	 * @version	5.4.8
+	 * @see 	anr_captcha_class::init()->form_field();
+	 * @uses	anr_captcha_class::init()->form_field();
 	 *
 	 * @return  void
 	 */
@@ -139,21 +139,13 @@ class ANR implements Integration {
 			return $defaults;
 		}
 
-		$classes = [ 'mb-3', 'comment-form-captcha', 'col-12', 'col-md-7' ];
-
 		$defaults .= wecodeart( 'markup' )::wrap( 'comment-captcha', [ [ 
 			'tag' 	=> 'div', 
 			'attrs' => [
-				'class' => implode( ' ', array_filter( $classes ) ),
+				'class' => 'comment-form-field comment-form-captcha',
 				'style' => $ver === 'v3' ? 'display:none;' : null,
 			]
-		] ], function() { ?>
-			<label for="g-recaptcha-response"><?php esc_html_e( 'Captcha *', 'wecodeart' ); ?></label>
-			<?php
-
-			echo Captcha::init()->form_field_return(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		
-		}, [], false );
+		] ], [ Captcha::init(), 'form_field' ], [], false );
 
 		return $defaults;
 	}

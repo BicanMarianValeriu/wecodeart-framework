@@ -1,3 +1,10 @@
+v5.4.8
+- Updated - Output custom duotones into wp_body_open (previously wp_footer) as per WP updates
+- Updated - core/social-link to use global link color set in theme styles
+- Updated - Yoast author social profiles rendering improvements / bail early if certain conditions are not met
+- Updated - Footer Credits template pass "copy" and "year" variables (copyright symbol and current year)
+- Updated - ANR Captcha plugin extension updates after was bought by WPWhiteSecurity
+
 v5.4.7
 - Updated - Input validation message trim() text before skipping empty
 - Updated - Admin donate link form click on new tab

@@ -111,7 +111,7 @@ class Styles implements Integration {
 		add_action( 'wp_enqueue_scripts',  			[ $this, 'template_styles' 		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 20, 1 );
-		add_action( 'wp_footer',					[ $this, 'output_duotone'		], 20, 1 );
+		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
 		// On 90 priority we register all utilities so we add editor styles after this.
 		add_action( 'init',							[ $this, 'editor_styles' 		], 100 );
 		

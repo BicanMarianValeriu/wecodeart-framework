@@ -60,11 +60,14 @@ class Footer {
 	 * Footer Credits
 	 *
 	 * @since 	1.0
-	 * @version 5.1.2
+	 * @version 5.4.8
 	 *
 	 * @return 	void
 	 */
 	public function markup_credits() {
-		wecodeart_template( 'general/credits' );
+		wecodeart_template( 'general/credits', [
+			'copy' => '&copy;',
+			'year' => date( 'Y' )
+		] );
 	}
 }
