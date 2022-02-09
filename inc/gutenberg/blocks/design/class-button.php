@@ -112,7 +112,7 @@ class Button extends Dynamic {
 						--wp--bg-opacity: 0;
 						background-color: rgba(var(--wp--dark-rgb), var(--wp--bg-opacity));
 						border-color: currentColor;
-						color: var(--wp--dark);
+						color: var(--wp--preset--color--dark);
 					}
 					.is-style-outline .wp-block-button__link:hover {
 						--wp--bg-opacity: 1;
