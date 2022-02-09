@@ -4,6 +4,8 @@ v5.4.8
 - Updated - Yoast author social profiles rendering improvements / bail early if certain conditions are not met
 - Updated - Footer Credits template pass "copy" and "year" variables (copyright symbol and current year)
 - Updated - ANR Captcha plugin extension updates after was bought by WPWhiteSecurity
+- Updated - core/button style improvements
+- Updated - core/separator style improvements
 
 v5.4.7
 - Updated - Input validation message trim() text before skipping empty

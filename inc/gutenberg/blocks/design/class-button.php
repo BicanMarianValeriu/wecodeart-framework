@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -48,7 +48,7 @@ class Button extends Dynamic {
 		register_block_style( $this->get_block_type(), [
 			'name' 			=> 'link',
             'label'			=> __( 'Link', 'wecodeart' ),
-			'inline_style' 	=> '.is-style-link .wp-block-button__link{background:transparent;border:none;padding:0;color:var(--wp--preset--color--primary);}'
+			'inline_style' 	=> self::get_style( 'link' )
 		] );
 	}
 	
@@ -68,8 +68,7 @@ class Button extends Dynamic {
 	 */
 	public function register_args( $args, $name ) {
 		if ( $this->get_block_type() === $name ) {
-			if ( isset( $args['supports']['__experimentalSelector'] ) ) {
-				$existing 	= (array) $args['supports']['__experimentalSelector'];
+			if ( $existing = (array) get_prop( $args, [ 'supports', '__experimentalSelector'], [] ) ) {
 				$extra 		= [
 					'.wp-block-file__button',
 					'.wp-block-login__button',
@@ -77,9 +76,7 @@ class Button extends Dynamic {
 					'.comment-form-field .comment-form-submit'
 				];
 		
-				$new_selectors = join( ', ', array_filter( array_merge( $existing, $extra ) ) );
-		
-				$args['supports']['__experimentalSelector'] = $new_selectors;
+				$args['supports']['__experimentalSelector'] = join( ', ', array_filter( array_merge( $existing, $extra ) ) );
 			}
 		}
 		
@@ -101,11 +98,60 @@ class Button extends Dynamic {
 	}
 
 	/**
+	 * Get Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public static function get_style( $class = 'link' ) {
+		$inline = '';
+
+		switch( $class ) :
+			case 'outline' :
+				$inline = "
+					.is-style-outline .wp-block-button__link {
+						--wp--bg-opacity: 0;
+						background-color: rgba(var(--wp--dark-rgb), var(--wp--bg-opacity));
+						border-color: currentColor;
+						color: var(--wp--dark);
+					}
+					.is-style-outline .wp-block-button__link:hover {
+						--wp--bg-opacity: 1;
+						border-color: transparent;
+						color: white;
+					}
+				";
+				break;
+			case 'link' :
+				$inline = "
+					.is-style-link .wp-block-button__link {
+						background: transparent;
+						border: none;
+						box-shadow: none;
+						padding: 0;
+						color: var(--wp--preset--color--primary);
+					}
+					.is-style-link .wp-block-button__link :hover {
+						color: var(--wp--preset--color--primary);
+						box-shadow: none;
+					}
+				";
+				break;
+			default :
+				break;
+		endswitch;
+
+		return trim( $inline );
+	}
+
+	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
+		$outl_style = self::get_style( 'outline' );
+		$link_style = self::get_style( 'link' );
+
 		return "
 		.wp-block-button.has-custom-width {
 			max-width: none;
@@ -149,14 +195,7 @@ class Button extends Dynamic {
 		.wp-block-button__link {
 			display: inline-block;
 			vertical-align: middle;
-			padding: 0.5rem 0.75rem;
-			color: var(--wp--preset--color--white);
-			font-size: 1rem;
-			font-weight: 400;
 			text-align: center;
-			line-height: 1.5;
-			background-color: var(--wp--preset--color--dark);
-			border: 1px solid transparent;
 			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 			user-select: none;
 			cursor: pointer;
@@ -167,7 +206,7 @@ class Button extends Dynamic {
 		}
 		.wp-block-button__link:focus {
 			outline: 0;
-    		box-shadow: 0 0 0 1px #000;
+    		box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
 		}
 		.wp-block-button__link:active,
 		.wp-block-button__link.active {
@@ -185,30 +224,11 @@ class Button extends Dynamic {
 		.wp-block-button__link.disabled,
 		fieldset:disabled .wp-block-button__link {
 			pointer-events: none;
+			box-shadow: none;
 			opacity: .7;
-			box-shadow: none;
 		}
-		.is-style-outline .wp-block-button__link {
-			--wp--bg-opacity: 0;
-			background-color: rgba(var(--wp--dark-rgb), var(--wp--bg-opacity));
-			border-color: currentColor;
-			color: var(--wp--dark);
-		}
-		.is-style-outline .wp-block-button__link:hover {
-			--wp--bg-opacity: 1;
-			border-color: var(--wp--dark);
-			color: white;
-		}
-		.is-style-link .wp-block-button__link {
-			padding: 0;
-			background: transparent;
-			border: none;
-			color: var(--wp--preset--color--primary);
-		}
-		.is-style-link .wp-block-button__link:hover {
-			color: var(--wp--preset--color--primary);
-			box-shadow: none;
-		}
+		$outl_style
+		$link_style
 		";
 	}
 }

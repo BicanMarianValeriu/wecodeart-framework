@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.2
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -46,9 +46,9 @@ class Separator extends Dynamic {
 	 */
 	public function init() {
 		register_block_style( $this->get_block_type(), [
-			'name' 	=> 'faded',
-            'label'	=> __( 'Faded', 'wecodeart' ),
-			'inline_style' => '.is-style-faded {background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;opacity:1;border:none;height:1px;}'
+			'name' 			=> 'faded',
+            'label'			=> __( 'Faded', 'wecodeart' ),
+			'inline_style' 	=> self::get_style( 'faded' )
 		] );
 	}
 
@@ -58,34 +58,54 @@ class Separator extends Dynamic {
 	public function register() {}
 
 	/**
+	 * Get Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public static function get_style( $class = 'faded' ) {
+		$inline = '';
+
+		switch( $class ) :
+			case 'faded' :
+				$inline = "
+					.wp-block-separator.is-style-faded {
+						background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
+						opacity: 1;
+						border: none;
+						height: 1px;
+					}
+				";
+				break;
+			default :
+				break;
+		endswitch;
+
+		return trim( $inline );
+	}
+
+	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return '
+		$inline = '
 		.wp-block-separator {
 			margin-left: auto;
 			margin-right: auto;
+		}
+		.wp-block-separator.is-style-default,
+		.wp-block-separator:not([class*="is-style-"]) {
 			max-width: 100px;
-		}
-		.wp-block-separator.is-style-faded {
-			background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
-			opacity: 1;
-		}
-		.wp-block-separator.is-style-faded,
-		.wp-block-separator.is-style-wide {
-			max-width: initial;
 		}
 		.wp-block-separator.is-style-dots {
 			--wp--separator-gap: 2em;
 			--wp--separator-icon: "\00b7 \00b7 \00b7";
 			background: none !important;
 			border: none;
-			text-align: center;
-			max-width: none;
-			line-height: 1;
 			height: auto;
+			line-height: 1;
+			text-align: center;
 			opacity: 1;
 		}
 		.wp-block-separator.is-style-dots::before {
@@ -97,5 +117,9 @@ class Separator extends Dynamic {
 			font-family: serif;
 		}
 		';
+
+		$inline .= self::get_style( 'faded' );
+
+		return $inline;
 	}
 }
