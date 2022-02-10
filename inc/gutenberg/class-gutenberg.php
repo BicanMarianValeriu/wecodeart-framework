@@ -63,11 +63,6 @@ class Gutenberg {
 		remove_action( 'wp_footer', 				'the_block_template_skip_link' );
 		add_action( 'wp_footer', 					[ $this, 'the_skip_link' ] );
 
-		// Remove GB plugin unnecessary functions
-		if( function_exists( 'gutenberg_experimental_global_styles_render_svg_filters' ) ) {
-			remove_action( 'wp_body_open', 'gutenberg_experimental_global_styles_render_svg_filters' );
-		}
-
 		// Modules.
 		Gutenberg\Modules::get_instance();
 		

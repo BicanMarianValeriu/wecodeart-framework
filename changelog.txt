@@ -6,6 +6,7 @@ v5.4.8
 - Updated - ANR Captcha plugin extension updates after was bought by WPWhiteSecurity
 - Updated - core/button style improvements
 - Updated - core/separator style improvements
+- Updated - Added upcoming blocks to Gutenberg Styles extension / collect template classes into register_styles function
 
 v5.4.7
 - Updated - Input validation message trim() text before skipping empty

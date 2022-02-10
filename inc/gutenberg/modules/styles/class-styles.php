@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.4.5
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -108,7 +108,6 @@ class Styles implements Integration {
 		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
-		add_action( 'wp_enqueue_scripts',  			[ $this, 'template_styles' 		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 20, 1 );
 		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
@@ -127,6 +126,7 @@ class Styles implements Integration {
 			remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
+			remove_action( 'wp_body_open', 'gutenberg_experimental_global_styles_render_svg_filters' );
 		}
 	}
 
@@ -259,25 +259,19 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Collect template utilities styles.
-	 *
-	 * @return 	void
-	 */
-	public function template_styles() {
-		global $_wp_current_template_content;
-		$blocks 	= parse_blocks( $_wp_current_template_content );
-		$classes 	= self::collect_classes( _flatten_blocks( $blocks ) );
-
-		$this->classes = wp_parse_args( $classes, $this->classes );
-	}
-
-	/**
 	 * Output styles.
 	 *
 	 * @return 	string
 	 */
 	public function register_styles() {
+		global $_wp_current_template_content;
 		$inline_css = '';
+
+		// Collect Template Classes
+		$blocks		= parse_blocks( $_wp_current_template_content );
+		$classes	= self::collect_classes( _flatten_blocks( $blocks ) );
+
+		$this->classes = array_merge( $this->classes, $classes );
 
 		// Process Utilities
 		if( ! empty( $this->classes ) ) {
@@ -297,37 +291,6 @@ class Styles implements Integration {
 		wp_register_style( self::CSS_ID, false, [], true, true );
 		wp_add_inline_style( self::CSS_ID, $inline_css );
 		wp_enqueue_style( self::CSS_ID );
-	}
-	
-	/**
-	 * Output duotone in footer.
-	 *
-	 * @return 	string
-	 */
-	public function output_duotone() {
-		if( empty( $this->filters ) ) return;
-		?>
-		<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 0 0" focusable="false" role="none" class="visually-hidden">
-			<defs>
-			<?php foreach( $this->filters as $block_id => $filter ) : ?>
-				<filter id="wp-duotone-<?php echo esc_attr( $block_id ); ?>">
-					<feColorMatrix
-						type="matrix"
-						color-interpolation-filters="sRGB"
-						values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0"
-					/>
-					<feComponentTransfer color-interpolation-filters="sRGB">
-						<feFuncR type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['r'] ) ); ?>" />
-						<feFuncG type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['g'] ) ); ?>" />
-						<feFuncB type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['b'] ) ); ?>" />
-						<feFuncA type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['a'] ) ); ?>" />
-					</feComponentTransfer>
-					<feComposite in2="SourceGraphic" operator="in" />
-				</filter>
-			<?php endforeach; ?>
-			</defs>
-		</svg>
-		<?php
 	}
 	
 	/**
@@ -366,6 +329,37 @@ class Styles implements Integration {
 	}
 
 	/**
+	 * Output duotone in footer.
+	 *
+	 * @return 	string
+	 */
+	public function output_duotone() {
+		if( empty( $this->filters ) ) return;
+		?>
+		<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 0 0" focusable="false" role="none" class="visually-hidden">
+			<defs>
+			<?php foreach( $this->filters as $block_id => $filter ) : ?>
+				<filter id="wp-duotone-<?php echo esc_attr( $block_id ); ?>">
+					<feColorMatrix
+						type="matrix"
+						color-interpolation-filters="sRGB"
+						values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0"
+					/>
+					<feComponentTransfer color-interpolation-filters="sRGB">
+						<feFuncR type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['r'] ) ); ?>" />
+						<feFuncG type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['g'] ) ); ?>" />
+						<feFuncB type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['b'] ) ); ?>" />
+						<feFuncA type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['a'] ) ); ?>" />
+					</feComponentTransfer>
+					<feComposite in2="SourceGraphic" operator="in" />
+				</filter>
+			<?php endforeach; ?>
+			</defs>
+		</svg>
+		<?php
+	}
+
+	/**
 	 * Core blocks.
 	 *
 	 * @return 	array
@@ -396,6 +390,9 @@ class Styles implements Integration {
 			'core/list',
 			'core/loginout',
 			'core/media-text',
+			// 'core/more',
+			// 'core/missing',
+			// 'core/next-page',
 			'core/navigation',
 			'core/navigation-link',
 			'core/navigation-submenu',
@@ -405,6 +402,8 @@ class Styles implements Integration {
 			'core/preformatted',
 			'core/pullquote',
 			'core/post-author',
+			'core/post-author-name',
+			'core/post-author-biography',
 			'core/post-title',
 			'core/post-terms',
 			'core/post-date',
@@ -426,6 +425,8 @@ class Styles implements Integration {
 			'core/comment-template',
 			'core/comments-query-loop',
 			'core/comments-pagination',
+			'core/comments-pagination-next',
+			'core/comments-pagination-previous',
 			'core/comments-pagination-numbers',
 			'core/query',
 			'core/query-title',
@@ -434,6 +435,7 @@ class Styles implements Integration {
 			'core/query-pagination-prev',
 			'core/query-pagination-numbers',
 			'core/quote',
+			'core/read-more',
 			'core/rss',
 			'core/search',
 			'core/separator',
@@ -471,10 +473,9 @@ class Styles implements Integration {
 
 			$classes	= get_prop( $block, [ 'attrs', 'className' ] );
 			$classes 	= array_filter( explode( ' ', $classes ) );
-			$inner		= get_prop( $block, [ 'innerBlocks' ] );
 
 			if( ! empty( $classes ) ) {
-				$return = wp_parse_args( $classes, $return );
+				$return = array_merge( $return, $classes );
 			}
 		}
 
