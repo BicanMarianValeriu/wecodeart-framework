@@ -67,36 +67,36 @@ return [
 	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true}} -->
-	<div class="wp-block-group my-5">
-	<!-- wp:columns {"className":"flex-column flex-md-row"} -->
+	<!-- wp:group {"backgroundColor":"primary","textColor":"white","className":"my-5 py-5","layout":{"inherit":true}} -->
+	<div class="wp-block-group my-5 py-5 has-white-color has-primary-background-color has-text-color has-background">
+	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}},"className":"flex-column flex-md-row"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
-	<!-- wp:column {"className":"mb-4"} -->
-	<div class="wp-block-column mb-4">
+	<!-- wp:column {"className":""} -->
+	<div class="wp-block-column">
 	<!-- wp:heading {"level":3} -->
-	<h3>Super Efficient</h3>
+	<h3 id="super-efficient">Super Efficient</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
-	<!-- wp:column {"className":"mb-4"} -->
-	<div class="wp-block-column mb-4">
-	<!-- wp:heading {"level":3} -->
-	<h3>Deeply Commited</h3>
+	<!-- wp:column -->
+	<div class="wp-block-column"><!-- wp:heading {"level":3} -->
+	<h3 id="deeply-commited">Deeply Commited</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
-	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. </p>
-	<!-- /wp:paragraph --></div>
+	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
+	<!-- /wp:paragraph -->
+	</div>
 	<!-- /wp:column -->
-	<!-- wp:column {"className":"mb-4"} -->
-	<div class="wp-block-column mb-4">
+	<!-- wp:column -->
+	<div class="wp-block-column">
 	<!-- wp:heading {"level":3} -->
-	<h3>Highly Skilled</h3>
+	<h3 id="highly-skilled">Highly Skilled</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
-	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. </p>
+	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
@@ -104,8 +104,8 @@ return [
 	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
-	<!-- wp:group {"backgroundColor":"light","className":"pt-5","layout":{"inherit":true}} -->
-	<div class="wp-block-group has-background has-light-background-color pt-5">
+	<!-- wp:group {"backgroundColor":"white","className":"pt-5","layout":{"inherit":true}} -->
+	<div class="wp-block-group has-background has-white-background-color pt-5">
 	<!-- wp:heading {"textAlign":"center"} -->
 	<h2 class="has-text-align-center">Our Awesome Members</h2>
 	<!-- /wp:heading -->
