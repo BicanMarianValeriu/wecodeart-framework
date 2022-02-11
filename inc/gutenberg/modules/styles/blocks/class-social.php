@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -40,12 +40,12 @@ class Social extends Base {
 		}
 
 		// Background Color 
-		if ( $value = get_prop( $this->attrs, 'customIconBackgroundColor', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'customIconBackgroundColor' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'background-color',
 				'value'	  	=> $value,
 			], $output );
-		} else if ( $value = get_prop( $this->attrs, 'iconBackgroundColor', false ) ) {
+		} else if ( $value = get_prop( $this->attrs, 'iconBackgroundColor' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'background-color',
 				'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $value )
@@ -53,12 +53,12 @@ class Social extends Base {
 		}
 
 		// Icon color
-		if ( $value = get_prop( $this->attrs, 'customIconColor', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'customIconColor' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'color',
 				'value'	  	=> $value,
 			], $output );
-		} else if ( $value = get_prop( $this->attrs, 'iconColor', false ) ) {
+		} else if ( $value = get_prop( $this->attrs, 'iconColor' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'color',
 				'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $value )
@@ -66,7 +66,7 @@ class Social extends Base {
 		}
 
 		// Size
-		if ( $value = get_prop( $this->attrs, 'size', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'size' ) ) {
 			$value = explode( '-', $value ); 
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'font-size',

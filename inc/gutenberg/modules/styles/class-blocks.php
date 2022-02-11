@@ -356,10 +356,23 @@ class Blocks extends Processor {
 					], $output );
 				}
 				if ( $value = get_prop( $border, 'radius', false ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-radius',
-						'value'	  	=> $value
-					], $output );
+					if ( is_array( $value ) ) {
+						// We have individual border radius corner values.
+						foreach ( $value as $key => $radius ) {
+							// Convert CamelCase corner name to kebab-case.
+							$corner   = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $key ) );
+							$this->output[] = wp_parse_args( [
+								'property' 	=> sprintf( 'border-%s-radius', $corner ),
+								'value'	  	=> $radius,
+							], $output );
+						}
+					} else {
+						$this->output[] = wp_parse_args( [
+							'property' 	=> 'border-radius',
+							'value'	  	=> $value,
+							'units'		=> is_numeric( $value ) ? 'px' : null
+						], $output );
+					}
 				}
 				if ( $value = get_prop( $border, 'color', false ) ) {
 					$this->output[] = wp_parse_args( [

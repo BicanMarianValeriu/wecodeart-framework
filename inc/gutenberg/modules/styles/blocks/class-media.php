@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.2.2
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -34,7 +34,7 @@ class Media extends Base {
 		$output['element'] 	= implode( ' ', [ $this->element, '.wp-block-media-text__media' ] );
 
 		// Handle width
-		if ( $value = get_prop( $this->attrs, 'mediaWidth', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'mediaWidth' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'flex-basis',
 				'value'	  	=> $value,
@@ -44,28 +44,28 @@ class Media extends Base {
 
 		// Handle media image if is used as column filler
 		if( get_prop( $this->attrs, 'mediaType' ) === 'image' ) {
-			if( get_prop( $this->attrs, 'imageFill', false ) ) {
-				if ( $value = get_prop( $this->attrs, 'mediaId', false ) ) {
+			if( get_prop( $this->attrs, 'imageFill' ) ) {
+				if ( $value = get_prop( $this->attrs, 'mediaId' ) ) {
 					if( $media = wp_get_attachment_image_url( $value, get_prop( $this->attrs, 'mediaSizeSlug', 'full' ) ) ) {
 						$this->output[] = wp_parse_args( [
 							'property' 	=> 'background-image',
 							'value'	  	=> $media
 						], $output );
 					// Fallback to WP.org patterns (however some of them have wp.org page url instead of a media file)
-					} elseif ( $value = get_prop( $this->attrs, 'mediaLink', false ) ) {
+					} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
 						$this->output[] = wp_parse_args( [
 							'property' 	=> 'background-image',
 							'value'	  	=> $value
 						], $output );
 					}
-				} elseif ( $value = get_prop( $this->attrs, 'mediaLink', false ) ) {
+				} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'background-image',
 						'value'	  	=> $value
 					], $output );
 				}
 		
-				if ( $value = get_prop( $this->attrs, 'focalPoint', false ) ) {
+				if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'background-position',
 						'value'	  	=> $value

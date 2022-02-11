@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.8
- * @version		5.2.8
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -34,7 +34,7 @@ class Featured extends Base {
 		$output 			= [];
 		$output['element'] 	= $this->element;
 		
-		if( $width = get_prop( $this->attrs, 'width', false ) ) {
+		if( $width = get_prop( $this->attrs, 'width' ) ) {
 			$this->output[] = wp_parse_args( [
 				'element'	=> $this->element . '>*',
 				'property' 	=> 'width',
@@ -42,13 +42,13 @@ class Featured extends Base {
 			], $output );
 		}
 		
-		if( $height = get_prop( $this->attrs, 'height', false ) ) {
+		if( $height = get_prop( $this->attrs, 'height' ) ) {
 			if( Image::use_ratio() ) {
 				// We use aspect ratio istead of specific height
 				$custom_sizes 	= [];
 				$requested_size	= Image::get_image_sizes( apply_filters( 'post_thumbnail_size', 'post-thumbnail', get_the_ID() ) );
 
-				if( $width = get_prop( $this->attrs, 'width', false ) ) {
+				if( $width = get_prop( $this->attrs, 'width' ) ) {
 					if( strpos( $width, 'px' ) ) {
 						$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "",  $width );
 					}
@@ -84,7 +84,7 @@ class Featured extends Base {
 				], $output );	 
 			}
 
-			if( $value = get_prop( $this->attrs, 'scale', false ) ) {
+			if( $value = get_prop( $this->attrs, 'scale' ) ) {
 				$this->output[] = wp_parse_args( [
 					'element'	=> $this->element . ' img',
 					'property' 	=> 'object-fit',

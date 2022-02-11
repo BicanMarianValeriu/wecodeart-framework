@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -34,7 +34,7 @@ class PullQuote extends Base {
 		$output['element'] 	= $this->element;
 		
 		// Block Attributes
-		if ( $value = get_prop( $this->attrs, 'customMainColor', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'customMainColor' ) ) {
 			$class_name = explode( ' ', get_prop( $this->attrs, 'className', '' ) );
 			$main_prop 	= in_array( 'is-style-solid-color', $class_name, true ) ? 'background-color' : 'border-color'; 
 			$this->output[] = wp_parse_args( [
@@ -43,7 +43,7 @@ class PullQuote extends Base {
 			], $output );
 		}
 		
-		if ( $value = get_prop( $this->attrs, 'customTextColor', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'customTextColor' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'color',
 				'value'	  	=> $value,

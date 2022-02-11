@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.2
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -34,15 +34,27 @@ class Image extends Base {
 		$output['element'] 	= $this->element;
 
 		// Inline Style
-		if( $css_style = get_prop( $this->attrs, 'style', false ) ) {
+		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
 			// Border
 			if( $border = get_prop( $css_style, 'border', [] ) ) {
-				if ( $value = get_prop( $border, 'radius', false ) ) {
-					$this->output[] = wp_parse_args( [
-						'element'	=> $this->element . ' img',
-						'property' 	=> 'border-radius',
-						'value'	  	=> $value
-					], $output );
+				if ( $value = get_prop( $border, 'radius' ) ) {
+					if ( is_array( $value ) ) {
+						// We have individual border radius corner values.
+						foreach ( $value as $key => $radius ) {
+							// Convert CamelCase corner name to kebab-case.
+							$corner   = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $key ) );
+							$this->output[] = wp_parse_args( [
+								'property' 	=> sprintf( 'border-%s-radius', $corner ),
+								'value'	  	=> $radius,
+							], $output );
+						}
+					} else {
+						$this->output[] = wp_parse_args( [
+							'property' 	=> 'border-radius',
+							'value'	  	=> $value,
+							'units'		=> is_numeric( $value ) ? 'px' : null
+						], $output );
+					}
 				}
 			}
 		}

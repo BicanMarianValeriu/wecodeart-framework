@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -33,7 +33,7 @@ class Column extends Base {
 		$output 			= [];
 		$output['element'] 	= $this->element;
 		
-		if ( $value = get_prop( $this->attrs, 'width', false ) ) {
+		if ( $value = get_prop( $this->attrs, 'width' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'flex',
 				'value'	  	=> sprintf( '0 0 %s', $value ),

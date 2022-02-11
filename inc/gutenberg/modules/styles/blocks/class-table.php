@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -36,9 +36,9 @@ class Table extends Base {
 		
 		if( $css_style = get_prop( $this->attrs, 'style', [] ) ) {
 			// Colors
-			if ( $color = get_prop( $css_style, 'color', false ) ) {
+			if ( $color = get_prop( $css_style, 'color' ) ) {
 				// Text
-				if ( $value = get_prop( $color, 'text', false ) ) {
+				if ( $value = get_prop( $color, 'text' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'color',
 						'value'	  	=> $value
@@ -46,7 +46,7 @@ class Table extends Base {
 				}
 
 				// Background
-				if ( $value = get_prop( $color, 'background', false ) ) {
+				if ( $value = get_prop( $color, 'background' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'background-color',
 						'value'	  	=> $value
@@ -54,7 +54,7 @@ class Table extends Base {
 				}
 
 				// Gradient
-				if ( $value = get_prop( $color, 'gradient', false ) ) {
+				if ( $value = get_prop( $color, 'gradient' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'background-image',
 						'value'	  	=> $value
@@ -64,19 +64,19 @@ class Table extends Base {
 
 			// Border
 			if( $border = get_prop( $css_style, 'border', [] ) ) {
-				if ( $value = get_prop( $border, 'width', false ) ) {
+				if ( $value = get_prop( $border, 'width' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-width',
 						'value'	  	=> $value
 					], $output );
 				}
-				if ( $value = get_prop( $border, 'style', false ) ) {
+				if ( $value = get_prop( $border, 'style' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-style',
 						'value'	  	=> $value
 					], $output );
 				}
-				if ( $value = get_prop( $border, 'color', false ) ) {
+				if ( $value = get_prop( $border, 'color' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-color',
 						'value'	  	=> $value
