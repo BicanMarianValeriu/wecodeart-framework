@@ -59,23 +59,8 @@ final class Styles implements Integration {
 	 */
 	public function register_hooks() {
 		// Styles init action
-		do_action( 'wecodeart/support/styles/init', $this );
-		
-		// Require utilities
-		add_action( 'init', [ $this, 'require_utils' ], 90 );
+		do_action( 'wecodeart/support/styles/init', $this );	
 	}
-
-	/**
-     * Load Utils
-     *
-     * @since 	5.3.0
-     * @version 5.3.0
-     *
-     * @return 	void
-     */
-    public function require_utils() {
-		require_once( __DIR__ . '/utilities.php' );
-    }
 
 	/**
 	 * Generate breakpoint class

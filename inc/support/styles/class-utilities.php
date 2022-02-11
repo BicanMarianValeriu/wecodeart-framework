@@ -64,13 +64,26 @@ class Utilities implements \ArrayAccess {
         // Avoid get_instance() due to infinite loop - we only need static methods.
 		$this->CSS = wecodeart( 'integrations' )->get( 'styles' );
 
-        // Generate CSS
-        add_action( 'init',             [ $this, 'cache'    ], 100 );
-        add_action( 'wp_print_styles',  [ $this, 'generate' ], 20, 1 );
+        // Require, cache and generate CSS
+		add_action( 'init',             [ $this, 'require'  ], 10       );
+        add_action( 'init',             [ $this, 'cache'    ], 20       );
+        add_action( 'wp_print_styles',  [ $this, 'generate' ], 20, 1    );
 
         // Add to editor Advanced class suggestion
         add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'suggestions' ] );
 	}
+
+	/**
+     * Load Utils
+     *
+     * @since 	5.4.8
+     * @version 5.4.8
+     *
+     * @return 	void
+     */
+    public function require() {
+		require_once( __DIR__ . '/utilities.php' );
+    }
 
     /**
      * Load.
