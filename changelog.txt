@@ -7,6 +7,9 @@ v5.4.8
 - Updated - core/button style improvements
 - Updated - core/separator style improvements
 - Updated - Added upcoming blocks to Gutenberg Styles extension / collect template classes into register_styles function
+- Updated - Normalized buttons markup and styles for blocks like: File/Search/Login/Comments.
+- Added - ::load() method for Gutenberg\Blocks registry - used to queque blocks for the current page (currently used for CSS).
+- Fixed - core/search block styles and gradient classes to reflect the admin block settings
 
 v5.4.7
 - Updated - Input validation message trim() text before skipping empty

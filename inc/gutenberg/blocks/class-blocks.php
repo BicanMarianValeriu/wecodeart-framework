@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Blocks Registry
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -26,6 +26,13 @@ class Blocks implements \ArrayAccess {
 
 	use Singleton;
 
+    /**
+	 * The CSS ID for registered style.
+	 *
+	 * @var string
+	 */
+    const CSS_ID = 'wecodeart-blocks';
+
 	/**
 	 * The registered Blocks.
 	 *
@@ -34,19 +41,12 @@ class Blocks implements \ArrayAccess {
 	protected $items = [];
 
     /**
-	 * The CSS ID for registered style.
-	 *
-	 * @var string
-	 */
-    const CSS_ID = 'wecodeart-blocks';
-
-    /**
 	 * An array of blocks used in current page.
      *
-	 * @access  private
+	 * @access  public
 	 * @var     array
 	 */
-	private static $blocks = [];
+	public static $blocks = [];
 
 	/**
 	 * Send to Constructor
@@ -108,7 +108,7 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
 		$this->register( 'core/loginout',       Blocks\Site\Login::class );
         
-        $this->load();
+        foreach( $this->items as $class ) $class::get_instance()->register();
 
         // Hooks
         add_filter( 'render_block',             [ $this, 'collect_blocks'   ], 10, 2 );
@@ -126,7 +126,7 @@ class Blocks implements \ArrayAccess {
 	 */
 	public function collect_blocks( $block_content, $block ) {
 		if ( $name = get_prop( $block, 'blockName' ) ) {
-			self::$blocks[] = $name;
+			self::load( $name );
 		}
 
 		return $block_content;
@@ -138,13 +138,13 @@ class Blocks implements \ArrayAccess {
 	 * @return void
 	 */
 	public function register_styles() {
-        if( empty( self::$blocks ) ) return;
+        if( empty( self::current() ) ) return;
 
         $inline_css = '';
 
-        foreach( array_unique( self::$blocks ) as $block ) {
+        foreach( self::current() as $block ) {
             if( ! $this->has( $block ) ) continue;
-            $inline_css .= $this->get( $block )::get_instance()->styles();
+            $inline_css .= $this->get( $block )::styles();
         } 
         
         $inline_css = wecodeart( 'styles' )::compress( $inline_css );
@@ -167,13 +167,24 @@ class Blocks implements \ArrayAccess {
 	}
 
 	/**
-	 * Loads all registered integrations if their conditionals are met.
+	 * Get unique list of used blocks.
+	 *
+	 * @return array
+	 */
+	public static function current() {
+		return array_unique( self::$blocks );
+	}
+
+    /**
+	 * Add a block to the queque.
 	 *
 	 * @return void
 	 */
-	public function load() {
-		foreach( $this->items as $class ) {
-            $class::get_instance()->register();
+	public static function load( $names = '' ) {
+        foreach( (array) $names as $name ) {
+            if( in_array( $name, self::current() ) ) continue;
+
+            self::$blocks[] = $name;
         }
 	}
 

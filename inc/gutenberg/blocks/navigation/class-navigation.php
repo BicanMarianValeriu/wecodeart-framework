@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.5
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -436,9 +436,9 @@ class Navigation extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$filter		= explode( '-', $this->get_mobile_breakpoint() );
+		$filter		= explode( '-', Navigation::get_instance()->get_mobile_breakpoint() );
 		$filter		= end( $filter );
 		$breakpoint	= get_prop( $breaks, $filter, '992px' );
 

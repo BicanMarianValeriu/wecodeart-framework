@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -45,21 +46,35 @@ class Search extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
+		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+	}
+
+	/**
+	 * Filter Render
+	 *
+	 * @param	array 	$settings
+	 * @param	array 	$data
+	 */
+	public function filter_render( $settings, $data ) {
+		if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => [ $this, 'render' ]
+			], $settings );
+		}
+		
+		return $settings;
 	}
 
 	/**
 	 * Dynamically renders the `core/search` block.
 	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
+	 * @param 	array 	$attributes The block attributes.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
+	public function render( $attributes = [], $content = '', $block = null ) {
 		static $instance_id = 0;
-				
-		$attributes = get_prop( $block, 'attrs', [] );
+
 		$attributes = wp_parse_args( $attributes, [
 			'label'      => __( 'Search', 'wecodeart' ),
 			'buttonText' => __( 'Search', 'wecodeart' ),
@@ -68,13 +83,22 @@ class Search extends Dynamic {
 		$input_id 	= 'wp-block-search__input-' . ++$instance_id;
 		$form_class = [ 'wp-block-search__form', 'needs-validation' ];
 
+		// Width utility.
 		if( get_prop( $attributes, 'widthUnit', 'px' ) === '%' ) {
 			if( in_array( get_prop( $attributes, 'width' ), [ 25, 50, 75, 100 ] ) ) {
-			   $form_class[] = 'w-' . get_prop( $attributes, 'width' );
+				$utility = 'w-' . get_prop( $attributes, 'width' );
+				
+				wecodeart( 'styles' )->Utilities->load( $utility );
+				
+				$form_class[] = $utility;
 			}
 		}
 
-		return wecodeart( 'markup' )::wrap( 'wp-block-search', [
+		// Queue block for assets.
+		$storage = Blocks::get_instance();
+		$storage::load( [ 'core/buttons', 'core/button' ] );
+
+		$content = wecodeart( 'markup' )::wrap( 'wp-block-search', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => [
@@ -111,14 +135,14 @@ class Search extends Dynamic {
 					'name'			=> 's',
 					'class' 		=> $this->get_classname( $attributes, 'field' ),
 					'value'			=> get_search_query(),
-					'placeholder' 	=> get_prop( $attributes, 'placeholder', false ),
+					'placeholder' 	=> get_prop( $attributes, 'placeholder' ),
 					'required' 		=> true,
 				]
 			] );
 
 			// Maybe add submit button
 			if ( get_prop( $attributes, 'buttonPosition', 'button-outside' ) !== 'no-button' ) {
-				$icon  = get_prop( $attributes, 'buttonUseIcon', false );
+				$icon  = get_prop( $attributes, 'buttonUseIcon' );
 				$label = $icon ? wecodeart( 'markup' )->SVG::compile( 'search' ) : get_prop( $attributes, 'buttonText' );
 
 				wecodeart_input( 'button', [
@@ -133,6 +157,8 @@ class Search extends Dynamic {
 			</div>
 			<?php
 		}, [], false );
+
+		return $content;
 	}
 
 	/**
@@ -158,12 +184,14 @@ class Search extends Dynamic {
 		}
 
 		if( $wrapper === 'button' ) {
-			$classnames = [ 'wp-block-search__button' ];
+			$classnames = [ 'wp-block-button__link' ];
+			
+			if( $value = get_prop( $attributes, [ 'gradient' ] ) ) {
+				$classnames[] = 'has-' . $value . '-gradient-background';
+			}
+
 			if( $value = get_prop( $attributes, [ 'backgroundColor' ] ) ) {
 				$classnames[] = 'has-' . $value . '-background-color';
-			} else if( $value = get_prop( $attributes, [ 'borderColor' ] ) ) {
-				$classnames[] = 'border';
-				$classnames[] = 'border-' . $value;
 			}
 
 			if( $value = get_prop( $attributes, [ 'textColor' ] ) ) {
@@ -174,10 +202,11 @@ class Search extends Dynamic {
 		
 		if( $wrapper === 'field' ) {
 			$classnames = [ 'wp-block-search__input', 'form-control' ];
-			if( $value = get_prop( $attributes, [ 'borderColor' ] ) ) {
-				$classnames[] = 'border';
-				$classnames[] = 'border-' . $value;
-			}
+		}
+		
+		if( $value = get_prop( $attributes, [ 'borderColor' ] ) ) {
+			$classnames[] = 'has-border-color';
+			$classnames[] = 'has-' . $value . '-border-color';
 		}
 
 		return implode( ' ', $classnames );
@@ -188,33 +217,16 @@ class Search extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		return "
 		.wp-block-search {
 			margin-bottom: 1rem;
 		}
-		.wp-block-search--button-outside .wp-block-search__button {
-			margin-left: .5rem;
+		.wp-block-search--button-outside .wp-block-button__link {
+			margin-left: 1rem;
 		}
 		.wp-block-search__fields {
 			display: flex;
-		}
-		.wp-block-search__button {
-			display: inline-block;
-			vertical-align: middle;
-			padding: 0.5rem 0.75rem;
-			color: var(--wp--white);
-			font-size: 1rem;
-			font-weight: 400;
-			text-align: center;
-			line-height: 1.5;
-			background-color: var(--wp--dark);
-			border: 1px solid transparent;
-			border-radius: .25rem;
-			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-			user-select: none;
-			cursor: pointer;
-			margin-left: 1rem;
 		}
 		.navbar .wp-block-search {
 			margin-bottom: 0;

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -232,7 +232,7 @@ class Image extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		$ratio_css = '';
 
 		if( self::use_ratio() ) {

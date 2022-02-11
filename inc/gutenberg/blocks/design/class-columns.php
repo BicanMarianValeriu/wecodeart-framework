@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.3.1
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -73,7 +73,7 @@ class Columns extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		$mobile	= wecodeart_json( [ 'settings', 'custom', 'breakpoints', 'sm' ], '640px' );
 
 		return "

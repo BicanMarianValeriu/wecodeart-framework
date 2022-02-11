@@ -56,31 +56,7 @@ class Button extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'			], 10, 2 );
-		add_filter( 'register_block_type_args',					[ $this, 'register_args'	], 10, 2 );
-	}
-
-	/**
-	 * Filter register args
-	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
-	 */
-	public function register_args( $args, $name ) {
-		if ( $this->get_block_type() === $name ) {
-			if ( $existing = (array) get_prop( $args, [ 'supports', '__experimentalSelector'], [] ) ) {
-				$extra 		= [
-					'.wp-block-file__button',
-					'.wp-block-login__button',
-					'.wp-block-search__button',
-					'.comment-form-field .comment-form-submit'
-				];
-		
-				$args['supports']['__experimentalSelector'] = join( ', ', array_filter( array_merge( $existing, $extra ) ) );
-			}
-		}
-		
-		return $args;
+		add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'	], 10, 2 );
 	}
 
 	/**
@@ -148,7 +124,7 @@ class Button extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		$outl_style = self::get_style( 'outline' );
 		$link_style = self::get_style( 'link' );
 

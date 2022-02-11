@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -104,7 +104,7 @@ class Date extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		return "
 		.wp-block-post-date--updated .wp-block-post-date__updated {
 			display: none;

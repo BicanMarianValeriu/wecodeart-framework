@@ -88,7 +88,7 @@ class Separator extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		$inline = '
 		.wp-block-separator {
 			margin-left: auto;

@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Login Template
  * @since 	    5.1.8
- * @version	    5.3.3
+ * @version	    5.4.8
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -76,14 +76,16 @@ wecodeart( 'styles' )->Utilities->load( 'mb-3' );
             ]
         ] );
     
-    ?><?php endif; ?><p><?php
+    ?><?php endif; ?>
+    <div class="wp-block-button wp-block-button--login mb-3">
+    <?php
 
         wecodeart_input( 'submit', [
             'attrs' => [
                 'name'  => false,
                 'id'    => 'wp-submit',
                 'value' => $args['label_log_in'],
-                'class' => 'wp-block-login__button',
+                'class' => 'wp-block-button__link',
             ]
         ] );
 
@@ -95,7 +97,9 @@ wecodeart( 'styles' )->Utilities->load( 'mb-3' );
             ]
         ] );
 
-    ?></p><?php
+    ?>
+    </div>
+    <?php
         
         // WP Filter
         echo apply_filters( 'login_form_bottom', '', $args );

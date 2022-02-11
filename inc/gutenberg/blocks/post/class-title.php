@@ -121,7 +121,7 @@ class Title extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		return "
 		.wp-block-post-title {
 			word-break: break-word;

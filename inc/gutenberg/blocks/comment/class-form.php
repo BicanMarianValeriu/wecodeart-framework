@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.4.4
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -306,7 +306,7 @@ class Form extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		return "
 		.wp-block-post-comments-form:empty {
 			display: none;

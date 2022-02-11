@@ -50,7 +50,7 @@ class Social extends Dynamic {
 	}
 
 	/**
-	 * Dynamically renders the `core/button` block.
+	 * Dynamically renders the `core/social` block.
 	 *
 	 * @param 	string 	$content 	The block markup.
 	 * @param 	array 	$block 		The parsed block.
@@ -197,7 +197,7 @@ class Social extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
 		return "
 		.wp-block-social-links {
 			display: flex;

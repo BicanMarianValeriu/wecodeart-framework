@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.1.8
- * @version		5.3.3
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Gutenberg\Blocks\Site;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -45,19 +46,33 @@ class Login extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
+		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
-	 * Dynamically renders the `core/loginout` block.
+	 * Filter Render
 	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
+	 * @param	array 	$settings
+	 * @param	array 	$data
+	 */
+	public function filter_render( $settings, $data ) {
+		if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => [ $this, 'render' ]
+			], $settings );
+		}
+		
+		return $settings;
+	}
+
+	/**
+	 * Dynamically renders the `core/search` block.
+	 *
+	 * @param 	array 	$attributes The block attributes.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		$attributes 	= get_prop( $block, [ 'attrs' ] );
+	public function render( $attributes = [], $content = '', $block = null ) {
 		// Build the redirect URL.
 		$current_url 	= ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		$contents 		= wp_loginout( get_prop( $attributes, [ 'redirectToCurrent' ] ) ? $current_url : '', false );
@@ -71,6 +86,10 @@ class Login extends Dynamic {
 			// Get the form.
 			$contents 		= $this->render_form( [], false );
 		}
+
+		// Queue block for assets.
+		$storage = Blocks::get_instance();
+		$storage::load( [ 'core/buttons', 'core/button' ] );
 
 		return wecodeart( 'markup' )::wrap( 'wp-block-login', [
 			[
@@ -112,30 +131,5 @@ class Login extends Dynamic {
 			'action' 	=> home_url( 'wp-login.php', 'login_post' ),
 			'args'		=> wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) )
 		], $echo );
-	}
-
-	/**
-	 * Block styles
-	 *
-	 * @return 	string 	The block styles.
-	 */
-	public function styles() {
-		return "
-		.wp-block-login__button {
-			display: inline-block;
-			vertical-align: middle;
-			padding: 0.5rem 0.75rem;
-			color: var(--wp--preset--color--white);
-			font-size: 1rem;
-			font-weight: 400;
-			text-align: center;
-			line-height: 1.5;
-			background-color: var(--wp--preset--color--dark);
-			border: 1px solid transparent;
-			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-			user-select: none;
-			cursor: pointer;
-		}
-		";
 	}
 }

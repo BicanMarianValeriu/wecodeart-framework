@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.5
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -60,15 +60,6 @@ abstract class Dynamic {
 	 * @return	string Block Markup.
 	 */
 	public function render() {}
-
-	/**
-	 * Block styles.
-	 *
-	 * @return 	string Block CSS.
-	 */
-	public function styles() {
-		return '';
-	}
 
 	/**
 	 * Load and manipulate HTML with DOMDocument.
@@ -172,5 +163,14 @@ abstract class Dynamic {
 		endswitch;
 
 		return $schema;
+	}
+
+	/**
+	 * Block styles.
+	 *
+	 * @return 	string Block CSS.
+	 */
+	public static function styles() {
+		return '';
 	}
 }

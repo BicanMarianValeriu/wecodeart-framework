@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -165,7 +165,7 @@ class Numbers extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function styles() {
         $button_css = wecodeart_json( [ 'styles', 'blocks', 'core/button' ] );
         $width      = get_prop( $button_css, [ 'border', 'width' ], '1px' );
         $style      = get_prop( $button_css, [ 'border', 'style' ], 'solid' );
