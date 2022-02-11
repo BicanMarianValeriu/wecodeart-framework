@@ -65,8 +65,8 @@ class Utilities implements \ArrayAccess {
 		$this->CSS = wecodeart( 'integrations' )->get( 'styles' );
 
         // Require, cache and generate CSS
-		add_action( 'init',             [ $this, 'require'  ], 10       );
-        add_action( 'init',             [ $this, 'cache'    ], 20       );
+		add_action( 'init',             [ $this, 'require'  ], 90       );
+        add_action( 'init',             [ $this, 'cache'    ], 95       );
         add_action( 'wp_print_styles',  [ $this, 'generate' ], 20, 1    );
 
         // Add to editor Advanced class suggestion
