@@ -132,4 +132,17 @@ class Login extends Dynamic {
 			'args'		=> wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) )
 		], $echo );
 	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public static function styles() {
+		return '
+		.wp-block-login {
+            margin-bottom: 2rem;
+        }
+		';
+	}
 }
