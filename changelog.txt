@@ -12,6 +12,7 @@ v5.4.8
 - Added - Styles extention to support mixed border radius (array) and unitless value
 - Added - ::load() method for Gutenberg\Blocks registry - used to queque blocks for the current page (currently used for CSS).
 - Fixed - core/search block styles and gradient classes to reflect the admin block settings
+- Fixed - CSS padding variables inside table block
 
 v5.4.7
 - Updated - Input validation message trim() text before skipping empty

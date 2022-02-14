@@ -145,7 +145,7 @@ class Table extends Dynamic {
 			vertical-align: inherit;
 		}
 		table > :not(caption) > * > * {
-			padding: var(wp--table-padding-y) var(wp--table-padding-x);
+			padding: var(--wp--table-padding-y) var(--wp--table-padding-x);
 			background-color: var(--wp--table-bg);
 			border-bottom-width: var(--wp--table-border-width);
 			box-shadow: inset 0 0 0 9999px var(--wp--table-accent-bg);
