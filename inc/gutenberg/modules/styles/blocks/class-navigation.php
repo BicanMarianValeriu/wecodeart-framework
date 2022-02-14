@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.1.3
- * @version		5.3.3
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -158,7 +158,7 @@ class Navigation extends Base {
 
 		// Dropdown active state
 		if( $named_color !== null ) {
-			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
+			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
 			$hex_color	= get_prop( current( wp_list_filter( $palette, [ 'slug' => $named_color ] ) ), 'color' );

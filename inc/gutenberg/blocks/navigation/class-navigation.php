@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -237,7 +237,7 @@ class Navigation extends Dynamic {
 	 * @return 	string 	HEX color code for pallete class
 	 */
 	public static function get_class_color( $context, $key = 'background' ) {
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
 				

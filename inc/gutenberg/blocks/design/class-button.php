@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -46,9 +46,15 @@ class Button extends Dynamic {
 	 */
 	public function init() {
 		register_block_style( $this->get_block_type(), [
+			'name' 			=> 'outline',
+            'label'			=> __( 'Outline', 'wecodeart' ),
+			'inline_style' 	=> '.is-style-outline .wp-block-button__link {border-color:currentColor!important;}'
+		] );
+
+		register_block_style( $this->get_block_type(), [
 			'name' 			=> 'link',
             'label'			=> __( 'Link', 'wecodeart' ),
-			'inline_style' 	=> self::get_style( 'link' )
+			'inline_style' 	=> '.is-style-link .wp-block-button__link {background:transparent!important;border:none!important;box-shadow:none!important;padding:0!important;}'
 		] );
 	}
 	
@@ -86,14 +92,17 @@ class Button extends Dynamic {
 				$inline = "
 					.is-style-outline .wp-block-button__link {
 						--wp--bg-opacity: 0;
-						background-color: rgba(var(--wp--dark-rgb), var(--wp--bg-opacity));
-						border-color: currentColor;
+						background-color: rgba(var(--wp--color--rgb), var(--wp--bg-opacity));
+						border-color: currentColor!important;
 						color: var(--wp--preset--color--dark);
 					}
 					.is-style-outline .wp-block-button__link:hover {
 						--wp--bg-opacity: 1;
-						border-color: transparent;
-						color: white;
+						border-color: rgb(var(--wp--color--rgb))!important;
+						color: white!important;
+					}
+					.is-style-outline .has-white-color:hover {
+						color: black!important;
 					}
 				";
 				break;

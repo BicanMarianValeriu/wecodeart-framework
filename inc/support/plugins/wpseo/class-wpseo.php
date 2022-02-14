@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.5
- * @version		5.4.7
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -186,7 +186,7 @@ class WPSeo implements Integration {
 		// Bail early if author meta is empty.
 		if( empty( $socials ) ) return;
 
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
 

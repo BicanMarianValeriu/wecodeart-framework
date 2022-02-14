@@ -109,7 +109,6 @@ class Styles implements Integration {
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
-		add_action( 'wp_enqueue_scripts',			[ $this, 'add_link_styles'		], 20, 1 );
 		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
 		// On 90 priority we register all utilities so we add editor styles after this.
 		add_action( 'init',							[ $this, 'editor_styles' 		], 100 );
@@ -267,6 +266,9 @@ class Styles implements Integration {
 		global $_wp_current_template_content;
 		$inline_css = '';
 
+		// Global styles
+		$this->global_styles();
+
 		// Collect Template Classes
 		$blocks		= parse_blocks( $_wp_current_template_content );
 		$classes	= self::collect_classes( _flatten_blocks( $blocks ) );
@@ -294,14 +296,26 @@ class Styles implements Integration {
 	}
 	
 	/**
-	 * Add link styles.
+	 * Global styles.
 	 *
 	 * @return 	void
 	 */
-	public function add_link_styles() {
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
+	public function global_styles() {
+		$style  	= '';
+
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
+
+		foreach( $palette as $item ) {
+			$slug 	= get_prop( $item, [ 'slug' ] );
+			$value 	= $this->CSS::hex_to_rgba( get_prop( $item, [ 'color' ] ) );
+			$value  = preg_match( '/\((.*?)\)/', $value, $color );
+			
+			$style .= sprintf( '.has-%s-color{--wp--color--rgb: %s}', $slug, $color[1] );
+			$style .= sprintf( '.has-%s-background-color{--wp--background--rgb: %s}', $slug, $color[1] );
+		}
+
 		$link_color = wecodeart_json( [ 'styles', 'elements', 'link', 'color', 'text' ], false );
 
 		// Is WP way of saved color
@@ -325,7 +339,9 @@ class Styles implements Integration {
 		// Sanitized because we are not using CSS::parse method which does that by default (for arrays)
 		$link_color = $this->CSS::hex_brightness( $this->CSS->Sanitize::color( $link_color ), -25 );
 
-		wp_add_inline_style( 'global-styles', "a:hover{color:${link_color};}" );
+		$style .= "a:hover{color:${link_color};}";
+
+		wp_add_inline_style( 'global-styles', $style );
 	}
 
 	/**

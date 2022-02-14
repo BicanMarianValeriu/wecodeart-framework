@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.3.1
+ * @version		5.4.9
  */
 
 // Theme Shadows
@@ -26,7 +26,7 @@ $spacers    = array_merge( $spacers, [
 ] );
 
 // Theme Colors
-$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'core' ], [] );
+$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
 $palette    = wp_list_pluck( $palette, 'color', 'slug' );

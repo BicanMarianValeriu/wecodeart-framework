@@ -207,8 +207,10 @@ return [
 	<!-- /wp:paragraph -->
 	<!-- wp:buttons {"contentJustification":"center"} -->
 	<div class="wp-block-buttons is-content-justification-center">
-	<!-- wp:button {"backgroundColor":"light","textColor":"dark"} -->
-	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">LEARN MORE</a></div>
+	<!-- wp:button {"className":"is-style-outline","textColor":"white"} -->
+	<div class="wp-block-button is-style-outline">
+	<a class="wp-block-button__link has-white-color has-text-color" href="#">LEARN MORE</a>
+	</div>
 	<!-- /wp:button -->
 	</div>
 	<!-- /wp:buttons -->
