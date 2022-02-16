@@ -97,11 +97,53 @@ foreach( [
             5 => '5px',
         ],
     ],
+    // Rounded
     [
-        'property'  => 'border-color',
-        'class'		=> 'border',
-        'values'	=> $palette,
+        'property'  => 'border-radius',
+        'class'		=> 'rounded',
+        'values'	=> [
+            null    => '.25rem',
+            0       => 0,
+            1       => '.5rem',
+            2       => '1rem',
+            3       => '1.5rem',
+            'circle'=> '50%',
+            'pill'  => '50px',
+        ],
     ],
+    [
+        'property'  => [ 'border-top-left-radius', 'border-top-right-radius' ],
+        'class'		=> 'rounded-top',
+        'values'	=> [
+            null    => '.25rem',
+            0       => 0,
+        ],
+    ],
+    [
+        'property'  => [ 'border-bottom-left-radius', 'border-bottom-right-radius' ],
+        'class'		=> 'rounded-bottom',
+        'values'	=> [
+            null    => '.25rem',
+            0       => 0,
+        ],
+    ],
+    [
+        'property'  => [ 'border-top-left-radius', 'border-bottom-left-radius' ],
+        'class'		=> 'rounded-start',
+        'values'	=> [
+            null    => '.25rem',
+            0       => 0,
+        ],
+    ],
+    [
+        'property'  => [ 'border-top-right-radius', 'border-bottom-right-radius' ],
+        'class'		=> 'rounded-end',
+        'values'	=> [
+            null    => '.25rem',
+            0       => 0,
+        ],
+    ],
+    // Border Color - use Gutenberg classes
     // Display
     [
         'property'  => 'display',
@@ -504,52 +546,6 @@ foreach( [
         'values'	=> [
             0   => 0,
             1   => '1rem',
-        ],
-    ],
-    // Rounded
-    [
-        'property'  => 'border-radius',
-        'class'		=> 'rounded',
-        'values'	=> [
-            null    => '.25rem',
-            0       => 0,
-            1       => '.5rem',
-            2       => '1rem',
-            3       => '1.5rem',
-            'circle'=> '50%',
-            'pill'  => '50px',
-        ],
-    ],
-    [
-        'property'  => [ 'border-top-left-radius', 'border-top-right-radius' ],
-        'class'		=> 'rounded-top',
-        'values'	=> [
-            null    => '.25rem',
-            0       => 0,
-        ],
-    ],
-    [
-        'property'  => [ 'border-bottom-left-radius', 'border-bottom-right-radius' ],
-        'class'		=> 'rounded-bottom',
-        'values'	=> [
-            null    => '.25rem',
-            0       => 0,
-        ],
-    ],
-    [
-        'property'  => [ 'border-top-left-radius', 'border-bottom-left-radius' ],
-        'class'		=> 'rounded-start',
-        'values'	=> [
-            null    => '.25rem',
-            0       => 0,
-        ],
-    ],
-    [
-        'property'  => [ 'border-top-right-radius', 'border-bottom-right-radius' ],
-        'class'		=> 'rounded-end',
-        'values'	=> [
-            null    => '.25rem',
-            0       => 0,
         ],
     ],
     // Shadow
