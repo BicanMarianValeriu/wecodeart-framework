@@ -317,7 +317,6 @@ a {
 // It would be more straightforward to just use a[href] in previous block, but that
 // causes specificity issues in many other styles that are too complex to fix.
 // See https://github.com/twbs/bootstrap/issues/19402
-
 a:not([href]):not([class]) {
 	&,
 	&:hover {
@@ -428,7 +427,6 @@ caption {
 // 1. Removes font-weight bold by inheriting
 // 2. Matches default `<td>` alignment by inheriting `text-align`.
 // 3. Fix alignment for Safari
-
 th {
 	font-weight: $table-th-font-weight; // 1
 	text-align: inherit; // 2
@@ -455,7 +453,6 @@ label {
 
 // Remove the default `border-radius` that macOS Chrome adds.
 // See https://github.com/twbs/bootstrap/issues/24093
-
 button {
 	// stylelint-disable-next-line property-disallowed-list
 	border-radius: 0;

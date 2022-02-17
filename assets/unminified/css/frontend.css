@@ -617,27 +617,30 @@ html body {
 }
 
 .alignnone {
-  margin: 0 0 1rem 0;
+  margin: 0 0 var(--wp--custom--spacers--3) 0;
 }
 
 .aligncenter {
   display: block;
-  margin: 0 auto 1rem;
+  margin: 0 auto var(--wp--custom--spacers--3);
 }
 
 .alignright {
   float: right;
-  margin: 0 0 1rem 1rem;
+  margin: 0 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3);
 }
 
 .alignleft {
   float: left;
-  margin: 0 1rem 1rem 0;
+  margin: 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3) 0;
 }
 
 .has-background-dim {
   opacity: 0.5;
   z-index: 1;
+}
+.has-background-dim-0 {
+  opacity: 0;
 }
 .has-background-dim-10 {
   opacity: 0.1;
