@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.4.5
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -86,30 +86,28 @@ class Classes implements Integration {
 
 		foreach( range( 1, 12 ) as $number ) {
 			$args[] = 'col-' . $number;
-			$args[] = 'g-col-' . $number;
-			$args[] = 'g-start-' . $number;
+			$args[] = 'span-' . $number;
+			$args[] = 'start-' . $number;
 			$args[] = 'row-cols-' . $number;
 			$args[] = 'offset-' . $number;
 		}
 
 		foreach( $breakpoints as $breakpoint ) {
-			$args[] = 'container-' . $breakpoint;
 			$args[] = 'col-' . $breakpoint;
-			$args[] = 'g-col-' . $breakpoint;
+			$args[] = 'span-' . $breakpoint;
 			$args[] = 'col-' . $breakpoint . '-auto';
 			$args[] = 'row-cols-' . $breakpoint . '-auto';
 			
 			foreach( range( 1, 12 ) as $number ) {
 				$args[] = 'col-' . $breakpoint . '-' . $number;
-				$args[] = 'g-col-' . $breakpoint . '-' . $number;
-				$args[] = 'g-start-' . $breakpoint . '-' . $number;
+				$args[] = 'span-' . $breakpoint . '-' . $number;
+				$args[] = 'start-' . $breakpoint . '-' . $number;
 				$args[] = 'row-cols-'. $breakpoint . '-' . $number;
 				$args[] = 'offset-' . $breakpoint . '-' . $number;
 			}
 		}
 
 		return wp_parse_args( [
-			'container',
 			'row',
 			'grid',
 			'col-auto',

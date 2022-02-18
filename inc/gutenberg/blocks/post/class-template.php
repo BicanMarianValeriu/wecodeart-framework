@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -134,7 +134,7 @@ class Template extends Dynamic {
 				$item_class = [ 'wp-block-post' ];
 				if( get_prop( $block->context, [ 'displayLayout', 'columns' ], false ) ) {
 					$columns 	= ( 12 / get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
-					$item_class = array_merge( $item_class, [ 'g-col-12', 'g-col-md-6', 'g-col-lg-' . $columns ] );
+					$item_class = array_merge( $item_class, [ 'span-12', 'span-md-6', 'span-lg-' . $columns ] );
 				}
 
 				wecodeart( 'markup' )::wrap( 'wp-block-post', [

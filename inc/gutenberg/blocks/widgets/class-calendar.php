@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -57,11 +58,39 @@ class Calendar extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
+		// Queue block for assets.
+		$storage = Blocks::get_instance();
+		$storage::load( [ 'core/table' ] );
+
 		// Remove ID
 		$content = preg_replace( '/(<[^>]+) id=".*?"/i', '$1', $content, 1 );
 		// Add Bootstrap Classes
 		$content = preg_replace( '/' . preg_quote( 'table class="', '/' ) . '/', 'table class="table table-bordered table-hover ', $content, 1 );
 
 		return $content;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public static function styles() {
+		return "
+		.wp-block-calendar,
+		.wp-block-calendar caption {
+			text-align: center;
+		}
+		.wp-block-calendar caption {
+			font-size: var(--wp--preset--font-size--large);
+			color: var(--wp--preset--color--dark);
+		}
+		.wp-block-calendar .wp-calendar-table {
+			caption-side: top;
+		}
+		.wp-block-calendar .wp-calendar-nav {
+			margin-bottom: 1.5rem;
+		}
+		";
 	}
 }

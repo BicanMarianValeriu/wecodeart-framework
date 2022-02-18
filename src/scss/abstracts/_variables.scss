@@ -18,5 +18,4 @@ $link-decoration: none!default;
 $headings-margin-bottom: 1.5rem;
 
 // Grid
-$container-padding-x: 1rem;
-$enable-cssgrid: true;
+$container-padding-x: var(--wp--custom--gutter, 1rem);

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -44,35 +44,7 @@ class Cover extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
-	}
-
-	/**
-	 * Dynamically renders the `core/cover` block.
-	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		
-		$attributes = get_prop( $block, 'attrs', [] );
-
-		$container = [ 'wp-block-cover__inner-container' ];
-		if( get_prop( $attributes, 'align', false ) === 'full' ) {
-			$container[] = 'container-fluid';
-		} else {
-			$container[] = 'container';
-		}
-
-		$search 	= '/' . preg_quote( 'class="wp-block-cover__inner-container"', '/' ) . '/';
-		$replace	= 'class="' . join( ' ', $container ) . '"';
-		$content 	= preg_replace( $search, $replace, $content, 1 );
-
-		return $content;
-	}
+	public function register() {}
 
 	/**
 	 * Block styles
@@ -118,6 +90,9 @@ class Cover extends Dynamic {
 			align-items: flex-end;
 		}
 		.wp-block-cover__inner-container {
+			width: 100%;
+			padding-left: var(--wp--custom--gutter);
+			padding-right: var(--wp--custom--gutter);
 			z-index: 2;
 			color: var(--wp--white);
 		}

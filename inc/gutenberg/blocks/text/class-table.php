@@ -63,8 +63,6 @@ class Table extends Dynamic {
 			'table-bordered',
 			'table-borderless',
 			'table-dark',
-			'table-sm',
-			'table-lg',
 			'table-striped',
 			'table-hover',
 		];
@@ -73,32 +71,28 @@ class Table extends Dynamic {
 
 		$border = get_prop( $attributes, [ 'style', 'border' ], [] );
 
-		$matched = array_intersect( $classes, $exclude );
-		$ommited = array_diff( $classes, $exclude );
-
 		$doc = $this->load_html( $content );
 
 		// Wrapper Changes
 		$wrapper	= $doc->getElementsByTagName( 'figure' )->item(0);
-		$classname 	= $wrapper->getAttribute( 'class' );
-		$wrapper->setAttribute( 'class', join( ' ', array_filter( array_merge( explode( ' ', $classname ), $ommited ) ) ) );
+		$classnames	= explode( ' ', $wrapper->getAttribute( 'class' ) );
+		$ommited 	= array_diff( $classnames, $exclude );
+		
+		$wrapper->setAttribute( 'class', join( ' ', array_filter( $ommited ) ) );
 		
 		// Table Changes
 		$table 		= $wrapper->getElementsByTagName( 'table' )->item(0);
-		$table_cls  = [ 'table' ];
+		$table_cls  = [ 'wp-block-table__table' ];
 		
 		if( $value = get_prop( $border, 'style', 'none' ) ) {
 			$table_cls[] = $value === 'none' ? 'table-borderless' : 'table-bordered';
-		}
-
-		if( in_array( 'is-style-stripes', $classes, true ) ) {
-			$table_cls[] = 'table-striped';
 		}
 		
 		if( in_array( 'is-style-hover', $classes, true ) ) {
 			$table_cls[] = 'table-hover';
 		}
 
+		$matched = array_intersect( $classes, $exclude );
 		if( ! empty( $matched ) ) {
 			$table_cls = array_merge( $table_cls, $matched );
 		}
@@ -165,7 +159,7 @@ class Table extends Dynamic {
 		.table-borderless > :not(:first-child) {
 			border-top-width: 0;
 		}
-		.table-striped > tbody > tr:nth-of-type(2n) > * {
+		.is-style-stripes table > tbody > tr:nth-of-type(odd) > * {
 			--wp--table-accent-bg: var(--wp--table-striped-bg);
 			color: var(--wp--table-striped-color);
 		}
@@ -203,7 +197,7 @@ class Table extends Dynamic {
 		.wp-block-table th {
 			word-break: break-word;
 		}
-		.wp-block-table .table-striped tbody tr {
+		.wp-block-table .is-style-stripes tbody tr {
 			--wp--table-striped-color: inherit;
 		}
 		";

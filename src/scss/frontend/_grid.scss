@@ -1,0 +1,38 @@
+$breakpoints: $grid-breakpoints;
+$columns: $grid-columns;
+
+.grid {
+    --wp--style--block-gap: 0px;
+    --wp--columns: 12;
+    --wp--column-min: 0px;
+    --wp--gap-count: calc(var(--wp--columns) - 1);
+    --wp--gap-width: calc(var(--wp--gap-count) * var(--wp--style--block-gap));
+    --wp--column-max: calc((100% - var(--wp--gap-width)) / var(--wp--columns));
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(var(--wp--column-min), var(--wp--column-max)), 1fr));
+    grid-gap: var(--wp--style--block-gap);
+    // padding-left: var(--wp--custom--gutter, 1rem);
+    // padding-right: var(--wp--custom--gutter, 1rem);
+
+    @each $breakpoint in map-keys($breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $breakpoints);
+    
+        @include media-breakpoint-up($breakpoint, $breakpoints) {
+            @if $columns > 0 {
+                @for $i from 1 through $columns {
+                    .span#{$infix}-#{$i} {
+                        grid-column: auto / span $i;
+                    }
+                }
+        
+                // Start with `1` because `0` is and invalid value.
+                // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+                @for $i from 1 through ($columns - 1) {
+                    .start#{$infix}-#{$i} {
+                        grid-column-start: $i;
+                    }
+                }
+            }
+        }
+    }
+}

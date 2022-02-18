@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -89,15 +89,9 @@ class Quote extends Dynamic {
 	 */
 	public static function styles() {
 		return "
-		.wp-block-quote {
+		.wp-block-quote:not(.is-style-plain) {
 			border-left: 4px solid var( --wp--preset--color--primary );
 			padding-left: 1rem;
-		}
-		.wp-block-quote .is-style-large .blockquote {
-			font-size: 2rem;
-		}
-		.wp-block-quote .is-style-large .blockquote-footer {
-			font-size: 1.5rem;
 		}
 		.wp-block-quote .blockquote {
 			font-size: inherit;

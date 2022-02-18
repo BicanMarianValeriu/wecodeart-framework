@@ -131,6 +131,7 @@
 			"defaultPalette": false
 		},
 		"custom": {
+			"gutter": "1rem",
 			"breakpoints": {
 				"sm": "640px",
 				"md": "768px",
@@ -272,8 +273,8 @@
 			"core/columns": {
 				"spacing": {
 					"padding": {
-						"left": "1rem",
-						"right": "1rem"
+						"left": "var:custom|gutter",
+						"right": "var:custom|gutter"
 					}
 				}
 			}

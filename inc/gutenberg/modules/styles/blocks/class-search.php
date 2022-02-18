@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.4.8
- * @version		5.4.8
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -38,6 +38,15 @@ class Search extends Base {
 		];
 
 		// Inline Style
+		if( ! in_array( get_prop( $this->attrs, 'width' ), [ 25, 50, 75, 100 ] ) ) {
+			$this->output[] = wp_parse_args( [
+				'element'	=> join( ' ', [ $this->element, '.wp-block-search__fields' ] ),
+				'property' 	=> 'width',
+				'value'	  	=> get_prop( $this->attrs, 'width' ),
+				'units'		=> get_prop( $this->attrs, 'widthUnit' )
+			], $output );
+		}
+
 		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
 			// Border
 			if( $border = get_prop( $css_style, 'border', [] ) ) {

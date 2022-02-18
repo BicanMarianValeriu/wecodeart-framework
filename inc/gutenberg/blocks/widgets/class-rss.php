@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -116,8 +116,8 @@ class RSS extends Dynamic {
 			$item_class = [ 'wp-block-rss__item' ];
 
 			if ( get_prop( $attributes, [ 'blockLayout' ], false ) ) {
-				$item_class[] = 'g-col-' . $columns;
-				$item_class[] = 'g-col-lg-1';
+				$item_class[] = 'span-' . $columns;
+				$item_class[] = 'span-lg-1';
 			}
 
 			foreach ( $posts as $item ) {

@@ -62,7 +62,7 @@ class Posts extends Dynamic {
 		$attributes = get_prop( $block, 'attrs', [] );
 
 		$args = [
-			'queryId'	=> '7',
+			// 'queryId'	=> '7',
 			'displayLayout' => get_prop( $attributes, [ 'postLayout' ] ) ? [
 				'columns'	=> get_prop( $attributes, [ 'columns' ], null ),
 				'type' 		=> get_prop( $attributes, [ 'postLayout' ], 'list' ) === 'grid' ? 'flex' : 'list' 

@@ -16,11 +16,12 @@ Author URI: https://www.wecodeart.com/about/
 @import './root';
 @import './reboot';
 @import './base';
+@import './grid';
 
 // This will allways be in the theme - core CSS
-@import "~bootstrap/scss/containers";       // X
 @import "~bootstrap/scss/grid";             // X
 @import "~bootstrap/scss/helpers";          // X
+// @import "~bootstrap/scss/containers";    // XX Deprecated
 // @import "~bootstrap/scss/transitions";   // XX Base
 // @import "~bootstrap/scss/type";          // XX Reboot
 

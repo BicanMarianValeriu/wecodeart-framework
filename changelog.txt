@@ -1,8 +1,15 @@
 v5.4.9
 - Updated - Get WP core colors from 'default' instead of deprecated 'core' ( [ 'settings', 'color', 'palette', 'default' ] )
 - Updated - Home starter content
+- Updated - core/latest-posts and core/post-template grid classes
+- Updated - core/table and core/calendar to load table CSS
+- Updated - core/search width styles output
+- Removed - Containers CSS - fully updated to Gutenberg (not needed anymore)
+- Removed - Cover block inner container class
 - Fixed - Editor preview for outline/link button styles (after transfering most of the properties to theme.json)
 - Added - Color classes will also output rgb color value in global styles to allow more styleing flexibility
+- Added - Custom Grid classes (experimental): .grid, .span-{number}, .start-{number}
+- Added - Custom global styles gutter
 
 v5.4.8
 - Updated - Output custom duotones into wp_body_open (previously wp_footer) as per WP updates
