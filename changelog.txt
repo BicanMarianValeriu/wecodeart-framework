@@ -1,3 +1,6 @@
+v5.5.1
+- Updated - to do
+
 v5.5.0
 - Fixed - Grid gap default to 1 rem (--wp--custom--gutter variable)
 
