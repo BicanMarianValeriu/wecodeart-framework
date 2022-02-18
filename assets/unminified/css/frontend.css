@@ -861,7 +861,7 @@ figcaption p.wp-caption-text,
 }
 
 .grid {
-  --wp--style--block-gap: 0px;
+  --wp--style--block-gap: var(--wp--custom--gutter, 1rem);
   --wp--columns: 12;
   --wp--column-min: 0px;
   --wp--gap-count: calc(var(--wp--columns) - 1);
