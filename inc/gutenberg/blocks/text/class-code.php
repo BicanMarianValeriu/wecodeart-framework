@@ -53,13 +53,10 @@ class Code extends Dynamic {
 	 */
 	public static function styles() {
 		return "
-		.wp-block-code {
-			padding: 1rem;
-			color: var(--wp--preset--color--dark, #212529);
-			background-color: var(--wp--preset--color--white, white);
-			border: 1px solid;
-			border-color: var(--wp--preset--color--cyan-bluish-gray, #dee2e6);
-			border-radius: var(--wp--border-radius, 0.25rem);
+		.wp-block-code code {
+			display: block;
+			overflow-wrap: break-word;
+    		white-space: pre-wrap;
 		}
 		";
 	}

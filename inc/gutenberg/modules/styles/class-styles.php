@@ -219,6 +219,7 @@ class Styles implements Integration {
 				// Here we need "cancel reply" link to be hidden
 				'core/post-comments-form',
 				// Blocks with inline formatting (text blocks)
+				'core/code',
 				'core/quote',
 				'core/pullquote',
 				'core/verse',

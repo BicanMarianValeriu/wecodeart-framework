@@ -311,7 +311,7 @@ blockquote,
 
 b,
 strong {
-  font-weight: bolder;
+  font-weight: 700;
 }
 
 small, .small {
@@ -319,7 +319,9 @@ small, .small {
 }
 
 mark, .mark {
-  padding: 0.2em;
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border-radius: 0.25rem;
   background-color: #fcf8e3;
 }
 
@@ -419,6 +421,13 @@ iframe {
 img,
 svg {
   vertical-align: middle;
+}
+
+svg {
+  display: inline-block;
+  vertical-align: -0.125em;
+  fill: currentColor;
+  height: 1em;
 }
 
 img {
@@ -726,13 +735,6 @@ html body {
   /* Above WP toolbar. */
 }
 
-svg,
-.svg-inline {
-  display: inline-block;
-  vertical-align: -0.125em;
-  fill: currentColor;
-  height: 1em;
-}
 svg .fa-secondary,
 .svg-inline .fa-secondary {
   opacity: 0.4;
@@ -740,12 +742,6 @@ svg .fa-secondary,
 svg.fa-fw,
 .svg-inline.fa-fw {
   width: 1em;
-}
-
-mark.has-inline-color, .has-inline-color.mark {
-  border-radius: 0.25rem;
-  padding: 0.2rem 0.5rem;
-  margin: 0 0.3rem;
 }
 
 figcaption,

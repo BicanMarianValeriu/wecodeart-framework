@@ -2,6 +2,32 @@
 	"$schema": "http://schemas.wp.org/trunk/theme.json",
 	"version": 2,
 	"styles": {
+		"blocks": {
+			"core/code": {
+				"border": {
+					"width": "1px",
+					"style": "solid",
+					"radius": "0.5rem",
+					"color": "var:preset|color|light"
+				},
+				"color": {
+					"background": "var:preset|color|white",
+					"text": "var:preset|color|dark"
+				},
+				"typography": {
+					"fontFamily": "monospace",
+					"fontSize": "var:preset|font-size|small"
+				},
+				"spacing": {
+					"padding": {
+						"top": "1rem",
+						"bottom": "1rem",
+						"left": "1rem",
+						"right": "1rem"
+					}
+				}
+			}
+		},
 		"elements": {
 			"link": {
 				"color": {

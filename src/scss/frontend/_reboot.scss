@@ -253,7 +253,7 @@ blockquote,
 // Add the correct font weight in Chrome, Edge, and Safari
 b,
 strong {
-	font-weight: $font-weight-bolder;
+	font-weight: 700;
 }
 
 // Small
@@ -265,8 +265,10 @@ small {
 
 // Mark
 mark {
-	padding: $mark-padding;
-	background-color: $mark-bg;
+	display: inline-block;
+	padding: .2rem .8rem;
+	border-radius: .25rem;
+	background-color: #fcf8e3;
 }
 
 .small {
@@ -402,6 +404,13 @@ iframe {
 img,
 svg {
   	vertical-align: middle;
+}
+
+svg {
+    display: inline-block;
+    vertical-align: -0.125em;
+    fill: currentColor;
+    height: 1em;
 }
 
 img {
