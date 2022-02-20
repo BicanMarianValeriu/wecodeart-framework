@@ -8,10 +8,16 @@
  * @package		WeCodeArt Framework
  * @subpackage  OffCanvas
  * @since		5.0.0
- * @version    	5.3.3
+ * @version    	5.5.1
  */
 
 defined( 'ABSPATH' ) || exit();
+
+/**
+ * @param   mixed  	$id			Toggle ID
+ * @param   string	$title		Offcanvas Title
+ * @param   string	$content	Offcanvas Content
+ */
 
 $classnames = [ 'offcanvas' ];
 

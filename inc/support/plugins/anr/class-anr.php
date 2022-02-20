@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.4.8
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -69,7 +69,7 @@ class ANR implements Integration {
 					remove_action( 'comment_form_after_fields', 	[ $anr_instance, 'form_field' ], 99 );
 					add_action( 'comment_form_after_fields', 		[ $this, 'comment_field' ] );
 				} else {
-					remove_filter( 'comment_form_field_comment', 	[ $anr_instance, 'comment_form_field' ], 99 );
+					remove_filter( 'comment_form_field_comment', 	[ $anr_instance, 'form_field_return' ], 99 );
 					add_filter( 'comment_form_field_comment', 		[ $this, 'comment_field_return' ] );
 				}
 			} );

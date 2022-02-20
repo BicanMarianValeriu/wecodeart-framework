@@ -45,7 +45,7 @@ class Home extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -113,22 +113,7 @@ class Home extends Dynamic {
 						'class' => 'wp-block-navigation-link__label'
 					]
 				] ], function( $attributes ) { 
-						echo wp_kses( $attributes['label'], [
-							'code'   => [],
-							'em'     => [],
-							'img'    => [
-								'scale' => [],
-								'class' => [],
-								'style' => [],
-								'src'   => [],
-								'alt'   => [],
-							],
-							's'      => [],
-							'span'   => [
-								'style' => [],
-							],
-							'strong' => [],
-						] );
+						echo wp_kses_post( $attributes['label'] );
 				}, [ $attributes ] );
 
 			}, [ $attributes, $icons ] );

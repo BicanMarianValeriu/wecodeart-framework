@@ -1,5 +1,14 @@
 v5.5.1
-- Updated - to do
+- Updated - /views/ folder params inline documentation
+- Updated - core/site-logo is-style-rounded CSS
+- Updated - 404 page base design improvements + added big title and "Home" button
+- Updated - Header columns adjustments and Navigation remove ID to allow usage of core/page-list fallback
+- Updated - Page List fallback max pages changed to 3 and remove "ul" tag when used in Navigation
+- Updated - Navigation blocks wp_kses to wp_kses_post
+- Updated - core/page-list to use Navigation link markup and styles (not sure why WP complicates things)
+- Updated - Allow inline CSS for mark formatting on text blocks (headings, paragraph, lists etc)
+- Fixed - ANR -> Captcha 4WP double captcha containers on comment form.
+- Fixed - core/cover bug with solid color only background style
 
 v5.5.0
 - Fixed - Grid gap default to 1 rem (--wp--custom--gutter variable)

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -145,22 +145,7 @@ class Link extends Dynamic {
 					'class' => 'wp-block-navigation-link__label'
 				]
 			] ], function( $attributes ) { 
-					echo wp_kses( $attributes['label'], [
-						'code'   => [],
-						'em'     => [],
-						'img'    => [
-							'scale' => [],
-							'class' => [],
-							'style' => [],
-							'src'   => [],
-							'alt'   => [],
-						],
-						's'      => [],
-						'span'   => [
-							'style' => [],
-						],
-						'strong' => [],
-					] );
+					echo wp_kses_post( $attributes['label'] );
 			}, [ $attributes ] );
 		}, [ $attributes, $extras ] );
 	}

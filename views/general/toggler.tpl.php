@@ -13,6 +13,11 @@
 
 defined( 'ABSPATH' ) || exit();
 
+/**
+ * @param   mixed  	$id			Toggle ID
+ * @param   mixed	$toggle		Toggle Type
+ */
+
 ?>
 <button type="button" class="navbar-toggler" data-bs-toggle="<?php echo esc_attr( $toggle ); ?>" data-bs-target="#<?php echo esc_attr( $id ); ?>" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'wecodeart' ); ?>">
 	<span class="navbar-toggler-icon"></span>

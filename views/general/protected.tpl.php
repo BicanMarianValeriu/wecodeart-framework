@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Protected Template
  * @since 	    3.5
- * @version	    5.3.3
+ * @version	    5.5.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -23,13 +23,13 @@ wecodeart( 'markup' )->SVG::add( 'unlock', [
     'paths' 	=> 'M336 256H96v-96c0-70.6 25.4-128 96-128s96 57.4 96 128v20c0 6.6 5.4 12 12 12h8c6.6 0 12-5.4 12-12v-18.5C320 73.1 280.9.3 192.5 0 104-.3 64 71.6 64 160v96H48c-26.5 0-48 21.5-48 48v160c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm16 208c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V304c0-8.8 7.2-16 16-16h288c8.8 0 16 7.2 16 16v160z',
 ] );
 
-wecodeart( 'styles' )->Utilities->load( [ 'border', 'border-light', 'p-3', 'my-5' ] );
+wecodeart( 'styles' )->Utilities->load( [ 'border', 'p-3', 'my-5' ] );
 
 /**
- * @param   string  $action       Contains the form action url
+ * @param   string  $action Contains the form action url
  */
 ?>
-<form action="<?php echo esc_url( $action ); ?>" method="post" class="border border-light p-3 my-5">
+<form action="<?php echo esc_url( $action ); ?>" method="post" class="border has-border-light-color p-3 my-5">
     <h4><?php
     
         esc_html_e( 'This post is password protected. To view this post, enter the password below!', 'wecodeart' );

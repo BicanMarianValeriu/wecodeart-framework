@@ -87,7 +87,7 @@ final class Assets implements Integration {
 	 * WeCodeArt JS Object
 	 *
 	 * @since	3.2
-	 * @version	5.3.5
+	 * @version	5.5.1
 	 *
 	 * @return 	void
 	 */
@@ -105,6 +105,7 @@ final class Assets implements Integration {
 		}
 
 		$wecodeart = apply_filters( 'wecodeart/filter/scripts/localize', $wecodeart );
+		$wecodeart = apply_filters( 'wecodeart/filter/support/assets/localize', $wecodeart );
 		
 		wp_localize_script( $this->make_handle(), 'wecodeart', $wecodeart );
 	}

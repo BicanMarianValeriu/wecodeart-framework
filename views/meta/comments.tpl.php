@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Comments
  * @since 		3.9.5
- * @version		5.3.1
+ * @version		5.5.1
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -16,7 +16,9 @@ defined( 'ABSPATH' ) || exit();
 use function WeCodeArt\Functions\get_prop;
 
 /**
- * @param   int     $number Contains the comments number
+ * @param   int     $post_id    Contains the post id
+ * @param   int     $number     Contains the comments number
+ * @param   array   $attributes Contains the Block attributes
  */
 
 $attributes = isset( $attributes ) ? $attributes : [];

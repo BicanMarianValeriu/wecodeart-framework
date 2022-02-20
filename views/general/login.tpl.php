@@ -8,12 +8,12 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Login Template
  * @since 	    5.1.8
- * @version	    5.4.8
+ * @version	    5.5.1
  */
 
 defined( 'ABSPATH' ) || exit;
 
-wecodeart( 'styles' )->Utilities->load( 'mb-3' );
+wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
 
 // Escaping attrs is not necessary with wecodeart_input()
 // Is already done inside the function via esc_attr()
@@ -66,7 +66,7 @@ wecodeart( 'styles' )->Utilities->load( 'mb-3' );
     
         wecodeart_input( 'toggle', [
             'type'  => 'checkbox',
-            'label' => esc_html( $args['label_remember'] ),
+            'label' => $args['label_remember'],
             'attrs' => [
                 'id'        => $args['id_remember'],
                 'name'      => 'rememberme',

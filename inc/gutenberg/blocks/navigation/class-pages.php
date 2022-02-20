@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.3.7
- * @version		5.3.7
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Gutenberg\Blocks\Navigation;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -45,23 +46,117 @@ class Pages extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'	], 10, 2 );
+		\add_filter( 'block_type_metadata_settings',	[ $this, 'filter_render' ], 10, 2 );
+	}
+
+	/**
+	 * Filter navigation markup
+	 *
+	 * @param	array 	$settings
+	 * @param	array 	$data
+	 */
+	public function filter_render( $settings, $data ) {
+		if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => [ $this, 'render' ]
+			], $settings );
+		}
+		
+		return $settings;
 	}
 
 	/**
 	 * Dynamically renders the `core/page-list` block.
 	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
+	 * @param 	array 	$attributes The block attributes.
+	 * @param 	string 	$content 	The block content.
+	 * @param 	array 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
+	public function render( $attributes = [], $content = '', $block = null ) {
+		// All pages
+		$all_pages = get_pages( [
+			'sort_column' => 'menu_order,post_title',
+			'order'       => 'asc',
+		] );
+
+		// If there are no pages, there is nothing to show.
+		if ( empty( $all_pages ) ) {
+			return;
+		}
+
+		$inner_blocks 	= [];
+		$top_levels		= wp_list_filter( $all_pages, [ 'post_parent' => 0 ] );
 		
-		$content = str_replace( 'wp-block-page-list', 'wp-block-page-list nav', $content );
-		$content = str_replace( 'wp-block-navigation-item', 'wp-block-navigation-item nav-item', $content );
-		$content = str_replace( 'wp-block-pages-list__item__link', 'wp-block-pages-list__item__link nav-link', $content );
+		// Limit the number of items to be visually displayed.
+		if ( $amount = get_prop( $attributes, [ '__unstableMaxPages' ] ) ) {
+			$top_levels = array_slice( $top_levels, 0, $amount );
+		}
+
+		foreach( $top_levels as $page ) {
+			$inner_blocks[] = self::parse_block( $page, $all_pages );
+		}
+
+		$inner_blocks = new \WP_Block_List( $inner_blocks, $attributes );
+
+		// Assets - we need navigation css/js for dropdowns and styleing.
+		Blocks::get_instance()::load( [ 'core/navigation' ] );
+
+		// Render links.
+		foreach( $inner_blocks as $inner_block ) $content .= $inner_block->render();
+		
+		// If not used in navigation then we wrap it.
+		if( empty( $block->context ) ) {
+			$classes = [ 'wp-block-navigation', 'wp-block-navigation--pages', 'nav' ];
+	
+			if( $classname = get_prop( $attributes, [ 'className' ], '' ) ) {
+				$classes = array_merge( $classes, array_filter( explode( ' ', $classname ) ) );
+			}
+
+			$content = wecodeart( 'markup' )::wrap( 'wp-block-page-list', [ [
+				'tag' 	=> 'ul',
+				'attrs'	=> [
+					'class' => join( ' ', $classes ),
+				]
+			] ], $content, [], false );
+		}
 
 		return $content;
+	}
+
+	/**
+	 * Returns page as a parsed navigation link with inner blocks.
+	 *
+	 * @param 	object 	$page		Current page.
+	 * @param 	array 	$all_pages 	All pages.
+	 *
+	 * @return 	array 	Parsed Block.
+	 */
+	public static function parse_block( $page, $all_pages ) {
+		$block = [
+			'blockName'	=> 'core/navigation-link',
+			'attrs'		=> [
+				'kind' 	=> 'post-type',
+				'type' 	=> 'page',
+				'rel'	=> (int) get_option( 'page_on_front' ) === $page->ID ? 'home' : null,
+				'id'	=> $page->ID,
+				'label' => $page->post_title,
+				'url'	=> get_permalink( $page ),
+				'isTopLevelLink' => (int) $page->post_parent === 0,
+			]
+		];
+
+		$inner_blocks = wp_list_filter( $all_pages, [ 'post_parent' => $page->ID ] );
+
+		if( ! empty( $inner_blocks ) ) {
+			$block = wp_parse_args( [
+				'innerBlocks' => array_map( function( $page ) use( $all_pages ) {
+					return self::parse_block( $page, $all_pages );
+				}, $inner_blocks )
+			], $block );
+		}
+
+		return $block;
 	}
 }

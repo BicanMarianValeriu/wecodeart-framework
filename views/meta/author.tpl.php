@@ -17,6 +17,7 @@ use function WeCodeArt\Functions\get_prop;
 
 /**
  * @param   object  $author Author
+ * @param   array   $attributes Contains the Block attributes
  */
 
 $attributes = isset( $attributes ) ? $attributes : [];

@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Terms
  * @since 		5.0.0
- * @version		5.3.1
+ * @version		5.5.1
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -16,8 +16,11 @@ defined( 'ABSPATH' ) || exit();
 use function WeCodeArt\Functions\get_prop;
 
 /**
+ * @param   int     $post_id    Current post ID
+ * @param   int     $count      Terms number
+ * @param   string  $terms      Terms markup
  * @param   int     $primary    Primary Category
- * @param   array   $attributes
+ * @param   array   $attributes Block attributes
  */
 
 $attributes = isset( $attributes ) ? $attributes : [];

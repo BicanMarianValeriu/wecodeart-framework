@@ -8,10 +8,15 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Notification Template
  * @since 		3.8.1
- * @version		5.3.1
+ * @version		5.5.1
  */
 
 defined( 'ABSPATH' ) || exit();
+
+/**
+ * @param   array  	$attributes Notification attributes
+ * @param   string	$message   	Notification message
+ */
 
 ?>
 <div <?php echo wecodeart( 'markup' )::generate_attr( 'admin-notification', $attributes ); // WPCS ok - attributes escaped with fn above. ?>>

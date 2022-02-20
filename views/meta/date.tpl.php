@@ -8,12 +8,19 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Date
  * @since 		3.9.5
- * @version		5.3.1
+ * @version		5.5.1
  */
 
 defined( 'ABSPATH' ) || exit();
 
 use function WeCodeArt\Functions\get_prop;
+
+/**
+ * @param   int     $post_id        Contains the post id
+ * @param   array   $published      Contains the published date
+ * @param   array   $modified       Contains the modified date
+ * @param   array   $attributes     Contains the Block attributes
+ */
 
 $attributes = isset( $attributes ) ? $attributes : [];
 $classnames = [ 'wp-block-post-date' ];

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.9
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -103,6 +103,7 @@ class Cover extends Dynamic {
 			display: flex;
 			flex-direction: column;
 		}
+		.wp-block-cover__background,
 		.wp-block-cover__gradient-background,
 		.wp-block-cover__image-background,
 		.wp-block-cover__video-background {
