@@ -64,18 +64,23 @@ class Table extends Base {
 
 			// Border
 			if( $border = get_prop( $css_style, 'border', [] ) ) {
+				// Width
 				if ( $value = get_prop( $border, 'width' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-width',
 						'value'	  	=> $value
 					], $output );
 				}
+
+				// Style
 				if ( $value = get_prop( $border, 'style' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-style',
 						'value'	  	=> $value
 					], $output );
 				}
+
+				// Color
 				if ( $value = get_prop( $border, 'color' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-color',

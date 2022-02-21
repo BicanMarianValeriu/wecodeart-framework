@@ -323,8 +323,8 @@ class Styles implements Integration {
 			$value 	= $this->CSS::hex_to_rgba( get_prop( $item, [ 'color' ] ) );
 			$value  = preg_match( '/\((.*?)\)/', $value, $color );
 			
-			$style .= sprintf( '.has-%s-color{--wp--color--rgb: %s}', $slug, $color[1] );
-			$style .= sprintf( '.has-%s-background-color{--wp--background--rgb: %s}', $slug, $color[1] );
+			$style .= sprintf( '.has-%s-color{--wp--color--rgb:%s}', $slug, $color[1] );
+			$style .= sprintf( '.has-%s-background-color{--wp--background--rgb:%s}', $slug, $color[1] );
 		}
 
 		$link_color = wecodeart_json( [ 'styles', 'elements', 'link', 'color', 'text' ], false );
@@ -350,7 +350,7 @@ class Styles implements Integration {
 		// Sanitized because we are not using CSS::parse method which does that by default (for arrays)
 		$link_color = $this->CSS::hex_brightness( $this->CSS->Sanitize::color( $link_color ), -25 );
 
-		$style .= "a:hover{color:${link_color};}";
+		$style .= "a:hover{color:${link_color}}";
 
 		wp_add_inline_style( 'global-styles', $style );
 	}
@@ -388,6 +388,8 @@ class Styles implements Integration {
 
 	/**
 	 * Core blocks.
+	 *
+	 * @param	bool	$exclude Whether to exclude blocks that should be skipped
 	 *
 	 * @return 	array
 	 */

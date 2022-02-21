@@ -8,6 +8,7 @@ v5.5.1
 - Updated - core/page-list to use Navigation link markup and styles (not sure why WP complicates things)
 - Updated - Allow inline CSS for mark formatting on text blocks (headings, paragraph, lists etc)
 - Updated - Gutenberg restricted blocks (skipped by our Styles extension) list
+- Updated - core/comment-template to load Utilities CSS only if there are comments
 - Fixed - ANR -> Captcha 4WP double captcha containers on comment form.
 - Fixed - core/cover bug with solid color only background style
 - Added - core/code default styleing

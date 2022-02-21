@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.4.8
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -92,14 +92,14 @@ class Template extends Dynamic {
         $comments 			= $comments_query->get_comments();
 		$comments_number 	= count( $comments );
 
-		// Required Utilities
-		wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5', 'mb-5', 'my-1' ] );
-		
 		$output	= wecodeart( 'markup' )->SVG::compile( 'comments' );
 		
 		if ( 0 === $comments_number ) {
 			$header	= esc_html__( 'No comments', 'wecodeart' );
 		} else {
+			// Required Utilities
+			wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5', 'mb-5', 'my-1' ] );
+
 			$header = sprintf(
 				_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
 				number_format_i18n( $comments_number )

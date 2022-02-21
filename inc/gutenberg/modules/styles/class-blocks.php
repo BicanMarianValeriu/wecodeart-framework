@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.3
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -89,7 +89,7 @@ class Blocks extends Processor {
 		$output['element'] 	= $this->element;
 
 		// Layout - we do not support wide align yet but it will be enabled in a future version!
-		if( $layout = get_prop( $this->attrs, 'layout', false ) ) {
+		if( $layout = get_prop( $this->attrs, 'layout' ) ) {
 			$type = get_prop( $layout, 'type', 'default' );
 
 			if( $type === 'default' ) {
@@ -195,63 +195,63 @@ class Blocks extends Processor {
 		}
 		
 		// Inline Style
-		if( $css_style = get_prop( $this->attrs, 'style', false ) ) {
+		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
 			// Typography
-			if ( $typography = get_prop( $css_style, 'typography', false ) ) {
-				if ( $value = get_prop( $typography, 'fontFamily', false ) ) {
+			if ( $typography = get_prop( $css_style, 'typography' ) ) {
+				if ( $value = get_prop( $typography, 'fontFamily' ) ) {
 					if ( strpos( $value, 'var:preset|font-family' ) !== false ) {
 						// Get the name from the string and add proper styles.
 						$name 	= substr( $value, strrpos( $value, '|' ) + 1 );
 						$this->output[] = wp_parse_args( [
 							'property' 	=> 'font-family',
-							'value'	  	=> sprintf( 'var(--wp--preset--font-family--%s)', $name )
+							'value'	  	=> sprintf( 'var(--wp--preset--font-family--%s)', _wp_to_kebab_case( $name ) )
 						], $output );
 					}
 				}
 
-				if ( $value = get_prop( $typography, 'fontSize', false ) ) {
+				if ( $value = get_prop( $typography, 'fontSize' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'font-size',
 						'value'	  	=> $value,
 					], $output );
 				}
 	
-				if ( $value = get_prop( $typography, 'fontWeight', false ) ) {
+				if ( $value = get_prop( $typography, 'fontWeight' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'font-weight',
 						'value'	  	=> $value
 					], $output );
 				}
 
-				if ( $value = get_prop( $typography, 'fontStyle', false ) ) {
+				if ( $value = get_prop( $typography, 'fontStyle' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'font-style',
 						'value'	  	=> $value
 					], $output );
 				}
 				
-				if ( $value = get_prop( $typography, 'lineHeight', false ) ) {
+				if ( $value = get_prop( $typography, 'lineHeight' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'line-height',
 						'value'	  	=> $value,
 					], $output );
 				}
 	
-				if ( $value = get_prop( $typography, 'textTransform', false ) ) {
+				if ( $value = get_prop( $typography, 'textTransform' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'text-transform',
 						'value'	  	=> $value
 					], $output );
 				}
 	
-				if ( $value = get_prop( $typography, 'textDecoration', false ) ) {
+				if ( $value = get_prop( $typography, 'textDecoration' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'text-decoration',
 						'value'	  	=> $value
 					], $output );
 				}
 				
-				if ( $value = get_prop( $typography, 'letterSpacing', false ) ) {
+				if ( $value = get_prop( $typography, 'letterSpacing' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'letter-spacing',
 						'value'	  	=> $value
@@ -260,9 +260,9 @@ class Blocks extends Processor {
 			}
 
 			// Colors
-			if ( $color = get_prop( $css_style, 'color', false ) ) {
+			if ( $color = get_prop( $css_style, 'color' ) ) {
 				// Text
-				if ( $value = get_prop( $color, 'text', false ) ) {
+				if ( $value = get_prop( $color, 'text' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'color',
 						'value'	  	=> $value
@@ -270,7 +270,7 @@ class Blocks extends Processor {
 				}
 
 				// Background
-				if ( $value = get_prop( $color, 'background', false ) ) {
+				if ( $value = get_prop( $color, 'background' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'background-color',
 						'value'	  	=> $value
@@ -278,7 +278,7 @@ class Blocks extends Processor {
 				}
 
 				// Gradient
-				if ( $value = get_prop( $color, 'gradient', false ) ) {
+				if ( $value = get_prop( $color, 'gradient' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'background-image',
 						'value'	  	=> $value
@@ -307,7 +307,7 @@ class Blocks extends Processor {
 			}
 
 			// Spacing
-			if( $spacing = get_prop( $css_style, 'spacing', false ) ) {
+			if( $spacing = get_prop( $css_style, 'spacing' ) ) {
 				// Padding
 				if ( $padding = get_prop( $spacing, 'padding', [] ) ) {
 					if( ! empty( $padding ) ) {
@@ -342,20 +342,22 @@ class Blocks extends Processor {
 			}
 
 			// Border
-			if( $border = get_prop( $css_style, 'border', [] ) ) {
-				if ( $value = get_prop( $border, 'width', false ) ) {
+			if( $border = get_prop( $css_style, 'border' ) ) {
+				if ( $value = get_prop( $border, 'width' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-width',
 						'value'	  	=> $value
 					], $output );
 				}
-				if ( $value = get_prop( $border, 'style', false ) ) {
+
+				if ( $value = get_prop( $border, 'style' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-style',
 						'value'	  	=> $value
 					], $output );
 				}
-				if ( $value = get_prop( $border, 'radius', false ) ) {
+
+				if ( $value = get_prop( $border, 'radius' ) ) {
 					if ( is_array( $value ) ) {
 						// We have individual border radius corner values.
 						foreach ( $value as $key => $radius ) {
@@ -374,6 +376,7 @@ class Blocks extends Processor {
 						], $output );
 					}
 				}
+				
 				if ( $value = get_prop( $border, 'color', false ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-color',
@@ -417,7 +420,7 @@ class Blocks extends Processor {
 	protected function parse_custom() {
 		if ( $css_custom = get_prop( $this->attrs, 'customCSS', false ) ) {
 			$custom_style 	= wp_strip_all_tags( $css_custom );
-			$custom_style 	= str_replace( 'selector', $this->element, $custom_style );
+			$custom_style 	= str_replace( 'selector', $this->get_element(), $custom_style );
 			$custom_style 	= wecodeart( 'styles' )::string_to_array_query( $custom_style );
 			// Array replace existing CSS rules - custom overwrites everything
 			$this->styles 	= array_replace_recursive( $this->styles, $custom_style );
