@@ -22,10 +22,10 @@ defined( 'ABSPATH' ) || exit();
 <div <?php echo wecodeart( 'markup' )::generate_attr( 'admin-notification', $attributes ); // WPCS ok - attributes escaped with fn above. ?>>
 	<div class="wca-notice__branding"><?php
 
-		printf( '<img src="%s" />', wecodeart_config( 'paths' )['uri'] . '/assets/images/logo.png' );
+		printf( '<img style="margin:10px;" src="%s" />', wecodeart_config( 'paths' )['uri'] . '/assets/images/logo.png' );
  
 	?></div>
-	<div class="wca-notice__container" style="padding-left: 60px;"><?php
+	<div class="wca-notice__container" style="padding-left: 75px;"><?php
 
 		echo wp_kses_post( $message );
  
