@@ -7,9 +7,12 @@ v5.5.1
 - Updated - Navigation blocks wp_kses to wp_kses_post
 - Updated - core/page-list to use Navigation link markup and styles (not sure why WP complicates things)
 - Updated - Allow inline CSS for mark formatting on text blocks (headings, paragraph, lists etc)
+- Updated - Gutenberg restricted blocks (skipped by our Styles extension) list
 - Fixed - ANR -> Captcha 4WP double captcha containers on comment form.
 - Fixed - core/cover bug with solid color only background style
 - Added - core/code default styleing
+- Added - core/tag-cloud default styleing
+- Added - missing "sticky-top" class in gutenberg block Advanced class suggestions
 
 v5.5.0
 - Fixed - Grid gap default to 1 rem (--wp--custom--gutter variable)

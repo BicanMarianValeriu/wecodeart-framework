@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.4.7
+ * @version		5.5.1
  */
 
 namespace WeCodeArt;
@@ -117,10 +117,6 @@ class Gutenberg {
 				'core/shortcode',
 				'core/nextpage',
 				'core/archives',
-				'core/calendar',
-				'core/tag-cloud',
-				'core/page-list',
-				'core/latest-comments',
 				'core/block',
 			] ),
 		] );

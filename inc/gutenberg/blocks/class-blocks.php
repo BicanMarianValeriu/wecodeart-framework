@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Blocks Registry
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -68,17 +68,18 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/paragraph',  Blocks\Text\Paragraph::class );
 		$this->register( 'core/pullquote',  Blocks\Text\Pullquote::class );
         // Design Blocks
-		$this->register( 'core/columns',    Blocks\Design\Columns::class );
 		$this->register( 'core/buttons',    Blocks\Design\Buttons::class );
 		$this->register( 'core/button',     Blocks\Design\Button::class );
+		$this->register( 'core/columns',    Blocks\Design\Columns::class );
 		$this->register( 'core/spacer',     Blocks\Design\Spacer::class );
 		$this->register( 'core/separator',  Blocks\Design\Separator::class );
         // Widget Blocks
-		$this->register( 'core/search',	            Blocks\Widgets\Search::class );
+		$this->register( 'core/tag-cloud',          Blocks\Widgets\Cloud::class );
 		$this->register( 'core/calendar',           Blocks\Widgets\Calendar::class );
 	    $this->register( 'core/rss',                Blocks\Widgets\RSS::class );
 	    $this->register( 'core/latest-posts',       Blocks\Widgets\Posts::class );
 		$this->register( 'core/latest-comments',    Blocks\Widgets\Comments::class );
+		$this->register( 'core/search',	            Blocks\Widgets\Search::class );
 		$this->register( 'core/social-links',       Blocks\Widgets\Social::class );
         // Navigation Blocks
 		$this->register( 'core/navigation',         Blocks\Navigation::class );

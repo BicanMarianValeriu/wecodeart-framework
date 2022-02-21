@@ -56,7 +56,7 @@ const CSSEditor = ({
 		<>
 			<div class="wecodeart-advanced-css">
 				<hr />
-				<h2 class="wecodeart-advanced-css__title">{__('Add your custom CSS.', 'wecodeart')}</h2>
+				<p class="wecodeart-advanced-css__title">{__('Add your custom CSS.', 'wecodeart')}</p>
 				<div className="wecodeart-advanced-css__editor" id="wecodeart-css-editor" />
 				<div class="wecodeart-advanced-css__content">
 					<p>{__('Use', 'wecodeart')} <code>selector</code> {__('to target the block class.', 'wecodeart')}</p>

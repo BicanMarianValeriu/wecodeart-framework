@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.4.9
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -150,6 +150,7 @@ class Classes implements Integration {
 			'text-truncate',
 			'visually-hidden',
 			'visually-hidden-focusable',
+			'sticky-top',
 			'fixed-top',
 			'fixed-bottom',
 			'list-unstyled',
