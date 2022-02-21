@@ -55,7 +55,7 @@ const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
 	const extractCustomCss = flattenDeep(allBlocks).map((block) => {
 		const { attributes: { customCSS = null } = {}, clientId } = block;
 		if (customCSS) {
-			return customCSS.replace('selector', `[data-block="${clientId}"]`) + '\n';
+			return customCSS.replace(new RegExp('selector', 'g'), `.wp-block[data-block="${clientId}"]`) + '\n';
 		}
 		return '';
 	});

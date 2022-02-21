@@ -352,7 +352,7 @@ const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
     } = block;
 
     if (customCSS) {
-      return customCSS.replace('selector', `[data-block="${clientId}"]`) + '\n';
+      return customCSS.replace(new RegExp('selector', 'g'), `.wp-block[data-block="${clientId}"]`) + '\n';
     }
 
     return '';

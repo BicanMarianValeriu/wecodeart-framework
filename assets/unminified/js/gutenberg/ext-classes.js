@@ -120,9 +120,6 @@ const {
     addFilter,
     removeFilter
   },
-  blocks: {
-    hasBlockSupport
-  },
   compose: {
     createHigherOrderComponent
   },

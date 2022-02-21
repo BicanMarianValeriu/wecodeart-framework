@@ -9,7 +9,6 @@ const { split, replace, get, join } = lodash;
 const {
 	i18n: { __ },
 	hooks: { addFilter, removeFilter },
-	blocks: { hasBlockSupport },
 	compose: { createHigherOrderComponent },
 	data: { useSelect },
 	blockEditor: { InspectorAdvancedControls, store: blockEditorStore },
