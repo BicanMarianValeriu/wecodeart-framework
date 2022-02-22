@@ -9,6 +9,7 @@ v5.5.1
 - Updated - Allow inline CSS for mark formatting on text blocks (headings, paragraph, lists etc)
 - Updated - Gutenberg restricted blocks (skipped by our Styles extension) list
 - Updated - core/comment-template to load Utilities CSS only if there are comments
+- Updated - core/latest-comments and core/latest-posts change render function earlier using metadata filter (rather than render)
 - Fixed - ANR -> Captcha 4WP double captcha containers on comment form.
 - Fixed - core/cover bug with solid color only background style
 - Fixed - Gutteberg Advanced CSS bug in editor when replacing selector with block class

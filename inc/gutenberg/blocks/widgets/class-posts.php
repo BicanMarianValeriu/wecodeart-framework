@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -45,21 +45,36 @@ class Posts extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
+		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
+	 * Filter block markup
+	 *
+	 * @param	array 	$settings
+	 * @param	array 	$data
+	 */
+	public function filter_render( $settings, $data ) {
+        if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => [ $this, 'render' ]
+			], $settings );
+		}
+		
+		return $settings;
+	}
+	
+	/**
 	 * Dynamically renders the `core/latest-posts` block.
 	 *
+	 * @param 	string 	$attributes	The block attrs.
 	 * @param 	string 	$content 	The block markup.
 	 * @param 	array 	$block 		The parsed block.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
+	public function render( $attributes = [], $content = '', $block = null ) {
 		global $block_core_latest_posts_excerpt_length;
-
-		$attributes = get_prop( $block, 'attrs', [] );
 
 		$args = [
 			// 'queryId'	=> '7',

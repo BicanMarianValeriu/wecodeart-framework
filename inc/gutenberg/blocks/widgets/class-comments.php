@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -45,20 +45,35 @@ class Comments extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
+		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+	}
+
+	/**
+	 * Filter block markup
+	 *
+	 * @param	array 	$settings
+	 * @param	array 	$data
+	 */
+	public function filter_render( $settings, $data ) {
+        if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => [ $this, 'render' ]
+			], $settings );
+		}
+		
+		return $settings;
 	}
 
 	/**
 	 * Dynamically renders the `core/latest-comments` block.
 	 *
+	 * @param 	string 	$attributes	The block attrs.
 	 * @param 	string 	$content 	The block markup.
 	 * @param 	array 	$block 		The parsed block.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		$attributes = get_prop( $block, 'attrs', [] );
-
+	public function render( $attributes = [], $content = '', $block = null ) {
 		$comments = get_comments(
 			/** This filter is documented in wp-includes/widgets/class-wp-widget-recent-comments.php */
 			apply_filters( 'widget_comments_args', [

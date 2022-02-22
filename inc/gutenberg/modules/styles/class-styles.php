@@ -249,7 +249,7 @@ class Styles implements Integration {
 		// Currently php filter only works for PHP Server side rendered blocks.
 		$html_elements = [];
 		preg_match( '/<[^>]+>/', $content, $html_elements, PREG_OFFSET_CAPTURE );
-		$first_element = $html_elements[0][0];
+		$first_element = is_array( $html_elements ) ? $html_elements[0][0] : '';
 		if ( strpos( $first_element, 'class="css-' ) === false ) {
 			$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="' . $block_id . ' ', $content, 1 );
 		}
