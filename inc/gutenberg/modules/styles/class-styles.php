@@ -247,12 +247,7 @@ class Styles implements Integration {
 		// Add necessary class - exclude blocks without wrappers, eg wp:pattern (commented out in core_blocks method).
 		// We should have the possibility to directly change the block class, not with methods like this.
 		// Currently php filter only works for PHP Server side rendered blocks.
-		$html_elements = [];
-		preg_match( '/<[^>]+>/', $content, $html_elements, PREG_OFFSET_CAPTURE );
-		$first_element = is_array( $html_elements ) ? $html_elements[0][0] : '';
-		if ( strpos( $first_element, 'class="css-' ) === false ) {
-			$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="' . $block_id . ' ', $content, 1 );
-		}
+		$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="' . $block_id . ' ', $content, 1 );
 
 		// Process CSS, add prefixes and convert to string!
 		if( $styles ) {
