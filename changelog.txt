@@ -4,7 +4,7 @@ v5.5.1
 - Updated - 404 page base design improvements + added big title and "Home" button
 - Updated - Header columns adjustments and Navigation remove ID to allow usage of core/page-list fallback
 - Updated - Page List fallback max pages changed to 3 and remove "ul" tag when used in Navigation
-- Updated - Navigation blocks wp_kses to wp_kses_post
+- Updated - Navigation blocks wp_kses to wp_kses_post + add className support to main container
 - Updated - core/page-list to use Navigation link markup and styles (not sure why WP complicates things)
 - Updated - Allow inline CSS for mark formatting on text blocks (headings, paragraph, lists etc)
 - Updated - Gutenberg restricted blocks (skipped by our Styles extension) list
@@ -13,7 +13,9 @@ v5.5.1
 - Fixed - ANR -> Captcha 4WP double captcha containers on comment form.
 - Fixed - core/cover bug with solid color only background style
 - Fixed - Gutteberg Advanced CSS bug in editor when replacing selector with block class
-- Fixed - Gutenberg Advanced CSS bug when custom CSS was applied for sidebar block navigation 
+- Fixed - Gutenberg Advanced CSS bug when custom CSS was applied for sidebar block navigation
+- Fixed - Markup Select input - bug with placeholder undefined $value variable
+- Added - core/archives custom markup using inputs and navigation as rendering content
 - Added - core/code default styleing
 - Added - core/tag-cloud default styleing
 - Added - missing "sticky-top" class in gutenberg block Advanced class suggestions

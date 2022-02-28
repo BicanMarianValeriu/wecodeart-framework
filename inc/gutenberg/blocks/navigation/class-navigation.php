@@ -376,6 +376,8 @@ class Navigation extends Dynamic {
 			$classes[] 	= 'hide-toggle';
 		}
 
+		$classnames = explode( ' ',  get_prop( $attributes, 'className', '' ) );
+
 		// Deprecated - uses flex layout support
 		if( $align = get_prop( $attributes, 'itemsJustification' ) ) {
 			$justify_options = [
@@ -391,7 +393,7 @@ class Navigation extends Dynamic {
 		}
 		// End deprecated
 
-		$classes    	= array_merge( $classes, $colors['classes'], $typography['classes'] );
+		$classes    	= array_merge( $classes, $colors['classes'], $typography['classes'], $classnames );
 		$block_styles 	= get_prop( $attributes, 'styles', '' );
 
 		return [

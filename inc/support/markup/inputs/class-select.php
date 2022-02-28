@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.5.1
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -76,7 +76,6 @@ class Select extends Base {
                         'tag' => 'option',
                         'attrs' => [
                             'class'     => false,
-                            'value'     => $value,
                             'disabled'  => true,
                             'selected'  => isset( $this->attrs['value'] ) ? null : true,
                         ]

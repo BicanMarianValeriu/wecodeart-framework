@@ -74,6 +74,7 @@ class Blocks implements \ArrayAccess {
 		$this->register( 'core/spacer',     Blocks\Design\Spacer::class );
 		$this->register( 'core/separator',  Blocks\Design\Separator::class );
         // Widget Blocks
+		$this->register( 'core/archives',           Blocks\Widgets\Archives::class );
 		$this->register( 'core/tag-cloud',          Blocks\Widgets\Cloud::class );
 		$this->register( 'core/calendar',           Blocks\Widgets\Calendar::class );
 	    $this->register( 'core/rss',                Blocks\Widgets\RSS::class );
