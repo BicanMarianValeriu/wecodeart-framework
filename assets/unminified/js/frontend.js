@@ -811,15 +811,20 @@ __webpack_require__.r(__webpack_exports__);
             condition = true
           } = this.routes[route][funcname];
           const condMeet = typeof condition === 'function' ? condition() !== false : condition;
-          const hasBundle = [...bundleIds].filter(k => Object.keys(this.lazyJs).includes(k));
+          const missingBundles = [...bundleIds].filter(k => !Object.keys(this.lazyJs).includes(k));
 
-          if (condMeet && hasBundle.length) {
+          if (condMeet) {
+            if (missingBundles) {
+              const message = `WeCodeArt JSM - Route "${route}" is missing the lazy bundle(s): ${missingBundles.join(', ')}. Please add them before using.`;
+              console.log(message);
+              return;
+            }
+
             Object(_helpers_requireJs__WEBPACK_IMPORTED_MODULE_1__["default"])(this.lazyJs, bundleIds, () => {
               callback(args);
-              this.doAction('wecodeart.route', route, 'lazy', args);
+              this.doAction('wecodeart.route', route, funcname, args);
+              this.loaded.push(route);
             });
-            this.loaded.push(route);
-            return;
           }
 
           return;

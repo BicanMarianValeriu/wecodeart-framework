@@ -41,14 +41,19 @@ export default (function (wecodeart) {
 				if (typeof this.routes[route][funcname] === 'object') {
 					const { id: bundleIds = [], callback = () => { }, condition = true } = this.routes[route][funcname];
 					const condMeet = typeof condition === 'function' ? condition() !== false : condition;
-					const hasBundle = [...bundleIds].filter(k => Object.keys(this.lazyJs).includes(k));
-					if (condMeet && hasBundle.length) {
+					const missingBundles = [...bundleIds].filter(k => !Object.keys(this.lazyJs).includes(k));
+					if (condMeet) {
+						if (missingBundles) {
+							const message = `WeCodeArt JSM - Route "${route}" is missing the lazy bundle(s): ${missingBundles.join(', ')}. Please add them before using.`;
+							console.log(message);
+							return;
+						}
+
 						requireJs(this.lazyJs, bundleIds, () => {
 							callback(args);
-							this.doAction('wecodeart.route', route, 'lazy', args);
+							this.doAction('wecodeart.route', route, funcname, args);
+							this.loaded.push(route);
 						});
-						this.loaded.push(route);
-						return;
 					}
 					return;
 				}
