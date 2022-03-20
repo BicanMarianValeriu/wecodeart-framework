@@ -99,7 +99,7 @@
 				},
 				{
 					"slug": "primary-to-vivid-purple",
-					"gradient": "linear-gradient(160deg, var(--wp--preset--color--primary), var(--wp--preset--color--vivid-purple))",
+					"gradient": "linear-gradient(160deg, var(--wp--preset--color--primary), purple)",
 					"name": "Primary to Purple"
 				},
 				{
@@ -140,7 +140,7 @@
 				"xxl": "1440px"
 			},
 			"shadows": {
-				"sm": "0 0.125rem 0.25rem rgba(0,0,0,.08)",
+				"sm": "0 0.125rem .25rem rgba(0,0,0,.08)",
 				"lg": "0 3px 1rem .25rem rgba(0,0,0,.10)"
 			},
 			"spacers": {
