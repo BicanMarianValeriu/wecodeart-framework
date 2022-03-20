@@ -28,7 +28,7 @@ $spacers    = array_merge( $spacers, [
 // Theme Colors
 $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
+$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
 $palette    = wp_list_pluck( $palette, 'color', 'slug' );
 
 // Default utilities

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.5.1
+ * @version		5.5.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -317,7 +317,7 @@ class Styles implements Integration {
 
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
+		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
 
 		foreach( $palette as $item ) {
 			$slug 	= get_prop( $item, [ 'slug' ] );

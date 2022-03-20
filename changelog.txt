@@ -1,3 +1,6 @@
+v5.5.3
+- Updated - Certain blocks logic to make use of custom palette colors along with default ones - previously was overwriting them.
+
 v5.5.2
 - Updated - Header default pattern for WP.org directory
 

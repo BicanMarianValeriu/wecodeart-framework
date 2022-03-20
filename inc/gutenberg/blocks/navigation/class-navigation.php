@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.1
+ * @version		5.5.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -217,7 +217,7 @@ class Navigation extends Dynamic {
 	public static function get_class_color( $context, $key = 'background' ) {
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
+		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
 				
 		$_keys 		= [
 			'overlay-background' 	=> 'overlayBackgroundColor',

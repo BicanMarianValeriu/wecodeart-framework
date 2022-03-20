@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.5
- * @version		5.4.9
+ * @version		5.5.3
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -188,7 +188,7 @@ class WPSeo implements Integration {
 
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'user' ], $palette );
+		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
 
 		if( $color = get_prop( $atts, [ 'color' ] ) ) {
 			$named = get_prop( current( wp_list_filter( $palette, [ 'color' => $color ] ) ), 'slug' );
