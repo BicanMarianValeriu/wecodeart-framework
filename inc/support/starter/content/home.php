@@ -7,10 +7,10 @@ return [
 	'post_title'   => _x( 'Home', 'Theme starter content', 'wecodeart' ),
 	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","gradient":"primary-to-vivid-purple","contentPosition":"center center","isDark":false,"align":"full","className":"py-5 text-center","customCSS":"selector {\n  min-height: calc(100vh - 70px);\n}\n"} -->
 	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:100vh">
-	<span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
+	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","level":1,"textColor":"white","className":"mb-5 display-5"} -->
-	<h1 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="create-and-growyour-unique-website-today">Create and grow<br>your unique website today</h1>
+	<h1 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="create-and-grow">Create and grow<br>your unique website today</h1>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph {"align":"center","textColor":"white","className":"lead mb-5"} -->
 	<p class="has-text-align-center lead mb-5 has-white-color has-text-color">Programmatically work but low hanging fruit so new economy cross-pollination. Quick sync new<br>economy onward and upward.</p>
@@ -163,7 +163,7 @@ return [
 	</figure>
 	<!-- /wp:image -->
 	<!-- wp:quote -->
-	<blockquote class="wp-block-quote"><p>“What is the point of being alive if you don’t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
+	<blockquote class="wp-block-quote"><p>“What is the point of being alive if you don`t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
 	<!-- /wp:quote -->
 	</div>
 	<!-- /wp:column -->
@@ -174,7 +174,7 @@ return [
 	</figure>
 	<!-- /wp:image -->
 	<!-- wp:quote -->
-	<blockquote class="wp-block-quote"><p>“What is the point of being alive if you don’t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
+	<blockquote class="wp-block-quote"><p>“What is the point of being alive if you don`t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
 	<!-- /wp:quote -->
 	</div>
 	<!-- /wp:column -->
@@ -186,7 +186,7 @@ return [
 	</figure>
 	<!-- /wp:image -->
 	<!-- wp:quote -->
-	<blockquote class="wp-block-quote"><p>“What is the point of being alive if you don’t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
+	<blockquote class="wp-block-quote"><p>“What is the point of being alive if you don`t at least try to do something remarkable?”</p><cite>SEAN FISHER</cite></blockquote>
 	<!-- /wp:quote -->
 	</div>
 	<!-- /wp:column -->
@@ -197,7 +197,7 @@ return [
 	
 	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","gradient":"primary-to-vivid-purple","isDark":false,"align":"full","className":"py-5 text-center"} -->
 	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:555px">
-	<span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
+	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","textColor":"white","className":"mb-5 display-5"} -->
 	<h2 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="let-s-work-together-on-your-next-web-project">Let’s work together on your <br>next web project</h2>
