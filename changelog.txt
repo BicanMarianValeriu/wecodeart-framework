@@ -13,7 +13,7 @@ v5.5.1
 - Updated - core/latest-comments and core/latest-posts change render function earlier using metadata filter (rather than render)
 - Fixed - ANR -> Captcha 4WP double captcha containers on comment form.
 - Fixed - core/cover bug with solid color only background style
-- Fixed - Gutteberg Advanced CSS bug in editor when replacing selector with block class
+- Fixed - Gutenberg Advanced CSS bug in editor when replacing selector with block class
 - Fixed - Gutenberg Advanced CSS bug when custom CSS was applied for sidebar block navigation
 - Fixed - Markup Select input - bug with placeholder undefined $value variable
 - Fixed - Gutenberg Columns gridlines with gutter support
