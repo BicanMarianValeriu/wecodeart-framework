@@ -9,7 +9,8 @@
 	gap: var(--wp--style--block-gap, 0);
 	
 	&.has-background {
-		padding: 5px;
+		padding-top: 5px;
+		padding-bottom: 5px;
 	}
 
 	&.is-selected,
@@ -23,15 +24,15 @@
 	&::before {
 		pointer-events: none;
 		top: 0;
-		left: 0;
-		right: 0;
+		left: var(--wp--custom--gutter);
+		right: var(--wp--custom--gutter);
 		bottom: 0;
 		color: rgba(0,0,0,0.1);
 		z-index: 0;
 		background-image: repeating-linear-gradient(to right, currentColor, currentColor 1px, transparent 1px, transparent);
 		background-size: 8.33%;
-		border-top: 1px solid #efefef;
-    	border-bottom: 1px solid #efefef;
+		border-top: 1px solid currentColor;
+    	border-bottom: 1px solid currentColor;
 	}
 	
 	& > .wp-block-column {
