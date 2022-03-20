@@ -1,3 +1,6 @@
+v5.5.2
+- Updated -
+
 v5.5.1
 - Updated - /views/ folder params inline documentation
 - Updated - core/site-logo is-style-rounded CSS
