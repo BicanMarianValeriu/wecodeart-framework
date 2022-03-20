@@ -5,75 +5,153 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'Features', 'Theme starter content', 'wecodeart' ),
-	'post_content' => '<!-- wp:group {"className":"my-5","layout":{"inherit":true}} -->
-	<div class="wp-block-group my-5">
+	'post_content' => '<!-- wp:cover {"url":"' . trailingslashit( get_template_directory_uri() ) . 'assets/images/wordpress-cover.jpg","dimRatio":80,"focalPoint":{"x":"1.00","y":"0.82"},"minHeight":400,"gradient":"light-to-white","contentPosition":"center center","align":"full"} -->
+	<div class="wp-block-cover alignfull" style="min-height:400px">
+	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-80 has-background-dim wp-block-cover__gradient-background has-background-gradient has-light-to-white-gradient-background"></span>
+	<img class="wp-block-cover__image-background wp-image-55" alt="" src="http://working.on/wecodeart/wp-content/uploads/2022/02/wordpress-cover.jpg" style="object-position:100% 82%" data-object-fit="cover" data-object-position="100% 82%"/>
+	<div class="wp-block-cover__inner-container">
+	<!-- wp:heading {"textAlign":"center","level":1,"textColor":"primary","className":"display-6"} -->
+	<h1 class="has-text-align-center display-6 has-primary-color has-text-color" id="top-reasons">Top reasons to <mark style="background-color:#2388ed" class="has-inline-color has-white-color"><strong>choose</strong></mark><br>WeCodeArt Framework.</h1>
+	<!-- /wp:heading -->
+	</div>
+	</div>
+	<!-- /wp:cover -->
+	<!-- wp:group {"align":"full","className":"py-5","layout":{"inherit":true}} -->
+	<div class="wp-block-group alignfull py-5" id="list"><!-- wp:columns {"className":""} -->
+	<div class="wp-block-columns">
+	<!-- wp:column {"className":"","customCSS":""} -->
+	<div class="wp-block-column">
+	<!-- wp:paragraph {"className":"mb-5"} -->
+	<p class="mb-5">In addition to all goodies coming with Gutenberg editor and Full Site Editing feature in WP 5.9 WeCodeArt Framework comes with extra improvements:</p>
+	<!-- /wp:paragraph -->
+	<!-- wp:heading {"textColor":"primary","className":"h1"} -->
+	<h2 class="h1 has-primary-color has-text-color" id="performance">Performance Focused</h2>
+	<!-- /wp:heading --></div>
+	<!-- /wp:column --></div>
+	<!-- /wp:columns -->
+	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}}} -->
+	<div class="wp-block-columns">
+	<!-- wp:column -->
+	<div class="wp-block-column">
+	<!-- wp:heading {"level":3} -->
+	<h3>No jQuery</h3>
+	<!-- /wp:heading -->
+	<!-- wp:paragraph -->
+	<p>WeCodeArt Framework uses Vanilla JavaScript that prevents render blocking jQuery to come in the way and affect performance.</p>
+	<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:column -->
+	<!-- wp:column -->
+	<div class="wp-block-column">
+	<!-- wp:heading {"level":3} -->
+	<h3>Less than 25 KB</h3>
+	<!-- /wp:heading -->
+	<!-- wp:paragraph -->
+	<p>WeCodeArt Framework requires less than 25KB of resources (CSS/JS/HTML) as compared to 100s required by the other WordPress themes. <sup>1</sup></p>
+	<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:column -->
+	<!-- wp:column -->
+	<div class="wp-block-column">
+	<!-- wp:heading {"level":3} -->
+	<h3>Loads in just .25 second!</h3>
+	<!-- /wp:heading -->
+	<!-- wp:paragraph -->
+	<p>WeCodeArt Framework is built for speed and fully optimized for performance. Being the most lightweight theme, it loads in less than 0.25 seconds! <sup>1</sup><br></p>
+	<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:column -->
+	</div>
+	<!-- /wp:columns -->
 	<!-- wp:columns -->
 	<div class="wp-block-columns">
 	<!-- wp:column -->
 	<div class="wp-block-column">
-	<!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large"} -->
-	<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:35% auto">
-	<figure class="wp-block-media-text__media">
-	<img src="https://picsum.photos/id/1/800/800" alt=""/></figure><div class="wp-block-media-text__content">
-	<!-- wp:heading -->
-	<h2>Our Story</h2>
-	<!-- /wp:heading -->
-	<!-- wp:paragraph -->
-	<p>Are there any leftovers in the kitchen? what are the expectations but&nbsp;technologically&nbsp;savvy.</p>
+	<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
+	<p class="has-secondary-color has-text-color has-small-font-size"><em>1 - Applies for the starter/blank template without any blocks. As soon as you add additional blocks this values will likely increase depending on the blocks CSS/JS and/or other media assets loaded.</em></p>
 	<!-- /wp:paragraph -->
-	<!-- wp:paragraph -->
-	<p>Quick sync new economy onward and upward, productize the deliverables and focus on the bottom line high touch client we need to have a Come to Jesus meeting with Phil about his attitude, so where the metal hits the meat best.</p>
-	<!-- /wp:paragraph -->
-	</div>
-	</div>
-	<!-- /wp:media-text -->
 	</div>
 	<!-- /wp:column -->
 	</div>
 	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true}} -->
-	<div class="wp-block-group my-5">
-	<!-- wp:columns -->
+	<!-- wp:group {"align":"full","backgroundColor":"light","className":"py-5","layout":{"inherit":true}} -->
+	<div class="wp-block-group alignfull py-5 has-light-background-color has-background"><!-- wp:columns {"className":""} -->
+	<div class="wp-block-columns"><!-- wp:column {"className":"","customCSS":""} -->
+	<div class="wp-block-column"><!-- wp:heading {"textColor":"primary","className":"h1"} -->
+	<h2 class="h1 has-primary-color has-text-color" id="performance">Gutenberg Improvements</h2>
+	<!-- /wp:heading -->
+	</div>
+	<!-- /wp:column -->
+	</div>
+	<!-- /wp:columns -->
+	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}},"className":"mb-5"} -->
+	<div class="wp-block-columns mb-5">
+	<!-- wp:column -->
+	<div class="wp-block-column">
+	<!-- wp:heading {"level":3} -->
+	<h3>Improved Blocks Markup</h3>
+	<!-- /wp:heading -->
+	<!-- wp:paragraph -->
+	<p>Custom and improved blocks HTML markup where required following the <a rel="noreferrer noopener" href="https://validator.w3.org/" target="_blank">W3C Markup Validation</a> standards. Rendering navigation blocks (link, home-link, dropdown, pages) using the same markup.</p>
+	<!-- /wp:paragraph --></div>
+	<!-- /wp:column -->
+	<!-- wp:column -->
+	<div class="wp-block-column">
+	<!-- wp:heading {"level":3} -->
+	<h3>Tiny Blocks CSS/JS</h3>
+	<!-- /wp:heading -->
+	<!-- wp:paragraph -->
+	<p>Simplified blocks CSS and Javascript code and removed unnecessary rules making it easier to adjust them as you like via Editor (Global Styles). In addition, the assets are loaded on demand.</p>
+	<!-- /wp:paragraph --></div>
+	<!-- /wp:column -->
+	<!-- wp:column -->
+	<div class="wp-block-column">
+	<!-- wp:heading {"level":3} -->
+	<h3>Clean Blocks Markup</h3>
+	<!-- /wp:heading -->
+	<!-- wp:paragraph -->
+	<p>WeCodeArt Framework will collect all inline style attributes and enqueue them inline (as text) so they can be picked up by caching plugins. Custom Duotones will be loaded into 1 single SVG to save on document length.<br></p>
+	<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:column -->
+	</div>
+	<!-- /wp:columns -->
+	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}}} -->
 	<div class="wp-block-columns">
 	<!-- wp:column -->
 	<div class="wp-block-column">
-	<!-- wp:media-text {"align":"","mediaPosition":"right","mediaLink":"https://picsum.photos/id/180/500/500","mediaType":"image","mediaWidth":35,"mediaSizeSlug":"large"} -->
-	<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="grid-template-columns:auto 35%">
-	<figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/180/500/500" alt=""/></figure>
-	<div class="wp-block-media-text__content">
-	<!-- wp:heading -->
-	<h2>We are driven by values</h2>
+	<!-- wp:heading {"level":3} -->
+	<h3>Class Utilities</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Line high touch client we need to have a Come to Jesus meeting with Phil about his attitude, so where the.</p>
+	<p>You can use the block`s Advanced Tab --> Classname(s) to load additional CSS utilities. Those classes will appear as suggestions in a dropdown (margin/padding/flex utilities and more). The CSS rules for utilities will loaded on demand and in order of their appearance.</p>
 	<!-- /wp:paragraph -->
-	<!-- wp:buttons -->
-	<div class="wp-block-buttons">
-	<!-- wp:button {"backgroundColor":"primary","textColor":"white"} -->
-	<div class="wp-block-button">
-	<a class="wp-block-button__link has-white-color has-primary-background-color has-text-color has-background">Let\'s Talk</a>
 	</div>
-	<!-- /wp:button -->
-	</div>
-	<!-- /wp:buttons -->
-	</div>
-	</div>
-	<!-- /wp:media-text -->
-	</div>
+	<!-- /wp:column -->
+	<!-- wp:column -->
+	<div class="wp-block-column">
+	<!-- wp:heading {"level":3} -->
+	<h3>Custom Styles</h3>
+	<!-- /wp:heading -->
+	<!-- wp:paragraph -->
+	<p>Are you familiar with CSS and you need to add a small adjustment to your block? No worries, you can use the block`s Advanced Tab --> Custom CSS to do that - with live preview. You can use any CSS syntax including media queries.</p>
+	<!-- /wp:paragraph --></div>
+	<!-- /wp:column -->
+	<!-- wp:column -->
+	<div class="wp-block-column"></div>
 	<!-- /wp:column -->
 	</div>
 	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
-	<!-- wp:group {"backgroundColor":"primary","textColor":"white","className":"my-5 py-5","layout":{"inherit":true}} -->
-	<div class="wp-block-group my-5 py-5 has-white-color has-primary-background-color has-text-color has-background">
+	<!-- wp:group {"align":"full","backgroundColor":"primary","textColor":"white","className":"py-5","layout":{"inherit":true}} -->
+	<div class="wp-block-group alignfull py-5 has-white-color has-primary-background-color has-text-color has-background">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}},"className":"flex-column flex-md-row"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
 	<!-- wp:column {"className":""} -->
-	<div class="wp-block-column">
-	<!-- wp:heading {"level":3} -->
+	<div class="wp-block-column"><!-- wp:heading {"level":3} -->
 	<h3 id="super-efficient">Super Efficient</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
@@ -82,7 +160,8 @@ return [
 	</div>
 	<!-- /wp:column -->
 	<!-- wp:column -->
-	<div class="wp-block-column"><!-- wp:heading {"level":3} -->
+	<div class="wp-block-column">
+	<!-- wp:heading {"level":3} -->
 	<h3 id="deeply-commited">Deeply Commited</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
@@ -98,115 +177,6 @@ return [
 	<!-- wp:paragraph -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
 	<!-- /wp:paragraph -->
-	</div>
-	<!-- /wp:column -->
-	</div>
-	<!-- /wp:columns -->
-	</div>
-	<!-- /wp:group -->
-	<!-- wp:group {"backgroundColor":"white","className":"pt-5","layout":{"inherit":true}} -->
-	<div class="wp-block-group has-background has-white-background-color pt-5">
-	<!-- wp:heading {"textAlign":"center"} -->
-	<h2 class="has-text-align-center">Our Awesome Members</h2>
-	<!-- /wp:heading -->
-	<!-- wp:separator {"color":"primary","className":"mb-5 is-style-dots"} -->
-	<hr class="wp-block-separator has-text-color has-background has-primary-background-color has-primary-color mb-5 is-style-dots"/>
-	<!-- /wp:separator -->
-	<!-- wp:columns {"className":"row-cols-sm-2 row-cols-lg-4"} -->
-	<div class="wp-block-columns row-cols-sm-2 row-cols-lg-4">
-	<!-- wp:column {"className":"mb-4 px-3"} -->
-	<div class="wp-block-column mb-4 px-3">
-	<!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3"} -->
-	<div class="wp-block-image is-style-default mb-3">
-	<figure class="aligncenter size-thumbnail">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" />
-	</figure>
-	</div>
-	<!-- /wp:image -->
-	<!-- wp:heading {"textAlign":"center","level":4} -->
-	<h4 class="has-text-align-center">Bican Marian</h4>
-	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center"} -->
-	<p class="has-text-align-center">CEO</p>
-	<!-- /wp:paragraph -->
-	<!-- wp:social-links {"iconColor":"white","iconColorValue":"#ffffff","openInNewTab":true,"size":"has-normal-icon-size","align":"center","className":"is-style-default"} -->
-	<ul class="wp-block-social-links aligncenter has-normal-icon-size has-icon-color items-justified-center is-style-default">
-	<!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook"} /-->
-	<!-- wp:social-link {"url":"https://twitter.com/mvbican","service":"twitter"} /-->
-	<!-- wp:social-link {"url":"https://www.linkedin.com/in/mvbican/","service":"linkedin"} /-->
-	</ul>
-	<!-- /wp:social-links -->
-	</div>
-	<!-- /wp:column -->
-	<!-- wp:column {"className":"mb-4 px-3"} -->
-	<div class="wp-block-column mb-4 px-3">
-	<!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3"} -->
-	<div class="wp-block-image is-style-default mb-3">
-	<figure class="aligncenter size-thumbnail">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" />
-	</figure>
-	</div>
-	<!-- /wp:image -->
-	<!-- wp:heading {"textAlign":"center","level":4} -->
-	<h4 class="has-text-align-center">Mark Smith</h4>
-	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center"} -->
-	<p class="has-text-align-center">Designer</p>
-	<!-- /wp:paragraph -->
-	<!-- wp:social-links {"iconColor":"white","iconColorValue":"#ffffff","openInNewTab":true,"size":"has-normal-icon-size","align":"center","className":"is-style-default"} -->
-	<ul class="wp-block-social-links aligncenter has-normal-icon-size has-icon-color items-justified-center is-style-default">
-	<!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook"} /-->
-	<!-- wp:social-link {"url":"https://twitter.com/mvbican","service":"twitter"} /-->
-	<!-- wp:social-link {"url":"https://www.linkedin.com/in/mvbican/","service":"linkedin"} /-->
-	</ul>
-	<!-- /wp:social-links -->
-	</div>
-	<!-- /wp:column -->
-	<!-- wp:column {"className":"mb-4 px-3"} -->
-	<div class="wp-block-column mb-4 px-3">
-	<!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3"} -->
-	<div class="wp-block-image is-style-default mb-3">
-	<figure class="aligncenter size-thumbnail">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" />
-	</figure>
-	</div>
-	<!-- /wp:image -->
-	<!-- wp:heading {"textAlign":"center","level":4} -->
-	<h4 class="has-text-align-center">George Williams</h4>
-	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center"} -->
-	<p class="has-text-align-center">Developer</p>
-	<!-- /wp:paragraph -->
-	<!-- wp:social-links {"iconColor":"white","iconColorValue":"#ffffff","openInNewTab":true,"size":"has-normal-icon-size","align":"center","className":"is-style-default"} -->
-	<ul class="wp-block-social-links aligncenter has-normal-icon-size has-icon-color items-justified-center is-style-default">
-	<!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook"} /-->
-	<!-- wp:social-link {"url":"https://twitter.com/mvbican","service":"twitter"} /-->
-	<!-- wp:social-link {"url":"https://www.linkedin.com/in/mvbican/","service":"linkedin"} /-->
-	</ul>
-	<!-- /wp:social-links -->
-	</div>
-	<!-- /wp:column -->
-	<!-- wp:column {"className":"mb-4 px-3"} -->
-	<div class="wp-block-column mb-4 px-3"><!-- wp:image {"align":"center","sizeSlug":"thumbnail","linkDestination":"none","className":"is-style-default mb-3"} -->
-	<div class="wp-block-image is-style-default mb-3">
-	<figure class="aligncenter size-thumbnail">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" />
-	</figure>
-	</div>
-	<!-- /wp:image -->
-	<!-- wp:heading {"textAlign":"center","level":4} -->
-	<h4 class="has-text-align-center">Julia Castillo</h4>
-	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center"} -->
-	<p class="has-text-align-center">Client Service</p>
-	<!-- /wp:paragraph -->
-	<!-- wp:social-links {"iconColor":"white","iconColorValue":"#ffffff","openInNewTab":true,"size":"has-normal-icon-size","align":"center","className":"is-style-default"} -->
-	<ul class="wp-block-social-links aligncenter has-normal-icon-size has-icon-color items-justified-center is-style-default">
-	<!-- wp:social-link {"url":"https://www.facebook.com/mvbican/","service":"facebook"} /-->
-	<!-- wp:social-link {"url":"https://twitter.com/mvbican","service":"twitter"} /-->
-	<!-- wp:social-link {"url":"https://www.linkedin.com/in/mvbican/","service":"linkedin"} /-->
-	</ul>
-	<!-- /wp:social-links -->
 	</div>
 	<!-- /wp:column -->
 	</div>

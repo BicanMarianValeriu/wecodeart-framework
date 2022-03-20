@@ -110,8 +110,7 @@ class Styles implements Integration {
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
-		// On 90 priority we register all utilities so we add editor styles after this.
-		add_action( 'init',							[ $this, 'editor_styles' 		], 100 );
+		add_action( 'admin_init',					[ $this, 'editor_styles' 		], 20, 1 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_spacing_gap_support', 10, 2 );
