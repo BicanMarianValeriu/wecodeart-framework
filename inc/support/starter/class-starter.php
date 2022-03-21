@@ -9,7 +9,7 @@
  * @subpackage  Support\Starter
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.1
+ * @version		5.5.3
  */
 
 namespace WeCodeArt\Support;
@@ -30,7 +30,7 @@ class Starter implements Integration {
 
 	const HOME_SLUG  	= 'home';
 	const BLOG_SLUG  	= 'blog';
-	const FEATURES_SLUG	= 'features';
+	const ABOUT_SLUG	= 'about';
 	const NOTICE_ID 	= 'wecodeart-starter-notice';
 
 	/**
@@ -130,9 +130,9 @@ class Starter implements Integration {
 				self::BLOG_SLUG  => wp_parse_args( [
 					'post_name'  => self::BLOG_SLUG,
 				], require __DIR__ . '/content/blog.php' ),
-				self::FEATURES_SLUG => wp_parse_args( [
-					'post_name'  => self::FEATURES_SLUG,
-				], require __DIR__ . '/content/features.php' ),
+				self::ABOUT_SLUG => wp_parse_args( [
+					'post_name'  => self::ABOUT_SLUG,
+				], require __DIR__ . '/content/about.php' ),
 			],
 		];
 

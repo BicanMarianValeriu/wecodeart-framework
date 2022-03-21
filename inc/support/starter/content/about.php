@@ -8,7 +8,7 @@ return [
 	'post_content' => '<!-- wp:cover {"url":"' . trailingslashit( get_template_directory_uri() ) . 'assets/images/wordpress-cover.jpg","dimRatio":80,"focalPoint":{"x":"1.00","y":"0.82"},"minHeight":400,"gradient":"light-to-white","contentPosition":"center center","align":"full"} -->
 	<div class="wp-block-cover alignfull" style="min-height:400px">
 	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-80 has-background-dim wp-block-cover__gradient-background has-background-gradient has-light-to-white-gradient-background"></span>
-	<img class="wp-block-cover__image-background wp-image-55" alt="" src="http://working.on/wecodeart/wp-content/uploads/2022/02/wordpress-cover.jpg" style="object-position:100% 82%" data-object-fit="cover" data-object-position="100% 82%"/>
+	<img class="wp-block-cover__image-background wp-image-55" alt="" src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/wordpress-cover.jpg" style="object-position:100% 82%" data-object-fit="cover" data-object-position="100% 82%"/>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","level":1,"textColor":"primary","className":"display-6"} -->
 	<h1 class="has-text-align-center display-6 has-primary-color has-text-color" id="top-reasons">Top reasons to <mark style="background-color:#2388ed" class="has-inline-color has-white-color"><strong>choose</strong></mark><br>WeCodeArt Framework.</h1>
