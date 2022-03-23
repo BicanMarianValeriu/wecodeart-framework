@@ -1,4 +1,7 @@
-v5.5.3
+v5.5.5
+- Added - WooCoomerce html templates
+
+v5.5.3/4
 - Updated - Certain blocks logic to make use of custom palette colors along with default ones - previously was overwriting them
 - Updated - Starter features.php to about.php + fixed a slug (for some reason it does not loads on WP.org)
 - Updated - core/separator faded style width to 100% for backend overwrite
