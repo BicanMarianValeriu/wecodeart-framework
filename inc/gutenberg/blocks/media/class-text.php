@@ -57,13 +57,13 @@ class Text extends Dynamic {
 		$desktop	= get_prop( $breaks, 'lg', '992px' );
 		return "
 		.wp-block-media-text {
-			--wp--gutter-x: 40px;
+			--wp--gutter-x: 1rem;
 			display: flex;
 			flex-flow: column;
 		}
 		.wp-block-media-text.has-background .wp-block-media-text__content {
-			padding-left: calc(var(--wp--gutter-x) / 2);
-			padding-right: calc(var(--wp--gutter-x) / 2);
+			padding-left: var(--wp--gutter-x);
+			padding-right: var(--wp--gutter-x);
 		}
 		.wp-block-media-text__content {
 			flex: 1 0 0%;
@@ -99,16 +99,16 @@ class Text extends Dynamic {
 			.wp-block-media-text {
 				flex-flow: row nowrap;
 			}
-			.wp-block-media-text:not(.has-background) .wp-block-media-text__content {
-				padding-top: 0;
-				padding-bottom: 0;
+			.wp-block-media-text.has-background .wp-block-media-text__content {
+				padding-top: 1rem;
+				padding-bottom: 1rem;
 			}
 			.wp-block-media-text .wp-block-media-text__content {
 				align-self: center;
-				padding-left: calc(var(--wp--gutter-x) / 2);
+				padding-left: var(--wp--gutter-x);
 			}
 			.wp-block-media-text.has-media-on-the-right .wp-block-media-text__content {
-				padding-right: calc(var(--wp--gutter-x) / 2);
+				padding-right: var(--wp--gutter-x);
 				padding-left: 0;
 				order: -1;
 			}
@@ -122,10 +122,10 @@ class Text extends Dynamic {
 				align-self: flex-end;
 			}
 			.wp-block-media-text.has-media-on-the-right.has-background .wp-block-media-text__content {
-				padding-left: calc(var(--wp--gutter-x) / 2);
+				padding-left: var(--wp--gutter-x);
 			}
 			.wp-block-media-text.has-background .wp-block-media-text__content {
-				padding-right: calc(var(--wp--gutter-x) / 2);
+				padding-right: var(--wp--gutter-x);
 			}
 			.wp-block-media-text__media {
 				margin-bottom: 0;
@@ -133,7 +133,7 @@ class Text extends Dynamic {
 		}
 		@media (min-width: $desktop) {
 			.wp-block-media-text {
-				--wp--gutter-x: 60px;
+				--wp--gutter-x: 3rem;
 			}
 		}
 		";
