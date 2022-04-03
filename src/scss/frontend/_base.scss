@@ -28,9 +28,9 @@ html {
 .has-background-dim {
     opacity: 0.5;
     z-index: 1;
-    
+
     @for $i from 0 through 10 {
-        &-#{ $i * 10 } { 
+        &-#{ $i * 10 } {
             opacity: $i * 0.1;
         }
     }
@@ -55,7 +55,7 @@ html {
 .screen-reader-response,
 .screen-reader-text {
     border: 0;
-    clip: rect(1px,1px,1px,1px);
+    clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);
     height: 1px;
     margin: -1px;
@@ -82,7 +82,8 @@ html {
         font-weight: bold;
         line-height: normal;
         text-decoration: none;
-        z-index: 100000; /* Above WP toolbar. */
+        z-index: 100000;
+        /* Above WP toolbar. */
     }
 }
 
@@ -125,31 +126,74 @@ figcaption,
     color: inherit;
 }
 
-// Containers
+/*
+ * Alignment styles.
+ * These rules are temporary, and should not be relied on or modified too heavily by themes
+ *
+ * Relevant issues:
+ * https://github.com/WordPress/gutenberg/issues/35607
+ * https://github.com/WordPress/gutenberg/issues/35884
+ */
+.site-header, // Deprecated
+.site-footer, // Deprecated
 .wp-site-blocks,
+.wp-site-header,
+.wp-site-footer,
 .wp-site-credits,
-.site-header,
-.site-footer {
+.wp-block-group.alignfull,
+.wp-block-cover.alignfull {
+    padding-left: var(--wp--custom--gutter);
+    padding-right: var(--wp--custom--gutter);
+}
+
+.wp-site-blocks .site-header, // Deprecated
+.wp-site-blocks .site-footer, // Deprecated
+.wp-site-blocks .alignfull,
+.wp-site-blocks .wp-site-header,
+.wp-site-blocks .wp-site-footer,
+.wp-site-blocks .wp-site-credits {
+    margin-left: calc(var(--wp--custom--gutter) * -1) !important;
+    margin-right: calc(var(--wp--custom--gutter) * -1) !important;
+    width: unset;
+}
+
+.wp-site-blocks .wp-block-columns .wp-block-column .alignfull,
+.wp-site-blocks .alignfull:not(.wp-block-group) .alignfull {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: inherit;
+}
+
+// Containers
+.site-header, // Deprecated
+.site-footer, // Deprecated
+.wp-site-blocks,
+.wp-site-header,
+.wp-site-footer,
+.wp-site-credits {
     background-color: inherit;
 }
 
-.site-footer,
-.wp-site-credits {
-    box-shadow: 0 0 1px 0 rgba( black, 0.15 );
-}
-
-.wp-site-credits {
-    padding: 1rem 0;
-}
-
-.site-header {
+.site-header, // Deprecated
+.wp-site-header {
     position: relative;
-    box-shadow: 0 0 1px 0 rgba( black, 0.15 );
+    box-shadow: 0 0 1px 0 rgba(black, 0.15);
     z-index: 15;
 
     .has-scrolled & {
-        box-shadow: 0 0 1px 1px rgba( black, 0.05 );
+        box-shadow: 0 0 1px 1px rgba(black, 0.05);
     }
+}
+
+.site-footer, // Deprecated
+.wp-site-footer,
+.wp-site-credits {
+    box-shadow: 0 0 1px 0 rgba(black, 0.15);
+}
+
+.wp-site-credits {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 // Blocks

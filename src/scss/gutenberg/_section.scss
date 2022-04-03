@@ -1,18 +1,4 @@
-.wp-block-group {
-	&.has-background {
-		padding: 5px;
-	}
-}
-
 .wp-block-columns {
-	margin-bottom: 0;
-	gap: var(--wp--style--block-gap, 0);
-	
-	&.has-background {
-		padding-top: 5px;
-		padding-bottom: 5px;
-	}
-
 	&.is-selected,
 	&.has-child-selected {
 		&::before {
@@ -24,8 +10,8 @@
 	&::before {
 		pointer-events: none;
 		top: 0;
-		left: var(--wp--custom--gutter);
-		right: var(--wp--custom--gutter);
+		left: 0;
+		right: 0;
 		bottom: 0;
 		color: rgba(0,0,0,0.1);
 		z-index: 0;

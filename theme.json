@@ -309,14 +309,6 @@
 				"spacing": {
 					"blockGap": "1rem"
 				}
-			},
-			"core/columns": {
-				"spacing": {
-					"padding": {
-						"left": "var:custom|gutter",
-						"right": "var:custom|gutter"
-					}
-				}
 			}
 		},
 		"elements": {

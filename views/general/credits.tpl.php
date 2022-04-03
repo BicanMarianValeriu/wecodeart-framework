@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Footer Credits
  * @since	 	5.0.0
- * @version    	5.4.8
+ * @version    	5.5.5
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -20,21 +20,19 @@ defined( 'ABSPATH' ) || exit();
 
 ?>
 <div class="wp-site-credits">
-    <div class="container">
-        <div class="has-text-align-center">
-            <span class="wp-site-credits__text"><?php
-                
-                echo wp_kses_post( sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), join( ' ', [ $copy, $year ] ) ) );
-                
-            ?></span>
-            <span class="wp-site-credits__theme"><?php
+    <div class="has-text-align-center">
+        <span class="wp-site-credits__text"><?php
+            
+            echo wp_kses_post( sprintf( __( 'Copyright %s - All rights reserved.', 'wecodeart' ), join( ' ', [ $copy, $year ] ) ) );
+            
+        ?></span>
+        <span class="wp-site-credits__theme"><?php
 
-                printf(
-                    esc_html__( 'Built on %1s.', 'wecodeart' ),
-                    sprintf( '<a href="%s" target="_blank">%s</a>', 'https://www.wecodeart.com/', 'WeCodeArt Framework' )
-                );
+            printf(
+                esc_html__( 'Built on %1s.', 'wecodeart' ),
+                sprintf( '<a href="%s" target="_blank">%s</a>', 'https://www.wecodeart.com/', 'WeCodeArt Framework' )
+            );
 
-            ?></span>
-        </div>
+        ?></span>
     </div>
 </div>

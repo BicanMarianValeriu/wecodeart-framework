@@ -6,7 +6,7 @@
  * Block Types: core/query
  */
 ?>
-<!-- wp:query {"queryId":1,"query":{"perPage":0,"pages":0,"offset":0,"postType":"post","categoryIds":[],"tagIds":[],"order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"className":"px-3"} -->
+<!-- wp:query {"queryId":1,"query":{"perPage":0,"pages":0,"offset":0,"postType":"post","categoryIds":[],"tagIds":[],"order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true}} -->
 <div class="wp-block-query px-3">
     <!-- wp:query-title {"type":"archive","className":"my-5"} /-->
     <!-- wp:term-description /-->
