@@ -9,19 +9,19 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.4.5
+ * @version		5.5.5
  */
 
 namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit();
 
-use ArrayAccess;
+use WeCodeArt\Config\Interfaces\Configuration;
 
 /**
  * Support for various plugins and features.
  */
-class Support implements ArrayAccess {
+class Support implements Configuration {
 
 	use Singleton; 
 
@@ -97,33 +97,6 @@ class Support implements ArrayAccess {
 	}
 
 	/**
-     * Determine if the given integration value exists.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function has( $key ) {
-        return isset( $this->items[$key] );
-    }
-
-    /**
-     * Get the specified integration value.
-     *
-     * @param  string  $key
-     * @param  mixed   $default
-     *
-     * @return mixed
-     */
-    public function get( $key, $default = null ) {
-        if ( ! isset( $this->items[$key] ) ) {
-            return $default;
-        }
-
-        return apply_filters( "wecodeart/integration/get/{$key}", $this->items[$key] );
-    }
-
-	/**
      * Set a given integration value.
      *
      * @param  array|string  $key
@@ -150,6 +123,33 @@ class Support implements ArrayAccess {
             $this->items[$key] = apply_filters( "wecodeart/integration/set/{$key}", $value );
         }
 	}
+
+	/**
+     * Determine if the given integration value exists.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function has( $key ) {
+        return isset( $this->items[$key] );
+    }
+
+    /**
+     * Get the specified integration value.
+     *
+     * @param  string  $key
+     * @param  mixed   $default
+     *
+     * @return mixed
+     */
+    public function get( $key, $default = null ) {
+        if ( ! isset( $this->items[$key] ) ) {
+            return $default;
+        }
+
+        return apply_filters( "wecodeart/integration/get/{$key}", $this->items[$key] );
+    }
 	
 	/**
      * Removes integration from the container.
@@ -169,50 +169,5 @@ class Support implements ArrayAccess {
      */
     public function all() {
         return $this->items;
-    }
-
-    /**
-     * Determine if the given integration option exists.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function offsetExists( $key ) {
-        return $this->has( $key );
-    }
-
-    /**
-     * Get a integration option.
-     *
-     * @param  string  $key
-     *
-     * @return mixed
-     */
-    public function offsetGet( $key ) {
-        return $this->get( $key );
-    }
-
-    /**
-     * Set a integration option.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     *
-     * @return void
-     */
-    public function offsetSet( $key, $value ) {
-        $this->set( $key, $value );
-    }
-
-    /**
-     * Unset a integration option.
-     *
-     * @param  string  $key
-     *
-     * @return void
-     */
-    public function offsetUnset( $key ) {
-        $this->set( $key, null );
     }
 }

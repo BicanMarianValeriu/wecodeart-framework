@@ -55,4 +55,13 @@ interface Configuration {
      * @return bool
      */
     public function has( $key );
+
+    /**
+     * Removes configuration from the container.
+     *
+     * @param  string  $key
+     *
+     * @return void
+     */
+    public function forget( $key );
 }

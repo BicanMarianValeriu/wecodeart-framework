@@ -9,21 +9,21 @@
  * @subpackage 	Conditional
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		4.0
- * @version		5.2.2
+ * @version		5.5.5
  */
 
 namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit();
 
-use ArrayAccess;
+use WeCodeArt\Config\Interfaces\Configuration;
 
 /**
  * Conditional.
  *
  * @author     Bican Marian Valeriu <marianvaleriubican@gmail.com>
  */
-class Conditional implements ArrayAccess {
+class Conditional implements Configuration {
 
     use Singleton;
 
@@ -52,6 +52,34 @@ class Conditional implements ArrayAccess {
     }
 	
     /**
+     * Set a given conditional value.
+     *
+     * @param  array|string  $key
+     * @param  mixed   $value
+     *
+     * @return void
+     */
+    public function register( $key, $value = null ) {
+        return $this->set( $key, $value );
+    }
+
+    /**
+     * Set a given conditional value.
+     *
+     * @param  array|string  $key
+     * @param  mixed   $value
+     *
+     * @return void
+     */
+    public function set( $key, $value = null ) {
+        $keys = is_array( $key ) ? $key : [ $key => $value ];
+
+        foreach ( $keys as $key => $value ) {
+            $this->items[$key] = apply_filters( "wecodeart/conditional/set/{$key}", $value );
+        }
+    }
+
+    /**
      * Determine if the given conditional value exists.
      *
      * @param  string  $key
@@ -79,31 +107,14 @@ class Conditional implements ArrayAccess {
     }
 
     /**
-     * Set a given conditional value.
+     * Removes integration from the container.
      *
-     * @param  array|string  $key
-     * @param  mixed   $value
+     * @param  string  $key
      *
-     * @return void
+     * @return bool
      */
-    public function set( $key, $value = null ) {
-        $keys = is_array( $key ) ? $key : [ $key => $value ];
-
-        foreach ( $keys as $key => $value ) {
-            $this->items[$key] = apply_filters( "wecodeart/conditional/set/{$key}", $value );
-        }
-    }
-    
-    /**
-     * Set a given conditional value.
-     *
-     * @param  array|string  $key
-     * @param  mixed   $value
-     *
-     * @return void
-     */
-    public function register( $key, $value = null ) {
-        return $this->set( $key, $value );
+    public function forget( $key ) {
+		unset( $this->items[$key] );
     }
 
     /**
@@ -113,50 +124,5 @@ class Conditional implements ArrayAccess {
      */
     public function all() {
         return $this->items;
-    }
-
-    /**
-     * Determine if the given conditional option exists.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function offsetExists( $key ) {
-        return $this->has( $key );
-    }
-
-    /**
-     * Get a conditional option.
-     *
-     * @param  string  $key
-     *
-     * @return mixed
-     */
-    public function offsetGet( $key ) {
-        return $this->get( $key );
-    }
-
-    /**
-     * Set a conditional option.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     *
-     * @return void
-     */
-    public function offsetSet( $key, $value ) {
-        $this->set( $key, $value );
-    }
-
-    /**
-     * Unset a conditional option.
-     *
-     * @param  string  $key
-     *
-     * @return void
-     */
-    public function offsetUnset( $key ) {
-        $this->set( $key, null );
     }
 }

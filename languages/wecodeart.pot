@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 04:08+0000\n"
+"POT-Creation-Date: 2022-04-02 23:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,12 +16,12 @@ msgstr ""
 "X-Loco-Version: 2.5.0; wp-5.6.1\n"
 "X-Domain: wecodeart"
 
-#: views/meta/comments.tpl.php:58
+#: views/meta/comments.tpl.php:60
 #, php-format
 msgid " on %s"
 msgstr ""
 
-#: views/meta/comments.tpl.php:50
+#: views/meta/comments.tpl.php:52
 msgid "% Comments"
 msgstr ""
 
@@ -30,7 +30,7 @@ msgstr ""
 msgid "%s Archives"
 msgstr ""
 
-#: views/meta/author-box.tpl.php:54 views/meta/author.tpl.php:42
+#: views/meta/author.tpl.php:43
 #, php-format
 msgid "%s`s avatar"
 msgstr ""
@@ -39,11 +39,11 @@ msgstr ""
 msgid "(no title)"
 msgstr ""
 
-#: views/meta/comments.tpl.php:49
+#: views/meta/comments.tpl.php:51
 msgid "1 Comment"
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-content.php:90
+#: inc/gutenberg/blocks/post/class-content.php:89
 msgid "[block rendering halted]"
 msgstr ""
 
@@ -57,10 +57,6 @@ msgid ""
 "plugins (Elementor, Brizy, Beaver Builder, Visual Composer, SiteOrigin, Divi)"
 " and it's core blocks are also optimized using Bootstrap's markup - the "
 "perfect tool for any developer."
-msgstr ""
-
-#: views/meta/author-box.tpl.php:39
-msgid "About"
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-template.php:114
@@ -77,11 +73,8 @@ msgid ""
 "later."
 msgstr ""
 
-#: inc/support/plugins/anr/class-anr.php:90
-msgid "ANR Captcha support is enabled!"
-msgstr ""
-
 #: inc/gutenberg/blocks/query/class-title.php:167
+#: inc/gutenberg/blocks/widgets/class-archives.php:109
 msgid "Archives"
 msgstr ""
 
@@ -98,7 +91,7 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: views/general/credits.tpl.php:28
+#: views/general/credits.tpl.php:33
 #, php-format
 msgid "Built on %1s."
 msgstr ""
@@ -112,8 +105,8 @@ msgstr ""
 msgid "Cancel reply"
 msgstr ""
 
-#: inc/support/plugins/anr/class-anr.php:151
-msgid "Captcha *"
+#: inc/support/plugins/anr/class-anr.php:90
+msgid "Captcha 4WP support is enabled!"
 msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:130
@@ -126,7 +119,7 @@ msgstr ""
 msgid "Comment *"
 msgstr ""
 
-#: views/meta/comments.tpl.php:52
+#: views/meta/comments.tpl.php:54
 msgid "Comments are Closed"
 msgstr ""
 
@@ -138,7 +131,7 @@ msgid_plural "%1$s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: views/general/credits.tpl.php:22
+#: views/general/credits.tpl.php:27
 #, php-format
 msgid "Copyright %s - All rights reserved."
 msgstr ""
@@ -200,15 +193,15 @@ msgstr ""
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr ""
 
-#: views/meta/comments.tpl.php:48
+#: views/meta/comments.tpl.php:50
 msgid "Leave a Comment"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-button.php:50
+#: inc/gutenberg/blocks/design/class-button.php:56
 msgid "Link"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:100
+#: inc/gutenberg/blocks/site/class-login.php:119
 msgid "Log In"
 msgstr ""
 
@@ -230,7 +223,11 @@ msgstr ""
 msgid "Name *"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:101
+#: inc/gutenberg/blocks/widgets/class-archives.php:120
+msgid "No archives to show."
+msgstr ""
+
+#: inc/gutenberg/blocks/comment/class-template.php:98
 msgid "No comments"
 msgstr ""
 
@@ -242,11 +239,15 @@ msgstr ""
 msgid "Notification dismissed"
 msgstr ""
 
+#: inc/gutenberg/blocks/design/class-button.php:50
+msgid "Outline"
+msgstr ""
+
 #: inc/gutenberg/blocks/query/class-numbers.php:139
 msgid "Pagination"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:98
+#: inc/gutenberg/blocks/site/class-login.php:117
 msgid "Password"
 msgstr ""
 
@@ -267,20 +268,20 @@ msgstr ""
 msgid "Post Type Archives: %s"
 msgstr ""
 
-#: views/meta/date.tpl.php:62
+#: views/meta/date.tpl.php:69
 #, php-format
 msgid "Post updated on %s."
 msgstr ""
 
-#: views/meta/terms.tpl.php:53
+#: views/meta/terms.tpl.php:56
 msgid "Posted in"
 msgstr ""
 
-#: views/meta/date.tpl.php:43
+#: views/meta/date.tpl.php:50
 msgid "Posted on "
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:99
+#: inc/gutenberg/blocks/site/class-login.php:118
 msgid "Remember Me"
 msgstr ""
 
@@ -299,8 +300,8 @@ msgstr ""
 msgid "RSS Error"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-search.php:64
-#: inc/gutenberg/blocks/widgets/class-search.php:65
+#: inc/gutenberg/blocks/widgets/class-search.php:79
+#: inc/gutenberg/blocks/widgets/class-search.php:80
 msgid "Search"
 msgstr ""
 
@@ -309,7 +310,27 @@ msgstr ""
 msgid "Search Results for \"%s\"."
 msgstr ""
 
-#: inc/gutenberg/class-gutenberg.php:251
+#: inc/gutenberg/blocks/widgets/class-archives.php:97
+msgid "Select Day"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/class-archives.php:94
+msgid "Select Month"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/class-archives.php:103
+msgid "Select Post"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/class-archives.php:100
+msgid "Select Week"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/class-archives.php:91
+msgid "Select Year"
+msgstr ""
+
+#: inc/gutenberg/class-gutenberg.php:247
 msgid "Skip to content"
 msgstr ""
 
@@ -322,7 +343,7 @@ msgstr ""
 msgid "Tag Archives: %s"
 msgstr ""
 
-#: inc/init.php:366
+#: inc/init.php:282
 msgid "The file must be of type CSS/JS."
 msgstr ""
 
@@ -330,14 +351,14 @@ msgstr ""
 msgid "Theme Options"
 msgstr ""
 
-#: inc/support/starter/content/about.php:7
-msgctxt "Theme starter content"
-msgid "About"
-msgstr ""
-
-#: inc/support/starter/class-starter.php:136
+#: inc/support/starter/content/blog.php:7
 msgctxt "Theme starter content"
 msgid "Blog"
+msgstr ""
+
+#: inc/support/starter/content/about.php:7
+msgctxt "Theme starter content"
+msgid "Features"
 msgstr ""
 
 #: inc/support/starter/content/home.php:7
@@ -361,7 +382,7 @@ msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
 
-#: views/general/toggler.tpl.php:17
+#: views/general/toggler.tpl.php:22
 msgid "Toggle navigation"
 msgstr ""
 
@@ -373,7 +394,7 @@ msgstr ""
 msgid "upgrade PHP"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:97
+#: inc/gutenberg/blocks/site/class-login.php:116
 msgid "Username or Email Address"
 msgstr ""
 
@@ -407,7 +428,7 @@ msgid ""
 "version %2$s. Please upgrade WordPress to use WeCodeArt Framework."
 msgstr ""
 
-#: inc/support/markup/class-svg.php:158
+#: inc/support/markup/class-svg.php:159
 #, php-format
 msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
@@ -427,7 +448,7 @@ msgstr ""
 msgid "Yearly Archives: %s"
 msgstr ""
 
-#: inc/support/plugins/wpseo/class-wpseo.php:72
+#: inc/support/plugins/wpseo/class-wpseo.php:75
 msgid ""
 "YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
 "plugin."

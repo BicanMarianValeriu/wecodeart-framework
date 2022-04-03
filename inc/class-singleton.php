@@ -53,11 +53,11 @@ trait Singleton {
 	 * Prevent the instance from being cloned
 	 * @return void
 	 */
-	final private function __clone() {}
+	final public function __clone() {}
 
 	/**
 	 * Prevent from being unserialized 
 	 * @return void
 	 */
-	final private function __wakeup() {}
+	final public function __wakeup() {}
 }

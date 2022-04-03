@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		1.9
- * @version		5.4.4
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -115,7 +115,7 @@ class WooCommerce implements Integration {
 	 * Filter - Restricted WooCommerce Blocks from theme code
 	 *
 	 * @since	5.0.0
-	 * @version	5.4.4
+	 * @version	5.5.5
 	 *
 	 * @return 	array
 	 */
@@ -128,7 +128,9 @@ class WooCommerce implements Integration {
 			'woocommerce/product-best-sellers',
 			'woocommerce/product-top-rated',
 			'woocommerce/product-on-sale',
+			'woocommerce/product-category',
 			'woocommerce/product-new',
+			'woocommerce/product-tag',
 		], $blocks );
 	}
 }

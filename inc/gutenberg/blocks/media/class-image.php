@@ -56,7 +56,7 @@ class Image extends Dynamic {
 		.wp-block-image.alignfull, .wp-block-image.alignfull img, .wp-block-image.alignwide img {
 			width: 100%;
 		}
-		.wp-block-image.alignfull, .wp-block-image.alignwide, .wp-block-image.is-resized, .wp-block-image figure {
+		.wp-block-image.alignfull, .wp-block-image.aligncenter, .wp-block-image.alignwide, .wp-block-image.is-resized, .wp-block-image figure {
 			display: table;
 		}
 		.wp-block-image.alignfull figcaption, .wp-block-image.alignwide figcaption, .wp-block-image.is-resized figcaption {

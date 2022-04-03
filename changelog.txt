@@ -1,5 +1,18 @@
 v5.5.5
-- Added - WooCoomerce html templates
+- Removed - ArrayAccess implementation where not required (prepare for PHP 8)
+- Updated - Singleton Class __clone() and __wakeup() marked as public (PHP 8 warning fix)
+- Updated - core/image aligncenter fix
+- Updated - core/cover inner container padding removed (use columns block for adding gutters)
+- Updated - Gutenberg Styles core_blocks() list to 5.9.2 (added new blocks)
+- Updated - WooCommerce updated block names exclude from theme Gutenberg Extensions
+- Updated - Implement Configuration where ArrayAccess was removed + code cleanup
+- Updated - Romanian local translations
+- Fixed - Issue with invalid starter content for About page
+- Fixed - Issue with blockGap CSS generation due to being saved as array after Gutenberg plugin update (logical block margin based on writing mode)
+- Fixed - Generate CSS for vertical blockGap (eg, Group block with multiple Columns)
+- Added - WooCommerce HTML starter templates
+- Added - Author Box template
+- Added - Default patterns as PHP files for Gutenberg 12.9.0 / Maintain HTML registration as well for backwards compat
 
 v5.5.3/4
 - Updated - Certain blocks logic to make use of custom palette colors along with default ones - previously was overwriting them
@@ -97,10 +110,10 @@ v5.4.5
 
 v5.4.4
 - Updated - Header/Footer/Content PHP fallbacks
-- Updated - Adjusted WooCoomerce wrapper on legacy template
+- Updated - Adjusted WooCommerce wrapper on legacy template
 - Updated - Adjusted Single Post comment form margins
 - Updated - JS logging only when developer mode is enabled
-- Fixed - a notice on WooCoomerce Leave a Review form regarding Privacy Policy field
+- Fixed - a notice on WooCommerce Leave a Review form regarding Privacy Policy field
 - Fixed - Inputs label return vs echo bug (visible on comment form)
 
 v5.4.3
@@ -248,7 +261,7 @@ v5.2.3
 v5.2.2
 - Updated - Gutenberg remove from theme activation check - WP does that automatically until 5.9 for FSE themes
 - Updated - Pattern to use spacing attributes instead of BootStrap's classes
-- Updated - Reduce WooCoomerce starter support to minimum / eventually all support extensions will be moved to own plugin
+- Updated - Reduce WooCommerce starter support to minimum / eventually all support extensions will be moved to own plugin
 - Updated - Duotone support transparency
 - Updated - BEM class naming for some post meta block views
 - Updated - Updated starter content

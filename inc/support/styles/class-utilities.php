@@ -9,7 +9,7 @@
  * @subpackage  Styles Utilities
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.3.3
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -18,12 +18,13 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Support\FileSystem;
+use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Handles Utilities.
  */
-class Utilities implements \ArrayAccess {
+class Utilities implements Configuration {
 
 	use Singleton;
 
@@ -242,50 +243,5 @@ class Utilities implements \ArrayAccess {
      */
     public function all() {
         return $this->items;
-    }
-
-    /**
-     * Determine if the given module option exists.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function offsetExists( $key ) {
-        return $this->has( $key );
-    }
-
-    /**
-     * Get a module option.
-     *
-     * @param  string  $key
-     *
-     * @return mixed
-     */
-    public function offsetGet( $key ) {
-        return $this->get( $key );
-    }
-
-    /**
-     * Set a module option.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     *
-     * @return void
-     */
-    public function offsetSet( $key, $value ) {
-        $this->set( $key, $value );
-    }
-
-    /**
-     * Unset a module option.
-     *
-     * @param  string  $key
-     *
-     * @return void
-     */
-    public function offsetUnset( $key ) {
-        $this->set( $key, null );
     }
 }

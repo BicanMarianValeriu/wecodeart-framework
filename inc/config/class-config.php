@@ -119,6 +119,17 @@ class Config implements Configuration, ArrayAccess {
     }
 
     /**
+     * Removes given configuration from the container.
+     *
+     * @param  string  $key
+     *
+     * @return void
+     */
+    public function forget( $key ) {
+		unset( $this->items[$key] );
+    }
+
+    /**
      * Get all of the configuration items for the application.
      *
      * @return array

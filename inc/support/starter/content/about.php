@@ -5,10 +5,10 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'Features', 'Theme starter content', 'wecodeart' ),
-	'post_content' => '<!-- wp:cover {"url":"' . trailingslashit( get_template_directory_uri() ) . 'assets/images/wordpress-cover.jpg","dimRatio":80,"focalPoint":{"x":"1.00","y":"0.82"},"minHeight":400,"gradient":"light-to-white","contentPosition":"center center","align":"full"} -->
+	'post_content' => '<!-- wp:cover {"url":"' . trailingslashit( get_template_directory_uri() ) . 'assets/images/wordpress-cover.jpg","dimRatio":80,"focalPoint":{"x":"1.00","y":"0.70"},"minHeight":400,"gradient":"primary-to-vivid-purple","contentPosition":"center center","align":"full"} -->
 	<div class="wp-block-cover alignfull" style="min-height:400px">
-	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-80 has-background-dim wp-block-cover__gradient-background has-background-gradient has-light-to-white-gradient-background"></span>
-	<img class="wp-block-cover__image-background wp-image-55" alt="" src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/wordpress-cover.jpg" style="object-position:100% 82%" data-object-fit="cover" data-object-position="100% 82%"/>
+	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-80 has-background-dim wp-block-cover__gradient-background has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
+	<img class="wp-block-cover__image-background" alt="" src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/wordpress-cover.jpg" style="object-position:100% 70%" data-object-fit="cover" data-object-position="100% 70%"/>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","level":1,"textColor":"primary","className":"display-6"} -->
 	<h1 class="has-text-align-center display-6 has-primary-color has-text-color" id="top-reasons">Top reasons to <mark style="background-color:#2388ed" class="has-inline-color has-white-color"><strong>choose</strong></mark><br>WeCodeArt Framework.</h1>
@@ -19,7 +19,7 @@ return [
 	<!-- wp:group {"align":"full","className":"py-5","layout":{"inherit":true}} -->
 	<div class="wp-block-group alignfull py-5" id="list"><!-- wp:columns {"className":""} -->
 	<div class="wp-block-columns">
-	<!-- wp:column {"className":"","customCSS":""} -->
+	<!-- wp:column {"className":""} -->
 	<div class="wp-block-column">
 	<!-- wp:paragraph {"className":"mb-5"} -->
 	<p class="mb-5">In addition to all goodies coming with Gutenberg editor and Full Site Editing feature in WP 5.9 WeCodeArt Framework comes with extra improvements:</p>
@@ -78,7 +78,7 @@ return [
 	<!-- /wp:group -->
 	<!-- wp:group {"align":"full","backgroundColor":"light","className":"py-5","layout":{"inherit":true}} -->
 	<div class="wp-block-group alignfull py-5 has-light-background-color has-background"><!-- wp:columns {"className":""} -->
-	<div class="wp-block-columns"><!-- wp:column {"className":"","customCSS":""} -->
+	<div class="wp-block-columns"><!-- wp:column {"className":""} -->
 	<div class="wp-block-column"><!-- wp:heading {"textColor":"primary","className":"h1"} -->
 	<h2 class="h1 has-primary-color has-text-color" id="performance">Gutenberg Improvements</h2>
 	<!-- /wp:heading -->

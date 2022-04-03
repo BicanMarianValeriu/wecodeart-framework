@@ -80,7 +80,6 @@ class Columns extends Dynamic {
 		.wp-block-columns {
 			display: flex;
 			flex-wrap: wrap;
-			gap: var(--wp--style--block-gap);
 		}
 		.wp-block-columns.are-vertically-aligned-top {
 			align-items: flex-start;

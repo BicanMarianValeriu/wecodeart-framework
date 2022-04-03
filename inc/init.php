@@ -9,7 +9,7 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		1.0
- * @version		5.4.5
+ * @version		5.5.5
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -29,7 +29,7 @@ new WeCodeArt\Autoloader();
 /**
  * Final Class
  */
-final class WeCodeArt implements \ArrayAccess {
+final class WeCodeArt {
 
 	use Singleton;
 
@@ -151,55 +151,6 @@ final class WeCodeArt implements \ArrayAccess {
      */
     public function forget( $key ) {
         unset( $this->factories[$key], $this->services[$key] );
-    }
-	
-	/**
-     * Gets a service.
-     *
-     * @param string $key
-     *
-     * @return mixed
-     */
-    public function offsetGet( $key ) {
-        return $this->get( $key );
-	}
-	
-    /**
-     * Sets a service.
-     *
-     * @param string $key
-     * @param Closure $service
-     *
-     * @return void
-     */
-    public function offsetSet( $key, $service ) {
-        if ( ! is_callable( $service ) ) {
-            throw new BindingResolutionException("Service definition [{$service}] is not an instance of Closure");
-		}
-		
-        $this->bind( $key, $service );
-    }
-	
-	/**
-     * Determine if the given service exists.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function offsetExists( $key ) {
-        return $this->has( $key );
-	}
-	
-    /**
-     * Unsets a service.
-     *
-     * @param  string  $key
-     *
-     * @return void
-     */
-    public function offsetUnset( $key ) {
-        return $this->forget( $key );
     }
 }
 

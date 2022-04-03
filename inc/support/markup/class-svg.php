@@ -9,7 +9,7 @@
  * @subpackage  Markup\SVG
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.3.3
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Support\Markup;
@@ -17,12 +17,13 @@ namespace WeCodeArt\Support\Markup;
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\kses_svg;
 
 /**
  * SVG Rendering
  */
-class SVG implements \ArrayAccess {
+class SVG implements Configuration {
 
 	use Singleton;
 
@@ -302,6 +303,22 @@ class SVG implements \ArrayAccess {
 	}
 
 	/**
+     * Set a given configuration value.
+     *
+     * @param  array|string  $key
+     * @param  mixed   $value
+     *
+     * @return void
+     */
+    public function set( $key, $value = null ) {
+        $keys = is_array( $key ) ? $key : [ $key => $value ];
+
+        foreach ( $keys as $key => $value ) {
+            $this->items[$key] = apply_filters( "wecodeart/svg/set/{$key}", $value );
+        }
+    }
+
+	/**
      * Determine if the given configuration value exists.
      *
      * @param  string  $key
@@ -329,22 +346,6 @@ class SVG implements \ArrayAccess {
 	}
 
     /**
-     * Set a given configuration value.
-     *
-     * @param  array|string  $key
-     * @param  mixed   $value
-     *
-     * @return void
-     */
-    public function set( $key, $value = null ) {
-        $keys = is_array( $key ) ? $key : [ $key => $value ];
-
-        foreach ( $keys as $key => $value ) {
-            $this->items[$key] = apply_filters( "wecodeart/svg/set/{$key}", $value );
-        }
-    }
-
-    /**
      * Forget a given configuration value.
      *
      * @param string  $key
@@ -362,50 +363,5 @@ class SVG implements \ArrayAccess {
      */
     public function all() {
         return $this->items;
-    }
-
-    /**
-     * Determine if the given configuration option exists.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function offsetExists( $key ) {
-        return $this->has( $key );
-    }
-
-    /**
-     * Get a configuration option.
-     *
-     * @param  string  $key
-     *
-     * @return mixed
-     */
-    public function offsetGet( $key ) {
-        return $this->get( $key );
-    }
-
-    /**
-     * Set a configuration option.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     *
-     * @return void
-     */
-    public function offsetSet( $key, $value ) {
-        $this->set( $key, $value );
-    }
-
-    /**
-     * Unset a configuration option.
-     *
-     * @param  string  $key
-     *
-     * @return void
-     */
-    public function offsetUnset( $key ) {
-        $this->set( $key, null );
     }
 }

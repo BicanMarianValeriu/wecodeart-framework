@@ -9,21 +9,21 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.1.2
- * @version		5.4.5
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Support\Markup;
 
 defined( 'ABSPATH' ) || exit();
 
-use ArrayAccess;
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Config\Interfaces\Configuration;
 
 /**
  * Standard Inputs Markup
  */
-class Inputs implements ArrayAccess {
+class Inputs implements Configuration {
 
 	use Singleton;
     use Asset;
@@ -150,33 +150,6 @@ class Inputs implements ArrayAccess {
 	}
 	
 	/**
-     * Determine if the given configuration value exists.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function has( $key ) {
-        return isset( $this->items[$key] );
-    }
-
-    /**
-     * Get the specified configuration value.
-     *
-     * @param  string  $key
-     * @param  mixed   $default
-     *
-     * @return mixed
-     */
-    public function get( $key, $default = null ) {
-        if ( ! isset( $this->items[$key] ) ) {
-            return $default;
-        }
-
-        return apply_filters( "wecodeart/inputs/get/{$key}", $this->items[$key] );
-	}
-	
-	/**
      * Set a given integration value.
      *
      * @param  array|string  $key
@@ -204,6 +177,33 @@ class Inputs implements ArrayAccess {
         }
     }
 
+	/**
+     * Determine if the given configuration value exists.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function has( $key ) {
+        return isset( $this->items[$key] );
+    }
+
+    /**
+     * Get the specified configuration value.
+     *
+     * @param  string  $key
+     * @param  mixed   $default
+     *
+     * @return mixed
+     */
+    public function get( $key, $default = null ) {
+        if ( ! isset( $this->items[$key] ) ) {
+            return $default;
+        }
+
+        return apply_filters( "wecodeart/inputs/get/{$key}", $this->items[$key] );
+	}
+
     /**
      * Forget a given configuration value.
      *
@@ -222,50 +222,5 @@ class Inputs implements ArrayAccess {
      */
     public function all() {
         return $this->items;
-    }
-
-    /**
-     * Determine if the given configuration option exists.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function offsetExists( $key ) {
-        return $this->has( $key );
-    }
-
-    /**
-     * Get a configuration option.
-     *
-     * @param  string  $key
-     *
-     * @return mixed
-     */
-    public function offsetGet( $key ) {
-        return $this->get( $key );
-    }
-
-    /**
-     * Set a configuration option.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     *
-     * @return void
-     */
-    public function offsetSet( $key, $value ) {
-        $this->set( $key, $value );
-    }
-
-    /**
-     * Unset a configuration option.
-     *
-     * @param  string  $key
-     *
-     * @return void
-     */
-    public function offsetUnset( $key ) {
-        $this->set( $key, null );
     }
 }

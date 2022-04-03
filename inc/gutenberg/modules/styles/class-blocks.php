@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.1
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -93,46 +93,74 @@ class Blocks extends Processor {
 			$type = get_prop( $layout, 'type', 'default' );
 
 			if( $type === 'default' ) {
-				if( get_prop( $layout, 'inherit', null ) ) {
-					$default_layout = wecodeart_json( [ 'settings', 'layout' ], false );
+				if( get_prop( $layout, 'inherit' ) ) {
+					$default_layout = wecodeart_json( [ 'settings', 'layout' ] );
 					if ( $default_layout ) {
 						$layout = $default_layout;
 					}
 				}
 
-				if( $layout ) { 
-					$size_default 	= get_prop( $layout, 'contentSize', null );
-					$size_wide    	= get_prop( $layout, 'wideSize', null );
-					$size_default 	= $size_default ?: $size_wide;
-					$size_wide 		= $size_wide ?: $size_default;
+				$size_default 	= get_prop( $layout, 'contentSize' );
+				$size_wide    	= get_prop( $layout, 'wideSize' );
+				$size_default 	= $size_default ?: $size_wide;
+				$size_wide 		= $size_wide ?: $size_default;
 
-					if( $size_default || $size_wide ) {
-						$this->output[] = wp_parse_args( [
-							'element'	=> join( '>', [ $this->element, '*' ] ),
-							'property' 	=> 'max-width',
-							'value'	  	=> $size_default
-						], $output );
-						$this->output[] = wp_parse_args( [
-							'element'	=> join( '>', [ $this->element, '*' ] ),
-							'property' 	=> 'margin-left',
-							'value'	  	=> 'auto!important'
-						], $output );
-						$this->output[] = wp_parse_args( [
-							'element'	=> join( '>', [ $this->element, '*' ] ),
-							'property' 	=> 'margin-right',
-							'value'	  	=> 'auto!important'
-						], $output );
-						$this->output[] = wp_parse_args( [
-							'element'	=> join( '>', [ $this->element, '.alignwide' ] ),
-							'property' 	=> 'max-width',
-							'value'	  	=> $size_wide
-						], $output );
-						$this->output[] = wp_parse_args( [
-							'element'	=> join( '>', [ $this->element, '.alignfull' ] ),
-							'property' 	=> 'max-width',
-							'value'	  	=> 'none'
-						], $output );
+				if( $size_default || $size_wide ) {
+					$this->output[] = wp_parse_args( [
+						'element'	=> join( '>', [ $this->element, '*' ] ),
+						'property' 	=> 'max-width',
+						'value'	  	=> $size_default
+					], $output );
+					$this->output[] = wp_parse_args( [
+						'element'	=> join( '>', [ $this->element, '*' ] ),
+						'property' 	=> 'margin-left',
+						'value'	  	=> 'auto!important'
+					], $output );
+					$this->output[] = wp_parse_args( [
+						'element'	=> join( '>', [ $this->element, '*' ] ),
+						'property' 	=> 'margin-right',
+						'value'	  	=> 'auto!important'
+					], $output );
+					$this->output[] = wp_parse_args( [
+						'element'	=> join( '>', [ $this->element, '.alignwide' ] ),
+						'property' 	=> 'max-width',
+						'value'	  	=> $size_wide
+					], $output );
+					$this->output[] = wp_parse_args( [
+						'element'	=> join( '>', [ $this->element, '.alignfull' ] ),
+						'property' 	=> 'max-width',
+						'value'	  	=> 'none'
+					], $output );
+				}
+
+				// Block Gap
+				if ( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ] ) ) {
+					if ( is_array( $gap ) ) {
+						$gap_x	= get_prop( $gap, [ 'top' ] );
 					}
+
+					$gap = $gap_x ? $gap_x : 'var( --wp--style--block-gap )';
+
+					$this->output[] = wp_parse_args( [
+						'element'	=> implode( '>', [ $this->element, '*' ] ),
+						'property'	=> 'margin-block-start',
+						'value'		=> 0,
+					], $output );
+					$this->output[] = wp_parse_args( [
+						'element'	=> implode( '>', [ $this->element, '*' ] ),
+						'property'	=> 'margin-block-end',
+						'value'		=> 0,
+					], $output );
+					$this->output[] = wp_parse_args( [
+						'element'	=> implode( '>', [ $this->element, '*+*' ] ),
+						'property'	=> 'margin-block-start',
+						'value'		=> $gap,
+					], $output );
+					$this->output[] = wp_parse_args( [
+						'element'	=> implode( '>', [ $this->element, '*+*' ] ),
+						'property'	=> 'margin-block-end',
+						'value'		=> 0,
+					], $output );
 				}
 			} elseif( $type === 'flex' ) {
 				$orientation	= get_prop( $layout, 'orientation', 'horizontal' );
@@ -177,14 +205,15 @@ class Blocks extends Processor {
 
 					$direction = 'align-items';
 				}
-
-				// Backwards
+				
 				if ( ! empty( $justification ) && array_key_exists( $justification, $justify_options ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> $direction,
 						'value'	  	=> $justify_options[ $justification ]
 					], $output );
 				}
+
+				// BlockGap handled bellow in spacing
 
 				$this->output[] = wp_parse_args( [
 					'element'	=> join( '>', [ $this->element, '*' ] ),
@@ -332,11 +361,17 @@ class Blocks extends Processor {
 					}
 				}
 
-				// Block Gap
+				// Block Gap - only if not inherit
 				if ( $gap = get_prop( $spacing, 'blockGap' ) ) {
+					if( is_array( $gap ) ) {
+						$gap_y	= get_prop( $gap, [ 'top' ], 'var(--wp--custom--gutter, 1rem)' );
+						$gap_x	= get_prop( $gap, [ 'left' ], 'var(--wp--custom--gutter, 1rem)' );
+						$gap 	= $gap_y === $gap_x ? $gap_y : $gap_y . ' ' . $gap_x;
+					}
+					
 					$this->output[] = wp_parse_args( [
-						'property' 	=> '--wp--style--block-gap',
-						'value'	  	=> $gap
+						'property' 	=> 'gap',
+						'value'	  	=> get_prop( $this->attrs, [ 'layout', 'inherit' ] ) ? null : $gap
 					], $output );
 				}
 			}

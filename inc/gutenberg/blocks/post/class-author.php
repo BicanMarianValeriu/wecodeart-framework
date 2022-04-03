@@ -44,12 +44,7 @@ class Author extends Dynamic {
 	/**
 	 * Init
 	 */
-	public function init() {
-		register_block_style( $this->get_block_type(), [
-			'name' 	=> 'box',
-            'label'	=> __( 'Wide Box', 'wecodeart' ),
-		] );
-	}
+	public function init() {}
 
 	/**
 	 * Shortcircuit Register

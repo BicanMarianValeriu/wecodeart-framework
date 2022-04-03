@@ -26,8 +26,23 @@
 			"area": "header"
 		},
 		{
+			"title": "Header (Logo left)",
+			"name": "header-left",
+			"area": "header"
+		},
+		{
+			"title": "Header (Dark)",
+			"name": "header-dark",
+			"area": "header"
+		},
+		{
 			"title": "Footer",
 			"name": "footer",
+			"area": "footer"
+		},
+		{
+			"title": "Footer (Dark)",
+			"name": "footer-dark",
 			"area": "footer"
 		},
 		{
@@ -149,7 +164,8 @@
 				"2": ".75rem",
 				"3": "1rem",
 				"4": "2rem",
-				"5": "3rem"
+				"5": "3rem",
+				"6": "clamp(3rem, 10vw, 5rem)"
 			},
 			"mobileBreakpoint": "lg"
 		},
