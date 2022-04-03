@@ -55,6 +55,7 @@ class Text extends Dynamic {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$tablet		= get_prop( $breaks, 'md', '768px' );
 		$desktop	= get_prop( $breaks, 'lg', '992px' );
+		
 		return "
 		.wp-block-media-text {
 			--wp--gutter-x: 1rem;
