@@ -7,7 +7,7 @@ return [
 	'post_title'   => _x( 'Home', 'Theme starter content', 'wecodeart' ),
 	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","gradient":"primary-to-vivid-purple","contentPosition":"center center","isDark":false,"align":"full","className":"py-5 text-center","customCSS":"selector {\n  min-height: calc(100vh - 70px);\n}"} -->
 	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:100vh">
-	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
+	<span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","level":1,"textColor":"white","className":"mb-5 display-5"} -->
 	<h1 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="create-and-grow">Create and grow<br>your unique website today</h1>
@@ -33,12 +33,12 @@ return [
 	</div>
 	<!-- /wp:cover -->
 	
-	<!-- wp:group {"className":"my-md-5","layout":{"inherit":true}} -->
-	<div class="wp-block-group my-md-5">
+	<!-- wp:group {"className":"my-5","layout":{"inherit":true}} -->
+	<div class="wp-block-group my-5">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}},"className":"flex-column flex-md-row"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
-	<!-- wp:column {"className":"p-2 mt-5 shadow-sm rounded"} -->
-	<div class="wp-block-column p-2 mt-5 shadow-sm rounded">
+	<!-- wp:column {"className":"p-3 mt-md-5 shadow-sm rounded"} -->
+	<div class="wp-block-column p-3 mt-md-5 shadow-sm rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large"} -->
 	<div class="wp-block-image">
 	<figure class="aligncenter size-large is-resized">
@@ -53,8 +53,8 @@ return [
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
-	<!-- wp:column {"className":"p-2 my-5 mt-md-0 shadow rounded"} -->
-	<div class="wp-block-column p-2 my-5 mt-md-0 shadow rounded">
+	<!-- wp:column {"className":"p-3 mb-md-5 shadow rounded"} -->
+	<div class="wp-block-column p-3 mb-md-5 shadow rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large"} -->
 	<div class="wp-block-image">
 	<figure class="aligncenter size-large is-resized">
@@ -70,8 +70,8 @@ return [
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
-	<!-- wp:column {"className":"p-2 mt-md-5 mb-5 mb-md-0 shadow-sm rounded"} -->
-	<div class="wp-block-column p-2 mt-md-5 mb-5 mb-md-0 shadow-sm rounded">
+	<!-- wp:column {"className":"p-3 mt-md-5 shadow-sm rounded"} -->
+	<div class="wp-block-column p-3 mt-md-5 shadow-sm rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large"} -->
 	<div class="wp-block-image">
 	<figure class="aligncenter size-large is-resized">
@@ -197,10 +197,10 @@ return [
 	
 	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","gradient":"primary-to-vivid-purple","isDark":false,"align":"full","className":"py-5 text-center"} -->
 	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:555px">
-	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
+	<span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","textColor":"white","className":"mb-5 display-5"} -->
-	<h2 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="let-s-work-together-on-your-next-web-project">Let’s work together on your <br>next web project</h2>
+	<h2 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="let-s-work-together-on-your-next-web-project">Let`s work together on your <br>next web project</h2>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph {"align":"center","textColor":"white","className":"lead mb-5","fontSize":"medium"} -->
 	<p class="has-text-align-center lead mb-5 has-white-color has-text-color has-medium-font-size">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus <br>nec ullamcorper mattis, pulvinar dapibus leo.</p>
