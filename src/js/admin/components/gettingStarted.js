@@ -66,7 +66,7 @@ export default () => {
                     return (
                         <div className={`alert alert-${type}`} role="alert">
                             <h3>{title}</h3>
-                            <p>{content}</p>
+                            <p dangerouslySetInnerHTML={{ __html: content }} />
                         </div>
                     );
                 })}
