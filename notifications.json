@@ -4,7 +4,7 @@
 		{
 			"type": "info",
 			"title": "Before updating to 5.5.5!",
-			"content": "Updating to 5.5.5 will have minor layout changes like a new gutter approach for .wp-site-blocks container instead of columns padding. You will need to edit customized templates to remove the custom padding/padding classes."
+			"content": "Updating to 5.5.5 will have minor layout changes like a new gutter approach for .wp-site-blocks container instead of core/columns block padding. You will need to edit any customized templates to remove the custom padding/padding classes."
 		},
 		{
 			"type": "info",
