@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.3.3
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -81,11 +81,9 @@ class Numbers extends Dynamic {
 		}
 
 		// Get the what we need.
-		$comments 	= new \WP_Comment_Query( Template::build_query( $block ) );
-		$total    	= $comments->max_num_pages;
-
-		// Get the current comment page from the URL.
-		$current 	= get_query_var( 'cpage' ) ?: 'newest' === get_option( 'default_comments_page' ) ? $total : 1;
+		$comment_vars 	= build_comment_query_vars_from_block( $block );
+		$total   		= ( new WP_Comment_Query( $comment_vars ) )->max_num_pages;
+		$current 		= ! empty( $comment_vars['paged'] ) ? $comment_vars['paged'] : null;
 
 		return wecodeart( 'markup' )::wrap( 'wp-block-comments-pagination-numbers', [ [
 			'tag' 	=> 'div',

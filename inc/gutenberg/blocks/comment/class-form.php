@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -81,7 +81,9 @@ class Form extends Dynamic {
 	 * @return 	array
 	 */
 	public function comment_form_defaults( $defaults ) {
-		$dots= wecodeart( 'markup' )->SVG::compile( 'comment-dots' );
+		$dots= wecodeart( 'markup' )->SVG::compile( 'comment-dots', [
+			'class' => 'fa-fw'
+		] );
 
 		return wp_parse_args( [
 			'format'			 	=> 'html5',

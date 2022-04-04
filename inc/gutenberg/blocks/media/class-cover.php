@@ -60,6 +60,7 @@ class Cover extends Dynamic {
 			align-items: center;
 			width: 100%;
 			min-height: 350px;
+			padding: 1rem;
 			background-size: cover;
 			background-position: center center;
 			overflow: hidden;
@@ -77,13 +78,13 @@ class Cover extends Dynamic {
 			margin-right: 0;
 			float: none;
 		}
-		.wp-block-cover[class*="is-position-top"],
-		.wp-block-cover[class*="-left"] .wp-block-cover__inner-container {
-			align-items: flex-start;
-		}
 		.wp-block-cover[class*="is-position-center"],
 		.wp-block-cover[class*="-center"] .wp-block-cover__inner-container {
 			align-items: center;
+		}
+		.wp-block-cover[class*="is-position-top"],
+		.wp-block-cover[class*="-left"] .wp-block-cover__inner-container {
+			align-items: flex-start;
 		}
 		.wp-block-cover[class*="is-position-bottom"],
 		.wp-block-cover[class*="-right"] .wp-block-cover__inner-container {

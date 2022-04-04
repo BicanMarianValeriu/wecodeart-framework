@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -136,6 +136,7 @@ class Numbers extends Dynamic {
                 'tag'   => 'ul',
                 'attrs' => [
                     'class'     => 'pagination',
+                    'role'      => 'navigation',
                     'aria-label'=> esc_attr__( 'Pagination', 'wecodeart' )
                 ]
             ],
@@ -170,6 +171,7 @@ class Numbers extends Dynamic {
         $width      = get_prop( $button_css, [ 'border', 'width' ], '1px' );
         $style      = get_prop( $button_css, [ 'border', 'style' ], 'solid' );
         $color      = get_prop( $button_css, [ 'border', 'color' ], 'currentColor' );
+        $color      = $color === 'transparent' ? 'currentColor' : $color;
         $radius     = get_prop( $button_css, [ 'border', 'radius' ], '.25rem' );
         
 		return "

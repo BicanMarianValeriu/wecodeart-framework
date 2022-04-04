@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.5.1
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -88,11 +88,18 @@ class Template extends Dynamic {
 		}
 
         // Get what we need about comments for the current post.
-		$comments_query		= new \WP_Comment_Query( self::build_args( $block ) );
+		$comments_query		= new \WP_Comment_Query( build_comment_query_vars_from_block( $block ) );
         $comments 			= $comments_query->get_comments();
 		$comments_number 	= count( $comments );
+		$comment_order 		= get_option( 'comment_order' );
 
-		$output	= wecodeart( 'markup' )->SVG::compile( 'comments' );
+		if ( 'desc' === $comment_order ) {
+			$comments = array_reverse( $comments );
+		}
+
+		$output	= wecodeart( 'markup' )->SVG::compile( 'comments', [
+			'class' => 'fa-fw'
+		] );
 		
 		if ( 0 === $comments_number ) {
 			$header	= esc_html__( 'No comments', 'wecodeart' );
@@ -106,7 +113,7 @@ class Template extends Dynamic {
 			);
 		}
 
-		$output = sprintf( '%s %s', $output, $header );
+		$output .= sprintf( '<span>%s</span>', $header );
 
 		if( comments_open( $post_id ) ) {
 			$output .= sprintf(
@@ -183,51 +190,6 @@ class Template extends Dynamic {
 	
 		// This is ok, we render gutenberg blocks here.
 		echo $content;
-	}
-
-	/**
-	 * Temporary until WP 5.9
-	 *
-	 * @return 	array
-	 */
-	public static function build_args( $block ) {
-		$comment_args = array(
-			'orderby'                   => 'comment_date_gmt',
-			'order'                     => 'ASC',
-			'status'                    => 'approve',
-			'no_found_rows'             => false,
-			'update_comment_meta_cache' => false, // We lazy-load comment meta for performance.
-		);
-		
-		if ( ! empty( $block->context['postId'] ) ) {
-			$comment_args['post_id'] = (int) $block->context['postId'];
-		}
-
-		if ( get_option( 'thread_comments' ) ) {
-			$comment_args['hierarchical'] = 'threaded';
-		} else {
-			$comment_args['hierarchical'] = false;
-		}
-
-		$per_page = ! empty( $block->context['comments/perPage'] ) ? (int) $block->context['comments/perPage'] : 0;
-		if ( 0 === $per_page && get_option( 'page_comments' ) ) {
-			$per_page = (int) get_query_var( 'comments_per_page' );
-			if ( 0 === $per_page ) {
-				$per_page = (int) get_option( 'comments_per_page' );
-			}
-		}
-		if ( $per_page > 0 ) {
-			$comment_args['number'] = $per_page;
-			$page                   = (int) get_query_var( 'cpage' );
-
-			if ( $page ) {
-				$comment_args['offset'] = ( $page - 1 ) * $per_page;
-			} elseif ( 'oldest' === get_option( 'default_comments_page' ) ) {
-				$comment_args['offset'] = 0;
-			}
-		}
-
-		return $comment_args;
 	}
 
 	/**
