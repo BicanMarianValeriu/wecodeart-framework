@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -148,8 +148,9 @@ class Search extends Dynamic {
 				wecodeart_input( 'button', [
 					'label' => $label,
 					'attrs' => [
-						'type'	=> 'submit',
-						'class' => $this->get_classname( $attributes, 'button' ),
+						'type'			=> 'submit',
+						'class' 		=> $this->get_classname( $attributes, 'button' ),
+						'aria-label'	=> wp_strip_all_tags( get_prop( $attributes, 'buttonText' ) ),
 					]
 				] );
 			}
