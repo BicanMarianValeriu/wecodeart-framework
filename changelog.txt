@@ -9,12 +9,14 @@ v5.5.5
 - Updated - Romanian local translations
 - Updated - Query Pagination Numbers border to currentColor if button styles are having transparent border
 - Updated - Query Comments Template and Pagination cleanup unnecessary methods after WP5.9 updates
-- Updated - core/gallery to use grid layout
 - Fixed - Issue with core/cover top-left content alignment
 - Fixed - Issue with invalid starter content for About page
 - Fixed - Issue with blockGap CSS generation due to being saved as array after Gutenberg plugin update (logical block margin based on writing mode)
 - Fixed - Generate CSS for vertical blockGap (eg, Group block with multiple Columns)
+- Fixed - core/spacer double output of units in generated CSS
+- Fixed - core/spacer height issue with .vr class in navigation - on mobile
 - Added - WooCommerce HTML starter templates
+- Added - New Header/Footer template parts: Header Dark, Header Logo Left, Header with Search, Footer Dark (removed as patterns)
 - Added - Author Box template
 - Added - Default patterns as PHP files for Gutenberg 12.9.0 / Maintain HTML registration as well for backwards compat
 

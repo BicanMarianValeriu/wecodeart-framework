@@ -444,6 +444,7 @@ class Navigation extends Dynamic {
 		.wp-block-navigation .wp-block-spacer {
 			width: 100%;
 			height: var(--wp--spacer-width);
+			min-height: initial;
 		}
 		.wp-block-navigation.hide-toggle .dropdown-toggle::after {
 			content: none;
