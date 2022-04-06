@@ -49,7 +49,7 @@ return [
 	<h3 class="has-text-align-center has-primary-color has-text-color">Is FREE! Forever</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph {"align":"center"} -->
-	<p class="has-text-align-center">WeCodeArt Framework will allways be free with all future updates.</p>
+	<p class="has-text-align-center">WeCodeArt Framework will always be free with all future updates.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
@@ -66,7 +66,7 @@ return [
 	<h3 class="has-text-align-center has-primary-color has-text-color">Unparalleled speed</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph {"align":"center"} -->
-	<p class="has-text-align-center">Fastest loading times of all WP.org themes. See for yourself by doing a speedtest.</p>
+	<p class="has-text-align-center">Fastest loading times of all WP.org themes. See for yourself by doing a speed test.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
@@ -83,7 +83,7 @@ return [
 	<h3 class="has-text-align-center has-primary-color has-text-color">Fast work turnaround</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph {"align":"center"} -->
-	<p class="has-text-align-center">Build simple sites in no time with Gutenberg pagebuilder. No extra plugins are required.</p>
+	<p class="has-text-align-center">Build simple sites in no time with Gutenberg page-builder. No extra plugins are required.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
@@ -92,14 +92,10 @@ return [
 	</div>
 	<!-- /wp:group -->
 	
-	<!-- wp:group {"layout":{"inherit":true}} -->
+	<!-- wp:group {"style":{"spacing":{"blockGap":"3rem"}},"layout":{"inherit":true}} -->
 	<div class="wp-block-group">
-	<!-- wp:columns -->
-	<div class="wp-block-columns">
-	<!-- wp:column -->
-	<div class="wp-block-column">
-	<!-- wp:media-text {"align":"","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image"} -->
-	<div class="wp-block-media-text is-stacked-on-mobile">
+	<!-- wp:media-text {"backgroundColor":"light","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image"} -->
+	<div class="wp-block-media-text is-stacked-on-mobile has-background has-light-background-color">
 	<figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure>
 	<div class="wp-block-media-text__content">
 	<!-- wp:heading -->
@@ -118,7 +114,19 @@ return [
 	</div>
 	</div>
 	<!-- /wp:media-text -->
-	<!-- wp:media-text {"align":"","backgroundColor":"light","mediaPosition":"right","mediaLink":"https://picsum.photos/id/119/800/800","mediaType":"image"} -->
+	<!-- wp:gallery {"columns":3,"linkTo":"none"} -->
+	<figure class="wp-block-gallery has-nested-images columns-3 is-cropped">
+	<!-- wp:image {"sizeSlug":"large","linkDestination":"none","style":{"color":{"duotone":["#000000","#7f7f7f"]}},"className":""} -->
+	<figure class="wp-block-image size-large"><img src="https://picsum.photos/id/119/800/800" alt=""/></figure>
+	<!-- /wp:image -->
+	<!-- wp:image {"sizeSlug":"large","linkDestination":"none","style":{"color":{"duotone":["#000000","#7f7f7f"]}}} -->
+	<figure class="wp-block-image size-large"><img src="https://picsum.photos/id/1/800/800" alt=""/></figure>
+	<!-- /wp:image -->
+	<!-- wp:image {"sizeSlug":"large","linkDestination":"none","style":{"color":{"duotone":["#000000","#7f7f7f"]}},"className":""} -->
+	<figure class="wp-block-image size-large"><img src="https://picsum.photos/id/119/800/800" alt=""/></figure>
+	<!-- /wp:image --></figure>
+	<!-- /wp:gallery -->
+	<!-- wp:media-text {"backgroundColor":"light","mediaPosition":"right","mediaLink":"https://picsum.photos/id/119/800/800","mediaType":"image"} -->
 	<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile has-background has-light-background-color">
 	<figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/119/800/800" alt="" /></figure>
 	<div class="wp-block-media-text__content">
@@ -138,10 +146,6 @@ return [
 	</div>
 	</div>
 	<!-- /wp:media-text -->
-	</div>
-	<!-- /wp:column -->
-	</div>
-	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
 

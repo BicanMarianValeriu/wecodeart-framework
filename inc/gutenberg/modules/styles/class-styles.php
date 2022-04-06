@@ -553,6 +553,7 @@ class Styles implements Integration {
 			'core/cover' 			=> Styles\Blocks\Cover::class,
 			'core/column' 			=> Styles\Blocks\Column::class,
 			'core/image' 			=> Styles\Blocks\Image::class,
+			'core/gallery' 			=> Styles\Blocks\Gallery::class,
 			'core/media-text' 		=> Styles\Blocks\Media::class,
 			'core/navigation' 		=> Styles\Blocks\Navigation::class,
 			'core/pullquote' 		=> Styles\Blocks\PullQuote::class,

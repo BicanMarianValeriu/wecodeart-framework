@@ -117,47 +117,10 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ "./src/js/admin/components/common/notices.js":
-/*!***************************************************!*\
-  !*** ./src/js/admin/components/common/notices.js ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-
-
-/**
- * WordPress dependencies
- */
-const {
-  useSelect,
-  useDispatch
-} = wp.data;
-const {
-  SnackbarList
-} = wp.components;
-/* harmony default export */ __webpack_exports__["default"] = (() => {
-  const notices = useSelect(select => select('core/notices').getNotices().filter(n => n.type === 'snackbar'), []);
-  const {
-    removeNotice
-  } = useDispatch('core/notices');
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(SnackbarList, {
-    className: "components-editor-notices__snackbar",
-    notices: notices,
-    onRemove: removeNotice
-  });
-});
-
-/***/ }),
-
-/***/ "./src/js/admin/components/donate.js":
-/*!*******************************************!*\
-  !*** ./src/js/admin/components/donate.js ***!
-  \*******************************************/
+/***/ "./src/js/admin/components/common/donate.js":
+/*!**************************************************!*\
+  !*** ./src/js/admin/components/common/donate.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -195,6 +158,43 @@ const donate = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (donate);
+
+/***/ }),
+
+/***/ "./src/js/admin/components/common/notices.js":
+/*!***************************************************!*\
+  !*** ./src/js/admin/components/common/notices.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/**
+ * WordPress dependencies
+ */
+const {
+  useSelect,
+  useDispatch
+} = wp.data;
+const {
+  SnackbarList
+} = wp.components;
+/* harmony default export */ __webpack_exports__["default"] = (() => {
+  const notices = useSelect(select => select('core/notices').getNotices().filter(n => n.type === 'snackbar'), []);
+  const {
+    removeNotice
+  } = useDispatch('core/notices');
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(SnackbarList, {
+    className: "components-editor-notices__snackbar",
+    notices: notices,
+    onRemove: removeNotice
+  });
+});
 
 /***/ }),
 
@@ -285,7 +285,7 @@ const {
     className: "card-title"
   }, __('Customizer Options', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
     className: "card-text"
-  }, "WeCodeArt Framework still uses WP Customizer API to manage logo, favicon, menus, set home or blog page. You can also add your own custom CSS."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+  }, "Looking for WP Customizer API to manage logo, favicon, set home or blog page? You can also add your own custom CSS there."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
     href: adminUrl + '/customize.php',
     class: "button button-primary is-primary"
   }, __('Legacy Options', 'wecodeart')))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
@@ -296,7 +296,7 @@ const {
     className: "card-title"
   }, __('Rate Us Five!', 'wecodeart')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
     className: "card-text"
-  }, "If you like this theme please give me a 5 star rating. This would boost my motivation and help other users make a comfortable decision while choosing the WeCodeArt Framework."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+  }, "If you like this theme please give me a 5-star rating. This would boost my motivation and help other users make a comfortable decision while choosing the WeCodeArt Framework."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
     href: "//wordpress.org/support/theme/wecodeart/reviews/?filter=5#new-post",
     class: "button button-primary is-primary",
     target: "_blank"
@@ -316,7 +316,11 @@ const {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: `alert alert-${type}`,
       role: "alert"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", null, title), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, content));
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", null, title), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+      dangerouslySetInnerHTML: {
+        __html: content
+      }
+    }));
   })));
 });
 
@@ -326,25 +330,25 @@ const {
 /*!******************************************!*\
   !*** ./src/js/admin/components/index.js ***!
   \******************************************/
-/*! exports provided: Notices, Licenses, Extensions, GettingStarted, Donate */
+/*! exports provided: Donate, Notices, Licenses, Extensions, GettingStarted */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _common_notices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/notices */ "./src/js/admin/components/common/notices.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Notices", function() { return _common_notices__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+/* harmony import */ var _common_donate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/donate */ "./src/js/admin/components/common/donate.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Donate", function() { return _common_donate__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-/* harmony import */ var _licenses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./licenses */ "./src/js/admin/components/licenses.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Licenses", function() { return _licenses__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+/* harmony import */ var _common_notices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common/notices */ "./src/js/admin/components/common/notices.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Notices", function() { return _common_notices__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
-/* harmony import */ var _extensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./extensions */ "./src/js/admin/components/extensions.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Extensions", function() { return _extensions__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+/* harmony import */ var _licenses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./licenses */ "./src/js/admin/components/licenses.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Licenses", function() { return _licenses__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
-/* harmony import */ var _gettingStarted__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gettingStarted */ "./src/js/admin/components/gettingStarted.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GettingStarted", function() { return _gettingStarted__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _extensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./extensions */ "./src/js/admin/components/extensions.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Extensions", function() { return _extensions__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
-/* harmony import */ var _donate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./donate */ "./src/js/admin/components/donate.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Donate", function() { return _donate__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+/* harmony import */ var _gettingStarted__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gettingStarted */ "./src/js/admin/components/gettingStarted.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GettingStarted", function() { return _gettingStarted__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
 
 

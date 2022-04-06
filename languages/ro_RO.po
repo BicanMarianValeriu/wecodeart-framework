@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-04-02 23:35+0000\n"
+"PO-Revision-Date: 2022-04-06 00:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -68,7 +68,7 @@ msgstr ""
 "asemenea, optimizate folosind marcajul Bootstrap - instrumentul perfect "
 "pentru orice dezvoltator."
 
-#: inc/gutenberg/blocks/comment/class-template.php:114
+#: inc/gutenberg/blocks/comment/class-template.php:121
 msgid "add one"
 msgstr "adaugă unul"
 
@@ -102,18 +102,18 @@ msgstr "Bican Marian Valeriu @wecodeart"
 msgid "Blog"
 msgstr "Blog"
 
-#: views/general/credits.tpl.php:33
+#: views/general/credits.tpl.php:32
 #, php-format
 #| msgid "Built on %1$s."
 msgid "Built on %1s."
 msgstr "Creat pe %1s."
 
-#: inc/gutenberg/blocks/comment/class-form.php:235
+#: inc/gutenberg/blocks/comment/class-form.php:237
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr "Comentand vei accepta %s."
 
-#: inc/gutenberg/blocks/comment/class-form.php:95
+#: inc/gutenberg/blocks/comment/class-form.php:97
 msgid "Cancel reply"
 msgstr "Anulați răspunsul"
 
@@ -126,8 +126,8 @@ msgstr "Suportul Captcha 4WP este activat!"
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
 
-#: inc/gutenberg/blocks/comment/class-form.php:193
-#: inc/gutenberg/blocks/comment/class-form.php:200
+#: inc/gutenberg/blocks/comment/class-form.php:195
+#: inc/gutenberg/blocks/comment/class-form.php:202
 msgid "Comment *"
 msgstr "Comentariu"
 
@@ -135,7 +135,7 @@ msgstr "Comentariu"
 msgid "Comments are Closed"
 msgstr "Comentariile sunt inchise"
 
-#: inc/gutenberg/blocks/comment/class-template.php:104
+#: inc/gutenberg/blocks/comment/class-template.php:111
 #, php-format
 msgctxt "comments title"
 msgid "%1$s comment"
@@ -144,7 +144,7 @@ msgstr[0] "%1$s comentariu"
 msgstr[1] "%1$s comentarii"
 msgstr[2] ""
 
-#: views/general/credits.tpl.php:27
+#: views/general/credits.tpl.php:26
 #, php-format
 msgid "Copyright %s - All rights reserved."
 msgstr "Drepturi de autor %s - Toate drepturile reservate."
@@ -172,7 +172,7 @@ msgstr ""
 "pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
 "WeCodeArt Framework."
 
-#: inc/gutenberg/blocks/comment/class-form.php:152
+#: inc/gutenberg/blocks/comment/class-form.php:154
 msgid "Email *"
 msgstr "Email *"
 
@@ -236,7 +236,7 @@ msgstr "F Y"
 msgid "Monthly Archives: %s"
 msgstr "Arhive lunare: %s"
 
-#: inc/gutenberg/blocks/comment/class-form.php:131
+#: inc/gutenberg/blocks/comment/class-form.php:133
 msgid "Name *"
 msgstr "Nume *"
 
@@ -244,7 +244,7 @@ msgstr "Nume *"
 msgid "No archives to show."
 msgstr "Nu există arhive de afișat."
 
-#: inc/gutenberg/blocks/comment/class-template.php:98
+#: inc/gutenberg/blocks/comment/class-template.php:105
 msgid "No comments"
 msgstr "Fără comentarii"
 
@@ -260,7 +260,7 @@ msgstr "Notificare respinsă"
 msgid "Outline"
 msgstr "Contur"
 
-#: inc/gutenberg/blocks/query/class-numbers.php:139
+#: inc/gutenberg/blocks/query/class-numbers.php:140
 msgid "Pagination"
 msgstr "Paginare"
 
@@ -308,7 +308,7 @@ msgstr "Ține-mă minte"
 msgid "Request method %1$s is not valid."
 msgstr "Metoda de solicitare %1$s nu este validă."
 
-#: inc/gutenberg/blocks/comment/class-form.php:272
+#: inc/gutenberg/blocks/comment/class-form.php:274
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr "Fișele obligatorii sunt marcate cu %s\"."
@@ -352,7 +352,7 @@ msgstr "Selectați Anul"
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
-#: inc/gutenberg/blocks/comment/class-form.php:90
+#: inc/gutenberg/blocks/comment/class-form.php:92
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
@@ -429,7 +429,7 @@ msgstr ""
 "Avem o extensie care integrează tema noastră cu pluginul Contact Form 7! Îl "
 "puteți obține (în curând) de la %s."
 
-#: inc/gutenberg/blocks/comment/class-form.php:173
+#: inc/gutenberg/blocks/comment/class-form.php:175
 msgid "Website"
 msgstr "Site"
 
@@ -465,10 +465,6 @@ msgstr ""
 "Când adăugați o pictogramă SVG cu %s, trebuie să definiți cheile `viewBox` "
 "și `paths`."
 
-#: inc/gutenberg/blocks/post/class-author.php:50
-msgid "Wide Box"
-msgstr "Cutie largă"
-
 #: inc/gutenberg/blocks/query/class-title.php:146
 msgctxt "yearly archives date format"
 msgid "Y"
@@ -487,12 +483,12 @@ msgstr ""
 "Suportul YoastSEO este activat! Tema noastră funcționează perfect cu cel mai "
 "bun plugin SEO."
 
-#: inc/gutenberg/blocks/comment/class-form.php:296
+#: inc/gutenberg/blocks/comment/class-form.php:298
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"
 
-#: inc/gutenberg/blocks/comment/class-form.php:269
+#: inc/gutenberg/blocks/comment/class-form.php:271
 msgid "Your email address will not be published."
 msgstr "Emailul tău nu va fi publicat."
 

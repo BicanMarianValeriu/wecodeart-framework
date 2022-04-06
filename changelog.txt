@@ -1,6 +1,7 @@
 v5.5.5
 - Removed - ArrayAccess implementation where not required (prepare for PHP 8)
 - Updated - Singleton Class __clone() and __wakeup() marked as public (PHP 8 warning fix)
+- Updated - core/gallery to use grid layout
 - Updated - core/image aligncenter fix
 - Updated - core/cover inner container padding removed (use columns block for adding gutters)
 - Updated - Gutenberg Styles core_blocks() list to 5.9.2 (added new blocks)

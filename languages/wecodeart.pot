@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-02 23:34+0000\n"
+"POT-Creation-Date: 2022-04-06 00:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -59,7 +59,7 @@ msgid ""
 "perfect tool for any developer."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:114
+#: inc/gutenberg/blocks/comment/class-template.php:121
 msgid "add one"
 msgstr ""
 
@@ -91,17 +91,17 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: views/general/credits.tpl.php:33
+#: views/general/credits.tpl.php:32
 #, php-format
 msgid "Built on %1s."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:235
+#: inc/gutenberg/blocks/comment/class-form.php:237
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:95
+#: inc/gutenberg/blocks/comment/class-form.php:97
 msgid "Cancel reply"
 msgstr ""
 
@@ -114,8 +114,8 @@ msgstr ""
 msgid "Category Archives: %s"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:193
-#: inc/gutenberg/blocks/comment/class-form.php:200
+#: inc/gutenberg/blocks/comment/class-form.php:195
+#: inc/gutenberg/blocks/comment/class-form.php:202
 msgid "Comment *"
 msgstr ""
 
@@ -123,7 +123,7 @@ msgstr ""
 msgid "Comments are Closed"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:104
+#: inc/gutenberg/blocks/comment/class-template.php:111
 #, php-format
 msgctxt "comments title"
 msgid "%1$s comment"
@@ -131,7 +131,7 @@ msgid_plural "%1$s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: views/general/credits.tpl.php:27
+#: views/general/credits.tpl.php:26
 #, php-format
 msgid "Copyright %s - All rights reserved."
 msgstr ""
@@ -156,7 +156,7 @@ msgid ""
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:152
+#: inc/gutenberg/blocks/comment/class-form.php:154
 msgid "Email *"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgstr ""
 msgid "Monthly Archives: %s"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:131
+#: inc/gutenberg/blocks/comment/class-form.php:133
 msgid "Name *"
 msgstr ""
 
@@ -227,7 +227,7 @@ msgstr ""
 msgid "No archives to show."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:98
+#: inc/gutenberg/blocks/comment/class-template.php:105
 msgid "No comments"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-numbers.php:139
+#: inc/gutenberg/blocks/query/class-numbers.php:140
 msgid "Pagination"
 msgstr ""
 
@@ -291,7 +291,7 @@ msgstr ""
 msgid "Request method %1$s is not valid."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:272
+#: inc/gutenberg/blocks/comment/class-form.php:274
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr ""
@@ -334,7 +334,7 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:90
+#: inc/gutenberg/blocks/comment/class-form.php:92
 msgid "Speak Your Mind"
 msgstr ""
 
@@ -405,7 +405,7 @@ msgid ""
 "You can get it (soon) from %s."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:173
+#: inc/gutenberg/blocks/comment/class-form.php:175
 msgid "Website"
 msgstr ""
 
@@ -434,10 +434,6 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-author.php:50
-msgid "Wide Box"
-msgstr ""
-
 #: inc/gutenberg/blocks/query/class-title.php:146
 msgctxt "yearly archives date format"
 msgid "Y"
@@ -454,12 +450,12 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:296
+#: inc/gutenberg/blocks/comment/class-form.php:298
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:269
+#: inc/gutenberg/blocks/comment/class-form.php:271
 msgid "Your email address will not be published."
 msgstr ""
 

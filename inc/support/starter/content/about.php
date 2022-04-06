@@ -25,7 +25,7 @@ return [
 	<p class="mb-5">In addition to all goodies coming with Gutenberg editor and Full Site Editing feature in WP 5.9 WeCodeArt Framework comes with extra improvements:</p>
 	<!-- /wp:paragraph -->
 	<!-- wp:heading {"textColor":"primary","className":"h1"} -->
-	<h2 class="h1 has-primary-color has-text-color" id="performance">Performance Focused</h2>
+	<h2 class="h1 has-primary-color has-text-color" id="performance">Performance-Focused</h2>
 	<!-- /wp:heading --></div>
 	<!-- /wp:column --></div>
 	<!-- /wp:columns -->
@@ -68,7 +68,7 @@ return [
 	<!-- wp:column -->
 	<div class="wp-block-column">
 	<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
-	<p class="has-secondary-color has-text-color has-small-font-size"><em>1 - Applies for the starter/blank template without any blocks. As soon as you add additional blocks this values will likely increase depending on the blocks CSS/JS and/or other media assets loaded.</em></p>
+	<p class="has-secondary-color has-text-color has-small-font-size"><em>1 - Applies for the starter/blank template without any blocks. As soon as you add additional blocks these values will likely increase depending on the blocks CSS/JS and/or other media assets loaded.</em></p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
@@ -103,7 +103,7 @@ return [
 	<h3>Tiny Blocks CSS/JS</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
-	<p>Simplified blocks CSS and Javascript code and removed unnecessary rules making it easier to adjust them as you like via Editor (Global Styles). In addition, the assets are loaded on demand.</p>
+	<p>Simplified blocks CSS and Javascript code and removed unnecessary rules making it easier to adjust them as you like via Editor (Global Styles). In addition, the assets are loaded on-demand.</p>
 	<!-- /wp:paragraph --></div>
 	<!-- /wp:column -->
 	<!-- wp:column -->
@@ -126,7 +126,7 @@ return [
 	<h3>Class Utilities</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
-	<p>You can use the block`s Advanced Tab --> Classname(s) to load additional CSS utilities. Those classes will appear as suggestions in a dropdown (margin/padding/flex utilities and more). The CSS rules for utilities will loaded on demand and in order of their appearance.</p>
+	<p>You can use the block`s Advanced Tab --> Classname(s) to load additional CSS utilities. Those classes will appear as suggestions in a dropdown (margin/padding/flex utilities and more). The CSS rules for utilities will be loaded on-demand and in order of their appearance.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
@@ -136,7 +136,7 @@ return [
 	<h3>Custom Styles</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
-	<p>Are you familiar with CSS and you need to add a small adjustment to your block? No worries, you can use the block`s Advanced Tab --> Custom CSS to do that - with live preview. You can use any CSS syntax including media queries.</p>
+	<p>Are you familiar with CSS and do you need to add a small adjustment to your block? No worries, you can use the block`s Advanced Tab --> Custom CSS to do that - with live preview. You can use any CSS syntax including media queries.</p>
 	<!-- /wp:paragraph --></div>
 	<!-- /wp:column -->
 	<!-- wp:column -->
