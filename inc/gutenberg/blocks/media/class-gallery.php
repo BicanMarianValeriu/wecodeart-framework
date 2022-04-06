@@ -46,11 +46,10 @@ class Gallery extends Dynamic {
 	 */
 	public function register() {
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
 	/**
-	 * Filter - temporary disable to fix issue with blockGap
+	 * Filter markup
 	 *
 	 * @param	array 	$settings
 	 * @param	array 	$data
@@ -58,9 +57,7 @@ class Gallery extends Dynamic {
 	public function filter_render( $settings, $data ) {
 		if ( $this->get_block_type() === $data['name'] ) {
 			$settings = wp_parse_args( [
-				'render_callback' => function( $attributes, $content ) {
-					return $content;
-				}
+				'render_callback' => [ $this, 'render' ]
 			], $settings );
 		}
 		
@@ -70,13 +67,15 @@ class Gallery extends Dynamic {
 	/**
 	 * Dynamically renders the `core/gallery` block.
 	 *
+	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		return preg_replace( '/( columns-)\w+/', ' grid', $content, 1 );
+	public function render( $attributes = [], $content = '' ) {
+		$columns = get_prop( $attributes, 'columns', 'default' );
+
+		return preg_replace( '/( columns-)\w+/', ' grid columns-' . $columns, $content, 1 );
 	}
 
 	/**
