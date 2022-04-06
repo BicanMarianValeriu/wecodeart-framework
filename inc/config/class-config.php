@@ -152,7 +152,7 @@ class Config implements Configuration, ArrayAccess {
     /**
      * Get a configuration option.
      *
-     * @param  string   $key
+     * @param  mixed   $key
      *
      * @return mixed
      */
