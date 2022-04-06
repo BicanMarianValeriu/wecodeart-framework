@@ -31,7 +31,7 @@ class Image extends Base {
 	 */
 	protected function process_extra() {	
 		$output 			= [];
-		$output['element'] 	= $this->element;
+		$output['element'] 	= $this->element . ' img';
 
 		// Inline Style
 		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
