@@ -4,7 +4,7 @@
 		{
 			"type": "info",
 			"title": "Cool new colors!",
-			"content": "Currently working on implementing CSS vars on Gutenberg generated color classes - this will allow developers to easily create color shades like <a href='https://getbootstrap.com/docs/5.1/utilities/background/#how-it-works'>here</a>."
+			"content": "Currently working on implementing CSS vars on Gutenberg generated color classes - this will allow developers to easily create color shades like <a href='https://getbootstrap.com/docs/5.1/utilities/background/#how-it-works' target='_blank'>here</a>."
 		},
 		{
 			"type": "info",
