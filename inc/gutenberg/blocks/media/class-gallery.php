@@ -75,7 +75,7 @@ class Gallery extends Dynamic {
 	public function render( $attributes = [], $content = '' ) {
 		$columns = get_prop( $attributes, 'columns', 'default' );
 
-		return preg_replace( '/( columns-)\w+/', ' grid columns-' . $columns, $content, 1 );
+		return preg_replace( '/(columns-)\w+/', 'grid columns-' . $columns, $content, 1 );
 	}
 
 	/**
