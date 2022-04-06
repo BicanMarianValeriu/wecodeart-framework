@@ -1,7 +1,7 @@
 v5.5.5
-- Removed - ArrayAccess implementation where not required (prepare for PHP 8)
+- Removed - ArrayAccess implementation where it was not necessary (prepare for PHP 8)
 - Updated - Singleton Class __clone() and __wakeup() marked as public (PHP 8 warning fix)
-- Updated - core/gallery to use grid layout
+- Updated - core/gallery to use grid layout / temporary fix fatal error caused by Gutenberg plugin (when setting blockGap)
 - Updated - core/image aligncenter fix
 - Updated - core/cover inner container padding removed (use columns block for adding gutters)
 - Updated - Gutenberg Styles core_blocks() list to 5.9.2 (added new blocks)
@@ -10,6 +10,7 @@ v5.5.5
 - Updated - Romanian local translations
 - Updated - Query Pagination Numbers border to currentColor if button styles are having transparent border
 - Updated - Query Comments Template and Pagination cleanup unnecessary methods after WP5.9 updates
+- Fixed - ArrayAccess methods PHP 8 warnings (in class-config.php)
 - Fixed - Issue with core/cover top-left content alignment
 - Fixed - Issue with invalid starter content for About page
 - Fixed - Issue with blockGap CSS generation due to being saved as array after Gutenberg plugin update (logical block margin based on writing mode)

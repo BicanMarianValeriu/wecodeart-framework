@@ -39,5 +39,23 @@ class Gallery extends Base {
 				'value'	  	=> $columns
 			], $output );
 		}
+
+		// Gap
+		if( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ], '0px' ) ) {
+			if ( is_array( $gap ) ) {
+				$gap	= get_prop( $gap, [ 'top' ] );
+			}
+
+			$this->output[] = wp_parse_args( [
+				'property' 	=> '--wp--style--block-gap',
+				'value'	  	=> $gap
+			], $output );
+
+			// Unset default gap
+			$this->output[] = wp_parse_args( [
+				'property' 	=> 'gap',
+				'value'	  	=> null
+			], $output );
+		}
 	}
 }

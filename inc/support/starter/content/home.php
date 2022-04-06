@@ -114,7 +114,7 @@ return [
 	</div>
 	</div>
 	<!-- /wp:media-text -->
-	<!-- wp:gallery {"columns":3,"linkTo":"none","align":"full","customCSS":"selector {\n  \u002d\u002dwp\u002d\u002dstyle\u002d\u002dblock-gap: 0px;\n}\n"} -->
+	<!-- wp:gallery {"columns":3,"linkTo":"none","align":"full"} -->
 	<figure class="wp-block-gallery alignfull has-nested-images columns-3 is-cropped">
 	<!-- wp:image {"sizeSlug":"large","linkDestination":"none","style":{"color":{"duotone":["#000000","#7f7f7f"]}},"className":""} -->
 	<figure class="wp-block-image size-large"><img src="https://picsum.photos/id/119/800/800" alt=""/></figure>

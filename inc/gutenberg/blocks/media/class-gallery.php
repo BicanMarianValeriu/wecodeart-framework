@@ -45,7 +45,26 @@ class Gallery extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
+	}
+
+	/**
+	 * Filter - temporary disable to fix issue with blockGap
+	 *
+	 * @param	array 	$settings
+	 * @param	array 	$data
+	 */
+	public function filter_render( $settings, $data ) {
+		if ( $this->get_block_type() === $data['name'] ) {
+			$settings = wp_parse_args( [
+				'render_callback' => function( $attributes, $content ) {
+					return $content;
+				}
+			], $settings );
+		}
+		
+		return $settings;
 	}
 
 	/**
@@ -81,7 +100,6 @@ class Gallery extends Dynamic {
 			margin-top: 0;
 			margin-bottom: auto;
 		}
-		.wp-block-gallery.is-cropped figure.wp-block-image > div,
 		.wp-block-gallery.is-cropped figure.wp-block-image > a {
 			display: flex;
 		}
@@ -107,7 +125,6 @@ class Gallery extends Dynamic {
 			margin-bottom: 0;
 			max-width: 100%;
 		}
-		.wp-block-gallery figure.wp-block-image > div,
 		.wp-block-gallery figure.wp-block-image > a {
 			flex-direction: column;
 			margin: 0;

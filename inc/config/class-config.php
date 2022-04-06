@@ -145,41 +145,41 @@ class Config implements Configuration, ArrayAccess {
      *
      * @return bool
      */
-    public function offsetExists( $key ) {
+    public function offsetExists( mixed $key ): bool {
         return $this->has( $key );
     }
 
     /**
      * Get a configuration option.
      *
-     * @param  string  $key
+     * @param  string   $key
      *
      * @return mixed
      */
-    public function offsetGet( $key ) {
+    public function offsetGet( mixed $key ): mixed {
         return $this->get( $key );
     }
 
     /**
      * Set a configuration option.
      *
-     * @param  string  $key
-     * @param  mixed  $value
+     * @param  string   $key
+     * @param  mixed    $value
      *
      * @return void
      */
-    public function offsetSet( $key, $value ) {
+    public function offsetSet( mixed $key, mixed $value ): void {
         $this->set( $key, $value );
     }
 
     /**
      * Unset a configuration option.
      *
-     * @param  string  $key
+     * @param  string   $key
      *
      * @return void
      */
-    public function offsetUnset( $key ) {
+    public function offsetUnset( mixed $key ): void {
         $this->set( $key, null );
     }
 }
