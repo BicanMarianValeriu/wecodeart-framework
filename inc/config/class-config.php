@@ -145,7 +145,7 @@ class Config implements Configuration, ArrayAccess {
      *
      * @return bool
      */
-    public function offsetExists( mixed $key ): bool {
+    public function offsetExists( $key ): bool {
         return $this->has( $key );
     }
 
@@ -156,7 +156,7 @@ class Config implements Configuration, ArrayAccess {
      *
      * @return mixed
      */
-    public function offsetGet( mixed $key ): mixed {
+    public function offsetGet( $key ) {
         return $this->get( $key );
     }
 
@@ -168,7 +168,7 @@ class Config implements Configuration, ArrayAccess {
      *
      * @return void
      */
-    public function offsetSet( mixed $key, mixed $value ): void {
+    public function offsetSet( $key, $value ): void {
         $this->set( $key, $value );
     }
 
@@ -179,7 +179,7 @@ class Config implements Configuration, ArrayAccess {
      *
      * @return void
      */
-    public function offsetUnset( mixed $key ): void {
+    public function offsetUnset( $key ): void {
         $this->set( $key, null );
     }
 }
