@@ -140,13 +140,12 @@ class Gallery extends Dynamic {
 			overflow: auto;
 			padding: 1rem;
 			color: var(--wp--preset--color--white);
-			text-align: center;
+			border-radius: inherit;
 			background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 70%, transparent);
 		}
 		.wp-block-gallery figcaption {
 			grid-column: auto/span var(--wp--columns);
 			padding: 0;
-			text-align: center;
 		}
 		";
 	}

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -53,18 +53,26 @@ class Image extends Dynamic {
 	 */
 	public static function styles() {
 		return '
-		.wp-block-image.alignfull, .wp-block-image.alignfull img, .wp-block-image.alignwide img {
-			width: 100%;
-		}
-		.wp-block-image.alignfull, .wp-block-image.aligncenter, .wp-block-image.alignwide, .wp-block-image.is-resized, .wp-block-image figure {
+		.wp-block-image:where(.alignfull,.aligncenter,.alignwide,.is-resized) {
 			display: table;
 		}
-		.wp-block-image.alignfull figcaption, .wp-block-image.alignwide figcaption, .wp-block-image.is-resized figcaption {
+		.wp-block-image.aligncenter {
+			text-align: center;
+		}
+		.wp-block-image:where(.alignfull,.alignwide) img {
+			width: 100%;
+		}
+		.wp-block-image:where(.alignfull,.alignwide,.is-resized) figcaption {
 			display: table-caption;
 			caption-side: bottom;
+			text-align: inherit;
 		}
-		.wp-block-image.is-style-circle-mask, .wp-block-image.is-style-rounded img {
+		.wp-block-image:where(.is-style-circle-mask,.is-style-rounded) {
 			border-radius: 9999px;
+		}
+		.wp-block-image > a,
+		.wp-block-image img {
+			border-radius: inherit;
 		}
 		';
 	}
