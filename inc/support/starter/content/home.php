@@ -92,8 +92,8 @@ return [
 	</div>
 	<!-- /wp:group -->
 	
-	<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":{"top":"3rem","left":"3rem"}}},"layout":{"inherit":true}} -->
-	<div class="wp-block-group alignfull">
+	<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":{"top":"3rem","left":"3rem"}}},"className":"my-5","layout":{"inherit":true}} -->
+	<div class="wp-block-group alignfull my-5">
 	<!-- wp:media-text {"backgroundColor":"light","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image"} -->
 	<div class="wp-block-media-text is-stacked-on-mobile has-background has-light-background-color">
 	<figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure>
