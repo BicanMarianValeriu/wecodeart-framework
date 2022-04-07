@@ -11,6 +11,8 @@ v5.5.5
 - Updated - Query Pagination Numbers border to currentColor if button styles are having transparent border
 - Updated - Query Comments Template and Pagination cleanup unnecessary methods after WP5.9 updates
 - Updated - Gutenberg Editor Styles (cleanup)
+- Updated - Remove emoji CSS properly when enabling Clean Header
+- Updated - Remove DNS prefech ( s.w.org ) when enabling Clean Header
 - Fixed - ArrayAccess methods PHP 8 warnings (in class-config.php)
 - Fixed - Issue with core/cover top-left content alignment
 - Fixed - Issue with invalid starter content for About page

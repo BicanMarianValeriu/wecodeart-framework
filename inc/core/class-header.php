@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.4.4
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Core;
@@ -110,9 +110,10 @@ class Header {
 			[ 'wp_head', 'adjacent_posts_rel_link', 10, 0 ],
 			[ 'wp_head', 'rest_output_link_wp_head' ],
 			[ 'wp_head', 'wp_shortlink_wp_head' ],
+			[ 'wp_head', 'wp_resource_hints', 2, 99 ],
 			[ 'wp_head', 'wp_oembed_add_discovery_links' ],
 			[ 'wp_head', 'print_emoji_detection_script', 7 ],
-			[ 'wp_print_styles', 'print_emoji_styles', 7 ],
+			[ 'wp_print_styles', 'print_emoji_styles' ],
 			[ 'template_redirect', 'rest_output_link_header', 11 ],
 		] );
 
