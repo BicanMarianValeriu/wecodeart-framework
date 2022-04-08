@@ -94,6 +94,7 @@ class Blocks implements Configuration {
 		$this->register( 'core/post-title',         Blocks\Post\Title::class );
 		$this->register( 'core/post-terms',         Blocks\Post\Terms::class );
 		$this->register( 'core/post-author',        Blocks\Post\Author::class );
+		$this->register( 'core/post-author-name',   Blocks\Post\AuthorName::class );
 		$this->register( 'core/post-excerpt',       Blocks\Post\Excerpt::class );
 		$this->register( 'core/post-content',       Blocks\Post\Content::class );
 		$this->register( 'core/post-template',      Blocks\Post\Template::class );

@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Comments
  * @since 		3.9.5
- * @version		5.5.1
+ * @version		5.5.5
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -22,7 +22,7 @@ use function WeCodeArt\Functions\get_prop;
  */
 
 $attributes = isset( $attributes ) ? $attributes : [];
-$classnames = [ 'wp-block-post-comments-link' ];
+$classnames = [];
 
 if( 0 === $number ) {
     $classnames[] = 'wp-block-post-comments-link--none';
@@ -32,15 +32,16 @@ if( 0 === $number ) {
     $classnames[] = 'wp-block-post-comments-link--multiple';
 }
 
-if( $value = get_prop( $attributes, 'textAlign', false ) ) {
-    $classnames[] = 'has-text-align-' . $value;
-}
-
 if( post_password_required() ) {
     $classnames[] = 'wp-block-post-comments-link--protected';
 }
+
+if( $value = get_prop( $attributes, 'textAlign' ) ) {
+    $classnames[] = 'has-text-align-' . $value;
+}
+
 ?>
-<div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
+<div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>><?php
     
     wecodeart( 'markup' )->SVG::render( 'comments', [
         'class' => 'wp-block-post-comments-link__icon'

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -62,8 +62,6 @@ class Table extends Dynamic {
 		$exclude = [
 			'table-bordered',
 			'table-borderless',
-			'table-dark',
-			'table-striped',
 			'table-hover',
 		];
 		
@@ -153,8 +151,8 @@ class Table extends Dynamic {
 		.table-bordered > :not(caption) > * > * {
 			border-width: 0 var(--wp--table-border-width);
 		}
-		.table-borderless > :not(caption) > * {
-			border-bottom-width: 0;
+		.table-borderless {
+			--wp--table-border-width: 0;
 		}
 		.table-borderless > :not(:first-child) {
 			border-top-width: 0;
@@ -174,7 +172,6 @@ class Table extends Dynamic {
 		.caption-top {
 			caption-side: top;
 		}
-
 		.wp-block-table.alignleft,
 		.wp-block-table.aligncenter,
 		.wp-block-table.alignright {

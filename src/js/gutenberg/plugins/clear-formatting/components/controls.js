@@ -16,7 +16,7 @@ const {
 	richText: { create, toHTMLString }
 } = wp;
 
-const allowedBlocks = ['core/paragraph', 'core/heading', 'core/list'];
+const allowedBlocks = [ 'core/heading', 'core/paragraph' ];
 
 /**
  * Render plugin

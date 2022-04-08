@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-06 00:14+0000\n"
+"POT-Creation-Date: 2022-04-07 23:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -188,9 +188,19 @@ msgstr ""
 msgid "https://www.wecodeart.com/about/"
 msgstr ""
 
+#: views/admin/notification-locale.tpl.php:29
+msgid ""
+"I would really appreciate that and it will also help you and your clients. "
+msgstr ""
+
 #: inc/support/markup/class-markup.php:250
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
+msgstr ""
+
+#: views/admin/notification-locale.tpl.php:25
+#, php-format
+msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr ""
 
 #: views/meta/comments.tpl.php:50
@@ -229,6 +239,10 @@ msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-template.php:105
 msgid "No comments"
+msgstr ""
+
+#: views/admin/notification-locale.tpl.php:40
+msgid "No, I don`t care."
 msgstr ""
 
 #: inc/gutenberg/blocks/post/class-template.php:118
@@ -330,7 +344,7 @@ msgstr ""
 msgid "Select Year"
 msgstr ""
 
-#: inc/gutenberg/class-gutenberg.php:247
+#: inc/gutenberg/class-gutenberg.php:248
 msgid "Skip to content"
 msgstr ""
 
@@ -341,6 +355,10 @@ msgstr ""
 #: inc/gutenberg/blocks/query/class-title.php:135
 #, php-format
 msgid "Tag Archives: %s"
+msgstr ""
+
+#: views/admin/notification-locale.tpl.php:22
+msgid "Thank you for using our theme!"
 msgstr ""
 
 #: inc/init.php:282
@@ -434,6 +452,10 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
+#: views/admin/notification-locale.tpl.php:27
+msgid "Would you like to contribute by suggesting some translations? "
+msgstr ""
+
 #: inc/gutenberg/blocks/query/class-title.php:146
 msgctxt "yearly archives date format"
 msgid "Y"
@@ -442,6 +464,10 @@ msgstr ""
 #: inc/gutenberg/blocks/query/class-title.php:145
 #, php-format
 msgid "Yearly Archives: %s"
+msgstr ""
+
+#: views/admin/notification-locale.tpl.php:36
+msgid "Yes, I would love to!"
 msgstr ""
 
 #: inc/support/plugins/wpseo/class-wpseo.php:75

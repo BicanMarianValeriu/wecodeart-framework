@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-04-06 00:14+0000\n"
+"PO-Revision-Date: 2022-04-07 23:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -205,10 +205,22 @@ msgstr "https://www.wecodeart.com/"
 msgid "https://www.wecodeart.com/about/"
 msgstr "https://www.wecodeart.com/about/"
 
+#: views/admin/notification-locale.tpl.php:29
+msgid ""
+"I would really appreciate that and it will also help you and your clients. "
+msgstr ""
+"Aș aprecia foarte mult acest lucru și vă va ajuta, de asemenea, pe "
+"dumneavoastră și pe clienții dumneavoastră."
+
 #: inc/support/markup/class-markup.php:250
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr "Wrapper HTML nevalid pentru „%s”."
+
+#: views/admin/notification-locale.tpl.php:25
+#, php-format
+msgid "It looks like WeCodeArt Framework is not translated in %s. "
+msgstr "Se pare că WeCodeArt Framework nu este tradusă în %s."
 
 #: views/meta/comments.tpl.php:50
 msgid "Leave a Comment"
@@ -247,6 +259,10 @@ msgstr "Nu există arhive de afișat."
 #: inc/gutenberg/blocks/comment/class-template.php:105
 msgid "No comments"
 msgstr "Fără comentarii"
+
+#: views/admin/notification-locale.tpl.php:40
+msgid "No, I don`t care."
+msgstr "Nu, nu-mi pasă."
 
 #: inc/gutenberg/blocks/post/class-template.php:118
 msgid "Nothing found matching your criteria."
@@ -348,7 +364,7 @@ msgstr "Selectați Săptămâna"
 msgid "Select Year"
 msgstr "Selectați Anul"
 
-#: inc/gutenberg/class-gutenberg.php:247
+#: inc/gutenberg/class-gutenberg.php:248
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
@@ -360,6 +376,10 @@ msgstr "Vorbesc din mintea ta"
 #, php-format
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
+
+#: views/admin/notification-locale.tpl.php:22
+msgid "Thank you for using our theme!"
+msgstr "Vă mulțumim că folosiți tema noastră!"
 
 #: inc/init.php:282
 msgid "The file must be of type CSS/JS."
@@ -465,6 +485,10 @@ msgstr ""
 "Când adăugați o pictogramă SVG cu %s, trebuie să definiți cheile `viewBox` "
 "și `paths`."
 
+#: views/admin/notification-locale.tpl.php:27
+msgid "Would you like to contribute by suggesting some translations? "
+msgstr "Doriți să contribuiți, sugerând câteva traduceri?"
+
 #: inc/gutenberg/blocks/query/class-title.php:146
 msgctxt "yearly archives date format"
 msgid "Y"
@@ -474,6 +498,10 @@ msgstr "Y"
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr "Arhive Anuale"
+
+#: views/admin/notification-locale.tpl.php:36
+msgid "Yes, I would love to!"
+msgstr "Da, mi-ar plăcea!"
 
 #: inc/support/plugins/wpseo/class-wpseo.php:75
 msgid ""

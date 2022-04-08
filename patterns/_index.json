@@ -28,5 +28,13 @@
         "categories": [
             "wecodeart"
         ]
+    },
+    {
+        "slug": "author-box",
+        "title": "Author Box",
+        "description": "WeCodeArt Framework author box.",
+        "categories": [
+            "wecodeart"
+        ]
     }
 ]

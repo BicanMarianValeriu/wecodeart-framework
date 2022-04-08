@@ -54,7 +54,7 @@ const Edit = ({ isActive, value, onChange }) => {
                     <TextControl
                         label={__('Language (optional)', 'wecodeart')}
                         value={lang}
-                        help={__('Example: fr, en, de, etc. Use it only if the abbreviation’s language is different from page main language.', 'wecodeart')}
+                        help={__('Example: fr, en, de, etc. Use it only if the abbreviation`s language is different from blog language.', 'wecodeart')}
                         onChange={(lang) => setState({ ...state, lang })}
                     />
                     <Button isPrimary isLarge onClick={onClick}>

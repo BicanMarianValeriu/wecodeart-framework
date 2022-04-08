@@ -5,9 +5,9 @@
  * Categories: wecodeart
  */
 ?>
-<!-- wp:group {"className":"hstack gap-1 mb-3"} -->
-<div class="wp-block-group hstack gap-1 mb-3">
-    <!-- wp:post-author {"showAvatar":false} /-->
+<!-- wp:group {"className":"gap-1 mb-3","layout":{"type":"flex"}} -->
+<div class="wp-block-group gap-1 mb-3">
+    <!-- wp:post-author-name {"isLink":true} /-->
     <!-- wp:post-date /-->
     <!-- wp:post-terms {"term":"category"} /-->
     <!-- wp:post-comments-link /-->

@@ -13,6 +13,8 @@ v5.5.5
 - Updated - Gutenberg Editor Styles (cleanup)
 - Updated - Remove emoji CSS properly when enabling Clean Header
 - Updated - Remove DNS prefech ( s.w.org ) when enabling Clean Header
+- Updated - Templates for Post Meta blocks (author, terms, comments, date)
+- Updated - entry-meta.html template to use new core/post-author-name instead of core/post-author block
 - Fixed - ArrayAccess methods PHP 8 warnings (in class-config.php)
 - Fixed - Issue with core/cover top-left content alignment
 - Fixed - Issue with invalid starter content for About page
@@ -20,10 +22,14 @@ v5.5.5
 - Fixed - Generate CSS for vertical blockGap (eg, Group block with multiple Columns)
 - Fixed - core/spacer double output of units in generated CSS
 - Fixed - core/spacer height issue with .vr class in navigation - on mobile
+- Fixed - core/table styleing issues (allow to be cleared of inline style attr)
+- Fixed - Editor Styles: add frontend / minor style fixes
 - Added - WooCommerce HTML starter templates
-- Added - New Header/Footer template parts: Header Dark, Header Logo Left, Header with Search, Footer Dark (removed as patterns)
+- Added - New Header/Footer template parts: Header Dark, Header Logo Left, Header with Search, Header with Topbar Footer Dark (removed as patterns)
 - Added - Author Box template
 - Added - Default patterns as PHP files for Gutenberg 12.9.0 / Maintain HTML registration as well for backwards compat
+- Added - Translation request notification
+- Added - Template for post-author-name
 
 v5.5.3/4
 - Updated - Certain blocks logic to make use of custom palette colors along with default ones - previously was overwriting them

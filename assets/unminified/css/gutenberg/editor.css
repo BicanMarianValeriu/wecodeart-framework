@@ -7,6 +7,26 @@
   background-color: inherit;
 }
 
+.is-root-container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.is-root-container .alignfull {
+  margin-left: calc(var(--wp--custom--gutter) * -1) !important;
+  margin-right: calc(var(--wp--custom--gutter) * -1) !important;
+  width: unset;
+}
+.is-root-container .wp-block-columns .wp-block-column .alignfull,
+.is-root-container .alignfull > *:not(.wp-block-group) .alignfull {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: inherit;
+}
+
+.edit-post-visual-editor__post-title-wrapper {
+  --wp--style--block-gap: 4rem;
+}
+
 .wp-block-columns.is-selected::before, .wp-block-columns.has-child-selected::before {
   content: "";
   position: absolute;

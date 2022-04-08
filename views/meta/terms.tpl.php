@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Terms
  * @since 		5.0.0
- * @version		5.5.1
+ * @version		5.5.5
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -24,18 +24,14 @@ use function WeCodeArt\Functions\get_prop;
  */
 
 $attributes = isset( $attributes ) ? $attributes : [];
-$classnames         = [ 'wp-block-post-terms' ];
+$classnames = [];
 
 if( isset( $primary ) ) {
     $classnames[]   = 'wp-block-post-terms--has-primary';
 }
 
-if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+if( $value = get_prop( $attributes, 'textAlign' ) ) {
     $classnames[] = 'has-text-align-' . $value;
-}
-
-if( $value = get_prop( $attributes, 'className', false ) ) {
-    $classnames[] = $value;
 }
 
 $icon_name = ( isset( $primary ) || $count === 1 ) ? 'folder' : 'folders';
@@ -44,7 +40,7 @@ if( isset( $icon ) ) {
 }
 
 ?>
-<div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
+<div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>><?php
 
     wecodeart( 'markup' )->SVG::render( $icon_name, [
         'class' => 'wp-block-post-terms__icon'

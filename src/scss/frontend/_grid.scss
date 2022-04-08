@@ -11,8 +11,6 @@ $columns: $grid-columns;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(max(var(--wp--column-min), var(--wp--column-max)), 1fr));
     grid-gap: var(--wp--style--block-gap);
-    // padding-left: var(--wp--custom--gutter, 1rem);
-    // padding-right: var(--wp--custom--gutter, 1rem);
 
     @each $breakpoint in map-keys($breakpoints) {
         $infix: breakpoint-infix($breakpoint, $breakpoints);

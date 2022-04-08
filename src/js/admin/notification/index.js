@@ -8,7 +8,7 @@
  * @subpackage 	Admin/Notifications
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.0.0
+ * @version		5.5.5
  */
 
 import './../../../scss/admin/notification/notification.scss';
@@ -40,7 +40,7 @@ import './../../../scss/admin/notification/notification.scss';
 		 * @method 	_bind
 		 */
 		_bind: () => {
-			$(document).on('click', '.wca-notice__close', Notification._dismissNew);
+			$(document).on('click', '[data-dismiss]', Notification._dismissNew);
 			$(document).on('click', '.wca-notice .notice-dismiss', Notification._dismiss);
 		},
 

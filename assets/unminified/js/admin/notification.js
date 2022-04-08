@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
  * @subpackage 	Admin/Notifications
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.0.0
+ * @version		5.5.5
  */
 
 
@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
      * @method 	_bind
      */
     _bind: () => {
-      $(document).on('click', '.wca-notice__close', Notification._dismissNew);
+      $(document).on('click', '[data-dismiss]', Notification._dismissNew);
       $(document).on('click', '.wca-notice .notice-dismiss', Notification._dismiss);
     },
     _dismiss: function (e) {

@@ -1,0 +1,179 @@
+// Align
+.alignnone {
+    margin: 0 0 var(--wp--custom--spacers--3) 0;
+}
+
+.aligncenter {
+    display: block;
+    margin: 0 auto var(--wp--custom--spacers--3);
+}
+
+.alignright {
+    float: right;
+    margin: 0 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3);
+}
+
+.alignleft {
+    float: left;
+    margin: 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3) 0;
+}
+
+// Text
+.has-text-align-center {
+    text-align: center;
+}
+
+.has-text-align-right {
+    text-align: right;
+}
+
+.has-text-align-justify {
+    text-align: justify;
+}
+
+.has-underline {
+    text-decoration: underline;
+}
+
+.text-truncate {
+    @include text-truncate();
+}
+
+// Clearfix
+.clearfix {
+    @include clearfix();
+}
+
+// Visually hidden
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+    @include visually-hidden();
+}
+
+.screen-reader-response,
+.screen-reader-text {
+    @include visually-hidden-focusable();
+}
+
+// Ratio
+.ratio {
+    position: relative;
+    width: 100%;
+  
+    &::before {
+        display: block;
+        padding-top: var(--#{$variable-prefix}aspect-ratio);
+        content: "";
+    }
+  
+    > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+  
+@each $key, $ratio in $aspect-ratios {
+    .ratio-#{$key} {
+        --#{$variable-prefix}aspect-ratio: #{$ratio};
+    }
+}
+
+// Position
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+  
+.fixed-bottom {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+}
+  
+// Responsive sticky top
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+        .sticky#{$infix}-top {
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+        }
+    }
+}
+
+// Stacks
+.hstack {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: stretch;
+}
+  
+.vstack {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-self: stretch;
+}
+
+// Stretched link
+.stretched-link {
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        content: "";
+    }
+}
+
+// Background Dim
+.has-background-dim {
+    opacity: 0.5;
+    z-index: 1;
+
+    @for $i from 0 through 10 {
+        &-#{ $i * 10 } {
+            opacity: $i * 0.1;
+        }
+    }
+}
+
+// Transitions
+.fade {
+    @include transition($transition-fade);
+
+    &:not(.show) {
+        opacity: 0;
+    }
+}
+
+.collapse {
+    &:not(.show) {
+        display: none;
+    }
+}
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    @include transition($transition-collapse);
+
+    &.collapse-horizontal {
+        width: 0;
+        height: auto;
+        @include transition($transition-collapse-width);
+    }
+}

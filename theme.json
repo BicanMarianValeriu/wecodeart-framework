@@ -36,6 +36,11 @@
 			"area": "header"
 		},
 		{
+			"title": "Header (with Topbar)",
+			"name": "header-top",
+			"area": "header"
+		},
+		{
 			"title": "Header (Dark)",
 			"name": "header-dark",
 			"area": "header"
@@ -240,6 +245,11 @@
 					"fontSize": "var:preset|font-size|small"
 				}
 			},
+			"core/post-author-name": {
+				"typography": {
+					"fontSize": "var:preset|font-size|small"
+				}
+			},
 			"core/post-date": {
 				"typography": {
 					"fontSize": "var:preset|font-size|small"
@@ -326,9 +336,6 @@
 		"color": {
 			"background": "var:preset|color|white",
 			"text": "var:preset|color|dark"
-		},
-		"spacing": {
-			"blockGap": ""
 		},
 		"typography": {
 			"fontSize": "var:preset|font-size|normal",

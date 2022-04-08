@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.5.1
+ * @version		5.5.5
  */
 
 namespace WeCodeArt;
@@ -174,6 +174,7 @@ class Gutenberg {
 		}
 		
 		// Editor Style
+		add_editor_style( $this->get_asset( 'css', 'frontend' ) );
 		add_editor_style( $this->get_asset( 'css', 'gutenberg/editor' ) );
 	}
 

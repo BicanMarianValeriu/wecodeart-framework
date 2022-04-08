@@ -44,29 +44,7 @@ class Columns extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {
-		// add_filter( 'register_block_type_args',	[ $this, 'register_args' ], 10, 2 );
-	}
-
-	/**
-	 * Filter register args
-	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
-	 */
-	public function register_args( $args, $name ) {
-		if ( $this->get_block_type() === $name ) {
-			if ( isset( $args['supports']['spacing'] ) ) {
-				$existing 	= (array) $args['supports']['spacing'];
-		
-				$args['supports']['spacing'] = wp_parse_args( [
-					'blockGap' => true
-				], $existing );
-			}
-		}
-		
-		return $args;
-	}
+	public function register() {}
 
 	/**
 	 * Block styles

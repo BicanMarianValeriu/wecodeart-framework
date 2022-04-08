@@ -6,8 +6,8 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Entry\Meta\Author
- * @since 		3.9.5
+ * @subpackage 	Entry\Meta\AuthorName
+ * @since 		5.5.5
  * @version		5.5.5
  */
 
@@ -29,33 +29,13 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
 
 ?>
 <div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>>
-    <?php if( get_prop( $attributes, 'showAvatar' ) ) : ?>
-    <span class="wp-block-post-author__avatar"><?php
-
-    echo get_avatar(
-        $author->id,
-        get_prop( $attributes, 'avatarSize', 45 ), 
-        '',
-        sprintf( esc_html__( '%s`s avatar', 'wecodeart' ), $author->name )
-    );
-
-    ?></span><?php
-    
-    else : 
+    <?php 
     
     wecodeart( 'markup' )->SVG::render( 'user', [
         'class' => 'wp-block-post-author__icon'
     ] );
-
-    endif; 
     
-    if( $byline = get_prop( $attributes, 'byline' ) ) : ?>
-    <span class="wp-block-post-author__byline screen-reader-text"><?php
-    
-    echo esc_html( $byline );
-
-    ?></span>
-    <?php endif; ?>
+    ?>
     <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
     <a class="wp-block-post-author__link" href="<?php echo esc_url( $author->url ); ?>" rel="author">
     <?php endif; ?>

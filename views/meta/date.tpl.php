@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Date
  * @since 		3.9.5
- * @version		5.5.1
+ * @version		5.5.5
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -23,22 +23,18 @@ use function WeCodeArt\Functions\get_prop;
  */
 
 $attributes = isset( $attributes ) ? $attributes : [];
-$classnames = [ 'wp-block-post-date' ];
+$classnames = [];
 
 if( isset( $modified ) ) {
     $classnames[] = 'wp-block-post-date--updated';
 }
 
-if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+if( $value = get_prop( $attributes, 'textAlign' ) ) {
     $classnames[] = 'has-text-align-' . $value;
 }
 
-if( $value = get_prop( $attributes, 'className', false ) ) {
-    $classnames[] = $value;
-}
-
 ?>
-<div class="<?php echo esc_attr( implode( ' ', $classnames ) ); ?>"><?php
+<div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>><?php
 
     wecodeart( 'markup' )->SVG::render( 'clock', [
         'class' => 'wp-block-post-date__icon'

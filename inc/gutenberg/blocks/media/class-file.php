@@ -74,22 +74,7 @@ class File extends Dynamic {
 	 */
 	public function render( $attributes = [], $content = '', $block = null ) {
 		$exclude = [
-			'bg-primary',
-			'bg-secondary',
-			'bg-success',
-			'bg-danger',
-			'bg-warning',
-			'bg-light',
-			'bg-dark',
-			'bg-info',
-			'text-primary',
-			'text-secondary',
-			'text-success',
-			'text-danger',
-			'text-warning',
-			'text-light',
-			'text-dark',
-			'text-info',
+			
 		];
 
 		$classes = explode( ' ', get_prop( $attributes, 'className', '' ) );

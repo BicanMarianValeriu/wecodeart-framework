@@ -10246,7 +10246,7 @@ const Edit = ({
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(TextControl, {
     label: __('Language (optional)', 'wecodeart'),
     value: lang,
-    help: __('Example: fr, en, de, etc. Use it only if the abbreviation’s language is different from page main language.', 'wecodeart'),
+    help: __('Example: fr, en, de, etc. Use it only if the abbreviation`s language is different from blog language.', 'wecodeart'),
     onChange: lang => setState({ ...state,
       lang
     })
@@ -10784,7 +10784,7 @@ const {
     toHTMLString
   }
 } = wp;
-const allowedBlocks = ['core/paragraph', 'core/heading', 'core/list'];
+const allowedBlocks = ['core/heading', 'core/paragraph'];
 /**
  * Render plugin
  */

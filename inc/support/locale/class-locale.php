@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.4.5
- * @version		5.4.5
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Support;
@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
+use WeCodeArt\Admin\Notifications;
+use WeCodeArt\Admin\Notifications\Notification;
 use WeCodeArt\Conditional\Traits\No_Conditionals;
 use function WeCodeArt\Functions\get_prop;
 
@@ -28,12 +30,15 @@ final class Locale implements Integration {
 
 	use Singleton;
 	use No_Conditionals;
+	
+	const NOTICE_ID = 'wecodeart-locale-notice';
 
 	/**
 	 * Register hooks
 	 */
 	public function register_hooks() {
-		\add_action( 'after_setup_theme', [ $this, 'translations' ] );
+		\add_action( 'after_setup_theme',	[ $this, 'translations' ] );
+		\add_action( 'admin_notices',		[ $this, 'manage_notice' ] );
 	}
 
 	/**
@@ -56,5 +61,58 @@ final class Locale implements Integration {
 
 		// Loads wp-content/themes/wecodeart/languages/it_IT.mo.
 		load_theme_textdomain( 'wecodeart', $paths['directory'] . $lang );
+	}
+
+	/**
+	 * Manage Notices
+	 *
+	 * @since 	5.5.5
+	 * @version	5.5.5
+	 */
+	public function manage_notice() {
+		$translated = [ 'en_US', 'ro_RO' ];
+
+		$current_lang = get_user_locale();
+
+		if( in_array( $current_lang, $translated ) ) return;
+
+		require_once ABSPATH . 'wp-admin/includes/translation-install.php';
+		$translations = wp_get_available_translations();
+
+		if ( $translation = get_prop( $translations, $current_lang, [] ) ) {
+			$translation = [
+				'code'	=> $translation['language'],
+				'name' 	=> $translation['native_name'],
+				'lang'	=> current( $translation['iso'] ), 	
+			];
+		}
+
+		if( empty( $translation ) ) return;
+
+		$language_link 	= sprintf( '//translate.wordpress.org/projects/wp-themes/wecodeart/%s/default/', get_prop( $translation, [ 'iso' ] ) );
+		
+		$data = [
+			'language' 	=> (object) $translation,
+			'wp_link'	=> $language_link,
+		];
+
+		$notification = new Notification( wecodeart_template( [ 'admin/notification', 'locale' ], $data, false ), [
+			'id'			=> self::NOTICE_ID,
+			'type'     		=> Notification::INFO,
+			'priority' 		=> 1,
+			'class'			=> 'notice is-dismissible',
+			'capabilities' 	=> 'switch_themes',
+		] );
+		
+		if( get_user_option( self::NOTICE_ID ) === 'seen' ) {
+			Notifications::get_instance()->remove_notification( $notification );
+			set_transient( self::NOTICE_ID, true, WEEK_IN_SECONDS );
+			return;
+		}
+
+		if( get_transient( self::NOTICE_ID ) === false ) {
+			Notifications::get_instance()->add_notification( $notification );
+			set_transient( self::NOTICE_ID, true, WEEK_IN_SECONDS );
+		}
 	}
 }
