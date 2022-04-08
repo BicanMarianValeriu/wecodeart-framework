@@ -115,7 +115,7 @@ class Button extends Dynamic {
 						padding: 0;
 						color: var(--wp--preset--color--primary);
 					}
-					.is-style-link .wp-block-button__link :hover {
+					.is-style-link .wp-block-button__link:hover {
 						color: var(--wp--preset--color--primary);
 						box-shadow: none;
 					}
