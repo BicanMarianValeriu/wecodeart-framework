@@ -34,43 +34,11 @@
 		--wp--gray-#{$color}: #{$value};
 	}
 
-	// Gutenberg Generates own theme
-	// @each $color, $value in $theme-colors {
-	//   	--wp--#{$color}: #{$value};
-	// }
-
-	// @each $color, $value in $theme-colors-rgb {
-	//   	--wp--#{$color}-rgb: #{$value};
-	// }
-
-	// --wp--white-rgb: #{to-rgb($white)};
-	// --wp--black-rgb: #{to-rgb($black)};
-	// --wp--body-color-rgb: #{to-rgb($body-color)};
-	// --wp--body-bg-rgb: #{to-rgb($body-bg)};
-
 	// Fonts
 	// Note: Use `inspect` for lists so that quoted items keep the quotes.
 	// See https://github.com/sass/sass/issues/2383#issuecomment-336349172
 	--wp--font-sans-serif: #{inspect($font-family-sans-serif)};
 	--wp--font-monospace: #{inspect($font-family-monospace)};
-	--wp--gradient: #{$gradient};
-
-	// Root and body
-	// stylelint-disable custom-property-empty-line-before
-	@if $font-size-root != null {
-		--wp--root-font-size: #{$font-size-root};
-	}
-	--wp--body-font-family: #{$font-family-base};
-	--wp--body-font-size: #{$font-size-base};
-	--wp--body-font-weight: #{$font-weight-base};
-	--wp--body-line-height: #{$line-height-base};
-	--wp--body-color: #{$body-color};
-	@if $body-text-align != null {
-		--wp--body-text-align: #{$body-text-align};
-	}
-	--wp--body-bg: #{$body-bg};
-	// stylelint-enable custom-property-empty-line-before
-	font-size: var(--wp--root-font-size);
 	
 	@media (prefers-reduced-motion: no-preference) {
 		scroll-behavior: smooth;
@@ -79,129 +47,38 @@
 
 // Body
 //
-// 1. Remove the margin in all browsers.
-// 2. As a best practice, apply a default `background-color`.
-// 3. Prevent adjustments of font size after orientation changes in iOS.
-// 4. Change the default tap highlight to be completely transparent in iOS.
+// 1. Prevent adjustments of font size after orientation changes in iOS.
+// 2. Change the default tap highlight to be completely transparent in iOS.
 // scss-docs-start reboot-body-rules
 body {
-	margin: 0; // 1
-	font-family: var(--wp--body-font-family);
-	@include font-size(var(--wp--body-font-size));
-	font-weight: var(--wp--body-font-weight);
-	line-height: var(--wp--body-line-height);
-	color: var(--wp--body-color);
-	text-align: var(--wp--body-text-align);
-	background-color: var(--wp--body-bg); // 2
-	-webkit-text-size-adjust: 100%; // 3
-	-webkit-tap-highlight-color: rgba($black, 0); // 4
+	-webkit-text-size-adjust: 100%; // 1
+	-webkit-tap-highlight-color: rgba($black, 0); // 2
 	overflow-x: hidden;
 }
-// scss-docs-end reboot-body-rules
 
 // Content grouping
 //
 // 1. Reset Firefox's gray color
-// 2. Set correct height and prevent the `size` attribute to make the `hr` look like an input field
 hr {
-	margin: $hr-margin-y 0;
-	color: $hr-color; // 1
+	margin: 1.5rem 0;
+	color: inherit; // 1
 	background-color: currentColor;
 	border: 0;
 	opacity: 1;
 }
 
-// Vertical Line
-.vr {
-    display: inline-block;
-    align-self: stretch;
-    width: 1px;
-    min-height: 1em;
-    background-color: currentColor;
-    opacity: $hr-opacity;
-}
-
 // Typography
 //
-// 1. Remove top margins from headings
-//    By default, `<h1>`-`<h6>` all receive top and bottom margins. We nuke the top
-//    margin for easier control within type scales as it avoids margin collapsing.
-%heading {
-	margin-top: 0; // 1
-	margin-bottom: $headings-margin-bottom;
-	font-family: $headings-font-family;
-	font-style: $headings-font-style;
-	font-weight: $headings-font-weight;
-	line-height: $headings-line-height;
-	color: $headings-color;
-}
-
-h1 {
-	@extend %heading;
-	@include font-size($h1-font-size);
-}
-
-h2 {
-	@extend %heading;
-	@include font-size($h2-font-size);
-}
-
-h3 {
-	@extend %heading;
-	@include font-size($h3-font-size);
-}
-
-h4 {
-	@extend %heading;
-	@include font-size($h4-font-size);
-}
-
-h5 {
-	@extend %heading;
-	@include font-size($h5-font-size);
-}
-
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
-	@extend %heading;
-	@include font-size($h6-font-size);
-}
-
-.h1 {
-	@extend h1;
-}
-
-.h2 {
-	@extend h2;
-}
-
-.h3 {
-	@extend h3;
-}
-
-.h4 {
-	@extend h4;
-}
-
-.h5 {
-	@extend h5;
-}
-
-.h6 {
-	@extend h6;
-}
-
-.lead {
-	@include font-size($lead-font-size);
-	font-weight: $lead-font-weight;
-}
-
-// Type display classes
-@each $display, $font-size in $display-font-sizes {
-	.display-#{$display} {
-		@include font-size($font-size);
-		font-weight: $display-font-weight;
-		line-height: $display-line-height;
-	}
+	// 1. Remove top margins from headings
+	//    By default, `<h1>`-`<h6>` all receive top and bottom margins. We nuke the top
+	//    margin for easier control within type scales as it avoids margin collapsing.
+	margin-top: 0; // 1
 }
 
 // Reset margins on paragraphs
@@ -253,22 +130,6 @@ ul ol {
   	margin-bottom: 0;
 }
 
-.list-unstyled {
-	@include list-unstyled();
-}
-
-.list-inline {
-	@include list-unstyled();
-}
-
-.list-inline-item {
-	display: inline-block;
-
-	&:not(:last-child) {
-		margin-right: 1rem;
-	}
-}
-
 dt {
   	font-weight: 700;
 }
@@ -280,28 +141,9 @@ dd {
 }
 
 // Blockquote
-blockquote,
-.blockquote {
-  	margin: 0 0 1rem;
-}
-
-.blockquote {
+blockquote {
 	font-size: 1rem;
-
-	> :last-child {
-		margin-bottom: 0;
-	}
-}
-
-.blockquote-footer {
-	margin-top: -1rem;
-	margin-bottom: 1rem;
-	font-size: var(--wp--preset--font-size--small);
-	color: var(--wp--gray);
-
-	&::before {
-		content: "\2014\00A0"; // em dash, nbsp
-	}
+  	margin: 0 0 1rem;
 }
 
 // Strong
@@ -325,19 +167,6 @@ mark {
 	padding: .2rem .5rem;
 	border-radius: .25rem;
 	background-color: #fcf8e3;
-}
-
-.small {
-	@extend small;
-}
-
-.mark {
-	@extend mark;
-}
-
-.initialism {
-	font-size: var(--wp--preset--font-size--small);
-	text-transform: uppercase;
 }
 
 // Sub and Sup
@@ -397,7 +226,7 @@ pre {
 	margin-top: 0; // 1
 	margin-bottom: 1rem; // 2
 	overflow: auto; // 3
-	color: $pre-color;
+	color: var(--wp--pink);
 
 	// Account for some code outputs that place code tags in pre tags
 	code {
@@ -428,7 +257,7 @@ kbd {
 	kbd {
 		padding: 0;
 		font-size: 1em;
-		font-weight: $nested-kbd-font-weight;
+		font-weight: normal;
 	}
 }
 
@@ -445,8 +274,7 @@ figure {
   	margin: 0 0 1rem;
 }
 
-figcaption,
-.wp-caption {
+figcaption {
     font-size: var(--wp--preset--font-size--small);
     font-style: italic;
     padding: 5px 3px 10px;
@@ -460,12 +288,6 @@ figcaption,
         padding: 0;
         width: auto;
     }
-
-    p.wp-caption-text {
-        font-size: var(--wp--preset--font-size--small);
-        margin: 0;
-        padding: 0 4px 5px;
-    }
 }
 
 // Remove border from iframe
@@ -477,24 +299,6 @@ iframe {
 img,
 svg {
   	vertical-align: middle;
-}
-
-svg {
-    display: inline-block;
-    vertical-align: -0.125em;
-    fill: currentColor;
-    height: 1em;
-}
-
-svg,
-.svg-inline {
-    .fa-secondary {
-        opacity: .4;
-    }
-
-    &.fa-fw {
-        width: 1em;
-    }
 }
 
 img {
@@ -513,7 +317,7 @@ table {
 caption {
 	padding-top: .5rem;
 	padding-bottom: .5rem;
-	color: var(--wp--dark);
+	color: var(--wp--preset--color--dark);
 	text-align: left;
 }
 

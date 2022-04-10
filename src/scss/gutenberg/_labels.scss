@@ -15,7 +15,7 @@
 	} 
 }
 
-@for $i from 1 to 6 {
+@for $i from 1 through 6 {
 	h#{$i}[data-type="core/heading"]:not(.is-selected):not(.is-hovered)::before {
 		content: "H#{$i}";
 	}

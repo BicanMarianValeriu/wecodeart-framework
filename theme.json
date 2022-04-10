@@ -174,8 +174,15 @@
 				"2": ".75rem",
 				"3": "1rem",
 				"4": "2rem",
-				"5": "3rem",
-				"6": "clamp(3rem, 10vw, 5rem)"
+				"5": "3rem"
+			},
+			"displays": {
+				"1": "clamp(3.5rem, 1.16rem + 5.12vw, 5rem)",
+				"2": "clamp(3.25rem, 1.16rem + 5.12vw, 4.5rem)",
+				"3": "clamp(3rem, 1.16rem + 5.12vw, 4rem)",
+				"4": "clamp(2.75rem, 1.16rem + 5.12vw, 3.5rem)",
+				"5": "clamp(2.5rem, 1.16rem + 5.12vw, 3rem)",
+				"6": "clamp(2rem, 1.16rem + 5.12vw, 2.5rem)"
 			},
 			"mobileBreakpoint": "lg"
 		},
@@ -240,6 +247,17 @@
 	},
 	"styles": {
 		"blocks": {
+			"core/heading": {
+				"typography": {
+					"fontWeight": "500",
+					"lineHeight": "1.2"
+				},
+				"spacing": {
+					"margin": {
+						"bottom": "1.5rem"
+					}
+				}
+			},
 			"core/post-author": {
 				"typography": {
 					"fontSize": "var:preset|font-size|small"
@@ -312,6 +330,7 @@
 					"text": "var:preset|color|white"
 				},
 				"spacing": {
+					"blockGap": "1rem",
 					"padding": {
 						"top": ".5rem",
 						"bottom": ".5rem",
@@ -319,14 +338,39 @@
 						"right": ".75rem"
 					}
 				}
-			},
-			"core/buttons": {
-				"spacing": {
-					"blockGap": "1rem"
-				}
 			}
 		},
 		"elements": {
+			"h1": {
+				"typography": {
+					"fontSize": "clamp(2.5rem, 1.16rem + 5.12vw, 3.5rem)"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "clamp(2rem, 1.16rem + 5.12vw, 2.5rem)"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "clamp(1.5rem, 1.16rem + 5.12vw, 1.875rem)"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "clamp(1.275rem, 1.16rem + 5.12vw, 1.5rem)"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontSize": "1.25rem"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontSize": "1rem"
+				}
+			},
 			"link": {
 				"color": {
 					"text": "var:preset|color|primary"
@@ -336,6 +380,9 @@
 		"color": {
 			"background": "var:preset|color|white",
 			"text": "var:preset|color|dark"
+		},
+		"spacing": {
+			"blockGap": null
 		},
 		"typography": {
 			"fontSize": "var:preset|font-size|normal",

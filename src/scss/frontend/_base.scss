@@ -1,9 +1,5 @@
 /* 	= Base
 --------------------------------------------------------------- */
-.wp-site-blocks > * + * {
-    margin-top: 0!important;
-}
-
 /*
  * Alignment styles.
  * These rules are temporary, and should not be relied on or modified too heavily by themes
@@ -18,8 +14,9 @@
 .wp-site-header,
 .wp-site-footer,
 .wp-site-credits,
+.wp-block-cover.alignfull,
 .wp-block-group.alignfull,
-.wp-block-cover.alignfull {
+.wp-block-group.has-background {
     padding-left: var(--wp--custom--gutter);
     padding-right: var(--wp--custom--gutter);
 }

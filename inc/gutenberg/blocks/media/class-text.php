@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -58,13 +58,12 @@ class Text extends Dynamic {
 		
 		return "
 		.wp-block-media-text {
-			--wp--gutter-x: 1rem;
 			display: flex;
 			flex-flow: column;
 		}
 		.wp-block-media-text.has-background .wp-block-media-text__content {
-			padding-left: var(--wp--gutter-x);
-			padding-right: var(--wp--gutter-x);
+			padding-left: var(--wp--custom--gutter);
+			padding-right: var(--wp--custom--gutter);
 		}
 		.wp-block-media-text__content {
 			flex: 1 0 0%;
@@ -98,6 +97,7 @@ class Text extends Dynamic {
 		}
 		@media (min-width: $tablet) {
 			.wp-block-media-text {
+				--wp--custom--gutter: 2rem;
 				flex-flow: row nowrap;
 			}
 			.wp-block-media-text.has-background .wp-block-media-text__content {
@@ -106,10 +106,10 @@ class Text extends Dynamic {
 			}
 			.wp-block-media-text .wp-block-media-text__content {
 				align-self: center;
-				padding-left: var(--wp--gutter-x);
+				padding-left: var(--wp--custom--gutter);
 			}
 			.wp-block-media-text.has-media-on-the-right .wp-block-media-text__content {
-				padding-right: var(--wp--gutter-x);
+				padding-right: var(--wp--custom--gutter);
 				padding-left: 0;
 				order: -1;
 			}
@@ -123,10 +123,10 @@ class Text extends Dynamic {
 				align-self: flex-end;
 			}
 			.wp-block-media-text.has-media-on-the-right.has-background .wp-block-media-text__content {
-				padding-left: var(--wp--gutter-x);
+				padding-left: var(--wp--custom--gutter);
 			}
 			.wp-block-media-text.has-background .wp-block-media-text__content {
-				padding-right: var(--wp--gutter-x);
+				padding-right: var(--wp--custom--gutter);
 			}
 			.wp-block-media-text__media {
 				margin-bottom: 0;
@@ -134,7 +134,7 @@ class Text extends Dynamic {
 		}
 		@media (min-width: $desktop) {
 			.wp-block-media-text {
-				--wp--gutter-x: 3rem;
+				--wp--custom--gutter: 3rem;
 			}
 		}
 		";

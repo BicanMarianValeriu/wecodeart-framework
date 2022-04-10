@@ -1,30 +1,40 @@
-.site-header,
-.site-footer,
-.wp-site-blocks,
-.wp-site-credits,
-.wp-site-header,
-.wp-site-footer {
-  background-color: inherit;
+.edit-post-visual-editor__post-title-wrapper {
+  --wp--style--block-gap: 4rem;
+  padding-left: var(--wp--custom--gutter);
+  padding-right: var(--wp--custom--gutter);
 }
 
-.is-root-container {
-  padding-left: 0;
-  padding-right: 0;
+.is-root-container:not(.wp-site-blocks) {
+  overflow: hidden;
 }
-.is-root-container .alignfull {
+
+.block-editor-block-list__layout.is-root-container {
+  padding-left: var(--wp--custom--gutter);
+  padding-right: var(--wp--custom--gutter);
+}
+.block-editor-block-list__layout.is-root-container .alignfull.wp-block,
+.block-editor-block-list__layout.is-root-container > .wp-block-cover {
   margin-left: calc(var(--wp--custom--gutter) * -1) !important;
   margin-right: calc(var(--wp--custom--gutter) * -1) !important;
   width: unset;
 }
-.is-root-container .wp-block-columns .wp-block-column .alignfull,
-.is-root-container .alignfull > *:not(.wp-block-group) .alignfull {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: inherit;
+.block-editor-block-list__layout.is-root-container .block-editor-block-list__block > :where(.wp-block) {
+  --wp--style--block-gap: 1.5rem;
 }
 
-.edit-post-visual-editor__post-title-wrapper {
-  --wp--style--block-gap: 4rem;
+.block-editor-block-list__layout.wp-site-blocks .alignfull.wp-block,
+.block-editor-block-list__layout.wp-site-blocks > .wp-block-cover,
+.block-editor-block-list__layout.wp-site-blocks > .wp-block-group.has-background {
+  margin-left: calc(var(--wp--custom--gutter) * -1) !important;
+  margin-right: calc(var(--wp--custom--gutter) * -1) !important;
+  width: unset;
+}
+.block-editor-block-list__layout.wp-site-blocks .entry-content > :where(.wp-block) {
+  --wp--style--block-gap: 0;
+}
+
+.wp-block-buttons {
+  --wp--style--block-gap: 1em;
 }
 
 .wp-block-columns.is-selected::before, .wp-block-columns.has-child-selected::before {
@@ -90,6 +100,10 @@ h4[data-type="core/heading"]:not(.is-selected):not(.is-hovered)::before {
 
 h5[data-type="core/heading"]:not(.is-selected):not(.is-hovered)::before {
   content: "H5";
+}
+
+h6[data-type="core/heading"]:not(.is-selected):not(.is-hovered)::before {
+  content: "H6";
 }
 
 .editor-inner-blocks .wp-block[data-type="core/heading"]:not(.is-selected):not(.is-hovered)::before,

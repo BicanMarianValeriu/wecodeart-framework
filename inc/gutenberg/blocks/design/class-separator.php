@@ -70,10 +70,10 @@ class Separator extends Dynamic {
 				$inline = "
 					.wp-block-separator.is-style-faded {
 						background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
-						opacity: 1;
-						border: none;
-						height: 1px;
 						width: 100%!important;
+						height: 1px;
+						border: none;
+						opacity: 1;
 					}
 				";
 				break;

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.5.1
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -87,7 +87,7 @@ class Logo extends Dynamic {
             display: block;
             margin: 0 auto;
         }
-		.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) {
+		.wp-block-site-logo:is(.alignleft,.aligncenter,.alignright) {
 			margin-bottom: 0;
 		}
 		.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) .navbar-brand {

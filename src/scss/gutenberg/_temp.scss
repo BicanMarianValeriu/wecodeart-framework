@@ -1,0 +1,47 @@
+// Temporary, similar as frontend ones
+.edit-post-visual-editor__post-title-wrapper {
+    --wp--style--block-gap: 4rem;
+	padding-left: var(--wp--custom--gutter);
+    padding-right: var(--wp--custom--gutter);
+}
+
+// Overflowing fix
+.is-root-container:not(.wp-site-blocks) {
+    overflow: hidden;
+}
+
+// Entry Editor
+.block-editor-block-list__layout.is-root-container {
+    padding-left: var(--wp--custom--gutter);
+    padding-right: var(--wp--custom--gutter);
+
+    .alignfull.wp-block,
+	> .wp-block-cover {
+        margin-left: calc(var(--wp--custom--gutter) * -1) !important;
+        margin-right: calc(var(--wp--custom--gutter) * -1) !important;
+        width: unset;
+    }
+    
+    .block-editor-block-list__block > :where(.wp-block) {
+        --wp--style--block-gap: 1.5rem;
+    }
+}
+
+// FSE Editor
+.block-editor-block-list__layout.wp-site-blocks {
+    .alignfull.wp-block,
+    > .wp-block-cover,
+    > .wp-block-group.has-background {
+        margin-left: calc(var(--wp--custom--gutter) * -1) !important;
+        margin-right: calc(var(--wp--custom--gutter) * -1) !important;
+        width: unset;
+    }
+
+    .entry-content > :where(.wp-block) {
+        --wp--style--block-gap: 0;
+    }
+}
+
+.wp-block-buttons {
+    --wp--style--block-gap: 1em;
+}

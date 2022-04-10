@@ -99,7 +99,7 @@ class Form extends Dynamic {
 			'comment_notes_before' 	=> $this->get_form_notes(),
 			'submit_field'			=> '<div class="comment-form-field">%1$s %2$s</div>',
 			'submit_button'			=> $this->get_input( 'submit' ),
-			'class_submit'			=> 'comment-form-submit',
+			'class_submit'			=> 'comment-form-submit wp-block-button__link',
 			'fields' 				=> [
 				'author' 	=> $this->get_input( 'name' ),
 				'email'  	=> $this->get_input( 'email' ),
@@ -319,22 +319,6 @@ class Form extends Dynamic {
 		}
 		.comment-form-field {
 			margin-bottom: 1rem;
-		}
-		.comment-form-submit {
-			display: inline-block;
-			vertical-align: middle;
-			padding: 0.5rem 0.75rem;
-			color: var(--wp--white);
-			font-size: 1rem;
-			font-weight: 400;
-			text-align: center;
-			line-height: 1.5;
-			background-color: var(--wp--dark);
-			border: 1px solid transparent;
-			border-radius: .25rem;
-			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-			user-select: none;
-			cursor: pointer;
 		}
 		";
 	}

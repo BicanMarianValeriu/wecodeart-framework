@@ -118,11 +118,11 @@ class Table extends Dynamic {
 			--wp--table-padding-y: .5rem;
 			--wp--table-bg: transparent;
 			--wp--table-accent-bg: transparent;
-			--wp--table-striped-color: var(--wp--dark);
+			--wp--table-striped-color: var(--wp--preset--color--dark);
 			--wp--table-striped-bg: rgba(0, 0, 0, 0.05);
-			--wp--table-active-color: var(--wp--dark);
+			--wp--table-active-color: var(--wp--preset--color--dark);
 			--wp--table-active-bg: rgba(0, 0, 0, 0.1);
-			--wp--table-hover-color: var(--wp--dark);
+			--wp--table-hover-color: var(--wp--preset--color--dark);
 			--wp--table-hover-bg: rgba(0, 0, 0, 0.075);
 		  
 			width: 100%;

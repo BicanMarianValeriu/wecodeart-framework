@@ -1,36 +1,4 @@
-// Core
-.site-header, // Deprecated
-.site-footer, // Deprecated
-.wp-site-blocks,
-.wp-site-credits,
-.wp-site-header,
-.wp-site-footer {
-    background-color: inherit;
-}
-
-// Temporary, same as frontend ones
-.is-root-container {
-    padding-left: 0;
-    padding-right: 0;
-    
-    .alignfull {
-        margin-left: calc(var(--wp--custom--gutter) * -1) !important;
-        margin-right: calc(var(--wp--custom--gutter) * -1) !important;
-        width: unset;
-    }
-
-    .wp-block-columns .wp-block-column .alignfull,
-    .alignfull>*:not(.wp-block-group) .alignfull {
-        margin-left: auto !important;
-        margin-right: auto !important;
-        width: inherit;
-    }
-}
-
-.edit-post-visual-editor__post-title-wrapper {
-    --wp--style--block-gap: 4rem;
-}
-
 // Custom
+@import './temp';
 @import './section';
 @import './labels';

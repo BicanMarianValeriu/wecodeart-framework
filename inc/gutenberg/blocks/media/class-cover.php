@@ -93,10 +93,10 @@ class Cover extends Dynamic {
 		.wp-block-cover__inner-container {
 			width: 100%;
 			z-index: 2;
-			color: var(--wp--white);
+			color: var(--wp--preset--color--white);
 		}
 		.wp-block-cover.is-light .wp-block-cover__inner-container {
-			color: var(--wp--dark);
+			color: var(--wp--preset--color--dark);
 		}
 		.has-custom-content-position .wp-block-cover__inner-container {
 			display: flex;

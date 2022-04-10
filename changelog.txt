@@ -1,9 +1,11 @@
 v5.5.5
 - Removed - ArrayAccess implementation where it was not necessary (prepare for PHP 8)
+- Removed - .lead classes (unnecessary with fw-100/200/300 and guttenberg classes)
 - Updated - Singleton Class __clone() and __wakeup() marked as public (PHP 8 warning fix)
 - Updated - core/gallery to use grid layout / temporary fix fatal error caused by Gutenberg plugin (when setting blockGap)
 - Updated - core/image aligncenter fix and style improvements
 - Updated - core/cover inner container padding removed (use columns block for adding gutters)
+- Updated - core/media-text CSS variable --wp--gutter-x to --wp--custom--gutter (set in theme.json)
 - Updated - Gutenberg Styles core_blocks() list to 5.9.2 (added new blocks)
 - Updated - WooCommerce updated block names exclude from theme Gutenberg Extensions
 - Updated - Implement Configuration where ArrayAccess was removed + code cleanup

@@ -9,11 +9,11 @@ return [
 	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:100vh">
 	<span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<div class="wp-block-cover__inner-container">
-	<!-- wp:heading {"textAlign":"center","level":1,"textColor":"white","className":"mb-5 display-5"} -->
-	<h1 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="create-and-grow">Create and grow<br>your unique website today</h1>
+	<!-- wp:heading {"textAlign":"center","level":1,"textColor":"white","className":"mb-5 display-1"} -->
+	<h1 class="has-text-align-center mb-5 display-1 has-white-color has-text-color" id="create-and-grow">Create and grow<br>your unique website today</h1>
 	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center","textColor":"white","className":"lead mb-5"} -->
-	<p class="has-text-align-center lead mb-5 has-white-color has-text-color">Programmatically work but low hanging fruit so new economy cross-pollination. Quick sync new<br>economy onward and upward.</p>
+	<!-- wp:paragraph {"align":"center","textColor":"white","className":"fw-300 mb-5"} -->
+	<p class="has-text-align-center fw-300 mb-5 has-white-color has-text-color">Programmatically work but low hanging fruit so new economy cross-pollination. Quick sync new<br>economy onward and upward.</p>
 	<!-- /wp:paragraph -->
 	<!-- wp:buttons {"contentJustification":"center","className":"is-style-default"} -->
 	<div class="wp-block-buttons is-content-justification-center is-style-default">
@@ -150,7 +150,7 @@ return [
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"className":"my-5","layout":{"inherit":true}} -->
+	<!-- wp:group {"style":{"spacing":{"blockGap":{"top":"1.5rem","left":"1.5rem"}}},"className":"my-5","layout":{"inherit":true}} -->
 	<div class="wp-block-group my-5">
 	<!-- wp:heading {"textAlign":"center"} -->
 	<h2 class="has-text-align-center">What Client\'s Say</h2>
@@ -204,11 +204,11 @@ return [
 	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:555px">
 	<span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<div class="wp-block-cover__inner-container">
-	<!-- wp:heading {"textAlign":"center","textColor":"white","className":"mb-5 display-5"} -->
-	<h2 class="has-text-align-center mb-5 display-5 has-white-color has-text-color" id="let-s-work-together-on-your-next-web-project">Let`s work together on your <br>next web project</h2>
+	<!-- wp:heading {"textAlign":"center","textColor":"white","className":"mb-5 display-3"} -->
+	<h2 class="has-text-align-center mb-5 display-3 has-white-color has-text-color" id="let-s-work-together-on-your-next-web-project">Let`s work together on your <br>next web project</h2>
 	<!-- /wp:heading -->
-	<!-- wp:paragraph {"align":"center","textColor":"white","className":"lead mb-5","fontSize":"medium"} -->
-	<p class="has-text-align-center lead mb-5 has-white-color has-text-color has-medium-font-size">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus <br>nec ullamcorper mattis, pulvinar dapibus leo.</p>
+	<!-- wp:paragraph {"align":"center","textColor":"white","className":"fw-300 mb-5","fontSize":"medium"} -->
+	<p class="has-text-align-center fw-300 mb-5 has-white-color has-text-color has-medium-font-size">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus <br>nec ullamcorper mattis, pulvinar dapibus leo.</p>
 	<!-- /wp:paragraph -->
 	<!-- wp:buttons {"contentJustification":"center"} -->
 	<div class="wp-block-buttons is-content-justification-center">

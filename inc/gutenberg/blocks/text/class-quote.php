@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.9
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -88,7 +88,7 @@ class Quote extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public static function styles() {
-		return "
+		return '
 		.wp-block-quote:not(.is-style-plain) {
 			border-left: 4px solid var( --wp--preset--color--primary );
 			padding-left: 1rem;
@@ -97,8 +97,14 @@ class Quote extends Dynamic {
 			font-size: inherit;
 		}
 		.wp-block-quote .blockquote-footer {
+			margin-top: -1rem;
+			margin-bottom: 1rem;
 			text-align: left;
+			color: var(--wp--gray);
 		}
-		";
+		.wp-block-quote .blockquote-footer::before {
+			content: "\2014\00A0";
+		}
+		';
 	}
 }
