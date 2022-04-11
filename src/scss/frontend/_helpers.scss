@@ -150,6 +150,14 @@
 
 .screen-reader-response,
 .screen-reader-text {
+    position: absolute;
+    background-color: var(--wp--preset--color--light);
+    color: var(--wp--preset--color--dark);
+    padding: .5rem 1rem;
+    top: 5px;
+    left: 5px;
+    z-index: 100000;
+
     @include visually-hidden-focusable();
 }
 
@@ -174,7 +182,7 @@
 }
   
 @each $key, $ratio in $aspect-ratios {
-    .ratio-#{$key} {
+    .ratio--#{$key} {
         --#{$variable-prefix}aspect-ratio: #{$ratio};
     }
 }
@@ -228,8 +236,8 @@
 .vr {
     display: inline-block;
     align-self: stretch;
+    background-color: currentColor;
     width: 1px;
     min-height: 1em;
-    background-color: currentColor;
     opacity: .25;
 }

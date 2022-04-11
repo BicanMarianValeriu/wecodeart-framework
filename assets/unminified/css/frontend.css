@@ -1160,6 +1160,16 @@ progress {
   border: 0 !important;
 }
 
+.screen-reader-response,
+.screen-reader-text {
+  position: absolute;
+  background-color: var(--wp--preset--color--light);
+  color: var(--wp--preset--color--dark);
+  padding: 0.5rem 1rem;
+  top: 5px;
+  left: 5px;
+  z-index: 100000;
+}
 .screen-reader-response:not(:focus):not(:focus-within),
 .screen-reader-text:not(:focus):not(:focus-within) {
   position: absolute !important;
@@ -1190,19 +1200,19 @@ progress {
   height: 100%;
 }
 
-.ratio-1x1 {
+.ratio--1x1 {
   --wp--aspect-ratio: 100%;
 }
 
-.ratio-4x3 {
+.ratio--4x3 {
   --wp--aspect-ratio: 75%;
 }
 
-.ratio-16x9 {
+.ratio--16x9 {
   --wp--aspect-ratio: 56.25%;
 }
 
-.ratio-21x9 {
+.ratio--21x9 {
   --wp--aspect-ratio: 42.8571428571%;
 }
 
@@ -1280,9 +1290,9 @@ progress {
 .vr {
   display: inline-block;
   align-self: stretch;
+  background-color: currentColor;
   width: 1px;
   min-height: 1em;
-  background-color: currentColor;
   opacity: 0.25;
 }
 

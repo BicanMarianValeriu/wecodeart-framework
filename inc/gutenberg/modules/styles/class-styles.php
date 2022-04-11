@@ -263,7 +263,7 @@ class Styles implements Integration {
 		}
 
 		// This is processed so next time we skipp it (avoid issues like multiple calls of this filter, if any)
-		self::$processed[] = $block_id;
+		self::$processed[] = $block_id; 
 
 		return $content;
 	}
@@ -397,15 +397,15 @@ class Styles implements Integration {
 		// Exclude this blocks from styles extenstions for various reasons
 		// like: no wrapper, renders html or other blocks or simply it should not remove style (core/post-content)
 		$excludes = [
+			'core/block',
 			'core/freeform',
 			'core/html',
-			'core/more',
-			'core/block',
 			'core/missing',
+			'core/more',
 			'core/next-page',
 			'core/pattern',
+			'core/post-content',
 			'core/shortcode',
-			'core/post-content'
 		];
 
 		$blocks = apply_filters( 'wecodeart/filter/gutenberg/styles/core', [

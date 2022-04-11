@@ -113,11 +113,14 @@ class Gutenberg {
 				'version' 	=> wecodeart( 'version' )
 			],
 			'restrictedBlocks' => apply_filters( 'wecodeart/filter/gutenberg/restricted', [
-				'core/freeform',
-				'core/shortcode',
-				'core/nextpage',
 				'core/archives',
 				'core/block',
+				'core/freeform',
+				'core/missing',
+				'core/more',
+				'core/nextpage',
+				'core/pattern',
+				'core/shortcode',
 			] ),
 		] );
 		
