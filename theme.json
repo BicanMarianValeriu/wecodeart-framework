@@ -152,6 +152,7 @@
 			"custom": true,
 			"customDuotone": true,
 			"customGradient": true,
+			"defaultDuotone": true,
 			"defaultGradients": false,
 			"defaultPalette": false
 		},

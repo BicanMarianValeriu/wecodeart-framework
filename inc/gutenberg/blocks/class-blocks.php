@@ -39,15 +39,15 @@ class Blocks implements Configuration {
 	 *
 	 * @var Blocks[]
 	 */
-	protected $items = [];
+	protected   $items = [];
 
     /**
 	 * An array of blocks used in current page.
      *
-	 * @access  public
+	 * @access  protected
 	 * @var     array
 	 */
-	public static $blocks = [];
+	protected   $blocks = [];
 
 	/**
 	 * Send to Constructor
@@ -109,14 +109,14 @@ class Blocks implements Configuration {
 		$this->register( 'core/template-part',              Blocks\Query\Template::class );
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );
         // Site Blocks
-		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
 		$this->register( 'core/loginout',       Blocks\Site\Login::class );
-        
-        foreach( $this->items as $class ) $class::get_instance()->register();
+		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
 
         // Hooks
+        add_filter( 'should_load_separate_core_block_assets', '__return_false', 100 );
+        add_action( 'init',                     [ $this, 'register_blocks'  ], 10, 1 );
         add_filter( 'render_block',             [ $this, 'collect_blocks'   ], 10, 2 );
-        add_action( 'wp_enqueue_scripts',       [ $this, 'register_styles'  ], 0, 1 );
+        add_action( 'wp_enqueue_scripts',       [ $this, 'register_styles'  ], 10, 1 );  // or before global with 0 priority?
         add_action( 'wp_print_styles',          [ $this, 'remove_styles'    ], 100 );
 	}
 
@@ -130,10 +130,19 @@ class Blocks implements Configuration {
 	 */
 	public function collect_blocks( $block_content, $block ) {
 		if ( $name = get_prop( $block, 'blockName' ) ) {
-			self::load( $name );
+			$this->load( $name );
 		}
 
 		return $block_content;
+	}
+
+     /**
+	 * Register hooks
+	 *
+	 * @return void
+	 */
+	public function register_blocks() {
+        foreach( $this->items as $class ) $class::get_instance()->register();
 	}
 
     /**
@@ -142,11 +151,11 @@ class Blocks implements Configuration {
 	 * @return void
 	 */
 	public function register_styles() {
-        if( empty( self::current() ) ) return;
+        if( empty( $this->current() ) ) return;
 
         $inline_css = '';
 
-        foreach( self::current() as $block ) {
+        foreach( $this->current() as $block ) {
             if( ! $this->has( $block ) ) continue;
             $inline_css .= $this->get( $block )::styles();
         } 
@@ -175,8 +184,8 @@ class Blocks implements Configuration {
 	 *
 	 * @return array
 	 */
-	public static function current() {
-		return array_unique( self::$blocks );
+	public function current() {
+		return array_unique( $this->blocks );
 	}
 
     /**
@@ -184,11 +193,11 @@ class Blocks implements Configuration {
 	 *
 	 * @return void
 	 */
-	public static function load( $names = '' ) {
+	public function load( $names = '' ) {
         foreach( (array) $names as $name ) {
-            if( in_array( $name, self::current() ) ) continue;
+            if( in_array( $name, $this->current() ) ) continue;
 
-            self::$blocks[] = $name;
+            $this->blocks[] = $name;
         }
 	}
 

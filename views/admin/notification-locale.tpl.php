@@ -19,19 +19,15 @@ defined( 'ABSPATH' ) || exit();
  */
 
 ?>
-<h3 style="margin-bottom:.5rem;"><?php esc_html_e( 'Thank you for using our theme!', 'wecodeart' ); ?></h3>
+<h3 style="margin-bottom:.5rem;"><?php printf( esc_html__( 'It looks like WeCodeArt Framework is not translated in %s. ', 'wecodeart' ), strtolower( $language->name ) ); ?></h3>
 <p><?php
 
- 	printf( esc_html__( 'It looks like WeCodeArt Framework is not translated in %s. ', 'wecodeart' ), strtolower( $language->name ) );
-
- 	esc_html_e( 'Would you like to contribute by suggesting some translations? ', 'wecodeart' );
-
-	esc_html_e( 'I would really appreciate that and it will also help you and your clients. ', 'wecodeart' );
+	esc_html_e( 'Would you like to contribute by suggesting some translations? To show how much I appreciate that I will put your name on an upcoming "Credits and Contributors" special page. It will help both you and your clients. ', 'wecodeart' );
 
 ?>
 </p>
 <p>
-	<a href="<?php echo esc_attr( $wp_link ); ?>" class="button button-primary is-primary" target="_blank"><?php
+	<a href="<?php echo esc_url( $wp_link ); ?>" class="button button-primary is-primary" target="_blank"><?php
 	
 		esc_html_e( 'Yes, I would love to!', 'wecodeart' );
 		

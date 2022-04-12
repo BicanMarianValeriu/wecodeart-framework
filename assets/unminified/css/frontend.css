@@ -53,6 +53,7 @@ hr {
   margin: 1.5rem 0;
   color: inherit;
   background-color: currentColor;
+  height: 1px;
   border: 0;
   opacity: 1;
 }

@@ -76,7 +76,7 @@ class Form extends Dynamic {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	5.3.3
+	 * @version	5.5.5
 	 *
 	 * @return 	array
 	 */

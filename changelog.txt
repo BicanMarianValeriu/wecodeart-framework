@@ -17,6 +17,8 @@ v5.5.5
 - Updated - Remove DNS prefech ( s.w.org ) when enabling Clean Header
 - Updated - Templates for Post Meta blocks (author, terms, comments, date)
 - Updated - entry-meta.html template to use new core/post-author-name instead of core/post-author block
+- Updated - WeCodeArt\Gutenberg\Blocks storage loaded into init hook
+- Updated - WeCodeArt\Gutenberg\Blocks storage static ::load method to normal instance function
 - Fixed - ArrayAccess methods PHP 8 warnings (in class-config.php)
 - Fixed - Issue with core/cover top-left content alignment
 - Fixed - Issue with invalid starter content for About page

@@ -89,7 +89,7 @@ final class Locale implements Integration {
 
 		if( empty( $translation ) ) return;
 
-		$language_link 	= sprintf( '//translate.wordpress.org/projects/wp-themes/wecodeart/%s/default/', get_prop( $translation, [ 'iso' ] ) );
+		$language_link 	= sprintf( '//translate.wordpress.org/projects/wp-themes/wecodeart/%s/default/', get_prop( $translation, [ 'lang' ] ) );
 		
 		$data = [
 			'language' 	=> (object) $translation,

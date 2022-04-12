@@ -67,7 +67,7 @@ class Image extends Dynamic {
 			caption-side: bottom;
 			text-align: inherit;
 		}
-		.wp-block-image:where(.is-style-circle-mask,.is-style-rounded) {
+		.wp-block-image.is-style-rounded {
 			border-radius: 9999px;
 		}
 		.wp-block-image > a,

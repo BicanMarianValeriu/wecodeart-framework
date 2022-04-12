@@ -95,8 +95,7 @@ class Search extends Dynamic {
 		}
 
 		// Queue block for assets.
-		$storage = Blocks::get_instance();
-		$storage::load( [ 'core/buttons', 'core/button' ] );
+		Blocks::get_instance()->load( [ 'core/buttons', 'core/button' ] );
 
 		$content = wecodeart( 'markup' )::wrap( 'wp-block-search', [
 			[

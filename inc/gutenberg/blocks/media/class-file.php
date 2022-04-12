@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -107,8 +107,7 @@ class File extends Dynamic {
 		}
 
 		// Queue block for assets.
-		$storage = Blocks::get_instance();
-		$storage::load( [ 'core/buttons', 'core/button' ] );
+		Blocks::get_instance()->load( [ 'core/buttons', 'core/button' ] );
 
 		return $this->save_html( $doc->saveHTML() );
 	}

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.3
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -66,14 +66,31 @@ class Separator extends Dynamic {
 		$inline = '';
 
 		switch( $class ) :
+			case 'dots' :
+				$inline = '
+					.wp-block-separator.is-style-dots {
+						--wp--separator-gap: 2em;
+						--wp--separator-icon: "\00b7 \00b7 \00b7";
+						background: none !important;
+						height: auto;
+						line-height: 1;
+						text-align: center;
+					}
+					.wp-block-separator.is-style-dots::before {
+						content: var(--wp--separator-icon);
+						color: currentColor;
+						font-size: 1.5rem;
+						letter-spacing: var(--wp--separator-gap);
+						padding-left: var(--wp--separator-gap);
+						font-family: serif;
+					}
+				';
+				break;
 			case 'faded' :
 				$inline = "
 					.wp-block-separator.is-style-faded {
 						background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
 						width: 100%!important;
-						height: 1px;
-						border: none;
-						opacity: 1;
 					}
 				";
 				break;
@@ -99,26 +116,9 @@ class Separator extends Dynamic {
 		.wp-block-separator:not([class*="is-style-"]) {
 			max-width: 100px;
 		}
-		.wp-block-separator.is-style-dots {
-			--wp--separator-gap: 2em;
-			--wp--separator-icon: "\00b7 \00b7 \00b7";
-			background: none !important;
-			border: none;
-			height: auto;
-			line-height: 1;
-			text-align: center;
-			opacity: 1;
-		}
-		.wp-block-separator.is-style-dots::before {
-			content: var(--wp--separator-icon);
-			color: currentColor;
-			font-size: 1.5rem;
-			letter-spacing: var(--wp--separator-gap);
-			padding-left: var(--wp--separator-gap);
-			font-family: serif;
-		}
 		';
 
+		$inline .= self::get_style( 'dots' );
 		$inline .= self::get_style( 'faded' );
 
 		return $inline;

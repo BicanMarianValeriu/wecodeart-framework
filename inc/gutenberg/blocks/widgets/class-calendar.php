@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.9
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -59,8 +59,7 @@ class Calendar extends Dynamic {
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
 		// Queue block for assets.
-		$storage = Blocks::get_instance();
-		$storage::load( [ 'core/table' ] );
+		Blocks::get_instance()->load( [ 'core/table' ] );
 
 		// Remove ID
 		$content = preg_replace( '/(<[^>]+) id=".*?"/i', '$1', $content, 1 );

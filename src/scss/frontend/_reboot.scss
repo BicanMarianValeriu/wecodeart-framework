@@ -52,7 +52,7 @@
 // scss-docs-start reboot-body-rules
 body {
 	-webkit-text-size-adjust: 100%; // 1
-	-webkit-tap-highlight-color: rgba($black, 0); // 2
+	-webkit-tap-highlight-color: rgba(black, 0); // 2
 	overflow-x: hidden;
 }
 
@@ -63,6 +63,7 @@ hr {
 	margin: 1.5rem 0;
 	color: inherit; // 1
 	background-color: currentColor;
+	height: 1px;
 	border: 0;
 	opacity: 1;
 }

@@ -315,7 +315,7 @@ class Blocks extends Processor {
 				}
 				
 				// Duotone - temporary disable until I combine them into our styles
-				if ( $value = get_prop( $color, 'duotone', false ) ) {
+				if ( $value = get_prop( $color, 'duotone' ) ) {
 					$block_type = \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
 
 					$duotone_support = false;
@@ -412,7 +412,7 @@ class Blocks extends Processor {
 					}
 				}
 				
-				if ( $value = get_prop( $border, 'color', false ) ) {
+				if ( $value = get_prop( $border, 'color' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-color',
 						'value'	  	=> $value
@@ -421,9 +421,9 @@ class Blocks extends Processor {
 			}
 
 			// Elements
-			if( $elements = get_prop( $css_style, 'elements', false ) ) {
-				if ( $link = get_prop( $elements, 'link', false ) ) {
-					if ( $color = get_prop( $link, 'color', false ) ) {
+			if( $elements = get_prop( $css_style, 'elements' ) ) {
+				if ( $link = get_prop( $elements, 'link' ) ) {
+					if ( $color = get_prop( $link, 'color' ) ) {
 						if ( $value = get_prop( $color, 'text', false ) ) {
 							if ( strpos( $value, 'var:preset|color' ) !== false ) {
 								// Get the name from the string and add proper styles.

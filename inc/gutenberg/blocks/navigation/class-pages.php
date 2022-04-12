@@ -101,7 +101,7 @@ class Pages extends Dynamic {
 		$inner_blocks = new \WP_Block_List( $inner_blocks, $attributes );
 
 		// Assets - we need navigation css/js for dropdowns and styleing.
-		Blocks::get_instance()::load( [ 'core/navigation' ] );
+		Blocks::get_instance()->load( [ 'core/navigation' ] );
 
 		// Render links.
 		foreach( $inner_blocks as $inner_block ) $content .= $inner_block->render();

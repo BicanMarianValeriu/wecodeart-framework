@@ -105,7 +105,6 @@ class Styles implements Integration {
 		] );
 
 		// Hooks
-		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
