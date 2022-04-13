@@ -27,6 +27,7 @@ v5.5.5
 - Fixed - core/spacer double output of units in generated CSS
 - Fixed - core/spacer height issue with .vr class in navigation - on mobile
 - Fixed - core/table styleing issues (allow to be cleared of inline style attr)
+- Fixed - core/post-featured-image issue with image aspect ratio when having custom sizes and add source size support (previously pulling full image)
 - Fixed - Editor Styles: add frontend / minor style fixes
 - Added - WooCommerce HTML starter templates
 - Added - New Header/Footer template parts: Header Dark, Header Logo Left, Header with Search, Header with Topbar Footer Dark (removed as patterns)

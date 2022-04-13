@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -46,7 +46,6 @@ class Image extends Dynamic {
 	 */
 	public function register() {
 		set_post_thumbnail_size( 1920, 1080 );
-		add_filter( 'wecodeart/filter/gutenberg/featured/ratio', '__return_true' );
 		add_filter( 'post_thumbnail_html',			[ $this, 'filter_html'		], 20, 3 );
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render'	], 20, 2 );
 	}
@@ -80,11 +79,13 @@ class Image extends Dynamic {
 		}
 	
 		$post_ID	= $block->context['postId'];
+		$size_slug	= get_prop( $attributes, 'sizeSlug', 'post-thumbnail' );
 		$link 		= get_prop( $attributes, 'isLink', false );
 		$context	= 'wp-block-post-featured-image';
+		$use_ratio	= self::use_ratio();
 		$classnames = [ $context ];
 
-		if( self::use_ratio() ) {
+		if( $use_ratio ) {
 			$classnames[] = 'ratio';
 		}
 
@@ -103,6 +104,7 @@ class Image extends Dynamic {
 		if( isset( $dimmensions['width'] ) && strpos( $dimmensions['width'], 'px' ) ) {
 			$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "",  $dimmensions['width'] );
 		}
+		
 		if( isset( $dimmensions['height'] ) && strpos( $dimmensions['height'], 'px' ) ) {
 			$custom_sizes['height'] = preg_replace( "/[^0-9.]/", "",  $dimmensions['height'] );
 		}
@@ -113,13 +115,13 @@ class Image extends Dynamic {
 
 		if( $link ) {
 			$classnames = array_diff( $classnames, [ 'ratio' ] );
-			$filter = function( $wrappers ) use ( $post_ID, $context, $dummy_ratio ) {
+			$filter = function( $wrappers ) use ( $post_ID, $context, $dummy_ratio, $use_ratio ) {
 				$wrappers = array_merge( $wrappers, [
 					[
 						'tag' 	=> 'a',
 						'attrs'	=> [
 							'href' 	=> get_permalink( $post_ID ),
-							'class'	=> $context . '__link ratio',
+							'class'	=> $context . '__link' . ( $use_ratio ? ' ratio' : '' ),
 							'style'	=> sprintf( '--wp--aspect-ratio:%s;', $dummy_ratio )
 						]
 					]
@@ -135,9 +137,15 @@ class Image extends Dynamic {
 			'tag' 	=> 'figure',
 			'attrs' => [
 				'class' => join( ' ', $classnames ),
-				'style'	=> ! $link ? sprintf( '--wp--aspect-ratio:%s;', $dummy_ratio ) : null
+				'style'	=> ( ! $link && $use_ratio ) ? sprintf( '--wp--aspect-ratio:%s;', $dummy_ratio ) : null
 			]
-		] ], 'the_post_thumbnail', [ $post_ID ], false );
+		] ], function( $post_ID, $size_slug ) {
+
+			echo get_the_post_thumbnail( $post_ID, $size_slug, [
+				'alt' => trim( strip_tags( get_the_title( $post_ID ) ) )
+			] );
+
+		}, [ $post_ID, $size_slug ], false );
 
 		if( $link ) {
 			remove_filter( 'wecodeart/filter/wrappers/' . $context, $filter );
@@ -164,7 +172,7 @@ class Image extends Dynamic {
 				'<img class="%2$s" src="%1$s" alt="%3$s"/>',
 				$placeholder_url,
 				'wp-block-post-featured-image__src',
-				esc_html__( 'Placeholder image', 'wecodeart' )
+				esc_attr__( 'Placeholder image', 'wecodeart' )
 			);
 		}
 
@@ -219,12 +227,12 @@ class Image extends Dynamic {
 	 * Use aspect ratio
 	 *
 	 * @since	5.2.8
-	 * @version	5.2.8
+	 * @version	5.5.5
 	 *
 	 * @return 	boolean
 	 */
 	public static function use_ratio() {
-		return apply_filters( 'wecodeart/filter/gutenberg/featured/ratio', false );
+		return (bool) apply_filters( 'wecodeart/filter/gutenberg/featured/ratio', true );
 	}
 
 	/**
@@ -254,6 +262,7 @@ class Image extends Dynamic {
 		}
 		.wp-block-post-featured-image__link {
 			display: block;
+			min-width: 150px;
 		}
 		.wp-block-post-featured-image img {
 			width: 100%;

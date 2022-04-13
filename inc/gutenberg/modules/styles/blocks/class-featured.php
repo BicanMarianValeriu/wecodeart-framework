@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.8
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -36,7 +36,7 @@ class Featured extends Base {
 		
 		if( $width = get_prop( $this->attrs, 'width' ) ) {
 			$this->output[] = wp_parse_args( [
-				'element'	=> $this->element . '>*',
+				'element' 	=> $this->element . ' > *',
 				'property' 	=> 'width',
 				'value'	  	=> $width
 			], $output );
@@ -78,7 +78,7 @@ class Featured extends Base {
 				], $output );
 			} else {
 				$this->output[] = wp_parse_args( [
-					'element'	=> $this->element . '>*',
+					'element' 	=> $this->element . ' > *',
 					'property' 	=> 'height',
 					'value'	  	=> $height
 				], $output );	 
@@ -86,7 +86,7 @@ class Featured extends Base {
 
 			if( $value = get_prop( $this->attrs, 'scale' ) ) {
 				$this->output[] = wp_parse_args( [
-					'element'	=> $this->element . ' img',
+					'element' 	=> $this->element . ' img',
 					'property' 	=> 'object-fit',
 					'value'	  	=> $value
 				], $output );
