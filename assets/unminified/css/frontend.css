@@ -1062,6 +1062,10 @@ progress {
   width: 1em;
 }
 
+.has-text-align-left {
+  text-align: left;
+}
+
 .has-text-align-center {
   text-align: center;
 }
@@ -1085,37 +1089,37 @@ progress {
 }
 
 .display-1 {
-  font-size: var(--wp--custom--displays--1);
+  font-size: var(--wp--custom--display--1);
   font-weight: 300;
   line-height: 1.2;
 }
 
 .display-2 {
-  font-size: var(--wp--custom--displays--2);
+  font-size: var(--wp--custom--display--2);
   font-weight: 300;
   line-height: 1.2;
 }
 
 .display-3 {
-  font-size: var(--wp--custom--displays--3);
+  font-size: var(--wp--custom--display--3);
   font-weight: 300;
   line-height: 1.2;
 }
 
 .display-4 {
-  font-size: var(--wp--custom--displays--4);
+  font-size: var(--wp--custom--display--4);
   font-weight: 300;
   line-height: 1.2;
 }
 
 .display-5 {
-  font-size: var(--wp--custom--displays--5);
+  font-size: var(--wp--custom--display--5);
   font-weight: 300;
   line-height: 1.2;
 }
 
 .display-6 {
-  font-size: var(--wp--custom--displays--6);
+  font-size: var(--wp--custom--display--6);
   font-weight: 300;
   line-height: 1.2;
 }

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-07 23:50+0000\n"
+"POT-Creation-Date: 2022-04-12 21:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,12 +16,12 @@ msgstr ""
 "X-Loco-Version: 2.5.0; wp-5.6.1\n"
 "X-Domain: wecodeart"
 
-#: views/meta/comments.tpl.php:60
+#: views/meta/comments.tpl.php:61
 #, php-format
 msgid " on %s"
 msgstr ""
 
-#: views/meta/comments.tpl.php:52
+#: views/meta/comments.tpl.php:53
 msgid "% Comments"
 msgstr ""
 
@@ -30,7 +30,7 @@ msgstr ""
 msgid "%s Archives"
 msgstr ""
 
-#: views/meta/author.tpl.php:43
+#: views/meta/author.tpl.php:39
 #, php-format
 msgid "%s`s avatar"
 msgstr ""
@@ -39,7 +39,7 @@ msgstr ""
 msgid "(no title)"
 msgstr ""
 
-#: views/meta/comments.tpl.php:51
+#: views/meta/comments.tpl.php:52
 msgid "1 Comment"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Comment *"
 msgstr ""
 
-#: views/meta/comments.tpl.php:54
+#: views/meta/comments.tpl.php:55
 msgid "Comments are Closed"
 msgstr ""
 
@@ -188,22 +188,17 @@ msgstr ""
 msgid "https://www.wecodeart.com/about/"
 msgstr ""
 
-#: views/admin/notification-locale.tpl.php:29
-msgid ""
-"I would really appreciate that and it will also help you and your clients. "
-msgstr ""
-
 #: inc/support/markup/class-markup.php:250
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr ""
 
-#: views/admin/notification-locale.tpl.php:25
+#: views/admin/notification-locale.tpl.php:22
 #, php-format
 msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr ""
 
-#: views/meta/comments.tpl.php:50
+#: views/meta/comments.tpl.php:51
 msgid "Leave a Comment"
 msgstr ""
 
@@ -211,7 +206,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:119
+#: inc/gutenberg/blocks/site/class-login.php:118
 msgid "Log In"
 msgstr ""
 
@@ -241,7 +236,7 @@ msgstr ""
 msgid "No comments"
 msgstr ""
 
-#: views/admin/notification-locale.tpl.php:40
+#: views/admin/notification-locale.tpl.php:36
 msgid "No, I don`t care."
 msgstr ""
 
@@ -261,7 +256,7 @@ msgstr ""
 msgid "Pagination"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:117
+#: inc/gutenberg/blocks/site/class-login.php:116
 msgid "Password"
 msgstr ""
 
@@ -282,20 +277,20 @@ msgstr ""
 msgid "Post Type Archives: %s"
 msgstr ""
 
-#: views/meta/date.tpl.php:69
+#: views/meta/date.tpl.php:65
 #, php-format
 msgid "Post updated on %s."
 msgstr ""
 
-#: views/meta/terms.tpl.php:56
+#: views/meta/terms.tpl.php:52
 msgid "Posted in"
 msgstr ""
 
-#: views/meta/date.tpl.php:50
+#: views/meta/date.tpl.php:46
 msgid "Posted on "
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:118
+#: inc/gutenberg/blocks/site/class-login.php:117
 msgid "Remember Me"
 msgstr ""
 
@@ -344,7 +339,7 @@ msgstr ""
 msgid "Select Year"
 msgstr ""
 
-#: inc/gutenberg/class-gutenberg.php:248
+#: inc/gutenberg/class-gutenberg.php:251
 msgid "Skip to content"
 msgstr ""
 
@@ -355,10 +350,6 @@ msgstr ""
 #: inc/gutenberg/blocks/query/class-title.php:135
 #, php-format
 msgid "Tag Archives: %s"
-msgstr ""
-
-#: views/admin/notification-locale.tpl.php:22
-msgid "Thank you for using our theme!"
 msgstr ""
 
 #: inc/init.php:282
@@ -412,7 +403,7 @@ msgstr ""
 msgid "upgrade PHP"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:116
+#: inc/gutenberg/blocks/site/class-login.php:115
 msgid "Username or Email Address"
 msgstr ""
 
@@ -452,8 +443,11 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
-#: views/admin/notification-locale.tpl.php:27
-msgid "Would you like to contribute by suggesting some translations? "
+#: views/admin/notification-locale.tpl.php:25
+msgid ""
+"Would you like to contribute by suggesting some translations? To show how "
+"much I appreciate that I will put your name on an upcoming \"Credits and "
+"Contributors\" special page. It will help both you and your clients. "
 msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:146
@@ -466,7 +460,7 @@ msgstr ""
 msgid "Yearly Archives: %s"
 msgstr ""
 
-#: views/admin/notification-locale.tpl.php:36
+#: views/admin/notification-locale.tpl.php:32
 msgid "Yes, I would love to!"
 msgstr ""
 

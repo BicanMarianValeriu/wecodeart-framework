@@ -5,8 +5,8 @@
 return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'Home', 'Theme starter content', 'wecodeart' ),
-	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","gradient":"primary-to-vivid-purple","contentPosition":"center center","isDark":false,"align":"full","className":"py-5 text-center","customCSS":"selector {\n  min-height: calc(100vh - 70px);\n}"} -->
-	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:100vh">
+	'post_content' => '<!-- wp:cover {"minHeight":100,"minHeightUnit":"vh","gradient":"primary-to-vivid-purple","contentPosition":"center center","isDark":false,"align":"full","className":"py-5","customCSS":"selector {\n  min-height: calc(100vh - 70px);\n}"} -->
+	<div class="wp-block-cover alignfull is-light py-5" style="min-height:100vh">
 	<span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","level":1,"textColor":"white","className":"mb-5 display-1"} -->
@@ -200,8 +200,8 @@ return [
 	</div>
 	<!-- /wp:group -->
 	
-	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","gradient":"primary-to-vivid-purple","isDark":false,"align":"full","className":"py-5 text-center"} -->
-	<div class="wp-block-cover alignfull is-light py-5 text-center" style="min-height:555px">
+	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","gradient":"primary-to-vivid-purple","isDark":false,"align":"full","className":"py-5"} -->
+	<div class="wp-block-cover alignfull is-light py-5 style="min-height:555px">
 	<span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","textColor":"white","className":"mb-5 display-3"} -->

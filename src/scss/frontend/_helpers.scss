@@ -80,6 +80,10 @@
 }
 
 // Text
+.has-text-align-left {
+    text-align: left;
+}
+
 .has-text-align-center {
     text-align: center;
 }
@@ -102,7 +106,7 @@
 
 @for $i from 1 through 6 {
 	.display-#{$i} {
-		font-size: var(--wp--custom--displays--#{$i});
+		font-size: var(--wp--custom--display--#{$i});
 		font-weight: 300;
 		line-height: 1.2;
 	}

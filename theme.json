@@ -177,13 +177,13 @@
 				"4": "2rem",
 				"5": "3rem"
 			},
-			"displays": {
-				"1": "clamp(3.5rem, 1.16rem + 5.12vw, 5rem)",
-				"2": "clamp(3.25rem, 1.16rem + 5.12vw, 4.5rem)",
-				"3": "clamp(3rem, 1.16rem + 5.12vw, 4rem)",
-				"4": "clamp(2.75rem, 1.16rem + 5.12vw, 3.5rem)",
-				"5": "clamp(2.5rem, 1.16rem + 5.12vw, 3rem)",
-				"6": "clamp(2rem, 1.16rem + 5.12vw, 2.5rem)"
+			"display": {
+				"1": "clamp(3.5rem, 2.95rem + 2.75vw, 5rem)",
+				"2": "clamp(3.25rem, 2.8rem + 2.3vw, 4.5rem)",
+				"3": "clamp(3rem, 2.65rem + 1.8vw, 4rem)",
+				"4": "clamp(2.75rem, 2.5rem + 1.35vw, 3.5rem)",
+				"5": "clamp(2.5rem, 2.3rem + 0.9vw, 3rem)",
+				"6": "clamp(2.25rem, 2rem + 0.5vw, 2.5rem)"
 			},
 			"mobileBreakpoint": "lg"
 		},
@@ -348,22 +348,22 @@
 		"elements": {
 			"h1": {
 				"typography": {
-					"fontSize": "clamp(2.5rem, 1.16rem + 5.12vw, 3.5rem)"
+					"fontSize": "clamp(2.5rem, 2.25rem + 1.35vw, 3.25rem)"
 				}
 			},
 			"h2": {
 				"typography": {
-					"fontSize": "clamp(2rem, 1.16rem + 5.12vw, 2.5rem)"
+					"fontSize": "clamp(2rem, 1.815rem + .9vw, 2.5rem)"
 				}
 			},
 			"h3": {
 				"typography": {
-					"fontSize": "clamp(1.5rem, 1.16rem + 5.12vw, 1.875rem)"
+					"fontSize": "clamp(1.75rem, 1.65rem + .45vw, 2rem)"
 				}
 			},
 			"h4": {
 				"typography": {
-					"fontSize": "clamp(1.275rem, 1.16rem + 5.12vw, 1.5rem)"
+					"fontSize": "clamp(1.5rem, 1.20rem + .4vw, 1.5rem)"
 				}
 			},
 			"h5": {

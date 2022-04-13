@@ -16,17 +16,17 @@ return [
 	</div>
 	</div>
 	<!-- /wp:cover -->
-	<!-- wp:group {"align":"full","className":"py-5","layout":{"inherit":true}} -->
+	<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":{"top":"3rem","left":"3rem"}}},"className":"py-5","layout":{"inherit":true}} -->
 	<div class="wp-block-group alignfull py-5" id="list">
 	<!-- wp:columns {"className":""} -->
 	<div class="wp-block-columns">
 	<!-- wp:column {"className":""} -->
 	<div class="wp-block-column">
-	<!-- wp:paragraph {"className":"mb-5"} -->
-	<p class="mb-5">In addition to all goodies coming with Gutenberg editor and Full Site Editing feature in WP 5.9 WeCodeArt Framework comes with extra improvements:</p>
+	<!-- wp:paragraph {"align":"center","className":"fw-300 mb-5","fontSize":"large"} -->
+	<p class="has-text-align-center fw-300 mb-5 has-large-font-size">In addition to all goodies coming with Gutenberg editor and Full Site Editing feature in WP 5.9 WeCodeArt Framework comes with extra improvements.</p>
 	<!-- /wp:paragraph -->
-	<!-- wp:heading {"textColor":"primary","className":"h1"} -->
-	<h2 class="h1 has-primary-color has-text-color" id="performance">Performance-Focused</h2>
+	<!-- wp:heading {"textAlign":"center","textColor":"primary","className":"display-2"} -->
+	<h2 class="has-text-align-center display-2 has-primary-color has-text-color" id="performance">Performance-Focused</h2>
 	<!-- /wp:heading --></div>
 	<!-- /wp:column --></div>
 	<!-- /wp:columns -->
@@ -77,11 +77,14 @@ return [
 	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
-	<!-- wp:group {"align":"full","backgroundColor":"light","className":"py-5","layout":{"inherit":true}} -->
-	<div class="wp-block-group alignfull py-5 has-light-background-color has-background"><!-- wp:columns {"className":""} -->
-	<div class="wp-block-columns"><!-- wp:column {"className":""} -->
-	<div class="wp-block-column"><!-- wp:heading {"textColor":"primary","className":"h1"} -->
-	<h2 class="h1 has-primary-color has-text-color" id="performance">Gutenberg Improvements</h2>
+	<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":{"top":"3rem","left":"3rem"}}},"backgroundColor":"light","className":"py-5","layout":{"inherit":true}} -->
+	<div class="wp-block-group alignfull py-5 has-light-background-color has-background">
+	<!-- wp:columns {"className":""} -->
+	<div class="wp-block-columns">
+	<!-- wp:column {"className":""} -->
+	<div class="wp-block-column">
+	<!-- wp:heading {"textAlign":"center","textColor":"primary","className":"display-2"} -->
+	<h2 class="has-text-align-center display-2 has-primary-color has-text-color" id="performance">Gutenberg Improvements</h2>
 	<!-- /wp:heading -->
 	</div>
 	<!-- /wp:column -->

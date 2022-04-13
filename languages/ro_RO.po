@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-04-07 23:51+0000\n"
+"PO-Revision-Date: 2022-04-12 21:24+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -16,12 +16,12 @@ msgstr ""
 "X-Loco-Version: 2.5.5; wp-5.8.1\n"
 "X-Domain: wecodeart"
 
-#: views/meta/comments.tpl.php:60
+#: views/meta/comments.tpl.php:61
 #, php-format
 msgid " on %s"
 msgstr "la %s"
 
-#: views/meta/comments.tpl.php:52
+#: views/meta/comments.tpl.php:53
 msgid "% Comments"
 msgstr "% Comentarii"
 
@@ -30,7 +30,7 @@ msgstr "% Comentarii"
 msgid "%s Archives"
 msgstr "%s Arhivă"
 
-#: views/meta/author.tpl.php:43
+#: views/meta/author.tpl.php:39
 #, php-format
 msgid "%s`s avatar"
 msgstr "Avatarul lui %s"
@@ -39,7 +39,7 @@ msgstr "Avatarul lui %s"
 msgid "(no title)"
 msgstr "(fără titlu)"
 
-#: views/meta/comments.tpl.php:51
+#: views/meta/comments.tpl.php:52
 msgid "1 Comment"
 msgstr "1 Comentariu"
 
@@ -131,7 +131,7 @@ msgstr "Arhivă Categorie: %s"
 msgid "Comment *"
 msgstr "Comentariu"
 
-#: views/meta/comments.tpl.php:54
+#: views/meta/comments.tpl.php:55
 msgid "Comments are Closed"
 msgstr "Comentariile sunt inchise"
 
@@ -205,24 +205,17 @@ msgstr "https://www.wecodeart.com/"
 msgid "https://www.wecodeart.com/about/"
 msgstr "https://www.wecodeart.com/about/"
 
-#: views/admin/notification-locale.tpl.php:29
-msgid ""
-"I would really appreciate that and it will also help you and your clients. "
-msgstr ""
-"Aș aprecia foarte mult acest lucru și vă va ajuta, de asemenea, pe "
-"dumneavoastră și pe clienții dumneavoastră."
-
 #: inc/support/markup/class-markup.php:250
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr "Wrapper HTML nevalid pentru „%s”."
 
-#: views/admin/notification-locale.tpl.php:25
+#: views/admin/notification-locale.tpl.php:22
 #, php-format
 msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr "Se pare că WeCodeArt Framework nu este tradusă în %s."
 
-#: views/meta/comments.tpl.php:50
+#: views/meta/comments.tpl.php:51
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
@@ -230,7 +223,7 @@ msgstr "Lasă un comentariu"
 msgid "Link"
 msgstr "Legătură"
 
-#: inc/gutenberg/blocks/site/class-login.php:119
+#: inc/gutenberg/blocks/site/class-login.php:118
 msgid "Log In"
 msgstr "Autentificare"
 
@@ -260,7 +253,7 @@ msgstr "Nu există arhive de afișat."
 msgid "No comments"
 msgstr "Fără comentarii"
 
-#: views/admin/notification-locale.tpl.php:40
+#: views/admin/notification-locale.tpl.php:36
 msgid "No, I don`t care."
 msgstr "Nu, nu-mi pasă."
 
@@ -280,7 +273,7 @@ msgstr "Contur"
 msgid "Pagination"
 msgstr "Paginare"
 
-#: inc/gutenberg/blocks/site/class-login.php:117
+#: inc/gutenberg/blocks/site/class-login.php:116
 msgid "Password"
 msgstr "Parolă"
 
@@ -301,20 +294,20 @@ msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
 
-#: views/meta/date.tpl.php:69
+#: views/meta/date.tpl.php:65
 #, php-format
 msgid "Post updated on %s."
 msgstr "Postare actualizată la %s."
 
-#: views/meta/terms.tpl.php:56
+#: views/meta/terms.tpl.php:52
 msgid "Posted in"
 msgstr "Postat in"
 
-#: views/meta/date.tpl.php:50
+#: views/meta/date.tpl.php:46
 msgid "Posted on "
 msgstr "Postat pe"
 
-#: inc/gutenberg/blocks/site/class-login.php:118
+#: inc/gutenberg/blocks/site/class-login.php:117
 msgid "Remember Me"
 msgstr "Ține-mă minte"
 
@@ -364,7 +357,7 @@ msgstr "Selectați Săptămâna"
 msgid "Select Year"
 msgstr "Selectați Anul"
 
-#: inc/gutenberg/class-gutenberg.php:248
+#: inc/gutenberg/class-gutenberg.php:251
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
@@ -376,10 +369,6 @@ msgstr "Vorbesc din mintea ta"
 #, php-format
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
-
-#: views/admin/notification-locale.tpl.php:22
-msgid "Thank you for using our theme!"
-msgstr "Vă mulțumim că folosiți tema noastră!"
 
 #: inc/init.php:282
 msgid "The file must be of type CSS/JS."
@@ -436,7 +425,7 @@ msgstr "Deblochează"
 msgid "upgrade PHP"
 msgstr "actualizați PHP"
 
-#: inc/gutenberg/blocks/site/class-login.php:116
+#: inc/gutenberg/blocks/site/class-login.php:115
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
@@ -485,9 +474,15 @@ msgstr ""
 "Când adăugați o pictogramă SVG cu %s, trebuie să definiți cheile `viewBox` "
 "și `paths`."
 
-#: views/admin/notification-locale.tpl.php:27
-msgid "Would you like to contribute by suggesting some translations? "
-msgstr "Doriți să contribuiți, sugerând câteva traduceri?"
+#: views/admin/notification-locale.tpl.php:25
+msgid ""
+"Would you like to contribute by suggesting some translations? To show how "
+"much I appreciate that I will put your name on an upcoming \"Credits and "
+"Contributors\" special page. It will help both you and your clients. "
+msgstr ""
+"Dorești să contribui, sugerând câteva traduceri? Pentru a arăta cât de mult "
+"apreciez că vă voi pune numele pe o viitoare pagină specială „Credite și "
+"colaboratori”. Te va ajuta atât pe tine, cât și pe clienții tăi."
 
 #: inc/gutenberg/blocks/query/class-title.php:146
 msgctxt "yearly archives date format"
@@ -499,7 +494,7 @@ msgstr "Y"
 msgid "Yearly Archives: %s"
 msgstr "Arhive Anuale"
 
-#: views/admin/notification-locale.tpl.php:36
+#: views/admin/notification-locale.tpl.php:32
 msgid "Yes, I would love to!"
 msgstr "Da, mi-ar plăcea!"
 

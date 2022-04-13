@@ -1,36 +1,28 @@
 <!-- wp:template-part {"slug":"header","tagName":"header","className":"site-header wp-site-header sticky-top","layout":{"inherit":true}} /-->
-<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"5rem","bottom":"5rem"}}}} -->
-<main class="wp-block-group" style="padding-top:5rem;padding-bottom:5rem">
-    <!-- wp:columns {"className":"flex-column"} -->
-    <div class="wp-block-columns flex-column">
-        <!-- wp:column {"className":"col-sm-8 col-lg-6 col-xl-5 mx-auto has-text-align-center"} -->
-        <div class="wp-block-column col-sm-8 col-lg-6 col-xl-5 mx-auto has-text-align-center">
-            <!-- wp:heading {"textAlign":"center","className":"display-1 fw-700"} -->
-            <h2 class="has-text-align-center display-1 fw-700" id="404">404</h2>
-            <!-- /wp:heading -->
-            <!-- wp:heading {"level":1,"className":"display-6","textColor":"primary"} -->
-            <h1 class="has-text-color has-primary-color display-6">Oops! That page can't be found.</h1>
-            <!-- /wp:heading -->
-            <!-- wp:paragraph -->
-            <p>It looks like nothing was found at this location. Maybe try a search?</p>
-            <!-- /wp:paragraph -->
-            <!-- wp:search {"showLabel":false,"placeholder":"What are you looking for?","buttonUseIcon":true,"style":{"border":{"radius":"100px"}},"borderColor":"primary","backgroundColor":"primary","textColor":"white"} /-->
-            <!-- wp:paragraph {"align":"center"} -->
-            <p class="has-text-align-center"><strong>or</strong></p>
-            <!-- /wp:paragraph -->
-            <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
-            <div class="wp-block-buttons">
-                <!-- wp:button {"backgroundColor":"primary","textColor":"white"} -->
-                <div class="wp-block-button">
-                    <a class="wp-block-button__link has-white-color has-primary-background-color has-text-color has-background" href="/">Return to home</a>
-                </div>
-                <!-- /wp:button -->
-            </div>
-            <!-- /wp:buttons -->
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"5rem","bottom":"5rem"},"blockGap":{"top":"2rem","left":"2rem"}}},"className":"has-text-align-center","layout":{"contentSize":"580px"}} -->
+<main class="wp-block-group has-text-align-center" style="padding-top:5rem;padding-bottom:5rem">
+    <!-- wp:heading {"className":"display-1 fw-700"} -->
+    <h2 class="display-1 fw-700" id="404">404</h2>
+    <!-- /wp:heading -->
+    <!-- wp:heading {"level":1,"textColor":"primary","className":"display-6"} -->
+    <h1 class="display-6 has-primary-color has-text-color">Oops! That page can't be found.</h1>
+    <!-- /wp:heading -->
+    <!-- wp:paragraph -->
+    <p>It looks like nothing was found at this location. Maybe try a search?</p>
+    <!-- /wp:paragraph -->
+    <!-- wp:search {"showLabel":false,"placeholder":"What are you looking for?","buttonUseIcon":true,"backgroundColor":"primary","textColor":"white"} /-->
+    <!-- wp:paragraph {"align":"center"} -->
+    <p class="has-text-align-center"><strong>or</strong></p>
+    <!-- /wp:paragraph -->
+    <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+    <div class="wp-block-buttons">
+        <!-- wp:button {"backgroundColor":"primary","textColor":"white"} -->
+        <div class="wp-block-button">
+            <a class="wp-block-button__link has-white-color has-primary-background-color has-text-color has-background" href="/">Return to home</a>
         </div>
-        <!-- /wp:column -->
+        <!-- /wp:button -->
     </div>
-    <!-- /wp:columns -->
+    <!-- /wp:buttons -->
 </main>
 <!-- /wp:group -->
 <!-- wp:template-part {"slug":"footer","tagName":"footer","className":"site-footer wp-site-footer","layout":{"inherit":true}} /-->

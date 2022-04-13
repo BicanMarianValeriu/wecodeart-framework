@@ -200,9 +200,10 @@ foreach( [
         'class'		=> 'has-text-align',
         'responsive'=> true,
         'values'	=> [
-            'left'  => 'left',
-            'center'=> 'center',
-            'right' => 'right',
+            'left'      => 'left',
+            'center'    => 'center',
+            'justify'   => 'justify',
+            'right'     => 'right',
         ],
     ],
     [
