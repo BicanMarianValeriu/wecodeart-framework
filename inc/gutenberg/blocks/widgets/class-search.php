@@ -17,7 +17,6 @@ namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -95,7 +94,7 @@ class Search extends Dynamic {
 		}
 
 		// Queue block for assets.
-		Blocks::get_instance()->load( [ 'core/buttons', 'core/button' ] );
+		wecodeart( 'blocks' )->load( [ 'core/buttons', 'core/button' ] );
 
 		$content = wecodeart( 'markup' )::wrap( 'wp-block-search', [
 			[

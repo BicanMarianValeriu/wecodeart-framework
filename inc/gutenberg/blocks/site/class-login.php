@@ -17,7 +17,6 @@ namespace WeCodeArt\Gutenberg\Blocks\Site;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -88,7 +87,7 @@ class Login extends Dynamic {
 		}
 
 		// Queue block for assets.
-		Blocks::get_instance()->load( [ 'core/buttons', 'core/button' ] );
+		wecodeart( 'blocks' )->load( [ 'core/buttons', 'core/button' ] );
 
 		return wecodeart( 'markup' )::wrap( 'wp-block-login', [
 			[

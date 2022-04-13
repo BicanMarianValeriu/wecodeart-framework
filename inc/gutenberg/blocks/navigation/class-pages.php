@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.3.7
- * @version		5.5.1
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -17,7 +17,6 @@ namespace WeCodeArt\Gutenberg\Blocks\Navigation;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -101,7 +100,7 @@ class Pages extends Dynamic {
 		$inner_blocks = new \WP_Block_List( $inner_blocks, $attributes );
 
 		// Assets - we need navigation css/js for dropdowns and styleing.
-		Blocks::get_instance()->load( [ 'core/navigation' ] );
+		wecodeart( 'blocks' )->load( [ 'core/navigation' ] );
 
 		// Render links.
 		foreach( $inner_blocks as $inner_block ) $content .= $inner_block->render();

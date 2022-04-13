@@ -17,7 +17,6 @@ namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -59,7 +58,7 @@ class Calendar extends Dynamic {
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
 		// Queue block for assets.
-		Blocks::get_instance()->load( [ 'core/table' ] );
+		wecodeart( 'blocks' )->load( [ 'core/table' ] );
 
 		// Remove ID
 		$content = preg_replace( '/(<[^>]+) id=".*?"/i', '$1', $content, 1 );

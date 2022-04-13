@@ -17,7 +17,6 @@ namespace WeCodeArt\Gutenberg\Blocks\Media;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Blocks;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -107,7 +106,7 @@ class File extends Dynamic {
 		}
 
 		// Queue block for assets.
-		Blocks::get_instance()->load( [ 'core/buttons', 'core/button' ] );
+		wecodeart( 'blocks' )->load( [ 'core/buttons', 'core/button' ] );
 
 		return $this->save_html( $doc->saveHTML() );
 	}

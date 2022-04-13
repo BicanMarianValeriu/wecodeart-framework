@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.9.5
- * @version		5.4.5
+ * @version		5.5.5
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -54,6 +54,17 @@ wecodeart()->bind( 'conditionals', function () {
  */
 wecodeart()->bind( 'integrations', function () {
     return WeCodeArt\Support::get_instance();
+} );
+
+/**
+ * Bind Gutenberg Blocks.
+ *
+ * @since   5.5.5
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'blocks', function () {
+    return WeCodeArt\Gutenberg\Blocks::get_instance();
 } );
 
 /**
