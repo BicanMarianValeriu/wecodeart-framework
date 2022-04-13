@@ -35,6 +35,7 @@ v5.5.5
 - Added - Default patterns as PHP files for Gutenberg 12.9.0 / Maintain HTML registration as well for backwards compat
 - Added - Translation request notification
 - Added - Template for post-author-name
+- Added - wecodeart( 'blocks' ) binding for WeCodeArt\Gutenberg\Blocks;
 
 v5.5.3/4
 - Updated - Certain blocks logic to make use of custom palette colors along with default ones - previously was overwriting them
