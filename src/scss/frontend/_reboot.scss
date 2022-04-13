@@ -307,6 +307,10 @@ img {
     backface-visibility: hidden;
 }
 
+svg {
+	fill: currentColor;
+}
+
 // Tables
 //
 // Prevent double borders

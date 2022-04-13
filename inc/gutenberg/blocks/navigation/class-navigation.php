@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.3
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -434,7 +434,7 @@ class Navigation extends Dynamic {
 		$breakpoint	= get_prop( $breaks, $filter, '992px' );
 
 		return "
-		:is(.site-header,.site-footer) .wp-block-navigation {
+		:is(.wp-site-header,.wp-site-footer) .wp-block-navigation {
 			padding-top: 0;
 			padding-bottom: 0;
 		}

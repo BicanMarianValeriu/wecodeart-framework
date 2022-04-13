@@ -58,25 +58,6 @@
             @include transition($transition-collapse-width);
         }
     }
-
-    // SVG
-    svg {
-		display: inline-block;
-		vertical-align: -0.125em;
-		fill: currentColor;
-		height: 1em;
-	}
-
-    svg,
-    .svg-inline {
-        .fa-secondary {
-            opacity: .4;
-        }
-
-        &.fa-fw {
-            width: 1em;
-        }
-    }
 }
 
 // Text
@@ -126,6 +107,20 @@
 	&:not(:last-child) {
 		margin-right: 1rem;
 	}
+}
+
+.svg-inline {
+    display: inline-block;
+    vertical-align: -0.125em;
+    height: 1em;
+
+    .fa-secondary {
+        opacity: .4;
+    }
+
+    &.fa-fw {
+        width: 1em;
+    }
 }
 
 .small {

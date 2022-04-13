@@ -247,6 +247,10 @@ img {
           backface-visibility: hidden;
 }
 
+svg {
+  fill: currentColor;
+}
+
 table {
   caption-side: bottom;
   border-collapse: collapse;
@@ -1047,20 +1051,6 @@ progress {
     transition: none;
   }
 }
-.theme-wecodeart svg {
-  display: inline-block;
-  vertical-align: -0.125em;
-  fill: currentColor;
-  height: 1em;
-}
-.theme-wecodeart svg .fa-secondary,
-.theme-wecodeart .svg-inline .fa-secondary {
-  opacity: 0.4;
-}
-.theme-wecodeart svg.fa-fw,
-.theme-wecodeart .svg-inline.fa-fw {
-  width: 1em;
-}
 
 .has-text-align-left {
   text-align: left;
@@ -1139,6 +1129,18 @@ progress {
 }
 .list-inline-item:not(:last-child) {
   margin-right: 1rem;
+}
+
+.svg-inline {
+  display: inline-block;
+  vertical-align: -0.125em;
+  height: 1em;
+}
+.svg-inline .fa-secondary {
+  opacity: 0.4;
+}
+.svg-inline.fa-fw {
+  width: 1em;
 }
 
 .initialism {
