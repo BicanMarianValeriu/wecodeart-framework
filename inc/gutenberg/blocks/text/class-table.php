@@ -128,7 +128,7 @@ class Table extends Dynamic {
 			width: 100%;
 			margin-bottom: 1rem;
 			vertical-align: middle;
-			border-color: var(--wp--light);
+			border-color: var(--wp--preset--color--light);
 		}
 		table > thead {
 			vertical-align: inherit;

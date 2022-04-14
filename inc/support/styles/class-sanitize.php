@@ -66,7 +66,7 @@ final class Sanitize {
 	/**
 	 * Sanitize color.
 	 *
-	 * @param 	string $value recieved value.
+	 * @param 	string $value Color value.
 	 *
 	 * @return 	string
 	 */

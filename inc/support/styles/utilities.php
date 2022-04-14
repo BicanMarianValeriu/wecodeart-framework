@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.4.9
+ * @version		5.5.5
  */
 
 // Theme Shadows
@@ -41,7 +41,11 @@ foreach( [
             'top'       => 'top',
             'middle'    => 'middle',
             'bottom'    => 'bottom',
-            'baseline'  => 'baseline'
+            'baseline'  => 'baseline',
+            'sub'       => 'sub',
+            'super'     => 'super',
+            'text-top'      => 'text-top',
+            'text-bottom'   => 'text-bottom',
         ],
     ],
     // Border
@@ -97,7 +101,6 @@ foreach( [
             5 => '5px',
         ],
     ],
-    // Rounded
     [
         'property'  => 'border-radius',
         'class'		=> 'rounded',
@@ -221,7 +224,7 @@ foreach( [
             'break' => 'break-word',
         ],
     ],
-    // Flex
+    // Flex / Grid
     [
         'property'  => 'flex',
         'class'		=> 'flex',
@@ -286,16 +289,6 @@ foreach( [
             'between'   => 'space-between',
             'around'    => 'space-around',
             'evenly'    => 'space-evenly',
-        ],
-    ],
-    [
-        'property'  => 'align-items',
-        'responsive'=> true,
-        'values'	=> [
-            'start'     => 'flex-start',
-            'end'       => 'flex-end',
-            'center'    => 'center',
-            'baseline'  => 'baseline',
             'stretch'   => 'stretch',
         ],
     ],
@@ -321,6 +314,7 @@ foreach( [
             'center'    => 'center',
             'between'   => 'space-between',
             'around'    => 'space-around',
+            'evenly'    => 'space-evenly',
             'stretch'   => 'stretch',
         ],
     ],
@@ -334,6 +328,42 @@ foreach( [
             'end'       => 'flex-end',
             'center'    => 'center',
             'baseline'  => 'baseline',
+            'stretch'   => 'stretch',
+        ],
+    ],
+    [
+        'property'  => 'place-items',
+        'class'     => 'place-items',
+        'responsive'=> true,
+        'values'	=> [
+            'start'     => 'start',
+            'center'    => 'center',
+            'end'       => 'end',
+            'stretch'   => 'stretch',
+        ],
+    ],
+    [
+        'property'  => 'place-content',
+        'class'     => 'place-content',
+        'responsive'=> true,
+        'values'	=> [
+            'start'     => 'start',
+            'center'    => 'center',
+            'end'       => 'end',
+            'between'   => 'space-between',
+            'around'    => 'space-around',
+            'evenly'    => 'space-evenly',
+            'stretch'   => 'stretch',
+        ],
+    ],
+    [
+        'property'  => 'place-self',
+        'class'     => 'place-self',
+        'responsive'=> true,
+        'values'	=> [
+            'start'     => 'start',
+            'center'    => 'center',
+            'end'       => 'end',
             'stretch'   => 'stretch',
         ],
     ],
@@ -426,7 +456,7 @@ foreach( [
     // Opacity
     [
         'property'  => 'opacity',
-        'class'		=> 'opacity',
+        'class'     => 'opacity',
         'values'	=> [
             0   => 0,
             25  => '.25',
@@ -460,7 +490,7 @@ foreach( [
     // Overflow
     [
         'property'  => 'overflow',
-        'class'		=> 'overflow',
+        'class'     => 'overflow',
         'values'	=> [
             'auto'      => 'auto',
             'hidden'    => 'hidden',
