@@ -1,3 +1,6 @@
+v5.5.6
+- Fixed - core/image restore align classes display table CSS rule
+
 v5.5.5
 - Removed - ArrayAccess implementation where it was not necessary (prepare for PHP 8)
 - Removed - .lead classes (unnecessary with fw-100/200/300 and guttenberg classes)
