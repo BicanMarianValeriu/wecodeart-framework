@@ -40,10 +40,9 @@ return [
 	<!-- wp:column {"className":"p-3 mt-md-5 shadow-sm rounded"} -->
 	<div class="wp-block-column p-3 mt-md-5 shadow-sm rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large"} -->
-	<div class="wp-block-image">
-	<figure class="aligncenter size-large is-resized">
+	<figure class="wp-block-image aligncenter size-large is-resized">
 	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/calculator.svg" alt="" width="65" height="65"/>
-	</figure></div>
+	</figure>
 	<!-- /wp:image -->
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3} -->
 	<h3 class="has-text-align-center has-primary-color has-text-color">Is FREE! Forever</h3>
@@ -56,11 +55,9 @@ return [
 	<!-- wp:column {"className":"p-3 mb-md-5 shadow rounded"} -->
 	<div class="wp-block-column p-3 mb-md-5 shadow rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large"} -->
-	<div class="wp-block-image">
-	<figure class="aligncenter size-large is-resized">
+	<figure class="wp-block-image aligncenter size-large is-resized">
 	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/clock.svg" alt="" width="65" height="65"/>
 	</figure>
-	</div>
 	<!-- /wp:image -->
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3} -->
 	<h3 class="has-text-align-center has-primary-color has-text-color">Unparalleled speed</h3>
@@ -73,11 +70,9 @@ return [
 	<!-- wp:column {"className":"p-3 mt-md-5 shadow-sm rounded"} -->
 	<div class="wp-block-column p-3 mt-md-5 shadow-sm rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large"} -->
-	<div class="wp-block-image">
-	<figure class="aligncenter size-large is-resized">
+	<figure class="wp-block-image aligncenter size-large is-resized">
 	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/delivery.svg" alt="" width="65" height="65"/>
 	</figure>
-	</div>
 	<!-- /wp:image -->
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3} -->
 	<h3 class="has-text-align-center has-primary-color has-text-color">Fast work turnaround</h3>

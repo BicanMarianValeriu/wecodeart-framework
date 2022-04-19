@@ -1,3 +1,6 @@
+v5.5.7
+- Update - Homepage starter content adjust core/image markup to latest Gutenberg version
+
 v5.5.6
 - Fixed - core/image restore align classes display table CSS rule
 

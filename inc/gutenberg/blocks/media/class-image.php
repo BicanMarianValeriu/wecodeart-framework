@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.6
+ * @version		5.5.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -54,9 +54,6 @@ class Image extends Dynamic {
 		return '
 		.wp-block-image.aligncenter {
 			text-align: center;
-		}
-		.wp-block-image:where(.alignfull,.aligncenter,.alignwide,.is-resized) {
-			display: table;
 		}
 		.wp-block-image:where(.alignfull,.alignwide) img {
 			width: 100%;
