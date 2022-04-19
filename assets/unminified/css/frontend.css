@@ -965,89 +965,89 @@ progress {
   }
 }
 
-.theme-wecodeart .alignnone {
+:where(.theme-wecodeart) .alignnone {
   margin: 0 0 var(--wp--custom--spacers--3) 0;
 }
-.theme-wecodeart .aligncenter {
+:where(.theme-wecodeart) .aligncenter {
   display: block;
   margin: 0 auto var(--wp--custom--spacers--3);
 }
-.theme-wecodeart .alignright {
+:where(.theme-wecodeart) .alignright {
   float: right;
   margin: 0 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3);
 }
-.theme-wecodeart .alignleft {
+:where(.theme-wecodeart) .alignleft {
   float: left;
   margin: 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3) 0;
 }
-.theme-wecodeart .has-background-dim {
+:where(.theme-wecodeart) .has-background-dim {
   opacity: 0.5;
   z-index: 1;
 }
-.theme-wecodeart .has-background-dim-0 {
+:where(.theme-wecodeart) .has-background-dim-0 {
   opacity: 0;
 }
-.theme-wecodeart .has-background-dim-10 {
+:where(.theme-wecodeart) .has-background-dim-10 {
   opacity: 0.1;
 }
-.theme-wecodeart .has-background-dim-20 {
+:where(.theme-wecodeart) .has-background-dim-20 {
   opacity: 0.2;
 }
-.theme-wecodeart .has-background-dim-30 {
+:where(.theme-wecodeart) .has-background-dim-30 {
   opacity: 0.3;
 }
-.theme-wecodeart .has-background-dim-40 {
+:where(.theme-wecodeart) .has-background-dim-40 {
   opacity: 0.4;
 }
-.theme-wecodeart .has-background-dim-50 {
+:where(.theme-wecodeart) .has-background-dim-50 {
   opacity: 0.5;
 }
-.theme-wecodeart .has-background-dim-60 {
+:where(.theme-wecodeart) .has-background-dim-60 {
   opacity: 0.6;
 }
-.theme-wecodeart .has-background-dim-70 {
+:where(.theme-wecodeart) .has-background-dim-70 {
   opacity: 0.7;
 }
-.theme-wecodeart .has-background-dim-80 {
+:where(.theme-wecodeart) .has-background-dim-80 {
   opacity: 0.8;
 }
-.theme-wecodeart .has-background-dim-90 {
+:where(.theme-wecodeart) .has-background-dim-90 {
   opacity: 0.9;
 }
-.theme-wecodeart .has-background-dim-100 {
+:where(.theme-wecodeart) .has-background-dim-100 {
   opacity: 1;
 }
-.theme-wecodeart .fade {
+:where(.theme-wecodeart) .fade {
   transition: opacity 0.15s linear;
 }
 @media (prefers-reduced-motion: reduce) {
-  .theme-wecodeart .fade {
+  :where(.theme-wecodeart) .fade {
     transition: none;
   }
 }
-.theme-wecodeart .fade:not(.show) {
+:where(.theme-wecodeart) .fade:not(.show) {
   opacity: 0;
 }
-.theme-wecodeart .collapse:not(.show) {
+:where(.theme-wecodeart) .collapse:not(.show) {
   display: none;
 }
-.theme-wecodeart .collapsing {
+:where(.theme-wecodeart) .collapsing {
   height: 0;
   overflow: hidden;
   transition: height 0.35s ease;
 }
 @media (prefers-reduced-motion: reduce) {
-  .theme-wecodeart .collapsing {
+  :where(.theme-wecodeart) .collapsing {
     transition: none;
   }
 }
-.theme-wecodeart .collapsing.collapse-horizontal {
+:where(.theme-wecodeart) .collapsing.collapse-horizontal {
   width: 0;
   height: auto;
   transition: width 0.35s ease;
 }
 @media (prefers-reduced-motion: reduce) {
-  .theme-wecodeart .collapsing.collapse-horizontal {
+  :where(.theme-wecodeart) .collapsing.collapse-horizontal {
     transition: none;
   }
 }

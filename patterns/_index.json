@@ -7,7 +7,8 @@
             "core/query"
         ],
         "categories": [
-            "wecodeart", "query"
+            "wecodeart",
+            "query"
         ]
     },
     {
@@ -18,13 +19,25 @@
             "core/query"
         ],
         "categories": [
-            "wecodeart", "query"
+            "wecodeart",
+            "query"
         ]
     },
     {
         "slug": "entry-meta",
         "title": "Entry Meta",
         "description": "WeCodeArt Framework entry meta.",
+        "categories": [
+            "wecodeart"
+        ]
+    },
+    {
+        "slug": "section",
+        "title": "Section",
+        "description": "A simple section with two columns.",
+        "blockTypes": [
+            "core/post-content"
+        ],
         "categories": [
             "wecodeart"
         ]

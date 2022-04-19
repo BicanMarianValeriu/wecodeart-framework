@@ -155,8 +155,9 @@ return [
 	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}},"className":"flex-column flex-md-row"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
 	<!-- wp:column {"className":""} -->
-	<div class="wp-block-column"><!-- wp:heading {"level":3} -->
-	<h3 id="super-efficient">Super Efficient</h3>
+	<div class="wp-block-column">
+	<!-- wp:heading {"level":3"textColor":"white"} -->
+	<h3 class="has-color has-white-color" id="super-efficient">Super Efficient</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
@@ -165,8 +166,8 @@ return [
 	<!-- /wp:column -->
 	<!-- wp:column -->
 	<div class="wp-block-column">
-	<!-- wp:heading {"level":3} -->
-	<h3 id="deeply-commited">Deeply Commited</h3>
+	<!-- wp:heading {"level":3"textColor":"white"} -->
+	<h3 class="has-color has-white-color" id="deeply-commited">Deeply Committed</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
@@ -175,8 +176,8 @@ return [
 	<!-- /wp:column -->
 	<!-- wp:column -->
 	<div class="wp-block-column">
-	<!-- wp:heading {"level":3} -->
-	<h3 id="highly-skilled">Highly Skilled</h3>
+	<!-- wp:heading {"level":3,"textColor":"white"} -->
+	<h3 class="has-color has-white-color" id="highly-skilled">Highly Skilled</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>

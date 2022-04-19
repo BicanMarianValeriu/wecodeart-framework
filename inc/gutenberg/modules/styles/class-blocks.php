@@ -136,10 +136,10 @@ class Blocks extends Processor {
 				// Block Gap
 				if ( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ] ) ) {
 					if ( is_array( $gap ) ) {
-						$gap_x	= get_prop( $gap, [ 'top' ] );
+						$gap	= get_prop( $gap, [ 'top' ] );
 					}
 
-					$gap = $gap_x ? $gap_x : 'var( --wp--style--block-gap )';
+					$gap = $gap ?: 'var( --wp--style--block-gap )';
 
 					$this->output[] = wp_parse_args( [
 						'element'	=> implode( '>', [ $this->element, '*' ] ),

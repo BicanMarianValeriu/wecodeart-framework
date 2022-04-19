@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -33,10 +33,46 @@ class Column extends Base {
 		$output 			= [];
 		$output['element'] 	= $this->element;
 		
+		// Custom Width
 		if ( $value = get_prop( $this->attrs, 'width' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'flex',
 				'value'	  	=> sprintf( '0 0 %s', $value ),
+			], $output );
+		}
+
+		// Block Gap
+		if ( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ] ) ) {
+			if ( is_array( $gap ) ) {
+				$gap	= get_prop( $gap, [ 'top' ] );
+			}
+
+			$gap = $gap ? $gap : 'var( --wp--style--block-gap )';
+
+			$this->output[] = wp_parse_args( [
+				'property'	=> 'gap',
+				'value'		=> null,
+			], $output );
+
+			$this->output[] = wp_parse_args( [
+				'element'	=> implode( '>', [ $this->element, '*' ] ),
+				'property'	=> 'margin-block-start',
+				'value'		=> 0,
+			], $output );
+			$this->output[] = wp_parse_args( [
+				'element'	=> implode( '>', [ $this->element, '*' ] ),
+				'property'	=> 'margin-block-end',
+				'value'		=> 0,
+			], $output );
+			$this->output[] = wp_parse_args( [
+				'element'	=> implode( '>', [ $this->element, '*+*' ] ),
+				'property'	=> 'margin-block-start',
+				'value'		=> $gap,
+			], $output );
+			$this->output[] = wp_parse_args( [
+				'element'	=> implode( '>', [ $this->element, '*+*' ] ),
+				'property'	=> 'margin-block-end',
+				'value'		=> 0,
 			], $output );
 		}
 	}

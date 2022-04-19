@@ -76,6 +76,7 @@ class Pages extends Dynamic {
 	public function render( $attributes = [], $content = '', $block = null ) {
 		// All pages
 		$all_pages = get_pages( [
+			'post_status' => 'publish',
 			'sort_column' => 'menu_order,post_title',
 			'order'       => 'asc',
 		] );

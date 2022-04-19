@@ -814,7 +814,7 @@ __webpack_require__.r(__webpack_exports__);
           const missingBundles = [...bundleIds].filter(k => !Object.keys(this.lazyJs).includes(k));
 
           if (condMeet) {
-            if (missingBundles) {
+            if (missingBundles.length) {
               const message = `WeCodeArt JSM - Route "${route}" is missing the lazy bundle(s): ${missingBundles.join(', ')}. Please add them before using.`;
               console.log(message);
               return;

@@ -1,5 +1,5 @@
 // Frontend Only
-.theme-wecodeart {
+:where(.theme-wecodeart) {
     // Align
     .alignnone {
         margin: 0 0 var(--wp--custom--spacers--3) 0;
@@ -167,7 +167,7 @@
   
     &::before {
         display: block;
-        padding-top: var(--#{$variable-prefix}aspect-ratio);
+        padding-top: var(--wp--aspect-ratio);
         content: "";
     }
   
@@ -182,7 +182,7 @@
   
 @each $key, $ratio in $aspect-ratios {
     .ratio--#{$key} {
-        --#{$variable-prefix}aspect-ratio: #{$ratio};
+        --wp--aspect-ratio: #{$ratio};
     }
 }
 

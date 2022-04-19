@@ -87,7 +87,7 @@ class Logo extends Dynamic {
             display: block;
             margin: 0 auto;
         }
-		.wp-block-site-logo:is(.alignleft,.aligncenter,.alignright) {
+		.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) {
 			margin-bottom: 0;
 		}
 		.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) .navbar-brand {

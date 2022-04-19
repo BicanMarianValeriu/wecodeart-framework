@@ -3,6 +3,11 @@
 	"version": 2,
 	"styles": {
 		"blocks": {
+			"core/heading": {
+				"color": {
+					"text": "var:preset|color|white"
+				}
+			},
 			"core/code": {
 				"border": {
 					"width": "1px",

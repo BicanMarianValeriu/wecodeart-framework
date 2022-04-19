@@ -113,11 +113,11 @@ class Blocks implements Configuration {
 		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
 
         // Hooks
-        add_filter( 'should_load_separate_core_block_assets', '__return_false', 100 );
+        add_filter( 'should_load_separate_core_block_assets', '__return_false', PHP_INT_MAX );
         add_action( 'init',                     [ $this, 'register_blocks'  ], 10, 1 );
         add_filter( 'render_block',             [ $this, 'collect_blocks'   ], 10, 2 );
-        add_action( 'wp_enqueue_scripts',       [ $this, 'register_styles'  ], 10, 1 );  // or before global with 0 priority?
-        add_action( 'wp_print_styles',          [ $this, 'remove_styles'    ], 100 );
+        add_action( 'wp_enqueue_scripts',       [ $this, 'register_styles'  ], 0, 1 );  // or before global with 0 priority?
+        add_action( 'wp_print_styles',          [ $this, 'remove_styles'    ], PHP_INT_MAX );
 	}
 
     /**

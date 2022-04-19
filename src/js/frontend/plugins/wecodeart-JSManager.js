@@ -43,7 +43,7 @@ export default (function (wecodeart) {
 					const condMeet = typeof condition === 'function' ? condition() !== false : condition;
 					const missingBundles = [...bundleIds].filter(k => !Object.keys(this.lazyJs).includes(k));
 					if (condMeet) {
-						if (missingBundles) {
+						if (missingBundles.length) {
 							const message = `WeCodeArt JSM - Route "${route}" is missing the lazy bundle(s): ${missingBundles.join(', ')}. Please add them before using.`;
 							console.log(message);
 							return;

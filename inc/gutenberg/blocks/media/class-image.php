@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Image block.
@@ -53,19 +52,11 @@ class Image extends Dynamic {
 	 */
 	public static function styles() {
 		return '
-		.wp-block-image:where(.alignfull,.aligncenter,.alignwide,.is-resized) {
-			display: table;
-		}
 		.wp-block-image.aligncenter {
 			text-align: center;
 		}
 		.wp-block-image:where(.alignfull,.alignwide) img {
 			width: 100%;
-		}
-		.wp-block-image:where(.alignfull,.alignwide,.is-resized) figcaption {
-			display: table-caption;
-			caption-side: bottom;
-			text-align: inherit;
 		}
 		.wp-block-image.is-style-rounded {
 			border-radius: 9999px;

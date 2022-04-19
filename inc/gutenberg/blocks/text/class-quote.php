@@ -98,9 +98,9 @@ class Quote extends Dynamic {
 		}
 		.wp-block-quote .blockquote-footer {
 			margin-top: -1rem;
-			margin-bottom: 1rem;
 			text-align: left;
-			color: var(--wp--gray);
+			color: inherit;
+			opacity: .8;
 		}
 		.wp-block-quote .blockquote-footer::before {
 			content: "\2014\00A0";

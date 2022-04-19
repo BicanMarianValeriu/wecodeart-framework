@@ -6,6 +6,7 @@ v5.5.5
 - Updated - core/image aligncenter fix and style improvements
 - Updated - core/cover inner container padding removed (use columns block for adding gutters)
 - Updated - core/media-text CSS variable --wp--gutter-x to --wp--custom--gutter (set in theme.json)
+- Updated - core/column add blockGap CSS output support
 - Updated - Gutenberg Styles core_blocks() list to 5.9.2 (added new blocks)
 - Updated - WooCommerce updated block names exclude from theme Gutenberg Extensions
 - Updated - Implement Configuration where ArrayAccess was removed + code cleanup
