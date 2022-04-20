@@ -168,7 +168,8 @@ return [
 	</div>
 	<!-- /wp:column -->
 	<!-- wp:column {"className":"mb-3 mb-lg-0"} -->
-	<div class="wp-block-column mb-3 mb-lg-0"><!-- wp:image {"width":65,"height":65,"sizeSlug":"large"} -->
+	<div class="wp-block-column mb-3 mb-lg-0">
+	<!-- wp:image {"width":65,"height":65,"sizeSlug":"large"} -->
 	<figure class="wp-block-image size-large is-resized">
 	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="65" height="65"/>
 	</figure>
