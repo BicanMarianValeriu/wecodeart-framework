@@ -41,7 +41,7 @@ return [
 	<div class="wp-block-column p-3 mt-md-5 shadow-sm rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large"} -->
 	<figure class="wp-block-image aligncenter size-large is-resized">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/calculator.svg" alt="" width="65" height="65"/>
+	<img src="' . get_parent_theme_file_uri( 'assets/images/calculator.svg' ) . '" alt="" width="65" height="65"/>
 	</figure>
 	<!-- /wp:image -->
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3} -->
@@ -56,7 +56,7 @@ return [
 	<div class="wp-block-column p-3 mb-md-5 shadow rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large"} -->
 	<figure class="wp-block-image aligncenter size-large is-resized">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/clock.svg" alt="" width="65" height="65"/>
+	<img src="' . get_parent_theme_file_uri( 'assets/images/clock.svg' ) . '" alt="" width="65" height="65"/>
 	</figure>
 	<!-- /wp:image -->
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3} -->
@@ -71,7 +71,7 @@ return [
 	<div class="wp-block-column p-3 mt-md-5 shadow-sm rounded">
 	<!-- wp:image {"align":"center","width":65,"height":65,"sizeSlug":"large"} -->
 	<figure class="wp-block-image aligncenter size-large is-resized">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/delivery.svg" alt="" width="65" height="65"/>
+	<img src="' . get_parent_theme_file_uri( 'assets/images/delivery.svg' ) . '" alt="" width="65" height="65"/>
 	</figure>
 	<!-- /wp:image -->
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","level":3} -->
@@ -159,7 +159,7 @@ return [
 	<div class="wp-block-column mb-3 mb-lg-0">
 	<!-- wp:image {"width":65,"height":65,"sizeSlug":"large"} -->
 	<figure class="wp-block-image size-large is-resized">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="65" height="65"/>
+	<img src="' . get_parent_theme_file_uri( 'assets/images/user-circle.png' ) . '" alt="" width="65" height="65"/>
 	</figure>
 	<!-- /wp:image -->
 	<!-- wp:quote -->
@@ -171,7 +171,7 @@ return [
 	<div class="wp-block-column mb-3 mb-lg-0">
 	<!-- wp:image {"width":65,"height":65,"sizeSlug":"large"} -->
 	<figure class="wp-block-image size-large is-resized">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="65" height="65"/>
+	<img src="' . get_parent_theme_file_uri( 'assets/images/user-circle.png' ) . '" alt="" width="65" height="65"/>
 	</figure>
 	<!-- /wp:image -->
 	<!-- wp:quote -->
@@ -183,7 +183,7 @@ return [
 	<div class="wp-block-column mb-3 mb-lg-0">
 	<!-- wp:image {"width":65,"height":65,"sizeSlug":"large"} -->
 	<figure class="wp-block-image size-large is-resized">
-	<img src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/user-circle.png" alt="" width="65" height="65"/>
+	<img src="' . get_parent_theme_file_uri( 'assets/images/user-circle.png' ) . '" alt="" width="65" height="65"/>
 	</figure>
 	<!-- /wp:image -->
 	<!-- wp:quote -->
@@ -217,5 +217,5 @@ return [
 	<!-- /wp:buttons -->
 	</div>
 	</div>
-	<!-- /wp:cover -->,
+	<!-- /wp:cover -->',
 ];
