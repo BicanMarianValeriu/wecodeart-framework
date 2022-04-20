@@ -196,8 +196,8 @@ return [
 	<!-- /wp:group -->
 	
 	<!-- wp:cover {"minHeight":555,"minHeightUnit":"px","gradient":"primary-to-vivid-purple","isDark":false,"align":"full","className":"py-5"} -->
-	<div class="wp-block-cover alignfull is-light py-5 style="min-height:555px">
-	<span aria-hidden="true" class="has-background-dim-100 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
+	<div class="wp-block-cover alignfull is-light py-5" style="min-height:555px">
+	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","textColor":"white","className":"mb-5 display-3"} -->
 	<h2 class="has-text-align-center mb-5 display-3 has-white-color has-text-color" id="let-s-work-together-on-your-next-web-project">Let`s work together on your <br>next web project</h2>
@@ -205,9 +205,9 @@ return [
 	<!-- wp:paragraph {"align":"center","textColor":"white","className":"fw-300 mb-5","fontSize":"medium"} -->
 	<p class="has-text-align-center fw-300 mb-5 has-white-color has-text-color has-medium-font-size">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus <br>nec ullamcorper mattis, pulvinar dapibus leo.</p>
 	<!-- /wp:paragraph -->
-	<!-- wp:buttons {"contentJustification":"center"} -->
-	<div class="wp-block-buttons is-content-justification-center">
-	<!-- wp:button {"className":"is-style-outline","textColor":"white"} -->
+	<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center","orientation":"horizontal"}} -->
+	<div class="wp-block-buttons">
+	<!-- wp:button {"textColor":"white","className":"is-style-outline"} -->
 	<div class="wp-block-button is-style-outline">
 	<a class="wp-block-button__link has-white-color has-text-color" href="#">LEARN MORE</a>
 	</div>
@@ -216,5 +216,5 @@ return [
 	<!-- /wp:buttons -->
 	</div>
 	</div>
-	<!-- /wp:cover -->',
+	<!-- /wp:cover -->,
 ];

@@ -1,5 +1,7 @@
 v5.5.7
-- Update - Homepage starter content adjust core/image markup to latest Gutenberg version
+- Updated - core/columns grid lines to transparent black (in Editor)
+- Updated - Homepage starter content adjust core/image markup to latest Gutenberg version
+- Fixed - Starter content block validation errors
 
 v5.5.6
 - Fixed - core/image restore align classes display table CSS rule

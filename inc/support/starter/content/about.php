@@ -156,8 +156,8 @@ return [
 	<div class="wp-block-columns flex-column flex-md-row">
 	<!-- wp:column {"className":""} -->
 	<div class="wp-block-column">
-	<!-- wp:heading {"level":3"textColor":"white"} -->
-	<h3 class="has-color has-white-color" id="super-efficient">Super Efficient</h3>
+	<!-- wp:heading {"level":3,"textColor":"white"} -->
+	<h3 class="has-white-color has-text-color" id="super-efficient">Super Efficient</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
@@ -166,7 +166,7 @@ return [
 	<!-- /wp:column -->
 	<!-- wp:column -->
 	<div class="wp-block-column">
-	<!-- wp:heading {"level":3"textColor":"white"} -->
+	<!-- wp:heading {"level":3,"textColor":"white"} -->
 	<h3 class="has-color has-white-color" id="deeply-commited">Deeply Committed</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
