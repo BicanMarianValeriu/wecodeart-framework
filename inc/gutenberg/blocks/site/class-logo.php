@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -45,6 +45,8 @@ class Logo extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+		
         add_filter( 'get_custom_logo',  [ $this, 'custom_logo'  ] );
     }
 
@@ -68,7 +70,7 @@ class Logo extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return '
 		.wp-block-site-logo {
             line-height: 0;
@@ -87,7 +89,7 @@ class Logo extends Dynamic {
             display: block;
             margin: 0 auto;
         }
-		.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) {
+		.wp-block-site-logo:is(.alignleft,.aligncenter,.alignright) {
 			margin-bottom: 0;
 		}
 		.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) .navbar-brand {

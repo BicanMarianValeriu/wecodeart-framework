@@ -9,27 +9,43 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 // Theme Shadows
 $shadows    = wecodeart_json( [ 'settings', 'custom', 'shadows' ], [] );
-$shadows    = array_merge( $shadows, [
+$shadows    = $shadows + [
     null    => '0 .3rem .75rem rgba(0,0,0, .15)',
     'none'  => 'none'
-] );
+];
 
 // Theme Spacers
 $spacers    = wecodeart_json( [ 'settings', 'custom', 'spacers' ], [] );
-$spacers    = array_merge( $spacers, [
-    'auto'  => 'auto'
-] );
+$spacers    = $spacers + [ 'auto' => 'auto' ];
 
 // Theme Colors
 $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 $palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
 $palette    = wp_list_pluck( $palette, 'color', 'slug' );
+
+// Widths
+$widths = [
+    '1'   => '8.33333333%',
+    '2'   => '16.66666667%',
+    '3'   => '25%',
+    '4'   => '33.33333333%',
+    '5'   => '41.66666667%',
+    '6'   => '50%',
+    '7'   => '58.33333333%',
+    '8'   => '66.66666667%',
+    '9'   => '75%',
+    '10'  => '83.33333333%',
+    '11'  => '91.66666667%',
+];
+
+$offsets = $widths + [ '0' => '0' ];
+$columns = $widths + [ '12' => '100%', 'auto' => 'auto' ];
 
 // Default utilities
 foreach( [
@@ -405,6 +421,12 @@ foreach( [
         'values'	=> $spacers,
     ],
     [
+        'property'  => 'margin-left',
+        'class'		=> 'offset',
+        'responsive'=> true,
+        'values'	=> $offsets,
+    ],
+    [
         'property'  => 'margin-right',
         'class'		=> 'me',
         'responsive'=> true,
@@ -628,6 +650,12 @@ foreach( [
         'values'	=> [
             100 => '100vw'
         ],
+    ],
+    [
+        'property'  => 'width',
+        'class'		=> 'col',
+        'responsive'=> true,
+        'values'	=> $columns,
     ],
     [
         'property'  => 'height',

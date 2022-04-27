@@ -13,12 +13,12 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		color: rgba(0,0,0,0.1);
+		color: rgba(140,140,140,0.3);
 		z-index: 0;
-		background-image: repeating-linear-gradient(to right, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 1px, transparent 1px, transparent);
+		background-image: repeating-linear-gradient(to right, currentColor, currentColor 1px, transparent 1px, transparent);
 		background-size: 8.33%;
-		border-top: 1px solid rgba(0,0,0,0.1);
-    	border-bottom: 1px solid rgba(0,0,0,0.1);
+		border-top: 1px solid currentColor;
+    	border-bottom: 1px solid currentColor;
 	}
 	
 	& > .wp-block-column {
@@ -28,10 +28,8 @@
 			margin-left: 0;
 		}
 
-		&[class*="col-"] {
-			flex-grow: 0;
-			flex-shrink: 1;
-			flex-basis: auto;
+		&[class*="col-"]:not(:is(.col-sm, .col-md, .col-lg, .col-xl, .col-xxl, .col-xxxl)) {
+			flex: 0 0 auto;
 		}
 	}
 }

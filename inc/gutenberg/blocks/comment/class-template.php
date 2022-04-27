@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -197,7 +197,7 @@ class Template extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return "
 		.wp-block-comments-query-loop:empty {
 			display: none;

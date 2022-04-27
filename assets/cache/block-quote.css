@@ -1,0 +1,1 @@
+.wp-block-quote:not(.is-style-plain){border-left:4px solid var( --wp--preset--color--primary );padding-left:1rem}.wp-block-quote .blockquote{font-size:inherit}.wp-block-quote .blockquote-footer{margin-top:-1rem;text-align:left;color:inherit;opacity:.8}.wp-block-quote .blockquote-footer::before{content:"\2014\00A0"}

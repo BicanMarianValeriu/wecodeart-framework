@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.3.3
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -102,7 +102,7 @@ class Numbers extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return "";
 	}
 }

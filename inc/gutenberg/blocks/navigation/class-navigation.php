@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -30,6 +30,14 @@ class Navigation extends Dynamic {
 	use Asset;
 
 	/**
+	 * Block static.
+	 *
+	 * @var mixed
+	 */
+	protected static $responsive_loaded = null;
+	protected static $themes_loaded = [];
+
+	/**
 	 * Block namespace.
 	 *
 	 * @var string
@@ -47,6 +55,8 @@ class Navigation extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+
 		\add_filter( 'block_type_metadata_settings', 			[ $this, 'filter_render' ], 10, 2 );
 		\add_filter( 'block_core_navigation_render_fallback', 	[ $this, 'fallback' ] );
 	}
@@ -118,18 +128,33 @@ class Navigation extends Dynamic {
 			$inner_blocks = new \WP_Block_List( $parsed_blocks, $attributes );
 		}
 
-		$block_id	= uniqid();
+		$block_id	= wp_unique_id( 'wp-navigation-' );
+		$attrs		= $this->get_wrapper_attributes( $attributes );
 
-		// Styles
-		if( ! wp_style_is( $this->make_handle() ) ) {
-			wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/navigation' ), [
-				'wecodeart-support-assets'
-			], wecodeart( 'version' ) );
+		// This CSS holds the block customization.
+		if( ! wp_style_is( 'wp-block-' . $this->block_name . '-custom' ) ) {
+			wp_register_style( 'wp-block-' . $this->block_name . '-custom', '', [], wecodeart( 'version' ) );
+			wp_enqueue_style( 'wp-block-' . $this->block_name . '-custom' );
+		}
+
+		// Add Expand CSS.
+		$classname = get_prop( $attrs, [ 'class' ], '' );
+		if( strpos( $classname, 'navbar-expand' ) !== false ) {
+			wp_add_inline_style( 'wp-block-' . $this->block_name . '-custom', $this->get_responsive_styles( 'expand' ) );
+		}
+
+		// Add Themes CSS.
+		preg_match( '/navbar-(light|dark)/i', $classname, $navbar_theme );
+		if( count( $navbar_theme ) && ! in_array( current( $navbar_theme ), self::$themes_loaded ) ) {
+
+			wp_add_inline_style( 'wp-block-' . $this->block_name . '-custom', $this->get_color_styles( current( $navbar_theme ) ) );
+			
+			self::$themes_loaded[] = current( $navbar_theme );
 		}
 
 		return wecodeart( 'markup' )::wrap( 'navbar', [ [
 			'tag' 	=> 'nav',
-			'attrs'	=> $this->get_wrapper_attributes( $attributes )
+			'attrs'	=> $attrs
 		] ], function( $attributes, $inner_blocks ) use ( $block_id ) {
 
 			// Navbar List HTML
@@ -145,22 +170,28 @@ class Navigation extends Dynamic {
 			// Is responsive? Render in offcanvas container
 			if( get_prop( $attributes, 'overlayMenu' ) !== 'never' ) {
 
+				// Styles
+				if( is_null( self::$responsive_loaded ) ) {
+
+					wp_add_inline_style( 'wp-block-' . $this->block_name . '-custom', $this->get_responsive_styles() );
+					
+					self::$responsive_loaded = true;
+				}
+
 				// Scripts
 				if( ! wp_script_is( $this->make_handle() ) ) {
-					wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/navigation' ), [
-						'wecodeart-support-assets'
-					], wecodeart( 'version' ), true );
+					wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'modules/offcanvas' ), [], wecodeart( 'version' ), true );
 				}
 
 				// Toggler
 				wecodeart_template( 'general/toggler', [
-					'id'		=> 'navbar-' . $block_id,
+					'id'		=> $block_id,
 					'toggle' 	=> 'offcanvas',
 				] );
 
 				// OffCanvas
 				wecodeart_template( 'general/offcanvas', [
-					'id'		=> 'navbar-' . $block_id,
+					'id'		=> $block_id,
 					'classes'	=> [ 'offcanvas-start' ],
 					'content' 	=> $html,
 				] );
@@ -354,17 +385,18 @@ class Navigation extends Dynamic {
 
 		$classes 	= [ 'wp-block-navigation', 'navbar' ];
 		$classes[] 	= ( wecodeart( 'styles' )::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
-
-		if( get_prop( $attributes, 'orientation', false ) === 'horizontal' ) {
+		
+		if( get_prop( $attributes, [ 'layout', 'orientation' ] ) === 'horizontal' ) {
 			$classes[] = 'navbar-expand';
 		}
-
+		
 		if( $value = get_prop( $attributes, 'overlayMenu' ) ) {
 			if( $value !== 'never' ) {
 				$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
-				if( $value === 'mobile' ) {
-					$classes[] 	= $this->get_mobile_breakpoint();
-				}
+			}
+
+			if( $value === 'mobile' ) {
+				$classes[] 	= $this->get_mobile_breakpoint();
 			}
 		}
 		
@@ -423,85 +455,596 @@ class Navigation extends Dynamic {
 	}
 
 	/**
+	 * Generate Styles.
+	 *
+	 * @return string
+	 */
+	public function get_responsive_styles( $type = 'default' ) {
+		$close		= 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%23000"%3e%3cpath d="M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z"/%3e%3c/svg%3e';
+
+		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$filter		= explode( '-', Navigation::get_instance()->get_mobile_breakpoint() );
+		$filter		= end( $filter );
+		$breakpoint	= get_prop( $breaks, $filter, '992px' ); 
+
+		$inline = '';
+
+		switch( $type ) :
+			case 'expand':
+				$inline .= "
+					.navbar-expand {
+						flex-wrap: nowrap;
+						justify-content: flex-start;
+					}
+					.navbar-expand .navbar-nav {
+						flex-direction: row;
+					}
+					.navbar-expand .navbar-nav .dropdown-menu {
+						position: absolute;
+					}
+					.navbar-expand .navbar-nav .nav-link {
+						padding-right: 0.5rem;
+						padding-left: 0.5rem;
+					}
+					.navbar-expand .navbar-nav-scroll {
+						overflow: visible;
+					}
+					.navbar-expand .navbar-collapse {
+						display: flex !important;
+						flex-basis: auto;
+					}
+					.navbar-expand .navbar-toggler {
+						display: none;
+					}
+					.navbar-expand .offcanvas-header {
+						display: none;
+					}
+					.navbar-expand .offcanvas {
+						position: inherit;
+						bottom: 0;
+						z-index: 1000;
+						flex-grow: 1;
+						visibility: visible !important;
+						background-color: transparent;
+						border-right: 0;
+						border-left: 0;
+						transition: none;
+						transform: none;
+					}
+					.navbar-expand .offcanvas-top,
+					.navbar-expand .offcanvas-bottom {
+						height: auto;
+						border-top: 0;
+						border-bottom: 0;
+					}
+					.navbar-expand .offcanvas-body {
+						display: flex;
+						flex-grow: 0;
+						padding: 0;
+						overflow-y: visible;
+					}
+				";
+			break;
+			default:
+				$inline .= "
+					/* Offcanvas */
+					.offcanvas {
+						position: fixed;
+						bottom: 0;
+						display: flex;
+						flex-direction: column;
+						max-width: 100%;
+						visibility: hidden;
+						background-color: #fff;
+						background-clip: padding-box;
+						outline: 0;
+						transition: transform 0.3s ease-in-out;
+						z-index: 1045;
+					}
+					.offcanvas-backdrop {
+						position: fixed;
+						top: 0;
+						left: 0;
+						width: 100vw;
+						height: 100vh;
+						background-color: #000;
+						z-index: 1040;
+					}
+					.offcanvas-backdrop.fade {
+						opacity: 0;
+					}
+					.offcanvas-backdrop.show {
+						opacity: 0.5;
+					}
+					.offcanvas-header {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						padding: 1rem 1rem;
+					}
+					.offcanvas-header .btn-close {
+						padding: 0.5rem 0.5rem;
+						margin-top: -0.5rem;
+						margin-right: -0.5rem;
+						margin-bottom: -0.5rem;
+					}
+					.offcanvas-title {
+						margin-bottom: 0;
+						line-height: 1.5;
+					} 
+					.offcanvas-body {
+						flex-grow: 1;
+						padding: 1rem 1rem;
+						overflow-y: auto;
+					}
+					.offcanvas-start {
+						top: 0;
+						left: 0;
+						width: 400px;
+						border-right: 1px solid rgba(0, 0, 0, 0.2);
+						transform: translateX(-100%);
+					}
+					.offcanvas-end {
+						top: 0;
+						right: 0;
+						width: 400px;
+						border-left: 1px solid rgba(0, 0, 0, 0.2);
+						transform: translateX(100%);
+					}
+					.offcanvas-top {
+						top: 0;
+						right: 0;
+						left: 0;
+						height: 30vh;
+						max-height: 100%;
+						border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+						transform: translateY(-100%);
+					} 
+					.offcanvas-bottom {
+						right: 0;
+						left: 0;
+						height: 30vh;
+						max-height: 100%;
+						border-top: 1px solid rgba(0, 0, 0, 0.2);
+						transform: translateY(100%);
+					}
+					.offcanvas.show {
+						transform: none;
+					}
+					
+					/* Close */
+					.btn-close {
+						box-sizing: content-box;
+						width: 1em;
+						height: 1em;
+						padding: 0.25em 0.25em;
+						color: #000;
+						background: transparent url('$close') center/1em auto no-repeat;
+						border: 0;
+						border-radius: 0.25rem;
+						opacity: 0.5;
+					}
+					.btn-close:hover {
+						color: #000;
+						text-decoration: none;
+						opacity: 0.75;
+					}
+					.btn-close:focus {
+						outline: 0;
+						box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
+						opacity: 1;
+					}
+					.btn-close:disabled, .btn-close.disabled {
+						pointer-events: none;
+						user-select: none;
+						opacity: 0.25;
+					}
+					.btn-close-white {
+						filter: invert(1) grayscale(100%) brightness(200%);
+					}
+					.navbar-toggler {
+						padding: 0.25rem 0.75rem;
+						font-size: 1.25rem;
+						line-height: 1;
+						background-color: transparent;
+						border: 1px solid transparent;
+						border-radius: 0.25rem;
+						transition: box-shadow 0.15s ease-in-out;
+					}
+					.navbar-toggler:hover {
+						text-decoration: none;
+					}
+					.navbar-toggler:focus {
+						text-decoration: none;
+						outline: 0;
+						box-shadow: 0 0 0 0.25rem;
+					} 
+					.navbar-toggler-icon {
+						display: inline-block;
+						width: 1.5em;
+						height: 1.5em;
+						vertical-align: middle;
+						background-repeat: no-repeat;
+						background-position: center;
+						background-size: 100%;
+					}
+				";
+				
+				foreach( $breaks as $key => $value ) {
+					// Skip what we dont need!
+					if( $key !== $filter ) continue;
+
+					$inline .= "
+					@media (min-width: {$value}) {
+						/* Navbar */
+						.navbar-expand-{$key} {
+							flex-wrap: nowrap;
+							justify-content: flex-start;
+						}
+						.navbar-expand-{$key} .navbar-nav {
+							flex-direction: row;
+						}
+						.navbar-expand-{$key} .navbar-nav .dropdown-menu {
+							position: absolute;
+						}
+						.navbar-expand-{$key} .navbar-nav-scroll {
+							overflow: visible;
+						}
+						.navbar-expand-{$key} .navbar-collapse {
+							display: flex !important;
+							flex-basis: auto;
+						}
+						.navbar-expand-{$key} .navbar-toggler {
+							display: none;
+						}
+						.navbar-expand-{$key} .offcanvas-header {
+							display: none;
+						}
+						.navbar-expand-{$key} .offcanvas {
+							position: inherit;
+							bottom: 0;
+							z-index: 1000;
+							flex-grow: 1;
+							visibility: visible !important;
+							background-color: transparent;
+							border-right: 0;
+							border-left: 0;
+							transition: none;
+							transform: none;
+						}
+						.navbar-expand-{$key} .offcanvas-top,
+						.navbar-expand-{$key} .offcanvas-bottom {
+							height: auto;
+							border-top: 0;
+							border-bottom: 0;
+						}
+						.navbar-expand-{$key} .offcanvas-body {
+							display: flex;
+							flex-grow: 0;
+							padding: 0;
+							overflow-y: visible;
+						}
+
+						/* Dropdowns */
+						.dropdown-menu-{$key}-start {
+							--wp-position: start;
+						}
+						.dropdown-menu-{$key}-start[data-bs-popper] {
+							right: auto;
+							left: 0;
+						}
+						.dropdown-menu-{$key}-end {
+							--wp-position: end;
+						}
+						.dropdown-menu-{$key}-end[data-bs-popper] {
+							right: 0;
+							left: auto;
+						}
+
+						/* Block */
+						.wp-block-navigation :where(.offcanvas,.offcanvas-body) {
+							flex-direction: inherit;
+							justify-content: inherit;
+							align-items: inherit;
+						}
+						.wp-block-navigation.navbar-expand-{$key}.flex-column .navbar-nav {
+							flex-direction: column;
+						}
+						.wp-block-navigation.navbar-expand-{$key} .wp-block-spacer {
+							height: 100%;
+							width: var(--wp--spacer-width);
+						}
+						.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
+							border-top: 0.3em solid transparent;
+							border-right: 0;
+							border-bottom: 0.3em solid transparent;
+							border-left: 0.3em solid;
+						}
+					}
+					";
+				}
+
+				$inline .= "
+					/* No Motion */
+					@media (prefers-reduced-motion: reduce) {
+						.navbar-toggler,
+						.offcanvas {
+							transition: none;
+						}
+					}
+
+					/* Block */
+					.wp-block-navigation[class*='navbar-expand-'] .offcanvas:not([aria-modal='true']) {
+						width: initial;
+					}
+					.wp-block-navigation[class*='has-background'] :where(.offcanvas,.offcanvas-body) {
+						background-color: inherit;
+					}
+					.wp-block-navigation .offcanvas-start .btn-close {
+						margin-left: auto;
+					}
+				";
+			break;
+		endswitch;
+
+		return wecodeart( 'styles' )::compress( $inline );
+	}
+
+	/**
+	 * Color Shade Styles.
+	 *
+	 * @return string
+	 */
+	public function get_color_styles( string $color = 'navbar-light' ) {
+		$menu_light = 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3e%3cpath stroke="rgba%280, 0, 0, 0.55%29" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3e%3c/svg%3e';
+		$menu_dark 	= 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3e%3cpath stroke="rgba%28255, 255, 255, 0.55%29" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3e%3c/svg%3e';
+
+		$inline = '';
+		
+		switch( $color ) :
+			case 'navbar-dark':
+				$inline .= "
+				.navbar-dark .navbar-brand {
+					color: var(--wp--preset--color--white);
+				}
+				.navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
+					color: var(--wp--preset--color--white);
+				}
+				.navbar-dark .navbar-nav .nav-link {
+					color: rgba(255, 255, 255, 0.55);
+				}
+				.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+					color: rgba(255, 255, 255, 0.75);
+				}
+				.navbar-dark .navbar-nav .nav-link.disabled {
+					color: rgba(255, 255, 255, 0.25);
+				}
+				.navbar-dark .navbar-nav .show > .nav-link,
+				.navbar-dark .navbar-nav .nav-link.active {
+					color: var(--wp--preset--color--white);
+				}
+				.navbar-dark .navbar-toggler {
+					color: rgba(255, 255, 255, 0.55);
+					border-color: rgba(255, 255, 255, 0.1);
+				}
+				.navbar-dark .navbar-toggler-icon {
+					background-image: url('$menu_dark');
+				}
+				.navbar-dark .navbar-text {
+					color: rgba(255, 255, 255, 0.55);
+				}
+				.navbar-dark .navbar-text a,
+				.navbar-dark .navbar-text a:hover,
+				.navbar-dark .navbar-text a:focus {
+					color: var(--wp--preset--color--white);
+				}
+				.navbar-dark .btn-close {
+					filter: invert(1) grayscale(100%) brightness(200%);
+				}
+				";
+			break;
+			default:
+				$inline .= "
+					.navbar-light .navbar-brand {
+						color: rgba(0, 0, 0, 0.9);
+					}
+					.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
+						color: rgba(0, 0, 0, 0.9);
+					}
+					.navbar-light .navbar-nav .nav-link {
+						color: rgba(0, 0, 0, 0.55);
+					}
+					.navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+						color: rgba(0, 0, 0, 0.7);
+					}
+					.navbar-light .navbar-nav .nav-link.disabled {
+						color: rgba(0, 0, 0, 0.3);
+					}
+					.navbar-light .navbar-nav .show > .nav-link,
+					.navbar-light .navbar-nav .nav-link.active {
+						color: rgba(0, 0, 0, 0.9);
+					}
+					.navbar-light .navbar-toggler {
+						color: rgba(0, 0, 0, 0.55);
+						border-color: rgba(0, 0, 0, 0.1);
+					}
+					.navbar-light .navbar-toggler-icon {
+						background-image: url('$menu_light');
+					}
+					.navbar-light .navbar-text {
+						color: rgba(0, 0, 0, 0.55);
+					}
+					.navbar-light .navbar-text a,
+					.navbar-light .navbar-text a:hover,
+					.navbar-light .navbar-text a:focus {
+						color: rgba(0, 0, 0, 0.9);
+					}
+				";
+			break;
+		endswitch;
+
+		return wecodeart( 'styles' )::compress( $inline );
+	}
+
+	/**
+	 * Extra Styles.
+	 *
+	 * @return string
+	 */
+	public function get_extra_styles( string $variation = 'nav-tabs' ) {
+		$inline = '';
+
+		switch( $variation ) :
+			case 'nav-tabs':
+				$inline .= "
+					.nav-tabs {
+						border-bottom: 1px solid #dee2e6;
+					}
+					.nav-tabs .nav-link {
+						margin-bottom: -1px;
+						background: none;
+						border: 1px solid transparent;
+						border-top-left-radius: 0.25rem;
+						border-top-right-radius: 0.25rem;
+					}
+					.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+						border-color: #e9ecef #e9ecef #dee2e6;
+						isolation: isolate;
+					}
+					.nav-tabs .nav-link.disabled {
+						color: #6c757d;
+						background-color: transparent;
+						border-color: transparent;
+					}
+					.nav-tabs .nav-link.active,
+					.nav-tabs .nav-item.show .nav-link {
+						color: #495057;
+						background-color: #fff;
+						border-color: #dee2e6 #dee2e6 #fff;
+					}
+					.nav-tabs .dropdown-menu {
+						margin-top: -1px;
+						border-top-left-radius: 0;
+						border-top-right-radius: 0;
+					}
+					.tab-content > .tab-pane {
+						display: none;
+					}
+					.tab-content > .active {
+						display: block;
+					}
+				";
+			break;
+			case 'nav-pills':
+				$inline .= "
+					.nav-pills .nav-link {
+						background: none;
+						border: 0;
+						border-radius: 0.25rem;
+					}
+					.nav-pills .nav-link.active,
+					.nav-pills .show > .nav-link {
+						color: var(--wp--preset--color--white);
+						background-color: var(--wp--preset--color--primary);
+					}	
+				";
+			break;
+		endswitch;
+
+		return wecodeart( 'styles' )::compress( $inline );
+	}
+
+	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
-		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$filter		= explode( '-', Navigation::get_instance()->get_mobile_breakpoint() );
-		$filter		= end( $filter );
-		$breakpoint	= get_prop( $breaks, $filter, '992px' );
+	public function styles() {
+		$extras = $this->get_extra_styles( 'nav-tabs' ) . $this->get_extra_styles( 'nav-pills' );
 
 		return "
+		/* Nav */
+		.nav {
+			display: flex;
+			flex-wrap: wrap;
+			padding-left: 0;
+			margin-bottom: 0;
+			list-style: none;
+		}
+		.nav-fill > .nav-link,
+		.nav-fill .nav-item {
+			flex: 1 1 auto;
+			text-align: center;
+		}
+		.nav-justified > .nav-link,
+		.nav-justified .nav-item {
+			flex-basis: 0;
+			flex-grow: 1;
+			text-align: center;
+		}
+		.nav-fill .nav-item .nav-link,
+		.nav-justified .nav-item .nav-link {
+			width: 100%;
+		}
+
+		/* Navbar */
+		.navbar {
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+		}
+		.navbar-brand {
+			padding-top: 0.3125rem;
+			padding-bottom: 0.3125rem;
+			margin-right: 1rem;
+			font-size: 1.25rem;
+			white-space: nowrap;
+		}
+		.navbar-nav {
+			display: flex;
+			flex-direction: column;
+			padding-left: 0;
+			margin-bottom: 0;
+			list-style: none;
+		}
+		.navbar-nav .nav-link {
+			padding: 0;
+		}
+		.navbar-nav .dropdown-menu {
+			position: static;
+		}
+		.navbar-text {
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+		}
+		.navbar-collapse {
+			flex-basis: 100%;
+			flex-grow: 1;
+			align-items: center;
+		}
+		.navbar-nav-scroll {
+			max-height: var(--wp--scroll-height, 75vh);
+			overflow-y: auto;
+		}
+
+		/* Extras */
+		{$extras}
+
+		/* No Motion */
+		@media (prefers-reduced-motion: reduce) {
+			.nav-link {
+				transition: none;
+			}
+		}
+
+		/* Block */
 		:is(.wp-site-header,.wp-site-footer) .wp-block-navigation {
 			padding-top: 0;
 			padding-bottom: 0;
-		}
-		.wp-block-navigation.has-text-color .nav-link {
-			color: inherit;
-		}
-		.wp-block-navigation .wp-block-spacer {
-			width: 100%;
-			height: var(--wp--spacer-width);
-			min-height: initial;
-		}
-		.wp-block-navigation.hide-toggle .dropdown-toggle::after {
-			content: none;
-		}
-		.wp-block-navigation.with-hover .dropdown:where(:hover,:focus,:focus-within) > .dropdown-toggle ~ .dropdown-menu {
-			display: block;
-			visibility: visible;
-			opacity: 1;
-		}
-		.wp-block-navigation[class*='navbar-expand-'] .offcanvas:not([aria-modal='true']) {
-			width: initial;
-		}
-		.wp-block-navigation.navbar-dark .btn-close {
-			background-color: var(--wp--white);
-		}
-		.wp-block-navigation .offcanvas-start .btn-close {
-			margin-left: auto;
-		}
-		.wp-block-navigation :where(.offcanvas,.offcanvas-body) {
-			justify-content: inherit;
-		}
-		.wp-block-navigation[class*='has-background'] :where(.offcanvas,.offcanvas-body) {
-			background-color: inherit;
-		}
-		.wp-block-navigation-link__content {
-			display: flex;
-			align-items: center;
-		}
-		.wp-block-navigation-link__icon {
-			margin-right: .5rem;
-		}
-		.wp-block-navigation-link__label {
-			flex: 1 1 auto;
-			word-break: normal;
-			overflow-wrap: break-word;
-		}
-		.wp-block-navigation .dropdown-menu[data-bs-popper] {
-			margin-top: 0;
-		}
-		.wp-block-navigation .dropdown-menu .dropdown-menu {
-			top: 0;
-			left: 100%;
-		}
-		.wp-block-navigation.navbar-expand-{$filter} .nav {
-			gap: var(--wp--style--block-gap, .5rem);
-		}
-		@media (min-width: $breakpoint) {
-			.wp-block-navigation.navbar-expand-{$filter} .wp-block-spacer {
-				height: 100%;
-				width: var(--wp--spacer-width);
-			}
-			.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
-				border-top: 0.3em solid transparent;
-				border-right: 0;
-				border-bottom: 0.3em solid transparent;
-				border-left: 0.3em solid;
-			}
 		}
 		";
 	}

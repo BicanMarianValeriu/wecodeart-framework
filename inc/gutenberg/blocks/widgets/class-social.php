@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -46,6 +46,8 @@ class Social extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+		
 		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
@@ -72,7 +74,7 @@ class Social extends Dynamic {
 			foreach( $services as $service ) $inline_css .= $this->get_inline_style( current( $classnames ), $service );
 			
 			add_action( 'wp_print_styles', function() use ( $inline_css ) {
-				wp_add_inline_style( Blocks::CSS_ID, $inline_css );
+				wp_add_inline_style( 'wp-block-' . $this->block_name, $inline_css );
 			} );
 		}
 
@@ -197,7 +199,7 @@ class Social extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return "
 		.wp-block-social-links {
 			display: flex;

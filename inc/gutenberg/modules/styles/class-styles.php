@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -34,7 +34,7 @@ class Styles implements Integration {
 	 *
 	 * @var string
 	 */
-    const CSS_ID 	= 'wecodeart-blocks-custom';
+    const CSS_ID 	= 'wecodeart-blocks';
 
 	/**
 	 * The Styles Processor
@@ -258,7 +258,7 @@ class Styles implements Integration {
 		
 		// Utilities CSS
 		if( $classes ) {
-			$this->classes = wp_parse_args( $classes, $this->classes );
+			$this->classes = array_merge( $this->classes, $classes );
 		}
 
 		// This is processed so next time we skipp it (avoid issues like multiple calls of this filter, if any)
@@ -551,7 +551,6 @@ class Styles implements Integration {
 			'core/column' 			=> Styles\Blocks\Column::class,
 			'core/cover' 			=> Styles\Blocks\Cover::class,
 			'core/gallery' 			=> Styles\Blocks\Gallery::class,
-			// 'core/image' 			=> Styles\Blocks\Image::class,
 			'core/media-text' 		=> Styles\Blocks\Media::class,
 			'core/navigation' 		=> Styles\Blocks\Navigation::class,
 			'core/pullquote' 		=> Styles\Blocks\PullQuote::class,

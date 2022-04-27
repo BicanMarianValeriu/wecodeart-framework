@@ -1,3 +1,16 @@
+v5.5.8
+- Updated - Revert entry-meta pattern post-author-name to post-author (as it will not land in WP 6)
+- Updated - core/latest-comments add isLink (false) attribute to render pattern
+- Updated - Commnents template remove date format to use default / add isLink (false)
+- Updated - Blocks to cache and load dynamic CSS via wp_enqueue_block_style
+- Updated - column classes to utilities from base CSS (loaded on demand)
+- Updated - offset classes to utilities from base CSS (loaded on demand)
+- Updated - core/media-text CSS moved from flex to grid
+- Updated - core/navigation (and child blocks) assets loading optimization and code splitting
+- Updated - core/cover to use the featured image (inline CSS + placeholder support)
+- Fixed - Utilitites to properly order CSS (based on breakpoints) when generating inline styles
+- Fixed - core/embed CSS
+
 v5.5.7
 - Updated - core/columns grid lines to transparent black (in Editor)
 - Updated - Homepage starter content adjust core/image markup to latest Gutenberg version

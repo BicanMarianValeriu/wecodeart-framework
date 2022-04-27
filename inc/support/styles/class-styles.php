@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.4.1
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Support;
@@ -102,17 +102,17 @@ final class Styles implements Integration {
 		if( empty( $values ) ) return;
 		
 		$properties	= (array) get_prop( $args, 'property' );
-		$class 		= get_prop( $args, 'class', $properties[0] );
+		$class 		= get_prop( $args, 'class', current( $properties ) );
 
 		// Bail if no class.
 		if( ! $class ) return;
 
 		$media		= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$responsive = get_prop( $args, 'responsive' ) && ! empty( $media );
-		$container  = Styles::get_instance()->Utilities;
+		$container  = static::get_instance()->Utilities;
 
 		foreach( $values as $key => $value ) {
-			$_class	= self::generate_class( $class, $key );
+			$_class	= static::generate_class( $class, $key );
 			$value  = (string) $value;
 
 			$output = [];
@@ -128,7 +128,7 @@ final class Styles implements Integration {
 			if( ! $responsive ) continue;
 
 			foreach( $media as $break => $query ) {
-				$_class_ = self::generate_class( $class, $key, $break );
+				$_class_ = static::generate_class( $class, $key, $break );
 				
 				$output = [];
 				foreach( $properties as $property ) {
@@ -526,5 +526,29 @@ final class Styles implements Integration {
 		$color 	= $mode === 'hex' ? self::hex_to_rgba( $color ) : $color; 
 		preg_match_all( "/\(([^\]]*)\)/" , $color, $matches );
 		return intval( array_sum( explode( ',', current( $matches[1] ) ) ) );
+	}
+
+	/**
+	 * Sort by breakpoints.
+	 *
+     * @param   array $order
+     *
+	 * @return  array
+	 */
+	public static function sort_breakpoints( $order ) {
+        $breaks     = wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+        $sortArray  = [ 'global' ] + array_map( function( $point ) {
+            return "@media (min-width:{$point})";
+        }, array_values( $breaks ) );
+        
+		$ordered    = [];
+        foreach ( $sortArray as $key ) {
+            if ( array_key_exists( $key, $order ) ) {
+                $ordered[$key] = $order[$key];
+                unset( $order[$key] );
+            }
+        }
+
+        return $ordered + $order;
 	}
 }

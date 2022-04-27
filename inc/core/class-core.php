@@ -9,7 +9,7 @@
  * @subpackage 	Core
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.0
- * @version		5.4.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt;
@@ -42,7 +42,7 @@ class Core {
 	 * Gallery Shortcode
 	 *
 	 * @since	5.0.0
-	 * @version	5.0.0
+	 * @version	5.5.8
 	 *
 	 * @return 	string
 	 */
@@ -119,8 +119,8 @@ class Core {
 		$items 		= [ 'wp-gallery__item' ];
 
 		if( $has_cols ) {
-			$items[]	= 'col';
-			$wrapper 	= array_merge( $wrapper, [ 'row', 'row-cols-2', 'row-cols-md-' . $columns ] );
+			$wrapper[] = 'grid';
+			$items 	= array_merge( $items, [ 'span-12', 'span-lg-' . $columns ] );
 		}
 		
 		$items 		= implode( ' ', $items );

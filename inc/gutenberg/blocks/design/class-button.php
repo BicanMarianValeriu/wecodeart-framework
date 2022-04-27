@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.9
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -40,28 +40,19 @@ class Button extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'button';
-
-	/**
-	 * Init
-	 */
-	public function init() {
-		register_block_style( $this->get_block_type(), [
-			'name' 			=> 'outline',
-            'label'			=> __( 'Outline', 'wecodeart' ),
-			'inline_style' 	=> '.is-style-outline .wp-block-button__link {border-color:currentColor!important;}'
-		] );
-
-		register_block_style( $this->get_block_type(), [
-			'name' 			=> 'link',
-            'label'			=> __( 'Link', 'wecodeart' ),
-			'inline_style' 	=> '.is-style-link .wp-block-button__link {background:transparent!important;border:none!important;box-shadow:none!important;padding:0!important;}'
-		] );
-	}
 	
 	/**
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+
+		register_block_style( $this->get_block_type(), [
+			'name' 			=> 'link',
+            'label'			=> __( 'Link', 'wecodeart' ),
+			'inline_style' 	=> static::get_style( 'link' )
+		] );
+		
 		add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'	], 10, 2 );
 	}
 
@@ -109,15 +100,10 @@ class Button extends Dynamic {
 			case 'link' :
 				$inline = "
 					.is-style-link .wp-block-button__link {
-						background: transparent;
-						border: none;
-						box-shadow: none;
-						padding: 0;
-						color: var(--wp--preset--color--primary);
-					}
-					.is-style-link .wp-block-button__link:hover {
-						color: var(--wp--preset--color--primary);
-						box-shadow: none;
+						background: transparent!important;
+						border: none!important;
+						box-shadow: none!important;
+						padding: 0!important;
 					}
 				";
 				break;
@@ -125,7 +111,7 @@ class Button extends Dynamic {
 				break;
 		endswitch;
 
-		return trim( $inline );
+		return wecodeart( 'styles' )::compress( $inline );
 	}
 
 	/**
@@ -133,7 +119,7 @@ class Button extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		$outl_style = self::get_style( 'outline' );
 		$link_style = self::get_style( 'link' );
 
@@ -213,7 +199,6 @@ class Button extends Dynamic {
 			opacity: .7;
 		}
 		$outl_style
-		$link_style
 		";
 	}
 }

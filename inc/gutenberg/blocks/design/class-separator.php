@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -42,20 +42,17 @@ class Separator extends Dynamic {
 	protected $block_name = 'separator';
 
 	/**
-	 * Init
+	 * Shortcircuit Register
 	 */
-	public function init() {
+	public function register() {
+		$this->enqueue_styles();
+
 		register_block_style( $this->get_block_type(), [
 			'name' 			=> 'faded',
-            'label'			=> __( 'Faded', 'wecodeart' ),
+            'label'			=> esc_html__( 'Faded', 'wecodeart' ),
 			'inline_style' 	=> self::get_style( 'faded' )
 		] );
 	}
-
-	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {}
 
 	/**
 	 * Get Block styles
@@ -90,7 +87,7 @@ class Separator extends Dynamic {
 				$inline = "
 					.wp-block-separator.is-style-faded {
 						background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
-						width: 100%!important;
+						width: 100%;
 					}
 				";
 				break;
@@ -98,7 +95,7 @@ class Separator extends Dynamic {
 				break;
 		endswitch;
 
-		return trim( $inline );
+		return wecodeart( 'styles' )::compress( $inline );
 	}
 
 	/**
@@ -106,7 +103,7 @@ class Separator extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		$inline = '
 		.wp-block-separator {
 			margin-left: auto;
@@ -119,7 +116,6 @@ class Separator extends Dynamic {
 		';
 
 		$inline .= self::get_style( 'dots' );
-		$inline .= self::get_style( 'faded' );
 
 		return $inline;
 	}

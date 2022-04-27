@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Video block.
@@ -44,14 +43,16 @@ class Video extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {}
+	public function register() {
+		$this->enqueue_styles();
+	}
 
 	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return "
 		.wp-block-video {
 			margin: 0 0 1.5rem;

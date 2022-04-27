@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -42,19 +42,17 @@ class Buttons extends Dynamic {
 	protected $block_name = 'buttons';
 
 	/**
-	 * Init
-	 */
-	public function init() {
-		register_block_style( $this->get_block_type(), [
-			'name' 	=> 'group',
-            'label'	=> __( 'Group', 'wecodeart' ),
-		] );
-	}
-
-	/**
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+
+		register_block_style( $this->get_block_type(), [
+			'name' 	=> 'group',
+            'label'	=> __( 'Group', 'wecodeart' ),
+			'inline_style' => static::get_style( 'group' )
+		] );
+
 		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
@@ -81,40 +79,60 @@ class Buttons extends Dynamic {
 	}
 
 	/**
+	 * Get Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public static function get_style( $class = 'group' ) {
+		$inline = '';
+
+		switch( $class ) :
+			case 'group' :
+				$inline = "
+					.wp-block-buttons.is-style-group {
+						--wp--style--block-gap: 0px!important;
+					}
+					.wp-block-buttons.is-style-group:not(.are-vertical) .wp-block-button:not(:first-child) .wp-block-button__link {
+						border-left: 0;
+						border-top-left-radius: 0;
+						border-bottom-left-radius: 0;
+					}
+					.wp-block-buttons.is-style-group:not(.are-vertical) .wp-block-button:not(:last-child) .wp-block-button__link {
+						border-top-right-radius: 0;
+						border-bottom-right-radius: 0;
+					}
+					.wp-block-buttons.is-style-group.are-vertical .wp-block-button:not(:first-child) {
+						margin-top: -1px;
+					}
+					.wp-block-buttons.is-style-group.are-vertical .wp-block-button:not(:first-child) .wp-block-button__link {
+						border-top-left-radius: 0;
+						border-top-right-radius: 0;
+					}
+					.wp-block-buttons.is-style-group.are-vertical .wp-block-button:not(:last-child) .wp-block-button__link {
+						border-bottom-left-radius: 0;
+						border-bottom-right-radius: 0;
+					}
+				";
+				break;
+			default :
+				break;
+		endswitch;
+
+		return wecodeart( 'styles' )::compress( $inline );
+	}
+
+	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return "
 		.wp-block-buttons {
 			display: flex;
 			flex-flow: row wrap;
 			gap: var(--wp--style--block-gap, 1em);
 			margin-bottom: 1rem;
-		}
-		.wp-block-buttons.is-style-group {
-			--wp--style--block-gap: 0px;
-		}
-		.wp-block-buttons.is-style-group:not(.are-vertical) .wp-block-button:not(:first-child) .wp-block-button__link {
-			border-left: 0;
-			border-top-left-radius: 0;
-			border-bottom-left-radius: 0;
-		}
-		.wp-block-buttons.is-style-group:not(.are-vertical) .wp-block-button:not(:last-child) .wp-block-button__link {
-			border-top-right-radius: 0;
-			border-bottom-right-radius: 0;
-		}
-		.wp-block-buttons.is-style-group.are-vertical .wp-block-button:not(:first-child) {
-			margin-top: -1px;
-		}
-		.wp-block-buttons.is-style-group.are-vertical .wp-block-button:not(:first-child) .wp-block-button__link {
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
-		}
-		.wp-block-buttons.is-style-group.are-vertical .wp-block-button:not(:last-child) .wp-block-button__link {
-			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 0;
 		}
 		.wp-block-buttons.are-vertical {
 			flex-direction: column;

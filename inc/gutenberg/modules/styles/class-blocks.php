@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -88,7 +88,7 @@ class Blocks extends Processor {
 		$output 			= [];
 		$output['element'] 	= $this->element;
 
-		// Layout - we do not support wide align yet but it will be enabled in a future version!
+		// Layout Style
 		if( $layout = get_prop( $this->attrs, 'layout' ) ) {
 			$type = get_prop( $layout, 'type', 'default' );
 
@@ -223,21 +223,18 @@ class Blocks extends Processor {
 			}
 		}
 		
+		// Font Family
+		if ( $value = get_prop( $this->attrs, 'fontFamily' ) ) {
+			$this->output[] = wp_parse_args( [
+				'property' 	=> 'font-family',
+				'value'	  	=> sprintf( 'var(--wp--preset--font-family--%s)', $value )
+			], $output );
+		}
+
 		// Inline Style
 		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
 			// Typography
 			if ( $typography = get_prop( $css_style, 'typography' ) ) {
-				if ( $value = get_prop( $typography, 'fontFamily' ) ) {
-					if ( strpos( $value, 'var:preset|font-family' ) !== false ) {
-						// Get the name from the string and add proper styles.
-						$name 	= substr( $value, strrpos( $value, '|' ) + 1 );
-						$this->output[] = wp_parse_args( [
-							'property' 	=> 'font-family',
-							'value'	  	=> sprintf( 'var(--wp--preset--font-family--%s)', _wp_to_kebab_case( $name ) )
-						], $output );
-					}
-				}
-
 				if ( $value = get_prop( $typography, 'fontSize' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'font-size',

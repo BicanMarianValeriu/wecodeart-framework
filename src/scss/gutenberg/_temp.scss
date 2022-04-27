@@ -20,10 +20,11 @@
         margin-left: calc(var(--wp--custom--gutter) * -1) !important;
         margin-right: calc(var(--wp--custom--gutter) * -1) !important;
         width: unset;
+        max-width: initial;
     }
     
     .block-editor-block-list__block > :where(.wp-block) {
-        --wp--style--block-gap: 1.5rem;
+        --wp--style--block-gap: 1rem;
     }
 }
 
@@ -35,6 +36,7 @@
         margin-left: calc(var(--wp--custom--gutter) * -1) !important;
         margin-right: calc(var(--wp--custom--gutter) * -1) !important;
         width: unset;
+        max-width: initial;
     }
 
     .entry-content > :where(.wp-block) {
@@ -44,4 +46,12 @@
 
 .wp-block-buttons {
     --wp--style--block-gap: 1em;
+}
+
+.wp-block-navigation {
+    position: relative;
+}
+
+.components-circular-option-picker__option {
+    border-radius: 50%;
 }

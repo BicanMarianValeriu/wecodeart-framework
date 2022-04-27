@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.1.8
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -45,6 +45,8 @@ class Login extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -85,9 +87,6 @@ class Login extends Dynamic {
 			// Get the form.
 			$contents 		= $this->render_form( [], false );
 		}
-
-		// Queue block for assets.
-		wecodeart( 'blocks' )->load( [ 'core/buttons', 'core/button' ] );
 
 		return wecodeart( 'markup' )::wrap( 'wp-block-login', [
 			[
@@ -136,7 +135,7 @@ class Login extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return '
 		.wp-block-login {
             margin-bottom: 2rem;

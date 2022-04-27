@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt;
@@ -43,6 +43,7 @@ class Support implements Configuration {
 		$this->register( 'starter',				Support\Starter::class	    );
 		$this->register( 'markup',				Support\Markup::class	    );
 		$this->register( 'assets',				Support\Assets::class	    );
+		$this->register( 'fonts',				Support\Fonts::class	    );
 		$this->register( 'styles',				Support\Styles::class	    );
 		$this->register( 'locale',				Support\Locale::class	    );
 		$this->register( 'files',				Support\FileSystem::class	);

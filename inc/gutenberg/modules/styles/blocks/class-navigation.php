@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.1.3
- * @version		5.5.3
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -31,9 +31,21 @@ class Navigation extends Base {
 	 */
 	protected function process_extra() {	
 		$output 			= [];
-		$output['element'] 	= $this->element;
+		$output['element'] 	= join( ' ', [ $this->element, '.navbar-nav' ] );
+
+		// Gap
+		if( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ], '1rem' ) ) {
+			if ( is_array( $gap ) ) {
+				$gap	= get_prop( $gap, [ 'top' ] );
+			}
+
+			$this->output[] = wp_parse_args( [
+				'property' 	=> 'gap',
+				'value'	  	=> $gap
+			], $output );
+		}
 		
-		// Navigation background
+		// Navigation background color.
 		if ( $value = get_prop( $this->attrs, 'customBackgroundColor' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'background-color',
@@ -41,75 +53,20 @@ class Navigation extends Base {
 			], $output );
 		}
 
-		// Navigation item color
+		// Navigation item color.
+		$output['element'] = join( ' ', [ $this->element, '.navbar-nav', '.nav-link' ] );
+
 		if ( $value = get_prop( $this->attrs, 'customTextColor' ) ) {
 			$this->output[] = wp_parse_args( [
-				'element'	=> join( ' ', [ $this->element, '.navbar-nav', '.nav-link' ] ),
 				'property' 	=> 'color',
 				'value'	  	=> $value
 			], $output );
 		}
 		
-		// Dropdowns items
+		// Dropdowns items.
 		$output['element'] = join( ' ', [ $this->element, '.wp-block-navigation-link__content' ] );
-		if ( $value = get_prop( $this->attrs, 'fontSize' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'font-size',
-				'value'	  	=> sprintf( 'var(--wp--preset--font-size--%s)', $value )
-			], $output );
-		}
-		
-		if ( $typography = get_prop( $this->attrs, [ 'style', 'typography' ], [] ) ) {
-			if ( $value = get_prop( $typography, [ 'fontFamily' ] ) ) {
-				$this->output[] = wp_parse_args( [
-					'property' 	=> 'font-family',
-					'value'	  	=> sprintf( 'var(--wp--preset--font-family--%s)', $value )
-				], $output );
-			}
 
-			if ( $value = get_prop( $typography, [ 'fontSize' ] ) ) {
-				$this->output[] = wp_parse_args( [
-					'property' 	=> 'font-size',
-					'value'	  	=> $value
-				], $output );
-			}
-
-			if ( $value = get_prop( $typography, [ 'fontStyle' ] ) ) {
-				$this->output[] = wp_parse_args( [
-					'property' 	=> 'font-style',
-					'value'	  	=> $value
-				], $output );
-			}
-
-			if ( $value = get_prop( $typography, [ 'fontWeight' ] ) ) {
-				$this->output[] = wp_parse_args( [
-					'property' 	=> 'font-weight',
-					'value'	  	=> $value
-				], $output );
-			}
-
-			if ( $value = get_prop( $typography, [ 'lineHeight' ] ) ) {
-				$this->output[] = wp_parse_args( [
-					'property' 	=> 'line-height',
-					'value'	  	=> $value
-				], $output );
-			}
-
-			if ( $value = get_prop( $typography, [ 'textTransform' ] ) ) {
-				$this->output[] = wp_parse_args( [
-					'property' 	=> 'text-transform',
-					'value'	  	=> $value
-				], $output );
-			}
-
-			if ( $value = get_prop( $typography, [ 'textDecoration' ] ) ) {
-				$this->output[] = wp_parse_args( [
-					'property' 	=> 'text-decoration',
-					'value'	  	=> $value
-				], $output );
-			}
-		}
-
+		// Dropdowns item color.
 		if ( $value = get_prop( $this->attrs, 'overlayTextColor' ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'color',
@@ -124,7 +81,7 @@ class Navigation extends Base {
 			], $output );
 		}
 
-		// Dropdowns item background
+		// Dropdowns item background color.
 		$hex_color 		= null;
 		$named_color 	= null;
 

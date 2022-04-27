@@ -361,7 +361,6 @@ label {
 // Remove the default `border-radius` that macOS Chrome adds.
 // See https://github.com/twbs/bootstrap/issues/24093
 button {
-	// stylelint-disable-next-line property-disallowed-list
 	border-radius: 0;
 }
 

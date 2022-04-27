@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.3.7
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -45,6 +45,8 @@ class Pages extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		wp_deregister_style( 'wp-block-' . $this->block_name );
+
 		\add_filter( 'block_type_metadata_settings',	[ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -100,9 +102,6 @@ class Pages extends Dynamic {
 
 		$inner_blocks = new \WP_Block_List( $inner_blocks, $attributes );
 
-		// Assets - we need navigation css/js for dropdowns and styleing.
-		wecodeart( 'blocks' )->load( [ 'core/navigation' ] );
-
 		// Render links.
 		foreach( $inner_blocks as $inner_block ) $content .= $inner_block->render();
 		
@@ -150,6 +149,8 @@ class Pages extends Dynamic {
 		$inner_blocks = wp_list_filter( $all_pages, [ 'post_parent' => $page->ID ] );
 
 		if( ! empty( $inner_blocks ) ) {
+			wp_enqueue_style( 'wp-block-navigation-submenu' );
+
 			$block = wp_parse_args( [
 				'innerBlocks' => array_map( function( $page ) use( $all_pages ) {
 					return self::parse_block( $page, $all_pages );

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.4.8
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -43,14 +43,16 @@ class Paragraph extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {}
+	public function register() {
+		$this->enqueue_styles();
+	}
 
 	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return "
 		p.has-background {
 			padding: 0.5rem 0.8rem;

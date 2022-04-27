@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.4.8
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -44,15 +44,30 @@ class Columns extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {}
+	public function register() {
+		$this->enqueue_styles();
+	}
 
 	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
-		$mobile	= wecodeart_json( [ 'settings', 'custom', 'breakpoints', 'sm' ], '640px' );
+	public function styles() {
+		$breaks	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$mobile	= get_prop( $breaks, 'sm', '640px' );
+
+		$inline = '
+			*[class*="col-"] {
+				flex: 0 0 auto;
+			}
+		';
+		
+		foreach( $breaks as $key => $val ) {
+			$inline .= "@media (min-width:{$val}){";
+			$inline .= ".col-{$key}{flex: 1 0 0%}";
+			$inline .= "}";
+		}
 
 		return "
 		.wp-block-columns {
@@ -69,6 +84,8 @@ class Columns extends Dynamic {
 			align-items: flex-end;
 		}
 		.wp-block-column {
+			width: 100%;
+    		flex: 1 0 0%;
 			max-width: 100%;
 		}
 		.wp-block-column.is-vertically-aligned-top {
@@ -85,6 +102,7 @@ class Columns extends Dynamic {
 				flex-direction: column;
 			}
 		}
+		{$inline}
 		";
 	}
 }

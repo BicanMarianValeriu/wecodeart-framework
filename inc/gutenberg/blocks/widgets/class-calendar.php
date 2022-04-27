@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -45,6 +45,8 @@ class Calendar extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+		
 		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
@@ -57,9 +59,6 @@ class Calendar extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
-		// Queue block for assets.
-		wecodeart( 'blocks' )->load( [ 'core/table' ] );
-
 		// Remove ID
 		$content = preg_replace( '/(<[^>]+) id=".*?"/i', '$1', $content, 1 );
 		// Add Bootstrap Classes
@@ -73,10 +72,9 @@ class Calendar extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return "
-		.wp-block-calendar,
-		.wp-block-calendar caption {
+		.wp-block-calendar {
 			text-align: center;
 		}
 		.wp-block-calendar caption {
@@ -85,6 +83,10 @@ class Calendar extends Dynamic {
 		}
 		.wp-block-calendar .wp-calendar-table {
 			caption-side: top;
+			width: 100%;
+		}
+		.wp-block-calendar .wp-calendar-table thead {
+			background-color: var(--wp--preset--color--light);
 		}
 		.wp-block-calendar .wp-calendar-nav {
 			margin-bottom: 1.5rem;

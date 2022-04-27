@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Embed block.
@@ -44,38 +43,40 @@ class Embed extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {}
+	public function register() {
+		$this->enqueue_styles();
+	}
 
 	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return '
 		.wp-block-embed {
 			margin-bottom: 1rem;
 		}
 		.wp-block-embed.wp-embed-aspect-21-9 .wp-block-embed__wrapper::before {
-			padding-top: 42.85%; // 9 / 21 * 100
+			padding-top: calc(9 / 21 * 100%);
 		}
 		.wp-block-embed.wp-embed-aspect-18-9 .wp-block-embed__wrapper::before {
-			padding-top: 50%; // 9 / 18 * 100
+			padding-top: calc(9 / 18 * 100%);
 		}
 		.wp-block-embed.wp-embed-aspect-16-9 .wp-block-embed__wrapper::before {
-			padding-top: 56.25%; // 9 / 16 * 100
+			padding-top: calc(9 / 16 * 100%);
 		}
 		.wp-block-embed.wp-embed-aspect-4-3 .wp-block-embed__wrapper::before {
-			padding-top: 75%; // 3 / 4 * 100
+			padding-top: calc(3 / 4 * 100%);
 		}
 		.wp-block-embed.wp-embed-aspect-1-1 .wp-block-embed__wrapper::before {
-			padding-top: 100%; // 1 / 1 * 100
+			padding-top: calc(1 / 1 * 100%);
 		}
 		.wp-block-embed.wp-embed-aspect-9-16 .wp-block-embed__wrapper::before {
-			padding-top: 177.78%; // 16 / 9 * 100
+			padding-top: calc(16 / 9 * 100%);
 		}
 		.wp-block-embed.wp-embed-aspect-1-2 .wp-block-embed__wrapper::before {
-			padding-top: 200%; // 2 / 1 * 100
+			padding-top: calc(2 / 1 * 100%);
 		}
 		.wp-embed-responsive .wp-block-embed__wrapper {
 			position: relative;

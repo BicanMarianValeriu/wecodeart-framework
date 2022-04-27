@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.1.2
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Support\Markup;
@@ -107,14 +107,14 @@ class Inputs implements Configuration {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	5.4.5
+	 * @version	5.5.8
 	 */
 	public function assets() {
-		wp_register_style( $this->make_handle(), $this->get_asset( 'css', 'blocks/forms' ), [
+		wp_register_style( $this->make_handle(), $this->get_asset( 'css', 'modules/forms' ), [
             'wecodeart-support-assets'
         ], wecodeart( 'version' ) );
 
-		wp_register_script( $this->make_handle(), $this->get_asset( 'js', 'blocks/forms' ), [
+		wp_register_script( $this->make_handle(), $this->get_asset( 'js', 'modules/forms' ), [
             'wecodeart-support-assets'
         ], wecodeart( 'version' ), true );
 	}

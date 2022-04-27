@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.7
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -78,6 +78,13 @@ class Cover extends Base {
 				'element'	=> join( '>', [ $this->element, '.has-background-gradient' ] ),
 				'property' 	=> 'background-image',
 				'value'	  	=> $value,
+			], $output );
+		}
+		
+		if( get_prop( $this->attrs, 'useFeaturedImage' ) ) {
+			$this->output[] = wp_parse_args( [
+				'property' 	=> 'background-image',
+				'value'	  	=> get_post_thumbnail_id(),
 			], $output );
 		}
 	}

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -17,15 +17,12 @@ namespace WeCodeArt\Gutenberg\Blocks;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Abstract Dynamic block.
  */
 abstract class Dynamic {
-
-    use Asset;
 
 	/**
 	 * Block namespace.
@@ -170,7 +167,46 @@ abstract class Dynamic {
 	 *
 	 * @return 	string Block CSS.
 	 */
-	public static function styles() {
+	public function enqueue_styles( $deps = [] ) {
+		// These are cached styles, so we only generate minified version.
+		$styles = wecodeart( 'styles' )::compress( $this->styles() );
+		
+		if( empty( $styles ) ) return;
+		
+		$filesystem = wecodeart( 'files' );
+		$filesystem->set_folder( 'cache' );
+
+		$block_handle 	= 'wp-block-' . $this->block_name;
+		$block_css 		= 'block-' . $this->block_name . '.css';
+
+		if( ! $filesystem->has_file( $block_css ) ) {
+			$filesystem->create_file( $block_css, $styles );
+		}
+		
+		// Deregister Core
+		wp_deregister_style( $block_handle );
+
+		// Register Custom
+		wp_register_style( $block_handle, $filesystem->get_file_url( $block_css, true ), $deps, wecodeart( 'version' ) );
+
+		// Enqueue Custom
+		wp_enqueue_block_style( $this->get_block_type(), [
+			'handle'	=> $block_handle,
+			'src'		=> $filesystem->get_file_url( $block_css, true ),
+			'path'		=> $filesystem->get_file_url( $block_css ),
+			'deps'		=> $deps,
+			'ver'		=> wecodeart( 'version' )
+		] );
+
+		$filesystem->set_folder( '' );
+	}
+
+	/**
+	 * Block styles.
+	 *
+	 * @return 	string Block CSS.
+	 */
+	public function styles() {
 		return '';
 	}
 }

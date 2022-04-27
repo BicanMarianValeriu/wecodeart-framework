@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.4.0
- * @version		5.4.7
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Support;
@@ -51,8 +51,8 @@ final class Assets implements Integration {
 	 */
 	public function register_hooks() {
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'front_scripts'		], 0 );
-		add_action( 'wp_enqueue_scripts', 	[ $this, 'localize_js' 			], 90 );
-		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			], 95 );
+		add_action( 'wp_enqueue_scripts', 	[ $this, 'localize_js' 			] );
+		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			] );
 		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] );
 	}
 
@@ -87,7 +87,7 @@ final class Assets implements Integration {
 	 * WeCodeArt JS Object
 	 *
 	 * @since	3.2
-	 * @version	5.5.1
+	 * @version	5.5.8
 	 *
 	 * @return 	void
 	 */
@@ -104,7 +104,6 @@ final class Assets implements Integration {
 			$wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
 		}
 
-		$wecodeart = apply_filters( 'wecodeart/filter/scripts/localize', $wecodeart );
 		$wecodeart = apply_filters( 'wecodeart/filter/support/assets/localize', $wecodeart );
 		
 		wp_localize_script( $this->make_handle(), 'wecodeart', $wecodeart );

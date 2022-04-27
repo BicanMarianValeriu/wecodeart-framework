@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -45,6 +45,8 @@ class Numbers extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+        $this->enqueue_styles();
+
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -166,8 +168,9 @@ class Numbers extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
         $button_css = wecodeart_json( [ 'styles', 'blocks', 'core/button' ] );
+
         $width      = get_prop( $button_css, [ 'border', 'width' ], '1px' );
         $style      = get_prop( $button_css, [ 'border', 'style' ], 'solid' );
         $color      = get_prop( $button_css, [ 'border', 'color' ], 'currentColor' );
@@ -187,19 +190,19 @@ class Numbers extends Dynamic {
             color: var(--wp--preset--color--primary);
             text-decoration: none;
             background-color: white;
-            padding: 0.35rem 0.75rem;
+            padding: .35rem .75rem;
             border: $width $style $color;
         }
         .pagination__link:hover {
             z-index: 2;
             color: var(--wp--preset--color--primary);
-            background-color: var(--wp--light);
+            background-color: var(--wp--preset--color--light);
             border-color: $color;
         }
         .pagination__link:focus {
             z-index: 3;
             color: var(--wp--preset--color--primary);
-            background-color: var(--wp--light);
+            background-color: var(--wp--preset--color--light);
             outline: none;
             box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
         }

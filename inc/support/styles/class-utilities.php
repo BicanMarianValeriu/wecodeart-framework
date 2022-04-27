@@ -9,7 +9,7 @@
  * @subpackage  Styles Utilities
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -116,7 +116,8 @@ class Utilities implements Configuration {
         }
         
         if( ! empty( $array_css ) ) {
-            $processed 	= $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
+            $array_css  = $this->CSS::sort_breakpoints( $array_css );
+            $processed  = $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
             $inline_css .= $this->CSS::compress( $processed );
         }
 

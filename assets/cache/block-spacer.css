@@ -1,0 +1,1 @@
+.wp-block-spacer{height:calc(var(--wp--spacer-height,100px) * var(--wp--spacer-mobile,.5));width:var(--wp--spacer-width,100%);clear:both}@media (min-width:768px){.wp-block-spacer{height:calc(var(--wp--spacer-height,100px) * var(--wp--spacer-tablet,.7))}}@media (min-width:992px){.wp-block-spacer{height:var(--wp--spacer-height,100px)}}

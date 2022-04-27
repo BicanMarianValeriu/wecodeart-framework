@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -45,6 +45,8 @@ class Date extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+		
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -104,7 +106,7 @@ class Date extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return "
 		.wp-block-post-date--updated .wp-block-post-date__updated {
 			display: none;

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.7
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -43,14 +43,16 @@ class Image extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {}
+	public function register() {
+		$this->enqueue_styles();
+	}
 
 	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return '
 		.wp-block-image.aligncenter {
 			text-align: center;

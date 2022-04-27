@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -114,21 +114,5 @@ class Title extends Dynamic {
 		return wecodeart( 'markup' )::wrap( 'wp-block-post-title', $wrappers, function( $id ) {
 			echo get_the_title( $id );
 		}, [ $block->context['postId'] ], false );
-	}
-
-	/**
-	 * Block styles
-	 *
-	 * @return 	string 	The block styles.
-	 */
-	public static function styles() {
-		return "
-		.wp-block-post-title {
-			word-break: break-word;
-		}
-		.wp-block-post-title a {
-			display: inline-block;
-		}
-		";
 	}
 }

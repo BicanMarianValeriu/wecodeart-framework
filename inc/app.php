@@ -93,17 +93,38 @@ return [
     ],
     /*
     |--------------------------------------------------------------------------
-    | Theme Header/Footer
+    | Theme Header
     |--------------------------------------------------------------------------
     |
-    | This array of options will be used as defaults for header/footer.
+    | This array of options will be used as defaults for header.
     |
     */
     'header' => [
         'clean'     => false
     ],
+    /*
+    |--------------------------------------------------------------------------
+    | Theme Footer
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for footer.
+    |
+    */
     'footer' => [
         'jquery'    => false
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Theme Placeholder
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for placeholder.
+    |
+    */
+    'placeholder' => [
+        'text'  => __( 'Placeholder', 'wecodeart' ),
+        'src'   => "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' preserveAspectRatio='none'%3E%3Cpath fill='%23EEE' d='M0 0h300v300H0z'/%3E%3Ctext x='50%25' y='50%25' fill='%23aaa' dominant-baseline='middle' text-anchor='middle' font-family='Arial,Helvetica,Open Sans,sans-serif,monospace' font-size='20' %3E" . esc_attr__( 'Placeholder', 'wecodeart' ) . "%3C/text%3E%3C/svg%3E",
+        'html'  => '<img class="%s" src="%s" alt="%s" />'
     ],
     /*
     |--------------------------------------------------------------------------
@@ -119,6 +140,15 @@ return [
             'height'        => 60,
             'width'         => 60,
             'flex-height'   => true,
+        ],
+        'fonts' => [
+            'system' => [],
+            'google' => [
+                [
+                    'family' 	=> 'Open Sans',
+                    'variants' 	=> [ 300, 'regular' ]
+                ]
+            ]
         ],
     ],
 ];

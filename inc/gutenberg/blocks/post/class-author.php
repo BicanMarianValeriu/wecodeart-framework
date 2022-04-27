@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.1
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -50,6 +50,8 @@ class Author extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		wp_deregister_style( 'wp-block-' . $this->block_name );
+
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 

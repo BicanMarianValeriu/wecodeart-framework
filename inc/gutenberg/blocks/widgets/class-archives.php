@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.5.1
- * @version		5.5.1
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -46,6 +46,8 @@ class Archives extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+		
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -179,7 +181,7 @@ class Archives extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		return "
 		.wp-block-archives {
 			margin-bottom: 1rem;

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.1
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -45,6 +45,8 @@ class Menu extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+
 		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -62,5 +64,252 @@ class Menu extends Dynamic {
 		}
 		
 		return $settings;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		$inline = '';
+
+		$inline .= "
+			/* Dropdowns */
+			.dropup,
+			.dropend,
+			.dropdown,
+			.dropstart {
+				position: relative;
+			}
+			.dropdown-toggle {
+				white-space: nowrap;
+			}
+			.dropdown-toggle::after {
+				content: '';
+				display: inline-block;
+				margin-left: 0.255em;
+				vertical-align: 0.255em;
+				border-top: 0.3em solid;
+				border-left: 0.3em solid transparent;
+				border-right: 0.3em solid transparent;
+				border-bottom: 0;
+			}
+			.dropdown-toggle:empty::after {
+				margin-left: 0;
+			}
+			.dropdown-menu {
+				position: absolute;
+				z-index: 1000;
+				display: none;
+				min-width: 10rem;
+				padding: 0.5rem 0;
+				margin: 0;
+				/* font-size: 1rem; */
+				text-align: left;
+				list-style: none;
+				color: var(--wp--preset--color--dark);
+				background-color: var(--wp--preset--color--white);
+				background-clip: padding-box;
+				border: 1px solid rgba(0, 0, 0, 0.15);
+				border-radius: 0.25rem;
+			}
+			.dropdown-menu[data-bs-popper] {
+				top: 100%;
+				left: 0;
+				margin-top: 0.125rem;
+			}
+			.dropdown-menu-start {
+				--wp-position: start;
+			}
+			.dropdown-menu-start[data-bs-popper] {
+				right: auto;
+				left: 0;
+			}
+			.dropdown-menu-end {
+				--wp-position: end;
+			}
+			.dropdown-menu-end[data-bs-popper] {
+				right: 0;
+				left: auto;
+			}
+		";
+
+		// Temporary Disable unnecessary styles until we implement something
+		if( false ) { 
+			$inline .= "
+				.dropup .dropdown-menu[data-bs-popper] {
+					top: auto;
+					bottom: 100%;
+					margin-top: 0;
+					margin-bottom: 0.125rem;
+				}
+				.dropup .dropdown-toggle::after {
+					content: '';
+					display: inline-block;
+					margin-left: 0.255em;
+					vertical-align: 0.255em;
+					border-top: 0;
+					border-right: 0.3em solid transparent;
+					border-bottom: 0.3em solid;
+					border-left: 0.3em solid transparent;
+				}
+				.dropup .dropdown-toggle:empty::after {
+					margin-left: 0;
+				}
+				.dropend .dropdown-menu[data-bs-popper] {
+					top: 0;
+					right: auto;
+					left: 100%;
+					margin-top: 0;
+					margin-left: 0.125rem;
+				}
+				.dropend .dropdown-toggle::after {
+					content: '';
+					display: inline-block;
+					margin-left: 0.255em;
+					vertical-align: 0.255em;
+					border-top: 0.3em solid transparent;
+					border-right: 0;
+					border-bottom: 0.3em solid transparent;
+					border-left: 0.3em solid;
+				}
+				.dropend .dropdown-toggle:empty::after {
+					margin-left: 0;
+				}
+				.dropend .dropdown-toggle::after {
+					vertical-align: 0;
+				}
+				.dropstart .dropdown-menu[data-bs-popper] {
+					top: 0;
+					right: 100%;
+					left: auto;
+					margin-top: 0;
+					margin-right: 0.125rem;
+				}
+				.dropstart .dropdown-toggle::after {
+					content: '';
+					display: inline-block;
+					margin-left: 0.255em;
+					vertical-align: 0.255em;
+				}
+				.dropstart .dropdown-toggle::after {
+					display: none;
+				}
+				.dropstart .dropdown-toggle::before {
+					content: '';
+					display: inline-block;
+					margin-right: 0.255em;
+					vertical-align: 0.255em;
+					border-top: 0.3em solid transparent;
+					border-right: 0.3em solid;
+					border-bottom: 0.3em solid transparent;
+				}
+				.dropstart .dropdown-toggle:empty::after {
+					margin-left: 0;
+				}
+				.dropstart .dropdown-toggle::before {
+					vertical-align: 0;
+				}
+			";
+		}
+
+		$inline .= "
+			.dropdown-divider {
+				height: 0;
+				margin: 0.5rem 0;
+				overflow: hidden;
+				border-top: 1px solid rgba(0, 0, 0, 0.15);
+			}
+			.dropdown-item {
+				display: block;
+				width: 100%;
+				padding: 0.25rem 1rem;
+				/* font-weight: 400; */
+				text-align: inherit;
+				white-space: nowrap;
+				color: var(--wp--gray-dark);
+				background-color: transparent;
+				border: 0;
+				clear: both;
+			}
+			.dropdown-item:hover, .dropdown-item:focus {
+				color: var(--wp--preset--color--dark);
+				background-color: var(--wp--preset--color--light);
+			}
+			.dropdown-item.active, .dropdown-item:active {
+				background-color: var(--wp--preset--color--primary);
+				color: var(--wp--preset--color--white);
+				text-decoration: none;
+			}
+			.disabled>.dropdown-item, .dropdown-item.disabled, .dropdown-item:disabled {
+				color: var(--wp--gray);
+				pointer-events: none;
+				background-color: transparent;
+			}
+			.dropdown-menu.show {
+				display: block;
+			}	  
+			.dropdown-header {
+				display: block;
+				padding: 0.5rem 1rem;
+				margin-bottom: 0;
+				font-size: var(--wp--preset--font-size--small);
+				color: var(--wp--gray);
+				white-space: nowrap;
+			}
+			.dropdown-item-text {
+				display: block;
+				padding: 0.25rem 1rem;
+				color: var(--wp--preset--color--light);
+			}
+			.dropdown-menu-dark {
+				color: var(--wp--preset--color--light);
+				background-color: var(--wp--preset--color--dark);
+				border-color: rgba(0, 0, 0, 0.15);
+			}
+			.dropdown-menu-dark .dropdown-item {
+				color: var(--wp--preset--color--light);
+			}
+			.dropdown-menu-dark .dropdown-item:hover, .dropdown-menu-dark .dropdown-item:focus {
+				color: var(--wp--preset--color--white);
+				background-color: rgba(255, 255, 255, 0.15);
+			}
+			.dropdown-menu-dark .dropdown-item.active, .dropdown-menu-dark .dropdown-item:active {
+				color: var(--wp--preset--color--white);
+				background-color: var(--wp--preset--color--primary);
+			}
+			.dropdown-menu-dark .dropdown-item.disabled, .dropdown-menu-dark .dropdown-item:disabled {
+				color: var(--wp--gray);
+			}
+			.dropdown-menu-dark .dropdown-divider {
+				border-color: rgba(0, 0, 0, 0.15);
+			}
+			.dropdown-menu-dark .dropdown-item-text {
+				color: var(--wp--preset--color--light);
+			}
+			.dropdown-menu-dark .dropdown-header {
+				color: var(--wp--gray);
+			}
+
+			/* Block */
+			.wp-block-navigation.hide-toggle .dropdown-toggle::after {
+				content: none;
+			}
+			.wp-block-navigation.with-hover .dropdown:where(:hover,:focus,:focus-within) > .dropdown-toggle ~ .dropdown-menu {
+				display: block;
+				visibility: visible;
+				opacity: 1;
+			}
+			.wp-block-navigation .dropdown-menu[data-bs-popper] {
+				margin-top: 0;
+			}
+			.wp-block-navigation .dropdown-menu .dropdown-menu {
+				top: 0;
+				left: 100%;
+			}
+		";
+
+		return $inline;
 	}
 }

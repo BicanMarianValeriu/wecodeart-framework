@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles\Property\FontFamily
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Support\Styles\Property;
@@ -31,7 +31,7 @@ class Focal extends Styles\Property {
 		$processed = '';
 
 		if ( is_array( $this->value ) && isset( $this->value['x'] ) && isset( $this->value['y'] ) ) {
-			$processed = ( $this->value['x'] * 100 ) . '% ' . ( $this->value['y'] * 100 ) . '%';
+			$processed = round( $this->value['x'] * 100 ) . '% ' . round( $this->value['y'] * 100 ) . '%';
 		}
 		
 		$this->value = esc_attr( $processed );

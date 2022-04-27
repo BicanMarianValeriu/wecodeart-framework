@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.1
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Gutenberg\Blocks\Navigation;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use WeCodeArt\Gutenberg\Blocks\Navigation;
 use function WeCodeArt\Functions\get_prop;
@@ -27,6 +28,7 @@ use function WeCodeArt\Functions\flatten;
  */
 class Link extends Dynamic {
 
+	use Asset;
 	use Singleton;
 
 	/**
@@ -47,6 +49,8 @@ class Link extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		$this->enqueue_styles();
+
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -159,6 +163,11 @@ class Link extends Dynamic {
 	 */
 	public function render_submenu( $block ) {
 		if( count( $block->inner_blocks ) === 0 ) return;
+
+		// Scripts
+		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( $this->make_handle() ) ) {
+			wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'modules/dropdown' ), [], wecodeart( 'version' ), true );
+		}
 
 		$inner_html = '';
 		foreach ( $block->inner_blocks as $inner_block ) $inner_html .= $inner_block->render();
@@ -352,5 +361,45 @@ class Link extends Dynamic {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.nav-link {
+			display: block;
+			padding: 0.5rem 1rem;
+			color: var(--wp--preset--color--primary);
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+		}
+		.disabled>.nav-link,
+		.nav-link.disabled {
+			color: var(--wp--preset--color--gray);
+			pointer-events: none;
+			cursor: default;
+		}
+		.wp-block-navigation.has-text-color .nav-link {
+			color: inherit;
+		}
+		.wp-block-navigation .nav-link {
+			display: flex;
+			align-items: center;
+		}
+		.wp-block-navigation .wp-block-navigation-link__icon {
+			margin-right: .5rem;
+		}
+		.wp-block-navigation .wp-block-navigation-link__label {
+			flex: 1 1 auto;
+			word-break: normal;
+			overflow-wrap: break-word;
+		}
+		.wp-block-navigation .wp-block-navigation-item__description {
+			display: none;
+		}
+		";
 	}
 }

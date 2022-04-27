@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -46,6 +46,9 @@ class Image extends Dynamic {
 	 */
 	public function register() {
 		set_post_thumbnail_size( 1920, 1080 );
+
+		$this->enqueue_styles();
+
 		add_filter( 'post_thumbnail_html',			[ $this, 'filter_html'		], 20, 3 );
 		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render'	], 20, 2 );
 	}
@@ -165,14 +168,17 @@ class Image extends Dynamic {
 	 */
 	public function filter_html( $html, $post, $thumbnail ) {
 		if( $html === '' && $thumbnail === 0 ) {
-			$placeholder_text	= apply_filters( 'wecodeart/filter/gutenberg/featured/placeholder', esc_attr__( 'Placeholder', 'wecodeart' ) );
-			$placeholder_url 	= "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' preserveAspectRatio='none'%3E%3Cpath fill='%23EEE' d='M0 0h300v300H0z'/%3E%3Ctext x='50%25' y='50%25' fill='%23aaa' dominant-baseline='middle' text-anchor='middle' font-family='Arial,Helvetica,Open Sans,sans-serif,monospace' font-size='20' %3E $placeholder_text %3C/text%3E%3C/svg%3E";
+			$placeholder = wecodeart_config( 'placeholder', false );
 
-			$html = sprintf(
-				'<img class="%2$s" src="%1$s" alt="%3$s"/>',
-				$placeholder_url,
+			if( $placeholder === false ) return $html;
+			
+			$source = get_prop( $placeholder, [ 'src' ] );
+
+			$html 	= sprintf(
+				get_prop( $placeholder, 'html', '<img class="%s" src="%s" alt="%s" />' ),
 				'wp-block-post-featured-image__src',
-				esc_attr__( 'Placeholder image', 'wecodeart' )
+				esc_url( $source, strpos( $source, 'data:image' ) !== false ? [ 'data' ] : null ),
+				esc_attr( get_prop( $placeholder, [ 'text' ] ) )
 			);
 		}
 
@@ -240,11 +246,11 @@ class Image extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function styles() {
+	public function styles() {
 		$ratio_css = '';
 
-		if( self::use_ratio() ) {
-			$dummy_sizes	= Image::get_image_sizes( apply_filters( 'post_thumbnail_size', 'post-thumbnail', get_the_ID() ) );
+		if( static::use_ratio() ) {
+			$dummy_sizes	= static::get_image_sizes( apply_filters( 'post_thumbnail_size', 'post-thumbnail', get_the_ID() ) );
 			$dummy_ratio	= absint( $dummy_sizes['height'] ) / absint( $dummy_sizes['width'] );
 
 			$ratio_css .= "
