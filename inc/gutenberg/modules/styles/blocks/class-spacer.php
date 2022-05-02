@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -36,18 +36,19 @@ class Spacer extends Base {
 		// Height
 		if ( $value = get_prop( $this->attrs, 'height', 100 ) ) {
 			// Mobile Spacer can be reduced using custom CSS variable
-			$this->output[] = wp_parse_args( [
+			array_unshift( $this->output, wp_parse_args( [
 				'property' 	=> '--wp--spacer-height',
 				'value'	  	=> $value,
-			], $output );
+			], $output ) );
 		}
 		
+		// Width
 		if ( $value = get_prop( $this->attrs, 'width' ) ) {
 			// Mobile Spacer can be reduced using custom CSS variable
-			$this->output[] = wp_parse_args( [
+			array_unshift( $this->output, wp_parse_args( [
 				'property' 	=> '--wp--spacer-width',
 				'value'	  	=> $value,
-			], $output );
+			], $output ) );
 		}
 	}
 }

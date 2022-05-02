@@ -45,11 +45,9 @@ class Form extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-
-		add_filter( 'comment_form_fields',		[ $this, 'comment_form_fields' 		], 90 );
-		add_filter( 'comment_form_defaults',	[ $this, 'comment_form_defaults' 	], 90 );
-		add_action( 'pre_comment_on_post',  	[ $this, 'validate_privacy'			] );
+		\add_filter( 'comment_form_fields',		[ $this, 'comment_form_fields' 		], 90 );
+		\add_filter( 'comment_form_defaults',	[ $this, 'comment_form_defaults' 	], 90 );
+		\add_action( 'pre_comment_on_post',  	[ $this, 'validate_privacy'			] );
 	}
 
 	/**

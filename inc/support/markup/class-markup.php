@@ -154,7 +154,6 @@ class Markup implements Integration {
 		}
 
 		return $text;
-
 	}
 
 	/**

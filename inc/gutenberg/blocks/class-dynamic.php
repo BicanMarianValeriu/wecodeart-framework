@@ -16,7 +16,6 @@ namespace WeCodeArt\Gutenberg\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -90,6 +89,53 @@ abstract class Dynamic {
 	}
 
 	/**
+	 * Get block wrapper attributes.
+	 *
+	 * @return array
+	 */
+	protected function get_block_wrapper_attributes( $extra_attributes = [] ) {
+		$new_attributes = \WP_Block_Supports::get_instance()->apply_block_supports();
+	
+		if ( empty( $new_attributes ) && empty( $extra_attributes ) ) {
+			return [];
+		}
+	
+		// This is hardcoded on purpose.
+		// We only support a fixed list of attributes.
+		$attributes_to_merge = [ 'class', 'style', 'data-test' ];
+		$attributes          = [];
+		foreach ( $attributes_to_merge as $attribute_name ) {
+			if ( empty( $new_attributes[ $attribute_name ] ) && empty( $extra_attributes[ $attribute_name ] ) ) {
+				continue;
+			}
+	
+			if ( empty( $new_attributes[ $attribute_name ] ) ) {
+				$attributes[ $attribute_name ] = $extra_attributes[ $attribute_name ];
+				continue;
+			}
+	
+			if ( empty( $extra_attributes[ $attribute_name ] ) ) {
+				$attributes[ $attribute_name ] = $new_attributes[ $attribute_name ];
+				continue;
+			}
+	
+			$attributes[ $attribute_name ] = $extra_attributes[ $attribute_name ] . ' ' . $new_attributes[ $attribute_name ];
+		}
+	
+		foreach ( $extra_attributes as $attribute_name => $value ) {
+			if ( ! in_array( $attribute_name, $attributes_to_merge, true ) ) {
+				$attributes[ $attribute_name ] = $value;
+			}
+		}
+	
+		if ( empty( $attributes ) ) {
+			return [];
+		}
+	
+		return $attributes;
+	}
+
+	/**
 	 * Get the block type.
 	 *
 	 * @return string
@@ -120,7 +166,7 @@ abstract class Dynamic {
 	 * Get the schema for a value.
 	 *
 	 * @param  string 	$default  The default value.
-	 *s
+	 *
 	 * @return array 	Property definition.
 	 */
 	protected function get_schema( string $type, $default ) {

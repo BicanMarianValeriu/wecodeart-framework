@@ -51,9 +51,9 @@ class AuthorName extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		wp_deregister_style( 'wp-block-' . $this->block_name );
+		\wp_deregister_style( 'wp-block-' . $this->block_name );
 
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**

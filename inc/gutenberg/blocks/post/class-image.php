@@ -28,6 +28,13 @@ class Image extends Dynamic {
 	use Singleton;
 
 	/**
+	 * Block static.
+	 *
+	 * @var mixed
+	 */
+	protected static $ratio = null;
+
+	/**
 	 * Block namespace.
 	 *
 	 * @var string
@@ -47,10 +54,8 @@ class Image extends Dynamic {
 	public function register() {
 		set_post_thumbnail_size( 1920, 1080 );
 
-		$this->enqueue_styles();
-
-		add_filter( 'post_thumbnail_html',			[ $this, 'filter_html'		], 20, 3 );
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render'	], 20, 2 );
+		\add_filter( 'post_thumbnail_html',				[ $this, 'filter_html'		], 20, 3 );
+		\add_filter( 'block_type_metadata_settings', 	[ $this, 'filter_render'	], 20, 2 );
 	}
 
 	/**
@@ -89,7 +94,13 @@ class Image extends Dynamic {
 		$classnames = [ $context ];
 
 		if( $use_ratio ) {
-			$classnames[] = 'ratio';
+			if( is_null( self::$ratio ) ) {
+				wp_add_inline_style( 'wp-block-' . $this->block_name, $this->ratio_styles() );
+
+				self::$ratio = true;
+			}
+
+			$classnames[] = 'wp-block-post-featured-image--ratio';
 		}
 
 		if( $align = get_prop( $attributes, 'align' ) ) {
@@ -117,14 +128,13 @@ class Image extends Dynamic {
 		$dummy_ratio 	= number_format( $dummy_ratio * 100, 3 ) . '%';
 
 		if( $link ) {
-			$classnames = array_diff( $classnames, [ 'ratio' ] );
-			$filter = function( $wrappers ) use ( $post_ID, $context, $dummy_ratio, $use_ratio ) {
+			$filter = function( $wrappers ) use ( $post_ID, $context, $dummy_ratio ) {
 				$wrappers = array_merge( $wrappers, [
 					[
 						'tag' 	=> 'a',
 						'attrs'	=> [
 							'href' 	=> get_permalink( $post_ID ),
-							'class'	=> $context . '__link' . ( $use_ratio ? ' ratio' : '' ),
+							'class'	=> $context . '__link',
 							'style'	=> sprintf( '--wp--aspect-ratio:%s;', $dummy_ratio )
 						]
 					]
@@ -246,32 +256,48 @@ class Image extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
-		$ratio_css = '';
+	public function ratio_styles() {
+		$dummy_sizes	= static::get_image_sizes( apply_filters( 'post_thumbnail_size', 'post-thumbnail', get_the_ID() ) );
+		$dummy_ratio	= absint( $dummy_sizes['height'] ) / absint( $dummy_sizes['width'] );
 
-		if( static::use_ratio() ) {
-			$dummy_sizes	= static::get_image_sizes( apply_filters( 'post_thumbnail_size', 'post-thumbnail', get_the_ID() ) );
-			$dummy_ratio	= absint( $dummy_sizes['height'] ) / absint( $dummy_sizes['width'] );
-
-			$ratio_css .= "
+		return wecodeart( 'styles' )::compress( "
+			.wp-block-post-featured-image--ratio {
 				--wp--width: {$dummy_sizes['width']};
 				--wp--height: {$dummy_sizes['height']};
 				--wp--aspect-ratio: calc(var(--wp--height) / var(--wp--width) * 100% );
-			";
-		}
+			}
+			.wp-block-post-featured-image--ratio::before {
+				content: '';
+				display: block;
+				padding-top: var(--wp--aspect-ratio);
+			}
+			.wp-block-post-featured-image--ratio img {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		" );
+	}
 
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
 		return "
 		.wp-block-post-featured-image {
-			{$ratio_css}
 			position: relative;
 			overflow: hidden;
+			max-width: 100%;
 		}
 		.wp-block-post-featured-image__link {
 			display: block;
-			min-width: 150px;
 		}
 		.wp-block-post-featured-image img {
 			width: 100%;
+			height: 100%;
+			min-width: 150px;
 			object-fit: cover;
 		}
 		.wp-block-post-featured-image img[data-placeholder-resp] {

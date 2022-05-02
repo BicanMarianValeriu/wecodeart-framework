@@ -45,7 +45,7 @@ class RSS extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
+		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
 	}
 
 	/**

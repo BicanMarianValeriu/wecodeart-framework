@@ -50,9 +50,7 @@ class Author extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		wp_deregister_style( 'wp-block-' . $this->block_name );
-
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -94,10 +92,24 @@ class Author extends Dynamic {
 				'id' 	=> $author_id,
 				'url' 	=> get_author_posts_url( $author_id ),
 				'name' 	=> get_the_author_meta( 'display_name', $author_id ),
-				'description'	=> wpautop( get_the_author_meta( 'description', $author_id ) ),
+				'bio'	=> wpautop( get_the_author_meta( 'description', $author_id ) ),
 			]
 		];
 
 		return wecodeart_template( 'meta/author', $args, false );
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.wp-block-post-author {
+			display: flex;
+			flex-wrap: wrap
+		}
+		";
 	}
 }

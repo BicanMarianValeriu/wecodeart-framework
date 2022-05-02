@@ -45,7 +45,7 @@ class Template extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' 	], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' 	], 10, 2 );
 	}
 
 	/**
@@ -105,17 +105,19 @@ class Template extends Dynamic {
 			$header	= esc_html__( 'No comments', 'wecodeart' );
 		} else {
 			// Required Utilities
-			wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5', 'mb-5', 'my-1' ] );
+			wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5', 'mb-5' ] );
 
 			$header = sprintf(
-				_nx( '%1$s comment', '%1$s comments', $comments_number, 'comments title', 'wecodeart' ),
-				number_format_i18n( $comments_number )
+				_nx( '%1$s comment', '%1$s comments', get_comments_number(), 'comments title', 'wecodeart' ),
+				number_format_i18n( get_comments_number() )
 			);
 		}
 
 		$output .= sprintf( '<span>%s</span>', $header );
 
 		if( comments_open( $post_id ) ) {
+			// Required Utilities
+			wecodeart( 'styles' )->Utilities->load( [ 'float-end', 'my-1' ] );
 			$output .= sprintf(
 				'<a class="comments__add-new float-end my-1 has-small-font-size" href="#respond" rel="nofollow">%s</a>',
 				esc_html__( 'add one', 'wecodeart' )
@@ -125,21 +127,22 @@ class Template extends Dynamic {
 		$content = '';
 		
 		// Head
-		$content .= wecodeart( 'markup' )::wrap( 'wp-block-comments-head', [ [
+		$content .= wecodeart( 'markup' )::wrap( 'wp-block-comments-title', [ [
 			'tag' 	=> 'h3',
 			'attrs' => [
-				'class' => 'wp-block-comments-query-loop__head'
+				
+				'id'	=> 'comments',
+				'class' => 'wp-block-comments-title'
 			]
 		] ], $output, [], false );
 
 		// List
-        $content .= wecodeart( 'markup' )::wrap( 'wp-block-comments-list', [
+        $content .= wecodeart( 'markup' )::wrap( 'wp-block-comment-template', [
 			[
 				'tag' 	=> 'ul',
-				'attrs'	=> [
-					'id'	=> 'comments',
-					'class' => 'wp-block-comments-query-loop__list list-unstyled'
-				]
+				'attrs'	=> $this->get_block_wrapper_attributes( [
+					'class' => 'list-unstyled'
+				] )
 			]
 		], [ __CLASS__, 'render_comments' ], [ $comments, $block ], false );
 
@@ -202,10 +205,10 @@ class Template extends Dynamic {
 		.wp-block-comments-query-loop:empty {
 			display: none;
 		}
-		.wp-block-comments-query-loop__head:only-child {
+		.wp-block-comments-title:only-child {
 			margin-bottom: 0;
 		}
-		.wp-block-comments-query-loop__head svg {
+		.wp-block-comments-title svg {
 			margin-right: .5rem;
 		}
 		";

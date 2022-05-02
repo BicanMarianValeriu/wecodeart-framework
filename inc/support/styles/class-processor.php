@@ -307,7 +307,7 @@ abstract class Processor {
 	}
 
 	/**
-	 * Returns the property vvalue.
+	 * Returns the property value.
 	 *
 	 * @param 	string  		$property 	The CSS Property.
 	 * @param 	mixed       	$value 		The Property Value.

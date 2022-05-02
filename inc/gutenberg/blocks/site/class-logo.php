@@ -45,9 +45,7 @@ class Logo extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-		
-        add_filter( 'get_custom_logo',  [ $this, 'custom_logo'  ] );
+		\add_filter( 'get_custom_logo',  [ $this, 'custom_logo'  ] );
     }
 
     /**

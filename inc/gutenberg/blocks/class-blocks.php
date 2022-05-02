@@ -93,6 +93,7 @@ class Blocks implements Configuration {
 		$this->register( 'core/post-featured-image',Blocks\Post\Image::class );
 		$this->register( 'core/post-comments-link', Blocks\Post\Comments::class );
         // // Comment Blocks
+		$this->register( 'core/comments-title',     Blocks\Comment\Title::class );
 		$this->register( 'core/post-comments-form', Blocks\Comment\Form::class );
 		$this->register( 'core/comment-template',   Blocks\Comment\Template::class );
         // // Query Blocks
@@ -105,9 +106,9 @@ class Blocks implements Configuration {
 		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
 
         // Hooks
-        add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
         add_action( 'init',                     [ $this, 'register_blocks'  ], 10, 1 );
         add_action( 'wp_print_styles',          [ $this, 'remove_styles'    ], PHP_INT_MAX );
+        add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
 	}
 
     /**
@@ -116,7 +117,13 @@ class Blocks implements Configuration {
 	 * @return void
 	 */
 	public function register_blocks() {
-        foreach( $this->items as $class ) $class::get_instance()->register();
+        foreach( $this->items as $class ) {
+            $block = $class::get_instance();
+            // Maybe overwrite styles
+            $block->enqueue_styles();
+            // Registration hooks
+            $block->register();
+        }
 	}
 
     /**

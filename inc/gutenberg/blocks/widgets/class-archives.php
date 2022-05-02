@@ -46,9 +46,7 @@ class Archives extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-		
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -143,15 +141,23 @@ class Archives extends Dynamic {
 						'overlayMenu'		=> 'never',
 						'showSubmenuIcon' 	=> false,
 						'hasIcon'			=> false,
+						'style'	=> [
+							'spacing'			=> [
+								'blockGap'	=> '.5rem'
+							]
+						]
 					] ),
 					'innerBlocks' 	=> $parsed,
 				] ) )->render();
 			}
 		}
 
-		$content = wecodeart( 'markup' )::wrap( 'wp-block-archives', [], $content, [], false );
-
-		return $content;
+		return wecodeart( 'markup' )::wrap( 'wp-block-archives', [
+			[
+				'tag' 	=> 'div',
+				'attrs' => $this->get_block_wrapper_attributes()
+			]
+		], $content, [], false );
 	}
 
 	/**

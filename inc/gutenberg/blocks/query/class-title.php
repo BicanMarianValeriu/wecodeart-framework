@@ -45,10 +45,8 @@ class Title extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' 	], 10, 2 );
-		add_filter( 'get_the_archive_title',		[ $this, 'filter_title'		] );
+		\add_filter( 'block_type_metadata_settings', 	[ $this, 'filter_render' 	], 10, 2 );
+		\add_filter( 'get_the_archive_title',			[ $this, 'filter_title'		] );
 	}
 
 	/**
@@ -88,22 +86,18 @@ class Title extends Dynamic {
             $title = get_the_archive_title();
         }
 
-        $classes = [ 'wp-block-query-title' ];
+        $classnames = [];
 
         if( $align = get_prop( $attributes, 'textAlign' ) ) {
-            $classes[] = 'has-text-align-' . $align;
+            $classnames[] = 'has-text-align-' . $align;
         }
 
-		if( $classname = get_prop( $attributes, 'className' ) ) {
-			$classes = array_merge( $classes, explode( ' ', $classname ) );
-		}
-
-        return wecodeart( 'markup' )::wrap( 'wp-block-query-title', [
+        return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [
             [
                 'tag' 	=> 'h' . get_prop( $attributes, 'level', '1' ),
-                'attrs'	=> [
-                    'class' => join( ' ', $classes )
-                ]
+                'attrs'	=> $this->get_block_wrapper_attributes( [
+                    'class' => join( ' ', $classnames )
+                ] )
             ]
         ], $title, [], false );
 	}

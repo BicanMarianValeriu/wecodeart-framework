@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -88,7 +88,6 @@ class Classes implements Integration {
 			$args[] = 'col-' . $number;
 			$args[] = 'span-' . $number;
 			$args[] = 'start-' . $number;
-			$args[] = 'row-cols-' . $number;
 			$args[] = 'offset-' . $number;
 		}
 
@@ -96,19 +95,16 @@ class Classes implements Integration {
 			$args[] = 'col-' . $breakpoint;
 			$args[] = 'span-' . $breakpoint;
 			$args[] = 'col-' . $breakpoint . '-auto';
-			$args[] = 'row-cols-' . $breakpoint . '-auto';
 			
 			foreach( range( 1, 12 ) as $number ) {
 				$args[] = 'col-' . $breakpoint . '-' . $number;
 				$args[] = 'span-' . $breakpoint . '-' . $number;
 				$args[] = 'start-' . $breakpoint . '-' . $number;
-				$args[] = 'row-cols-'. $breakpoint . '-' . $number;
 				$args[] = 'offset-' . $breakpoint . '-' . $number;
 			}
 		}
 
 		return wp_parse_args( [
-			'row',
 			'grid',
 			'col-auto',
 		], $args );
@@ -154,18 +150,12 @@ class Classes implements Integration {
 			'visually-hidden',
 			'visually-hidden-focusable',
 			'screen-reader-text',
-			'screen-reader-response',
 			'sticky-top',
 			'fixed-top',
 			'fixed-bottom',
 			'list-unstyled',
 			'list-inline',
 			'list-inline-item',
-			'ratio',
-			'ratio-1x1',
-			'ratio-4x3',
-			'ratio-16x9',
-			'ratio-21x9',
 		], $args );
 	}
 }

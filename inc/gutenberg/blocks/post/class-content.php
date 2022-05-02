@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.7
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -45,10 +45,10 @@ class Content extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-        add_filter( 'wp_link_pages_link',  	 		[ $this, 'wp_link_pages_link' 	] );
-		add_filter( 'wp_link_pages_args',   		[ $this, 'wp_link_pages_args' 	] );
-		add_filter( 'the_password_form',			[ $this, 'the_password_form' 	] );
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+        \add_filter( 'wp_link_pages_link',  	 		[ $this, 'wp_link_pages_link' 	] );
+		\add_filter( 'wp_link_pages_args',   			[ $this, 'wp_link_pages_args' 	] );
+		\add_filter( 'the_password_form',				[ $this, 'the_password_form' 	] );
+		\add_filter( 'block_type_metadata_settings', 	[ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -112,22 +112,10 @@ class Content extends Dynamic {
 			return '';
 		}
 
-		$classnames = [ 'wp-block-post-content' ];
-
-		// if( $value = get_prop( $attributes, 'textAlign' ) ) {
-		// 	$classnames[] = 'has-text-align-' . $value;
-		// }
-
-		if( $value = get_prop( $attributes, 'className' ) ) {
-			$classnames[] = $value;
-		}
-
 		return wecodeart( 'markup' )::wrap( 'wp-block-post-content', [
 			[
 				'tag' 	=> 'div',
-				'attrs' => [
-					'class' => implode( ' ', $classnames )
-				]
+				'attrs' => $this->get_block_wrapper_attributes()
 			]
 		], $content, [], false );
 	}

@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Author
  * @since 		3.9.5
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -27,19 +27,21 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
     $classnames[] = 'has-text-align-' . $value;
 }
 
+wecodeart( 'styles' )->Utilities->load( [ 'me-2', 'flex-fill', 'm-0' ] );
+
 ?>
 <div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>>
     <?php if( get_prop( $attributes, 'showAvatar' ) ) : ?>
-    <span class="wp-block-post-author__avatar"><?php
+    <div class="wp-block-post-author__avatar me-2"><?php
 
     echo get_avatar(
         $author->id,
-        get_prop( $attributes, 'avatarSize', 45 ), 
+        get_prop( $attributes, 'avatarSize', 48 ), 
         '',
         sprintf( esc_html__( '%s`s avatar', 'wecodeart' ), $author->name )
     );
 
-    ?></span><?php
+    ?></div><?php
     
     else : 
     
@@ -47,19 +49,19 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
         'class' => 'wp-block-post-author__icon'
     ] );
 
-    endif; 
-    
-    if( $byline = get_prop( $attributes, 'byline' ) ) : ?>
-    <span class="wp-block-post-author__byline screen-reader-text"><?php
+    endif; ?>
+    <div class="wp-block-post-author__content flex-fill">
+    <?php if( $byline = get_prop( $attributes, 'byline' ) ) : ?>
+    <div class="wp-block-post-author__byline has-small-font-size"><?php
     
     echo esc_html( $byline );
 
-    ?></span>
+    ?></div>
     <?php endif; ?>
     <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
     <a class="wp-block-post-author__link" href="<?php echo esc_url( $author->url ); ?>" rel="author">
     <?php endif; ?>
-        <span class="wp-block-post-author__name"><?php
+        <span class="wp-block-post-author__name m-0"><?php
         
         echo esc_html( $author->name ); 
 
@@ -67,4 +69,8 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
     <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
     </a>
     <?php endif; ?>
+    <?php if( get_prop( $attributes, 'showBio' ) ) : ?>
+    <div class="wp-block-post-author__bio"><?php echo wp_kses_post( $author->bio ); ?></div>
+    <?php endif; ?>
+    </div>
 </div>

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.1
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -45,7 +45,8 @@ class Excerpt extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' 	], 10, 2 );
+		\add_filter( 'excerpt_length', 				 [ $this, 'filter_length' 	] );
 	}
 
 	/**
@@ -78,6 +79,8 @@ class Excerpt extends Dynamic {
 
 		$post_id = $block->context['postId'];
 
+		$excerpt = get_the_excerpt( $post_id );
+
 		$more_text = wecodeart( 'markup' )::wrap( 'entry-more', [
 			[
 				'tag' 	=> 'a',
@@ -94,32 +97,41 @@ class Excerpt extends Dynamic {
 			return empty( $more_text ) ? $more : '';
 		};
 
-		add_filter( 'excerpt_more', $filter_excerpt_more );
-		$html	= '<p class="wp-block-post-excerpt__text">' . get_the_excerpt( $post_id );
+		add_filter( 'excerpt_more',		$filter_excerpt_more );
+		$html	= '<p class="wp-block-post-excerpt__text">' . $excerpt;
 		if ( get_prop( $attributes, 'showMoreOnNewLine', false ) && ! empty( $more_text ) ) {
 			$html .= '</p><p class="wp-block-post-excerpt__more">' . $more_text . '</p>';
 		} else {
 			$html .= " $more_text</p>";
 		}
-		remove_filter( 'excerpt_more', $filter_excerpt_more );
+		remove_filter( 'excerpt_more',	$filter_excerpt_more );
 
-		$classnames = [ 'wp-block-post-excerpt' ];
+		$classnames = [];
 
-		if( $value = get_prop( $attributes, 'textAlign', false ) ) {
+		if( $value = get_prop( $attributes, 'textAlign' ) ) {
 			$classnames[] = 'has-text-align-' . $value;
-		}
-
-		if( $value = get_prop( $attributes, 'className', false ) ) {
-			$classnames[] = $value;
 		}
 
 		return wecodeart( 'markup' )::wrap( 'wp-block-post-excerpt', [
 			[
 				'tag' 	=> 'div',
-				'attrs' => [
-					'class' => implode( ' ', $classnames )
-				]
+				'attrs' => $this->get_block_wrapper_attributes( [
+					'class' => join( ' ', $classnames )
+				] )
 			]
 		], $html, [], false );
+	}
+
+	/**
+	 * Filter excerpt length.
+	 *
+	 * @param 	int 	$length The excerpt length.
+	 *
+	 * @return 	int
+	 */
+	public function filter_length( $length ) {
+		$length = wecodeart_config( 'excerpt', 20 );
+
+		return $length;
 	}
 }

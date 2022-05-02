@@ -51,12 +51,11 @@ class Blocks extends Processor {
 	public function __construct( $args ) {
 		$this->name		= get_prop( $args, 'blockName' );
 		$this->attrs	= get_prop( $args, 'attrs', [] );
-
-		// Set unique class
-		$this->set_element();
+		$this->element  = wp_unique_id( '.css-' );
 
 		// Process CSS
 		$this->process_attributes();
+		
 		if( method_exists( $this, 'process_extra' ) ) {
 			// Extra attributes
 			$this->process_extra();
@@ -68,16 +67,6 @@ class Blocks extends Processor {
 	}
 
 	/**
-	 * Setup element unique class.
-	 *
-	 * @return 	mixed
-	 */
-	protected function set_element() {
-		$element = wp_unique_id( '.css-' );
-		$this->element = apply_filters( 'wecodeart/filter/gutenberg/styles/element', $element, $this->name );
-	}
-
-	/**
 	 * Parses attributes and creates the styles array for them.
 	 *
 	 * @return 	void
@@ -86,7 +75,7 @@ class Blocks extends Processor {
 		$this->output = [];
 
 		$output 			= [];
-		$output['element'] 	= $this->element;
+		$output['element'] 	= apply_filters( 'wecodeart/filter/gutenberg/styles/element', $this->element, $this->name );
 
 		// Layout Style
 		if( $layout = get_prop( $this->attrs, 'layout' ) ) {

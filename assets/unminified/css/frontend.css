@@ -67,6 +67,50 @@ h6 {
   margin-top: 0;
 }
 
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media (min-width: 1200px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+@media (min-width: 1200px) {
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
+h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media (min-width: 1200px) {
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
 p {
   margin-top: 0;
   margin-bottom: 1rem;
@@ -155,6 +199,9 @@ sup {
 a {
   color: var(--wp--preset--color--primary);
   text-decoration: none;
+}
+a:focus {
+  outline: thin dotted;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -507,15 +554,12 @@ progress {
   padding-bottom: 1rem;
 }
 
-.wp-block-post-meta {
-  margin-bottom: 0.5rem;
-}
-
 .wp-block-post-comments-link {
   font-size: var(--wp--preset--font-size--small);
 }
 
 :where(.wp-block-post-author, .wp-block-post-author-name, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) .svg-inline {
+  align-self: center;
   margin-right: 0.5rem;
 }
 
@@ -1016,6 +1060,21 @@ progress {
 :where(.theme-wecodeart) .has-background-dim-100 {
   opacity: 1;
 }
+:where(.theme-wecodeart) :where(.has-border-color,[style*=border-width]) {
+  border-style: solid;
+}
+:where(.theme-wecodeart) :where([style*=border-top-color],[style*=border-top-width]) {
+  border-top-style: solid;
+}
+:where(.theme-wecodeart) :where([style*=border-left-color],[style*=border-left-width]) {
+  border-left-style: solid;
+}
+:where(.theme-wecodeart) :where([style*=border-right-color],[style*=border-right-width]) {
+  border-right-style: solid;
+}
+:where(.theme-wecodeart) :where([style*=border-bottom-color],[style*=border-bottom-width]) {
+  border-bottom-style: solid;
+}
 :where(.theme-wecodeart) .fade {
   transition: opacity 0.15s linear;
 }
@@ -1075,6 +1134,11 @@ progress {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.initialism {
+  font-size: var(--wp--preset--font-size--small);
+  text-transform: uppercase;
 }
 
 .display-1 {
@@ -1142,11 +1206,6 @@ progress {
   width: 1em;
 }
 
-.initialism {
-  font-size: var(--wp--preset--font-size--small);
-  text-transform: uppercase;
-}
-
 .clearfix::after {
   display: block;
   clear: both;
@@ -1166,7 +1225,6 @@ progress {
   border: 0 !important;
 }
 
-.screen-reader-response,
 .screen-reader-text {
   position: absolute;
   background-color: var(--wp--preset--color--light);
@@ -1176,7 +1234,6 @@ progress {
   left: 5px;
   z-index: 100000;
 }
-.screen-reader-response:not(:focus):not(:focus-within),
 .screen-reader-text:not(:focus):not(:focus-within) {
   position: absolute !important;
   width: 1px !important;
@@ -1189,37 +1246,27 @@ progress {
   border: 0 !important;
 }
 
-.ratio {
-  position: relative;
-  width: 100%;
-}
-.ratio::before {
-  display: block;
-  padding-top: var(--wp--aspect-ratio);
-  content: "";
-}
-.ratio > * {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.hstack {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: stretch;
 }
 
-.ratio--1x1 {
-  --wp--aspect-ratio: 100%;
+.vstack {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-self: stretch;
 }
 
-.ratio--4x3 {
-  --wp--aspect-ratio: 75%;
-}
-
-.ratio--16x9 {
-  --wp--aspect-ratio: 56.25%;
-}
-
-.ratio--21x9 {
-  --wp--aspect-ratio: 42.8571428571%;
+.vr {
+  display: inline-block;
+  align-self: stretch;
+  background-color: currentColor;
+  width: 1px;
+  min-height: 1em;
+  opacity: 0.25;
 }
 
 .fixed-top {
@@ -1278,28 +1325,6 @@ progress {
     top: 0;
     z-index: 1020;
   }
-}
-.hstack {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-self: stretch;
-}
-
-.vstack {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  align-self: stretch;
-}
-
-.vr {
-  display: inline-block;
-  align-self: stretch;
-  background-color: currentColor;
-  width: 1px;
-  min-height: 1em;
-  opacity: 0.25;
 }
 
 /*# sourceMappingURL=frontend.css.map*/

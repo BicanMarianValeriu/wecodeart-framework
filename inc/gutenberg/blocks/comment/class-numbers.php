@@ -46,7 +46,7 @@ class Numbers extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -85,11 +85,9 @@ class Numbers extends Dynamic {
 		$total   		= ( new WP_Comment_Query( $comment_vars ) )->max_num_pages;
 		$current 		= ! empty( $comment_vars['paged'] ) ? $comment_vars['paged'] : null;
 
-		return wecodeart( 'markup' )::wrap( 'wp-block-comments-pagination-numbers', [ [
+		return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [ [
 			'tag' 	=> 'div',
-			'attrs' => [ 
-				'class' => 'wp-block-comments-pagination-numbers'
-			] 
+			'attrs' => $this->get_block_wrapper_attributes()
 		] ], 'paginate_comments_links', [
 			'total'     => $total,
 			'current'   => $current,

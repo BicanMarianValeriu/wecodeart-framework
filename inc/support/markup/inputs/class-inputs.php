@@ -110,13 +110,9 @@ class Inputs implements Configuration {
 	 * @version	5.5.8
 	 */
 	public function assets() {
-		wp_register_style( $this->make_handle(), $this->get_asset( 'css', 'modules/forms' ), [
-            'wecodeart-support-assets'
-        ], wecodeart( 'version' ) );
+		wp_register_style( $this->make_handle(), $this->get_asset( 'css', 'modules/forms' ), [], wecodeart( 'version' ) );
 
-		wp_register_script( $this->make_handle(), $this->get_asset( 'js', 'modules/forms' ), [
-            'wecodeart-support-assets'
-        ], wecodeart( 'version' ), true );
+		wp_register_script( $this->make_handle(), $this->get_asset( 'js', 'modules/forms' ), [], wecodeart( 'version' ), true );
 	}
 
     /**

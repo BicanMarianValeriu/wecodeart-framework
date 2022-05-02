@@ -101,10 +101,11 @@ class Styles implements Integration {
 
 		// Custom Style Attributes support
 		\WP_Block_Supports::get_instance()->register( 'styleCustom', [
-			'register_attribute' => [ $this, 'register_attribute' ],
+			'register_attribute' 	=> [ $this, 'register_attribute' ],
 		] );
 
 		// Hooks
+		add_action( 'wecodeart/filter/gutenberg/styles/element',	[ $this, 'filter_selectors'	], 10, 2 );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
@@ -265,6 +266,30 @@ class Styles implements Integration {
 		self::$processed[] = $block_id; 
 
 		return $content;
+	}
+
+	/**
+	 * Filter CSS selector
+	 *
+	 * @param	string 	$selector
+	 * @param	array 	$block
+	 *
+	 * @return 	string
+	 */
+	public function filter_selectors( $selector, $block ) {
+		if( $block === 'core/avatar' ) {
+			$selector .= ' img';
+		}
+
+		if( $block === 'core/button' ) {
+			$selector .= ' .wp-block-button__link';
+		}
+
+		if( $block === 'core/table' ) {
+			$selector .= ' table';
+		}
+
+		return $selector;
 	}
 
 	/**
@@ -546,7 +571,6 @@ class Styles implements Integration {
 		// Find the class that will handle the output for this block.
 		$classname	= Styles\Blocks::class;
 		$defaults   = [
-			'core/avatar' 			=> Styles\Blocks\Avatar::class,
 			'core/button' 			=> Styles\Blocks\Button::class,
 			'core/column' 			=> Styles\Blocks\Column::class,
 			'core/cover' 			=> Styles\Blocks\Cover::class,
@@ -558,7 +582,6 @@ class Styles implements Integration {
 			'core/separator' 		=> Styles\Blocks\Separator::class,
 			'core/social-links'		=> Styles\Blocks\Social::class,
 			'core/spacer' 			=> Styles\Blocks\Spacer::class,
-			'core/table' 			=> Styles\Blocks\Table::class,
 			'core/post-featured-image'	=> Styles\Blocks\Featured::class,
 		];
 

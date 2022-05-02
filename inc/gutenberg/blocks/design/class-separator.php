@@ -45,9 +45,7 @@ class Separator extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-
-		register_block_style( $this->get_block_type(), [
+		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'faded',
             'label'			=> esc_html__( 'Faded', 'wecodeart' ),
 			'inline_style' 	=> self::get_style( 'faded' )

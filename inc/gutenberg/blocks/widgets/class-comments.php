@@ -45,9 +45,9 @@ class Comments extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		wp_deregister_style( 'wp-block-' . $this->block_name );
+		\wp_deregister_style( 'wp-block-' . $this->block_name );
 		
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -116,7 +116,7 @@ class Comments extends Dynamic {
 
 		// Comment Author Avatar
 		if ( get_prop( $attributes, [ 'displayAvatar' ], true ) ) {
-			$template .= '<!-- wp:comment-author-avatar {"backgroundColor":"white","className":"float-start rounded-circle me-3","width":50,"height":50} /-->';
+			$template .= '<!-- wp:avatar {"className":"float-start rounded-circle overflow-hidden me-3","size":50} /-->';
 		}
 		
 		$template .= '<!-- wp:group {"className":"gap-1 clearfix"} -->';

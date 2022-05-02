@@ -45,9 +45,7 @@ class Calendar extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-		
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
+		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
 	/**

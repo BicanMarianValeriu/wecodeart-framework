@@ -45,9 +45,7 @@ class Numbers extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-        $this->enqueue_styles();
-
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+        \add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -127,21 +125,13 @@ class Numbers extends Dynamic {
             return '';
         }
 		
-		return wecodeart( 'markup' )::wrap( 'pagination-numbers', [
-            [
-                'tag'   => 'nav',
-                'attrs' => [
-                    'class' => 'wp-block-query-pagination__numbers',
-                ]
-            ],
+		return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [
             [
                 'tag'   => 'ul',
-                'attrs' => [
-                    'class'     => 'pagination',
-                    'role'      => 'navigation',
-                    'aria-label'=> esc_attr__( 'Pagination', 'wecodeart' )
-                ]
-            ],
+                'attrs' => $this->get_block_wrapper_attributes( [
+                    'class' => 'pagination',
+                ] )
+            ]
         ], function( $content ) {
             
             foreach( $content as $key => $link ) :

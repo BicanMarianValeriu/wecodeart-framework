@@ -14,7 +14,7 @@
     <!-- wp:post-featured-image {"isLink":true} /-->
     <!-- wp:post-title {"level":3,"isLink":true} /-->
     <!-- wp:pattern {"slug":"wecodeart/entry-meta"} /-->
-    <!-- wp:post-excerpt {"moreText":"Continue reading","excerptLength":10,"textColor":"secondary"} /-->
+    <!-- wp:post-excerpt {"moreText":"Continue reading","textColor":"secondary"} /-->
     <!-- /wp:post-template -->
     <!-- wp:query-pagination {"className":"mb-5"} -->
     <!-- wp:query-pagination-numbers /-->

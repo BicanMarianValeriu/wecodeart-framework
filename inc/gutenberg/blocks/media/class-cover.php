@@ -46,9 +46,7 @@ class Cover extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -92,8 +90,9 @@ class Cover extends Dynamic {
 			$current_featured_image = get_prop( $placeholder, [ 'src' ] );
 		}
 		
+		$is_img_data		= strpos( $current_featured_image, 'data:image' ) !== false;
 		$is_img_element		= ! ( get_prop( $attributes, [ 'hasParallax' ] ) || get_prop( $attributes, [ 'isRepeated' ] ) );
-		$escaped_url		= esc_url( $current_featured_image, strpos( $current_featured_image, 'data:image' ) !== false ? [ 'data' ] : null );
+		$escaped_url		= esc_url( $current_featured_image, $is_img_data ? [ 'data' ] : null );
 		$escaped_alt		= esc_attr( get_the_post_thumbnail_caption() ?: get_prop( $placeholder, 'text' ) );
 		
 		if ( ! $is_img_element ) {

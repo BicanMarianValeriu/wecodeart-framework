@@ -45,9 +45,8 @@ class Table extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-
-		add_filter( 'render_block_core/table', [ $this, 'render' ], 10, 2 );
+		\add_filter( 'render_block_core/' . $this->block_name, 		[ $this, 'render' ], 10, 2 );
+        \add_filter( 'wecodeart/filter/gutenberg/settings/classes',	[ $this, 'suggestions' ] );
 	}
 
 	/**
@@ -66,10 +65,10 @@ class Table extends Dynamic {
 			'table-borderless',
 			'table-hover',
 		];
-		
+
 		$classes = explode( ' ', get_prop( $attributes, 'className', '' ) );
 
-		$border = get_prop( $attributes, [ 'style', 'border' ], [] );
+		$border = get_prop( $attributes, [ 'style', 'border' ] );
 
 		$doc = $this->load_html( $content );
 
@@ -83,10 +82,7 @@ class Table extends Dynamic {
 		// Table Changes
 		$table 		= $wrapper->getElementsByTagName( 'table' )->item(0);
 		$table_cls  = [ 'wp-block-table__table' ];
-		
-		if( $value = get_prop( $border, 'style', 'none' ) ) {
-			$table_cls[] = $value === 'none' ? 'table-borderless' : 'table-bordered';
-		}
+		$table_cls[] = $border ? 'table-bordered' : 'table-borderless';
 		
 		if( in_array( 'is-style-hover', $classes, true ) ) {
 			$table_cls[] = 'table-hover';
@@ -105,6 +101,17 @@ class Table extends Dynamic {
 		$table->setAttribute( 'class', join( ' ', $table_cls ) );
 
 		return $this->save_html( $doc->saveHTML() );
+	}
+
+	/**
+	 * Add new classes.
+	 *
+	 * @param 	array  	$classes
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function suggestions( $classes ) {
+		return array_merge( $classes, [ 'table-hover' ] );
 	}
 
 	/**
@@ -162,10 +169,6 @@ class Table extends Dynamic {
 		.is-style-stripes table > tbody > tr:nth-of-type(odd) > * {
 			--wp--table-accent-bg: var(--wp--table-striped-bg);
 			color: var(--wp--table-striped-color);
-		}
-		.table-active {
-			--wp--table-accent-bg: var(--wp--table-active-bg);
-			color: var(--wp--table-active-color);
 		}
 		.table-hover > tbody > tr:hover > * {
 			--wp--table-accent-bg: var(--wp--table-hover-bg);

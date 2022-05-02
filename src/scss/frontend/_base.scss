@@ -72,16 +72,13 @@
 }
 
 // Blocks
-.wp-block-post-meta {
-    margin-bottom: .5rem;
-}
-
 .wp-block-post-comments-link {
     font-size: var(--wp--preset--font-size--small);
 }
 
 :where(.wp-block-post-author, .wp-block-post-author-name, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) {
     .svg-inline {
+        align-self: center;
         margin-right: .5rem;
     }
 }

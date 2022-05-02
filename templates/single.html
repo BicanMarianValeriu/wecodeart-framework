@@ -1,7 +1,7 @@
 <!-- wp:template-part {"slug":"header","tagName":"header","className":"site-header wp-site-header sticky-top","layout":{"inherit":true}} /-->
 <!-- wp:group {"layout":{"inherit":true},"className":"pb-5"} -->
 <div class="wp-block-group pb-5">
-    <!-- wp:cover {"useFeaturedImage":true,"hasParallax":true,"dimRatio":40,"overlayColor":"dark","contentPosition":"bottom center","align":"full","className":"mb-5"} -->
+    <!-- wp:cover {"useFeaturedImage":true,"hasParallax":true,"dimRatio":40,"overlayColor":"dark","contentPosition":"bottom center","align":"full","className":"mb-5","customCSS":"selector {\n  background-position: center -200px;\n}\n"} -->
     <div class="wp-block-cover alignfull has-parallax has-custom-content-position is-position-bottom-center mb-5">
         <span aria-hidden="true" class="wp-block-cover__background has-dark-background-color has-background-dim-40 has-background-dim"></span>
         <div class="wp-block-cover__inner-container">
@@ -29,7 +29,7 @@
                     <!-- wp:comments-query-loop {"queryPerPage":10} -->
                     <div class="wp-block-comments-query-loop">
                         <!-- wp:comment-template -->
-                        <!-- wp:comment-author-avatar {"backgroundColor":"white","className":"float-start rounded-circle me-3","width":50,"height":50} /-->
+                        <!-- wp:avatar {"className":"float-start rounded-circle overflow-hidden me-3","size":50} /-->
                         <!-- wp:comment-edit-link {"className":"float-end","fontSize":"small"} /-->
                         <!-- wp:comment-author-name {"isLink":true} /-->
                         <!-- wp:comment-date {"isLink":false} /-->
@@ -50,7 +50,7 @@
         <!-- /wp:column -->
         <!-- wp:column {"className":"col-12 col-lg-3"} -->
         <div class="wp-block-column col-12 col-lg-3">
-            <!-- wp:template-part {"slug":"sidebar","tagName":"aside","className":"h-100"} /-->
+            <!-- wp:template-part {"slug":"sidebar","tagName":"aside","className":"h-100 mt-5 mt-lg-0"} /-->
         </div>
         <!-- /wp:column -->
     </div>

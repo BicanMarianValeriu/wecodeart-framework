@@ -107,7 +107,9 @@ class Pages extends Dynamic {
 		
 		// If not used in navigation then we wrap it.
 		if( empty( $block->context ) ) {
-			$classes = [ 'wp-block-navigation', 'wp-block-navigation--pages', 'nav' ];
+			wp_enqueue_style( 'wp-block-navigation-submenu' );
+			
+			$classes = [ 'wp-block-navigation', 'wp-block-navigation--pages', 'nav', 'with-hover' ];
 	
 			if( $classname = get_prop( $attributes, [ 'className' ], '' ) ) {
 				$classes = array_merge( $classes, array_filter( explode( ' ', $classname ) ) );
@@ -149,8 +151,6 @@ class Pages extends Dynamic {
 		$inner_blocks = wp_list_filter( $all_pages, [ 'post_parent' => $page->ID ] );
 
 		if( ! empty( $inner_blocks ) ) {
-			wp_enqueue_style( 'wp-block-navigation-submenu' );
-
 			$block = wp_parse_args( [
 				'innerBlocks' => array_map( function( $page ) use( $all_pages ) {
 					return self::parse_block( $page, $all_pages );

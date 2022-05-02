@@ -45,9 +45,7 @@ class Login extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
@@ -77,23 +75,22 @@ class Login extends Dynamic {
 		// Build the redirect URL.
 		$current_url 	= ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		$contents 		= wp_loginout( get_prop( $attributes, [ 'redirectToCurrent' ] ) ? $current_url : '', false );
-		$classnames 	= [ 'wp-block-login' ];
-		$classnames[] 	= is_user_logged_in() ? 'wp-block-login--is-in' : 'wp-block-login--is-out';
+		$classnames 	= [];
 
 		// If logged-out and displayLoginAsForm is true, show the login form.
 		if ( ! is_user_logged_in() && get_prop( $attributes, [ 'displayLoginAsForm' ] ) ) {
 			// Add a class.
-			$classnames[] 	= 'wp-block-login--has-form';
+			$classnames[] 	= 'has-form';
 			// Get the form.
 			$contents 		= $this->render_form( [], false );
 		}
 
-		return wecodeart( 'markup' )::wrap( 'wp-block-login', [
+		return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [
 			[
 				'tag' 	=> 'div',
-				'attrs'	=> [
-					'class' => implode( ' ', $classnames )
-				]
+				'attrs'	=> $this->get_block_wrapper_attributes( [
+					'class' => join( ' ', array_filter( $classnames ) )
+				] )
 			]
 		], $contents, [], false );
 	}

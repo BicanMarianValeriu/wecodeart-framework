@@ -43,9 +43,7 @@ class Embed extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {
-		$this->enqueue_styles();
-	}
+	public function register() {}
 
 	/**
 	 * Block styles

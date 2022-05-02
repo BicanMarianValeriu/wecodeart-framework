@@ -1010,6 +1010,7 @@ class Navigation extends Dynamic {
 			padding-left: 0;
 			margin-bottom: 0;
 			list-style: none;
+			min-width: 160px;
 		}
 		.navbar-nav .nav-link {
 			padding: 0;

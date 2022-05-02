@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.8
- * @version		5.5.5
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -34,63 +34,64 @@ class Featured extends Base {
 		$output 			= [];
 		$output['element'] 	= $this->element;
 		
-		if( $width = get_prop( $this->attrs, 'width' ) ) {
-			$this->output[] = wp_parse_args( [
-				'element' 	=> $this->element . ' > *',
-				'property' 	=> 'width',
-				'value'	  	=> $width
-			], $output );
-		}
-		
-		if( $height = get_prop( $this->attrs, 'height' ) ) {
-			if( Image::use_ratio() ) {
-				// We use aspect ratio istead of specific height
-				$custom_sizes 	= [];
-				$requested_size	= Image::get_image_sizes( apply_filters( 'post_thumbnail_size', 'post-thumbnail', get_the_ID() ) );
+		if( Image::use_ratio() ) {
+			$height = get_prop( $this->attrs, 'height' );
+			$width 	= get_prop( $this->attrs, 'width' );
 
-				if( $width = get_prop( $this->attrs, 'width' ) ) {
-					if( strpos( $width, 'px' ) ) {
-						$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "",  $width );
-					}
-					if( strpos( $width, 'rem' ) || strpos( $width, 'em' ) ) {
-						$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "", $width ) * 16;
-					}
-				}
+			// We use aspect ratio istead of specific height
+			$custom_sizes 	= [];
+			$requested_size	= Image::get_image_sizes( apply_filters( 'post_thumbnail_size', 'post-thumbnail', get_the_ID() ) );
 
-				if( strpos( $height, 'px' ) ) {
-					$custom_sizes['height'] = preg_replace( "/[^0-9.]/", "", $height );
-				}
-
-				if( strpos( $height, 'rem' ) || strpos( $height, 'em' ) ) {
-					$custom_sizes['height'] = preg_replace( "/[^0-9.]/", "", $height ) * 16;
-				}
-
-				$dummy_sizes	= wp_parse_args( $custom_sizes, $requested_size );
-
-				$this->output[] = wp_parse_args( [
-					'property' 	=> '--wp--width',
-					'value'	  	=> absint( $dummy_sizes['width'] ),
-				], $output );
-
-				$this->output[] = wp_parse_args( [
-					'property' 	=> '--wp--height',
-					'value'	  	=> absint( $dummy_sizes['height'] ),
-				], $output );
-			} else {
-				$this->output[] = wp_parse_args( [
-					'element' 	=> $this->element . ' > *',
-					'property' 	=> 'height',
-					'value'	  	=> $height
-				], $output );	 
+			if( strpos( $width, 'px' ) ) {
+				$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "",  $width );
+			}
+			if( strpos( $width, 'rem' ) || strpos( $width, 'em' ) ) {
+				$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "", $width ) * 16;
 			}
 
-			if( $value = get_prop( $this->attrs, 'scale' ) ) {
+			if( strpos( $height, 'px' ) ) {
+				$custom_sizes['height'] = preg_replace( "/[^0-9.]/", "", $height );
+			}
+
+			if( strpos( $height, 'rem' ) || strpos( $height, 'em' ) ) {
+				$custom_sizes['height'] = preg_replace( "/[^0-9.]/", "", $height ) * 16;
+			}
+
+			$dummy_sizes	= wp_parse_args( $custom_sizes, $requested_size );
+
+			$this->output[] = wp_parse_args( [
+				'property' 	=> '--wp--width',
+				'value'	  	=> absint( $dummy_sizes['width'] ),
+			], $output );
+
+			$this->output[] = wp_parse_args( [
+				'property' 	=> '--wp--height',
+				'value'	  	=> absint( $dummy_sizes['height'] ),
+			], $output );
+
+		} else {
+			if( $width = get_prop( $this->attrs, 'width' ) ) {
 				$this->output[] = wp_parse_args( [
 					'element' 	=> $this->element . ' img',
-					'property' 	=> 'object-fit',
-					'value'	  	=> $value
+					'property' 	=> 'width',
+					'value'	  	=> $width
 				], $output );
 			}
+			if( $height = get_prop( $this->attrs, 'height' ) ) {
+				$this->output[] = wp_parse_args( [
+					'element' 	=> $this->element . ' img',
+					'property' 	=> 'height',
+					'value'	  	=> $height
+				], $output );
+			} 
+		}
+
+		if( $value = get_prop( $this->attrs, 'scale' ) ) {
+			$this->output[] = wp_parse_args( [
+				'element' 	=> $this->element . ' img',
+				'property' 	=> 'object-fit',
+				'value'	  	=> $value
+			], $output );
 		}
 	}
 }

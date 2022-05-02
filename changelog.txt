@@ -8,8 +8,16 @@ v5.5.8
 - Updated - core/media-text CSS moved from flex to grid
 - Updated - core/navigation (and child blocks) assets loading optimization and code splitting
 - Updated - core/cover to use the featured image (inline CSS + placeholder support)
+- Updated - core/post-featured-image style improvements (deprecated .ratio class in favor of modifier)
+- Updated - core/comment-template intro to match upcoming core/comments-title block
+- Updated - core/table inline CSS generation (border control)
+- Updated - single.html and core/latest-comments to use core/avatar block
+- Updated - removed unnecessary nav wrapper on pagination-numbers block (it has been added into WP core)
 - Fixed - Utilitites to properly order CSS (based on breakpoints) when generating inline styles
-- Fixed - core/embed CSS
+- Fixed - core/embed styles
+- Fixed - wecodeart/filter/gutenberg/styles/element - incorect filter ussage 
+- Added - core/comments-title overwrite markup with custom SVG, response messages and call to action
+- Removed - .ratio .row .row-cols-{x} classes (not necessary with Gutenberg columns and embed blocks)
 
 v5.5.7
 - Updated - core/columns grid lines to transparent black (in Editor)

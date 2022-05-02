@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles\Property\FontFamily
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.5.8
  */
 
 namespace WeCodeArt\Support\Styles\Property;
@@ -38,6 +38,9 @@ class Background extends Styles\Property {
 			// If is URL
 			if( filter_var( $this->value, FILTER_VALIDATE_URL ) ) {
 				$processed = sprintf( 'url(%s)', esc_url( set_url_scheme( $this->value ) ) );
+			// If is Data URL
+			} elseif( strpos( $this->value, 'data:image' ) !== false  ) {
+				$processed = sprintf( 'url("%s")', esc_url_raw( $this->value, [ 'data' ] ) );
 			// If is image ID
 			} elseif ( preg_match( '/^\d+$/', $this->value ) ) {
 				$processed = sprintf( 'url(%s)', esc_url( set_url_scheme( wp_get_attachment_url( $this->value ) ) ) );

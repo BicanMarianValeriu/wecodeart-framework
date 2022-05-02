@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-12 21:23+0000\n"
+"POT-Creation-Date: 2022-05-01 16:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,12 +25,12 @@ msgstr ""
 msgid "% Comments"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:159
+#: inc/gutenberg/blocks/query/class-title.php:155
 #, php-format
 msgid "%s Archives"
 msgstr ""
 
-#: views/meta/author.tpl.php:39
+#: views/meta/author.tpl.php:41
 #, php-format
 msgid "%s`s avatar"
 msgstr ""
@@ -59,7 +59,8 @@ msgid ""
 "perfect tool for any developer."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:121
+#: inc/gutenberg/blocks/comment/class-template.php:123
+#: inc/gutenberg/blocks/comment/class-title.php:118
 msgid "add one"
 msgstr ""
 
@@ -73,12 +74,12 @@ msgid ""
 "later."
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:167
+#: inc/gutenberg/blocks/query/class-title.php:163
 #: inc/gutenberg/blocks/widgets/class-archives.php:109
 msgid "Archives"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:140
+#: inc/gutenberg/blocks/query/class-title.php:136
 #, php-format
 msgid "Author Archives: %s"
 msgstr ""
@@ -87,8 +88,24 @@ msgstr ""
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:165
+#: inc/gutenberg/blocks/query/class-title.php:161
 msgid "Blog"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:205
+msgid "Bold 700"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:206
+msgid "Bold 700 Italic"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:195
+msgid "Book 300"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:196
+msgid "Book 300 Italic"
 msgstr ""
 
 #: views/general/credits.tpl.php:32
@@ -96,12 +113,12 @@ msgstr ""
 msgid "Built on %1s."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:237
+#: inc/gutenberg/blocks/comment/class-form.php:239
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:97
+#: inc/gutenberg/blocks/comment/class-form.php:99
 msgid "Cancel reply"
 msgstr ""
 
@@ -109,13 +126,13 @@ msgstr ""
 msgid "Captcha 4WP support is enabled!"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:130
+#: inc/gutenberg/blocks/query/class-title.php:126
 #, php-format
 msgid "Category Archives: %s"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:195
-#: inc/gutenberg/blocks/comment/class-form.php:202
+#: inc/gutenberg/blocks/comment/class-form.php:197
+#: inc/gutenberg/blocks/comment/class-form.php:204
 msgid "Comment *"
 msgstr ""
 
@@ -131,6 +148,37 @@ msgid_plural "%1$s comments"
 msgstr[0] ""
 msgstr[1] ""
 
+#: inc/gutenberg/blocks/comment/class-title.php:105
+#, php-format
+msgctxt "comments title"
+msgid "%1$s response"
+msgid_plural "%1$s responses"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/gutenberg/blocks/comment/class-title.php:92
+#, php-format
+msgctxt "comments title"
+msgid "%1$s response on \"%2$s\""
+msgid_plural "%1$s responses on \"%2$s\""
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/gutenberg/blocks/comment/class-title.php:88
+msgctxt "comments title"
+msgid "One response"
+msgid_plural "Responses"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/gutenberg/blocks/comment/class-title.php:99
+#, php-format
+msgctxt "comments title"
+msgid "One response on \"%1$s\""
+msgid_plural "Responses on \"%1$s\""
+msgstr[0] ""
+msgstr[1] ""
+
 #: views/general/credits.tpl.php:26
 #, php-format
 msgid "Copyright %s - All rights reserved."
@@ -140,7 +188,7 @@ msgstr ""
 msgid "Customizer"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:155
+#: inc/gutenberg/blocks/query/class-title.php:151
 #, php-format
 msgid "Daily Archives: %s"
 msgstr ""
@@ -156,12 +204,20 @@ msgid ""
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:154
+#: inc/gutenberg/blocks/comment/class-form.php:156
 msgid "Email *"
 msgstr ""
 
 #: views/general/protected.tpl.php:53
 msgid "Enter password"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:207 inc/support/fonts/class-fonts.php:208
+msgid "Extra-Bold 800"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:209
+msgid "Extra-Bold 800 Italic"
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-separator.php:50
@@ -188,7 +244,7 @@ msgstr ""
 msgid "https://www.wecodeart.com/about/"
 msgstr ""
 
-#: inc/support/markup/class-markup.php:250
+#: inc/support/markup/class-markup.php:249
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr ""
@@ -202,29 +258,45 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-button.php:56
+#: inc/support/fonts/class-fonts.php:193
+msgid "Light 200"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:194
+msgid "Light 200 Italic"
+msgstr ""
+
+#: inc/gutenberg/blocks/design/class-button.php:50
 msgid "Link"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:118
+#: inc/gutenberg/blocks/site/class-login.php:113
 msgid "Log In"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:200
+msgid "Medium 500"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:201
+msgid "Medium 500 Italic"
 msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:55
 msgid "Missing notification id"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:151
+#: inc/gutenberg/blocks/query/class-title.php:147
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:150
+#: inc/gutenberg/blocks/query/class-title.php:146
 #, php-format
 msgid "Monthly Archives: %s"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:133
+#: inc/gutenberg/blocks/comment/class-form.php:135
 msgid "Name *"
 msgstr ""
 
@@ -236,11 +308,23 @@ msgstr ""
 msgid "No comments"
 msgstr ""
 
+#: inc/gutenberg/blocks/comment/class-title.php:85
+msgid "No responses"
+msgstr ""
+
 #: views/admin/notification-locale.tpl.php:36
 msgid "No, I don`t care."
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-template.php:118
+#: inc/support/fonts/class-fonts.php:197 inc/support/fonts/class-fonts.php:198
+msgid "Normal 400"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:199
+msgid "Normal 400 Italic"
+msgstr ""
+
+#: inc/gutenberg/blocks/post/class-template.php:120
 msgid "Nothing found matching your criteria."
 msgstr ""
 
@@ -248,31 +332,19 @@ msgstr ""
 msgid "Notification dismissed"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-button.php:50
-msgid "Outline"
-msgstr ""
-
-#: inc/gutenberg/blocks/query/class-numbers.php:140
-msgid "Pagination"
-msgstr ""
-
-#: inc/gutenberg/blocks/site/class-login.php:116
+#: inc/gutenberg/blocks/site/class-login.php:111
 msgid "Password"
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-image.php:160
+#: inc/app.php:125 inc/app.php:126
 msgid "Placeholder"
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-image.php:167
-msgid "Placeholder image"
-msgstr ""
-
-#: inc/support/markup/class-markup.php:181
+#: inc/support/markup/class-markup.php:180
 msgid "Please define a callback function for each of the modules."
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:162
+#: inc/gutenberg/blocks/query/class-title.php:158
 #, php-format
 msgid "Post Type Archives: %s"
 msgstr ""
@@ -290,7 +362,7 @@ msgstr ""
 msgid "Posted on "
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:117
+#: inc/gutenberg/blocks/site/class-login.php:112
 msgid "Remember Me"
 msgstr ""
 
@@ -300,7 +372,7 @@ msgstr ""
 msgid "Request method %1$s is not valid."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:274
+#: inc/gutenberg/blocks/comment/class-form.php:276
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr ""
@@ -309,12 +381,12 @@ msgstr ""
 msgid "RSS Error"
 msgstr ""
 
+#: inc/gutenberg/blocks/widgets/class-search.php:78
 #: inc/gutenberg/blocks/widgets/class-search.php:79
-#: inc/gutenberg/blocks/widgets/class-search.php:80
 msgid "Search"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:125
+#: inc/gutenberg/blocks/query/class-title.php:121
 #, php-format
 msgid "Search Results for \"%s\"."
 msgstr ""
@@ -339,15 +411,23 @@ msgstr ""
 msgid "Select Year"
 msgstr ""
 
+#: inc/support/fonts/class-fonts.php:202 inc/support/fonts/class-fonts.php:203
+msgid "Semi-Bold 600"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:204
+msgid "Semi-Bold 600 Italic"
+msgstr ""
+
 #: inc/gutenberg/class-gutenberg.php:251
 msgid "Skip to content"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:92
+#: inc/gutenberg/blocks/comment/class-form.php:94
 msgid "Speak Your Mind"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:135
+#: inc/gutenberg/blocks/query/class-title.php:131
 #, php-format
 msgid "Tag Archives: %s"
 msgstr ""
@@ -395,6 +475,22 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
+#: inc/support/fonts/class-fonts.php:210 inc/support/fonts/class-fonts.php:211
+msgid "Ultra-Bold 900"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:212
+msgid "Ultra-Bold 900 Italic"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:190 inc/support/fonts/class-fonts.php:191
+msgid "Ultra-Light 100"
+msgstr ""
+
+#: inc/support/fonts/class-fonts.php:192
+msgid "Ultra-Light 100 Italic"
+msgstr ""
+
 #: views/general/protected.tpl.php:58
 msgid "Unlock"
 msgstr ""
@@ -403,7 +499,7 @@ msgstr ""
 msgid "upgrade PHP"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:115
+#: inc/gutenberg/blocks/site/class-login.php:110
 msgid "Username or Email Address"
 msgstr ""
 
@@ -414,7 +510,7 @@ msgid ""
 "You can get it (soon) from %s."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:175
+#: inc/gutenberg/blocks/comment/class-form.php:177
 msgid "Website"
 msgstr ""
 
@@ -450,12 +546,12 @@ msgid ""
 "Contributors\" special page. It will help both you and your clients. "
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:146
+#: inc/gutenberg/blocks/query/class-title.php:142
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr ""
 
-#: inc/gutenberg/blocks/query/class-title.php:145
+#: inc/gutenberg/blocks/query/class-title.php:141
 #, php-format
 msgid "Yearly Archives: %s"
 msgstr ""
@@ -470,12 +566,12 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:298
+#: inc/gutenberg/blocks/comment/class-form.php:300
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-form.php:271
+#: inc/gutenberg/blocks/comment/class-form.php:273
 msgid "Your email address will not be published."
 msgstr ""
 

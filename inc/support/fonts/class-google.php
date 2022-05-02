@@ -56,11 +56,23 @@ final class Google {
 	public function init() {
 		self::get_fonts();
 
-		$fonts = get_prop( wecodeart_config( 'support' ), [ 'fonts', 'google' ], [] );
+		$fonts = get_prop( wecodeart_config( 'fonts' ), [ 'google' ], [] );
 
 		foreach( $fonts as $font ) {
 			$this->add_font( $font );
 		}
+
+		wp_register_webfonts(
+			[
+				[
+					'font-family'  => 'Open Sans',
+					'font-weight'  => '400',
+					'font-style'   => 'normal',
+					'font-stretch' => 'normal',
+					'provider'     => 'google',
+				],
+			]
+		);
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_styles' ] );
 	}

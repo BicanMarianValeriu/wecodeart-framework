@@ -32,6 +32,27 @@
         }
     }
 
+    // Borders
+    :where(.has-border-color,[style*=border-width]) {
+        border-style: solid
+    }
+    
+    :where([style*=border-top-color],[style*=border-top-width]) {
+        border-top-style: solid
+    }
+
+    :where([style*=border-left-color],[style*=border-left-width]) {
+        border-left-style: solid
+    }
+    
+    :where([style*=border-right-color],[style*=border-right-width]) {
+        border-right-style: solid
+    }
+    
+    :where([style*=border-bottom-color],[style*=border-bottom-width]) {
+        border-bottom-style: solid
+    }
+
     // Transitions
     .fade {
         @include transition($transition-fade);
@@ -85,6 +106,19 @@
     @include text-truncate();
 }
 
+.small {
+	@extend small;
+}
+
+.mark {
+	@extend mark;
+}
+
+.initialism {
+	font-size: var(--wp--preset--font-size--small);
+	text-transform: uppercase;
+}
+
 @for $i from 1 through 6 {
 	.display-#{$i} {
 		font-size: var(--wp--custom--display--#{$i});
@@ -93,6 +127,7 @@
 	}
 }
 
+// List
 .list-unstyled {
 	@include list-unstyled();
 }
@@ -109,6 +144,7 @@
 	}
 }
 
+// SVG
 .svg-inline {
     display: inline-block;
     vertical-align: -0.125em;
@@ -123,19 +159,6 @@
     }
 }
 
-.small {
-	@extend small;
-}
-
-.mark {
-	@extend mark;
-}
-
-.initialism {
-	font-size: var(--wp--preset--font-size--small);
-	text-transform: uppercase;
-}
-
 // Clearfix
 .clearfix {
     @include clearfix();
@@ -147,7 +170,6 @@
     @include visually-hidden();
 }
 
-.screen-reader-response,
 .screen-reader-text {
     position: absolute;
     background-color: var(--wp--preset--color--light);
@@ -160,30 +182,29 @@
     @include visually-hidden-focusable();
 }
 
-// Ratio
-.ratio {
-    position: relative;
-    width: 100%;
-  
-    &::before {
-        display: block;
-        padding-top: var(--wp--aspect-ratio);
-        content: "";
-    }
-  
-    > * {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+// Stacks
+.hstack {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: stretch;
 }
   
-@each $key, $ratio in $aspect-ratios {
-    .ratio--#{$key} {
-        --wp--aspect-ratio: #{$ratio};
-    }
+.vstack {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-self: stretch;
+}
+
+// Vertical Line
+.vr {
+    display: inline-block;
+    align-self: stretch;
+    background-color: currentColor;
+    width: 1px;
+    min-height: 1em;
+    opacity: .25;
 }
 
 // Position
@@ -214,29 +235,4 @@
             z-index: 1020;
         }
     }
-}
-
-// Stacks
-.hstack {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-self: stretch;
-}
-  
-.vstack {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    align-self: stretch;
-}
-
-// Vertical Line
-.vr {
-    display: inline-block;
-    align-self: stretch;
-    background-color: currentColor;
-    width: 1px;
-    min-height: 1em;
-    opacity: .25;
 }

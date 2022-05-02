@@ -45,15 +45,13 @@ class Buttons extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-
-		register_block_style( $this->get_block_type(), [
+		\register_block_style( $this->get_block_type(), [
 			'name' 	=> 'group',
             'label'	=> __( 'Group', 'wecodeart' ),
 			'inline_style' => static::get_style( 'group' )
 		] );
 
-		add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
+		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
 	}
 
 	/**

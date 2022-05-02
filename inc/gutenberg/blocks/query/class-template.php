@@ -45,7 +45,7 @@ class Template extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		add_filter( 'block_type_metadata_settings', [ $this, 'filter' ], 10, 2 );
+		\add_filter( 'block_type_metadata_settings', [ $this, 'filter' ], 10, 2 );
 	}
 
 	/**

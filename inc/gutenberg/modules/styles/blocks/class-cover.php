@@ -82,9 +82,11 @@ class Cover extends Base {
 		}
 		
 		if( get_prop( $this->attrs, 'useFeaturedImage' ) ) {
+			$placeholder = wecodeart_config( 'placeholder', false );
+			
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'background-image',
-				'value'	  	=> get_post_thumbnail_id(),
+				'value'	  	=> get_post_thumbnail_id() ?: get_prop( $placeholder, [ 'src' ] ),
 			], $output );
 		}
 	}
