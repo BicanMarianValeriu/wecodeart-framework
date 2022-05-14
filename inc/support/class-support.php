@@ -43,7 +43,7 @@ class Support implements Configuration {
 		$this->register( 'starter',				Support\Starter::class	    );
 		$this->register( 'markup',				Support\Markup::class	    );
 		$this->register( 'assets',				Support\Assets::class	    );
-		$this->register( 'fonts',				Support\Fonts::class	    );
+		// $this->register( 'fonts',				Support\Fonts::class	    );
 		$this->register( 'styles',				Support\Styles::class	    );
 		$this->register( 'locale',				Support\Locale::class	    );
 		$this->register( 'files',				Support\FileSystem::class	);

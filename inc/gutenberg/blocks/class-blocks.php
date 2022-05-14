@@ -106,7 +106,8 @@ class Blocks implements Configuration {
 		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
 
         // Hooks
-        add_action( 'init',                     [ $this, 'register_blocks'  ], 10, 1 );
+        $this->register_blocks();
+
         add_action( 'wp_print_styles',          [ $this, 'remove_styles'    ], PHP_INT_MAX );
         add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
 	}

@@ -326,11 +326,18 @@ class Blocks extends Processor {
 				// Padding
 				if ( $padding = get_prop( $spacing, 'padding', [] ) ) {
 					if( ! empty( $padding ) ) {
-						foreach( $padding as $dir => $val ) {
+						if( count( array_unique( $padding ) ) === 1 ) {
 							$this->output[] = wp_parse_args( [
-								'property' 	=> 'padding-' . $dir,
-								'value'	  	=> $val
+								'property' 	=> 'padding',
+								'value'	  	=> end( $padding )
 							], $output );
+						} else {
+							foreach( $padding as $dir => $val ) {
+								$this->output[] = wp_parse_args( [
+									'property' 	=> 'padding-' . $dir,
+									'value'	  	=> $val
+								], $output );
+							}
 						}
 					}
 				}
@@ -338,11 +345,18 @@ class Blocks extends Processor {
 				// Margin
 				if ( $margin = get_prop( $spacing, 'margin', [] ) ) {
 					if( ! empty( $margin ) ) {
-						foreach( $margin as $dir => $val ) {
+						if( count( array_unique( $margin ) ) === 1 ) {
 							$this->output[] = wp_parse_args( [
-								'property' 	=> 'margin-' . $dir,
-								'value'	  	=> $val
+								'property' 	=> 'margin',
+								'value'	  	=> end( $padding )
 							], $output );
+						} else {
+							foreach( $margin as $dir => $val ) {
+								$this->output[] = wp_parse_args( [
+									'property' 	=> 'margin-' . $dir,
+									'value'	  	=> $val
+								], $output );
+							}
 						}
 					}
 				}

@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Fonts
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
- * @since 		5.5.8
- * @version		5.5.8
+ * @since 		5.x.x
+ * @version		5.x.x
  */
 
 namespace WeCodeArt\Support\Fonts;
@@ -61,18 +61,6 @@ final class Google {
 		foreach( $fonts as $font ) {
 			$this->add_font( $font );
 		}
-
-		wp_register_webfonts(
-			[
-				[
-					'font-family'  => 'Open Sans',
-					'font-weight'  => '400',
-					'font-style'   => 'normal',
-					'font-stretch' => 'normal',
-					'provider'     => 'google',
-				],
-			]
-		);
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_styles' ] );
 	}

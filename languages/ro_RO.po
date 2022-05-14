@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-05-01 16:22+0000\n"
+"PO-Revision-Date: 2022-05-08 16:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -102,22 +102,6 @@ msgstr "Bican Marian Valeriu @wecodeart"
 #: inc/gutenberg/blocks/query/class-title.php:161
 msgid "Blog"
 msgstr "Blog"
-
-#: inc/support/fonts/class-fonts.php:205
-msgid "Bold 700"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:206
-msgid "Bold 700 Italic"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:195
-msgid "Book 300"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:196
-msgid "Book 300 Italic"
-msgstr ""
 
 #: views/general/credits.tpl.php:32
 #, php-format
@@ -232,14 +216,6 @@ msgstr "Email *"
 msgid "Enter password"
 msgstr "Introduceți parola"
 
-#: inc/support/fonts/class-fonts.php:207 inc/support/fonts/class-fonts.php:208
-msgid "Extra-Bold 800"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:209
-msgid "Extra-Bold 800 Italic"
-msgstr ""
-
 #: inc/gutenberg/blocks/design/class-separator.php:50
 #| msgid "Fixed"
 msgid "Faded"
@@ -279,14 +255,6 @@ msgstr "Se pare că WeCodeArt Framework nu este tradusă în %s."
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
-#: inc/support/fonts/class-fonts.php:193
-msgid "Light 200"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:194
-msgid "Light 200 Italic"
-msgstr ""
-
 #: inc/gutenberg/blocks/design/class-button.php:50
 msgid "Link"
 msgstr "Legătură"
@@ -294,14 +262,6 @@ msgstr "Legătură"
 #: inc/gutenberg/blocks/site/class-login.php:113
 msgid "Log In"
 msgstr "Autentificare"
-
-#: inc/support/fonts/class-fonts.php:200
-msgid "Medium 500"
-msgstr "Mediu 500"
-
-#: inc/support/fonts/class-fonts.php:201
-msgid "Medium 500 Italic"
-msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:55
 msgid "Missing notification id"
@@ -336,14 +296,6 @@ msgstr "Fără răspunsuri"
 #: views/admin/notification-locale.tpl.php:36
 msgid "No, I don`t care."
 msgstr "Nu, nu-mi pasă."
-
-#: inc/support/fonts/class-fonts.php:197 inc/support/fonts/class-fonts.php:198
-msgid "Normal 400"
-msgstr "Normal 400"
-
-#: inc/support/fonts/class-fonts.php:199
-msgid "Normal 400 Italic"
-msgstr ""
 
 #: inc/gutenberg/blocks/post/class-template.php:120
 msgid "Nothing found matching your criteria."
@@ -433,14 +385,6 @@ msgstr "Selectați Săptămâna"
 msgid "Select Year"
 msgstr "Selectați Anul"
 
-#: inc/support/fonts/class-fonts.php:202 inc/support/fonts/class-fonts.php:203
-msgid "Semi-Bold 600"
-msgstr "Semi Gros 600"
-
-#: inc/support/fonts/class-fonts.php:204
-msgid "Semi-Bold 600 Italic"
-msgstr ""
-
 #: inc/gutenberg/class-gutenberg.php:251
 msgid "Skip to content"
 msgstr "Sari la conținut"
@@ -500,22 +444,6 @@ msgstr ""
 #: views/general/toggler.tpl.php:22
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
-
-#: inc/support/fonts/class-fonts.php:210 inc/support/fonts/class-fonts.php:211
-msgid "Ultra-Bold 900"
-msgstr "Ultra Gros 900"
-
-#: inc/support/fonts/class-fonts.php:212
-msgid "Ultra-Bold 900 Italic"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:190 inc/support/fonts/class-fonts.php:191
-msgid "Ultra-Light 100"
-msgstr ""
-
-#: inc/support/fonts/class-fonts.php:192
-msgid "Ultra-Light 100 Italic"
-msgstr ""
 
 #: views/general/protected.tpl.php:58
 msgid "Unlock"

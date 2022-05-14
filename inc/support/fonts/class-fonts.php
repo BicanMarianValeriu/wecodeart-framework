@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Fonts
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
- * @since 		5.5.8
- * @version		5.5.8
+ * @since 		5.x.x
+ * @version		5.x.x
  */
 
 namespace WeCodeArt\Support;
@@ -177,39 +177,6 @@ final class Fonts implements Integration {
 			'tamil'        => 'Tamil',
 			'telugu'       => 'Telugu',
 			'thai'         => 'Thai',
-        ];
-	}
-
-	/**
-	 * Returns an array of all available variants.
-	 *
-	 * @return array
-	 */
-	public static function get_variants() {
-		return [
-            '100'       => esc_html__( 'Ultra-Light 100', 'wecodeart' ),
-			'100light'  => esc_html__( 'Ultra-Light 100', 'wecodeart' ),
-			'100italic' => esc_html__( 'Ultra-Light 100 Italic', 'wecodeart' ),
-			'200'       => esc_html__( 'Light 200', 'wecodeart' ),
-			'200italic' => esc_html__( 'Light 200 Italic', 'wecodeart' ),
-			'300'       => esc_html__( 'Book 300', 'wecodeart' ),
-			'300italic' => esc_html__( 'Book 300 Italic', 'wecodeart' ),
-			'400'       => esc_html__( 'Normal 400', 'wecodeart' ),
-			'regular'   => esc_html__( 'Normal 400', 'wecodeart' ),
-			'italic'    => esc_html__( 'Normal 400 Italic', 'wecodeart' ),
-			'500'       => esc_html__( 'Medium 500', 'wecodeart' ),
-			'500italic' => esc_html__( 'Medium 500 Italic', 'wecodeart' ),
-			'600'       => esc_html__( 'Semi-Bold 600', 'wecodeart' ),
-			'600bold'   => esc_html__( 'Semi-Bold 600', 'wecodeart' ),
-			'600italic' => esc_html__( 'Semi-Bold 600 Italic', 'wecodeart' ),
-			'700'       => esc_html__( 'Bold 700', 'wecodeart' ),
-			'700italic' => esc_html__( 'Bold 700 Italic', 'wecodeart' ),
-			'800'       => esc_html__( 'Extra-Bold 800', 'wecodeart' ),
-			'800bold'   => esc_html__( 'Extra-Bold 800', 'wecodeart' ),
-			'800italic' => esc_html__( 'Extra-Bold 800 Italic', 'wecodeart' ),
-			'900'       => esc_html__( 'Ultra-Bold 900', 'wecodeart' ),
-			'900bold'   => esc_html__( 'Ultra-Bold 900', 'wecodeart' ),
-			'900italic' => esc_html__( 'Ultra-Bold 900 Italic', 'wecodeart' ),
         ];
 	}
 
