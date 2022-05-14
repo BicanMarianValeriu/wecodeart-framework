@@ -1,3 +1,7 @@
+v5.6.0
+- Updated - core/button default CSS update to remove outline (Outline registered using register_block_style)
+- Fixed - register_block_style to init instead of wp_enqueue_scripts hooks 
+
 v5.5.9
 - Fixed - Corectly overwrite core styles using wp_enqueue_scripts hook
 - Fixed - Issue with core/pages not enqueueing submenu styles when used in navigation block

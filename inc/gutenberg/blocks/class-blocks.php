@@ -123,7 +123,7 @@ class Blocks implements Configuration {
             // Register Overwrite
             $block->register();
             // Maybe overwrite styles
-            add_action( 'wp_enqueue_scripts',   [ $block, 'enqueue_styles' ] );
+            add_action( 'init',   [ $block, 'enqueue_styles' ] );
         }
 	}
 

@@ -218,7 +218,7 @@ abstract class Dynamic {
 		$styles = wecodeart( 'styles' )::compress( $this->styles() );
 		
 		if( empty( $styles ) ) return;
-		
+
 		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 
@@ -228,13 +228,13 @@ abstract class Dynamic {
 		if( ! $filesystem->has_file( $block_css ) ) {
 			$filesystem->create_file( $block_css, $styles );
 		}
-		
+
 		// Deregister Core
-		wp_deregister_style( $block_handle );
+		// wp_deregister_style( $block_handle );
 
 		// Register Custom
 		wp_register_style( $block_handle, $filesystem->get_file_url( $block_css, true ), $deps, wecodeart( 'version' ) );
-
+			
 		// Enqueue Custom
 		wp_enqueue_block_style( $this->get_block_type(), [
 			'handle'	=> $block_handle,
