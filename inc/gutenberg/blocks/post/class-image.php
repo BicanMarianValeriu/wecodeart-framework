@@ -95,7 +95,9 @@ class Image extends Dynamic {
 
 		if( $use_ratio ) {
 			if( is_null( self::$ratio ) ) {
-				wp_add_inline_style( 'wp-block-' . $this->block_name, $this->ratio_styles() );
+				\add_action( 'wp_enqueue_scripts', function() {
+					wp_add_inline_style( 'wp-block-' . $this->block_name, $this->ratio_styles() );
+				} );
 
 				self::$ratio = true;
 			}

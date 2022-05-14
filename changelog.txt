@@ -1,3 +1,7 @@
+v5.5.9
+- Fixed - Corectly overwrite core styles using wp_enqueue_scripts hook
+- Fixed - Issue with core/pages not enqueueing submenu styles when used in navigation block
+
 v5.5.8
 - Updated - Revert entry-meta pattern post-author-name to post-author (as it will not land in WP 6)
 - Updated - core/latest-comments add isLink (false) attribute to render pattern

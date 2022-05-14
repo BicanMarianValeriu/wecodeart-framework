@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Blocks Registry
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.5.9
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -120,10 +120,10 @@ class Blocks implements Configuration {
 	public function register_blocks() {
         foreach( $this->items as $class ) {
             $block = $class::get_instance();
-            // Maybe overwrite styles
-            $block->enqueue_styles();
-            // Registration hooks
+            // Register Overwrite
             $block->register();
+            // Maybe overwrite styles
+            add_action( 'wp_enqueue_scripts',   [ $block, 'enqueue_styles' ] );
         }
 	}
 

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.3.7
- * @version		5.5.8
+ * @version		5.5.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -45,7 +45,9 @@ class Pages extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		wp_deregister_style( 'wp-block-' . $this->block_name );
+		\add_action( 'wp_print_styles', function() {
+			\wp_deregister_style( 'wp-block-' . $this->block_name );
+		} );
 
 		\add_filter( 'block_type_metadata_settings',	[ $this, 'filter_render' ], 10, 2 );
 	}
@@ -90,6 +92,7 @@ class Pages extends Dynamic {
 
 		$inner_blocks 	= [];
 		$top_levels		= wp_list_filter( $all_pages, [ 'post_parent' => 0 ] );
+		wp_enqueue_style( 'wp-block-navigation-submenu' );
 		
 		// Limit the number of items to be visually displayed.
 		if ( $amount = get_prop( $attributes, [ '__unstableMaxPages' ] ) ) {
@@ -107,7 +110,6 @@ class Pages extends Dynamic {
 		
 		// If not used in navigation then we wrap it.
 		if( empty( $block->context ) ) {
-			wp_enqueue_style( 'wp-block-navigation-submenu' );
 			
 			$classes = [ 'wp-block-navigation', 'wp-block-navigation--pages', 'nav', 'with-hover' ];
 	
