@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -145,7 +145,7 @@ class Posts extends Dynamic {
 			$content_type	= get_prop( $attributes, [ 'displayPostContentRadio' ], 'excerpt' );
 			if( $content_type === 'excerpt' ) {
 				$length	= (string) get_prop( $attributes, 'excerptLength', 55 );
-				$template .= '<!-- wp:post-excerpt {"moreText":"Continue reading","textColor":"secondary"} /-->';
+				$template .= '<!-- wp:post-excerpt {"moreText":"Continue reading"} /-->';
 			}
 			if( $content_type === 'full_post' ) {
 				$template .= '<!-- wp:post-content /-->';

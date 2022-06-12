@@ -75,7 +75,7 @@ class Cover extends Dynamic {
 	 */
 	public function render( $attributes = [], $content = '' ) {
 
-		if ( ! get_prop( $attributes, [ 'useFeaturedImage' ] ) ) {
+		if ( 'image' !== get_prop( $attributes, [ 'backgroundType' ] ) || ! get_prop( $attributes, [ 'useFeaturedImage' ] ) ) {
 			return $content;
 		}
 	
@@ -90,14 +90,10 @@ class Cover extends Dynamic {
 			$current_featured_image = get_prop( $placeholder, [ 'src' ] );
 		}
 		
-		$is_img_data		= strpos( $current_featured_image, 'data:image' ) !== false;
 		$is_img_element		= ! ( get_prop( $attributes, [ 'hasParallax' ] ) || get_prop( $attributes, [ 'isRepeated' ] ) );
+		$is_img_data		= strpos( $current_featured_image, 'data:image' ) !== false;
 		$escaped_url		= esc_url( $current_featured_image, $is_img_data ? [ 'data' ] : null );
 		$escaped_alt		= esc_attr( get_the_post_thumbnail_caption() ?: get_prop( $placeholder, 'text' ) );
-		
-		if ( ! $is_img_element ) {
-			$content = preg_replace( '/class=\".*?\"/', '${0} style="background-image:url(' . $escaped_url . ')"', $content, 1 );
-		}
 		
 		if ( $is_img_element ) {
 			$object_position = '';
@@ -111,7 +107,18 @@ class Cover extends Dynamic {
 	
 			$image = sprintf( $image_template, $escaped_url, $escaped_alt, $object_position );
 	
-			$content = str_replace( '></span>', '></span>' . $image, $content );
+			$content = str_replace( '</span><div', '</span>' . $image . '<div', $content );
+		} else {
+			if ( in_the_loop() ) {
+				update_post_thumbnail_cache();
+			}
+
+			$content	= preg_replace(
+				'/class=\".*?\"/',
+				'${0} style="background-image:url(' . $escaped_url . ')"',
+				$content,
+				1
+			);
 		}
 	
 		return $content;

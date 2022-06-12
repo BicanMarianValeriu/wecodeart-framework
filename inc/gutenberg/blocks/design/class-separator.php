@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -85,7 +85,7 @@ class Separator extends Dynamic {
 				$inline = "
 					.wp-block-separator.is-style-faded {
 						background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
-						width: 100%;
+						width: initial!important;
 					}
 				";
 				break;

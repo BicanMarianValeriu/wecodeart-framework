@@ -1,3 +1,9 @@
+v5.6.1
+- Updated - core/latest-posts remove textColor from post-excerpt
+- Updated - remove textColor from default patterns
+- Updated - local translations
+- Fixed - core/navigation and core/navigation-submenu styles
+
 v5.6.0
 - Updated - core/button default CSS update to remove outline (Outline registered using register_block_style)
 - Fixed - register_block_style to init instead of wp_enqueue_scripts hooks 

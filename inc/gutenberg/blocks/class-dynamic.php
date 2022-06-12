@@ -230,7 +230,7 @@ abstract class Dynamic {
 		}
 
 		// Deregister Core
-		// wp_deregister_style( $block_handle );
+		wp_deregister_style( $block_handle );
 
 		// Register Custom
 		wp_register_style( $block_handle, $filesystem->get_file_url( $block_css, true ), $deps, wecodeart( 'version' ) );

@@ -124,8 +124,6 @@ class Button extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		$outl_style = self::get_style( 'outline' );
-
 		return "
 		.wp-block-button.has-custom-width {
 			max-width: none;

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-05-08 16:01+0000\n"
+"PO-Revision-Date: 2022-06-12 01:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -22,6 +22,7 @@ msgid " on %s"
 msgstr "la %s"
 
 #: views/meta/comments.tpl.php:53
+#| msgid "%s Comments"
 msgid "% Comments"
 msgstr "% Comentarii"
 
@@ -297,13 +298,17 @@ msgstr "Fără răspunsuri"
 msgid "No, I don`t care."
 msgstr "Nu, nu-mi pasă."
 
-#: inc/gutenberg/blocks/post/class-template.php:120
+#: inc/gutenberg/blocks/post/class-template.php:122
 msgid "Nothing found matching your criteria."
 msgstr "Nu s-a găsit nimic care să corespundă criteriilor dvs."
 
 #: inc/admin/notifications/class-ajax.php:74
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
+
+#: inc/gutenberg/blocks/design/class-button.php:56
+msgid "Outline"
+msgstr "Contur"
 
 #: inc/gutenberg/blocks/site/class-login.php:111
 msgid "Password"

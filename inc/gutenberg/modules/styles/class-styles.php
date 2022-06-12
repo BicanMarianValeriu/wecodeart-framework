@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.5.8
+ * @version		5.6.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -117,6 +117,7 @@ class Styles implements Integration {
 		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
 		remove_filter( 'render_block', 'wp_render_elements_support', 	10, 2 );
 		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
+		remove_filter( 'pre_render_block', 'wp_render_elements_support_styles',	10, 2 );
 
 		// Eventually it will be removed - 1 check since they are all from GB.
 		if( function_exists( 'gutenberg_render_layout_support_flag' ) ) {
@@ -124,6 +125,7 @@ class Styles implements Integration {
 			remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
+			remove_filter( 'pre_render_block', 'gutenberg_render_elements_support_styles', 	10, 2 );
 		}
 	}
 

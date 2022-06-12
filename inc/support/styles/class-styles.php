@@ -525,6 +525,7 @@ final class Styles implements Integration {
 		$mode 	= ( false === strpos( $color, 'rgba' ) ) ? 'hex' : 'rgba';
 		$color 	= $mode === 'hex' ? self::hex_to_rgba( $color ) : $color; 
 		preg_match_all( "/\(([^\]]*)\)/" , $color, $matches );
+		
 		return intval( array_sum( explode( ',', current( $matches[1] ) ) ) );
 	}
 

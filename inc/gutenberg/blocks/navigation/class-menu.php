@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -45,8 +45,6 @@ class Menu extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		$this->enqueue_styles();
-
 		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
