@@ -1,10 +1,10 @@
-## WeCodeArt Copyright 2021
+## WeCodeArt Copyright 2022
 ## https://www.wecodeart.com/
 
 Version: 5.0+
-Contributors: vbmv
-Requires at least: WordPress 5.9
-Tested up to: WordPress 5.9
+Contributors: Bican Marian Valeriu
+Requires at least: WordPress 6.0
+Tested up to: WordPress 6.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
