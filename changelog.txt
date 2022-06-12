@@ -3,6 +3,7 @@ v5.6.1
 - Updated - remove textColor from default patterns
 - Updated - local translations
 - Fixed - core/navigation and core/navigation-submenu styles
+- Fixed - Styles sort_breakpoints issue with 1st breakpoint (sm) being ordered as last
 
 v5.6.0
 - Updated - core/button default CSS update to remove outline (Outline registered using register_block_style)

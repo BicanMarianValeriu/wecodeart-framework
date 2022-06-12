@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.5.8
+ * @version		5.6.1
  */
 
 namespace WeCodeArt\Support;
@@ -538,9 +538,9 @@ final class Styles implements Integration {
 	 */
 	public static function sort_breakpoints( $order ) {
         $breaks     = wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-        $sortArray  = [ 'global' ] + array_map( function( $point ) {
+        $sortArray  = array_merge( [ 'global' ], array_map( function( $point ) {
             return "@media (min-width:{$point})";
-        }, array_values( $breaks ) );
+        }, array_values( $breaks ) ) );
         
 		$ordered    = [];
         foreach ( $sortArray as $key ) {
