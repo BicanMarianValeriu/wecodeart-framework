@@ -126,7 +126,7 @@ class Styles implements Integration {
 			remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
-			remove_action( 'wp_body_open', 'gutenberg_global_styles_render_svg_filters',	10, 1 );
+		 	remove_action( 'wp_body_open', 'gutenberg_global_styles_render_svg_filters',	10, 1 );
 			remove_filter( 'pre_render_block', 'gutenberg_render_elements_support_styles', 	10, 2 );
 		}
 	}
@@ -402,7 +402,7 @@ class Styles implements Integration {
 
 		if( empty( $this->filters ) ) return;
 		?>
-		<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 0 0" focusable="false" role="none" class="visually-hidden">
+		<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="position:absolute;left:-9999px;visibility:hidden;overflow:hidden;">
 			<defs>
 			<?php foreach( $this->filters as $block_id => $filter ) : ?>
 				<filter id="wp-duotone-<?php echo esc_attr( $block_id ); ?>">
