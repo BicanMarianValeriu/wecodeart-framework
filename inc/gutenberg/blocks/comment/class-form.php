@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.5.8
+ * @version		5.6.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -76,7 +76,7 @@ class Form extends Dynamic {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	5.5.5
+	 * @version	5.6.1
 	 *
 	 * @return 	array
 	 */
@@ -89,7 +89,7 @@ class Form extends Dynamic {
 
 		return wp_parse_args( [
 			'format'			 	=> 'html5',
-			'class_container'		=> 'wp-block-post-comments-form__wrap',
+			// 'class_container'	=> 'wp-block-post-comments-form__wrap',
 			'class_form' 			=> 'wp-block-post-comments-form__form comment-form needs-validation',
 			'title_reply' 			=> $dots . esc_html__( 'Speak Your Mind', 'wecodeart' ),
 			'title_reply_before' 	=> '<h3 class="wp-block-post-comments-form__headline" id="reply-title">',

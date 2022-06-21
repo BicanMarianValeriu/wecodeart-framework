@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.9.5
- * @version		5.5.5
+ * @version		5.6.1
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -169,6 +169,8 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
     if( empty( $parameters ) ) {
         $parameters = [ 'header', 'content', 'footer' ];
     }
+    
+    ob_start();
 
     array_map( function( $partial ) {
         switch( $partial ) {
@@ -188,7 +190,7 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
 
             case 'footer' :
                 /**
-                * @see - WeCodeArt\Core\Footer::markup();
+                 * @see - WeCodeArt\Core\Footer::markup();
                  */
                 do_action( 'wecodeart/footer' );
                 break;
@@ -197,4 +199,29 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
                 return is_callable( $partial ) && call_user_func( $partial );
         }
     }, $parameters );
+    
+    $inner = ob_get_clean();
+
+    add_action( 'wp_head', '_block_template_viewport_meta_tag', 0 );
+
+	// Render title tag with content, regardless of whether theme has title-tag support.
+	remove_action( 'wp_head', '_wp_render_title_tag', 1 );          // Remove conditional title tag rendering...
+	add_action( 'wp_head', '_block_template_render_title_tag', 1 ); // ...and make it unconditional.
+
+    ?>
+    <!DOCTYPE html>
+    <html <?php language_attributes(); ?>>
+        <head>
+            <meta charset="<?php bloginfo( 'charset' ); ?>" />
+            <?php wp_head(); ?>
+        </head>
+        <body <?php body_class(); ?>>
+            <?php wp_body_open(); ?>
+            <div class="wp-site-blocks">
+            <?php echo $inner; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+            </div>
+            <?php wp_footer(); ?>
+        </body>
+    </html>
+    <?php
 } );

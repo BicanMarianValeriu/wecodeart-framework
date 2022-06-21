@@ -1,51 +1,11 @@
 [
     {
-        "slug": "query-default",
-        "title": "Query (Default)",
-        "description": "WeCodeArt Framework default query template.",
-        "blockTypes": [
-            "core/query"
-        ],
-        "categories": [
-            "wecodeart",
-            "query"
-        ]
-    },
-    {
-        "slug": "query-list",
-        "title": "Query (List)",
-        "description": "WeCodeArt Framework query template as a list.",
-        "blockTypes": [
-            "core/query"
-        ],
-        "categories": [
-            "wecodeart",
-            "query"
-        ]
-    },
-    {
-        "slug": "entry-meta",
-        "title": "Entry Meta",
-        "description": "WeCodeArt Framework entry meta.",
-        "categories": [
-            "wecodeart"
-        ]
-    },
-    {
         "slug": "section",
         "title": "Section",
         "description": "A simple section with two columns.",
         "blockTypes": [
             "core/post-content"
         ],
-        "categories": [
-            "wecodeart"
-        ]
-    },
-    {
-        "slug": "author-box",
-        "title": "Author Box",
-        "description": "WeCodeArt Framework author box.",
         "categories": [
             "wecodeart"
         ]

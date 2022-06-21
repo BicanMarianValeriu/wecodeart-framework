@@ -472,21 +472,7 @@ class Blocks extends Processor {
 		$duotone 	= get_prop( $this->attrs, [ 'style', 'color', 'duotone' ], false );
 
 		if( $duotone ) {
-			$return = [
-				'r' => [],
-				'g' => [],
-				'b' => [],
-				'a' => [],
-			];
-
-			foreach ( $duotone as $color ) {
-				$color = wp_tinycolor_string_to_rgb( $color );
-
-				$return['r'][] = $color['r'] / 255;
-				$return['g'][] = $color['g'] / 255;
-				$return['b'][] = $color['b'] / 255;
-				$return['a'][] = isset( $color['a'] ) ? $color['a'] : 1;
-			}
+			$return = wecodeart( 'styles' )::get_duotone( [ 'colors' => $duotone ] );
 		}
 
 		return $return;

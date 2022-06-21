@@ -1,7 +1,11 @@
 v5.6.1
 - Updated - core/latest-posts remove textColor from post-excerpt
+- Updated - core/post-template removed no results message and use Gutenberg block in patters
 - Updated - remove textColor from default patterns
 - Updated - local translations
+- Updated - wecodeart( 'layout' ) PHP to match exactly header/content-only/footer block template (to be used in old PHP templates)
+- Updated - merge duotone filters from wp_body_open in a single SVG
+- Removed - html patterns excepting 'section.html' for demo purpose 
 - Fixed - core/navigation and core/navigation-submenu styles
 - Fixed - Styles sort_breakpoints issue with 1st breakpoint (sm) being ordered as last
 

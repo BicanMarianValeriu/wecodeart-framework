@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -109,19 +109,6 @@ class Template extends Dynamic {
 		}
 
 		$classnames[] = 'list-unstyled';
-
-		if ( ! $query->have_posts() ) {
-			return wecodeart( 'markup' )::wrap( 'wp-block-query-message', [
-				[
-					'tag' 	=> 'div',
-					'attrs'	=> [
-						'class' => implode( ' ', array_merge( $classnames, [ 'wp-block-post-template--none' ] ) )
-					]
-				]
-			], function() {
-				esc_html_e( 'Nothing found matching your criteria.', 'wecodeart' );
-			}, [], false );
-		}
 
 		return wecodeart( 'markup' )::wrap( 'wp-block-query', [
 			[

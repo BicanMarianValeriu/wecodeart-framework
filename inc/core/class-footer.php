@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.5
- * @version		5.4.4
+ * @version		5.6.1
  */
 
 namespace WeCodeArt\Core;
@@ -39,7 +39,7 @@ class Footer {
 	 * Output FOOTER markup function Plugin PHP fallback
 	 * 
 	 * @since 	1.0
-	 * @version	5.4.5
+	 * @version	5.6.1
 	 *
 	 * @return 	HTML 
 	 */
@@ -48,10 +48,10 @@ class Footer {
 			'theme' 	=> wecodeart( 'name' ),
 			'slug' 		=> 'footer',
 			'tagName' 	=> 'footer',
-			'className' => 'site-footer'
+			'className' => 'wp-site-footer'
 		] );
 
-		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '"} /-->';
+		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '","layout":{"inherit":true}} /-->';
 
 		echo do_blocks( $content ); 
 	}

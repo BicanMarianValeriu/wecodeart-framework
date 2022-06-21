@@ -43,7 +43,7 @@ class Content {
 	 * @return 	HTML
 	 */
 	public static function markup() {
-		$file = get_parent_theme_file_path( 'block-templates/content-only.html' );
+		$file = get_parent_theme_file_path( 'templates/content-only.html' );
 
 		if( file_exists( $file ) === false ) return;
 			

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.6.0
+ * @version		5.6.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -117,14 +117,16 @@ class Styles implements Integration {
 		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
 		remove_filter( 'render_block', 'wp_render_elements_support', 	10, 2 );
 		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
+		remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters',	10, 1 );
 		remove_filter( 'pre_render_block', 'wp_render_elements_support_styles',	10, 2 );
-
+		
 		// Eventually it will be removed - 1 check since they are all from GB.
 		if( function_exists( 'gutenberg_render_layout_support_flag' ) ) {
 			remove_filter( 'render_block', 'gutenberg_render_spacing_gap_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
+			remove_action( 'wp_body_open', 'gutenberg_global_styles_render_svg_filters',	10, 1 );
 			remove_filter( 'pre_render_block', 'gutenberg_render_elements_support_styles', 	10, 2 );
 		}
 	}
@@ -387,6 +389,17 @@ class Styles implements Integration {
 	 * @return 	string
 	 */
 	public function output_duotone() {
+		$default_duotones = wp_get_global_settings( [ 'color', 'duotone', 'default' ] );
+
+		// Not sure why they render those filters in multiple SVG files.
+		// Even though the defaults are printed in wp_body_open,
+		// using them will generate another SVG in footer (eg grayscale)
+		if ( ! empty( $default_duotones ) ) {
+			foreach( $default_duotones as $preset ) {
+				$this->filters[get_prop( $preset, 'slug' )] = wecodeart( 'styles' )::get_duotone( $preset );
+			}	
+		}
+
 		if( empty( $this->filters ) ) return;
 		?>
 		<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 0 0" focusable="false" role="none" class="visually-hidden">

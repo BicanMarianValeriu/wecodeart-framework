@@ -552,4 +552,35 @@ final class Styles implements Integration {
 
         return $ordered + $order;
 	}
+
+	/**
+	 * Get Duotone.
+	 *
+     * @param   array $preset
+     *
+	 * @return  array
+	 */
+	public static function get_duotone( array $preset = [] ) {
+        $values = [
+			'r' => [],
+			'g' => [],
+			'b' => [],
+			'a' => [],
+		];
+	
+		if ( ! isset( $preset['colors'] ) || ! is_array( $preset['colors'] ) ) {
+			$preset['colors'] = [];
+		}
+	
+		foreach ( $preset['colors'] as $color_str ) {
+			$color = wp_tinycolor_string_to_rgb( $color_str );
+	
+			$values['r'][] = $color['r'] / 255;
+			$values['g'][] = $color['g'] / 255;
+			$values['b'][] = $color['b'] / 255;
+			$values['a'][] = $color['a'];
+		}
+
+		return $values;
+	}
 }
