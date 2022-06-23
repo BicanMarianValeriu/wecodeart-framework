@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.4.0
- * @version		5.5.8
+ * @version		5.6.1
  */
 
 namespace WeCodeArt\Support;
@@ -60,7 +60,7 @@ final class Assets implements Integration {
 	 * Enqueue Front-End Styles
 	 *
 	 * @since	1.0
-	 * @version	5.3.3
+	 * @version	5.6.1
 	 */
 	public function front_scripts() {
 		// Styles
@@ -70,17 +70,6 @@ final class Assets implements Integration {
 		// Scripts
 		// -- Core
 		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'frontend' ), [ 'wp-hooks' ], wecodeart( 'version' ), true );
-		// --LiveReload - only in developer enviroment
-		if ( wecodeart_if( 'is_dev_mode' ) ) {
-			$lr_url = 'http://localhost:35729/livereload.js';
-			$lr_url = set_url_scheme( $lr_url );
-
-			$response = wp_remote_get( $lr_url );
-
-			if ( wp_remote_retrieve_response_code( $response ) === 200 ) {
-				wp_enqueue_script( $this->make_handle( 'livereload' ), $lr_url, [], wecodeart( 'version' ) );
-			}
-		}
 	}
 
 	/**

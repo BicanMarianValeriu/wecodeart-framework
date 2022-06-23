@@ -36,8 +36,8 @@
 	"dependencies": {
 		"@popperjs/core": "^2.11.2",
 		"@wordpress/browserslist-config": "^4.0.0",
-		"@wordpress/icons": "^6.2.0",
-		"@wordpress/scripts": "^17.1.0",
+		"@wordpress/icons": "^9.2.0",
+		"@wordpress/scripts": "^23.3.0",
 		"bootstrap": "^5.1.3",
 		"classnames": "^2.2.6",
 		"dploy": "^1.2.0",
