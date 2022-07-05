@@ -4,8 +4,9 @@ import './plugins/wecodeart-JSManager';
 import './plugins/wecodeart-Template';
 import loadJs from 'loadjs';
 import requireJs from './helpers/requireJs';
-import createParams from './helpers/createParams';
 import getOptions from './helpers/parseData';
+import createParams from './helpers/createParams';
+import updateParams from './helpers/updateParams';
 import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled } from './helpers/hasScrollbar';
 
 // Styles
@@ -32,6 +33,7 @@ function filterLog(route, func, args) {
 	wecodeart.fn = {
 		hasScrollbar,
 		createParams,
+		updateParams,
 		getOptions,
 		requireJs,
 		loadJs
@@ -46,15 +48,14 @@ function filterLog(route, func, args) {
 	wecodeart.lazyJs = {
 		// Use for popups
 		'sweetalert': [
-			'//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.css',
-			'//unpkg.com/sweetalert2@11.3.4/dist/sweetalert2.min.js',
+			'//unpkg.com/sweetalert2@11.4.18/dist/sweetalert2.min.css',
+			'//unpkg.com/sweetalert2@11.4.18/dist/sweetalert2.min.js',
 		],
 		// Use for lighbox galleries
 		'photoswipe': [
-			'//unpkg.com/photoswipe@4.1.3/dist/default-skin/default-skin.css',
-			'//unpkg.com/photoswipe@4.1.3/dist/photoswipe.css',
-			'//unpkg.com/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js',
-			'//unpkg.com/photoswipe@4.1.3/dist/photoswipe.min.js',
+			'//unpkg.com/photoswipe@5.2.4/dist/photoswipe-lightbox.esm.min.js',
+			'//unpkg.com/photoswipe@5.2.4/dist/photoswipe.esm.min.js',
+			'//unpkg.com/photoswipe@5.2.4/dist/photoswipe.css',
 		]
 	};
 	wecodeart.routes = {

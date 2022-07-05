@@ -1,3 +1,6 @@
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/scss/frontend/frontend.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
 /*!
 Theme Name: WeCodeArt
 Theme URI: https://www.wecodeart.com/
@@ -59,55 +62,56 @@ hr {
 }
 
 h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
-}
-
-h1 {
+.h1 {
   font-size: calc(1.375rem + 1.5vw);
 }
 @media (min-width: 1200px) {
-  h1 {
+  h1,
+.h1 {
     font-size: 2.5rem;
   }
 }
 
-h2 {
+h2,
+.h2 {
   font-size: calc(1.325rem + 0.9vw);
 }
 @media (min-width: 1200px) {
-  h2 {
+  h2,
+.h2 {
     font-size: 2rem;
   }
 }
 
-h3 {
+h3,
+.h3 {
   font-size: calc(1.3rem + 0.6vw);
 }
 @media (min-width: 1200px) {
-  h3 {
+  h3,
+.h3 {
     font-size: 1.75rem;
   }
 }
 
-h4 {
+h4,
+.h4 {
   font-size: calc(1.275rem + 0.3vw);
 }
 @media (min-width: 1200px) {
-  h4 {
+  h4,
+.h4 {
     font-size: 1.5rem;
   }
 }
 
-h5 {
+h5,
+.h5 {
   font-size: 1.25rem;
 }
 
-h6 {
+h6,
+.h6 {
   font-size: 1rem;
 }
 
@@ -196,17 +200,12 @@ sup {
   top: -0.5em;
 }
 
-a {
-  color: var(--wp--preset--color--primary);
-  text-decoration: none;
-}
 a:focus {
   outline: thin dotted;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
   color: inherit;
-  text-decoration: none;
 }
 
 pre,
@@ -450,10 +449,6 @@ legend + * {
 
 ::-webkit-color-swatch-wrapper {
   padding: 0;
-}
-
-::-webkit-file-upload-button {
-  font: inherit;
 }
 
 ::file-selector-button {
@@ -1023,56 +1018,19 @@ progress {
   float: left;
   margin: 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3) 0;
 }
-:where(.theme-wecodeart) .has-background-dim {
-  opacity: 0.5;
-  z-index: 1;
-}
-:where(.theme-wecodeart) .has-background-dim-0 {
-  opacity: 0;
-}
-:where(.theme-wecodeart) .has-background-dim-10 {
-  opacity: 0.1;
-}
-:where(.theme-wecodeart) .has-background-dim-20 {
-  opacity: 0.2;
-}
-:where(.theme-wecodeart) .has-background-dim-30 {
-  opacity: 0.3;
-}
-:where(.theme-wecodeart) .has-background-dim-40 {
-  opacity: 0.4;
-}
-:where(.theme-wecodeart) .has-background-dim-50 {
-  opacity: 0.5;
-}
-:where(.theme-wecodeart) .has-background-dim-60 {
-  opacity: 0.6;
-}
-:where(.theme-wecodeart) .has-background-dim-70 {
-  opacity: 0.7;
-}
-:where(.theme-wecodeart) .has-background-dim-80 {
-  opacity: 0.8;
-}
-:where(.theme-wecodeart) .has-background-dim-90 {
-  opacity: 0.9;
-}
-:where(.theme-wecodeart) .has-background-dim-100 {
-  opacity: 1;
-}
-:where(.theme-wecodeart) :where(.has-border-color,[style*=border-width]) {
+:where(.theme-wecodeart) :where(.has-border-color, [style*=border-width]) {
   border-style: solid;
 }
-:where(.theme-wecodeart) :where([style*=border-top-color],[style*=border-top-width]) {
+:where(.theme-wecodeart) :where([style*=border-top-color], [style*=border-top-width]) {
   border-top-style: solid;
 }
-:where(.theme-wecodeart) :where([style*=border-left-color],[style*=border-left-width]) {
+:where(.theme-wecodeart) :where([style*=border-left-color], [style*=border-left-width]) {
   border-left-style: solid;
 }
-:where(.theme-wecodeart) :where([style*=border-right-color],[style*=border-right-width]) {
+:where(.theme-wecodeart) :where([style*=border-right-color], [style*=border-right-width]) {
   border-right-style: solid;
 }
-:where(.theme-wecodeart) :where([style*=border-bottom-color],[style*=border-bottom-width]) {
+:where(.theme-wecodeart) :where([style*=border-bottom-color], [style*=border-bottom-width]) {
   border-bottom-style: solid;
 }
 :where(.theme-wecodeart) .fade {
@@ -1108,6 +1066,43 @@ progress {
   :where(.theme-wecodeart) .collapsing.collapse-horizontal {
     transition: none;
   }
+}
+
+.has-background-dim {
+  --wp--bg--opacity: 0.5;
+}
+.has-background-dim-0 {
+  --wp--bg--opacity: 0;
+}
+.has-background-dim-10 {
+  --wp--bg--opacity: 0.1;
+}
+.has-background-dim-20 {
+  --wp--bg--opacity: 0.2;
+}
+.has-background-dim-30 {
+  --wp--bg--opacity: 0.3;
+}
+.has-background-dim-40 {
+  --wp--bg--opacity: 0.4;
+}
+.has-background-dim-50 {
+  --wp--bg--opacity: 0.5;
+}
+.has-background-dim-60 {
+  --wp--bg--opacity: 0.6;
+}
+.has-background-dim-70 {
+  --wp--bg--opacity: 0.7;
+}
+.has-background-dim-80 {
+  --wp--bg--opacity: 0.8;
+}
+.has-background-dim-90 {
+  --wp--bg--opacity: 0.9;
+}
+.has-background-dim-100 {
+  --wp--bg--opacity: 1;
 }
 
 .has-text-align-left {

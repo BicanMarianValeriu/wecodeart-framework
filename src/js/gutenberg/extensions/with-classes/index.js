@@ -84,7 +84,7 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
  */
 function applyFilters() {
 	removeFilter('editor.BlockEdit', 'core/editor/custom-class-name/with-inspector-control');
-	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-classes/withInspectorControl', withInspectorControl);
+	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-class-name/with-inspector-control', withInspectorControl);
 }
 
 applyFilters();

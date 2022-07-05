@@ -50,7 +50,7 @@ final class Assets implements Integration {
 	 * Register hooks
 	 */
 	public function register_hooks() {
-		add_action( 'wp_enqueue_scripts', 	[ $this, 'front_scripts'		], 0 );
+		add_action( 'wp_enqueue_scripts', 	[ $this, 'front_scripts'		] );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'localize_js' 			] );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			] );
 		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] );

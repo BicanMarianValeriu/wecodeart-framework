@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -205,6 +205,10 @@ class Cover extends Dynamic {
 			border: none;
 			box-shadow: none;
 			background-color: inherit;
+			opacity: var(--wp--bg--opacity);
+		}
+		.wp-block-cover .has-background-dim {
+			z-index: 1;
 		}
 		.wp-block-cover :is(h1, h2, h3, h4, h5, h6, p, ul, ol, hr):not(.has-text-color) {
 			color: inherit;

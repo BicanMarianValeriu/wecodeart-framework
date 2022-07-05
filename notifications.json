@@ -3,13 +3,8 @@
 	"items": [
 		{
 			"type": "info",
-			"title": "Before updating to 5.5.5!",
-			"content": "Version 5.5.5 is live - make sure you install/update Gutenberg to version 13.0+ and WordPress to 6.0+ (beta)."
-		},
-		{
-			"type": "info",
-			"title": "Where is the comments template?",
-			"content": "Please install Gutenberg Plugin - comments related blocks did not landed in WP 5.9 yet. If you are not using comments you can remove them from single.html template."
+			"title": "Issue with blocks Advanced Classname",
+			"content": "I`m aware of the bug when trying to add/remove a block class (under block`s Advanced tab). A fix is done and will be released with the next update."
 		}
 	]
 }

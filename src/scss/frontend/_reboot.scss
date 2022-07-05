@@ -67,21 +67,9 @@ hr {
 }
 
 // Typography
-//
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	// 1. Remove top margins from headings
-	//    By default, `<h1>`-`<h6>` all receive top and bottom margins. We nuke the top
-	//    margin for easier control within type scales as it avoids margin collapsing.
-	margin-top: 0; // 1
-}
-
 @each $tag, $value in $font-sizes {
-	h#{$tag} {
+	h#{$tag},
+	.h#{$tag} {
 		@include font-size($value);
 	}
 }
@@ -196,9 +184,6 @@ sup {
 
 // Links
 a {
-	color: var(--wp--preset--color--primary);
-	text-decoration: none;
-
 	&:focus {
 		outline: thin dotted;
 	}
@@ -212,7 +197,6 @@ a:not([href]):not([class]) {
 	&,
 	&:hover {
 		color: inherit;
-		text-decoration: none;
 	}
 }
 

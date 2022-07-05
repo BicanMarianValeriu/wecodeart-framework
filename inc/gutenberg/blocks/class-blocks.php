@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Blocks Registry
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.9
+ * @version		5.6.2
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -123,7 +123,7 @@ class Blocks implements Configuration {
             // Register Overwrite
             $block->register();
             // Maybe overwrite styles
-            add_action( 'init',   [ $block, 'enqueue_styles' ] );
+            add_action( 'init',   [ $block, 'enqueue_styles' ], -10 );
         }
 	}
 

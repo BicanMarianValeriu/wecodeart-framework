@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.5.8
+ * @version		5.6.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -67,7 +67,7 @@ class Classes implements Integration {
 	public function set_suggestions( $settings, $post ) {
 		if ( ! isset( $settings[ 'customClasses' ] ) ) {
 			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/classes', [], $post );
-			$settings['customClasses'] = array_map( 'sanitize_html_class', array_unique( $classes ) );
+			$settings['customClasses'] = array_values( array_map( 'sanitize_html_class', array_unique( $classes ) ) );
 		}
 
 		return $settings;
@@ -119,18 +119,21 @@ class Classes implements Integration {
 	 */
 	public function helpers( $args ) {
 		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$breakpoints	= array_keys( $breakpoints );
+		$displays		= wecodeart_json( [ 'settings', 'custom', 'display' ], [] );
 
 		// Sticky top - currently it must match the ones from CSS
 		// In the future, helpers will be moved to dynamic CSS
-		foreach( $breakpoints as $breakpoint ) {
+		foreach( array_keys( $breakpoints ) as $breakpoint ) {
 			$args[] = 'sticky-' . $breakpoint . '-top';
 		}
 
 		// Typography extra sizes
 		foreach( range( 1, 6 ) as $nr ) {
-			$args[] = 'display-' . $nr;
 			$args[] = 'h' . $nr;
+		}
+		
+		foreach( array_keys( $displays ) as $d ) {
+			$args[] = 'display-' . $d;
 		}
 
 		return wp_parse_args( [

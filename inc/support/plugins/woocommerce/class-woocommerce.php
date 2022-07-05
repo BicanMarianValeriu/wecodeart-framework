@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		1.9
- * @version		5.5.5
+ * @version		5.6.2
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -50,19 +50,10 @@ class WooCommerce implements Integration {
 	 */
 	public function register_hooks() {
 		// Add support for WooCommerce 
-		add_action( 'after_setup_theme', 	[ $this, 'after_setup_theme' ] );
-
-		// Remove Sidebar
-		remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar'	);
-
-		// Content Wrappers
-		remove_action( 'woocommerce_before_main_content', 		'woocommerce_output_content_wrapper',		10 );
-		add_action( 'woocommerce_before_main_content',    		[ $this, 'before_content_wrapp' ], 	10 );
-		remove_action( 'woocommerce_after_main_content',  		'woocommerce_output_content_wrapper_end',	10 );
-		add_action( 'woocommerce_after_main_content',    		[ $this, 'after_content_wrapp' ],  	10 );
+		add_action( 'after_setup_theme', 						[ $this, 'after_setup_theme' ] );
 
 		// Filters
-		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_gutenberg_blocks' ] );
+		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' ] );
 	}
 
 	/**
@@ -73,42 +64,13 @@ class WooCommerce implements Integration {
 	public function after_setup_theme() {
 		$support = get_prop( wecodeart_config( 'woocommerce' ), 'support', [] );
 		// Theme Support
-		foreach( $support as $feature => $value ) add_theme_support( $feature, $value );
-	}
-	
-	/**
-	 * Before Content - Wraps all WooCommerce content in wrappers which match the theme markup
-	 *
-	 * @since   3.5
-	 * @version 5.4.4
-	 *
-	 * @return  void
-	 */
-	public function before_content_wrapp() {
-		/**
-		 * Added Attributes / can be filtered
-		 * @since 3.7.0
-		 */		
-		?>
-		<div <?php echo wecodeart( 'markup' )::generate_attr( 'woocommerce', [
-			'class' => 'wp-block-template-part'
-		] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-		<?php
-	}
-
-	/**
-	 * After Content - Wraps all WooCommerce content in wrappers which match the theme markup
-	 *
-	 * @since   3.5
-	 * @version 5.4.4
-	 *
-	 * @return  void
-	 */
-	public function after_content_wrapp() {
-		?>
-		</div>
-		<!-- /.woocommerce @filter = `wecodeart/filter/wrappers/woocommerce` -->
-		<?php
+		foreach( $support as $feature => $value ) {
+			if( $value === 'remove' ) {
+                remove_theme_support( $feature );
+                continue;
+            }
+			add_theme_support( $feature, $value );
+		}
 	}
 
 	/**
@@ -119,7 +81,7 @@ class WooCommerce implements Integration {
 	 *
 	 * @return 	array
 	 */
-	public function restricted_gutenberg_blocks( $blocks ) {
+	public function restricted_blocks( $blocks ) {
 		return wp_parse_args( [
 			'woocommerce/handpicked-products',
 			'woocommerce/products-by-attribute',

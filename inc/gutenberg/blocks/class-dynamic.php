@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -102,7 +102,7 @@ abstract class Dynamic {
 	
 		// This is hardcoded on purpose.
 		// We only support a fixed list of attributes.
-		$attributes_to_merge = [ 'class', 'style', 'data-test' ];
+		$attributes_to_merge = [ 'class', 'style' ];
 		$attributes          = [];
 		foreach ( $attributes_to_merge as $attribute_name ) {
 			if ( empty( $new_attributes[ $attribute_name ] ) && empty( $extra_attributes[ $attribute_name ] ) ) {
@@ -213,11 +213,13 @@ abstract class Dynamic {
 	 *
 	 * @return 	string Block CSS.
 	 */
-	public function enqueue_styles( $deps = [] ) {
+	public function enqueue_styles() {
 		// These are cached styles, so we only generate minified version.
 		$styles = wecodeart( 'styles' )::compress( $this->styles() );
 		
 		if( empty( $styles ) ) return;
+
+		global $wp_styles;
 
 		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
@@ -229,6 +231,8 @@ abstract class Dynamic {
 			$filesystem->create_file( $block_css, $styles );
 		}
 
+		$registered = get_prop( $wp_styles->registered, $block_handle );
+
 		// Deregister Core
 		wp_deregister_style( $block_handle );
 
@@ -239,8 +243,8 @@ abstract class Dynamic {
 		wp_enqueue_block_style( $this->get_block_type(), [
 			'handle'	=> $block_handle,
 			'src'		=> $filesystem->get_file_url( $block_css, true ),
-			'path'		=> $filesystem->get_file_url( $block_css ),
-			'deps'		=> $deps,
+			'path'		=> wp_normalize_path( $filesystem->get_file_url( $block_css ) ),
+			'deps'		=> $registered ? $registered->deps : [ 'global-styles' ],
 			'ver'		=> wecodeart( 'version' )
 		] );
 

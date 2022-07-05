@@ -288,6 +288,7 @@
 				},
 				"spacing": {
 					"margin": {
+						"top": "0",
 						"bottom": "1.5rem"
 					}
 				}
@@ -408,6 +409,9 @@
 			"link": {
 				"color": {
 					"text": "var:preset|color|primary"
+				},
+				"typography": {
+					"textDecoration": "none"
 				}
 			}
 		},

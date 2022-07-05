@@ -1,5 +1,11 @@
 v5.6.2
-- Updated - ...
+- Updated - JavaScript's SweetAlert2 and Photoswipe unpkg URLs (latest versions) / rebuild
+- Updated - Added deps to custom block styles due to https://github.com/WordPress/gutenberg/pull/41934 (also updated enqueueing with negative priority)
+- Updated - Cleanup some reboot.scss rules after https://github.com/WordPress/gutenberg/pull/41934 + updated theme.json headings margin
+- Updated - .has-background-dim to use CSS variable instead of opacity (compatability with WooCommerce's different className approach)
+- Updated - Minor adjustments to views/meta/author and views/meta/author-name templates
+- Removed - WooCommerce's unnecessary div wrappers (the hooks - if FSE after all)
+- Fixed - Issue with block custom className suggestion
 
 v5.6.1
 - Updated - core/latest-posts remove textColor from post-excerpt

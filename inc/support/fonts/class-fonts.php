@@ -36,6 +36,7 @@ final class Fonts implements Integration {
 	const CSS_ID = 'wecodeart-fonts';
 	const OPTION = 'wecodeart-fonts';
 	const FOLDER = 'fonts';
+	const CLEANUP_FREQUENCY = 'monthly';
 
 	/**
 	 * Google Fonts.
@@ -55,7 +56,8 @@ final class Fonts implements Integration {
 	 * Send to Constructor
 	 */
 	public function register_hooks() {
-		// self::clear_cache();
+		$this->schedule_cleanup();
+		add_action( 'wecodeart_cleanup_fonts', [ __CLASS__, 'clear_cache' ] );
 	}
 
 	/**
@@ -208,5 +210,18 @@ final class Fonts implements Integration {
 		wecodeart( 'files' )->set_folder( '' );
 
 		return true;
+	}
+
+	/**
+	 * Schedule a cleanup.
+	 *
+	 * @return void
+	 */
+	public function schedule_cleanup() {
+		if ( ! is_multisite() || ( is_multisite() && is_main_site() ) ) {
+			if ( ! wp_next_scheduled( 'wecodeart_cleanup_fonts' ) && ! wp_installing() ) {
+				wp_schedule_event( time(), self::CLEANUP_FREQUENCY, 'wecodeart_cleanup_fonts' );
+			}
+		}
 	}
 }

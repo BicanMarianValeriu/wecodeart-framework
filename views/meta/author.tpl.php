@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Author
  * @since 		3.9.5
- * @version		5.5.8
+ * @version		5.6.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -27,7 +27,7 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
     $classnames[] = 'has-text-align-' . $value;
 }
 
-wecodeart( 'styles' )->Utilities->load( [ 'me-2', 'flex-fill', 'm-0' ] );
+wecodeart( 'styles' )->Utilities->load( [ 'me-2', 'flex-fill' ] );
 
 ?>
 <div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>>
@@ -59,9 +59,9 @@ wecodeart( 'styles' )->Utilities->load( [ 'me-2', 'flex-fill', 'm-0' ] );
     ?></div>
     <?php endif; ?>
     <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
-    <a class="wp-block-post-author__link" href="<?php echo esc_url( $author->url ); ?>" rel="author">
+    <a href="<?php echo esc_url( $author->url ); ?>" rel="author">
     <?php endif; ?>
-        <span class="wp-block-post-author__name m-0"><?php
+        <span class="wp-block-post-author__name"><?php
         
         echo esc_html( $author->name ); 
 

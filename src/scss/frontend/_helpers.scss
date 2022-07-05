@@ -20,18 +20,6 @@
         margin: 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3) 0;
     }
 
-    // Background Dim
-    .has-background-dim {
-        opacity: 0.5;
-        z-index: 1;
-
-        @for $i from 0 through 10 {
-            &-#{ $i * 10 } {
-                opacity: $i * 0.1;
-            }
-        }
-    }
-
     // Borders
     :where(.has-border-color,[style*=border-width]) {
         border-style: solid
@@ -77,6 +65,17 @@
             width: 0;
             height: auto;
             @include transition($transition-collapse-width);
+        }
+    }
+}
+
+// Background Dim
+.has-background-dim {
+    --wp--bg--opacity: 0.5;
+
+    @for $i from 0 through 10 {
+        &-#{ $i * 10 } {
+            --wp--bg--opacity: #{$i * 0.1};
         }
     }
 }
