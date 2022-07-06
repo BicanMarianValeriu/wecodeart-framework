@@ -1,3 +1,6 @@
+v5.6.3
+- Updated - ...
+
 v5.6.2
 - Updated - JavaScript's SweetAlert2 and Photoswipe unpkg URLs (latest versions) / rebuild
 - Updated - Added deps to custom block styles due to https://github.com/WordPress/gutenberg/pull/41934 (also updated enqueueing with negative priority)
