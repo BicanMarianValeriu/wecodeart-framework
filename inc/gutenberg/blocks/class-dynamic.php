@@ -232,6 +232,7 @@ abstract class Dynamic {
 		}
 
 		$registered = get_prop( $wp_styles->registered, $block_handle );
+		$deps		= $registered ? $registered->deps : [ 'global-styles' ];
 
 		// Deregister Core
 		wp_deregister_style( $block_handle );
@@ -244,7 +245,7 @@ abstract class Dynamic {
 			'handle'	=> $block_handle,
 			'src'		=> $filesystem->get_file_url( $block_css, true ),
 			'path'		=> wp_normalize_path( $filesystem->get_file_url( $block_css ) ),
-			'deps'		=> $registered ? $registered->deps : [ 'global-styles' ],
+			'deps'		=> $deps,
 			'ver'		=> wecodeart( 'version' )
 		] );
 
