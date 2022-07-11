@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.5.8
+ * @version		5.6.3
  */
 
 // Theme Shadows
@@ -229,8 +229,17 @@ foreach( [
         'property'  => 'white-space',
         'class'		=> 'text',
         'values'	=> [
-            'wrap'      => 'wrap',
+            'wrap'      => 'normal',
             'nowrap'    => 'nowrap',
+        ],
+    ],
+    [
+        'property'  => 'text-transform',
+        'class'		=> 'text',
+        'values'	=> [
+            'lowercase' => 'lowercase',
+            'uppercase' => 'uppercase',
+            'capitalize'=> 'capitalize',
         ],
     ],
     [

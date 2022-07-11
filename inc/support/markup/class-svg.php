@@ -9,7 +9,7 @@
  * @subpackage  Markup\SVG
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.5.5
+ * @version		5.6.3
  */
 
 namespace WeCodeArt\Support\Markup;
@@ -219,7 +219,7 @@ class SVG implements Configuration {
 
 			// Generate Attrs
 			$attrs = [
-				'class' 		=> 'svg-inline svg-inline--fa svg-inline--' .  $icon . '',
+				'class' 		=> 'svg-inline svg-inline--' .  $icon . '',
 				'aria-hidden' 	=> 'true',
 				'role' 			=> 'img',
 				'focusable'		=> 'false',

@@ -3,6 +3,13 @@
 	"version": 2,
 	"customTemplates": [
 		{
+			"name": "product-search-results",
+			"title": "Product Search Results",
+			"postTypes": [
+				"product"
+			]
+		},
+		{
 			"name": "taxonomy-product_cat",
 			"title": "Products by Category",
 			"postTypes": [

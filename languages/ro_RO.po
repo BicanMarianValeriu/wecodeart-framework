@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-06-12 01:41+0000\n"
+"PO-Revision-Date: 2022-07-08 00:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -24,7 +24,7 @@ msgstr "la %s"
 #: views/meta/comments.tpl.php:53
 #| msgid "%s Comments"
 msgid "% Comments"
-msgstr "% Comentarii"
+msgstr "%s Comentarii"
 
 #: inc/gutenberg/blocks/query/class-title.php:155
 #, php-format
@@ -94,11 +94,15 @@ msgstr "Arhive"
 #: inc/gutenberg/blocks/query/class-title.php:136
 #, php-format
 msgid "Author Archives: %s"
-msgstr "Arhive autor"
+msgstr "Arhive autor: %s"
 
 #. Author of the theme
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr "Bican Marian Valeriu @wecodeart"
+
+#: inc/gutenberg/blocks/class-dynamic.php:48
+msgid "Block name is required."
+msgstr "Denumirea bloc-ului este necesară."
 
 #: inc/gutenberg/blocks/query/class-title.php:161
 msgid "Blog"
@@ -297,10 +301,6 @@ msgstr "Fără răspunsuri"
 #: views/admin/notification-locale.tpl.php:36
 msgid "No, I don`t care."
 msgstr "Nu, nu-mi pasă."
-
-#: inc/gutenberg/blocks/post/class-template.php:122
-msgid "Nothing found matching your criteria."
-msgstr "Nu s-a găsit nimic care să corespundă criteriilor dvs."
 
 #: inc/admin/notifications/class-ajax.php:74
 msgid "Notification dismissed"
@@ -525,7 +525,7 @@ msgstr "Y"
 #: inc/gutenberg/blocks/query/class-title.php:141
 #, php-format
 msgid "Yearly Archives: %s"
-msgstr "Arhive Anuale"
+msgstr "Arhive Anuale: %s"
 
 #: views/admin/notification-locale.tpl.php:32
 msgid "Yes, I would love to!"

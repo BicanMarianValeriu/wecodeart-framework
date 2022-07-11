@@ -184,14 +184,6 @@ class Button extends Dynamic {
 		.wp-block-button__link.active {
 			box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
 		}
-		.wp-block-button__link:active,
-		.wp-block-button__link.active {
-			box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
-		}
-		.wp-block-button__link:active:focus,
-		.wp-block-button__link.active:focus {
-			box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
-		}
 		.wp-block-button__link:disabled,
 		.wp-block-button__link.disabled,
 		fieldset:disabled .wp-block-button__link {

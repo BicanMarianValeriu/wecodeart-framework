@@ -487,8 +487,6 @@ progress {
  * https://github.com/WordPress/gutenberg/issues/35607
  * https://github.com/WordPress/gutenberg/issues/35884
  */
-.site-header,
-.site-footer,
 .wp-site-blocks,
 .wp-site-header,
 .wp-site-footer,
@@ -500,8 +498,6 @@ progress {
   padding-right: var(--wp--custom--gutter);
 }
 
-.wp-site-blocks .site-header,
-.wp-site-blocks .site-footer,
 .wp-site-blocks .alignfull,
 .wp-site-blocks .wp-site-header,
 .wp-site-blocks .wp-site-footer,
@@ -518,8 +514,6 @@ progress {
   width: inherit;
 }
 
-.site-header,
-.site-footer,
 .wp-site-blocks,
 .wp-site-header,
 .wp-site-footer,
@@ -527,18 +521,15 @@ progress {
   background-color: inherit;
 }
 
-.site-header,
 .wp-site-header {
   position: relative;
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
   z-index: 15;
 }
-.has-scrolled .site-header,
 .has-scrolled .wp-site-header {
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-.site-footer,
 .wp-site-footer,
 .wp-site-credits {
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
@@ -547,10 +538,6 @@ progress {
 .wp-site-credits {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.wp-block-post-comments-link {
-  font-size: var(--wp--preset--font-size--small);
 }
 
 :where(.wp-block-post-author, .wp-block-post-author-name, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) .svg-inline {

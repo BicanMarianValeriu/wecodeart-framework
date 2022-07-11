@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.2
+ * @version		5.6.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -38,9 +38,25 @@ abstract class Dynamic {
 	protected $block_name = '';
 
 	/**
+	 * Initialize this block type.
+	 *
+	 * - Hook into WP lifecycle.
+	 * - Register the block with WordPress.
+	 */
+	public function hooks() {
+		if ( empty( $this->block_name ) ) {
+			_doing_it_wrong( __METHOD__, esc_html__( 'Block name is required.', 'wecodeart' ), '5.6.3' );
+			return false;
+		}
+		
+		add_action( 'init', [ $this, 'register' ] );
+		add_action( 'init', [ $this, 'enqueue_styles' ] ); // wp_enqueue_block_styles goes to init hook instead of the usual one.
+	}
+
+	/**
 	 * Registers the block type with WordPress.
 	 */
-	public function register() {
+	protected function register() {
 		// Like this to pass theme check - however, in the theme, this acts as an abstract method
 		// and its overwritten to add_filter for the blocks that we change the markup
 		call_user_func_array( 'register_block_type', [ $this->get_block_type(), [
@@ -55,7 +71,7 @@ abstract class Dynamic {
 	 *
 	 * @return	string Block Markup.
 	 */
-	public function render() {}
+	protected function render() {}
 
 	/**
 	 * Load and manipulate HTML with DOMDocument.

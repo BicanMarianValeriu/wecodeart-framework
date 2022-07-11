@@ -1,5 +1,14 @@
 v5.6.3
-- Updated - ...
+- Removed - Deprecated .site-header/footer classes
+- Updated - Gutenberg block overwrites - small refactoring on their register method
+- Updated - Social icons NOT to load styles for individual icons more thank once (if multiple blocks are on the same page)
+- Fixed - Bug with spacer height default value (in CSS processor)
+- Fixed - Button double CSS rules for active style
+- Fixed - Couple of wrong local translations in Romanian.
+- Fixed - CSS for .text-wrap utility
+- Added - Text transform utilites (uppercase/lowercase/capitalize)
+- Added - Extend button styles to WooCommerce '.wc-block-components-button' class (when WOO is active)
+- Added - Product search results template with legacy template block
 
 v5.6.2
 - Updated - JavaScript's SweetAlert2 and Photoswipe unpkg URLs (latest versions) / rebuild

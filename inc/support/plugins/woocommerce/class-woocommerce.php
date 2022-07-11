@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		1.9
- * @version		5.6.2
+ * @version		5.6.3
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -50,10 +50,13 @@ class WooCommerce implements Integration {
 	 */
 	public function register_hooks() {
 		// Add support for WooCommerce 
-		add_action( 'after_setup_theme', 						[ $this, 'after_setup_theme' ] );
+		add_action( 'after_setup_theme', 						[ $this, 'after_setup_theme' 	] );
 
 		// Filters
-		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' ] );
+		add_filter( 'register_block_type_args', 				[ $this, 'block_type_args' 		], 20, 2 );
+		add_filter( 'wecodeart/filter/gutenberg/styles/core', 	[ $this, 'block_inline_styles' 	], 20, 1 );
+		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' 	] );
+		add_filter( 'woocommerce_breadcrumb_defaults',			[ $this, 'breadcrumb_defaults'	] );
 	}
 
 	/**
@@ -71,6 +74,42 @@ class WooCommerce implements Integration {
             }
 			add_theme_support( $feature, $value );
 		}
+	}
+
+	/**
+	 * Block args
+	 *
+	 * @since	5.6.3
+	 * @version	5.6.3
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( $args, $block_name ) {
+		if ( $block_name === 'core/button' && get_prop( $args, [ 'supports', '__experimentalSelector' ] ) ) {
+			$woocommerce = [
+				'.wc-block-components-button',
+			];
+
+			$selectors = array_merge( (array) get_prop( $args, [ 'supports', '__experimentalSelector' ], [] ), $woocommerce );
+			$args['supports']['__experimentalSelector'] = implode( ',', array_filter( $selectors ) );
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Block CSS process
+	 *
+	 * @since	5.6.3
+	 * @version	5.6.3
+	 *
+	 * @return 	array
+	 */
+	public function block_inline_styles( $args ) {
+		return array_merge( $args, [
+			'woocommerce/featured-category',
+			'woocommerce/featured-product',
+		] );
 	}
 
 	/**
@@ -94,5 +133,19 @@ class WooCommerce implements Integration {
 			'woocommerce/product-new',
 			'woocommerce/product-tag',
 		], $blocks );
+	}
+
+	/**
+	 * Breadcrumbs
+	 *
+	 * @since	5.6.3
+	 * @version	5.6.3
+	 *
+	 * @return 	array
+	 */
+	public function breadcrumb_defaults( $args ) {
+		$args['delimiter'] = ' » ';
+
+		return $args;
 	}
 }

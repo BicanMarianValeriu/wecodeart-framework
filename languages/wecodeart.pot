@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-12 01:40+0000\n"
+"POT-Creation-Date: 2022-07-08 00:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -86,6 +86,10 @@ msgstr ""
 
 #. Author of the theme
 msgid "Bican Marian Valeriu @wecodeart"
+msgstr ""
+
+#: inc/gutenberg/blocks/class-dynamic.php:48
+msgid "Block name is required."
 msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:161
@@ -274,10 +278,6 @@ msgstr ""
 
 #: views/admin/notification-locale.tpl.php:36
 msgid "No, I don`t care."
-msgstr ""
-
-#: inc/gutenberg/blocks/post/class-template.php:122
-msgid "Nothing found matching your criteria."
 msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:74

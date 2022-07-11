@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -69,7 +69,23 @@ class Social extends Dynamic {
 				return strpos( $val, 'is-style-' ) === 0;
 			} );
 
-			foreach( $services as $service ) $inline_css .= $this->get_inline_style( current( $classnames ), $service );
+			static $loaded_styles = [
+				'classes'	=> [],
+				'services' 	=> []
+			];
+
+			foreach( $services as $service ) {
+				$classname = current( $classnames );
+
+				if( 
+					in_array( $classname, $loaded_styles['classes'], true ) &&
+					in_array( $service, $loaded_styles['services'], true )
+				) continue;
+
+				$inline_css .= $this->get_inline_style( $classname , $service );
+				$loaded_styles['classes'][] = $classname;
+				$loaded_styles['services'][] = $service;
+			}
 			
 			add_action( 'wp_print_styles', function() use ( $inline_css ) {
 				wp_add_inline_style( 'wp-block-' . $this->block_name, $inline_css );

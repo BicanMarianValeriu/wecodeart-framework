@@ -8,8 +8,6 @@
  * https://github.com/WordPress/gutenberg/issues/35607
  * https://github.com/WordPress/gutenberg/issues/35884
  */
-.site-header, // Deprecated
-.site-footer, // Deprecated
 .wp-site-blocks,
 .wp-site-header,
 .wp-site-footer,
@@ -21,8 +19,6 @@
     padding-right: var(--wp--custom--gutter);
 }
 
-.wp-site-blocks .site-header, // Deprecated
-.wp-site-blocks .site-footer, // Deprecated
 .wp-site-blocks .alignfull,
 .wp-site-blocks .wp-site-header,
 .wp-site-blocks .wp-site-footer,
@@ -40,8 +36,6 @@
 }
 
 // Containers
-.site-header, // Deprecated
-.site-footer, // Deprecated
 .wp-site-blocks,
 .wp-site-header,
 .wp-site-footer,
@@ -49,7 +43,6 @@
     background-color: inherit;
 }
 
-.site-header, // Deprecated
 .wp-site-header {
     position: relative;
     box-shadow: 0 0 1px 0 rgba(black, 0.15);
@@ -60,7 +53,6 @@
     }
 }
 
-.site-footer, // Deprecated
 .wp-site-footer,
 .wp-site-credits {
     box-shadow: 0 0 1px 0 rgba(black, 0.15);
@@ -72,10 +64,6 @@
 }
 
 // Blocks
-.wp-block-post-comments-link {
-    font-size: var(--wp--preset--font-size--small);
-}
-
 :where(.wp-block-post-author, .wp-block-post-author-name, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) {
     .svg-inline {
         align-self: center;

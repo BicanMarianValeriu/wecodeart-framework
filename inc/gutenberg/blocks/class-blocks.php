@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Blocks Registry
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.2
+ * @version		5.6.3
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -93,8 +93,8 @@ class Blocks implements Configuration {
 		$this->register( 'core/post-featured-image',Blocks\Post\Image::class );
 		$this->register( 'core/post-comments-link', Blocks\Post\Comments::class );
         // // Comment Blocks
-		$this->register( 'core/comments-title',     Blocks\Comment\Title::class );
 		$this->register( 'core/post-comments-form', Blocks\Comment\Form::class );
+		$this->register( 'core/comments-title',     Blocks\Comment\Title::class );
 		$this->register( 'core/comment-template',   Blocks\Comment\Template::class );
         // // Query Blocks
 		$this->register( 'core/query-title',	            Blocks\Query\Title::class );
@@ -118,12 +118,8 @@ class Blocks implements Configuration {
 	 * @return void
 	 */
 	public function register_blocks() {
-        foreach( $this->items as $class ) {
-            $block = $class::get_instance();
-            // Register Overwrite
-            $block->register();
-            // Maybe overwrite styles
-            add_action( 'init',   [ $block, 'enqueue_styles' ], -10 );
+        foreach( $this->all() as $class ) {
+            $class::get_instance()->hooks();
         }
 	}
 
