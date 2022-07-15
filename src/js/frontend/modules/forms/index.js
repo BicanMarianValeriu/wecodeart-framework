@@ -10,6 +10,8 @@ const extendCommonWithForms = (route, func) => {
 		// Fetch all the forms we want to apply custom Bootstrap validation styles to
 		const forms = document.querySelectorAll('.needs-validation');
 		Array.prototype.slice.call(forms).forEach((form) => {
+			let timeout;
+			
 			form.addEventListener('submit', (e) => {
 				if (!form.checkValidity()) {
 					e.preventDefault();
@@ -17,10 +19,12 @@ const extendCommonWithForms = (route, func) => {
 				}
 
 				form.classList.add('was-validated');
-				const timeout = setTimeout(() => {
+
+				timeout = setTimeout(() => {
 					form.classList.remove('was-validated');
 					clearTimeout(timeout);
 				}, 5000);
+
 			}, false);
 		});
 	}
