@@ -156,7 +156,7 @@ class Config implements Configuration, ArrayAccess {
      *
      * @return mixed
      */
-    public function offsetGet( mixed $key ) : mixed {
+    public function offsetGet( $key ) {
         return $this->get( $key );
     }
 
