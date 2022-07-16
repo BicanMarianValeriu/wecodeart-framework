@@ -1,14 +1,15 @@
 {
 	"name": "wecodeart",
-	"version": "5.0.0",
+	"version": "5.6.3",
 	"main": "webpack.config.js",
 	"author": "Bican Marian Valeriu",
 	"browserslist": [
 		"extends @wordpress/browserslist-config"
 	],
 	"scripts": {
-		"build": "wp-scripts build",
-		"start": "wp-scripts start",
+		"build": "wp-scripts build frontend=./src/js/frontend/index.js --output-path=assets/minified",
+		"start": "wp-scripts start frontend=./src/js/frontend/index.js --output-path=assets/unminified",
+		"start:hot": "wp-scripts start frontend=./src/js/frontend/index.js --output-path=assets/unminified --hot",
 		"build:admin": "wp-scripts build admin/admin=./src/js/admin/index.js --output-path=assets/minified",
 		"start:admin": "wp-scripts start admin/admin=./src/js/admin/index.js --output-path=assets/unminified",
 		"build:forms": "wp-scripts build modules/forms=./src/js/frontend/modules/forms/index.js --output-path=assets/minified",

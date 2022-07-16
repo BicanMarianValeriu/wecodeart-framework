@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-07-08 00:39+0000\n"
+"PO-Revision-Date: 2022-07-16 02:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -24,7 +24,7 @@ msgstr "la %s"
 #: views/meta/comments.tpl.php:53
 #| msgid "%s Comments"
 msgid "% Comments"
-msgstr "%s Comentarii"
+msgstr "% Comentarii"
 
 #: inc/gutenberg/blocks/query/class-title.php:155
 #, php-format

@@ -13,9 +13,6 @@ const wplib = [
 
 module.exports = {
     ...defaultConfig,
-    entry: {
-        'frontend': path.resolve(process.cwd(), 'src', 'js', 'frontend', 'index.js'),
-    },
     output: {
         path: path.resolve(process.cwd(), `assets/${devMode ? 'unminified' : 'minified'}`),
         filename: devMode ? 'js/[name].js' : 'js/[name].min.js',
