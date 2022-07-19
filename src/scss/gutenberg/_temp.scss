@@ -22,10 +22,6 @@
         width: unset;
         max-width: initial;
     }
-    
-    .block-editor-block-list__block > :where(.wp-block) {
-        --wp--style--block-gap: 1rem;
-    }
 }
 
 // FSE Editor
@@ -38,18 +34,10 @@
         width: unset;
         max-width: initial;
     }
-
-    .entry-content > :where(.wp-block) {
-        --wp--style--block-gap: 0;
-    }
 }
 
 .wp-block-buttons {
     --wp--style--block-gap: 1em;
-}
-
-.wp-block-navigation {
-    position: relative;
 }
 
 .components-circular-option-picker__option {

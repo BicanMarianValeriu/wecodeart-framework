@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.6.1
+ * @version		5.6.4
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -340,8 +340,10 @@ class Styles implements Integration {
 	 * @return 	void
 	 */
 	public function global_styles() {
-		$style  	= '';
+		// Box Sizing
+		$style  	= '*,*::before,*::after{box-sizing: border-box;}';
 
+		// Colors RGB as CSS var
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
@@ -367,8 +369,8 @@ class Styles implements Integration {
 			$slug = str_replace( ')', '', end( $slug ) );
 		}
 		
+		// Otherwhise is a normal Hex color
 		if ( isset( $slug  ) ) {
-			// Otherwhise is a normal Hex color
 			$link_color	= get_prop( current( wp_list_filter( $palette, [
 				'slug' => $slug,
 			] ) ), 'color', '#0088cc' );

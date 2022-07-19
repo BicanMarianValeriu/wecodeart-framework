@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.6.1
+ * @version		5.6.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -76,7 +76,7 @@ class Form extends Dynamic {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	5.6.1
+	 * @version	5.6.4
 	 *
 	 * @return 	array
 	 */
@@ -89,7 +89,6 @@ class Form extends Dynamic {
 
 		return wp_parse_args( [
 			'format'			 	=> 'html5',
-			// 'class_container'	=> 'wp-block-post-comments-form__wrap',
 			'class_form' 			=> 'wp-block-post-comments-form__form comment-form needs-validation',
 			'title_reply' 			=> $dots . esc_html__( 'Speak Your Mind', 'wecodeart' ),
 			'title_reply_before' 	=> '<h3 class="wp-block-post-comments-form__headline" id="reply-title">',
@@ -99,7 +98,7 @@ class Form extends Dynamic {
 			'cancel_reply_link'    	=> esc_html__( 'Cancel reply', 'wecodeart' ),
 			'comment_field' 		=> $this->get_input( 'comment' ),
 			'comment_notes_before' 	=> $this->get_form_notes(),
-			'submit_field'			=> '<div class="comment-form-field">%1$s %2$s</div>',
+			'submit_field'			=> '<div class="comment-form-field wp-block-button">%1$s %2$s</div>',
 			'submit_button'			=> $this->get_input( 'submit' ),
 			'class_submit'			=> 'comment-form-submit wp-block-button__link',
 			'fields' 				=> [

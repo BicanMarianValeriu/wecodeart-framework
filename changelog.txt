@@ -1,3 +1,7 @@
+v5.6.4
+- Updated - Navigation block custom styles to use main stylesheed as dependency
+- Fixed - CSS: moved box sizing to global styles to fix an issue with loaders in FSE admin
+
 v5.6.3
 - Removed - Deprecated .site-header/footer classes
 - Updated - Gutenberg block overwrites - small refactoring on their register method

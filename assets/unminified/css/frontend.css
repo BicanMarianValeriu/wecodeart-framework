@@ -8,12 +8,6 @@ Package: Core CSS
 Author: Bican Marian Valeriu @wecodeart
 Author URI: https://www.wecodeart.com/about/
 */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 :root {
   --wp--blue: #2388ed;
   --wp--indigo: #6610f2;
