@@ -35,6 +35,10 @@
     width: inherit;
 }
 
+.wp-site-blocks > * + * {
+    margin-block-start: 0!important;
+}
+
 // Containers
 .wp-site-blocks,
 .wp-site-header,

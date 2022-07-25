@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.4.6
+ * @version		5.6.4
  */
 
 namespace WeCodeArt\Admin;
@@ -33,7 +33,7 @@ class Activation {
 	 *
 	 * @var		string
 	 */
-	const REQUIRED_WP 	= '5.9';
+	const REQUIRED_WP 	= '6.0';
 	const REQUIRED_PHP 	= '7.0';
 
 	/**
@@ -43,14 +43,6 @@ class Activation {
 	 * @var		array
 	 */
 	protected $requirements = [];
-
-	/**
-	 * Messages
-	 *
-	 * @access 	protected
-	 * @var		array
-	 */
-	protected $messages = [];
 
 	/**
 	 * Status
@@ -64,30 +56,10 @@ class Activation {
 	 * Send to Constructor
 	 */
 	public function init() {
-		$this->set_i18n();
 		$this->set_requirements();
 		$this->set_deactivation_hooks();
 
 		add_action( 'after_switch_theme', 	[ $this, 'after_switch_theme' 	] );
-		add_action( 'load-customize.php', 	[ $this, 'load_customize' 		] );
-		add_action( 'template_redirect', 	[ $this, 'template_redirect' 	] );
-	}
-
-	/**
-	 * Set Translation Messages
-	 *
-	 * @since 	3.7.9
-	 * @version	4.1.5
-	 */
-	public function set_i18n( $args = [] ) {
-		$defaults = [
-			'customizer' => esc_html__( 
-				'Your WordPress installation does not meet the minimum requirements to run WeCodeArt Framework. Please upgrade and try again.', 
-				'wecodeart'
-			),
-		];
-
-		return $this->messages = wp_parse_args( $args, apply_filters( 'wecodeart/filter/activation/i18n', $defaults ) );	
 	}
 
 	/**
@@ -205,30 +177,6 @@ class Activation {
 			do_action( 'wecodeart/hook/activation/failed' );
 
 			return;
-		}
-	}
-
-		/**
-	 * Show an error notice box on WP Customizer
-	 *
-	 * @since 	1.8
-	 * @version	5.0.0
-	 */
-	public function load_customize() {
-		if( $this->is_ok() ) return;
-		wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
-	}
-
-	/**
-	 * Prevents the Theme Preview from being loaded.
-	 *
-	 * @since 	5.0.0
-	 * @version	5.0.0
-	 */
-	public function template_redirect() {
-		if( $this->is_ok() ) return;
-		if( isset( $_GET['preview'] ) ) {
-			wp_die( $this->messages['customizer'], '', [ 'back_link' => true ] );
 		}
 	}
 

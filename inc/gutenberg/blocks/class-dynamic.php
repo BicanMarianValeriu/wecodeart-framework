@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.3
+ * @version		5.6.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -49,7 +49,7 @@ abstract class Dynamic {
 			return false;
 		}
 		
-		add_action( 'init', [ $this, 'register' ] );
+		$this->register();
 		add_action( 'init', [ $this, 'enqueue_styles' ] ); // wp_enqueue_block_styles goes to init hook instead of the usual one.
 	}
 

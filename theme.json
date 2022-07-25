@@ -242,7 +242,7 @@
 			"customFontSize": true,
 			"fontFamilies": [
 				{
-					"fontFamily": "var(--wp--font-sans-serif)",
+					"fontFamily": "var(--wp--font-system)",
 					"slug": "base",
 					"name": "Base"
 				},
@@ -296,7 +296,15 @@
 				"spacing": {
 					"margin": {
 						"top": "0",
-						"bottom": "1.5rem"
+						"bottom": "var:style|block-gap"
+					}
+				}
+			},
+			"core/paragraph": {
+				"spacing": {
+					"margin": {
+						"top": "var:style|block-gap",
+						"bottom": "var:style|block-gap"
 					}
 				}
 			},
@@ -351,6 +359,10 @@
 						"bottom": "1rem",
 						"left": "1rem",
 						"right": "1rem"
+					},
+					"margin": {
+						"top": "0",
+						"bottom": "var:style|block-gap"
 					}
 				}
 			},
@@ -378,6 +390,21 @@
 						"bottom": ".5rem",
 						"left": ".75rem",
 						"right": ".75rem"
+					}
+				}
+			},
+			"core/separator": {
+				"border": {
+					"width": "0"
+				},
+				"color": {
+					"background": "currentColor",
+					"text": "inherit"
+				},
+				"spacing": {
+					"margin": {
+						"top": "var:style|block-gap",
+						"bottom": "var:style|block-gap"
 					}
 				}
 			}
@@ -427,7 +454,7 @@
 			"text": "var:preset|color|dark"
 		},
 		"spacing": {
-			"blockGap": ""
+			"blockGap": "1.5rem"
 		},
 		"typography": {
 			"fontSize": "var:preset|font-size|normal",

@@ -1,6 +1,9 @@
 v5.6.4
+- Removed - Old Customizer activation errors (if server does not match our requirements) and code.
 - Updated - Navigation block custom styles to use main stylesheed as dependency
+- Updated - Moved some styles from stylesheet to global styles / added blockGap (with reset on fist .wp-site-blocks children)
 - Fixed - CSS: moved box sizing to global styles to fix an issue with loaders in FSE admin
+- Added - WooCommerce to render fields using woocommerce_form_field() with wecodeart_input() function (excepting: state/country/select/radio)
 
 v5.6.3
 - Removed - Deprecated .site-header/footer classes

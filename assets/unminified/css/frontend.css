@@ -31,7 +31,7 @@ Author URI: https://www.wecodeart.com/about/
   --wp--gray-700: #495057;
   --wp--gray-800: #343a40;
   --wp--gray-900: #212529;
-  --wp--font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --wp--font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --wp--font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -47,11 +47,7 @@ body {
 }
 
 hr {
-  margin: 1.5rem 0;
-  color: inherit;
-  background-color: currentColor;
   height: 1px;
-  border: 0;
   opacity: 1;
 }
 
@@ -109,11 +105,6 @@ h6,
   font-size: 1rem;
 }
 
-p {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-
 abbr[title],
 abbr[data-bs-original-title] {
   -webkit-text-decoration: underline dotted;
@@ -124,7 +115,6 @@ abbr[data-bs-original-title] {
 }
 
 address {
-  margin-bottom: 1rem;
   font-style: normal;
   line-height: inherit;
 }
@@ -138,7 +128,7 @@ ol,
 ul,
 dl {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: var(--wp--style--block-gap);
 }
 
 ol ol,
@@ -157,8 +147,9 @@ dd {
   margin-left: 0;
 }
 
-blockquote {
-  font-size: 1rem;
+address,
+blockquote,
+figure {
   margin: 0 0 1rem;
 }
 
@@ -175,7 +166,7 @@ mark, .mark {
   display: inline-block;
   padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
-  background-color: #fcf8e3;
+  background-color: var(--wp--gray-100);
 }
 
 sub,
@@ -213,9 +204,6 @@ samp {
 }
 
 pre {
-  display: block;
-  margin-top: 0;
-  margin-bottom: 1rem;
   overflow: auto;
   color: var(--wp--pink);
 }
@@ -251,10 +239,6 @@ figure,
 iframe,
 img {
   max-width: 100%;
-}
-
-figure {
-  margin: 0 0 1rem;
 }
 
 figcaption {
@@ -506,6 +490,10 @@ progress {
   margin-left: auto !important;
   margin-right: auto !important;
   width: inherit;
+}
+
+.wp-site-blocks > * + * {
+  margin-block-start: 0 !important;
 }
 
 .wp-site-blocks,

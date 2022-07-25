@@ -26,7 +26,7 @@
 	// Fonts
 	// Note: Use `inspect` for lists so that quoted items keep the quotes.
 	// See https://github.com/sass/sass/issues/2383#issuecomment-336349172
-	--wp--font-sans-serif: #{inspect($font-family-sans-serif)};
+	--wp--font-system: #{inspect($font-family-sans-serif)};
 	--wp--font-monospace: #{inspect($font-family-monospace)};
 	
 	@media (prefers-reduced-motion: no-preference) {
@@ -49,11 +49,7 @@ body {
 //
 // 1. Reset Firefox's gray color
 hr {
-	margin: 1.5rem 0;
-	color: inherit; // 1
-	background-color: currentColor;
 	height: 1px;
-	border: 0;
 	opacity: 1;
 }
 
@@ -63,15 +59,6 @@ hr {
 	.h#{$tag} {
 		@include font-size($value);
 	}
-}
-
-// Reset margins on paragraphs
-//
-// Similarly, the top margin on `<p>`s get reset. However, we also reset the
-// bottom margin to use `rem` units instead of `em`.
-p {
-	margin-top: 0;
-	margin-bottom: 1rem;
 }
 
 // Abbreviations
@@ -89,7 +76,6 @@ abbr[data-bs-original-title] { // 1
 
 // Address
 address {
-	margin-bottom: 1rem;
 	font-style: normal;
 	line-height: inherit;
 }
@@ -104,7 +90,7 @@ ol,
 ul,
 dl {
 	margin-top: 0;
-	margin-bottom: 1rem;
+	margin-bottom: var(--wp--style--block-gap);
 }
 
 ol ol,
@@ -124,9 +110,10 @@ dd {
 	margin-left: 0; // 1
 }
 
-// Blockquote
-blockquote {
-	font-size: 1rem;
+// Reset elements margin
+address,
+blockquote,
+figure {
   	margin: 0 0 1rem;
 }
 
@@ -150,7 +137,7 @@ mark {
 	display: inline-block;
 	padding: .2rem .5rem;
 	border-radius: .25rem;
-	background-color: #fcf8e3;
+	background-color: var(--wp--gray-100);
 }
 
 // Sub and Sup
@@ -191,7 +178,7 @@ a:not([href]):not([class]) {
 	}
 }
 
-// Code
+// Pre/Code/Kbd/Samp
 pre,
 code,
 kbd,
@@ -202,14 +189,9 @@ samp {
 	unicode-bidi: bidi-override;
 }
 
-// 1. Remove browser default top margin
-// 2. Reset browser default of `1em` to use `rem`s
-// 3. Don't allow content to break outside
+// Pre
 pre {
-	display: block;
-	margin-top: 0; // 1
-	margin-bottom: 1rem; // 2
-	overflow: auto; // 3
+	overflow: auto;
 	color: var(--wp--pink);
 
 	// Account for some code outputs that place code tags in pre tags
@@ -220,6 +202,7 @@ pre {
 	}
 }
 
+// Code
 code {
 	font-size: var(--wp--preset--font-size--small);
 	color: var(--wp--pink);
@@ -231,6 +214,7 @@ code {
 	}
 }
 
+// Kbd
 kbd {
 	padding: 0.2rem 0.4rem;
 	font-size: var(--wp--preset--font-size--small);
@@ -252,10 +236,6 @@ figure,
 iframe,
 img {
     max-width: 100%;
-}
-
-figure {
-  	margin: 0 0 1rem;
 }
 
 figcaption {
