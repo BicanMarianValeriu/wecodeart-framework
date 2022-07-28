@@ -1,3 +1,6 @@
+v5.6.5
+- Fixed - core/paragraph top margin in theme.json (it should be 0)
+
 v5.6.4
 - Removed - Old Customizer activation errors (if server does not match our requirements) and code.
 - Updated - Navigation block custom styles to use main stylesheed as dependency

@@ -303,7 +303,7 @@
 			"core/paragraph": {
 				"spacing": {
 					"margin": {
-						"top": "var:style|block-gap",
+						"top": "0",
 						"bottom": "var:style|block-gap"
 					}
 				}
