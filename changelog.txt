@@ -1,3 +1,6 @@
+v5.6.6
+- Updated - Theme description
+
 v5.6.5
 - Fixed - core/paragraph top margin in theme.json (it should be 0)
 

@@ -1,10 +1,5 @@
 {
 	"version": "5.0.0",
 	"items": [
-		{
-			"type": "info",
-			"title": "Issue with blocks Advanced Classname - Fixed",
-			"content": "I`m aware of the bug when trying to add/remove a block class (under block`s Advanced tab). A fix is done and will be released with the next update. Update: Please update to 5.6.2!"
-		}
 	]
 }
