@@ -15,19 +15,13 @@ return [
 	<!-- wp:paragraph {"align":"center","textColor":"white","className":"fw-300 mb-5"} -->
 	<p class="has-text-align-center fw-300 mb-5 has-white-color has-text-color">Programmatically work but low hanging fruit so new economy cross-pollination. Quick sync new<br>economy onward and upward.</p>
 	<!-- /wp:paragraph -->
-	<!-- wp:buttons {"contentJustification":"center","className":"is-style-default"} -->
-	<div class="wp-block-buttons is-content-justification-center is-style-default">
-	<!-- wp:button {"backgroundColor":"light","textColor":"dark"} -->
-	<div class="wp-block-button">
-	<a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">LEARN MORE</a>
-	</div>
+	<!-- wp:buttons {"className":"is-style-default","layout":{"type":"flex","justifyContent":"center","orientation":"horizontal"}} -->
+	<div class="wp-block-buttons is-style-default"><!-- wp:button {"backgroundColor":"light","textColor":"dark"} -->
+	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background wp-element-button" href="#">LEARN MORE</a></div>
 	<!-- /wp:button -->
 	<!-- wp:button {"backgroundColor":"light","textColor":"dark"} -->
-	<div class="wp-block-button">
-	<a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background" href="#">HIRE US</a>
-	</div>
-	<!-- /wp:button -->
-	</div>
+	<div class="wp-block-button"><a class="wp-block-button__link has-dark-color has-light-background-color has-text-color has-background wp-element-button" href="#">HIRE US</a></div>
+	<!-- /wp:button --></div>
 	<!-- /wp:buttons -->
 	</div>
 	</div>
@@ -209,8 +203,7 @@ return [
 	<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center","orientation":"horizontal"}} -->
 	<div class="wp-block-buttons">
 	<!-- wp:button {"textColor":"white","className":"is-style-outline"} -->
-	<div class="wp-block-button is-style-outline">
-	<a class="wp-block-button__link has-white-color has-text-color" href="#">LEARN MORE</a>
+	<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-white-color has-text-color wp-element-button" href="#">LEARN MORE</a>
 	</div>
 	<!-- /wp:button -->
 	</div>

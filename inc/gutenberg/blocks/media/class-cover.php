@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.2
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -147,7 +147,7 @@ class Cover extends Dynamic {
 			margin-bottom: 1rem;
 		}
 		.single-post .wp-block-cover__inner-container {
-			max-width: 1330px;
+			max-width: var(--wp--style--global--content-size);
 			margin-left: auto;
 			margin-right: auto;
 		}

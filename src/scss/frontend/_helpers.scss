@@ -2,22 +2,22 @@
 :where(.theme-wecodeart) {
     // Align
     .alignnone {
-        margin: 0 0 var(--wp--custom--spacers--3) 0;
+        margin: 0 0 var(--wp--preset--spacing--sm) 0;
     }
     
     .aligncenter {
         display: block;
-        margin: 0 auto var(--wp--custom--spacers--3);
+        margin: 0 auto var(--wp--preset--spacing--sm);
     }
     
     .alignright {
         float: right;
-        margin: 0 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3);
+        margin: 0 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm);
     }
     
     .alignleft {
         float: left;
-        margin: 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3) 0;
+        margin: 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm) 0;
     }
 
     // Borders

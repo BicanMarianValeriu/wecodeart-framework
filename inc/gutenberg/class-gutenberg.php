@@ -59,9 +59,8 @@ class Gutenberg {
 		// Admin.
 		add_action( 'admin_init', 					[ $this, 'admin_init' ] );
 
-		// Skip links.
+		// Skip links - those are handled in JS file.
 		remove_action( 'wp_footer', 				'the_block_template_skip_link' );
-		add_action( 'wp_footer', 					[ $this, 'the_skip_link' ] );
 
 		// Modules.
 		Gutenberg\Modules::get_instance();
@@ -194,66 +193,5 @@ class Gutenberg {
 		if( ! get_prop( wecodeart_config( 'gutenberg' ), 'editor' ) ) {
 			remove_submenu_page( 'themes.php', 'gutenberg-edit-site' );
 		}
-	}
-
-	/**
-	 * Print the skip-link script & styles.
-	 *
-	 * @todo Remove this when WP 5.8 is the minimum required version.
-	 *
-	 * @return void
-	 */
-	public function the_skip_link() {
-		// This is a block theme so we skip the other check.
-		// Early exit if not a block template.
-		global $_wp_current_template_content;
-		if ( ! $_wp_current_template_content ) {
-			return;
-		}
-		?>
-		<?php
-		/**
-		 * Print the skip-link script.
-		 */
-		?>
-		<script>
-		(function() {
-			var skipLinkTarget = document.querySelector( 'main' ),
-				sibling,
-				skipLinkTargetID,
-				skipLink;
-
-			// Early exit if a skip-link target can't be located.
-			if ( ! skipLinkTarget ) {
-				return;
-			}
-
-			// Get the site wrapper.
-			// The skip-link will be injected in the beginning of it.
-			sibling = document.querySelector( '.wp-site-blocks' );
-
-			// Early exit if the root element was not found.
-			if ( ! sibling ) {
-				return;
-			}
-
-			// Get the skip-link target's ID, and generate one if it doesn't exist.
-			skipLinkTargetID = skipLinkTarget.id;
-			if ( ! skipLinkTargetID ) {
-				skipLinkTargetID = 'wp--skip-link--target';
-				skipLinkTarget.id = skipLinkTargetID;
-			}
-
-			// Create the skip link.
-			skipLink = document.createElement( 'a' );
-			skipLink.classList.add( 'skip-link', 'screen-reader-text' );
-			skipLink.href = '#' + skipLinkTargetID;
-			skipLink.innerHTML = '<?php esc_html_e( 'Skip to content', 'wecodeart' ); ?>';
-
-			// Inject the skip link.
-			sibling.parentElement.insertBefore( skipLink, sibling );
-		}());
-		</script>
-		<?php
 	}
 }

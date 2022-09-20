@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -132,9 +132,11 @@ class Text extends Dynamic {
 			}
 			.wp-block-media-text.is-stacked-on-mobile .wp-block-media-text__media {
 				grid-column: 1;
+				grid-row: 1;
 			}
 			.wp-block-media-text.is-stacked-on-mobile .wp-block-media-text__content {
 				grid-column: 1;
+				grid-row: 2;
 			}
 		}
 		";

@@ -110,11 +110,10 @@ class Styles implements Integration {
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
 		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
-		add_action( 'admin_init',					[ $this, 'editor_styles' 		], 20, 1 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
 		remove_filter( 'render_block', 'wp_render_spacing_gap_support', 10, 2 );
-		remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
+		// remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
 		remove_filter( 'render_block', 'wp_render_elements_support', 	10, 2 );
 		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
 		remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters',	10, 1 );
@@ -123,26 +122,12 @@ class Styles implements Integration {
 		// Eventually it will be removed - 1 check since they are all from GB.
 		if( function_exists( 'gutenberg_render_layout_support_flag' ) ) {
 			remove_filter( 'render_block', 'gutenberg_render_spacing_gap_support', 	10, 2 );
-			remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
+			// remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_elements_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
 		 	remove_action( 'wp_body_open', 'gutenberg_global_styles_render_svg_filters',	10, 1 );
 			remove_filter( 'pre_render_block', 'gutenberg_render_elements_support_styles', 	10, 2 );
 		}
-	}
-
-	/**
-	 * Generate Utilities CSS on admin.
-	 *
-	 * @return  void
-	 */
-	public function editor_styles() {
-		$filesystem = wecodeart( 'files' );
-		$filesystem->set_folder( 'cache' );
-
-		add_editor_style( $filesystem->get_file_url( $this->CSS->Utilities::CACHE_FILE, true ) );
-		
-		$filesystem->set_folder( '' );
 	}
 
 	/**
@@ -281,7 +266,7 @@ class Styles implements Integration {
 	 * @return 	string
 	 */
 	public function filter_selectors( $selector, $block ) {
-		if( $block === 'core/avatar' ) {
+		if( $block === 'core/avatar' || $block === 'core/image' ) {
 			$selector .= ' img';
 		}
 

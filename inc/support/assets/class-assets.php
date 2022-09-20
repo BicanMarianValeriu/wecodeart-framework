@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		5.4.0
- * @version		5.6.1
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Support;
@@ -76,7 +76,7 @@ final class Assets implements Integration {
 	 * WeCodeArt JS Object
 	 *
 	 * @since	3.2
-	 * @version	5.5.8
+	 * @version	5.6.7
 	 *
 	 * @return 	void
 	 */
@@ -87,6 +87,9 @@ final class Assets implements Integration {
 			'assetsEnqueue' 	=> $wp_scripts->queue, 
 			'templateDirectory' => get_template_directory_uri(),
 			'isDevMode'			=> wecodeart_if( 'is_dev_mode' ),
+			'locale'			=> [
+				'skipLink' => esc_html__( 'Skip to content', 'wecodeart' )
+			]
 		];
 
 		if( is_child_theme() ) {

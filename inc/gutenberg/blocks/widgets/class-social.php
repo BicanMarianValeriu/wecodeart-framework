@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.2
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -143,6 +143,7 @@ class Social extends Dynamic {
 			'vk' 		=> '#4680c2',
 			'vimeo' 	=> '#1eb7ea',
 			'wordpress'	=> '#3499cd',
+			'whatsapp'	=> '#25d366',
 			'yelp' 		=> '#d32422',
 			'youtube'	=> '#ff0100',
 		];

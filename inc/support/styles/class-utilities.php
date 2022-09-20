@@ -9,7 +9,7 @@
  * @subpackage  Styles Utilities
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.5.8
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -65,10 +65,11 @@ class Utilities implements Configuration {
         // Avoid get_instance() due to infinite loop - we only need static methods.
 		$this->CSS = wecodeart( 'integrations' )->get( 'styles' );
 
-        // Require, cache and generate CSS
-		add_action( 'init',             [ $this, 'require'  ], 90       );
-        add_action( 'init',             [ $this, 'cache'    ], 95       );
-        add_action( 'wp_print_styles',  [ $this, 'generate' ], 20, 1    );
+        // Require, cache and load CSS
+		add_action( 'init',             [ $this, 'require'  ], 90   );
+        add_action( 'init',             [ $this, 'cache'    ], 95   );
+        add_action( 'wp_print_styles',  [ $this, 'frontend_css' ], 20, 1 );
+        add_action( 'admin_init',       [ $this, 'editor_css'   ], 20, 1 );
 
         // Add to editor Advanced class suggestion
         add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'suggestions' ] );
@@ -95,37 +96,6 @@ class Utilities implements Configuration {
      */
     public function load( $key ) {
         return $this->classes = wp_parse_args( (array) $key, $this->classes );
-	}
-
-    /**
-	 * Output styles.
-	 *
-	 * @return 	string
-	 */
-	public function generate() {
-        if( empty( $this->classes ) ) return;
-
-		$inline_css = '';
-		$array_css	= [];
-
-		foreach( array_unique( $this->classes ) as $utility ) {
-            // If we dont have utility, move on.
-            if( ! $this->has( $utility ) ) continue;
-            // Merge breakpoints.
-            $array_css = array_merge_recursive( $array_css, $this->get( $utility ) );
-        }
-        
-        if( ! empty( $array_css ) ) {
-            $array_css  = $this->CSS::sort_breakpoints( $array_css );
-            $processed  = $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
-            $inline_css .= $this->CSS::compress( $processed );
-        }
-
-		if( empty( $inline_css ) ) return;
-
-		wp_register_style( self::CSS_ID, false, [], true, true );
-		wp_add_inline_style( self::CSS_ID, $inline_css );
-		wp_enqueue_style( self::CSS_ID );
 	}
 
     /**
@@ -158,6 +128,51 @@ class Utilities implements Configuration {
 		}
 
 		$filesystem->set_folder( '' );
+	}
+
+    /**
+	 * Load Utilities CSS on admin.
+	 *
+	 * @return  void
+	 */
+	public function editor_css() {
+		$filesystem = wecodeart( 'files' );
+		$filesystem->set_folder( 'cache' );
+
+		add_editor_style( $filesystem->get_file_url( self::CACHE_FILE, true ) );
+		
+		$filesystem->set_folder( '' );
+	}
+
+    /**
+	 * Output frontend styles.
+	 *
+	 * @return 	string
+	 */
+	public function frontend_css() {
+        if( empty( $this->classes ) ) return;
+
+		$inline_css = '';
+		$array_css	= [];
+
+		foreach( array_unique( $this->classes ) as $utility ) {
+            // If we dont have utility, move on.
+            if( ! $this->has( $utility ) ) continue;
+            // Merge breakpoints.
+            $array_css = array_merge_recursive( $array_css, $this->get( $utility ) );
+        }
+        
+        if( ! empty( $array_css ) ) {
+            $array_css  = $this->CSS::sort_breakpoints( $array_css );
+            $processed  = $this->CSS::parse( $this->CSS::add_prefixes( $array_css ) );
+            $inline_css .= $this->CSS::compress( $processed );
+        }
+
+		if( empty( $inline_css ) ) return;
+
+		wp_register_style( self::CSS_ID, false, [], true, true );
+		wp_add_inline_style( self::CSS_ID, $inline_css );
+		wp_enqueue_style( self::CSS_ID );
 	}
 
 	/**

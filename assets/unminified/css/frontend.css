@@ -19,6 +19,7 @@ Author URI: https://www.wecodeart.com/about/
   --wp--green: #7dc855;
   --wp--teal: #20c997;
   --wp--cyan: #0dcaf0;
+  --wp--black: #000;
   --wp--white: #fff;
   --wp--gray: #6c757d;
   --wp--gray-dark: #343a40;
@@ -31,7 +32,7 @@ Author URI: https://www.wecodeart.com/about/
   --wp--gray-700: #495057;
   --wp--gray-800: #343a40;
   --wp--gray-900: #212529;
-  --wp--font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --wp--font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --wp--font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -493,7 +494,8 @@ progress {
 }
 
 .wp-site-blocks > * + * {
-  margin-block-start: 0 !important;
+  -webkit-margin-before: 0 !important;
+          margin-block-start: 0 !important;
 }
 
 .wp-site-blocks,
@@ -973,19 +975,19 @@ progress {
 }
 
 :where(.theme-wecodeart) .alignnone {
-  margin: 0 0 var(--wp--custom--spacers--3) 0;
+  margin: 0 0 var(--wp--preset--spacing--sm) 0;
 }
 :where(.theme-wecodeart) .aligncenter {
   display: block;
-  margin: 0 auto var(--wp--custom--spacers--3);
+  margin: 0 auto var(--wp--preset--spacing--sm);
 }
 :where(.theme-wecodeart) .alignright {
   float: right;
-  margin: 0 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3);
+  margin: 0 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm);
 }
 :where(.theme-wecodeart) .alignleft {
   float: left;
-  margin: 0 var(--wp--custom--spacers--3) var(--wp--custom--spacers--3) 0;
+  margin: 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm) 0;
 }
 :where(.theme-wecodeart) :where(.has-border-color, [style*=border-width]) {
   border-style: solid;

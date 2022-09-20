@@ -1,5 +1,10 @@
 {
 	"version": "5.0.0",
 	"items": [
+		{
+			"type": "info",
+			"title": "Next update",
+			"content": "Next update might include some small breaking changes due to Gutenberg updates (text it on development first). It will fix/align with the latest Gutenberg plugin version and it will be released as soon as they fix the missing CSS files (404 errors Gutenberg plugin)."
+		}
 	]
 }

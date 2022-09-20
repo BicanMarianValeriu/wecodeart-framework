@@ -228,6 +228,51 @@
 		},
 		"spacing": {
 			"blockGap": true,
+			"customSpacingSize": true,
+			"spacingScale": {
+                "operator": "*",
+                "increment": 1.5,
+                "steps": 0,
+                "mediumStep": 1.5,
+                "unit": "rem"
+            },
+			"spacingSizes": [
+				{
+					"name": "XS",
+					"slug": "xs",
+					"size": "0.5rem"
+				},
+				{
+					"name": "SM",
+					"slug": "sm",
+					"size": "1rem"
+				},
+				{
+					"name": "MD",
+					"slug": "md",
+					"size": "2rem"
+				},
+				{
+					"name": "LG",
+					"slug": "lg",
+					"size": "3rem"
+				},
+				{
+					"name": "XL",
+					"slug": "xl",
+					"size": "4rem"
+				},
+				{
+					"name": "XXL",
+					"slug": "xxl",
+					"size": "5rem"
+				},
+				{
+					"name": "Gutter",
+					"slug": "gutter",
+					"size": "var(--wp--custom--gutter)"
+				}
+			],
 			"units": [
 				"px",
 				"%",

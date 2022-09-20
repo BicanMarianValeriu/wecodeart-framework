@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.3.7
- * @version		5.5.9
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -92,11 +92,11 @@ class Pages extends Dynamic {
 
 		$inner_blocks 	= [];
 		$top_levels		= wp_list_filter( $all_pages, [ 'post_parent' => 0 ] );
-		wp_enqueue_style( 'wp-block-navigation-submenu' );
 		
 		// Limit the number of items to be visually displayed.
-		if ( $amount = get_prop( $attributes, [ '__unstableMaxPages' ] ) ) {
+		if ( $amount = get_prop( $attributes, [ '__unstableMaxPages' ], 3 ) ) {
 			$top_levels = array_slice( $top_levels, 0, $amount );
+
 		}
 
 		foreach( $top_levels as $page ) {

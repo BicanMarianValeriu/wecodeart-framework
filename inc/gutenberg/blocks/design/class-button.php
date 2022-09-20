@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.0
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -85,25 +85,25 @@ class Button extends Dynamic {
 		switch( $class ) :
 			case 'outline' :
 				$inline = "
-					.is-style-outline .wp-block-button__link {
+					.is-style-outline.wp-block-button .wp-block-button__link {
 						--wp--bg-opacity: 0;
 						background-color: rgba(var(--wp--color--rgb), var(--wp--bg-opacity));
 						border-color: currentColor!important;
 						color: var(--wp--preset--color--dark);
 					}
-					.is-style-outline .wp-block-button__link:hover {
+					.is-style-outline.wp-block-button .wp-block-button__link:hover {
 						--wp--bg-opacity: 1;
 						border-color: rgb(var(--wp--color--rgb))!important;
 						color: white!important;
 					}
-					.is-style-outline .has-white-color:hover {
+					.is-style-outline.wp-block-button .has-white-color:hover {
 						color: black!important;
 					}
 				";
 				break;
 			case 'link' :
 				$inline = "
-					.is-style-link .wp-block-button__link {
+					.is-style-link.wp-block-button .wp-block-button__link {
 						background: transparent!important;
 						border: none!important;
 						box-shadow: none!important;
