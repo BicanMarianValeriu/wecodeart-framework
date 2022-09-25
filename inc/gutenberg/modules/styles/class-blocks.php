@@ -179,7 +179,7 @@ class Blocks extends Processor {
 			}
 
 			// Spacing
-			if( $spacing = get_prop( $css_style, 'spacing' ) ) {
+			if ( $spacing = get_prop( $css_style, 'spacing' ) ) {
 				// Padding
 				if ( $padding = get_prop( $spacing, 'padding', [] ) ) {
 					if( ! empty( $padding ) ) {
@@ -227,7 +227,8 @@ class Blocks extends Processor {
 
 							$this->output[] = wp_parse_args( [
 								'property' 	=> 'margin',
-								'value'	  	=> $margin
+								'value'	  	=> $margin,
+								'units'		=> '!important'
 							], $output );
 						} else {
 							foreach( $margin as $dir => $val ) {
@@ -239,7 +240,8 @@ class Blocks extends Processor {
 
 								$this->output[] = wp_parse_args( [
 									'property' 	=> 'margin-' . $dir,
-									'value'	  	=> $val
+									'value'	  	=> $val,
+									'units'		=> '!important'
 								], $output );
 							}
 						}
@@ -248,7 +250,7 @@ class Blocks extends Processor {
 			}
 
 			// Border
-			if( $border = get_prop( $css_style, 'border' ) ) {
+			if ( $border = get_prop( $css_style, 'border' ) ) {
 				if ( $value = get_prop( $border, 'width' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-width',
@@ -259,6 +261,13 @@ class Blocks extends Processor {
 				if ( $value = get_prop( $border, 'style' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-style',
+						'value'	  	=> $value
+					], $output );
+				}
+
+				if ( $value = get_prop( $border, 'color' ) ) {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'border-color',
 						'value'	  	=> $value
 					], $output );
 				}
@@ -282,37 +291,24 @@ class Blocks extends Processor {
 						], $output );
 					}
 				}
-				
-				if ( $value = get_prop( $border, 'color' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-color',
-						'value'	  	=> $value
-					], $output );
-				}
 			}
 
 			// Elements
-			if( $elements = get_prop( $css_style, 'elements' ) ) {
-				if ( $link = get_prop( $elements, 'link' ) ) {
-					if ( $color = get_prop( $link, 'color' ) ) {
-						if ( $value = get_prop( $color, 'text', false ) ) {
-							if ( strpos( $value, 'var:preset|color' ) !== false ) {
-								// Get the name from the string and add proper styles.
-								$name 	= substr( $value, strrpos( $value, '|' ) + 1 );
-								$this->output[] = wp_parse_args( [
-									'element'	=> implode( ' ', [ $this->element, 'a' ] ),
-									'property' 	=> 'color',
-									'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $name )
-								], $output );
-							} else {
-								$this->output[] = wp_parse_args( [
-									'element'	=> implode( ' ', [ $this->element, 'a' ] ),
-									'property' 	=> 'color',
-									'value'	  	=> $value
-								], $output );
-							}
-						}
-					}
+			if ( $link = get_prop( $css_style, [ 'elements', 'link', 'color', 'text' ] ) ) {
+				if ( strpos( $link, 'var:preset|color' ) !== false ) {
+					// Get the name from the string and add proper styles.
+					$name 	= substr( $link, strrpos( $link, '|' ) + 1 );
+					$this->output[] = wp_parse_args( [
+						'element'	=> implode( ' ', [ $this->element, 'a' ] ),
+						'property' 	=> 'color',
+						'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $name )
+					], $output );
+				} else {
+					$this->output[] = wp_parse_args( [
+						'element'	=> implode( ' ', [ $this->element, 'a' ] ),
+						'property' 	=> 'color',
+						'value'	  	=> $link
+					], $output );
 				}
 			}
 		}

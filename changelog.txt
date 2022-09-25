@@ -1,14 +1,16 @@
 v5.6.7
+- Removed - layout CSS generation and let WP handle block layout support
 - Updated - core/image styles output to img (as Gutenberg introduced border/border-radius controls)
 - Updated - core/buttons and core/button increased CSS specificity for group and outline/link styles
 - Updated - core/page-list default pages number
 - Updated - skip link PHP js code to JavaScript file
-- Updated - Disabled layout CSS generation and let WP handle Layout support
 - Updated - Footers columns vertical alignment after Layout support updates
-- Fixed - Spacings: margin/padding after Gutenberg update with spacing.spacingSizes (theme.json)
+- Fixed - spacings: margin/padding after Gutenberg update with spacing.spacingSizes (theme.json)
 - Fixed - Media/Text mobile figure order after markup update
 - Fixed - Gallery flex layout
-- Added - whatsapp icon CSS
+- Fixed - single.html template link color for post meta
+- Added - footer .flex-wrap to columns (due to WP layout nowrap CSS)
+- Added - whatsapp icon styles
 - Added - spacing utilities in theme.json
 
 v5.6.6

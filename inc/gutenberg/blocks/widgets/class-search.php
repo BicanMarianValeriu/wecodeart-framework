@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -217,6 +217,7 @@ class Search extends Dynamic {
 		return "
 		.wp-block-search {
 			margin-bottom: 1rem;
+			border: 0;
 		}
 		.wp-block-search--button-outside .wp-block-button__link {
 			margin-left: 1rem;
