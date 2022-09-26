@@ -46,7 +46,7 @@ class Pattern extends Dynamic {
 	 */
 	public function register() {
 		// It has been added into WP Core - to be removed.
-		// \add_filter( 'render_block_core/' . $this->block_name , [ $this, 'render' ] );
+		\add_filter( 'render_block_core/' . $this->block_name , [ $this, 'render' ] );
 	}
 
 	/**

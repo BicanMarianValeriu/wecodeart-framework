@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.6.4
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -171,18 +171,18 @@ class Styles implements Integration {
 		$block_name	= get_prop( $block, 'blockName' );
 
 		// Skip nulls
-		if( ! $block_name ) return $content;
+		if( ! $block_name ) {
+			return $content;
+		}
 
 		// Process a block
 		$processed 	= self::process_block( $block );
 
 		$block_id	= ltrim( $processed->get_element(), '.' );
 
-		if( in_array( $block_id, self::$processed ) ) return $content;
-
-		$styles 	= $processed->get_styles();
-		$classes	= $processed->get_classes();
-		$filters	= $processed->get_duotone();
+		if( in_array( $block_id, self::$processed ) ) {
+			return $content;
+		}
 		
 		// Remove styles, where needed.
 		// I'm not happy with this way but there is no other way to remove style attributes that I know, on PHP.
@@ -229,30 +229,34 @@ class Styles implements Integration {
 			}
 
 			$content 	= preg_replace( $regex, '$1', $content, $passes );
+			
+			// Add necessary class - exclude blocks without wrappers, eg wp:pattern (commented out in core_blocks method).
+			// We should have the possibility to directly change the block class, not with methods like this.
+			// Currently php filter only works for PHP Server side rendered blocks.
+			$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="' . $block_id . ' ', $content, 1 );
+			
+			$styles 	= $processed->get_styles();
+			$classes	= $processed->get_classes();
+			$filters	= $processed->get_duotone();
+			
+			// Process CSS, add prefixes and convert to string!
+			if( $styles ) {
+				$this->styles[$block_id] = $styles;
+			}
+			
+			// Process Duotone SVG filters
+			if( $filters ) {
+				$this->filters[$block_id] = $filters;
+			}
+			
+			// Utilities CSS
+			if( $classes ) {
+				$this->classes = array_merge( $this->classes, $classes );
+			}
+	
+			// This is processed so next time we skipp it (avoid issues like multiple calls of this filter, if any)
+			self::$processed[] = $block_id; 
 		}
-
-		// Add necessary class - exclude blocks without wrappers, eg wp:pattern (commented out in core_blocks method).
-		// We should have the possibility to directly change the block class, not with methods like this.
-		// Currently php filter only works for PHP Server side rendered blocks.
-		$content	= preg_replace( '/' . preg_quote( 'class="', '/' ) . '/', 'class="' . $block_id . ' ', $content, 1 );
-
-		// Process CSS, add prefixes and convert to string!
-		if( $styles ) {
-			$this->styles[$block_id] = $styles;
-		}
-		
-		// Process Duotone SVG filters
-		if( $filters ) {
-			$this->filters[$block_id] = $filters;
-		}
-		
-		// Utilities CSS
-		if( $classes ) {
-			$this->classes = array_merge( $this->classes, $classes );
-		}
-
-		// This is processed so next time we skipp it (avoid issues like multiple calls of this filter, if any)
-		self::$processed[] = $block_id; 
 
 		return $content;
 	}

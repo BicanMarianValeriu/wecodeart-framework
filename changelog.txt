@@ -10,6 +10,7 @@ v5.6.7
 - Fixed - Media/Text mobile figure order after markup update
 - Fixed - Gallery flex layout
 - Fixed - single.html template link color for post meta
+- Fixed - issue with generated css class applied to blocks like pattern/html/etc
 - Added - footer .flex-wrap to columns (due to WP layout nowrap CSS)
 - Added - whatsapp icon styles
 - Added - spacing utilities in theme.json

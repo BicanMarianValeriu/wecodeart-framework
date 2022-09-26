@@ -80,7 +80,7 @@ class Footer {
 	public function footer_shortcodes( $content = '', $block = [], $data = null ) {
 		$is_footer = get_prop( $block, [ 'attrs', 'tagName' ] );
 
-		if( $is_footer === 'footer' ) {
+		if( strtolower( $is_footer ) === 'footer' ) {
 			$content = str_replace( [
 				'[copy]',
 				'[year]',
