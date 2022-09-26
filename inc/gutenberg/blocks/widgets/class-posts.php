@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.1
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -123,7 +123,7 @@ class Posts extends Dynamic {
 		
 		// Meta
 		if( $display_author || $display_date ) {
-			$template .= '<!-- wp:group {"className":"hstack gap-1 mb-1"} -->';
+			$template .= '<!-- wp:group {"className":"hstack gap-1 mb-1","layout":{"type":"flex","flexWrap":"wrap"}} -->';
 			$template .= '<div class="wp-block-group hstack gap-1 mb-1">';
 
 			// Author

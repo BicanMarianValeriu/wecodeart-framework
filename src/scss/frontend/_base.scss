@@ -11,7 +11,6 @@
 .wp-site-blocks,
 .wp-site-header,
 .wp-site-footer,
-.wp-site-credits,
 .wp-block-cover.alignfull,
 .wp-block-group.alignfull,
 .wp-block-group.has-background {
@@ -21,8 +20,7 @@
 
 .wp-site-blocks .alignfull,
 .wp-site-blocks .wp-site-header,
-.wp-site-blocks .wp-site-footer,
-.wp-site-blocks .wp-site-credits {
+.wp-site-blocks .wp-site-footer {
     margin-left: calc(var(--wp--custom--gutter) * -1) !important;
     margin-right: calc(var(--wp--custom--gutter) * -1) !important;
     width: unset;
@@ -42,8 +40,7 @@
 // Containers
 .wp-site-blocks,
 .wp-site-header,
-.wp-site-footer,
-.wp-site-credits {
+.wp-site-footer {
     background-color: inherit;
 }
 
@@ -57,14 +54,8 @@
     }
 }
 
-.wp-site-footer,
-.wp-site-credits {
+.wp-site-footer {
     box-shadow: 0 0 1px 0 rgba(black, 0.15);
-}
-
-.wp-site-credits {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
 }
 
 // Blocks

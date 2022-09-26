@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.5
- * @version		5.6.1
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Core;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Core;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * This file serves as fallback for old PHP of way of building themes
@@ -31,8 +32,8 @@ class Footer {
 	 * Send to Constructor
 	 */
 	public function init() {
-		add_action( 'wecodeart/footer',	[ $this, 'markup' ] );
-		add_action( 'wp_footer',		[ $this, 'markup_credits' ], 0 );
+		\add_action( 'wecodeart/footer',				[ $this, 'markup' ] );
+		\add_filter( 'render_block_core/template-part',	[ $this, 'footer_shortcodes'	], 10, 2 );
 	}
 	
 	/**
@@ -60,14 +61,37 @@ class Footer {
 	 * Footer Credits
 	 *
 	 * @since 	1.0
-	 * @version 5.4.8
+	 * @version 5.6.7
 	 *
 	 * @return 	void
 	 */
-	public function markup_credits() {
-		wecodeart_template( 'general/credits', [
-			'copy' => '&copy;',
-			'year' => date( 'Y' )
-		] );
+	public function markup_credits( $args = [] ) {
+		// deprecated
+	}
+
+	/**
+	 * Dynamically renders the footer `core/template-part` block to insert some shortcodes.
+	 *
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	array 	$block 		The parsed block.
+	 *
+	 * @return 	string 	The block markup.
+	 */
+	public function footer_shortcodes( $content = '', $block = [], $data = null ) {
+		$is_footer = get_prop( $block, [ 'attrs', 'tagName' ] );
+
+		if( $is_footer === 'footer' ) {
+			$content = str_replace( [
+				'[copy]',
+				'[year]',
+				'[theme]',
+			], [
+				'&copy;',
+				date( 'Y' ),
+				sprintf( '<a href="%s" target="_blank">%s</a>', 'https://www.wecodeart.com/', 'WeCodeArt Framework' )
+			], $content );
+		}
+
+		return $content;
 	}
 }

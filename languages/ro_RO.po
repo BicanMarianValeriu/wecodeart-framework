@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-07-16 02:20+0000\n"
+"PO-Revision-Date: 2022-09-26 09:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -50,24 +50,14 @@ msgstr "[redării blocului a fost oprită]"
 
 #. Description of the theme
 msgid ""
-"A simple WordPress Theme Framework focused on SEO and speed (perfect 100% "
-"PageSpeed scores). Is realy fast (300ms), fully customizable &amp; beautiful "
-"theme suitable for blog, personal portfolio, business website and "
-"WooCommerce storefront. Take full control over your site with the new Full "
-"Site Editor feature. The theme also works perfectly with all page builder "
-"plugins (Elementor, Brizy, Beaver Builder, Visual Composer, SiteOrigin, Divi)"
-" and it's core blocks are also optimized using Bootstrap's markup - the "
-"perfect tool for any developer."
+"A simple WordPress theme framework focused on SEO and speed (perfect 100% "
+"PageSpeed scores) while still being fully customizable via Full Site Editing."
+" It also works perfectly with all page builder plugins."
 msgstr ""
-"O temă WordPress simplă, axată pe SEO și viteză (viteză pagină cu scoruri "
-"perfecte de 100%). Este foarte rapidă (300 ms), complet personalizabilă și "
-"frumoasă, potrivită pentru blog, portofoliu personal, site web de afaceri și "
-"magazin WooCommerce. Preluați controlul deplin asupra site-ului dvs. cu noua "
-"funcție Full Site Editor. De asemenea, tema funcționează perfect cu toate "
-"pluginurile de generare a paginilor (Elementor, Brizy, Beaver Builder, "
-"Visual Composer, SiteOrigin, Divi) și blocurile sale de bază sunt, de "
-"asemenea, optimizate folosind marcajul Bootstrap - instrumentul perfect "
-"pentru orice dezvoltator."
+"Un cadru de temă WordPress simplu axat pe SEO și viteză (scoruri perfecte de "
+"100% PageSpeed) și totodată fiind complet personalizabil prin Editarea "
+"completă a site-ului. De asemenea, funcționează perfect cu toate pluginurile "
+"generatore de pagini."
 
 #: inc/gutenberg/blocks/comment/class-template.php:123
 #: inc/gutenberg/blocks/comment/class-title.php:118
@@ -108,18 +98,12 @@ msgstr "Denumirea bloc-ului este necesară."
 msgid "Blog"
 msgstr "Blog"
 
-#: views/general/credits.tpl.php:32
-#, php-format
-#| msgid "Built on %1$s."
-msgid "Built on %1s."
-msgstr "Creat pe %1s."
-
-#: inc/gutenberg/blocks/comment/class-form.php:239
+#: inc/gutenberg/blocks/comment/class-form.php:238
 #, php-format
 msgid "By commenting you accept the %s."
 msgstr "Comentand vei accepta %s."
 
-#: inc/gutenberg/blocks/comment/class-form.php:99
+#: inc/gutenberg/blocks/comment/class-form.php:98
 msgid "Cancel reply"
 msgstr "Anulați răspunsul"
 
@@ -132,8 +116,8 @@ msgstr "Suportul Captcha 4WP este activat!"
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
 
-#: inc/gutenberg/blocks/comment/class-form.php:197
-#: inc/gutenberg/blocks/comment/class-form.php:204
+#: inc/gutenberg/blocks/comment/class-form.php:196
+#: inc/gutenberg/blocks/comment/class-form.php:203
 msgid "Comment *"
 msgstr "Comentariu"
 
@@ -185,10 +169,10 @@ msgstr[0] "Un răspuns la \"%1$s\""
 msgstr[1] "Răspunsuri la \"%1$s\""
 msgstr[2] "Răspunsuri la \"%1$s\""
 
-#: views/general/credits.tpl.php:26
+#: patterns/footer-credits.php:15
 #, php-format
-msgid "Copyright %s - All rights reserved."
-msgstr "Drepturi de autor %s - Toate drepturile reservate."
+msgid "Copyright %s - All rights reserved. Built on %s."
+msgstr "Copyright %s – Toate drepturile rezervate. Construit pe %s."
 
 #: inc/support/starter/class-starter.php:71
 msgid "Customizer"
@@ -213,7 +197,7 @@ msgstr ""
 "pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
 "WeCodeArt Framework."
 
-#: inc/gutenberg/blocks/comment/class-form.php:156
+#: inc/gutenberg/blocks/comment/class-form.php:155
 msgid "Email *"
 msgstr "Email *"
 
@@ -282,7 +266,7 @@ msgstr "F Y"
 msgid "Monthly Archives: %s"
 msgstr "Arhive lunare: %s"
 
-#: inc/gutenberg/blocks/comment/class-form.php:135
+#: inc/gutenberg/blocks/comment/class-form.php:134
 msgid "Name *"
 msgstr "Nume *"
 
@@ -350,7 +334,7 @@ msgstr "Ține-mă minte"
 msgid "Request method %1$s is not valid."
 msgstr "Metoda de solicitare %1$s nu este validă."
 
-#: inc/gutenberg/blocks/comment/class-form.php:276
+#: inc/gutenberg/blocks/comment/class-form.php:275
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr "Fișele obligatorii sunt marcate cu %s\"."
@@ -390,11 +374,11 @@ msgstr "Selectați Săptămâna"
 msgid "Select Year"
 msgstr "Selectați Anul"
 
-#: inc/gutenberg/class-gutenberg.php:251
+#: inc/support/assets/class-assets.php:91
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
-#: inc/gutenberg/blocks/comment/class-form.php:94
+#: inc/gutenberg/blocks/comment/class-form.php:93
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
@@ -454,7 +438,7 @@ msgstr "Comutare navigare"
 msgid "Unlock"
 msgstr "Deblochează"
 
-#: inc/admin/class-activation.php:117
+#: inc/admin/class-activation.php:89
 msgid "upgrade PHP"
 msgstr "actualizați PHP"
 
@@ -471,16 +455,16 @@ msgstr ""
 "Avem o extensie care integrează tema noastră cu pluginul Contact Form 7! Îl "
 "puteți obține (în curând) de la %s."
 
-#: inc/gutenberg/blocks/comment/class-form.php:177
+#: inc/gutenberg/blocks/comment/class-form.php:176
 msgid "Website"
 msgstr "Site"
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:83
+#: inc/gutenberg/class-gutenberg.php:82
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/admin/class-activation.php:114
+#: inc/admin/class-activation.php:86
 #, php-format
 msgid ""
 "WeCodeArt Framework requires PHP version %1$s or higher. You are using "
@@ -489,7 +473,7 @@ msgstr ""
 "WeCodeArt Framework necesită versiunea PHP %1$s sau mai mare. Folosiți "
 "versiunea %2$s. Vă rugăm să %3$s pentru a utiliza WeCodeArt Framework."
 
-#: inc/admin/class-activation.php:105
+#: inc/admin/class-activation.php:77
 #, php-format
 msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
@@ -539,19 +523,11 @@ msgstr ""
 "Suportul YoastSEO este activat! Tema noastră funcționează perfect cu cel mai "
 "bun plugin SEO."
 
-#: inc/gutenberg/blocks/comment/class-form.php:300
+#: inc/gutenberg/blocks/comment/class-form.php:299
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"
 
-#: inc/gutenberg/blocks/comment/class-form.php:273
+#: inc/gutenberg/blocks/comment/class-form.php:272
 msgid "Your email address will not be published."
 msgstr "Emailul tău nu va fi publicat."
-
-#: inc/admin/class-activation.php:84
-msgid ""
-"Your WordPress installation does not meet the minimum requirements to run "
-"WeCodeArt Framework. Please upgrade and try again."
-msgstr ""
-"Instalarea dvs. WordPress nu îndeplinește cerințele minime pentru a rula "
-"WeCodeArt Framework. Vă rugăm să faceți upgrade și să încercați din nou."

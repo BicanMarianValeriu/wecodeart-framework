@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -121,8 +121,8 @@ class Comments extends Dynamic {
 			$template .= '<!-- wp:avatar {"className":"float-start rounded-circle overflow-hidden me-3","size":50} /-->';
 		}
 		
-		$template .= '<!-- wp:group {"className":"gap-1 clearfix"} -->';
-		$template .= '<div class="wp-block-group gap-1 clearfix">';
+		$template .= '<!-- wp:group {"className":"gap-1","layout":{"type":"flex","orientation":"vertical"}} -->';
+		$template .= '<div class="wp-block-group gap-1">';
 
 		// Comment Author
 		$template .= '<!-- wp:comment-author-name {"isLink":true} /-->';

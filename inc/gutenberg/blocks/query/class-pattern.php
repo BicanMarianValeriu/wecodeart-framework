@@ -45,7 +45,8 @@ class Pattern extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_filter( 'render_block_core/' . $this->block_name , [ $this, 'render' ] );
+		// It has been added into WP Core - to be removed.
+		// \add_filter( 'render_block_core/' . $this->block_name , [ $this, 'render' ] );
 	}
 
 	/**

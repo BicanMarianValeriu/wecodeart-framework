@@ -469,7 +469,6 @@ progress {
 .wp-site-blocks,
 .wp-site-header,
 .wp-site-footer,
-.wp-site-credits,
 .wp-block-cover.alignfull,
 .wp-block-group.alignfull,
 .wp-block-group.has-background {
@@ -479,8 +478,7 @@ progress {
 
 .wp-site-blocks .alignfull,
 .wp-site-blocks .wp-site-header,
-.wp-site-blocks .wp-site-footer,
-.wp-site-blocks .wp-site-credits {
+.wp-site-blocks .wp-site-footer {
   margin-left: calc(var(--wp--custom--gutter) * -1) !important;
   margin-right: calc(var(--wp--custom--gutter) * -1) !important;
   width: unset;
@@ -500,8 +498,7 @@ progress {
 
 .wp-site-blocks,
 .wp-site-header,
-.wp-site-footer,
-.wp-site-credits {
+.wp-site-footer {
   background-color: inherit;
 }
 
@@ -514,14 +511,8 @@ progress {
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-.wp-site-footer,
-.wp-site-credits {
+.wp-site-footer {
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
-}
-
-.wp-site-credits {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 :where(.wp-block-post-author, .wp-block-post-author-name, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) .svg-inline {
