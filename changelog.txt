@@ -1,3 +1,8 @@
+v5.6.8
+- Removed - Deprecated pattern block filter
+- Updated - Grid layout for post-template
+- Updated - Query Overlay as a default post listing
+
 v5.6.7
 - Removed - layout CSS generation and let WP handle block layout support
 - Updated - core/image styles output to img (as Gutenberg introduced border/border-radius controls)
