@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.6.7
+ * @version		5.6.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -369,7 +369,7 @@ class Styles implements Integration {
 		// Sanitized because we are not using CSS::parse method which does that by default (for arrays)
 		$link_color = $this->CSS::hex_brightness( $this->CSS->Sanitize::color( $link_color ), -25 );
 
-		$style .= "a:hover{color:${link_color}}";
+		$style .= "a:where(:not(.wp-element-button)):hover{color:${link_color}}";
 
 		wp_add_inline_style( 'global-styles', $style );
 	}

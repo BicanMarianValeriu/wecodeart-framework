@@ -2,6 +2,11 @@ v5.6.8
 - Removed - Deprecated pattern block filter
 - Updated - Grid layout for post-template
 - Updated - Query Overlay as a default post listing
+- Updated - Gutenberg block styles (custom CSS) interface improvements - moved description to a Popover component
+- Updated - Link hover color (darken) apply to a:where(:not(.wp-element-button)), in sync with WP Core
+- Fixed - Dark footer partial to properly include footer-credits pattern
+- Fixed - core/navigation offcanvas justification and alignment when having 'navbar-expand' class
+- Fixed - core/navigation blockGap css generation after adding spacing utilities
 
 v5.6.7
 - Removed - layout CSS generation and let WP handle block layout support

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -161,6 +161,11 @@ class Link extends Dynamic {
 	 */
 	public function render_submenu( $block ) {
 		if( count( $block->inner_blocks ) === 0 ) return;
+
+		// Styles
+		if( ! wp_style_is( 'wp-block-navigation-submenu' ) ) {
+			wp_enqueue_style( 'wp-block-navigation-submenu' );
+		}
 
 		// Scripts
 		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( $this->make_handle() ) ) {

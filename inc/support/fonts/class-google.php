@@ -86,7 +86,7 @@ final class Google {
 		if ( ! isset( $this->fonts[ $sanitized ] ) ) {
 			$this->fonts[ $sanitized ] = [
 				'family' 	=> $value['family'],
-				'variants' 	=> ! empty( $value['variants'] ) ? (array) $value['variants'] : [ 'regular' ],
+				'variants' 	=> $value['variants'],
 			];
 
 			return true;

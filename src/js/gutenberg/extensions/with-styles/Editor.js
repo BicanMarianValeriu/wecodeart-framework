@@ -2,8 +2,9 @@
  * WordPress dependencies.
  */
 const {
-	i18n: { __ },
-	element: { useEffect, useRef }
+	i18n: { __, sprintf },
+	element: { useEffect, useState, useRef },
+	components: { Popover, Button, Dashicon }
 } = wp;
 
 const CSSEditor = ({
@@ -52,20 +53,33 @@ const CSSEditor = ({
 		});
 	}, []);
 
+	const DescriptionPopover = () => {
+		const [isVisible, setIsVisible] = useState(false);
+		const toggleVisible = () => setIsVisible((state) => !state);
+
+		return (
+			<Button variant={isVisible ? 'primary' : 'secondary'} onClick={toggleVisible}>
+				<Dashicon icon="info-outline" />
+				{isVisible && <Popover placement="top left">
+					<div style={{ padding: '.5rem 1rem' }}>
+						<p>{sprintf(__('Use %s to target the block CSS class.', 'wecodeart'), '"selector"')}</p>
+						<pre>
+							{'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'}
+						</pre>
+						<p>{__('You can also use other CSS syntax here, such as media queries.', 'wecodeart')}</p>
+					</div>
+				</Popover>}
+			</Button>
+		);
+	};
+
 	return (
 		<>
 			<div class="wecodeart-advanced-css">
 				<hr />
 				<p class="wecodeart-advanced-css__title">{__('Add your custom CSS.', 'wecodeart')}</p>
 				<div className="wecodeart-advanced-css__editor" id="wecodeart-css-editor" />
-				<div class="wecodeart-advanced-css__content">
-					<p>{__('Use', 'wecodeart')} <code>selector</code> {__('to target the block class.', 'wecodeart')}</p>
-					<p>{__('Example', 'wecodeart')}:</p>
-					<pre className="wecodeart-advanced-css__help">
-						{'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'}
-					</pre>
-					<p>{__('You can also use other CSS syntax here, such as media queries.', 'wecodeart')}</p>
-				</div>
+				<DescriptionPopover />
 			</div>
 		</>
 	);

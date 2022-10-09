@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.1.3
- * @version		5.5.8
+ * @version		5.6.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -37,6 +37,12 @@ class Navigation extends Base {
 		if( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ], '1rem' ) ) {
 			if ( is_array( $gap ) ) {
 				$gap	= get_prop( $gap, [ 'top' ] );
+			}
+
+			if ( mb_strpos( $gap, '|' ) !== false ) {
+				$slug = explode( '|', $gap );
+				$slug = end( $slug );
+				$gap  = sprintf( 'var(--wp--preset--spacing--%s)', $slug );
 			}
 
 			$this->output[] = wp_parse_args( [

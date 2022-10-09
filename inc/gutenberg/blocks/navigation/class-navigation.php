@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.4
+ * @version		5.6.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -410,21 +410,6 @@ class Navigation extends Dynamic {
 
 		$classnames = explode( ' ',  get_prop( $attributes, 'className', '' ) );
 
-		// Deprecated - uses flex layout support
-		if( $align = get_prop( $attributes, 'itemsJustification' ) ) {
-			$justify_options = [
-				'left'          => 'start',
-				'right'         => 'end',
-				'center'        => 'center',
-				'space-between' => 'space-between',
-			];
-
-			if ( array_key_exists( $align, $justify_options ) ) {
-				$classes[] = 'justify-content-' . $justify_options[$align];
-			}
-		}
-		// End deprecated
-
 		$classes    	= array_merge( $classes, $colors['classes'], $typography['classes'], $classnames );
 		$block_styles 	= get_prop( $attributes, 'styles', '' );
 
@@ -742,7 +727,7 @@ class Navigation extends Dynamic {
 						}
 
 						/* Block */
-						.wp-block-navigation :where(.offcanvas,.offcanvas-body) {
+						.wp-block-navigation[class*='navbar-expand'] :where(.offcanvas,.offcanvas-body) {
 							flex-direction: inherit;
 							justify-content: inherit;
 							align-items: inherit;
