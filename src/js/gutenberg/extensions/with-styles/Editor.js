@@ -4,7 +4,7 @@
 const {
 	i18n: { __, sprintf },
 	element: { useEffect, useState, useRef },
-	components: { Popover, Button, Dashicon }
+	components: { Popover, Dashicon }
 } = wp;
 
 const CSSEditor = ({
@@ -58,9 +58,9 @@ const CSSEditor = ({
 		const toggleVisible = () => setIsVisible((state) => !state);
 
 		return (
-			<Button variant={isVisible ? 'primary' : 'secondary'} onClick={toggleVisible}>
-				<Dashicon icon="info-outline" />
-				{isVisible && <Popover placement="top left">
+			<>
+				<Dashicon icon="info-outline" style={{ marginLeft: 'auto', cursor: 'pointer' }} onClick={toggleVisible} />
+				{isVisible && <Popover placement="top-end">
 					<div style={{ padding: '.5rem 1rem' }}>
 						<p>{sprintf(__('Use %s to target the block CSS class.', 'wecodeart'), '"selector"')}</p>
 						<pre>
@@ -69,7 +69,7 @@ const CSSEditor = ({
 						<p>{__('You can also use other CSS syntax here, such as media queries.', 'wecodeart')}</p>
 					</div>
 				</Popover>}
-			</Button>
+			</>
 		);
 	};
 
@@ -77,9 +77,11 @@ const CSSEditor = ({
 		<>
 			<div class="wecodeart-advanced-css">
 				<hr />
-				<p class="wecodeart-advanced-css__title">{__('Add your custom CSS.', 'wecodeart')}</p>
+				<p class="wecodeart-advanced-css__title" style={{ display: 'flex', fontSize: '11px', fontWeight: '500', textTransform: 'uppercase' }}>
+					<span>{__('Add your custom CSS.', 'wecodeart')}</span>
+					<DescriptionPopover />
+				</p>
 				<div className="wecodeart-advanced-css__editor" id="wecodeart-css-editor" />
-				<DescriptionPopover />
 			</div>
 		</>
 	);

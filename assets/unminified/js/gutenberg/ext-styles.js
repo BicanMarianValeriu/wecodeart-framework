@@ -31,7 +31,6 @@ const {
   },
   components: {
     Popover,
-    Button,
     Dashicon
   }
 } = wp;
@@ -91,13 +90,15 @@ const CSSEditor = _ref => {
 
     const toggleVisible = () => setIsVisible(state => !state);
 
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-      variant: isVisible ? 'primary' : 'secondary',
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
+      icon: "info-outline",
+      style: {
+        marginLeft: 'auto',
+        cursor: 'pointer'
+      },
       onClick: toggleVisible
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
-      icon: "info-outline"
     }), isVisible && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Popover, {
-      placement: "top left"
+      placement: "top-end"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       style: {
         padding: '.5rem 1rem'
@@ -108,11 +109,17 @@ const CSSEditor = _ref => {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "wecodeart-advanced-css"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    class: "wecodeart-advanced-css__title"
-  }, __('Add your custom CSS.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "wecodeart-advanced-css__title",
+    style: {
+      display: 'flex',
+      fontSize: '11px',
+      fontWeight: '500',
+      textTransform: 'uppercase'
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, __('Add your custom CSS.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(DescriptionPopover, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wecodeart-advanced-css__editor",
     id: "wecodeart-css-editor"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(DescriptionPopover, null)));
+  })));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CSSEditor);
