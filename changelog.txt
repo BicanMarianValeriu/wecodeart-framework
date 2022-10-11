@@ -5,6 +5,7 @@ v5.6.9
 - Updated - Single template markup: remove unnecessary group wrapper and use col- classes for width
 - Updated - CSS for core/comment-template and core/comment-title blocks
 - Updated - Romanian local translation
+- Updated - Gutenberg Styles extension UI - moved Popover into label
 - Fixed - core/navigation justification and alignment
 - Fixed - core/search styles and button markup after Gutenberg updates
 - Fixed - page-sidebar columns vertical alignment
