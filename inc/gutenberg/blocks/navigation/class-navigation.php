@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.8
+ * @version		5.6.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -187,6 +187,7 @@ class Navigation extends Dynamic {
 				wecodeart_template( 'general/toggler', [
 					'id'		=> $block_id,
 					'toggle' 	=> 'offcanvas',
+					'icon'		=> get_prop( $attributes, 'hasIcon' )
 				] );
 
 				// OffCanvas
@@ -727,7 +728,7 @@ class Navigation extends Dynamic {
 						}
 
 						/* Block */
-						.wp-block-navigation[class*='navbar-expand'] :where(.offcanvas,.offcanvas-body) {
+						.wp-block-navigation.navbar-expand-{$key} :where(.offcanvas,.offcanvas-body,.navbar-nav) {
 							flex-direction: inherit;
 							justify-content: inherit;
 							align-items: inherit;

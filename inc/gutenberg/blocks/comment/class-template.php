@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.5.8
+ * @version		5.6.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -90,51 +90,11 @@ class Template extends Dynamic {
         // Get what we need about comments for the current post.
 		$comments_query		= new \WP_Comment_Query( build_comment_query_vars_from_block( $block ) );
         $comments 			= $comments_query->get_comments();
-		$comments_number 	= count( $comments );
 		$comment_order 		= get_option( 'comment_order' );
 
 		if ( 'desc' === $comment_order ) {
 			$comments = array_reverse( $comments );
 		}
-
-		$output	= wecodeart( 'markup' )->SVG::compile( 'comments', [
-			'class' => 'fa-fw'
-		] );
-		
-		if ( 0 === $comments_number ) {
-			$header	= esc_html__( 'No comments', 'wecodeart' );
-		} else {
-			// Required Utilities
-			wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5', 'mb-5' ] );
-
-			$header = sprintf(
-				_nx( '%1$s comment', '%1$s comments', get_comments_number(), 'comments title', 'wecodeart' ),
-				number_format_i18n( get_comments_number() )
-			);
-		}
-
-		$output .= sprintf( '<span>%s</span>', $header );
-
-		if( comments_open( $post_id ) ) {
-			// Required Utilities
-			wecodeart( 'styles' )->Utilities->load( [ 'float-end', 'my-1' ] );
-			$output .= sprintf(
-				'<a class="comments__add-new float-end my-1 has-small-font-size" href="#respond" rel="nofollow">%s</a>',
-				esc_html__( 'add one', 'wecodeart' )
-			);
-		}
-		
-		$content = '';
-		
-		// Head
-		$content .= wecodeart( 'markup' )::wrap( 'wp-block-comments-title', [ [
-			'tag' 	=> 'h3',
-			'attrs' => [
-				
-				'id'	=> 'comments',
-				'class' => 'wp-block-comments-title'
-			]
-		] ], $output, [], false );
 
 		// List
         $content .= wecodeart( 'markup' )::wrap( 'wp-block-comment-template', [
@@ -204,12 +164,6 @@ class Template extends Dynamic {
 		return "
 		.wp-block-comments-query-loop:empty {
 			display: none;
-		}
-		.wp-block-comments-title:only-child {
-			margin-bottom: 0;
-		}
-		.wp-block-comments-title svg {
-			margin-right: .5rem;
 		}
 		";
 	}

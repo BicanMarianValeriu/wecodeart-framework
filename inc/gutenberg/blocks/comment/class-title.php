@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.5.8
- * @version		5.5.8
+ * @version		5.6.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -118,12 +118,18 @@ class Title extends Dynamic {
 				esc_html__( 'add one', 'wecodeart' )
 			);
 		}
+
+		$classname = '';
+
+		if( $align = get_prop( $attributes, [ 'textAlign' ] ) ) {
+			$classname = 'has-text-align-' . $align;
+		}
 		
 		return wecodeart( 'markup' )::wrap( 'wp-block-comments-title', [ [
 			'tag' 	=> 'h' . get_prop( $attributes, [ 'level' ], 2 ),
 			'attrs' => $this->get_block_wrapper_attributes( [
 				'id'	=> 'comments',
-				'class' => 'has-text-align-' . get_prop( $attributes, [ 'textAlign' ], 'left' )
+				'class' => $align
 			] )
 		] ], $output, [], false );
 	}
@@ -135,6 +141,9 @@ class Title extends Dynamic {
 	 */
 	public function styles() {
 		return "
+		.wp-block-comments-title:only-child {
+			margin-bottom: 0;
+		}
 		.wp-block-comments-title svg {
 			margin-right: .5rem;
 		}

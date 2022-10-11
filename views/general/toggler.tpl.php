@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Navbar Toggler HTML
  * @since	 	5.0.0
- * @version    	5.0.0
+ * @version    	5.6.9
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -16,9 +16,14 @@ defined( 'ABSPATH' ) || exit();
 /**
  * @param   mixed  	$id			Toggle ID
  * @param   mixed	$toggle		Toggle Type
+ * @param   mixed	$icon		Toggle Icon
  */
 
 ?>
 <button type="button" class="navbar-toggler" data-bs-toggle="<?php echo esc_attr( $toggle ); ?>" data-bs-target="#<?php echo esc_attr( $id ); ?>" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'wecodeart' ); ?>">
+	<?php if ( $icon ) : ?>
 	<span class="navbar-toggler-icon"></span>
+	<?php else : ?>
+	<span class="navbar-toggler-text"><?php esc_html_e( 'Menu', 'wecodeart' ); ?></span>
+	<?php endif; ?>
 </button>

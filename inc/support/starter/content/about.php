@@ -150,8 +150,8 @@ return [
 	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
-	<!-- wp:group {"align":"full","backgroundColor":"primary","textColor":"white","className":"py-5","layout":{"inherit":true}} -->
-	<div class="wp-block-group alignfull py-5 has-white-color has-primary-background-color has-text-color has-background">
+	<!-- wp:group {"align":"full","backgroundColor":"primary","textColor":"white","className":"py-5 my-0","layout":{"inherit":true}} -->
+	<div class="wp-block-group alignfull py-5 my-0 has-white-color has-primary-background-color has-text-color has-background">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}},"className":"flex-column flex-md-row"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
 	<!-- wp:column {"className":""} -->

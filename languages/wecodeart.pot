@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-26 09:17+0000\n"
+"POT-Creation-Date: 2022-10-10 12:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -54,7 +54,6 @@ msgid ""
 " It also works perfectly with all page builder plugins."
 msgstr ""
 
-#: inc/gutenberg/blocks/comment/class-template.php:123
 #: inc/gutenberg/blocks/comment/class-title.php:118
 msgid "add one"
 msgstr ""
@@ -117,14 +116,6 @@ msgstr ""
 #: views/meta/comments.tpl.php:55
 msgid "Comments are Closed"
 msgstr ""
-
-#: inc/gutenberg/blocks/comment/class-template.php:111
-#, php-format
-msgctxt "comments title"
-msgid "%1$s comment"
-msgid_plural "%1$s comments"
-msgstr[0] ""
-msgstr[1] ""
 
 #: inc/gutenberg/blocks/comment/class-title.php:105
 #, php-format
@@ -236,6 +227,10 @@ msgstr ""
 msgid "Log In"
 msgstr ""
 
+#: views/general/toggler.tpl.php:27
+msgid "Menu"
+msgstr ""
+
 #: inc/admin/notifications/class-ajax.php:55
 msgid "Missing notification id"
 msgstr ""
@@ -256,10 +251,6 @@ msgstr ""
 
 #: inc/gutenberg/blocks/widgets/class-archives.php:120
 msgid "No archives to show."
-msgstr ""
-
-#: inc/gutenberg/blocks/comment/class-template.php:105
-msgid "No comments"
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-title.php:85
@@ -409,7 +400,7 @@ msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
 
-#: views/general/toggler.tpl.php:22
+#: views/general/toggler.tpl.php:23
 msgid "Toggle navigation"
 msgstr ""
 

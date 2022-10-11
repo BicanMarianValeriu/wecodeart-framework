@@ -1,3 +1,15 @@
+v5.6.9
+- Updated - Offcanvas menu label support
+- Updated - core/comment-template: remove custom title as it was added as a separate block in WP Core
+- Updated - Single template to use core/comments-title block
+- Updated - Single template markup: remove unnecessary group wrapper and use col- classes for width
+- Updated - CSS for core/comment-template and core/comment-title blocks
+- Updated - Romanian local translation
+- Fixed - core/navigation justification and alignment
+- Fixed - core/search styles and button markup after Gutenberg updates
+- Fixed - page-sidebar columns vertical alignment
+- Added - Pillar Content template/pattern with table of contents
+
 v5.6.8
 - Removed - Deprecated pattern block filter
 - Updated - Grid layout for post-template

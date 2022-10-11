@@ -1,3 +1,11 @@
+<?php
+/**
+ * Title: Section
+ * Slug: wecodeart/section
+ * Categories: wecodeart
+ * Block Types: core/post-content
+ */
+?>
 <!-- wp:group {"layout":{"inherit":true,"type":"constrained"},"align":"full","backgroundColor":"light","className":"py-5"} -->
 <div class="wp-block-group alignfull py-5 has-light-background-color has-background">
     <!-- wp:columns {"verticalAlignment":"center"} -->
