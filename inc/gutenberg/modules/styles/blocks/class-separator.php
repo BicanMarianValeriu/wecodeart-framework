@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.6.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -34,7 +34,7 @@ class Separator extends Base {
 		$output['element'] 	= $this->element;
 		
 		// Background HR styleing
-		if ( $value = get_prop( $this->attrs, 'customColor' ) ) {
+		if ( $value = get_prop( $this->attrs, [ 'style', 'color', 'background' ] ) ) {
 			$this->output[] = wp_parse_args( [
 				'property' 	=> 'color',
 				'value'	  	=> $value

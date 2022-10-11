@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.6.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -251,6 +251,27 @@ class Blocks extends Processor {
 
 			// Border
 			if ( $border = get_prop( $css_style, 'border' ) ) {
+
+				// Handle individual borders in upcoming WP 6.1
+				$directions = wp_array_slice_assoc( $border, [ 'top', 'left', 'right', 'bottom' ] );
+
+				foreach( $directions as $dir => $value ) {
+					$color = get_prop( $value, 'color' );
+					if ( strpos( $color, 'var:preset|color' ) !== false ) {
+						$color = sprintf( 'var(--wp--preset--color--%s)', substr( $color, strrpos( $color, '|' ) + 1 ) );
+					}
+
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'border-' . $dir,
+						'value'	  	=> trim( sprintf(
+							'%s %s %s',
+							get_prop( $value, 'width' ),
+							get_prop( $value, 'style', 'solid' ),
+							$color
+						) )
+					], $output );
+				}
+
 				if ( $value = get_prop( $border, 'width' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-width',

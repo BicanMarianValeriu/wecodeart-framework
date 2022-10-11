@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.6.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -60,19 +60,6 @@ class Pullquote extends Dynamic {
 			border-bottom-width: 5px;
 			border-top-style: solid;
 			border-bottom-style: solid;
-		}
-		.wp-block-pullquote.is-style-solid-color {
-			border-width: 0;
-			border-style: none;
-		}
-		.wp-block-pullquote.is-style-solid-color blockquote {
-			margin: 0 auto 0;
-			text-align: left;
-			max-width: max( 400px, 60% );
-		}
-		.wp-block-pullquote.is-style-solid-color blockquote p {
-			font-size: 2.5rem;
-			margin-bottom: 0;
 		}
 		.wp-block-pullquote	blockquote {
 			margin-bottom: 0;

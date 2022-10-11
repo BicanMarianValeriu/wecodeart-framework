@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.6.8
+ * @version		5.6.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -424,7 +424,7 @@ class Styles implements Integration {
 	 * @return 	array
 	 */
 	public static function core_blocks( $exclude = false ) {
-		// Exclude this blocks from styles extenstions for various reasons
+		// Exclude this blocks from styles extensions for various reasons
 		// like: no wrapper, renders html or other blocks or simply it should not remove style (core/post-content)
 		$excludes = [
 			'core/block',
@@ -583,7 +583,6 @@ class Styles implements Integration {
 			'core/gallery' 			=> Styles\Blocks\Gallery::class,
 			'core/media-text' 		=> Styles\Blocks\Media::class,
 			'core/navigation' 		=> Styles\Blocks\Navigation::class,
-			'core/pullquote' 		=> Styles\Blocks\PullQuote::class,
 			'core/search' 			=> Styles\Blocks\Search::class,
 			'core/separator' 		=> Styles\Blocks\Separator::class,
 			'core/social-links'		=> Styles\Blocks\Social::class,

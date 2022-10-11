@@ -40,40 +40,5 @@ class Column extends Base {
 				'value'	  	=> sprintf( '0 0 %s', $value ),
 			], $output );
 		}
-
-		// Block Gap
-		// if ( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ] ) ) {
-		// 	if ( is_array( $gap ) ) {
-		// 		$gap	= get_prop( $gap, [ 'top' ] );
-		// 	}
-
-		// 	$gap = $gap ? $gap : 'var( --wp--style--block-gap )';
-
-		// 	$this->output[] = wp_parse_args( [
-		// 		'property'	=> 'gap',
-		// 		'value'		=> null,
-		// 	], $output );
-
-		// 	$this->output[] = wp_parse_args( [
-		// 		'element'	=> implode( '>', [ $this->element, '*' ] ),
-		// 		'property'	=> 'margin-block-start',
-		// 		'value'		=> 0,
-		// 	], $output );
-		// 	$this->output[] = wp_parse_args( [
-		// 		'element'	=> implode( '>', [ $this->element, '*' ] ),
-		// 		'property'	=> 'margin-block-end',
-		// 		'value'		=> 0,
-		// 	], $output );
-		// 	$this->output[] = wp_parse_args( [
-		// 		'element'	=> implode( '>', [ $this->element, '*+*' ] ),
-		// 		'property'	=> 'margin-block-start',
-		// 		'value'		=> $gap,
-		// 	], $output );
-		// 	$this->output[] = wp_parse_args( [
-		// 		'element'	=> implode( '>', [ $this->element, '*+*' ] ),
-		// 		'property'	=> 'margin-block-end',
-		// 		'value'		=> 0,
-		// 	], $output );
-		// }
 	}
 }

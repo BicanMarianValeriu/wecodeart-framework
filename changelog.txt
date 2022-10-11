@@ -1,4 +1,5 @@
 v5.6.9
+- Removed - core/pullquote redundant is-style-solid CSS rules and extra attributes processor
 - Updated - Offcanvas menu label support
 - Updated - core/comment-template: remove custom title as it was added as a separate block in WP Core
 - Updated - Single template to use core/comments-title block
@@ -8,8 +9,10 @@ v5.6.9
 - Updated - Gutenberg Styles extension UI - moved Popover into label
 - Fixed - core/navigation justification and alignment
 - Fixed - core/search styles and button markup after Gutenberg updates
+- Fixed - core/separator inline CSS generation for custom color
 - Fixed - page-sidebar columns vertical alignment
 - Added - Pillar Content template/pattern with table of contents
+- Added - Support for individual border (top/bottom/left/right) CSS generation
 
 v5.6.8
 - Removed - Deprecated pattern block filter
