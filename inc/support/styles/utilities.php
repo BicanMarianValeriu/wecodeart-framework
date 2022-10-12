@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.6.3
+ * @version		5.6.9
  */
 
 // Theme Shadows
@@ -20,7 +20,7 @@ $shadows    = $shadows + [
 ];
 
 // Theme Spacers
-$spacers    = wecodeart_json( [ 'settings', 'custom', 'spacers' ], [] );
+$spacers    = wecodeart_json( [ 'settings', 'custom', 'spacing' ], [] );
 $spacers    = $spacers + [ 'auto' => 'auto' ];
 
 // Theme Colors
@@ -193,7 +193,7 @@ foreach( [
     ],
     // Typography
     [
-        'property'  => 'font-family',
+        'property'  => 'font-family', // To be deprecated in favor of Gutenberg
         'class'		=> 'font',
         'values'	=> [
             'monospace' => 'var(--wp--font-monospace)',
@@ -498,7 +498,7 @@ foreach( [
     ],
     // Text Opacity
     [
-        'property'  => '--wp--text-opacity',
+        'property'  => '--wp--text-opacity', // To follow GB standard (has-text-dim)
         'class'		=> 'text-opacity',
         'values'	=> [
             25  => '.25',
@@ -509,7 +509,7 @@ foreach( [
     ],
     // Background Opacity
     [
-        'property'  => '--wp--bg-opacity',
+        'property'  => '--wp--bg-opacity', // To be deprecated in favor of Gutenberg classes
         'class'		=> 'bg-opacity',
         'values'	=> [
             25  => '.25',

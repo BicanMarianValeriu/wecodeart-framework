@@ -7,9 +7,11 @@ v5.6.9
 - Updated - CSS for core/comment-template and core/comment-title blocks
 - Updated - Romanian local translation
 - Updated - Gutenberg Styles extension UI - moved Popover into label
+- Updated - theme.json custom spacer to spacing (to follow WP naming standard) for custom number scaled spacing utilities
 - Fixed - core/navigation justification and alignment
 - Fixed - core/search styles and button markup after Gutenberg updates
 - Fixed - core/separator inline CSS generation for custom color
+- Fixed - core/cover styles updated to 6.1
 - Fixed - page-sidebar columns vertical alignment
 - Added - Pillar Content template/pattern with table of contents
 - Added - Support for individual border (top/bottom/left/right) CSS generation

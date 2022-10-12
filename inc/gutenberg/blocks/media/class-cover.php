@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.6.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -151,10 +151,6 @@ class Cover extends Dynamic {
 			margin-left: auto;
 			margin-right: auto;
 		}
-		.wp-block-cover.is-repeated {
-			background-repeat: repeat;
-			background-size: auto;
-		}
 		.wp-block-cover.alignleft, wp-block-cover.alignright {
 			margin-top: 0;
 			margin-left: 0;
@@ -186,16 +182,16 @@ class Cover extends Dynamic {
 			flex-direction: column;
 		}
 		.wp-block-cover__background,
-		.wp-block-cover__gradient-background,
 		.wp-block-cover__image-background,
-		.wp-block-cover__video-background {
+		.wp-block-cover__video-background,
+		.wp-block-cover__gradient-background {
 			position: absolute;
 			top: 0;
 			left: 0;
 			right: 0;
 			bottom: 0;
-			margin: 0!important;
-			padding: 0!important;
+			margin: 0;
+			padding: 0;
 			width: 100%;
 			height: 100%;
 			max-width: none;
@@ -204,14 +200,35 @@ class Cover extends Dynamic {
 			outline: none;
 			border: none;
 			box-shadow: none;
-			background-color: inherit;
+		}
+		.wp-block-cover__background,
+		.wp-block-cover__gradient-background {
 			opacity: var(--wp--bg--opacity);
+		}
+		.wp-block-cover .has-parallax {
+			background-attachment: fixed;
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+		.wp-block-cover .is-repeated {
+			background-repeat: repeat;
+			background-size: auto;
 		}
 		.wp-block-cover .has-background-dim {
 			z-index: 1;
 		}
 		.wp-block-cover :is(h1, h2, h3, h4, h5, h6, p, ul, ol, hr):not(.has-text-color) {
 			color: inherit;
+		}
+		@supports (-webkit-overflow-scrolling: touch) {
+			.wp-block-cover .has-parallax {
+				background-attachment: scroll;
+			}
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.wp-block-cover .has-parallax {
+				background-attachment: scroll;
+			}
 		}
 		';
 	}

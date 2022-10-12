@@ -204,7 +204,7 @@
 				"sm": "0 0.125rem .25rem rgba(0,0,0,.08)",
 				"lg": "0 3px 1rem .25rem rgba(0,0,0,.10)"
 			},
-			"spacers": {
+			"spacing": {
 				"0": "0",
 				"1": ".5rem",
 				"2": ".75rem",
