@@ -2,8 +2,6 @@
 /**
  * Title: Section: Pillar Content
  * Slug: wecodeart/section-pillar
- * Categories: wecodeart
- * Block Types: core/post-content
  */
 ?>
 <!-- wp:group {"align":"full","className":"py-5","layout":{"type":"constrained"}} -->

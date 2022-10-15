@@ -1,7 +1,7 @@
 v5.6.9
 - Removed - core/pullquote redundant is-style-solid CSS rules and extra attributes processor
 - Updated - Offcanvas menu label support
-- Updated - core/comment-template: remove custom title as it was added as a separate block in WP Core
+- Updated - core/comment-template: remove custom title as it was added as a separate block in WP Core / comment-form top margin removed
 - Updated - Single template to use core/comments-title block
 - Updated - Single template markup: remove unnecessary group wrapper and use col- classes for width
 - Updated - CSS for core/comment-template and core/comment-title blocks
