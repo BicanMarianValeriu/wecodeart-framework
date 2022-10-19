@@ -140,7 +140,8 @@ class Comments extends Dynamic {
 		}
 
 		// Allow users to change this template
-		$template = apply_filters( 'wecodeart/filter/gutenberg/latest-comments/template', parse_blocks( $template ), $attributes );
+		$template = apply_filters( 'wecodeart/filter/gutenberg/latest-comments/template', $template, $attributes );
+		$template = parse_blocks( $template );
 
 		return wecodeart( 'markup' )::wrap( 'wp-block-latest-comments', [
 			[

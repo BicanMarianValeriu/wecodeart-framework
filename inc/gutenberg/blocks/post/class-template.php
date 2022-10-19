@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.8
+ * @version		5.7.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -79,29 +79,29 @@ class Template extends Dynamic {
 	public function render( $attributes = [], $content = '', $block = null ) {
 		$page 	= isset( $block->context['queryId'] ) ? 'query-' . $block->context['queryId'] . '-page' : 'query-page';
 		$page	= (int) get_prop( $_GET, $page, 1 );
-		$args	= build_query_vars_from_query_block( $block, $page );
-
+		
 		// Override the custom query with the global query if needed.
 		if ( get_prop( $block->context, [ 'query', 'inherit' ], false ) ) {
 			global $wp_query;
-			if ( $wp_query && isset( $wp_query->query_vars ) && is_array( $wp_query->query_vars ) ) {
-				// Unset `offset` because if is set, $wp_query overrides/ignores the paged parameter and breaks pagination.
-				unset( $args['offset'] );
-				$args = wp_parse_args( $wp_query->query_vars, $args );
-
-				if ( empty( $args['post_type'] ) && is_singular() ) {
-					$args['post_type'] = get_post_type( get_the_ID() );
-				}
-			}
+			$query = clone $wp_query;
+		} else {
+			$args	= build_query_vars_from_query_block( $block, $page );
+			$query = new \WP_Query( $args );
 		}
-
-		$query = new \WP_Query( $args );
 
 		$classnames = [ 'wp-block-post-template' ];
 		if ( isset( $block->context['displayLayout'] ) && isset( $block->context['query'] ) ) {
-			if ( get_prop( $block->context, [ 'displayLayout', 'type' ], false ) === 'flex' ) {
+			if ( get_prop( $block->context, [ 'displayLayout', 'type' ] ) === 'flex' ) {
 				$classnames = array_merge( $classnames, [ 'wp-block-post-template--grid', 'grid' ] );
 			}
+		}
+
+		$item_class = [ 'wp-block-post' ];
+		if( get_prop( $block->context, [ 'displayLayout', 'columns' ] ) ) {
+			$columns 	= ( 12 / get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
+			$item_class = array_merge( $item_class, [ 'span-12', 'span-md-6', 'span-lg-' . $columns, 'm-0' ] );
+
+			wecodeart( 'styles' )->Utilities->load( [ 'm-0' ] );
 		}
 
 		if( $value = get_prop( $attributes, 'className' ) ) {
@@ -117,18 +117,15 @@ class Template extends Dynamic {
 					'class' => implode( ' ', $classnames )
 				]
 			]
-		], function( $query, $block ) {
+		], function( $query, $block, $item_class ) {
 
 			while ( $query->have_posts() ) {
 				$query->the_post();
 
-				$item_class = [ 'wp-block-post' ];
-				if( get_prop( $block->context, [ 'displayLayout', 'columns' ], false ) ) {
-					$columns 	= ( 12 / get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
-					$item_class = array_merge( $item_class, [ 'span-12', 'span-md-6', 'span-lg-' . $columns, 'm-0' ] );
-
-					wecodeart( 'styles' )->Utilities->load( [ 'm-0' ] );
-				}
+				// Set the block name to one that does not correspond to an existing registered block.
+				// This ensures that for the inner instances of the Post Template block, we do not render any block supports.
+				$block_instance = $block->parsed_block;
+				$block_instance['blockName'] = 'core/null';
 
 				wecodeart( 'markup' )::wrap( 'wp-block-post', [
 					[
@@ -138,16 +135,16 @@ class Template extends Dynamic {
 						]
 					]
 				], function( $block ) {
-					echo ( new \WP_Block( $block->parsed_block, [
+					echo ( new \WP_Block( $block, [
 						'postType' => get_post_type(),
 						'postId'   => get_the_ID(),
 					] ) )->render( [ 'dynamic' => false ] );
-				}, [ $block ] );
+				}, [ $block_instance ] );
 			}
 	
 			wp_reset_postdata();
 
-		}, [ $query, $block ], false );
+		}, [ $query, $block, $item_class ], false );
 	}
 
 	/**

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.7.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -112,52 +112,55 @@ class Posts extends Dynamic {
 		$template .= '<div class="wp-block-query">';
 		$template .= '<!-- wp:post-template {"className":"wp-block-post-template--latest"} -->';
 		
+		$inner_blocks = '';
 		// Image
 		if ( $display_image ) {
 			$align	= (string) get_prop( $attributes, [ 'featuredImageAlign' ], 'none' );
 			$linked	= (string) get_prop( $attributes, [ 'addLinkToFeaturedImage' ], 'false' );
-			$template .= '<!-- wp:post-featured-image {"align":"' . $align . '","isLink":' . $linked . '} /-->';
+			$inner_blocks .= '<!-- wp:post-featured-image {"align":"' . $align . '","isLink":' . $linked . '} /-->';
 		}
 
-		$template .= '<!-- wp:post-title {"level":3,"isLink":true} /-->';
+		$inner_blocks .= '<!-- wp:post-title {"level":3,"isLink":true} /-->';
 		
 		// Meta
 		if( $display_author || $display_date ) {
-			$template .= '<!-- wp:group {"className":"hstack gap-1 mb-1","layout":{"type":"flex","flexWrap":"wrap"}} -->';
-			$template .= '<div class="wp-block-group hstack gap-1 mb-1">';
+			$inner_blocks .= '<!-- wp:group {"className":"hstack gap-1 mb-1","layout":{"type":"flex","flexWrap":"wrap"}} -->';
+			$inner_blocks .= '<div class="wp-block-group hstack gap-1 mb-1">';
 
 			// Author
 			if ( $display_author ) {
-				$template .= '<!-- wp:post-author {"showAvatar":false} /-->';
+				$inner_blocks .= '<!-- wp:post-author {"showAvatar":false} /-->';
 			}
 
 			// Date
 			if ( $display_date ) {
-				$template .= '<!-- wp:post-date /-->';
+				$inner_blocks .= '<!-- wp:post-date /-->';
 			}
 
-			$template .= '</div>';
-			$template .= '<!-- /wp:group -->';
+			$inner_blocks .= '</div>';
+			$inner_blocks .= '<!-- /wp:group -->';
 		}
 
 		// Content
 		if ( $display_content ) {
 			$content_type	= get_prop( $attributes, [ 'displayPostContentRadio' ], 'excerpt' );
 			if( $content_type === 'excerpt' ) {
-				$length	= (string) get_prop( $attributes, 'excerptLength', 55 );
-				$template .= '<!-- wp:post-excerpt {"moreText":"Continue reading"} /-->';
+				$inner_blocks .= '<!-- wp:post-excerpt {"moreText":"Continue reading"} /-->';
 			}
 			if( $content_type === 'full_post' ) {
-				$template .= '<!-- wp:post-content /-->';
+				$inner_blocks .= '<!-- wp:post-content /-->';
 			}
 		}
 		
+		// Allow users to change this template
+		$template .= apply_filters( 'wecodeart/filter/gutenberg/latest-posts/template', $inner_blocks, $attributes );
+
 		$template .= '<!-- /wp:post-template -->';
 		$template .= '</div>';
 		$template .= '<!-- /wp:query -->';
 
-		// Allow users to change this template
-		$template = apply_filters( 'wecodeart/filter/gutenberg/latest-posts/template', parse_blocks( $template ), $attributes );
+		// Allow users to change this query
+		$template = apply_filters( 'wecodeart/filter/gutenberg/latest-posts/query', parse_blocks( $template ), $attributes, $args );
 		// End Template
 		
 		$blocks = new \WP_Block_List( $template, $args );

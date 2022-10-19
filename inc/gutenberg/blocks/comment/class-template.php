@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.6.9
+ * @version		5.7.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -79,7 +79,7 @@ class Template extends Dynamic {
             return '';
         }
 
-		if( $post_id !== 0 && post_password_required( $post_id ) ) {
+		if( post_password_required( $post_id ) ) {
 			return wecodeart( 'markup' )::wrap( 'wp-block-comments-protected', [ [
 				'tag' 	=> 'p',
 			] ], 'printf', [ 
@@ -113,31 +113,52 @@ class Template extends Dynamic {
 	 * Render Threaded Comments
 	 *
 	 * @since	5.3.3
-	 * @version	5.3.5
+	 * @version	5.7.0
 	 *
 	 * @return 	string
 	 */
 	public static function render_comments( $comments, $block ) {
+		global $comment_depth;
+		$thread_comments       = get_option( 'thread_comments' );
+		$thread_comments_depth = get_option( 'thread_comments_depth' );
+
+		if ( empty( $comment_depth ) ) {
+			$comment_depth = 1;
+		}
+		
 		$content = '';
 
 		foreach ( $comments as $comment ) {
+
+			$block_instance = $block->parsed_block;
+			$block_instance['blockName'] = 'core/null';
 	
-			$block_content = ( new \WP_Block( $block->parsed_block, [
+			$block_content = ( new \WP_Block( $block_instance, [
 				'commentId' => $comment->comment_ID,
 			] ) )->render( [ 'dynamic' => false ] );
 	
 			$children = $comment->get_children();
 	
 			// If the comment has children, recurse to create the HTML for the nested comments.
-			if ( ! empty( $children ) ) {
-				$block_content .= wecodeart( 'markup' )::wrap( 'wp-block-comments-query-children', [
-					[
-						'tag' 	=> 'ol',
-						'attrs'	=> [
-							'class' => 'comment__children list-unstyled ps-3 ps-md-5 mt-5'
+			if ( ! empty( $children ) && ! empty( $thread_comments ) ) {
+
+				// Load Utilities
+				wecodeart( 'styles' )->Utilities->load( [ 'ps-3', 'ps-md-5', 'mt-5' ] );
+
+				if ( $comment_depth < $thread_comments_depth ) {
+					++$comment_depth;
+					$block_content .= wecodeart( 'markup' )::wrap( 'wp-block-comment-template-children', [
+						[
+							'tag' 	=> 'ol',
+							'attrs'	=> [
+								'class' => 'comment__children list-unstyled ps-3 ps-md-5 mt-5'
+							]
 						]
-					]
-				], [ __CLASS__, 'render_comments' ], [ $children, $block ], false );
+					], [ __CLASS__, 'render_comments' ], [ $children, $block ], false );
+					--$comment_depth;
+				} else {
+					$block_content .= [ __CLASS__, 'render_comments' ];
+				}
 			}
 	
 			$content .= wecodeart( 'markup' )::wrap( 'wp-block-comment', [

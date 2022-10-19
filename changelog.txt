@@ -1,3 +1,11 @@
+v5.7.0
+- Updated - core/latest-posts and core/latest-comments template filter now takes a string as 1st argument (without parse_blocks)
+- Updated - single.html template comments markup: remove group and rename core/comments-query-loop to core/comments
+- Fixed - core/post-template issue with double css-# classes in wrapper (from Styles Gutenberg Extension)
+- Fixed - core/comment-template issue with double css-# classes in wrapper (from Styles Gutenberg Extension)
+- Added - core/post-template $args as 3rd parameter to template filter and new filter for Query Template - wecodeart/filter/gutenberg/latest-posts/query
+- Added - core/comment-template support for threaded comments
+
 v5.6.9
 - Removed - core/pullquote redundant is-style-solid CSS rules and extra attributes processor
 - Updated - Offcanvas menu label support
