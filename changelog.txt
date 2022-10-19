@@ -1,4 +1,5 @@
 v5.7.0
+- Removed - align{left/center/right/none} styles (as they were added in core)
 - Updated - core/latest-posts and core/latest-comments template filter now takes a string as 1st argument (without parse_blocks)
 - Updated - single.html template comments markup: remove group and rename core/comments-query-loop to core/comments
 - Fixed - core/post-template issue with double css-# classes in wrapper (from Styles Gutenberg Extension)
