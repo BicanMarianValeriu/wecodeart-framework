@@ -965,21 +965,6 @@ progress {
   }
 }
 
-:where(.theme-wecodeart) .alignnone {
-  margin: 0 0 var(--wp--preset--spacing--sm) 0;
-}
-:where(.theme-wecodeart) .aligncenter {
-  display: block;
-  margin: 0 auto var(--wp--preset--spacing--sm);
-}
-:where(.theme-wecodeart) .alignright {
-  float: right;
-  margin: 0 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm);
-}
-:where(.theme-wecodeart) .alignleft {
-  float: left;
-  margin: 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm) 0;
-}
 :where(.theme-wecodeart) :where(.has-border-color, [style*=border-width]) {
   border-style: solid;
 }

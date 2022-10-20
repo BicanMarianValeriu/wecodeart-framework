@@ -2,6 +2,7 @@ v5.7.0
 - Removed - align{left/center/right/none} styles (as they were added in core)
 - Updated - core/latest-posts and core/latest-comments template filter now takes a string as 1st argument (without parse_blocks)
 - Updated - single.html template comments markup: remove group and rename core/comments-query-loop to core/comments
+- Fixed - A bug with spacing margin/padding generation when all paddings are equal but not on all dirrections
 - Fixed - core/post-template issue with double css-# classes in wrapper (from Styles Gutenberg Extension)
 - Fixed - core/comment-template issue with double css-# classes in wrapper (from Styles Gutenberg Extension)
 - Added - core/post-template $args as 3rd parameter to template filter and new filter for Query Template - wecodeart/filter/gutenberg/latest-posts/query

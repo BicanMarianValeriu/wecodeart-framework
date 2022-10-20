@@ -183,7 +183,7 @@ class Blocks extends Processor {
 				// Padding
 				if ( $padding = get_prop( $spacing, 'padding', [] ) ) {
 					if( ! empty( $padding ) ) {
-						if( count( array_unique( $padding ) ) === 1 ) {
+						if( count( $padding ) === 4 && count( array_unique( $padding ) ) === 1 ) {
 							$padding = end( $padding );
 
 							// Is WP way of saved color
@@ -216,7 +216,7 @@ class Blocks extends Processor {
 				// Margin
 				if ( $margin = get_prop( $spacing, 'margin', [] ) ) {
 					if( ! empty( $margin ) ) {
-						if( count( array_unique( $margin ) ) === 1 ) {
+						if( count( $margin ) === 4 && count( array_unique( $margin ) ) === 1 ) {
 							$margin = end( $margin );
 							
 							// Is WP way of saved color

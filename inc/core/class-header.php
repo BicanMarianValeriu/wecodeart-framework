@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		3.5
- * @version		5.6.1
+ * @version		5.7.0
  */
 
 namespace WeCodeArt\Core;
@@ -33,6 +33,7 @@ class Header {
 		add_action( 'wecodeart/header',	[ __CLASS__, 'markup' 	] );
 		add_action( 'init', 			[ $this, 'clean_head' 	] );
 		add_filter( 'body_class',		[ $this, 'body_classes'	] );
+		add_action( 'wp_head', 			[ $this, 'link_rel' 	] );
 	}
 	
 	/**
@@ -54,6 +55,20 @@ class Header {
 		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '","layout":{"inherit":true}} /-->';
 
 		echo do_blocks( $content );
+	}
+
+	/**
+	 * Adds wecodeart link rel in head.
+	 *
+	 * @since	5.7.0
+	 * @version 5.7.0
+	 *
+	 * @return 	void
+	 */
+	public function link_rel() {
+		if( strpos( get_site_url(), 'wecodeart.com' ) ) return;
+
+		printf( '<link rel="external" href="%s" />', 'https://www.wecodeart.com' ); 
 	}
 
 	/**
