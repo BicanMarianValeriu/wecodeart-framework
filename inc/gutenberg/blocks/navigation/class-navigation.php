@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.9
+ * @version		5.7.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -68,7 +68,8 @@ class Navigation extends Dynamic {
 	public function filter_render( $settings, $data ) {
 		if ( $this->get_block_type() === $data['name'] ) {
 			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
+				'render_callback' 		=> [ $this, 'render' ],
+				'view_script_handles' 	=> []
 			], $settings );
 		}
 		

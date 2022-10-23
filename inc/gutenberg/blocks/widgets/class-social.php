@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.7.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -264,10 +264,6 @@ class Social extends Dynamic {
 		.wp-social-link svg {
 			width: 1em;
 			height: 1em;
-		}
-		.navbar .wp-block-social-links {
-			margin-top: 0;
-			margin-bottom: 0;
 		}
 		";
 	}

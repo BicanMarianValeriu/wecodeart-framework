@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.7.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -136,7 +136,7 @@ class Comments extends Dynamic {
 
 		// Comment Content
 		if ( get_prop( $attributes, [ 'displayExcerpt' ], true ) ) {
-			$template .= '<!-- wp:comment-content {"backgroundColor":"white","className":"p-3 my-3 border rounded"} /-->';
+			$template .= '<!-- wp:comment-content {"className":"p-3 my-3 border rounded"} /-->';
 		}
 
 		// Allow users to change this template
