@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.5.1
- * @version		5.5.8
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -75,7 +75,7 @@ class Archives extends Dynamic {
 	public function render( $attributes = [], $content = '', $block = null ) {
 		$args = apply_filters( 'wecodeart/filter/gutenberg/archives', [
 			'format' 			=> 'custom',
-			'type'				=> 'monthly',
+			'type'				=> get_prop( $attributes, [ 'type' ], 'monthly' ),
 			'before' 			=> '',
 			'after' 			=> '|',
 			'echo' 				=> 0,

@@ -1,3 +1,9 @@
+v5.7.1
+- Updated - core/archives type attribute
+- Updated - core/latest-posts featured image alignment
+- Updated - core/search query params output and styles extension ouput
+- Added - Fragment cache for WooCommerce Mini Cart block (which changed the fragments loading on mouseover instead of page load) for LiteSpeed
+
 v5.7.0
 - Removed - align{left/center/right/none} styles (as they were added in core)
 - Updated - core/social-links styles regarding .nav-bar margin

@@ -78,7 +78,7 @@ class Footer {
 	 * @return 	string 	The block markup.
 	 */
 	public function footer_shortcodes( $content = '', $block = [], $data = null ) {
-		$is_footer = get_prop( $block, [ 'attrs', 'tagName' ] );
+		$is_footer = get_prop( $block, [ 'attrs', 'tagName' ], '' );
 
 		if( strtolower( $is_footer ) === 'footer' ) {
 			$content = str_replace( [

@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		1.9
- * @version		5.6.3
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -53,6 +53,7 @@ class WooCommerce implements Integration {
 		add_action( 'after_setup_theme', 						[ $this, 'after_setup_theme' 	] );
 
 		// Filters
+		// add_filter( 'render_block', 							[ $this, 'block_fragment_cache'	], 20, 2 );
 		add_filter( 'register_block_type_args', 				[ $this, 'block_type_args' 		], 20, 2 );
 		add_filter( 'wecodeart/filter/gutenberg/styles/core', 	[ $this, 'block_inline_styles' 	], 20, 1 );
 		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' 	] );
@@ -75,6 +76,19 @@ class WooCommerce implements Integration {
             }
 			add_theme_support( $feature, $value );
 		}
+	}
+
+	/**
+	 * Fragment Cache
+	 *
+	 * @since	5.7.1
+	 */
+	public function block_fragment_cache( $content, $data ) {
+		if( get_prop( $data, [ 'blockName' ] ) === 'woocommerce/mini-cart' ) {
+			do_action( 'litespeed_control_set_nocache' );
+		}
+
+		return $content;
 	}
 
 	/**

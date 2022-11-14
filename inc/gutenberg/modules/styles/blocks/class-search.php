@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.4.8
- * @version		5.4.9
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -50,12 +50,40 @@ class Search extends Base {
 		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
 			// Border
 			if( $border = get_prop( $css_style, 'border', [] ) ) {
+				// Handle individual borders in upcoming WP 6.1
+				$directions = wp_array_slice_assoc( $border, [ 'top', 'left', 'right', 'bottom' ] );
+
+				foreach( $directions as $dir => $value ) {
+					$color = get_prop( $value, 'color' );
+					if ( strpos( $color, 'var:preset|color' ) !== false ) {
+						$color = sprintf( 'var(--wp--preset--color--%s)', substr( $color, strrpos( $color, '|' ) + 1 ) );
+					}
+
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'border-' . $dir,
+						'value'	  	=> trim( sprintf(
+							'%s %s %s',
+							get_prop( $value, 'width' ),
+							get_prop( $value, 'style', 'solid' ),
+							$color
+						) )
+					], $output );
+				}
+
 				if ( $value = get_prop( $border, 'width' ) ) {
 					$this->output[] = wp_parse_args( [
 						'property' 	=> 'border-width',
 						'value'	  	=> $value
 					], $output );
 				}
+
+				if ( $value = get_prop( $border, 'color' ) ) {
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'border-color',
+						'value'	  	=> $value
+					], $output );
+				}
+
 				if ( $value = get_prop( $border, 'radius' ) ) {
 					if ( is_array( $value ) ) {
 						// We have individual border radius corner values.
@@ -75,12 +103,6 @@ class Search extends Base {
 						], $output );
 					}
 				}
-				if ( $value = get_prop( $border, 'color' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-color',
-						'value'	  	=> $value
-					], $output );
-				}
 			}
 
 			// Colors
@@ -88,21 +110,21 @@ class Search extends Base {
 				// Text
 				if ( $value = get_prop( $color, 'text' ) ) {
 					$this->output[] = wp_parse_args( [
-						'property' 	=> '--wp--color',
-						'value'	  	=> $value
-					], $output );
-					$this->output[] = wp_parse_args( [
+						'element'	=> join( ' ', [ $this->element, '.wp-block-button__link' ] ),
 						'property' 	=> 'color',
 						'value'	  	=> $value
 					], $output );
 				}
+				
 				// Background
 				if ( $value = get_prop( $color, 'background' ) ) {
 					$this->output[] = wp_parse_args( [
+						'element'	=> join( ' ', [ $this->element, '.wp-block-button__link' ] ),
 						'property' 	=> 'background-color',
 						'value'	  	=> $value
 					], $output );
 				}
+
 				// Gradient
 				if ( $value = get_prop( $color, 'gradient' ) ) {
 					$this->output[] = wp_parse_args( [

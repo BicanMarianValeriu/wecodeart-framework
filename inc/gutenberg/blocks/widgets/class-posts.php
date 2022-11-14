@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.7.0
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -45,10 +45,6 @@ class Posts extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_action( 'wp_print_styles', function() {
-			\wp_deregister_style( 'wp-block-' . $this->block_name );
-		} );
-
 		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -81,9 +77,8 @@ class Posts extends Dynamic {
 		global $block_core_latest_posts_excerpt_length;
 
 		$args = [
-			// 'queryId'	=> '7',
 			'displayLayout' => get_prop( $attributes, [ 'postLayout' ] ) ? [
-				'columns'	=> get_prop( $attributes, [ 'columns' ], null ),
+				'columns'	=> get_prop( $attributes, [ 'columns' ] ),
 				'type' 		=> get_prop( $attributes, [ 'postLayout' ], 'list' ) === 'grid' ? 'flex' : 'list' 
 			] : null,
 			'query' 	=> [
@@ -115,9 +110,15 @@ class Posts extends Dynamic {
 		$inner_blocks = '';
 		// Image
 		if ( $display_image ) {
-			$align	= (string) get_prop( $attributes, [ 'featuredImageAlign' ], 'none' );
-			$linked	= (string) get_prop( $attributes, [ 'addLinkToFeaturedImage' ], 'false' );
-			$inner_blocks .= '<!-- wp:post-featured-image {"align":"' . $align . '","isLink":' . $linked . '} /-->';
+			$args	= array_filter( [
+				'align'  	=> get_prop( $attributes, [ 'featuredImageAlign' ] ),
+				'isLink' 	=> get_prop( $attributes, [ 'addLinkToFeaturedImage' ] ),
+				'sizeSlug'	=> get_prop( $attributes, [ 'featuredImageSizeSlug' ] ),
+				'width' 	=> get_prop( $attributes, [ 'featuredImageSizeWidth' ] ),
+				'height' 	=> get_prop( $attributes, [ 'featuredImageSizeHeight' ] ),
+			] );
+			
+			$inner_blocks .= '<!-- wp:post-featured-image ' . wp_json_encode( $args ) . ' /-->';
 		}
 
 		$inner_blocks .= '<!-- wp:post-title {"level":3,"isLink":true} /-->';
@@ -144,9 +145,11 @@ class Posts extends Dynamic {
 		// Content
 		if ( $display_content ) {
 			$content_type	= get_prop( $attributes, [ 'displayPostContentRadio' ], 'excerpt' );
+			
 			if( $content_type === 'excerpt' ) {
 				$inner_blocks .= '<!-- wp:post-excerpt {"moreText":"Continue reading"} /-->';
 			}
+
 			if( $content_type === 'full_post' ) {
 				$inner_blocks .= '<!-- wp:post-content /-->';
 			}
@@ -173,5 +176,27 @@ class Posts extends Dynamic {
 		remove_filter( 'excerpt_length', 'block_core_latest_posts_get_excerpt_length', 20 );
 
 		return $content;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.wp-block-post-template--latest figure.alignleft,
+		.wp-block-post-template--latest figure.alignright {
+			min-width: 100px;
+		}
+		.wp-block-post-template--latest figure.alignleft {
+			float: left;
+			margin-right: 1rem;
+		}
+		.wp-block-post-template--latest figure.alignright {
+			float: right;
+			margin-left: 1rem;
+		}
+		";
 	}
 }

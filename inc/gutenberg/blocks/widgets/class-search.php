@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.9
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -81,6 +81,7 @@ class Search extends Dynamic {
 
 		$input_id 	= 'wp-block-search__input-' . ++$instance_id;
 		$form_class = [ 'wp-block-search__form', 'needs-validation' ];
+		$query_atts = get_prop( $attributes, [ 'query' ], [] );
 
 		// Width utility.
 		if( get_prop( $attributes, 'widthUnit', 'px' ) === '%' ) {
@@ -110,7 +111,7 @@ class Search extends Dynamic {
 					'novalidate'=> 'novalidate',
 				]
 			],
-		], function() use( $attributes, $input_id ) {
+		], function() use( $attributes, $input_id, $query_atts ) {
 			$wrapper   = [ 'wp-block-search__fields' ];
 
 			if( get_prop( $attributes, 'buttonPosition' ) !== 'no-button' ) {
@@ -142,6 +143,19 @@ class Search extends Dynamic {
 					'required' 		=> true,
 				]
 			] );
+
+			// Add Query Params
+			if ( count( $query_atts ) > 0 ) {
+				foreach ( $query_atts as $param => $value ) {
+					wecodeart_input( 'hidden', [
+						'attrs' => [
+							'id'	=> false,
+							'name'	=> $param,
+							'value'	=> $value,
+						]
+					] );
+				}
+			}
 
 			// Maybe add submit button
 			if ( get_prop( $attributes, 'buttonPosition', 'button-outside' ) !== 'no-button' ) {
@@ -223,6 +237,9 @@ class Search extends Dynamic {
 	 */
 	public function styles() {
 		return "
+		.wp-block-search {
+			border-width: 0;
+		}
 		.wp-block-search--button-outside .wp-block-button__link {
 			margin-left: 1rem;
 		}
