@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.1
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -48,7 +48,7 @@ class Separator extends Dynamic {
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'faded',
             'label'			=> esc_html__( 'Faded', 'wecodeart' ),
-			'inline_style' 	=> self::get_style( 'faded' )
+			'inline_style' 	=> wecodeart( 'styles' )::compress( self::get_style( 'faded' ) )
 		] );
 	}
 
@@ -93,7 +93,7 @@ class Separator extends Dynamic {
 				break;
 		endswitch;
 
-		return wecodeart( 'styles' )::compress( $inline );
+		return $inline;
 	}
 
 	/**
