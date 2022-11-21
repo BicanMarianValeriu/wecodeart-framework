@@ -137,10 +137,14 @@ return [
     'fonts' => [
         'system' => [],
         'google' => [
-            // [
-            //     'family' 	=> 'Open Sans',
-            //     'variants' 	=> [ 300, 'regular' ]
-            // ]
+            [
+                'family' 	=> 'Open Sans',
+                'variants' 	=> [ 300, 'regular' ]
+            ],
+            [
+                'family' 	=> 'Shadows Into Light',
+                'variants' 	=> [ 'regular' ]
+            ]
         ]
     ],
     /*

@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Fonts
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
- * @since 		5.x.x
- * @version		5.x.x
+ * @since 		5.7.1
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Support\Fonts;
@@ -20,6 +20,7 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Support\Fonts;
 use WeCodeArt\Admin\Request;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\set_settings_array;
 
 /**
  * Manages the way Google Fonts are enqueued.
@@ -62,7 +63,9 @@ final class Google {
 			$this->add_font( $font );
 		}
 
-		add_action( 'wp_enqueue_scripts', [ $this, 'register_styles' ] );
+		add_filter( 'wp_theme_json_data_theme', [ $this, 'register_json' 	] );
+		add_action( 'wp_enqueue_scripts', 		[ $this, 'register_styles' 	] );
+		add_action( 'admin_init', 				[ $this, 'register_styles' 	] );
 	}
 
 	/**
@@ -103,7 +106,7 @@ final class Google {
 	/**
 	 * Determines the validity of the selected font as well as its properties.
 	 *
-	 * @since 		5.5.8
+	 * @since 		5.7.1
 	 *
 	 * @return 		void
 	 */
@@ -135,9 +138,30 @@ final class Google {
 			], $font );
 		}, $this->fonts );
 	}
+
+	/**
+	 * Register JSON.
+	 *
+	 * @return 	object
+	 */
+	public function register_json( $object ) {
+		$data = $object->get_data();
+
+		foreach( $this->fonts as $slug => $font ) {
+			$data['settings']['typography']['fontFamilies']['theme'][] = [
+				'fontFamily' 	=> $font['family'],
+				'slug'			=> $slug,
+				'name'			=> $font['family']
+			];
+		}
+
+		$object->update_with( $data );
+
+		return $object;
+	}
 	
 	/**
-	 * Output styles.
+	 * Register styles.
 	 *
 	 * @return 	void
 	 */
@@ -146,15 +170,18 @@ final class Google {
 
 		if( empty( $inline_css ) ) return;
 
-		wp_register_style( Fonts::CSS_ID, false, [], true, true );
-		wp_add_inline_style( Fonts::CSS_ID, $inline_css );
-		wp_enqueue_style( Fonts::CSS_ID );
+		if( ! wp_style_is( 'wp-webfonts' ) ) {
+			wp_register_style( 'wp-webfonts', '' );
+			wp_enqueue_style( 'wp-webfonts' );
+		}
+
+		wp_add_inline_style( is_admin() ? 'wp-block-library' : 'wp-webfonts', $inline_css );
 	}
 
 	/**
 	 * Get styles from URL.
 	 *
-	 * @since 	5.5.8
+	 * @since 	5.7.1
 	 * @param 	string 		$font 	The URL.
 	 *
 	 * @return 	string
@@ -179,7 +206,7 @@ final class Google {
 	/**
 	 * Get styles with fonts downloaded locally.
 	 *
-	 * @since 	5.5.8
+	 * @since 	5.7.1
 	 * @param 	string 		$css 	The styles.
 	 *
 	 * @return 	string
@@ -198,7 +225,7 @@ final class Google {
 	/**
 	 * Download files mentioned in our CSS locally.
 	 *
-	 * @since 	5.5.8
+	 * @since 	5.7.1
 	 * @param 	string		$css 	The CSS we want to parse.
 	 *
 	 * @return 	array      			Returns an array of remote URLs and their local counterparts.
@@ -258,7 +285,7 @@ final class Google {
 	/**
 	 * Get font files from the CSS.
 	 *
-	 * @since 	5.5.8
+	 * @since 	5.7.1
 	 * @param 	string 	$css 	The CSS we want to parse.
 	 *
 	 * @return 	array      		Returns an array of font-families and the font-files used.
@@ -315,7 +342,7 @@ final class Google {
 	 * Get cached url contents.
 	 * If a cache doesn't already exist, get the URL contents from remote and cache the result.
 	 *
-	 * @since 	5.5.8
+	 * @since 	5.7.1
 	 * @param 	string 	$url        The URL we want to get the contents from.
 	 * @param 	string 	$user_agent	The user-agent to use for our request.
 	 *
@@ -346,7 +373,7 @@ final class Google {
 	/**
 	 * Get remote file contents.
 	 *
-	 * @since 	5.5.8
+	 * @since 	5.7.1
 	 * @param 	string 	$url		The URL we want to get the contents from.
 	 * @param 	string 	$user_agent	The user-agent to use for our request.
 	 *
@@ -375,7 +402,7 @@ final class Google {
 	/**
 	 * Get remote file URL.
 	 *
-	 * @since 	5.5.8
+	 * @since 	5.7.1
 	 * @param 	array 	$font
 	 *
 	 * @return 	mixed 	Returns the remote URL or false if is not google font.

@@ -296,23 +296,6 @@
 					"fontFamily": "var(--wp--font-monospace)",
 					"slug": "monospace",
 					"name": "Monospace"
-				},
-				{
-					"fontFace": [
-						{
-							"fontFamily": "Shadows Into Light",
-							"fontStretch": "normal",
-							"fontStyle": "normal",
-							"fontWeight": "400",
-							"src": [
-								"file:./assets/fonts/shadows-into-light/shadows-into-light-v15-latin-regular.woff2",
-								"file:./assets/fonts/shadows-into-light/shadows-into-light-v15-latin-regular.svg"
-							]
-						}
-					],
-					"fontFamily": "\"Shadows Into Light\", cursive",
-					"slug": "shadows",
-					"name": "Shadows Into Light"
 				}
 			],
 			"fontSizes": [
@@ -451,8 +434,8 @@
 					"padding": {
 						"top": ".5rem",
 						"bottom": ".5rem",
-						"left": ".75rem",
-						"right": ".75rem"
+						"left": "1rem",
+						"right": "1rem"
 					}
 				}
 			},
@@ -521,7 +504,7 @@
 		},
 		"typography": {
 			"fontSize": "var:preset|font-size|normal",
-			"fontFamily": "var:preset|font-family|base",
+			"fontFamily": "var:preset|font-family|open-sans",
 			"lineHeight": "1.5"
 		}
 	}

@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Fonts
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
- * @since 		5.x.x
- * @version		5.x.x
+ * @since 		5.7.1
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Support;
@@ -33,10 +33,10 @@ final class Fonts implements Integration {
 	 *
 	 * @var string
 	 */
-	const CSS_ID = 'wecodeart-fonts';
+	const CSS_ID = 'wp-webfonts';
 	const OPTION = 'wecodeart-fonts';
 	const FOLDER = 'fonts';
-	const CLEANUP_FREQUENCY = 'monthly';
+	const CLEANUP_FREQUENCY = 'weekly';
 
 	/**
 	 * Google Fonts.
@@ -56,8 +56,8 @@ final class Fonts implements Integration {
 	 * Send to Constructor
 	 */
 	public function register_hooks() {
-		$this->schedule_cleanup();
-		add_action( 'wecodeart_cleanup_fonts', [ __CLASS__, 'clear_cache' ] );
+		add_action( 'init', 					[ $this, 'schedule_cleanup' ] );
+		add_action( 'wecodeart_cleanup_fonts', 	[ __CLASS__, 'clear_cache' 	] );
 	}
 
 	/**

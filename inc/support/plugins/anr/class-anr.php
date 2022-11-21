@@ -9,14 +9,14 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.5.1
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Support\Plugins;
 
 defined( 'ABSPATH' ) || exit;
 
-use anr_captcha_class as Captcha;
+use C4wp_Captcha_Class as Captcha;
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
 use WeCodeArt\Admin\Notifications;
@@ -54,7 +54,7 @@ class ANR implements Integration {
 	 * Hooks
 	 *
 	 * @since   3.8.1
-	 * @version	5.0.0
+	 * @version	5.7.1
 	 *
 	 * @return  void
 	 */
@@ -62,14 +62,14 @@ class ANR implements Integration {
 		add_action( 'admin_notices',	[ $this, 'manage_notice' ] );
 
 		// Comments
-		if( anr_is_form_enabled( 'comment' ) && ( ! is_admin() || ! current_user_can( 'moderate_comments' ) ) ) {
+		if( c4wp_is_form_enabled( 'comment' ) && ( ! is_admin() || ! current_user_can( 'moderate_comments' ) ) ) {
 			add_action( 'init', function() {
-				$anr_instance = Captcha::init();
+				$instance = Captcha::init();
 				if ( ! is_user_logged_in() ) {
-					remove_action( 'comment_form_after_fields', 	[ $anr_instance, 'form_field' ], 99 );
+					remove_action( 'comment_form_after_fields', 	[ $instance, 'form_field' ], 99 );
 					add_action( 'comment_form_after_fields', 		[ $this, 'comment_field' ] );
 				} else {
-					remove_filter( 'comment_form_field_comment', 	[ $anr_instance, 'form_field_return' ], 99 );
+					remove_filter( 'comment_form_field_comment', 	[ $instance, 'form_field_return' ], 99 );
 					add_filter( 'comment_form_field_comment', 		[ $this, 'comment_field_return' ] );
 				}
 			} );
@@ -126,14 +126,14 @@ class ANR implements Integration {
 	 *
 	 * @since   3.8.1
 	 * @version	5.4.8
-	 * @see 	anr_captcha_class::init()->form_field();
-	 * @uses	anr_captcha_class::init()->form_field();
+	 * @see 	C4wp_Captcha_Class::init()->form_field();
+	 * @uses	C4wp_Captcha_Class::init()->form_field();
 	 *
 	 * @return  void
 	 */
 	public function comment_field_return( $defaults = '' ) {
-		$hide	= anr_get_option( 'loggedin_hide' );
-		$ver	= anr_get_option( 'captcha_version', 'v2_checkbox' );
+		$hide	= c4wp_get_option( 'loggedin_hide' );
+		$ver	= c4wp_get_option( 'captcha_version', 'v2_checkbox' );
 
 		if ( is_user_logged_in() && $hide === (bool) true ) {
 			return $defaults;

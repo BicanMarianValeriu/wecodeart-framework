@@ -9,7 +9,7 @@
  * @subpackage 	Support\Plugins\ANR\is_anr_active
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since 		4.0.2
- * @version		5.0.0
+ * @version		5.7.0
  */
 
 namespace WeCodeArt\Support\Plugins\ANR;
@@ -28,6 +28,6 @@ class Condition implements ConditionalInterface {
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return detect_plugin( [ 'constants' => [ 'ANR_PLUGIN_VERSION' ] ] );
+		return detect_plugin( [ 'constants' => [ 'C4WP_PLUGIN_VERSION' ] ] );
 	}
 }

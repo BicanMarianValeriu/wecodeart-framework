@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.5.8
- * @version		5.6.9
+ * @version		5.7.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -129,7 +129,7 @@ class Title extends Dynamic {
 			'tag' 	=> 'h' . get_prop( $attributes, [ 'level' ], 2 ),
 			'attrs' => $this->get_block_wrapper_attributes( [
 				'id'	=> 'comments',
-				'class' => $align
+				'class' => $classname
 			] )
 		] ], $output, [], false );
 	}
