@@ -89,8 +89,8 @@ return [
 	
 	<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":{"top":"3rem","left":"3rem"}}},"className":"my-5","layout":{"inherit":true}} -->
 	<div class="wp-block-group alignfull my-5">
-	<!-- wp:media-text {"backgroundColor":"light","mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image"} -->
-	<div class="wp-block-media-text is-stacked-on-mobile has-background has-light-background-color">
+	<!-- wp:media-text {"mediaLink":"https://picsum.photos/id/1/800/800","mediaType":"image"} -->
+	<div class="wp-block-media-text is-stacked-on-mobile">
 	<figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/1/800/800" alt="" /></figure>
 	<div class="wp-block-media-text__content">
 	<!-- wp:heading -->
@@ -122,8 +122,8 @@ return [
 	<!-- /wp:image -->
 	</figure>
 	<!-- /wp:gallery -->
-	<!-- wp:media-text {"backgroundColor":"light","mediaPosition":"right","mediaLink":"https://picsum.photos/id/119/800/800","mediaType":"image"} -->
-	<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile has-background has-light-background-color">
+	<!-- wp:media-text {"mediaPosition":"right","mediaLink":"https://picsum.photos/id/119/800/800","mediaType":"image"} -->
+	<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile">
 	<figure class="wp-block-media-text__media"><img src="https://picsum.photos/id/119/800/800" alt="" /></figure>
 	<div class="wp-block-media-text__content">
 	<!-- wp:heading -->

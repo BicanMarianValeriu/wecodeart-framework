@@ -2,6 +2,7 @@ v5.7.1
 - Updated - core/archives type attribute
 - Updated - core/latest-posts featured image alignment
 - Updated - core/search query params output and styles extension ouput
+- Updated - Starter content for homepage
 - Added - Fragment cache for WooCommerce Mini Cart block (which changed the fragments loading on mouseover instead of page load) for LiteSpeed
 - Fixed - Captcha4WP comment hooks and class name change after was bought (ANR plugin)
 - Fixed - core/comments-title text alignment class
