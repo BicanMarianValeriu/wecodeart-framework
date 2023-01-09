@@ -1,3 +1,6 @@
+v5.7.2
+- Updated - ...
+
 v5.7.1
 - Updated - core/archives type attribute
 - Updated - core/latest-posts featured image alignment
