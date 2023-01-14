@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.7.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -82,7 +82,7 @@ class Posts extends Dynamic {
 				'type' 		=> get_prop( $attributes, [ 'postLayout' ], 'list' ) === 'grid' ? 'flex' : 'list' 
 			] : null,
 			'query' 	=> [
-				'post_type' => 'post',
+				'postType' => 'post',
 				'perPage' 	=> get_prop( $attributes, 'postsToShow', 5 ),
 				'pages'		=> 0,
 				'offset'	=> 0,
@@ -111,8 +111,8 @@ class Posts extends Dynamic {
 		// Image
 		if ( $display_image ) {
 			$args	= array_filter( [
-				'align'  	=> get_prop( $attributes, [ 'featuredImageAlign' ] ),
 				'isLink' 	=> get_prop( $attributes, [ 'addLinkToFeaturedImage' ] ),
+				'align'  	=> get_prop( $attributes, [ 'featuredImageAlign' ] ),
 				'sizeSlug'	=> get_prop( $attributes, [ 'featuredImageSizeSlug' ] ),
 				'width' 	=> get_prop( $attributes, [ 'featuredImageSizeWidth' ] ),
 				'height' 	=> get_prop( $attributes, [ 'featuredImageSizeHeight' ] ),

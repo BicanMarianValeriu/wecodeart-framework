@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.9
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -136,9 +136,8 @@ class Cover extends Dynamic {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: 100%;
 			min-height: 350px;
-			padding: 1rem;
+			padding: 1rem var(--wp--custom--gutter);
 			background-size: cover;
 			background-position: center center;
 			overflow: hidden;

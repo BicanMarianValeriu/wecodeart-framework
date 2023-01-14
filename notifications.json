@@ -2,9 +2,9 @@
 	"version": "5.0.0",
 	"items": [
 		{
-			"type": "info",
-			"title": "Next update",
-			"content": "Next update will bring Threaded Comments support and minor fixes to core/post-template and core/comment-template blocks."
+			"type": "danger",
+			"title": "Next update - 5.7.2",
+			"content": "Next update will remove `__experimentalLayout` from core/template-part and use useRootPaddingAwareAlignments, so you will need to edit your home/single/page.html (and others) templates. If you did not make any significant changes to those templates you can simply reset them and redo those small changes."
 		}
 	]
 }

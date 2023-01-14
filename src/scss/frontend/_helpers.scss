@@ -107,10 +107,7 @@
 }
 
 // List
-.list-unstyled {
-	@include list-unstyled();
-}
-
+.list-unstyled,
 .list-inline {
 	@include list-unstyled();
 }

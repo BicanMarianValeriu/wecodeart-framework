@@ -1,5 +1,9 @@
 v5.7.2
-- Updated - ...
+- Updated - core/latest-posts post_type attribute to postType
+- Updated - enabled useRootPaddingAwareAlignments and adjusted global CSS to fit
+- Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
+- Fixed - core/button outline default color rgb variable added in CSS
+- Added - shadow support in theme.json (upcoming WP versions)
 
 v5.7.1
 - Updated - core/archives type attribute

@@ -1,38 +1,5 @@
 /* 	= Base
 --------------------------------------------------------------- */
-/*
- * Alignment styles.
- * These rules are temporary, and should not be relied on or modified too heavily by themes
- *
- * Relevant issues:
- * https://github.com/WordPress/gutenberg/issues/35607
- * https://github.com/WordPress/gutenberg/issues/35884
- */
-.wp-site-blocks,
-.wp-site-header,
-.wp-site-footer,
-.wp-block-cover.alignfull,
-.wp-block-group.alignfull,
-.wp-block-group.has-background {
-    padding-left: var(--wp--custom--gutter);
-    padding-right: var(--wp--custom--gutter);
-}
-
-.wp-site-blocks .alignfull,
-.wp-site-blocks .wp-site-header,
-.wp-site-blocks .wp-site-footer {
-    margin-left: calc(var(--wp--custom--gutter) * -1) !important;
-    margin-right: calc(var(--wp--custom--gutter) * -1) !important;
-    width: unset;
-}
-
-.wp-site-blocks .wp-block-columns .wp-block-column .alignfull,
-.wp-site-blocks .alignfull:not(.wp-block-group) .alignfull {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: inherit;
-}
-
 .wp-site-blocks > * + * {
     margin-block-start: 0!important;
 }

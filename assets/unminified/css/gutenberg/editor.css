@@ -1,39 +1,6 @@
 /*!******************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/scss/gutenberg/index.scss ***!
   \******************************************************************************************************************************************************************************************************************************************************/
-.is-root-container:not(.wp-site-blocks) {
-  overflow: hidden;
-}
-
-.block-editor-block-list__layout.is-root-container {
-  padding-left: var(--wp--custom--gutter);
-  padding-right: var(--wp--custom--gutter);
-}
-.block-editor-block-list__layout.is-root-container .alignfull.wp-block,
-.block-editor-block-list__layout.is-root-container > .wp-block-cover {
-  margin-left: calc(var(--wp--custom--gutter) * -1) !important;
-  margin-right: calc(var(--wp--custom--gutter) * -1) !important;
-  width: unset;
-  max-width: initial;
-}
-
-.wp-block-gallery {
-  display: flex;
-}
-
-.block-editor-block-list__layout.wp-site-blocks .alignfull.wp-block,
-.block-editor-block-list__layout.wp-site-blocks > .wp-block-cover,
-.block-editor-block-list__layout.wp-site-blocks > .wp-block-group.has-background {
-  margin-left: calc(var(--wp--custom--gutter) * -1) !important;
-  margin-right: calc(var(--wp--custom--gutter) * -1) !important;
-  width: unset;
-  max-width: initial;
-}
-
-.components-circular-option-picker__option {
-  border-radius: 50%;
-}
-
 .wp-block-columns.is-selected::before, .wp-block-columns.has-child-selected::before {
   content: "";
   position: absolute;

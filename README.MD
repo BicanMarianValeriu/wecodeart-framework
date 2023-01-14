@@ -1,4 +1,4 @@
-## WeCodeArt Copyright 2022
+## WeCodeArt Copyright 2023
 ## https://www.wecodeart.com/
 
 Version: 5.0+
@@ -9,7 +9,7 @@ Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WeCodeArt WordPress Theme, Copyright 2021 by Bican Marian Valeriu
+WeCodeArt WordPress Theme, Copyright 2023 by Bican Marian Valeriu
 WeCodeArt is distributed under the terms of the GNU General Public License v2
 
 ## Support

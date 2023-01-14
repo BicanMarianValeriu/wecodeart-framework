@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2022, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -108,6 +108,9 @@ class Button extends Dynamic {
 		switch( $class ) :
 			case 'outline' :
 				$inline = "
+					.is-style-outline :where(.wp-block-button__link) {
+						--wp--color--rgb: 52, 58, 64;
+					}
 					.is-style-outline.wp-block-button .wp-block-button__link {
 						--wp--bg-opacity: 0;
 						background-color: rgba(var(--wp--color--rgb), var(--wp--bg-opacity));
