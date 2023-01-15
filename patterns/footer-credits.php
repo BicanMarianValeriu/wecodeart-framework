@@ -5,8 +5,8 @@
  * Categories: wecodeart
  */
 ?>
-<!-- wp:group {"layout":{"inherit":true,"type":"constrained"},"align":"full","backgroundColor":"light","className":"py-3"} -->
-<div class="wp-block-group alignfull py-3 has-light-background-color has-background">
+<!-- wp:group {"align":"full","textColor":"dark","className":"py-3","layout":{"inherit":true,"type":"constrained"},"className":"py-3"} -->
+<div class="wp-block-group alignfull py-3 has-dark-color has-text-color">
 	<!-- wp:paragraph {"align":"center"} -->
 	<p class="has-text-align-center"><?php
 	

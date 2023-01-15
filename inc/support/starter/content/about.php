@@ -7,7 +7,7 @@ return [
 	'post_title'   => _x( 'Features', 'Theme starter content', 'wecodeart' ),
 	'post_content' => '<!-- wp:cover {"url":"' . trailingslashit( get_template_directory_uri() ) . 'assets/images/wordpress-cover.jpg","dimRatio":80,"focalPoint":{"x":"1.00","y":"1.00"},"minHeight":600,"gradient":"primary-to-vivid-purple","contentPosition":"center center","align":"full"} -->
 	<div class="wp-block-cover alignfull" style="min-height:600px">
-	<span aria-hidden="true" class="has-background-dim-80 wp-block-cover__gradient-background has-primary-to-vivid-purple-gradient-background has-background-dim has-background-gradient"></span>
+	<span aria-hidden="true" class="wp-block-cover__background has-background-dim-80 has-background-dim wp-block-cover__gradient-background has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
 	<img class="wp-block-cover__image-background" alt="" src="' . trailingslashit( get_template_directory_uri() ) . 'assets/images/wordpress-cover.jpg" style="object-position:100% 100%" data-object-fit="cover" data-object-position="100% 100%"/>
 	<div class="wp-block-cover__inner-container">
 	<!-- wp:heading {"textAlign":"center","level":1,"className":"display-1"} -->
@@ -16,7 +16,8 @@ return [
 	</div>
 	</div>
 	<!-- /wp:cover -->
-	<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":{"top":"3rem","left":"3rem"}}},"className":"py-5","layout":{"inherit":true}} -->
+	
+	<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":{"top":"3rem","left":"3rem"}}},"className":"py-5","layout":{"inherit":true,"type":"constrained"}} -->
 	<div class="wp-block-group alignfull py-5" id="list">
 	<!-- wp:columns {"className":""} -->
 	<div class="wp-block-columns">
@@ -27,8 +28,10 @@ return [
 	<!-- /wp:paragraph -->
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","className":"display-2"} -->
 	<h2 class="has-text-align-center display-2 has-primary-color has-text-color" id="performance">Performance-Focused</h2>
-	<!-- /wp:heading --></div>
-	<!-- /wp:column --></div>
+	<!-- /wp:heading -->
+	</div>
+	<!-- /wp:column -->
+	</div>
 	<!-- /wp:columns -->
 	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}}} -->
 	<div class="wp-block-columns">
@@ -77,14 +80,15 @@ return [
 	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
-	<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":{"top":"3rem","left":"3rem"}}},"backgroundColor":"light","className":"py-5","layout":{"inherit":true}} -->
+
+	<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":{"top":"3rem","left":"3rem"}}},"backgroundColor":"light","className":"py-5","layout":{"inherit":true,"type":"constrained"}} -->
 	<div class="wp-block-group alignfull py-5 has-light-background-color has-background">
 	<!-- wp:columns {"className":""} -->
 	<div class="wp-block-columns">
 	<!-- wp:column {"className":""} -->
 	<div class="wp-block-column">
 	<!-- wp:heading {"textAlign":"center","textColor":"primary","className":"display-2"} -->
-	<h2 class="has-text-align-center display-2 has-primary-color has-text-color" id="performance">Gutenberg Improvements</h2>
+	<h2 class="has-text-align-center display-2 has-primary-color has-text-color" id="improvements">Gutenberg Improvements</h2>
 	<!-- /wp:heading -->
 	</div>
 	<!-- /wp:column -->
@@ -99,7 +103,8 @@ return [
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
 	<p>Custom and improved blocks HTML markup where required following the <a rel="noreferrer noopener" href="https://validator.w3.org/" target="_blank">W3C Markup Validation</a> standards. Rendering navigation blocks (link, home-link, dropdown, pages) using the same markup.</p>
-	<!-- /wp:paragraph --></div>
+	<!-- /wp:paragraph -->
+	</div>
 	<!-- /wp:column -->
 	<!-- wp:column -->
 	<div class="wp-block-column">
@@ -108,7 +113,8 @@ return [
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
 	<p>Simplified blocks CSS and Javascript code and removed unnecessary rules making it easier to adjust them as you like via Editor (Global Styles). In addition, the assets are loaded on-demand.</p>
-	<!-- /wp:paragraph --></div>
+	<!-- /wp:paragraph -->
+	</div>
 	<!-- /wp:column -->
 	<!-- wp:column -->
 	<div class="wp-block-column">
@@ -130,7 +136,7 @@ return [
 	<h3>Class Utilities</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
-	<p>You can use the block`s Advanced Tab --> Classname(s) to load additional CSS utilities. Those classes will appear as suggestions in a dropdown (margin/padding/flex utilities and more). The CSS rules for utilities will be loaded on-demand and in order of their appearance.</p>
+	<p>You can use the block`s Advanced Tab --&gt; Classname(s) to load additional CSS utilities. Those classes will appear as suggestions in a dropdown (margin/padding/flex utilities and more). The CSS rules for utilities will be loaded on-demand and in order of their appearance.</p>
 	<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:column -->
@@ -140,18 +146,21 @@ return [
 	<h3>Custom Styles</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
-	<p>Are you familiar with CSS and do you need to add a small adjustment to your block? No worries, you can use the block`s Advanced Tab --> Custom CSS to do that - with live preview. You can use any CSS syntax including media queries.</p>
-	<!-- /wp:paragraph --></div>
+	<p>Are you familiar with CSS and do you need to add a small adjustment to your block? No worries, you can use the block`s Advanced Tab --&gt; Custom CSS to do that - with live preview. You can use any CSS syntax including media queries.</p>
+	<!-- /wp:paragraph -->
+	</div>
 	<!-- /wp:column -->
 	<!-- wp:column -->
-	<div class="wp-block-column"></div>
+	<div class="wp-block-column">
+	</div>
 	<!-- /wp:column -->
 	</div>
 	<!-- /wp:columns -->
 	</div>
 	<!-- /wp:group -->
-	<!-- wp:group {"align":"full","backgroundColor":"primary","textColor":"white","className":"py-5 my-0","layout":{"inherit":true}} -->
-	<div class="wp-block-group alignfull py-5 my-0 has-white-color has-primary-background-color has-text-color has-background">
+
+	<!-- wp:group {"align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"primary","textColor":"white","className":"py-5","layout":{"inherit":true,"type":"constrained"}} -->
+	<div class="wp-block-group alignfull py-5 has-white-color has-primary-background-color has-text-color has-background" style="margin-top:0;margin-bottom:0">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":"2rem"}},"className":"flex-column flex-md-row"} -->
 	<div class="wp-block-columns flex-column flex-md-row">
 	<!-- wp:column {"className":""} -->
@@ -167,7 +176,7 @@ return [
 	<!-- wp:column -->
 	<div class="wp-block-column">
 	<!-- wp:heading {"level":3,"textColor":"white"} -->
-	<h3 class="has-color has-white-color" id="deeply-commited">Deeply Committed</h3>
+	<h3 class="has-color has-white-color has-text-color" id="deeply-commited">Deeply Committed</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
@@ -177,7 +186,7 @@ return [
 	<!-- wp:column -->
 	<div class="wp-block-column">
 	<!-- wp:heading {"level":3,"textColor":"white"} -->
-	<h3 class="has-color has-white-color" id="highly-skilled">Highly Skilled</h3>
+	<h3 class="has-color has-white-color has-text-color" id="highly-skilled">Highly Skilled</h3>
 	<!-- /wp:heading -->
 	<!-- wp:paragraph -->
 	<p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
