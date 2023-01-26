@@ -1,4 +1,5 @@
 node_modules/
+assets/fonts/
 .DS_Store
 yarn.lock
 .idea/
