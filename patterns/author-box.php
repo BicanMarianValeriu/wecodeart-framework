@@ -16,7 +16,7 @@
         <!-- /wp:column -->
         <!-- wp:column -->
         <div class="wp-block-column">
-            <!-- wp:post-author-name {"isLink":true,"fontSize":"large"} /-->
+            <!-- wp:post-author {"isLink":true,"fontSize":"large"} /-->
             <!-- wp:post-author-biography /-->
         </div>
         <!-- /wp:column -->

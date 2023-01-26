@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  WeCodeArt/Config/Exceptions/FileNotFoundException
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.9.5
  * @version		3.9.5
  */

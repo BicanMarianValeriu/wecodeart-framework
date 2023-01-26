@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\AuthorName
  * @since 		5.5.5
- * @version		5.6.2
+ * @version		5.7.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -37,7 +37,7 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
     
     ?>
     <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
-    <a href="<?php echo esc_url( $author->url ); ?>" rel="author">
+    <a class="wp-block-post-author__link" href="<?php echo esc_url( $author->url ); ?>" rel="author">
     <?php endif; ?>
         <span class="wp-block-post-author__name"><?php
         

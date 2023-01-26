@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Author
  * @since 		3.9.5
- * @version		5.6.2
+ * @version		5.7.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -59,7 +59,7 @@ wecodeart( 'styles' )->Utilities->load( [ 'me-2', 'flex-fill' ] );
     ?></div>
     <?php endif; ?>
     <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
-    <a href="<?php echo esc_url( $author->url ); ?>" rel="author">
+    <a class="wp-block-post-author__link" href="<?php echo esc_url( $author->url ); ?>" rel="author">
     <?php endif; ?>
         <span class="wp-block-post-author__name"><?php
         

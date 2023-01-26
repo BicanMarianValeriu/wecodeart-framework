@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg Blocks Registry
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
  * @version		5.6.3
  */
@@ -102,6 +102,7 @@ class Blocks implements Configuration {
         // // Site Blocks
 		$this->register( 'core/loginout',       Blocks\Site\Login::class );
 		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
+		$this->register( 'core/template-part',  Blocks\Site\Template::class );
 
         // Hooks
         $this->register_blocks();

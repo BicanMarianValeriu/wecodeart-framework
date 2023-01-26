@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Module
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
  * @version		5.6.9
  */
@@ -331,9 +331,8 @@ class Styles implements Integration {
 	 * @return 	void
 	 */
 	public function global_styles() {
-		// Box Sizing
-		$style  	= '*,*::before,*::after{box-sizing: border-box;}';
-
+		$style = '';
+		
 		// Colors RGB as CSS var
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );

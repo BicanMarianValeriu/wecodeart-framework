@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Admin
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.8.1
  * @version		5.4.5
  */

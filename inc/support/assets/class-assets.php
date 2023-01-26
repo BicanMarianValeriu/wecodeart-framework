@@ -7,9 +7,9 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Assets
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.4.0
- * @version		5.6.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support;
@@ -51,25 +51,55 @@ final class Assets implements Integration {
 	 */
 	public function register_hooks() {
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'front_scripts'		] );
-		add_action( 'wp_enqueue_scripts', 	[ $this, 'localize_js' 			] );
-		add_action( 'wp_enqueue_scripts', 	[ $this, 'inline_js' 			] );
 		add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer' 	] );
 	}
 
 	/**
-	 * Enqueue Front-End Styles
+	 * Enqueue Front-End Assets
 	 *
 	 * @since	1.0
-	 * @version	5.6.1
+	 * @version	5.7.2
 	 */
 	public function front_scripts() {
-		// Styles
-		// --Core
-		wp_enqueue_style( $this->make_handle(), $this->get_asset( 'css', 'frontend' ), [], wecodeart( 'version' ) );
-
-		// Scripts
 		// -- Core
 		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'frontend' ), [ 'wp-hooks' ], wecodeart( 'version' ), true );
+
+		$this->inline_css();
+		$this->inline_js();
+		$this->localize_js();
+	}
+
+	/**
+	 * WeCodeArt CSS Inline
+	 *
+	 * @since	5.7.2
+	 * @version	5.7.2
+	 *
+	 * @return 	void
+	 */
+	public function inline_css() {
+		$file = $this->get_asset( 'css', 'frontend' );
+
+		wp_add_inline_style( 'global-styles', wecodeart( 'styles' )::compress( file_get_contents( $file ), [
+			'comments' => true
+		] ) );
+	}
+
+	/**
+	 * WeCodeArt JS Inline
+	 *
+	 * @since	4.1.5
+	 * @version	5.4.7
+	 *
+	 * @return 	void
+	 */
+	public function inline_js() {
+		$data = 'document.addEventListener("DOMContentLoaded",function(){';
+		$data .= 'var _wjs = new wecodeart.JSM(wecodeart);';
+		$data .= '_wjs.loadEvents();';
+		$data .= '});';
+
+		wp_add_inline_script( $this->make_handle(), $data );
 	}
 
 	/**
@@ -99,23 +129,6 @@ final class Assets implements Integration {
 		$wecodeart = apply_filters( 'wecodeart/filter/support/assets/localize', $wecodeart );
 		
 		wp_localize_script( $this->make_handle(), 'wecodeart', $wecodeart );
-	}
-
-	/**
-	 * WeCodeArt JS Inline
-	 *
-	 * @since	4.1.5
-	 * @version	5.4.7
-	 *
-	 * @return 	void
-	 */
-	public function inline_js() {
-		$data = 'document.addEventListener("DOMContentLoaded",function(){';
-		$data .= 'var _wjs = new wecodeart.JSM(wecodeart);';
-		$data .= '_wjs.loadEvents();';
-		$data .= '});';
-
-		wp_add_inline_script( $this->make_handle(), $data );
 	}
 
 	/**

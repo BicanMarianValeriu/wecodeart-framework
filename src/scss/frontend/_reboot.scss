@@ -4,6 +4,11 @@
 // styles targeting irrelevant browsers while applying new styles.
 //
 // Normalize is licensed MIT. https://github.com/necolas/normalize.css
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
 
 // Root
 //

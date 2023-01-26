@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.4
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Gutenberg\Blocks;
 defined( 'ABSPATH' ) || exit();
 
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\dom;
 
 /**
  * Gutenberg Abstract Dynamic block.
@@ -80,17 +81,21 @@ abstract class Dynamic {
 	 * 
 	 * @return 	object $doc.
 	 */
-	protected function load_html( $content = '' ) {
-		$doc = new \DOMDocument();
-		// See https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/table-of-contents/index.php
-		libxml_use_internal_errors( true );
-		$doc->loadHTML( htmlspecialchars_decode(
-			utf8_decode( htmlentities( $content, ENT_COMPAT, get_option( 'blog_charset' ), false ) ),
-			ENT_COMPAT
-		), LIBXML_HTML_NOIMPLIED );
-		libxml_use_internal_errors( false );
+	protected function markup( $content = '' ) {
+		$doc = dom( $content );
 
 		return $doc;
+	}
+
+	/**
+	 * Load and manipulate HTML with DOMDocument.
+	 *
+	 * @param 	string $content    Block content. 		Default empty string.
+	 * 
+	 * @return 	object $doc.
+	 */
+	protected function load_html( $content = '' ) {
+		return $this->markup( $doc );
 	}
 	
 	/**
@@ -101,7 +106,7 @@ abstract class Dynamic {
 	 * @return 	string $content.
 	 */
 	protected function save_html( $content = '' ) {
-		return preg_replace( '~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $content );
+		return $content;
 	}
 
 	/**

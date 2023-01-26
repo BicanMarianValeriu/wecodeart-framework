@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Frontend
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.4.8
  * @version		5.7.1
  */

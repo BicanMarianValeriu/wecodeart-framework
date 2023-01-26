@@ -47,7 +47,7 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
     
     ?></span>
     <?php if ( get_prop( $attributes, [ 'isLink' ], false ) ) : ?>
-    <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>" class="wp-block-post-date__link me-2">
+    <a class="wp-block-post-date__link me-2" href="<?php echo esc_url( get_permalink( $post_id ) ); ?>">
     <?php endif; ?>
         <time class="wp-block-post-date__published"
             <?php if( isset( $modified ) ) : ?>

@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.7.0
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -19,6 +19,36 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+// use function unset;
+// use function isset;
+// use function empty;
+use function end;
+use function join;
+use function explode;
+use function sprintf;
+use function is_null;
+use function is_array;
+use function current;
+use function array_merge;
+use function array_filter;
+use function array_key_exists;
+use function add_filter;
+use function parse_blocks;
+use function wp_unique_id;
+use function wp_style_is;
+use function wp_script_is;
+use function wp_register_style;
+use function wp_enqueue_style;
+use function wp_enqueue_script;
+use function wp_add_inline_style;
+use function wp_parse_args;
+use function wp_list_filter;
+use function strpos;
+use function mb_strpos;
+use function preg_match;
+use function str_replace;
+use function sanitize_html_class;
+use function block_core_navigation_filter_out_empty_blocks;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -384,14 +414,22 @@ class Navigation extends Dynamic {
 		$colors     = $this->get_colors( $attributes );
 		$typography = $this->get_typography( $attributes );
 		$background = get_prop( $attributes, 'customBackgroundColor', self::get_class_color( $attributes ) );
+		$classnames = explode( ' ',  get_prop( $attributes, 'className', '' ) );
 
 		$classes 	= [ 'wp-block-navigation', 'navbar' ];
-		$classes[] 	= ( wecodeart( 'styles' )::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
-		
+		$excludes 	= [ 'navbar-light', 'navbar-dark' ];
+
+		// Detect navbar theme
+		if( count( array_intersect( $classnames, $excludes ) ) === 0 ) {
+			$classes[] = ( wecodeart( 'styles' )::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
+		}
+
+		// Navbar orientation
 		if( get_prop( $attributes, [ 'layout', 'orientation' ] ) === 'horizontal' ) {
 			$classes[] = 'navbar-expand';
 		}
 		
+		// Offcanvas
 		if( $value = get_prop( $attributes, 'overlayMenu' ) ) {
 			if( $value !== 'never' ) {
 				$classes 	= array_diff( $classes, [ 'navbar-expand' ] );
@@ -402,17 +440,17 @@ class Navigation extends Dynamic {
 			}
 		}
 		
+		// Hover or click
 		if( get_prop( $attributes, 'openSubmenusOnClick', false ) === false ) {
 			$classes[] 	= 'with-hover';
 		}
 
+		// Hide dropdown toggle
 		if( get_prop( $attributes, 'showSubmenuIcon', false ) === false ) {
 			$classes[] 	= 'hide-toggle';
 		}
 
-		$classnames = explode( ' ',  get_prop( $attributes, 'className', '' ) );
-
-		$classes    	= array_merge( $classes, $colors['classes'], $typography['classes'], $classnames );
+		$classes    	= array_merge( $classes, $classnames, $colors['classes'], $typography['classes'] );
 		$block_styles 	= get_prop( $attributes, 'styles', '' );
 
 		return [
@@ -794,13 +832,15 @@ class Navigation extends Dynamic {
 				.navbar-dark .navbar-brand {
 					color: var(--wp--preset--color--white);
 				}
-				.navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
+				.navbar-dark .navbar-brand:hover,
+				.navbar-dark .navbar-brand:focus {
 					color: var(--wp--preset--color--white);
 				}
 				.navbar-dark .navbar-nav .nav-link {
 					color: rgba(255, 255, 255, 0.55);
 				}
-				.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+				.navbar-dark .navbar-nav .nav-link:hover,
+				.navbar-dark .navbar-nav .nav-link:focus {
 					color: rgba(255, 255, 255, 0.75);
 				}
 				.navbar-dark .navbar-nav .nav-link.disabled {
@@ -832,16 +872,18 @@ class Navigation extends Dynamic {
 			break;
 			default:
 				$inline .= "
-					.navbar-light .navbar-brand {
+					.navbar-light .wp-site-logo {
 						color: rgba(0, 0, 0, 0.9);
 					}
-					.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
+					.navbar-light .wp-site-logo a:hover,
+					.navbar-light .wp-site-logo a:focus {
 						color: rgba(0, 0, 0, 0.9);
 					}
 					.navbar-light .navbar-nav .nav-link {
 						color: rgba(0, 0, 0, 0.55);
 					}
-					.navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+					.navbar-light .navbar-nav .nav-link:hover,
+					.navbar-light .navbar-nav .nav-link:focus {
 						color: rgba(0, 0, 0, 0.7);
 					}
 					.navbar-light .navbar-nav .nav-link.disabled {
@@ -894,7 +936,8 @@ class Navigation extends Dynamic {
 						border-top-left-radius: 0.25rem;
 						border-top-right-radius: 0.25rem;
 					}
-					.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+					.nav-tabs .nav-link:hover,
+					.nav-tabs .nav-link:focus {
 						border-color: #e9ecef #e9ecef #dee2e6;
 						isolation: isolate;
 					}
@@ -983,13 +1026,6 @@ class Navigation extends Dynamic {
 			justify-content: space-between;
 			padding-top: 0.5rem;
 			padding-bottom: 0.5rem;
-		}
-		.navbar-brand {
-			padding-top: 0.3125rem;
-			padding-bottom: 0.3125rem;
-			margin-right: 1rem;
-			font-size: 1.25rem;
-			white-space: nowrap;
 		}
 		.navbar-nav {
 			display: flex;

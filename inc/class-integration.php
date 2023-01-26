@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  Integration Interface
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.2
  * @version		5.0.0
  */

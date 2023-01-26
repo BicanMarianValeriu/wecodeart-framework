@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg Pattern
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Patterns;
@@ -127,7 +127,7 @@ class Pattern {
      * @return string
      */
 	public function get_name() {
-		return join( '/', [ self::NAMESPACE, sanitize_text_field( $this->slug ) ] );
+		return join( '/', [ self::NAMESPACE, $this->slug ] );
 	}
 
 	/**

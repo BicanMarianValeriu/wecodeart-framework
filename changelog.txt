@@ -1,9 +1,19 @@
 v5.7.2
+- Updated - core/navigation to remove automatic `navbar-dark|light` class if present in block attributes
+- Updated - core/file markup and CSS updates
+- Updated - core/site-logo markup and CSS updates / Ability for inline SVG upload
 - Updated - core/latest-posts post_type attribute to postType
+- Updated - core/post-read-more extend class to inherit button styles
+- Updated - Frontend CSS move inline to global styles
 - Updated - enabled useRootPaddingAwareAlignments and adjusted global CSS to fit
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
 - Fixed - core/button outline default color rgb variable added in CSS
+- Fixed - core/social inline CSS generation (for single SVG icons) if 2 or more blocks are used on the template
 - Added - shadow support in theme.json (upcoming WP versions)
+- Added - core/post-author link class (wp-block-post-author__link)
+- Added - core/post-terms link class (wp-block-post-terms__link)
+- Added - new dom() function to manipulate HTML markup for Gutenberg blocks
+- Added - Schema.org for header/footer/sidebar template parts
 
 v5.7.1
 - Updated - core/archives type attribute

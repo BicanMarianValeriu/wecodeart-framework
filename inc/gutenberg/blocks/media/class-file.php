@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_dom_element;
 
 /**
  * Gutenberg File block.
@@ -73,7 +74,8 @@ class File extends Dynamic {
 	 */
 	public function render( $attributes = [], $content = '', $block = null ) {
 		$exclude = [
-			
+			// To do, add text/background-colors (similar to button)
+			// But for now we wait as it will probably be included in the WP Core
 		];
 
 		$classes = explode( ' ', get_prop( $attributes, 'className', '' ) );
@@ -81,7 +83,7 @@ class File extends Dynamic {
 		$matched = array_intersect( $classes, $exclude );
 		$ommited = array_diff( $classes, $exclude );
 
-		$doc = $this->load_html( $content );
+		$doc = $this->markup( $content );
 
 		// Wrapper Changes
 		$wrapper	= $doc->getElementsByTagName( 'div' )->item(0);
@@ -90,22 +92,17 @@ class File extends Dynamic {
 		$wrapper->setAttribute( 'class', $classname );
 		
 		// Button Changes
-		$links	= $wrapper->getElementsByTagName( 'a' );
-		foreach( $links as $link ) {
-			if( $link->getAttribute( 'class' ) === 'wp-block-file__button' ) {
-				$btn_class  = [ 'wp-block-button__link' ];
-	
-				if( ! empty( $matched ) ) {
-					$btn_class = array_merge( $btn_class, $matched );
-				}
-
-				$link->setAttribute( 'class', join( ' ', $btn_class ) );
-			} else {
-				$link->setAttribute( 'class', 'wp-block-file__link' );
+		$download	= get_dom_element( 'a', $doc, 1 );
+		if( $download ) {
+			$btn_class  = [ $download->getAttribute( 'class' ) ];
+			if( ! empty( $matched ) ) {
+				$btn_class = array_merge( $btn_class, $matched );
 			}
+	
+			$download->setAttribute( 'class', join( ' ', $btn_class ) );
 		}
 
-		return $this->save_html( $doc->saveHTML() );
+		return $doc->saveHTML();
 	}
 
 	/**
@@ -126,15 +123,15 @@ class File extends Dynamic {
 		.wp-block-file::before {
 			content: '';
 			display: block;
-			width: 1.5em;
+			width: 1em;
 			height: 1em;
-			margin-right: .5em;
+			margin-right: .75em;
 			background-image: url('$svg');
 			background-size: contain;
 			background-repeat: no-repeat;
 			background-position: center;
 		}
-		.wp-block-file .wp-block-button__link {
+		.wp-block-file .wp-element-button {
 			margin-left: 1rem;
 		}
 		";

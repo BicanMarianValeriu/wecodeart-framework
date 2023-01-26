@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Conditional
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		4.0
  * @version		5.5.5
  */

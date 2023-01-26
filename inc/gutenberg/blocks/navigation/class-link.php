@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
  * @version		5.6.8
  */
@@ -202,10 +202,14 @@ class Link extends Dynamic {
 	public function get_link_type( $classes = [] ) {
 		$mod = '';
 		// Loop through array of linkmod classes to handle their $atts.
-		if ( empty( $classes ) ) return $mod;
+		if ( empty( $classes ) ) {
+			return $mod;
+		}
 
 		foreach ( $classes as $class ) {
-			if ( empty( $class ) ) continue;
+			if ( empty( $class ) ) {
+				continue;
+			}
 
 			if ( 'dropdown-header' === $class ) {
 				$mod = 'dropdown-header';
@@ -226,8 +230,13 @@ class Link extends Dynamic {
 	 */
 	public function get_link_tag( $type ) {
 		$output = 'a';
-		if ( 'dropdown-header' === $type || 'dropdown-item-text' === $type ) $output = 'span';
-		elseif ( 'dropdown-divider' === $type ) $output = 'div';
+
+		if ( 'dropdown-header' === $type || 'dropdown-item-text' === $type ) {
+			$output = 'span';
+		} elseif ( 'dropdown-divider' === $type ) {
+			$output = 'div';
+		}
+
 		return $output;
 	}
 

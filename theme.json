@@ -103,7 +103,7 @@
 			"palette": [
 				{
 					"slug": "primary",
-					"color": "#2388ed",
+					"color": "#1188ff",
 					"name": "Primary"
 				},
 				{
@@ -143,7 +143,7 @@
 				},
 				{
 					"slug": "dark",
-					"color": "#343a40",
+					"color": "#1b1b1b",
 					"name": "Dark"
 				},
 				{
@@ -524,7 +524,7 @@
 		"typography": {
 			"fontSize": "var:preset|font-size|normal",
 			"fontFamily": "var:preset|font-family|open-sans",
-			"lineHeight": "1.5"
+			"lineHeight": "1.7"
 		}
 	}
 }

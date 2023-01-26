@@ -7,28 +7,39 @@
  *
  * @package 	WeCodeArt Framework 
  * @subpackage 	Functions
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version     5.0.0
+ * @version     5.7.2
  */
 
 namespace WeCodeArt\Functions;
 
 defined( 'ABSPATH' ) || exit();
 
+use function defined;
+use function is_a;
+use function libxml_clear_errors;
+use function libxml_use_internal_errors;
+use function mb_convert_encoding;
+use DOMDocument;
+use DOMElement;
+
 /**
  * Helper function to encode an array to an excaped json string
  * Useful to use it for placing encoded object in html attrs
  *
  * @since	3.5
- * @param 	array $json
+ * @version 5.7.2
+ * @param 	array   $json
  *
  * @return 	string 
  */
 function toJSON( $json = array() ) {
-    if( ! is_array( $json ) ) return null;
-    $json = str_replace( '"', "'", json_encode( $json ) );
-    return htmlspecialchars( $json, ENT_QUOTES, 'UTF-8' );
+    if( ! is_array( $json ) ) {
+        return null;
+    }
+
+    return htmlspecialchars( str_replace( '"', "'", json_encode( $json ) ), ENT_QUOTES, get_option( 'blog_charset' ) );
 }
 
 /**
@@ -266,4 +277,114 @@ function flatten( $array ) {
     }
 
     return $result;
+}
+
+/**
+ * Returns a formatted DOMDocument object from a given string.
+ *
+ * @since 5.7.2
+ *
+ * @param string $html HTML string to convert to DOM.
+ *
+ * @return \DOMDocument
+ */
+function dom( string $html ): DOMDocument {
+	$dom = new DOMDocument();
+
+	if ( ! $html ) {
+		return $dom;
+	}
+
+	$libxml_previous_state = libxml_use_internal_errors( true );
+
+	$dom->preserveWhiteSpace = true;
+
+	if ( defined( 'LIBXML_HTML_NOIMPLIED' ) && defined( 'LIBXML_HTML_NODEFDTD' ) ) {
+		$options = LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD;
+	} elseif ( defined( 'LIBXML_HTML_NOIMPLIED' ) ) {
+		$options = LIBXML_HTML_NOIMPLIED;
+	} elseif ( defined( 'LIBXML_HTML_NODEFDTD' ) ) {
+		$options = LIBXML_HTML_NODEFDTD;
+	} else {
+		$options = 0;
+	}
+
+	$dom->loadHTML( mb_convert_encoding( $html, 'HTML-ENTITIES', get_option( 'blog_charset' ) ), $options );
+
+	$dom->formatOutput = true;
+
+	libxml_clear_errors();
+	libxml_use_internal_errors( $libxml_previous_state );
+
+	return $dom;
+}
+
+/**
+ * Returns a formatted DOMElement object from a DOMDocument object.
+ *
+ * @since 5.7.2
+ *
+ * @param string $tag            HTML tag.
+ * @param mixed  $dom_or_element DOMDocument or DOMElement.
+ * @param int    $index          Index of element to return.
+ *
+ * @return \DOMElement|null
+ */
+function get_dom_element( string $tag, $dom_or_element, int $index = 0 ) {
+	if ( ! is_a( $dom_or_element, DOMDocument::class ) && ! is_a( $dom_or_element, DOMElement::class ) ) {
+		return null;
+	}
+
+	$element = $dom_or_element->getElementsByTagName( $tag )->item( $index );
+
+	if ( ! $element ) {
+		return null;
+	}
+
+	return dom_element( $element );
+}
+
+/**
+ * Casts a DOMNode to a DOMElement.
+ *
+ * @since 5.7.2
+ *
+ * @param mixed $node DOMNode to cast to DOMElement.
+ *
+ * @return \DOMElement|null
+ */
+function dom_element( $node ) {
+	if ( $node->nodeType === XML_ELEMENT_NODE ) {
+		/* @var \DOMElement $node DOM Element node */
+		return $node;
+	}
+
+	return null;
+}
+
+/**
+ * Returns array of dom elements by class name.
+ *
+ * @since 5.7.2
+ *
+ * @param DOMDocument|DOMElement $dom        DOM document or element.
+ * @param string                 $class_name Element class name.
+ * @param string                 $tag        Element tag name (optional).
+ *
+ * @return array
+ */
+function get_elements_by_class_name( $dom, string $class_name, string $tag = '*' ): array {
+	$elements = [];
+
+	foreach ( $dom->getElementsByTagName( $tag ) as $element ) {
+		if ( $element->hasAttribute( 'class' ) ) {
+			$classes = explode( ' ', $element->getAttribute( 'class' ) );
+
+			if ( in_array( $class_name, $classes, true ) ) {
+				$elements[] = $element;
+			}
+		}
+	}
+
+	return $elements;
 }

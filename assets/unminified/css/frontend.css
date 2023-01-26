@@ -1,13 +1,12 @@
 /*!********************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/scss/frontend/frontend.scss ***!
   \********************************************************************************************************************************************************************************************************************************************************/
-/*!
-Theme Name: WeCodeArt
-Theme URI: https://www.wecodeart.com/
-Package: Core CSS
-Author: Bican Marian Valeriu @wecodeart
-Author URI: https://www.wecodeart.com/about/
-*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   --wp--blue: #2388ed;
   --wp--indigo: #6610f2;
@@ -458,14 +457,6 @@ progress {
 
 /* 	= Base
 --------------------------------------------------------------- */
-/*
- * Alignment styles.
- * These rules are temporary, and should not be relied on or modified too heavily by themes
- *
- * Relevant issues:
- * https://github.com/WordPress/gutenberg/issues/35607
- * https://github.com/WordPress/gutenberg/issues/35884
- */
 .wp-site-blocks > * + * {
   -webkit-margin-before: 0 !important;
           margin-block-start: 0 !important;
@@ -1058,47 +1049,41 @@ progress {
   text-transform: uppercase;
 }
 
-.display-1 {
-  font-size: var(--wp--custom--display--1);
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
   font-weight: 300;
   line-height: 1.2;
+}
+
+.display-1 {
+  font-size: var(--wp--custom--display--1);
 }
 
 .display-2 {
   font-size: var(--wp--custom--display--2);
-  font-weight: 300;
-  line-height: 1.2;
 }
 
 .display-3 {
   font-size: var(--wp--custom--display--3);
-  font-weight: 300;
-  line-height: 1.2;
 }
 
 .display-4 {
   font-size: var(--wp--custom--display--4);
-  font-weight: 300;
-  line-height: 1.2;
 }
 
 .display-5 {
   font-size: var(--wp--custom--display--5);
-  font-weight: 300;
-  line-height: 1.2;
 }
 
 .display-6 {
   font-size: var(--wp--custom--display--6);
-  font-weight: 300;
-  line-height: 1.2;
 }
 
-.list-unstyled {
-  padding-left: 0;
-  list-style: none;
-}
-
+.list-unstyled,
 .list-inline {
   padding-left: 0;
   list-style: none;

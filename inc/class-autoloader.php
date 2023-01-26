@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  Autoloader
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
  * @version 	4.0.2
  */

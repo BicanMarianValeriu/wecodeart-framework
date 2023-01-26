@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Terms
  * @since 		5.0.0
- * @version		5.5.5
+ * @version		5.7.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -55,7 +55,7 @@ if( isset( $icon ) ) {
     if( isset( $primary ) ) {
         
         printf( 
-            '<a href="%s" rel="category tag">%s</a>', 
+            '<a class="wp-block-post-terms__link" href="%s" rel="category tag">%s</a>', 
             esc_url( get_term_link( $primary ) ),
             esc_html( get_term_by( 'id', $primary, 'category' )->name )
         );

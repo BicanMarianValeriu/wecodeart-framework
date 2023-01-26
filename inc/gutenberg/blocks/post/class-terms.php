@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -87,7 +87,11 @@ class Terms extends Dynamic {
 			'post_id'		=> $block->context['postId'],
 			'count'			=> count( $terms ),
 			'attributes'	=> $attributes,
-			'terms'			=> get_the_term_list( $block->context['postId'], $attributes['term'], '', ', ' ),
+			'terms'			=> str_replace(
+				'<a href=',
+				'<a class="wp-block-post-terms__link" href=',
+				get_the_term_list( $block->context['postId'], $attributes['term'], '', ', ' )
+			),
 		];
 
 		$template = wecodeart_template( 'meta/terms', $args, false );

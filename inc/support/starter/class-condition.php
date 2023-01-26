@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Starter\Condition\is_fresh
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
  * @version		5.0.0
  */

@@ -1,12 +1,4 @@
 @charset "UTF-8";
-/*!
-Theme Name: WeCodeArt
-Theme URI: https://www.wecodeart.com/
-Package: Core CSS
-Author: Bican Marian Valeriu @wecodeart
-Author URI: https://www.wecodeart.com/about/
-*/
-
 // Required
 @import "~bootstrap/scss/functions";
 @import "./../abstracts/variables";
@@ -28,22 +20,22 @@ Author URI: https://www.wecodeart.com/about/
 // This will be added as utilities
 // @import "~bootstrap/scss/utilities";     // XX Done as utility
 // @import "~bootstrap/scss/utilities/api"; // XX Done as utility
-// @import "~bootstrap/scss/alert";         // XX ToDO as utility
-// @import "~bootstrap/scss/badge";         // XX ToDO as utility
-// @import "~bootstrap/scss/card";          // XX ToDO as utility
-// @import "~bootstrap/scss/list-group";    // XX ToDO as utility
+// @import "~bootstrap/scss/alert";         // XX Can be achieved in Gutenberg
+// @import "~bootstrap/scss/badge";         // XX Can be achieved in Gutenberg
+// @import "~bootstrap/scss/card";          // XX Can be achieved in Gutenberg
+// @import "~bootstrap/scss/list-group";    // XX Can be achieved in Gutenberg
 
 // This is added as a block style
-// @import "~bootstrap/scss/nav";           // XX Block
-// @import "~bootstrap/scss/navbar";        // XX Block
-// @import "~bootstrap/scss/dropdown";      // XX Block
-// @import "~bootstrap/scss/offcanvas";     // XX Block
-// @import "~bootstrap/scss/close";         // XX Block
-// @import "~bootstrap/scss/button-group";  // XX Block
-// @import "~bootstrap/scss/buttons";       // XX Block
-// @import "~bootstrap/scss/tables";        // XX Block
-// @import "~bootstrap/scss/forms";         // XX Block
-// @import "~bootstrap/scss/pagination";    // XX Block
+// @import "~bootstrap/scss/nav";           // XX Block with CSS Adjusted
+// @import "~bootstrap/scss/navbar";        // XX Block with CSS Adjusted
+// @import "~bootstrap/scss/dropdown";      // XX Block with CSS Adjusted
+// @import "~bootstrap/scss/offcanvas";     // XX Block with CSS Adjusted
+// @import "~bootstrap/scss/close";         // XX Block with CSS Adjusted
+// @import "~bootstrap/scss/button-group";  // XX Block with CSS Adjusted
+// @import "~bootstrap/scss/buttons";       // XX Block with CSS Adjusted
+// @import "~bootstrap/scss/tables";        // XX Block with CSS Adjusted
+// @import "~bootstrap/scss/forms";         // XX Included when wecodeart_input() is called 
+// @import "~bootstrap/scss/pagination";    // XX Block with CSS Adjusted
 
 // This will be added as extension - requires JS
 // @import "~bootstrap/scss/accordion";     // XX Extension

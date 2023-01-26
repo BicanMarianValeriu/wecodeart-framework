@@ -98,11 +98,19 @@
 	text-transform: uppercase;
 }
 
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+    font-weight: 300;
+    line-height: 1.2;
+}
+
 @for $i from 1 through 6 {
 	.display-#{$i} {
 		font-size: var(--wp--custom--display--#{$i});
-		font-weight: 300;
-		line-height: 1.2;
 	}
 }
 

@@ -7,9 +7,9 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Header Class
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		5.7.0
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Core;
@@ -52,7 +52,7 @@ class Header {
 			'className'	=> 'wp-site-header sticky-top'
 		] );
 
-		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '","layout":{"inherit":true}} /-->';
+		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '"} /-->';
 
 		echo do_blocks( $content );
 	}

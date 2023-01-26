@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -57,7 +57,7 @@ class Quote extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {		
-		$doc = $this->load_html( $content );
+		$doc = $this->markup( $content );
 		
 		// Quote Changes
 		$quote	= $doc->getElementsByTagName( 'blockquote' )->item(0);
@@ -79,7 +79,7 @@ class Quote extends Dynamic {
 			$figure->appendChild( $caption );
 		}
 
-		return $this->save_html( $doc->saveHTML() );
+		return $doc->saveHTML();
 	}
 
 	/**

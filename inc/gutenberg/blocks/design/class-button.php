@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
  * @version		5.7.2
  */
@@ -57,31 +57,31 @@ class Button extends Dynamic {
 			'inline_style' 	=> static::get_style( 'outline' )
 		] );
 		
-		// \add_filter( 'register_block_type_args',	[ $this, 'block_type_args' 		], 20, 2 );
+		\add_filter( 'register_block_type_args',	[ $this, 'block_type_args' 		], 20, 2 );
 		\add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'	], 10, 2 );
 	}
 
 	/**
 	 * Block args
 	 *
-	 * @since	5.7.0
-	 * @version	5.7.0
+	 * @since	5.7.2
+	 * @version	5.7.2
 	 *
 	 * @return 	array
 	 */
-	// public function block_type_args( $args, $block_name ) {
-	// 	if ( $block_name === $this->get_block_type() && get_prop( $args, [ 'supports', '__experimentalSelector' ] ) ) {
-	// 		$read_more = [
-	// 			'.wp-block-read-more',
-	// 		];
+	public function block_type_args( $args, $block_name ) {
+		if ( $block_name === $this->get_block_type() && get_prop( $args, [ 'supports', '__experimentalSelector' ] ) ) {
+			$read_more = [
+				'.wp-block-read-more',
+			];
 
-	// 		$selectors = array_merge( (array) get_prop( $args, [ 'supports', '__experimentalSelector' ], [] ), $read_more );
+			$selectors = array_merge( (array) get_prop( $args, [ 'supports', '__experimentalSelector' ], [] ), $read_more );
 			
-	// 		$args['supports']['__experimentalSelector'] = implode( ',', array_filter( $selectors ) );
-	// 	}
+			$args['supports']['__experimentalSelector'] = implode( ',', array_filter( $selectors ) );
+		}
 
-	// 	return $args;
-	// }
+		return $args;
+	}
 
 	/**
 	 * Dynamically renders the `core/button` block.

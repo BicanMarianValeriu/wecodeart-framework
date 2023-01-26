@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.7.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -69,22 +69,15 @@ class Social extends Dynamic {
 				return strpos( $val, 'is-style-' ) === 0;
 			} );
 
-			static $loaded_styles = [
-				'classes'	=> [],
-				'services' 	=> []
-			];
+			static $loaded_styles = [];
 
 			foreach( $services as $service ) {
 				$classname = current( $classnames );
 
-				if( 
-					in_array( $classname, $loaded_styles['classes'], true ) &&
-					in_array( $service, $loaded_styles['services'], true )
-				) continue;
+				if( array_key_exists( $classname, $loaded_styles ) && in_array( $service, $loaded_styles[$classname] ) ) continue;
 
 				$inline_css .= $this->get_inline_style( $classname , $service );
-				$loaded_styles['classes'][] = $classname;
-				$loaded_styles['services'][] = $service;
+				$loaded_styles[$classname][] = $service;
 			}
 			
 			add_action( 'wp_print_styles', function() use ( $inline_css ) {
@@ -227,6 +220,13 @@ class Social extends Dynamic {
 			display: flex;
 			justify-content: center;
 		}
+		.wp-block-social-links.has-visible-labels a {
+			padding: .5em 1em;
+			flex-direction: row;
+		}
+		.wp-block-social-links.has-visible-labels svg {
+			margin-right: .5em;
+		}
 		.wp-block-social-links.is-style-pill-shape .wp-social-link {
 			width: auto;
 		}
@@ -254,7 +254,7 @@ class Social extends Dynamic {
 			border-radius: 9999px;
 			transition: all 0.1s ease;
 			padding: 0.35em;
-			line-height: 0;
+			line-height: 1;
 			text-decoration: none;
 			border: none;
 			box-shadow: none;

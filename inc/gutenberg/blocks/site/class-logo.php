@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -18,7 +18,18 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use function str_contains;
+use function str_replace;
+use function dirname;
+use function content_url;
+use function method_exists;
+use function add_filter;
+use function file_exists;
+use function file_get_contents;
+use function get_template_directory;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\dom;
+use function WeCodeArt\Functions\get_dom_element;
 
 /**
  * Gutenberg Site Logo block.
@@ -45,22 +56,55 @@ class Logo extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_filter( 'get_custom_logo',  [ $this, 'custom_logo'  ] );
+		\add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'	], 10, 2 );
     }
 
     /**
 	 * Filter Custom Logo
 	 * 
-	 * @since  	5.0.0
-	 * @version	5.2.7
+	 * @since  	5.7.2
+	 * @version	5.7.2
 	 * 
 	 * @return 	string
 	 */
-	public function custom_logo( $html ) {
-		$search 	= '/' . preg_quote( 'class="custom-logo-link', '/' ) . '/';
-		$replace 	= 'class="navbar-brand wp-block-site-logo__link';
+	public function render( $content = '', $block = [] ) {
+		$dom	= dom( $content );
+		$div  	= get_dom_element( 'div', $dom );
+		$link 	= get_dom_element( 'a', $div );
+		$img  	= get_dom_element( 'img', $link ?? $div );
 
-		return preg_replace( $search, $replace, $html, 1 );
+		$link->setAttribute( 'class', 'wp-block-site-logo__link' );
+		$img->setAttribute( 'class', 'wp-block-site-logo__img' );
+
+		// If no image, bail early.
+		if ( ! $img ) {
+			return $content;
+		}
+
+		// If image is SVG, import it.
+		if ( str_contains( $content, '.svg' ) ) {
+			$file = str_replace( content_url(), dirname( dirname( get_template_directory() ) ), $img->getAttribute( 'src' ) );
+	
+			if ( ! file_exists( $file ) ) {
+				return $content;
+			}
+	
+			$svg = $dom->importNode( dom( file_get_contents( $file ) )->documentElement, true );
+	
+			if ( ! method_exists( $svg, 'setAttribute' ) ) {
+				return $content;
+			}
+	
+			$svg->setAttribute( 'width', $img->getAttribute( 'width' ) );
+			$svg->setAttribute( 'height', $img->getAttribute( 'height' ) );
+			$svg->setAttribute( 'aria-label', $img->getAttribute( 'alt' ) );
+			$svg->setAttribute( 'class', $img->getAttribute( 'class' ) );
+	
+			( $link ?? $div )->removeChild( $img );
+			( $link ?? $div )->appendChild( $svg );
+		}
+
+		return $dom->saveHTML();
 	}
 
 	/**
@@ -70,34 +114,31 @@ class Logo extends Dynamic {
 	 */
 	public function styles() {
 		return '
-		.wp-block-site-logo {
-            line-height: 0;
-        }
 		.wp-block-site-logo.is-style-rounded {
 			border-radius: 9999px;
 		}
-		.wp-block-site-logo.is-default-size img {
+		.wp-block-site-logo.is-default-size :where(img,svg) {
             max-width: 120px;
             height: auto;
         }
         .wp-block-site-logo.aligncenter {
             display: table;
         }
-        .wp-block-site-logo.aligncenter img {
+        .wp-block-site-logo.aligncenter :where(img,svg) {
             display: block;
             margin: 0 auto;
         }
-		.wp-block-site-logo:is(.alignleft,.aligncenter,.alignright) {
-			margin-bottom: 0;
-		}
-		.wp-block-site-logo:where(.alignleft,.aligncenter,.alignright) .navbar-brand {
-			margin: 0;
-		}
-        .wp-block-site-logo :where(a,img) {
+		.wp-block-site-logo > * {
+			padding-top: 0.3125rem;
+			padding-bottom: 0.3125rem;
+        }
+        .wp-block-site-logo :where(a,img,svg) {
             border-radius: inherit;
         }
         .wp-block-site-logo a {
-            display: inline-block;
+			display: inline-block;
+			color: inherit;
+			white-space: nowrap;
         }
 		';
 	}

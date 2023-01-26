@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -70,7 +70,7 @@ class Table extends Dynamic {
 
 		$border = get_prop( $attributes, [ 'style', 'border' ] );
 
-		$doc = $this->load_html( $content );
+		$doc = $this->markup( $content );
 
 		// Wrapper Changes
 		$wrapper	= $doc->getElementsByTagName( 'figure' )->item(0);
@@ -100,7 +100,7 @@ class Table extends Dynamic {
 		// Set Table Classname
 		$table->setAttribute( 'class', join( ' ', $table_cls ) );
 
-		return $this->save_html( $doc->saveHTML() );
+		return $doc->saveHTML();
 	}
 
 	/**

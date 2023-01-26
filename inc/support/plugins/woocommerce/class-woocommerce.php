@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\WooCommerce
- * @copyright   Copyright (c) 2022, WeCodeArt Framework
+ * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		1.9
  * @version		5.7.1
  */
