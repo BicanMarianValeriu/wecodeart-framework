@@ -148,7 +148,7 @@ final class Assets implements Integration {
 		if( ! in_array( $type, [ 'style', 'script' ] ) ) {
 			return _doing_it_wrong(
 				__CLASS__, 
-				sprintf( esc_html__( 'When using "%s" method you must define the 3rd parameter (style or script).', 'wecodeart' ), __FUNCTION__ ),
+				sprintf( esc_html__( 'When using "%s" method you must define 3rd parameter (style or script).', 'wecodeart' ), __FUNCTION__ ),
 				'5.7.2'
 			);
 		}
@@ -195,7 +195,9 @@ final class Assets implements Integration {
 			get_prop( $data, 'media' )
 		];
 
-		wp_register_style( ...$args );
+		if ( ! in_array( $handle, self::$styles, true ) && ! wp_style_is( $handle, 'registered' ) ) {
+			wp_register_style( ...$args );
+		}
 
 		self::$styles[$handle] = $data;
 	}
@@ -225,7 +227,9 @@ final class Assets implements Integration {
 			get_prop( $data, 'footer' )
 		];
 
-		wp_register_script( ...$args );
+		if ( ! in_array( $handle, self::$scripts, true ) && ! wp_script_is( $handle, 'registered' ) ) {
+			wp_register_script( ...$args );
+		}
 
 		self::$scripts[$handle] = $data;
 	}
@@ -249,7 +253,7 @@ final class Assets implements Integration {
 			return (bool) $condition;
 		};
 
-		foreach( self::$scripts as $handle => $data ) {
+		foreach( $this->all( 'scripts' ) as $handle => $data ) {
 			// Condition
 			if( $should_load( $data ) === false ) continue;
 
@@ -267,7 +271,7 @@ final class Assets implements Integration {
 			}
 		}
 		
-		foreach( self::$styles as $handle => $data ) {
+		foreach( $this->all( 'styles' ) as $handle => $data ) {
 			// Condition
 			if( $should_load( $data ) === false ) continue;
 
