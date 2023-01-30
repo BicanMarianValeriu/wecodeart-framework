@@ -28,7 +28,6 @@ use function file_exists;
 use function file_get_contents;
 use function get_template_directory;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\dom;
 use function WeCodeArt\Functions\get_dom_element;
 
 /**
@@ -68,17 +67,21 @@ class Logo extends Dynamic {
 	 * @return 	string
 	 */
 	public function render( $content = '', $block = [] ) {
-		$dom	= dom( $content );
+		$dom	= $this->markup( $content );
 		$div  	= get_dom_element( 'div', $dom );
 		$link 	= get_dom_element( 'a', $div );
 		$img  	= get_dom_element( 'img', $link ?? $div );
 
-		$link->setAttribute( 'class', 'wp-block-site-logo__link' );
-		$img->setAttribute( 'class', 'wp-block-site-logo__img' );
-
 		// If no image, bail early.
 		if ( ! $img ) {
 			return $content;
+		}
+
+		// Update classes
+		$img->setAttribute( 'class', 'wp-block-site-logo__img' );
+		
+		if( $link ) {
+			$link->setAttribute( 'class', 'wp-block-site-logo__link' );
 		}
 
 		// If image is SVG, import it.
@@ -89,16 +92,16 @@ class Logo extends Dynamic {
 				return $content;
 			}
 	
-			$svg = $dom->importNode( dom( file_get_contents( $file ) )->documentElement, true );
+			$svg = $dom->importNode( $this->markup( file_get_contents( $file ) )->documentElement, true );
 	
 			if ( ! method_exists( $svg, 'setAttribute' ) ) {
 				return $content;
 			}
 	
+			$svg->setAttribute( 'class', $img->getAttribute( 'class' ) );
 			$svg->setAttribute( 'width', $img->getAttribute( 'width' ) );
 			$svg->setAttribute( 'height', $img->getAttribute( 'height' ) );
 			$svg->setAttribute( 'aria-label', $img->getAttribute( 'alt' ) );
-			$svg->setAttribute( 'class', $img->getAttribute( 'class' ) );
 	
 			( $link ?? $div )->removeChild( $img );
 			( $link ?? $div )->appendChild( $svg );

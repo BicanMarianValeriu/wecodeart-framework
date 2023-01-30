@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.5.5
- * @version		5.5.5
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -41,9 +41,34 @@ class Gallery extends Base {
 		}
 
 		// Gap
-		if( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ], '0px' ) ) {
+		if( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ] ) ) {
+			if( count( $gap ) === 2 && count( array_unique( $gap ) ) === 1 ) {
+				$gap = current( $gap );
+			}
+
 			if ( is_array( $gap ) ) {
-				$gap	= get_prop( $gap, [ 'top' ] );
+				$gap_y	= get_prop( $gap, [ 'top' ] );
+				$gap_x	= get_prop( $gap, [ 'left' ] );
+
+				// Is WP way of saved color
+				if( mb_strpos( $gap_x, 'var:preset|spacing' ) !== false ) {
+					$gap_x = explode( '|', $gap_x );
+					$gap_x = sprintf( 'var(--wp--preset--spacing--%s)', end( $gap_x ) );
+				}
+
+				// Is WP way of saved color
+				if( mb_strpos( $gap_y, 'var:preset|spacing' ) !== false ) {
+					$gap_y = explode( '|', $gap_y );
+					$gap_y = sprintf( 'var(--wp--preset--spacing--%s)', end( $gap_y ) );
+				}
+
+				$gap = $gap_y . ' ' . $gap_x;
+			} else {
+				// Is WP way of saved color
+				if( mb_strpos( $gap, 'var:preset|spacing' ) !== false ) {
+					$gap = explode( '|', $gap );
+					$gap = sprintf( 'var(--wp--preset--spacing--%s)', end( $gap ) );
+				}
 			}
 
 			$this->output[] = wp_parse_args( [

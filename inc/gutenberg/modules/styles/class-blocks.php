@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.9
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -187,7 +187,7 @@ class Blocks extends Processor {
 							$padding = end( $padding );
 
 							// Is WP way of saved color
-							if( mb_strpos( $padding, '|' ) !== false ) {
+							if( mb_strpos( $padding, 'var:preset|spacing' ) !== false ) {
 								$padding = explode( '|', $padding );
 								$padding = sprintf( 'var(--wp--preset--spacing--%s)', end( $padding ) );
 							}
@@ -199,7 +199,7 @@ class Blocks extends Processor {
 						} else {
 							foreach( $padding as $dir => $val ) {
 								// Is WP way of saved color
-								if( mb_strpos( $val, '|' ) !== false ) {
+								if( mb_strpos( $val, 'var:preset|spacing' ) !== false ) {
 									$val = explode( '|', $val );
 									$val = sprintf( 'var(--wp--preset--spacing--%s)', end( $val ) );
 								}
@@ -220,7 +220,7 @@ class Blocks extends Processor {
 							$margin = end( $margin );
 							
 							// Is WP way of saved color
-							if( mb_strpos( $margin, '|' ) !== false ) {
+							if( mb_strpos( $margin, 'var:preset|spacing' ) !== false ) {
 								$margin = explode( '|', $margin );
 								$margin = sprintf( 'var(--wp--preset--spacing--%s)', end( $margin ) );
 							}
@@ -233,7 +233,7 @@ class Blocks extends Processor {
 						} else {
 							foreach( $margin as $dir => $val ) {
 								// Is WP way of saved color
-								if( mb_strpos( $val, '|' ) !== false ) {
+								if( mb_strpos( $val, 'var:preset|spacing' ) !== false ) {
 									$val = explode( '|', $val );
 									$val = sprintf( 'var(--wp--preset--spacing--%s)', end( $val ) );
 								}

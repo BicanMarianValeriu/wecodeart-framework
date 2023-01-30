@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Blocks Registry
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.3
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -103,10 +103,9 @@ class Blocks implements Configuration {
 		$this->register( 'core/loginout',       Blocks\Site\Login::class );
 		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
 		$this->register( 'core/template-part',  Blocks\Site\Template::class );
-
+        
         // Hooks
-        $this->register_blocks();
-
+        add_action( 'after_setup_theme',        [ $this, 'register_blocks'  ], PHP_INT_MAX );
         add_action( 'wp_print_styles',          [ $this, 'remove_styles'    ], PHP_INT_MAX );
         add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
 	}

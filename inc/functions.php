@@ -322,13 +322,13 @@ function dom( string $html ): DOMDocument {
 /**
  * Returns a formatted DOMElement object from a DOMDocument object.
  *
- * @since 5.7.2
+ * @since   5.7.2
  *
- * @param string $tag            HTML tag.
- * @param mixed  $dom_or_element DOMDocument or DOMElement.
- * @param int    $index          Index of element to return.
+ * @param   string $tag            HTML tag.
+ * @param   mixed  $dom_or_element DOMDocument or DOMElement.
+ * @param   int    $index          Index of element to return.
  *
- * @return \DOMElement|null
+ * @return  \DOMElement|null
  */
 function get_dom_element( string $tag, $dom_or_element, int $index = 0 ) {
 	if ( ! is_a( $dom_or_element, DOMDocument::class ) && ! is_a( $dom_or_element, DOMElement::class ) ) {
@@ -347,11 +347,11 @@ function get_dom_element( string $tag, $dom_or_element, int $index = 0 ) {
 /**
  * Casts a DOMNode to a DOMElement.
  *
- * @since 5.7.2
+ * @since   5.7.2
  *
- * @param mixed $node DOMNode to cast to DOMElement.
+ * @param   mixed $node DOMNode to cast to DOMElement.
  *
- * @return \DOMElement|null
+ * @return  \DOMElement|null
  */
 function dom_element( $node ) {
 	if ( $node->nodeType === XML_ELEMENT_NODE ) {
@@ -365,13 +365,13 @@ function dom_element( $node ) {
 /**
  * Returns array of dom elements by class name.
  *
- * @since 5.7.2
+ * @since   5.7.2
  *
- * @param DOMDocument|DOMElement $dom        DOM document or element.
- * @param string                 $class_name Element class name.
- * @param string                 $tag        Element tag name (optional).
+ * @param   DOMDocument|DOMElement $dom        DOM document or element.
+ * @param   string                 $class_name Element class name.
+ * @param   string                 $tag        Element tag name (optional).
  *
- * @return array
+ * @return  array
  */
 function get_elements_by_class_name( $dom, string $class_name, string $tag = '*' ): array {
 	$elements = [];
@@ -387,4 +387,46 @@ function get_elements_by_class_name( $dom, string $class_name, string $tag = '*'
 	}
 
 	return $elements;
+}
+
+/**
+ * Returns an HTML element with a replaced tag.
+ *
+ * @since   5.7.2
+ *
+ * @param   DOMElement $element DOM Element to change.
+ * @param   string     $name    Tag name, e.g: 'div'.
+ *
+ * @return  DOMElement
+ */
+function change_tag_name( DOMElement $element, string $name ): DOMElement {
+	if ( ! $element->ownerDocument ) {
+		return new DOMElement( $name );
+	}
+
+	$child_nodes = [];
+
+	foreach ( $element->childNodes as $child ) {
+		$child_nodes[] = $child;
+	}
+
+	$new_element = $element->ownerDocument->createElement( $name );
+
+	foreach ( $child_nodes as $child ) {
+		$child2 = $element->ownerDocument->importNode( $child, true );
+		$new_element->appendChild( $child2 );
+	}
+
+	foreach ( $element->attributes as $attr_node ) {
+		$attr_name  = $attr_node->nodeName;
+		$attr_value = $attr_node->nodeValue;
+
+		$new_element->setAttribute( $attr_name, $attr_value );
+	}
+
+	if ( $element->parentNode ) {
+		$element->parentNode->replaceChild( $new_element, $element );
+	}
+
+	return $new_element;
 }

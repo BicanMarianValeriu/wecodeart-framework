@@ -332,6 +332,9 @@ class Styles implements Integration {
 	 */
 	public function global_styles() {
 		$style = '';
+
+		// Box Sizing
+		$style .= '*,*::before,*::after {box-sizing: border-box;}';
 		
 		// Colors RGB as CSS var
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );

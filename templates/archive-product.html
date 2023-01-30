@@ -12,29 +12,18 @@
         <div class="wp-block-column col-12 col-lg-9">
             <!-- wp:group {"tagName":"main","layout":{"inherit":false}} -->
             <main class="wp-block-group">
-                <!-- wp:woocommerce/active-filters {"displayStyle":"chips"} -->
-                <div class="wp-block-woocommerce-active-filters is-loading" data-display-style="chips" data-heading="Filtre active" data-heading-level="3">
-                    <span aria-hidden="true" class="wc-block-active-product-filters__placeholder"></span>
+                <!-- wp:woocommerce/filter-wrapper {"filterType":"active-filters","heading":"Active Filters"} -->
+                <div class="wp-block-woocommerce-filter-wrapper">
+                    <!-- wp:heading {"level":3} -->
+                    <h3>Active Filters</h3>
+                    <!-- /wp:heading -->
+                    <!-- wp:woocommerce/active-filters {"displayStyle":"chips","heading":""} -->
+                    <div class="wp-block-woocommerce-active-filters is-loading" data-display-style="chips" data-heading="" data-heading-level="3"><span aria-hidden="true" class="wc-block-active-filters__placeholder"></span></div>
+                    <!-- /wp:woocommerce/active-filters -->
                 </div>
-                <!-- /wp:woocommerce/active-filters -->
-                <!-- wp:woocommerce/all-products {"columns":3,"rows":3,"alignButtons":true,"contentVisibility":{"orderBy":false},"orderby":"date","layoutConfig":[["woocommerce/product-image",{"showProductLink":true,"showSaleBadge":true,"saleBadgeAlign":"left","imageSizing":"cropped","productId":0,"customCSS":null,"children":[]}],["woocommerce/product-title",{"headingLevel":2,"showProductLink":true,"productId":0,"customCSS":null,"children":[]}],["woocommerce/product-rating",{"productId":0,"customCSS":null,"children":[]}],["woocommerce/product-price",{"productId":0,"customCSS":null,"children":[]}],["woocommerce/product-button",{"productId":0,"customCSS":null,"children":[]}]]} -->
-                <div class="wp-block-woocommerce-all-products wc-block-all-products" data-attributes="{&quot;alignButtons&quot;:true,&quot;columns&quot;:3,&quot;contentVisibility&quot;:{&quot;orderBy&quot;:false},&quot;customCSS&quot;:null,&quot;isPreview&quot;:false,&quot;layoutConfig&quot;:[[&quot;woocommerce/product-image&quot;,{&quot;showProductLink&quot;:true,&quot;showSaleBadge&quot;:true,&quot;saleBadgeAlign&quot;:&quot;left&quot;,&quot;imageSizing&quot;:&quot;cropped&quot;,&quot;productId&quot;:0,&quot;customCSS&quot;:null,&quot;children&quot;:[]}],[&quot;woocommerce/product-title&quot;,{&quot;headingLevel&quot;:2,&quot;showProductLink&quot;:true,&quot;productId&quot;:0,&quot;customCSS&quot;:null,&quot;children&quot;:[]}],[&quot;woocommerce/product-rating&quot;,{&quot;productId&quot;:0,&quot;customCSS&quot;:null,&quot;children&quot;:[]}],[&quot;woocommerce/product-price&quot;,{&quot;productId&quot;:0,&quot;customCSS&quot;:null,&quot;children&quot;:[]}],[&quot;woocommerce/product-button&quot;,{&quot;productId&quot;:0,&quot;customCSS&quot;:null,&quot;children&quot;:[]}]],&quot;orderby&quot;:&quot;date&quot;,&quot;rows&quot;:3}">
-                    <!-- wp:woocommerce/product-image {"saleBadgeAlign":"left","imageSizing":"cropped"} -->
-                    <div class="wp-block-woocommerce-product-image is-loading"></div>
-                    <!-- /wp:woocommerce/product-image -->
-                    <!-- wp:woocommerce/product-title -->
-                    <div class="wp-block-woocommerce-product-title is-loading"></div>
-                    <!-- /wp:woocommerce/product-title -->
-                    <!-- wp:woocommerce/product-rating -->
-                    <div class="wp-block-woocommerce-product-rating is-loading"></div>
-                    <!-- /wp:woocommerce/product-rating -->
-                    <!-- wp:woocommerce/product-price -->
-                    <div class="wp-block-woocommerce-product-price is-loading"></div>
-                    <!-- /wp:woocommerce/product-price -->
-                    <!-- wp:woocommerce/product-button -->
-                    <div class="wp-block-woocommerce-product-button is-loading"></div>
-                    <!-- /wp:woocommerce/product-button -->
-                </div>
+                <!-- /wp:woocommerce/filter-wrapper -->
+                <!-- wp:woocommerce/all-products {"columns":3,"rows":3,"alignButtons":true,"contentVisibility":{"orderBy":false},"orderby":"date","layoutConfig":[["woocommerce/product-image",{"imageSizing":"cropped","saleBadgeAlign":"left"}],["woocommerce/product-title"],["woocommerce/product-price"],["woocommerce/product-rating"],["woocommerce/product-button"]]} -->
+                <div class="wp-block-woocommerce-all-products wc-block-all-products" data-attributes="{&quot;alignButtons&quot;:true,&quot;columns&quot;:3,&quot;contentVisibility&quot;:{&quot;orderBy&quot;:false},&quot;isPreview&quot;:false,&quot;layoutConfig&quot;:[[&quot;woocommerce/product-image&quot;,{&quot;imageSizing&quot;:&quot;cropped&quot;,&quot;saleBadgeAlign&quot;:&quot;left&quot;}],[&quot;woocommerce/product-title&quot;],[&quot;woocommerce/product-price&quot;],[&quot;woocommerce/product-rating&quot;],[&quot;woocommerce/product-button&quot;]],&quot;orderby&quot;:&quot;date&quot;,&quot;rows&quot;:3}"></div>
                 <!-- /wp:woocommerce/all-products -->
             </main>
             <!-- /wp:group -->

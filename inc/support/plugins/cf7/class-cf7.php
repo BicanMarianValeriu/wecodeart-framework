@@ -9,7 +9,7 @@
  * @subpackage 	Support\CF7
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.4.5
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
-use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
 
@@ -29,7 +28,6 @@ use WeCodeArt\Admin\Notifications\Notification;
 class CF7 implements Integration {
 
 	use Singleton;
-	use Asset;
 
 	const NOTICE_ID = 'wecodeart-cf7-notice';
 

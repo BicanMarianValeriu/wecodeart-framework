@@ -86,6 +86,7 @@ class Text extends Dynamic {
 			padding: 0;
 			min-height: 250px;
 			background-size: cover;
+			background-position: center;
 		}
 		.is-image-fill .wp-block-media-text__media img {
 			position: absolute;

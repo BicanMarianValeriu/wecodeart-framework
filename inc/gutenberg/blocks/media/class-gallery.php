@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -45,6 +45,8 @@ class Gallery extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		if( is_admin() ) return;
+
 		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 

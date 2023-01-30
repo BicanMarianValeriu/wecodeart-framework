@@ -39,7 +39,7 @@ class Navigation extends Base {
 				$gap	= get_prop( $gap, [ 'top' ] );
 			}
 
-			if ( mb_strpos( $gap, '|' ) !== false ) {
+			if ( mb_strpos( $gap, 'var:preset|spacing' ) !== false ) {
 				$slug = explode( '|', $gap );
 				$slug = end( $slug );
 				$gap  = sprintf( 'var(--wp--preset--spacing--%s)', $slug );

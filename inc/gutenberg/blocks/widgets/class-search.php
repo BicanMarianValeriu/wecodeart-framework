@@ -159,6 +159,8 @@ class Search extends Dynamic {
 
 			// Maybe add submit button
 			if ( get_prop( $attributes, 'buttonPosition', 'button-outside' ) !== 'no-button' ) {
+				wp_enqueue_style( 'wp-block-button' );
+
 				$icon  = get_prop( $attributes, 'buttonUseIcon' );
 				$label = $icon ? wecodeart( 'markup' )->SVG::compile( 'search' ) : get_prop( $attributes, 'buttonText' );
 

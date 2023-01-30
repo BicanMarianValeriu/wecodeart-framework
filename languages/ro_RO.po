@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2022-10-10 12:46+0000\n"
+"PO-Revision-Date: 2023-01-30 12:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -63,7 +63,7 @@ msgstr ""
 msgid "add one"
 msgstr "adaugă unul"
 
-#: inc/support/plugins/cf7/class-cf7.php:69
+#: inc/support/plugins/cf7/class-cf7.php:67
 msgid "Amazing news!"
 msgstr "Vesti uimitoare!"
 
@@ -89,7 +89,7 @@ msgstr "Arhive autor: %s"
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr "Bican Marian Valeriu @wecodeart"
 
-#: inc/gutenberg/blocks/class-dynamic.php:48
+#: inc/gutenberg/blocks/class-dynamic.php:49
 msgid "Block name is required."
 msgstr "Denumirea bloc-ului este necesară."
 
@@ -208,7 +208,7 @@ msgstr "Notificarea nu a putut fi respinsă"
 msgid "Group"
 msgstr "Grupare"
 
-#: inc/support/plugins/cf7/class-cf7.php:72
+#: inc/support/plugins/cf7/class-cf7.php:70
 msgid "here"
 msgstr "aici"
 
@@ -364,7 +364,7 @@ msgstr "Selectați Săptămâna"
 msgid "Select Year"
 msgstr "Selectați Anul"
 
-#: inc/support/assets/class-assets.php:91
+#: inc/support/assets/class-assets.php:114
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
@@ -436,7 +436,7 @@ msgstr "actualizați PHP"
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
-#: inc/support/plugins/cf7/class-cf7.php:71
+#: inc/support/plugins/cf7/class-cf7.php:69
 #, php-format
 msgid ""
 "We have an extension that integrates our theme with Contact Form 7 plugin! "
@@ -481,6 +481,16 @@ msgstr ""
 "Când adăugați o pictogramă SVG cu %s, trebuie să definiți cheile `viewBox` "
 "și `paths`."
 
+#: inc/support/assets/class-assets.php:151
+#, php-format
+#| msgid ""
+#| "When using \"%s\" method you must define 3rd parameter (style or script)."
+msgid ""
+"When using \"%s\" method you must define the 3rd parameter (style or script)."
+msgstr ""
+"Când utilizați metoda \"%s\" trebuie să definiți al treilea parametru (style "
+"sau script)."
+
 #: views/admin/notification-locale.tpl.php:25
 msgid ""
 "Would you like to contribute by suggesting some translations? To show how "
@@ -505,7 +515,7 @@ msgstr "Arhive Anuale: %s"
 msgid "Yes, I would love to!"
 msgstr "Da, mi-ar plăcea!"
 
-#: inc/support/plugins/wpseo/class-wpseo.php:75
+#: inc/support/plugins/wpseo/class-wpseo.php:78
 msgid ""
 "YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
 "plugin."

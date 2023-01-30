@@ -137,7 +137,7 @@ class Table extends Dynamic {
 			width: 100%;
 			margin-bottom: 1rem;
 			vertical-align: middle;
-			border-color: var(--wp--preset--color--light);
+			border-color: var(--wp--gray-300);
 		}
 		table > thead {
 			vertical-align: inherit;
@@ -150,9 +150,6 @@ class Table extends Dynamic {
 			background-color: var(--wp--table-bg);
 			border-bottom-width: var(--wp--table-border-width);
 			box-shadow: inset 0 0 0 9999px var(--wp--table-accent-bg);
-		}
-		table > :not(:first-child) {
-			border-top: calc(2 * 1px) solid currentColor;
 		}
 		.table-bordered > :not(caption) > * {
 			border-width: var(--wp--table-border-width) 0;

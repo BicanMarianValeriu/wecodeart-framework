@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.5
- * @version		5.5.3
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -62,6 +62,9 @@ class WPSeo implements Integration {
 		// Its only used when Yoast SEO plugin is installed and enabled.
 		// Renders author social profiles using core/social-links block markup
 		add_action( 'init', [ $this, 'register_social' ] );
+
+		// Register Blocks Overwrites
+		add_action( 'after_setup_theme', [ $this, 'register_blocks' ] );
 	}
 
 	/**
@@ -91,6 +94,19 @@ class WPSeo implements Integration {
 		if( get_transient( self::NOTICE_ID ) === false ) {
 			Notifications::get_instance()->add_notification( $notification );
 		}
+	}
+
+	/**
+	 * Register Block Overwrites
+	 *
+	 * @since	5.7.2
+	 * @version 5.7.2
+	 *
+	 * @return 	void
+	 */
+	public function register_blocks() {
+		// Register Yoast FAQ Overwrite
+		wecodeart( 'blocks' )->register( 'yoast/faq-block', WPSeo\Blocks\FAQ::class );
 	}
 
 	/**
@@ -256,13 +272,17 @@ class WPSeo implements Integration {
 	 * Filter - Restricted Yoast Blocks from theme code
 	 *
 	 * @since	5.0.0
-	 * @version	5.0.0
+	 * @version	5.7.2
 	 *
 	 * @return 	array
 	 */
 	public function restricted_gutenberg_blocks( $blocks ) {
-		return wp_parse_args( [
+		$blocks = array_merge( $blocks, [
 			'yoast-seo/breadcrumbs',
-		], $blocks );
+			'yoast/how-to-block',
+			'yoast/faq-block',
+		] );
+
+		return $blocks;
 	}
 }

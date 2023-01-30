@@ -253,7 +253,7 @@ abstract class Dynamic {
 		}
 
 		$registered = is_object( $wp_styles ) ? get_prop( $wp_styles->registered, $block_handle ) : false;
-		$deps		= $registered ? $registered->deps : [ 'global-styles' ];
+		$deps		= $registered ? $registered->deps : [];
 
 		// Deregister Core
 		wp_deregister_style( $block_handle );

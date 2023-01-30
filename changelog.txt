@@ -4,16 +4,23 @@ v5.7.2
 - Updated - core/site-logo markup and CSS updates / Ability for inline SVG upload
 - Updated - core/latest-posts post_type attribute to postType
 - Updated - core/post-read-more extend class to inherit button styles
+- Updated - Minimum PHP version requirement is now 7.4
 - Updated - Frontend CSS move inline to global styles
+- Updated - Improved wecodeart( 'assets' ) manager with easier API
 - Updated - enabled useRootPaddingAwareAlignments and adjusted global CSS to fit
+- Updated - base WooCommerce templates (transition to blocks instead of legacy template) to match WOO 7.3
+- Updated - core/table minor CSS updates + core/calendar to enqueue table CSS
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
 - Fixed - core/button outline default color rgb variable added in CSS
 - Fixed - core/social inline CSS generation (for single SVG icons) if 2 or more blocks are used on the template
+- Fixed - core/gallery admin styles and Frontend gap
 - Added - shadow support in theme.json (upcoming WP versions)
 - Added - core/post-author link class (wp-block-post-author__link)
 - Added - core/post-terms link class (wp-block-post-terms__link)
 - Added - new dom() function to manipulate HTML markup for Gutenberg blocks
-- Added - Schema.org for header/footer/sidebar template parts
+- Added - Improved SEO: Schema.org for header/footer/sidebar template parts
+- Added - Yoast SEO`s FAQ block markup updated to "details" HTML element + improved styles
+- Added - Coming Soon pattern (for pages)
 
 v5.7.1
 - Updated - core/archives type attribute

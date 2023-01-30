@@ -3,7 +3,22 @@
 <div class="wp-block-group py-5">
     <!-- wp:group {"tagName":"main","layout":{"inherit":false}} -->
     <main class="wp-block-group">
-        <!-- wp:woocommerce/legacy-template {"template":"taxonomy-product_tag"} /-->
+        <!-- wp:query-title {"type":"archive","className":"mb-0"} /-->
+        <!-- wp:term-description {"className":"mb-5"} /-->
+        <!-- wp:separator {"backgroundColor":"light","className":"is-style-wide"} -->
+        <hr class="wp-block-separator has-text-color has-light-color has-alpha-channel-opacity has-light-background-color has-background is-style-wide"/>
+        <!-- /wp:separator -->
+        <!-- wp:woocommerce/filter-wrapper {"filterType":"active-filters","heading":"Active Filters"} -->
+        <div class="wp-block-woocommerce-filter-wrapper">
+            <!-- wp:heading {"level":3} -->
+            <h3>Active Filters</h3>
+            <!-- /wp:heading -->
+            <!-- wp:woocommerce/active-filters {"displayStyle":"chips","heading":""} -->
+            <div class="wp-block-woocommerce-active-filters is-loading" data-display-style="chips" data-heading="" data-heading-level="3"><span aria-hidden="true" class="wc-block-active-filters__placeholder"></span></div>
+            <!-- /wp:woocommerce/active-filters -->
+        </div>
+        <!-- /wp:woocommerce/filter-wrapper -->
+        <!-- wp:pattern {"slug":"wecodeart/query-products"} /-->
     </main>
     <!-- /wp:group -->
 </div>

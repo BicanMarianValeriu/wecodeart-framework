@@ -9,7 +9,7 @@
  * @subpackage  Autoloader
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version 	4.0.2
+ * @version 	5.7.2
  */
 
 namespace WeCodeArt;
@@ -25,7 +25,7 @@ class Autoloader {
 	 *
 	 * @access 	private
 	 * @since 	3.5
-	 * @version 3.6.1
+	 * @version 5.7.2
 	 * 
 	 * @var 	array 	$cached_paths	Cached FilePaths
 	 * @var 	string	$_namespace		Theme Namespace
@@ -35,6 +35,7 @@ class Autoloader {
 	private $namespace		= '';
 	private $directory		= '';
 	private $separator 		= '\\';
+	const DS = DIRECTORY_SEPARATOR;
 
 	/**
 	 * Class constructor.
@@ -91,7 +92,7 @@ class Autoloader {
 	 *
 	 * @access 	protected
 	 * @since 	3.5
-	 * @version 4.0.2
+	 * @version 5.7.2
 	 *
 	 * @param 	string 	$class_name 	The name of the class we're trying to load.
 	 *
@@ -105,7 +106,7 @@ class Autoloader {
 		$filename = 'class-' . strtolower( end( $exploded ) ) . '.php';
 
 		// Check same directory
-		$paths[] = $this->directory . DIRECTORY_SEPARATOR . $filename;
+		$paths[] = $this->directory . self::DS . $filename;
 
 		// Look into sub-directory
 		$substr   = str_replace( $this->namespace . $this->separator, '', $class_name );
@@ -115,8 +116,8 @@ class Autoloader {
 		// Build the filepath
 		$previous_path = '';
 		for ( $i = 0; $i < $levels; $i++ ) {
-			$paths[]        = $this->directory . DIRECTORY_SEPARATOR . $previous_path . strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR . $filename;
-			$previous_path .= strtolower( $exploded[ $i ] ) . DIRECTORY_SEPARATOR;
+			$paths[]        = join( self::DS, [ $this->directory, $previous_path . strtolower( $exploded[ $i ] ), $filename ] );
+			$previous_path .= strtolower( $exploded[ $i ] ) . self::DS;
 		}
 
 		// Return Paths

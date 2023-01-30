@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-10 12:46+0000\n"
+"POT-Creation-Date: 2023-01-30 12:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "add one"
 msgstr ""
 
-#: inc/support/plugins/cf7/class-cf7.php:69
+#: inc/support/plugins/cf7/class-cf7.php:67
 msgid "Amazing news!"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Bican Marian Valeriu @wecodeart"
 msgstr ""
 
-#: inc/gutenberg/blocks/class-dynamic.php:48
+#: inc/gutenberg/blocks/class-dynamic.php:49
 msgid "Block name is required."
 msgstr ""
 
@@ -193,7 +193,7 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: inc/support/plugins/cf7/class-cf7.php:72
+#: inc/support/plugins/cf7/class-cf7.php:70
 msgid "here"
 msgstr ""
 
@@ -348,7 +348,7 @@ msgstr ""
 msgid "Select Year"
 msgstr ""
 
-#: inc/support/assets/class-assets.php:91
+#: inc/support/assets/class-assets.php:114
 msgid "Skip to content"
 msgstr ""
 
@@ -416,7 +416,7 @@ msgstr ""
 msgid "Username or Email Address"
 msgstr ""
 
-#: inc/support/plugins/cf7/class-cf7.php:71
+#: inc/support/plugins/cf7/class-cf7.php:69
 #, php-format
 msgid ""
 "We have an extension that integrates our theme with Contact Form 7 plugin! "
@@ -452,6 +452,12 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
+#: inc/support/assets/class-assets.php:151
+#, php-format
+msgid ""
+"When using \"%s\" method you must define the 3rd parameter (style or script)."
+msgstr ""
+
 #: views/admin/notification-locale.tpl.php:25
 msgid ""
 "Would you like to contribute by suggesting some translations? To show how "
@@ -473,7 +479,7 @@ msgstr ""
 msgid "Yes, I would love to!"
 msgstr ""
 
-#: inc/support/plugins/wpseo/class-wpseo.php:75
+#: inc/support/plugins/wpseo/class-wpseo.php:78
 msgid ""
 "YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
 "plugin."

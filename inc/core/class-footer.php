@@ -58,18 +58,6 @@ class Footer {
 	}
 
 	/**
-	 * Footer Credits
-	 *
-	 * @since 	1.0
-	 * @version 5.6.7
-	 *
-	 * @return 	void
-	 */
-	public function markup_credits( $args = [] ) {
-		// deprecated
-	}
-
-	/**
 	 * Dynamically renders the footer `core/template-part` block to insert some shortcodes.
 	 *
 	 * @param 	string 	$content 	The block markup.

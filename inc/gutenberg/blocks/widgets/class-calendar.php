@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -57,6 +57,9 @@ class Calendar extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
+		// Enqueue Table CSS
+		wp_enqueue_style( 'wp-block-table' );
+
 		// Remove ID
 		$content = preg_replace( '/(<[^>]+) id=".*?"/i', '$1', $content, 1 );
 		// Add Bootstrap Classes

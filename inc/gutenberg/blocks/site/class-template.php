@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function add_filter;
-use function WeCodeArt\Functions\dom;
 use function WeCodeArt\Functions\get_dom_element;
 
 /**
@@ -59,7 +58,7 @@ class Template extends Dynamic {
 	 * @return 	string
 	 */
 	public function render( $content = '', $block = [] ) {
-		$dom   = dom( $content );
+		$dom   = $this->markup( $content );
 		$first = get_dom_element( '*', $dom );
 
 		if ( ! $first ) {

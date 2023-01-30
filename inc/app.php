@@ -139,7 +139,7 @@ return [
         'google' => [
             [
                 'family' 	=> 'Open Sans',
-                'variants' 	=> [ 300, 'regular' ]
+                'variants' 	=> [ 300, 'regular', 500 ]
             ],
             [
                 'family' 	=> 'Shadows Into Light',

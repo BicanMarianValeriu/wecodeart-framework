@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		1.9
- * @version		5.7.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -116,14 +116,17 @@ class WooCommerce implements Integration {
 	 * Block CSS process
 	 *
 	 * @since	5.6.3
-	 * @version	5.6.3
+	 * @version	5.7.2
 	 *
 	 * @return 	array
 	 */
 	public function block_inline_styles( $args ) {
 		return array_merge( $args, [
+			'woocommerce/product-categories',
 			'woocommerce/featured-category',
 			'woocommerce/featured-product',
+			'woocommerce/reviews-by-category',
+			'woocommerce/reviews-by-product',
 		] );
 	}
 
@@ -131,22 +134,20 @@ class WooCommerce implements Integration {
 	 * Filter - Restricted WooCommerce Blocks from theme code
 	 *
 	 * @since	5.0.0
-	 * @version	5.5.5
+	 * @version	5.7.2
 	 *
 	 * @return 	array
 	 */
 	public function restricted_blocks( $blocks ) {
 		return wp_parse_args( [
-			'woocommerce/handpicked-products',
-			'woocommerce/products-by-attribute',
-			'woocommerce/products-by-tag',
-			'woocommerce/product-categories',
-			'woocommerce/product-best-sellers',
-			'woocommerce/product-top-rated',
-			'woocommerce/product-on-sale',
-			'woocommerce/product-category',
-			'woocommerce/product-new',
-			'woocommerce/product-tag',
+			'woocommerce/products-by-attribute',// ok
+			'woocommerce/product-best-sellers', // ok
+			'woocommerce/product-top-rated',	// ok
+			'woocommerce/product-on-sale',		// ok
+			'woocommerce/product-category', 	// ok
+			'woocommerce/product-new',			// ok
+			'woocommerce/product-tag',			// ok
+			'woocommerce/products-by-tag',		// old naming, just in case
 		], $blocks );
 	}
 
