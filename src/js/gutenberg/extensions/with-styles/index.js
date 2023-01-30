@@ -21,6 +21,11 @@ const addAttributes = (props) => {
 	const isRestrictedBlock = restrictedBlocks.includes(name);
 	if (!isRestrictedBlock) {
 		props.attributes = assign(props.attributes, {
+			customStyle: {
+				type: 'string',
+				default: null
+			},
+			// Deprecated
 			customCSS: {
 				type: 'string',
 				default: null

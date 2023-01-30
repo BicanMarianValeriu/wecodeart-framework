@@ -341,7 +341,7 @@ class Blocks extends Processor {
 	 * @return 	void
 	 */
 	protected function parse_custom() {
-		if ( $css_custom = get_prop( $this->attrs, 'customCSS', false ) ) {
+		if ( $css_custom = get_prop( $this->attrs, 'customStyle', get_prop( $this->attrs, 'customCSS' ) ) ) {
 			$custom_style 	= wp_strip_all_tags( $css_custom );
 			$custom_style 	= str_replace( 'selector', $this->get_element(), $custom_style );
 			$custom_style 	= wecodeart( 'styles' )::string_to_array_query( $custom_style );

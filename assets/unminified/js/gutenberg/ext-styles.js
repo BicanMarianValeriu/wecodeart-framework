@@ -41,20 +41,21 @@ const CSSEditor = _ref => {
     setAttributes
   } = _ref;
   const {
-    customCSS
+    customCSS,
+    customStyle
   } = attributes;
   const editorRef = useRef(null);
-  const customCSSRef = useRef(null);
+  const customStyleRef = useRef(null);
   const defaultValue = 'selector {\n}\n';
   useEffect(() => {
-    customCSSRef.current = defaultValue;
+    customStyleRef.current = defaultValue;
 
-    if (customCSS) {
-      customCSSRef.current = customCSS;
+    if (customStyle || customCSS) {
+      customStyleRef.current = customStyle || customCSS;
     }
 
     editorRef.current = wp.CodeMirror(document.getElementById('wecodeart-css-editor'), {
-      value: customCSSRef.current,
+      value: customStyleRef.current,
       autoCloseBrackets: true,
       continueComments: true,
       lineNumbers: true,
@@ -71,16 +72,18 @@ const CSSEditor = _ref => {
       }
     });
     editorRef.current.on('change', () => {
-      customCSSRef.current = editorRef.current.getValue();
+      customStyleRef.current = editorRef.current.getValue(); // Deprecate old attribute naming
 
-      if (defaultValue.replace(/\s+/g, '') === customCSSRef.current.replace(/\s+/g, '')) {
+      if (defaultValue.replace(/\s+/g, '') === customStyleRef.current.replace(/\s+/g, '')) {
         return setAttributes({
+          customStyle: null,
           customCSS: null
         });
       }
 
       setAttributes({
-        customCSS: customCSSRef.current
+        customStyle: customStyleRef.current,
+        customCSS: null
       });
     });
   }, []);
@@ -168,7 +171,7 @@ const addStyle = style => {
   return element.textContent = style;
 };
 
-const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
+const getCustomStyleFromBlocks = (blocks, reusableBlocks) => {
   if (!blocks) {
     return '';
   } // Return the children of the block. The result is an array deeply nested that match the structure of the block in the editor.
@@ -195,26 +198,27 @@ const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
   }; // Get all the blocks and their children
 
 
-  const allBlocks = blocks.map(block => [block, getChildrenFromBlock(block)]); // Transform the deply nested array in a simple one and then get the `customCss` value where it is the case
+  const allBlocks = blocks.map(block => [block, getChildrenFromBlock(block)]); // Transform the deply nested array in a simple one and then get the `customStyle` value where it is the case
 
-  const extractCustomCss = flattenDeep(allBlocks).map(block => {
+  const extractCustomStyle = flattenDeep(allBlocks).map(block => {
     const {
       attributes: {
-        customCSS = null
+        customCSS = null,
+        customStyle = customCSS
       } = {},
       clientId
     } = block;
 
-    if (customCSS) {
-      return customCSS.replace(new RegExp('selector', 'g'), `.wp-block[data-block="${clientId}"]`) + '\n';
+    if (customStyle) {
+      return customStyle.replace(new RegExp('selector', 'g'), `.wp-block[data-block="${clientId}"]`) + '\n';
     }
 
     return '';
   }); // Build the global style
 
-  const style = extractCustomCss.reduce((acc, localStyle) => acc + localStyle, ''); // For debugging
+  const style = extractCustomStyle.reduce((acc, localStyle) => acc + localStyle, ''); // For debugging
   // console.log( 'Get all the block', allBlocks );
-  // console.log( 'Extract customCss', extractCustomCss );
+  // console.log( 'Extract customStyle', extractCustomStyle );
   // console.log( 'Final Result\n', style );
 
   return style;
@@ -226,7 +230,7 @@ const subscribed = subscribe(() => {
   } = select('core/block-editor') || select('core/editor');
   const blocks = getBlocks();
   const reusableBlocks = select('core').getEntityRecords('postType', 'wp_block');
-  const blocksStyle = getCustomCSSFromBlocks(blocks, reusableBlocks);
+  const blocksStyle = getCustomStyleFromBlocks(blocks, reusableBlocks);
   addStyle(blocksStyle);
 });
 
@@ -361,6 +365,11 @@ const addAttributes = props => {
 
   if (!isRestrictedBlock) {
     props.attributes = assign(props.attributes, {
+      customStyle: {
+        type: 'string',
+        default: null
+      },
+      // Deprecated
       customCSS: {
         type: 'string',
         default: null

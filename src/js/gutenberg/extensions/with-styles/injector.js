@@ -26,7 +26,7 @@ const addStyle = style => {
 	return element.textContent = style;
 };
 
-const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
+const getCustomStyleFromBlocks = (blocks, reusableBlocks) => {
 	if (!blocks) {
 		return '';
 	}
@@ -51,21 +51,21 @@ const getCustomCSSFromBlocks = (blocks, reusableBlocks) => {
 	// Get all the blocks and their children
 	const allBlocks = blocks.map((block) => [block, getChildrenFromBlock(block)]);
 
-	// Transform the deply nested array in a simple one and then get the `customCss` value where it is the case
-	const extractCustomCss = flattenDeep(allBlocks).map((block) => {
-		const { attributes: { customCSS = null } = {}, clientId } = block;
-		if (customCSS) {
-			return customCSS.replace(new RegExp('selector', 'g'), `.wp-block[data-block="${clientId}"]`) + '\n';
+	// Transform the deply nested array in a simple one and then get the `customStyle` value where it is the case
+	const extractCustomStyle = flattenDeep(allBlocks).map((block) => {
+		const { attributes: { customCSS = null, customStyle = customCSS } = {}, clientId } = block;
+		if (customStyle) {
+			return customStyle.replace(new RegExp('selector', 'g'), `.wp-block[data-block="${clientId}"]`) + '\n';
 		}
 		return '';
 	});
 
 	// Build the global style
-	const style = extractCustomCss.reduce((acc, localStyle) => acc + localStyle, '');
+	const style = extractCustomStyle.reduce((acc, localStyle) => acc + localStyle, '');
 
 	// For debugging
 	// console.log( 'Get all the block', allBlocks );
-	// console.log( 'Extract customCss', extractCustomCss );
+	// console.log( 'Extract customStyle', extractCustomStyle );
 	// console.log( 'Final Result\n', style );
 
 	return style;
@@ -75,6 +75,6 @@ const subscribed = subscribe(() => {
 	const { getBlocks } = select('core/block-editor') || select('core/editor');
 	const blocks = getBlocks();
 	const reusableBlocks = select('core').getEntityRecords('postType', 'wp_block');
-	const blocksStyle = getCustomCSSFromBlocks(blocks, reusableBlocks);
+	const blocksStyle = getCustomStyleFromBlocks(blocks, reusableBlocks);
 	addStyle(blocksStyle);
 });
