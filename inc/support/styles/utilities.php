@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.6.9
+ * @version		5.7.2
  */
 
 // Theme Shadows
@@ -304,6 +304,12 @@ foreach( [
         'values'	=> $spacers,
     ],
     [
+        'property'  => 'gap',
+        'class'		=> 'g',
+        'responsive'=> true,
+        'values'	=> $spacers,
+    ],
+    [
         'property'  => 'justify-content',
         'class'     => 'justify-content',
         'responsive'=> true,
@@ -501,6 +507,7 @@ foreach( [
         'property'  => '--wp--text-opacity', // To follow GB standard (has-text-dim)
         'class'		=> 'text-opacity',
         'values'	=> [
+            0   => 0,
             25  => '.25',
             50  => '.5',
             75  => '.75',
@@ -512,6 +519,7 @@ foreach( [
         'property'  => '--wp--bg-opacity', // To be deprecated in favor of Gutenberg classes
         'class'		=> 'bg-opacity',
         'values'	=> [
+            0   => 0,
             25  => '.25',
             50  => '.5',
             75  => '.75',

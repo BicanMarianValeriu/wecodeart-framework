@@ -11,6 +11,7 @@ v5.7.2
 - Updated - base WooCommerce templates (transition to blocks instead of legacy template) to match WOO 7.3
 - Updated - core/table minor CSS updates + core/calendar to enqueue table CSS
 - Updated - Gutenberg `customCSS` block attribute (from styles extension) to `customStyle`
+- Updated - Utilities `gap` to `g` class for flex/grid gap (kept both for the moment)
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
 - Fixed - core/button outline default color rgb variable added in CSS
 - Fixed - core/social inline CSS generation (for single SVG icons) if 2 or more blocks are used on the template
