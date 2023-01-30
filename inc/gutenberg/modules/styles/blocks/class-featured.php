@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.8
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -35,8 +35,8 @@ class Featured extends Base {
 		$output['element'] 	= $this->element;
 		
 		if( Image::use_ratio() ) {
-			$height = get_prop( $this->attrs, 'height' );
-			$width 	= get_prop( $this->attrs, 'width' );
+			$height = get_prop( $this->attrs, 'height', '' );
+			$width 	= get_prop( $this->attrs, 'width', '' );
 
 			// We use aspect ratio istead of specific height
 			$custom_sizes 	= [];

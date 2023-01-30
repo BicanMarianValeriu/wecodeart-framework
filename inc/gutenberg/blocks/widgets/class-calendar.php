@@ -58,7 +58,10 @@ class Calendar extends Dynamic {
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
 		// Enqueue Table CSS
-		wp_enqueue_style( 'wp-block-table' );
+		wp_add_inline_style(
+			'wp-block-' . $this->block_name, 
+			wecodeart( 'styles' )::compress( wecodeart( 'blocks' )->get( 'core/table' )::get_instance()->styles() )
+		);
 
 		// Remove ID
 		$content = preg_replace( '/(<[^>]+) id=".*?"/i', '$1', $content, 1 );
@@ -83,6 +86,7 @@ class Calendar extends Dynamic {
 			color: var(--wp--preset--color--dark);
 		}
 		.wp-block-calendar .wp-calendar-table {
+			text-align: inherit;
 			caption-side: top;
 			width: 100%;
 		}

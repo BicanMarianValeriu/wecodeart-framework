@@ -151,9 +151,14 @@ class Styles implements Integration {
 	 */
 	public function register_attribute( $block ) {
 		// Currently we suport only core blocks
-		if( ! in_array( $block->name, self::core_blocks() ) ) return;
+		if( ! in_array( $block->name, self::core_blocks( true ) ) ) return;
 
 		$block->attributes['customCSS'] = [
+			'type'    => 'string',
+			'default' => null,
+		];
+		
+		$block->attributes['customStyle'] = [
 			'type'    => 'string',
 			'default' => null,
 		];
