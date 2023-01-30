@@ -148,7 +148,7 @@ final class Assets implements Integration {
 		if( ! in_array( $type, [ 'style', 'script' ] ) ) {
 			return _doing_it_wrong(
 				__CLASS__, 
-				sprintf( esc_html__( 'When using "%s" method you must define 3rd parameter (style or script).', 'wecodeart' ), __FUNCTION__ ),
+				sprintf( esc_html__( 'When using "%s" method you must define the 3rd parameter (style or script).', 'wecodeart' ), __FUNCTION__ ),
 				'5.7.2'
 			);
 		}
