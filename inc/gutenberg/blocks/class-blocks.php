@@ -34,14 +34,6 @@ class Blocks implements Configuration {
 	 */
 	protected   $items = [];
 
-    /**
-	 * An array of blocks used in current page.
-     *
-	 * @access  protected
-	 * @var     array
-	 */
-	protected   $blocks = [];
-
 	/**
 	 * Send to Constructor
 	 */
