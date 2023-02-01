@@ -45,7 +45,7 @@ class Quote extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 10, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 10, 2 );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Quote extends Dynamic {
 		$dom = $this->dom( $content );
 		
 		// Quote Changes
-		$quote	= $doc->getElementsByTagName( 'blockquote' )->item(0);
+		$quote	= $dom->getElementsByTagName( 'blockquote' )->item(0);
 		if( $quote ) {
 			$figure	= $dom->createElement( 'figure' );
 			$figure->setAttribute( 'class', $quote->getAttribute( 'class' ) );
