@@ -11,8 +11,8 @@
     <!-- wp:query-title {"type":"archive","className":"my-5"} /-->
     <!-- wp:term-description /-->
     <!-- wp:post-template {"className":"my-5"} -->
-    <!-- wp:cover {"useFeaturedImage":true,"dimRatio":70,"overlayColor":"primary","contentPosition":"bottom left","className":"rounded shadow-lg"} -->
-    <div class="wp-block-cover has-custom-content-position is-position-bottom-left rounded shadow-lg">
+    <!-- wp:cover {"useFeaturedImage":true,"dimRatio":70,"overlayColor":"primary","contentPosition":"bottom left","className":"rounded shadow-lg h-100"} -->
+    <div class="wp-block-cover has-custom-content-position is-position-bottom-left rounded shadow-lg h-100">
         <span aria-hidden="true" class="wp-block-cover__background has-primary-background-color has-background-dim-70 has-background-dim"></span>
         <div class="wp-block-cover__inner-container">
             <!-- wp:group {"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"textColor":"white"} -->
