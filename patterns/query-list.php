@@ -32,8 +32,8 @@
     <!-- wp:query-pagination-numbers /-->
     <!-- /wp:query-pagination -->
     <!-- wp:query-no-results -->
-    <!-- wp:paragraph {"className":"mb-5","placeholder":"No results."} -->
-    <p class="mb-5">No results.</p>
+    <!-- wp:paragraph {"className":"mb-5","placeholder":"<?php esc_html_e( 'No results.', 'wecodeart' ); ?>"} -->
+    <p class="mb-5"><?php esc_html_e( 'No results.', 'wecodeart' ); ?></p>
     <!-- /wp:paragraph -->
     <!-- /wp:query-no-results -->
 </div>

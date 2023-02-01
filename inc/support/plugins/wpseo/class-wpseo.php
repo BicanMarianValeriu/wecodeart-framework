@@ -105,6 +105,9 @@ class WPSeo implements Integration {
 	 * @return 	void
 	 */
 	public function register_blocks() {
+		// Avoid overwriting content in admin.
+		if( is_admin() ) return;
+
 		// Register Yoast FAQ Overwrite
 		wecodeart( 'blocks' )->register( 'yoast/faq-block', WPSeo\Blocks\FAQ::class );
 	}

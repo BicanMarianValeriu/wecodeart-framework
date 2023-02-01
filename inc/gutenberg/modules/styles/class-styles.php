@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.6.9
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
+use WeCodeArt\Gutenberg;
 use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
 
@@ -277,8 +278,12 @@ class Styles implements Integration {
 	 * @return 	string
 	 */
 	public function filter_selectors( $selector, $block ) {
-		if( $block === 'core/avatar' || $block === 'core/image' ) {
+		if( $block === 'core/avatar' ) {
 			$selector .= ' img';
+		}
+
+		if( $block === 'core/image' ) {
+			$selector = $selector . ' img, ' . $selector . ' svg';
 		}
 
 		if( $block === 'core/button' ) {
@@ -433,22 +438,8 @@ class Styles implements Integration {
 	 * @return 	array
 	 */
 	public static function core_blocks( $exclude = false ) {
-		// Exclude this blocks from styles extensions for various reasons
-		// like: no wrapper, renders html or other blocks or simply it should not remove style (core/post-content)
-		$excludes = [
-			'core/block',
-			'core/freeform',
-			'core/html',
-			'core/missing',
-			'core/more',
-			'core/next-page',
-			'core/pattern',
-			'core/post-content',
-			'core/shortcode',
-		];
-
 		$blocks = apply_filters( 'wecodeart/filter/gutenberg/styles/core', [
-			'core/archive',
+			'core/archives',
 			'core/audio',
 			'core/avatar',
 			'core/buttons',
@@ -545,7 +536,9 @@ class Styles implements Integration {
 		] );
 
 		if( (bool) $exclude ) {
-			$blocks = array_diff( $blocks, $excludes );
+			// Exclude this blocks from styles extensions for various reasons
+			// like: no wrapper, renders html or other blocks or simply it should not remove styles
+			$blocks = array_diff( $blocks, Gutenberg::get_restricted_blocks() );
 		}
 
 		return $blocks;

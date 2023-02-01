@@ -58,7 +58,7 @@ class Template extends Dynamic {
 	 * @return 	string
 	 */
 	public function render( $content = '', $block = [] ) {
-		$dom   = $this->markup( $content );
+		$dom   = $this->dom( $content );
 		$first = get_dom_element( '*', $dom );
 
 		if ( ! $first ) {

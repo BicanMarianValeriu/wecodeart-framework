@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-01-30 12:36+0000\n"
+"PO-Revision-Date: 2023-02-01 02:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -164,6 +164,10 @@ msgstr[2] "Răspunsuri la \"%1$s\""
 msgid "Copyright %s - All rights reserved. Built on %s."
 msgstr "Copyright %s – Toate drepturile rezervate. Construit pe %s."
 
+#: inc/gutenberg/blocks/design/class-separator.php:62
+msgid "Curve"
+msgstr "Curbe"
+
 #: inc/support/starter/class-starter.php:71
 msgid "Customizer"
 msgstr "Customizer"
@@ -187,6 +191,10 @@ msgstr ""
 "pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
 "WeCodeArt Framework."
 
+#: inc/gutenberg/blocks/design/class-separator.php:50
+msgid "Dots"
+msgstr "Puncte"
+
 #: inc/gutenberg/blocks/comment/class-form.php:155
 msgid "Email *"
 msgstr "Email *"
@@ -195,7 +203,7 @@ msgstr "Email *"
 msgid "Enter password"
 msgstr "Introduceți parola"
 
-#: inc/gutenberg/blocks/design/class-separator.php:50
+#: inc/gutenberg/blocks/design/class-separator.php:56
 #| msgid "Fixed"
 msgid "Faded"
 msgstr "Estompat"
@@ -272,6 +280,12 @@ msgstr "Nu există arhive de afișat."
 msgid "No responses"
 msgstr "Fără răspunsuri"
 
+#: patterns/query-default.php:23 patterns/query-default.php:24
+#: patterns/query-list.php:35 patterns/query-list.php:36
+#: patterns/query-overlay.php:33 patterns/query-overlay.php:34
+msgid "No results."
+msgstr "Fără rezultate"
+
 #: views/admin/notification-locale.tpl.php:36
 msgid "No, I don`t care."
 msgstr "Nu, nu-mi pasă."
@@ -288,7 +302,7 @@ msgstr "Contur"
 msgid "Password"
 msgstr "Parolă"
 
-#: inc/app.php:125 inc/app.php:126
+#: inc/app.php:126 inc/app.php:127
 msgid "Placeholder"
 msgstr "Substituent"
 
@@ -424,6 +438,10 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
+#: inc/gutenberg/blocks/text/class-heading.php:49
+msgid "Underline Brush"
+msgstr "Pensulă de subliniere"
+
 #: views/general/protected.tpl.php:58
 msgid "Unlock"
 msgstr "Deblochează"
@@ -435,6 +453,10 @@ msgstr "actualizați PHP"
 #: inc/gutenberg/blocks/site/class-login.php:110
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
+
+#: inc/gutenberg/blocks/design/class-separator.php:68
+msgid "Wave"
+msgstr "Val"
 
 #: inc/support/plugins/cf7/class-cf7.php:69
 #, php-format

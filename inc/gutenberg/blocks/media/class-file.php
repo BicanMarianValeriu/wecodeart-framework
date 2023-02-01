@@ -83,16 +83,16 @@ class File extends Dynamic {
 		$matched = array_intersect( $classes, $exclude );
 		$ommited = array_diff( $classes, $exclude );
 
-		$doc = $this->markup( $content );
+		$dom = $this->dom( $content );
 
 		// Wrapper Changes
-		$wrapper	= $doc->getElementsByTagName( 'div' )->item(0);
+		$wrapper	= $dom->getElementsByTagName( 'div' )->item(0);
 		$classname 	= implode( ' ', array_merge( [ 'wp-block-file' ], array_filter( $ommited ) ) );
 		
 		$wrapper->setAttribute( 'class', $classname );
 		
 		// Button Changes
-		$download	= get_dom_element( 'a', $doc, 1 );
+		$download	= get_dom_element( 'a', $dom, 1 );
 		if( $download ) {
 			$btn_class  = [ $download->getAttribute( 'class' ) ];
 			if( ! empty( $matched ) ) {
@@ -102,7 +102,7 @@ class File extends Dynamic {
 			$download->setAttribute( 'class', join( ' ', $btn_class ) );
 		}
 
-		return $doc->saveHTML();
+		return $dom->saveHTML();
 	}
 
 	/**

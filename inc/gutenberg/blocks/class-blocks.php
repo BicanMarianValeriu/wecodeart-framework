@@ -51,6 +51,7 @@ class Blocks implements Configuration {
         $this->register( 'core/code',	    Blocks\Text\Code::class );
         $this->register( 'core/table',	    Blocks\Text\Table::class );
 		$this->register( 'core/quote',	    Blocks\Text\Quote::class );
+		$this->register( 'core/heading',    Blocks\Text\Heading::class );
 		$this->register( 'core/paragraph',  Blocks\Text\Paragraph::class );
 		$this->register( 'core/pullquote',  Blocks\Text\Pullquote::class );
         // // Design Blocks

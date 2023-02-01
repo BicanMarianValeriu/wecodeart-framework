@@ -57,12 +57,12 @@ class Quote extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $content = '', $block = [], $data = null ) {		
-		$doc = $this->markup( $content );
+		$dom = $this->dom( $content );
 		
 		// Quote Changes
 		$quote	= $doc->getElementsByTagName( 'blockquote' )->item(0);
 		if( $quote ) {
-			$figure	= $doc->createElement( 'figure' );
+			$figure	= $dom->createElement( 'figure' );
 			$figure->setAttribute( 'class', $quote->getAttribute( 'class' ) );
 			$quote->setAttribute( 'class', 'blockquote' );
 			$quote->parentNode->replaceChild( $figure, $quote );
@@ -70,16 +70,16 @@ class Quote extends Dynamic {
 		}
 
 		// Cite Changes
-		$cite	= $doc->getElementsByTagName( 'cite' )->item(0);
+		$cite	= $dom->getElementsByTagName( 'cite' )->item(0);
 		if( $cite ) {
-			$caption = $doc->createElement( 'figcaption' );
+			$caption = $dom->createElement( 'figcaption' );
 			$caption->setAttribute( 'class', 'blockquote-footer' );
 			$cite->parentNode->replaceChild( $caption, $cite );
 			$caption->appendChild( $cite );
 			$figure->appendChild( $caption );
 		}
 
-		return $doc->saveHTML();
+		return $dom->saveHTML();
 	}
 
 	/**

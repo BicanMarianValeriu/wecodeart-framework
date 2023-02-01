@@ -70,10 +70,10 @@ class Table extends Dynamic {
 
 		$border = get_prop( $attributes, [ 'style', 'border' ] );
 
-		$doc = $this->markup( $content );
+		$dom = $this->dom( $content );
 
 		// Wrapper Changes
-		$wrapper	= $doc->getElementsByTagName( 'figure' )->item(0);
+		$wrapper	= $dom->getElementsByTagName( 'figure' )->item(0);
 		$classnames	= explode( ' ', $wrapper->getAttribute( 'class' ) );
 		$ommited 	= array_diff( $classnames, $exclude );
 		
@@ -100,7 +100,7 @@ class Table extends Dynamic {
 		// Set Table Classname
 		$table->setAttribute( 'class', join( ' ', $table_cls ) );
 
-		return $doc->saveHTML();
+		return $dom->saveHTML();
 	}
 
 	/**

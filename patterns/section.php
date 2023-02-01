@@ -13,14 +13,14 @@
         <!-- wp:column {"verticalAlignment":"center","className":""} -->
         <div class="wp-block-column is-vertically-aligned-center">
             <!-- wp:paragraph -->
-            <p>Content</p>
+            <p>Lorem ipsum</p>
             <!-- /wp:paragraph -->
         </div>
         <!-- /wp:column -->
         <!-- wp:column {"verticalAlignment":"center","style":{"spacing":{"padding":{"top":"var:preset|spacing|gutter","right":"var:preset|spacing|gutter","bottom":"var:preset|spacing|gutter","left":"var:preset|spacing|gutter"}}},"backgroundColor":"white","className":""} -->
         <div class="wp-block-column is-vertically-aligned-center has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--gutter);padding-right:var(--wp--preset--spacing--gutter);padding-bottom:var(--wp--preset--spacing--gutter);padding-left:var(--wp--preset--spacing--gutter)">
             <!-- wp:paragraph -->
-            <p>Content</p>
+            <p>Lorem ipsum</p>
             <!-- /wp:paragraph -->
         </div>
         <!-- /wp:column -->

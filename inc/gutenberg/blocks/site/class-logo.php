@@ -55,7 +55,7 @@ class Logo extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'	], 10, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'	], 10, 2 );
     }
 
     /**
@@ -67,7 +67,7 @@ class Logo extends Dynamic {
 	 * @return 	string
 	 */
 	public function render( $content = '', $block = [] ) {
-		$dom	= $this->markup( $content );
+		$dom	= $this->dom( $content );
 		$div  	= get_dom_element( 'div', $dom );
 		$link 	= get_dom_element( 'a', $div );
 		$img  	= get_dom_element( 'img', $link ?? $div );
@@ -92,7 +92,7 @@ class Logo extends Dynamic {
 				return $content;
 			}
 	
-			$svg = $dom->importNode( $this->markup( file_get_contents( $file ) )->documentElement, true );
+			$svg = $dom->importNode( $this->dom( file_get_contents( $file ) )->documentElement, true );
 	
 			if ( ! method_exists( $svg, 'setAttribute' ) ) {
 				return $content;

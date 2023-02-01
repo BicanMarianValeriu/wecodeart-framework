@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -109,6 +109,9 @@ class Author extends Dynamic {
 		.wp-block-post-author {
 			display: flex;
 			flex-wrap: wrap
+		}
+		.wp-block-post-author__name:last-child {
+			margin-bottom: 0;
 		}
 		";
 	}

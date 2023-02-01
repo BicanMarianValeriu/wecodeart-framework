@@ -5,7 +5,7 @@
  * Categories: wecodeart
  */
 ?>
-<!-- wp:group {"align":"full","className":"","layout":{"type":"constrained"}} -->
+<!-- wp:group {"align":"full","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull">
     <!-- wp:media-text {"align":"full","mediaLink":"https://pd.w.org/2023/01/42163d169550d5270.03657997.jpg","mediaType":"image","imageFill":true,"className":"min-vh-100 gap-0"} -->
     <div class="wp-block-media-text alignfull is-stacked-on-mobile is-image-fill min-vh-100 gap-0">
@@ -15,24 +15,23 @@
         <div class="wp-block-media-text__content">
             <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|gutter","right":"var:preset|spacing|gutter","bottom":"var:preset|spacing|gutter","left":"var:preset|spacing|gutter"},"blockGap":"var:preset|spacing|lg"}},"className":"py-5 px-md-5","layout":{"type":"constrained"}} -->
             <div class="wp-block-group alignfull py-5 px-md-5" style="padding-top:var(--wp--preset--spacing--gutter);padding-right:var(--wp--preset--spacing--gutter);padding-bottom:var(--wp--preset--spacing--gutter);padding-left:var(--wp--preset--spacing--gutter)">
-                <!-- wp:site-logo {"width":120,"isLink":false,"className":"mb-5"} /-->
-                <!-- wp:separator {"style":{"color":{"background":"#ececec"}},"className":"is-style-wide"} -->
-                <hr class="wp-block-separator has-text-color has-alpha-channel-opacity has-background is-style-wide" style="background-color:#ececec;color:#ececec" />
-                <!-- /wp:separator -->
+                <!-- wp:site-logo {"width":60,"isLink":false,"className":"mb-5"} /-->
                 <!-- wp:group {"align":"full","layout":{"type":"constrained","contentSize":"550px","justifyContent":"left"}} -->
                 <div class="wp-block-group alignfull">
+                    <!-- wp:separator {"style":{"color":{"background":"#ececec"}},"className":"is-style-wide"} -->
+                    <hr class="wp-block-separator has-text-color has-alpha-channel-opacity has-background is-style-wide" style="background-color:#ececec;color:#ececec" />
+                    <!-- /wp:separator -->
                     <!-- wp:paragraph {"placeholder":"Conținut...","textColor":"primary","className":"mb-0","fontSize":"small"} -->
                     <p class="mb-0 has-primary-color has-text-color has-small-font-size">COMING SOON</p>
                     <!-- /wp:paragraph -->
-                    <!-- wp:heading {"style":{"spacing":{"margin":{"top":"0"}}},"className":"fw-500"} -->
-                    <h2 class="fw-500" style="margin-top:0"><strong>We Are Getting Ready to Launch!</strong></h2>
+                    <!-- wp:heading {"style":{"spacing":{"margin":{"top":"0"}}},"className":"fw-500 is-style-underline-brush"} -->
+                    <h2 class="fw-500 is-style-underline-brush" style="margin-top:0"><strong><span class="has-underline">We Are Getting Ready to Launch!</span></strong></h2>
                     <!-- /wp:heading -->
                     <!-- wp:paragraph {"textColor":"secondary"} -->
                     <p class="has-secondary-color has-text-color">Our website is almost ready to launch, lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim.</p>
                     <!-- /wp:paragraph -->
-                    <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","right":"var:preset|spacing|lg","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|lg"},"margin":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg"}}},"backgroundColor":"primary","textColor":"white","className":"rounded-1","layout":{"type":"constrained"}} -->
-                    <div class="wp-block-group rounded-1 has-white-color has-primary-background-color has-text-color has-background"
-                        style="margin-top:var(--wp--preset--spacing--lg);margin-bottom:var(--wp--preset--spacing--lg);padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--lg)">
+                    <!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md"}}},"backgroundColor":"primary","textColor":"white","className":"p-4 p-lg-5 rounded-1","layout":{"type":"constrained"}} -->
+                    <div class="wp-block-group p-4 p-lg-5 rounded-1 has-white-color has-primary-background-color has-text-color has-background" style="margin-top:var(--wp--preset--spacing--md);margin-bottom:var(--wp--preset--spacing--md)">
                         <!-- wp:paragraph {"fontSize":"small"} -->
                         <p class="has-small-font-size">SUBSCRIBE AND</p>
                         <!-- /wp:paragraph -->
@@ -55,9 +54,9 @@
                         <!-- /wp:paragraph -->
                         <!-- wp:social-links {"iconColor":"primary","iconColorValue":"#1188ff","openInNewTab":true,"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|gutter","left":"var:preset|spacing|gutter"}}},"className":"is-style-logos-only"} -->
                         <ul class="wp-block-social-links has-icon-color is-style-logos-only">
-                            <!-- wp:social-link {"url":"http://localhost/wecodeart/test/","service":"wordpress"} /-->
-                            <!-- wp:social-link {"url":"http://localhost/wecodeart/test/","service":"facebook"} /-->
-                            <!-- wp:social-link {"url":"http://localhost/wecodeart/test/","service":"twitter"} /-->
+                            <!-- wp:social-link {"url":"#","service":"wordpress"} /-->
+                            <!-- wp:social-link {"url":"#","service":"facebook"} /-->
+                            <!-- wp:social-link {"url":"#","service":"twitter"} /-->
                         </ul>
                         <!-- /wp:social-links -->
                     </div>

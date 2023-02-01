@@ -10,6 +10,5 @@
     <!-- wp:post-author {"isLink":true,"showAvatar":false} /-->
     <!-- wp:post-date /-->
     <!-- wp:post-terms {"term":"category"} /-->
-    <!-- wp:post-comments-link /-->
 </div>
 <!-- /wp:group -->

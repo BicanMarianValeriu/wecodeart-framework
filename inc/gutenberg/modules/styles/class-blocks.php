@@ -184,7 +184,7 @@ class Blocks extends Processor {
 				if ( $padding = get_prop( $spacing, 'padding', [] ) ) {
 					if( ! empty( $padding ) ) {
 						if( count( $padding ) === 4 && count( array_unique( $padding ) ) === 1 ) {
-							$padding = end( $padding );
+							$padding = current( $padding );
 
 							// Is WP way of saved color
 							if( mb_strpos( $padding, 'var:preset|spacing' ) !== false ) {

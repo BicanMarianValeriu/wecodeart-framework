@@ -12,17 +12,22 @@ v5.7.2
 - Updated - core/table minor CSS updates + core/calendar to enqueue table CSS
 - Updated - Gutenberg `customCSS` block attribute (from styles extension) to `customStyle`
 - Updated - Utilities `gap` to `g` class for flex/grid gap (kept both for the moment)
+- Updated - support removed for core block patterns
+- Updated - Translated some pattern strings
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
+- Removed - core/post-comments-link from Post Meta pattern
 - Fixed - core/button outline default color rgb variable added in CSS
 - Fixed - core/social inline CSS generation (for single SVG icons) if 2 or more blocks are used on the template
 - Fixed - core/gallery admin styles and Frontend gap
 - Added - shadow support in theme.json (upcoming WP versions)
 - Added - core/post-author link class (wp-block-post-author__link)
 - Added - core/post-terms link class (wp-block-post-terms__link)
+- Added - core/separator styles - must have a defined height custom CSS;
 - Added - new dom() function to manipulate HTML markup for Gutenberg blocks
 - Added - Improved SEO: Schema.org for header/footer/sidebar template parts
 - Added - Yoast SEO`s FAQ block markup updated to "details" HTML element + improved styles
 - Added - Coming Soon pattern (for pages)
+- Added - viewportWidth property to patterns registered from HTML files in the theme
 
 v5.7.1
 - Updated - core/archives type attribute

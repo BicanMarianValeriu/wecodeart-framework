@@ -17,7 +17,7 @@
         <div class="wp-block-column is-vertically-aligned-top col-lg-9 ps-lg-5">
             <!-- wp:post-title {"level":1} /-->
             <!-- wp:heading -->
-            <h2 id="sample-heading">Sample Heading</h2>
+            <h2 id="sample-heading-1">Sample Heading</h2>
             <!-- /wp:heading -->
             <!-- wp:heading {"level":3} -->
             <h3 id="subline-1">Subline 1</h3>
@@ -32,7 +32,7 @@
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.</p>
             <!-- /wp:paragraph -->
             <!-- wp:heading -->
-            <h2 id="sample-heading">Another Heading</h2>
+            <h2 id="sample-heading-2">Another Heading</h2>
             <!-- /wp:heading -->
             <!-- wp:paragraph -->
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.</p>

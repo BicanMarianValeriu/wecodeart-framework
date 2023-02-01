@@ -71,6 +71,7 @@ return [
         'classes'   => true,
         'patterns'  => true,
         'support'   => [
+            'core-block-patterns'   => 'remove',
             'block-nav-menus'       => true,
             'widgets-block-editor'  => true,
         ],

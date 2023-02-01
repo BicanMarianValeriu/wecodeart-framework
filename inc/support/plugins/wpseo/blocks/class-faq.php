@@ -20,7 +20,6 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 
 use function add_filter;
-use function WeCodeArt\Functions\dom;
 use function WeCodeArt\Functions\get_dom_element;
 use function WeCodeArt\Functions\change_tag_name;
 use function WeCodeArt\Functions\get_elements_by_class_name;
@@ -50,7 +49,7 @@ class Faq extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_filter( 'render_block_' . $this->namespace . '/' . $this->block_name,	[ $this, 'render'	], 10, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'	], 10, 2 );
     }
 
     /**
@@ -62,7 +61,7 @@ class Faq extends Dynamic {
 	 * @return 	string
 	 */
 	public function render( $content = '', $block = [] ) {
-		$dom		= dom( $content );
+		$dom		= $this->dom( $content );
 		$sections	= get_elements_by_class_name( $dom, 'schema-faq-section' );
 
 		if( count( $sections ) ) {
@@ -92,9 +91,6 @@ class Faq extends Dynamic {
 				--wp--faq--border: 1px solid var(--wp--gray-300);
 				border: var(--wp--faq--border);
 			}
-			.wp-block-yoast-faq-block details {
-				overflow: hidden;
-			}
 			.wp-block-yoast-faq-block details + details {
 				border-top: var(--wp--faq--border);
 			}
@@ -106,7 +102,7 @@ class Faq extends Dynamic {
 				font-weight: 700;
 				cursor: pointer;
 			}
-			.wp-block-yoast-faq-block summary:before {
+			.wp-block-yoast-faq-block summary::before {
 				content: "";
 				position: absolute;
 				top: calc(50% - var(--wp--faq--chevron-size));
@@ -126,7 +122,7 @@ class Faq extends Dynamic {
 			.wp-block-yoast-faq-block details[open] summary {
 				border-bottom: var(--wp--faq--border);
 			}
-			.wp-block-yoast-faq-block details[open] > summary:before {
+			.wp-block-yoast-faq-block details[open] > summary::before {
 				transform: rotate(90deg);
 			}
 			.wp-block-yoast-faq-block details summary::-webkit-details-marker {

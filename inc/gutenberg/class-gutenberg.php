@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.5.5
+ * @version		5.7.2
  */
 
 namespace WeCodeArt;
@@ -111,16 +111,7 @@ class Gutenberg {
 				'name'		=> wecodeart( 'name' ),
 				'version' 	=> wecodeart( 'version' )
 			],
-			'restrictedBlocks' => apply_filters( 'wecodeart/filter/gutenberg/restricted', [
-				'core/archives',
-				'core/block',
-				'core/freeform',
-				'core/missing',
-				'core/more',
-				'core/nextpage',
-				'core/pattern',
-				'core/shortcode',
-			] ),
+			'restrictedBlocks' => self::get_restricted_blocks(),
 		] );
 		
 		wp_register_script( $this->make_handle( 'inline' ), '' );
@@ -128,7 +119,7 @@ class Gutenberg {
 		wp_add_inline_script( $this->make_handle( 'inline' ), 'window.wecodeartGutenberg = ' . wp_json_encode( $data ) . ';', 'before' );
 
 		// Gutenberg editor assets.
-		wp_enqueue_script( 	$this->make_handle(),	$this->get_asset( 'js', 'gutenberg/editor' ), 	[
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/editor' ), [
 			'wp-blocks',
 			'wp-i18n',
 			'wp-element',
@@ -193,5 +184,25 @@ class Gutenberg {
 		if( ! get_prop( wecodeart_config( 'gutenberg' ), 'editor' ) ) {
 			remove_submenu_page( 'themes.php', 'gutenberg-edit-site' );
 		}
+	}
+
+	/**
+	 * Restricted core blocks.
+	 *
+	 * @param 	array 	$blocks
+	 *
+	 * @return 	array
+	 */
+	public static function get_restricted_blocks( array $blocks = [] ): array {
+		return apply_filters( 'wecodeart/filter/gutenberg/restricted', wp_parse_args( $blocks, [
+			'core/block',
+			'core/html',
+			'core/freeform',
+			'core/missing',
+			'core/more',
+			'core/nextpage',
+			'core/pattern',
+			'core/shortcode',
+		] ) );
 	}
 }

@@ -159,6 +159,7 @@ class Search extends Dynamic {
 
 			// Maybe add submit button
 			if ( get_prop( $attributes, 'buttonPosition', 'button-outside' ) !== 'no-button' ) {
+				add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
 				wp_enqueue_style( 'wp-block-button' );
 
 				$icon  = get_prop( $attributes, 'buttonUseIcon' );

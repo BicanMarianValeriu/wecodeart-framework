@@ -32,7 +32,7 @@ class Pattern {
 	 *
 	 * @var array
 	 */
-	const VALID_PROPERTIES = [ 'slug', 'title', 'content', 'description', 'categories', 'blockTypes', 'theme' ];
+	const VALID_PROPERTIES = [ 'slug', 'title', 'content', 'description', 'categories', 'viewportWidth', 'blockTypes', 'theme' ];
 
 	/**
 	 * Template slug.
@@ -61,6 +61,13 @@ class Pattern {
 	 * @var string
 	 */
 	public $description = '';
+
+    /**
+	 * Viewport Width.
+	 *
+	 * @var int
+	 */
+	public $viewportWidth = null;
 
     /**
 	 * Categories.
@@ -115,6 +122,7 @@ class Pattern {
             'content'     	=> serialize_blocks( parse_blocks( $this->content ) ),
             'categories'  	=> ! empty( $this->categories ) ? $this->categories : [ $this->theme ],
             'description' 	=> $this->description,
+            'viewportWidth'	=> $this->viewportWidth,
 			'blockTypes' 	=> $this->blockTypes,
         ];
 
@@ -148,6 +156,10 @@ class Pattern {
 				case 'theme':
 				case 'description':
 					$sanitized[$key] = sanitize_text_field( $value );
+				break;
+				// Number
+				case 'viewportWidth':
+					$sanitized[$key] = absint( $value );
 				break;
 				// Arrays
 				case 'categories':

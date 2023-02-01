@@ -81,7 +81,7 @@ abstract class Dynamic {
 	 * 
 	 * @return 	object $doc.
 	 */
-	protected function markup( $content = '' ) {
+	protected function dom( $content = '' ) {
 		$doc = dom( $content );
 
 		return $doc;
@@ -95,7 +95,7 @@ abstract class Dynamic {
 	 * @return 	object $doc.
 	 */
 	protected function load_html( $content = '' ) {
-		return $this->markup( $doc );
+		return $this->dom( $doc );
 	}
 	
 	/**

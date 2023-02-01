@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.7.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -46,9 +46,27 @@ class Separator extends Dynamic {
 	 */
 	public function register() {
 		\register_block_style( $this->get_block_type(), [
+			'name' 			=> 'dots',
+            'label'			=> esc_html__( 'Dots', 'wecodeart' ),
+			'inline_style' 	=> self::get_style( 'dots' )
+		] );
+		
+		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'faded',
             'label'			=> esc_html__( 'Faded', 'wecodeart' ),
-			'inline_style' 	=> wecodeart( 'styles' )::compress( self::get_style( 'faded' ) )
+			'inline_style' 	=> self::get_style( 'faded' )
+		] );
+
+		\register_block_style( $this->get_block_type(), [
+			'name' 			=> 'curve',
+            'label'			=> esc_html__( 'Curve', 'wecodeart' ),
+			'inline_style' 	=> self::get_style( 'curve' )
+		] );
+		
+		\register_block_style( $this->get_block_type(), [
+			'name' 			=> 'wave',
+            'label'			=> esc_html__( 'Wave', 'wecodeart' ),
+			'inline_style' 	=> self::get_style( 'wave' )
 		] );
 	}
 
@@ -89,11 +107,57 @@ class Separator extends Dynamic {
 					}
 				";
 				break;
+			case 'wave' :
+				$symbol = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 1000 120"%3E%3Cpath d="M0 80q200 80 500-20 270-100 500-20v80H0Z"/%3E%3C/svg%3E';
+				$inline = "
+				hr.wp-block-separator.is-style-wave {
+					position: relative;
+					background-color: transparent!important;
+				}
+				.wp-block-separator.is-style-wave::before {
+					content: '';
+					display: block;
+					position: absolute;
+					background: currentColor;
+					width: 100%;
+					height: calc(100% + 1px);
+					min-height: 50px;
+					-webkit-mask-repeat: no-repeat;
+					-webkit-mask-position: center;
+					-webkit-mask-size: 100%;
+					-webkit-mask: url('$symbol');
+					mask: url('$symbol');
+				}
+				";
+				break;
+			case 'curve' :
+				$symbol = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 1000 120"%3E%3Cpath d="M1000 120H0c533.3 0 866.7-40 1000-120v120z"/%3E%3C/svg%3E';
+				$inline = "
+				hr.wp-block-separator.is-style-curve {
+					position: relative;
+					background-color: transparent!important;
+				}
+				.wp-block-separator.is-style-curve::before {
+					content: '';
+					display: block;
+					position: absolute;
+					background: currentColor;
+					width: 100%;
+					height: calc(100% + 1px);
+					min-height: 50px;
+					-webkit-mask-repeat: no-repeat;
+					-webkit-mask-position: center;
+					-webkit-mask-size: 100%;
+					-webkit-mask: url('$symbol');
+					mask: url('$symbol');
+				}
+				";
+				break;
 			default :
 				break;
 		endswitch;
 
-		return $inline;
+		return wecodeart( 'styles' )::compress( $inline );
 	}
 
 	/**
@@ -112,8 +176,6 @@ class Separator extends Dynamic {
 			max-width: 100px;
 		}
 		';
-
-		$inline .= self::get_style( 'dots' );
 
 		return $inline;
 	}
