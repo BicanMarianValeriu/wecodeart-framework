@@ -45,10 +45,7 @@ class Pages extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_action( 'wp_print_styles', function() {
-			\wp_deregister_style( 'wp-block-' . $this->block_name );
-		} );
-
+		\add_action( 'wp_print_styles', fn() => \wp_deregister_style( 'wp-block-' . $this->block_name ) );
 		\add_filter( 'block_type_metadata_settings',	[ $this, 'filter_render' ], 10, 2 );
 	}
 

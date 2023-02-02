@@ -27,7 +27,7 @@ class Condition implements ConditionalInterface {
 	/**
 	 * @inheritdoc
 	 */
-	public function is_met() {
+	public function is_met(): bool {
 		return detect_plugin( [ 'constants' => [ 'WPSEO_VERSION' ] ] );
 	}
 }

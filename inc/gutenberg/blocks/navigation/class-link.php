@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -137,14 +137,14 @@ class Link extends Dynamic {
 	
 			// Icon
 			if( ! empty( $icon = get_prop( $extras, 'icon', [] ) ) ) {
-				printf( '<i class="wp-block-navigation-link__icon %s"></i>', esc_attr( join( ' ', $icon ) ) );
+				printf( '<i class="wp-block-navigation-item__icon %s"></i>', esc_attr( join( ' ', $icon ) ) );
 			}
 	
 			// Label
 			wecodeart( 'markup' )::wrap( 'nav-label', [ [
 				'tag' 	=> 'span',
 				'attrs'	=> [
-					'class' => 'wp-block-navigation-link__label'
+					'class' => 'wp-block-navigation-item__label'
 				]
 			] ], function( $attributes ) { 
 					echo wp_kses_post( $attributes['label'] );
@@ -155,6 +155,7 @@ class Link extends Dynamic {
 	/**
 	 * Renders dropdown
 	 *
+	 * @param 	array 	$attributes
 	 * @param 	array 	$block
 	 *
 	 * @return 	string	HTML
@@ -196,11 +197,14 @@ class Link extends Dynamic {
 
 	/**
 	 * Return a string containing a linkmod type and update $atts array
+	 *
+	 * @param	array	$classes
 	 * 
 	 * @return 	string
 	 */
-	public function get_link_type( $classes = [] ) {
+	public function get_link_type( array $classes = [] ): string {
 		$mod = '';
+		
 		// Loop through array of linkmod classes to handle their $atts.
 		if ( empty( $classes ) ) {
 			return $mod;
@@ -215,8 +219,8 @@ class Link extends Dynamic {
 				$mod = 'dropdown-header';
 			} elseif ( 'dropdown-divider' === $class ) {
 				$mod = 'dropdown-divider';
-			} elseif ( 'dropdown-item-text' === $class ) {
-				$mod = 'dropdown-item-text';
+			} elseif ( in_array( $class, [ 'dropdown-text', 'dropdown-item-text' ] ) ) {
+				$mod = 'dropdown-text';
 			}
 		}
 
@@ -225,17 +229,29 @@ class Link extends Dynamic {
 
 	/**
 	 * Return a string containing a linkmod span.
+	 *
+	 * @param	string 	$type
 	 * 
 	 * @return 	string
 	 */
-	public function get_link_tag( $type ) {
-		$output = 'a';
+	public function get_link_tag( string $type ): string  {
+		$output = '';
 
-		if ( 'dropdown-header' === $type || 'dropdown-item-text' === $type ) {
-			$output = 'span';
-		} elseif ( 'dropdown-divider' === $type ) {
-			$output = 'div';
-		}
+		switch( $type ) :
+			case 'dropdown-header':
+				$output = 'h6';
+			break;
+			case 'dropdown-text':
+			case 'dropdown-item-text':
+				$output = 'span';
+			break;
+			case 'dropdown-divider':
+				$output = 'div';
+			break;
+			default: 
+				$output = 'a';
+			break;
+		endswitch;
 
 		return $output;
 	}
@@ -253,7 +269,7 @@ class Link extends Dynamic {
 		$has_submenu 	= count( $block->inner_blocks ) > 0;
 		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
 
-		$classes = [ 'wp-block-navigation-link__content' ];
+		$classes = [ 'wp-block-navigation-item__content' ];
 		$classes[] =  $is_sub_menu ? 'dropdown-item' : 'nav-link' ;
 			
 		if( $is_active ) {
@@ -288,6 +304,7 @@ class Link extends Dynamic {
 		foreach ( $extras as $class ) {
 			if ( empty( $class ) ) continue;
 
+			// Add Disabled
 			if ( 'disabled' === $class ) {
 				$attrs['href'] = '#';
 				$attrs['tabindex'] = '-1';
@@ -295,10 +312,8 @@ class Link extends Dynamic {
 				unset( $attrs['target'] );
 			}
 
-			// This applies only for submenus
-			if( $is_sub_menu === false ) continue;
-			
-			if ( in_array( $class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-item-text' ] ) ) {
+			// Submenu Elements
+			if( $is_sub_menu && in_array( $class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-text', 'dropdown-item-text' ], true ) ) {
 				$attrs['class'] = str_replace( 'dropdown-item', $class, $attrs['class'] );
 				unset( $attrs['href'] );
 				unset( $attrs['target'] );
@@ -315,8 +330,8 @@ class Link extends Dynamic {
 	 */
 	public function get_wrapper_attributes( $attributes, $block, &$extras ) {
 		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
-		$classes		= [ 'wp-block-navigation-link' ];
-		$class_names	= ! empty( $attributes['className'] ) ? explode( ' ', $attributes['className'] ) : false;
+		$classes		= [ 'wp-block-navigation-item', 'wp-block-navigation-link' ];
+		$class_names	= explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
 
 		// Fallback - to do, if styles extension is disabled.
 		$inline_style 	= '';
@@ -325,11 +340,11 @@ class Link extends Dynamic {
 			$classes[] = 'nav-item';
 		}
 
-		if ( ! empty( $class_names ) ) {
+		if ( count( $class_names ) ) {
 			$classes = array_merge( $classes, $class_names );
 		}
 
-		if( count( $block->inner_blocks ) > 0 ) {
+		if( count( $block->inner_blocks ) ) {
 			$classes[] = 'dropdown';
 		}
 		
@@ -342,10 +357,10 @@ class Link extends Dynamic {
 	}
 
 	/**
-	 * Find any custom linkmod or icon classes and store in their holder
+	 * Find any custom mod or icon classes and store in their holder
 	 *
-	 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider
-	 * Supported iconsets: Font Awesome 4/5/6, Glypicons
+	 * Supported Mods: .disabled, .dropdown-header, .dropdown-divider, .dropdown-text
+	 * Supported Icons: Font Awesome 4/5/6, Glypicons
 	 *
 	 * @param 	array   $classes		an array of classes currently assigned to the item.
 	 * @param 	bool   	$is_sub_menu	is dropdown link.
@@ -353,14 +368,14 @@ class Link extends Dynamic {
 	 *
 	 * @return 	array  $classes	a maybe modified array of classnames.
 	 */
-	private static function pluck_special_classes( $classes, $is_sub_menu, &$extras ) {
+	private function pluck_special_classes( $classes, $is_sub_menu, &$extras ) {
 		foreach ( $classes as $key => $class ) {
 			// If any special classes are found, store the class in it's
 			// holder array and and unset the item from $classes.
 			if ( preg_match( '/^disabled|^sr-only|^screen-reader-text/i', $class ) ) {
 				$extras['mod'][] = $class;
-				unset( $classes[ $key ] );
-			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) && $is_sub_menu ) {
+				// unset( $classes[ $key ] );
+			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-text|^dropdown-item-text/i', $class ) && $is_sub_menu ) {
 				$extras['mod'][] = $class;
 				unset( $classes[ $key ] );
 			} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {
@@ -380,38 +395,44 @@ class Link extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public function styles(): string {
 		return "
-		.nav-link {
-			display: block;
-			padding: 0.5rem 1rem;
-			color: var(--wp--preset--color--primary);
-			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-		}
-		.disabled>.nav-link,
-		.nav-link.disabled {
-			color: var(--wp--preset--color--gray);
-			pointer-events: none;
-			cursor: default;
-		}
-		.wp-block-navigation.has-text-color .nav-link {
-			color: inherit;
-		}
-		.wp-block-navigation .nav-link {
-			display: flex;
-			align-items: center;
-		}
-		.wp-block-navigation .wp-block-navigation-link__icon {
-			margin-right: .5rem;
-		}
-		.wp-block-navigation .wp-block-navigation-link__label {
-			flex: 1 1 auto;
-			word-break: normal;
-			overflow-wrap: break-word;
-		}
-		.wp-block-navigation .wp-block-navigation-item__description {
-			display: none;
-		}
+			/* Nav Links */
+			.wp-block-navigation .nav-link {
+				display: block;
+				padding: var(--wp--nav-link-padding-y) var(--wp--nav-link-padding-x);
+				color: var(--wp--nav-link-color);
+				font-size: inherit;
+				font-weight: inherit;
+				transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+			}
+			.wp-block-navigation .nav-link:is(:focus,:hover) {
+				outline: none;
+			}
+			.wp-block-navigation .disabled>.nav-link,
+			.wp-block-navigation .nav-link.disabled {
+				color: var(--wp--nav-link-disabled-color);
+				pointer-events: none;
+				cursor: default;
+			}
+			.wp-block-navigation .navbar-nav .nav-link:is(:hover,:focus) {
+				color: var(--wp--nav-link-hover-color);
+			}
+			.wp-block-navigation .navbar-nav .show > .nav-link,
+			.wp-block-navigation .navbar-nav .nav-link.active {
+				color: var(--wp--navbar-active-color);
+			}
+			/* Fix Custom Styles */
+			.wp-block-navigation .wp-block-navigation-item__icon {
+				margin-right: .5rem;
+			}
+			.wp-block-navigation .wp-block-navigation-item__label {
+				word-break: normal;
+				overflow-wrap: break-word;
+			}
+			.wp-block-navigation .wp-block-navigation-item__description {
+				display: none;
+			}
 		";
 	}
 }

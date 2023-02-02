@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -69,7 +69,7 @@ class Menu extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public function styles(): string {
 		$inline = '';
 
 		$inline .= "
@@ -86,8 +86,8 @@ class Menu extends Dynamic {
 			.dropdown-toggle::after {
 				content: '';
 				display: inline-block;
-				margin-left: 0.255em;
-				vertical-align: 0.255em;
+				margin-left: .5em;
+				vertical-align: 0.125em;
 				border-top: 0.3em solid;
 				border-left: 0.3em solid transparent;
 				border-right: 0.3em solid transparent;
@@ -97,35 +97,57 @@ class Menu extends Dynamic {
 				margin-left: 0;
 			}
 			.dropdown-menu {
+				--wp--dropdown-zindex: 1000;
+				--wp--dropdown-min-width: 10rem;
+				--wp--dropdown-padding-x: 0;
+				--wp--dropdown-padding-y: 0.5rem;
+				--wp--dropdown-spacer: 0;
+				--wp--dropdown-color: var(--wp--preset--color--dark);
+				--wp--dropdown-bg: var(--wp--white);
+				--wp--dropdown-border-width: 1px;
+				--wp--dropdown-border-color: var(--wp--gray-200);
+				--wp--dropdown-border-radius: 0.375rem;
+				--wp--dropdown-divider-bg: rgba(0,0,0, .05);
+				--wp--dropdown-divider-margin-y: 0.5rem;
+				--wp--dropdown-box-shadow: 0 0.5rem 1rem rgba(0,0,0, 0.15);
+				--wp--dropdown-link-color: var(--wp--preset--color--dark);
+				--wp--dropdown-link-hover-color: var(--wp--preset--color--dark);
+				--wp--dropdown-link-hover-bg: var(--wp--preset--color--light);
+				--wp--dropdown-link-active-color: var(--wp--white);
+				--wp--dropdown-link-active-bg: var(--wp--preset--color--primary);
+				--wp--dropdown-link-disabled-color: var(--wp--gray-400);
+				--wp--dropdown-item-padding-x: 1rem;
+				--wp--dropdown-item-padding-y: 0.25rem;
+				--wp--dropdown-header-color: var(--wp--gray-600);
+				--wp--dropdown-header-padding-x: 1rem;
+				--wp--dropdown-header-padding-y: 0.5rem;
 				position: absolute;
-				z-index: 1000;
 				display: none;
-				min-width: 10rem;
-				padding: 0.5rem 0;
+				z-index: var(--wp--dropdown-zindex);
+				min-width: var(--wp--dropdown-min-width);
+    			padding: var(--wp--dropdown-padding-y) var(--wp--dropdown-padding-x);
 				margin: 0;
-				/* font-size: 1rem; */
 				text-align: left;
 				list-style: none;
-				color: var(--wp--preset--color--dark);
-				background-color: var(--wp--preset--color--white);
-				background-clip: padding-box;
-				border: 1px solid rgba(0, 0, 0, 0.15);
-				border-radius: 0.25rem;
+				color: var(--wp--dropdown-color);
+				background-color: var(--wp--dropdown-bg);
+				border: var(--wp--dropdown-border-width) solid var(--wp--dropdown-border-color);
+    			border-radius: var(--wp--dropdown-border-radius);
 			}
 			.dropdown-menu[data-bs-popper] {
 				top: 100%;
 				left: 0;
-				margin-top: 0.125rem;
+				margin-top: var(--wp--dropdown-spacer);
 			}
 			.dropdown-menu-start {
-				--wp-position: start;
+				--wp--position: start;
 			}
 			.dropdown-menu-start[data-bs-popper] {
 				right: auto;
 				left: 0;
 			}
 			.dropdown-menu-end {
-				--wp-position: end;
+				--wp--position: end;
 			}
 			.dropdown-menu-end[data-bs-popper] {
 				right: 0;
@@ -213,81 +235,72 @@ class Menu extends Dynamic {
 		}
 
 		$inline .= "
-			.dropdown-divider {
-				height: 0;
-				margin: 0.5rem 0;
-				overflow: hidden;
-				border-top: 1px solid rgba(0, 0, 0, 0.15);
-			}
-			.dropdown-item {
+			.wp-block-navigation .dropdown-item {
 				display: block;
 				width: 100%;
-				padding: 0.25rem 1rem;
-				/* font-weight: 400; */
+				padding: var(--wp--dropdown-item-padding-y) var(--wp--dropdown-item-padding-x);
+				color: var(--wp--dropdown-link-color);
+				font-weight: inherit;
 				text-align: inherit;
 				white-space: nowrap;
-				color: var(--wp--gray-dark);
 				background-color: transparent;
 				border: 0;
+				border-radius: var(--wp--dropdown-item-border-radius,0);
 				clear: both;
 			}
-			.dropdown-item:hover, .dropdown-item:focus {
-				color: var(--wp--preset--color--dark);
-				background-color: var(--wp--preset--color--light);
+			.wp-block-navigation .dropdown-item:is(:hover,:focus) {
+				color: var(--wp--dropdown-link-hover-color);
+    			background-color: var(--wp--dropdown-link-hover-bg);
 			}
-			.dropdown-item.active, .dropdown-item:active {
-				background-color: var(--wp--preset--color--primary);
-				color: var(--wp--preset--color--white);
+			.wp-block-navigation .dropdown-item:is(.active,:active) {
+				color: var(--wp--dropdown-link-active-color);
+				background-color: var(--wp--dropdown-link-active-bg);
 				text-decoration: none;
 			}
-			.disabled>.dropdown-item, .dropdown-item.disabled, .dropdown-item:disabled {
-				color: var(--wp--gray);
+			.wp-block-navigation .disabled>.dropdown-item,
+			.wp-block-navigation .dropdown-item:is(.disabled,:disabled) {
+				color: var(--wp--dropdown-link-disabled-color);
 				pointer-events: none;
 				background-color: transparent;
 			}
-			.dropdown-menu.show {
+			.wp-block-navigation .dropdown-menu.show {
 				display: block;
-			}	  
-			.dropdown-header {
-				display: block;
-				padding: 0.5rem 1rem;
+			}
+
+			/* Elements */
+			.wp-block-navigation .dropdown-header {
+				padding: var(--wp--dropdown-header-padding-y) var(--wp--dropdown-header-padding-x);
 				margin-bottom: 0;
+				color: var(--wp--dropdown-header-color);
 				font-size: var(--wp--preset--font-size--small);
-				color: var(--wp--gray);
 				white-space: nowrap;
 			}
-			.dropdown-item-text {
+			.wp-block-navigation .dropdown-text,
+			.wp-block-navigation .dropdown-item-text {
 				display: block;
-				padding: 0.25rem 1rem;
-				color: var(--wp--preset--color--light);
+				padding: var(--wp--dropdown-header-padding-y) var(--wp--dropdown-header-padding-x);
+				color: var(--wp--dropdown-color);
 			}
-			.dropdown-menu-dark {
-				color: var(--wp--preset--color--light);
-				background-color: var(--wp--preset--color--dark);
-				border-color: rgba(0, 0, 0, 0.15);
+			.wp-block-navigation .dropdown-divider {
+				height: 0;
+				margin: var(--wp--dropdown-divider-margin-y) 0;
+				border-top: 1px solid var(--wp--dropdown-divider-bg);
+				overflow: hidden;
 			}
-			.dropdown-menu-dark .dropdown-item {
-				color: var(--wp--preset--color--light);
-			}
-			.dropdown-menu-dark .dropdown-item:hover, .dropdown-menu-dark .dropdown-item:focus {
-				color: var(--wp--preset--color--white);
-				background-color: rgba(255, 255, 255, 0.15);
-			}
-			.dropdown-menu-dark .dropdown-item.active, .dropdown-menu-dark .dropdown-item:active {
-				color: var(--wp--preset--color--white);
-				background-color: var(--wp--preset--color--primary);
-			}
-			.dropdown-menu-dark .dropdown-item.disabled, .dropdown-menu-dark .dropdown-item:disabled {
-				color: var(--wp--gray);
-			}
-			.dropdown-menu-dark .dropdown-divider {
-				border-color: rgba(0, 0, 0, 0.15);
-			}
-			.dropdown-menu-dark .dropdown-item-text {
-				color: var(--wp--preset--color--light);
-			}
-			.dropdown-menu-dark .dropdown-header {
-				color: var(--wp--gray);
+			
+			/* Dark */
+			.wp-block-navigation .dropdown-menu-dark {
+				--wp--dropdown-color: var(--wp--gray-500);
+				--wp--dropdown-bg: #343a40;
+				--wp--dropdown-border-color: rgba(255,255,255, .15);
+				--wp--dropdown-divider-bg: rgba(255,255,255, .15);
+				--wp--dropdown-link-color: var(--wp--gray-500);
+				--wp--dropdown-link-hover-color: var(--wp--white);
+				--wp--dropdown-link-hover-bg: rgba(255,255,255, .15);
+				--wp--dropdown-link-active-color: var(--wp--white);
+				--wp--dropdown-link-active-bg: var(--wp--preset--color--primary);
+				--wp--dropdown-link-disabled-color: var(--wp--gray-600);
+				--wp--dropdown-header-color: var(--wp--gray-500);
 			}
 
 			/* Block */
@@ -298,9 +311,6 @@ class Menu extends Dynamic {
 				display: block;
 				visibility: visible;
 				opacity: 1;
-			}
-			.wp-block-navigation .dropdown-menu[data-bs-popper] {
-				margin-top: 0;
 			}
 			.wp-block-navigation .dropdown-menu .dropdown-menu {
 				top: 0;

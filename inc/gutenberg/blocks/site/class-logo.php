@@ -143,6 +143,13 @@ class Logo extends Dynamic {
 			color: inherit;
 			white-space: nowrap;
         }
+		/* Navigation */
+		.wp-block-navigation .navbar-nav .wp-site-logo {
+			color: var(--wp--nav-link-color);
+		}
+		.wp-block-navigation .navbar-nav .wp-site-logo a:is(:hover,:focus) {
+			color: var(--wp--nav-link-hover-color);
+		}
 		';
 	}
 }

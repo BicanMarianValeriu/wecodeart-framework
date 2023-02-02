@@ -48,8 +48,8 @@ class Faq extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'	], 10, 2 );
+	public function register(): void {
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'	], 20, 2 );
     }
 
     /**
@@ -60,7 +60,7 @@ class Faq extends Dynamic {
 	 * 
 	 * @return 	string
 	 */
-	public function render( $content = '', $block = [] ) {
+	public function render( $content = '', $block = [] ): string {
 		$dom		= $this->dom( $content );
 		$sections	= get_elements_by_class_name( $dom, 'schema-faq-section' );
 
@@ -79,7 +79,7 @@ class Faq extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public function styles(): string {
 		return '
 			.wp-block-yoast-faq-block {
 				--wp--faq--padding-y: 1rem;

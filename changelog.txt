@@ -1,15 +1,16 @@
 v5.7.2
 - Updated - core/navigation to remove automatic `navbar-dark|light` class if present in block attributes
+- Updated - core/navigation(-link/menu/submenu) upgraded to Boostrap 5.3 and adjusted to WordPress
 - Updated - core/file markup and CSS updates
 - Updated - core/site-logo markup and CSS updates / Ability for inline SVG upload
 - Updated - core/latest-posts post_type attribute to postType
 - Updated - core/post-read-more extend class to inherit button styles
+- Updated - core/table minor CSS updates + core/calendar to enqueue table CSS
 - Updated - Minimum PHP version requirement is now 7.4
 - Updated - Frontend CSS move inline to global styles
 - Updated - Improved wecodeart( 'assets' ) manager with easier API
 - Updated - enabled useRootPaddingAwareAlignments and adjusted global CSS to fit
 - Updated - base WooCommerce templates (transition to blocks instead of legacy template) to match WOO 7.3
-- Updated - core/table minor CSS updates + core/calendar to enqueue table CSS
 - Updated - Gutenberg `customCSS` block attribute (from styles extension) to `customStyle`
 - Updated - Utilities `gap` to `g` class for flex/grid gap (kept both for the moment)
 - Updated - support removed for core block patterns

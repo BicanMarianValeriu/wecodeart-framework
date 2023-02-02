@@ -36,7 +36,7 @@ class WPSeo implements Integration {
 	 *
 	 * @return void
 	 */
-	public static function get_conditionals() {
+	public static function get_conditionals(): array {
 		wecodeart( 'conditionals' )->set( [
 			'is_yoast_active' => WPSeo\Condition::class,
 		] );
@@ -47,7 +47,7 @@ class WPSeo implements Integration {
 	/**
 	 * Send to Constructor
 	 */
-	public function register_hooks() {
+	public function register_hooks(): void {
 		// Notices
 		add_action( 'admin_notices',	[ $this, 'manage_notice' ] );
 
@@ -73,7 +73,7 @@ class WPSeo implements Integration {
 	 * @since 	5.0.0
 	 * @version	5.0.0
 	 */
-	public function manage_notice() {
+	public function manage_notice(): void {
 		$notification = new Notification(
 			esc_html__( 'YoastSEO support is enabled! Our theme works seamlessly with the best SEO plugin.', 'wecodeart' ),
 			[
@@ -104,7 +104,7 @@ class WPSeo implements Integration {
 	 *
 	 * @return 	void
 	 */
-	public function register_blocks() {
+	public function register_blocks(): void {
 		// Avoid overwriting content in admin.
 		if( is_admin() ) return;
 
@@ -118,9 +118,9 @@ class WPSeo implements Integration {
 	 * @since	5.4.7
 	 * @version 5.4.8
 	 *
-	 * @return 	array
+	 * @return 	void
 	 */
-	public function register_social() {
+	public function register_social(): void {
 		global $shortcode_tags;
 		
 		// Bail if the author of the plugin decides to create one.
@@ -135,7 +135,7 @@ class WPSeo implements Integration {
 	 * @since	5.4.7
 	 * @version 5.4.8
 	 *
-	 * @return 	array
+	 * @return 	string
 	 */
 	public function render_social( $atts ) {
 		global $post;
@@ -259,7 +259,7 @@ class WPSeo implements Integration {
 	 *
 	 * @return 	array
 	 */
-	public function filter_category_context( $args, $name ) {
+	public function filter_category_context( $args, $name ): array {
 		if( $name !== 'entry/meta/terms.php' ) {
 			return $args;
 		}
@@ -279,7 +279,7 @@ class WPSeo implements Integration {
 	 *
 	 * @return 	array
 	 */
-	public function restricted_gutenberg_blocks( $blocks ) {
+	public function restricted_gutenberg_blocks( $blocks ): array {
 		$blocks = array_merge( $blocks, [
 			'yoast-seo/breadcrumbs',
 			'yoast/how-to-block',

@@ -85,6 +85,18 @@ class Navigation extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
+		\register_block_style( $this->get_block_type(), [
+			'name' 	=> 'tabs',
+            'label'	=> __( 'Tabs', 'wecodeart' ),
+			'inline_style' => static::get_extra_styles( 'tabs' )
+		] );
+
+		\register_block_style( $this->get_block_type(), [
+			'name' 	=> 'pills',
+            'label'	=> __( 'Pills', 'wecodeart' ),
+			'inline_style' => static::get_extra_styles( 'pills' )
+		] );
+
 		\add_filter( 'block_type_metadata_settings', 			[ $this, 'filter_render' ], 10, 2 );
 		\add_filter( 'block_core_navigation_render_fallback', 	[ $this, 'fallback' ] );
 	}
@@ -255,7 +267,7 @@ class Navigation extends Dynamic {
 			'core/site-title',
 			'core/site-logo',
 		] ) ) {
-			$classes	= [ 'wp-block-navigation-link', 'nav-item' ];
+			$classes	= [ 'wp-block-navigation-item', 'nav-item' ];
 			$classes[]  = 'nav-item--' . join( '-', explode( '/', get_prop( $block->parsed_block, 'blockName' ) ) );
 
 			return wecodeart( 'markup' )::wrap( 'nav-item', [ [
@@ -638,7 +650,7 @@ class Navigation extends Dynamic {
 					}
 					
 					/* Close */
-					.btn-close {
+					.wp-block-navigation .btn-close {
 						box-sizing: content-box;
 						width: 1em;
 						height: 1em;
@@ -649,46 +661,47 @@ class Navigation extends Dynamic {
 						border-radius: 0.25rem;
 						opacity: 0.5;
 					}
-					.btn-close:hover {
+					.wp-block-navigation .btn-close:hover {
 						color: #000;
 						text-decoration: none;
 						opacity: 0.75;
 					}
-					.btn-close:focus {
+					.wp-block-navigation .btn-close:focus {
 						outline: 0;
 						box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
 						opacity: 1;
 					}
-					.btn-close:disabled, .btn-close.disabled {
+					.wp-block-navigation .btn-close:disabled,
+					.wp-block-navigation .btn-close.disabled {
 						pointer-events: none;
 						user-select: none;
 						opacity: 0.25;
 					}
-					.btn-close-white {
-						filter: invert(1) grayscale(100%) brightness(200%);
-					}
-					.navbar-toggler {
-						padding: 0.25rem 0.75rem;
-						font-size: 1.25rem;
-						line-height: 1;
+					/* Toggler */
+					.wp-block-navigation .navbar-toggler {
+						padding: var(--wp--navbar-toggler-padding-y) var(--wp--navbar-toggler-padding-x);
 						background-color: transparent;
-						border: 1px solid transparent;
-						border-radius: 0.25rem;
-						transition: box-shadow 0.15s ease-in-out;
+						color: var(--wp--navbar-color);
+						font-size: var(--wp--navbar-toggler-font-size, 1.25rem);
+						line-height: 1;
+						border: 1px solid var(--wp--navbar-toggler-border-color, transparent);
+						border-radius: var(--wp--navbar-toggler-border-radius, 0.25rem);
+						transition: var(--wp--navbar-toggler-transition, box-shadow 0.15s ease-in-out);
 					}
-					.navbar-toggler:hover {
+					.wp-block-navigation .navbar-toggler:hover {
 						text-decoration: none;
 					}
-					.navbar-toggler:focus {
+					.wp-block-navigation .navbar-toggler:focus {
 						text-decoration: none;
 						outline: 0;
-						box-shadow: 0 0 0 0.25rem;
+						box-shadow: 0 0 0 var(--wp--navbar-toggler-focus-width);
 					} 
-					.navbar-toggler-icon {
+					.wp-block-navigation .navbar-toggler-icon {
 						display: inline-block;
 						width: 1.5em;
 						height: 1.5em;
 						vertical-align: middle;
+						background-image: var(--wp--navbar-toggler-icon-bg);
 						background-repeat: no-repeat;
 						background-position: center;
 						background-size: 100%;
@@ -751,17 +764,17 @@ class Navigation extends Dynamic {
 						}
 
 						/* Dropdowns */
-						.dropdown-menu-{$key}-start {
+						.wp-block-navigation .dropdown-menu-{$key}-start {
 							--wp-position: start;
 						}
-						.dropdown-menu-{$key}-start[data-bs-popper] {
+						.wp-block-navigation .dropdown-menu-{$key}-start[data-bs-popper] {
 							right: auto;
 							left: 0;
 						}
-						.dropdown-menu-{$key}-end {
+						.wp-block-navigation .dropdown-menu-{$key}-end {
 							--wp-position: end;
 						}
-						.dropdown-menu-{$key}-end[data-bs-popper] {
+						.wp-block-navigation .dropdown-menu-{$key}-end[data-bs-popper] {
 							right: 0;
 							left: auto;
 						}
@@ -771,6 +784,7 @@ class Navigation extends Dynamic {
 							flex-direction: inherit;
 							justify-content: inherit;
 							align-items: inherit;
+							flex: 1 1 100%;
 						}
 						.wp-block-navigation.navbar-expand-{$key}.flex-column .navbar-nav {
 							flex-direction: column;
@@ -790,23 +804,16 @@ class Navigation extends Dynamic {
 				}
 
 				$inline .= "
-					/* No Motion */
-					@media (prefers-reduced-motion: reduce) {
-						.navbar-toggler,
-						.offcanvas {
-							transition: none;
-						}
-					}
-
-					/* Block */
-					.wp-block-navigation[class*='navbar-expand-'] .offcanvas:not([aria-modal='true']) {
-						width: initial;
-					}
-					.wp-block-navigation[class*='has-background'] :where(.offcanvas,.offcanvas-body) {
-						background-color: inherit;
-					}
+					/* Offcanvas */
 					.wp-block-navigation .offcanvas-start .btn-close {
 						margin-left: auto;
+					}
+
+					/* No Motion */
+					@media (prefers-reduced-motion: reduce) {
+						.wp-block-navigation :where(.navbar-toggler,.offcanvas) {
+							transition: none;
+						}
 					}
 				";
 			break;
@@ -821,92 +828,23 @@ class Navigation extends Dynamic {
 	 * @return string
 	 */
 	public function get_color_styles( string $color = 'navbar-light' ) {
-		$menu_light = 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3e%3cpath stroke="rgba%280, 0, 0, 0.55%29" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3e%3c/svg%3e';
-		$menu_dark 	= 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3e%3cpath stroke="rgba%28255, 255, 255, 0.55%29" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3e%3c/svg%3e';
-
 		$inline = '';
 		
 		switch( $color ) :
 			case 'navbar-dark':
 				$inline .= "
-				.navbar-dark .navbar-brand {
-					color: var(--wp--preset--color--white);
-				}
-				.navbar-dark .navbar-brand:hover,
-				.navbar-dark .navbar-brand:focus {
-					color: var(--wp--preset--color--white);
-				}
-				.navbar-dark .navbar-nav .nav-link {
-					color: rgba(255, 255, 255, 0.55);
-				}
-				.navbar-dark .navbar-nav .nav-link:hover,
-				.navbar-dark .navbar-nav .nav-link:focus {
-					color: rgba(255, 255, 255, 0.75);
-				}
-				.navbar-dark .navbar-nav .nav-link.disabled {
-					color: rgba(255, 255, 255, 0.25);
-				}
-				.navbar-dark .navbar-nav .show > .nav-link,
-				.navbar-dark .navbar-nav .nav-link.active {
-					color: var(--wp--preset--color--white);
-				}
-				.navbar-dark .navbar-toggler {
-					color: rgba(255, 255, 255, 0.55);
-					border-color: rgba(255, 255, 255, 0.1);
-				}
-				.navbar-dark .navbar-toggler-icon {
-					background-image: url('$menu_dark');
-				}
-				.navbar-dark .navbar-text {
-					color: rgba(255, 255, 255, 0.55);
-				}
-				.navbar-dark .navbar-text a,
-				.navbar-dark .navbar-text a:hover,
-				.navbar-dark .navbar-text a:focus {
-					color: var(--wp--preset--color--white);
-				}
-				.navbar-dark .btn-close {
-					filter: invert(1) grayscale(100%) brightness(200%);
-				}
+					.navbar-dark {
+						--wp--emphasis-color-rgb: 255, 255, 255;/* white */
+					}
+					.navbar-dark :where(.btn-close,.navbar-toggler-icon) {
+						filter: invert(1) grayscale(100%) brightness(200%);
+					}
 				";
 			break;
-			default:
+			case 'navbar-light':
 				$inline .= "
-					.navbar-light .wp-site-logo {
-						color: rgba(0, 0, 0, 0.9);
-					}
-					.navbar-light .wp-site-logo a:hover,
-					.navbar-light .wp-site-logo a:focus {
-						color: rgba(0, 0, 0, 0.9);
-					}
-					.navbar-light .navbar-nav .nav-link {
-						color: rgba(0, 0, 0, 0.55);
-					}
-					.navbar-light .navbar-nav .nav-link:hover,
-					.navbar-light .navbar-nav .nav-link:focus {
-						color: rgba(0, 0, 0, 0.7);
-					}
-					.navbar-light .navbar-nav .nav-link.disabled {
-						color: rgba(0, 0, 0, 0.3);
-					}
-					.navbar-light .navbar-nav .show > .nav-link,
-					.navbar-light .navbar-nav .nav-link.active {
-						color: rgba(0, 0, 0, 0.9);
-					}
-					.navbar-light .navbar-toggler {
-						color: rgba(0, 0, 0, 0.55);
-						border-color: rgba(0, 0, 0, 0.1);
-					}
-					.navbar-light .navbar-toggler-icon {
-						background-image: url('$menu_light');
-					}
-					.navbar-light .navbar-text {
-						color: rgba(0, 0, 0, 0.55);
-					}
-					.navbar-light .navbar-text a,
-					.navbar-light .navbar-text a:hover,
-					.navbar-light .navbar-text a:focus {
-						color: rgba(0, 0, 0, 0.9);
+					.navbar-light {
+						--wp--emphasis-color-rgb: 0, 0, 0;/* black */
 					}
 				";
 			break;
@@ -918,64 +856,85 @@ class Navigation extends Dynamic {
 	/**
 	 * Extra Styles.
 	 *
-	 * @return string
+	 * @param	string $variation
+	 *
+	 * @return 	string
 	 */
-	public function get_extra_styles( string $variation = 'nav-tabs' ) {
+	public function get_extra_styles( string $variation = 'tabs' ): string {
 		$inline = '';
 
 		switch( $variation ) :
-			case 'nav-tabs':
+			case 'tabs':
 				$inline .= "
-					.nav-tabs {
-						border-bottom: 1px solid #dee2e6;
+					.wp-block-navigation.is-style-tabs {
+						--wp--nav-tabs-border-width: 1px;
+						--wp--nav-tabs-border-color: var(--wp--gray-200);
+						--wp--nav-tabs-border-radius: .25rem;
+						--wp--nav-tabs-link-hover-border-color: var(--wp--nav-tabs-border-color) var(--wp--nav-tabs-border-color) var(--wp--nav-tabs-border-color);
+						--wp--nav-tabs-link-active-color: #000;
+						--wp--nav-tabs-link-active-bg: var(--wp--white);
+						--wp--nav-tabs-link-active-border-color: var(--wp--nav-tabs-border-color) var(--wp--nav-tabs-border-color) var(--wp--white);
+						border-bottom: var(--wp--nav-tabs-border-width) solid var(--wp--nav-tabs-border-color);
 					}
-					.nav-tabs .nav-link {
-						margin-bottom: -1px;
-						background: none;
-						border: 1px solid transparent;
-						border-top-left-radius: 0.25rem;
-						border-top-right-radius: 0.25rem;
+					.wp-block-navigation.is-style-tabs .navbar-nav {
+						--wp--nav-link-padding-x: 1rem;
+    					--wp--nav-link-padding-y: 0.5rem;
 					}
-					.nav-tabs .nav-link:hover,
-					.nav-tabs .nav-link:focus {
-						border-color: #e9ecef #e9ecef #dee2e6;
+					.wp-block-navigation.is-style-tabs .navbar-nav .nav-link {
+						margin-bottom: calc(-1 * var(--wp--nav-tabs-border-width));
+						background: 0 0;
+						border: var(--wp--nav-tabs-border-width) solid transparent;
+						border-top-left-radius: var(--wp--nav-tabs-border-radius);
+						border-top-right-radius: var(--wp--nav-tabs-border-radius);
+					}
+					.wp-block-navigation.is-style-tabs .navbar-nav .nav-link:is(:hover,:focus) {
 						isolation: isolate;
+						border-color: var(--wp--nav-tabs-link-hover-border-color);
 					}
-					.nav-tabs .nav-link.disabled {
-						color: #6c757d;
+					.wp-block-navigation.is-style-tabs .navbar-nav .nav-link.active,
+					.wp-block-navigation.is-style-tabs .navbar-nav .nav-item.show .nav-link {
+						background-color: var(--wp--nav-tabs-link-active-bg);
+						border-color: var(--wp--nav-tabs-link-active-border-color);
+						color: var(--wp--nav-tabs-link-active-color);
+					}
+					.wp-block-navigation.is-style-tabs .navbar-nav .nav-link.disabled {
 						background-color: transparent;
 						border-color: transparent;
+						color: var(--wp--nav-link-disabled-color);
 					}
-					.nav-tabs .nav-link.active,
-					.nav-tabs .nav-item.show .nav-link {
-						color: #495057;
-						background-color: #fff;
-						border-color: #dee2e6 #dee2e6 #fff;
-					}
-					.nav-tabs .dropdown-menu {
-						margin-top: -1px;
+					.wp-block-navigation.is-style-tabs .navbar-nav .dropdown-menu {
+						margin-top: calc(-1 * var(--wp--nav-tabs-border-width));
 						border-top-left-radius: 0;
 						border-top-right-radius: 0;
 					}
-					.tab-content > .tab-pane {
+					.wp-block-navigation.is-style-tabs .tab-content > .tab-pane {
 						display: none;
 					}
-					.tab-content > .active {
+					.wp-block-navigation.is-style-tabs .tab-content > .active {
 						display: block;
 					}
 				";
 			break;
-			case 'nav-pills':
+			case 'pills':
 				$inline .= "
-					.nav-pills .nav-link {
+					.wp-block-navigation.is-style-pills {
+						--wp--nav-pills-border-radius: 0.375rem;
+						--wp--nav-pills-link-active-color: var(--wp--white);
+						--wp--nav-pills-link-active-bg: var(--wp--preset--color--primary);
+					}
+					.wp-block-navigation.is-style-pills .navbar-nav {
+						--wp--nav-link-padding-x: 1rem;
+    					--wp--nav-link-padding-y: .25rem;
+					}
+					.wp-block-navigation.is-style-pills .navbar-nav .nav-link {
 						background: none;
 						border: 0;
-						border-radius: 0.25rem;
+						border-radius: var(--wp--nav-pills-border-radius);
 					}
-					.nav-pills .nav-link.active,
-					.nav-pills .show > .nav-link {
-						color: var(--wp--preset--color--white);
-						background-color: var(--wp--preset--color--primary);
+					.wp-block-navigation.is-style-pills .navbar-nav .nav-link.active,
+					.wp-block-navigation.is-style-pills .navbar-nav .show > .nav-link {
+						color: var(--wp--nav-pills-link-active-color);
+    					background-color: var(--wp--nav-pills-link-active-bg);
 					}	
 				";
 			break;
@@ -989,36 +948,58 @@ class Navigation extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
-		$extras = $this->get_extra_styles( 'nav-tabs' ) . $this->get_extra_styles( 'nav-pills' );
+	public function styles(): string {
+		$toggler 	= 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3e%3cpath stroke="rgba%280, 0, 0, 0.55%29" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3e%3c/svg%3e';
 
 		return "
 		/* Nav */
-		.nav {
+		.wp-block-navigation .nav {
+			--wp--nav-link-padding-x: 0.5rem;
+			--wp--nav-link-padding-y: 0.5rem;
+			--wp--nav-link-color: rgba(var(--wp--emphasis-color-rgb), 0.55);
+			--wp--nav-link-hover-color: rgba(var(--wp--emphasis-color-rgb), 0.55);
+			--wp--nav-link-disabled-color: rgba(var(--wp--emphasis-color-rgb), 0.55);
+
 			display: flex;
 			flex-wrap: wrap;
 			padding-left: 0;
 			margin-bottom: 0;
 			list-style: none;
 		}
-		.nav-fill > .nav-link,
-		.nav-fill .nav-item {
+		.wp-block-navigation.nav-fill .nav-link,
+		.wp-block-navigation.nav-fill .nav-item {
 			flex: 1 1 auto;
 			text-align: center;
 		}
-		.nav-justified > .nav-link,
-		.nav-justified .nav-item {
+		.wp-block-navigation.nav-justified .nav-link,
+		.wp-block-navigation.nav-justified .nav-item {
 			flex-basis: 0;
 			flex-grow: 1;
 			text-align: center;
 		}
-		.nav-fill .nav-item .nav-link,
-		.nav-justified .nav-item .nav-link {
+		.wp-block-navigation.nav-fill .nav-item .nav-link,
+		.wp-block-navigation.nav-justified .nav-item .nav-link {
 			width: 100%;
 		}
 
 		/* Navbar */
-		.navbar {
+		.wp-block-navigation.navbar {
+			--wp--navbar-padding-x: 0;
+			--wp--navbar-padding-y: 0.5rem;
+			--wp--navbar-color: rgba(var(--wp--emphasis-color-rgb), 0.65);
+			--wp--navbar-hover-color: rgba(var(--wp--emphasis-color-rgb), 0.8);
+			--wp--navbar-active-color: rgba(var(--wp--emphasis-color-rgb), 1);
+			--wp--navbar-disabled-color: rgba(var(--wp--emphasis-color-rgb), 0.3);
+
+			--wp--navbar-toggler-padding-y: 0.25rem;
+			--wp--navbar-toggler-padding-x: 0.75rem;
+			--wp--navbar-toggler-font-size: 1.25rem;
+			--wp--navbar-toggler-icon-bg: url('$toggler');
+			--wp--navbar-toggler-border-color: rgba(var(--wp--emphasis-color-rgb),.15);
+			--wp--navbar-toggler-border-radius: 0.375rem;
+			--wp--navbar-toggler-focus-width: 0.25rem;
+			--wp--navbar-toggler-transition: box-shadow 0.15s ease-in-out;
+
 			position: relative;
 			display: flex;
 			flex-wrap: wrap;
@@ -1027,40 +1008,38 @@ class Navigation extends Dynamic {
 			padding-top: 0.5rem;
 			padding-bottom: 0.5rem;
 		}
-		.navbar-nav {
+		.wp-block-navigation .navbar-nav {
+			--wp--nav-link-padding-x: 0;
+			--wp--nav-link-padding-y: 0;
+			--wp--nav-link-color: var(--wp--navbar-color);
+			--wp--nav-link-hover-color: var(--wp--navbar-hover-color);
+			--wp--nav-link-disabled-color: var(--wp--navbar-disabled-color);
 			display: flex;
 			flex-direction: column;
 			padding-left: 0;
 			margin-bottom: 0;
 			list-style: none;
-			min-width: 160px;
 		}
-		.navbar-nav .nav-link {
-			padding: 0;
-		}
-		.navbar-nav .dropdown-menu {
+		.wp-block-navigation .navbar-nav .dropdown-menu {
 			position: static;
 		}
-		.navbar-text {
+		.wp-block-navigation .navbar-text {
 			padding-top: 0.5rem;
 			padding-bottom: 0.5rem;
 		}
-		.navbar-collapse {
+		.wp-block-navigation .navbar-collapse {
 			flex-basis: 100%;
 			flex-grow: 1;
 			align-items: center;
 		}
-		.navbar-nav-scroll {
+		.wp-block-navigation .navbar-nav-scroll {
 			max-height: var(--wp--scroll-height, 75vh);
 			overflow-y: auto;
 		}
 
-		/* Extras */
-		{$extras}
-
 		/* No Motion */
 		@media (prefers-reduced-motion: reduce) {
-			.nav-link {
+			.wp-block-navigation .nav-link {
 				transition: none;
 			}
 		}
