@@ -32,24 +32,6 @@ class Navigation extends Base {
 	protected function process_extra() {	
 		$output 			= [];
 		$output['element'] 	= join( ' ', [ $this->element, '.navbar-nav' ] );
-
-		// Gap
-		if( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ], '1rem' ) ) {
-			if ( is_array( $gap ) ) {
-				$gap	= get_prop( $gap, [ 'top' ] );
-			}
-
-			if ( mb_strpos( $gap, 'var:preset|spacing' ) !== false ) {
-				$slug = explode( '|', $gap );
-				$slug = end( $slug );
-				$gap  = sprintf( 'var(--wp--preset--spacing--%s)', $slug );
-			}
-
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'gap',
-				'value'	  	=> $gap
-			], $output );
-		}
 		
 		// Navigation background color.
 		$output['element'] = $this->element;
@@ -62,11 +44,11 @@ class Navigation extends Base {
 		}
 
 		// Navigation item color.
-		$output['element'] = join( ' ', [ $this->element, '.navbar-nav' ] );
+		$output['element'] = join( ' ', [ $this->element, '.navbar-nav', '.nav-link' ] );
 
 		if ( $value = get_prop( $this->attrs, 'customTextColor' ) ) {
 			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--nav-link-color',
+				'property' 	=> 'color',
 				'value'	  	=> $value
 			], $output );
 		}

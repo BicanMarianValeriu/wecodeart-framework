@@ -423,6 +423,9 @@ class Link extends Dynamic {
 				color: var(--wp--navbar-active-color);
 			}
 			/* Fix Custom Styles */
+			.wp-block-navigation.has-text-color .nav-link {
+				color: inherit;
+			}
 			.wp-block-navigation .wp-block-navigation-item__icon {
 				margin-right: .5rem;
 			}

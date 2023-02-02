@@ -785,6 +785,7 @@ class Navigation extends Dynamic {
 							justify-content: inherit;
 							align-items: inherit;
 							flex: 1 1 100%;
+							gap: inherit;
 						}
 						.wp-block-navigation.navbar-expand-{$key}.flex-column .navbar-nav {
 							flex-direction: column;

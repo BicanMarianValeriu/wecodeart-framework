@@ -103,7 +103,7 @@ class Heading extends Dynamic {
 					-webkit-mask-position: center;
 					-webkit-mask-size: 100%;
 					-webkit-mask-image: url('$symbol');
-					mask-image: url('$symbol');
+					mask: url('$symbol');
 					z-index: -1;
 				}
 				";
