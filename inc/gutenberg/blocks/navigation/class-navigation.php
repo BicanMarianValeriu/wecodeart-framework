@@ -784,8 +784,6 @@ class Navigation extends Dynamic {
 							flex-direction: inherit;
 							justify-content: inherit;
 							align-items: inherit;
-							flex: 1 1 100%;
-							gap: inherit;
 						}
 						.wp-block-navigation.navbar-expand-{$key}.flex-column .navbar-nav {
 							flex-direction: column;
@@ -806,6 +804,10 @@ class Navigation extends Dynamic {
 
 				$inline .= "
 					/* Offcanvas */
+					.wp-block-navigation[class*='navbar-expand'] :where(.offcanvas,.offcanvas-body,.navbar-nav) {
+						flex: 1 1 100%;
+						gap: inherit;
+					}
 					.wp-block-navigation .offcanvas-start .btn-close {
 						margin-left: auto;
 					}

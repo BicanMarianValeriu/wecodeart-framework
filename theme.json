@@ -351,7 +351,7 @@
 		"blocks": {
 			"core/heading": {
 				"typography": {
-					"fontWeight": "500",
+					"fontWeight": "300",
 					"lineHeight": "1.2"
 				},
 				"spacing": {
