@@ -2,7 +2,7 @@
 /**
  * Title: Cards
  * Slug: wecodeart/cards-default
- * Categories: wecodeart
+ * Categories: wecodeart, wecodeart-cards
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"className":"py-5","layout":{"inherit":true,"type":"constrained"}} -->
@@ -20,10 +20,7 @@
                 <hr class="wp-block-separator has-text-color has-dark-color has-alpha-channel-opacity has-dark-background-color has-background" />
                 <!-- /wp:separator -->
                 <!-- wp:paragraph {"align":"center","textColor":"secondary"} -->
-                <p class="has-text-align-center has-secondary-color has-text-color">Lorem ipsum dolor sit amet,
-                    consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum
-                    pellentesque imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque
-                    rutrum pellentesque imperdiet.</p>
+                <p class="has-text-align-center has-secondary-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet.</p>
                 <!-- /wp:paragraph -->
                 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
                 <div class="wp-block-buttons">
@@ -49,10 +46,7 @@
                 <hr class="wp-block-separator has-text-color has-dark-color has-alpha-channel-opacity has-dark-background-color has-background" />
                 <!-- /wp:separator -->
                 <!-- wp:paragraph {"align":"center","textColor":"secondary"} -->
-                <p class="has-text-align-center has-secondary-color has-text-color">Lorem ipsum dolor sit amet,
-                    consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum
-                    pellentesque imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque
-                    rutrum pellentesque imperdiet.</p>
+                <p class="has-text-align-center has-secondary-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet.</p>
                 <!-- /wp:paragraph -->
                 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
                 <div class="wp-block-buttons">

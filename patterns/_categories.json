@@ -1,6 +1,18 @@
 [
     {
+        "slug": "wecodeart-pages",
+        "label": "WeCodeArt - Pages"
+    },
+    {
+        "slug": "wecodeart-cards",
+        "label": "WeCodeArt - Cards"
+    },
+    {
+        "slug": "wecodeart-cta",
+        "label": "WeCodeArt - Call to Action"
+    },
+    {
         "slug": "wecodeart",
-        "label": "WeCodeArt"
+        "label": "WeCodeArt (All)"
     }
 ]

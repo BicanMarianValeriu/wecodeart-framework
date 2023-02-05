@@ -94,8 +94,10 @@ class Patterns implements Integration {
 		];
 
 		$data = [];
+		
 		foreach ( $themes as $theme_slug => $theme_dir ) {
 			$file_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . '_categories.json' );
+
 			if ( file_exists( $file_path ) ) {
 				$data = array_merge( $data, json_decode( file_get_contents( $file_path ), true ) );
 			}
@@ -131,13 +133,16 @@ class Patterns implements Integration {
 	 */
 	public function get_paths( $base_directory ) {
 		$path_list = [];
+		
 		if ( file_exists( $base_directory ) ) {
 			$nested_files      = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $base_directory ) );
 			$nested_html_files = new \RegexIterator( $nested_files, '/^.+\.html$/i', \RecursiveRegexIterator::GET_MATCH );
+
 			foreach ( $nested_html_files as $path => $file ) {
 				$path_list[] = $path;
 			}
 		}
+
 		return $path_list;
 	}
 
@@ -153,8 +158,10 @@ class Patterns implements Integration {
 		];
 
 		$template_files = [];
+
 		foreach ( $themes as $theme_slug => $theme_dir ) {
 			$theme_files = $this->get_paths( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER );
+
 			foreach ( $theme_files as $file ) {
 				$template_slug      = substr(
 					$file,
@@ -228,9 +235,7 @@ class Patterns implements Integration {
 			$args = wp_parse_args( $has_json, $args );
 		}
 
-		$template = new Patterns\Pattern( $args );
-
-		return $template->register();
+		return ( new Patterns\Pattern( $args ) )->register();
 	}
 
 	/**

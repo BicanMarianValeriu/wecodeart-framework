@@ -180,7 +180,7 @@ class Menu extends Dynamic {
 				--wp--dropdown-color: var(--wp--gray-500);
 				--wp--dropdown-bg: var(--wp--gray-900);
 				--wp--dropdown-border-color: rgba(var(--wp--emphasis-color-rgb), .15);
-				--wp--dropdown-divider-bg: rgba(var(--wp--emphasis-color-rgb), .15);
+				--wp--dropdown-divider-bg: rgba(255,255,255,.15);
 				--wp--dropdown-link-color: var(--wp--gray-500);
 				--wp--dropdown-link-hover-color: var(--wp--white);
 				--wp--dropdown-link-hover-bg: rgba(var(--wp--emphasis-color-rgb), .15);

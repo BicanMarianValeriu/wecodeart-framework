@@ -11,6 +11,7 @@
 <div class="wp-block-query">
     <!-- wp:query-title {"type":"archive","className":"my-5"} /-->
     <!-- wp:term-description /-->
+
     <!-- wp:post-template {"className":"my-5"} -->
     <!-- wp:columns {"className":"flex-column flex-md-row gap-5 px-0 mb-5"} -->
     <div class="wp-block-columns flex-column flex-md-row gap-5 px-0 mb-5">
@@ -29,9 +30,11 @@
     </div>
     <!-- /wp:columns -->
     <!-- /wp:post-template -->
+    
     <!-- wp:query-pagination {"className":"mb-5"} -->
     <!-- wp:query-pagination-numbers /-->
     <!-- /wp:query-pagination -->
+    
     <!-- wp:query-no-results -->
     <!-- wp:paragraph {"className":"mb-5","placeholder":"<?php esc_html_e( 'No results.', 'wecodeart' ); ?>"} -->
     <p class="mb-5"><?php esc_html_e( 'No results.', 'wecodeart' ); ?></p>

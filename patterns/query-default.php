@@ -11,15 +11,18 @@
 <div class="wp-block-query">
     <!-- wp:query-title {"type":"archive","className":"my-5"} /-->
     <!-- wp:term-description /-->
+
     <!-- wp:post-template {"className":"my-5"} -->
     <!-- wp:post-featured-image {"isLink":true} /-->
     <!-- wp:post-title {"level":3,"isLink":true} /-->
     <!-- wp:pattern {"slug":"wecodeart/entry-meta"} /-->
     <!-- wp:post-excerpt {"moreText":"Continue reading"} /-->
     <!-- /wp:post-template -->
+
     <!-- wp:query-pagination {"className":"mb-5"} -->
     <!-- wp:query-pagination-numbers /-->
     <!-- /wp:query-pagination -->
+    
     <!-- wp:query-no-results -->
     <!-- wp:paragraph {"className":"mb-5","placeholder":"<?php esc_html_e( 'No results.', 'wecodeart' ); ?>"} -->
     <p class="mb-5"><?php esc_html_e( 'No results.', 'wecodeart' ); ?></p>

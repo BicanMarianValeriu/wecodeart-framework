@@ -152,7 +152,7 @@ class Pattern {
 
 		$args = [
             'title'       	=> $this->title,
-            'content'     	=> serialize_blocks( parse_blocks( $this->content ) ),
+            'content'     	=> $this->content,
             'categories'  	=> ! empty( $this->categories ) ? $this->categories : [ $this->theme ],
             'description' 	=> $this->description,
             'viewportWidth'	=> $this->viewportWidth,
@@ -209,7 +209,10 @@ class Pattern {
 				case 'inserter':
 					$sanitized[$key] = (bool) $value;
 				break;
-				// Content -> return as is.
+				// Content
+				case 'content':
+					$sanitized[$key] = serialize_blocks( parse_blocks( $value ) );
+				break;
 				default:
 					$sanitized[$key] = $value;
 				break;

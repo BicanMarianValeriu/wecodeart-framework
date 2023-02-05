@@ -1,8 +1,8 @@
 <?php
 /**
- * Title: Call to Action (Default)
+ * Title: Call to Action
  * Slug: wecodeart/cta-default
- * Categories: wecodeart
+ * Categories: wecodeart, wecodeart-cta
  */
 ?>
 <!-- wp:cover {"url":"https://pd.w.org/2023/01/42163d169550d5270.03657997.jpg","dimRatio":80,"minHeight":50,"gradient":"primary-to-vivid-purple","align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","right":"0","left":"0"}}}} -->

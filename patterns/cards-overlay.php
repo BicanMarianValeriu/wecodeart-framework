@@ -2,7 +2,7 @@
 /**
  * Title: Cards (with overlay)
  * Slug: wecodeart/cards-overlay
- * Categories: wecodeart
+ * Categories: wecodeart, wecodeart-cards
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"className":"py-5","layout":{"inherit":true,"type":"constrained"}} -->
@@ -24,10 +24,8 @@
                         <!-- wp:separator -->
                         <hr class="wp-block-separator has-alpha-channel-opacity" />
                         <!-- /wp:separator -->
-                        <!-- wp:paragraph {"align":"center"} -->
-                        <p class="has-text-align-center">Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque
-                            rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Lorem ipsum dolor sit amet,
-                            consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet.</p>
+                        <!-- wp:paragraph {"align":"center","textColor":"secondary"} -->
+                        <p class="has-text-align-center has-secondary-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet.</p>
                         <!-- /wp:paragraph -->
                         <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
                         <div class="wp-block-buttons">
@@ -60,10 +58,8 @@
                         <!-- wp:separator -->
                         <hr class="wp-block-separator has-alpha-channel-opacity" />
                         <!-- /wp:separator -->
-                        <!-- wp:paragraph {"align":"center"} -->
-                        <p class="has-text-align-center">Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque
-                            rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Lorem ipsum dolor sit amet,
-                            consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet.</p>
+                        <!-- wp:paragraph {"align":"center","textColor":"secondary"} -->
+                        <p class="has-text-align-center has-secondary-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet.</p>
                         <!-- /wp:paragraph -->
                         <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
                         <div class="wp-block-buttons">

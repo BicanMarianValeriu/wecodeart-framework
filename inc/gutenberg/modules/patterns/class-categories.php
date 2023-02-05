@@ -63,6 +63,7 @@ class Categories {
 		// Remove anything that's not present in the schema.
 		foreach( $input as $key => $category ) {
 			$result = array_intersect_key( (array) $category, array_flip( self::VALID_PROPERTIES ) );
+			
 			if ( empty( $result ) ) {
 				unset( $output[ $key ] );
 			} else {
