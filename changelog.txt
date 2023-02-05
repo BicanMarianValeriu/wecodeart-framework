@@ -15,6 +15,7 @@ v5.7.2
 - Updated - Utilities `gap` to `g` class for flex/grid gap (kept both for the moment)
 - Updated - support removed for core block patterns
 - Updated - Translated some pattern strings
+- Updated - Pattern registry - add latest list of valid properties
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
 - Removed - core/post-comments-link from Post Meta pattern
 - Fixed - core/button outline default color rgb variable added in CSS
@@ -28,6 +29,8 @@ v5.7.2
 - Added - Improved SEO: Schema.org for header/footer/sidebar template parts
 - Added - Yoast SEO`s FAQ block markup updated to "details" HTML element + improved styles
 - Added - Coming Soon pattern (for pages)
+- Added - Call to Action patterns
+- Added - Cards patterns with 3 variations
 - Added - viewportWidth property to patterns registered from HTML files in the theme
 
 v5.7.1

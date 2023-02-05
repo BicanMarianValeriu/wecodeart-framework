@@ -32,7 +32,19 @@ class Pattern {
 	 *
 	 * @var array
 	 */
-	const VALID_PROPERTIES = [ 'slug', 'title', 'content', 'description', 'categories', 'viewportWidth', 'blockTypes', 'theme' ];
+	const VALID_PROPERTIES = [
+		'slug',
+		'title',
+		'content',
+		'description',
+		'categories',
+		'viewportWidth',
+		'blockTypes',
+		'postTypes',
+		'templateTypes',
+		'inserter',
+		'theme'
+	];
 
 	/**
 	 * Template slug.
@@ -84,6 +96,27 @@ class Pattern {
 	public $blockTypes = [];
 
 	/**
+	 * Post Types.
+	 *
+	 * @var array
+	 */
+	public $postTypes = [];
+
+	/**
+	 * Template Types.
+	 *
+	 * @var array
+	 */
+	public $templateTypes = [];
+
+	/**
+	 * Inserter.
+	 *
+	 * @var string
+	 */
+	public $inserter;
+
+	/**
 	 * Theme.
 	 *
 	 * @var string
@@ -115,7 +148,7 @@ class Pattern {
      * @return void
      */
     public function register() {
-		if ( \WP_Block_Patterns_Registry::get_instance()->is_registered( $this->get_name() ) ) return;
+		if ( \WP_Block_Patterns_Registry::get_instance()->is_registered( $this->get_name() ) || empty( $this->content )) return;
 
 		$args = [
             'title'       	=> $this->title,
@@ -124,6 +157,10 @@ class Pattern {
             'description' 	=> $this->description,
             'viewportWidth'	=> $this->viewportWidth,
 			'blockTypes' 	=> $this->blockTypes,
+			'postTypes' 	=> $this->postTypes,
+			'templateTypes'	=> $this->templateTypes,
+			'blockTypes' 	=> $this->blockTypes,
+			'inserter' 		=> $this->inserter,
         ];
 
         register_block_pattern( $this->get_name(), $args );
@@ -164,7 +201,13 @@ class Pattern {
 				// Arrays
 				case 'categories':
 				case 'blockTypes':
+				case 'postTypes':
+				case 'templateTypes':
 					$sanitized[$key] = array_map( 'sanitize_text_field', $value );
+				break;
+				// Boolean
+				case 'inserter':
+					$sanitized[$key] = (bool) $value;
 				break;
 				// Content -> return as is.
 				default:

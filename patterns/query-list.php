@@ -4,6 +4,7 @@
  * Slug: wecodeart/query-list
  * Categories: wecodeart, query
  * Block Types: core/query
+ * Inserter: false
  */
 ?>
 <!-- wp:query {"queryId":1,"query":{"perPage":0,"pages":0,"offset":0,"postType":"post","categoryIds":[],"tagIds":[],"order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true}} -->

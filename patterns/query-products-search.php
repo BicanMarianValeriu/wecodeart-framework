@@ -4,6 +4,7 @@
  * Slug: wecodeart/query-products-search
  * Categories: wecodeart, query
  * Block Types: core/query
+ * Inserter: false
  */
 ?>
 <!-- wp:query {"queryId":20,"query":{"perPage":"12","pages":0,"offset":0,"postType":"product","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true,"__woocommerceStockStatus":["instock","outofstock","onbackorder"]},"displayLayout":{"type":"flex","columns":4},"namespace":"woocommerce/product-query","layout":{"type":"default"}} -->
@@ -23,8 +24,8 @@
     <!-- /wp:query-pagination -->
     
     <!-- wp:query-no-results -->
-    <!-- wp:paragraph {"placeholder":"Add text or blocks that will display when a query returns no results."} -->
-    <p>No results found for your query.</p>
+    <!-- wp:paragraph -->
+    <p><?php esc_html_e( 'No results found for your query.', 'wecodeart' ); ?></p>
     <!-- /wp:paragraph -->
     <!-- /wp:query-no-results -->
 </div>

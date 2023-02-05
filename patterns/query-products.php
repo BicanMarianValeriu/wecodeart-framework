@@ -4,6 +4,7 @@
  * Slug: wecodeart/query-products
  * Categories: wecodeart, query
  * Block Types: core/query
+ * Inserter: false
  */
 ?>
 <!-- wp:query {"queryId":20,"query":{"perPage":9,"pages":0,"offset":0,"postType":"product","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true,"__woocommerceAttributes":[],"__woocommerceStockStatus":["outofstock","onbackorder","instock"],"__woocommerceOnSale":false,"parents":[],"taxQuery":null},"displayLayout":{"type":"flex","columns":3},"namespace":"woocommerce/product-query"} -->
@@ -23,8 +24,8 @@
     <!-- /wp:query-pagination -->
 
     <!-- wp:query-no-results -->
-    <!-- wp:paragraph {"placeholder":"Adaugă un text sau blocuri care vor fi afișate când o interogare nu găsește niciun rezultat."} -->
-    <p>No results.</p>
+    <!-- wp:paragraph -->
+    <p><?php esc_html_e( 'No results.', 'wecodeart' ); ?></p>
     <!-- /wp:paragraph -->
     <!-- /wp:query-no-results -->
 </div>

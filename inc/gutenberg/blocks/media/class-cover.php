@@ -213,7 +213,7 @@ class Cover extends Dynamic {
 		.wp-block-cover .has-background-dim {
 			z-index: 1;
 		}
-		.wp-block-cover :is(h1, h2, h3, h4, h5, h6, p, ul, ol, hr):not(.has-text-color) {
+		.wp-block-cover :where(h1, h2, h3, h4, h5, h6, p, ul, ol, hr):not(.has-text-color,.dropdown-menu) {
 			color: inherit;
 		}
 		@supports (-webkit-overflow-scrolling: touch) {

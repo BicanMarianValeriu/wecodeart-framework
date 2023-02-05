@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-02-01 02:09+0000\n"
+"PO-Revision-Date: 2023-02-03 19:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -159,7 +159,7 @@ msgstr[0] "Un răspuns la \"%1$s\""
 msgstr[1] "Răspunsuri la \"%1$s\""
 msgstr[2] "Răspunsuri la \"%1$s\""
 
-#: patterns/footer-credits.php:15
+#: patterns/footer-credits.php:16
 #, php-format
 msgid "Copyright %s - All rights reserved. Built on %s."
 msgstr "Copyright %s – Toate drepturile rezervate. Construit pe %s."
@@ -280,9 +280,14 @@ msgstr "Nu există arhive de afișat."
 msgid "No responses"
 msgstr "Fără răspunsuri"
 
-#: patterns/query-default.php:23 patterns/query-default.php:24
-#: patterns/query-list.php:35 patterns/query-list.php:36
+#: patterns/query-products-search.php:28
+msgid "No results found for your query."
+msgstr "Nu s-au găsit rezultate pentru interogarea dvs."
+
+#: patterns/query-default.php:24 patterns/query-default.php:25
+#: patterns/query-list.php:36 patterns/query-list.php:37
 #: patterns/query-overlay.php:33 patterns/query-overlay.php:34
+#: patterns/query-products.php:28
 msgid "No results."
 msgstr "Fără rezultate"
 
@@ -301,6 +306,10 @@ msgstr "Contur"
 #: inc/gutenberg/blocks/site/class-login.php:111
 msgid "Password"
 msgstr "Parolă"
+
+#: inc/gutenberg/blocks/navigation/class-navigation.php:96
+msgid "Pills"
+msgstr "Pastile"
 
 #: inc/app.php:126 inc/app.php:127
 msgid "Placeholder"
@@ -386,6 +395,10 @@ msgstr "Sari la conținut"
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
+#: inc/gutenberg/blocks/navigation/class-navigation.php:90
+msgid "Tabs"
+msgstr "File"
+
 #: inc/gutenberg/blocks/query/class-title.php:131
 #, php-format
 msgid "Tag Archives: %s"
@@ -438,7 +451,7 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
-#: inc/gutenberg/blocks/text/class-heading.php:49
+#: inc/gutenberg/blocks/text/class-heading.php:53
 msgid "Underline Brush"
 msgstr "Pensulă de subliniere"
 

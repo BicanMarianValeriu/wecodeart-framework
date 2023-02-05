@@ -650,7 +650,7 @@ class Navigation extends Dynamic {
 					}
 					
 					/* Close */
-					.wp-block-navigation .btn-close {
+					.btn-close {
 						box-sizing: content-box;
 						width: 1em;
 						height: 1em;
@@ -661,24 +661,23 @@ class Navigation extends Dynamic {
 						border-radius: 0.25rem;
 						opacity: 0.5;
 					}
-					.wp-block-navigation .btn-close:hover {
+					.btn-close:hover {
 						color: #000;
 						text-decoration: none;
 						opacity: 0.75;
 					}
-					.wp-block-navigation .btn-close:focus {
+					.btn-close:focus {
 						outline: 0;
 						box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
 						opacity: 1;
 					}
-					.wp-block-navigation .btn-close:disabled,
-					.wp-block-navigation .btn-close.disabled {
+					.btn-close:is(.disabled,:disabled) {
 						pointer-events: none;
 						user-select: none;
 						opacity: 0.25;
 					}
 					/* Toggler */
-					.wp-block-navigation .navbar-toggler {
+					.navbar-toggler {
 						padding: var(--wp--navbar-toggler-padding-y) var(--wp--navbar-toggler-padding-x);
 						background-color: transparent;
 						color: var(--wp--navbar-color);
@@ -688,15 +687,15 @@ class Navigation extends Dynamic {
 						border-radius: var(--wp--navbar-toggler-border-radius, 0.25rem);
 						transition: var(--wp--navbar-toggler-transition, box-shadow 0.15s ease-in-out);
 					}
-					.wp-block-navigation .navbar-toggler:hover {
+					.navbar-toggler:hover {
 						text-decoration: none;
 					}
-					.wp-block-navigation .navbar-toggler:focus {
+					.navbar-toggler:focus {
 						text-decoration: none;
 						outline: 0;
 						box-shadow: 0 0 0 var(--wp--navbar-toggler-focus-width);
 					} 
-					.wp-block-navigation .navbar-toggler-icon {
+					.navbar-toggler-icon {
 						display: inline-block;
 						width: 1.5em;
 						height: 1.5em;
@@ -764,17 +763,17 @@ class Navigation extends Dynamic {
 						}
 
 						/* Dropdowns */
-						.wp-block-navigation .dropdown-menu-{$key}-start {
-							--wp-position: start;
+						.dropdown-menu-{$key}-start {
+							--wp--position: start;
 						}
-						.wp-block-navigation .dropdown-menu-{$key}-start[data-bs-popper] {
+						.dropdown-menu-{$key}-start[data-bs-popper] {
 							right: auto;
 							left: 0;
 						}
-						.wp-block-navigation .dropdown-menu-{$key}-end {
-							--wp-position: end;
+						.dropdown-menu-{$key}-end {
+							--wp--position: end;
 						}
-						.wp-block-navigation .dropdown-menu-{$key}-end[data-bs-popper] {
+						.dropdown-menu-{$key}-end[data-bs-popper] {
 							right: 0;
 							left: auto;
 						}
@@ -785,18 +784,9 @@ class Navigation extends Dynamic {
 							justify-content: inherit;
 							align-items: inherit;
 						}
-						.wp-block-navigation.navbar-expand-{$key}.flex-column .navbar-nav {
-							flex-direction: column;
-						}
 						.wp-block-navigation.navbar-expand-{$key} .wp-block-spacer {
 							height: 100%;
 							width: var(--wp--spacer-width);
-						}
-						.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
-							border-top: 0.3em solid transparent;
-							border-right: 0;
-							border-bottom: 0.3em solid transparent;
-							border-left: 0.3em solid;
 						}
 					}
 					";
@@ -804,7 +794,7 @@ class Navigation extends Dynamic {
 
 				$inline .= "
 					/* Offcanvas */
-					.wp-block-navigation[class*='navbar-expand'] :where(.offcanvas,.offcanvas-body,.navbar-nav) {
+					.wp-block-navigation :where(.offcanvas,.offcanvas-body,.navbar-nav) {
 						flex: 1 1 100%;
 						gap: inherit;
 					}
@@ -874,14 +864,14 @@ class Navigation extends Dynamic {
 						--wp--nav-tabs-border-color: var(--wp--gray-200);
 						--wp--nav-tabs-border-radius: .25rem;
 						--wp--nav-tabs-link-hover-border-color: var(--wp--nav-tabs-border-color) var(--wp--nav-tabs-border-color) var(--wp--nav-tabs-border-color);
-						--wp--nav-tabs-link-active-color: #000;
+						--wp--nav-tabs-link-active-color: var(--wp--preset--color--dark);
 						--wp--nav-tabs-link-active-bg: var(--wp--white);
 						--wp--nav-tabs-link-active-border-color: var(--wp--nav-tabs-border-color) var(--wp--nav-tabs-border-color) var(--wp--white);
 						border-bottom: var(--wp--nav-tabs-border-width) solid var(--wp--nav-tabs-border-color);
 					}
 					.wp-block-navigation.is-style-tabs .navbar-nav {
 						--wp--nav-link-padding-x: 1rem;
-    					--wp--nav-link-padding-y: 0.5rem;
+    					--wp--nav-link-padding-y: .5rem;
 					}
 					.wp-block-navigation.is-style-tabs .navbar-nav .nav-link {
 						margin-bottom: calc(-1 * var(--wp--nav-tabs-border-width));
@@ -921,7 +911,7 @@ class Navigation extends Dynamic {
 			case 'pills':
 				$inline .= "
 					.wp-block-navigation.is-style-pills {
-						--wp--nav-pills-border-radius: 0.375rem;
+						--wp--nav-pills-border-radius: .375rem;
 						--wp--nav-pills-link-active-color: var(--wp--white);
 						--wp--nav-pills-link-active-bg: var(--wp--preset--color--primary);
 					}
@@ -956,7 +946,7 @@ class Navigation extends Dynamic {
 
 		return "
 		/* Nav */
-		.wp-block-navigation .nav {
+		.nav {
 			--wp--nav-link-padding-x: 0.5rem;
 			--wp--nav-link-padding-y: 0.5rem;
 			--wp--nav-link-color: rgba(var(--wp--emphasis-color-rgb), 0.55);
@@ -969,24 +959,21 @@ class Navigation extends Dynamic {
 			margin-bottom: 0;
 			list-style: none;
 		}
-		.wp-block-navigation.nav-fill .nav-link,
-		.wp-block-navigation.nav-fill .nav-item {
+		.nav-fill :where(.nav-link,.nav-item) {
 			flex: 1 1 auto;
 			text-align: center;
 		}
-		.wp-block-navigation.nav-justified .nav-link,
-		.wp-block-navigation.nav-justified .nav-item {
+		.nav-justified :where(.nav-link,.nav-item) {
 			flex-basis: 0;
 			flex-grow: 1;
 			text-align: center;
 		}
-		.wp-block-navigation.nav-fill .nav-item .nav-link,
-		.wp-block-navigation.nav-justified .nav-item .nav-link {
+		:where(.nav-fill,.nav-justified) .nav-item .nav-link {
 			width: 100%;
 		}
 
 		/* Navbar */
-		.wp-block-navigation.navbar {
+		.navbar {
 			--wp--navbar-padding-x: 0;
 			--wp--navbar-padding-y: 0.5rem;
 			--wp--navbar-color: rgba(var(--wp--emphasis-color-rgb), 0.65);
@@ -1011,7 +998,7 @@ class Navigation extends Dynamic {
 			padding-top: 0.5rem;
 			padding-bottom: 0.5rem;
 		}
-		.wp-block-navigation .navbar-nav {
+		.navbar-nav {
 			--wp--nav-link-padding-x: 0;
 			--wp--nav-link-padding-y: 0;
 			--wp--nav-link-color: var(--wp--navbar-color);
@@ -1023,26 +1010,26 @@ class Navigation extends Dynamic {
 			margin-bottom: 0;
 			list-style: none;
 		}
-		.wp-block-navigation .navbar-nav .dropdown-menu {
+		.navbar-nav .dropdown-menu {
 			position: static;
 		}
-		.wp-block-navigation .navbar-text {
+		.navbar-text {
 			padding-top: 0.5rem;
 			padding-bottom: 0.5rem;
 		}
-		.wp-block-navigation .navbar-collapse {
+		.navbar-collapse {
 			flex-basis: 100%;
 			flex-grow: 1;
 			align-items: center;
 		}
-		.wp-block-navigation .navbar-nav-scroll {
+		.navbar-nav-scroll {
 			max-height: var(--wp--scroll-height, 75vh);
 			overflow-y: auto;
 		}
 
 		/* No Motion */
 		@media (prefers-reduced-motion: reduce) {
-			.wp-block-navigation .nav-link {
+			.nav-link {
 				transition: none;
 			}
 		}

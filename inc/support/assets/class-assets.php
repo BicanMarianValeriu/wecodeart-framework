@@ -76,9 +76,9 @@ final class Assets implements Integration {
 	/**
 	 * Register hooks
 	 */
-	public function register_hooks() {
-		\add_action( $this->hook,	[ $this, 'core'		] );
-		\add_action( $this->hook,	[ $this, 'enqueue'	], PHP_INT_MAX );
+	public function register_hooks(): void {
+		\add_action( $this->hook,	[ $this, 'core'		], -20 );
+		\add_action( $this->hook,	[ $this, 'enqueue'	], -10 );
 	}
 	
 	/**
@@ -87,7 +87,7 @@ final class Assets implements Integration {
 	 * @since	3.1.2
 	 * @version	5.3.8
 	 */
-	public function jquery_to_footer( $wp_scripts ) {
+	public function jquery_to_footer( $wp_scripts ): void {
 		$config = wecodeart_config( 'footer' );
 
 		if ( is_admin() && get_prop( $config, 'jquery' ) !== false ) return;
@@ -130,7 +130,7 @@ final class Assets implements Integration {
 		] );
 
 		// Add Core Styles
-		$this->add_style( 'global-styles', [
+		$this->add_style( $this->make_handle(), [
 			'inline'	=> 'file:' . $this->get_asset( 'css', 'frontend' ),
 		] );
 	}
@@ -181,16 +181,19 @@ final class Assets implements Integration {
     public function add_style( string $handle, array $data = [] ): void {
 		// Valid Args
 		$data = wp_array_slice_assoc( $data, [ 'path', 'deps', 'version', 'media', 'rtl', 'inline', 'load' ] );
-		$data = wp_parse_args( [
+		$data = wp_parse_args( $data, [
+			'handle' 	=> '',
+			'src'    	=> '',
+			'deps'   	=> [],
 			'version' 	=> wecodeart( 'version' ),
 			'media'		=> 'all',
-		], $data );
+		] );
 
 		// Registration Logic
 		$args = [
 			$handle,
 			get_prop( $data, 'path', false ),
-			get_prop( $data, 'deps', [] ),
+			get_prop( $data, 'deps' ),
 			get_prop( $data, 'version' ),
 			get_prop( $data, 'media' )
 		];
@@ -213,16 +216,19 @@ final class Assets implements Integration {
     public function add_script( string $handle, array $data = [] ): void {
 		// Valid Args
 		$data = wp_array_slice_assoc( $data, [ 'path', 'deps', 'version', 'footer', 'inline', 'locale', 'where', 'load' ] );
-		$data = wp_parse_args( [
+		$data = wp_parse_args( $data, [
+			'handle' 	=> '',
+			'src'    	=> '',
+			'deps'   	=> [],
 			'version' 	=> wecodeart( 'version' ),
 			'footer' 	=> true,
-		], $data );
+		] );
 
 		// Registration Logic
 		$args = [
 			$handle,
 			get_prop( $data, 'path', false ),
-			get_prop( $data, 'deps', [] ),
+			get_prop( $data, 'deps' ),
 			get_prop( $data, 'version' ),
 			get_prop( $data, 'footer' )
 		];

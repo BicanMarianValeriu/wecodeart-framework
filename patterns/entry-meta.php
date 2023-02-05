@@ -3,6 +3,7 @@
  * Title: Entry Meta
  * Slug: wecodeart/entry-meta
  * Categories: wecodeart
+ * Inserter: false
  */
 ?>
 <!-- wp:group {"className":"gap-1 mb-3","layout":{"type":"flex","flexWrap":"wrap"}} -->

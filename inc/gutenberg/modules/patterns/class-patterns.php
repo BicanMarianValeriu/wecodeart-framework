@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Patterns
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.5
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -216,7 +216,7 @@ class Patterns implements Integration {
 		$template	= file_get_contents( $file['path'] );
 
 		$args = [
-			'title' 	=> ucfirst( implode( ' ', explode( '-', $file['slug'] ) ) ),
+			'title' 	=> ucwords( implode( ' ', explode( '-', $file['slug'] ) ) ),
 			'content' 	=> $template,
 			'slug'		=> $file['slug'],
 			'theme'		=> $file['theme'],

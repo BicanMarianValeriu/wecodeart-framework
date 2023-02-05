@@ -438,7 +438,7 @@
 				"border": {
 					"width": "1px",
 					"style": "solid",
-					"radius": "0.25rem",
+					"radius": ".35rem",
 					"color": "transparent"
 				},
 				"color": {
@@ -447,10 +447,10 @@
 				},
 				"spacing": {
 					"padding": {
-						"top": ".5rem",
-						"bottom": ".5rem",
-						"left": "1rem",
-						"right": "1rem"
+						"top": ".75rem",
+						"bottom": ".75rem",
+						"left": "1.25rem",
+						"right": "1.25rem"
 					}
 				}
 			},
@@ -478,7 +478,7 @@
 			},
 			"h2": {
 				"typography": {
-					"fontSize": "clamp(2rem, 1.815rem + .9vw, 2.5rem)"
+					"fontSize": "clamp(2rem, 1.815rem + .9vw, 2.25rem)"
 				}
 			},
 			"h3": {

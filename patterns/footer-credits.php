@@ -3,6 +3,7 @@
  * Title: Footer Credits
  * Slug: wecodeart/footer-credits
  * Categories: wecodeart
+ * Inserter: false
  */
 ?>
 <!-- wp:group {"align":"full","textColor":"dark","className":"py-3","layout":{"inherit":true,"type":"constrained"},"className":"py-3"} -->

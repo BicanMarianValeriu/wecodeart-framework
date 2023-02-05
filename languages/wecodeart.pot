@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-01 02:07+0000\n"
+"POT-Creation-Date: 2023-02-03 19:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -148,7 +148,7 @@ msgid_plural "Responses on \"%1$s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: patterns/footer-credits.php:15
+#: patterns/footer-credits.php:16
 #, php-format
 msgid "Copyright %s - All rights reserved. Built on %s."
 msgstr ""
@@ -265,9 +265,14 @@ msgstr ""
 msgid "No responses"
 msgstr ""
 
-#: patterns/query-default.php:23 patterns/query-default.php:24
-#: patterns/query-list.php:35 patterns/query-list.php:36
+#: patterns/query-products-search.php:28
+msgid "No results found for your query."
+msgstr ""
+
+#: patterns/query-default.php:24 patterns/query-default.php:25
+#: patterns/query-list.php:36 patterns/query-list.php:37
 #: patterns/query-overlay.php:33 patterns/query-overlay.php:34
+#: patterns/query-products.php:28
 msgid "No results."
 msgstr ""
 
@@ -285,6 +290,10 @@ msgstr ""
 
 #: inc/gutenberg/blocks/site/class-login.php:111
 msgid "Password"
+msgstr ""
+
+#: inc/gutenberg/blocks/navigation/class-navigation.php:96
+msgid "Pills"
 msgstr ""
 
 #: inc/app.php:126 inc/app.php:127
@@ -370,6 +379,10 @@ msgstr ""
 msgid "Speak Your Mind"
 msgstr ""
 
+#: inc/gutenberg/blocks/navigation/class-navigation.php:90
+msgid "Tabs"
+msgstr ""
+
 #: inc/gutenberg/blocks/query/class-title.php:131
 #, php-format
 msgid "Tag Archives: %s"
@@ -418,7 +431,7 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
-#: inc/gutenberg/blocks/text/class-heading.php:49
+#: inc/gutenberg/blocks/text/class-heading.php:53
 msgid "Underline Brush"
 msgstr ""
 

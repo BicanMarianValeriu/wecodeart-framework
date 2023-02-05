@@ -58,7 +58,7 @@ class Link extends Dynamic {
 	 * @param	array 	$settings
 	 * @param	array 	$data
 	 */
-	public function filter_render( $settings, $data ) {
+	public function filter_render( array $settings, array $data ): array {
 		if ( $this->get_block_type() === $data['name'] ) {
 			$settings = wp_parse_args( [
 				'render_callback' => [ $this, 'render' ]
@@ -75,9 +75,7 @@ class Link extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '', $block = null ) {
-		global $wp;
-
+	public function render( $attributes = [], $content = '', $block = null ): string {
 		$link_has_id 	= isset( $attributes['id'] ) && is_numeric( $attributes['id'] );
 		$is_post_type	= isset( $attributes['kind'] ) && 'post-type' === $attributes['kind'];
 		$is_post_type	= $is_post_type || isset( $attributes['type'] ) && ( 'post' === $attributes['type'] || 'page' === $attributes['type'] );
@@ -99,6 +97,7 @@ class Link extends Dynamic {
 		$extras = [
 			'mod' 	=> [],
 			'icon' 	=> [],
+			'menu'	=> []
 		];
 
 		$attrs 	= $this->get_wrapper_attributes( $attributes, $block, $extras );
@@ -112,7 +111,7 @@ class Link extends Dynamic {
 			$this->render_link( $attributes, $block, $extras );
 
 			// Nav Submenu
-			$this->render_submenu( $block );
+			$this->render_submenu( $block, $extras );
 
 		}, [ $attributes, $block, $extras ], false );
 	}
@@ -125,11 +124,12 @@ class Link extends Dynamic {
 	 *
 	 * @return	string 	HTML
 	 */
-	public function render_link( $attributes, $block, $extras ) {
+	public function render_link( $attributes, $block, $extras ): void {
 		wecodeart( 'markup' )::wrap( 'nav-link', [ [
-			'tag' 	=> $this->get_link_tag( $this->get_link_type( get_prop( $extras, 'mod', [] ) ) ),
+			'tag' 	=> $this->get_link_tag( get_prop( $extras, 'mod', [] ) ),
 			'attrs'	=> $this->get_link_attributes( $attributes, $block, $extras ),
 		] ], function( $attributes, $extras ) {
+			// Divider
 			if( in_array( 'dropdown-divider', get_prop( $extras, 'mod', [] ) ) ) {
 				echo '&nbsp';
 				return;
@@ -155,12 +155,12 @@ class Link extends Dynamic {
 	/**
 	 * Renders dropdown
 	 *
-	 * @param 	array 	$attributes
-	 * @param 	array 	$block
+	 * @param 	object	$block
+	 * @param 	array 	$extras
 	 *
-	 * @return 	string	HTML
+	 * @return 	void
 	 */
-	public function render_submenu( $block ) {
+	public function render_submenu( object $block, array $extras = [] ): void {
 		if( count( $block->inner_blocks ) === 0 ) return;
 
 		// Styles
@@ -172,9 +172,6 @@ class Link extends Dynamic {
 		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( $this->make_handle() ) ) {
 			wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'modules/dropdown' ), [], wecodeart( 'version' ), true );
 		}
-
-		$inner_html = '';
-		foreach ( $block->inner_blocks as $inner_block ) $inner_html .= $inner_block->render();
 		
 		// Use overlay first, fallback to nav background (or body).
 		$color_type = get_prop( $block->context, 'overlayBackgroundColor' );
@@ -183,7 +180,11 @@ class Link extends Dynamic {
 		
 		$classes 	= [ 'wp-block-navigation-link__dropdown', 'dropdown-menu' ];
 
-		if( ( wecodeart( 'styles' )::color_lightness( $background ) < 380 ) ) {
+		if( $extras = get_prop( $extras, [ 'menu' ], [] ) ) {
+			$classes = array_merge( $classes, $extras );
+		}
+
+		if( ! in_array( 'dropdown-menu-dark', $classes, true ) && wecodeart( 'styles' )::color_lightness( $background ) < 380 ) {
 			$classes[] = 'dropdown-menu-dark';
 		}
 
@@ -192,23 +193,31 @@ class Link extends Dynamic {
 			'attrs'	=> [
 				'class' => join( ' ', $classes ),
 			]
-		] ], $inner_html );
+		] ], function( $block ) {
+			$inner_html = '';
+
+			foreach ( $block->inner_blocks as $inner_block ) {
+				if( property_exists( $block, 'attributes' ) ) {
+					// For some reason, WP does not pass this attribute to 2nd level dropdowns.
+					$inner_block->attributes['isTopLevelLink'] = false;
+				}
+				$inner_html .= $inner_block->render();
+			}
+
+			echo $inner_html; // WPCS ok - Gutenberg blocks here.
+		}, [ $block ] );
 	}
 
 	/**
-	 * Return a string containing a linkmod type and update $atts array
+	 * Return a string containing a linkmod tag.
 	 *
 	 * @param	array	$classes
 	 * 
 	 * @return 	string
 	 */
-	public function get_link_type( array $classes = [] ): string {
-		$mod = '';
-		
-		// Loop through array of linkmod classes to handle their $atts.
-		if ( empty( $classes ) ) {
-			return $mod;
-		}
+	public function get_link_tag( array $classes = [] ): string  {
+		$type 	= 'link'; // Default
+		$output = '';
 
 		foreach ( $classes as $class ) {
 			if ( empty( $class ) ) {
@@ -216,36 +225,22 @@ class Link extends Dynamic {
 			}
 
 			if ( 'dropdown-header' === $class ) {
-				$mod = 'dropdown-header';
+				$type = 'header';
 			} elseif ( 'dropdown-divider' === $class ) {
-				$mod = 'dropdown-divider';
-			} elseif ( in_array( $class, [ 'dropdown-text', 'dropdown-item-text' ] ) ) {
-				$mod = 'dropdown-text';
+				$type = 'divider';
+			} elseif ( in_array( $class, [ 'dropdown-text', 'dropdown-item-text' ], true ) ) {
+				$type = 'text';
 			}
 		}
 
-		return $mod;
-	}
-
-	/**
-	 * Return a string containing a linkmod span.
-	 *
-	 * @param	string 	$type
-	 * 
-	 * @return 	string
-	 */
-	public function get_link_tag( string $type ): string  {
-		$output = '';
-
 		switch( $type ) :
-			case 'dropdown-header':
+			case 'header':
 				$output = 'h6';
 			break;
-			case 'dropdown-text':
-			case 'dropdown-item-text':
+			case 'text':
 				$output = 'span';
 			break;
-			case 'dropdown-divider':
+			case 'divider':
 				$output = 'div';
 			break;
 			default: 
@@ -261,9 +256,7 @@ class Link extends Dynamic {
 	 * 
 	 * @return 	array
 	 */
-	public function get_link_attributes( $attributes, $block, $extras ) {
-		global $wp;
-
+	public function get_link_attributes( $attributes, $block, $extras ): array {
 		$current_id 	= is_home() ? get_option( 'page_for_posts' ) : get_the_ID();
 		$is_active   	= ! empty( $attributes['id'] ) && ( (int) $current_id === (int) $attributes['id'] );
 		$has_submenu 	= count( $block->inner_blocks ) > 0;
@@ -299,9 +292,7 @@ class Link extends Dynamic {
 			], $attrs );
 		}
 
-		$extras = flatten( $extras );
-
-		foreach ( $extras as $class ) {
+		foreach ( get_prop( $extras, [ 'mod' ], [] ) as $class ) {
 			if ( empty( $class ) ) continue;
 
 			// Add Disabled
@@ -328,53 +319,36 @@ class Link extends Dynamic {
 	 * 
 	 * @return 	array
 	 */
-	public function get_wrapper_attributes( $attributes, $block, &$extras ) {
-		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
+	public function get_wrapper_attributes( $attributes, $block, &$extras ): array {
 		$classes		= [ 'wp-block-navigation-item', 'wp-block-navigation-link' ];
+		$inline_style 	= ''; // Fallback - to do, if styles extension is disabled.
+		
+		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
 		$class_names	= explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
+		$has_dropdown 	= count( array_intersect( $class_names, [ 'dropup', 'dropend', 'dropdown', 'dropstart' ] ) );
 
-		// Fallback - to do, if styles extension is disabled.
-		$inline_style 	= '';
-
+		// If is not submenu, add specific class.
 		if( $is_sub_menu === false ) {
 			$classes[] = 'nav-item';
 		}
 
-		if ( count( $class_names ) ) {
+		// If we have custom classes, add them.
+		if( count( $class_names ) ) {
 			$classes = array_merge( $classes, $class_names );
 		}
 
-		if( count( $block->inner_blocks ) ) {
-			$classes[] = 'dropdown';
+		// If is submenu and we dont already have that class.
+		if( count( $block->inner_blocks ) && ! $has_dropdown ) {
+			$classes[] = $is_sub_menu ? 'dropend' : 'dropdown';
 		}
 		
-		$classes = $this->pluck_special_classes( $classes, $is_sub_menu, $extras );
-
-		return [
-			'class'	=> join( ' ', array_filter( $classes ) ),
-			'style'	=> $inline_style,
-		];
-	}
-
-	/**
-	 * Find any custom mod or icon classes and store in their holder
-	 *
-	 * Supported Mods: .disabled, .dropdown-header, .dropdown-divider, .dropdown-text
-	 * Supported Icons: Font Awesome 4/5/6, Glypicons
-	 *
-	 * @param 	array   $classes		an array of classes currently assigned to the item.
-	 * @param 	bool   	$is_sub_menu	is dropdown link.
-	 * @param 	array   $extras			an array to hold linkmod classes.
-	 *
-	 * @return 	array  $classes	a maybe modified array of classnames.
-	 */
-	private function pluck_special_classes( $classes, $is_sub_menu, &$extras ) {
-		foreach ( $classes as $key => $class ) {
-			// If any special classes are found, store the class in it's
-			// holder array and and unset the item from $classes.
+		// Filter special classes storing them in $extras
+		// Supported Mods: .disabled, .dropdown-header, .dropdown-divider, .dropdown-text
+		// Supported Icons: Font Awesome 4/5/6, Glypicons
+		foreach( $classes as $key => $class ) {
 			if ( preg_match( '/^disabled|^sr-only|^screen-reader-text/i', $class ) ) {
 				$extras['mod'][] = $class;
-				// unset( $classes[ $key ] );
+				// unset( $classes[ $key ] ); // This will apply to the link
 			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-text|^dropdown-item-text/i', $class ) && $is_sub_menu ) {
 				$extras['mod'][] = $class;
 				unset( $classes[ $key ] );
@@ -384,10 +358,16 @@ class Link extends Dynamic {
 			} elseif ( preg_match( '/^glyphicon-(\S*)?|^glyphicon(\s?)$/i', $class ) ) {
 				$extras['icon'][] = $class;
 				unset( $classes[ $key ] );
+			} elseif ( preg_match( '/^dropdown-menu-(\S*)/i', $class ) ) {
+				$extras['menu'][] = $class;
+				unset( $classes[ $key ] );
 			}
 		}
 
-		return $classes;
+		return [
+			'class'	=> join( ' ', array_filter( $classes ) ),
+			'style'	=> $inline_style,
+		];
 	}
 
 	/**
@@ -397,8 +377,8 @@ class Link extends Dynamic {
 	 */
 	public function styles(): string {
 		return "
-			/* Nav Links */
-			.wp-block-navigation .nav-link {
+			/* Nav Link */
+			.nav-link {
 				display: block;
 				padding: var(--wp--nav-link-padding-y) var(--wp--nav-link-padding-x);
 				color: var(--wp--nav-link-color);
@@ -406,26 +386,24 @@ class Link extends Dynamic {
 				font-weight: inherit;
 				transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 			}
-			.wp-block-navigation .nav-link:is(:focus,:hover) {
+			.nav-link:is(:focus,:hover) {
 				outline: none;
 			}
-			.wp-block-navigation .disabled>.nav-link,
-			.wp-block-navigation .nav-link.disabled {
+			.disabled>.nav-link,
+			.nav-link.disabled {
 				color: var(--wp--nav-link-disabled-color);
 				pointer-events: none;
 				cursor: default;
 			}
-			.wp-block-navigation .navbar-nav .nav-link:is(:hover,:focus) {
+			.navbar-nav .nav-link:is(:hover,:focus) {
 				color: var(--wp--nav-link-hover-color);
 			}
-			.wp-block-navigation .navbar-nav .show > .nav-link,
-			.wp-block-navigation .navbar-nav .nav-link.active {
+			.navbar-nav .show > .nav-link,
+			.navbar-nav .nav-link.active {
 				color: var(--wp--navbar-active-color);
 			}
-			/* Fix Custom Styles */
-			.wp-block-navigation.has-text-color .nav-link {
-				color: inherit;
-			}
+
+			/* Blockd */
 			.wp-block-navigation .wp-block-navigation-item__icon {
 				margin-right: .5rem;
 			}
