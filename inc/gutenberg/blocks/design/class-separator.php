@@ -167,18 +167,18 @@ class Separator extends Dynamic {
 	 */
 	public function styles() {
 		$inline = '
-		hr {
-			height: 1px;
-			opacity: 1;
-		}
-		.wp-block-separator {
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.wp-block-separator.is-style-default,
-		.wp-block-separator:not([class*="is-style-"]) {
-			max-width: 100px;
-		}
+			hr {
+				height: 1px;
+				opacity: 1;
+			}
+			.wp-block-separator {
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.wp-block-separator.is-style-default,
+			.wp-block-separator:not([class*="is-style-"]) {
+				max-width: 100px;
+			}
 		';
 
 		return $inline;

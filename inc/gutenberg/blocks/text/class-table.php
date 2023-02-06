@@ -135,15 +135,12 @@ class Table extends Dynamic {
 			--wp--table-hover-bg: rgba(0, 0, 0, 0.075);
 		  
 			width: 100%;
-			margin-bottom: 1rem;
 			vertical-align: middle;
 			border-color: var(--wp--gray-300);
 			border-collapse: collapse;
 			caption-side: bottom;
 		}
-		table > thead {
-			vertical-align: inherit;
-		}
+		table > thead,
 		table > tbody {
 			vertical-align: inherit;
 		}
@@ -153,23 +150,22 @@ class Table extends Dynamic {
 			border-bottom-width: var(--wp--table-border-width);
 			box-shadow: inset 0 0 0 9999px var(--wp--table-accent-bg);
 		}
-		th {
+		table th {
 			text-align: inherit;
 			text-align: -webkit-match-parent;
 		}
-		th,
-		td {
+		table :where(th,td) {
 			padding: .5rem;
+			word-break: break-word;
 		}
-		thead,
-		tbody,
-		tfoot,
-		tr,
-		td,
-		th {
+		table :where(thead,tbody,tfoot,tr,td,th) {
 			border-color: inherit;
 			border-style: solid;
 			border-width: 0;
+		}
+		table caption {
+			color: inherit;
+			text-align: inherit;
 		}
 		.table-bordered > :not(caption) > * {
 			border-width: var(--wp--table-border-width) 0;
@@ -194,6 +190,9 @@ class Table extends Dynamic {
 		.caption-top {
 			caption-side: top;
 		}
+		.wp-block-table {
+			margin: 0;
+		}
 		.wp-block-table.alignleft,
 		.wp-block-table.aligncenter,
 		.wp-block-table.alignright {
@@ -203,18 +202,15 @@ class Table extends Dynamic {
 		.wp-block-table .has-fixed-layout {
 			table-layout: fixed;
 		}
-		.wp-block-table thead,
-		.wp-block-table tbody,
-		.wp-block-table tfoot,
+		.wp-block-table figcaption {
+			text-align: center;
+		}
+		.wp-block-table :where(thead,tbody,tfoot),
 		.wp-block-table .table-bordered > :not(caption) > *,
 		.wp-block-table .table-bordered > :not(caption) > * > * {
 			border-color: inherit;
 			border-style: inherit;
 			border-width: inherit;
-		}
-		.wp-block-table td,
-		.wp-block-table th {
-			word-break: break-word;
 		}
 		.wp-block-table .is-style-stripes tbody tr {
 			--wp--table-striped-color: inherit;

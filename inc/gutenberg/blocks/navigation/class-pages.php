@@ -96,30 +96,29 @@ class Pages extends Dynamic {
 		$inner_blocks = new \WP_Block_List( $inner_blocks, $attributes );
 
 		// Render links.
-		foreach( $inner_blocks as $inner_block ) $content .= $inner_block->render();
-		
-		// If not used in navigation then we wrap it.
-		if( empty( $block->context ) ) {
-			$handle_style 	= 'wp-block-navigation';
-
-			if( ! wp_style_is( $handle_style ) ) {
-				wp_enqueue_style( 'wp-block-navigation' );
-				wp_enqueue_style( 'wp-block-navigation-link' );
-			}
-
-			$classes = [ 'wp-block-page-list', 'wp-block-navigation', 'nav' ];
-	
-			if( $classname = get_prop( $attributes, [ 'className' ], '' ) ) {
-				$classes = array_merge( $classes, array_filter( explode( ' ', $classname ) ) );
-			}
-
-			$content = wecodeart( 'markup' )::wrap( 'wp-block-page-list', [ [
-				'tag' 	=> 'ul',
-				'attrs'	=> [
-					'class' => join( ' ', $classes ),
-				]
-			] ], $content, [], false );
+		foreach( $inner_blocks as $inner_block ) {
+			$content .= $inner_block->render();
 		}
+		
+		// If not used in navigation return only <li> elements.
+		if( ! empty( $block->context ) ) {
+			return $content;
+		}
+
+		// Otherwise we wrap them in <ul> tag.
+		$handle_style 	= 'wp-block-navigation';
+
+		if( ! wp_style_is( $handle_style ) ) {
+			wp_enqueue_style( 'wp-block-navigation' );
+			wp_enqueue_style( 'wp-block-navigation-link' );
+		}
+
+		$content = wecodeart( 'markup' )::wrap( 'wp-block-page-list', [ [
+			'tag' 	=> 'ul',
+			'attrs'	=> $this->get_block_wrapper_attributes( [
+				'class' => 'wp-block-navigation nav'
+			] )
+		] ], $content, [], false );
 
 		return $content;
 	}
@@ -178,9 +177,10 @@ class Pages extends Dynamic {
 	 */
 	public function styles(): string {
 		return "
-			.wp-block-pages-list {
+			.wp-block-page-list {
 				display: flex;
 				flex-direction: column;
+				align-items: flex-start;
 				padding-left: 0;
 				list-style: none;
 			}

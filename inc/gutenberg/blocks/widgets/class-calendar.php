@@ -58,10 +58,12 @@ class Calendar extends Dynamic {
 	 */
 	public function render( $content = '', $block = [], $data = null ) {
 		// Enqueue Table CSS
-		wp_add_inline_style(
-			'wp-block-' . $this->block_name, 
-			wecodeart( 'styles' )::compress( wecodeart( 'blocks' )->get( 'core/table' )::get_instance()->styles() )
-		);
+		if( ! wp_style_is( 'wp-block-table' ) ) {
+			wp_add_inline_style(
+				'wp-block-' . $this->block_name, 
+				wecodeart( 'styles' )::compress( wecodeart( 'blocks' )->get( 'core/table' )::get_instance()->styles() )
+			);
+		}
 
 		// Remove ID
 		$content = preg_replace( '/(<[^>]+) id=".*?"/i', '$1', $content, 1 );
@@ -82,8 +84,9 @@ class Calendar extends Dynamic {
 			text-align: center;
 		}
 		.wp-block-calendar caption {
-			font-size: var(--wp--preset--font-size--large);
 			color: var(--wp--preset--color--dark);
+			font-size: var(--wp--preset--font-size--large);
+			margin-bottom: var(--wp--style--block-gap);
 		}
 		.wp-block-calendar .wp-calendar-table {
 			text-align: inherit;

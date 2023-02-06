@@ -136,7 +136,6 @@ class Archives extends Dynamic {
 				$content .= ( new \WP_Block( [
 					'blockName' 	=> 'core/navigation',
 					'attrs'			=> apply_filters( 'wecodeart/filter/gutenberg/archives/nav', [
-						'className'			=> 'wp-block-archives__nav',
 						'textColor'			=> 'primary',
 						'overlayMenu'		=> 'never',
 						'showSubmenuIcon' 	=> false,
