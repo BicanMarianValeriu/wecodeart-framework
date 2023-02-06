@@ -90,6 +90,14 @@
 	text-transform: uppercase;
 }
 
+.small {
+    @extend small;
+}
+
+.mark {
+    @extend mark;
+}
+
 .display-1,
 .display-2,
 .display-3,

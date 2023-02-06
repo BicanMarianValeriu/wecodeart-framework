@@ -77,14 +77,12 @@ strong {
 // Small
 //
 // Add the correct font size in all browsers
-small,
-.small {
+small {
   	font-size: var(--wp--preset--font-size--small);
 }
 
 // Mark
-mark,
-.mark {
+mark {
 	display: inline-block;
 	padding: .2rem .5rem;
 	border-radius: .25rem;

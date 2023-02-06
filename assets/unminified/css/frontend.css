@@ -108,13 +108,11 @@ strong {
   font-weight: 700;
 }
 
-small,
-.small {
+small, .small {
   font-size: var(--wp--preset--font-size--small);
 }
 
-mark,
-.mark {
+mark, .mark {
   display: inline-block;
   padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
