@@ -403,7 +403,7 @@ class Link extends Dynamic {
 				color: var(--wp--navbar-active-color);
 			}
 
-			/* Blockd */
+			/* Block */
 			.wp-block-navigation .wp-block-navigation-item__icon {
 				margin-right: .5rem;
 			}
