@@ -1,1 +1,1 @@
-.wp-block-code code{display:block;overflow-wrap:break-word;white-space:pre-wrap}
+/* Reset */pre{overflow:auto;color:var(--wp--pink)}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:var(--wp--preset--font-size--small);color:var(--wp--pink);word-wrap:break-word}a >code{color:inherit}/* Block */.wp-block-code code{display:block;overflow-wrap:break-word;white-space:pre-wrap}

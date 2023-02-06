@@ -269,7 +269,7 @@ class Menu extends Dynamic {
 			}
 			.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
 				float: right;
-				margin-top: .25em;
+				margin-top: .35em;
 			}
 		";
 

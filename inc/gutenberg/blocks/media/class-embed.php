@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -52,6 +52,9 @@ class Embed extends Dynamic {
 	 */
 	public function styles() {
 		return '
+		iframe {
+			border: 0;
+		}
 		.wp-block-embed {
 			margin-bottom: 1rem;
 		}

@@ -349,18 +349,6 @@
 	},
 	"styles": {
 		"blocks": {
-			"core/heading": {
-				"typography": {
-					"fontWeight": "300",
-					"lineHeight": "1.2"
-				},
-				"spacing": {
-					"margin": {
-						"top": "0",
-						"bottom": "var:style|block-gap"
-					}
-				}
-			},
 			"core/paragraph": {
 				"spacing": {
 					"margin": {
@@ -471,6 +459,18 @@
 			}
 		},
 		"elements": {
+			"heading": {
+				"typography": {
+					"fontWeight": "300",
+					"lineHeight": "1.2"
+				},
+				"spacing": {
+					"margin": {
+						"top": "0",
+						"bottom": "var:style|block-gap"
+					}
+				}
+			},
 			"h1": {
 				"typography": {
 					"fontSize": "clamp(2.5rem, 2.25rem + 1.35vw, 3.25rem)"
@@ -507,6 +507,22 @@
 				},
 				"typography": {
 					"textDecoration": "none"
+				},
+				":focus": {
+					"outline": {
+						"style": "thin dotted"
+					}
+				}
+			},
+			"caption": {
+				"color": {
+					"text": "var:preset|color|dark"
+				},
+				"spacing": {
+					"padding": {
+						"top": ".2rem",
+						"bottom": ".4rem"
+					}
 				}
 			}
 		},

@@ -85,14 +85,6 @@
     @include text-truncate();
 }
 
-.small {
-	@extend small;
-}
-
-.mark {
-	@extend mark;
-}
-
 .initialism {
 	font-size: var(--wp--preset--font-size--small);
 	text-transform: uppercase;

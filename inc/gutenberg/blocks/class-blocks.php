@@ -49,6 +49,7 @@ class Blocks implements Configuration {
         $this->register( 'core/gallery',    Blocks\Media\Gallery::class );
         // Text Blocks
         $this->register( 'core/code',	    Blocks\Text\Code::class );
+        $this->register( 'core/list',	    Blocks\Text\Lists::class );
         $this->register( 'core/table',	    Blocks\Text\Table::class );
 		$this->register( 'core/quote',	    Blocks\Text\Quote::class );
 		$this->register( 'core/heading',    Blocks\Text\Heading::class );

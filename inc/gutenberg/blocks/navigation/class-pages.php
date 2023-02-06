@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.3.7
- * @version		5.6.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -45,7 +45,6 @@ class Pages extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_action( 'wp_print_styles', fn() => \wp_deregister_style( 'wp-block-' . $this->block_name ) );
 		\add_filter( 'block_type_metadata_settings',	[ $this, 'filter_render' ], 10, 2 );
 	}
 
@@ -89,12 +88,6 @@ class Pages extends Dynamic {
 
 		$inner_blocks 	= [];
 		$top_levels		= wp_list_filter( $all_pages, [ 'post_parent' => 0 ] );
-		
-		// Limit the number of items to be visually displayed.
-		if ( $amount = get_prop( $attributes, [ '__unstableMaxPages' ], 3 ) ) {
-			$top_levels = array_slice( $top_levels, 0, $amount );
-
-		}
 
 		foreach( $top_levels as $page ) {
 			$inner_blocks[] = self::parse_block( $page, $all_pages );
@@ -107,8 +100,14 @@ class Pages extends Dynamic {
 		
 		// If not used in navigation then we wrap it.
 		if( empty( $block->context ) ) {
-			
-			$classes = [ 'wp-block-navigation', 'wp-block-navigation--pages', 'nav', 'with-hover' ];
+			$handle_style 	= 'wp-block-navigation';
+
+			if( ! wp_style_is( $handle_style ) ) {
+				wp_enqueue_style( 'wp-block-navigation' );
+				wp_enqueue_style( 'wp-block-navigation-link' );
+			}
+
+			$classes = [ 'wp-block-page-list', 'wp-block-navigation', 'nav' ];
 	
 			if( $classname = get_prop( $attributes, [ 'className' ], '' ) ) {
 				$classes = array_merge( $classes, array_filter( explode( ' ', $classname ) ) );
@@ -150,6 +149,18 @@ class Pages extends Dynamic {
 		$inner_blocks = wp_list_filter( $all_pages, [ 'post_parent' => $page->ID ] );
 
 		if( ! empty( $inner_blocks ) ) {
+			// Extra Assets Handle
+			$handle_style 	= 'wp-block-navigation-submenu';
+			$handle_script 	= 'wecodeart-gutenberg-blocks-navigation';
+
+			if( ! wp_style_is( $handle_style ) ) {
+				wp_enqueue_style( $handle_style );
+			}
+			
+			if( ! wp_script_is( $handle_script ) ) {
+				wp_enqueue_script( $handle_script, wecodeart_asset( 'js', 'modules/dropdown' ), [], wecodeart( 'version' ), true );
+			}
+
 			$block = wp_parse_args( [
 				'innerBlocks' => array_map( function( $page ) use( $all_pages ) {
 					return self::parse_block( $page, $all_pages );
@@ -158,5 +169,21 @@ class Pages extends Dynamic {
 		}
 
 		return $block;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles(): string {
+		return "
+			.wp-block-pages-list {
+				display: flex;
+				flex-direction: column;
+				padding-left: 0;
+				list-style: none;
+			}
+		";
 	}
 }

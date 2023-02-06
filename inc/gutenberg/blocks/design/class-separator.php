@@ -167,6 +167,10 @@ class Separator extends Dynamic {
 	 */
 	public function styles() {
 		$inline = '
+		hr {
+			height: 1px;
+			opacity: 1;
+		}
 		.wp-block-separator {
 			margin-left: auto;
 			margin-right: auto;

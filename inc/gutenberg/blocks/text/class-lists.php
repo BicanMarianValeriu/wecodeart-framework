@@ -8,7 +8,7 @@
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
- * @since		5.0.0
+ * @since		5.7.2
  * @version		5.7.2
  */
 
@@ -18,12 +18,11 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Code block.
  */
-class Code extends Dynamic {
+class Lists extends Dynamic {
 
 	use Singleton;
 
@@ -39,7 +38,7 @@ class Code extends Dynamic {
 	 *
 	 * @var string
 	 */
-	protected $block_name = 'code';
+	protected $block_name = 'list';
 
 	/**
 	 * Shortcircuit Register
@@ -53,31 +52,30 @@ class Code extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		/* Reset */
-		pre {
-			overflow: auto;
-			color: var(--wp--pink);
-		}
-		pre code {
-			font-size: inherit;
-			color: inherit;
-			word-break: normal;
-		}
-		code {
-			font-size: var(--wp--preset--font-size--small);
-			color: var(--wp--pink);
-			word-wrap: break-word;
-		}
-		a > code {
-			color: inherit;
-		}
-
-		/* Block */
-		.wp-block-code code {
-			display: block;
-			overflow-wrap: break-word;
-    		white-space: pre-wrap;
-		}
+			/* Reset */
+			ol,
+			ul {
+				padding-left: 1.1em;
+			}
+			ol,
+			ul,
+			dl {
+				margin-top: 0;
+				margin-bottom: var(--wp--style--block-gap);
+			}
+			ol ol,
+			ul ul,
+			ol ul,
+			ul ol {
+				margin-bottom: 0;
+			}
+			dt {
+				font-weight: 700;
+			}
+			dd {
+				margin-bottom: .5rem;
+				margin-left: 0;
+			}
 		";
 	}
 }

@@ -262,6 +262,7 @@ class Social extends Dynamic {
 		.wp-social-link svg {
 			width: 1em;
 			height: 1em;
+			fill: currentColor;
 		}
 		";
 	}

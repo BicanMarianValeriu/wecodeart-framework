@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -292,6 +292,7 @@ class Image extends Dynamic {
 			position: relative;
 			overflow: hidden;
 			max-width: 100%;
+			margin: 0 0 var(--wp--style--block-gap)
 		}
 		.wp-block-post-featured-image__link {
 			display: block;

@@ -16,6 +16,7 @@ v5.7.2
 - Updated - support removed for core block patterns
 - Updated - Translated some pattern strings
 - Updated - Pattern registry - add latest list of valid properties
+- Updated - CSS reset simplified and optimized (moved into block styles / forms)
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
 - Removed - core/post-comments-link from Post Meta pattern
 - Fixed - core/button outline default color rgb variable added in CSS

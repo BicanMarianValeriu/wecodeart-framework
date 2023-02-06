@@ -138,6 +138,8 @@ class Table extends Dynamic {
 			margin-bottom: 1rem;
 			vertical-align: middle;
 			border-color: var(--wp--gray-300);
+			border-collapse: collapse;
+			caption-side: bottom;
 		}
 		table > thead {
 			vertical-align: inherit;
@@ -150,6 +152,24 @@ class Table extends Dynamic {
 			background-color: var(--wp--table-bg);
 			border-bottom-width: var(--wp--table-border-width);
 			box-shadow: inset 0 0 0 9999px var(--wp--table-accent-bg);
+		}
+		th {
+			text-align: inherit;
+			text-align: -webkit-match-parent;
+		}
+		th,
+		td {
+			padding: .5rem;
+		}
+		thead,
+		tbody,
+		tfoot,
+		tr,
+		td,
+		th {
+			border-color: inherit;
+			border-style: solid;
+			border-width: 0;
 		}
 		.table-bordered > :not(caption) > * {
 			border-width: var(--wp--table-border-width) 0;

@@ -110,6 +110,7 @@ class Image extends Dynamic {
 	 */
 	public function styles() {
 		return '
+		/* Block */
 		.wp-block-image.aligncenter {
 			text-align: center;
 		}
@@ -122,6 +123,10 @@ class Image extends Dynamic {
 		.wp-block-image > a,
 		.wp-block-image :where(img,svg) {
 			border-radius: inherit;
+		}
+		.wp-block-image figcaption {
+			font-size: var(--wp--preset--font-size--small);
+			font-style: italic;
 		}
 		';
 	}
