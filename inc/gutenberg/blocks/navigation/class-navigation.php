@@ -917,7 +917,7 @@ class Navigation extends Dynamic {
 					}
 					.wp-block-navigation.is-style-pills .navbar-nav {
 						--wp--nav-link-padding-x: 1rem;
-    					--wp--nav-link-padding-y: .25rem;
+    					--wp--nav-link-padding-y: .5rem;
 					}
 					.wp-block-navigation.is-style-pills .navbar-nav .nav-link {
 						background: none;
@@ -955,9 +955,9 @@ class Navigation extends Dynamic {
 
 			display: flex;
 			flex-wrap: wrap;
-			padding-left: 0;
-			margin-bottom: 0;
 			list-style: none;
+			padding-left: 0;
+			margin: 0;
 		}
 		.nav-fill :where(.nav-link,.nav-item) {
 			flex: 1 1 auto;
