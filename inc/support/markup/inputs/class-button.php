@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -57,4 +57,30 @@ class Button extends Basic {
         ?></button>
         <?php
     }
+
+    /**
+	 * Input styles.
+	 *
+	 * @return 	string
+	 */
+	public static function styles(): string {
+		return '
+            button {
+                text-transform: none;
+            }
+            button:focus:not(:focus-visible) {
+                outline: 0;
+            }
+            :is(:not([class])):is(button, [type=button], [type=reset], [type=submit]) {
+                border: 1px solid transparent;
+                -webkit-appearance: button;
+            }
+            :is(:not([class])):is(button, [type=button], [type=reset], [type=submit]):not(:disabled) {
+                cursor: pointer;
+            }
+            [role="button"] {
+                cursor: pointer;
+            }
+        ';
+	}
 }

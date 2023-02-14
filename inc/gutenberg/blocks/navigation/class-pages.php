@@ -74,6 +74,9 @@ class Pages extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( $attributes = [], $content = '', $block = null ) {
+		static $block_id = 0;
+		++$block_id;
+
 		// All pages
 		$all_pages = get_pages( [
 			'post_status' => 'publish',
@@ -87,9 +90,22 @@ class Pages extends Dynamic {
 		}
 
 		$inner_blocks 	= [];
-		$top_levels		= wp_list_filter( $all_pages, [ 'post_parent' => 0 ] );
 
-		foreach( $top_levels as $page ) {
+		$parent_page_id = get_prop( $attributes, [ 'parentPageID' ], 0 );
+
+		if ( 0 !== $parent_page_id ) {
+			$pages = wp_list_filter( $all_pages, [ 'post_parent' => $parent_page_id ] );
+
+			// If the parent page has no child pages, there is nothing to show.
+			if ( ! count( $pages ) ) {
+				return;
+			}
+		} else {
+			$pages	= wp_list_filter( $all_pages, [ 'post_parent' => 0 ] );
+		}
+
+		// Parse as navigation blocks.
+		foreach( $pages as $page ) {
 			$inner_blocks[] = self::parse_block( $page, $all_pages );
 		}
 

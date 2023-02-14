@@ -1,6 +1,3 @@
-// Styles
-import './../../../../scss/frontend/forms.scss';
-
 const { addAction } = wp.hooks;
 
 const extendCommonWithForms = (route, func) => {

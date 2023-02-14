@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -39,6 +39,14 @@ class Fieldset extends Base {
      * @var     array
      */
     public $choices = [];
+
+    /**
+     * Exclusive.
+     *
+     * @since   5.7.2
+     * @var     bool
+     */
+    public $exclusive = false;
     
     /**
 	 * Constructor 
@@ -100,6 +108,8 @@ class Fieldset extends Base {
 	 * Render the label HTML of the input
      *
      * @since   5.0.0
+     * @version 5.7.2
+     *
 	 * @return	mixed|string
 	 */
 	public function get_label() {
@@ -107,9 +117,9 @@ class Fieldset extends Base {
 
         wecodeart( 'markup' )::wrap( 'fieldset-label', [
             [
-                'tag'   => 'legend',
+                'tag'   => 'label',
                 'attrs' => [
-                    'class' => 'fs-6'
+                    'class' => 'd-block'
                 ]
             ]
         ], $this->label );
@@ -121,9 +131,17 @@ class Fieldset extends Base {
      * @since   5.0.0
 	 * @return	string
 	 */
-	public function get_option_name( string $item ) {
-        if( $this->type === 'checkbox' ) $value = get_prop( $this->attrs, 'name', $this->unique_id ) . ( $this->exclusive ? '[]' : '' );
-        if( $this->type === 'radio' ) $value = get_prop( $this->attrs, 'name', $this->unique_id );
+	public function get_option_name( string $item ): string {
+        $value = '';
+        
+        if( $this->type === 'checkbox' ) {
+            $value = get_prop( $this->attrs, 'name', $this->unique_id ) . ( $this->exclusive ? '[]' : '' );
+        }
+
+        if( $this->type === 'radio' ) {
+            $value = get_prop( $this->attrs, 'name', $this->unique_id );
+        }
+        
         return $value;
     }
 
@@ -133,8 +151,9 @@ class Fieldset extends Base {
      * @since   5.0.0
 	 * @return	string
 	 */
-	public function get_option_id( string $item ) {
+	public function get_option_id( string $item ): string {
         $value = get_prop( $this->attrs, 'name', $this->unique_id ) . '-' . sanitize_title_with_dashes( $item );
+
         return $value;
     }
 
@@ -144,7 +163,7 @@ class Fieldset extends Base {
      * @since   5.0.0
 	 * @return	mixed|string
 	 */
-	public function checked_option( string $value ) {
+	public function checked_option( string $value ): bool {
         if( isset( $this->attrs['value'] ) ) {
             if( is_array( $this->attrs['value'] ) && in_array( $value, $this->attrs['value'] ) ) {
                 return true;
@@ -154,5 +173,35 @@ class Fieldset extends Base {
                 return true;
             }
         }
+
+        return false;
     }
+
+    /**
+	 * Input styles.
+	 *
+	 * @return 	string
+	 */
+	public static function styles(): string {
+		return '
+            fieldset {
+                min-width: 0;
+                padding: 0;
+                margin: 0;
+                border: 0;
+            }
+            legend {
+                float: left;
+                width: 100%;
+                padding: 0;
+                margin-bottom: 1rem;
+                font-size: clamp(1rem, 3vw, 1.5rem);
+                font-weight: 300;
+                line-height: inherit;
+            }
+            legend + * {
+                clear: left;
+            }
+        ';
+	}
 }

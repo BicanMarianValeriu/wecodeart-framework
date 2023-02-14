@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.6.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -71,15 +71,15 @@ final class Sanitize {
 	 * @return 	string
 	 */
 	public static function color( string $value = '' ) {
-		// Is CSS Variable
-		$is_var = ( strpos( $value, 'var(' ) !== false );
+		// Is CSS Variable or RGB
+		$is_var = ( strpos( $value, 'var(' ) !== false || strpos( $value, 'rgb(' ) !== false );
 	
 		if ( $is_var ) {
 			return sanitize_text_field( $value );
 		}
 	
 		// Is this an rgba color or a hex?
-		$mode = ( strpos( $value, 'rgba' ) === false ) ? 'hex' : 'rgba';
+		$mode = ( strpos( $value, 'rgba(' ) !== false ) ? 'rgba' : 'hex';
 	
 		if ( 'rgba' === $mode ) {
 			return self::color_rgba( $value );

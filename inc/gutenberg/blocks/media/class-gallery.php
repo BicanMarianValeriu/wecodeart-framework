@@ -127,7 +127,7 @@ class Gallery extends Dynamic {
 			justify-content: center;
 			flex-direction: column;
 			flex-grow: 1;
-			margin-bottom: 0;
+			margin: 0;
 			max-width: 100%;
 		}
 		.wp-block-gallery figure.wp-block-image > a {

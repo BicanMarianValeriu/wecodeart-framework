@@ -13,9 +13,12 @@
  */
 
 // Theme Shadows
-$shadows    = wecodeart_json( [ 'settings', 'custom', 'shadows' ], [] );
+$shadows    = wecodeart_json( [ 'settings', 'shadow', 'presets', 'default' ], [] );
+$shadows 	= wecodeart_json( [ 'settings', 'shadow', 'presets', 'theme' ], $shadows );
+$shadows 	= array_merge( $shadows, wecodeart_json( [ 'settings', 'shadow', 'presets', 'custom' ], [] ) );
+$shadows    = wp_list_pluck( $shadows, 'shadow', 'slug' );
 $shadows    = $shadows + [
-    null    => '0 .3rem .75rem rgba(0,0,0, .15)',
+    null    => 'var(--wp--preset--shadow--md)',
     'none'  => 'none'
 ];
 
@@ -192,13 +195,6 @@ foreach( [
         ],
     ],
     // Typography
-    [
-        'property'  => 'font-family', // To be deprecated in favor of Gutenberg
-        'class'		=> 'font',
-        'values'	=> [
-            'monospace' => 'var(--wp--font-monospace)',
-        ],
-    ],
     [
         'property'  => 'font-weight',
         'class'		=> 'fw',

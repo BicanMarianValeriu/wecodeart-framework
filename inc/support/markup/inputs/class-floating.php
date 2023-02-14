@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -58,4 +58,74 @@ class Floating extends Basic {
             '_label' => 'after'
         ], $this->args ) ] );
     }
+
+    /**
+	 * Input styles.
+	 *
+	 * @return 	string
+	 */
+	public static function styles(): string {
+		return '
+            .form-floating {
+                position: relative;
+            }
+            .form-floating > :is(.form-control,.form-control-plaintext,.form-select) {
+                height: calc(3.5rem + 2px);
+                line-height: 1.25;
+            }
+            .form-floating > label {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 1rem 0.75rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                pointer-events: none;
+                border: 1px solid transparent;
+                transform-origin: 0 0;
+                transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+            }
+            .form-floating > :is(.form-control,.form-control-plaintext) {
+                padding: 1rem 0.75rem;
+            }
+            .form-floating > .form-control::placeholder,
+            .form-floating > .form-control-plaintext::placeholder {
+                color: transparent;
+            }
+            .form-floating > :is(.form-control:focus,form-control:not(:placeholder-shown),.form-control-plaintext:focus,.form-control-plaintext:not(:placeholder-shown)) {
+                padding-top: 1.625rem;
+                padding-bottom: 0.625rem;
+            }
+            .form-floating > .form-control:-webkit-autofill,
+            .form-floating > .form-control-plaintext:-webkit-autofill {
+                padding-top: 1.625rem;
+                padding-bottom: 0.625rem;
+            }
+            .form-floating > .form-select {
+                padding-top: 1.625rem;
+                padding-bottom: 0.625rem;
+            }
+            .form-floating > :is(.form-control:focus,form-control:not(:placeholder-shown),.form-control-plaintext,.form-select) ~ label {
+                opacity: 0.65;
+                transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+            }
+            .form-floating > .form-control:-webkit-autofill ~ label {
+                opacity: 0.65;
+                transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+            }
+            .form-floating > .form-control-plaintext ~ label {
+                border-width: 1px 0;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .form-floating > label {
+                    transition: none;
+                }
+            }
+        ';
+	}
 }

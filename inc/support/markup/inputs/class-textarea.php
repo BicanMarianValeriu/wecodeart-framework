@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.3.3
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -23,21 +23,19 @@ use function WeCodeArt\Functions\get_prop;
  * Standard Inputs Markup
  */
 class TextArea extends Basic {
-
     /**
-     * Input's Type.
+     * Input's Style Deps.
      *
-     * @since   5.0.0
-     * @var     string
+     * @since   5.7.2
+     * @var     array
      */
-    public $type = 'textarea';
+    static $style_deps = [ 'basic' ];
     
     /**
 	 * Constructor 
 	 */
 	public function __construct( string $type = 'textarea', array $args = [] ) {
         $this->unique_id    = wp_unique_id( 'textarea-' );
-        $this->style        = get_prop( $args, 'style', 'default' );
         $this->label        = get_prop( $args, 'label', '' );
         $this->_label       = get_prop( $args, '_label', 'before' );
         $this->attrs        = get_prop( $args, 'attrs', [] );
@@ -59,4 +57,36 @@ class TextArea extends Basic {
         ?></textarea>
         <?php
     }
+
+    /**
+	 * Input styles.
+	 *
+	 * @return 	string
+	 */
+	public static function styles(): string {
+		return '
+            textarea {
+                resize: vertical;
+            }
+            textarea.form-control {
+                min-height: 150px;
+            }
+            textarea.form-control-sm {
+                min-height: 100px;
+            } 
+            textarea.form-control-lg {
+                min-height: 200px;
+            }
+            .was-validated textarea.form-control:valid,
+            textarea.form-control.is-valid {
+                padding-right: calc(1.5em + 0.75rem);
+                background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
+            }
+            .was-validated textarea.form-control:invalid,
+            textarea.form-control.is-invalid {
+                padding-right: calc(1.5em + 0.75rem);
+                background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
+            }
+        ';
+	}
 }

@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Date
  * @since 		3.9.5
- * @version		5.5.5
+ * @version		5.7.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -50,9 +50,6 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
     <a class="wp-block-post-date__link me-2" href="<?php echo esc_url( get_permalink( $post_id ) ); ?>">
     <?php endif; ?>
         <time class="wp-block-post-date__published"
-            <?php if( isset( $modified ) ) : ?>
-            style="display:none;"
-            <?php endif; ?>
             datetime="<?php echo esc_attr( $published['robot'] ); ?>"><?php
 
             echo esc_html( $published['human'] );

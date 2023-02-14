@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.6.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support;
@@ -57,10 +57,7 @@ final class Styles implements Integration {
 	/**
 	 * Register hooks
 	 */
-	public function register_hooks() {
-		// Styles init action
-		do_action( 'wecodeart/support/styles/init', $this );	
-	}
+	public function register_hooks() {}
 
 	/**
 	 * Generate breakpoint class
@@ -146,7 +143,7 @@ final class Styles implements Integration {
      * Trim CSS
      *
      * @since 	3.7.7
-     * @version 5.0.0
+     * @version 5.7.2
 	 * 
      * @param 	string $css CSS content to trim.
      *
@@ -163,29 +160,29 @@ final class Styles implements Integration {
 			'zeroUnit' => false,
 		] );
 
-		if( get_prop( $options, 'comments' ) ) {
-			// remove comments
-			$css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
-		}
-
         // Normalize whitespace
         $css = preg_replace( '/\s+/', ' ', $css );
 
         // Remove ; before }
         $css = preg_replace( '/;(?=\s*})/', '', $css );
 
-        // Remove space after , : ; { } */ >
-        $css = preg_replace( '/(,|:|;|\{|}|\*\/|>) /', '$1', $css );
+        // Remove space after , : ; { } */ > ~
+        $css = preg_replace( '/(,|:|;|\{|}|\*\/|>|~) /', '$1', $css );
 
-        // Remove space before , ; { }
-        $css = preg_replace( '/ (,|;|\{|})/', '$1', $css );
+        // Remove space before , ; { } > ~
+        $css = preg_replace( '/ (,|;|\{|}|>|~)/', '$1', $css );
 
         // Strips leading 0 on decimal values (converts 0.5px into .5px)
         $css = preg_replace( '/(:| )0\.([0-9]+)(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
 
+		// Strips units if value is 0 (converts 0px to 0)
 		if( get_prop( $options, 'zeroUnit' ) ) {
-			// Strips units if value is 0 (converts 0px to 0)
 			$css = preg_replace( '/(:| )(\.?)0(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}0', $css );
+		}
+
+		// Remove comments
+		if( get_prop( $options, 'comments' ) ) {
+			$css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
 		}
 
         // Trim

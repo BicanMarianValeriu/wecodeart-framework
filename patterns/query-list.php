@@ -24,7 +24,7 @@
         <div class="wp-block-column">
             <!-- wp:post-title {"level":3,"isLink":true} /-->
             <!-- wp:pattern {"slug":"wecodeart/entry-meta"} /-->
-            <!-- wp:post-excerpt {"moreText":"Continue reading"} /-->
+            <!-- wp:post-excerpt {"moreText":"<?php esc_html_e( 'Read More', 'wecodeart' ); ?>"} /-->
         </div>
         <!-- /wp:column -->
     </div>

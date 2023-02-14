@@ -131,7 +131,7 @@ class Logo extends Dynamic {
             display: block;
             margin: 0 auto;
         }
-		.wp-block-site-logo > * {
+		.wp-block-site-logo > *:not(div) {
 			padding-top: 0.3125rem;
 			padding-bottom: 0.3125rem;
         }

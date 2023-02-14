@@ -13,16 +13,17 @@
     <!-- wp:term-description /-->
     
     <!-- wp:post-template {"className":"my-5"} -->
-    <!-- wp:cover {"useFeaturedImage":true,"dimRatio":70,"overlayColor":"primary","contentPosition":"bottom left","className":"rounded shadow-lg h-100"} -->
+    <!-- wp:cover {"useFeaturedImage":true,"dimRatio":90,"gradient":"primary-to-vivid-purple","contentPosition":"bottom left","className":"rounded shadow-lg h-100"} -->
     <div class="wp-block-cover has-custom-content-position is-position-bottom-left rounded shadow-lg h-100">
-        <span aria-hidden="true" class="wp-block-cover__background has-primary-background-color has-background-dim-70 has-background-dim"></span>
+        <span aria-hidden="true" class="wp-block-cover__background has-background-dim-90 has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
         <div class="wp-block-cover__inner-container">
-            <!-- wp:group {"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"textColor":"white"} -->
+            <!-- wp:group {"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"textColor":"white","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
             <div class="wp-block-group has-white-color has-text-color has-link-color">
-            <!-- wp:post-title {"level":3,"isLink":true} /-->
-            <!-- wp:pattern {"slug":"wecodeart/entry-meta"} /-->
-            <!-- wp:post-excerpt {"moreText":""} /-->
-            <!-- wp:read-more {"style":{"spacing":{"padding":{"top":"10px","right":"25px","bottom":"10px","left":"25px"}},"border":{"width":"1px","radius":"100px"},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"700"}},"borderColor":"light","backgroundColor":"white","textColor":"dark","fontSize":"small"} /-->            </div>
+                <!-- wp:post-title {"level":3,"isLink":true,"className":"fw-700"} /-->
+                <!-- wp:pattern {"slug":"wecodeart/entry-meta"} /-->
+                <!-- wp:post-excerpt {"textAlign":"center","moreText":""} /-->
+                <!-- wp:read-more {"style":{"spacing":{"padding":{"top":"10px","right":"25px","bottom":"10px","left":"25px"}},"border":{"width":"1px","radius":"100px"},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"700"}},"borderColor":"light","backgroundColor":"white","textColor":"dark","fontSize":"small"} /-->
+            </div>
             <!-- /wp:group -->
         </div>
     </div>

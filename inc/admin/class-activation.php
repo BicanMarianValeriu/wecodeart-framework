@@ -33,7 +33,7 @@ class Activation {
 	 *
 	 * @var		string
 	 */
-	const REQUIRED_WP 	= '6.0';
+	const REQUIRED_WP 	= '6.1';
 	const REQUIRED_PHP 	= '7.4';
 
 	/**
@@ -59,7 +59,33 @@ class Activation {
 		$this->set_requirements();
 		$this->set_deactivation_hooks();
 
-		add_action( 'after_switch_theme', 	[ $this, 'after_switch_theme' 	] );
+		add_action( 'after_switch_theme', [ $this, 'after_switch_theme'	] );
+	}
+
+	/**
+	 * Get Activation Validation Status
+	 *
+	 * @since 	3.5
+	 * @version	5.4.6
+	 *
+	 * @return	boolean
+	 */
+	public function is_ok() {
+		if( empty( $this->requirements ) || ! is_admin() ) return true;
+
+		$this->compare_requirements();
+
+		foreach( $this->requirements as $val ) {
+
+			if( isset( $val['condition'] ) && $val['condition'] === false ) {
+
+				$this->status = false;
+
+				break;
+			}
+		}
+
+		return $this->status;
 	}
 
 	/**
@@ -93,46 +119,6 @@ class Activation {
 	}
 
 	/**
-	 * Requirements deactivated?
-	 *
-	 * @since 	5.0.0
-	 * @version	5.0.0
-	 */
-	public function set_deactivation_hooks() {
-		if( ! $this->requirements ) return;
-		foreach( $this->requirements as $key => $val ) {
-			if( isset( $val['plugin'] ) && (bool) $val['plugin'] === true ) {
-				// Simply switch theme on plugin deactivation, beautiful!!!
-				register_deactivation_hook( $val['required'], [ $this, 'switch_theme' ] );
-				continue;
-			}
-		}
-	}
-
-	/**
-	 * Get Activation Validation Status
-	 *
-	 * @since 	3.5
-	 * @version	5.4.6
-	 *
-	 * @return	boolean
-	 */
-	public function is_ok() {
-		if( empty( $this->requirements ) || ! is_admin() ) return true;
-
-		$this->compare_requirements();
-
-		foreach( $this->requirements as $val ) {
-			if( isset( $val['condition'] ) && $val['condition'] === false ) {
-				$this->status = false;
-				break;
-			}
-		}
-
-		return $this->status;
-	}
-
-	/**
 	 * Compare Requirements
 	 *
 	 * @since 	3.5
@@ -140,30 +126,58 @@ class Activation {
 	 */
 	public function compare_requirements() {
 		if( ! $this->requirements ) return;
+		
 		foreach( $this->requirements as $key => $val ) {
 			if( isset( $val['plugin'] ) && (bool) $val['plugin'] === true ) {
+
 				// If we have plugin, activate it and move on!
 				if( $this->is_plugin_installed( $val['required'] ) ) {
+
 					\activate_plugin( $val['required'] );
+
 					continue;
 				}
+
 				// If we dont, simply return true on the failed key, it means we dont have it
 				$this->requirements[$key]['condition'] = \is_plugin_active( $val['required'] ) === false;
+
 				continue;
 			}
 
 			if( isset( $val['installed'] ) && isset( $val['required'] ) ) {
+
 				$this->requirements[$key]['condition'] = \version_compare( $val['installed'], $val['required'], '>=' );
+
 			}
 		}
 	}
 
+	/**
+	 * Requirements deactivated?
+	 *
+	 * @since 	5.0.0
+	 * @version	5.0.0
+	 */
+	public function set_deactivation_hooks() {
+		if( ! $this->requirements ) return;
+
+		foreach( $this->requirements as $key => $val ) {
+
+			if( isset( $val['plugin'] ) && (bool) $val['plugin'] === true ) {
+
+				// Simply switch theme on plugin deactivation, beautiful!!!
+				register_deactivation_hook( $val['required'], [ $this, 'switch_theme' ] );
+
+				continue;
+			}
+		}
+	}
 
 	/**
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	5.2.7
+	 * @version	5.7.2
 	 */
 	public function after_switch_theme() {
 		// If not, why bother to load the theme?
@@ -174,7 +188,8 @@ class Activation {
 			// Show what's failed validation
 			$this->admin_notice();
 
-			do_action( 'wecodeart/hook/activation/failed' );
+			do_action_deprecated( 'wecodeart/hook/activation/failed', [], '5.7.2', 'wecodeart/activation/failed' );
+			do_action( 'wecodeart/activation/failed' );
 
 			return;
 		}
@@ -190,6 +205,7 @@ class Activation {
 		unset( $_GET['activated'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		$old_theme = wp_get_theme( get_option( 'theme_switched' ) );
+
 		if ( $old_theme->exists() && strpos( $old_theme->get_stylesheet(), wecodeart( 'name' ) ) === false ) {
 			$fallback_stylesheet = $old_theme->get_stylesheet();
 		} else {
@@ -204,15 +220,23 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	5.4.6
+	 * @version	5.7.2
 	 */
 	public function admin_notice() {
 		if( ! $this->requirements ) return;
+
 		foreach( $this->requirements as $key => $val ) {
 			if( isset( $val['condition'] ) && $val['condition'] === false ) {
-				$notification = new Notification( wpautop( $val['i18n'] ), [ 'type' => Notification::ERROR ] );
-			
+
+				$notification = new Notification( wpautop( $val['i18n'] ), [
+					'id'			=> 'wecodeart-activation-' . $key, 
+					'type' 			=> Notification::ERROR,
+					'class'			=> 'notice is-dismissible',
+					'capabilities' 	=> 'switch_themes'
+				] );
+
 				Notifications::get_instance()->add_notification( $notification );
+
 			}
 		}	
 	}

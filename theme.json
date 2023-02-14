@@ -201,10 +201,6 @@
 				"xl": "1200px",
 				"xxl": "1440px"
 			},
-			"shadows": {
-				"sm": "0 0.125rem .25rem rgba(0,0,0,.08)",
-				"lg": "0 3px 1rem .25rem rgba(0,0,0,.10)"
-			},
 			"spacing": {
 				"0": "0",
 				"1": ".5rem",
@@ -228,16 +224,21 @@
 			"wideSize": "1440px"
 		},
 		"shadow": {
-			"palette": [
+			"presets": [
 				{
-					"name": "Default",
-					"slug": "default",
-					"shadow": "0 0.1rem 0.3rem 0 rgb(0 0 0 / 10%)"
+					"name": "Small",
+					"slug": "sm",
+					"shadow": "0 0.125rem .25rem rgba(0,0,0,.08)"
 				},
 				{
-					"name": "Sharp",
-					"slug": "sharp",
-					"shadow": ".5rem .5rem 0 0 rgba(0,0,0, 0.4)"
+					"name": "Medium",
+					"slug": "md",
+					"shadow": "0 .3rem .75rem rgba(0,0,0, .15)"
+				},
+				{
+					"name": "Large",
+					"slug": "lg",
+					"shadow": "0 3px 1rem .25rem rgba(0,0,0,.10)"
 				}
 			]
 		},
@@ -245,12 +246,12 @@
 			"blockGap": true,
 			"customSpacingSize": true,
 			"spacingScale": {
-                "operator": "*",
-                "increment": 1.5,
-                "steps": 0,
-                "mediumStep": 1.5,
-                "unit": "rem"
-            },
+				"operator": "*",
+				"increment": 1.5,
+				"steps": 0,
+				"mediumStep": 1.5,
+				"unit": "rem"
+			},
 			"spacingSizes": [
 				{
 					"name": "Gutter",
@@ -416,30 +417,8 @@
 				}
 			},
 			"core/button": {
-				"typography": {
-					"fontFamily": "var:preset|font-family|button",
-					"fontSize": "var:preset|font-size|small",
-					"fontWeight": "600",
-					"lineHeight": "1.5",
-					"textTransform": "uppercase"
-				},
 				"border": {
-					"width": "1px",
-					"style": "solid",
-					"radius": ".35rem",
-					"color": "transparent"
-				},
-				"color": {
-					"background": "var:preset|color|dark",
-					"text": "var:preset|color|white"
-				},
-				"spacing": {
-					"padding": {
-						"top": ".75rem",
-						"bottom": ".75rem",
-						"left": "1.25rem",
-						"right": "1.25rem"
-					}
+					"width": "1px"
 				}
 			},
 			"core/separator": {
@@ -468,6 +447,33 @@
 					"margin": {
 						"top": "0",
 						"bottom": "var:style|block-gap"
+					}
+				}
+			},
+			"button": {
+				"typography": {
+					"fontFamily": "var:preset|font-family|button",
+					"fontSize": "var:preset|font-size|small",
+					"fontWeight": "600",
+					"lineHeight": "1.5",
+					"textTransform": "uppercase"
+				},
+				"border": {
+					"width": "1px",
+					"style": "solid",
+					"radius": ".35rem",
+					"color": "transparent"
+				},
+				"color": {
+					"background": "var:preset|color|dark",
+					"text": "var:preset|color|white"
+				},
+				"spacing": {
+					"padding": {
+						"top": ".75rem",
+						"bottom": ".75rem",
+						"left": "1.25rem",
+						"right": "1.25rem"
 					}
 				}
 			},
@@ -510,7 +516,13 @@
 				},
 				":focus": {
 					"outline": {
-						"style": "thin dotted"
+						"style": "dotted",
+						"width": "thin"
+					}
+				},
+				":active": {
+					"typography": {
+						"textDecoration": "none"
 					}
 				}
 			},

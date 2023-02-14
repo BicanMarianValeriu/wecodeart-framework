@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Modules\Styles\Blocks as Base;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_placeholder_source;
 
 /**
  * Block CSS Processor
@@ -39,6 +40,14 @@ class Media extends Base {
 				'element'	=> $this->element,
 				'property' 	=> 'grid-template-columns',
 				'value'	  	=> "{$value}% auto",
+			], $output );
+		}
+
+		// Placeholder
+		if( ! get_prop( $this->attrs, 'mediaLink' ) ) {
+			$this->output[] = wp_parse_args( [
+				'property' 	=> 'background-image',
+				'value'	  	=> get_placeholder_source()
 			], $output );
 		}
 

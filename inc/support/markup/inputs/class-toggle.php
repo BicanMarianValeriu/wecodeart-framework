@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -49,14 +49,16 @@ class Toggle extends Base {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	5.4.7
+	 * @version	5.7.2
+     *
+     * @return  void
 	 */
-	public function content() {  
+	public function content() {
         wecodeart( 'markup' )::wrap( $this->type, [
             [
                 'tag'   => 'span',
                 'attrs' => [
-                    'class' => implode( ' ', array_filter( [ 'form-check', $this->attrs['class'] ] ) ),
+                    'class' => $this->input_class(),
                 ]
             ]
         ], 'wecodeart_input', [ $this->type, [
@@ -64,9 +66,188 @@ class Toggle extends Base {
             'label'     => $this->label,
             'attrs'     => wp_parse_args( [
                 'class' => 'form-check-input',
-                'id'    => get_prop( $this->attrs, 'id', $this->unique_id )
+                'id'    => get_prop( $this->attrs, [ 'id' ], $this->unique_id )
             ], $this->attrs ),
             'messages'  => $this->messages
         ] ] ); 
     }
+
+    /**
+	 * Input class
+	 *
+	 * @since	5.7.2
+     *
+     * @return  string
+	 */
+	public function input_class(): string {
+        $classes = explode( ' ', get_prop( $this->attrs, [ 'class' ], '' ) );
+        
+        if( ! array_intersect_key( [ 'form-check', 'form-switch' ], array_flip( $classes ) ) ) $classes[] = 'form-check';
+
+        return implode( ' ', $classes );
+    }
+
+    /**
+	 * Input styles.
+	 *
+	 * @return 	string
+	 */
+	public static function styles(): string {
+		return '
+            /* Check */
+            .form-check {
+                display: block;
+                min-height: 1.5rem;
+                padding-left: 1.5em;
+                margin-bottom: 0.125rem;
+            }
+            .form-check .form-check-input {
+                float: left;
+                margin-left: -1.5em;
+            }
+            .form-check-reverse {
+                padding-right: 1.5em;
+                padding-left: 0;
+                text-align: right;
+            }
+            .form-check-reverse .form-check-input {
+                float: right;
+                margin-right: -1.5em;
+                margin-left: 0;
+            }
+            .form-check-input {
+                width: 1em;
+                height: 1em;
+                margin-top: 0.25em;
+                vertical-align: top;
+                background-color: #fff;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+                border: 1px solid rgba(0, 0, 0, 0.25);
+                -webkit-appearance: none;
+                        appearance: none;
+                -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+            }
+            .form-check-input[type=checkbox] {
+                border-radius: 0.25em;
+            }
+            .form-check-input[type=radio] {
+                border-radius: 50%;
+            }
+            .form-check-input:active {
+                filter: brightness(90%);
+            }
+            .form-check-input:focus {
+                border-color: #91c4f6;
+                outline: 0;
+                box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
+            }
+            .form-check-input:checked {
+                background-color: var(--wp--preset--color--primary);
+                border-color: var(--wp--preset--color--primary);
+            }
+            .form-check-input:checked[type=checkbox] {
+                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27%3e%3cpath fill=%27none%27 stroke=%27%23fff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27m6 10 3 3 6-6%27/%3e%3c/svg%3e");
+            }
+            .form-check-input:checked[type=radio] {
+                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e");
+            }
+            .form-check-input[type=checkbox]:indeterminate {
+                background-color: var(--wp--preset--color--primary);
+                border-color: var(--wp--preset--color--primary);
+                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27%3e%3cpath fill=%27none%27 stroke=%27%23fff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27M6 10h8%27/%3e%3c/svg%3e");
+            }
+            .form-check-input:disabled {
+                pointer-events: none;
+                filter: none;
+                opacity: 0.5;
+            }
+            .form-check-input[disabled] ~ .form-check-label,
+            .form-check-input:disabled ~ .form-check-label {
+                cursor: default;
+                opacity: 0.5;
+            }
+            
+            /* Switch */
+            .form-switch {
+                padding-left: 2.5em;
+            }
+            .form-switch .form-check-input {
+                width: 2em;
+                margin-left: -2.5em;
+                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27rgba%280, 0, 0, 0.25%29%27/%3e%3c/svg%3e");
+                background-position: left center;
+                border-radius: 2em;
+                transition: background-position 0.15s ease-in-out;
+            }
+            .form-switch .form-check-input:focus {
+                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%2391c4f6%27/%3e%3c/svg%3e");
+            }
+            .form-switch .form-check-input:checked {
+                background-position: right center;
+                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%23fff%27/%3e%3c/svg%3e");
+            }
+            .form-switch.form-check-reverse {
+                padding-right: 2.5em;
+                padding-left: 0;
+            }
+            .form-switch.form-check-reverse .form-check-input {
+                margin-right: -2.5em;
+                margin-left: 0;
+            }  
+            .form-check-inline {
+                display: inline-block;
+                margin-right: 1rem;
+            }
+
+            /* Validation */
+            .was-validated .form-check-input:valid,
+            .form-check-input.is-valid {
+                border-color: #7dc855;
+            }
+            .was-validated .form-check-input:valid:checked,
+            .form-check-input.is-valid:checked {
+                background-color: #7dc855;
+            }
+            .was-validated .form-check-input:valid:focus,
+            .form-check-input.is-valid:focus {
+                box-shadow: 0 0 0 0.25rem rgba(125, 200, 85, 0.25);
+            }
+            .was-validated .form-check-input:valid ~ .form-check-label,
+            .form-check-input.is-valid ~ .form-check-label {
+                color: #7dc855;
+            }  
+            .form-check-inline .form-check-input ~ .valid-feedback {
+                margin-left: 0.5em;
+            }
+            .was-validated .form-check-input:invalid,
+            .form-check-input.is-invalid {
+                border-color: #dc3545;
+            }
+            .was-validated .form-check-input:invalid:checked,
+            .form-check-input.is-invalid:checked {
+                background-color: #dc3545;
+            }
+            .was-validated .form-check-input:invalid:focus,
+            .form-check-input.is-invalid:focus {
+                box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+            }
+            .was-validated .form-check-input:invalid ~ .form-check-label,
+            .form-check-input.is-invalid ~ .form-check-label {
+                color: #dc3545;
+            }
+            .form-check-inline .form-check-input ~ .invalid-feedback {
+                margin-left: 0.5em;
+            }
+            
+            /* Motion */
+            @media (prefers-reduced-motion: reduce) {
+                .form-switch .form-check-input {
+                    transition: none;
+                }
+            }
+        ';
+	}
 }

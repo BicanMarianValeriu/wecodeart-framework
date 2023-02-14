@@ -158,14 +158,14 @@ class Table extends Dynamic {
 			padding: .5rem;
 			word-break: break-word;
 		}
-		table :where(thead,tbody,tfoot,tr,td,th) {
-			border-color: inherit;
-			border-style: solid;
-			border-width: 0;
-		}
 		table caption {
 			color: inherit;
 			text-align: inherit;
+		}
+		.table-bordered  :where(thead,tbody,tfoot,tr,td,th) {
+			border-color: inherit;
+			border-style: solid;
+			border-width: 0;
 		}
 		.table-bordered > :not(caption) > * {
 			border-width: var(--wp--table-border-width) 0;

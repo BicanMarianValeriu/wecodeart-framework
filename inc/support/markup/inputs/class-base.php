@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.2
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -30,17 +30,9 @@ abstract class Base {
      * @var     string
      */
     public $type = '';
-    
-    /**
-     * Input's Style.
-     *
-     * @since   5.3.3
-     * @var     string
-     */
-    public $style = 'default';
 
     /**
-	 * Unique ID for this search field.
+	 * Unique ID for this field.
 	 *
 	 * @var string
 	 */
@@ -86,20 +78,22 @@ abstract class Base {
      */
     public $with_messages = true;
 
+    /**
+     * Input's Style Deps.
+     *
+     * @since   5.7.2
+     * @var     array
+     */
+    static $style_deps = [];
+
 	/**
 	 * Constructor 
 	 */
 	public function __construct( $type = '', array $args = [] ) {
         $this->unique_id    = wp_unique_id( 'input-' );
-        $this->style        = get_prop( $args, 'style', 'default' );
         $this->label        = get_prop( $args, 'label', '' );
         $this->_label       = get_prop( $args, '_label', 'before' );
-        $this->attrs        = wp_parse_args( get_prop( $args, 'attrs', [] ), [
-            'type'  => $this->type,
-            'name'  => $this->unique_id,
-            'id'    => $this->unique_id,
-            'class' => $this->input_class()
-        ] );
+        $this->attrs        = get_prop( $args, 'attrs', [] );
         $this->messages     = get_prop( $args, 'messages', [] );
     }
 
@@ -205,9 +199,28 @@ abstract class Base {
      * @since   5.0.0
      * @param 	array   $ommit Attributes to exclude
      */
-    public function input_attrs( $ommit = [] ) {
-        $attributes = ! empty( $ommit ) ? array_diff_key( $this->attrs, array_flip( $ommit ) ) : $this->attrs;
+    public function input_attrs( array $ommit = [] ) {
+        $attributes = wp_parse_args( $this->attrs, [
+            'type'  => $this->type,
+            'name'  => $this->unique_id,
+            'id'    => $this->unique_id,
+            'class' => $this->input_class()
+        ] );
+
+        $attributes = ! empty( $ommit ) ? array_diff_key( $attributes, array_flip( $ommit ) ) : $attributes;
+        
         echo wecodeart( 'markup' )::generate_attr( $this->type, $attributes );
+    }
+
+    /**
+	 * Input class
+	 *
+	 * @since	5.7.2
+     *
+     * @return  string
+	 */
+	public function input_class(): string {
+        return '';
     }
     	
 	/**
@@ -217,4 +230,11 @@ abstract class Base {
 	 * @version	5.0.0
 	 */
 	abstract function content();
+
+    /**
+	 * Input styles.
+	 *
+	 * @return 	string
+	 */
+	abstract static function styles(): string;
 }

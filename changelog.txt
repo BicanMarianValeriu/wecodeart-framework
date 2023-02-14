@@ -5,7 +5,11 @@ v5.7.2
 - Updated - core/site-logo markup and CSS updates / Ability for inline SVG upload
 - Updated - core/latest-posts post_type attribute to postType
 - Updated - core/post-read-more extend class to inherit button styles
+- Updated - core/page-list implement page children rendering (6.2 update)
 - Updated - core/table minor CSS updates + core/calendar to enqueue table CSS
+- Updated - core/image to output placeholder if no image is added
+- Updated - core/image to output svg inline if an svg image is uploaded
+- Updated - core/media-text to output placeholder if no image is added
 - Updated - Minimum PHP version requirement is now 7.4
 - Updated - Frontend CSS move inline to global styles
 - Updated - Improved wecodeart( 'assets' ) manager with easier API
@@ -17,11 +21,13 @@ v5.7.2
 - Updated - Translated some pattern strings
 - Updated - Pattern registry - add latest list of valid properties
 - Updated - CSS reset simplified and optimized (moved into block styles / forms)
+- Updated - Inputs styles moved inline and enqueue on demand
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
 - Removed - core/post-comments-link from Post Meta pattern
 - Fixed - core/button outline default color rgb variable added in CSS
 - Fixed - core/social inline CSS generation (for single SVG icons) if 2 or more blocks are used on the template
 - Fixed - core/gallery admin styles and Frontend gap
+- Fixed - core/post-title block supports
 - Added - shadow support in theme.json (upcoming WP versions)
 - Added - core/post-author link class (wp-block-post-author__link)
 - Added - core/post-terms link class (wp-block-post-terms__link)

@@ -77,8 +77,8 @@ final class Assets implements Integration {
 	 * Register hooks
 	 */
 	public function register_hooks(): void {
-		\add_action( $this->hook,	[ $this, 'core'		], -20 );
-		\add_action( $this->hook,	[ $this, 'enqueue'	], -10 );
+		\add_action( $this->hook,	[ $this, 'core'		], 10 );
+		\add_action( $this->hook,	[ $this, 'enqueue'	], 20 );
 	}
 	
 	/**
@@ -291,9 +291,11 @@ final class Assets implements Integration {
 
 			// Inline CSS
 			if( ! empty( $inline = self::get_inline( $data ) ) ) {
-				wp_add_inline_style( $handle, wecodeart( 'styles' )::compress( $inline, [
+				$inline = wecodeart( 'styles' )::compress( $inline, [
 					'comments' => true
-				] ) );
+				] );
+
+				wp_add_inline_style( $handle, $inline );
 			}
 		}
 	}

@@ -113,9 +113,7 @@ class Buttons extends Dynamic {
 			position: relative;
 		}
 		.wp-block-buttons .wp-block-button:hover,
-		.wp-block-buttons .wp-block-button__link:focus,
-		.wp-block-buttons .wp-block-button__link:active,
-		.wp-block-buttons .wp-block-button__link.active {
+		.wp-block-buttons .wp-block-button__link:is(:focus,:active,.active) {
 			z-index: 1;
 		}
 		";

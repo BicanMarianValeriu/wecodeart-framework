@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -46,6 +46,11 @@ class Button extends Base {
 						'property' 	=> '--wp--color--rgb',
 						'value'	  	=> $color[1]
 					], $output ) );
+
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'color',
+						'value'	  	=> $text,
+					], $output );
 				}
 			}
 		}

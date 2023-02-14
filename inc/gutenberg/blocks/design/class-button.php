@@ -115,14 +115,14 @@ class Button extends Dynamic {
 						--wp--bg-opacity: 0;
 						background-color: rgba(var(--wp--color--rgb), var(--wp--bg-opacity));
 						border-color: currentColor!important;
-						color: var(--wp--preset--color--dark);
+						color: inherit;
 					}
-					.is-style-outline.wp-block-button .wp-block-button__link:hover {
+					.is-style-outline.wp-block-button .wp-block-button__link:is(:hover,:focus) {
 						--wp--bg-opacity: 1;
 						border-color: rgb(var(--wp--color--rgb))!important;
 						color: white!important;
 					}
-					.is-style-outline.wp-block-button .has-white-color:hover {
+					.is-style-outline.wp-block-button .has-white-color:is(:hover,:focus) {
 						color: black!important;
 					}
 				";
@@ -130,10 +130,10 @@ class Button extends Dynamic {
 			case 'link' :
 				$inline = "
 					.is-style-link.wp-block-button .wp-block-button__link {
-						background: transparent!important;
-						border: none!important;
-						box-shadow: none!important;
-						padding: 0!important;
+						background: transparent;
+						border: none;
+						box-shadow: none;
+						padding: 0;
 					}
 				";
 				break;
@@ -190,6 +190,7 @@ class Button extends Dynamic {
 		.wp-block-button__link.no-border-radius {
 			border-radius: 0;
 		}
+		.wp-element-button,
 		.wp-block-button__link {
 			display: inline-block;
 			vertical-align: middle;
@@ -198,21 +199,22 @@ class Button extends Dynamic {
 			user-select: none;
 			cursor: pointer;
 		}
+		.wp-element-button:hover,
 		.wp-block-button__link:hover {
 			color: var(--wp--preset--color--white);
 			text-decoration: none;
 		}
+		.wp-element-button:focus,
 		.wp-block-button__link:focus {
 			outline: 0;
     		box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
 		}
-		.wp-block-button__link:active,
-		.wp-block-button__link.active {
+		.wp-element-button:is(:active,.active),
+		.wp-block-button__link:is(:active,.active) {
 			box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
 		}
-		.wp-block-button__link:disabled,
-		.wp-block-button__link.disabled,
-		fieldset:disabled .wp-block-button__link {
+		.wp-block-button__link:is(:disabled,.disabled),
+		fieldset:is(:disabled,.disabled) .wp-block-button__link {
 			pointer-events: none;
 			box-shadow: none;
 			opacity: .7;

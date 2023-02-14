@@ -20,6 +20,7 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_dom_element;
+use function WeCodeArt\Functions\get_placeholder_source;
 
 /**
  * Gutenberg Image block.
@@ -64,8 +65,12 @@ class Image extends Dynamic {
 		$img  	= get_dom_element( 'img', $link ?? $div );
 
 		// If no image, bail early.
-		if ( ! $img ) {
-			return $content;
+		if ( ! $img->getAttribute( 'src' ) ) {
+			$img->setAttribute( 'class', 'wp-block-image__placeholder' );
+			$img->setAttribute( 'src', get_placeholder_source() );
+			$img->setAttribute( 'alt', esc_attr__( 'Placeholder', 'wecodeart' ) );
+
+			return $dom->saveHTML();
 		}
 
 		// If image is SVG, import it.
@@ -111,6 +116,9 @@ class Image extends Dynamic {
 	public function styles() {
 		return '
 		/* Block */
+		.wp-block-image {
+			margin: 0;
+		}
 		.wp-block-image.aligncenter {
 			text-align: center;
 		}

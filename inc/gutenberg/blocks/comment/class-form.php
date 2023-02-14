@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.6.4
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -76,7 +76,7 @@ class Form extends Dynamic {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	5.6.4
+	 * @version	5.7.2
 	 *
 	 * @return 	array
 	 */
@@ -100,7 +100,7 @@ class Form extends Dynamic {
 			'comment_notes_before' 	=> $this->get_form_notes(),
 			'submit_field'			=> '<div class="comment-form-field wp-block-button">%1$s %2$s</div>',
 			'submit_button'			=> $this->get_input( 'submit' ),
-			'class_submit'			=> 'comment-form-submit wp-block-button__link',
+			'class_submit'			=> 'comment-form-submit wp-element-button',
 			'fields' 				=> [
 				'author' 	=> $this->get_input( 'name' ),
 				'email'  	=> $this->get_input( 'email' ),
@@ -199,7 +199,6 @@ class Form extends Dynamic {
 						'name' 	=> 'comment',
 						'rows'	=> 8,
 						'cols'  => 45,
-						'style'	=> 'min-height:150px;',
 						'placeholder'	=> esc_html__( 'Comment *', 'wecodeart' ),
 						'required'		=> ( $req ) ? 'required' : NULL,
 					]

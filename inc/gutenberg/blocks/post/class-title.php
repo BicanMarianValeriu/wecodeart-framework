@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -81,22 +81,19 @@ class Title extends Dynamic {
 			$tag_name = 0 === $value ? 'p' : 'h' . $value;
 		}
 
-		$classnames = [ 'wp-block-post-title' ];
+		$classnames = [];
 
+		// Fix Post Title text align
 		if( $value = get_prop( $attributes, 'textAlign', false ) ) {
 			$classnames[] = 'has-text-align-' . $value;
-		}
-
-		if( $value = get_prop( $attributes, 'className', false ) ) {
-			$classnames[] = $value;
 		}
 
 		$wrappers = [
 			[
 				'tag' 	=> $tag_name,
-				'attrs' => [
-					'class' => implode( ' ', $classnames )
-				]
+				'attrs' => $this->get_block_wrapper_attributes( [
+					'class' => join( ' ', $classnames )
+				] )
 			]
 		];
 

@@ -30,7 +30,7 @@ class Gallery extends Base {
 	 */
 	protected function process_extra() {
 		$output				= [];
-		$output['element'] 	= $this->element;
+		$output['element'] 	= '.wp-block-gallery' . $this->element;
 
 		// Columns
 		if( $columns = get_prop( $this->attrs, 'columns', 3 ) ) {
