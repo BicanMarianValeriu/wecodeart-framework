@@ -27,10 +27,10 @@ class Search extends Base {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *
-	 * @return 	null
+	 * @return 	void
 	 */
-	protected function process_extra() {		
-		$this->output 		= []; // Reset output		
+	protected function process_extra(): void {		
+		$this->output	= []; // Reset output		
 
 		$output	= [
 			'element' => [

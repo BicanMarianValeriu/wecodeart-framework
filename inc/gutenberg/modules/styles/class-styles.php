@@ -171,7 +171,7 @@ class Styles implements Integration {
 		if ( in_array( $block_name, self::core_blocks( true ) ) ) {
 			// Process a block
 			$processed 	= self::process_block( $block );
-			$block_id	= ltrim( $processed->get_element(), '.' );
+			$block_id	= $processed->get_id();
 			$content 	= new \WP_HTML_Tag_Processor( $content );
 
 			$content->next_tag();

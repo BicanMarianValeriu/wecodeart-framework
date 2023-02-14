@@ -33,7 +33,7 @@ class Blocks extends Processor {
 	 * @var 	string
 	 */
 	protected 	$name 		= '';
-	protected 	$element 	= '';
+	protected 	$block_id 	= '';
 
 	/**
 	 * Block Attrs.
@@ -51,7 +51,7 @@ class Blocks extends Processor {
 	public function __construct( $args ) {
 		$this->name		= get_prop( $args, 'blockName' );
 		$this->attrs	= get_prop( $args, 'attrs', [] );
-		$this->element  = wp_unique_id( '.css-' );
+		$this->block_id	= wp_unique_id( 'css-' );
 
 		// Process CSS
 		$this->process_attributes();
@@ -71,7 +71,7 @@ class Blocks extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_attributes() {
+	protected function process_attributes(): void {
 		$this->output = [];
 
 		$output	= [
@@ -322,10 +322,10 @@ class Blocks extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function parse_custom() {
+	protected function parse_custom(): void {
 		if ( $css_custom = get_prop( $this->attrs, 'customStyle', get_prop( $this->attrs, 'customCSS' ) ) ) {
 			$custom_style 	= wp_strip_all_tags( $css_custom );
-			$custom_style 	= str_replace( 'selector', $this->get_element(), $custom_style );
+			$custom_style 	= str_replace( 'selector', '.' . $this->get_id(), $custom_style );
 			$custom_style 	= wecodeart( 'styles' )::string_to_array_query( $custom_style );
 			// Array replace existing CSS rules - custom overwrites everything
 			$this->styles 	= array_replace_recursive( $this->styles, $custom_style );
@@ -362,8 +362,8 @@ class Blocks extends Processor {
 	 *
 	 * @return 	array
 	 */
-	public function get_element(): string {
-		return $this->element;
+	public function get_id(): string {
+		return $this->block_id;
 	}
 
 	/**
@@ -379,7 +379,7 @@ class Blocks extends Processor {
 			$selector 	= get_prop( $block_type->supports, [ '__experimentalSelector' ] );
 		}
 
-		$selector 	= join( '', array_filter( [ $this->get_element(), $selector, $extra ] ) );
+		$selector 	= join( '', array_filter( [ '.', $this->get_id(), $selector, $extra ] ) );
 
 		return apply_filters( 'wecodeart/filter/gutenberg/styles/selector', $selector, $this->name );
 	}

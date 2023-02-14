@@ -26,9 +26,9 @@ class Gallery extends Base {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *
-	 * @return 	null
+	 * @return 	void
 	 */
-	protected function process_extra() {
+	protected function process_extra(): void {
 		$output	= [
 			'element' => '.wp-block-gallery' . $this->get_selector()
 		];

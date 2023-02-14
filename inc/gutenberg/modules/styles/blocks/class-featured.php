@@ -28,9 +28,9 @@ class Featured extends Base {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *
-	 * @return 	null
+	 * @return 	void
 	 */
-	protected function process_extra() {
+	protected function process_extra(): void {
 		$output	= [
 			'element' => $this->get_selector()
 		];
