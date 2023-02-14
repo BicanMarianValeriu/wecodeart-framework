@@ -89,6 +89,9 @@ class Quote extends Dynamic {
 	 */
 	public function styles(): string {
 		return '
+			.wp-block-quote {
+				margin: 0;
+			}
 			.wp-block-quote:not(.is-style-plain) {
 				border-left: 4px solid var( --wp--preset--color--primary );
 				padding-left: 1rem;
