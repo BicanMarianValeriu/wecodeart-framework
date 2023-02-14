@@ -372,8 +372,13 @@ class Blocks extends Processor {
 	 * @return 	string
 	 */
 	public function get_selector( string $extra = '' ): string {
-		$block_type	= \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
-		$selector 	= get_prop( $block_type->supports, [ '__experimentalSelector' ] );
+		$selector = '';
+		
+		if( ! in_array( $this->name, [ 'core/heading', 'core/paragraph' ] ) ) {
+			$block_type	= \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
+			$selector 	= get_prop( $block_type->supports, [ '__experimentalSelector' ] );
+		}
+
 		$selector 	= join( '', array_filter( [ $this->get_element(), $selector, $extra ] ) );
 
 		return apply_filters( 'wecodeart/filter/gutenberg/styles/selector', $selector, $this->name );
