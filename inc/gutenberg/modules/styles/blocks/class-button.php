@@ -30,8 +30,9 @@ class Button extends Base {
 	 * @return 	void
 	 */
 	protected function process_extra() {
-		$output 			= [];
-		$output['element'] 	= apply_filters( 'wecodeart/filter/gutenberg/styles/element', $this->element, $this->name );
+		$output	= [
+			'element' => $this->get_selector()
+		];
 
 		// Inline Style
 		if( $css_style = get_prop( $this->attrs, 'style' ) ) {

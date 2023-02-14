@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -29,15 +29,16 @@ class Cover extends Base {
 	 * @return 	null
 	 */
 	protected function process_extra() {		
-		$output 			= [];
-		$output['element'] 	= $this->element;
+		$output	= [
+			'element' => $this->get_selector()
+		];
 
 		// Block Attributes
 		if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
 			$this->output[] = wp_parse_args( [
 				'element'	=> [
-					join( '>', [ $this->element, '.wp-block-cover__image-background' ] ), 
-					join( '>', [ $this->element, '.wp-block-cover__video-background' ] )
+					$this->get_selector( '> .wp-block-cover__image-background' ),
+					$this->get_selector( '> .wp-block-cover__video-background' )
 				],
 				'property' 	=> 'object-position',
 				'value'	  	=> $value
@@ -75,7 +76,7 @@ class Cover extends Base {
 
 		if ( $value = get_prop( $this->attrs, 'customGradient' ) ) {
 			$this->output[] = wp_parse_args( [
-				'element'	=> join( '>', [ $this->element, '.has-background-gradient' ] ),
+				'element'	=> $this->get_selector( '> .has-background-gradient' ),
 				'property' 	=> 'background-image',
 				'value'	  	=> $value,
 			], $output );

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -30,8 +30,9 @@ class Column extends Base {
 	 * @return 	null
 	 */
 	protected function process_extra() {		
-		$output 			= [];
-		$output['element'] 	= $this->element;
+		$output	= [
+			'element' => $this->get_selector()
+		];
 		
 		// Custom Width
 		if ( $value = get_prop( $this->attrs, 'width' ) ) {

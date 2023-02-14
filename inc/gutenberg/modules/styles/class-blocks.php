@@ -74,9 +74,10 @@ class Blocks extends Processor {
 	protected function process_attributes() {
 		$this->output = [];
 
-		$output 			= [];
-		$output['element'] 	= apply_filters( 'wecodeart/filter/gutenberg/styles/element', $this->element, $this->name );
-	
+		$output	= [
+			'element' => $this->get_selector()
+		];
+			
 		// Inline Style
 		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
 			// Typography
@@ -135,20 +136,21 @@ class Blocks extends Processor {
 			if ( $color = get_prop( $css_style, 'color' ) ) {
 				// Text
 				if ( $value = get_prop( $color, 'text' ) ) {
-					// $this->output[] = wp_parse_args( [
-					// 	'property' 	=> 'color',
-					// 	'value'	  	=> $value
-					// ], $output );
-					wp_style_engine_get_stylesheet_from_css_rules( [
-					[
-						'selector'     => $this->element,
-						'declarations' => [
-							'color' => $value,
-						],
-					] ], [
-						'context'  => 'block-supports',
-						'prettify' => false,
-					] );
+					$this->output[] = wp_parse_args( [
+						'property' 	=> 'color',
+						'value'	  	=> $value
+					], $output );
+
+					// wp_style_engine_get_stylesheet_from_css_rules( [
+					// [
+					// 	'selector'     => $this->get_selector(),
+					// 	'declarations' => [
+					// 		'color' => $value,
+					// 	],
+					// ] ], [
+					// 	'context'  => 'block-supports',
+					// 	'prettify' => false,
+					// ] );
 				}
 
 				// Background
@@ -167,24 +169,13 @@ class Blocks extends Processor {
 					], $output );
 				}
 				
-				// Duotone - temporary disable until I combine them into our styles
+				// Duotone
 				if ( $value = get_prop( $color, 'duotone' ) ) {
-					$block_type = \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
-
-					$duotone_support = false;
-					if ( $block_type && property_exists( $block_type, 'supports' ) ) {
-						$duotone_support = get_prop( $block_type->supports, [ 'color', '__experimentalDuotone' ], false );
-					}
-
-					if( $duotone_support ) {
-						$this->output[] = wp_parse_args( [
-							'element'	=> implode( ', ', array_map( function ( $selector ) {
-								return implode( ' ', [ $this->element, trim( $selector ) ] );
-							}, explode( ',', $duotone_support ) ) ),
-							'property' 	=> 'filter',
-							'value'	  	=> sprintf( 'url(#wp-duotone-%s)', ltrim( $this->element, '.' ) )
-						], $output );
-					}
+					$this->output[] = wp_parse_args( [
+						'element'	=> $this->get_selector(),
+						'property' 	=> 'filter',
+						'value'	  	=> sprintf( 'url(#wp-duotone-%s)', ltrim( $this->element, '.' ) )
+					], $output );
 				}
 			}
 
@@ -362,7 +353,7 @@ class Blocks extends Processor {
 	 *
 	 * @return 	array
 	 */
-	public function get_classes() {
+	public function get_classes(): array {
 		return array_unique( array_filter( explode( ' ', get_prop( $this->attrs, 'className', '' ) ) ) );
 	}
 	
@@ -371,7 +362,20 @@ class Blocks extends Processor {
 	 *
 	 * @return 	array
 	 */
-	public function get_element() {
+	public function get_element(): string {
 		return $this->element;
+	}
+
+	/**
+	 * Get selector.
+	 *
+	 * @return 	string
+	 */
+	public function get_selector( string $extra = '' ): string {
+		$block_type	= \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
+		$selector 	= get_prop( $block_type->supports, [ '__experimentalSelector' ] );
+		$selector 	= join( '', array_filter( [ $this->get_element(), $selector, $extra ] ) );
+
+		return apply_filters( 'wecodeart/filter/gutenberg/styles/selector', $selector, $this->name );
 	}
 }

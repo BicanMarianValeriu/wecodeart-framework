@@ -31,8 +31,9 @@ class Featured extends Base {
 	 * @return 	null
 	 */
 	protected function process_extra() {
-		$output 			= [];
-		$output['element'] 	= $this->element;
+		$output	= [
+			'element' => $this->get_selector()
+		];
 		
 		if( Image::use_ratio() ) {
 			$height = get_prop( $this->attrs, 'height', '' );
@@ -72,14 +73,14 @@ class Featured extends Base {
 		} else {
 			if( $width = get_prop( $this->attrs, 'width' ) ) {
 				$this->output[] = wp_parse_args( [
-					'element' 	=> $this->element . ' img',
+					'element' 	=> $this->get_selector( ' img' ),
 					'property' 	=> 'width',
 					'value'	  	=> $width
 				], $output );
 			}
 			if( $height = get_prop( $this->attrs, 'height' ) ) {
 				$this->output[] = wp_parse_args( [
-					'element' 	=> $this->element . ' img',
+					'element' 	=> $this->get_selector( ' img' ),
 					'property' 	=> 'height',
 					'value'	  	=> $height
 				], $output );
@@ -88,7 +89,7 @@ class Featured extends Base {
 
 		if( $value = get_prop( $this->attrs, 'scale' ) ) {
 			$this->output[] = wp_parse_args( [
-				'element' 	=> $this->element . ' img',
+				'element' 	=> $this->get_selector( ' img' ),
 				'property' 	=> 'object-fit',
 				'value'	  	=> $value
 			], $output );

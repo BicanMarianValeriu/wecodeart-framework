@@ -98,7 +98,7 @@ class Styles implements Integration {
 		] );
 
 		// Hooks
-		add_filter( 'wecodeart/filter/gutenberg/styles/element',	[ $this, 'filter_selectors'	], 10, 2 );
+		add_filter( 'wecodeart/filter/gutenberg/styles/selector',	[ $this, 'filter_selectors'	], 10, 2 );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
@@ -194,6 +194,12 @@ class Styles implements Integration {
 				$content->remove_attribute( 'style' );
 			}
 			
+			if( $block_name === 'core/table' ) {
+				// Table also adds style to the <table>.
+				$content->next_tag( [ 'tag_name' => 'table' ] );
+				$content->remove_attribute( 'style' );
+			}
+			
 			if( in_array( $block_name, [ 'core/avatar', 'core/image', 'core/cover' ], true ) ) {
 				// Blocks that also adds style to the <img />.
 				$content->next_tag( [ 'tag_name' => 'img' ] );
@@ -238,14 +244,6 @@ class Styles implements Integration {
 
 		if( $block === 'core/image' ) {
 			$selector = $selector . ' img, ' . $selector . ' svg';
-		}
-
-		if( $block === 'core/button' ) {
-			$selector .= ' .wp-block-button__link';
-		}
-
-		if( $block === 'core/table' ) {
-			$selector .= ' table';
 		}
 
 		return $selector;

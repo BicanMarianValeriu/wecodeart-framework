@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -31,13 +31,14 @@ class Media extends Base {
 	 * @return 	null
 	 */
 	protected function process_extra() {
-		$output 			= [];
-		$output['element'] 	= implode( ' ', [ $this->element, '.wp-block-media-text__media' ] );
+		$output	= [
+			'element' => $this->get_selector( '> .wp-block-media-text__media' )
+		];
 		
 		// Handle width
 		if ( $value = get_prop( $this->attrs, 'mediaWidth' ) ) {
 			$this->output[] = wp_parse_args( [
-				'element'	=> $this->element,
+				'element'	=> $this->get_selector(),
 				'property' 	=> 'grid-template-columns',
 				'value'	  	=> "{$value}% auto",
 			], $output );

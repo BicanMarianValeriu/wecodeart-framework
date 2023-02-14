@@ -29,8 +29,9 @@ class Gallery extends Base {
 	 * @return 	null
 	 */
 	protected function process_extra() {
-		$output				= [];
-		$output['element'] 	= '.wp-block-gallery' . $this->element;
+		$output	= [
+			'element' => '.wp-block-gallery' . $this->get_selector()
+		];
 
 		// Columns
 		if( $columns = get_prop( $this->attrs, 'columns', 3 ) ) {

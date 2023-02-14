@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.4.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -30,13 +30,14 @@ class Social extends Base {
 	 * @return 	null
 	 */
 	protected function process_extra() {
-		$output 			= [];
-		$output['element'] 	= join( '>', [ $this->element . ':not(.is-style-logos-only)', '.wp-block-social-link', 'a' ] );
+		$output	= [
+			'element' => join( '>', [ $this->get_selector() . ':not(.is-style-logos-only)', '.wp-block-social-link', 'a' ] )
+		];
 
 		$classnames = explode( ' ', get_prop( $this->attrs, 'className', '' ) );
 
 		if( in_array( 'is-style-logos-only', $classnames ) ) {
-			$output['element'] 	= join( '>', [ $this->element . '.is-style-logos-only', '.wp-block-social-link', 'a' ] );
+			$output['element'] 	= join( '>', [ $this->get_selector() . '.is-style-logos-only', '.wp-block-social-link', 'a' ] );
 		}
 
 		// Background Color 

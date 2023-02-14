@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.4.8
- * @version		5.7.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -31,16 +31,18 @@ class Search extends Base {
 	 */
 	protected function process_extra() {		
 		$this->output 		= []; // Reset output		
-		$output 			= [];
-		$output['element'] 	= [
-			join( ' ', [ $this->element, '.wp-block-search__input' ] ),
-			join( ' ', [ $this->element, '.wp-block-button__link' ] )
+
+		$output	= [
+			'element' => [
+				$this->get_selector( ' .wp-block-search__input' ),
+				$this->get_selector( ' .wp-element-button' )
+			]
 		];
 
 		// Inline Style
 		if( ! in_array( get_prop( $this->attrs, 'width' ), [ 25, 50, 75, 100 ] ) ) {
 			$this->output[] = wp_parse_args( [
-				'element'	=> join( ' ', [ $this->element, '.wp-block-search__fields' ] ),
+				'element'	=> $this->get_selector( ' .wp-block-search__fields' ),
 				'property' 	=> 'width',
 				'value'	  	=> get_prop( $this->attrs, 'width' ),
 				'units'		=> get_prop( $this->attrs, 'widthUnit' )
@@ -107,10 +109,11 @@ class Search extends Base {
 
 			// Colors
 			if ( $color = get_prop( $css_style, 'color' ) ) {
+				$output['element'] = $this->get_selector( ' .wp-element-button' );
+
 				// Text
 				if ( $value = get_prop( $color, 'text' ) ) {
 					$this->output[] = wp_parse_args( [
-						'element'	=> join( ' ', [ $this->element, '.wp-block-button__link' ] ),
 						'property' 	=> 'color',
 						'value'	  	=> $value
 					], $output );
@@ -119,7 +122,6 @@ class Search extends Base {
 				// Background
 				if ( $value = get_prop( $color, 'background' ) ) {
 					$this->output[] = wp_parse_args( [
-						'element'	=> join( ' ', [ $this->element, '.wp-block-button__link' ] ),
 						'property' 	=> 'background-color',
 						'value'	  	=> $value
 					], $output );
@@ -128,7 +130,6 @@ class Search extends Base {
 				// Gradient
 				if ( $value = get_prop( $color, 'gradient' ) ) {
 					$this->output[] = wp_parse_args( [
-						'element'	=> join( ' ', [ $this->element, '.wp-block-button__link' ] ),
 						'property' 	=> 'background-image',
 						'value'	  	=> $value
 					], $output );
