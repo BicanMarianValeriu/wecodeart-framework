@@ -9,7 +9,7 @@
  * @subpackage 	Support\Plugins\ANR\is_anr_active
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		4.0.2
- * @version		5.7.0
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Plugins\ANR;
@@ -17,7 +17,6 @@ namespace WeCodeArt\Support\Plugins\ANR;
 defined( 'ABSPATH' ) || exit(); 
 
 use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
-use function WeCodeArt\Functions\detect_plugin;
 
 /**
  * Conditional that is only met when plugin is active.
@@ -28,6 +27,6 @@ class Condition implements ConditionalInterface {
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return detect_plugin( [ 'constants' => [ 'C4WP_PLUGIN_VERSION' ] ] );
+		return defined( 'C4WP_PLUGIN_VERSION' );
 	}
 }

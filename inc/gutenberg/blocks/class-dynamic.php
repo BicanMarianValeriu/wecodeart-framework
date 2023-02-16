@@ -95,6 +95,8 @@ abstract class Dynamic {
 	 * @return 	object $doc.
 	 */
 	protected function load_html( $content = '' ) {
+		_deprecated_function( __FUNCTION__, '5.7.2', 'dom' );
+
 		return $this->dom( $doc );
 	}
 	
@@ -106,6 +108,8 @@ abstract class Dynamic {
 	 * @return 	string $content.
 	 */
 	protected function save_html( $content = '' ) {
+		_deprecated_function( __FUNCTION__, '5.7.2' );
+		
 		return $content;
 	}
 

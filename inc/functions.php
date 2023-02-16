@@ -43,28 +43,6 @@ function toJSON( $json = array() ) {
 }
 
 /**
- * Detect active plugin by constant, class or function existence.
- *
- * @since 	3.5
- * @param 	array 	$plugins 	Array of array for constants, classes and / or functions to check for plugin existence
- * 
- * @return 	boolean
- */
-function detect_plugin( array $plugins ) {
-    // Check for classes.
-    if ( isset( $plugins['classes'] ) ) foreach ( $plugins['classes'] as $name ) if ( class_exists( $name ) ) return true;
-
-    // Check for functions.
-    if ( isset( $plugins['functions'] ) ) foreach ( $plugins['functions'] as $name ) if ( function_exists( $name ) ) return true;
-
-    // Check for constants.
-    if ( isset( $plugins['constants'] ) ) foreach ( $plugins['constants'] as $name ) if ( defined( $name ) ) return true;
-
-    // No class, function or constant found to exist.
-    return false;
-}
-
-/**
  * Get a specific property of an array
  *
  * @since  	3.8.1

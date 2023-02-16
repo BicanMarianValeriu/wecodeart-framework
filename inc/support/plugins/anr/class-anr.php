@@ -44,7 +44,7 @@ class ANR implements Integration {
 	 */
 	public static function get_conditionals() {
 		wecodeart( 'conditionals' )->set( [
-			'is_anr_active'		=> ANR\Condition::class,
+			'is_anr_active'	=> ANR\Condition::class,
 		] );
 
 		return [ 'is_anr_active' ];

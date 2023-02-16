@@ -9,7 +9,7 @@
  * @subpackage 	Support\Plugins\CF7\is_cf7_active
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Plugins\CF7;
@@ -17,7 +17,6 @@ namespace WeCodeArt\Support\Plugins\CF7;
 defined( 'ABSPATH' ) || exit(); 
 
 use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
-use function WeCodeArt\Functions\detect_plugin;
 
 /**
  * Conditional that is only met when plugin is active.
@@ -28,6 +27,6 @@ class Condition implements ConditionalInterface {
 	 * @inheritdoc
 	 */
 	public function is_met() {
-		return detect_plugin( [ 'constants' => [ 'WPCF7_VERSION' ] ] );
+		return defined( 'WPCF7_VERSION' );
 	}
 }

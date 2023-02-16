@@ -68,7 +68,7 @@ final class Fonts implements Integration {
 	public static function get_fonts( string $type = 'all' ) {
 		$data = [];
 
-		switch ($type):
+		switch( $type ):
 			case 'all':
 				$data = array_merge( self::get_standard_fonts(), self::get_google_fonts() );
 			break;

@@ -9,7 +9,7 @@
  * @subpackage 	Support\Fonts
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.7.1
- * @version		5.7.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Fonts;
@@ -55,13 +55,10 @@ final class Google {
 	 * Init.
 	 */
 	public function init() {
-		self::get_fonts();
+		self::get_fonts(); // Load Google Fonts
 
 		$fonts = get_prop( wecodeart_config( 'fonts' ), [ 'google' ], [] );
-
-		foreach( $fonts as $font ) {
-			$this->add_font( $font );
-		}
+		array_map( [ $this, 'add_font' ], $fonts );
 
 		add_filter( 'wp_theme_json_data_theme', [ $this, 'register_json' 	] );
 		add_action( 'wp_enqueue_scripts', 		[ $this, 'register_styles' 	] );

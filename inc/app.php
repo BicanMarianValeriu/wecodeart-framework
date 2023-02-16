@@ -157,12 +157,7 @@ return [
     |
     */
     'support' => [
-        'responsive-embeds' => true,
         'title-tag'         => true,
-        'custom-logo'       => [
-            'height'        => 60,
-            'width'         => 60,
-            'flex-height'   => true,
-        ],
+        'responsive-embeds' => true,
     ],
 ];

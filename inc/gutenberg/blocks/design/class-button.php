@@ -48,13 +48,13 @@ class Button extends Dynamic {
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'link',
             'label'			=> __( 'Link', 'wecodeart' ),
-			'inline_style' 	=> static::get_style( 'link' )
+			// 'inline_style' 	=> static::get_style( 'link' ) // Not working in Site Editor yet.
 		] );
 		
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'outline',
             'label'			=> __( 'Outline', 'wecodeart' ),
-			'inline_style' 	=> static::get_style( 'outline' )
+			// 'inline_style' 	=> static::get_style( 'outline' ) // Not working in Site Editor yet.
 		] );
 		
 		\add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'	], 10, 2 );
@@ -88,18 +88,18 @@ class Button extends Dynamic {
 					.is-style-outline :where(.wp-block-button__link) {
 						--wp--color--rgb: 52, 58, 64;
 					}
-					.is-style-outline.wp-block-button .wp-block-button__link {
+					.is-style-outline.wp-block-button .wp-block-button__link.wp-block-button__link {
 						--wp--bg-opacity: 0;
 						background-color: rgba(var(--wp--color--rgb), var(--wp--bg-opacity));
-						border-color: currentColor!important;
+						border-color: currentColor;
 						color: inherit;
 					}
-					.is-style-outline.wp-block-button .wp-block-button__link:is(:hover,:focus) {
+					.is-style-outline.wp-block-button .wp-block-button__link.wp-block-button__link:is(:hover,:focus) {
 						--wp--bg-opacity: 1;
-						border-color: rgb(var(--wp--color--rgb))!important;
+						border-color: rgb(var(--wp--color--rgb));
 						color: white!important;
 					}
-					.is-style-outline.wp-block-button .has-white-color:is(:hover,:focus) {
+					.is-style-outline.wp-block-button .wp-block-button__link.has-white-color:is(:hover,:focus) {
 						color: black!important;
 					}
 				";
@@ -127,6 +127,8 @@ class Button extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
+		$inline = static::get_style( 'outline' ) . static::get_style( 'link' );
+
 		return "
 		.wp-block-button.has-custom-width {
 			max-width: none;
@@ -196,6 +198,7 @@ class Button extends Dynamic {
 			box-shadow: none;
 			opacity: .7;
 		}
+		${inline}
 		";
 	}
 }
