@@ -34,7 +34,7 @@ final class Sanitize {
 	 *
 	 * @return 	string
 	 */
-	public static function color_rgba( string $value = '' ) {
+	public static function color_rgba( string $value = '' ): string {
 		$red   = 'rgba(0,0,0,0)';
 		$green = 'rgba(0,0,0,0)';
 		$blue  = 'rgba(0,0,0,0)';
@@ -59,7 +59,7 @@ final class Sanitize {
 	 *
 	 * @return 	string
 	 */
-	public static function color_hex( string $value = '' ) {
+	public static function color_hex( string $value = '' ): string {
 		return sanitize_hex_color( $value );
 	}
 
@@ -70,12 +70,12 @@ final class Sanitize {
 	 *
 	 * @return 	string
 	 */
-	public static function color( string $value = '' ) {
+	public static function color( string $value = '' ): string {
 		// Is CSS Variable or RGB
 		$is_var = ( strpos( $value, 'var(' ) !== false || strpos( $value, 'rgb(' ) !== false );
 	
 		if ( $is_var ) {
-			return sanitize_text_field( $value );
+			return filter_var( $value, FILTER_SANITIZE_STRING );
 		}
 	
 		// Is this an rgba color or a hex?

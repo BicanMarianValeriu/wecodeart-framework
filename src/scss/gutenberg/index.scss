@@ -1,2 +1,19 @@
 @import './section';
 @import './labels';
+
+/*--------------------------------------------------------------
+# Title
+--------------------------------------------------------------*/
+.edit-post-visual-editor__post-title-wrapper {
+    padding-top: var(--wp--style--block-gap);
+    padding-bottom: var(--wp--style--block-gap);
+    margin: 0!important;
+    background-color: var(--wp--gray-100);
+    
+    &:focus,
+    &:focus-within {
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 1px 5px rgba(0,0,0,.15);
+    }
+}

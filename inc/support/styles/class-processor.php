@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles\Processor
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.4.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -152,9 +152,6 @@ abstract class Processor {
 						if ( $user_id ) {
 							$replacement = get_user_meta( $user_id, $replace, true );
 						}
-						break;
-					case 'theme_mod':
-						$replacement = get_theme_mod( $replace, $replace ); // Defaults to $replace variable
 						break;
 					default:
 						if( is_callable( $replace ) ) {

@@ -147,7 +147,7 @@ class Posts extends Dynamic {
 			$content_type	= get_prop( $attributes, [ 'displayPostContentRadio' ], 'excerpt' );
 			
 			if( $content_type === 'excerpt' ) {
-				$inner_blocks .= '<!-- wp:post-excerpt {"moreText":"Continue reading"} /-->';
+				$inner_blocks .= '<!-- wp:post-excerpt {"moreText":"' . esc_html__( 'Continue reading', 'wecodeart' ) . '"} /-->';
 			}
 
 			if( $content_type === 'full_post' ) {
@@ -185,6 +185,9 @@ class Posts extends Dynamic {
 	 */
 	public function styles() {
 		return "
+		.wp-block-post-template--latest .wp-block-post-title {
+			margin-bottom: 0;
+		}
 		.wp-block-post-template--latest figure.alignleft,
 		.wp-block-post-template--latest figure.alignright {
 			min-width: 100px;

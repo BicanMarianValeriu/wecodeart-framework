@@ -1,6 +1,9 @@
 /*!******************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/scss/gutenberg/index.scss ***!
   \******************************************************************************************************************************************************************************************************************************************************/
+/*--------------------------------------------------------------
+# Columns Guidelines / Fix cols
+--------------------------------------------------------------*/
 .wp-block-columns.is-selected::before, .wp-block-columns.has-child-selected::before {
   content: "";
   position: absolute;
@@ -71,6 +74,21 @@ h6[data-type="core/heading"]:not(.is-selected):not(.is-hovered)::before {
 .editor-inner-blocks .wp-block[data-type="core/heading"]:not(.is-selected):not(.is-hovered)::before,
 .block-editor-inner-blocks .wp-block[data-type="core/heading"]:not(.is-selected):not(.is-hovered)::before {
   content: "";
+}
+
+/*--------------------------------------------------------------
+# Title
+--------------------------------------------------------------*/
+.edit-post-visual-editor__post-title-wrapper {
+  padding-top: var(--wp--style--block-gap);
+  padding-bottom: var(--wp--style--block-gap);
+  margin: 0 !important;
+  background-color: var(--wp--gray-100);
+}
+.edit-post-visual-editor__post-title-wrapper:focus, .edit-post-visual-editor__post-title-wrapper:focus-within {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
 }
 
 /*# sourceMappingURL=editor.css.map*/

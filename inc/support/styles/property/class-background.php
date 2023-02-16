@@ -38,7 +38,7 @@ class Background extends Styles\Property {
 			// If is URL
 			if( filter_var( $this->value, FILTER_VALIDATE_URL ) ) {
 				$processed = sprintf( 'url(%s)', esc_url( set_url_scheme( $this->value ) ) );
-			// If is Data URL
+			// If is data URL
 			} elseif( strpos( $this->value, 'data:image' ) !== false  ) {
 				$processed = sprintf( 'url("%s")', esc_url_raw( $this->value, [ 'data' ] ) );
 			// If is image ID

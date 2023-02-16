@@ -39,7 +39,7 @@ class Button extends Base {
 			// Color
 			if( $color = get_prop( $css_style, 'color' ) ) {
 				if( $text = get_prop( $color, 'text' ) ) {
-					$value 	= wecodeart( 'styles' )::hex_to_rgba( $text );
+					$value 	= wecodeart( 'styles' )::color_to_rgba( $text );
 					preg_match( '/\((.*?)\)/', $value, $color );
 					
 					// We put CSS vars first!

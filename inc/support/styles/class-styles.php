@@ -149,7 +149,7 @@ final class Styles implements Integration {
      *
      * @return 	string
      */
-    public static function compress( string $css = '', $options = [] ) {
+    public static function compress( string $css = '', $options = [] ): string {
         // Return if no CSS
         if ( ! $css ) {
             return '';
@@ -166,11 +166,11 @@ final class Styles implements Integration {
         // Remove ; before }
         $css = preg_replace( '/;(?=\s*})/', '', $css );
 
-        // Remove space after , : ; { } */ > ~
-        $css = preg_replace( '/(,|:|;|\{|}|\*\/|>|~) /', '$1', $css );
+        // Remove space after , : ; { } * > ~ +
+        $css = preg_replace( '/(,|:|;|\{|}|\*\/|>|~|\+) /', '$1', $css );
 
-        // Remove space before , ; { } > ~
-        $css = preg_replace( '/ (,|;|\{|}|>|~)/', '$1', $css );
+        // Remove space before , ; { } > ~ +
+        $css = preg_replace( '/ (,|;|\{|}|>|~|\+)/', '$1', $css );
 
         // Strips leading 0 on decimal values (converts 0.5px into .5px)
         $css = preg_replace( '/(:| )0\.([0-9]+)(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
@@ -205,7 +205,7 @@ final class Styles implements Integration {
      *
      * @return  string
      */
-    public static function clean_empty( string $css ) {
+    public static function clean_empty( string $css ): string {
         $css_explode        = explode( '}', $css );
         $result             = '';
         $double_braces_open = false;
@@ -243,7 +243,7 @@ final class Styles implements Integration {
 	 *
 	 * @return 	string          The generated CSS.
 	 */
-	public static function parse( array $css = [], $context = '' ) {
+	public static function parse( array $css = [], $context = '' ): string {
 		// Pass our styles from filter.
 		$css = apply_filters( 'wecodeart/filter/styles/array', $css, $context );
 
@@ -266,12 +266,12 @@ final class Styles implements Integration {
 	/**
 	 * Utility method to convert associative array to css rules.
 	 *
-	 * @param 	array 		$rules The associative rules array.
-	 * @param 	int   		$indent The indent to be used per rule.
+	 * @param 	array	$rules The associative rules array.
+	 * @param 	int		$indent The indent to be used per rule.
 	 *
 	 * @return string
 	 */
-	public static function array_to_string( array $selectors = [], $indent = 0 ) {
+	public static function array_to_string( array $selectors = [], $indent = 0 ): string {
 		$css    = '';
 		$prefix = str_repeat( '  ', $indent );
 
@@ -322,9 +322,9 @@ final class Styles implements Integration {
 	 * @param 	string	$css	The CSS definitions string.
 	 * @param 	bool   	$group	If true, it will group CSS into media queries.
 	 *
-	 * @return 	array          	The generated CSS array.
+	 * @return 	array	The generated CSS array.
 	 */
-	public static function string_to_array( string $css = '' ) {
+	public static function string_to_array( string $css = '' ): array {
 		$results = [];
 		// Escape base64 images
 		$css = preg_replace( '/(data\:[^;]+);/i', '$1~£&#', $css );
@@ -350,9 +350,9 @@ final class Styles implements Integration {
 	 *
 	 * @param 	string   $css	The CSS definitions string.
 	 *
-	 * @return 	array          	The generated CSS array.
+	 * @return 	array	The generated CSS array.
 	 */
-	public static function string_to_array_query( string $css = '' ) {
+	public static function string_to_array_query( string $css = '' ): array {
 		$queries 	= [];
 		$start 		= 0;
 		$global 	= preg_replace( '/@media[^{]+\{([\s\S]+?\})\s*\}/i', '', $css );
@@ -388,7 +388,7 @@ final class Styles implements Integration {
 	 *
 	 * @return array
 	 */
-	public static function add_prefixes( array $css ) {
+	public static function add_prefixes( array $css ): array {
 		if( is_array( $css ) ) {
 			foreach( $css as $media_query => $elements ) {
 				if( empty( $elements ) ) continue;
@@ -438,42 +438,17 @@ final class Styles implements Integration {
 	 * Convert HEX to RGBA.
 	 *
 	 * @since   5.0.0
+	 * @version	5.7.2
+	 * 
 	 * @param 	string $color   Color data.
 	 * @param 	bool   $opacity Opacity status.
 	 *
 	 * @return 	mixed
 	 */
-	public static function hex_to_rgba( string $color, $opacity = false ) {
-		$default = 'rgb(0,0,0)';
+	public static function hex_to_rgba( string $color, $opacity = false ): string {
+		_deprecated_function( __METHOD__, '5.7.2', 'color_to_rgba' );
 
-		if ( empty( $color ) ) {
-			return $default;
-		}
-
-		if ( '#' == $color[0] ) {
-			$color = substr( $color, 1 );
-		}
-
-		if ( strlen( $color ) == 6 ) {
-			$hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
-		} elseif ( strlen( $color ) == 3 ) {
-			$hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
-		} else {
-			return $default;
-		}
-
-		$rgb = array_map( 'hexdec', $hex );
-
-		if ( $opacity ) {
-			if ( abs( $opacity ) > 1 ) {
-				$opacity = 1.0;
-			}
-			$output = 'rgba(' . implode( ',', $rgb ) . ',' . $opacity . ')';
-		} else {
-			$output = 'rgb(' . implode( ',', $rgb ) . ')';
-		}
-
-		return $output;
+		return self::color_to_rgba( $color );
 	}
 
 	/**
@@ -485,7 +460,7 @@ final class Styles implements Integration {
 	 *
 	 * @return 	string
 	 */
-	public static function hex_brightness( string $hex, $steps ) {
+	public static function hex_brightness( string $hex, int $steps ): string {
 		// Steps should be between -255 and 255. Negative = darker, positive = lighter
 		$steps = max( -255, min( 255, $steps ) );
 	
@@ -509,19 +484,37 @@ final class Styles implements Integration {
 	
 		return $return;
 	}
+
+	/**
+	 * Convert Color to RGBA.
+	 *
+	 * @since   5.0.0
+	 * @param 	string 	$color   Color data.
+	 * @param 	bool 	$alpha   Either return alpha or not
+	 *
+	 * @return 	string
+	 */
+	public static function color_to_rgba( string $color, bool $alpha = false ): string {
+		$colors = wp_tinycolor_string_to_rgb( $color );
+
+		if( $alpha === false ) {
+			return 'rgb(' . join( ', ', array_splice( $colors, 0, 3 ) ) . ')';
+		}
+		
+		return 'rgba(' . join( ', ', $colors ) . ')';
+	}
 	
 	/**
 	 * Color lightness
 	 *
 	 * @since   5.0.0
-	 * @param  	string 	$color  Color in HEX/RGB/RGBA format
+	 * @version	5.7.2
+	 * @param  	string	$color  Color in HEX/RGB/RGBA format
 	 *
-	 * @return 	string
+	 * @return 	integer
 	 */
 	public static function color_lightness( string $color ) {
-		$mode 	= ( false === strpos( $color, 'rgba' ) ) ? 'hex' : 'rgba';
-		$color 	= $mode === 'hex' ? self::hex_to_rgba( $color ) : $color; 
-		preg_match_all( "/\(([^\]]*)\)/" , $color, $matches );
+		preg_match_all( "/\(([^\]]*)\)/", self::color_to_rgba( $color, true ), $matches );
 		
 		return intval( array_sum( explode( ',', current( $matches[1] ) ) ) );
 	}
@@ -533,7 +526,7 @@ final class Styles implements Integration {
      *
 	 * @return  array
 	 */
-	public static function sort_breakpoints( $order ) {
+	public static function sort_breakpoints( array $order ): array {
         $breaks     = wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
         $sortArray  = array_merge( [ 'global' ], array_map( function( $point ) {
             return "@media (min-width:{$point})";
@@ -557,7 +550,7 @@ final class Styles implements Integration {
      *
 	 * @return  array
 	 */
-	public static function get_duotone( array $preset = [] ) {
+	public static function get_duotone( array $preset = [] ): array {
         $values = [
 			'r' => [],
 			'g' => [],

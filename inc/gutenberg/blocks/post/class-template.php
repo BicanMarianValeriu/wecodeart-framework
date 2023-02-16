@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.7.0
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -45,12 +45,8 @@ class Template extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_action( 'wp_print_styles', function() {
-			\wp_deregister_style( 'wp-block-' . $this->block_name );
-		} );
-
 		\add_filter( 'post_class',						[ $this, 'post_classes' 	] );
-		\add_filter( 'block_type_metadata_settings', 	[ $this, 'filter_render' 	], 10, 2 );
+		\add_filter( 'block_type_metadata_settings',	[ $this, 'filter_render'	], 10, 2 );
 	}
 
 	/**
@@ -89,6 +85,10 @@ class Template extends Dynamic {
 			$query = new \WP_Query( $args );
 		}
 
+		if ( block_core_post_template_uses_featured_image( $block->inner_blocks ) ) {
+			update_post_thumbnail_cache( $query );
+		}
+
 		$classnames = [ 'wp-block-post-template' ];
 		if ( isset( $block->context['displayLayout'] ) && isset( $block->context['query'] ) ) {
 			if ( get_prop( $block->context, [ 'displayLayout', 'type' ] ) === 'flex' ) {
@@ -99,9 +99,7 @@ class Template extends Dynamic {
 		$item_class = [ 'wp-block-post' ];
 		if( get_prop( $block->context, [ 'displayLayout', 'columns' ] ) ) {
 			$columns 	= ( 12 / get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
-			$item_class = array_merge( $item_class, [ 'span-12', 'span-md-6', 'span-lg-' . $columns, 'm-0' ] );
-
-			wecodeart( 'styles' )->Utilities->load( [ 'm-0' ] );
+			$item_class = array_merge( $item_class, [ 'span-12', 'span-md-6', 'span-lg-' . $columns ] );
 		}
 
 		if( $value = get_prop( $attributes, 'className' ) ) {
@@ -166,5 +164,18 @@ class Template extends Dynamic {
 		$classes = array_diff( $classes, [ 'hentry' ] );
 		
 		return $classes;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.wp-block-post-template--grid .wp-block-post + .wp-block-post {
+			margin-top: 0;
+		}
+		";
 	}
 }

@@ -304,7 +304,7 @@ class Styles implements Integration {
 
 		foreach( $palette as $item ) {
 			$slug 	= get_prop( $item, [ 'slug' ] );
-			$value 	= $this->CSS::hex_to_rgba( get_prop( $item, [ 'color' ] ) );
+			$value 	= $this->CSS::color_to_rgba( get_prop( $item, [ 'color' ] ) );
 			$value  = preg_match( '/\((.*?)\)/', $value, $color );
 			
 			$style .= sprintf( '.has-%s-color{--wp--color--rgb:%s}', $slug, $color[1] );
