@@ -42,36 +42,26 @@ class Search extends Dynamic {
 	protected $block_name = 'search';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {
-		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
-	}
-
-	/**
-	 * Filter Render
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/search` block.
 	 *
-	 * @param 	array 	$attributes The block attributes.
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '', $block = null ) {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		static $instance_id = 0;
 
 		$attributes = wp_parse_args( $attributes, [

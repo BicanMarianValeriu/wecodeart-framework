@@ -49,39 +49,35 @@ class Image extends Dynamic {
 	protected $block_name = 'post-featured-image';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
+	public function init() {
 		set_post_thumbnail_size( 1920, 1080 );
 
-		\add_filter( 'post_thumbnail_html',				[ $this, 'filter_html'		], 20, 3 );
-		\add_filter( 'block_type_metadata_settings', 	[ $this, 'filter_render'	], 20, 2 );
+		\add_filter( 'post_thumbnail_html', [ $this, 'filter_html' ], 20, 3 );
 	}
 
 	/**
-	 * Filter image markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/post-featured-image` block.
 	 *
-	 * @param 	array 	$attributes The block attributes.
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '', $block = null ) {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		if ( ! isset( $block->context['postId'] ) ) {
 			return '';
 		}
@@ -299,7 +295,6 @@ class Image extends Dynamic {
 		.wp-block-post-featured-image img {
 			width: 100%;
 			height: 100%;
-			min-width: 150px;
 			object-fit: cover;
 		}
 		.wp-block-post-featured-image img[data-placeholder-resp] {

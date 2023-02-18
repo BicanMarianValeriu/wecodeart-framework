@@ -43,26 +43,14 @@ class Cover extends Dynamic {
 	protected $block_name = 'cover';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {
-		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
-	}
-
-	/**
-	 * Filter markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
@@ -73,7 +61,7 @@ class Cover extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '' ) {
+	public function render( array $attributes = [], string $content = '' ): string {
 
 		if ( 'image' !== get_prop( $attributes, [ 'backgroundType' ] ) || ! get_prop( $attributes, [ 'useFeaturedImage' ] ) ) {
 			return $content;

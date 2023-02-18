@@ -42,23 +42,23 @@ class Quote extends Dynamic {
 	protected $block_name = 'quote';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
-		\add_filter( 'register_block_type_args',				[ $this, 'block_type_args'	], 20, 2 );
-		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' 			], 10, 2 );
+	public function init() {
+		\add_filter( 'register_block_type_args',				[ $this, 'register_args'	], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' 			], 20, 2 );
 	}
 
 	/**
 	 * Block args
 	 *
-	 * @since	5.7.2
-	 * @version	5.7.2
+	 * @param	array 	$args
+	 * @param	string 	$block_name
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args( $args, $block_name ) {
-		if ( $block_name === $this->get_block_type() ) {
+	public function register_args( array $args, string $block_name ): array {
+		if ( $this->get_block_type() === $block_name ) {
 			$args['supports']['spacing'] = [
 				'margin'  	=> true,
 				'padding' 	=> true,

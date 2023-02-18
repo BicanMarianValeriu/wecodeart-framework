@@ -42,26 +42,14 @@ class Menu extends Dynamic {
 	protected $block_name = 'navigation-submenu';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {
-		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
-	}
-
-	/**
-	 * Filter submenu markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ Link::get_instance(), 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ Link::get_instance(), 'render' ]
+		];
 	}
 
 	/**

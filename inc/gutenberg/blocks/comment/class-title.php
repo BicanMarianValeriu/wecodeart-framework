@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.5.8
- * @version		5.7.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -42,26 +42,14 @@ class Title extends Dynamic {
 	protected $block_name = 'comments-title';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {
-		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' 	], 10, 2 );
-	}
-
-	/**
-	 * Filter template markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
@@ -71,7 +59,7 @@ class Title extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [] ) {
+	public function render( array $attributes = [] ): string {
 		$show_post_title     = get_prop( $attributes, [ 'showPostTitle' ] );
 		$show_comments_count = get_prop( $attributes, [ 'showCommentsCount' ] );
 		$comments_count      = absint( get_comments_number() );

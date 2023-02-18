@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -40,11 +40,6 @@ class Spacer extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'spacer';
-
-	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {}
 
 	/**
 	 * Block styles

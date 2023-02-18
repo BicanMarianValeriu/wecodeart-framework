@@ -42,9 +42,9 @@ class Button extends Dynamic {
 	protected $block_name = 'button';
 	
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
+	public function init() {
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'link',
             'label'			=> __( 'Link', 'wecodeart' ),
@@ -56,21 +56,28 @@ class Button extends Dynamic {
             'label'			=> __( 'Outline', 'wecodeart' ),
 			// 'inline_style' 	=> static::get_style( 'outline' ) // Not working in Site Editor yet.
 		] );
-		
-		\add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'	], 10, 2 );
+	}
+
+	/**
+	 * Block args.
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/button` block.
 	 *
+	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
-		$attributes = get_prop( $block, 'attrs', [] );
-
+	public function render( array $attributes = [], string $content = '' ): string {
 		return str_replace( '-button__width', '-button--width', $content );
 	}
 

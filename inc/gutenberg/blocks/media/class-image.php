@@ -44,11 +44,21 @@ class Image extends Dynamic {
 	protected $block_name = 'image';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
-		\add_filter( 'register_block_type_args',				[ $this, 'block_type_args'	], 20, 2 );
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'			], 20, 2 );
+	public function init() {
+		\add_filter( 'register_block_type_args',	[ $this, 'register_args'	], 20, 2 );
+	}
+
+	/**
+	 * Block args.
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
@@ -59,7 +69,7 @@ class Image extends Dynamic {
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args( $args, $block_name ) {
+	public function register_args( $args, $block_name ) {
 		if ( $block_name === $this->get_block_type() || $block_name === 'core/avatar' /* Same markup */ ) {
 			$selectors = array_merge( (array) get_prop( $args, [ 'supports', '__experimentalSelector' ], [] ), [ ' :where(img,svg)' ] );
 			$args['supports']['__experimentalSelector'] = implode( ',', array_filter( $selectors ) );
@@ -79,14 +89,15 @@ class Image extends Dynamic {
 	}
 
 	/**
-	 * Filter Image
-	 * 
-	 * @param 	string 	$content
-	 * @param 	array 	$block
-	 * 
-	 * @return 	string
+	 * Dynamically renders the `core/image` block.
+	 *
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
+	 *
+	 * @return 	string 	The block markup.
 	 */
-	public function render( string $content = '', $block = [] ): string {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		$dom	= $this->dom( $content );
 		$div  	= get_dom_element( 'figure', $dom );
 		$link 	= get_dom_element( 'a', $div );

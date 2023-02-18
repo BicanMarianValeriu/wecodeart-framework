@@ -37,6 +37,13 @@ abstract class Dynamic {
 	 * @var string
 	 */
 	protected $block_name = '';
+	
+	/**
+	 * Register.
+	 *
+	 * @var boolean
+	 */
+	protected $register = false;
 
 	/**
 	 * Initialize this block type.
@@ -51,20 +58,28 @@ abstract class Dynamic {
 		}
 		
 		$this->register();
-		add_action( 'init', [ $this, 'enqueue_styles' ] ); // wp_enqueue_block_styles goes to init hook instead of the usual one.
 	}
 
 	/**
 	 * Registers the block type with WordPress.
 	 */
 	protected function register() {
-		// Like this to pass theme check - however, in the theme, this acts as an abstract method
-		// and its overwritten to add_filter for the blocks that we change the markup
-		call_user_func_array( 'register_block_type', [ $this->get_block_type(), [
-			'render_callback' => [ $this, 'get_render_callback' ],
-			'attributes'      => [ $this, 'get_attributes' ],
-			'supports'        => [],
-		] ] );
+		if( $this->register ) {
+			call_user_func_array( 'register_block_type', [ $this->get_block_type(), [
+				'render_callback' 	=> [ $this, 'get_render_callback' ],
+				'attributes'      	=> [ $this, 'get_attributes' ],
+				'supports'        	=> [ $this, 'get_supports' ],
+				'uses_context'		=> [ $this, 'get_context' ],
+			] ] );
+		}
+
+		// Block args.
+		if( method_exists( $this, 'block_type_args' ) ) {
+			\add_filter( 'register_block_type_args', [ $this, 'get_block_args' ], 20, 2 );
+		}
+
+		// Block styles.
+		\add_action( 'init', [ $this, 'enqueue_styles' ] ); // wp_enqueue_block_styles goes to init hook instead of the usual one.
 	}
 
 	/**
@@ -85,32 +100,6 @@ abstract class Dynamic {
 		$doc = dom( $content );
 
 		return $doc;
-	}
-
-	/**
-	 * Load and manipulate HTML with DOMDocument.
-	 *
-	 * @param 	string $content    Block content. 		Default empty string.
-	 * 
-	 * @return 	object $doc.
-	 */
-	protected function load_html( $content = '' ) {
-		_deprecated_function( __FUNCTION__, '5.7.2', 'dom' );
-
-		return $this->dom( $doc );
-	}
-	
-	/**
-	 * Save HTML with DOMDocument.
-	 *
-	 * @param 	string $content    Block content. 		Default empty string.
-	 * 
-	 * @return 	string $content.
-	 */
-	protected function save_html( $content = '' ) {
-		_deprecated_function( __FUNCTION__, '5.7.2' );
-		
-		return $content;
 	}
 
 	/**
@@ -186,6 +175,26 @@ abstract class Dynamic {
 	protected function get_attributes() {
 		return [];
 	}
+
+	/**
+	 * Get the supports array for this block type.
+	 *
+	 * @see $this->register()
+	 *
+	 * @return array;
+	 */
+	protected function get_supports() {
+		return [];
+	}
+
+	/**
+	 * Get block usesContext.
+	 *
+	 * @return array;
+	 */
+	protected function get_context() {
+		return [];
+	}
 	
 	/**
 	 * Get the schema for a value.
@@ -231,6 +240,19 @@ abstract class Dynamic {
 		endswitch;
 
 		return $schema;
+	}
+
+	/**
+	 * Get block args.
+	 *
+	 * @return array
+	 */
+	public function get_block_args( array $args, string $block_name ): array {
+		if ( $this->get_block_type() === $block_name ) {
+			$args	= wp_parse_args( (array) $this->block_type_args( $args ), $args );
+		}
+
+		return $args;
 	}
 
 	/**

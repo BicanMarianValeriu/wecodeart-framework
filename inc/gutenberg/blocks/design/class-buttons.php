@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -42,9 +42,9 @@ class Buttons extends Dynamic {
 	protected $block_name = 'buttons';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
+	public function init() {
 		\register_block_style( $this->get_block_type(), [
 			'name' 	=> 'group',
             'label'	=> __( 'Group', 'wecodeart' ),

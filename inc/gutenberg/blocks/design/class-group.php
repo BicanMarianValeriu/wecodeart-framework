@@ -40,33 +40,16 @@ class Group extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'group';
-	
-	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {
-		// \register_block_style( $this->get_block_type(), [
-		// 	'name' 	=> 'marquee',
-        //     'label'	=> __( 'Marquee', 'wecodeart' ),
-		// ] );
-
-		\add_filter( 'block_type_metadata_settings',	[ $this, 'filter_render'	], 20, 2 );
-	}
 
 	/**
-	 * Filter markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**

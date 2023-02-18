@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -42,36 +42,26 @@ class Date extends Dynamic {
 	protected $block_name = 'post-date';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {
-		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
-	}
-
-	/**
-	 * Filter block markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/post-date` block.
 	 *
-	 * @param 	array 	$attributes The block attributes.
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '', $block = null ) {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		if ( ! isset( $block->context['postId'] ) ) {
 			return '';
 		}

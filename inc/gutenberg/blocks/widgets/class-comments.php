@@ -42,39 +42,33 @@ class Comments extends Dynamic {
 	protected $block_name = 'latest-comments';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
+	public function init() {
 		\add_action( 'wp_print_styles', fn() => \wp_deregister_style( 'wp-block-' . $this->block_name ) );
-		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
 	}
 
 	/**
-	 * Filter block markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-        if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/latest-comments` block.
 	 *
-	 * @param 	string 	$attributes	The block attrs.
+	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
+	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '', $block = null ) {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		$comments = get_comments(
 			/** This filter is documented in wp-includes/widgets/class-wp-widget-recent-comments.php */
 			apply_filters( 'widget_comments_args', [

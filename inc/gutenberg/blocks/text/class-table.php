@@ -42,9 +42,9 @@ class Table extends Dynamic {
 	protected $block_name = 'table';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
+	public function init() {
 		\add_filter( 'render_block_core/' . $this->block_name, 		[ $this, 'render' ], 10, 2 );
         \add_filter( 'wecodeart/filter/gutenberg/settings/classes',	[ $this, 'suggestions' ] );
 	}
@@ -57,7 +57,7 @@ class Table extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
+	public function render( $content = '', $block = [] ) {
 		$attributes = get_prop( $block, 'attrs', [] );
 
 		$exclude = [

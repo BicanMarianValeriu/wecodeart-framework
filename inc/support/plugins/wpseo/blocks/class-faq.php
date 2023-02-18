@@ -46,10 +46,10 @@ class Faq extends Dynamic {
 	protected $block_name = 'faq-block';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register(): void {
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'	], 20, 2 );
+	public function init(): void {
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render' ], 20, 2 );
     }
 
     /**

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.9
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -40,11 +40,6 @@ class Pullquote extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'pullquote';
-
-	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {}
 
 	/**
 	 * Block styles

@@ -42,9 +42,9 @@ class RSS extends Dynamic {
 	protected $block_name = 'rss';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
+	public function init() {
 		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
 	}
 

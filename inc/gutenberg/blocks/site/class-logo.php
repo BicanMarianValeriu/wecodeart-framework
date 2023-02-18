@@ -52,11 +52,11 @@ class Logo extends Dynamic {
 	protected $block_name = 'site-logo';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
-		\add_filter( 'register_block_type_args',				[ $this, 'block_type_args'	], 20, 2 );
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'			], 10, 2 );
+	public function init() {
+		\add_filter( 'register_block_type_args',				[ $this, 'register_args'	], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'			], 20, 2 );
     }
 
 	/**
@@ -67,7 +67,7 @@ class Logo extends Dynamic {
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args( $args, $block_name ) {
+	public function register_args( $args, $block_name ) {
 		if ( $block_name === $this->get_block_type() ) {
 			$args['supports']['color'] = [
 				'background' => true,

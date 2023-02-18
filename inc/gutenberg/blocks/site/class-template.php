@@ -43,10 +43,10 @@ class Template extends Dynamic {
 	protected $block_name = 'template-part';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
-		\add_filter( 'render_block_core/' . $this->block_name, 	[ $this, 'render'	], 10, 2 );
+	public function init() {
+		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
     }
 
     /**

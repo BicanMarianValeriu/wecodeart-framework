@@ -43,30 +43,14 @@ class Heading extends Dynamic {
 	protected $block_name = 'heading';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
-		// \add_filter( 'render_block_core/' . $this->block_name,	[ $this, 'render'	], 20, 2 );
-
+	public function init() {
 		\register_block_style( $this->get_block_type(), [
-			'name' 	=> 'underline-brush',
-            'label'	=> __( 'Underline Brush', 'wecodeart' ),
-			'inline_style' => static::get_style( 'underline-brush' )
+			'name' 			=> 'underline-brush',
+            'label'			=> esc_html__( 'Underline Brush', 'wecodeart' ),
+			'inline_style' 	=> static::get_style( 'underline-brush' )
 		] );
-	}
-
-    /**
-	 * Filter FAQ
-	 * 
-	 * @param 	string 	$content
-	 * @param 	array 	$block
-	 * 
-	 * @return 	string
-	 */
-	public function render( string $content = '', $block = [] ): string {
-		$classses 	= explode( ' ', get_prop( $block, [ 'attrs', 'className' ], '' ) );
-
-		return $content;
 	}
 
 	/**

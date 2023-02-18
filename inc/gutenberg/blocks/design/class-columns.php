@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.4
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -40,11 +40,6 @@ class Columns extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'columns';
-
-	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {}
 
 	/**
 	 * Block styles

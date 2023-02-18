@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -42,39 +42,35 @@ class Content extends Dynamic {
 	protected $block_name = 'post-content';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
-        \add_filter( 'wp_link_pages_link',  	 		[ $this, 'wp_link_pages_link' 	] );
-		\add_filter( 'wp_link_pages_args',   			[ $this, 'wp_link_pages_args' 	] );
-		\add_filter( 'the_password_form',				[ $this, 'the_password_form' 	] );
-		\add_filter( 'block_type_metadata_settings', 	[ $this, 'filter_render' ], 10, 2 );
+	public function init() {
+        \add_filter( 'wp_link_pages_link',	[ $this, 'wp_link_pages_link' 	] );
+		\add_filter( 'wp_link_pages_args',	[ $this, 'wp_link_pages_args' 	] );
+		\add_filter( 'the_password_form',	[ $this, 'the_password_form' 	] );
 	}
 
 	/**
-	 * Filter block markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/post-content` block.
 	 *
-	 * @param 	array 	$attributes The block attributes.
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '', $block = null ) {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		static $seen_ids = array();
 
 		if ( ! isset( $block->context['postId'] ) ) {

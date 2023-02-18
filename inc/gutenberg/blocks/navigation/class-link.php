@@ -46,36 +46,26 @@ class Link extends Dynamic {
 	protected $block_name = 'navigation-link';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {
-		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
-	}
-
-	/**
-	 * Filter navigation link markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( array $settings, array $data ): array {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ]
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/navigation-link` block.
 	 *
-	 * @param 	array 	$attributes The block attributes.
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '', $block = null ): string {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		$link_has_id 	= isset( $attributes['id'] ) && is_numeric( $attributes['id'] );
 		$is_post_type	= isset( $attributes['kind'] ) && 'post-type' === $attributes['kind'];
 		$is_post_type	= $is_post_type || isset( $attributes['type'] ) && ( 'post' === $attributes['type'] || 'page' === $attributes['type'] );

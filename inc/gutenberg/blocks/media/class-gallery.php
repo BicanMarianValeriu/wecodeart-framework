@@ -42,31 +42,14 @@ class Gallery extends Dynamic {
 	protected $block_name = 'gallery';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {
-		if( is_admin() ) return;
-
-		\add_filter( 'block_type_metadata_settings', [ $this, 'filter_render' ], 10, 2 );
-	}
-
-	/**
-	 * Filter markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' => [ $this, 'render' ],
-				'supports' => array_merge( get_prop( $settings, [ 'supports' ], [] ), [
-                    '__experimentalLayout' => false,
-                ] )
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
@@ -74,10 +57,11 @@ class Gallery extends Dynamic {
 	 *
 	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '' ) {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		$columns = get_prop( $attributes, 'columns', 'default' );
 
 		return preg_replace( '/(columns-)\w+/', 'grid columns-' . $columns, $content, 1 );

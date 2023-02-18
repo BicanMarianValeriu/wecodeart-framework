@@ -82,9 +82,9 @@ class Navigation extends Dynamic {
 	protected $block_name = 'navigation';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
+	public function init() {
 		\register_block_style( $this->get_block_type(), [
 			'name' 	=> 'tabs',
             'label'	=> __( 'Tabs', 'wecodeart' ),
@@ -97,37 +97,30 @@ class Navigation extends Dynamic {
 			'inline_style' => static::get_extra_styles( 'pills' )
 		] );
 
-		\add_filter( 'block_type_metadata_settings', 			[ $this, 'filter_render' ], 10, 2 );
-		\add_filter( 'block_core_navigation_render_fallback', 	[ $this, 'fallback' ] );
+		\add_filter( 'block_core_navigation_render_fallback', [ $this, 'fallback' ] );
 	}
 
 	/**
-	 * Filter navigation markup
+	 * Block args.
 	 *
-	 * @param	array 	$settings
-	 * @param	array 	$data
+	 * @return 	array
 	 */
-	public function filter_render( $settings, $data ) {
-		if ( $this->get_block_type() === $data['name'] ) {
-			$settings = wp_parse_args( [
-				'render_callback' 		=> [ $this, 'render' ],
-				'view_script_handles' 	=> []
-			], $settings );
-		}
-		
-		return $settings;
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/navigation` block.
 	 *
-	 * @param 	array 	$attributes The block attributes.
-	 * @param 	string 	$content 	The block content.
-	 * @param 	array 	$block 		The block data.
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '', $block = null ) {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		if ( $color = get_prop( $attributes, 'rgbTextColor' ) ) {
 			$attributes['customTextColor'] = $color;
 		}

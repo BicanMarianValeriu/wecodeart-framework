@@ -42,9 +42,9 @@ class Separator extends Dynamic {
 	protected $block_name = 'separator';
 
 	/**
-	 * Shortcircuit Register
+	 * Init.
 	 */
-	public function register() {
+	public function init() {
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'dots',
             'label'			=> esc_html__( 'Dots', 'wecodeart' ),

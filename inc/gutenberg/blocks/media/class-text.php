@@ -44,21 +44,26 @@ class Text extends Dynamic {
 	protected $block_name = 'media-text';
 
 	/**
-	 * Shortcircuit Register
+	 * Block args.
+	 *
+	 * @return 	array
 	 */
-	public function register() {
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'	], 20, 2 );
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
 	}
 
 	/**
-	 * Filter Image
-	 * 
-	 * @param 	string 	$content
-	 * @param 	array 	$block
-	 * 
-	 * @return 	string
+	 * Dynamically renders the `core/media-text` block.
+	 *
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
+	 *
+	 * @return 	string 	The block markup.
 	 */
-	public function render( string $content = '', $block = [] ): string {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		$dom	= $this->dom( $content );
 		$div  	= get_dom_element( 'figure', $dom );
 		$link 	= get_dom_element( 'a', $div );

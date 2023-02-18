@@ -43,11 +43,6 @@ class File extends Dynamic {
 	protected $block_name = 'file';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {}
-
-	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.

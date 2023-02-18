@@ -41,11 +41,6 @@ class Embed extends Dynamic {
 	protected $block_name = 'embed';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {}
-
-	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.

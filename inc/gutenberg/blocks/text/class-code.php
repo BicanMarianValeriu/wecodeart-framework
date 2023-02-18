@@ -42,11 +42,6 @@ class Code extends Dynamic {
 	protected $block_name = 'code';
 
 	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {}
-
-	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.

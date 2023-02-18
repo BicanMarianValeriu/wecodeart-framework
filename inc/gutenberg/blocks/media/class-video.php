@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -39,11 +39,6 @@ class Video extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'video';
-
-	/**
-	 * Shortcircuit Register
-	 */
-	public function register() {}
 
 	/**
 	 * Block styles
