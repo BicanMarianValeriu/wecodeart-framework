@@ -63,7 +63,7 @@ abstract class Dynamic {
 	/**
 	 * Registers the block type with WordPress.
 	 */
-	protected function register() {
+	private function register() {
 		if( $this->register ) {
 			call_user_func_array( 'register_block_type', [ $this->get_block_type(), [
 				'render_callback' 	=> [ $this, 'get_render_callback' ],
