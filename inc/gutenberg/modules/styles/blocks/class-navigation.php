@@ -29,44 +29,32 @@ class Navigation extends Base {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {	
-		$output	= [
-			'element' => $this->get_selector()
-		];
-
+	protected function process_extra(): void {
+		// Navigation background
 		if ( $value = get_prop( $this->attrs, 'customBackgroundColor' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-color',
-				'value'	  	=> $value
-			], $output );
+			$this->add_declarations( [
+				'background-color' => $value
+			] );
 		}
 
 		// Navigation item color.
-		$output['element'] = $this->get_selector( ' .navbar-nav .nav-link' );
-
 		if ( $value = get_prop( $this->attrs, 'customTextColor' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'color',
-				'value'	  	=> $value
-			], $output );
+			$this->add_declarations( [
+				'color' => $value
+			], $this->get_selector( ' .navbar-nav .nav-link' ) );
 		}
 		
 		// Dropdown items.
-		$output['element'] = $this->get_selector( ' .dropdown-menu' );
+		$dropdown_selector 	= $this->get_selector( ' .dropdown-menu' );
+		$dropdown_rules		= [];
 
 		// Dropdown items color.
 		if ( $value = get_prop( $this->attrs, 'overlayTextColor' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--dropdown-color',
-				'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $value )
-			], $output );
+			$dropdown_rules['--wp--dropdown-color'] = sprintf( 'var(--wp--preset--color--%s)', $value );
 		}
 		
 		if ( $value = get_prop( $this->attrs, 'customOverlayTextColor' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--dropdown-color',
-				'value'	  	=> $value
-			], $output );
+			$dropdown_rules['--wp--dropdown-color'] = $value;
 		}
 
 		// Dropdown items background color.
@@ -75,26 +63,16 @@ class Navigation extends Base {
 
 		if ( $value = get_prop( $this->attrs, 'overlayBackgroundColor' ) ) {
 			$named_color = $value;
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--dropdown-bg',
-				'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $value )
-			], $output );
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--dropdown-border-color',
-				'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $value )
-			], $output );
+
+			$dropdown_rules['--wp--dropdown-bg']			= sprintf( 'var(--wp--preset--color--%s)', $value );
+			$dropdown_rules['--wp--dropdown-border-color'] 	= sprintf( 'var(--wp--preset--color--%s)', $value );
 		}
 
 		if ( $value = get_prop( $this->attrs, 'customOverlayBackgroundColor' ) ) {
 			$hex_color = $value;
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--dropdown-bg',
-				'value'	  	=> $value
-			], $output );
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--dropdown-border-color',
-				'value'	  	=> $value
-			], $output );
+			
+			$dropdown_rules['--wp--dropdown-bg']			= $value;
+			$dropdown_rules['--wp--dropdown-border-color'] 	= $value;
 		}
 
 		// Dropdown active state
@@ -107,14 +85,13 @@ class Navigation extends Base {
 
 		if( $hex_color !== null ) {
 			$darken_color = wecodeart( 'styles' )::hex_brightness( $hex_color, -25 );
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--dropdown-link-hover-bg',
-				'value'	  	=> $darken_color
-			], $output );
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--dropdown-link-active-bg',
-				'value'	  	=> $darken_color
-			], $output );
+
+			$dropdown_rules['--wp--dropdown-link-hover-bg']		= $darken_color;
+			$dropdown_rules['--wp--dropdown-link-active-bg']	= $darken_color;
+		}
+
+		if( ! empty( $declarations ) ) {
+			$this->add_declarations( $dropdown_rules, $dropdown_selector );
 		}
 	}
 }

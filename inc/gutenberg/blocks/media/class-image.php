@@ -47,7 +47,25 @@ class Image extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'	], 20, 2 );
+		\add_filter( 'register_block_type_args',				[ $this, 'block_type_args'	], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'			], 20, 2 );
+	}
+
+	/**
+	 * Block args
+	 *
+	 * @since	5.7.2
+	 * @version	5.7.2
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( $args, $block_name ) {
+		if ( $block_name === $this->get_block_type() || $block_name === 'core/avatar' /* Same markup */ ) {
+			$selectors = array_merge( (array) get_prop( $args, [ 'supports', '__experimentalSelector' ], [] ), [ ' :where(img,svg)' ] );
+			$args['supports']['__experimentalSelector'] = implode( ',', array_filter( $selectors ) );
+		}
+
+		return $args;
 	}
 
 	/**
@@ -64,8 +82,8 @@ class Image extends Dynamic {
 		$link 	= get_dom_element( 'a', $div );
 		$img  	= get_dom_element( 'img', $link ?? $div );
 
-		// If no image, bail early.
-		if ( ! $img->getAttribute( 'src' ) ) {
+		// If no image, use placeholder.
+		if ( $img && ! $img->getAttribute( 'src' ) ) {
 			$img->setAttribute( 'class', 'wp-block-image__placeholder' );
 			$img->setAttribute( 'src', get_placeholder_source() );
 			$img->setAttribute( 'alt', esc_attr__( 'Placeholder', 'wecodeart' ) );
@@ -118,6 +136,9 @@ class Image extends Dynamic {
 		/* Block */
 		.wp-block-image {
 			margin: 0;
+		}
+		.wp-block-image.alignfull {
+			max-width: initial;
 		}
 		.wp-block-image.aligncenter {
 			text-align: center;

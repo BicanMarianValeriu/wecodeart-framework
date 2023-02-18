@@ -31,6 +31,13 @@ class Styles implements Integration {
 	use Asset;
 
 	/**
+	 * The CSS context for style engine.
+	 *
+	 * @var string
+	 */
+	const CONTEXT 	= 'attributes';
+
+	/**
 	 * The CSS ID for registered style.
 	 *
 	 * @var string
@@ -98,7 +105,6 @@ class Styles implements Integration {
 		] );
 
 		// Hooks
-		add_filter( 'wecodeart/filter/gutenberg/styles/selector',	[ $this, 'filter_selectors'	], 10, 2 );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
@@ -210,43 +216,23 @@ class Styles implements Integration {
 			$classes	= $processed->get_classes();
 			$filters	= $processed->get_duotone();
 			
-			// Process CSS, add prefixes and convert to string!
+			// Process Custom styles.
 			if( $styles ) {
 				$this->styles[$block_id] = $styles;
 			}
 			
-			// Process Duotone SVG filters
+			// Process Duotone SVG filters.
 			if( $filters ) {
 				$this->filters[$block_id] = $filters;
 			}
 			
-			// Utilities CSS
+			// Utilities CSS.
 			if( $classes ) {
 				$this->classes = array_merge( $this->classes, $classes );
 			}
 		}
 
 		return (string) $content;
-	}
-
-	/**
-	 * Filter CSS selector
-	 *
-	 * @param	string 	$selector
-	 * @param	array 	$block
-	 *
-	 * @return 	string
-	 */
-	public function filter_selectors( $selector, $block ) {
-		if( $block === 'core/avatar' ) {
-			$selector .= ' img';
-		}
-
-		if( $block === 'core/image' ) {
-			$selector = $selector . ' img, ' . $selector . ' svg';
-		}
-
-		return $selector;
 	}
 
 	/**
@@ -284,6 +270,8 @@ class Styles implements Integration {
 		wp_register_style( self::CSS_ID, false, [], true, true );
 		wp_add_inline_style( self::CSS_ID, $inline_css );
 		wp_enqueue_style( self::CSS_ID );
+
+		wp_style_engine_get_stylesheet_from_context( self::CONTEXT );
 	}
 	
 	/**
@@ -388,7 +376,7 @@ class Styles implements Integration {
 	 *
 	 * @return 	array
 	 */
-	public static function core_blocks( $exclude = false ) {
+	public static function core_blocks( $exclude = false ): array {
 		$blocks = apply_filters( 'wecodeart/filter/gutenberg/styles/core', [
 			'core/archives',
 			'core/audio',
@@ -502,7 +490,7 @@ class Styles implements Integration {
 	 *
 	 * @return 	array
 	 */
-	public static function collect_classes( array $blocks = [] ) {
+	public static function collect_classes( array $blocks = [] ): array {
 		$return = [];
 
 		foreach( $blocks as $block ) {

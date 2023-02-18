@@ -30,49 +30,36 @@ class Social extends Base {
 	 * @return 	void
 	 */
 	protected function process_extra(): void {
-		$output	= [
-			'element' => join( '>', [ $this->get_selector() . ':not(.is-style-logos-only)', '.wp-block-social-link', 'a' ] )
-		];
-
-		$classnames = explode( ' ', get_prop( $this->attrs, 'className', '' ) );
+		$declarations 	= [];
+		$selector 		= join( '>', [ $this->get_selector( ':not(.is-style-logos-only)' ), '.wp-block-social-link', 'a' ] );
+		$classnames 	= explode( ' ', get_prop( $this->attrs, 'className', '' ) );
 
 		if( in_array( 'is-style-logos-only', $classnames ) ) {
-			$output['element'] 	= join( '>', [ $this->get_selector() . '.is-style-logos-only', '.wp-block-social-link', 'a' ] );
+			$selector	= join( '>', [ $this->get_selector( '.is-style-logos-only' ), '.wp-block-social-link', 'a' ] );
 		}
 
 		// Background Color 
 		if ( $value = get_prop( $this->attrs, 'customIconBackgroundColor' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-color',
-				'value'	  	=> $value,
-			], $output );
+			$declarations['background-color'] = $value;
 		} else if ( $value = get_prop( $this->attrs, 'iconBackgroundColor' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-color',
-				'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $value )
-			], $output );
+			$declarations['background-color'] = sprintf( 'var(--wp--preset--color--%s)', $value );
 		}
 
 		// Icon color
 		if ( $value = get_prop( $this->attrs, 'customIconColor' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'color',
-				'value'	  	=> $value,
-			], $output );
+			$declarations['color'] = $value;
 		} else if ( $value = get_prop( $this->attrs, 'iconColor' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'color',
-				'value'	  	=> sprintf( 'var(--wp--preset--color--%s)', $value )
-			], $output );
+			$declarations['color'] = sprintf( 'var(--wp--preset--color--%s)', $value );
 		}
 
 		// Size
 		if ( $value = get_prop( $this->attrs, 'size' ) ) {
-			$value = explode( '-', $value ); 
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'font-size',
-				'value'	  	=> sprintf( 'var(--wp--preset--font-size--%s)', $value[1] )
-			], $output );
+			$value = explode( '-', $value );
+			$declarations['font-size'] = sprintf( 'var(--wp--preset--font-size--%s)', $value[1] );
+		}
+
+		if( ! empty( $declarations ) ) {
+			$this->add_declarations( $declarations, $selector );
 		}
 	}
 }

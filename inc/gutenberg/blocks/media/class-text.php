@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.6.7
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_dom_element;
 use function WeCodeArt\Functions\get_placeholder_source;
 
 /**
@@ -45,7 +46,38 @@ class Text extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {}
+	public function register() {
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'	], 20, 2 );
+	}
+
+	/**
+	 * Filter Image
+	 * 
+	 * @param 	string 	$content
+	 * @param 	array 	$block
+	 * 
+	 * @return 	string
+	 */
+	public function render( string $content = '', $block = [] ): string {
+		$dom	= $this->dom( $content );
+		$div  	= get_dom_element( 'figure', $dom );
+		$link 	= get_dom_element( 'a', $div );
+		$img  	= get_dom_element( 'img', $link ?? $div );
+
+		// If no image, add placeholder.
+		if ( ! $img ) {
+			
+			$image = $dom->createElement( 'img' );
+
+			$image->setAttribute( 'class', 'wp-block-media-text__placeholder' );
+			$image->setAttribute( 'src', get_placeholder_source() );
+			$image->setAttribute( 'alt', esc_html__( 'Placeholder', 'wecodeart' ) );
+			
+			( $link ?? $div )->appendChild( $image );
+		}
+
+		return $dom->saveHTML();
+	}
 
 	/**
 	 * Block styles
@@ -81,6 +113,10 @@ class Text extends Dynamic {
 			display: block;
 			width: 100%;
 			object-fit: cover;
+		}
+		.wp-block-media-text__media .wp-block-media-text__placeholder {
+			object-fit: initial;
+			min-height: 250px;
 		}
 		.is-image-fill .wp-block-media-text__media {
 			position: relative;

@@ -201,7 +201,7 @@ class Search extends Dynamic {
 		}
 
 		if( $wrapper === 'button' ) {
-			$classnames = [ 'wp-element-button' ];
+			$classnames = [ 'wp-block-search__button', 'wp-element-button' ];
 			
 			if( $value = get_prop( $attributes, [ 'gradient' ] ) ) {
 				$classnames[] = 'has-' . $value . '-gradient-background';

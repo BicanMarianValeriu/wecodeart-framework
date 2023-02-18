@@ -16,8 +16,11 @@ namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Support\Styles\Property\Focal;
+use WeCodeArt\Support\Styles\Property\Background;
 use WeCodeArt\Gutenberg\Modules\Styles\Blocks as Base;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_placeholder_source;
 
 /**
  * Block CSS Processor
@@ -29,66 +32,47 @@ class Cover extends Base {
 	 * @return 	void
 	 */
 	protected function process_extra(): void {		
-		$output	= [
-			'element' => $this->get_selector()
-		];
-
 		// Block Attributes
-		if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
-			$this->output[] = wp_parse_args( [
-				'element'	=> [
-					$this->get_selector( '> .wp-block-cover__image-background' ),
-					$this->get_selector( '> .wp-block-cover__video-background' )
-				],
-				'property' 	=> 'object-position',
-				'value'	  	=> $value
-			], $output );
-		}
+		$declarations	= [];
 
 		if ( $value = get_prop( $this->attrs, 'minHeight' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'min-height',
-				'value'	  	=> $value,
-				'units'		=> get_prop( $this->attrs, 'minHeightUnit', 'px' )
-			], $output );
+			$declarations['min-height'] = $value . get_prop( $this->attrs, 'minHeightUnit', 'px' );
 		}
 
 		if ( $value = get_prop( $this->attrs, 'url' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-image',
-				'value'	  	=> $value,
-			], $output );
+			$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
 		}
 
 		if ( $value = get_prop( $this->attrs, 'customOverlayColor' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-color',
-				'value'	  	=> $value
-			], $output );
+			$declarations['background-color'] = $value;
 		}
 		
 		if ( $value = get_prop( $this->attrs, 'hasParallax' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-attachment',
-				'value'	  	=> 'fixed'
-			], $output );
+			$declarations['background-attachment'] = 'fixed';
 		}
 
-		if ( $value = get_prop( $this->attrs, 'customGradient' ) ) {
-			$this->output[] = wp_parse_args( [
-				'element'	=> $this->get_selector( '> .has-background-gradient' ),
-				'property' 	=> 'background-image',
-				'value'	  	=> $value,
-			], $output );
+		if( get_prop( $this->attrs, 'useFeaturedImage' ) ) {
+			$value = get_post_thumbnail_id() ?: get_placeholder_source();
+			$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
 		}
 		
-		if( get_prop( $this->attrs, 'useFeaturedImage' ) ) {
-			$placeholder = wecodeart_config( 'placeholder', false );
-			
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-image',
-				'value'	  	=> get_post_thumbnail_id() ?: get_prop( $placeholder, [ 'src' ] ),
-			], $output );
+		$this->add_declarations( $declarations );
+
+		// Gradient Selector
+		if ( $value = get_prop( $this->attrs, 'customGradient' ) ) {
+			$this->add_declarations( [
+				'background-image' => $value
+			], $this->get_selector( '>.has-background-gradient' ) );
+		}
+
+		// Focal Selector
+		if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
+			$this->add_declarations( [
+				'object-position' => ( new Focal( 'object-position', $value ) )->get_value()
+			], join( ', ', [
+				$this->get_selector( '>.wp-block-cover__image-background' ),
+				$this->get_selector( '>.wp-block-cover__video-background' )
+			] ) );
 		}
 	}
 }

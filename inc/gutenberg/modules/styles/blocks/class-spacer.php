@@ -29,27 +29,21 @@ class Spacer extends Base {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {	
-		$output	= [
-			'element' => $this->get_selector()
-		];
-
+	protected function process_extra(): void {
+		$declarations = [];
+		
 		// Height
 		if ( $value = get_prop( $this->attrs, 'height', '100px' ) ) {
-			// Mobile Spacer can be reduced using custom CSS variable
-			array_unshift( $this->output, wp_parse_args( [
-				'property' 	=> '--wp--spacer-height',
-				'value'	  	=> $value,
-			], $output ) );
+			$declarations['--wp--spacer-height'] = $value;
 		}
 		
 		// Width
 		if ( $value = get_prop( $this->attrs, 'width' ) ) {
-			// Mobile Spacer can be reduced using custom CSS variable
-			array_unshift( $this->output, wp_parse_args( [
-				'property' 	=> '--wp--spacer-width',
-				'value'	  	=> $value,
-			], $output ) );
+			$declarations['--wp--spacer-height'] = $value;
+		}
+
+		if( ! empty( $declarations ) ) {
+			$this->add_declarations( $declarations, $selector );
 		}
 	}
 }

@@ -17,6 +17,8 @@ namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Support\Styles\Property\Focal;
+use WeCodeArt\Support\Styles\Property\Background;
 use WeCodeArt\Gutenberg\Modules\Styles\Blocks as Base;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_placeholder_source;
@@ -31,25 +33,14 @@ class Media extends Base {
 	 * @return 	void
 	 */
 	protected function process_extra(): void {
-		$output	= [
-			'element' => $this->get_selector( '> .wp-block-media-text__media' )
-		];
+		$selector 		= $this->get_selector( '> .wp-block-media-text__media' );
+		$declarations 	= [];
 		
 		// Handle width
 		if ( $value = get_prop( $this->attrs, 'mediaWidth' ) ) {
-			$this->output[] = wp_parse_args( [
-				'element'	=> $this->get_selector(),
-				'property' 	=> 'grid-template-columns',
-				'value'	  	=> "{$value}% auto",
-			], $output );
-		}
-
-		// Placeholder
-		if( ! get_prop( $this->attrs, 'mediaLink' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'background-image',
-				'value'	  	=> get_placeholder_source()
-			], $output );
+			$this->add_declarations( [
+				'grid-template-columns' => "{$value}% auto",
+			] );
 		}
 
 		// Handle media image if is used as column filler
@@ -57,31 +48,23 @@ class Media extends Base {
 			if( get_prop( $this->attrs, 'imageFill' ) ) {
 				if ( $value = get_prop( $this->attrs, 'mediaId' ) ) {
 					if( $media = wp_get_attachment_image_url( $value, get_prop( $this->attrs, 'mediaSizeSlug', 'full' ) ) ) {
-						$this->output[] = wp_parse_args( [
-							'property' 	=> 'background-image',
-							'value'	  	=> $media
-						], $output );
-					// Fallback to WP.org patterns (however some of them have wp.org page url instead of a media file)
+						$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
+						// Fallback to WP.org patterns (however some of them have wp.org page url instead of a media file)
 					} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
-						$this->output[] = wp_parse_args( [
-							'property' 	=> 'background-image',
-							'value'	  	=> $value
-						], $output );
+						$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
 					}
 				} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'background-image',
-						'value'	  	=> $value
-					], $output );
+					$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
 				}
 		
 				if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'background-position',
-						'value'	  	=> $value
-					], $output );
+					$declarations['background-position'] = ( new Focal( 'object-position', $value ) )->get_value();
 				}
 			}
+		}
+
+		if( ! empty( $declarations ) ) {
+			$this->add_declarations( $declarations, $selector );
 		}
 	}
 }

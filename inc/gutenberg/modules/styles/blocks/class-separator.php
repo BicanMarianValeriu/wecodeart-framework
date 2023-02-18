@@ -29,17 +29,12 @@ class Separator extends Base {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {	
-		$output	= [
-			'element' => $this->get_selector()
-		];
-		
+	protected function process_extra(): void {
 		// Background HR styleing
 		if ( $value = get_prop( $this->attrs, [ 'style', 'color', 'background' ] ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'color',
-				'value'	  	=> $value
-			], $output );
+			$this->add_declarations( [
+				'color' => $value
+			], $this->get_selector() );
 		}
 	}
 }

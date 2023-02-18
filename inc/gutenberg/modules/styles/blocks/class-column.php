@@ -29,17 +29,12 @@ class Column extends Base {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {		
-		$output	= [
-			'element' => $this->get_selector()
-		];
-		
+	protected function process_extra(): void {
 		// Custom Width
 		if ( $value = get_prop( $this->attrs, 'width' ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'flex',
-				'value'	  	=> sprintf( '0 0 %s', $value ),
-			], $output );
+			$this->add_declarations( [
+				'flex'	=> sprintf( '0 0 %s', $value ),
+			] );
 		}
 	}
 }

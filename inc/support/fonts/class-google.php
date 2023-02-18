@@ -61,7 +61,7 @@ final class Google {
 		array_map( [ $this, 'add_font' ], $fonts );
 
 		add_filter( 'wp_theme_json_data_theme', [ $this, 'register_json' 	] );
-		add_action( 'wp_enqueue_scripts', 		[ $this, 'register_styles' 	] );
+		add_action( 'wp_enqueue_scripts', 		[ $this, 'register_styles' 	], 0 );
 		add_action( 'admin_init', 				[ $this, 'register_styles' 	] );
 	}
 

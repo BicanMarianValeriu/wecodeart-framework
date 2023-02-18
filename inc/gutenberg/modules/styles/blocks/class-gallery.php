@@ -29,17 +29,7 @@ class Gallery extends Base {
 	 * @return 	void
 	 */
 	protected function process_extra(): void {
-		$output	= [
-			'element' => '.wp-block-gallery' . $this->get_selector()
-		];
-
-		// Columns
-		if( $columns = get_prop( $this->attrs, 'columns', 3 ) ) {
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--columns',
-				'value'	  	=> $columns
-			], $output );
-		}
+		$declarations = [];
 
 		// Gap
 		if( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ] ) ) {
@@ -72,16 +62,16 @@ class Gallery extends Base {
 				}
 			}
 
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--style--block-gap',
-				'value'	  	=> $gap
-			], $output );
+			$declarations['--wp--style--block-gap'] = $gap;
+		}
 
-			// Unset default gap
-			$this->output[] = wp_parse_args( [
-				'property' 	=> 'gap',
-				'value'	  	=> null
-			], $output );
+		// Columns
+		if( $columns = get_prop( $this->attrs, 'columns', 3 ) ) {
+			$declarations['--wp--columns'] = $columns;
+		}
+
+		if( ! empty( $declarations ) ) {
+			$this->add_declarations( $declarations );
 		}
 	}
 }

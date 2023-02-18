@@ -29,112 +29,28 @@ class Search extends Base {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {		
-		$this->output	= []; // Reset output		
-
-		$output	= [
-			'element' => [
-				$this->get_selector( ' .wp-block-search__input' ),
-				$this->get_selector( ' .wp-element-button' )
-			]
-		];
-
-		// Inline Style
+	protected function process_extra(): void {
+		// Width
 		if( ! in_array( get_prop( $this->attrs, 'width' ), [ 25, 50, 75, 100 ] ) ) {
-			$this->output[] = wp_parse_args( [
-				'element'	=> $this->get_selector( ' .wp-block-search__fields' ),
-				'property' 	=> 'width',
-				'value'	  	=> get_prop( $this->attrs, 'width' ),
-				'units'		=> get_prop( $this->attrs, 'widthUnit' )
-			], $output );
+			$this->add_declarations( [
+				'width' => get_prop( $this->attrs, 'width' ) . get_prop( $this->attrs, 'widthUnit' )
+			], $this->get_selector( ' .wp-block-search__fields' ) );
 		}
 
-		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
-			// Border
-			if( $border = get_prop( $css_style, 'border', [] ) ) {
-				// Handle individual borders in upcoming WP 6.1
-				$directions = wp_array_slice_assoc( $border, [ 'top', 'left', 'right', 'bottom' ] );
+		// Update Selector
+		$new_selector = join( ', ', [
+			$this->get_selector( ' .wp-block-search__input' ),
+			$this->get_selector( ' .wp-element-button' )
+		] );
 
-				foreach( $directions as $dir => $value ) {
-					$color = get_prop( $value, 'color' );
-					if ( strpos( $color, 'var:preset|color' ) !== false ) {
-						$color = sprintf( 'var(--wp--preset--color--%s)', substr( $color, strrpos( $color, '|' ) + 1 ) );
-					}
-
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-' . $dir,
-						'value'	  	=> trim( sprintf(
-							'%s %s %s',
-							get_prop( $value, 'width' ),
-							get_prop( $value, 'style', 'solid' ),
-							$color
-						) )
-					], $output );
-				}
-
-				if ( $value = get_prop( $border, 'width' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-width',
-						'value'	  	=> $value
-					], $output );
-				}
-
-				if ( $value = get_prop( $border, 'color' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-color',
-						'value'	  	=> $value
-					], $output );
-				}
-
-				if ( $value = get_prop( $border, 'radius' ) ) {
-					if ( is_array( $value ) ) {
-						// We have individual border radius corner values.
-						foreach ( $value as $key => $radius ) {
-							// Convert CamelCase corner name to kebab-case.
-							$corner   = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $key ) );
-							$this->output[] = wp_parse_args( [
-								'property' 	=> sprintf( 'border-%s-radius', $corner ),
-								'value'	  	=> $radius,
-							], $output );
-						}
-					} else {
-						$this->output[] = wp_parse_args( [
-							'property' 	=> 'border-radius',
-							'value'	  	=> $value,
-							'units'		=> is_numeric( $value ) ? 'px' : null
-						], $output );
-					}
-				}
+		add_filter( 'wecodeart/filter/gutenberg/styles/selector', function( $selector, $name ) use ( $new_selector ) {
+			if( 'core/search' === $name ) {
+				$selector = $new_selector;
 			}
+			
+			remove_filter( current_filter(), __FUNCTION__ );
 
-			// Colors
-			if ( $color = get_prop( $css_style, 'color' ) ) {
-				$output['element'] = $this->get_selector( ' .wp-element-button' );
-
-				// Text
-				if ( $value = get_prop( $color, 'text' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'color',
-						'value'	  	=> $value
-					], $output );
-				}
-				
-				// Background
-				if ( $value = get_prop( $color, 'background' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'background-color',
-						'value'	  	=> $value
-					], $output );
-				}
-
-				// Gradient
-				if ( $value = get_prop( $color, 'gradient' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'background-image',
-						'value'	  	=> $value
-					], $output );
-				}
-			}
-		}
+			return $selector;
+		}, 10, 2 );
 	}
 }

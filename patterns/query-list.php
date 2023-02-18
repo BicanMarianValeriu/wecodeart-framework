@@ -13,11 +13,11 @@
     <!-- wp:term-description /-->
 
     <!-- wp:post-template {"className":"my-5"} -->
-    <!-- wp:columns {"className":"flex-column flex-md-row gap-5 px-0 mb-5"} -->
-    <div class="wp-block-columns flex-column flex-md-row gap-5 px-0 mb-5">
+    <!-- wp:columns {"className":"flex-column flex-md-row g-5 mb-5"} -->
+    <div class="wp-block-columns flex-column flex-md-row g-5 mb-5">
         <!-- wp:column {"className":"col-md-5 col-lg-4"} -->
         <div class="wp-block-column col-md-5 col-lg-4">
-            <!-- wp:post-featured-image {"isLink":true,"className":"mb-3 mb-md-0"} /-->
+            <!-- wp:post-featured-image {"isLink":true} /-->
         </div>
         <!-- /wp:column -->
         <!-- wp:column -->

@@ -238,7 +238,7 @@ abstract class Processor {
 			}
 
 			// Output based on context
-			if ( ( is_admin() && ! is_customize_preview() ) || ( isset( $_GET['editor'] ) && '1' === $_GET['editor'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			if ( is_admin() || ( isset( $_GET['editor'] ) && '1' === $_GET['editor'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				// Check if this is an admin style.
 				if ( ! isset( $output['context'] ) || ! in_array( 'editor', $output['context'], true ) ) {
 					continue;
@@ -313,8 +313,6 @@ abstract class Processor {
 	 */
 	protected function get_property_value( string $property, $value ) {
 		$properties = apply_filters( 'wecodeart/filter/styles/process/properties', [
-			'--wp--font-sans-serif'	=> Property\Font::class,
-			'--wp--font-secondary'	=> Property\Font::class,
 			'font-family' 			=> Property\Font::class,
 			'background' 			=> Property\Background::class,
 			'background-image'		=> Property\Background::class,
@@ -339,12 +337,7 @@ abstract class Processor {
 	 * @return 	string|array
 	 */
 	protected function process_value( $output ) {
-		if ( isset( $output['property'] ) ) {
-			return $this->get_property_value( $output['property'], $output['value'] );
-		}
-		
-		// Unfiltered for rare cases
-		return $output['value'];
+		return $this->get_property_value( $output['property'], $output['value'] );
 	}
 
 	/**

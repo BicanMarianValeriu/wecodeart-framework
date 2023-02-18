@@ -31,9 +31,7 @@ class Featured extends Base {
 	 * @return 	void
 	 */
 	protected function process_extra(): void {
-		$output	= [
-			'element' => $this->get_selector()
-		];
+		$declarations	= [];
 		
 		if( Image::use_ratio() ) {
 			$height = get_prop( $this->attrs, 'height', '' );
@@ -46,6 +44,7 @@ class Featured extends Base {
 			if( strpos( $width, 'px' ) ) {
 				$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "",  $width );
 			}
+
 			if( strpos( $width, 'rem' ) || strpos( $width, 'em' ) ) {
 				$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "", $width ) * 16;
 			}
@@ -60,39 +59,26 @@ class Featured extends Base {
 
 			$dummy_sizes	= wp_parse_args( $custom_sizes, $requested_size );
 
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--width',
-				'value'	  	=> absint( $dummy_sizes['width'] ),
-			], $output );
+			$declarations['--wp--width'] = absint( $dummy_sizes['width'] );
+			$declarations['--wp--height'] = absint( $dummy_sizes['height'] );
 
-			$this->output[] = wp_parse_args( [
-				'property' 	=> '--wp--height',
-				'value'	  	=> absint( $dummy_sizes['height'] ),
-			], $output );
+			$this->add_declarations( $declarations );
 
 		} else {
 			if( $width = get_prop( $this->attrs, 'width' ) ) {
-				$this->output[] = wp_parse_args( [
-					'element' 	=> $this->get_selector( ' img' ),
-					'property' 	=> 'width',
-					'value'	  	=> $width
-				], $output );
+				$declarations['width'] = $width;
 			}
 			if( $height = get_prop( $this->attrs, 'height' ) ) {
-				$this->output[] = wp_parse_args( [
-					'element' 	=> $this->get_selector( ' img' ),
-					'property' 	=> 'height',
-					'value'	  	=> $height
-				], $output );
-			} 
+				$declarations['height'] = $height;
+			}
+
+			$this->add_declarations( $declarations, $this->get_selector( ' img' ) );
 		}
 
 		if( $value = get_prop( $this->attrs, 'scale' ) ) {
-			$this->output[] = wp_parse_args( [
-				'element' 	=> $this->get_selector( ' img' ),
-				'property' 	=> 'object-fit',
-				'value'	  	=> $value
-			], $output );
+			$declarations['object-fit'] = $value;
+			
+			$this->add_declarations( $declarations, $this->get_selector( ' img' ) );
 		}
 	}
 }

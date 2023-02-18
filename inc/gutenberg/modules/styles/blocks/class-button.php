@@ -30,28 +30,18 @@ class Button extends Base {
 	 * @return 	void
 	 */
 	protected function process_extra(): void {
-		$output	= [
-			'element' => $this->get_selector()
-		];
-
 		// Inline Style
 		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
 			// Color
 			if( $color = get_prop( $css_style, 'color' ) ) {
 				if( $text = get_prop( $color, 'text' ) ) {
-					$value 	= wecodeart( 'styles' )::color_to_rgba( $text );
-					preg_match( '/\((.*?)\)/', $value, $color );
+					$value	= wecodeart( 'styles' )::color_to_rgba( $text );
+					preg_match( '/\((.*?)\)/', $value, $rgb );
 					
-					// We put CSS vars first!
-					array_unshift( $this->output, wp_parse_args( [
-						'property' 	=> '--wp--color--rgb',
-						'value'	  	=> $color[1]
-					], $output ) );
-
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'color',
-						'value'	  	=> $text,
-					], $output );
+					$this->add_declarations( [
+						'--wp--color--rgb' 	=> $rgb[1],
+						'color' 			=> $value,
+					] );
 				}
 			}
 		}

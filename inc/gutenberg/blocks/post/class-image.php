@@ -137,7 +137,6 @@ class Image extends Dynamic {
 						'attrs'	=> [
 							'href' 	=> get_permalink( $post_ID ),
 							'class'	=> $context . '__link',
-							'style'	=> sprintf( '--wp--aspect-ratio:%s;', $dummy_ratio )
 						]
 					]
 				] );
@@ -152,7 +151,7 @@ class Image extends Dynamic {
 			'tag' 	=> 'figure',
 			'attrs' => [
 				'class' => join( ' ', $classnames ),
-				'style'	=> ( ! $link && $use_ratio ) ? sprintf( '--wp--aspect-ratio:%s;', $dummy_ratio ) : null
+				'style'	=> $use_ratio ? sprintf( '--wp--aspect-ratio:%s;', $dummy_ratio ) : null
 			]
 		] ], function( $post_ID, $size_slug ) {
 

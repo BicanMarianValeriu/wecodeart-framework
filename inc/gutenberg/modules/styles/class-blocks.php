@@ -16,6 +16,7 @@ namespace WeCodeArt\Gutenberg\Modules\Styles;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Gutenberg\Modules\Styles;
 use WeCodeArt\Support\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
@@ -26,7 +27,6 @@ use function WeCodeArt\Functions\get_prop;
  * Any extends of this class, should use process_extra() method for extending the attributes processor.
  */
 class Blocks extends Processor {
-
 	/**
 	 * Block Name.
 	 *
@@ -52,292 +52,44 @@ class Blocks extends Processor {
 		$this->name		= get_prop( $args, 'blockName' );
 		$this->attrs	= get_prop( $args, 'attrs', [] );
 		$this->block_id	= wp_unique_id( 'css-' );
-
-		// Process CSS
-		$this->process_attributes();
 		
 		if( method_exists( $this, 'process_extra' ) ) {
-			// Extra attributes
+			// Process extra attributes
 			$this->process_extra();
 		}
 
-		// Parse CSS
+		// Process Styles
+		$this->process_style();
+
+		// Parse Styles
 		$this->parse_output();
 		$this->parse_custom();
 	}
 
 	/**
-	 * Parses attributes and creates the styles array for them.
+	 * Get uniqueID.
 	 *
-	 * @return 	void
+	 * @return 	array
 	 */
-	protected function process_attributes(): void {
-		$this->output = [];
-
-		$output	= [
-			'element' => $this->get_selector()
-		];
-			
-		// Inline Style
-		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
-			// Typography
-			if ( $typography = get_prop( $css_style, 'typography' ) ) {
-				if ( $value = get_prop( $typography, 'fontSize' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'font-size',
-						'value'	  	=> $value,
-					], $output );
-				}
-	
-				if ( $value = get_prop( $typography, 'fontWeight' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'font-weight',
-						'value'	  	=> $value
-					], $output );
-				}
-
-				if ( $value = get_prop( $typography, 'fontStyle' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'font-style',
-						'value'	  	=> $value
-					], $output );
-				}
-				
-				if ( $value = get_prop( $typography, 'lineHeight' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'line-height',
-						'value'	  	=> $value,
-					], $output );
-				}
-	
-				if ( $value = get_prop( $typography, 'textTransform' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'text-transform',
-						'value'	  	=> $value
-					], $output );
-				}
-	
-				if ( $value = get_prop( $typography, 'textDecoration' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'text-decoration',
-						'value'	  	=> $value
-					], $output );
-				}
-				
-				if ( $value = get_prop( $typography, 'letterSpacing' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'letter-spacing',
-						'value'	  	=> $value
-					], $output );
-				}
-			}
-
-			// Colors
-			if ( $color = get_prop( $css_style, 'color' ) ) {
-				// Text
-				if ( $value = get_prop( $color, 'text' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'color',
-						'value'	  	=> $value
-					], $output );
-
-					// wp_style_engine_get_stylesheet_from_css_rules( [
-					// [
-					// 	'selector'     => $this->get_selector(),
-					// 	'declarations' => [
-					// 		'color' => $value,
-					// 	],
-					// ] ], [
-					// 	'context'  => 'block-supports',
-					// 	'prettify' => false,
-					// ] );
-				}
-
-				// Background
-				if ( $value = get_prop( $color, 'background' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'background-color',
-						'value'	  	=> $value
-					], $output );
-				}
-
-				// Gradient
-				if ( $value = get_prop( $color, 'gradient' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'background-image',
-						'value'	  	=> $value
-					], $output );
-				}
-				
-				// Duotone
-				if ( $value = get_prop( $color, 'duotone' ) ) {
-					$this->output[] = wp_parse_args( [
-						'element'	=> $this->get_selector(),
-						'property' 	=> 'filter',
-						'value'	  	=> sprintf( 'url(#wp-duotone-%s)', ltrim( $this->element, '.' ) )
-					], $output );
-				}
-			}
-
-			// Spacing
-			if ( $spacing = get_prop( $css_style, 'spacing' ) ) {
-				// Padding
-				if ( $padding = get_prop( $spacing, 'padding', [] ) ) {
-					if( ! empty( $padding ) ) {
-						if( count( $padding ) === 4 && count( array_unique( $padding ) ) === 1 ) {
-							$padding = current( $padding );
-
-							// Is WP way of saved color
-							if( mb_strpos( $padding, 'var:preset|spacing' ) !== false ) {
-								$padding = explode( '|', $padding );
-								$padding = sprintf( 'var(--wp--preset--spacing--%s)', end( $padding ) );
-							}
-
-							$this->output[] = wp_parse_args( [
-								'property' 	=> 'padding',
-								'value'	  	=> $padding
-							], $output );
-						} else {
-							foreach( $padding as $dir => $val ) {
-								// Is WP way of saved color
-								if( mb_strpos( $val, 'var:preset|spacing' ) !== false ) {
-									$val = explode( '|', $val );
-									$val = sprintf( 'var(--wp--preset--spacing--%s)', end( $val ) );
-								}
-								
-								$this->output[] = wp_parse_args( [
-									'property' 	=> 'padding-' . $dir,
-									'value'	  	=> $val
-								], $output );
-							}
-						}
-					}
-				}
-
-				// Margin
-				if ( $margin = get_prop( $spacing, 'margin', [] ) ) {
-					if( ! empty( $margin ) ) {
-						if( count( $margin ) === 4 && count( array_unique( $margin ) ) === 1 ) {
-							$margin = end( $margin );
-							
-							// Is WP way of saved color
-							if( mb_strpos( $margin, 'var:preset|spacing' ) !== false ) {
-								$margin = explode( '|', $margin );
-								$margin = sprintf( 'var(--wp--preset--spacing--%s)', end( $margin ) );
-							}
-
-							$this->output[] = wp_parse_args( [
-								'property' 	=> 'margin',
-								'value'	  	=> $margin,
-								'units'		=> '!important'
-							], $output );
-						} else {
-							foreach( $margin as $dir => $val ) {
-								// Is WP way of saved color
-								if( mb_strpos( $val, 'var:preset|spacing' ) !== false ) {
-									$val = explode( '|', $val );
-									$val = sprintf( 'var(--wp--preset--spacing--%s)', end( $val ) );
-								}
-
-								$this->output[] = wp_parse_args( [
-									'property' 	=> 'margin-' . $dir,
-									'value'	  	=> $val,
-									'units'		=> '!important'
-								], $output );
-							}
-						}
-					}
-				}
-			}
-
-			// Border
-			if ( $border = get_prop( $css_style, 'border' ) ) {
-
-				// Handle individual borders in upcoming WP 6.1
-				$directions = wp_array_slice_assoc( $border, [ 'top', 'left', 'right', 'bottom' ] );
-
-				foreach( $directions as $dir => $value ) {
-					$color = get_prop( $value, 'color' );
-					if ( strpos( $color, 'var:preset|color' ) !== false ) {
-						$color = sprintf( 'var(--wp--preset--color--%s)', substr( $color, strrpos( $color, '|' ) + 1 ) );
-					}
-
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-' . $dir,
-						'value'	  	=> trim( sprintf(
-							'%s %s %s',
-							get_prop( $value, 'width' ),
-							get_prop( $value, 'style', 'solid' ),
-							$color
-						) )
-					], $output );
-				}
-
-				if ( $value = get_prop( $border, 'width' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-width',
-						'value'	  	=> $value
-					], $output );
-				}
-
-				if ( $value = get_prop( $border, 'style' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-style',
-						'value'	  	=> $value
-					], $output );
-				}
-
-				if ( $value = get_prop( $border, 'color' ) ) {
-					$this->output[] = wp_parse_args( [
-						'property' 	=> 'border-color',
-						'value'	  	=> $value
-					], $output );
-				}
-
-				if ( $value = get_prop( $border, 'radius' ) ) {
-					if ( is_array( $value ) ) {
-						// We have individual border radius corner values.
-						foreach ( $value as $key => $radius ) {
-							// Convert CamelCase corner name to kebab-case.
-							$corner   = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $key ) );
-							$this->output[] = wp_parse_args( [
-								'property' 	=> sprintf( 'border-%s-radius', $corner ),
-								'value'	  	=> $radius,
-							], $output );
-						}
-					} else {
-						$this->output[] = wp_parse_args( [
-							'property' 	=> 'border-radius',
-							'value'	  	=> $value,
-							'units'		=> is_numeric( $value ) ? 'px' : null
-						], $output );
-					}
-				}
-			}
-		}
+	public function get_id(): string {
+		return $this->block_id;
 	}
 	
 	/**
-	 * Parses custom CSS.
+	 * Get classnames.
 	 *
-	 * @return 	void
+	 * @return 	array
 	 */
-	protected function parse_custom(): void {
-		if ( $css_custom = get_prop( $this->attrs, 'customStyle', get_prop( $this->attrs, 'customCSS' ) ) ) {
-			$custom_style 	= wp_strip_all_tags( $css_custom );
-			$custom_style 	= str_replace( 'selector', '.' . $this->get_id(), $custom_style );
-			$custom_style 	= wecodeart( 'styles' )::string_to_array_query( $custom_style );
-			// Array replace existing CSS rules - custom overwrites everything
-			$this->styles 	= array_replace_recursive( $this->styles, $custom_style );
-		}
+	public function get_classes(): array {
+		return array_unique( array_filter( explode( ' ', get_prop( $this->attrs, 'className', '' ) ) ) );
 	}
 
 	/**
 	 * Get duotone.
 	 *
-	 * @return 	array
+	 * @return 	mixed
 	 */
-	public function get_duotone() {
+	public function get_duotone(): mixed {
 		$return 	= false;
 		$duotone 	= get_prop( $this->attrs, [ 'style', 'color', 'duotone' ], false );
 
@@ -349,38 +101,77 @@ class Blocks extends Processor {
 	}
 
 	/**
-	 * Get classnames.
-	 *
-	 * @return 	array
-	 */
-	public function get_classes(): array {
-		return array_unique( array_filter( explode( ' ', get_prop( $this->attrs, 'className', '' ) ) ) );
-	}
-	
-	/**
-	 * Get uniqueID.
-	 *
-	 * @return 	array
-	 */
-	public function get_id(): string {
-		return $this->block_id;
-	}
-
-	/**
 	 * Get selector.
+	 *
+	 * @param	string	$prefix		Append to selector
+	 * @param	bool	$support	Import block supports selectors
 	 *
 	 * @return 	string
 	 */
-	public function get_selector( string $extra = '' ): string {
+	public function get_selector( string $prefix = '', bool $support = true ): string {
+		$excludes = [ 'core/heading', 'core/paragraph' ]; // Exclude this.
 		$selector = '';
 		
-		if( ! in_array( $this->name, [ 'core/heading', 'core/paragraph' ] ) ) {
+		if( $support === true && ! in_array( $this->name, $excludes ) ) {
 			$block_type	= \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
 			$selector 	= get_prop( $block_type->supports, [ '__experimentalSelector' ] );
 		}
 
-		$selector 	= join( '', array_filter( [ '.', $this->get_id(), $selector, $extra ] ) );
+		$selector 	= join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), $selector, $prefix ] ) );
 
 		return apply_filters( 'wecodeart/filter/gutenberg/styles/selector', $selector, $this->name );
+	}
+	
+	/**
+	 * Load styles.
+	 *
+	 * @return 	void
+	 */
+	public function add_declarations( array $declarations, $selector = false ): void {
+		\WP_Style_Engine::store_css_rule( Styles::CONTEXT, $selector ?: $this->get_selector(), $declarations );
+	}
+
+	/**
+	 * Load styles.
+	 *
+	 * @return 	mixed
+	 */
+	private function process_style(): mixed {
+		$style_attr = get_prop( $this->attrs, [ 'style' ], [] );
+
+		if( empty( $style_attr ) ) {
+			return null;
+		}
+
+		// Add Duotone to inline CSS instead of WP Default.
+		if( $duotone = get_prop( $style_attr, [ 'color', 'duotone' ] ) ) {
+			$this->output[] = [
+				'element' 	=> $this->get_selector( ' :where(img,video)', '', false ),
+				'property'	=> 'filter',
+				'value'		=> sprintf( 'url(#wp-duotone-%s)', $this->get_id() )
+			];
+		}
+
+		// Process block attributes.
+		return wp_style_engine_get_styles( $style_attr, [
+			'selector' 	=> $this->get_selector(),
+			'context'	=> Styles::CONTEXT
+		] );
+	}
+
+	/**
+	 * Parses custom CSS.
+	 *
+	 * @return 	void
+	 */
+	private function parse_custom(): void {
+		if ( $css_custom = get_prop( $this->attrs, 'customStyle', get_prop( $this->attrs, 'customCSS' ) ) ) {
+			$custom_style 	= wp_strip_all_tags( $css_custom );
+			$custom_style 	= str_replace( 'selector', $this->get_selector( '', false ) , $custom_style );
+			$custom_style 	= wecodeart( 'styles' )::string_to_array_query( $custom_style );
+
+			// Array replace existing CSS rules - custom overwrites everything
+			$this->styles 	= array_replace_recursive( $this->styles, $custom_style );
+		}
 	}
 }
