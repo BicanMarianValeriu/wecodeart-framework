@@ -134,13 +134,13 @@ class Blocks extends Processor {
 	/**
 	 * Load styles.
 	 *
-	 * @return 	mixed
+	 * @return 	void
 	 */
-	private function process_style(): mixed {
+	private function process_style(): void {
 		$style_attr = get_prop( $this->attrs, [ 'style' ], [] );
 
 		if( empty( $style_attr ) ) {
-			return null;
+			return;
 		}
 
 		// Add Duotone to inline CSS instead of WP Default.
@@ -153,7 +153,7 @@ class Blocks extends Processor {
 		}
 
 		// Process block attributes.
-		return wp_style_engine_get_styles( $style_attr, [
+		wp_style_engine_get_styles( $style_attr, [
 			'selector' 	=> $this->get_selector(),
 			'context'	=> Styles::CONTEXT
 		] );
