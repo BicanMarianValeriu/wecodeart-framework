@@ -115,17 +115,8 @@
 }
 
 // List
-.list-unstyled,
-.list-inline {
+.list-unstyled {
 	@include list-unstyled();
-}
-
-.list-inline-item {
-	display: inline-block;
-
-	&:not(:last-child) {
-		margin-right: 1rem;
-	}
 }
 
 // SVG

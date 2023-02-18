@@ -63,6 +63,16 @@ class Image extends Dynamic {
 		if ( $block_name === $this->get_block_type() || $block_name === 'core/avatar' /* Same markup */ ) {
 			$selectors = array_merge( (array) get_prop( $args, [ 'supports', '__experimentalSelector' ], [] ), [ ' :where(img,svg)' ] );
 			$args['supports']['__experimentalSelector'] = implode( ',', array_filter( $selectors ) );
+			$args['supports']['color'] = [
+				'gradients'	 => true,
+				'background' => true,
+				'link' 		 => true, // For Caption links.
+				'text'       => true, // For SVG currentColor.
+			];
+			$args['supports']['spacing'] = [
+				'margin'  => true,
+				'padding' => true,
+			];
 		}
 
 		return $args;

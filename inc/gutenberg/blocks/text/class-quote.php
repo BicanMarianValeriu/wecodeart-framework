@@ -45,7 +45,38 @@ class Quote extends Dynamic {
 	 * Shortcircuit Register
 	 */
 	public function register() {
-		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 10, 2 );
+		\add_filter( 'register_block_type_args',				[ $this, 'block_type_args'	], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' 			], 10, 2 );
+	}
+
+	/**
+	 * Block args
+	 *
+	 * @since	5.7.2
+	 * @version	5.7.2
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( $args, $block_name ) {
+		if ( $block_name === $this->get_block_type() ) {
+			$args['supports']['spacing'] = [
+				'margin'  	=> true,
+				'padding' 	=> true,
+				'blockGap' 	=> false,
+			];
+			$args['supports']['__experimentalBorder'] = [
+				'radius'                        => true,
+				'width'                         => true,
+				'color'                         => true,
+				'style'                         => true,
+				'__experimentalDefaultControls' => [
+					'width' => true,
+					'color' => true,
+				],
+			];
+		}
+
+		return $args;
 	}
 
 	/**

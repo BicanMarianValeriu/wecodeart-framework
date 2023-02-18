@@ -2,6 +2,9 @@ v5.7.2
 - Updated - core/navigation to remove automatic `navbar-dark|light` class if present in block attributes
 - Updated - core/navigation(-link/menu/submenu) upgraded to Boostrap 5.3 and adjusted to WordPress
 - Updated - core/file markup and CSS updates
+- Updated - core/list to use layout support (inline lists) with blockGap
+- Updated - core/list-item to use color/border/spacing support
+- Updated - core/quote to use color/border/spacing support
 - Updated - core/site-logo markup and CSS updates / Ability for inline SVG upload
 - Updated - core/latest-posts post_type attribute to postType
 - Updated - core/post-read-more extend class to inherit button styles

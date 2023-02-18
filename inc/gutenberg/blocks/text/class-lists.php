@@ -43,7 +43,62 @@ class Lists extends Dynamic {
 	/**
 	 * Shortcircuit Register
 	 */
-	public function register() {}
+	public function register() {
+		\add_filter( 'register_block_type_args',	[ $this, 'block_type_args'	], 20, 2 );
+	}
+
+	/**
+	 * Block args
+	 *
+	 * @since	5.7.2
+	 * @version	5.7.2
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( $args, $block_name ) {
+		// List Block
+		if ( $block_name === $this->get_block_type() ) {
+			$args['supports']['spacing'] = [
+				'margin'  	=> true,
+				'padding' 	=> true,
+				'blockGap' 	=> true,
+			];
+			$args['supports']['__experimentalLayout'] = [
+				'allowSwitching'  => false,
+				'allowInheriting' => false,
+				'default'         => [
+					'type'        => 'flex',
+					'orientation' => 'vertical',
+				],
+			];
+		}
+		
+		// List Item Block
+		if ( $block_name === 'core/list-item' ) {
+			$args['supports']['color'] = [
+				'text'       => true,
+				'background' => true,
+				'link'       => true,
+				'gradient'   => true,
+			];
+			$args['supports']['spacing'] = [
+				'padding' => true,
+				'margin'  => true,
+			];
+			$args['supports']['__experimentalBorder'] = [
+				'radius'                        => true,
+				'width'                         => true,
+				'color'                         => true,
+				'style'                         => true,
+				'__experimentalDefaultControls' => [
+					'width' => true,
+					'color' => true,
+				],
+			];
+		}
+
+		return $args;
+	}
 
 	/**
 	 * Block styles
