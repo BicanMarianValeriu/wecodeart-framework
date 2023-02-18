@@ -46,21 +46,25 @@ class Faq extends Dynamic {
 	protected $block_name = 'faq-block';
 
 	/**
-	 * Init.
+	 * Block args.
+	 *
+	 * @return 	array
 	 */
-	public function init(): void {
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render' ], 20, 2 );
-    }
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
+	}
 
     /**
 	 * Filter FAQ
 	 * 
-	 * @param 	string 	$content
-	 * @param 	array 	$block
+	 * @param 	string 	$attributes
+	 * @param 	array 	$content
 	 * 
 	 * @return 	string
 	 */
-	public function render( $content = '', $block = [] ): string {
+	public function render( array $attributes = [], string $content = '' ): string {
 		$dom		= $this->dom( $content );
 		$sections	= get_elements_by_class_name( $dom, 'schema-faq-section' );
 
