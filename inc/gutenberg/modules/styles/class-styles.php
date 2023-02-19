@@ -46,14 +46,6 @@ class Styles implements Integration {
 	public $CSS		= null;
 
 	/**
-	 * The blocks styles
-	 *
-	 * @access 	public
-	 * @var 	array
-	 */
-	public $styles	= [];
-
-	/**
 	 * The blocks duotone
 	 *
 	 * @access 	public
