@@ -27,6 +27,7 @@ v5.7.2
 - Updated - CSS reset simplified and optimized (moved into block styles / forms)
 - Updated - Inputs styles moved inline and enqueue on demand
 - Updated - Refactor blocks inline styles to use WP_Style_Engine
+- Updated - entry-meta and author-box patterns to use post-author-name block instead of post-author
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
 - Removed - core/post-comments-link from Post Meta pattern
 - Removed - custom logo customizer support

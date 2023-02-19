@@ -66,10 +66,10 @@ return [
     |
     */
     'gutenberg' => [
-        'editor'    => true,
-        'styles'    => true,
-        'classes'   => true,
-        'patterns'  => true,
+        'editor'    => true, // To do - remove FSE edit screen (developer/client only)
+        'styles'    => true, // Convert style attribute CSS to inline CSS
+        'classes'   => true, // Add CSS utilities like margin/padding etc
+        'patterns'  => true, // Patterns folder will also register plain HTML files
         'support'   => [
             'core-block-patterns'   => 'remove',
             'block-nav-menus'       => true,

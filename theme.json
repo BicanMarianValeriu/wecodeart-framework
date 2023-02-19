@@ -455,7 +455,6 @@
 			},
 			"button": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|button",
 					"fontSize": "var:preset|font-size|small",
 					"fontWeight": "600",
 					"lineHeight": "1.5",

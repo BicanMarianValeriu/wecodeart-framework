@@ -142,6 +142,7 @@ a:not([href]):not([class]):hover {
 
 figure,
 iframe,
+svg,
 img {
   max-width: 100%;
 }
@@ -832,17 +833,9 @@ progress {
   font-size: var(--wp--custom--display--6);
 }
 
-.list-unstyled,
-.list-inline {
+.list-unstyled {
   padding-left: 0;
   list-style: none;
-}
-
-.list-inline-item {
-  display: inline-block;
-}
-.list-inline-item:not(:last-child) {
-  margin-right: 1rem;
 }
 
 .svg-inline {
