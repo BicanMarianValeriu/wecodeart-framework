@@ -486,7 +486,7 @@ class Styles implements Integration {
 	 *
 	 * @return 	object
 	 */
-	public static function process_block( $block = [] ) {
+	public static function process_block( array $block = [] ) {
 		// Find the class that will handle the output for this block.
 		$classname	= Styles\Blocks::class;
 		$defaults   = [

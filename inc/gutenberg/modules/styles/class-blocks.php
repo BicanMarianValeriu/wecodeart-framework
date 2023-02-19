@@ -167,9 +167,9 @@ class Blocks {
 		}
 
 		// Process custom style attribute.
-		if ( $css_custom = get_prop( $this->attrs, 'customStyle', get_prop( $this->attrs, 'customCSS' ) ) ) {
+		if ( $style_custom = get_prop( $this->attrs, 'customStyle', get_prop( $this->attrs, 'customCSS' ) ) ) {
 			// Remove tags, just in case.
-			$custom_style 	= wp_strip_all_tags( $css_custom );
+			$custom_style 	= wp_strip_all_tags( $style_custom );
 			// Update selector with class id.
 			$custom_style 	= str_replace( 'selector', $this->get_selector( '', false ) , $custom_style );
 			// Convert the string to array (no media queries atm).
