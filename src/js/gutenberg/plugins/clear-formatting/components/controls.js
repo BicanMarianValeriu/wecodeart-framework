@@ -16,7 +16,7 @@ const {
 	richText: { create, toHTMLString }
 } = wp;
 
-const allowedBlocks = [ 'core/heading', 'core/paragraph' ];
+const allowedBlocks = [ 'core/heading', 'core/paragraph', 'core/code', 'core/list-item' ];
 
 /**
  * Render plugin
@@ -44,7 +44,7 @@ const Controls = () => {
 		return (
 			<PluginBlockSettingsMenuItem
 				icon={<Icon icon="editor-removeformatting" className="components-menu-items__item-icon" />}
-				label={__('Clear Block Formatting', 'wecodeart')}
+				label={__('Clear block formatting', 'wecodeart')}
 				onClick={() => updateBlockAttributes(blockId, {
 					content: toHTMLString({
 						value: { ...record, formats: Array(record.formats.length) },

@@ -67,7 +67,6 @@ const CSSEditor = ({
 						<pre>
 							{'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'}
 						</pre>
-						<p>{__('You can also use other CSS syntax here, such as media queries.', 'wecodeart')}</p>
 					</div>
 				</Popover>}
 			</>
@@ -79,7 +78,7 @@ const CSSEditor = ({
 			<div class="wecodeart-advanced-css">
 				<hr />
 				<p class="wecodeart-advanced-css__title" style={{ display: 'flex', fontSize: '11px', fontWeight: '500', textTransform: 'uppercase' }}>
-					<span>{__('Add your custom CSS.', 'wecodeart')}</span>
+					<span>{__('Additional custom CSS', 'wecodeart')}</span>
 					<DescriptionPopover />
 				</p>
 				<div className="wecodeart-advanced-css__editor" id="wecodeart-css-editor" />

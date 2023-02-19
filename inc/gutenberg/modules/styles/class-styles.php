@@ -205,14 +205,8 @@ class Styles implements Integration {
 				$content->remove_attribute( 'style' );
 			}
 			
-			$styles 	= $processed->get_styles();
 			$classes	= $processed->get_classes();
 			$filters	= $processed->get_duotone();
-			
-			// Process Custom styles.
-			if( $styles ) {
-				$this->styles[$block_id] = $styles;
-			}
 			
 			// Process Duotone SVG filters.
 			if( $filters ) {
@@ -235,34 +229,20 @@ class Styles implements Integration {
 	 */
 	public function register_styles() {
 		global $_wp_current_template_content;
-		$inline_css = '';
 
-		// Global styles
+		// Global styles.
 		$this->global_styles();
 
-		// Collect Template Classes
+		// Collect template classes.
 		$blocks		= parse_blocks( $_wp_current_template_content );
 		$classes	= self::collect_classes( _flatten_blocks( $blocks ) );
 
 		$this->classes = array_merge( $this->classes, $classes );
 
-		// Process Utilities
+		// Process utilities.
 		if( ! empty( $this->classes ) ) {
 			$this->CSS->Utilities->load( $this->classes );
 		}
-
-		// Process Attributes
-		if( ! empty( $this->styles ) ) {
-			foreach( $this->styles as $styles ) {
-				$inline_css .= $this->CSS::compress( $this->CSS::parse( $this->CSS::add_prefixes( $styles ) ) );
-			}
-		}
-		
-		wp_style_engine_get_stylesheet_from_context( self::CONTEXT );
-
-		if( empty( $inline_css ) ) return;
-
-		wp_add_inline_style( 'wp-style-engine-' . self::CONTEXT, $inline_css );
 	}
 	
 	/**

@@ -28,9 +28,12 @@ v5.7.2
 - Updated - Inputs styles moved inline and enqueue on demand
 - Updated - Refactor blocks inline styles to use WP_Style_Engine
 - Updated - entry-meta and author-box patterns to use post-author-name block instead of post-author
+- Updated - Clear block formatting plugin now works on code and list item blocks
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
 - Removed - core/post-comments-link from Post Meta pattern
 - Removed - custom logo customizer support
+- Removed - clear format - format type (was unnecessary) - kept "Clear block formatting" which removes all formats
+- Removed - Styles processor (kept for reference) / switched to WP_Style_Engine API
 - Fixed - core/button outline default color rgb variable added in CSS
 - Fixed - core/social inline CSS generation (for single SVG icons) if 2 or more blocks are used on the template
 - Fixed - core/gallery admin styles and Frontend gap

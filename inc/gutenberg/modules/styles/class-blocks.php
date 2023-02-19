@@ -17,7 +17,6 @@ namespace WeCodeArt\Gutenberg\Modules\Styles;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Gutenberg\Modules\Styles;
-use WeCodeArt\Support\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -26,7 +25,7 @@ use function WeCodeArt\Functions\get_prop;
  * This class handles all the Gutenberg Core styles from attributes found under style object or theme customs.
  * Any extends of this class, should use process_extra() method for extending the attributes processor.
  */
-class Blocks extends Processor {
+class Blocks {
 	/**
 	 * Block Name.
 	 *
@@ -60,10 +59,6 @@ class Blocks extends Processor {
 
 		// Process Styles
 		$this->process_style();
-
-		// Parse Styles
-		$this->parse_output();
-		$this->parse_custom();
 	}
 
 	/**
@@ -108,7 +103,7 @@ class Blocks extends Processor {
 	 *
 	 * @return 	string
 	 */
-	public function get_selector( string $prefix = '', bool $support = true ): string {
+	protected function get_selector( string $prefix = '', bool $support = true ): string {
 		$excludes = [ 'core/heading', 'core/paragraph' ]; // Exclude this.
 		$selector = '';
 		
@@ -123,11 +118,14 @@ class Blocks extends Processor {
 	}
 	
 	/**
-	 * Load styles.
+	 * Add declarations to WP_Style_Engine.
+	 *
+	 * @param 	array 	$declarations
+	 * @param 	string 	$selector
 	 *
 	 * @return 	void
 	 */
-	public function add_declarations( array $declarations, $selector = false ): void {
+	protected function add_declarations( array $declarations, string $selector = '' ): void {
 		\WP_Style_Engine::store_css_rule( Styles::CONTEXT, $selector ?: $this->get_selector(), $declarations );
 	}
 
@@ -137,41 +135,49 @@ class Blocks extends Processor {
 	 * @return 	void
 	 */
 	private function process_style(): void {
-		$style_attr = get_prop( $this->attrs, [ 'style' ], [] );
+		// Process style attribute.
+		if( ! empty( $style_attr = get_prop( $this->attrs, [ 'style' ], [] ) ) ) {
+			// Process block attributes.
+			wp_style_engine_get_styles( $style_attr, [
+				'selector' 	=> $this->get_selector(),
+				'context'	=> Styles::CONTEXT
+			] );
 
-		if( empty( $style_attr ) ) {
-			return;
+			// Process block duotone attribute (not processed by default above).
+			if( $duotone = get_prop( $style_attr, [ 'color', 'duotone' ] ) ) {
+				$css_value 	= "url(#wp-duotone-{$this->get_id()})";
+
+				// Temporary allow this exact CSS trough safecss_filter_attr.
+				$callback 	= function( $allow, $css ) use ( $css_value ) {
+					if( $css === 'filter:' . $css_value ) {
+						$allow = true;
+					}
+
+					// Self remove filter.
+					remove_filter( current_filter(), __FUNCTION__ );
+
+					return $allow;
+				};
+
+				// Allow filter:url(#value).
+				add_filter( 'safecss_filter_attr_allow_css', $callback, 20, 2 );
+				
+				$this->add_declarations( [ 'filter' => $css_value ], $this->get_selector( ' :where(img,video)', '', false ) );
+			}
 		}
 
-		// Add Duotone to inline CSS instead of WP Default.
-		if( $duotone = get_prop( $style_attr, [ 'color', 'duotone' ] ) ) {
-			$this->output[] = [
-				'element' 	=> $this->get_selector( ' :where(img,video)', '', false ),
-				'property'	=> 'filter',
-				'value'		=> sprintf( 'url(#wp-duotone-%s)', $this->get_id() )
-			];
-		}
-
-		// Process block attributes.
-		wp_style_engine_get_styles( $style_attr, [
-			'selector' 	=> $this->get_selector(),
-			'context'	=> Styles::CONTEXT
-		] );
-	}
-
-	/**
-	 * Parses custom CSS.
-	 *
-	 * @return 	void
-	 */
-	private function parse_custom(): void {
+		// Process custom style attribute.
 		if ( $css_custom = get_prop( $this->attrs, 'customStyle', get_prop( $this->attrs, 'customCSS' ) ) ) {
+			// Remove tags, just in case.
 			$custom_style 	= wp_strip_all_tags( $css_custom );
+			// Update selector with class id.
 			$custom_style 	= str_replace( 'selector', $this->get_selector( '', false ) , $custom_style );
-			$custom_style 	= wecodeart( 'styles' )::string_to_array_query( $custom_style );
+			// Convert the string to array (no media queries atm).
+			$custom_style 	= wecodeart( 'styles' )::string_to_array( $custom_style );
 
-			// Array replace existing CSS rules - custom overwrites everything
-			$this->styles 	= array_replace_recursive( $this->styles, $custom_style );
+			foreach( $custom_style as $selector => $rules ) {
+				$this->add_declarations( $rules, $selector );
+			}
 		}
 	}
 }

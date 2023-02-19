@@ -106,7 +106,7 @@ const CSSEditor = _ref => {
       style: {
         padding: '.5rem 1rem'
       }
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, sprintf(__('Use %s to target the block CSS class.', 'wecodeart'), '"selector"')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", null, 'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('You can also use other CSS syntax here, such as media queries.', 'wecodeart')))));
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, sprintf(__('Use %s to target the block CSS class.', 'wecodeart'), '"selector"')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", null, 'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'))));
   };
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -119,7 +119,7 @@ const CSSEditor = _ref => {
       fontWeight: '500',
       textTransform: 'uppercase'
     }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, __('Add your custom CSS.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(DescriptionPopover, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, __('Additional custom CSS', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(DescriptionPopover, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wecodeart-advanced-css__editor",
     id: "wecodeart-css-editor"
   })));

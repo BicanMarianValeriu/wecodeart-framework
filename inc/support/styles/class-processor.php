@@ -10,6 +10,7 @@
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
  * @version		5.7.2
+ * @deprecated	This class is deprecated as of 5.7.2 ( use the new WP_Style_Engine API )
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -22,6 +23,7 @@ use function WeCodeArt\Functions\get_prop;
 
 /**
  * CSS Processor.
+ *
  */
 abstract class Processor {
 

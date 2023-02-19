@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Code block.
@@ -40,6 +39,34 @@ class Code extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'code';
+
+	/**
+	 * Block args.
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
+	}
+
+	/**
+	 * Dynamically renders the `core/code` block.
+	 *
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 *
+	 * @return 	string 	The block markup.
+	 */
+	public function render( array $attributes = [], string $content = '' ): string {
+		$block_id = uniqid( 'wp-code-' );
+		$content = new \WP_HTML_Tag_Processor( $content );
+		$content->next_tag( [ 'tag_name' => 'code' ] );
+		$content->set_attribute( 'id', $block_id );
+		
+		return $content;
+	}
 
 	/**
 	 * Block styles
