@@ -103,11 +103,16 @@ class Navigation extends Dynamic {
 	/**
 	 * Block args.
 	 *
+	 * @param	array $current	Existing register args
+	 *
 	 * @return 	array
 	 */
-	public function block_type_args(): array {
+	public function block_type_args( $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback' 		=> [ $this, 'render' ],
+			'view_script_handles'	=> []
 		];
 	}
 
