@@ -57,10 +57,11 @@ class Template extends Dynamic {
 	 *
 	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
+	 * @param 	object 	$block 		The block object.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '' ): string {
+	public function render( array $attributes = [], string $content = '', object $block = null ): string {
 		$post_id = $block->context['postId'];
 
         // Bail out early if the post ID is not set for some reason.

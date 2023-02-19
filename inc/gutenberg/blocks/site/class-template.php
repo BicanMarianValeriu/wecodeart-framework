@@ -46,18 +46,17 @@ class Template extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render' ], 20, 2 );
     }
 
     /**
-	 * Filter Custom Logo
-	 * 
-	 * @since  	5.7.2
-	 * @version	5.7.2
-	 * 
-	 * @return 	string
+	 * Dynamically renders the `core/template-part` block.
+	 *
+	 * @param 	string 	$content 	The block markup.
+	 *
+	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [] ) {
+	public function render( string $content = '' ): string {
 		$dom   = $this->dom( $content );
 		$first = get_dom_element( '*', $dom );
 

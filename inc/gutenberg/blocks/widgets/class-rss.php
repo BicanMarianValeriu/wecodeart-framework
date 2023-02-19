@@ -45,7 +45,7 @@ class RSS extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 2 );
 	}
 
 	/**
@@ -56,7 +56,7 @@ class RSS extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
+	public function render( string $content = '', $block = [] ) {
 		$attributes = get_prop( $block, 'attrs', [] );
 
 		$rss = fetch_feed( $attributes['feedURL'] );

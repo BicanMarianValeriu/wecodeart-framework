@@ -55,50 +55,53 @@ class Logo extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_filter( 'register_block_type_args',				[ $this, 'register_args'	], 20, 2 );
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render'			], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render' ], 20, 2 );
     }
 
 	/**
-	 * Block args
+	 * Block args.
 	 *
-	 * @since	5.7.2
-	 * @version	5.7.2
+	 * @param	array $current	Existing register args
 	 *
 	 * @return 	array
 	 */
-	public function register_args( $args, $block_name ) {
-		if ( $block_name === $this->get_block_type() ) {
-			$args['supports']['color'] = [
-				'background' => true,
-				'gradients'  => true,
-				'link'       => false,
-				'text'       => true,
-			];
-			$args['supports']['__experimentalBorder'] = [
-				'radius'                        => true,
-				'width'                         => true,
-				'color'                         => true,
-				'style'                         => true,
-				'__experimentalDefaultControls' => [
-					'width' => true,
-					'color' => true,
-				],
-			];
-		}
+	public function block_type_args( $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
 
-		return $args;
+		return [
+			'supports' 			=> wp_parse_args( [
+				'__experimentalBorder' => [
+					'radius'                        => true,
+					'width'                         => true,
+					'color'                         => true,
+					'style'                         => true,
+					'__experimentalDefaultControls' => [
+						'width' => true,
+						'color' => true,
+					],
+				],
+				'color'		=> [
+					'background' => true,
+					'gradients'  => true,
+					'link'       => false,
+					'text'       => true,
+				],
+				'spacing'	=> [
+					'margin'  => true,
+					'padding' => true,
+				]
+			], $supports )
+		];
 	}
 
     /**
-	 * Filter Custom Logo
-	 * 
-	 * @since  	5.7.2
-	 * @version	5.7.2
-	 * 
-	 * @return 	string
+	 * Dynamically renders the `core/site-logo` block.
+	 *
+	 * @param 	string 	$content 	The block markup.
+	 *
+	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [] ) {
+	public function render( string $content = '' ): string {
 		$dom	= $this->dom( $content );
 		$div  	= get_dom_element( 'div', $dom );
 		$link 	= get_dom_element( 'a', $div );

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Modules
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		5.5.5
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -42,8 +42,7 @@ class Modules implements Configuration {
 		$this->register( 'classes',     Modules\Classes::class  );
 		$this->register( 'patterns',    Modules\Patterns::class );
         
-        $this->load(); // To be used into init for later priority
-        // add_action( 'init', [ $this, 'load' ], 20, 1 );
+        add_action( 'init', [ $this, 'load' ], 20, 1 );
 	}
 
 	/**
@@ -52,10 +51,11 @@ class Modules implements Configuration {
 	 * @return void
 	 */
 	public function load() {
-		foreach ( $this->items as $class ) {
-			if ( ! $this->conditionals_are_met( $class ) ) continue;
+		array_map( function( $class ) {
+			if ( ! $this->conditionals_are_met( $class ) ) return;
+            // Register hooks if we meet all conditions.
 			$class::get_instance()->register_hooks();
-		}
+		}, $this->all() );
 	}
 
 	/**

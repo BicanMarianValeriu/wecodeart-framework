@@ -59,11 +59,10 @@ class Text extends Dynamic {
 	 *
 	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
+	public function render( array $attributes = [], string $content = '' ): string {
 		$dom	= $this->dom( $content );
 		$div  	= get_dom_element( 'figure', $dom );
 		$link 	= get_dom_element( 'a', $div );

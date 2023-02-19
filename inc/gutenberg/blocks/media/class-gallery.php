@@ -57,11 +57,10 @@ class Gallery extends Dynamic {
 	 *
 	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
+	public function render( array $attributes = [], string $content = '' ): string {
 		$columns = get_prop( $attributes, 'columns', 'default' );
 
 		return preg_replace( '/(columns-)\w+/', 'grid columns-' . $columns, $content, 1 );

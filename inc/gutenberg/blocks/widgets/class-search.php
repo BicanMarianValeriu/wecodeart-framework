@@ -61,7 +61,7 @@ class Search extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
+	public function render( array $attributes = [], string $content = '' ): string {
 		static $instance_id = 0;
 
 		$attributes = wp_parse_args( $attributes, [

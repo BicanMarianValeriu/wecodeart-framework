@@ -111,9 +111,7 @@ class Blocks implements Configuration {
 	 * @return void
 	 */
 	public function register_blocks() {
-        foreach( $this->all() as $class ) {
-            $class::get_instance()->hooks();
-        }
+        array_map( fn( $class ) => $class::get_instance()->hooks(), $this->all() );
 	}
 
     /**

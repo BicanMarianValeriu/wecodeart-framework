@@ -42,52 +42,45 @@ class Quote extends Dynamic {
 	protected $block_name = 'quote';
 
 	/**
-	 * Init.
-	 */
-	public function init() {
-		\add_filter( 'register_block_type_args',				[ $this, 'register_args'	], 20, 2 );
-		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' 			], 20, 2 );
-	}
-
-	/**
-	 * Block args
+	 * Block args.
 	 *
-	 * @param	array 	$args
-	 * @param	string 	$block_name
+	 * @param	array $current	Existing register args
 	 *
 	 * @return 	array
 	 */
-	public function register_args( array $args, string $block_name ): array {
-		if ( $this->get_block_type() === $block_name ) {
-			$args['supports']['spacing'] = [
-				'margin'  	=> true,
-				'padding' 	=> true,
-				'blockGap' 	=> false,
-			];
-			$args['supports']['__experimentalBorder'] = [
-				'radius'                        => true,
-				'width'                         => true,
-				'color'                         => true,
-				'style'                         => true,
-				'__experimentalDefaultControls' => [
-					'width' => true,
-					'color' => true,
-				],
-			];
-		}
+	public function block_type_args( $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
 
-		return $args;
+		return [
+			'render_callback' 	=> [ $this, 'render' ],
+			'supports' 			=> wp_parse_args( [
+				'__experimentalBorder'	=> [
+					'radius'                        => true,
+					'width'                         => true,
+					'color'                         => true,
+					'style'                         => true,
+					'__experimentalDefaultControls' => [
+						'width' => true,
+						'color' => true,
+					],
+				],
+				'spacing'	=> [
+					'margin'  	=> true,
+					'padding' 	=> true,
+				]
+			], $supports )
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/quote` block.
 	 *
+	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {		
+	public function render( array $attributes = [], string $content = '' ): string {		
 		$dom = $this->dom( $content );
 		
 		// Quote Changes

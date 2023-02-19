@@ -44,48 +44,32 @@ class Image extends Dynamic {
 	protected $block_name = 'image';
 
 	/**
-	 * Init.
-	 */
-	public function init() {
-		\add_filter( 'register_block_type_args',	[ $this, 'register_args'	], 20, 2 );
-	}
-
-	/**
 	 * Block args.
 	 *
+	 * @param	array $current	Existing register args
+	 *
 	 * @return 	array
 	 */
-	public function block_type_args(): array {
+	public function block_type_args( $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+		$selectors 	= array_merge( (array) get_prop( $supports, [ '__experimentalSelector' ], [] ), [ ' :where(img,svg)' ] );
+
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback' 	=> [ $this, 'render' ],
+			'supports' 			=> wp_parse_args( [
+				'__experimentalSelector' => implode( ',', array_filter( $selectors ) ),
+				'color'		=> [
+					'gradients'	 => true,
+					'background' => true,
+					'link' 		 => true, // For Caption links.
+					'text'       => true, // For SVG currentColor.
+				],
+				'spacing'	=> [
+					'margin'  => true,
+					'padding' => true,
+				]
+			], $supports )
 		];
-	}
-
-	/**
-	 * Block args
-	 *
-	 * @since	5.7.2
-	 * @version	5.7.2
-	 *
-	 * @return 	array
-	 */
-	public function register_args( $args, $block_name ) {
-		if ( $block_name === $this->get_block_type() || $block_name === 'core/avatar' /* Same markup */ ) {
-			$selectors = array_merge( (array) get_prop( $args, [ 'supports', '__experimentalSelector' ], [] ), [ ' :where(img,svg)' ] );
-			$args['supports']['__experimentalSelector'] = implode( ',', array_filter( $selectors ) );
-			$args['supports']['color'] = [
-				'gradients'	 => true,
-				'background' => true,
-				'link' 		 => true, // For Caption links.
-				'text'       => true, // For SVG currentColor.
-			];
-			$args['supports']['spacing'] = [
-				'margin'  => true,
-				'padding' => true,
-			];
-		}
-
-		return $args;
 	}
 
 	/**
@@ -93,11 +77,10 @@ class Image extends Dynamic {
 	 *
 	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
+	public function render( array $attributes = [], string $content = '' ): string {
 		$dom	= $this->dom( $content );
 		$div  	= get_dom_element( 'figure', $dom );
 		$link 	= get_dom_element( 'a', $div );
@@ -164,15 +147,16 @@ class Image extends Dynamic {
 		.wp-block-image.aligncenter {
 			text-align: center;
 		}
-		.wp-block-image:where(.alignfull,.alignwide) :where(img,svg) {
-			width: 100%;
-		}
 		.wp-block-image.is-style-rounded {
 			border-radius: 9999px;
 		}
 		.wp-block-image > a,
 		.wp-block-image :where(img,svg) {
 			border-radius: inherit;
+		}
+		.wp-block-image__placeholder,
+		.wp-block-image:where(.alignfull,.alignwide) :where(img,svg) {
+			width: 100%;
 		}
 		.wp-block-image figcaption {
 			font-size: var(--wp--preset--font-size--small);

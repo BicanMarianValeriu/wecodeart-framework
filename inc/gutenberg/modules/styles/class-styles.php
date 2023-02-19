@@ -38,13 +38,6 @@ class Styles implements Integration {
 	const CONTEXT 	= 'attributes';
 
 	/**
-	 * The CSS ID for registered style.
-	 *
-	 * @var string
-	 */
-    const CSS_ID 	= 'wecodeart-blocks';
-
-	/**
 	 * The Styles Processor
 	 *
 	 * @access 	public
@@ -264,14 +257,12 @@ class Styles implements Integration {
 				$inline_css .= $this->CSS::compress( $this->CSS::parse( $this->CSS::add_prefixes( $styles ) ) );
 			}
 		}
+		
+		wp_style_engine_get_stylesheet_from_context( self::CONTEXT );
 
 		if( empty( $inline_css ) ) return;
 
-		wp_register_style( self::CSS_ID, false, [], true, true );
-		wp_add_inline_style( self::CSS_ID, $inline_css );
-		wp_enqueue_style( self::CSS_ID );
-
-		wp_style_engine_get_stylesheet_from_context( self::CONTEXT );
+		wp_add_inline_style( 'wp-style-engine-' . self::CONTEXT, $inline_css );
 	}
 	
 	/**

@@ -45,21 +45,31 @@ class Table extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_filter( 'render_block_core/' . $this->block_name, 		[ $this, 'render' ], 10, 2 );
         \add_filter( 'wecodeart/filter/gutenberg/settings/classes',	[ $this, 'suggestions' ] );
+	}
+
+	/**
+	 * Block args.
+	 *
+	 * @param	array $current	Existing register args
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( $current ): array {
+		return [
+			'render_callback' => [ $this, 'render' ],
+		];
 	}
 
 	/**
 	 * Dynamically renders the `core/table` block.
 	 *
+	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [] ) {
-		$attributes = get_prop( $block, 'attrs', [] );
-
+	public function render( array $attributes = [], string $content = '' ): string {	
 		$exclude = [
 			'table-bordered',
 			'table-borderless',

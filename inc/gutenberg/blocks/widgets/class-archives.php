@@ -58,11 +58,10 @@ class Archives extends Dynamic {
 	 *
 	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
+	public function render( array $attributes = [], string $content = '' ): string {
 		$args = apply_filters( 'wecodeart/filter/gutenberg/archives', [
 			'format' 			=> 'custom',
 			'type'				=> get_prop( $attributes, [ 'type' ], 'monthly' ),

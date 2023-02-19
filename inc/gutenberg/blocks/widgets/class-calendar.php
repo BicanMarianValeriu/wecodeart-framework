@@ -45,7 +45,7 @@ class Calendar extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 1 );
 	}
 
 	/**
@@ -56,7 +56,7 @@ class Calendar extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
+	public function render( string $content = '' ) {
 		// Enqueue Table CSS
 		if( ! wp_style_is( 'wp-block-table' ) ) {
 			wp_add_inline_style(

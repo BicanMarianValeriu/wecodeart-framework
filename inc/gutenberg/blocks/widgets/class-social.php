@@ -46,18 +46,18 @@ class Social extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_filter( 'render_block_core/' . $this->block_name, [ $this, 'render' ], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 2 );
 	}
 
 	/**
-	 * Dynamically renders the `core/social` block.
+	 * Dynamically renders the `core/social-links` block.
 	 *
 	 * @param 	string 	$content 	The block markup.
 	 * @param 	array 	$block 		The parsed block.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $content = '', $block = [], $data = null ) {
+	public function render( string $content = '', array $block = [] ) {
 		$attributes = get_prop( $block, 'attrs', [] );
 		$services 	= wp_list_pluck( wp_list_pluck( get_prop( $block, 'innerBlocks', [] ), 'attrs' ), 'service' );
 		
@@ -77,12 +77,11 @@ class Social extends Dynamic {
 				if( array_key_exists( $classname, $loaded_styles ) && in_array( $service, $loaded_styles[$classname] ) ) continue;
 
 				$inline_css .= $this->get_inline_style( $classname , $service );
+				
 				$loaded_styles[$classname][] = $service;
 			}
 			
-			add_action( 'wp_print_styles', function() use ( $inline_css ) {
-				wp_add_inline_style( 'wp-block-' . $this->block_name, $inline_css );
-			} );
+			wp_add_inline_style( 'wp-block-' . $this->block_name, $inline_css );
 		}
 
 		return $content;
