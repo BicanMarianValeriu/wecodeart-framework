@@ -35,7 +35,7 @@ class Styles implements Integration {
 	 *
 	 * @var string
 	 */
-	const CONTEXT 	= 'attributes';
+	const CONTEXT 	= 'blocks';
 
 	/**
 	 * The Styles Processor
