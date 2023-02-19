@@ -11,7 +11,7 @@
     <div class="wp-block-columns g-3">
         <!-- wp:column {"className":"col-auto"} -->
         <div class="wp-block-column col-auto">
-            <!-- wp:avatar {"isLink":true,"style":{"border":{"style":"solid","width":"1px","radius":"100px"}}} /-->
+            <!-- wp:avatar {"isLink":true,"style":{"border":{"radius":"100px"}}} /-->
         </div>
         <!-- /wp:column -->
         <!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"default"}} -->
