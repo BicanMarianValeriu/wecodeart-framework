@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.1.8
- * @version		5.5.8
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -110,7 +110,7 @@ class Login extends Dynamic {
 		];
 
 		// We use same filters as WP - plugins will hook into those.
-		return wecodeart_template( 'general/login', [
+		return wecodeart_template( 'blocks/site/login', [
 			'action' 	=> home_url( 'wp-login.php', 'login_post' ),
 			'args'		=> wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) )
 		], $echo );

@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_json_color;
+use function WeCodeArt\Functions\get_lightness_limit;
 
 /**
  * Framework Header
@@ -75,7 +77,7 @@ class Header {
 	 * Adds custom classes to the array of body classes.
 	 *
 	 * @since	4.0.6
-	 * @version 5.2.2
+	 * @version 5.7.2
 	 *
 	 * @param 	array 	$classes Classes for the body element.
 	 *
@@ -92,9 +94,17 @@ class Header {
 			$classes[] = 'group-blog';
 		}
 		
-		// Theme
+		// Theme specific classes
 		$classes[] = 'theme-' . wecodeart( 'name' );
-		$classes[] = is_child_theme() ? 'theme-is-skin' : 'theme-is-base'; 
+		$classes[] = is_child_theme() ? 'theme-is-skin' : 'theme-is-base';
+
+		$background	= get_json_color( [ 'styles', 'color', 'background' ] );
+		if( $background ) {
+			$background = wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+			$luminance 	= wecodeart( 'styles' )::rgb_luminance( $background );
+
+			$classes[] = ( $luminance < get_lightness_limit() ) ? 'theme-is-dark' : 'theme-is-light';
+		} 
 
 		return $classes;
 	}

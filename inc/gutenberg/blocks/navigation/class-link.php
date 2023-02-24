@@ -22,6 +22,7 @@ use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use WeCodeArt\Gutenberg\Blocks\Navigation;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\flatten;
+use function WeCodeArt\Functions\get_lightness_limit;
 
 /**
  * Gutenberg Navigation Link block.
@@ -167,6 +168,8 @@ class Link extends Dynamic {
 		$color_type = get_prop( $block->context, 'overlayBackgroundColor' );
 		$key_name 	= $color_type ? 'overlay-background' : 'background';
 		$background = Navigation::get_class_color( $block->context, $key_name );
+		$background = wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+		$luminance 	= wecodeart( 'styles' )::rgb_luminance( $background );
 		
 		$classes 	= [ 'wp-block-navigation-link__dropdown', 'dropdown-menu' ];
 
@@ -174,7 +177,7 @@ class Link extends Dynamic {
 			$classes = array_merge( $classes, $extras );
 		}
 
-		if( ! in_array( 'dropdown-menu-dark', $classes, true ) && wecodeart( 'styles' )::color_lightness( $background ) < 380 ) {
+		if( ! in_array( 'dropdown-menu-dark', $classes, true ) && $luminance < get_lightness_limit() ) {
 			$classes[] = 'dropdown-menu-dark';
 		}
 

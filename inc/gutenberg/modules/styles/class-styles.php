@@ -21,6 +21,7 @@ use WeCodeArt\Integration;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_json_color;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
@@ -93,6 +94,7 @@ class Styles implements Integration {
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
+		add_filter( 'wp_theme_json_data_theme',  	[ $this, 'link_brightness' 		], 20, 1 );
 		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
@@ -255,39 +257,41 @@ class Styles implements Integration {
 
 		foreach( $palette as $item ) {
 			$slug 	= get_prop( $item, [ 'slug' ] );
-			$value 	= $this->CSS::color_to_rgba( get_prop( $item, [ 'color' ] ) );
-			$value  = preg_match( '/\((.*?)\)/', $value, $color );
+			$value 	= $this->CSS::color_to_rgba( get_prop( $item, [ 'color' ] ), false, true );
+			$value  = join( ', ', [ $value['r'], $value['g'], $value['b'] ] );
 			
-			$style .= sprintf( '.has-%s-color{--wp--color--rgb:%s}', $slug, $color[1] );
-			$style .= sprintf( '.has-%s-background-color{--wp--background--rgb:%s}', $slug, $color[1] );
+			$style .= sprintf( '.has-%s-color{--wp--color--rgb:%s}', $slug, $value );
+			$style .= sprintf( '.has-%s-background-color{--wp--background--rgb:%s}', $slug, $value );
 		}
-
-		$link_color = wecodeart_json( [ 'styles', 'elements', 'link', 'color', 'text' ], false );
-
-		// Is WP way of saved color
-		if( mb_strpos( $link_color, '|' ) !== false ) {
-			$slug = explode( '|', $link_color );
-			$slug = end( $slug );
-		// Or is a CSS variable
-		} elseif( mb_strpos( $link_color, '--' ) !== false ) {
-			$slug = explode( '--', $link_color );
-			$slug = str_replace( ')', '', end( $slug ) );
-		}
-		
-		// Otherwhise is a normal Hex color
-		if ( isset( $slug  ) ) {
-			$link_color	= get_prop( current( wp_list_filter( $palette, [
-				'slug' => $slug,
-			] ) ), 'color', '#0088cc' );
-		}
-
-		// Darken the pallete link color (hex) on hover
-		// Sanitized because we are not using CSS::parse method which does that by default (for arrays)
-		$link_color = $this->CSS::hex_brightness( $this->CSS->Sanitize::color( $link_color ), -25 );
-
-		$style .= "a:where(:not(.wp-element-button)):hover{color:${link_color}}";
 
 		wp_add_inline_style( 'global-styles', $style );
+	}
+
+	/**
+	 * Link hover brightness.
+	 *
+	 * @param	object  WP_Theme_JSON object
+	 *
+	 * @return 	object
+	 */
+	public function link_brightness( $object ): object {
+		$link = get_json_color( [ 'styles', 'elements', 'link', 'color', 'text' ] );
+
+		if( $link ) {
+			$data = $object->get_data();
+
+			// Adjust hover brightness.
+			$data['styles']['elements']['link'][':hover'] = wp_parse_args( [
+				'color' => [
+					'text' => $this->CSS::hex_brightness( $link, -25 )
+				]
+			], get_prop( $data, [ 'styles', 'element', 'link', ':hover' ], [] ) );
+
+			// Update object.
+			$object->update_with( $data );
+		}
+
+		return $object;
 	}
 
 	/**
@@ -480,7 +484,7 @@ class Styles implements Integration {
 	 */
 	public static function process_block( array $block = [] ) {
 		// Find the class that will handle the output for this block.
-		$classname	= Styles\Blocks::class;
+		$classname	= Styles\Processor::class;
 		$defaults   = [
 			'core/button' 			=> Styles\Blocks\Button::class,
 			'core/column' 			=> Styles\Blocks\Column::class,

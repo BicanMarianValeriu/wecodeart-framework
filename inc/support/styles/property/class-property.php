@@ -21,14 +21,6 @@ defined( 'ABSPATH' ) || exit();
  */
 abstract class Property {
 	/**
-	 * The property we're modifying.
-	 *
-	 * @access 	protected
-	 * @var 	string
-	 */
-	protected $property;
-
-	/**
 	 * The value
 	 *
 	 * @access 	protected
@@ -40,11 +32,9 @@ abstract class Property {
 	 * Constructor.
 	 *
 	 * @access 	public
-	 * @param 	string $property The CSS property we're modifying.
 	 * @param 	mixed  $value    The value.
 	 */
-	public function __construct( $property, $value ) {
-		$this->property = $property;
+	public function __construct( $value ) {
 		$this->value    = $value;
 		$this->process_value();
 	}

@@ -86,7 +86,7 @@ class Date extends Dynamic {
 			], $args );
 		}
 
-		return wecodeart_template( 'meta/date', $args, false );
+		return wecodeart_template( 'blocks/post/date', $args, false );
 	}
 
 	/**

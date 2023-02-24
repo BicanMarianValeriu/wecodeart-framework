@@ -19,6 +19,9 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_dom_element;
+use function WeCodeArt\Functions\get_elements_by_class_name;
+use function WeCodeArt\Functions\change_tag_name;
 
 /**
  * Gutenberg Separator block.
@@ -40,34 +43,161 @@ class Separator extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'separator';
+	
+	/**
+	 * Block SVG styles.
+	 *
+	 * @var string
+	 */
+	protected static $styles = [];
 
 	/**
 	 * Init.
 	 */
 	public function init() {
+		// Collect SVG files.
+		$this->collect_svg_styles();
+		
+		// We only load them in admin for preview, in frontend we load conditionaly.
+		if( ! is_admin() ) return;
+
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'dots',
             'label'			=> esc_html__( 'Dots', 'wecodeart' ),
-			'inline_style' 	=> self::get_style( 'dots' )
+			'inline_style' 	=> self::get_style( 'is-style-dots' )
 		] );
 		
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'faded',
             'label'			=> esc_html__( 'Faded', 'wecodeart' ),
-			'inline_style' 	=> self::get_style( 'faded' )
+			'inline_style' 	=> self::get_style( 'is-style-faded' )
 		] );
 
-		\register_block_style( $this->get_block_type(), [
-			'name' 			=> 'curve',
-            'label'			=> esc_html__( 'Curve', 'wecodeart' ),
-			'inline_style' 	=> self::get_style( 'curve' )
-		] );
-		
-		\register_block_style( $this->get_block_type(), [
-			'name' 			=> 'wave',
-            'label'			=> esc_html__( 'Wave', 'wecodeart' ),
-			'inline_style' 	=> self::get_style( 'wave' )
-		] );
+		// Register collected SVG styles.
+		foreach( self::$styles as $data ) {
+			$name	= get_prop( $data, [ 'name' ] );
+			$label	= ucwords( join( ' ', explode( '-', $name ) ) );
+
+			\register_block_style( $this->get_block_type(), [
+				'name' 			=> 'svg-' . $name,
+				'label'			=> esc_html__( $label, 'wecodeart' ),
+				'inline_style' 	=> self::get_style( $data )
+			] );
+		}
+	}
+
+	/**
+	 * Block args.
+	 *
+	 * @param	array $current	Existing register args
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+
+		return [
+			'render_callback' 	=> [ $this, 'render' ],
+			'supports'			=> wp_parse_args( [
+				'dimensions'	=> [
+					'minHeight'	=> true,
+				],
+			], $supports )
+		];
+	}
+
+    /**
+	 * Dynamically renders the `core/separator` block.
+	 *
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 *
+	 * @return 	string 	The block markup.
+	 */
+	public function render( array $attributes = [], string $content = '' ): string {
+		$handle 	= 'wp-block-' . $this->block_name;
+		$classes 	= array_filter( explode( ' ', get_prop( $attributes, [ 'className' ], '' ) ) );
+		$is_svg 	= false;
+
+		static $styles = [];
+
+		// Load specific style if not already loaded.
+		foreach( $classes as $class ) {
+			// Default styles.
+			if( in_array( $class, [ 'is-style-dots', 'is-style-faded' ] ) && ! in_array( $class, $styles ) ) {
+				$style 	= self::get_style( $class );
+	
+				add_action( 'wp_enqueue_scripts', static fn() => wp_add_inline_style( $handle, $style ) );
+	
+				$styles[] = $class;
+			}
+
+			// This is SVG, handled it bellow.
+			if( str_starts_with( $class, 'is-style-svg-' ) ) {
+				$is_svg = $class;
+				
+				continue;
+			}
+		}
+
+		if( $is_svg ) {			
+			$style	= current( wp_list_filter( self::$styles, [
+				'class' => $is_svg
+			] ) );
+				
+			if( $style ) {
+				$dom	= $this->dom( $content );
+				$hr		= get_dom_element( 'hr', $dom );
+				$div 	= change_tag_name( $hr, 'div' );
+
+				$file	= file_get_contents( get_prop( $style, [ 'file' ] ) );
+				$svg    = $dom->importNode( $this->dom( $file )->documentElement, true );
+				$svg->setAttribute( 'role', 'presentation' );
+				$svg->setAttribute( 'aria-hidden', 'true' );
+				$div->appendChild( $svg );
+
+				$content = $dom->saveHtml();
+			}
+		}
+
+		return str_replace( 'has-alpha-channel-opacity ', '', $content );
+	}
+
+	/**
+	 * Collects SVG for creating styles
+	 *
+	 * @return 	void.
+	 */
+	public function collect_svg_styles(): void {
+		$themes     = [];
+		$stylesheet = get_stylesheet();
+		$template   = get_template();
+
+		if ( $stylesheet !== $template ) {
+			$themes[] = wp_get_theme( $stylesheet );
+		}
+
+		$themes[] = wp_get_theme( $template );
+
+		foreach ( $themes as $theme ) {
+			$dirpath = $theme->get_stylesheet_directory() . '/views/blocks/design/separator/';
+			if ( ! is_dir( $dirpath ) || ! is_readable( $dirpath ) ) {
+				continue;
+			}
+			if ( file_exists( $dirpath ) ) {
+				$files = glob( $dirpath . '*.svg' );
+				if ( $files ) {
+					foreach ( $files as $file ) {
+						$pathinfo 	= pathinfo( $file );
+						self::$styles[] = [
+							'name'	=> get_prop( $pathinfo, [ 'filename' ], '' ),
+							'class'	=> 'is-style-svg-' . get_prop( $pathinfo, [ 'filename' ], '' ),
+							'file'	=> $file,
+						];
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -75,87 +205,63 @@ class Separator extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function get_style( $class = 'faded' ) {
+	public static function get_style( mixed $data = null ): string {
 		$inline = '';
 
-		switch( $class ) :
-			case 'dots' :
-				$inline = '
-					.wp-block-separator.is-style-dots {
-						--wp--separator-gap: 2em;
-						--wp--separator-icon: "\00b7 \00b7 \00b7";
-						background: none !important;
-						height: auto;
-						line-height: 1;
-						text-align: center;
-					}
-					.wp-block-separator.is-style-dots::before {
-						content: var(--wp--separator-icon);
-						color: currentColor;
-						font-size: 1.5rem;
-						letter-spacing: var(--wp--separator-gap);
-						padding-left: var(--wp--separator-gap);
-						font-family: serif;
-					}
-				';
-				break;
-			case 'faded' :
-				$inline = "
-					.wp-block-separator.is-style-faded {
-						background: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
-						width: initial!important;
-					}
-				";
-				break;
-			case 'wave' :
-				$symbol = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 1000 120"%3E%3Cpath d="M0 80q200 80 500-20 270-100 500-20v80H0Z"/%3E%3C/svg%3E';
-				$inline = "
-				hr.wp-block-separator.is-style-wave {
-					position: relative;
-					background-color: transparent!important;
+		if( is_array( $data ) ) {
+			$class	= get_prop( $data, [ 'class' ] );
+
+			// Bail early if no class.
+			if( ! $class ) {
+				return $inline;
+			}
+
+			$svg_string	= file_get_contents( get_prop( $data, [ 'file' ] ) );
+			$encodedSVG = \rawurlencode( \str_replace( [ "\r", "\n" ], ' ', $svg_string ) );
+			$encodedSVG = 'data:image/svg+xml;utf8,' . $encodedSVG;
+
+			$inline = "
+				.wp-block-separator.{$class}::before {
+					-webkit-mask-image: url('{$encodedSVG}');
 				}
-				.wp-block-separator.is-style-wave::before {
-					content: '';
-					display: block;
-					position: absolute;
-					background: currentColor;
-					width: 100%;
-					height: calc(100% + 1px);
-					min-height: 50px;
-					-webkit-mask-repeat: no-repeat;
-					-webkit-mask-position: center;
-					-webkit-mask-size: 100%;
-					-webkit-mask: url('$symbol');
-					mask: url('$symbol');
-				}
-				";
-				break;
-			case 'curve' :
-				$symbol = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 1000 120"%3E%3Cpath d="M1000 120H0c533.3 0 866.7-40 1000-120v120z"/%3E%3C/svg%3E';
-				$inline = "
-				hr.wp-block-separator.is-style-curve {
-					position: relative;
-					background-color: transparent!important;
-				}
-				.wp-block-separator.is-style-curve::before {
-					content: '';
-					display: block;
-					position: absolute;
-					background: currentColor;
-					width: 100%;
-					height: calc(100% + 1px);
-					min-height: 50px;
-					-webkit-mask-repeat: no-repeat;
-					-webkit-mask-position: center;
-					-webkit-mask-size: 100%;
-					-webkit-mask: url('$symbol');
-					mask: url('$symbol');
-				}
-				";
-				break;
-			default :
-				break;
-		endswitch;
+			";
+		}
+
+		if( is_string( $data ) ) {
+			switch( $data ) :
+				case 'is-style-dots' :
+					$inline = '
+						.wp-block-separator.is-style-dots {
+							--wp--separator-gap: 2em;
+							--wp--separator-icon: "\00b7 \00b7 \00b7";
+							background: none !important;
+							height: auto;
+							line-height: 1;
+							text-align: center;
+						}
+						.wp-block-separator.is-style-dots::before {
+							content: var(--wp--separator-icon);
+							color: currentColor;
+							font-size: 1.5rem;
+							letter-spacing: var(--wp--separator-gap);
+							padding-left: var(--wp--separator-gap);
+							font-family: serif;
+						}
+					';
+					break;
+				case 'is-style-faded' :
+					$inline = "
+						.wp-block-separator.wp-block-separator.is-style-faded {
+							background-color: transparent!important;
+							background-image: linear-gradient(to right, rgba(255,255,255,0), currentColor, rgba(255,255,255,0))!important;
+							width: initial!important;
+						}
+					";
+					break;
+				default :
+					break;
+			endswitch;
+		}
 
 		return wecodeart( 'styles' )::compress( $inline );
 	}
@@ -166,20 +272,45 @@ class Separator extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		$inline = '
-			hr {
-				height: 1px;
-				opacity: 1;
-			}
-			.wp-block-separator {
-				margin-left: auto;
-				margin-right: auto;
-			}
-			.wp-block-separator.is-style-default,
-			.wp-block-separator:not([class*="is-style-"]) {
-				max-width: 100px;
-			}
-		';
+		$inline = "
+		/* Separator */
+		hr {
+			height: 1px;
+			border: 0;
+			opacity: 1;
+		}
+		.wp-block-separator {
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.wp-block-separator.is-style-default,
+		.wp-block-separator:not([class*='is-style-']) {
+			max-width: 100px;
+		}
+		.wp-block-separator.wp-block-separator[class*='is-style-svg-'] {
+			position: relative;
+			background-color: transparent!important;
+		}
+		.wp-block-separator[class*='is-style-svg-'] svg {
+			display: block;
+			position: absolute;
+			fill: currentColor;
+			width: 100%;
+			height: calc(100% + 1px);
+		}
+		/* Admin */
+		.editor-styles-wrapper .wp-block-separator[class*='is-style-svg-']::before {
+			content: '';
+			display: block;
+			position: absolute;
+			background: currentColor;
+			width: 100%;
+			height: calc(100% + 1px);
+			-webkit-mask-repeat: no-repeat;
+			-webkit-mask-position: center;
+			-webkit-mask-size: 100%;
+		}
+		";
 
 		return $inline;
 	}

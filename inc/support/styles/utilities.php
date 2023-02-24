@@ -701,6 +701,15 @@ foreach( [
             'y'     => 'translateY(-50%)',
         ],
     ],
+    // Flip
+    [
+        'property'  => 'transform',
+        'class'		=> 'flip',
+        'values'	=> [
+            'x'     => 'scaleX(-1)',
+            'y'     => 'scaleY(-1)',
+        ],
+    ],
     // User Select
     [
         'property'  => 'user-select',

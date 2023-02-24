@@ -386,6 +386,15 @@
 					}
 				}
 			},
+			"core/navigation": {
+				"elements": {
+					"link": {
+						"color": {
+							"text": "var(--wp--nav-link-color)"
+						}
+					}
+				}
+			},
 			"core/paragraph": {
 				"spacing": {
 					"margin": {

@@ -25,7 +25,7 @@ use function WeCodeArt\Functions\get_prop;
  * This class handles all the Gutenberg Core styles from attributes found under style object or theme customs.
  * Any extends of this class, should use process_extra() method for extending the attributes processor.
  */
-class Blocks {
+class Processor {
 	/**
 	 * Block Name.
 	 *
@@ -160,7 +160,7 @@ class Blocks {
 				};
 
 				// Allow filter:url(#value).
-				add_filter( 'safecss_filter_attr_allow_css', $callback, 20, 2 );
+				add_filter( 'safecss_filter_attr_allow_css', $callback, 10, 2 );
 				
 				$this->add_declarations( [ 'filter' => $css_value ], $this->get_selector( ' :where(img,video)', '', false ) );
 			}

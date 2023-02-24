@@ -16,13 +16,13 @@ namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Gutenberg\Modules\Styles\Blocks as Base;
+use WeCodeArt\Gutenberg\Modules\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Block CSS Processor
  */
-class Gallery extends Base {
+class Gallery extends Processor {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *

@@ -435,20 +435,71 @@ final class Styles implements Integration {
     }
 
 	/**
-	 * Convert HEX to RGBA.
+	 * Convert Color to RGBA.
 	 *
 	 * @since   5.0.0
-	 * @version	5.7.2
-	 * 
-	 * @param 	string $color   Color data.
-	 * @param 	bool   $opacity Opacity status.
+	 * @param 	string 	$color   Color data.
+	 * @param 	bool 	$alpha   Either return alpha or not
+	 * @param 	bool 	$array   Either return as array or string
 	 *
 	 * @return 	mixed
 	 */
-	public static function hex_to_rgba( string $color, $opacity = false ): string {
-		_deprecated_function( __METHOD__, '5.7.2', 'color_to_rgba' );
+	public static function color_to_rgba( string $color, bool $alpha = false, bool $array = false ): mixed {
+		$colors = wp_tinycolor_string_to_rgb( $color );
 
-		return self::color_to_rgba( $color );
+		if( $array === true ) {
+			return $colors;
+		}
+
+		if( $alpha === false ) {
+			return 'rgb(' . join( ', ', array_splice( $colors, 0, 3 ) ) . ')';
+		}
+		
+		return 'rgba(' . join( ', ', $colors ) . ')';
+	}
+
+	/**
+	 * Add a tint to an RGB color and make it lighter.
+	 *
+	 * @param 	float[] $rgb_array An array representing an RGB color.
+	 * @param 	float   $tint      How much of a tint to apply; a number between 0 and 1.
+	 *
+	 * @return 	float[] The new color as an RGB array.
+	 */
+	public static function rgb_tint( array $rgb_array = [], float $tint = 0 ): array {
+		return [
+			'r' => $rgb_array['r'] + ( 255 - $rgb_array['r'] ) * $tint,
+			'g' => $rgb_array['g'] + ( 255 - $rgb_array['g'] ) * $tint,
+			'b' => $rgb_array['b'] + ( 255 - $rgb_array['b'] ) * $tint,
+		];
+	}
+
+	/**
+	 * Get the relative luminance of a color.
+	 *
+	 * @link https://en.wikipedia.org/wiki/Relative_luminance
+	 *
+	 * @param 	array
+	 *
+	 * @return 	float	A value between 0 and 100 representing the luminance of a color.
+	 */
+	public static function rgb_luminance( array $rgb_array = [] ): float {
+		return 0.2126 * ( $rgb_array['r'] / 255 ) + 0.7152 * ( $rgb_array['g'] / 255 ) + 0.0722 * ( $rgb_array['b'] / 255 );
+	}
+
+	/**
+	 * Convert an RGB array to hexadecimal representation.
+	 *
+	 * @param 	array 	$rgb_array The RGB array to convert.
+	 * @return 	string 	A hexadecimal representation.
+	 */
+	public static function rgb_to_hex( array $rgb_array = [] ): string {
+		return sprintf(
+			'#%02X%02X%02X',
+			$rgb_array['r'],
+			$rgb_array['g'],
+			$rgb_array['b']
+		);
 	}
 
 	/**
@@ -483,40 +534,6 @@ final class Styles implements Integration {
 		}
 	
 		return $return;
-	}
-
-	/**
-	 * Convert Color to RGBA.
-	 *
-	 * @since   5.0.0
-	 * @param 	string 	$color   Color data.
-	 * @param 	bool 	$alpha   Either return alpha or not
-	 *
-	 * @return 	string
-	 */
-	public static function color_to_rgba( string $color, bool $alpha = false ): string {
-		$colors = wp_tinycolor_string_to_rgb( $color );
-
-		if( $alpha === false ) {
-			return 'rgb(' . join( ', ', array_splice( $colors, 0, 3 ) ) . ')';
-		}
-		
-		return 'rgba(' . join( ', ', $colors ) . ')';
-	}
-	
-	/**
-	 * Color lightness
-	 *
-	 * @since   5.0.0
-	 * @version	5.7.2
-	 * @param  	string	$color  Color in HEX/RGB/RGBA format
-	 *
-	 * @return 	integer
-	 */
-	public static function color_lightness( string $color ) {
-		preg_match_all( "/\(([^\]]*)\)/", self::color_to_rgba( $color, true ), $matches );
-		
-		return intval( array_sum( explode( ',', current( $matches[1] ) ) ) );
 	}
 
 	/**

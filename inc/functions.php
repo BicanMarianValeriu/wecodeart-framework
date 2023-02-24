@@ -419,3 +419,50 @@ function change_tag_name( DOMElement $element, string $name ): DOMElement {
 function get_placeholder_source(): string {
 	return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 300' stroke='%23AAA' stroke-width='1' stroke-dasharray='1' preserveAspectRatio='none'%3E%3Crect vector-effect='non-scaling-stroke' fill='%23FEFEFE' width='100%25' height='100%25'/%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='.5' d='M500 0 0 300'/%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='.5' d='M500 300 0 0'/%3E%3C/svg%3E";
 }
+
+/**
+ * Returns lightness compare limit (light/dark).
+ *
+ * @since   5.7.2
+ *
+ * @return  float
+ */
+function get_lightness_limit(): float {
+	return 0.6;
+}
+
+/**
+ * Returns pallete color from theme JSON (including vars).
+ *
+ * @since   5.7.2
+ *
+ * @return  string
+ */
+function get_json_color( array $path = [], $default = false ): string {
+	// Theme pallete.
+    $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
+    $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
+    $palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
+    $color      = wecodeart_json( $path, $default );
+
+    // Is WP way of saved color.
+    if( mb_strpos( $color, 'var:' ) !== false ) {
+        $slug = explode( '|', $color );
+        $slug = end( $slug );
+    }
+    
+    // Or is a CSS variable.
+    if( mb_strpos( $color, '--' ) !== false ) {
+        $slug = explode( '--', $color );
+        $slug = str_replace( ')', '', end( $slug ) );
+    }
+    
+    // If slug found, get color.
+    if ( isset( $slug  ) ) {
+        $color	= get_prop( current( wp_list_filter( $palette, [
+            'slug' => $slug,
+        ] ) ), 'color', '#0088cc' );
+    }
+
+    return $color;
+}

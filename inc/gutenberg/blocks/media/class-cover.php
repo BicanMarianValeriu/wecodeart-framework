@@ -91,22 +91,36 @@ class Cover extends Dynamic {
 				$object_position = sprintf( 'data-object-position="%s" style="object-position:%s"', $object_position, $object_position );
 			}
 	
-			$image_template = '<img class="wp-block-cover__image-background" src="%s" alt="%s" data-object-fit="cover" %s />';
+			$template 	= '<img class="wp-block-cover__image-background" src="%s" alt="%s" data-object-fit="cover" %s />';
+			$image		= sprintf( $template, $escaped_url, $escaped_alt, $object_position );
 	
-			$image = sprintf( $image_template, $escaped_url, $escaped_alt, $object_position );
-	
-			$content = str_replace( '</span><div', '</span>' . $image . '<div', $content );
+			/*
+			* Inserts the featured image between the (1st) cover 'background' `span` and 'inner_container' `div`,
+			* and removes eventual withespace characters between the two (typically introduced at template level)
+			*/
+			$inner_container_start = '/<div\b[^>]+wp-block-cover__inner-container[\s|"][^>]*>/U';
+			if ( 1 === preg_match( $inner_container_start, $content, $matches, PREG_OFFSET_CAPTURE ) ) {
+				$offset  = $matches[0][1];
+				$content = substr( $content, 0, $offset ) . $image . substr( $content, $offset );
+			}
 		} else {
 			if ( in_the_loop() ) {
 				update_post_thumbnail_cache();
 			}
+			
+			$styles = 'background-image:url(' . $escaped_url . '); ';
 
-			$content	= preg_replace(
-				'/class=\".*?\"/',
-				'${0} style="background-image:url(' . $escaped_url . ')"',
-				$content,
-				1
-			);
+			if ( $min_height = get_prop( $attributes, [ 'minHeight' ] ) ) {
+				$height_unit = get_prop( $attributes, [ 'minHeightUnit' ], 'px' );
+				$height      = " min-height:{$min_height}{$height_unit}";
+
+				$styles .= $height;
+			}
+
+			$processor = new \WP_HTML_Tag_Processor( $content );
+			$processor->next_tag();
+			$processor->set_attribute( 'style', $styles );
+			$content = $processor->get_updated_html();
 		}
 	
 		return $content;

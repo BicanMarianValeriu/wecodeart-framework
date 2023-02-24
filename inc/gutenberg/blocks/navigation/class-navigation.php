@@ -50,6 +50,8 @@ use function str_replace;
 use function sanitize_html_class;
 use function block_core_navigation_filter_out_empty_blocks;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_json_color;
+use function WeCodeArt\Functions\get_lightness_limit;
 
 /**
  * Gutenberg Navigation block.
@@ -278,12 +280,12 @@ class Navigation extends Dynamic {
 	/**
 	 * Get Class Color.
 	 *
-	 * @param 	array 	$context	Block Context
+	 * @param 	array 	$attributes	Attributes
 	 * @param 	string 	$key		Attribute name
 	 * 
 	 * @return 	string 	HEX color code for pallete class
 	 */
-	public static function get_class_color( $context, $key = 'background' ) {
+	public static function get_class_color( $attributes, $key = 'background' ) {
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
 		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
@@ -296,35 +298,21 @@ class Navigation extends Dynamic {
 			'text'		 			=> 'textColor',
 		];
 
-		// Real attribute name
+		// Real attribute name.
 		$attribute 	= isset( $_keys[$key] ) ? $_keys[$key] : $key;
 
 		// Get custom
-		$color 		= get_prop( $context, [ 'style', 'color', $attribute ] );
+		$color 		= get_prop( $attributes, [ 'style', 'color', $attribute ] );
 		
-		// If not custom, get named
+		// If not custom, get named.
 		if( $color === null ) {
-			$color = get_prop( $context, $attribute, $color );
-			$color = get_prop( current( wp_list_filter( $palette, [ 'slug' => $color ] ) ), 'color', false );
+			$color 	= get_prop( $attributes, $attribute, $color );
+			$color 	= get_prop( current( wp_list_filter( $palette, [ 'slug' => $color ] ) ), 'color', false );
 		}
 
-		// If named not found, fallback to body
+		// If named not found, fallback to body.
 		if( $color === false ) {
-			$styles 	= wecodeart_json( [ 'styles', 'color', $key ], '' );
-			if( strpos( $styles, '#' ) === 0 ) {
-				$color = $styles;
-			} else {
-				if( mb_strpos( $styles, '|' ) !== false ) {
-					$slug = explode( '|', $styles );
-					$slug = end( $slug );
-				} elseif( mb_strpos( $styles, '--' ) !== false ) {
-					$slug = explode( '--', $styles );
-					$slug = str_replace( ')', '', end( $slug ) );
-				}
-				$color	= get_prop( current( wp_list_filter( $palette, [
-					'slug' => $slug,
-				] ) ), 'color', '#ffffff' );
-			}
+			$color 	= get_json_color( [ 'styles', 'color', $key ] );
 		}
 
 		return $color;
@@ -420,6 +408,8 @@ class Navigation extends Dynamic {
 		$colors     = $this->get_colors( $attributes );
 		$typography = $this->get_typography( $attributes );
 		$background = get_prop( $attributes, 'customBackgroundColor', self::get_class_color( $attributes ) );
+		$background = wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+		$luminance 	= wecodeart( 'styles' )::rgb_luminance( $background );
 		$classnames = explode( ' ',  get_prop( $attributes, 'className', '' ) );
 
 		$classes 	= [ 'wp-block-navigation', 'navbar' ];
@@ -427,7 +417,7 @@ class Navigation extends Dynamic {
 
 		// Detect navbar theme
 		if( count( array_intersect( $classnames, $excludes ) ) === 0 ) {
-			$classes[] = ( wecodeart( 'styles' )::color_lightness( $background ) < 380 ) ? 'navbar-dark' : 'navbar-light';
+			$classes[] = ( $luminance < get_lightness_limit() ) ? 'navbar-dark' : 'navbar-light';
 		}
 
 		// Navbar orientation

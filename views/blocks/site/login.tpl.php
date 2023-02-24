@@ -8,15 +8,12 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Login Template
  * @since 	    5.1.8
- * @version	    5.5.1
+ * @version	    5.7.2
  */
 
 defined( 'ABSPATH' ) || exit;
 
 wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
-
-// Escaping attrs is not necessary with wecodeart_input()
-// Is already done inside the function via esc_attr()
 
 /**
  * @param   string  $action Contains the form action url
@@ -85,7 +82,6 @@ wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
                 'name'  => false,
                 'id'    => 'wp-submit',
                 'value' => $args['label_log_in'],
-                'class' => 'wp-block-button__link',
             ]
         ] );
 

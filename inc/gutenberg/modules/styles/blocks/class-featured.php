@@ -18,13 +18,13 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Post\Image;
-use WeCodeArt\Gutenberg\Modules\Styles\Blocks as Base;
+use WeCodeArt\Gutenberg\Modules\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Block CSS Processor
  */
-class Featured extends Base {
+class Featured extends Processor {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *

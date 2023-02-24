@@ -17,33 +17,62 @@ namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Modules\Styles\Blocks as Base;
+use WeCodeArt\Gutenberg\Modules\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_lightness_limit;
 
 /**
  * Block CSS Processor
  */
-class Button extends Base {
+class Button extends Processor {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *
 	 * @return 	void
 	 */
 	protected function process_extra(): void {
+		$is_outline = str_contains( get_prop( $this->attrs, [ 'className' ], '' ), 'is-style-outline' );
+
 		// Inline Style
+		$declarations = [];
+
+		// Autodetect color lightness if no text color.
+		if( get_prop( $this->attrs, 'textColor' ) === null && get_prop( $this->attrs, 'backgroundColor' ) ) {
+			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
+			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
+			$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
+			$selected	= wp_list_filter( $palette, [ 'slug' => get_prop( $this->attrs, 'backgroundColor' ) ] );
+
+			$rgba 		= wecodeart( 'styles' )::color_to_rgba( get_prop( current( $selected ), 'color' ), false, true );
+			$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
+			$is_dark 	= $luminance < get_lightness_limit();
+
+			$declarations['color'] = $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
+		}
+
 		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
 			// Color
 			if( $color = get_prop( $css_style, 'color' ) ) {
 				if( $text = get_prop( $color, 'text' ) ) {
 					$value	= wecodeart( 'styles' )::color_to_rgba( $text );
 					preg_match( '/\((.*?)\)/', $value, $rgb );
-					
-					$this->add_declarations( [
-						'--wp--color--rgb' 	=> $rgb[1],
-						'color' 			=> $value,
-					] );
+
+					if( $is_outline ) {
+						$rgba 		= wecodeart( 'styles' )::color_to_rgba( $text, false, true );
+						$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
+						$is_dark 	= $luminance < get_lightness_limit();
+
+						$declarations['--wp--color--hover'] = $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
+					}
+
+					$declarations['--wp--color--rgb'] 	= $rgb[1];
+					$declarations['color'] 				= $value;
 				}
 			}
+		}
+
+		if( ! empty( $declarations ) ) {
+			$this->add_declarations( $declarations );
 		}
 	}
 }

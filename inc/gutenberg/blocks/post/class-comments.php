@@ -76,6 +76,6 @@ class Comments extends Dynamic {
 			'number'		=> (int) get_comments_number( $block->context['postId'] ),
 		];
 		
-		return wecodeart_template( 'meta/comments', $args, false );
+		return wecodeart_template( 'blocks/post/comments', $args, false );
 	}
 }

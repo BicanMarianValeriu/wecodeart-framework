@@ -147,18 +147,13 @@ class Classes implements Integration {
 			'clearfix',
 			'text-truncate',
 			'list-unstyled',
-			'list-inline',
-			'list-inline-item',
-			'list-inline',
+			'has-underline',
 			'visually-hidden',
 			'visually-hidden-focusable',
 			'screen-reader-text',
 			'sticky-top',
 			'fixed-top',
 			'fixed-bottom',
-			'list-unstyled',
-			'list-inline',
-			'list-inline-item',
 		], $args );
 	}
 }

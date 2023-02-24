@@ -45,11 +45,11 @@ class Code extends Dynamic {
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args(): array {
-		return [
-			'render_callback' => [ $this, 'render' ]
-		];
-	}
+	// public function block_type_args(): array {
+	// 	return [
+	// 		'render_callback' => [ $this, 'render' ]
+	// 	];
+	// }
 
 	/**
 	 * Dynamically renders the `core/code` block.
@@ -59,14 +59,14 @@ class Code extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '' ): string {
-		$block_id = uniqid( 'wp-code-' );
-		$content = new \WP_HTML_Tag_Processor( $content );
-		$content->next_tag( [ 'tag_name' => 'code' ] );
-		$content->set_attribute( 'id', $block_id );
+	// public function render( array $attributes = [], string $content = '' ): string {
+	// 	$block_id = uniqid( 'wp-code-' );
+	// 	$content = new \WP_HTML_Tag_Processor( $content );
+	// 	$content->next_tag( [ 'tag_name' => 'code' ] );
+	// 	$content->set_attribute( 'id', $block_id );
 		
-		return $content;
-	}
+	// 	return $content;
+	// }
 
 	/**
 	 * Block styles

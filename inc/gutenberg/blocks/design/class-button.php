@@ -99,15 +99,12 @@ class Button extends Dynamic {
 						--wp--bg-opacity: 0;
 						background-color: rgba(var(--wp--color--rgb), var(--wp--bg-opacity));
 						border-color: currentColor;
-						color: inherit;
+						color: var(--wp--preset--color--dark);
 					}
 					.is-style-outline.wp-block-button .wp-block-button__link.wp-block-button__link:is(:hover,:focus) {
 						--wp--bg-opacity: 1;
 						border-color: rgb(var(--wp--color--rgb));
-						color: white!important;
-					}
-					.is-style-outline.wp-block-button .wp-block-button__link.has-white-color:is(:hover,:focus) {
-						color: black!important;
+						color: var(--wp--color--hover, white)!important;
 					}
 				";
 				break;

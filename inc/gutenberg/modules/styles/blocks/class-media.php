@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Support\Styles\Property\Focal;
 use WeCodeArt\Support\Styles\Property\Background;
-use WeCodeArt\Gutenberg\Modules\Styles\Blocks as Base;
+use WeCodeArt\Gutenberg\Modules\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_placeholder_source;
 
 /**
  * Block CSS Processor
  */
-class Media extends Base {
+class Media extends Processor {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *
@@ -48,17 +48,17 @@ class Media extends Base {
 			if( get_prop( $this->attrs, 'imageFill' ) ) {
 				if ( $value = get_prop( $this->attrs, 'mediaId' ) ) {
 					if( $media = wp_get_attachment_image_url( $value, get_prop( $this->attrs, 'mediaSizeSlug', 'full' ) ) ) {
-						$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
+						$declarations['background-image'] = ( new Background( $value ) )->get_value();
 						// Fallback to WP.org patterns (however some of them have wp.org page url instead of a media file)
 					} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
-						$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
+						$declarations['background-image'] = ( new Background( $value ) )->get_value();
 					}
 				} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
-					$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
+					$declarations['background-image'] = ( new Background( $value ) )->get_value();
 				}
 		
 				if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
-					$declarations['background-position'] = ( new Focal( 'object-position', $value ) )->get_value();
+					$declarations['background-position'] = ( new Focal( $value ) )->get_value();
 				}
 			}
 		}

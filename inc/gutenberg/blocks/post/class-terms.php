@@ -84,7 +84,7 @@ class Terms extends Dynamic {
 			),
 		];
 
-		$template = wecodeart_template( 'meta/terms', $args, false );
+		$template = wecodeart_template( 'blocks/post/terms', $args, false );
 
 		remove_filter( 'wecodeart/filter/template/context',	[ $this, 'filter_tags_context' ], 10 );
 

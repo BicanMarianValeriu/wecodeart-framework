@@ -18,14 +18,15 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Support\Styles\Property\Focal;
 use WeCodeArt\Support\Styles\Property\Background;
-use WeCodeArt\Gutenberg\Modules\Styles\Blocks as Base;
+use WeCodeArt\Gutenberg\Modules\Styles;
+use WeCodeArt\Gutenberg\Modules\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_placeholder_source;
+// use function WeCodeArt\Functions\get_placeholder_source;
 
 /**
  * Block CSS Processor
  */
-class Cover extends Base {
+class Cover extends Processor {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *
@@ -40,7 +41,7 @@ class Cover extends Base {
 		}
 
 		if ( $value = get_prop( $this->attrs, 'url' ) ) {
-			$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
+			$declarations['background-image'] = ( new Background( $value ) )->get_value();
 		}
 
 		if ( $value = get_prop( $this->attrs, 'customOverlayColor' ) ) {
@@ -52,8 +53,15 @@ class Cover extends Base {
 		}
 
 		if( get_prop( $this->attrs, 'useFeaturedImage' ) ) {
-			$value = get_post_thumbnail_id() ?: get_placeholder_source();
-			$declarations['background-image'] = ( new Background( 'background-image', $value ) )->get_value();
+			$placeholder	= get_prop( wecodeart_config( 'placeholder', [] ), [ 'src' ], '' );
+			$background		= ( new Background( get_post_thumbnail_id() ?: $placeholder ) )->get_value();
+
+			// $declarations['background-image'] = $background;
+
+			// Temporary as safecss_filter_attr does not allow data urls.
+			$handle = 'wp-style-engine-' . Styles::CONTEXT;
+			$style 	= $this->get_selector() . '{background-image:' . $background . '}';
+			add_action( 'wp_enqueue_scripts', static fn() => wp_add_inline_style( $handle, $style ) );
 		}
 		
 		$this->add_declarations( $declarations );
@@ -68,7 +76,7 @@ class Cover extends Base {
 		// Focal Selector
 		if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
 			$this->add_declarations( [
-				'object-position' => ( new Focal( 'object-position', $value ) )->get_value()
+				'object-position' => ( new Focal( $value ) )->get_value()
 			], join( ', ', [
 				$this->get_selector( '>.wp-block-cover__image-background' ),
 				$this->get_selector( '>.wp-block-cover__video-background' )

@@ -81,6 +81,6 @@ class AuthorName extends Dynamic {
 			]
 		];
 
-		return wecodeart_template( [ 'meta/author', 'name' ], $args, false );
+		return wecodeart_template( [ 'blocks/post/author', 'name' ], $args, false );
 	}
 }

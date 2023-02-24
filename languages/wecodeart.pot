@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 03:30+0000\n"
+"POT-Creation-Date: 2023-02-23 23:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,12 +16,12 @@ msgstr ""
 "X-Loco-Version: 2.5.0; wp-5.6.1\n"
 "X-Domain: wecodeart"
 
-#: views/meta/comments.tpl.php:61
+#: views/blocks/post/comments.tpl.php:61
 #, php-format
 msgid " on %s"
 msgstr ""
 
-#: views/meta/comments.tpl.php:53
+#: views/blocks/post/comments.tpl.php:53
 msgid "% Comments"
 msgstr ""
 
@@ -30,7 +30,7 @@ msgstr ""
 msgid "%s Archives"
 msgstr ""
 
-#: views/meta/author.tpl.php:41
+#: views/blocks/post/author.tpl.php:41
 #, php-format
 msgid "%s`s avatar"
 msgstr ""
@@ -39,7 +39,7 @@ msgstr ""
 msgid "(no title)"
 msgstr ""
 
-#: views/meta/comments.tpl.php:52
+#: views/blocks/post/comments.tpl.php:52
 msgid "1 Comment"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Comment *"
 msgstr ""
 
-#: views/meta/comments.tpl.php:55
+#: views/blocks/post/comments.tpl.php:55
 msgid "Comments are Closed"
 msgstr ""
 
@@ -157,10 +157,6 @@ msgstr ""
 msgid "Copyright %s - All rights reserved. Built on %s."
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-separator.php:62
-msgid "Curve"
-msgstr ""
-
 #: inc/support/starter/class-starter.php:71
 msgid "Customizer"
 msgstr ""
@@ -181,7 +177,7 @@ msgid ""
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-separator.php:50
+#: inc/gutenberg/blocks/design/class-separator.php:66
 msgid "Dots"
 msgstr ""
 
@@ -193,7 +189,7 @@ msgstr ""
 msgid "Enter password"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-separator.php:56
+#: inc/gutenberg/blocks/design/class-separator.php:72
 msgid "Faded"
 msgstr ""
 
@@ -227,7 +223,7 @@ msgstr ""
 msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr ""
 
-#: views/meta/comments.tpl.php:51
+#: views/blocks/post/comments.tpl.php:51
 msgid "Leave a Comment"
 msgstr ""
 
@@ -296,7 +292,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: inc/gutenberg/blocks/navigation/class-navigation.php:96
+#: inc/gutenberg/blocks/navigation/class-navigation.php:98
 msgid "Pills"
 msgstr ""
 
@@ -315,16 +311,16 @@ msgstr ""
 msgid "Post Type Archives: %s"
 msgstr ""
 
-#: views/meta/date.tpl.php:62
+#: views/blocks/post/date.tpl.php:62
 #, php-format
 msgid "Post updated on %s."
 msgstr ""
 
-#: views/meta/terms.tpl.php:52
+#: views/blocks/post/terms.tpl.php:52
 msgid "Posted in"
 msgstr ""
 
-#: views/meta/date.tpl.php:46
+#: views/blocks/post/date.tpl.php:46
 msgid "Posted on "
 msgstr ""
 
@@ -389,7 +385,7 @@ msgstr ""
 msgid "Speak Your Mind"
 msgstr ""
 
-#: inc/gutenberg/blocks/navigation/class-navigation.php:90
+#: inc/gutenberg/blocks/navigation/class-navigation.php:92
 msgid "Tabs"
 msgstr ""
 
@@ -441,7 +437,7 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
-#: inc/gutenberg/blocks/text/class-heading.php:51
+#: inc/gutenberg/blocks/text/class-heading.php:49
 msgid "Underline Brush"
 msgstr ""
 
@@ -455,10 +451,6 @@ msgstr ""
 
 #: inc/gutenberg/blocks/site/class-login.php:99
 msgid "Username or Email Address"
-msgstr ""
-
-#: inc/gutenberg/blocks/design/class-separator.php:68
-msgid "Wave"
 msgstr ""
 
 #: inc/support/plugins/cf7/class-cf7.php:69
