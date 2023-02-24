@@ -79,7 +79,14 @@ class Pattern {
 	 *
 	 * @var int
 	 */
-	public $viewportWidth = null;
+	public $viewportWidth;
+
+	/**
+	 * Keywords.
+	 *
+	 * @var array
+	 */
+	public $keywords = [];
 
     /**
 	 * Categories.
@@ -114,7 +121,7 @@ class Pattern {
 	 *
 	 * @var string
 	 */
-	public $inserter;
+	public $inserter = true;
 
 	/**
 	 * Theme.
@@ -155,6 +162,7 @@ class Pattern {
             'content'     	=> $this->content,
             'categories'  	=> ! empty( $this->categories ) ? $this->categories : [ $this->theme ],
             'description' 	=> $this->description,
+            'keywords' 		=> $this->keywords,
             'viewportWidth'	=> $this->viewportWidth,
 			'blockTypes' 	=> $this->blockTypes,
 			'postTypes' 	=> $this->postTypes,
@@ -199,6 +207,7 @@ class Pattern {
 					$sanitized[$key] = absint( $value );
 				break;
 				// Arrays
+				case 'keywords':
 				case 'categories':
 				case 'blockTypes':
 				case 'postTypes':

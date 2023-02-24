@@ -18,8 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
-use WeCodeArt\Config\Traits\Asset;
-use function WeCodeArt\Functions\get_prop;
 
 /**
  * Handles Gutenberg Theme Patterns Functionality.
@@ -27,7 +25,6 @@ use function WeCodeArt\Functions\get_prop;
 class Patterns implements Integration {
 
 	use Singleton;
-	use Asset;
 
 	/**
 	 * Folder.
@@ -75,35 +72,28 @@ class Patterns implements Integration {
 	 * @return 	void
 	 */
 	public function register_categories() {
-		$query = $this->get_categories();
+		$data 		= [];
+		$themes     = [];
+		$stylesheet = get_stylesheet();
+		$template   = get_template();
 
-		if( empty( $query ) ) return;
+		if ( $stylesheet !== $template ) {
+			$themes[] = wp_get_theme( $stylesheet );
+		}
 
-		( new Patterns\Categories( $query ) )->register();
-	}
-
-	/**
-	 * Get Categories
-	 *
-	 * @return array
-	 */
-	public function get_categories() {
-		$themes = [
-			get_stylesheet() => get_prop( wecodeart_config( 'paths' ), 'child' ),
-			get_template()   => get_prop( wecodeart_config( 'paths' ), 'directory' ),
-		];
-
-		$data = [];
+		$themes[] = wp_get_theme( $template );
 		
-		foreach ( $themes as $theme_slug => $theme_dir ) {
-			$file_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . '_categories.json' );
-
-			if ( file_exists( $file_path ) ) {
-				$data = array_merge( $data, json_decode( file_get_contents( $file_path ), true ) );
+		foreach ( $themes as $theme ) {
+			$dir	= $theme->get_stylesheet_directory();
+			$file	= wp_normalize_path( $dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . '_categories.json' );
+			if ( file_exists( $file ) ) {
+				$data = array_merge( $data, json_decode( file_get_contents( $file ), true ) );
 			}
 		}
 
-		return $data;
+		if( empty( $data ) ) return;
+
+		( new Patterns\Categories( $data ) )->register();
 	}
 
 	/**
@@ -112,104 +102,44 @@ class Patterns implements Integration {
 	 * @return 	void
 	 */
 	public function register_patterns() {
-		$query = $this->get_files();
+		$themes     = [];
+		$stylesheet = get_stylesheet();
+		$template   = get_template();
 
-		if( empty( $query ) ) return;
-
-		$theme_dir 	= wecodeart_config( 'paths' )['directory'];
-		$index_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . '_index.json' );
-
-		if ( file_exists( $index_path ) ) {
-			$this->patterns = json_decode( file_get_contents( $index_path ), true );
+		if ( $stylesheet !== $template ) {
+			$themes[] = wp_get_theme( $stylesheet );
 		}
 
-		foreach( $query as $pattern ) $this->get_pattern_from_file( $pattern['slug'] );
-	}
+		$themes[] = wp_get_theme( $template );
 
-	/**
-	 * Link Reusable blocks to Appearance
-	 *
-	 * @return void
-	 */
-	public function get_paths( $base_directory ) {
-		$path_list = [];
-		
-		if ( file_exists( $base_directory ) ) {
-			$nested_files      = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $base_directory ) );
-			$nested_html_files = new \RegexIterator( $nested_files, '/^.+\.html$/i', \RecursiveRegexIterator::GET_MATCH );
+		foreach ( $themes as $theme ) {
+			$dir		= $theme->get_stylesheet_directory();
+			$dirpath 	= wp_normalize_path( $dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR );
 
-			foreach ( $nested_html_files as $path => $file ) {
-				$path_list[] = $path;
+			// Skip if not readable.
+			if ( ! is_dir( $dirpath ) || ! is_readable( $dirpath ) ) {
+				continue;
 			}
-		}
-
-		return $path_list;
-	}
-
-	/**
-	 * Retrieves the template files from  the theme.
-	 *
-	 * @return 	array 	Template.
-	 */
-	public function get_files() {
-		$themes = [
-			get_stylesheet() => get_prop( wecodeart_config( 'paths' ), 'child' ),
-			get_template()   => get_prop( wecodeart_config( 'paths' ), 'directory' ),
-		];
-
-		$template_files = [];
-
-		foreach ( $themes as $theme_slug => $theme_dir ) {
-			$theme_files = $this->get_paths( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER );
-
-			foreach ( $theme_files as $file ) {
-				$template_slug      = substr(
-					$file,
-					// Starting position of slug.
-					strpos( $file, self::FOLDER . DIRECTORY_SEPARATOR ) + 1 + strlen( self::FOLDER ),
-					// Subtract ending '.html'.
-					-5
-				);
-
-				$template_files[] = [
-					'slug'  => $template_slug,
-					'path'  => $file,
-					'theme' => $theme_slug,
-				];
-			}
-		}
-		
-		return $template_files;
-	}
-
-	/**
-	 * Retrieves the template file from the theme for a given slug.
-	 *
-	 * @access 	private
-	 *
-	 * @param 	string 	$slug template slug.
-	 *
-	 * @return 	array 	Template.
-	 */
-	public function get_file( $slug ) {
-		$themes = [
-			get_stylesheet() => get_prop( wecodeart_config( 'paths' ), 'child' ),
-			get_template()   => get_prop( wecodeart_config( 'paths' ), 'directory' ),
-		];
-
-		foreach ( $themes as $theme_slug => $theme_dir ) {
-			$file_path = wp_normalize_path( $theme_dir . DIRECTORY_SEPARATOR . self::FOLDER . DIRECTORY_SEPARATOR . $slug . '.html' );
 			
-			if ( file_exists( $file_path ) ) {
-				return [
-					'slug'  => $slug,
-					'path'  => $file_path,
-					'theme' => $theme_slug
-				];
+			// If exists, continue.
+			if ( file_exists( $dirpath ) ) {
+				// Merge index data if exists.
+				$index	= $dirpath . '_index.json';
+				if ( file_exists( $index ) ) {
+					$this->patterns = array_merge( $this->patterns, json_decode( file_get_contents( $index ), true ) );
+				}
+				// Loop HTML files and register.
+				$files = glob( $dirpath . '*.html' );
+				if ( $files ) {
+					foreach ( $files as $file ) {
+						$this->register_from_file( wp_parse_args( [
+							'theme' => $theme->get( 'TextDomain' ),
+							'path' 	=> $file,
+						], 	pathinfo( $file ) ) );
+					}
+				}
 			}
 		}
-
-		return null;
 	}
 
 	/**
@@ -220,39 +150,19 @@ class Patterns implements Integration {
 	 * @return 	Patterns\Pattern Template.
 	 */
 	public function register_from_file( $file ) {
-		$template	= file_get_contents( $file['path'] );
-
 		$args = [
-			'title' 	=> ucwords( implode( ' ', explode( '-', $file['slug'] ) ) ),
-			'content' 	=> $template,
-			'slug'		=> $file['slug'],
+			'title' 	=> ucwords( implode( ' ', explode( '-', $file['filename'] ) ) ),
+			'content' 	=> file_get_contents( $file['path'] ),
+			'slug'		=> $file['filename'],
 			'theme'		=> $file['theme'],
 		];
 
-		$has_json = current( wp_list_filter( $this->patterns, [ 'slug' => $file['slug'] ] ) );
+		$has_json = current( wp_list_filter( $this->patterns, [ 'slug' => $args['slug'] ] ) );
 		
 		if( $has_json ) {
 			$args = wp_parse_args( $has_json, $args );
 		}
 
 		return ( new Patterns\Pattern( $args ) )->register();
-	}
-
-	/**
-	 * Retrieves a single unified template object using its id.
-	 * Retrieves the file template.
-	 *
-	 * @param 	string 	$slug Template unique identifier (example: template_slug).
-	 *
-	 * @return 	Patterns\Pattern|null File template.
-	 */
-	public function get_pattern_from_file( $slug ) {
-		$template_file = $this->get_file( $slug );
-
-		if ( null !== $template_file ) {
-			return $this->register_from_file( $template_file );
-		}
-
-		return null;
 	}
 }

@@ -1,13 +1,10 @@
 [
     {
-        "slug": "section",
-        "title": "Section",
+        "slug": "html",
+        "title": "HTML - sample",
         "description": "A simple section with two columns.",
-        "blockTypes": [
-            "core/post-content"
-        ],
         "categories": [
-            "wecodeart"
+            "wecodeart-pages"
         ]
     }
 ]

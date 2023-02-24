@@ -20,7 +20,6 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_dom_element;
-use function WeCodeArt\Functions\get_elements_by_class_name;
 use function WeCodeArt\Functions\change_tag_name;
 
 /**

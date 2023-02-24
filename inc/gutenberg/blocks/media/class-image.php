@@ -122,6 +122,8 @@ class Image extends Dynamic {
 			if( $value = $img->getAttribute( 'alt' ) ) {
 				$svg->setAttribute( 'aria-label', $value );
 			}
+
+			$svg->setAttribute( 'role', 'img' );
 	
 			( $link ?? $div )->removeChild( $img );
 			( $link ?? $div )->appendChild( $svg );
