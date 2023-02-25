@@ -96,24 +96,11 @@ class Floating extends Basic {
             .form-floating > .form-control-plaintext::placeholder {
                 color: transparent;
             }
-            .form-floating > :is(.form-control:focus,form-control:not(:placeholder-shown),.form-control-plaintext:focus,.form-control-plaintext:not(:placeholder-shown)) {
+            .form-floating > :is(.form-control:focus,.form-control:-webkit-autofill,.form-control:not(:placeholder-shown),.form-control-plaintext:focus,.form-control-plaintext:-webkit-autofill,.form-control-plaintext:not(:placeholder-shown),.form-select) {
                 padding-top: 1.625rem;
                 padding-bottom: 0.625rem;
             }
-            .form-floating > .form-control:-webkit-autofill,
-            .form-floating > .form-control-plaintext:-webkit-autofill {
-                padding-top: 1.625rem;
-                padding-bottom: 0.625rem;
-            }
-            .form-floating > .form-select {
-                padding-top: 1.625rem;
-                padding-bottom: 0.625rem;
-            }
-            .form-floating > :is(.form-control:focus,form-control:not(:placeholder-shown),.form-control-plaintext,.form-select) ~ label {
-                opacity: 0.65;
-                transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
-            }
-            .form-floating > .form-control:-webkit-autofill ~ label {
+            .form-floating > :is(.form-control:focus,.form-control:-webkit-autofill,.form-control:not(:placeholder-shown),.form-control-plaintext,.form-select) ~ label {
                 opacity: 0.65;
                 transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
             }
