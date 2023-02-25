@@ -100,9 +100,7 @@ class Blocks implements Configuration {
 		$this->register( 'core/template-part',  Blocks\Site\Template::class );
         
         // Hooks
-        add_action( 'after_setup_theme',        [ $this, 'register_blocks'  ], PHP_INT_MAX );
-        add_action( 'wp_print_styles',          [ $this, 'remove_styles'    ], PHP_INT_MAX );
-        add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
+        add_action( 'after_setup_theme',    [ $this, 'register_blocks'  ], PHP_INT_MAX );
 	}
 
     /**
@@ -112,16 +110,6 @@ class Blocks implements Configuration {
 	 */
 	public function register_blocks() {
         array_map( fn( $class ) => $class::get_instance()->hooks(), $this->all() );
-	}
-
-    /**
-	 * Remove default styles
-	 *
-	 * @return void
-	 */
-	public function remove_styles() {
-        wp_dequeue_style( 'wp-block-library' );         // WordPress Core
-        wp_dequeue_style( 'wp-block-library-theme' );   // WordPress Core
 	}
 
 	/**

@@ -102,4 +102,20 @@ class Title extends Dynamic {
 			echo get_the_title( $id );
 		}, [ $block->context['postId'] ], false );
 	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		.wp-block-post-title {
+			word-break: break-word;
+		}
+		.wp-block-post-title a {
+			display: inline-block;
+		}
+		";
+	}
 }

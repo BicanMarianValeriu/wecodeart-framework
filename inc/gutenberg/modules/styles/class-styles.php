@@ -91,9 +91,10 @@ class Styles implements Integration {
 		] );
 
 		// Hooks
+		add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
-		add_action( 'wp_enqueue_scripts',			[ $this, 'register_styles'		], 20, 1 );
+		add_action( 'wp_enqueue_scripts',			[ $this, 'manage_styles'		], 20, 1 );
 		add_filter( 'wp_theme_json_data_theme',  	[ $this, 'link_brightness' 		], 20, 1 );
 		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
 		
@@ -221,35 +222,17 @@ class Styles implements Integration {
 	 *
 	 * @return 	string
 	 */
-	public function register_styles() {
+	public function manage_styles() {
 		global $_wp_current_template_content;
 
-		// Global styles.
-		$this->global_styles();
+		// Manage Styles.
+		wp_dequeue_style( 'wp-block-library' );         // WordPress Core
+        wp_dequeue_style( 'wp-block-library-theme' );   // WordPress Core
 
-		// Collect template classes.
-		$blocks		= parse_blocks( $_wp_current_template_content );
-		$classes	= self::collect_classes( _flatten_blocks( $blocks ) );
-
-		$this->classes = array_merge( $this->classes, $classes );
-
-		// Process utilities.
-		if( ! empty( $this->classes ) ) {
-			$this->CSS->Utilities->load( $this->classes );
-		}
-	}
-	
-	/**
-	 * Global styles.
-	 *
-	 * @return 	void
-	 */
-	public function global_styles() {
 		$style = '';
 
 		// Box Sizing
 		$style .= '*,*::before,*::after {box-sizing: border-box;}';
-		
 		// Colors RGB as CSS var
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
@@ -265,6 +248,17 @@ class Styles implements Integration {
 		}
 
 		wp_add_inline_style( 'global-styles', $style );
+
+		// Collect template classes.
+		$blocks		= parse_blocks( $_wp_current_template_content );
+		$classes	= self::collect_classes( _flatten_blocks( $blocks ) );
+
+		$this->classes = array_merge( $this->classes, $classes );
+
+		// Process utilities.
+		if( ! empty( $this->classes ) ) {
+			$this->CSS->Utilities->load( $this->classes );
+		}
 	}
 
 	/**

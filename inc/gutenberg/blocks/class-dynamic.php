@@ -261,17 +261,20 @@ abstract class Dynamic {
 	 * @return 	string Block CSS.
 	 */
 	public function enqueue_styles() {
+		$block_handle	= 'wp-block-' . $this->block_name;
+
 		// These are cached styles, so we only generate minified version.
 		$styles = wecodeart( 'styles' )::compress( $this->styles() );
 		
-		if( empty( $styles ) ) return;
+		if( empty( $styles ) ) {
+			return wp_deregister_style( $block_handle );
+		}
 
 		global $wp_styles;
 
 		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 
-		$block_handle 	= 'wp-block-' . $this->block_name;
 		$block_css 		= 'block-' . $this->block_name . '.css';
 
 		if( ! $filesystem->has_file( $block_css ) ) {

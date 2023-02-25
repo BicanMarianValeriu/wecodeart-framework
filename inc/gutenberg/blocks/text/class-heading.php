@@ -96,4 +96,17 @@ class Heading extends Dynamic {
 
 		return wecodeart( 'styles' )::compress( $inline );
 	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return "
+		:where(h1,h2,h3,h4,h5,h6).has-background {
+			padding: .125em .25em;
+		}
+		";
+	}
 }
