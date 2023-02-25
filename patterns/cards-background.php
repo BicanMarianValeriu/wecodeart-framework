@@ -19,7 +19,7 @@
                     <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","right":"var:preset|spacing|md","left":"var:preset|spacing|md"}}},"className":"shadow-sm rounded","layout":{"type":"constrained"}} -->
                     <div class="wp-block-group shadow-sm rounded" style="padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--md)">
                         <!-- wp:heading {"textAlign":"center","level":3,"className":"is-style-default"} -->
-                        <h3 class="has-text-align-center is-style-default">Loved by <strong>Customers</strong></h3>
+                        <h3 class="has-text-align-center is-style-default"><?php printf( esc_html__( 'Loved by %s', 'wecodeart' ), sprintf( '<strong>%s</strong>', esc_html__( 'Customers', 'wecodeart' ) ) ); ?></h3>
                         <!-- /wp:heading -->
                         <!-- wp:separator -->
                         <hr class="wp-block-separator has-alpha-channel-opacity" />
@@ -31,7 +31,7 @@
                         <div class="wp-block-buttons">
                             <!-- wp:button {"textColor":"white","className":"is-style-outline"} -->
                             <div class="wp-block-button is-style-outline">
-                                <a class="wp-block-button__link has-white-color has-text-color wp-element-button" href="#">LEARN MORE</a>
+                                <a class="wp-block-button__link has-white-color has-text-color wp-element-button" href="#"><?php esc_html_e( 'Learn more', 'wecodeart' ); ?></a>
                             </div>
                             <!-- /wp:button -->
                         </div>
@@ -53,7 +53,7 @@
                     <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","right":"var:preset|spacing|md","left":"var:preset|spacing|md"}}},"className":"shadow-sm rounded","layout":{"type":"constrained"}} -->
                     <div class="wp-block-group shadow-sm rounded" style="padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--md)">
                         <!-- wp:heading {"textAlign":"center","level":3,"className":"is-style-default"} -->
-                        <h3 class="has-text-align-center is-style-default">Well <strong>Documented</strong></h3>
+                        <h3 class="has-text-align-center is-style-default"><?php printf( esc_html__( 'Well %s', 'wecodeart' ), sprintf( '<strong>%s</strong>', esc_html__( 'Documented', 'wecodeart' ) ) ); ?></h3>
                         <!-- /wp:heading -->
                         <!-- wp:separator -->
                         <hr class="wp-block-separator has-alpha-channel-opacity" />
@@ -65,7 +65,7 @@
                         <div class="wp-block-buttons">
                             <!-- wp:button {"textColor":"white","className":"is-style-outline"} -->
                             <div class="wp-block-button is-style-outline">
-                                <a class="wp-block-button__link has-white-color has-text-color wp-element-button" href="#">LEARN MORE</a>
+                                <a class="wp-block-button__link has-white-color has-text-color wp-element-button" href="#"><?php esc_html_e( 'Learn more', 'wecodeart' ); ?></a>
                             </div>
                             <!-- /wp:button -->
                         </div>

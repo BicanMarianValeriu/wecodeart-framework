@@ -1,7 +1,7 @@
 [
     {
-        "slug": "wecodeart-pages",
-        "label": "WeCodeArt - Pages"
+        "slug": "wecodeart-hero",
+        "label": "WeCodeArt - Hero"
     },
     {
         "slug": "wecodeart-cards",
@@ -10,6 +10,10 @@
     {
         "slug": "wecodeart-cta",
         "label": "WeCodeArt - CTA"
+    },
+    {
+        "slug": "wecodeart-pages",
+        "label": "WeCodeArt - Pages"
     },
     {
         "slug": "wecodeart",

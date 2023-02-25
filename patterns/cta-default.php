@@ -17,10 +17,10 @@
                 <!-- wp:column {"verticalAlignment":"center","style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"className":"col-12 col-lg has-text-align-center has-text-align-lg-left","layout":{"type":"default"}} -->
                 <div class="wp-block-column is-vertically-aligned-center col-12 col-lg has-text-align-center has-text-align-lg-left">
                     <!-- wp:heading {"className":"fw-300"} -->
-                    <h2 class="fw-300">Ready to create with <strong>WeCodeArt Framework?</strong></h2>
+                    <h2 class="fw-300"><?php printf( esc_html__( 'Ready to create with %s?', 'wecodeart' ), '<strong>WeCodeArt Framework</strong>' ); ?></h2>
                     <!-- /wp:heading -->
                     <!-- wp:paragraph {"className":"fw-300"} -->
-                    <p class="fw-300">WeCodeArt Framework is a base WP theme, Super Fast, Optimized, and ready for any shape.</p>
+                    <p class="fw-300"><?php esc_html_e( 'WeCodeArt Framework is a base WP theme, Super Fast, Optimized, and ready for any shape.', 'wecodeart' ); ?></p>
                     <!-- /wp:paragraph -->
                 </div>
                 <!-- /wp:column -->
@@ -35,7 +35,7 @@
                         <!-- /wp:button -->
                         <!-- wp:button {"textColor":"white","className":"is-style-link"} -->
                         <div class="wp-block-button is-style-link">
-                            <a class="wp-block-button__link has-white-color has-text-color wp-element-button">View Themes</a>
+                            <a class="wp-block-button__link has-white-color has-text-color wp-element-button"><?php esc_html_e( 'View Themes', 'wecodeart' ); ?></a>
                         </div>
                         <!-- /wp:button -->
                     </div>

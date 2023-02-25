@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-23 23:58+0000\n"
+"POT-Creation-Date: 2023-02-25 05:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -28,6 +28,16 @@ msgstr ""
 #: inc/gutenberg/blocks/query/class-title.php:151
 #, php-format
 msgid "%s Archives"
+msgstr ""
+
+#: patterns/cards-default.php:17
+#, php-format
+msgid "%s Design"
+msgstr ""
+
+#: patterns/cards-default.php:43
+#, php-format
+msgid "%s Source"
 msgstr ""
 
 #: views/blocks/post/author.tpl.php:41
@@ -88,6 +98,10 @@ msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:157
 msgid "Blog"
+msgstr ""
+
+#: patterns/hero-separator.php:13
+msgid "Build your website with WeCodeArt"
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-form.php:237
@@ -157,6 +171,14 @@ msgstr ""
 msgid "Copyright %s - All rights reserved. Built on %s."
 msgstr ""
 
+#: patterns/cards-background.php:22
+msgid "Customers"
+msgstr ""
+
+#: patterns/cards-default.php:43
+msgid "Customizable"
+msgstr ""
+
 #: inc/support/starter/class-starter.php:71
 msgid "Customizer"
 msgstr ""
@@ -166,8 +188,16 @@ msgstr ""
 msgid "Daily Archives: %s"
 msgstr ""
 
+#: patterns/cards-overlay.php:56
+msgid "Design"
+msgstr ""
+
 #: inc/admin/class-admin.php:261
 msgid "Developer Mode"
+msgstr ""
+
+#: patterns/cards-background.php:56 patterns/cards-overlay.php:22
+msgid "Documented"
 msgstr ""
 
 #: inc/support/starter/class-starter.php:70
@@ -177,8 +207,12 @@ msgid ""
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-separator.php:66
+#: inc/gutenberg/blocks/design/class-separator.php:70
 msgid "Dots"
+msgstr ""
+
+#: patterns/cta-border.php:22 patterns/hero-separator.php:46
+msgid "Download Now"
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-form.php:155
@@ -189,12 +223,29 @@ msgstr ""
 msgid "Enter password"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-separator.php:72
+#: inc/gutenberg/blocks/design/class-separator.php:76
 msgid "Faded"
 msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:79
 msgid "Failed to dismiss notification"
+msgstr ""
+
+#: patterns/hero-separator.php:23
+msgid "FIRST"
+msgstr ""
+
+#: patterns/hero-separator.php:16
+msgid "FREE"
+msgstr ""
+
+#: patterns/hero-separator.php:38
+msgid "Free for lifetime"
+msgstr ""
+
+#: patterns/hero-separator.php:16
+#, php-format
+msgid "Get it now. Is %s forever!"
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-buttons.php:50
@@ -223,6 +274,12 @@ msgstr ""
 msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr ""
 
+#: patterns/cards-background.php:34 patterns/cards-background.php:68
+#: patterns/cards-default.php:29 patterns/cards-default.php:55
+#: patterns/cards-overlay.php:34 patterns/cards-overlay.php:68
+msgid "Learn more"
+msgstr ""
+
 #: views/blocks/post/comments.tpl.php:51
 msgid "Leave a Comment"
 msgstr ""
@@ -233,6 +290,11 @@ msgstr ""
 
 #: inc/gutenberg/blocks/site/class-login.php:102
 msgid "Log In"
+msgstr ""
+
+#: patterns/cards-background.php:22
+#, php-format
+msgid "Loved by %s"
 msgstr ""
 
 #: views/general/toggler.tpl.php:27
@@ -328,6 +390,12 @@ msgstr ""
 msgid "Read more"
 msgstr ""
 
+#: patterns/cta-border.php:13 patterns/cta-center.php:16
+#: patterns/cta-default.php:20
+#, php-format
+msgid "Ready to create with %s?"
+msgstr ""
+
 #: inc/gutenberg/blocks/site/class-login.php:101
 msgid "Remember Me"
 msgstr ""
@@ -383,6 +451,14 @@ msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-form.php:93
 msgid "Speak Your Mind"
+msgstr ""
+
+#: patterns/hero-separator.php:35
+msgid "Strict coding standards"
+msgstr ""
+
+#: patterns/hero-separator.php:32
+msgid "Super high performance"
 msgstr ""
 
 #: inc/gutenberg/blocks/navigation/class-navigation.php:92
@@ -453,6 +529,10 @@ msgstr ""
 msgid "Username or Email Address"
 msgstr ""
 
+#: patterns/cta-default.php:38
+msgid "View Themes"
+msgstr ""
+
 #: inc/support/plugins/cf7/class-cf7.php:69
 #, php-format
 msgid ""
@@ -469,6 +549,13 @@ msgstr ""
 msgid "WeCodeArt"
 msgstr ""
 
+#: patterns/cta-border.php:16 patterns/cta-center.php:19
+#: patterns/cta-default.php:23
+msgid ""
+"WeCodeArt Framework is a base WP theme, Super Fast, Optimized, and ready for "
+"any shape."
+msgstr ""
+
 #: inc/admin/class-activation.php:112
 #, php-format
 msgid ""
@@ -483,6 +570,11 @@ msgid ""
 "version %2$s. Please upgrade WordPress to use WeCodeArt Framework."
 msgstr ""
 
+#: patterns/cards-background.php:56 patterns/cards-overlay.php:22
+#, php-format
+msgid "Well %s"
+msgstr ""
+
 #: inc/support/markup/class-svg.php:159
 #, php-format
 msgid ""
@@ -493,6 +585,15 @@ msgstr ""
 #, php-format
 msgid ""
 "When using \"%s\" method you must define the 3rd parameter (style or script)."
+msgstr ""
+
+#: patterns/cards-default.php:17
+msgid "Winner"
+msgstr ""
+
+#: patterns/cards-overlay.php:56
+#, php-format
+msgid "Winner %s"
 msgstr ""
 
 #: views/admin/notification-locale.tpl.php:25

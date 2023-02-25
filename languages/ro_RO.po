@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-02-23 23:58+0000\n"
+"PO-Revision-Date: 2023-02-25 05:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -30,6 +30,16 @@ msgstr "% Comentarii"
 #, php-format
 msgid "%s Archives"
 msgstr "%s Arhivă"
+
+#: patterns/cards-default.php:17
+#, php-format
+msgid "%s Design"
+msgstr "Personalizări %s "
+
+#: patterns/cards-default.php:43
+#, php-format
+msgid "%s Source"
+msgstr "Sursă %s"
 
 #: views/blocks/post/author.tpl.php:41
 #, php-format
@@ -96,6 +106,10 @@ msgstr "Denumirea bloc-ului este necesară."
 #: inc/gutenberg/blocks/query/class-title.php:157
 msgid "Blog"
 msgstr "Blog"
+
+#: patterns/hero-separator.php:13
+msgid "Build your website with WeCodeArt"
+msgstr "Construiește-ți site-ul web cu WeCodeArt"
 
 #: inc/gutenberg/blocks/comment/class-form.php:237
 #, php-format
@@ -168,6 +182,14 @@ msgstr "Continuați lectura"
 msgid "Copyright %s - All rights reserved. Built on %s."
 msgstr "Copyright %s – Toate drepturile rezervate. Construit pe %s."
 
+#: patterns/cards-background.php:22
+msgid "Customers"
+msgstr "Clienți"
+
+#: patterns/cards-default.php:43
+msgid "Customizable"
+msgstr "Personalizat"
+
 #: inc/support/starter/class-starter.php:71
 msgid "Customizer"
 msgstr "Customizer"
@@ -177,9 +199,17 @@ msgstr "Customizer"
 msgid "Daily Archives: %s"
 msgstr "Arhive zilnice: %s"
 
+#: patterns/cards-overlay.php:56
+msgid "Design"
+msgstr "Personalizări"
+
 #: inc/admin/class-admin.php:261
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
+
+#: patterns/cards-background.php:56 patterns/cards-overlay.php:22
+msgid "Documented"
+msgstr "Documentat"
 
 #: inc/support/starter/class-starter.php:70
 #, php-format
@@ -191,9 +221,13 @@ msgstr ""
 "pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
 "WeCodeArt Framework."
 
-#: inc/gutenberg/blocks/design/class-separator.php:66
+#: inc/gutenberg/blocks/design/class-separator.php:70
 msgid "Dots"
 msgstr "Puncte"
+
+#: patterns/cta-border.php:22 patterns/hero-separator.php:46
+msgid "Download Now"
+msgstr "Descarcă Acum"
 
 #: inc/gutenberg/blocks/comment/class-form.php:155
 msgid "Email *"
@@ -203,7 +237,7 @@ msgstr "Email *"
 msgid "Enter password"
 msgstr "Introduceți parola"
 
-#: inc/gutenberg/blocks/design/class-separator.php:72
+#: inc/gutenberg/blocks/design/class-separator.php:76
 #| msgid "Fixed"
 msgid "Faded"
 msgstr "Estompat"
@@ -211,6 +245,23 @@ msgstr "Estompat"
 #: inc/admin/notifications/class-ajax.php:79
 msgid "Failed to dismiss notification"
 msgstr "Notificarea nu a putut fi respinsă"
+
+#: patterns/hero-separator.php:23
+msgid "FIRST"
+msgstr "PRIMA"
+
+#: patterns/hero-separator.php:16
+msgid "FREE"
+msgstr "GRATIS"
+
+#: patterns/hero-separator.php:38
+msgid "Free for lifetime"
+msgstr "Gratiis pe viață"
+
+#: patterns/hero-separator.php:16
+#, php-format
+msgid "Get it now. Is %s forever!"
+msgstr "Ia-o acum. Este %s pentru totdeauna!"
 
 #: inc/gutenberg/blocks/design/class-buttons.php:50
 msgid "Group"
@@ -238,6 +289,14 @@ msgstr "Wrapper HTML nevalid pentru „%s”."
 msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr "Se pare că WeCodeArt Framework nu este tradusă în %s."
 
+#: patterns/cards-background.php:34 patterns/cards-background.php:68
+#: patterns/cards-default.php:29 patterns/cards-default.php:55
+#: patterns/cards-overlay.php:34 patterns/cards-overlay.php:68
+msgid "Learn more"
+msgstr ""
+"\n"
+"Află mai multe"
+
 #: views/blocks/post/comments.tpl.php:51
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
@@ -249,6 +308,11 @@ msgstr "Legătură"
 #: inc/gutenberg/blocks/site/class-login.php:102
 msgid "Log In"
 msgstr "Autentificare"
+
+#: patterns/cards-background.php:22
+#, php-format
+msgid "Loved by %s"
+msgstr "Iubit de %s"
 
 #: views/general/toggler.tpl.php:27
 msgid "Menu"
@@ -344,6 +408,12 @@ msgstr "Postat pe"
 msgid "Read more"
 msgstr "Citeşte mai mult"
 
+#: patterns/cta-border.php:13 patterns/cta-center.php:16
+#: patterns/cta-default.php:20
+#, php-format
+msgid "Ready to create with %s?"
+msgstr "Sunteți gata să creați cu %s?"
+
 #: inc/gutenberg/blocks/site/class-login.php:101
 msgid "Remember Me"
 msgstr "Ține-mă minte"
@@ -401,6 +471,14 @@ msgstr "Sari la conținut"
 #: inc/gutenberg/blocks/comment/class-form.php:93
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
+
+#: patterns/hero-separator.php:35
+msgid "Strict coding standards"
+msgstr "Standarde stricte de codare"
+
+#: patterns/hero-separator.php:32
+msgid "Super high performance"
+msgstr "Performanță super înaltă"
 
 #: inc/gutenberg/blocks/navigation/class-navigation.php:92
 msgid "Tabs"
@@ -474,6 +552,10 @@ msgstr "actualizați PHP"
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
+#: patterns/cta-default.php:38
+msgid "View Themes"
+msgstr "Vedeți Teme"
+
 #: inc/support/plugins/cf7/class-cf7.php:69
 #, php-format
 msgid ""
@@ -491,6 +573,15 @@ msgstr "Site"
 #: inc/gutenberg/class-gutenberg.php:82
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
+
+#: patterns/cta-border.php:16 patterns/cta-center.php:19
+#: patterns/cta-default.php:23
+msgid ""
+"WeCodeArt Framework is a base WP theme, Super Fast, Optimized, and ready for "
+"any shape."
+msgstr ""
+"WeCodeArt Framework este o temă WP de bază, super rapidă, optimizată și "
+"pregătită pentru orice formă."
 
 #: inc/admin/class-activation.php:112
 #, php-format
@@ -511,6 +602,11 @@ msgstr ""
 "Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
 "WeCodeArt Framework."
 
+#: patterns/cards-background.php:56 patterns/cards-overlay.php:22
+#, php-format
+msgid "Well %s"
+msgstr "Foarte bine %s"
+
 #: inc/support/markup/class-svg.php:159
 #, php-format
 msgid ""
@@ -528,6 +624,15 @@ msgid ""
 msgstr ""
 "Când utilizați metoda \"%s\" trebuie să definiți al treilea parametru (style "
 "sau script)."
+
+#: patterns/cards-default.php:17
+msgid "Winner"
+msgstr "Câştigător"
+
+#: patterns/cards-overlay.php:56
+#, php-format
+msgid "Winner %s"
+msgstr "%s Câştigător"
 
 #: views/admin/notification-locale.tpl.php:25
 msgid ""

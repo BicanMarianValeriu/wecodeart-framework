@@ -134,7 +134,7 @@ class Menu extends Dynamic {
 				--wp--dropdown-border-radius: .375rem;
 				--wp--dropdown-divider-bg: rgba(0,0,0, .05);
 				--wp--dropdown-divider-margin-y: .5rem;
-				--wp--dropdown-box-shadow: 0 .5rem 1rem rgba(0,0,0, 0.15);
+				--wp--dropdown-box-shadow: 0 .5rem 1rem rgba(0,0,0, 0.1);
 				--wp--dropdown-link-color: var(--wp--preset--color--dark);
 				--wp--dropdown-link-hover-color: var(--wp--preset--color--dark);
 				--wp--dropdown-link-hover-bg: var(--wp--preset--color--light);
@@ -158,6 +158,7 @@ class Menu extends Dynamic {
 				background-color: var(--wp--dropdown-bg);
 				border: var(--wp--dropdown-border-width) solid var(--wp--dropdown-border-color);
     			border-radius: var(--wp--dropdown-border-radius);
+				box-shadow: var(--wp--dropdown-box-shadow);
 			}
 			.dropdown-menu[data-bs-popper] {
 				top: 100%;
