@@ -12,7 +12,7 @@
     <div class="wp-block-columns are-vertically-aligned-top flex-column flex-lg-row gap-0">
         <!-- wp:column {"verticalAlignment":"top","className":"sticky-lg-top","customCSS":"selector {\n  top: 80px;\n  z-index: 5;\n}\n"} -->
         <div class="wp-block-column is-vertically-aligned-top sticky-lg-top">
-            <!-- wp:table-of-contents {"headings":[],"style":{"spacing":{"padding":{"top":"var:preset|spacing|gutter","right":"var:preset|spacing|gutter","bottom":"var:preset|spacing|gutter","left":"var:preset|spacing|gutter"}}},"backgroundColor":"light","textColor":"dark","className":"rounded-1"} /-->
+            <!-- wp:table-of-contents {"headings":[],"style":{"spacing":{"padding":{"top":"var:preset|spacing|g","right":"var:preset|spacing|g","bottom":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"backgroundColor":"light","textColor":"dark","className":"rounded-1"} /-->
         </div>
         <!-- /wp:column -->
         <!-- wp:column {"verticalAlignment":"top","className":"col-lg-9 ps-lg-5"} -->

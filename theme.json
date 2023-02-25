@@ -255,7 +255,7 @@
 			"spacingSizes": [
 				{
 					"name": "Gutter",
-					"slug": "gutter",
+					"slug": "g",
 					"size": "var(--wp--custom--gutter)"
 				},
 				{
@@ -301,7 +301,7 @@
 		"typography": {
 			"dropCap": true,
 			"customFontSize": true,
-			"fluid": false,
+			"fluid": true,
 			"fontFamilies": [
 				{
 					"fontFamily": "var(--wp--font-system)",
@@ -316,34 +316,39 @@
 			],
 			"fontSizes": [
 				{
-					"slug": "small",
-					"size": ".8rem",
-					"name": "Small"
+					"fluid": false,
+					"size": "0.875rem",
+					"slug": "small"
 				},
 				{
-					"slug": "normal",
+					"fluid": false,
 					"size": "1rem",
+					"slug": "normal",
 					"name": "Normal"
 				},
 				{
-					"slug": "medium",
-					"size": "1.3rem",
-					"name": "Medium"
+					"fluid": {
+						"min": "1rem",
+						"max": "1.25rem"
+					},
+					"size": "1.25rem",
+					"slug": "medium"
 				},
 				{
-					"slug": "large",
-					"size": "1.5rem",
-					"name": "Large"
+					"fluid": {
+						"min": "1.25rem",
+						"max": "1.75rem"
+					},
+					"size": "1.75rem",
+					"slug": "large"
 				},
 				{
-					"slug": "x-large",
-					"size": "2rem",
-					"name": "Extra Large"
-				},
-				{
-					"slug": "huge",
-					"size": "3rem",
-					"name": "Huge"
+					"fluid": {
+						"min": "2rem",
+						"max": "2.5rem"
+					},
+					"size": "2.5rem",
+					"slug": "x-large"
 				}
 			]
 		}
@@ -501,12 +506,14 @@
 			},
 			"h5": {
 				"typography": {
-					"fontSize": "1.25rem"
+					"fontSize": "1.25rem",
+					"textTransform": "uppercase"
 				}
 			},
 			"h6": {
 				"typography": {
-					"fontSize": "1rem"
+					"fontSize": "1rem",
+					"textTransform": "uppercase"
 				}
 			},
 			"link": {
@@ -547,8 +554,8 @@
 		"spacing": {
 			"blockGap": "1.5rem",
 			"padding": {
-				"left": "var:preset|spacing|gutter",
-				"right": "var:preset|spacing|gutter"
+				"left": "var:preset|spacing|g",
+				"right": "var:preset|spacing|g"
 			}
 		},
 		"typography": {

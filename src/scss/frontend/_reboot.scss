@@ -45,14 +45,6 @@ body {
 	overflow-x: hidden;
 }
 
-// Typography
-@each $tag, $value in $font-sizes {
-	h#{$tag},
-	.h#{$tag} {
-		@include font-size($value);
-	}
-}
-
 // Abbreviations
 //
 // 1. Duplicate behavior to the data-bs-* attribute for our tooltip plugin

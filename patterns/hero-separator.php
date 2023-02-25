@@ -7,7 +7,7 @@
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"blockGap":"0","margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0">
-    <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxl","bottom":"var:preset|spacing|xxl","right":"var:preset|spacing|gutter","left":"var:preset|spacing|gutter"},"blockGap":"var:preset|spacing|lg"}},"backgroundColor":"primary","textColor":"white","className":"","layout":{"type":"constrained"}} -->
+    <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxl","bottom":"var:preset|spacing|xxl","right":"var:preset|spacing|g","left":"var:preset|spacing|g"},"blockGap":"var:preset|spacing|lg"}},"backgroundColor":"primary","textColor":"white","className":"","layout":{"type":"constrained"}} -->
     <div class="wp-block-group alignfull has-white-color has-primary-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--xxl);padding-right:var(--wp--preset--spacing--gutter);padding-bottom:var(--wp--preset--spacing--xxl);padding-left:var(--wp--preset--spacing--gutter)">
         <!-- wp:heading {"textAlign":"center","level":1,"className":"display-4 fw-700"} -->
         <h1 class="wp-block-heading has-text-align-center display-4 fw-700"><?php esc_html_e( 'Build your website with WeCodeArt', 'wecodeart' ); ?></h1>
@@ -41,7 +41,7 @@
         <!-- /wp:list -->
         <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
         <div class="wp-block-buttons">
-            <!-- wp:button {"textColor":"white","style":{"spacing":{"padding":{"top":"var:preset|spacing|gutter","bottom":"var:preset|spacing|gutter","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"50px"}},"className":"is-style-outline"} -->
+            <!-- wp:button {"textColor":"white","style":{"spacing":{"padding":{"top":"var:preset|spacing|g","bottom":"var:preset|spacing|g","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"50px"}},"className":"is-style-outline"} -->
             <div class="wp-block-button is-style-outline">
                 <a class="wp-block-button__link has-white-color has-text-color wp-element-button" href="#" style="border-radius:50px;padding-top:var(--wp--preset--spacing--gutter);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--gutter);padding-left:var(--wp--preset--spacing--md)"><?php esc_html_e( 'Download Now', 'wecodeart' ); ?></a>
             </div>

@@ -13,7 +13,7 @@
             <img src="https://pd.w.org/2023/01/42163d169550d5270.03657997.jpg" alt="" />
         </figure>
         <div class="wp-block-media-text__content">
-            <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|gutter","right":"var:preset|spacing|gutter","bottom":"var:preset|spacing|gutter","left":"var:preset|spacing|gutter"},"blockGap":"var:preset|spacing|lg"}},"className":"py-5 px-md-5","layout":{"type":"constrained"}} -->
+            <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|g","right":"var:preset|spacing|g","bottom":"var:preset|spacing|g","left":"var:preset|spacing|g"},"blockGap":"var:preset|spacing|lg"}},"className":"py-5 px-md-5","layout":{"type":"constrained"}} -->
             <div class="wp-block-group alignfull py-5 px-md-5" style="padding-top:var(--wp--preset--spacing--gutter);padding-right:var(--wp--preset--spacing--gutter);padding-bottom:var(--wp--preset--spacing--gutter);padding-left:var(--wp--preset--spacing--gutter)">
                 <!-- wp:site-logo {"width":60,"isLink":false,"className":"mb-5"} /-->
                 <!-- wp:group {"align":"full","layout":{"type":"constrained","contentSize":"550px","justifyContent":"left"}} -->
@@ -44,7 +44,7 @@
                         <!-- wp:search {"label":"","showLabel":false,"placeholder":"Your email","buttonText":"Subscribe","backgroundColor":"warning","textColor":"dark"} /-->
                     </div>
                     <!-- /wp:group -->
-                    <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|gutter"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+                    <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|g"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
                     <div class="wp-block-group">
                         <!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|secondary"}}}},"textColor":"primary"} -->
                         <p class="has-primary-color has-text-color has-link-color"><strong>T: <a href="tel:+1234567890">123-456-7890</a></strong></p>
@@ -52,7 +52,7 @@
                         <!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|secondary"}}}},"textColor":"primary"} -->
                         <p class="has-primary-color has-text-color has-link-color"><strong>E: <a href="mailto:you@domain.com">you@domain.com</a></strong></p>
                         <!-- /wp:paragraph -->
-                        <!-- wp:social-links {"iconColor":"primary","iconColorValue":"#1188ff","openInNewTab":true,"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|gutter","left":"var:preset|spacing|gutter"}}},"className":"is-style-logos-only"} -->
+                        <!-- wp:social-links {"iconColor":"primary","iconColorValue":"#1188ff","openInNewTab":true,"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"className":"is-style-logos-only"} -->
                         <ul class="wp-block-social-links has-icon-color is-style-logos-only">
                             <!-- wp:social-link {"url":"#","service":"wordpress"} /-->
                             <!-- wp:social-link {"url":"#","service":"facebook"} /-->
