@@ -196,8 +196,8 @@ class Button extends Dynamic {
 		.wp-block-button__link:is(:active,.active) {
 			box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
 		}
-		.wp-block-button__link:is(:disabled,.disabled),
-		fieldset:is(:disabled,.disabled) .wp-block-button__link {
+		.wp-element-button:is(:disabled,.disabled),
+		.wp-block-button__link:is(:disabled,.disabled) {
 			pointer-events: none;
 			box-shadow: none;
 			opacity: .7;

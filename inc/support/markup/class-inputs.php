@@ -110,6 +110,9 @@ class Inputs implements Configuration {
 
 		$inline = '
 			.wecodeart-forms {
+				--wp--input--padding-y: .375rem;
+				--wp--input--padding-x: .75rem;
+				--wp--input--padding: var(--wp--input--padding-y) var(--wp--input--padding-x);
 				--wp--input--border-color: var(--wp--gray-400);
 				--wp--input--border-radius: .375rem;
 				--wp--input--border: 1px solid var(--wp--input--border-color);
@@ -173,8 +176,8 @@ class Inputs implements Configuration {
 			}
 			.form-text {
                 margin-top: 0.25rem;
-                font-size: 0.875em;
-                color: #6c757d;
+                font-size: var(--wp--preset--font-size--small);
+                color: var(--wp--preset--color--dark);
             }
 			.input-group {
 				position: relative;
@@ -222,7 +225,7 @@ class Inputs implements Configuration {
 			.input-group-lg > .input-group-text,
 			.input-group-lg > .wp-element-button {
 				padding: 0.5rem 1rem;
-				font-size: 1.25rem;
+				font-size: var(--wp--preset--font-size--medium);
 				border-radius: 0.5rem;
 			}
 			.input-group-sm > .form-control,
@@ -230,7 +233,7 @@ class Inputs implements Configuration {
 			.input-group-sm > .input-group-text,
 			.input-group-sm > .wp-element-button {
 				padding: 0.25rem 0.5rem;
-				font-size: 0.875rem;
+				font-size: var(--wp--preset--font-size--small);
 				border-radius: 0.25rem;
 			}
 			.input-group-lg > .form-select,
@@ -260,33 +263,20 @@ class Inputs implements Configuration {
 			}
 
 			/* Validation */
-			.valid-feedback {
-				display: none;
-				width: 100%;
-				margin-top: 0.25rem;
-				font-size: 0.875em;
-				color: #7dc855;
-			}  
-			.valid-tooltip {
-				position: absolute;
-				top: 100%;
-				z-index: 5;
-				display: none;
-				max-width: 100%;
-				padding: 0.25rem 0.5rem;
-				margin-top: 0.1rem;
-				font-size: 0.875rem;
-				color: #000;
-				background-color: rgba(125, 200, 85, 0.9);
-				border-radius: 0.375rem;
-			}
+			.valid-feedback,
 			.invalid-feedback {
 				display: none;
 				width: 100%;
 				margin-top: 0.25rem;
-				font-size: 0.875em;
-				color: #dc3545;
+				font-size: var(--wp--preset--font-size--small);
+			}  
+			.valid-feedback {
+				color: var(--wp--preset--color--success);
 			}
+			.invalid-feedback {
+				color: var(--wp--preset--color--danger);
+			}
+			.valid-tooltip,
 			.invalid-tooltip {
 				position: absolute;
 				top: 100%;
@@ -295,10 +285,16 @@ class Inputs implements Configuration {
 				max-width: 100%;
 				padding: 0.25rem 0.5rem;
 				margin-top: 0.1rem;
-				font-size: 0.875rem;
+				font-size: var(--wp--preset--font-size--small);
+				border-radius: var(--wp--input--border-radius);
+			}
+			.valid-tooltip {
+				color: #000;
+				background-color: var(--wp--preset--color--success);
+			}
+			.invalid-tooltip {
 				color: #fff;
-				background-color: rgba(220, 53, 69, 0.9);
-				border-radius: 0.375rem;
+				background-color: var(--wp--preset--color--danger);
 			}
 			.was-validated :valid ~ .valid-feedback,
 			.was-validated :valid ~ .valid-tooltip,

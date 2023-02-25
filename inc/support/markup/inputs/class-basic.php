@@ -108,7 +108,7 @@ class Basic extends Base {
             .form-control {
                 display: block;
                 width: 100%;
-                padding: 0.375rem 0.75rem;
+                padding: var(--wp--input--padding);
                 font-size: 1rem;
                 font-weight: 400;
                 line-height: 1.5;
@@ -138,19 +138,19 @@ class Basic extends Base {
             .form-control-sm {
                 min-height: calc(1.5em + 0.5rem + 2px);
                 padding: 0.25rem 0.5rem;
-                font-size: 0.875rem;
+                font-size: var(--wp--preset--font-size--small);
                 border-radius: calc(0.75 * var(--wp--input--border-radius));
             }
             .form-control-lg {
                 min-height: calc(1.5em + 1rem + 2px);
                 padding: 0.5rem 1rem;
-                font-size: 1.25rem;
+                font-size: var(--wp--preset--font-size--medium);
                 border-radius: calc(1.25 * var(--wp--input--border-radius));
             }
             .form-control-plaintext {
                 display: block;
                 width: 100%;
-                padding: 0.375rem 0;
+                padding: var(--wp--input--padding-y) 0;
                 margin-bottom: 0;
                 line-height: 1.5;
                 color: var(--wp--preset--color--dark);
@@ -170,7 +170,7 @@ class Basic extends Base {
             /* Validation */
             .was-validated .form-control:valid,
             .form-control.is-valid {
-                border-color: #7dc855;
+                border-color: var(--wp--preset--color--success);
                 padding-right: calc(1.5em + 0.75rem);
                 background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 8 8%27%3e%3cpath fill=%27%237dc855%27 d=%27M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e");
                 background-repeat: no-repeat;
@@ -179,11 +179,11 @@ class Basic extends Base {
             }
             .was-validated .form-control:valid:focus,
             .form-control.is-valid:focus {
-                border-color: #7dc855;
+                border-color: var(--wp--preset--color--success);
             }
             .was-validated .form-control:invalid,
             .form-control.is-invalid {
-                border-color: #dc3545;
+                border-color: var(--wp--preset--color--dager);
                 padding-right: calc(1.5em + 0.75rem);
                 background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 width=%2712%27 height=%2712%27 fill=%27none%27 stroke=%27%23dc3545%27%3e%3ccircle cx=%276%27 cy=%276%27 r=%274.5%27/%3e%3cpath stroke-linejoin=%27round%27 d=%27M5.8 3.6h.4L6 6.5z%27/%3e%3ccircle cx=%276%27 cy=%278.2%27 r=%27.6%27 fill=%27%23dc3545%27 stroke=%27none%27/%3e%3c/svg%3e");
                 background-repeat: no-repeat;
@@ -192,7 +192,7 @@ class Basic extends Base {
             }
             .was-validated .form-control:invalid:focus,
             .form-control.is-invalid:focus {
-                border-color: #dc3545;
+                border-color: var(--wp--preset--color--dager);
                 box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
             }
                 
