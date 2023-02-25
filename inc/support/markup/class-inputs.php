@@ -335,6 +335,11 @@ class Inputs implements Configuration {
 		foreach( self::$loaded as $class ) {
 			if( ! empty( $deps = $this->get( $class )::$style_deps ) ) {
 				foreach( $deps as $dep ) {
+					// Skip already loaded.
+					if( in_array( $dep, self::$loaded ) ) {
+						continue;
+					}
+
 					$inline .= $this->get( $dep )::styles();
 				}
 			}
