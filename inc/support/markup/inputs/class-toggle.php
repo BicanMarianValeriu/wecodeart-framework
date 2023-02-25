@@ -140,7 +140,7 @@ class Toggle extends Base {
                 filter: brightness(90%);
             }
             .form-check-input:focus {
-                border-color: #91c4f6;
+                border-color: var(--wp--preset--color--primary);
                 outline: 0;
                 box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
             }
@@ -205,11 +205,11 @@ class Toggle extends Base {
             /* Validation */
             .was-validated .form-check-input:valid,
             .form-check-input.is-valid {
-                border-color: #7dc855;
+                border-color: var(--wp--preset--color--success);
             }
             .was-validated .form-check-input:valid:checked,
             .form-check-input.is-valid:checked {
-                background-color: #7dc855;
+                background-color: var(--wp--preset--color--success);
             }
             .was-validated .form-check-input:valid:focus,
             .form-check-input.is-valid:focus {
@@ -217,18 +217,18 @@ class Toggle extends Base {
             }
             .was-validated .form-check-input:valid ~ .form-check-label,
             .form-check-input.is-valid ~ .form-check-label {
-                color: #7dc855;
+                color: var(--wp--preset--color--success);
             }  
             .form-check-inline .form-check-input ~ .valid-feedback {
                 margin-left: 0.5em;
             }
             .was-validated .form-check-input:invalid,
             .form-check-input.is-invalid {
-                border-color: #dc3545;
+                border-color: var(--wp--preset--color--danger);
             }
             .was-validated .form-check-input:invalid:checked,
             .form-check-input.is-invalid:checked {
-                background-color: #dc3545;
+                background-color: var(--wp--preset--color--danger);
             }
             .was-validated .form-check-input:invalid:focus,
             .form-check-input.is-invalid:focus {
@@ -236,7 +236,7 @@ class Toggle extends Base {
             }
             .was-validated .form-check-input:invalid ~ .form-check-label,
             .form-check-input.is-invalid ~ .form-check-label {
-                color: #dc3545;
+                color: var(--wp--preset--color--danger);
             }
             .form-check-inline .form-check-input ~ .invalid-feedback {
                 margin-left: 0.5em;

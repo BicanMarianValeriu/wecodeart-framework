@@ -59,9 +59,9 @@ class File extends Basic {
                 cursor: pointer;
             }
             .form-control::file-selector-button {
-                padding: .375rem .75rem;
-                margin: -.375rem -.75rem;
-                margin-inline-end: .75rem;
+                padding: var(--wp--input--padding);
+                margin: calc(-1 * var(--wp--input--padding-y)) calc(-1 * var(--wp--input--padding-x));
+                margin-inline-end: var(--wp--input--padding-x);
                 background-color: var(--wp--gray-200);
                 color: var(--wp--preset--color--dark);
                 pointer-events: none;

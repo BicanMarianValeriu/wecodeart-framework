@@ -62,18 +62,18 @@ class Color extends Basic {
 			}
             .form-control-color {
                 width: 3rem;
-                height: calc(1.5em + 0.75rem + 2px);
-                padding: 0.375rem;
+                height: calc(1.5em + var(--wp--input--padding-x) + 2px);
+                padding: var(--wp--input--padding-y);
             }
             .form-control-color:not(:disabled):not([readonly]) {
                 cursor: pointer;
             }
             .form-control-color::-moz-color-swatch {
                 border: 0 !important;
-                border-radius: 0.375rem;
+                border-radius: var(--wp--input--border-radius);
             }
             .form-control-color::-webkit-color-swatch {
-                border-radius: 0.375rem;
+                border-radius: var(--wp--input--border-radius);
             }
             .form-control-color.form-control-sm {
                 height: calc(1.5em + 0.5rem + 2px);
@@ -84,7 +84,7 @@ class Color extends Basic {
 
             .was-validated .form-control-color:invalid,
             .form-control-color.is-invalid {
-                width: calc(3rem + calc(1.5em + 0.75rem));
+                width: calc(3rem + calc(1.5em + var(--wp--input--padding-x)));
             }
         ';
 	}

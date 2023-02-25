@@ -195,8 +195,8 @@ class Fieldset extends Base {
                 width: 100%;
                 padding: 0;
                 margin-bottom: 1rem;
-                font-size: clamp(1rem, 3vw, 1.5rem);
-                font-weight: 300;
+                font-size: inherit;
+                font-weight: inherit;
                 line-height: inherit;
             }
             legend + * {

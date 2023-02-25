@@ -72,7 +72,7 @@ class Range extends Basic {
                 width: 1rem;
                 height: 1rem;
                 margin-top: -0.25rem;
-                background-color: #2388ed;
+                background-color: var(--wp--preset--color--primary);
                 border: 0;
                 border-radius: 1rem;
                 transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -93,7 +93,7 @@ class Range extends Basic {
             .form-range::-moz-range-thumb {
                 width: 1rem;
                 height: 1rem;
-                background-color: #2388ed;
+                background-color: var(--wp--preset--color--primary);
                 border: 0;
                 border-radius: 1rem;
                 transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;

@@ -79,12 +79,12 @@ class TextArea extends Basic {
             }
             .was-validated textarea.form-control:valid,
             textarea.form-control.is-valid {
-                padding-right: calc(1.5em + 0.75rem);
+                padding-right: calc(1.5em + var(--wp--input--padding-x));
                 background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
             }
             .was-validated textarea.form-control:invalid,
             textarea.form-control.is-invalid {
-                padding-right: calc(1.5em + 0.75rem);
+                padding-right: calc(1.5em + var(--wp--input--padding-x));
                 background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
             }
         ';

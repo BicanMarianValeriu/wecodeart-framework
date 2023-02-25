@@ -126,7 +126,7 @@ class Select extends Basic {
 	public static function styles(): string {
 		return '
             select {
-                text-tranform: none;
+                text-transform: none;
                 word-wrap: normal;
             }
             select:disabled {
@@ -135,8 +135,8 @@ class Select extends Basic {
             .form-select {
                 display: block;
                 width: 100%;
-                padding: 0.375rem 2.25rem 0.375rem 0.75rem;
-                -moz-padding-start: calc(0.75rem - 3px);
+                padding: var(--wp--input--padding-y) 2.25rem var(--wp--input--padding-y) var(--wp--input--padding-x);
+                -moz-padding-start: calc(var(--wp--input--padding-x) - 3px);
                 font-size: 1rem;
                 font-weight: 400;
                 line-height: 1.5;
@@ -144,7 +144,7 @@ class Select extends Basic {
                 background-color: var(--wp--preset--color--white);
                 background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e");
                 background-repeat: no-repeat;
-                background-position: right 0.75rem center;
+                background-position: right var(--wp--input--padding-x) center;
                 background-size: 16px 12px;
                 border: var(--wp--input--border);
                 border-radius: var(--wp--input--border-radius);
@@ -152,13 +152,13 @@ class Select extends Basic {
                 appearance: none;
             }
             .form-select:focus {
-                border-color: #91c4f6;
+                border-color: var(--wp--preset--color--primary);
                 outline: 0;
                 box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
             }
             .form-select[multiple],
             .form-select[size]:not([size="1"]) {
-                padding-right: 0.75rem;
+                padding-right: var(--wp--input--padding-x);
                 background-image: none;
             }
             .form-select:disabled {
@@ -172,20 +172,20 @@ class Select extends Basic {
                 padding-top: 0.25rem;
                 padding-bottom: 0.25rem;
                 padding-left: 0.5rem;
-                font-size: 0.875rem;
+                font-size: var(--wp--preset--font-size--small);
                 border-radius: 0.25rem;
             }   
             .form-select-lg {
                 padding-top: 0.5rem;
                 padding-bottom: 0.5rem;
                 padding-left: 1rem;
-                font-size: 1.25rem;
+                font-size: var(--wp--preset--font-size--medium);
                 border-radius: 0.5rem;
             }
 
             .was-validated .form-select:valid,
             .form-select.is-valid {
-                border-color: #7dc855;
+                border-color: var(--wp--preset--color--success);
             }
             .was-validated .form-select:valid:not([multiple]):not([size]),
             .was-validated .form-select:valid:not([multiple])[size="1"],
@@ -193,16 +193,16 @@ class Select extends Basic {
             .form-select.is-valid:not([multiple])[size="1"] {
                 padding-right: 4.125rem;
                 background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 8 8%27%3e%3cpath fill=%27%237dc855%27 d=%27M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e");
-                background-position: right 0.75rem center, center right 2.25rem;
-                background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+                background-position: right var(--wp--input--padding-x) center, center right 2.25rem;
+                background-size: 16px 12px, calc(0.75em + var(--wp--input--padding-y)) calc(0.75em + var(--wp--input--padding-y));
             }
             .was-validated .form-select:valid:focus,
             .form-select.is-valid:focus {
-                border-color: #7dc855;
+                border-color:var(--wp--preset--color--success);
                 box-shadow: 0 0 0 0.25rem rgba(125, 200, 85, 0.25);
             }
             .was-validated .form-select:invalid, .form-select.is-invalid {
-                border-color: #dc3545;
+                border-color: var(--wp--preset--color--danger);
             }
             .was-validated .form-select:invalid:not([multiple]):not([size]),
             .was-validated .form-select:invalid:not([multiple])[size="1"],
@@ -210,12 +210,12 @@ class Select extends Basic {
             .form-select.is-invalid:not([multiple])[size="1"] {
                 padding-right: 4.125rem;
                 background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 width=%2712%27 height=%2712%27 fill=%27none%27 stroke=%27%23dc3545%27%3e%3ccircle cx=%276%27 cy=%276%27 r=%274.5%27/%3e%3cpath stroke-linejoin=%27round%27 d=%27M5.8 3.6h.4L6 6.5z%27/%3e%3ccircle cx=%276%27 cy=%278.2%27 r=%27.6%27 fill=%27%23dc3545%27 stroke=%27none%27/%3e%3c/svg%3e");
-                background-position: right 0.75rem center, center right 2.25rem;
-                background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+                background-position: right var(--wp--input--padding-x) center, center right 2.25rem;
+                background-size: 16px 12px, calc(0.75em + var(--wp--input--padding-y)) calc(0.75em + var(--wp--input--padding-y));
             }
             .was-validated .form-select:invalid:focus,
             .form-select.is-invalid:focus {
-                border-color: #dc3545;
+                border-color:var(--wp--preset--color--danger);
                 box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
             }
 
