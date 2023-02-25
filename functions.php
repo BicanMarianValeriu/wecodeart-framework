@@ -12,10 +12,3 @@
  */
 
 require_once( get_template_directory() . '/inc/init.php' );
-
-wecodeart_input( 'select', [
-    'choices' => [
-        'value-1' => 'test 1', 
-        'value-2' => 'test 2', 
-    ]
-] );
