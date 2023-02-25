@@ -32,15 +32,15 @@ class Button extends Processor {
 	 */
 	protected function process_extra(): void {
 		$is_outline = str_contains( get_prop( $this->attrs, [ 'className' ], '' ), 'is-style-outline' );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
+		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
 
 		// Inline Style
 		$declarations = [];
 
-		// Autodetect color lightness if no text color.
+		// Autodetect color lightness if no text color but has background.
 		if( get_prop( $this->attrs, 'textColor' ) === null && get_prop( $this->attrs, 'backgroundColor' ) ) {
-			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
-			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-			$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
 			$selected	= wp_list_filter( $palette, [ 'slug' => get_prop( $this->attrs, 'backgroundColor' ) ] );
 
 			$rgba 		= wecodeart( 'styles' )::color_to_rgba( get_prop( current( $selected ), 'color' ), false, true );
@@ -50,23 +50,40 @@ class Button extends Processor {
 			$declarations['color'] = $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
 		}
 
+		// Autodetect color lightness if only text color for outline.
+		if( get_prop( $this->attrs, 'textColor' ) && $is_outline ) {
+			$selected	= wp_list_filter( $palette, [ 'slug' => get_prop( $this->attrs, 'textColor' ) ] );
+
+			$rgba 		= wecodeart( 'styles' )::color_to_rgba( get_prop( current( $selected ), 'color' ), false, true );
+			$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
+			$is_dark 	= $luminance < get_lightness_limit();
+
+			$declarations['--wp--color--hover'] = $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
+		}
+
+		// Autodetect color lightness for custom color.
 		if( $css_style = get_prop( $this->attrs, 'style' ) ) {
 			// Color
 			if( $color = get_prop( $css_style, 'color' ) ) {
+				// Text
 				if( $text = get_prop( $color, 'text' ) ) {
-					$value	= wecodeart( 'styles' )::color_to_rgba( $text );
-					preg_match( '/\((.*?)\)/', $value, $rgb );
+ 					$value	= wecodeart( 'styles' )::color_to_rgba( $text, false, true );
 
 					if( $is_outline ) {
-						$rgba 		= wecodeart( 'styles' )::color_to_rgba( $text, false, true );
-						$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
+						$luminance	= wecodeart( 'styles' )::rgb_luminance( $value );
 						$is_dark 	= $luminance < get_lightness_limit();
 
 						$declarations['--wp--color--hover'] = $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
 					}
 
-					$declarations['--wp--color--rgb'] 	= $rgb[1];
-					$declarations['color'] 				= $value;
+					$declarations['--wp--color--rgb'] 	= join( ', ', [ $value['r'], $value['g'], $value['b'] ] );
+					$declarations['color'] 				= $text;
+				}
+				// Background
+				if( $background = get_prop( $color, 'background' ) ) {
+ 					$value	= wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+
+					$declarations['color']	= $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
 				}
 			}
 		}

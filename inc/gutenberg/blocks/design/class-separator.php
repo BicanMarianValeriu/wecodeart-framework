@@ -16,6 +16,11 @@ namespace WeCodeArt\Gutenberg\Blocks\Design;
 
 defined( 'ABSPATH' ) || exit();
 
+use str_replace;
+use rawurldecode;
+use preg_replace;
+use str_starts_with;
+use file_get_contents;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -215,8 +220,9 @@ class Separator extends Dynamic {
 				return $inline;
 			}
 
-			$svg_string	= file_get_contents( get_prop( $data, [ 'file' ] ) );
-			$encodedSVG = \rawurlencode( \str_replace( [ "\r", "\n" ], ' ', $svg_string ) );
+			$svg_string	= \file_get_contents( get_prop( $data, [ 'file' ] ) );
+			// Clean SVG and covert to data URL.
+			$encodedSVG = \rawurlencode( \preg_replace( '/\s+/', ' ', \str_replace( '"', "'", $svg_string ) ) );
 			$encodedSVG = 'data:image/svg+xml;utf8,' . $encodedSVG;
 
 			$inline = "

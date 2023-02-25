@@ -111,6 +111,9 @@ class Lists extends Dynamic {
 			ul {
 				padding-left: 1.1em;
 			}
+			:is(ul,ol):is(.is-horizontal) li {
+				margin-right: .5em;
+			}
 			ol,
 			ul,
 			dl {

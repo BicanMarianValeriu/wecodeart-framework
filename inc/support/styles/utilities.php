@@ -706,6 +706,7 @@ foreach( [
         'property'  => 'transform',
         'class'		=> 'flip',
         'values'	=> [
+            null    => 'scaleX(-1) scaleY(-1)',
             'x'     => 'scaleX(-1)',
             'y'     => 'scaleY(-1)',
         ],
