@@ -127,10 +127,10 @@ class Classes implements Integration {
 			$args[] = 'sticky-' . $breakpoint . '-top';
 		}
 
-		// Typography extra sizes
-		foreach( range( 1, 6 ) as $nr ) {
-			$args[] = 'h' . $nr;
-		}
+		// Typography extra sizes - to do later.
+		// foreach( range( 1, 6 ) as $nr ) {
+		// 	$args[] = 'h' . $nr;
+		// }
 		
 		foreach( array_keys( $displays ) as $d ) {
 			$args[] = 'display-' . $d;
