@@ -328,10 +328,10 @@
 				},
 				{
 					"fluid": {
-						"min": "1rem",
-						"max": "1.25rem"
+						"min": "1.125rem",
+						"max": "1.5rem"
 					},
-					"size": "1.25rem",
+					"size": "1.5rem",
 					"slug": "medium"
 				},
 				{
@@ -344,10 +344,10 @@
 				},
 				{
 					"fluid": {
-						"min": "2rem",
-						"max": "2.5rem"
+						"min": "1.75rem",
+						"max": "3.5rem"
 					},
-					"size": "2.5rem",
+					"size": "3.5rem",
 					"slug": "x-large"
 				}
 			]
