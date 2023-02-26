@@ -491,7 +491,7 @@
 			},
 			"h2": {
 				"typography": {
-					"fontSize": "clamp(2rem, 1.815rem + .9vw, 2.25rem)"
+					"fontSize": "clamp(1.875rem, 1.715rem + .9vw, 2rem)"
 				}
 			},
 			"h3": {
