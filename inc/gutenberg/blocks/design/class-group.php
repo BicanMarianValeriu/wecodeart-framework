@@ -19,6 +19,8 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\dom_element;
+use function WeCodeArt\Functions\get_dom_element;
 
 /**
  * Gutenberg Group blocks.
@@ -60,20 +62,111 @@ class Group extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( $attributes = [], $content = '' ) {
+	public function render( array $attributes = [], string $content = '' ): string {
 		$content 	= new \WP_HTML_Tag_Processor( $content );
 
 		static $processed = null;
 
+		// Handle main tag (once).
 		if( $content->next_tag( [ 'tag_name' => 'main' ] ) && is_null( $processed ) ) {
 			$content->set_attribute( 'class', 'wp-site-main ' . $content->get_attribute( 'class' ) );
 			$processed = true;
 		}
 
-		// if( $content->next_tag( [ 'class_name' => 'is-style-marquee' ] ) ) {
-		// 	// To Do
-		// }
+		// Handle marquee group.
+		if ( get_prop( $attributes, [ 'layout', 'orientation' ] ) === 'marquee' ) {
+			$dom 	= $this->dom( (string) $content );
+			$div 	= get_dom_element( 'div', $dom );
+			$gap 	= get_prop( $attributes, [ 'style', 'spacing', 'blockGap' ] );
+			$wrap	= $dom->createElement( 'div' );
+
+			$wrap->setAttribute( 'class', 'wp-block-group__inner-wrap' );
+
+			if( $gap ) {
+				$wrap->setAttribute( 'style', '--marquee-gap:' . wecodeart( 'styles' )::format_variable( $gap ) );
+			}
+			
+			$count 	= $div->childNodes->count();
+			for ( $i = 0; $i < $count; $i++ ) {
+				$item = $div->childNodes->item( $i );
+
+				if ( ! $item || ! method_exists( $item, 'setAttribute' ) ) {
+					continue;
+				}
+
+				$wrap->appendChild( $item );
+
+				for ( $j = 0; $j < 2; $j++ ) {
+					$clone = dom_element( $item->cloneNode( true ) );
+
+					if ( ! $clone ) {
+						continue;
+					}
+
+					$clone->setAttribute( 'aria-hidden', 'true' );
+					$classes   = explode( ' ', $clone->getAttribute( 'class' ) );
+					$classes[] = 'is-cloned';
+					$clone->setAttribute( 'class', implode( ' ', $classes ) );
+					$wrap->appendChild( $clone );
+				}
+			}
+
+			$div->insertBefore( $wrap, $div->firstChild );
+
+			$content = $dom->saveHTML();
+		}
 	
 		return (string) $content;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		$mobile 	= wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' );
+		$breakpoint = wecodeart_json( [ 'settings', 'custom', 'breakpoints', $mobile ], '992px' );
+
+		$inline = "
+		.is-marquee .wp-block-group__inner-wrap {
+			display: flex;
+			overflow: hidden;
+			user-select: none;
+			gap: var(--marquee-gap, var(--wp--style--block-gap));
+			width: 100%;
+			max-width: 100vw;
+			min-width: 100%;
+		}
+		.is-marquee .wp-block-group__inner-wrap > * {
+			position: relative;
+			flex-shrink: 0;
+			min-height: 1em;
+			transform: translateX(0);
+			animation-name: marquee;
+			animation-duration: var(--marquee-speed-mobile, 25s);
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+			animation-direction: var(--marquee-direction, forwards);
+		}
+		.is-marquee:hover .wp-block-group__inner-wrap > * {
+			animation-play-state: paused;
+		}
+		@media (min-width: {$breakpoint}) {
+			.is-marquee .wp-block-group__inner-wrap > * {
+				animation-duration: var(--marquee-speed-desktop, 50s);
+			}
+		}
+		@keyframes marquee {
+			0% {
+				left: 0;
+			}
+			100% {
+				left: -100%;
+			}
+		}
+		";
+
+		return $inline;
 	}
 }

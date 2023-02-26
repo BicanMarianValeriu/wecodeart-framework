@@ -590,4 +590,19 @@ final class Styles implements Integration {
 
 		return $values;
 	}
+
+	/**
+	 * Formats custom properties for unsupported blocks.
+	 *
+	 * @param 	string 	$property Custom property value to format.
+	 *
+	 * @return 	string
+	 */
+	public static function format_variable( string $property ): string {
+		if ( ! str_contains( $property, 'var:' ) ) {
+			return $property;
+		}
+
+		return str_replace( [ 'var:', '|' ], [ 'var(--wp--', '--' ], $property . ')' );
+	}
 }
