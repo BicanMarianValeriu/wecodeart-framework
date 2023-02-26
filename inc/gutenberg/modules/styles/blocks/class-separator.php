@@ -31,10 +31,18 @@ class Separator extends Processor {
 	 */
 	protected function process_extra(): void {
 		// Background HR styleing
+		$declarations = [];
+
+		if ( $value = get_prop( $this->attrs, [ 'style', 'dimensions', 'minHeight' ] ) ) {
+			$declarations['--wp--separator-height'] = $value;
+		}
+		
 		if ( $value = get_prop( $this->attrs, [ 'style', 'color', 'background' ] ) ) {
-			$this->add_declarations( [
-				'color' => $value
-			], $this->get_selector() );
+			$declarations['color'] = $value;
+		}
+
+		if( ! empty( $declarations ) ) {
+			$this->add_declarations( $declarations );
 		}
 	}
 }

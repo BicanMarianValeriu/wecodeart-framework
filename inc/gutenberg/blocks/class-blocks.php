@@ -91,6 +91,7 @@ class Blocks implements Configuration {
 		$this->register( 'core/post-comments-form', Blocks\Comment\Form::class );
 		$this->register( 'core/comments-title',     Blocks\Comment\Title::class );
 		$this->register( 'core/comment-template',   Blocks\Comment\Template::class );
+		$this->register( 'core/comments-pagination-numbers',    Blocks\Comment\Pagination\Numbers::class );
         // Query Blocks
 		$this->register( 'core/query-title',	            Blocks\Query\Title::class );
 		$this->register( 'core/query-pagination-numbers',   Blocks\Query\Pagination\Numbers::class );

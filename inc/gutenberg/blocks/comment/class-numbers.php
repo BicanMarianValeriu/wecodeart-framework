@@ -12,7 +12,7 @@
  * @version		5.7.2
  */
 
-namespace WeCodeArt\Gutenberg\Blocks\Comment;
+namespace WeCodeArt\Gutenberg\Blocks\Comment\Pagination;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -58,30 +58,40 @@ class Numbers extends Dynamic {
 	 *
 	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
+	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '' ): string {
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		// Get the post ID from which comments should be retrieved.
-		$post_id = get_prop( $block->context, [ 'postId' ], get_the_id() );
+		$post_id = get_prop( $block->context, [ 'postId' ], get_the_ID() );
 
 		if ( ! $post_id ) {
 			return '';
 		}
 
 		// Get the what we need.
-		$comment_vars 	= build_comment_query_vars_from_block( $block );
-		$total   		= ( new WP_Comment_Query( $comment_vars ) )->max_num_pages;
-		$current 		= ! empty( $comment_vars['paged'] ) ? $comment_vars['paged'] : null;
-
-		return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [ [
-			'tag' 	=> 'div',
-			'attrs' => $this->get_block_wrapper_attributes()
-		] ], 'paginate_comments_links', [
+		$args 		= build_comment_query_vars_from_block( $block );
+		$total		= ( new \WP_Comment_Query( $args ) )->max_num_pages;
+		$current	= ! empty( $args['paged'] ) ? $args['paged'] : null;
+		$content	= paginate_comments_links( [
+            'type' 	    => 'array',
 			'total'     => $total,
 			'current'   => $current,
 			'prev_next' => false,
-		], false );
+		] );
+
+		if( empty( $content ) ) {
+			return '';
+		}
+
+		// Enqueue Query Pagination CSS
+		if( ! wp_style_is( 'wp-block-query-pagination-numbers' ) ) {
+			$styles = wecodeart( 'blocks' )->get( 'core/query-pagination-numbers' )::get_instance()->styles();
+			wp_add_inline_style( 'wp-block-comments-pagination', wecodeart( 'styles' )::compress( $styles ) );
+		}
+
+		return wecodeart( 'blocks' )->get( 'core/query-pagination-numbers' )::get_instance()->format_pagination( $content );
 	}
 
 	/**
@@ -90,6 +100,10 @@ class Numbers extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "";
+		return "
+			.wp-block-comments-pagination-numbers:only-child {
+				margin-bottom: 0!important;
+			}
+		";
 	}
 }

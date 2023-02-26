@@ -261,13 +261,13 @@ abstract class Dynamic {
 	 * @return 	string Block CSS.
 	 */
 	public function enqueue_styles() {
-		$block_handle	= 'wp-block-' . $this->block_name;
+		$handle	= 'wp-block-' . $this->block_name;
 
 		// These are cached styles, so we only generate minified version.
 		$styles = wecodeart( 'styles' )::compress( $this->styles() );
 		
 		if( empty( $styles ) ) {
-			return wp_deregister_style( $block_handle );
+			return;
 		}
 
 		global $wp_styles;
@@ -275,21 +275,21 @@ abstract class Dynamic {
 		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 
-		$block_css 		= 'block-' . $this->block_name . '.css';
+		$block_css	= 'block-' . $this->block_name . '.css';
 
 		if( ! $filesystem->has_file( $block_css ) ) {
 			$filesystem->create_file( $block_css, $styles );
 		}
 
-		$registered = is_object( $wp_styles ) ? get_prop( $wp_styles->registered, $block_handle ) : false;
+		$registered = is_object( $wp_styles ) ? get_prop( $wp_styles->registered, $handle ) : false;
 		$deps		= $registered ? $registered->deps : [];
 
 		// Deregister Core
-		wp_deregister_style( $block_handle );
+		wp_deregister_style( $handle );
 			
 		// Enqueue Custom
 		wp_enqueue_block_style( $this->get_block_type(), [
-			'handle'	=> $block_handle,
+			'handle'	=> $handle,
 			'src'		=> $filesystem->get_file_url( $block_css, true ),
 			'path'		=> wp_normalize_path( $filesystem->get_file_url( $block_css ) ),
 			'deps'		=> $deps,

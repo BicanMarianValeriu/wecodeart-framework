@@ -43,7 +43,7 @@ class Spacer extends Processor {
 		}
 
 		if( ! empty( $declarations ) ) {
-			$this->add_declarations( $declarations, $selector );
+			$this->add_declarations( $declarations );
 		}
 	}
 }

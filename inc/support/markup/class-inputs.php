@@ -54,8 +54,7 @@ class Inputs implements Configuration {
         $this->register( 'fieldset',	Inputs\Fieldset::class 	);
         $this->register( 'floating',	Inputs\Floating::class 	);
 
-        add_action( 'wp_enqueue_scripts',                           [ $this, 'assets'   ] );
-        add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'classes'  ] );
+        add_action( 'wp_enqueue_scripts',	[ $this, 'assets'   ] );
 	}
 
 	/**
@@ -83,8 +82,7 @@ class Inputs implements Configuration {
 	 */
 	public static function compile( string $type = 'hidden', ...$input_args ) {
 		$class_type = in_array( $type, Inputs\Basic::get_types() ) ? 'basic' : $type;
-		$storage    = Inputs::get_instance();
-		$class      = $storage->get( $class_type );
+		$class      = Inputs::get_instance()->get( $class_type );
 
 		if( $class ) {
 			if( ! in_array( $class_type, self::$loaded ) ) {
@@ -361,36 +359,6 @@ class Inputs implements Configuration {
 			'path'	=> $this->get_asset( 'js', 'modules/forms' ),
 			'deps'	=> [ 'wp-hooks' ],
 		] );
-	}
-
-    /**
-	 * Add new classes.
-	 *
-	 * @param 	array  	$classes
-	 *
-	 * @return 	array 	Returns updated editors settings.
-	 */
-	public function classes( $classes ) {
-		return wp_parse_args( [
-			'form-label',
-			'form-text',
-			'form-control',
-			'form-control-sm',
-			'form-control-lg',
-			'form-select',
-			'form-select-sm',
-			'form-select-lg',
-			'form-range',
-			'form-floating',
-			'input-group',
-			'input-group-sm',
-			'input-group-lg',
-			'input-group-text',
-			'valid-feedback',
-			'valid-tooltip',
-			'invalid-feedback',
-			'invalid-tooltip',
-		], $classes );
 	}
 	
 	/**

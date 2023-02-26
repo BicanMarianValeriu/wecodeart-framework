@@ -277,6 +277,9 @@ class Separator extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
+		$mobile = wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' );
+		$breakpoint = wecodeart_json( [ 'settings', 'custom', 'breakpoints', $mobile ], '992px' );
+
 		$inline = "
 		/* Separator */
 		hr {
@@ -295,6 +298,8 @@ class Separator extends Dynamic {
 		.wp-block-separator.wp-block-separator[class*='is-style-svg-'] {
 			position: relative;
 			background-color: transparent!important;
+			height: calc(var(--wp--separator-height) * var(--wp--separator-ratio, .7));
+			min-height: initial;
 		}
 		.wp-block-separator[class*='is-style-svg-'] svg {
 			display: block;
@@ -302,6 +307,11 @@ class Separator extends Dynamic {
 			fill: currentColor;
 			width: 100%;
 			height: calc(100% + 1px);
+		}
+		@media (min-width: {$breakpoint}) {
+			.wp-block-separator.wp-block-separator[class*='is-style-svg-'] {
+				height: var(--wp--separator-height);
+			}
 		}
 		/* Admin */
 		.editor-styles-wrapper .wp-block-separator[class*='is-style-svg-']::before {

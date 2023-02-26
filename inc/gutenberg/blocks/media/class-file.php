@@ -18,8 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_dom_element;
 
 /**
  * Gutenberg File block.

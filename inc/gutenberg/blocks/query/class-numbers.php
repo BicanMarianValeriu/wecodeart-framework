@@ -70,7 +70,6 @@ class Numbers extends Dynamic {
         $content    = [];
 
         $paginate_args = apply_filters( 'wecodeart/filter/query/pagination/args', [
-            'mixed'     => 'array',
             'type' 	    => 'array',
             'prev_next' => true,
         ] );
@@ -115,7 +114,16 @@ class Numbers extends Dynamic {
             return '';
         }
 		
-		return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [
+		return $this->format_pagination( $content );
+	}
+
+    /**
+	 * Formats paginate_links 
+	 *
+	 * @return 	void
+	 */
+    public function format_pagination( array $content ) {
+        return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [
             [
                 'tag'   => 'ul',
                 'attrs' => $this->get_block_wrapper_attributes( [
@@ -123,25 +131,23 @@ class Numbers extends Dynamic {
                 ] )
             ]
         ], function( $content ) {
-            
             foreach( $content as $key => $link ) :
-
+    
                 $class = [ 'pagination__item' ];
-
+    
                 if( strpos( $link, 'current' ) !== false ) {
                     $class[] = 'pagination__item--current';
                 }
-
+    
                 ?>
                 <li class="<?php echo esc_attr( implode( ' ', $class ) ); ?>">
                     <?php echo str_replace( 'page-numbers', 'pagination__link', $link ); ?>
                 </li>
                 <?php
-
+    
             endforeach;
-
         }, [ $content ], false );
-	}
+    }
 
     /**
 	 * Block styles
@@ -167,10 +173,11 @@ class Numbers extends Dynamic {
         .pagination__link {
             position: relative;
             display: block;
+            padding: .35rem .75rem;
             color: var(--wp--preset--color--primary);
             text-decoration: none;
+            line-height: 1.5;
             background-color: white;
-            padding: .35rem .75rem;
             border: $width $style $color;
         }
         .pagination__link:hover {

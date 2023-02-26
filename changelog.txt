@@ -43,6 +43,7 @@ v5.7.2
 - Added - core/post-author link class (wp-block-post-author__link)
 - Added - core/post-terms link class (wp-block-post-terms__link)
 - Added - core/separator new SVG masking styles
+- Added - core/comments-pagination-numbers block rewrite
 - Added - shadow support in theme.json (upcoming WP versions)
 - Added - new dom() function to manipulate HTML markup for Gutenberg blocks
 - Added - Improved SEO: Schema.org for header/footer/sidebar template parts
