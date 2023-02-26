@@ -14,7 +14,7 @@
         </figure>
         <div class="wp-block-media-text__content">
             <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|g","right":"var:preset|spacing|g","bottom":"var:preset|spacing|g","left":"var:preset|spacing|g"},"blockGap":"var:preset|spacing|lg"}},"className":"py-5 px-md-5","layout":{"type":"constrained"}} -->
-            <div class="wp-block-group alignfull py-5 px-md-5" style="padding-top:var(--wp--preset--spacing--gutter);padding-right:var(--wp--preset--spacing--gutter);padding-bottom:var(--wp--preset--spacing--gutter);padding-left:var(--wp--preset--spacing--gutter)">
+            <div class="wp-block-group alignfull py-5 px-md-5" style="padding-top:var(--wp--preset--spacing--g);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--g);padding-left:var(--wp--preset--spacing--g)">
                 <!-- wp:site-logo {"width":60,"isLink":false,"className":"mb-5"} /-->
                 <!-- wp:group {"align":"full","layout":{"type":"constrained","contentSize":"550px","justifyContent":"left"}} -->
                 <div class="wp-block-group alignfull">

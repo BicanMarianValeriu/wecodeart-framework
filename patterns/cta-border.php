@@ -8,7 +8,7 @@
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--xl);padding-bottom:var(--wp--preset--spacing--xl)">
     <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","right":"var:preset|spacing|g","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|g"}},"border":{"color":"#dfdfdf","width":"1px"}},"className":"rounded shadow-sm","layout":{"type":"constrained"}} -->
-    <div class="wp-block-group rounded shadow-sm has-border-color" style="border-color:#dfdfdf;border-width:1px;padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--gutter);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--gutter)">
+    <div class="wp-block-group rounded shadow-sm has-border-color" style="border-color:#dfdfdf;border-width:1px;padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--g)">
         <!-- wp:heading {"textAlign":"center","className":"fw-300"} -->
         <h2 class="has-text-align-center fw-300"><?php printf( esc_html__( 'Ready to create with %s?', 'wecodeart' ), '<strong>WeCodeArt Framework</strong>' ); ?></h2>
         <!-- /wp:heading -->

@@ -6,7 +6,7 @@
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"className":"py-5","layout":{"inherit":true,"type":"constrained"}} -->
-<div class="wp-block-group alignfull py-5" style="margin-top:0;margin-bottom:0;padding-right:var(--wp--preset--spacing--gutter);padding-left:var(--wp--preset--spacing--gutter)">
+<div class="wp-block-group alignfull py-5" style="margin-top:0;margin-bottom:0;padding-right:var(--wp--preset--spacing--g);padding-left:var(--wp--preset--spacing--g)">
     <!-- wp:columns {"verticalAlignment":"center"} -->
     <div class="wp-block-columns are-vertically-aligned-center">
         <!-- wp:column {"verticalAlignment":"center","className":""} -->
