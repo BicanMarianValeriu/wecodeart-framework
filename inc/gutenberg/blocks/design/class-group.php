@@ -67,7 +67,7 @@ class Group extends Dynamic {
 
 		static $processed = null;
 
-		// Handle main tag (once).
+		// Handle <main /> tag (once).
 		if( $content->next_tag( [ 'tag_name' => 'main' ] ) && is_null( $processed ) ) {
 			$content->set_attribute( 'class', 'wp-site-main ' . $content->get_attribute( 'class' ) );
 			$processed = true;
@@ -80,7 +80,7 @@ class Group extends Dynamic {
 			$gap 	= get_prop( $attributes, [ 'style', 'spacing', 'blockGap' ] );
 			$wrap	= $dom->createElement( 'div' );
 
-			$wrap->setAttribute( 'class', 'wp-block-group__inner-wrap' );
+			$wrap->setAttribute( 'class', 'wp-block-group__marquee' );
 
 			if( $gap ) {
 				$wrap->setAttribute( 'style', '--marquee-gap:' . wecodeart( 'styles' )::format_variable( $gap ) );
@@ -129,7 +129,7 @@ class Group extends Dynamic {
 		$breakpoint = wecodeart_json( [ 'settings', 'custom', 'breakpoints', $mobile ], '992px' );
 
 		$inline = "
-		.is-marquee .wp-block-group__inner-wrap {
+		.is-marquee .wp-block-group__marquee {
 			display: flex;
 			overflow: hidden;
 			user-select: none;
@@ -138,7 +138,7 @@ class Group extends Dynamic {
 			max-width: 100vw;
 			min-width: 100%;
 		}
-		.is-marquee .wp-block-group__inner-wrap > * {
+		.is-marquee .wp-block-group__marquee > * {
 			position: relative;
 			flex-shrink: 0;
 			min-height: 1em;
@@ -149,20 +149,25 @@ class Group extends Dynamic {
 			animation-iteration-count: infinite;
 			animation-direction: var(--marquee-direction, forwards);
 		}
-		.is-marquee:hover .wp-block-group__inner-wrap > * {
+		.is-marquee:is(:hover,:focus,:focus-within) .wp-block-group__marquee > * {
 			animation-play-state: paused;
 		}
 		@media (min-width: {$breakpoint}) {
-			.is-marquee .wp-block-group__inner-wrap > * {
+			.is-marquee .wp-block-group__marquee > * {
 				animation-duration: var(--marquee-speed-desktop, 50s);
+			}
+		}
+		@media (prefers-reduced-motion) {
+			.is-marquee .wp-block-group__marquee > * {
+				animation-play-state: paused;
 			}
 		}
 		@keyframes marquee {
 			0% {
-				left: 0;
+				transform: translateX(0);
 			}
 			100% {
-				left: -100%;
+				transform: translateX(calc(-100% - var(--wp--style--block-gap)));
 			}
 		}
 		";
