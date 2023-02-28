@@ -27,7 +27,7 @@ $attributes = isset( $attributes ) ? $attributes : [];
 $classnames = [];
 
 if( isset( $primary ) ) {
-    $classnames[]   = 'wp-block-post-terms--has-primary';
+    $classnames[] = 'wp-block-post-terms--has-primary';
 }
 
 if( $value = get_prop( $attributes, 'textAlign' ) ) {
