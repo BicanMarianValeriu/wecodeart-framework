@@ -85,13 +85,15 @@ class Numbers extends Dynamic {
 			return '';
 		}
 
+		$pagination_numbers = wecodeart( 'blocks' )->get( 'core/query-pagination-numbers' )::get_instance();
+
 		// Enqueue Query Pagination CSS
 		if( ! wp_style_is( 'wp-block-query-pagination-numbers' ) ) {
-			$styles = wecodeart( 'blocks' )->get( 'core/query-pagination-numbers' )::get_instance()->styles();
+			$styles = $pagination_numbers->styles();
 			wp_add_inline_style( 'wp-block-comments-pagination', wecodeart( 'styles' )::compress( $styles ) );
 		}
 
-		return wecodeart( 'blocks' )->get( 'core/query-pagination-numbers' )::get_instance()->format_pagination( $content );
+		return $pagination_numbers->format_pagination( $content );
 	}
 
 	/**
