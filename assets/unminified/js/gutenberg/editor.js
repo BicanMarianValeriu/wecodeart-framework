@@ -496,7 +496,7 @@ const {
     store: blockEditorStore
   }
 } = wp;
-const allowedBlocks = ['core/paragraph', 'core/heading'];
+const allowedBlocks = ['core/paragraph', 'core/heading', 'core/list-item'];
 
 const Control = () => {
   const {
@@ -685,13 +685,11 @@ const underline = {
       icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Icon, {
         icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(SVG, {
           style: {
-            height: 16
+            padding: 2
           },
-          viewBox: "0 0 467.765 467.765"
+          viewBox: "0 0 16 16"
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Path, {
-          d: "m58.471 409.294h350.824v58.471h-350.824z"
-        }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Path, {
-          d: "m292.353 0v58.471h29.235v175.412c0 48.364-39.342 87.706-87.706 87.706s-87.706-39.342-87.706-87.706v-175.412h29.235v-58.471h-116.94v58.471h29.235v175.412c0 80.597 65.579 146.176 146.176 146.176s146.176-65.579 146.176-146.176v-175.412h29.235v-58.471z"
+          d: "M5.313 3.136h-1.23V9.54c0 2.105 1.47 3.623 3.917 3.623s3.917-1.518 3.917-3.623V3.136h-1.23v6.323c0 1.49-.978 2.57-2.687 2.57-1.709 0-2.687-1.08-2.687-2.57V3.136zM12.5 15h-9v-1h9v1z"
         }))
       }),
       title: __('Underline', 'wecodeart'),

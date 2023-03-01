@@ -15,7 +15,7 @@ const {
 	blockEditor: { RichTextToolbarButton, store: blockEditorStore },
 } = wp;
 
-const allowedBlocks = ['core/paragraph', 'core/heading'];
+const allowedBlocks = ['core/paragraph', 'core/heading', 'core/list-item'];
 
 const Control = () => {
 	const { blockId, blockName, isBlockJustified, formatTypes = [] } = useSelect((select) => {
