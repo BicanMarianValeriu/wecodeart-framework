@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-02-25 05:18+0000\n"
+"PO-Revision-Date: 2023-03-01 07:48+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -256,7 +256,7 @@ msgstr "GRATIS"
 
 #: patterns/hero-separator.php:38
 msgid "Free for lifetime"
-msgstr "Gratiis pe viață"
+msgstr "Gratis pe viață"
 
 #: patterns/hero-separator.php:16
 #, php-format
