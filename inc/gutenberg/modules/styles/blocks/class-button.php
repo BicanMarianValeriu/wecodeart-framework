@@ -76,7 +76,7 @@ class Button extends Processor {
 						$declarations['--wp--color--hover'] = $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
 					}
 
-					$declarations['--wp--color--rgb'] 	= join( ', ', [ $value['r'], $value['g'], $value['b'] ] );
+					$declarations['--wp--color--rgb'] 	= join( ', ', wp_array_slice_assoc( $value, [ 'r', 'g', 'b' ] ) );
 					$declarations['color'] 				= $text;
 				}
 				// Background

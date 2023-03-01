@@ -241,7 +241,7 @@ class Styles implements Integration {
 		foreach( $palette as $item ) {
 			$slug 	= get_prop( $item, [ 'slug' ] );
 			$value 	= $this->CSS::color_to_rgba( get_prop( $item, [ 'color' ] ), false, true );
-			$value  = join( ', ', [ $value['r'], $value['g'], $value['b'] ] );
+			$value  = join( ', ', wp_array_slice_assoc( $value, [ 'r', 'g', 'b' ] ) );
 			
 			$style .= sprintf( '.has-%s-color{--wp--color--rgb:%s}', $slug, $value );
 			$style .= sprintf( '.has-%s-background-color{--wp--background--rgb:%s}', $slug, $value );
