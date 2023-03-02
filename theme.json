@@ -446,18 +446,6 @@
 			}
 		},
 		"elements": {
-			"heading": {
-				"typography": {
-					"fontWeight": "300",
-					"lineHeight": "1.2"
-				},
-				"spacing": {
-					"margin": {
-						"top": "0",
-						"bottom": "var:style|block-gap"
-					}
-				}
-			},
 			"button": {
 				"typography": {
 					"fontSize": "var:preset|font-size|small",
@@ -481,6 +469,18 @@
 						"bottom": ".75rem",
 						"left": "1.25rem",
 						"right": "1.25rem"
+					}
+				}
+			},
+			"heading": {
+				"typography": {
+					"fontWeight": "300",
+					"lineHeight": "1.2"
+				},
+				"spacing": {
+					"margin": {
+						"top": "0",
+						"bottom": "var:style|block-gap"
 					}
 				}
 			},
