@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Code block.
@@ -56,22 +57,6 @@ class Lists extends Dynamic {
 	 * @return 	array
 	 */
 	public function register_args( array $args, string $block_name ): array {
-		if ( $this->get_block_type() === $block_name ) {
-			$args['supports']['spacing'] = [
-				'margin'  	=> true,
-				'padding' 	=> true,
-				'blockGap' 	=> true,
-			];
-			$args['supports']['__experimentalLayout'] = [
-				'allowSwitching'  => false,
-				'allowInheriting' => false,
-				'default'         => [
-					'type'        => 'flex',
-					'orientation' => 'vertical',
-				],
-			];
-		}
-		
 		// List Item Block
 		if ( $block_name === 'core/list-item' ) {
 			$args['supports']['color'] = [
@@ -97,6 +82,35 @@ class Lists extends Dynamic {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Block args.
+	 *
+	 * @param	array $current	Existing register args
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( array $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+
+		return [
+			'supports'		=> wp_parse_args( [
+				'__experimentalLayout'	=> [
+					'allowSwitching'  => false,
+					'allowInheriting' => false,
+					'default'         => [
+						'type'        => 'flex',
+						'orientation' => 'vertical',
+					],
+				],
+				'spacing'	=> [
+					'margin'  	=> true,
+					'padding' 	=> true,
+					'blockGap' 	=> true,
+				]
+			], $supports )
+		];
 	}
 
 	/**

@@ -73,7 +73,7 @@ class Numbers extends Dynamic {
 		// Get the what we need.
 		$args 		= build_comment_query_vars_from_block( $block );
 		$total		= ( new \WP_Comment_Query( $args ) )->max_num_pages;
-		$current	= ! empty( $args['paged'] ) ? $args['paged'] : null;
+		$current	= get_prop( $args, [ 'paged' ] );
 		$content	= paginate_comments_links( [
             'type' 	    => 'array',
 			'total'     => $total,

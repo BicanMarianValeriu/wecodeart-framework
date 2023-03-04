@@ -91,7 +91,7 @@ class Gutenberg {
 	 *
 	 * @return array Returns updated editors settings.
 	 */
-	public function block_editor_settings( $settings, $post ) {
+	public function block_editor_settings( array $settings, $post ): array {
 		if ( ! isset( $settings[ 'wecodeart' ] ) ) {
 			$settings[ 'wecodeart' ] = apply_filters( 'wecodeart/filter/gutenberg/settings', [], $post );
 		}

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.6.2
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -41,7 +41,6 @@ class Classes implements Integration {
 		// Admin
 		add_action( 'enqueue_block_editor_assets', 					[ $this, 'block_editor_assets'	] );
 		add_filter( 'wecodeart/filter/gutenberg/settings', 			[ $this, 'set_suggestions' 	], 10, 2 );
-		add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'grid'		] );
 		add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'helpers'	] );
 	}
 
@@ -64,25 +63,27 @@ class Classes implements Integration {
 	 *
 	 * @return array Returns updated editors classes suggestions.
 	 */
-	public function set_suggestions( $settings, $post ) {
+	public function set_suggestions( array $settings, $post ): array {
 		if ( ! isset( $settings[ 'customClasses' ] ) ) {
 			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/classes', [], $post );
-			$settings['customClasses'] = array_values( array_map( 'sanitize_html_class', array_unique( $classes ) ) );
+			$classes = array_map( 'sanitize_html_class', array_values( array_unique( $classes ) ) ); // Unique sanitized values.
+			$settings['customClasses'] = $classes;
 		}
 
 		return $settings;
 	}
 
 	/**
-	 * Add new classes.
+	 * Add helper classes.
 	 *
 	 * @param 	array  	$args
 	 *
 	 * @return 	array 	Returns updated editors settings.
 	 */
-	public function grid( $args ) {
+	public function helpers( array $args ): array {
 		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$breakpoints	= array_keys( $breakpoints );
+		$displays		= wecodeart_json( [ 'settings', 'custom', 'display' ], [] );
 
 		foreach( range( 1, 12 ) as $number ) {
 			$args[] = 'col-' . $number;
@@ -95,6 +96,7 @@ class Classes implements Integration {
 			$args[] = 'col-' . $breakpoint;
 			$args[] = 'span-' . $breakpoint;
 			$args[] = 'col-' . $breakpoint . '-auto';
+			$args[] = 'sticky-' . $breakpoint . '-top';
 			
 			foreach( range( 1, 12 ) as $number ) {
 				$args[] = 'col-' . $breakpoint . '-' . $number;
@@ -102,29 +104,6 @@ class Classes implements Integration {
 				$args[] = 'start-' . $breakpoint . '-' . $number;
 				$args[] = 'offset-' . $breakpoint . '-' . $number;
 			}
-		}
-
-		return wp_parse_args( [
-			'grid',
-			'col-auto',
-		], $args );
-	}
-
-	/**
-	 * Add new classes.
-	 *
-	 * @param 	array  	$args
-	 *
-	 * @return 	array 	Returns updated editors settings.
-	 */
-	public function helpers( $args ) {
-		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$displays		= wecodeart_json( [ 'settings', 'custom', 'display' ], [] );
-
-		// Sticky top - currently it must match the ones from CSS
-		// In the future, helpers will be moved to dynamic CSS
-		foreach( array_keys( $breakpoints ) as $breakpoint ) {
-			$args[] = 'sticky-' . $breakpoint . '-top';
 		}
 
 		// Typography extra sizes - to do later.
@@ -154,6 +133,8 @@ class Classes implements Integration {
 			'sticky-top',
 			'fixed-top',
 			'fixed-bottom',
+			'grid',
+			'col-auto',
 		], $args );
 	}
 }

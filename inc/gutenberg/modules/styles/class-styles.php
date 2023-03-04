@@ -194,6 +194,12 @@ class Styles implements Integration {
 				$content->remove_attribute( 'style' );
 			}
 			
+			if( $block_name === 'core/quote' ) {
+				// Quote also adds style to the <blockquote>.
+				$content->next_tag( [ 'tag_name' => 'blockquote' ] );
+				$content->remove_attribute( 'style' );
+			}
+			
 			if( in_array( $block_name, [ 'core/avatar', 'core/image', 'core/cover' ], true ) ) {
 				// Blocks that also adds style to the <img />.
 				$content->next_tag( [ 'tag_name' => 'img' ] );

@@ -48,7 +48,7 @@ class Quote extends Dynamic {
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args( $current ): array {
+	public function block_type_args( array $current ): array {
 		$supports 	= get_prop( $current, [ 'supports' ], [] );
 
 		return [
@@ -128,14 +128,10 @@ class Quote extends Dynamic {
 				margin: 0;
 				font-size: inherit;
 			}
-			.wp-block-quote .blockquote *:last-child {
-				margin-bottom: 0;
-			}
 			.wp-block-quote .blockquote-footer {
 				font-size: var(--wp--preset--font-size--small);
 				text-align: left;
-				color: inherit;
-				opacity: .8;
+				color: var(--wp--preset--color--dark);
 			}
 			.wp-block-quote .blockquote-footer::before {
 				content: "\2014\00A0";
