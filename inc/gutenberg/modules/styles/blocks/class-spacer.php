@@ -39,7 +39,7 @@ class Spacer extends Processor {
 		
 		// Width
 		if ( $value = get_prop( $this->attrs, 'width' ) ) {
-			$declarations['--wp--spacer-height'] = $value;
+			$declarations['--wp--spacer-width'] = $value;
 		}
 
 		if( ! empty( $declarations ) ) {

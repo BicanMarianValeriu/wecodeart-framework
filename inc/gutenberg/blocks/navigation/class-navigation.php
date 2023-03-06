@@ -769,8 +769,9 @@ class Navigation extends Dynamic {
 							align-items: inherit;
 						}
 						.wp-block-navigation.navbar-expand-{$key} .wp-block-spacer {
-							height: 100%;
 							width: var(--wp--spacer-width);
+							vertical-align: -.125em;
+							height: 1em;
 						}
 					}
 					";
