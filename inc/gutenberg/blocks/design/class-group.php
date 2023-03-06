@@ -132,7 +132,6 @@ class Group extends Dynamic {
 		.is-marquee .wp-block-group__marquee {
 			display: flex;
 			overflow: hidden;
-			user-select: none;
 			gap: var(--marquee-gap, var(--wp--style--block-gap));
 			width: 100%;
 			max-width: 100vw;

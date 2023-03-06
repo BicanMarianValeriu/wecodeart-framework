@@ -9,7 +9,7 @@
  * @subpackage 	Conditional\Settings
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Conditional;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Conditional;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Conditional that is only met when in the admin.
@@ -28,11 +29,13 @@ class Settings implements ConditionalInterface {
 	 */
 	public function is_met() {
 		global $pagenow;
+
 		if( $pagenow === 'themes.php' ) {
-			if( isset( $_GET['page'] ) && $_GET['page'] === 'wecodeart' ) {
+			if( get_prop( $_GET, [ 'page' ] ) === 'wecodeart' ) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 }

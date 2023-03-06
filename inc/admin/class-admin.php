@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.4.5
+ * @version		5.7.2
  */
 
 namespace WeCodeArt;
@@ -236,9 +236,6 @@ class Admin {
 	 */
 	public function enqueue_assets() {
 		$version = wecodeart( 'version' );
-		
-		// wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
-		// wp_add_inline_script( 'wp-codemirror', 'window.CodeMirror = wp.CodeMirror;' );
 
 		wp_enqueue_style(
 			$this->make_handle(),
