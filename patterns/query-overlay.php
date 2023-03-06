@@ -13,9 +13,9 @@
     <!-- wp:term-description /-->
     
     <!-- wp:post-template {"className":"my-5"} -->
-    <!-- wp:cover {"useFeaturedImage":true,"dimRatio":90,"gradient":"primary-to-vivid-purple","contentPosition":"bottom left","className":"rounded shadow-lg h-100"} -->
+    <!-- wp:cover {"dimRatio":90,"overlayColor":"primary","className":"has-custom-content-position is-position-bottom-left rounded shadow-lg h-100"} -->
     <div class="wp-block-cover has-custom-content-position is-position-bottom-left rounded shadow-lg h-100">
-        <span aria-hidden="true" class="wp-block-cover__background has-background-dim-90 has-background-dim has-background-gradient has-primary-to-vivid-purple-gradient-background"></span>
+        <span aria-hidden="true" class="wp-block-cover__background has-primary-background-color has-background-dim-90 has-background-dim"></span>
         <div class="wp-block-cover__inner-container">
             <!-- wp:group {"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"textColor":"white","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
             <div class="wp-block-group has-white-color has-text-color has-link-color">
