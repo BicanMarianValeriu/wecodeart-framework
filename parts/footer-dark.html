@@ -1,35 +1,57 @@
 <!-- wp:group {"align":"full","backgroundColor":"dark","layout":{"inherit":true}} -->
 <div class="wp-block-group alignfull has-dark-background-color has-background">
-	<!-- wp:columns {"verticalAlignment":"top","style":{"spacing":{"blockGap":"1rem"}},"backgroundColor":"dark","textColor":"white","className":"flex-column flex-md-row flex-wrap py-5"} -->
-	<div class="wp-block-columns are-vertically-aligned-top flex-column flex-md-row flex-wrap py-5 has-white-color has-dark-background-color has-text-color has-background">
+	<!-- wp:columns {"verticalAlignment":"top","style":{"spacing":{"blockGap":"1rem"}},"textColor":"white","className":"flex-column flex-md-row flex-wrap py-5"} -->
+	<div class="wp-block-columns are-vertically-aligned-top flex-column flex-md-row flex-wrap py-5 has-white-color has-text-color">
 		<!-- wp:column {"className":"col-12 col-lg-5 mb-3"} -->
 		<div class="wp-block-column col-12 col-lg-5 mb-3">
-			<!-- wp:heading {"level":5,"className":"fw-700"} -->
-			<h5 class="fw-700" id="about-this-site-1">About us</h5>
+			<!-- wp:heading {"level":6,"className":"fw-700"} -->
+			<h6 class="wp-block-heading fw-700">Stay Updated</h6>
 			<!-- /wp:heading -->
-			<!-- wp:paragraph -->
-			<p>This may be a good place to introduce yourself and your site or include some credits and/or a navigation.</p>
+			<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
+			<p class="has-secondary-color has-text-color has-small-font-size">WordPress goodies and UI Frameworks designed and built for developers. Our products are made specifically to be used by developers, which means that we know how important it is to use clean, quality and standardized code.</p>
 			<!-- /wp:paragraph -->
+			<!-- wp:buttons {"className":"mt-2"} -->
+			<div class="wp-block-buttons mt-2">
+				<!-- wp:button {"textColor":"light","className":"is-style-link","fontSize":"small"} -->
+				<div class="wp-block-button has-custom-font-size is-style-link has-small-font-size">
+					<a class="wp-block-button__link has-light-color has-text-color wp-element-button">Read More</a>
+				</div>
+				<!-- /wp:button -->
+			</div>
+			<!-- /wp:buttons -->
 		</div>
 		<!-- /wp:column -->
 		<!-- wp:column -->
 		<div class="wp-block-column">
-			<!-- wp:heading {"level":5,"className":"fw-700"} -->
-			<h5 class="fw-700" id="recent-comments-1">Company</h5>
+			<!-- wp:heading {"level":6,"className":"fw-700"} -->
+			<h6 class="wp-block-heading fw-700">Links</h6>
 			<!-- /wp:heading -->
-			<!-- wp:navigation {"textColor":"white","overlayMenu":"never","className":"navbar-dark","layout":{"type":"flex","setCascadingProperties":true,"orientation":"vertical","justifyContent":"left"},"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}}} /-->
+			<!-- wp:navigation {"openSubmenusOnClick":true,"overlayMenu":"never","icon":"menu","hasIcon":false,"layout":{"type":"flex","orientation":"vertical"},"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"fontSize":"small"} /-->
 		</div>
 		<!-- /wp:column -->
 		<!-- wp:column -->
 		<div class="wp-block-column">
-			<!-- wp:heading {"level":5,"className":"fw-700"} -->
-			<h5 class="fw-700" id="recent-posts-1">Recent Posts</h5>
+			<!-- wp:heading {"level":6,"className":"fw-700"} -->
+			<h6 class="wp-block-heading fw-700">Social</h6>
 			<!-- /wp:heading -->
-			<!-- wp:latest-posts {"postsToShow":3,"displayAuthor":true} /-->
+			<!-- wp:social-links {"iconColor":"light","iconColorValue":"#f8f9fa","iconBackgroundColor":"black","iconBackgroundColorValue":"#000000","openInNewTab":true,"showLabels":true,"size":"has-small-icon-size","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|sm","left":"var:preset|spacing|xs"}}},"className":"","layout":{"type":"flex","orientation":"horizontal"}} -->
+			<ul class="wp-block-social-links has-small-icon-size has-visible-labels has-icon-color has-icon-background-color">
+				<!-- wp:social-link {"url":"#","service":"facebook","label":"Facebook"} /-->
+				<!-- wp:social-link {"url":"#","service":"linkedin","label":"LinkedIn"} /-->
+				<!-- wp:social-link {"url":"#","service":"wordpress","label":"WordPress"} /-->
+			</ul>
+			<!-- /wp:social-links -->
+			<!-- wp:paragraph {"fontSize":"small","fontFamily":"shadows-into-light"} -->
+			<p class="has-shadows-into-light-font-family has-small-font-size">Be social ;)</p>
+			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:column -->
 	</div>
 	<!-- /wp:columns -->
 </div>
 <!-- /wp:group -->
-<!-- wp:pattern {"slug":"wecodeart/footer-credits"} /-->
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|g","right":"var:preset|spacing|g","bottom":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"backgroundColor":"black","textColor":"secondary","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-secondary-color has-black-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--g);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--g);padding-left:var(--wp--preset--spacing--g)">
+	<!-- wp:pattern {"slug":"wecodeart/footer-credits"} /-->
+</div>
+<!-- /wp:group -->

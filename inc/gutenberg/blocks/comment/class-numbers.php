@@ -86,11 +86,12 @@ class Numbers extends Dynamic {
 		}
 
 		$pagination_numbers = wecodeart( 'blocks' )->get( 'core/query-pagination-numbers' )::get_instance();
-
+		
 		// Enqueue Query Pagination CSS
 		if( ! wp_style_is( 'wp-block-query-pagination-numbers' ) ) {
-			$styles = $pagination_numbers->styles();
-			wp_add_inline_style( 'wp-block-comments-pagination', wecodeart( 'styles' )::compress( $styles ) );
+			add_action( 'wp_enqueue_scripts', function() use( $pagination_numbers ) {
+				wp_add_inline_style( 'wp-block-' . $this->block_name, wecodeart( 'styles' )::compress( $pagination_numbers->styles() ) );
+			} );
 		}
 
 		return $pagination_numbers->format_pagination( $content );

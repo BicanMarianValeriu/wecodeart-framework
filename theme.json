@@ -91,6 +91,11 @@
 			"area": "footer"
 		},
 		{
+			"title": "Footer (with Background)",
+			"name": "footer-background",
+			"area": "footer"
+		},
+		{
 			"title": "Main Sidebar",
 			"name": "sidebar",
 			"area": "uncategorized"
