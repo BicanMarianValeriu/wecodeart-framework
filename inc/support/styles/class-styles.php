@@ -545,11 +545,14 @@ final class Styles implements Integration {
 	 */
 	public static function sort_breakpoints( array $order ): array {
         $breaks     = wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		natsort( $breaks );
+
         $sortArray  = array_merge( [ 'global' ], array_map( function( $point ) {
             return "@media (min-width:{$point})";
         }, array_values( $breaks ) ) );
         
 		$ordered    = [];
+
         foreach ( $sortArray as $key ) {
             if ( array_key_exists( $key, $order ) ) {
                 $ordered[$key] = $order[$key];
