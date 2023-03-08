@@ -60,6 +60,17 @@ final class Styles implements Integration {
 	public function register_hooks() {}
 
 	/**
+	 * Generate breakpoint
+	 *
+	 * @param  string   $query
+	 *
+	 * @return string
+	 */
+	public static function generate_breakpoint( string $query = '' ): string {
+		return "@media (min-width:{$query})";
+	}
+
+	/**
 	 * Generate breakpoint class
 	 *
 	 * @param  string   $class
@@ -68,7 +79,7 @@ final class Styles implements Integration {
 	 *
 	 * @return string
 	 */
-	public static function generate_class( string $class = '', $value = '', $break = '' ) {
+	public static function generate_class( string $class = '', $value = '', $break = '' ): string {
 		$return = join( '-', array_filter( [ $class, $break, $value ], function( $i ) {
 			return $i !== '';
 		} ) );
@@ -125,6 +136,7 @@ final class Styles implements Integration {
 			if( ! $responsive ) continue;
 
 			foreach( $media as $break => $query ) {
+				$_break_ = static::generate_breakpoint( $query );
 				$_class_ = static::generate_class( $class, $key, $break );
 				
 				$output = [];
@@ -133,7 +145,7 @@ final class Styles implements Integration {
 				}
 
 				$container->register( $_class_, [
-					"@media (min-width:{$query})" => $output
+					"{$_break_}" => $output
 				] );
 			}
 		}
@@ -544,14 +556,11 @@ final class Styles implements Integration {
 	 * @return  array
 	 */
 	public static function sort_breakpoints( array $order ): array {
-        $breaks     = wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$ordered	= [];
+        $breaks		= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		natsort( $breaks );
 
-        $sortArray  = array_merge( [ 'global' ], array_map( function( $point ) {
-            return "@media (min-width:{$point})";
-        }, array_values( $breaks ) ) );
-        
-		$ordered    = [];
+        $sortArray  = array_merge( [ 'global' ], array_map( [ __CLASS__, 'generate_breakpoint' ], array_values( $breaks ) ) );
 
         foreach ( $sortArray as $key ) {
             if ( array_key_exists( $key, $order ) ) {
