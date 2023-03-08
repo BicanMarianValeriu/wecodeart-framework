@@ -48,8 +48,14 @@ class Range extends Basic {
 	 * @return 	string
 	 */
 	public static function styles(): string {
+
 		return '
             .form-range {
+                --wp--range-focus-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem var(--wp--preset--color--primary);
+                --wp--range-disabled-color: var(--wp--gray-500);
+                --wp--range-thumb-color: var(--wp--preset--color--primary);
+                --wp--range-track-color: var(--wp--gray-200);
+                --wp--range-track-radius: 1rem;
                 width: 100%;
                 height: 1.5rem;
                 padding: 0;
@@ -59,66 +65,69 @@ class Range extends Basic {
             .form-range:focus {
                 outline: 0;
             }
-            .form-range:focus::-webkit-slider-thumb {
-                box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
-            }
-            .form-range:focus::-moz-range-thumb {
-                box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
-            }
             .form-range::-moz-focus-outer {
                 border: 0;
+            }
+
+            .form-range:focus::-webkit-slider-thumb {
+                box-shadow: var(--wp--range-focus-shadow);
             }
             .form-range::-webkit-slider-thumb {
                 width: 1rem;
                 height: 1rem;
                 margin-top: -0.25rem;
-                background-color: var(--wp--preset--color--primary);
+                background-color: var(--wp--range-thumb-color);
                 border: 0;
-                border-radius: 1rem;
+                border-radius: var(--wp--range-track-radius);
                 transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
                 appearance: none;
             }
             .form-range::-webkit-slider-thumb:active {
-                background-color: #bddbfa;
+                background-color: var(--wp--range-track-color);
             }
             .form-range::-webkit-slider-runnable-track {
                 width: 100%;
                 height: 0.5rem;
                 color: transparent;
                 cursor: pointer;
-                background-color: #dee2e6;
+                background-color: var(--wp--range-track-color);
                 border-color: transparent;
-                border-radius: 1rem;
+                border-radius: var(--wp--range-track-radius);
+            }
+
+            .form-range:focus::-moz-range-thumb {
+                box-shadow: var(--wp--range-focus-shadow);
             }
             .form-range::-moz-range-thumb {
                 width: 1rem;
                 height: 1rem;
-                background-color: var(--wp--preset--color--primary);
+                background-color: var(--wp--range-thumb-color);
                 border: 0;
-                border-radius: 1rem;
+                border-radius: var(--wp--range-track-radius);
                 transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
                 appearance: none;
             }
             .form-range::-moz-range-thumb:active {
-                background-color: #bddbfa;
+                background-color: var(--wp--range-track-color);
             }
             .form-range::-moz-range-track {
                 width: 100%;
                 height: 0.5rem;
                 color: transparent;
                 cursor: pointer;
-                background-color: #dee2e6;
+                background-color: var(--wp--range-track-color);
                 border-color: transparent;
-                border-radius: 1rem;
+                border-radius: var(--wp--range-track-radius);
             }
+
             .form-range:disabled {
                 pointer-events: none;
             }
             .form-range:disabled::-webkit-slider-thumb {
-                background-color: #adb5bd;
+                background-color: var(--wp--range-disabled-color);
             }
             .form-range:disabled::-moz-range-thumb {
-                background-color: #adb5bd;
+                background-color: var(--wp--range-disabled-color);
             }
 
             @media (prefers-reduced-motion: reduce) {

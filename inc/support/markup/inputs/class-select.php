@@ -198,7 +198,7 @@ class Select extends Basic {
             }
             .was-validated .form-select:valid:focus,
             .form-select.is-valid:focus {
-                border-color:var(--wp--preset--color--success);
+                border-color: var(--wp--preset--color--success);
                 box-shadow: 0 0 0 0.25rem rgba(125, 200, 85, 0.25);
             }
             .was-validated .form-select:invalid, .form-select.is-invalid {
@@ -215,7 +215,7 @@ class Select extends Basic {
             }
             .was-validated .form-select:invalid:focus,
             .form-select.is-invalid:focus {
-                border-color:var(--wp--preset--color--danger);
+                border-color: var(--wp--preset--color--danger);
                 box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
             }
 
