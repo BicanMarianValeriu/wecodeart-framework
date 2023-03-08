@@ -15,7 +15,11 @@
     <!-- wp:post-template {"className":"my-5"} -->
     <!-- wp:post-featured-image {"isLink":true} /-->
     <!-- wp:post-title {"level":3,"isLink":true} /-->
+    <!-- wp:group {"className":"gap-1","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
+    <div class="wp-block-group gap-1">
     <!-- wp:pattern {"slug":"wecodeart/entry-meta"} /-->
+    </div>
+    <!-- /wp:group -->
     <!-- wp:post-excerpt {"moreText":"<?php esc_html_e( 'Read more', 'wecodeart' ); ?>"} /-->
     <!-- /wp:post-template -->
 

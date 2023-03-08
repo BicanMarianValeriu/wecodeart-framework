@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-03-01 07:48+0000\n"
+"PO-Revision-Date: 2023-03-08 22:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -177,7 +177,7 @@ msgstr[2] "Răspunsuri la \"%1$s\""
 msgid "Continue reading"
 msgstr "Continuați lectura"
 
-#: patterns/footer-credits.php:16
+#: patterns/footer-credits.php:14
 #, php-format
 msgid "Copyright %s - All rights reserved. Built on %s."
 msgstr "Copyright %s – Toate drepturile rezervate. Construit pe %s."
@@ -203,7 +203,7 @@ msgstr "Arhive zilnice: %s"
 msgid "Design"
 msgstr "Personalizări"
 
-#: inc/admin/class-admin.php:261
+#: inc/admin/class-admin.php:258
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -225,7 +225,9 @@ msgstr ""
 msgid "Dots"
 msgstr "Puncte"
 
-#: patterns/cta-border.php:22 patterns/hero-separator.php:46
+#: patterns/cta-border.php:22 patterns/cta-center.php:25
+#: patterns/cta-default.php:33 patterns/cta-separator.php:33
+#: patterns/hero-separator.php:46
 msgid "Download Now"
 msgstr "Descarcă Acum"
 
@@ -289,6 +291,11 @@ msgstr "Wrapper HTML nevalid pentru „%s”."
 msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr "Se pare că WeCodeArt Framework nu este tradusă în %s."
 
+#: patterns/latest-posts.php:12
+#, php-format
+msgid "Latest %s"
+msgstr "Ultimele %s"
+
 #: patterns/cards-background.php:34 patterns/cards-background.php:68
 #: patterns/cards-default.php:29 patterns/cards-default.php:55
 #: patterns/cards-overlay.php:34 patterns/cards-overlay.php:68
@@ -344,13 +351,13 @@ msgstr "Nu există arhive de afișat."
 msgid "No responses"
 msgstr "Fără răspunsuri"
 
-#: patterns/query-products-search.php:28
+#: patterns/query-products-search.php:26
 msgid "No results found for your query."
 msgstr "Nu s-au găsit rezultate pentru interogarea dvs."
 
-#: patterns/query-default.php:27 patterns/query-default.php:28
-#: patterns/query-list.php:39 patterns/query-list.php:40
-#: patterns/query-overlay.php:38 patterns/query-overlay.php:39
+#: patterns/query-default.php:31 patterns/query-default.php:32
+#: patterns/query-list.php:43 patterns/query-list.php:44
+#: patterns/query-overlay.php:24 patterns/query-overlay.php:25
 #: patterns/query-products.php:28
 msgid "No results."
 msgstr "Fără rezultate"
@@ -403,13 +410,17 @@ msgstr "Postat in"
 msgid "Posted on "
 msgstr "Postat pe"
 
-#: patterns/query-default.php:19 patterns/query-list.php:27
+#: patterns/latest-posts.php:12
+msgid "Posts"
+msgstr "Postări"
+
+#: patterns/query-default.php:23 patterns/query-list.php:31
 #| msgid "Read More"
 msgid "Read more"
 msgstr "Citeşte mai mult"
 
 #: patterns/cta-border.php:13 patterns/cta-center.php:16
-#: patterns/cta-default.php:20
+#: patterns/cta-default.php:20 patterns/cta-separator.php:20
 #, php-format
 msgid "Ready to create with %s?"
 msgstr "Sunteți gata să creați cu %s?"
@@ -552,7 +563,7 @@ msgstr "actualizați PHP"
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
-#: patterns/cta-default.php:38
+#: patterns/cta-default.php:38 patterns/cta-separator.php:38
 msgid "View Themes"
 msgstr "Vedeți Teme"
 
@@ -575,7 +586,7 @@ msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
 #: patterns/cta-border.php:16 patterns/cta-center.php:19
-#: patterns/cta-default.php:23
+#: patterns/cta-default.php:23 patterns/cta-separator.php:23
 msgid ""
 "WeCodeArt Framework is a base WP theme, Super Fast, Optimized, and ready for "
 "any shape."

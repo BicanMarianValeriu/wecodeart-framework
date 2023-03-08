@@ -23,7 +23,11 @@
         <!-- wp:column -->
         <div class="wp-block-column">
             <!-- wp:post-title {"level":3,"isLink":true} /-->
+            <!-- wp:group {"className":"gap-1","layout":{"type":"flex","flexWrap":"wrap"}} -->
+            <div class="wp-block-group gap-1">
             <!-- wp:pattern {"slug":"wecodeart/entry-meta"} /-->
+            </div>
+            <!-- /wp:group -->
             <!-- wp:post-excerpt {"moreText":"<?php esc_html_e( 'Read more', 'wecodeart' ); ?>"} /-->
         </div>
         <!-- /wp:column -->
