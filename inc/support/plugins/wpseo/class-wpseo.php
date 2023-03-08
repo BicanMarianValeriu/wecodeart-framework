@@ -205,9 +205,7 @@ class WPSeo implements Integration {
 		// Bail early if author meta is empty.
 		if( empty( $socials ) ) return;
 
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
 
 		if( $color = get_prop( $atts, [ 'color' ] ) ) {
 			$named = get_prop( current( wp_list_filter( $palette, [ 'color' => $color ] ) ), 'slug' );

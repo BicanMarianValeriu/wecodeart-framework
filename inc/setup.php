@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.9.5
- * @version		5.6.1
+ * @version		5.7.2
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -20,7 +20,9 @@ use function WeCodeArt\Functions\get_prop;
  * @return  void
  */
 wecodeart()->bind( 'JSON', function () {
-    return \WP_Theme_JSON_Resolver::get_merged_data()->get_raw_data();
+    $data = \WP_Theme_JSON_Resolver::get_merged_data();
+
+    return $data->get_data();
 } );
 
 /**

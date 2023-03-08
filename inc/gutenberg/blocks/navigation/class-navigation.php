@@ -286,9 +286,7 @@ class Navigation extends Dynamic {
 	 * @return 	string 	HEX color code for pallete class
 	 */
 	public static function get_class_color( $attributes, $key = 'background' ) {
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
 				
 		$_keys 		= [
 			'overlay-background' 	=> 'overlayBackgroundColor',

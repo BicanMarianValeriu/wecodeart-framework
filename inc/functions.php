@@ -440,9 +440,7 @@ function get_lightness_limit(): float {
  */
 function get_json_color( array $path = [], $default = false ): string {
 	// Theme pallete.
-    $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
-    $palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-    $palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
+    $palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
     $color      = wecodeart_json( $path, $default );
 
     // Is WP way of saved color.

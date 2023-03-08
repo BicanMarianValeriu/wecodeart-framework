@@ -240,9 +240,7 @@ class Styles implements Integration {
 		// Box Sizing
 		$style .= '*,*::before,*::after {box-sizing: border-box;}';
 		// Colors RGB as CSS var
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
 
 		foreach( $palette as $item ) {
 			$slug 	= get_prop( $item, [ 'slug' ] );

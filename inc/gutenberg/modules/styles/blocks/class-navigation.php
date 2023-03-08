@@ -77,9 +77,7 @@ class Navigation extends Processor {
 
 		// Dropdown active state
 		if( $named_color !== null ) {
-			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
-			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-			$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
+			$palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
 			$hex_color	= get_prop( current( wp_list_filter( $palette, [ 'slug' => $named_color ] ) ), 'color' );
 		}
 

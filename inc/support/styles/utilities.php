@@ -13,12 +13,10 @@
  */
 
 // Theme Shadows
-$shadows    = wecodeart_json( [ 'settings', 'shadow', 'presets', 'default' ], [] );
-$shadows 	= wecodeart_json( [ 'settings', 'shadow', 'presets', 'theme' ], $shadows );
-$shadows 	= array_merge( $shadows, wecodeart_json( [ 'settings', 'shadow', 'presets', 'custom' ], [] ) );
+$shadows    = wecodeart_json( [ 'settings', 'shadow', 'presets' ], [] );
 $shadows    = wp_list_pluck( $shadows, 'shadow', 'slug' );
 $shadows    = $shadows + [
-    null    => 'var(--wp--preset--shadow--md)',
+    null    => 'var(--wp--preset--shadow--natural)',
     'none'  => 'none'
 ];
 
@@ -27,9 +25,7 @@ $spacers    = wecodeart_json( [ 'settings', 'custom', 'spacing' ], [] );
 $spacers    = $spacers + [ 'auto' => 'auto' ];
 
 // Theme Colors
-$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
-$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
+$palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
 $palette    = wp_list_pluck( $palette, 'color', 'slug' );
 
 // Widths

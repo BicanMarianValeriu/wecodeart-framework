@@ -32,9 +32,7 @@ class Button extends Processor {
 	 */
 	protected function process_extra(): void {
 		$is_outline = str_contains( get_prop( $this->attrs, [ 'className' ], '' ), 'is-style-outline' );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'default' ], [] );
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette', 'theme' ], $palette );
-		$palette 	= array_merge( $palette, wecodeart_json( [ 'settings', 'color', 'palette', 'custom' ], [] ) );
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
 
 		// Inline Style
 		$declarations = [];
