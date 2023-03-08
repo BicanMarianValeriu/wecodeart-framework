@@ -450,7 +450,7 @@ function get_json_color( array $path = [], $default = false ): string {
     }
     
     // Or is a CSS variable.
-    if( mb_strpos( $color, '--' ) !== false ) {
+    if( mb_strpos( $color, '--wp--' ) !== false ) {
         $slug = explode( '--', $color );
         $slug = str_replace( ')', '', end( $slug ) );
     }

@@ -324,7 +324,7 @@ abstract class Processor {
 
 		if ( array_key_exists( $property, $properties ) ) {
 			$classname = $properties[ $property ];
-			$obj = new $classname( $property, $value );
+			$obj = new $classname( $value );
 			return $obj->get_value();
 		}
 

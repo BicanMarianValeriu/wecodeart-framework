@@ -37,13 +37,13 @@ class Background extends Styles\Property {
 			}
 			// If is URL
 			if( filter_var( $this->value, FILTER_VALIDATE_URL ) ) {
-				$processed = sprintf( 'url(%s)', esc_url( set_url_scheme( $this->value ) ) );
+				$processed = sprintf( 'url("%s")', esc_url( set_url_scheme( $this->value ) ) );
 			// If is data URL
 			} elseif( strpos( $this->value, 'data:image' ) !== false  ) {
 				$processed = sprintf( 'url("%s")', esc_url_raw( $this->value, [ 'data' ] ) );
 			// If is image ID
 			} elseif ( preg_match( '/^\d+$/', $this->value ) ) {
-				$processed = sprintf( 'url(%s)', esc_url( set_url_scheme( wp_get_attachment_url( $this->value ) ) ) );
+				$processed = sprintf( 'url("%s")', esc_url( set_url_scheme( wp_get_attachment_url( $this->value ) ) ) );
 			// else is a gradient/string
 			} else {
 				$processed = filter_var( $this->value, FILTER_SANITIZE_STRING );
