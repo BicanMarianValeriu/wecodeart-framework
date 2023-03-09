@@ -219,11 +219,7 @@ class Admin {
 		
 					if( json_last_error() === JSON_ERROR_NONE ) {
 						// Clear and sanitize data.
-						$data['items'] = array_map( function( $item ) {
-							$item = wp_array_slice_assoc( $item, [ 'type', 'title', 'content' ] );
-
-							return self::sanitize_notification( $item );
-						}, get_prop( $results, [ 'items' ], [] ) );
+						$data['items'] = array_map( [ __CLASS__, 'sanitize_notification' ], get_prop( $results, [ 'items' ], [] ) );
 			
 						set_transient( 'wecodeart/transient/notifications', $data, MINUTE_IN_SECONDS );   
 					}
@@ -304,7 +300,10 @@ class Admin {
      *
      * @return 	array
      */
-	private static function sanitize_notification( $json = [] ) {
+	private static function sanitize_notification( array $json = [] ): array {
+		// Remove invalid properties.
+		$json = wp_array_slice_assoc( $json, [ 'type', 'title', 'content' ] );
+
 		$sanitized = [];
 
 		foreach( $json as $key => $value ) {
