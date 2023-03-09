@@ -151,6 +151,11 @@ wp.domReady(() => {
 			name: 'settings',	// route name
 			kind: 'wecodeart', 	// namespace
 			baseURL: '/wecodeart/v1/settings'  // API path without /wp-json
+		},
+		{
+			name: 'notifications',	// route name
+			kind: 'wecodeart', 		// namespace
+			baseURL: '/wecodeart/v1/notifications'	// API path without /wp-json
 		}
 	]);
 	// Render Admin

@@ -1,21 +1,46 @@
 const {
-    i18n: { __, sprintf },
-    element: { RawHTML, useEffect, useState }
+    i18n: {
+        __,
+        sprintf
+    },
+    element: {
+        RawHTML,
+        useState,
+        useEffect
+    },
+    data: {
+        useSelect,
+    },
+    components: {
+        Spinner,
+        Placeholder,
+    }
 } = wp;
 
 const { adminUrl } = wecodeart;
 
 export default () => {
-    const notesUrl = 'https://raw.githubusercontent.com/BicanMarianValeriu/wecodeart-framework/master/notifications.json';
+    const {
+        isRequesting,
+        request,
+    } = useSelect(select => {
+        const { getEntityRecord } = select('core');
+        const { isResolving } = select('core/data');
+
+        return {
+            isRequesting: isResolving('core', 'getEntityRecord', ['wecodeart', 'notifications']),
+            request: getEntityRecord('wecodeart', 'notifications'),
+        };
+    });
+
     const [notes, setNotes] = useState([]);
 
     useEffect(() => {
-        (async () => {
-            const data = await fetch(notesUrl).then(res => res.json());
-            const { items } = data;
+        if (!isRequesting && request) {
+            const { items = [] } = request
             setNotes(items);
-        })();
-    }, []);
+        }
+    }, [isRequesting]);
 
     return (
         <div className="d-flex flex-column flex-md-row flex-md-nowrap">
@@ -62,7 +87,13 @@ export default () => {
                     <span>{__('What`s next?', 'wecodeart')}</span>
                     <span class="badge rounded-pill bg-dark">{__('Developer news', 'wecodeart')}</span>
                 </h2>
-                {notes.map(({ title, content, type = 'info' }) => {
+                {isRequesting ? (
+                    <Placeholder {...{
+                        icon: <Spinner />,
+                        label: __('Loading', 'wecodeart'),
+                        instructions: __('Please wait, loading notifications...', 'wecodeart')
+                    }} />
+                ) : notes.map(({ title, content, type = 'info' }) => {
                     return (
                         <div className={`alert alert-${type}`} role="alert">
                             <h3>{title}</h3>

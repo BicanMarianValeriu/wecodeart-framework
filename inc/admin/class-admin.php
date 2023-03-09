@@ -18,8 +18,10 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Admin\Request;
 use WeCodeArt\Admin\Activation;
 use WeCodeArt\Admin\Notifications;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Admin Side Functionality
@@ -171,6 +173,7 @@ class Admin {
 	 * Register Rest Routes
 	 *
 	 * @since   5.0.0
+	 * @version 5.7.2
 	 */
 	public function register_routes() {
 		register_rest_route( self::NAMESPACE, '/settings', [
@@ -192,6 +195,43 @@ class Admin {
 				// If params provided, return only their values
 				if( $request->get_param( '_filter' ) ) {
 					$data = array_intersect_key( $data, $params );
+				}
+
+				return rest_ensure_response( $data );
+			},
+			'permission_callback' => function() {
+				return current_user_can( 'manage_options' );
+			},
+		] );
+		
+		register_rest_route( self::NAMESPACE, '/notifications', [
+			'methods'  => \WP_REST_Server::ALLMETHODS,
+			'callback' => function( $request ) {
+				// Unset Default Params
+				$params = array_filter( $request->get_params(), function( $key ) {
+					return( ! in_array( $key, [ 'context', '_locale' ] ) );
+				}, ARRAY_FILTER_USE_KEY );
+	
+				// Get the response.
+				$data 	= [];
+				$url 	= 'https://raw.githubusercontent.com/BicanMarianValeriu/wecodeart-framework/master/notifications.json';
+				if ( false === ( $data = get_transient( 'wecodeart/transient/notifications' ) ) ) {
+					$request	= new Request( $url, [] );
+					$request->send( $request::METHOD_GET );
+		
+					$results = $request->get_response_body();
+					$results = json_decode( $results, true );
+		
+					if( json_last_error() === JSON_ERROR_NONE ) {
+						// Clear and sanitize data.
+						$data['items'] = array_map( function( $item ) {
+							$item = wp_array_slice_assoc( $item, [ 'type', 'title', 'content' ] );
+
+							return self::sanitize_notification( $item );
+						}, get_prop( $results, [ 'items' ], [] ) );
+			
+						set_transient( 'wecodeart/transient/notifications', $data, MINUTE_IN_SECONDS );   
+					}
 				}
 
 				return rest_ensure_response( $data );
@@ -260,5 +300,36 @@ class Admin {
 			'currentUser'	=> wp_get_current_user()->display_name,
 			'adminUrl'		=> untrailingslashit( esc_url_raw( admin_url() ) ),
 		] );
+	}
+
+	/**
+     * Sanitize
+	 *
+	 * @param	array $json
+     *
+     * @return 	array
+     */
+	private static function sanitize_notification( $json = [] ) {
+		$sanitized = [];
+
+		foreach( $json as $key => $value ) {
+			switch( $key ) :
+				// Strings
+				case 'type':
+				case 'title':
+					$sanitized[$key] = sanitize_text_field( $value );
+				break;
+				// Content
+				case 'content':
+					$sanitized[$key] = wp_kses_post( $value );
+				break;
+				// Unfiltered
+				default:
+					$sanitized[$key] = $value;
+				break;
+			endswitch;
+		}
+
+		return $sanitized;
 	}
 }
