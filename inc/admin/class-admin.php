@@ -205,13 +205,8 @@ class Admin {
 		] );
 		
 		register_rest_route( self::NAMESPACE, '/notifications', [
-			'methods'  => \WP_REST_Server::ALLMETHODS,
+			'methods'  => \WP_REST_Server::READABLE,
 			'callback' => function( $request ) {
-				// Unset Default Params
-				$params = array_filter( $request->get_params(), function( $key ) {
-					return( ! in_array( $key, [ 'context', '_locale' ] ) );
-				}, ARRAY_FILTER_USE_KEY );
-	
 				// Get the response.
 				$data 	= [];
 				$url 	= 'https://raw.githubusercontent.com/BicanMarianValeriu/wecodeart-framework/master/notifications.json';
