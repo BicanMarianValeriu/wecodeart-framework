@@ -23,8 +23,8 @@
         <!-- wp:column -->
         <div class="wp-block-column">
             <!-- wp:post-title {"level":3,"isLink":true} /-->
-            <!-- wp:group {"className":"gap-1","layout":{"type":"flex","flexWrap":"wrap"}} -->
-            <div class="wp-block-group gap-1">
+            <!-- wp:group {"className":"g-1","layout":{"type":"flex","flexWrap":"wrap"}} -->
+            <div class="wp-block-group g-1">
             <!-- wp:pattern {"slug":"wecodeart/entry-meta"} /-->
             </div>
             <!-- /wp:group -->

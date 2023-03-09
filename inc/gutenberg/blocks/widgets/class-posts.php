@@ -113,8 +113,8 @@ class Posts extends Dynamic {
 		
 		// Meta
 		if( $display_author || $display_date ) {
-			$inner_blocks .= '<!-- wp:group {"className":"hstack gap-1 mb-1","layout":{"type":"flex","flexWrap":"wrap"}} -->';
-			$inner_blocks .= '<div class="wp-block-group hstack gap-1 mb-1">';
+			$inner_blocks .= '<!-- wp:group {"className":"hstack g-1 mb-1","layout":{"type":"flex","flexWrap":"wrap"}} -->';
+			$inner_blocks .= '<div class="wp-block-group hstack g-1 mb-1">';
 
 			// Author
 			if ( $display_author ) {
