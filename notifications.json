@@ -4,7 +4,7 @@
 		{
 			"type": "info",
 			"title": "Version - 6.0.0",
-			"content": "Due to major enhancements and usage of the <a href=\"https:\//make.wordpress.org\/core\/6-2\/\">WP 6.2</a> APIs, I will increase the version to 6 as soon as WordPress 6.2 is released. Just for the sake of being inline with WP :) ."
+			"content": "Due to major enhancements and usage of the <a href=\"https:\//make.wordpress.org\/core\/6-2\/\" target=\"_blank\">WordPress 6.2</a> APIs, I will increase the version to 6 as soon as WordPress 6.2 is released. Just for the sake of being inline with WP :) ."
 		},
 		{
 			"type": "danger",
