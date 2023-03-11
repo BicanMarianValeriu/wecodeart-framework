@@ -7,8 +7,8 @@
 ?>
 <!-- wp:group {"align":"full","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull">
-    <!-- wp:media-text {"align":"full","mediaLink":"https://pd.w.org/2023/01/42163d169550d5270.03657997.jpg","mediaType":"image","imageFill":true,"className":"min-vh-100 gap-0"} -->
-    <div class="wp-block-media-text alignfull is-stacked-on-mobile is-image-fill min-vh-100 gap-0">
+    <!-- wp:media-text {"align":"full","mediaLink":"https://pd.w.org/2023/01/42163d169550d5270.03657997.jpg","mediaType":"image","imageFill":true,"className":"min-vh-100 g-0"} -->
+    <div class="wp-block-media-text alignfull is-stacked-on-mobile is-image-fill min-vh-100 g-0">
         <figure class="wp-block-media-text__media" style="background-image:url(https://pd.w.org/2023/01/42163d169550d5270.03657997.jpg);background-position:50% 50%">
             <img src="https://pd.w.org/2023/01/42163d169550d5270.03657997.jpg" alt="" />
         </figure>

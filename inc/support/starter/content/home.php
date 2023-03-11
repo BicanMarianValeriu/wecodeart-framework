@@ -109,8 +109,8 @@ return [
 	</div>
 	</div>
 	<!-- /wp:media-text -->
-	<!-- wp:gallery {"className":"gap-0","columns":3,"linkTo":"none","align":"full"} -->
-	<figure class="wp-block-gallery alignfull has-nested-images columns-3 is-cropped gap-0">
+	<!-- wp:gallery {"className":"g-0","columns":3,"linkTo":"none","align":"full"} -->
+	<figure class="wp-block-gallery alignfull has-nested-images columns-3 is-cropped g-0">
 	<!-- wp:image {"sizeSlug":"large","linkDestination":"none","style":{"color":{"duotone":["#000000","#7f7f7f"]}},"className":""} -->
 	<figure class="wp-block-image size-large"><img src="https://picsum.photos/id/119/800/800" alt=""/></figure>
 	<!-- /wp:image -->
