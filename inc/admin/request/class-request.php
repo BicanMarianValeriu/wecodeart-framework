@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Request
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Admin;
@@ -121,7 +121,17 @@ class Request {
 	 *
 	 * @return mixed The response body.
 	 */
-	public function get_response_body() {
+	public function get_response_body( bool $decoded = false ) {
+		if( $decoded ) {
+			$data =  json_decode( $this->response_body, true );
+
+			if( json_last_error() === JSON_ERROR_NONE ) {
+				return $data;
+			}
+
+			return [];
+		}
+
 		return $this->response_body;
 	}
 

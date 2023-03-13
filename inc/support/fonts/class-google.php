@@ -458,7 +458,7 @@ final class Google {
 	 * @return array    All Google Fonts.
 	 */
 	public static function get_fonts() {
-        if ( false === ( $results = get_transient( self::CACHE_ID ) ) ) {
+        if ( false === ( $data = get_transient( self::CACHE_ID ) ) ) {
 			// It wasn't there, so regenerate the data and save the transient
 			$request_url    = add_query_arg( [
                 'key' => 'AIzaSyBwIX97bVWr3-6AIUvGkcNnmFgirefZ6Sw'
@@ -466,19 +466,16 @@ final class Google {
 			$request        = new Request( $request_url, [] );
 			$request->send( $request::METHOD_GET );
 
-            $results = $request->get_response_body();
-            $results = json_decode( $results, true );
+            $results = $request->get_response_body( true );
 
-			if( json_last_error() === JSON_ERROR_NONE ) {
-				$results = array_map( function( $item ) {
-					return wp_array_slice_assoc( $item, [ 'family', 'variants', 'subsets' ] );
-				}, get_prop( $results, 'items', [] ) );
-	
-				set_transient( self::CACHE_ID, $results, WEEK_IN_SECONDS );   
-			}
+			$data = array_map( function( $item ) {
+				return wp_array_slice_assoc( $item, [ 'family', 'variants', 'subsets' ] );
+			}, get_prop( $results, 'items', [] ) );
+
+			set_transient( self::CACHE_ID, $data, WEEK_IN_SECONDS );
         }
 
-        self::$items = $results;
+        self::$items = $data;
 
         return self::$items;
 	}

@@ -214,15 +214,12 @@ class Admin {
 					$request	= new Request( $url, [] );
 					$request->send( $request::METHOD_GET );
 		
-					$results = $request->get_response_body();
-					$results = json_decode( $results, true );
+					$results = $request->get_response_body( true );
+					
+					// Clear and sanitize data.
+					$data['items'] = array_map( [ __CLASS__, 'sanitize_notification' ], get_prop( $results, [ 'items' ], [] ) );
 		
-					if( json_last_error() === JSON_ERROR_NONE ) {
-						// Clear and sanitize data.
-						$data['items'] = array_map( [ __CLASS__, 'sanitize_notification' ], get_prop( $results, [ 'items' ], [] ) );
-			
-						set_transient( 'wecodeart/transient/notifications', $data, MINUTE_IN_SECONDS );   
-					}
+					set_transient( 'wecodeart/transient/notifications', $data, MINUTE_IN_SECONDS );
 				}
 
 				return rest_ensure_response( $data );
