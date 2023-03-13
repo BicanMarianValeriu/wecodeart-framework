@@ -55,6 +55,7 @@ v5.7.2
 - Added - Gutenberg page title highlight when focused / background contrast vs rest of the page
 - Added - flip-x and flip-y CSS utility classes
 - Added - Footer with Background image template part
+- Added - /wp-json/wecodeart/v1/notifications rest route instead of direct call to github (adjusted admin UX accordingly)
 
 v5.7.1
 - Updated - core/archives type attribute
