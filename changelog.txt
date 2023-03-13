@@ -30,6 +30,7 @@ v5.7.2
 - Updated - entry-meta and author-box patterns to use post-author-name block instead of post-author
 - Updated - Clear block formatting plugin now works on code and list item blocks
 - Updated - better light/dark theme detection (Navigation and Navigation Link blocks)
+- Updated - Admin/Request to decode response with json_decode()
 - Removed - __experimentalLayout for core/template-part block (also removed from templates / template edits are required)
 - Removed - core/post-comments-link from Post Meta pattern
 - Removed - custom logo customizer support
