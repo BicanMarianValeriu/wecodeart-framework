@@ -19,19 +19,28 @@
 }
 
 .wecodeart-admin {
+	--wca--body--background: #f1f5f9;
+	--wca--body--color: #111;
+	--wca--gutter: 12px;
+	--wca--border--color: #e2e4e7;
 	position: relative;
-	color: #111;
+	background-color: var(--wca--body--background);
+	color: var(--wca--body--color);
+
+	@media screen and (min-width: 783px) {
+		--wca--gutter: 50px;
+	}
 	
 	.components-panel {
 		min-height: 100vh;
+		background-color: inherit;
 
 		.components-panel__header {
 			border: 0;
 			display: block;
 			height: auto;
-			padding: 25px 50px;
-			margin: 0 -50px;
-			background-color: #f5f6f8;
+			padding: 25px var(--wca--gutter);
+			margin: 0 calc(-1 * var(--wca--gutter));
 
 			h2 {
 				font-size: 35px;
@@ -65,36 +74,36 @@
 		}
 
 		.components-panel__body {
-			padding: 0 50px 50px;
+			padding: 0 var(--wca--gutter) var(--wca--gutter);
 		}
 	}
 
+	/* Tabs */
 	.wecodeart-tab-panel {
 		overflow: hidden;
-		margin: 0 -50px;
+		margin: 0 calc(-1 * var(--wca--gutter));
 		width: calc(100% + 100px);	
 
 		.components-tab-panel {
 			&__tabs {
-				padding: 0 50px;
-				border-bottom: 1px solid #e2e4e7;
+				padding: 0 var(--wca--gutter);
+				border-bottom: 1px solid var(--wca--border--color);
 	
 				&-item {
-					font-size: 18px;
 					padding: 10px 15px;
 					border-bottom: 5px solid transparent;
-					opacity: 0.7;
+					font-size: 1rem;
 					font-weight: 500;
+					color: #475569;
 
 					@media screen and (max-width: 640px) {
-						display: block;
-						width: 100%;
+						font-size: 12px;
 					}
 	
 					&:hover {
-						opacity: 0.9;
+						opacity: 1;
+						background-color: #f8fafc;
 						border-color: #ccc;
-						background: #f5f6f8;
 					}
 
 					&:focus {
@@ -105,8 +114,8 @@
 					}
 	
 					&.active-tab {
-						opacity: 1;
-	
+						background: #e2e8f0;
+
 						&,
 						&:hover {
 							border-color: var( --wp-admin-theme-color );
@@ -117,7 +126,7 @@
 
 			&__tab {
 				&-content {
-					padding: 0 50px;
+					padding: 0 var(--wca--gutter);
 				}
 			}
 		}
@@ -129,14 +138,15 @@
 				&__tabs {
 					flex-direction: column;
 					padding: 15px 0;
-					border-right: 1px solid #e2e4e7;
+					border-right: 1px solid var(--wca--border--color);
 
 					&-item {
 						border: none;
+						margin-right: -1px;
+						color: var(--wca--body--color);
 
 						&.active-tab {
-							background-color: #e2e4e7;
-							color: #000;
+							background-color: white;
 						}
 					}
 				}
@@ -145,13 +155,15 @@
 					&-content {
 						flex: 1 1 auto;
 						padding: 15px;
-						border-bottom: 1px solid #e2e4e7;
+						background-color: white;
+						border-bottom: 1px solid var(--wca--border--color);
 					}
 				}
 			}
 		}
 	}
 	
+	/* Buttons */
 	.wecodeart-button-field {
 		label {
 			display: block;
@@ -178,8 +190,10 @@
 		}
 	}
 
+	/* Table */
 	.wecodeart-table {
-		border: 1px solid #e2e4e7;
+		background-color: white;
+		border: 1px solid var(--wca--border--color);
 		border-collapse: collapse;
 
 		td,
@@ -187,7 +201,7 @@
 			vertical-align: middle;
 			
 			&:not(:first-child) {
-				border-left: 1px solid #e2e4e7;
+				border-left: 1px solid var(--wca--border--color);
 			}
 
 			&:first-child {
@@ -196,7 +210,7 @@
 		}
 
 		td {
-			border-top: 1px solid #e2e4e7;
+			border-top: 1px solid var(--wca--border--color);
 
 			strong {
 				color: #121212;
@@ -205,10 +219,9 @@
 		}
 	}
 
+	/* Notices */
 	.components-editor-notices__snackbar {
 		position: fixed;
-		left: auto;
-		right: 0;
 		bottom: 20px;
 		padding-left: 16px;
 		padding-right: 16px;
