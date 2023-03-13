@@ -186,20 +186,16 @@ const {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('WeCodeArt Framework provides set of tools to extend the way you are building content on WordPress Gutenberg block editor. Designed and integrated to help users easily navigate; and control each block the way it should be.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "card-group mb-5"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "card"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "card-body"
+    className: "card card-body"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "card-title"
   }, __('Customizer Options', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "card-text"
-  }, "Looking for WP Customizer API to manage logo, favicon, set home or blog page? You can also add your own custom CSS there."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, "Looking for WP Customizer API to manage logo, favicon, set home or blog page? You can also add your own custom CSS there or find other plugins settings."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: adminUrl + '/customize.php',
     class: "button button-primary is-primary"
-  }, __('Legacy Options', 'wecodeart')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "card"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "card-body"
+  }, __('Legacy Options', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "card card-body"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "card-title"
   }, __('Rate Us Five!', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -208,7 +204,7 @@ const {
     href: "//wordpress.org/support/theme/wecodeart/reviews/?filter=5#new-post",
     class: "button button-primary is-primary",
     target: "_blank"
-  }, __('Ok, you deserve it', 'wecodeart'))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, __('Ok, you deserve it', 'wecodeart')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "alert alert-warning"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, null, sprintf(__('If you have any questions or suggestion, let us know through our %1$sFacebook community %3$s. Also, %2$ssubscribe to our newsletter%3$s if you want to stay up to date with what`s new and upcoming features.', 'wecodeart'), '<a href="https://www.facebook.com/wecodeart" target="_blank">', '<a href="https://www.wecodeart.com/" target="_blank">', '</a>')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "col col-md-4 offset-md-1"
