@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-03-08 22:03+0000\n"
+"PO-Revision-Date: 2023-03-16 23:54+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -107,7 +107,7 @@ msgstr "Denumirea bloc-ului este necesară."
 msgid "Blog"
 msgstr "Blog"
 
-#: patterns/hero-separator.php:13
+#: patterns/section-hero.php:13
 msgid "Build your website with WeCodeArt"
 msgstr "Construiește-ți site-ul web cu WeCodeArt"
 
@@ -203,7 +203,7 @@ msgstr "Arhive zilnice: %s"
 msgid "Design"
 msgstr "Personalizări"
 
-#: inc/admin/class-admin.php:258
+#: inc/admin/class-admin.php:286
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -227,7 +227,7 @@ msgstr "Puncte"
 
 #: patterns/cta-border.php:22 patterns/cta-center.php:25
 #: patterns/cta-default.php:33 patterns/cta-separator.php:33
-#: patterns/hero-separator.php:46
+#: patterns/section-hero.php:46
 msgid "Download Now"
 msgstr "Descarcă Acum"
 
@@ -248,19 +248,23 @@ msgstr "Estompat"
 msgid "Failed to dismiss notification"
 msgstr "Notificarea nu a putut fi respinsă"
 
-#: patterns/hero-separator.php:23
+#: patterns/section-testimonials.php:13
+msgid "Feedback"
+msgstr "Păreri"
+
+#: patterns/section-hero.php:23
 msgid "FIRST"
 msgstr "PRIMA"
 
-#: patterns/hero-separator.php:16
+#: patterns/section-hero.php:16
 msgid "FREE"
 msgstr "GRATIS"
 
-#: patterns/hero-separator.php:38
+#: patterns/section-hero.php:38
 msgid "Free for lifetime"
 msgstr "Gratis pe viață"
 
-#: patterns/hero-separator.php:16
+#: patterns/section-hero.php:16
 #, php-format
 msgid "Get it now. Is %s forever!"
 msgstr "Ia-o acum. Este %s pentru totdeauna!"
@@ -291,7 +295,7 @@ msgstr "Wrapper HTML nevalid pentru „%s”."
 msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr "Se pare că WeCodeArt Framework nu este tradusă în %s."
 
-#: patterns/latest-posts.php:12
+#: patterns/section-posts.php:12
 #, php-format
 msgid "Latest %s"
 msgstr "Ultimele %s"
@@ -410,7 +414,7 @@ msgstr "Postat in"
 msgid "Posted on "
 msgstr "Postat pe"
 
-#: patterns/latest-posts.php:12
+#: patterns/section-posts.php:12
 msgid "Posts"
 msgstr "Postări"
 
@@ -483,11 +487,11 @@ msgstr "Sari la conținut"
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
 
-#: patterns/hero-separator.php:35
+#: patterns/section-hero.php:35
 msgid "Strict coding standards"
 msgstr "Standarde stricte de codare"
 
-#: patterns/hero-separator.php:32
+#: patterns/section-hero.php:32
 msgid "Super high performance"
 msgstr "Performanță super înaltă"
 
@@ -504,7 +508,7 @@ msgstr "Arhive etichetă: %s"
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
-#: inc/admin/class-admin.php:212 inc/admin/class-admin.php:213
+#: inc/admin/class-admin.php:240 inc/admin/class-admin.php:241
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -562,6 +566,11 @@ msgstr "actualizați PHP"
 #: inc/gutenberg/blocks/site/class-login.php:99
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
+
+#: patterns/section-testimonials.php:13
+#, php-format
+msgid "Users %s"
+msgstr "%s Utilizatori"
 
 #: patterns/cta-default.php:38 patterns/cta-separator.php:38
 msgid "View Themes"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-08 22:02+0000\n"
+"POT-Creation-Date: 2023-03-16 23:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -100,7 +100,7 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: patterns/hero-separator.php:13
+#: patterns/section-hero.php:13
 msgid "Build your website with WeCodeArt"
 msgstr ""
 
@@ -192,7 +192,7 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: inc/admin/class-admin.php:258
+#: inc/admin/class-admin.php:286
 msgid "Developer Mode"
 msgstr ""
 
@@ -213,7 +213,7 @@ msgstr ""
 
 #: patterns/cta-border.php:22 patterns/cta-center.php:25
 #: patterns/cta-default.php:33 patterns/cta-separator.php:33
-#: patterns/hero-separator.php:46
+#: patterns/section-hero.php:46
 msgid "Download Now"
 msgstr ""
 
@@ -233,19 +233,23 @@ msgstr ""
 msgid "Failed to dismiss notification"
 msgstr ""
 
-#: patterns/hero-separator.php:23
+#: patterns/section-testimonials.php:13
+msgid "Feedback"
+msgstr ""
+
+#: patterns/section-hero.php:23
 msgid "FIRST"
 msgstr ""
 
-#: patterns/hero-separator.php:16
+#: patterns/section-hero.php:16
 msgid "FREE"
 msgstr ""
 
-#: patterns/hero-separator.php:38
+#: patterns/section-hero.php:38
 msgid "Free for lifetime"
 msgstr ""
 
-#: patterns/hero-separator.php:16
+#: patterns/section-hero.php:16
 #, php-format
 msgid "Get it now. Is %s forever!"
 msgstr ""
@@ -276,7 +280,7 @@ msgstr ""
 msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr ""
 
-#: patterns/latest-posts.php:12
+#: patterns/section-posts.php:12
 #, php-format
 msgid "Latest %s"
 msgstr ""
@@ -393,7 +397,7 @@ msgstr ""
 msgid "Posted on "
 msgstr ""
 
-#: patterns/latest-posts.php:12
+#: patterns/section-posts.php:12
 msgid "Posts"
 msgstr ""
 
@@ -464,11 +468,11 @@ msgstr ""
 msgid "Speak Your Mind"
 msgstr ""
 
-#: patterns/hero-separator.php:35
+#: patterns/section-hero.php:35
 msgid "Strict coding standards"
 msgstr ""
 
-#: patterns/hero-separator.php:32
+#: patterns/section-hero.php:32
 msgid "Super high performance"
 msgstr ""
 
@@ -485,7 +489,7 @@ msgstr ""
 msgid "The file must be of type CSS/JS."
 msgstr ""
 
-#: inc/admin/class-admin.php:212 inc/admin/class-admin.php:213
+#: inc/admin/class-admin.php:240 inc/admin/class-admin.php:241
 msgid "Theme Options"
 msgstr ""
 
@@ -538,6 +542,11 @@ msgstr ""
 
 #: inc/gutenberg/blocks/site/class-login.php:99
 msgid "Username or Email Address"
+msgstr ""
+
+#: patterns/section-testimonials.php:13
+#, php-format
+msgid "Users %s"
 msgstr ""
 
 #: patterns/cta-default.php:38 patterns/cta-separator.php:38
