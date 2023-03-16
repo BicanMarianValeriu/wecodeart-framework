@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Coming Soon
- * Slug: wecodeart/coming-soon
+ * Slug: wecodeart/page-soon
  * Categories: wecodeart, wecodeart-pages
  */
 ?>

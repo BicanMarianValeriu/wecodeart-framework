@@ -157,7 +157,7 @@ class Pattern {
     public function register() {
 		if ( \WP_Block_Patterns_Registry::get_instance()->is_registered( $this->get_name() ) || empty( $this->content )) return;
 
-		$args = [
+		$args = array_filter ( [
             'title'       	=> $this->title,
             'content'     	=> $this->content,
             'categories'  	=> ! empty( $this->categories ) ? $this->categories : [ $this->theme ],
@@ -169,7 +169,7 @@ class Pattern {
 			'templateTypes'	=> $this->templateTypes,
 			'blockTypes' 	=> $this->blockTypes,
 			'inserter' 		=> $this->inserter,
-        ];
+        ] );
 
         register_block_pattern( $this->get_name(), $args );
     }

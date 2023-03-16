@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Latest Posts
- * Slug: wecodeart/latest-posts
+ * Slug: wecodeart/section-posts
  * Categories: wecodeart, wecodeart-query
  */
 ?>

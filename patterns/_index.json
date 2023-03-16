@@ -1,10 +1,10 @@
 [
     {
-        "slug": "html",
-        "title": "HTML - sample",
-        "description": "A simple section with two columns.",
+        "slug": "testimonial",
+        "title": "Testimonial",
+        "description": "A simple testimonial.",
         "categories": [
-            "wecodeart-pages"
+            "wecodeart", "wecodeart-elements"
         ]
     }
 ]

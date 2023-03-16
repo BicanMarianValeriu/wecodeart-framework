@@ -52,7 +52,7 @@ export default () => {
                         <p className="card-text">
                             Looking for WP Customizer API to manage logo, favicon, set home or blog page? You can also add your own custom CSS there or find other plugins settings.
                         </p>
-                        <a href={adminUrl + '/customize.php'} class="button button-primary is-primary">{
+                        <a href={adminUrl + '/customize.php'} class="button button-primary is-primary align-self-start">{
                             __('Legacy Options', 'wecodeart')
                         }</a>
                     </div>
@@ -62,7 +62,7 @@ export default () => {
                             If you like this theme please give me a 5-star rating.
                             This would boost my motivation and help other users make a comfortable decision while choosing the WeCodeArt Framework.
                         </p>
-                        <a href="//wordpress.org/support/theme/wecodeart/reviews/?filter=5#new-post" class="button button-primary is-primary" target="_blank">{
+                        <a href="//wordpress.org/support/theme/wecodeart/reviews/?filter=5#new-post" class="button button-primary is-primary align-self-start" target="_blank">{
                             __('Ok, you deserve it', 'wecodeart')
                         }</a>
                     </div>

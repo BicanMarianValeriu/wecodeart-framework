@@ -193,7 +193,7 @@ const {
     className: "card-text"
   }, "Looking for WP Customizer API to manage logo, favicon, set home or blog page? You can also add your own custom CSS there or find other plugins settings."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: adminUrl + '/customize.php',
-    class: "button button-primary is-primary"
+    class: "button button-primary is-primary align-self-start"
   }, __('Legacy Options', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "card card-body"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
@@ -202,7 +202,7 @@ const {
     className: "card-text"
   }, "If you like this theme please give me a 5-star rating. This would boost my motivation and help other users make a comfortable decision while choosing the WeCodeArt Framework."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "//wordpress.org/support/theme/wecodeart/reviews/?filter=5#new-post",
-    class: "button button-primary is-primary",
+    class: "button button-primary is-primary align-self-start",
     target: "_blank"
   }, __('Ok, you deserve it', 'wecodeart')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "alert alert-warning"

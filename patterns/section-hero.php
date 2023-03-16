@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Hero (with separator)
- * Slug: wecodeart/hero-separator
+ * Slug: wecodeart/section-hero
  * Categories: wecodeart, wecodeart-hero
  */
 ?>

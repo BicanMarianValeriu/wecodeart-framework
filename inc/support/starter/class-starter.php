@@ -9,7 +9,7 @@
  * @subpackage  Support\Starter
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.5.3
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support;
@@ -112,7 +112,7 @@ class Starter implements Integration {
 					'post_title' 	=> _x( 'Logo', 'Theme starter content', 'wecodeart' ),
 					'post_excerpt' 	=> 'WeCodeArt',
 					'file' 			=> 'assets/images/logo.png',
-				],
+				]
 			],
 			'options'     => [
 				'page_on_front'  => '{{' . self::HOME_SLUG . '}}',

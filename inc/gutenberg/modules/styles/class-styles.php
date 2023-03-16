@@ -405,6 +405,7 @@ class Styles implements Integration {
 			'core/post-content',
 			'core/post-featured-image',
 			'core/post-navigation-link',
+			'core/post-time-to-read',
 			'core/post-template',
 			'core/post-comment',
 			'core/post-comments-link',
