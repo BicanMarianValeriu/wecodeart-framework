@@ -174,7 +174,7 @@ class Logo extends Dynamic {
             border-radius: inherit;
         }
         .wp-block-site-logo a {
-			display: inline-block;
+			display: block;
 			color: inherit;
 			white-space: nowrap;
         }
