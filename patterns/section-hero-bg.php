@@ -5,10 +5,10 @@
  * Categories: wecodeart, wecodeart-hero
  */
 ?>
-<!-- wp:cover {"url":"<?php echo get_parent_theme_file_uri( 'assets/images/hero.jpg' ); ?>","dimRatio":20,"overlayColor":"white","focalPoint":{"x":1,"y":1},"minHeight":50,"contentPosition":"center center","isDark":false,"align":"full","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|xxl","top":"var:preset|spacing|xxl","right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}}} -->
+<!-- wp:cover {"url":"<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/hero.jpg' ) ); ?>","dimRatio":20,"overlayColor":"white","focalPoint":{"x":1,"y":1},"minHeight":50,"contentPosition":"center center","isDark":false,"align":"full","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|xxl","top":"var:preset|spacing|xxl","right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}}} -->
 <div class="wp-block-cover alignfull is-light" style="padding-top:var(--wp--preset--spacing--xxl);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--xxl);padding-left:var(--wp--preset--spacing--g);min-height:50px">
     <span aria-hidden="true" class="wp-block-cover__background has-white-background-color has-background-dim-20 has-background-dim"></span>
-    <img class="wp-block-cover__image-background" alt="" src="<?php echo get_parent_theme_file_uri( 'assets/images/hero.jpg' ); ?>" style="object-position:100% 100%" data-object-fit="cover" data-object-position="100% 100%"/>
+    <img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/hero.jpg' ) ); ?>" style="object-position:100% 100%" data-object-fit="cover" data-object-position="100% 100%"/>
     <div class="wp-block-cover__inner-container">
     <!-- wp:group {"style":{"spacing":{"padding":{"top":"0","right":"0","bottom":"0","left":"0"}}},"layout":{"type":"constrained","contentSize":"950px"}} -->
     <div class="wp-block-group" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">

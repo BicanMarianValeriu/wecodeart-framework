@@ -9,6 +9,8 @@ return [
 	<!-- wp:pattern {"slug":"wecodeart/section-hero-bg"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/cta-default"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/cards-default"} /-->
+	<!-- wp:pattern {"slug":"wecodeart/section-woo"} /-->
+	<!-- wp:pattern {"slug":"wecodeart/cards-overlay"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/cta-center"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/section-testimonials"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/section-posts"} /-->
