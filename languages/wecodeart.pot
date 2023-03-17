@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-16 23:53+0000\n"
+"POT-Creation-Date: 2023-03-17 02:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -51,6 +51,10 @@ msgstr ""
 
 #: views/blocks/post/comments.tpl.php:52
 msgid "1 Comment"
+msgstr ""
+
+#: patterns/section-mobile.php:46
+msgid "100% Responsive"
 msgstr ""
 
 #: inc/gutenberg/blocks/post/class-content.php:85
@@ -316,6 +320,10 @@ msgstr ""
 msgid "Missing notification id"
 msgstr ""
 
+#: patterns/section-mobile.php:15
+msgid "MOBILE"
+msgstr ""
+
 #: inc/gutenberg/blocks/query/class-title.php:143
 msgctxt "monthly archives date format"
 msgid "F Y"
@@ -355,6 +363,10 @@ msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:74
 msgid "Notification dismissed"
+msgstr ""
+
+#: patterns/section-woo.php:17
+msgid "Out of the box WooCommerce Integration!"
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-button.php:56
@@ -405,6 +417,10 @@ msgstr ""
 msgid "Read more"
 msgstr ""
 
+#: patterns/section-woo.php:11
+msgid "Ready"
+msgstr ""
+
 #: patterns/cta-border.php:13 patterns/cta-center.php:16
 #: patterns/cta-default.php:20 patterns/cta-separator.php:20
 #, php-format
@@ -424,6 +440,10 @@ msgstr ""
 #: inc/gutenberg/blocks/comment/class-form.php:274
 #, php-format
 msgid "Required fiels are marked \"%s\"."
+msgstr ""
+
+#: patterns/section-mobile.php:82
+msgid "Retina Ready"
 msgstr ""
 
 #: inc/gutenberg/blocks/widgets/class-rss.php:65
@@ -476,6 +496,10 @@ msgstr ""
 msgid "Super high performance"
 msgstr ""
 
+#: patterns/section-woo.php:20
+msgid "Super-Optimized eCommerce website built with ease."
+msgstr ""
+
 #: inc/gutenberg/blocks/navigation/class-navigation.php:92
 msgid "Tabs"
 msgstr ""
@@ -498,9 +522,9 @@ msgctxt "Theme starter content"
 msgid "Blog"
 msgstr ""
 
-#: inc/support/starter/content/about.php:7
+#: inc/support/starter/content/soon.php:7
 msgctxt "Theme starter content"
-msgid "Features"
+msgid "Coming Soon"
 msgstr ""
 
 #: inc/support/starter/content/home.php:7
@@ -528,6 +552,10 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
+#: patterns/section-mobile.php:16
+msgid "too!"
+msgstr ""
+
 #: inc/gutenberg/blocks/text/class-heading.php:49
 msgid "Underline Brush"
 msgstr ""
@@ -551,6 +579,11 @@ msgstr ""
 
 #: patterns/cta-default.php:38 patterns/cta-separator.php:38
 msgid "View Themes"
+msgstr ""
+
+#: patterns/section-mobile.php:14
+#, php-format
+msgid "We are %s first ... %s"
 msgstr ""
 
 #: inc/support/plugins/cf7/class-cf7.php:69
@@ -590,6 +623,16 @@ msgid ""
 "version %2$s. Please upgrade WordPress to use WeCodeArt Framework."
 msgstr ""
 
+#: patterns/section-mobile.php:49
+msgid ""
+"WeCodeArt Themes are fully responsive and will adapt themselves to any "
+"mobile device."
+msgstr ""
+
+#: patterns/section-mobile.php:25
+msgid "WeCodeArt Themes will look amazing on any device."
+msgstr ""
+
 #: patterns/cards-background.php:56 patterns/cards-overlay.php:22
 #, php-format
 msgid "Well %s"
@@ -614,6 +657,11 @@ msgstr ""
 #: patterns/cards-overlay.php:56
 #, php-format
 msgid "Winner %s"
+msgstr ""
+
+#: patterns/section-mobile.php:85
+msgid ""
+"With WeCodeArt Themes your website will always look perfect on any device."
 msgstr ""
 
 #: views/admin/notification-locale.tpl.php:25

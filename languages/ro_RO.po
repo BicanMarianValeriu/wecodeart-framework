@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-03-16 23:54+0000\n"
+"PO-Revision-Date: 2023-03-17 02:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -53,6 +53,10 @@ msgstr "(fără titlu)"
 #: views/blocks/post/comments.tpl.php:52
 msgid "1 Comment"
 msgstr "1 Comentariu"
+
+#: patterns/section-mobile.php:46
+msgid "100% Responsive"
+msgstr "100% Receptiv"
 
 #: inc/gutenberg/blocks/post/class-content.php:85
 msgid "[block rendering halted]"
@@ -333,6 +337,10 @@ msgstr "Meniu"
 msgid "Missing notification id"
 msgstr "ID-ul notificării lipsește"
 
+#: patterns/section-mobile.php:15
+msgid "MOBILE"
+msgstr "MOBILE"
+
 #: inc/gutenberg/blocks/query/class-title.php:143
 msgctxt "monthly archives date format"
 msgid "F Y"
@@ -373,6 +381,10 @@ msgstr "Nu, nu-mi pasă."
 #: inc/admin/notifications/class-ajax.php:74
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
+
+#: patterns/section-woo.php:17
+msgid "Out of the box WooCommerce Integration!"
+msgstr "Integrare WooCommerce din cutie!"
 
 #: inc/gutenberg/blocks/design/class-button.php:56
 msgid "Outline"
@@ -423,6 +435,10 @@ msgstr "Postări"
 msgid "Read more"
 msgstr "Citeşte mai mult"
 
+#: patterns/section-woo.php:11
+msgid "Ready"
+msgstr "Gata"
+
 #: patterns/cta-border.php:13 patterns/cta-center.php:16
 #: patterns/cta-default.php:20 patterns/cta-separator.php:20
 #, php-format
@@ -443,6 +459,10 @@ msgstr "Metoda de solicitare %1$s nu este validă."
 #, php-format
 msgid "Required fiels are marked \"%s\"."
 msgstr "Fișele obligatorii sunt marcate cu %s\"."
+
+#: patterns/section-mobile.php:82
+msgid "Retina Ready"
+msgstr "Gata pentru retina"
 
 #: inc/gutenberg/blocks/widgets/class-rss.php:65
 msgid "RSS Error"
@@ -495,6 +515,11 @@ msgstr "Standarde stricte de codare"
 msgid "Super high performance"
 msgstr "Performanță super înaltă"
 
+#: patterns/section-woo.php:20
+msgid "Super-Optimized eCommerce website built with ease."
+msgstr ""
+"Site-ul web de comerț electronic super-optimizat, construit cu ușurință."
+
 #: inc/gutenberg/blocks/navigation/class-navigation.php:92
 msgid "Tabs"
 msgstr "File"
@@ -517,10 +542,10 @@ msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Blog"
 
-#: inc/support/starter/content/about.php:7
+#: inc/support/starter/content/soon.php:7
 msgctxt "Theme starter content"
-msgid "Features"
-msgstr "Caracteristici"
+msgid "Coming Soon"
+msgstr "In curând"
 
 #: inc/support/starter/content/home.php:7
 msgctxt "Theme starter content"
@@ -551,6 +576,10 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
+#: patterns/section-mobile.php:16
+msgid "too!"
+msgstr "de asemenea!"
+
 #: inc/gutenberg/blocks/text/class-heading.php:49
 msgid "Underline Brush"
 msgstr "Pensulă de subliniere"
@@ -575,6 +604,11 @@ msgstr "%s Utilizatori"
 #: patterns/cta-default.php:38 patterns/cta-separator.php:38
 msgid "View Themes"
 msgstr "Vedeți Teme"
+
+#: patterns/section-mobile.php:14
+#, php-format
+msgid "We are %s first ... %s"
+msgstr "Suntem mai întâi %s ... %s"
 
 #: inc/support/plugins/cf7/class-cf7.php:69
 #, php-format
@@ -622,6 +656,18 @@ msgstr ""
 "Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
 "WeCodeArt Framework."
 
+#: patterns/section-mobile.php:49
+msgid ""
+"WeCodeArt Themes are fully responsive and will adapt themselves to any "
+"mobile device."
+msgstr ""
+"Temele WeCodeArt sunt pe deplin receptive și se vor adapta la orice "
+"dispozitiv mobil."
+
+#: patterns/section-mobile.php:25
+msgid "WeCodeArt Themes will look amazing on any device."
+msgstr "Temele WeCodeArt vor arăta uimitor pe orice dispozitiv."
+
 #: patterns/cards-background.php:56 patterns/cards-overlay.php:22
 #, php-format
 msgid "Well %s"
@@ -653,6 +699,13 @@ msgstr "Câştigător"
 #, php-format
 msgid "Winner %s"
 msgstr "%s Câştigător"
+
+#: patterns/section-mobile.php:85
+msgid ""
+"With WeCodeArt Themes your website will always look perfect on any device."
+msgstr ""
+"Cu temele WeCodeArt, site-ul dvs. va arăta întotdeauna perfect pe orice "
+"dispozitiv."
 
 #: views/admin/notification-locale.tpl.php:25
 msgid ""

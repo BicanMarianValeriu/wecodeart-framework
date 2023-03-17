@@ -157,6 +157,11 @@ return [
     |
     */
     'support' => [
+        'custom-logo'       => [
+            'width'         => 65,
+            'height'        => 65,
+            'flex-height'   => true,
+        ],
         'title-tag'         => true,
         'responsive-embeds' => true,
     ],

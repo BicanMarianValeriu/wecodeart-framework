@@ -30,7 +30,7 @@ class Starter implements Integration {
 
 	const HOME_SLUG  	= 'home';
 	const BLOG_SLUG  	= 'blog';
-	const ABOUT_SLUG	= 'about';
+	const SOON_SLUG		= 'soon';
 	const NOTICE_ID 	= 'wecodeart-starter-notice';
 
 	/**
@@ -130,9 +130,9 @@ class Starter implements Integration {
 				self::BLOG_SLUG  => wp_parse_args( [
 					'post_name'  => self::BLOG_SLUG,
 				], require __DIR__ . '/content/blog.php' ),
-				self::ABOUT_SLUG => wp_parse_args( [
-					'post_name'  => self::ABOUT_SLUG,
-				], require __DIR__ . '/content/about.php' ),
+				self::SOON_SLUG => wp_parse_args( [
+					'post_name'  => self::SOON_SLUG,
+				], require __DIR__ . '/content/soon.php' ),
 			],
 		];
 
