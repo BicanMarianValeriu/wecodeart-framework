@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-03-17 02:27+0000\n"
+"PO-Revision-Date: 2023-03-17 04:59+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -198,6 +198,14 @@ msgstr "Personalizat"
 msgid "Customizer"
 msgstr "Customizer"
 
+#: patterns/section-features.php:54
+msgid ""
+"Cutting-edge code, simple, fast, and not packed with features you will never "
+"use."
+msgstr ""
+"Cod de ultimă oră, simplu, rapid și fără caracteristici pe care nu le vei "
+"folosi niciodată."
+
 #: inc/gutenberg/blocks/query/class-title.php:147
 #, php-format
 msgid "Daily Archives: %s"
@@ -268,6 +276,10 @@ msgstr "GRATIS"
 msgid "Free for lifetime"
 msgstr "Gratis pe viață"
 
+#: patterns/section-features.php:28
+msgid "Free WP Theme"
+msgstr "Tema WP gratuită"
+
 #: patterns/section-hero.php:16
 #, php-format
 msgid "Get it now. Is %s forever!"
@@ -276,6 +288,10 @@ msgstr "Ia-o acum. Este %s pentru totdeauna!"
 #: inc/gutenberg/blocks/design/class-buttons.php:50
 msgid "Group"
 msgstr "Grupare"
+
+#: patterns/section-features.php:87
+msgid "Gutenberg Ready"
+msgstr "Pregătită Gutenberg"
 
 #: inc/support/plugins/cf7/class-cf7.php:70
 msgid "here"
@@ -293,6 +309,10 @@ msgstr "https://www.wecodeart.com/about/"
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr "Wrapper HTML nevalid pentru „%s”."
+
+#: patterns/section-features.php:51
+msgid "Is a Framework"
+msgstr "Este un cadru"
 
 #: views/admin/notification-locale.tpl.php:22
 #, php-format
@@ -382,6 +402,14 @@ msgstr "Nu, nu-mi pasă."
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
 
+#: patterns/section-features.php:113
+msgid ""
+"Optimized to load very fast (under 1s GTMetrix), in any device, and also for "
+"SEO."
+msgstr ""
+"Optimizată pentru a încărca foarte rapid (sub 1s GTMetrix), în orice "
+"dispozitiv și, de asemenea, pentru SEO."
+
 #: patterns/section-woo.php:17
 msgid "Out of the box WooCommerce Integration!"
 msgstr "Integrare WooCommerce din cutie!"
@@ -437,7 +465,7 @@ msgstr "Citeşte mai mult"
 
 #: patterns/section-woo.php:11
 msgid "Ready"
-msgstr "Gata"
+msgstr "Pregătită"
 
 #: patterns/cta-border.php:13 patterns/cta-center.php:16
 #: patterns/cta-default.php:20 patterns/cta-separator.php:20
@@ -462,7 +490,7 @@ msgstr "Fișele obligatorii sunt marcate cu %s\"."
 
 #: patterns/section-mobile.php:82
 msgid "Retina Ready"
-msgstr "Gata pentru retina"
+msgstr "Pregătită pentru retina"
 
 #: inc/gutenberg/blocks/widgets/class-rss.php:65
 msgid "RSS Error"
@@ -514,6 +542,10 @@ msgstr "Standarde stricte de codare"
 #: patterns/section-hero.php:32
 msgid "Super high performance"
 msgstr "Performanță super înaltă"
+
+#: patterns/section-features.php:110
+msgid "Super Optimized"
+msgstr "Super Optimizată"
 
 #: patterns/section-woo.php:20
 msgid "Super-Optimized eCommerce website built with ease."
@@ -637,6 +669,11 @@ msgstr ""
 "WeCodeArt Framework este o temă WP de bază, super rapidă, optimizată și "
 "pregătită pentru orice formă."
 
+#: patterns/section-features.php:31
+msgid "WeCodeArt Framework is FREE with all future updates. Guaranteed!"
+msgstr ""
+"WeCodeArt Framework este GRATUITĂ cu toate actualizările viitoare. Garantat!"
+
 #: inc/admin/class-activation.php:112
 #, php-format
 msgid ""
@@ -738,6 +775,11 @@ msgid ""
 msgstr ""
 "Suportul YoastSEO este activat! Tema noastră funcționează perfect cu cel mai "
 "bun plugin SEO."
+
+#: patterns/section-features.php:90
+msgid "You don't need to fear the Gutenberg update introduced into WordPress."
+msgstr ""
+"Nu trebuie să vă temeți de actualizarea Gutenberg introdusă în WordPress."
 
 #: inc/gutenberg/blocks/comment/class-form.php:298
 #, php-format

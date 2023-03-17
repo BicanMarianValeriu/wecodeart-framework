@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-17 02:26+0000\n"
+"POT-Creation-Date: 2023-03-17 04:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -187,6 +187,12 @@ msgstr ""
 msgid "Customizer"
 msgstr ""
 
+#: patterns/section-features.php:54
+msgid ""
+"Cutting-edge code, simple, fast, and not packed with features you will never "
+"use."
+msgstr ""
+
 #: inc/gutenberg/blocks/query/class-title.php:147
 #, php-format
 msgid "Daily Archives: %s"
@@ -253,6 +259,10 @@ msgstr ""
 msgid "Free for lifetime"
 msgstr ""
 
+#: patterns/section-features.php:28
+msgid "Free WP Theme"
+msgstr ""
+
 #: patterns/section-hero.php:16
 #, php-format
 msgid "Get it now. Is %s forever!"
@@ -260,6 +270,10 @@ msgstr ""
 
 #: inc/gutenberg/blocks/design/class-buttons.php:50
 msgid "Group"
+msgstr ""
+
+#: patterns/section-features.php:87
+msgid "Gutenberg Ready"
 msgstr ""
 
 #: inc/support/plugins/cf7/class-cf7.php:70
@@ -277,6 +291,10 @@ msgstr ""
 #: inc/support/markup/class-markup.php:249
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
+msgstr ""
+
+#: patterns/section-features.php:51
+msgid "Is a Framework"
 msgstr ""
 
 #: views/admin/notification-locale.tpl.php:22
@@ -363,6 +381,12 @@ msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:74
 msgid "Notification dismissed"
+msgstr ""
+
+#: patterns/section-features.php:113
+msgid ""
+"Optimized to load very fast (under 1s GTMetrix), in any device, and also for "
+"SEO."
 msgstr ""
 
 #: patterns/section-woo.php:17
@@ -496,6 +520,10 @@ msgstr ""
 msgid "Super high performance"
 msgstr ""
 
+#: patterns/section-features.php:110
+msgid "Super Optimized"
+msgstr ""
+
 #: patterns/section-woo.php:20
 msgid "Super-Optimized eCommerce website built with ease."
 msgstr ""
@@ -609,6 +637,10 @@ msgid ""
 "any shape."
 msgstr ""
 
+#: patterns/section-features.php:31
+msgid "WeCodeArt Framework is FREE with all future updates. Guaranteed!"
+msgstr ""
+
 #: inc/admin/class-activation.php:112
 #, php-format
 msgid ""
@@ -689,6 +721,10 @@ msgstr ""
 msgid ""
 "YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
 "plugin."
+msgstr ""
+
+#: patterns/section-features.php:90
+msgid "You don't need to fear the Gutenberg update introduced into WordPress."
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-form.php:298
