@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-17 04:55+0000\n"
+"POT-Creation-Date: 2023-03-18 21:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -241,6 +241,10 @@ msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:79
 msgid "Failed to dismiss notification"
+msgstr ""
+
+#: patterns/section-hero-bg.php:18
+msgid "FASTEST"
 msgstr ""
 
 #: patterns/section-testimonials.php:13

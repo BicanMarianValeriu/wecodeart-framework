@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-03-17 04:59+0000\n"
+"PO-Revision-Date: 2023-03-18 21:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -259,6 +259,10 @@ msgstr "Estompat"
 #: inc/admin/notifications/class-ajax.php:79
 msgid "Failed to dismiss notification"
 msgstr "Notificarea nu a putut fi respinsă"
+
+#: patterns/section-hero-bg.php:18
+msgid "FASTEST"
+msgstr "Cea mai rapidă"
 
 #: patterns/section-testimonials.php:13
 msgid "Feedback"
