@@ -61,11 +61,12 @@
         <!-- /wp:column -->
         <!-- wp:column {"verticalAlignment":"bottom","className":"col-md-12 col-lg order-first order-lg-2 mb-3 mb-lg-0"} -->
         <div class="wp-block-column is-vertically-aligned-bottom col-md-12 col-lg order-first order-lg-2 mb-3 mb-lg-0">
-            <!-- wp:image {"align":"center","sizeSlug":"large","style":{"border":{"width":"1px"}},"borderColor":"primary","customStyle":"selector {\n  z-index: 5;\n}\nselector img {\n  margin-top: -100px;\n}\n"} -->
-            <figure class="wp-block-image aligncenter size-large has-custom-border">
+            <!-- wp:image {"align":"center","sizeSlug":"large","style":{"border":{"width":"1px"}},"borderColor":"primary","className":"position-relative","customStyle":"selector {\n  z-index: 5;\n}\nselector img {\n  margin-top: -100px;\n}\n"} -->
+            <figure class="wp-block-image aligncenter size-large has-custom-border position-relative">
                 <img src="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='400'%20height='400'%20preserveAspectRatio='none'&gt;<rect%20fill='%23fafafa'%20width='100%'%20height='100%'/&gt;<text%20x='50%25'%20y='50%25'%20fill='%23aaa'%20dominant-baseline='middle'%20text-anchor='middle'%20font-family='Arial,Helvetica,Open%20Sans,sans-serif,monospace'%20font-size='var(--wp--font-size,%2040)'%20&gt;Placeholder</text&gt;</svg&gt;" alt="" class="has-border-color has-primary-border-color" style="border-width:1px" />
             </figure>
             <!-- /wp:image -->
+            
         </div>
         <!-- /wp:column -->
         <!-- wp:column {"verticalAlignment":"bottom","style":{"spacing":{"blockGap":"var:preset|spacing|md"}},"className":"col-12 col-md order-lg-last"} -->
