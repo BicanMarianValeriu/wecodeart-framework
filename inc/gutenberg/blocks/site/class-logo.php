@@ -166,18 +166,21 @@ class Logo extends Dynamic {
             display: block;
             margin: 0 auto;
         }
-		.wp-block-site-logo > *:not(div) {
-			padding-top: 0.3125rem;
-			padding-bottom: 0.3125rem;
-        }
         .wp-block-site-logo :where(a,img,svg) {
             border-radius: inherit;
         }
         .wp-block-site-logo a {
-			display: block;
+			display: inline-block;
 			color: inherit;
 			white-space: nowrap;
         }
+		.wp-site-header .wp-block-site-logo > *:not(div) {
+			padding-top: 0.3125rem;
+			padding-bottom: 0.3125rem;
+        }
+		.wp-site-header .wp-block-site-logo__link {
+			display: block;
+		}
 		/* Navigation */
 		.wp-block-navigation .navbar-nav .wp-site-logo {
 			color: var(--wp--nav-link-color);
