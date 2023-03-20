@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-18 21:51+0000\n"
+"POT-Creation-Date: 2023-03-20 16:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -126,6 +126,10 @@ msgstr ""
 msgid "Category Archives: %s"
 msgstr ""
 
+#: patterns/page-soon.php:25
+msgid "COMING SOON"
+msgstr ""
+
 #: inc/gutenberg/blocks/comment/class-form.php:196
 #: inc/gutenberg/blocks/comment/class-form.php:202
 msgid "Comment *"
@@ -233,6 +237,10 @@ msgstr ""
 
 #: views/general/protected.tpl.php:53
 msgid "Enter password"
+msgstr ""
+
+#: patterns/page-soon.php:42
+msgid "Enter your email address to subscribe to get notified."
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-separator.php:76
@@ -554,7 +562,7 @@ msgctxt "Theme starter content"
 msgid "Blog"
 msgstr ""
 
-#: inc/support/starter/content/soon.php:7
+#: inc/support/starter/content/about.php:7
 msgctxt "Theme starter content"
 msgid "Coming Soon"
 msgstr ""
@@ -616,6 +624,10 @@ msgstr ""
 #: patterns/section-mobile.php:14
 #, php-format
 msgid "We are %s first ... %s"
+msgstr ""
+
+#: patterns/page-soon.php:28
+msgid "We Are Getting Ready to Launch!"
 msgstr ""
 
 #: inc/support/plugins/cf7/class-cf7.php:69

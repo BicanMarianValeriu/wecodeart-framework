@@ -22,24 +22,24 @@
                     <hr class="wp-block-separator has-text-color has-alpha-channel-opacity has-background is-style-wide" style="background-color:#ececec;color:#ececec" />
                     <!-- /wp:separator -->
                     <!-- wp:paragraph {"placeholder":"Conținut...","textColor":"primary","className":"mb-0","fontSize":"small"} -->
-                    <p class="mb-0 has-primary-color has-text-color has-small-font-size">COMING SOON</p>
+                    <p class="mb-0 has-primary-color has-text-color has-small-font-size"><?php esc_html_e( 'COMING SOON', 'wecodeart' ); ?></p>
                     <!-- /wp:paragraph -->
                     <!-- wp:heading {"style":{"spacing":{"margin":{"top":"0"}}},"className":"fw-500 is-style-underline-brush"} -->
-                    <h2 class="fw-500 is-style-underline-brush" style="margin-top:0"><strong><span class="has-underline">We Are Getting Ready to Launch!</span></strong></h2>
+                    <h2 class="fw-500 is-style-underline-brush" style="margin-top:0"><strong><span class="has-underline"><?php esc_html_e( 'We Are Getting Ready to Launch!', 'wecodeart' ); ?></span></strong></h2>
                     <!-- /wp:heading -->
                     <!-- wp:paragraph {"textColor":"secondary"} -->
-                    <p class="has-secondary-color has-text-color">Our website is almost ready to launch, lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim.</p>
+                    <p class="has-secondary-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim.</p>
                     <!-- /wp:paragraph -->
                     <!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md"}}},"backgroundColor":"primary","textColor":"white","className":"p-4 p-lg-5 rounded-1","layout":{"type":"constrained"}} -->
                     <div class="wp-block-group p-4 p-lg-5 rounded-1 has-white-color has-primary-background-color has-text-color has-background" style="margin-top:var(--wp--preset--spacing--md);margin-bottom:var(--wp--preset--spacing--md)">
                         <!-- wp:paragraph {"fontSize":"small"} -->
-                        <p class="has-small-font-size">SUBSCRIBE AND</p>
+                        <p class="has-small-font-size">DOLOR SIT</p>
                         <!-- /wp:paragraph -->
                         <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}},"fontSize":"medium"} -->
-                        <p class="has-medium-font-size" style="margin-top:0"><strong>BE THE FIRST TO KNOW!</strong></p>
+                        <p class="has-medium-font-size" style="margin-top:0"><strong>CONSECTETUR ADIPISCING ELIT!</strong></p>
                         <!-- /wp:paragraph -->
                         <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|xs"}}},"className":"opacity-50"} -->
-                        <p class="opacity-50" style="margin-top:var(--wp--preset--spacing--xs)">Enter your email address to subscribe to get notified.</p>
+                        <p class="opacity-50" style="margin-top:var(--wp--preset--spacing--xs)"><?php esc_html_e( 'Enter your email address to subscribe to get notified.', 'wecodeart' ); ?></p>
                         <!-- /wp:paragraph -->
                         <!-- wp:search {"label":"","showLabel":false,"placeholder":"Your email","buttonText":"Subscribe","backgroundColor":"warning","textColor":"dark"} /-->
                     </div>
@@ -62,7 +62,10 @@
                     </div>
                     <!-- /wp:group -->
                     <!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
-                    <p class="has-secondary-color has-text-color has-small-font-size">Copyright © 2023 - All rights reserved.</p>
+                    <p class="has-secondary-color has-text-color has-small-font-size"><?php printf(
+                        esc_html( 'Copyright %s - All rights reserved.', 'wecodeart' ),
+                        '&copy; 2023'
+                    ); ?></p>
                     <!-- /wp:paragraph -->
                 </div>
                 <!-- /wp:group -->

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-03-18 21:51+0000\n"
+"PO-Revision-Date: 2023-03-20 16:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -133,6 +133,10 @@ msgstr "Suportul Captcha 4WP este activat!"
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
 
+#: patterns/page-soon.php:25
+msgid "COMING SOON"
+msgstr "IN CURAND"
+
 #: inc/gutenberg/blocks/comment/class-form.php:196
 #: inc/gutenberg/blocks/comment/class-form.php:202
 msgid "Comment *"
@@ -250,6 +254,11 @@ msgstr "Email *"
 #: views/general/protected.tpl.php:53
 msgid "Enter password"
 msgstr "Introduceți parola"
+
+#: patterns/page-soon.php:42
+msgid "Enter your email address to subscribe to get notified."
+msgstr ""
+"Introdu adresa ta de e-mail pentru a te abona pentru a primi notificări."
 
 #: inc/gutenberg/blocks/design/class-separator.php:76
 #| msgid "Fixed"
@@ -578,7 +587,7 @@ msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Blog"
 
-#: inc/support/starter/content/soon.php:7
+#: inc/support/starter/content/about.php:7
 msgctxt "Theme starter content"
 msgid "Coming Soon"
 msgstr "In curând"
@@ -645,6 +654,10 @@ msgstr "Vedeți Teme"
 #, php-format
 msgid "We are %s first ... %s"
 msgstr "Suntem mai întâi %s ... %s"
+
+#: patterns/page-soon.php:28
+msgid "We Are Getting Ready to Launch!"
+msgstr "Ne pregătim de lansare!"
 
 #: inc/support/plugins/cf7/class-cf7.php:69
 #, php-format
