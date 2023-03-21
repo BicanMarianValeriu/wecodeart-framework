@@ -22,6 +22,7 @@ use WeCodeArt\Gutenberg;
 use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_json_color;
+use function WeCodeArt\Functions\get_lightness_limit;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
@@ -95,7 +96,7 @@ class Styles implements Integration {
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		add_action( 'wp_enqueue_scripts',			[ $this, 'manage_styles'		], 20, 1 );
-		add_filter( 'wp_theme_json_data_theme',  	[ $this, 'link_brightness' 		], 20, 1 );
+		add_filter( 'wp_theme_json_data_theme',  	[ $this, 'theme_json' 			], 20, 1 );
 		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
@@ -272,10 +273,11 @@ class Styles implements Integration {
 	 *
 	 * @return 	object
 	 */
-	public function link_brightness( $object ): object {
-		$link = get_json_color( [ 'styles', 'elements', 'link', 'color', 'text' ] );
+	public function theme_json( $object ): object {
+		$link 		= get_json_color( [ 'styles', 'elements', 'link', 'color', 'text' ] );
+		$background	= get_json_color( [ 'styles', 'color', 'background' ] );
 
-		if( $link ) {
+		if( $link || $background ) {
 			$data = $object->get_data();
 
 			// Adjust hover brightness.
@@ -284,6 +286,17 @@ class Styles implements Integration {
 					'text' => $this->CSS::hex_brightness( $link, -25 )
 				]
 			], get_prop( $data, [ 'styles', 'element', 'link', ':hover' ], [] ) );
+
+			// Adjust accent color.
+			$background = wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+			$luminance 	= wecodeart( 'styles' )::rgb_luminance( $background );
+			$accent 	= ( $luminance < get_lightness_limit() ) ? 'rgba(0,0,0,0.2)' : '#f1f7ff';
+
+			$data['settings']['color']['palette']['theme'][] = [
+				'slug' 	=> 'accent',
+				'color' => $accent,
+				'name' 	=> esc_html__( 'Accent', 'wecodeart' ),
+			];
 
 			// Update object.
 			$object->update_with( $data );

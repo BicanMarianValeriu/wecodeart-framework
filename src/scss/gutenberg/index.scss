@@ -5,10 +5,14 @@
 # Title
 --------------------------------------------------------------*/
 .edit-post-visual-editor__post-title-wrapper {
+    background-color: var(--wp--preset--color--accent);
     padding-top: var(--wp--style--block-gap);
     padding-bottom: var(--wp--style--block-gap);
     margin: 0!important;
-    background-color: var(--wp--gray-100);
+
+    h1 {
+        margin: inherit;
+    }
     
     &:focus,
     &:focus-within {

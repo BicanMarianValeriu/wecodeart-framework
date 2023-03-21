@@ -68,7 +68,7 @@ foreach( [
         'property'  => 'border',
         'class'		=> 'border',
         'values'	=> [
-            null    => '1px solid lightgrey',
+            null    => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],
@@ -76,7 +76,7 @@ foreach( [
         'property'  => 'border-top',
         'class'		=> 'border-top',
         'values'	=> [
-            null    => '1px solid lightgrey',
+            null    => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],
@@ -84,7 +84,7 @@ foreach( [
         'property'  => 'border-bottom',
         'class'		=> 'border-bottom',
         'values'	=> [
-            null    => '1px solid lightgrey',
+            null    => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],
@@ -92,7 +92,7 @@ foreach( [
         'property'  => 'border-left',
         'class'		=> 'border-start',
         'values'	=> [
-            null    => '1px solid lightgrey',
+            null    => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],
@@ -100,7 +100,7 @@ foreach( [
         'property'  => 'border-right',
         'class'		=> 'border-end',
         'values'	=> [
-            null    => '1px solid lightgrey',
+            null    => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],

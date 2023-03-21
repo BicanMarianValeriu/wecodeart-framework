@@ -5,8 +5,8 @@
  * Categories: wecodeart
  */
 ?>
-<!-- wp:group {"align":"full","style":{"color":{"background":"#f1f7ff"},"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","right":"var:preset|spacing|g","left":"var:preset|spacing|g"},"margin":{"top":"0","bottom":"0"}},"border":{"top":{"color":"#efefef","width":"5px","style":"solid"}}},"className":"position-relative","layout":{"type":"constrained"},"customStyle":""} -->
-<div class="wp-block-group alignfull position-relative has-background" style="border-top-color:#efefef;border-top-style:solid;border-top-width:5px;background-color:#f1f7ff;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--g)">
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","right":"var:preset|spacing|g","left":"var:preset|spacing|g"},"margin":{"top":"0","bottom":"0"}},"border":{"top":{"color":"#efefef","width":"5px","style":"solid"}}},"backgroundColor":"accent","className":"position-relative","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull position-relative has-accent-background-color has-background" style="border-top-color:#efefef;border-top-style:solid;border-top-width:5px;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--g)">
     <!-- wp:columns {"verticalAlignment":"bottom","className":"flex-wrap g-md-5"} -->
     <div class="wp-block-columns are-vertically-aligned-bottom flex-wrap g-md-5">
         <!-- wp:column {"verticalAlignment":"bottom","style":{"spacing":{"blockGap":"var:preset|spacing|md"}},"className":"col-12 col-md"} -->

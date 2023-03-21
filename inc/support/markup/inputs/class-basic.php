@@ -112,8 +112,8 @@ class Basic extends Base {
                 font-size: 1rem;
                 font-weight: 400;
                 line-height: 1.5;
-                color: var(--wp--preset--color--dark);
-                background-color: var(--wp--preset--color--white);
+                color: var(--wp--input--color);
+                background-color: var(--wp--input--background-color);
                 background-clip: padding-box;
                 border: var(--wp--input--border);
                 border-radius: var(--wp--input--border-radius);
@@ -122,7 +122,6 @@ class Basic extends Base {
             }
             .form-control:focus {
                 color: var(--wp--preset--color--dark);
-                background-color: var(--wp--preset--color--white);
                 border-color: var(--wp--preset--color--primary);
                 box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
                 outline: 0;

@@ -111,7 +111,9 @@ class Inputs implements Configuration {
 				--wp--input--padding-y: .375rem;
 				--wp--input--padding-x: .75rem;
 				--wp--input--padding: var(--wp--input--padding-y) var(--wp--input--padding-x);
-				--wp--input--border-color: var(--wp--gray-400);
+				--wp--input--color: var(--wp--preset--color--dark);
+				--wp--input--background-color: var(--wp--preset--color--accent);
+				--wp--input--border-color: var(--wp--preset--color--accent);
 				--wp--input--border-radius: .375rem;
 				--wp--input--border: 1px solid var(--wp--input--border-color);
 			}
