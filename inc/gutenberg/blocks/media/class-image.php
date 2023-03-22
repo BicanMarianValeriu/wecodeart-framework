@@ -160,6 +160,9 @@ class Image extends Dynamic {
 		.wp-block-image:where(.alignfull,.alignwide) :where(img,svg) {
 			width: 100%;
 		}
+		.wp-block-image__placeholder {
+			aspect-ratio: var(--wp--aspect-ratio, 16/9);
+		}
 		.wp-block-image figcaption {
 			font-size: var(--wp--preset--font-size--small);
 			font-style: italic;
