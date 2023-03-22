@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-20 16:16+0000\n"
+"POT-Creation-Date: 2023-03-22 00:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -66,6 +66,10 @@ msgid ""
 "A simple WordPress theme framework focused on SEO and speed (perfect 100% "
 "PageSpeed scores) while still being fully customizable via Full Site Editing."
 " It also works perfectly with all page builder plugins."
+msgstr ""
+
+#: inc/gutenberg/modules/styles/class-styles.php:298
+msgid "Accent"
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-title.php:106
@@ -528,6 +532,10 @@ msgstr ""
 msgid "Strict coding standards"
 msgstr ""
 
+#: patterns/page-soon.php:44
+msgid "Subscribe"
+msgstr ""
+
 #: patterns/section-hero.php:32
 msgid "Super high performance"
 msgstr ""
@@ -746,6 +754,10 @@ msgstr ""
 #: inc/gutenberg/blocks/comment/class-form.php:298
 #, php-format
 msgid "You must accept %s to comment!"
+msgstr ""
+
+#: patterns/page-soon.php:44
+msgid "Your email"
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-form.php:271

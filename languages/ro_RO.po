@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-03-20 16:17+0000\n"
+"PO-Revision-Date: 2023-03-22 00:54+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -72,6 +72,10 @@ msgstr ""
 "100% PageSpeed) și totodată fiind complet personalizabil prin Editarea "
 "completă a site-ului. De asemenea, funcționează perfect cu toate pluginurile "
 "generatore de pagini."
+
+#: inc/gutenberg/modules/styles/class-styles.php:298
+msgid "Accent"
+msgstr "Accent"
 
 #: inc/gutenberg/blocks/comment/class-title.php:106
 msgid "add one"
@@ -552,6 +556,10 @@ msgstr "Vorbesc din mintea ta"
 msgid "Strict coding standards"
 msgstr "Standarde stricte de codare"
 
+#: patterns/page-soon.php:44
+msgid "Subscribe"
+msgstr "Abonați-vă"
+
 #: patterns/section-hero.php:32
 msgid "Super high performance"
 msgstr "Performanță super înaltă"
@@ -802,6 +810,10 @@ msgstr ""
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"
+
+#: patterns/page-soon.php:44
+msgid "Your email"
+msgstr "Email-ul tău"
 
 #: inc/gutenberg/blocks/comment/class-form.php:271
 msgid "Your email address will not be published."

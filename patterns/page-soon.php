@@ -21,7 +21,7 @@
                     <!-- wp:separator {"style":{"color":{"background":"#ececec"}},"className":"is-style-wide"} -->
                     <hr class="wp-block-separator has-text-color has-alpha-channel-opacity has-background is-style-wide" style="background-color:#ececec;color:#ececec" />
                     <!-- /wp:separator -->
-                    <!-- wp:paragraph {"placeholder":"Conținut...","textColor":"primary","className":"mb-0","fontSize":"small"} -->
+                    <!-- wp:paragraph {"textColor":"primary","className":"mb-0","fontSize":"small"} -->
                     <p class="mb-0 has-primary-color has-text-color has-small-font-size"><?php esc_html_e( 'COMING SOON', 'wecodeart' ); ?></p>
                     <!-- /wp:paragraph -->
                     <!-- wp:heading {"style":{"spacing":{"margin":{"top":"0"}}},"className":"fw-500 is-style-underline-brush"} -->
@@ -41,7 +41,7 @@
                         <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|xs"}}},"className":"opacity-50"} -->
                         <p class="opacity-50" style="margin-top:var(--wp--preset--spacing--xs)"><?php esc_html_e( 'Enter your email address to subscribe to get notified.', 'wecodeart' ); ?></p>
                         <!-- /wp:paragraph -->
-                        <!-- wp:search {"label":"","showLabel":false,"placeholder":"Your email","buttonText":"Subscribe","backgroundColor":"warning","textColor":"dark"} /-->
+                        <!-- wp:search {"label":"","showLabel":false,"placeholder":"<?php esc_html_e( 'Your email', 'wecodeart' ); ?>","buttonText":"<?php esc_html_e( 'Subscribe', 'wecodeart' ); ?>","backgroundColor":"warning","textColor":"dark"} /-->
                     </div>
                     <!-- /wp:group -->
                     <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|g"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
