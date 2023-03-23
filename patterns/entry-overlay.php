@@ -5,8 +5,8 @@
  * Inserter: false
  */
 ?>
-<!-- wp:cover {"useFeaturedImage":true,"dimRatio":80,"overlayColor":"primary","contentPosition":"bottom center","className":"shadow-lg rounded-1"} -->
-<div class="wp-block-cover has-custom-content-position is-position-bottom-center shadow-lg rounded-1">
+<!-- wp:cover {"useFeaturedImage":true,"dimRatio":80,"overlayColor":"primary","contentPosition":"bottom center","className":"shadow-lg rounded-1 h-100"} -->
+<div class="wp-block-cover has-custom-content-position is-position-bottom-center shadow-lg rounded-1 h-100">
     <span aria-hidden="true" class="wp-block-cover__background has-primary-background-color has-background-dim-80 has-background-dim"></span>
     <div class="wp-block-cover__inner-container">
         <!-- wp:group {"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"textColor":"white","layout":{"type":"constrained"}} -->
