@@ -12,7 +12,7 @@
     
         printf(
             esc_html__( 'Choose %s', 'wecodeart' ), 
-            sprintf( '<strong><span class="has-underline">%s</span></strong>', esc_html__( 'your plan', 'wecodeart' ) )
+            sprintf( '<strong><span class="has-underline">%s</span></strong>', esc_html__( 'Your Plan', 'wecodeart' ) )
         );
         
     ?></h2>
