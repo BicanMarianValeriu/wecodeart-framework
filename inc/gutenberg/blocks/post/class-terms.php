@@ -103,18 +103,4 @@ class Terms extends Dynamic {
 		
 		return $args;
 	}
-
-	/**
-	 * Block styles
-	 *
-	 * @return 	string 	The block styles.
-	 */
-	public function styles() {
-		return "
-		.wp-block-post-terms {
-			display: flex;
-			flex-wrap: wrap
-		}
-		";
-	}
 }
