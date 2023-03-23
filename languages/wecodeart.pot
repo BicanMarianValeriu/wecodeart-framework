@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 00:53+0000\n"
+"POT-Creation-Date: 2023-03-23 15:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -128,6 +128,11 @@ msgstr ""
 #: inc/gutenberg/blocks/query/class-title.php:122
 #, php-format
 msgid "Category Archives: %s"
+msgstr ""
+
+#: patterns/section-pricing.php:14
+#, php-format
+msgid "Choose %s"
 msgstr ""
 
 #: patterns/page-soon.php:25
@@ -520,6 +525,10 @@ msgstr ""
 msgid "Select Year"
 msgstr ""
 
+#: patterns/section-pricing.php:21
+msgid "Simple pricing plans for any size team."
+msgstr ""
+
 #: inc/support/assets/class-assets.php:114
 msgid "Skip to content"
 msgstr ""
@@ -762,4 +771,8 @@ msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-form.php:271
 msgid "Your email address will not be published."
+msgstr ""
+
+#: patterns/section-pricing.php:15
+msgid "your plan"
 msgstr ""

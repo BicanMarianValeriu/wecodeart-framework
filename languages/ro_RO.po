@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-03-22 00:54+0000\n"
+"PO-Revision-Date: 2023-03-23 15:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -136,6 +136,11 @@ msgstr "Suportul Captcha 4WP este activat!"
 #, php-format
 msgid "Category Archives: %s"
 msgstr "Arhivă Categorie: %s"
+
+#: patterns/section-pricing.php:14
+#, php-format
+msgid "Choose %s"
+msgstr "Alege %s"
 
 #: patterns/page-soon.php:25
 msgid "COMING SOON"
@@ -544,6 +549,10 @@ msgstr "Selectați Săptămâna"
 msgid "Select Year"
 msgstr "Selectați Anul"
 
+#: patterns/section-pricing.php:21
+msgid "Simple pricing plans for any size team."
+msgstr "Planuri simple de prețuri pentru echipe de orice dimensiune."
+
 #: inc/support/assets/class-assets.php:114
 msgid "Skip to content"
 msgstr "Sari la conținut"
@@ -818,3 +827,7 @@ msgstr "Email-ul tău"
 #: inc/gutenberg/blocks/comment/class-form.php:271
 msgid "Your email address will not be published."
 msgstr "Emailul tău nu va fi publicat."
+
+#: patterns/section-pricing.php:15
+msgid "your plan"
+msgstr "planul tău"

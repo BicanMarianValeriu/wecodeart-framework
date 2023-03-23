@@ -1,5 +1,21 @@
 [
     {
+        "slug": "pricing",
+        "title": "Pricing Box",
+        "description": "A simple pricing box.",
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
+        "slug": "pricing-featured",
+        "title": "Pricing Box (Featured)",
+        "description": "A featured pricing box.",
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
         "slug": "testimonial",
         "title": "Testimonial",
         "description": "A simple testimonial.",
