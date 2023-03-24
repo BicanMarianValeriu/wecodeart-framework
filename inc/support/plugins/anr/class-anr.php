@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.7.1
+ * @version		5.7.2
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -54,7 +54,7 @@ class ANR implements Integration {
 	 * Hooks
 	 *
 	 * @since   3.8.1
-	 * @version	5.7.1
+	 * @version	5.7.2
 	 *
 	 * @return  void
 	 */
@@ -65,6 +65,7 @@ class ANR implements Integration {
 		if( c4wp_is_form_enabled( 'comment' ) && ( ! is_admin() || ! current_user_can( 'moderate_comments' ) ) ) {
 			add_action( 'init', function() {
 				$instance = Captcha::init();
+
 				if ( ! is_user_logged_in() ) {
 					remove_action( 'comment_form_after_fields', 	[ $instance, 'form_field' ], 99 );
 					add_action( 'comment_form_after_fields', 		[ $this, 'comment_field' ] );
@@ -74,9 +75,6 @@ class ANR implements Integration {
 				}
 			} );
 		}
-
-		// Hooks
-		do_action( 'wecodeart/action/support/anr/init' );
 	}
 
 	/**
