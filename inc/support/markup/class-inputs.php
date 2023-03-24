@@ -108,7 +108,7 @@ class Inputs implements Configuration {
 
 		$inline = '
 			.wecodeart-forms {
-				--wp--input--padding-y: .375rem;
+				--wp--input--padding-y: .5rem;
 				--wp--input--padding-x: .75rem;
 				--wp--input--padding: var(--wp--input--padding-y) var(--wp--input--padding-x);
 				--wp--input--color: var(--wp--preset--color--dark);
