@@ -51,7 +51,8 @@ class Embed extends Dynamic {
 			border: 0;
 		}
 		.wp-block-embed {
-			margin-bottom: 1rem;
+			width: 100%;
+			margin: 0;
 		}
 		.wp-block-embed.wp-embed-aspect-21-9 .wp-block-embed__wrapper::before {
 			padding-top: calc(9 / 21 * 100%);
