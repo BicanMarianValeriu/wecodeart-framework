@@ -416,8 +416,19 @@ function change_tag_name( DOMElement $element, string $name ): DOMElement {
  *
  * @return  string
  */
-function get_placeholder_source(): string {
-	return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 300' stroke='%23AAA' stroke-width='1' stroke-dasharray='1' preserveAspectRatio='none'%3E%3Crect vector-effect='non-scaling-stroke' fill='transparent' width='100%25' height='100%25'/%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='.5' d='M500 0 0 300'/%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='.5' d='M500 300 0 0'/%3E%3C/svg%3E";
+function get_placeholder_source( $encoded = true ): string {
+    $file = 'assets/images/placeholder-cross.svg';
+
+    if( $encoded ) {
+        $svg_string	= \file_get_contents( get_parent_theme_file_path( $file ) );
+    
+        // Clean SVG and covert to data URL.
+        $encodedSVG = \rawurlencode( \preg_replace( '/\s+/', ' ', \str_replace( '"', "'", $svg_string ) ) );
+    
+        return 'data:image/svg+xml;utf8,' . $encodedSVG;
+    }
+    
+    return get_parent_theme_file_uri( $file );
 }
 
 /**

@@ -62,6 +62,10 @@ class Media extends Processor {
 				}
 			}
 		}
+		
+		if( ! get_prop( $this->attrs, 'mediaLink' ) ) {
+			$declarations['background-image'] = ( new Background( get_placeholder_source( false ) ) )->get_value();
+		}
 
 		if( ! empty( $declarations ) ) {
 			$this->add_declarations( $declarations, $selector );

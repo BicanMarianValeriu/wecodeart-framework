@@ -66,10 +66,9 @@ class Text extends Dynamic {
 		$dom	= $this->dom( $content );
 		$div  	= get_dom_element( 'figure', $dom );
 		$link 	= get_dom_element( 'a', $div );
-		$img  	= get_dom_element( 'img', $link ?? $div );
 
 		// If no image, add placeholder.
-		if ( ! $img ) {
+		if( ! get_prop( $attributes, 'mediaLink' ) ) {
 			
 			$image = $dom->createElement( 'img' );
 

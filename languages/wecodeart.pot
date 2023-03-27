@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-23 15:32+0000\n"
+"POT-Creation-Date: 2023-03-27 01:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -121,7 +121,7 @@ msgstr ""
 msgid "Cancel reply"
 msgstr ""
 
-#: inc/support/plugins/anr/class-anr.php:90
+#: inc/support/plugins/anr/class-anr.php:88
 msgid "Captcha 4WP support is enabled!"
 msgstr ""
 
@@ -428,7 +428,7 @@ msgstr ""
 
 #: inc/app.php:126 inc/app.php:127
 #: inc/gutenberg/blocks/media/class-image.php:93
-#: inc/gutenberg/blocks/media/class-text.php:78
+#: inc/gutenberg/blocks/media/class-text.php:77
 msgid "Placeholder"
 msgstr ""
 
@@ -574,14 +574,14 @@ msgstr ""
 msgid "Theme Options"
 msgstr ""
 
+#: inc/support/starter/content/about.php:7
+msgctxt "Theme starter content"
+msgid "About Us"
+msgstr ""
+
 #: inc/support/starter/content/blog.php:7
 msgctxt "Theme starter content"
 msgid "Blog"
-msgstr ""
-
-#: inc/support/starter/content/about.php:7
-msgctxt "Theme starter content"
-msgid "Coming Soon"
 msgstr ""
 
 #: inc/support/starter/content/home.php:7
