@@ -58,7 +58,6 @@ class WooCommerce implements Integration {
 		add_filter( 'wecodeart/filter/gutenberg/styles/core', 	[ $this, 'block_inline_styles' 	], 20, 1 );
 		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' 	] );
 		add_filter( 'woocommerce_breadcrumb_defaults',			[ $this, 'breadcrumb_defaults'	] );
-		add_filter( 'woocommerce_form_field', 					[ $this, 'form_field_markup' 	], 10, 4 );
 	}
 
 	/**
@@ -163,48 +162,5 @@ class WooCommerce implements Integration {
 		$args['delimiter'] = ' » ';
 
 		return $args;
-	}
-
-	/**
-	 * Form Field Markup
-	 *
-	 * @since	5.6.4
-	 * @version	5.6.4
-	 *
-	 * @return 	array
-	 */
-	public function form_field_markup( $field, $key, $args, $value ) {
-		$invalid = [ 'state', 'country', 'select', 'radio' ];
-
-		if( ! in_array( get_prop( $args, 'type' ), $invalid ) ) {
-
-			$attributes = wp_array_slice_assoc( $args, [ 'id', 'input_class', 'placeholder', 'maxlength', 'autocomplete', 'autofocus', 'required' ] );
-			$attributes = wp_parse_args( [
-				'name' => $key,
-				'value'=> $value
-			], $attributes );
-			$custom_attributes = get_prop( $args, [ 'custom_attributes' ], [] );
-			$attributes = wp_parse_args( $custom_attributes, $attributes );
-
-			if( $classnames = get_prop( $attributes, [ 'input_class' ] ) ) {
-				array_unshift( $classnames, 'form-control' );
-				$attributes['class'] = join( ' ', $classnames );
-				unset( $attributes['input_class'] );
-			}
-
-			$container 	= '<p class="form-row %1$s" id="%2$s" data-priority="' . esc_attr( get_prop( $args, 'priority', '' ) ) . '">%3$s</p>';
-			
-			$field_html =  wecodeart_input( get_prop( $args, 'type' ), [
-				'label' => get_prop( $args, 'label' ),
-				'attrs' => $attributes
-			], false );
-
-			$container_class = esc_attr( implode( ' ', $args['class'] ) );
-			$container_id    = esc_attr( $args['id'] ) . '_field';
-			$field           = sprintf( $container, $container_class, $container_id, $field_html );
-		}
-
-		// Default
-		return $field;
 	}
 }
