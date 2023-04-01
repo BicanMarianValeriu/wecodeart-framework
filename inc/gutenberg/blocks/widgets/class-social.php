@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.0.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -67,7 +67,7 @@ class Social extends Dynamic {
 			$classnames = explode( ' ', get_prop( $attributes, 'className', '' ) );
 			$classnames = array_filter( $classnames, function( $val ) {
 				return strpos( $val, 'is-style-' ) === 0;
-			} );
+			} ) ?: [ '' ];
 
 			static $loaded_styles = [];
 

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.0.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -84,7 +84,7 @@ class Processor {
 	 *
 	 * @return 	mixed
 	 */
-	public function get_duotone(): mixed {
+	public function get_duotone() {
 		$return 	= false;
 		$duotone 	= get_prop( $this->attrs, [ 'style', 'color', 'duotone' ], false );
 

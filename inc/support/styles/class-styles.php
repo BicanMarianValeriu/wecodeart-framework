@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.0.0
+ * @version		6.0.1
  */
 
 namespace WeCodeArt\Support;
@@ -456,7 +456,7 @@ final class Styles implements Integration {
 	 *
 	 * @return 	mixed
 	 */
-	public static function color_to_rgba( string $color, bool $alpha = false, bool $array = false ): mixed {
+	public static function color_to_rgba( string $color, bool $alpha = false, bool $array = false ) {
 		$colors = wp_tinycolor_string_to_rgb( $color );
 
 		if( $array === true ) {
