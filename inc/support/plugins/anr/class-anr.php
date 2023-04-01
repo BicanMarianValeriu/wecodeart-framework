@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -54,7 +54,7 @@ class ANR implements Integration {
 	 * Hooks
 	 *
 	 * @since   3.8.1
-	 * @version	5.7.2
+	 * @version	6.0.0
 	 *
 	 * @return  void
 	 */

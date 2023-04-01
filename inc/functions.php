@@ -9,7 +9,7 @@
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version     5.7.2
+ * @version     6.0.0
  */
 
 namespace WeCodeArt\Functions;
@@ -29,7 +29,7 @@ use DOMElement;
  * Useful to use it for placing encoded object in html attrs
  *
  * @since	3.5
- * @version 5.7.2
+ * @version 6.0.0
  * @param 	array   $json
  *
  * @return 	string 
@@ -260,7 +260,7 @@ function flatten( $array ) {
 /**
  * Returns a formatted DOMDocument object from a given string.
  *
- * @since 5.7.2
+ * @since 6.0.0
  *
  * @param string $html HTML string to convert to DOM.
  *
@@ -300,7 +300,7 @@ function dom( string $html ): DOMDocument {
 /**
  * Returns a formatted DOMElement object from a DOMDocument object.
  *
- * @since   5.7.2
+ * @since   6.0.0
  *
  * @param   string $tag            HTML tag.
  * @param   mixed  $dom_or_element DOMDocument or DOMElement.
@@ -325,7 +325,7 @@ function get_dom_element( string $tag, $dom_or_element, int $index = 0 ) {
 /**
  * Casts a DOMNode to a DOMElement.
  *
- * @since   5.7.2
+ * @since   6.0.0
  *
  * @param   mixed $node DOMNode to cast to DOMElement.
  *
@@ -343,7 +343,7 @@ function dom_element( $node ) {
 /**
  * Returns array of dom elements by class name.
  *
- * @since   5.7.2
+ * @since   6.0.0
  *
  * @param   DOMDocument|DOMElement $dom        DOM document or element.
  * @param   string                 $class_name Element class name.
@@ -370,7 +370,7 @@ function get_elements_by_class_name( $dom, string $class_name, string $tag = '*'
 /**
  * Returns an HTML element with a replaced tag.
  *
- * @since   5.7.2
+ * @since   6.0.0
  *
  * @param   DOMElement $element DOM Element to change.
  * @param   string     $name    Tag name, e.g: 'div'.
@@ -412,7 +412,7 @@ function change_tag_name( DOMElement $element, string $name ): DOMElement {
 /**
  * Returns an Image placeholder source.
  *
- * @since   5.7.2
+ * @since   6.0.0
  *
  * @return  string
  */
@@ -434,7 +434,7 @@ function get_placeholder_source( $encoded = true ): string {
 /**
  * Returns lightness compare limit (light/dark).
  *
- * @since   5.7.2
+ * @since   6.0.0
  *
  * @return  float
  */
@@ -445,7 +445,7 @@ function get_lightness_limit(): float {
 /**
  * Returns pallete color from theme JSON (including vars).
  *
- * @since   5.7.2
+ * @since   6.0.0
  *
  * @return  string
  */

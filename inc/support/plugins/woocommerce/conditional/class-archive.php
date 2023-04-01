@@ -9,7 +9,7 @@
  * @subpackage 	Support\Plugins\WooCommerce\Conditional\is_woocommerce_archive
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		4.0.1
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Support\Plugins\WooCommerce\Conditional;

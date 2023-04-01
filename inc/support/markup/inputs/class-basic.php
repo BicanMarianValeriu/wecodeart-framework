@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -79,7 +79,7 @@ class Basic extends Base {
      * Get input's class.
      * 
      * @since   5.0.0
-     * @version 5.7.2
+     * @version 6.0.0
      *
      * @param 	string
      */

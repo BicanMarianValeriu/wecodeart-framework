@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Support;
@@ -155,7 +155,7 @@ final class Styles implements Integration {
      * Trim CSS
      *
      * @since 	3.7.7
-     * @version 5.7.2
+     * @version 6.0.0
 	 * 
      * @param 	string $css CSS content to trim.
      *

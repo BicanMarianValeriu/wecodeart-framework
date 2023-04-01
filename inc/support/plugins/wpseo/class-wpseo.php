@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.5
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -99,8 +99,8 @@ class WPSeo implements Integration {
 	/**
 	 * Register Block Overwrites
 	 *
-	 * @since	5.7.2
-	 * @version 5.7.2
+	 * @since	6.0.0
+	 * @version 6.0.0
 	 *
 	 * @return 	void
 	 */
@@ -273,7 +273,7 @@ class WPSeo implements Integration {
 	 * Filter - Restricted Yoast Blocks from theme code
 	 *
 	 * @since	5.0.0
-	 * @version	5.7.2
+	 * @version	6.0.0
 	 *
 	 * @return 	array
 	 */

@@ -9,8 +9,8 @@
  * @subpackage 	Support\Styles\Processor
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.7.2
- * @deprecated	This class is deprecated as of 5.7.2 ( use the new WP_Style_Engine API )
+ * @version		6.0.0
+ * @deprecated	This class is deprecated as of 6.0.0 ( use the new WP_Style_Engine API )
  */
 
 namespace WeCodeArt\Support\Styles;

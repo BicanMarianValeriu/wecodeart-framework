@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.4.0
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Support;
@@ -42,7 +42,7 @@ final class Assets implements Integration {
 	/**
 	 * Contains the scripts hook.
 	 *
-	 * @since  	5.7.2
+	 * @since  	6.0.0
 	 * @var 	string
 	 */
 	public $hook = 'wp_enqueue_scripts';
@@ -50,7 +50,7 @@ final class Assets implements Integration {
 	/**
 	 * Contains an array of script handles registered.
 	 * 
-	 * @since  	5.7.2
+	 * @since  	6.0.0
 	 * @var 	array
 	 */
 	private static $scripts = [];
@@ -58,7 +58,7 @@ final class Assets implements Integration {
 	/**
 	 * Contains an array of script handles registered.
 	 *
-	 * @since  	5.7.2
+	 * @since  	6.0.0
 	 * @var 	array
 	 */
 	private static $styles = [];
@@ -100,8 +100,8 @@ final class Assets implements Integration {
 	/**
 	 * Enqueue Front-End Core Assets
 	 *
-	 * @since	5.7.2
-	 * @version	5.7.2
+	 * @since	6.0.0
+	 * @version	6.0.0
 	 */
 	public function core(): void {
 		global $wp_scripts;
@@ -119,7 +119,7 @@ final class Assets implements Integration {
 			$wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
 		}
 
-		$wecodeart = apply_filters_deprecated( 'wecodeart/filter/support/assets/localize', [ $wecodeart ], '5.7.2' );
+		$wecodeart = apply_filters_deprecated( 'wecodeart/filter/support/assets/localize', [ $wecodeart ], '6.0.0' );
 
 		// Add Core Scripts
 		$this->add_script( $this->make_handle(), [
@@ -149,7 +149,7 @@ final class Assets implements Integration {
 			return _doing_it_wrong(
 				__CLASS__, 
 				sprintf( esc_html__( 'When using "%s" method you must define the 3rd parameter (style or script).', 'wecodeart' ), __FUNCTION__ ),
-				'5.7.2'
+				'6.0.0'
 			);
 		}
 
@@ -243,8 +243,8 @@ final class Assets implements Integration {
 	/**
 	 * Load Assets
 	 *
-	 * @since	5.7.2
-	 * @version	5.7.2
+	 * @since	6.0.0
+	 * @version	6.0.0
 	 *
      * @return void
 	 */

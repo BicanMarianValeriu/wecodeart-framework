@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Core;
@@ -77,7 +77,7 @@ class Header {
 	 * Adds custom classes to the array of body classes.
 	 *
 	 * @since	4.0.6
-	 * @version 5.7.2
+	 * @version 6.0.0
 	 *
 	 * @param 	array 	$classes Classes for the body element.
 	 *

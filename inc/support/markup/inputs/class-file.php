@@ -8,8 +8,8 @@
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
- * @since		5.7.2
- * @version		5.7.2
+ * @since		6.0.0
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -26,7 +26,7 @@ class File extends Basic {
     /**
      * Input's Style Deps.
      *
-     * @since   5.7.2
+     * @since   6.0.0
      * @var     array
      */
     static $style_deps = [ 'basic' ];

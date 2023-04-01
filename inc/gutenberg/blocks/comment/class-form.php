@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.2
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -76,7 +76,7 @@ class Form extends Dynamic {
 	 * Filter Comment Respond Args.
 	 *
 	 * @since	unknown
-	 * @version	5.7.2
+	 * @version	6.0.0
 	 *
 	 * @return 	array
 	 */

@@ -9,7 +9,7 @@
  * @subpackage  Autoloader
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version 	5.7.2
+ * @version 	6.0.0
  */
 
 namespace WeCodeArt;
@@ -25,7 +25,7 @@ class Autoloader {
 	 *
 	 * @access 	private
 	 * @since 	3.5
-	 * @version 5.7.2
+	 * @version 6.0.0
 	 * 
 	 * @var 	array 	$cached_paths	Cached FilePaths
 	 * @var 	string	$_namespace		Theme Namespace
@@ -92,7 +92,7 @@ class Autoloader {
 	 *
 	 * @access 	protected
 	 * @since 	3.5
-	 * @version 5.7.2
+	 * @version 6.0.0
 	 *
 	 * @param 	string 	$class_name 	The name of the class we're trying to load.
 	 *

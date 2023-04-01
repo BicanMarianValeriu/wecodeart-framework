@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt;
@@ -173,7 +173,7 @@ class Admin {
 	 * Register Rest Routes
 	 *
 	 * @since   5.0.0
-	 * @version 5.7.2
+	 * @version 6.0.0
 	 */
 	public function register_routes() {
 		register_rest_route( self::NAMESPACE, '/settings', [

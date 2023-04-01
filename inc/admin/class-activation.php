@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Admin;
@@ -33,7 +33,7 @@ class Activation {
 	 *
 	 * @var		string
 	 */
-	const REQUIRED_WP 	= '6.1';
+	const REQUIRED_WP 	= '6.2';
 	const REQUIRED_PHP 	= '7.4';
 
 	/**
@@ -177,7 +177,7 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	5.7.2
+	 * @version	6.0.0
 	 */
 	public function after_switch_theme() {
 		// If not, why bother to load the theme?
@@ -188,7 +188,7 @@ class Activation {
 			// Show what's failed validation
 			$this->admin_notice();
 
-			do_action_deprecated( 'wecodeart/hook/activation/failed', [], '5.7.2', 'wecodeart/activation/failed' );
+			do_action_deprecated( 'wecodeart/hook/activation/failed', [], '6.0.0', 'wecodeart/activation/failed' );
 			do_action( 'wecodeart/activation/failed' );
 
 			return;
@@ -220,7 +220,7 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	5.7.2
+	 * @version	6.0.0
 	 */
 	public function admin_notice() {
 		if( ! $this->requirements ) return;

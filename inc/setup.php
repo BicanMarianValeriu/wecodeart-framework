@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.9.5
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 use function WeCodeArt\Functions\get_prop;

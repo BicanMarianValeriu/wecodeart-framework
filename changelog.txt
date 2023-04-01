@@ -1,4 +1,4 @@
-v5.7.2
+v6.0.0
 - Updated - core/navigation to remove automatic `navbar-dark|light` class if present in block attributes
 - Updated - core/navigation(-link/menu/submenu) upgraded to Boostrap 5.3 and adjusted to WordPress
 - Updated - core/file markup and CSS updates

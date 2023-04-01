@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.1.2
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Support\Markup;
@@ -73,7 +73,7 @@ class Inputs implements Configuration {
 	 * Get the HTML of the input
 	 *
 	 * @since	unknown
-	 * @version	5.7.2
+	 * @version	6.0.0
 	 *
 	 * @param 	string 		$type		text/number/etc
 	 * @param 	array 		$args		Input Args
@@ -99,7 +99,7 @@ class Inputs implements Configuration {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	5.7.2
+	 * @version	6.0.0
 	 */
 	public function assets() {
 		if( empty( self::$loaded ) ) {

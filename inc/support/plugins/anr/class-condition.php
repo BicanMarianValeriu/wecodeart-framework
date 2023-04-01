@@ -9,7 +9,7 @@
  * @subpackage 	Support\Plugins\ANR\is_anr_active
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		4.0.2
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Support\Plugins\ANR;

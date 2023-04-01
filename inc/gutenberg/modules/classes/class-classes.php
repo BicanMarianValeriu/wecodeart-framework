@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.5
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules;

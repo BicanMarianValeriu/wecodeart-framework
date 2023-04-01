@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.8
- * @version		5.7.2
+ * @version		6.0.0
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
