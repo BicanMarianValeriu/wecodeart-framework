@@ -3,6 +3,11 @@
 	"items": [
 		{
 			"type": "info",
+			"title": "Version - 6.0.1",
+			"content": "Latest version is out however there is an issue with WP.org installation (probably due to Gutenberg plugin). Theme was tested on PHP 7.4 to 8.1 (and WP 6.2 to 6.3 alpha) without any issues but please test it locally before updating a live site."
+		},
+		{
+			"type": "info",
 			"title": "Version - 6.0.0",
 			"content": "Due to major enhancements and usage of the <a href=\"https:\//make.wordpress.org\/core\/6-2\/\" target=\"_blank\">WordPress 6.2</a> APIs, I will increase the version to 6 as soon as WordPress 6.2 is released. Just for the sake of being inline with WP :) ."
 		},
