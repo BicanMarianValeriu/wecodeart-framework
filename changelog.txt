@@ -1,3 +1,6 @@
+v6.0.6
+- Fixed - Issue with WP_Style_Engine styles being dequeued when Gutenberg plugin is active - temporary fix since Gutenberg is a beta plugin
+
 v6.0.3
 - Update - Deactivate Gutenberg on the theme switch (we do not support beta features)
 

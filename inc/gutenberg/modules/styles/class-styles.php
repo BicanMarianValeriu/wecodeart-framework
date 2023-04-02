@@ -106,6 +106,9 @@ class Styles implements Integration {
 		
 		// Eventually it will be removed - 1 check since they are all from GB.
 		if( function_exists( 'gutenberg_render_layout_support_flag' ) ) {
+			// Gutenberg plugin removes styles and adds them in footer - we dont want that.
+			add_action( 'wp_enqueue_scripts', 'wp_enqueue_stored_styles', PHP_INT_MAX ); // Temporary
+			add_action( 'wp_footer', 'wp_enqueue_stored_styles', 1 ); // Temporary.
 			remove_filter( 'render_block', 'gutenberg_render_spacing_gap_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
 		 	remove_action( 'wp_body_open', 'gutenberg_global_styles_render_svg_filters',	10, 1 );
