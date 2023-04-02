@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.0.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -209,7 +209,7 @@ class Separator extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public static function get_style( mixed $data = null ): string {
+	public static function get_style( $data = null ): string {
 		$inline = '';
 
 		if( is_array( $data ) ) {
