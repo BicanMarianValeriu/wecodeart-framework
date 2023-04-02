@@ -1,3 +1,6 @@
+v6.0.3
+- Update - Deactivate Gutenberg on the theme switch (we do not support beta features)
+
 v6.0.2
 - Fixed - issues with PHP 7.4 version giving a fatal error on Gutenberg Separator block overwrite.
 
