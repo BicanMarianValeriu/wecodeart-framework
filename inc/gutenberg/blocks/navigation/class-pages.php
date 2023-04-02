@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.3.7
- * @version		6.0.0
+ * @version		6.0.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -157,7 +157,7 @@ class Pages extends Dynamic {
 			$handle_script 	= 'wecodeart-gutenberg-blocks-navigation';
 
 			if( ! wp_style_is( $handle_style ) ) {
-				wp_enqueue_style( $handle_style );
+				wp_add_inline_style( 'wp-block-navigation', wecodeart( 'blocks' )->get( 'core/navigation-submenu' )::get_instance()->styles() );
 			}
 			
 			if( ! wp_script_is( $handle_script ) ) {

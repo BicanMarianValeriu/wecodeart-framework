@@ -1,3 +1,6 @@
+v6.0.7
+- Fixed - Issue with dropdown styles not being added when core/page-list block is used (empty navigation)
+
 v6.0.6
 - Fixed - Issue with WP_Style_Engine styles being dequeued when Gutenberg plugin is active - temporary fix since Gutenberg is a beta plugin
 
