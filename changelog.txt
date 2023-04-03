@@ -1,5 +1,5 @@
 v6.1.0
-- Fixed - query-overlay pattern used on archives
+- Fixed - remove Gutenberg plugin deactivation - not allowed
 
 v6.0.8/9
 - Removed - section.php pattern and section-markquee.php pattern
