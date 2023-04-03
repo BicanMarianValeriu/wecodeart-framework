@@ -13,7 +13,7 @@
     <!-- wp:term-description /-->
     
     <!-- wp:post-template {"className":"my-5"} -->
-    <!-- wp:pattern {"slug":"wecodeart/entry-overlay"} /-->
+    <!-- wp:pattern {"slug":"wecodeart/el-entry-overlay"} /-->
     <!-- /wp:post-template -->
 
     <!-- wp:query-pagination {"className":"mb-5"} -->
