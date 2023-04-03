@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		6.0.3
+ * @version		6.1.0
  */
 
 namespace WeCodeArt\Admin;
@@ -177,12 +177,9 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	6.0.3
+	 * @version	6.1.0
 	 */
 	public function after_switch_theme() {
-		// Deactivate Gutenberg on theme activation since we do not support beta features.
-		deactivate_plugins( 'gutenberg/gutenberg.php', true );
-
 		// If not, why bother to load the theme?
 		if( $this->is_ok() === false ) {
 			// Switch to old theme

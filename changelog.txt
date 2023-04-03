@@ -1,7 +1,7 @@
-v6.0.8
+v6.1.0
 - Fixed - query-overlay pattern used on archives
 
-v6.0.8
+v6.0.8/9
 - Removed - section.php pattern and section-markquee.php pattern
 - Updated - header/footer.html patterns navigation attributes adjustments
 - Updated - Navigation blocks scripts handle names to be inline with WP naming
