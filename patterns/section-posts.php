@@ -18,7 +18,7 @@
     <!-- wp:query {"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]},"displayLayout":{"type":"flex","columns":3}} -->
     <div class="wp-block-query">
         <!-- wp:post-template {"className":"my-5"} -->
-        <!-- wp:pattern {"slug":"wecodeart/entry-overlay"} /-->
+        <!-- wp:pattern {"slug":"wecodeart/el-entry-overlay"} /-->
         <!-- /wp:post-template -->
     </div>
     <!-- /wp:query -->

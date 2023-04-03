@@ -17,14 +17,14 @@
         <!-- /wp:paragraph -->
     </div>
     <!-- /wp:group -->
-    <!-- wp:group {"align":"full","layout":{"orientation":"marquee"}} -->
+    <!-- wp:group {"align":"full","layout":{"type":"flex","flexWrap":"nowrap","orientation":"marquee","justifyContent":"center"}} -->
     <div class="wp-block-group alignfull">
-        <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md"}}},"textColor":"secondary","className":"","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"stretch"}} -->
+        <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md"}}},"textColor":"secondary","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"stretch"},"lock":{"move":true,"remove":true}} -->
         <div class="wp-block-group has-secondary-color has-text-color" style="padding-top:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md)">
-            <!-- wp:pattern {"slug":"wecodeart/testimonial"} /-->
-            <!-- wp:pattern {"slug":"wecodeart/testimonial"} /-->
-            <!-- wp:pattern {"slug":"wecodeart/testimonial"} /-->
-            <!-- wp:pattern {"slug":"wecodeart/testimonial"} /-->
+            <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
+            <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
+            <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
+            <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
         </div>
         <!-- /wp:group -->
     </div>

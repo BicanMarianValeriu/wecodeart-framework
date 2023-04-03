@@ -12,16 +12,16 @@
         "label": "WeCodeArt - CTA"
     },
     {
-        "slug": "wecodeart-elements",
-        "label": "WeCodeArt - Elements"
-    },
-    {
         "slug": "wecodeart-query",
         "label": "WeCodeArt - Query"
     },
     {
         "slug": "wecodeart-pages",
         "label": "WeCodeArt - Pages"
+    },
+    {
+        "slug": "wecodeart-elements",
+        "label": "WeCodeArt - Elements"
     },
     {
         "slug": "wecodeart",

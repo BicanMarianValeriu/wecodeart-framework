@@ -1,9 +1,10 @@
 import lorem from './lorem';
+import { groupVariationMarquee } from './variations';
 
 /**
  * WP dependencies
  */
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, registerBlockVariation } = wp.blocks;
 
 function registerWCABlocks() {
     [
@@ -16,3 +17,13 @@ function registerWCABlocks() {
 }
 
 registerWCABlocks();
+
+function registerWCAVariations() {
+    [
+        groupVariationMarquee
+    ].forEach(({ block, attributes }) => {
+        registerBlockVariation(block, attributes);
+    });
+}
+
+registerWCAVariations();

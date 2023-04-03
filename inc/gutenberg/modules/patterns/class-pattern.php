@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Pattern
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.0.8
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Patterns;
@@ -119,7 +119,7 @@ class Pattern {
 	/**
 	 * Inserter.
 	 *
-	 * @var string
+	 * @var boolean
 	 */
 	public $inserter = true;
 
@@ -157,10 +157,10 @@ class Pattern {
     public function register() {
 		if ( \WP_Block_Patterns_Registry::get_instance()->is_registered( $this->get_name() ) || empty( $this->content )) return;
 
-		$args = array_filter ( [
+		$args = array_filter( [
             'title'       	=> $this->title,
             'content'     	=> $this->content,
-            'categories'  	=> ! empty( $this->categories ) ? $this->categories : [ $this->theme ],
+            'categories'  	=> $this->categories,
             'description' 	=> $this->description,
             'keywords' 		=> $this->keywords,
             'viewportWidth'	=> $this->viewportWidth,

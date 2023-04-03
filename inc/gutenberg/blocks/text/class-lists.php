@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.0.0
+ * @version		6.0.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -124,9 +124,6 @@ class Lists extends Dynamic {
 			ol,
 			ul {
 				padding-left: 1.1em;
-			}
-			:is(ul,ol):is(.is-horizontal) li {
-				margin-right: .5em;
 			}
 			ol,
 			ul,

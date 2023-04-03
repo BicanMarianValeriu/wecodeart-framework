@@ -24,12 +24,12 @@
     <div class="wp-block-columns align-items-stretch" style="margin-top:var(--wp--preset--spacing--xl)">
         <!-- wp:column -->
         <div class="wp-block-column">
-            <!-- wp:pattern {"slug":"wecodeart/pricing"} /-->
+            <!-- wp:pattern {"slug":"wecodeart/el-pricing"} /-->
         </div>
         <!-- /wp:column -->
         <!-- wp:column -->
         <div class="wp-block-column">
-            <!-- wp:pattern {"slug":"wecodeart/pricing-featured"} /-->
+            <!-- wp:pattern {"slug":"wecodeart/el-pricing-featured"} /-->
         </div>
         <!-- /wp:column -->
     </div>

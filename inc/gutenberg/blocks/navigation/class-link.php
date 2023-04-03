@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.0.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -160,8 +160,8 @@ class Link extends Dynamic {
 		}
 
 		// Scripts
-		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( $this->make_handle() ) ) {
-			wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'modules/dropdown' ), [], wecodeart( 'version' ), true );
+		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( 'wp-block-navigation-submenu' ) ) {
+			wp_enqueue_script( 'wp-block-navigation-submenu', $this->get_asset( 'js', 'modules/dropdown' ), [], wecodeart( 'version' ), true );
 		}
 		
 		// Use overlay first, fallback to nav background (or body).

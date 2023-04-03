@@ -74,13 +74,16 @@ const code = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lorem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lorem */ "./src/js/gutenberg/blocks/lorem/index.js");
+/* harmony import */ var _variations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./variations */ "./src/js/gutenberg/blocks/variations/index.js");
+
 
 /**
  * WP dependencies
  */
 
 const {
-  registerBlockType
+  registerBlockType,
+  registerBlockVariation
 } = wp.blocks;
 
 function registerWCABlocks() {
@@ -98,6 +101,18 @@ function registerWCABlocks() {
 }
 
 registerWCABlocks();
+
+function registerWCAVariations() {
+  [_variations__WEBPACK_IMPORTED_MODULE_1__.groupVariationMarquee].forEach(_ref => {
+    let {
+      block,
+      attributes
+    } = _ref;
+    registerBlockVariation(block, attributes);
+  });
+}
+
+registerWCAVariations();
 
 /***/ }),
 
@@ -247,6 +262,65 @@ const settings = {
   name,
   settings
 });
+
+/***/ }),
+
+/***/ "./src/js/gutenberg/blocks/variations/index.js":
+/*!*****************************************************!*\
+  !*** ./src/js/gutenberg/blocks/variations/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "groupVariationMarquee": () => (/* binding */ groupVariationMarquee)
+/* harmony export */ });
+/**
+ * WordPress dependencies
+ */
+const {
+  i18n: {
+    __
+  }
+} = wp;
+const groupVariationMarquee = {
+  block: 'core/group',
+  attributes: {
+    name: 'group-marquee',
+    title: __('Group: Marquee'),
+    description: __('Gather blocks in a sliding container.'),
+    attributes: {
+      layout: {
+        type: 'flex',
+        flexWrap: 'nowrap',
+        orientation: 'marquee',
+        justifyContent: 'center'
+      }
+    },
+    innerBlocks: [['core/group', {
+      lock: {
+        move: true,
+        remove: true
+      },
+      layout: {
+        type: 'flex',
+        flexWrap: 'nowrap',
+        orientation: 'horizontal',
+        justifyContent: 'center'
+      }
+    }]],
+    isDefault: false,
+    scope: ['block', 'inserter', 'transform'],
+    isActive: (blockAttributes, variationAttributes) => {
+      var _blockAttributes$layo, _variationAttributes$;
+
+      return ((_blockAttributes$layo = blockAttributes.layout) === null || _blockAttributes$layo === void 0 ? void 0 : _blockAttributes$layo.orientation) === ((_variationAttributes$ = variationAttributes.layout) === null || _variationAttributes$ === void 0 ? void 0 : _variationAttributes$.orientation);
+    },
+    icon: 'align-right'
+  }
+};
+
 
 /***/ }),
 

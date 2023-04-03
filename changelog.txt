@@ -1,3 +1,11 @@
+v6.0.8
+- Removed - section.php pattern and section-markquee.php pattern
+- Updated - header/footer.html patterns navigation attributes adjustments
+- Updated - Navigation blocks scripts handle names to be inline with WP naming
+- Updated - Elements pattern types prefixed with 'el-' and moved certain patterns to html files
+- Fixed - Navigation offcanvas script when empty navigation is used
+- Added - core/group marquee block variation
+
 v6.0.7
 - Fixed - Issue with dropdown styles not being added when core/page-list block is used (empty navigation)
 

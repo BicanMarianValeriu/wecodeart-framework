@@ -25,7 +25,7 @@
             <!-- wp:post-title {"level":3,"isLink":true} /-->
             <!-- wp:group {"className":"g-1","layout":{"type":"flex","flexWrap":"wrap"}} -->
             <div class="wp-block-group g-1">
-            <!-- wp:pattern {"slug":"wecodeart/entry-meta"} /-->
+            <!-- wp:pattern {"slug":"wecodeart/el-entry-meta"} /-->
             </div>
             <!-- /wp:group -->
             <!-- wp:post-excerpt {"moreText":"<?php esc_html_e( 'Read more', 'wecodeart' ); ?>"} /-->

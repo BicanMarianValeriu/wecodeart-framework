@@ -1,6 +1,35 @@
 [
     {
-        "slug": "pricing",
+        "slug": "el-author-box",
+        "title": "Author Box",
+        "description": "A simple author box.",
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
+        "slug": "el-entry-meta",
+        "title": "Entry Meta",
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
+        "slug": "el-entry-overlay",
+        "title": "Entry (Overlay)",
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
+        "slug": "el-entry-meta",
+        "title": "Entry Meta",
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
+        "slug": "el-pricing",
         "title": "Pricing Box",
         "description": "A simple pricing box.",
         "categories": [
@@ -8,7 +37,7 @@
         ]
     },
     {
-        "slug": "pricing-featured",
+        "slug": "el-pricing-featured",
         "title": "Pricing Box (Featured)",
         "description": "A featured pricing box.",
         "categories": [
@@ -16,9 +45,25 @@
         ]
     },
     {
-        "slug": "testimonial",
+        "slug": "el-testimonial",
         "title": "Testimonial",
         "description": "A simple testimonial.",
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
+        "slug": "el-media-text",
+        "title": "Media & Text",
+        "description": "A simple media and text section.",
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
+        "slug": "el-media-text-right",
+        "title": "Media & Text (Right Image)",
+        "description": "A simple media and text section with right aligned image.",
         "categories": [
             "wecodeart", "wecodeart-elements"
         ]

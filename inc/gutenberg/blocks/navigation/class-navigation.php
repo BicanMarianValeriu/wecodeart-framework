@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.0.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -218,8 +218,8 @@ class Navigation extends Dynamic {
 				}
 
 				// Scripts
-				if( ! wp_script_is( $this->make_handle() ) ) {
-					wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'modules/offcanvas' ), [], wecodeart( 'version' ), true );
+				if( ! wp_script_is( 'wp-block-' . $this->block_name . '-offcanvas' ) ) {
+					wp_enqueue_script( 'wp-block-' . $this->block_name . '-offcanvas', $this->get_asset( 'js', 'modules/offcanvas' ), [], wecodeart( 'version' ), true );
 				}
 
 				// Toggler
