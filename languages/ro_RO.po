@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-03-27 01:17+0000\n"
+"PO-Revision-Date: 2023-04-10 17:37+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -25,6 +25,11 @@ msgstr "la %s"
 #| msgid "%s Comments"
 msgid "% Comments"
 msgstr "% Comentarii"
+
+#: inc/gutenberg/blocks/design/class-separator.php:87
+#, php-format
+msgid "%s"
+msgstr "%s"
 
 #: inc/gutenberg/blocks/query/class-title.php:151
 #, php-format
@@ -73,7 +78,7 @@ msgstr ""
 "completă a site-ului. De asemenea, funcționează perfect cu toate pluginurile "
 "generatore de pagini."
 
-#: inc/gutenberg/modules/styles/class-styles.php:298
+#: inc/gutenberg/modules/styles/class-styles.php:301
 msgid "Accent"
 msgstr "Accent"
 
@@ -265,9 +270,8 @@ msgid "Enter password"
 msgstr "Introduceți parola"
 
 #: patterns/page-soon.php:42
-msgid "Enter your email address to subscribe to get notified."
-msgstr ""
-"Introdu adresa ta de e-mail pentru a te abona pentru a primi notificări."
+msgid "Enter your email address to subscribe."
+msgstr "Introdu adresa ta de e-mail pentru a te abona."
 
 #: inc/gutenberg/blocks/design/class-separator.php:76
 #| msgid "Fixed"

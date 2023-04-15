@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-27 01:16+0000\n"
+"POT-Creation-Date: 2023-04-10 17:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -23,6 +23,11 @@ msgstr ""
 
 #: views/blocks/post/comments.tpl.php:53
 msgid "% Comments"
+msgstr ""
+
+#: inc/gutenberg/blocks/design/class-separator.php:87
+#, php-format
+msgid "%s"
 msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:151
@@ -68,7 +73,7 @@ msgid ""
 " It also works perfectly with all page builder plugins."
 msgstr ""
 
-#: inc/gutenberg/modules/styles/class-styles.php:298
+#: inc/gutenberg/modules/styles/class-styles.php:301
 msgid "Accent"
 msgstr ""
 
@@ -249,7 +254,7 @@ msgid "Enter password"
 msgstr ""
 
 #: patterns/page-soon.php:42
-msgid "Enter your email address to subscribe to get notified."
+msgid "Enter your email address to subscribe."
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-separator.php:76

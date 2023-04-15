@@ -84,7 +84,7 @@ class Separator extends Dynamic {
 
 			\register_block_style( $this->get_block_type(), [
 				'name' 			=> 'svg-' . $name,
-				'label'			=> esc_html__( $label, 'wecodeart' ),
+				'label'			=> sprintf( esc_html__( '%s', 'wecodeart' ), $label ),
 				'inline_style' 	=> self::get_style( $data )
 			] );
 		}

@@ -1,3 +1,8 @@
+v6.1.1
+- Updated - RO local translations (page-soon.php pattern)
+- Fixed - class-separator.php translation function wrong usage
+- Fixed - class-template.php (post) fatal error on search page with no results
+
 v6.1.0
 - Fixed - remove Gutenberg plugin deactivation - not allowed
 

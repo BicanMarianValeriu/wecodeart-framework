@@ -39,7 +39,7 @@
                         <p class="has-medium-font-size" style="margin-top:0"><strong>CONSECTETUR ADIPISCING ELIT!</strong></p>
                         <!-- /wp:paragraph -->
                         <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|xs"}}},"className":"opacity-50"} -->
-                        <p class="opacity-50" style="margin-top:var(--wp--preset--spacing--xs)"><?php esc_html_e( 'Enter your email address to subscribe to get notified.', 'wecodeart' ); ?></p>
+                        <p class="opacity-50" style="margin-top:var(--wp--preset--spacing--xs)"><?php esc_html_e( 'Enter your email address to subscribe.', 'wecodeart' ); ?></p>
                         <!-- /wp:paragraph -->
                         <!-- wp:search {"label":"","showLabel":false,"placeholder":"<?php esc_html_e( 'Your email', 'wecodeart' ); ?>","buttonText":"<?php esc_html_e( 'Subscribe', 'wecodeart' ); ?>","backgroundColor":"warning","textColor":"dark"} /-->
                     </div>
