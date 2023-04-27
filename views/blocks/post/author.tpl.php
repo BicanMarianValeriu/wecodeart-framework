@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Author
  * @since 		3.9.5
- * @version		5.7.2
+ * @version		6.1.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -46,7 +46,7 @@ wecodeart( 'styles' )->Utilities->load( [ 'me-2', 'flex-fill' ] );
     else : 
     
     wecodeart( 'markup' )->SVG::render( 'user', [
-        'class' => 'wp-block-post-author__icon'
+        'class' => 'wp-block-post-author__icon fa-fw'
     ] );
 
     endif; ?>

@@ -1,3 +1,12 @@
+v6.1.2
+- Updated - get_site_url() to home_url() for wecodeart.com link in header
+- Updated - core/post-terms to use tags icon for product_tag term (WooCommerce)
+- Updated - fa-fw class to post meta blocks svg icon
+- Updated - accent color to theme.json instead of autodetect
+- Added - convert WooCommerce inputs to wecodeart_input (re-added until they fully update those as well)
+- Added - WooCommerce Product Manufacturer Price feature (Conversion enhancement)
+- Added - WooCommerce enhanced product rating with extra info
+
 v6.1.1
 - Updated - RO local translations (page-soon.php pattern)
 - Fixed - class-separator.php translation function wrong usage

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.1
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -112,7 +112,14 @@ class Processor {
 			$selector 	= get_prop( $block_type->supports, [ '__experimentalSelector' ] );
 		}
 
-		$selector 	= join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), $selector, $prefix ] ) );
+		if( strpos( $selector, ',' ) ) {
+			$selector 	= join( ',', array_map( function( $item ) use ( $prefix ) {
+				return join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), ' ', $item, $prefix ] ) );
+			}, explode( ',', $selector ) ) );
+		} else {
+			$selector 	= join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), $item, $prefix ] ) );
+		}
+
 
 		return apply_filters( 'wecodeart/filter/gutenberg/styles/selector', $selector, $this->name );
 	}

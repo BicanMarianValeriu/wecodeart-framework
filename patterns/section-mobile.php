@@ -33,8 +33,8 @@
             <div class="wp-block-columns are-vertically-aligned-top is-not-stacked-on-mobile mb-3">
                 <!-- wp:column {"verticalAlignment":"top","className":"col-auto order-md-last"} -->
                 <div class="wp-block-column is-vertically-aligned-top col-auto order-md-last">
-                    <!-- wp:image {"align":"center","width":35,"height":35,"backgroundColor":"light","textColor":"primary","customStyle":"selector svg {\n  padding: 5px\n}\n"} -->
-                    <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-light-background-color has-text-color has-background">
+                    <!-- wp:image {"align":"center","width":35,"height":35,"backgroundColor":"accent","textColor":"primary","customStyle":"selector svg {\n  padding: 5px\n}\n"} -->
+                    <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-accent-background-color has-text-color has-background">
                         <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-desktop.svg' ) ); ?>" alt="" width="35" height="35" />
                     </figure>
                     <!-- /wp:image -->
@@ -69,8 +69,8 @@
             <div class="wp-block-columns are-vertically-aligned-top is-not-stacked-on-mobile mb-3">
                 <!-- wp:column {"verticalAlignment":"top","className":"col-auto"} -->
                 <div class="wp-block-column is-vertically-aligned-top col-auto">
-                    <!-- wp:image {"align":"center","width":35,"height":35,"backgroundColor":"light","textColor":"primary","customStyle":"selector svg {\n  padding: 5px\n}\n"} -->
-                    <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-light-background-color has-text-color has-background">
+                    <!-- wp:image {"align":"center","width":35,"height":35,"backgroundColor":"accent","textColor":"primary","customStyle":"selector svg {\n  padding: 5px\n}\n"} -->
+                    <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-accent-background-color has-text-color has-background">
                         <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-eye.svg' ) ); ?>" alt="" width="35" height="35" />
                     </figure>
                     <!-- /wp:image -->

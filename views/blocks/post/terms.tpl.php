@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Terms
  * @since 		5.0.0
- * @version		5.7.2
+ * @version		6.1.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -43,7 +43,7 @@ if( isset( $icon ) ) {
 <div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>><?php
 
     wecodeart( 'markup' )->SVG::render( $icon_name, [
-        'class' => 'wp-block-post-terms__icon'
+        'class' => 'wp-block-post-terms__icon fa-fw'
     ] );
 
     ?>

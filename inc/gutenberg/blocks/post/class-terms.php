@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -97,7 +97,9 @@ class Terms extends Dynamic {
 	 * @return 	array
 	 */
 	public function filter_tags_context( $args ) {
-		if( get_prop( $args, [ 'attributes', 'term' ], false ) === 'post_tag' ) {
+		$term = get_prop( $args, [ 'attributes', 'term' ], '' );
+
+		if( in_array( $term, [ 'post_tag', 'product_tag' ] ) ) {
 			$args['icon'] = 'tags';
 		}
 		

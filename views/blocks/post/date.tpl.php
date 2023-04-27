@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Date
  * @since 		3.9.5
- * @version		5.7.2
+ * @version		6.1.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -37,7 +37,7 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
 <div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>><?php
 
     wecodeart( 'markup' )->SVG::render( 'clock', [
-        'class' => 'wp-block-post-date__icon'
+        'class' => 'wp-block-post-date__icon fa-fw'
     ] );
 
     ?>

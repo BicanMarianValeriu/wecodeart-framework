@@ -162,6 +162,11 @@
 					"slug": "black",
 					"color": "#000000",
 					"name": "Black"
+				},
+				{
+					"slug": "accent",
+					"color": "#f1f7ff",
+					"name": "Accent"
 				}
 			],
 			"gradients": [

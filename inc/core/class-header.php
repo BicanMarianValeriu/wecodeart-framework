@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Core;
@@ -63,12 +63,12 @@ class Header {
 	 * Adds wecodeart link rel in head.
 	 *
 	 * @since	5.7.0
-	 * @version 5.7.0
+	 * @version 6.1.2
 	 *
 	 * @return 	void
 	 */
 	public function link_rel() {
-		if( strpos( get_site_url(), 'wecodeart.com' ) ) return;
+		if( strpos( home_url(), 'wecodeart.com' ) ) return;
 
 		printf( '<link rel="external" href="%s" />', 'https://www.wecodeart.com' ); 
 	}

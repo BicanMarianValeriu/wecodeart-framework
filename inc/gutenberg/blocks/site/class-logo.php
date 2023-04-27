@@ -180,6 +180,7 @@ class Logo extends Dynamic {
         }
 		.wp-site-header .wp-block-site-logo__link {
 			display: block;
+			width: fit-content;
 		}
 		/* Navigation */
 		.wp-block-navigation .navbar-nav .wp-site-logo {

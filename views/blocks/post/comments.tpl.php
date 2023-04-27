@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Comments
  * @since 		3.9.5
- * @version		5.5.5
+ * @version		6.1.2
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -44,7 +44,7 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
 <div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>><?php
     
     wecodeart( 'markup' )->SVG::render( 'comments', [
-        'class' => 'wp-block-post-comments-link__icon'
+        'class' => 'wp-block-post-comments-link__icon fa-fw'
     ] );
 
     comments_popup_link( 

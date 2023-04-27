@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -278,9 +278,8 @@ class Styles implements Integration {
 	 */
 	public function theme_json( $object ): object {
 		$link 		= get_json_color( [ 'styles', 'elements', 'link', 'color', 'text' ] );
-		$background	= get_json_color( [ 'styles', 'color', 'background' ] );
 
-		if( $link || $background ) {
+		if( $link ) {
 			$data = $object->get_data();
 
 			// Adjust hover brightness.
@@ -289,17 +288,6 @@ class Styles implements Integration {
 					'text' => $this->CSS::hex_brightness( $link, -25 )
 				]
 			], get_prop( $data, [ 'styles', 'element', 'link', ':hover' ], [] ) );
-
-			// Adjust accent color.
-			$background = wecodeart( 'styles' )::color_to_rgba( $background, false, true );
-			$luminance 	= wecodeart( 'styles' )::rgb_luminance( $background );
-			$accent 	= ( $luminance < get_lightness_limit() ) ? 'rgba(0,0,0,0.2)' : '#f1f7ff';
-
-			$data['settings']['color']['palette']['theme'][] = [
-				'slug' 	=> 'accent',
-				'color' => $accent,
-				'name' 	=> esc_html__( 'Accent', 'wecodeart' ),
-			];
 
 			// Update object.
 			$object->update_with( $data );
