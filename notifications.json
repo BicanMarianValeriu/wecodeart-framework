@@ -3,8 +3,8 @@
 	"items": [
 		{
 			"type": "info",
-			"title": "Version - 6.0.2",
-			"content": "Next version will include huge WooCommerce improvements (almost fully blockified and custom block styles)."
+			"title": "Version - 6.1.2",
+			"content": "Next version will include huge WooCommerce improvements (almost fully blockified and custom block styles) and a reworked admin interface that allows to define recommended theme extensions/plugins."
 		}
 	]
 }
