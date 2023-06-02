@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.5
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
+use WeCodeArt\Support\Plugins;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
 use function WeCodeArt\Functions\get_prop;
@@ -29,7 +30,7 @@ class WPSeo implements Integration {
 
 	use Singleton; 
 
-	const NOTICE_ID = 'wecodeart-yoast-notice';
+	const NOTICE_ID = 'wecodeart/extension/yoast';
 
 	/**
 	 * Get Conditionals
@@ -37,9 +38,7 @@ class WPSeo implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals(): array {
-		wecodeart( 'conditionals' )->set( [
-			'is_yoast_active' => WPSeo\Condition::class,
-		] );
+		wecodeart( 'conditionals' )->set( 'is_yoast_active', WPSeo\Condition::class );
 		
 		return [ 'is_yoast_active' ];
 	}
@@ -52,30 +51,30 @@ class WPSeo implements Integration {
 		add_action( 'admin_notices',	[ $this, 'manage_notice' ] );
 
 		// Restricted Blocks
-		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_gutenberg_blocks' ] );
+		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' 	] );
 
 		// Terms Template Context
-		add_filter( 'wecodeart/filter/template/context', 		[ $this, 'filter_category_context' 	], 10, 2 );
+		add_filter( 'wecodeart/filter/template/context', 		[ $this, 'post_category_view'	], 20, 2 );
 
 		// Author Social - note for code reviewers
 		// This will be eventually removed as soon as I figure out another way (maybe PHP patterns?)
 		// Its only used when Yoast SEO plugin is installed and enabled.
 		// Renders author social profiles using core/social-links block markup
-		add_action( 'init', [ $this, 'register_social' ] );
+		add_action( 'init', 				[ $this, 'register_social' ] );
 
 		// Register Blocks Overwrites
-		add_action( 'after_setup_theme', [ $this, 'register_blocks' ] );
+		add_action( 'after_setup_theme', 	[ $this, 'register_blocks' ] );
 	}
 
 	/**
 	 * Manage Notice
 	 *
 	 * @since 	5.0.0
-	 * @version	5.0.0
+	 * @version	6.1.2
 	 */
 	public function manage_notice(): void {
 		$notification = new Notification(
-			esc_html__( 'YoastSEO support is enabled! Our theme works seamlessly with the best SEO plugin.', 'wecodeart' ),
+			esc_html__( 'YoastSEO plugin support is enabled! Our theme works seamlessly with the best SEO plugin.', 'wecodeart' ),
 			[
 				'id'			=> self::NOTICE_ID,
 				'type'     		=> Notification::INFO,
@@ -253,12 +252,12 @@ class WPSeo implements Integration {
 	 * Extend Category with Yoast's Primary Term
 	 *
 	 * @since	4.1.52
-	 * @version	5.0.0
+	 * @version	6.1.2
 	 *
 	 * @return 	array
 	 */
-	public function filter_category_context( $args, $name ): array {
-		if( $name !== 'entry/meta/terms.php' ) {
+	public function post_category_view( $args, $name ): array {
+		if( $name !== 'blocks/post/terms.php' ) {
 			return $args;
 		}
 		
@@ -273,11 +272,11 @@ class WPSeo implements Integration {
 	 * Filter - Restricted Yoast Blocks from theme code
 	 *
 	 * @since	5.0.0
-	 * @version	6.0.0
+	 * @version	6.1.2
 	 *
 	 * @return 	array
 	 */
-	public function restricted_gutenberg_blocks( $blocks ): array {
+	public function restricted_blocks( $blocks ): array {
 		$blocks = array_merge( $blocks, [
 			'yoast-seo/breadcrumbs',
 			'yoast/how-to-block',
@@ -285,5 +284,23 @@ class WPSeo implements Integration {
 		] );
 
 		return $blocks;
+	}
+
+	/**
+	 * Installer
+	 *
+	 * @since	6.1.2
+	 * @version	6.1.2
+	 *
+	 * @return 	array
+	 */
+	public function installer(): array {
+		return [
+			'slug' 			=> null,
+			'source'		=> 'custom',
+			'title' 		=> 'Yoast SEO',
+			'description' 	=> Plugins::get_default_description( 'Yoast SEO' ),
+			'required' 		=> [ 'wordpress-seo' ]
+		];
 	}
 }

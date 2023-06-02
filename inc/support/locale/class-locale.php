@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.4.5
- * @version		5.5.5
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Support;
@@ -67,10 +67,10 @@ final class Locale implements Integration {
 	 * Manage Notices
 	 *
 	 * @since 	5.5.5
-	 * @version	5.5.5
+	 * @version	6.1.2
 	 */
 	public function manage_notice() {
-		$translated = [ 'en_US', 'ro_RO' ];
+		$translated = [ 'en_US', 'ro_RO', 'nl_BE'];
 
 		$current_lang = get_user_locale();
 

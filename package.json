@@ -1,6 +1,6 @@
 {
 	"name": "wecodeart",
-	"version": "5.6.3",
+	"version": "6.1.2",
 	"main": "webpack.config.js",
 	"author": "Bican Marian Valeriu",
 	"browserslist": [
@@ -18,8 +18,10 @@
 		"start:offcanvas": "wp-scripts start modules/offcanvas=./src/js/frontend/modules/navigation/offcanvas.js --output-path=assets/unminified",
 		"build:dropdown": "wp-scripts build modules/dropdown=./src/js/frontend/modules/navigation/dropdown.js --output-path=assets/minified",
 		"start:dropdown": "wp-scripts start modules/dropdown=./src/js/frontend/modules/navigation/dropdown.js --output-path=assets/unminified",
-		"build:admin:notification": "wp-scripts build admin/notification=./src/js/admin/notification/index.js --output-path=assets/minified",
-		"start:admin:notification": "wp-scripts start admin/notification=./src/js/admin/notification/index.js --output-path=assets/unminified",
+		"build:admin:plugins": "wp-scripts build admin/plugins=./src/js/admin/plugins/index.js --output-path=assets/minified",
+		"start:admin:plugins": "wp-scripts start admin/plugins=./src/js/admin/plugins/index.js --output-path=assets/unminified",
+		"build:admin:notifications": "wp-scripts build admin/notifications=./src/js/admin/notifications/index.js --output-path=assets/minified",
+		"start:admin:notifications": "wp-scripts start admin/notifications=./src/js/admin/notifications/index.js --output-path=assets/unminified",
 		"build:gutenberg": "wp-scripts build gutenberg/editor=./src/js/gutenberg/index.js --output-path=assets/minified",
 		"start:gutenberg": "wp-scripts start gutenberg/editor=./src/js/gutenberg/index.js --output-path=assets/unminified",
 		"start:gutenberg:patterns": "wp-scripts start gutenberg/ext-patterns=./src/js/gutenberg/extensions/with-patterns/index.js --output-path=assets/unminified",

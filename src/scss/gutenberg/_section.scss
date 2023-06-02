@@ -2,27 +2,27 @@
 # Columns Guidelines / Fix cols
 --------------------------------------------------------------*/
 .wp-block-columns {
-	&.is-selected,
-	&.has-child-selected {
-		&::before {
-			content: '';
-			position: absolute;
-		}
-	}
+	// &.is-selected,
+	// &.has-child-selected {
+	// 	&::before {
+	// 		content: '';
+	// 		position: absolute;
+	// 	}
+	// }
 
-	&::before {
-		pointer-events: none;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		color: rgba(140,140,140,0.3);
-		z-index: 0;
-		background-image: repeating-linear-gradient(to right, currentColor, currentColor 1px, transparent 1px, transparent);
-		background-size: 8.33%;
-		border-top: 1px solid currentColor;
-    	border-bottom: 1px solid currentColor;
-	}
+	// &::before {
+	// 	pointer-events: none;
+	// 	top: 0;
+	// 	left: 0;
+	// 	right: 0;
+	// 	bottom: 0;
+	// 	color: rgba(140,140,140,0.3);
+	// 	z-index: 0;
+	// 	background-image: repeating-linear-gradient(to right, currentColor, currentColor 1px, transparent 1px, transparent);
+	// 	background-size: 8.33%;
+	// 	border-top: 1px solid currentColor;
+    // 	border-bottom: 1px solid currentColor;
+	// }
 	
 	& > .wp-block-column {
 		flex: 1 0 0%;

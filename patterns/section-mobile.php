@@ -18,8 +18,8 @@
     
     ?></h2>
     <!-- /wp:heading -->
-    <!-- wp:separator {"style":{"color":{"background":"#ededed"}},"className":"is-style-faded"} -->
-    <hr class="wp-block-separator has-text-color has-alpha-channel-opacity has-background is-style-faded" style="background-color:#ededed;color:#ededed"/>
+    <!-- wp:separator {"backgroundColor":"accent","className":"is-style-faded"} -->
+    <hr class="wp-block-separator has-text-color has-accent-color has-alpha-channel-opacity has-accent-background-color has-background is-style-faded"/>
     <!-- /wp:separator -->
     <!-- wp:paragraph {"align":"center","textColor":"secondary","className":"fw-300","fontSize":"medium"} -->
     <p class="has-text-align-center fw-300 has-secondary-color has-text-color has-medium-font-size"><?php esc_html_e( 'WeCodeArt Themes will look amazing on any device.', 'wecodeart' ); ?></p>

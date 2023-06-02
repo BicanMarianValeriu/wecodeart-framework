@@ -10,42 +10,53 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ camelCase)
 /* harmony export */ });
 /**
  * camelCase
- * @param {string} str String that isn't camel-case, e.g., CAMeL_CaSEiS-harD
- * @return {string} String converted to camel-case, e.g., camelCaseIsHard
+ * @param 	{string} str String that isn't camel-case, e.g., CAMeL_CaSEiS-harD
+ * @return 	{string} String converted to camel-case, e.g., camelCaseIsHard
  */
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (str => `${str.charAt(0).toLowerCase()}${str.replace(/[\W_]/g, '|').split('|').map(part => `${part.charAt(0).toUpperCase()}${part.slice(1)}`).join('').slice(1)}`);
+function camelCase(str) {
+  return str.replace(/[\W_]/g, '|').split('|').map((part, index) => {
+    const isFirstPart = index === 0;
+    const capitalizedPart = part.charAt(0).toUpperCase() + part.slice(1);
+    return isFirstPart ? part.toLowerCase() : capitalizedPart;
+  }).join('');
+}
 
 /***/ }),
 
-/***/ "./src/js/frontend/helpers/createParams.js":
-/*!*************************************************!*\
-  !*** ./src/js/frontend/helpers/createParams.js ***!
-  \*************************************************/
+/***/ "./src/js/frontend/helpers/getParents.js":
+/*!***********************************************!*\
+  !*** ./src/js/frontend/helpers/getParents.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ getParents)
 /* harmony export */ });
 /**
- * Generate String Params
- * @param   object 
- * @return  {string}
+ * Get element parents
+ * @param   {object/string} opts
+ * @return  {object/string}
  */
-/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__(query) {
-  let params = '';
+function getParents(elem, selector) {
+  const parents = [];
 
-  for (let key in query) {
-    if (params !== '') params += '&';
-    params += key + '=' + encodeURIComponent(query[key]);
+  while (elem && elem !== document) {
+    if (selector && elem.matches(selector)) {
+      parents.push(elem);
+    } else if (!selector) {
+      parents.push(elem);
+    }
+
+    elem = elem.parentNode;
   }
 
-  return params;
+  return parents;
 }
 ;
 
@@ -105,6 +116,63 @@ const handleBodyJSClass = () => {
 
 /***/ }),
 
+/***/ "./src/js/frontend/helpers/paramsCreate.js":
+/*!*************************************************!*\
+  !*** ./src/js/frontend/helpers/paramsCreate.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * Generate String Params
+ * @param   object 
+ * @return  {string}
+ */
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__(query) {
+  return Object.entries(query).map(_ref => {
+    let [key, value] = _ref;
+    return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+  }).join('&');
+}
+;
+
+/***/ }),
+
+/***/ "./src/js/frontend/helpers/paramsUpdate.js":
+/*!*************************************************!*\
+  !*** ./src/js/frontend/helpers/paramsUpdate.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * Update String Params
+ * @param  {string} uri The URI to update
+ * @param  {string} key The parameter key to update
+ * @param  {string} value The new value for the parameter
+ * @return {string} The updated URI
+ */
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((uri, key, value) => {
+  const re = new RegExp(`([?&])${key}=.*?(&|$)`, "i");
+  const separator = uri.includes('?') ? "&" : "?";
+
+  if (uri.match(re)) {
+    return uri.replace(re, `$1${key}=${value}$2`);
+  }
+
+  return uri + separator + `${key}=${value}`;
+});
+
+/***/ }),
+
 /***/ "./src/js/frontend/helpers/parseData.js":
 /*!**********************************************!*\
   !*** ./src/js/frontend/helpers/parseData.js ***!
@@ -161,35 +229,6 @@ function require(bundles, bundleIds, callbackFn) {
   loadJs.ready(bundleIds, callbackFn);
 }
 ;
-
-/***/ }),
-
-/***/ "./src/js/frontend/helpers/updateParams.js":
-/*!*************************************************!*\
-  !*** ./src/js/frontend/helpers/updateParams.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/**
- * Update String Params
- * @param  {object}
- * @return {string}
- */
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((uri, key, value) => {
-  const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-  const separator = uri.indexOf('?') !== -1 ? "&" : "?";
-
-  if (uri.match(re)) {
-    return uri.replace(re, '$1' + key + "=" + value + '$2');
-  }
-
-  return uri + separator + key + "=" + value;
-});
 
 /***/ }),
 
@@ -427,16 +466,6 @@ __webpack_require__.r(__webpack_exports__);
  * @author 	Bican Marian Valeriu
  * @version 1.0.0
  */
-const destruct = function (obj) {
-  for (var _len = arguments.length, keys = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    keys[_key - 1] = arguments[_key];
-  }
-
-  return keys.reduce((a, c) => ({ ...a,
-    [c]: obj[c]
-  }), {});
-};
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
   const {
     Component
@@ -519,17 +548,38 @@ const destruct = function (obj) {
     static renderToString() {
       let string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       let variables = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      let rxp = /{{([^}]+)}}/g,
-          curMatch;
 
-      while (curMatch = rxp.exec(string)) {
-        const trimd = curMatch[1].trim();
-        const found = destruct(variables, trimd);
-        if (found[trimd] === undefined) continue;
-        string = string.replace(new RegExp(`{{${curMatch[1]}}}`, 'g'), found[trimd]);
+      const destruct = (obj, v) => v.split(/\.|\|/).reduce((v, k) => v === null || v === void 0 ? void 0 : v[k], obj); // Multiple
+
+
+      const rxp = /{{([^}]+)}}/g;
+      let match;
+
+      while (match = rxp.exec(string)) {
+        const expression = match[1];
+        const value = destruct(variables, expression.trim());
+        if (value === undefined) continue;
+        string = string.replace(new RegExp(`{{${expression}}}`, 'g'), value);
       }
 
       return string;
+    }
+    /**
+     * Render variables to HTML Object
+     *
+     * @param 	{string} string 	HTML String
+     * @param 	{object} variables	Data to be rendered into the string
+     *
+     * @return 	{HTMLElement}
+     */
+
+
+    static renderToHTML() {
+      let string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      let variables = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = Template.renderToString(string, variables);
+      return wrapper.firstChild;
     }
 
   }
@@ -979,11 +1029,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(loadjs__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _helpers_requireJs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/requireJs */ "./src/js/frontend/helpers/requireJs.js");
 /* harmony import */ var _helpers_parseData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./helpers/parseData */ "./src/js/frontend/helpers/parseData.js");
-/* harmony import */ var _helpers_createParams__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/createParams */ "./src/js/frontend/helpers/createParams.js");
-/* harmony import */ var _helpers_updateParams__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helpers/updateParams */ "./src/js/frontend/helpers/updateParams.js");
-/* harmony import */ var _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./helpers/hasScrollbar */ "./src/js/frontend/helpers/hasScrollbar.js");
-/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
+/* harmony import */ var _helpers_paramsCreate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/paramsCreate */ "./src/js/frontend/helpers/paramsCreate.js");
+/* harmony import */ var _helpers_paramsUpdate__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helpers/paramsUpdate */ "./src/js/frontend/helpers/paramsUpdate.js");
+/* harmony import */ var _helpers_getParents__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./helpers/getParents */ "./src/js/frontend/helpers/getParents.js");
+/* harmony import */ var _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./helpers/hasScrollbar */ "./src/js/frontend/helpers/hasScrollbar.js");
+/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./../../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
 // WeCodeArt
+
 
 
 
@@ -1018,10 +1070,11 @@ function filterLog(route, func, args) {
    */
   wecodeart.plugins = {};
   wecodeart.fn = {
-    hasScrollbar: _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_8__["default"],
-    createParams: _helpers_createParams__WEBPACK_IMPORTED_MODULE_6__["default"],
-    updateParams: _helpers_updateParams__WEBPACK_IMPORTED_MODULE_7__["default"],
+    hasScrollbar: _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__["default"],
+    createParams: _helpers_paramsCreate__WEBPACK_IMPORTED_MODULE_6__["default"],
+    updateParams: _helpers_paramsUpdate__WEBPACK_IMPORTED_MODULE_7__["default"],
     getOptions: _helpers_parseData__WEBPACK_IMPORTED_MODULE_5__["default"],
+    getParents: _helpers_getParents__WEBPACK_IMPORTED_MODULE_8__["default"],
     requireJs: _helpers_requireJs__WEBPACK_IMPORTED_MODULE_4__["default"],
     loadJs: (loadjs__WEBPACK_IMPORTED_MODULE_3___default())
   };
@@ -1044,11 +1097,11 @@ function filterLog(route, func, args) {
       init: () => {
         var _wecodeart$locale;
 
-        (0,_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_8__.handleBodyJSClass)();
-        (0,_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_8__.handleDocumentScrolled)();
-        (0,_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_8__.handleDocumentScrollbar)();
-        window.onresize = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_8__.handleDocumentScrollbar;
-        window.onscroll = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_8__.handleDocumentScrolled; // Handle Skip Links
+        (0,_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleBodyJSClass)();
+        (0,_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleDocumentScrolled)();
+        (0,_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleDocumentScrollbar)();
+        window.onresize = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleDocumentScrollbar;
+        window.onscroll = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleDocumentScrolled; // Handle Skip Links
 
         let skipLinkTarget = document.querySelector('main'),
             sibling,

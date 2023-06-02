@@ -3,48 +3,6 @@
 	"version": 2,
 	"customTemplates": [
 		{
-			"name": "product-search-results",
-			"title": "Product Search Results",
-			"postTypes": [
-				"product"
-			]
-		},
-		{
-			"name": "taxonomy-product_cat",
-			"title": "Products by Category",
-			"postTypes": [
-				"product"
-			]
-		},
-		{
-			"name": "taxonomy-product_tag",
-			"title": "Products by Tag",
-			"postTypes": [
-				"product"
-			]
-		},
-		{
-			"name": "taxonomy-product_attribute",
-			"title": "Product attribute",
-			"postTypes": [
-				"product"
-			]
-		},
-		{
-			"name": "archive-product",
-			"title": "Product Catalog",
-			"postTypes": [
-				"product"
-			]
-		},
-		{
-			"name": "single-product",
-			"title": "Product Single",
-			"postTypes": [
-				"product"
-			]
-		},
-		{
 			"name": "page-sidebar",
 			"title": "Page - Sidebar",
 			"postTypes": [

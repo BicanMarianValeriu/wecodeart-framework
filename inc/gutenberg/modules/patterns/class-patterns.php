@@ -46,9 +46,7 @@ class Patterns implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->set( [
-			'with_block_patterns' => Patterns\Condition::class,
-		] );
+		wecodeart( 'conditionals' )->set( 'with_block_patterns', Patterns\Condition::class );
 
 		return [ 'with_block_patterns' ];
 	}

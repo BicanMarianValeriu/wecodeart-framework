@@ -74,7 +74,11 @@ class Faq extends Dynamic {
 			}
 		}
 
-		return $dom->saveHtml();
+		$content	= new \WP_HTML_Tag_Processor( $dom->saveHtml() );
+		$content->next_tag();
+		$content->add_class( 'wp-block-details' );
+
+		return (string) $content;
 	}
 
 	/**
@@ -84,28 +88,29 @@ class Faq extends Dynamic {
 	 */
 	public function styles(): string {
 		return '
-			.wp-block-yoast-faq-block {
+			.wp-block-details {
 				--wp--faq--padding-y: 1rem;
 				--wp--faq--padding-x: 2rem;
 				--wp--faq--padding: var(--wp--faq--padding-y) var(--wp--faq--padding-x);
 				--wp--faq--chevron-size: .4rem;
 				--wp--faq--chevron-color: currentColor;
 				--wp--faq--chevron-transition: .25s transform ease;
-				--wp--faq--border: 1px solid var(--wp--gray-300);
+				--wp--faq--border: 1px solid var(--wp--preset--color--accent);
 				border: var(--wp--faq--border);
 			}
-			.wp-block-yoast-faq-block details + details {
+			.wp-block-details details + details {
 				border-top: var(--wp--faq--border);
 			}
-			.wp-block-yoast-faq-block summary {
+			.wp-block-details summary {
 				position: relative;
 				display: block;
 				padding: var(--wp--faq--padding);
 				font-size: var(--wp--preset--font-size--normal);
 				font-weight: 700;
+				transition: background-color .5s ease-in-out;
 				cursor: pointer;
 			}
-			.wp-block-yoast-faq-block summary::before {
+			.wp-block-details summary::before {
 				content: "";
 				position: absolute;
 				top: calc(50% - var(--wp--faq--chevron-size));
@@ -117,21 +122,21 @@ class Faq extends Dynamic {
 				transform-origin: .125em 50%;
 				transition: var(--wp--faq--chevron-transition);
 			}
-			.wp-block-yoast-faq-block summary:hover,
-			.wp-block-yoast-faq-block summary:focus,
-			.wp-block-yoast-faq-block details[open] summary {
-				background-color: var(--wp--gray-100);
+			.wp-block-details summary:hover,
+			.wp-block-details summary:focus,
+			.wp-block-details details[open] summary {
+				background-color: var(--wp--preset--color--accent);
 			}
-			.wp-block-yoast-faq-block details[open] summary {
+			.wp-block-details details[open] summary {
 				border-bottom: var(--wp--faq--border);
 			}
-			.wp-block-yoast-faq-block details[open] > summary::before {
+			.wp-block-details details[open] > summary::before {
 				transform: rotate(90deg);
 			}
-			.wp-block-yoast-faq-block details summary::-webkit-details-marker {
+			.wp-block-details details summary::-webkit-details-marker {
 				display: none;
 			}
-			.wp-block-yoast-faq-block .schema-faq-answer {
+			.wp-block-details *[class*="-answer"] {
 				padding: var(--wp--faq--padding);
 				margin: 0;
 			}

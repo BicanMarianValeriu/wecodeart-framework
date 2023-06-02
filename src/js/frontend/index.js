@@ -5,8 +5,9 @@ import './plugins/wecodeart-Template';
 import loadJs from 'loadjs';
 import requireJs from './helpers/requireJs';
 import getOptions from './helpers/parseData';
-import createParams from './helpers/createParams';
-import updateParams from './helpers/updateParams';
+import createParams from './helpers/paramsCreate';
+import updateParams from './helpers/paramsUpdate';
+import getParents from './helpers/getParents';
 import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled } from './helpers/hasScrollbar';
 
 // Styles
@@ -35,6 +36,7 @@ function filterLog(route, func, args) {
 		createParams,
 		updateParams,
 		getOptions,
+		getParents,
 		requireJs,
 		loadJs
 	};

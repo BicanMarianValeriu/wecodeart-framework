@@ -9,15 +9,15 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		1.0
- * @version		5.5.5
+ * @version		6.1.2
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Gutenberg;
 use WeCodeArt\Singleton;
 use WeCodeArt\Core;
 use WeCodeArt\Admin;
+use WeCodeArt\Gutenberg;
 use WeCodeArt\Config;
 use WeCodeArt\Config\Exceptions\BindingResolutionException;
 
@@ -293,6 +293,7 @@ function wecodeart_asset( string $type, string $name ) {
  * Echo options from the options database.
  *
  * @since   5.0.0
+ * @since   6.1.2
  *
  * @param   string  $key        Option name.
  * @param   string  $default    Default value.
@@ -301,10 +302,10 @@ function wecodeart_asset( string $type, string $name ) {
  */
 function wecodeart_option( $key, $default = false, $setting = null, $use_cache = true ) {
     if ( is_array( $key ) ) {
-        return Admin::update_options( $key, $setting );
+        return wecodeart( 'options' )::set( $key, $setting );
     }
 
-    return Admin::get_option( $key, $default, $setting, $use_cache );
+    return wecodeart( 'options' )::get( $key, $default, $setting, $use_cache );
 }
 
 /**
@@ -355,34 +356,40 @@ $config = Config::get_config();
 /**
  * Before Setup Hook
  *
- * @since 4.0.1
+ * @since   4.0.1
  */
 do_action( 'wecodeart/setup/before', $config );
 
 /**
- * Load Setup
+ * Theme Setup
  */
 require_once __DIR__ . '/setup.php';
 
 /**
  * After Setup Hook
  *
- * @since 4.0.1
+ * @since   4.0.1
  */
 do_action( 'wecodeart/setup/after', $theme );
 
+/**
+ * Theme Load
+ *
+ * @since   4.0.9
+ */
 $theme->load();
     
 /**
  * Theme Loaded Hook
  *
  * @since   4.0.9
- * @version 5.4.5
  */
 do_action( 'wecodeart/theme/loaded', $theme );
 
 /**
  * Load Support/Integrations
+ *
+ * @since   unknown
  */
 wecodeart( 'integrations' )->load();
 

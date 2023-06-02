@@ -21,20 +21,20 @@ const {
         Button,
         Spinner,
         Placeholder,
+        Card,
+        CardBody
     }
 } = wp;
-
-const { pickBy } = lodash;
 
 export const License = (props) => {
     const {
         isRequesting,
         createNotice,
-        saveEntityRecord,
-        wecodeartSettings,
+        saveSettings,
+        settings,
     } = props;
 
-    if (isRequesting || !wecodeartSettings) {
+    if (isRequesting || !settings) {
         return (
             <Placeholder {...{
                 style: { marginTop: 20 },
@@ -45,7 +45,8 @@ export const License = (props) => {
         );
     }
 
-    const fields = applyFilters('wecodeart.admin.licensePanel.fields', [
+    // Deprecated Filter
+    let fields = applyFilters('wecodeart.admin.licensePanel.fields', [
         {
             id: 'theme_api_key',
             label: 'WeCodeArt Framework',
@@ -53,88 +54,102 @@ export const License = (props) => {
         }
     ], props);
 
+    fields = applyFilters('wecodeart.admin.tabs.license.fields', fields, props);
+
     const [loading, setLoading] = useState(null);
     const extensionOpts = fields.map(a => a.id);
-    const apiOptions = pickBy(wecodeartSettings, (v, k) => extensionOpts.includes(k));
+    const apiOptions = Object.fromEntries(Object.entries(settings).filter(([key]) => extensionOpts.includes(key)));
+
     const [formData, setFormData] = useState(apiOptions);
+    const [hasChanges, setHasChanges] = useState(false);
 
     const handleNotice = () => {
         setLoading(false);
+        setHasChanges(false);
+
         return createNotice('success', __('API Keys Saved.', 'wecodeart'));
     };
 
+    const handleInputChange = ({ target }) => {
+        const { id, value } = target;
+        setFormData({ ...formData, [id]: value });
+        setHasChanges(true);
+    };
+
+    // Deprecated Action
     doAction('wecodeart.admin.licensePanel', props);
+    doAction('wecodeart.admin.tabs.license', props);
 
     return (
         <>
-            <p>
-                <RawHTML>
-                    {sprintf(
-                        __('Enter your license keys here to receive updates. If your license keys are expired, please %1$srenew your licenses%2$s.', 'wecodeart'),
-                        '<a href="https://www.wecodeart.com/" target="_blank">',
-                        '</a>'
-                    )}
-                </RawHTML>
-            </p>
-            <table className="wecodeart-table table table-bordered table-hover" style={{ width: '100%' }}>
-                <thead>
-                    <tr style={{ textAlign: 'left' }}>
-                        <th>{__('Product', 'wecodeart')}</th>
-                        <th>{__('License Key', 'wecodeart')}</th>
-                        <th>{__('Actions', 'wecodeart')}</th>
-                        <th>{__('Status', 'wecodeart')}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {fields.map(({ id, label, externalUrl = '' }) => {
-                        return (
-                            <tr>
-                                <td><strong>{label}</strong></td>
-                                <td>
-                                    <BaseControl className="wecodeart-button-field" {...{ id, key: id }}>
-                                        <input
-                                            id={id}
-                                            type="text"
-                                            value={formData[id]}
-                                            placeholder={__('API Key', 'wecodeart')}
-                                            disabled={wecodeartSettings[id] === 'FREEMIUM'}
-                                            onChange={({ target: { value } }) => setFormData({ ...formData, [id]: value })}
-                                        />
-                                    </BaseControl>
-                                </td>
-                                <td>
-                                    <div className="wecodeart-button-group">
-                                        {externalUrl !== '' &&
-                                            <ExternalLink href={externalUrl} className="wecodeart-button-group__item">
-                                                {__('Get API Key', 'wecodeart')}
-                                            </ExternalLink>
-                                        }
-                                    </div>
-                                </td>
-                                <td style={{
-                                    backgroundColor: '#d7ffd2'
-                                }}>{sprintf(__('Days: %s', 'wecodeart'), __('Unlimited', 'wecodeart'))}</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-            <p>
-                <Button
-                    className="button"
-                    isPrimary
-                    isLarge
-                    icon={loading && <Spinner />}
-                    onClick={() => {
-                        setLoading(true);
-                        let value = {};
-                        Object.keys(formData).map(k => value = { ...value, [k]: formData[k] === '' ? 'unset' : formData[k] });
-                        saveEntityRecord('wecodeart', 'settings', value).then(handleNotice);
-                    }}
-                >
-                    {loading ? '' : __('Save', 'wecodeart')}
-                </Button>
-            </p>
+            <Card className="my-3 shadow-none">
+                <CardBody>
+                    <RawHTML>
+                        {sprintf(
+                            __('Enter your license keys here to receive updates. If your license keys are expired, please %1$srenew your licenses%2$s.', 'wecodeart'),
+                            '<a href="https://www.wecodeart.com/" target="_blank">',
+                            '</a>'
+                        )}
+                    </RawHTML>
+                </CardBody>
+            </Card>
+            <div className="table-responsive">
+                <table className="table table-bordered table-hover">
+                    <thead>
+                        <tr style={{ textAlign: 'left' }}>
+                            <th>{__('Product', 'wecodeart')}</th>
+                            <th>{__('License Key', 'wecodeart')}</th>
+                            <th>{__('Actions', 'wecodeart')}</th>
+                            <th>{__('Status', 'wecodeart')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {fields.map(({ id, label, externalUrl = '' }) => {
+                            return (
+                                <tr>
+                                    <td><strong>{label}</strong></td>
+                                    <td>
+                                        <BaseControl {...{ id, key: id }}>
+                                            <input
+                                                id={id}
+                                                type="text"
+                                                value={formData[id]}
+                                                placeholder={__('API Key', 'wecodeart')}
+                                                disabled={settings[id] === 'FREEMIUM'}
+                                                onChange={handleInputChange}
+                                            />
+                                        </BaseControl>
+                                    </td>
+                                    <td>
+                                        <div className="wecodeart-button-group">
+                                            {externalUrl !== '' &&
+                                                <ExternalLink href={externalUrl} className="wecodeart-button-group__item">
+                                                    {__('Get API Key', 'wecodeart')}
+                                                </ExternalLink>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td style={{
+                                        backgroundColor: '#d7ffd2'
+                                    }}>{sprintf(__('Days: %s', 'wecodeart'), __('Unlimited', 'wecodeart'))}</td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+            <Button
+                className="button"
+                isPrimary
+                icon={loading && <Spinner />}
+                onClick={() => {
+                    setLoading(true);
+                    saveSettings(formData, handleNotice);
+                }}
+                {...{ disabled: loading || !hasChanges }}
+            >
+                {loading ? '' : __('Save', 'wecodeart')}
+            </Button>
         </>
     );
 };

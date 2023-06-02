@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.4.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Support;
@@ -182,7 +182,7 @@ final class Assets implements Integration {
 		// Valid Args
 		$data = wp_array_slice_assoc( $data, [ 'path', 'deps', 'version', 'media', 'rtl', 'inline', 'load' ] );
 		$data = wp_parse_args( $data, [
-			'handle' 	=> '',
+			'handle' 	=> $handle,
 			'src'    	=> '',
 			'deps'   	=> [],
 			'version' 	=> wecodeart( 'version' ),
@@ -191,7 +191,7 @@ final class Assets implements Integration {
 
 		// Registration Logic
 		$args = [
-			$handle,
+			get_prop( $data, 'handle' ),
 			get_prop( $data, 'path', false ),
 			get_prop( $data, 'deps' ),
 			get_prop( $data, 'version' ),
@@ -217,7 +217,7 @@ final class Assets implements Integration {
 		// Valid Args
 		$data = wp_array_slice_assoc( $data, [ 'path', 'deps', 'version', 'footer', 'inline', 'locale', 'where', 'load' ] );
 		$data = wp_parse_args( $data, [
-			'handle' 	=> '',
+			'handle' 	=> $handle,
 			'src'    	=> '',
 			'deps'   	=> [],
 			'version' 	=> wecodeart( 'version' ),
@@ -226,7 +226,7 @@ final class Assets implements Integration {
 
 		// Registration Logic
 		$args = [
-			$handle,
+			get_prop( $data, 'handle' ),
 			get_prop( $data, 'path', false ),
 			get_prop( $data, 'deps' ),
 			get_prop( $data, 'version' ),
@@ -244,16 +244,23 @@ final class Assets implements Integration {
 	 * Load Assets
 	 *
 	 * @since	6.0.0
-	 * @version	6.0.0
+	 * @version	6.1.2
 	 *
      * @return void
 	 */
 	public function enqueue(): void {
-		$should_load = function( $data ) {
+		global $_wp_current_template_content;
+		$blocks_1   = parse_blocks( get_post_field( 'post_content', get_the_ID() ) );
+		$blocks_1 	= wp_list_pluck( _flatten_blocks( $blocks_1 ), 'blockName' );
+		$blocks_2   = parse_blocks( $_wp_current_template_content );
+		$blocks_2 	= wp_list_pluck( _flatten_blocks( $blocks_2 ), 'blockName' );
+		$blocks     = array_unique( array_merge( $blocks_2, $blocks_1 ) );
+
+		$should_load = function( $data ) use( $blocks ) {
 			$condition = get_prop( $data, [ 'load' ], true );
 
 			if( is_callable( $condition ) ) {
-				$condition = call_user_func( $condition );
+				$condition = call_user_func( $condition, $blocks );
 			}
 
 			return (bool) $condition;

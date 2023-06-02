@@ -1,11 +1,18 @@
 /**
  * WordPress dependencies
  */
-const { useSelect, useDispatch } = wp.data;
-const { SnackbarList } = wp.components;
+const {
+    data: {
+        useSelect,
+        useDispatch
+    },
+    components: {
+        SnackbarList
+    },
+} = wp;
 
 export default () => {
-    const notices = useSelect((select) => select('core/notices').getNotices().filter((n) => n.type === 'snackbar'), []);
+    const notices = useSelect((select) => select('core/notices').getNotices().filter(({ type }) => type === 'snackbar'), []);
     const { removeNotice } = useDispatch('core/notices');
     return (
         <SnackbarList

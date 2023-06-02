@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.8.1
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt;
@@ -18,7 +18,10 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Admin\Upgrade;
 use WeCodeArt\Admin\Request;
+use WeCodeArt\Admin\Settings;
+use WeCodeArt\Admin\Installer;
 use WeCodeArt\Admin\Activation;
 use WeCodeArt\Admin\Notifications;
 use function WeCodeArt\Functions\get_prop;
@@ -32,148 +35,28 @@ class Admin {
 	use Asset;
 
 	const NAMESPACE = 'wecodeart/v1';
+	CONST CACHE_KEY = 'wecodeart/transient/notifications';
 
 	/**
 	 * Send to Constructor
 	 */
 	public function init() {
 		\add_action( 'rest_api_init', 			[ $this, 'register_routes' ] );
-		\add_action( 'rest_api_init', 			[ $this, 'register_settings' ] );
-		\add_action( 'admin_init',				[ $this, 'register_settings' ] );
 		\add_action( 'admin_menu',				[ $this, 'register_menu_page' ] );
-		\add_action( 'after_switch_theme', 		[ $this, 'insert_default_settings' ] );
 
+		Upgrade::get_instance();
+		Settings::get_instance();
 		Activation::get_instance();
 		Notifications::get_instance();
-	}
 
-	/**
-	 * Takes an array of new settings, merges them with the old settings, and pushes them into the database.
-	 *
-	 * @since 	5.0.0
-	 *
-	 * @param 	string|array 	$new		New settings. Can be a string, or an array.
-	 * @param 	string       	$setting	Optional. Settings field name. Default is 'wecodeart-settings'.
-	 * @return 	bool 						`true` if option was updated, `false` otherwise.
-	 */
-	public static function update_options( $new = '', $setting = 'wecodeart-settings' ) {
-
-		$old = get_option( $setting );
-
-		$settings = wp_parse_args( $new, $old );
-
-		// Allow settings to be deleted.
-		foreach ( $settings as $key => $value ) {
-			if ( 'unset' === $value ) {
-				unset( $settings[ $key ] );
-			}
-		}
-
-		return update_option( $setting, $settings );
-	}
-
-	/**
-	 * Return option from the options table and cache result.
-	 *
-	 * Applies `wecodeart/get_option/$key` and `wecodeart_options` filters.
-	 *
-	 * Values pulled from the database are cached on each request, so a second request for the same value won't cause a
-	 * second DB interaction.
-	 *
-	 * @since 	5.0.0
-	 * @version 5.4.5
-	 *
-	 * @param   string  $key       	Option name.
-	 * @param   string  $setting   	Optional. Settings field name. Eventually defaults to `wecodeart` if not
-	 *                          	passed as an argument.
-	 * @param   bool    $use_cache 	Optional. Whether to use the Genesis cache value or not. Default is true.
-	 * @return  mixed   			The value of the `$key` in the database, or the return from
-	 * `wecodeart/get_option/{$key}` short circuit filter if not `null`.
-	 */
-	public static function get_option( $key, $default = false, $setting = null, $use_cache = true ) {
-		// The default is set here, so it doesn't have to be repeated in the function arguments for option_value() too.
-		$setting = $setting ?: 'wecodeart-settings';
-
-		// Allow child theme to short circuit this function.
-		$pre = apply_filters( "wecodeart/options/{$key}", null, $setting );
-		if ( null !== $pre ) {
-			return $pre;
-		}
-
-		// If we need to bypass the cache.
-		if ( ! $use_cache ) {
-			$options = get_option( $setting );
-
-			if ( ! is_array( $options ) || ! array_key_exists( $key, $options ) ) {
-				return $default;
-			}
-
-			return is_array( $options[ $key ] ) ? $options[ $key ] : wp_kses_decode_entities( $options[ $key ] );
-		}
-
-		// Setup caches.
-		static $settings_cache = [];
-		static $options_cache  = [];
-
-		// Check options cache.
-		if ( isset( $options_cache[ $setting ][ $key ] ) ) {
-			// Option has been cached.
-			return $options_cache[ $setting ][ $key ];
-		}
-
-		// Check settings cache.
-		if ( isset( $settings_cache[ $setting ] ) ) {
-			// Setting has been cached.
-			$options = apply_filters( 'wecodeart/options', $settings_cache[ $setting ], $setting );
-		} else {
-			// Set value and cache setting.
-			$settings_cache[ $setting ] = apply_filters( 'wecodeart/options', get_option( $setting ), $setting );
-			$options                    = $settings_cache[ $setting ];
-		}
-
-		// Check for non-existent option.
-		if ( ! is_array( $options ) || ! array_key_exists( $key, (array) $options ) ) {
-			// Cache non-existent option.
-			$options_cache[ $setting ][ $key ] = $default;
-		} else {
-			// Option has not previously been cached, so cache now.
-			$options_cache[ $setting ][ $key ] = is_array( $options[ $key ] ) ? $options[ $key ] : wp_kses_decode_entities( $options[ $key ] );
-		}
-
-		return $options_cache[ $setting ][ $key ];
-	}
-
-	/**
-	 * Inserts the default WeCodeArt settings values into the options table, if they don't already exist.
-	 *
-	 * @since 	5.0.0
-	 *
-	 * @return bool True of setting added, false otherwise.
-	 */
-	public function insert_default_settings() {
-		return add_option( 'wecodeart-settings', [
-			'theme_api_key'	=> 'FREEMIUM',
-			'theme_version'	=> wecodeart( 'version' ),
-		], '', true );
-	}
-
-	/**
-	 * Register the default WeCodeArt settings.
-	 *
-	 * @since 	5.0.0
-	 * @version	5.4.5
-	 *
-	 * @return 	bool True of setting added, false otherwise.
-	 */
-	public function register_settings() {
-		return register_setting( 'wecodeart', 'wecodeart-settings' );
+		new Installer\Plugin\Ajax();
 	}
 
 	/**
 	 * Register Rest Routes
 	 *
 	 * @since   5.0.0
-	 * @version 6.0.0
+	 * @version 6.1.2
 	 */
 	public function register_routes() {
 		register_rest_route( self::NAMESPACE, '/settings', [
@@ -186,11 +69,11 @@ class Admin {
 			
 				// Update if params with values
 				if( ! empty( $params ) ) {
-					self::update_options( array_filter( $params ) );
+					wecodeart( 'options' )::set( array_filter( $params ) );
 				}
 
 				// Get values, updated above
-				$data = get_option( 'wecodeart-settings' );
+				$data = wecodeart( 'options' )::all();
 
 				// If params provided, return only their values
 				if( $request->get_param( '_filter' ) ) {
@@ -208,18 +91,21 @@ class Admin {
 			'methods'  => \WP_REST_Server::READABLE,
 			'callback' => function( $request ) {
 				// Get the response.
-				$data 	= [];
 				$url 	= 'https://raw.githubusercontent.com/BicanMarianValeriu/wecodeart-framework/master/notifications.json';
-				if ( false === ( $data = get_transient( 'wecodeart/transient/notifications' ) ) ) {
+				if ( false === ( $data = get_transient( self::CACHE_KEY ) ) ) {
 					$request	= new Request( $url, [] );
 					$request->send( $request::METHOD_GET );
 		
 					$results = $request->get_response_body( true );
 					
-					// Clear and sanitize data.
-					$data['items'] = array_map( [ __CLASS__, 'sanitize_notification' ], get_prop( $results, [ 'items' ], [] ) );
+					if( ! empty( $results ) ) {
+						// Clear and sanitize data.
+						$data = [
+							'items' => array_map( [ __CLASS__, 'sanitize_notification' ], get_prop( $results, [ 'items' ], [] ) )
+						];
+					}
 		
-					set_transient( 'wecodeart/transient/notifications', $data, MINUTE_IN_SECONDS );
+					set_transient( self::CACHE_KEY, $data, MINUTE_IN_SECONDS );
 				}
 
 				return rest_ensure_response( $data );
@@ -260,7 +146,7 @@ class Admin {
 	 * Load assets for option page.
 	 *
 	 * @since   1.2.0
-	 * @version	5.1.7
+	 * @version	6.1.2
 	 */
 	public function enqueue_assets() {
 		$version = wecodeart( 'version' );
@@ -275,7 +161,7 @@ class Admin {
 		wp_enqueue_script(
 			$this->make_handle(),
 			$this->get_asset( 'js', 'admin/admin' ),
-			[ 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-plugins', 'wp-components', 'wp-edit-post', 'wp-api', 'wp-editor', 'wp-hooks', 'lodash' ],
+			[ 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-plugins', 'wp-components', 'wp-edit-post', 'wp-api', 'wp-editor', 'wp-hooks' ],
 			$version,
 			true
 		);
@@ -287,7 +173,10 @@ class Admin {
 			],
 			'currentUser'	=> wp_get_current_user()->display_name,
 			'adminUrl'		=> untrailingslashit( esc_url_raw( admin_url() ) ),
+			'themeDirs'		=> wecodeart_config( 'paths' )
 		] );
+		
+		wp_set_script_translations( $this->make_handle(), 'wecodeart', wecodeart_config( 'directories' )['languages'] );
 	}
 
 	/**
@@ -297,7 +186,7 @@ class Admin {
      *
      * @return 	array
      */
-	private static function sanitize_notification( array $json = [] ): array {
+	protected static function sanitize_notification( array $json = [] ): array {
 		// Remove invalid properties.
 		$json = wp_array_slice_assoc( $json, [ 'type', 'title', 'content' ] );
 

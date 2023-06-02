@@ -9,7 +9,7 @@
  * @subpackage  WeCodeArt/Config
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.9.5
- * @version		5.4.5
+ * @version		6.1.2
  */
 
 namespace WeCodeArt;
@@ -156,6 +156,7 @@ class Config implements Configuration, ArrayAccess {
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet( $key ) {
         return $this->get( $key );
     }

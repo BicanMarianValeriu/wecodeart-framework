@@ -1,39 +1,97 @@
 // Required
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+// Vars
+$prefix: wca--;
+$enable-cssgrid: true;
+// Utils
 @import "~bootstrap/scss/maps";
 @import "~bootstrap/scss/mixins";
-// Grid / Utilities
+
+// CSS
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/containers";
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/utilities/api";
 @import "~bootstrap/scss/tables";
-@import "~bootstrap/scss/alert";
 @import "~bootstrap/scss/badge";
-@import "~bootstrap/scss/card";
 
-.appearance_page_wecodeart #wpcontent {
-	padding-left: 0;
+// General
+.appearance_page_wecodeart {
+	#wpcontent {
+		padding-left: 0;
+	}
+
+	.wca-notice {
+		margin: 0;
+
+		& + .wca-notice {
+			margin-top: 1rem;
+		}
+	}
 }
 
+// Admin
 .wecodeart-admin {
+	--wca--header--background: #2c3338;
+	--wca--header--color: #98A2B3;
 	--wca--body--background: #f1f5f9;
 	--wca--body--color: #111;
 	--wca--gutter: 12px;
 	--wca--border--color: #e2e4e7;
+	// Other
 	position: relative;
 	background-color: var(--wca--body--background);
 	color: var(--wca--body--color);
 
-	@media screen and (min-width: 783px) {
+	@include media-breakpoint-up( 'md' ) {
 		--wca--gutter: 50px;
 	}
+
+	/* Donate */
+	#donate-button {
+		@include media-breakpoint-up( 'md' ) {
+			text-align: right;
+		}
+
+		img {
+			max-width: 110px;
+		}
+	}
+
+	/* Layout */
+	.grid--layout {
+		--wca--columns: 1;
+
+		@include media-breakpoint-up( 'md' ) {
+			--wca--columns: 12;
+		}
+
+		@include media-breakpoint-up( 'xl' ) {
+			--wca--gap: 4rem;
+		}
+
+		.grid {
+			&__main {
+				@include media-breakpoint-up( 'lg' ) {
+					grid-column: 1 / span 8;
+				}
+			}
+			
+			&__side {
+				@include media-breakpoint-up( 'lg' ) {
+					grid-column: 9 / span 4;
+				}
+			}
+		}
+	}
 	
+	/* Panels */
 	.components-panel {
 		min-height: 100vh;
 		background-color: inherit;
+		border: 0;
 
 		.components-panel__header {
 			border: 0;
@@ -41,31 +99,33 @@
 			height: auto;
 			padding: 25px var(--wca--gutter);
 			margin: 0 calc(-1 * var(--wca--gutter));
+			background-color: var(--wca--header--background);
+			color: var(--wca--header--color);
 
 			h2 {
-				font-size: 35px;
+				font-size: 2rem;
 				font-weight: 300;
-				line-height: 1;
-				margin-bottom: 10px;
+				line-height: 1.2;
 			}
 
 			code {
-				margin-left: 5px;
+				margin-left: 15px;
 				border-radius: 2px;
-				font-size: 11px;
-				opacity: 0.7;
+				background-color: rgba(0,0,0,.2);
+				font-size: .6rem;
 			}
 
-			p {
-				color: #333;
-				font-size: 1.15rem;
+			form {
+				@include media-breakpoint-up( 'md' ) {
+					float: right;
+				}
 			}
 
 			.wecodeart-panel__header-hint {
-				font-size: 12px;
-				opacity: 0.4;
-				margin: 0 0 40px;
-				padding: 0;
+				font-size: .6rem;
+				margin: 0 0 20px;
+				color: white;
+				opacity: .5;
 			}
 		}
 
@@ -136,17 +196,33 @@
 	
 			.components-tab-panel {
 				&__tabs {
-					flex-direction: column;
 					padding: 15px 0;
 					border-right: 1px solid var(--wca--border--color);
 
 					&-item {
+						position: relative;
 						border: none;
 						margin-right: -1px;
 						color: var(--wca--body--color);
+						min-width: 180px;
+						min-width: max-content;
+
+						&::before {
+							position: absolute;
+							top: 0;
+							left: 0;
+							right: 0;
+							bottom: 0;
+							border: 1px solid var(--wca--border--color);
+							border-right: 0;
+						}
 
 						&.active-tab {
 							background-color: white;
+						}
+
+						& + button::before {
+							border-top: 0;
 						}
 					}
 				}
@@ -162,36 +238,9 @@
 			}
 		}
 	}
-	
-	/* Buttons */
-	.wecodeart-button-field {
-		label {
-			display: block;
-			font-weight: bold;
-		}
-		
-		input {
-			display: block;
-			width: 100%;
-			padding: 4px 8px;
-		}
-	}
-	
-	.wecodeart-button-group {
-		display: inline-flex;
-		align-items: center;
-		margin: 0;
-	
-		.is-primary {
-			padding: 0px 20px;
-			font-size: 14px;
-			margin-right: 10px;
-			margin-bottom: 0;
-		}
-	}
 
 	/* Table */
-	.wecodeart-table {
+	.table {
 		background-color: white;
 		border: 1px solid var(--wca--border--color);
 		border-collapse: collapse;
@@ -212,11 +261,76 @@
 		td {
 			border-top: 1px solid var(--wca--border--color);
 
+			label {
+				display: block;
+				font-weight: bold;
+			}
+			
+			input {
+				display: block;
+				width: 100%;
+				padding: 4px 8px;
+			}
+
 			strong {
 				color: #121212;
-				font-size: 16px;
+				font-size: 1rem;
 			}
 		}
+	}
+
+	/* Cards */
+	.grid--cards {
+		--wca--columns: 1;
+		--wca--gap: 1rem;
+
+		@include media-breakpoint-up( 'sm' ) {
+			--wca--columns: 2;
+		}
+	}
+
+	.components-card {
+		--wca--card-bg: var(--wca--white);
+		background-color: var(--wca--card-bg);
+		background-image: var(--wca--card-image, none);
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: bottom -55px right -10px;
+		margin: 0;
+
+		&[style] {
+			.components-card__body {
+				max-width: 75%;
+			}
+		}
+
+		&__body {
+			color: rgba(36,47,87,.7);
+		}
+	}
+	
+	/* Social */
+	.wp-block-social-links {
+		list-style: none;
+		justify-content: flex-start;
+
+		a {
+			display: block;
+			text-decoration: none;
+		}
+
+		svg {
+			display: block;
+		}
+	}
+
+	/* Controls */
+	.components-base-control {
+		max-width: 768px;
+	}
+
+	.components-range-control {
+		max-width: 620px;
 	}
 
 	/* Notices */

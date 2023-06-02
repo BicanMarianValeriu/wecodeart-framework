@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-04-10 17:37+0000\n"
+"PO-Revision-Date: 2023-05-27 08:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.5; wp-5.8.1\n"
+"X-Loco-Version: 2.6.4; wp-6.2.2\n"
 "X-Domain: wecodeart"
 
 #: views/blocks/post/comments.tpl.php:61
@@ -67,6 +67,11 @@ msgstr "100% Receptiv"
 msgid "[block rendering halted]"
 msgstr "[redării blocului a fost oprită]"
 
+#: inc/support/plugins/class-plugins.php:122
+#, php-format
+msgid "A bridge between WeCodeArt Framework and %s plugin."
+msgstr "O punte între WeCodeArt Framework și pluginul %s."
+
 #. Description of the theme
 msgid ""
 "A simple WordPress theme framework focused on SEO and speed (perfect 100% "
@@ -78,15 +83,47 @@ msgstr ""
 "completă a site-ului. De asemenea, funcționează perfect cu toate pluginurile "
 "generatore de pagini."
 
-#: inc/gutenberg/modules/styles/class-styles.php:301
-msgid "Accent"
-msgstr "Accent"
+#: inc/app.php:179
+#| msgid ""
+#| "Add Google Analytics, verify your Google Webmasters property and Google "
+#| "Adsense publisher with ease."
+msgid ""
+"Add Google Analytics, verify your Google Webmasters property and Google "
+"Adsense publisher account with ease."
+msgstr ""
+"Adăugați Google Analytics, verificați cu ușurință proprietatea Google "
+"Webmasters și contul de editor Google Adsense."
 
 #: inc/gutenberg/blocks/comment/class-title.php:106
 msgid "add one"
 msgstr "adaugă unul"
 
-#: inc/support/plugins/cf7/class-cf7.php:67
+#: inc/admin/installer/plugin/class-ajax.php:168
+msgid "All plugins activated successfully."
+msgstr "Toate pluginurile au fost activate cu succes."
+
+#: inc/admin/installer/plugin/class-ajax.php:216
+msgid "All plugins deactivated successfully."
+msgstr "Toate pluginurile au fost dezactivate cu succes."
+
+#: inc/admin/installer/plugin/class-ajax.php:184
+msgid "All plugins have failed to activate."
+msgstr "Toate pluginurile nu au reușit să se activeze."
+
+#: inc/admin/installer/plugin/class-ajax.php:232
+msgid "All plugins have failed to deactivate."
+msgstr "Toate pluginurile nu au reușit să se dezactiveze."
+
+#: inc/admin/installer/plugin/class-ajax.php:136
+msgid "All plugins have failed to install."
+msgstr "Toate pluginurile nu au reușit să se installeze."
+
+#: inc/admin/installer/plugin/class-ajax.php:120
+msgid "All plugins installed successfully."
+msgstr "Toate pluginurile instalate cu succes."
+
+#: inc/support/plugins/contactform7/class-contactform7.php:68
+#: inc/support/plugins/woocommerce/class-woocommerce.php:69
 msgid "Amazing news!"
 msgstr "Vesti uimitoare!"
 
@@ -132,10 +169,6 @@ msgstr "Comentand vei accepta %s."
 #: inc/gutenberg/blocks/comment/class-form.php:98
 msgid "Cancel reply"
 msgstr "Anulați răspunsul"
-
-#: inc/support/plugins/anr/class-anr.php:88
-msgid "Captcha 4WP support is enabled!"
-msgstr "Suportul Captcha 4WP este activat!"
 
 #: inc/gutenberg/blocks/query/class-title.php:122
 #, php-format
@@ -233,7 +266,7 @@ msgstr "Arhive zilnice: %s"
 msgid "Design"
 msgstr "Personalizări"
 
-#: inc/admin/class-admin.php:286
+#: inc/admin/class-admin.php:170
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -319,7 +352,8 @@ msgstr "Grupare"
 msgid "Gutenberg Ready"
 msgstr "Pregătită Gutenberg"
 
-#: inc/support/plugins/cf7/class-cf7.php:70
+#: inc/support/plugins/contactform7/class-contactform7.php:74
+#: inc/support/plugins/woocommerce/class-woocommerce.php:75
 msgid "here"
 msgstr "aici"
 
@@ -409,14 +443,9 @@ msgstr "Nu există arhive de afișat."
 msgid "No responses"
 msgstr "Fără răspunsuri"
 
-#: patterns/query-products-search.php:26
-msgid "No results found for your query."
-msgstr "Nu s-au găsit rezultate pentru interogarea dvs."
-
 #: patterns/query-default.php:31 patterns/query-default.php:32
 #: patterns/query-list.php:43 patterns/query-list.php:44
 #: patterns/query-overlay.php:24 patterns/query-overlay.php:25
-#: patterns/query-products.php:28
 msgid "No results."
 msgstr "Fără rezultate"
 
@@ -436,6 +465,12 @@ msgstr ""
 "Optimizată pentru a încărca foarte rapid (sub 1s GTMetrix), în orice "
 "dispozitiv și, de asemenea, pentru SEO."
 
+#: inc/support/plugins/class-plugins.php:118
+#, php-format
+msgid "Our theme comes pre-packaged with built-in support for the %s plugin."
+msgstr ""
+"Tema noastră vine pre-ambalată cu suport încorporat pentru pluginul %s."
+
 #: patterns/section-woo.php:17
 msgid "Out of the box WooCommerce Integration!"
 msgstr "Integrare WooCommerce din cutie!"
@@ -452,7 +487,7 @@ msgstr "Parolă"
 msgid "Pills"
 msgstr "Pastile"
 
-#: inc/app.php:126 inc/app.php:127
+#: inc/app.php:105 inc/app.php:106
 #: inc/gutenberg/blocks/media/class-image.php:93
 #: inc/gutenberg/blocks/media/class-text.php:77
 msgid "Placeholder"
@@ -461,6 +496,38 @@ msgstr "Substituent"
 #: inc/support/markup/class-markup.php:180
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
+
+#: inc/admin/installer/plugin/class-ajax.php:88
+msgid "Please define an action type."
+msgstr "Definiți un tip de acțiune."
+
+#: inc/admin/installer/plugin/class-ajax.php:172
+msgid "Plugin activated successfully."
+msgstr "Pluginul a fost activat cu succes."
+
+#: inc/admin/installer/plugin/class-ajax.php:220
+msgid "Plugin deactivated successfully."
+msgstr "Pluginul a fost dezactivat cu succes."
+
+#: inc/admin/installer/plugin/class-ajax.php:176
+msgid "Plugin failed to activate."
+msgstr "Pluginul nu a reușit să se activeze."
+
+#: inc/admin/installer/plugin/class-ajax.php:224
+msgid "Plugin failed to deactivate."
+msgstr "Pluginul nu a reușit să se dezactiveze."
+
+#: inc/admin/installer/plugin/class-ajax.php:128
+msgid "Plugin failed to install."
+msgstr "Nu s-a instalat pluginul."
+
+#: inc/admin/installer/plugin/class-ajax.php:124
+msgid "Plugin installed successfully."
+msgstr "Pluginul instalat cu succes."
+
+#: inc/admin/installer/plugin/class-ajax.php:71
+msgid "Plugins array is empty."
+msgstr "Matricea de pluginuri este goală."
 
 #: inc/gutenberg/blocks/query/class-title.php:154
 #, php-format
@@ -483,6 +550,14 @@ msgstr "Postat pe"
 #: patterns/section-posts.php:12
 msgid "Posts"
 msgstr "Postări"
+
+#: inc/support/plugins/rankmath/class-rankmath.php:65
+msgid ""
+"RankMath plugin support is enabled! Our theme works seamlessly with the best "
+"SEO plugin."
+msgstr ""
+"Suportul pentru pluginul RankMath este activat! Tema noastră funcționează "
+"perfect cu cel mai bun plugin SEO."
 
 #: patterns/query-default.php:23 patterns/query-list.php:31
 #| msgid "Read More"
@@ -561,6 +636,18 @@ msgstr "Planuri simple de prețuri pentru echipe de orice dimensiune."
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
+#: inc/admin/installer/plugin/class-ajax.php:180
+msgid "Some plugins activated successfully, others have failed."
+msgstr "Unele plugin-uri au fost activate cu succes, altele au eșuat."
+
+#: inc/admin/installer/plugin/class-ajax.php:228
+msgid "Some plugins deactivated successfully, others have failed."
+msgstr "Unele plugin-uri au fost dezactivate cu succes, altele au eșuat."
+
+#: inc/admin/installer/plugin/class-ajax.php:132
+msgid "Some plugins installed successfully, others have failed."
+msgstr "Unele plugin-uri au fost instalate cu succes, altele au eșuat."
+
 #: inc/gutenberg/blocks/comment/class-form.php:93
 msgid "Speak Your Mind"
 msgstr "Vorbesc din mintea ta"
@@ -599,7 +686,7 @@ msgstr "Arhive etichetă: %s"
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
-#: inc/admin/class-admin.php:240 inc/admin/class-admin.php:241
+#: inc/admin/class-admin.php:124 inc/admin/class-admin.php:125
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -671,6 +758,18 @@ msgstr "%s Utilizatori"
 msgid "View Themes"
 msgstr "Vedeți Teme"
 
+#: inc/support/plugins/contactform7/class-contactform7.php:108
+msgid "WCA: Contact Form 7"
+msgstr "WCA: Contact Form 7"
+
+#: inc/app.php:178
+msgid "WCA: Google Tools Extension"
+msgstr "WCA: Google Tools Extension"
+
+#: inc/support/plugins/woocommerce/class-woocommerce.php:109
+msgid "WCA: WooCommerce"
+msgstr "WCA: WooCommerce"
+
 #: patterns/section-mobile.php:14
 #, php-format
 msgid "We are %s first ... %s"
@@ -680,14 +779,26 @@ msgstr "Suntem mai întâi %s ... %s"
 msgid "We Are Getting Ready to Launch!"
 msgstr "Ne pregătim de lansare!"
 
-#: inc/support/plugins/cf7/class-cf7.php:69
+#: inc/support/plugins/contactform7/class-contactform7.php:70
 #, php-format
+#| msgid ""
+#| "We have an extension that integrates our theme with Contact Form 7 plugin!"
+#| " You can get it (soon) from %s."
 msgid ""
 "We have an extension that integrates our theme with Contact Form 7 plugin! "
-"You can get it (soon) from %s."
+"You can get it from %s."
 msgstr ""
-"Avem o extensie care integrează tema noastră cu pluginul Contact Form 7! Îl "
-"puteți obține (în curând) de la %s."
+"Avem o extensie care integrează tema noastră cu pluginul Contact Form 7! O "
+"puteți obține %s."
+
+#: inc/support/plugins/woocommerce/class-woocommerce.php:71
+#, php-format
+msgid ""
+"We have an extension that integrates our theme with WooCommerce plugin! You "
+"can get it from %s."
+msgstr ""
+"Avem o extensie care ne integrează tema cu pluginul WooCommerce! O puteți "
+"obține de la %s."
 
 #: inc/gutenberg/blocks/comment/class-form.php:176
 msgid "Website"
@@ -806,13 +917,16 @@ msgstr "Arhive Anuale: %s"
 msgid "Yes, I would love to!"
 msgstr "Da, mi-ar plăcea!"
 
-#: inc/support/plugins/wpseo/class-wpseo.php:78
+#: inc/support/plugins/wpseo/class-wpseo.php:79
+#| msgid ""
+#| "YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
+#| "plugin."
 msgid ""
-"YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
-"plugin."
+"YoastSEO plugin support is enabled! Our theme works seamlessly with the best "
+"SEO plugin."
 msgstr ""
-"Suportul YoastSEO este activat! Tema noastră funcționează perfect cu cel mai "
-"bun plugin SEO."
+"Suportul pentru pluginul YoastSEO este activat! Tema noastră funcționează "
+"perfect cu cel mai bun plugin SEO."
 
 #: patterns/section-features.php:90
 msgid "You don't need to fear the Gutenberg update introduced into WordPress."

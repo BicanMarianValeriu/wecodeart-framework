@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.2
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -100,7 +100,7 @@ class Form extends Dynamic {
 			'comment_notes_before' 	=> $this->get_form_notes(),
 			'submit_field'			=> '<div class="comment-form-field wp-block-button">%1$s %2$s</div>',
 			'submit_button'			=> $this->get_input( 'submit' ),
-			'class_submit'			=> 'comment-form-submit wp-element-button',
+			'class_submit'			=> 'comment-form-submit wp-element-button has-accent-border-color',
 			'fields' 				=> [
 				'author' 	=> $this->get_input( 'name' ),
 				'email'  	=> $this->get_input( 'email' ),

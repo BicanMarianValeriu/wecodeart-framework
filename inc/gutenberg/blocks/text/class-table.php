@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -146,7 +146,7 @@ class Table extends Dynamic {
 		  
 			width: 100%;
 			vertical-align: middle;
-			border-color: var(--wp--gray-300);
+			border-color: var(--wp--preset--color--accent);
 			border-collapse: collapse;
 			caption-side: bottom;
 		}

@@ -59,41 +59,6 @@ return [
     ],
     /*
     |--------------------------------------------------------------------------
-    | Theme Gutenberg
-    |--------------------------------------------------------------------------
-    |
-    | This array of options will be used as defaults for gutenberg options.
-    |
-    */
-    'gutenberg' => [
-        'editor'    => true, // To do - remove FSE edit screen (developer/client only)
-        'styles'    => true, // Convert style attribute CSS to inline CSS
-        'classes'   => true, // Add CSS utilities like margin/padding etc
-        'patterns'  => true, // Patterns folder will also register plain HTML files
-        'support'   => [
-            'core-block-patterns'   => 'remove',
-            'block-nav-menus'       => true,
-            'widgets-block-editor'  => true,
-        ],
-    ],
-    /*
-    |--------------------------------------------------------------------------
-    | Theme WooCommerce
-    |--------------------------------------------------------------------------
-    |
-    | This array of options will be used as defaults for WooCommerce.
-    |
-    */
-    'woocommerce' => [
-        'support'   => [
-            'woocommerce'                   => true,
-            'wc-product-gallery-zoom'       => true,
-            'wc-product-gallery-lightbox'   => true,
-            'wc-product-gallery-slider'     => true,
-        ]
-    ],
-    /*
-    |--------------------------------------------------------------------------
     | Theme Header
     |--------------------------------------------------------------------------
     |
@@ -116,6 +81,20 @@ return [
     ],
     /*
     |--------------------------------------------------------------------------
+    | Theme Gutenberg
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for gutenberg options.
+    |
+    */
+    'gutenberg' => [
+        'editor'    => true, // To do - remove FSE edit screen (developer/client only)
+        'styles'    => true, // Convert style attribute CSS to inline CSS
+        'classes'   => true, // Add CSS utilities like margin/padding etc
+        'patterns'  => true, // Patterns folder will also register plain HTML files
+    ],
+    /*
+    |--------------------------------------------------------------------------
     | Theme Placeholder
     |--------------------------------------------------------------------------
     |
@@ -132,17 +111,17 @@ return [
     | Theme Fonts
     |--------------------------------------------------------------------------
     |
-    | This array of options will be used as defaults for placeholder.
+    | This array of options will be used as defaults for fonts.
     |
     */
     'fonts' => [
         'system' => [],
         'google' => [
-            [
+            'open-sans' => [
                 'family' 	=> 'Open Sans',
                 'variants' 	=> [ 300, 'regular', 500 ]
             ],
-            [
+            'shadows'   => [
                 'family' 	=> 'Shadows Into Light',
                 'variants' 	=> [ 'regular' ]
             ]
@@ -162,7 +141,47 @@ return [
             'height'        => 65,
             'flex-height'   => true,
         ],
-        'title-tag'         => true,
-        'responsive-embeds' => true,
+        'title-tag'             => true,
+        'responsive-embeds'     => true,
+        'block-nav-menus'       => true,
+        'widgets-block-editor'  => true,
+        'core-block-patterns'   => 'remove',
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Theme WooCommerce
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for WooCommerce.
+    |
+    */
+    'woocommerce' => [
+        'support'   => [
+            'woocommerce'                   => true,
+            'wc-product-gallery-zoom'       => true,
+            'wc-product-gallery-lightbox'   => true,
+            'wc-product-gallery-slider'     => true,
+        ]
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Theme Installers
+    |--------------------------------------------------------------------------
+    |
+    | This array of options will be used as defaults for theme installers.
+    |
+    */
+    'installers' => [
+        'plugins' => [
+            [
+                'slug'          => 'wca-google-tools-extension',
+                'title'         => esc_html__( 'WCA: Google Tools Extension', 'wecodeart' ),
+                'description'   => esc_html__( 'Add Google Analytics, verify your Google Webmasters property and Google Adsense publisher account with ease.', 'wecodeart' ),
+                'source'        => 'wordpress',
+                'more'          => 'https://wordpress.org/plugins/wca-google-tools-extension/',
+                'recommended'   => true,
+            ],
+        ],
+        'themes' => []
     ],
 ];

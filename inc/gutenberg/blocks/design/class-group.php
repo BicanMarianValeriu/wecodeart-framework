@@ -44,6 +44,16 @@ class Group extends Dynamic {
 	protected $block_name = 'group';
 
 	/**
+	 * Init.
+	 */
+	public function init() {
+		\register_block_style( $this->get_block_type(), [
+			'name'	=> 'marquee',
+            'label'	=> esc_html__( 'Marquee', 'wecodeart' ),
+		] );
+	}
+
+	/**
 	 * Block args.
 	 *
 	 * @return 	array
@@ -66,7 +76,6 @@ class Group extends Dynamic {
 		$content 	= new \WP_HTML_Tag_Processor( $content );
 
 		static $processed = null;
-
 		// Handle <main /> tag (once).
 		if( $content->next_tag( [ 'tag_name' => 'main' ] ) && is_null( $processed ) ) {
 			$content->set_attribute( 'class', 'wp-site-main ' . $content->get_attribute( 'class' ) );
@@ -74,49 +83,93 @@ class Group extends Dynamic {
 		}
 
 		// Handle marquee group.
-		if ( get_prop( $attributes, [ 'layout', 'orientation' ] ) === 'marquee' ) {
-			$dom 	= $this->dom( (string) $content );
-			$div 	= get_dom_element( 'div', $dom );
-			$gap 	= get_prop( $attributes, [ 'style', 'spacing', 'blockGap' ] );
-			$wrap	= $dom->createElement( 'div' );
-
-			$wrap->setAttribute( 'class', 'wp-block-group__marquee' );
-
-			if( $gap ) {
-				$wrap->setAttribute( 'style', '--marquee-gap:' . wecodeart( 'styles' )::format_variable( $gap ) );
-			}
-			
-			$count 	= $div->childNodes->count();
-			for ( $i = 0; $i < $count; $i++ ) {
-				$item = $div->childNodes->item( $i );
-
-				if ( ! $item || ! method_exists( $item, 'setAttribute' ) ) {
-					continue;
-				}
-
-				$wrap->appendChild( $item );
-
-				for ( $j = 0; $j < 2; $j++ ) {
-					$clone = dom_element( $item->cloneNode( true ) );
-
-					if ( ! $clone ) {
-						continue;
-					}
-
-					$clone->setAttribute( 'aria-hidden', 'true' );
-					$classes   = explode( ' ', $clone->getAttribute( 'class' ) );
-					$classes[] = 'is-cloned';
-					$clone->setAttribute( 'class', implode( ' ', $classes ) );
-					$wrap->appendChild( $clone );
-				}
-			}
-
-			$div->insertBefore( $wrap, $div->firstChild );
-
-			$content = $dom->saveHTML();
+		$classNames = explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
+		if( in_array( 'is-style-marquee', $classNames, true ) ) {
+			$content = $this->create_marquee( $attributes, $content );
 		}
 	
 		return (string) $content;
+	}
+
+	/**
+	 * Generate marquee markup.
+	 *
+	 * @param 	string 	$attributes 	The block attrs.
+	 * @param 	string 	$content 		The block markup.
+	 *
+	 * @return 	string 	The block updated markup.
+	 */
+	public function create_marquee( $attributes, $content ) {
+		$dom 	= $this->dom( (string) $content );
+		$div 	= get_dom_element( 'div', $dom );
+		
+		$wrap	= $dom->createElement( 'div' );
+		$wrap->setAttribute( 'class', 'wp-block-group__marquee' );
+		
+		$styles 		= [];
+		$orientation 	= get_prop( $attributes, [ 'layout', 'orientation' ] );
+		$directionY 	= get_prop( $attributes, [ 'layout', 'verticalAlignment' ] );
+		$directionX 	= get_prop( $attributes, [ 'layout', 'justifyContent' ] );
+
+		// Handle orientation
+		if( $orientation === 'vertical' ) {
+			$styles[] = '--marquee-animation:marqueeY';
+		}
+
+		// Handle direction
+		if( ( $orientation === 'vertical' && $directionY === 'bottom' ) || ( $orientation === 'horizontal' && $directionX === 'right' ) ) {
+			$styles[] = '--marquee-direction:reverse';
+		}
+
+		// Handle alternate
+		if( ( $orientation === 'vertical' && $directionY === 'space-between' ) || ( $orientation === 'horizontal' && $directionX === 'space-between' ) ) {
+			$styles[] = '--marquee-direction:alternate';
+		}
+
+		// Handle pause state
+		if( ( $orientation === 'vertical' && $directionY === 'center' ) || ( $orientation === 'horizontal' && $directionX === 'center' ) ) {
+			$styles[] = '--marquee-state:paused';
+		}
+
+		// Handle gap
+		if( $blockGap = get_prop( $attributes, [ 'style', 'spacing', 'blockGap' ] ) ) {
+			$styles[] = '--marquee-gap:' . wecodeart( 'styles' )::format_variable( $blockGap );
+		}
+
+		if( ! empty( $styles ) ) {
+			$div->setAttribute( 'style', join( ';', $styles ) );
+		}
+		
+		$count 	= $div->childNodes->count();
+		for ( $i = 0; $i < $count; $i++ ) {
+			$item = $div->childNodes->item( $i );
+
+			if ( ! $item || ! method_exists( $item, 'setAttribute' ) ) {
+				continue;
+			}
+
+			$wrap->appendChild( $item );
+		}
+
+		for ( $j = 0; $j < 2; $j++ ) {
+			$clone = dom_element( $wrap->cloneNode( true ) );
+
+			if ( ! $clone ) {
+				continue;
+			}
+
+			$clone->setAttribute( 'aria-hidden', 'true' );
+			$classes   = explode( ' ', $clone->getAttribute( 'class' ) );
+			$classes[] = 'is-cloned';
+			$clone->setAttribute( 'class', implode( ' ', $classes ) );
+			$div->appendChild( $clone );
+		}
+
+		$div->insertBefore( $wrap, $div->firstChild );
+
+		$content = $dom->saveHTML();
+
+		return $content;
 	}
 
 	/**
@@ -129,46 +182,63 @@ class Group extends Dynamic {
 		$breakpoint = wecodeart_json( [ 'settings', 'custom', 'breakpoints', $mobile ], '992px' );
 
 		$inline = "
-		.is-marquee .wp-block-group__marquee {
-			display: flex;
-			overflow: hidden;
-			gap: var(--marquee-gap, var(--wp--style--block-gap));
-			width: 100%;
-			max-width: 100vw;
-			min-width: 100%;
-		}
-		.is-marquee .wp-block-group__marquee > * {
-			position: relative;
-			flex-shrink: 0;
-			min-height: 1em;
-			transform: translateX(0);
-			animation-name: marquee;
-			animation-duration: var(--marquee-speed-mobile, 25s);
-			animation-timing-function: linear;
-			animation-iteration-count: infinite;
-			animation-direction: var(--marquee-direction, forwards);
-		}
-		.is-marquee:is(:hover,:focus,:focus-within) .wp-block-group__marquee > * {
-			animation-play-state: paused;
-		}
-		@media (min-width: {$breakpoint}) {
-			.is-marquee .wp-block-group__marquee > * {
-				animation-duration: var(--marquee-speed-desktop, 50s);
+			.is-style-marquee {
+				--marquee-animation: marqueeX;
+				--marquee-speed: 50s;
+				--marquee-speed-mobile: calc(var(--marquee-speed) / 2);
+				--marquee-state: running;
+				--marquee-direction: forwards;
+				--marquee-gap: var(--wp--style--block-gap);
+				justify-content: initial /* required */;
+				flex-wrap: nowrap /* required */;
+				width: 100%;
+				max-width: 100vw;
+				overflow: hidden;
 			}
-		}
-		@media (prefers-reduced-motion) {
-			.is-marquee .wp-block-group__marquee > * {
+			.is-style-marquee > .wp-block-group__marquee {
+				position: relative;
+				display: flex;
+				flex-direction: inherit;
+				flex-shrink: 0;
+				gap: inherit;
+				min-height: 1em;
+				transform: translate3d(0,0,0);
+				animation-name: var(--marquee-animation);
+				animation-duration: var(--marquee-speed-mobile);
+				animation-direction: var(--marquee-direction);
+				animation-play-state: var(--marquee-state);
+				animation-iteration-count: infinite;
+				animation-timing-function: linear;
+			}
+			.is-style-marquee:is(:hover,:focus,:focus-within) > .wp-block-group__marquee {
 				animation-play-state: paused;
 			}
-		}
-		@keyframes marquee {
-			0% {
-				transform: translateX(0);
+			@media (min-width: {$breakpoint}) {
+				.is-style-marquee > .wp-block-group__marquee {
+					animation-duration: var(--marquee-speed);
+				}
 			}
-			100% {
-				transform: translateX(calc(-100% - var(--wp--style--block-gap)));
+			@media (prefers-reduced-motion) {
+				.is-style-marquee > .wp-block-group__marquee {
+					animation-play-state: paused;
+				}
 			}
-		}
+			@keyframes marqueeX {
+				0% {
+					transform: translateX(0);
+				}
+				100% {
+					transform: translateX(calc(-100% - var(--marquee-gap)));
+				}
+			}
+			@keyframes marqueeY {
+				0% {
+					transform: translateY(0);
+				}
+				100% {
+					transform: translateY(calc(-100% - var(--marquee-gap)));
+				}
+			}
 		";
 
 		return $inline;

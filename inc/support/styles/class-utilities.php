@@ -17,7 +17,6 @@ namespace WeCodeArt\Support\Styles;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Support\FileSystem;
 use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\get_prop;
 

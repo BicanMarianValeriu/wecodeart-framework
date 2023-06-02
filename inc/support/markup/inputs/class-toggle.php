@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -140,7 +140,7 @@ class Toggle extends Base {
                 filter: brightness(90%);
             }
             .form-check-input:focus {
-                border-color: var(--wp--preset--color--primary);
+                border-color: var(--wp--input--border-color-focus);
                 outline: 0;
                 box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
             }

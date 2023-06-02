@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt;
@@ -54,7 +54,7 @@ class Gutenberg {
 		add_action( 'enqueue_block_editor_assets', 	[ $this, 'block_editor_assets' 		], 10, 1 );
 		
 		// Theme Support.
-		add_action( 'after_setup_theme', 			[ $this, 'theme_support' ], 100 );
+		add_action( 'after_setup_theme', 			[ $this, 'after_setup_theme' 		], 100 );
 
 		// Admin.
 		add_action( 'admin_init', 					[ $this, 'admin_init' ] );
@@ -133,6 +133,8 @@ class Gutenberg {
 			'lodash',
 			$this->make_handle( 'inline' )
 		], wecodeart( 'version' ) );
+
+		wp_set_script_translations( $this->make_handle(), 'wecodeart', wecodeart_config( 'directories' )['languages'] );
 		
 		// CodeMirror assets.
 		wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
@@ -154,19 +156,7 @@ class Gutenberg {
 	 *
 	 * @access public
 	 */
-	public function theme_support() {
-		$support = get_prop( $this->config, 'support', [] );
-
-		// Theme Support
-		foreach( $support as $feature => $value ) {
-			if( $value === 'remove' ) {
-				remove_theme_support( $feature );
-				continue;
-			};
-			add_theme_support( $feature, $value );
-		}
-		
-		// Editor Style
+	public function after_setup_theme() {
 		add_editor_style( $this->get_asset( 'css', 'frontend' ) );
 		add_editor_style( $this->get_asset( 'css', 'gutenberg/editor' ) );
 	}
@@ -178,12 +168,16 @@ class Gutenberg {
 	 */
 	public function admin_init() {
 		// Developer mode will allways have access to FSE.
-		if( wecodeart_if( 'is_dev_mode' ) ) return;
+		if( wecodeart_if( 'is_dev_mode' ) ) {
+			return;
+		}
 
 		// Developers can turn off FSE admin (eg: on production).
-		if( ! get_prop( wecodeart_config( 'gutenberg' ), 'editor' ) ) {
-			remove_submenu_page( 'themes.php', 'gutenberg-edit-site' );
+		if( get_prop( wecodeart_config( 'gutenberg' ), [ 'editor' ], true ) === true ) {
+			return;
 		}
+
+		remove_submenu_page( 'themes.php', 'gutenberg-edit-site' );
 	}
 
 	/**

@@ -109,17 +109,18 @@ class Processor {
 		
 		if( $support === true && ! in_array( $this->name, $excludes ) ) {
 			$block_type	= \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
-			$selector 	= get_prop( $block_type->supports, [ '__experimentalSelector' ] );
-		}
+			$selector 	= get_prop( $block_type->supports, [ '__experimentalSelector' ], '' );
 
-		if( strpos( $selector, ',' ) ) {
-			$selector 	= join( ',', array_map( function( $item ) use ( $prefix ) {
-				return join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), ' ', $item, $prefix ] ) );
-			}, explode( ',', $selector ) ) );
+			if( $selector && strpos( $selector, ',' ) ) {
+				$selector 	= join( ',', array_map( function( $item ) use ( $prefix ) {
+					return join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), ' ', $item, $prefix ] ) );
+				}, explode( ',', $selector ) ) );
+			} else {
+				$selector 	= join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), $selector, $prefix ] ) );
+			}
 		} else {
-			$selector 	= join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), $item, $prefix ] ) );
+			$selector 	= join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), $selector, $prefix ] ) );
 		}
-
 
 		return apply_filters( 'wecodeart/filter/gutenberg/styles/selector', $selector, $this->name );
 	}

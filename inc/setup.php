@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.9.5
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -48,14 +48,14 @@ wecodeart()->bind( 'conditionals', function () {
 } );
 
 /**
- * Bind Integrations.
+ * Bind Options.
  *
- * @since   4.1.0
+ * @since   6.1.2
  *
  * @return  void
  */
-wecodeart()->bind( 'integrations', function () {
-    return WeCodeArt\Support::get_instance();
+wecodeart()->bind( 'options', function () {
+    return WeCodeArt\Admin\Settings::get_instance();
 } );
 
 /**
@@ -67,6 +67,17 @@ wecodeart()->bind( 'integrations', function () {
  */
 wecodeart()->bind( 'blocks', function () {
     return WeCodeArt\Gutenberg\Blocks::get_instance();
+} );
+
+/**
+ * Bind Integrations.
+ *
+ * @since   4.1.0
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'integrations', function () {
+    return WeCodeArt\Support::get_instance();
 } );
 
 /**
@@ -143,9 +154,9 @@ wecodeart()->bind( 'name', function () {
  * @return string
  */
 wecodeart()->bind( 'version', function () {
-    if ( wecodeart_if( 'is_dev_mode' ) ) {
-		return (string) time();
-	}
+    // if ( wecodeart_if( 'is_dev_mode' ) ) {
+	// 	return (string) time();
+	// }
 
 	static $version;
 

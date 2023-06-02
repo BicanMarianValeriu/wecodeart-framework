@@ -103,19 +103,19 @@ class Buttons extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-buttons {
-			display: flex;
-			flex-flow: row wrap;
-			gap: var(--wp--style--block-gap, 1em);
-			margin-bottom: 1rem;
-		}
-		.wp-block-buttons .wp-block-button {
-			position: relative;
-		}
-		.wp-block-buttons .wp-block-button:hover,
-		.wp-block-buttons .wp-block-button__link:is(:focus,:active,.active) {
-			z-index: 1;
-		}
+			.wp-block-buttons {
+				display: flex;
+				flex-flow: row wrap;
+				gap: var(--wp--style--block-gap, 1em);
+				margin-bottom: 1rem;
+			}
+			.wp-block-buttons .wp-block-button {
+				position: relative;
+			}
+			.wp-block-buttons .wp-block-button:hover,
+			.wp-block-buttons .wp-block-button__link:is(:focus,:active,.active) {
+				z-index: 1;
+			}
 		";
 	}
 }

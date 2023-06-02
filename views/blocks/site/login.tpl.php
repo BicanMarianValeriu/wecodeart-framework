@@ -73,7 +73,8 @@ wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
             ]
         ] );
     
-    ?><?php endif; ?>
+        endif;
+    ?>
     <div class="wp-block-button wp-block-button--login mb-3">
     <?php
 

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.7
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -102,7 +102,7 @@ class Link extends Dynamic {
 			$this->render_link( $attributes, $block, $extras );
 
 			// Nav Submenu
-			$this->render_submenu( $block, $extras );
+			Navigation\Menu::render_dropdown( $block, $extras );
 
 		}, [ $attributes, $block, $extras ], false );
 	}
@@ -141,64 +141,6 @@ class Link extends Dynamic {
 					echo wp_kses_post( $attributes['label'] );
 			}, [ $attributes ] );
 		}, [ $attributes, $extras ] );
-	}
-
-	/**
-	 * Renders dropdown
-	 *
-	 * @param 	object	$block
-	 * @param 	array 	$extras
-	 *
-	 * @return 	void
-	 */
-	public function render_submenu( object $block, array $extras = [] ): void {
-		if( count( $block->inner_blocks ) === 0 ) return;
-
-		// Styles
-		if( ! wp_style_is( 'wp-block-navigation-submenu' ) ) {
-			wp_enqueue_style( 'wp-block-navigation-submenu' );
-		}
-
-		// Scripts
-		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( 'wp-block-navigation-submenu' ) ) {
-			wp_enqueue_script( 'wp-block-navigation-submenu', $this->get_asset( 'js', 'modules/dropdown' ), [], wecodeart( 'version' ), true );
-		}
-		
-		// Use overlay first, fallback to nav background (or body).
-		$color_type = get_prop( $block->context, 'overlayBackgroundColor' );
-		$key_name 	= $color_type ? 'overlay-background' : 'background';
-		$background = Navigation::get_class_color( $block->context, $key_name );
-		$background = wecodeart( 'styles' )::color_to_rgba( $background, false, true );
-		$luminance 	= wecodeart( 'styles' )::rgb_luminance( $background );
-		
-		$classes 	= [ 'wp-block-navigation-link__dropdown', 'dropdown-menu' ];
-
-		if( $extras = get_prop( $extras, [ 'menu' ], [] ) ) {
-			$classes = array_merge( $classes, $extras );
-		}
-
-		if( ! in_array( 'dropdown-menu-dark', $classes, true ) && $luminance < get_lightness_limit() ) {
-			$classes[] = 'dropdown-menu-dark';
-		}
-
-		wecodeart( 'markup' )::wrap( 'nav-dropdown', [ [
-			'tag' 	=> 'ul',
-			'attrs'	=> [
-				'class' => join( ' ', $classes ),
-			]
-		] ], function( $block ) {
-			$inner_html = '';
-
-			foreach ( $block->inner_blocks as $inner_block ) {
-				if( property_exists( $block, 'attributes' ) ) {
-					// For some reason, WP does not pass this attribute to 2nd level dropdowns.
-					$inner_block->attributes['isTopLevelLink'] = false;
-				}
-				$inner_html .= $inner_block->render();
-			}
-
-			echo $inner_html; // WPCS ok - Gutenberg blocks here.
-		}, [ $block ] );
 	}
 
 	/**
@@ -250,8 +192,8 @@ class Link extends Dynamic {
 	 * @return 	array
 	 */
 	public function get_link_attributes( $attributes, $block, $extras ): array {
-		$current_id 	= is_home() ? get_option( 'page_for_posts' ) : get_the_ID();
-		$is_active   	= ! empty( $attributes['id'] ) && ( (int) $current_id === (int) $attributes['id'] );
+		$current_id 	= is_home() ? get_option( 'page_for_posts' ) : get_queried_object_id();
+		$is_active   	= ! empty( $attributes['id'] ) && (int) $current_id === (int) $attributes['id'];
 		$has_submenu 	= count( $block->inner_blocks ) > 0;
 		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
 

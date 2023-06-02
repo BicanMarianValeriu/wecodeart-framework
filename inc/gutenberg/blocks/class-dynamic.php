@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -261,8 +261,6 @@ abstract class Dynamic {
 	 * @return 	string Block CSS.
 	 */
 	public function enqueue_styles() {
-		$handle	= 'wp-block-' . $this->block_name;
-
 		// These are cached styles, so we only generate minified version.
 		$styles = wecodeart( 'styles' )::compress( $this->styles() );
 		
@@ -270,31 +268,32 @@ abstract class Dynamic {
 			return;
 		}
 
-		global $wp_styles;
-
 		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 
+		$handle		= 'wp-block-' . $this->block_name;
 		$block_css	= 'block-' . $this->block_name . '.css';
 
 		if( ! $filesystem->has_file( $block_css ) ) {
 			$filesystem->create_file( $block_css, $styles );
 		}
 
-		$registered = is_object( $wp_styles ) ? get_prop( $wp_styles->registered, $handle ) : false;
-		$deps		= $registered ? $registered->deps : [];
+		$registered = get_prop( wp_styles()->registered, $handle );
 
-		// Deregister Core
-		wp_deregister_style( $handle );
-			
-		// Enqueue Custom
-		wp_enqueue_block_style( $this->get_block_type(), [
-			'handle'	=> $handle,
-			'src'		=> $filesystem->get_file_url( $block_css, true ),
-			'path'		=> wp_normalize_path( $filesystem->get_file_url( $block_css ) ),
-			'deps'		=> $deps,
-			'ver'		=> wecodeart( 'version' )
-		] );
+		if( $this->register || ! $registered ) {
+			// Enqueue new
+			wp_enqueue_block_style( $this->get_block_type(), [
+				'handle'	=> $handle,
+				'src'		=> $filesystem->get_file_url( $block_css, true ),
+				'path'		=> $filesystem->get_file_url( $block_css ),
+				'ver'		=> wecodeart( 'version' )
+			] );
+		} elseif( $registered ) {
+			// Change existing
+			$registered->src = $filesystem->get_file_url( $block_css, true );
+			$registered->ver = wecodeart( 'version' );
+			wp_style_add_data( $handle, 'path', $filesystem->get_file_url( $block_css ) );
+		}
 
 		$filesystem->set_folder( '' );
 	}

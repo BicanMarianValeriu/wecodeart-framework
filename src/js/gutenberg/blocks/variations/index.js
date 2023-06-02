@@ -12,35 +12,17 @@ const groupVariationMarquee = {
         title: __('Group: Marquee'),
         description: __('Gather blocks in a sliding container.'),
         attributes: {
+            className: 'is-style-marquee',
             layout: {
                 type: 'flex',
                 flexWrap: 'nowrap',
-                orientation: 'marquee',
                 justifyContent: 'center',
+                alignItems: 'center'
             }
         },
-        innerBlocks: [
-            [
-                'core/group',
-                {
-                    lock: {
-                        move: true,
-                        remove: true
-                    },
-                    layout: {
-                        type: 'flex',
-                        flexWrap: 'nowrap',
-                        orientation: 'horizontal',
-                        justifyContent: 'center',
-                    }
-                },
-            ],
-        ],
+        innerBlocks: [],
         isDefault: false,
         scope: ['block', 'inserter', 'transform'],
-        isActive: (blockAttributes, variationAttributes) => {
-            return blockAttributes.layout?.orientation === variationAttributes.layout?.orientation;
-        },
         icon: 'align-right',
     }
 };

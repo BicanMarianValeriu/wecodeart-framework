@@ -18,6 +18,9 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
+use WeCodeArt\Support\Plugins;
+use WeCodeArt\Admin\Notifications;
+use WeCodeArt\Admin\Notifications\Notification;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -27,6 +30,8 @@ use function WeCodeArt\Functions\get_prop;
 class WooCommerce implements Integration {
 
 	use Singleton;
+
+	const NOTICE_ID = 'wecodeart/extension/woocommerce';
 	
 	/**
 	 * Get Conditionals
@@ -34,160 +39,76 @@ class WooCommerce implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->set( [
-			'is_woocommerce_active'		=> WooCommerce\Conditional\Plugin::class,
-			'is_woocommerce_page'		=> WooCommerce\Conditional\Page::class,
-			'is_woocommerce_archive'	=> WooCommerce\Conditional\Archive::class,
-		] );
+		wecodeart( 'conditionals' )->register( 'is_woocommerce_active', WooCommerce\Condition::class );
 
 		return [ 'is_woocommerce_active' ];
 	}
 
 	/**
-	 * Register Hooks
+	 * Hooks
 	 *
-	 * @return void
+	 * @since   5.0.0
+	 * @version	6.1.2
+	 *
+	 * @return  void
 	 */
 	public function register_hooks() {
-		// Add support for WooCommerce 
-		add_action( 'after_setup_theme', 						[ $this, 'after_setup_theme' 	] );
-
-		// Filters
-		// add_filter( 'render_block', 							[ $this, 'block_fragment_cache'	], 20, 2 );
-		add_filter( 'wecodeart/filter/gutenberg/styles/core', 	[ $this, 'block_inline_styles' 	], 20, 1 );
-		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' 	] );
-		add_filter( 'woocommerce_breadcrumb_defaults',			[ $this, 'breadcrumb_defaults'	] );
-		add_filter( 'woocommerce_form_field',					[ $this, 'form_field_markup'	], 10, 4 );
+		add_action( 'admin_notices', [ $this, 'manage_notice' ] );
 	}
 
 	/**
-	 * Sets up theme defaults and registers support for various WordPress features.
+	 * Manage Notice
 	 *
-	 * @since	unknown
+	 * @since 	6.1.2
+	 * @version	6.1.2
 	 */
-	public function after_setup_theme() {
-		$support = get_prop( wecodeart_config( 'woocommerce' ), 'support', [] );
-		// Theme Support
-		foreach( $support as $feature => $value ) {
-			if( $value === 'remove' ) {
-                remove_theme_support( $feature );
-                continue;
-            }
-			add_theme_support( $feature, $value );
+	public function manage_notice() {
+		$notification = new Notification(
+			sprintf( '<h3 style="margin: .5em 0;">%s</h3>', esc_html__( 'Amazing news!', 'wecodeart' ) ) .
+			sprintf(
+				esc_html__( 'We have an extension that integrates our theme with WooCommerce plugin! You can get it from %s.', 'wecodeart' ),
+				sprintf(
+					'<a href="%s" target="_blank">%s</a>',
+					esc_url( admin_url( '/themes.php?page=wecodeart&tab=plugins' ) ),
+					esc_html__( 'here', 'wecodeart' )
+				)
+			),
+			[
+				'id'			=> self::NOTICE_ID,
+				'type'     		=> Notification::INFO,
+				'priority' 		=> 1,
+				'class'			=> 'notice is-dismissible',
+				'capabilities' 	=> 'activate_plugins',
+			]
+		);
+		
+		if( get_user_option( self::NOTICE_ID ) === 'seen' ) {
+			Notifications::get_instance()->remove_notification( $notification );
+			set_transient( self::NOTICE_ID, true, WEEK_IN_SECONDS );
+			return;
 		}
 
-		// Register Blocks Overwrites
-		wecodeart( 'blocks' )->register( 'woocommerce/product-price', 	WooCommerce\Blocks\Price::class );
-		wecodeart( 'blocks' )->register( 'woocommerce/product-rating', 	WooCommerce\Blocks\Rating::class );
-	}
-
-	/**
-	 * Fragment Cache
-	 *
-	 * @since	5.7.1
-	 */
-	public function block_fragment_cache( $content, $data ) {
-		if( get_prop( $data, [ 'blockName' ] ) === 'woocommerce/mini-cart' ) {
-			do_action( 'litespeed_control_set_nocache' );
+		if( get_transient( self::NOTICE_ID ) === false ) {
+			Notifications::get_instance()->add_notification( $notification );
 		}
-
-		return $content;
 	}
 
 	/**
-	 * Block CSS process
+	 * Installer
 	 *
-	 * @since	5.6.3
+	 * @since	6.1.2
 	 * @version	6.1.2
 	 *
 	 * @return 	array
 	 */
-	public function block_inline_styles( $args ) {
-		return array_merge( $args, [
-			'woocommerce/product-categories',
-			'woocommerce/featured-category',
-			'woocommerce/featured-product',
-			'woocommerce/reviews-by-category',
-			'woocommerce/reviews-by-product',
-			'woocommerce/all-reviews',
-		] );
+	public function installer(): array {
+		return [
+			'slug'          => 'BicanMarianValeriu/wca-woocommerce',
+			'title'         => esc_html__( 'WCA: WooCommerce', 'wecodeart' ),
+			'description'   => Plugins::get_default_description( 'WooCommerce', 'external' ),
+			'source'        => 'github',
+			'more'          => 'https://github.com/BicanMarianValeriu/wca-woocommerce/',
+			'required' 		=> [ 'woocommerce' ]
+		];
 	}
-
-	/**
-	 * Filter - Restricted WooCommerce Blocks from theme code
-	 *
-	 * @since	5.0.0
-	 * @version	6.0.0
-	 *
-	 * @return 	array
-	 */
-	public function restricted_blocks( $blocks ) {
-		return wp_parse_args( [
-			'woocommerce/products-by-attribute',// ok
-			'woocommerce/product-best-sellers', // ok
-			'woocommerce/product-top-rated',	// ok
-			'woocommerce/product-on-sale',		// ok
-			'woocommerce/product-category', 	// ok
-			'woocommerce/product-new',			// ok
-			'woocommerce/product-tag',			// ok
-			'woocommerce/products-by-tag',		// old naming, just in case
-		], $blocks );
-	}
-
-	/**
-	 * Breadcrumbs
-	 *
-	 * @since	5.6.3
-	 * @version	5.6.3
-	 *
-	 * @return 	array
-	 */
-	public function breadcrumb_defaults( $args ) {
-		$args['delimiter'] = ' » ';
-
-		return $args;
-	}
-
-	/**
-     * Form Field Markup
-     *
-     * @since	5.6.4
-     * @version	6.1.2
-     *
-     * @return	array
-     */
-    public function form_field_markup( $field, $key, $args, $value ) {
-        $invalid = [ 'state', 'country', 'select', 'radio' ];
-
-        if( ! in_array( get_prop( $args, 'type' ), $invalid ) ) {
-
-            $attributes = wp_array_slice_assoc( $args, [ 'id', 'input_class', 'placeholder', 'maxlength', 'autocomplete', 'autofocus', 'required' ] );
-            $attributes = wp_parse_args( [
-                'name' => $key,
-                'value'=> $value
-            ], $attributes );
-            $custom_attributes = get_prop( $args, [ 'custom_attributes' ], [] );
-            $attributes = wp_parse_args( $custom_attributes, $attributes );
-
-            if( $classnames = get_prop( $attributes, [ 'input_class' ] ) ) {
-                array_unshift( $classnames, 'form-control' );
-                $attributes['class'] = join( ' ', $classnames );
-                unset( $attributes['input_class'] );
-            }
-
-            $container     = '<p class="form-row %1$s" id="%2$s" data-priority="' . esc_attr( get_prop( $args, 'priority', '' ) ) . '">%3$s</p>';
-            
-            $field_html =  wecodeart_input( get_prop( $args, 'type' ), [
-                'label' => get_prop( $args, 'label' ),
-                'attrs' => $attributes
-            ], false );
-
-            $container_class = esc_attr( implode( ' ', $args['class'] ) );
-            $container_id    = esc_attr( $args['id'] ) . '_field';
-            $field           = sprintf( $container, $container_class, $container_id, $field_html );
-        }
-
-        // Default
-        return $field;
-    }
 }

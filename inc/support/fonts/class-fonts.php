@@ -9,7 +9,7 @@
  * @subpackage 	Support\Fonts
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.7.1
- * @version		5.7.1
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Support;
@@ -196,17 +196,7 @@ final class Fonts implements Integration {
 
 		// Clear Folder
 		wecodeart( 'files' )->set_folder( 'fonts' );
-
-		$objects = new \RecursiveDirectoryIterator( wecodeart( 'files' )->folder );
-		foreach( $objects as $name => $object ) {
-			$parts 	= explode( DIRECTORY_SEPARATOR, $name );
-			$name 	= end( $parts );
-
-			if( in_array( $name, [ '.', '..' ] ) ) continue;
-
-			wecodeart( 'files' )->clean_folder( $name );
-		}
-
+		wecodeart( 'files' )->clean_folder();
 		wecodeart( 'files' )->set_folder( '' );
 
 		return true;

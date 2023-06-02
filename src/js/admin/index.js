@@ -4,7 +4,6 @@
 const {
 	i18n: {
 		__,
-		sprintf
 	},
 	hooks: {
 		applyFilters
@@ -15,8 +14,8 @@ const {
 		dispatch
 	},
 	element: {
+		useRef,
 		useEffect,
-		useState,
 		render,
 	},
 	components: {
@@ -27,13 +26,26 @@ const {
 	}
 } = wp;
 
-const { currentUser, theme: { version: themeVersion } } = wecodeart;
+/**
+ * Localization
+ */
+const {
+	theme: {
+		version: themeVersion
+	}
+} = wecodeart;
 
-/* Settings */
-import { GettingStarted, Extensions, Licenses, Notices, Donate } from './components';
+/**
+ * Components
+ */
+import { GettingStarted, Plugins, Licenses, Notices } from './components';
 
+/**
+ * Styles
+ */
 import './../../scss/admin/index.scss';
 
+// Core
 const WeCodeArt = () => {
 	const { createNotice: coreCreateNotice } = useDispatch('core/notices');
 
@@ -46,83 +58,130 @@ const WeCodeArt = () => {
 	};
 
 	const {
-		wecodeartSettings,
+		settings,
 		saveEntityRecord,
 		editEntityRecord,
 		deleteEntityRecord,
 		isRequesting,
 	} = useSelect(select => {
-		const { getEntityRecord } = select('core');
 		const { isResolving } = select('core/data');
+		const { getEntityRecord } = select('core');
 		const { saveEntityRecord, editEntityRecord, deleteEntityRecord } = dispatch('core');
-		const isRequesting = isResolving('core', 'getEntityRecord', ['wecodeart', 'settings']);
 
 		return {
-			isRequesting,
 			saveEntityRecord,
 			editEntityRecord,
 			deleteEntityRecord,
-			wecodeartSettings: getEntityRecord('wecodeart', 'settings'),
+			isRequesting: isResolving('core', 'getEntityRecord', ['wecodeart', 'settings']),
+			settings: getEntityRecord('wecodeart', 'settings'),
 		};
 	});
 
-	const tabProps = { saveEntityRecord, editEntityRecord, deleteEntityRecord, isRequesting, wecodeartSettings, createNotice };
+	const saveSettings = (formData, callback = () => { }) => {
+		const value = Object.keys(formData).reduce((result, key) => {
+			result[key] = formData[key] === '' ? 'unset' : formData[key];
 
-	let tabs = [{
-		name: 'wca-getting-started',
-		title: __('Getting Started', 'wecodeart'),
-		className: 'wca-getting-started',
-		render: <GettingStarted />
-	}];
+			return result;
+		}, {});
 
-	const extensions = applyFilters('wecodeart.admin.extensions', []);
-
-	if (extensions.length) {
-		tabs = [...tabs, {
-			name: 'wca-extensions',
-			title: __('Extensions', 'wecodeart'),
-			className: 'wca-extensions',
-			render: <Extensions {...{
-				...tabProps,
-				extensions,
-			}} />
-		}];
+		saveEntityRecord('wecodeart', 'settings', value).then(callback);
 	}
 
-	tabs = [
-		...tabs,
+	const tabProps = { settings, wecodeartSettings: settings, saveSettings, isRequesting, createNotice, saveEntityRecord, editEntityRecord, deleteEntityRecord };
+
+	const tabs = applyFilters('wecodeart.admin.tabs', [
 		{
-			name: 'wca-license',
+			name: 'intro',
+			title: __('Getting Started', 'wecodeart'),
+			className: 'wecodeart-intro',
+			render: <GettingStarted />
+		},
+		// Deprecated filter: wecodeart.admin.extensions
+		...(applyFilters('wecodeart.admin.extensions', applyFilters('wecodeart.admin.tabs.plugins', [])).length
+			? [
+				{
+					name: 'plugins',
+					title: __('Plugins', 'wecodeart'),
+					className: 'wecodeart-plugins',
+					render: <Plugins {...tabProps} plugins={applyFilters('wecodeart.admin.extensions', applyFilters('wecodeart.admin.tabs.plugins', []))} />
+				}
+			]
+			: []
+		),
+		{
+			name: 'license',
 			title: __('License(s)', 'wecodeart'),
-			className: 'wca-license',
+			className: 'wecodeart-license',
 			render: <Licenses {...tabProps} />
 		}
-	];
+	]);
 
-	const [initialTab, setInitialTab] = useState('');
+	const urlParams = new URLSearchParams(window.location.search);
+	const requestedTab = urlParams.get('tab');
+	const initialTab = requestedTab ? tabs.find(({ name }) => name === requestedTab)?.name : tabs[0]?.name;
+
+	const updateUrl = (tabName) => {
+		urlParams.set('tab', tabName);
+
+		const { location: { protocol, host, pathname, hash } } = window;
+
+		if (history.pushState) {
+			const newUrl = `${protocol}//${host}${pathname}?${urlParams.toString()}${hash}`;
+
+			return window.history.replaceState({ path: newUrl }, '', newUrl);
+		}
+
+		return window.location.search = urlParams.toString();
+	};
+
+	const scriptRef = useRef(null);
 
 	useEffect(() => {
-		const { hash = '' } = document.location;
-		setInitialTab(hash.replace('#', ''));
-	}, [wecodeartSettings]);
+		if (!settings) return;
+
+		scriptRef.current = document.createElement('script');
+		scriptRef.current.src = 'https://www.paypalobjects.com/donate/sdk/donate-sdk.js';
+
+		scriptRef.current.onload = () => {
+			PayPal.Donation.Button({
+				env: 'production',
+				hosted_button_id: 'PV9A4JDX84Z3W',
+				image: {
+					src: 'https://pics.paypal.com/00/s/MzMzMTdhOWItZmYxZS00MjcwLWIyNmItNDRiYzhhNGZhOWI0/file.PNG',
+					alt: 'Donate with PayPal button',
+					title: 'Support the development of WeCodeArt Framework!',
+				},
+			}).render('#donate-button');
+		};
+
+		document.head.appendChild(scriptRef.current);
+
+		return () => {
+			document.head.removeChild(scriptRef.current);
+		};
+	}, [settings]);
 
 	const MainPanel = () => (
 		<Panel>
 			<PanelBody opened={true}>
 				<div className="components-panel__header">
-					<p className="wecodeart-panel__header-hint">{__('Appearance', 'wecodeart')} → WeCodeArt</p>
-					<h2>{__('Getting Started with', 'wecodeart')} <strong>WeCodeArt Framework</strong><code>{themeVersion}</code></h2>
-					<p>{sprintf(
-						__('Congratulations %s! You`ve just unlocked more Gutenberg block editor tools for easier editing and better workflow.', 'wecodeart'),
-						currentUser
-					)}</p>
-					<Donate />
+					<div className="grid">
+						<div className="g-col-12 g-col-md-8 g-col-lg-10">
+							<p className="wecodeart-panel__header-hint">{__('Appearance', 'wecodeart')} → WeCodeArt</p>
+							<h2><strong>WeCodeArt Framework</strong><code>{themeVersion}</code></h2>
+						</div>
+						<div className="g-col-12 g-col-md-4 g-col-lg-2 align-self-end">
+							<div id="donate-button-container">
+								<div id="donate-button"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<PanelRow>
 					<TabPanel className="wecodeart-tab-panel"
 						activeClass="active-tab"
 						initialTabName={initialTab}
-						onSelect={(tab) => document.location.hash = tab}
+						onSelect={updateUrl}
 						tabs={tabs}>
 						{({ render }) => render}
 					</TabPanel>
@@ -142,11 +201,6 @@ const WeCodeArt = () => {
 wp.domReady(() => {
 	// Expose Settings
 	dispatch('core').addEntities([
-		{
-			name: 'settings',	// route name
-			kind: 'core', 		// namespace
-			baseURL: '/wp/v2/settings'  // API path without /wp-json
-		},
 		{
 			name: 'settings',	// route name
 			kind: 'wecodeart', 	// namespace

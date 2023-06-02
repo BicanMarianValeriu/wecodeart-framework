@@ -53,6 +53,14 @@
         ]
     },
     {
+        "slug": "el-badge",
+        "title": "Badge",
+        "description": "A simple badge.",
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
         "slug": "el-media-text",
         "title": "Media & Text",
         "description": "A simple media and text section.",

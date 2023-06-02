@@ -1,0 +1,48 @@
+// Required
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+// Vars
+$prefix: wca--;
+// Utils
+@import "~bootstrap/scss/mixins";
+
+.wecodeart-admin {
+    .grid--installables {
+        --wca--columns: 1;
+        --wca--gap: 1rem;
+    
+        @include media-breakpoint-up( 'md' ) {
+            --wca--columns: 2;
+        }
+    
+        @include media-breakpoint-up( 'xl' ) {
+            --wca--columns: 4;
+        }
+
+        .components-card {
+            & > div {
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__badge {
+                opacity: .3;
+    
+                svg {
+                    display: block;
+                    width: 100%;
+                }
+            }
+
+            &__body,
+            &__footer {
+                color: rgba(36, 47, 87, 0.7);
+            }
+
+            &__footer {
+                margin-top: auto;
+            }
+        }
+    }
+}
+    

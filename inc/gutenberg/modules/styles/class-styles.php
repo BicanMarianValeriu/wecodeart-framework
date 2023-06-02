@@ -69,9 +69,7 @@ class Styles implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->set( [
-			'with_blocks_styles' => Styles\Condition::class,
-		] );
+		wecodeart( 'conditionals' )->set( 'with_blocks_styles', Styles\Condition::class );
 
 		return [ 'with_blocks_styles' ];
 	}
@@ -136,7 +134,7 @@ class Styles implements Integration {
 	 */
 	public function register_attribute( $block ) {
 		// Currently we suport only core blocks
-		if( ! in_array( $block->name, self::core_blocks( true ) ) ) return;
+		if( ! in_array( $block->name, Gutenberg::get_restricted_blocks() ) ) return;
 
 		$block->attributes['customCSS'] = [
 			'type'    => 'string',
@@ -166,7 +164,7 @@ class Styles implements Integration {
 		}
 
 		// Remove styles, where needed.
-		if ( in_array( $block_name, self::core_blocks( true ) ) ) {
+		if ( ! in_array( $block_name, Gutenberg::get_restricted_blocks() ) ) {
 			// Process a block
 			$processed 	= self::process_block( $block );
 			$block_id	= $processed->get_id();
@@ -339,121 +337,6 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Core blocks.
-	 *
-	 * @param	bool	$exclude Whether to exclude blocks that should be skipped
-	 *
-	 * @return 	array
-	 */
-	public static function core_blocks( $exclude = false ): array {
-		$blocks = apply_filters( 'wecodeart/filter/gutenberg/styles/core', [
-			'core/archives',
-			'core/audio',
-			'core/avatar',
-			'core/block',
-			'core/button',
-			'core/buttons',
-			'core/calendar',
-			'core/categories',
-			'core/code',
-			'core/column',
-			'core/columns',
-			'core/cover',
-			'core/comment-author-avatar',
-			'core/comment-author-name',
-			'core/comment-content',
-			'core/comment-date',
-			'core/comment-edit-link',
-			'core/comment-reply-link',
-			'core/comment-template',
-			'core/comments',
-			'core/comments-title',
-			'core/comments-pagination',
-			'core/comments-pagination-next',
-			'core/comments-pagination-previous',
-			'core/comments-pagination-numbers',
-			'core/embed',
-			'core/file',
-			'core/freeform',
-			'core/gallery',
-			'core/group',
-			'core/heading',
-			'core/home-link',
-			'core/html',
-			'core/image',
-			'core/latest-comments',
-			'core/latest-posts',
-			'core/list',
-			'core/list-item',
-			'core/loginout',
-			'core/media-text',
-			'core/missing',
-			'core/more',
-			'core/navigation',
-			'core/navigation-link',
-			'core/navigation-submenu',
-			'core/next-page',
-			'core/pattern',
-			'core/page-list',
-			'core/page-list-item',
-			'core/paragraph',
-			'core/preformatted',
-			'core/pullquote',
-			'core/post-author',
-			'core/post-author-name',
-			'core/post-author-biography',
-			'core/post-title',
-			'core/post-terms',
-			'core/post-date',
-			'core/post-excerpt',
-			'core/post-content',
-			'core/post-featured-image',
-			'core/post-navigation-link',
-			'core/post-time-to-read',
-			'core/post-template',
-			'core/post-comment',
-			'core/post-comments-link',
-			'core/post-comments-form',
-			'core/post-comments-count',
-			'core/quote',
-			'core/query',
-			'core/query-title',
-			'core/query-no-results',
-			'core/query-pagination',
-			'core/query-pagination-next',
-			'core/query-pagination-previous',
-			'core/query-pagination-numbers',
-			'core/read-more',
-			'core/rss',
-			'core/search',
-			'core/separator',
-			'core/shortcode',
-			'core/site-logo',
-			'core/site-title',
-			'core/site-tagline',
-			'core/social-link',
-			'core/social-links',
-			'core/spacer',
-			'core/table',
-			'core/table-of-contents',
-			'core/tag-cloud',
-			'core/template-part',
-			'core/term-description',
-			'core/text-columns',
-			'core/verse',
-			'core/video',
-		] );
-
-		if( (bool) $exclude ) {
-			// Exclude this blocks from styles extensions for various reasons
-			// like: no wrapper, renders html or other blocks or simply it should not remove styles
-			$blocks = array_diff( $blocks, Gutenberg::get_restricted_blocks() );
-		}
-
-		return $blocks;
-	}
-
-	/**
 	 * Get classNames.
 	 *
 	 * @param	array	$blocks  List with all blocks
@@ -492,6 +375,7 @@ class Styles implements Integration {
 			'core/button' 			=> Styles\Blocks\Button::class,
 			'core/column' 			=> Styles\Blocks\Column::class,
 			'core/cover' 			=> Styles\Blocks\Cover::class,
+			'core/group' 			=> Styles\Blocks\Group::class,
 			'core/gallery' 			=> Styles\Blocks\Gallery::class,
 			'core/media-text' 		=> Styles\Blocks\Media::class,
 			'core/navigation' 		=> Styles\Blocks\Navigation::class,

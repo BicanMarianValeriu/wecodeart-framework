@@ -287,39 +287,39 @@ final class Styles implements Integration {
 		$css    = '';
 		$prefix = str_repeat( '  ', $indent );
 
-		foreach( $selectors as $selector => $properties ) {
-			$css_for_style = '';
-			foreach( $properties as $property => $value ) {
-				if ( is_string( $value ) && '' !== $value ) {
-					$css_for_style .= $property . ':' . $value . ';';
-				} elseif( is_array( $value ) ) {
-					foreach ( $value as $subvalue ) {
-						if ( is_string( $subvalue ) && '' !== $subvalue ) {
-							$css_for_style .= $property . ':' . $subvalue . ';';
-						}
-					}
-				}
-			}
-			
-			if ( '' !== $css_for_style ) {
-				$css .= $selector . '{' . $css_for_style . '}';
-			}
-		}
-
-		// foreach ( $selectors as $key => $value ) {
-		// 	if ( is_array( $value ) ) {
-		// 		$selector   = $key;
-		// 		$properties = $value;
-
-		// 		$css .= $prefix . "$selector {\n";
-		// 		$css .= $prefix . self::array_to_css( $properties, $indent + 1 );
-		// 		$css .= $prefix . "}\n";
-		// 		continue;
+		// foreach( $selectors as $selector => $properties ) {
+		// 	$css_for_style = '';
+		// 	foreach( $properties as $property => $value ) {
+		// 		if ( is_string( $value ) && '' !== $value ) {
+		// 			$css_for_style .= $property . ':' . $value . ';';
+		// 		} elseif( is_array( $value ) ) {
+		// 			foreach ( $value as $subvalue ) {
+		// 				if ( is_string( $subvalue ) && '' !== $subvalue ) {
+		// 					$css_for_style .= $property . ':' . $subvalue . ';';
+		// 				}
+		// 			}
+		// 		}
 		// 	}
-
-		// 	$property 	= $key;
-		// 	$css	.= $prefix . "$property: $value;\n";
+			
+		// 	if ( '' !== $css_for_style ) {
+		// 		$css .= $selector . '{' . $css_for_style . '}';
+		// 	}
 		// }
+
+		foreach ( $selectors as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$selector   = $key;
+				$properties = $value;
+
+				$css .= $prefix . "$selector {\n";
+				$css .= $prefix . self::array_to_string( $properties, $indent + 1 );
+				$css .= $prefix . "}\n";
+				continue;
+			}
+
+			$property 	= $key;
+			$css	.= $prefix . "$property: $value;\n";
+		}
 
 		if ( preg_match( '#</?\w+#', $css ) ) {
 			$css = '';

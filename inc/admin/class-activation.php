@@ -177,7 +177,7 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	6.1.0
+	 * @version	6.1.2
 	 */
 	public function after_switch_theme() {
 		// If not, why bother to load the theme?
@@ -188,7 +188,6 @@ class Activation {
 			// Show what's failed validation
 			$this->admin_notice();
 
-			do_action_deprecated( 'wecodeart/hook/activation/failed', [], '6.0.0', 'wecodeart/activation/failed' );
 			do_action( 'wecodeart/activation/failed' );
 
 			return;

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -155,7 +155,7 @@ class Numbers extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-        $button_css = wecodeart_json( [ 'styles', 'blocks', 'core/button' ] );
+        $button_css = wecodeart_json( [ 'styles', 'elements', 'button' ], [] );
 
         $width      = get_prop( $button_css, [ 'border', 'width' ], '1px' );
         $style      = get_prop( $button_css, [ 'border', 'style' ], 'solid' );
@@ -164,58 +164,58 @@ class Numbers extends Dynamic {
         $radius     = get_prop( $button_css, [ 'border', 'radius' ], '.25rem' );
         
 		return "
-        .pagination {
-            display: flex;
-            list-style-type: none;
-            padding-left: 0;
-            margin-bottom: 0;
-        }
-        .pagination__link {
-            position: relative;
-            display: block;
-            padding: .35rem .75rem;
-            color: var(--wp--preset--color--primary);
-            text-decoration: none;
-            line-height: 1.5;
-            background-color: white;
-            border: $width $style $color;
-        }
-        .pagination__link:hover {
-            z-index: 2;
-            color: var(--wp--preset--color--primary);
-            background-color: var(--wp--preset--color--light);
-            border-color: $color;
-        }
-        .pagination__link:focus {
-            z-index: 3;
-            color: var(--wp--preset--color--primary);
-            background-color: var(--wp--preset--color--light);
-            outline: none;
-            box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
-        }
-        .pagination__item:first-child .pagination__link {
-            border-top-left-radius: $radius;
-            border-bottom-left-radius: $radius;
-        }
-        .pagination__item:not(:first-child) .pagination__link {
-            margin-left: -1px;
-        }
-        .pagination__item:last-child .pagination__link {
-            border-top-right-radius: $radius;
-            border-bottom-right-radius: $radius;
-        }
-        .pagination__item--current .pagination__link {
-            z-index: 3;
-            color: white;
-            background-color: var(--wp--preset--color--primary);
-            border-color: var(--wp--preset--color--primary);
-        } 
-        .pagination__item--disabled .pagination__link {
-            color: var(--wp--gray);
-            pointer-events: none;
-            background-color: var(--wp--gray-100);
-            border-color: currentColor;
-        }
+            .pagination {
+                display: flex;
+                list-style-type: none;
+                padding-left: 0;
+                margin-bottom: 0;
+            }
+            .pagination__link {
+                position: relative;
+                display: block;
+                padding: .35rem .75rem;
+                color: var(--wp--preset--color--primary);
+                text-decoration: none;
+                line-height: 1.5;
+                background-color: white;
+                border: $width $style $color;
+            }
+            .pagination__link:hover {
+                z-index: 2;
+                color: var(--wp--preset--color--primary);
+                background-color: var(--wp--preset--color--light);
+                border-color: $color;
+            }
+            .pagination__link:focus {
+                z-index: 3;
+                color: var(--wp--preset--color--primary);
+                background-color: var(--wp--preset--color--light);
+                outline: none;
+                box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
+            }
+            .pagination__item:first-child .pagination__link {
+                border-top-left-radius: $radius;
+                border-bottom-left-radius: $radius;
+            }
+            .pagination__item:not(:first-child) .pagination__link {
+                margin-left: -1px;
+            }
+            .pagination__item:last-child .pagination__link {
+                border-top-right-radius: $radius;
+                border-bottom-right-radius: $radius;
+            }
+            .pagination__item--current .pagination__link {
+                z-index: 3;
+                color: white;
+                background-color: var(--wp--preset--color--primary);
+                border-color: var(--wp--preset--color--primary);
+            } 
+            .pagination__item--disabled .pagination__link {
+                color: var(--wp--gray);
+                pointer-events: none;
+                background-color: var(--wp--gray-100);
+                border-color: currentColor;
+            }
 		";
 	}
 }

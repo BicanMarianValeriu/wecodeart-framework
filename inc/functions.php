@@ -344,14 +344,16 @@ function dom_element( $node ) {
  * Returns array of dom elements by class name.
  *
  * @since   6.0.0
+ * @version 6.1.2
  *
- * @param   DOMDocument|DOMElement $dom        DOM document or element.
- * @param   string                 $class_name Element class name.
- * @param   string                 $tag        Element tag name (optional).
+ * @param   DOMDocument|DOMElement $dom         DOM document or element.
+ * @param   string                 $class_name  Element class name.
+ * @param   string                 $tag         Element tag name (optional).
+ * @param   string                 $index       Element index
  *
- * @return  array
+ * @return  mixed
  */
-function get_elements_by_class_name( $dom, string $class_name, string $tag = '*' ): array {
+function get_elements_by_class_name( $dom, string $class_name, string $tag = '*', $index = null ) {
 	$elements = [];
 
 	foreach ( $dom->getElementsByTagName( $tag ) as $element ) {
@@ -363,6 +365,10 @@ function get_elements_by_class_name( $dom, string $class_name, string $tag = '*'
 			}
 		}
 	}
+
+    if( is_int( $index ) ) {
+        return isset( $elements[$index] ) ? $elements[$index] : null;
+    }
 
 	return $elements;
 }

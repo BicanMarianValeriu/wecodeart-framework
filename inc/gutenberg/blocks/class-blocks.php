@@ -99,18 +99,20 @@ class Blocks implements Configuration {
 		$this->register( 'core/loginout',       Blocks\Site\Login::class );
 		$this->register( 'core/site-logo',      Blocks\Site\Logo::class );
 		$this->register( 'core/template-part',  Blocks\Site\Template::class );
-        
+
         // Hooks
-        add_action( 'after_setup_theme',    [ $this, 'register_blocks'  ], PHP_INT_MAX );
+        add_action( 'after_setup_theme', [ $this, 'register_blocks'  ], PHP_INT_MAX );
 	}
 
     /**
-	 * Register hooks
+     * Register hooks
 	 *
-	 * @return void
+     * @return void
 	 */
-	public function register_blocks() {
-        array_map( fn( $class ) => $class::get_instance()->hooks(), $this->all() );
+    public function register_blocks() {
+        do_action( 'wecodeart/gutenberg/blocks/register', $this );
+
+        return array_map( fn( $class ) => $class::get_instance()->hooks(), $this->all() );
 	}
 
 	/**

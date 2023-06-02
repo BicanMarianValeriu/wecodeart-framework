@@ -9,7 +9,7 @@
  * @subpackage 	Notifications
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.8.1
- * @version		5.4.5
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Admin;
@@ -756,15 +756,15 @@ class Notifications {
 	public function enqueue_scripts() {
 		wp_enqueue_script( 
 			$this->make_handle(),
-			$this->get_asset( 'js', 'admin/notification' ),
-			[ 'jquery' ],
+			$this->get_asset( 'js', 'admin/notifications' ),
+			[],
 			wecodeart( 'version' ),
 			true
 		);
 
 		wp_enqueue_style(
 			$this->make_handle(),
-			$this->get_asset( 'css', 'admin/notification' ),
+			$this->get_asset( 'css', 'admin/notifications' ),
 			[],
 			wecodeart( 'version' )
 		);

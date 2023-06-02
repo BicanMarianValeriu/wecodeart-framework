@@ -1,11 +1,26 @@
 v6.1.2
+- Removed - Captcha4WP admin notification when plugin enabled
 - Updated - get_site_url() to home_url() for wecodeart.com link in header
 - Updated - core/post-terms to use tags icon for product_tag term (WooCommerce)
 - Updated - fa-fw class to post meta blocks svg icon
 - Updated - accent color to theme.json instead of autodetect
-- Added - convert WooCommerce inputs to wecodeart_input (re-added until they fully update those as well)
-- Added - WooCommerce Product Manufacturer Price feature (Conversion enhancement)
-- Added - WooCommerce enhanced product rating with extra info
+- Updated - blockified all WooCommerce templates and updated patterns
+- Updated - improved theme settings page (preselected tab with browser history)
+- Updated - PayPal donate to popup (theme settings page)
+- Updated - theme FileSystem clear_folder improved
+- Updated - transients consistent naming
+- Updated - all WooCommerce related code moved to external extension
+- Updated - Group: Marquee refactored to use only 1 group container / added support for vertical sliding, reverse, pause, alternate
+- Fixed - PHP notices with inc/config/config.php
+- Fixed - wide align on Media & Text pattern (left image alignment)
+- Fixed - offcanvas container background inside core/navigation block
+- Fixed - core/button styles output to correct classname from block supports
+- Fixed - issue with Yoast's Support term view not passing data to correct template (when primary is selected)
+- Added - new Admin\Settings class to manage theme settings (with get/set/all static methods)
+- Added - new badge pattern (element)
+- Added - script translations for admin/gutenberg JavaScript
+- Added - support for RankMath / FAQ block as accordion (using details tag)
+- Added - Admin\Upgrade class to handle future theme upgrades
 
 v6.1.1
 - Updated - RO local translations (page-soon.php pattern)

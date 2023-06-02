@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt;
@@ -23,12 +23,30 @@ use WeCodeArt\Config\Interfaces\Configuration;
  */
 class Support implements Configuration {
 
-	use Singleton; 
+	use Singleton;
+
+    /**
+	 * The protected integrations.
+     * 
+     * @todo    When "modular" functionality is developed, this wont be allowed to be deleted.
+	 *
+	 * @var     array[]
+	 */
+    const PROTECTED = [
+        'assets',
+        'files',
+        'fonts',
+        'locale',
+        'markup',
+        'plugins',
+        'starter',
+        'styles'
+    ];
 
 	/**
 	 * The registered integrations.
 	 *
-	 * @var Integration[]
+	 * @var     Integration[]
 	 */
 	protected $items = [];
 
@@ -39,19 +57,17 @@ class Support implements Configuration {
 		// Theme Support
 		\add_action( 'after_setup_theme', [ $this, 'after_setup_theme'	] );
 
-		// Register Default Integrations
-		$this->register( 'starter',				Support\Starter::class	    );
-		$this->register( 'markup',				Support\Markup::class	    );
-		$this->register( 'assets',				Support\Assets::class	    );
-		$this->register( 'fonts',				Support\Fonts::class	    );
-		$this->register( 'styles',				Support\Styles::class	    );
-		$this->register( 'locale',				Support\Locale::class	    );
-		$this->register( 'files',				Support\FileSystem::class	);
-        // Plugin Integrations
-		$this->register( 'plugin/anr', 			Support\Plugins\ANR::class 			);
-		$this->register( 'plugin/cf7', 			Support\Plugins\CF7::class 			);
-		$this->register( 'plugin/wpseo', 		Support\Plugins\WPSeo::class 		);
-		$this->register( 'plugin/woocommerce', 	Support\Plugins\WooCommerce::class 	);
+		// Register Default/Core Integrations
+		foreach ( glob( dirname( __FILE__ ) . '/*', GLOB_ONLYDIR ) as $directory ) {
+			$directory = basename( $directory );
+			$this->register( $directory, 'WeCodeArt\\Support\\' . ucfirst( $directory ) );
+		}
+
+        // Register Plugin Integrations
+        foreach ( glob( dirname( __FILE__ ) . '/plugins/*', GLOB_ONLYDIR ) as $directory ) {
+			$directory = basename( $directory );
+			$this->register( $directory, 'WeCodeArt\\Support\\Plugins\\' . ucfirst( $directory ) );
+		}
 	}
 
 	/**

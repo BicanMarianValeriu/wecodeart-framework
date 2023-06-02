@@ -3,8 +3,6 @@
  * @author 	Bican Marian Valeriu
  * @version 1.0.0
  */
-const destruct = (obj, ...keys) => keys.reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
-
 export default (function (wecodeart) {
 
 	const { Component } = wecodeart;
@@ -73,16 +71,35 @@ export default (function (wecodeart) {
 		 * @return 	{string}
 		 */
 		static renderToString(string = '', variables = {}) {
-			let rxp = /{{([^}]+)}}/g, curMatch;
+			const destruct = (obj, v) => v.split(/\.|\|/).reduce((v, k) => v?.[k], obj); // Multiple
+			const rxp = /{{([^}]+)}}/g;
+			let match;
 
-			while (curMatch = rxp.exec(string)) {
-				const trimd = curMatch[1].trim();
-				const found = destruct(variables, trimd);
-				if (found[trimd] === undefined) continue;
-				string = string.replace(new RegExp(`{{${curMatch[1]}}}`, 'g'), found[trimd]);
+			while ((match = rxp.exec(string))) {
+				const expression = match[1];
+				const value = destruct(variables, expression.trim());
+
+				if (value === undefined) continue;
+
+				string = string.replace(new RegExp(`{{${expression}}}`, 'g'), value);
 			}
 
 			return string;
+		}
+
+		/**
+		 * Render variables to HTML Object
+		 *
+		 * @param 	{string} string 	HTML String
+		 * @param 	{object} variables	Data to be rendered into the string
+		 *
+		 * @return 	{HTMLElement}
+		 */
+		static renderToHTML(string = '', variables = {}) {
+			const wrapper = document.createElement('div');
+			wrapper.innerHTML = Template.renderToString(string, variables);
+
+			return wrapper.firstChild;
 		}
 	}
 

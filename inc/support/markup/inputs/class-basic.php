@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -79,12 +79,16 @@ class Basic extends Base {
      * Get input's class.
      * 
      * @since   5.0.0
-     * @version 6.0.0
+     * @version 6.1.2
      *
      * @param 	string
      */
     public function input_class(): string {
-        $class = 'form-control';
+        $class = '';
+
+        if( $this->type !== 'hidden' ) {
+            $class = 'form-control';
+        }
 
         if( in_array( $this->type, [ 'radio', 'checkbox' ] ) ) {
             $class = 'form-check-input';
@@ -121,13 +125,12 @@ class Basic extends Base {
                 appearance: none;
             }
             .form-control:focus {
-                color: var(--wp--preset--color--dark);
-                border-color: var(--wp--preset--color--primary);
-                box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
+                border-color: var(--wp--input--border-color-focus);
+                box-shadow: 0 0 0 0.25rem var(--wp--preset--color--accent);
                 outline: 0;
             }
             .form-control::placeholder {
-                color: #6c757d;
+                color: var(--wp--gray-600);
                 opacity: 1;
             }
             .form-control:disabled {
