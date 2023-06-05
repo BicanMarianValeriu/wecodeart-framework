@@ -169,7 +169,7 @@ class Text extends Dynamic {
 		}
 		@media (max-width: 767.98px) {
 			.wp-block-media-text.is-stacked-on-mobile {
-				grid-template-columns: 100%;
+				grid-template-columns: 100%!important;
 			}
 			.wp-block-media-text.is-stacked-on-mobile .wp-block-media-text__media {
 				grid-column: 1;
