@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -140,9 +140,6 @@ class Image extends Dynamic {
 	public function styles() {
 		return '
 		/* Block */
-		.wp-block-image {
-			margin: 0;
-		}
 		.wp-block-image.alignfull {
 			max-width: initial;
 		}
