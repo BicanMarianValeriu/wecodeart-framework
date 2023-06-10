@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-05-27 08:32+0000\n"
+"PO-Revision-Date: 2023-06-10 20:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -122,8 +122,8 @@ msgstr "Toate pluginurile nu au reușit să se installeze."
 msgid "All plugins installed successfully."
 msgstr "Toate pluginurile instalate cu succes."
 
-#: inc/support/plugins/contactform7/class-contactform7.php:68
-#: inc/support/plugins/woocommerce/class-woocommerce.php:69
+#: inc/support/plugins/contactform7/class-contactform7.php:66
+#: inc/support/plugins/woocommerce/class-woocommerce.php:67
 msgid "Amazing news!"
 msgstr "Vesti uimitoare!"
 
@@ -232,6 +232,11 @@ msgstr[2] "Răspunsuri la \"%1$s\""
 msgid "Continue reading"
 msgstr "Continuați lectura"
 
+#: patterns/page-soon.php:66
+#, php-format
+msgid "Copyright %s - All rights reserved."
+msgstr "Copyright %s - Toate drepturile rezervate."
+
 #: patterns/footer-credits.php:14
 #, php-format
 msgid "Copyright %s - All rights reserved. Built on %s."
@@ -266,7 +271,7 @@ msgstr "Arhive zilnice: %s"
 msgid "Design"
 msgstr "Personalizări"
 
-#: inc/admin/class-admin.php:170
+#: inc/admin/class-admin.php:172
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -315,6 +320,15 @@ msgstr "Estompat"
 msgid "Failed to dismiss notification"
 msgstr "Notificarea nu a putut fi respinsă"
 
+#: patterns/section-hero-bg.php:24
+#, php-format
+msgid ""
+"Fast, modern, beautiful, and easy-to-use themes powered by %s, the #1 "
+"WordPress theme framework"
+msgstr ""
+"Teme rapide, moderne, frumoase și ușor de utilizat, dezvoltate de %s, cadrul "
+"de teme WordPress numărul #1."
+
 #: patterns/section-hero-bg.php:18
 msgid "FASTEST"
 msgstr "Cea mai rapidă"
@@ -352,8 +366,8 @@ msgstr "Grupare"
 msgid "Gutenberg Ready"
 msgstr "Pregătită Gutenberg"
 
-#: inc/support/plugins/contactform7/class-contactform7.php:74
-#: inc/support/plugins/woocommerce/class-woocommerce.php:75
+#: inc/support/plugins/contactform7/class-contactform7.php:72
+#: inc/support/plugins/woocommerce/class-woocommerce.php:73
 msgid "here"
 msgstr "aici"
 
@@ -408,6 +422,10 @@ msgstr "Autentificare"
 #, php-format
 msgid "Loved by %s"
 msgstr "Iubit de %s"
+
+#: inc/gutenberg/blocks/design/class-group.php:52
+msgid "Marquee"
+msgstr "Marquee"
 
 #: views/general/toggler.tpl.php:27
 msgid "Menu"
@@ -471,7 +489,7 @@ msgid "Our theme comes pre-packaged with built-in support for the %s plugin."
 msgstr ""
 "Tema noastră vine pre-ambalată cu suport încorporat pentru pluginul %s."
 
-#: patterns/section-woo.php:17
+#: patterns/section-woo.php:31
 msgid "Out of the box WooCommerce Integration!"
 msgstr "Integrare WooCommerce din cutie!"
 
@@ -551,7 +569,7 @@ msgstr "Postat pe"
 msgid "Posts"
 msgstr "Postări"
 
-#: inc/support/plugins/rankmath/class-rankmath.php:65
+#: inc/support/plugins/rankmath/class-rankmath.php:63
 msgid ""
 "RankMath plugin support is enabled! Our theme works seamlessly with the best "
 "SEO plugin."
@@ -564,7 +582,7 @@ msgstr ""
 msgid "Read more"
 msgstr "Citeşte mai mult"
 
-#: patterns/section-woo.php:11
+#: patterns/section-woo.php:25
 msgid "Ready"
 msgstr "Pregătită"
 
@@ -668,7 +686,7 @@ msgstr "Performanță super înaltă"
 msgid "Super Optimized"
 msgstr "Super Optimizată"
 
-#: patterns/section-woo.php:20
+#: patterns/section-woo.php:34
 msgid "Super-Optimized eCommerce website built with ease."
 msgstr ""
 "Site-ul web de comerț electronic super-optimizat, construit cu ușurință."
@@ -686,7 +704,7 @@ msgstr "Arhive etichetă: %s"
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
-#: inc/admin/class-admin.php:124 inc/admin/class-admin.php:125
+#: inc/admin/class-admin.php:126 inc/admin/class-admin.php:127
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -758,7 +776,7 @@ msgstr "%s Utilizatori"
 msgid "View Themes"
 msgstr "Vedeți Teme"
 
-#: inc/support/plugins/contactform7/class-contactform7.php:108
+#: inc/support/plugins/contactform7/class-contactform7.php:106
 msgid "WCA: Contact Form 7"
 msgstr "WCA: Contact Form 7"
 
@@ -766,7 +784,7 @@ msgstr "WCA: Contact Form 7"
 msgid "WCA: Google Tools Extension"
 msgstr "WCA: Google Tools Extension"
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:109
+#: inc/support/plugins/woocommerce/class-woocommerce.php:107
 msgid "WCA: WooCommerce"
 msgstr "WCA: WooCommerce"
 
@@ -779,7 +797,7 @@ msgstr "Suntem mai întâi %s ... %s"
 msgid "We Are Getting Ready to Launch!"
 msgstr "Ne pregătim de lansare!"
 
-#: inc/support/plugins/contactform7/class-contactform7.php:70
+#: inc/support/plugins/contactform7/class-contactform7.php:68
 #, php-format
 #| msgid ""
 #| "We have an extension that integrates our theme with Contact Form 7 plugin!"
@@ -791,7 +809,7 @@ msgstr ""
 "Avem o extensie care integrează tema noastră cu pluginul Contact Form 7! O "
 "puteți obține %s."
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:71
+#: inc/support/plugins/woocommerce/class-woocommerce.php:69
 #, php-format
 msgid ""
 "We have an extension that integrates our theme with WooCommerce plugin! You "
@@ -822,6 +840,20 @@ msgstr ""
 msgid "WeCodeArt Framework is FREE with all future updates. Guaranteed!"
 msgstr ""
 "WeCodeArt Framework este GRATUITĂ cu toate actualizările viitoare. Garantat!"
+
+#: patterns/section-hero-bg.php:17
+#, php-format
+msgid "WeCodeArt Framework is one of the %s Theme for %s"
+msgstr "WeCodeArt Framework este una dintre temele %s pentru %s"
+
+#: patterns/section-hero.php:22
+#, php-format
+msgid ""
+"WeCodeArt Framework is the %s theme to embrace %s and is one of the top-"
+"rated block themes."
+msgstr ""
+"WeCodeArt Framework este tema %s pentru a îmbrățișa %s și este una dintre "
+"cele mai apreciate teme de bloc."
 
 #: inc/admin/class-activation.php:112
 #, php-format
@@ -859,7 +891,7 @@ msgstr "Temele WeCodeArt vor arăta uimitor pe orice dispozitiv."
 msgid "Well %s"
 msgstr "Foarte bine %s"
 
-#: inc/support/markup/class-svg.php:159
+#: inc/support/markup/svg/class-svg.php:159
 #, php-format
 msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
@@ -917,7 +949,7 @@ msgstr "Arhive Anuale: %s"
 msgid "Yes, I would love to!"
 msgstr "Da, mi-ar plăcea!"
 
-#: inc/support/plugins/wpseo/class-wpseo.php:79
+#: inc/support/plugins/wpseo/class-wpseo.php:77
 #| msgid ""
 #| "YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
 #| "plugin."

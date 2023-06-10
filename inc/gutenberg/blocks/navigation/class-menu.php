@@ -308,7 +308,7 @@ class Menu extends Dynamic {
 			/* Elements */
 			.dropdown-header {
 				padding: var(--wp--dropdown-header-padding-y) var(--wp--dropdown-header-padding-x);
-				margin-bottom: 0;
+				margin: 0;
 				color: var(--wp--dropdown-header-color);
 				font-size: var(--wp--preset--font-size--small);
 				white-space: nowrap;

@@ -13,6 +13,7 @@ v6.1.2
 - Updated - Group: Marquee refactored to use only 1 group container / added support for vertical sliding, reverse, pause, alternate
 - Updated - core/social-links styles (class naming, selectors and css specificity updates)
 - Removed - heading/paragraphs spacing
+- Fixed - patterns translations
 - Fixed - PHP notices with inc/config/config.php
 - Fixed - wide align on Media & Text pattern (left image alignment)
 - Fixed - offcanvas container background inside core/navigation block

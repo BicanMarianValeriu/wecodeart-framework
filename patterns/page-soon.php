@@ -63,7 +63,7 @@
                     <!-- /wp:group -->
                     <!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
                     <p class="has-secondary-color has-text-color has-small-font-size"><?php printf(
-                        esc_html( 'Copyright %s - All rights reserved.', 'wecodeart' ),
+                        esc_html__( 'Copyright %s - All rights reserved.', 'wecodeart' ),
                         '&copy; 2023'
                     ); ?></p>
                     <!-- /wp:paragraph -->

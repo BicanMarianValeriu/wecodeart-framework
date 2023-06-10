@@ -14,14 +14,14 @@
     <div class="wp-block-group" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">
     <!-- wp:heading {"textAlign":"center","className":"display-3"} -->
     <h2 class="wp-block-heading has-text-align-center display-3"><?php printf(
-        esc_html( 'WeCodeArt Framework is one of the %s Theme for %s', 'wecodeart' ),
+        esc_html__( 'WeCodeArt Framework is one of the %s Theme for %s', 'wecodeart' ),
         sprintf( '<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-primary-color has-shadows-into-light-font-family">%s</mark>', esc_html__( 'FASTEST', 'wecodeart' ) ),
         '<strong>WordPress</strong>'
     ); ?></h2>
     <!-- /wp:heading -->
     <!-- wp:paragraph {"align":"center","className":"fw-300 mb-5","fontSize":"large"} -->
     <p class="has-text-align-center fw-300 mb-5 has-large-font-size"><?php printf(
-        esc_html( 'Fast, modern, beautiful, and easy-to-use themes powered by %s, the #1 WordPress theme framework', 'wecodeart' ),
+        esc_html__( 'Fast, modern, beautiful, and easy-to-use themes powered by %s, the #1 WordPress theme framework', 'wecodeart' ),
         '<strong>WeCodeArt</strong>',
     ); ?></p>
     <!-- /wp:paragraph -->

@@ -197,6 +197,10 @@ class Gutenberg {
 			'core/nextpage',
 			'core/pattern',
 			'core/shortcode',
+			'core/calendar',
+			'core/archives',
+			'core/rss',
+			'core/latest-comments'
 		] ) );
 	}
 }
