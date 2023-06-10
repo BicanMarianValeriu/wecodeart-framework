@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.1
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -98,7 +98,9 @@ class Social extends Dynamic {
 	public function get_inline_style( string $style = 'default', string $service = '' ) {
 		$inline_css = '';
 
-		if( empty( $service ) ) return $inline_css;
+		if( empty( $service ) ) {
+			return $inline_css;
+		}
 
 		$colors = [
 			'link'		=> '', // Preserve link color
@@ -140,14 +142,14 @@ class Social extends Dynamic {
 			'youtube'	=> '#ff0100',
 		];
 
-		$selector 	= '.wp-block-social-links a';
+		$selector 	= '.wp-block-social-links .wp-block-social-link-anchor';
 		$properties = [
 			'color' => isset( $colors[$service] ) ? $colors[$service] : 'inherit'
 		];
 
 		// Logos only
 		if( $style === 'is-style-logos-only' ) {
-			$selector = '.wp-block-social-links.is-style-logos-only .wp-social-link-' . $service . ' a';
+			$selector = '.wp-block-social-links.is-style-logos-only .wp-block-social-link-' . $service;
 			$properties = [
 				'color'	=> $colors[$service]
 			];
@@ -172,7 +174,7 @@ class Social extends Dynamic {
 			}
 		// Default style
 		} else {
-			$selector = '.wp-block-social-links:not(.is-style-logos-only) .wp-social-link-' . $service . ' a';
+			$selector = '.wp-block-social-links:not(.is-style-logos-only) .wp-block-social-link-' . $service;
 			$properties = [
 				'background-color' => $colors[$service],
 				'color'	=> '#fff'
@@ -195,7 +197,7 @@ class Social extends Dynamic {
 		$css_array = [];
 		$css_array['global'][$selector] = $properties;
 
-		$inline_css = wecodeart( 'styles' )::parse( $css_array, 'wp-social-link-' . $service );
+		$inline_css = wecodeart( 'styles' )::parse( $css_array, 'wp-block-social-link-' . $service );
 		$inline_css = wecodeart( 'styles' )::compress( $inline_css );
 
 		return $inline_css;
@@ -208,61 +210,67 @@ class Social extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-social-links {
-			padding-left: 0;
-			padding-right: 0;
-			text-indent: 0;
-			margin-left: 0;
-			background: none;
-		}
-		.wp-block-social-links.aligncenter {
-			display: flex;
-			justify-content: center;
-		}
-		.wp-block-social-links.has-visible-labels a {
-			padding: .5em 1em;
-			flex-direction: row;
-		}
-		.wp-block-social-links.has-visible-labels svg {
-			margin-right: .5em;
-		}
-		.wp-block-social-links.is-style-pill-shape .wp-social-link {
-			width: auto;
-		}
-		.wp-block-social-links.is-style-pill-shape .wp-social-link a {
-			padding-left: calc((2.5/3) * 1em);
-			padding-right: calc((2.5/3) * 1em);
-		}
-		.wp-block-social-links.is-style-square-shape .wp-social-link a {
-			border-radius: 0;
-		}
-		.wp-block-social-links.is-style-logos-only .wp-social-link a {
-			background: none;
-			padding: 0;
-		}
-		.wp-social-link {
-			display: block;
-			background-color: transparent;
-		}
-		.wp-social-link a {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
-			border-radius: 9999px;
-			transition: all 0.1s ease;
-			padding: 0.35em;
-			line-height: 1;
-			text-decoration: none;
-			border: none;
-			box-shadow: none;
-		}
-		.wp-social-link svg {
-			width: 1em;
-			height: 1em;
-			fill: currentColor;
-		}
+			.wp-block-social-links {
+				padding-left: 0;
+				padding-right: 0;
+				text-indent: 0;
+				margin-left: 0;
+				background: none;
+			}
+			.wp-block-social-links.aligncenter {
+				display: flex;
+				justify-content: center;
+			}
+			.wp-block-social-links.has-visible-labels .wp-block-social-link-anchor {
+				padding: .5em 1em;
+				flex-direction: row;
+			}
+			.wp-block-social-links.has-visible-labels svg {
+				margin-right: .5em;
+			}
+			.wp-block-social-links.is-style-pill-shape .wp-block-social-link {
+				width: auto;
+			}
+			.wp-block-social-links.is-style-pill-shape .wp-block-social-link-anchor {
+				padding-left: calc((2.5/3) * 1em);
+				padding-right: calc((2.5/3) * 1em);
+			}
+			.wp-block-social-links.is-style-square-shape .wp-block-social-link {
+				border-radius: 0;
+			}
+			.wp-block-social-links.is-style-logos-only .wp-block-social-link {
+				background: none;
+			}
+			.wp-block-social-links.is-style-logos-only .wp-block-social-link-anchor {
+				padding: 0;
+			}
+			.wp-block-social-link {
+				display: block;
+				background-color: transparent;
+				border-radius: 9999px;
+			}
+			.wp-block-social-link-anchor {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				transition: all 0.1s ease;
+				padding: 0.35em;
+				line-height: 1;
+				text-decoration: none;
+				color: inherit;
+				border: none;
+				border-radius: inherit;
+				box-shadow: none;
+			}
+			.wp-block-social-link-anchor:is(:hover,:active,:visited) {
+				color: inherit;
+			}
+			.wp-block-social-link-anchor svg {
+				width: 1em;
+				height: 1em;
+			}
 		";
 	}
 }

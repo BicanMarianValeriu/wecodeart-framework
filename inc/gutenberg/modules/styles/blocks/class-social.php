@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -31,25 +31,21 @@ class Social extends Processor {
 	 */
 	protected function process_extra(): void {
 		$declarations 	= [];
-		$selector 		= join( '>', [ $this->get_selector( ':not(.is-style-logos-only)' ), '.wp-block-social-link', 'a' ] );
+		$selector 		= join( '>', [ $this->get_selector( ':not(.is-style-logos-only)' ), '.wp-block-social-link' ] );
 		$classnames 	= explode( ' ', get_prop( $this->attrs, 'className', '' ) );
 
 		if( in_array( 'is-style-logos-only', $classnames ) ) {
-			$selector	= join( '>', [ $this->get_selector( '.is-style-logos-only' ), '.wp-block-social-link', 'a' ] );
+			$selector	= join( '>', [ $this->get_selector( '.is-style-logos-only' ), '.wp-block-social-link' ] );
 		}
 
 		// Background Color 
 		if ( $value = get_prop( $this->attrs, 'customIconBackgroundColor' ) ) {
 			$declarations['background-color'] = $value;
-		} else if ( $value = get_prop( $this->attrs, 'iconBackgroundColor' ) ) {
-			$declarations['background-color'] = sprintf( 'var(--wp--preset--color--%s)', $value );
 		}
 
 		// Icon color
 		if ( $value = get_prop( $this->attrs, 'customIconColor' ) ) {
 			$declarations['color'] = $value;
-		} else if ( $value = get_prop( $this->attrs, 'iconColor' ) ) {
-			$declarations['color'] = sprintf( 'var(--wp--preset--color--%s)', $value );
 		}
 
 		// Size

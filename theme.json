@@ -359,18 +359,6 @@
 						"bottom": "1rem",
 						"left": "1rem",
 						"right": "1rem"
-					},
-					"margin": {
-						"top": "0",
-						"bottom": "var:style|block-gap"
-					}
-				}
-			},
-			"core/paragraph": {
-				"spacing": {
-					"margin": {
-						"top": "0",
-						"bottom": "var:style|block-gap"
 					}
 				}
 			},
@@ -451,12 +439,6 @@
 				"typography": {
 					"fontWeight": "300",
 					"lineHeight": "1.2"
-				},
-				"spacing": {
-					"margin": {
-						"top": "0",
-						"bottom": "var:style|block-gap"
-					}
 				}
 			},
 			"h1": {
