@@ -200,6 +200,7 @@ class Gutenberg {
 			'core/calendar',
 			'core/archives',
 			'core/rss',
+			'core/tag-cloud',
 			'core/latest-comments'
 		] ) );
 	}

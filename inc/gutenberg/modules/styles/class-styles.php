@@ -285,7 +285,7 @@ class Styles implements Integration {
 				'color' => [
 					'text' => $this->CSS::hex_brightness( $link, -25 )
 				]
-			], get_prop( $data, [ 'styles', 'element', 'link', ':hover' ], [] ) );
+			], get_prop( $data, [ 'styles', 'elements', 'link', ':hover' ], [] ) );
 
 			// Update object.
 			$object->update_with( $data );
