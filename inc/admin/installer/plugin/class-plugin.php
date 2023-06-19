@@ -16,6 +16,7 @@ namespace WeCodeArt\Admin\Installer;
 
 defined( 'ABSPATH' ) || exit;
 
+use WeCodeArt\Installable;
 use WeCodeArt\Admin\Request;
 use WeCodeArt\Admin\Installer;
 use function WeCodeArt\Functions\get_prop;
@@ -23,7 +24,7 @@ use function WeCodeArt\Functions\get_prop;
 /**
  * Plugin Installer
  */
-class Plugin extends Installer {
+class Plugin extends Installer implements Installable {
 	/**
 	 * Sets remote.
 	 *
