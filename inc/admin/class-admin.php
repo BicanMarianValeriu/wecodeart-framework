@@ -37,6 +37,8 @@ class Admin {
 	const NAMESPACE = 'wecodeart/v1';
 	CONST CACHE_KEY = 'wecodeart/transient/notifications';
 
+	var $page;
+
 	/**
 	 * Send to Constructor
 	 */
@@ -121,9 +123,10 @@ class Admin {
 	 * Register Admin Page
 	 *
 	 * @since   5.0.0
+	 * @version 6.1.2
 	 */
 	public function register_menu_page() {
-		$page_hook_suffix = add_theme_page(
+		$this->page = add_theme_page(
 			__( 'Theme Options', 'wecodeart' ),
 			__( 'Theme Options', 'wecodeart' ),
 			'manage_options',
@@ -131,7 +134,7 @@ class Admin {
 			[ $this, 'menu_callback' ]
 		);
 
-		add_action( "admin_print_scripts-{$page_hook_suffix}", [ $this, 'enqueue_assets' ] );
+		add_action( "admin_print_scripts-{$this->page}", [ $this, 'enqueue_assets' ] );
 	}
 
 	/**
