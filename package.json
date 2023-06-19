@@ -20,6 +20,8 @@
 		"start:dropdown": "wp-scripts start modules/dropdown=./src/js/frontend/modules/navigation/dropdown.js --output-path=assets/unminified",
 		"build:admin:plugins": "wp-scripts build admin/plugins=./src/js/admin/plugins/index.js --output-path=assets/minified",
 		"start:admin:plugins": "wp-scripts start admin/plugins=./src/js/admin/plugins/index.js --output-path=assets/unminified",
+		"build:admin:themes": "wp-scripts build admin/themes=./src/js/admin/themes/index.js --output-path=assets/minified",
+		"start:admin:themes": "wp-scripts start admin/themes=./src/js/admin/themes/index.js --output-path=assets/unminified",
 		"build:admin:notifications": "wp-scripts build admin/notifications=./src/js/admin/notifications/index.js --output-path=assets/minified",
 		"start:admin:notifications": "wp-scripts start admin/notifications=./src/js/admin/notifications/index.js --output-path=assets/unminified",
 		"build:gutenberg": "wp-scripts build gutenberg/editor=./src/js/gutenberg/index.js --output-path=assets/minified",

@@ -64,7 +64,7 @@ class Theme extends Installer {
 		// Create an instance of the theme upgrader
 		$skin 		= new Skin();
 		$upgrader 	= new \Theme_Upgrader( $skin );
-		$result 	= $upgrader->install( $zip_url, [ 'overwrite_package' => true ] );
+		$result 	= $upgrader->install( $this->package, [ 'overwrite_package' => true ] );
 
 		// Theme installed
 		if( $result ) {
@@ -72,5 +72,31 @@ class Theme extends Installer {
 		}
 		
 		return $this->status = false;
+	}
+
+	/**
+	 * Fix GitHub path.
+	 *
+	 * @since 	6.1.2
+	 *
+	 * @param 	boolean $true       always true
+	 * @param 	mixed   $hook_extra not used
+	 * @param 	array   $result     the result of the move
+	 *
+	 * @return 	array 	$result		the result of the move
+	 */
+	public function upgrader_post_install( $true, $hook_extra, $result ): array {
+		if( $this->source !== 'github' ) {
+			return $result;
+		}
+
+		global $wp_filesystem;
+
+		$destination = WP_CONTENT_DIR . '/themes/' . $this->get_dir();
+
+		$wp_filesystem->move( $result['destination'], $destination );
+		$result['destination'] = $destination;
+
+		return $result;
 	}
 }

@@ -31,7 +31,7 @@ final class Locale implements Integration {
 	use Singleton;
 	use No_Conditionals;
 	
-	const NOTICE_ID = 'wecodeart-locale-notice';
+	const NOTICE_ID = 'wecodeart/locale/notice';
 
 	/**
 	 * Register hooks
@@ -70,7 +70,7 @@ final class Locale implements Integration {
 	 * @version	6.1.2
 	 */
 	public function manage_notice() {
-		$translated = [ 'en_US', 'ro_RO', 'nl_BE'];
+		$translated = [ 'en_US', 'ro_RO', 'nl_BE' ];
 
 		$current_lang = get_user_locale();
 

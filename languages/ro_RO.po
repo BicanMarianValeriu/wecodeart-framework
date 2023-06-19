@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-06-10 20:38+0000\n"
+"PO-Revision-Date: 2023-06-18 04:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -72,6 +72,10 @@ msgstr "[redării blocului a fost oprită]"
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr "O punte între WeCodeArt Framework și pluginul %s."
 
+#: inc/app.php:189
+msgid "A simple starter theme with webpack setup."
+msgstr "O temă de pornire simplă cu webpack configurat."
+
 #. Description of the theme
 msgid ""
 "A simple WordPress theme framework focused on SEO and speed (perfect 100% "
@@ -98,27 +102,27 @@ msgstr ""
 msgid "add one"
 msgstr "adaugă unul"
 
-#: inc/admin/installer/plugin/class-ajax.php:168
+#: inc/admin/installer/plugin/class-ajax.php:161
 msgid "All plugins activated successfully."
 msgstr "Toate pluginurile au fost activate cu succes."
 
-#: inc/admin/installer/plugin/class-ajax.php:216
+#: inc/admin/installer/plugin/class-ajax.php:209
 msgid "All plugins deactivated successfully."
 msgstr "Toate pluginurile au fost dezactivate cu succes."
 
-#: inc/admin/installer/plugin/class-ajax.php:184
+#: inc/admin/installer/plugin/class-ajax.php:177
 msgid "All plugins have failed to activate."
 msgstr "Toate pluginurile nu au reușit să se activeze."
 
-#: inc/admin/installer/plugin/class-ajax.php:232
+#: inc/admin/installer/plugin/class-ajax.php:225
 msgid "All plugins have failed to deactivate."
 msgstr "Toate pluginurile nu au reușit să se dezactiveze."
 
-#: inc/admin/installer/plugin/class-ajax.php:136
+#: inc/admin/installer/plugin/class-ajax.php:129
 msgid "All plugins have failed to install."
 msgstr "Toate pluginurile nu au reușit să se installeze."
 
-#: inc/admin/installer/plugin/class-ajax.php:120
+#: inc/admin/installer/plugin/class-ajax.php:113
 msgid "All plugins installed successfully."
 msgstr "Toate pluginurile instalate cu succes."
 
@@ -271,7 +275,7 @@ msgstr "Arhive zilnice: %s"
 msgid "Design"
 msgstr "Personalizări"
 
-#: inc/admin/class-admin.php:172
+#: inc/admin/class-admin.php:173
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -320,6 +324,15 @@ msgstr "Estompat"
 msgid "Failed to dismiss notification"
 msgstr "Notificarea nu a putut fi respinsă"
 
+#: inc/admin/installer/theme/class-ajax.php:199
+msgid "Failed to send your submission."
+msgstr "Trimiterea cereri dvs. a eșuat."
+
+#: inc/admin/installer/theme/class-ajax.php:132
+#: inc/admin/installer/theme/class-ajax.php:157
+msgid "Failed to switch theme."
+msgstr "Nu s-a putut schimba tema."
+
 #: patterns/section-hero-bg.php:24
 #, php-format
 msgid ""
@@ -340,6 +353,10 @@ msgstr "Păreri"
 #: patterns/section-hero.php:23
 msgid "FIRST"
 msgstr "PRIMA"
+
+#: views/admin/notification-theme.tpl.php:35
+msgid "Fix this!"
+msgstr "Repară asta!"
 
 #: patterns/section-hero.php:16
 msgid "FREE"
@@ -379,6 +396,10 @@ msgstr "https://www.wecodeart.com/"
 msgid "https://www.wecodeart.com/about/"
 msgstr "https://www.wecodeart.com/about/"
 
+#: views/admin/notification-theme.tpl.php:39
+msgid "Ignore for 1 day"
+msgstr "Ignoră timp de 1 zi"
+
 #: inc/support/markup/class-markup.php:249
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
@@ -387,6 +408,16 @@ msgstr "Wrapper HTML nevalid pentru „%s”."
 #: patterns/section-features.php:51
 msgid "Is a Framework"
 msgstr "Este un cadru"
+
+#: views/admin/notification-theme.tpl.php:28
+msgid ""
+"It appears that you do not currently have a child theme installed or "
+"activated. We highly recommend using a child theme for making any "
+"modifications to your website."
+msgstr ""
+"Se pare că în prezent nu aveți o temă copil instalată sau activată. Vă "
+"recomandăm cu căldură să utilizați o temă copil pentru a face orice "
+"modificări site-ului dvs."
 
 #: views/admin/notification-locale.tpl.php:22
 #, php-format
@@ -515,35 +546,40 @@ msgstr "Substituent"
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 
-#: inc/admin/installer/plugin/class-ajax.php:88
+#: inc/admin/installer/plugin/class-ajax.php:74
+#: inc/admin/installer/theme/class-ajax.php:77
 msgid "Please define an action type."
 msgstr "Definiți un tip de acțiune."
 
-#: inc/admin/installer/plugin/class-ajax.php:172
+#: views/admin/notification-theme.tpl.php:23
+msgid "Please use a child theme!"
+msgstr "Vă rugăm să utilizați o temă copil!"
+
+#: inc/admin/installer/plugin/class-ajax.php:165
 msgid "Plugin activated successfully."
 msgstr "Pluginul a fost activat cu succes."
 
-#: inc/admin/installer/plugin/class-ajax.php:220
+#: inc/admin/installer/plugin/class-ajax.php:213
 msgid "Plugin deactivated successfully."
 msgstr "Pluginul a fost dezactivat cu succes."
 
-#: inc/admin/installer/plugin/class-ajax.php:176
+#: inc/admin/installer/plugin/class-ajax.php:169
 msgid "Plugin failed to activate."
 msgstr "Pluginul nu a reușit să se activeze."
 
-#: inc/admin/installer/plugin/class-ajax.php:224
+#: inc/admin/installer/plugin/class-ajax.php:217
 msgid "Plugin failed to deactivate."
 msgstr "Pluginul nu a reușit să se dezactiveze."
 
-#: inc/admin/installer/plugin/class-ajax.php:128
+#: inc/admin/installer/plugin/class-ajax.php:121
 msgid "Plugin failed to install."
 msgstr "Nu s-a instalat pluginul."
 
-#: inc/admin/installer/plugin/class-ajax.php:124
+#: inc/admin/installer/plugin/class-ajax.php:117
 msgid "Plugin installed successfully."
 msgstr "Pluginul instalat cu succes."
 
-#: inc/admin/installer/plugin/class-ajax.php:71
+#: inc/admin/installer/plugin/class-ajax.php:57
 msgid "Plugins array is empty."
 msgstr "Matricea de pluginuri este goală."
 
@@ -654,15 +690,15 @@ msgstr "Planuri simple de prețuri pentru echipe de orice dimensiune."
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
-#: inc/admin/installer/plugin/class-ajax.php:180
+#: inc/admin/installer/plugin/class-ajax.php:173
 msgid "Some plugins activated successfully, others have failed."
 msgstr "Unele plugin-uri au fost activate cu succes, altele au eșuat."
 
-#: inc/admin/installer/plugin/class-ajax.php:228
+#: inc/admin/installer/plugin/class-ajax.php:221
 msgid "Some plugins deactivated successfully, others have failed."
 msgstr "Unele plugin-uri au fost dezactivate cu succes, altele au eșuat."
 
-#: inc/admin/installer/plugin/class-ajax.php:132
+#: inc/admin/installer/plugin/class-ajax.php:125
 msgid "Some plugins installed successfully, others have failed."
 msgstr "Unele plugin-uri au fost instalate cu succes, altele au eșuat."
 
@@ -704,9 +740,25 @@ msgstr "Arhive etichetă: %s"
 msgid "The file must be of type CSS/JS."
 msgstr "Fișierul trebuie să fie de tip CSS/JS."
 
-#: inc/admin/class-admin.php:126 inc/admin/class-admin.php:127
+#: inc/admin/installer/theme/class-ajax.php:93
+msgid "Theme failed to install."
+msgstr "Tema nu a putut fi instalată."
+
+#: inc/admin/installer/theme/class-ajax.php:115
+msgid "Theme installed successfully."
+msgstr "Tema instalată cu succes."
+
+#: inc/admin/installer/theme/class-ajax.php:57
+msgid "Theme is not defined."
+msgstr "Tema nu este definită."
+
+#: inc/admin/class-admin.php:127 inc/admin/class-admin.php:128
 msgid "Theme Options"
 msgstr "Opțiuni temă"
+
+#: inc/admin/installer/theme/class-ajax.php:107
+msgid "Theme package not found."
+msgstr "Pachetul tematic nu a fost găsit."
 
 #: inc/support/starter/content/about.php:7
 msgctxt "Theme starter content"
@@ -727,6 +779,14 @@ msgstr "Acasă"
 msgctxt "Theme starter content"
 msgid "Logo"
 msgstr "Logo"
+
+#: inc/admin/installer/theme/class-ajax.php:165
+msgid "Theme switched to Core Framework."
+msgstr "Tema a fost schimbată la Core Framework."
+
+#: inc/admin/installer/theme/class-ajax.php:140
+msgid "Theme switched."
+msgstr "S-a schimbat tema."
 
 #: inc/gutenberg/blocks/comment/class-template.php:76
 msgid ""
@@ -826,6 +886,10 @@ msgstr "Site"
 #: inc/gutenberg/class-gutenberg.php:82
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
+
+#: inc/app.php:188
+msgid "WeCodeArt Developer"
+msgstr "WeCodeArt Dezvoltator"
 
 #: patterns/cta-border.php:16 patterns/cta-center.php:19
 #: patterns/cta-default.php:23 patterns/cta-separator.php:23
@@ -982,3 +1046,7 @@ msgstr "Emailul tău nu va fi publicat."
 #| msgid "your plan"
 msgid "Your Plan"
 msgstr "Planul Tău"
+
+#: inc/admin/installer/theme/class-ajax.php:197
+msgid "Your submission was successfully sent. We well get back to you shortly."
+msgstr "Cererea dvs. a fost trimisă cu succes. Vom reveni în curând."

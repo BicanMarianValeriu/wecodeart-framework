@@ -77,12 +77,12 @@ __webpack_require__.r(__webpack_exports__);
 const Notification = {
   init() {
     document.addEventListener('click', e => {
-      var _target$closest$id, _target$closest;
+      var _target$closest$datas, _target$closest, _target$closest$datas2;
 
       const {
         target
       } = e;
-      const noticeId = (_target$closest$id = (_target$closest = target.closest('.wca-notice')) === null || _target$closest === void 0 ? void 0 : _target$closest.id) !== null && _target$closest$id !== void 0 ? _target$closest$id : '';
+      const noticeId = (_target$closest$datas = (_target$closest = target.closest('.wca-notice')) === null || _target$closest === void 0 ? void 0 : (_target$closest$datas2 = _target$closest.dataset) === null || _target$closest$datas2 === void 0 ? void 0 : _target$closest$datas2.id) !== null && _target$closest$datas !== void 0 ? _target$closest$datas : '';
 
       if (target.matches('[data-dismiss]')) {
         this.dismissNew(e, noticeId);
@@ -105,14 +105,8 @@ const Notification = {
       target
     } = e;
     const el = target.closest('.wca-notice');
-    el.style.opacity = 0;
-    el.addEventListener('transitionend', () => {
-      el.style.display = 'none';
-      el.parentNode.removeChild(el);
-    }, {
-      once: true
-    });
     this.ajax(noticeId);
+    el.parentNode.removeChild(el);
     const link = (_target$getAttribute = target.getAttribute('href')) !== null && _target$getAttribute !== void 0 ? _target$getAttribute : '';
 
     const _target = (_target$getAttribute2 = target.getAttribute('target')) !== null && _target$getAttribute2 !== void 0 ? _target$getAttribute2 : '';
@@ -120,12 +114,20 @@ const Notification = {
     link && _target === '_blank' && window.open(link, '_blank');
   },
 
-  ajax(id) {
-    if (id === '') {
+  ajax(noticeId) {
+    if (noticeId === '') {
       return;
     }
 
-    const container = document.getElementById(id);
+    const notices = [...document.querySelectorAll('.wca-notice')];
+    const container = notices.filter(_ref => {
+      let {
+        dataset: {
+          id = ''
+        } = {}
+      } = _ref;
+      return id == noticeId;
+    }).pop();
     const {
       nonce = ''
     } = (container === null || container === void 0 ? void 0 : container.dataset) || {};
@@ -134,7 +136,7 @@ const Notification = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
-      body: `action=wca_dismiss_notification&notification=${encodeURIComponent(id)}&nonce=${encodeURIComponent(nonce)}`
+      body: `action=wca_dismiss_notification&notification=${encodeURIComponent(noticeId)}&nonce=${encodeURIComponent(nonce)}`
     });
   }
 

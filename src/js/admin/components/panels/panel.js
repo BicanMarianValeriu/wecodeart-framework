@@ -10,8 +10,8 @@ const {
     }
 } = wp;
 
-export default function Plugins(props) {
-    const { plugins: tabs, ...tabProps } = props;
+export default function Panel(props) {
+    const { tabs, ...tabProps } = props;
 
     const hash = window.location.hash.substr(1);
     const initialTab = hash ? tabs.find(({ name }) => name === hash)?.name : tabs[0]?.name;

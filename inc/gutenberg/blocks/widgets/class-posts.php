@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -158,6 +158,11 @@ class Posts extends Dynamic {
 		
 		$content = '';
 
+		add_filter( 'pre_render_block', static function() {
+			remove_all_filters( 'query_loop_block_query_vars' );
+			remove_filter( current_filter(), __METHOD__ );
+		} ); // WooCommerce messes things up.
+		
 		$block_core_latest_posts_excerpt_length = get_prop( $attributes, 'excerptLength', 55 );
         add_filter( 'excerpt_length', 'block_core_latest_posts_get_excerpt_length', 20 );
 		foreach( $blocks as $block ) $content .= $block->render( $block );
@@ -173,21 +178,21 @@ class Posts extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-post-template--latest .wp-block-post-title {
-			margin-bottom: 0;
-		}
-		.wp-block-post-template--latest figure.alignleft,
-		.wp-block-post-template--latest figure.alignright {
-			min-width: 100px;
-		}
-		.wp-block-post-template--latest figure.alignleft {
-			float: left;
-			margin-right: 1rem;
-		}
-		.wp-block-post-template--latest figure.alignright {
-			float: right;
-			margin-left: 1rem;
-		}
+			.wp-block-post-template--latest .wp-block-post-title {
+				margin-bottom: 0;
+			}
+			.wp-block-post-template--latest figure.alignleft,
+			.wp-block-post-template--latest figure.alignright {
+				min-width: 100px;
+			}
+			.wp-block-post-template--latest figure.alignleft {
+				float: left;
+				margin-right: 1rem;
+			}
+			.wp-block-post-template--latest figure.alignright {
+				float: right;
+				margin-left: 1rem;
+			}
 		";
 	}
 }

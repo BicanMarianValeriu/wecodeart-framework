@@ -17,7 +17,7 @@ const Notification = {
     init() {
         document.addEventListener('click', (e) => {
             const { target } = e;
-            const noticeId = target.closest('.wca-notice')?.id ?? '';
+            const noticeId = target.closest('.wca-notice')?.dataset?.id ?? '';
             if (target.matches('[data-dismiss]')) {
                 this.dismissNew(e, noticeId);
             } else if (target.classList.contains('notice-dismiss')) {
@@ -33,24 +33,20 @@ const Notification = {
         e.preventDefault();
         const { target } = e;
         const el = target.closest('.wca-notice');
-
-        el.style.opacity = 0;
-        el.addEventListener('transitionend', () => {
-            el.style.display = 'none';
-            el.parentNode.removeChild(el);
-        }, { once: true });
-
+        
         this.ajax(noticeId);
+        el.parentNode.removeChild(el);
 
         const link = target.getAttribute('href') ?? '';
         const _target = target.getAttribute('target') ?? '';
         link && _target === '_blank' && window.open(link, '_blank');
     },
-    ajax(id) {
-        if (id === '') {
+    ajax(noticeId) {
+        if (noticeId === '') {
             return;
         }
-        const container = document.getElementById(id);
+        const notices = [...document.querySelectorAll('.wca-notice')];
+        const container = notices.filter(({ dataset: { id = '' } = {}}) => id == noticeId).pop();
         const { nonce = '' } = container?.dataset || {};
 
         fetch(ajaxurl, {
@@ -58,7 +54,7 @@ const Notification = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             },
-            body: `action=wca_dismiss_notification&notification=${encodeURIComponent(id)}&nonce=${encodeURIComponent(nonce)}`,
+            body: `action=wca_dismiss_notification&notification=${encodeURIComponent(noticeId)}&nonce=${encodeURIComponent(nonce)}`,
         });
     },
 };

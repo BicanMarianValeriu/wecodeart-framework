@@ -12,13 +12,13 @@ const {
 
 import { Manager } from './Components';
 
-import './../../../scss/admin/plugins/index.scss';
+import './../../../scss/admin/themes/index.scss';
 
-addFilter('wecodeart.admin.tabs.plugins', 'wecodeart/plugins/admin/panel', optionsPanel);
+addFilter('wecodeart.admin.tabs.themes', 'wecodeart/themes/admin/panel', optionsPanel);
 function optionsPanel(panels) {
 	return [{
 		name: 'manager',
-		title: __('Plugins Manager', 'wecodeart'),
+		title: __('Themes Manager', 'wecodeart'),
 		render: (props) => <Manager {...props} />
 	}, ...panels];
 }

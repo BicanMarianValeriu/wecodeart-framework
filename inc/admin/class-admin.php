@@ -41,8 +41,8 @@ class Admin {
 	 * Send to Constructor
 	 */
 	public function init() {
-		\add_action( 'rest_api_init', 			[ $this, 'register_routes' ] );
-		\add_action( 'admin_menu',				[ $this, 'register_menu_page' ] );
+		\add_action( 'rest_api_init',	[ $this, 'register_routes' 		] );
+		\add_action( 'admin_menu',		[ $this, 'register_menu_page' 	] );
 
 		Upgrade::get_instance();
 		Settings::get_instance();
@@ -50,6 +50,7 @@ class Admin {
 		Notifications::get_instance();
 
 		new Installer\Plugin\Ajax();
+		new Installer\Theme\Ajax();
 	}
 
 	/**
@@ -173,6 +174,7 @@ class Admin {
 			],
 			'currentUser'	=> wp_get_current_user()->display_name,
 			'adminUrl'		=> untrailingslashit( esc_url_raw( admin_url() ) ),
+			'adminEmail'	=> get_bloginfo( 'admin_email' ),
 			'themeDirs'		=> wecodeart_config( 'paths' )
 		] );
 		

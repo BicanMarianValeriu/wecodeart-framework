@@ -182,6 +182,14 @@ return [
                 'recommended'   => true,
             ],
         ],
-        'themes' => []
+        'themes' => [
+            [
+                'slug'          => 'BicanMarianValeriu/wecodeart-developer',
+                'title'         => esc_html__( 'WeCodeArt Developer', 'wecodeart' ),
+                'description'   => esc_html__( 'A simple starter theme with webpack setup.', 'wecodeart' ),
+                'source'        => 'github',
+                'more'          => 'https://github.com/BicanMarianValeriu/wecodeart-developer/',
+            ],
+        ]
     ],
 ];

@@ -352,8 +352,8 @@ class Notification {
 	 */
 	public function render() {
 		$attributes = [
-			'id'			=> $this->get_id(),
 			'class'			=> $this->get_classname(),
+			'data-id'		=> $this->get_id(),
 			'data-nonce'	=> $this->get_nonce(),
 		];
 

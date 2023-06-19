@@ -84,6 +84,8 @@ abstract class Installer implements Installable {
 
 		$this->set_api_url();
 		$this->set_zip_url();
+
+		add_action( 'upgrader_post_install', [ $this, 'upgrader_post_install' ], 20, 3 );
     }
 	
 	/**
@@ -94,6 +96,15 @@ abstract class Installer implements Installable {
 	 * @return 	mixed
 	 */
 	abstract public function install();
+
+	/**
+	 * Post install process.
+	 *
+	 * @since 	6.1.2
+	 *
+	 * @return 	mixed
+	 */
+	abstract public function upgrader_post_install( $true, $hook_extra, $result ): array;
 
 	/**
 	 * Sets remote.
@@ -136,6 +147,31 @@ abstract class Installer implements Installable {
 		$response = $request->get_response_body( true );
 		
 		return $this->package = get_prop( $response, [ $zip_key ] );
+	}
+
+	/**
+	 * Get installer dir.
+	 *
+	 * @since 	6.1.2
+	 *
+	 * @return 	string	the installer directory
+	 */
+	public function get_dir(): string {
+		$dir = (string) $this->slug;
+
+		switch ( $this->source ) {
+			case 'github':
+				$dir = preg_replace( '/^.*\//', '', $dir );
+				break;
+			case 'custom':
+				$dir = substr( $dir, strrpos( $dir, '/' ) + 1, strrpos( $dir, '.zip' ) - strrpos( $dir, '/' ) - 1 );
+				break;
+			default:
+				$dir = preg_replace( '/\/[^/]*$/', '', $dir );
+				break;
+		}
+	
+		return $dir;
 	}
 
 	/**

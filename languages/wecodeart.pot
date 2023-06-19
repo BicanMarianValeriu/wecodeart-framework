@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-10 20:37+0000\n"
+"POT-Creation-Date: 2023-06-17 04:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -71,6 +71,10 @@ msgstr ""
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr ""
 
+#: inc/app.php:189
+msgid "A simple starter theme with webpack setup."
+msgstr ""
+
 #. Description of the theme
 msgid ""
 "A simple WordPress theme framework focused on SEO and speed (perfect 100% "
@@ -88,27 +92,27 @@ msgstr ""
 msgid "add one"
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:168
+#: inc/admin/installer/plugin/class-ajax.php:161
 msgid "All plugins activated successfully."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:216
+#: inc/admin/installer/plugin/class-ajax.php:209
 msgid "All plugins deactivated successfully."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:184
+#: inc/admin/installer/plugin/class-ajax.php:177
 msgid "All plugins have failed to activate."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:232
+#: inc/admin/installer/plugin/class-ajax.php:225
 msgid "All plugins have failed to deactivate."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:136
+#: inc/admin/installer/plugin/class-ajax.php:129
 msgid "All plugins have failed to install."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:120
+#: inc/admin/installer/plugin/class-ajax.php:113
 msgid "All plugins installed successfully."
 msgstr ""
 
@@ -253,7 +257,7 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: inc/admin/class-admin.php:172
+#: inc/admin/class-admin.php:173
 msgid "Developer Mode"
 msgstr ""
 
@@ -298,6 +302,15 @@ msgstr ""
 msgid "Failed to dismiss notification"
 msgstr ""
 
+#: inc/admin/installer/theme/class-ajax.php:199
+msgid "Failed to send your submission."
+msgstr ""
+
+#: inc/admin/installer/theme/class-ajax.php:132
+#: inc/admin/installer/theme/class-ajax.php:157
+msgid "Failed to switch theme."
+msgstr ""
+
 #: patterns/section-hero-bg.php:24
 #, php-format
 msgid ""
@@ -315,6 +328,10 @@ msgstr ""
 
 #: patterns/section-hero.php:23
 msgid "FIRST"
+msgstr ""
+
+#: views/admin/notification-theme.tpl.php:35
+msgid "Fix this!"
 msgstr ""
 
 #: patterns/section-hero.php:16
@@ -355,6 +372,10 @@ msgstr ""
 msgid "https://www.wecodeart.com/about/"
 msgstr ""
 
+#: views/admin/notification-theme.tpl.php:39
+msgid "Ignore for 1 day"
+msgstr ""
+
 #: inc/support/markup/class-markup.php:249
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
@@ -362,6 +383,13 @@ msgstr ""
 
 #: patterns/section-features.php:51
 msgid "Is a Framework"
+msgstr ""
+
+#: views/admin/notification-theme.tpl.php:28
+msgid ""
+"It appears that you do not currently have a child theme installed or "
+"activated. We highly recommend using a child theme for making any "
+"modifications to your website."
 msgstr ""
 
 #: views/admin/notification-locale.tpl.php:22
@@ -486,35 +514,40 @@ msgstr ""
 msgid "Please define a callback function for each of the modules."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:88
+#: inc/admin/installer/plugin/class-ajax.php:74
+#: inc/admin/installer/theme/class-ajax.php:77
 msgid "Please define an action type."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:172
+#: views/admin/notification-theme.tpl.php:23
+msgid "Please use a child theme!"
+msgstr ""
+
+#: inc/admin/installer/plugin/class-ajax.php:165
 msgid "Plugin activated successfully."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:220
+#: inc/admin/installer/plugin/class-ajax.php:213
 msgid "Plugin deactivated successfully."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:176
+#: inc/admin/installer/plugin/class-ajax.php:169
 msgid "Plugin failed to activate."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:224
+#: inc/admin/installer/plugin/class-ajax.php:217
 msgid "Plugin failed to deactivate."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:128
+#: inc/admin/installer/plugin/class-ajax.php:121
 msgid "Plugin failed to install."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:124
+#: inc/admin/installer/plugin/class-ajax.php:117
 msgid "Plugin installed successfully."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:71
+#: inc/admin/installer/plugin/class-ajax.php:57
 msgid "Plugins array is empty."
 msgstr ""
 
@@ -621,15 +654,15 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:180
+#: inc/admin/installer/plugin/class-ajax.php:173
 msgid "Some plugins activated successfully, others have failed."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:228
+#: inc/admin/installer/plugin/class-ajax.php:221
 msgid "Some plugins deactivated successfully, others have failed."
 msgstr ""
 
-#: inc/admin/installer/plugin/class-ajax.php:132
+#: inc/admin/installer/plugin/class-ajax.php:125
 msgid "Some plugins installed successfully, others have failed."
 msgstr ""
 
@@ -670,8 +703,24 @@ msgstr ""
 msgid "The file must be of type CSS/JS."
 msgstr ""
 
-#: inc/admin/class-admin.php:126 inc/admin/class-admin.php:127
+#: inc/admin/installer/theme/class-ajax.php:93
+msgid "Theme failed to install."
+msgstr ""
+
+#: inc/admin/installer/theme/class-ajax.php:115
+msgid "Theme installed successfully."
+msgstr ""
+
+#: inc/admin/installer/theme/class-ajax.php:57
+msgid "Theme is not defined."
+msgstr ""
+
+#: inc/admin/class-admin.php:127 inc/admin/class-admin.php:128
 msgid "Theme Options"
+msgstr ""
+
+#: inc/admin/installer/theme/class-ajax.php:107
+msgid "Theme package not found."
 msgstr ""
 
 #: inc/support/starter/content/about.php:7
@@ -692,6 +741,14 @@ msgstr ""
 #: inc/support/starter/class-starter.php:112
 msgctxt "Theme starter content"
 msgid "Logo"
+msgstr ""
+
+#: inc/admin/installer/theme/class-ajax.php:165
+msgid "Theme switched to Core Framework."
+msgstr ""
+
+#: inc/admin/installer/theme/class-ajax.php:140
+msgid "Theme switched."
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-template.php:76
@@ -780,6 +837,10 @@ msgstr ""
 #. Name of the theme
 #: inc/gutenberg/class-gutenberg.php:82
 msgid "WeCodeArt"
+msgstr ""
+
+#: inc/app.php:188
+msgid "WeCodeArt Developer"
 msgstr ""
 
 #: patterns/cta-border.php:16 patterns/cta-center.php:19
@@ -906,4 +967,8 @@ msgstr ""
 
 #: patterns/section-pricing.php:15
 msgid "Your Plan"
+msgstr ""
+
+#: inc/admin/installer/theme/class-ajax.php:197
+msgid "Your submission was successfully sent. We well get back to you shortly."
 msgstr ""

@@ -73,4 +73,30 @@ class Plugin extends Installer {
 		
 		return $this->status = false;
 	}
+
+	/**
+	 * Fix GitHub path.
+	 *
+	 * @since 	6.1.2
+	 *
+	 * @param 	boolean $true       always true
+	 * @param 	mixed   $hook_extra not used
+	 * @param 	array   $result     the result of the move
+	 *
+	 * @return 	array 	$result		the result of the move
+	 */
+	public function upgrader_post_install( $true, $hook_extra, $result ): array {
+		if( $this->source !== 'github' ) {
+			return $result;
+		}
+
+		global $wp_filesystem;
+
+		$destination = WP_PLUGIN_DIR . '/' . $this->get_dir();
+
+		$wp_filesystem->move( $result['destination'], $destination );
+		$result['destination'] = $destination;
+
+		return $result;
+	}
 }

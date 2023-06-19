@@ -38,7 +38,7 @@ const {
 /**
  * Components
  */
-import { GettingStarted, Plugins, Licenses, Notices } from './components';
+import { GettingStarted, SubPanel, Licenses, Notices } from './components';
 
 /**
  * Styles
@@ -103,7 +103,18 @@ const WeCodeArt = () => {
 					name: 'plugins',
 					title: __('Plugins', 'wecodeart'),
 					className: 'wecodeart-plugins',
-					render: <Plugins {...tabProps} plugins={applyFilters('wecodeart.admin.extensions', applyFilters('wecodeart.admin.tabs.plugins', []))} />
+					render: <SubPanel {...tabProps} tabs={applyFilters('wecodeart.admin.extensions', applyFilters('wecodeart.admin.tabs.plugins', []))} />
+				}
+			]
+			: []
+		),
+		...(applyFilters('wecodeart.admin.tabs.themes', []).length
+			? [
+				{
+					name: 'themes',
+					title: __('Themes', 'wecodeart'),
+					className: 'wecodeart-themes',
+					render: <SubPanel {...tabProps} tabs={applyFilters('wecodeart.admin.tabs.themes', [])} />
 				}
 			]
 			: []
@@ -148,8 +159,8 @@ const WeCodeArt = () => {
 				hosted_button_id: 'PV9A4JDX84Z3W',
 				image: {
 					src: 'https://pics.paypal.com/00/s/MzMzMTdhOWItZmYxZS00MjcwLWIyNmItNDRiYzhhNGZhOWI0/file.PNG',
-					alt: 'Donate with PayPal button',
-					title: 'Support the development of WeCodeArt Framework!',
+					alt: __('Donate with PayPal button', 'wecodeart'),
+					title: __('Support the development of WeCodeArt Framework!', 'wecodeart'),
 				},
 			}).render('#donate-button');
 		};

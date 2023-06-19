@@ -58,11 +58,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "GettingStarted": () => (/* reexport safe */ _panels_gettingStarted__WEBPACK_IMPORTED_MODULE_3__["default"]),
 /* harmony export */   "Licenses": () => (/* reexport safe */ _panels_licenses__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "Notices": () => (/* reexport safe */ _common_notices__WEBPACK_IMPORTED_MODULE_0__["default"]),
-/* harmony export */   "Plugins": () => (/* reexport safe */ _panels_plugins__WEBPACK_IMPORTED_MODULE_2__["default"])
+/* harmony export */   "SubPanel": () => (/* reexport safe */ _panels_panel__WEBPACK_IMPORTED_MODULE_2__["default"])
 /* harmony export */ });
 /* harmony import */ var _common_notices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/notices */ "./src/js/admin/components/common/notices.js");
 /* harmony import */ var _panels_licenses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./panels/licenses */ "./src/js/admin/components/panels/licenses.js");
-/* harmony import */ var _panels_plugins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./panels/plugins */ "./src/js/admin/components/panels/plugins.js");
+/* harmony import */ var _panels_panel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./panels/panel */ "./src/js/admin/components/panels/panel.js");
 /* harmony import */ var _panels_gettingStarted__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./panels/gettingStarted */ "./src/js/admin/components/panels/gettingStarted.js");
 
 
@@ -151,10 +151,10 @@ const {
     className: "m-0 shadow-none"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "m-0"
-  }, __('Customizer Options', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('Looking to manage your logo, favicon, set the home or blog page using WP Customizer? You can also add your own custom CSS or explore other plugin settings.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-    href: adminUrl + '/customize.php',
+  }, __('Need Support?', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('Whether you need assistance, wish to report a bug, or have a new feature request, please create a topic in the support forum on WordPress.org.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
+    href: "https://wordpress.org/support/theme/wecodeart/",
     isPrimary: true
-  }, __('Legacy Options', 'wecodeart')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
+  }, __('Support Forum', 'wecodeart')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
     className: "m-0 shadow-none"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "m-0"
@@ -170,7 +170,7 @@ const {
     }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "m-0"
-  }, __('Join Our Facebook Community!', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('Do join WeCodeArt\'s official Facebook page to share your experience, thoughts, and ideas.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
+  }, __('Join Our Facebook Community', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('Do join WeCodeArt\'s official Facebook page to share your experience, thoughts, and ideas.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
     href: "https://www.facebook.com/wecodeart/",
     isPrimary: true,
     target: "_blank"
@@ -405,15 +405,15 @@ const License = props => {
 
 /***/ }),
 
-/***/ "./src/js/admin/components/panels/plugins.js":
-/*!***************************************************!*\
-  !*** ./src/js/admin/components/panels/plugins.js ***!
-  \***************************************************/
+/***/ "./src/js/admin/components/panels/panel.js":
+/*!*************************************************!*\
+  !*** ./src/js/admin/components/panels/panel.js ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Plugins)
+/* harmony export */   "default": () => (/* binding */ Panel)
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
@@ -430,11 +430,11 @@ const {
     TabPanel
   }
 } = wp;
-function Plugins(props) {
+function Panel(props) {
   var _tabs$find, _tabs$;
 
   const {
-    plugins: tabs,
+    tabs,
     ...tabProps
   } = props;
   const hash = window.location.hash.substr(1);
@@ -737,8 +737,15 @@ const WeCodeArt = () => {
     name: 'plugins',
     title: __('Plugins', 'wecodeart'),
     className: 'wecodeart-plugins',
-    render: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components__WEBPACK_IMPORTED_MODULE_2__.Plugins, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, tabProps, {
-      plugins: applyFilters('wecodeart.admin.extensions', applyFilters('wecodeart.admin.tabs.plugins', []))
+    render: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components__WEBPACK_IMPORTED_MODULE_2__.SubPanel, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, tabProps, {
+      tabs: applyFilters('wecodeart.admin.extensions', applyFilters('wecodeart.admin.tabs.plugins', []))
+    }))
+  }] : []), ...(applyFilters('wecodeart.admin.tabs.themes', []).length ? [{
+    name: 'themes',
+    title: __('Themes', 'wecodeart'),
+    className: 'wecodeart-themes',
+    render: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components__WEBPACK_IMPORTED_MODULE_2__.SubPanel, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, tabProps, {
+      tabs: applyFilters('wecodeart.admin.tabs.themes', [])
     }))
   }] : []), {
     name: 'license',
@@ -788,8 +795,8 @@ const WeCodeArt = () => {
         hosted_button_id: 'PV9A4JDX84Z3W',
         image: {
           src: 'https://pics.paypal.com/00/s/MzMzMTdhOWItZmYxZS00MjcwLWIyNmItNDRiYzhhNGZhOWI0/file.PNG',
-          alt: 'Donate with PayPal button',
-          title: 'Support the development of WeCodeArt Framework!'
+          alt: __('Donate with PayPal button', 'wecodeart'),
+          title: __('Support the development of WeCodeArt Framework!', 'wecodeart')
         }
       }).render('#donate-button');
     };

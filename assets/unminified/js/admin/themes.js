@@ -122,16 +122,17 @@ const getInstallerDir = _ref => {
 
 /***/ }),
 
-/***/ "./src/js/admin/plugins/Components.js":
-/*!********************************************!*\
-  !*** ./src/js/admin/plugins/Components.js ***!
-  \********************************************/
+/***/ "./src/js/admin/themes/Components.js":
+/*!*******************************************!*\
+  !*** ./src/js/admin/themes/Components.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Manager": () => (/* binding */ Manager),
-/* harmony export */   "Plugin": () => (/* binding */ Plugin)
+/* harmony export */   "Submit": () => (/* binding */ Submit),
+/* harmony export */   "Theme": () => (/* binding */ Theme)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
@@ -145,7 +146,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 const {
   i18n: {
-    __
+    __,
+    sprintf
   },
   components: {
     Card,
@@ -155,37 +157,46 @@ const {
     ExternalLink,
     ToggleControl,
     __experimentalHStack: HStack,
+    TextControl,
+    TextareaControl,
+    Modal,
     Spinner,
     Button
   },
   element: {
-    useState
+    useState,
+    useEffect
   }
 } = wp;
 const {
-  active: _activePlugins = [],
-  all: _allPlugins = [],
-  installers = []
-} = wecodeartPlugins || {};
+  currentUser,
+  adminEmail,
+  themeDirs
+} = wecodeart;
+const {
+  installed = [],
+  installers = [],
+  child = false
+} = wecodeartThemes || {};
 
+const AJAX_ACTION = 'wca_manage_themes';
 
-const Plugin = _ref => {
+const Theme = _ref => {
   let {
     title = '',
     slug = '',
     description = '',
     more = '',
     source = 'wordpress',
-    required = true,
-    activePlugins,
-    setActivePlugins,
-    allPlugins,
-    setAllPlugins,
+    allThemes,
+    setAllThemes,
+    activeTheme,
+    setActiveTheme,
     handleNotice
   } = _ref;
   const [activeLoading, setActiveLoading] = useState(null);
   const [installLoading, setInstallLoading] = useState(null);
-  const pluginDir = (0,_functions__WEBPACK_IMPORTED_MODULE_2__.getInstallerDir)({
+  const themeDir = (0,_functions__WEBPACK_IMPORTED_MODULE_2__.getInstallerDir)({
     slug,
     source
   });
@@ -193,11 +204,11 @@ const Plugin = _ref => {
   const handleActivation = async value => {
     setActiveLoading(true);
     const formData = new FormData();
-    formData.append('action', 'wca_manage_plugins');
+    formData.append('action', AJAX_ACTION);
     formData.append('type', value ? 'activate' : 'deactivate');
-    formData.append('plugins', JSON.stringify([{
-      slug: pluginDir
-    }]));
+    formData.append('data', JSON.stringify({
+      slug: themeDir
+    }));
     const r = await fetch(ajaxurl, {
       method: 'POST',
       body: formData
@@ -205,14 +216,14 @@ const Plugin = _ref => {
     const {
       data: {
         message,
-        success = []
+        success = false
       }
     } = await r.json();
 
-    if (value && success.length) {
-      setActivePlugins([...activePlugins, pluginDir]);
-    } else if (success.length) {
-      setActivePlugins(activePlugins.filter(item => item !== pluginDir));
+    if (value && success) {
+      setActiveTheme(themeDir);
+    } else if (success) {
+      setActiveTheme('wecodeart');
     }
 
     handleNotice(message);
@@ -226,12 +237,12 @@ const Plugin = _ref => {
     } = _ref2;
     setInstallLoading(true);
     const formData = new FormData();
-    formData.append('action', 'wca_manage_plugins');
+    formData.append('action', AJAX_ACTION);
     formData.append('type', 'install');
-    formData.append('plugins', JSON.stringify([{
+    formData.append('data', JSON.stringify({
       slug,
       source
-    }]));
+    }));
     const r = await fetch(ajaxurl, {
       method: 'POST',
       body: formData
@@ -239,20 +250,19 @@ const Plugin = _ref => {
     const {
       data: {
         message = '',
-        success = []
+        success = false
       } = {}
     } = await r.json();
 
-    if (success.length) {
-      setAllPlugins([...allPlugins, pluginDir]);
+    if (success) {
+      setAllThemes([...allThemes, themeDir]);
     }
 
     handleNotice(message);
     setInstallLoading(false);
   };
 
-  const hasMetRequirements = required instanceof Array ? required.map(i => activePlugins.includes(i)).every(i => i === true) : required;
-  const shouldAllowInstall = allPlugins.includes(pluginDir) || !pluginDir || !hasMetRequirements || installLoading;
+  const shouldAllowInstall = allThemes.includes(themeDir) || installLoading;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Card, {
     className: "border shadow-none"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardHeader, null, title && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h3", {
@@ -264,13 +274,13 @@ const Plugin = _ref => {
     className: "me-1"
   }, __('Learn more', 'wecodeart'))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(HStack, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
     className: "align-self-end"
-  }, hasMetRequirements ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ToggleControl, {
+  }, allThemes.includes(themeDir) ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ToggleControl, {
     className: "m-0",
-    label: activePlugins.includes(pluginDir) || !pluginDir ? __('Active', 'wecodeart') : __('Activate', 'wecodeart'),
-    checked: activePlugins.includes(pluginDir) || !pluginDir,
+    label: activeTheme !== themeDir ? __('Active', 'wecodeart') : __('Activate', 'wecodeart'),
+    checked: activeTheme === themeDir,
     onChange: handleActivation,
-    disabled: !allPlugins.includes(pluginDir) || activeLoading
-  }) : __('Plugin not detected.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+    disabled: !allThemes.includes(themeDir) || activeLoading
+  }) : __('Not installed.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
     className: "button",
     isPrimary: true,
     icon: installLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Spinner, null),
@@ -279,17 +289,171 @@ const Plugin = _ref => {
       source
     }),
     disabled: shouldAllowInstall
-  }, installLoading ? '' : allPlugins.includes(pluginDir) || !pluginDir ? __('Installed', 'wecodeart') : __('Install', 'wecodeart')))));
+  }, installLoading ? '' : allThemes.includes(themeDir) ? __('Installed', 'wecodeart') : __('Install', 'wecodeart')))));
 };
 
-const Manager = _ref3 => {
+const Submit = _ref3 => {
+  let {
+    handleNotice
+  } = _ref3;
+  const cardDecoration = `${themeDirs.uri}/assets/images/appreciation.svg`;
+  const [isOpen, setIsOpen] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [sending, setSending] = useState(false);
+  const [details, setDetails] = useState({
+    name: currentUser,
+    email: adminEmail,
+    url: '',
+    message: ''
+  });
+  useEffect(() => {
+    validateForm();
+    return () => null;
+  }, [details]);
+
+  const openModal = () => setIsOpen(true);
+
+  const closeModal = () => setIsOpen(false);
+
+  const isValidEmail = email => {
+    // Use a regular expression or any other validation logic to check email validity
+    // Return true if the email is valid, false otherwise
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const isValidUrl = url => {
+    // Use a regular expression or any other validation logic to check URL validity
+    // Return true if the URL is valid, false otherwise
+    return /^(ftp|http|https):\/\/[^ "]+$/.test(url);
+  };
+
+  const validateForm = () => {
+    const errors = {};
+
+    if (!details.name) {
+      errors.name = __('Please enter your name.', 'wecodeart');
+    }
+
+    if (!details.email) {
+      errors.email = __('Please enter your email.', 'wecodeart');
+    } else if (!isValidEmail(details.email)) {
+      errors.email = __('Please enter a valid email address.', 'wecodeart');
+    }
+
+    if (!details.url) {
+      errors.url = __('Please enter the theme URL.', 'wecodeart');
+    } else if (!isValidUrl(details.url)) {
+      errors.url = __('Please enter a valid URL.', 'wecodeart');
+    }
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    setSending(true);
+    const formData = new FormData();
+    formData.append('action', AJAX_ACTION);
+    formData.append('type', 'submit');
+    formData.append('data', JSON.stringify(details));
+    const r = await fetch(ajaxurl, {
+      method: 'POST',
+      body: formData
+    });
+    const {
+      data: {
+        message
+      }
+    } = await r.json();
+    handleNotice(message);
+    setSending(false);
+    setDetails({
+      name: currentUser,
+      email: adminEmail,
+      url: '',
+      message: ''
+    });
+    closeModal();
+  };
+
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, isOpen && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Modal, {
+    title: __('Awesome, let\'s see it!', 'wecodeart'),
+    onRequestClose: closeModal
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(TextControl, {
+    label: __('Your name', 'wecodeart'),
+    value: details.name,
+    onChange: name => setDetails({ ...details,
+      name
+    }),
+    help: errors.name
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(TextControl, {
+    label: __('Your email', 'wecodeart'),
+    type: "email",
+    value: details.email,
+    onChange: email => setDetails({ ...details,
+      email
+    }),
+    help: errors.email
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(TextControl, {
+    label: __('Theme URL', 'wecodeart'),
+    type: "url",
+    value: details.url,
+    placeholder: __('Github repository or website demo', 'wecodeart'),
+    onChange: url => setDetails({ ...details,
+      url
+    }),
+    help: errors.url
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(TextareaControl, {
+    label: __('Your message', 'wecodeart'),
+    value: details.message,
+    placeholder: __('Additional info', 'wecodeart'),
+    onChange: message => setDetails({ ...details,
+      message
+    }),
+    help: errors.message
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+    className: "button",
+    isPrimary: true,
+    icon: sending && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Spinner, null),
+    onClick: handleSubmit,
+    disabled: Object.keys(errors).length,
+    style: {
+      marginTop: '1rem'
+    }
+  }, sending ? '' : __('Send', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Card, {
+    className: "shadow-none",
+    style: {
+      '--wca--card-image': `url(${cardDecoration})`,
+      '--wca--card-bg': '#E7E6FE',
+      backgroundPosition: 'bottom 55px right 0',
+      backgroundSize: 150
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h3", {
+    className: "m-0"
+  }, __('Your Theme Here', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, __('Have you created an amazing child skin for our theme? We would love to feature it here!', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardFooter, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+    variant: "secondary",
+    isPrimary: true,
+    onClick: openModal,
+    style: {
+      display: 'block',
+      width: '100%'
+    }
+  }, __('Contact us', 'wecodeart')))));
+};
+
+const Manager = _ref4 => {
   let {
     createNotice
-  } = _ref3;
-  const [activePlugins, setActivePlugins] = useState(_activePlugins);
-  const [allPlugins, setAllPlugins] = useState(_allPlugins);
+  } = _ref4;
+  const [activeTheme, setActiveTheme] = useState(localStorage.getItem('activeTheme') || child);
+  const [allThemes, setAllThemes] = useState(installed);
   const [hasChanges, setHasChanges] = useState(false);
   const [reloading, setReloading] = useState(false);
+  useEffect(() => localStorage.setItem('activeTheme', activeTheme), [activeTheme]);
 
   const handleNotice = message => {
     setReloading(false);
@@ -297,45 +461,29 @@ const Manager = _ref3 => {
     return createNotice('success', message);
   };
 
-  const hasRecommendedPlugins = installers.filter(_ref4 => {
-    let {
-      recommended,
-      ...rest
-    } = _ref4;
-    return recommended && allPlugins.includes((0,_functions__WEBPACK_IMPORTED_MODULE_2__.getInstallerDir)(rest)) === false;
-  });
-  const extraPluginProps = {
-    activePlugins,
-    setActivePlugins,
-    allPlugins,
-    setAllPlugins,
+  const extraThemeProps = {
+    allThemes,
+    setAllThemes,
+    activeTheme,
+    setActiveTheme,
     handleNotice
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, hasRecommendedPlugins.length ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+  const isCoreFramework = !activeTheme || activeTheme && activeTheme === 'wecodeart';
+  const hasDefaultTheme = allThemes.includes('wecodeart-developer');
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, isCoreFramework ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
     className: "components-notice is-warning flex-column align-items-start m-0 mb-3"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, sprintf(__('Your theme has recommended the following plugins: %s. Would you like to install them?', 'wecodeart'), hasRecommendedPlugins.map(_ref5 => {
-    let {
-      title
-    } = _ref5;
-    return title;
-  }).join(', '))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, sprintf(__('It appears that you do not currently have a child theme %s.', 'wecodeart'), hasDefaultTheme ? __('activated', 'wecodeart') : __('installed', 'wecodeart')), "\xA0", __('We highly recommend using a child theme for making any modifications to your website.', 'wecodeart'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("br", null), sprintf(__('Would you like us to %s our starter theme for you?', 'wecodeart'), hasDefaultTheme ? __('activate', 'wecodeart') : __('install', 'wecodeart'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
     className: "button",
     isPrimary: true,
     onClick: async () => {
       setReloading(true);
       const formData = new FormData();
-      formData.append('action', 'wca_manage_plugins');
-      formData.append('type', 'install');
-      formData.append('plugins', JSON.stringify(hasRecommendedPlugins.map(_ref6 => {
-        let {
-          slug,
-          source
-        } = _ref6;
-        return {
-          slug,
-          source
-        };
-      })));
+      formData.append('action', AJAX_ACTION);
+      formData.append('type', hasDefaultTheme ? 'activate' : 'install');
+      formData.append('data', JSON.stringify({
+        slug: 'wecodeart-developer',
+        source: 'github'
+      }));
       const r = await fetch(ajaxurl, {
         method: 'POST',
         body: formData
@@ -343,29 +491,22 @@ const Manager = _ref3 => {
       const {
         data: {
           message = '',
-          success = []
+          success
         } = {}
       } = await r.json();
 
-      if (success.length) {
-        setAllPlugins([...allPlugins, ...success.map(_ref7 => {
-          let {
-            slug,
-            source
-          } = _ref7;
-          return (0,_functions__WEBPACK_IMPORTED_MODULE_2__.getInstallerDir)({
-            slug,
-            source
-          });
-        })]);
+      if (success) {
+        setActiveTheme('wecodeart-developer');
       }
 
       handleNotice(message);
     },
     disabled: reloading
-  }, __('Install', 'wecodeart')))) : null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+  }, __('Yes, please do.', 'wecodeart'))) : null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
     className: "grid grid--installables mb-3"
-  }, installers.map(props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Plugin, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, extraPluginProps)))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+  }, installers.map(props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Theme, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, extraThemeProps))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Submit, {
+    handleNotice
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
     className: "button",
     isPrimary: true,
     icon: reloading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Spinner, null),
@@ -381,10 +522,10 @@ const Manager = _ref3 => {
 
 /***/ }),
 
-/***/ "./src/scss/admin/plugins/index.scss":
-/*!*******************************************!*\
-  !*** ./src/scss/admin/plugins/index.scss ***!
-  \*******************************************/
+/***/ "./src/scss/admin/themes/index.scss":
+/*!******************************************!*\
+  !*** ./src/scss/admin/themes/index.scss ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -503,14 +644,14 @@ function _extends() {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!***************************************!*\
-  !*** ./src/js/admin/plugins/index.js ***!
-  \***************************************/
+/*!**************************************!*\
+  !*** ./src/js/admin/themes/index.js ***!
+  \**************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components */ "./src/js/admin/plugins/Components.js");
-/* harmony import */ var _scss_admin_plugins_index_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../scss/admin/plugins/index.scss */ "./src/scss/admin/plugins/index.scss");
+/* harmony import */ var _Components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components */ "./src/js/admin/themes/Components.js");
+/* harmony import */ var _scss_admin_themes_index_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../scss/admin/themes/index.scss */ "./src/scss/admin/themes/index.scss");
 
 
 /**
@@ -526,12 +667,12 @@ const {
 } = wp;
 
 
-addFilter('wecodeart.admin.tabs.plugins', 'wecodeart/plugins/admin/panel', optionsPanel);
+addFilter('wecodeart.admin.tabs.themes', 'wecodeart/themes/admin/panel', optionsPanel);
 
 function optionsPanel(panels) {
   return [{
     name: 'manager',
-    title: __('Plugins Manager', 'wecodeart'),
+    title: __('Themes Manager', 'wecodeart'),
     render: props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components__WEBPACK_IMPORTED_MODULE_1__.Manager, props)
   }, ...panels];
 }
@@ -539,4 +680,4 @@ function optionsPanel(panels) {
 
 /******/ })()
 ;
-//# sourceMappingURL=plugins.js.map
+//# sourceMappingURL=themes.js.map

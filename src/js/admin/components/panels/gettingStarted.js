@@ -62,14 +62,14 @@ export default () => {
                 <div className="grid grid--cards">
                     <Card className="m-0 shadow-none">
                         <CardHeader>
-                            <h3 className="m-0">{__('Customizer Options', 'wecodeart')}</h3>
+                            <h3 className="m-0">{__('Need Support?', 'wecodeart')}</h3>
                         </CardHeader>
                         <CardBody>
                             <p>{
-                                __('Looking to manage your logo, favicon, set the home or blog page using WP Customizer? You can also add your own custom CSS or explore other plugin settings.', 'wecodeart')
+                                __('Whether you need assistance, wish to report a bug, or have a new feature request, please create a topic in the support forum on WordPress.org.', 'wecodeart')
                             }</p>
-                            <Button href={adminUrl + '/customize.php'} isPrimary>{
-                                __('Legacy Options', 'wecodeart')
+                            <Button href="https://wordpress.org/support/theme/wecodeart/" isPrimary>{
+                                __('Support Forum', 'wecodeart')
                             }</Button>
                         </CardBody>
                     </Card>
@@ -91,7 +91,7 @@ export default () => {
                         '--wca--card-bg': '#D5EAFF',
                     }}>
                         <CardHeader>
-                            <h3 className="m-0">{__('Join Our Facebook Community!', 'wecodeart')}</h3>
+                            <h3 className="m-0">{__('Join Our Facebook Community', 'wecodeart')}</h3>
                         </CardHeader>
                         <CardBody>
                             <p>{
