@@ -41,11 +41,15 @@ class Social extends Processor {
 		// Background Color 
 		if ( $value = get_prop( $this->attrs, 'customIconBackgroundColor' ) ) {
 			$declarations['background-color'] = $value;
+		} else if ( $value = get_prop( $this->attrs, 'iconBackgroundColor' ) ) { // To be removed when GB merged into core.
+			$declarations['background-color'] = sprintf( 'var(--wp--preset--color--%s)', $value );
 		}
 
 		// Icon color
 		if ( $value = get_prop( $this->attrs, 'customIconColor' ) ) {
 			$declarations['color'] = $value;
+		} else if ( $value = get_prop( $this->attrs, 'iconColor' ) ) { // To be removed when GB merged into core.
+			$declarations['color'] = sprintf( 'var(--wp--preset--color--%s)', $value );
 		}
 
 		// Size
