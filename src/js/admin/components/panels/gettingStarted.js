@@ -68,7 +68,7 @@ export default () => {
                             <p>{
                                 __('Whether you need assistance, wish to report a bug, or have a new feature request, please create a topic in the support forum on WordPress.org.', 'wecodeart')
                             }</p>
-                            <Button href="https://wordpress.org/support/theme/wecodeart/" isPrimary>{
+                            <Button href="https://wordpress.org/support/theme/wecodeart/" isPrimary target="_blank">{
                                 __('Support Forum', 'wecodeart')
                             }</Button>
                         </CardBody>
