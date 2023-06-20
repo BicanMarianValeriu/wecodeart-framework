@@ -186,9 +186,16 @@ return [
             [
                 'slug'          => 'BicanMarianValeriu/wecodeart-developer',
                 'title'         => esc_html__( 'WeCodeArt Developer', 'wecodeart' ),
-                'description'   => esc_html__( 'A simple starter theme with webpack setup.', 'wecodeart' ),
+                'description'   => esc_html__( 'A simple starter theme with webpack configuration. Ideal for developers seeking a streamlined starting point.', 'wecodeart' ),
                 'source'        => 'github',
                 'more'          => 'https://github.com/BicanMarianValeriu/wecodeart-developer/',
+            ],
+            [
+                'slug'          => 'BicanMarianValeriu/wecodeart-honey',
+                'title'         => esc_html__( 'WeCodeArt Honey', 'wecodeart' ),
+                'description'   => esc_html__( 'A sleek WooCommerce block theme with webpack configuration. No bloat - perfect starting point for your store.', 'wecodeart' ),
+                'source'        => 'github',
+                'more'          => 'https://github.com/BicanMarianValeriu/wecodeart-honey/',
             ],
         ]
     ],

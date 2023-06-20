@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-17 04:12+0000\n"
+"POT-Creation-Date: 2023-06-20 01:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -72,7 +72,9 @@ msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr ""
 
 #: inc/app.php:189
-msgid "A simple starter theme with webpack setup."
+msgid ""
+"A simple starter theme with webpack configuration. Ideal for developers "
+"seeking a streamlined starting point."
 msgstr ""
 
 #. Description of the theme
@@ -80,6 +82,12 @@ msgid ""
 "A simple WordPress theme framework focused on SEO and speed (perfect 100% "
 "PageSpeed scores) while still being fully customizable via Full Site Editing."
 " It also works perfectly with all page builder plugins."
+msgstr ""
+
+#: inc/app.php:196
+msgid ""
+"A sleek WooCommerce block theme with webpack configuration. No bloat - "
+"perfect starting point for your store."
 msgstr ""
 
 #: inc/app.php:179
@@ -257,7 +265,7 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: inc/admin/class-admin.php:173
+#: inc/admin/class-admin.php:176
 msgid "Developer Mode"
 msgstr ""
 
@@ -715,7 +723,7 @@ msgstr ""
 msgid "Theme is not defined."
 msgstr ""
 
-#: inc/admin/class-admin.php:127 inc/admin/class-admin.php:128
+#: inc/admin/class-admin.php:130 inc/admin/class-admin.php:131
 msgid "Theme Options"
 msgstr ""
 
@@ -878,6 +886,10 @@ msgstr ""
 msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
 "version %2$s. Please upgrade WordPress to use WeCodeArt Framework."
+msgstr ""
+
+#: inc/app.php:195
+msgid "WeCodeArt Honey"
 msgstr ""
 
 #: patterns/section-mobile.php:49

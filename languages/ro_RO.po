@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-06-18 04:27+0000\n"
+"PO-Revision-Date: 2023-06-20 01:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -73,8 +73,12 @@ msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr "O punte între WeCodeArt Framework și pluginul %s."
 
 #: inc/app.php:189
-msgid "A simple starter theme with webpack setup."
-msgstr "O temă de pornire simplă cu webpack configurat."
+msgid ""
+"A simple starter theme with webpack configuration. Ideal for developers "
+"seeking a streamlined starting point."
+msgstr ""
+"O temă de pornire simplă cu configurație webpack. Ideal pentru dezvoltatorii "
+"care caută un punct de plecare simplificat."
 
 #. Description of the theme
 msgid ""
@@ -86,6 +90,17 @@ msgstr ""
 "100% PageSpeed) și totodată fiind complet personalizabil prin Editarea "
 "completă a site-ului. De asemenea, funcționează perfect cu toate pluginurile "
 "generatore de pagini."
+
+#: inc/app.php:196
+#| msgid ""
+#| "A sleek WooCommerce block theme with webpack setup. No bloat - perfect "
+#| "starting point for your store."
+msgid ""
+"A sleek WooCommerce block theme with webpack configuration. No bloat - "
+"perfect starting point for your store."
+msgstr ""
+"O temă elegantă de bloc WooCommerce cu configurație webpack. Fără bloat - un "
+"punct de plecare perfect pentru magazinul tău."
 
 #: inc/app.php:179
 #| msgid ""
@@ -275,7 +290,7 @@ msgstr "Arhive zilnice: %s"
 msgid "Design"
 msgstr "Personalizări"
 
-#: inc/admin/class-admin.php:173
+#: inc/admin/class-admin.php:176
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -752,7 +767,7 @@ msgstr "Tema instalată cu succes."
 msgid "Theme is not defined."
 msgstr "Tema nu este definită."
 
-#: inc/admin/class-admin.php:127 inc/admin/class-admin.php:128
+#: inc/admin/class-admin.php:130 inc/admin/class-admin.php:131
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -937,6 +952,10 @@ msgstr ""
 "WeCodeArt Framework necesită versiunea WordPress %1$s sau mai mare. "
 "Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
 "WeCodeArt Framework."
+
+#: inc/app.php:195
+msgid "WeCodeArt Honey"
+msgstr "WeCodeArt Honey"
 
 #: patterns/section-mobile.php:49
 msgid ""
