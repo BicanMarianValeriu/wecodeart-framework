@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -46,7 +46,7 @@ class Template extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render' ], 20, 2 );
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render' ], 20, 1 );
     }
 
     /**
@@ -57,33 +57,37 @@ class Template extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( string $content = '' ): string {
-		$dom   = $this->dom( $content );
-		$first = get_dom_element( '*', $dom );
+		$markup	= new \WP_HTML_Tag_Processor( $content );
+		$tags 	= [ 'HEADER', 'FOOTER', 'ASIDE' ];
+		$count	= count( $tags );
 
-		if ( ! $first ) {
-			return $content;
+		while ( $count > 0 && $markup->next_tag() ) {
+			$current = $markup->get_tag();
+			switch( $current ):
+				case 'HEADER' :
+					$markup->set_attribute( 'id', 'top' );
+					$markup->set_attribute( 'role', 'banner' );
+					$markup->set_attribute( 'itemscope', 'itemscope' );
+					$markup->set_attribute( 'itemtype', 'https://schema.org/WPHeader' );
+				break;
+				case 'FOOTER' :
+					$markup->set_attribute( 'role', 'contentinfo' );
+					$markup->set_attribute( 'itemscope', 'itemscope' );
+					$markup->set_attribute( 'itemtype', 'https://schema.org/WPFooter' );
+				break;
+				case 'ASIDE' :
+					$markup->set_attribute( 'role', 'complementary' );
+					$markup->set_attribute( 'itemscope', 'itemscope' );
+					$markup->set_attribute( 'itemtype', 'https://schema.org/WPSideBar' );
+				break;
+			endswitch;
+
+			$count--;
 		}
 
-		if ( $first->tagName === 'header' ) {
-			$first->setAttribute( 'id', 'top' );
-			$first->setAttribute( 'role', 'banner' );
-			$first->setAttribute( 'itemscope', 'itemscope' );
-			$first->setAttribute( 'itemtype', 'https://schema.org/WPHeader' );
-		}
-
-		if ( $first->tagName === 'footer' ) {
-			$first->setAttribute( 'role', 'contentinfo' );
-			$first->setAttribute( 'itemscope', 'itemscope' );
-			$first->setAttribute( 'itemtype', 'https://schema.org/WPFooter' );
-		}
+		$content = $markup->get_updated_html();
 		
-		if ( $first->tagName === 'aside' ) {
-			$first->setAttribute( 'role', 'complementary' );
-			$first->setAttribute( 'itemscope', 'itemscope' );
-			$first->setAttribute( 'itemtype', 'https://schema.org/WPSideBar' );
-		}
-
-		return $dom->saveHTML();
+		return $content;
 	}
 
 	/**

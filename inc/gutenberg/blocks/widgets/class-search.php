@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -145,7 +145,6 @@ class Search extends Dynamic {
 
 			// Maybe add submit button
 			if ( get_prop( $attributes, 'buttonPosition', 'button-outside' ) !== 'no-button' ) {
-				add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
 				wp_enqueue_style( 'wp-block-button' );
 
 				$icon  = get_prop( $attributes, 'buttonUseIcon' );
@@ -226,15 +225,15 @@ class Search extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-search {
-			border-width: 0;
-		}
-		.wp-block-search--button-outside .wp-element-button {
-			margin-left: 1rem;
-		}
-		.wp-block-search__fields {
-			display: flex;
-		}
+			.wp-block-search {
+				border-width: 0;
+			}
+			.wp-block-search--button-outside .wp-element-button {
+				margin-left: 1rem;
+			}
+			.wp-block-search__fields {
+				display: flex;
+			}
 		";
 	}
 }
