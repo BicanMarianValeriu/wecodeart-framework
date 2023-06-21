@@ -129,12 +129,12 @@ class Title extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-comments-title:only-child {
-			margin-bottom: 0;
-		}
-		.wp-block-comments-title svg {
-			margin-right: .5rem;
-		}
+			.wp-block-comments-title:only-child {
+				margin-bottom: 0;
+			}
+			.wp-block-comments-title svg {
+				margin-right: .5rem;
+			}
 		";
 	}
 }

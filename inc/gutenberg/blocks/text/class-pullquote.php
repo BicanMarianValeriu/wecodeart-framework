@@ -48,22 +48,22 @@ class Pullquote extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-pullquote {
-			padding: 3rem 0;
-			text-align: center;
-			border-top-width: 5px;
-			border-bottom-width: 5px;
-			border-top-style: solid;
-			border-bottom-style: solid;
-		}
-		.wp-block-pullquote	blockquote {
-			margin-bottom: 0;
-			padding: 0 1rem;
-		}
-		.wp-block-pullquote p {
-			margin-bottom: 0;
-			font-size: 1.5rem;
-		}
+			.wp-block-pullquote {
+				padding: 3rem 0;
+				text-align: center;
+				border-top-width: 5px;
+				border-bottom-width: 5px;
+				border-top-style: solid;
+				border-bottom-style: solid;
+			}
+			.wp-block-pullquote	blockquote {
+				margin-bottom: 0;
+				padding: 0 1rem;
+			}
+			.wp-block-pullquote p {
+				margin-bottom: 0;
+				font-size: 1.5rem;
+			}
 		";
 	}
 }

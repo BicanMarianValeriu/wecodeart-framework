@@ -47,24 +47,24 @@ class Paragraph extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		p.has-background {
-			padding: 0.5rem 0.8rem;
-		} 
-		p.has-drop-cap.has-background {
-			overflow: hidden;
-		}
-		p.has-drop-cap:not(:focus)::first-letter {
-			float: left;
-			font-size: 8em;
-			font-weight: 100;
-			font-style: normal;
-			line-height: 0.7;
-			text-transform: uppercase;
-			margin: 0.05em 0.1em 0 0;
-		}
-		:where(p.has-text-color:not(.has-link-color)) a {
-			color: inherit;
-		}
+			p.has-background {
+				padding: 0.5rem 0.8rem;
+			} 
+			p.has-drop-cap.has-background {
+				overflow: hidden;
+			}
+			p.has-drop-cap:not(:focus)::first-letter {
+				float: left;
+				font-size: 8em;
+				font-weight: 100;
+				font-style: normal;
+				line-height: 0.7;
+				text-transform: uppercase;
+				margin: 0.05em 0.1em 0 0;
+			}
+			:where(p.has-text-color:not(.has-link-color)) a {
+				color: inherit;
+			}
 		";
 	}
 }

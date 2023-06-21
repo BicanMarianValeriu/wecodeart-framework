@@ -48,10 +48,10 @@ class Audio extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-audio audio {
-			width: 100%;
-			min-width: 300px;
-		}
+			.wp-block-audio audio {
+				width: 100%;
+				min-width: 300px;
+			}
 		";
 	}
 }

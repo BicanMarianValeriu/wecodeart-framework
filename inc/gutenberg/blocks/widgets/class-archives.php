@@ -177,9 +177,9 @@ class Archives extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-archives {
-			margin-bottom: 1rem;
-		}
+			.wp-block-archives {
+				margin-bottom: 1rem;
+			}
 		";
 	}
 }

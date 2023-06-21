@@ -13,6 +13,7 @@ v6.1.2
 - Updated - Group: Marquee refactored to use only 1 group container / added support for vertical sliding, reverse, pause, alternate
 - Updated - core/social-links styles (class naming, selectors and css specificity updates)
 - Updated - core/template-part to use WP_HTML_Tag_Processor
+- Updated - core/cover to use WP_HTML_Tag_Processor and also removed redundand render
 - Removed - heading/paragraphs spacing
 - Fixed - core/latest-posts issue with woocommerce wrong filter usage (query_loop_block_query_vars)
 - Fixed - patterns translations

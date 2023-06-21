@@ -104,9 +104,9 @@ class Heading extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		:where(h1,h2,h3,h4,h5,h6).has-background {
-			padding: .125em .25em;
-		}
+			:where(h1,h2,h3,h4,h5,h6).has-background {
+				padding: .125em .25em;
+			}
 		";
 	}
 }

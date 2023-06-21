@@ -80,25 +80,25 @@ class Calendar extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-calendar {
-			text-align: center;
-		}
-		.wp-block-calendar caption {
-			color: var(--wp--preset--color--dark);
-			font-size: var(--wp--preset--font-size--large);
-			margin-bottom: var(--wp--style--block-gap);
-		}
-		.wp-block-calendar .wp-calendar-table {
-			text-align: inherit;
-			caption-side: top;
-			width: 100%;
-		}
-		.wp-block-calendar .wp-calendar-table thead {
-			background-color: var(--wp--preset--color--light);
-		}
-		.wp-block-calendar .wp-calendar-nav {
-			margin-bottom: 1.5rem;
-		}
+			.wp-block-calendar {
+				text-align: center;
+			}
+			.wp-block-calendar caption {
+				color: var(--wp--preset--color--dark);
+				font-size: var(--wp--preset--font-size--large);
+				margin-bottom: var(--wp--style--block-gap);
+			}
+			.wp-block-calendar .wp-calendar-table {
+				text-align: inherit;
+				caption-side: top;
+				width: 100%;
+			}
+			.wp-block-calendar .wp-calendar-table thead {
+				background-color: var(--wp--preset--color--light);
+			}
+			.wp-block-calendar .wp-calendar-nav {
+				margin-bottom: 1.5rem;
+			}
 		";
 	}
 }

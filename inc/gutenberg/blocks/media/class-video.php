@@ -47,19 +47,19 @@ class Video extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-video {
-			margin: 0 0 1.5rem;
-		}
-		.wp-block-video.aligncenter {
-			text-align: center;
-		}
-		.wp-block-video	video {
-			width: 100%;
-			max-width: 100%;
-		}
-		.wp-block-video	[poster] {
-			object-fit: cover;
-		}
+			.wp-block-video {
+				margin: 0 0 1.5rem;
+			}
+			.wp-block-video.aligncenter {
+				text-align: center;
+			}
+			.wp-block-video	video {
+				width: 100%;
+				max-width: 100%;
+			}
+			.wp-block-video	[poster] {
+				object-fit: cover;
+			}
 		";
 	}
 }

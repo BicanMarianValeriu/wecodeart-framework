@@ -310,16 +310,16 @@ class Form extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-post-comments-form:empty {
-			display: none;
-		}
-		.wp-block-post-comments-form__headline svg,
-		.comment-form-submit svg {
-			margin-right: .5rem;
-		}
-		.comment-form-field {
-			margin-bottom: 1rem;
-		}
+			.wp-block-post-comments-form:empty {
+				display: none;
+			}
+			.wp-block-post-comments-form__headline svg,
+			.comment-form-submit svg {
+				margin-right: .5rem;
+			}
+			.comment-form-field {
+				margin-bottom: 1rem;
+			}
 		";
 	}
 }

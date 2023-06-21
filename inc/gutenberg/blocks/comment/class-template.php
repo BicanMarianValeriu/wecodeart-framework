@@ -173,9 +173,9 @@ class Template extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-comments-query-loop:empty {
-			display: none;
-		}
+			.wp-block-comments-query-loop:empty {
+				display: none;
+			}
 		";
 	}
 }

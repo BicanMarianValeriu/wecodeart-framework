@@ -52,26 +52,26 @@ class Spacer extends Dynamic {
 		$desktop	= get_prop( $breaks, 'lg', '992px' );
 
 		return "
-		.wp-block-spacer {
-			height: calc(var(--wp--spacer-height, 100px) * var(--wp--spacer-mobile, .5));
-			width: var(--wp--spacer-width, 100%);
-			clear: both;
-		}
-		.wp-block-navigation .wp-block-spacer {
-			width: 100%;
-			height: var(--wp--spacer-width);
-			min-height: initial;
-		}
-		@media (min-width: $tablet) {
 			.wp-block-spacer {
-				height: calc(var(--wp--spacer-height, 100px) * var(--wp--spacer-tablet, .7));
+				height: calc(var(--wp--spacer-height, 100px) * var(--wp--spacer-mobile, .5));
+				width: var(--wp--spacer-width, 100%);
+				clear: both;
 			}
-		}
-		@media (min-width: $desktop) {
-			.wp-block-spacer {
-				height: var(--wp--spacer-height, 100px);
+			.wp-block-navigation .wp-block-spacer {
+				width: 100%;
+				height: var(--wp--spacer-width);
+				min-height: initial;
 			}
-		}
+			@media (min-width: $tablet) {
+				.wp-block-spacer {
+					height: calc(var(--wp--spacer-height, 100px) * var(--wp--spacer-tablet, .7));
+				}
+			}
+			@media (min-width: $desktop) {
+				.wp-block-spacer {
+					height: var(--wp--spacer-height, 100px);
+				}
+			}
 		";
 	}
 }

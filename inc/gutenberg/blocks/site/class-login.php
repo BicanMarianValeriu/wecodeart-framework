@@ -123,9 +123,9 @@ class Login extends Dynamic {
 	 */
 	public function styles() {
 		return '
-		.wp-block-login {
-            margin-bottom: 2rem;
-        }
+			.wp-block-login {
+				margin-bottom: 2rem;
+			}
 		';
 	}
 }

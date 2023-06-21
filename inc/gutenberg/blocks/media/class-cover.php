@@ -47,10 +47,8 @@ class Cover extends Dynamic {
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args(): array {
-		return [
-			'render_callback' => [ $this, 'render' ]
-		];
+	public function init() {
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 2 );
 	}
 
 	/**
@@ -61,66 +59,15 @@ class Cover extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '' ): string {
-
-		if ( 'image' !== get_prop( $attributes, [ 'backgroundType' ] ) || ! get_prop( $attributes, [ 'useFeaturedImage' ] ) ) {
-			return $content;
-		}
-	
-		$current_featured_image = get_the_post_thumbnail_url();
-		$placeholder = wecodeart_config( 'placeholder', false );
-
-		if ( false === $current_featured_image ) {
-			if( $placeholder === false ) {
-				return $content;
+	public function render( string $content = '', array $block = [] ): string {
+		if ( get_prop( $block, [ 'attrs', 'useFeaturedImage' ] ) ) {
+			$content = new \WP_HTML_Tag_Processor( $content );
+			if( $content->next_tag( [
+				'tag_name' 	=> 'IMG',
+			] ) ) {
+				$content->add_class( 'wp-block-cover__image-background' );
 			}
-
-			$current_featured_image = get_prop( $placeholder, [ 'src' ] );
-		}
-		
-		$is_img_element		= ! ( get_prop( $attributes, [ 'hasParallax' ] ) || get_prop( $attributes, [ 'isRepeated' ] ) );
-		$is_img_data		= strpos( $current_featured_image, 'data:image' ) !== false;
-		$escaped_url		= esc_url( $current_featured_image, $is_img_data ? [ 'data' ] : null );
-		$escaped_alt		= esc_attr( get_the_post_thumbnail_caption() ?: get_prop( $placeholder, 'text' ) );
-		
-		if ( $is_img_element ) {
-			$object_position = '';
-			
-			if ( $focal = get_prop( $attributes, [ 'focalPoint' ] ) ) {
-				$object_position = ( new Focal( 'object-position', $focal ) )->get_value(); // Already escaped/sanitized
-				$object_position = sprintf( 'data-object-position="%s" style="object-position:%s"', $object_position, $object_position );
-			}
-	
-			$template 	= '<img class="wp-block-cover__image-background" src="%s" alt="%s" data-object-fit="cover" %s />';
-			$image		= sprintf( $template, $escaped_url, $escaped_alt, $object_position );
-	
-			/*
-			* Inserts the featured image between the (1st) cover 'background' `span` and 'inner_container' `div`,
-			* and removes eventual withespace characters between the two (typically introduced at template level)
-			*/
-			$inner_container_start = '/<div\b[^>]+wp-block-cover__inner-container[\s|"][^>]*>/U';
-			if ( 1 === preg_match( $inner_container_start, $content, $matches, PREG_OFFSET_CAPTURE ) ) {
-				$offset  = $matches[0][1];
-				$content = substr( $content, 0, $offset ) . $image . substr( $content, $offset );
-			}
-		} else {
-			if ( in_the_loop() ) {
-				update_post_thumbnail_cache();
-			}
-			
-			$styles = 'background-image:url(' . $escaped_url . '); ';
-
-			if ( $min_height = get_prop( $attributes, [ 'minHeight' ] ) ) {
-				$height_unit = get_prop( $attributes, [ 'minHeightUnit' ], 'px' );
-				$height      = " min-height:{$min_height}{$height_unit}";
-
-				$styles .= $height;
-			}
-
-			$processor = new \WP_HTML_Tag_Processor( $content );
-			$processor->next_tag();
-			$processor->set_attribute( 'style', $styles );
-			$content = $processor->get_updated_html();
+			$content = $content->get_updated_html();
 		}
 	
 		return $content;
