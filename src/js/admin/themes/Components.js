@@ -29,7 +29,7 @@ const {
 const { currentUser, adminEmail, themeDirs } = wecodeart;
 const { installed = [], installers = [], child = false } = wecodeartThemes || {};
 
-import { getInstallerIcon, getInstallerDir } from './../functions';
+import { getInstallerIcon, getInstallerDir, getCookie, setCookie } from './../functions';
 
 const AJAX_ACTION = 'wca_manage_themes';
 
@@ -300,12 +300,12 @@ const Submit = ({ handleNotice }) => {
 }
 
 const Manager = ({ createNotice }) => {
-    const [activeTheme, setActiveTheme] = useState(localStorage.getItem('activeTheme') || child);
+    const [activeTheme, setActiveTheme] = useState(getCookie('activeTheme') || child || 'wecodeart');
     const [allThemes, setAllThemes] = useState(installed);
     const [hasChanges, setHasChanges] = useState(false);
     const [reloading, setReloading] = useState(false);
 
-    useEffect(() => localStorage.setItem('activeTheme', activeTheme), [activeTheme]);
+    useEffect(() => setCookie('activeTheme', activeTheme), [activeTheme]);
 
     const handleNotice = (message) => {
         setReloading(false);
@@ -315,7 +315,7 @@ const Manager = ({ createNotice }) => {
     };
 
     const extraThemeProps = { allThemes, setAllThemes, activeTheme, setActiveTheme, handleNotice };
-    const isCoreFramework = !activeTheme || activeTheme && activeTheme === 'wecodeart';
+    const isCoreFramework = !activeTheme || activeTheme === 'wecodeart';
     const hasDefaultTheme = allThemes.includes('wecodeart-developer');
 
     return (

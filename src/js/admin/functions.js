@@ -30,7 +30,7 @@ const getInstallerIcon = (source) => {
             break;
         default:
             icon = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 174">
-                <path fill="currentColor" d="M80 1.6C47.4 5.5 20.6 25.4 8.9 54.5 4 66.8 2.8 74.6 3.2 90c.4 12 .8 14.6 3.7 23 9.5 28 31.3 48.5 59.7 56.1 11.3 3.1 30.8 3.1 41.9.2 38.7-10.4 64.5-43.6 64.5-82.9 0-44.9-35.5-82.3-80.6-84.7-4.9-.3-10.5-.3-12.4-.1zM105 28c2.7 1.5 4 6 2.6 9.6-1.1 3-19.5 27.3-20.7 27.4-.4 0-3.4-2.2-6.7-4.8l-6.1-4.9 8.5-10.9C95.7 27.6 99.3 24.9 105 28zm-9.6 46.9c18.7 14.6 34.7 27.1 35.5 27.7 1.2 1 .9 1.8-2.4 5.8a45.4 45.4 0 0 1-34.7 17.1c-7.1.2-9.1.6-11.3 2.4-3.7 2.8-5.4 2.7-10.3-.9l-4.1-2.9-7.6 9.4c-6.7 8.4-7.9 9.5-10.7 9.5-3.8 0-7.8-3.4-7.8-6.6 0-1.3 3.2-6.3 7.4-11.8l7.5-9.5L53 112c-4.7-3.8-5.6-6-3.6-9.8 1.4-2.7 1.3-3.4-.4-8-4.2-11-3.5-22.2 2-33.9 3.6-7.8 7.8-13.5 9.4-12.6.6.4 16.4 12.6 35 27.2zm45.3-18.7c2.8 2.6 3 7.2.5 11-3.2 5.2-18.7 24.7-19.5 24.7-1.8.2-12.6-9.2-12-10.3 2.8-4.5 19.9-25.3 21.6-26.3 3.3-1.9 6.8-1.5 9.4.9z"/>
+                <path fill="currentColor" d="M80 1.6C47.4 5.5 20.6 25.4 8.9 54.5 4 66.8 2.8 74.6 3.2 90c.4 12 .8 14.6 3.7 23 9.5 28 31.3 48.5 59.7 56.1 11.3 3.1 30.8 3.1 41.9.2 38.7-10.4 64.5-43.6 64.5-82.9 0-44.9-35.5-82.3-80.6-84.7-4.9-.3-10.5-.3-12.4-.1zM105 28c2.7 1.5 4 6 2.6 9.6-1.1 3-19.5 27.3-20.7 27.4-.4 0-3.4-2.2-6.7-4.8l-6.1-4.9 8.5-10.9C95.7 27.6 99.3 24.9 105 28zm-9.6 46.9c18.7 14.6 34.7 27.1 35.5 27.7 1.2 1 .9 1.8-2.4 5.8a45.4 45.4 0 0 1-34.7 17.1c-7.1.2-9.1.6-11.3 2.4-3.7 2.8-5.4 2.7-10.3-.9l-4.1-2.9-7.6 9.4c-6.7 8.4-7.9 9.5-10.7 9.5-3.8 0-7.8-3.4-7.8-6.6 0-1.3 3.2-6.3 7.4-11.8l7.5-9.5L53 112c-4.7-3.8-5.6-6-3.6-9.8 1.4-2.7 1.3-3.4-.4-8-4.2-11-3.5-22.2 2-33.9 3.6-7.8 7.8-13.5 9.4-12.6.6.4 16.4 12.6 35 27.2zm45.3-18.7c2.8 2.6 3 7.2.5 11-3.2 5.2-18.7 24.7-19.5 24.7-1.8.2-12.6-9.2-12-10.3 2.8-4.5 19.9-25.3 21.6-26.3 3.3-1.9 6.8-1.5 9.4.9z" />
             </svg>;
             break;
     }
@@ -62,4 +62,27 @@ const getInstallerDir = ({ slug, source = 'wordpress' }) => {
     return dir;
 }
 
-export { getInstallerIcon, getInstallerDir };
+// Helper function to get the value of a cookie by name
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].split('=');
+        if (cookie[0] === name) {
+            return decodeURIComponent(cookie[1]);
+        }
+    }
+
+    return '';
+}
+
+// Helper function to set a cookie with a given name, value, and expiration time
+function setCookie(name, value, days = 365, path = window.location.pathname) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = date.toUTCString();
+
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=${path}`;
+}
+
+export { getInstallerIcon, getInstallerDir, getCookie, setCookie };

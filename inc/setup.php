@@ -149,7 +149,7 @@ wecodeart()->bind( 'name', function () {
  * Bind Version.
  *
  * @since   3.9.5
- * @version 4.0.1
+ * @version 6.1.2
  *
  * @return string
  */

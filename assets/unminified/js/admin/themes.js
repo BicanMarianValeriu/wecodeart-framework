@@ -10,8 +10,10 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getCookie": () => (/* binding */ getCookie),
 /* harmony export */   "getInstallerDir": () => (/* binding */ getInstallerDir),
-/* harmony export */   "getInstallerIcon": () => (/* binding */ getInstallerIcon)
+/* harmony export */   "getInstallerIcon": () => (/* binding */ getInstallerIcon),
+/* harmony export */   "setCookie": () => (/* binding */ setCookie)
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
@@ -116,7 +118,32 @@ const getInstallerDir = _ref => {
   }
 
   return dir;
-};
+}; // Helper function to get the value of a cookie by name
+
+
+function getCookie(name) {
+  const cookies = document.cookie.split('; ');
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].split('=');
+
+    if (cookie[0] === name) {
+      return decodeURIComponent(cookie[1]);
+    }
+  }
+
+  return '';
+} // Helper function to set a cookie with a given name, value, and expiration time
+
+
+function setCookie(name, value) {
+  let days = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 365;
+  let path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : window.location.pathname;
+  const date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  const expires = date.toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=${path}`;
+}
 
 
 
@@ -449,11 +476,11 @@ const Manager = _ref4 => {
   let {
     createNotice
   } = _ref4;
-  const [activeTheme, setActiveTheme] = useState(localStorage.getItem('activeTheme') || child);
+  const [activeTheme, setActiveTheme] = useState((0,_functions__WEBPACK_IMPORTED_MODULE_2__.getCookie)('activeTheme') || child || 'wecodeart');
   const [allThemes, setAllThemes] = useState(installed);
   const [hasChanges, setHasChanges] = useState(false);
   const [reloading, setReloading] = useState(false);
-  useEffect(() => localStorage.setItem('activeTheme', activeTheme), [activeTheme]);
+  useEffect(() => (0,_functions__WEBPACK_IMPORTED_MODULE_2__.setCookie)('activeTheme', activeTheme), [activeTheme]);
 
   const handleNotice = message => {
     setReloading(false);
@@ -468,7 +495,7 @@ const Manager = _ref4 => {
     setActiveTheme,
     handleNotice
   };
-  const isCoreFramework = !activeTheme || activeTheme && activeTheme === 'wecodeart';
+  const isCoreFramework = !activeTheme || activeTheme === 'wecodeart';
   const hasDefaultTheme = allThemes.includes('wecodeart-developer');
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, isCoreFramework ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
     className: "components-notice is-warning flex-column align-items-start m-0 mb-3"
