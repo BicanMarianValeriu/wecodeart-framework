@@ -181,6 +181,13 @@ return [
                 'more'          => 'https://wordpress.org/plugins/wca-google-tools-extension/',
                 'recommended'   => true,
             ],
+            [
+                'slug'          => 'wca-scrolltop',
+                'title'         => esc_html__( 'WCA: Scroll Top', 'wecodeart' ),
+                'description'   => esc_html__( 'Lightweight extension for adding a scroll to top button on your site. Super flexible and customizable.', 'wecodeart' ),
+                'source'        => 'github',
+                'more'          => 'https://wordpress.org/plugins/wca-scrolltop/',
+            ],
         ],
         'themes' => [
             [

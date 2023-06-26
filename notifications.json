@@ -5,6 +5,11 @@
 			"type": "info",
 			"title": "Version - 6.1.2",
 			"content": "Next version will include huge WooCommerce improvements (almost fully blockified and custom block styles) and a reworked admin interface that allows to define recommended theme extensions/plugins."
+		},
+		{
+			"type": "info",
+			"title": "Special thanks to:",
+			"content": "Translation contributors: <a href=\"https:\/\/profiles.wordpress.org\/dancaragea\/\">Dan Caragea<\/a>, <a href=\"https:\/\/profiles.wordpress.org\/vladytimy\/\">Vlad T<\/a>, <a href=\"https:\/\/profiles.wordpress.org\/psmits1567\/\">Peter Smits<\/a>, <a href=\"https:\/\/profiles.wordpress.org\/oliviervaneester\/\">Oliver Van Eester<\/a>, <a href=\"https:\/\/profiles.wordpress.org\/nekojonez\/\">Pieterjan Deneys<\/a>"
 		}
 	]
 }

@@ -9,7 +9,7 @@
  * @subpackage 	Support\Themes
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.2
+ * @version		6.1.3
  */
 
 namespace WeCodeArt\Support;
@@ -91,6 +91,8 @@ class Themes implements Integration {
 			'installers' 	=> (array) $installers,
 			'child'			=> is_child_theme() ? get_stylesheet() : false,
 		] );
+
+		wp_set_script_translations( $this->make_handle(), 'wecodeart', wecodeart_config( 'directories' )['languages'] );
 	}
 
 	/**
