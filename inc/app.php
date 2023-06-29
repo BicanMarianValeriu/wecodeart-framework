@@ -186,7 +186,7 @@ return [
                 'title'         => esc_html__( 'WCA: Scroll Top', 'wecodeart' ),
                 'description'   => esc_html__( 'Lightweight extension for adding a scroll to top button on your site. Super flexible and customizable.', 'wecodeart' ),
                 'source'        => 'github',
-                'more'          => 'https://wordpress.org/plugins/wca-scrolltop/',
+                'more'          => 'https://github.com/BicanMarianValeriu/wca-scrolltop/',
             ],
         ],
         'themes' => [

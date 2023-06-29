@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\Author
  * @since 		3.9.5
- * @version		6.1.2
+ * @version		6.1.3
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -69,7 +69,7 @@ wecodeart( 'styles' )->Utilities->load( [ 'me-2', 'flex-fill' ] );
     <?php if( get_prop( $attributes, 'isLink', true ) ) : ?>
     </a>
     <?php endif; ?>
-    <?php if( get_prop( $attributes, 'showBio' ) ) : ?>
+    <?php if( get_prop( $attributes, 'showBio' ) && $author->bio ) : ?>
     <div class="wp-block-post-author__bio"><?php echo wp_kses_post( $author->bio ); ?></div>
     <?php endif; ?>
     </div>

@@ -10,7 +10,7 @@
 <div class="wp-block-group alignfull py-5">
     <!-- wp:columns {"verticalAlignment":"top","className":"flex-column flex-lg-row g-0"} -->
     <div class="wp-block-columns are-vertically-aligned-top flex-column flex-lg-row g-0">
-        <!-- wp:column {"verticalAlignment":"top","className":"sticky-lg-top","customCSS":"selector {\n  top: 80px;\n  z-index: 5;\n}\n"} -->
+        <!-- wp:column {"verticalAlignment":"top","className":"sticky-lg-top","customStyle":"selector {\n  top: 80px;\n  z-index: 5;\n}\n"} -->
         <div class="wp-block-column is-vertically-aligned-top sticky-lg-top">
             <!-- wp:table-of-contents {"headings":[],"style":{"spacing":{"padding":{"top":"var:preset|spacing|g","right":"var:preset|spacing|g","bottom":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"backgroundColor":"light","textColor":"dark","className":"rounded-1"} /-->
         </div>

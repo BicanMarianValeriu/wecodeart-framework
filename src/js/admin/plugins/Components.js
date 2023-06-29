@@ -4,6 +4,7 @@
 const {
     i18n: {
         __,
+        _x,
     },
     components: {
         Card,
@@ -114,7 +115,7 @@ const Plugin = ({
                         {hasMetRequirements ?
                             <ToggleControl
                                 className="m-0"
-                                label={activePlugins.includes(pluginDir) || !pluginDir ? __('Active', 'wecodeart') : __('Activate', 'wecodeart')}
+                                label={activePlugins.includes(pluginDir) || !pluginDir ? _x('Active', 'plugin', 'wecodeart') : __('Activate', 'wecodeart')}
                                 checked={activePlugins.includes(pluginDir) || !pluginDir}
                                 onChange={handleActivation}
                                 {...{ disabled: !allPlugins.includes(pluginDir) || activeLoading }}
@@ -128,7 +129,7 @@ const Plugin = ({
                         onClick={() => handleInstall({ slug, source })}
                         {...{ disabled: shouldAllowInstall }}
                     >
-                        {installLoading ? '' : allPlugins.includes(pluginDir) || !pluginDir ? __('Installed', 'wecodeart') : __('Install', 'wecodeart')}
+                        {installLoading ? '' : allPlugins.includes(pluginDir) || !pluginDir ? _x('Installed', 'plugin', 'wecodeart') : __('Install', 'wecodeart')}
                     </Button>
                 </HStack>
             </CardFooter>

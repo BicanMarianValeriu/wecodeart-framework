@@ -174,6 +174,7 @@ __webpack_require__.r(__webpack_exports__);
 const {
   i18n: {
     __,
+    _x,
     sprintf
   },
   components: {
@@ -303,11 +304,11 @@ const Theme = _ref => {
     className: "align-self-end"
   }, allThemes.includes(themeDir) ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ToggleControl, {
     className: "m-0",
-    label: activeTheme !== themeDir ? __('Active', 'wecodeart') : __('Activate', 'wecodeart'),
+    label: activeTheme !== themeDir ? _x('Active', 'theme', 'wecodeart') : __('Activate', 'wecodeart'),
     checked: activeTheme === themeDir,
     onChange: handleActivation,
     disabled: !allThemes.includes(themeDir) || activeLoading
-  }) : __('Not installed.', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+  }) : _x('Not installed.', 'theme', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
     className: "button",
     isPrimary: true,
     icon: installLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Spinner, null),
@@ -316,7 +317,7 @@ const Theme = _ref => {
       source
     }),
     disabled: shouldAllowInstall
-  }, installLoading ? '' : allThemes.includes(themeDir) ? __('Installed', 'wecodeart') : __('Install', 'wecodeart')))));
+  }, installLoading ? '' : allThemes.includes(themeDir) ? _x('Installed', 'theme', 'wecodeart') : __('Install', 'wecodeart')))));
 };
 
 const Submit = _ref3 => {

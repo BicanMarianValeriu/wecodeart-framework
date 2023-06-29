@@ -9,7 +9,7 @@
  * @subpackage 	Support\ANR Captcha
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.8.1
- * @version		6.1.2
+ * @version		6.1.3
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -82,7 +82,7 @@ class Captcha implements Integration {
 	 * Comment Captcha
 	 *
 	 * @since   3.8.1
-	 * @version	5.4.8
+	 * @version	6.1.3
 	 * @see 	C4wp_Captcha_Class::init()->form_field();
 	 * @uses	C4wp_Captcha_Class::init()->form_field();
 	 *
@@ -92,7 +92,7 @@ class Captcha implements Integration {
 		$hide	= c4wp_get_option( 'loggedin_hide' );
 		$ver	= c4wp_get_option( 'captcha_version', 'v2_checkbox' );
 
-		if ( is_user_logged_in() && $hide === (bool) true ) {
+		if ( is_user_logged_in() && $hide ) {
 			return $defaults;
 		}
 

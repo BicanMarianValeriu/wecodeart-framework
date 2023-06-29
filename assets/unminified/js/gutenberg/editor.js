@@ -373,8 +373,7 @@ const Edit = _ref => {
   const toggle = () => setIsOpen(!isOpen);
 
   const {
-    title,
-    lang
+    title
   } = state;
 
   const onClick = () => {
@@ -405,13 +404,6 @@ const Edit = _ref => {
     value: title,
     onChange: title => setState({ ...state,
       title
-    })
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
-    label: __('Language (optional)', 'wecodeart'),
-    value: lang,
-    help: __('Example: fr, en, de, etc. Use it only if the abbreviation`s language is different from blog language.', 'wecodeart'),
-    onChange: lang => setState({ ...state,
-      lang
     })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
     isPrimary: true,
@@ -458,8 +450,7 @@ const abbreviation = {
   tagName: 'abbr',
   className: null,
   attributes: {
-    title: 'title',
-    lang: 'lang'
+    title: 'title'
   },
   edit: _components_edit__WEBPACK_IMPORTED_MODULE_0__["default"]
 };

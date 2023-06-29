@@ -28,7 +28,7 @@
     <hr class="wp-block-separator has-text-color has-white-color has-alpha-channel-opacity has-white-background-color has-background is-style-faded" />
     <!-- /wp:separator -->
     <!-- wp:paragraph {"align":"center","fontSize":"medium","fontFamily":"shadows-into-light"} -->
-    <p class="has-text-align-center has-shadows-into-light-font-family has-medium-font-size"><?php esc_html_e( 'Out of the box WooCommerce Integration!', 'wecodeart' ); ?></p>
+    <p class="has-text-align-center has-shadows-into-light-font-family has-medium-font-size"><?php esc_html_e( 'Seamless integration with WooCommerce right from the start!', 'wecodeart' ); ?></p>
     <!-- /wp:paragraph -->
     <!-- wp:paragraph {"align":"center","className":"fw-300","fontSize":"medium"} -->
     <p class="has-text-align-center fw-300 has-medium-font-size"><?php esc_html_e( 'Super-Optimized eCommerce website built with ease.', 'wecodeart' ); ?></p>

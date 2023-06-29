@@ -137,6 +137,8 @@ class Text extends Dynamic {
 				overflow: hidden;
 				clip: rect(0, 0, 0, 0);
 				border: 0;
+				min-width: 0;
+				min-height: 0;
 			}
 			@media (min-width: $tablet) {
 				.wp-block-media-text {

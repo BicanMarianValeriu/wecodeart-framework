@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-06-20 01:08+0000\n"
+"PO-Revision-Date: 2023-06-29 03:46+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -67,12 +67,12 @@ msgstr "100% Receptiv"
 msgid "[block rendering halted]"
 msgstr "[redării blocului a fost oprită]"
 
-#: inc/support/plugins/class-plugins.php:122
+#: inc/support/plugins/class-plugins.php:124
 #, php-format
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr "O punte între WeCodeArt Framework și pluginul %s."
 
-#: inc/app.php:189
+#: inc/app.php:196
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -91,7 +91,7 @@ msgstr ""
 "completă a site-ului. De asemenea, funcționează perfect cu toate pluginurile "
 "generatore de pagini."
 
-#: inc/app.php:196
+#: inc/app.php:203
 #| msgid ""
 #| "A sleek WooCommerce block theme with webpack setup. No bloat - perfect "
 #| "starting point for your store."
@@ -456,6 +456,14 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
+#: inc/app.php:187
+msgid ""
+"Lightweight extension for adding a scroll to top button on your site. Super "
+"flexible and customizable."
+msgstr ""
+"Extensie ușoară pentru adăugarea unui buton de derulare în sus pe site-ul "
+"dvs. Super flexibil și personalizabil."
+
 #: inc/gutenberg/blocks/design/class-button.php:50
 msgid "Link"
 msgstr "Legătură"
@@ -529,15 +537,11 @@ msgstr ""
 "Optimizată pentru a încărca foarte rapid (sub 1s GTMetrix), în orice "
 "dispozitiv și, de asemenea, pentru SEO."
 
-#: inc/support/plugins/class-plugins.php:118
+#: inc/support/plugins/class-plugins.php:120
 #, php-format
 msgid "Our theme comes pre-packaged with built-in support for the %s plugin."
 msgstr ""
 "Tema noastră vine pre-ambalată cu suport încorporat pentru pluginul %s."
-
-#: patterns/section-woo.php:31
-msgid "Out of the box WooCommerce Integration!"
-msgstr "Integrare WooCommerce din cutie!"
 
 #: inc/gutenberg/blocks/design/class-button.php:56
 msgid "Outline"
@@ -665,6 +669,10 @@ msgstr "Pregătită pentru retina"
 #: inc/gutenberg/blocks/widgets/class-rss.php:65
 msgid "RSS Error"
 msgstr "Eroare RSS"
+
+#: patterns/section-woo.php:31
+msgid "Seamless integration with WooCommerce right from the start!"
+msgstr "Integrare perfectă cu WooCommerce chiar de la început!"
 
 #: inc/gutenberg/blocks/widgets/class-search.php:68
 #: inc/gutenberg/blocks/widgets/class-search.php:69
@@ -859,6 +867,10 @@ msgstr "WCA: Contact Form 7"
 msgid "WCA: Google Tools Extension"
 msgstr "WCA: Google Tools Extension"
 
+#: inc/app.php:186
+msgid "WCA: Scroll Top"
+msgstr "WCA: Scroll Top"
+
 #: inc/support/plugins/woocommerce/class-woocommerce.php:107
 msgid "WCA: WooCommerce"
 msgstr "WCA: WooCommerce"
@@ -902,7 +914,7 @@ msgstr "Site"
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/app.php:188
+#: inc/app.php:195
 msgid "WeCodeArt Developer"
 msgstr "WeCodeArt Dezvoltator"
 
@@ -953,7 +965,7 @@ msgstr ""
 "Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
 "WeCodeArt Framework."
 
-#: inc/app.php:195
+#: inc/app.php:202
 msgid "WeCodeArt Honey"
 msgstr "WeCodeArt Honey"
 
@@ -1010,13 +1022,13 @@ msgstr ""
 
 #: views/admin/notification-locale.tpl.php:25
 msgid ""
-"Would you like to contribute by suggesting some translations? To show how "
-"much I appreciate that I will put your name on an upcoming \"Credits and "
-"Contributors\" special page. It will help both you and your clients. "
+"Would you be interested in making contributions by providing suggestions for "
+"translations? As a token of my appreciation, your name will be included on "
+"the \"Getting Started\" page."
 msgstr ""
-"Dorești să contribui, sugerând câteva traduceri? Pentru a arăta cât de mult "
-"apreciez că vă voi pune numele pe o viitoare pagină specială „Credite și "
-"colaboratori”. Te va ajuta atât pe tine, cât și pe clienții tăi."
+"Ați fi interesat să contribuiți oferind sugestii pentru traduceri? Ca semn "
+"al aprecierii mele, numele dvs. va fi inclus pe pagina „Noțiuni "
+"introductive”."
 
 #: inc/gutenberg/blocks/query/class-title.php:138
 msgctxt "yearly archives date format"

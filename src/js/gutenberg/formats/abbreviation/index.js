@@ -20,7 +20,6 @@ export const abbreviation = {
 	className: null,
 	attributes: {
 		title: 'title',
-		lang: 'lang',
 	},
 	edit,
 };

@@ -4,6 +4,7 @@
 const {
     i18n: {
         __,
+        _x,
         sprintf
     },
     components: {
@@ -120,11 +121,11 @@ const Theme = ({
                         {allThemes.includes(themeDir) ?
                             <ToggleControl
                                 className="m-0"
-                                label={activeTheme !== themeDir ? __('Active', 'wecodeart') : __('Activate', 'wecodeart')}
+                                label={activeTheme !== themeDir ? _x('Active', 'theme', 'wecodeart') : __('Activate', 'wecodeart')}
                                 checked={activeTheme === themeDir}
                                 onChange={handleActivation}
                                 {...{ disabled: !allThemes.includes(themeDir) || activeLoading }}
-                            /> : __('Not installed.', 'wecodeart')}
+                            /> : _x('Not installed.', 'theme', 'wecodeart')}
                     </div>
                     <Button
                         className="button"
@@ -133,7 +134,7 @@ const Theme = ({
                         onClick={() => handleInstall({ slug, source })}
                         {...{ disabled: shouldAllowInstall }}
                     >
-                        {installLoading ? '' : allThemes.includes(themeDir) ? __('Installed', 'wecodeart') : __('Install', 'wecodeart')}
+                        {installLoading ? '' : allThemes.includes(themeDir) ? _x('Installed', 'theme', 'wecodeart') : __('Install', 'wecodeart')}
                     </Button>
                 </HStack>
             </CardFooter>

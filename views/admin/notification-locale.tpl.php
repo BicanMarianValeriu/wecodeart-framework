@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Notification Locale Template
  * @since 		5.5.5
- * @version		5.5.5
+ * @version		6.1.3
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit();
 <h3 style="margin-bottom:.5rem;"><?php printf( esc_html__( 'It looks like WeCodeArt Framework is not translated in %s. ', 'wecodeart' ), strtolower( $language->name ) ); ?></h3>
 <p><?php
 
-	esc_html_e( 'Would you like to contribute by suggesting some translations? To show how much I appreciate that I will put your name on an upcoming "Credits and Contributors" special page. It will help both you and your clients. ', 'wecodeart' );
+	esc_html_e( 'Would you be interested in making contributions by providing suggestions for translations? As a token of my appreciation, your name will be included on the "Getting Started" page.', 'wecodeart' );
 
 ?>
 </p>

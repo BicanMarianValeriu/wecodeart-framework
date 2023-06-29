@@ -1,4 +1,8 @@
 v6.1.3
+- Removed - wca/abbreviation formatting lang attribute (irrelevant)
+- Updated - theme/plugins translation context for some of the strings (eg: install is translated different for theme vs plugin is some languages)
+- Updated - translation request notification wording
+- Updated - WooCommerce pattern wording
 - Added - themes/plugins modules admin script translations
 - Added - Scroll Top extension installer
 

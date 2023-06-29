@@ -24,7 +24,7 @@ const Edit = ({ isActive, value, onChange }) => {
 
     const toggle = () => setIsOpen(!isOpen);
 
-    const { title, lang } = state;
+    const { title } = state;
 
     const onClick = () => {
         if (title) {
@@ -50,12 +50,6 @@ const Edit = ({ isActive, value, onChange }) => {
                         label={__('Title', 'wecodeart')}
                         value={title}
                         onChange={(title) => setState({ ...state, title })}
-                    />
-                    <TextControl
-                        label={__('Language (optional)', 'wecodeart')}
-                        value={lang}
-                        help={__('Example: fr, en, de, etc. Use it only if the abbreviation`s language is different from blog language.', 'wecodeart')}
-                        onChange={(lang) => setState({ ...state, lang })}
                     />
                     <Button isPrimary isLarge onClick={onClick}>
                         {title ? __('Apply', 'wecodeart') : __('Remove', 'wecodeart')}
