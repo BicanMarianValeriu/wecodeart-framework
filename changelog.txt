@@ -1,3 +1,6 @@
+v6.1.4
+- Fixed - ScrollTop plugin installer slug
+
 v6.1.3
 - Removed - wca/abbreviation formatting lang attribute (irrelevant)
 - Updated - theme/plugins translation context for some of the strings (eg: install is translated different for theme vs plugin is some languages)

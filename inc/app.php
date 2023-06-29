@@ -182,7 +182,7 @@ return [
                 'recommended'   => true,
             ],
             [
-                'slug'          => 'wca-scrolltop',
+                'slug'          => 'BicanMarianValeriu/wca-scrolltop',
                 'title'         => esc_html__( 'WCA: Scroll Top', 'wecodeart' ),
                 'description'   => esc_html__( 'Lightweight extension for adding a scroll to top button on your site. Super flexible and customizable.', 'wecodeart' ),
                 'source'        => 'github',
