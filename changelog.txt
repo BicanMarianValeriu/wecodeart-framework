@@ -1,3 +1,7 @@
+v6.1.5
+- Fixed - Admin themes manager Active/Activate labels wrong condition.
+- Fixed - core/post-date show modified when selected
+
 v6.1.4
 - Fixed - ScrollTop plugin installer slug
 

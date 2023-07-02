@@ -304,7 +304,7 @@ const Theme = _ref => {
     className: "align-self-end"
   }, allThemes.includes(themeDir) ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ToggleControl, {
     className: "m-0",
-    label: activeTheme !== themeDir ? _x('Active', 'theme', 'wecodeart') : __('Activate', 'wecodeart'),
+    label: activeTheme !== themeDir ? _x('Activate', 'theme', 'wecodeart') : __('Active', 'wecodeart'),
     checked: activeTheme === themeDir,
     onChange: handleActivation,
     disabled: !allThemes.includes(themeDir) || activeLoading

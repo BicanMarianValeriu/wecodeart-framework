@@ -121,7 +121,7 @@ const Theme = ({
                         {allThemes.includes(themeDir) ?
                             <ToggleControl
                                 className="m-0"
-                                label={activeTheme !== themeDir ? _x('Active', 'theme', 'wecodeart') : __('Activate', 'wecodeart')}
+                                label={activeTheme !== themeDir ? _x('Activate', 'theme', 'wecodeart') : __('Active', 'wecodeart')}
                                 checked={activeTheme === themeDir}
                                 onChange={handleActivation}
                                 {...{ disabled: !allThemes.includes(themeDir) || activeLoading }}
