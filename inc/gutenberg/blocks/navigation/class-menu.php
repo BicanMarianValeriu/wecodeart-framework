@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.1.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -47,13 +47,6 @@ class Menu extends Dynamic {
 	protected $block_name = 'navigation-submenu';
 
 	/**
-	 * Init.
-	 */
-	public function init() {
-		\add_action( 'wp_enqueue_scripts', [ $this, 'register_assets' ] );
-	}
-
-	/**
 	 * Block args.
 	 *
 	 * @return 	array
@@ -81,8 +74,8 @@ class Menu extends Dynamic {
 		}
 
 		// Scripts
-		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( 'wp-block-navigation-submenu' ) ) {
-			wp_enqueue_script( 'wp-block-navigation-submenu' );
+		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( 'wecodeart-support-assets-dropdown' ) ) {
+			wp_enqueue_script( 'wecodeart-support-assets-dropdown' );
 		}
 		
 		// Use overlay first, fallback to nav background (or body).
@@ -111,24 +104,11 @@ class Menu extends Dynamic {
 			$inner_html = '';
 
 			foreach ( $block->inner_blocks as $inner_block ) {
-				if( property_exists( $block, 'attributes' ) ) {
-					// For some reason, WP does not pass this attribute to 2nd level dropdowns.
-					$inner_block->attributes['isTopLevelLink'] = false;
-				}
 				$inner_html .= $inner_block->render();
 			}
 
 			echo $inner_html; // WPCS ok - Gutenberg blocks here.
 		}, [ $block ], $echo );
-	}
-
-	/**
-	 * Register assets
-	 *
-	 * @return 	void
-	 */
-	public function register_assets(): void {
-		\wp_register_script( 'wp-block-navigation-submenu', $this->get_asset( 'js', 'modules/dropdown' ), [], wecodeart( 'version' ), true );
 	}
 
 	/**

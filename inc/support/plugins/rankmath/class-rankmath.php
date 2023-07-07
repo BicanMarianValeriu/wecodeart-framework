@@ -9,7 +9,7 @@
  * @subpackage 	Support\RankMath
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.2
+ * @version		6.1.5
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -28,9 +28,7 @@ use function WeCodeArt\Functions\get_prop;
  */
 class RankMath implements Integration {
 
-	use Singleton; 
-
-	const NOTICE_ID = 'wecodeart/extension/rankmath';
+	use Singleton;
 
 	/**
 	 * Get Conditionals
@@ -47,38 +45,9 @@ class RankMath implements Integration {
 	 * Send to Constructor
 	 */
 	public function register_hooks(): void {
-		add_action( 'admin_notices',							[ $this, 'manage_notice'		] );
 		add_action( 'after_setup_theme', 						[ $this, 'register_blocks'		] );
 		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' 	] );
 		add_filter( 'wecodeart/filter/template/context', 		[ $this, 'post_category_view'	], 20, 2 );
-	}
-
-	/**
-	 * Manage Notice
-	 *
-	 * @return 	void
-	 */
-	public function manage_notice(): void {
-		$notification = new Notification(
-			esc_html__( 'RankMath plugin support is enabled! Our theme works seamlessly with the best SEO plugin.', 'wecodeart' ),
-			[
-				'id'			=> self::NOTICE_ID,
-				'type'     		=> Notification::INFO,
-				'priority' 		=> 1,
-				'class'			=> 'notice is-dismissible',
-				'capabilities' 	=> 'activate_plugins',
-			]
-		);
-
-		if( get_user_option( self::NOTICE_ID ) === 'seen' ) {
-			Notifications::get_instance()->remove_notification( $notification );
-			set_transient( self::NOTICE_ID, true, WEEK_IN_SECONDS );
-			return;
-		}
-
-		if( get_transient( self::NOTICE_ID ) === false ) {
-			Notifications::get_instance()->add_notification( $notification );
-		}
 	}
 
 	/**

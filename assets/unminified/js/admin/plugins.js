@@ -196,6 +196,7 @@ const {
   installers = []
 } = wecodeartPlugins || {};
 
+const AJAX_ACTION = 'wca_manage_plugins';
 
 const Plugin = _ref => {
   let {
@@ -221,7 +222,7 @@ const Plugin = _ref => {
   const handleActivation = async value => {
     setActiveLoading(true);
     const formData = new FormData();
-    formData.append('action', 'wca_manage_plugins');
+    formData.append('action', AJAX_ACTION);
     formData.append('type', value ? 'activate' : 'deactivate');
     formData.append('plugins', JSON.stringify([{
       slug: pluginDir
@@ -254,7 +255,7 @@ const Plugin = _ref => {
     } = _ref2;
     setInstallLoading(true);
     const formData = new FormData();
-    formData.append('action', 'wca_manage_plugins');
+    formData.append('action', AJAX_ACTION);
     formData.append('type', 'install');
     formData.append('plugins', JSON.stringify([{
       slug,
@@ -352,7 +353,7 @@ const Manager = _ref3 => {
     onClick: async () => {
       setReloading(true);
       const formData = new FormData();
-      formData.append('action', 'wca_manage_plugins');
+      formData.append('action', AJAX_ACTION);
       formData.append('type', 'install');
       formData.append('plugins', JSON.stringify(hasRecommendedPlugins.map(_ref6 => {
         let {

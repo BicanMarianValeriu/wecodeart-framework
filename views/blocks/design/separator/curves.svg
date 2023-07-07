@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 100">
-    <path opacity=".3" d="M0 0v11s177 85 500 85 500-84 500-84V0z"/>
-    <path opacity=".6" d="M0-1s177 90 500 90 500-89 500-89z"/>
-    <path d="M0 0v13s177 62 500 62 500-61 500-61V0z"/>
+    <path d="M.42-.84v.11s177.84 99.24 500.84 99.24S1000-.15 1000-.15V0L.42-.84Z" opacity=".5"/>
+    <path d="M.42-.58s179.93 70.73 502.93 70.73S1000 0 1000 0L.42-.58Z" opacity=".7"/>
+    <path d="M0 0v.01s177.84 39.8 500.84 39.8S1000-.24 1000-.24V0H0Z"/>
 </svg>

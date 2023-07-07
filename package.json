@@ -1,6 +1,6 @@
 {
 	"name": "wecodeart",
-	"version": "6.1.2",
+	"version": "6.1.5",
 	"main": "webpack.config.js",
 	"author": "Bican Marian Valeriu",
 	"browserslist": [
@@ -18,6 +18,8 @@
 		"start:offcanvas": "wp-scripts start modules/offcanvas=./src/js/frontend/modules/navigation/offcanvas.js --output-path=assets/unminified",
 		"build:dropdown": "wp-scripts build modules/dropdown=./src/js/frontend/modules/navigation/dropdown.js --output-path=assets/minified",
 		"start:dropdown": "wp-scripts start modules/dropdown=./src/js/frontend/modules/navigation/dropdown.js --output-path=assets/unminified",
+		"build:modal": "wp-scripts build modules/modal=./src/js/frontend/modules/modal.js --output-path=assets/minified",
+		"start:modal": "wp-scripts start modules/modal=./src/js/frontend/modules/modal.js --output-path=assets/unminified",
 		"build:admin:plugins": "wp-scripts build admin/plugins=./src/js/admin/plugins/index.js --output-path=assets/minified",
 		"start:admin:plugins": "wp-scripts start admin/plugins=./src/js/admin/plugins/index.js --output-path=assets/unminified",
 		"build:admin:themes": "wp-scripts build admin/themes=./src/js/admin/themes/index.js --output-path=assets/minified",

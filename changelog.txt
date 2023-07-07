@@ -1,6 +1,18 @@
 v6.1.5
-- Fixed - Admin themes manager Active/Activate labels wrong condition.
+- Removed - Notifications about Rank Math and Yoast SEO integrations
+- Updated - Standardize offcanvas/dropdown scripts from Navigation blocks to 'wecodeart-support-assets-{module-name}'
+- Updated - Move jquery/jquery-migrate and wp-inert-polyfill to footer by default
+- Updated - offcanvas scripts are now enqueued from view template
+- Updated - core/navigation offcanvas styles to Components API
+- Updated - core/separator: wave/waves/lines/curves/curves-corner/triangles SVGs to be more symetric
+- Fixed - Admin themes manager Active/Activate labels wrong condition
+- Fixed - core/media-text style output width when image is on the right
 - Fixed - core/post-date show modified when selected
+- Fixed - core/search bug with styles output selector when multiple block instances
+- Added - core/search support for modal search (upcoming Button only block option instead of input expand)
+- Added - wecodeart( 'styles' )->Components API for using in various blocks (and other places)
+- Added - wecodeart( 'styles' )->Components API: modal, close button, offcanvas
+- Added - modal.tpl.php view for rendering modals along with JS and CSS
 
 v6.1.4
 - Fixed - ScrollTop plugin installer slug

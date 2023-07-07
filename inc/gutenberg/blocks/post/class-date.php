@@ -96,9 +96,9 @@ class Date extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-post-date--updated .wp-block-post-date__published {
-			display: none;
-		}
+			.wp-block-post-date--updated .wp-block-post-date__published {
+				display: none;
+			}
 		";
 	}
 }

@@ -217,10 +217,8 @@ class Navigation extends Dynamic {
 					self::$responsive_loaded = true;
 				}
 
-				// Scripts
-				if( ! wp_script_is( 'wp-block-' . $this->block_name . '-offcanvas' ) ) {
-					wp_enqueue_script( 'wp-block-' . $this->block_name . '-offcanvas', $this->get_asset( 'js', 'modules/offcanvas' ), [], wecodeart( 'version' ), true );
-				}
+				// Components
+				wecodeart( 'styles' )->Components->load( [ 'offcanvas' ] );
 
 				// Toggler
 				wecodeart_template( 'general/toggler', [
@@ -479,12 +477,10 @@ class Navigation extends Dynamic {
 	 * @return string
 	 */
 	public function get_responsive_styles( $type = 'default' ) {
-		$close		= 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%23000"%3e%3cpath d="M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z"/%3e%3c/svg%3e';
-
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$filter		= explode( '-', Navigation::get_instance()->get_mobile_breakpoint() );
 		$filter		= end( $filter );
-		$breakpoint	= get_prop( $breaks, $filter, '992px' ); 
+		$breakpoint	= get_prop( $breaks, $filter, '992px' );
 
 		$inline = '';
 
@@ -546,117 +542,6 @@ class Navigation extends Dynamic {
 			break;
 			default:
 				$inline .= "
-					/* Offcanvas */
-					.offcanvas {
-						position: fixed;
-						bottom: 0;
-						display: flex;
-						flex-direction: column;
-						max-width: 100%;
-						visibility: hidden;
-						background-color: rgb(var(--wp--background--rgb, 255,255,255));
-						background-clip: padding-box;
-						outline: 0;
-						transition: transform 0.3s ease-in-out;
-						z-index: 1045;
-					}
-					.offcanvas-backdrop {
-						position: fixed;
-						top: 0;
-						left: 0;
-						width: 100vw;
-						height: 100vh;
-						background-color: #000;
-						z-index: 1040;
-					}
-					.offcanvas-backdrop.fade {
-						opacity: 0;
-					}
-					.offcanvas-backdrop.show {
-						opacity: 0.5;
-					}
-					.offcanvas-header {
-						display: flex;
-						align-items: center;
-						justify-content: space-between;
-						padding: 1rem 1rem;
-					}
-					.offcanvas-header .btn-close {
-						padding: 0.5rem 0.5rem;
-						margin-top: -0.5rem;
-						margin-right: -0.5rem;
-						margin-bottom: -0.5rem;
-					}
-					.offcanvas-title {
-						margin-bottom: 0;
-						line-height: 1.5;
-					} 
-					.offcanvas-body {
-						flex-grow: 1;
-						padding: 1rem 1rem;
-						overflow-y: auto;
-					}
-					.offcanvas-start {
-						top: 0;
-						left: 0;
-						width: 400px;
-						border-right: 1px solid rgba(0, 0, 0, 0.2);
-						transform: translateX(-100%);
-					}
-					.offcanvas-end {
-						top: 0;
-						right: 0;
-						width: 400px;
-						border-left: 1px solid rgba(0, 0, 0, 0.2);
-						transform: translateX(100%);
-					}
-					.offcanvas-top {
-						top: 0;
-						right: 0;
-						left: 0;
-						height: 30vh;
-						max-height: 100%;
-						border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-						transform: translateY(-100%);
-					} 
-					.offcanvas-bottom {
-						right: 0;
-						left: 0;
-						height: 30vh;
-						max-height: 100%;
-						border-top: 1px solid rgba(0, 0, 0, 0.2);
-						transform: translateY(100%);
-					}
-					.offcanvas.show {
-						transform: none;
-					}				
-					/* Close */
-					.btn-close {
-						box-sizing: content-box;
-						width: 1em;
-						height: 1em;
-						padding: 0.25em 0.25em;
-						color: #000;
-						background: transparent url('$close') center/1em auto no-repeat;
-						border: 0;
-						border-radius: 0.25rem;
-						opacity: 0.5;
-					}
-					.btn-close:hover {
-						color: #000;
-						text-decoration: none;
-						opacity: 0.75;
-					}
-					.btn-close:focus {
-						outline: 0;
-						box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
-						opacity: 1;
-					}
-					.btn-close:is(.disabled,:disabled) {
-						pointer-events: none;
-						user-select: none;
-						opacity: 0.25;
-					}
 					/* Toggler */
 					.navbar-toggler {
 						padding: var(--wp--navbar-toggler-padding-y) var(--wp--navbar-toggler-padding-x);
@@ -815,7 +700,7 @@ class Navigation extends Dynamic {
 					.navbar-dark {
 						--wp--emphasis-color-rgb: 255, 255, 255;/* white */
 					}
-					.navbar-dark :where(.btn-close,.navbar-toggler-icon) {
+					.navbar-dark .navbar-toggler-icon {
 						filter: invert(1) grayscale(100%) brightness(200%);
 					}
 				";

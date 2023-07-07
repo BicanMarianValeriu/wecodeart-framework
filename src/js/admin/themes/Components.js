@@ -331,7 +331,7 @@ const Manager = ({ createNotice }) => {
                     {__('We highly recommend using a child theme for making any modifications to your website.', 'wecodeart')}
                     <br />
                     {sprintf(
-                        __('Would you like us to %s our starter theme for you?', 'wecodeart'),
+                        __('Would you like us to %s our child theme for you?', 'wecodeart'),
                         hasDefaultTheme ? __('activate', 'wecodeart') : __('install', 'wecodeart')
                     )}
                 </p>

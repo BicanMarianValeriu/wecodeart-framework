@@ -45,6 +45,14 @@ final class Styles implements Integration {
 	 * @var 	object
 	 */
 	public 	$Utilities	= null;
+	
+	/**
+	 * Components
+	 *
+	 * @since  	6.1.5
+	 * @var 	object
+	 */
+	public 	$Components	= null;
 
 	/**
 	 * Send to Constructor
@@ -52,6 +60,7 @@ final class Styles implements Integration {
 	public function init() {
 		$this->Sanitize 	= Styles\Sanitize::get_instance();
 		$this->Utilities 	= Styles\Utilities::get_instance();
+		$this->Components 	= Styles\Components::get_instance();
 	}
 
 	/**

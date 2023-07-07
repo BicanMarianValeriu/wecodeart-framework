@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.4.8
- * @version		6.0.0
+ * @version		6.1.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -36,21 +36,5 @@ class Search extends Processor {
 				'width' => get_prop( $this->attrs, 'width' ) . get_prop( $this->attrs, 'widthUnit' )
 			], $this->get_selector( ' .wp-block-search__fields' ) );
 		}
-
-		// Update Selector
-		$new_selector = join( ', ', [
-			$this->get_selector( ' .wp-block-search__input' ),
-			$this->get_selector( ' .wp-element-button' )
-		] );
-
-		add_filter( 'wecodeart/filter/gutenberg/styles/selector', function( $selector, $name ) use ( $new_selector ) {
-			if( 'core/search' === $name ) {
-				$selector = $new_selector;
-			}
-			
-			remove_filter( current_filter(), __FUNCTION__ );
-
-			return $selector;
-		}, 10, 2 );
 	}
 }

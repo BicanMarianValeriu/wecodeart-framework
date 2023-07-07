@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-29 03:44+0000\n"
+"POT-Creation-Date: 2023-07-04 07:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -178,6 +178,10 @@ msgstr ""
 #: patterns/section-pricing.php:14
 #, php-format
 msgid "Choose %s"
+msgstr ""
+
+#: views/general/modal.tpl.php:40 views/general/offcanvas.tpl.php:38
+msgid "Close"
 msgstr ""
 
 #: patterns/page-soon.php:25
@@ -491,6 +495,10 @@ msgstr ""
 msgid "Notification dismissed"
 msgstr ""
 
+#: inc/gutenberg/blocks/widgets/class-search.php:195
+msgid "Open search modal"
+msgstr ""
+
 #: patterns/section-features.php:113
 msgid ""
 "Optimized to load very fast (under 1s GTMetrix), in any device, and also for "
@@ -566,7 +574,7 @@ msgstr ""
 msgid "Post Type Archives: %s"
 msgstr ""
 
-#: views/blocks/post/date.tpl.php:62
+#: views/blocks/post/date.tpl.php:61
 #, php-format
 msgid "Post updated on %s."
 msgstr ""
@@ -581,12 +589,6 @@ msgstr ""
 
 #: patterns/section-posts.php:12
 msgid "Posts"
-msgstr ""
-
-#: inc/support/plugins/rankmath/class-rankmath.php:63
-msgid ""
-"RankMath plugin support is enabled! Our theme works seamlessly with the best "
-"SEO plugin."
 msgstr ""
 
 #: patterns/query-default.php:23 patterns/query-list.php:31
@@ -630,8 +632,8 @@ msgstr ""
 msgid "Seamless integration with WooCommerce right from the start!"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-search.php:68
-#: inc/gutenberg/blocks/widgets/class-search.php:69
+#: inc/gutenberg/blocks/widgets/class-search.php:70
+#: inc/gutenberg/blocks/widgets/class-search.php:71
 msgid "Search"
 msgstr ""
 
@@ -664,7 +666,7 @@ msgstr ""
 msgid "Simple pricing plans for any size team."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:114
+#: inc/support/assets/class-assets.php:113
 msgid "Skip to content"
 msgstr ""
 
@@ -923,7 +925,7 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:151
+#: inc/support/assets/class-assets.php:165
 #, php-format
 msgid ""
 "When using \"%s\" method you must define the 3rd parameter (style or script)."
@@ -962,12 +964,6 @@ msgstr ""
 
 #: views/admin/notification-locale.tpl.php:32
 msgid "Yes, I would love to!"
-msgstr ""
-
-#: inc/support/plugins/wpseo/class-wpseo.php:77
-msgid ""
-"YoastSEO plugin support is enabled! Our theme works seamlessly with the best "
-"SEO plugin."
 msgstr ""
 
 #: patterns/section-features.php:90

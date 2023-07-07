@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-06-29 03:46+0000\n"
+"PO-Revision-Date: 2023-07-04 07:45+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -198,6 +198,10 @@ msgstr "Arhivă Categorie: %s"
 #, php-format
 msgid "Choose %s"
 msgstr "Alege %s"
+
+#: views/general/modal.tpl.php:40 views/general/offcanvas.tpl.php:38
+msgid "Close"
+msgstr "Închide"
 
 #: patterns/page-soon.php:25
 msgid "COMING SOON"
@@ -529,6 +533,10 @@ msgstr "Nu, nu-mi pasă."
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
 
+#: inc/gutenberg/blocks/widgets/class-search.php:195
+msgid "Open search modal"
+msgstr "Deschideți modalul de căutare"
+
 #: patterns/section-features.php:113
 msgid ""
 "Optimized to load very fast (under 1s GTMetrix), in any device, and also for "
@@ -607,7 +615,7 @@ msgstr "Matricea de pluginuri este goală."
 msgid "Post Type Archives: %s"
 msgstr "Arhivă tip postare: %s"
 
-#: views/blocks/post/date.tpl.php:62
+#: views/blocks/post/date.tpl.php:61
 #, php-format
 msgid "Post updated on %s."
 msgstr "Postare actualizată la %s."
@@ -623,14 +631,6 @@ msgstr "Postat pe"
 #: patterns/section-posts.php:12
 msgid "Posts"
 msgstr "Postări"
-
-#: inc/support/plugins/rankmath/class-rankmath.php:63
-msgid ""
-"RankMath plugin support is enabled! Our theme works seamlessly with the best "
-"SEO plugin."
-msgstr ""
-"Suportul pentru pluginul RankMath este activat! Tema noastră funcționează "
-"perfect cu cel mai bun plugin SEO."
 
 #: patterns/query-default.php:23 patterns/query-list.php:31
 #| msgid "Read More"
@@ -674,8 +674,8 @@ msgstr "Eroare RSS"
 msgid "Seamless integration with WooCommerce right from the start!"
 msgstr "Integrare perfectă cu WooCommerce chiar de la început!"
 
-#: inc/gutenberg/blocks/widgets/class-search.php:68
-#: inc/gutenberg/blocks/widgets/class-search.php:69
+#: inc/gutenberg/blocks/widgets/class-search.php:70
+#: inc/gutenberg/blocks/widgets/class-search.php:71
 msgid "Search"
 msgstr "Caută"
 
@@ -709,7 +709,7 @@ msgstr "Selectați Anul"
 msgid "Simple pricing plans for any size team."
 msgstr "Planuri simple de prețuri pentru echipe de orice dimensiune."
 
-#: inc/support/assets/class-assets.php:114
+#: inc/support/assets/class-assets.php:113
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
@@ -994,7 +994,7 @@ msgstr ""
 "Când adăugați o pictogramă SVG cu %s, trebuie să definiți cheile `viewBox` "
 "și `paths`."
 
-#: inc/support/assets/class-assets.php:151
+#: inc/support/assets/class-assets.php:165
 #, php-format
 #| msgid ""
 #| "When using \"%s\" method you must define 3rd parameter (style or script)."
@@ -1043,17 +1043,6 @@ msgstr "Arhive Anuale: %s"
 #: views/admin/notification-locale.tpl.php:32
 msgid "Yes, I would love to!"
 msgstr "Da, mi-ar plăcea!"
-
-#: inc/support/plugins/wpseo/class-wpseo.php:77
-#| msgid ""
-#| "YoastSEO support is enabled! Our theme works seamlessly with the best SEO "
-#| "plugin."
-msgid ""
-"YoastSEO plugin support is enabled! Our theme works seamlessly with the best "
-"SEO plugin."
-msgstr ""
-"Suportul pentru pluginul YoastSEO este activat! Tema noastră funcționează "
-"perfect cu cel mai bun plugin SEO."
 
 #: patterns/section-features.php:90
 msgid "You don't need to fear the Gutenberg update introduced into WordPress."

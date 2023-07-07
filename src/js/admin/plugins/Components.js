@@ -26,6 +26,8 @@ const { active: _activePlugins = [], all: _allPlugins = [], installers = [] } = 
 
 import { getInstallerIcon, getInstallerDir } from './../functions';
 
+const AJAX_ACTION = 'wca_manage_plugins';
+
 const Plugin = ({
     title = '',
     slug = '',
@@ -48,7 +50,7 @@ const Plugin = ({
         setActiveLoading(true);
 
         const formData = new FormData();
-        formData.append('action', 'wca_manage_plugins');
+        formData.append('action', AJAX_ACTION);
         formData.append('type', value ? 'activate' : 'deactivate');
         formData.append('plugins', JSON.stringify([{ slug: pluginDir }]));
 
@@ -73,7 +75,7 @@ const Plugin = ({
         setInstallLoading(true);
 
         const formData = new FormData();
-        formData.append('action', 'wca_manage_plugins');
+        formData.append('action', AJAX_ACTION);
         formData.append('type', 'install');
         formData.append('plugins', JSON.stringify([{ slug, source }]));
 
@@ -168,7 +170,7 @@ const Manager = ({ createNotice }) => {
                         setReloading(true);
 
                         const formData = new FormData();
-                        formData.append('action', 'wca_manage_plugins');
+                        formData.append('action', AJAX_ACTION);
                         formData.append('type', 'install');
                         formData.append('plugins', JSON.stringify(hasRecommendedPlugins.map(({ slug, source }) => ({ slug, source }))));
 

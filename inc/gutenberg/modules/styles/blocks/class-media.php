@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -39,7 +39,7 @@ class Media extends Processor {
 		// Handle width
 		if ( $value = get_prop( $this->attrs, 'mediaWidth' ) ) {
 			$this->add_declarations( [
-				'grid-template-columns' => "{$value}% auto",
+				'grid-template-columns' => get_prop( $this->attrs, 'mediaPosition', 'left' ) === 'right' ? "auto {$value}%" : "{$value}% auto",
 			] );
 		}
 

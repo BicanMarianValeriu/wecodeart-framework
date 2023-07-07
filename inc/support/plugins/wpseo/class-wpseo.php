@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.5
- * @version		6.1.2
+ * @version		6.1.5
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -28,9 +28,7 @@ use function WeCodeArt\Functions\get_prop;
  */
 class WPSeo implements Integration {
 
-	use Singleton; 
-
-	const NOTICE_ID = 'wecodeart/extension/yoast';
+	use Singleton;
 
 	/**
 	 * Get Conditionals
@@ -64,35 +62,6 @@ class WPSeo implements Integration {
 
 		// Register Blocks Overwrites
 		add_action( 'after_setup_theme', 	[ $this, 'register_blocks' ] );
-	}
-
-	/**
-	 * Manage Notice
-	 *
-	 * @since 	5.0.0
-	 * @version	6.1.2
-	 */
-	public function manage_notice(): void {
-		$notification = new Notification(
-			esc_html__( 'YoastSEO plugin support is enabled! Our theme works seamlessly with the best SEO plugin.', 'wecodeart' ),
-			[
-				'id'			=> self::NOTICE_ID,
-				'type'     		=> Notification::INFO,
-				'priority' 		=> 1,
-				'class'			=> 'notice is-dismissible',
-				'capabilities' 	=> 'activate_plugins',
-			]
-		);
-
-		if( get_user_option( self::NOTICE_ID ) === 'seen' ) {
-			Notifications::get_instance()->remove_notification( $notification );
-			set_transient( self::NOTICE_ID, true, WEEK_IN_SECONDS );
-			return;
-		}
-
-		if( get_transient( self::NOTICE_ID ) === false ) {
-			Notifications::get_instance()->add_notification( $notification );
-		}
 	}
 
 	/**

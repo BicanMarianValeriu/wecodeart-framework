@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.4.0
- * @version		6.1.2
+ * @version		6.1.5
  */
 
 namespace WeCodeArt\Support;
@@ -70,7 +70,7 @@ final class Assets implements Integration {
 		$this->Asset	= ( new Assets\Asset( wecodeart_config() ) );
 
 		// Move jQuery to Footer
-		\add_action( 'wp_default_scripts', 	[ $this, 'jquery_to_footer'	] );
+		\add_action( 'wp_default_scripts', 	[ $this, 'to_footer'	] );
 	}
 
 	/**
@@ -82,16 +82,15 @@ final class Assets implements Integration {
 	}
 	
 	/**
-	 * jQuery to Footer
+	 * Scripts to Footer
 	 *
-	 * @since	3.1.2
-	 * @version	5.3.8
+	 * @since	6.1.5
+	 * @version	6.1.5
 	 */
-	public function jquery_to_footer( $wp_scripts ): void {
-		$config = wecodeart_config( 'footer' );
+	public function to_footer( $wp_scripts ): void {
+		if( is_admin() || get_prop( wecodeart_config( 'footer' ), [ 'scripts' ] ) === false ) return;
 
-		if ( is_admin() && get_prop( $config, 'jquery' ) !== false ) return;
-
+		$wp_scripts->add_data( 'wp-inert-polyfill',	'group', 1 );
 		$wp_scripts->add_data( 'jquery', 			'group', 1 );
 		$wp_scripts->add_data( 'jquery-core', 		'group', 1 );
 		$wp_scripts->add_data( 'jquery-migrate', 	'group', 1 );
@@ -101,7 +100,7 @@ final class Assets implements Integration {
 	 * Enqueue Front-End Core Assets
 	 *
 	 * @since	6.0.0
-	 * @version	6.0.0
+	 * @version	6.1.5
 	 */
 	public function core(): void {
 		global $wp_scripts;
@@ -127,6 +126,21 @@ final class Assets implements Integration {
 			'deps'		=> [ 'wp-hooks' ],
 			'locale'	=> $wecodeart,
 			'inline'	=> 'document.addEventListener("DOMContentLoaded",function(){(new wecodeart.JSM(wecodeart)).loadEvents();});',
+		] );
+		
+		$this->add_script( $this->make_handle( 'offcanvas '), [
+			'path' 		=> $this->get_asset( 'js', 'modules/offcanvas' ),
+			'load'		=> false,
+		] );
+		
+		$this->add_script( $this->make_handle( 'dropdown '), [
+			'path' 		=> $this->get_asset( 'js', 'modules/dropdown' ),
+			'load'		=> false,
+		] );
+		
+		$this->add_script( $this->make_handle( 'modal '), [
+			'path' 		=> $this->get_asset( 'js', 'modules/modal' ),
+			'load'		=> false,
 		] );
 
 		// Add Core Styles
@@ -327,19 +341,6 @@ final class Assets implements Integration {
 		}
 
 		return $inline;
-    }
-
-	/**
-     * Update Hook
-     *
-     * @param  string  $hook
-     *
-     * @return void
-     */
-    public function hook( string $hook = 'wp_enqueue_scripts' ) {
-		$this->hook = $hook;
-
-		return $this;
     }
 
 	/**

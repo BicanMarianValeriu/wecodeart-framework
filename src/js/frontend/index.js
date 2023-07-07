@@ -2,6 +2,7 @@
 import './plugins/wecodeart-Component';
 import './plugins/wecodeart-JSManager';
 import './plugins/wecodeart-Template';
+
 import loadJs from 'loadjs';
 import requireJs from './helpers/requireJs';
 import getOptions from './helpers/parseData';

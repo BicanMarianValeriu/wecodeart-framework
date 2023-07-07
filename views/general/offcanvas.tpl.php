@@ -8,10 +8,14 @@
  * @package		WeCodeArt Framework
  * @subpackage  OffCanvas
  * @since		5.0.0
- * @version    	5.5.1
+ * @version    	6.1.5
  */
 
 defined( 'ABSPATH' ) || exit();
+
+if( ! wp_script_is( 'wecodeart-support-assets-offcanvas' ) ) {
+    wp_enqueue_script( 'wecodeart-support-assets-offcanvas' );
+}
 
 /**
  * @param   mixed  	$id			Toggle ID
@@ -31,11 +35,11 @@ if( isset( $classes ) && is_array( $classes ) ) {
 		<?php if( isset( $title ) ) : ?>
 		<h5 class="offcanvas-title"><?php echo esc_html( $title ); ?></h5>
 		<?php endif; ?>
-		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<?php esc_attr_e( 'Close', 'wecodeart' ); ?>"></button>
 	</div>
 	<div class="offcanvas-body"><?php
 
-		// Is Ok, we render Navigation Gutenberg blocks here
+		// Content markup should be escaped before passing to this view.
 		echo $content;
 
 	?></div>

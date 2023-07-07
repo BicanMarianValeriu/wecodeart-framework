@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 773.74 154.98">
-    <path d="M0 0h773.74L386.87 77.5Z"/>
-    <path opacity=".66" d="m0 0 386.87 154.98L773.74 0Z"/>
+    <path d="M0 0h773.74l-385.9 57.73L0 0Z"/>
+    <path d="m0 0 388.49 106.03L773.74 0H0Z" opacity=".7"/>
+    <path d="m0 0 388.17 155.3L773.74 0H0Z" opacity=".5"/>
 </svg>
