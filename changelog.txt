@@ -1,3 +1,6 @@
+v6.1.6
+- Fixed - Issue with Admin theme options fatal error after removing WP SEO manage_notice method
+
 v6.1.5
 - Removed - Notifications about Rank Math and Yoast SEO integrations
 - Updated - Standardize offcanvas/dropdown scripts from Navigation blocks to 'wecodeart-support-assets-{module-name}'

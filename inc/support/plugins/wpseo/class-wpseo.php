@@ -45,9 +45,6 @@ class WPSeo implements Integration {
 	 * Send to Constructor
 	 */
 	public function register_hooks(): void {
-		// Notices
-		add_action( 'admin_notices',	[ $this, 'manage_notice' ] );
-
 		// Restricted Blocks
 		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' 	] );
 
