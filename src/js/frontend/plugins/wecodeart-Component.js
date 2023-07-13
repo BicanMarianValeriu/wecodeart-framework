@@ -51,5 +51,6 @@ export default (function (wecodeart) {
 	 * @memberof Component
 	 */
 	wecodeart.Component = Component;
+	wecodeart.plugins.Component = Component;
 
 }).apply(this, [window.wecodeart]);

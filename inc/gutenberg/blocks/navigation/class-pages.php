@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.3.7
- * @version		6.0.8
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -152,16 +152,12 @@ class Pages extends Dynamic {
 		$inner_blocks = wp_list_filter( $all_pages, [ 'post_parent' => $page->ID ] );
 
 		if( ! empty( $inner_blocks ) ) {
-			// Extra Assets Handle
-			$handle_style 	= 'wp-block-navigation-submenu';
-			$handle_script 	= 'wp-block-navigation-submenu';
-
-			if( ! wp_style_is( $handle_style ) ) {
-				wp_add_inline_style( 'wp-block-navigation', wecodeart( 'blocks' )->get( 'core/navigation-submenu' )::get_instance()->styles() );
-			}
+			// Styles
+			wecodeart( 'styles' )->Components->load( [ 'dropdown' ] );
 			
-			if( ! wp_script_is( $handle_script ) ) {
-				wp_enqueue_script( $handle_script, wecodeart_asset( 'js', 'modules/dropdown' ), [], wecodeart( 'version' ), true );
+			// Scripts
+			if( ! wp_script_is( 'wecodeart-support-assets-dropdown' ) ) {
+				wp_enqueue_script( 'wecodeart-support-assets-dropdown' );
 			}
 
 			$block = wp_parse_args( [

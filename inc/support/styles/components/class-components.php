@@ -8,8 +8,8 @@
  * @package		WeCodeArt Framework
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
- * @since		6.1.5
- * @version		6.1.5
+ * @since		6.1.7
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Support\Styles;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\get_prop;
  
@@ -26,6 +27,7 @@ use function WeCodeArt\Functions\get_prop;
 class Components implements Configuration {
 
 	use Singleton;
+    use Asset;
 
 	/**
      * All of the configuration items.
@@ -43,20 +45,17 @@ class Components implements Configuration {
 	protected $loaded  = [];
 
     /**
-	 * The CSS ID for registered style.
-	 *
-	 * @var string
-	 */
-    const CSS_ID    = 'wecodeart-components';
-
-    /**
 	 * Send to Constructor
 	 */
 	public function init() {
         // Modules
 		$this->register( 'close',       Components\Close::class     );
 		$this->register( 'modal',       Components\Modal::class     );
+		$this->register( 'toast',       Components\Toast::class     );
+		$this->register( 'toggler',     Components\Toggler::class   );
+		$this->register( 'dropdown',    Components\Dropdown::class  );
 		$this->register( 'offcanvas',   Components\OffCanvas::class );
+		$this->register( 'transition',  Components\Transition::class);
 
         add_action( 'wp_print_styles',  [ $this, 'assets' ], 20, 1 );
 	}
@@ -103,7 +102,7 @@ class Components implements Configuration {
 			}
         }
         
-        if( empty( $queue  ) ) return;
+        if( empty( $queue ) ) return;
            
         foreach( $queue as $component ) {
             $inline_css .= $this->get( $component )::styles();
@@ -113,9 +112,9 @@ class Components implements Configuration {
 
         $inline_css = wecodeart( 'styles' )::compress( $inline_css );
 
-		wp_register_style( self::CSS_ID, false, [], true, true );
-		wp_add_inline_style( self::CSS_ID, $inline_css );
-		wp_enqueue_style( self::CSS_ID );
+		wp_register_style( $this->make_handle(), false, [], true, true );
+		wp_add_inline_style( $this->make_handle(), $inline_css );
+		wp_enqueue_style( $this->make_handle() );
 	}
 	
 	/**

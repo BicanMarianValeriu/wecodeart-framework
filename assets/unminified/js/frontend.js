@@ -306,6 +306,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
   wecodeart.Component = Component;
+  wecodeart.plugins.Component = Component;
 }).apply(undefined, [window.wecodeart]));
 
 /***/ }),
@@ -591,6 +592,7 @@ __webpack_require__.r(__webpack_exports__);
 
   Template._templates = [];
   wecodeart.Template = Template;
+  wecodeart.plugins.Template = Template;
   /**
    * Add A Basic Sample Template
    */
@@ -1068,7 +1070,6 @@ function filterLog(route, func, args) {
    * Base WCA Functions
    * @since 3.6
    */
-  wecodeart.plugins = {};
   wecodeart.fn = {
     hasScrollbar: _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__["default"],
     createParams: _helpers_paramsCreate__WEBPACK_IMPORTED_MODULE_6__["default"],

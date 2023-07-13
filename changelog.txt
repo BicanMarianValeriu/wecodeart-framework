@@ -1,3 +1,22 @@
+v6.1.7
+- Removed - gap-# utility class (replaced previously with g-#)
+- Updated - core/comments-title top margin to zero (after removing certain CSS reboot)
+- Updated - core/navigation-submenu and core/page-list to use new Dropdowns component styles
+- Updated - core/navigation toggler padding to 0 and SVG color to full black
+- Updated - offcanvas/modal views to load their Components styles (along with scripts)
+- Updated - disable notifications for CF7 and WooCommerce if plugins already installed
+- Updated - expose Dropdown/Modal/Offcanvas modules to wecodeart object (wecodeart.plugins = {...})
+- Updated - utilities and components styles to use Asset trait to generate handle based on class (wecodeart-support-styles-utilities)
+- Updated - move forms.js (wecodeart-support-markup-inputs) JavaScript to inline generated
+- Updated - improve inputs styles with :where() and :is() selector to reduce ammount of CSS
+- Updated - move input-group styles to its own component to reduce the loaded CSS for forms
+- Updated - move transitions styles to its own component to reduce the default loaded CSS (dependency for Offcanvas, Modal, Toast components)
+- Updated - forms validation styles now extends .wp-cf7-invalid-tip class (styled as a tooltip)
+- Updated - add --wp--style--block-gap to g-# utility class
+- Added - Dropdowns styles to wecodeart( 'styles' )->Components API
+- Added - Navbar toggler styles to wecodeart( 'styles' )->Components API
+- Added - wecodeart_input( 'group', ...args ) to render inputs into an input-group container (usses array of input args) 
+
 v6.1.6
 - Fixed - Issue with Admin theme options fatal error after removing WP SEO manage_notice method
 

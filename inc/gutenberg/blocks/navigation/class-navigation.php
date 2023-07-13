@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -216,9 +216,6 @@ class Navigation extends Dynamic {
 					
 					self::$responsive_loaded = true;
 				}
-
-				// Components
-				wecodeart( 'styles' )->Components->load( [ 'offcanvas' ] );
 
 				// Toggler
 				wecodeart_template( 'general/toggler', [
@@ -541,38 +538,6 @@ class Navigation extends Dynamic {
 				";
 			break;
 			default:
-				$inline .= "
-					/* Toggler */
-					.navbar-toggler {
-						padding: var(--wp--navbar-toggler-padding-y) var(--wp--navbar-toggler-padding-x);
-						background-color: transparent;
-						color: var(--wp--navbar-color);
-						font-size: var(--wp--navbar-toggler-font-size, 1.25rem);
-						line-height: 1;
-						border: 1px solid var(--wp--navbar-toggler-border-color, transparent);
-						border-radius: var(--wp--navbar-toggler-border-radius, 0.25rem);
-						transition: var(--wp--navbar-toggler-transition, box-shadow 0.15s ease-in-out);
-					}
-					.navbar-toggler:hover {
-						text-decoration: none;
-					}
-					.navbar-toggler:focus {
-						text-decoration: none;
-						outline: 0;
-						box-shadow: 0 0 0 var(--wp--navbar-toggler-focus-width);
-					} 
-					.navbar-toggler-icon {
-						display: inline-block;
-						width: 1.5em;
-						height: 1.5em;
-						vertical-align: middle;
-						background-image: var(--wp--navbar-toggler-icon-bg);
-						background-repeat: no-repeat;
-						background-position: center;
-						background-size: 100%;
-					}
-				";
-				
 				foreach( $breaks as $key => $value ) {
 					// Skip what we dont need!
 					if( $key !== $filter ) continue;
@@ -700,9 +665,6 @@ class Navigation extends Dynamic {
 					.navbar-dark {
 						--wp--emphasis-color-rgb: 255, 255, 255;/* white */
 					}
-					.navbar-dark .navbar-toggler-icon {
-						filter: invert(1) grayscale(100%) brightness(200%);
-					}
 				";
 			break;
 			case 'navbar-light':
@@ -813,8 +775,6 @@ class Navigation extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles(): string {
-		$toggler 	= 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3e%3cpath stroke="rgba%280, 0, 0, 0.55%29" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3e%3c/svg%3e';
-
 		return "
 			.wp-block-navigation {
 				display: flex;
@@ -853,16 +813,6 @@ class Navigation extends Dynamic {
 				--wp--navbar-hover-color: rgba(var(--wp--emphasis-color-rgb), 0.8);
 				--wp--navbar-active-color: rgba(var(--wp--emphasis-color-rgb), 1);
 				--wp--navbar-disabled-color: rgba(var(--wp--emphasis-color-rgb), 0.3);
-
-				--wp--navbar-toggler-padding-y: 0.25rem;
-				--wp--navbar-toggler-padding-x: 0.75rem;
-				--wp--navbar-toggler-font-size: 1.25rem;
-				--wp--navbar-toggler-icon-bg: url('$toggler');
-				--wp--navbar-toggler-border-color: rgba(var(--wp--emphasis-color-rgb),.15);
-				--wp--navbar-toggler-border-radius: 0.375rem;
-				--wp--navbar-toggler-focus-width: 0.25rem;
-				--wp--navbar-toggler-transition: box-shadow 0.15s ease-in-out;
-
 				position: relative;
 				display: flex;
 				flex-wrap: wrap;

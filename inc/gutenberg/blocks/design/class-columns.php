@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.1.2
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -69,7 +69,6 @@ class Columns extends Dynamic {
 			}
 			.wp-block-columns.grid {
 				display: grid;
-				gap: var(--wp--style--block-gap);
 			}
 			.wp-block-columns.are-vertically-aligned-top {
 				align-items: flex-start;

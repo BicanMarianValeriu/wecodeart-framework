@@ -77,11 +77,11 @@ class Button extends Basic {
                 box-shadow: none;
                 opacity: 0.65;
             }
-            :where(button, [type=button], [type=reset], [type=submit], [role="button"]) {
+            :where(button,[type=button],[type=reset],[type=submit],[role="button"]) {
                 border: 1px solid transparent;
                 -webkit-appearance: button;
             }
-            :where(button, [type=button], [type=reset], [type=submit], [role="button"]):not(:disabled) {
+            :where(button,[type=button],[type=reset],[type=submit],[role="button"]):not(:disabled) {
                 cursor: pointer;
             }
         ';

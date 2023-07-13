@@ -179,7 +179,6 @@ return [
                 'description'   => esc_html__( 'Add Google Analytics, verify your Google Webmasters property and Google Adsense publisher account with ease.', 'wecodeart' ),
                 'source'        => 'wordpress',
                 'more'          => 'https://wordpress.org/plugins/wca-google-tools-extension/',
-                'recommended'   => true,
             ],
             [
                 'slug'          => 'BicanMarianValeriu/wca-scrolltop',

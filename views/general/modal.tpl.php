@@ -8,7 +8,7 @@
  * @package		WeCodeArt Framework
  * @subpackage  Modal
  * @since		6.1.5
- * @version    	6.1.5
+ * @version    	6.1.7
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -16,6 +16,8 @@ defined( 'ABSPATH' ) || exit();
 if( ! wp_script_is( 'wecodeart-support-assets-modal' ) ) {
     wp_enqueue_script( 'wecodeart-support-assets-modal' );
 }
+
+wecodeart( 'styles' )->Components->load( [ 'modal' ] );
 
 /**
  * @param   mixed  	$id			Modal ID

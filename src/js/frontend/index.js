@@ -31,7 +31,6 @@ function filterLog(route, func, args) {
 	 * Base WCA Functions
 	 * @since 3.6
 	 */
-	wecodeart.plugins = {};
 	wecodeart.fn = {
 		hasScrollbar,
 		createParams,

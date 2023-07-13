@@ -27,7 +27,7 @@ class Modal extends Base {
      *
      * @var     array
      */
-    static $deps = [ 'close' ];
+    static $deps = [ 'transition', 'close' ];
 
     /**
 	 * Component styles.
@@ -226,6 +226,34 @@ class Modal extends Base {
 			}
         ';
 
+		// FullScreen Breakpoints
+		foreach( $breaks as $key => $value ) {
+			$inline .= "
+				@media (max-width:{$value}) {
+					.modal--fullscreen\:{$key} .modal-dialog {
+						width: 100vw;
+						max-width: none;
+						height: 100%;
+						margin: 0
+					}
+				
+					.modal--fullscreen\:{$key} .modal-content {
+						height: 100%;
+						border: 0;
+						border-radius: 0
+					}
+				
+					.modal--fullscreen\:{$key} :where(.modal-header,.modal-footer) {
+						border-radius: 0
+					}
+				
+					.modal--fullscreen\:{$key} .modal-body {
+						overflow-y: auto
+					}
+				}
+			";
+		}
+
 		// Sizes
 		$inline .= "
 			@media (min-width:{$break_sm}) {
@@ -259,35 +287,7 @@ class Modal extends Base {
 			}
 		";
 
-		// FullScreen Breakpoints
-		foreach( $breaks as $key => $value ) {
-			$inline .= "
-				@media (max-width:{$value}) {
-					.modal--fullscreen\:{$key} .modal-dialog {
-						width: 100vw;
-						max-width: none;
-						height: 100%;
-						margin: 0
-					}
-				
-					.modal--fullscreen\:{$key} .modal-content {
-						height: 100%;
-						border: 0;
-						border-radius: 0
-					}
-				
-					.modal--fullscreen\:{$key} :where(.modal-header,.modal-footer) {
-						border-radius: 0
-					}
-				
-					.modal--fullscreen\:{$key} .modal-body {
-						overflow-y: auto
-					}
-				}
-			";
-		}
-
-		/* Reduce Motion */
+		// Reduce Motion
 		$inline .= '
 			@media (prefers-reduced-motion:reduce) {
 				.modal.fade .modal-dialog {

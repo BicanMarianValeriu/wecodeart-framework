@@ -8,7 +8,7 @@
  * @package		WeCodeArt Framework
  * @subpackage  OffCanvas
  * @since		5.0.0
- * @version    	6.1.5
+ * @version    	6.1.7
  */
 
 defined( 'ABSPATH' ) || exit();
@@ -16,6 +16,8 @@ defined( 'ABSPATH' ) || exit();
 if( ! wp_script_is( 'wecodeart-support-assets-offcanvas' ) ) {
     wp_enqueue_script( 'wecodeart-support-assets-offcanvas' );
 }
+
+wecodeart( 'styles' )->Components->load( [ 'offcanvas' ] );
 
 /**
  * @param   mixed  	$id			Toggle ID

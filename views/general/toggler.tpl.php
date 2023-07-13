@@ -8,10 +8,12 @@
  * @package 	WeCodeArt Framework
  * @subpackage  Navbar Toggler HTML
  * @since	 	5.0.0
- * @version    	5.6.9
+ * @version    	6.1.7
  */
 
 defined( 'ABSPATH' ) || exit();
+
+wecodeart( 'styles' )->Components->load( [ 'toggler' ] );
 
 /**
  * @param   mixed  	$id			Toggle ID

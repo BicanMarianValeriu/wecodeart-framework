@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.4.0
- * @version		6.1.5
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Support;
@@ -77,7 +77,7 @@ final class Assets implements Integration {
 	 * Register hooks
 	 */
 	public function register_hooks(): void {
-		\add_action( $this->hook,	[ $this, 'core'		], 10 );
+		\add_action( $this->hook,	[ $this, 'core'		], 20 );
 		\add_action( $this->hook,	[ $this, 'enqueue'	], 20 );
 	}
 	
@@ -100,15 +100,47 @@ final class Assets implements Integration {
 	 * Enqueue Front-End Core Assets
 	 *
 	 * @since	6.0.0
-	 * @version	6.1.5
+	 * @version	6.1.7
 	 */
 	public function core(): void {
 		global $wp_scripts;
 
+		// Enqueue
+		$this->add_script( $this->make_handle( 'offcanvas '), [
+			'path' 		=> $this->get_asset( 'js', 'modules/offcanvas' ),
+			'deps'		=> [ $this->make_handle() ],
+			'load'		=> false,
+		] );
+		
+		$this->add_script( $this->make_handle( 'dropdown '), [
+			'path' 		=> $this->get_asset( 'js', 'modules/dropdown' ),
+			'deps'		=> [ $this->make_handle() ],
+			'load'		=> false,
+		] );
+		
+		$this->add_script( $this->make_handle( 'modal '), [
+			'path' 		=> $this->get_asset( 'js', 'modules/modal' ),
+			'deps'		=> [ $this->make_handle() ],
+			'load'		=> false,
+		] );
+
+		$this->add_script( $this->make_handle( 'toast '), [
+			'path' 		=> $this->get_asset( 'js', 'modules/toast' ),
+			'deps'		=> [ $this->make_handle() ],
+			'load'		=> false,
+		] );
+
+		// Styles
+		$this->add_style( $this->make_handle(), [
+			'inline'	=> 'file:' . $this->get_asset( 'css', 'frontend' ),
+		] );
+
+		// Scripts
 		$wecodeart = [
 			'assetsEnqueue' 	=> $wp_scripts->queue, 
 			'templateDirectory' => get_template_directory_uri(),
 			'isDevMode'			=> wecodeart_if( 'is_dev_mode' ),
+			'plugins'			=> [],
 			'locale'			=> [
 				'skipLink' => esc_html__( 'Skip to content', 'wecodeart' )
 			]
@@ -117,35 +149,12 @@ final class Assets implements Integration {
 		if( is_child_theme() ) {
 			$wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
 		}
-
-		$wecodeart = apply_filters_deprecated( 'wecodeart/filter/support/assets/localize', [ $wecodeart ], '6.0.0' );
-
-		// Add Core Scripts
+		
 		$this->add_script( $this->make_handle(), [
 			'path' 		=> $this->get_asset( 'js', 'frontend' ),
 			'deps'		=> [ 'wp-hooks' ],
 			'locale'	=> $wecodeart,
 			'inline'	=> 'document.addEventListener("DOMContentLoaded",function(){(new wecodeart.JSM(wecodeart)).loadEvents();});',
-		] );
-		
-		$this->add_script( $this->make_handle( 'offcanvas '), [
-			'path' 		=> $this->get_asset( 'js', 'modules/offcanvas' ),
-			'load'		=> false,
-		] );
-		
-		$this->add_script( $this->make_handle( 'dropdown '), [
-			'path' 		=> $this->get_asset( 'js', 'modules/dropdown' ),
-			'load'		=> false,
-		] );
-		
-		$this->add_script( $this->make_handle( 'modal '), [
-			'path' 		=> $this->get_asset( 'js', 'modules/modal' ),
-			'load'		=> false,
-		] );
-
-		// Add Core Styles
-		$this->add_style( $this->make_handle(), [
-			'inline'	=> 'file:' . $this->get_asset( 'css', 'frontend' ),
 		] );
 	}
 
@@ -289,7 +298,9 @@ final class Assets implements Integration {
 
 			// Locale JS
 			if( $locale = get_prop( $data, [ 'locale' ] ) ) {
-				wp_localize_script( $handle, current( explode( '-', $handle ) ), $locale );
+				$locale_handle = lcfirst( join( '', array_map( 'ucfirst', explode( '-', $handle ) ) ) );
+				$locale_handle = $handle === $this->make_handle() ? 'wecodeart' : $locale_handle;
+				wp_localize_script( $handle, $locale_handle, $locale );
 			}
 
 			// Inline JS
@@ -312,11 +323,7 @@ final class Assets implements Integration {
 
 			// Inline CSS
 			if( ! empty( $inline = self::get_inline( $data ) ) ) {
-				$inline = wecodeart( 'styles' )::compress( $inline, [
-					'comments' => true
-				] );
-
-				wp_add_inline_style( $handle, $inline );
+				wp_add_inline_style( $handle, wecodeart( 'styles' )::compress( $inline ) );
 			}
 		}
 	}

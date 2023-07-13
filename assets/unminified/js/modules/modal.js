@@ -2120,10 +2120,14 @@ var __webpack_exports__ = {};
   !*** ./src/js/frontend/modules/modal.js ***!
   \******************************************/
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap/js/dist/modal */ "./node_modules/bootstrap/js/dist/modal.js");
 /* harmony import */ var bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_0__);
-// Boostrap - modal
+// Boostrap - Modal
 
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (wecodeart.plugins.Modal = (bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_0___default()));
 })();
 
 /******/ })()

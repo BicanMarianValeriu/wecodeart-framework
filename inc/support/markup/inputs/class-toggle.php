@@ -149,23 +149,22 @@ class Toggle extends Base {
                 border-color: var(--wp--preset--color--primary);
             }
             .form-check-input:checked[type=checkbox] {
-                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27%3e%3cpath fill=%27none%27 stroke=%27%23fff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27m6 10 3 3 6-6%27/%3e%3c/svg%3e");
+                background-image: var(--wp--input--icon-check);
             }
             .form-check-input:checked[type=radio] {
-                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e");
+                background-image: var(--wp--input--icon-radio);
             }
             .form-check-input[type=checkbox]:indeterminate {
+                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27%3e%3cpath fill=%27none%27 stroke=%27%23fff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27M6 10h8%27/%3e%3c/svg%3e");
                 background-color: var(--wp--preset--color--primary);
                 border-color: var(--wp--preset--color--primary);
-                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27%3e%3cpath fill=%27none%27 stroke=%27%23fff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27M6 10h8%27/%3e%3c/svg%3e");
             }
             .form-check-input:disabled {
                 pointer-events: none;
                 filter: none;
                 opacity: 0.5;
             }
-            .form-check-input[disabled] ~ .form-check-label,
-            .form-check-input:disabled ~ .form-check-label {
+            .form-check-input:is([disabled],:disabled) ~ .form-check-label {
                 cursor: default;
                 opacity: 0.5;
             }
@@ -218,9 +217,6 @@ class Toggle extends Base {
             .was-validated .form-check-input:valid ~ .form-check-label,
             .form-check-input.is-valid ~ .form-check-label {
                 color: var(--wp--preset--color--success);
-            }  
-            .form-check-inline .form-check-input ~ .valid-feedback {
-                margin-left: 0.5em;
             }
             .was-validated .form-check-input:invalid,
             .form-check-input.is-invalid {
@@ -238,7 +234,7 @@ class Toggle extends Base {
             .form-check-input.is-invalid ~ .form-check-label {
                 color: var(--wp--preset--color--danger);
             }
-            .form-check-inline .form-check-input ~ .invalid-feedback {
+            .form-check-inline .form-check-input ~ :is(.valid-feedback,.invalid-feedback ) {
                 margin-left: 0.5em;
             }
             

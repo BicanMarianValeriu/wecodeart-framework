@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.1.2
- * @version		6.1.2
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Support\Markup;
@@ -53,6 +53,7 @@ class Inputs implements Configuration {
 		$this->register( 'checkbox',	Inputs\Toggle::class 	);
         $this->register( 'fieldset',	Inputs\Fieldset::class 	);
         $this->register( 'floating',	Inputs\Floating::class 	);
+        $this->register( 'group',		Inputs\Group::class 	);
 
         add_action( 'wp_enqueue_scripts',	[ $this, 'assets'   ] );
 	}
@@ -99,15 +100,21 @@ class Inputs implements Configuration {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	6.1.2
+	 * @version	6.1.7
 	 */
 	public function assets() {
 		if( empty( self::$loaded ) ) {
 			return;
 		}
 
-		$inline = '
+		$inline_css = '
+			/* Global */
 			.wecodeart-forms {
+				--wp--input--icon-check: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27%3e%3cpath fill=%27none%27 stroke=%27%23fff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27m6 10 3 3 6-6%27/%3e%3c/svg%3e");
+				--wp--input--icon-radio: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e");
+				--wp--input--icon-valid: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 8 8%27%3e%3cpath fill=%27%237dc855%27 d=%27M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e");
+				--wp--input--icon-invalid: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 width=%2712%27 height=%2712%27 fill=%27none%27 stroke=%27%23dc3545%27%3e%3ccircle cx=%276%27 cy=%276%27 r=%274.5%27/%3e%3cpath stroke-linejoin=%27round%27 d=%27M5.8 3.6h.4L6 6.5z%27/%3e%3ccircle cx=%276%27 cy=%278.2%27 r=%27.6%27 fill=%27%23dc3545%27 stroke=%27none%27/%3e%3c/svg%3e");
+				--wp--input--icon-select: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e");
 				--wp--input--padding-y: .5rem;
 				--wp--input--padding-x: .75rem;
 				--wp--input--padding: var(--wp--input--padding-y) var(--wp--input--padding-x);
@@ -184,88 +191,6 @@ class Inputs implements Configuration {
                 font-size: var(--wp--preset--font-size--small);
                 color: var(--wp--preset--color--dark);
             }
-			.input-group {
-				position: relative;
-				display: flex;
-				flex-wrap: wrap;
-				align-items: stretch;
-				width: 100%;
-			}
-			.input-group > .form-control,
-			.input-group > .form-select,
-			.input-group > .form-floating {
-				position: relative;
-				flex: 1 1 auto;
-				width: 1%;
-				min-width: 0;
-			}
-			.input-group > .form-control:focus,
-			.input-group > .form-select:focus,
-			.input-group > .form-floating:focus-within {
-				z-index: 3;
-			}
-			.input-group .wp-element-button {
-				position: relative;
-				z-index: 2;
-			}
-			.input-group .wp-element-button:focus {
-				z-index: 3;
-			}
-			.input-group-text {
-				display: flex;
-				align-items: center;
-				padding: 0.375rem 0.75rem;
-				font-size: 1rem;
-				font-weight: 400;
-				line-height: 1.5;
-				color: var(--wp--preset--color--dark);
-				text-align: center;
-				white-space: nowrap;
-				background-color: var(--wp--gray-200);
-				border: 1px solid var(--wp--gray-400);
-				border-radius: var(--wp--input--border-radius);
-			}
-			.input-group-lg > .form-control,
-			.input-group-lg > .form-select,
-			.input-group-lg > .input-group-text,
-			.input-group-lg > .wp-element-button {
-				padding: 0.5rem 1rem;
-				font-size: var(--wp--preset--font-size--medium);
-				border-radius: 0.5rem;
-			}
-			.input-group-sm > .form-control,
-			.input-group-sm > .form-select,
-			.input-group-sm > .input-group-text,
-			.input-group-sm > .wp-element-button {
-				padding: 0.25rem 0.5rem;
-				font-size: var(--wp--preset--font-size--small);
-				border-radius: 0.25rem;
-			}
-			.input-group-lg > .form-select,
-			.input-group-sm > .form-select {
-				padding-right: 3rem;
-			}
-			.input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
-			.input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3),
-			.input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-control,
-			.input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-select {
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
-			}
-			.input-group.has-validation > :nth-last-child(n+3):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
-			.input-group.has-validation > .dropdown-toggle:nth-last-child(n+4),
-			.input-group.has-validation > .form-floating:nth-last-child(n+3) > .form-control,
-			.input-group.has-validation > .form-floating:nth-last-child(n+3) > .form-select {
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
-			}
-			.input-group > :not(:first-child):not(.dropdown-menu):not(.form-floating):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback),
-			.input-group > .form-floating:not(:first-child) > .form-control,
-			.input-group > .form-floating:not(:first-child) > .form-select {
-				margin-left: -1px;
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
-			}
 
 			/* Validation */
 			.valid-feedback,
@@ -282,7 +207,8 @@ class Inputs implements Configuration {
 				color: var(--wp--preset--color--danger);
 			}
 			.valid-tooltip,
-			.invalid-tooltip {
+			.invalid-tooltip,
+			.wpcf7-not-valid-tip {
 				position: absolute;
 				top: 100%;
 				z-index: 5;
@@ -297,43 +223,25 @@ class Inputs implements Configuration {
 				color: #000;
 				background-color: var(--wp--preset--color--success);
 			}
-			.invalid-tooltip {
+			.invalid-tooltip,
+			.wpcf7-not-valid-tip {
 				color: #fff;
 				background-color: var(--wp--preset--color--danger);
 			}
-			.was-validated :valid ~ .valid-feedback,
-			.was-validated :valid ~ .valid-tooltip,
-			.is-valid ~ .valid-feedback,
-			.is-valid ~ .valid-tooltip,
-			.was-validated :invalid ~ .invalid-feedback,
-			.was-validated :invalid ~ .invalid-tooltip,
-			.is-invalid ~ .invalid-feedback,
-			.is-invalid ~ .invalid-tooltip {
+			.was-validated :where(
+				:valid,
+				:invalid,
+				.is-valid,
+				.is-invalid,
+				.wpcf7-not-valid,
+			) ~ :where(
+				.valid-feedback,
+				.valid-tooltip,
+				.invalid-feedback,
+				.invalid-tooltip,
+				.wpcf7-not-valid-tip
+			) {
 				display: block;
-			}
-			.was-validated .input-group .form-control:valid,
-			.input-group .form-control.is-valid,
-			.was-validated .input-group .form-select:valid,
-			.input-group .form-select.is-valid {
-				z-index: 1;
-			}
-			.was-validated .input-group .form-control:valid:focus,
-			.input-group .form-control.is-valid:focus,
-			.was-validated .input-group .form-select:valid:focus,
-			.input-group .form-select.is-valid:focus {
-				z-index: 3;
-			}
-			.was-validated .input-group .form-control:invalid,
-			.input-group .form-control.is-invalid,
-			.was-validated .input-group .form-select:invalid,
-			.input-group .form-select.is-invalid {
-				z-index: 2;
-			}
-			.was-validated .input-group .form-control:invalid:focus,
-			.input-group .form-control.is-invalid:focus,
-			.was-validated .input-group .form-select:invalid:focus,
-			.input-group .form-select.is-invalid:focus {
-				z-index: 3;
 			}
 		';
 
@@ -345,26 +253,62 @@ class Inputs implements Configuration {
 						continue;
 					}
 
-					$inline .= $this->get( $dep )::styles();
+					$inline_css .= $this->get( $dep )::styles();
 				}
 			}
 
-			$inline .= $this->get( $class )::styles();
+			$inline_css .= $this->get( $class )::styles();
 		}
 
-		add_action( 'body_class', function( $classes ) {
+		// Body class
+		add_action( 'body_class', static function( $classes ) {
 			$classes[] = 'wecodeart-forms';
 
 			return $classes;
 		} );
 
+		// Styles
 		wecodeart( 'assets' )->add_style( $this->make_handle(), [
-			'inline'	=> $inline,
+			'inline'	=> $inline_css,
 		] );
+
+		$inline_js = <<<JS
+			(function (wecodeart) {
+				wecodeart.routes = {
+					...wecodeart.routes,
+					wecodeartForms: {
+						complete: () => {
+							const forms = document.querySelectorAll('.needs-validation');
+							Array.prototype.slice.call(forms).forEach((form) => {
+								let timeout;
+								
+								form.addEventListener('submit', (e) => {
+									if (!form.checkValidity()) {
+										e.preventDefault();
+										e.stopPropagation();
+									}
+									
+									form.classList.add('was-validated');
+									
+									clearTimeout(timeout);
+
+									timeout = setTimeout(() => {
+										form.classList.remove('was-validated');
+										clearTimeout(timeout);
+									}, 5000);
+
+								}, false);
+							});
+						}
+					}
+				};
+			}).apply(this, [window.wecodeart]);
+		JS;
 		
+		// Scripts
 		wecodeart( 'assets' )->add_script( $this->make_handle(), [
-			'path'	=> $this->get_asset( 'js', 'modules/forms' ),
-			'deps'	=> [ 'wp-hooks' ],
+			'inline'	=> $inline_js,
+			'deps'		=> [ 'wecodeart-support-assets' ],
 		] );
 	}
 	

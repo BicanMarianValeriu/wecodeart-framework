@@ -27,7 +27,7 @@ class OffCanvas extends Base {
      *
      * @var     array
      */
-    static $deps = [ 'close' ];
+    static $deps = [ 'transition', 'close' ];
 	
     /**
 	 * Component styles.

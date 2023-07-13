@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.5.8
- * @version		6.0.0
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -129,6 +129,9 @@ class Title extends Dynamic {
 	 */
 	public function styles() {
 		return "
+			.wp-block-comments-title {
+				margin-top: 0;
+			}
 			.wp-block-comments-title:only-child {
 				margin-bottom: 0;
 			}

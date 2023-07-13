@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		1.9
- * @version		6.1.2
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -60,9 +60,13 @@ class WooCommerce implements Integration {
 	 * Manage Notice
 	 *
 	 * @since 	6.1.2
-	 * @version	6.1.2
+	 * @version	6.1.7
 	 */
 	public function manage_notice() {
+		if( class_exists( 'WCA\EXT\WOO' ) ) {
+			return;
+		}
+
 		$notification = new Notification(
 			sprintf( '<h3 style="margin: .5em 0;">%s</h3>', esc_html__( 'Amazing news!', 'wecodeart' ) ) .
 			sprintf(

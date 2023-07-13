@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.0.0
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -70,12 +70,10 @@ class File extends Basic {
                 border-radius: 0;
                 border-width: 0;
                 border-inline-end-width: 1px;
-                transition: border-color .15s ease-in-out, background-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                transition: color .15s ease-in-out, background-color .15s ease-in-out, box-shadow .15s ease-in-out;
             }
             .form-control:hover:not(:disabled):not([readonly])::file-selector-button {
                 background-color: var(--wp--gray-300);
-                border-color: var(--wp--input--border-color);
-                border-right-color: inherit;
             }
         ';
 	}

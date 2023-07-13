@@ -9,7 +9,7 @@
  * @subpackage  Styles Utilities
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.0.0
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Support\Styles;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\get_prop;
 
@@ -25,7 +26,8 @@ use function WeCodeArt\Functions\get_prop;
  */
 class Utilities implements Configuration {
 
-	use Singleton;
+    use Singleton;
+    use Asset;
 
 	/**
 	 * The registered utilities.
@@ -41,13 +43,6 @@ class Utilities implements Configuration {
 	 * @var 	array
 	 */
 	protected $classes  = [];
-
-    /**
-	 * The CSS ID for registered style.
-	 *
-	 * @var string
-	 */
-    const CSS_ID    = 'wecodeart-utilities';
 
     /**
 	 * The CSS cache file.
@@ -170,9 +165,9 @@ class Utilities implements Configuration {
 
 		if( empty( $inline_css ) ) return;
 
-		wp_register_style( self::CSS_ID, false, [], true, true );
-		wp_add_inline_style( self::CSS_ID, $inline_css );
-		wp_enqueue_style( self::CSS_ID );
+		wp_register_style( $this->make_handle(), false, [], true, true );
+		wp_add_inline_style( $this->make_handle(), $inline_css );
+		wp_enqueue_style( $this->make_handle() );
 	}
 
 	/**

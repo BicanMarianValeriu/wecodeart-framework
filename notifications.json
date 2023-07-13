@@ -3,8 +3,8 @@
 	"items": [
 		{
 			"type": "info",
-			"title": "Version - 6.1.2",
-			"content": "Next version will include huge WooCommerce improvements (almost fully blockified and custom block styles) and a reworked admin interface that allows to define recommended theme extensions/plugins."
+			"title": "Version - 6.1.7",
+			"content": "core/search block has now support for button only - openning the search form in a Boostrap modal (must have Gutenberg plugin until merged into core)."
 		},
 		{
 			"type": "info",

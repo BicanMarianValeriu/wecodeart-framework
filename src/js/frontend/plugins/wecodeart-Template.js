@@ -109,6 +109,7 @@ export default (function (wecodeart) {
 	 */
 	Template._templates = [];
 	wecodeart.Template = Template;
+	wecodeart.plugins.Template = Template;
 
 	/**
 	 * Add A Basic Sample Template

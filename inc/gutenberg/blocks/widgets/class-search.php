@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.5
+ * @version		6.1.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -80,14 +80,9 @@ class Search extends Dynamic {
 		wecodeart_input( 'hidden', [], false );
 		
 		if( get_prop( $attributes, 'buttonPosition', 'button-outside' ) === 'button-only' ) {
-			// Components
-			wecodeart( 'styles' )->Components->load( [ 'modal' ] );
-
 			// Modal
 			$modal = self::get_modal( $attributes, $instance_id );
-			add_action( 'wp_footer', static function() use ( $modal ) {
-				echo $modal; // WP.CS is ok, we pass Gutenberg rendered block in the modal.
-			} );
+			add_action( 'wp_footer', static fn() => printf( $modal ) );
 
 			// Button
 			$content = self::get_button( $attributes, $instance_id );
@@ -108,6 +103,7 @@ class Search extends Dynamic {
 	
 				if( get_prop( $attributes, 'buttonPosition' ) === 'button-inside' ) {
 					$wrapper[] = 'input-group';
+					wecodeart_input( 'group', [], false ); // Fake input.
 				}
 	
 				// Add Label

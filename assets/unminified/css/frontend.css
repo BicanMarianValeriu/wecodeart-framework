@@ -642,40 +642,6 @@ progress {
 :where(.theme-wecodeart) :where([style*=border-bottom-color], [style*=border-bottom-width]) {
   border-bottom-style: solid;
 }
-:where(.theme-wecodeart) .fade {
-  transition: opacity 0.15s linear;
-}
-@media (prefers-reduced-motion: reduce) {
-  :where(.theme-wecodeart) .fade {
-    transition: none;
-  }
-}
-:where(.theme-wecodeart) .fade:not(.show) {
-  opacity: 0;
-}
-:where(.theme-wecodeart) .collapse:not(.show) {
-  display: none;
-}
-:where(.theme-wecodeart) .collapsing {
-  height: 0;
-  overflow: hidden;
-  transition: height 0.35s ease;
-}
-@media (prefers-reduced-motion: reduce) {
-  :where(.theme-wecodeart) .collapsing {
-    transition: none;
-  }
-}
-:where(.theme-wecodeart) .collapsing.collapse-horizontal {
-  width: 0;
-  height: auto;
-  transition: width 0.35s ease;
-}
-@media (prefers-reduced-motion: reduce) {
-  :where(.theme-wecodeart) .collapsing.collapse-horizontal {
-    transition: none;
-  }
-}
 
 .has-background-dim {
   --wp--bg--opacity: 0.5;
@@ -815,6 +781,7 @@ progress {
   border: 0 !important;
 }
 
+.screen-reader-response,
 .screen-reader-text {
   position: absolute;
   background-color: var(--wp--preset--color--light);
@@ -824,6 +791,7 @@ progress {
   left: 5px;
   z-index: 100000;
 }
+.screen-reader-response:not(:focus):not(:focus-within),
 .screen-reader-text:not(:focus):not(:focus-within) {
   position: absolute !important;
   width: 1px !important;
