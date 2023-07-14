@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.1.7
+ * @version		6.1.8
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -41,18 +41,18 @@ class Toast extends Base {
 				--wp--toast-zindex: 1090;
 				--wp--toast-padding-x: 0.75rem;
 				--wp--toast-padding-y: 0.5rem;
-				--wp--toast-spacing: 1.5rem;
+				--wp--toast-spacing: var(--wp--style--block-gap);
 				--wp--toast-max-width: 350px;
-				--wp--toast-font-size: 0.875rem;
+				--wp--toast-font-size: var(--wp--preset--font-size--small);
 				--wp--toast-color: ;
 				--wp--toast-bg: rgba(255,255,255,.85);
 				--wp--toast-border-width: 1px;
-				--wp--toast-border-color: var(--wp--border-color-accent);
+				--wp--toast-border-color: var(--wp--preset--color--accent);
 				--wp--toast-border-radius: .25rem;
 				--wp--toast-box-shadow: var(--wp--preset--shadow--natural);
 				--wp--toast-header-color: var(--wp--preset--color--dark);
 				--wp--toast-header-bg: rgba(255,255,255,.85);
-				--wp--toast-header-border-color: var(--wp--border-color-accent);
+				--wp--toast-header-border-color: var(--wp--preset--color--accent);
 				width: var(--wp--toast-max-width);
 				max-width: 100%;
 				font-size: var(--wp--toast-font-size);

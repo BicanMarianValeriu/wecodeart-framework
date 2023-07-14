@@ -1,3 +1,9 @@
+v6.1.8
+- Updated - restored .wp-block-columns.grid default gap
+- Updated - toast component style to use WP theme.json variables
+- Fixed - offcanvas visibility styles
+- Added - e-commerce and wide-blocks tags for WP.Org
+
 v6.1.7
 - Removed - gap-# utility class (replaced previously with g-#)
 - Updated - core/comments-title top margin to zero (after removing certain CSS reboot)

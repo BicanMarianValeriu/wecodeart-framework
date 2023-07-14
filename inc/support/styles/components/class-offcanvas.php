@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.1.5
+ * @version		6.1.8
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -35,8 +35,6 @@ class OffCanvas extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		// $breaks	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		
 		$inline = '
 			/* Offcanvas */
 			.offcanvas {
@@ -119,9 +117,12 @@ class OffCanvas extends Base {
 				border-top: 1px solid rgba(0, 0, 0, 0.2);
 				transform: translateY(100%);
 			}
-			.offcanvas.show {
+			.offcanvas:is(.showing,.show:not(.hiding)) {
 				transform: none;
-			}	
+			}
+			.offcanvas:is(.showing,.hiding,.show) {
+				visibility: visible;
+			}
 		';
 
 		return $inline;
