@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.0.0
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -52,9 +52,7 @@ class Range extends Basic {
 		return '
             .form-range {
                 --wp--range-focus-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem var(--wp--preset--color--primary);
-                --wp--range-disabled-color: var(--wp--gray-500);
                 --wp--range-thumb-color: var(--wp--preset--color--primary);
-                --wp--range-track-color: var(--wp--gray-200);
                 --wp--range-track-radius: 1rem;
                 width: 100%;
                 height: 1.5rem;
@@ -83,14 +81,14 @@ class Range extends Basic {
                 appearance: none;
             }
             .form-range::-webkit-slider-thumb:active {
-                background-color: var(--wp--range-track-color);
+                background-color: var(--wp--input--background-color);
             }
             .form-range::-webkit-slider-runnable-track {
                 width: 100%;
                 height: 0.5rem;
                 color: transparent;
                 cursor: pointer;
-                background-color: var(--wp--range-track-color);
+                background-color: var(--wp--input--background-color);
                 border-color: transparent;
                 border-radius: var(--wp--range-track-radius);
             }
@@ -108,14 +106,14 @@ class Range extends Basic {
                 appearance: none;
             }
             .form-range::-moz-range-thumb:active {
-                background-color: var(--wp--range-track-color);
+                background-color: var(--wp--input--background-color);
             }
             .form-range::-moz-range-track {
                 width: 100%;
                 height: 0.5rem;
                 color: transparent;
                 cursor: pointer;
-                background-color: var(--wp--range-track-color);
+                background-color: var(--wp--input--background-color);
                 border-color: transparent;
                 border-radius: var(--wp--range-track-radius);
             }
@@ -124,10 +122,10 @@ class Range extends Basic {
                 pointer-events: none;
             }
             .form-range:disabled::-webkit-slider-thumb {
-                background-color: var(--wp--range-disabled-color);
+                background-color: var(--wp--input--disabled-color);
             }
             .form-range:disabled::-moz-range-thumb {
-                background-color: var(--wp--range-disabled-color);
+                background-color: var(--wp--input--disabled-color);
             }
 
             @media (prefers-reduced-motion: reduce) {

@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -135,7 +135,7 @@ class Fieldset extends Base {
         $value = '';
         
         if( $this->type === 'checkbox' ) {
-            $value = get_prop( $this->attrs, 'name', $this->unique_id ) . ( $this->exclusive ? '[]' : '' );
+            $value = get_prop( $this->attrs, 'name', $this->unique_id ) . ( $this->exclusive ? '' : '[]' );
         }
 
         if( $this->type === 'radio' ) {

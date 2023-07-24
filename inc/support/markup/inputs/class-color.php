@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.0.0
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -39,18 +39,6 @@ class Color extends Basic {
     }
 
     /**
-     * Get input's class.
-     * 
-     * @since   6.0.0
-     * @version 6.0.0
-     *
-     * @param 	string
-     */
-    public function input_class(): string {
-        return 'form-control form-control-color';
-    }
-
-    /**
 	 * Input styles.
 	 *
 	 * @return 	string
@@ -60,30 +48,30 @@ class Color extends Basic {
 			::-webkit-color-swatch-wrapper {
 				padding: 0;
 			}
-            .form-control-color {
+            .form-control[type="color"] {
                 width: 3rem;
-                height: calc(1.5em + var(--wp--input--padding-x) + 2px);
+                height: calc(1.5em + var(--wp--input--padding-x) + 5px);
                 padding: var(--wp--input--padding-y);
             }
-            .form-control-color:not(:disabled):not([readonly]) {
+            .form-control[type="color"]:not(:disabled):not([readonly]) {
                 cursor: pointer;
             }
-            .form-control-color::-moz-color-swatch {
+            .form-control[type="color"]::-moz-color-swatch {
                 border: 0 !important;
                 border-radius: var(--wp--input--border-radius);
             }
-            .form-control-color::-webkit-color-swatch {
+            .form-control[type="color"]::-webkit-color-swatch {
                 border-radius: var(--wp--input--border-radius);
             }
-            .form-control-color.form-control-sm {
-                height: calc(1.5em + 0.5rem + 2px);
+            .form-control[type="color"].form-control-sm {
+                height: calc(1.5em + 0.5rem + 5px);
             }
-            .form-control-color.form-control-lg {
-                height: calc(1.5em + 1rem + 2px);
+            .form-control[type="color"].form-control-lg {
+                height: calc(1.5em + 1rem + 5px);
             }
 
-            .was-validated .form-control-color:invalid,
-            .form-control-color.is-invalid {
+            .was-validated .form-control[type="color"]:is(:valid,:invalid),
+            .form-control[type="color"]:is(.is-valid,.is-invalid) {
                 width: calc(3rem + calc(1.5em + var(--wp--input--padding-x)));
             }
         ';

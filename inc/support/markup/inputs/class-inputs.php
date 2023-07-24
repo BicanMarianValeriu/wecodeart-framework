@@ -100,7 +100,7 @@ class Inputs implements Configuration {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	6.1.7
+	 * @version	6.1.9
 	 */
 	public function assets() {
 		if( empty( self::$loaded ) ) {
@@ -110,15 +110,15 @@ class Inputs implements Configuration {
 		$inline_css = '
 			/* Global */
 			.wecodeart-forms {
-				--wp--input--icon-check: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27%3e%3cpath fill=%27none%27 stroke=%27%23fff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27m6 10 3 3 6-6%27/%3e%3c/svg%3e");
-				--wp--input--icon-radio: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e");
 				--wp--input--icon-valid: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 8 8%27%3e%3cpath fill=%27%237dc855%27 d=%27M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e");
 				--wp--input--icon-invalid: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 width=%2712%27 height=%2712%27 fill=%27none%27 stroke=%27%23dc3545%27%3e%3ccircle cx=%276%27 cy=%276%27 r=%274.5%27/%3e%3cpath stroke-linejoin=%27round%27 d=%27M5.8 3.6h.4L6 6.5z%27/%3e%3ccircle cx=%276%27 cy=%278.2%27 r=%27.6%27 fill=%27%23dc3545%27 stroke=%27none%27/%3e%3c/svg%3e");
-				--wp--input--icon-select: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e");
 				--wp--input--padding-y: .5rem;
 				--wp--input--padding-x: .75rem;
+				--wp--input--validation-size: calc(0.75em + .375rem) calc(0.75em + .375rem);
 				--wp--input--padding: var(--wp--input--padding-y) var(--wp--input--padding-x);
 				--wp--input--color: inherit;
+				--wp--input--disabled-color: var(--wp--gray-300);
+				--wp--input--placeholder-color: var(--wp--gray-600);
 				--wp--input--background-color: var(--wp--preset--color--accent);
 				--wp--input--border-color: var(--wp--preset--color--accent);
 				--wp--input--border-color-focus: var(--wp--preset--color--primary);

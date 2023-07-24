@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.1.7
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -30,13 +30,32 @@ class Group extends Basic {
      * @var     string
      */
     public $type    = 'group';
-    public $_label  = 'none';
+    public $_label  = 'before';
+
+    /**
+     * Input's Messages.
+     *
+     * @var boolean
+     */
+    public $with_messages = false;
+
+    /**
+     * All controls tied to the control.
+     *
+     * @var     array
+     */
+    public $controls = [];
 
     /**
 	 * Constructor 
 	 */
 	public function __construct( string $type = 'group', array $args = [] ) {
-        $this->args = $args;
+        $this->type     = $type;
+        $this->unique_id= wp_unique_id( 'group-' );
+        $this->label    = get_prop( $args, 'label', '' );
+        $this->attrs    = get_prop( $args, 'attrs', [] );
+        $this->controls = get_prop( $args, 'controls', [] );
+        $this->messages = get_prop( $args, 'messages', [] );
     }
 	
 	/**
@@ -47,10 +66,11 @@ class Group extends Basic {
 	public function content() {
         wecodeart( 'markup' )::wrap( 'input-group', [
             [
-                'tag' => 'div',
-                'attrs' => [
-                    'class' => 'input-group',
-                ]
+                'tag'   => 'span',
+                'attrs' => wp_parse_args( [
+                    'class' => $this->input_class(),
+                    'id'    => get_prop( $this->attrs, [ 'id' ], $this->unique_id )
+                ], $this->attrs )
             ]
         ], function( $fields ) {
             foreach( $fields as $field ) {
@@ -87,7 +107,22 @@ class Group extends Basic {
                 // Filter - Update wrapper class accordingly.
                 remove_filter( 'wecodeart/filter/wrappers/' . $type . '-label', [ __CLASS__, 'update_label' ] );
             }
-        }, [ $this->args ?? [] ] );
+
+            $this->get_messages( true );
+        }, [ $this->controls ] );
+    }
+
+    /**
+     * Get input's class.
+     *
+     * @return 	string
+     */
+    public function input_class(): string {
+        $classes = explode( ' ', get_prop( $this->attrs, [ 'class' ], '' ) );
+        
+        if( ! array_intersect_key( [ 'input-group' ], array_flip( $classes ) ) ) $classes[] = 'input-group';
+
+        return implode( ' ', $classes );
     }
 
     /**

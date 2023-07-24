@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -96,35 +96,38 @@ class Toggle extends Base {
 		return '
             /* Check */
             .form-check {
+                --wp--input--size: 1em;
+                --wp--input--icon-check: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27%3e%3cpath fill=%27none%27 stroke=%27%23fff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27m6 10 3 3 6-6%27/%3e%3c/svg%3e");
+				--wp--input--icon-radio: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e");
                 display: block;
                 min-height: 1.5rem;
-                padding-left: 1.5em;
+                padding-left: calc(var(--wp--input--size) + .5em);
                 margin-bottom: 0.125rem;
             }
             .form-check .form-check-input {
                 float: left;
-                margin-left: -1.5em;
+                margin-left: calc(-1 * var(--wp--input--size) - .5em);
             }
             .form-check-reverse {
-                padding-right: 1.5em;
+                padding-right: calc(var(--wp--input--size) + .5em));
                 padding-left: 0;
                 text-align: right;
             }
             .form-check-reverse .form-check-input {
                 float: right;
-                margin-right: -1.5em;
+                margin-right: calc(-1 * var(--wp--input--size) - .5em);
                 margin-left: 0;
             }
             .form-check-input {
-                width: 1em;
-                height: 1em;
+                width: var(--wp--input--size);
+                height: var(--wp--input--size);
                 margin-top: 0.25em;
                 vertical-align: top;
-                background-color: #fff;
+                background-color: var(--wp--input--background-color);
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: contain;
-                border: 1px solid rgba(0, 0, 0, 0.25);
+                border: var(--wp--input--border);
                 -webkit-appearance: none;
                         appearance: none;
                 -webkit-print-color-adjust: exact;
@@ -141,8 +144,8 @@ class Toggle extends Base {
             }
             .form-check-input:focus {
                 border-color: var(--wp--input--border-color-focus);
+                box-shadow: 0 0 0 0.25rem var(--wp--preset--color--accent);
                 outline: 0;
-                box-shadow: 0 0 0 0.25rem rgba(35, 136, 237, 0.25);
             }
             .form-check-input:checked {
                 background-color: var(--wp--preset--color--primary);
@@ -160,40 +163,41 @@ class Toggle extends Base {
                 border-color: var(--wp--preset--color--primary);
             }
             .form-check-input:disabled {
+                background-color: var(--wp--input--disabled-color);
                 pointer-events: none;
                 filter: none;
-                opacity: 0.5;
             }
             .form-check-input:is([disabled],:disabled) ~ .form-check-label {
+                color: var(--wp--input--disabled-color);
                 cursor: default;
-                opacity: 0.5;
             }
             
             /* Switch */
             .form-switch {
-                padding-left: 2.5em;
+                --wp--input--size: 2em;
+                --wp--input--icon-switch: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27rgba%280, 0, 0, 0.25%29%27/%3e%3c/svg%3e");
+                --wp--input--icon-switch--checked: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%23fff%27/%3e%3c/svg%3e");
+                --wp--input--icon-switch--focus: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%2391c4f6%27/%3e%3c/svg%3e");
             }
             .form-switch .form-check-input {
-                width: 2em;
-                margin-left: -2.5em;
-                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27rgba%280, 0, 0, 0.25%29%27/%3e%3c/svg%3e");
-                background-position: left center;
+                height: 1em;
                 border-radius: 2em;
+                background-image: var(--wp--input--icon-switch);
+                background-position: left center;
                 transition: background-position 0.15s ease-in-out;
             }
             .form-switch .form-check-input:focus {
-                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%2391c4f6%27/%3e%3c/svg%3e");
+                background-image: var(--wp--input--icon-switch--focus);
             }
             .form-switch .form-check-input:checked {
+                background-image: var(--wp--input--icon-switch--checked);
                 background-position: right center;
-                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%23fff%27/%3e%3c/svg%3e");
             }
             .form-switch.form-check-reverse {
-                padding-right: 2.5em;
+                padding-right: var(--wp--input--size);
                 padding-left: 0;
             }
             .form-switch.form-check-reverse .form-check-input {
-                margin-right: -2.5em;
                 margin-left: 0;
             }  
             .form-check-inline {

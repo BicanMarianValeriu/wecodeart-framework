@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -112,7 +112,7 @@ class Select extends Basic {
      * @since   6.0.0
      * @version 6.0.0
      *
-     * @param 	string
+     * @return 	string
      */
     public function input_class(): string {
         return 'form-select';
@@ -133,6 +133,7 @@ class Select extends Basic {
                 opacity: 1;
             }
             .form-select {
+                --wp--input--icon-select: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e");
                 display: block;
                 width: 100%;
                 padding: var(--wp--input--padding-y) 2.25rem var(--wp--input--padding-y) var(--wp--input--padding-x);
@@ -142,7 +143,7 @@ class Select extends Basic {
                 line-height: 1.5;
                 color: var(--wp--input--color);
                 background-color: var(--wp--input--background-color);
-                background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e");
+                background-image: var(--wp--input--icon-select);
                 background-repeat: no-repeat;
                 background-position: right var(--wp--input--padding-x) center;
                 background-size: 1em .75em;
@@ -162,7 +163,7 @@ class Select extends Basic {
                 background-image: none;
             }
             .form-select:disabled {
-                background-color: #e9ecef;
+                background-color: var(--wp--input--disabled-color);
             }
             .form-select:-moz-focusring {
                 color: transparent;
@@ -173,41 +174,42 @@ class Select extends Basic {
                 padding-bottom: .25rem;
                 padding-left: .75rem;
                 font-size: var(--wp--preset--font-size--small);
-                border-radius: .25rem;
+                border-radius: calc(0.75 * var(--wp--input--border-radius));
             }   
             .form-select-lg {
                 padding-top: .5rem;
                 padding-bottom: .5rem;
                 padding-left: 1rem;
                 font-size: var(--wp--preset--font-size--medium);
-                border-radius: .5rem;
+                border-radius: calc(1.25 * var(--wp--input--border-radius));
             }
 
+            .was-validated .form-select:is(:valid,:invalid):not([multiple]):where(:not([size]),[size="1"]),
+            .form-select:is(.is-valid,.is-invalid):not([multiple]):where(:not([size]),[size="1"]) {
+                padding-right: 4.125rem;
+                background-position: right var(--wp--input--padding-x) center, center right 2.25rem;
+                background-size: 16px 12px, var(--wp--input--validation-size);
+            }
+            .was-validated .form-select:valid:not([multiple]):is(:not([size]),[size="1"]),
+            .form-select.is-valid:not([multiple]):is(:not([size]),[size="1"]) {
+                background-image: var(--wp--input--icon-select), var(--wp--input--icon-valid);
+            }
+            .was-validated .form-select:invalid:not([multiple]):is(:not([size]),[size="1"]),
+            .form-select.is-invalid:not([multiple]):is(:not([size]),[size="1"]) {
+                background-image: var(--wp--input--icon-select), var(--wp--input--icon-invalid);
+            }
             .was-validated .form-select:valid,
             .form-select.is-valid {
                 border-color: var(--wp--preset--color--success);
             }
-            .was-validated .form-select:valid:not([multiple]):is(:not([size]),[size="1"]),
-            .form-select.is-valid:not([multiple]):is(:not([size]),[size="1"]) {
-                padding-right: 4.125rem;
-                background-image: var(--wp--input--icon-select), var(--wp--input--icon-valid);
-                background-position: right var(--wp--input--padding-x) center, center right 2.25rem;
-                background-size: 16px 12px, calc(.75em + var(--wp--input--padding-y)) calc(.75em + var(--wp--input--padding-y));
+            .was-validated .form-select:invalid,
+            .form-select.is-invalid {
+                border-color: var(--wp--preset--color--danger);
             }
             .was-validated .form-select:valid:focus,
             .form-select.is-valid:focus {
                 border-color: var(--wp--preset--color--success);
                 box-shadow: 0 0 0 .25rem rgba(125, 200, 85, 0.25);
-            }
-            .was-validated .form-select:invalid, .form-select.is-invalid {
-                border-color: var(--wp--preset--color--danger);
-            }
-            .was-validated .form-select:invalid:not([multiple]):is(:not([size]),[size="1"]),
-            .form-select.is-invalid:not([multiple]):is(:not([size]),[size="1"]) {
-                padding-right: 4.125rem;
-                background-image: var(--wp--input--icon-select), var(--wp--input--icon-invalid);
-                background-position: right var(--wp--input--padding-x) center, center right 2.25rem;
-                background-size: 16px 12px, calc(.75em + var(--wp--input--padding-y)) calc(.75em + var(--wp--input--padding-y));
             }
             .was-validated .form-select:invalid:focus,
             .form-select.is-invalid:focus {

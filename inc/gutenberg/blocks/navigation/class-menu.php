@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.7
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -104,6 +104,15 @@ class Menu extends Dynamic {
 			foreach ( $block->inner_blocks as $inner_block ) {
 				$inner_html .= $inner_block->render();
 			}
+
+			$tag_processor = new \WP_HTML_Tag_Processor( $inner_html );
+			while ( $tag_processor->next_tag( [
+				'class_name' => 'nav-link'
+			] ) ) {
+				$tag_processor->remove_class( 'nav-link' );
+				$tag_processor->add_class( 'dropdown-item' );
+			}
+			$inner_html = $tag_processor->get_updated_html();
 
 			echo $inner_html; // WPCS ok - Gutenberg blocks here.
 		}, [ $block ], $echo );

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -195,10 +195,8 @@ class Link extends Dynamic {
 		$current_id 	= is_home() ? get_option( 'page_for_posts' ) : get_queried_object_id();
 		$is_active   	= ! empty( $attributes['id'] ) && (int) $current_id === (int) $attributes['id'];
 		$has_submenu 	= count( $block->inner_blocks ) > 0;
-		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
 
-		$classes = [ 'wp-block-navigation-item__content' ];
-		$classes[] =  $is_sub_menu ? 'dropdown-item' : 'nav-link' ;
+		$classes = [ 'wp-block-navigation-item__content', 'nav-link' ];
 			
 		if( $is_active ) {
 			$classes[] = 'active';
@@ -239,8 +237,8 @@ class Link extends Dynamic {
 			}
 
 			// Submenu Elements
-			if( $is_sub_menu && in_array( $class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-text', 'dropdown-item-text' ], true ) ) {
-				$attrs['class'] = str_replace( 'dropdown-item', $class, $attrs['class'] );
+			if( in_array( $class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-text', 'dropdown-item-text' ], true ) ) {
+				$attrs['class'] = str_replace( 'nav-link', $class, $attrs['class'] );
 				unset( $attrs['href'] );
 				unset( $attrs['target'] );
 			}
@@ -255,17 +253,11 @@ class Link extends Dynamic {
 	 * @return 	array
 	 */
 	public function get_wrapper_attributes( $attributes, $block, &$extras ): array {
-		$classes		= [ 'wp-block-navigation-item', 'wp-block-navigation-link' ];
+		$classes		= [ 'wp-block-navigation-item', 'wp-block-navigation-link', 'nav-item' ];
 		$inline_style 	= ''; // Fallback - to do, if styles extension is disabled.
 		
-		$is_sub_menu 	= isset( $attributes['isTopLevelLink'] ) ? ( ! $attributes['isTopLevelLink'] ) : false;
 		$class_names	= explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
 		$has_dropdown 	= count( array_intersect( $class_names, [ 'dropup', 'dropend', 'dropdown', 'dropstart' ] ) );
-
-		// If is not submenu, add specific class.
-		if( $is_sub_menu === false ) {
-			$classes[] = 'nav-item';
-		}
 
 		// If we have custom classes, add them.
 		if( count( $class_names ) ) {
@@ -274,7 +266,7 @@ class Link extends Dynamic {
 
 		// If is submenu and we dont already have that class.
 		if( count( $block->inner_blocks ) && ! $has_dropdown ) {
-			$classes[] = $is_sub_menu ? 'dropend' : 'dropdown';
+			$classes[] = 'dropdown';
 		}
 		
 		// Filter special classes storing them in $extras
@@ -284,7 +276,7 @@ class Link extends Dynamic {
 			if ( preg_match( '/^disabled|^sr-only|^screen-reader-text/i', $class ) ) {
 				$extras['mod'][] = $class;
 				// unset( $classes[ $key ] ); // This will apply to the link
-			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-text|^dropdown-item-text/i', $class ) && $is_sub_menu ) {
+			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-text|^dropdown-item-text/i', $class ) ) {
 				$extras['mod'][] = $class;
 				unset( $classes[ $key ] );
 			} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {

@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -80,7 +80,7 @@ class Floating extends Basic {
                 width: 100%;
                 height: 100%;
                 margin: 0;
-                padding: 1rem 0.75rem;
+                padding: 1rem var(--wp--input--padding-x);
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -90,7 +90,7 @@ class Floating extends Basic {
                 transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
             }
             .form-floating > :is(.form-control,.form-control-plaintext) {
-                padding: 1rem 0.75rem;
+                padding: 1rem var(--wp--input--padding-x);
             }
             .form-floating > .form-control::placeholder,
             .form-floating > .form-control-plaintext::placeholder {

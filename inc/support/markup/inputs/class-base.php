@@ -74,7 +74,7 @@ abstract class Base {
      * Input's Messages.
      *
      * @since   5.0.0
-     * @var     string
+     * @var     boolean
      */
     public $with_messages = true;
 

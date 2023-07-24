@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.1.9
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -77,14 +77,8 @@ class TextArea extends Basic {
             textarea.form-control-lg {
                 min-height: 200px;
             }
-            .was-validated textarea.form-control:valid,
-            textarea.form-control.is-valid {
-                padding-right: calc(1.5em + var(--wp--input--padding-x));
-                background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
-            }
-            .was-validated textarea.form-control:invalid,
-            textarea.form-control.is-invalid {
-                padding-right: calc(1.5em + var(--wp--input--padding-x));
+            .was-validated textarea.form-control:is(:valid,:invalid),
+            textarea.form-control:is(.is-valid,.is-invalid) {
                 background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
             }
         ';
