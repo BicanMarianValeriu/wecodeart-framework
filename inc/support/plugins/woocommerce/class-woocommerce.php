@@ -111,7 +111,7 @@ class WooCommerce implements Integration {
 			'title'         => esc_html__( 'WCA: WooCommerce', 'wecodeart' ),
 			'description'   => Plugins::get_default_description( 'WooCommerce', 'external' ),
 			'source'        => 'github',
-			'more'          => 'https://github.com/BicanMarianValeriu/wca-woocommerce/',
+			'more'          => 'https://www.wecodeart.com/integrations/woocommerce/',
 			'required' 		=> [ 'woocommerce' ]
 		];
 	}

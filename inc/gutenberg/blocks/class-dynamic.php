@@ -256,6 +256,15 @@ abstract class Dynamic {
 	}
 
 	/**
+	 * Get block asset handle.
+	 *
+	 * @return string
+	 */
+	public function get_asset_handle(): string {
+		return 'wp-block-' . $this->block_name;
+	}
+
+	/**
 	 * Block styles.
 	 *
 	 * @return 	string Block CSS.
@@ -271,7 +280,7 @@ abstract class Dynamic {
 		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 
-		$handle		= 'wp-block-' . $this->block_name;
+		$handle		= $this->get_asset_handle();
 		$block_css	= 'block-' . $this->block_name . '.css';
 
 		if( ! $filesystem->has_file( $block_css ) ) {

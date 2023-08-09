@@ -207,11 +207,11 @@ class Link extends Dynamic {
 		}
 
 		$attrs 			= [
-			'class' 	=> join( ' ', array_filter( $classes )),
+			'class' 	=> join( ' ', array_filter( $classes ) ),
 			'href'		=> get_prop( $attributes, 'url', '#' ),
 			'target' 	=> get_prop( $attributes, 'opensInNewTab' ) === true ? '_blank' : null,
-			'rel'		=> get_prop( $attributes, 'rel', get_prop( $attributes, 'nofollow', null ) === 'nofollow' ? 'nofollow' : null ),
-			'title'		=> get_prop( $attributes, 'title', null ),
+			'rel'		=> get_prop( $attributes, 'nofollow' ),
+			'title'		=> get_prop( $attributes, 'title' ),
 			'aria-current'	=> $is_active ? 'page' : null,
 		];
 

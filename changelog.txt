@@ -5,6 +5,8 @@ v6.1.9
 - Updated - inputs/toggle background style vars to theme.json
 - Updated - inputs/range match background color from inputs vars
 - Updated - inputs specific variables moved to own classes (.form-check,.form-switch,.form-select)
+- Updated - default plugins (removed Google Tools) and update WooCommerce about link
+- Updated - new method for retrieving Dynamic block asset handle
 - Fixed - core/navigation-link and core/navigation-submenu dropdown classes logic (due to issues or removal of isTopLevelLink - we dont relly on it anymore)
 
 v6.1.8

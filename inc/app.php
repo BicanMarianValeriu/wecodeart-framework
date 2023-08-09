@@ -174,13 +174,6 @@ return [
     'installers' => [
         'plugins' => [
             [
-                'slug'          => 'wca-google-tools-extension',
-                'title'         => esc_html__( 'WCA: Google Tools Extension', 'wecodeart' ),
-                'description'   => esc_html__( 'Add Google Analytics, verify your Google Webmasters property and Google Adsense publisher account with ease.', 'wecodeart' ),
-                'source'        => 'wordpress',
-                'more'          => 'https://wordpress.org/plugins/wca-google-tools-extension/',
-            ],
-            [
                 'slug'          => 'BicanMarianValeriu/wca-scrolltop',
                 'title'         => esc_html__( 'WCA: Scroll Top', 'wecodeart' ),
                 'description'   => esc_html__( 'Lightweight extension for adding a scroll to top button on your site. Super flexible and customizable.', 'wecodeart' ),
