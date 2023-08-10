@@ -9,7 +9,7 @@
  * @subpackage  RankMath\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.2
- * @version		6.1.2
+ * @version		6.2.0
  */
 
 namespace WeCodeArt\Support\Plugins\RankMath\Blocks;
@@ -87,64 +87,24 @@ class Faq extends Dynamic {
 	}
 
 	/**
-	 * Block styles
+	 * Block styles.
 	 *
-	 * @return 	string 	The block styles.
+	 * @return 	string Block CSS.
 	 */
-	public function styles(): string {
-		return '
-			.wp-block-details {
-				--wp--faq--padding-y: 1rem;
-				--wp--faq--padding-x: 2rem;
-				--wp--faq--padding: var(--wp--faq--padding-y) var(--wp--faq--padding-x);
-				--wp--faq--chevron-size: .4rem;
-				--wp--faq--chevron-color: currentColor;
-				--wp--faq--chevron-transition: .25s transform ease;
-				--wp--faq--border: 1px solid var(--wp--preset--color--accent);
-				border: var(--wp--faq--border);
-			}
-			.wp-block-details details + details {
-				border-top: var(--wp--faq--border);
-			}
-			.wp-block-details summary {
-				position: relative;
-				display: block;
-				padding: var(--wp--faq--padding);
-				font-size: var(--wp--preset--font-size--normal);
-				font-weight: 700;
-				transition: background-color .5s ease-in-out;
-				cursor: pointer;
-			}
-			.wp-block-details summary::before {
-				content: "";
-				position: absolute;
-				top: calc(50% - var(--wp--faq--chevron-size));
-				left: 1rem;
-				border-width: var(--wp--faq--chevron-size);
-				border-style: solid;
-				border-color: transparent transparent transparent var(--wp--faq--chevron-color);
-				transform: rotate(0);
-				transform-origin: .125em 50%;
-				transition: var(--wp--faq--chevron-transition);
-			}
-			.wp-block-details summary:hover,
-			.wp-block-details summary:focus,
-			.wp-block-details details[open] summary {
-				background-color: var(--wp--preset--color--accent);
-			}
-			.wp-block-details details[open] summary {
-				border-bottom: var(--wp--faq--border);
-			}
-			.wp-block-details details[open] > summary::before {
-				transform: rotate(90deg);
-			}
-			.wp-block-details details summary::-webkit-details-marker {
-				display: none;
-			}
-			.wp-block-details *[class*="-answer"] {
-				padding: var(--wp--faq--padding);
-				margin: 0;
-			}
-		';
+	public function enqueue_styles() {
+		parent::enqueue_styles();
+
+		wecodeart( 'assets' )->add_style( 'wp-block-details', [
+			'load'		=> function( $blocks ) {
+				if( wp_style_is( 'wp-block-details' ) ) {
+					return false;
+				}
+
+				if( in_array( $this->get_block_type(), $blocks, true ) ) {
+					return true;
+				}
+			},
+			'inline'	=> wecodeart( 'blocks' )->get( 'core/details' )::get_instance()->styles()
+		] );
 	}
 }

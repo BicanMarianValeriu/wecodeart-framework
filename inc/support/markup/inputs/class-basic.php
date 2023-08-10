@@ -67,8 +67,8 @@ class Basic extends Base {
             'submit',
             'radio',
             'checkbox',
-            'date',
             'hidden',
+            // 'date',  // Extended
             // 'file',  // Extended
             // 'range', // Extended
             // 'color', // Extended

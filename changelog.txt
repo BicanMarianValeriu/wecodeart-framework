@@ -1,3 +1,7 @@
+v6.2.0
+- Updated - date input styles to own class (micro optimization)
+- Added - core/details block support with inheritance to RankMath and YoastSEO FAQ blocks
+
 v6.1.9
 - Updated - cleanup inputs styles / validation / variables
 - Updated - inputs/group constructor - add label, messages etc

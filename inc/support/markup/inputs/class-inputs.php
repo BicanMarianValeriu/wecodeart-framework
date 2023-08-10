@@ -43,6 +43,7 @@ class Inputs implements Configuration {
 		// Register Default Inputs
 		$this->register( 'basic',		Inputs\Basic::class     );
 		$this->register( 'file',		Inputs\File::class     	);
+		$this->register( 'date',		Inputs\Date::class     	);
 		$this->register( 'color',		Inputs\Color::class		);
 		$this->register( 'range',		Inputs\Range::class     );
 		$this->register( 'button',		Inputs\Button::class 	);
@@ -100,7 +101,7 @@ class Inputs implements Configuration {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	6.1.9
+	 * @version	6.2.0
 	 */
 	public function assets() {
 		if( empty( self::$loaded ) ) {
@@ -150,18 +151,6 @@ class Inputs implements Configuration {
 			}
 			::-webkit-inner-spin-button {
 				height: auto;
-			}
-			::-webkit-datetime-edit-fields-wrapper,
-			::-webkit-datetime-edit-text,
-			::-webkit-datetime-edit-minute,
-			::-webkit-datetime-edit-hour-field,
-			::-webkit-datetime-edit-day-field,
-			::-webkit-datetime-edit-month-field,
-			::-webkit-datetime-edit-year-field {
-				padding: 0;
-			}
-			[list]::-webkit-calendar-picker-indicator {
-				display: none;
 			}
 			::-webkit-search-decoration {
 				-webkit-appearance: none;
