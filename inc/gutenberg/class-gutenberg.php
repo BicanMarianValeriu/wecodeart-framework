@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.1.2
+ * @version		6.2.1
  */
 
 namespace WeCodeArt;
@@ -177,7 +177,7 @@ class Gutenberg {
 			return;
 		}
 
-		remove_submenu_page( 'themes.php', 'gutenberg-edit-site' );
+		remove_submenu_page( 'themes.php', 'site-editor.php' );
 	}
 
 	/**

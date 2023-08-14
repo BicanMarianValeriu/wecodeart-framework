@@ -1,3 +1,7 @@
+v6.2.1
+- Fixed - ability to disable FSE link (Site Editor) under Appearance -> Themes
+- Added - ability to remove style attribute from multiple selectors while extending Processor class via remove_style method
+
 v6.2.0
 - Updated - date input styles to own class (micro optimization)
 - Added - core/details block support with inheritance to RankMath and YoastSEO FAQ blocks

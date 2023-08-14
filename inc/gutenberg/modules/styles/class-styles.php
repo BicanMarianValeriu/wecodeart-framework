@@ -178,15 +178,8 @@ class Styles implements Integration {
 			// Remove inline style attribute.
 			$content->remove_attribute( 'style' );
 			
-			if( $block_name === 'core/media-text' ) {
-				// Media & Text also adds style to the <figure>.
-				$content->next_tag( [ 'tag_name' => 'figure' ] );
-				$content->remove_attribute( 'style' );
-			}
-			
-			if( $block_name === 'core/button' ) {
-				// Button also adds style to the <a>.
-				$content->next_tag( [ 'tag_name' => 'a' ] );
+			if( ! empty( $selectors = $processed->remove_style() ) ) {
+				$content->next_tag( $selectors );
 				$content->remove_attribute( 'style' );
 			}
 			

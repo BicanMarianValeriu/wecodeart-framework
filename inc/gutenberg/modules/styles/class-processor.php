@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -187,5 +187,14 @@ class Processor {
 				$this->add_declarations( $rules, $selector );
 			}
 		}
+	}
+
+	/**
+	 * Additional selectors to remove styles from.
+	 *
+	 * @return 	array
+	 */
+	public function remove_style(): array {
+		return [];
 	}
 }
