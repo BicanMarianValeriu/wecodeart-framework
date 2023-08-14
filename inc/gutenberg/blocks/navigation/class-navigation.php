@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.7
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -630,10 +630,6 @@ class Navigation extends Dynamic {
 
 				$inline .= "
 					/* Offcanvas */
-					.wp-block-navigation :where(.offcanvas,.offcanvas-body,.navbar-nav) {
-						flex: 1 1 100%;
-						gap: inherit;
-					}
 					.wp-block-navigation .offcanvas-start .btn-close {
 						margin-left: auto;
 					}
@@ -779,6 +775,10 @@ class Navigation extends Dynamic {
 			.wp-block-navigation {
 				display: flex;
 				align-items: center;
+			}
+			.wp-block-navigation :where(.offcanvas,.offcanvas-body,.navbar-nav) {
+				flex: 1 1 100%;
+				gap: inherit;
 			}
 			.nav {
 				--wp--nav-link-padding-x: 0.5rem;

@@ -12,7 +12,7 @@
     <!-- wp:query-title {"type":"archive","className":"my-5"} /-->
     <!-- wp:term-description /-->
 
-    <!-- wp:post-template {"className":"my-5"} -->
+    <!-- wp:post-template {"className":"my-5","layout":{"type":"grid","columnCount":3}} -->
     <!-- wp:post-featured-image {"isLink":true} /-->
     <!-- wp:post-title {"level":3,"isLink":true} /-->
     <!-- wp:group {"className":"g-1","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->

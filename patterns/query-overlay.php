@@ -12,7 +12,7 @@
     <!-- wp:query-title {"type":"archive","className":"my-5"} /-->
     <!-- wp:term-description /-->
     
-    <!-- wp:post-template {"className":"my-5"} -->
+    <!-- wp:post-template {"className":"my-5","layout":{"type":"grid","columnCount":3}} -->
     <!-- wp:pattern {"slug":"wecodeart/el-entry-overlay"} /-->
     <!-- /wp:post-template -->
 

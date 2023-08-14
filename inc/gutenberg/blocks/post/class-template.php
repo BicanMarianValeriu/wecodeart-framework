@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.1
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -97,16 +97,26 @@ class Template extends Dynamic {
 		}
 
 		$classnames = [ 'wp-block-post-template' ];
+
+		// Deprecated grid layout
 		if ( isset( $block->context['displayLayout'] ) && isset( $block->context['query'] ) ) {
 			if ( get_prop( $block->context, [ 'displayLayout', 'type' ] ) === 'flex' ) {
-				$classnames = array_merge( $classnames, [ 'wp-block-post-template--grid', 'grid' ] );
+				$classnames = array_merge( $classnames, [ 'grid' ] );
 			}
 		}
 
+		// New Grid layout
+		if ( get_prop( $attributes, [ 'layout', 'type' ], '' ) === 'grid' ) {
+			$classnames = array_merge( $classnames, [ 'grid' ] );
+		}
+
 		$item_class = [ 'wp-block-post' ];
-		if( get_prop( $block->context, [ 'displayLayout', 'columns' ] ) ) {
-			$columns 	= ( 12 / get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
-			$item_class = array_merge( $item_class, [ 'span-12', 'span-md-6', 'span-lg-' . $columns ] );
+
+		// Grid Layout (with old support)
+		$columns = get_prop( $attributes, [ 'layout', 'columnCount' ], get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
+		
+		if( $columns ) {
+			$item_class = array_merge( $item_class, [ 'span-12', 'span-md-6', 'span-lg-' . ( 12 / $columns ) ] );
 		}
 
 		if( $value = get_prop( $attributes, 'className' ) ) {

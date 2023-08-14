@@ -202,6 +202,9 @@ progress {
   grid-template-columns: repeat(auto-fill, minmax(max(var(--wp--column-min), var(--wp--column-max)), 1fr));
   grid-gap: var(--wp--style--block-gap);
 }
+.grid.is-layout-grid {
+  grid-template-columns: repeat(auto-fill, minmax(max(var(--wp--column-min), var(--wp--column-max)), 1fr));
+}
 .grid .span-1 {
   grid-column: auto/span 1;
 }

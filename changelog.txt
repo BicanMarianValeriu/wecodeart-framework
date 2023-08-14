@@ -1,4 +1,6 @@
 v6.2.1
+- Updated - Navigation gap inherit styled moved to default for when offcanvas is not enabled
+- Updated - core/post-template grid layout support for WP 6.3
 - Fixed - ability to disable FSE link (Site Editor) under Appearance -> Themes
 - Added - ability to remove style attribute from multiple selectors while extending Processor class via remove_style method
 
