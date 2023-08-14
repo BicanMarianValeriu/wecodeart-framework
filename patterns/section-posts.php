@@ -15,9 +15,9 @@
     <!-- wp:paragraph {"align":"center","fontSize":"medium","fontFamily":"shadows-into-light"} -->
     <p class="has-text-align-center has-shadows-into-light-font-family has-medium-font-size">Lorem ipsum dolor sit ament</p>
     <!-- /wp:paragraph -->    
-    <!-- wp:query {"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]},"displayLayout":{"type":"flex","columns":3}} -->
+    <!-- wp:query {"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]}} -->
     <div class="wp-block-query">
-        <!-- wp:post-template {"className":"my-5"} -->
+        <!-- wp:post-template {"className":"my-5","layout":{"type":"grid","columnCount":3}} -->
         <!-- wp:pattern {"slug":"wecodeart/el-entry-overlay"} /-->
         <!-- /wp:post-template -->
     </div>
