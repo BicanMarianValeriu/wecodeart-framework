@@ -3,8 +3,13 @@
 	"items": [
 		{
 			"type": "info",
+			"title": "Version - 6.2.1",
+			"content": "core/loginout block has now support for Boostrap modal."
+		},
+		{
+			"type": "info",
 			"title": "Version - 6.1.7",
-			"content": "core/search block has now support for button only - openning the search form in a Boostrap modal (must have Gutenberg plugin until merged into core)."
+			"content": "core/search block has now support for button only - openning the search form in a Boostrap modal."
 		},
 		{
 			"type": "info",

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.2
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -119,7 +119,7 @@ class Separator extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( array $attributes = [], string $content = '' ): string {
-		$handle 	= 'wp-block-' . $this->block_name;
+		$handle 	= $this->get_asset_handle();
 		$classes 	= array_filter( explode( ' ', get_prop( $attributes, [ 'className' ], '' ) ) );
 		$is_svg 	= false;
 
@@ -172,7 +172,7 @@ class Separator extends Dynamic {
 	 *
 	 * @return 	void.
 	 */
-	public function collect_svg_styles(): void {
+	private function collect_svg_styles(): void {
 		$themes     = [];
 		$stylesheet = get_stylesheet();
 		$template   = get_template();
@@ -184,7 +184,7 @@ class Separator extends Dynamic {
 		$themes[] = wp_get_theme( $template );
 
 		foreach ( $themes as $theme ) {
-			$dirpath = $theme->get_stylesheet_directory() . '/views/blocks/design/separator/';
+			$dirpath = $theme->get_stylesheet_directory() . '/views/blocks/separator/';
 			if ( ! is_dir( $dirpath ) || ! is_readable( $dirpath ) ) {
 				continue;
 			}

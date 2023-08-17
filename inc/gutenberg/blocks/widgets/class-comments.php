@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -45,7 +45,7 @@ class Comments extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_action( 'wp_print_styles', fn() => \wp_deregister_style( 'wp-block-' . $this->block_name ) );
+		\add_action( 'wp_print_styles', fn() => \wp_deregister_style( $this->get_asset_handle() ) );
 	}
 
 	/**

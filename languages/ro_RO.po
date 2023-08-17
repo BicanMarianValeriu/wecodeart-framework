@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-07-04 07:45+0000\n"
+"PO-Revision-Date: 2023-08-15 15:59+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -72,7 +72,7 @@ msgstr "[redării blocului a fost oprită]"
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr "O punte între WeCodeArt Framework și pluginul %s."
 
-#: inc/app.php:196
+#: inc/app.php:188
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -91,7 +91,7 @@ msgstr ""
 "completă a site-ului. De asemenea, funcționează perfect cu toate pluginurile "
 "generatore de pagini."
 
-#: inc/app.php:203
+#: inc/app.php:195
 #| msgid ""
 #| "A sleek WooCommerce block theme with webpack setup. No bloat - perfect "
 #| "starting point for your store."
@@ -101,17 +101,6 @@ msgid ""
 msgstr ""
 "O temă elegantă de bloc WooCommerce cu configurație webpack. Fără bloat - un "
 "punct de plecare perfect pentru magazinul tău."
-
-#: inc/app.php:179
-#| msgid ""
-#| "Add Google Analytics, verify your Google Webmasters property and Google "
-#| "Adsense publisher with ease."
-msgid ""
-"Add Google Analytics, verify your Google Webmasters property and Google "
-"Adsense publisher account with ease."
-msgstr ""
-"Adăugați Google Analytics, verificați cu ușurință proprietatea Google "
-"Webmasters și contul de editor Google Adsense."
 
 #: inc/gutenberg/blocks/comment/class-title.php:106
 msgid "add one"
@@ -141,8 +130,8 @@ msgstr "Toate pluginurile nu au reușit să se installeze."
 msgid "All plugins installed successfully."
 msgstr "Toate pluginurile instalate cu succes."
 
-#: inc/support/plugins/contactform7/class-contactform7.php:66
-#: inc/support/plugins/woocommerce/class-woocommerce.php:67
+#: inc/support/plugins/contactform7/class-contactform7.php:70
+#: inc/support/plugins/woocommerce/class-woocommerce.php:71
 msgid "Amazing news!"
 msgstr "Vesti uimitoare!"
 
@@ -199,7 +188,7 @@ msgstr "Arhivă Categorie: %s"
 msgid "Choose %s"
 msgstr "Alege %s"
 
-#: views/general/modal.tpl.php:40 views/general/offcanvas.tpl.php:38
+#: views/general/modal.tpl.php:42 views/general/offcanvas.tpl.php:40
 msgid "Close"
 msgstr "Închide"
 
@@ -402,8 +391,8 @@ msgstr "Grupare"
 msgid "Gutenberg Ready"
 msgstr "Pregătită Gutenberg"
 
-#: inc/support/plugins/contactform7/class-contactform7.php:72
-#: inc/support/plugins/woocommerce/class-woocommerce.php:73
+#: inc/support/plugins/contactform7/class-contactform7.php:76
+#: inc/support/plugins/woocommerce/class-woocommerce.php:77
 msgid "here"
 msgstr "aici"
 
@@ -460,7 +449,7 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
-#: inc/app.php:187
+#: inc/app.php:179
 msgid ""
 "Lightweight extension for adding a scroll to top button on your site. Super "
 "flexible and customizable."
@@ -472,7 +461,8 @@ msgstr ""
 msgid "Link"
 msgstr "Legătură"
 
-#: inc/gutenberg/blocks/site/class-login.php:102
+#: inc/gutenberg/blocks/site/class-login.php:138
+#: inc/gutenberg/blocks/site/class-login.php:158
 msgid "Log In"
 msgstr "Autentificare"
 
@@ -485,7 +475,7 @@ msgstr "Iubit de %s"
 msgid "Marquee"
 msgstr "Marquee"
 
-#: views/general/toggler.tpl.php:27
+#: views/general/toggler.tpl.php:29
 msgid "Menu"
 msgstr "Meniu"
 
@@ -496,6 +486,10 @@ msgstr "ID-ul notificării lipsește"
 #: patterns/section-mobile.php:15
 msgid "MOBILE"
 msgstr "MOBILE"
+
+#: inc/gutenberg/blocks/site/class-login.php:50
+msgid "Modal"
+msgstr "Modal"
 
 #: inc/gutenberg/blocks/query/class-title.php:143
 msgctxt "monthly archives date format"
@@ -533,7 +527,11 @@ msgstr "Nu, nu-mi pasă."
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
 
-#: inc/gutenberg/blocks/widgets/class-search.php:195
+#: inc/gutenberg/blocks/site/class-login.php:97
+msgid "Open login modal"
+msgstr "Deschideți modalul de autentificare"
+
+#: inc/gutenberg/blocks/widgets/class-search.php:196
 msgid "Open search modal"
 msgstr "Deschideți modalul de căutare"
 
@@ -555,7 +553,7 @@ msgstr ""
 msgid "Outline"
 msgstr "Contur"
 
-#: inc/gutenberg/blocks/site/class-login.php:100
+#: inc/gutenberg/blocks/site/class-login.php:156
 msgid "Password"
 msgstr "Parolă"
 
@@ -647,7 +645,7 @@ msgstr "Pregătită"
 msgid "Ready to create with %s?"
 msgstr "Sunteți gata să creați cu %s?"
 
-#: inc/gutenberg/blocks/site/class-login.php:101
+#: inc/gutenberg/blocks/site/class-login.php:157
 msgid "Remember Me"
 msgstr "Ține-mă minte"
 
@@ -674,8 +672,8 @@ msgstr "Eroare RSS"
 msgid "Seamless integration with WooCommerce right from the start!"
 msgstr "Integrare perfectă cu WooCommerce chiar de la început!"
 
-#: inc/gutenberg/blocks/widgets/class-search.php:70
-#: inc/gutenberg/blocks/widgets/class-search.php:71
+#: inc/gutenberg/blocks/widgets/class-search.php:75
+#: inc/gutenberg/blocks/widgets/class-search.php:76
 msgid "Search"
 msgstr "Caută"
 
@@ -709,7 +707,7 @@ msgstr "Selectați Anul"
 msgid "Simple pricing plans for any size team."
 msgstr "Planuri simple de prețuri pentru echipe de orice dimensiune."
 
-#: inc/support/assets/class-assets.php:113
+#: inc/support/assets/class-assets.php:145
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
@@ -826,7 +824,7 @@ msgstr ""
 "Această postare este protejată prin parolă. Pentru a vizualiza această "
 "postare, introduceți parola mai jos!"
 
-#: views/general/toggler.tpl.php:23
+#: views/general/toggler.tpl.php:25
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
@@ -846,7 +844,7 @@ msgstr "Deblochează"
 msgid "upgrade PHP"
 msgstr "actualizați PHP"
 
-#: inc/gutenberg/blocks/site/class-login.php:99
+#: inc/gutenberg/blocks/site/class-login.php:155
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
@@ -859,19 +857,15 @@ msgstr "%s Utilizatori"
 msgid "View Themes"
 msgstr "Vedeți Teme"
 
-#: inc/support/plugins/contactform7/class-contactform7.php:106
+#: inc/support/plugins/contactform7/class-contactform7.php:110
 msgid "WCA: Contact Form 7"
 msgstr "WCA: Contact Form 7"
 
 #: inc/app.php:178
-msgid "WCA: Google Tools Extension"
-msgstr "WCA: Google Tools Extension"
-
-#: inc/app.php:186
 msgid "WCA: Scroll Top"
 msgstr "WCA: Scroll Top"
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:107
+#: inc/support/plugins/woocommerce/class-woocommerce.php:111
 msgid "WCA: WooCommerce"
 msgstr "WCA: WooCommerce"
 
@@ -884,7 +878,7 @@ msgstr "Suntem mai întâi %s ... %s"
 msgid "We Are Getting Ready to Launch!"
 msgstr "Ne pregătim de lansare!"
 
-#: inc/support/plugins/contactform7/class-contactform7.php:68
+#: inc/support/plugins/contactform7/class-contactform7.php:72
 #, php-format
 #| msgid ""
 #| "We have an extension that integrates our theme with Contact Form 7 plugin!"
@@ -896,7 +890,7 @@ msgstr ""
 "Avem o extensie care integrează tema noastră cu pluginul Contact Form 7! O "
 "puteți obține %s."
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:69
+#: inc/support/plugins/woocommerce/class-woocommerce.php:73
 #, php-format
 msgid ""
 "We have an extension that integrates our theme with WooCommerce plugin! You "
@@ -914,7 +908,7 @@ msgstr "Site"
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/app.php:195
+#: inc/app.php:187
 msgid "WeCodeArt Developer"
 msgstr "WeCodeArt Dezvoltator"
 
@@ -965,7 +959,7 @@ msgstr ""
 "Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
 "WeCodeArt Framework."
 
-#: inc/app.php:202
+#: inc/app.php:194
 msgid "WeCodeArt Honey"
 msgstr "WeCodeArt Honey"
 
@@ -994,7 +988,7 @@ msgstr ""
 "Când adăugați o pictogramă SVG cu %s, trebuie să definiți cheile `viewBox` "
 "și `paths`."
 
-#: inc/support/assets/class-assets.php:165
+#: inc/support/assets/class-assets.php:174
 #, php-format
 #| msgid ""
 #| "When using \"%s\" method you must define 3rd parameter (style or script)."

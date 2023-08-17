@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.1.8
- * @version		6.0.0
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -42,6 +42,16 @@ class Login extends Dynamic {
 	protected $block_name = 'loginout';
 
 	/**
+	 * Init.
+	 */
+	public function init() {
+		\register_block_style( $this->get_block_type(), [
+			'name'	=> 'modal',
+            'label'	=> esc_html__( 'Modal', 'wecodeart' ),
+		] );
+	}
+
+	/**
 	 * Block args.
 	 *
 	 * @return 	array
@@ -65,14 +75,46 @@ class Login extends Dynamic {
 		$current_url 	= ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		$contents 		= wp_loginout( get_prop( $attributes, [ 'redirectToCurrent' ] ) ? $current_url : '', false );
 		$classnames 	= [];
-
+		$classNames 	= explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
+		
 		// If logged-out and displayLoginAsForm is true, show the login form.
 		if ( ! is_user_logged_in() && get_prop( $attributes, [ 'displayLoginAsForm' ] ) ) {
 			// Add a class.
 			$classnames[] 	= 'has-form';
+
 			// Get the form.
-			$contents 		= $this->render_form( [], false );
+			$form_html 		= self::render_form( [], false );
+			
+			// Is this a modal?
+			if( in_array( 'is-style-modal', $classNames, true ) ) {
+				$instance_id 	= wp_unique_id( 'wp-login-' );
+
+				// Get the form.
+				$contents		= new \WP_HTML_Tag_Processor( $contents );
+				if( $contents->next_tag( [ 'tag_name' => 'a' ] ) ) {
+					$contents->set_attribute( 'href', '#' );
+					$contents->set_attribute( 'class', 'nav-link' );
+					$contents->set_attribute( 'aria-label', esc_attr__( 'Open login modal', 'wecodeart' ) );
+					$contents->set_attribute( 'aria-controls', '#' . $instance_id . '-modal' );
+					$contents->set_attribute( 'data-bs-target', '#' . $instance_id . '-modal' );
+					$contents->set_attribute( 'data-bs-toggle', 'modal' );
+				}
+				$contents = $contents->get_updated_html();
+	
+				// Modal
+				$modal 			= self::get_modal( $form_html, $instance_id );
+				add_action( 'wp_footer', static fn() => printf( $modal ) );
+			} else {
+				$contents = $form_html;
+			}
+		} 
+		
+		$contents	= new \WP_HTML_Tag_Processor( $contents );
+		if( $contents->next_tag( [ 'tag_name' => 'a' ] ) ) {
+			// Is this a button?
+			$contents->add_class( in_array( 'wp-block-button', $classNames, true ) ? 'wp-element-button' : 'nav-link' );
 		}
+		$contents = $contents->get_updated_html();
 
 		return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [
 			[
@@ -85,6 +127,20 @@ class Login extends Dynamic {
 	}
 
 	/**
+	 * Render Modal
+	 *
+	 * @param 	array 	$attributes 	The block attributes.
+	 */
+	private static function get_modal( string $content, string $instance_id ) {
+		return wecodeart_template( 'general/modal', [
+			'id'		=> (string) $instance_id . '-modal',
+			'classes'	=> [ 'modal--login', 'modal--fullscreen:sm', 'fade' ],
+			'title'		=> esc_html__( 'Log In', 'wecodeart' ),
+			'content' 	=> $content,
+		], false );
+	}
+
+	/**
 	 * Dynamically renders the `core/loginout` form.
 	 *
 	 * @param 	array 	$args	The form args.
@@ -92,14 +148,14 @@ class Login extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render_form( $args = [], $echo = true ) {
+	private static function render_form( $args = [], $echo = true ) {
 		// Default args from wp_login_form();
 		$defaults = [
 			'redirect'       => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
-			'label_username' => __( 'Username or Email Address', 'wecodeart' ),
-			'label_password' => __( 'Password', 'wecodeart'  ),
-			'label_remember' => __( 'Remember Me', 'wecodeart'  ),
-			'label_log_in'   => __( 'Log In', 'wecodeart'  ),
+			'label_username' => esc_html__( 'Username or Email Address', 'wecodeart' ),
+			'label_password' => esc_html__( 'Password', 'wecodeart'  ),
+			'label_remember' => esc_html__( 'Remember Me', 'wecodeart'  ),
+			'label_log_in'   => esc_html__( 'Log In', 'wecodeart'  ),
 			'id_username'    => 'user_login',
 			'id_password'    => 'user_pass',
 			'id_remember'    => 'rememberme',
@@ -110,7 +166,7 @@ class Login extends Dynamic {
 		];
 
 		// We use same filters as WP - plugins will hook into those.
-		return wecodeart_template( 'blocks/site/login', [
+		return wecodeart_template( 'general/login', [
 			'action' 	=> home_url( 'wp-login.php', 'login_post' ),
 			'args'		=> wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) )
 		], $echo );
@@ -125,6 +181,9 @@ class Login extends Dynamic {
 		return '
 			.wp-block-login {
 				margin-bottom: 2rem;
+			}
+			.wp-block-loginout > :where(a) {
+				text-decoration: none;
 			}
 		';
 	}

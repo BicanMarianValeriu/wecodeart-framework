@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -48,13 +48,13 @@ class Button extends Dynamic {
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'link',
             'label'			=> __( 'Link', 'wecodeart' ),
-			// 'inline_style' 	=> static::get_style( 'link' ) // Not working in Site Editor yet.
+			'inline_style' 	=> static::get_style( 'link' )
 		] );
 		
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'outline',
             'label'			=> __( 'Outline', 'wecodeart' ),
-			// 'inline_style' 	=> static::get_style( 'outline' ) // Not working in Site Editor yet.
+			'inline_style' 	=> static::get_style( 'outline' )
 		] );
 	}
 
@@ -131,8 +131,6 @@ class Button extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		$inline = static::get_style( 'outline' ) . static::get_style( 'link' );
-
 		return "
 			.wp-block-button.has-custom-width {
 				max-width: none;
@@ -202,7 +200,6 @@ class Button extends Dynamic {
 				box-shadow: none;
 				opacity: .7;
 			}
-			${inline}
 		";
 	}
 }

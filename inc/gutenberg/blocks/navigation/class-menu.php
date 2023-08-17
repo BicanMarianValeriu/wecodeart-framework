@@ -66,7 +66,9 @@ class Menu extends Dynamic {
 	 * @return 	void
 	 */
 	public static function render_dropdown( object $block, array $extras = [], $echo = true ) {
-		if( count( $block->inner_blocks ) === 0 ) return;
+		if( count( $block->inner_blocks ) === 0 ) {
+			return '';
+		}
 
 		// Styles
 		wecodeart( 'styles' )->Components->load( [ 'dropdown' ] );

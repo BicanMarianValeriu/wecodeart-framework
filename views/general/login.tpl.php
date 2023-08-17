@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Login Template
  * @since 	    5.1.8
- * @version	    5.7.2
+ * @version	    6.2.1
  */
 
 defined( 'ABSPATH' ) || exit;

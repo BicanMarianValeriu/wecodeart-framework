@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.9
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -306,7 +306,7 @@ class Link extends Dynamic {
 		return "
 			/* Nav Link */
 			.nav-link {
-				display: block;
+				display: inline-block;
 				padding: var(--wp--nav-link-padding-y) var(--wp--nav-link-padding-x);
 				color: var(--wp--nav-link-color);
 				font-size: inherit;

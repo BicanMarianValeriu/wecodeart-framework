@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.1.8
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -38,17 +38,28 @@ class OffCanvas extends Base {
 		$inline = '
 			/* Offcanvas */
 			.offcanvas {
+				--wp--offcanvas-zindex: 1045;
+				--wp--offcanvas-width: 400px;
+				--wp--offcanvas-height: 30vh;
+				--wp--offcanvas-padding-x: 1rem;
+				--wp--offcanvas-padding-y: 1rem;
+				--wp--offcanvas-color: var(--wp--preset--color--dark);
+				--wp--offcanvas-bg: rgb(var(--wp--background--rgb, 255,255,255));
+				--wp--offcanvas-transition: transform 0.3s ease-in-out;
 				position: fixed;
 				bottom: 0;
 				display: flex;
 				flex-direction: column;
 				max-width: 100%;
 				visibility: hidden;
-				background-color: rgb(var(--wp--background--rgb, 255,255,255));
+				background-color: var(--wp--offcanvas-bg);
 				background-clip: padding-box;
+				transition: var(--wp--offcanvas-transition);
+				z-index: var(--wp--offcanvas-zindex);
 				outline: 0;
-				transition: transform 0.3s ease-in-out;
-				z-index: 1045;
+			}
+			.theme-is-dark .offcanvas {
+				--wp--offcanvas-color: var(--wp--preset--color--white);
 			}
 			.offcanvas-backdrop {
 				position: fixed;
@@ -69,13 +80,14 @@ class OffCanvas extends Base {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
-				padding: 1rem 1rem;
+				padding: var(--wp--offcanvas-padding-y) var(--wp--offcanvas-padding-x);
 			}
 			.offcanvas-header .btn-close {
-				padding: 0.5rem 0.5rem;
-				margin-top: -0.5rem;
-				margin-right: -0.5rem;
-				margin-bottom: -0.5rem;
+				padding: calc(var(--wp--offcanvas-padding-y) * .5) calc(var(--wp--offcanvas-padding-x) * .5);
+				margin-top: calc(-.5 * var(--wp--offcanvas-padding-y));
+				margin-left: calc(-.5 * var(--wp--offcanvas-padding-x));
+				margin-right: calc(-.5 * var(--wp--offcanvas-padding-x));
+				margin-bottom: calc(-.5 * var(--wp--offcanvas-padding-y));
 			}
 			.offcanvas-title {
 				margin-bottom: 0;
@@ -83,37 +95,35 @@ class OffCanvas extends Base {
 			} 
 			.offcanvas-body {
 				flex-grow: 1;
-				padding: 1rem 1rem;
+				padding: var(--wp--offcanvas-padding-y) var(--wp--offcanvas-padding-x);
 				overflow-y: auto;
 			}
-			.offcanvas-start {
+			:where(.offcanvas-start,.offcanvas-end) {
 				top: 0;
+				width: var(--wp--offcanvas-width);
+			}
+			.offcanvas-start {
 				left: 0;
-				width: 400px;
 				border-right: 1px solid rgba(0, 0, 0, 0.2);
 				transform: translateX(-100%);
 			}
 			.offcanvas-end {
-				top: 0;
 				right: 0;
-				width: 400px;
 				border-left: 1px solid rgba(0, 0, 0, 0.2);
 				transform: translateX(100%);
 			}
-			.offcanvas-top {
-				top: 0;
+			:where(.offcanvas-top,.offcanvas-bottom) {
 				right: 0;
 				left: 0;
-				height: 30vh;
+				height: var(--wp--offcanvas-height);
 				max-height: 100%;
+			}
+			.offcanvas-top {
+				top: 0;
 				border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 				transform: translateY(-100%);
 			} 
 			.offcanvas-bottom {
-				right: 0;
-				left: 0;
-				height: 30vh;
-				max-height: 100%;
 				border-top: 1px solid rgba(0, 0, 0, 0.2);
 				transform: translateY(100%);
 			}

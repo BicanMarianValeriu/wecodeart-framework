@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-04 07:45+0000\n"
+"POT-Creation-Date: 2023-08-15 15:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -71,7 +71,7 @@ msgstr ""
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr ""
 
-#: inc/app.php:196
+#: inc/app.php:188
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -84,16 +84,10 @@ msgid ""
 " It also works perfectly with all page builder plugins."
 msgstr ""
 
-#: inc/app.php:203
+#: inc/app.php:195
 msgid ""
 "A sleek WooCommerce block theme with webpack configuration. No bloat - "
 "perfect starting point for your store."
-msgstr ""
-
-#: inc/app.php:179
-msgid ""
-"Add Google Analytics, verify your Google Webmasters property and Google "
-"Adsense publisher account with ease."
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-title.php:106
@@ -124,8 +118,8 @@ msgstr ""
 msgid "All plugins installed successfully."
 msgstr ""
 
-#: inc/support/plugins/contactform7/class-contactform7.php:66
-#: inc/support/plugins/woocommerce/class-woocommerce.php:67
+#: inc/support/plugins/contactform7/class-contactform7.php:70
+#: inc/support/plugins/woocommerce/class-woocommerce.php:71
 msgid "Amazing news!"
 msgstr ""
 
@@ -180,7 +174,7 @@ msgstr ""
 msgid "Choose %s"
 msgstr ""
 
-#: views/general/modal.tpl.php:40 views/general/offcanvas.tpl.php:38
+#: views/general/modal.tpl.php:42 views/general/offcanvas.tpl.php:40
 msgid "Close"
 msgstr ""
 
@@ -371,8 +365,8 @@ msgstr ""
 msgid "Gutenberg Ready"
 msgstr ""
 
-#: inc/support/plugins/contactform7/class-contactform7.php:72
-#: inc/support/plugins/woocommerce/class-woocommerce.php:73
+#: inc/support/plugins/contactform7/class-contactform7.php:76
+#: inc/support/plugins/woocommerce/class-woocommerce.php:77
 msgid "here"
 msgstr ""
 
@@ -424,7 +418,7 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr ""
 
-#: inc/app.php:187
+#: inc/app.php:179
 msgid ""
 "Lightweight extension for adding a scroll to top button on your site. Super "
 "flexible and customizable."
@@ -434,7 +428,8 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:102
+#: inc/gutenberg/blocks/site/class-login.php:138
+#: inc/gutenberg/blocks/site/class-login.php:158
 msgid "Log In"
 msgstr ""
 
@@ -447,7 +442,7 @@ msgstr ""
 msgid "Marquee"
 msgstr ""
 
-#: views/general/toggler.tpl.php:27
+#: views/general/toggler.tpl.php:29
 msgid "Menu"
 msgstr ""
 
@@ -457,6 +452,10 @@ msgstr ""
 
 #: patterns/section-mobile.php:15
 msgid "MOBILE"
+msgstr ""
+
+#: inc/gutenberg/blocks/site/class-login.php:50
+msgid "Modal"
 msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:143
@@ -495,7 +494,11 @@ msgstr ""
 msgid "Notification dismissed"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-search.php:195
+#: inc/gutenberg/blocks/site/class-login.php:97
+msgid "Open login modal"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/class-search.php:196
 msgid "Open search modal"
 msgstr ""
 
@@ -514,7 +517,7 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:100
+#: inc/gutenberg/blocks/site/class-login.php:156
 msgid "Password"
 msgstr ""
 
@@ -605,7 +608,7 @@ msgstr ""
 msgid "Ready to create with %s?"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:101
+#: inc/gutenberg/blocks/site/class-login.php:157
 msgid "Remember Me"
 msgstr ""
 
@@ -632,8 +635,8 @@ msgstr ""
 msgid "Seamless integration with WooCommerce right from the start!"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-search.php:70
-#: inc/gutenberg/blocks/widgets/class-search.php:71
+#: inc/gutenberg/blocks/widgets/class-search.php:75
+#: inc/gutenberg/blocks/widgets/class-search.php:76
 msgid "Search"
 msgstr ""
 
@@ -666,7 +669,7 @@ msgstr ""
 msgid "Simple pricing plans for any size team."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:113
+#: inc/support/assets/class-assets.php:145
 msgid "Skip to content"
 msgstr ""
 
@@ -778,7 +781,7 @@ msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
 
-#: views/general/toggler.tpl.php:23
+#: views/general/toggler.tpl.php:25
 msgid "Toggle navigation"
 msgstr ""
 
@@ -798,7 +801,7 @@ msgstr ""
 msgid "upgrade PHP"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:99
+#: inc/gutenberg/blocks/site/class-login.php:155
 msgid "Username or Email Address"
 msgstr ""
 
@@ -811,19 +814,15 @@ msgstr ""
 msgid "View Themes"
 msgstr ""
 
-#: inc/support/plugins/contactform7/class-contactform7.php:106
+#: inc/support/plugins/contactform7/class-contactform7.php:110
 msgid "WCA: Contact Form 7"
 msgstr ""
 
 #: inc/app.php:178
-msgid "WCA: Google Tools Extension"
-msgstr ""
-
-#: inc/app.php:186
 msgid "WCA: Scroll Top"
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:107
+#: inc/support/plugins/woocommerce/class-woocommerce.php:111
 msgid "WCA: WooCommerce"
 msgstr ""
 
@@ -836,14 +835,14 @@ msgstr ""
 msgid "We Are Getting Ready to Launch!"
 msgstr ""
 
-#: inc/support/plugins/contactform7/class-contactform7.php:68
+#: inc/support/plugins/contactform7/class-contactform7.php:72
 #, php-format
 msgid ""
 "We have an extension that integrates our theme with Contact Form 7 plugin! "
 "You can get it from %s."
 msgstr ""
 
-#: inc/support/plugins/woocommerce/class-woocommerce.php:69
+#: inc/support/plugins/woocommerce/class-woocommerce.php:73
 #, php-format
 msgid ""
 "We have an extension that integrates our theme with WooCommerce plugin! You "
@@ -859,7 +858,7 @@ msgstr ""
 msgid "WeCodeArt"
 msgstr ""
 
-#: inc/app.php:195
+#: inc/app.php:187
 msgid "WeCodeArt Developer"
 msgstr ""
 
@@ -900,7 +899,7 @@ msgid ""
 "version %2$s. Please upgrade WordPress to use WeCodeArt Framework."
 msgstr ""
 
-#: inc/app.php:202
+#: inc/app.php:194
 msgid "WeCodeArt Honey"
 msgstr ""
 
@@ -925,7 +924,7 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:165
+#: inc/support/assets/class-assets.php:174
 #, php-format
 msgid ""
 "When using \"%s\" method you must define the 3rd parameter (style or script)."

@@ -166,6 +166,27 @@ class Navigation extends Dynamic {
 		}
 
 		$block_id	= wp_unique_id( 'wp-navigation-' );
+
+		// Offcanvas classes
+		$classes	= explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
+		$offcanvas  = [ 'offcanvas-start' ];
+
+		if( ! empty( $classes ) ) {
+			$excludes	= [ 'offcanvas-start', 'offcanvas-end', 'offcanvas-top', 'offcanvas-bottom' ];
+
+			foreach ( $classes as $key => $class ) {
+				if ( in_array( $class, $excludes ) ) {
+					unset( $classes[$key] ); // Filter out.
+					$offcanvas = [ $class ];
+				}
+			}
+
+			if( ! empty( $offcanvas ) ) {
+				$attributes['className'] = join( ' ', $classes );
+			}
+		}
+		
+		// Attributes
 		$attrs		= $this->get_wrapper_attributes( $attributes );
 
 		// This CSS holds the block customization.
@@ -194,7 +215,7 @@ class Navigation extends Dynamic {
 		return wecodeart( 'markup' )::wrap( 'navbar', [ [
 			'tag' 	=> 'nav',
 			'attrs'	=> $attrs
-		] ], function( $attributes, $inner_blocks ) use ( $block_id ) {
+		] ], function( $attributes, $inner_blocks, $block_id, $offcanvas ) {
 
 			// Navbar List HTML
 			$html = wecodeart( 'markup' )::wrap( 'navbar-nav', [ [
@@ -227,7 +248,7 @@ class Navigation extends Dynamic {
 				// OffCanvas
 				wecodeart_template( 'general/offcanvas', [
 					'id'		=> $block_id,
-					'classes'	=> [ 'offcanvas-start' ],
+					'classes'	=> $offcanvas,
 					'content' 	=> $html,
 				] );
 
@@ -237,7 +258,7 @@ class Navigation extends Dynamic {
 			// Is ok, we use the WP block rendering
 			echo $html;
 
-		}, [ $attributes, $inner_blocks ], false );
+		}, [ $attributes, $inner_blocks, $block_id, $offcanvas ], false );
 	}
 
 	/**
@@ -257,6 +278,7 @@ class Navigation extends Dynamic {
 			'core/social-links',
 			'core/site-title',
 			'core/site-logo',
+			'core/loginout',
 		] ) ) {
 			$classes	= [ 'wp-block-navigation-item', 'nav-item' ];
 			$classes[]  = 'nav-item--' . join( '-', explode( '/', get_prop( $block->parsed_block, 'blockName' ) ) );
@@ -595,22 +617,6 @@ class Navigation extends Dynamic {
 							flex-grow: 0;
 							padding: 0;
 							overflow-y: visible;
-						}
-
-						/* Dropdowns */
-						.dropdown-menu-{$key}-start {
-							--wp--position: start;
-						}
-						.dropdown-menu-{$key}-start[data-bs-popper] {
-							right: auto;
-							left: 0;
-						}
-						.dropdown-menu-{$key}-end {
-							--wp--position: end;
-						}
-						.dropdown-menu-{$key}-end[data-bs-popper] {
-							right: 0;
-							left: auto;
 						}
 
 						/* Block */

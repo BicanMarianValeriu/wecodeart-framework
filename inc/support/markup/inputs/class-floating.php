@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.9
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -88,6 +88,9 @@ class Floating extends Basic {
                 border: 1px solid transparent;
                 transform-origin: 0 0;
                 transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+            }
+            .theme-is-dark .form-floating > label {
+                color: var(--wp--preset--color--dark);
             }
             .form-floating > :is(.form-control,.form-control-plaintext) {
                 padding: 1rem var(--wp--input--padding-x);

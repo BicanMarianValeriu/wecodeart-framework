@@ -1,8 +1,16 @@
 v6.2.1
 - Updated - Navigation gap inherit styled moved to default for when offcanvas is not enabled
+- Updated - Dynamic CSS generation to use namespace in file name to avoid conflicts (wp-block-{name} / wc-blocks-style-{name} for WooCommerce, and so on)
 - Updated - core/post-template grid layout support for WP 6.3
+- Updated - core/button variation styles moved inline (fixed in WP 6.3 for FSE)
+- Updated - core/loginout to support login modal / also allow the block into core/navigation
+- Updated - core/separator svg views updated to /blocks/ instead of /blocks/design/
+- Updated - login.tpl.php view moved from views/blocks/site to views/general
+- Updated - offcanvas style component css variables and minor tweaks
 - Fixed - ability to disable FSE link (Site Editor) under Appearance -> Themes
+- Fixed - core/navigation dropdown styles issue (checking for wrong variable name)
 - Added - ability to remove style attribute from multiple selectors while extending Processor class via remove_style method
+- Added - ability to change navigation offcanvas position by using offcanvas-{start/end/top/bottom} classes
 
 v6.2.0
 - Updated - date input styles to own class (micro optimization)

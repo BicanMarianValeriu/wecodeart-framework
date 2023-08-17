@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.1.3
- * @version		6.0.0
+ * @version		6.2.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -88,7 +88,7 @@ class Navigation extends Processor {
 			$dropdown_rules['--wp--dropdown-link-active-bg']	= $darken_color;
 		}
 
-		if( ! empty( $declarations ) ) {
+		if( ! empty( $dropdown_rules ) ) {
 			$this->add_declarations( $dropdown_rules, $dropdown_selector );
 		}
 	}

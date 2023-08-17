@@ -281,7 +281,7 @@ abstract class Dynamic {
 		$filesystem->set_folder( 'cache' );
 
 		$handle		= $this->get_asset_handle();
-		$block_css	= 'block-' . $this->block_name . '.css';
+		$block_css	= $handle . '.css';
 
 		if( ! $filesystem->has_file( $block_css ) ) {
 			$filesystem->create_file( $block_css, $styles );
