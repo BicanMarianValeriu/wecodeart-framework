@@ -1,3 +1,6 @@
+v6.2.2
+- Removed - drop support class for Captcha4WP
+
 v6.2.1
 - Updated - Navigation gap inherit styled moved to default for when offcanvas is not enabled
 - Updated - Dynamic CSS generation to use namespace in file name to avoid conflicts (wp-block-{name} / wc-blocks-style-{name} for WooCommerce, and so on)
