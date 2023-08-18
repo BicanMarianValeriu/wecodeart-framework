@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		6.1.2
+ * @version		6.2.3
  */
 
 namespace WeCodeArt;
@@ -40,7 +40,8 @@ class Support implements Configuration {
         'markup',
         'plugins',
         'starter',
-        'styles'
+        'styles',
+        'themes'
     ];
 
 	/**
