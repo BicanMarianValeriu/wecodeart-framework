@@ -368,11 +368,6 @@ const addAttributes = props => {
       customStyle: {
         type: 'string',
         default: null
-      },
-      // Deprecated
-      customCSS: {
-        type: 'string',
-        default: null
       }
     });
   }

@@ -34,7 +34,7 @@ use DOMElement;
  *
  * @return 	string 
  */
-function toJSON( $json = array() ) {
+function toJSON( array $json = [] ) {
     if( ! is_array( $json ) ) {
         return null;
     }
@@ -52,6 +52,32 @@ function toJSON( $json = array() ) {
  */
 function get_prop( $array, $prop, $default = null ) {
     return _wp_array_get( $array, (array) $prop, $default );
+}
+
+/**
+ * Set Theme Settings
+ *
+ * @param 	array 	$target
+ * @param 	array 	$array
+ * @param 	mixed 	$value
+ *
+ * @return 	array
+ */
+function set_prop( $target, $array, $value ) {
+	$key     = array_shift( $array );
+	$current =& $target;
+    
+	while ( 0 < sizeof( $array ) ) {
+		if ( ! property_exists( $current, $key ) ) {
+			$current->{ $key } = (object) [];
+		}
+		$current =& $current->{ $key };
+		$key     = array_shift( $array );
+	}
+
+	$current->{ $key } = $value;
+
+	return $target;
 }
     
 /**
@@ -213,40 +239,20 @@ function calc( $number1, $action, $number2, $round = false, $decimals = 0, $prec
 }
 
 /**
- * Set Theme Settings
- *
- * @param 	array 	$target
- * @param 	array 	$array
- * @param 	mixed 	$value
- *
- * @return 	array
- */
-function set_settings_array( $target, $array, $value ) {
-	$key     = array_shift( $array );
-	$current =& $target;
-	while ( 0 < sizeof( $array ) ) {
-		if ( ! property_exists( $current, $key ) ) {
-			$current->{ $key } = (object) array();
-		}
-		$current =& $current->{ $key };
-		$key     = array_shift( $array );
-	}
-	$current->{ $key } = $value;
-	return $target;
-}
-
-/**
  * Flattens a multidimensional array to a simple array.
  *
  * @param   array $array a multidimensional array.
  *
  * @return  array a simple array
  */
-function flatten( $array ) {
+function flatten( array $array = [] ): array {
     $result = [];
     
     foreach ( $array as $element ) {
-        if( empty( $element ) ) continue;
+        if( empty( $element ) ) {
+            continue;
+        }
+
         if ( is_array( $element ) ) {
             array_push( $result, ...flatten( $element ) );
         } else {

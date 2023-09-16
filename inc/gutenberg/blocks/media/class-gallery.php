@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.2.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -46,9 +46,20 @@ class Gallery extends Dynamic {
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args(): array {
+	public function block_type_args( array $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback' => [ $this, 'render' ],
+			'supports'		=> wp_parse_args( [
+				'spacing'	=> [
+					'margin'  	=> true,
+					'padding' 	=> true,
+					'blockGap' 	=> [
+						'sides' => [ 'vertical', 'horizontal' ]
+					],
+				]
+			], $supports )
 		];
 	}
 
@@ -75,7 +86,6 @@ class Gallery extends Dynamic {
 		return "
 			.wp-block-gallery {
 				max-width: initial;
-				margin-bottom: 1rem;
 			}
 			.wp-block-gallery.alignleft,
 			.wp-block-gallery.alignright {
@@ -91,8 +101,7 @@ class Gallery extends Dynamic {
 			.wp-block-gallery.is-cropped figure.wp-block-image > a {
 				display: flex;
 			}
-			.wp-block-gallery.is-cropped figure.wp-block-image a,
-			.wp-block-gallery.is-cropped figure.wp-block-image img {
+			.wp-block-gallery.is-cropped figure.wp-block-image :where(a,img,svg) {
 				flex: 1 0 0%;
 				width: 100%;
 				height: 100%;

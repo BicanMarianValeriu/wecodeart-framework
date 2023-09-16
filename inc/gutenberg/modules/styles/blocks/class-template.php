@@ -8,7 +8,7 @@
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
- * @since		5.5.5
+ * @since		6.2.3
  * @version		6.2.3
  */
 
@@ -22,7 +22,7 @@ use function WeCodeArt\Functions\get_prop;
 /**
  * Block CSS Processor
  */
-class Gallery extends Processor {
+class Template extends Processor {
 	/**
 	 * Parses an output and creates the styles array for it.
 	 *
@@ -31,11 +31,6 @@ class Gallery extends Processor {
 	protected function process_extra(): void {
 		$declarations = [];
 
-		// Columns
-		if( $columns = get_prop( $this->attrs, 'columns', 3 ) ) {
-			$declarations['--wp--columns'] = $columns;
-		}
-		
 		// Gap
 		if( $gap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ] ) ) {	
 			if ( is_array( $gap ) ) {

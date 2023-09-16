@@ -1,3 +1,8 @@
+v6.2.3
+- Updated - use static function for some inline styles
+- Added - core/gallery gap support
+- Added - core/post-template grid support
+
 v6.2.2
 - Removed - drop support class for Captcha4WP
 

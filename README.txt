@@ -1,10 +1,10 @@
 ## WeCodeArt Copyright 2023
 ## https://www.wecodeart.com/
 
-Version: 5.0+
+Version: 6.0+
 Contributors: Bican Marian Valeriu
 Requires at least: WordPress 6.0
-Tested up to: WordPress 6.1
+Tested up to: WordPress 6.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

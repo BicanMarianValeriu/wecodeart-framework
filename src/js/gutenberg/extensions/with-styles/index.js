@@ -25,11 +25,6 @@ const addAttributes = (props) => {
 				type: 'string',
 				default: null
 			},
-			// Deprecated
-			customCSS: {
-				type: 'string',
-				default: null
-			}
 		});
 	}
 

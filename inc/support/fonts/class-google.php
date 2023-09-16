@@ -20,7 +20,6 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Support\Fonts;
 use WeCodeArt\Admin\Request;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\set_settings_array;
 
 /**
  * Manages the way Google Fonts are enqueued.

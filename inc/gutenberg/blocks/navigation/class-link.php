@@ -21,7 +21,6 @@ use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use WeCodeArt\Gutenberg\Blocks\Navigation;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\flatten;
 use function WeCodeArt\Functions\get_lightness_limit;
 
 /**

@@ -88,7 +88,7 @@ class Title extends Dynamic {
             $classnames[] = 'has-text-align-' . $align;
         }
 
-        return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [
+        return wecodeart( 'markup' )::wrap( $this->get_asset_handle(), [
             [
                 'tag' 	=> 'h' . get_prop( $attributes, 'level', '1' ),
                 'attrs'	=> $this->get_block_wrapper_attributes( [

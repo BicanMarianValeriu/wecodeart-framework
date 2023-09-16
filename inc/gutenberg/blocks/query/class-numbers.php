@@ -123,7 +123,7 @@ class Numbers extends Dynamic {
 	 * @return 	void
 	 */
     public function format_pagination( array $content ) {
-        return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [
+        return wecodeart( 'markup' )::wrap( $this->get_asset_handle(), [
             [
                 'tag'   => 'ul',
                 'attrs' => $this->get_block_wrapper_attributes( [

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.1.2
+ * @version		6.2.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -98,7 +98,6 @@ class Styles implements Integration {
 		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
 		
 		// Remove WP/GB plugins hooks - we dont need this anymore!
-		remove_filter( 'render_block', 'wp_render_spacing_gap_support', 10, 2 );
 		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
 		remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters',	10, 1 );
 		
@@ -107,7 +106,6 @@ class Styles implements Integration {
 			// Gutenberg plugin removes styles and adds them in footer - we dont want that.
 			add_action( 'wp_enqueue_scripts', 'wp_enqueue_stored_styles', PHP_INT_MAX ); // Temporary
 			add_action( 'wp_footer', 'wp_enqueue_stored_styles', 1 ); // Temporary.
-			remove_filter( 'render_block', 'gutenberg_render_spacing_gap_support', 	10, 2 );
 			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
 		 	remove_action( 'wp_body_open', 'gutenberg_global_styles_render_svg_filters',	10, 1 );
 		}
@@ -134,12 +132,9 @@ class Styles implements Integration {
 	 */
 	public function register_attribute( $block ) {
 		// Currently we suport only core blocks
-		if( ! in_array( $block->name, Gutenberg::get_restricted_blocks() ) ) return;
-
-		$block->attributes['customCSS'] = [
-			'type'    => 'string',
-			'default' => null,
-		];
+		if( ! in_array( $block->name, Gutenberg::get_restricted_blocks() ) ) {
+			return;
+		}
 		
 		$block->attributes['customStyle'] = [
 			'type'    => 'string',
@@ -376,6 +371,7 @@ class Styles implements Integration {
 			'core/separator' 		=> Styles\Blocks\Separator::class,
 			'core/social-links'		=> Styles\Blocks\Social::class,
 			'core/spacer' 			=> Styles\Blocks\Spacer::class,
+			'core/post-template'	=> Styles\Blocks\Template::class,
 			'core/post-featured-image'	=> Styles\Blocks\Featured::class,
 		];
 

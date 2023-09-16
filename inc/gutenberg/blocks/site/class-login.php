@@ -116,7 +116,7 @@ class Login extends Dynamic {
 		}
 		$contents = $contents->get_updated_html();
 
-		return wecodeart( 'markup' )::wrap( 'wp-block-' . $this->block_name, [
+		return wecodeart( 'markup' )::wrap( $this->get_asset_handle(), [
 			[
 				'tag' 	=> 'div',
 				'attrs'	=> $this->get_block_wrapper_attributes( [

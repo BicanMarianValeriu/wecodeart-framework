@@ -81,7 +81,7 @@ class Social extends Dynamic {
 				$loaded_styles[$classname][] = $service;
 			}
 			
-			wp_add_inline_style( 'wp-block-' . $this->block_name, $inline_css );
+			wp_add_inline_style( $this->get_asset_handle(), $inline_css );
 		}
 
 		return $content;

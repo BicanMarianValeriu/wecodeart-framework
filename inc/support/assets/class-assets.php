@@ -106,29 +106,13 @@ final class Assets implements Integration {
 		global $wp_scripts;
 
 		// Enqueue
-		$this->add_script( $this->make_handle( 'offcanvas '), [
-			'path' 		=> $this->get_asset( 'js', 'modules/offcanvas' ),
-			'deps'		=> [ $this->make_handle() ],
-			'load'		=> false,
-		] );
-		
-		$this->add_script( $this->make_handle( 'dropdown '), [
-			'path' 		=> $this->get_asset( 'js', 'modules/dropdown' ),
-			'deps'		=> [ $this->make_handle() ],
-			'load'		=> false,
-		] );
-		
-		$this->add_script( $this->make_handle( 'modal '), [
-			'path' 		=> $this->get_asset( 'js', 'modules/modal' ),
-			'deps'		=> [ $this->make_handle() ],
-			'load'		=> false,
-		] );
-
-		$this->add_script( $this->make_handle( 'toast '), [
-			'path' 		=> $this->get_asset( 'js', 'modules/toast' ),
-			'deps'		=> [ $this->make_handle() ],
-			'load'		=> false,
-		] );
+		foreach( [ 'offcanvas', 'dropdown', 'modal', 'toast' ] as $handle ) {
+			$this->add_script( $this->make_handle( $handle ), [
+				'path' 		=> $this->get_asset( 'js', 'modules/' . $handle ),
+				'deps'		=> [ $this->make_handle() ],
+				'load'		=> false,
+			] );
+		}
 
 		// Styles
 		$this->add_style( $this->make_handle(), [
