@@ -1,3 +1,6 @@
+v6.2.4
+- Fixed - wrong $this context usage in blocks/class-image.php
+
 v6.2.3
 - Updated - use static function for some inline styles
 - Added - core/gallery gap support
