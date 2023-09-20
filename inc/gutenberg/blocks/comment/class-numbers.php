@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.3.3
- * @version		6.0.0
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment\Pagination;
@@ -89,9 +89,7 @@ class Numbers extends Dynamic {
 		
 		// Enqueue Query Pagination CSS
 		if( ! wp_style_is( 'wp-block-query-pagination-numbers' ) ) {
-			add_action( 'wp_enqueue_scripts', function() use( $pagination_numbers ) {
-				wp_add_inline_style( $this->get_asset_handle(), wecodeart( 'styles' )::compress( $pagination_numbers->styles() ) );
-			} );
+			\wp_add_inline_style( $this->get_asset_handle(), wecodeart( 'styles' )::compress( $pagination_numbers->styles() ) );
 		}
 
 		return $pagination_numbers->format_pagination( $content );

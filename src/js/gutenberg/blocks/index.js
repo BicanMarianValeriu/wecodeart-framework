@@ -1,5 +1,5 @@
 import lorem from './lorem';
-import { groupVariationMarquee } from './variations';
+import { groupMarquee, socialSharing } from './variations';
 
 /**
  * WP dependencies
@@ -20,7 +20,8 @@ registerWCABlocks();
 
 function registerWCAVariations() {
     [
-        groupVariationMarquee
+        groupMarquee,
+        // socialSharing
     ].forEach(({ block, attributes }) => {
         registerBlockVariation(block, attributes);
     });

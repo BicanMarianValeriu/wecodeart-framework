@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Heading block.
@@ -43,7 +44,105 @@ class Details extends Dynamic {
 	/**
 	 * Init.
 	 */
-	public function init() {}
+	public function init() { 
+		// \add_filter( 'pre_render_block', [ $this, 'collect_questions' ], 20, 2 );
+	}
+
+	/**
+	 * Collection questions and generate schema.
+	 *
+	 * @param	string|null $pre_render   The pre-rendered content. Default null.
+	 * @param 	array       $parsed_block The block being rendered.
+	 */
+	public function collect_questions( $pre_render, $parsed_block ) {
+		if ( 'core/details' !== get_prop( $parsed_block, [ 'blockName' ] ) ) {
+			return;
+		}
+
+		if( $summary = get_prop( $parsed_block, [ 'attrs', 'summary' ] ) ) {
+			$text = self::get_question_content( get_prop( $parsed_block, [ 'innerBlocks' ], [] ) );
+
+			// Only for pages.
+			\add_filter( 'wpseo_schema_webpage', static function( $data ) use ( $summary, $text ) {
+				$data['@type'] = [ 'WebPage', 'FAQPage' ];
+				$data['mainEntity'] = [];
+				$data['mainEntity'][] = self::get_question_json( $summary, $text );
+
+				return $data;
+			} );
+			
+			\add_filter( 'rank_math/json_ld', static function( $data ) use ( $summary, $text ) {
+				if ( ! isset( $data['WebPage'] ) ) {
+					return $data;
+				}
+
+				$data['WebPage']['@type'] = [ 'WebPage', 'FAQPage' ];
+				$data['WebPage']['mainEntity'] = [];
+				$data['WebPage']['mainEntity'][] = self::get_question_json( $summary, $text );
+
+				return $data;
+			} );
+		}
+	}
+
+	/**
+	 * Get Question content
+	 *
+	 * @param	array	$blocks
+	 *
+	 * @return 	string
+	 */
+	public static function get_question_content( array $blocks = [] ): string {
+		$content = '';
+
+		foreach( $blocks as $block ) {
+			if( ! in_array( $block['blockName'], [ 'core/heading', 'core/paragraph' ], true ) ) {
+				continue;
+			}
+
+			if( ! empty( $inner = get_prop( $block, [ 'innerBlocks' ], [] ) ) ) {
+				$content .= self::get_question_content( $inner );
+			}
+
+			$content .= ' ' . strip_tags( $block['innerHTML'], [
+				'h1',
+				'h2',
+				'h3',
+				'h4',
+				'h5',
+				'h6',
+				'p',
+				'strong',
+				'b',
+				'em',
+				'br',
+				'a',
+				'i',
+			] );
+		}
+
+		return preg_replace( '/(<[^>]+) style=".*?"/i', '$1', $content );
+	}
+
+	/**
+	 * Get Question JSON
+	 *
+	 * @param	string	$question
+	 * @param	string	$answer
+	 *
+	 * @return 	array
+	 */
+	public static function get_question_json( string $question = '', string $answer = '' ): array {
+		return [
+			'@type'          => 'Question',
+			'url'            => get_permalink() . '#' . 'faq-' . md5( $question ),
+			'name'           => wp_strip_all_tags( $question ),
+			'acceptedAnswer' => [
+				'@type' => 'Answer',
+				'text'  => $answer,
+			],
+		];
+	}
 
 	/**
 	 * Block styles

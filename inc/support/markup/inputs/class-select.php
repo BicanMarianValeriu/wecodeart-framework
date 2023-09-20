@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.9
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Support\Markup\Inputs;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Support\Markup;
 use WeCodeArt\Support\Markup\Inputs\Basic;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\encode_svg_data;
 
 /**
  * Standard Inputs Markup
@@ -124,6 +125,12 @@ class Select extends Basic {
 	 * @return 	string
 	 */
 	public static function styles(): string {
+        $symbol = encode_svg_data( join( '', [
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">',
+				'<path fill="none" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2 5 6 6 6-6"/>',
+			'</svg>'
+		] ) );
+
 		return '
             select {
                 text-transform: none;
@@ -133,7 +140,7 @@ class Select extends Basic {
                 opacity: 1;
             }
             .form-select {
-                --wp--input--icon-select: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e");
+                --wp--input--icon-select: url("' . $symbol . '");
                 display: block;
                 width: 100%;
                 padding: var(--wp--input--padding-y) 2.25rem var(--wp--input--padding-y) var(--wp--input--padding-x);

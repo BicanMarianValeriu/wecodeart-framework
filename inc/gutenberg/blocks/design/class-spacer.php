@@ -59,7 +59,7 @@ class Spacer extends Dynamic {
 			}
 			.wp-block-navigation .wp-block-spacer {
 				width: 100%;
-				height: var(--wp--spacer-width);
+				height: var(--wp--spacer-width, 1px);
 				min-height: initial;
 			}
 			@media (min-width: $tablet) {

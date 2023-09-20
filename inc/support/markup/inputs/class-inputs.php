@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.1.2
- * @version		6.1.7
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Support\Markup;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Config\Interfaces\Configuration;
+use function WeCodeArt\Functions\encode_svg_data;
 
 /**
  * Standard Inputs Markup
@@ -101,18 +102,36 @@ class Inputs implements Configuration {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	6.2.0
+	 * @version	6.2.5
 	 */
 	public function assets() {
 		if( empty( self::$loaded ) ) {
 			return;
 		}
 
+		$svg_valid = [
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">',
+				'<path fill="#7dc855" d="M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z"/>',
+			'</svg>'
+		];
+
+		$svg_valid = encode_svg_data( join( '', $svg_valid ) );
+
+		$svg_invalid = [
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="#dc3545">',
+				'<circle cx="6" cy="6" r="4.5"/>',
+				'<path stroke-linejoin="round" d="M5.8 3.6h.4L6 6.5z"/>',
+				'<circle cx="6" cy="8.2" r=".6" fill="#dc3545" stroke="none"/>',
+			'</svg>'
+		];
+
+		$svg_invalid = encode_svg_data( join( '', $svg_invalid ) );
+
 		$inline_css = '
 			/* Global */
 			.wecodeart-forms {
-				--wp--input--icon-valid: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 8 8%27%3e%3cpath fill=%27%237dc855%27 d=%27M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e");
-				--wp--input--icon-invalid: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 width=%2712%27 height=%2712%27 fill=%27none%27 stroke=%27%23dc3545%27%3e%3ccircle cx=%276%27 cy=%276%27 r=%274.5%27/%3e%3cpath stroke-linejoin=%27round%27 d=%27M5.8 3.6h.4L6 6.5z%27/%3e%3ccircle cx=%276%27 cy=%278.2%27 r=%27.6%27 fill=%27%23dc3545%27 stroke=%27none%27/%3e%3c/svg%3e");
+				--wp--input--icon-valid: url("' . $svg_valid . '");
+				--wp--input--icon-invalid: url("' . $svg_invalid . '");
 				--wp--input--padding-y: .5rem;
 				--wp--input--padding-x: .75rem;
 				--wp--input--validation-size: calc(0.75em + .375rem) calc(0.75em + .375rem);

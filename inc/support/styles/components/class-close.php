@@ -9,12 +9,14 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.1.5
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
 
 defined( 'ABSPATH' ) || exit();
+
+use function WeCodeArt\Functions\encode_svg_data;
 
 /**
  * Close Styles
@@ -26,7 +28,11 @@ class Close extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		$symbol = 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%23000"%3e%3cpath d="M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z"/%3e%3c/svg%3e';
+		$symbol	= encode_svg_data( join( '', [
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">',
+				'<path d="M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z"/>',
+			'</svg>'
+		] ) );
 
 		return "
 			/* Close */

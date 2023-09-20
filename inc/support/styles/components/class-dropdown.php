@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.1.7
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -17,6 +17,7 @@ namespace WeCodeArt\Support\Styles\Components;
 defined( 'ABSPATH' ) || exit();
 
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\encode_svg_data;
 
 /**
  * Dropdown Styles
@@ -35,9 +36,13 @@ class Dropdown extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$symbol = 'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/%3E%3C/svg%3E';
-		
+		$breaks	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+		$symbol	= encode_svg_data( join( '', [
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">',
+				'<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>',
+			'</svg>'
+		] ) );
+
 		$inline = "
 			/* Dropdowns */
 			.dropup,

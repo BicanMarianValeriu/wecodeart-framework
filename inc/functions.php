@@ -9,7 +9,7 @@
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version     6.0.0
+ * @version     6.2.5
  */
 
 namespace WeCodeArt\Functions;
@@ -422,22 +422,33 @@ function change_tag_name( DOMElement $element, string $name ): DOMElement {
 }
 
 /**
- * Returns an Image placeholder source.
+ * Encode SVG string as url.
  *
- * @since   6.0.0
+ * @since   6.2.5
  *
  * @return  string
  */
-function get_placeholder_source( $encoded = true ): string {
+
+function encode_svg_data( string $svg = '' ): string {
+    // Clean SVG and covert to data URL.
+    return 'data:image/svg+xml;utf8,' . \rawurlencode( \preg_replace( '/\s+/', ' ', \str_replace( '"', "'", $svg ) ) );
+}
+
+/**
+ * Returns an Image placeholder source.
+ *
+ * @since   6.0.0
+ * @version 6.2.5
+ *
+ * @return  string
+ */
+function get_placeholder_source( bool $encoded = true ): string {
     $file = 'assets/images/placeholder-cross.svg';
 
     if( $encoded ) {
         $svg_string	= \file_get_contents( get_parent_theme_file_path( $file ) );
     
-        // Clean SVG and covert to data URL.
-        $encodedSVG = \rawurlencode( \preg_replace( '/\s+/', ' ', \str_replace( '"', "'", $svg_string ) ) );
-    
-        return 'data:image/svg+xml;utf8,' . $encodedSVG;
+        return encode_svg_data( $svg_string );
     }
     
     return get_parent_theme_file_uri( $file );

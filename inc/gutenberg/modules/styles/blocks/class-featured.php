@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.8
- * @version		6.0.0
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -32,53 +32,37 @@ class Featured extends Processor {
 	 */
 	protected function process_extra(): void {
 		$declarations	= [];
+
+		if( $value = get_prop( $this->attrs, 'aspectRatio' ) ) {
+			$declarations['aspect-ratio'] = $value;
+		}
 		
-		if( Image::use_ratio() ) {
-			$height = get_prop( $this->attrs, 'height', '' );
-			$width 	= get_prop( $this->attrs, 'width', '' );
+		$this->add_declarations( $declarations );
 
-			// We use aspect ratio istead of specific height
-			$custom_sizes 	= [];
-			$requested_size	= Image::get_image_sizes( apply_filters( 'post_thumbnail_size', 'post-thumbnail', get_the_ID() ) );
+		// Reset
+		$declarations 	= [];
 
-			if( strpos( $width, 'px' ) ) {
-				$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "",  $width );
-			}
+		if( $width = get_prop( $this->attrs, 'width' ) ) {
+			$declarations['width'] = $width;
+		}
 
-			if( strpos( $width, 'rem' ) || strpos( $width, 'em' ) ) {
-				$custom_sizes['width'] = preg_replace( "/[^0-9.]/", "", $width ) * 16;
-			}
-
-			if( strpos( $height, 'px' ) ) {
-				$custom_sizes['height'] = preg_replace( "/[^0-9.]/", "", $height );
-			}
-
-			if( strpos( $height, 'rem' ) || strpos( $height, 'em' ) ) {
-				$custom_sizes['height'] = preg_replace( "/[^0-9.]/", "", $height ) * 16;
-			}
-
-			$dummy_sizes	= wp_parse_args( $custom_sizes, $requested_size );
-
-			$declarations['--wp--width'] = absint( $dummy_sizes['width'] );
-			$declarations['--wp--height'] = absint( $dummy_sizes['height'] );
-
-			$this->add_declarations( $declarations );
-
-		} else {
-			if( $width = get_prop( $this->attrs, 'width' ) ) {
-				$declarations['width'] = $width;
-			}
-			if( $height = get_prop( $this->attrs, 'height' ) ) {
-				$declarations['height'] = $height;
-			}
-
-			$this->add_declarations( $declarations, $this->get_selector( ' img' ) );
+		if( $height = get_prop( $this->attrs, 'height' ) ) {
+			$declarations['height'] = $height;
 		}
 
 		if( $value = get_prop( $this->attrs, 'scale' ) ) {
 			$declarations['object-fit'] = $value;
-			
-			$this->add_declarations( $declarations, $this->get_selector( ' img' ) );
 		}
+
+		$this->add_declarations( $declarations, $this->get_selector( ' img' ) );
+	}
+
+	/**
+	 * Additional selectors to remove styles from.
+	 *
+	 * @return 	array
+	 */
+	public function remove_style(): array {
+		return [ 'tag_name' => 'a' ];
 	}
 }

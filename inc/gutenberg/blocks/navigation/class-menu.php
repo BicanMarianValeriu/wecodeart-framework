@@ -75,7 +75,7 @@ class Menu extends Dynamic {
 
 		// Scripts
 		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( 'wecodeart-support-assets-dropdown' ) ) {
-			wp_enqueue_script( 'wecodeart-support-assets-dropdown' );
+			\wp_enqueue_script( 'wecodeart-support-assets-dropdown' );
 		}
 		
 		// Use overlay first, fallback to nav background (or body).

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -76,12 +76,12 @@ class Social extends Dynamic {
 
 				if( array_key_exists( $classname, $loaded_styles ) && in_array( $service, $loaded_styles[$classname] ) ) continue;
 
-				$inline_css .= $this->get_inline_style( $classname , $service );
+				$inline_css .= $this->get_inline_style( $classname, $service );
 				
 				$loaded_styles[$classname][] = $service;
 			}
-			
-			wp_add_inline_style( $this->get_asset_handle(), $inline_css );
+
+			\wp_add_inline_style( $this->get_asset_handle(), $inline_css );
 		}
 
 		return $content;
@@ -149,7 +149,7 @@ class Social extends Dynamic {
 
 		// Logos only
 		if( $style === 'is-style-logos-only' ) {
-			$selector = '.wp-block-social-links.is-style-logos-only .wp-block-social-link-' . $service;
+			$selector = '.wp-block-social-links.is-style-logos-only .wp-social-link-' . $service;
 			$properties = [
 				'color'	=> $colors[$service]
 			];
@@ -174,7 +174,7 @@ class Social extends Dynamic {
 			}
 		// Default style
 		} else {
-			$selector = '.wp-block-social-links:not(.is-style-logos-only) .wp-block-social-link-' . $service;
+			$selector = '.wp-block-social-links:not(.is-style-logos-only) .wp-social-link-' . $service;
 			$properties = [
 				'background-color' => $colors[$service],
 				'color'	=> '#fff'
@@ -270,6 +270,10 @@ class Social extends Dynamic {
 			.wp-block-social-link-anchor svg {
 				width: 1em;
 				height: 1em;
+			}
+			.is-style-logos-only .wp-block-social-link-anchor svg {
+				width: 1.25em;
+				height: 1.25em;
 			}
 		";
 	}

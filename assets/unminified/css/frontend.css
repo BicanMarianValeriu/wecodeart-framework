@@ -100,8 +100,7 @@ svg {
 
 img {
   height: auto;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 svg {
@@ -153,8 +152,7 @@ progress {
 /* 	= Base
 --------------------------------------------------------------- */
 .wp-site-blocks > * + * {
-  -webkit-margin-before: 0 !important;
-          margin-block-start: 0 !important;
+  margin-block-start: 0 !important;
 }
 
 .wp-site-blocks,
@@ -648,6 +646,7 @@ progress {
 
 .has-background-dim {
   --wp--bg--opacity: 0.5;
+  opacity: var(--wp--bg--opacity);
 }
 .has-background-dim-0 {
   --wp--bg--opacity: 0;
@@ -773,7 +772,6 @@ progress {
 
 .visually-hidden,
 .visually-hidden-focusable:not(:focus):not(:focus-within) {
-  position: absolute !important;
   width: 1px !important;
   height: 1px !important;
   padding: 0 !important;
@@ -782,6 +780,10 @@ progress {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+.visually-hidden:not(caption),
+.visually-hidden-focusable:not(:focus):not(:focus-within):not(caption) {
+  position: absolute !important;
 }
 
 .screen-reader-response,
@@ -796,7 +798,6 @@ progress {
 }
 .screen-reader-response:not(:focus):not(:focus-within),
 .screen-reader-text:not(:focus):not(:focus-within) {
-  position: absolute !important;
   width: 1px !important;
   height: 1px !important;
   padding: 0 !important;
@@ -805,6 +806,10 @@ progress {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+.screen-reader-response:not(:focus):not(:focus-within):not(caption),
+.screen-reader-text:not(:focus):not(:focus-within):not(caption) {
+  position: absolute !important;
 }
 
 .hstack {

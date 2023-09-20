@@ -1,3 +1,11 @@
+v6.2.5
+- Updated - core/search dequeue default JavaScript view handle (not necessary, we use modal and we load only on demand)
+- Removed - core/post-featured-image old aspect ratio approach (aspect-ratio css property has good support now)
+- Removed - unnecessary wp_enqueue_scripts action from some blocks
+- Fixed - core/social-links default social services colors
+- Added - core/post-featured-image support for overlay
+- Added - encode_svg_data function to convert svg to data url
+
 v6.2.4
 - Fixed - wrong $this context usage in blocks/class-image.php
 

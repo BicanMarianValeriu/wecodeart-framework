@@ -1,16 +1,16 @@
-/******/ (() => { // webpackBootstrap
+/******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/js/frontend/helpers/camelCase.js":
 /*!**********************************************!*\
   !*** ./src/js/frontend/helpers/camelCase.js ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ camelCase)
+/* harmony export */   "default": function() { return /* binding */ camelCase; }
 /* harmony export */ });
 /**
  * camelCase
@@ -31,12 +31,12 @@ function camelCase(str) {
 /*!***********************************************!*\
   !*** ./src/js/frontend/helpers/getParents.js ***!
   \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getParents)
+/* harmony export */   "default": function() { return /* binding */ getParents; }
 /* harmony export */ });
 /**
  * Get element parents
@@ -45,17 +45,14 @@ __webpack_require__.r(__webpack_exports__);
  */
 function getParents(elem, selector) {
   const parents = [];
-
   while (elem && elem !== document) {
     if (selector && elem.matches(selector)) {
       parents.push(elem);
     } else if (!selector) {
       parents.push(elem);
     }
-
     elem = elem.parentNode;
   }
-
   return parents;
 }
 ;
@@ -66,26 +63,29 @@ function getParents(elem, selector) {
 /*!*************************************************!*\
   !*** ./src/js/frontend/helpers/hasScrollbar.js ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ hasScrollbar),
-/* harmony export */   "handleBodyJSClass": () => (/* binding */ handleBodyJSClass),
-/* harmony export */   "handleDocumentScrollbar": () => (/* binding */ handleDocumentScrollbar),
-/* harmony export */   "handleDocumentScrolled": () => (/* binding */ handleDocumentScrolled)
+/* harmony export */   "default": function() { return /* binding */ hasScrollbar; },
+/* harmony export */   handleBodyJSClass: function() { return /* binding */ handleBodyJSClass; },
+/* harmony export */   handleDocumentScrollbar: function() { return /* binding */ handleDocumentScrollbar; },
+/* harmony export */   handleDocumentScrolled: function() { return /* binding */ handleDocumentScrolled; }
 /* harmony export */ });
 function hasScrollbar(el) {
   // The Modern solution
-  if (typeof window.innerWidth === 'number') return window.innerWidth > document.documentElement.clientWidth; // Elem for quirksmode
+  if (typeof window.innerWidth === 'number') return window.innerWidth > document.documentElement.clientWidth;
 
-  const elem = el || document.documentElement || document.body; // Check overflow style property on body for fauxscrollbars
+  // Elem for quirksmode
+  const elem = el || document.documentElement || document.body;
 
+  // Check overflow style property on body for fauxscrollbars
   let overflowStyle;
   if (typeof elem.currentStyle !== 'undefined') overflowStyle = elem.currentStyle.overflow;
-  overflowStyle = overflowStyle || window.getComputedStyle(elem, '').overflow; // Also need to check the Y axis overflow
+  overflowStyle = overflowStyle || window.getComputedStyle(elem, '').overflow;
 
+  // Also need to check the Y axis overflow
   let overflowYStyle;
   if (typeof elem.currentStyle !== 'undefined') overflowYStyle = elem.currentStyle.overflowY;
   overflowYStyle = overflowYStyle || window.getComputedStyle(elem, '').overflowY;
@@ -95,23 +95,19 @@ function hasScrollbar(el) {
   return contentOverflows && overflowShown || alwaysShowScroll;
 }
 ;
-
 const handleDocumentScrolled = () => {
   const html = document.documentElement;
   html.classList[window.scrollY > 1 ? 'add' : 'remove']('has-scrolled');
 };
-
 const handleDocumentScrollbar = () => {
   const html = document.documentElement;
   html.classList[hasScrollbar() ? 'add' : 'remove']('has-scrollbar');
 };
-
 const handleBodyJSClass = () => {
   const html = document.documentElement;
   html.classList.remove('no-js');
   html.classList.add('js');
 };
-
 
 
 /***/ }),
@@ -120,12 +116,12 @@ const handleBodyJSClass = () => {
 /*!*************************************************!*\
   !*** ./src/js/frontend/helpers/paramsCreate.js ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": function() { return /* export default binding */ __WEBPACK_DEFAULT_EXPORT__; }
 /* harmony export */ });
 /**
  * Generate String Params
@@ -146,13 +142,10 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************!*\
   !*** ./src/js/frontend/helpers/paramsUpdate.js ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
 /**
  * Update String Params
  * @param  {string} uri The URI to update
@@ -160,14 +153,12 @@ __webpack_require__.r(__webpack_exports__);
  * @param  {string} value The new value for the parameter
  * @return {string} The updated URI
  */
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((uri, key, value) => {
+/* harmony default export */ __webpack_exports__["default"] = ((uri, key, value) => {
   const re = new RegExp(`([?&])${key}=.*?(&|$)`, "i");
   const separator = uri.includes('?') ? "&" : "?";
-
   if (uri.match(re)) {
     return uri.replace(re, `$1${key}=${value}$2`);
   }
-
   return uri + separator + `${key}=${value}`;
 });
 
@@ -177,12 +168,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************!*\
   !*** ./src/js/frontend/helpers/parseData.js ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ parseData)
+/* harmony export */   "default": function() { return /* binding */ parseData; }
 /* harmony export */ });
 /**
  * Parse data attrs
@@ -210,12 +201,12 @@ function parseData(opts) {
 /*!**********************************************!*\
   !*** ./src/js/frontend/helpers/requireJs.js ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ require)
+/* harmony export */   "default": function() { return /* binding */ require; }
 /* harmony export */ });
 function require(bundles, bundleIds, callbackFn) {
   const {
@@ -236,14 +227,11 @@ function require(bundles, bundleIds, callbackFn) {
 /*!********************************************************!*\
   !*** ./src/js/frontend/plugins/wecodeart-Component.js ***!
   \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
+/* harmony default export */ __webpack_exports__["default"] = ((function (wecodeart) {
   class Component {
     /**
      * Generic constructor for all components
@@ -255,25 +243,22 @@ __webpack_require__.r(__webpack_exports__);
       // Display error if el is valid HTML Element
       if (!(el instanceof Element)) {
         console.error(Error(el + ' is not an HTML Element'));
-      } // If exists, destroy and reinitialize in child
+      }
 
-
+      // If exists, destroy and reinitialize in child
       const ins = classDef.getInstance(el);
-
       if (!!ins) {
         ins.destroy();
       }
-
       this.el = el;
     }
+
     /**
      * Initializes components
      * @param {class} classDef
      * @param {Element | NodeList | jQuery} els
      * @param {Object} options
      */
-
-
     static init(classDef, els, options) {
       const {
         fn: {
@@ -281,30 +266,24 @@ __webpack_require__.r(__webpack_exports__);
         }
       } = wecodeart;
       let instances = null;
-
       if (els instanceof Element) {
         instances = new classDef(els, options);
       } else if (!!els && (els.jquery || els instanceof NodeList)) {
         let instancesArr = [];
-
         for (let i = 0; i < els.length; i++) {
           const mergedOptions = Object.assign({}, options, getOptions(els[i].dataset.options));
           instancesArr.push(new classDef(els[i], mergedOptions));
         }
-
         instances = instancesArr;
       }
-
       return instances;
     }
-
   }
+
   /**
    * @static
    * @memberof Component
    */
-
-
   wecodeart.Component = Component;
   wecodeart.plugins.Component = Component;
 }).apply(undefined, [window.wecodeart]));
@@ -315,22 +294,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************!*\
   !*** ./src/js/frontend/plugins/wecodeart-JSManager.js ***!
   \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
 /* harmony import */ var _helpers_camelCase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/camelCase */ "./src/js/frontend/helpers/camelCase.js");
 /* harmony import */ var _helpers_requireJs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/requireJs */ "./src/js/frontend/helpers/requireJs.js");
+
 
 
 /**
  * Utility to trigger JS code based on clasname routing
  */
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
+/* harmony default export */ __webpack_exports__["default"] = ((function (wecodeart) {
   class JSManager {
     /**
      * Generic constructor 
@@ -352,28 +328,21 @@ __webpack_require__.r(__webpack_exports__);
       this.loaded = [];
       this.doAction = doAction;
       this.applyFilters = applyFilters;
-      this.extendedR = Object.keys(routes).filter(k => {
-        var _routes$k;
-
-        return ((_routes$k = routes[k]) === null || _routes$k === void 0 ? void 0 : _routes$k.extends) && routes[k].extends instanceof Array;
-      });
+      this.extendedR = Object.keys(routes).filter(k => routes[k]?.extends && routes[k].extends instanceof Array);
     }
+
     /**
      * Meant to be run on load
      * @info 	It handles all necessary JS init from routes
      */
-
-
     fireRoute(route, funcname, args) {
       let fire;
       funcname = funcname === undefined ? 'init' : funcname;
       fire = route !== '';
       fire = fire && this.routes[route];
       fire = fire && (typeof this.routes[route][funcname] === 'function' || typeof this.routes[route][funcname] === 'object');
-
       if (fire) {
         args = this.applyFilters('wecodeart.route', args, route, funcname);
-
         if (typeof this.routes[route][funcname] === 'object') {
           const {
             id: bundleIds = [],
@@ -382,70 +351,60 @@ __webpack_require__.r(__webpack_exports__);
           } = this.routes[route][funcname];
           const condMeet = typeof condition === 'function' ? condition() !== false : condition;
           const missingBundles = [...bundleIds].filter(k => !Object.keys(this.lazyJs).includes(k));
-
           if (condMeet) {
             if (missingBundles.length) {
               const message = `WeCodeArt JSM - Route "${route}" is missing the lazy bundle(s): ${missingBundles.join(', ')}. Please add them before using.`;
               console.log(message);
               return;
             }
-
             (0,_helpers_requireJs__WEBPACK_IMPORTED_MODULE_1__["default"])(this.lazyJs, bundleIds, () => {
               callback(args);
               this.doAction('wecodeart.route', route, funcname, args);
               this.loaded.push(route);
             });
           }
-
           return;
         }
-
         this.routes[route][funcname](args);
         this.doAction('wecodeart.route', route, funcname, args);
         this.loaded.push(route);
         return;
       }
     }
+
     /**
      * Meant to be run on load
      * @info 	It handles all necessary JS init from routes
      */
-
-
     sequence(route) {
       if (this.loaded.includes(route)) return;
       this.fireRoute(route);
       this.fireRoute(route, 'complete');
       this.fireRoute(route, 'lazy');
     }
+
     /**
      * Meant to be run on load
      * @info 	It handles all necessary JS init from routes
      */
-
-
     loadEvents() {
       this.fireRoute('common');
-
       for (let cls of document.body.classList) {
-        const route = (0,_helpers_camelCase__WEBPACK_IMPORTED_MODULE_0__["default"])(cls.toLowerCase().replace(/-/g, '_')); // Fire Manual Routes
-
-        this.sequence(route); // Additional Extended Routes
-
+        const route = (0,_helpers_camelCase__WEBPACK_IMPORTED_MODULE_0__["default"])(cls.toLowerCase().replace(/-/g, '_'));
+        // Fire Manual Routes
+        this.sequence(route);
+        // Additional Extended Routes
         this.extendedR.filter(k => this.routes[k].extends.includes(cls) && this.sequence(k));
       }
-
       this.fireRoute('common', 'complete');
       this.fireRoute('common', 'lazy');
     }
-
   }
+
   /**
    * @static
    * @memberof JSManager
    */
-
-
   wecodeart.JSM = JSManager;
 }).apply(undefined, [window.wecodeart]));
 
@@ -455,24 +414,20 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./src/js/frontend/plugins/wecodeart-Template.js ***!
   \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
 /**
  * Template Submit
  * @author 	Bican Marian Valeriu
  * @version 1.0.0
  */
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
+/* harmony default export */ __webpack_exports__["default"] = ((function (wecodeart) {
   const {
     Component
   } = wecodeart;
   const pluginDefaults = {};
-
   class Template extends Component {
     /**
      * Construct Animate instance
@@ -486,35 +441,31 @@ __webpack_require__.r(__webpack_exports__);
        * Options for the animation
        * @member YTIframe#options
        */
-
       this.options = Object.assign({}, Template.defaults, {}, options);
     }
-
     static get defaults() {
       return pluginDefaults;
     }
-
     static get registered() {
       return Template._templates;
     }
+
     /**
      * Add a template
      *
      * @param {string} name Give the template a name
      * @param {function} render Render Function for the template
      */
-
-
     static addTemplate(name, render) {
       if (typeof render !== 'function') {
         return console.warn(`Templates: ${name} - The 'render' argument must be a function.`);
       }
-
       Template._templates.push({
         name,
         render
       });
     }
+
     /**
      * Render a template
      *
@@ -523,21 +474,15 @@ __webpack_require__.r(__webpack_exports__);
      *
      * @return 	DOM Element
      */
-
-
     static render() {
       let name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'sample';
       let data = arguments.length > 1 ? arguments[1] : undefined;
-
       const child = Template._templates.filter(item => item.name === name).shift();
-
       if (child) {
         return child.render(data);
       }
-
       return console.warn(`Template:: There is no registered template with the name of "${name}".`);
     }
-
     /**
      * Render variables to string
      *
@@ -549,22 +494,18 @@ __webpack_require__.r(__webpack_exports__);
     static renderToString() {
       let string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       let variables = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-      const destruct = (obj, v) => v.split(/\.|\|/).reduce((v, k) => v === null || v === void 0 ? void 0 : v[k], obj); // Multiple
-
-
+      const destruct = (obj, v) => v.split(/\.|\|/).reduce((v, k) => v?.[k], obj); // Multiple
       const rxp = /{{([^}]+)}}/g;
       let match;
-
       while (match = rxp.exec(string)) {
         const expression = match[1];
         const value = destruct(variables, expression.trim());
         if (value === undefined) continue;
         string = string.replace(new RegExp(`{{${expression}}}`, 'g'), value);
       }
-
       return string;
     }
+
     /**
      * Render variables to HTML Object
      *
@@ -573,8 +514,6 @@ __webpack_require__.r(__webpack_exports__);
      *
      * @return 	{HTMLElement}
      */
-
-
     static renderToHTML() {
       let string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       let variables = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -582,21 +521,19 @@ __webpack_require__.r(__webpack_exports__);
       wrapper.innerHTML = Template.renderToString(string, variables);
       return wrapper.firstChild;
     }
-
   }
+
   /**
    * @static
    * @memberof Template
    */
-
-
   Template._templates = [];
   wecodeart.Template = Template;
   wecodeart.plugins.Template = Template;
+
   /**
    * Add A Basic Sample Template
    */
-
   Template.addTemplate('sample', data => {
     const postHTML = document.createElement('div');
     const {
@@ -729,8 +666,9 @@ function loadFile(path, callbackFn, args, numTries) {
       maxTries = (args.numRetries || 0) + 1,
       beforeCallbackFn = args.before || devnull,
       pathname = path.replace(/[\?|#].*$/, ''),
-      pathStripped = path.replace(/^(css|img)!/, ''),
+      pathStripped = path.replace(/^(css|img|module|nomodule)!/, ''),
       isLegacyIECss,
+      hasModuleSupport,
       e;
 
   numTries = numTries || 0;
@@ -757,8 +695,21 @@ function loadFile(path, callbackFn, args, numTries) {
   } else {
     // javascript
     e = doc.createElement('script');
-    e.src = path;
+    e.src = pathStripped;
     e.async = async === undefined ? true : async;
+
+    // handle es modules
+    // modern browsers:
+    //   module: add to dom with type="module"
+    //   nomodule: call success() callback without adding to dom
+    // legacy browsers:
+    //   module: call success() callback without adding to dom
+    //   nomodule: add to dom with default type ("text/javascript")
+    hasModuleSupport = 'noModule' in e;
+    if (/^module!/.test(pathname)) {
+      if (!hasModuleSupport) return callbackFn(path, 'l');
+      e.type = "module";
+    } else if (/^nomodule!/.test(pathname) && hasModuleSupport) return callbackFn(path, 'l');
   }
 
   e.onload = e.onerror = e.onbeforeload = function (ev) {
@@ -939,7 +890,7 @@ return loadjs;
 /*!*****************************************!*\
   !*** ./src/scss/frontend/frontend.scss ***!
   \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -976,49 +927,49 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
+/******/ 		__webpack_require__.n = function(module) {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 		__webpack_require__.d = function(exports, definition) {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
+/******/ 		__webpack_require__.r = function(exports) {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
+!function() {
 "use strict";
 /*!**********************************!*\
   !*** ./src/js/frontend/index.js ***!
@@ -1046,25 +997,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Styles
 
+
+// Styles
 
 const {
   addAction
 } = wp.hooks;
 addAction('wecodeart.route', 'wecodeart/developer/log', filterLog, 10);
-
 function filterLog(route, func, args) {
   const {
     isDevMode = false
   } = wecodeart;
-
   if (isDevMode) {
     console.log('Loaded: ', route, '::', func);
     if (args) console.log(args);
   }
 }
-
 (function (wecodeart) {
   /**
    * Base WCA Functions
@@ -1086,7 +1035,6 @@ function filterLog(route, func, args) {
    * This helps us to avoid updating multiple files and/or use multiple sources of the same script
    * @see example under common key and below
    */
-
   wecodeart.lazyJs = {
     // Use for popups
     'sweetalert': ['//unpkg.com/sweetalert2@11.4.18/dist/sweetalert2.min.css', '//unpkg.com/sweetalert2@11.4.18/dist/sweetalert2.min.js'],
@@ -1096,52 +1044,52 @@ function filterLog(route, func, args) {
   wecodeart.routes = {
     common: {
       init: () => {
-        var _wecodeart$locale;
-
         (0,_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleBodyJSClass)();
         (0,_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleDocumentScrolled)();
         (0,_helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleDocumentScrollbar)();
         window.onresize = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleDocumentScrollbar;
-        window.onscroll = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleDocumentScrolled; // Handle Skip Links
+        window.onscroll = _helpers_hasScrollbar__WEBPACK_IMPORTED_MODULE_9__.handleDocumentScrolled;
 
+        // Handle Skip Links
         let skipLinkTarget = document.querySelector('main'),
-            sibling,
-            skipLinkTargetID,
-            skipLink; // Early exit if a skip-link target can't be located.
+          sibling,
+          skipLinkTargetID,
+          skipLink;
 
+        // Early exit if a skip-link target can't be located.
         if (!skipLinkTarget) {
           return;
-        } // Get the site wrapper.
+        }
+
+        // Get the site wrapper.
         // The skip-link will be injected in the beginning of it.
+        sibling = document.querySelector('.wp-site-blocks');
 
-
-        sibling = document.querySelector('.wp-site-blocks'); // Early exit if the root element was not found.
-
+        // Early exit if the root element was not found.
         if (!sibling) {
           return;
-        } // Get the skip-link target's ID, and generate one if it doesn't exist.
+        }
 
-
+        // Get the skip-link target's ID, and generate one if it doesn't exist.
         skipLinkTargetID = skipLinkTarget.id;
-
         if (!skipLinkTargetID) {
           skipLinkTargetID = 'wp--skip-link--target';
           skipLinkTarget.id = skipLinkTargetID;
-        } // Create the skip link.
+        }
 
-
+        // Create the skip link.
         skipLink = document.createElement('a');
         skipLink.classList.add('skip-link', 'screen-reader-text');
         skipLink.href = '#' + skipLinkTargetID;
-        skipLink.innerHTML = wecodeart === null || wecodeart === void 0 ? void 0 : (_wecodeart$locale = wecodeart.locale) === null || _wecodeart$locale === void 0 ? void 0 : _wecodeart$locale.skipLink; // Inject the skip link.
+        skipLink.innerHTML = wecodeart?.locale?.skipLink;
 
+        // Inject the skip link.
         sibling.parentElement.insertBefore(skipLink, sibling);
       }
     }
   };
 }).apply(undefined, [window.wecodeart]);
-})();
-
+}();
 /******/ })()
 ;
 //# sourceMappingURL=frontend.js.map

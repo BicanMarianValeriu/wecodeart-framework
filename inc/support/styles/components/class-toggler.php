@@ -9,12 +9,14 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.1.7
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
 
 defined( 'ABSPATH' ) || exit();
+
+use function WeCodeArt\Functions\encode_svg_data;
 
 /**
  * Toggler Styles
@@ -26,7 +28,11 @@ class Toggler extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		$symbol	= 'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3e%3cpath stroke="black" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3e%3c/svg%3e';
+		$symbol	= encode_svg_data( join( '', [
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">',
+				'<path stroke="black" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/>',
+			'</svg>'
+		] ) );
 
 		return "
 			/* Toggler */

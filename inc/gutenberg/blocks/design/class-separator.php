@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.1
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -26,6 +26,7 @@ use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_dom_element;
 use function WeCodeArt\Functions\change_tag_name;
+use function WeCodeArt\Functions\encode_svg_data;
 
 /**
  * Gutenberg Separator block.
@@ -131,7 +132,7 @@ class Separator extends Dynamic {
 			if( in_array( $class, [ 'is-style-dots', 'is-style-faded' ] ) && ! in_array( $class, $styles ) ) {
 				$style 	= self::get_style( $class );
 	
-				add_action( 'wp_enqueue_scripts', static fn() => wp_add_inline_style( $handle, $style ) );
+				\wp_add_inline_style( $handle, $style );
 	
 				$styles[] = $class;
 			}
@@ -222,8 +223,7 @@ class Separator extends Dynamic {
 
 			$svg_string	= \file_get_contents( get_prop( $data, [ 'file' ] ) );
 			// Clean SVG and covert to data URL.
-			$encodedSVG = \rawurlencode( \preg_replace( '/\s+/', ' ', \str_replace( '"', "'", $svg_string ) ) );
-			$encodedSVG = 'data:image/svg+xml;utf8,' . $encodedSVG;
+			$encodedSVG = encode_svg_data( $svg_string );
 
 			$inline = "
 				.wp-block-separator.{$class}::before {

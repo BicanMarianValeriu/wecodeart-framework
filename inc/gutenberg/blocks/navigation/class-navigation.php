@@ -190,24 +190,22 @@ class Navigation extends Dynamic {
 		$attrs		= $this->get_wrapper_attributes( $attributes );
 
 		// This CSS holds the block customization.
-		if( ! wp_style_is( 'wp-block-' . $this->block_name . '-custom' ) ) {
-			wp_register_style( 'wp-block-' . $this->block_name . '-custom', '', [
-				'wp-block-' . $this->block_name
-			], wecodeart( 'version' ) );
-			wp_enqueue_style( 'wp-block-' . $this->block_name . '-custom' );
+		if( ! wp_style_is( $this->get_asset_handle() . '-custom' ) ) {
+			\wp_register_style( $this->get_asset_handle() . '-custom', '', [ $this->get_asset_handle() ], wecodeart( 'version' ) );
+			\wp_enqueue_style( $this->get_asset_handle() . '-custom' );
 		}
 
 		// Add Expand CSS.
 		$classname = get_prop( $attrs, [ 'class' ], '' );
 		if( strpos( $classname, 'navbar-expand' ) !== false ) {
-			wp_add_inline_style( 'wp-block-' . $this->block_name . '-custom', $this->get_responsive_styles( 'expand' ) );
+			\wp_add_inline_style( $this->get_asset_handle() . '-custom', $this->get_responsive_styles( 'expand' ) );
 		}
 
 		// Add Themes CSS.
 		preg_match( '/navbar-(light|dark)/i', $classname, $navbar_theme );
 		if( count( $navbar_theme ) && ! in_array( current( $navbar_theme ), self::$themes_loaded ) ) {
 
-			wp_add_inline_style( 'wp-block-' . $this->block_name . '-custom', $this->get_color_styles( current( $navbar_theme ) ) );
+			\wp_add_inline_style( $this->get_asset_handle() . '-custom', $this->get_color_styles( current( $navbar_theme ) ) );
 			
 			self::$themes_loaded[] = current( $navbar_theme );
 		}
@@ -233,7 +231,7 @@ class Navigation extends Dynamic {
 				// Styles
 				if( is_null( self::$responsive_loaded ) ) {
 
-					wp_add_inline_style( 'wp-block-' . $this->block_name . '-custom', $this->get_responsive_styles() );
+					\wp_add_inline_style( 'wp-block-' . $this->block_name . '-custom', $this->get_responsive_styles() );
 					
 					self::$responsive_loaded = true;
 				}
@@ -626,7 +624,7 @@ class Navigation extends Dynamic {
 							align-items: inherit;
 						}
 						.wp-block-navigation.navbar-expand-{$key} .wp-block-spacer {
-							width: var(--wp--spacer-width);
+							width: var(--wp--spacer-width, 1px);
 							vertical-align: -.125em;
 							height: 1em;
 						}

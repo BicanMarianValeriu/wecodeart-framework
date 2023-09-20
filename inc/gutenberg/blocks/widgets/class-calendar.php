@@ -59,7 +59,7 @@ class Calendar extends Dynamic {
 	public function render( string $content = '' ) {
 		// Enqueue Table CSS
 		if( ! wp_style_is( 'wp-block-table' ) ) {
-			wp_add_inline_style(
+			\wp_add_inline_style(
 				$this->get_asset_handle(), 
 				wecodeart( 'styles' )::compress( wecodeart( 'blocks' )->get( 'core/table' )::get_instance()->styles() )
 			);

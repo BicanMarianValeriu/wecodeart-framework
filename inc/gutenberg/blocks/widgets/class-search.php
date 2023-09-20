@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.7
+ * @version		6.2.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -52,10 +52,11 @@ class Search extends Dynamic {
 		$supports 	= get_prop( $current, [ 'supports' ], [] );
 
 		return [
-			'supports'	=> wp_parse_args( [
+			'render_callback' 		=> [ $this, 'render' ],
+			'view_script_handles'	=> [],
+			'supports'				=> wp_parse_args( [
 				'__experimentalSelector' => ' :where(.wp-block-search__input,.wp-block-search__button)',
 			], $supports ),
-			'render_callback' => [ $this, 'render' ]
 		];
 	}
 
