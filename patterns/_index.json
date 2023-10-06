@@ -5,28 +5,24 @@
         "description": "A simple author box.",
         "categories": [
             "wecodeart", "wecodeart-elements"
-        ]
+        ],
+        "inserter": false
     },
     {
         "slug": "el-entry-meta",
         "title": "Entry Meta",
         "categories": [
             "wecodeart", "wecodeart-elements"
-        ]
+        ],
+        "inserter": false
     },
     {
         "slug": "el-entry-overlay",
         "title": "Entry (Overlay)",
         "categories": [
             "wecodeart", "wecodeart-elements"
-        ]
-    },
-    {
-        "slug": "el-entry-meta",
-        "title": "Entry Meta",
-        "categories": [
-            "wecodeart", "wecodeart-elements"
-        ]
+        ],
+        "inserter": false
     },
     {
         "slug": "el-pricing",

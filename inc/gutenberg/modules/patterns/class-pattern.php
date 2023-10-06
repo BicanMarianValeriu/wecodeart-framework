@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Pattern
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.8
+ * @version		6.2.6
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Patterns;
@@ -169,7 +169,7 @@ class Pattern {
 			'templateTypes'	=> $this->templateTypes,
 			'blockTypes' 	=> $this->blockTypes,
 			'inserter' 		=> $this->inserter,
-        ] );
+        ], fn( $v ) => is_bool( $v ) || ! empty( $v ) || $v === 0 );
 
         register_block_pattern( $this->get_name(), $args );
     }

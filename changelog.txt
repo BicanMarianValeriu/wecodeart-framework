@@ -1,3 +1,7 @@
+v6.2.6
+- Updated - Hide some patterns from inserter (post meta, author box, post entry template)
+- Fixed - issue with HTML pattern registration when trying to hide a pattern from inserter
+
 v6.2.5
 - Updated - core/search dequeue default JavaScript view handle (not necessary, we use modal and we load only on demand)
 - Removed - core/post-featured-image old aspect ratio approach (aspect-ratio css property has good support now)
