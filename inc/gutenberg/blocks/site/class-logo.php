@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.2
- * @version		6.0.0
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -28,7 +28,8 @@ use function file_exists;
 use function file_get_contents;
 use function get_template_directory;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_dom_element;
+use function WeCodeArt\Functions\dom_get_element;
+use function WeCodeArt\Functions\dom_image_2_svg;
 
 /**
  * Gutenberg Site Logo block.
@@ -103,9 +104,9 @@ class Logo extends Dynamic {
 	 */
 	public function render( string $content = '' ): string {
 		$dom	= $this->dom( $content );
-		$div  	= get_dom_element( 'div', $dom );
-		$link 	= get_dom_element( 'a', $div );
-		$img  	= get_dom_element( 'img', $link ?? $div );
+		$div  	= dom_get_element( 'div', $dom );
+		$link 	= dom_get_element( 'a', $div );
+		$img  	= dom_get_element( 'img', $link ?? $div );
 
 		// If no image, bail early.
 		if ( ! $img ) {
@@ -121,25 +122,7 @@ class Logo extends Dynamic {
 
 		// If image is SVG, import it.
 		if ( str_contains( $content, '.svg' ) ) {
-			$file = str_replace( content_url(), dirname( dirname( get_template_directory() ) ), $img->getAttribute( 'src' ) );
-	
-			if ( ! file_exists( $file ) ) {
-				return $content;
-			}
-	
-			$svg = $dom->importNode( $this->dom( file_get_contents( $file ) )->documentElement, true );
-	
-			if ( ! method_exists( $svg, 'setAttribute' ) ) {
-				return $content;
-			}
-	
-			$svg->setAttribute( 'class', $img->getAttribute( 'class' ) );
-			$svg->setAttribute( 'width', $img->getAttribute( 'width' ) );
-			$svg->setAttribute( 'height', $img->getAttribute( 'height' ) );
-			$svg->setAttribute( 'aria-label', $img->getAttribute( 'alt' ) );
-	
-			( $link ?? $div )->removeChild( $img );
-			( $link ?? $div )->appendChild( $svg );
+			dom_image_2_svg( $dom, $link ?? $div, $img, [], $content );
 		}
 
 		return $dom->saveHTML();

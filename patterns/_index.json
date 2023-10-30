@@ -28,6 +28,7 @@
         "slug": "el-pricing",
         "title": "Pricing Box",
         "description": "A simple pricing box.",
+        "viewportWidth": 550,
         "categories": [
             "wecodeart", "wecodeart-elements"
         ]
@@ -36,6 +37,16 @@
         "slug": "el-pricing-featured",
         "title": "Pricing Box (Featured)",
         "description": "A featured pricing box.",
+        "viewportWidth": 550,
+        "categories": [
+            "wecodeart", "wecodeart-elements"
+        ]
+    },
+    {
+        "slug": "el-pricing-dark",
+        "title": "Pricing Box (Dark)",
+        "description": "A dark pricing box.",
+        "viewportWidth": 550,
         "categories": [
             "wecodeart", "wecodeart-elements"
         ]
@@ -44,6 +55,7 @@
         "slug": "el-testimonial",
         "title": "Testimonial",
         "description": "A simple testimonial.",
+        "viewportWidth": 550,
         "categories": [
             "wecodeart", "wecodeart-elements"
         ]
@@ -52,6 +64,7 @@
         "slug": "el-badge",
         "title": "Badge",
         "description": "A simple badge.",
+        "viewportWidth": 250,
         "categories": [
             "wecodeart", "wecodeart-elements"
         ]

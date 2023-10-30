@@ -9,7 +9,7 @@
  * @subpackage  RankMath\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.2
- * @version		6.2.0
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Support\Plugins\RankMath\Blocks;
@@ -20,9 +20,9 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_dom_element;
-use function WeCodeArt\Functions\change_tag_name;
-use function WeCodeArt\Functions\get_elements_by_class_name;
+use function WeCodeArt\Functions\dom_get_element;
+use function WeCodeArt\Functions\dom_change_tag;
+use function WeCodeArt\Functions\dom_elements_by_class;
 
 /**
  * Gutenberg RankMath FAQ block.
@@ -52,7 +52,8 @@ class Faq extends Dynamic {
 	 */
 	public function block_type_args(): array {
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback'  	=> [ $this, 'render' ],
+			'style'				=> 'wp-block-details'
 		];
 	}
 
@@ -69,12 +70,12 @@ class Faq extends Dynamic {
 		
 		if( $condition ) { // Apply only for default styleing with div titles (so we respect block settings).
 			$dom		= $this->dom( $content );
-			$sections	= get_elements_by_class_name( $dom, 'rank-math-faq-item' );
+			$sections	= dom_elements_by_class( $dom, 'rank-math-faq-item' );
 	
 			if( count( $sections ) ) {
 				foreach( $sections as $section ) {
-					$section = change_tag_name( $section, 'details' );
-					$summary = change_tag_name( get_elements_by_class_name( $section, 'rank-math-question', 'div', 0 ), 'summary' );
+					$section = dom_change_tag( $section, 'details' );
+					$summary = dom_change_tag( dom_elements_by_class( $section, 'rank-math-question', 'div', 0 ), 'summary' );
 				}
 			}
 
@@ -84,27 +85,5 @@ class Faq extends Dynamic {
 		}
 
 		return (string) $content;
-	}
-
-	/**
-	 * Block styles.
-	 *
-	 * @return 	string Block CSS.
-	 */
-	public function enqueue_styles() {
-		parent::enqueue_styles();
-
-		wecodeart( 'assets' )->add_style( 'wp-block-details', [
-			'load'		=> function( $blocks ) {
-				if( wp_style_is( 'wp-block-details' ) ) {
-					return false;
-				}
-
-				if( in_array( $this->get_block_type(), $blocks, true ) ) {
-					return true;
-				}
-			},
-			'inline'	=> wecodeart( 'blocks' )->get( 'core/details' )::get_instance()->styles()
-		] );
 	}
 }

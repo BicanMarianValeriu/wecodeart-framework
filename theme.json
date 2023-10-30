@@ -406,6 +406,9 @@
 						"bottom": "var:style|block-gap"
 					}
 				}
+			},
+			"core/read-more": {
+				"css": "display:block;width:fit-content;"
 			}
 		},
 		"elements": {
@@ -433,6 +436,9 @@
 						"left": "1.25rem",
 						"right": "1.25rem"
 					}
+				},
+				":hover": {
+					"shadow": "var:preset|shadow|md"
 				}
 			},
 			"heading": {

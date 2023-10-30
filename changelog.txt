@@ -1,3 +1,16 @@
+v6.2.7
+- Updated - added "viewportWidth" to some of the patterns for a scaled preview in the inserter
+- Updated - core/logo SVG import using dom_image_2_svg
+- Updated - core/image SVG import using dom_image_2_svg
+- Updated - core/read-more default styles
+- Updated - core/group marquee styles default attributes
+- Updated - default Hero with background pattern (removed unnecessary group block)
+- Updated - prefixed DOM functions with dom_ and created aliases for them
+- Updated - style deps enqueue method for some of the blocks that might require other block styles (Calendar, FAQ, Pagination, etc)
+- Added - dark pricing box pattern variation
+- Added - dom_image_2_svg to import SVG images into DOMDocument class
+- Added - buttons shadow on hover
+
 v6.2.6
 - Updated - Hide some patterns from inserter (post meta, author box, post entry template)
 - Fixed - issue with HTML pattern registration when trying to hide a pattern from inserter

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.0.0
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -20,7 +20,7 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\dom_element;
-use function WeCodeArt\Functions\get_dom_element;
+use function WeCodeArt\Functions\dom_get_element;
 
 /**
  * Gutenberg Group blocks.
@@ -101,7 +101,7 @@ class Group extends Dynamic {
 	 */
 	public function create_marquee( $attributes, $content ) {
 		$dom 	= $this->dom( (string) $content );
-		$div 	= get_dom_element( 'div', $dom );
+		$div 	= dom_get_element( 'div', $dom );
 		
 		$wrap	= $dom->createElement( 'div' );
 		$wrap->setAttribute( 'class', 'wp-block-group__marquee' );

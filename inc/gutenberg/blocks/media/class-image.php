@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -19,8 +19,9 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_dom_element;
 use function WeCodeArt\Functions\get_placeholder_source;
+use function WeCodeArt\Functions\dom_get_element;
+use function WeCodeArt\Functions\dom_image_2_svg;
 
 /**
  * Gutenberg Image block.
@@ -82,9 +83,9 @@ class Image extends Dynamic {
 	 */
 	public function render( array $attributes = [], string $content = '' ): string {
 		$dom	= $this->dom( $content );
-		$div  	= get_dom_element( 'figure', $dom );
-		$link 	= get_dom_element( 'a', $div );
-		$img  	= get_dom_element( 'img', $link ?? $div );
+		$div  	= dom_get_element( 'figure', $dom );
+		$link 	= dom_get_element( 'a', $div );
+		$img  	= dom_get_element( 'img', $link ?? $div );
 
 		// If no image, use placeholder.
 		if ( $img && ! $img->getAttribute( 'src' ) ) {
@@ -92,44 +93,17 @@ class Image extends Dynamic {
 			$img->setAttribute( 'src', get_placeholder_source() );
 			$img->setAttribute( 'alt', esc_attr__( 'Placeholder', 'wecodeart' ) );
 
-			return $dom->saveHTML();
+			$content = $dom->saveHTML();
 		}
 
 		// If image is SVG, import it.
 		if ( str_contains( $content, '.svg' ) ) {
-			$file = str_replace( content_url(), dirname( dirname( get_template_directory() ) ), $img->getAttribute( 'src' ) );
-	
-			if ( ! file_exists( $file ) ) {
-				return $content;
-			}
-	
-			$svg = $dom->importNode( $this->dom( file_get_contents( $file ) )->documentElement, true );
-	
-			if ( ! method_exists( $svg, 'setAttribute' ) ) {
-				return $content;
-			}
-	
-			$svg->setAttribute( 'class', $img->getAttribute( 'class' ) );
+			dom_image_2_svg( $dom, $link ?? $div, $img, $attributes, $content );
 
-			if( $value = $img->getAttribute( 'width' ) ) {
-				$svg->setAttribute( 'width', $value );
-			}
-
-			if( $value = $img->getAttribute( 'height' ) ) {
-				$svg->setAttribute( 'height', $value );
-			}
-
-			if( $value = $img->getAttribute( 'alt' ) ) {
-				$svg->setAttribute( 'aria-label', $value );
-			}
-
-			$svg->setAttribute( 'role', 'img' );
-	
-			( $link ?? $div )->removeChild( $img );
-			( $link ?? $div )->appendChild( $svg );
+			$content = $dom->saveHTML();
 		}
 
-		return $dom->saveHTML();
+		return $content;
 	}
 
 	/**

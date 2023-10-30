@@ -35,9 +35,9 @@ class Group extends Processor {
 		if( in_array( 'is-style-marquee', $classNames, true ) ) {
 			$declarations = [];
 	
-			$orientation 	= get_prop( $this->attrs, [ 'layout', 'orientation' ] );
-			$directionY 	= get_prop( $this->attrs, [ 'layout', 'verticalAlignment' ] );
-			$directionX 	= get_prop( $this->attrs, [ 'layout', 'justifyContent' ] );
+			$orientation 	= get_prop( $this->attrs, [ 'layout', 'orientation' ], 'horizontal' );
+			$directionY 	= get_prop( $this->attrs, [ 'layout', 'verticalAlignment' ], 'center' );
+			$directionX 	= get_prop( $this->attrs, [ 'layout', 'justifyContent' ], 'left' );
 	
 			// Handle orientation
 			if( $orientation === 'vertical' ) {

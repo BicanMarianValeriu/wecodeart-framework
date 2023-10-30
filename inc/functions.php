@@ -9,7 +9,7 @@
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version     6.2.5
+ * @version     6.2.7
  */
 
 namespace WeCodeArt\Functions;
@@ -314,7 +314,7 @@ function dom( string $html ): DOMDocument {
  *
  * @return  \DOMElement|null
  */
-function get_dom_element( string $tag, $dom_or_element, int $index = 0 ) {
+function dom_get_element( string $tag, $dom_or_element, int $index = 0 ) {
 	if ( ! is_a( $dom_or_element, DOMDocument::class ) && ! is_a( $dom_or_element, DOMElement::class ) ) {
 		return null;
 	}
@@ -326,6 +326,12 @@ function get_dom_element( string $tag, $dom_or_element, int $index = 0 ) {
 	}
 
 	return dom_element( $element );
+}
+
+function get_dom_element( string $tag, $dom_or_element, int $index = 0 ) {
+    _deprecated_function( __FUNCTION__, '6.2.7', 'dom_get_element' );
+
+    return dom_get_element( $tag, $dom_or_element, $index );
 }
 
 /**
@@ -347,6 +353,57 @@ function dom_element( $node ) {
 }
 
 /**
+ * Import image as SVG
+ *
+ * @since   6.2.7
+ *
+ * @param   DOMDocument $dom    DOM Document to change.
+ * @param   DOMElement  $wrap   DOM Element to add image to.
+ * @param   DOMElement  $img    DOM Element image to change.
+ * @param   array       $attributes
+ * @param   string      $content
+ *
+ * @return  DOMElement
+ */
+function dom_image_2_svg( \DOMDocument $dom, \DOMElement $wrap, \DOMElement $img, array $attributes = [], string $content = '' ) {
+    $file = get_prop( $attributes, [ 'url' ] ) ?: $img->getAttribute( 'src' );
+    $file = str_replace( content_url(), dirname( dirname( get_template_directory() ) ), $file );
+
+    if ( ! file_exists( $file ) ) {
+        return $content;
+    }
+
+    $svg = $dom->importNode( dom( file_get_contents( $file ) )->documentElement, true );
+
+    if ( ! method_exists( $svg, 'setAttribute' ) ) {
+        return $content;
+    }
+
+    if( $value = $img->getAttribute( 'class' ) ) {
+        $svg->setAttribute( 'class', $value );
+    }
+
+    if( $value = get_prop( $attributes, [ 'width' ] ) ?: $img->getAttribute( 'width' ) ) {
+        $svg->setAttribute( 'width', $value );
+    }
+
+    if( $value = get_prop( $attributes, [ 'height' ] ) ?: $img->getAttribute( 'height' ) ) {
+        $svg->setAttribute( 'height', $value );
+    }
+
+    if( $value = get_prop( $attributes, [ 'alt' ] ) ?: $img->getAttribute( 'alt' ) ) {
+        $svg->setAttribute( 'aria-label', $value );
+    }
+
+    $svg->setAttribute( 'role', 'img' );
+
+    ( $wrap )->removeChild( $img );
+    ( $wrap )->appendChild( $svg );
+
+    return $svg;
+}
+
+/**
  * Returns array of dom elements by class name.
  *
  * @since   6.0.0
@@ -359,7 +416,7 @@ function dom_element( $node ) {
  *
  * @return  mixed
  */
-function get_elements_by_class_name( $dom, string $class_name, string $tag = '*', $index = null ) {
+function dom_elements_by_class( $dom, string $class_name, string $tag = '*', $index = null ) {
 	$elements = [];
 
 	foreach ( $dom->getElementsByTagName( $tag ) as $element ) {
@@ -379,6 +436,12 @@ function get_elements_by_class_name( $dom, string $class_name, string $tag = '*'
 	return $elements;
 }
 
+function get_elements_by_class_name( $dom, string $class_name, string $tag = '*', $index = null ) {
+    _deprecated_function( __FUNCTION__, '6.2.7', 'dom_elements_by_class' );
+
+	return dom_elements_by_class( $dom, $class_name, $tag, $index );
+}
+
 /**
  * Returns an HTML element with a replaced tag.
  *
@@ -389,7 +452,7 @@ function get_elements_by_class_name( $dom, string $class_name, string $tag = '*'
  *
  * @return  DOMElement
  */
-function change_tag_name( DOMElement $element, string $name ): DOMElement {
+function dom_change_tag( DOMElement $element, string $name ): DOMElement {
 	if ( ! $element->ownerDocument ) {
 		return new DOMElement( $name );
 	}
@@ -419,6 +482,12 @@ function change_tag_name( DOMElement $element, string $name ): DOMElement {
 	}
 
 	return $new_element;
+}
+
+function change_tag_name( DOMElement $element, string $name ): DOMElement {
+    _deprecated_function( __FUNCTION__, '6.2.7', 'dom_change_tag' );
+
+	return dom_change_tag( $elementm, $name );
 }
 
 /**

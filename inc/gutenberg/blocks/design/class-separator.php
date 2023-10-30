@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.5
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -24,9 +24,9 @@ use file_get_contents;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_dom_element;
-use function WeCodeArt\Functions\change_tag_name;
 use function WeCodeArt\Functions\encode_svg_data;
+use function WeCodeArt\Functions\dom_get_element;
+use function WeCodeArt\Functions\dom_change_tag;
 
 /**
  * Gutenberg Separator block.
@@ -152,8 +152,8 @@ class Separator extends Dynamic {
 				
 			if( $style ) {
 				$dom	= $this->dom( $content );
-				$hr		= get_dom_element( 'hr', $dom );
-				$div 	= change_tag_name( $hr, 'div' );
+				$hr		= dom_get_element( 'hr', $dom );
+				$div 	= dom_change_tag( $hr, 'div' );
 
 				$file	= file_get_contents( get_prop( $style, [ 'file' ] ) );
 				$svg    = $dom->importNode( $this->dom( $file )->documentElement, true );

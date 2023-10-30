@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -49,6 +49,17 @@ class Calendar extends Dynamic {
 	}
 
 	/**
+	 * Block args.
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args(): array {
+		return [
+			'style'	=> [ $this->get_asset_handle(), 'wp-block-table' ]
+		];
+	}
+
+	/**
 	 * Dynamically renders the `core/calendar` block.
 	 *
 	 * @param 	string 	$content 	The block markup.
@@ -57,14 +68,6 @@ class Calendar extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( string $content = '' ) {
-		// Enqueue Table CSS
-		if( ! wp_style_is( 'wp-block-table' ) ) {
-			\wp_add_inline_style(
-				$this->get_asset_handle(), 
-				wecodeart( 'styles' )::compress( wecodeart( 'blocks' )->get( 'core/table' )::get_instance()->styles() )
-			);
-		}
-
 		// Remove ID
 		$content = preg_replace( '/(<[^>]+) id=".*?"/i', '$1', $content, 1 );
 		// Add Bootstrap Classes
