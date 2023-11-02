@@ -7,6 +7,7 @@ v6.2.7
 - Updated - default Hero with background pattern (removed unnecessary group block)
 - Updated - prefixed DOM functions with dom_ and created aliases for them
 - Updated - style deps enqueue method for some of the blocks that might require other block styles (Calendar, FAQ, Pagination, etc)
+- Fixed - core/post-featured-image width and height units for inline styles
 - Added - dark pricing box pattern variation
 - Added - dom_image_2_svg to import SVG images into DOMDocument class
 - Added - buttons shadow on hover

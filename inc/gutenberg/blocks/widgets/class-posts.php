@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -48,7 +48,7 @@ class Posts extends Dynamic {
 	 */
 	public function block_type_args(): array {
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback' => [ $this, 'render' ],
 		];
 	}
 	
@@ -178,6 +178,9 @@ class Posts extends Dynamic {
 	 */
 	public function styles() {
 		return "
+			.wp-block-post-template.grid .wp-block-post + .wp-block-post {
+				margin-top: 0;
+			}
 			.wp-block-post-template--latest .wp-block-post-title {
 				margin-bottom: 0;
 			}

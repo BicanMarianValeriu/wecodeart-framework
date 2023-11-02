@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.8
- * @version		6.2.5
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -43,11 +43,11 @@ class Featured extends Processor {
 		$declarations 	= [];
 
 		if( $width = get_prop( $this->attrs, 'width' ) ) {
-			$declarations['width'] = $width;
+			$declarations['width'] = $width . 'px';
 		}
 
 		if( $height = get_prop( $this->attrs, 'height' ) ) {
-			$declarations['height'] = $height;
+			$declarations['height'] = $height . 'px';
 		}
 
 		if( $value = get_prop( $this->attrs, 'scale' ) ) {

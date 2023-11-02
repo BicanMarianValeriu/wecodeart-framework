@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.1
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -42,20 +42,15 @@ class Comments extends Dynamic {
 	protected $block_name = 'latest-comments';
 
 	/**
-	 * Init.
-	 */
-	public function init() {
-		\add_action( 'wp_print_styles', fn() => \wp_deregister_style( $this->get_asset_handle() ) );
-	}
-
-	/**
 	 * Block args.
 	 *
 	 * @return 	array
 	 */
 	public function block_type_args(): array {
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback'	=> [ $this, 'render' ],
+			'editor_style'		=> [],
+			'style'				=> []
 		];
 	}
 
