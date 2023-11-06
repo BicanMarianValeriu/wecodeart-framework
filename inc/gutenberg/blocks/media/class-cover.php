@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.2.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -90,6 +90,7 @@ class Cover extends Dynamic {
 				background-size: cover;
 				background-position: center center;
 				overflow: hidden;
+				overflow: clip;
 			}
 			.single-post .wp-block-cover__inner-container {
 				max-width: var(--wp--style--global--content-size);
@@ -131,10 +132,7 @@ class Cover extends Dynamic {
 			.wp-block-cover__video-background,
 			.wp-block-cover__gradient-background {
 				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
+				inset: 0;
 				margin: 0;
 				padding: 0;
 				width: 100%;

@@ -113,8 +113,8 @@ class Posts extends Dynamic {
 		
 		// Meta
 		if( $display_author || $display_date ) {
-			$inner_blocks .= '<!-- wp:group {"className":"hstack g-1 mb-1","layout":{"type":"flex","flexWrap":"wrap"}} -->';
-			$inner_blocks .= '<div class="wp-block-group hstack g-1 mb-1">';
+			$inner_blocks .= '<!-- wp:group {"className":"hstack g-1","layout":{"type":"flex","flexWrap":"wrap"}} -->';
+			$inner_blocks .= '<div class="wp-block-group hstack g-1">';
 
 			// Author
 			if ( $display_author ) {
@@ -180,9 +180,6 @@ class Posts extends Dynamic {
 		return "
 			.wp-block-post-template.grid .wp-block-post + .wp-block-post {
 				margin-top: 0;
-			}
-			.wp-block-post-template--latest .wp-block-post-title {
-				margin-bottom: 0;
 			}
 			.wp-block-post-template--latest figure.alignleft,
 			.wp-block-post-template--latest figure.alignright {

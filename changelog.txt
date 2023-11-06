@@ -1,5 +1,6 @@
 v6.2.7
 - Updated - added "viewportWidth" to some of the patterns for a scaled preview in the inserter
+- Updated - core/cover overflow clip to allow position sticky
 - Updated - core/logo SVG import using dom_image_2_svg
 - Updated - core/image SVG import using dom_image_2_svg
 - Updated - core/read-more default styles
