@@ -176,6 +176,18 @@
 				"xl": "1200px",
 				"xxl": "1440px"
 			},
+			"boxShadow": {
+				"inset": "",
+				"x": "0",
+				"y": "4px",
+				"blur": "16px",
+				"spread": "0",
+				"color": "#6b728011",
+				"hover": {
+				  "inset": "",
+				  "y": "8px"
+				}
+			},
 			"spacing": {
 				"0": "0",
 				"1": ".5rem",
@@ -203,21 +215,47 @@
 			"allowEditing": true
 		},
 		"shadow": {
+			"defaultPresets": false,
 			"presets": [
+				{
+					"name": "None",
+					"slug": "none",
+					"shadow": "none"
+				},
+				{
+					"name": "XXS Small",
+					"slug": "xxs",
+					"shadow": "0 1px 2px 0 var(--wp--custom--box-shadow--color)"
+				},
+				{
+					"name": "XS Small",
+					"slug": "xs",
+					"shadow": "0 1px 2px var(--wp--custom--box-shadow--color), 0 2px 4px 0 var(--wp--custom--box-shadow--color)"
+				},
 				{
 					"name": "Small",
 					"slug": "sm",
-					"shadow": "0 0.125rem .25rem rgba(0,0,0,.08)"
+					"shadow": "0 1px 2px 0 var(--wp--custom--box-shadow--color), 0 4px 12px -4px var(--wp--custom--box-shadow--color)"
 				},
 				{
 					"name": "Medium",
 					"slug": "md",
-					"shadow": "0 .3rem .75rem rgba(0,0,0, .15)"
+					"shadow": "0 1px 2px 0 var(--wp--custom--box-shadow--color), 0 4px 8px var(--wp--custom--box-shadow--color)"
 				},
 				{
 					"name": "Large",
 					"slug": "lg",
-					"shadow": "0 3px 1rem .25rem rgba(0,0,0,.10)"
+					"shadow": "0 2px 4px 0 var(--wp--custom--box-shadow--color), 0 8px 24px var(--wp--custom--box-shadow--color)"
+				},
+				{
+					"name": "X Large",
+					"slug": "xl",
+					"shadow": "0 4px 8px -4px var(--wp--custom--box-shadow--color), 0 16px 24px -4px var(--wp--custom--box-shadow--color)"
+				},
+				{
+					"name": "XX Large",
+					"slug": "xxl",
+					"shadow": "0 4px 8px 0 var(--wp--custom--box-shadow--color), 0 24px 48px 0 var(--wp--custom--box-shadow--color)"
 				}
 			]
 		},
@@ -307,14 +345,6 @@
 				},
 				{
 					"fluid": {
-						"min": "1.125rem",
-						"max": "1.5rem"
-					},
-					"size": "1.5rem",
-					"slug": "medium"
-				},
-				{
-					"fluid": {
 						"min": "1.25rem",
 						"max": "1.75rem"
 					},
@@ -324,10 +354,19 @@
 				{
 					"fluid": {
 						"min": "1.75rem",
+						"max": "2.25rem"
+					},
+					"size": "2.25rem",
+					"slug": "x-large"
+				},
+				{
+					"fluid": {
+						"min": "2.25rem",
 						"max": "3.5rem"
 					},
+					"name": "Extra Extra Large",
 					"size": "3.5rem",
-					"slug": "x-large"
+					"slug": "xx-large"
 				}
 			]
 		}

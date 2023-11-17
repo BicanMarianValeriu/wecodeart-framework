@@ -61,6 +61,7 @@ class Blocks implements Configuration {
 		$this->register( 'core/buttons',    Blocks\Design\Buttons::class );
 		$this->register( 'core/button',     Blocks\Design\Button::class );
 		$this->register( 'core/columns',    Blocks\Design\Columns::class );
+		$this->register( 'core/column',     Blocks\Design\Column::class );
 		$this->register( 'core/spacer',     Blocks\Design\Spacer::class );
 		$this->register( 'core/separator',  Blocks\Design\Separator::class );
         // Widget Blocks
@@ -102,8 +103,95 @@ class Blocks implements Configuration {
 		$this->register( 'core/template-part',  Blocks\Site\Template::class );
 
         // Hooks
-        add_action( 'after_setup_theme', [ $this, 'register_blocks'  ], PHP_INT_MAX );
+        add_action( 'after_setup_theme',    [ $this, 'register_blocks'  ], PHP_INT_MAX );
+        add_filter( 'render_block',         [ $this, 'render_template_tags' ], 8, 3 );
 	}
+
+    /**
+     * Allow custom data to be rendered in blocks.
+     *
+     * Runs before the block is rendered, so that the custom field
+     * string can be used in the shortcode block.
+     *
+     * @since 6.2.8
+     *
+     * @param string   $html   Block HTML.
+     * @param array    $block  Block data.
+     * @param WP_Block $object Block context.
+     *
+     * @return string
+     */
+    public function render_template_tags( string $html, array $block, \WP_Block $object ): string {
+        $html = str_replace(
+            [ '&#123;', '&#125;', '%7B', '%7D' ],
+            [ '{', '}', '{', '}' ],
+            $html
+        );
+
+        preg_match_all( '#\{(.*?)}#', $html, $matches );
+
+        if ( ! $matches ) {
+            return $html;
+        }
+
+        $tags = apply_filters(
+            'wecodeart/filter/template/tags',
+            [
+                'copy'         => '&copy;',
+                'year'         => gmdate( 'Y' ),
+                'current_year' => gmdate( 'Y' ),
+                'date'         => gmdate( 'm/d/Y' ),
+                'home_url'     => esc_url( home_url() ),
+                'site_title'   => get_bloginfo( 'name', 'display' ),
+                'site_name'    => get_bloginfo( 'name', 'display' ),
+                'theme'        => sprintf( '<a href="%s" target="_blank">%s</a>', 'https://www.wecodeart.com/', 'WeCodeArt Framework' )
+            ]
+        );
+
+        for ( $i = 0; $i < count( $matches ); $i++ ) {
+            $with_tags = $matches[0][ $i ] ?? '';
+
+            if ( ! $with_tags ) {
+                continue;
+            }
+
+            $without_tags = str_replace( [ '{', '}' ], '', $with_tags );
+
+            if ( ! $without_tags ) {
+                continue;
+            }
+
+            if ( shortcode_exists( $without_tags ) ) {
+                return $html;
+            }
+
+            $id         = $object->context['postId'] ?? get_the_ID();
+            $post_field = null;
+            $post_meta  = null;
+
+            if ( ! is_null( $id ) ) {
+                $post_field = esc_html( get_post_field( $without_tags, $id ) );
+
+                if ( $post_field ) {
+                    $html = str_replace( $with_tags, $post_field, $html );
+                }
+
+                $post_meta = esc_html( get_post_meta( $id, $without_tags, true ) );
+
+                if ( ! $post_field && $post_meta ) {
+                    $html = str_replace( $with_tags, $post_meta, $html );
+                }
+            }
+
+            $custom = esc_html( $tags[ $with_tags ] ?? $tags[ $without_tags ] ?? '' );
+
+            if ( ! $post_field && ! $post_meta && $custom ) {
+                $html = str_replace( $with_tags, $custom, $html );
+            }
+        }
+
+        return $html;
+    }
 
     /**
      * Register hooks

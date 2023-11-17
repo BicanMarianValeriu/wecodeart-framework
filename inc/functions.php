@@ -9,20 +9,23 @@
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version     6.2.7
+ * @version     6.2.8
  */
 
 namespace WeCodeArt\Functions;
 
 defined( 'ABSPATH' ) || exit();
 
+use DOMDocument;
+use DOMElement;
+use DOMXPath;
+use Exception;
+use WP_Error;
 use function defined;
 use function is_a;
 use function libxml_clear_errors;
 use function libxml_use_internal_errors;
 use function mb_convert_encoding;
-use DOMDocument;
-use DOMElement;
 
 /**
  * Helper function to encode an array to an excaped json string
@@ -407,7 +410,7 @@ function dom_image_2_svg( \DOMDocument $dom, \DOMElement $wrap, \DOMElement $img
  * Returns array of dom elements by class name.
  *
  * @since   6.0.0
- * @version 6.1.2
+ * @version 6.2.8
  *
  * @param   DOMDocument|DOMElement $dom         DOM document or element.
  * @param   string                 $class_name  Element class name.
@@ -417,17 +420,20 @@ function dom_image_2_svg( \DOMDocument $dom, \DOMElement $wrap, \DOMElement $img
  * @return  mixed
  */
 function dom_elements_by_class( $dom, string $class_name, string $tag = '*', $index = null ) {
+	$xpath    = new \DOMXPath( $dom );
+	$query    = sprintf( "//%s[contains(concat(' ', normalize-space(@class), ' '), ' %s ')]", $tag, $class_name );
+	$nodes    = $xpath->query( $query );
 	$elements = [];
 
-	foreach ( $dom->getElementsByTagName( $tag ) as $element ) {
-		if ( $element->hasAttribute( 'class' ) ) {
-			$classes = explode( ' ', $element->getAttribute( 'class' ) );
-
-			if ( in_array( $class_name, $classes, true ) ) {
-				$elements[] = $element;
+	if ( $nodes !== false ) {
+		foreach ( $nodes as $node ) {
+			if ( $node instanceof DOMElement ) {
+				$elements[] = $node;
 			}
 		}
 	}
+
+	return $elements;
 
     if( is_int( $index ) ) {
         return isset( $elements[$index] ) ? $elements[$index] : null;
@@ -488,6 +494,32 @@ function change_tag_name( DOMElement $element, string $name ): DOMElement {
     _deprecated_function( __FUNCTION__, '6.2.7', 'dom_change_tag' );
 
 	return dom_change_tag( $elementm, $name );
+}
+
+/**
+ * Creates a DOMElement to avoid unhandled exceptions.
+ *
+ * @since   6.2.8
+ *
+ * @param   string      $tag HTML tag.
+ * @param   DOMDocument $dom DOM object.
+ *
+ * @return  ?DOMElement
+ */
+function dom_create_element( string $tag, DOMDocument $dom ): ?DOMElement {
+	$element = null;
+
+	try {
+		$element = $dom->createElement( $tag );
+	} catch ( Exception $e ) {
+		new WP_Error( 'invalid_dom_tag', $e->getMessage() );
+	}
+
+	if ( is_null( $element ) ) {
+		return null;
+	}
+
+	return dom_element( $element );
 }
 
 /**

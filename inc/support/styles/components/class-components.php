@@ -53,6 +53,7 @@ class Components implements Configuration {
 		$this->register( 'modal',       Components\Modal::class     );
 		$this->register( 'toast',       Components\Toast::class     );
 		$this->register( 'toggler',     Components\Toggler::class   );
+		$this->register( 'lightbox',    Components\Lightbox::class  );
 		$this->register( 'dropdown',    Components\Dropdown::class  );
 		$this->register( 'offcanvas',   Components\OffCanvas::class );
 		$this->register( 'transition',  Components\Transition::class);

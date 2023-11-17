@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.7
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -78,11 +78,13 @@ class Image extends Dynamic {
 	 *
 	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
+	 * @param 	object 	$block 		The block object.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '' ): string {
-		$dom	= $this->dom( $content );
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
+		$html 	= render_block_core_image( $attributes, $content, $block ); // For lightbox logic.
+		$dom	= $this->dom( $html );
 		$div  	= dom_get_element( 'figure', $dom );
 		$link 	= dom_get_element( 'a', $div );
 		$img  	= dom_get_element( 'img', $link ?? $div );
@@ -101,6 +103,12 @@ class Image extends Dynamic {
 			dom_image_2_svg( $dom, $link ?? $div, $img, $attributes, $content );
 
 			$content = $dom->saveHTML();
+		}
+
+		// If lightbox is enabled, load styles.
+		$lightbox = get_prop( block_core_image_get_lightbox_settings( $block->parsed_block ), [ 'enabled' ] );
+		if( $lightbox ) {
+			wecodeart( 'styles' )->Components->load( [ 'lightbox' ] );
 		}
 
 		return $content;

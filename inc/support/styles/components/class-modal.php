@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.1.5
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -66,6 +66,7 @@ class Modal extends Base {
 				--wp--modal-footer-bg: ;
 				--wp--modal-footer-border-color: var(--wp--modal-border-color);
 				--wp--modal-footer-border-width: 1px;
+				--wp--modal-backdrop-filter: ;
 				position: fixed;
 				top: 0;
 				left: 0;
@@ -76,6 +77,7 @@ class Modal extends Base {
 				overflow-y: auto;
 				outline: 0;
 				z-index: var(--wp--modal-zindex);
+				backdrop-filter: var(--wp--modal-backdrop-filter);
 			}
 
 			.theme-is-dark .modal {
@@ -87,39 +89,39 @@ class Modal extends Base {
 				position: relative;
 				width: auto;
 				margin: var(--wp--modal-margin);
-				pointer-events: none
+				pointer-events: none;
 			}
 			
 			.modal.fade .modal-dialog {
 				transition: transform 0.3s ease-out;
-				transform: translate(0, -50px)
+				transform: translate(0, -50px);
 			}
 			
 			.modal.show .modal-dialog {
-				transform: none
+				transform: none;
 			}
 			
 			.modal.modal-static .modal-dialog {
-				transform: scale(1.02)
+				transform: scale(1.02);
 			}
 			
 			.modal-dialog-scrollable {
-				height: calc(100% - var(--wp--modal-margin) * 2)
+				height: calc(100% - var(--wp--modal-margin) * 2);
 			}
 			
 			.modal-dialog-scrollable .modal-content {
 				max-height: 100%;
-				overflow: hidden
+				overflow: hidden;
 			}
 			
 			.modal-dialog-scrollable .modal-body {
-				overflow-y: auto
+				overflow-y: auto;
 			}
 			
 			.modal-dialog-centered {
 				display: flex;
 				align-items: center;
-				min-height: calc(100% - var(--wp--modal-margin) * 2)
+				min-height: calc(100% - var(--wp--modal-margin) * 2);
 			}
 			
 			.modal-content {
@@ -133,7 +135,7 @@ class Modal extends Base {
 				background-clip: padding-box;
 				border: var(--wp--modal-border-width) solid var(--wp--modal-border-color);
 				border-radius: var(--wp--modal-border-radius);
-				outline: 0
+				outline: 0;
 			}
 			
 			.modal-backdrop {
@@ -146,15 +148,15 @@ class Modal extends Base {
 				z-index: var(--wp--backdrop-zindex);
 				width: 100vw;
 				height: 100vh;
-				background-color: var(--wp--backdrop-bg)
+				background-color: var(--wp--backdrop-bg);
 			}
 			
 			.modal-backdrop.fade {
-				opacity: 0
+				opacity: 0;
 			}
 			
 			.modal-backdrop.show {
-				opacity: var(--wp--backdrop-opacity)
+				opacity: var(--wp--backdrop-opacity);
 			}
 			
 			.modal-header {
@@ -234,21 +236,21 @@ class Modal extends Base {
 						width: 100vw;
 						max-width: none;
 						height: 100%;
-						margin: 0
+						margin: 0;
 					}
 				
 					.modal--fullscreen\:{$key} .modal-content {
 						height: 100%;
 						border: 0;
-						border-radius: 0
+						border-radius: 0;
 					}
 				
 					.modal--fullscreen\:{$key} :where(.modal-header,.modal-footer) {
-						border-radius: 0
+						border-radius: 0;
 					}
 				
 					.modal--fullscreen\:{$key} .modal-body {
-						overflow-y: auto
+						overflow-y: auto;
 					}
 				}
 			";
@@ -259,30 +261,31 @@ class Modal extends Base {
 			@media (min-width:{$break_sm}) {
 				.modal {
 					--wp--modal-margin: 1.75rem;
-					--wp--modal-box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.15)
+					--wp--modal-box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.15);
+					--wp--modal-backdrop-filter: blur(15px);
 				}
 			
 				.modal-dialog {
 					max-width: var(--wp--modal-width);
 					margin-right: auto;
-					margin-left: auto
+					margin-left: auto;
 				}
 			
 				.modal-sm {
-					--wp--modal-width: 300px
+					--wp--modal-width: 300px;
 				}
 			}
 			
 			@media (min-width:{$break_lg}) {
 				.modal-lg,
 				.modal-xl {
-					--wp--modal-width: 800px
+					--wp--modal-width: 800px;
 				}
 			}
 			
 			@media (min-width:{$break_xl}) {
 				.modal-xl {
-					--wp--modal-width: 1140px
+					--wp--modal-width: 1140px;
 				}
 			}
 		";
@@ -291,7 +294,7 @@ class Modal extends Base {
 		$inline .= '
 			@media (prefers-reduced-motion:reduce) {
 				.modal.fade .modal-dialog {
-					transition: none
+					transition: none;
 				}
 			}
 		';

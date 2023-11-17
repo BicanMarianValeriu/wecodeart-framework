@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -54,26 +54,26 @@ class Embed extends Dynamic {
 				width: 100%;
 				margin: 0;
 			}
-			.wp-block-embed.wp-embed-aspect-21-9 .wp-block-embed__wrapper::before {
-				padding-top: calc(9 / 21 * 100%);
+			.wp-block-embed.wp-embed-aspect-21-9 {
+				--wp--padding-top: calc(9 / 21 * 100%);
 			}
-			.wp-block-embed.wp-embed-aspect-18-9 .wp-block-embed__wrapper::before {
-				padding-top: calc(9 / 18 * 100%);
+			.wp-block-embed.wp-embed-aspect-18-9 {
+				--wp--padding-top: calc(9 / 18 * 100%);
 			}
-			.wp-block-embed.wp-embed-aspect-16-9 .wp-block-embed__wrapper::before {
-				padding-top: calc(9 / 16 * 100%);
+			.wp-block-embed.wp-embed-aspect-16-9 {
+				--wp--padding-top: calc(9 / 16 * 100%);
 			}
-			.wp-block-embed.wp-embed-aspect-4-3 .wp-block-embed__wrapper::before {
-				padding-top: calc(3 / 4 * 100%);
+			.wp-block-embed.wp-embed-aspect-4-3 {
+				--wp--padding-top: calc(3 / 4 * 100%);
 			}
-			.wp-block-embed.wp-embed-aspect-1-1 .wp-block-embed__wrapper::before {
-				padding-top: calc(1 / 1 * 100%);
+			.wp-block-embed.wp-embed-aspect-1-1 {
+				--wp--padding-top: calc(1 / 1 * 100%);
 			}
-			.wp-block-embed.wp-embed-aspect-9-16 .wp-block-embed__wrapper::before {
-				padding-top: calc(16 / 9 * 100%);
+			.wp-block-embed.wp-embed-aspect-9-16 {
+				--wp--padding-top: calc(16 / 9 * 100%);
 			}
-			.wp-block-embed.wp-embed-aspect-1-2 .wp-block-embed__wrapper::before {
-				padding-top: calc(2 / 1 * 100%);
+			.wp-block-embed.wp-embed-aspect-1-2 {
+				--wp--padding-top: calc(2 / 1 * 100%);
 			}
 			.wp-embed-responsive .wp-block-embed__wrapper {
 				position: relative;
@@ -81,7 +81,7 @@ class Embed extends Dynamic {
 			.wp-embed-responsive .wp-block-embed__wrapper::before {
 				content: "";
 				display: block;
-				padding-top: 50%;
+				padding-top: var(--wp--padding-top, 50%);
 			}
 			.wp-embed-responsive .wp-block-embed__wrapper iframe {
 				position: absolute;

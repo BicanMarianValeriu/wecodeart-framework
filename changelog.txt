@@ -1,3 +1,12 @@
+v6.2.8
+- Upadted - core/embed styles to css custom variable
+- Updated - core/column add is-stacked-on-mobile class / data-columns HTML attribute
+- Updated - core/column add support for border radius
+- Updated - box shadow presets styles
+- Updated - blur backdrop-filter for modal style component
+- Added - core/image lightbox support
+- Added - lightbox for wecodeart( 'styles' )->Components to be loaded on demand
+
 v6.2.7
 - Updated - added "viewportWidth" to some of the patterns for a scaled preview in the inserter
 - Updated - core/cover overflow clip to allow position sticky

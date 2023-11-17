@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.1.8
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -19,6 +19,9 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\dom_element;
+use function WeCodeArt\Functions\dom_get_element;
+use function WeCodeArt\Functions\dom_create_element;
 
 /**
  * Gutenberg Columns blocks.
@@ -40,6 +43,57 @@ class Columns extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'columns';
+
+	/**
+	 * Block args.
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args(): array {
+		return [
+			'render_callback' => [ $this, 'render' ]
+		];
+	}
+
+	/**
+	 * Dynamically renders the `core/columns` block.
+	 *
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 * @param 	object 	$block 		The block data.
+	 *
+	 * @return 	string 	The block markup.
+	 */
+	public function render( array $attributes = [], string $content = '', object $block = null ): string {
+		$dom 	= $this->dom( (string) $content );
+		$div 	= dom_get_element( 'div', $dom );
+
+		if ( $div ) {
+			$column_count = (string) count( $block->parsed_block['innerBlocks'] ?? 0 );
+	
+			$div->setAttribute( 'data-columns', $column_count );
+
+			$is_stacked = get_prop( $attributes, [ 'isStackedOnMobile' ] );
+
+			$class	= $is_stacked === false ? 'is-not-stacked-on-mobile': 'is-stacked-on-mobile';
+	
+			if ( $class === 'is-stacked-on-mobile' ) {
+				$classes 	= explode( ' ', $div->getAttribute( 'class' ) );
+	
+				if ( ! in_array( $class, $classes ) ) {
+					$classes[] = $class;
+				}
+	
+				$classes = array_unique( $classes );
+	
+				$div->setAttribute( 'class', implode( ' ', $classes ) );
+			}
+	
+			$content = $dom->saveHTML();
+		}
+	
+		return (string) $content;
+	}
 
 	/**
 	 * Block styles
@@ -96,7 +150,7 @@ class Columns extends Dynamic {
 				align-self: flex-end;
 			}
 			@media (max-width: $mobile) {
-				.wp-block-columns:not(.is-not-stacked-on-mobile) {
+				.wp-block-columns:is-stacked-on-mobile {
 					flex-direction: column;
 				}
 			}

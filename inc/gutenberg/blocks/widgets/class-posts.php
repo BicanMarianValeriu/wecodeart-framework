@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.7
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -181,9 +181,11 @@ class Posts extends Dynamic {
 			.wp-block-post-template.grid .wp-block-post + .wp-block-post {
 				margin-top: 0;
 			}
-			.wp-block-post-template--latest figure.alignleft,
-			.wp-block-post-template--latest figure.alignright {
-				min-width: 100px;
+			.wp-block-post-template--latest figure:where(.alignleft,.alignright) {
+				min-width: 75px;
+			}
+			.wp-block-post-template--latest figure:where(.alignleft,.alignright) + .wp-block-post-title {
+				margin-top: 0;
 			}
 			.wp-block-post-template--latest figure.alignleft {
 				float: left;

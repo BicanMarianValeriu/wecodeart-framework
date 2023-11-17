@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.2.7
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -21,6 +21,7 @@ use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\dom_element;
 use function WeCodeArt\Functions\dom_get_element;
+use function WeCodeArt\Functions\dom_create_element;
 
 /**
  * Gutenberg Group blocks.
@@ -103,7 +104,7 @@ class Group extends Dynamic {
 		$dom 	= $this->dom( (string) $content );
 		$div 	= dom_get_element( 'div', $dom );
 		
-		$wrap	= $dom->createElement( 'div' );
+		$wrap	= dom_create_element( 'div', $dom );
 		$wrap->setAttribute( 'class', 'wp-block-group__marquee' );
 		
 		$styles 		= [];
@@ -191,7 +192,7 @@ class Group extends Dynamic {
 				--marquee-gap: var(--wp--style--block-gap);
 				justify-content: initial /* required */;
 				flex-wrap: nowrap /* required */;
-				width: 100%;
+				min-width: 100%;
 				max-width: 100vw;
 				overflow: hidden;
 			}
