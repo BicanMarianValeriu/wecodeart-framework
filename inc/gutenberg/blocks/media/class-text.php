@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.7
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -123,7 +123,6 @@ class Text extends Dynamic {
 			}
 			.is-image-fill .wp-block-media-text__media {
 				position: relative;
-				padding: 0;
 				min-height: 250px;
 				background-size: cover;
 				background-position: center;

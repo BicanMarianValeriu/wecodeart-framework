@@ -2,7 +2,7 @@
 /**
  * Title: Footer Credits
  * Slug: wecodeart/footer-credits
- * Categories: wecodeart
+ * Categories: wecodeart, footer
  * Inserter: false
  */
 ?>

@@ -4,7 +4,7 @@
         "title": "Author Box",
         "description": "A simple author box.",
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "elements"
         ],
         "inserter": false
     },
@@ -12,7 +12,7 @@
         "slug": "el-entry-meta",
         "title": "Entry Meta",
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "elements"
         ],
         "inserter": false
     },
@@ -20,7 +20,7 @@
         "slug": "el-entry-overlay",
         "title": "Entry (Overlay)",
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "elements"
         ],
         "inserter": false
     },
@@ -30,7 +30,7 @@
         "description": "A simple pricing box.",
         "viewportWidth": 550,
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "elements"
         ]
     },
     {
@@ -39,7 +39,7 @@
         "description": "A featured pricing box.",
         "viewportWidth": 550,
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "elements"
         ]
     },
     {
@@ -48,7 +48,7 @@
         "description": "A dark pricing box.",
         "viewportWidth": 550,
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "elements"
         ]
     },
     {
@@ -57,7 +57,7 @@
         "description": "A simple testimonial.",
         "viewportWidth": 550,
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "elements"
         ]
     },
     {
@@ -66,7 +66,7 @@
         "description": "A simple badge.",
         "viewportWidth": 250,
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "elements"
         ]
     },
     {
@@ -74,7 +74,7 @@
         "title": "Media & Text",
         "description": "A simple media and text section.",
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "featured"
         ]
     },
     {
@@ -82,7 +82,7 @@
         "title": "Media & Text (Right Image)",
         "description": "A simple media and text section with right aligned image.",
         "categories": [
-            "wecodeart", "wecodeart-elements"
+            "wecodeart", "featured"
         ]
     }
 ]

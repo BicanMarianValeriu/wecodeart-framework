@@ -1,11 +1,14 @@
 v6.2.8
-- Upadted - core/embed styles to css custom variable
+- Updated - core/embed styles to css custom variable
 - Updated - core/column add is-stacked-on-mobile class / data-columns HTML attribute
 - Updated - core/column add support for border radius
+- Updated - core/query-pagination-numbers markup and styles improved / to be used in backend
 - Updated - box shadow presets styles
 - Updated - blur backdrop-filter for modal style component
+- Updated - use default categories and add/rename Pages (for full pages), Elements (for small elements), WeCodeArt (all from theme)
 - Added - core/image lightbox support
 - Added - lightbox for wecodeart( 'styles' )->Components to be loaded on demand
+- Added - animation-timeline scroll for .has-parallax class (used on core/cover)
 
 v6.2.7
 - Updated - added "viewportWidth" to some of the patterns for a scaled preview in the inserter

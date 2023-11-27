@@ -2,7 +2,7 @@
 /**
  * Title: Call to Action (Separator)
  * Slug: wecodeart/cta-separator
- * Categories: wecodeart, wecodeart-cta
+ * Categories: wecodeart, call-to-action
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} -->

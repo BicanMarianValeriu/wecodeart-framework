@@ -2,7 +2,7 @@
 /**
  * Title: Hero (with separator)
  * Slug: wecodeart/section-hero
- * Categories: wecodeart, wecodeart-hero
+ * Categories: wecodeart, header
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"blockGap":"0","margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->

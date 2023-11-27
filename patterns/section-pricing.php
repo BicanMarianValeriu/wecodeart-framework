@@ -2,7 +2,7 @@
 /**
  * Title: Pricing
  * Slug: wecodeart/section-pricing
- * Categories: wecodeart
+ * Categories: wecodeart, featured
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|g","left":"var:preset|spacing|g","top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl"},"margin":{"top":"0","bottom":"0"}}},"layout":{"inherit":false,"contentSize":"900px","type":"constrained"}} -->

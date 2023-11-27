@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.3.3
- * @version		6.2.7
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment\Pagination;
@@ -47,44 +47,42 @@ class Numbers extends Dynamic {
 	 *
 	 * @return 	array
 	 */
+	public function init() {
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 1 );
+	}
+
+	/**
+	 * Block args.
+	 *
+	 * @return 	array
+	 */
 	public function block_type_args(): array {
 		return [
-			'render_callback' 	=> [ $this, 'render' ],
-			'style'				=> [ $this->get_asset_handle(), 'wp-block-query-pagination-numbers' ]
+			'style'	=> [ $this->get_asset_handle(), 'wp-block-query-pagination-numbers' ]
 		];
 	}
 
 	/**
 	 * Dynamically renders the `core/comments-pagination-numbers` block.
 	 *
-	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
-		// Get the post ID from which comments should be retrieved.
-		$post_id = get_prop( $block->context, [ 'postId' ], get_the_ID() );
-
-		if ( ! $post_id ) {
-			return '';
+	public function render( string $content = '' ): string {
+		if( ! $content ) {
+			return $content;
 		}
 
-		// Get the what we need.
-		$args 		= build_comment_query_vars_from_block( $block );
-		$total		= ( new \WP_Comment_Query( $args ) )->max_num_pages;
-		$current	= get_prop( $args, [ 'paged' ] );
-		$content	= paginate_comments_links( [
-            'type' 	    => 'array',
-			'total'     => $total,
-			'current'   => $current,
-			'prev_next' => false,
-		] );
-
-		if( empty( $content ) ) {
-			return '';
+        $p = new \WP_HTML_Tag_Processor( $content );
+		
+		if( $p->next_tag( [
+			'class_name'	=> 'wp-block-comments-pagination-numbers',
+		] ) ) {
+			$p->add_class( 'wp-block-query-pagination-numbers' );
 		}
+
+		$content = $p->get_updated_html();
 
 		$pagination_numbers = wecodeart( 'blocks' )->get( 'core/query-pagination-numbers' )::get_instance();
 

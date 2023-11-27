@@ -2,7 +2,7 @@
 /**
  * Title: Mobile Ready
  * Slug: wecodeart/section-mobile
- * Categories: wecodeart
+ * Categories: wecodeart, featured
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"top":"var:preset|spacing|xxl","right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"layout":{"type":"constrained"}} -->

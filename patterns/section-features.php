@@ -2,7 +2,7 @@
 /**
  * Title: Features
  * Slug: wecodeart/section-features
- * Categories: wecodeart
+ * Categories: wecodeart, featured
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","right":"var:preset|spacing|g","left":"var:preset|spacing|g"},"margin":{"top":"0","bottom":"0"}},"border":{"top":{"color":"#efefef","width":"5px","style":"solid"}}},"backgroundColor":"accent","className":"position-relative","layout":{"type":"constrained"}} -->

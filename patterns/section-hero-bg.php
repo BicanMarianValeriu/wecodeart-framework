@@ -2,7 +2,7 @@
 /**
  * Title: Hero (with background)
  * Slug: wecodeart/section-hero-bg
- * Categories: wecodeart, wecodeart-hero
+ * Categories: wecodeart, header
  */
 ?>
 <!-- wp:cover {"url":"<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/hero.jpg' ) ); ?>","dimRatio":20,"overlayColor":"white","focalPoint":{"x":1,"y":1},"minHeight":50,"contentPosition":"center center","isDark":false,"align":"full","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|xxl","top":"var:preset|spacing|xxl","right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"layout":{"type":"constrained","contentSize":"980px"}} -->

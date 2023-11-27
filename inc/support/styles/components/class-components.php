@@ -56,6 +56,7 @@ class Components implements Configuration {
 		$this->register( 'lightbox',    Components\Lightbox::class  );
 		$this->register( 'dropdown',    Components\Dropdown::class  );
 		$this->register( 'offcanvas',   Components\OffCanvas::class );
+		$this->register( 'parallax',    Components\Parallax::class  );
 		$this->register( 'transition',  Components\Transition::class);
 
         add_action( 'wp_print_styles',  [ $this, 'assets' ], 20, 1 );

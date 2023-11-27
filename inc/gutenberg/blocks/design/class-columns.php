@@ -150,7 +150,7 @@ class Columns extends Dynamic {
 				align-self: flex-end;
 			}
 			@media (max-width: $mobile) {
-				.wp-block-columns:is-stacked-on-mobile {
+				.wp-block-columns.is-stacked-on-mobile {
 					flex-direction: column;
 				}
 			}

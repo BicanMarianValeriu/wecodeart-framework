@@ -2,7 +2,7 @@
 /**
  * Title: Testimonials
  * Slug: wecodeart/section-testimonials
- * Categories: wecodeart
+ * Categories: wecodeart, testimonials
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl"},"blockGap":"var:preset|spacing|md"}},"backgroundColor":"accent","layout":{"type":"constrained"}} -->

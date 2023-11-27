@@ -2,7 +2,7 @@
 /**
  * Title: Cards (with overlay)
  * Slug: wecodeart/cards-overlay
- * Categories: wecodeart, wecodeart-cards
+ * Categories: wecodeart, text
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"className":"py-5","layout":{"inherit":true,"type":"constrained"}} -->

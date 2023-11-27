@@ -2,7 +2,7 @@
 /**
  * Title: WooCommerce
  * Slug: wecodeart/section-woo
- * Categories: wecodeart, wecodeart-cta
+ * Categories: wecodeart, call-to-action
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxl","right":"var:preset|spacing|g","left":"var:preset|spacing|g"},"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"primary","textColor":"white","layout":{"type":"constrained"}} -->

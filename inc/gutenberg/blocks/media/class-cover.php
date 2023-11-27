@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.7
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use WeCodeArt\Support\Styles\Property\Focal;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -68,6 +67,10 @@ class Cover extends Dynamic {
 				$content->add_class( 'wp-block-cover__image-background' );
 			}
 			$content = $content->get_updated_html();
+		}
+
+		if ( get_prop( $block, [ 'attrs', 'hasParallax' ] ) ) {
+			wecodeart( 'styles' )->Components->load( [ 'parallax' ] );
 		}
 	
 		return $content;

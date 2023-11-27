@@ -2,7 +2,7 @@
 /**
  * Title: Cards
  * Slug: wecodeart/cards-default
- * Categories: wecodeart, wecodeart-cards
+ * Categories: wecodeart, text
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"className":"py-5","layout":{"inherit":true,"type":"constrained"}} -->

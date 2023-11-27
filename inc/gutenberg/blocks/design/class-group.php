@@ -192,7 +192,6 @@ class Group extends Dynamic {
 				--marquee-gap: var(--wp--style--block-gap);
 				justify-content: initial /* required */;
 				flex-wrap: nowrap /* required */;
-				min-width: 100%;
 				max-width: 100vw;
 				overflow: hidden;
 			}

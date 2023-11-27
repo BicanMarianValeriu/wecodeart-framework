@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.1
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -78,6 +78,34 @@ class Button extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( array $attributes = [], string $content = '' ): string {
+		if ( str_contains( $content, 'javascript:void' ) ) {
+			$content = str_replace(
+				[
+					'http://javascript:void',
+					'target="_blank"',
+				],
+				[
+					'javascript:void',
+					'disabled',
+				],
+				$content
+			);
+		}
+	
+		if ( str_contains( $content, 'href="http://#"' ) ) {
+			$content = str_replace(
+				[
+					'href="http://#"',
+					'target="_blank"',
+				],
+				[
+					'href="#"',
+					'',
+				],
+				$content
+			);
+		}
+
 		return str_replace( '-button__width', '-button--width', $content );
 	}
 

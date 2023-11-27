@@ -169,9 +169,9 @@ class Title extends Dynamic {
 	 */
 	public function styles() {
 		return "
-        .wp-block-query-title svg {
-			margin-right: 1rem;
-		}
+			.wp-block-query-title svg {
+				margin-right: 1rem;
+			}
 		";
 	}
 }

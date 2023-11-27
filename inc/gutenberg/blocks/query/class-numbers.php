@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -19,6 +19,10 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\dom_element;
+use function WeCodeArt\Functions\dom_change_tag;
+use function WeCodeArt\Functions\dom_get_element;
+use function WeCodeArt\Functions\dom_create_element;
 
 /**
  * Gutenberg Query Pagination block.
@@ -46,75 +50,19 @@ class Numbers extends Dynamic {
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args(): array {
-		return [
-			'render_callback' => [ $this, 'render' ]
-		];
+	public function init() {
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 1 );
 	}
 
 	/**
 	 * Dynamically renders the `core/query-pagination-numbers` block.
 	 *
-	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	object 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
-        global $wp_query;
-		
-        $page_key   = isset( $block->context['queryId'] ) ? 'query-' . $block->context['queryId'] . '-page' : 'query-page';
-        $page       = empty( $_GET[ $page_key ] ) ? 1 : (int) $_GET[ $page_key ];
-        $max_page   = isset( $block->context['query']['pages'] ) ? (int) $block->context['query']['pages'] : 0;
-        $content    = [];
-
-        $paginate_args = apply_filters( 'wecodeart/filter/query/pagination/args', [
-            'type' 	    => 'array',
-            'prev_next' => true,
-        ] );
-        
-        if ( isset( $block->context['query']['inherit'] ) && $block->context['query']['inherit'] ) {
-            // Take into account if we have set a bigger `max page` than what the query has.
-            $total      = ! $max_page || $max_page > $wp_query->max_num_pages ? $wp_query->max_num_pages : $max_page;
-            $content    = paginate_links( wp_parse_args( [
-                'total' => $total,
-            ], $paginate_args ) );
-        } else {
-            $block_query = new \WP_Query( build_query_vars_from_query_block( $block, $page ) );
-
-            // `paginate_links` works with the global $wp_query, so we have to temporarily switch it with our custom query.
-            $prev_wp_query  = $wp_query;
-            $wp_query       = $block_query;
-            $total          = ! $max_page || $max_page > $wp_query->max_num_pages ? $wp_query->max_num_pages : $max_page;
-            $paginate_args  = wp_parse_args( [
-                'base'      => '%_%',
-                'format'    => "?$page_key=%#%",
-                'current'   => max( 1, $page ),
-                'total'     => $total,
-            ], $paginate_args );
-            
-            // https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/query-pagination-numbers/index.php
-            if ( 1 !== $page ) {
-                $paginate_args['add_args'] = [ 'cst' => '' ];
-            }
-
-            // We still need to preserve `paged` query param if exists.
-            $paged = empty( $_GET['paged'] ) ? null : (int) $_GET['paged'];
-            if ( $paged ) {
-                $paginate_args['add_args'] = [ 'paged' => $paged ];
-            }
-
-            $content = paginate_links( $paginate_args );
-            wp_reset_postdata(); // Restore original Post Data.
-            $wp_query = $prev_wp_query;
-        }
-
-        if ( empty( $content ) ) {
-            return '';
-        }
-		
-		return $this->format_pagination( $content );
+	public function render( string $content = '' ): string {
+        return $this->format_pagination( $content );
 	}
 
     /**
@@ -122,31 +70,50 @@ class Numbers extends Dynamic {
 	 *
 	 * @return 	void
 	 */
-    public function format_pagination( array $content ) {
-        return wecodeart( 'markup' )::wrap( $this->get_asset_handle(), [
-            [
-                'tag'   => 'ul',
-                'attrs' => $this->get_block_wrapper_attributes( [
-                    'class' => 'pagination',
-                ] )
-            ]
-        ], function( $content ) {
-            foreach( $content as $key => $link ) :
-    
-                $class = [ 'pagination__item' ];
-    
-                if( strpos( $link, 'current' ) !== false ) {
-                    $class[] = 'pagination__item--current';
-                }
-    
-                ?>
-                <li class="<?php echo esc_attr( implode( ' ', $class ) ); ?>">
-                    <?php echo str_replace( 'page-numbers', 'pagination__link', $link ); ?>
-                </li>
-                <?php
-    
-            endforeach;
-        }, [ $content ], false );
+    public function format_pagination( string $content = '' ): string {
+        if( ! $content ) {
+            return $content;
+        }
+
+        $dom 	= $this->dom( $content );
+		$div 	= dom_get_element( 'div', $dom );
+
+        if( ! $div ) {
+            return $content;
+        }
+
+        // Change to ul.
+        $div    = dom_change_tag( $div, 'ul' );
+
+        // Create a list wrapper
+        $wrap	= dom_create_element( 'li', $dom );
+		$wrap->setAttribute( 'class', 'wp-block-query-pagination-numbers__item' );
+
+        $items = [];
+        $count 	= $div->childNodes->count();
+        for ( $i = 0; $i < $count; $i++ ) {
+            $item = $div->childNodes->item( $i );
+            if ( $item ) {
+                $items[] = $item;
+            }
+        }
+        $items = array_reverse( $items );
+
+        for ( $i = 0; $i < $count; $i++ ) {
+            $item = $items[$i];
+            if ( ! method_exists( $item, 'setAttribute' ) ) {
+                continue;
+            }
+
+            $item->setAttribute( 'class', 'wp-block-query-pagination-numbers__link ' . $item->getAttribute( 'class' ) );
+            $clone = $wrap->cloneNode( true );
+            $clone->appendChild( $item );
+            $div->insertBefore( $clone, $div->firstChild );
+        }
+
+		$content = $dom->saveHTML();
+
+        return $content;
     }
 
     /**
@@ -164,53 +131,55 @@ class Numbers extends Dynamic {
         $radius     = get_prop( $button_css, [ 'border', 'radius' ], '.25rem' );
         
 		return "
-            .pagination {
+            .wp-block-query-pagination-numbers {
                 display: flex;
                 list-style-type: none;
                 padding-left: 0;
                 margin-bottom: 0;
             }
-            .pagination__link {
+            .wp-block-query-pagination-numbers .page-numbers {
                 position: relative;
                 display: block;
                 padding: .35rem .75rem;
+                margin: 0;
                 color: var(--wp--preset--color--primary);
                 text-decoration: none;
                 line-height: 1.5;
-                background-color: white;
+                background-color: var(--wp--preset--color--accent);
                 border: $width $style $color;
+                border-radius: inherit;
             }
-            .pagination__link:hover {
+            .wp-block-query-pagination-numbers .page-numbers:hover {
                 z-index: 2;
-                color: var(--wp--preset--color--primary);
-                background-color: var(--wp--preset--color--light);
-                border-color: $color;
+                color: var(--wp--preset--color--white);
+                background-color: var(--wp--preset--color--primary);
+                border-color: var(--wp--preset--color--primary);
             }
-            .pagination__link:focus {
+            .wp-block-query-pagination-numbers .page-numbers:focus {
                 z-index: 3;
-                color: var(--wp--preset--color--primary);
-                background-color: var(--wp--preset--color--light);
+                color: var(--wp--preset--color--white);
+                background-color: var(--wp--preset--color--primary);
                 outline: none;
                 box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
             }
-            .pagination__item:first-child .pagination__link {
+            .wp-block-query-pagination-numbers > *:first-child {
                 border-top-left-radius: $radius;
                 border-bottom-left-radius: $radius;
             }
-            .pagination__item:not(:first-child) .pagination__link {
+            .wp-block-query-pagination-numbers > *:not(:first-child) {
                 margin-left: -1px;
             }
-            .pagination__item:last-child .pagination__link {
+            .wp-block-query-pagination-numbers > *:last-child {
                 border-top-right-radius: $radius;
                 border-bottom-right-radius: $radius;
             }
-            .pagination__item--current .pagination__link {
+            .wp-block-query-pagination-numbers .page-numbers.current {
                 z-index: 3;
                 color: white;
                 background-color: var(--wp--preset--color--primary);
                 border-color: var(--wp--preset--color--primary);
             } 
-            .pagination__item--disabled .pagination__link {
+            .wp-block-query-pagination-numbers .page-numbers.disabled {
                 color: var(--wp--gray);
                 pointer-events: none;
                 background-color: var(--wp--gray-100);

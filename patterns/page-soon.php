@@ -2,7 +2,7 @@
 /**
  * Title: Coming Soon
  * Slug: wecodeart/page-soon
- * Categories: wecodeart, wecodeart-pages
+ * Categories: wecodeart, pages
  */
 ?>
 <!-- wp:group {"align":"full","layout":{"type":"constrained"}} -->

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.2.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\dom_create_element;
 
 /**
  * Gutenberg Quote block.
@@ -86,7 +87,7 @@ class Quote extends Dynamic {
 		// Quote Changes
 		$quote	= $dom->getElementsByTagName( 'blockquote' )->item(0);
 		if( $quote ) {
-			$figure	= $dom->createElement( 'figure' );
+			$figure	= dom_create_element( 'figure', $dom );
 			$figure->setAttribute( 'class', $quote->getAttribute( 'class' ) );
 			$quote->setAttribute( 'class', 'blockquote' );
 			$quote->parentNode->replaceChild( $figure, $quote );
@@ -96,7 +97,7 @@ class Quote extends Dynamic {
 		// Cite Changes
 		$cite	= $dom->getElementsByTagName( 'cite' )->item(0);
 		if( $cite ) {
-			$caption = $dom->createElement( 'figcaption' );
+			$caption = dom_create_element( 'figcaption', $dom );
 			$caption->setAttribute( 'class', 'blockquote-footer' );
 			$cite->parentNode->replaceChild( $caption, $cite );
 			$caption->appendChild( $cite );

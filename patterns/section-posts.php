@@ -2,7 +2,7 @@
 /**
  * Title: Latest Posts
  * Slug: wecodeart/section-posts
- * Categories: wecodeart, wecodeart-query
+ * Categories: wecodeart, query
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|md","right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"className":"my-0","layout":{"type":"constrained"}} -->

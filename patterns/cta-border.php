@@ -2,7 +2,7 @@
 /**
  * Title: Call to Action (Border)
  * Slug: wecodeart/cta-border
- * Categories: wecodeart, wecodeart-cta
+ * Categories: wecodeart, call-to-action
  */
 ?>
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl"}}},"layout":{"type":"constrained"}} -->

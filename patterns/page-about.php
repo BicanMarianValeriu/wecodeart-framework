@@ -2,7 +2,7 @@
 /**
  * Title: About
  * Slug: wecodeart/page-about
- * Categories: wecodeart, wecodeart-pages
+ * Categories: wecodeart, pages
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxl","right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"layout":{"type":"constrained","contentSize":"680px"}} -->
