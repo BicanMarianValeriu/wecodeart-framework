@@ -57,7 +57,9 @@ class Lists extends Dynamic {
 		$this->collect_svg_styles();
 		
 		// We only load them in admin for preview, in frontend we load conditionaly.
-		if( ! is_admin() ) return;
+		if( ! is_admin() ) {
+			return;
+		}
 
 		// Register collected SVG styles.
 		foreach( self::$styles as $data ) {
@@ -212,7 +214,7 @@ class Lists extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public function styles(): string {
 		return "
 			/* Reset */
 			ol,
