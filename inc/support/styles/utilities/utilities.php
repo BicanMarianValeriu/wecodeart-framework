@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.1.7
+ * @version		6.2.8
  */
 
 // Theme Shadows
@@ -292,6 +292,18 @@ foreach( [
     [
         'property'  => [ '--wp--style--block-gap', 'gap' ],
         'class'		=> 'g',
+        'responsive'=> true,
+        'values'	=> $spacers,
+    ],
+    [
+        'property'  => 'column-gap',
+        'class'		=> 'gx',
+        'responsive'=> true,
+        'values'	=> $spacers,
+    ],
+    [
+        'property'  => 'row-gap',
+        'class'		=> 'gy',
         'responsive'=> true,
         'values'	=> $spacers,
     ],

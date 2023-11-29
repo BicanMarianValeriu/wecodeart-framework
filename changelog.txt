@@ -11,6 +11,7 @@ v6.2.8
 - Added - core/image lightbox support
 - Added - lightbox for wecodeart( 'styles' )->Components to be loaded on demand
 - Added - animation-timeline scroll for .has-parallax class (used on core/cover)
+- Added - gy-# and gx-# gap utilities for rows and columns
 
 v6.2.7
 - Updated - added "viewportWidth" to some of the patterns for a scaled preview in the inserter

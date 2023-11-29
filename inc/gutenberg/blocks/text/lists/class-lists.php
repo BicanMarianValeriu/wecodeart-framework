@@ -83,9 +83,9 @@ class Lists extends Dynamic {
 		$supports 	= get_prop( $current, [ 'supports' ], [] );
 
 		return [
-			'render_callback' 	=> [ $this, 'render' ],
+			'render_callback'	=> [ $this, 'render' ],
 			'supports'			=> wp_parse_args( [
-				'__experimentalLayout'	=> [
+				'layout'	=> [
 					'allowSwitching'  => false,
 					'allowInheriting' => false,
 					'default'         => [

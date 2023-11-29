@@ -45,8 +45,8 @@
                     <!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"400"}},"className":"h4 is-style-default"} -->
                     <h3 class="wp-block-heading h4 is-style-default" style="font-style:normal;font-weight:400"><?php esc_html_e( '100% Responsive', 'wecodeart' ); ?></h3>
                     <!-- /wp:heading -->
-                    <!-- wp:paragraph {"textColor":"secondary","className":"fw-300"} -->
-                    <p class="fw-300 has-secondary-color has-text-color"><?php esc_html_e( 'WeCodeArt Themes are fully responsive and will adapt themselves to any mobile device.', 'wecodeart' ); ?></p>
+                    <!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
+                    <p class="fhas-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'WeCodeArt Themes are fully responsive and will adapt themselves to any mobile device.', 'wecodeart' ); ?></p>
                     <!-- /wp:paragraph -->
                 </div>
                 <!-- /wp:column -->
@@ -81,8 +81,8 @@
                     <!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"400"}},"className":"h4 is-style-default"} -->
                     <h3 class="wp-block-heading h4 is-style-default" style="font-style:normal;font-weight:400"><?php esc_html_e( 'Retina Ready', 'wecodeart' ); ?></h3>
                     <!-- /wp:heading -->
-                    <!-- wp:paragraph {"textColor":"secondary","className":"fw-300"} -->
-                    <p class="fw-300 has-secondary-color has-text-color"><?php esc_html_e( 'With WeCodeArt Themes your website will always look perfect on any device.', 'wecodeart' ); ?></p>
+                    <!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
+                    <p class="has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'With WeCodeArt Themes your website will always look perfect on any device.', 'wecodeart' ); ?></p>
                     <!-- /wp:paragraph -->
                 </div>
                 <!-- /wp:column -->

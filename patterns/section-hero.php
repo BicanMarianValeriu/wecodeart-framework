@@ -26,8 +26,9 @@
             <!-- /wp:paragraph -->
         </div>
         <!-- /wp:group -->
-        <!-- wp:list {"className":"fw-700 gy-0","layout":{"type":"flex","orientation":"horizontal","justifyContent":"center"}} -->
-        <ul class="fw-700 gy-0">
+        
+        <!-- wp:list {"style":{"spacing":{"blockGap":"var:preset|spacing|lg"}},"className":"fw-700 g-0 is-style-icon\u002d\u002dcheck-circle-fill","layout":{"type":"flex","orientation":"horizontal","justifyContent":"center"}} -->
+        <ul class="fw-700 gy-0 is-style-icon--check-circle-fill">
             <!-- wp:list-item {"className":"text-uppercase"} -->
             <li class="text-uppercase"><?php esc_html_e( 'Super high performance', 'wecodeart' ); ?></li>
             <!-- /wp:list-item -->

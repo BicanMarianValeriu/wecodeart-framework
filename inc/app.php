@@ -119,7 +119,7 @@ return [
         'google' => [
             'open-sans' => [
                 'family' 	=> 'Open Sans',
-                'variants' 	=> [ 300, 'regular', 500 ]
+                'variants' 	=> [ 300, 'regular', 500, 700 ]
             ],
             'shadows'   => [
                 'family' 	=> 'Shadows Into Light',

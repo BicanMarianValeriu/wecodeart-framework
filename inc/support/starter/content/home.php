@@ -6,7 +6,7 @@ return [
 	'post_type'    => 'page',
 	'post_title'   => _x( 'Home', 'Theme starter content', 'wecodeart' ),
 	'post_content' => '
-	<!-- wp:pattern {"slug":"wecodeart/section-hero-bg"} /-->
+	<!-- wp:pattern {"slug":"wecodeart/section-hero"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/section-features"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/cta-default"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/section-mobile"} /-->
