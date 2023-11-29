@@ -33,9 +33,9 @@
     <!-- wp:paragraph {"align":"center","className":"fw-300","fontSize":"medium"} -->
     <p class="has-text-align-center fw-300 has-medium-font-size"><?php esc_html_e( 'Super-Optimized eCommerce website built with ease.', 'wecodeart' ); ?></p>
     <!-- /wp:paragraph -->
-    <!-- wp:image {"align":"center","width":300,"height":140,"sizeSlug":"full","linkDestination":"none","className":"overflow-hidden","customStyle":"selector svg {\n  margin-bottom: -70px;\n}\n"} -->
+    <!-- wp:image {"align":"center","width":"300px","sizeSlug":"full","linkDestination":"none","className":"overflow-hidden","customStyle":"selector svg {\n  margin-bottom: -70px;\n}\n"} -->
     <figure class="wp-block-image aligncenter size-full is-resized overflow-hidden">
-        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/logo-woocommerce.svg' ) ); ?>" alt="" width="300" height="140"/>
+        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/logo-woocommerce.svg' ) ); ?>" alt="" style="width:300px"/>
     </figure>
     <!-- /wp:image -->
 </div>

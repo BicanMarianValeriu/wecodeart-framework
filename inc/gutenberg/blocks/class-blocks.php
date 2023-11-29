@@ -50,6 +50,7 @@ class Blocks implements Configuration {
         // Text Blocks
         $this->register( 'core/code',	    Blocks\Text\Code::class );
         $this->register( 'core/list',	    Blocks\Text\Lists::class );
+        $this->register( 'core/list-item',  Blocks\Text\Lists\Item::class );
         $this->register( 'core/table',	    Blocks\Text\Table::class );
 		$this->register( 'core/quote',	    Blocks\Text\Quote::class );
         $this->register( 'core/details',    Blocks\Text\Details::class );

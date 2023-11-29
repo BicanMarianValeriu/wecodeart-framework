@@ -15,9 +15,9 @@
             <div class="wp-block-columns are-vertically-aligned-top is-not-stacked-on-mobile">
                 <!-- wp:column {"verticalAlignment":"top","className":"col-auto order-md-last"} -->
                 <div class="wp-block-column is-vertically-aligned-top col-auto order-md-last">
-                    <!-- wp:image {"align":"center","width":40,"height":40,"sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
+                    <!-- wp:image {"align":"center","width":"35px","height":"35px","scale":"contain","sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
                     <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-text-color">
-                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-download.svg' ) ); ?>" alt="" width="40" height="40" />
+                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-download.svg' ) ); ?>" alt="" style="object-fit:contain;width:35px;height:35px" />
                     </figure>
                     <!-- /wp:image -->
                 </div>
@@ -38,9 +38,9 @@
             <div class="wp-block-columns are-vertically-aligned-top is-not-stacked-on-mobile">
                 <!-- wp:column {"verticalAlignment":"top","className":"col-auto order-md-last"} -->
                 <div class="wp-block-column is-vertically-aligned-top col-auto order-md-last">
-                    <!-- wp:image {"align":"center","width":40,"height":40,"sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
+                    <!-- wp:image {"align":"center","width":"35px","height":"35px","scale":"contain","sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
                     <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-text-color">
-                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-heart.svg' ) ); ?>" alt="" width="40" height="40" />
+                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-heart.svg' ) ); ?>" alt="" style="object-fit:contain;width:35px;height:35px" />
                     </figure>
                     <!-- /wp:image -->
                 </div>
@@ -74,9 +74,9 @@
             <div class="wp-block-columns are-vertically-aligned-top is-not-stacked-on-mobile">
                 <!-- wp:column {"verticalAlignment":"top","className":"col-auto"} -->
                 <div class="wp-block-column is-vertically-aligned-top col-auto">
-                    <!-- wp:image {"align":"center","width":40,"height":40,"sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
+                    <!-- wp:image {"align":"center","width":"35px","height":"35px","scale":"contain","sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
                     <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-text-color">
-                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-puzzle.svg' ) ); ?>" alt="" width="40" height="40" />
+                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-puzzle.svg' ) ); ?>" alt="" style="object-fit:contain;width:35px;height:35px" />
                     </figure>
                     <!-- /wp:image -->
                 </div>
@@ -97,9 +97,9 @@
             <div class="wp-block-columns are-vertically-aligned-top is-not-stacked-on-mobile">
                 <!-- wp:column {"verticalAlignment":"top","className":"col-auto"} -->
                 <div class="wp-block-column is-vertically-aligned-top col-auto">
-                    <!-- wp:image {"align":"center","width":40,"height":40,"sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
+                    <!-- wp:image {"align":"center","width":"35px","height":"35px","scale":"contain","sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
                     <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-text-color">
-                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-bolt.svg' ) ); ?>" alt="" width="40" height="40" />
+                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-bolt.svg' ) ); ?>" alt="" style="object-fit:contain;width:35px;height:35px" />
                     </figure>
                     <!-- /wp:image -->
                 </div>

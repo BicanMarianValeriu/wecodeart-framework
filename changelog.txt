@@ -6,6 +6,8 @@ v6.2.8
 - Updated - box shadow presets styles
 - Updated - blur backdrop-filter for modal style component
 - Updated - use default categories and add/rename Pages (for full pages), Elements (for small elements), WeCodeArt (all from theme)
+- Updated - fix pattern images with new inline style attribute
+- Added - core/list various icons styles
 - Added - core/image lightbox support
 - Added - lightbox for wecodeart( 'styles' )->Components to be loaded on demand
 - Added - animation-timeline scroll for .has-parallax class (used on core/cover)
