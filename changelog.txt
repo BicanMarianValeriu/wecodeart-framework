@@ -1,3 +1,10 @@
+v6.2.9
+- Updated - core/group marquee variation logic with namespace attribute / deprecated old logic with block style
+- Fixed - core/social-links missing social networks services colors
+- Added - core/social-links sharing variation
+- Added - core/social-link sharing variation (for common social networks)
+- Added - social sharing block pattern / used on single page
+
 v6.2.8
 - Updated - core/embed styles to css custom variable
 - Updated - core/column add is-stacked-on-mobile class / data-columns HTML attribute

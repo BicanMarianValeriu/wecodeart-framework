@@ -93,9 +93,7 @@ function registerWCABlocks() {
 }
 registerWCABlocks();
 function registerWCAVariations() {
-  [_variations__WEBPACK_IMPORTED_MODULE_1__.groupMarquee
-  // socialSharing
-  ].forEach(_ref => {
+  [_variations__WEBPACK_IMPORTED_MODULE_1__.groupMarquee, _variations__WEBPACK_IMPORTED_MODULE_1__.groupMarqueeV2, _variations__WEBPACK_IMPORTED_MODULE_1__.socialSharing].forEach(_ref => {
     let {
       block,
       attributes
@@ -246,6 +244,7 @@ const settings = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   groupMarquee: function() { return /* binding */ groupMarquee; },
+/* harmony export */   groupMarqueeV2: function() { return /* binding */ groupMarqueeV2; },
 /* harmony export */   socialSharing: function() { return /* binding */ socialSharing; }
 /* harmony export */ });
 /**
@@ -260,10 +259,32 @@ const groupMarquee = {
   block: 'core/group',
   attributes: {
     name: 'group-marquee',
-    title: __('Group: Marquee', 'wecodeart'),
+    title: __('Group: Marquee (deprecated)', 'wecodeart'),
     description: __('Gather blocks in a sliding container.', 'wecodeart'),
     attributes: {
       className: 'is-style-marquee',
+      layout: {
+        type: 'flex',
+        flexWrap: 'nowrap',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }
+    },
+    innerBlocks: [],
+    isDefault: false,
+    scope: ['block', 'inserter', 'transform'],
+    icon: 'align-right'
+  }
+};
+const groupMarqueeV2 = {
+  block: 'core/group',
+  attributes: {
+    name: 'wecodeart/group/marquee',
+    title: __('Group: Marquee', 'wecodeart'),
+    description: __('Gather blocks in a sliding container.', 'wecodeart'),
+    isActive: ['namespace'],
+    attributes: {
+      namespace: 'wecodeart/group/marquee',
       layout: {
         type: 'flex',
         flexWrap: 'nowrap',
@@ -283,16 +304,17 @@ const socialSharing = {
     name: 'wecodeart/social-links/sharing',
     title: __('Social Icons: Sharing', 'wecodeart'),
     isActive: ['namespace'],
-    description: __('Display icons to share current page on social media sites.', 'wecodeart'),
+    description: __('Display icons for sharing the current page on social media sites.', 'wecodeart'),
     attributes: {
-      namespace: 'wecodeart/social-links/sharing'
+      namespace: 'wecodeart/social-links/sharing',
+      openInNewTab: true
     },
     innerBlocks: [['core/social-link', {
       service: 'facebook',
-      'url': '{{currentUrl}}'
+      'url': '#'
     }], ['core/social-link', {
       service: 'twitter',
-      'url': '{{currentUrl}}'
+      'url': '#'
     }]],
     isDefault: false,
     scope: ['block', 'inserter', 'transform']

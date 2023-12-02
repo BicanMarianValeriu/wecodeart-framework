@@ -57,11 +57,20 @@ class Group extends Dynamic {
 	/**
 	 * Block args.
 	 *
+	 * @param	array $current	Existing register args
+	 *
 	 * @return 	array
 	 */
-	public function block_type_args(): array {
+	public function block_type_args( $current ): array {
+		$attributes	= get_prop( $current, [ 'attributes' ], [] );
+
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback' => [ $this, 'render' ],
+			'attributes' 		=> wp_parse_args( [
+				'namespace'		=> [
+					'type'		=> 'string',
+				],
+			], $attributes ),
 		];
 	}
 
@@ -84,12 +93,31 @@ class Group extends Dynamic {
 		}
 
 		// Handle marquee group.
-		$classNames = explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
-		if( in_array( 'is-style-marquee', $classNames, true ) ) {
+		if( self::is_marquee_variation( $attributes ) ) {
 			$content = $this->create_marquee( $attributes, $content );
 		}
 	
 		return (string) $content;
+	}
+
+	/**
+	 * Determines whether the block is a marquee block.
+	 *
+	 * @param 	array 	$attributs The block attrs.
+	 *
+	 * @return 	bool 	Whether the block is a marquee block.
+	 */
+	public static function is_marquee_variation( array $attributes = [] ): bool {
+		if ( get_prop( $attributes, [ 'namespace' ], '' ) === 'wecodeart/group/marquee' ) {
+			return true;
+		}
+
+		$classNames = explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
+		if ( in_array( 'is-style-marquee', $classNames, true ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -167,6 +195,7 @@ class Group extends Dynamic {
 		}
 
 		$div->insertBefore( $wrap, $div->firstChild );
+		$div->setAttribute( 'class', $div->getAttribute( 'class' ) . ' wp-block-group--marquee' );
 
 		$content = $dom->saveHTML();
 
@@ -183,7 +212,7 @@ class Group extends Dynamic {
 		$breakpoint = wecodeart_json( [ 'settings', 'custom', 'breakpoints', $mobile ], '992px' );
 
 		$inline = "
-			.is-style-marquee {
+			:where(.is-style-marquee,.wp-block-group--marquee) {
 				--marquee-animation: marqueeX;
 				--marquee-speed: 50s;
 				--marquee-speed-mobile: calc(var(--marquee-speed) / 2);
@@ -195,7 +224,7 @@ class Group extends Dynamic {
 				max-width: 100vw;
 				overflow: hidden;
 			}
-			.is-style-marquee > .wp-block-group__marquee {
+			:where(.is-style-marquee,.wp-block-group--marquee) > .wp-block-group__marquee {
 				position: relative;
 				display: flex;
 				flex-direction: inherit;
@@ -210,16 +239,16 @@ class Group extends Dynamic {
 				animation-iteration-count: infinite;
 				animation-timing-function: linear;
 			}
-			.is-style-marquee:is(:hover,:focus,:focus-within) > .wp-block-group__marquee {
+			.:where(.is-style-marquee,.wp-block-group--marquee):is(:hover,:focus,:focus-within) > .wp-block-group__marquee {
 				animation-play-state: paused;
 			}
 			@media (min-width: {$breakpoint}) {
-				.is-style-marquee > .wp-block-group__marquee {
+				:where(.is-style-marquee,.wp-block-group--marquee) > .wp-block-group__marquee {
 					animation-duration: var(--marquee-speed);
 				}
 			}
 			@media (prefers-reduced-motion) {
-				.is-style-marquee > .wp-block-group__marquee {
+				:where(.is-style-marquee,.wp-block-group--marquee) > .wp-block-group__marquee {
 					animation-play-state: paused;
 				}
 			}

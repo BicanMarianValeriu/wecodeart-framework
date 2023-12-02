@@ -73,6 +73,7 @@ class Blocks implements Configuration {
 		$this->register( 'core/latest-comments',    Blocks\Widgets\Comments::class );
 		$this->register( 'core/search',	            Blocks\Widgets\Search::class );
 		$this->register( 'core/social-links',       Blocks\Widgets\Social::class );
+		$this->register( 'core/social-link',        Blocks\Widgets\Social\Link::class );
         // Navigation Blocks
 		$this->register( 'core/navigation',         Blocks\Navigation::class );
 		$this->register( 'core/navigation-link',    Blocks\Navigation\Link::class );

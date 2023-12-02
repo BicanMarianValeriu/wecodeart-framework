@@ -50,6 +50,29 @@ class Social extends Dynamic {
 	}
 
 	/**
+	 * Block args.
+	 *
+	 * @param	array $current	Existing register args
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( $current ): array {
+		$attributes	= get_prop( $current, [ 'attributes' ], [] );
+		$context	= get_prop( $current, [ 'provides_context' ], [] );
+
+		return [
+			'attributes' 		=> wp_parse_args( [
+				'namespace'		=> [
+					'type'		=> 'string',
+				],
+			], $attributes ),
+			'provides_context' 	=> wp_parse_args( [
+				'namespace'		=> 'namespace',
+			], $context ),
+		];
+	}
+
+	/**
 	 * Dynamically renders the `core/social-links` block.
 	 *
 	 * @param 	string 	$content 	The block markup.
@@ -84,7 +107,35 @@ class Social extends Dynamic {
 			\wp_add_inline_style( $this->get_asset_handle(), $inline_css );
 		}
 
+		if ( self::is_sharing_variation( $block ) ) {
+			$content 	= new \WP_HTML_Tag_Processor( $content );
+			
+			if( $content->next_tag() ) {
+				$content->add_class( 'wp-block-social-links--sharing' );
+			}
+			
+			$content = $content->get_updated_html();
+		}
+
 		return $content;
+	}
+
+	/**
+	 * Determines whether the block is a recent products block.
+	 *
+	 * @param 	array 	$block The block.
+	 *
+	 * @return 	bool 	Whether the block is a recent products block.
+	 */
+	public static function is_sharing_variation( array $block = [] ): bool {
+		if ( 
+			get_prop( $block, [ 'attrs', 'namespace' ], '' ) === 'wecodeart/social-links/sharing' || 
+			get_prop( $block, [ 'namespace' ], '' ) === 'wecodeart/social-links/sharing'
+		) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -104,15 +155,18 @@ class Social extends Dynamic {
 
 		$colors = [
 			'link'		=> '', // Preserve link color
-			'amazon' 	=> '#f90',
+			'mail'		=> '#f0f0f0',
+			'amazon' 	=> '#ff9900',
 			'bandcamp' 	=> '#1ea0c3',
 			'behance' 	=> '#0757fe',
 			'codepen' 	=> '#1e1f26',
+			'chain' 	=> '#1e1f26',
 			'deviantart'=> '#02e49b',
 			'dribbble' 	=> '#e94c89',
 			'dropbox' 	=> '#4280ff',
 			'etsy' 		=> '#f45800',
 			'facebook' 	=> '#1977f2',
+			'feed' 		=> '#1977f2',
 			'fivehundredpx'	=> '#000',
 			'flickr' 	=> '#0461dd',
 			'foursquare'=> '#e65678',
@@ -124,6 +178,8 @@ class Social extends Dynamic {
 			'linkedin' 	=> '#0577b5',
 			'mastodon' 	=> '#3288d4',
 			'meetup' 	=> '#02ab6c',
+			'medium' 	=> '#f6405f',
+			'patreon'	=> '#ff424d',
 			'pinterest'	=> '#e60122',
 			'pocket' 	=> '#ef4155',
 			'reddit' 	=> '#fe4500',
@@ -132,8 +188,12 @@ class Social extends Dynamic {
 			'soundcloud'=> '#ff5600',
 			'spotify' 	=> '#1bd760',
 			'tumblr' 	=> '#011835',
+			'telegram'	=> '#3390ec',
+			'tiktok'	=> '#000000',
+			'threads'	=> '#000000',
 			'twitch' 	=> '#6440a4',
 			'twitter' 	=> '#21a1f3',
+			'x' 		=> '#000000',
 			'vk' 		=> '#4680c2',
 			'vimeo' 	=> '#1eb7ea',
 			'wordpress'	=> '#3499cd',
@@ -172,6 +232,12 @@ class Social extends Dynamic {
 					'color' => 'white',
 				], $properties );
 			}
+
+			if( $service === 'mail' ) {
+				$properties = wp_parse_args( [
+					'color' => '#212121'
+				], $properties );
+			}
 		// Default style
 		} else {
 			$selector = '.wp-block-social-links:not(.is-style-logos-only) .wp-social-link-' . $service;
@@ -183,6 +249,12 @@ class Social extends Dynamic {
 			if( $service === 'goodreads' ) {
 				$properties = wp_parse_args( [
 					'color' => '#382110'
+				], $properties );
+			}
+			
+			if( $service === 'mail' ) {
+				$properties = wp_parse_args( [
+					'color' => '#212121'
 				], $properties );
 			}
 		}

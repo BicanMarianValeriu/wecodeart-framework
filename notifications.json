@@ -3,6 +3,11 @@
 	"items": [
 		{
 			"type": "info",
+			"title": "Version 6.2.9",
+			"content": "The next version will introduce a scriptless social sharing block variation for core/social-links block with buttons for major social networks."
+		},
+		{
+			"type": "info",
 			"title": "Special thanks to:",
 			"content": "Translation contributors: <a href=\"https:\/\/profiles.wordpress.org\/dancaragea\/\" target=\"_blank\">Dan Caragea<\/a>, <a href=\"https:\/\/profiles.wordpress.org\/vladytimy\/\" target=\"_blank\">Vlad T<\/a>, <a href=\"https:\/\/profiles.wordpress.org\/psmits1567\/\" target=\"_blank\">Peter Smits<\/a>, <a href=\"https:\/\/profiles.wordpress.org\/oliviervaneester\/\" target=\"_blank\">Olivier Van Eester<\/a>, <a href=\"https:\/\/profiles.wordpress.org\/nekojonez\/\" target=\"_blank\">Pieterjan Deneys<\/a>."
 		}
