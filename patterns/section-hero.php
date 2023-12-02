@@ -26,7 +26,6 @@
             <!-- /wp:paragraph -->
         </div>
         <!-- /wp:group -->
-        
         <!-- wp:list {"style":{"spacing":{"blockGap":"var:preset|spacing|lg"}},"className":"fw-700 g-0 is-style-icon\u002d\u002dcheck-circle-fill","layout":{"type":"flex","orientation":"horizontal","justifyContent":"center"}} -->
         <ul class="fw-700 gy-0 is-style-icon--check-circle-fill">
             <!-- wp:list-item {"className":"text-uppercase"} -->
@@ -51,8 +50,8 @@
         <!-- /wp:buttons -->
     </div>
     <!-- /wp:group -->
-    <!-- wp:separator {"align":"full","style":{"dimensions":{"minHeight":"110px"}},"backgroundColor":"primary","className":"is-style-svg-waves"} -->
-    <hr class="wp-block-separator alignfull has-text-color has-primary-color has-alpha-channel-opacity has-primary-background-color has-background is-style-svg-waves" style="min-height:110px" />
+    <!-- wp:separator {"align":"full","style":{"dimensions":{"minHeight":"110px"}},"backgroundColor":"primary","className":"is-style-svg-lines"} -->
+    <hr class="wp-block-separator alignfull has-text-color has-primary-color has-alpha-channel-opacity has-primary-background-color has-background is-style-svg-lines" style="min-height:110px" />
     <!-- /wp:separator -->
 </div>
 <!-- /wp:group -->

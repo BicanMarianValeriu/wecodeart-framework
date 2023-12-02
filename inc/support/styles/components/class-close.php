@@ -50,6 +50,7 @@ class Close extends Base {
 				border: 0;
 				border-radius: .25rem;
 				opacity: var(--wp--close-opacity);
+				cursor: pointer;
 			}
 
 			.theme-is-dark .btn-close {
