@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.1
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -64,7 +64,7 @@ class Template extends Dynamic {
 				'spacing' => [
 					'padding'	=> true,
 					'margin'	=> true,
-					'blockGap' 	=> true // For list view only (avoid using with grid)
+					'blockGap' 	=> true
 				],
 			], $supports )
 		];
@@ -75,91 +75,31 @@ class Template extends Dynamic {
 	 *
 	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
+	 * @param 	object 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ) {
-		$page 	= isset( $block->context['queryId'] ) ? 'query-' . $block->context['queryId'] . '-page' : 'query-page';
-		$page	= (int) get_prop( $_GET, $page, 1 );
+	public function render( array $attributes = [], string $content = '', object $block = null ): string {
+		$columns 	= get_prop( $attributes, [ 'layout', 'columnCount' ], get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
+		$callback 	= function( array $classes = [] ) use( $columns ) {
+			$classes = array_merge( $classes, [ 'span-12', 'span-md-6', 'span-lg-' . ( 12 / $columns ) ] );
+
+			return $classes;
+		};
+
+		\add_filter( 'post_class', $callback );
+		$content	= render_block_core_post_template( $attributes, $content, $block );
+		\remove_filter( 'post_class', $callback );
+
+		$content	= new \WP_HTML_Tag_Processor( $content );
 		
-		// Override the custom query with the global query if needed.
-		if ( get_prop( $block->context, [ 'query', 'inherit' ], false ) ) {
-			global $wp_query;
-			$query = clone $wp_query;
-		} else {
-			$args	= build_query_vars_from_query_block( $block, $page );
-			$query = new \WP_Query( $args );
-		}
-
-		if ( block_core_post_template_uses_featured_image( $block->inner_blocks ) ) {
-			update_post_thumbnail_cache( $query );
-		}
-
-		$classnames = [ 'wp-block-post-template' ];
-
-		// Deprecated grid layout
-		if ( isset( $block->context['displayLayout'] ) && isset( $block->context['query'] ) ) {
-			if ( get_prop( $block->context, [ 'displayLayout', 'type' ] ) === 'flex' ) {
-				$classnames = array_merge( $classnames, [ 'grid' ] );
+		if( $content->next_tag( [ 'class_name' => 'wp-block-post-template' ] ) ) {
+			if( get_prop( $attributes, [ 'layout', 'type' ], get_prop( $block->context, [ 'displayLayout', 'type' ], '' ) ) === 'grid' ) {
+				$content->remove_class( 'columns-' . $columns );
 			}
 		}
 
-		// New Grid layout
-		if ( get_prop( $attributes, [ 'layout', 'type' ], '' ) === 'grid' ) {
-			$classnames = array_merge( $classnames, [ 'grid' ] );
-		}
-
-		$item_class = [ 'wp-block-post' ];
-
-		// Grid Layout (with old support)
-		$columns = get_prop( $attributes, [ 'layout', 'columnCount' ], get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
-		
-		if( $columns ) {
-			$item_class = array_merge( $item_class, [ 'span-12', 'span-md-6', 'span-lg-' . ( 12 / $columns ) ] );
-		}
-
-		if( $value = get_prop( $attributes, 'className' ) ) {
-			$classnames[] = $value;
-		}
-
-		$classnames[] = 'list-unstyled';
-
-		return wecodeart( 'markup' )::wrap( 'wp-block-query', [
-			[
-				'tag' 	=> 'ul',
-				'attrs'	=> [
-					'class' => implode( ' ', $classnames )
-				]
-			]
-		], function( $query, $block, $item_class ) {
-
-			while ( $query->have_posts() ) {
-				$query->the_post();
-
-				// Set the block name to one that does not correspond to an existing registered block.
-				// This ensures that for the inner instances of the Post Template block, we do not render any block supports.
-				$block_instance = $block->parsed_block;
-				$block_instance['blockName'] = 'core/null';
-
-				wecodeart( 'markup' )::wrap( 'wp-block-post', [
-					[
-						'tag' 	=> 'li',
-						'attrs'	=> [
-							'class' => implode( ' ', get_post_class( implode( ' ', $item_class ) ) )
-						]
-					]
-				], function( $block ) {
-					echo ( new \WP_Block( $block, [
-						'postType' => get_post_type(),
-						'postId'   => get_the_ID(),
-					] ) )->render( [ 'dynamic' => false ] );
-				}, [ $block_instance ] );
-			}
-	
-			wp_reset_postdata();
-
-		}, [ $query, $block, $item_class ], false );
+		return (string) $content;
 	}
 
 	/**
@@ -190,9 +130,13 @@ class Template extends Dynamic {
 	 */
 	public function styles() {
 		return "
-		.wp-block-post-template--grid .wp-block-post + .wp-block-post {
-			margin-top: 0;
-		}
+			.wp-block-post-template {
+				list-style: none;
+				padding: 0;
+			}
+			.wp-block-post-template.wp-block-post-template.has-background {
+				padding: var(--wp--preset--spacing--g);
+			}
 		";
 	}
 }

@@ -61,6 +61,15 @@
         ]
     },
     {
+        "slug": "el-testimonial-card",
+        "title": "Testimonial (Card)",
+        "description": "A simple testimonial card.",
+        "viewportWidth": 550,
+        "categories": [
+            "wecodeart", "elements"
+        ]
+    },
+    {
         "slug": "el-badge",
         "title": "Badge",
         "description": "A simple badge.",

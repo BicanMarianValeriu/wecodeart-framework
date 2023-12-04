@@ -189,7 +189,7 @@ progress {
   text-decoration: underline;
 }
 
-.grid {
+:is(.grid, .is-layout-grid) {
   --wp--style--block-gap: var(--wp--custom--gutter, 1rem);
   --wp--columns: 12;
   --wp--column-min: 0px;
@@ -200,430 +200,430 @@ progress {
   grid-template-columns: repeat(auto-fill, minmax(max(var(--wp--column-min), var(--wp--column-max)), 1fr));
   grid-gap: var(--wp--style--block-gap);
 }
-.grid.is-layout-grid {
+:is(.grid, .is-layout-grid).is-layout-grid {
   grid-template-columns: repeat(auto-fill, minmax(max(var(--wp--column-min), var(--wp--column-max)), 1fr));
 }
-.grid .span-1 {
+:is(.grid, .is-layout-grid) .span-1 {
   grid-column: auto/span 1;
 }
-.grid .span-2 {
+:is(.grid, .is-layout-grid) .span-2 {
   grid-column: auto/span 2;
 }
-.grid .span-3 {
+:is(.grid, .is-layout-grid) .span-3 {
   grid-column: auto/span 3;
 }
-.grid .span-4 {
+:is(.grid, .is-layout-grid) .span-4 {
   grid-column: auto/span 4;
 }
-.grid .span-5 {
+:is(.grid, .is-layout-grid) .span-5 {
   grid-column: auto/span 5;
 }
-.grid .span-6 {
+:is(.grid, .is-layout-grid) .span-6 {
   grid-column: auto/span 6;
 }
-.grid .span-7 {
+:is(.grid, .is-layout-grid) .span-7 {
   grid-column: auto/span 7;
 }
-.grid .span-8 {
+:is(.grid, .is-layout-grid) .span-8 {
   grid-column: auto/span 8;
 }
-.grid .span-9 {
+:is(.grid, .is-layout-grid) .span-9 {
   grid-column: auto/span 9;
 }
-.grid .span-10 {
+:is(.grid, .is-layout-grid) .span-10 {
   grid-column: auto/span 10;
 }
-.grid .span-11 {
+:is(.grid, .is-layout-grid) .span-11 {
   grid-column: auto/span 11;
 }
-.grid .span-12 {
+:is(.grid, .is-layout-grid) .span-12 {
   grid-column: auto/span 12;
 }
-.grid .start-1 {
+:is(.grid, .is-layout-grid) .start-1 {
   grid-column-start: 1;
 }
-.grid .start-2 {
+:is(.grid, .is-layout-grid) .start-2 {
   grid-column-start: 2;
 }
-.grid .start-3 {
+:is(.grid, .is-layout-grid) .start-3 {
   grid-column-start: 3;
 }
-.grid .start-4 {
+:is(.grid, .is-layout-grid) .start-4 {
   grid-column-start: 4;
 }
-.grid .start-5 {
+:is(.grid, .is-layout-grid) .start-5 {
   grid-column-start: 5;
 }
-.grid .start-6 {
+:is(.grid, .is-layout-grid) .start-6 {
   grid-column-start: 6;
 }
-.grid .start-7 {
+:is(.grid, .is-layout-grid) .start-7 {
   grid-column-start: 7;
 }
-.grid .start-8 {
+:is(.grid, .is-layout-grid) .start-8 {
   grid-column-start: 8;
 }
-.grid .start-9 {
+:is(.grid, .is-layout-grid) .start-9 {
   grid-column-start: 9;
 }
-.grid .start-10 {
+:is(.grid, .is-layout-grid) .start-10 {
   grid-column-start: 10;
 }
-.grid .start-11 {
+:is(.grid, .is-layout-grid) .start-11 {
   grid-column-start: 11;
 }
 @media (min-width: 576px) {
-  .grid .span-sm-1 {
+  :is(.grid, .is-layout-grid) .span-sm-1 {
     grid-column: auto/span 1;
   }
-  .grid .span-sm-2 {
+  :is(.grid, .is-layout-grid) .span-sm-2 {
     grid-column: auto/span 2;
   }
-  .grid .span-sm-3 {
+  :is(.grid, .is-layout-grid) .span-sm-3 {
     grid-column: auto/span 3;
   }
-  .grid .span-sm-4 {
+  :is(.grid, .is-layout-grid) .span-sm-4 {
     grid-column: auto/span 4;
   }
-  .grid .span-sm-5 {
+  :is(.grid, .is-layout-grid) .span-sm-5 {
     grid-column: auto/span 5;
   }
-  .grid .span-sm-6 {
+  :is(.grid, .is-layout-grid) .span-sm-6 {
     grid-column: auto/span 6;
   }
-  .grid .span-sm-7 {
+  :is(.grid, .is-layout-grid) .span-sm-7 {
     grid-column: auto/span 7;
   }
-  .grid .span-sm-8 {
+  :is(.grid, .is-layout-grid) .span-sm-8 {
     grid-column: auto/span 8;
   }
-  .grid .span-sm-9 {
+  :is(.grid, .is-layout-grid) .span-sm-9 {
     grid-column: auto/span 9;
   }
-  .grid .span-sm-10 {
+  :is(.grid, .is-layout-grid) .span-sm-10 {
     grid-column: auto/span 10;
   }
-  .grid .span-sm-11 {
+  :is(.grid, .is-layout-grid) .span-sm-11 {
     grid-column: auto/span 11;
   }
-  .grid .span-sm-12 {
+  :is(.grid, .is-layout-grid) .span-sm-12 {
     grid-column: auto/span 12;
   }
-  .grid .start-sm-1 {
+  :is(.grid, .is-layout-grid) .start-sm-1 {
     grid-column-start: 1;
   }
-  .grid .start-sm-2 {
+  :is(.grid, .is-layout-grid) .start-sm-2 {
     grid-column-start: 2;
   }
-  .grid .start-sm-3 {
+  :is(.grid, .is-layout-grid) .start-sm-3 {
     grid-column-start: 3;
   }
-  .grid .start-sm-4 {
+  :is(.grid, .is-layout-grid) .start-sm-4 {
     grid-column-start: 4;
   }
-  .grid .start-sm-5 {
+  :is(.grid, .is-layout-grid) .start-sm-5 {
     grid-column-start: 5;
   }
-  .grid .start-sm-6 {
+  :is(.grid, .is-layout-grid) .start-sm-6 {
     grid-column-start: 6;
   }
-  .grid .start-sm-7 {
+  :is(.grid, .is-layout-grid) .start-sm-7 {
     grid-column-start: 7;
   }
-  .grid .start-sm-8 {
+  :is(.grid, .is-layout-grid) .start-sm-8 {
     grid-column-start: 8;
   }
-  .grid .start-sm-9 {
+  :is(.grid, .is-layout-grid) .start-sm-9 {
     grid-column-start: 9;
   }
-  .grid .start-sm-10 {
+  :is(.grid, .is-layout-grid) .start-sm-10 {
     grid-column-start: 10;
   }
-  .grid .start-sm-11 {
+  :is(.grid, .is-layout-grid) .start-sm-11 {
     grid-column-start: 11;
   }
 }
 @media (min-width: 768px) {
-  .grid .span-md-1 {
+  :is(.grid, .is-layout-grid) .span-md-1 {
     grid-column: auto/span 1;
   }
-  .grid .span-md-2 {
+  :is(.grid, .is-layout-grid) .span-md-2 {
     grid-column: auto/span 2;
   }
-  .grid .span-md-3 {
+  :is(.grid, .is-layout-grid) .span-md-3 {
     grid-column: auto/span 3;
   }
-  .grid .span-md-4 {
+  :is(.grid, .is-layout-grid) .span-md-4 {
     grid-column: auto/span 4;
   }
-  .grid .span-md-5 {
+  :is(.grid, .is-layout-grid) .span-md-5 {
     grid-column: auto/span 5;
   }
-  .grid .span-md-6 {
+  :is(.grid, .is-layout-grid) .span-md-6 {
     grid-column: auto/span 6;
   }
-  .grid .span-md-7 {
+  :is(.grid, .is-layout-grid) .span-md-7 {
     grid-column: auto/span 7;
   }
-  .grid .span-md-8 {
+  :is(.grid, .is-layout-grid) .span-md-8 {
     grid-column: auto/span 8;
   }
-  .grid .span-md-9 {
+  :is(.grid, .is-layout-grid) .span-md-9 {
     grid-column: auto/span 9;
   }
-  .grid .span-md-10 {
+  :is(.grid, .is-layout-grid) .span-md-10 {
     grid-column: auto/span 10;
   }
-  .grid .span-md-11 {
+  :is(.grid, .is-layout-grid) .span-md-11 {
     grid-column: auto/span 11;
   }
-  .grid .span-md-12 {
+  :is(.grid, .is-layout-grid) .span-md-12 {
     grid-column: auto/span 12;
   }
-  .grid .start-md-1 {
+  :is(.grid, .is-layout-grid) .start-md-1 {
     grid-column-start: 1;
   }
-  .grid .start-md-2 {
+  :is(.grid, .is-layout-grid) .start-md-2 {
     grid-column-start: 2;
   }
-  .grid .start-md-3 {
+  :is(.grid, .is-layout-grid) .start-md-3 {
     grid-column-start: 3;
   }
-  .grid .start-md-4 {
+  :is(.grid, .is-layout-grid) .start-md-4 {
     grid-column-start: 4;
   }
-  .grid .start-md-5 {
+  :is(.grid, .is-layout-grid) .start-md-5 {
     grid-column-start: 5;
   }
-  .grid .start-md-6 {
+  :is(.grid, .is-layout-grid) .start-md-6 {
     grid-column-start: 6;
   }
-  .grid .start-md-7 {
+  :is(.grid, .is-layout-grid) .start-md-7 {
     grid-column-start: 7;
   }
-  .grid .start-md-8 {
+  :is(.grid, .is-layout-grid) .start-md-8 {
     grid-column-start: 8;
   }
-  .grid .start-md-9 {
+  :is(.grid, .is-layout-grid) .start-md-9 {
     grid-column-start: 9;
   }
-  .grid .start-md-10 {
+  :is(.grid, .is-layout-grid) .start-md-10 {
     grid-column-start: 10;
   }
-  .grid .start-md-11 {
+  :is(.grid, .is-layout-grid) .start-md-11 {
     grid-column-start: 11;
   }
 }
 @media (min-width: 992px) {
-  .grid .span-lg-1 {
+  :is(.grid, .is-layout-grid) .span-lg-1 {
     grid-column: auto/span 1;
   }
-  .grid .span-lg-2 {
+  :is(.grid, .is-layout-grid) .span-lg-2 {
     grid-column: auto/span 2;
   }
-  .grid .span-lg-3 {
+  :is(.grid, .is-layout-grid) .span-lg-3 {
     grid-column: auto/span 3;
   }
-  .grid .span-lg-4 {
+  :is(.grid, .is-layout-grid) .span-lg-4 {
     grid-column: auto/span 4;
   }
-  .grid .span-lg-5 {
+  :is(.grid, .is-layout-grid) .span-lg-5 {
     grid-column: auto/span 5;
   }
-  .grid .span-lg-6 {
+  :is(.grid, .is-layout-grid) .span-lg-6 {
     grid-column: auto/span 6;
   }
-  .grid .span-lg-7 {
+  :is(.grid, .is-layout-grid) .span-lg-7 {
     grid-column: auto/span 7;
   }
-  .grid .span-lg-8 {
+  :is(.grid, .is-layout-grid) .span-lg-8 {
     grid-column: auto/span 8;
   }
-  .grid .span-lg-9 {
+  :is(.grid, .is-layout-grid) .span-lg-9 {
     grid-column: auto/span 9;
   }
-  .grid .span-lg-10 {
+  :is(.grid, .is-layout-grid) .span-lg-10 {
     grid-column: auto/span 10;
   }
-  .grid .span-lg-11 {
+  :is(.grid, .is-layout-grid) .span-lg-11 {
     grid-column: auto/span 11;
   }
-  .grid .span-lg-12 {
+  :is(.grid, .is-layout-grid) .span-lg-12 {
     grid-column: auto/span 12;
   }
-  .grid .start-lg-1 {
+  :is(.grid, .is-layout-grid) .start-lg-1 {
     grid-column-start: 1;
   }
-  .grid .start-lg-2 {
+  :is(.grid, .is-layout-grid) .start-lg-2 {
     grid-column-start: 2;
   }
-  .grid .start-lg-3 {
+  :is(.grid, .is-layout-grid) .start-lg-3 {
     grid-column-start: 3;
   }
-  .grid .start-lg-4 {
+  :is(.grid, .is-layout-grid) .start-lg-4 {
     grid-column-start: 4;
   }
-  .grid .start-lg-5 {
+  :is(.grid, .is-layout-grid) .start-lg-5 {
     grid-column-start: 5;
   }
-  .grid .start-lg-6 {
+  :is(.grid, .is-layout-grid) .start-lg-6 {
     grid-column-start: 6;
   }
-  .grid .start-lg-7 {
+  :is(.grid, .is-layout-grid) .start-lg-7 {
     grid-column-start: 7;
   }
-  .grid .start-lg-8 {
+  :is(.grid, .is-layout-grid) .start-lg-8 {
     grid-column-start: 8;
   }
-  .grid .start-lg-9 {
+  :is(.grid, .is-layout-grid) .start-lg-9 {
     grid-column-start: 9;
   }
-  .grid .start-lg-10 {
+  :is(.grid, .is-layout-grid) .start-lg-10 {
     grid-column-start: 10;
   }
-  .grid .start-lg-11 {
+  :is(.grid, .is-layout-grid) .start-lg-11 {
     grid-column-start: 11;
   }
 }
 @media (min-width: 1200px) {
-  .grid .span-xl-1 {
+  :is(.grid, .is-layout-grid) .span-xl-1 {
     grid-column: auto/span 1;
   }
-  .grid .span-xl-2 {
+  :is(.grid, .is-layout-grid) .span-xl-2 {
     grid-column: auto/span 2;
   }
-  .grid .span-xl-3 {
+  :is(.grid, .is-layout-grid) .span-xl-3 {
     grid-column: auto/span 3;
   }
-  .grid .span-xl-4 {
+  :is(.grid, .is-layout-grid) .span-xl-4 {
     grid-column: auto/span 4;
   }
-  .grid .span-xl-5 {
+  :is(.grid, .is-layout-grid) .span-xl-5 {
     grid-column: auto/span 5;
   }
-  .grid .span-xl-6 {
+  :is(.grid, .is-layout-grid) .span-xl-6 {
     grid-column: auto/span 6;
   }
-  .grid .span-xl-7 {
+  :is(.grid, .is-layout-grid) .span-xl-7 {
     grid-column: auto/span 7;
   }
-  .grid .span-xl-8 {
+  :is(.grid, .is-layout-grid) .span-xl-8 {
     grid-column: auto/span 8;
   }
-  .grid .span-xl-9 {
+  :is(.grid, .is-layout-grid) .span-xl-9 {
     grid-column: auto/span 9;
   }
-  .grid .span-xl-10 {
+  :is(.grid, .is-layout-grid) .span-xl-10 {
     grid-column: auto/span 10;
   }
-  .grid .span-xl-11 {
+  :is(.grid, .is-layout-grid) .span-xl-11 {
     grid-column: auto/span 11;
   }
-  .grid .span-xl-12 {
+  :is(.grid, .is-layout-grid) .span-xl-12 {
     grid-column: auto/span 12;
   }
-  .grid .start-xl-1 {
+  :is(.grid, .is-layout-grid) .start-xl-1 {
     grid-column-start: 1;
   }
-  .grid .start-xl-2 {
+  :is(.grid, .is-layout-grid) .start-xl-2 {
     grid-column-start: 2;
   }
-  .grid .start-xl-3 {
+  :is(.grid, .is-layout-grid) .start-xl-3 {
     grid-column-start: 3;
   }
-  .grid .start-xl-4 {
+  :is(.grid, .is-layout-grid) .start-xl-4 {
     grid-column-start: 4;
   }
-  .grid .start-xl-5 {
+  :is(.grid, .is-layout-grid) .start-xl-5 {
     grid-column-start: 5;
   }
-  .grid .start-xl-6 {
+  :is(.grid, .is-layout-grid) .start-xl-6 {
     grid-column-start: 6;
   }
-  .grid .start-xl-7 {
+  :is(.grid, .is-layout-grid) .start-xl-7 {
     grid-column-start: 7;
   }
-  .grid .start-xl-8 {
+  :is(.grid, .is-layout-grid) .start-xl-8 {
     grid-column-start: 8;
   }
-  .grid .start-xl-9 {
+  :is(.grid, .is-layout-grid) .start-xl-9 {
     grid-column-start: 9;
   }
-  .grid .start-xl-10 {
+  :is(.grid, .is-layout-grid) .start-xl-10 {
     grid-column-start: 10;
   }
-  .grid .start-xl-11 {
+  :is(.grid, .is-layout-grid) .start-xl-11 {
     grid-column-start: 11;
   }
 }
 @media (min-width: 1400px) {
-  .grid .span-xxl-1 {
+  :is(.grid, .is-layout-grid) .span-xxl-1 {
     grid-column: auto/span 1;
   }
-  .grid .span-xxl-2 {
+  :is(.grid, .is-layout-grid) .span-xxl-2 {
     grid-column: auto/span 2;
   }
-  .grid .span-xxl-3 {
+  :is(.grid, .is-layout-grid) .span-xxl-3 {
     grid-column: auto/span 3;
   }
-  .grid .span-xxl-4 {
+  :is(.grid, .is-layout-grid) .span-xxl-4 {
     grid-column: auto/span 4;
   }
-  .grid .span-xxl-5 {
+  :is(.grid, .is-layout-grid) .span-xxl-5 {
     grid-column: auto/span 5;
   }
-  .grid .span-xxl-6 {
+  :is(.grid, .is-layout-grid) .span-xxl-6 {
     grid-column: auto/span 6;
   }
-  .grid .span-xxl-7 {
+  :is(.grid, .is-layout-grid) .span-xxl-7 {
     grid-column: auto/span 7;
   }
-  .grid .span-xxl-8 {
+  :is(.grid, .is-layout-grid) .span-xxl-8 {
     grid-column: auto/span 8;
   }
-  .grid .span-xxl-9 {
+  :is(.grid, .is-layout-grid) .span-xxl-9 {
     grid-column: auto/span 9;
   }
-  .grid .span-xxl-10 {
+  :is(.grid, .is-layout-grid) .span-xxl-10 {
     grid-column: auto/span 10;
   }
-  .grid .span-xxl-11 {
+  :is(.grid, .is-layout-grid) .span-xxl-11 {
     grid-column: auto/span 11;
   }
-  .grid .span-xxl-12 {
+  :is(.grid, .is-layout-grid) .span-xxl-12 {
     grid-column: auto/span 12;
   }
-  .grid .start-xxl-1 {
+  :is(.grid, .is-layout-grid) .start-xxl-1 {
     grid-column-start: 1;
   }
-  .grid .start-xxl-2 {
+  :is(.grid, .is-layout-grid) .start-xxl-2 {
     grid-column-start: 2;
   }
-  .grid .start-xxl-3 {
+  :is(.grid, .is-layout-grid) .start-xxl-3 {
     grid-column-start: 3;
   }
-  .grid .start-xxl-4 {
+  :is(.grid, .is-layout-grid) .start-xxl-4 {
     grid-column-start: 4;
   }
-  .grid .start-xxl-5 {
+  :is(.grid, .is-layout-grid) .start-xxl-5 {
     grid-column-start: 5;
   }
-  .grid .start-xxl-6 {
+  :is(.grid, .is-layout-grid) .start-xxl-6 {
     grid-column-start: 6;
   }
-  .grid .start-xxl-7 {
+  :is(.grid, .is-layout-grid) .start-xxl-7 {
     grid-column-start: 7;
   }
-  .grid .start-xxl-8 {
+  :is(.grid, .is-layout-grid) .start-xxl-8 {
     grid-column-start: 8;
   }
-  .grid .start-xxl-9 {
+  :is(.grid, .is-layout-grid) .start-xxl-9 {
     grid-column-start: 9;
   }
-  .grid .start-xxl-10 {
+  :is(.grid, .is-layout-grid) .start-xxl-10 {
     grid-column-start: 10;
   }
-  .grid .start-xxl-11 {
+  :is(.grid, .is-layout-grid) .start-xxl-11 {
     grid-column-start: 11;
   }
 }

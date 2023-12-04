@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.2.3
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -173,29 +173,16 @@ class Styles implements Integration {
 			// Remove inline style attribute.
 			$content->remove_attribute( 'style' );
 			
-			if( ! empty( $selectors = $processed->remove_style() ) ) {
-				$content->next_tag( $selectors );
-				$content->remove_attribute( 'style' );
+			// Remove inline style attribute for extra wrappers.
+			if( ! empty( $selectors = $processed->remove_style() ) ) {				
+				foreach( $selectors as $selector ) {
+					if( $content->next_tag( $selector ) ) {
+						$content->remove_attribute( 'style' );
+					}
+				}
 			}
 			
-			if( $block_name === 'core/table' ) {
-				// Table also adds style to the <table>.
-				$content->next_tag( [ 'tag_name' => 'table' ] );
-				$content->remove_attribute( 'style' );
-			}
-			
-			if( $block_name === 'core/quote' ) {
-				// Quote also adds style to the <blockquote>.
-				$content->next_tag( [ 'tag_name' => 'blockquote' ] );
-				$content->remove_attribute( 'style' );
-			}
-			
-			if( in_array( $block_name, [ 'core/avatar', 'core/image', 'core/cover' ], true ) ) {
-				// Blocks that also adds style to the <img />.
-				$content->next_tag( [ 'tag_name' => 'img' ] );
-				$content->remove_attribute( 'style' );
-			}
-			
+			// Utilities and Duotone SVGs
 			$classes	= $processed->get_classes();
 			$filters	= $processed->get_duotone();
 			
@@ -363,6 +350,8 @@ class Styles implements Integration {
 			'core/button' 			=> Styles\Blocks\Button::class,
 			'core/column' 			=> Styles\Blocks\Column::class,
 			'core/cover' 			=> Styles\Blocks\Cover::class,
+			'core/table' 			=> Styles\Blocks\Table::class,
+			'core/quote' 			=> Styles\Blocks\Quote::class,
 			'core/group' 			=> Styles\Blocks\Group::class,
 			'core/gallery' 			=> Styles\Blocks\Gallery::class,
 			'core/media-text' 		=> Styles\Blocks\Media::class,

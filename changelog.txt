@@ -1,6 +1,11 @@
 v6.2.9
 - Updated - core/group marquee variation logic with namespace attribute / deprecated old logic with block style
+- Updated - core/post-template markup logic to use core render_block_core_post_template function
+- Updated - .grid styles now extends to .is-layout-grid class (applied on blocks that supports grid layout)
 - Fixed - core/social-links missing social networks services colors
+- Fixed - issue with generated classname for inline styles for selectors that contains ","
+- Fixed - issue with buttons auto text color based on background lightness
+- Added - new testimonial cards pattern
 - Added - core/social-links sharing variation
 - Added - core/social-link sharing variation (for common social networks)
 - Added - social sharing block pattern / used on single page

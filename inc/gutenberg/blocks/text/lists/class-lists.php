@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.2.8
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -217,14 +217,10 @@ class Lists extends Dynamic {
 	public function styles(): string {
 		return "
 			/* Reset */
-			ol,
-			ul {
+			.wp-block-list {
 				padding-left: 1.1em;
 			}
-			ol ol,
-			ul ul,
-			ol ul,
-			ul ol {
+			.wp-block-list .wp-block-list {
 				margin-bottom: 0;
 			}
 			dt {

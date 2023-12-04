@@ -1,7 +1,7 @@
 $breakpoints: $grid-breakpoints;
 $columns: $grid-columns;
 
-.grid {
+:is(.grid,.is-layout-grid) {
     --wp--style--block-gap: var(--wp--custom--gutter, 1rem);
     --wp--columns: 12;
     --wp--column-min: 0px;

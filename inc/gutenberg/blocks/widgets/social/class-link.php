@@ -71,9 +71,9 @@ class Link extends Dynamic {
 	public function render( array $attributes = [], string $content = '', object $block = null ): string {
 		$content	= render_block_core_social_link( $attributes, $content, $block );
 		$is_sharing = wecodeart( 'blocks' )->get( 'core/social-links' )::is_sharing_variation( $block->context );
-		$service 	= get_prop( $attributes, [ 'service' ], '' );
-
+		
 		if ( $is_sharing ) {
+			$service 	= get_prop( $attributes, [ 'service' ], '' );
 			$content 	= new \WP_HTML_Tag_Processor( $content );
 
 			$window_title = esc_html__( 'Share the post!', 'wecodeart' );
@@ -86,15 +86,19 @@ class Link extends Dynamic {
 				$content->set_attribute( 'aria-label', $window_title );
 				$content->set_attribute( 'title', sprintf( esc_html__( 'Share on %s', 'wecodeart' ), ucfirst( $service ) ) );
 
-				if( $content->get_attribute( 'target' ) === '_blank' && $service !== 'mail' ) {
+				if( $content->get_attribute( 'target' ) === '_blank' ) {
+					if( $service === 'mail' ) {
+						$content->remove_attribute( 'target' );
+	
+						return (string) $content;
+					}
+
 					$content->set_attribute( 'onclick', "return !window.open(this.href, '{$window_title}', 'width=500,height=500')" );
 				}
 			}
-			
-			$content = $content->get_updated_html();
 		}
 
-		return $content;
+		return (string) $content;
 	}
 
 	/**
@@ -113,6 +117,15 @@ class Link extends Dynamic {
 		$current_img = get_the_post_thumbnail_url();
 
 		switch( $service ):
+			case 'wordpress':
+				$sharing_url 	= 'https://wordpress.com/press-this.php';
+				$network_args 	= [
+					'u'	=> $current_url,
+					't'	=> $current_ttl,
+					's'	=> $current_txt,
+					'i'	=> $current_img
+				];
+			break;
 			case 'facebook':
 				$sharing_url 	= 'https://www.facebook.com/sharer/sharer.php';
 				$network_args 	= [
@@ -125,14 +138,6 @@ class Link extends Dynamic {
 				$network_args 	= [
 					'url' 	=> $current_url,
 					'text'	=> $current_txt
-				];
-			break;
-			case 'pinterest':
-				$sharing_url 	= 'https://pinterest.com/pin/create/button';
-				$network_args 	= [
-					'url' 	=> $current_url,
-					'media'	=> $current_img,
-					'description'	=> $current_txt
 				];
 			break;
 			case 'linkedin':
@@ -156,6 +161,14 @@ class Link extends Dynamic {
 				$network_args 	= [
 					'url'	=> $current_url,
 					'text'	=> $current_txt
+				];
+			break;
+			case 'pinterest':
+				$sharing_url 	= 'https://pinterest.com/pin/create/button';
+				$network_args 	= [
+					'url' 	=> $current_url,
+					'media'	=> $current_img,
+					'description'	=> $current_txt
 				];
 			break;
 			case 'reddit':
@@ -184,15 +197,6 @@ class Link extends Dynamic {
 					'url'		=> $current_url,
 					'title'		=> $current_ttl,
 					'caption'	=> $current_txt
-				];
-			break;
-			case 'wordpress':
-				$sharing_url 	= 'https://wordpress.com/press-this.php';
-				$network_args 	= [
-					'u'	=> $current_url,
-					't'	=> $current_ttl,
-					's'	=> $current_txt,
-					'i'	=> $current_img
 				];
 			break;
 			case 'skype':

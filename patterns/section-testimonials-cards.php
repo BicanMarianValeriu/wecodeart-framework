@@ -1,12 +1,12 @@
 <?php
 /**
- * Title: Testimonials
- * Slug: wecodeart/section-testimonials
+ * Title: Testimonials (Cards)
+ * Slug: wecodeart/section-testimonials-cards
  * Categories: wecodeart, testimonials
  */
 ?>
-<!-- wp:group {"align":"full","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl"},"blockGap":"var:preset|spacing|md"}},"backgroundColor":"accent","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-accent-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--xl);padding-bottom:var(--wp--preset--spacing--xl)">
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxl","bottom":"var:preset|spacing|xxl","left":"var:preset|spacing|g","right":"var:preset|spacing|g"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xxl);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--xxl);padding-left:var(--wp--preset--spacing--g)">
     <!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"layout":{"type":"constrained"}} -->
     <div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--g);padding-left:var(--wp--preset--spacing--g)">
         <!-- wp:heading {"textAlign":"center","className":"is-style-underline-brush"} -->
@@ -17,16 +17,27 @@
         <!-- /wp:paragraph -->
     </div>
     <!-- /wp:group -->
-    <!-- wp:group {"namespace":"wecodeart/group/marquee","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md"}}},"textColor":"secondary","layout":{"type":"flex","flexWrap":"nowrap","alignItems":"center"}} -->
-    <div class="wp-block-group alignfull has-secondary-color has-text-color" style="padding-top:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md)">
-        <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
-        <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
-        <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
-        <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
+    <!-- wp:columns {"style":{"spacing":{"margin":{"top":"var:preset|spacing|xl"}}},"className":"grid"} -->
+    <div class="wp-block-columns grid" style="margin-top:var(--wp--preset--spacing--xl)">
+        <!-- wp:column {"className":"span-12 span-md-4"} -->
+        <div class="wp-block-column span-12 span-md-4">
+            <!-- wp:pattern {"slug":"wecodeart/el-testimonial-card"} /-->
+        </div>
+        <!-- /wp:column -->
+        <!-- wp:column {"className":"span-12 span-md-4"} -->
+        <div class="wp-block-column span-12 span-md-4">
+            <!-- wp:pattern {"slug":"wecodeart/el-testimonial-card"} /-->
+        </div>
+        <!-- /wp:column -->
+        <!-- wp:column {"className":"span-12 span-md-4"} -->
+        <div class="wp-block-column span-12 span-md-4">
+            <!-- wp:pattern {"slug":"wecodeart/el-testimonial-card"} /-->
+        </div>
+        <!-- /wp:column -->
     </div>
-    <!-- /wp:group -->
-    <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
-    <div class="wp-block-buttons">
+    <!-- /wp:columns -->
+    <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|xl"}}}} -->
+    <div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--xl)">
         <!-- wp:button {"backgroundColor":"primary","style":{"border":{"radius":"50px"},"spacing":{"padding":{"top":"var:preset|spacing|sm","bottom":"var:preset|spacing|sm","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"className":""} -->
         <div class="wp-block-button">
             <a class="wp-block-button__link has-primary-background-color has-background wp-element-button" href="#" style="border-radius:50px;padding-top:var(--wp--preset--spacing--sm);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--sm);padding-left:var(--wp--preset--spacing--md)" target="_blank" rel="noreferrer noopener">Lorem Ipsum</a>

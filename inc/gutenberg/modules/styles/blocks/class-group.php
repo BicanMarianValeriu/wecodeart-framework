@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.2
- * @version		6.1.2
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -31,8 +31,9 @@ class Group extends Processor {
 	 */
 	protected function process_extra(): void {
 		$classNames = explode( ' ', get_prop( $this->attrs, [ 'className' ], '' ) );
+		$is_marquee = get_prop( $this->attrs, [ 'namespace' ] ) === 'wecodeart/group/marquee';
 
-		if( in_array( 'is-style-marquee', $classNames, true ) ) {
+		if( $is_marquee || in_array( 'is-style-marquee', $classNames, true ) ) {
 			$declarations = [];
 	
 			$orientation 	= get_prop( $this->attrs, [ 'layout', 'orientation' ], 'horizontal' );

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.1
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -79,7 +79,9 @@ class Button extends Processor {
 				}
 				// Background
 				if( $background = get_prop( $color, 'background' ) ) {
- 					$value	= wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+ 					$value		= wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+					$luminance	= wecodeart( 'styles' )::rgb_luminance( $value );
+					$is_dark 	= $luminance < get_lightness_limit();
 
 					$declarations['color']	= $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
 				}
@@ -97,6 +99,8 @@ class Button extends Processor {
 	 * @return 	array
 	 */
 	public function remove_style(): array {
-		return [ 'tag_name' => 'a' ];
+		return [ 
+			[ 'tag_name' => 'a' ]
+		];
 	}
 }

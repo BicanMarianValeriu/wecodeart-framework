@@ -121,17 +121,14 @@ class Social extends Dynamic {
 	}
 
 	/**
-	 * Determines whether the block is a recent products block.
+	 * Determines whether the block is a social sharing block.
 	 *
-	 * @param 	array 	$block The block.
+	 * @param 	array 	$block/attributes
 	 *
-	 * @return 	bool 	Whether the block is a recent products block.
+	 * @return 	bool 	Whether the block is a social sharing block.
 	 */
 	public static function is_sharing_variation( array $block = [] ): bool {
-		if ( 
-			get_prop( $block, [ 'attrs', 'namespace' ], '' ) === 'wecodeart/social-links/sharing' || 
-			get_prop( $block, [ 'namespace' ], '' ) === 'wecodeart/social-links/sharing'
-		) {
+		if ( get_prop( $block, [ 'namespace' ], get_prop( $block, [ 'attrs', 'namespace' ], '' ) ) === 'wecodeart/social-links/sharing' ) {
 			return true;
 		}
 

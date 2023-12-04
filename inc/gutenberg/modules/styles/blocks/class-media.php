@@ -78,6 +78,8 @@ class Media extends Processor {
 	 * @return 	array
 	 */
 	public function remove_style(): array {
-		return [ 'tag_name' => 'figure' ];
+		return [ 
+			[ 'tag_name' => 'figure' ]
+		];
 	}
 }

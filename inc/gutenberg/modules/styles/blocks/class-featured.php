@@ -63,6 +63,8 @@ class Featured extends Processor {
 	 * @return 	array
 	 */
 	public function remove_style(): array {
-		return [ 'tag_name' => 'a' ];
+		return [
+			[ 'tag_name' => 'a' ]
+		];
 	}
 }
