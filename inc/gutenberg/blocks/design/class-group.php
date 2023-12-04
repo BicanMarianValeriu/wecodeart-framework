@@ -239,7 +239,7 @@ class Group extends Dynamic {
 				animation-iteration-count: infinite;
 				animation-timing-function: linear;
 			}
-			.:where(.is-style-marquee,.wp-block-group--marquee):is(:hover,:focus,:focus-within) > .wp-block-group__marquee {
+			:where(.is-style-marquee,.wp-block-group--marquee):is(:hover,:focus,:focus-within) > .wp-block-group__marquee {
 				animation-play-state: paused;
 			}
 			@media (min-width: {$breakpoint}) {

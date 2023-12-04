@@ -5,6 +5,7 @@ v6.2.9
 - Fixed - core/social-links missing social networks services colors
 - Fixed - issue with generated classname for inline styles for selectors that contains ","
 - Fixed - issue with buttons auto text color based on background lightness
+- Fixed - issue with group marquee styles for hover state
 - Added - new testimonial cards pattern
 - Added - core/social-links sharing variation
 - Added - core/social-link sharing variation (for common social networks)
