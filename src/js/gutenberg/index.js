@@ -6,6 +6,3 @@ import './blocks';
 
 // Plugins
 import './plugins';
-
-// Formats
-import './formats';

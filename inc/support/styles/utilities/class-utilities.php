@@ -49,8 +49,8 @@ class Utilities implements Configuration {
 	 *
 	 * @var string
 	 */
-    const CACHE_FILE    = 'utilities.css';
-    const CACHE_KEY     = 'wecodeart/gutenberg/utilities';
+    const CACHE_FILE    = 'wp-utilities.css';
+    const CACHE_KEY     = 'wecodeart/support/styles/utilities';
 
     /**
 	 * Send to Constructor

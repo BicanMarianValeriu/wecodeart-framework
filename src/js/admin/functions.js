@@ -40,11 +40,15 @@ const getInstallerIcon = (source) => {
     );
 };
 
-const getInstallerDir = ({ slug, source = 'wordpress' }) => {
+const getInstallerDir = ({ slug, source = 'wordpress', destination }) => {
     let dir = slug;
 
     if (!slug) {
         return dir;
+    }
+
+    if (destination) {
+        return destination;
     }
 
     switch (source) {

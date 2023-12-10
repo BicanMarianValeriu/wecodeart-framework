@@ -1,4 +1,4 @@
-/******/ (() => { // webpackBootstrap
+/******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
@@ -6,18 +6,17 @@
 /*!***********************************!*\
   !*** ./src/js/admin/functions.js ***!
   \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getCookie": () => (/* binding */ getCookie),
-/* harmony export */   "getInstallerDir": () => (/* binding */ getInstallerDir),
-/* harmony export */   "getInstallerIcon": () => (/* binding */ getInstallerIcon),
-/* harmony export */   "setCookie": () => (/* binding */ setCookie)
+/* harmony export */   getCookie: function() { return /* binding */ getCookie; },
+/* harmony export */   getInstallerDir: function() { return /* binding */ getInstallerDir; },
+/* harmony export */   getInstallerIcon: function() { return /* binding */ getInstallerIcon; },
+/* harmony export */   setCookie: function() { return /* binding */ setCookie; }
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-
 
 /**
  * WordPress dependencies
@@ -27,10 +26,8 @@ const {
     Icon
   }
 } = wp;
-
 const getInstallerIcon = source => {
   let icon;
-
   switch (source) {
     case 'github':
       icon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -41,7 +38,6 @@ const getInstallerIcon = source => {
         d: "M256 6.3C114.6 6.3 0 120.9 0 262.3c0 113.1 73.3 209.1 175.1 242.9 12.8 2.4 17.5-5.6 17.5-12.3 0-6.1-.2-26.3-.4-47.6-71.2 15.4-86.2-30.2-86.2-30.2-11.7-29.6-28.4-37.4-28.4-37.4-23.3-15.9 1.7-15.6 1.7-15.6 25.7 1.8 39.3 26.4 39.3 26.4 22.8 39.1 59.9 27.8 74.5 21.2 2.3-16.5 8.9-27.8 16.2-34.2C152.5 369 92.7 347 92.7 248.9c0-28 10-50.8 26.3-68.7-2.6-6.5-11.4-32.5 2.5-67.8 0 0 21.5-6.9 70.4 26.2 20.4-5.7 42.3-8.5 64.1-8.6 21.8.1 43.7 2.9 64.1 8.6 48.8-33.2 70.4-26.2 70.4-26.2 14 35.3 5.2 61.3 2.6 67.8 16.4 17.9 26.3 40.7 26.3 68.7 0 98.4-59.9 120-116.9 126.4 9.2 7.9 17.4 23.5 17.4 47.4 0 34.2-.3 61.8-.3 70.3 0 6.8 4.7 14.8 17.6 12.3 101.5-34 174.8-129.9 174.8-243 0-141.3-114.6-256-256-256z"
       }));
       break;
-
     case 'wordpress':
       icon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
         xmlns: "http://www.w3.org/2000/svg",
@@ -74,7 +70,6 @@ const getInstallerIcon = source => {
         d: "M58.17 21.88a20 20 0 0 1 .18 2.77 25.22 25.22 0 0 1-2.07 9.64l-8.35 23.78A26.85 26.85 0 0 0 61.51 34.8a26.48 26.48 0 0 0-3.34-12.92zM34.68 37.15l-8.2 23.48a27.85 27.85 0 0 0 16.79-.43 3.39 3.39 0 0 1-.2-.38zm18-3.71A14.06 14.06 0 0 0 50.39 26c-1.39-2.21-2.69-4.08-2.69-6.3a4.69 4.69 0 0 1 4.59-4.78h.35A27.54 27.54 0 0 0 11.38 20h1.75c2.86 0 7.28-.34 7.28-.34a1.11 1.11 0 0 1 .18 2.22s-1.48.17-3.13.25l10 29.17 6-17.67-4.26-11.5c-1.47-.08-2.86-.25-2.86-.25a1.11 1.11 0 0 1 .17-2.22S31 20 33.63 20c2.86 0 7.29-.34 7.29-.34a1.11 1.11 0 0 1 .17 2.22s-1.48.17-3.13.25l9.88 28.95 2.81-8.81c1.26-3.84 2-6.57 2-8.87zM6.88 34.8A26.92 26.92 0 0 0 22.28 59l-13-35.19a26.42 26.42 0 0 0-2.37 11z"
       }));
       break;
-
     default:
       icon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
         xmlns: "http://www.w3.org/2000/svg",
@@ -85,57 +80,51 @@ const getInstallerIcon = source => {
       }));
       break;
   }
-
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Icon, {
     className: "components-card__badge",
     icon: icon
   });
 };
-
 const getInstallerDir = _ref => {
   let {
     slug,
-    source = 'wordpress'
+    source = 'wordpress',
+    destination
   } = _ref;
   let dir = slug;
-
   if (!slug) {
     return dir;
   }
-
+  if (destination) {
+    return destination;
+  }
   switch (source) {
     case 'github':
       dir = slug.replace(/^.*\//, '');
       break;
-
     case 'custom':
       dir = slug.substring(slug.lastIndexOf('/') + 1, slug.lastIndexOf('.zip'));
       break;
-
     default:
       dir = slug.replace(/\/[^/]*$/, '');
       break;
   }
-
   return dir;
-}; // Helper function to get the value of a cookie by name
+};
 
-
+// Helper function to get the value of a cookie by name
 function getCookie(name) {
   const cookies = document.cookie.split('; ');
-
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i].split('=');
-
     if (cookie[0] === name) {
       return decodeURIComponent(cookie[1]);
     }
   }
-
   return '';
-} // Helper function to set a cookie with a given name, value, and expiration time
+}
 
-
+// Helper function to set a cookie with a given name, value, and expiration time
 function setCookie(name, value) {
   let days = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 365;
   let path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : window.location.pathname;
@@ -146,26 +135,24 @@ function setCookie(name, value) {
 }
 
 
-
 /***/ }),
 
 /***/ "./src/js/admin/themes/Components.js":
 /*!*******************************************!*\
   !*** ./src/js/admin/themes/Components.js ***!
   \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Manager": () => (/* binding */ Manager),
-/* harmony export */   "Submit": () => (/* binding */ Submit),
-/* harmony export */   "Theme": () => (/* binding */ Theme)
+/* harmony export */   Manager: function() { return /* binding */ Manager; },
+/* harmony export */   Submit: function() { return /* binding */ Submit; },
+/* harmony export */   Theme: function() { return /* binding */ Theme; }
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../functions */ "./src/js/admin/functions.js");
-
 
 
 /**
@@ -201,14 +188,8 @@ const {
   adminEmail,
   themeDirs
 } = wecodeart;
-const {
-  installed = [],
-  installers = [],
-  child = false
-} = wecodeartThemes || {};
 
 const AJAX_ACTION = 'wca_manage_themes';
-
 const Theme = _ref => {
   let {
     title = '',
@@ -228,7 +209,6 @@ const Theme = _ref => {
     slug,
     source
   });
-
   const handleActivation = async value => {
     setActiveLoading(true);
     const formData = new FormData();
@@ -247,17 +227,14 @@ const Theme = _ref => {
         success = false
       }
     } = await r.json();
-
     if (value && success) {
       setActiveTheme(themeDir);
     } else if (success) {
       setActiveTheme('wecodeart');
     }
-
     handleNotice(message);
     setActiveLoading(false);
   };
-
   const handleInstall = async _ref2 => {
     let {
       slug,
@@ -281,15 +258,12 @@ const Theme = _ref => {
         success = false
       } = {}
     } = await r.json();
-
     if (success) {
       setAllThemes([...allThemes, themeDir]);
     }
-
     handleNotice(message);
     setInstallLoading(false);
   };
-
   const shouldAllowInstall = allThemes.includes(themeDir) || installLoading;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Card, {
     className: "border shadow-none"
@@ -319,7 +293,6 @@ const Theme = _ref => {
     disabled: shouldAllowInstall
   }, installLoading ? '' : allThemes.includes(themeDir) ? _x('Installed', 'theme', 'wecodeart') : __('Install', 'wecodeart')))));
 };
-
 const Submit = _ref3 => {
   let {
     handleNotice
@@ -338,51 +311,40 @@ const Submit = _ref3 => {
     validateForm();
     return () => null;
   }, [details]);
-
   const openModal = () => setIsOpen(true);
-
   const closeModal = () => setIsOpen(false);
-
   const isValidEmail = email => {
     // Use a regular expression or any other validation logic to check email validity
     // Return true if the email is valid, false otherwise
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
-
   const isValidUrl = url => {
     // Use a regular expression or any other validation logic to check URL validity
     // Return true if the URL is valid, false otherwise
     return /^(ftp|http|https):\/\/[^ "]+$/.test(url);
   };
-
   const validateForm = () => {
     const errors = {};
-
     if (!details.name) {
       errors.name = __('Please enter your name.', 'wecodeart');
     }
-
     if (!details.email) {
       errors.email = __('Please enter your email.', 'wecodeart');
     } else if (!isValidEmail(details.email)) {
       errors.email = __('Please enter a valid email address.', 'wecodeart');
     }
-
     if (!details.url) {
       errors.url = __('Please enter the theme URL.', 'wecodeart');
     } else if (!isValidUrl(details.url)) {
       errors.url = __('Please enter a valid URL.', 'wecodeart');
     }
-
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
-
   const handleSubmit = async () => {
     if (!validateForm()) {
       return;
     }
-
     setSending(true);
     const formData = new FormData();
     formData.append('action', AJAX_ACTION);
@@ -407,14 +369,14 @@ const Submit = _ref3 => {
     });
     closeModal();
   };
-
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, isOpen && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Modal, {
     title: __('Awesome, let\'s see it!', 'wecodeart'),
     onRequestClose: closeModal
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(TextControl, {
     label: __('Your name', 'wecodeart'),
     value: details.name,
-    onChange: name => setDetails({ ...details,
+    onChange: name => setDetails({
+      ...details,
       name
     }),
     help: errors.name
@@ -422,7 +384,8 @@ const Submit = _ref3 => {
     label: __('Your email', 'wecodeart'),
     type: "email",
     value: details.email,
-    onChange: email => setDetails({ ...details,
+    onChange: email => setDetails({
+      ...details,
       email
     }),
     help: errors.email
@@ -431,7 +394,8 @@ const Submit = _ref3 => {
     type: "url",
     value: details.url,
     placeholder: __('Github repository or website demo', 'wecodeart'),
-    onChange: url => setDetails({ ...details,
+    onChange: url => setDetails({
+      ...details,
       url
     }),
     help: errors.url
@@ -439,7 +403,8 @@ const Submit = _ref3 => {
     label: __('Your message', 'wecodeart'),
     value: details.message,
     placeholder: __('Additional info', 'wecodeart'),
-    onChange: message => setDetails({ ...details,
+    onChange: message => setDetails({
+      ...details,
       message
     }),
     help: errors.message
@@ -472,23 +437,23 @@ const Submit = _ref3 => {
     }
   }, __('Contact us', 'wecodeart')))));
 };
-
 const Manager = _ref4 => {
   let {
-    createNotice
+    createNotice,
+    installers = [],
+    activeTheme = '',
+    setActiveTheme,
+    allThemes = [],
+    setAllThemes,
+    hasChanges = false,
+    setHasChanges
   } = _ref4;
-  const [activeTheme, setActiveTheme] = useState((0,_functions__WEBPACK_IMPORTED_MODULE_2__.getCookie)('activeTheme') || child || 'wecodeart');
-  const [allThemes, setAllThemes] = useState(installed);
-  const [hasChanges, setHasChanges] = useState(false);
   const [reloading, setReloading] = useState(false);
-  useEffect(() => (0,_functions__WEBPACK_IMPORTED_MODULE_2__.setCookie)('activeTheme', activeTheme), [activeTheme]);
-
   const handleNotice = message => {
     setReloading(false);
     setHasChanges(true);
     return createNotice('success', message);
   };
-
   const extraThemeProps = {
     allThemes,
     setAllThemes,
@@ -522,11 +487,9 @@ const Manager = _ref4 => {
           success
         } = {}
       } = await r.json();
-
       if (success) {
         setActiveTheme('wecodeart-developer');
       }
-
       handleNotice(message);
     },
     disabled: reloading
@@ -547,14 +510,13 @@ const Manager = _ref4 => {
 };
 
 
-
 /***/ }),
 
 /***/ "./src/scss/admin/themes/index.scss":
 /*!******************************************!*\
   !*** ./src/scss/admin/themes/index.scss ***!
   \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
@@ -566,7 +528,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
   \*********************************/
-/***/ ((module) => {
+/***/ (function(module) {
 
 module.exports = window["wp"]["element"];
 
@@ -576,24 +538,22 @@ module.exports = window["wp"]["element"];
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
   \************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _extends)
+/* harmony export */   "default": function() { return /* binding */ _extends; }
 /* harmony export */ });
 function _extends() {
   _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
   return _extends.apply(this, arguments);
@@ -629,57 +589,58 @@ function _extends() {
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
+/******/ 		__webpack_require__.n = function(module) {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 		__webpack_require__.d = function(exports, definition) {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
+/******/ 		__webpack_require__.r = function(exports) {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
+!function() {
 /*!**************************************!*\
   !*** ./src/js/admin/themes/index.js ***!
   \**************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components */ "./src/js/admin/themes/Components.js");
-/* harmony import */ var _scss_admin_themes_index_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../scss/admin/themes/index.scss */ "./src/scss/admin/themes/index.scss");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components */ "./src/js/admin/themes/Components.js");
+/* harmony import */ var _scss_admin_themes_index_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../scss/admin/themes/index.scss */ "./src/scss/admin/themes/index.scss");
 
 
 /**
@@ -691,21 +652,38 @@ const {
   },
   hooks: {
     addFilter
+  },
+  element: {
+    useState
   }
 } = wp;
+const {
+  installed = [],
+  installers = [],
+  child = false
+} = wecodeartThemes || {};
 
 
 addFilter('wecodeart.admin.tabs.themes', 'wecodeart/themes/admin/panel', optionsPanel);
-
 function optionsPanel(panels) {
+  const [activeTheme, setActiveTheme] = useState(child || 'wecodeart');
+  const [allThemes, setAllThemes] = useState(installed);
+  const [hasChanges, setHasChanges] = useState(false);
   return [{
     name: 'manager',
     title: __('Themes Manager', 'wecodeart'),
-    render: props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components__WEBPACK_IMPORTED_MODULE_1__.Manager, props)
+    render: props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_Components__WEBPACK_IMPORTED_MODULE_2__.Manager, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+      installers,
+      activeTheme,
+      setActiveTheme,
+      allThemes,
+      setAllThemes,
+      hasChanges,
+      setHasChanges
+    }))
   }, ...panels];
 }
-})();
-
+}();
 /******/ })()
 ;
 //# sourceMappingURL=themes.js.map

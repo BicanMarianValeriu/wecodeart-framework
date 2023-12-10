@@ -9,7 +9,7 @@
  * @subpackage 	Admin
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.8.1
- * @version		6.1.2
+ * @version		6.2.9
  */
 
 namespace WeCodeArt;
@@ -52,6 +52,7 @@ class Admin {
 		Notifications::get_instance();
 
 		new Installer\Plugin\Ajax();
+		new Installer\Module\Ajax();
 		new Installer\Theme\Ajax();
 	}
 

@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer\Ajax
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.2
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Admin\Installer\Theme;
@@ -92,14 +92,14 @@ class Ajax extends Async {
     public static function install( array $theme = [] ): array {
         $message    = esc_html__( 'Theme failed to install.', 'wecodeart' );
         $success    = false;
-
+        
         // Remove unnecessary output
 		remove_all_actions( 'upgrader_pre_install' );
 		remove_all_actions( 'upgrader_process_complete' );
 		remove_all_actions( 'upgrader_post_install' );
 		// remove_all_actions( 'upgrader_source_selection' );
 		// remove_all_actions( 'upgrader_overwrote_package' );
-        
+
         $installer = new Theme( $theme );
         $installer->install();
 
@@ -109,9 +109,6 @@ class Ajax extends Async {
 
         if( $installer->ok() ) {
             $success = $theme;
-        }
-
-        if( $success ) {
             $message = esc_html__( 'Theme installed successfully.', 'wecodeart' );
         }
 
@@ -184,7 +181,6 @@ class Ajax extends Async {
         $link = esc_url_raw( get_prop( $data, 'url', '' ) );
         $info = sanitize_text_field( get_prop( $data, 'message', '' ) );
         
-        $to = 'to_email@example.com';
         $subject = 'New Theme Submission';
         $message = "Name: $name\nEmail: $mail\nTheme URL: $link\nMessage: $info";
     

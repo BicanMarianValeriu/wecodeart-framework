@@ -78,7 +78,7 @@ final class Assets implements Integration {
 	 */
 	public function register_hooks(): void {
 		\add_action( $this->hook,	[ $this, 'core'		], 20 );
-		\add_action( $this->hook,	[ $this, 'enqueue'	], 20 );
+		\add_action( $this->hook,	[ $this, 'enqueue'	], PHP_INT_MAX );
 	}
 	
 	/**

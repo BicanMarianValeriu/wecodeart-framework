@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.2
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Admin;
@@ -61,6 +61,13 @@ abstract class Installer implements Installable {
 	 * @var string
 	 */
 	protected 	$package = '';
+	
+	/**
+	 * Version.
+	 *
+	 * @var string
+	 */
+	protected 	$version = '';
 
 	/**
 	 * Status.
@@ -145,6 +152,8 @@ abstract class Installer implements Installable {
 		$request = new Request( $api_url, [] );
 		$request->send( $request::METHOD_GET );
 		$response = $request->get_response_body( true );
+
+		$this->version  = get_prop( $response, [ 'tag_name' ] );
 		
 		return $this->package = get_prop( $response, [ $zip_key ] );
 	}
@@ -172,6 +181,17 @@ abstract class Installer implements Installable {
 		}
 	
 		return $dir;
+	}
+
+	/**
+	 * Get installer version.
+	 *
+	 * @since 	6.2.9
+	 *
+	 * @return 	string
+	 */
+	public function get_ver(): string {
+		return str_replace( 'v', '', (string) $this->version );
 	}
 
 	/**

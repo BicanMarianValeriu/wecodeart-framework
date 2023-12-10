@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-12-02 01:49+0000\n"
+"PO-Revision-Date: 2023-12-09 16:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -68,12 +68,12 @@ msgstr "100% Receptiv"
 msgid "[block rendering halted]"
 msgstr "[redării blocului a fost oprită]"
 
-#: inc/support/plugins/class-plugins.php:124
+#: inc/support/plugins/class-plugins.php:137
 #, php-format
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr "O punte între WeCodeArt Framework și pluginul %s."
 
-#: inc/app.php:188
+#: inc/app.php:198
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -92,7 +92,7 @@ msgstr ""
 "completă a site-ului. De asemenea, funcționează perfect cu toate pluginurile "
 "generatore de pagini."
 
-#: inc/app.php:195
+#: inc/app.php:205
 #| msgid ""
 #| "A sleek WooCommerce block theme with webpack setup. No bloat - perfect "
 #| "starting point for your store."
@@ -110,6 +110,14 @@ msgstr "Despre"
 #: inc/gutenberg/blocks/comment/class-title.php:106
 msgid "add one"
 msgstr "adaugă unul"
+
+#: inc/admin/installer/module/class-ajax.php:124
+msgid "All modules have failed to install."
+msgstr "Nu s-au instalat modulele."
+
+#: inc/admin/installer/module/class-ajax.php:108
+msgid "All modules installed successfully."
+msgstr "Modulele instalate cu succes."
 
 #: inc/admin/installer/plugin/class-ajax.php:161
 msgid "All plugins activated successfully."
@@ -292,7 +300,7 @@ msgstr "Arhive zilnice: %s"
 msgid "Design"
 msgstr "Personalizări"
 
-#: inc/admin/class-admin.php:176
+#: inc/admin/class-admin.php:177
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -332,6 +340,12 @@ msgstr "Introduceți parola"
 msgid "Enter your email address to subscribe."
 msgstr "Introdu adresa ta de e-mail pentru a te abona."
 
+#: inc/app.php:187
+msgid ""
+"Extends Gutenberg editor with extra formatting options like: justify, "
+"abbreviation, underline, tooltips and inline typography."
+msgstr ""
+
 #: inc/gutenberg/blocks/design/class-separator.php:77
 #| msgid "Fixed"
 msgid "Faded"
@@ -341,12 +355,12 @@ msgstr "Estompat"
 msgid "Failed to dismiss notification"
 msgstr "Notificarea nu a putut fi respinsă"
 
-#: inc/admin/installer/theme/class-ajax.php:199
+#: inc/admin/installer/theme/class-ajax.php:195
 msgid "Failed to send your submission."
 msgstr "Trimiterea cereri dvs. a eșuat."
 
-#: inc/admin/installer/theme/class-ajax.php:132
-#: inc/admin/installer/theme/class-ajax.php:157
+#: inc/admin/installer/theme/class-ajax.php:129
+#: inc/admin/installer/theme/class-ajax.php:154
 msgid "Failed to switch theme."
 msgstr "Nu s-a putut schimba tema."
 
@@ -363,6 +377,7 @@ msgstr ""
 msgid "FASTEST"
 msgstr "Cea mai rapidă"
 
+#: patterns/section-testimonials-cards.php:13
 #: patterns/section-testimonials.php:13
 msgid "Feedback"
 msgstr "Păreri"
@@ -504,6 +519,26 @@ msgstr "MOBILE"
 msgid "Modal"
 msgstr "Modal"
 
+#: inc/admin/installer/module/class-ajax.php:116
+msgid "Module failed to install."
+msgstr "Nu s-a instalat modulul."
+
+#: inc/admin/installer/module/class-ajax.php:112
+msgid "Module installed successfully."
+msgstr "Modulul instalat cu succes."
+
+#: inc/admin/installer/module/class-ajax.php:57
+msgid "Modules array is empty."
+msgstr ""
+
+#: inc/admin/installer/module/class-ajax.php:142
+msgctxt "modules uninstall ajax"
+msgid "Module uninstalled"
+msgid_plural "Modules uninstalled"
+msgstr[0] "Modulul a fost "
+msgstr[1] ""
+msgstr[2] ""
+
 #: inc/gutenberg/blocks/query/class-title.php:143
 msgctxt "monthly archives date format"
 msgid "F Y"
@@ -556,7 +591,7 @@ msgstr ""
 "Optimizată pentru a încărca foarte rapid (sub 1s GTMetrix), în orice "
 "dispozitiv și, de asemenea, pentru SEO."
 
-#: inc/support/plugins/class-plugins.php:120
+#: inc/support/plugins/class-plugins.php:133
 #, php-format
 msgid "Our theme comes pre-packaged with built-in support for the %s plugin."
 msgstr ""
@@ -584,6 +619,7 @@ msgstr "Substituent"
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 
+#: inc/admin/installer/module/class-ajax.php:71
 #: inc/admin/installer/plugin/class-ajax.php:74
 #: inc/admin/installer/theme/class-ajax.php:77
 msgid "Please define an action type."
@@ -720,6 +756,19 @@ msgstr "Selectați Săptămâna"
 msgid "Select Year"
 msgstr "Selectați Anul"
 
+#: inc/gutenberg/blocks/widgets/social/class-link.php:87
+#, php-format
+msgid "Share on %s"
+msgstr "Distribuie pe %s"
+
+#: inc/gutenberg/blocks/widgets/social/class-link.php:79
+msgid "Share the post!"
+msgstr "Distribuie postarea!"
+
+#: patterns/social-sharing.php:12
+msgid "Share the post:"
+msgstr "Distribuie postarea:"
+
 #: patterns/section-pricing.php:21
 msgid "Simple pricing plans for any size team."
 msgstr "Planuri simple de prețuri pentru echipe de orice dimensiune."
@@ -731,6 +780,10 @@ msgstr "Sari la conținut"
 #: patterns/footer.php:44
 msgid "Social"
 msgstr "Social"
+
+#: inc/admin/installer/module/class-ajax.php:120
+msgid "Some modules installed successfully, others have failed."
+msgstr ""
 
 #: inc/admin/installer/plugin/class-ajax.php:173
 msgid "Some plugins activated successfully, others have failed."
@@ -790,7 +843,7 @@ msgstr "Fișierul trebuie să fie de tip CSS/JS."
 msgid "Theme failed to install."
 msgstr "Tema nu a putut fi instalată."
 
-#: inc/admin/installer/theme/class-ajax.php:115
+#: inc/admin/installer/theme/class-ajax.php:112
 msgid "Theme installed successfully."
 msgstr "Tema instalată cu succes."
 
@@ -798,7 +851,7 @@ msgstr "Tema instalată cu succes."
 msgid "Theme is not defined."
 msgstr "Tema nu este definită."
 
-#: inc/admin/class-admin.php:130 inc/admin/class-admin.php:131
+#: inc/admin/class-admin.php:131 inc/admin/class-admin.php:132
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -826,11 +879,11 @@ msgctxt "Theme starter content"
 msgid "Logo"
 msgstr "Logo"
 
-#: inc/admin/installer/theme/class-ajax.php:165
+#: inc/admin/installer/theme/class-ajax.php:162
 msgid "Theme switched to Core Framework."
 msgstr "Tema a fost schimbată la Core Framework."
 
-#: inc/admin/installer/theme/class-ajax.php:140
+#: inc/admin/installer/theme/class-ajax.php:137
 msgid "Theme switched."
 msgstr "S-a schimbat tema."
 
@@ -873,6 +926,7 @@ msgstr "actualizați PHP"
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
+#: patterns/section-testimonials-cards.php:13
 #: patterns/section-testimonials.php:13
 #, php-format
 msgid "Users %s"
@@ -885,6 +939,10 @@ msgstr "Vedeți Teme"
 #: inc/support/plugins/contactform7/class-contactform7.php:110
 msgid "WCA: Contact Form 7"
 msgstr "WCA: Contact Form 7"
+
+#: inc/app.php:186
+msgid "WCA: Formatting"
+msgstr ""
 
 #: inc/app.php:178
 msgid "WCA: Scroll Top"
@@ -933,7 +991,7 @@ msgstr "Site"
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/app.php:187
+#: inc/app.php:197
 msgid "WeCodeArt Developer"
 msgstr "WeCodeArt Dezvoltator"
 
@@ -984,7 +1042,7 @@ msgstr ""
 "Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
 "WeCodeArt Framework."
 
-#: inc/app.php:194
+#: inc/app.php:204
 msgid "WeCodeArt Honey"
 msgstr "WeCodeArt Honey"
 
@@ -1086,6 +1144,6 @@ msgstr "Emailul tău nu va fi publicat."
 msgid "Your Plan"
 msgstr "Planul Tău"
 
-#: inc/admin/installer/theme/class-ajax.php:197
+#: inc/admin/installer/theme/class-ajax.php:193
 msgid "Your submission was successfully sent. We well get back to you shortly."
 msgstr "Cererea dvs. a fost trimisă cu succes. Vom reveni în curând."

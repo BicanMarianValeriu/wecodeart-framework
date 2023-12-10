@@ -10,7 +10,14 @@
     <!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"layout":{"type":"constrained"}} -->
     <div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--g);padding-left:var(--wp--preset--spacing--g)">
         <!-- wp:heading {"textAlign":"center","className":"is-style-underline-brush"} -->
-        <h2 class="wp-block-heading has-text-align-center is-style-underline-brush"><?php printf( esc_html__( 'Users %s', 'wecodeart' ), sprintf( '<strong>%s</strong>', esc_html__( 'Feedback', 'wecodeart' ) ) ); ?></h2>
+        <h2 class="wp-block-heading has-text-align-center is-style-underline-brush">
+            <?php
+                printf( 
+                    esc_html__( 'Users %s', 'wecodeart' ), 
+                    sprintf( '<strong><span class="has-underline">%s</span></strong>', esc_html__( 'Feedback', 'wecodeart' ) )
+                ); 
+            ?>
+        </h2>
         <!-- /wp:heading -->
         <!-- wp:paragraph {"align":"center","className":"fw-300","fontSize":"medium"} -->
         <p class="has-text-align-center fw-300 has-medium-font-size">Lorem ipsum dolor sit <strong><mark  style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-primary-color">Metus Nibendum</mark></strong> massa nisl malesuada lacinia integer nunc posuere:</p>

@@ -9,7 +9,7 @@
  * @subpackage 	Support\Plugins
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.3
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Support;
@@ -44,14 +44,14 @@ class Plugins implements Integration {
 	 * @return  void
 	 */
 	public function register_hooks() {
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ], 20 );
 	}
 
 	/**
 	 * Load assets for option page.
 	 *
 	 * @since   6.1.2
-	 * @version	6.1.2
+	 * @version	6.2.9
 	 */
 	public function enqueue_assets() {
 		$version = wecodeart( 'version' );
@@ -86,11 +86,11 @@ class Plugins implements Integration {
 			return ( $a['slug'] === null ) <=> ( $b['slug'] === null );
 		} );
 
-		wp_localize_script( $this->make_handle(), 'wecodeartPlugins', [
+		wp_localize_script( $this->make_handle(), 'wecodeartPlugins', apply_filters( 'wecodeart/filter/support/plugins/admin', [
 			'installers' 	=> (array) $installers,
-			'active' 		=> self::get_plugins_dir( array_values( get_option( 'active_plugins' ) ) ),
-			'all'			=> self::get_plugins_dir( array_keys( get_plugins() ) ),
-		] );
+			'plugins'		=> self::get_plugins_dir( array_keys( get_plugins() ) ),
+			'plugins_active'=> self::get_plugins_dir( array_values( get_option( 'active_plugins' ) ) ),
+		] ) );
 
 		wp_set_script_translations( $this->make_handle(), 'wecodeart', wecodeart_config( 'directories' )['languages'] );
 	}

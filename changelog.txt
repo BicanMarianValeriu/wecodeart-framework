@@ -2,14 +2,23 @@ v6.2.9
 - Updated - core/group marquee variation logic with namespace attribute / deprecated old logic with block style
 - Updated - core/post-template markup logic to use core render_block_core_post_template function
 - Updated - .grid styles now extends to .is-layout-grid class (applied on blocks that supports grid layout)
+- Updated - Admin themes manager will now maintain state on tab change (without using cookie)
+- Updated - Admin plugins manager will now maintain state on tab change
+- Updated - Theme upgrade routines will now run after_switch_theme, once
+- Updated - Offload gutenberg extra formatting to own installable module
+- Updated - Style components are now cached and enqueued in admin/editor
+- Updated - Update underlined word for latest posts and testimonial patterns
 - Fixed - core/social-links missing social networks services colors
-- Fixed - issue with generated classname for inline styles for selectors that contains ","
-- Fixed - issue with buttons auto text color based on background lightness
-- Fixed - issue with group marquee styles for hover state
-- Added - new testimonial cards pattern
+- Fixed - Issue with generated classname for inline styles for selectors that contains ","
+- Fixed - Issue with buttons auto text color based on background lightness
+- Fixed - Issue with group marquee styles for hover state
+- Added - New testimonial cards pattern
+- Added - New Tooltip component styles (to be used on modules and other places)
+- Added - New Popover component styles (to be used on modules and other places)
 - Added - core/social-links sharing variation
 - Added - core/social-link sharing variation (for common social networks)
-- Added - social sharing block pattern / used on single page
+- Added - Social sharing block pattern / used on single page
+- Added - New theme ability to install modules (similar to plugins but as in the theme itself)
 
 v6.2.8
 - Updated - core/embed styles to css custom variable

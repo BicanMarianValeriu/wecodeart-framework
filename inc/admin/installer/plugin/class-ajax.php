@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer\Ajax
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.2
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Admin\Installer\Plugin;

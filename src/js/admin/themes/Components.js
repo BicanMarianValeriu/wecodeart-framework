@@ -28,9 +28,8 @@ const {
 } = wp;
 
 const { currentUser, adminEmail, themeDirs } = wecodeart;
-const { installed = [], installers = [], child = false } = wecodeartThemes || {};
 
-import { getInstallerIcon, getInstallerDir, getCookie, setCookie } from './../functions';
+import { getInstallerIcon, getInstallerDir } from './../functions';
 
 const AJAX_ACTION = 'wca_manage_themes';
 
@@ -300,13 +299,17 @@ const Submit = ({ handleNotice }) => {
     )
 }
 
-const Manager = ({ createNotice }) => {
-    const [activeTheme, setActiveTheme] = useState(getCookie('activeTheme') || child || 'wecodeart');
-    const [allThemes, setAllThemes] = useState(installed);
-    const [hasChanges, setHasChanges] = useState(false);
+const Manager = ({
+    createNotice,
+    installers = [],
+    activeTheme = '',
+    setActiveTheme,
+    allThemes = [],
+    setAllThemes,
+    hasChanges = false,
+    setHasChanges
+}) => {
     const [reloading, setReloading] = useState(false);
-
-    useEffect(() => setCookie('activeTheme', activeTheme), [activeTheme]);
 
     const handleNotice = (message) => {
         setReloading(false);

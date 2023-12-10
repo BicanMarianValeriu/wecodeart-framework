@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer\Plugin
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.2
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Admin\Installer;
@@ -49,6 +49,7 @@ class Plugin extends Installer implements Installable {
 	 * Install the plugin.
 	 *
 	 * @since 	6.1.2
+	 * @version	6.2.9
 	 *
 	 * @return 	mixed
 	 */

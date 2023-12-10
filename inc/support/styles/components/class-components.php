@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.1.7
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -28,6 +28,14 @@ class Components implements Configuration {
 
 	use Singleton;
     use Asset;
+
+    /**
+	 * The CSS cache file.
+	 *
+	 * @var string
+	 */
+    const CACHE_FILE    = 'wp-components.css';
+    const CACHE_KEY     = 'wecodeart/support/styles/components';
 
 	/**
      * All of the configuration items.
@@ -53,13 +61,17 @@ class Components implements Configuration {
 		$this->register( 'modal',       Components\Modal::class     );
 		$this->register( 'toast',       Components\Toast::class     );
 		$this->register( 'toggler',     Components\Toggler::class   );
+		$this->register( 'tooltip',     Components\Tooltip::class   );
+		$this->register( 'popover',     Components\Popover::class   );
 		$this->register( 'lightbox',    Components\Lightbox::class  );
 		$this->register( 'dropdown',    Components\Dropdown::class  );
 		$this->register( 'offcanvas',   Components\OffCanvas::class );
 		$this->register( 'parallax',    Components\Parallax::class  );
 		$this->register( 'transition',  Components\Transition::class);
 
-        add_action( 'wp_print_styles',  [ $this, 'assets' ], 20, 1 );
+        add_action( 'init',             [ $this, 'cache'        ], 95    );
+        add_action( 'wp_print_styles',  [ $this, 'assets'       ], 20, 1 );
+        add_action( 'admin_init',       [ $this, 'editor_css'   ], 20, 1 );
 	}
 
     /**
@@ -71,6 +83,25 @@ class Components implements Configuration {
      */
     public function load( $key ) {
         return $this->loaded = wp_parse_args( (array) $key, $this->loaded );
+	}
+
+    /**
+	 * Generate cache.
+	 *
+	 * @return  void
+	 */
+	public function cache() {
+		$filesystem = wecodeart( 'files' );
+        $filesystem->set_folder( 'cache' );
+        if( ! $filesystem->has_file( self::CACHE_FILE ) || false === get_transient( self::CACHE_KEY ) ) {
+            $inline = '';
+            foreach( $this->all() as $component ) {
+                $inline .= $component::styles();
+            }
+			$filesystem->create_file( self::CACHE_FILE, wecodeart( 'styles' )::compress( $inline ) );
+			set_transient( self::CACHE_KEY, true, 5 * MINUTE_IN_SECONDS );
+		}
+        $filesystem->set_folder( '' );
 	}
     
     /**
@@ -114,9 +145,23 @@ class Components implements Configuration {
 
         $inline_css = wecodeart( 'styles' )::compress( $inline_css );
 
-		wp_register_style( $this->make_handle(), false, [], true, true );
-		wp_add_inline_style( $this->make_handle(), $inline_css );
-		wp_enqueue_style( $this->make_handle() );
+        wp_register_style( $this->make_handle(), false, [], true, true );
+        wp_add_inline_style( $this->make_handle(), $inline_css );
+        wp_enqueue_style( $this->make_handle() );
+	}
+
+    /**
+	 * Load Utilities CSS on admin.
+	 *
+	 * @return  void
+	 */
+	public function editor_css() {
+		$filesystem = wecodeart( 'files' );
+		$filesystem->set_folder( 'cache' );
+
+		add_editor_style( $filesystem->get_file_url( self::CACHE_FILE, true ) );
+		
+		$filesystem->set_folder( '' );
 	}
 	
 	/**

@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer\Theme
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.2
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Admin\Installer;
@@ -49,6 +49,7 @@ class Theme extends Installer implements Installable {
 	 * Install the theme.
 	 *
 	 * @since 	6.1.2
+	 * @version 6.2.9
 	 *
 	 * @return 	mixed
 	 */
@@ -79,6 +80,7 @@ class Theme extends Installer implements Installable {
 	 * Fix GitHub path.
 	 *
 	 * @since 	6.1.2
+	 * @version	6.2.9
 	 *
 	 * @param 	boolean $true       always true
 	 * @param 	mixed   $hook_extra not used
@@ -93,7 +95,7 @@ class Theme extends Installer implements Installable {
 
 		global $wp_filesystem;
 
-		$destination = WP_CONTENT_DIR . '/themes/' . $this->get_dir();
+		$destination = wp_normalize_path( WP_CONTENT_DIR . '/themes/' . $this->get_dir() );
 
 		$wp_filesystem->move( $result['destination'], $destination );
 		$result['destination'] = $destination;

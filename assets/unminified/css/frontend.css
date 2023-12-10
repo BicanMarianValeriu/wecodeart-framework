@@ -698,7 +698,7 @@ progress {
   text-align: justify;
 }
 
-.has-underline {
+:where(.has-underline, .is-style-underline) {
   text-decoration: underline;
 }
 

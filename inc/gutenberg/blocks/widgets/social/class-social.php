@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.5
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -59,6 +59,7 @@ class Social extends Dynamic {
 	public function block_type_args( $current ): array {
 		$attributes	= get_prop( $current, [ 'attributes' ], [] );
 		$context	= get_prop( $current, [ 'provides_context' ], [] );
+		$supports	= get_prop( $current, [ 'supports' ], [] );
 
 		return [
 			'attributes' 		=> wp_parse_args( [
@@ -69,6 +70,23 @@ class Social extends Dynamic {
 			'provides_context' 	=> wp_parse_args( [
 				'namespace'		=> 'namespace',
 			], $context ),
+			'supports' 			=> wp_parse_args( [
+				'typography'	=> [
+					'__experimentalSelector' 		=> '.wp-block-social-link-label',
+					'fontSize' 						=> true,
+					'lineHeight' 					=> true,
+					'__experimentalFontFamily' 		=> true,
+					'__experimentalTextDecoration' 	=> true,
+					'__experimentalFontStyle' 		=> true,
+					'__experimentalFontWeight' 		=> true,
+					'__experimentalLetterSpacing' 	=> true,
+					'__experimentalTextTransform' 	=> true,
+					'__experimentalWritingMode'		=> true,
+					'__experimentalDefaultControls' => [
+						'fontSize' => true,
+					],
+				],
+			], $supports ),
 		];
 	}
 

@@ -9,7 +9,12 @@
 <div class="wp-block-group alignfull my-0" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--g)">
     <!-- wp:heading {"textAlign":"center","className":"fw-300 is-style-underline-brush"} -->
     <h2 class="wp-block-heading has-text-align-center fw-300 is-style-underline-brush">
-        <span class="has-underline"><?php printf( esc_html__( 'Latest %s', 'wecodeart' ), sprintf( '<strong>%s</strong>', esc_html__( 'Posts', 'wecodeart' ) ) ); ?></span>
+        <?php
+            printf(
+                esc_html__( 'Latest %s', 'wecodeart' ),
+                sprintf( '<strong><span class="has-underline">%s</span></strong>', esc_html__( 'Posts', 'wecodeart' ) )
+            );
+        ?>
     </h2>
     <!-- /wp:heading -->
     <!-- wp:paragraph {"align":"center","fontSize":"medium","fontFamily":"shadows-into-light"} -->

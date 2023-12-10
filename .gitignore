@@ -4,3 +4,5 @@ assets/fonts/
 yarn.lock
 .idea/
 dploy.js
+
+inc/support/modules/formatting/

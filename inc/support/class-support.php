@@ -9,14 +9,16 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		6.2.3
+ * @version		6.2.9
  */
 
 namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Admin\Installer\Module;
 use WeCodeArt\Config\Interfaces\Configuration;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Support for various plugins and features.
@@ -56,18 +58,42 @@ class Support implements Configuration {
 	 */
 	public function init() {
 		// Theme Support
-		\add_action( 'after_setup_theme', [ $this, 'after_setup_theme'	] );
+		\add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
 
-		// Register Default/Core Integrations
+		// Register Default/Core integrations
 		foreach ( glob( dirname( __FILE__ ) . '/*', GLOB_ONLYDIR ) as $directory ) {
-			$directory = basename( $directory );
-			$this->register( $directory, 'WeCodeArt\\Support\\' . ucfirst( $directory ) );
+			$directory 	= basename( $directory );
+			$namespace	= 'WeCodeArt\\Support\\' . ucfirst( $directory );
+			
+			if( ! class_exists( $namespace ) ) {
+				continue;
+			}
+
+			$this->register( $directory, $namespace );
 		}
 
-        // Register Plugin Integrations
+        // Register plugin integrations
         foreach ( glob( dirname( __FILE__ ) . '/plugins/*', GLOB_ONLYDIR ) as $directory ) {
 			$directory = basename( $directory );
-			$this->register( $directory, 'WeCodeArt\\Support\\Plugins\\' . ucfirst( $directory ) );
+			$namespace	= 'WeCodeArt\\Support\\Plugins\\' . ucfirst( $directory );
+			
+			if( ! class_exists( $namespace ) ) {
+				continue;
+			}
+
+			$this->register( 'plugins/' . $directory, $namespace );
+		}
+
+        // Register module integrations
+        foreach ( glob( dirname( __FILE__ ) . '/modules/*', GLOB_ONLYDIR ) as $directory ) {
+			$directory = basename( $directory );
+			$namespace	= 'WeCodeArt\\Support\\Modules\\' . ucfirst( $directory );
+			
+			if( ! class_exists( $namespace ) ) {
+				continue;
+			}
+
+			$this->register( 'modules/' . $directory, $namespace );
 		}
 	}
 
@@ -76,6 +102,8 @@ class Support implements Configuration {
 	 *
 	 * @since 	1.0
 	 * @version	5.3.8
+	 *
+	 * @return 	void
 	 */
 	public function after_setup_theme() {
 		// Theme Support
