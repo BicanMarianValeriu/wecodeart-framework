@@ -28,7 +28,7 @@ class Popover extends Base {
 	public static function styles(): string {
         $inline = "
             .popover {
-                --wp--popover--zindex: 1070;
+                --wp--popover--zindex: 70;
                 --wp--popover--max-width: 276px;
                 --wp--popover--font-size: 0.875rem;
                 --wp--popover--bg: var(--wp--preset--color--white);

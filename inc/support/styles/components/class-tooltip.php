@@ -28,7 +28,7 @@ class Tooltip extends Base {
 	public static function styles(): string {
         $inline = "
             .tooltip {
-                --wp--tooltip--zindex: 1080;
+                --wp--tooltip--zindex: 80;
                 --wp--tooltip--max-width: 200px;
                 --wp--tooltip--padding-x: 0.5rem;
                 --wp--tooltip--padding-y: 0.25rem;
