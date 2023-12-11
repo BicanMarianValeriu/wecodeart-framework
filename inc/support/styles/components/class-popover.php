@@ -8,8 +8,8 @@
  * @package		WeCodeArt Framework
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
- * @since		6.3.0
- * @version		6.3.0
+ * @since		6.2.9
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -20,6 +20,13 @@ defined( 'ABSPATH' ) || exit();
  * Module Styles
  */
 class Popover extends Base {
+    /**
+     * Component's Style Deps.
+     *
+     * @var     array
+     */
+    static $deps = [ 'transition' ];
+
     /**
 	 * Component styles.
 	 *
