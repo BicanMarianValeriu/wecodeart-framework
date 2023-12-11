@@ -362,6 +362,9 @@ class Social extends Dynamic {
 				width: 1.25em;
 				height: 1.25em;
 			}
+			.wp-social-link.wp-social-link__is-incomplete {
+				opacity: 1;
+			}
 		";
 	}
 }

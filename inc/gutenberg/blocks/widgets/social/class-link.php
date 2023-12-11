@@ -69,8 +69,15 @@ class Link extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( array $attributes = [], string $content = '', object $block = null ): string {
+		$is_sharing	= wecodeart( 'blocks' )->get( 'core/social-links' )::is_sharing_variation( $block->context );
+
+		if ( $is_sharing ) {
+			$has_url	= get_prop( $attributes, [ 'url' ] );
+			$attributes['url'] = $has_url ?: '#';
+		}
+
+		// Core render.
 		$content	= render_block_core_social_link( $attributes, $content, $block );
-		$is_sharing = wecodeart( 'blocks' )->get( 'core/social-links' )::is_sharing_variation( $block->context );
 		
 		if ( $is_sharing ) {
 			$service 	= get_prop( $attributes, [ 'service' ], '' );
