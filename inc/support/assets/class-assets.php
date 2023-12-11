@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.4.0
- * @version		6.1.7
+ * @version		6.2.9
  */
 
 namespace WeCodeArt\Support;
@@ -251,23 +251,27 @@ final class Assets implements Integration {
 	 * Load Assets
 	 *
 	 * @since	6.0.0
-	 * @version	6.1.2
+	 * @version	6.2.9
 	 *
      * @return void
 	 */
 	public function enqueue(): void {
 		global $_wp_current_template_content;
-		$blocks_1   = parse_blocks( get_post_field( 'post_content', get_the_ID() ) );
+		$content	= get_post_field( 'post_content', get_the_ID() );
+
+		$blocks_1   = parse_blocks( $content );
 		$blocks_1 	= wp_list_pluck( _flatten_blocks( $blocks_1 ), 'blockName' );
+
 		$blocks_2   = parse_blocks( $_wp_current_template_content );
 		$blocks_2 	= wp_list_pluck( _flatten_blocks( $blocks_2 ), 'blockName' );
+
 		$blocks     = array_unique( array_merge( $blocks_2, $blocks_1 ) );
 
-		$should_load = function( $data ) use( $blocks ) {
+		$should_load = function( $data ) use( $blocks, $content, $_wp_current_template_content ) {
 			$condition = get_prop( $data, [ 'load' ], true );
 
 			if( is_callable( $condition ) ) {
-				$condition = call_user_func( $condition, $blocks );
+				$condition = call_user_func( $condition, $blocks, $content, $_wp_current_template_content );
 			}
 
 			return (bool) $condition;

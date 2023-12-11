@@ -8,6 +8,7 @@ v6.2.9
 - Updated - Offload gutenberg extra formatting to own installable module
 - Updated - Style components are now cached and enqueued in admin/editor
 - Updated - Update underlined word for latest posts and testimonial patterns
+- Updated - Pass template content and post content to the load callback of wecodeart( 'assets' ) API
 - Fixed - core/social-links missing social networks services colors
 - Fixed - Issue with generated classname for inline styles for selectors that contains ","
 - Fixed - Issue with buttons auto text color based on background lightness
