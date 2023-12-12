@@ -3,6 +3,7 @@
  */
 const {
     i18n: { __ },
+    blocks: { registerBlockType, registerBlockVariation }
 } = wp;
 
 const groupMarquee = {
@@ -70,4 +71,14 @@ const socialSharing = {
     }
 };
 
-export { groupMarquee, groupMarqueeV2, socialSharing };
+function registerWCAVariations() {
+    [
+        groupMarquee,
+        groupMarqueeV2,
+        socialSharing
+    ].forEach(({ block, attributes }) => {
+        registerBlockVariation(block, attributes);
+    });
+}
+
+registerWCAVariations();

@@ -38,6 +38,8 @@
 		"build:gutenberg:classes": "wp-scripts build gutenberg/ext-classes=./src/js/gutenberg/extensions/with-classes/index.js --output-path=assets/minified",
 		"start:modules:formatting": "wp-scripts start index=./inc/support/modules/formatting/src/js/index.js front=./inc/support/modules/formatting/src/js/front.js --output-path=inc/support/modules/formatting/assets/unminified",
 		"build:modules:formatting": "wp-scripts build index=./inc/support/modules/formatting/src/js/index.js front=./inc/support/modules/formatting/src/js/front.js --output-path=inc/support/modules/formatting/assets/minified",
+		"start:modules:lorem": "wp-scripts start index=./inc/support/modules/lorem/src/js/index.js --output-path=inc/support/modules/lorem/assets/unminified",
+		"build:modules:lorem": "wp-scripts build index=./inc/support/modules/lorem/src/js/index.js --output-path=inc/support/modules/lorem/assets/minified",
 		"lint:css": "wp-scripts lint-style ./src/scss",
 		"lint:js": "wp-scripts lint-js ./src/js/routes ./src/js/frontend.js",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",

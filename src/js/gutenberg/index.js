@@ -1,8 +1,8 @@
 // SCSS
 import './../../scss/gutenberg/index.scss';
 
-// Blocks
-import './blocks';
+// Variations
+import './variations';
 
 // Plugins
 import './plugins';

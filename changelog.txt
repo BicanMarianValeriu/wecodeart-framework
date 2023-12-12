@@ -6,6 +6,7 @@ v6.2.9
 - Updated - Admin plugins manager will now maintain state on tab change
 - Updated - Theme upgrade routines will now run after_switch_theme, once
 - Updated - Offload gutenberg extra formatting to own installable module
+- Updated - Offload gutenberg lorem ipsum generator to own installable module (+400kb in file savings)
 - Updated - Style components are now cached and enqueued in admin/editor
 - Updated - Update underlined word for latest posts and testimonial patterns
 - Updated - Pass template content and post content to the load callback of wecodeart( 'assets' ) API
