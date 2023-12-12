@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.8
+ * @version		6.3.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -84,25 +84,26 @@ class Image extends Dynamic {
 	 */
 	public function render( array $attributes = [], string $content = '', $block = null ): string {
 		$html 	= render_block_core_image( $attributes, $content, $block ); // For lightbox logic.
-		$dom	= $this->dom( $html );
+
+		$dom	= $this->dom( $content );
 		$div  	= dom_get_element( 'figure', $dom );
 		$link 	= dom_get_element( 'a', $div );
 		$img  	= dom_get_element( 'img', $link ?? $div );
 
 		// If no image, use placeholder.
-		if ( $img && ! $img->getAttribute( 'src' ) ) {
+		if ( $img && ! $img->getAttribute( 'src' ) ) { 
 			$img->setAttribute( 'class', 'wp-block-image__placeholder' );
 			$img->setAttribute( 'src', get_placeholder_source() );
 			$img->setAttribute( 'alt', esc_attr__( 'Placeholder', 'wecodeart' ) );
 
-			$content = $dom->saveHTML();
+			$html = $dom->saveHTML();
 		}
 
 		// If image is SVG, import it.
-		if ( str_contains( $content, '.svg' ) ) {
-			dom_image_2_svg( $dom, $link ?? $div, $img, $attributes, $content );
+		if ( str_contains( $html, '.svg' ) ) {
+			dom_image_2_svg( $dom, $link ?? $div, $img, $attributes, $html );
 
-			$content = $dom->saveHTML();
+			$html = $dom->saveHTML();
 		}
 
 		// If lightbox is enabled, load styles.
@@ -111,7 +112,7 @@ class Image extends Dynamic {
 			wecodeart( 'styles' )->Components->load( [ 'lightbox' ] );
 		}
 
-		return $content;
+		return $html;
 	}
 
 	/**

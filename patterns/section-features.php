@@ -40,7 +40,7 @@
                 <div class="wp-block-column is-vertically-aligned-top col-auto order-md-last">
                     <!-- wp:image {"align":"center","width":"35px","height":"35px","scale":"contain","sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
                     <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-text-color">
-                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-heart.svg' ) ); ?>" alt="" style="object-fit:contain;width:35px;height:35px" />
+                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-puzzle.svg' ) ); ?>" alt="" style="object-fit:contain;width:35px;height:35px" />
                     </figure>
                     <!-- /wp:image -->
                 </div>
@@ -48,7 +48,7 @@
                 <!-- wp:column {"verticalAlignment":"top","style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"className":"has-text-align-md-right"} -->
                 <div class="wp-block-column is-vertically-aligned-top has-text-align-md-right">
                     <!-- wp:heading {"level":3,"className":"h4 fw-400"} -->
-                    <h3 class="wp-block-heading h4 fw-400"><?php esc_html_e( 'Is a Framework', 'wecodeart' ); ?></h3>
+                    <h3 class="wp-block-heading h4 fw-400"><?php esc_html_e( 'Modular Design', 'wecodeart' ); ?></h3>
                     <!-- /wp:heading -->
                     <!-- wp:paragraph {"fontSize":"small"} -->
                     <p class="has-small-font-size"><?php esc_html_e( 'Cutting-edge code, simple, fast, and not packed with features you will never use.', 'wecodeart' ); ?></p>
@@ -76,7 +76,7 @@
                 <div class="wp-block-column is-vertically-aligned-top col-auto">
                     <!-- wp:image {"align":"center","width":"35px","height":"35px","scale":"contain","sizeSlug":"large","linkDestination":"none","textColor":"primary"} -->
                     <figure class="wp-block-image aligncenter size-large is-resized has-primary-color has-text-color">
-                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-puzzle.svg' ) ); ?>" alt="" style="object-fit:contain;width:35px;height:35px" />
+                        <img src="<?php echo esc_url( get_parent_theme_file_uri( 'assets/images/icon-heart.svg' ) ); ?>" alt="" style="object-fit:contain;width:35px;height:35px" />
                     </figure>
                     <!-- /wp:image -->
                 </div>

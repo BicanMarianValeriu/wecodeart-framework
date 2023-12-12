@@ -1,5 +1,6 @@
 v6.3.0
-- Updated - social sharing pattern label update
+- Updated - Some of the patterns wording
+- Fixed - issue with empty image source to be rendered as placeholder
 
 v6.2.9
 - Updated - core/group marquee variation logic with namespace attribute / deprecated old logic with block style
