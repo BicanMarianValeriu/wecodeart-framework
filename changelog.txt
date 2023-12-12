@@ -1,3 +1,6 @@
+v6.3.0
+- Updated - social sharing pattern label update
+
 v6.2.9
 - Updated - core/group marquee variation logic with namespace attribute / deprecated old logic with block style
 - Updated - core/post-template markup logic to use core render_block_core_post_template function
