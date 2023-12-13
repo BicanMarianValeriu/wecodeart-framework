@@ -9,7 +9,7 @@
  * @subpackage 	Support\Modules
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.2.9
- * @version		6.3.0
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Support;
@@ -40,7 +40,8 @@ final class Modules implements Integration {
 	public function register_hooks() {
 		// Check modules for updates
 		\add_action( 'init', [ $this, 'check_modules' ] );
-		\add_filter( 'wecodeart/filter/support/plugins/admin', [ $this, 'extend_plugins' ] );
+		\add_filter( 'wecodeart/filter/support/plugins/admin', 	[ $this, 'extend_plugins' 	] );
+		\add_action( 'wecodeart/upgrade/finish',				[ $this, 'upgrade_modules' 	] );
 	}
 
 	/**
@@ -96,5 +97,17 @@ final class Modules implements Integration {
 
 			set_transient( self::MODULES_CACHE_KEY, true, 12 * HOUR_IN_SECONDS );
 		}
+	}
+
+	/**
+	 * Upgrade modules with theme.
+	 *
+	 * @since   6.3.1
+	 * @version	6.3.1
+	 *
+	 * @return 	void
+	 */
+	public function upgrade_modules(): void {
+		Module\Ajax::install( wecodeart_option( 'installed_modules', [] ) );
 	}
 }

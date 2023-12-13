@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Upgrade
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.2.9
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Admin;
@@ -111,8 +111,6 @@ class Upgrade {
 			'theme_version' => wecodeart( 'version' )
 		] );
 
-        // Update installed modules.
-		$installed_modules = wecodeart_option( 'installed_modules', [] );
-		Module\Ajax::install( $installed_modules );
+		do_action( 'wecodeart/upgrade/finish', $previous_version );
 	}
 }
