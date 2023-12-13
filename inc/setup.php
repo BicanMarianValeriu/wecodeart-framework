@@ -76,8 +76,12 @@ wecodeart()->bind( 'blocks', function () {
  *
  * @return  void
  */
-wecodeart()->bind( 'integrations', function () {
+wecodeart()->bind( 'support', function () {
     return WeCodeArt\Support::get_instance();
+} );
+
+wecodeart()->bind( 'integrations', function () {
+    return wecodeart( 'support' );
 } );
 
 /**
@@ -88,7 +92,7 @@ wecodeart()->bind( 'integrations', function () {
  * @return  void
  */
 wecodeart()->bind( 'markup', function () {
-    return wecodeart( 'integrations' )->get( 'markup' )::get_instance();
+    return wecodeart( 'support' )->get( 'markup' )::get_instance();
 } );
 
 /**
@@ -99,7 +103,7 @@ wecodeart()->bind( 'markup', function () {
  * @return  void
  */
 wecodeart()->bind( 'assets', function () {
-    return wecodeart( 'integrations' )->get( 'assets' )::get_instance();
+    return wecodeart( 'support' )->get( 'assets' )::get_instance();
 } );
 
 /**
@@ -110,7 +114,7 @@ wecodeart()->bind( 'assets', function () {
  * @return  void
  */
 wecodeart()->bind( 'styles', function () {
-    return wecodeart( 'integrations' )->get( 'styles' )::get_instance();
+    return wecodeart( 'support' )->get( 'styles' )::get_instance();
 } );
 
 /**
@@ -121,7 +125,7 @@ wecodeart()->bind( 'styles', function () {
  * @return  void
  */
 wecodeart()->bind( 'files', function () {
-    return wecodeart( 'integrations' )->get( 'files' )::get_instance();
+    return wecodeart( 'support' )->get( 'files' )::get_instance();
 } );
 
 /**

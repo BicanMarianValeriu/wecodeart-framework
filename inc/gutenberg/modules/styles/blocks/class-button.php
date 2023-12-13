@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.9
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -41,7 +41,7 @@ class Button extends Processor {
 		if( get_prop( $this->attrs, 'textColor' ) === null && get_prop( $this->attrs, 'backgroundColor' ) ) {
 			$selected	= wp_list_filter( $palette, [ 'slug' => get_prop( $this->attrs, 'backgroundColor' ) ] );
 
-			$rgba 		= wecodeart( 'styles' )::color_to_rgba( get_prop( current( $selected ), 'color' ), false, true );
+			$rgba 		= wecodeart( 'styles' )::hex_to_rgb( get_prop( current( $selected ), 'color' ), 1, true );
 			$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
 			$is_dark 	= $luminance < get_lightness_limit();
 
@@ -52,7 +52,7 @@ class Button extends Processor {
 		if( get_prop( $this->attrs, 'textColor' ) && $is_outline ) {
 			$selected	= wp_list_filter( $palette, [ 'slug' => get_prop( $this->attrs, 'textColor' ) ] );
 
-			$rgba 		= wecodeart( 'styles' )::color_to_rgba( get_prop( current( $selected ), 'color' ), false, true );
+			$rgba 		= wecodeart( 'styles' )::hex_to_rgb( get_prop( current( $selected ), 'color' ), 1, true );
 			$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
 			$is_dark 	= $luminance < get_lightness_limit();
 
@@ -65,7 +65,7 @@ class Button extends Processor {
 			if( $color = get_prop( $css_style, 'color' ) ) {
 				// Text
 				if( $text = get_prop( $color, 'text' ) ) {
- 					$value	= wecodeart( 'styles' )::color_to_rgba( $text, false, true );
+ 					$value	= wecodeart( 'styles' )::hex_to_rgb( $text, 1, true );
 
 					if( $is_outline ) {
 						$luminance	= wecodeart( 'styles' )::rgb_luminance( $value );
@@ -79,7 +79,7 @@ class Button extends Processor {
 				}
 				// Background
 				if( $background = get_prop( $color, 'background' ) ) {
- 					$value		= wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+ 					$value		= wecodeart( 'styles' )::hex_to_rgb( $background, 1, true );
 					$luminance	= wecodeart( 'styles' )::rgb_luminance( $value );
 					$is_dark 	= $luminance < get_lightness_limit();
 

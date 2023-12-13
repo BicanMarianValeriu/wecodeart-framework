@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.0.1
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Support;
@@ -466,17 +466,9 @@ final class Styles implements Integration {
 	 * @return 	mixed
 	 */
 	public static function color_to_rgba( string $color, bool $alpha = false, bool $array = false ) {
-		$colors = wp_tinycolor_string_to_rgb( $color );
+		_deprecated_function( __FUNCTION__, '6.3.1', "wecodeart( 'styles' )::hex_to_rgb" );
 
-		if( $array === true ) {
-			return $colors;
-		}
-
-		if( $alpha === false ) {
-			return 'rgb(' . join( ', ', array_splice( $colors, 0, 3 ) ) . ')';
-		}
-		
-		return 'rgba(' . join( ', ', $colors ) . ')';
+		return self::hex_to_rgb( $color, $alpha ? (int) $alpha : 1 , $array );
 	}
 
 	/**
@@ -521,6 +513,59 @@ final class Styles implements Integration {
 			$rgb_array['g'],
 			$rgb_array['b']
 		);
+	}
+	
+	/**
+	 * Convert an RGB array to hexadecimal representation.
+	 *
+	 * @param 	string 	$hex
+	 * @param 	integer	$alpha
+	 * @param 	boolean	$array
+	 *
+	 * @return 	mixed
+	 */
+	public static function hex_to_rgb( string $hex = '', int $alpha = 1, bool $array = false ): mixed {
+		$pattern = '/rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})(?:,\s*(0|1|0?\.\d+))?\)/';
+    
+		// Check if rgba
+		if ( preg_match( $pattern, $hex, $matches ) ) {
+			$r = $matches[1];
+			$r = $matches[2];
+			$r = $matches[3];
+			$a = isset( $matches[4] ) ? (float) $matches[4] : 1;
+
+			return $array ? [
+				'r' => $r,
+				'g' => $g,
+				'b' => $b,
+				'a' => $a
+			] : "rgba($r, $g, $b, $a)";
+		}
+
+		// Remove '#' if present
+		$hex = ltrim( $hex, '#' );
+
+		// If shorthand format, need to expand it
+		if ( strlen( $hex ) === 3 ) {
+			$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+		}
+
+		if ( strlen( $hex ) !== 6 ) {
+			return false;
+		}
+	
+		// Convert hex to decimal
+		$r = hexdec( substr( $hex, 0, 2 ) );
+		$g = hexdec( substr( $hex, 2, 2 ) );
+		$b = hexdec( substr( $hex, 4, 2 ) );
+		$a = max( 0, min( 1, $alpha ) ); // Ensure alpha is between 0 and 1
+
+		return $array ? [
+			'r' => $r, 
+			'g' => $g, 
+			'b' => $b, 
+			'a' => $a
+		] : "rgba($r, $g, $b, $a)";
 	}
 
 	/**
@@ -601,7 +646,7 @@ final class Styles implements Integration {
 		}
 	
 		foreach ( $preset['colors'] as $color_str ) {
-			$color = wp_tinycolor_string_to_rgb( $color_str );
+			$color = self::hex_to_rgb( $color_str, 1, true );
 	
 			$values['r'][] = $color['r'] / 255;
 			$values['g'][] = $color['g'] / 255;

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.9
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -82,7 +82,7 @@ class Menu extends Dynamic {
 		$color_type = get_prop( $block->context, 'overlayBackgroundColor' );
 		$key_name 	= $color_type ? 'overlay-background' : 'background';
 		$background = Navigation::get_class_color( $block->context, $key_name );
-		$background = wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+		$background = wecodeart( 'styles' )::hex_to_rgb( $background, 1, true );
 		$luminance 	= wecodeart( 'styles' )::rgb_luminance( $background );
 		
 		$classes 	= [ 'wp-block-navigation-link__dropdown', 'dropdown-menu' ];

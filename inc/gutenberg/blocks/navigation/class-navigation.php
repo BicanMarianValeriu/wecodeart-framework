@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.1
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -421,7 +421,7 @@ class Navigation extends Dynamic {
 		$colors     = $this->get_colors( $attributes );
 		$typography = $this->get_typography( $attributes );
 		$background = get_prop( $attributes, 'customBackgroundColor', self::get_class_color( $attributes ) );
-		$background = wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+		$background = wecodeart( 'styles' )::hex_to_rgb( $background, 1, true );
 		$luminance 	= wecodeart( 'styles' )::rgb_luminance( $background );
 		$classnames = explode( ' ',  get_prop( $attributes, 'className', '' ) );
 

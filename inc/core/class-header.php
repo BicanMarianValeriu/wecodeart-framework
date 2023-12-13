@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		6.1.2
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Core;
@@ -77,7 +77,7 @@ class Header {
 	 * Adds custom classes to the array of body classes.
 	 *
 	 * @since	4.0.6
-	 * @version 6.0.0
+	 * @version 6.3.1
 	 *
 	 * @param 	array 	$classes Classes for the body element.
 	 *
@@ -100,7 +100,7 @@ class Header {
 
 		$background	= get_json_color( [ 'styles', 'color', 'background' ] );
 		if( $background ) {
-			$background = wecodeart( 'styles' )::color_to_rgba( $background, false, true );
+			$background = wecodeart( 'styles' )::hex_to_rgb( $background, 1, true );
 			$luminance 	= wecodeart( 'styles' )::rgb_luminance( $background );
 
 			$classes[] = ( $luminance < get_lightness_limit() ) ? 'theme-is-dark' : 'theme-is-light';
