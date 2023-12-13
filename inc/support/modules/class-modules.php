@@ -9,7 +9,7 @@
  * @subpackage 	Support\Modules
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.2.9
- * @version		6.2.9
+ * @version		6.3.0
  */
 
 namespace WeCodeArt\Support;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Integration;
+use WeCodeArt\Admin\Installer\Module;
 use WeCodeArt\Conditional\Traits\No_Conditionals;
 use function WeCodeArt\Functions\get_prop;
 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-12 13:37+0000\n"
+"POT-Creation-Date: 2023-12-12 23:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -425,10 +425,6 @@ msgstr ""
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr ""
 
-#: patterns/section-features.php:51
-msgid "Is a Framework"
-msgstr ""
-
 #: views/admin/notification-theme.tpl.php:28
 msgid ""
 "It appears that you do not currently have a child theme installed or "
@@ -510,6 +506,10 @@ msgstr ""
 
 #: inc/gutenberg/blocks/site/class-login.php:50
 msgid "Modal"
+msgstr ""
+
+#: patterns/section-features.php:51
+msgid "Modular Design"
 msgstr ""
 
 #: inc/admin/installer/module/class-ajax.php:116
@@ -615,7 +615,7 @@ msgid "Pills"
 msgstr ""
 
 #: inc/app.php:105 inc/app.php:106
-#: inc/gutenberg/blocks/media/class-image.php:96
+#: inc/gutenberg/blocks/media/class-image.php:97
 #: inc/gutenberg/blocks/media/class-text.php:77
 msgid "Placeholder"
 msgstr ""

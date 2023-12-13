@@ -1,6 +1,7 @@
 v6.3.0
 - Updated - Some of the patterns wording
 - Fixed - issue with empty image source to be rendered as placeholder
+- Fixed - fatal error in modules update check transient
 
 v6.2.9
 - Updated - core/group marquee variation logic with namespace attribute / deprecated old logic with block style

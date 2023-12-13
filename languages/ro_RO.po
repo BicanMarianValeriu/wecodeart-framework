@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-12-12 13:43+0000\n"
+"PO-Revision-Date: 2023-12-12 23:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -455,10 +455,6 @@ msgstr "Ignoră timp de 1 zi"
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr "Wrapper HTML nevalid pentru „%s”."
 
-#: patterns/section-features.php:51
-msgid "Is a Framework"
-msgstr "Este un cadru"
-
 #: views/admin/notification-theme.tpl.php:28
 msgid ""
 "It appears that you do not currently have a child theme installed or "
@@ -548,6 +544,10 @@ msgstr "MOBILE"
 #: inc/gutenberg/blocks/site/class-login.php:50
 msgid "Modal"
 msgstr "Modal"
+
+#: patterns/section-features.php:51
+msgid "Modular Design"
+msgstr "Design Modular"
 
 #: inc/admin/installer/module/class-ajax.php:116
 msgid "Module failed to install."
@@ -658,7 +658,7 @@ msgid "Pills"
 msgstr "Pastile"
 
 #: inc/app.php:105 inc/app.php:106
-#: inc/gutenberg/blocks/media/class-image.php:96
+#: inc/gutenberg/blocks/media/class-image.php:97
 #: inc/gutenberg/blocks/media/class-text.php:77
 msgid "Placeholder"
 msgstr "Substituent"
