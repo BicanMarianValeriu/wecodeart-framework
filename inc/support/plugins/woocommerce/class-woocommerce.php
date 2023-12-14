@@ -9,7 +9,7 @@
  * @subpackage 	Support\WooCommerce
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		1.9
- * @version		6.1.7
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -101,7 +101,7 @@ class WooCommerce implements Integration {
 	 * Installer
 	 *
 	 * @since	6.1.2
-	 * @version	6.1.2
+	 * @version	6.3.1
 	 *
 	 * @return 	array
 	 */

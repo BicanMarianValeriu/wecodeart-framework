@@ -177,7 +177,7 @@ return [
                 'slug'          => 'BicanMarianValeriu/wca-formatting',
                 'title'         => esc_html__( 'WCA: Formatting', 'wecodeart' ),
                 'description'   => esc_html__( 'Extends Gutenberg editor with extra formatting options like: justify, abbreviation, text decorations, tooltips and popovers.', 'wecodeart' ),
-                'more'          => 'https://github.com/BicanMarianValeriu/wca-formatting/',
+                'more'          => 'https://www.wecodeart.com/integrations/formatting-options/',
                 'source'        => 'github',
                 'destination'   => 'formatting',
                 'type'          => 'module',
