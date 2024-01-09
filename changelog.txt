@@ -4,6 +4,9 @@ v6.3.1
 - Updated - bind 'support' key instead of wecodeart( 'intergrations' ) to access WeCodeArt\Support class
 - Updated - social sharing pattern icons and text color and font
 - Updated - removed unused JavaScript code for patterns (was implemented in Core)
+- Updated - normalized core/home-link to use Navigation/Link class to render markup
+- Updated - core/navigation to wrap core/buttons in li tag (the same as other: spacer/logo)
+- Fixed - properly update installed modules options inside module uninstall function
 
 v6.3.0
 - Updated - Some of the patterns wording

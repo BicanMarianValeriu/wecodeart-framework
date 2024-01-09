@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.1
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -137,7 +137,17 @@ class Link extends Dynamic {
 					'class' => 'wp-block-navigation-item__label'
 				]
 			] ], function( $attributes ) { 
-					echo wp_kses_post( $attributes['label'] );
+					echo wp_kses_post( get_prop( $attributes, [ 'label' ], '' ) );
+			}, [ $attributes ] );
+
+			// Description
+			wecodeart( 'markup' )::wrap( 'nav-description', [ [
+				'tag' 	=> 'span',
+				'attrs'	=> [
+					'class' => 'wp-block-navigation-item__description'
+				]
+			] ], function( $attributes ) { 
+					echo wp_kses_post( get_prop( $attributes, [ 'description' ], '' ) );
 			}, [ $attributes ] );
 		}, [ $attributes, $extras ] );
 	}
@@ -191,30 +201,37 @@ class Link extends Dynamic {
 	 * @return 	array
 	 */
 	public function get_link_attributes( $attributes, $block, $extras ): array {
-		$current_id 	= is_home() ? get_option( 'page_for_posts' ) : get_queried_object_id();
-		$is_active   	= ! empty( $attributes['id'] ) && (int) $current_id === (int) $attributes['id'];
-		$has_submenu 	= count( $block->inner_blocks ) > 0;
-
-		$classes = [ 'wp-block-navigation-item__content', 'nav-link' ];
+		// Default links
+		$is_active	= (int) get_queried_object_id() === (int) get_prop( $attributes, [ 'id' ], 0 );
+		$classes 	= [ 'wp-block-navigation-item__content', 'nav-link' ];
 			
 		if( $is_active ) {
 			$classes[] = 'active';
 		}
 
-		if( $has_submenu ) {
-			$classes[] = 'dropdown-toggle';
-		}
-
 		$attrs 			= [
-			'class' 	=> join( ' ', array_filter( $classes ) ),
 			'href'		=> get_prop( $attributes, 'url', '#' ),
 			'target' 	=> get_prop( $attributes, 'opensInNewTab' ) === true ? '_blank' : null,
-			'rel'		=> get_prop( $attributes, 'nofollow' ),
+			'rel'		=> get_prop( $attributes, 'rel' ),
 			'title'		=> get_prop( $attributes, 'title' ),
 			'aria-current'	=> $is_active ? 'page' : null,
 		];
 
-		if( $has_submenu ) {
+		// Home link
+		if( get_prop( $block->parsed_block, [ 'blockName' ], '' ) === 'core/home-link' ) {
+			$attrs = wp_parse_args( [
+				'href' 			=> esc_url( trailingslashit( home_url() ) ),
+				'aria-current'	=> wecodeart_if( 'is_front_page' ) ? 'page' : null,
+				'rel'			=> 'home'
+			], $attrs );
+
+			if( wecodeart_if( 'is_front_page' ) ) {
+				$classes[] = 'active';
+			}
+		}
+
+		// Submenu
+		if( count( $block->inner_blocks ) > 0 ) {
 			$attrs = wp_parse_args( [
 				'href'				=> '#',
 				'data-bs-toggle' 	=> 'dropdown',
@@ -222,8 +239,14 @@ class Link extends Dynamic {
 				'aria-haspopup' 	=> 'true',
 				'aria-expanded' 	=> 'false',
 			], $attrs );
+
+			$classes[] = 'dropdown-toggle';
 		}
 
+		// Add class
+		$attrs['class'] = join( ' ', array_filter( $classes ) );
+
+		// Modifiers
 		foreach ( get_prop( $extras, [ 'mod' ], [] ) as $class ) {
 			if ( empty( $class ) ) continue;
 

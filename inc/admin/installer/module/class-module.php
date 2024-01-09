@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer\Module
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.2.9
- * @version		6.2.9
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Admin\Installer;
@@ -127,7 +127,7 @@ class Module extends Installer implements Installable {
 			return $this->status = null;
 		}
 
-		$folder = wp_normalize_path( $this->get_dir() );
+		$folder = $this->get_dir();
 
 		if ( is_dir( $folder ) ) {
             $objects = new \RecursiveIteratorIterator(
@@ -140,15 +140,17 @@ class Module extends Installer implements Installable {
          		else unlink( $object->getPathname() );
             }
 
-            return rmdir( $folder );
+            $removed = rmdir( $folder );
+			
+			if( $removed ) {
+				$installed_modules = wecodeart_option( 'installed_modules', [] );
+				$installed_modules = wp_list_filter( $installed_modules, [ 'slug' => $this->slug ], 'NOT' );
+				
+				wecodeart_option( [
+					'installed_modules' => array_values( $installed_modules )
+				] );
+			}
         }
-
-        $installed_modules = wecodeart_option( 'installed_modules', [] );
-		$installed_modules = wp_list_filter( $installed_modules, [ 'slug' => $this->slug ], 'NOT' );
-		
-        wecodeart_option( [
-            'installed_modules' => array_values( $installed_modules )
-        ] );
 		
 		return $this->status = true;
 	}

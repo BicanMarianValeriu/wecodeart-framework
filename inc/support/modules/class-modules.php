@@ -39,9 +39,9 @@ final class Modules implements Integration {
 	 */
 	public function register_hooks() {
 		// Check modules for updates
-		\add_action( 'init', [ $this, 'check_modules' ] );
+		\add_action( 'init', 									[ $this, 'check_updates'	] );
 		\add_filter( 'wecodeart/filter/support/plugins/admin', 	[ $this, 'extend_plugins' 	] );
-		\add_action( 'wecodeart/upgrade/finish',				[ $this, 'upgrade_modules' 	] );
+		\add_action( 'wecodeart/upgrade/finish',				[ $this, 'update_modules' 	] );
 	}
 
 	/**
@@ -54,7 +54,7 @@ final class Modules implements Integration {
 	 *
 	 * @return	array
 	 */
-	public function extend_plugins( $data = [] ) {
+	public function extend_plugins( $data = [] ): array {
 		$installers = get_prop( wecodeart_config( 'installers' ), [ 'modules' ], [] );
 		$installers = array_merge( get_prop( $data, [ 'installers' ], [] ), $installers );
 
@@ -72,11 +72,11 @@ final class Modules implements Integration {
 	 * Check modules for updates.
 	 *
 	 * @since   6.2.9
-	 * @version	6.2.9
+	 * @version	6.3.1
 	 *
 	 * @return 	void
 	 */
-	public function check_modules() {
+	public function check_updates(): void {
 		$installed_modules  = wecodeart_option( 'installed_modules', [] );
 
         // Check for updates
@@ -107,7 +107,7 @@ final class Modules implements Integration {
 	 *
 	 * @return 	void
 	 */
-	public function upgrade_modules(): void {
+	public function update_modules(): void {
 		Module\Ajax::install( wecodeart_option( 'installed_modules', [] ) );
 	}
 }

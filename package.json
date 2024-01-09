@@ -40,6 +40,8 @@
 		"build:modules:formatting": "wp-scripts build index=./inc/support/modules/formatting/src/js/index.js front=./inc/support/modules/formatting/src/js/front.js --output-path=inc/support/modules/formatting/assets/minified",
 		"start:modules:lorem": "wp-scripts start index=./inc/support/modules/lorem/src/js/index.js --output-path=inc/support/modules/lorem/assets/unminified",
 		"build:modules:lorem": "wp-scripts build index=./inc/support/modules/lorem/src/js/index.js --output-path=inc/support/modules/lorem/assets/minified",
+		"start:modules:scrolltop": "wp-scripts start admin=./inc/support/modules/scrolltop/src/js/admin.js --output-path=inc/support/modules/scrolltop/assets/unminified",
+		"build:modules:scrolltop": "wp-scripts build admin=./inc/support/modules/scrolltop/src/js/admin.js --output-path=inc/support/modules/scrolltop/assets/minified",
 		"lint:css": "wp-scripts lint-style ./src/scss",
 		"lint:js": "wp-scripts lint-js ./src/js/routes ./src/js/frontend.js",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",

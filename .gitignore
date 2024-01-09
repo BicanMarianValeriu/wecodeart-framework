@@ -6,4 +6,5 @@ yarn.lock
 dploy.js
 
 inc/support/modules/formatting/
+inc/support/modules/scrolltop/
 inc/support/modules/lorem/

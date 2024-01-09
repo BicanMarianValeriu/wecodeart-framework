@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.1
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -63,7 +63,7 @@ class Media extends Processor {
 			}
 		}
 		
-		if( ! get_prop( $this->attrs, 'mediaLink' ) ) {
+		if( get_prop( $this->attrs, 'imageFill' ) && ! get_prop( $this->attrs, 'mediaLink' ) ) {
 			$declarations['background-image'] = ( new Background( get_placeholder_source( false ) ) )->get_value();
 		}
 

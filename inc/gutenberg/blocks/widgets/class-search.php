@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.5
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -17,7 +17,6 @@ namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
@@ -27,7 +26,6 @@ use function WeCodeArt\Functions\get_prop;
 class Search extends Dynamic {
 
 	use Singleton;
-	use Asset;
 
 	/**
 	 * Block namespace.
@@ -199,7 +197,7 @@ class Search extends Dynamic {
 		return wecodeart_input( 'button', [
 			'label' => $label,
 			'attrs' => [
-				'type'			=>$is_btn ? 'button' : 'submit',
+				'type'			=> $is_btn ? 'button' : 'submit',
 				'class' 		=> self::get_classname( $attributes, 'button' ),
 				'aria-label'	=> $aria,
 				'data-bs-toggle'=> $is_btn ? 'modal' : null,

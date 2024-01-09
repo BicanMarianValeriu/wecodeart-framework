@@ -8,8 +8,8 @@
 ?>
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group">
-    <!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|primary"}}}},"textColor":"primary","fontSize":"large","fontFamily":"shadows-into-light"} -->
-    <p class="has-primary-color has-text-color has-link-color has-shadows-into-light-font-family has-large-font-size"><?php esc_html_e( 'Share the post:', 'wecodeart' ); ?></p>
+    <!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|primary"}}}},"textColor":"primary","fontFamily":"shadows-into-light"} -->
+    <p class="has-primary-color has-text-color has-link-color has-shadows-into-light-font-family"><?php esc_html_e( 'Share the post:', 'wecodeart' ); ?></p>
     <!-- /wp:paragraph -->
     <!-- wp:social-links {"openInNewTab":true,"namespace":"wecodeart/social-links/sharing","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xs","left":"var:preset|spacing|xs"}}}} -->
     <ul class="wp-block-social-links">

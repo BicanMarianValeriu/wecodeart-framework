@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.3.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use WeCodeArt\Gutenberg\Blocks\Navigation\Link;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -48,116 +49,7 @@ class Home extends Dynamic {
 	 */
 	public function block_type_args(): array {
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback' => [ Link::get_instance(), 'render' ],
 		];
-	}
-
-	/**
-	 * Dynamically renders the `core/home-link` block.
-	 *
-	 * @param 	array 	$attributes	The attributes.
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
-		// Don't render the block's subtree if it has no label.
-		if ( empty( $attributes['label'] ) ) {
-			return '';
-		}
-		
-		$icons = [];
-		$attrs 	= $this->get_wrapper_attributes( $attributes, $block, $icons );
-
-		return wecodeart( 'markup' )::wrap( 'nav-item', [ [
-			'tag' 	=> 'li',
-			'attrs'	=> $attrs
-		] ], function( $attributes, $icons ) {
-			$is_active 	= wecodeart_if( 'is_front_page' );
-			$classes 	= [ 'wp-block-navigation-link__content', 'nav-link' ];
-
-			if( $is_active ) {
-				$classes[] = 'active';
-			}
-
-			// Nav Link
-			wecodeart( 'markup' )::wrap( 'nav-link', [ [
-				'tag' 	=> 'a',
-				'attrs'	=>	[
-					'class' 		=> join( ' ', $classes ),
-					'href'			=> esc_url( trailingslashit( home_url() ) ),
-					'aria-current'	=> $is_active ? 'page' : null,
-					'rel'			=> 'home',
-				],
-			] ], function( $attributes, $icons ) {
-				// Icon
-				if( ! empty( $icons ) ) {
-					printf( '<i class="wp-block-navigation-link__icon %s"></i>', esc_attr( join( ' ', $icons ) ) );
-				}
-		
-				// Label
-				wecodeart( 'markup' )::wrap( 'nav-label', [ [
-					'tag' 	=> 'span',
-					'attrs'	=> [
-						'class' => 'wp-block-navigation-link__label'
-					]
-				] ], function( $attributes ) { 
-						echo wp_kses_post( $attributes['label'] );
-				}, [ $attributes ] );
-
-			}, [ $attributes, $icons ] );
-		}, [ $attributes, $icons ], false );
-	}
-
-	/**
-	 * Return an array of wrapper attributes.
-	 * 
-	 * @return 	array
-	 */
-	public function get_wrapper_attributes( $attributes, $block, &$icons ) {
-		$classes		= [ 'wp-block-navigation-link', 'wp-block-navigation-link--home', 'nav-item' ];
-		$class_names	= ! empty( $attributes['className'] ) ? explode( ' ', $attributes['className'] ) : false;
-
-		// Fallback - to do, if styles extension is disabled.
-		$inline_style 	= '';
-
-		if ( ! empty( $class_names ) ) {
-			$classes = array_merge( $classes, $class_names );
-		}
-		
-		$classes = $this->pluck_icon_classes( $classes, $icons );
-
-		return [
-			'class'	=> join( ' ', array_filter( $classes ) ),
-			'style'	=> $inline_style,
-		];
-	}
-
-	/**
-	 * Find any custom linkmod or icon classes and store in their holder
-	 *
-	 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider, .sr-only
-	 * Supported iconsets: Font Awesome 4/5, Glypicons
-	 *
-	 * @param array   $classes		an array of classes currently assigned to the item.
-	 * @param array   $icons		an array to hold linkmod classes.
-	 *
-	 * @return array  $classes		a maybe modified array of classnames.
-	 */
-	private function pluck_icon_classes( $classes, &$icons ) {
-		foreach ( $classes as $key => $class ) {
-			// If any special classes are found, store the class in it's
-			// holder array and and unset the item from $classes.
-			if ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {
-				$extras[] = $class;
-				unset( $classes[ $key ] );
-			} elseif ( preg_match( '/^glyphicon-(\S*)?|^glyphicon(\s?)$/i', $class ) ) {
-				$extras[] = $class;
-				unset( $classes[ $key ] );
-			}
-		}
-
-		return $classes;
 	}
 }

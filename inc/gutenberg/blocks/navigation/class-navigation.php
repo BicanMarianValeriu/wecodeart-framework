@@ -271,6 +271,7 @@ class Navigation extends Dynamic {
 		
 		// For this specific blocks, please wrap them in a <li> for valid markup
 		if( in_array( get_prop( $block->parsed_block, 'blockName', '' ), [
+			'core/buttons',
 			'core/spacer',
 			'core/search',
 			'core/social-links',
@@ -279,7 +280,7 @@ class Navigation extends Dynamic {
 			'core/loginout',
 		] ) ) {
 			$classes	= [ 'wp-block-navigation-item', 'nav-item' ];
-			$classes[]  = 'nav-item--' . join( '-', explode( '/', get_prop( $block->parsed_block, 'blockName' ) ) );
+			$classes[]  = 'nav-item--' . join( '-', explode( '/', get_prop( $block->parsed_block, 'blockName', '' ) ) );
 
 			return wecodeart( 'markup' )::wrap( 'nav-item', [ [
 				'tag' 	=> 'li',
