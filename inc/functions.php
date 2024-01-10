@@ -9,7 +9,7 @@
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version     6.2.8
+ * @version     6.3.2
  */
 
 namespace WeCodeArt\Functions;
@@ -579,13 +579,13 @@ function get_json_color( array $path = [], $default = false ): string {
     $color      = wecodeart_json( $path, $default );
 
     // Is WP way of saved color.
-    if( mb_strpos( $color, 'var:' ) !== false ) {
+    if( strpos( $color, 'var:' ) !== false ) {
         $slug = explode( '|', $color );
         $slug = end( $slug );
     }
     
     // Or is a CSS variable.
-    if( mb_strpos( $color, '--wp--' ) !== false ) {
+    if( strpos( $color, '--wp--' ) !== false ) {
         $slug = explode( '--', $color );
         $slug = str_replace( ')', '', end( $slug ) );
     }

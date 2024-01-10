@@ -1,3 +1,7 @@
+v6.3.2
+- Updated - replace mb_strpos instances with strpos to avoid fatal errors on some hostings
+- Updated - hex_to_rgb function return mixed error on wp-themes preview
+
 v6.3.1
 - Updated - replaced all instances of deprecated wp_tinycolor_string_to_rgb usage with own function to convert hex to rgb/a
 - Updated - add 'wecodeart/upgrade/finish' action for ability to hook modules/plugins actions into it

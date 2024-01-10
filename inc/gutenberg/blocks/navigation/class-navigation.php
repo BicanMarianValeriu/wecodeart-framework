@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.1
+ * @version		6.3.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -44,7 +44,6 @@ use function wp_add_inline_style;
 use function wp_parse_args;
 use function wp_list_filter;
 use function strpos;
-use function mb_strpos;
 use function preg_match;
 use function str_replace;
 use function sanitize_html_class;

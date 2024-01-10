@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.3.1
+ * @version		6.3.2
  */
 
 namespace WeCodeArt\Support;
@@ -524,7 +524,7 @@ final class Styles implements Integration {
 	 *
 	 * @return 	mixed
 	 */
-	public static function hex_to_rgb( string $hex = '', int $alpha = 1, bool $array = false ): mixed {
+	public static function hex_to_rgb( string $hex = '', int $alpha = 1, bool $array = false ) {
 		$pattern = '/rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})(?:,\s*(0|1|0?\.\d+))?\)/';
     
 		// Check if rgba

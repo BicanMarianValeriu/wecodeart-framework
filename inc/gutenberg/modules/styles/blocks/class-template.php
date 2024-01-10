@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.2.3
- * @version		6.2.3
+ * @version		6.3.2
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -38,13 +38,13 @@ class Template extends Processor {
 				$gap_x	= get_prop( $gap, [ 'left' ] );
 
 				// Is WP way of saved color
-				if( mb_strpos( $gap_x, 'var:preset|spacing' ) !== false ) {
+				if( strpos( $gap_x, 'var:preset|spacing' ) !== false ) {
 					$gap_x = explode( '|', $gap_x );
 					$gap_x = sprintf( 'var(--wp--preset--spacing--%s)', end( $gap_x ) );
 				}
 
 				// Is WP way of saved color
-				if( mb_strpos( $gap_y, 'var:preset|spacing' ) !== false ) {
+				if( strpos( $gap_y, 'var:preset|spacing' ) !== false ) {
 					$gap_y = explode( '|', $gap_y );
 					$gap_y = sprintf( 'var(--wp--preset--spacing--%s)', end( $gap_y ) );
 				}
@@ -56,7 +56,7 @@ class Template extends Processor {
 				}
 			} else {
 				// Is WP way of saved color
-				if( mb_strpos( $gap, 'var:preset|spacing' ) !== false ) {
+				if( strpos( $gap, 'var:preset|spacing' ) !== false ) {
 					$gap = explode( '|', $gap );
 					$gap = sprintf( 'var(--wp--preset--spacing--%s)', end( $gap ) );
 				}
