@@ -3,8 +3,8 @@
 	"items": [
 		{
 			"type": "info",
-			"title": "Version 6.2.9",
-			"content": "The next version will introduce a scriptless social sharing block variation for core/social-links block with buttons for major social networks."
+			"title": "Version 6.3.3",
+			"content": "The next version will generate inline styles (not attributes) only for the core blocks. Updated the approach to avoid compatability issues with custom blocks/plugins. To enable this feature for your block please add '__experimentalStyles' as block support."
 		},
 		{
 			"type": "info",

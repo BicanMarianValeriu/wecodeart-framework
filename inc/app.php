@@ -201,15 +201,6 @@ return [
                 'type'          => 'module',
             ],
         ],
-        'plugins' => [
-            [
-                'slug'          => 'BicanMarianValeriu/wca-scrolltop-plugin',
-                'title'         => esc_html__( 'WCA: Scroll Top', 'wecodeart' ) . ' (deprecated)',
-                'description'   => esc_html__( 'Lightweight extension for adding a scroll to top button on your site. Super flexible and customizable.', 'wecodeart' ),
-                'source'        => 'github',
-                'more'          => 'https://github.com/BicanMarianValeriu/wca-scrolltop/',
-            ],
-        ],
         'themes' => [
             [
                 'slug'          => 'BicanMarianValeriu/wecodeart-developer',
@@ -225,6 +216,7 @@ return [
                 'source'        => 'github',
                 'more'          => 'https://github.com/BicanMarianValeriu/wecodeart-honey/',
             ],
-        ]
+        ],
+        'plugins' => [],
     ],
 ];

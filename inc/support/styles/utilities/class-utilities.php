@@ -9,7 +9,7 @@
  * @subpackage  Styles Utilities
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.1.7
+ * @version		6.3.3
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -62,11 +62,8 @@ class Utilities implements Configuration {
         // Require, cache and load CSS
 		add_action( 'init',             [ $this, 'require'  ], 90   );
         add_action( 'init',             [ $this, 'cache'    ], 95   );
-        add_action( 'wp_print_styles',  [ $this, 'frontend_css' ], 20, 1 );
+        add_action( 'wp_print_styles',  [ $this, 'frontend_css' ], PHP_INT_MAX, 1 );
         add_action( 'admin_init',       [ $this, 'editor_css'   ], 20, 1 );
-
-        // Add to editor Advanced class suggestion
-        add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'suggestions' ] );
 	}
 
 	/**
@@ -168,17 +165,6 @@ class Utilities implements Configuration {
 		wp_register_style( $this->make_handle(), false, [], true, true );
 		wp_add_inline_style( $this->make_handle(), $inline_css );
 		wp_enqueue_style( $this->make_handle() );
-	}
-
-	/**
-	 * Add new classes.
-	 *
-	 * @param 	array  	$classes
-	 *
-	 * @return 	array 	Returns updated editors settings.
-	 */
-	public function suggestions( $classes ) {
-		return array_merge( array_keys( $this->all() ), $classes );
 	}
 
 	/**

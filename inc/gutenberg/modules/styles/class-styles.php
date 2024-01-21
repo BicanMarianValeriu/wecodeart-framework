@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.2.9
+ * @version		6.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -22,7 +22,6 @@ use WeCodeArt\Gutenberg;
 use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_json_color;
-use function WeCodeArt\Functions\get_lightness_limit;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
@@ -37,15 +36,7 @@ class Styles implements Integration {
 	 *
 	 * @var string
 	 */
-	const CONTEXT 	= 'blocks';
-
-	/**
-	 * The Styles Processor
-	 *
-	 * @access 	public
-	 * @var 	null|object
-	 */
-	public $CSS		= null;
+	const CONTEXT 	= 'block-supports';
 
 	/**
 	 * The blocks duotone
@@ -54,14 +45,6 @@ class Styles implements Integration {
 	 * @var 	array
 	 */
 	public $filters	= [];
-
-	/**
-	 * The blocks classes
-	 *
-	 * @access 	public
-	 * @var 	array
-	 */
-	public $classes	= [];
 
 	/**
 	 * Get Conditionals
@@ -82,8 +65,6 @@ class Styles implements Integration {
 	 * @return 	void
 	 */
 	public function register_hooks() {
-		$this->CSS	= wecodeart( 'styles' );
-
 		// Custom Style Attributes support
 		\WP_Block_Supports::get_instance()->register( 'customStyle', [
 			'register_attribute' 	=> [ $this, 'register_attribute' ],
@@ -93,21 +74,13 @@ class Styles implements Integration {
 		add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
-		add_action( 'wp_enqueue_scripts',			[ $this, 'manage_styles'		], 20, 1 );
-		add_filter( 'wp_theme_json_data_theme',  	[ $this, 'theme_json' 			], 20, 1 );
-		add_action( 'wp_body_open',					[ $this, 'output_duotone'		], 20, 1 );
-		
-		// Remove WP/GB plugins hooks - we dont need this anymore!
-		remove_filter( 'render_block', 'wp_render_duotone_support',		10, 2 );
-		remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters',	10, 1 );
+		add_filter( 'wp_theme_json_data_theme',  	[ $this, 'theme_json'			], 20, 1 );
 		
 		// Eventually it will be removed - 1 check since they are all from GB.
-		if( function_exists( 'gutenberg_render_layout_support_flag' ) ) {
+		if( function_exists( 'gutenberg_render_duotone_support' ) ) {
 			// Gutenberg plugin removes styles and adds them in footer - we dont want that.
 			add_action( 'wp_enqueue_scripts', 'wp_enqueue_stored_styles', PHP_INT_MAX ); // Temporary
 			add_action( 'wp_footer', 'wp_enqueue_stored_styles', 1 ); // Temporary.
-			remove_filter( 'render_block', 'gutenberg_render_duotone_support', 		10, 2 );
-		 	remove_action( 'wp_body_open', 'gutenberg_global_styles_render_svg_filters',	10, 1 );
 		}
 	}
 
@@ -124,18 +97,50 @@ class Styles implements Integration {
 	}
 
 	/**
-	 * Adds the `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes` error.
+	 * Link hover brightness.
+	 *
+	 * @param	object  WP_Theme_JSON object
+	 *
+	 * @return 	object
+	 */
+	public function theme_json( object $object ): object {
+		$link 		= get_json_color( [ 'styles', 'elements', 'link', 'color', 'text' ] );
+
+		if( $link ) {
+			$data = $object->get_data();
+
+			// Adjust hover brightness.
+			$data['styles']['elements']['link'][':hover'] = wp_parse_args( [
+				'color' => [
+					'text' => wecodeart( 'styles' )::hex_brightness( $link, -25 )
+				]
+			], get_prop( $data, [ 'styles', 'elements', 'link', ':hover' ], [] ) );
+
+			// Update object.
+			$object->update_with( $data );
+		}
+
+		return $object;
+	}
+
+	/**
+	 * Adds the `customStyle` attributes to all blocks, to avoid `Invalid parameter(s): attributes` error.
 	 *
 	 * @since   5.2.x
 	 *
 	 * @return 	void
 	 */
 	public function register_attribute( $block ) {
-		// Currently we suport only core blocks
-		if( ! in_array( $block->name, Gutenberg::get_restricted_blocks() ) ) {
+		$has_support = block_has_support( $block, '__experimentalStyles', false );
+
+		if ( ! $has_support ) {
 			return;
 		}
 		
+		if ( ! $block->attributes ) {
+			$block->attributes = [];
+		}
+
 		$block->attributes['customStyle'] = [
 			'type'    => 'string',
 			'default' => null,
@@ -158,8 +163,11 @@ class Styles implements Integration {
 			return $content;
 		}
 
+		$block_type		= \WP_Block_Type_Registry::get_instance()->get_registered( $block['blockName'] );
+		$has_support 	= block_has_support( $block_type, '__experimentalStyles', false );
+
 		// Remove styles, where needed.
-		if ( ! in_array( $block_name, Gutenberg::get_restricted_blocks() ) ) {
+		if ( $has_support ) {
 			// Process a block
 			$processed 	= self::process_block( $block );
 			$block_id	= $processed->get_id();
@@ -181,159 +189,9 @@ class Styles implements Integration {
 					}
 				}
 			}
-			
-			// Utilities and Duotone SVGs
-			$classes	= $processed->get_classes();
-			$filters	= $processed->get_duotone();
-			
-			// Process Duotone SVG filters.
-			if( $filters ) {
-				$this->filters[$block_id] = $filters;
-			}
-			
-			// Utilities CSS.
-			if( $classes ) {
-				$this->classes = array_merge( $this->classes, $classes );
-			}
 		}
 
 		return (string) $content;
-	}
-
-	/**
-	 * Output styles.
-	 *
-	 * @return 	string
-	 */
-	public function manage_styles() {
-		global $_wp_current_template_content;
-
-		// Manage Styles.
-		wp_dequeue_style( 'wp-block-library' );         // WordPress Core
-        wp_dequeue_style( 'wp-block-library-theme' );   // WordPress Core
-
-		$style = '';
-
-		// Box Sizing
-		$style .= '*,*::before,*::after {box-sizing: border-box;}';
-		// Colors RGB as CSS var
-		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
-
-		foreach( $palette as $item ) {
-			$slug 	= get_prop( $item, [ 'slug' ] );
-			$value 	= $this->CSS::hex_to_rgb( get_prop( $item, [ 'color' ] ), 1, true );
-			$value  = join( ', ', wp_array_slice_assoc( $value, [ 'r', 'g', 'b' ] ) );
-			
-			$style .= sprintf( '.has-%s-color{--wp--color--rgb:%s}', $slug, $value );
-			$style .= sprintf( '.has-%s-background-color{--wp--background--rgb:%s}', $slug, $value );
-		}
-
-		wp_add_inline_style( 'global-styles', $style );
-
-		// Collect template classes.
-		$blocks		= parse_blocks( $_wp_current_template_content );
-		$classes	= self::collect_classes( _flatten_blocks( $blocks ) );
-
-		$this->classes = array_merge( $this->classes, $classes );
-
-		// Process utilities.
-		if( ! empty( $this->classes ) ) {
-			$this->CSS->Utilities->load( $this->classes );
-		}
-	}
-
-	/**
-	 * Link hover brightness.
-	 *
-	 * @param	object  WP_Theme_JSON object
-	 *
-	 * @return 	object
-	 */
-	public function theme_json( $object ): object {
-		$link 		= get_json_color( [ 'styles', 'elements', 'link', 'color', 'text' ] );
-
-		if( $link ) {
-			$data = $object->get_data();
-
-			// Adjust hover brightness.
-			$data['styles']['elements']['link'][':hover'] = wp_parse_args( [
-				'color' => [
-					'text' => $this->CSS::hex_brightness( $link, -25 )
-				]
-			], get_prop( $data, [ 'styles', 'elements', 'link', ':hover' ], [] ) );
-
-			// Update object.
-			$object->update_with( $data );
-		}
-
-		return $object;
-	}
-
-	/**
-	 * Output duotone in footer.
-	 *
-	 * @return 	string
-	 */
-	public function output_duotone() {
-		$default_duotones = wp_get_global_settings( [ 'color', 'duotone', 'default' ] );
-
-		// Not sure why they render those filters in multiple SVG files.
-		// Even though the defaults are printed in wp_body_open,
-		// using them will generate another SVG in footer (eg grayscale)
-		if ( ! empty( $default_duotones ) ) {
-			foreach( $default_duotones as $preset ) {
-				$this->filters[get_prop( $preset, 'slug' )] = wecodeart( 'styles' )::get_duotone( $preset );
-			}	
-		}
-
-		if( empty( $this->filters ) ) return;
-		?>
-		<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="position:absolute;left:-9999px;visibility:hidden;overflow:hidden;">
-			<defs>
-			<?php foreach( $this->filters as $block_id => $filter ) : ?>
-				<filter id="wp-duotone-<?php echo esc_attr( $block_id ); ?>">
-					<feColorMatrix
-						type="matrix"
-						color-interpolation-filters="sRGB"
-						values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0"
-					/>
-					<feComponentTransfer color-interpolation-filters="sRGB">
-						<feFuncR type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['r'] ) ); ?>" />
-						<feFuncG type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['g'] ) ); ?>" />
-						<feFuncB type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['b'] ) ); ?>" />
-						<feFuncA type="table" tableValues="<?php echo esc_attr( implode( ' ', $filter['a'] ) ); ?>" />
-					</feComponentTransfer>
-					<feComposite in2="SourceGraphic" operator="in" />
-				</filter>
-			<?php endforeach; ?>
-			</defs>
-		</svg>
-		<?php
-	}
-
-	/**
-	 * Get classNames.
-	 *
-	 * @param	array	$blocks  List with all blocks
-	 *
-	 * @return 	array
-	 */
-	public static function collect_classes( array $blocks = [] ): array {
-		$return = [];
-
-		foreach( $blocks as $block ) {
-			// Dont bother with empty blocks from parse_blocks
-			if( ! get_prop( $block, [ 'blockName' ] ) ) continue;
-
-			$classes	= get_prop( $block, [ 'attrs', 'className' ], '' );
-			$classes 	= array_filter( explode( ' ', $classes ) );
-
-			if( ! empty( $classes ) ) {
-				$return = array_merge( $return, $classes );
-			}
-		}
-
-		return array_unique( $return );
 	}
 
 	/**

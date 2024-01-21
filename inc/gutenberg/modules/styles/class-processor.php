@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.9
+ * @version		6.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles;
@@ -69,31 +69,6 @@ class Processor {
 	public function get_id(): string {
 		return $this->block_id;
 	}
-	
-	/**
-	 * Get classnames.
-	 *
-	 * @return 	array
-	 */
-	public function get_classes(): array {
-		return array_unique( array_filter( explode( ' ', get_prop( $this->attrs, 'className', '' ) ) ) );
-	}
-
-	/**
-	 * Get duotone.
-	 *
-	 * @return 	mixed
-	 */
-	public function get_duotone() {
-		$return 	= false;
-		$duotone 	= get_prop( $this->attrs, [ 'style', 'color', 'duotone' ], false );
-
-		if( $duotone ) {
-			$return = wecodeart( 'styles' )::get_duotone( [ 'colors' => $duotone ] );
-		}
-
-		return $return;
-	}
 
 	/**
 	 * Get selector.
@@ -111,10 +86,10 @@ class Processor {
 			$block_type	= \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
 			$selector 	= $block_type ? get_prop( $block_type->supports, [ '__experimentalSelector' ], '' ) : '';
 
-			if( $selector && strpos( $selector, ', ' ) ) {
+			if( $selector && strpos( $selector, ',' ) ) {
 				$selector 	= join( ', ', array_map( function( $item ) use ( $prefix ) {
 					return join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), ' ', $item, $prefix ] ) );
-				}, explode( ', ', $selector ) ) );
+				}, explode( ',', $selector ) ) );
 			} else {
 				$selector 	= join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), $selector, $prefix ] ) );
 			}
@@ -150,28 +125,6 @@ class Processor {
 				'selector' 	=> $this->get_selector(),
 				'context'	=> Styles::CONTEXT
 			] );
-
-			// Process block duotone attribute (not processed by default above).
-			if( $duotone = get_prop( $style_attr, [ 'color', 'duotone' ] ) ) {
-				$css_value 	= "url(#wp-duotone-{$this->get_id()})";
-
-				// Temporary allow this exact CSS trough safecss_filter_attr.
-				$callback 	= function( $allow, $css ) use ( $css_value ) {
-					if( $css === 'filter:' . $css_value ) {
-						$allow = true;
-					}
-
-					// Self remove filter.
-					remove_filter( current_filter(), __FUNCTION__ );
-
-					return $allow;
-				};
-
-				// Allow filter:url(#value).
-				add_filter( 'safecss_filter_attr_allow_css', $callback, 10, 2 );
-				
-				$this->add_declarations( [ 'filter' => $css_value ], $this->get_selector( ' :where(img,video)', '', false ) );
-			}
 		}
 
 		// Process custom style attribute.

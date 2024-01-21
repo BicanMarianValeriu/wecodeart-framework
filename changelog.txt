@@ -1,3 +1,10 @@
+v6.3.3
+- Updated - disabled core/cover background styles until we fully remove inline styles
+- Updated - Gutenberg inline styles only for core blocks via block support (enable with '__experimentalStyles') to avoid issues with custom blocks
+- Updated - Gutenberg block utility classes styles enqueue to module files (was placed under styles module and Utilities class)
+- Updated - Gutenberg block utility classes to respect the with_block_classes condition (if disabled/enabled under /app.php config)
+- Removed - Duotone SVG combine and styles/svg custom output (WP 6.3+ comes with WP_Duotone with improved conditional output)
+
 v6.3.2
 - Updated - replace mb_strpos instances with strpos to avoid fatal errors on some hostings
 - Updated - hex_to_rgb function return mixed error on wp-themes preview

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.2.1
+ * @version		6.3.3
  */
 
 namespace WeCodeArt;
@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
-
+use function WeCodeArt\Functions\get_json_color;
 /**
  * Handles Gutenberg Theme Functionality.
  */
@@ -45,14 +45,20 @@ class Gutenberg {
 		$this->config = wecodeart_config( 'gutenberg', [] );
 
 		// Block Categories.
-		add_filter( 'block_categories_all',			[ $this, 'block_category' 			], 10, 1 );
+		add_filter( 'block_categories_all',			[ $this, 'block_category' 			], 20, 1 );
 		
 		// Editor Settings.
-		add_filter( 'block_editor_settings_all',	[ $this, 'block_editor_settings' 	], 10, 2 );
+		add_filter( 'block_editor_settings_all',	[ $this, 'block_editor_settings' 	], 20, 2 );
+		
+		// Block Supports
+		add_filter( 'register_block_type_args',		[ $this, 'block_type_args' 			], 20, 2 );
 		
 		// Editor Assets.
-		add_action( 'enqueue_block_editor_assets', 	[ $this, 'block_editor_assets' 		], 10, 1 );
-		
+		add_action( 'enqueue_block_editor_assets', 	[ $this, 'block_editor_assets' 		], 20, 1 );
+
+		// Frontend Assets.
+		add_action( 'wp_enqueue_scripts',			[ $this, 'frontend_assets'			], 20, 1 );
+
 		// Theme Support.
 		add_action( 'after_setup_theme', 			[ $this, 'after_setup_theme' 		], 100 );
 
@@ -84,6 +90,28 @@ class Gutenberg {
 	}
 
 	/**
+	 * Block register args.
+	 *
+	 * @param	array	$args
+	 * @param	string	$block_name
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( array $args, string $block_name ): array {
+		if( str_starts_with( $block_name, 'core/' ) && ! in_array( $block_name, self::get_restricted_blocks(), true ) ) {
+			$support	= get_prop( $args, [ 'supports' ], [] );
+			
+			$args		= wp_parse_args( [
+				'supports'	=> wp_parse_args( [
+					'__experimentalStyles' => true,
+				], $support ),
+			], $args );
+		}
+
+		return $args;
+	}
+
+	/**
 	 * Add new block editor settings for custom classes.
 	 *
 	 * @param array  $settings 	The editor settings.
@@ -100,7 +128,7 @@ class Gutenberg {
 	}
 
 	/**
-	 * Editor only.
+	 * Editor assets.
 	 *
 	 * @return  void
 	 */
@@ -149,6 +177,35 @@ class Gutenberg {
 		$code_mirror = ''; // Adds a border to CodeMirror to match WP and fixes height.
 		$code_mirror .= '.CodeMirror.CodeMirror-wrap{height:auto;margin-bottom:1rem;border:1px solid #949494;z-index:0;}';
 		wp_add_inline_style( 'wp-editor', $code_mirror );
+	}
+
+	/**
+	 * Frontend assets.
+	 *
+	 * @return 	void
+	 */
+	public function frontend_assets() {
+		// Manage Styles.
+		wp_dequeue_style( 'wp-block-library' );         // WordPress Core
+        wp_dequeue_style( 'wp-block-library-theme' );   // WordPress Core
+
+		$style = '';
+
+		// Box Sizing
+		$style .= '*,*::before,*::after {box-sizing: border-box;}';
+		// Colors RGB as CSS var
+		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
+
+		foreach( $palette as $item ) {
+			$slug 	= get_prop( $item, [ 'slug' ] );
+			$value 	= wecodeart( 'styles' )::hex_to_rgb( get_prop( $item, [ 'color' ] ), 1, true );
+			$value  = join( ', ', wp_array_slice_assoc( $value, [ 'r', 'g', 'b' ] ) );
+			
+			$style .= sprintf( '.has-%s-color{--wp--color--rgb:%s}', $slug, $value );
+			$style .= sprintf( '.has-%s-background-color{--wp--background--rgb:%s}', $slug, $value );
+		}
+
+		wp_add_inline_style( 'global-styles', $style );
 	}
 
 	/**
@@ -203,5 +260,31 @@ class Gutenberg {
 			'core/tag-cloud',
 			'core/latest-comments'
 		] ) );
+	}
+
+	/**
+	 * Registered core blocks.
+	 *
+	 * @param 	bool 	$restricted
+	 *
+	 * @return 	array
+	 */
+	public static function get_core_blocks( bool $restricted = true ): array {
+		$all_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+		$all_blocks = array_keys( $all_blocks );
+
+		$core_blocks= [];
+
+		foreach ( $all_blocks as $slug ) { 
+			if( str_starts_with( $slug, 'core/' ) ) {
+				$core_blocks[] = $slug;
+			}
+		}
+
+		if( $restricted === false ) {
+			$core_blocks = array_diff( $core_blocks, self::get_restricted_blocks() );
+		}
+
+		return $core_blocks;
 	}
 }
