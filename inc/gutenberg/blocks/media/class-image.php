@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.0
+ * @version		6.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -53,12 +53,10 @@ class Image extends Dynamic {
 	 */
 	public function block_type_args( $current ): array {
 		$supports 	= get_prop( $current, [ 'supports' ], [] );
-		$selectors 	= array_merge( (array) get_prop( $supports, [ '__experimentalSelector' ], [] ), [ ' :where(img,svg)' ] );
 
 		return [
 			'render_callback' 	=> [ $this, 'render' ],
 			'supports' 			=> wp_parse_args( [
-				'__experimentalSelector' => implode( ',', array_filter( $selectors ) ),
 				'color'		=> [
 					'gradients'	 => true,
 					'background' => true,

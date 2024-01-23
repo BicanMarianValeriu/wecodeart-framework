@@ -163,7 +163,7 @@ class Styles implements Integration {
 			return $content;
 		}
 
-		$block_type		= \WP_Block_Type_Registry::get_instance()->get_registered( $block['blockName'] );
+		$block_type		= \WP_Block_Type_Registry::get_instance()->get_registered( $block_name );
 		$has_support 	= block_has_support( $block_type, '__experimentalStyles', false );
 
 		// Remove styles, where needed.

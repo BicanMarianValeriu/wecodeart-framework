@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.1
+ * @version		6.3.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -52,9 +52,6 @@ class Search extends Dynamic {
 		return [
 			'render_callback' 		=> [ $this, 'render' ],
 			'view_script_handles'	=> [],
-			'supports'				=> wp_parse_args( [
-				'__experimentalSelector' => ' :where(.wp-block-search__input,.wp-block-search__button)',
-			], $supports ),
 		];
 	}
 
@@ -108,7 +105,7 @@ class Search extends Dynamic {
 				// Add Label
 				if ( get_prop( $attributes, 'showLabel' ) !== false && ! empty( $label = get_prop( $attributes, 'label' ) ) ) {
 				?>
-				<label class="form-label" for="wp-block-search-<?php echo esc_attr( $instance_id ); ?>"><?php echo esc_html( $label ); ?></label>
+				<label class="wp-block-search__label form-label" for="wp-block-search-<?php echo esc_attr( $instance_id ); ?>"><?php echo esc_html( $label ); ?></label>
 				<?php
 				}
 				?>

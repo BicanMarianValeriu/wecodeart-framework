@@ -87,8 +87,8 @@ class Processor {
 			$selector 	= $block_type ? get_prop( $block_type->supports, [ '__experimentalSelector' ], '' ) : '';
 
 			if( $selector && strpos( $selector, ',' ) ) {
-				$selector 	= join( ', ', array_map( function( $item ) use ( $prefix ) {
-					return join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), ' ', $item, $prefix ] ) );
+				$selector 	= join( ',', array_map( function( $item ) use ( $prefix ) {
+					return join( '', array_filter( [ $item, '.', $this->get_id(), '.', $this->get_id(), $prefix ] ) );
 				}, explode( ',', $selector ) ) );
 			} else {
 				$selector 	= join( '', array_filter( [ '.', $this->get_id(), '.', $this->get_id(), $selector, $prefix ] ) );
@@ -128,11 +128,11 @@ class Processor {
 		}
 
 		// Process custom style attribute.
-		if ( $style_custom = get_prop( $this->attrs, 'customStyle', get_prop( $this->attrs, 'customCSS' ) ) ) {
+		if ( $style_custom = get_prop( $this->attrs, 'customStyle' ) ) {
 			// Remove tags, just in case.
 			$custom_style 	= wp_strip_all_tags( $style_custom );
 			// Update selector with class id.
-			$custom_style 	= str_replace( 'selector', $this->get_selector( '', false ) , $custom_style );
+			$custom_style 	= str_replace( 'selector', $this->get_selector(), $custom_style );
 			// Convert the string to array (no media queries atm).
 			$custom_style 	= wecodeart( 'styles' )::string_to_array( $custom_style );
 
