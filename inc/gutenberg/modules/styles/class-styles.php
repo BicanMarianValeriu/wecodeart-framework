@@ -217,6 +217,7 @@ class Styles implements Integration {
 			'core/search' 			=> Styles\Blocks\Search::class,
 			'core/separator' 		=> Styles\Blocks\Separator::class,
 			'core/social-links'		=> Styles\Blocks\Social::class,
+			'core/image' 			=> Styles\Blocks\Image::class,
 			'core/spacer' 			=> Styles\Blocks\Spacer::class,
 			'core/post-template'	=> Styles\Blocks\Template::class,
 			'core/post-featured-image'	=> Styles\Blocks\Featured::class,

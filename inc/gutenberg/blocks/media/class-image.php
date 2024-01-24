@@ -67,7 +67,8 @@ class Image extends Dynamic {
 					'margin'  => true,
 					'padding' => true,
 				]
-			], $supports )
+			], $supports ),
+			'styles'	=> wp_list_filter( get_prop( $current, [ 'styles' ], [] ), [ 'name' => 'rounded' ], 'NOT' )
 		];
 	}
 
