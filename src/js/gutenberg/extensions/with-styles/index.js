@@ -4,11 +4,10 @@
 const { assign } = lodash;
 const {
 	hooks: { addFilter },
+	blocks: { hasBlockSupport },
 	compose: { createHigherOrderComponent },
 	blockEditor: { InspectorAdvancedControls },
 } = wp;
-
-const { restrictedBlocks } = wecodeartGutenberg;
 
 /**
  * Internal dependencies.
@@ -17,9 +16,7 @@ import CSSEditor from './Editor';
 import './injector';
 
 const addAttributes = (props) => {
-	const { name } = props;
-	const isRestrictedBlock = restrictedBlocks.includes(name);
-	if (!isRestrictedBlock) {
+	if (hasBlockSupport(props, '__experimentalStyles')) {
 		props.attributes = assign(props.attributes, {
 			customStyle: {
 				type: 'string',
@@ -42,9 +39,7 @@ const addAttributes = (props) => {
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
 		const { name } = props;
-		const isRestrictedBlock = restrictedBlocks.includes(name);
-
-		if (!isRestrictedBlock) {
+		if (hasBlockSupport(name, '__experimentalStyles')) {
 			return (
 				<>
 					<BlockEdit {...props} />

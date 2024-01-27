@@ -9,7 +9,7 @@
  * @subpackage 	Support\RankMath
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.5
+ * @version		6.3.3
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -45,9 +45,8 @@ class RankMath implements Integration {
 	 * Send to Constructor
 	 */
 	public function register_hooks(): void {
-		add_action( 'after_setup_theme', 						[ $this, 'register_blocks'		] );
-		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' 	] );
-		add_filter( 'wecodeart/filter/template/context', 		[ $this, 'post_category_view'	], 20, 2 );
+		add_action( 'after_setup_theme',					[ $this, 'register_blocks'		] );
+		add_filter( 'wecodeart/filter/template/context',	[ $this, 'post_category_view'	], 20, 2 );
 	}
 
 	/**
@@ -78,19 +77,6 @@ class RankMath implements Integration {
 		}
 
 		return $args;
-	}
-
-	/**
-	 * Filter - Restricted RankMath Blocks from theme code
-	 *
-	 * @return 	array
-	 */
-	public function restricted_blocks( $blocks ): array {
-		$blocks = array_merge( $blocks, [
-			'rank-math/rich-snippet',
-		] );
-
-		return $blocks;
 	}
 
 	/**

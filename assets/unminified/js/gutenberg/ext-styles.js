@@ -1,20 +1,16 @@
-/******/ (() => { // webpackBootstrap
+/******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/js/gutenberg/extensions/with-styles/Editor.js":
 /*!***********************************************************!*\
   !*** ./src/js/gutenberg/extensions/with-styles/Editor.js ***!
   \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-
 
 /**
  * WordPress dependencies.
@@ -34,7 +30,6 @@ const {
     Dashicon
   }
 } = wp;
-
 const CSSEditor = _ref => {
   let {
     attributes,
@@ -49,11 +44,9 @@ const CSSEditor = _ref => {
   const defaultValue = 'selector {\n}\n';
   useEffect(() => {
     customStyleRef.current = defaultValue;
-
     if (customStyle || customCSS) {
       customStyleRef.current = customStyle || customCSS;
     }
-
     editorRef.current = wp.CodeMirror(document.getElementById('wecodeart-css-editor'), {
       value: customStyleRef.current,
       autoCloseBrackets: true,
@@ -72,27 +65,24 @@ const CSSEditor = _ref => {
       }
     });
     editorRef.current.on('change', () => {
-      customStyleRef.current = editorRef.current.getValue(); // Deprecate old attribute naming
+      customStyleRef.current = editorRef.current.getValue();
 
+      // Deprecate old attribute naming
       if (defaultValue.replace(/\s+/g, '') === customStyleRef.current.replace(/\s+/g, '')) {
         return setAttributes({
           customStyle: null,
           customCSS: null
         });
       }
-
       setAttributes({
         customStyle: customStyleRef.current,
         customCSS: null
       });
     });
   }, []);
-
   const DescriptionPopover = () => {
     const [isVisible, setIsVisible] = useState(false);
-
     const toggleVisible = () => setIsVisible(state => !state);
-
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
       icon: "info-outline",
       style: {
@@ -108,7 +98,6 @@ const CSSEditor = _ref => {
       }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, sprintf(__('Use %s to target the block CSS class.', 'wecodeart'), '"selector"')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", null, 'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'))));
   };
-
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "wecodeart-advanced-css"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -124,8 +113,7 @@ const CSSEditor = _ref => {
     id: "wecodeart-css-editor"
   })));
 };
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CSSEditor);
+/* harmony default export */ __webpack_exports__["default"] = (CSSEditor);
 
 /***/ }),
 
@@ -133,7 +121,7 @@ const CSSEditor = _ref => {
 /*!*************************************************************!*\
   !*** ./src/js/gutenberg/extensions/with-styles/injector.js ***!
   \*************************************************************/
-/***/ (() => {
+/***/ (function() {
 
 /**
  * WordPress dependencies.
@@ -153,53 +141,44 @@ const {
 const {
   flattenDeep
 } = lodash;
-
 const addStyle = style => {
   let element = document.getElementById('wecodeart-blocks-dynamic-styles');
-
   if (null === element) {
     element = document.createElement('style');
     element.setAttribute('type', 'text/css');
     element.setAttribute('id', 'wecodeart-blocks-dynamic-styles');
     document.getElementsByTagName('head')[0].appendChild(element);
   }
-
   if (element.textContent === style) {
     return null;
   }
-
   return element.textContent = style;
 };
-
 const getCustomStyleFromBlocks = (blocks, reusableBlocks) => {
   if (!blocks) {
     return '';
-  } // Return the children of the block. The result is an array deeply nested that match the structure of the block in the editor.
+  }
 
-
+  // Return the children of the block. The result is an array deeply nested that match the structure of the block in the editor.
   const getChildrenFromBlock = block => {
     const childrends = [];
-
     if ('core/block' === block.name && null !== reusableBlocks) {
       const reBlocks = reusableBlocks.find(i => block.attributes.ref === i.id);
-
       if (reBlocks && reBlocks.content) {
         childrends.push(parse(reBlocks.content.raw || reBlocks.content).map(child => [child, getChildrenFromBlock(child)]));
       }
-
       ;
     }
-
     if (undefined !== block.innerBlocks && 0 < block.innerBlocks.length) {
       childrends.push(block.innerBlocks.map(child => [child, getChildrenFromBlock(child)]));
     }
-
     return childrends;
-  }; // Get all the blocks and their children
+  };
 
+  // Get all the blocks and their children
+  const allBlocks = blocks.map(block => [block, getChildrenFromBlock(block)]);
 
-  const allBlocks = blocks.map(block => [block, getChildrenFromBlock(block)]); // Transform the deply nested array in a simple one and then get the `customStyle` value where it is the case
-
+  // Transform the deply nested array in a simple one and then get the `customStyle` value where it is the case
   const extractCustomStyle = flattenDeep(allBlocks).map(block => {
     const {
       attributes: {
@@ -208,22 +187,22 @@ const getCustomStyleFromBlocks = (blocks, reusableBlocks) => {
       } = {},
       clientId
     } = block;
-
     if (customStyle) {
       return customStyle.replace(new RegExp('selector', 'g'), `.wp-block[data-block="${clientId}"]`) + '\n';
     }
-
     return '';
-  }); // Build the global style
+  });
 
-  const style = extractCustomStyle.reduce((acc, localStyle) => acc + localStyle, ''); // For debugging
+  // Build the global style
+  const style = extractCustomStyle.reduce((acc, localStyle) => acc + localStyle, '');
+
+  // For debugging
   // console.log( 'Get all the block', allBlocks );
   // console.log( 'Extract customStyle', extractCustomStyle );
   // console.log( 'Final Result\n', style );
 
   return style;
 };
-
 const subscribed = subscribe(() => {
   const {
     getBlocks
@@ -240,7 +219,7 @@ const subscribed = subscribe(() => {
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
   \*********************************/
-/***/ ((module) => {
+/***/ (function(module) {
 
 "use strict";
 module.exports = window["wp"]["element"];
@@ -275,49 +254,49 @@ module.exports = window["wp"]["element"];
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
+/******/ 		__webpack_require__.n = function(module) {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 		__webpack_require__.d = function(exports, definition) {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
+/******/ 		__webpack_require__.r = function(exports) {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
+!function() {
 "use strict";
 /*!**********************************************************!*\
   !*** ./src/js/gutenberg/extensions/with-styles/index.js ***!
@@ -329,7 +308,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./injector */ "./src/js/gutenberg/extensions/with-styles/injector.js");
 /* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_injector__WEBPACK_IMPORTED_MODULE_2__);
 
-
 /**
  * WordPress dependencies.
  */
@@ -340,6 +318,9 @@ const {
   hooks: {
     addFilter
   },
+  blocks: {
+    hasBlockSupport
+  },
   compose: {
     createHigherOrderComponent
   },
@@ -347,23 +328,14 @@ const {
     InspectorAdvancedControls
   }
 } = wp;
-const {
-  restrictedBlocks
-} = wecodeartGutenberg;
+
 /**
  * Internal dependencies.
  */
 
 
-
-
 const addAttributes = props => {
-  const {
-    name
-  } = props;
-  const isRestrictedBlock = restrictedBlocks.includes(name);
-
-  if (!isRestrictedBlock) {
+  if (hasBlockSupport(props, '__experimentalStyles')) {
     props.attributes = assign(props.attributes, {
       customStyle: {
         type: 'string',
@@ -371,9 +343,9 @@ const addAttributes = props => {
       }
     });
   }
-
   return props;
 };
+
 /**
  * Override the default edit UI to include a new block inspector control for
  * assigning the custom class name, if block supports custom class name.
@@ -382,30 +354,24 @@ const addAttributes = props => {
  *
  * @return 	{string} 	Wrapped component.
  */
-
-
 const withInspectorControl = createHigherOrderComponent(BlockEdit => {
   return props => {
     const {
       name
     } = props;
-    const isRestrictedBlock = restrictedBlocks.includes(name);
-
-    if (!isRestrictedBlock) {
+    if (hasBlockSupport(name, '__experimentalStyles')) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, props), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorAdvancedControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Editor__WEBPACK_IMPORTED_MODULE_1__["default"], props)));
     }
-
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, props);
   };
 }, 'withInspectorControl');
+
 /**
  * Apply Filters
  */
-
 addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
 addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl, 90);
-})();
-
+}();
 /******/ })()
 ;
 //# sourceMappingURL=ext-styles.js.map

@@ -138,8 +138,7 @@ class Gutenberg {
 			'theme' 	=> [
 				'name'		=> wecodeart( 'name' ),
 				'version' 	=> wecodeart( 'version' )
-			],
-			'restrictedBlocks' => self::get_restricted_blocks(),
+			]
 		] );
 		
 		wp_register_script( $this->make_handle( 'inline' ), '' );

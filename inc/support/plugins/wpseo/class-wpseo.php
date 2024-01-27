@@ -9,7 +9,7 @@
  * @subpackage 	Support\Yoast SEO
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		3.5
- * @version		6.1.5
+ * @version		6.3.3
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -45,9 +45,6 @@ class WPSeo implements Integration {
 	 * Send to Constructor
 	 */
 	public function register_hooks(): void {
-		// Restricted Blocks
-		add_filter( 'wecodeart/filter/gutenberg/restricted',	[ $this, 'restricted_blocks' 	] );
-
 		// Terms Template Context
 		add_filter( 'wecodeart/filter/template/context', 		[ $this, 'post_category_view'	], 20, 2 );
 
@@ -232,24 +229,6 @@ class WPSeo implements Integration {
 		}
 
 		return $args;
-	}
-
-	/**
-	 * Filter - Restricted Yoast Blocks from theme code
-	 *
-	 * @since	5.0.0
-	 * @version	6.1.2
-	 *
-	 * @return 	array
-	 */
-	public function restricted_blocks( $blocks ): array {
-		$blocks = array_merge( $blocks, [
-			'yoast-seo/breadcrumbs',
-			'yoast/how-to-block',
-			'yoast/faq-block',
-		] );
-
-		return $blocks;
 	}
 
 	/**
