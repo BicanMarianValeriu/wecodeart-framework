@@ -42,9 +42,9 @@ class Cover extends Dynamic {
 	protected $block_name = 'cover';
 
 	/**
-	 * Block args.
+	 * Constructor.
 	 *
-	 * @return 	array
+	 * @return 	void
 	 */
 	public function init() {
 		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 2 );
