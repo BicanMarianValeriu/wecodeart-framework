@@ -119,7 +119,7 @@ class Processor {
 	 */
 	private function process_style(): void {
 		// Process style attribute.
-		if( ! empty( $style_attr = get_prop( $this->attrs, [ 'style' ], [] ) ) ) {
+		if( $style_attr = get_prop( $this->attrs, [ 'style' ] ) ) {
 			// Process block attributes.
 			wp_style_engine_get_styles( $style_attr, [
 				'selector' 	=> $this->get_selector(),
