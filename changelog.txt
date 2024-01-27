@@ -1,7 +1,6 @@
 v6.3.3
 - Updated - disabled core/cover background styles until we fully remove inline styles
 - Updated - Gutenberg inline styles only for core blocks via block support (enable with '__experimentalStyles') to avoid issues with custom blocks
-- Updated - Gutenberg inline styles to apply custom css-# class only where necessary (has value for `style` or `customStyle` attribute)
 - Updated - Gutenberg block utility classes styles enqueue to module files (was placed under styles module and Utilities class)
 - Updated - Gutenberg block utility classes to respect the with_block_classes condition (if disabled/enabled under /app.php config)
 - Updated - core/image and core/search attribute styles removed and output inline to block supports

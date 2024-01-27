@@ -166,11 +166,12 @@ class Styles implements Integration {
 		$block_type		= \WP_Block_Type_Registry::get_instance()->get_registered( $block_name );
 		$has_support 	= block_has_support( $block_type, '__experimentalStyles', false );
 
-		$has_styles_1	= get_prop( $block, [ 'attrs', 'style' ] );
-		$has_styles_2	= get_prop( $block, [ 'attrs', 'customStyle' ] );
+		// To be implemented when we have dimensions / other styles
+		// $has_styles_1	= get_prop( $block, [ 'attrs', 'style' ] );
+		// $has_styles_2	= get_prop( $block, [ 'attrs', 'customStyle' ] );
 
 		// Remove styles, where needed.
-		if ( $has_support && ( $has_styles_1 || $has_styles_2 )) {
+		if ( $has_support ) {
 			// Process a block
 			$processed 	= self::process_block( $block );
 			$block_id	= $processed->get_id();
