@@ -1,4 +1,4 @@
-v6.3.3
+v6.3.3/4
 - Updated - disabled core/cover background styles until we fully remove inline styles
 - Updated - Gutenberg inline styles only for core blocks via block support (enable with '__experimentalStyles') to avoid issues with custom blocks
 - Updated - Gutenberg block utility classes styles enqueue to module files (was placed under styles module and Utilities class)
