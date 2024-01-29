@@ -9,7 +9,7 @@
  * @subpackage  RankMath\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.2
- * @version		6.2.7
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Support\Plugins\RankMath\Blocks;
@@ -70,13 +70,12 @@ class Faq extends Dynamic {
 		
 		if( $condition ) { // Apply only for default styleing with div titles (so we respect block settings).
 			$dom		= $this->dom( $content );
-			$sections	= dom_elements_by_class( $dom, 'rank-math-faq-item' );
-	
+			$sections	= dom_elements_by_class( $dom, 'rank-math-faq-item', 'div' );
+			$summaries	= dom_elements_by_class( $dom, 'rank-math-question', 'div' );
+
 			if( count( $sections ) ) {
-				foreach( $sections as $section ) {
-					$section = dom_change_tag( $section, 'details' );
-					$summary = dom_change_tag( dom_elements_by_class( $section, 'rank-math-question', 'div', 0 ), 'summary' );
-				}
+				array_walk( $sections, static fn( $section ) => dom_change_tag( $section, 'details' ) );
+				array_walk( $summaries, static fn( $summary ) => dom_change_tag( $summary, 'summary' ) );
 			}
 
 			$content	= new \WP_HTML_Tag_Processor( $dom->saveHtml() );
