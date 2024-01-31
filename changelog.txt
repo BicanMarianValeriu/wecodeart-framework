@@ -1,4 +1,5 @@
 v6.3.5
+- Updated - Modules will now be located into 'modules' key in theme options (previously: 'installed_modules')
 - Fixed - issue with RankMath FAQ block being converted to core/details block (if div selector is set)
 
 v6.3.3/4

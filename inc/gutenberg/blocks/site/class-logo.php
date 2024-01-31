@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.2
- * @version		6.2.7
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -19,14 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function str_contains;
-use function str_replace;
-use function dirname;
-use function content_url;
-use function method_exists;
 use function add_filter;
-use function file_exists;
-use function file_get_contents;
-use function get_template_directory;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\dom_get_element;
 use function WeCodeArt\Functions\dom_image_2_svg;

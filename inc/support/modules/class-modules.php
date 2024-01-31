@@ -48,7 +48,7 @@ final class Modules implements Integration {
 	 * Extend plugins localize.
 	 *
 	 * @since   6.2.9
-	 * @version	6.2.9
+	 * @version	6.3.5
 	 *
 	 * @param 	array	$data
 	 *
@@ -64,7 +64,7 @@ final class Modules implements Integration {
 
 		return wp_parse_args( [
 			'installers'	=> $installers,
-			'modules'		=> wecodeart_option( 'installed_modules', [] ),
+			'modules'		=> wecodeart_option( 'modules', [] ),
 		], $data );
 	}
 
@@ -72,27 +72,27 @@ final class Modules implements Integration {
 	 * Check modules for updates.
 	 *
 	 * @since   6.2.9
-	 * @version	6.3.1
+	 * @version	6.3.5
 	 *
 	 * @return 	void
 	 */
 	public function check_updates(): void {
-		$installed_modules  = wecodeart_option( 'installed_modules', [] );
+		$modules  = wecodeart_option( 'modules', [] );
 
         // Check for updates
 		if ( false === ( get_transient( self::MODULES_CACHE_KEY ) ) ) {
-			foreach( $installed_modules as $key => $module ) {
+			foreach( $modules as $key => $module ) {
 				$installer 		= new Module( $module );
 				$current_ver	= get_prop( $module, [ 'version' ], '1.0.0' );
 				$remote_ver 	= $installer->get_ver();
 				
 				if ( version_compare( $current_ver, $remote_ver, '<' ) ) {
-					$installed_modules[$key]['hasUpdate'] = $remote_ver; 
+					$modules[$key]['hasUpdate'] = $remote_ver; 
 				}
 			}
 			
 			wecodeart_option( [
-				'installed_modules' => $installed_modules
+				'modules' => $modules
 			] );
 
 			set_transient( self::MODULES_CACHE_KEY, true, 12 * HOUR_IN_SECONDS );
@@ -103,11 +103,11 @@ final class Modules implements Integration {
 	 * Upgrade modules with theme.
 	 *
 	 * @since   6.3.1
-	 * @version	6.3.1
+	 * @version	6.3.5
 	 *
 	 * @return 	void
 	 */
 	public function update_modules(): void {
-		Module\Ajax::install( wecodeart_option( 'installed_modules', [] ) );
+		Module\Ajax::install( wecodeart_option( 'modules', [] ) );
 	}
 }

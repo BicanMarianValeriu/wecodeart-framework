@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Upgrade
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.3.1
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Admin;
@@ -46,11 +46,31 @@ class Upgrade {
 		$routines = [
 			'6.1.2' => 'upgrade_1',
 			'6.2.9' => 'upgrade_629',
+			'6.3.5' => 'upgrade_635',
 		];
 
 		array_walk( $routines, [ $this, 'run_upgrade' ], $version );
 
 		$this->finish_up( $version );
+	}
+
+	/**
+	 * 6.3.5
+	 *
+	 * @param 	string $version Current plugin version.
+	 */
+	private function upgrade_635( $version ) {
+		$modules = wecodeart( 'options' )::get( 'installed_modules' );
+
+		if( $modules ) {
+			wecodeart( 'options' )::set( [
+				'modules' 			=> $modules
+			] );
+
+			wecodeart( 'options' )::set( [
+				'installed_modules' => 'unset'
+			] );
+		}
 	}
 
 	/**

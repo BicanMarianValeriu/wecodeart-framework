@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer\Module
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		6.2.9
- * @version		6.3.1
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Admin\Installer;
@@ -91,8 +91,8 @@ class Module extends Installer implements Installable {
 		] );
 
 		// Update options
-		$installed_modules  = wecodeart_option( 'installed_modules', [] );
-		$current_module		= array_search( $this->slug, array_column( $installed_modules, 'slug' ) );
+		$modules		= wecodeart_option( 'modules', [] );
+		$current_module	= array_search( $this->slug, array_column( $modules, 'slug' ) );
 
 		$module = [
 			'slug'			=> $this->slug,
@@ -103,13 +103,13 @@ class Module extends Installer implements Installable {
 		];
 		
 		if ( $current_module !== false ) {
-			$installed_modules[$current_module] = $module;
+			$modules[$current_module] = $module;
 		} else {
-			$installed_modules[] = $module;
+			$modules[] = $module;
 		}
 
 		wecodeart_option( [
-			'installed_modules' => $installed_modules
+			'modules' => $modules
 		] );
 		
 		return $this->status = $this->get_ver();
@@ -143,11 +143,11 @@ class Module extends Installer implements Installable {
             $removed = rmdir( $folder );
 			
 			if( $removed ) {
-				$installed_modules = wecodeart_option( 'installed_modules', [] );
-				$installed_modules = wp_list_filter( $installed_modules, [ 'slug' => $this->slug ], 'NOT' );
+				$modules = wecodeart_option( 'modules', [] );
+				$modules = wp_list_filter( $modules, [ 'slug' => $this->slug ], 'NOT' );
 				
 				wecodeart_option( [
-					'installed_modules' => array_values( $installed_modules )
+					'modules' => array_values( $modules )
 				] );
 			}
         }
