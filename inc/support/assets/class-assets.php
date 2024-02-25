@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.4.0
- * @version		6.2.9
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Support;
@@ -100,10 +100,13 @@ final class Assets implements Integration {
 	 * Enqueue Front-End Core Assets
 	 *
 	 * @since	6.0.0
-	 * @version	6.1.7
+	 * @version	6.3.5
 	 */
 	public function core(): void {
-		global $wp_scripts;
+		// Styles
+		$this->add_style( 'global-styles', [
+			'inline'	=> 'file:' . $this->get_asset( 'css', 'frontend' ),
+		] );
 
 		// Enqueue
 		foreach( [ 'offcanvas', 'dropdown', 'modal', 'toast' ] as $handle ) {
@@ -114,15 +117,10 @@ final class Assets implements Integration {
 			] );
 		}
 
-		// Styles
-		$this->add_style( $this->make_handle(), [
-			'inline'	=> 'file:' . $this->get_asset( 'css', 'frontend' ),
-		] );
-
 		// Scripts
-		$wecodeart = [
-			'assetsEnqueue' 	=> $wp_scripts->queue, 
+		$wecodeart = [ 
 			'templateDirectory' => get_template_directory_uri(),
+			'version'			=> wecodeart( 'version' ),
 			'isDevMode'			=> wecodeart_if( 'is_dev_mode' ),
 			'plugins'			=> [],
 			'locale'			=> [
@@ -140,6 +138,16 @@ final class Assets implements Integration {
 			'locale'	=> $wecodeart,
 			'inline'	=> 'document.addEventListener("DOMContentLoaded",function(){(new wecodeart.JSM(wecodeart)).loadEvents();});',
 		] );
+
+		// Modules
+		if( function_exists( 'wp_register_script_module' ) ) {
+			\wp_register_script_module(
+				'@wecodeart/collapse',
+				$this->get_asset( 'js', 'modules/collapse' ),
+				[ '@wordpress/interactivity' ],
+				wecodeart( 'version' )
+			);
+		}
 	}
 
 	/**

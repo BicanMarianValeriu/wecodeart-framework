@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.8
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;

@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_json_color;
 /**
  * Handles Gutenberg Theme Functionality.
  */

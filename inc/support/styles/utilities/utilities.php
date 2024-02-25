@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.2.8
+ * @version		6.3.5
  */
 
 // Theme Shadows
@@ -43,8 +43,23 @@ $widths = [
     '11'  => '91.66666667%',
 ];
 
-$offsets = $widths + [ '0' => '0' ];
-$columns = $widths + [ '12' => '100%', 'auto' => 'auto' ];
+$grid = [
+    '1'   => 'auto/span 1',
+    '2'   => 'auto/span 2',
+    '3'   => 'auto/span 3',
+    '4'   => 'auto/span 4',
+    '5'   => 'auto/span 5',
+    '6'   => 'auto/span 6',
+    '7'   => 'auto/span 7',
+    '8'   => 'auto/span 8',
+    '9'   => 'auto/span 9',
+    '10'  => 'auto/span 10',
+    '11'  => 'auto/span 11',
+    '12'  => 'auto/span 12',
+];
+
+$offsets    = $widths + [ '0' => '0' ];
+$columns    = $widths + [ '12' => '100%', 'auto' => 'auto' ];
 
 // Default utilities
 foreach( [
@@ -671,6 +686,18 @@ foreach( [
         'class'		=> 'col',
         'responsive'=> true,
         'values'	=> $columns,
+    ],
+    [
+        'property'  => 'grid-column',
+        'class'		=> 'span',
+        'responsive'=> true,
+        'values'	=> $grid,
+    ],
+    [
+        'property'  => 'grid-column-start',
+        'class'		=> 'start',
+        'responsive'=> true,
+        'values'	=> array_keys( range( 1, 11 ) ),
     ],
     [
         'property'  => 'height',

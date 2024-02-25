@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.2.8
- * @version		6.2.8
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -53,6 +53,10 @@ class Column extends Dynamic {
 
 		return [
 			'supports'		=> wp_parse_args( [
+				'background' 			=> [
+					'backgroundImage' 	=> true,
+					'backgroundSize' 	=> true,
+				],
 				'__experimentalBorder'	=> [
 					'width'  	=> true,
 					'color' 	=> true,

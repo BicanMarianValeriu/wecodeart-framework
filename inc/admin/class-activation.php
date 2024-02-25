@@ -9,7 +9,7 @@
  * @subpackage 	Compatability/Activation
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		3.5
- * @version		6.1.0
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Admin;
@@ -20,6 +20,7 @@ use WeCodeArt\Config;
 use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Activation - runs first before any other class to make sure user meets the requirements
@@ -122,31 +123,36 @@ class Activation {
 	 * Compare Requirements
 	 *
 	 * @since 	3.5
-	 * @version	5.0.0
+	 * @version	6.3.5
 	 */
 	public function compare_requirements() {
-		if( ! $this->requirements ) return;
+		if( ! $this->requirements ) {
+			return;
+		}
 		
 		foreach( $this->requirements as $key => $val ) {
-			if( isset( $val['plugin'] ) && (bool) $val['plugin'] === true ) {
+			$installed 	= get_prop( $val, [ 'installed' ] );
+			$required 	= get_prop( $val, [ 'required' ] );
+
+			if( (bool) get_prop( $val, [ 'plugin' ] ) === true ) {
 
 				// If we have plugin, activate it and move on!
-				if( $this->is_plugin_installed( $val['required'] ) ) {
+				if( $this->is_plugin_installed( $required ) ) {
 
-					\activate_plugin( $val['required'] );
+					\activate_plugin( $required );
 
 					continue;
 				}
 
 				// If we dont, simply return true on the failed key, it means we dont have it
-				$this->requirements[$key]['condition'] = \is_plugin_active( $val['required'] ) === false;
+				$this->requirements[$key]['condition'] = \is_plugin_active( $required ) === false;
 
 				continue;
 			}
 
-			if( isset( $val['installed'] ) && isset( $val['required'] ) ) {
+			if( $installed && $required ) {
 
-				$this->requirements[$key]['condition'] = \version_compare( $val['installed'], $val['required'], '>=' );
+				$this->requirements[$key]['condition'] = \version_compare( $installed, $required, '>=' );
 
 			}
 		}
@@ -156,17 +162,19 @@ class Activation {
 	 * Requirements deactivated?
 	 *
 	 * @since 	5.0.0
-	 * @version	5.0.0
+	 * @version	6.3.5
 	 */
 	public function set_deactivation_hooks() {
-		if( ! $this->requirements ) return;
+		if( ! $this->requirements ) {
+			return;
+		}
 
 		foreach( $this->requirements as $key => $val ) {
 
-			if( isset( $val['plugin'] ) && (bool) $val['plugin'] === true ) {
+			if( (bool) get_prop( $val, [ 'plugin' ] ) ) {
 
 				// Simply switch theme on plugin deactivation, beautiful!!!
-				register_deactivation_hook( $val['required'], [ $this, 'switch_theme' ] );
+				register_deactivation_hook( get_prop( $val, [ 'required' ] ), [ $this, 'switch_theme' ] );
 
 				continue;
 			}
@@ -219,23 +227,27 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	6.0.0
+	 * @version	6.3.5
 	 */
 	public function admin_notice() {
-		if( ! $this->requirements ) return;
+		if( ! $this->requirements ) {
+			return;
+		}
 
 		foreach( $this->requirements as $key => $val ) {
-			if( isset( $val['condition'] ) && $val['condition'] === false ) {
+			$notification_id = 'wecodeart-activation-' . $key;
 
+			Notifications::get_instance()->remove_notification_by_id( $notification_id );
+			
+			if( get_prop( $val, [ 'condition' ] ) === false ) {
 				$notification = new Notification( wpautop( $val['i18n'] ), [
-					'id'			=> 'wecodeart-activation-' . $key, 
+					'id'			=> $notification_id, 
 					'type' 			=> Notification::ERROR,
 					'class'			=> 'notice is-dismissible',
 					'capabilities' 	=> 'switch_themes'
 				] );
-
+				
 				Notifications::get_instance()->add_notification( $notification );
-
 			}
 		}	
 	}

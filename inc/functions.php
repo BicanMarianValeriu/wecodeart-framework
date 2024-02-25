@@ -9,7 +9,7 @@
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version     6.3.2
+ * @version     6.3.5
  */
 
 namespace WeCodeArt\Functions;
@@ -32,17 +32,17 @@ use function mb_convert_encoding;
  * Useful to use it for placing encoded object in html attrs
  *
  * @since	3.5
- * @version 6.0.0
+ * @version 6.3.5
  * @param 	array   $json
  *
  * @return 	string 
  */
-function toJSON( array $json = [] ) {
+function toJSON( array $json = [], $options = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP ) {
     if( ! is_array( $json ) ) {
         return null;
     }
 
-    return htmlspecialchars( str_replace( '"', "'", json_encode( $json ) ), ENT_QUOTES, get_option( 'blog_charset' ) );
+    return wp_json_encode( $json, $options );
 }
 
 /**

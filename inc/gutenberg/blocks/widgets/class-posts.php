@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.8
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -113,8 +113,8 @@ class Posts extends Dynamic {
 		
 		// Meta
 		if( $display_author || $display_date ) {
-			$inner_blocks .= '<!-- wp:group {"className":"hstack g-1","layout":{"type":"flex","flexWrap":"wrap"}} -->';
-			$inner_blocks .= '<div class="wp-block-group hstack g-1">';
+			$inner_blocks .= '<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|g"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->';
+			$inner_blocks .= '<div class="wp-block-group">';
 
 			// Author
 			if ( $display_author ) {

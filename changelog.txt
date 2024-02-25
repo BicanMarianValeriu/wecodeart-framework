@@ -1,6 +1,20 @@
 v6.3.5
+- Removed - hstack/vstack helper classes in favor of core/group block variations
+- Removed - Deprecated core/group marquee variation - keept styles though just in case
+- Updated - core/group marquee to enquee marquee styles only if this variation is used (micro optimization)
+- Updated - deprecated wecodeart( 'styles' )::get_duotone function (not used anymore)
 - Updated - Modules will now be located into 'modules' key in theme options (previously: 'installed_modules')
+- Updated - moved grid classes (span-# and start-#) into utilities module (saves 13kb of minified css / enqueued when used)
+- Updated - base styles (small reboot and couple of helpers) are now enqueued into global styles
 - Fixed - issue with RankMath FAQ block being converted to core/details block (if div selector is set)
+- Fixed - wecodeart( 'style' )->Components->load( [ ...] ) loading multiple instances of the same item
+- Added - core/column support for background image
+- Added - ability for wecodeart( 'styles' )::register_utility and ::generate_class to generate Tailwind like classes (.md:pt-5)
+- Added - Ajax interactivity suupport for blog/index templates (query-overlay pattern)
+- Added - JavaScript: Bootrap`s Config class
+- Added - JavaScript: Bootrap`s Data attribute class
+- Added - JavaScript: Bootrap`s Events Handler class
+- Added - JavaScript: Bootrap`s Template Factory class
 
 v6.3.3/4
 - Updated - disabled core/cover background styles until we fully remove inline styles

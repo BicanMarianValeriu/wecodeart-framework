@@ -1,15 +1,32 @@
 // WeCodeArt
-import './plugins/wecodeart-Component';
 import './plugins/wecodeart-JSManager';
+import './plugins/wecodeart-Events';
+import './plugins/wecodeart-Data';
+import './plugins/wecodeart-Config';
+import './plugins/wecodeart-Component';
 import './plugins/wecodeart-Template';
 
+// Load JS
 import loadJs from 'loadjs';
-import requireJs from './helpers/requireJs';
-import getOptions from './helpers/parseData';
-import createParams from './helpers/paramsCreate';
-import updateParams from './helpers/paramsUpdate';
-import getParents from './helpers/getParents';
-import hasScrollbar, { handleBodyJSClass, handleDocumentScrollbar, handleDocumentScrolled } from './helpers/hasScrollbar';
+
+// Utils
+import {
+	isRTL,
+	isElement,
+	getElement,
+	getParents,
+	getTransitionDuration,
+	sanitizeHtml,
+	hasScrollbar,
+	reflow,
+	paramsCreate,
+	paramsUpdate,
+	parseData as getOptions,
+	execute,
+	executeAfterTransition,
+	camelCase,
+	requireJs,
+} from './helpers';
 
 // Styles
 import './../../scss/frontend/frontend.scss';
@@ -32,13 +49,22 @@ function filterLog(route, func, args) {
 	 * @since 3.6
 	 */
 	wecodeart.fn = {
-		hasScrollbar,
-		createParams,
-		updateParams,
-		getOptions,
+		isRTL,
+		isElement,
+		getElement,
 		getParents,
+		sanitizeHtml,
+		hasScrollbar,
+		reflow,
+		camelCase,
+		paramsCreate,
+		paramsUpdate,
+		getOptions,
+		execute,
+		executeAfterTransition,
+		getTransitionDuration,
+		loadJs,
 		requireJs,
-		loadJs
 	};
 	/**
 	 * @description
@@ -50,57 +76,73 @@ function filterLog(route, func, args) {
 	wecodeart.lazyJs = {
 		// Use for popups
 		'sweetalert': [
-			'//unpkg.com/sweetalert2@11.4.18/dist/sweetalert2.min.css',
-			'//unpkg.com/sweetalert2@11.4.18/dist/sweetalert2.min.js',
+			'//unpkg.com/sweetalert2@11/dist/sweetalert2.min.css',
+			'//unpkg.com/sweetalert2@11/dist/sweetalert2.min.js',
 		],
 		// Use for lighbox galleries
 		'photoswipe': [
-			'//unpkg.com/photoswipe@5.2.4/dist/photoswipe-lightbox.esm.min.js',
-			'//unpkg.com/photoswipe@5.2.4/dist/photoswipe.esm.min.js',
-			'//unpkg.com/photoswipe@5.2.4/dist/photoswipe.css',
+			'//unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.min.js',
+			'//unpkg.com/photoswipe@5/dist/photoswipe.esm.min.js',
+			'//unpkg.com/photoswipe@5/dist/photoswipe.css',
 		]
 	};
 	wecodeart.routes = {
 		common: {
 			init: () => {
-				handleBodyJSClass();
-				handleDocumentScrolled();
-				handleDocumentScrollbar();
+				const html = document.documentElement;
+
+				const handleDocumentScrolled = () => {
+					html.classList[window.scrollY > 1 ? 'add' : 'remove']('has-scrolled');
+				};
+
+				const handleDocumentScrollbar = () => {
+					html.classList[hasScrollbar() ? 'add' : 'remove']('has-scrollbar');
+				};
+
+				const bodyJSClass = () => {
+					html.classList.remove('no-js');
+					html.classList.add('js');
+				};
+
+				const skipLink = () => {
+					// Handle Skip Links
+					let skipLinkTarget = document.querySelector('main'), sibling, skipLinkTargetID, skipLink;
+
+					// Early exit if a skip-link target can't be located.
+					if (!skipLinkTarget) {
+						return;
+					}
+
+					// Get the site wrapper.
+					// The skip-link will be injected in the beginning of it.
+					sibling = document.querySelector('.wp-site-blocks');
+
+					// Early exit if the root element was not found.
+					if (!sibling) {
+						return;
+					}
+
+					// Get the skip-link target's ID, and generate one if it doesn't exist.
+					skipLinkTargetID = skipLinkTarget.id;
+					if (!skipLinkTargetID) {
+						skipLinkTargetID = 'wp--skip-link--target';
+						skipLinkTarget.id = skipLinkTargetID;
+					}
+
+					// Create the skip link.
+					skipLink = document.createElement('a');
+					skipLink.classList.add('skip-link', 'screen-reader-text');
+					skipLink.href = '#' + skipLinkTargetID;
+					skipLink.innerHTML = wecodeart?.locale?.skipLink;
+
+					// Inject the skip link.
+					sibling.parentElement.insertBefore(skipLink, sibling);
+				}
+
+				bodyJSClass();
+				skipLink();
 				window.onresize = handleDocumentScrollbar;
 				window.onscroll = handleDocumentScrolled;
-
-				// Handle Skip Links
-				let skipLinkTarget = document.querySelector('main'), sibling, skipLinkTargetID, skipLink;
-
-				// Early exit if a skip-link target can't be located.
-				if (!skipLinkTarget) {
-					return;
-				}
-
-				// Get the site wrapper.
-				// The skip-link will be injected in the beginning of it.
-				sibling = document.querySelector('.wp-site-blocks');
-
-				// Early exit if the root element was not found.
-				if (!sibling) {
-					return;
-				}
-
-				// Get the skip-link target's ID, and generate one if it doesn't exist.
-				skipLinkTargetID = skipLinkTarget.id;
-				if (!skipLinkTargetID) {
-					skipLinkTargetID = 'wp--skip-link--target';
-					skipLinkTarget.id = skipLinkTargetID;
-				}
-
-				// Create the skip link.
-				skipLink = document.createElement('a');
-				skipLink.classList.add('skip-link', 'screen-reader-text');
-				skipLink.href = '#' + skipLinkTargetID;
-				skipLink.innerHTML = wecodeart?.locale?.skipLink;
-
-				// Inject the skip link.
-				sibling.parentElement.insertBefore(skipLink, sibling);
 			},
 		},
 	};

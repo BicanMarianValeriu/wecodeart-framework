@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		4.0.5
- * @version		6.3.3
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Gutenberg\Modules;
@@ -160,7 +160,7 @@ class Classes implements Integration {
 	public function set_suggestions( array $settings, $post ): array {
 		if ( ! isset( $settings[ 'customClasses' ] ) ) {
 			$classes = apply_filters( 'wecodeart/filter/gutenberg/settings/classes', [], $post );
-			$classes = array_map( 'sanitize_html_class', array_values( array_unique( $classes ) ) ); // Unique sanitized values.
+			$classes = array_map( 'sanitize_text_field', array_values( array_unique( $classes ) ) ); // Unique sanitized values.
 			$settings['customClasses'] = $classes;
 		}
 
@@ -191,19 +191,17 @@ class Classes implements Integration {
 			$args[] = 'span-' . $breakpoint;
 			$args[] = 'col-' . $breakpoint . '-auto';
 			$args[] = 'sticky-' . $breakpoint . '-top';
+			$args[] = $breakpoint . ':sticky-top';
 			
 			foreach( range( 1, 12 ) as $number ) {
 				$args[] = 'col-' . $breakpoint . '-' . $number;
 				$args[] = 'span-' . $breakpoint . '-' . $number;
+				$args[] = $breakpoint . ':span-' . $number;
 				$args[] = 'start-' . $breakpoint . '-' . $number;
+				$args[] = $breakpoint . ':start-' . $number;
 				$args[] = 'offset-' . $breakpoint . '-' . $number;
 			}
 		}
-
-		// Typography extra sizes - to do later.
-		// foreach( range( 1, 6 ) as $nr ) {
-		// 	$args[] = 'h' . $nr;
-		// }
 		
 		foreach( array_keys( $displays ) as $d ) {
 			$args[] = 'display-' . $d;
@@ -211,8 +209,6 @@ class Classes implements Integration {
 
 		return wp_parse_args( [
 			'vr',
-			'hstack',
-			'vstack',
 			'small',
 			'mark',
 			'initialism',

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.2.8
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -43,16 +43,6 @@ class Group extends Dynamic {
 	 * @var string
 	 */
 	protected $block_name = 'group';
-
-	/**
-	 * Init.
-	 */
-	public function init() {
-		\register_block_style( $this->get_block_type(), [
-			'name'	=> 'marquee',
-            'label'	=> esc_html__( 'Marquee', 'wecodeart' ),
-		] );
-	}
 
 	/**
 	 * Block args.
@@ -95,6 +85,7 @@ class Group extends Dynamic {
 		// Handle marquee group.
 		if( self::is_marquee_variation( $attributes ) ) {
 			$content = $this->create_marquee( $attributes, $content );
+			wp_add_inline_style( $this->get_asset_handle(), self::marquee_styles() );
 		}
 	
 		return (string) $content;
@@ -109,11 +100,6 @@ class Group extends Dynamic {
 	 */
 	public static function is_marquee_variation( array $attributes = [] ): bool {
 		if ( get_prop( $attributes, [ 'namespace' ], '' ) === 'wecodeart/group/marquee' ) {
-			return true;
-		}
-
-		$classNames = explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
-		if ( in_array( 'is-style-marquee', $classNames, true ) ) {
 			return true;
 		}
 
@@ -203,11 +189,11 @@ class Group extends Dynamic {
 	}
 
 	/**
-	 * Block styles
+	 * Marquee styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public static function marquee_styles() {
 		$mobile 	= wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' );
 		$breakpoint = wecodeart_json( [ 'settings', 'custom', 'breakpoints', $mobile ], '992px' );
 
@@ -270,6 +256,21 @@ class Group extends Dynamic {
 			}
 		";
 
+		$inline = wecodeart( 'styles' )::compress( $inline );
+
 		return $inline;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return '
+			.wp-block-group {
+				box-sizing: border-box;
+			}
+		';
 	}
 }

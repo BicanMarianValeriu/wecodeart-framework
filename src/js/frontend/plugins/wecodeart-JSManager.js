@@ -1,9 +1,13 @@
-import camelCase from '../helpers/camelCase';
-import requireJs from '../helpers/requireJs';
-
 /**
- * Utility to trigger JS code based on clasname routing
+ * --------------------------------------------------------------------------
+ * Javascript Manager
+ *
+ * @author 	Bican Marian Valeriu
+ * @version 1.0.0
+ * --------------------------------------------------------------------------
  */
+import { camelCase, requireJs } from '../helpers';
+
 export default (function (wecodeart) {
 
 	class JSManager {
@@ -70,7 +74,10 @@ export default (function (wecodeart) {
 		 * @info 	It handles all necessary JS init from routes
 		 */
 		sequence(route) {
-			if (this.loaded.includes(route)) return;
+			if (this.loaded.includes(route)) {
+				return;
+			}
+
 			this.fireRoute(route);
 			this.fireRoute(route, 'complete');
 			this.fireRoute(route, 'lazy');

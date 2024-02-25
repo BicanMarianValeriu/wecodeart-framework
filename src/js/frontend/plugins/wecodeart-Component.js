@@ -1,45 +1,102 @@
+import { parseData } from '../helpers';
+
+/**
+ * --------------------------------------------------------------------------
+ * Plugin Component
+ *
+ * @author 	Bican Marian Valeriu
+ * @version 1.0.0
+ * --------------------------------------------------------------------------
+ */
+const NAME = 'WeCodeArtComponent';
+
 export default (function (wecodeart) {
 
-	class Component {
-		/**
-		 * Generic constructor for all components
-		 * @constructor
-		 * @param {Element} el
-		 * @param {Object} options
-		 */
-		constructor(classDef, el, options) {
-			// Display error if el is valid HTML Element
-			if (!(el instanceof Element)) {
-				console.error(Error(el + ' is not an HTML Element'));
+	const { Config, Data, Events, version } = wecodeart;
+
+	class Component extends Config {
+		constructor(classDef, element, config) {
+			super();
+
+			if (!element) {
+				return;
 			}
 
-			// If exists, destroy and reinitialize in child
-			const ins = classDef.getInstance(el);
-			if (!!ins) {
-				ins.destroy();
-			}
+			this.el = element; // Deprecated
+			this._element = element;
+			this._config = this._getConfig(config);
 
-			this.el = el;
+			Data.set(this._element, this.constructor.DATA_KEY, this);
+		}
+
+		// Public
+		dispose() {
+			Data.remove(this._element, this.constructor.DATA_KEY);
+			Events.off(this._element, this.constructor.EVENT_KEY);
+
+			for (const propertyName of Object.getOwnPropertyNames(this)) {
+				this[propertyName] = null;
+			}
+		}
+
+		_queueCallback(callback, element, isAnimated = true) {
+			executeAfterTransition(callback, element, isAnimated);
+		}
+
+		_getConfig(config) {
+			config = this._mergeConfigObj(config, this._element);
+			config = this._configAfterMerge(config);
+			this._typeCheckConfig(config);
+
+			return config;
+		}
+
+		// Static
+		static getInstance(element) {
+			return Data.get(element, this.DATA_KEY);
+		}
+
+		static getOrCreateInstance(element, config = {}) {
+			return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
+		}
+
+		static get NAME() {
+			return NAME;
+		}
+
+		static get VERSION() {
+			return version;
+		}
+
+		static get DATA_KEY() {
+			return `wp.${this.NAME}`;
+		}
+
+		static get EVENT_KEY() {
+			return `.${this.DATA_KEY}`;
+		}
+
+		static eventName(name) {
+			return `${name}${this.EVENT_KEY}`;
 		}
 
 		/**
 		 * Initializes components
-		 * @param {class} classDef
-		 * @param {Element | NodeList | jQuery} els
-		 * @param {Object} options
+		 *
+		 * @param	{class}	classDef
+		 * @param	{Element | NodeList | jQuery} els
+		 * @param	{Object} options
 		 */
 		static init(classDef, els, options) {
-			const { fn: { getOptions } } = wecodeart;
-			let instances = null;
+			let instances = [];
+
 			if (els instanceof Element) {
-				instances = new classDef(els, options);
+				const instance = classDef.getOrCreateInstance(els, options);
+				instances.push(instance);
 			} else if (!!els && (els.jquery || els instanceof NodeList)) {
-				let instancesArr = [];
 				for (let i = 0; i < els.length; i++) {
-					const mergedOptions = Object.assign({}, options, getOptions(els[i].dataset.options));
-					instancesArr.push(new classDef(els[i], mergedOptions));
+					instances.push(classDef.getOrCreateInstance(els[i], options));
 				}
-				instances = instancesArr;
 			}
 
 			return instances;

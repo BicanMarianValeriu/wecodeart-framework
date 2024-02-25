@@ -116,7 +116,7 @@ abstract class Dynamic {
 	
 		// This is hardcoded on purpose.
 		// We only support a fixed list of attributes.
-		$attributes_to_merge = [ 'class', 'style' ];
+		$attributes_to_merge = [ 'class', 'style', 'id' ];
 		$attributes          = [];
 		foreach ( $attributes_to_merge as $attribute_name ) {
 			if ( empty( $new_attributes[ $attribute_name ] ) && empty( $extra_attributes[ $attribute_name ] ) ) {

@@ -132,21 +132,6 @@
     @include visually-hidden-focusable();
 }
 
-// Stacks
-.hstack {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-self: stretch;
-}
-  
-.vstack {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    align-self: stretch;
-}
-
 // Vertical Line
 .vr {
     display: inline-block;
@@ -157,20 +142,37 @@
 }
 
 // Position
-.fixed-top {
+:where(.fixed-top,.fixed-bottom) {
     position: fixed;
-    top: 0;
     right: 0;
     left: 0;
     z-index: 1030;
 }
+
+.fixed-top {
+    top: 0;
+}
   
 .fixed-bottom {
-    position: fixed;
-    right: 0;
     bottom: 0;
-    left: 0;
-    z-index: 1030;
+}
+
+// Grid
+.grid {
+    --wp--style--block-gap: var(--wp--custom--gutter, 1rem);
+    --wp--columns: 12;
+    --wp--column-min: 0px;
+    --wp--gap-count: calc(var(--wp--columns) - 1);
+    --wp--gap-width: calc(var(--wp--gap-count) * var(--wp--style--block-gap));
+    --wp--column-max: calc((100% - var(--wp--gap-width)) / var(--wp--columns));
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(var(--wp--column-min), var(--wp--column-max)), 1fr));
+    grid-gap: var(--wp--style--block-gap);
+    grid-auto-flow: dense;
+
+    &.is-layout-grid[class*=wp-container-] {
+        grid-template-columns: repeat(auto-fill, minmax(max(var(--wp--column-min), var(--wp--column-max)), 1fr));
+    }
 }
   
 // Responsive sticky top
@@ -178,7 +180,8 @@
     @include media-breakpoint-up($breakpoint) {
         $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-        .sticky#{$infix}-top {
+        .sticky#{$infix}-top,
+        .#{$breakpoint}\:sticky-top {
             position: sticky;
             top: 0;
             z-index: 1020;

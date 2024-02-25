@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.2.9
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -82,7 +82,7 @@ class Components implements Configuration {
      * @return void
      */
     public function load( $key ) {
-        return $this->loaded = wp_parse_args( (array) $key, $this->loaded );
+        return $this->loaded = array_merge( (array) $key, $this->loaded );
 	}
 
     /**

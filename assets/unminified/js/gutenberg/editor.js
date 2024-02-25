@@ -161,27 +161,6 @@ const {
 const groupMarquee = {
   block: 'core/group',
   attributes: {
-    name: 'group-marquee',
-    title: __('Group: Marquee (deprecated)', 'wecodeart'),
-    description: __('Gather blocks in a sliding container.', 'wecodeart'),
-    attributes: {
-      className: 'is-style-marquee',
-      layout: {
-        type: 'flex',
-        flexWrap: 'nowrap',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }
-    },
-    innerBlocks: [],
-    isDefault: false,
-    scope: ['block', 'inserter', 'transform'],
-    icon: 'align-right'
-  }
-};
-const groupMarqueeV2 = {
-  block: 'core/group',
-  attributes: {
     name: 'wecodeart/group/marquee',
     title: __('Group: Marquee', 'wecodeart'),
     description: __('Gather blocks in a sliding container.', 'wecodeart'),
@@ -224,7 +203,7 @@ const socialSharing = {
   }
 };
 function registerWCAVariations() {
-  [groupMarquee, groupMarqueeV2, socialSharing].forEach(_ref => {
+  [groupMarquee, socialSharing].forEach(_ref => {
     let {
       block,
       attributes

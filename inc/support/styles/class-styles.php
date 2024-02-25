@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2023, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.3.2
+ * @version		6.3.5
  */
 
 namespace WeCodeArt\Support;
@@ -89,11 +89,24 @@ final class Styles implements Integration {
 	 * @return string
 	 */
 	public static function generate_class( string $class = '', $value = '', $break = '' ): string {
-		$return = join( '-', array_filter( [ $class, $break, $value ], function( $i ) {
-			return $i !== '';
-		} ) );
+		$mode = apply_filters( 'wecodeart/filter/styles/utilities/class', 'bootstrap', $class, $value, $break );
 
-		return sanitize_html_class( $return );
+		switch( $mode ) :
+			case 'tailwind':
+				$return = ( $break ? $break . ':' : '' ) . join( '-', array_filter( [ $class, $value ], function( $i ) {
+					return $i !== '';
+				} ) );
+			break;
+
+			default:
+				$return = join( '-', array_filter( [ $class, $break, $value ], function( $i ) {
+					return $i !== '';
+				} ) );
+			break;
+		endswitch;
+
+
+		return sanitize_text_field( $return );
 	}
 
 	/**
@@ -134,7 +147,7 @@ final class Styles implements Integration {
 
 			$output = [];
 			foreach( $properties as $property ) {
-				$output['.' . $_class][$property] = "$value!important";
+				$output['.' . str_replace( ':', '\:', $_class )][$property] = "$value!important";
 			}
 		
 			$container->register( $_class, [
@@ -150,7 +163,7 @@ final class Styles implements Integration {
 				
 				$output = [];
 				foreach( $properties as $property ) {
-					$output['.' . $_class_][$property] = "$value!important";
+					$output['.' . str_replace( ':', '\:', $_class_ )][$property] = "$value!important";
 				}
 
 				$container->register( $_class_, [
@@ -634,6 +647,8 @@ final class Styles implements Integration {
 	 * @return  array
 	 */
 	public static function get_duotone( array $preset = [] ): array {
+		_deprecated_function( __FUNCTION__, '6.3.5' );
+
         $values = [
 			'r' => [],
 			'g' => [],
