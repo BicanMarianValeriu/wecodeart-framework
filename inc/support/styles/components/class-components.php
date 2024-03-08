@@ -7,17 +7,17 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Styles\Components
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.3.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Styles;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\get_prop;
  
@@ -61,17 +61,15 @@ class Components implements Configuration {
 		$this->register( 'modal',       Components\Modal::class     );
 		$this->register( 'toast',       Components\Toast::class     );
 		$this->register( 'toggler',     Components\Toggler::class   );
-		$this->register( 'tooltip',     Components\Tooltip::class   );
-		$this->register( 'popover',     Components\Popover::class   );
 		$this->register( 'lightbox',    Components\Lightbox::class  );
 		$this->register( 'dropdown',    Components\Dropdown::class  );
 		$this->register( 'offcanvas',   Components\OffCanvas::class );
 		$this->register( 'parallax',    Components\Parallax::class  );
 		$this->register( 'transition',  Components\Transition::class);
 
-        add_action( 'init',             [ $this, 'cache'        ], 95    );
-        add_action( 'wp_print_styles',  [ $this, 'assets'       ], 20, 1 );
-        add_action( 'admin_init',       [ $this, 'editor_css'   ], 20, 1 );
+        add_action( 'init',                         [ $this, 'cache'        ], 95    );
+        add_action( 'wp_enqueue_scripts',           [ $this, 'assets'       ], 20, 1 );
+        add_action( 'enqueue_block_editor_assets',  [ $this, 'editor_css'   ], 20, 1 );
 	}
 
     /**
@@ -82,7 +80,7 @@ class Components implements Configuration {
      * @return void
      */
     public function load( $key ) {
-        return $this->loaded = array_merge( (array) $key, $this->loaded );
+        return $this->loaded = array_merge( $this->loaded, (array) $key );
 	}
 
     /**
@@ -110,7 +108,9 @@ class Components implements Configuration {
      * @return void
 	 */
 	public function assets() {
-        if( empty( $this->loaded ) ) return;
+        if( empty( $this->loaded ) ) {
+            return;
+        }
 
 		$inline_css = '';
 
@@ -118,7 +118,9 @@ class Components implements Configuration {
 
 		foreach( array_unique( $this->loaded ) as $component ) {
             // If we dont have component, move on.
-            if( ! $this->has( $component ) ) continue;
+            if( ! $this->has( $component ) ) {
+                continue;
+            }
 
             $queue[] = $component;
 
@@ -135,19 +137,21 @@ class Components implements Configuration {
 			}
         }
         
-        if( empty( $queue ) ) return;
+        if( empty( $queue ) ) {
+            return;
+        }
            
         foreach( $queue as $component ) {
             $inline_css .= $this->get( $component )::styles();
         }
 
-		if( empty( $inline_css ) ) return;
+		if( empty( $inline_css ) ) {
+            return;
+        }
 
-        $inline_css = wecodeart( 'styles' )::compress( $inline_css );
-
-        wp_register_style( $this->make_handle(), false, [], true, true );
-        wp_add_inline_style( $this->make_handle(), $inline_css );
-        wp_enqueue_style( $this->make_handle() );
+        wecodeart( 'assets' )->add_style( $this->make_handle(), [
+            'inline' => wecodeart( 'styles' )::compress( $inline_css )
+        ] );
 	}
 
     /**
@@ -159,7 +163,14 @@ class Components implements Configuration {
 		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 
-		add_editor_style( $filesystem->get_file_url( self::CACHE_FILE, true ) );
+        wp_enqueue_style(
+			$this->make_handle(),
+			$filesystem->get_file_url( self::CACHE_FILE, true ),
+			[],
+			wecodeart( 'version' )
+		);
+
+		// add_editor_style( $filesystem->get_file_url( self::CACHE_FILE, true ) );
 		
 		$filesystem->set_folder( '' );
 	}
@@ -188,7 +199,7 @@ class Components implements Configuration {
         $keys = is_array( $key ) ? $key : [ $key => $value ];
 
         foreach ( $keys as $key => $value ) {
-            $this->items[$key] = $value;
+            $this->items[$key] = apply_filters( "wecodeart/styles/components/set/{$key}", $value );
         }
     }
 
@@ -216,7 +227,7 @@ class Components implements Configuration {
             return $default;
         }
 
-        return $this->items[$key];
+        return apply_filters( "wecodeart/styles/components/set/{$key}", $this->items[$key] );
 	}
 
     /**

@@ -7,18 +7,18 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Admin\Installer\Module
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.2.9
- * @version		6.3.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Admin\Installer;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Installable;
 use WeCodeArt\Admin\Request;
 use WeCodeArt\Admin\Installer;
+use WeCodeArt\Config\Interfaces\Installable;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -163,7 +163,7 @@ class Module extends Installer implements Installable {
 	 * @return 	string	the installer directory
 	 */
 	public function get_dir(): string {
-		$path = wecodeart_config( 'paths' )['directory'] . '/inc/support/modules/';
+		$path = get_prop( wecodeart_config( 'paths' ), [ 'directory' ], '' ) . '/inc/support/modules/';
 
 		if( ! empty( $this->destination ) ) {
 			$path .= $this->destination;

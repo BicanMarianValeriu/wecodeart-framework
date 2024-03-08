@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  Autoloader
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
  * @version 	6.0.0
  */
@@ -61,7 +61,7 @@ class Autoloader {
 	 *
 	 * @param 	string 	$class_name 	The name of the class we're trying to load.
 	 */
-	protected function autoload( $class_name ) {
+	protected function autoload( $class_name ): void {
 
 		// Not a WeCodeArt file, early exit.
 		if ( 0 !== stripos( $class_name, $this->namespace ) ) {
@@ -98,7 +98,7 @@ class Autoloader {
 	 *
 	 * @return 	array
 	 */
-	protected function get_paths( $class_name ) {
+	protected function get_paths( $class_name ): array {
 		$paths = [];
 
 		// Build the filename

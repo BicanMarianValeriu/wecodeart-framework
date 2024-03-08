@@ -7,19 +7,19 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Modules
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.2.9
- * @version		6.3.1
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Admin\Installer\Module;
-use WeCodeArt\Conditional\Traits\No_Conditionals;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Traits\No_Conditionals;
+use WeCodeArt\Config\Interfaces\Integration;
 use function WeCodeArt\Functions\get_prop;
 
 /**

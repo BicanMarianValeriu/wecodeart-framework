@@ -7,9 +7,9 @@
  *
  * @package 	WeCodeArt Framework 
  * @subpackage 	Functions
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version     6.3.5
+ * @version     6.3.7
  */
 
 namespace WeCodeArt\Functions;
@@ -410,7 +410,7 @@ function dom_image_2_svg( \DOMDocument $dom, \DOMElement $wrap, \DOMElement $img
  * Returns array of dom elements by class name.
  *
  * @since   6.0.0
- * @version 6.2.8
+ * @version 6.3.7
  *
  * @param   DOMDocument|DOMElement $dom         DOM document or element.
  * @param   string                 $class_name  Element class name.
@@ -432,8 +432,6 @@ function dom_elements_by_class( $dom, string $class_name, string $tag = '*', $in
 			}
 		}
 	}
-
-	return $elements;
 
     if( is_int( $index ) ) {
         return isset( $elements[$index] ) ? $elements[$index] : null;
@@ -526,13 +524,17 @@ function dom_create_element( string $tag, DOMDocument $dom ): ?DOMElement {
  * Encode SVG string as url.
  *
  * @since   6.2.5
+ * @version 6.3.7
  *
  * @return  string
  */
-
 function encode_svg_data( string $svg = '' ): string {
-    // Clean SVG and covert to data URL.
-    return 'data:image/svg+xml;utf8,' . \rawurlencode( \preg_replace( '/\s+/', ' ', \str_replace( '"', "'", $svg ) ) );
+    // Encode svg to URL.
+    $svg = \rawurlencode( \str_replace( '"', "'", \preg_replace( '/\v(?:[\v\h]+)/', ' ', $svg ) ) );
+    // re-decode a few characters understood by browsers to improve compression.
+    $svg = \str_replace( [ '%20', '%3D', '%3A', '%2F' ], [ ' ', '=', ':', '/' ], $svg );
+    
+    return 'data:image/svg+xml;utf8,' . $svg;
 }
 
 /**

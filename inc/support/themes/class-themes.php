@@ -7,20 +7,21 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Themes
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.1.3
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
 use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Interfaces\Integration;
+use WeCodeArt\Config\Traits\No_Conditionals;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -30,17 +31,9 @@ class Themes implements Integration {
 
 	use Singleton;
 	use Asset;
+	use No_Conditionals;
 
 	const NOTICE_ID = 'wecodeart/themes/notice';
-
-	/**
-	 * Get Conditionals
-	 *
-	 * @return void
-	 */
-	public static function get_conditionals() {
-		return [];
-	}
 
 	/**
 	 * Hooks

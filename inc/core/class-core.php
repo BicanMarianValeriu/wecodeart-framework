@@ -7,16 +7,16 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Core
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		3.0
- * @version		5.5.8
+ * @version		6.3.7
  */
 
 namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit(); 
 
-use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Singleton;
 
 /**
  * General Hooks

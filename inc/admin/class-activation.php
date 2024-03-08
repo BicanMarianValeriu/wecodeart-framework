@@ -7,9 +7,9 @@
  *
  * @package 	WeCodeArt Framework 
  * @subpackage 	Compatability/Activation
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		6.3.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Admin;
@@ -17,7 +17,7 @@ namespace WeCodeArt\Admin;
 defined( 'ABSPATH' ) || exit(); 
 
 use WeCodeArt\Config;
-use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
 use function WeCodeArt\Functions\get_prop;

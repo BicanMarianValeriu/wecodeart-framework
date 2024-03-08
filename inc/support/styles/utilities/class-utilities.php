@@ -7,17 +7,17 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Styles Utilities
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.3.3
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Styles;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Config\Traits\Singleton; 
 use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\get_prop;
 
@@ -86,7 +86,7 @@ class Utilities implements Configuration {
      * @return void
      */
     public function load( $key ) {
-        return $this->classes = wp_parse_args( (array) $key, $this->classes );
+        return $this->classes = array_merge( $this->classes, (array) $key );
 	}
 
     /**

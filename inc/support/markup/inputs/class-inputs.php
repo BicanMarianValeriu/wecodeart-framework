@@ -7,17 +7,18 @@
  *
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Inputs
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.1.2
- * @version		6.2.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Markup;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Interfaces\Integration;
 use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\encode_svg_data;
 
@@ -57,7 +58,7 @@ class Inputs implements Configuration {
         $this->register( 'floating',	Inputs\Floating::class 	);
         $this->register( 'group',		Inputs\Group::class 	);
 
-        add_action( 'wp_enqueue_scripts',	[ $this, 'assets'   ] );
+        add_action( 'wp_enqueue_scripts',	[ $this, 'assets'   ], 20, 1 );
 	}
 
 	/**

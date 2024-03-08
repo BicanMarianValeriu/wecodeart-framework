@@ -6,13 +6,13 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage  WeCodeArt\Loadable
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @subpackage 	WeCodeArt/Config/Interfaces
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.2
  * @version		4.0.2
  */
 
-namespace WeCodeArt;
+ namespace WeCodeArt\Config\Interfaces;
 
 defined( 'ABSPATH' ) || exit();
 

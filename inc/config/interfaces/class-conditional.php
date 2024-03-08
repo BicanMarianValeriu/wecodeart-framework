@@ -6,13 +6,13 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Conditional\Interfaces
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @subpackage 	WeCodeArt/Config/Interfaces
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		4.0
- * @version		4.0
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Conditional\Interfaces;
+namespace WeCodeArt\Config\Interfaces;
 
 defined( 'ABSPATH' ) || exit(); 
 
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit();
  *
  * @package WeCodeArt\Conditional\ConditionalInterface
  */
-interface ConditionalInterface {
+interface Conditional {
 
 	/**
 	 * Returns whether or not this conditional is met.

@@ -10,7 +10,7 @@ import { camelCase, requireJs } from '../helpers';
 
 export default (function (wecodeart) {
 
-	class JSManager {
+	class Scripts {
 		/**
 		 * Generic constructor 
 		 * @constructor
@@ -26,6 +26,7 @@ export default (function (wecodeart) {
 			this.doAction = doAction;
 			this.applyFilters = applyFilters;
 			this.extendedR = Object.keys(routes).filter(k => routes[k]?.extends && routes[k].extends instanceof Array);
+			this.loadEvents();
 		}
 
 		/**
@@ -105,6 +106,6 @@ export default (function (wecodeart) {
 	 * @static
 	 * @memberof JSManager
 	 */
-	wecodeart.JSM = JSManager;
+	wecodeart.Scripts = Scripts;
 
 }).apply(this, [window.wecodeart]);

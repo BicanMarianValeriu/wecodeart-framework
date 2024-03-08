@@ -1,28 +1,28 @@
-import { store, getContext, getElement } from '@wordpress/interactivity';
+import { store, getContext, getElement, getConfig } from '@wordpress/interactivity';
 
 const { fn: { reflow, executeAfterTransition }, Events } = wecodeart;
 
 const NAME = 'collapse';
+const NAMESPACE = `wecodeart/${NAME}`;
 const DATA_KEY = `wp.${NAME}`;
 const EVENT_KEY = `.${DATA_KEY}`;
 const EVENT_SHOW = `show${EVENT_KEY}`;
 const EVENT_SHOWN = `shown${EVENT_KEY}`;
 const EVENT_HIDE = `hide${EVENT_KEY}`;
 const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
-const CLASS_NAME_SHOW = 'show';
-const CLASS_NAME_COLLAPSE = 'collapse';
-const CLASS_NAME_COLLAPSING = 'collapsing';
 
-const { state, actions, callbacks } = store('wecodeart/collapse', {
+const { state, actions, callbacks } = store(NAMESPACE, {
     state: {
-        classNames: {
-            show: CLASS_NAME_SHOW,
-            collapse: CLASS_NAME_COLLAPSE,
-            collapsing: CLASS_NAME_COLLAPSING,
-        },
         get ariaLabel() {
-            const { isOpen, ariaLabel: { expanded, collapsed } } = getContext();
+            const { ariaLabel: { expanded: ariaExpanded, collapsed: ariaCollapsed } = {} } = getConfig();
+            const { isOpen, ariaLabel: { expanded = ariaExpanded, collapsed = ariaCollapsed } = {} } = getContext();
+
             return Boolean(isOpen) ? expanded : collapsed;
+        },
+        get isOpened() {
+            const { isAnimating = false, isOpen } = getContext();
+
+            return (isAnimating || isOpen);
         }
     },
     actions: {
@@ -34,30 +34,32 @@ const { state, actions, callbacks } = store('wecodeart/collapse', {
                 actions.show();
             }
         },
-        show(element, context = getContext()) {
-            if (context.isAnimating || context.isOpen) {
+        show() {
+            if (state.isOpened) {
                 return;
             }
 
-            const { ref } = element || getElement();
-            const collapsedEl = ref.parentNode.nextSibling;
-            const { classNames } = state;
+            const { ref } = getElement();
+            const collapsedEl = document.getElementById(ref.getAttribute('aria-controls'));
 
             const startEvent = Events.trigger(collapsedEl, EVENT_SHOW);
             if (startEvent.defaultPrevented) {
                 return;
             }
 
-            collapsedEl.classList.remove(classNames.collapse);
-            collapsedEl.classList.add(classNames.collapsing);
+            const { classNames } = getConfig();
+            const context = getContext();
 
-            const dimension = callbacks.getDimension({ ref });
+            collapsedEl.classList.remove(classNames?.collapse);
+            collapsedEl.classList.add(classNames?.collapsing);
+
+            const dimension = callbacks.getDimension();
 
             collapsedEl.style[dimension] = 0;
 
             context.isAnimating = true;
 
-            callbacks.onShow(collapsedEl, context);
+            callbacks.onShow(collapsedEl);
 
             const capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
             const scrollSize = `scroll${capitalizedDimension}`;
@@ -66,63 +68,66 @@ const { state, actions, callbacks } = store('wecodeart/collapse', {
 
             context.isOpen = true;
         },
-        hide(element, context = getContext()) {
-            if (context.isAnimating || !context.isOpen) {
+        hide() {
+            if (state.isOpened === false) {
                 return;
             }
 
-            const { ref } = element || getElement();
-            const collapsedEl = ref.parentNode.nextSibling;
+            const { ref } = getElement();
+            const collapsedEl = document.getElementById(ref.getAttribute('aria-controls'));
 
             const startEvent = Events.trigger(collapsedEl, EVENT_HIDE);
             if (startEvent.defaultPrevented) {
                 return;
             }
 
-            const dimension = callbacks.getDimension({ ref });
+            const dimension = callbacks.getDimension();
 
             collapsedEl.style[dimension] = `${collapsedEl.getBoundingClientRect()[dimension]}px`;
             reflow(collapsedEl);
 
-            const { classNames } = state;
+            const { classNames } = getConfig();
+            const context = getContext();
 
-            collapsedEl.classList.add(classNames.collapsing);
-            collapsedEl.classList.remove(classNames.collapse, classNames.show);
+            collapsedEl.classList.add(classNames?.collapsing);
+            collapsedEl.classList.remove(classNames?.collapse, classNames?.show);
 
             context.isAnimating = true;
 
             collapsedEl.style[dimension] = '';
 
-            callbacks.onHide(collapsedEl, context);
+            callbacks.onHide(collapsedEl);
 
             context.isOpen = false;
         }
     },
     callbacks: {
-        onShow(collapsedEl, context) {
-            const dimension = callbacks.getDimension({ ref: collapsedEl });
+        onShow: (collapsedEl) => {
+            const context = getContext();
+            const { classNames } = getConfig();
+
+            const dimension = callbacks.getDimension();
 
             executeAfterTransition(() => {
-                const { classNames } = state;
-
                 context.isAnimating = false;
 
-                collapsedEl.classList.remove(classNames.collapsing);
-                collapsedEl.classList.add(classNames.collapse, classNames.show);
+                collapsedEl.classList.remove(classNames?.collapsing);
+                collapsedEl.classList.add(classNames?.collapse, classNames?.show);
 
                 collapsedEl.style[dimension] = '';
 
                 Events.trigger(collapsedEl, EVENT_SHOWN);
             }, collapsedEl, true);
         },
-        onHide: (collapsedEl, context) => {
-            executeAfterTransition(() => {
-                const { classNames } = state;
+        onHide: (collapsedEl) => {
+            const context = getContext();
+            const { classNames } = getConfig();
 
+            executeAfterTransition(() => {
                 context.isAnimating = false;
 
-                collapsedEl.classList.remove(classNames.collapsing);
-                collapsedEl.classList.add(classNames.collapse);
+                collapsedEl.classList.remove(classNames?.collapsing);
+                collapsedEl.classList.add(classNames?.collapse);
 
                 Events.trigger(collapsedEl, EVENT_HIDDEN);
             }, collapsedEl, true);

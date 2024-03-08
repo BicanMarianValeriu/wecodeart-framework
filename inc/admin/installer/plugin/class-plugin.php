@@ -7,18 +7,18 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Admin\Installer\Plugin
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.2.9
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Admin\Installer;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Installable;
 use WeCodeArt\Admin\Request;
 use WeCodeArt\Admin\Installer;
+use WeCodeArt\Config\Interfaces\Installable;
 use function WeCodeArt\Functions\get_prop;
 
 /**

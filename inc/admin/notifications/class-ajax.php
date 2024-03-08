@@ -7,19 +7,19 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Notifications/Ajax
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Admin\Notifications;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Request\Async;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
+use WeCodeArt\Config\Traits\Singleton;
 
 /**
  * This class handles a post request being send to a given endpoint.

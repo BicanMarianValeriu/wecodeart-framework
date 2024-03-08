@@ -7,17 +7,17 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Notifications
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		3.8.1
- * @version		6.1.2
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Admin\Notifications\Notification;
 use function WeCodeArt\Functions\calc as wecodeart_calc;
 

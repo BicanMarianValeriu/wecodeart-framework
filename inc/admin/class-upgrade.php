@@ -7,17 +7,17 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Admin\Upgrade
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.3.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
 use WeCodeArt\Admin\Installer\Module;
+use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\get_prop;
 

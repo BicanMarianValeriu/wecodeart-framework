@@ -154,6 +154,11 @@
 					"name": "Secondary to Light"
 				},
 				{
+					"slug": "accent-to-white",
+					"gradient": "linear-gradient(160deg, var(--wp--preset--color--accent), var(--wp--preset--color--white))",
+					"name": "Accent to White"
+				},
+				{
 					"slug": "light-to-white",
 					"gradient": "linear-gradient(160deg, var(--wp--preset--color--light), var(--wp--preset--color--white))",
 					"name": "Light to White"
@@ -178,17 +183,14 @@
 			},
 			"boxShadow": {
 				"inset": "",
-				"x": "0",
-				"y": "4px",
-				"blur": "16px",
+				"x": "5px",
+				"y": "5px",
+				"blur": "1rem",
 				"spread": "0",
-				"color": "#6b728011",
-				"hover": {
-				  "inset": "",
-				  "y": "8px"
-				}
+				"color": "var:preset|color|cyan-bluish-gray"
 			},
 			"spacing": {
+				"auto": "auto",
 				"0": "0",
 				"1": ".5rem",
 				"2": ".75rem",
@@ -223,39 +225,49 @@
 					"shadow": "none"
 				},
 				{
-					"name": "XXS Small",
-					"slug": "xxs",
-					"shadow": "0 1px 2px 0 var(--wp--custom--box-shadow--color)"
-				},
-				{
 					"name": "XS Small",
 					"slug": "xs",
-					"shadow": "0 1px 2px var(--wp--custom--box-shadow--color), 0 2px 4px 0 var(--wp--custom--box-shadow--color)"
+					"shadow": "calc(var(--wp--custom--box-shadow--y,0px)/2) calc(var(--wp--custom--box-shadow--y,0px)/2) var(--wp--custom--box-shadow--blur,0px) var(--wp--custom--box-shadow--spread,0px) var(--wp--custom--box-shadow--color,currentColor)"
 				},
 				{
 					"name": "Small",
 					"slug": "sm",
-					"shadow": "0 1px 2px 0 var(--wp--custom--box-shadow--color), 0 4px 12px -4px var(--wp--custom--box-shadow--color)"
+					"shadow": "var(--wp--custom--box-shadow--x,0px) var(--wp--custom--box-shadow--y,0px) var(--wp--custom--box-shadow--blur,0px) var(--wp--custom--box-shadow--spread,0px) var(--wp--custom--box-shadow--color,currentColor)"
 				},
 				{
 					"name": "Medium",
 					"slug": "md",
-					"shadow": "0 1px 2px 0 var(--wp--custom--box-shadow--color), 0 4px 8px var(--wp--custom--box-shadow--color)"
+					"shadow": "calc(var(--wp--custom--box-shadow--x,0px) * 1.5) calc(var(--wp--custom--box-shadow--y,0px) * 1.5) var(--wp--custom--box-shadow--blur,0px) var(--wp--custom--box-shadow--spread,0px) var(--wp--custom--box-shadow--color,currentColor)"
 				},
 				{
 					"name": "Large",
 					"slug": "lg",
-					"shadow": "0 2px 4px 0 var(--wp--custom--box-shadow--color), 0 8px 24px var(--wp--custom--box-shadow--color)"
+					"shadow": "calc(var(--wp--custom--box-shadow--x,0px) * 2) calc(var(--wp--custom--box-shadow--y,0px) * 2) var(--wp--custom--box-shadow--blur,0px) var(--wp--custom--box-shadow--spread,0px) var(--wp--custom--box-shadow--color,currentColor)"
 				},
 				{
 					"name": "X Large",
 					"slug": "xl",
-					"shadow": "0 4px 8px -4px var(--wp--custom--box-shadow--color), 0 16px 24px -4px var(--wp--custom--box-shadow--color)"
+					"shadow": "calc(var(--wp--custom--box-shadow--x,0px) * 3) calc(var(--wp--custom--box-shadow--y,0px) * 3) var(--wp--custom--box-shadow--blur,0px) var(--wp--custom--box-shadow--spread,0px) var(--wp--custom--box-shadow--color,currentColor)"
 				},
 				{
 					"name": "XX Large",
 					"slug": "xxl",
-					"shadow": "0 4px 8px 0 var(--wp--custom--box-shadow--color), 0 24px 48px 0 var(--wp--custom--box-shadow--color)"
+					"shadow": "calc(var(--wp--custom--box-shadow--x,0px) * 4) calc(var(--wp--custom--box-shadow--y,0px) * 4) var(--wp--custom--box-shadow--blur,0px) var(--wp--custom--box-shadow--spread,0px) var(--wp--custom--box-shadow--color,currentColor)"
+				},
+				{
+					"name": "Outlined",
+					"slug": "outlined",
+					"shadow": "white var(--wp--custom--box-shadow--x,0px) var(--wp--custom--box-shadow--y,0px) var(--wp--custom--box-shadow--spread,0px) -.5px, var(--wp--custom--box-shadow--color,currentColor) var(--wp--custom--box-shadow--x,0px) var(--wp--custom--box-shadow--y,0px)"
+				},
+				{
+					"name": "Sharp",
+					"slug": "sharp",
+					"shadow": "color-mix(in oklab, var(--wp--custom--box-shadow--color,currentColor), white 50%) var(--wp--custom--box-shadow--x,0px) var(--wp--custom--box-shadow--y,0px) var(--wp--custom--box-shadow--spread,0px)"
+				},
+				{
+					"name": "Crisp",
+					"slug": "crisp",
+					"shadow": "color-mix(in oklab, var(--wp--custom--box-shadow--color,currentColor), black 50%) var(--wp--custom--box-shadow--x,0px) var(--wp--custom--box-shadow--y,0px) var(--wp--custom--box-shadow--spread,0px)"
 				}
 			]
 		},
@@ -399,14 +411,6 @@
 				"typography": {
 					"fontFamily": "var:preset|font-family|monospace",
 					"fontSize": "var:preset|font-size|small"
-				},
-				"spacing": {
-					"padding": {
-						"top": "1rem",
-						"bottom": "1rem",
-						"left": "1rem",
-						"right": "1rem"
-					}
 				}
 			},
 			"core/post-author": {
@@ -456,6 +460,11 @@
 			},
 			"core/read-more": {
 				"css": "display:block;width:fit-content;"
+			},
+			"wecodeart/accordion": {
+				"spacing": {
+					"blockGap": "0"
+				}
 			}
 		},
 		"elements": {
@@ -570,7 +579,7 @@
 		},
 		"typography": {
 			"fontSize": "var:preset|font-size|normal",
-			"fontFamily": "var:preset|font-family|open-sans",
+			"fontFamily": "var:preset|font-family|base",
 			"lineHeight": "1.7"
 		}
 	}

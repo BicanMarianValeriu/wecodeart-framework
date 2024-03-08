@@ -7,12 +7,12 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Styles\Property
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
  * @version		5.1.5
  */
 
-namespace WeCodeArt\Support\Styles;
+namespace WeCodeArt\Support\Styles\Sanitize;
 
 defined( 'ABSPATH' ) || exit();
 

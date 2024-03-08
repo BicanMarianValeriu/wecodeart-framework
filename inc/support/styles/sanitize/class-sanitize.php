@@ -7,16 +7,17 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Styles
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.0.0
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Styles;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Support\Styles\Sanitize\Property;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -25,6 +26,42 @@ use function WeCodeArt\Functions\get_prop;
 final class Sanitize {
 
 	use Singleton;
+
+	/**
+	 * Font.
+	 *
+	 * @since   6.3.7
+	 * @param 	mixed $value
+	 *
+	 * @return 	string
+	 */
+	public static function font( mixed $value ): string {
+		return ( new Property\Font( $value ) )->get_value();
+	}
+
+	/**
+	 * Focal.
+	 *
+	 * @since   6.3.7
+	 * @param 	array $value
+	 *
+	 * @return 	string
+	 */
+	public static function focal( array $value ): string {
+		return ( new Property\Focal( $value ) )->get_value();
+	}
+
+	/**
+	 * Background.
+	 *
+	 * @since   6.3.7
+	 * @param 	mixed $value (int|string)
+	 *
+	 * @return 	string
+	 */
+	public static function background( mixed $value ): string {
+		return ( new Property\Background( $value ) )->get_value();
+	}
 
 	/**
 	 * Sanitize rgba color.

@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.3
  * @version		6.3.3
  */
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
+
 /**
  * Handles Gutenberg Theme Functionality.
  */
@@ -119,6 +120,8 @@ class Gutenberg {
 	 * @return array Returns updated editors settings.
 	 */
 	public function block_editor_settings( array $settings, $post ): array {
+		$settings['fontLibraryEnabled'] = true;
+
 		if ( ! isset( $settings[ 'wecodeart' ] ) ) {
 			$settings[ 'wecodeart' ] = apply_filters( 'wecodeart/filter/gutenberg/settings', [], $post );
 		}

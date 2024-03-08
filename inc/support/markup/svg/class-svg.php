@@ -7,16 +7,16 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  Markup\SVG
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		5.6.3
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Markup;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\kses_svg;
 

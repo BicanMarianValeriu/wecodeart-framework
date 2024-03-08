@@ -6,10 +6,10 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Config\Asset
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @subpackage 	WeCodeArt\Config\Traits
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.4.5
- * @version		5.4.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Config\Traits;
@@ -41,14 +41,24 @@ trait Asset {
 	 * Retrieve an asset if path structure is the same as class
 	 *
 	 * @since	5.4.5
- 	* @version	5.4.5
+ 	 * @version	6.3.7
 	 *
 	 * @param	string 	$type
 	 * @param	string 	$name
+	 * @param	string 	$url_or_path
 	 *
 	 * @return 	string
 	 */
-	protected function get_asset( string $type, string $name = __CLASS__ ) {
-	 	return wecodeart_asset( $type, strtolower( str_replace( '\\', '-', $name ) ) );
+	protected function get_asset( string $type, string $name = __CLASS__, string $url_or_path = 'url' ): string {
+		switch( strtolower( $url_or_path ) ) :
+			case 'path':
+			$method = 'get_path';
+			break;
+			default: 
+			$method = 'get_uri';
+			break;
+		endswitch;
+
+	 	return wecodeart_asset( $type, strtolower( str_replace( '\\', '-', $name ) ) )->{$method}();
 	}
 }

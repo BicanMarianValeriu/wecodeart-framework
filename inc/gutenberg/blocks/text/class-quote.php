@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.8
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -113,7 +113,7 @@ class Quote extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles(): string {
-		return '
+		return <<<CSS
 			.wp-block-quote {
 				margin: 0;
 			}
@@ -137,6 +137,6 @@ class Quote extends Dynamic {
 			.wp-block-quote .blockquote-footer::before {
 				content: "\2014\00A0";
 			}
-		';
+		CSS;
 	}
 }

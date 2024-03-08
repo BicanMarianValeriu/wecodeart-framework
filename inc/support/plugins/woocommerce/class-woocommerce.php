@@ -7,20 +7,20 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\WooCommerce
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		1.9
- * @version		6.3.1
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Plugins;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Support\Plugins;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Interfaces\Integration;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -39,7 +39,7 @@ class WooCommerce implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->register( 'is_woocommerce_active', WooCommerce\Condition::class );
+		wecodeart( 'ifso' )->register( 'is_woocommerce_active', WooCommerce\Condition::class );
 
 		return [ 'is_woocommerce_active' ];
 	}

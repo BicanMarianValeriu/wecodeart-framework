@@ -64,6 +64,9 @@ mark, .mark {
   border-radius: 0.25rem;
   background-color: var(--wp--gray-100);
 }
+mark[style*="background-color:rgba"], [style*="background-color:rgba"].mark {
+  padding: 0;
+}
 
 sub,
 sup {
@@ -129,6 +132,15 @@ kbd kbd {
   padding: 0;
   font-size: 1em;
   font-weight: normal;
+}
+
+dt {
+  font-weight: 700;
+}
+
+dd {
+  margin-bottom: 0.5rem;
+  margin-left: 0;
 }
 
 address {

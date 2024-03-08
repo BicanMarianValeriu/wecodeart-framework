@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
  * @version		6.3.3
  */
@@ -145,6 +145,7 @@ class Image extends Dynamic {
 			}
 			.wp-block-image__placeholder {
 				aspect-ratio: var(--wp--aspect-ratio, 16/9);
+				object-fit: fill!important;
 			}
 			.wp-block-image figcaption {
 				font-size: var(--wp--preset--font-size--small);

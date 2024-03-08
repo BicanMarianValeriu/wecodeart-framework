@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\toJSON;
 
 /**
  * Gutenberg Code block.
@@ -40,14 +42,90 @@ class Code extends Dynamic {
 	 */
 	protected $block_name = 'code';
 
+	 /**
+	 * Send to Constructor
+	 */
+	public function init() {
+		add_action( 'wp_enqueue_scripts', [ $this, 'register_assets' ] );
+	}
+
+	/**
+	 * Block args.
+	 *
+	 * @param	array $current	Existing register args
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( array $current ): array {
+		$render_fn 		= fn( array $attrs = [], string $content = '' ): string => preg_replace( "/<br\W*?\/?>/", "\n", $content );
+		$view_scripts 	= get_prop( $current, [ 'view_scripts' ], [] );
+		
+		if( $this->has_syntax_highlight() ) {
+			$view_scripts[] = 'highlightjs-lazy';
+		}
+
+		return [
+			'render_callback'	=> $render_fn,
+			'view_scripts'		=> $view_scripts,
+		];
+	}
+
+	/**
+	 * Has syntax highlighter
+	 *
+	 * @since	6.3.7
+	 * @version	6.3.7
+	 */
+	public function has_syntax_highlight(): mixed {
+		return apply_filters( 'wecodeart/filter/gutenberg/block/code/hljs', [
+			'//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js',
+			'//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css',
+			'//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js'
+		] );
+	}
+	
+	/**
+	 * Enqueue Front-End Assets
+	 *
+	 * @since	6.3.7
+	 * @version	6.3.7
+	 */
+	public function register_assets(): void {
+		$highlight_js = $this->has_syntax_highlight();
+
+		if( ! $highlight_js || ! is_array( $highlight_js ) ) {
+			return;
+		}
+
+		$highlight_js = toJSON( $highlight_js );
+
+		wecodeart( 'assets' )->add_script( 'highlightjs-lazy', [
+			'deps'	 => [ 'wecodeart-support-assets' ],
+			'inline' => <<<JS
+				const { fn: { loadJs } } = wecodeart;
+				
+				loadJs( $highlight_js, 'highlightjs', { async: false } );
+
+				loadJs.ready( 'highlightjs', () => {
+					hljs.configure({ ignoreUnescapedHTML: true });
+
+					const codeBlocks = document.querySelectorAll( 'pre.wp-block-code:not(.ignore) code' );
+					[...codeBlocks].forEach(el => {
+						hljs.highlightElement(el);
+						hljs.lineNumbersBlock(el);
+					});
+				});
+			JS,
+		] );
+	}
+
 	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
-			/* Reset */
+		return <<<CSS
 			pre {
 				overflow: auto;
 				color: var(--wp--pink);
@@ -65,13 +143,28 @@ class Code extends Dynamic {
 			a > code {
 				color: inherit;
 			}
-
-			/* Block */
 			.wp-block-code code {
 				display: block;
 				overflow-wrap: break-word;
 				white-space: pre-wrap;
+				padding: 1rem;
 			}
-		";
+			.wp-block-code .hljs-ln-numbers {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				text-align: center;
+				color: #ccc;
+				border-right: 1px solid #ccc;
+				vertical-align: top;
+				padding-right: 5px;
+			}
+			.wp-block-code .hljs-ln-code {
+				padding-left: 10px;
+			}
+		CSS;
 	}
 }

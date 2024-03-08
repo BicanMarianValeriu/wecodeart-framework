@@ -7,19 +7,19 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Assets
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.4.0
- * @version		6.3.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Conditional\Traits\No_Conditionals;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Traits\No_Conditionals;
+use WeCodeArt\Config\Interfaces\Integration;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -100,7 +100,7 @@ final class Assets implements Integration {
 	 * Enqueue Front-End Core Assets
 	 *
 	 * @since	6.0.0
-	 * @version	6.3.5
+	 * @version	6.3.7
 	 */
 	public function core(): void {
 		// Styles
@@ -136,7 +136,7 @@ final class Assets implements Integration {
 			'path' 		=> $this->get_asset( 'js', 'frontend' ),
 			'deps'		=> [ 'wp-hooks' ],
 			'locale'	=> $wecodeart,
-			'inline'	=> 'document.addEventListener("DOMContentLoaded",function(){(new wecodeart.JSM(wecodeart)).loadEvents();});',
+			'inline'	=> 'document.addEventListener("DOMContentLoaded",function(){new wecodeart.Scripts(wecodeart);});',
 		] );
 
 		// Modules

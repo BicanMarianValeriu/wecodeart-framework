@@ -108,6 +108,34 @@ const reflow = (element) => {
 };
 
 /**
+ * Find DOM Element shadowRoot
+ *
+ * @param 	{DOMElement} element
+ */
+const findShadowRoot = element => {
+    if (!document.documentElement.attachShadow) {
+        return null;
+    }
+
+    // Can find the shadow root otherwise it'll return the document
+    if (typeof element.getRootNode === 'function') {
+        const root = element.getRootNode();
+        return root instanceof ShadowRoot ? root : null;
+    }
+
+    if (element instanceof ShadowRoot) {
+        return element;
+    }
+
+    // when we don't find a shadow root
+    if (!element.parentNode) {
+        return null;
+    }
+
+    return findShadowRoot(element.parentNode);
+};
+
+/**
  * Has Scrollbar
  *
  * @param 	{DOMElement} element
@@ -146,4 +174,4 @@ const hasScrollbar = (el) => {
 const isRTL = () => document.documentElement.dir === 'rtl';
 
 // Exports
-export { isElement, getElement, getParents, getTransitionDuration, reflow, hasScrollbar, isRTL };
+export { isElement, getElement, getParents, getTransitionDuration, findShadowRoot, reflow, hasScrollbar, isRTL };

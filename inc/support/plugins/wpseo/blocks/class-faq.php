@@ -7,16 +7,17 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Yoast\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.2.7
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Plugins\WPSeo\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Interfaces\Integration;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 
 use function WeCodeArt\Functions\dom_get_element;

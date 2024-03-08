@@ -1,3 +1,27 @@
+v6.3.7
+- Updated - Installer for the secondary child theme with webpack setup (wecodeart-honey)
+- Updated - .has-parallax class can now be used to translate the entire element on scroll (--wp--animation: __backgrounPosition|__translate3d)
+- Updated - cleaner folder structure and class aliases for some of the deprecated classes/namespaces (Singleton/Installable/Loadable etc)
+- Updated - Improved compression for encode_svg_data output
+- Updated - Styles/Components frontend CSS to be enqueued via wp_enqueue_scripts using wecodeart( 'assets' )->add_style();
+- Updated - Styles/Components to be enqueued via enqueue_block_editor_assets instead of add_editor_style (unlike reset CSS and Utilities that needs specificity)
+- Updated - wecodeart_asset function to return WeCodeArt\Support\Assets\Asset object instead of the file uri
+- Updated - get_asset method of Config/Trait/Asset class to return file URL or PATH (based on 3rd new parameter)
+- Updated - core/list icon style overflowing due to missing position: relative for list items
+- Updated - core/columns align items specificity versus is-layout-flex class
+- Updated - core/image placeholder object-fit force fill (for aspect ratio responsiveness)
+- Updated - Styles/Components/Tooltip|Popover to WCA: Formatting module
+- Updated - deprecated fonts API and conditional load only if WP version is less than 6.5
+- Updated - box-shadow presets are now controlled via custom -> boxShadow in theme.json
+- Updated - improved shorthand properties for block styles (margin and padding for the moment)
+- Added - wecodeart/filter/gutenberg/block/details/seo filter to enable SEO (FAQ Page) support for Details block (boolean)
+- Added - wecodeart/filter/gutenberg/block/code/hljs filter to enable syntax highlight for core/code block
+- Added - outlined/sharp/crisp box-shadow controlled via custom box shadow theme.json
+- Added - box-shadow support for core/group, core/columns and core/column block
+
+v6.3.6
+- Fixed - typo for upcomming collapse script in minified assets folder
+
 v6.3.5
 - Removed - hstack/vstack helper classes in favor of core/group block variations
 - Removed - Deprecated core/group marquee variation - keept styles though just in case

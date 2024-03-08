@@ -7,9 +7,9 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  Support
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		6.2.9
+ * @version		6.3.7
  */
 
 namespace WeCodeArt;
@@ -38,6 +38,7 @@ class Support implements Configuration {
         'assets',
         'files',
         'fonts',
+		'ifso',
         'locale',
         'markup',
         'plugins',
@@ -126,6 +127,7 @@ class Support implements Configuration {
 			if ( ! $this->conditionals_are_met( $class ) ) {
 				continue;
 			}
+	
 			$class::get_instance()->register_hooks();
 		}
 	}
@@ -139,6 +141,7 @@ class Support implements Configuration {
 	 */
 	protected function conditionals_are_met( $class ) {
 		$conditionals = $class::get_conditionals();
+
 		return wecodeart_if( $conditionals );
 	}
 

@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Module
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.3
  * @version		6.3.3
  */
@@ -52,7 +52,7 @@ class Styles implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->set( 'with_blocks_styles', Styles\Condition::class );
+		wecodeart( 'ifso' )->set( 'with_blocks_styles', Styles\Condition::class );
 
 		return [ 'with_blocks_styles' ];
 	}

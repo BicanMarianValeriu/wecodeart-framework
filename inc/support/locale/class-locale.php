@@ -7,20 +7,20 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Assets
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.4.5
- * @version		6.1.2
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
-use WeCodeArt\Conditional\Traits\No_Conditionals;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Traits\No_Conditionals;
+use WeCodeArt\Config\Interfaces\Integration;
 use function WeCodeArt\Functions\get_prop;
 
 /**

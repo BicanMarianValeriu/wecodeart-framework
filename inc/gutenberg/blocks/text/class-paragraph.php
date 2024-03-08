@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.0.0
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -46,7 +46,7 @@ class Paragraph extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			p.has-background {
 				padding: 0.5rem 0.8rem;
 			} 
@@ -65,6 +65,6 @@ class Paragraph extends Dynamic {
 			:where(p.has-text-color:not(.has-link-color)) a {
 				color: inherit;
 			}
-		";
+		CSS;
 	}
 }

@@ -7,20 +7,20 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Contact Form 7
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.1.7
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Plugins;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Support\Plugins;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Interfaces\Integration;
 
 /**
  * Contact Form 7 Integration
@@ -38,7 +38,7 @@ class ContactForm7 implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->register( 'is_cf7_active', ContactForm7\Condition::class );
+		wecodeart( 'ifso' )->register( 'is_cf7_active', ContactForm7\Condition::class );
 
 		return [ 'is_cf7_active' ];
 	}

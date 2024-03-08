@@ -10,6 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   findShadowRoot: () => (/* binding */ findShadowRoot),
 /* harmony export */   getElement: () => (/* binding */ getElement),
 /* harmony export */   getParents: () => (/* binding */ getParents),
 /* harmony export */   getTransitionDuration: () => (/* binding */ getTransitionDuration),
@@ -119,6 +120,32 @@ const getTransitionDuration = element => {
  */
 const reflow = element => {
   element.offsetHeight;
+};
+
+/**
+ * Find DOM Element shadowRoot
+ *
+ * @param 	{DOMElement} element
+ */
+const findShadowRoot = element => {
+  if (!document.documentElement.attachShadow) {
+    return null;
+  }
+
+  // Can find the shadow root otherwise it'll return the document
+  if (typeof element.getRootNode === 'function') {
+    const root = element.getRootNode();
+    return root instanceof ShadowRoot ? root : null;
+  }
+  if (element instanceof ShadowRoot) {
+    return element;
+  }
+
+  // when we don't find a shadow root
+  if (!element.parentNode) {
+    return null;
+  }
+  return findShadowRoot(element.parentNode);
 };
 
 /**
@@ -232,12 +259,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   camelCase: () => (/* binding */ camelCase),
 /* harmony export */   execute: () => (/* reexport safe */ _execute__WEBPACK_IMPORTED_MODULE_3__.execute),
 /* harmony export */   executeAfterTransition: () => (/* reexport safe */ _execute__WEBPACK_IMPORTED_MODULE_3__.executeAfterTransition),
+/* harmony export */   findShadowRoot: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.findShadowRoot),
 /* harmony export */   getElement: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getElement),
 /* harmony export */   getParents: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getParents),
 /* harmony export */   getTransitionDuration: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getTransitionDuration),
 /* harmony export */   hasScrollbar: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.hasScrollbar),
 /* harmony export */   isElement: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isElement),
 /* harmony export */   isRTL: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isRTL),
+/* harmony export */   noop: () => (/* binding */ noop),
 /* harmony export */   paramsCreate: () => (/* reexport safe */ _params__WEBPACK_IMPORTED_MODULE_1__.paramsCreate),
 /* harmony export */   paramsUpdate: () => (/* reexport safe */ _params__WEBPACK_IMPORTED_MODULE_1__.paramsUpdate),
 /* harmony export */   parseData: () => (/* reexport safe */ _params__WEBPACK_IMPORTED_MODULE_1__.parseData),
@@ -285,6 +314,7 @@ const camelCase = str => {
     return isFirstPart ? part.toLowerCase() : capitalizedPart;
   }).join('');
 };
+const noop = () => {};
 
 // Exports
 
@@ -513,9 +543,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers */ "./src/js/frontend/helpers/index.js");
-
-
 /**
  * --------------------------------------------------------------------------
  * Plugin Component
@@ -638,6 +665,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
+  const {
+    applyFilters
+  } = wp.hooks;
   class Config {
     // Getters
     static get Default() {
@@ -656,7 +686,7 @@ __webpack_require__.r(__webpack_exports__);
       return config;
     }
     _configAfterMerge(config) {
-      return config;
+      return applyFilters('wecodeart.config', config, this);
     }
     _mergeConfigObj(config, element) {
       const dataConfig = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isElement)(element) ? (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.parseData)(element.dataset.options) : {}; // try to parse
@@ -957,10 +987,10 @@ function hydrateObj(obj, meta = {}) {
 
 /***/ }),
 
-/***/ "./src/js/frontend/plugins/wecodeart-JSManager.js":
-/*!********************************************************!*\
-  !*** ./src/js/frontend/plugins/wecodeart-JSManager.js ***!
-  \********************************************************/
+/***/ "./src/js/frontend/plugins/wecodeart-Scripts.js":
+/*!******************************************************!*\
+  !*** ./src/js/frontend/plugins/wecodeart-Scripts.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -979,7 +1009,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
-  class JSManager {
+  class Scripts {
     /**
      * Generic constructor 
      * @constructor
@@ -1001,6 +1031,7 @@ __webpack_require__.r(__webpack_exports__);
       this.doAction = doAction;
       this.applyFilters = applyFilters;
       this.extendedR = Object.keys(routes).filter(k => routes[k]?.extends && routes[k].extends instanceof Array);
+      this.loadEvents();
     }
 
     /**
@@ -1079,7 +1110,7 @@ __webpack_require__.r(__webpack_exports__);
    * @static
    * @memberof JSManager
    */
-  wecodeart.JSM = JSManager;
+  wecodeart.Scripts = Scripts;
 }).apply(undefined, [window.wecodeart]));
 
 /***/ }),
@@ -1243,7 +1274,7 @@ const DefaultContentType = {
         templateElement.remove();
         return;
       }
-      if (typeof content === 'object' && typeof content.nodeType !== 'undefined') {
+      if ((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isElement)(content)) {
         this._putElementInTemplate(content, templateElement);
         return;
       }
@@ -1732,7 +1763,7 @@ var __webpack_exports__ = {};
   !*** ./src/js/frontend/index.js ***!
   \**********************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _plugins_wecodeart_JSManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/wecodeart-JSManager */ "./src/js/frontend/plugins/wecodeart-JSManager.js");
+/* harmony import */ var _plugins_wecodeart_Scripts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/wecodeart-Scripts */ "./src/js/frontend/plugins/wecodeart-Scripts.js");
 /* harmony import */ var _plugins_wecodeart_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./plugins/wecodeart-Events */ "./src/js/frontend/plugins/wecodeart-Events.js");
 /* harmony import */ var _plugins_wecodeart_Data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/wecodeart-Data */ "./src/js/frontend/plugins/wecodeart-Data.js");
 /* harmony import */ var _plugins_wecodeart_Config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/wecodeart-Config */ "./src/js/frontend/plugins/wecodeart-Config.js");
@@ -1777,11 +1808,14 @@ function filterLog(route, func, args) {
    * @since 3.6
    */
   wecodeart.fn = {
+    noop: _helpers__WEBPACK_IMPORTED_MODULE_7__.noop,
+    toType: _helpers__WEBPACK_IMPORTED_MODULE_7__.toType,
     isRTL: _helpers__WEBPACK_IMPORTED_MODULE_7__.isRTL,
     isElement: _helpers__WEBPACK_IMPORTED_MODULE_7__.isElement,
     getElement: _helpers__WEBPACK_IMPORTED_MODULE_7__.getElement,
     getParents: _helpers__WEBPACK_IMPORTED_MODULE_7__.getParents,
     sanitizeHtml: _helpers__WEBPACK_IMPORTED_MODULE_7__.sanitizeHtml,
+    findShadowRoot: _helpers__WEBPACK_IMPORTED_MODULE_7__.findShadowRoot,
     hasScrollbar: _helpers__WEBPACK_IMPORTED_MODULE_7__.hasScrollbar,
     reflow: _helpers__WEBPACK_IMPORTED_MODULE_7__.reflow,
     camelCase: _helpers__WEBPACK_IMPORTED_MODULE_7__.camelCase,

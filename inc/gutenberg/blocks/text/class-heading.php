@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
  * @version		6.0.0
  */
@@ -100,10 +100,10 @@ class Heading extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			:where(h1,h2,h3,h4,h5,h6).has-background {
 				padding: .125em .25em;
 			}
-		";
+		CSS;
 	}
 }

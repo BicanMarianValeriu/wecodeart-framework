@@ -7,9 +7,9 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support/Assets/Asset
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.4.5
- * @version		5.4.5
+ * @version		6.3.7
  */ 
 
 namespace WeCodeArt\Support\Assets;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Config\Interfaces\Configuration;
 use WeCodeArt\Config\Exceptions\FileNotFoundException;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Framework Assets
@@ -52,10 +53,13 @@ class Asset {
      *
      * @return string
      */
-    public function get_uri() {
-        if ( $this->file_exists( $file = $this->get_public_path() ) ) {
-            return $this->get_public_uri();
+    public function get_uri(): string {
+        $file = $this->get_public_path();
+
+        if ( $this->file_exists( $file ) ) {
+            return esc_url( $this->get_public_uri() );
         }
+
         throw new FileNotFoundException( sprintf( 'Asset file [%s] cannot be located.', $file ) );
 	}
 	
@@ -64,10 +68,13 @@ class Asset {
      *
      * @return string
      */
-    public function get_path() {
-        if ( $this->file_exists( $file = $this->get_public_path() ) ) {
-            return $file;
+    public function get_path(): string {
+        $file = $this->get_public_path();
+
+        if ( $this->file_exists( $file ) ) {
+            return wp_normalize_path( $file );
         }
+    
         throw new FileNotFoundException( sprintf( 'Asset file [%s] cannot be located.', $file ) );
 	}
 	
@@ -76,9 +83,8 @@ class Asset {
      *
      * @return string
      */
-    public function get_public_uri() {
-        $uri = $this->config['paths']['uri'];
-        return $uri . '/' . $this->get_relative_path();
+    public function get_public_uri(): string {
+        return $this->config['paths']['uri'] . '/' . $this->get_relative_path();
 	}
 
     /**
@@ -86,9 +92,8 @@ class Asset {
      *
      * @return string
      */
-    public function get_public_path() {
-        $directory = $this->config['paths']['directory'];
-        return $directory . '/' . $this->get_relative_path();
+    public function get_public_path(): string {
+        return $this->config['paths']['directory'] . '/' . $this->get_relative_path();
 	}
 	
     /**
@@ -96,9 +101,8 @@ class Asset {
      *
      * @return string
      */
-    public function get_relative_path() {
-        $public = $this->config['directories']['assets'];
-        return $public . '/' . $this->file;
+    public function get_relative_path(): string {
+        return $this->config['directories']['assets'] . '/' . $this->get_file();
 	}
 	
     /**
@@ -108,7 +112,7 @@ class Asset {
      *
      * @return boolean
      */
-    public function file_exists( $file ) {
+    public function file_exists( $file ): bool {
         return file_exists( $file );
 	}
 	
@@ -117,19 +121,20 @@ class Asset {
      *
      * @return string
      */
-    public function get_file() {
+    public function get_file(): string {
         return $this->file;
 	}
 	
     /**
      * Sets the Asset file.
      *
-     * @param string $file the file
+     * @param   string $file the file
      *
-     * @return self
+     * @return  self
      */
-    public function set_file( $file ) {
+    public function set_file( string $file ) {
         $this->file = $file;
+
         return $this;
     }
 }

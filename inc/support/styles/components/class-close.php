@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Styles\Components
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.5
  * @version		6.2.5
  */
@@ -28,11 +28,13 @@ class Close extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		$symbol	= encode_svg_data( join( '', [
-			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">',
-				'<path d="M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z"/>',
-			'</svg>'
-		] ) );
+		$symbol = <<<HTML
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+				<path d="M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z"/>
+			</svg>
+		HTML;
+
+		$symbol	= encode_svg_data( $symbol );
 
 		return "
 			/* Close */

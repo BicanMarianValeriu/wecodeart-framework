@@ -7,19 +7,19 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Styles
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.3.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Admin\Request;
-use WeCodeArt\Conditional\Traits\No_Conditionals;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Traits\No_Conditionals;
+use WeCodeArt\Config\Interfaces\Integration;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -640,39 +640,6 @@ final class Styles implements Integration {
 	}
 
 	/**
-	 * Get Duotone.
-	 *
-     * @param   array $preset
-     *
-	 * @return  array
-	 */
-	public static function get_duotone( array $preset = [] ): array {
-		_deprecated_function( __FUNCTION__, '6.3.5' );
-
-        $values = [
-			'r' => [],
-			'g' => [],
-			'b' => [],
-			'a' => [],
-		];
-	
-		if ( ! isset( $preset['colors'] ) || ! is_array( $preset['colors'] ) ) {
-			$preset['colors'] = [];
-		}
-	
-		foreach ( $preset['colors'] as $color_str ) {
-			$color = self::hex_to_rgb( $color_str, 1, true );
-	
-			$values['r'][] = $color['r'] / 255;
-			$values['g'][] = $color['g'] / 255;
-			$values['b'][] = $color['b'] / 255;
-			$values['a'][] = $color['a'];
-		}
-
-		return $values;
-	}
-
-	/**
 	 * Formats custom properties for unsupported blocks.
 	 *
 	 * @param 	string 	$property Custom property value to format.
@@ -685,5 +652,46 @@ final class Styles implements Integration {
 		}
 
 		return str_replace( [ 'var:', '|' ], [ 'var(--wp--', '--' ], $property . ')' );
+	}
+
+	/**
+	 * Adds shorthand CSS properties.
+	 *
+	 * @param array  $styles   Existing CSS array.
+	 *
+	 * @return array
+	 */
+	public static function shorthand_properties( array $styles = [] ): array {
+		if ( empty( $styles ) ) {
+			return $styles;
+		}
+
+		if( ! isset( $styles['spacing'] ) ) {
+			return $styles;
+		}
+
+		foreach( [ 'margin', 'padding' ] as $property ) {
+			$has_top    = isset( $styles['spacing'][$property]['top'] );
+			$has_right  = isset( $styles['spacing'][$property]['right'] );
+			$has_bottom = isset( $styles['spacing'][$property]['bottom'] );
+			$has_left   = isset( $styles['spacing'][$property]['left'] );
+	
+			if ( ! $has_top && ! $has_right && ! $has_bottom && ! $has_left ) {
+				continue;
+			}
+	
+			$values = array_filter( [
+				'top' 		=> self::format_variable( $styles['spacing'][$property]['top'] ?? 0 ),
+				'right' 	=> self::format_variable( $styles['spacing'][$property]['right'] ?? 0 ),
+				'bottom' 	=> self::format_variable( $styles['spacing'][$property]['bottom'] ?? 0 ),
+				'left' 		=> self::format_variable( $styles['spacing'][$property]['left'] ?? 0 ),
+			] );
+			
+			if( empty( $values ) ) {
+				continue;
+			}
+		}
+
+		return $styles;
 	}
 }

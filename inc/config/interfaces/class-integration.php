@@ -6,17 +6,15 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage  Integration Interface
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @subpackage 	WeCodeArt/Config/Interfaces
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.2
- * @version		5.0.0
+ * @version		6.3.7
  */
 
-namespace WeCodeArt;
+namespace WeCodeArt\Config\Interfaces;
 
 defined( 'ABSPATH' ) || exit();
-
-use WeCodeArt\Loadable;
 
 /**
  * An interface for registering integrations with WordPress/WeCodeArt

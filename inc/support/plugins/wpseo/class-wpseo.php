@@ -7,20 +7,20 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Yoast SEO
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		3.5
- * @version		6.3.3
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Plugins;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Support\Plugins;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Interfaces\Integration;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -36,7 +36,7 @@ class WPSeo implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals(): array {
-		wecodeart( 'conditionals' )->set( 'is_yoast_active', WPSeo\Condition::class );
+		wecodeart( 'ifso' )->set( 'is_yoast_active', WPSeo\Condition::class );
 		
 		return [ 'is_yoast_active' ];
 	}

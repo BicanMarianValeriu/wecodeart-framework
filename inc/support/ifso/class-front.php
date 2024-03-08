@@ -7,21 +7,21 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Conditional\is_front_page
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		4.0
- * @version		4.0.1
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Conditional;
+namespace WeCodeArt\Support\IfSo;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
+use WeCodeArt\Config\Interfaces\Conditional;
 
 /**
  * Conditional that is only met when in the front page.
  */
-class Front implements ConditionalInterface {
+class Front implements Conditional {
 
 	/**
 	 * @inheritdoc

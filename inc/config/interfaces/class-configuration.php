@@ -6,8 +6,8 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework.
- * @subpackage  WeCodeArt/Config/Interfaces/Config
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @subpackage  WeCodeArt/Config/Interfaces
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.9.5
  * @version		5.4.5
  */

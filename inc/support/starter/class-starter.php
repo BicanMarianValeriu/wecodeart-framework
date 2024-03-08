@@ -7,19 +7,19 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  Support\Starter
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Interfaces\Integration;
 
 /**
  * Class Starter
@@ -39,7 +39,7 @@ class Starter implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->set( [
+		wecodeart( 'ifso' )->set( [
 			'is_fresh_site' => Starter\Condition::class,
 		] );
 		

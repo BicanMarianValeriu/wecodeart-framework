@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Styles\Components
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
  * @version		6.2.5
  */
@@ -28,11 +28,13 @@ class Toggler extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		$symbol	= encode_svg_data( join( '', [
-			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">',
-				'<path stroke="black" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/>',
-			'</svg>'
-		] ) );
+		$symbol = <<<HTML
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+				<path stroke="black" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/>
+			</svg>
+		HTML;
+
+		$symbol	= encode_svg_data( $symbol );
 
 		return "
 			/* Toggler */

@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Frontend
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
  * @version		6.3.3
  */
@@ -120,6 +120,8 @@ class Processor {
 	private function process_style(): void {
 		// Process style attribute.
 		if( $style_attr = get_prop( $this->attrs, [ 'style' ] ) ) {
+			$style_attr = wecodeart( 'styles' )::shorthand_properties( $style_attr );
+
 			// Process block attributes.
 			wp_style_engine_get_styles( $style_attr, [
 				'selector' 	=> $this->get_selector(),
@@ -129,8 +131,6 @@ class Processor {
 
 		// Process custom style attribute.
 		if ( $style_custom = get_prop( $this->attrs, 'customStyle' ) ) {
-			// Remove tags, just in case.
-			$custom_style 	= wp_strip_all_tags( $style_custom );
 			// Update selector with class id.
 			$custom_style 	= str_replace( 'selector', $this->get_selector(), $custom_style );
 			// Convert the string to array (no media queries atm).

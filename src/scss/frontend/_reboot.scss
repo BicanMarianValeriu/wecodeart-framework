@@ -79,6 +79,10 @@ mark {
 	padding: .2rem .5rem;
 	border-radius: .25rem;
 	background-color: var(--wp--gray-100);
+
+	&[style*="background-color:rgba"] {
+		padding: 0;
+	}
 }
 
 // Sub and Sup
@@ -152,6 +156,16 @@ kbd kbd {
 	padding: 0;
 	font-size: 1em;
 	font-weight: normal;
+}
+
+// Description lists
+dt {
+	font-weight: 700;
+}
+
+dd {
+	margin-bottom: .5rem;
+	margin-left: 0;
 }
 
 // Address

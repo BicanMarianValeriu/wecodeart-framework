@@ -7,25 +7,29 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Conditional
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		4.0
- * @version		5.5.5
+ * @version		6.3.7
  */
 
-namespace WeCodeArt;
+namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit();
 
+use WeCodeArt\Config\Interfaces\Integration;
 use WeCodeArt\Config\Interfaces\Configuration;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Traits\No_Conditionals;
 
 /**
  * Conditional.
  *
  * @author     Bican Marian Valeriu <marianvaleriubican@gmail.com>
  */
-class Conditional implements Configuration {
+class IfSo implements Configuration, Integration {
 
     use Singleton;
+    use No_Conditionals;
 
     /**
      * All of the conditional items.
@@ -35,20 +39,15 @@ class Conditional implements Configuration {
     protected $items = [];
 
     /**
-     * Create a new conditional repository.
-     *
-     * @param  array  $items
-     *
-     * @return void
-     */
-    public function init() {
-        foreach( apply_filters( 'wecodeart/filter/conditionals', [
-			'is_theme_admin'    => Conditional\Settings::class,
-			'is_front_page'     => Conditional\Front::class,
-            'is_dev_mode'       => Conditional\Debug::class,
-		] ) as $key => $condition ) {
-            $this->register( $key, $condition );
-        }
+	 * Hooks
+	 *
+	 * @return  void
+	 */
+	public function register_hooks() {
+        $this->register( 'is_theme_admin',  IfSo\Settings::class );
+        $this->register( 'is_front_page',   IfSo\Front::class );
+        $this->register( 'is_debug_mode',   IfSo\Debug::class );
+        $this->register( 'is_dev_mode',     IfSo\Debug::class );
     }
 	
     /**

@@ -7,16 +7,16 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Header Class
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		6.3.1
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Singleton;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_json_color;
 use function WeCodeArt\Functions\get_lightness_limit;

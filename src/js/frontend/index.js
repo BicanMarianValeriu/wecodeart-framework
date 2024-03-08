@@ -1,5 +1,5 @@
 // WeCodeArt
-import './plugins/wecodeart-JSManager';
+import './plugins/wecodeart-Scripts';
 import './plugins/wecodeart-Events';
 import './plugins/wecodeart-Data';
 import './plugins/wecodeart-Config';
@@ -11,12 +11,15 @@ import loadJs from 'loadjs';
 
 // Utils
 import {
+	noop,
+	toType,
 	isRTL,
 	isElement,
 	getElement,
 	getParents,
 	getTransitionDuration,
 	sanitizeHtml,
+	findShadowRoot,
 	hasScrollbar,
 	reflow,
 	paramsCreate,
@@ -49,11 +52,14 @@ function filterLog(route, func, args) {
 	 * @since 3.6
 	 */
 	wecodeart.fn = {
+		noop,
+		toType,
 		isRTL,
 		isElement,
 		getElement,
 		getParents,
 		sanitizeHtml,
+		findShadowRoot,
 		hasScrollbar,
 		reflow,
 		camelCase,

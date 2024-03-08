@@ -7,17 +7,15 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Frontend
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.3
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Support\Styles\Property\Focal;
-use WeCodeArt\Support\Styles\Property\Background;
 use WeCodeArt\Gutenberg\Modules\Styles;
 use WeCodeArt\Gutenberg\Modules\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
@@ -48,7 +46,7 @@ class Cover extends Processor {
 
 		// if( get_prop( $this->attrs, 'useFeaturedImage' ) ) {
 		// 	$placeholder	= get_prop( wecodeart_config( 'placeholder', [] ), [ 'src' ], '' );
-		// 	$background		= ( new Background( get_post_thumbnail_id() ?: $placeholder ) )->get_value();
+		// 	$background		= wecodeart( 'styles' )->Sanitize::background( get_post_thumbnail_id() ?: $placeholder );
 
 		// 	// Temporary as safecss_filter_attr does not allow data urls.
 		// 	$handle = 'wp-style-engine-' . Styles::CONTEXT;
@@ -75,7 +73,7 @@ class Cover extends Processor {
 		// // Focal Selector
 		// if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
 		// 	$this->add_declarations( [
-		// 		'object-position' => ( new Focal( $value ) )->get_value()
+		// 		'object-position' => wecodeart( 'styles' )->Sanitize::focal( $value );
 		// 	], join( ', ', [
 		// 		$this->get_selector( '>.wp-block-cover__image-background' ),
 		// 		$this->get_selector( '>.wp-block-cover__video-background' )

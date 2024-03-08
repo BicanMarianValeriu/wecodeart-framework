@@ -7,9 +7,9 @@
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  Setup
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.9.5
- * @version		6.1.2
+ * @version		6.3.7
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -34,17 +34,6 @@ wecodeart()->bind( 'JSON', function () {
  */
 wecodeart()->bind( 'config', function () use ( $config ) {
     return new WeCodeArt\Config( $config );
-} );
-
-/**
- * Bind Conditionals.
- *
- * @since   4.0.1
- *
- * @return  void
- */
-wecodeart()->bind( 'conditionals', function () {
-    return WeCodeArt\Conditional::get_instance();
 } );
 
 /**
@@ -78,10 +67,6 @@ wecodeart()->bind( 'blocks', function () {
  */
 wecodeart()->bind( 'support', function () {
     return WeCodeArt\Support::get_instance();
-} );
-
-wecodeart()->bind( 'integrations', function () {
-    return wecodeart( 'support' );
 } );
 
 /**
@@ -126,6 +111,17 @@ wecodeart()->bind( 'styles', function () {
  */
 wecodeart()->bind( 'files', function () {
     return wecodeart( 'support' )->get( 'files' )::get_instance();
+} );
+
+/**
+ * Bind Conditionals.
+ *
+ * @since   6.3.7
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'ifso', function () {
+    return wecodeart( 'support' )->get( 'ifso' )::get_instance();
 } );
 
 /**
@@ -242,3 +238,7 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
     </html>
     <?php
 } );
+
+// Aliases/deprecated
+wecodeart()->bind( 'integrations', fn() => wecodeart( 'support' ) );
+wecodeart()->bind( 'conditionals', fn() => wecodeart( 'ifso' ) );

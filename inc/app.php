@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  App Config
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		unknown
  * @version		unknown
  */
@@ -88,7 +88,7 @@ return [
     |
     */
     'gutenberg' => [
-        'editor'    => true, // To do - remove FSE edit screen (developer/client only)
+        'editor'    => true, // Disable FSE Editor for non-admins
         'styles'    => true, // Convert style attribute CSS to inline CSS
         'classes'   => true, // Add CSS utilities like margin/padding etc
         'patterns'  => true, // Patterns folder will also register plain HTML files
@@ -117,10 +117,6 @@ return [
     'fonts' => [
         'system' => [],
         'google' => [
-            'open-sans' => [
-                'family' 	=> 'Open Sans',
-                'variants' 	=> [ 300, 'regular', 500, 700 ]
-            ],
             'shadows'   => [
                 'family' 	=> 'Shadows Into Light',
                 'variants' 	=> [ 'regular' ]
@@ -208,14 +204,7 @@ return [
                 'description'   => esc_html__( 'A simple starter theme with webpack configuration. Ideal for developers seeking a streamlined starting point.', 'wecodeart' ),
                 'source'        => 'github',
                 'more'          => 'https://github.com/BicanMarianValeriu/wecodeart-developer/',
-            ],
-            [
-                'slug'          => 'BicanMarianValeriu/wecodeart-honey',
-                'title'         => esc_html__( 'WeCodeArt Honey', 'wecodeart' ),
-                'description'   => esc_html__( 'A sleek WooCommerce block theme with webpack configuration. No bloat - perfect starting point for your store.', 'wecodeart' ),
-                'source'        => 'github',
-                'more'          => 'https://github.com/BicanMarianValeriu/wecodeart-honey/',
-            ],
+            ]
         ],
         'plugins' => [],
     ],

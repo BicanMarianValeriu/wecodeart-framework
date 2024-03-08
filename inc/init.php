@@ -7,22 +7,22 @@
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  Init
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		1.0
- * @version		6.1.2
+ * @version		6.3.7
  */
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
 use WeCodeArt\Core;
 use WeCodeArt\Admin;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Config;
+use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Config\Exceptions\BindingResolutionException;
 
 // Include the functions and autoloader.
-require_once( get_parent_theme_file_path( '/inc/class-autoloader.php' ) );
+require_once( get_parent_theme_file_path( '/inc/autoloader.php' ) );
 require_once( get_parent_theme_file_path( '/inc/functions.php' ) );
 new WeCodeArt\Autoloader();
 
@@ -270,7 +270,7 @@ function wecodeart_template( $file, $data = [], $echo = true ) {
  * Gets asset file from public directory.
  *
  * @since	5.0.0
- * @version	5.4.5
+ * @version	6.3.7
  *
  * @param  string $type 	Type of the asset file.
  * @param  string $name 	Name of the asset file.
@@ -286,7 +286,7 @@ function wecodeart_asset( string $type, string $name ) {
 	$file_path .= '/' . strtolower( $type ) . '/';
 	$file_path .= wecodeart_if( 'is_dev_mode' ) ? $name . '.' . $type :  $name . '.min.' . $type;
 
-    return wecodeart( 'assets' )->Asset->set_file( $file_path )->get_uri();
+    return wecodeart( 'assets' )->Asset->set_file( $file_path );
 }
 
 /**
@@ -312,14 +312,16 @@ function wecodeart_option( $key, $default = false, $setting = null, $use_cache =
  * Check if condition is met.
  *
  * @since	4.0
- * @version	5.0.0
+ * @version	6.3.7
  *
  * @param   string|array    $parameters
  *
  * @return  mixed|null|bool
  */
 function wecodeart_if( $parameters, $relation = 'AND' ) {
-    if( empty( $parameters ) ) return true;
+    if( empty( $parameters ) ) {
+        return true;
+    }
 
     $return = false;
 
@@ -330,8 +332,11 @@ function wecodeart_if( $parameters, $relation = 'AND' ) {
     $one_met = true;
     
     foreach ( (array) $parameters as $conditional ) {
-        if ( ! wecodeart( 'conditionals' )->has( $conditional ) ) return null;
-        $class  = wecodeart( 'conditionals' )->get( $conditional );
+        if ( ! wecodeart( 'ifso' )->has( $conditional ) ) {
+            return null;
+        }
+
+        $class  = wecodeart( 'ifso' )->get( $conditional );
         $is_met = ( new $class )->is_met();
         
         if( $return === false && ! $is_met ) {
@@ -363,7 +368,8 @@ do_action( 'wecodeart/setup/before', $config );
 /**
  * Theme Setup
  */
-require_once __DIR__ . '/setup.php';
+require_once( get_parent_theme_file_path( '/inc/alias.php' ) );
+require_once( get_parent_theme_file_path( '/inc/setup.php' ) );
 
 /**
  * After Setup Hook

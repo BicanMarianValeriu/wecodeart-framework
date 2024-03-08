@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Styles\Components
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.8
- * @version		6.2.8
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -35,26 +35,29 @@ class Parallax extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		$inline = '
+		return <<<CSS
 			.has-parallax {
-				--wp--animation: parallaxBackground;
-				--wp--easing: linear;
+				--wp--animation: __backgroundPosition;
+				--wp--easing: ease-in-out;
 				--wp--range: 0vh, 100vh;
 				--wp--offset: -250px;
 				animation-name: var(--wp--animation);
 				animation-duration: 1ms;
 				animation-timing-function: var(--wp--easing);
-				animation-timeline: scroll();
+				animation-timeline: view();
 				animation-range: var(--wp--range);
 			}
 			
-			@keyframes parallaxBackground {
+			@keyframes __backgroundPosition {
 				to {
 					background-position: 50% calc(50% + var(--wp--offset));
 				}
 			}
-        ';
-
-		return $inline;
+			@keyframes __translate3d {
+				to {
+					transform: translate3d(0,var(--wp--offset),0);
+				}
+			}
+		CSS;
 	}
 }

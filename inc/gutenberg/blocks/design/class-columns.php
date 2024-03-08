@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.2.8
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -46,12 +46,19 @@ class Columns extends Dynamic {
 
 	/**
 	 * Block args.
+	 * 
+	 * @param	array $current	Existing register args
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args(): array {
+	public function block_type_args( $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback' 	=> [ $this, 'render' ],
+			'supports'			=> wp_parse_args( [
+				'shadow'	=> true, 
+			], $supports )
 		];
 	}
 
@@ -120,6 +127,7 @@ class Columns extends Dynamic {
 			.wp-block-columns {
 				display: flex;
 				flex-wrap: wrap;
+				align-items: initial!important;
 			}
 			.wp-block-columns.grid {
 				--wp--style--block-gap: var(--wp--custom--gutter);

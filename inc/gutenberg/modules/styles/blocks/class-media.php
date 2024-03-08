@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg CSS Frontend
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.1
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
@@ -17,8 +17,6 @@ namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Support\Styles\Property\Focal;
-use WeCodeArt\Support\Styles\Property\Background;
 use WeCodeArt\Gutenberg\Modules\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_placeholder_source;
@@ -48,23 +46,23 @@ class Media extends Processor {
 			if( get_prop( $this->attrs, 'imageFill' ) ) {
 				if ( $value = get_prop( $this->attrs, 'mediaId' ) ) {
 					if( $media = wp_get_attachment_image_url( $value, get_prop( $this->attrs, 'mediaSizeSlug', 'full' ) ) ) {
-						$declarations['background-image'] = ( new Background( $value ) )->get_value();
+						$declarations['background-image'] = wecodeart( 'styles' )->Sanitize::background( $value );
 						// Fallback to WP.org patterns (however some of them have wp.org page url instead of a media file)
 					} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
-						$declarations['background-image'] = ( new Background( $value ) )->get_value();
+						$declarations['background-image'] = wecodeart( 'styles' )->Sanitize::background( $value );
 					}
 				} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
-					$declarations['background-image'] = ( new Background( $value ) )->get_value();
+					$declarations['background-image'] = wecodeart( 'styles' )->Sanitize::background( $value );
 				}
 		
 				if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
-					$declarations['background-position'] = ( new Focal( $value ) )->get_value();
+					$declarations['background-position'] = wecodeart( 'styles' )->Sanitize::background( $value );
 				}
 			}
 		}
 		
 		if( get_prop( $this->attrs, 'imageFill' ) && ! get_prop( $this->attrs, 'mediaLink' ) ) {
-			$declarations['background-image'] = ( new Background( get_placeholder_source( false ) ) )->get_value();
+			$declarations['background-image'] = wecodeart( 'styles' )->Sanitize::background( get_placeholder_source( false ) );
 		}
 
 		if( ! empty( $declarations ) ) {

@@ -7,16 +7,16 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Core\Content
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		3.5
- * @version		5.4.4
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Core;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Singleton;
+use WeCodeArt\Config\Traits\Singleton;
 use function WeCodeArt\Functions\get_prop;
 
 /**

@@ -6,7 +6,7 @@
  * @version 1.0.0
  * --------------------------------------------------------------------------
  */
-import { sanitizeHtml, DefaultAllowlist, execute } from '../helpers';
+import { sanitizeHtml, DefaultAllowlist, execute, isElement } from '../helpers';
 
 const NAME = 'TemplateFactory';
 
@@ -41,7 +41,7 @@ export default (function (wecodeart) {
 
 	class Template extends Config {
 		constructor(config) {
-			super()
+			super();
 			this._config = this._getConfig(config);
 		}
 
@@ -166,7 +166,7 @@ export default (function (wecodeart) {
 				return;
 			}
 
-			if (typeof content === 'object' && typeof content.nodeType !== 'undefined') {
+			if (isElement(content)) {
 				this._putElementInTemplate(content, templateElement);
 				return
 			}

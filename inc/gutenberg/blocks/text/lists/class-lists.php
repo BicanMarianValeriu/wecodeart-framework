@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.2.9
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -215,25 +215,19 @@ class Lists extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles(): string {
-		return "
-			/* Reset */
+		return <<<CSS
 			.wp-block-list {
 				padding-left: 1.1em;
 			}
 			.wp-block-list .wp-block-list {
 				margin-bottom: 0;
 			}
-			dt {
-				font-weight: 700;
-			}
-			dd {
-				margin-bottom: .5rem;
-				margin-left: 0;
-			}
-			/* Styles */
 			.wp-block-list[class*='is-style-icon--'] {
 				list-style: none;
 				padding-left: 1.5em;
+			}
+			.wp-block-list[class*='is-style-icon--'] li {
+				position: relative;
 			}
 			.wp-block-list[class*='is-style-icon--'] li::before {
 				content: '';
@@ -246,6 +240,6 @@ class Lists extends Dynamic {
 				margin-left: -1.75em;
 				background: var(--wp--marker--color, currentColor);
 			}
-		";
+		CSS;
 	}
 }

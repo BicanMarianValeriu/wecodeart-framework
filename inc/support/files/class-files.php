@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\FileSystem
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
  * @version		6.1.2
  */
@@ -18,9 +18,9 @@ defined( 'ABSPATH' ) || exit;
 
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
-use WeCodeArt\Conditional\Traits\No_Conditionals;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Traits\No_Conditionals;
+use WeCodeArt\Config\Interfaces\Integration;
 
 /**
  * Manages the Theme Uploads.

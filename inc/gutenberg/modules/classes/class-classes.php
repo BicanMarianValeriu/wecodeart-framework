@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.5
  * @version		6.3.5
  */
@@ -44,7 +44,7 @@ class Classes implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->set( 'with_block_classes', Classes\Condition::class );
+		wecodeart( 'ifso' )->set( 'with_block_classes', Classes\Condition::class );
 
 		return [ 'with_block_classes' ];
 	}

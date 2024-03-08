@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -47,7 +47,7 @@ class Pullquote extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-pullquote {
 				padding: 3rem 0;
 				text-align: center;
@@ -64,6 +64,6 @@ class Pullquote extends Dynamic {
 				margin-bottom: 0;
 				font-size: 1.5rem;
 			}
-		";
+		CSS;
 	}
 }

@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.0
- * @version		6.2.0
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\dom_get_element;
 
 /**
  * Gutenberg Heading block.
@@ -44,45 +45,68 @@ class Details extends Dynamic {
 	/**
 	 * Init.
 	 */
-	public function init() { 
-		// \add_filter( 'pre_render_block', [ $this, 'collect_questions' ], 20, 2 );
+	public function init() {
+		if( self::has_seo_support() === true ) {
+			\add_filter( 'render_block', [ $this, 'collect_questions' ], 20, 2 );
+		}
+	}
+
+	/**
+	 * Check if has SEO support
+	 *
+	 * @return boolean
+	 */
+	public static function has_seo_support(): bool {
+		if( wecodeart_if( 'is_rankmath_active' ) || wecodeart_if( 'is_yoast_active' ) ) {
+			return \apply_filters( 'wecodeart/filter/gutenberg/block/details/seo', false );
+		}
+
+		return false;
 	}
 
 	/**
 	 * Collection questions and generate schema.
 	 *
-	 * @param	string|null $pre_render   The pre-rendered content. Default null.
+	 * @param	string|null $content   The pre-rendered content. Default null.
 	 * @param 	array       $parsed_block The block being rendered.
 	 */
-	public function collect_questions( $pre_render, $parsed_block ) {
+	public function collect_questions( $content, $parsed_block ) {
 		if ( 'core/details' !== get_prop( $parsed_block, [ 'blockName' ] ) ) {
-			return;
+			return $content;
 		}
 
-		if( $summary = get_prop( $parsed_block, [ 'attrs', 'summary' ] ) ) {
-			$text = self::get_question_content( get_prop( $parsed_block, [ 'innerBlocks' ], [] ) );
+		$dom = $this->dom( $content );
 
-			// Only for pages.
-			\add_filter( 'wpseo_schema_webpage', static function( $data ) use ( $summary, $text ) {
-				$data['@type'] = [ 'WebPage', 'FAQPage' ];
+		$summary	= dom_get_element( 'summary', $dom, 0 );
+		$summary	= is_object( $summary ) ? $summary->nodeValue : '';
+		$text 		= self::get_question_content( get_prop( $parsed_block, [ 'innerBlocks' ], [] ) );
+
+		// Only for pages.
+		\add_filter( 'wpseo_schema_webpage', static function( $data ) use ( $summary, $text ) {
+			$data['@type'] = [ 'WebPage', 'FAQPage' ];
+			if( ! isset( $data['mainEntity'] ) ) {
 				$data['mainEntity'] = [];
-				$data['mainEntity'][] = self::get_question_json( $summary, $text );
+			}
+			$data['mainEntity'][] = self::get_question_json( $summary, $text );
 
+			return $data;
+		} );
+		
+		\add_filter( 'rank_math/json_ld', static function( $data ) use ( $summary, $text ) {
+			if ( ! isset( $data['WebPage'] ) ) {
 				return $data;
-			} );
-			
-			\add_filter( 'rank_math/json_ld', static function( $data ) use ( $summary, $text ) {
-				if ( ! isset( $data['WebPage'] ) ) {
-					return $data;
-				}
+			}
 
-				$data['WebPage']['@type'] = [ 'WebPage', 'FAQPage' ];
+			$data['WebPage']['@type'] = [ 'WebPage', 'FAQPage' ];
+			if( ! isset( $data['WebPage']['mainEntity'] ) ) {
 				$data['WebPage']['mainEntity'] = [];
-				$data['WebPage']['mainEntity'][] = self::get_question_json( $summary, $text );
+			}
+			$data['WebPage']['mainEntity'][] = self::get_question_json( $summary, $text );
 
-				return $data;
-			} );
-		}
+			return $data;
+		} );
+
+		return $content;
 	}
 
 	/**
@@ -121,7 +145,7 @@ class Details extends Dynamic {
 			] );
 		}
 
-		return preg_replace( '/(<[^>]+) style=".*?"/i', '$1', $content );
+		return trim( preg_replace( '/(<[^>]+) style=".*?"/i', '$1', $content ) );
 	}
 
 	/**
@@ -150,7 +174,7 @@ class Details extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles(): string {
-		return '
+		return <<<CSS
 			.wp-block-details {
 				--wp--details--padding-y: 1rem;
 				--wp--details--padding-x: 2rem;
@@ -208,6 +232,6 @@ class Details extends Dynamic {
 				display: none;
 				content: none;
 			}
-		';
+		CSS;
 	}
 }

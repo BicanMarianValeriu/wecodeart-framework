@@ -7,21 +7,21 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Styles\Property\FontFamily
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
  * @version		5.5.8
  */
 
-namespace WeCodeArt\Support\Styles\Property;
+namespace WeCodeArt\Support\Styles\Sanitize\Property;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Support\Styles;
+use WeCodeArt\Support\Styles\Sanitize\Property;
 
 /**
  * Output for CSS properties.
  */
-class Background extends Styles\Property {
+class Background extends Property {
 	/**
 	 * Modifies the value.
 	 *

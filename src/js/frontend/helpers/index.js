@@ -35,10 +35,12 @@ const camelCase = (str) => {
     }).join('');
 };
 
+const noop = () => { };
+
 // Exports
-export { isElement, getElement, getParents, getTransitionDuration, hasScrollbar, reflow, isRTL } from './dom';
+export { isElement, getElement, getParents, getTransitionDuration, findShadowRoot, reflow, hasScrollbar, isRTL } from './dom';
 export { paramsCreate, paramsUpdate, parseData } from './params';
 export { sanitizeHtml, DefaultAllowlist } from './sanitizer';
 export { execute, executeAfterTransition } from './execute';
 export { default as requireJs } from './requireJs';
-export { camelCase, toType };
+export { camelCase, toType, noop };

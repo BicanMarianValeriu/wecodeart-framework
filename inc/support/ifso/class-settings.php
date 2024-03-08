@@ -6,23 +6,23 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage 	Conditional\Settings
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @subpackage 	Conditional\is_theme_admin
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.0.0
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Conditional;
+namespace WeCodeArt\Support\IfSo;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
+use WeCodeArt\Config\Interfaces\Conditional;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Conditional that is only met when in the admin.
  */
-class Settings implements ConditionalInterface {
+class Settings implements Conditional {
 
 	/**
 	 * @inheritdoc

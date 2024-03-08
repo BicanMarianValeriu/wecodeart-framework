@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg Patterns
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
  * @version		6.0.0
  */
@@ -46,7 +46,7 @@ class Patterns implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals() {
-		wecodeart( 'conditionals' )->set( 'with_block_patterns', Patterns\Condition::class );
+		wecodeart( 'ifso' )->set( 'with_block_patterns', Patterns\Condition::class );
 
 		return [ 'with_block_patterns' ];
 	}

@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg Modules
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.3
  * @version		6.0.0
  */
@@ -52,7 +52,10 @@ class Modules implements Configuration {
 	 */
 	public function load() {
 		array_map( function( $class ) {
-			if ( ! $this->conditionals_are_met( $class ) ) return;
+			if ( ! $this->conditionals_are_met( $class ) ) {
+                return;
+            }
+            
             // Register hooks if we meet all conditions.
 			$class::get_instance()->register_hooks();
 		}, $this->all() );
@@ -67,6 +70,7 @@ class Modules implements Configuration {
 	 */
 	protected function conditionals_are_met( $class ) {
 		$conditionals = $class::get_conditionals();
+
 		return wecodeart_if( $conditionals );
 	}
 

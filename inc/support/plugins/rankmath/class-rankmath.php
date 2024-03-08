@@ -7,20 +7,20 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\RankMath
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.3.3
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Plugins;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Support\Plugins;
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Interfaces\Integration;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -36,7 +36,7 @@ class RankMath implements Integration {
 	 * @return void
 	 */
 	public static function get_conditionals(): array {
-		wecodeart( 'conditionals' )->register( 'is_rankmath_active', RankMath\Condition::class );
+		wecodeart( 'ifso' )->register( 'is_rankmath_active', RankMath\Condition::class );
 		
 		return [ 'is_rankmath_active' ];
 	}
@@ -56,7 +56,9 @@ class RankMath implements Integration {
 	 */
 	public function register_blocks(): void {
 		// Avoid overwriting content in admin.
-		if( is_admin() ) return;
+		if( is_admin() ) {
+			return;
+		}
 
 		// Register RankMath FAQ Overwrite
 		wecodeart( 'blocks' )->register( 'rankmath/faq-block', RankMath\Blocks\FAQ::class );

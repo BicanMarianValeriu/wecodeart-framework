@@ -10,6 +10,8 @@ import { isElement, parseData, toType } from '../helpers';
 
 export default (function (wecodeart) {
 
+	const { applyFilters } = wp.hooks;
+
 	class Config {
 		// Getters
 		static get Default() {
@@ -28,12 +30,12 @@ export default (function (wecodeart) {
 			config = this._mergeConfigObj(config);
 			config = this._configAfterMerge(config);
 			this._typeCheckConfig(config);
-			
+
 			return config;
 		}
-		
+
 		_configAfterMerge(config) {
-			return config;
+			return applyFilters('wecodeart.config', config, this);
 		}
 
 		_mergeConfigObj(config, element) {

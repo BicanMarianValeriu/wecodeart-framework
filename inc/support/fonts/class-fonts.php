@@ -7,18 +7,17 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Fonts
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.7.1
- * @version		6.1.2
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
-use WeCodeArt\Conditional\Traits\No_Conditionals;
+use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Config\Interfaces\Integration;
 
 /**
  * The Fonts object.
@@ -26,7 +25,6 @@ use WeCodeArt\Conditional\Traits\No_Conditionals;
 final class Fonts implements Integration {
 
     use Singleton;
-	use No_Conditionals;
 
 	/**
 	 * The CSS ID + Folder for registered style.
@@ -44,6 +42,19 @@ final class Fonts implements Integration {
 	 * @var	null|object
 	 */
 	public $Google = null;
+
+	/**
+	 * Get Conditionals
+	 *
+	 * @return void
+	 */
+	public static function get_conditionals() {
+		wecodeart( 'ifso' )->set( [
+			'has_wp_fonts' => Fonts\Condition::class,
+		] );
+		
+		return [ 'has_wp_fonts' ];
+	}
 
 	/**
 	 * Init

@@ -6,12 +6,13 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework 
- * @subpackage 	Singleton
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @subpackage 	WeCodeArt\Config\Traits
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.6.2
+ * @version		6.3.7
  */
 
-namespace WeCodeArt;
+namespace WeCodeArt\Config\Traits;
 
 defined( 'ABSPATH' ) || exit();
 
