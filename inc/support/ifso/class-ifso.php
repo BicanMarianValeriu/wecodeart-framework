@@ -74,7 +74,7 @@ class IfSo implements Configuration, Integration {
         $keys = is_array( $key ) ? $key : [ $key => $value ];
 
         foreach ( $keys as $key => $value ) {
-            $this->items[$key] = apply_filters( "wecodeart/conditional/set/{$key}", $value );
+            $this->items[$key] = $value;
         }
     }
 
@@ -102,7 +102,7 @@ class IfSo implements Configuration, Integration {
             return $default;
         }
 
-        return apply_filters( "wecodeart/conditional/get/{$key}", $this->items[$key] );
+        return $this->items[$key];
     }
 
     /**

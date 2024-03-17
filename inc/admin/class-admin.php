@@ -86,9 +86,7 @@ class Admin {
 
 				return rest_ensure_response( $data );
 			},
-			'permission_callback' => function() {
-				return current_user_can( 'manage_options' );
-			},
+			'permission_callback' => static fn() => current_user_can( 'manage_options' ),
 		] );
 		
 		register_rest_route( self::NAMESPACE, '/notifications', [
@@ -114,9 +112,7 @@ class Admin {
 
 				return rest_ensure_response( $data );
 			},
-			'permission_callback' => function() {
-				return current_user_can( 'manage_options' );
-			},
+			'permission_callback' => static fn() => current_user_can( 'manage_options' ),
 		] );
 	}
 

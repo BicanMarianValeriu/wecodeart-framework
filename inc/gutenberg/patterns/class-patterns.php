@@ -9,20 +9,19 @@
  * @subpackage  Gutenberg Patterns
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules;
+namespace WeCodeArt\Gutenberg;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 
 /**
  * Handles Gutenberg Theme Patterns Functionality.
  */
-class Patterns implements Integration {
+class Patterns {
 
 	use Singleton;
 
@@ -41,24 +40,13 @@ class Patterns implements Integration {
 	private $patterns	= [];
 
 	/**
-	 * Get Conditionals
-	 *
-	 * @return void
-	 */
-	public static function get_conditionals() {
-		wecodeart( 'ifso' )->set( 'with_block_patterns', Patterns\Condition::class );
-
-		return [ 'with_block_patterns' ];
-	}
-
-	/**
-	 * Register Hooks
+	 * Init
 	 *
 	 * @since 	5.0.0
 	 *
 	 * @return 	void
 	 */
-	public function register_hooks() {
+	public function init() {
 		// Register.
 		$this->register_categories();
 		$this->register_patterns();

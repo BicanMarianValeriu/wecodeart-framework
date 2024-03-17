@@ -150,7 +150,7 @@ final class Styles implements Integration {
 				$output['.' . str_replace( ':', '\:', $_class )][$property] = "$value!important";
 			}
 		
-			$container->register( $_class, [
+			$container->set( $_class, [
 				'global' => $output
 			] );
 			
@@ -166,7 +166,7 @@ final class Styles implements Integration {
 					$output['.' . str_replace( ':', '\:', $_class_ )][$property] = "$value!important";
 				}
 
-				$container->register( $_class_, [
+				$container->set( $_class_, [
 					"{$_break_}" => $output
 				] );
 			}
@@ -177,7 +177,7 @@ final class Styles implements Integration {
      * Trim CSS
      *
      * @since 	3.7.7
-     * @version 6.0.0
+     * @version 6.3.7
 	 * 
      * @param 	string $css CSS content to trim.
      *
@@ -208,6 +208,12 @@ final class Styles implements Integration {
 
         // Strips leading 0 on decimal values (converts 0.5px into .5px)
         $css = preg_replace( '/(:| )0\.([0-9]+)(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
+
+		// Converts all zeros value into shorthand.
+		$css = preg_replace( '/0 0 0 0/', '0', $css );
+
+		// Shorten 6-character hex color codes to 3-character where possible.
+		$css = preg_replace( '/#([a-f0-9])\\1([a-f0-9])\\2([a-f0-9])\\3/i', '#\1\2\3', $css );
 
 		// Strips units if value is 0 (converts 0px to 0)
 		if( get_prop( $options, 'zeroUnit' ) ) {
@@ -503,7 +509,7 @@ final class Styles implements Integration {
 	/**
 	 * Get the relative luminance of a color.
 	 *
-	 * @link https://en.wikipedia.org/wiki/Relative_luminance
+	 * @link 	https://en.wikipedia.org/wiki/Relative_luminance
 	 *
 	 * @param 	array
 	 *

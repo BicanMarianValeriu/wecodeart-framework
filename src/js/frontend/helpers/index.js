@@ -39,7 +39,7 @@ const noop = () => { };
 
 // Exports
 export { isElement, getElement, getParents, getTransitionDuration, findShadowRoot, reflow, hasScrollbar, isRTL } from './dom';
-export { paramsCreate, paramsUpdate, parseData } from './params';
+export { paramsCreate, paramsUpdate, parseData, validateConfig } from './params';
 export { sanitizeHtml, DefaultAllowlist } from './sanitizer';
 export { execute, executeAfterTransition } from './execute';
 export { default as requireJs } from './requireJs';

@@ -185,7 +185,7 @@ class Activation {
 	 * Show an error notice box
 	 *
 	 * @since 	1.8
-	 * @version	6.1.2
+	 * @version	6.3.7
 	 */
 	public function after_switch_theme() {
 		// If not, why bother to load the theme?
@@ -200,6 +200,8 @@ class Activation {
 
 			return;
 		}
+
+		wp_redirect( admin_url( 'themes.php?page=wecodeart&tab=intro' ) );
 	}
 
 	/**

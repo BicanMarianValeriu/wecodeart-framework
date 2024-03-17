@@ -9,16 +9,16 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.2.8
- * @version		6.2.7
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Post\Image;
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -30,7 +30,7 @@ class Featured extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {
+	protected function process_style(): void {
 		$declarations	= [];
 
 		if( $value = get_prop( $this->attrs, 'aspectRatio' ) ) {
@@ -55,6 +55,8 @@ class Featured extends Processor {
 		}
 
 		$this->add_declarations( $declarations, $this->get_selector( ' img' ) );
+
+		parent::process_style();
 	}
 
 	/**

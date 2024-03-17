@@ -9,14 +9,14 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.3
- * @version		6.3.2
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -28,7 +28,7 @@ class Template extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {
+	protected function process_style(): void {
 		$declarations = [];
 
 		// Gap
@@ -67,5 +67,7 @@ class Template extends Processor {
 		if( ! empty( $declarations ) ) {
 			$this->add_declarations( $declarations );
 		}
+
+		parent::process_style();
 	}
 }

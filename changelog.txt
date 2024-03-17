@@ -1,4 +1,6 @@
 v6.3.7
+- Removed - default fonts - in WP 6.5, fonts can be installed by user.
+- Removed - purple style variation - is a base theme after all.
 - Updated - Installer for the secondary child theme with webpack setup (wecodeart-honey)
 - Updated - .has-parallax class can now be used to translate the entire element on scroll (--wp--animation: __backgrounPosition|__translate3d)
 - Updated - cleaner folder structure and class aliases for some of the deprecated classes/namespaces (Singleton/Installable/Loadable etc)
@@ -14,10 +16,14 @@ v6.3.7
 - Updated - deprecated fonts API and conditional load only if WP version is less than 6.5
 - Updated - box-shadow presets are now controlled via custom -> boxShadow in theme.json
 - Updated - improved shorthand properties for block styles (margin and padding for the moment)
+- Updated - Gutenberg styles module - implement by default instead of using Integration interface
+- Updated - Gutenberg styles module - now allows easy registration of Styles processors (core will run by default)
+- Updated - Gutenberg class utilities module - implement by default instead of using Integration interface
+- Updated - Gutenberg patterns module - implement by default instead of using Integration interface
 - Added - wecodeart/filter/gutenberg/block/details/seo filter to enable SEO (FAQ Page) support for Details block (boolean)
 - Added - wecodeart/filter/gutenberg/block/code/hljs filter to enable syntax highlight for core/code block
 - Added - outlined/sharp/crisp box-shadow controlled via custom box shadow theme.json
-- Added - box-shadow support for core/group, core/columns and core/column block
+- Added - box-shadow support for core/group, core/columns, core/column block
 
 v6.3.6
 - Fixed - typo for upcomming collapse script in minified assets folder

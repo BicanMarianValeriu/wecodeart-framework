@@ -9,7 +9,7 @@
  * @subpackage 	Support\FileSystem
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.1.2
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support;
@@ -124,8 +124,10 @@ class Files implements Integration {
 	public function delete_file( $filename ) {
 		// If no specific file, bail
 		if ( $this->has_file( $filename ) ) {
-			return unlink( $this->get_file_url( $filename ) );
+			return wp_delete_file( $this->get_file_url( $filename ) );
 		}
+
+		return null;
 	}
 
 	/**
@@ -135,7 +137,7 @@ class Files implements Integration {
 	 *
 	 * @return  bool
 	 */
-	public function has_file( $file ) {
+	public function has_file( $file ): bool {
 		return is_file( $this->get_file_url( $file ) );
 	}
 
@@ -144,7 +146,7 @@ class Files implements Integration {
 	 *
 	 * @return  string File url.
 	 */
-	public function get_file_url( $filename, $link = false ) {
+	public function get_file_url( $filename, $link = false ): string {
 		$file = implode( DIRECTORY_SEPARATOR, array_filter( [ $this->folder, $filename ] ) );
 		
 		if( $link ) {

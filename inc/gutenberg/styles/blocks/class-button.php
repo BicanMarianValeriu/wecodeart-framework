@@ -9,15 +9,15 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.1
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_lightness_limit;
 
@@ -30,7 +30,7 @@ class Button extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {
+	protected function process_style(): void {
 		$is_outline = str_contains( get_prop( $this->attrs, [ 'className' ], '' ), 'is-style-outline' );
 		$palette 	= wecodeart_json( [ 'settings', 'color', 'palette' ], [] );
 
@@ -91,6 +91,8 @@ class Button extends Processor {
 		if( ! empty( $declarations ) ) {
 			$this->add_declarations( $declarations );
 		}
+
+		parent::process_style();
 	}
 
 	/**

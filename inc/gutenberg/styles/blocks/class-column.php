@@ -9,15 +9,15 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -29,12 +29,14 @@ class Column extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {
+	protected function process_style(): void {
 		// Custom Width
 		if ( $value = get_prop( $this->attrs, 'width' ) ) {
 			$this->add_declarations( [
 				'flex'	=> sprintf( '0 0 %s', $value ),
 			] );
 		}
+
+		parent::process_style();
 	}
 }

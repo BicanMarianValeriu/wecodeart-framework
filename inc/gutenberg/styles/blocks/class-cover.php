@@ -12,12 +12,12 @@
  * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Gutenberg\Modules\Styles;
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 // use function WeCodeArt\Functions\get_placeholder_source;
 
@@ -30,7 +30,7 @@ class Cover extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {		
+	protected function process_style(): void {		
 		// Block Attributes
 		$declarations	= [];
 		$has_parallax	= get_prop( $this->attrs, 'hasParallax' );
@@ -79,6 +79,8 @@ class Cover extends Processor {
 		// 		$this->get_selector( '>.wp-block-cover__video-background' )
 		// 	] ) );
 		// }
+
+		parent::process_style();
 	}
 
 	/**

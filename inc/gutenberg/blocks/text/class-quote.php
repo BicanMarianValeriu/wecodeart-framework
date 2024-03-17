@@ -68,7 +68,8 @@ class Quote extends Dynamic {
 				'spacing'	=> [
 					'margin'  	=> true,
 					'padding' 	=> true,
-				]
+				],
+				'shadow'	=> true
 			], $supports )
 		];
 	}
@@ -135,7 +136,7 @@ class Quote extends Dynamic {
 				color: var(--wp--preset--color--dark);
 			}
 			.wp-block-quote .blockquote-footer::before {
-				content: "\2014\00A0";
+				content: "— ";
 			}
 		CSS;
 	}

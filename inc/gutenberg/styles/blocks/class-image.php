@@ -9,16 +9,16 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.3.3
- * @version		6.3.3
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Modules\Styles;
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -30,7 +30,7 @@ class Image extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {
+	protected function process_style(): void {
 		$declarations 	= [];
 
 		// Apply styles to inner selectors.
@@ -68,6 +68,8 @@ class Image extends Processor {
 		if( ! empty( $declarations ) ) {
 			$this->add_declarations( $declarations, $this->get_selector( ' :where(img,svg)' ) );
 		}
+
+		parent::process_style();
 	}
 
 	/**

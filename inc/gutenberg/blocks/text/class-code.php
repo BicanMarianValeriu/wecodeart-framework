@@ -57,16 +57,10 @@ class Code extends Dynamic {
 	 * @return 	array
 	 */
 	public function block_type_args( array $current ): array {
-		$render_fn 		= fn( array $attrs = [], string $content = '' ): string => preg_replace( "/<br\W*?\/?>/", "\n", $content );
-		$view_scripts 	= get_prop( $current, [ 'view_scripts' ], [] );
-		
-		if( $this->has_syntax_highlight() ) {
-			$view_scripts[] = 'highlightjs-lazy';
-		}
+		$render_fn	= fn( array $attrs = [], string $content = '' ): string => preg_replace( "/<br\W*?\/?>/", "\n", $content );
 
 		return [
-			'render_callback'	=> $render_fn,
-			'view_scripts'		=> $view_scripts,
+			'render_callback' => $render_fn,
 		];
 	}
 
@@ -101,6 +95,7 @@ class Code extends Dynamic {
 
 		wecodeart( 'assets' )->add_script( 'highlightjs-lazy', [
 			'deps'	 => [ 'wecodeart-support-assets' ],
+			'load'	 => fn( $blocks ) => in_array( $this->get_block_type(), $blocks, true ),
 			'inline' => <<<JS
 				const { fn: { loadJs } } = wecodeart;
 				

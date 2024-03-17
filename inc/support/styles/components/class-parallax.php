@@ -35,15 +35,15 @@ class Parallax extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
+		// Parallax range: animation-range is calculated with offset instead of leaving "viewport"
+		// to avoid stopping -250px from top. This behaviour is disabled when translate is positive (to bottom)
 		return <<<CSS
 			.has-parallax {
 				--wp--animation: __backgroundPosition;
-				--wp--easing: ease-in-out;
-				--wp--range: 0vh, 100vh;
+				--wp--easing: linear;
 				--wp--offset: -250px;
-				animation-name: var(--wp--animation);
-				animation-duration: 1ms;
-				animation-timing-function: var(--wp--easing);
+				--wp--range: 0 calc(100vh + max(var(--wp--offset) * -1,0));
+				animation: var(--wp--animation) 1ms var(--wp--easing) forwards;
 				animation-timeline: view();
 				animation-range: var(--wp--range);
 			}
@@ -53,9 +53,10 @@ class Parallax extends Base {
 					background-position: 50% calc(50% + var(--wp--offset));
 				}
 			}
+
 			@keyframes __translate3d {
 				to {
-					transform: translate3d(0,var(--wp--offset),0);
+					transform: translate3d(var(--wp--offset-x,0),var(--wp--offset),var(--wp--offset-z,0));
 				}
 			}
 		CSS;

@@ -37,7 +37,6 @@ class Support implements Configuration {
     const PROTECTED = [
         'assets',
         'files',
-        'fonts',
 		'ifso',
         'locale',
         'markup',

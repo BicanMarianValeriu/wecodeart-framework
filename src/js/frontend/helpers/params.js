@@ -50,5 +50,28 @@ const parseData = (opts) => {
 	}
 };
 
+/**
+ * Validate config
+ *
+ * @param   {string} NAME
+ * @param   {object} Config
+ * @param   {object} Types
+ *
+ * @return  {void}
+ */
+const validateConfig = (NAME, config, DefaultType) => {
+	const { fn: { isElement, toType } } = wecodeart;
+	for (const [property, expectedTypes] of Object.entries(DefaultType)) {
+		const value = config[property];
+		const valueType = isElement(value) ? 'element' : toType(value);
+
+		if (!new RegExp(expectedTypes).test(valueType)) {
+			throw new TypeError(
+				`${NAME.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`
+			);
+		}
+	}
+};
+
 // Exports
-export { paramsCreate, paramsUpdate, parseData };
+export { paramsCreate, paramsUpdate, parseData, validateConfig };

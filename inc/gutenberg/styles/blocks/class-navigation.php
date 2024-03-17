@@ -9,15 +9,15 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.1.3
- * @version		6.2.1
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -29,7 +29,7 @@ class Navigation extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {
+	protected function process_style(): void {
 		// Navigation background
 		if ( $value = get_prop( $this->attrs, 'customBackgroundColor' ) ) {
 			$this->add_declarations( [
@@ -91,5 +91,7 @@ class Navigation extends Processor {
 		if( ! empty( $dropdown_rules ) ) {
 			$this->add_declarations( $dropdown_rules, $dropdown_selector );
 		}
+
+		parent::process_style();
 	}
 }

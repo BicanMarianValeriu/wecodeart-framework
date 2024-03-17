@@ -62,15 +62,15 @@ class Upgrade {
 	private function upgrade_635( $version ) {
 		$modules = wecodeart( 'options' )::get( 'installed_modules' );
 
-		if( $modules ) {
-			wecodeart( 'options' )::set( [
-				'modules' 			=> $modules
-			] );
-
-			wecodeart( 'options' )::set( [
+		if( empty( $modules ) ) {
+			return wecodeart( 'options' )::set( [
 				'installed_modules' => 'unset'
 			] );
 		}
+
+		wecodeart( 'options' )::set( [
+			'modules'	=> $modules
+		] );
 	}
 
 	/**

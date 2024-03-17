@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Blocks Registry
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -17,8 +17,8 @@ namespace WeCodeArt\Gutenberg;
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use function WeCodeArt\Functions\get_prop;
 use WeCodeArt\Config\Interfaces\Configuration;
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Blocks Registry.

@@ -9,21 +9,20 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.3
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles;
+namespace WeCodeArt\Gutenberg\Styles;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Gutenberg\Modules\Styles;
+use WeCodeArt\Gutenberg\Styles;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Block CSS Processor
  *
- * This class handles all the Gutenberg Core styles from attributes found under style object or theme customs.
- * Any extends of this class, should use process_extra() method for extending the attributes processor.
+ * This class handles all the Gutenberg Core styles from attributes found under style object (or theme custom)
  */
 class Processor {
 	/**
@@ -47,15 +46,10 @@ class Processor {
 	 * @access 	public
 	 * @param 	array 	$args The block args.
 	 */
-	public function __construct( $args ) {
+	public function __construct( array $args = [] ) {
 		$this->name		= get_prop( $args, 'blockName' );
 		$this->attrs	= get_prop( $args, 'attrs', [] );
 		$this->block_id	= wp_unique_id( 'css-' );
-		
-		if( method_exists( $this, 'process_extra' ) ) {
-			// Process extra attributes
-			$this->process_extra();
-		}
 
 		// Process Styles
 		$this->process_style();
@@ -117,11 +111,9 @@ class Processor {
 	 *
 	 * @return 	void
 	 */
-	private function process_style(): void {
+	protected function process_style(): void {
 		// Process style attribute.
 		if( $style_attr = get_prop( $this->attrs, [ 'style' ] ) ) {
-			$style_attr = wecodeart( 'styles' )::shorthand_properties( $style_attr );
-
 			// Process block attributes.
 			wp_style_engine_get_styles( $style_attr, [
 				'selector' 	=> $this->get_selector(),
@@ -130,7 +122,7 @@ class Processor {
 		}
 
 		// Process custom style attribute.
-		if ( $style_custom = get_prop( $this->attrs, 'customStyle' ) ) {
+		if ( $custom_style = get_prop( $this->attrs, 'customStyle' ) ) {
 			// Update selector with class id.
 			$custom_style 	= str_replace( 'selector', $this->get_selector(), $custom_style );
 			// Convert the string to array (no media queries atm).

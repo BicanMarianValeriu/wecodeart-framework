@@ -331,12 +331,6 @@ function dom_get_element( string $tag, $dom_or_element, int $index = 0 ) {
 	return dom_element( $element );
 }
 
-function get_dom_element( string $tag, $dom_or_element, int $index = 0 ) {
-    _deprecated_function( __FUNCTION__, '6.2.7', 'dom_get_element' );
-
-    return dom_get_element( $tag, $dom_or_element, $index );
-}
-
 /**
  * Casts a DOMNode to a DOMElement.
  *
@@ -440,12 +434,6 @@ function dom_elements_by_class( $dom, string $class_name, string $tag = '*', $in
 	return $elements;
 }
 
-function get_elements_by_class_name( $dom, string $class_name, string $tag = '*', $index = null ) {
-    _deprecated_function( __FUNCTION__, '6.2.7', 'dom_elements_by_class' );
-
-	return dom_elements_by_class( $dom, $class_name, $tag, $index );
-}
-
 /**
  * Returns an HTML element with a replaced tag.
  *
@@ -486,12 +474,6 @@ function dom_change_tag( DOMElement $element, string $name ): DOMElement {
 	}
 
 	return $new_element;
-}
-
-function change_tag_name( DOMElement $element, string $name ): DOMElement {
-    _deprecated_function( __FUNCTION__, '6.2.7', 'dom_change_tag' );
-
-	return dom_change_tag( $elementm, $name );
 }
 
 /**

@@ -9,10 +9,10 @@
  * @subpackage  Gutenberg Pattern
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.6
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Patterns;
+namespace WeCodeArt\Gutenberg\Patterns;
 
 defined( 'ABSPATH' ) || exit();
 

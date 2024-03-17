@@ -77,7 +77,7 @@ return [
     |
     */
     'footer' => [
-        'scripts' => true
+        'scripts'   => true
     ],
     /*
     |--------------------------------------------------------------------------
@@ -87,11 +87,8 @@ return [
     | This array of options will be used as defaults for gutenberg options.
     |
     */
-    'gutenberg' => [
+    'gutenberg'     => [
         'editor'    => true, // Disable FSE Editor for non-admins
-        'styles'    => true, // Convert style attribute CSS to inline CSS
-        'classes'   => true, // Add CSS utilities like margin/padding etc
-        'patterns'  => true, // Patterns folder will also register plain HTML files
     ],
     /*
     |--------------------------------------------------------------------------
@@ -114,15 +111,7 @@ return [
     | This array of options will be used as defaults for fonts.
     |
     */
-    'fonts' => [
-        'system' => [],
-        'google' => [
-            'shadows'   => [
-                'family' 	=> 'Shadows Into Light',
-                'variants' 	=> [ 'regular' ]
-            ]
-        ]
-    ],
+    'fonts' => [ /* Deprecated */ ],
     /*
     |--------------------------------------------------------------------------
     | Theme Support

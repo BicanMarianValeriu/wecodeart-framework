@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.3
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -139,7 +139,6 @@ class Image extends Dynamic {
 			.wp-block-image :where(img,svg) {
 				border-radius: inherit;
 			}
-			.wp-block-image__placeholder,
 			.wp-block-image:where(.alignfull,.alignwide) :where(img,svg) {
 				width: 100%;
 			}

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.3.5
+ * @version		6.3.7
  */
 
 // Theme Shadows
@@ -547,7 +547,8 @@ foreach( [
             'auto'      => 'auto',
             'hidden'    => 'hidden',
             'visible'   => 'visible',
-            'scroll'    => 'scroll'
+            'scroll'    => 'scroll',
+            'clip'      => 'clip'
         ],
     ],
     // Order

@@ -12,12 +12,12 @@
  * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\get_placeholder_source;
 
@@ -30,7 +30,7 @@ class Media extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {
+	protected function process_style(): void {
 		$selector 		= $this->get_selector( '> .wp-block-media-text__media' );
 		$declarations 	= [];
 		
@@ -68,6 +68,8 @@ class Media extends Processor {
 		if( ! empty( $declarations ) ) {
 			$this->add_declarations( $declarations, $selector );
 		}
+
+		parent::process_style();
 	}
 
 	/**

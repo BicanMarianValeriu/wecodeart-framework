@@ -9,15 +9,15 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.2
- * @version		6.2.9
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -29,7 +29,7 @@ class Group extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {
+	protected function process_style(): void {
 		$classNames = explode( ' ', get_prop( $this->attrs, [ 'className' ], '' ) );
 		$is_marquee = get_prop( $this->attrs, [ 'namespace' ] ) === 'wecodeart/group/marquee';
 
@@ -39,11 +39,6 @@ class Group extends Processor {
 			$orientation 	= get_prop( $this->attrs, [ 'layout', 'orientation' ], 'horizontal' );
 			$directionY 	= get_prop( $this->attrs, [ 'layout', 'verticalAlignment' ], 'center' );
 			$directionX 	= get_prop( $this->attrs, [ 'layout', 'justifyContent' ], 'left' );
-	
-			// Handle orientation
-			if( $orientation === 'vertical' ) {
-				$declarations['--marquee-animation'] = 'marqueeY';
-			}
 
 			// Handle direction 
 			if( ( $orientation === 'vertical' && $directionY === 'bottom' ) || ( $orientation === 'horizontal' && $directionX === 'right' ) ) {
@@ -70,5 +65,7 @@ class Group extends Processor {
 	
 			$this->add_declarations( $declarations );
 		}
+
+		parent::process_style();
 	}
 }

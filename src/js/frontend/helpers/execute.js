@@ -16,13 +16,12 @@ const execute = (possibleCallback, args = [], defaultValue = possibleCallback) =
  * @param 	{DOMElement}
  * @param 	{Boolean}
  */
-const executeAfterTransition = (callback, transitionElement, waitForTransition = true) => {
+const executeAfterTransition = (callback, transitionElement, waitForTransition = true, durationPadding = 5) => {
 	if (!waitForTransition) {
 		execute(callback);
 		return;
 	}
 
-	const durationPadding = 5;
 	const emulatedDuration = wecodeart.fn.getTransitionDuration(transitionElement) + durationPadding;
 
 	let called = false;

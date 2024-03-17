@@ -9,14 +9,14 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.5.5
- * @version		6.3.2
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Styles\Blocks;
+namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
 defined( 'ABSPATH' ) || exit();
 
-use WeCodeArt\Gutenberg\Modules\Styles\Processor;
+use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -28,7 +28,7 @@ class Gallery extends Processor {
 	 *
 	 * @return 	void
 	 */
-	protected function process_extra(): void {
+	protected function process_style(): void {
 		$declarations = [];
 
 		// Columns
@@ -72,5 +72,7 @@ class Gallery extends Processor {
 		if( ! empty( $declarations ) ) {
 			$this->add_declarations( $declarations );
 		}
+
+		parent::process_style();
 	}
 }

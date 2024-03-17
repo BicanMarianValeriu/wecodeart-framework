@@ -9,10 +9,10 @@
  * @subpackage  Gutenberg Pattern
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		5.0.0
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules\Patterns;
+namespace WeCodeArt\Gutenberg\Patterns;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -82,7 +82,10 @@ class Categories {
 	public function register() {
 		foreach( $this->theme_json as $category ) {
 			// Skip registered
-			if( \WP_Block_Pattern_Categories_Registry::get_instance()->is_registered( $category['slug'] ) ) continue;
+			if( \WP_Block_Pattern_Categories_Registry::get_instance()->is_registered( $category['slug'] ) ) {
+				continue;
+			}
+
 			// Register pattern
 			register_block_pattern_category( $category['slug'], wp_array_slice_assoc( $category, [ 'label' ] ) );
 		}

@@ -130,11 +130,6 @@ class Group extends Dynamic {
 		$directionY 	= get_prop( $attributes, [ 'layout', 'verticalAlignment' ] );
 		$directionX 	= get_prop( $attributes, [ 'layout', 'justifyContent' ] );
 
-		// Handle orientation
-		if( $orientation === 'vertical' ) {
-			$styles[] = '--marquee-animation:marqueeY';
-		}
-
 		// Handle direction
 		if( ( $orientation === 'vertical' && $directionY === 'bottom' ) || ( $orientation === 'horizontal' && $directionX === 'right' ) ) {
 			$styles[] = '--marquee-direction:reverse';
@@ -202,19 +197,23 @@ class Group extends Dynamic {
 		$breakpoint = wecodeart_json( [ 'settings', 'custom', 'breakpoints', $mobile ], '992px' );
 
 		$inline = "
-			:where(.is-style-marquee,.wp-block-group--marquee) {
-				--marquee-animation: marqueeX;
+			.wp-block-group--marquee {
+				--marquee-animation: __marquee;
 				--marquee-speed: 50s;
 				--marquee-speed-mobile: calc(var(--marquee-speed) / 2);
 				--marquee-state: running;
 				--marquee-direction: forwards;
 				--marquee-gap: var(--wp--style--block-gap);
+				--marquee-transform: translate3d(calc(-100% - var(--marquee-gap)),0,0);
 				justify-content: initial /* required */;
 				flex-wrap: nowrap /* required */;
 				max-width: 100vw;
 				overflow: hidden;
 			}
-			:where(.is-style-marquee,.wp-block-group--marquee) > .wp-block-group__marquee {
+			.wp-block-group--marquee.is-vertical { 
+				--marquee-transform: translate3d(0,calc(-100% - var(--marquee-gap)),0);
+			}
+			.wp-block-group--marquee > .wp-block-group__marquee {
 				position: relative;
 				display: flex;
 				flex-direction: inherit;
@@ -229,33 +228,22 @@ class Group extends Dynamic {
 				animation-iteration-count: infinite;
 				animation-timing-function: linear;
 			}
-			:where(.is-style-marquee,.wp-block-group--marquee):is(:hover,:focus,:focus-within) > .wp-block-group__marquee {
+			.wp-block-group--marquee:is(:hover,:focus,:focus-within) > .wp-block-group__marquee {
 				animation-play-state: paused;
 			}
 			@media (min-width: {$breakpoint}) {
-				:where(.is-style-marquee,.wp-block-group--marquee) > .wp-block-group__marquee {
+				.wp-block-group--marquee > .wp-block-group__marquee {
 					animation-duration: var(--marquee-speed);
 				}
 			}
 			@media (prefers-reduced-motion) {
-				:where(.is-style-marquee,.wp-block-group--marquee) > .wp-block-group__marquee {
+				.wp-block-group--marquee > .wp-block-group__marquee {
 					animation-play-state: paused;
 				}
 			}
-			@keyframes marqueeX {
-				0% {
-					transform: translateX(0);
-				}
-				100% {
-					transform: translateX(calc(-100% - var(--marquee-gap)));
-				}
-			}
-			@keyframes marqueeY {
-				0% {
-					transform: translateY(0);
-				}
-				100% {
-					transform: translateY(calc(-100% - var(--marquee-gap)));
+			@keyframes __marquee {
+				to {
+					transform: var(--marquee-transform);
 				}
 			}
 		";

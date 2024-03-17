@@ -216,12 +216,11 @@ const execute = (possibleCallback, args = [], defaultValue = possibleCallback) =
  * @param 	{DOMElement}
  * @param 	{Boolean}
  */
-const executeAfterTransition = (callback, transitionElement, waitForTransition = true) => {
+const executeAfterTransition = (callback, transitionElement, waitForTransition = true, durationPadding = 5) => {
   if (!waitForTransition) {
     execute(callback);
     return;
   }
-  const durationPadding = 5;
   const emulatedDuration = wecodeart.fn.getTransitionDuration(transitionElement) + durationPadding;
   let called = false;
   const handler = ({
@@ -273,7 +272,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   reflow: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.reflow),
 /* harmony export */   requireJs: () => (/* reexport safe */ _requireJs__WEBPACK_IMPORTED_MODULE_4__["default"]),
 /* harmony export */   sanitizeHtml: () => (/* reexport safe */ _sanitizer__WEBPACK_IMPORTED_MODULE_2__.sanitizeHtml),
-/* harmony export */   toType: () => (/* binding */ toType)
+/* harmony export */   toType: () => (/* binding */ toType),
+/* harmony export */   validateConfig: () => (/* reexport safe */ _params__WEBPACK_IMPORTED_MODULE_1__.validateConfig)
 /* harmony export */ });
 /* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dom */ "./src/js/frontend/helpers/dom.js");
 /* harmony import */ var _params__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./params */ "./src/js/frontend/helpers/params.js");
@@ -337,7 +337,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   paramsCreate: () => (/* binding */ paramsCreate),
 /* harmony export */   paramsUpdate: () => (/* binding */ paramsUpdate),
-/* harmony export */   parseData: () => (/* binding */ parseData)
+/* harmony export */   parseData: () => (/* binding */ parseData),
+/* harmony export */   validateConfig: () => (/* binding */ validateConfig)
 /* harmony export */ });
 /**
  * Generate String Params
@@ -386,6 +387,31 @@ const parseData = opts => {
     }
   } else {
     return {};
+  }
+};
+
+/**
+ * Validate config
+ *
+ * @param   {string} NAME
+ * @param   {object} Config
+ * @param   {object} Types
+ *
+ * @return  {void}
+ */
+const validateConfig = (NAME, config, DefaultType) => {
+  const {
+    fn: {
+      isElement,
+      toType
+    }
+  } = wecodeart;
+  for (const [property, expectedTypes] of Object.entries(DefaultType)) {
+    const value = config[property];
+    const valueType = isElement(value) ? 'element' : toType(value);
+    if (!new RegExp(expectedTypes).test(valueType)) {
+      throw new TypeError(`${NAME.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
+    }
   }
 };
 
@@ -664,10 +690,10 @@ __webpack_require__.r(__webpack_exports__);
  * --------------------------------------------------------------------------
  */
 
+const {
+  applyFilters
+} = wp.hooks;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
-  const {
-    applyFilters
-  } = wp.hooks;
   class Config {
     // Getters
     static get Default() {
@@ -686,7 +712,7 @@ __webpack_require__.r(__webpack_exports__);
       return config;
     }
     _configAfterMerge(config) {
-      return applyFilters('wecodeart.config', config, this);
+      return applyFilters('wecodeart.config', config, this.NAME);
     }
     _mergeConfigObj(config, element) {
       const dataConfig = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isElement)(element) ? (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.parseData)(element.dataset.options) : {}; // try to parse
@@ -1822,6 +1848,7 @@ function filterLog(route, func, args) {
     paramsCreate: _helpers__WEBPACK_IMPORTED_MODULE_7__.paramsCreate,
     paramsUpdate: _helpers__WEBPACK_IMPORTED_MODULE_7__.paramsUpdate,
     getOptions: _helpers__WEBPACK_IMPORTED_MODULE_7__.parseData,
+    validateConfig: _helpers__WEBPACK_IMPORTED_MODULE_7__.validateConfig,
     execute: _helpers__WEBPACK_IMPORTED_MODULE_7__.execute,
     executeAfterTransition: _helpers__WEBPACK_IMPORTED_MODULE_7__.executeAfterTransition,
     getTransitionDuration: _helpers__WEBPACK_IMPORTED_MODULE_7__.getTransitionDuration,

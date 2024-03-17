@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.3.3
+ * @version		6.3.7
  */
 
 namespace WeCodeArt;
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit();
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
 use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\get_json_color;
 
 /**
  * Handles Gutenberg Theme Functionality.
@@ -68,11 +69,12 @@ class Gutenberg {
 		// Skip links - those are handled in JS file.
 		remove_action( 'wp_footer', 				'the_block_template_skip_link' );
 
-		// Modules.
-		Gutenberg\Modules::get_instance();
-		
 		// Blocks.
 		Gutenberg\Blocks::get_instance();
+		// Styles.
+		Gutenberg\Styles::get_instance();
+		// Paterns.
+		Gutenberg\Patterns::get_instance();
 	}
 
 	/**
@@ -215,8 +217,36 @@ class Gutenberg {
 	 * @access public
 	 */
 	public function after_setup_theme() {
-		add_editor_style( $this->get_asset( 'css', 'frontend' ) );
-		add_editor_style( $this->get_asset( 'css', 'gutenberg/editor' ) );
+		\add_editor_style( $this->get_asset( 'css', 'frontend' ) );
+		\add_editor_style( $this->get_asset( 'css', 'gutenberg/editor' ) );
+		\add_filter( 'wp_theme_json_data_theme', [ $this, 'link_hover_brightness' ], 20, 1 );
+	}
+
+	/**
+	 * Adjust link hover brightness automatically.
+	 *
+	 * @param 	object 	$theme_json
+	 *
+	 * @return 	object
+	 */
+	public function link_hover_brightness( object $theme_json ): object {
+		$link	= get_json_color( [ 'styles', 'elements', 'link', 'color', 'text' ] );
+
+		if( $link ) {
+			$data = $theme_json->get_data();
+
+			// Adjust hover brightness.
+			$data['styles']['elements']['link'][':hover'] = wp_parse_args( [
+				'color' => [
+					'text' => wecodeart( 'styles' )::hex_brightness( $link, -25 )
+				]
+			], get_prop( $data, [ 'styles', 'elements', 'link', ':hover' ], [] ) );
+
+			// Update object.
+			$theme_json->update_with( $data );
+		}
+
+		return $theme_json;
 	}
 
 	/**

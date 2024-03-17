@@ -219,6 +219,10 @@ class Details extends Dynamic {
 			.wp-block-details details[open] summary {
 				border-bottom: var(--wp--details--border);
 			}
+			details[open].wp-block-details,
+			.wp-block-details details[open] {
+				padding-bottom: var(--wp--details--padding-y);
+			}
 			details[open].wp-block-details > summary::before,
 			.wp-block-details details[open] > summary::before {
 				transform: rotate(90deg);

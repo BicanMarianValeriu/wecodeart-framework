@@ -9,24 +9,23 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.3.3
+ * @version		6.3.7
  */
 
-namespace WeCodeArt\Gutenberg\Modules;
+namespace WeCodeArt\Gutenberg;
 
 defined( 'ABSPATH' ) || exit();
 
 use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
 use WeCodeArt\Gutenberg;
 use WeCodeArt\Config\Traits\Asset;
+use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_json_color;
 
 /**
  * Handles Gutenberg Theme CSS Functionality.
  */
-class Styles implements Integration {
+class Styles implements Configuration {
 
 	use Singleton;
 	use Asset;
@@ -39,23 +38,11 @@ class Styles implements Integration {
 	const CONTEXT 	= 'block-supports';
 
 	/**
-	 * The blocks duotone
+	 * The registered style processors.
 	 *
-	 * @access 	public
-	 * @var 	array
+	 * @var array[]
 	 */
-	public $filters	= [];
-
-	/**
-	 * Get Conditionals
-	 *
-	 * @return void
-	 */
-	public static function get_conditionals() {
-		wecodeart( 'ifso' )->set( 'with_blocks_styles', Styles\Condition::class );
-
-		return [ 'with_blocks_styles' ];
-	}
+	protected   $items = [];
 
 	/**
 	 * Register Hooks - into styles processor action if enabled
@@ -64,17 +51,36 @@ class Styles implements Integration {
 	 *
 	 * @return 	void
 	 */
-	public function register_hooks() {
-		// Custom Style Attributes support
+	public function init() {
+		// Default core processor.
+		$this->set( 'core', 						Styles\Processor::class );
+		
+		// Some blocks require additional processing.
+		$this->set( 'core/button', 					Styles\Blocks\Button::class );
+		$this->set( 'core/column', 					Styles\Blocks\Column::class );
+		$this->set( 'core/cover', 					Styles\Blocks\Cover::class );
+		$this->set( 'core/group', 					Styles\Blocks\Group::class );
+		$this->set( 'core/image', 					Styles\Blocks\Image::class );
+		$this->set( 'core/media-text',				Styles\Blocks\Media::class );
+		$this->set( 'core/navigation',				Styles\Blocks\Navigation::class );
+		$this->set( 'core/quote',					Styles\Blocks\Quote::class );
+		$this->set( 'core/search',					Styles\Blocks\Search::class );
+		$this->set( 'core/separator',				Styles\Blocks\Separator::class );
+		$this->set( 'core/social-links',			Styles\Blocks\Social::class );
+		$this->set( 'core/spacer',					Styles\Blocks\Spacer::class );
+		$this->set( 'core/table',					Styles\Blocks\Table::class );
+		$this->set( 'core/template',				Styles\Blocks\Template::class );
+		$this->set( 'core/post-featured-image', 	Styles\Blocks\Featured::class );
+
+		// Custom style attributes support
 		\WP_Block_Supports::get_instance()->register( 'customStyle', [
 			'register_attribute' 	=> [ $this, 'register_attribute' ],
 		] );
 
 		// Hooks
-		add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
+        add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
-		add_filter( 'wp_theme_json_data_theme',  	[ $this, 'theme_json'			], 20, 1 );
 		
 		// Eventually it will be removed - 1 check since they are all from GB.
 		if( function_exists( 'gutenberg_render_duotone_support' ) ) {
@@ -94,33 +100,6 @@ class Styles implements Integration {
 		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-styles' ), [
 			'wecodeart-gutenberg-inline'
 		], wecodeart( 'version' ) );
-	}
-
-	/**
-	 * Link hover brightness.
-	 *
-	 * @param	object  WP_Theme_JSON object
-	 *
-	 * @return 	object
-	 */
-	public function theme_json( object $object ): object {
-		$link 		= get_json_color( [ 'styles', 'elements', 'link', 'color', 'text' ] );
-
-		if( $link ) {
-			$data = $object->get_data();
-
-			// Adjust hover brightness.
-			$data['styles']['elements']['link'][':hover'] = wp_parse_args( [
-				'color' => [
-					'text' => wecodeart( 'styles' )::hex_brightness( $link, -25 )
-				]
-			], get_prop( $data, [ 'styles', 'elements', 'link', ':hover' ], [] ) );
-
-			// Update object.
-			$object->update_with( $data );
-		}
-
-		return $object;
 	}
 
 	/**
@@ -155,7 +134,7 @@ class Styles implements Integration {
 	 *
 	 * @return 	string 	HTML
 	 */
-	public function filter_render( $content, $block ) {
+	public function filter_render( string $content = '', array $block = [] ): string {
 		$block_name	= get_prop( $block, 'blockName' );
 
 		// Skip nulls
@@ -173,14 +152,13 @@ class Styles implements Integration {
 		// Remove styles, where needed.
 		if ( $has_support ) {
 			// Process a block
-			$processed 	= self::process_block( $block );
-			$block_id	= $processed->get_id();
+			$processed 	= $this->process_block( $block );
 			$content 	= new \WP_HTML_Tag_Processor( $content );
 
 			$content->next_tag();
 
 			// Inject class name to block tag.
-			$content->add_class( $block_id );
+			$content->add_class( $processed->get_id() );
 			
 			// Remove inline style attribute.
 			$content->remove_attribute( 'style' );
@@ -201,40 +179,81 @@ class Styles implements Integration {
 	/**
 	 * Process a block.
 	 *
-	 * @param 	array 	$block 	The block data.
+	 * @param 	array 	$block 	Parsed block.
 	 *
 	 * @return 	object
 	 */
-	public static function process_block( array $block = [] ) {
-		// Find the class that will handle the output for this block.
-		$classname	= Styles\Processor::class;
-		$defaults   = [
-			'core/button' 			=> Styles\Blocks\Button::class,
-			'core/column' 			=> Styles\Blocks\Column::class,
-			'core/cover' 			=> Styles\Blocks\Cover::class,
-			'core/table' 			=> Styles\Blocks\Table::class,
-			'core/quote' 			=> Styles\Blocks\Quote::class,
-			'core/group' 			=> Styles\Blocks\Group::class,
-			'core/gallery' 			=> Styles\Blocks\Gallery::class,
-			'core/media-text' 		=> Styles\Blocks\Media::class,
-			'core/navigation' 		=> Styles\Blocks\Navigation::class,
-			'core/search' 			=> Styles\Blocks\Search::class,
-			'core/separator' 		=> Styles\Blocks\Separator::class,
-			'core/social-links'		=> Styles\Blocks\Social::class,
-			'core/image' 			=> Styles\Blocks\Image::class,
-			'core/spacer' 			=> Styles\Blocks\Spacer::class,
-			'core/post-template'	=> Styles\Blocks\Template::class,
-			'core/post-featured-image'	=> Styles\Blocks\Featured::class,
-		];
+	public function process_block( array $block = [] ): Styles\Processor {
+		$classname 	= $this->get( 'core' );
+		$block_name	= get_prop( $block, 'blockName', '' );
 
-		$output_classes = apply_filters( 'wecodeart/filter/gutenberg/styles/processor', $defaults );
-
-		if ( array_key_exists( $block['blockName'], $output_classes ) ) {
-			$classname = $output_classes[ $block['blockName'] ];
+		if( $this->has( $block_name ) ) {
+			$classname = $this->get( $block_name );
 		}
 		
-		if( class_exists( $classname ) ) {
-			return ( new $classname( $block ) );
-		};
+		return ( new $classname( $block ) );
 	}
+	
+    /**
+     * Set a given module value.
+     *
+     * @param  array|string  $key
+     * @param  mixed   $value
+     *
+     * @return void
+     */
+    public function set( $key, $value = null ) {
+        $keys = is_array( $key ) ? $key : [ $key => $value ];
+
+        foreach ( $keys as $key => $value ) {
+            $this->items[$key] = $value;
+        }
+	}
+
+	/**
+     * Determine if the given Blocks value exists.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function has( $key ) {
+        return isset( $this->items[$key] );
+    }
+
+    /**
+     * Get the specified Blocks value.
+     *
+     * @param  string  $key
+     * @param  mixed   $default
+     *
+     * @return mixed
+     */
+    public function get( $key, $default = null ) {
+        if ( ! isset( $this->items[$key] ) ) {
+            return $default;
+        }
+
+        return $this->items[$key];
+    }
+	
+	/**
+     * Removes module from the container.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function forget( $key ) {
+		unset( $this->items[$key] );
+    }
+
+    /**
+     * Get all of the module items for the application.
+     *
+     * @return array
+     */
+    public function all() {
+        return $this->items;
+    }
 }

@@ -8,10 +8,9 @@
  */
 import { isElement, parseData, toType } from '../helpers';
 
+const { applyFilters } = wp.hooks;
+
 export default (function (wecodeart) {
-
-	const { applyFilters } = wp.hooks;
-
 	class Config {
 		// Getters
 		static get Default() {
@@ -35,7 +34,7 @@ export default (function (wecodeart) {
 		}
 
 		_configAfterMerge(config) {
-			return applyFilters('wecodeart.config', config, this);
+			return applyFilters('wecodeart.config', config, this.NAME);
 		}
 
 		_mergeConfigObj(config, element) {
