@@ -172,10 +172,10 @@ class Template extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-comments-query-loop:empty {
 				display: none;
 			}
-		";
+		CSS;
 	}
 }

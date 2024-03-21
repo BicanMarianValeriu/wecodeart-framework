@@ -126,7 +126,7 @@ class Menu extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles(): string {
-		$inline = "
+		return <<<CSS
 			/* Block */
 			.wp-block-navigation.hide-toggle .dropdown-toggle::after {
 				content: none;
@@ -140,8 +140,6 @@ class Menu extends Dynamic {
 				float: right;
 				margin-top: .35em;
 			}
-		";
-
-		return $inline;
+		CSS;
 	}
 }

@@ -83,7 +83,7 @@ class Gallery extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-gallery {
 				max-width: initial;
 			}
@@ -146,6 +146,6 @@ class Gallery extends Dynamic {
 				grid-column: auto/span var(--wp--columns);
 				text-align: center;
 			}
-		";
+		CSS;
 	}
 }

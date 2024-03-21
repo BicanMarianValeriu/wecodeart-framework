@@ -27,7 +27,7 @@ class Settings implements Conditional {
 	/**
 	 * @inheritdoc
 	 */
-	public function is_met() {
+	public function is_met(): bool {
 		global $pagenow;
 
 		if( $pagenow === 'themes.php' ) {

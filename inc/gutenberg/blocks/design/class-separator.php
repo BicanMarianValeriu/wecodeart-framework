@@ -280,7 +280,7 @@ class Separator extends Dynamic {
 		$mobile = wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' );
 		$breakpoint = wecodeart_json( [ 'settings', 'custom', 'breakpoints', $mobile ], '992px' );
 
-		$inline = "
+		return <<<CSS
 			/* Separator */
 			hr {
 				height: 1px;
@@ -325,8 +325,6 @@ class Separator extends Dynamic {
 				-webkit-mask-position: center;
 				-webkit-mask-size: 100%;
 			}
-		";
-
-		return $inline;
+		CSS;
 	}
 }

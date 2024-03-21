@@ -95,10 +95,10 @@ class Date extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-post-date--updated .wp-block-post-date__published {
 				display: none;
 			}
-		";
+		CSS;
 	}
 }

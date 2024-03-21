@@ -53,7 +53,7 @@ class File extends Dynamic {
 			'</svg>'
 		] ) );
 		
-		return "
+		return <<<CSS
 			.wp-block-file.aligncenter {
 				justify-content: center;
 			}
@@ -78,6 +78,6 @@ class File extends Dynamic {
 			.wp-block-file .wp-element-button {
 				margin-left: 1rem;
 			}
-		";
+		CSS;
 	}
 }

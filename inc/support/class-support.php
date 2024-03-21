@@ -39,8 +39,9 @@ class Support implements Configuration {
         'files',
 		'ifso',
         'locale',
-        'markup',
         'plugins',
+        'markup',
+        'modules',
         'starter',
         'styles',
         'themes'
@@ -196,6 +197,10 @@ class Support implements Configuration {
             return $default;
         }
 
+		if( in_array( $key, self::PROTECTED, true ) ) {
+			return $this->items[$key];
+		}
+
         return apply_filters( "wecodeart/integration/get/{$key}", $this->items[$key] );
     }
 	
@@ -207,6 +212,10 @@ class Support implements Configuration {
      * @return bool
      */
     public function forget( $key ) {
+		if( in_array( strtolower( $key ), self::PROTECTED, true ) ) {
+			return _doing_it_wrong( __FUNCTION__, esc_html__( 'Module is protected and cannot be removed.', 'wecodeart' ), wecodeart( 'version' ) );
+		}
+
 		unset( $this->items[$key] );
     }
 

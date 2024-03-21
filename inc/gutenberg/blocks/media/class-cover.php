@@ -82,7 +82,7 @@ class Cover extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return '
+		return <<<CSS
 			.wp-block-cover {
 				position: relative;
 				display: flex;
@@ -176,6 +176,6 @@ class Cover extends Dynamic {
 					background-attachment: scroll;
 				}
 			}
-		';
+		CSS;
 	}
 }

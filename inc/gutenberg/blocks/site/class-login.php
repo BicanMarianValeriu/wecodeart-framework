@@ -178,13 +178,13 @@ class Login extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return '
+		return <<<CSS
 			.wp-block-login {
 				margin-bottom: 2rem;
 			}
 			.wp-block-loginout > :where(a) {
 				text-decoration: none;
 			}
-		';
+		CSS;
 	}
 }

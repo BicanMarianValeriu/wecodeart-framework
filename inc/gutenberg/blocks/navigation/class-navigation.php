@@ -775,7 +775,7 @@ class Navigation extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles(): string {
-		return "
+		return <<<CSS
 			.wp-block-navigation {
 				display: flex;
 				align-items: center;
@@ -864,6 +864,6 @@ class Navigation extends Dynamic {
 				padding-top: 0;
 				padding-bottom: 0;
 			}
-		";
+		CSS;
 	}
 }

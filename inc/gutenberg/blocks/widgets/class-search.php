@@ -299,7 +299,7 @@ class Search extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-search {
 				border-width: 0;
 			}
@@ -309,6 +309,6 @@ class Search extends Dynamic {
 			.wp-block-search__fields {
 				display: flex;
 			}
-		";
+		CSS;
 	}
 }

@@ -46,7 +46,7 @@ class Video extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-video {
 				margin: 0 0 1.5rem;
 			}
@@ -60,6 +60,6 @@ class Video extends Dynamic {
 			.wp-block-video	[poster] {
 				object-fit: cover;
 			}
-		";
+		CSS;
 	}
 }

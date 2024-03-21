@@ -159,7 +159,7 @@ class Button extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-button.has-custom-width {
 				max-width: none;
 			}
@@ -228,6 +228,6 @@ class Button extends Dynamic {
 				box-shadow: none;
 				opacity: .7;
 			}
-		";
+		CSS;
 	}
 }

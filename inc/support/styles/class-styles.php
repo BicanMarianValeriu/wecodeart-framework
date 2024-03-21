@@ -210,7 +210,7 @@ final class Styles implements Integration {
         $css = preg_replace( '/(:| )0\.([0-9]+)(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
 
 		// Converts all zeros value into shorthand.
-		$css = preg_replace( '/0 0 0 0/', '0', $css );
+		// $css = preg_replace( '/0 0 0 0/', '0', $css ); // Invalid on data urls
 
 		// Shorten 6-character hex color codes to 3-character where possible.
 		$css = preg_replace( '/#([a-f0-9])\\1([a-f0-9])\\2([a-f0-9])\\3/i', '#\1\2\3', $css );

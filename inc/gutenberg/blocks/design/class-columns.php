@@ -111,11 +111,11 @@ class Columns extends Dynamic {
 		$breaks	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$mobile	= get_prop( $breaks, 'sm', '640px' );
 
-		$inline = '
+		$inline = <<<CSS
 			*[class*="col-"] {
 				flex: 0 0 auto;
 			}
-		';
+		CSS;
 		
 		foreach( $breaks as $key => $val ) {
 			$inline .= "@media (min-width:{$val}){";
@@ -123,7 +123,7 @@ class Columns extends Dynamic {
 			$inline .= "}";
 		}
 
-		return "
+		return <<<CSS
 			.wp-block-columns {
 				display: flex;
 				flex-wrap: wrap;
@@ -163,6 +163,6 @@ class Columns extends Dynamic {
 				}
 			}
 			{$inline}
-		";
+		CSS;
 	}
 }

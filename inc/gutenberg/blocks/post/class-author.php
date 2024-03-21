@@ -90,14 +90,14 @@ class Author extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
-		.wp-block-post-author {
-			display: flex;
-			flex-wrap: wrap
-		}
-		.wp-block-post-author__name:last-child {
-			margin-bottom: 0;
-		}
-		";
+		return <<<CSS
+			.wp-block-post-author {
+				display: flex;
+				flex-wrap: wrap
+			}
+			.wp-block-post-author__name:last-child {
+				margin-bottom: 0;
+			}
+		CSS;
 	}
 }

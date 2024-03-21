@@ -9,7 +9,7 @@
  * @subpackage 	Support\Starter\Condition\is_fresh
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		5.0.0
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Starter;
@@ -26,7 +26,7 @@ class Condition implements ConditionalInterface {
 	/**
 	 * @inheritdoc
 	 */
-	public function is_met() {
+	public function is_met(): bool {
 		return (bool) \get_option( 'fresh_site' );
 	}
 }

@@ -176,7 +176,7 @@ class Pages extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles(): string {
-		return "
+		return <<<CSS
 			.wp-block-page-list {
 				display: flex;
 				flex-direction: column;
@@ -184,6 +184,6 @@ class Pages extends Dynamic {
 				padding-left: 0;
 				list-style: none;
 			}
-		";
+		CSS;
 	}
 }

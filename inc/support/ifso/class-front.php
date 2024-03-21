@@ -26,7 +26,7 @@ class Front implements Conditional {
 	/**
 	 * @inheritdoc
 	 */
-	public function is_met() {
+	public function is_met(): bool {
 		return \is_front_page() && ! \is_home();
 	}
 }

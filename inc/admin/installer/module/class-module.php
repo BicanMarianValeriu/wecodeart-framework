@@ -18,13 +18,12 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Admin\Request;
 use WeCodeArt\Admin\Installer;
-use WeCodeArt\Config\Interfaces\Installable;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Module Installer
  */
-class Module extends Installer implements Installable {
+class Module extends Installer {
 	/**
 	 * Container of valid json properties.
 	 *

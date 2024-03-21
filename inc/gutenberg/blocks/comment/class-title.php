@@ -128,7 +128,7 @@ class Title extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-comments-title {
 				margin-top: 0;
 			}
@@ -138,6 +138,6 @@ class Title extends Dynamic {
 			.wp-block-comments-title svg {
 				margin-right: .5rem;
 			}
-		";
+		CSS;
 	}
 }

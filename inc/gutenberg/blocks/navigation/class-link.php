@@ -202,7 +202,7 @@ class Link extends Dynamic {
 	 */
 	public function get_link_attributes( $attributes, $block, $extras ): array {
 		// Default links
-		$is_active	= (int) get_queried_object_id() === (int) get_prop( $attributes, [ 'id' ], 0 );
+		$is_active	= get_queried_object_id() === get_prop( $attributes, [ 'id' ] );
 		$classes 	= [ 'wp-block-navigation-item__content', 'nav-link' ];
 			
 		if( $is_active ) {
@@ -325,7 +325,7 @@ class Link extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles(): string {
-		return "
+		return <<<CSS
 			/* Nav Link */
 			.nav-link {
 				display: inline-block;
@@ -363,6 +363,6 @@ class Link extends Dynamic {
 			.wp-block-navigation .wp-block-navigation-item__description {
 				display: none;
 			}
-		";
+		CSS;
 	}
 }

@@ -82,7 +82,7 @@ class Calendar extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-calendar {
 				text-align: center;
 			}
@@ -102,6 +102,6 @@ class Calendar extends Dynamic {
 			.wp-block-calendar .wp-calendar-nav {
 				margin-bottom: 1.5rem;
 			}
-		";
+		CSS;
 	}
 }

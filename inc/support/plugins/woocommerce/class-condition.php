@@ -9,24 +9,24 @@
  * @subpackage 	Support\Plugins\WooCommerce\is_woocommerce_active
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		4.0.2
- * @version		6.1.2
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Plugins\WooCommerce;
 
 defined( 'ABSPATH' ) || exit(); 
 
-use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
+use WeCodeArt\Config\Interfaces\Conditional;
 
 /**
  * Conditional that is only met when in the front page.
  */
-class Condition implements ConditionalInterface {
+class Condition implements Conditional {
 
 	/**
 	 * @inheritdoc
 	 */
-	public function is_met() {
+	public function is_met(): bool {
 		return class_exists( 'woocommerce' );
 	}
 }

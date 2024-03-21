@@ -120,7 +120,7 @@ class Image extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return '
+		return <<<CSS
 			/* Block */
 			:where(.wp-block-image) {
 				margin-left: 0;
@@ -150,6 +150,6 @@ class Image extends Dynamic {
 				font-size: var(--wp--preset--font-size--small);
 				font-style: italic;
 			}
-		';
+		CSS;
 	}
 }

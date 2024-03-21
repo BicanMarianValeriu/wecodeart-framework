@@ -46,7 +46,7 @@ class Embed extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return '
+		return <<<CSS
 			iframe {
 				border: 0;
 			}
@@ -92,6 +92,6 @@ class Embed extends Dynamic {
 				width: 100%;
 				height: 100%;
 			}
-		';
+		CSS;
 	}
 }

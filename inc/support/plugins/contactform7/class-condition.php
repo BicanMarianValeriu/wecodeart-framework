@@ -9,24 +9,24 @@
  * @subpackage 	Support\Plugins\CF7\is_cf7_active
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.1.2
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Plugins\ContactForm7;
 
 defined( 'ABSPATH' ) || exit(); 
 
-use WeCodeArt\Conditional\Interfaces\ConditionalInterface;
+use WeCodeArt\Config\Interfaces\Conditional;
 
 /**
  * Conditional that is only met when plugin is active.
  */
-class Condition implements ConditionalInterface {
+class Condition implements Conditional {
 
 	/**
 	 * @inheritdoc
 	 */
-	public function is_met() {
+	public function is_met(): bool {
 		return defined( 'WPCF7_VERSION' );
 	}
 }

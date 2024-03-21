@@ -397,6 +397,6 @@ do_action( 'wecodeart/theme/loaded', $theme );
  *
  * @since   unknown
  */
-wecodeart( 'integrations' )->load();
+wecodeart( 'support' )->load();
 
 return $theme;

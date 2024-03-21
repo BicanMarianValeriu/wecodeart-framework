@@ -114,7 +114,7 @@ class Image extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-post-featured-image {
 				position: relative;
 				overflow: hidden;
@@ -146,6 +146,6 @@ class Image extends Dynamic {
 			.wp-block-post-featured-image img.litespeed-loaded {
 				filter: none;
 			}
-		";
+		CSS;
 	}
 }

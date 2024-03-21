@@ -127,7 +127,7 @@ class Logo extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return '
+		return <<<CSS
 			.wp-block-site-logo.is-style-rounded {
 				border-radius: 9999px;
 			}
@@ -165,6 +165,6 @@ class Logo extends Dynamic {
 			.wp-block-navigation .navbar-nav .wp-site-logo a:is(:hover,:focus) {
 				color: var(--wp--nav-link-hover-color);
 			}
-		';
+		CSS;
 	}
 }

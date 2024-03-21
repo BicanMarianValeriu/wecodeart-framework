@@ -314,7 +314,7 @@ class SVG implements Configuration {
         $keys = is_array( $key ) ? $key : [ $key => $value ];
 
         foreach ( $keys as $key => $value ) {
-            $this->items[$key] = apply_filters( "wecodeart/svg/set/{$key}", $value );
+            $this->items[$key] = $value;
         }
     }
 
@@ -342,7 +342,7 @@ class SVG implements Configuration {
             return $default;
         }
 
-        return apply_filters( "wecodeart/svg/get/{$key}", $this->items[$key] );
+        return $this->items[$key];
 	}
 
     /**

@@ -309,7 +309,7 @@ class Form extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-post-comments-form:empty {
 				display: none;
 			}
@@ -320,6 +320,6 @@ class Form extends Dynamic {
 			.comment-form-field {
 				margin-bottom: 1rem;
 			}
-		";
+		CSS;
 	}
 }

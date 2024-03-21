@@ -62,7 +62,7 @@ class Buttons extends Dynamic {
 
 		switch( $class ) :
 			case 'group' :
-				$inline = "
+				$inline = <<<CSS
 					.wp-block-buttons.is-style-group {
 						--wp--style--block-gap: 0px!important;
 						gap: 0!important;
@@ -87,7 +87,7 @@ class Buttons extends Dynamic {
 						border-bottom-left-radius: 0;
 						border-bottom-right-radius: 0;
 					}
-				";
+				CSS;
 				break;
 			default :
 				break;
@@ -102,7 +102,7 @@ class Buttons extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-buttons {
 				display: flex;
 				flex-flow: row wrap;
@@ -116,6 +116,6 @@ class Buttons extends Dynamic {
 			.wp-block-buttons .wp-block-button__link:is(:focus,:active,.active) {
 				z-index: 1;
 			}
-		";
+		CSS;
 	}
 }

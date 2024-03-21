@@ -18,13 +18,12 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Admin\Request;
 use WeCodeArt\Admin\Installer;
-use WeCodeArt\Config\Interfaces\Installable;
 use function WeCodeArt\Functions\get_prop;
 
 /**
  * Theme Installer
  */
-class Theme extends Installer implements Installable {
+class Theme extends Installer {
 	/**
 	 * Sets remote.
 	 *

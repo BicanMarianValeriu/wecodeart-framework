@@ -168,10 +168,10 @@ class Title extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-query-title svg {
 				margin-right: 1rem;
 			}
-		";
+		CSS;
 	}
 }

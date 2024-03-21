@@ -109,13 +109,13 @@ class Title extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
-		.wp-block-post-title {
-			word-break: break-word;
-		}
-		.wp-block-post-title a {
-			display: inline-block;
-		}
-		";
+		return <<<CSS
+			.wp-block-post-title {
+				word-break: break-word;
+			}
+			.wp-block-post-title a {
+				display: inline-block;
+			}
+		CSS;
 	}
 }

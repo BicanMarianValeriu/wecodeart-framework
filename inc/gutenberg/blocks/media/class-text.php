@@ -92,7 +92,7 @@ class Text extends Dynamic {
 		$tablet		= get_prop( $breaks, 'md', '768px' );
 		$desktop	= get_prop( $breaks, 'lg', '992px' );
 		
-		return "
+		return <<<CSS
 			.wp-block-media-text {
 				--wp--custom--gutter: 1rem;
 				display: grid;
@@ -181,6 +181,6 @@ class Text extends Dynamic {
 					grid-row: 2;
 				}
 			}
-		";
+		CSS;
 	}
 }

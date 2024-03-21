@@ -177,7 +177,7 @@ class Posts extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-post-template.grid .wp-block-post + .wp-block-post {
 				margin-top: 0;
 			}
@@ -195,6 +195,6 @@ class Posts extends Dynamic {
 				float: right;
 				margin-left: 1rem;
 			}
-		";
+		CSS;
 	}
 }

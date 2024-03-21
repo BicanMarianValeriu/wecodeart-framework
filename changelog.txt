@@ -20,6 +20,8 @@ v6.3.7
 - Updated - Gutenberg styles module - now allows easy registration of Styles processors (core will run by default)
 - Updated - Gutenberg class utilities module - implement by default instead of using Integration interface
 - Updated - Gutenberg patterns module - implement by default instead of using Integration interface
+- Updated - Core support keys cannot be set/unset/changed
+- Fixed - issue with navigation dropdown active class condition
 - Added - wecodeart/filter/gutenberg/block/details/seo filter to enable SEO (FAQ Page) support for Details block (boolean)
 - Added - wecodeart/filter/gutenberg/block/code/hljs filter to enable syntax highlight for core/code block
 - Added - outlined/sharp/crisp box-shadow controlled via custom box shadow theme.json

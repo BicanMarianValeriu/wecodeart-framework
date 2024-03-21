@@ -51,7 +51,7 @@ class Spacer extends Dynamic {
 		$tablet		= get_prop( $breaks, 'md', '768px' );
 		$desktop	= get_prop( $breaks, 'lg', '992px' );
 
-		return "
+		return <<<CSS
 			.wp-block-spacer {
 				height: calc(var(--wp--spacer-height, 100px) * var(--wp--spacer-mobile, .5));
 				width: var(--wp--spacer-width, 100%);
@@ -72,6 +72,6 @@ class Spacer extends Dynamic {
 					height: var(--wp--spacer-height, 100px);
 				}
 			}
-		";
+		CSS;
 	}
 }

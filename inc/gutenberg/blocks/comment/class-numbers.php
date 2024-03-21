@@ -95,10 +95,10 @@ class Numbers extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-comments-pagination-numbers:only-child {
 				margin-bottom: 0!important;
 			}
-		";
+		CSS;
 	}
 }

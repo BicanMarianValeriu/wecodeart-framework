@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.9
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -82,9 +82,11 @@ class Template extends Dynamic {
 	public function render( array $attributes = [], string $content = '', object $block = null ): string {
 		$columns 	= get_prop( $attributes, [ 'layout', 'columnCount' ], get_prop( $block->context, [ 'displayLayout', 'columns' ], 3 ) );
 		$callback 	= function( array $classes = [] ) use( $columns ) {
-			$classes = array_merge( $classes, [ 'span-12', 'span-md-6', 'span-lg-' . ( 12 / $columns ) ] );
+			$grid_cl = [ 'span-12', 'span-md-6', 'span-lg-' . ( 12 / $columns ) ];
 
-			return $classes;
+			wecodeart( 'styles' )->Utilities->load( $grid_cl ); 
+
+			return array_merge( $classes, $grid_cl );
 		};
 
 		\add_filter( 'post_class', $callback );
@@ -95,6 +97,7 @@ class Template extends Dynamic {
 		
 		if( $content->next_tag( [ 'class_name' => 'wp-block-post-template' ] ) ) {
 			if( get_prop( $attributes, [ 'layout', 'type' ], get_prop( $block->context, [ 'displayLayout', 'type' ], '' ) ) === 'grid' ) {
+				$content->add_class( 'grid' );
 				$content->remove_class( 'columns-' . $columns );
 			}
 		}
