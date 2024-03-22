@@ -14,6 +14,8 @@
 
 namespace WeCodeArt\Config\Interfaces;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * ConfigInterface.
  *

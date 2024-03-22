@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Gutenberg\Patterns;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Class representing a block pattern.

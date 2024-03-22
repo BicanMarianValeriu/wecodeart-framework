@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;

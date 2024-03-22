@@ -11,7 +11,7 @@
  * @version		6.1.2
  */
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 /**
  * @param   string	$link	Link to administration

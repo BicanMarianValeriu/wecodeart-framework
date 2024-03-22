@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Config\Traits;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Base Trait Class for implementing make_handle()

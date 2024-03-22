@@ -9,12 +9,12 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.9
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks;
@@ -87,6 +87,40 @@ class Social extends Dynamic {
 					],
 				],
 			], $supports ),
+			'variation_callback' => fn() => [
+				[
+					'name'        => 'core/social-links',
+					'title'       => esc_html__( 'Social Icons', 'wecodeart' ),
+					'description' => esc_html__( 'Display icons linking to your social media profiles or sites.', 'wecodeart' ),
+					'attributes'  => [
+						'namespace' 	=> '',
+						'openInNewTab'	=> true
+					],
+					'isActive'    => [ 'namespace' ],
+					'innerBlocks' => [
+						[ 'core/social-link', [ 'service' => 'facebook', 	'url' => '#' ] ],
+						[ 'core/social-link', [ 'service' => 'x', 			'url' => '#' ] ],
+					],
+					'scope'       => [ 'block', 'transform' ],
+					'icon'        => null,
+				],
+				[
+					'name'        => 'wecodeart/social-links/sharing',
+					'title'       => esc_html__( 'Social Icons: Sharing', 'wecodeart' ),
+					'description' => esc_html__( 'Display icons for sharing the current page on social media sites.', 'wecodeart' ),
+					'attributes'  => [
+						'namespace' 	=> 'wecodeart/social-links/sharing',
+						'openInNewTab'	=> true
+					],
+					'isActive'    => [ 'namespace' ],
+					'innerBlocks' => [
+						[ 'core/social-link', [ 'service' => 'facebook', 	'url' => '#' ] ],
+						[ 'core/social-link', [ 'service' => 'x', 			'url' => '#' ] ],
+					],
+					'scope'       => [ 'block', 'inserter', 'transform' ],
+					'icon'        => null,
+				]
+			],
 		];
 	}
 

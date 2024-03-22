@@ -12,7 +12,7 @@
  * @version		6.3.7
  */
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 // Traits
 class_alias( '\WeCodeArt\Config\Traits\Singleton',          '\WeCodeArt\Traits\Singleton' );

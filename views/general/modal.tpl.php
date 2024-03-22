@@ -11,7 +11,7 @@
  * @version    	6.1.7
  */
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 if( ! wp_script_is( 'wecodeart-support-assets-modal' ) ) {
     wp_enqueue_script( 'wecodeart-support-assets-modal' );

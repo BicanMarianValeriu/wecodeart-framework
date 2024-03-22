@@ -14,6 +14,8 @@
 
 namespace WeCodeArt\Config\Exceptions;
 
+defined( 'ABSPATH' ) || exit;
+
 use Exception;
 
 /**

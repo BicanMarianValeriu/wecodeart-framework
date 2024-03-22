@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Config\Interfaces;
 
-defined( 'ABSPATH' ) || exit(); 
+defined( 'ABSPATH' ) || exit; 
 
 /**
  * Conditional interface, used to prevent integrations from loading.

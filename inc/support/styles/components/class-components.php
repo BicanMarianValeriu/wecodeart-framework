@@ -14,11 +14,10 @@
 
 namespace WeCodeArt\Support\Styles;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Config\Interfaces\Configuration;
+use WeCodeArt\Config\Traits\{ Asset, Singleton };
 use function WeCodeArt\Functions\get_prop;
  
 /**
@@ -67,9 +66,9 @@ class Components implements Configuration {
 		$this->register( 'parallax',    Components\Parallax::class  );
 		$this->register( 'transition',  Components\Transition::class);
 
-        add_action( 'init',                         [ $this, 'cache'        ], 95    );
-        add_action( 'wp_enqueue_scripts',           [ $this, 'assets'       ], 20, 1 );
-        add_action( 'enqueue_block_editor_assets',  [ $this, 'editor_css'   ], 20, 1 );
+        add_action( 'init',                 [ $this, 'cache'        ], 95    );
+        add_action( 'wp_enqueue_scripts',   [ $this, 'assets'       ], 20, 1 );
+        add_action( 'enqueue_block_assets', [ $this, 'editor_css'   ], 20, 1 );
 	}
 
     /**
@@ -169,8 +168,6 @@ class Components implements Configuration {
 			[],
 			wecodeart( 'version' )
 		);
-
-		// add_editor_style( $filesystem->get_file_url( self::CACHE_FILE, true ) );
 		
 		$filesystem->set_folder( '' );
 	}

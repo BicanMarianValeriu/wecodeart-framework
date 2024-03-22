@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Functions;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use DOMDocument;
 use DOMElement;

@@ -16,14 +16,8 @@ namespace WeCodeArt;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Admin\Upgrade;
-use WeCodeArt\Admin\Request;
-use WeCodeArt\Admin\Settings;
-use WeCodeArt\Admin\Installer;
-use WeCodeArt\Admin\Activation;
-use WeCodeArt\Admin\Notifications;
-use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Config\Traits\Singleton;
+use WeCodeArt\Admin\{ Upgrade, Request, Settings, Installer, Activation, Notifications };
+use WeCodeArt\Config\Traits\{ Asset, Singleton };
 use function WeCodeArt\Functions\get_prop;
 
 /**

@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
@@ -65,6 +65,26 @@ class Group extends Dynamic {
 					'type'		=> 'string',
 				],
 			], $attributes ),
+			'variation_callback' => fn() => [
+				[
+					'name'        => 'wecodeart/group/marquee',
+					'title'       => esc_html__( 'Group: Marquee', 'wecodeart' ),
+					'description' => esc_html__( 'Gather blocks in a sliding container.', 'wecodeart' ),
+					'attributes'  => [
+						'namespace'	=> 'wecodeart/group/marquee',
+						'layout'	=> [
+							'type' 			=> 'flex',
+							'flexWrap' 		=> 'nowrap',
+							'justifyContent'=> 'center',
+							'alignItems' 	=> 'center'
+						]
+					],
+					'isActive'    => [ 'namespace' ],
+					'innerBlocks' => [],
+					'scope'       => [ 'block', 'inserter', 'transform' ],
+					'icon'        => 'align-right',
+				],
+			],
 		];
 	}
 

@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;

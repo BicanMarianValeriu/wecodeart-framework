@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Gutenberg\Styles\Blocks;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Gutenberg\Styles;
 use WeCodeArt\Gutenberg\Styles\Processor;

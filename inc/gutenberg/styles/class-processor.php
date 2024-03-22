@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Gutenberg\Styles;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Gutenberg\Styles;
 use function WeCodeArt\Functions\get_prop;

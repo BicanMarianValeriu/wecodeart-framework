@@ -18,10 +18,8 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Admin\Notifications;
 use WeCodeArt\Admin\Notifications\Notification;
-use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Config\Interfaces\Integration;
-use WeCodeArt\Config\Traits\No_Conditionals;
+use WeCodeArt\Config\Traits\{ Asset, Singleton, No_Conditionals };
 use function WeCodeArt\Functions\get_prop;
 
 /**

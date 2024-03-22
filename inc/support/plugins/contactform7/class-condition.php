@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\Plugins\ContactForm7;
 
-defined( 'ABSPATH' ) || exit(); 
+defined( 'ABSPATH' ) || exit; 
 
 use WeCodeArt\Config\Interfaces\Conditional;
 

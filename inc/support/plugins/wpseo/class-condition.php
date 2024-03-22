@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\Plugins\WPSeo;
 
-defined( 'ABSPATH' ) || exit(); 
+defined( 'ABSPATH' ) || exit; 
 
 use WeCodeArt\Config\Interfaces\Conditional;
 

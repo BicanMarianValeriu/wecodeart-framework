@@ -57,5 +57,9 @@ const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 /**
  * Apply Filters
  */
-addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
-addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl, 90);
+function applyFilters() {
+	addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
+	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl, 90);
+}
+
+wp.domReady(applyFilters);

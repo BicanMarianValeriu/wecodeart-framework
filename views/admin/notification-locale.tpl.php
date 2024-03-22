@@ -11,7 +11,7 @@
  * @version		6.1.3
  */
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 /**
  * @param   object	$language 	Current Blog Language

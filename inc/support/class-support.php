@@ -14,7 +14,7 @@
 
 namespace WeCodeArt;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Admin\Installer\Module;
 use WeCodeArt\Config\Interfaces\Configuration;

@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\Styles\Sanitize\Property;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Support\Styles\Sanitize\Property;
 

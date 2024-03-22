@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\Styles\Sanitize;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Output for CSS properties.

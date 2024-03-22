@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Core;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Config\Traits\Singleton;
 use function WeCodeArt\Functions\get_prop;

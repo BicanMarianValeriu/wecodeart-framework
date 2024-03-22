@@ -11,7 +11,7 @@
  * @version    	6.1.7
  */
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 wecodeart( 'styles' )->Components->load( [ 'toggler' ] );
 

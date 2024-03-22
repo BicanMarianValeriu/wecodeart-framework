@@ -16,9 +16,8 @@ namespace WeCodeArt\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Admin\Notifications\Notification;
+use WeCodeArt\Config\Traits\{ Asset, Singleton };
 use function WeCodeArt\Functions\calc as wecodeart_calc;
 
 /**

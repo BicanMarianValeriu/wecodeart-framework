@@ -14,7 +14,7 @@
 
  namespace WeCodeArt\Config\Interfaces;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 /**
  * An interface for registering installables with WordPress/WeCodeArt

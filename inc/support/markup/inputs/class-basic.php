@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\Markup\Inputs;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Support\Markup\Inputs\Base;
 use function WeCodeArt\Functions\get_prop;

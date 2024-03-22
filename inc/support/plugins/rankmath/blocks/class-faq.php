@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\Plugins\RankMath\Blocks;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;

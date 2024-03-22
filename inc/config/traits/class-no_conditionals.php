@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Config\Traits;
 
-defined( 'ABSPATH' ) || exit(); 
+defined( 'ABSPATH' ) || exit; 
 
 /**
  * Trait for integrations that do not have any conditionals.

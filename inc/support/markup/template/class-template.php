@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\Markup;
 
-defined( 'ABSPATH' ) || exit(); 
+defined( 'ABSPATH' ) || exit; 
 
 use WeCodeArt\Config\Interfaces\Configuration;
 use WeCodeArt\Config\Exceptions\FileNotFoundException;

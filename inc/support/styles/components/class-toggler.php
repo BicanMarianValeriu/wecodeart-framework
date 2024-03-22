@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\Styles\Components;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use function WeCodeArt\Functions\encode_svg_data;
 

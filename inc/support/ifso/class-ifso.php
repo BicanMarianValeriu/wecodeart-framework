@@ -14,12 +14,10 @@
 
 namespace WeCodeArt\Support;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Config\Interfaces\Integration;
-use WeCodeArt\Config\Interfaces\Configuration;
-use WeCodeArt\Config\Traits\Singleton;
-use WeCodeArt\Config\Traits\No_Conditionals;
+use WeCodeArt\Config\Traits\{ Singleton, No_Conditionals };
+use WeCodeArt\Config\Interfaces\{ Integration, Configuration };
 
 /**
  * Conditional.

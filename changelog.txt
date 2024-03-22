@@ -5,8 +5,6 @@ v6.3.7
 - Updated - .has-parallax class can now be used to translate the entire element on scroll (--wp--animation: __backgrounPosition|__translate3d)
 - Updated - cleaner folder structure and class aliases for some of the deprecated classes/namespaces (Singleton/Installable/Loadable etc)
 - Updated - Improved compression for encode_svg_data output
-- Updated - Styles/Components frontend CSS to be enqueued via wp_enqueue_scripts using wecodeart( 'assets' )->add_style();
-- Updated - Styles/Components to be enqueued via enqueue_block_editor_assets instead of add_editor_style (unlike reset CSS and Utilities that needs specificity)
 - Updated - wecodeart_asset function to return WeCodeArt\Support\Assets\Asset object instead of the file uri
 - Updated - get_asset method of Config/Trait/Asset class to return file URL or PATH (based on 3rd new parameter)
 - Updated - core/list icon style overflowing due to missing position: relative for list items
@@ -21,7 +19,11 @@ v6.3.7
 - Updated - Gutenberg class utilities module - implement by default instead of using Integration interface
 - Updated - Gutenberg patterns module - implement by default instead of using Integration interface
 - Updated - Core support keys cannot be set/unset/changed
+- Updated - core/social-links sharing variation is now registered in php
+- Updated - core/group marquee variation is now registered in php
+- Fixed - CodeMirror on editor text view in Site Editor screen
 - Fixed - issue with navigation dropdown active class condition
+- Fixed - properly enqueue wecodeart( 'styles' ) Components and Utilities cache file
 - Added - wecodeart/filter/gutenberg/block/details/seo filter to enable SEO (FAQ Page) support for Details block (boolean)
 - Added - wecodeart/filter/gutenberg/block/code/hljs filter to enable syntax highlight for core/code block
 - Added - outlined/sharp/crisp box-shadow controlled via custom box shadow theme.json

@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\IfSo;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Config\Interfaces\Conditional;
 use function WeCodeArt\Functions\get_prop;

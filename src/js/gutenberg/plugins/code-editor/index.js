@@ -1,9 +1,9 @@
 /**
  * Internal dependencies
  */
-import CodeEditor from './components/controls';
+import render from './controls';
 
 export default {
 	name: 'wca-code-editor',
-	render: CodeEditor
+	render
 };

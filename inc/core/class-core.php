@@ -14,7 +14,7 @@
 
 namespace WeCodeArt;
 
-defined( 'ABSPATH' ) || exit(); 
+defined( 'ABSPATH' ) || exit; 
 
 use WeCodeArt\Config\Traits\Singleton;
 

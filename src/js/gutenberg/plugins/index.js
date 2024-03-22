@@ -5,11 +5,13 @@ import codeEditor from './code-editor';
 
 const { registerPlugin } = wp.plugins;
 
-export default function registerWCAPlugins() {
+function registerWCAPlugins() {
 	[
 		codeEditor,
 	].forEach((block) => {
-		if (!block) return;
+		if (!block) {
+			return;
+		}
 
 		const { name, render } = block;
 
@@ -17,4 +19,4 @@ export default function registerWCAPlugins() {
 	});
 }
 
-registerWCAPlugins();
+wp.domReady(registerWCAPlugins);

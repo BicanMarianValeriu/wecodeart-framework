@@ -18,9 +18,8 @@ defined( 'ABSPATH' ) || exit;
 
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
-use WeCodeArt\Config\Traits\Singleton;
-use WeCodeArt\Config\Traits\No_Conditionals;
 use WeCodeArt\Config\Interfaces\Integration;
+use WeCodeArt\Config\Traits\{ Singleton, No_Conditionals };
 
 /**
  * Manages the Theme Uploads.

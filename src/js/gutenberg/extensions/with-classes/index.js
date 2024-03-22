@@ -87,4 +87,4 @@ function applyFilters() {
 	addFilter('editor.BlockEdit', 'wecodeart/editor/custom-class-name/with-inspector-control', withInspectorControl);
 }
 
-applyFilters();
+wp.domReady(applyFilters);

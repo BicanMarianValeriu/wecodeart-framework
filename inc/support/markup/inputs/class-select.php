@@ -14,7 +14,7 @@
 
 namespace WeCodeArt\Support\Markup\Inputs;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Support\Markup;
 use WeCodeArt\Support\Markup\Inputs\Basic;

@@ -16,9 +16,7 @@ namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Config\Traits\Singleton;
-use WeCodeArt\Config\Traits\No_Conditionals;
+use WeCodeArt\Config\Traits\{ Asset, Singleton, No_Conditionals };
 use WeCodeArt\Config\Interfaces\Integration;
 use function WeCodeArt\Functions\get_prop;
 

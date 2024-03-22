@@ -12,7 +12,7 @@
  * @version		6.3.7
  */
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Core;
 use WeCodeArt\Admin;

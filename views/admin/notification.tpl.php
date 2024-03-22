@@ -11,7 +11,7 @@
  * @version		5.5.1
  */
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 /**
  * @param   array  	$attributes Notification attributes

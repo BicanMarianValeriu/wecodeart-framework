@@ -14,11 +14,10 @@
 
 namespace WeCodeArt\Support\Styles;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Config\Traits\Singleton; 
 use WeCodeArt\Config\Interfaces\Configuration;
+use WeCodeArt\Config\Traits\{ Asset, Singleton };
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -63,7 +62,7 @@ class Utilities implements Configuration {
 
         // Admin
 		add_action( 'enqueue_block_editor_assets', 					[ $this, 'block_editor_assets'	] );
-        add_action( 'after_setup_theme',                            [ $this, 'editor_css'       ], 20, 1 );
+        add_action( 'enqueue_block_assets',                     	[ $this, 'editor_css'       ], 20, 1 );
 		add_filter( 'wecodeart/filter/gutenberg/settings', 			[ $this, 'set_suggestions' 	], 10, 2 );
 		add_filter( 'wecodeart/filter/gutenberg/settings/classes', 	[ $this, 'add_suggestions'  ], 10, 1 );
 
@@ -137,7 +136,12 @@ class Utilities implements Configuration {
 		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 
-		add_editor_style( $filesystem->get_file_url( self::CACHE_FILE, true ) );
+		wp_enqueue_style(
+			$this->make_handle(),
+			$filesystem->get_file_url( self::CACHE_FILE, true ),
+			[],
+			wecodeart( 'version' )
+		);
 		
 		$filesystem->set_folder( '' );
 	}
