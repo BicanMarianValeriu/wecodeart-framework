@@ -23,10 +23,7 @@ use str_starts_with;
 use file_get_contents;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\encode_svg_data;
-use function WeCodeArt\Functions\dom_get_element;
-use function WeCodeArt\Functions\dom_change_tag;
+use function WeCodeArt\Functions\{ get_prop, encode_svg_data, dom_get_element, dom_change_tag };
 
 /**
  * Gutenberg Separator block.
@@ -64,7 +61,9 @@ class Separator extends Dynamic {
 		$this->collect_svg_styles();
 		
 		// We only load them in admin for preview, in frontend we load conditionaly.
-		if( ! is_admin() ) return;
+		if( ! is_admin() ) {
+			return;
+		}
 
 		\register_block_style( $this->get_block_type(), [
 			'name' 			=> 'dots',

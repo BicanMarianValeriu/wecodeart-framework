@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.3.5
- * @version		6.3.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -42,30 +42,56 @@ class Query extends Dynamic {
 	protected $block_name = 'query';
 
     /**
+	 * Block args.
+	 *
+	 * @param	array $current	Existing register args
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( array $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+
+		return [
+			'supports'	=> wp_parse_args( [
+				'spacing'	=> [
+					'margin'	=> true,
+					'padding'	=> true,
+					'blockGap'	=> true,
+					'__experimentalDefaultControls' => [
+						'margin'	=> false,
+						'padding'	=> false,
+						'blockGap'	=> true,
+					]
+				],
+			], $supports )
+		];
+	}
+
+    /**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
 		return "
-            .wp-block-query__enhanced-pagination-animation {
+            *[class*='pagination-animation'] {
                 position: fixed;
                 top: 0;
                 left: 0;
-                max-width: 100vw;
-                width: 100vw;
                 height: 4px;
-                margin: 0;
-                padding: 0;
+                width: 100vw;
+                max-width: 100vw;
+                margin: 0!important;
+                padding: 0!important;
                 opacity: 0;
             }
-            .wp-block-query__enhanced-pagination-animation.start-animation {
+            *[class*='pagination-animation'].start-animation {
                 animation: wp-pagination-start-animation 30s cubic-bezier(0.03, 0.5, 0, 1) forwards;
             }
-            .wp-block-query__enhanced-pagination-animation.finish-animation {
+            *[class*='pagination-animation'].finish-animation {
                 animation: wp-pagination-finish-animation 0.3s ease-in;
             }
-            :is(.wp-interactivity-router-loading-bar.wp-interactivity-router-loading-bar, .wp-block-query__enhanced-pagination-animation) {
+            :is(.wp-interactivity-router-loading-bar.wp-interactivity-router-loading-bar, *[class*='pagination-animation']) {
                 background-color: var(--wp--preset--color--primary, #000);
                 z-index: 1050;
             }

@@ -27,6 +27,7 @@
   --wp--gray-900: #212529;
   --wp--font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --wp--font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  scroll-padding-top: var(--wp--header-height, 80px);
 }
 @media (prefers-reduced-motion: no-preference) {
   :root {

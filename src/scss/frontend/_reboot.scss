@@ -29,6 +29,8 @@
 	--wp--font-system: #{inspect($font-family-sans-serif)};
 	--wp--font-monospace: #{inspect($font-family-monospace)};
 	
+	scroll-padding-top: var(--wp--header-height, 80px);
+
 	@media (prefers-reduced-motion: no-preference) {
 		scroll-behavior: smooth;
 	}

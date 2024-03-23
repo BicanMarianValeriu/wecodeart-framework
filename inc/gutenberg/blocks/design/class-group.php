@@ -18,10 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\dom_element;
-use function WeCodeArt\Functions\dom_get_element;
-use function WeCodeArt\Functions\dom_create_element;
+use function WeCodeArt\Functions\{ get_prop, dom_element, dom_get_element, dom_create_element };
 
 /**
  * Gutenberg Group blocks.
@@ -58,7 +55,7 @@ class Group extends Dynamic {
 		return [
 			'render_callback' 	=> [ $this, 'render' ],
 			'supports'			=> wp_parse_args( [
-				'shadow'	=> true, 
+				'shadow'		=> true, 
 			], $supports ),
 			'attributes' 		=> wp_parse_args( [
 				'namespace'		=> [
@@ -81,7 +78,7 @@ class Group extends Dynamic {
 					],
 					'isActive'    => [ 'namespace' ],
 					'innerBlocks' => [],
-					'scope'       => [ 'block', 'inserter', 'transform' ],
+					'scope'       => [ 'inserter' ],
 					'icon'        => 'align-right',
 				],
 			],

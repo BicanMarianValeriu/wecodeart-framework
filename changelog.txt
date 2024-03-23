@@ -21,6 +21,7 @@ v6.3.7
 - Updated - Core support keys cannot be set/unset/changed
 - Updated - core/social-links sharing variation is now registered in php
 - Updated - core/group marquee variation is now registered in php
+- Updated - core/query spacing support - it makes sense to have adjustable space between post template and pagination
 - Fixed - CodeMirror on editor text view in Site Editor screen
 - Fixed - issue with navigation dropdown active class condition
 - Fixed - properly enqueue wecodeart( 'styles' ) Components and Utilities cache file

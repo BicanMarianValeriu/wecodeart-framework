@@ -53,7 +53,7 @@ class Column extends Dynamic {
 
 		return [
 			'supports'		=> wp_parse_args( [
-				'shadow'		=> true,
+				'shadow'	=> true,
 				'background' 			=> [
 					'backgroundImage' 	=> true,
 					'backgroundSize' 	=> true,
