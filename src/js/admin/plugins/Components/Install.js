@@ -22,6 +22,7 @@ const Install = ({
     type = '',
     slug = '',
     source = '',
+    version = '',
     destination = '',
     pluginDir = '',
     allPlugins = [],
@@ -34,7 +35,9 @@ const Install = ({
 }) => {
     const [isLoading, setIsLoading] = useState(null);
 
-    const { hasUpdate = false } = allModules.filter(({ slug: _slug }) => _slug === slug).pop() || {};
+    const { version: installedVersion, update = false } = allModules.filter(({ slug: _slug }) => _slug === slug).pop() || {};
+    const hasUpdate = update && installedVersion !== update ? update : false;
+    const canUpdate = version === update;
 
     const handleInstall = async () => {
         setIsLoading(true);
@@ -42,7 +45,7 @@ const Install = ({
         const formData = new FormData();
         formData.append('action', AJAX_ACTIONS[type]);
         formData.append('type', 'install');
-        formData.append('plugins', JSON.stringify([{ slug, source, destination }]));
+        formData.append('plugins', JSON.stringify([{ slug, source, destination, version }]));
 
         const r = await fetch(ajaxurl, {
             method: 'POST',
@@ -56,7 +59,7 @@ const Install = ({
                 setAllPlugins([...allPlugins, pluginDir]);
             }
             if (type === 'module') {
-                setAllModules([...allModules, { slug, source, destination, version: hasUpdate }]);
+                setAllModules([...allModules, { slug, source, destination, version }]);
             }
 
             setHasChanges(true);
@@ -66,11 +69,11 @@ const Install = ({
         setIsLoading(false);
     }
 
-    const getInstallStatus = () => {
+    const getButtonStatus = () => {
         let status = false;
 
         // If has update, enable button.
-        if (hasUpdate) {
+        if (hasUpdate && canUpdate) {
             return status;
         }
 
@@ -124,16 +127,16 @@ const Install = ({
     const InstallButton = (
         <Button
             className="button d-flex gap-2"
-            variant={hasUpdate ? 'tertiary' : 'primary'}
+            variant={canUpdate ? 'tertiary' : 'primary'}
             icon={isLoading && <Spinner style={{ margin: 0 }} />}
             onClick={handleInstall}
-            {...{ disabled: getInstallStatus() }}
+            {...{ disabled: getButtonStatus() }}
         >
             {getInstallLabel()}
         </Button>
     );
 
-    return (hasUpdate ? (
+    return (canUpdate ? (
         <Tooltip
             text={sprintf(__('New version available: %s', 'wecodeart'), hasUpdate)}
             placement="top"

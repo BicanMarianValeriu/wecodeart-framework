@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer\Ajax
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.2.9
- * @version		6.2.9
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Admin\Installer\Module;
@@ -49,7 +49,7 @@ class Ajax extends Async {
     protected function handle() {
         $type       = sanitize_text_field( get_prop( $_POST, 'type', '' ) );
         $modules    = array_map( function( $plugin ) {
-            return array_map( 'sanitize_text_field', wp_array_slice_assoc( $plugin, [ 'slug', 'source', 'destination' ] ) );
+            return array_map( 'sanitize_text_field', wp_array_slice_assoc( $plugin, [ 'slug', 'source', 'version', 'destination' ] ) );
         }, json_decode( stripslashes( get_prop( $_POST, 'plugins', '{}' ) ), true ) );
 
 		if ( empty( $modules ) ) {

@@ -21,6 +21,7 @@ import { Activation, Install, Uninstall } from './';
 const Plugin = ({
     title = '',
     slug = '',
+    version = '',
     description = '',
     destination = '',
     more = '',
@@ -38,9 +39,8 @@ const Plugin = ({
 }) => {
     const pluginDir = getInstallerDir({ slug, source, destination });
     const hasMetRequirements = required instanceof Array ? required.map(i => activePlugins.includes(i)).every(i => i === true) : required;
-    const { version = false } = allModules.filter(({ slug: _slug }) => _slug === slug).pop() || {};
-
-    const sharedProps = { type, slug, source, destination, pluginDir, handleNotice, setHasChanges };
+    const sharedProps = { type, slug, version, source, destination, pluginDir, handleNotice, setHasChanges };
+    const { version: installedVersion = version } = allModules.filter(({ slug: _slug }) => _slug === slug).pop() || {};
 
     return (
         <Card className="border shadow-none">
@@ -50,9 +50,9 @@ const Plugin = ({
             </CardHeader>
             {(description || more) && (<CardBody style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 {description && <p>{description}</p>}
-                {(version || more) && <HStack style={{ marginTop: 'auto' }}>
-                    {version && (
-                        <span>{sprintf(__('Version: %s', 'am2'), version)}</span>
+                {(installedVersion || more) && <HStack style={{ marginTop: 'auto' }}>
+                    {installedVersion && (
+                        <span>{sprintf(__('Version: %s', 'am2'), installedVersion)}</span>
                     )}
                     <ExternalLink className="fw-bold text-decoration-none" href={more}>
                         <span className="me-1">{__('Learn more', 'wecodeart')}</span>

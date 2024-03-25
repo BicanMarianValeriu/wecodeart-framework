@@ -31,7 +31,7 @@ class Module extends Installer {
 	 */
 	const VALID_PROPERTIES = [
 		'slug',
-		'source',
+		'version',
 		'destination'
 	];
 
@@ -61,6 +61,44 @@ class Module extends Installer {
 		$this->set_api_url();
 		$this->set_zip_url();
     }
+
+	/**
+	 * Sets remote.
+	 *
+	 * @since 	6.3.7
+	 *
+	 * @return 	bool
+	 */
+	public function set_api_url(): bool {
+		if ( $this->version === '' ) {
+		 	parent::set_api_url();
+
+			return true;
+		}
+		
+		$this->remote = 'https://api.github.com/repos/%s/zipball/refs/tags/%s';
+
+		return true;
+	}
+
+	/**
+	 * Set zip url.
+	 *
+	 * @since 	6.3.7
+	 *
+	 * @return 	mixed
+	 */
+	public function set_zip_url(): mixed {
+		if ( $this->version === '' ) {
+			parent::set_zip_url();
+	
+			return true;
+		}
+		
+		$this->package = sprintf( $this->remote, $this->slug, 'v' . $this->version );
+
+		return true;
+	}
 
 	/**
 	 * Install the module.
@@ -97,7 +135,7 @@ class Module extends Installer {
 			'slug'			=> $this->slug,
 			'source'		=> $this->source,
 			'version'       => $this->get_ver(),
-			'hasUpdate'		=> false,
+			'update'		=> false,
 			'destination'   => $this->destination ?: basename( $this->get_dir() ),
 		];
 		
@@ -122,10 +160,6 @@ class Module extends Installer {
 	 * @return 	mixed
 	 */
 	public function uninstall() {
-		if( ! $this->package ) {
-			return $this->status = null;
-		}
-
 		$folder = $this->get_dir();
 
 		if ( is_dir( $folder ) ) {

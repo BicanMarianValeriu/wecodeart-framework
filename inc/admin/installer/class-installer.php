@@ -31,6 +31,7 @@ abstract class Installer implements Installable {
 	 */
 	const VALID_PROPERTIES = [
 		'slug',
+		'version',
 		'source',
 	];
 
@@ -49,6 +50,13 @@ abstract class Installer implements Installable {
 	protected	$source = '';
 	
 	/**
+	 * Version.
+	 *
+	 * @var string
+	 */
+	protected 	$version = '';
+	
+	/**
 	 * Remote API.
 	 *
 	 * @var string
@@ -61,13 +69,6 @@ abstract class Installer implements Installable {
 	 * @var string
 	 */
 	protected 	$package = '';
-	
-	/**
-	 * Version.
-	 *
-	 * @var string
-	 */
-	protected 	$version = '';
 
 	/**
 	 * Status.
@@ -121,7 +122,7 @@ abstract class Installer implements Installable {
 	 * @return 	bool
 	 */
 	public function set_api_url(): bool {
-		$this->remote = 'https://api.github.com/repos/%s/releases/latest' ;
+		$this->remote = 'https://api.github.com/repos/%s/releases/latest';
 
 		return true;
 	}
@@ -154,8 +155,9 @@ abstract class Installer implements Installable {
 		$response = $request->get_response_body( true );
 
 		$this->version  = get_prop( $response, [ 'tag_name' ] );
-		
-		return $this->package = get_prop( $response, [ $zip_key ] );
+	 	$this->package 	= get_prop( $response, [ $zip_key ] );
+
+		return true;
 	}
 
 	/**

@@ -40,6 +40,7 @@ final class Modules implements Integration {
 	public function register_hooks() {
 		// Check modules for updates
 		\add_action( 'init', 									[ $this, 'check_updates'	] );
+		\add_action( 'init', 									[ $this, 'merge_installed'	] );
 		\add_filter( 'wecodeart/filter/support/plugins/admin', 	[ $this, 'extend_plugins' 	] );
 		\add_action( 'wecodeart/upgrade/finish',				[ $this, 'update_modules' 	] );
 	}
@@ -69,10 +70,49 @@ final class Modules implements Integration {
 	}
 
 	/**
+	 * Detect installed.
+	 *
+	 * @since   6.3.7
+	 * @version	6.3.7
+	 *
+	 * @return 	void
+	 */
+	public function merge_installed(): void {
+		$install 	= [];
+		
+		$options  	= wecodeart_option( 'modules', [] );
+		$modules	= wecodeart( 'config' )['installers']['modules'] ?? [];
+		
+		foreach ( glob( dirname( __FILE__ ) . '/*', GLOB_ONLYDIR ) as $directory ) {
+			$directory 	= basename( $directory );
+			$namespace	= 'WeCodeArt\\Support\\Modules\\' . ucfirst( $directory );
+			$in_options = wp_list_filter( $options, [ 'destination' => $directory ] );
+
+			if( ! class_exists( $namespace ) || current( $in_options ) ) {
+				continue;
+			}
+
+			$installer = current( wp_list_filter( $modules, [ 'destination' => $directory ] ) );
+
+			if( $installer ) {
+				$install[] = $installer;
+			}
+		}
+
+		if( empty( $install ) ) {
+			return;
+		}
+
+		wecodeart_option( [
+			'modules' => array_values( array_merge( $options, $install ) )
+		] );
+	}
+
+	/**
 	 * Check modules for updates.
 	 *
 	 * @since   6.2.9
-	 * @version	6.3.5
+	 * @version	6.3.7
 	 *
 	 * @return 	void
 	 */
@@ -82,12 +122,13 @@ final class Modules implements Integration {
         // Check for updates
 		if ( false === ( get_transient( self::MODULES_CACHE_KEY ) ) ) {
 			foreach( $modules as $key => $module ) {
-				$installer 		= new Module( $module );
 				$current_ver	= get_prop( $module, [ 'version' ], '1.0.0' );
+				unset( $module['version'] ); // Get latest
+				$installer 		= new Module( $module );
 				$remote_ver 	= $installer->get_ver();
 				
 				if ( version_compare( $current_ver, $remote_ver, '<' ) ) {
-					$modules[$key]['hasUpdate'] = $remote_ver; 
+					$modules[$key]['update'] = $remote_ver; 
 				}
 			}
 			

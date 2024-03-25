@@ -23,6 +23,7 @@ v6.3.7
 - Updated - core/group marquee variation is now registered in php
 - Updated - core/query spacing support - it makes sense to have adjustable space between post template and pagination
 - Updated - replace templates/patterns query utilities classes with blockGap support
+- Updated - modules can now use version to update (lock maximum compatible version based on what is set in config)
 - Fixed - CodeMirror on editor text view in Site Editor screen
 - Fixed - issue with navigation dropdown active class condition
 - Fixed - properly enqueue wecodeart( 'styles' ) Components and Utilities cache file
