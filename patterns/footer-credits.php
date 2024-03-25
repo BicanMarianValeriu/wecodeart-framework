@@ -12,8 +12,8 @@
 echo wp_kses_post( 
 	sprintf(
 		__( 'Copyright %s - All rights reserved. Built on %s.', 'wecodeart' ),
-		'[copy] [year]',
-		'[theme]'
+		'{copy} {year}',
+		'{theme}'
 	)
 );
 

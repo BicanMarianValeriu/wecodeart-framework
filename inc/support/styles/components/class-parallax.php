@@ -43,9 +43,12 @@ class Parallax extends Base {
 				--wp--easing: linear;
 				--wp--offset: -250px;
 				--wp--range: 0 calc(100vh + max(var(--wp--offset) * -1,0));
-				animation: var(--wp--animation) 1ms var(--wp--easing) forwards;
 				animation-timeline: view();
 				animation-range: var(--wp--range);
+				animation-name: var(--wp--animation);
+				animation-timing-function: var(--wp--easing);
+				animation-direction: forwards;
+				animation-duration: 1ms;
 			}
 			
 			@keyframes __backgroundPosition {

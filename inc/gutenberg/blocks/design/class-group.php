@@ -42,6 +42,13 @@ class Group extends Dynamic {
 	protected $block_name = 'group';
 
 	/**
+	 * Init.
+	 */
+	public function init() {
+		\add_action( 'enqueue_block_editor_assets', [ $this, 'register_variation' ], 30, 1 );
+	}
+
+	/**
 	 * Block args.
 	 *
 	 * @param	array $current	Existing register args
@@ -61,27 +68,7 @@ class Group extends Dynamic {
 				'namespace'		=> [
 					'type'		=> 'string',
 				],
-			], $attributes ),
-			'variation_callback' => fn() => [
-				[
-					'name'        => 'wecodeart/group/marquee',
-					'title'       => esc_html__( 'Group: Marquee', 'wecodeart' ),
-					'description' => esc_html__( 'Gather blocks in a sliding container.', 'wecodeart' ),
-					'attributes'  => [
-						'namespace'	=> 'wecodeart/group/marquee',
-						'layout'	=> [
-							'type' 			=> 'flex',
-							'flexWrap' 		=> 'nowrap',
-							'justifyContent'=> 'center',
-							'alignItems' 	=> 'center'
-						]
-					],
-					'isActive'    => [ 'namespace' ],
-					'innerBlocks' => [],
-					'scope'       => [ 'inserter' ],
-					'icon'        => 'align-right',
-				],
-			],
+			], $attributes )
 		];
 	}
 
@@ -110,6 +97,40 @@ class Group extends Dynamic {
 		}
 	
 		return (string) $content;
+	}
+
+	/**
+	 * Registers variation.
+	 *
+	 * @return 	string
+	 */
+	public function register_variation(): void {
+		wp_add_inline_script( 'wecodeart-gutenberg', <<<JS
+			const {
+				domReady,
+				i18n: { __ },
+				blocks: { registerBlockVariation },
+			} = wp;
+
+			domReady(() => registerBlockVariation('core/group', {
+				name: 'wecodeart/group/marquee',
+				title: __('Group: Marquee', 'wecodeart'),
+				description: __('Gather blocks in a sliding container.', 'wecodeart'),
+				icon: 'align-right',
+				isDefault: false,
+				isActive: ['namespace'],
+				scope: ['block', 'inserter'],
+				attributes: {
+					namespace: 'wecodeart/group/marquee',
+					layout: {
+						type: 'flex',
+						flexWrap: 'nowrap',
+						justifyContent: 'center',
+						alignItems: 'center'
+					}
+				},
+			}));
+		JS );
 	}
 
 	/**
@@ -222,6 +243,7 @@ class Group extends Dynamic {
 				--marquee-direction: forwards;
 				--marquee-gap: var(--wp--style--block-gap);
 				--marquee-transform: translate3d(calc(-100% - var(--marquee-gap)),0,0);
+				--marquee-repeat: infinite;
 				justify-content: initial /* required */;
 				flex-wrap: nowrap /* required */;
 				max-width: 100vw;
@@ -229,6 +251,11 @@ class Group extends Dynamic {
 			}
 			.wp-block-group--marquee.is-vertical { 
 				--marquee-transform: translate3d(0,calc(-100% - var(--marquee-gap)),0);
+			}
+			.wp-block-group--marquee:is(.scroll.scroll) {
+				--marquee-state: initial;
+				--marquee-repeat: initial;
+				--marquee-timeline: scroll(root);
 			}
 			.wp-block-group--marquee > .wp-block-group__marquee {
 				position: relative;
@@ -238,15 +265,16 @@ class Group extends Dynamic {
 				gap: inherit;
 				min-height: 1em;
 				transform: translate3d(0,0,0);
+				animation-timeline: var(--marquee-timeline, initial);
 				animation-name: var(--marquee-animation);
+				animation-timing-function: linear;
 				animation-duration: var(--marquee-speed-mobile);
 				animation-direction: var(--marquee-direction);
 				animation-play-state: var(--marquee-state);
-				animation-iteration-count: infinite;
-				animation-timing-function: linear;
+				animation-iteration-count: var(--marquee-repeat);
 			}
-			.wp-block-group--marquee:is(:hover,:focus,:focus-within) > .wp-block-group__marquee {
-				animation-play-state: paused;
+			.wp-block-group--marquee:is(:hover,:focus,:focus-within) {
+				--marquee-state: paused;
 			}
 			@media (min-width: {$breakpoint}) {
 				.wp-block-group--marquee > .wp-block-group__marquee {
@@ -254,8 +282,8 @@ class Group extends Dynamic {
 				}
 			}
 			@media (prefers-reduced-motion) {
-				.wp-block-group--marquee > .wp-block-group__marquee {
-					animation-play-state: paused;
+				.wp-block-group--marquee {
+					--marquee-state: paused;
 				}
 			}
 			@keyframes __marquee {

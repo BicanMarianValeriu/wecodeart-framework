@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.5
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -18,11 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\dom_element;
-use function WeCodeArt\Functions\dom_change_tag;
-use function WeCodeArt\Functions\dom_get_element;
-use function WeCodeArt\Functions\dom_create_element;
+use function WeCodeArt\Functions\{ get_prop, dom_element, dom_change_tag, dom_get_element, dom_create_element };
 
 /**
  * Gutenberg Query Pagination block.

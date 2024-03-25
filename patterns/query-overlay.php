@@ -7,16 +7,16 @@
  * Inserter: false
  */
 ?>
-<!-- wp:query {"queryId":1,"query":{"perPage":0,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"enhancedPagination":true} -->
+<!-- wp:query {"queryId":1,"query":{"perPage":0,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"enhancedPagination":true,"style":{"spacing":{"blockGap":"var:preset|spacing|lg"}}} -->
 <div class="wp-block-query">
-    <!-- wp:query-title {"type":"archive","className":"my-5"} /-->
+    <!-- wp:query-title {"type":"archive"} /-->
     <!-- wp:term-description /-->
     
-    <!-- wp:post-template {"className":"my-5","layout":{"type":"grid","columnCount":3}} -->
+    <!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
     <!-- wp:pattern {"slug":"wecodeart/el-entry-overlay"} /-->
     <!-- /wp:post-template -->
 
-    <!-- wp:query-pagination {"className":"mb-5"} -->
+    <!-- wp:query-pagination -->
     <!-- wp:query-pagination-numbers /-->
     <!-- /wp:query-pagination -->
 

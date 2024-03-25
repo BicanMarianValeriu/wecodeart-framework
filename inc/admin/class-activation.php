@@ -200,8 +200,6 @@ class Activation {
 
 			return;
 		}
-
-		wp_redirect( admin_url( 'themes.php?page=wecodeart&tab=intro' ) );
 	}
 
 	/**

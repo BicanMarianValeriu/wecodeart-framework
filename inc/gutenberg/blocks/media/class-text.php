@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.8
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -18,9 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_placeholder_source;
-use function WeCodeArt\Functions\dom_get_element;
+use function WeCodeArt\Functions\{ get_prop, get_placeholder_source, dom_get_element };
 
 /**
  * Gutenberg Media Text block.

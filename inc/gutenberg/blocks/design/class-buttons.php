@@ -107,7 +107,6 @@ class Buttons extends Dynamic {
 				display: flex;
 				flex-flow: row wrap;
 				gap: var(--wp--style--block-gap, 1em);
-				margin-bottom: 1rem;
 			}
 			.wp-block-buttons .wp-block-button {
 				position: relative;

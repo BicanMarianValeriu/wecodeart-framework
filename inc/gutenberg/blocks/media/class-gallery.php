@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.3
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -58,6 +58,11 @@ class Gallery extends Dynamic {
 					'blockGap' 	=> [
 						'sides' => [ 'vertical', 'horizontal' ]
 					],
+					'__experimentalDefaultControls' => [
+						'margin'	=> false,
+						'padding'	=> false,
+						'blockGap' 	=> true
+					]
 				]
 			], $supports )
 		];

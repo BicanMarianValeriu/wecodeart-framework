@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.8
- * @version		6.2.8
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -104,7 +104,7 @@ class Lightbox extends Base {
 				visibility: hidden;
 				overflow: hidden;
 				cursor: zoom-out;
-				z-index:100000;
+				z-index: 100000;
 			}
 			
 			.wp-lightbox-overlay .close-button {
@@ -189,11 +189,11 @@ class Lightbox extends Base {
 				animation: both turn-on-visibility 0.35s;
 			}
 
-			.wp-lightbox-overlay.hideanimationenabled:not(.active) {
+			.wp-lightbox-overlay:is(.show-closing-animation,.hideanimationenabled):not(.active) {
 				animation: both turn-off-visibility 0.35s;
 			}
 
-			.wp-lightbox-overlay.hideanimationenabled:not(.active) img {
+			.wp-lightbox-overlay:is(.show-closing-animation,.hideanimationenabled):not(.active) img {
 				animation: both turn-off-visibility 0.25s;
 			}
 			
@@ -212,16 +212,16 @@ class Lightbox extends Base {
 				.wp-lightbox-overlay.zoom.active .scrim {
 					animation: turn-on-visibility .4s forwards;
 				}
-				.wp-lightbox-overlay.zoom.hideanimationenabled:not(.active) {
+				.wp-lightbox-overlay.zoom:is(.show-closing-animation,.hideanimationenabled):not(.active) {
 					animation: none;
 				}
-				.wp-lightbox-overlay.zoom.hideanimationenabled:not(.active) .lightbox-image-container {
+				.wp-lightbox-overlay.zoom:is(.show-closing-animation,.hideanimationenabled):not(.active) .lightbox-image-container {
 					animation: lightbox-zoom-out .4s;
 				}
-				.wp-lightbox-overlay.zoom.hideanimationenabled:not(.active) .lightbox-image-container img {
+				.wp-lightbox-overlay.zoom:is(.show-closing-animation,.hideanimationenabled):not(.active) .lightbox-image-container img {
 					animation: none;
 				}
-				.wp-lightbox-overlay.zoom.hideanimationenabled:not(.active) .scrim {
+				.wp-lightbox-overlay.zoom:is(.show-closing-animation,.hideanimationenabled):not(.active) .scrim {
 					animation: turn-off-visibility .4s forwards;
 				}
 			}

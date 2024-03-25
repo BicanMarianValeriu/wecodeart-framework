@@ -60,6 +60,7 @@ class Styles implements Configuration {
 		$this->set( 'core/column', 					Styles\Blocks\Column::class );
 		$this->set( 'core/cover', 					Styles\Blocks\Cover::class );
 		$this->set( 'core/group', 					Styles\Blocks\Group::class );
+		$this->set( 'core/gallery', 				Styles\Blocks\Gallery::class );
 		$this->set( 'core/image', 					Styles\Blocks\Image::class );
 		$this->set( 'core/media-text',				Styles\Blocks\Media::class );
 		$this->set( 'core/navigation',				Styles\Blocks\Navigation::class );

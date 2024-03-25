@@ -115,7 +115,7 @@ class Quote extends Dynamic {
 	 */
 	public function styles(): string {
 		return <<<CSS
-			.wp-block-quote {
+			:where(.wp-block-quote) {
 				margin: 0;
 			}
 			.wp-block-quote:not(.is-style-plain) {

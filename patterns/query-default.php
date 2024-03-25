@@ -7,12 +7,12 @@
  * Inserter: false
  */
 ?>
-<!-- wp:query {"queryId":1,"query":{"perPage":0,"pages":0,"offset":0,"postType":"post","categoryIds":[],"tagIds":[],"order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true}} -->
+<!-- wp:query {"queryId":1,"query":{"perPage":0,"pages":0,"offset":0,"postType":"post","categoryIds":[],"tagIds":[],"order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"style":{"spacing":{"blockGap":"var:preset|spacing|lg"}}} -->
 <div class="wp-block-query">
-    <!-- wp:query-title {"type":"archive","className":"my-5"} /-->
+    <!-- wp:query-title {"type":"archive"} /-->
     <!-- wp:term-description /-->
 
-    <!-- wp:post-template {"className":"my-5","layout":{"type":"grid","columnCount":3}} -->
+    <!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
     <!-- wp:post-featured-image {"isLink":true} /-->
     <!-- wp:post-title {"level":3,"isLink":true} /-->
     <!-- wp:group {"className":"g-1","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
@@ -23,7 +23,7 @@
     <!-- wp:post-excerpt {"moreText":"<?php esc_html_e( 'Read more', 'wecodeart' ); ?>"} /-->
     <!-- /wp:post-template -->
 
-    <!-- wp:query-pagination {"className":"mb-5"} -->
+    <!-- wp:query-pagination -->
     <!-- wp:query-pagination-numbers /-->
     <!-- /wp:query-pagination -->
     

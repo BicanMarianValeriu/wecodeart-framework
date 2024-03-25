@@ -18,10 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_placeholder_source;
-use function WeCodeArt\Functions\dom_get_element;
-use function WeCodeArt\Functions\dom_image_2_svg;
+use function WeCodeArt\Functions\{ get_prop, get_placeholder_source, dom_get_element, dom_image_2_svg };
 
 /**
  * Gutenberg Image block.
@@ -129,11 +126,11 @@ class Image extends Dynamic {
 			.wp-block-image.alignfull {
 				max-width: initial;
 			}
+			.wp-block-image[class*='align'] {
+				display: table;
+			}
 			.wp-block-image.aligncenter {
 				text-align: center;
-			}
-			.wp-block-image.is-style-rounded {
-				border-radius: 9999px;
 			}
 			.wp-block-image > a,
 			.wp-block-image :where(img,svg) {

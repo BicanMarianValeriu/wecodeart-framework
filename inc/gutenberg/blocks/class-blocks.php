@@ -116,85 +116,138 @@ class Blocks implements Configuration {
      * Runs before the block is rendered, so that the custom field
      * string can be used in the shortcode block.
      *
-     * @since 6.2.8
+     * @since   6.2.8
+     * @version 6.3.7
      *
-     * @param string   $html   Block HTML.
-     * @param array    $block  Block data.
-     * @param WP_Block $object Block context.
+     * @param   string   $html   Block HTML.
+     * @param   array    $block  Block data.
+     * @param   WP_Block $object Block context.
      *
      * @return string
      */
     public function render_template_tags( string $html, array $block, \WP_Block $object ): string {
+        $block_name = get_prop( $block, [ 'blockName' ], '' );
+		$registered = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+
+        if ( ! array_key_exists( $block_name, $registered ) ) {
+			return $html;
+		}
+
+		$category     = $registered[ $block_name ]->category ?? '';
+		$other_blocks = [
+			'core/button',
+			'core/image',
+			'core/navigation-link',
+			'core/post-excerpt',
+		];
+
+		if ( 'text' !== $category && ! in_array( $block_name, $other_blocks, true ) ) {
+			return $html;
+		}
+
         $html = str_replace(
             [ '&#123;', '&#125;', '%7B', '%7D' ],
             [ '{', '}', '{', '}' ],
             $html
         );
 
+        if ( ! str_contains( $html, '{' ) || ! str_contains( $html, '}' ) ) {
+			return $html;
+		}
+
         preg_match_all( '#\{(.*?)}#', $html, $matches );
 
-        if ( ! $matches ) {
-            return $html;
-        }
+		$without_brackets = $matches[1] ?? [];
 
-        $tags = apply_filters(
-            'wecodeart/filter/template/tags',
-            [
-                'copy'         => '&copy;',
-                'year'         => gmdate( 'Y' ),
-                'current_year' => gmdate( 'Y' ),
-                'date'         => gmdate( 'm/d/Y' ),
-                'home_url'     => esc_url( home_url() ),
-                'site_title'   => get_bloginfo( 'name', 'display' ),
-                'site_name'    => get_bloginfo( 'name', 'display' ),
-                'theme'        => sprintf( '<a href="%s" target="_blank">%s</a>', 'https://www.wecodeart.com/', 'WeCodeArt Framework' )
-            ]
-        );
+		if ( empty( $without_brackets ) ) {
+			return $html;
+		}
 
-        for ( $i = 0; $i < count( $matches ); $i++ ) {
-            $with_tags = $matches[0][ $i ] ?? '';
+        $post_id      = $instance->context['postId'] ?? get_the_ID();
+		$replacements = [];
 
-            if ( ! $with_tags ) {
-                continue;
-            }
+		foreach ( $without_brackets as $tag ) {
+			$tag         = strtolower( $tag );
+			$replacement = '';
 
-            $without_tags = str_replace( [ '{', '}' ], '', $with_tags );
+			if ( shortcode_exists( $tag ) ) {
+				continue;
+			}
 
-            if ( ! $without_tags ) {
-                continue;
-            }
+			if ( ! is_null( $post_id ) ) {
+				$post_field = get_post_field( $tag, $post_id );
 
-            if ( shortcode_exists( $without_tags ) ) {
-                return $html;
-            }
+				if ( $post_field ) {
+					$replacement = $post_field;
+				} else {
+					$post_meta = get_post_meta( $post_id, $tag, true );
 
-            $id         = $object->context['postId'] ?? get_the_ID();
-            $post_field = null;
-            $post_meta  = null;
+					if ( $post_meta ) {
+						$replacement = $post_meta;
+					}
+				}
+			}
 
-            if ( ! is_null( $id ) ) {
-                $post_field = esc_html( get_post_field( $without_tags, $id ) );
+			if ( ! $replacement ) {
+				$tags = $this->get_template_tags( $post_id ?: null );
 
-                if ( $post_field ) {
-                    $html = str_replace( $with_tags, $post_field, $html );
-                }
+				if ( isset( $tags[ $tag ] ) ) {
+                    $replacement = is_callable( $tags[ $tag ] ) ? call_user_func( $tags[ $tag ] ) : $tags[ $tag ];
+				}
+			}
+            
+			if ( $replacement ) {
+                $replacements[ '{' . $tag . '}' ] = $replacement;
+			}
+		}
 
-                $post_meta = esc_html( get_post_meta( $id, $without_tags, true ) );
-
-                if ( ! $post_field && $post_meta ) {
-                    $html = str_replace( $with_tags, $post_meta, $html );
-                }
-            }
-
-            $custom = esc_html( $tags[ $with_tags ] ?? $tags[ $without_tags ] ?? '' );
-
-            if ( ! $post_field && ! $post_meta && $custom ) {
-                $html = str_replace( $with_tags, $custom, $html );
-            }
-        }
-
-        return $html;
+		return str_replace( array_keys( $replacements ), array_values( $replacements ), $html );
     }
+
+    /**
+	 * Get template tags.
+	 *
+	 * @since   6.3.7
+	 *
+	 * @param   ?int $post_id
+	 *
+	 * @return  array
+	 */
+	private function get_template_tags( ?int $post_id ): array {
+        $tags = [
+            'copy'         => '&copy;',
+            'year'         => gmdate( 'Y' ),
+            'current_year' => gmdate( 'Y' ),
+            'date'         => gmdate( 'm/d/Y' ),
+            'home_url'     => esc_url( home_url() ),
+            'site_title'   => get_bloginfo( 'name', 'display' ),
+            'site_name'    => get_bloginfo( 'name', 'display' ),
+            'theme'        => sprintf( '<a href="%s" target="_blank">%s</a>', 'https://www.wecodeart.com/', 'WeCodeArt Framework' )
+        ];
+
+		$post_type_object = get_post_type_object( get_post_type( $post_id ) );
+
+		if ( $post_type_object ) {
+			$tags['post_type_label'] = $post_type_object->label;
+		}
+
+        $tags['read_time'] = static function () use ( $post_id ): string {
+            $per_minute = apply_filters( 'wecodeart/filter/words_per_minute', 200 );
+            $words      = str_word_count( strip_tags( get_post_field( 'post_content', $post_id ) ) );
+            $minutes    = floor( $words / $per_minute );
+
+            if( $time < 1 ) {
+                return esc_html__( 'Less than a minute to read.', 'wecodeart' );
+            }
+
+            return sprintf(
+                _nx( '%1$s minute to read', '%1$s minutes to read', $minutes, 'comments title', 'wecodeart' ),
+                number_format_i18n( $minutes ),
+            );
+        };
+
+		return apply_filters( 'wecodeart/filter/template/tags', $tags, $post_id );
+	}
 
     /**
      * Register hooks

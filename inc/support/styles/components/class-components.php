@@ -149,7 +149,7 @@ class Components implements Configuration {
         }
 
         wecodeart( 'assets' )->add_style( $this->make_handle(), [
-            'inline' => wecodeart( 'styles' )::compress( $inline_css )
+            'inline' => $inline_css
         ] );
 	}
 
@@ -159,6 +159,10 @@ class Components implements Configuration {
 	 * @return  void
 	 */
 	public function editor_css() {
+        if( ! is_admin() ) {
+            return;
+        }
+
 		$filesystem = wecodeart( 'files' );
 		$filesystem->set_folder( 'cache' );
 

@@ -109,14 +109,12 @@ class Pages extends Dynamic {
 			return $content;
 		}
 
-		// Otherwise we wrap them in <ul> tag.
-		$handle_style 	= 'wp-block-navigation';
-
-		if( ! wp_style_is( $handle_style ) ) {
+		if( ! wp_style_is( 'wp-block-navigation' ) ) {
 			wp_enqueue_style( 'wp-block-navigation' );
 			wp_enqueue_style( 'wp-block-navigation-link' );
 		}
 
+		// Otherwise we wrap them in <ul> tag.
 		$content = wecodeart( 'markup' )::wrap( 'wp-block-page-list', [ [
 			'tag' 	=> 'ul',
 			'attrs'	=> $this->get_block_wrapper_attributes( [

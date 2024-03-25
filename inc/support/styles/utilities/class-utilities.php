@@ -69,7 +69,7 @@ class Utilities implements Configuration {
 		// Front
 		add_filter( 'pre_render_block',     [ $this, 'get_block_utilities'      ], 20, 2 );
 		add_action( 'wp_enqueue_scripts',   [ $this, 'get_template_utilities'   ], 20, 1 );
-        add_action( 'wp_print_styles',      [ $this, 'frontend_css'             ], PHP_INT_MAX, 1 );
+        add_action( 'wp_enqueue_scripts',	[ $this, 'assets'             		], 20, 1 );
 	}
 
     /**
@@ -116,42 +116,12 @@ class Utilities implements Configuration {
 		$filesystem->set_folder( '' );
 	}
 
-    /**
-	 * Editor only.
-	 *
-	 * @return  void
-	 */
-	public function block_editor_assets() {
-		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-classes' ), [
-			'wecodeart-gutenberg'
-		], wecodeart( 'version' ) );
-	}
-
-    /**
-	 * Load Utilities CSS on admin.
-	 *
-	 * @return  void
-	 */
-	public function editor_css() {
-		$filesystem = wecodeart( 'files' );
-		$filesystem->set_folder( 'cache' );
-
-		wp_enqueue_style(
-			$this->make_handle(),
-			$filesystem->get_file_url( self::CACHE_FILE, true ),
-			[],
-			wecodeart( 'version' )
-		);
-		
-		$filesystem->set_folder( '' );
-	}
-
-    /**
+	/**
 	 * Output frontend styles.
 	 *
 	 * @return 	string
 	 */
-	public function frontend_css() {
+	public function assets() {
         if( empty( $this->classes ) ) {
             return;
         }
@@ -172,16 +142,39 @@ class Utilities implements Configuration {
         if( ! empty( $array_css ) ) {
             $array_css  = wecodeart( 'styles' )::sort_breakpoints( $array_css );
             $processed  = wecodeart( 'styles' )::parse( wecodeart( 'styles' )::add_prefixes( $array_css ) );
-            $inline_css .= wecodeart( 'styles' )::compress( $processed );
+            $inline_css .= $processed;
         }
 
 		if( empty( $inline_css ) ) {
             return;
         }
 
-		wp_register_style( $this->make_handle(), false, [], true, true );
-		wp_add_inline_style( $this->make_handle(), $inline_css );
-		wp_enqueue_style( $this->make_handle() );
+		wecodeart( 'assets' )->add_style( $this->make_handle(), [
+            'inline' => $inline_css
+        ] );
+	}
+
+    /**
+	 * Load Utilities CSS on admin.
+	 *
+	 * @return  void
+	 */
+	public function editor_css() {
+		if( ! is_admin() ) {
+            return;
+        }
+
+		$filesystem = wecodeart( 'files' );
+		$filesystem->set_folder( 'cache' );
+
+		wp_enqueue_style(
+			$this->make_handle(),
+			$filesystem->get_file_url( self::CACHE_FILE, true ),
+			[],
+			wecodeart( 'version' )
+		);
+		
+		$filesystem->set_folder( '' );
 	}
 
     /**
@@ -317,6 +310,17 @@ class Utilities implements Configuration {
 			'grid',
 			'col-auto',
 		], array_keys( $this->all() ), $args );
+	}
+
+	/**
+	 * Editor only.
+	 *
+	 * @return  void
+	 */
+	public function block_editor_assets() {
+		wp_enqueue_script( $this->make_handle(), $this->get_asset( 'js', 'gutenberg/ext-classes' ), [
+			'wecodeart-gutenberg'
+		], wecodeart( 'version' ) );
 	}
 	
     /**
