@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.8
+ * @version		6.3.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -85,7 +85,7 @@ class Button extends Dynamic {
 					'target="_blank"',
 				],
 				[
-					'javascript:void',
+					'javascript:void(0)',
 					'disabled',
 				],
 				$content
@@ -119,7 +119,7 @@ class Button extends Dynamic {
 
 		switch( $class ) :
 			case 'outline' :
-				$inline = "
+				$inline = <<<CSS
 					.is-style-outline :where(.wp-block-button__link) {
 						--wp--color--rgb: 52, 58, 64;
 					}
@@ -134,17 +134,17 @@ class Button extends Dynamic {
 						border-color: rgb(var(--wp--color--rgb));
 						color: var(--wp--color--hover, white)!important;
 					}
-				";
+				CSS;
 				break;
 			case 'link' :
-				$inline = "
+				$inline = <<<CSS
 					.is-style-link.wp-block-button .wp-block-button__link {
 						background: transparent;
 						border: none;
 						box-shadow: none;
 						padding: 0;
 					}
-				";
+				CSS;
 				break;
 			default :
 				break;
@@ -215,12 +215,8 @@ class Button extends Dynamic {
 			}
 			.wp-element-button:focus,
 			.wp-block-button__link:focus {
-				outline: 0;
-				box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
-			}
-			.wp-element-button:is(:active,.active),
-			.wp-block-button__link:is(:active,.active) {
-				box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
+				outline-style: dotted;
+				outline-width: thin;
 			}
 			.wp-element-button:is(:disabled,.disabled),
 			.wp-block-button__link:is(:disabled,.disabled) {
