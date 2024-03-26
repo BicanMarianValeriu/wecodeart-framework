@@ -247,7 +247,8 @@ class Group extends Dynamic {
 				justify-content: initial /* required */;
 				flex-wrap: nowrap /* required */;
 				max-width: 100vw;
-				overflow: hidden;
+				overflow-x: hidden;
+				overflow-x: clip;
 			}
 			.wp-block-group--marquee.is-vertical { 
 				--marquee-transform: translate3d(0,calc(-100% - var(--marquee-gap)),0);

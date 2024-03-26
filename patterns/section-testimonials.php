@@ -24,8 +24,8 @@
         <!-- /wp:paragraph -->
     </div>
     <!-- /wp:group -->
-    <!-- wp:group {"namespace":"wecodeart/group/marquee","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md"}}},"textColor":"secondary","layout":{"type":"flex","flexWrap":"nowrap","alignItems":"center"}} -->
-    <div class="wp-block-group alignfull has-secondary-color has-text-color" style="padding-top:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md)">
+    <!-- wp:group {"namespace":"wecodeart/group/marquee","align":"full","textColor":"secondary","layout":{"type":"flex","flexWrap":"nowrap","alignItems":"center"}} -->
+    <div class="wp-block-group alignfull has-secondary-color has-text-color">
         <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
         <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
         <!-- wp:pattern {"slug":"wecodeart/el-testimonial"} /-->
