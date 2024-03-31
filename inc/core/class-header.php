@@ -33,7 +33,6 @@ class Header {
 	 */
 	public function init() {
 		add_action( 'wecodeart/header',	[ __CLASS__, 'markup' 	] );
-		add_action( 'init', 			[ $this, 'clean_head' 	] );
 		add_filter( 'body_class',		[ $this, 'body_classes'	] );
 		add_action( 'wp_head', 			[ $this, 'link_rel' 	] );
 	}
@@ -107,43 +106,5 @@ class Header {
 		} 
 
 		return $classes;
-	}
-
-	/**
-	 * Clean WP_Head of unwanted of stuff
-	 *
-	 * This approach tricks the theme check plugin in WP.org but...
-	 * I'm aware about plugin teritoriality so I will keep this disabled
-	 * However, user can use this filter to reduce <head> bloat to minimum
-	 *
-	 * @return void
-	 */
-	public function clean_head() {
-		$config = wecodeart_config( 'header' );
-
-		if( get_prop( $config, 'clean' ) !== true ) return;
-
-		$actions = apply_filters( 'wecodeart/filter/head/clean/actions', [
-			[ 'wp_head', 'wp_generator' ],
-			[ 'wp_head', 'rsd_link' ],
-			[ 'wp_head', 'feed_links', 2 ],
-			[ 'wp_head', 'feed_links_extra', 3 ],
-			[ 'wp_head', 'wlwmanifest_link' ],
-			[ 'wp_head', 'index_rel_link' ],
-			[ 'wp_head', 'parent_post_rel_link', 10, 0 ],
-			[ 'wp_head', 'start_post_rel_link', 10, 0 ],
-			[ 'wp_head', 'adjacent_posts_rel_link', 10, 0 ],
-			[ 'wp_head', 'rest_output_link_wp_head' ],
-			[ 'wp_head', 'wp_shortlink_wp_head' ],
-			[ 'wp_head', 'wp_resource_hints', 2, 99 ],
-			[ 'wp_head', 'wp_oembed_add_discovery_links' ],
-			[ 'wp_head', 'print_emoji_detection_script', 7 ],
-			[ 'wp_print_styles', 'print_emoji_styles' ],
-			[ 'template_redirect', 'rest_output_link_header', 11 ],
-		] );
-
-		if( empty( $actions ) ) return;
-		
-		foreach( $actions as $args ) call_user_func( 'remove_action', ...$args );
 	}
 }

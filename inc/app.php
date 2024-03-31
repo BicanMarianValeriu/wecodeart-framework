@@ -65,9 +65,7 @@ return [
     | This array of options will be used as defaults for header.
     |
     */
-    'header' => [
-        'clean'     => false
-    ],
+    'header' => [ /* Deprecated */ ],
     /*
     |--------------------------------------------------------------------------
     | Theme Footer
@@ -76,9 +74,7 @@ return [
     | This array of options will be used as defaults for footer.
     |
     */
-    'footer' => [
-        'scripts'   => true
-    ],
+    'footer' => [ /* Deprecated */ ],
     /*
     |--------------------------------------------------------------------------
     | Theme Gutenberg
@@ -182,10 +178,20 @@ return [
                 'slug'          => 'BicanMarianValeriu/wca-scrolltop',
                 'title'         => esc_html__( 'WCA: Scroll Top', 'wecodeart' ),
                 'description'   => esc_html__( 'Lightweight extension for adding a scroll to top button on your site. Super flexible and customizable.', 'wecodeart' ),
-                'more'          => 'https://github.com/BicanMarianValeriu/wca-scrolltop/',
+                'more'          => 'https://www.wecodeart.com/integrations/scrolltop/',
                 'source'        => 'github',
                 'version'       => '1.0.1',
                 'destination'   => 'scrolltop',
+                'type'          => 'module',
+            ],
+            [
+                'slug'          => 'BicanMarianValeriu/wca-optimization',
+                'title'         => esc_html__( 'WCA: Optimization', 'wecodeart' ),
+                'description'   => esc_html__( 'Lightweight extension for enhancing our theme with options for cleaning wp_head of unnecesary stuff.', 'wecodeart' ),
+                'more'          => 'https://github.com/BicanMarianValeriu/wca-optimization/',
+                'source'        => 'github',
+                'version'       => '1.0.0',
+                'destination'   => 'optimization',
                 'type'          => 'module',
             ],
         ],

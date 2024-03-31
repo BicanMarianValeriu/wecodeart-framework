@@ -44,6 +44,8 @@
 		"build:modules:accordion": "wp-scripts build index=./inc/support/modules/accordion/src/js/index.js --output-path=inc/support/modules/accordion/assets/minified",
 		"start:modules:scrolltop": "wp-scripts start admin=./inc/support/modules/scrolltop/src/js/admin.js --output-path=inc/support/modules/scrolltop/assets/unminified",
 		"build:modules:scrolltop": "wp-scripts build admin=./inc/support/modules/scrolltop/src/js/admin.js --output-path=inc/support/modules/scrolltop/assets/minified",
+		"start:modules:optimization": "wp-scripts start admin=./inc/support/modules/optimization/src/js/admin.js --output-path=inc/support/modules/optimization/assets/unminified",
+		"build:modules:optimization": "wp-scripts build admin=./inc/support/modules/optimization/src/js/admin.js --output-path=inc/support/modules/optimization/assets/minified",
 		"lint:css": "wp-scripts lint-style ./src/scss",
 		"lint:js": "wp-scripts lint-js ./src/js/routes ./src/js/frontend.js",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",

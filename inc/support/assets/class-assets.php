@@ -65,10 +65,7 @@ final class Assets implements Integration {
 	 * Send to Constructor
 	 */
 	public function init() {
-		$this->Asset	= ( new Assets\Asset( wecodeart_config() ) );
-
-		// Move jQuery to Footer
-		\add_action( 'wp_default_scripts', 	[ $this, 'to_footer'	] );
+		$this->Asset = ( new Assets\Asset( wecodeart_config() ) );
 	}
 
 	/**
@@ -77,21 +74,6 @@ final class Assets implements Integration {
 	public function register_hooks(): void {
 		\add_action( $this->hook,	[ $this, 'core'		], 20 );
 		\add_action( $this->hook,	[ $this, 'enqueue'	], PHP_INT_MAX );
-	}
-	
-	/**
-	 * Scripts to Footer
-	 *
-	 * @since	6.1.5
-	 * @version	6.1.5
-	 */
-	public function to_footer( $wp_scripts ): void {
-		if( is_admin() || get_prop( wecodeart_config( 'footer' ), [ 'scripts' ] ) === false ) return;
-
-		$wp_scripts->add_data( 'wp-inert-polyfill',	'group', 1 );
-		$wp_scripts->add_data( 'jquery', 			'group', 1 );
-		$wp_scripts->add_data( 'jquery-core', 		'group', 1 );
-		$wp_scripts->add_data( 'jquery-migrate', 	'group', 1 );
 	}
 
 	/**

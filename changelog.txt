@@ -1,4 +1,5 @@
 v6.3.7
+- Removed - header/footer cleanup functions moved to WCA: Optimization module (installable via Modules Manager)
 - Removed - default fonts - in WP 6.5, fonts can be installed by user.
 - Removed - purple style variation - is a base theme after all.
 - Updated - Installer for the secondary child theme with webpack setup (wecodeart-honey)
