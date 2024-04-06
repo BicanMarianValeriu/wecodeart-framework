@@ -1,3 +1,9 @@
+v6.3.9
+- Fixed - fatal error on PHP 7.4 on Sanitize::background()
+
+v6.3.8
+- Fixed - fatal error on PHP 7.4
+
 v6.3.7
 - Removed - header/footer cleanup functions moved to WCA: Optimization module (installable via Modules Manager)
 - Removed - default fonts - in WP 6.5, fonts can be installed by user.

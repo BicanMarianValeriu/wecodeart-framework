@@ -70,11 +70,13 @@ class Code extends Dynamic {
 	 * @since	6.3.7
 	 * @version	6.3.7
 	 */
-	public function has_syntax_highlight(): mixed {
+	public function has_syntax_highlight() {
+		$assets = wecodeart_config( 'paths' )['uri'] . '/assets/cache';
+
 		return apply_filters( 'wecodeart/filter/gutenberg/block/code/hljs', [
-			'//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js',
-			'//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css',
-			'//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js'
+			$assets . '/highlight.min.js',
+			$assets . '/highlight-ln.min.js',
+			$assets . '/vs2015.min.css',
 		] );
 	}
 	

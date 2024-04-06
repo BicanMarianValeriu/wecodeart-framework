@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.3.7
+ * @version		6.3.9
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -35,7 +35,7 @@ final class Sanitize {
 	 *
 	 * @return 	string
 	 */
-	public static function font( mixed $value ): string {
+	public static function font( $value ): string {
 		return ( new Property\Font( $value ) )->get_value();
 	}
 
@@ -59,7 +59,7 @@ final class Sanitize {
 	 *
 	 * @return 	string
 	 */
-	public static function background( mixed $value ): string {
+	public static function background( $value ): string {
 		return ( new Property\Background( $value ) )->get_value();
 	}
 
