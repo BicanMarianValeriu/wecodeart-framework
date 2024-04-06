@@ -248,7 +248,7 @@ function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
  * Gets template instance.
  *
  * @since	5.0.0
- * @version	5.3.1
+ * @version	6.3.7
  *
  * @param   string|array    $file
  * @param   array|null      $data
@@ -257,7 +257,7 @@ function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
  * @return  mixed
  */
 function wecodeart_template( $file, $data = [], $echo = true ) {
-    $template = wecodeart( 'markup' )->Template->set_file( $file );
+    $template = wecodeart( 'template' )->set_file( $file );
 
     if( $echo ) {
         return $template->render( $data );

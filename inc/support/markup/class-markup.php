@@ -58,7 +58,6 @@ class Markup implements Integration {
 	public function init() {
 		$this->SVG 		= Markup\SVG::get_instance();
 		$this->Inputs 	= Markup\Inputs::get_instance();
-		$this->Template	= ( new Markup\Template( wecodeart_config() ) );
 	}
 
 	/**

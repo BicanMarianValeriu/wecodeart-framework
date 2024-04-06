@@ -25,6 +25,8 @@ v6.3.7
 - Updated - core/query spacing support - it makes sense to have adjustable space between post template and pagination
 - Updated - replace templates/patterns query utilities classes with blockGap support
 - Updated - modules installer can now use `version` to install/update maximum compatible version (button is disabled if update is higher than config)
+- Updated - added wecodeart( 'template' ) factory
+- Updated - core/read-more styles moved to theme.json
 - Fixed - CodeMirror on editor text view in Site Editor screen
 - Fixed - issue with navigation dropdown active class condition
 - Fixed - properly enqueue wecodeart( 'styles' ) Components and Utilities cache file
@@ -33,6 +35,7 @@ v6.3.7
 - Added - outlined/sharp/crisp box-shadow controlled via custom box shadow theme.json
 - Added - box-shadow support for core/group, core/columns, core/column block
 - Added - scroll animation-timeline for core/group marquee variation (controlled on scroll - Chrome/Edge only)
+- Added - logos slider section built with Group: Marquee
 
 v6.3.6
 - Fixed - typo for upcomming collapse script in minified assets folder

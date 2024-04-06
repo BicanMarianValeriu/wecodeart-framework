@@ -120,8 +120,7 @@ class Image extends Dynamic {
 		return <<<CSS
 			/* Block */
 			:where(.wp-block-image) {
-				margin-left: 0;
-				margin-right: 0;
+				margin: 0;
 			}
 			.wp-block-image.alignfull {
 				max-width: initial;

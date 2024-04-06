@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-12 23:06+0000\n"
+"POT-Creation-Date: 2024-04-06 13:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "% Comments"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-separator.php:88
+#: inc/gutenberg/blocks/design/class-separator.php:87
 #: inc/gutenberg/blocks/text/lists/class-lists.php:71
 #, php-format
 msgid "%s"
@@ -67,12 +67,12 @@ msgstr ""
 msgid "[block rendering halted]"
 msgstr ""
 
-#: inc/support/plugins/class-plugins.php:124
+#: inc/support/plugins/class-plugins.php:123
 #, php-format
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr ""
 
-#: inc/app.php:209
+#: inc/app.php:212
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -83,12 +83,6 @@ msgid ""
 "A simple WordPress theme framework focused on SEO and speed (perfect 100% "
 "PageSpeed scores) while still being fully customizable via Full Site Editing."
 " It also works perfectly with all page builder plugins."
-msgstr ""
-
-#: inc/app.php:216
-msgid ""
-"A sleek WooCommerce block theme with webpack configuration. No bloat - "
-"perfect starting point for your store."
 msgstr ""
 
 #: patterns/header.php:33
@@ -168,14 +162,6 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: inc/support/modules/formatting/class-formatting.php:108
-msgid "Brush"
-msgstr ""
-
-#: inc/support/modules/formatting/class-formatting.php:112
-msgid "Brush - Secondary"
-msgstr ""
-
 #: patterns/section-hero.php:13
 msgid "Build your website with WeCodeArt"
 msgstr ""
@@ -203,6 +189,61 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Accent"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Black"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Danger"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Dark"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Info"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Light"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Primary"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Secondary"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Success"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Warning"
+msgstr ""
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "White"
+msgstr ""
+
 #: patterns/page-soon.php:25
 msgid "COMING SOON"
 msgstr ""
@@ -215,6 +256,14 @@ msgstr ""
 #: views/blocks/post/comments.tpl.php:55
 msgid "Comments are Closed"
 msgstr ""
+
+#: inc/gutenberg/blocks/class-blocks.php:244
+#, php-format
+msgctxt "comments title"
+msgid "%1$s minute to read"
+msgid_plural "%1$s minutes to read"
+msgstr[0] ""
+msgstr[1] ""
 
 #: inc/gutenberg/blocks/comment/class-title.php:93
 #, php-format
@@ -261,6 +310,16 @@ msgstr ""
 msgid "Copyright %s - All rights reserved. Built on %s."
 msgstr ""
 
+#: theme.json:1
+msgctxt "Custom template name"
+msgid "Content Only"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Custom template name"
+msgid "Page - Sidebar"
+msgstr ""
+
 #: patterns/cards-background.php:22
 msgid "Customers"
 msgstr ""
@@ -288,8 +347,16 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: inc/admin/class-admin.php:177
+#: inc/admin/class-admin.php:167
 msgid "Developer Mode"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/social/class-social.php:110
+msgid "Display icons for sharing the current page on social media sites."
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/social/class-social.php:94
+msgid "Display icons linking to your social media profiles or sites."
 msgstr ""
 
 #: patterns/cards-background.php:56 patterns/cards-overlay.php:22
@@ -303,7 +370,7 @@ msgid ""
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-separator.php:71
+#: inc/gutenberg/blocks/design/class-separator.php:70
 msgid "Dots"
 msgstr ""
 
@@ -325,19 +392,25 @@ msgstr ""
 msgid "Enter your email address to subscribe."
 msgstr ""
 
-#: inc/app.php:179
+#: inc/app.php:160
+msgid ""
+"Extends Gutenberg editor with an accordion block built on WP Interactivity "
+"API."
+msgstr ""
+
+#: inc/app.php:170
 msgid ""
 "Extends Gutenberg editor with extra formatting options like: justify, "
 "abbreviation, text decorations, tooltips and popovers."
 msgstr ""
 
-#: inc/app.php:188
+#: inc/app.php:180
 msgid ""
 "Extends Gutenberg editor with lorem ipsum dummy content generator for "
 "headings, paragraphs and lists."
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-separator.php:77
+#: inc/gutenberg/blocks/design/class-separator.php:76
 msgid "Faded"
 msgstr ""
 
@@ -378,6 +451,26 @@ msgstr ""
 msgid "Fix this!"
 msgstr ""
 
+#: theme.json:1
+msgctxt "Font family name"
+msgid "Base"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Font family name"
+msgid "Monospace"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Font size name"
+msgid "Extra Extra Large"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Font size name"
+msgid "Normal"
+msgstr ""
+
 #: patterns/section-hero.php:16
 msgid "FREE"
 msgstr ""
@@ -393,6 +486,41 @@ msgstr ""
 #: patterns/section-hero.php:16
 #, php-format
 msgid "Get it now. Is %s forever!"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Accent to White"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Danger to Warning"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Light to White"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Primary to Purple"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Primary to Success"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Secondary to Light"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Success to Warning"
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-buttons.php:50
@@ -420,7 +548,7 @@ msgstr ""
 msgid "Ignore for 1 day"
 msgstr ""
 
-#: inc/support/markup/class-markup.php:249
+#: inc/support/markup/class-markup.php:248
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr ""
@@ -452,18 +580,20 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr ""
 
-#: inc/app.php:199
+#: inc/gutenberg/blocks/class-blocks.php:240
+msgid "Less than a minute to read."
+msgstr ""
+
+#: inc/app.php:190
 msgid ""
 "Lightweight extension for adding a scroll to top button on your site. Super "
 "flexible and customizable."
 msgstr ""
 
-#: inc/support/modules/formatting/class-formatting.php:120
-msgid "Lines"
-msgstr ""
-
-#: inc/support/modules/formatting/class-formatting.php:124
-msgid "Lines - Secondary"
+#: inc/app.php:200
+msgid ""
+"Lightweight extension for enhancing our theme with options for cleaning "
+"wp_head of unnecesary stuff."
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-button.php:50
@@ -482,14 +612,6 @@ msgstr ""
 #: patterns/cards-background.php:22
 #, php-format
 msgid "Loved by %s"
-msgstr ""
-
-#: inc/support/modules/formatting/class-formatting.php:140
-msgid "Marker"
-msgstr ""
-
-#: inc/gutenberg/blocks/design/class-group.php:53
-msgid "Marquee"
 msgstr ""
 
 #: views/general/toggler.tpl.php:29
@@ -518,6 +640,10 @@ msgstr ""
 
 #: inc/admin/installer/module/class-ajax.php:112
 msgid "Module installed successfully."
+msgstr ""
+
+#: inc/support/class-support.php:216
+msgid "Module is protected and cannot be removed."
 msgstr ""
 
 #: inc/admin/installer/module/class-ajax.php:57
@@ -571,7 +697,7 @@ msgstr ""
 msgid "Open login modal"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-search.php:197
+#: inc/gutenberg/blocks/widgets/class-search.php:192
 msgid "Open search modal"
 msgstr ""
 
@@ -581,7 +707,7 @@ msgid ""
 "SEO."
 msgstr ""
 
-#: inc/support/plugins/class-plugins.php:120
+#: inc/support/plugins/class-plugins.php:119
 #, php-format
 msgid "Our theme comes pre-packaged with built-in support for the %s plugin."
 msgstr ""
@@ -590,37 +716,155 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
-#: inc/support/modules/formatting/class-formatting.php:128
-msgid "Oval"
-msgstr ""
-
-#: inc/support/modules/formatting/class-formatting.php:132
-msgid "Oval - Secondary"
-msgstr ""
-
-#: inc/support/modules/formatting/class-formatting.php:136
-msgid "Oval - Tertiary"
-msgstr ""
-
 #: inc/gutenberg/blocks/site/class-login.php:156
 msgid "Password"
 msgstr ""
 
-#: inc/support/modules/formatting/class-formatting.php:116
-msgid "Pencil"
+#: patterns/page-about.php:2
+msgctxt "Pattern title"
+msgid "About"
 msgstr ""
 
-#: inc/gutenberg/blocks/navigation/class-navigation.php:98
+#: patterns/cta-default.php:2
+msgctxt "Pattern title"
+msgid "Call to Action"
+msgstr ""
+
+#: patterns/cta-border.php:2
+msgctxt "Pattern title"
+msgid "Call to Action (Border)"
+msgstr ""
+
+#: patterns/cta-center.php:2
+msgctxt "Pattern title"
+msgid "Call to Action (Center)"
+msgstr ""
+
+#: patterns/cta-separator.php:2
+msgctxt "Pattern title"
+msgid "Call to Action (Separator)"
+msgstr ""
+
+#: patterns/cards-default.php:2
+msgctxt "Pattern title"
+msgid "Cards"
+msgstr ""
+
+#: patterns/cards-background.php:2
+msgctxt "Pattern title"
+msgid "Cards (with background)"
+msgstr ""
+
+#: patterns/cards-overlay.php:2
+msgctxt "Pattern title"
+msgid "Cards (with overlay)"
+msgstr ""
+
+#: patterns/page-soon.php:2
+msgctxt "Pattern title"
+msgid "Coming Soon"
+msgstr ""
+
+#: patterns/section-features.php:2
+msgctxt "Pattern title"
+msgid "Features"
+msgstr ""
+
+#: patterns/footer.php:2
+msgctxt "Pattern title"
+msgid "Footer"
+msgstr ""
+
+#: patterns/footer-credits.php:2
+msgctxt "Pattern title"
+msgid "Footer Credits"
+msgstr ""
+
+#: patterns/header.php:2
+msgctxt "Pattern title"
+msgid "Header"
+msgstr ""
+
+#: patterns/section-hero-bg.php:2
+msgctxt "Pattern title"
+msgid "Hero (with background)"
+msgstr ""
+
+#: patterns/section-hero.php:2
+msgctxt "Pattern title"
+msgid "Hero (with separator)"
+msgstr ""
+
+#: patterns/section-posts.php:2
+msgctxt "Pattern title"
+msgid "Latest Posts"
+msgstr ""
+
+#: patterns/section-logos.php:2
+msgctxt "Pattern title"
+msgid "Logos"
+msgstr ""
+
+#: patterns/section-mobile.php:2
+msgctxt "Pattern title"
+msgid "Mobile Ready"
+msgstr ""
+
+#: patterns/section-pricing.php:2
+msgctxt "Pattern title"
+msgid "Pricing"
+msgstr ""
+
+#: patterns/query-default.php:2
+msgctxt "Pattern title"
+msgid "Query (Default)"
+msgstr ""
+
+#: patterns/query-list.php:2
+msgctxt "Pattern title"
+msgid "Query (List Style)"
+msgstr ""
+
+#: patterns/query-overlay.php:2
+msgctxt "Pattern title"
+msgid "Query (Overlay)"
+msgstr ""
+
+#: patterns/section-pillar.php:2
+msgctxt "Pattern title"
+msgid "Section: Pillar Content"
+msgstr ""
+
+#: patterns/social-sharing.php:2
+msgctxt "Pattern title"
+msgid "Social: Sharing"
+msgstr ""
+
+#: patterns/section-testimonials.php:2
+msgctxt "Pattern title"
+msgid "Testimonials"
+msgstr ""
+
+#: patterns/section-testimonials-cards.php:2
+msgctxt "Pattern title"
+msgid "Testimonials (Cards)"
+msgstr ""
+
+#: patterns/section-woo.php:2
+msgctxt "Pattern title"
+msgid "WooCommerce"
+msgstr ""
+
+#: inc/gutenberg/blocks/navigation/class-navigation.php:97
 msgid "Pills"
 msgstr ""
 
-#: inc/app.php:105 inc/app.php:106
-#: inc/gutenberg/blocks/media/class-image.php:97
-#: inc/gutenberg/blocks/media/class-text.php:77
+#: inc/app.php:98 inc/app.php:99 inc/gutenberg/blocks/media/class-image.php:93
+#: inc/gutenberg/blocks/media/class-text.php:75
 msgid "Placeholder"
 msgstr ""
 
-#: inc/support/markup/class-markup.php:180
+#: inc/support/markup/class-markup.php:179
 msgid "Please define a callback function for each of the modules."
 msgstr ""
 
@@ -729,8 +973,8 @@ msgstr ""
 msgid "Seamless integration with WooCommerce right from the start!"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-search.php:76
-#: inc/gutenberg/blocks/widgets/class-search.php:77
+#: inc/gutenberg/blocks/widgets/class-search.php:71
+#: inc/gutenberg/blocks/widgets/class-search.php:72
 msgid "Search"
 msgstr ""
 
@@ -776,12 +1020,20 @@ msgstr ""
 msgid "Simple pricing plans for any size team."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:129
+#: inc/support/assets/class-assets.php:107
 msgid "Skip to content"
 msgstr ""
 
 #: patterns/footer.php:44
 msgid "Social"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/social/class-social.php:93
+msgid "Social Icons"
+msgstr ""
+
+#: inc/gutenberg/blocks/widgets/social/class-social.php:109
+msgid "Social Icons: Sharing"
 msgstr ""
 
 #: inc/admin/installer/module/class-ajax.php:120
@@ -798,6 +1050,41 @@ msgstr ""
 
 #: inc/admin/installer/plugin/class-ajax.php:125
 msgid "Some plugins installed successfully, others have failed."
+msgstr ""
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "Gutter"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "LG"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "MD"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "SM"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "XL"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "XS"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "XXL"
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-form.php:93
@@ -828,13 +1115,58 @@ msgstr ""
 msgid "Super-Optimized eCommerce website built with ease."
 msgstr ""
 
-#: inc/gutenberg/blocks/navigation/class-navigation.php:92
+#: inc/gutenberg/blocks/navigation/class-navigation.php:91
 msgid "Tabs"
 msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:127
 #, php-format
 msgid "Tag Archives: %s"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Footer"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Footer (Dark)"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Footer (with Background)"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header (Dark)"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header (Logo left)"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header (with Search)"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header (with Topbar)"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Main Sidebar"
 msgstr ""
 
 #: inc/init.php:282
@@ -853,7 +1185,7 @@ msgstr ""
 msgid "Theme is not defined."
 msgstr ""
 
-#: inc/admin/class-admin.php:131 inc/admin/class-admin.php:132
+#: inc/admin/class-admin.php:121 inc/admin/class-admin.php:122
 msgid "Theme Options"
 msgstr ""
 
@@ -908,10 +1240,6 @@ msgstr ""
 msgid "too!"
 msgstr ""
 
-#: inc/support/modules/formatting/class-formatting.php:104
-msgid "Underline"
-msgstr ""
-
 #: inc/gutenberg/blocks/text/class-heading.php:49
 msgid "Underline Brush"
 msgstr ""
@@ -920,7 +1248,7 @@ msgstr ""
 msgid "Unlock"
 msgstr ""
 
-#: inc/admin/class-activation.php:115
+#: inc/admin/class-activation.php:116
 msgid "upgrade PHP"
 msgstr ""
 
@@ -938,19 +1266,27 @@ msgstr ""
 msgid "View Themes"
 msgstr ""
 
+#: inc/app.php:159
+msgid "WCA: Accordion"
+msgstr ""
+
 #: inc/support/plugins/contactform7/class-contactform7.php:110
 msgid "WCA: Contact Form 7"
 msgstr ""
 
-#: inc/app.php:178
+#: inc/app.php:169
 msgid "WCA: Formatting"
 msgstr ""
 
-#: inc/app.php:187
+#: inc/app.php:179
 msgid "WCA: Lorem Ipsum"
 msgstr ""
 
-#: inc/app.php:198
+#: inc/app.php:199
+msgid "WCA: Optimization"
+msgstr ""
+
+#: inc/app.php:189
 msgid "WCA: Scroll Top"
 msgstr ""
 
@@ -986,11 +1322,11 @@ msgid "Website"
 msgstr ""
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:82
+#: inc/gutenberg/class-gutenberg.php:90
 msgid "WeCodeArt"
 msgstr ""
 
-#: inc/app.php:208
+#: inc/app.php:211
 msgid "WeCodeArt Developer"
 msgstr ""
 
@@ -1017,22 +1353,18 @@ msgid ""
 "rated block themes."
 msgstr ""
 
-#: inc/admin/class-activation.php:112
+#: inc/admin/class-activation.php:113
 #, php-format
 msgid ""
 "WeCodeArt Framework requires PHP version %1$s or higher. You are using "
 "version %2$s. Please %3$s to use WeCodeArt Framework."
 msgstr ""
 
-#: inc/admin/class-activation.php:103
+#: inc/admin/class-activation.php:104
 #, php-format
 msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
 "version %2$s. Please upgrade WordPress to use WeCodeArt Framework."
-msgstr ""
-
-#: inc/app.php:215
-msgid "WeCodeArt Honey"
 msgstr ""
 
 #: patterns/section-mobile.php:49
@@ -1056,7 +1388,7 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:158
+#: inc/support/assets/class-assets.php:146
 #, php-format
 msgid ""
 "When using \"%s\" method you must define the 3rd parameter (style or script)."

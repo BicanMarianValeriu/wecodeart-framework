@@ -99,6 +99,11 @@ class Lists extends Dynamic {
 					'margin'  	=> true,
 					'padding' 	=> true,
 					'blockGap' 	=> true,
+					'__experimentalDefaultControls' => [
+						'margin' 	=> false,
+						'padding' 	=> false,
+						'blockGap'	=> true,
+					]
 				]
 			], $supports )
 		];

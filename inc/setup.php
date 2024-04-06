@@ -81,6 +81,15 @@ wecodeart()->bind( 'markup', function () {
 } );
 
 /**
+ * Bind Templates.
+ *
+ * @since   6.3.7
+ *
+ * @return  void
+ */
+wecodeart()->factory( 'template', fn() => new WeCodeArt\Support\Markup\Template( wecodeart_config() ) );
+
+/**
  * Bind assets.
  * 
  * @since   5.4.5

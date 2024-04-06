@@ -132,7 +132,7 @@ class Template extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-post-template {
 				list-style: none;
 				padding: 0;
@@ -140,6 +140,6 @@ class Template extends Dynamic {
 			.wp-block-post-template.wp-block-post-template.has-background {
 				padding: var(--wp--preset--spacing--g);
 			}
-		";
+		CSS;
 	}
 }

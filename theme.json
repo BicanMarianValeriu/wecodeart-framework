@@ -459,6 +459,28 @@
 				}
 			},
 			"core/read-more": {
+				"typography": {
+					"fontSize": "var:preset|font-size|small",
+					"fontWeight": "700",
+					"textTransform": "uppercase"
+				},
+				"spacing": {
+					"padding": {
+						"top": "10px",
+						"left": "25px",
+						"right": "25px",
+						"bottom": "10px"
+					}
+				},
+				"border": {
+					"width": "1px",
+					"radius": "50px",
+					"color": "var:preset|color|light"
+				},
+				"color": {
+					"background": "var:preset|color|white",
+					"text": "var(--wp--preset--color--dark)!important"
+				},
 				"css": "display:block;width:fit-content;"
 			},
 			"wecodeart/accordion": {

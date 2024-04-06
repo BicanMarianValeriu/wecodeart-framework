@@ -62,14 +62,14 @@ class Header {
 	 * Adds wecodeart link rel in head.
 	 *
 	 * @since	5.7.0
-	 * @version 6.1.2
+	 * @version 6.3.7
 	 *
 	 * @return 	void
 	 */
 	public function link_rel() {
 		if( strpos( home_url(), 'wecodeart.com' ) ) return;
 
-		printf( '<link rel="external" href="%s" />', 'https://www.wecodeart.com' ); 
+		printf( '<link rel="external" href="%s" />' . PHP_EOL, 'https://www.wecodeart.com' ); 
 	}
 
 	/**

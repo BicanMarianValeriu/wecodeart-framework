@@ -236,7 +236,7 @@ class Blocks implements Configuration {
             $words      = str_word_count( strip_tags( get_post_field( 'post_content', $post_id ) ) );
             $minutes    = floor( $words / $per_minute );
 
-            if( $time < 1 ) {
+            if( $minutes < 1 ) {
                 return esc_html__( 'Less than a minute to read.', 'wecodeart' );
             }
 

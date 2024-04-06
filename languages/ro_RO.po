@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2023-12-12 23:06+0000\n"
+"PO-Revision-Date: 2024-04-06 14:07+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.4; wp-6.2.2\n"
+"X-Loco-Version: 2.6.7; wp-6.5\n"
 "X-Domain: wecodeart"
 
 #: views/blocks/post/comments.tpl.php:61
@@ -26,7 +26,7 @@ msgstr "la %s"
 msgid "% Comments"
 msgstr "% Comentarii"
 
-#: inc/gutenberg/blocks/design/class-separator.php:88
+#: inc/gutenberg/blocks/design/class-separator.php:87
 #: inc/gutenberg/blocks/text/lists/class-lists.php:71
 #, php-format
 msgid "%s"
@@ -68,12 +68,12 @@ msgstr "100% Receptiv"
 msgid "[block rendering halted]"
 msgstr "[redării blocului a fost oprită]"
 
-#: inc/support/plugins/class-plugins.php:124
+#: inc/support/plugins/class-plugins.php:123
 #, php-format
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr "O punte între WeCodeArt Framework și pluginul %s."
 
-#: inc/app.php:209
+#: inc/app.php:212
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -91,17 +91,6 @@ msgstr ""
 "100% PageSpeed) și totodată fiind complet personalizabil prin Editarea "
 "completă a site-ului. De asemenea, funcționează perfect cu toate pluginurile "
 "generatore de pagini."
-
-#: inc/app.php:216
-#| msgid ""
-#| "A sleek WooCommerce block theme with webpack setup. No bloat - perfect "
-#| "starting point for your store."
-msgid ""
-"A sleek WooCommerce block theme with webpack configuration. No bloat - "
-"perfect starting point for your store."
-msgstr ""
-"O temă elegantă de bloc WooCommerce cu configurație webpack. Fără bloat - un "
-"punct de plecare perfect pentru magazinul tău."
 
 #: patterns/header.php:33
 msgid "About"
@@ -182,14 +171,6 @@ msgstr "Denumirea bloc-ului este necesară."
 msgid "Blog"
 msgstr "Blog"
 
-#: inc/support/modules/formatting/class-formatting.php:108
-msgid "Brush"
-msgstr "Pensulă"
-
-#: inc/support/modules/formatting/class-formatting.php:112
-msgid "Brush - Secondary"
-msgstr "Pensulă - secundar"
-
 #: patterns/section-hero.php:13
 msgid "Build your website with WeCodeArt"
 msgstr "Construiește-ți site-ul web cu WeCodeArt"
@@ -217,6 +198,61 @@ msgstr "Alege %s"
 msgid "Close"
 msgstr "Închide"
 
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Accent"
+msgstr "Accent"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Black"
+msgstr "Negru"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Danger"
+msgstr "Pericol"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Dark"
+msgstr "Intunecat"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Info"
+msgstr "Info"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Light"
+msgstr "Ușor"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Primary"
+msgstr "Primar"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Secondary"
+msgstr "Secundar"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Success"
+msgstr "Succes"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "Warning"
+msgstr "Pericol"
+
+#: theme.json:1 styles/dark.json:1
+msgctxt "Color name"
+msgid "White"
+msgstr "Alb"
+
 #: patterns/page-soon.php:25
 msgid "COMING SOON"
 msgstr "IN CURAND"
@@ -229,6 +265,15 @@ msgstr "Comentariu"
 #: views/blocks/post/comments.tpl.php:55
 msgid "Comments are Closed"
 msgstr "Comentariile sunt inchise"
+
+#: inc/gutenberg/blocks/class-blocks.php:244
+#, php-format
+msgctxt "comments title"
+msgid "%1$s minute to read"
+msgid_plural "%1$s minutes to read"
+msgstr[0] "%1$s minut de citit"
+msgstr[1] "%1$s minute de citit"
+msgstr[2] "%1$s minute de citit"
 
 #: inc/gutenberg/blocks/comment/class-title.php:93
 #, php-format
@@ -279,6 +324,16 @@ msgstr "Copyright %s - Toate drepturile rezervate."
 msgid "Copyright %s - All rights reserved. Built on %s."
 msgstr "Copyright %s – Toate drepturile rezervate. Construit pe %s."
 
+#: theme.json:1
+msgctxt "Custom template name"
+msgid "Content Only"
+msgstr "Doar "
+
+#: theme.json:1
+msgctxt "Custom template name"
+msgid "Page - Sidebar"
+msgstr "Pagina - Bara laterală"
+
 #: patterns/cards-background.php:22
 msgid "Customers"
 msgstr "Clienți"
@@ -308,9 +363,21 @@ msgstr "Arhive zilnice: %s"
 msgid "Design"
 msgstr "Personalizări"
 
-#: inc/admin/class-admin.php:177
+#: inc/admin/class-admin.php:167
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
+
+#: inc/gutenberg/blocks/widgets/social/class-social.php:110
+msgid "Display icons for sharing the current page on social media sites."
+msgstr ""
+"Afișați pictograme pentru partajarea paginii curente pe site-urile de rețele "
+"sociale."
+
+#: inc/gutenberg/blocks/widgets/social/class-social.php:94
+msgid "Display icons linking to your social media profiles or sites."
+msgstr ""
+"Afișați pictograme care leagă la profilurile sau site-urile dvs. de rețele "
+"sociale."
 
 #: patterns/cards-background.php:56 patterns/cards-overlay.php:22
 msgid "Documented"
@@ -326,7 +393,7 @@ msgstr ""
 "pornire. Acolo puteți găsi câteva pagini și exemple de secțiuni create cu "
 "WeCodeArt Framework."
 
-#: inc/gutenberg/blocks/design/class-separator.php:71
+#: inc/gutenberg/blocks/design/class-separator.php:70
 msgid "Dots"
 msgstr "Puncte"
 
@@ -348,7 +415,15 @@ msgstr "Introduceți parola"
 msgid "Enter your email address to subscribe."
 msgstr "Introdu adresa ta de e-mail pentru a te abona."
 
-#: inc/app.php:179
+#: inc/app.php:160
+msgid ""
+"Extends Gutenberg editor with an accordion block built on WP Interactivity "
+"API."
+msgstr ""
+"Extinde editorul Gutenberg cu un bloc acordeon construit pe API-ul WP "
+"Interactivity."
+
+#: inc/app.php:170
 msgid ""
 "Extends Gutenberg editor with extra formatting options like: justify, "
 "abbreviation, text decorations, tooltips and popovers."
@@ -356,7 +431,7 @@ msgstr ""
 "Extinde editorul Gutenberg cu opțiuni extra pentru formatare, precum: "
 "justificare, abreviere, decoratii text, tooltip-uri si popover."
 
-#: inc/app.php:188
+#: inc/app.php:180
 msgid ""
 "Extends Gutenberg editor with lorem ipsum dummy content generator for "
 "headings, paragraphs and lists."
@@ -364,7 +439,7 @@ msgstr ""
 "Extinde editorul Gutenberg cu generatorul de conținut Lorem Ipsum pentru "
 "titluri, paragrafe şi liste."
 
-#: inc/gutenberg/blocks/design/class-separator.php:77
+#: inc/gutenberg/blocks/design/class-separator.php:76
 #| msgid "Fixed"
 msgid "Faded"
 msgstr "Estompat"
@@ -408,6 +483,26 @@ msgstr "PRIMA"
 msgid "Fix this!"
 msgstr "Repară asta!"
 
+#: theme.json:1
+msgctxt "Font family name"
+msgid "Base"
+msgstr "Baza"
+
+#: theme.json:1
+msgctxt "Font family name"
+msgid "Monospace"
+msgstr "Monospace"
+
+#: theme.json:1
+msgctxt "Font size name"
+msgid "Extra Extra Large"
+msgstr "Extra Extra Large"
+
+#: theme.json:1
+msgctxt "Font size name"
+msgid "Normal"
+msgstr "Normal"
+
 #: patterns/section-hero.php:16
 msgid "FREE"
 msgstr "GRATIS"
@@ -424,6 +519,41 @@ msgstr "Tema WP gratuită"
 #, php-format
 msgid "Get it now. Is %s forever!"
 msgstr "Ia-o acum. Este %s pentru totdeauna!"
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Accent to White"
+msgstr "Accent spre alb"
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Danger to Warning"
+msgstr "Pericol spre avertizare"
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Light to White"
+msgstr "Luminat spre alb"
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Primary to Purple"
+msgstr "Primar la violet"
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Primary to Success"
+msgstr "Primar la succes"
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Secondary to Light"
+msgstr "Secundar spre luminat"
+
+#: theme.json:1
+msgctxt "Gradient name"
+msgid "Success to Warning"
+msgstr "Succes spre avertisment"
 
 #: inc/gutenberg/blocks/design/class-buttons.php:50
 msgid "Group"
@@ -450,7 +580,7 @@ msgstr "https://www.wecodeart.com/about/"
 msgid "Ignore for 1 day"
 msgstr "Ignoră timp de 1 zi"
 
-#: inc/support/markup/class-markup.php:249
+#: inc/support/markup/class-markup.php:248
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr "Wrapper HTML nevalid pentru „%s”."
@@ -487,7 +617,11 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
-#: inc/app.php:199
+#: inc/gutenberg/blocks/class-blocks.php:240
+msgid "Less than a minute to read."
+msgstr "Mai puțin de un minut de citit."
+
+#: inc/app.php:190
 msgid ""
 "Lightweight extension for adding a scroll to top button on your site. Super "
 "flexible and customizable."
@@ -495,13 +629,13 @@ msgstr ""
 "Extensie ușoară pentru adăugarea unui buton de derulare în sus pe site-ul "
 "dvs. Super flexibil și personalizabil."
 
-#: inc/support/modules/formatting/class-formatting.php:120
-msgid "Lines"
-msgstr "Linii"
-
-#: inc/support/modules/formatting/class-formatting.php:124
-msgid "Lines - Secondary"
-msgstr "Linii - Secundar"
+#: inc/app.php:200
+msgid ""
+"Lightweight extension for enhancing our theme with options for cleaning "
+"wp_head of unnecesary stuff."
+msgstr ""
+"Extensie ușoară pentru îmbunătățirea temei noastre cu opțiuni pentru "
+"curățarea wp_head de lucruri inutile."
 
 #: inc/gutenberg/blocks/design/class-button.php:50
 msgid "Link"
@@ -520,14 +654,6 @@ msgstr "Autentificare"
 #, php-format
 msgid "Loved by %s"
 msgstr "Iubit de %s"
-
-#: inc/support/modules/formatting/class-formatting.php:140
-msgid "Marker"
-msgstr "Marker"
-
-#: inc/gutenberg/blocks/design/class-group.php:53
-msgid "Marquee"
-msgstr "Marquee"
 
 #: views/general/toggler.tpl.php:29
 msgid "Menu"
@@ -556,6 +682,10 @@ msgstr "Nu s-a instalat modulul."
 #: inc/admin/installer/module/class-ajax.php:112
 msgid "Module installed successfully."
 msgstr "Modulul instalat cu succes."
+
+#: inc/support/class-support.php:216
+msgid "Module is protected and cannot be removed."
+msgstr "Modulul este protejat și nu poate fi îndepărtat."
 
 #: inc/admin/installer/module/class-ajax.php:57
 msgid "Modules array is empty."
@@ -611,7 +741,7 @@ msgstr "Notificare respinsă"
 msgid "Open login modal"
 msgstr "Deschideți modalul de autentificare"
 
-#: inc/gutenberg/blocks/widgets/class-search.php:197
+#: inc/gutenberg/blocks/widgets/class-search.php:192
 msgid "Open search modal"
 msgstr "Deschideți modalul de căutare"
 
@@ -623,7 +753,7 @@ msgstr ""
 "Optimizată pentru a încărca foarte rapid (sub 1s GTMetrix), în orice "
 "dispozitiv și, de asemenea, pentru SEO."
 
-#: inc/support/plugins/class-plugins.php:120
+#: inc/support/plugins/class-plugins.php:119
 #, php-format
 msgid "Our theme comes pre-packaged with built-in support for the %s plugin."
 msgstr ""
@@ -633,37 +763,157 @@ msgstr ""
 msgid "Outline"
 msgstr "Contur"
 
-#: inc/support/modules/formatting/class-formatting.php:128
-msgid "Oval"
-msgstr "Oval"
-
-#: inc/support/modules/formatting/class-formatting.php:132
-msgid "Oval - Secondary"
-msgstr "Oval - secundar"
-
-#: inc/support/modules/formatting/class-formatting.php:136
-msgid "Oval - Tertiary"
-msgstr "Oval - terțiar"
-
 #: inc/gutenberg/blocks/site/class-login.php:156
 msgid "Password"
 msgstr "Parolă"
 
-#: inc/support/modules/formatting/class-formatting.php:116
-msgid "Pencil"
-msgstr "Creion"
+#: patterns/page-about.php:2
+msgctxt "Pattern title"
+msgid "About"
+msgstr "Despre"
 
-#: inc/gutenberg/blocks/navigation/class-navigation.php:98
+#: patterns/cta-default.php:2
+msgctxt "Pattern title"
+msgid "Call to Action"
+msgstr ""
+"\n"
+"Apel la acțiune"
+
+#: patterns/cta-border.php:2
+msgctxt "Pattern title"
+msgid "Call to Action (Border)"
+msgstr "Apel la acțiune (bordură)"
+
+#: patterns/cta-center.php:2
+msgctxt "Pattern title"
+msgid "Call to Action (Center)"
+msgstr "Apel la acțiune (Centru)"
+
+#: patterns/cta-separator.php:2
+msgctxt "Pattern title"
+msgid "Call to Action (Separator)"
+msgstr "Apel la acțiune (separator)"
+
+#: patterns/cards-default.php:2
+msgctxt "Pattern title"
+msgid "Cards"
+msgstr "Carduri"
+
+#: patterns/cards-background.php:2
+msgctxt "Pattern title"
+msgid "Cards (with background)"
+msgstr "Carduri (cu fundal)"
+
+#: patterns/cards-overlay.php:2
+msgctxt "Pattern title"
+msgid "Cards (with overlay)"
+msgstr "Carduri (cu suprapunere)"
+
+#: patterns/page-soon.php:2
+msgctxt "Pattern title"
+msgid "Coming Soon"
+msgstr "In curand"
+
+#: patterns/section-features.php:2
+msgctxt "Pattern title"
+msgid "Features"
+msgstr "Caracteristici"
+
+#: patterns/footer.php:2
+msgctxt "Pattern title"
+msgid "Footer"
+msgstr "Subsol"
+
+#: patterns/footer-credits.php:2
+msgctxt "Pattern title"
+msgid "Footer Credits"
+msgstr "Credite de subsol"
+
+#: patterns/header.php:2
+msgctxt "Pattern title"
+msgid "Header"
+msgstr "Antet"
+
+#: patterns/section-hero-bg.php:2
+msgctxt "Pattern title"
+msgid "Hero (with background)"
+msgstr "Erou (cu fundal)"
+
+#: patterns/section-hero.php:2
+msgctxt "Pattern title"
+msgid "Hero (with separator)"
+msgstr "Erou (cu separator)"
+
+#: patterns/section-posts.php:2
+msgctxt "Pattern title"
+msgid "Latest Posts"
+msgstr "Ultimele postări"
+
+#: patterns/section-logos.php:2
+msgctxt "Pattern title"
+msgid "Logos"
+msgstr "Logo-uri"
+
+#: patterns/section-mobile.php:2
+msgctxt "Pattern title"
+msgid "Mobile Ready"
+msgstr "Pregătit pentru mobil"
+
+#: patterns/section-pricing.php:2
+msgctxt "Pattern title"
+msgid "Pricing"
+msgstr "Prețuri"
+
+#: patterns/query-default.php:2
+msgctxt "Pattern title"
+msgid "Query (Default)"
+msgstr "Interogare (implicit)"
+
+#: patterns/query-list.php:2
+msgctxt "Pattern title"
+msgid "Query (List Style)"
+msgstr "Interogare (Stil listă)"
+
+#: patterns/query-overlay.php:2
+msgctxt "Pattern title"
+msgid "Query (Overlay)"
+msgstr "Interogare (suprapunere)"
+
+#: patterns/section-pillar.php:2
+msgctxt "Pattern title"
+msgid "Section: Pillar Content"
+msgstr "Secțiunea: Conținutul pilonului"
+
+#: patterns/social-sharing.php:2
+msgctxt "Pattern title"
+msgid "Social: Sharing"
+msgstr "Social: partajare"
+
+#: patterns/section-testimonials.php:2
+msgctxt "Pattern title"
+msgid "Testimonials"
+msgstr "Mărturii"
+
+#: patterns/section-testimonials-cards.php:2
+msgctxt "Pattern title"
+msgid "Testimonials (Cards)"
+msgstr "Mărturii (carduri)"
+
+#: patterns/section-woo.php:2
+msgctxt "Pattern title"
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: inc/gutenberg/blocks/navigation/class-navigation.php:97
 msgid "Pills"
 msgstr "Pastile"
 
-#: inc/app.php:105 inc/app.php:106
-#: inc/gutenberg/blocks/media/class-image.php:97
-#: inc/gutenberg/blocks/media/class-text.php:77
+#: inc/app.php:98 inc/app.php:99 inc/gutenberg/blocks/media/class-image.php:93
+#: inc/gutenberg/blocks/media/class-text.php:75
 msgid "Placeholder"
 msgstr "Substituent"
 
-#: inc/support/markup/class-markup.php:180
+#: inc/support/markup/class-markup.php:179
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 
@@ -773,8 +1023,8 @@ msgstr "Eroare RSS"
 msgid "Seamless integration with WooCommerce right from the start!"
 msgstr "Integrare perfectă cu WooCommerce chiar de la început!"
 
-#: inc/gutenberg/blocks/widgets/class-search.php:76
-#: inc/gutenberg/blocks/widgets/class-search.php:77
+#: inc/gutenberg/blocks/widgets/class-search.php:71
+#: inc/gutenberg/blocks/widgets/class-search.php:72
 msgid "Search"
 msgstr "Caută"
 
@@ -821,13 +1071,21 @@ msgstr "Distribuie postarea:"
 msgid "Simple pricing plans for any size team."
 msgstr "Planuri simple de prețuri pentru echipe de orice dimensiune."
 
-#: inc/support/assets/class-assets.php:129
+#: inc/support/assets/class-assets.php:107
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
 #: patterns/footer.php:44
 msgid "Social"
 msgstr "Social"
+
+#: inc/gutenberg/blocks/widgets/social/class-social.php:93
+msgid "Social Icons"
+msgstr "Icoane sociale"
+
+#: inc/gutenberg/blocks/widgets/social/class-social.php:109
+msgid "Social Icons: Sharing"
+msgstr "Icoane sociale: partajare"
 
 #: inc/admin/installer/module/class-ajax.php:120
 msgid "Some modules installed successfully, others have failed."
@@ -844,6 +1102,41 @@ msgstr "Unele plugin-uri au fost dezactivate cu succes, altele au eșuat."
 #: inc/admin/installer/plugin/class-ajax.php:125
 msgid "Some plugins installed successfully, others have failed."
 msgstr "Unele plugin-uri au fost instalate cu succes, altele au eșuat."
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "Gutter"
+msgstr "Jgheab"
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "LG"
+msgstr "LG"
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "MD"
+msgstr "MD"
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "SM"
+msgstr "SM"
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "XL"
+msgstr "XL"
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "XS"
+msgstr "XS"
+
+#: theme.json:1
+msgctxt "Space size name"
+msgid "XXL"
+msgstr "XXL"
 
 #: inc/gutenberg/blocks/comment/class-form.php:93
 msgid "Speak Your Mind"
@@ -874,7 +1167,7 @@ msgid "Super-Optimized eCommerce website built with ease."
 msgstr ""
 "Site-ul web de comerț electronic super-optimizat, construit cu ușurință."
 
-#: inc/gutenberg/blocks/navigation/class-navigation.php:92
+#: inc/gutenberg/blocks/navigation/class-navigation.php:91
 msgid "Tabs"
 msgstr "File"
 
@@ -882,6 +1175,51 @@ msgstr "File"
 #, php-format
 msgid "Tag Archives: %s"
 msgstr "Arhive etichetă: %s"
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Footer"
+msgstr "Subsol"
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Footer (Dark)"
+msgstr "Subsol (întunecat)"
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Footer (with Background)"
+msgstr "Subsol (cu fundal)"
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header"
+msgstr "Antet"
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header (Dark)"
+msgstr "Antet (întunecat)"
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header (Logo left)"
+msgstr "Antet (sigla stânga)"
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header (with Search)"
+msgstr "Antet (cu căutare)"
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Header (with Topbar)"
+msgstr "Antet (cu bara de sus)"
+
+#: theme.json:1
+msgctxt "Template part name"
+msgid "Main Sidebar"
+msgstr "Bara laterală principală"
 
 #: inc/init.php:282
 msgid "The file must be of type CSS/JS."
@@ -899,7 +1237,7 @@ msgstr "Tema instalată cu succes."
 msgid "Theme is not defined."
 msgstr "Tema nu este definită."
 
-#: inc/admin/class-admin.php:131 inc/admin/class-admin.php:132
+#: inc/admin/class-admin.php:121 inc/admin/class-admin.php:122
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -958,10 +1296,6 @@ msgstr "Comutare navigare"
 msgid "too!"
 msgstr "de asemenea!"
 
-#: inc/support/modules/formatting/class-formatting.php:104
-msgid "Underline"
-msgstr "Subliniere"
-
 #: inc/gutenberg/blocks/text/class-heading.php:49
 msgid "Underline Brush"
 msgstr "Pensulă de subliniere"
@@ -970,7 +1304,7 @@ msgstr "Pensulă de subliniere"
 msgid "Unlock"
 msgstr "Deblochează"
 
-#: inc/admin/class-activation.php:115
+#: inc/admin/class-activation.php:116
 msgid "upgrade PHP"
 msgstr "actualizați PHP"
 
@@ -988,19 +1322,27 @@ msgstr "%s Utilizatori"
 msgid "View Themes"
 msgstr "Vedeți Teme"
 
+#: inc/app.php:159
+msgid "WCA: Accordion"
+msgstr "WCA: Acordeon"
+
 #: inc/support/plugins/contactform7/class-contactform7.php:110
 msgid "WCA: Contact Form 7"
 msgstr "WCA: Contact Form 7"
 
-#: inc/app.php:178
+#: inc/app.php:169
 msgid "WCA: Formatting"
 msgstr "WCA: Formatare"
 
-#: inc/app.php:187
+#: inc/app.php:179
 msgid "WCA: Lorem Ipsum"
 msgstr "WCA: Lorem Ipsum"
 
-#: inc/app.php:198
+#: inc/app.php:199
+msgid "WCA: Optimization"
+msgstr "WCA: Optimizare"
+
+#: inc/app.php:189
 msgid "WCA: Scroll Top"
 msgstr "WCA: Scroll Top"
 
@@ -1043,11 +1385,11 @@ msgid "Website"
 msgstr "Site"
 
 #. Name of the theme
-#: inc/gutenberg/class-gutenberg.php:82
+#: inc/gutenberg/class-gutenberg.php:90
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/app.php:208
+#: inc/app.php:211
 msgid "WeCodeArt Developer"
 msgstr "WeCodeArt Dezvoltator"
 
@@ -1079,7 +1421,7 @@ msgstr ""
 "WeCodeArt Framework este tema %s pentru a îmbrățișa %s și este una dintre "
 "cele mai apreciate teme de bloc."
 
-#: inc/admin/class-activation.php:112
+#: inc/admin/class-activation.php:113
 #, php-format
 msgid ""
 "WeCodeArt Framework requires PHP version %1$s or higher. You are using "
@@ -1088,7 +1430,7 @@ msgstr ""
 "WeCodeArt Framework necesită versiunea PHP %1$s sau mai mare. Folosiți "
 "versiunea %2$s. Vă rugăm să %3$s pentru a utiliza WeCodeArt Framework."
 
-#: inc/admin/class-activation.php:103
+#: inc/admin/class-activation.php:104
 #, php-format
 msgid ""
 "WeCodeArt Framework requires WordPress version %1$s or higher. You are using "
@@ -1097,10 +1439,6 @@ msgstr ""
 "WeCodeArt Framework necesită versiunea WordPress %1$s sau mai mare. "
 "Utilizați versiunea %2$s. Vă rugăm să actualizați WordPress pentru a utiliza "
 "WeCodeArt Framework."
-
-#: inc/app.php:215
-msgid "WeCodeArt Honey"
-msgstr "WeCodeArt Honey"
 
 #: patterns/section-mobile.php:49
 msgid ""
@@ -1127,7 +1465,7 @@ msgstr ""
 "Când adăugați o pictogramă SVG cu %s, trebuie să definiți cheile `viewBox` "
 "și `paths`."
 
-#: inc/support/assets/class-assets.php:158
+#: inc/support/assets/class-assets.php:146
 #, php-format
 #| msgid ""
 #| "When using \"%s\" method you must define 3rd parameter (style or script)."

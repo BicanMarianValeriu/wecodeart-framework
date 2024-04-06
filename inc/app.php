@@ -155,12 +155,22 @@ return [
     'installers' => [
         'modules' => [
             [
+                'slug'          => 'BicanMarianValeriu/wca-accordion',
+                'title'         => esc_html__( 'WCA: Accordion', 'wecodeart' ),
+                'description'   => esc_html__( 'Extends Gutenberg editor with an accordion block built on WP Interactivity API.', 'wecodeart' ),
+                'more'          => 'https://github.com/BicanMarianValeriu/wca-accordion/',
+                'source'        => 'github',
+                'version'       => '1.0.0',
+                'destination'   => 'accordion',
+                'type'          => 'module',
+            ],
+            [
                 'slug'          => 'BicanMarianValeriu/wca-formatting',
                 'title'         => esc_html__( 'WCA: Formatting', 'wecodeart' ),
                 'description'   => esc_html__( 'Extends Gutenberg editor with extra formatting options like: justify, abbreviation, text decorations, tooltips and popovers.', 'wecodeart' ),
                 'more'          => 'https://www.wecodeart.com/integrations/formatting-options/',
                 'source'        => 'github',
-                'version'       => '1.0.3',
+                'version'       => '1.0.4',
                 'destination'   => 'formatting',
                 'type'          => 'module',
             ],
@@ -180,7 +190,7 @@ return [
                 'description'   => esc_html__( 'Lightweight extension for adding a scroll to top button on your site. Super flexible and customizable.', 'wecodeart' ),
                 'more'          => 'https://www.wecodeart.com/integrations/scrolltop/',
                 'source'        => 'github',
-                'version'       => '1.0.1',
+                'version'       => '1.0.3',
                 'destination'   => 'scrolltop',
                 'type'          => 'module',
             ],
