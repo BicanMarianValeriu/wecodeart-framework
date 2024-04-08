@@ -13,7 +13,7 @@
         printf(
             esc_html__( 'We are %s first ... %s', 'wecodeart' ),
             sprintf( '<strong>%s</strong>', esc_html__( 'MOBILE', 'wecodeart' ) ),
-            sprintf( '<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-primary-color has-shadows-into-light-font-family">%s</mark>', esc_html__( 'too!', 'wecodeart' ) )
+            sprintf( '<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-primary-color has-handwritten-font-family">%s</mark>', esc_html__( 'too!', 'wecodeart' ) )
         );
     
     ?></h2>

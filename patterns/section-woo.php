@@ -22,13 +22,13 @@
     </div>
     <!-- /wp:group -->
     <!-- wp:heading {"textAlign":"center"} -->
-    <h2 class="wp-block-heading has-text-align-center"><strong>WooCommerce</strong> <mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-white-color has-shadows-into-light-font-family"><?php esc_html_e( 'Ready', 'wecodeart' ); ?></mark></h2>
+    <h2 class="wp-block-heading has-text-align-center"><strong>WooCommerce</strong> <mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-white-color has-handwritten-font-family"><?php esc_html_e( 'Ready', 'wecodeart' ); ?></mark></h2>
     <!-- /wp:heading -->
     <!-- wp:separator {"backgroundColor":"white","className":"is-style-faded"} -->
     <hr class="wp-block-separator has-text-color has-white-color has-alpha-channel-opacity has-white-background-color has-background is-style-faded" />
     <!-- /wp:separator -->
-    <!-- wp:paragraph {"align":"center","fontSize":"medium","fontFamily":"shadows-into-light"} -->
-    <p class="has-text-align-center has-shadows-into-light-font-family has-medium-font-size"><?php esc_html_e( 'Seamless integration with WooCommerce right from the start!', 'wecodeart' ); ?></p>
+    <!-- wp:paragraph {"align":"center","fontSize":"medium","fontFamily":"handwritten"} -->
+    <p class="has-text-align-center has-handwritten-font-family has-medium-font-size"><?php esc_html_e( 'Seamless integration with WooCommerce right from the start!', 'wecodeart' ); ?></p>
     <!-- /wp:paragraph -->
     <!-- wp:paragraph {"align":"center","className":"fw-300","fontSize":"medium"} -->
     <p class="has-text-align-center fw-300 has-medium-font-size"><?php esc_html_e( 'Super-Optimized eCommerce website built with ease.', 'wecodeart' ); ?></p>

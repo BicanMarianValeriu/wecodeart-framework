@@ -13,7 +13,7 @@
         <!-- wp:heading {"textAlign":"center","className":"display-3"} -->
         <h2 class="wp-block-heading has-text-align-center display-3"><?php printf(
             esc_html__( 'WeCodeArt Framework is one of the %s Theme for %s', 'wecodeart' ),
-            sprintf( '<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-primary-color has-shadows-into-light-font-family">%s</mark>', esc_html__( 'FASTEST', 'wecodeart' ) ),
+            sprintf( '<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-primary-color has-handwritten-font-family">%s</mark>', esc_html__( 'FASTEST', 'wecodeart' ) ),
             '<strong>WordPress</strong>'
         ); ?></h2>
         <!-- /wp:heading -->

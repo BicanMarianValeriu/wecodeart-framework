@@ -9,14 +9,13 @@
  * @subpackage 	Admin\Upgrade
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.3.7
+ * @version		6.4.0
  */
 
 namespace WeCodeArt\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Admin\Installer\Module;
 use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Config\Interfaces\Configuration;
 use function WeCodeArt\Functions\get_prop;
@@ -32,7 +31,7 @@ class Upgrade {
 	 * Send to Constructor
 	 */
 	public function init() {
-		add_action( 'after_switch_theme', [ $this, 'after_switch_theme' ], 20 );
+		add_action( 'upgrader_process_complete', [ $this, 'upgrader_process_complete' ], 20, 2 );
 	}
 
 	/**
@@ -40,9 +39,32 @@ class Upgrade {
 	 *
 	 * @return void
 	 */
-	public function after_switch_theme() {
-		$version = wecodeart( 'options' )::get( 'theme_version' );
+	public function upgrader_process_complete( $object, $options ): void {
+		$is_theme_update = get_prop( $options, [ 'action' ] ) === 'update' && get_prop( $options, [ 'type' ] ) === 'theme';
 
+		if( ! $is_theme_update ) {
+			return;
+		}
+		
+		$themes = get_prop( $options, [ 'themes' ], [] );
+
+		foreach( $themes as $theme ) {
+			if( $theme !== 'wecodeart' ) {
+				continue;
+			}
+
+			$this->on_update();
+		}
+	}
+
+	/**
+	 * 6.4.0
+	 *
+	 * @return void
+	 */
+	private function on_update(): void {
+		$version = wecodeart( 'options' )::get( 'theme_version' );
+		
 		$routines = [
 			'6.1.2' => 'upgrade_1',
 			'6.2.9' => 'upgrade_629',

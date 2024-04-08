@@ -338,6 +338,11 @@
 					"name": "Base"
 				},
 				{
+					"fontFamily": "var(--wp--font-cursive)",
+					"slug": "handwritten",
+					"name": "Handwritten"
+				},
+				{
 					"fontFamily": "var(--wp--font-monospace)",
 					"slug": "monospace",
 					"name": "Monospace"

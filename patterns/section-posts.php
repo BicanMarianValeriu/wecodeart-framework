@@ -17,8 +17,8 @@
         ?>
     </h2>
     <!-- /wp:heading -->
-    <!-- wp:paragraph {"align":"center","fontSize":"medium","fontFamily":"shadows-into-light"} -->
-    <p class="has-text-align-center has-shadows-into-light-font-family has-medium-font-size">Lorem ipsum dolor sit ament</p>
+    <!-- wp:paragraph {"align":"center","fontSize":"medium","fontFamily":"handwritten"} -->
+    <p class="has-text-align-center has-handwritten-font-family has-medium-font-size">Lorem ipsum dolor sit ament</p>
     <!-- /wp:paragraph -->    
     <!-- wp:query {"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]}} -->
     <div class="wp-block-query">

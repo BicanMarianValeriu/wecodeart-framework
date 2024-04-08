@@ -27,6 +27,7 @@
   --wp--gray-900: #212529;
   --wp--font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --wp--font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --wp--font-cursive: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
   scroll-padding-top: var(--wp--header-height, 80px);
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -176,15 +177,15 @@ progress {
 
 .wp-site-header {
   position: relative;
-  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 1px 1px var(--wp--preset--color--accent);
   z-index: 15;
 }
 .has-scrolled .wp-site-header {
-  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--wp--preset--shadow--sm);
 }
 
 .wp-site-footer {
-  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 1px 1px var(--wp--preset--color--accent);
 }
 
 :where(.wp-block-post-author, .wp-block-post-author-name, .wp-block-post-date, .wp-block-post-terms, .wp-block-post-comments-link) .svg-inline {

@@ -50,8 +50,8 @@
 				<!-- wp:social-link {"url":"https://www.linkedin.com/in/mvbican/","service":"linkedin","label":"LinkedIn"} /-->
 			</ul>
 			<!-- /wp:social-links -->
-			<!-- wp:paragraph {"fontSize":"small","fontFamily":"shadows-into-light"} -->
-			<p class="has-shadows-into-light-font-family has-small-font-size"><?php esc_html_e( 'Be social ;)', 'wecodeart' ); ?></p>
+			<!-- wp:paragraph {"fontSize":"small","fontFamily":"handwritten"} -->
+			<p class="has-handwritten-font-family has-small-font-size"><?php esc_html_e( 'Be social ;)', 'wecodeart' ); ?></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:column -->

@@ -20,7 +20,7 @@
             <!-- wp:paragraph {"align":"center","className":"fw-300","fontSize":"medium"} -->
             <p class="has-text-align-center fw-300 has-medium-font-size"><?php printf(
                 esc_html__( 'WeCodeArt Framework is the %s theme to embrace %s and is one of the top-rated block themes.', 'wecodeart' ),
-                sprintf( '<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-white-color has-shadows-into-light-font-family">%s</mark>', esc_html__( 'FIRST', 'wecodeart' ) ),
+                sprintf( '<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-white-color has-handwritten-font-family">%s</mark>', esc_html__( 'FIRST', 'wecodeart' ) ),
                 '<strong>Gutenberg</strong>'
             ); ?></p>
             <!-- /wp:paragraph -->

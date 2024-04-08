@@ -13,16 +13,16 @@
 
 .wp-site-header {
     position: relative;
-    box-shadow: 0 0 1px 0 rgba(black, 0.15);
+    box-shadow: 0 0 1px 1px var(--wp--preset--color--accent);
     z-index: 15;
 
     .has-scrolled & {
-        box-shadow: 0 0 1px 1px rgba(black, 0.05);
+        box-shadow: var(--wp--preset--shadow--sm);
     }
 }
 
 .wp-site-footer {
-    box-shadow: 0 0 1px 0 rgba(black, 0.15);
+    box-shadow: 0 0 1px 1px var(--wp--preset--color--accent);
 }
 
 // Blocks

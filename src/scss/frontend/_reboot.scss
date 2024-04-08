@@ -28,6 +28,7 @@
 	// See https://github.com/sass/sass/issues/2383#issuecomment-336349172
 	--wp--font-system: #{inspect($font-family-sans-serif)};
 	--wp--font-monospace: #{inspect($font-family-monospace)};
+	--wp--font-cursive: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 	
 	scroll-padding-top: var(--wp--header-height, 80px);
 

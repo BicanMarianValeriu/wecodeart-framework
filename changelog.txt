@@ -1,3 +1,9 @@
+v6.4.0
+- Removed - FontAwesome license info - we are not using it anymore
+- Updated - default box shadow for .wp-site-header/.wp-site-footer containers and on scroll box shadow for header
+- Updated - use upgrader_process_complete action hook instead of after_switch_theme to do our updates maintenance
+- Added - cursive font family (modern) to replace removed Shadows Into Light google font (now installable via WP Fonts)
+
 v6.3.9
 - Fixed - fatal error on PHP 7.4 on Sanitize::background()
 
