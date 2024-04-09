@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.5
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -139,11 +139,11 @@ class Image extends Dynamic {
 				height: 100%;
 				object-fit: cover;
 			}
-			.wp-block-post-featured-image img[data-placeholder-resp] {
+			.wp-block-post-featured-image img:is(.lazyload,[data-placeholder-resp]) {
 				transition: filter .5s cubic-bezier(.6,-.28,.735,.045);
 				filter: blur(5px);
 			}	
-			.wp-block-post-featured-image img.litespeed-loaded {
+			.wp-block-post-featured-image img:is(.lazyloaded,.litespeed-loaded) {
 				filter: none;
 			}
 		CSS;
