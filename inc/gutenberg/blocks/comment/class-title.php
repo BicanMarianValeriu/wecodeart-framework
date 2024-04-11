@@ -113,7 +113,7 @@ class Title extends Dynamic {
 			$classname = 'has-text-align-' . $align;
 		}
 		
-		return wecodeart( 'markup' )::wrap( 'wp-block-comments-title', [ [
+		return wecodeart( 'dom' )::wrap( 'wp-block-comments-title', [ [
 			'tag' 	=> 'h' . get_prop( $attributes, [ 'level' ], 2 ),
 			'attrs' => $this->get_block_wrapper_attributes( [
 				'id'	=> 'comments',

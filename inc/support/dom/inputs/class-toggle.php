@@ -9,14 +9,14 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.9
+ * @version		6.4.1
  */
 
-namespace WeCodeArt\Support\Markup\Inputs;
+namespace WeCodeArt\Support\DOM\Inputs;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Support\Markup\Inputs\Base;
+use WeCodeArt\Support\DOM\Inputs\Base;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -49,12 +49,12 @@ class Toggle extends Base {
 	 * Create HTML Inputs
 	 *
 	 * @since	unknown
-	 * @version	6.0.0
+	 * @version	6.4.1
      *
      * @return  void
 	 */
 	public function content() {
-        wecodeart( 'markup' )::wrap( $this->type, [
+        wecodeart( 'dom' )::wrap( $this->type, [
             [
                 'tag'   => 'span',
                 'attrs' => [
@@ -75,7 +75,7 @@ class Toggle extends Base {
     /**
 	 * Input class
 	 *
-	 * @since	6.0.0
+	 * @since	6.4.1
      *
      * @return  string
 	 */

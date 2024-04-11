@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  */
 
 ?>
-<div <?php echo wecodeart( 'markup' )::generate_attr( 'admin-notification', $attributes ); // WPCS ok - attributes escaped with fn above. ?>>
+<div <?php echo wecodeart( 'dom' )::generate_attr( 'admin-notification', $attributes ); // WPCS ok - attributes escaped with fn above. ?>>
 	<div class="wca-notice__branding"><?php
 
 		printf( '<img style="margin:10px;" src="%s" />', wecodeart_config( 'paths' )['uri'] . '/assets/images/logo.png' );

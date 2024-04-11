@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.1.2
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -56,7 +56,7 @@ class Template extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( string $content = '' ): string {
-		$markup	= new \WP_HTML_Tag_Processor( $content );
+		$markup	= wecodeart( 'dom' )::procesor( $content );
 		$tags 	= [ 'HEADER', 'FOOTER', 'ASIDE' ];
 		$count	= count( $tags );
 

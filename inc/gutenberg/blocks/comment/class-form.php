@@ -81,7 +81,7 @@ class Form extends Dynamic {
 	 * @return 	array
 	 */
 	public function comment_form_defaults( $defaults ) {
-		$dots= wecodeart( 'markup' )->SVG::compile( 'comment-dots', [
+		$dots= wecodeart( 'dom' )->SVG::compile( 'comment-dots', [
 			'class' => 'fa-fw'
 		] );
 
@@ -124,7 +124,7 @@ class Form extends Dynamic {
 
 		switch( $type ) {
 			case 'name':
-				return wecodeart( 'markup' )::wrap( 'comment-author-name', [ [
+				return wecodeart( 'dom' )::wrap( 'comment-author-name', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
 						'class' => 'comment-form-field comment-form-author col-md-7'
@@ -145,7 +145,7 @@ class Form extends Dynamic {
 			break;
 
 			case 'email':
-				return wecodeart( 'markup' )::wrap( 'comment-author-email', [ [
+				return wecodeart( 'dom' )::wrap( 'comment-author-email', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
 						'class' => 'comment-form-field comment-form-email col-md-7'
@@ -166,7 +166,7 @@ class Form extends Dynamic {
 			break;
 
 			case 'url':
-				return wecodeart( 'markup' )::wrap( 'comment-author-url', [ [
+				return wecodeart( 'dom' )::wrap( 'comment-author-url', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
 						'class' => 'comment-form-field comment-form-url col-md-7'
@@ -186,7 +186,7 @@ class Form extends Dynamic {
 			break;
 
 			case 'comment':
-				return wecodeart( 'markup' )::wrap( 'comment-author-comment', [ [
+				return wecodeart( 'dom' )::wrap( 'comment-author-comment', [ [
 					'tag' 	=> 'div',
 					'attrs' => [
 						'class' => 'comment-form-field comment-form-comment'
@@ -227,7 +227,7 @@ class Form extends Dynamic {
 						esc_html( get_the_title( $privacy ) )
 					);
 					
-					$content = wecodeart( 'markup' )::wrap( 'comment-privacy', [ [
+					$content = wecodeart( 'dom' )::wrap( 'comment-privacy', [ [
 						'tag' 	=> 'div',
 						'attrs' => [
 							'class' => 'comment-form-field comment-form-privacy-consent'
@@ -261,7 +261,7 @@ class Form extends Dynamic {
 	 * @return 	void
 	 */
 	public function get_form_notes() {
-		return wecodeart( 'markup' )::wrap( 'comment-notes-before', [ [
+		return wecodeart( 'dom' )::wrap( 'comment-notes-before', [ [
 			'tag' 	=> 'div',
 			'attrs' => [
 				'class' => 'comment-form-field comment-form-notes'

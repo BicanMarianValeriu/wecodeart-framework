@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -19,9 +19,6 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\dom_element;
-use function WeCodeArt\Functions\dom_get_element;
-use function WeCodeArt\Functions\dom_create_element;
 
 /**
  * Gutenberg Columns blocks.
@@ -72,8 +69,8 @@ class Columns extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( array $attributes = [], string $content = '', object $block = null ): string {
-		$dom 	= $this->dom( (string) $content );
-		$div 	= dom_get_element( 'div', $dom );
+		$dom 	= wecodeart( 'dom' )::create( (string) $content );
+		$div 	= wecodeart( 'dom' )::get_element( 'div', $dom );
 
 		if ( $div ) {
 			$column_count = (string) count( $block->parsed_block['innerBlocks'] ?? 0 );

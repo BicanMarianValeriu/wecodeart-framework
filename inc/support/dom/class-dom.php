@@ -6,24 +6,23 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage  Markup
+ * @subpackage  DOM
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Support;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Config\Traits\Singleton;
-use WeCodeArt\Config\Traits\No_Conditionals;
 use WeCodeArt\Config\Interfaces\Integration;
+use WeCodeArt\Config\Traits\{ Singleton, No_Conditionals };
 
 /**
- * Markup Utilities Parent Class
+ * DOM Utilities Parent Class
  */
-class Markup implements Integration {
+class DOM implements Integration {
 
 	use Singleton;
 	use No_Conditionals;
@@ -43,27 +42,246 @@ class Markup implements Integration {
 	 * @var 	object
 	 */
 	public 	$Inputs	= null;
-	
-	/**
-	 * Template
-	 *
-	 * @since  	5.0.0
-	 * @var 	object
-	 */
-	public 	$Template	= null;
 
 	/**
 	 * Send to Constructor
 	 */
 	public function init() {
-		$this->SVG 		= Markup\SVG::get_instance();
-		$this->Inputs 	= Markup\Inputs::get_instance();
+		$this->SVG 		= DOM\SVG::get_instance();
+		$this->Inputs 	= DOM\Inputs::get_instance();
 	}
 
 	/**
 	 * Register hooks
 	 */
 	public function register_hooks() {}
+
+	/**
+	 * Returns a WP_HTML_Tag_Processor object from a given string.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	string $html HTML string to convert to DOM.
+	 *
+	 * @return 	WP_HTML_Tag_Processor
+	 */
+	public static function procesor( string $html ): \WP_HTML_Tag_Processor {
+		return new \WP_HTML_Tag_Processor( $html );
+	}
+
+	/**
+	 * Returns a formatted DOMDocument object from a given string.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	string $html HTML string to convert to DOM.
+	 *
+	 * @return 	DOMDocument
+	 */
+	public static function create( string $html ): \DOMDocument {
+		$dom = new \DOMDocument();
+
+		if ( ! $html ) {
+			return $dom;
+		}
+
+		$dom->preserveWhiteSpace = false;
+		$dom->formatOutput       = true;
+
+		// Setting libxml options with bitwise operator.
+		$options = 0;
+		$options |= defined( 'LIBXML_HTML_NOIMPLIED' ) ? LIBXML_HTML_NOIMPLIED : 0;
+		$options |= defined( 'LIBXML_HTML_NODEFDTD' ) ? LIBXML_HTML_NODEFDTD : 0;
+
+		// @see https://stackoverflow.com/questions/13280200/convert-unicode-to-html-entities-hex.
+		// @todo Check if all DOMs need this.
+		$html = static::convert_unicode_to_html_entities( $html );
+
+		libxml_use_internal_errors( true );
+
+		$dom->loadHTML( $html, $options );
+
+		libxml_clear_errors();
+		libxml_use_internal_errors( false );
+
+		return $dom;
+	}
+
+	/**
+	 * Returns an array of DOM elements by class name.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	DOMDocument	$dom        DOM document or element.
+	 * @param 	string		$class_name Element class name.
+	 * @param 	string		$tag        Element tag name (optional).
+	 * @param 	integer		$index		Element index (optional).
+	 *
+	 * @return 	mixed
+	 */
+	public static function get_elements_by_class( \DOMDocument $dom, string $class_name, string $tag = '*', $index = null ) {
+		$xpath    = new DOMXPath( $dom );
+		$query    = sprintf( "//%s[contains(concat(' ', normalize-space(@class), ' '), ' %s ')]", $tag, $class_name );
+		$nodes    = $xpath->query( $query );
+		$elements = [];
+
+		if ( $nodes !== false ) {
+			foreach ( $nodes as $node ) {
+				if ( $node instanceof DOMElement ) {
+					$elements[] = $node;
+				}
+			}
+		}
+	
+		if( is_int( $index ) ) {
+			return isset( $elements[$index] ) ? $elements[$index] : null;
+		}
+	
+		return $elements;
+	}
+
+	/**
+	 * Returns a formatted DOMElement object from a DOMDocument object.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	string $tag            HTML tag.
+	 * @param 	mixed  $dom_or_element DOMDocument or DOMElement.
+	 * @param 	int    $index          Index of element to return.
+	 *
+	 * @return 	?DOMElement
+	 */
+	public static function get_element( string $tag, $dom_or_element, int $index = 0 ): ?\DOMElement {
+		if ( ! is_a( $dom_or_element, \DOMDocument::class ) && ! is_a( $dom_or_element, \DOMElement::class ) ) {
+			return null;
+		}
+
+		$element = $dom_or_element->getElementsByTagName( $tag )->item( $index );
+
+		if ( ! $element ) {
+			return null;
+		}
+
+		return self::element( $element );
+	}
+
+	/**
+	 * Creates a DOMElement to avoid unhandled exceptions.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	string      $tag HTML tag.
+	 * @param 	DOMDocument $dom DOM object.
+	 *
+	 * @return 	?DOMElement
+	 */
+	public static function create_element( string $tag, \DOMDocument $dom ): ?\DOMElement {
+		$element = null;
+
+		try {
+			$element = $dom->createElement( $tag );
+		} catch ( Exception $e ) {
+			new WP_Error( 'invalid_dom_tag', $e->getMessage() );
+		}
+
+		if ( is_null( $element ) ) {
+			return null;
+		}
+
+		return self::element( $element );
+	}
+
+	/**
+	 * Casts a DOMNode to a DOMElement.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	mixed $node DOMNode to cast to DOMElement.
+	 *
+	 * @return 	?DOMElement
+	 */
+	public static function element( $node ): ?\DOMElement {
+		if ( $node && $node->nodeType === XML_ELEMENT_NODE ) {
+			/* @var DOMElement $node DOM Element node */
+			return $node;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns an HTML element with a replaced tag.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	string     $name    Tag name, e.g: 'div'.
+	 * @param 	DOMElement $element DOM Element to change.
+	 *
+	 * @return 	?DOMElement
+	 */
+	public static function change_tag( \DOMElement $element, string $name ): ?\DOMElement {
+		if ( ! $element->ownerDocument ) {
+			return new \DOMElement( $name );
+		}
+	
+		$child_nodes = [];
+	
+		foreach ( $element->childNodes as $child ) {
+			$child_nodes[] = $child;
+		}
+	
+		$new_element = $element->ownerDocument->createElement( $name );
+	
+		foreach ( $child_nodes as $child ) {
+			$child2 = $element->ownerDocument->importNode( $child, true );
+			$new_element->appendChild( $child2 );
+		}
+	
+		foreach ( $element->attributes as $attr_node ) {
+			$attr_name  = $attr_node->nodeName;
+			$attr_value = $attr_node->nodeValue;
+	
+			$new_element->setAttribute( $attr_name, $attr_value );
+		}
+	
+		if ( $element->parentNode ) {
+			$element->parentNode->replaceChild( $new_element, $element );
+		}
+	
+		return $new_element;
+	}
+
+	/**
+	 * Gets classes from a DOM element.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	DOMElement $element DOM element.
+	 *
+	 * @return 	array
+	 */
+	public static function get_classes( \DOMElement $element ): array {
+		$classes = explode( ' ', $element->getAttribute( 'class' ) );
+
+		return array_filter( $classes );
+	}
+
+	/**
+	 * Adds CSS classes to a DOM element.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	DOMElement $element DOM element.
+	 * @param 	array      $classes Classes to add.
+	 *
+	 * @return 	void
+	 */
+	public static function add_classes( \DOMElement $element, array $classes ): void {
+		$element->setAttribute(
+			'class',
+			trim( implode( ' ', array_unique( array_merge( self::get_classes( $element ), $classes ) ) ) )
+		);
+	}
 
 	/**
 	 * Merge array of attributes with defaults, and apply contextual filter on array.
@@ -308,5 +526,30 @@ class Markup implements Integration {
 		}
 		
 		return $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
+
+	/**
+	 * Returns a formatted HTML string from a DOMDocument object.
+	 *
+	 * @param 	string $html HTML string to convert to DOM.
+	 *
+	 * @return 	string
+	 */
+	private static function convert_unicode_to_html_entities( string $html ): string {
+		return preg_replace_callback( '/[\x{80}-\x{10FFFF}]/u', static fn( array $matches ): string => sprintf(
+			'&#x%s;',
+			ltrim(
+				strtoupper(
+					bin2hex(
+						iconv(
+							'UTF-8',
+							'UCS-4',
+							current( $matches )
+						)
+					)
+				),
+				'0'
+			)
+		), $html );
 	}
 }

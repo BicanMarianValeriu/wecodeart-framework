@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\{ get_prop, get_placeholder_source, dom_get_element };
+use function WeCodeArt\Functions\{ get_prop, get_placeholder_source };
 
 /**
  * Gutenberg Media Text block.
@@ -62,8 +62,8 @@ class Text extends Dynamic {
 	 */
 	public function render( array $attributes = [], string $content = '' ): string {
 		$dom	= $this->dom( $content );
-		$div  	= dom_get_element( 'figure', $dom );
-		$link 	= dom_get_element( 'a', $div );
+		$div  	= wecodeart( 'dom' )::get_element( 'figure', $dom );
+		$link 	= wecodeart( 'dom' )::get_element( 'a', $div );
 
 		// If no image, add placeholder.
 		if( ! get_prop( $attributes, 'mediaLink' ) ) {

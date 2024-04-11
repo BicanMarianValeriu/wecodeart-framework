@@ -6,20 +6,18 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework 
- * @subpackage 	Markup\Inputs
+ * @subpackage 	DOM\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.1.2
- * @version		6.3.7
+ * @version		6.4.1
  */
 
-namespace WeCodeArt\Support\Markup;
+namespace WeCodeArt\Support\DOM;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Config\Traits\Singleton;
-use WeCodeArt\Config\Interfaces\Integration;
-use WeCodeArt\Config\Interfaces\Configuration;
+use WeCodeArt\Config\Traits\{ Asset, Singleton };
+use WeCodeArt\Config\Interfaces\{ Integration, Configuration };
 use function WeCodeArt\Functions\encode_svg_data;
 
 /**
@@ -77,7 +75,7 @@ class Inputs implements Configuration {
 	 * Get the HTML of the input
 	 *
 	 * @since	unknown
-	 * @version	6.0.0
+	 * @version	6.4.1
 	 *
 	 * @param 	string 		$type		text/number/etc
 	 * @param 	array 		$args		Input Args
@@ -297,6 +295,8 @@ class Inputs implements Configuration {
 										e.stopPropagation();
 									}
 									
+									form.querySelectorAll('.wpcf7-not-valid-tip,.invalid-feedback,.invalid-tooltip').forEach(el => el.remove());
+
 									form.classList.add('was-validated');
 									
 									clearTimeout(timeout);

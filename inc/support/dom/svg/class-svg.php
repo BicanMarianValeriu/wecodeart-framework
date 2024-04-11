@@ -6,19 +6,18 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage  Markup\SVG
+ * @subpackage  DOM\SVG
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		6.3.7
+ * @version		6.4.1
  */
 
-namespace WeCodeArt\Support\Markup;
+namespace WeCodeArt\Support\DOM;
 
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Config\Interfaces\Configuration;
-use function WeCodeArt\Functions\kses_svg;
 
 /**
  * SVG Rendering
@@ -242,7 +241,7 @@ class SVG implements Configuration {
 				$attrs['class'] .= ' ' . $args['class'];
 			}
 
-			$attributes = wecodeart( 'markup' )::generate_attr( $icon, $attrs );
+			$attributes = wecodeart( 'dom' )::generate_attr( $icon, $attrs );
 
 			// Begin SVG markup.
 			$svg = '<svg ' . $attributes . '>';
@@ -266,7 +265,7 @@ class SVG implements Configuration {
 			$svg  = preg_replace( "/([\n\t]+)/", ' ', $svg ); 	// Remove newlines & tabs.
 			$svg  = preg_replace( '/>\s*</', '><', $svg ); 		// Remove white space between SVG tags.
 	
-			return kses_svg( $svg );
+			return self::sanitize( $svg );
 		}
 
 		return null;
@@ -300,6 +299,32 @@ class SVG implements Configuration {
 		}
 
 		return $string;
+	}
+
+	/**
+	 * Kses SVG
+	 *
+	 * @param 	string 	$data
+	 *
+	 * @return 	string
+	 */
+	public static function sanitize( string $data ) {
+		return wp_kses( $data, [ 
+			'svg' => [
+				'class'  		=> true,
+				'aria-hidden'  	=> true,
+				'role' 			=> true,
+				'focusable'    	=> true,
+				'xmlns'    		=> true,
+				'viewbox' 		=> true,
+			],
+			'g' 	=> [],
+			'path' 	=> [
+				'd' 	=> true,
+				'class' => true,
+				'fill'	=> true
+			]
+		] );
 	}
 
 	/**

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -93,7 +93,7 @@ class Template extends Dynamic {
 		$content	= render_block_core_post_template( $attributes, $content, $block );
 		\remove_filter( 'post_class', $callback );
 
-		$content	= new \WP_HTML_Tag_Processor( $content );
+		$content	= wecodeart( 'dom' )::procesor( $content );
 		
 		if( $content->next_tag( [ 'class_name' => 'wp-block-post-template' ] ) ) {
 			if( get_prop( $attributes, [ 'layout', 'type' ], get_prop( $block->context, [ 'displayLayout', 'type' ], '' ) ) === 'grid' ) {

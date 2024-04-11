@@ -9,14 +9,14 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
-namespace WeCodeArt\Support\Markup\Inputs;
+namespace WeCodeArt\Support\DOM\Inputs;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Support\Markup\Inputs\Basic;
+use WeCodeArt\Support\DOM\Inputs\Basic;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -47,7 +47,7 @@ class Floating extends Basic {
 	 * @version	5.0.0
 	 */
 	public function content() {
-        wecodeart( 'markup' )::wrap( 'form-floating', [
+        wecodeart( 'dom' )::wrap( 'form-floating', [
             [
                 'tag' => 'div',
                 'attrs' => [

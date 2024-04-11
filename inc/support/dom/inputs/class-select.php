@@ -9,15 +9,15 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.5
+ * @version		6.4.1
  */
 
-namespace WeCodeArt\Support\Markup\Inputs;
+namespace WeCodeArt\Support\DOM\Inputs;
 
 defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Support\Markup;
-use WeCodeArt\Support\Markup\Inputs\Basic;
+use WeCodeArt\Support\DOM\Inputs\Basic;
 use function WeCodeArt\Functions\get_prop;
 use function WeCodeArt\Functions\encode_svg_data;
 
@@ -67,7 +67,7 @@ class Select extends Basic {
         <select <?php $this->input_attrs( [ 'type', 'value', 'placeholder' ] ); ?>>
             <?php if( $placeholder ) {
             
-                wecodeart( 'markup' )::wrap( 'select-placeholder', [
+                wecodeart( 'dom' )::wrap( 'select-placeholder', [
                     [
                         'tag' => 'option',
                         'attrs' => [
@@ -81,7 +81,7 @@ class Select extends Basic {
             } ?>
             <?php foreach( $this->choices as $value => $label ) {
             
-                wecodeart( 'markup' )::wrap( 'select-option', [
+                wecodeart( 'dom' )::wrap( 'select-option', [
                     [
                         'tag' => 'option',
                         'attrs' => [
@@ -110,8 +110,8 @@ class Select extends Basic {
     /**
      * Get input's class.
      * 
-     * @since   6.0.0
-     * @version 6.0.0
+     * @since   6.4.1
+     * @version 6.4.1
      *
      * @return 	string
      */

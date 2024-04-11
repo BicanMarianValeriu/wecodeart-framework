@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\dom_get_element;
 
 /**
  * Gutenberg Heading block.
@@ -75,9 +74,9 @@ class Details extends Dynamic {
 			return $content;
 		}
 
-		$dom = $this->dom( $content );
+		$dom = wecodeart( 'dom' )::create( $content );
 
-		$summary	= dom_get_element( 'summary', $dom, 0 );
+		$summary	= wecodeart( 'dom' )::get_element( 'summary', $dom, 0 );
 		$summary	= is_object( $summary ) ? $summary->nodeValue : '';
 		$text 		= self::get_question_content( get_prop( $parsed_block, [ 'innerBlocks' ], [] ) );
 

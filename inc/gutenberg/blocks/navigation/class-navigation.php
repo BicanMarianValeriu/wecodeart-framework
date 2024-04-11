@@ -209,13 +209,13 @@ class Navigation extends Dynamic {
 			self::$themes_loaded[] = current( $navbar_theme );
 		}
 
-		return wecodeart( 'markup' )::wrap( 'navbar', [ [
+		return wecodeart( 'dom' )::wrap( 'navbar', [ [
 			'tag' 	=> 'nav',
 			'attrs'	=> $attrs
 		] ], function( $attributes, $inner_blocks, $block_id, $offcanvas ) {
 
 			// Navbar List HTML
-			$html = wecodeart( 'markup' )::wrap( 'navbar-nav', [ [
+			$html = wecodeart( 'dom' )::wrap( 'navbar-nav', [ [
 				'tag' 	=> 'ul',
 				'attrs' => [
 					'class' => 'wp-block-navigation__container nav navbar-nav',
@@ -281,7 +281,7 @@ class Navigation extends Dynamic {
 			$classes	= [ 'wp-block-navigation-item', 'nav-item' ];
 			$classes[]  = 'nav-item--' . join( '-', explode( '/', get_prop( $block->parsed_block, 'blockName', '' ) ) );
 
-			return wecodeart( 'markup' )::wrap( 'nav-item', [ [
+			return wecodeart( 'dom' )::wrap( 'nav-item', [ [
 				'tag' 	=> 'li',
 				'attrs'	=> [
 					'class'	=> join( ' ', $classes ),

@@ -140,7 +140,7 @@ class Archives extends Dynamic {
 			}
 		}
 
-		return wecodeart( 'markup' )::wrap( 'wp-block-archives', [
+		return wecodeart( 'dom' )::wrap( 'wp-block-archives', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => $this->get_block_wrapper_attributes()

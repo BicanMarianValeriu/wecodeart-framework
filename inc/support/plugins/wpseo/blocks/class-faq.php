@@ -9,7 +9,7 @@
  * @subpackage  Yoast\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Support\Plugins\WPSeo\Blocks;
@@ -19,10 +19,6 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Config\Interfaces\Integration;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-
-use function WeCodeArt\Functions\dom_get_element;
-use function WeCodeArt\Functions\dom_change_tag;
-use function WeCodeArt\Functions\dom_elements_by_class;
 
 /**
  * Gutenberg Yoast FAQ block.
@@ -66,17 +62,17 @@ class Faq extends Dynamic {
 	 * @return 	string
 	 */
 	public function render( array $attributes = [], string $content = '' ): string {
-		$dom		= $this->dom( $content );
-		$sections	= dom_elements_by_class( $dom, 'schema-faq-section' );
+		$dom		= wecodeart( 'dom' )::create( $content );
+		$sections	= wecodeart( 'dom' )::get_elements_by_class( $dom, 'schema-faq-section' );
 
 		if( count( $sections ) ) {
 			foreach( $sections as $section ) {
-				$section = dom_change_tag( $section, 'details' );
-				$summary = dom_change_tag( dom_get_element( 'strong', $section, 0 ), 'summary' );
+				$section = wecodeart( 'dom' )::change_tag( $section, 'details' );
+				$summary = wecodeart( 'dom' )::change_tag( wecodeart( 'dom' )::get_element( 'strong', $section, 0 ), 'summary' );
 			}
 		}
 
-		$content	= new \WP_HTML_Tag_Processor( $dom->saveHtml() );
+		$content	= wecodeart( 'dom' )::procesor( $dom->saveHtml() );
 		$content->next_tag();
 		$content->add_class( 'wp-block-details' );
 

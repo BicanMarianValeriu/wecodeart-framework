@@ -92,7 +92,7 @@ class Link extends Dynamic {
 
 		$attrs 	= $this->get_wrapper_attributes( $attributes, $block, $extras );
 
-		return wecodeart( 'markup' )::wrap( 'nav-item', [ [
+		return wecodeart( 'dom' )::wrap( 'nav-item', [ [
 			'tag' 	=> 'li',
 			'attrs'	=> $attrs,
 		] ], function( $attributes, $block, $extras ) {
@@ -115,7 +115,7 @@ class Link extends Dynamic {
 	 * @return	string 	HTML
 	 */
 	public function render_link( $attributes, $block, $extras ): void {
-		wecodeart( 'markup' )::wrap( 'nav-link', [ [
+		wecodeart( 'dom' )::wrap( 'nav-link', [ [
 			'tag' 	=> $this->get_link_tag( get_prop( $extras, 'mod', [] ) ),
 			'attrs'	=> $this->get_link_attributes( $attributes, $block, $extras ),
 		] ], function( $attributes, $extras ) {
@@ -131,7 +131,7 @@ class Link extends Dynamic {
 			}
 	
 			// Label
-			wecodeart( 'markup' )::wrap( 'nav-label', [ [
+			wecodeart( 'dom' )::wrap( 'nav-label', [ [
 				'tag' 	=> 'span',
 				'attrs'	=> [
 					'class' => 'wp-block-navigation-item__label'
@@ -141,7 +141,7 @@ class Link extends Dynamic {
 			}, [ $attributes ] );
 
 			// Description
-			wecodeart( 'markup' )::wrap( 'nav-description', [ [
+			wecodeart( 'dom' )::wrap( 'nav-description', [ [
 				'tag' 	=> 'span',
 				'attrs'	=> [
 					'class' => 'wp-block-navigation-item__description'

@@ -9,23 +9,12 @@
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version     6.3.7
+ * @version     6.4.1
  */
 
 namespace WeCodeArt\Functions;
 
 defined( 'ABSPATH' ) || exit;
-
-use DOMDocument;
-use DOMElement;
-use DOMXPath;
-use Exception;
-use WP_Error;
-use function defined;
-use function is_a;
-use function libxml_clear_errors;
-use function libxml_use_internal_errors;
-use function mb_convert_encoding;
 
 /**
  * Helper function to encode an array to an excaped json string
@@ -81,32 +70,6 @@ function set_prop( $target, $array, $value ) {
 	$current->{ $key } = $value;
 
 	return $target;
-}
-    
-/**
- * Kses SVG
- *
- * @param 	string 	$data
- *
- * @return 	string
- */
-function kses_svg( string $data ) {
-    return wp_kses( $data, [ 
-        'svg' => [
-            'class'  		=> true,
-            'aria-hidden'  	=> true,
-            'role' 			=> true,
-            'focusable'    	=> true,
-            'xmlns'    		=> true,
-            'viewbox' 		=> true,
-        ],
-        'g' 	=> [],
-        'path' 	=> [
-            'd' 	=> true,
-            'class' => true,
-            'fill'	=> true
-        ]
-    ] );
 }
 
 /**
@@ -269,47 +232,22 @@ function flatten( array $array = [] ): array {
 /**
  * Returns a formatted DOMDocument object from a given string.
  *
- * @since 6.0.0
+ * @since   6.0.0
+ * @version 6.4.1
  *
- * @param string $html HTML string to convert to DOM.
+ * @param   string $html HTML string to convert to DOM.
  *
- * @return \DOMDocument
+ * @return  \DOMDocument
  */
-function dom( string $html ): DOMDocument {
-	$dom = new DOMDocument();
-
-	if ( ! $html ) {
-		return $dom;
-	}
-
-	$libxml_previous_state = libxml_use_internal_errors( true );
-
-	$dom->preserveWhiteSpace = true;
-
-	if ( defined( 'LIBXML_HTML_NOIMPLIED' ) && defined( 'LIBXML_HTML_NODEFDTD' ) ) {
-		$options = LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD;
-	} elseif ( defined( 'LIBXML_HTML_NOIMPLIED' ) ) {
-		$options = LIBXML_HTML_NOIMPLIED;
-	} elseif ( defined( 'LIBXML_HTML_NODEFDTD' ) ) {
-		$options = LIBXML_HTML_NODEFDTD;
-	} else {
-		$options = 0;
-	}
-
-	$dom->loadHTML( mb_convert_encoding( $html, 'HTML-ENTITIES', get_option( 'blog_charset' ) ), $options );
-
-	$dom->formatOutput = true;
-
-	libxml_clear_errors();
-	libxml_use_internal_errors( $libxml_previous_state );
-
-	return $dom;
+function dom( string $html ): \DOMDocument {
+	return wecodeart( 'dom' )::create( $html );
 }
 
 /**
  * Returns a formatted DOMElement object from a DOMDocument object.
  *
  * @since   6.0.0
+ * @version 6.4.1
  *
  * @param   string $tag            HTML tag.
  * @param   mixed  $dom_or_element DOMDocument or DOMElement.
@@ -318,35 +256,21 @@ function dom( string $html ): DOMDocument {
  * @return  \DOMElement|null
  */
 function dom_get_element( string $tag, $dom_or_element, int $index = 0 ) {
-	if ( ! is_a( $dom_or_element, DOMDocument::class ) && ! is_a( $dom_or_element, DOMElement::class ) ) {
-		return null;
-	}
-
-	$element = $dom_or_element->getElementsByTagName( $tag )->item( $index );
-
-	if ( ! $element ) {
-		return null;
-	}
-
-	return dom_element( $element );
+	return wecodeart( 'dom' )::get_element( $tag, $dom_or_element, $index );
 }
 
 /**
  * Casts a DOMNode to a DOMElement.
  *
  * @since   6.0.0
+ * @version 6.4.1
  *
  * @param   mixed $node DOMNode to cast to DOMElement.
  *
  * @return  \DOMElement|null
  */
-function dom_element( $node ) {
-	if ( $node->nodeType === XML_ELEMENT_NODE ) {
-		/* @var \DOMElement $node DOM Element node */
-		return $node;
-	}
-
-	return null;
+function dom_element( $node ): \DOMElement {
+	return wecodeart( 'dom' )::node_2_element( $node );
 }
 
 /**
@@ -404,7 +328,7 @@ function dom_image_2_svg( \DOMDocument $dom, \DOMElement $wrap, \DOMElement $img
  * Returns array of dom elements by class name.
  *
  * @since   6.0.0
- * @version 6.3.7
+ * @version 6.4.1
  *
  * @param   DOMDocument|DOMElement $dom         DOM document or element.
  * @param   string                 $class_name  Element class name.
@@ -414,92 +338,37 @@ function dom_image_2_svg( \DOMDocument $dom, \DOMElement $wrap, \DOMElement $img
  * @return  mixed
  */
 function dom_elements_by_class( $dom, string $class_name, string $tag = '*', $index = null ) {
-	$xpath    = new \DOMXPath( $dom );
-	$query    = sprintf( "//%s[contains(concat(' ', normalize-space(@class), ' '), ' %s ')]", $tag, $class_name );
-	$nodes    = $xpath->query( $query );
-	$elements = [];
-
-	if ( $nodes !== false ) {
-		foreach ( $nodes as $node ) {
-			if ( $node instanceof DOMElement ) {
-				$elements[] = $node;
-			}
-		}
-	}
-
-    if( is_int( $index ) ) {
-        return isset( $elements[$index] ) ? $elements[$index] : null;
-    }
-
-	return $elements;
+	return wecodeart( 'dom' )::get_elements_by_class( $dom, $class_name, $tag, $index );
 }
 
 /**
  * Returns an HTML element with a replaced tag.
  *
  * @since   6.0.0
+ * @version 6.4.1
  *
  * @param   DOMElement $element DOM Element to change.
  * @param   string     $name    Tag name, e.g: 'div'.
  *
  * @return  DOMElement
  */
-function dom_change_tag( DOMElement $element, string $name ): DOMElement {
-	if ( ! $element->ownerDocument ) {
-		return new DOMElement( $name );
-	}
-
-	$child_nodes = [];
-
-	foreach ( $element->childNodes as $child ) {
-		$child_nodes[] = $child;
-	}
-
-	$new_element = $element->ownerDocument->createElement( $name );
-
-	foreach ( $child_nodes as $child ) {
-		$child2 = $element->ownerDocument->importNode( $child, true );
-		$new_element->appendChild( $child2 );
-	}
-
-	foreach ( $element->attributes as $attr_node ) {
-		$attr_name  = $attr_node->nodeName;
-		$attr_value = $attr_node->nodeValue;
-
-		$new_element->setAttribute( $attr_name, $attr_value );
-	}
-
-	if ( $element->parentNode ) {
-		$element->parentNode->replaceChild( $new_element, $element );
-	}
-
-	return $new_element;
+function dom_change_tag( \DOMElement $element, string $name ): \DOMElement {
+	return wecodeart( 'dom' )::change_tag( $element, $name );
 }
 
 /**
  * Creates a DOMElement to avoid unhandled exceptions.
  *
  * @since   6.2.8
+ * @version 6.4.1
  *
  * @param   string      $tag HTML tag.
  * @param   DOMDocument $dom DOM object.
  *
  * @return  ?DOMElement
  */
-function dom_create_element( string $tag, DOMDocument $dom ): ?DOMElement {
-	$element = null;
-
-	try {
-		$element = $dom->createElement( $tag );
-	} catch ( Exception $e ) {
-		new WP_Error( 'invalid_dom_tag', $e->getMessage() );
-	}
-
-	if ( is_null( $element ) ) {
-		return null;
-	}
-
-	return dom_element( $element );
+function dom_create_element( string $tag, \DOMDocument $dom ): \DOMElement {
+	return wecodeart( 'dom' )::create_element( $tag, $dom );
 }
 
 /**

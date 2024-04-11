@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.1.8
- * @version		6.2.1
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -90,7 +90,7 @@ class Login extends Dynamic {
 				$instance_id 	= wp_unique_id( 'wp-login-' );
 
 				// Get the form.
-				$contents		= new \WP_HTML_Tag_Processor( $contents );
+				$contents		= wecodeart( 'dom' )::procesor( $contents );
 				if( $contents->next_tag( [ 'tag_name' => 'a' ] ) ) {
 					$contents->set_attribute( 'href', '#' );
 					$contents->set_attribute( 'class', 'nav-link' );
@@ -109,14 +109,14 @@ class Login extends Dynamic {
 			}
 		} 
 		
-		$contents	= new \WP_HTML_Tag_Processor( $contents );
+		$contents	= wecodeart( 'dom' )::procesor( $contents );
 		if( $contents->next_tag( [ 'tag_name' => 'a' ] ) ) {
 			// Is this a button?
 			$contents->add_class( in_array( 'wp-block-button', $classNames, true ) ? 'wp-element-button' : 'nav-link' );
 		}
 		$contents = $contents->get_updated_html();
 
-		return wecodeart( 'markup' )::wrap( $this->get_asset_handle(), [
+		return wecodeart( 'dom' )::wrap( $this->get_asset_handle(), [
 			[
 				'tag' 	=> 'div',
 				'attrs'	=> $this->get_block_wrapper_attributes( [

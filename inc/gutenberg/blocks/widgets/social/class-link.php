@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.9
- * @version		6.2.9
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets\Social;
@@ -81,7 +81,7 @@ class Link extends Dynamic {
 		
 		if ( $is_sharing ) {
 			$service 	= get_prop( $attributes, [ 'service' ], '' );
-			$content 	= new \WP_HTML_Tag_Processor( $content );
+			$content 	= wecodeart( 'dom' )::procesor( $content );
 
 			$window_title = esc_html__( 'Share the post!', 'wecodeart' );
 

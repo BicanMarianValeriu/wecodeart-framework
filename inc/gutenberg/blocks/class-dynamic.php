@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -94,12 +94,10 @@ abstract class Dynamic {
 	 *
 	 * @param 	string $content    Block content. 		Default empty string.
 	 * 
-	 * @return 	object $doc.
+	 * @return 	DOMDocument.
 	 */
-	protected function dom( $content = '' ) {
-		$doc = dom( $content );
-
-		return $doc;
+	protected function dom( $content = '' ): \DOMDocument {
+		return wecodeart( 'dom' )::create( $content );
 	}
 
 	/**

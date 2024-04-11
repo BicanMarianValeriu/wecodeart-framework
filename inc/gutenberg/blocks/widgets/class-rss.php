@@ -96,7 +96,7 @@ class RSS extends Dynamic {
 
 		$classnames[] = 'list-unstyled';
 
-		$content = wecodeart( 'markup' )::wrap( 'wp-block-rss', [
+		$content = wecodeart( 'dom' )::wrap( 'wp-block-rss', [
 			[
 				'tag' 	=> 'ul',
 				'attrs'	=> [

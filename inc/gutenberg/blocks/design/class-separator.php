@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -23,7 +23,7 @@ use str_starts_with;
 use file_get_contents;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\{ get_prop, encode_svg_data, dom_get_element, dom_change_tag };
+use function WeCodeArt\Functions\{ get_prop, encode_svg_data };
 
 /**
  * Gutenberg Separator block.
@@ -150,12 +150,12 @@ class Separator extends Dynamic {
 			] ) );
 				
 			if( $style ) {
-				$dom	= $this->dom( $content );
-				$hr		= dom_get_element( 'hr', $dom );
-				$div 	= dom_change_tag( $hr, 'div' );
+				$dom	= wecodeart( 'dom' )::create( $content );
+				$hr		= wecodeart( 'dom' )::get_element( 'hr', $dom );
+				$div 	= wecodeart( 'dom' )::change_tag( $hr, 'div' );
 
 				$file	= file_get_contents( get_prop( $style, [ 'file' ] ) );
-				$svg    = $dom->importNode( $this->dom( $file )->documentElement, true );
+				$svg    = $dom->importNode( wecodeart( 'dom' )::create( $file )->documentElement, true );
 				$svg->setAttribute( 'role', 'presentation' );
 				$svg->setAttribute( 'aria-hidden', 'true' );
 				$div->appendChild( $svg );

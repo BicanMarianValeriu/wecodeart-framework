@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -108,7 +108,7 @@ class Content extends Dynamic {
 			return '';
 		}
 
-		return wecodeart( 'markup' )::wrap( 'wp-block-post-content', [
+		return wecodeart( 'dom' )::wrap( 'wp-block-post-content', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => $this->get_block_wrapper_attributes()

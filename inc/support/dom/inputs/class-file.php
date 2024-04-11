@@ -9,14 +9,14 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.1.7
+ * @version		6.4.1
  */
 
-namespace WeCodeArt\Support\Markup\Inputs;
+namespace WeCodeArt\Support\DOM\Inputs;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Support\Markup\Inputs\Basic;
+use WeCodeArt\Support\DOM\Inputs\Basic;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -26,7 +26,7 @@ class File extends Basic {
     /**
      * Input's Style Deps.
      *
-     * @since   6.0.0
+     * @since   6.4.1
      * @var     array
      */
     static $style_deps = [ 'basic' ];

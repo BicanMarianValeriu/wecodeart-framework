@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\{ get_prop, dom_element, dom_get_element, dom_create_element };
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Group blocks.
@@ -81,7 +81,7 @@ class Group extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( array $attributes = [], string $content = '' ): string {
-		$content 	= new \WP_HTML_Tag_Processor( $content );
+		$content 	= wecodeart( 'dom' )::procesor( $content );
 
 		static $processed = null;
 		// Handle <main /> tag (once).
@@ -157,10 +157,9 @@ class Group extends Dynamic {
 	 * @return 	string 	The block updated markup.
 	 */
 	public function create_marquee( $attributes, $content ) {
-		$dom 	= $this->dom( (string) $content );
-		$div 	= dom_get_element( 'div', $dom );
-		
-		$wrap	= dom_create_element( 'div', $dom );
+		$dom 	= wecodeart( 'dom' )::create( (string) $content );
+		$div 	= wecodeart( 'dom' )::get_element( 'div', $dom );
+		$wrap	= wecodeart( 'dom' )::create_element( 'div', $dom );
 		$wrap->setAttribute( 'class', 'wp-block-group__marquee' );
 		
 		$styles 		= [];
@@ -204,7 +203,7 @@ class Group extends Dynamic {
 		}
 
 		for ( $j = 0; $j < 2; $j++ ) {
-			$clone = dom_element( $wrap->cloneNode( true ) );
+			$clone = wecodeart( 'dom' )::element( $wrap->cloneNode( true ) );
 
 			if ( ! $clone ) {
 				continue;

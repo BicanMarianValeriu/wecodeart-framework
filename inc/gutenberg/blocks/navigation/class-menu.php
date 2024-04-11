@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.1
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -95,7 +95,7 @@ class Menu extends Dynamic {
 			$classes[] = 'dropdown-menu-dark';
 		}
 
-		return wecodeart( 'markup' )::wrap( 'nav-dropdown', [ [
+		return wecodeart( 'dom' )::wrap( 'nav-dropdown', [ [
 			'tag' 	=> 'ul',
 			'attrs'	=> [
 				'class' => join( ' ', $classes ),
@@ -107,7 +107,7 @@ class Menu extends Dynamic {
 				$inner_html .= $inner_block->render();
 			}
 
-			$tag_processor = new \WP_HTML_Tag_Processor( $inner_html );
+			$tag_processor = wecodeart( 'dom' )::procesor( $inner_html );
 			while ( $tag_processor->next_tag( [
 				'class_name' => 'nav-link'
 			] ) ) {

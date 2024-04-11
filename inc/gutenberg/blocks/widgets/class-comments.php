@@ -129,7 +129,7 @@ class Comments extends Dynamic {
 		$template = apply_filters( 'wecodeart/filter/gutenberg/latest-comments/template', $template, $attributes );
 		$template = parse_blocks( $template );
 
-		return wecodeart( 'markup' )::wrap( 'wp-block-latest-comments', [
+		return wecodeart( 'dom' )::wrap( 'wp-block-latest-comments', [
 			[
 				'tag' 	=> 'ul',
 				'attrs'	=> [
@@ -145,7 +145,7 @@ class Comments extends Dynamic {
 				] );
 
 				// Same context as default comment block for filters
-				$content	.= wecodeart( 'markup' )::wrap( 'wp-block-comment', [
+				$content	.= wecodeart( 'dom' )::wrap( 'wp-block-comment', [
 					[
 						'tag' 	=> 'li',
 						'attrs'	=> [

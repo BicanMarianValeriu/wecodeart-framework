@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\{ get_prop, dom_element, dom_change_tag, dom_get_element, dom_create_element };
+use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Query Pagination block.
@@ -71,18 +71,18 @@ class Numbers extends Dynamic {
             return $content;
         }
 
-        $dom 	= $this->dom( $content );
-		$div 	= dom_get_element( 'div', $dom );
+        $dom 	= wecodeart( 'dom' )::create( $content );
+		$div 	= wecodeart( 'dom' )::get_element( 'div', $dom );
 
         if( ! $div ) {
             return $content;
         }
 
         // Change to ul.
-        $div    = dom_change_tag( $div, 'ul' );
+        $div    = wecodeart( 'dom' )::change_tag( $div, 'ul' );
 
         // Create a list wrapper
-        $wrap	= dom_create_element( 'li', $dom );
+        $wrap	= wecodeart( 'dom' )::create_element( 'li', $dom );
 		$wrap->setAttribute( 'class', 'wp-block-query-pagination-numbers__item' );
 
         $items = [];
@@ -102,7 +102,7 @@ class Numbers extends Dynamic {
             }
 
             $item->setAttribute( 'class', 'wp-block-query-pagination-numbers__link ' . $item->getAttribute( 'class' ) );
-            $clone = $wrap->cloneNode( true );
+            $clone = wecodeart( 'dom' )::element( $wrap->cloneNode( true ) );
             $clone->appendChild( $item );
             $div->insertBefore( $clone, $div->firstChild );
         }

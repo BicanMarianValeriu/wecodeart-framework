@@ -9,14 +9,14 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.1.9
+ * @version		6.4.1
  */
 
-namespace WeCodeArt\Support\Markup\Inputs;
+namespace WeCodeArt\Support\DOM\Inputs;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Support\Markup\Inputs\Basic;
+use WeCodeArt\Support\DOM\Inputs\Basic;
 use function WeCodeArt\Functions\get_prop;
 
 /**
@@ -64,7 +64,7 @@ class Group extends Basic {
 	 * @return	void
 	 */
 	public function content() {
-        wecodeart( 'markup' )::wrap( 'input-group', [
+        wecodeart( 'dom' )::wrap( 'input-group', [
             [
                 'tag'   => 'span',
                 'attrs' => wp_parse_args( [
@@ -76,7 +76,7 @@ class Group extends Basic {
             foreach( $fields as $field ) {
                 // If is a string, we ouput a label.
                 if( is_string( $field ) ) {
-                    wecodeart( 'markup' )::wrap( 'input-group-text', [
+                    wecodeart( 'dom' )::wrap( 'input-group-text', [
                         [
                             'tag'   => 'label',
                         ]
@@ -95,7 +95,7 @@ class Group extends Basic {
 
                 // Wrap specific input types.
                 if( in_array( $type, [ 'checkbox', 'radio', 'toggle' ], true ) ) {
-                    $input = wecodeart( 'markup' )::wrap( 'input-group-text', [
+                    $input = wecodeart( 'dom' )::wrap( 'input-group-text', [
                         [
                             'tag'   => 'label',
                         ]

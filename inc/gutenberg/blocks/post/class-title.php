@@ -98,7 +98,7 @@ class Title extends Dynamic {
 			];
 		}
 
-		return wecodeart( 'markup' )::wrap( 'wp-block-post-title', $wrappers, function( $id ) {
+		return wecodeart( 'dom' )::wrap( 'wp-block-post-title', $wrappers, function( $id ) {
 			echo get_the_title( $id );
 		}, [ $block->context['postId'] ], false );
 	}

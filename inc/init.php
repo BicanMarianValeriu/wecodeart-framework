@@ -9,7 +9,7 @@
  * @subpackage  Init
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		1.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -218,7 +218,7 @@ function wecodeart_config( $key = null, $default = null ) {
  * Gets input instance.
  *
  * @since	5.0.0
- * @version	5.3.1
+ * @version	6.4.1
  *
  * @param   string|array    $key
  * @param   array|null      $args
@@ -227,7 +227,7 @@ function wecodeart_config( $key = null, $default = null ) {
  * @return  mixed
  */
 function wecodeart_input( $key = null, array $args = [], bool $echo = true ) {
-    $instance = wecodeart( 'markup' )->Inputs;
+    $instance = wecodeart( 'dom' )->Inputs;
 
     if ( null === $key ) {
         return $instance;

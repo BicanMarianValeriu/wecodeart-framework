@@ -115,7 +115,7 @@ class Pages extends Dynamic {
 		}
 
 		// Otherwise we wrap them in <ul> tag.
-		$content = wecodeart( 'markup' )::wrap( 'wp-block-page-list', [ [
+		$content = wecodeart( 'dom' )::wrap( 'wp-block-page-list', [ [
 			'tag' 	=> 'ul',
 			'attrs'	=> $this->get_block_wrapper_attributes( [
 				'class' => 'wp-block-navigation nav'

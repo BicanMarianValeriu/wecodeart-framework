@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -160,7 +160,7 @@ class Social extends Dynamic {
 		}
 
 		if ( self::is_sharing_variation( $block ) ) {
-			$content 	= new \WP_HTML_Tag_Processor( $content );
+			$content 	= wecodeart( 'dom' )::procesor( $content );
 			
 			if( $content->next_tag() ) {
 				$content->add_class( 'wp-block-social-links--sharing' );

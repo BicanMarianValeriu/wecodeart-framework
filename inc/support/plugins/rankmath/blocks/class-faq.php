@@ -9,7 +9,7 @@
  * @subpackage  RankMath\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.2
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Support\Plugins\RankMath\Blocks;
@@ -18,11 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Config\Traits\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\dom_get_element;
-use function WeCodeArt\Functions\dom_change_tag;
-use function WeCodeArt\Functions\dom_elements_by_class;
 
 /**
  * Gutenberg RankMath FAQ block.
@@ -69,16 +65,16 @@ class Faq extends Dynamic {
 		$condition = ( get_prop( $attributes, [ 'listStyle' ] ) === '' && get_prop( $attributes, [ 'titleWrapper' ] ) === 'div' );
 		
 		if( $condition ) { // Apply only for default styleing with div titles (so we respect block settings).
-			$dom		= $this->dom( $content );
-			$sections	= dom_elements_by_class( $dom, 'rank-math-faq-item', 'div' );
-			$summaries	= dom_elements_by_class( $dom, 'rank-math-question', 'div' );
+			$dom		= wecodeart( 'dom' )::create( $content );
+			$sections	= wecodeart( 'dom' )::get_elements_by_class( $dom, 'rank-math-faq-item', 'div' );
+			$summaries	= wecodeart( 'dom' )::get_elements_by_class( $dom, 'rank-math-question', 'div' );
 
 			if( count( $sections ) ) {
-				array_walk( $sections, static fn( $section ) => dom_change_tag( $section, 'details' ) );
-				array_walk( $summaries, static fn( $summary ) => dom_change_tag( $summary, 'summary' ) );
+				array_walk( $sections, static fn( $section ) => wecodeart( 'dom' )::change_tag( $section, 'details' ) );
+				array_walk( $summaries, static fn( $summary ) => wecodeart( 'dom' )::change_tag( $summary, 'summary' ) );
 			}
 
-			$content	= new \WP_HTML_Tag_Processor( $dom->saveHtml() );
+			$content	= wecodeart( 'dom' )::procesor( $dom->saveHtml() );
 			$content->next_tag();
 			$content->add_class( 'wp-block-details' );
 		}

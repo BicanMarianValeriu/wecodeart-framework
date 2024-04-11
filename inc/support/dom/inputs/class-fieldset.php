@@ -9,10 +9,10 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.9
+ * @version		6.4.1
  */
 
-namespace WeCodeArt\Support\Markup\Inputs;
+namespace WeCodeArt\Support\DOM\Inputs;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -43,7 +43,7 @@ class Fieldset extends Base {
     /**
      * Exclusive.
      *
-     * @since   6.0.0
+     * @since   6.4.1
      * @var     bool
      */
     public $exclusive = false;
@@ -69,7 +69,7 @@ class Fieldset extends Base {
 	 * @version	5.0.0
 	 */
 	public function content() {
-        wecodeart( 'markup' )::wrap( 'fieldset-' . $this->type, [
+        wecodeart( 'dom' )::wrap( 'fieldset-' . $this->type, [
             [
                 'tag'   => 'span',
                 'attrs' => [
@@ -108,14 +108,14 @@ class Fieldset extends Base {
 	 * Render the label HTML of the input
      *
      * @since   5.0.0
-     * @version 6.0.0
+     * @version 6.4.1
      *
 	 * @return	mixed|string
 	 */
 	public function get_label() {
         if( empty( $this->label ) ) return;
 
-        wecodeart( 'markup' )::wrap( 'fieldset-label', [
+        wecodeart( 'dom' )::wrap( 'fieldset-label', [
             [
                 'tag'   => 'label',
                 'attrs' => [

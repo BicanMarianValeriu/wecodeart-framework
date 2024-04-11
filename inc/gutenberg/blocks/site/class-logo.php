@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.2.2
- * @version		6.3.5
+ * @version		6.4.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -20,9 +20,7 @@ use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function str_contains;
 use function add_filter;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\dom_get_element;
-use function WeCodeArt\Functions\dom_image_2_svg;
+use function WeCodeArt\Functions\{ get_prop, dom_image_2_svg };
 
 /**
  * Gutenberg Site Logo block.
@@ -96,10 +94,10 @@ class Logo extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( string $content = '' ): string {
-		$dom	= $this->dom( $content );
-		$div  	= dom_get_element( 'div', $dom );
-		$link 	= dom_get_element( 'a', $div );
-		$img  	= dom_get_element( 'img', $link ?? $div );
+		$dom	= wecodeart( 'dom' )::create( $content );
+		$div  	= wecodeart( 'dom' )::get_element( 'div', $dom );
+		$link 	= wecodeart( 'dom' )::get_element( 'a', $div );
+		$img  	= wecodeart( 'dom' )::get_element( 'img', $link ?? $div );
 
 		// If no image, bail early.
 		if ( ! $img ) {

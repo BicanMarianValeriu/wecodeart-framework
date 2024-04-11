@@ -9,7 +9,7 @@
  * @subpackage  Support
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt;
@@ -36,11 +36,11 @@ class Support implements Configuration {
 	 */
     const PROTECTED = [
         'assets',
+        'dom',
         'files',
 		'ifso',
         'locale',
         'plugins',
-        'markup',
         'modules',
         'starter',
         'styles',

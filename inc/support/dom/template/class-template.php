@@ -9,10 +9,10 @@
  * @subpackage 	Markup\Template
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.7.3
- * @version     5.4.5
+ * @version     6.4.1
  */
 
-namespace WeCodeArt\Support\Markup;
+namespace WeCodeArt\Support\DOM;
 
 defined( 'ABSPATH' ) || exit; 
 

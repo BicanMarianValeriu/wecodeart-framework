@@ -83,7 +83,7 @@ class Search extends Dynamic {
 			// Button
 			$content = self::get_button( $attributes, $instance_id );
 		} else {
-			$content = wecodeart( 'markup' )::wrap( 'wp-block-search__form', [
+			$content = wecodeart( 'dom' )::wrap( 'wp-block-search__form', [
 				[
 					'tag' 	=> 'form',
 					'attrs' => [
@@ -124,7 +124,7 @@ class Search extends Dynamic {
 			}, [ $attributes, $instance_id ], false );
 		}
 
-		return wecodeart( 'markup' )::wrap( 'wp-block-search', [
+		return wecodeart( 'dom' )::wrap( 'wp-block-search', [
 			[
 				'tag' 	=> 'div',
 				'attrs' => [

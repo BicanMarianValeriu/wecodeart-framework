@@ -70,7 +70,7 @@ class Template extends Dynamic {
         }
 
 		if( post_password_required( $post_id ) ) {
-			return wecodeart( 'markup' )::wrap( 'wp-block-comments-protected', [ [
+			return wecodeart( 'dom' )::wrap( 'wp-block-comments-protected', [ [
 				'tag' 	=> 'p',
 			] ], 'printf', [ 
 				esc_html__( 'This post is password protected. Enter the password to view comments or leave a comment.', 'wecodeart' )
@@ -87,7 +87,7 @@ class Template extends Dynamic {
 		}
 
 		// List
-        $content .= wecodeart( 'markup' )::wrap( 'wp-block-comment-template', [
+        $content .= wecodeart( 'dom' )::wrap( 'wp-block-comment-template', [
 			[
 				'tag' 	=> 'ul',
 				'attrs'	=> $this->get_block_wrapper_attributes( [
@@ -137,7 +137,7 @@ class Template extends Dynamic {
 
 				if ( $comment_depth < $thread_comments_depth ) {
 					++$comment_depth;
-					$block_content .= wecodeart( 'markup' )::wrap( 'wp-block-comment-template-children', [
+					$block_content .= wecodeart( 'dom' )::wrap( 'wp-block-comment-template-children', [
 						[
 							'tag' 	=> 'ol',
 							'attrs'	=> [
@@ -151,7 +151,7 @@ class Template extends Dynamic {
 				}
 			}
 	
-			$content .= wecodeart( 'markup' )::wrap( 'wp-block-comment', [
+			$content .= wecodeart( 'dom' )::wrap( 'wp-block-comment', [
 				[
 					'tag' 	=> 'li',
 					'attrs'	=> [

@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.9.5
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -73,21 +73,23 @@ wecodeart()->bind( 'support', function () {
  * Bind markup.
  * 
  * @since   5.3.1
+ * @version 6.4.1
  *
  * @return  void
  */
-wecodeart()->bind( 'markup', function () {
-    return wecodeart( 'support' )->get( 'markup' )::get_instance();
+wecodeart()->bind( 'dom', function () {
+    return wecodeart( 'support' )->get( 'dom' )::get_instance();
 } );
 
 /**
  * Bind Templates.
  *
  * @since   6.3.7
+ * @version 6.4.1
  *
  * @return  void
  */
-wecodeart()->factory( 'template', fn() => new WeCodeArt\Support\Markup\Template( wecodeart_config() ) );
+wecodeart()->factory( 'template', fn() => new WeCodeArt\Support\DOM\Template( wecodeart_config() ) );
 
 /**
  * Bind assets.
@@ -249,5 +251,6 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
 } );
 
 // Aliases/deprecated
-wecodeart()->bind( 'integrations', fn() => wecodeart( 'support' ) );
-wecodeart()->bind( 'conditionals', fn() => wecodeart( 'ifso' ) );
+wecodeart()->bind( 'integrations',  fn() => wecodeart( 'support' ) );
+wecodeart()->bind( 'conditionals',  fn() => wecodeart( 'ifso' ) );
+wecodeart()->bind( 'markup',        fn() => wecodeart( 'dom' ) );
