@@ -3,6 +3,7 @@ v6.4.1
 - Updated - wecodeart( 'markup' ) is now wecodeart( 'dom' ) - alias added for compatability
 - Updated - wecodeart( 'dom' )::procesor method for WP_HTML_Tag_Processor
 - Updated - wecodeart( 'dom' )->Inputs JS now removes forms feedback|tooltips before sumitting (CF7 plugin)
+- Updated - post_gallery shortcode to use wecodeart( 'styles' )->Utilities for columns
 
 v6.4.0
 - Removed - FontAwesome license info - we are not using it anymore

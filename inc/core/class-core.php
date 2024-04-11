@@ -9,7 +9,7 @@
  * @subpackage 	Core
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		3.0
- * @version		6.3.7
+ * @version		6.4.1
  */
 
 namespace WeCodeArt;
@@ -121,6 +121,8 @@ class Core {
 		if( $has_cols ) {
 			$wrapper[] = 'grid';
 			$items 	= array_merge( $items, [ 'span-12', 'span-lg-' . $columns ] );
+
+			wecodeart( 'styles' )->Utilities->load( [ 'span-12', 'span-lg-' . $columns ] );
 		}
 		
 		$items 		= implode( ' ', $items );
