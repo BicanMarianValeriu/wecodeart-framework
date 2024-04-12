@@ -3,7 +3,7 @@ v6.4.2
 - Updated - yoast faq block small CSS adjustments and add default style
 - Updated - bump formatting and optimization modules updates
 - Fixed - issue with namespace on wecodeart( 'dom' )::get_elements_by_class() method
-- Fixed - HTML validation errors on button, some custom variables, CSS mask images
+- Fixed - HTML validation errors on button disabled attribute (javascript:void), some custom variables, CSS mask images
 - Added - site/template-part support for color/spacing/layout/position (avoid unnecessary group wrapper for background/elements spacing)
 
 v6.4.1
