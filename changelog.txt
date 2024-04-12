@@ -1,7 +1,14 @@
+v6.4.2
+- Updated - default templates sticky header using position attribute (via template-part)
+- Updated - yoast faq block small CSS adjustments and add default style
+- Fixed - issue with namespace on wecodeart( 'dom' )::get_elements_by_class() method
+- Fixed - HTML validation errors on button, some custom variables, CSS mask images
+- Added - site/template-part support for color/spacing/layout/position (avoid unnecessary group wrapper for background/elements spacing)
+
 v6.4.1
 - Updated - DOM manipulation methods from inc/functions.php to wecodeart( 'dom' )
 - Updated - wecodeart( 'markup' ) is now wecodeart( 'dom' ) - alias added for compatability
-- Updated - wecodeart( 'dom' )::procesor method for WP_HTML_Tag_Processor
+- Updated - new \WP_HTML_Tag_Processor method for WP_HTML_Tag_Processor
 - Updated - wecodeart( 'dom' )->Inputs JS now removes forms feedback|tooltips before sumitting (CF7 plugin)
 - Updated - post_gallery shortcode to use wecodeart( 'styles' )->Utilities for columns
 

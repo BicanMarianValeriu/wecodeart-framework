@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.4.1
+ * @version		6.4.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use function WeCodeArt\Functions\get_prop;
 use function add_filter;
 
 /**
@@ -48,6 +49,35 @@ class Template extends Dynamic {
 		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render' ], 20, 1 );
     }
 
+	/**
+	 * Block args.
+	 *
+	 * @param	array $current	Existing register args
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( array $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+
+		return [
+			'supports'	=> wp_parse_args( [
+				'color'		=> true,
+				'position'	=> true,
+				'layout'	=> true,
+				'spacing'	=> [
+					'margin'  	=> true,
+					'padding' 	=> true,
+					'blockGap' 	=> true,
+					'__experimentalDefaultControls' => [
+						'margin' 	=> false,
+						'padding' 	=> false,
+						'blockGap'	=> true,
+					]
+				]
+			], $supports )
+		];
+	}
+
     /**
 	 * Dynamically renders the `core/template-part` block.
 	 *
@@ -65,17 +95,14 @@ class Template extends Dynamic {
 			switch( $current ):
 				case 'HEADER' :
 					$markup->set_attribute( 'id', 'top' );
-					$markup->set_attribute( 'role', 'banner' );
 					$markup->set_attribute( 'itemscope', 'itemscope' );
 					$markup->set_attribute( 'itemtype', 'https://schema.org/WPHeader' );
 				break;
 				case 'FOOTER' :
-					$markup->set_attribute( 'role', 'contentinfo' );
 					$markup->set_attribute( 'itemscope', 'itemscope' );
 					$markup->set_attribute( 'itemtype', 'https://schema.org/WPFooter' );
 				break;
 				case 'ASIDE' :
-					$markup->set_attribute( 'role', 'complementary' );
 					$markup->set_attribute( 'itemscope', 'itemscope' );
 					$markup->set_attribute( 'itemtype', 'https://schema.org/WPSideBar' );
 				break;

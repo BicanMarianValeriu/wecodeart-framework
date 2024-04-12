@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.1
+ * @version		6.4.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -87,21 +87,25 @@ class Numbers extends Dynamic {
 
         $items = [];
         $count 	= $div->childNodes->count();
+        
         for ( $i = 0; $i < $count; $i++ ) {
             $item = $div->childNodes->item( $i );
             if ( $item ) {
                 $items[] = $item;
             }
         }
+
         $items = array_reverse( $items );
 
         for ( $i = 0; $i < $count; $i++ ) {
             $item = $items[$i];
+
             if ( ! method_exists( $item, 'setAttribute' ) ) {
                 continue;
             }
 
-            $item->setAttribute( 'class', 'wp-block-query-pagination-numbers__link ' . $item->getAttribute( 'class' ) );
+            wecodeart( 'dom' )::add_classes( $item, [ 'wp-block-query-pagination-numbers__link' ] );
+
             $clone = wecodeart( 'dom' )::element( $wrap->cloneNode( true ) );
             $clone->appendChild( $item );
             $div->insertBefore( $clone, $div->firstChild );

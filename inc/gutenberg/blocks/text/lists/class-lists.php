@@ -236,8 +236,9 @@ class Lists extends Dynamic {
 			}
 			.wp-block-list[class*='is-style-icon--'] li::before {
 				content: '';
-				mask: var(--wp--marker) no-repeat center;
-				-webkit-mask: var(--wp--marker) no-repeat center;
+				-webkit-mask-image: var(--wp--marker);
+				-webkit-mask-repeat: no-repeat;
+				-webkit-mask-position: center;
 				position: absolute;
 				display: inline-block;
 				width: 1.5em;

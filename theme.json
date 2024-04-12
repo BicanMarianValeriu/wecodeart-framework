@@ -182,7 +182,6 @@
 				"xxl": "1440px"
 			},
 			"boxShadow": {
-				"inset": "",
 				"x": "5px",
 				"y": "5px",
 				"blur": "1rem",

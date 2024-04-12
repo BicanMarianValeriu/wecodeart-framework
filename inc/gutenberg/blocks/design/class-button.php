@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.4.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -86,7 +86,7 @@ class Button extends Dynamic {
 				],
 				[
 					'javascript:void(0)',
-					'disabled',
+					'',
 				],
 				$content
 			);

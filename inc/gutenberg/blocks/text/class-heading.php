@@ -81,8 +81,10 @@ class Heading extends Dynamic {
 					max-width: 100%;
 					margin: 0;
 					background: var(--wp--preset--color--primary, currentColor);
-					-webkit-mask: url('$symbol') center 100% no-repeat;
-					mask: url('$symbol') 100% center no-repeat;
+					-webkit-mask-image: url('$symbol');
+					-webkit-mask-repeat: no-repeat;
+					-webkit-mask-position: center;
+					-webkit-mask-size: 100%;
 					z-index: -1;
 				}
 				";

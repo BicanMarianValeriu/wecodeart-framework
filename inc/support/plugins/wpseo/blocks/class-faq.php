@@ -9,7 +9,7 @@
  * @subpackage  Yoast\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.4.1
+ * @version		6.4.2
  */
 
 namespace WeCodeArt\Support\Plugins\WPSeo\Blocks;
@@ -49,8 +49,17 @@ class Faq extends Dynamic {
 	public function block_type_args(): array {
 		return [
 			'render_callback' 	=> [ $this, 'render' ],
-			'style'				=> 'wp-block-details'
+			'style'				=> [ $this->get_asset_handle(), 'wp-block-details' ]
 		];
+	}
+
+	/**
+	 * Get block asset handle.
+	 *
+	 * @return string
+	 */
+	public function get_asset_handle(): string {
+		return 'yoast-block-' . $this->block_name;
 	}
 
     /**
@@ -77,5 +86,18 @@ class Faq extends Dynamic {
 		$content->add_class( 'wp-block-details' );
 
 		return (string) $content;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return <<<CSS
+			.wp-block-yoast-faq-block details[open] {
+				padding-bottom: 0;
+			}
+		CSS;
 	}
 }

@@ -9,7 +9,7 @@
  * @subpackage  RankMath\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.2
- * @version		6.4.1
+ * @version		6.4.2
  */
 
 namespace WeCodeArt\Support\Plugins\RankMath\Blocks;
@@ -74,7 +74,7 @@ class Faq extends Dynamic {
 				array_walk( $summaries, static fn( $summary ) => wecodeart( 'dom' )::change_tag( $summary, 'summary' ) );
 			}
 
-			$content	= wecodeart( 'dom' )::procesor( $dom->saveHtml() );
+			$content = wecodeart( 'dom' )::procesor( $dom->saveHtml() );
 			$content->next_tag();
 			$content->add_class( 'wp-block-details' );
 		}

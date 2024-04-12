@@ -69,11 +69,13 @@ class Image extends Dynamic {
 	public function render( string $content = '', array $block = [] ): string {
 		if ( get_prop( $block, [ 'attrs', 'isLink' ] ) ) {
 			$content = wecodeart( 'dom' )::procesor( $content );
+			
 			if( $content->next_tag( [
 				'tag_name' 	=> 'A',
 			] ) ) {
 				$content->add_class( 'wp-block-post-featured-image__link' );
 			}
+
 			$content = $content->get_updated_html();
 		}
 

@@ -9,7 +9,7 @@
  * @subpackage  DOM
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		6.4.1
+ * @version		6.4.2
  */
 
 namespace WeCodeArt\Support;
@@ -65,8 +65,8 @@ class DOM implements Integration {
 	 *
 	 * @return 	WP_HTML_Tag_Processor
 	 */
-	public static function procesor( string $html ): \WP_HTML_Tag_Processor {
-		return new \WP_HTML_Tag_Processor( $html );
+	public static function procesor( string $html = '' ): \WP_HTML_Tag_Processor {
+		return new \WP_HTML_Tag_Processor( (string) $html );
 	}
 
 	/**
@@ -95,7 +95,7 @@ class DOM implements Integration {
 
 		// @see https://stackoverflow.com/questions/13280200/convert-unicode-to-html-entities-hex.
 		// @todo Check if all DOMs need this.
-		$html = static::convert_unicode_to_html_entities( $html );
+		$html = static::html_entities( $html );
 
 		libxml_use_internal_errors( true );
 
@@ -120,14 +120,14 @@ class DOM implements Integration {
 	 * @return 	mixed
 	 */
 	public static function get_elements_by_class( \DOMDocument $dom, string $class_name, string $tag = '*', $index = null ) {
-		$xpath    = new DOMXPath( $dom );
+		$xpath    = new \DOMXPath( $dom );
 		$query    = sprintf( "//%s[contains(concat(' ', normalize-space(@class), ' '), ' %s ')]", $tag, $class_name );
 		$nodes    = $xpath->query( $query );
 		$elements = [];
 
 		if ( $nodes !== false ) {
 			foreach ( $nodes as $node ) {
-				if ( $node instanceof DOMElement ) {
+				if ( $node instanceof \DOMElement ) {
 					$elements[] = $node;
 				}
 			}
@@ -322,16 +322,22 @@ class DOM implements Integration {
 		$attributes = self::parse_attr( $context, $attributes, $args );
 		$output = '';
 
-		if( empty( $attributes ) ) return $output;
+		if( empty( $attributes ) ) {
+			return $output;
+		}
 
 		// Cycle through attributes, build tag attribute string.
 		foreach( $attributes as $key => $value ) {
-			if ( ! $value ) continue;
+			if ( ! $value ) {
+				continue;
+			}
+
 			if ( true === $value ) $output .= esc_html( $key ) . ' ';
 			else $output .= sprintf( '%s="%s" ', esc_html( $key ), esc_attr( $value ) );
 		}
 
 		$output = apply_filters( "wecodeart/filter/attributes/{$context}/output", $output, $attributes, $args );
+
 		return trim( $output );
 	}
 
@@ -454,9 +460,7 @@ class DOM implements Integration {
 		$args = apply_filters( "wecodeart/filter/wrappers/{$context}", $wrappers );
 
 		// Wrapper must have a 'tag' defined
-		$_wrappers = array_map( function( $item ) {
-			return array_key_exists( 'tag', $item ) && is_string( $item['tag'] ); 
-		}, $args );
+		$_wrappers = array_map( fn( $item ) => array_key_exists( 'tag', $item ) && is_string( $item['tag'] ), $args );
 
 		// Make sure $args are an array.
 		if ( empty( $args ) || ( ! empty( $args ) && count( array_unique( $_wrappers ) ) !== 1 ) ) {
@@ -484,7 +488,9 @@ class DOM implements Integration {
 			$function_html .= (string) $content;
 		}
 
-		if( empty( $function_html ) ) return;
+		if( empty( $function_html ) ) {
+			return;
+		}
 
 		$html = '';
 		
@@ -535,21 +541,10 @@ class DOM implements Integration {
 	 *
 	 * @return 	string
 	 */
-	private static function convert_unicode_to_html_entities( string $html ): string {
+	private static function html_entities( string $html ): string {
 		return preg_replace_callback( '/[\x{80}-\x{10FFFF}]/u', static fn( array $matches ): string => sprintf(
 			'&#x%s;',
-			ltrim(
-				strtoupper(
-					bin2hex(
-						iconv(
-							'UTF-8',
-							'UCS-4',
-							current( $matches )
-						)
-					)
-				),
-				'0'
-			)
+			ltrim( strtoupper( bin2hex( iconv( 'UTF-8', 'UCS-4', current( $matches ) ) ) ), '0' )
 		), $html );
 	}
 }
