@@ -1,6 +1,6 @@
 {
 	"name": "wecodeart",
-	"version": "6.2.9",
+	"version": "6.4.2",
 	"main": "webpack.config.js",
 	"author": "Bican Marian Valeriu",
 	"browserslist": [
@@ -53,8 +53,7 @@
 		"test:unit": "wp-scripts test-unit-js"
 	},
 	"dependencies": {
-		"@popperjs/core": "^2.11.8",
-		"@wordpress/browserslist-config": "^4.0.0",
+		"@wordpress/browserslist-config": "^5.38.0",
 		"@wordpress/icons": "^9.2.0",
 		"@wordpress/interactivity": "^5.0.0",
 		"@wordpress/scripts": "^27.2.0",
