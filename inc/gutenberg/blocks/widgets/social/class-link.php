@@ -81,7 +81,7 @@ class Link extends Dynamic {
 		
 		if ( $is_sharing ) {
 			$service 	= get_prop( $attributes, [ 'service' ], '' );
-			$content 	= wecodeart( 'dom' )::procesor( $content );
+			$content 	= wecodeart( 'dom' )::processor( $content );
 
 			$window_title = esc_html__( 'Share the post!', 'wecodeart' );
 

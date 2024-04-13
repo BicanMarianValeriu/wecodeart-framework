@@ -7,8 +7,8 @@
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|md","right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"className":"my-0","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull my-0" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--g)">
-    <!-- wp:heading {"textAlign":"center","className":"fw-300 is-style-underline-brush"} -->
-    <h2 class="wp-block-heading has-text-align-center fw-300 is-style-underline-brush">
+    <!-- wp:heading {"textAlign":"center","className":"fw-300"} -->
+    <h2 class="wp-block-heading has-text-align-center fw-300">
         <?php
             printf(
                 esc_html__( 'Latest %s', 'wecodeart' ),

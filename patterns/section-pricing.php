@@ -7,8 +7,8 @@
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|g","left":"var:preset|spacing|g","top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl"},"margin":{"top":"0","bottom":"0"}}},"layout":{"inherit":false,"contentSize":"900px","type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--g)">
-    <!-- wp:heading {"textAlign":"center","className":"is-style-underline-brush"} -->
-    <h2 class="wp-block-heading has-text-align-center is-style-underline-brush"><?php
+    <!-- wp:heading {"textAlign":"center"} -->
+    <h2 class="wp-block-heading has-text-align-center"><?php
     
         printf(
             esc_html__( 'Choose %s', 'wecodeart' ), 

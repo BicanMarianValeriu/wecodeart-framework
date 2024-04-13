@@ -93,7 +93,7 @@ class Template extends Dynamic {
 		$content	= render_block_core_post_template( $attributes, $content, $block );
 		\remove_filter( 'post_class', $callback );
 
-		$content	= wecodeart( 'dom' )::procesor( $content );
+		$content	= wecodeart( 'dom' )::processor( $content );
 		
 		if( $content->next_tag( [ 'class_name' => 'wp-block-post-template' ] ) ) {
 			if( get_prop( $attributes, [ 'layout', 'type' ], get_prop( $block->context, [ 'displayLayout', 'type' ], '' ) ) === 'grid' ) {

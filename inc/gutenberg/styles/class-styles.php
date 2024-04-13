@@ -154,7 +154,7 @@ class Styles implements Configuration {
 		if ( $has_support ) {
 			// Process a block
 			$processed 	= $this->process_block( $block );
-			$content 	= wecodeart( 'dom' )::procesor( $content );
+			$content 	= wecodeart( 'dom' )::processor( $content );
 
 			$content->next_tag();
 

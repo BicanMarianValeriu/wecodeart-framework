@@ -1,3 +1,7 @@
+v6.4.3
+- Removed - is-style-underline-brush from core/heading and it's usage in patterns (now that we have WCA: Formatting module)
+- Fixed - wecodeart( 'dom' )::procesor to wecodeart( 'dom' )::processor (typo)
+
 v6.4.2
 - Updated - default templates sticky header using position attribute (via template-part)
 - Updated - yoast faq block small CSS adjustments and add default style

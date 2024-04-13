@@ -60,7 +60,7 @@ class Cover extends Dynamic {
 	 */
 	public function render( string $content = '', array $block = [] ): string {
 		if ( get_prop( $block, [ 'attrs', 'useFeaturedImage' ] ) ) {
-			$content = wecodeart( 'dom' )::procesor( $content );
+			$content = wecodeart( 'dom' )::processor( $content );
 			if( $content->next_tag( [
 				'tag_name' 	=> 'IMG',
 			] ) ) {

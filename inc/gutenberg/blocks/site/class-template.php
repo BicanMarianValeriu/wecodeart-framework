@@ -86,7 +86,7 @@ class Template extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( string $content = '' ): string {
-		$markup	= wecodeart( 'dom' )::procesor( $content );
+		$markup	= wecodeart( 'dom' )::processor( $content );
 		$tags 	= [ 'HEADER', 'FOOTER', 'ASIDE' ];
 		$count	= count( $tags );
 

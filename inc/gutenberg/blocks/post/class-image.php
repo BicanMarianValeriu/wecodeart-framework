@@ -68,7 +68,7 @@ class Image extends Dynamic {
 	 */
 	public function render( string $content = '', array $block = [] ): string {
 		if ( get_prop( $block, [ 'attrs', 'isLink' ] ) ) {
-			$content = wecodeart( 'dom' )::procesor( $content );
+			$content = wecodeart( 'dom' )::processor( $content );
 			
 			if( $content->next_tag( [
 				'tag_name' 	=> 'A',

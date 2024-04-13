@@ -12,8 +12,8 @@
         <!-- wp:heading {"textAlign":"center","level":1,"className":"display-4 fw-700"} -->
         <h1 class="wp-block-heading has-text-align-center display-4 fw-700"><?php esc_html_e( 'Build your website with WeCodeArt', 'wecodeart' ); ?></h1>
         <!-- /wp:heading -->
-        <!-- wp:heading {"textAlign":"center","className":"display-5 fw-700 mt-0 is-style-underline-brush","customStyle":"selector .has-underline::after {\n  background: currentColor;\n}\n"} -->
-        <h2 class="wp-block-heading has-text-align-center display-5 fw-700 mt-0 is-style-underline-brush"><?php printf( esc_html__( 'Get it now. Is %s forever!', 'wecodeart' ), sprintf( '<span class="has-underline">%s</span>', esc_html__( 'FREE', 'wecodeart' ) ) ); ?></h2>
+        <!-- wp:heading {"textAlign":"center","className":"display-5 fw-700 mt-0","customStyle":"selector .has-underline::after {\n  background: currentColor;\n}\n"} -->
+        <h2 class="wp-block-heading has-text-align-center display-5 fw-700 mt-0"><?php printf( esc_html__( 'Get it now. Is %s forever!', 'wecodeart' ), sprintf( '<span class="has-underline">%s</span>', esc_html__( 'FREE', 'wecodeart' ) ) ); ?></h2>
         <!-- /wp:heading -->
         <!-- wp:group {"layout":{"type":"constrained","contentSize":"615px"}} -->
         <div class="wp-block-group">

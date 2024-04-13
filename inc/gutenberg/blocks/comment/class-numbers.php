@@ -74,7 +74,7 @@ class Numbers extends Dynamic {
 			return $content;
 		}
 
-        $p = wecodeart( 'dom' )::procesor( $content );
+        $p = wecodeart( 'dom' )::processor( $content );
 		
 		if( $p->next_tag( [
 			'class_name'	=> 'wp-block-comments-pagination-numbers',

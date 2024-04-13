@@ -10,8 +10,8 @@
     <!-- wp:heading {"textAlign":"center","level":6,"textColor":"primary","fontFamily":"handwritten"} -->
     <h6 class="wp-block-heading has-text-align-center has-primary-color has-text-color has-handwritten-font-family">consectetur</h6>
     <!-- /wp:heading -->
-    <!-- wp:heading {"textAlign":"center","style":{"spacing":{"margin":{"top":"0"}}},"className":"is-style-underline-brush"} -->
-    <h2 class="wp-block-heading has-text-align-center is-style-underline-brush" style="margin-top:0">Tempus leo eu <span class="has-underline"><strong>aenean sed</strong></span> diam urna tempor</h2>
+    <!-- wp:heading {"textAlign":"center","style":{"spacing":{"margin":{"top":"0"}}}} -->
+    <h2 class="wp-block-heading has-text-align-center" style="margin-top:0">Tempus leo eu <span class="has-underline"><strong>aenean sed</strong></span> diam urna tempor</h2>
     <!-- /wp:heading -->
     <!-- wp:paragraph {"align":"center"} -->
     <p class="has-text-align-center">Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.</p>

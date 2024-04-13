@@ -107,7 +107,7 @@ class Menu extends Dynamic {
 				$inner_html .= $inner_block->render();
 			}
 
-			$tag_processor = wecodeart( 'dom' )::procesor( $inner_html );
+			$tag_processor = wecodeart( 'dom' )::processor( $inner_html );
 			while ( $tag_processor->next_tag( [
 				'class_name' => 'nav-link'
 			] ) ) {

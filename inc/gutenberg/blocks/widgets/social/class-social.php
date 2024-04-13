@@ -160,7 +160,7 @@ class Social extends Dynamic {
 		}
 
 		if ( self::is_sharing_variation( $block ) ) {
-			$content 	= wecodeart( 'dom' )::procesor( $content );
+			$content 	= wecodeart( 'dom' )::processor( $content );
 			
 			if( $content->next_tag() ) {
 				$content->add_class( 'wp-block-social-links--sharing' );

@@ -24,8 +24,8 @@
                     <!-- wp:paragraph {"textColor":"primary","className":"mb-0","fontSize":"small"} -->
                     <p class="mb-0 has-primary-color has-text-color has-small-font-size"><?php esc_html_e( 'COMING SOON', 'wecodeart' ); ?></p>
                     <!-- /wp:paragraph -->
-                    <!-- wp:heading {"style":{"spacing":{"margin":{"top":"0"}}},"className":"fw-500 is-style-underline-brush"} -->
-                    <h2 class="fw-500 is-style-underline-brush" style="margin-top:0"><strong><span class="has-underline"><?php esc_html_e( 'We Are Getting Ready to Launch!', 'wecodeart' ); ?></span></strong></h2>
+                    <!-- wp:heading {"style":{"spacing":{"margin":{"top":"0"}}},"className":"fw-500"} -->
+                    <h2 class="fw-500" style="margin-top:0"><strong><span class="has-underline"><?php esc_html_e( 'We Are Getting Ready to Launch!', 'wecodeart' ); ?></span></strong></h2>
                     <!-- /wp:heading -->
                     <!-- wp:paragraph {"textColor":"secondary"} -->
                     <p class="has-secondary-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim.</p>

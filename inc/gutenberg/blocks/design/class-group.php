@@ -81,7 +81,7 @@ class Group extends Dynamic {
 	 * @return 	string 	The block markup.
 	 */
 	public function render( array $attributes = [], string $content = '' ): string {
-		$content 	= wecodeart( 'dom' )::procesor( $content );
+		$content 	= wecodeart( 'dom' )::processor( $content );
 
 		static $processed = null;
 		// Handle <main /> tag (once).

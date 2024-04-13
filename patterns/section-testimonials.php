@@ -9,8 +9,8 @@
 <div class="wp-block-group alignfull has-accent-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--xl);padding-bottom:var(--wp--preset--spacing--xl)">
     <!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|g","left":"var:preset|spacing|g"}}},"layout":{"type":"constrained"}} -->
     <div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--g);padding-left:var(--wp--preset--spacing--g)">
-        <!-- wp:heading {"textAlign":"center","className":"is-style-underline-brush"} -->
-        <h2 class="wp-block-heading has-text-align-center is-style-underline-brush">
+        <!-- wp:heading {"textAlign":"center"} -->
+        <h2 class="wp-block-heading has-text-align-center">
             <?php
                 printf( 
                     esc_html__( 'Users %s', 'wecodeart' ), 

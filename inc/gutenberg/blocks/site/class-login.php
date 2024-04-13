@@ -90,7 +90,7 @@ class Login extends Dynamic {
 				$instance_id 	= wp_unique_id( 'wp-login-' );
 
 				// Get the form.
-				$contents		= wecodeart( 'dom' )::procesor( $contents );
+				$contents		= wecodeart( 'dom' )::processor( $contents );
 				if( $contents->next_tag( [ 'tag_name' => 'a' ] ) ) {
 					$contents->set_attribute( 'href', '#' );
 					$contents->set_attribute( 'class', 'nav-link' );
@@ -109,7 +109,7 @@ class Login extends Dynamic {
 			}
 		} 
 		
-		$contents	= wecodeart( 'dom' )::procesor( $contents );
+		$contents	= wecodeart( 'dom' )::processor( $contents );
 		if( $contents->next_tag( [ 'tag_name' => 'a' ] ) ) {
 			// Is this a button?
 			$contents->add_class( in_array( 'wp-block-button', $classNames, true ) ? 'wp-element-button' : 'nav-link' );

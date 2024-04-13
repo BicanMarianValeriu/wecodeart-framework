@@ -138,7 +138,7 @@ class Lists extends Dynamic {
 			}
 		}
 
-		$content 	= wecodeart( 'dom' )::procesor( $content );
+		$content 	= wecodeart( 'dom' )::processor( $content );
 		
 		if( $content->next_tag() ) {
 			$content->add_class( 'wp-block-list' );

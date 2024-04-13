@@ -65,8 +65,12 @@ class DOM implements Integration {
 	 *
 	 * @return 	WP_HTML_Tag_Processor
 	 */
+	public static function processor( string $html = '' ): \WP_HTML_Tag_Processor {
+		return new \WP_HTML_Tag_Processor( $html );
+	}
+	
 	public static function procesor( string $html = '' ): \WP_HTML_Tag_Processor {
-		return new \WP_HTML_Tag_Processor( (string) $html );
+		return self::processor( $html );
 	}
 
 	/**

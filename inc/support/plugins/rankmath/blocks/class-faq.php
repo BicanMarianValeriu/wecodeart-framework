@@ -74,7 +74,7 @@ class Faq extends Dynamic {
 				array_walk( $summaries, static fn( $summary ) => wecodeart( 'dom' )::change_tag( $summary, 'summary' ) );
 			}
 
-			$content = wecodeart( 'dom' )::procesor( $dom->saveHtml() );
+			$content = wecodeart( 'dom' )::processor( $dom->saveHtml() );
 			$content->next_tag();
 			$content->add_class( 'wp-block-details' );
 		}
