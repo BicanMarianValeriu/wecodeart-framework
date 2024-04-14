@@ -170,7 +170,7 @@ return [
                 'description'   => esc_html__( 'Extends Gutenberg editor with extra formatting options like: justify, abbreviation, text decorations, tooltips and popovers.', 'wecodeart' ),
                 'more'          => 'https://www.wecodeart.com/integrations/formatting-options/',
                 'source'        => 'github',
-                'version'       => '1.0.5',
+                'version'       => '1.0.6',
                 'destination'   => 'formatting',
                 'type'          => 'module',
             ],

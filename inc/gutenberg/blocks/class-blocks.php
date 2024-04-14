@@ -91,6 +91,7 @@ class Blocks implements Configuration {
 		$this->register( 'core/post-template',      Blocks\Post\Template::class );
 		$this->register( 'core/post-featured-image',Blocks\Post\Image::class );
 		$this->register( 'core/post-comments-link', Blocks\Post\Comments::class );
+		$this->register( 'core/post-navigation-link',   Blocks\Post\Navigation::class );
         // Comment Blocks
 		$this->register( 'core/post-comments-form', Blocks\Comment\Form::class );
 		$this->register( 'core/comments-title',     Blocks\Comment\Title::class );

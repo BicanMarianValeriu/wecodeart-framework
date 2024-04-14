@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.4.1
+ * @version		6.4.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\{ get_prop, toJSON };
 
 /**
  * Gutenberg Group blocks.
@@ -45,7 +45,7 @@ class Group extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_action( 'enqueue_block_editor_assets', [ $this, 'register_variation' ], 30, 1 );
+		\add_action( 'enqueue_block_editor_assets', [ $this, 'register_variations' ], 30, 1 );
 	}
 
 	/**
@@ -91,9 +91,14 @@ class Group extends Dynamic {
 		}
 
 		// Handle marquee group.
-		if( self::is_marquee_variation( $attributes ) ) {
-			$content = $this->create_marquee( $attributes, $content );
-			wp_add_inline_style( $this->get_asset_handle(), self::marquee_styles() );
+		if( self::is_variation( $attributes, 'marquee' ) ) {
+			$content = self::create_marquee( $attributes, $content );
+			\wp_add_inline_style( $this->get_asset_handle(), self::marquee_styles() );
+		}
+
+		// Handle collapsible group.
+		if( self::is_variation( $attributes, 'collapse' ) ) {
+			$content = self::create_collapse( $attributes, $content );
 		}
 	
 		return (string) $content;
@@ -104,44 +109,52 @@ class Group extends Dynamic {
 	 *
 	 * @return 	string
 	 */
-	public function register_variation(): void {
+	public function register_variations(): void {
 		wp_add_inline_script( 'wecodeart-gutenberg', <<<JS
-			const {
-				domReady,
-				i18n: { __ },
-				blocks: { registerBlockVariation },
-			} = wp;
-
-			domReady(() => registerBlockVariation('core/group', {
-				name: 'wecodeart/group/marquee',
-				title: __('Group: Marquee', 'wecodeart'),
-				description: __('Gather blocks in a sliding container.', 'wecodeart'),
-				icon: 'align-right',
-				isDefault: false,
-				isActive: ['namespace'],
-				scope: ['block', 'inserter'],
-				attributes: {
-					namespace: 'wecodeart/group/marquee',
-					layout: {
-						type: 'flex',
-						flexWrap: 'nowrap',
-						justifyContent: 'center',
-						alignItems: 'center'
-					}
-				},
-			}));
+			wp.domReady(() => {
+				wp.blocks.registerBlockVariation('core/group', {
+					name: 'wecodeart/group/marquee',
+					title: wp.i18n.__('Group: Marquee', 'wecodeart'),
+					description: wp.i18n.__('Gather blocks in a sliding container.', 'wecodeart'),
+					icon: 'align-right',
+					isDefault: false,
+					isActive: ['namespace'],
+					scope: ['block', 'inserter'],
+					attributes: {
+						namespace: 'wecodeart/group/marquee',
+						layout: {
+							type: 'flex',
+							flexWrap: 'nowrap',
+							justifyContent: 'center',
+							alignItems: 'center'
+						}
+					},
+				});
+				wp.blocks.registerBlockVariation('core/group', {
+					name: 'wecodeart/group/collapse',
+					title: wp.i18n.__('Group: Collapse', 'wecodeart'),
+					description: wp.i18n.__('Gather blocks in a collapsible group.', 'wecodeart'),
+					icon: 'editor-expand',
+					isDefault: false,
+					isActive: ['namespace'],
+					scope: ['block', 'inserter'],
+					attributes: {
+						namespace: 'wecodeart/group/collapse'
+					},
+				});
+			});
 		JS );
 	}
 
 	/**
 	 * Determines whether the block is a marquee block.
 	 *
-	 * @param 	array 	$attributs The block attrs.
+	 * @param 	array 	$attributes The block attrs.
 	 *
 	 * @return 	bool 	Whether the block is a marquee block.
 	 */
-	public static function is_marquee_variation( array $attributes = [] ): bool {
-		if ( get_prop( $attributes, [ 'namespace' ], '' ) === 'wecodeart/group/marquee' ) {
+	public static function is_variation( array $attributes = [], string $type = '' ): bool {
+		if ( get_prop( $attributes, [ 'namespace' ], '' ) === 'wecodeart/group/' . $type ) {
 			return true;
 		}
 
@@ -151,12 +164,12 @@ class Group extends Dynamic {
 	/**
 	 * Generate marquee markup.
 	 *
-	 * @param 	string 	$attributes 	The block attrs.
+	 * @param 	array 	$attributes 	The block attrs.
 	 * @param 	string 	$content 		The block markup.
 	 *
 	 * @return 	string 	The block updated markup.
 	 */
-	public function create_marquee( $attributes, $content ) {
+	public static function create_marquee( array $attributes, string $content ): string {
 		$dom 	= wecodeart( 'dom' )::create( (string) $content );
 		$div 	= wecodeart( 'dom' )::get_element( 'div', $dom );
 		$wrap	= wecodeart( 'dom' )::create_element( 'div', $dom );
@@ -210,18 +223,101 @@ class Group extends Dynamic {
 			}
 
 			$clone->setAttribute( 'aria-hidden', 'true' );
-			$classes   = explode( ' ', $clone->getAttribute( 'class' ) );
-			$classes[] = 'is-cloned';
-			$clone->setAttribute( 'class', implode( ' ', $classes ) );
+			wecodeart( 'dom' )::add_classes( $clone, [ 'is-cloned' ] );
 			$div->appendChild( $clone );
 		}
 
 		$div->insertBefore( $wrap, $div->firstChild );
-		$div->setAttribute( 'class', $div->getAttribute( 'class' ) . ' wp-block-group--marquee' );
+		wecodeart( 'dom' )::add_classes( $div, [ 'wp-block-group--marquee' ] );
 
 		$content = $dom->saveHTML();
 
 		return $content;
+	}
+
+	/**
+	 * Generate collapse markup.
+	 *
+	 * @param 	array 	$attributes 	The block attrs.
+	 * @param 	string 	$content 		The block markup.
+	 *
+	 * @return 	string 	The block updated markup.
+	 */
+	public static function create_collapse( array $attributes, string $content ): string {
+		$tagName 	= get_prop( $attributes, [ 'tagName' ], 'div' );
+		$className  = get_prop( $attributes, [ 'className' ], '' );
+		$ariaLabel  = get_prop( $attributes, [ 'metadata', 'name' ] ) ?: __( 'Group' );
+		$ariaLabel  = sprintf( esc_html__( 'Toggle %s', 'wecodeart' ), $ariaLabel );
+		$itemID 	= wp_unique_id( 'wp-collapse-' );
+		$isHidden 	= '';
+		$isDisplay 	= '';
+
+		// Regular expression to match the specific class pattern
+		$pattern = '/\b(d-(sm|md|lg|xl|xxl)-(block|flex|grid|inline-block))\b/';
+		if ( preg_match( $pattern, $className, $matches ) ) {
+			$isHidden 	= preg_replace_callback( $pattern, fn( $matches ) => 'd-' . $matches[2] . '-none', $matches[1] );
+		} else {
+			$isHidden 	= 'd-lg-none';
+			$isDisplay 	= 'd-lg-block';
+		}
+
+		$dom	= wecodeart( 'dom' )::create( $content );
+		$div 	= wecodeart( 'dom' )::get_element( strtolower( $tagName ), $dom );
+
+		// Toggle
+		$toggl	= wecodeart( 'dom' )::create_element( 'button', $dom );
+		$toggl->nodeValue = $ariaLabel;
+		$dom->insertBefore( $toggl, $dom->firstChild );
+
+		$p = wecodeart( 'dom' )::processor( $dom->saveHTML() );
+
+		// Button
+		$p->next_tag( [ 'tag_name' => 'button' ] );
+		$p->set_attribute( 'data-wp-interactive', 'wecodeart/collapse' );
+		$p->set_attribute( 'data-wp-context', toJSON( [ 'isOpen' => false ] ) );
+		$p->set_attribute( 'data-wp-bind--aria-label', 'state.ariaLabel' );
+		$p->set_attribute( 'data-wp-bind--aria-expanded', 'context.isOpen' );
+		$p->set_attribute( 'data-wp-on--click', 'actions.toggle' );
+		$p->set_attribute( 'data-wp-class--collapsed', '!context.isOpen' );
+		$p->set_attribute( 'aria-controls', $itemID . '-content' );
+		$p->set_attribute( 'aria-label', esc_html__( 'Open item', 'wecodeart' ) );
+		$p->set_attribute( 'aria-expanded', 'false' );
+		$p->set_attribute( 'id', $itemID . '-toggle' );
+		$p->set_attribute( 'type', 'button' );
+		$p->add_class( 'wp-element-button has-accent-background-color has-dark-color collapsed' . $isHidden );
+			
+		\wecodeart( 'styles' )->Utilities->load( [ $isHidden ] );
+
+		// Container
+		$p->next_tag( [ 'tag_name' => $tagName ] );
+		$p->set_attribute( 'aria-labelledby', $itemID . '-toggle' );
+		$p->set_attribute( 'id', $itemID . '-content' );
+		$p->set_attribute( 'role', 'region' );
+		$p->add_class( 'collapse' );
+
+		if( $isDisplay ) {
+			$p->add_class( $isDisplay );
+			
+			\wecodeart( 'styles' )->Utilities->load( [ $isDisplay ] );
+		}
+
+		// Requirements
+		\wp_enqueue_script_module( '@wecodeart/collapse' );
+		\wp_interactivity_config( 'wecodeart/collapse', [
+			'ariaLabel'	=>	[
+				'collapsed' => esc_html__( 'Open item', 'wecodeart' ),
+				'expanded'	=> esc_html__( 'Close item', 'wecodeart' )
+			],
+			'classNames' => [
+				'show' 			=> 'show',
+				'collapse' 		=> 'collapse',
+				'collapsing' 	=> 'collapsing'
+			]
+		] );
+
+		\wecodeart( 'styles' )->Components->load( [ 'transition' ] );
+
+		return $p->get_updated_html();
 	}
 
 	/**

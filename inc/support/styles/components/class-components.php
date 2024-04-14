@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.3.7
+ * @version		6.4.4
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -127,7 +127,7 @@ class Components implements Configuration {
             if( ! empty( $deps = $this->get( $component )::$deps ) ) {
 				foreach( $deps as $dep ) {
 					// Skip already loaded.
-					if( in_array( $dep, $queue  ) ) {
+					if( in_array( $dep, $queue ) ) {
 						continue;
 					}
 
@@ -140,7 +140,7 @@ class Components implements Configuration {
             return;
         }
            
-        foreach( $queue as $component ) {
+        foreach( array_unique( $queue ) as $component ) {
             $inline_css .= $this->get( $component )::styles();
         }
 

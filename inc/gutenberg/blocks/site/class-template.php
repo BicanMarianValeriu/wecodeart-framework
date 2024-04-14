@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.4.2
+ * @version		6.4.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\{ get_prop, toJSON };
 use function add_filter;
 
 /**
@@ -46,7 +46,7 @@ class Template extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'render' ], 20, 1 );
+		\add_filter( 'render_block_' . $this->get_block_type(),	[ $this, 'filter_render' ], 20, 2 );
     }
 
 	/**
@@ -57,13 +57,16 @@ class Template extends Dynamic {
 	 * @return 	array
 	 */
 	public function block_type_args( array $current ): array {
-		$supports 	= get_prop( $current, [ 'supports' ], [] );
+		$styles		= get_prop( $current, [ 'styles' ], [] );
+		$supports	= get_prop( $current, [ 'supports' ], [] );
 
 		return [
 			'supports'	=> wp_parse_args( [
 				'color'		=> true,
 				'position'	=> true,
 				'layout'	=> true,
+				// Allow renaming, used on collapse toggle (not on admin)
+				'renaming' 	=> true,
 				'spacing'	=> [
 					'margin'  	=> true,
 					'padding' 	=> true,
@@ -74,7 +77,19 @@ class Template extends Dynamic {
 						'blockGap'	=> true,
 					]
 				]
-			], $supports )
+			], $supports ),
+			'styles'	=> wp_parse_args( [
+				[
+					'name' 	=> 'default',
+					'label' => __( 'Default' ),
+					'isDefault' => true
+				],
+				[
+					'name' 	=> 'collapse',
+					'label' => __( 'Collapse' ),
+					'isDefault' => true
+				]
+			], $styles )
 		];
 	}
 
@@ -85,16 +100,17 @@ class Template extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( string $content = '' ): string {
-		$markup	= wecodeart( 'dom' )::processor( $content );
-		$tags 	= [ 'HEADER', 'FOOTER', 'ASIDE' ];
-		$count	= count( $tags );
+	public function filter_render( string $content, array $block ): string {
+		$attributes = get_prop( $block, [ 'attrs' ], [] );
+		$tagName 	= strtoupper( get_prop( $attributes, [ 'tagName' ] ) );
+		
+		$markup		= wecodeart( 'dom' )::processor( $content );
 
-		while ( $count > 0 && $markup->next_tag() ) {
-			$current = $markup->get_tag();
-			switch( $current ):
+		if ( $markup->next_tag( [
+			'tag_name' => $tagName
+		]) ) {
+			switch( $tagName ) :
 				case 'HEADER' :
-					$markup->set_attribute( 'id', 'top' );
 					$markup->set_attribute( 'itemscope', 'itemscope' );
 					$markup->set_attribute( 'itemtype', 'https://schema.org/WPHeader' );
 				break;
@@ -107,11 +123,13 @@ class Template extends Dynamic {
 					$markup->set_attribute( 'itemtype', 'https://schema.org/WPSideBar' );
 				break;
 			endswitch;
-
-			$count--;
 		}
 
 		$content = $markup->get_updated_html();
+
+		if( str_contains( get_prop( $attributes, [ 'className' ], '' ), 'is-style-collapse' ) ) {
+			$content = wecodeart( 'blocks' )->get( 'core/group' )::create_collapse( $attributes, $content ); 
+		}
 		
 		return $content;
 	}
