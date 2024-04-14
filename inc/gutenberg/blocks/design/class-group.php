@@ -284,7 +284,8 @@ class Group extends Dynamic {
 		$p->set_attribute( 'aria-expanded', 'false' );
 		$p->set_attribute( 'id', $itemID . '-toggle' );
 		$p->set_attribute( 'type', 'button' );
-		$p->add_class( 'wp-element-button has-accent-background-color has-dark-color collapsed' . $isHidden );
+		$p->add_class( 'wp-element-button has-accent-background-color has-dark-color collapsed' );
+		$p->add_class( $isHidden );
 			
 		\wecodeart( 'styles' )->Utilities->load( [ $isHidden ] );
 
