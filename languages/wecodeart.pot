@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-06 13:56+0000\n"
+"POT-Creation-Date: 2024-04-14 22:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -189,6 +189,10 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: inc/gutenberg/blocks/design/class-group.php:309
+msgid "Close item"
+msgstr ""
+
 #: theme.json:1 styles/dark.json:1
 msgctxt "Color name"
 msgid "Accent"
@@ -257,7 +261,7 @@ msgstr ""
 msgid "Comments are Closed"
 msgstr ""
 
-#: inc/gutenberg/blocks/class-blocks.php:244
+#: inc/gutenberg/blocks/class-blocks.php:245
 #, php-format
 msgctxt "comments title"
 msgid "%1$s minute to read"
@@ -458,6 +462,11 @@ msgstr ""
 
 #: theme.json:1
 msgctxt "Font family name"
+msgid "Handwritten"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Font family name"
 msgid "Monospace"
 msgstr ""
 
@@ -548,7 +557,7 @@ msgstr ""
 msgid "Ignore for 1 day"
 msgstr ""
 
-#: inc/support/markup/class-markup.php:248
+#: inc/support/dom/class-dom.php:474
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr ""
@@ -580,7 +589,7 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr ""
 
-#: inc/gutenberg/blocks/class-blocks.php:240
+#: inc/gutenberg/blocks/class-blocks.php:241
 msgid "Less than a minute to read."
 msgstr ""
 
@@ -691,6 +700,11 @@ msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:74
 msgid "Notification dismissed"
+msgstr ""
+
+#: inc/gutenberg/blocks/design/class-group.php:283
+#: inc/gutenberg/blocks/design/class-group.php:308
+msgid "Open item"
 msgstr ""
 
 #: inc/gutenberg/blocks/site/class-login.php:97
@@ -864,7 +878,7 @@ msgstr ""
 msgid "Placeholder"
 msgstr ""
 
-#: inc/support/markup/class-markup.php:179
+#: inc/support/dom/class-dom.php:407
 msgid "Please define a callback function for each of the modules."
 msgstr ""
 
@@ -1232,16 +1246,17 @@ msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
 
+#: inc/gutenberg/blocks/design/class-group.php:250
+#, php-format
+msgid "Toggle %s"
+msgstr ""
+
 #: views/general/toggler.tpl.php:25
 msgid "Toggle navigation"
 msgstr ""
 
 #: patterns/section-mobile.php:16
 msgid "too!"
-msgstr ""
-
-#: inc/gutenberg/blocks/text/class-heading.php:49
-msgid "Underline Brush"
 msgstr ""
 
 #: views/general/protected.tpl.php:58
@@ -1382,7 +1397,7 @@ msgstr ""
 msgid "Well %s"
 msgstr ""
 
-#: inc/support/markup/svg/class-svg.php:159
+#: inc/support/dom/svg/class-svg.php:158
 #, php-format
 msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2024-04-06 14:07+0000\n"
+"PO-Revision-Date: 2024-04-14 22:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -198,6 +198,10 @@ msgstr "Alege %s"
 msgid "Close"
 msgstr "Închide"
 
+#: inc/gutenberg/blocks/design/class-group.php:309
+msgid "Close item"
+msgstr "Închideți elementul"
+
 #: theme.json:1 styles/dark.json:1
 msgctxt "Color name"
 msgid "Accent"
@@ -266,7 +270,7 @@ msgstr "Comentariu"
 msgid "Comments are Closed"
 msgstr "Comentariile sunt inchise"
 
-#: inc/gutenberg/blocks/class-blocks.php:244
+#: inc/gutenberg/blocks/class-blocks.php:245
 #, php-format
 msgctxt "comments title"
 msgid "%1$s minute to read"
@@ -490,6 +494,11 @@ msgstr "Baza"
 
 #: theme.json:1
 msgctxt "Font family name"
+msgid "Handwritten"
+msgstr "Scris de mană"
+
+#: theme.json:1
+msgctxt "Font family name"
 msgid "Monospace"
 msgstr "Monospace"
 
@@ -580,7 +589,7 @@ msgstr "https://www.wecodeart.com/about/"
 msgid "Ignore for 1 day"
 msgstr "Ignoră timp de 1 zi"
 
-#: inc/support/markup/class-markup.php:248
+#: inc/support/dom/class-dom.php:474
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
 msgstr "Wrapper HTML nevalid pentru „%s”."
@@ -617,7 +626,7 @@ msgstr ""
 msgid "Leave a Comment"
 msgstr "Lasă un comentariu"
 
-#: inc/gutenberg/blocks/class-blocks.php:240
+#: inc/gutenberg/blocks/class-blocks.php:241
 msgid "Less than a minute to read."
 msgstr "Mai puțin de un minut de citit."
 
@@ -736,6 +745,11 @@ msgstr "Nu, nu-mi pasă."
 #: inc/admin/notifications/class-ajax.php:74
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
+
+#: inc/gutenberg/blocks/design/class-group.php:283
+#: inc/gutenberg/blocks/design/class-group.php:308
+msgid "Open item"
+msgstr "Deschideți elementul"
 
 #: inc/gutenberg/blocks/site/class-login.php:97
 msgid "Open login modal"
@@ -913,7 +927,7 @@ msgstr "Pastile"
 msgid "Placeholder"
 msgstr "Substituent"
 
-#: inc/support/markup/class-markup.php:179
+#: inc/support/dom/class-dom.php:407
 msgid "Please define a callback function for each of the modules."
 msgstr "Vă rugăm să definiți o funcție pentru fiecare dintre module."
 
@@ -1288,6 +1302,11 @@ msgstr ""
 "Această postare este protejată prin parolă. Pentru a vizualiza această "
 "postare, introduceți parola mai jos!"
 
+#: inc/gutenberg/blocks/design/class-group.php:250
+#, php-format
+msgid "Toggle %s"
+msgstr "Comută %s"
+
 #: views/general/toggler.tpl.php:25
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
@@ -1295,10 +1314,6 @@ msgstr "Comutare navigare"
 #: patterns/section-mobile.php:16
 msgid "too!"
 msgstr "de asemenea!"
-
-#: inc/gutenberg/blocks/text/class-heading.php:49
-msgid "Underline Brush"
-msgstr "Pensulă de subliniere"
 
 #: views/general/protected.tpl.php:58
 msgid "Unlock"
@@ -1457,7 +1472,7 @@ msgstr "Temele WeCodeArt vor arăta uimitor pe orice dispozitiv."
 msgid "Well %s"
 msgstr "Foarte bine %s"
 
-#: inc/support/markup/svg/class-svg.php:159
+#: inc/support/dom/svg/class-svg.php:158
 #, php-format
 msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
