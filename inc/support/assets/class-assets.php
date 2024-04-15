@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.4.0
- * @version		6.3.7
+ * @version		6.4.4
  */
 
 namespace WeCodeArt\Support;
@@ -30,20 +30,30 @@ final class Assets implements Integration {
 	use No_Conditionals;
 
 	/**
+	 * Container of valid properties.
+	 *
+	 * @var array
+	 */
+	const VALID_PROPERTIES = [
+		'path',
+		'deps',
+		'version',
+		'footer',
+		'inline',
+		'locale',
+		'where',
+		'load',
+		'media',
+		'rtl'
+	];
+
+	/**
 	 * Asset
 	 *
 	 * @since  	5.4.5
 	 * @var 	object
 	 */
 	public 	$Asset	= null;
-
-	/**
-	 * Contains the scripts hook.
-	 *
-	 * @since  	6.0.0
-	 * @var 	string
-	 */
-	public $hook = 'wp_enqueue_scripts';
 
 	/**
 	 * Contains an array of script handles registered.
@@ -72,8 +82,8 @@ final class Assets implements Integration {
 	 * Register hooks
 	 */
 	public function register_hooks(): void {
-		\add_action( $this->hook,	[ $this, 'core'		], 20 );
-		\add_action( $this->hook,	[ $this, 'enqueue'	], PHP_INT_MAX );
+		\add_action( 'wp_enqueue_scripts',	[ $this, 'core'		], 20 );
+		\add_action( 'wp_enqueue_scripts',	[ $this, 'enqueue'	], PHP_INT_MAX );
 	}
 
 	/**
@@ -119,15 +129,12 @@ final class Assets implements Integration {
 			'inline'	=> 'document.addEventListener("DOMContentLoaded",function(){new wecodeart.Scripts(wecodeart);});',
 		] );
 
-		// Modules
-		if( function_exists( 'wp_register_script_module' ) ) {
-			\wp_register_script_module(
-				'@wecodeart/collapse',
-				$this->get_asset( 'js', 'modules/collapse' ),
-				[ '@wordpress/interactivity' ],
-				wecodeart( 'version' )
-			);
-		}
+		\wp_register_script_module(
+			'@wecodeart/collapse',
+			$this->get_asset( 'js', 'modules/collapse' ),
+			[ '@wordpress/interactivity' ],
+			wecodeart( 'version' )
+		);
 	}
 
 	/**
@@ -148,21 +155,22 @@ final class Assets implements Integration {
 			);
 		}
 
-		$data = wp_array_slice_assoc( $data, [ 'path', 'deps', 'version', 'media', 'rtl', 'footer', 'inline', 'locale', 'where', 'load' ] );
+		$data = wp_array_slice_assoc( $data, self::VALID_PROPERTIES );
 
-		if( $type === 'style' ) {
-			if( array_key_exists( $handle, self::$styles ) ) {
-				return self::$styles[$handle] = wp_parse_args( $data, self::$styles[$handle] );
-			}
-		}
-		
-		if( $type === 'script' ) {
-			if( array_key_exists( $handle, self::$scripts ) ) {
-				return self::$scripts[$handle] = wp_parse_args( $data, self::$scripts[$handle] );
-			}
-		}
+		switch( $type ) :
+			case 'style':
+				if( array_key_exists( $handle, self::$styles ) ) {
+					self::$styles[$handle] = wp_parse_args( $data, self::$styles[$handle] );
+				}
+			break;
+			case 'script':
+				if( array_key_exists( $handle, self::$scripts ) ) {
+					self::$scripts[$handle] = wp_parse_args( $data, self::$scripts[$handle] );
+				}
+			break;
+		endswitch;
 
-		return null;
+		return $this;
 	}
 
 	/**
@@ -175,7 +183,7 @@ final class Assets implements Integration {
      */
     public function add_style( string $handle, array $data = [] ): void {
 		// Valid Args
-		$data = wp_array_slice_assoc( $data, [ 'path', 'deps', 'version', 'media', 'rtl', 'inline', 'load' ] );
+		$data = wp_array_slice_assoc( $data, self::VALID_PROPERTIES );
 		$data = wp_parse_args( $data, [
 			'handle' 	=> $handle,
 			'src'    	=> '',
@@ -210,7 +218,7 @@ final class Assets implements Integration {
      */
     public function add_script( string $handle, array $data = [] ): void {
 		// Valid Args
-		$data = wp_array_slice_assoc( $data, [ 'path', 'deps', 'version', 'footer', 'inline', 'locale', 'where', 'load' ] );
+		$data = wp_array_slice_assoc( $data, self::VALID_PROPERTIES );
 		$data = wp_parse_args( $data, [
 			'handle' 	=> $handle,
 			'src'    	=> '',
@@ -267,7 +275,9 @@ final class Assets implements Integration {
 
 		foreach( $this->all( 'scripts' ) as $handle => $data ) {
 			// Condition
-			if( $should_load( $data ) === false ) continue;
+			if( $should_load( $data ) === false ) {
+				continue;
+			}
 
 			// Enqueue
 			wp_enqueue_script( $handle );
@@ -287,7 +297,9 @@ final class Assets implements Integration {
 		
 		foreach( $this->all( 'styles' ) as $handle => $data ) {
 			// Condition
-			if( $should_load( $data ) === false ) continue;
+			if( $should_load( $data ) === false ) {
+				continue;
+			}
 
 			// Enqueue
 			wp_enqueue_style( $handle );
