@@ -178,7 +178,6 @@ progress {
 .wp-site-header {
   position: relative;
   box-shadow: 0 0 1px 1px var(--wp--preset--color--accent);
-  z-index: 15;
 }
 .has-scrolled .wp-site-header {
   box-shadow: var(--wp--preset--shadow--sm);

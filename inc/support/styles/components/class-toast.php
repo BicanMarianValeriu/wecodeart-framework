@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.1.8
+ * @version		6.4.4
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -35,9 +35,8 @@ class Toast extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		$inline = '
-			/* Toast */
-			.toast {
+		return <<<CSS
+			:where(.toast,.wp-toast) {
 				--wp--toast-zindex: 1090;
 				--wp--toast-padding-x: 0.75rem;
 				--wp--toast-padding-y: 0.5rem;
@@ -64,13 +63,13 @@ class Toast extends Base {
 				box-shadow: var(--wp--toast-box-shadow);
 				border-radius: var(--wp--toast-border-radius);
 			}
-			.toast.showing {
+			:where(.toast,.wp-toast).showing {
 				opacity: 0;
 			}
-			.toast:not(.show) {
+			:where(.toast,.wp-toast):not(.show) {
 				display: none;
 			}
-			.toast-container {
+			:where(.toast-container,.wp-toast-container) {
 				--wp--toast-zindex: 1090;
 				position: absolute;
 				z-index: var(--wp--toast-zindex);
@@ -78,10 +77,10 @@ class Toast extends Base {
 				max-width: 100%;
 				pointer-events: none;
 			}
-			.toast-container > :not(:last-child) {
+			:where(.toast-container,.wp-toast-container) > :not(:last-child) {
 				margin-bottom: var(--wp--toast-spacing);
 			}
-			.toast-header {
+			:where(.toast-header,.wp-toast__header) {
 				display: flex;
 				align-items: center;
 				padding: var(--wp--toast-padding-y) var(--wp--toast-padding-x);
@@ -92,16 +91,14 @@ class Toast extends Base {
 				border-top-left-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
 				border-top-right-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
 			}
-			.toast-header .btn-close {
+			:where(.toast-header,.wp-toast__header) :is(.btn-close,.wp-close) {
 				margin-right: calc(-.5 * var(--wp--toast-padding-x));
 				margin-left: var(--wp--toast-padding-x);
 			}
-			.toast-body {
+			:where(.toast-body,.wp-toast__body) {
 				padding: var(--wp--toast-padding-x);
 				word-wrap: break-word;
 			}
-        ';
-
-		return $inline;
+		CSS;
 	}
 }

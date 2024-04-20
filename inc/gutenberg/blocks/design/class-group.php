@@ -85,15 +85,21 @@ class Group extends Dynamic {
 
 		static $processed = null;
 		// Handle <main /> tag (once).
-		if( $content->next_tag( [ 'tag_name' => 'main' ] ) && is_null( $processed ) ) {
-			$content->set_attribute( 'class', 'wp-site-main ' . $content->get_attribute( 'class' ) );
-			$processed = true;
+		if( $content->next_tag( [ 'tag_name' => 'main' ] ) ) {
+			if( is_null( $processed ) ) {
+				$content->set_attribute( 'class', 'wp-site-main ' . $content->get_attribute( 'class' ) );
+				$processed = true;
+			}
 		}
 
 		// Handle marquee group.
 		if( self::is_variation( $attributes, 'marquee' ) ) {
 			$content = self::create_marquee( $attributes, $content );
-			\wp_add_inline_style( $this->get_asset_handle(), self::marquee_styles() );
+
+			static $marquee_styles = null;
+			if( is_null( $marquee_styles ) ) {
+				$marquee_styles = \wp_add_inline_style( $this->get_asset_handle(), self::marquee_styles() );
+			}
 		}
 
 		// Handle collapsible group.

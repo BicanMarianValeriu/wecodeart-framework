@@ -49,7 +49,7 @@ class Components implements Configuration {
 	 * @access 	public
 	 * @var 	array
 	 */
-	protected $loaded  = [];
+	protected $loaded  = [ 'backdrop' ];
 
     /**
 	 * Send to Constructor
@@ -64,6 +64,7 @@ class Components implements Configuration {
 		$this->register( 'dropdown',    Components\Dropdown::class  );
 		$this->register( 'offcanvas',   Components\OffCanvas::class );
 		$this->register( 'parallax',    Components\Parallax::class  );
+		$this->register( 'backdrop',    Components\Backdrop::class  );
 		$this->register( 'transition',  Components\Transition::class);
 
         add_action( 'init',                 [ $this, 'cache'        ], 95    );

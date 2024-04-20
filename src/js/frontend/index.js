@@ -1,11 +1,3 @@
-// WeCodeArt
-import './plugins/wecodeart-Scripts';
-import './plugins/wecodeart-Events';
-import './plugins/wecodeart-Data';
-import './plugins/wecodeart-Config';
-import './plugins/wecodeart-Component';
-import './plugins/wecodeart-Template';
-
 // Load JS
 import loadJs from 'loadjs';
 
@@ -30,7 +22,17 @@ import {
 	executeAfterTransition,
 	camelCase,
 	requireJs,
+	enableDismissTrigger
 } from './helpers';
+
+// WeCodeArt
+import './plugins/wecodeart-Scripts';
+import './plugins/wecodeart-Events';
+import './plugins/wecodeart-Data';
+import './plugins/wecodeart-Config';
+import './plugins/wecodeart-Component';
+import './plugins/wecodeart-Backdrop';
+import './plugins/wecodeart-Template';
 
 // Styles
 import './../../scss/frontend/frontend.scss';
@@ -73,6 +75,7 @@ function filterLog(route, func, args) {
 		getTransitionDuration,
 		loadJs,
 		requireJs,
+		enableDismissTrigger
 	};
 	/**
 	 * @description
@@ -148,6 +151,7 @@ function filterLog(route, func, args) {
 				}
 
 				bodyJSClass();
+				handleDocumentScrollbar();
 				skipLink();
 				window.onresize = handleDocumentScrollbar;
 				window.onscroll = handleDocumentScrolled;

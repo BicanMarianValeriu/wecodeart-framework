@@ -87,7 +87,6 @@ class Template extends Dynamic {
 				[
 					'name' 	=> 'collapse',
 					'label' => __( 'Collapse' ),
-					'isDefault' => true
 				]
 			], $styles )
 		];

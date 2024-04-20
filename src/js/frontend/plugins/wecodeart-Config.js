@@ -11,6 +11,7 @@ import { isElement, parseData, toType } from '../helpers';
 const { applyFilters } = wp.hooks;
 
 export default (function (wecodeart) {
+	
 	class Config {
 		// Getters
 		static get Default() {

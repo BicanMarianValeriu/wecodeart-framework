@@ -99,9 +99,17 @@ final class Assets implements Integration {
 		] );
 
 		// Enqueue
-		foreach( [ 'offcanvas', 'dropdown', 'modal', 'toast' ] as $handle ) {
+		foreach( [ 'offcanvas', 'dropdown', 'modal' ] as $handle ) {
 			$this->add_script( $this->make_handle( $handle ), [
 				'path' 		=> $this->get_asset( 'js', 'modules/' . $handle ),
+				'deps'		=> [ $this->make_handle() ],
+				'load'		=> false,
+			] );
+		}
+
+		foreach( [ 'toast' ] as $handle ) {
+			$this->add_script( $this->make_handle( $handle ), [
+				'path' 		=> $this->get_asset( 'js', 'plugins/' . $handle ),
 				'deps'		=> [ $this->make_handle() ],
 				'load'		=> false,
 			] );

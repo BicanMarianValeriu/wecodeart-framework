@@ -15,8 +15,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getParents: () => (/* binding */ getParents),
 /* harmony export */   getTransitionDuration: () => (/* binding */ getTransitionDuration),
 /* harmony export */   hasScrollbar: () => (/* binding */ hasScrollbar),
+/* harmony export */   isDisabled: () => (/* binding */ isDisabled),
 /* harmony export */   isElement: () => (/* binding */ isElement),
 /* harmony export */   isRTL: () => (/* binding */ isRTL),
+/* harmony export */   isVisible: () => (/* binding */ isVisible),
 /* harmony export */   reflow: () => (/* binding */ reflow)
 /* harmony export */ });
 /**
@@ -111,6 +113,51 @@ const getTransitionDuration = element => {
   transitionDuration = transitionDuration.split(',')[0];
   transitionDelay = transitionDelay.split(',')[0];
   return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * 1000;
+};
+
+/**
+ * Is visible
+ *
+ * @param 	{DOMElement} element
+ */
+const isVisible = element => {
+  if (!isElement(element) || element.getClientRects().length === 0) {
+    return false;
+  }
+  const elementIsVisible = getComputedStyle(element).getPropertyValue('visibility') === 'visible';
+  // Handle `details` element as its content may falsie appear visible when it is closed
+  const closedDetails = element.closest('details:not([open])');
+  if (!closedDetails) {
+    return elementIsVisible;
+  }
+  if (closedDetails !== element) {
+    const summary = element.closest('summary');
+    if (summary && summary.parentNode !== closedDetails) {
+      return false;
+    }
+    if (summary === null) {
+      return false;
+    }
+  }
+  return elementIsVisible;
+};
+
+/**
+ * Is disabled
+ *
+ * @param 	{DOMElement} element
+ */
+const isDisabled = element => {
+  if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+    return true;
+  }
+  if (element.classList.contains('disabled')) {
+    return true;
+  }
+  if (typeof element.disabled !== 'undefined') {
+    return element.disabled;
+  }
+  return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
 };
 
 /**
@@ -256,6 +303,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DefaultAllowlist: () => (/* reexport safe */ _sanitizer__WEBPACK_IMPORTED_MODULE_2__.DefaultAllowlist),
 /* harmony export */   camelCase: () => (/* binding */ camelCase),
+/* harmony export */   enableDismissTrigger: () => (/* binding */ enableDismissTrigger),
 /* harmony export */   execute: () => (/* reexport safe */ _execute__WEBPACK_IMPORTED_MODULE_3__.execute),
 /* harmony export */   executeAfterTransition: () => (/* reexport safe */ _execute__WEBPACK_IMPORTED_MODULE_3__.executeAfterTransition),
 /* harmony export */   findShadowRoot: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.findShadowRoot),
@@ -263,8 +311,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getParents: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getParents),
 /* harmony export */   getTransitionDuration: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getTransitionDuration),
 /* harmony export */   hasScrollbar: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.hasScrollbar),
+/* harmony export */   isDisabled: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isDisabled),
 /* harmony export */   isElement: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isElement),
 /* harmony export */   isRTL: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isRTL),
+/* harmony export */   isVisible: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isVisible),
 /* harmony export */   noop: () => (/* binding */ noop),
 /* harmony export */   paramsCreate: () => (/* reexport safe */ _params__WEBPACK_IMPORTED_MODULE_1__.paramsCreate),
 /* harmony export */   paramsUpdate: () => (/* reexport safe */ _params__WEBPACK_IMPORTED_MODULE_1__.paramsUpdate),
@@ -288,6 +338,8 @@ __webpack_require__.r(__webpack_exports__);
  * @version 1.0.0
  * --------------------------------------------------------------------------
  */
+
+
 /**
  * Shout-out Angus Croll (https://goo.gl/pxwQGp)
  *
@@ -313,6 +365,26 @@ const camelCase = str => {
     const capitalizedPart = part.charAt(0).toUpperCase() + part.slice(1);
     return isFirstPart ? part.toLowerCase() : capitalizedPart;
   }).join('');
+};
+const enableDismissTrigger = (component, method = 'hide') => {
+  const {
+    Events
+  } = wecodeart;
+  const clickEvent = `click.dismiss${component.EVENT_KEY}`;
+  const name = component.NAME;
+  Events.on(document, clickEvent, `[data-bs-dismiss="${name}"]`, function (event) {
+    if (['A', 'AREA'].includes(this.tagName)) {
+      event.preventDefault();
+    }
+    if ((0,_dom__WEBPACK_IMPORTED_MODULE_0__.isDisabled)(this)) {
+      return;
+    }
+    const target = this.closest(`.${name}`);
+    const instance = component.getOrCreateInstance(target);
+
+    // Method argument is left, for Alert and only, as it doesn't implement the 'hide' method
+    instance[method]();
+  });
 };
 const noop = () => {};
 
@@ -558,6 +630,148 @@ function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
 
 /***/ }),
 
+/***/ "./src/js/frontend/plugins/wecodeart-Backdrop.js":
+/*!*******************************************************!*\
+  !*** ./src/js/frontend/plugins/wecodeart-Backdrop.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helpers */ "./src/js/frontend/helpers/index.js");
+/**
+ * --------------------------------------------------------------------------
+ * Backdrop Component
+ *
+ * @author 	Bican Marian Valeriu
+ * @version 1.0.0
+ * --------------------------------------------------------------------------
+ */
+const NAME = 'backdrop';
+const CLASS_NAME_FADE = 'fade';
+const CLASS_NAME_SHOW = 'show';
+const EVENT_MOUSEDOWN = `mousedown.wp.${NAME}`;
+const Default = {
+  className: 'wp-backdrop',
+  clickCallback: null,
+  isAnimated: false,
+  isVisible: true,
+  // if false, we use the backdrop helper without adding any element to the dom
+  rootElement: 'body' // give the choice to place backdrop under different elements
+};
+const DefaultType = {
+  className: 'string',
+  clickCallback: '(function|null)',
+  isAnimated: 'boolean',
+  isVisible: 'boolean',
+  rootElement: '(element|string)'
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
+  const {
+    Config,
+    Events
+  } = wecodeart;
+
+  /**
+   * Class definition
+   */
+  class Backdrop extends Config {
+    constructor(config) {
+      super();
+      this._config = this._getConfig(config);
+      this._isAppended = false;
+      this._element = null;
+    }
+
+    // Getters
+    static get Default() {
+      return Default;
+    }
+    static get DefaultType() {
+      return DefaultType;
+    }
+    static get NAME() {
+      return NAME;
+    }
+
+    // Public
+    show(callback) {
+      if (!this._config.isVisible) {
+        (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(callback);
+        return;
+      }
+      this._append();
+      const element = this._getElement();
+      if (this._config.isAnimated) {
+        (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.reflow)(element);
+      }
+      element.classList.add(CLASS_NAME_SHOW);
+      this._emulateAnimation(() => (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(callback));
+    }
+    hide(callback) {
+      if (!this._config.isVisible) {
+        (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(callback);
+        return;
+      }
+      this._getElement().classList.remove(CLASS_NAME_SHOW);
+      this._emulateAnimation(() => {
+        this.dispose();
+        (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(callback);
+      });
+    }
+    dispose() {
+      if (!this._isAppended) {
+        return;
+      }
+      Events.off(this._element, EVENT_MOUSEDOWN);
+      this._element.remove();
+      this._isAppended = false;
+    }
+
+    // Private
+    _getElement() {
+      if (!this._element) {
+        const backdrop = document.createElement('div');
+        backdrop.className = this._config.className;
+        if (this._config.isAnimated) {
+          backdrop.classList.add(CLASS_NAME_FADE);
+        }
+        this._element = backdrop;
+      }
+      return this._element;
+    }
+    _configAfterMerge(config) {
+      config.rootElement = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.getElement)(config.rootElement);
+      return config;
+    }
+    _append() {
+      if (this._isAppended) {
+        return;
+      }
+      const element = this._getElement();
+      this._config.rootElement.append(element);
+      Events.on(element, EVENT_MOUSEDOWN, () => (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(this._config.clickCallback, [this]));
+      this._isAppended = true;
+    }
+    _emulateAnimation(callback) {
+      (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.executeAfterTransition)(callback, this._getElement(), this._config.isAnimated);
+    }
+  }
+
+  /**
+   * @static
+   * @memberof Component
+   */
+  wecodeart.Backdrop = Backdrop;
+  wecodeart.plugins.Backdrop = Backdrop;
+}).apply(undefined, [window.wecodeart]));
+
+/***/ }),
+
 /***/ "./src/js/frontend/plugins/wecodeart-Component.js":
 /*!********************************************************!*\
   !*** ./src/js/frontend/plugins/wecodeart-Component.js ***!
@@ -569,6 +783,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helpers */ "./src/js/frontend/helpers/index.js");
 /**
  * --------------------------------------------------------------------------
  * Plugin Component
@@ -578,6 +793,7 @@ __webpack_require__.r(__webpack_exports__);
  * --------------------------------------------------------------------------
  */
 const NAME = 'WeCodeArtComponent';
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
   const {
     Config,
@@ -586,7 +802,7 @@ const NAME = 'WeCodeArtComponent';
     version
   } = wecodeart;
   class Component extends Config {
-    constructor(classDef, element, config) {
+    constructor(element, config) {
       super();
       if (!element) {
         return;
@@ -606,7 +822,7 @@ const NAME = 'WeCodeArtComponent';
       }
     }
     _queueCallback(callback, element, isAnimated = true) {
-      executeAfterTransition(callback, element, isAnimated);
+      (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.executeAfterTransition)(callback, element, isAnimated);
     }
     _getConfig(config) {
       config = this._mergeConfigObj(config, this._element);
@@ -1789,16 +2005,23 @@ var __webpack_exports__ = {};
   !*** ./src/js/frontend/index.js ***!
   \**********************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _plugins_wecodeart_Scripts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/wecodeart-Scripts */ "./src/js/frontend/plugins/wecodeart-Scripts.js");
-/* harmony import */ var _plugins_wecodeart_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./plugins/wecodeart-Events */ "./src/js/frontend/plugins/wecodeart-Events.js");
-/* harmony import */ var _plugins_wecodeart_Data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/wecodeart-Data */ "./src/js/frontend/plugins/wecodeart-Data.js");
-/* harmony import */ var _plugins_wecodeart_Config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/wecodeart-Config */ "./src/js/frontend/plugins/wecodeart-Config.js");
-/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/frontend/plugins/wecodeart-Component.js");
-/* harmony import */ var _plugins_wecodeart_Template__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugins/wecodeart-Template */ "./src/js/frontend/plugins/wecodeart-Template.js");
-/* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! loadjs */ "./node_modules/loadjs/dist/loadjs.umd.js");
-/* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(loadjs__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helpers */ "./src/js/frontend/helpers/index.js");
-/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
+/* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! loadjs */ "./node_modules/loadjs/dist/loadjs.umd.js");
+/* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(loadjs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./src/js/frontend/helpers/index.js");
+/* harmony import */ var _plugins_wecodeart_Scripts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/wecodeart-Scripts */ "./src/js/frontend/plugins/wecodeart-Scripts.js");
+/* harmony import */ var _plugins_wecodeart_Events__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/wecodeart-Events */ "./src/js/frontend/plugins/wecodeart-Events.js");
+/* harmony import */ var _plugins_wecodeart_Data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/wecodeart-Data */ "./src/js/frontend/plugins/wecodeart-Data.js");
+/* harmony import */ var _plugins_wecodeart_Config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugins/wecodeart-Config */ "./src/js/frontend/plugins/wecodeart-Config.js");
+/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/frontend/plugins/wecodeart-Component.js");
+/* harmony import */ var _plugins_wecodeart_Backdrop__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./plugins/wecodeart-Backdrop */ "./src/js/frontend/plugins/wecodeart-Backdrop.js");
+/* harmony import */ var _plugins_wecodeart_Template__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./plugins/wecodeart-Template */ "./src/js/frontend/plugins/wecodeart-Template.js");
+/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
+// Load JS
+
+
+// Utils
+
+
 // WeCodeArt
 
 
@@ -1806,11 +2029,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-// Load JS
-
-
-// Utils
 
 
 // Styles
@@ -1834,26 +2052,27 @@ function filterLog(route, func, args) {
    * @since 3.6
    */
   wecodeart.fn = {
-    noop: _helpers__WEBPACK_IMPORTED_MODULE_7__.noop,
-    toType: _helpers__WEBPACK_IMPORTED_MODULE_7__.toType,
-    isRTL: _helpers__WEBPACK_IMPORTED_MODULE_7__.isRTL,
-    isElement: _helpers__WEBPACK_IMPORTED_MODULE_7__.isElement,
-    getElement: _helpers__WEBPACK_IMPORTED_MODULE_7__.getElement,
-    getParents: _helpers__WEBPACK_IMPORTED_MODULE_7__.getParents,
-    sanitizeHtml: _helpers__WEBPACK_IMPORTED_MODULE_7__.sanitizeHtml,
-    findShadowRoot: _helpers__WEBPACK_IMPORTED_MODULE_7__.findShadowRoot,
-    hasScrollbar: _helpers__WEBPACK_IMPORTED_MODULE_7__.hasScrollbar,
-    reflow: _helpers__WEBPACK_IMPORTED_MODULE_7__.reflow,
-    camelCase: _helpers__WEBPACK_IMPORTED_MODULE_7__.camelCase,
-    paramsCreate: _helpers__WEBPACK_IMPORTED_MODULE_7__.paramsCreate,
-    paramsUpdate: _helpers__WEBPACK_IMPORTED_MODULE_7__.paramsUpdate,
-    getOptions: _helpers__WEBPACK_IMPORTED_MODULE_7__.parseData,
-    validateConfig: _helpers__WEBPACK_IMPORTED_MODULE_7__.validateConfig,
-    execute: _helpers__WEBPACK_IMPORTED_MODULE_7__.execute,
-    executeAfterTransition: _helpers__WEBPACK_IMPORTED_MODULE_7__.executeAfterTransition,
-    getTransitionDuration: _helpers__WEBPACK_IMPORTED_MODULE_7__.getTransitionDuration,
-    loadJs: (loadjs__WEBPACK_IMPORTED_MODULE_6___default()),
-    requireJs: _helpers__WEBPACK_IMPORTED_MODULE_7__.requireJs
+    noop: _helpers__WEBPACK_IMPORTED_MODULE_1__.noop,
+    toType: _helpers__WEBPACK_IMPORTED_MODULE_1__.toType,
+    isRTL: _helpers__WEBPACK_IMPORTED_MODULE_1__.isRTL,
+    isElement: _helpers__WEBPACK_IMPORTED_MODULE_1__.isElement,
+    getElement: _helpers__WEBPACK_IMPORTED_MODULE_1__.getElement,
+    getParents: _helpers__WEBPACK_IMPORTED_MODULE_1__.getParents,
+    sanitizeHtml: _helpers__WEBPACK_IMPORTED_MODULE_1__.sanitizeHtml,
+    findShadowRoot: _helpers__WEBPACK_IMPORTED_MODULE_1__.findShadowRoot,
+    hasScrollbar: _helpers__WEBPACK_IMPORTED_MODULE_1__.hasScrollbar,
+    reflow: _helpers__WEBPACK_IMPORTED_MODULE_1__.reflow,
+    camelCase: _helpers__WEBPACK_IMPORTED_MODULE_1__.camelCase,
+    paramsCreate: _helpers__WEBPACK_IMPORTED_MODULE_1__.paramsCreate,
+    paramsUpdate: _helpers__WEBPACK_IMPORTED_MODULE_1__.paramsUpdate,
+    getOptions: _helpers__WEBPACK_IMPORTED_MODULE_1__.parseData,
+    validateConfig: _helpers__WEBPACK_IMPORTED_MODULE_1__.validateConfig,
+    execute: _helpers__WEBPACK_IMPORTED_MODULE_1__.execute,
+    executeAfterTransition: _helpers__WEBPACK_IMPORTED_MODULE_1__.executeAfterTransition,
+    getTransitionDuration: _helpers__WEBPACK_IMPORTED_MODULE_1__.getTransitionDuration,
+    loadJs: (loadjs__WEBPACK_IMPORTED_MODULE_0___default()),
+    requireJs: _helpers__WEBPACK_IMPORTED_MODULE_1__.requireJs,
+    enableDismissTrigger: _helpers__WEBPACK_IMPORTED_MODULE_1__.enableDismissTrigger
   };
   /**
    * @description
@@ -1876,7 +2095,7 @@ function filterLog(route, func, args) {
           html.classList[window.scrollY > 1 ? 'add' : 'remove']('has-scrolled');
         };
         const handleDocumentScrollbar = () => {
-          html.classList[(0,_helpers__WEBPACK_IMPORTED_MODULE_7__.hasScrollbar)() ? 'add' : 'remove']('has-scrollbar');
+          html.classList[(0,_helpers__WEBPACK_IMPORTED_MODULE_1__.hasScrollbar)() ? 'add' : 'remove']('has-scrollbar');
         };
         const bodyJSClass = () => {
           html.classList.remove('no-js');
@@ -1920,6 +2139,7 @@ function filterLog(route, func, args) {
           sibling.parentElement.insertBefore(skipLink, sibling);
         };
         bodyJSClass();
+        handleDocumentScrollbar();
         skipLink();
         window.onresize = handleDocumentScrollbar;
         window.onscroll = handleDocumentScrolled;

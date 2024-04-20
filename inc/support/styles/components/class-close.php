@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.2.5
+ * @version		6.4.4
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -37,8 +37,7 @@ class Close extends Base {
 		$symbol	= encode_svg_data( $symbol );
 
 		return "
-			/* Close */
-			.btn-close {
+			:where(.btn-close,.wp-close) {
 				--wp--close-color: var(--wp--preset--color--black);
 				--wp--close-icon: transparent url('$symbol') center/1em auto no-repeat;
 				--wp--close-opacity: .5;
@@ -55,23 +54,23 @@ class Close extends Base {
 				cursor: pointer;
 			}
 
-			.theme-is-dark .btn-close {
+			.theme-is-dark :where(.btn-close,.wp-close) {
 				filter: var(--wp--close-white-filter);
 			}
 
-			.btn-close:hover {
+			:where(.btn-close,.wp-close):hover {
 				color: var(--wp--close-color);
 				text-decoration: none;
 				opacity: .75;
 			}
 
-			.btn-close:focus {
+			:where(.btn-close,.wp-close):focus {
 				outline: 0;
 				box-shadow: 0 0 0 .25rem rgba(35,136,237,0.25);
 				opacity: 1;
 			}
 
-			.btn-close:is(.disabled,:disabled) {
+			:where(.btn-close,.wp-close):is(.disabled,:disabled) {
 				pointer-events: none;
 				user-select: none;
 				opacity: .25;

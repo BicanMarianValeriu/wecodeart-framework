@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.4.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -47,13 +47,17 @@ class Video extends Dynamic {
 	 */
 	public function styles() {
 		return <<<CSS
-			.wp-block-video {
-				margin: 0 0 1.5rem;
+			:where(.wp-block-video) {
+				margin: 0;
 			}
 			.wp-block-video.aligncenter {
 				text-align: center;
 			}
+			.wp-block-video.alignfull {
+				max-width: initial;
+			}
 			.wp-block-video	video {
+				display: block;
 				width: 100%;
 				max-width: 100%;
 			}

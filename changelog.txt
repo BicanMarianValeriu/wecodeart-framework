@@ -1,10 +1,17 @@
 v6.4.4
+- Updated = core/cover styles simplified for custom content position
 - Updated = core/group to use wecodeart( 'dom' )::add_classes
 - Updated - core/template-part to update schemap markup based on tagName attribute (Header/Footer/Aside)
 - Updated - bump WCA: Formatting module update to 1.0.6
 - Updated - templates/single.html to show post navigation chevron icon
 - Updated - core/template-part support for renaming (to be used on collapse toggle label: Open %s - Sidebar or custom name)
+- Updated - core/video CSS - default margin removed and alignfull max-width to initial
+- Updated - Micro-Optimization: Toast to ditch Bootstrap's JavaScript (13kb to 3kb)
+- Updated - Styles: .toast class extended with .wp-toast / BEMified inner elements
+- Updated - Styles: .btn-close class extended with .wp-close
+- Updated - Styles: .wp-lightbox adjustments for close button and z-index of open button
 - Fixed - loading multiple instance of the same component via wecodeart( 'styles' )->Components when using dependency
+- Added - Styles: wp-backdrop Component (to be used in OffCanvas and Modal)
 - Added - core/group collapsible variation using @wecodeart/collpase script module
 - Added - core/template-part can now be collapsed via is-style-collapse (using core/group`s create_collapse method)
 - Added - core/post-navigation-link class for link

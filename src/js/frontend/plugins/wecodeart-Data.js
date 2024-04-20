@@ -9,6 +9,7 @@
 const elementMap = new Map();
 
 export default (function (wecodeart) {
+	
 	const Data = {
 		set(element, key, instance) {
 			if (!elementMap.has(element)) {

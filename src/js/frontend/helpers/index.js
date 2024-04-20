@@ -6,6 +6,8 @@
  * @version 1.0.0
  * --------------------------------------------------------------------------
  */
+import { isDisabled } from './dom';
+
 /**
  * Shout-out Angus Croll (https://goo.gl/pxwQGp)
  *
@@ -35,12 +37,35 @@ const camelCase = (str) => {
     }).join('');
 };
 
+const enableDismissTrigger = (component, method = 'hide') => {
+    const { Events } = wecodeart;
+
+    const clickEvent = `click.dismiss${component.EVENT_KEY}`;
+    const name = component.NAME;
+
+    Events.on(document, clickEvent, `[data-bs-dismiss="${name}"]`, function (event) {
+        if (['A', 'AREA'].includes(this.tagName)) {
+            event.preventDefault();
+        }
+
+        if (isDisabled(this)) {
+            return;
+        }
+
+        const target = this.closest(`.${name}`);
+        const instance = component.getOrCreateInstance(target);
+
+        // Method argument is left, for Alert and only, as it doesn't implement the 'hide' method
+        instance[method]();
+    });
+};
+
 const noop = () => { };
 
 // Exports
-export { isElement, getElement, getParents, getTransitionDuration, findShadowRoot, reflow, hasScrollbar, isRTL } from './dom';
+export { isElement, getElement, getParents, getTransitionDuration, isVisible, isDisabled, findShadowRoot, reflow, hasScrollbar, isRTL } from './dom';
 export { paramsCreate, paramsUpdate, parseData, validateConfig } from './params';
 export { sanitizeHtml, DefaultAllowlist } from './sanitizer';
 export { execute, executeAfterTransition } from './execute';
 export { default as requireJs } from './requireJs';
-export { camelCase, toType, noop };
+export { camelCase, toType, noop, enableDismissTrigger };

@@ -99,6 +99,59 @@ const getTransitionDuration = (element) => {
 };
 
 /**
+ * Is visible
+ *
+ * @param 	{DOMElement} element
+ */
+const isVisible = element => {
+    if (!isElement(element) || element.getClientRects().length === 0) {
+        return false;
+    }
+
+    const elementIsVisible = getComputedStyle(element).getPropertyValue('visibility') === 'visible';
+    // Handle `details` element as its content may falsie appear visible when it is closed
+    const closedDetails = element.closest('details:not([open])');
+
+    if (!closedDetails) {
+        return elementIsVisible;
+    }
+
+    if (closedDetails !== element) {
+        const summary = element.closest('summary');
+        if (summary && summary.parentNode !== closedDetails) {
+            return false;
+        }
+
+        if (summary === null) {
+            return false;
+        }
+    }
+
+    return elementIsVisible;
+};
+
+/**
+ * Is disabled
+ *
+ * @param 	{DOMElement} element
+ */
+const isDisabled = element => {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+        return true;
+    }
+
+    if (element.classList.contains('disabled')) {
+        return true;
+    }
+
+    if (typeof element.disabled !== 'undefined') {
+        return element.disabled;
+    }
+
+    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+};
+
+/**
  * Reflow DOM Element
  *
  * @param 	{DOMElement} element
@@ -174,4 +227,4 @@ const hasScrollbar = (el) => {
 const isRTL = () => document.documentElement.dir === 'rtl';
 
 // Exports
-export { isElement, getElement, getParents, getTransitionDuration, findShadowRoot, reflow, hasScrollbar, isRTL };
+export { isElement, getElement, getParents, getTransitionDuration, isDisabled, isVisible, findShadowRoot, reflow, hasScrollbar, isRTL };

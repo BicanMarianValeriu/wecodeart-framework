@@ -8,12 +8,14 @@
  */
 const NAME = 'WeCodeArtComponent';
 
+import { executeAfterTransition } from './../helpers';
+
 export default (function (wecodeart) {
 
 	const { Config, Data, Events, version } = wecodeart;
 
 	class Component extends Config {
-		constructor(classDef, element, config) {
+		constructor(element, config) {
 			super();
 
 			if (!element) {

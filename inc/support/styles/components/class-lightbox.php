@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.8
- * @version		6.3.7
+ * @version		6.4.4
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -71,7 +71,7 @@ class Lightbox extends Base {
 				text-align: center;
 				transition: opacity 0.2s ease;
 				cursor: zoom-in;
-				z-index: 100;
+				z-index: 5;
 			}
 			
 			.wp-lightbox-container button:focus-visible {
@@ -107,10 +107,13 @@ class Lightbox extends Base {
 				z-index: 100000;
 			}
 			
+			.has-scrollbar .wp-lightbox-overlay .close-button {
+				right: 1rem;
+			}
 			.wp-lightbox-overlay .close-button {
 				position: absolute;
-				top: calc(env(safe-area-inset-top) + 16px);
-				right: calc(env(safe-area-inset-right) + 16px);
+				top: 0;
+				right: 0;
 				padding: 0;
 				min-width: 40px; 
 				min-height: 40px;
