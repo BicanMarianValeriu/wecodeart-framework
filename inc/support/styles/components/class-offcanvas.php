@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.2.1
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -35,9 +35,8 @@ class OffCanvas extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		$inline = '
-			/* Offcanvas */
-			.offcanvas {
+		return <<<CSS
+			:is(.wp-offcanvas,.offcanvas) {
 				--wp--offcanvas-zindex: 1045;
 				--wp--offcanvas-width: 400px;
 				--wp--offcanvas-height: 30vh;
@@ -58,83 +57,66 @@ class OffCanvas extends Base {
 				z-index: var(--wp--offcanvas-zindex);
 				outline: 0;
 			}
-			.theme-is-dark .offcanvas {
+			:is(.wp-offcanvas,.offcanvas):is(.showing,.show:not(.hiding)) {
+				transform: none;
+			}
+			:is(.wp-offcanvas,.offcanvas):is(.showing,.hiding,.show) {
+				visibility: visible;
+			}
+			.theme-is-dark :is(.wp-offcanvas,.offcanvas) {
 				--wp--offcanvas-color: var(--wp--preset--color--white);
 			}
-			.offcanvas-backdrop {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100vw;
-				height: 100vh;
-				background-color: #000;
-				z-index: 1040;
-			}
-			.offcanvas-backdrop.fade {
-				opacity: 0;
-			}
-			.offcanvas-backdrop.show {
-				opacity: 0.5;
-			}
-			.offcanvas-header {
+			:is(.wp-offcanvas__header,.offcanvas-header) {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 				padding: var(--wp--offcanvas-padding-y) var(--wp--offcanvas-padding-x);
 			}
-			.offcanvas-header .btn-close {
+			:is(.wp-offcanvas__header,.offcanvas-header) :is(.wp-close,.btn-close) {
 				padding: calc(var(--wp--offcanvas-padding-y) * .5) calc(var(--wp--offcanvas-padding-x) * .5);
 				margin-top: calc(-.5 * var(--wp--offcanvas-padding-y));
 				margin-left: calc(-.5 * var(--wp--offcanvas-padding-x));
 				margin-right: calc(-.5 * var(--wp--offcanvas-padding-x));
 				margin-bottom: calc(-.5 * var(--wp--offcanvas-padding-y));
 			}
-			.offcanvas-title {
+			:is(.wp-offcanvas__title,.offcanvas-title) {
 				margin-bottom: 0;
 				line-height: 1.5;
 			} 
-			.offcanvas-body {
+			:is(.wp-offcanvas__body,.offcanvas-body) {
 				flex-grow: 1;
 				padding: var(--wp--offcanvas-padding-y) var(--wp--offcanvas-padding-x);
 				overflow-y: auto;
 			}
-			:where(.offcanvas-start,.offcanvas-end) {
+			:is(.wp-offcanvas--start,.wp-offcanvas--end,.offcanvas-start,.offcanvas-end) {
 				top: 0;
 				width: var(--wp--offcanvas-width);
 			}
-			.offcanvas-start {
+			:is(.wp-offcanvas--start,.offcanvas-start) {
 				left: 0;
-				border-right: 1px solid rgba(0, 0, 0, 0.2);
+				border-right: 1px solid var(--wp--preset--color--accent);
 				transform: translateX(-100%);
 			}
-			.offcanvas-end {
+			:is(.wp-offcanvas--end,.offcanvas-end) {
 				right: 0;
-				border-left: 1px solid rgba(0, 0, 0, 0.2);
+				border-left: 1px solid var(--wp--preset--color--accent);
 				transform: translateX(100%);
 			}
-			:where(.offcanvas-top,.offcanvas-bottom) {
+			:is(.wp-offcanvas--top,.wp-offcanvas--bottom,.offcanvas-top,.offcanvas-bottom) {
 				right: 0;
 				left: 0;
 				height: var(--wp--offcanvas-height);
 				max-height: 100%;
 			}
-			.offcanvas-top {
+			:is(.wp-offcanvas--top,.offcanvas-top) {
 				top: 0;
-				border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+				border-bottom: 1px solid var(--wp--preset--color--accent);
 				transform: translateY(-100%);
 			} 
-			.offcanvas-bottom {
-				border-top: 1px solid rgba(0, 0, 0, 0.2);
+			:is(.wp-offcanvas--bottom,.offcanvas-bottom) {
+				border-top: 1px solid var(--wp--preset--color--accent);
 				transform: translateY(100%);
 			}
-			.offcanvas:is(.showing,.show:not(.hiding)) {
-				transform: none;
-			}
-			.offcanvas:is(.showing,.hiding,.show) {
-				visibility: visible;
-			}
-		';
-
-		return $inline;
+		CSS;
 	}
 }

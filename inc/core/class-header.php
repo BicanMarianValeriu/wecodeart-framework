@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		6.3.7
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Core;
@@ -41,19 +41,19 @@ class Header {
 	 * Output HEADER markup function Plugin PHP fallback
 	 *
 	 * @since 	unknown
-	 * @version	5.6.1
+	 * @version	6.4.5
 	 *
-	 * @return 	void 
+	 * @return 	string 
 	 */
 	public static function markup( $args = [] ) {
 		$args 	= wp_parse_args( $args, [
 			'theme' 	=> wecodeart( 'name' ),
 			'slug' 		=> 'header',
 			'tagName' 	=> 'header',
-			'className'	=> 'wp-site-header sticky-top'
+			'className'	=> 'wp-site-header'
 		] );
 
-		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '"} /-->';
+		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '","style":{"position":{"type":"sticky","top":"0px"}}} /-->';
 
 		echo do_blocks( $content );
 	}

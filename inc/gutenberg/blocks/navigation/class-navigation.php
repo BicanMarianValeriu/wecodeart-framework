@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.2
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -634,7 +634,7 @@ class Navigation extends Dynamic {
 
 				$inline .= "
 					/* Offcanvas */
-					.wp-block-navigation .offcanvas-start .btn-close {
+					.wp-block-navigation .offcanvas-start :is(.wp-close,.btn-close) {
 						margin-left: auto;
 					}
 

@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.1.7
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -35,39 +35,36 @@ class Transition extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		$inline = '
-			/* Transitions */
+		return <<<CSS
 			.fade {
 				transition: opacity 0.15s linear;
 			}
-			
+
 			.fade:not(.show) {
 				opacity: 0;
 			}
-			
+
 			.collapse:not(.show) {
 				display: none;
 			}
-			
+
 			.collapsing {
 				height: 0;
 				overflow: hidden;
 				transition: height 0.35s ease;
 			}
-			
+
 			.collapsing.collapse-horizontal {
 				width: 0;
 				height: auto;
 				transition: width 0.35s ease;
 			}
-			
+
 			@media (prefers-reduced-motion:reduce) {
 				:is(.fade,.collapsing,.collapsing.collapse-horizontal) {
 					transition: none;
 				}
 			}
-        ';
-
-		return $inline;
+		CSS;
 	}
 }

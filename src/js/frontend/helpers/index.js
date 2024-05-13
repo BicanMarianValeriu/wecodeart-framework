@@ -43,7 +43,7 @@ const enableDismissTrigger = (component, method = 'hide') => {
     const clickEvent = `click.dismiss${component.EVENT_KEY}`;
     const name = component.NAME;
 
-    Events.on(document, clickEvent, `[data-bs-dismiss="${name}"]`, function (event) {
+    Events.on(document, clickEvent, `[data-wp-close="${name}"]`, function (event) {
         if (['A', 'AREA'].includes(this.tagName)) {
             event.preventDefault();
         }
@@ -52,7 +52,7 @@ const enableDismissTrigger = (component, method = 'hide') => {
             return;
         }
 
-        const target = this.closest(`.${name}`);
+        const target = this.closest(`.wp-${name}`) || this.closest(`.${name}`);
         const instance = component.getOrCreateInstance(target);
 
         // Method argument is left, for Alert and only, as it doesn't implement the 'hide' method

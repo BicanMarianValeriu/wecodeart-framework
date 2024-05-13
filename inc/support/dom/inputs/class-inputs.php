@@ -9,7 +9,7 @@
  * @subpackage 	DOM\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.1.2
- * @version		6.4.1
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\DOM;
@@ -285,17 +285,17 @@ class Inputs implements Configuration {
 					...wecodeart.routes,
 					wecodeartForms: {
 						complete: () => {
-							const forms = document.querySelectorAll('.needs-validation');
-							Array.prototype.slice.call(forms).forEach((form) => {
+							const { Events, Selector } = wecodeart;
+							Selector.find('.needs-validation').forEach((form) => {
 								let timeout;
 								
-								form.addEventListener('submit', (e) => {
+								Events.on(form, 'submit', (e) => {
 									if (!form.checkValidity()) {
 										e.preventDefault();
 										e.stopPropagation();
 									}
 									
-									form.querySelectorAll('.wpcf7-not-valid-tip,.invalid-feedback,.invalid-tooltip').forEach(el => el.remove());
+									Selector.find('.wpcf7-not-valid-tip,.invalid-feedback,.invalid-tooltip', form).forEach(el => el.remove());
 
 									form.classList.add('was-validated');
 									

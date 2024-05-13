@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.3
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -78,7 +78,6 @@ class Search extends Dynamic {
 		if( get_prop( $attributes, 'buttonPosition', 'button-outside' ) === 'button-only' ) {
 			// Modal
 			$modal = self::get_modal( $attributes, $instance_id );
-			add_action( 'wp_footer', static fn() => printf( $modal ) );
 
 			// Button
 			$content = self::get_button( $attributes, $instance_id );
@@ -138,8 +137,9 @@ class Search extends Dynamic {
 	 * Render Fields
 	 *
 	 * @param 	array 	$attributes 	The block attributes.
+	 * @param 	string 	$instance_id 	The block instance_id.
 	 */
-	private static function get_input( $attributes, $instance_id ) {
+	private static function get_input( array $attributes, string $instance_id ): string {
 		$markup = '';
 
 		// Add search input
@@ -178,29 +178,39 @@ class Search extends Dynamic {
 	 * Render Button
 	 *
 	 * @param 	array 	$attributes 	The block attributes.
+	 * @param 	string 	$instance_id 	The block instance_id.
 	 */
-	private static function get_button( $attributes, $instance_id ) {
+	private static function get_button( array $attributes, string $instance_id ): string {
 		$type = get_prop( $attributes, [ 'buttonPosition' ], 'button-outside' );
 
-		if ( $type === 'no-button' ) return '';
+		if ( $type === 'no-button' ) {
+			return '';
+		}
 
-		wp_enqueue_style( 'wp-block-button' );
+		\wp_enqueue_style( 'wp-block-button' );
 
 		$is_btn = $type === 'button-only';
 		$icon  	= get_prop( $attributes, 'buttonUseIcon' );
 		$label 	= $icon ? wecodeart( 'markup' )->SVG::compile( 'search' ) : get_prop( $attributes, 'buttonText' );
 		$aria	= $is_btn ? __( 'Open search modal', 'wecodeart' ) : wp_strip_all_tags( get_prop( $attributes, 'buttonText' ) );
 
+		$attrs 	= [
+			'type'			=> $is_btn ? 'button' : 'submit',
+			'class' 		=> self::get_classname( $attributes, 'button' ),
+			'aria-label'	=> $aria, 
+		];
+
 		return wecodeart_input( 'button', [
 			'label' => $label,
-			'attrs' => [
-				'type'			=> $is_btn ? 'button' : 'submit',
-				'class' 		=> self::get_classname( $attributes, 'button' ),
-				'aria-label'	=> $aria,
-				'data-bs-toggle'=> $is_btn ? 'modal' : null,
-				'data-bs-target'=> $is_btn ? '#' . $instance_id . '-modal' : null,
-				'aria-controls'	=> $is_btn ? '#' . $instance_id . '-modal' : null,
-			]
+			'attrs' => $is_btn ? wp_parse_args( [
+				'aria-controls'				=> '#' . $instance_id . '-modal',
+				'data-wp-interactive' 		=> 'wecodeart/modal',
+				'data-wp-context' 			=> '{}',
+				'data-wp-init--validate' 	=> 'callbacks.validateConfig',
+				'data-wp-init--setup' 		=> 'callbacks.onInit',
+				'data-wp-on--click' 		=> 'actions.show',
+				'data-wp-on-window--resize' => 'callbacks.onResize',
+			], $attrs ) : $attrs
 		], false ); 
 	}
 
@@ -208,16 +218,17 @@ class Search extends Dynamic {
 	 * Render Modal
 	 *
 	 * @param 	array 	$attributes 	The block attributes.
+	 * @param 	string 	$instance_id 	The block instance_id.
 	 */
-	private static function get_modal( $attributes, $instance_id ) {
+	private static function get_modal( array $attributes, string $instance_id ): string {
 		$attributes = wp_parse_args( [
 			'showLabel'			=> false,
 			'buttonPosition' 	=> 'button-outside'
 		], $attributes );
 
 		return wecodeart_template( 'general/modal', [
-			'id'		=> (string) $instance_id . '-modal',
-			'classes'	=> [ 'modal--search', 'modal--fullscreen:sm', 'fade' ],
+			'id'		=> $instance_id,
+			'classes'	=> [ 'wp-modal--search', 'wp-modal--fullscreen:sm', 'fade' ],
 			'title'		=> get_prop( $attributes, 'label' ),
 			'content' 	=> render_block( [
 				'blockName' => 'core/search',
@@ -233,7 +244,7 @@ class Search extends Dynamic {
 	 *
 	 * @return 	string 	The classnames used in the block.
 	 */
-	private static function get_classname( $attributes, $wrapper = 'wrapper' ) {
+	private static function get_classname( array $attributes, string $wrapper = 'wrapper' ): string {
 		$classnames = [];
 
 		if( $wrapper === 'wrapper' ) {
@@ -298,7 +309,7 @@ class Search extends Dynamic {
 	 *
 	 * @return 	string 	The block styles.
 	 */
-	public function styles() {
+	public function styles(): string {
 		return <<<CSS
 			.wp-block-search {
 				border-width: 0;

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.1
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -153,14 +153,12 @@ class Content extends Dynamic {
 	 * Return the content for No Posts
 	 *
 	 * @since	3.5
-	 * @version	5.1.8
+	 * @version	6.4.5
 	 *
 	 * @return 	string
 	 */
 	public function the_password_form( $template ) {
-		$template = wecodeart_template( 'general/protected', [
-			'action' => home_url( 'wp-login.php?action=postpass', 'login_post' )
-		], false );
+		$template = wecodeart_template( 'general/protected', [], false );
 
 		$template = trim( preg_replace( '/\s+/', ' ', $template ) );
 		$template = preg_replace( '/>\s*</', '><', $template );

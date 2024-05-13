@@ -175,7 +175,7 @@ final class Styles implements Integration {
      * Trim CSS
      *
      * @since 	3.7.7
-     * @version 6.3.7
+     * @version 6.4.5
 	 * 
      * @param 	string $css CSS content to trim.
      *
@@ -188,7 +188,7 @@ final class Styles implements Integration {
         }
 
 		$options = wp_parse_args( $options, [
-			'comments' => false,
+			'comments' => true,
 			'zeroUnit' => false,
 		] );
 
@@ -207,10 +207,10 @@ final class Styles implements Integration {
         // Strips leading 0 on decimal values (converts 0.5px into .5px)
         $css = preg_replace( '/(:| )0\.([0-9]+)(%|em|rem|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
 
-		// Converts all zeros value into shorthand.
-		// $css = preg_replace( '/0 0 0 0/', '0', $css ); // Invalid on data urls
+		// Converts all zeros value into shorthand
+		// $css = preg_replace( '/(:| )0 0 0 0/', '0', $css );
 
-		// Shorten 6-character hex color codes to 3-character where possible.
+		// Shorten 6-character hex color codes to 3-character where possible
 		$css = preg_replace( '/#([a-f0-9])\\1([a-f0-9])\\2([a-f0-9])\\3/i', '#\1\2\3', $css );
 
 		// Strips units if value is 0 (converts 0px to 0)

@@ -8,16 +8,37 @@
  * @package		WeCodeArt Framework
  * @subpackage  OffCanvas
  * @since		5.0.0
- * @version    	6.1.7
+ * @version    	6.4.5
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if( ! wp_script_is( 'wecodeart-support-assets-offcanvas' ) ) {
-    wp_enqueue_script( 'wecodeart-support-assets-offcanvas' );
-}
+use function WeCodeArt\Functions\toJSON;
 
-wecodeart( 'styles' )->Components->load( [ 'offcanvas' ] );
+\wecodeart( 'styles' )->Components->load( [ 'offcanvas' ] );
+
+\wp_enqueue_script( 'wecodeart-support-assets-backdrop' );
+\wp_enqueue_script( 'wecodeart-support-assets-focustrap' );
+
+\wp_enqueue_script_module( '@wecodeart/offcanvas' );
+
+\wp_interactivity_state( 'wecodeart/offcanvas', apply_filters( 'wecodeart/filter/interactive/state/offcanvas', [
+	'backdrop'	=> true,
+	'keyboard'	=> true,
+	'scroll'	=> false,
+	'classes'	=> [
+		'show'		=> 'show',
+		'showing'	=> 'showing',
+		'hiding'	=> 'hiding'
+	]
+] ) );
+	
+\wp_interactivity_config( 'wecodeart/offcanvas', [
+	'backdrop'	=> '(boolean|string)',
+	'keyboard'	=> 'boolean',
+	'scroll'	=> 'boolean',
+	'classes'	=> 'object'
+] );
 
 /**
  * @param   mixed  	$id			Toggle ID
@@ -25,21 +46,18 @@ wecodeart( 'styles' )->Components->load( [ 'offcanvas' ] );
  * @param   string	$content	Offcanvas Content
  */
 
-$classnames = [ 'offcanvas' ];
-
-if( isset( $classes ) && is_array( $classes ) ) {
-	$classnames = array_merge( $classnames, $classes );
-}
+$classnames = [ 'wp-offcanvas', 'offcanvas' ];
+$classnames = array_merge( $classnames, $classes ?? [] );
 
 ?>
-<div class="<?php echo esc_attr( join( ' ', $classnames ) ); ?>" id="<?php echo esc_attr( $id ); ?>">
-	<div class="offcanvas-header">
+<div class="<?php echo esc_attr( join( ' ', $classnames ) ); ?>" id="<?php echo esc_attr( $id ); ?>-offcanvas" >
+	<div class="wp-offcanvas__header offcanvas-header">
 		<?php if( isset( $title ) ) : ?>
-		<h5 class="offcanvas-title"><?php echo esc_html( $title ); ?></h5>
+		<h5 class="wp-offcanvas__title offcanvas-title"><?php echo esc_html( $title ); ?></h5>
 		<?php endif; ?>
-		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<?php esc_attr_e( 'Close', 'wecodeart' ); ?>"></button>
+		<?php wecodeart_template( 'general/close', [ 'close' => 'offcanvas' ] ); ?>
 	</div>
-	<div class="offcanvas-body"><?php
+	<div class="wp-offcanvas__body offcanvas-body"><?php
 
 		// Content markup should be escaped before passing to this view.
 		echo $content;

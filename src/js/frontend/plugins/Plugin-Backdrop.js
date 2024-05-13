@@ -27,11 +27,9 @@ const DefaultType = {
 	rootElement: '(element|string)'
 };
 
-import { execute, executeAfterTransition, getElement, reflow } from './../helpers';
-
 export default (function (wecodeart) {
 
-	const { Config, Events } = wecodeart;
+	const { Config, Events, fn: { execute, executeAfterTransition, getElement, reflow } } = wecodeart;
 
 	/**
 	 * Class definition

@@ -8,23 +8,28 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Login Template
  * @since 	    5.1.8
- * @version	    6.2.1
+ * @version	    6.4.5
  */
 
 defined( 'ABSPATH' ) || exit;
 
 wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
 
+$hooks = [
+    'top'       => apply_filters( 'login_form_top', '', $args ),
+    'middle'    => apply_filters( 'login_form_middle', '', $args ),
+    'bottom'    => apply_filters( 'login_form_bottom', '', $args ),
+]
+
 /**
- * @param   string  $action Contains the form action url
  * @param   array   $args   Contains the form args
  */
 ?>
-<form action="<?php echo esc_url( $action ); ?>" method="post">
+<form class="needs-validation" action="<?php echo esc_url( wp_login_url() ); ?>" method="post" novalidate>
     <?php
     
         // WP Filter
-        echo apply_filters( 'login_form_top', '', $args );
+        echo $hooks['top'];
     
     ?>
     <?php
@@ -33,7 +38,7 @@ wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
             'type'  => 'text',
             'label' => $args['label_username'],
             'attrs' => [
-                'id'        => $args['id_username'],
+                'id'        => $args['id_username'] ?? null,
                 'name'      => 'log',
                 'value'     => $args['value_username'],
                 'size'      => 20,
@@ -47,7 +52,7 @@ wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
             'type'  => 'password',
             'label' => $args['label_password'],
             'attrs' => [
-                'id'        => $args['id_password'],
+                'id'        => $args['id_password'] ?? null,
                 'name'      => 'pwd',
                 'size'      => 20,
                 'required'  => true,
@@ -57,7 +62,7 @@ wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
         ] );
     
         // WP Filter
-        echo apply_filters( 'login_form_middle', '', $args );
+        echo $hooks['middle'];
     
         if( $args['remember'] ) :
     
@@ -65,7 +70,7 @@ wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
             'type'  => 'checkbox',
             'label' => $args['label_remember'],
             'attrs' => [
-                'id'        => $args['id_remember'],
+                'id'        => $args['id_remember'] ?? null,
                 'name'      => 'rememberme',
                 'value'     => 'forever',
                 'class'     => 'form-switch mb-3',
@@ -74,14 +79,16 @@ wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
         ] );
     
         endif;
+
+        $button_class = [ 'wp-block-button', 'wp-block-button--login', ! empty( $hooks['bottom'] ) ? 'mb-3' : '' ];
     ?>
-    <div class="wp-block-button wp-block-button--login mb-3">
+    <div class="<?php echo esc_attr( join( ' ', $button_class ) ); ?>">
     <?php
 
         wecodeart_input( 'submit', [
             'attrs' => [
                 'name'  => false,
-                'id'    => 'wp-submit',
+                'id'    => $args['id_submit'] ?? null,
                 'value' => $args['label_log_in'],
             ]
         ] );
@@ -99,7 +106,7 @@ wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
     <?php
         
         // WP Filter
-        echo apply_filters( 'login_form_bottom', '', $args );
+        echo $hooks['bottom'];
         
     ?>
 </form>

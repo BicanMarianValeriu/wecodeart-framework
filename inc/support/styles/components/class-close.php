@@ -37,7 +37,7 @@ class Close extends Base {
 		$symbol	= encode_svg_data( $symbol );
 
 		return "
-			:where(.btn-close,.wp-close) {
+			:is(.wp-close,[data-wp-close],.btn-close) {
 				--wp--close-color: var(--wp--preset--color--black);
 				--wp--close-icon: transparent url('$symbol') center/1em auto no-repeat;
 				--wp--close-opacity: .5;
@@ -54,23 +54,23 @@ class Close extends Base {
 				cursor: pointer;
 			}
 
-			.theme-is-dark :where(.btn-close,.wp-close) {
+			.theme-is-dark :is(.wp-close,[data-wp-close],.btn-close) {
 				filter: var(--wp--close-white-filter);
 			}
 
-			:where(.btn-close,.wp-close):hover {
+			:is(.wp-close,[data-wp-close],.btn-close):hover {
 				color: var(--wp--close-color);
 				text-decoration: none;
 				opacity: .75;
 			}
 
-			:where(.btn-close,.wp-close):focus {
+			:is(.wp-close,[data-wp-close],.btn-close):focus {
 				outline: 0;
 				box-shadow: 0 0 0 .25rem rgba(35,136,237,0.25);
 				opacity: 1;
 			}
 
-			:where(.btn-close,.wp-close):is(.disabled,:disabled) {
+			:is(.wp-close,[data-wp-close],.btn-close):is(.disabled,:disabled) {
 				pointer-events: none;
 				user-select: none;
 				opacity: .25;

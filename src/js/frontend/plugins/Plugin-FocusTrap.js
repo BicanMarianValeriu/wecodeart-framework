@@ -7,7 +7,7 @@
  * --------------------------------------------------------------------------
  */
 const NAME = 'focustrap';
-const DATA_KEY = 'wp.focustrap';
+const DATA_KEY = `wp.${NAME}`;
 const EVENT_KEY = `.${DATA_KEY}`;
 const EVENT_FOCUSIN = `focusin${EVENT_KEY}`;
 const EVENT_KEYDOWN_TAB = `keydown.tab${EVENT_KEY}`;
@@ -26,11 +26,9 @@ const DefaultType = {
 	trapElement: 'element'
 };
 
-import { execute, executeAfterTransition, getElement, reflow } from '../helpers';
-
 export default (function (wecodeart) {
 
-	const { Config, Events } = wecodeart;
+	const { Config, Events, Selector } = wecodeart;
 
 	/**
 	 * Class definition
@@ -90,7 +88,7 @@ export default (function (wecodeart) {
 				return;
 			}
 
-			const elements = SelectorEngine.focusableChildren(trapElement);
+			const elements = Selector.focusableChildren(trapElement);
 
 			if (elements.length === 0) {
 				trapElement.focus();

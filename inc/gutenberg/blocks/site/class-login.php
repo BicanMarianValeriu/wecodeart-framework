@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.1.8
- * @version		6.4.1
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\{ get_prop, toJSON };
 
 /**
  * Gutenberg Login block.
@@ -91,19 +91,24 @@ class Login extends Dynamic {
 
 				// Get the form.
 				$contents		= wecodeart( 'dom' )::processor( $contents );
+
 				if( $contents->next_tag( [ 'tag_name' => 'a' ] ) ) {
-					$contents->set_attribute( 'href', '#' );
+					$contents->set_attribute( 'href', 'javascript:void(0)' );
 					$contents->set_attribute( 'class', 'nav-link' );
 					$contents->set_attribute( 'aria-label', esc_attr__( 'Open login modal', 'wecodeart' ) );
 					$contents->set_attribute( 'aria-controls', '#' . $instance_id . '-modal' );
-					$contents->set_attribute( 'data-bs-target', '#' . $instance_id . '-modal' );
-					$contents->set_attribute( 'data-bs-toggle', 'modal' );
+					$contents->set_attribute( 'data-wp-interactive', 'wecodeart/modal' );
+					$contents->set_attribute( 'data-wp-context', esc_attr( toJSON( [ 'backdrop' => 'static' ] ) ) );
+					$contents->set_attribute( 'data-wp-init--validate', 'callbacks.validateConfig' );
+					$contents->set_attribute( 'data-wp-init--setup', 'callbacks.onInit' );
+					$contents->set_attribute( 'data-wp-on--click', 'actions.show' );
+					$contents->set_attribute( 'data-wp-on-window--resize', 'callbacks.onResize' );
 				}
+
 				$contents = $contents->get_updated_html();
 	
 				// Modal
-				$modal 			= self::get_modal( $form_html, $instance_id );
-				add_action( 'wp_footer', static fn() => printf( $modal ) );
+				self::get_modal( $form_html, $instance_id, $attributes );
 			} else {
 				$contents = $form_html;
 			}
@@ -129,14 +134,17 @@ class Login extends Dynamic {
 	/**
 	 * Render Modal
 	 *
+	 * @param 	string 	$content 		The block content.
+	 * @param 	string 	$instance_id 	The block instance.
 	 * @param 	array 	$attributes 	The block attributes.
 	 */
-	private static function get_modal( string $content, string $instance_id ) {
+	private static function get_modal( string $content, string $instance_id, array $attributes ): string {
 		return wecodeart_template( 'general/modal', [
-			'id'		=> (string) $instance_id . '-modal',
-			'classes'	=> [ 'modal--login', 'modal--fullscreen:sm', 'fade' ],
-			'title'		=> esc_html__( 'Log In', 'wecodeart' ),
+			'id'		=> $instance_id,
+			'classes'	=> [ 'wp-modal--login', 'wp-modal--fullscreen:sm', 'fade' ],
+			'title'		=> get_prop( $attributes, [ 'metadata', 'name' ] ) ?: esc_html__( 'Log In', 'wecodeart' ),
 			'content' 	=> $content,
+			// 'content' 	=> $content . '<a aria-controls="#wp-login-58-modal" data-wp-interactive="wecodeart/modal" data-wp-context="{}" data-wp-init--validate="callbacks.validateConfig" data-wp-init--setup="callbacks.onInit" data-wp-on-window--resize="callbacks.onResize" data-wp-on--click="actions.show">trigger</a>',
 		], false );
 	}
 
@@ -156,10 +164,10 @@ class Login extends Dynamic {
 			'label_password' => esc_html__( 'Password', 'wecodeart'  ),
 			'label_remember' => esc_html__( 'Remember Me', 'wecodeart'  ),
 			'label_log_in'   => esc_html__( 'Log In', 'wecodeart'  ),
-			'id_username'    => 'user_login',
-			'id_password'    => 'user_pass',
-			'id_remember'    => 'rememberme',
-			'id_submit'      => 'wp-submit',
+			// 'id_username'    => 'user_login',
+			// 'id_password'    => 'user_pass',
+			// 'id_remember'    => 'rememberme',
+			// 'id_submit'      => 'wp-submit',
 			'remember'       => true,
 			'value_username' => '',
 			'value_remember' => false,
@@ -167,8 +175,7 @@ class Login extends Dynamic {
 
 		// We use same filters as WP - plugins will hook into those.
 		return wecodeart_template( 'general/login', [
-			'action' 	=> home_url( 'wp-login.php', 'login_post' ),
-			'args'		=> wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) )
+			'args' => wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) )
 		], $echo );
 	}
 

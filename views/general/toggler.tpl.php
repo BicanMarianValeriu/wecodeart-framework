@@ -6,12 +6,14 @@
  * Please do all modifications in the form of a child theme.
  *
  * @package 	WeCodeArt Framework
- * @subpackage  Navbar Toggler HTML
+ * @subpackage  Toggler HTML
  * @since	 	5.0.0
- * @version    	6.1.7
+ * @version    	6.4.5
  */
 
 defined( 'ABSPATH' ) || exit;
+
+use function WeCodeArt\Functions\toJSON;
 
 wecodeart( 'styles' )->Components->load( [ 'toggler' ] );
 
@@ -21,11 +23,46 @@ wecodeart( 'styles' )->Components->load( [ 'toggler' ] );
  * @param   mixed	$icon		Toggle Icon
  */
 
+$type 	= $type ?? 'offcanvas';
+$label	= $label ?? __( 'Menu', 'wecodeart' );
+
 ?>
-<button type="button" class="navbar-toggler" data-bs-toggle="<?php echo esc_attr( $toggle ); ?>" data-bs-target="#<?php echo esc_attr( $id ); ?>" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'wecodeart' ); ?>">
-	<?php if ( $icon ) : ?>
+<button 
+	type="button"
+	<?php switch( $type ) : 
+		case 'offcanvas':
+	?>
+	class="navbar-toggler"
+	data-wp-interactive="wecodeart/offcanvas" 
+	data-wp-context="<?php echo esc_attr( toJSON( [ 'isOpen' => false ] ) ); ?>"
+	data-wp-init--validate="callbacks.validateConfig"
+	data-wp-init--setup="callbacks.onInit"
+	data-wp-bind--aria-expanded="context.isOpen",
+	data-wp-on--click="actions.toggle"
+	aria-label="<?php esc_attr_e( 'Toggle navigation', 'wecodeart' ); ?>"
+	aria-controls="#<?php echo esc_attr( $id ); ?>-offcanvas"
+	<?php
+		break;
+		case 'collapse':
+	?>
+	class="wp-element-button has-accent-background-color has-dark-color collapsed"
+	data-wp-interactive="wecodeart/collapse" 
+	data-wp-context="<?php echo esc_attr( toJSON( [ 'isOpen' => false ] ) ); ?>"
+	data-wp-bind--aria-label="state.ariaLabel",
+	data-wp-bind--aria-expanded="context.isOpen",
+	data-wp-class--collapsed="!context.isOpen",
+	data-wp-on--click="actions.toggle"
+	aria-label="<?php esc_attr_e( 'Open item', 'wecodeart' ); ?>"
+	aria-controls="#<?php echo esc_attr( $id ); ?>-content"
+	<?php 
+		break;
+	endswitch; ?>
+	aria-expanded="false"
+	id="<?php echo esc_attr( $id ); ?>-toggle"
+>
+	<?php if ( $icon ?? false ) : ?>
 	<span class="navbar-toggler-icon"></span>
 	<?php else : ?>
-	<span class="navbar-toggler-text"><?php esc_html_e( 'Menu', 'wecodeart' ); ?></span>
+	<span><?php echo esc_html( $label ); ?></span>
 	<?php endif; ?>
 </button>

@@ -6,7 +6,8 @@
  * @version 1.0.0
  * --------------------------------------------------------------------------
  */
-import { sanitizeHtml, DefaultAllowlist, execute, isElement } from '../helpers';
+
+import { DefaultAllowlist } from './../helpers/sanitizer';
 
 const NAME = 'TemplateFactory';
 
@@ -37,7 +38,7 @@ const DefaultContentType = {
 
 export default (function (wecodeart) {
 
-	const { Config } = wecodeart;
+	const { Config, fn: { sanitizeHtml, execute, isElement } } = wecodeart;
 
 	class Template extends Config {
 		constructor(config) {

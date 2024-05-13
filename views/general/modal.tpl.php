@@ -8,16 +8,31 @@
  * @package		WeCodeArt Framework
  * @subpackage  Modal
  * @since		6.1.5
- * @version    	6.1.7
+ * @version    	6.4.5
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if( ! wp_script_is( 'wecodeart-support-assets-modal' ) ) {
-    wp_enqueue_script( 'wecodeart-support-assets-modal' );
-}
+use function WeCodeArt\Functions\toJSON;
 
-wecodeart( 'styles' )->Components->load( [ 'modal' ] );
+\wecodeart( 'styles' )->Components->load( [ 'modal' ] );
+
+\wp_enqueue_script( 'wecodeart-support-assets-backdrop' );
+\wp_enqueue_script( 'wecodeart-support-assets-focustrap' );
+
+\wp_enqueue_script_module( '@wecodeart/modal' );
+
+\wp_interactivity_state( 'wecodeart/modal', apply_filters( 'wecodeart/filter/interactive/state/modal', [
+	'backdrop'	=> true,
+	'focus'	    => true,
+	'keyboard'	=> true,
+] ) );
+	
+\wp_interactivity_config( 'wecodeart/modal', [
+	'backdrop'	=> '(boolean|string)',
+	'focus'	    => 'boolean',
+	'keyboard'	=> 'boolean',
+] );
 
 /**
  * @param   mixed  	$id			Modal ID
@@ -25,31 +40,36 @@ wecodeart( 'styles' )->Components->load( [ 'modal' ] );
  * @param   string	$content	Modal Content
  */
 
-$classnames = [ 'modal' ];
+$classnames = [ 'wp-modal' ]; 
+$classnames = array_merge( $classnames, $classes ?? [] ); 
 
-if( isset( $classes ) && is_array( $classes ) ) {
-	$classnames = array_merge( $classnames, $classes );
-}
+$title      = $title ?? false;
+$content    = $content ?? false;
+$footer     = $footer ?? false;
 
+// Allways goes to footer
+\add_action( 'wp_footer', static function() use ( $classnames, $id, $title, $content, $footer ) {
 ?>
-<div class="<?php echo esc_attr( join( ' ', $classnames) ); ?>" tabindex="-1" id="<?php echo esc_attr( $id ); ?>" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <?php if( isset( $title ) && ! empty( $title ) ) : ?>
-                <h5 class="modal-title"><?php echo esc_html( $title ); ?></h5>
+<div class="<?php echo esc_attr( join( ' ', $classnames) ); ?>" id="<?php echo esc_attr( $id ); ?>-modal" aria-hidden="true" tabindex="-1">
+    <div class="wp-modal__dialog modal-dialog">
+        <div class="wp-modal__content modal-content">
+            <div class="wp-modal__header modal-header">
+                <?php if( ! empty( $title ) ) : ?>
+                <h5 class="wp-modal__title modal-title"><?php echo esc_html( $title ); ?></h5>
                 <?php endif; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Close', 'wecodeart' ); ?>"></button>
+                <?php wecodeart_template( 'general/close', [ 'close' => 'modal' ] ); ?>
             </div>
-            <div class="modal-body"><?php
+            <div class="wp-modal__body modal-body"><?php
             
                 // Content markup should be escaped before passing to this view.
                 echo $content;
                 
             ?></div>
-            <?php if( isset( $footer ) ) : ?>
-            <div class="modal-footer"><?php echo wp_kses_post( $footer ); ?></div>
+            <?php if( $footer ) : ?>
+            <div class="wp-modal__footer modal-footer"><?php echo wp_kses_post( $footer ); ?></div>
             <?php endif; ?>
         </div>
     </div>
 </div>
+<?php
+}, 0 );

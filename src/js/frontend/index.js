@@ -6,6 +6,8 @@ import {
 	noop,
 	toType,
 	isRTL,
+	isDisabled,
+	isVisible,
 	isElement,
 	getElement,
 	getParents,
@@ -22,17 +24,16 @@ import {
 	executeAfterTransition,
 	camelCase,
 	requireJs,
-	enableDismissTrigger
+	enableDismissTrigger,
 } from './helpers';
 
 // WeCodeArt
 import './plugins/wecodeart-Scripts';
-import './plugins/wecodeart-Events';
 import './plugins/wecodeart-Data';
+import './plugins/wecodeart-Events';
+import './plugins/wecodeart-Selector';
 import './plugins/wecodeart-Config';
 import './plugins/wecodeart-Component';
-import './plugins/wecodeart-Backdrop';
-import './plugins/wecodeart-Template';
 
 // Styles
 import './../../scss/frontend/frontend.scss';
@@ -58,6 +59,8 @@ function filterLog(route, func, args) {
 		noop,
 		toType,
 		isRTL,
+		isDisabled,
+		isVisible,
 		isElement,
 		getElement,
 		getParents,

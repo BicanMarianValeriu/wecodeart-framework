@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.1
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -201,8 +201,11 @@ class Link extends Dynamic {
 	 * @return 	array
 	 */
 	public function get_link_attributes( $attributes, $block, $extras ): array {
-		// Default links
-		$is_active	= get_queried_object_id() === get_prop( $attributes, [ 'id' ] );
+		$current_object = get_queried_object_id();
+		
+		$is_active  = $current_object === get_prop( $attributes, [ 'id' ] );
+		$same_url 	= $current_object && get_permalink( $current_object ) === trailingslashit( get_prop( $attributes, [ 'url' ], '' ) );
+		$is_active	= $is_active ?: $same_url;
 		$classes 	= [ 'wp-block-navigation-item__content', 'nav-link' ];
 			
 		if( $is_active ) {
@@ -338,7 +341,7 @@ class Link extends Dynamic {
 			.nav-link:is(:focus,:hover) {
 				outline: none;
 			}
-			.disabled>.nav-link,
+			.disabled > .nav-link,
 			.nav-link.disabled {
 				color: var(--wp--nav-link-disabled-color);
 				pointer-events: none;

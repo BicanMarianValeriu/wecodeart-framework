@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.4.5
- * @version		6.3.7
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support;
@@ -23,7 +23,7 @@ use WeCodeArt\Config\Traits\{ Singleton, No_Conditionals };
 use function WeCodeArt\Functions\get_prop;
 
 /**
- * The Fonts object.
+ * The Locale object.
  */
 final class Locale implements Integration {
 
@@ -44,7 +44,7 @@ final class Locale implements Integration {
 	 * Load Translations
 	 *
 	 * @since	5.4.5
-	 * @version 5.4.5
+	 * @version 6.4.5
 	 *
 	 * @return 	void
 	 */
@@ -52,14 +52,14 @@ final class Locale implements Integration {
 		$paths 	= wecodeart_config( 'paths' );
 		$lang 	= wecodeart_config( 'directories' )['languages'];
 
-		// Loads wp-content/languages/themes/wecodeart-it_IT.mo.
-		load_theme_textdomain( 'wecodeart', trailingslashit( WP_LANG_DIR ) . 'themes' );
-
 		// Loads wp-content/themes/child-theme-name/languages/it_IT.mo.
 		load_theme_textdomain( 'wecodeart', $paths['child'] . $lang );
 
 		// Loads wp-content/themes/wecodeart/languages/it_IT.mo.
 		load_theme_textdomain( 'wecodeart', $paths['directory'] . $lang );
+
+		// Loads wp-content/languages/themes/wecodeart-it_IT.mo.
+		load_theme_textdomain( 'wecodeart', trailingslashit( WP_LANG_DIR ) . 'themes' );
 	}
 
 	/**
@@ -73,7 +73,9 @@ final class Locale implements Integration {
 
 		$current_lang = get_user_locale();
 
-		if( in_array( $current_lang, $translated ) ) return;
+		if( in_array( $current_lang, $translated ) ) {
+			return;
+		}
 
 		require_once ABSPATH . 'wp-admin/includes/translation-install.php';
 		$translations = wp_get_available_translations();
@@ -86,7 +88,9 @@ final class Locale implements Integration {
 			];
 		}
 
-		if( empty( $translation ) ) return;
+		if( empty( $translation ) ) {
+			return;
+		}
 
 		$language_link 	= sprintf( '//translate.wordpress.org/projects/wp-themes/wecodeart/%s/default/', get_prop( $translation, [ 'lang' ] ) );
 		

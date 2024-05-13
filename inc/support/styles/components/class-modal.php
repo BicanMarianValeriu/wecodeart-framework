@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.2.8
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -43,7 +43,7 @@ class Modal extends Base {
 		
 		$inline = '
 			/* Modal */
-			.modal {
+			:where(.wp-modal,.modal) {
 				--wp--modal-zindex: 1055;
 				--wp--modal-width: 500px;
 				--wp--modal-padding: 1rem;
@@ -78,30 +78,31 @@ class Modal extends Base {
 				outline: 0;
 				z-index: var(--wp--modal-zindex);
 				backdrop-filter: var(--wp--modal-backdrop-filter);
+				/* pointer-events: none; */
 			}
 
-			.theme-is-dark .modal {
+			.theme-is-dark :where(.wp-modal,.modal) {
 				--wp--modal-bg: rgb(var(--wp--background--rgb, 0,0,0));
 				--wp--modal-color: var(--wp--preset--color--white);
 			}
 			
-			.modal-dialog {
+			:where(.wp-modal__dialog,.modal-dialog) {
 				position: relative;
 				width: auto;
 				margin: var(--wp--modal-margin);
 				pointer-events: none;
 			}
 			
-			.modal.fade .modal-dialog {
+			:where(.wp-modal,.modal).fade :where(.wp-modal__dialog,.modal-dialog) {
 				transition: transform 0.3s ease-out;
 				transform: translate(0, -50px);
 			}
 			
-			.modal.show .modal-dialog {
+			:where(.wp-modal,.modal).show :where(.wp-modal__dialog,.modal-dialog) {
 				transform: none;
 			}
 			
-			.modal.modal-static .modal-dialog {
+			:where(.wp-modal--static,.modal-static) :is(.wp-modal__dialog,.modal-dialog) {
 				transform: scale(1.02);
 			}
 			
@@ -124,7 +125,7 @@ class Modal extends Base {
 				min-height: calc(100% - var(--wp--modal-margin) * 2);
 			}
 			
-			.modal-content {
+			:where(.wp-modal__content,.modal-content) {
 				position: relative;
 				display: flex;
 				flex-direction: column;
@@ -138,28 +139,7 @@ class Modal extends Base {
 				outline: 0;
 			}
 			
-			.modal-backdrop {
-				--wp--backdrop-zindex: 1050;
-				--wp--backdrop-bg: #000;
-				--wp--backdrop-opacity: 0.5;
-				position: fixed;
-				top: 0;
-				left: 0;
-				z-index: var(--wp--backdrop-zindex);
-				width: 100vw;
-				height: 100vh;
-				background-color: var(--wp--backdrop-bg);
-			}
-			
-			.modal-backdrop.fade {
-				opacity: 0;
-			}
-			
-			.modal-backdrop.show {
-				opacity: var(--wp--backdrop-opacity);
-			}
-			
-			.modal-header {
+			:where(.wp-modal__header,.modal-header) {
 				display: flex;
 				flex-shrink: 0;
 				align-items: center;
@@ -171,25 +151,25 @@ class Modal extends Base {
 				background-color: var(--wp--modal-header-bg);
 			}
 			
-			.modal-header .btn-close {
+			:where(.wp-modal__header,.modal-header) :is(.wp-close,.btn-close) {
 				padding: calc(var(--wp--modal-header-padding-y) * 0.5) calc(var(--wp--modal-header-padding-x) * 0.5);
 				margin: calc(-0.5 * var(--wp--modal-header-padding-y)) calc(-0.5 * var(--wp--modal-header-padding-x)) calc(-0.5 * var(--wp--modal-header-padding-y)) auto
 			}
 			
-			.modal-title {
+			:where(.wp-modal__title,.modal-title) {
 				margin-top: 0;
 				margin-bottom: 0;
 				font-weight: 400;
 				line-height: var(--wp--modal-title-line-height)
 			}
 			
-			.modal-body {
+			:where(.wp-modal__body,.modal-body) {
 				position: relative;
 				flex: 1 1 auto;
 				padding: var(--wp--modal-padding)
 			}
 			
-			.modal-footer {
+			:where(.wp-modal__footer,.modal-footer) {
 				display: flex;
 				flex-shrink: 0;
 				flex-wrap: wrap;
@@ -202,28 +182,28 @@ class Modal extends Base {
 				border-bottom-left-radius: var(--wp--modal-inner-border-radius)
 			}
 			
-			.modal-footer > * {
+			:where(.wp-modal__footer,.modal-footer) > * {
 				margin: calc(var(--wp--modal-footer-gap) * 0.5)
 			}
 			
-			.modal--fullscreen {
+			:where(.wp-modal--fullscreen,.modal--fullscreen) {
 				width: 100vw;
 				max-width: none;
 				height: 100%;
 				margin: 0
 			}
 			
-			.modal--fullscreen .modal-content {
+			:where(.wp-modal--fullscreen,.modal--fullscreen) :is(.wp-modal__content,.modal-content) {
 				height: 100%;
 				border: 0;
 				border-radius: 0
 			}
 			
-			.modal--fullscreen :where(.modal-header,.modal-footer) {
+			:where(.wp-modal--fullscreen,.modal--fullscreen) :is(.wp-modal__header,.wp-modal__footer,.modal-header,.modal-footer) {
 				border-radius: 0
 			}
 			
-			.modal--fullscreen .modal-body {
+			:where(.wp-modal--fullscreen,.modal--fullscreen) :is(.wp-modal__body,.modal-body) {
 				overflow-y: auto
 			}
         ';
@@ -232,24 +212,24 @@ class Modal extends Base {
 		foreach( $breaks as $key => $value ) {
 			$inline .= "
 				@media (max-width:{$value}) {
-					.modal--fullscreen\:{$key} .modal-dialog {
+					:where(.wp-modal--fullscreen\:{$key},.modal--fullscreen\:{$key}) :where(.wp-modal__dialog,.modal-dialog) {
 						width: 100vw;
 						max-width: none;
 						height: 100%;
 						margin: 0;
 					}
 				
-					.modal--fullscreen\:{$key} .modal-content {
+					:where(.wp-modal--fullscreen\:{$key},.modal--fullscreen\:{$key}) :where(.wp-modal__content,.modal-content) {
 						height: 100%;
 						border: 0;
 						border-radius: 0;
 					}
 				
-					.modal--fullscreen\:{$key} :where(.modal-header,.modal-footer) {
+					:where(.wp-modal--fullscreen\:{$key},.modal--fullscreen\:{$key}) :where(.wp-modal__header,.wp-modal__footer,.modal-header,.modal-footer) {
 						border-radius: 0;
 					}
 				
-					.modal--fullscreen\:{$key} .modal-body {
+					:where(.wp-modal--fullscreen\:{$key},.modal--fullscreen\:{$key}) :where(.wp-modal__body,.modal-body) {
 						overflow-y: auto;
 					}
 				}
@@ -259,32 +239,31 @@ class Modal extends Base {
 		// Sizes
 		$inline .= "
 			@media (min-width:{$break_sm}) {
-				.modal {
+				:where(.wp-modal,.modal) {
 					--wp--modal-margin: 1.75rem;
 					--wp--modal-box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.15);
-					--wp--modal-backdrop-filter: blur(15px);
+					--wp--modal-backdrop-filter: blur(5px);
 				}
 			
-				.modal-dialog {
+				:where(.wp-modal__dialog,.modal-dialog) {
 					max-width: var(--wp--modal-width);
 					margin-right: auto;
 					margin-left: auto;
 				}
 			
-				.modal-sm {
+				:where(.wp-modal--sm,.modal-sm) {
 					--wp--modal-width: 300px;
 				}
 			}
 			
 			@media (min-width:{$break_lg}) {
-				.modal-lg,
-				.modal-xl {
+				:where(.wp-modal--lg,.wp-modal--xl,.modal-lg,.modal-xl) {
 					--wp--modal-width: 800px;
 				}
 			}
 			
 			@media (min-width:{$break_xl}) {
-				.modal-xl {
+				:where(.wp-modal--xl,.modal-xl) {
 					--wp--modal-width: 1140px;
 				}
 			}
@@ -293,7 +272,7 @@ class Modal extends Base {
 		// Reduce Motion
 		$inline .= '
 			@media (prefers-reduced-motion:reduce) {
-				.modal.fade .modal-dialog {
+				:where(.wp-modal,.modal).fade :is(.wp-modal__dialog,.modal-dialog) {
 					transition: none;
 				}
 			}

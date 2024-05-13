@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		3.5
- * @version		6.3.7
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Core;
@@ -40,11 +40,11 @@ class Footer {
 	 * Output FOOTER markup function Plugin PHP fallback
 	 * 
 	 * @since 	1.0
-	 * @version	5.6.1
+	 * @version	6.4.5
 	 *
-	 * @return 	HTML 
+	 * @return 	string 
 	 */
-	public function markup( $args = [] ) {
+	public static function markup( $args = [] ) {
 		$args 	= wp_parse_args( $args, [
 			'theme' 	=> wecodeart( 'name' ),
 			'slug' 		=> 'footer',

@@ -9,7 +9,7 @@
  * @subpackage  Setup
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.9.5
- * @version		6.4.1
+ * @version		6.4.5
  */
 
 use function WeCodeArt\Functions\get_prop;
@@ -136,6 +136,34 @@ wecodeart()->bind( 'ifso', function () {
 } );
 
 /**
+ * Bind Debug.
+ *
+ * @since   6.4.5
+ *
+ * @return  void
+ */
+wecodeart()->bind( 'debug', function () {
+    return wecodeart( 'support' )->get( 'debug' )::get_instance();
+} );
+
+/**
+ * Bind Toasts.
+ *
+ * @since   6.4.5
+ *
+ * @return string
+ */
+wecodeart()->bind( 'toasts', function () {
+    static $toasts;
+
+	if ( is_null( $toasts ) ) {
+        $toasts = \wecodeart_template( 'general/toast', [], false );
+	}
+
+    return $toasts;
+} );
+
+/**
  * Bind ThemeName.
  *
  * @since   3.9.5
@@ -160,14 +188,14 @@ wecodeart()->bind( 'name', function () {
  * Bind Version.
  *
  * @since   3.9.5
- * @version 6.1.2
+ * @version 6.4.5
  *
  * @return string
  */
 wecodeart()->bind( 'version', function () {
-    // if ( wecodeart_if( 'is_dev_mode' ) ) {
-	// 	return (string) time();
-	// }
+    if ( wecodeart_if( 'is_debug_mode' ) ) {
+		return (string) time();
+	}
 
 	static $version;
 
@@ -193,36 +221,42 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
     if( empty( $parameters ) ) {
         $parameters = [ 'header', 'content', 'footer' ];
     }
+
+    $parameters = array_reduce( array_keys( $parameters ), function( $carry, $key ) use ( $parameters ) {
+        $carry[is_int($key) ? $parameters[$key] : $key] = $parameters[$key];
+
+        return $carry;
+    }, [] );
     
     ob_start();
 
-    array_map( function( $partial ) {
+    array_map( function( $partial ) use( $parameters ) {
         switch( $partial ) {
             case 'header' :
                 /**
                  * @see - WeCodeArt\Core\Header::markup();
                  */
-                do_action( 'wecodeart/header' );
+                do_action( 'wecodeart/header', $parameters[$partial] );
                 break;
 
             case 'content' :
                 /**
                  * @see - WeCodeArt\Core\Content::markup();
                  */
-                do_action( 'wecodeart/content' );
+                do_action( 'wecodeart/content', (string) $parameters[$partial] !== $partial ? $parameters[$partial] : '' );
                 break;
 
             case 'footer' :
                 /**
                  * @see - WeCodeArt\Core\Footer::markup();
                  */
-                do_action( 'wecodeart/footer' );
+                do_action( 'wecodeart/footer', $parameters[$partial] );
                 break;
 
             default: 
                 return is_callable( $partial ) && call_user_func( $partial );
         }
-    }, $parameters );
+    }, array_keys( $parameters ) );
     
     $inner = ob_get_clean();
 
@@ -241,9 +275,7 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
         </head>
         <body <?php body_class(); ?>>
             <?php wp_body_open(); ?>
-            <div class="wp-site-blocks">
-            <?php echo $inner; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-            </div>
+            <div class="wp-site-blocks"><?php echo $inner; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
             <?php wp_footer(); ?>
         </body>
     </html>

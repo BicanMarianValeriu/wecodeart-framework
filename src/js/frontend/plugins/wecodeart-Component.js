@@ -6,8 +6,6 @@
  * @version 1.0.0
  * --------------------------------------------------------------------------
  */
-const NAME = 'WeCodeArtComponent';
-
 import { executeAfterTransition } from './../helpers';
 
 export default (function (wecodeart) {
@@ -58,10 +56,6 @@ export default (function (wecodeart) {
 
 		static getOrCreateInstance(element, config = {}) {
 			return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
-		}
-
-		static get NAME() {
-			return NAME;
 		}
 
 		static get VERSION() {

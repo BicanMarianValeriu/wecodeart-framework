@@ -42,14 +42,14 @@ class Backdrop extends Base {
 				left: 0;
 				width: 100vw;
 				height: 100vh;
-				background-color: var(--wp--preset--color--black);
-				z-index: 1040;
+				background-color: var(--wp--backdrop--background,var(--wp--preset--color--black, #000));
+				z-index: var(--wp--backdrop--zindex, 1040);
 			}
 			.wp-backdrop.fade {
 				opacity: 0;
 			}
 			.wp-backdrop.show {
-				opacity: .5;
+				opacity: var(--wp--backdrop--opacity, .5);
 			}
 		CSS;
 	}

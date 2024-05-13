@@ -7,7 +7,7 @@
  * --------------------------------------------------------------------------
  */
 const NAME = 'toast';
-const DATA_KEY = 'wp.toast';
+const DATA_KEY = `wp.${NAME}`;
 const EVENT_KEY = `.${DATA_KEY}`;
 
 const EVENT_MOUSEOVER = `mouseover${EVENT_KEY}`;
@@ -36,11 +36,9 @@ const Default = {
     delay: 5000
 };
 
-import { reflow, enableDismissTrigger } from '../helpers';
-
 export default (function (wecodeart) {
 
-    const { Component, Events } = wecodeart;
+    const { Component, Events, fn: { reflow, enableDismissTrigger } } = wecodeart;
 
     /**
      * Class definition

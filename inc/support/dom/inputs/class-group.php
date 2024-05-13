@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.4.1
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\DOM\Inputs;
@@ -120,9 +120,11 @@ class Group extends Basic {
     public function input_class(): string {
         $classes = explode( ' ', get_prop( $this->attrs, [ 'class' ], '' ) );
         
-        if( ! array_intersect_key( [ 'input-group' ], array_flip( $classes ) ) ) $classes[] = 'input-group';
+        if( ! array_intersect_key( [ 'input-group' ], array_flip( $classes ) ) ) {
+            $classes[] = 'input-group';
+        }
 
-        return implode( ' ', $classes );
+        return implode( ' ', array_filter( $classes ) );
     }
 
     /**

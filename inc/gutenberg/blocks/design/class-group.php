@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.4.4
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -176,7 +176,7 @@ class Group extends Dynamic {
 	 * @return 	string 	The block updated markup.
 	 */
 	public static function create_marquee( array $attributes, string $content ): string {
-		$dom 	= wecodeart( 'dom' )::create( (string) $content );
+		$dom 	= wecodeart( 'dom' )::create( $content );
 		$div 	= wecodeart( 'dom' )::get_element( 'div', $dom );
 		$wrap	= wecodeart( 'dom' )::create_element( 'div', $dom );
 		$wrap->setAttribute( 'class', 'wp-block-group__marquee' );
@@ -257,6 +257,11 @@ class Group extends Dynamic {
 		$itemID 	= wp_unique_id( 'wp-collapse-' );
 		$isHidden 	= '';
 		$isDisplay 	= '';
+		$toggler 	= [
+			'type' 	=> 'collapse',
+			'label'	=> $ariaLabel,
+			'id'	=> $itemID
+		];
 
 		// Regular expression to match the specific class pattern
 		$pattern = '/\b(d-(sm|md|lg|xl|xxl)-(block|flex|grid|inline-block))\b/';
@@ -271,26 +276,16 @@ class Group extends Dynamic {
 		$div 	= wecodeart( 'dom' )::get_element( strtolower( $tagName ), $dom );
 
 		// Toggle
-		$toggl	= wecodeart( 'dom' )::create_element( 'button', $dom );
-		$toggl->nodeValue = $ariaLabel;
-		$dom->insertBefore( $toggl, $dom->firstChild );
+		$toggler 	= wecodeart_template( 'general/toggler', $toggler, false );
+		$toggler	= wecodeart( 'dom' )::create( $toggler );
+		$toggler 	= wecodeart( 'dom' )::get_element( 'button', $toggler );
+
+		$dom->insertBefore( $dom->importNode( $toggler, true ), $dom->firstChild );
 
 		$p = wecodeart( 'dom' )::processor( $dom->saveHTML() );
 
 		// Button
 		$p->next_tag( [ 'tag_name' => 'button' ] );
-		$p->set_attribute( 'data-wp-interactive', 'wecodeart/collapse' );
-		$p->set_attribute( 'data-wp-context', toJSON( [ 'isOpen' => false ] ) );
-		$p->set_attribute( 'data-wp-bind--aria-label', 'state.ariaLabel' );
-		$p->set_attribute( 'data-wp-bind--aria-expanded', 'context.isOpen' );
-		$p->set_attribute( 'data-wp-on--click', 'actions.toggle' );
-		$p->set_attribute( 'data-wp-class--collapsed', '!context.isOpen' );
-		$p->set_attribute( 'aria-controls', $itemID . '-content' );
-		$p->set_attribute( 'aria-label', esc_html__( 'Open item', 'wecodeart' ) );
-		$p->set_attribute( 'aria-expanded', 'false' );
-		$p->set_attribute( 'id', $itemID . '-toggle' );
-		$p->set_attribute( 'type', 'button' );
-		$p->add_class( 'wp-element-button has-accent-background-color has-dark-color collapsed' );
 		$p->add_class( $isHidden );
 			
 		\wecodeart( 'styles' )->Utilities->load( [ $isHidden ] );

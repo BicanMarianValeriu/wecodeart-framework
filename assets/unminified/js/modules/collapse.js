@@ -40,7 +40,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             }
 
             const { ref } = getElement();
-            const collapsedEl = document.getElementById(ref.getAttribute('aria-controls'));
+            const collapsedEl = document.querySelector(ref.getAttribute('aria-controls'));
 
             const startEvent = Events.trigger(collapsedEl, EVENT_SHOW);
             if (startEvent.defaultPrevented) {
@@ -74,7 +74,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             }
 
             const { ref } = getElement();
-            const collapsedEl = document.getElementById(ref.getAttribute('aria-controls'));
+            const collapsedEl = document.querySelector(ref.getAttribute('aria-controls'));
 
             const startEvent = Events.trigger(collapsedEl, EVENT_HIDE);
             if (startEvent.defaultPrevented) {

@@ -14,6 +14,7 @@ const DefaultAllowlist = {
 	// Global attributes allowed on any supplied element below.
 	'*': ['class', 'dir', 'id', 'lang', 'role', PATTERN_ARIA_ATTRIBUTE],
 	a: ['target', 'href', 'title', 'rel'],
+	button: ['type', 'data-wp-close'],
 	area: [],
 	b: [],
 	br: [],

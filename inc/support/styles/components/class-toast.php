@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.4.4
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -36,22 +36,23 @@ class Toast extends Base {
 	 */
 	public static function styles(): string {
 		return <<<CSS
-			:where(.toast,.wp-toast) {
+			:where(.wp-toast,.toast) {
 				--wp--toast-zindex: 1090;
 				--wp--toast-padding-x: 0.75rem;
 				--wp--toast-padding-y: 0.5rem;
 				--wp--toast-spacing: var(--wp--style--block-gap);
 				--wp--toast-max-width: 350px;
 				--wp--toast-font-size: var(--wp--preset--font-size--small);
-				--wp--toast-color: ;
-				--wp--toast-bg: rgba(255,255,255,.85);
+				--wp--toast-color: inherit;
+				--wp--toast-bg: var(--wp--preset--color--accent);
 				--wp--toast-border-width: 1px;
-				--wp--toast-border-color: var(--wp--preset--color--accent);
+				--wp--toast-border-color: rgba(var(--wp--background--rgb, 200, 200, 200), .5);
 				--wp--toast-border-radius: .25rem;
 				--wp--toast-box-shadow: var(--wp--preset--shadow--natural);
-				--wp--toast-header-color: var(--wp--preset--color--dark);
-				--wp--toast-header-bg: rgba(255,255,255,.85);
-				--wp--toast-header-border-color: var(--wp--preset--color--accent);
+				--wp--toast-header-color: inherit;
+				--wp--toast-header-bg: transparent;
+				--wp--toast-header-border-color: var(--wp--toast-border-color);
+				--wp--toast-body-bg: rgba(255,255,255,.5);
 				width: var(--wp--toast-max-width);
 				max-width: 100%;
 				font-size: var(--wp--toast-font-size);
@@ -63,13 +64,20 @@ class Toast extends Base {
 				box-shadow: var(--wp--toast-box-shadow);
 				border-radius: var(--wp--toast-border-radius);
 			}
-			:where(.toast,.wp-toast).showing {
+			:is(.wp-toast,.toast).showing {
 				opacity: 0;
+				transform: translate3d(0, 25px, 0);
 			}
-			:where(.toast,.wp-toast):not(.show) {
+			:where(.wp-toast,.toast).fade {
+				transition: all .3s;
+			}
+			:where(.wp-toast,.toast).show {
+				transform: none;
+			}
+			:where(.wp-toast,.toast):not(.show) {
 				display: none;
 			}
-			:where(.toast-container,.wp-toast-container) {
+			:where(.wp-site-toasts,.toast-container) {
 				--wp--toast-zindex: 1090;
 				position: absolute;
 				z-index: var(--wp--toast-zindex);
@@ -77,12 +85,13 @@ class Toast extends Base {
 				max-width: 100%;
 				pointer-events: none;
 			}
-			:where(.toast-container,.wp-toast-container) > :not(:last-child) {
-				margin-bottom: var(--wp--toast-spacing);
+			:where(.wp-site-toasts,.toast-container) > :not(:first-child) {
+				margin-top: var(--wp--toast-spacing);
 			}
-			:where(.toast-header,.wp-toast__header) {
+			:where(.wp-toast__header,.toast-header) {
 				display: flex;
 				align-items: center;
+				justify-content: space-between;
 				padding: var(--wp--toast-padding-y) var(--wp--toast-padding-x);
 				color: var(--wp--toast-header-color);
 				background-color: var(--wp--toast-header-bg);
@@ -91,12 +100,15 @@ class Toast extends Base {
 				border-top-left-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
 				border-top-right-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
 			}
-			:where(.toast-header,.wp-toast__header) :is(.btn-close,.wp-close) {
+			:where(.wp-toast__header,.toast-header) :is(.wp-close,.btn-close) {
 				margin-right: calc(-.5 * var(--wp--toast-padding-x));
 				margin-left: var(--wp--toast-padding-x);
 			}
-			:where(.toast-body,.wp-toast__body) {
+			:where(.wp-toast__body,.toast-body) {
 				padding: var(--wp--toast-padding-x);
+				background-color: var(--wp--toast-body-bg);
+				border-bottom-left-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
+				border-bottom-right-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
 				word-wrap: break-word;
 			}
 		CSS;

@@ -1,6 +1,6 @@
 {
 	"$schema": "http://schemas.wp.org/trunk/theme.json",
-	"version": 2,
+	"version": 3,
 	"customTemplates": [
 		{
 			"name": "page-sidebar",
@@ -486,6 +486,11 @@
 					"text": "var(--wp--preset--color--dark)!important"
 				},
 				"css": "display:block;width:fit-content;"
+			},
+			"core/template-part": {
+				"spacing": {
+					"blockGap": "0"
+				}
 			},
 			"wecodeart/accordion": {
 				"spacing": {

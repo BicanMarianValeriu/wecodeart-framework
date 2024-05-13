@@ -1,3 +1,19 @@
+v6.4.5
+- Removed - Contact Form 7 plugin installer (will be done as a module instead)
+- Updated - Offcanvas`s JS upgraded to WP Interactivity API (20kb to 3kb minified) from Boostrap
+- Updated - Modal`s JS upgraded to WP Interactivity API (21kb to 4kb minified) from Boostrap
+- Updated - Toast`s JS upgraded to custom JS using our core API (13kb to 3kb minified + 2kb module) as an separate JS file
+- Updated - core/group - collapse variation to use toggler.tpl.php view (code reusability)
+- Updated - core/navigation-link is active via object ID or by matching URL
+- Updated - core/loginout and views/general/login.tpl.php to avoid duplicate IDs
+- Updated - core/loginout modal title to use block metadata name (or default string)
+- Updated - core/search updated to use new modal JS API
+- Updated - wecodeart( 'version' ) to return time string when WP_DEBUG is enabled
+- Fixed - protected.tpl.php layout for input group (converted HTML markup to use wecodeart_input API)
+- Added - Toast container template (along with WP Interactivity API module) for creating toast notifications
+- Added - wecodeart( 'toasts' ) binding to be called on pages where API is used (will include all necessary JS/CSS on demand)
+- Added - wecodeart( 'debug' )::log( $data ) method for debugging PHP data in JS console.log
+
 v6.4.4
 - Updated = core/cover styles simplified for custom content position
 - Updated = core/group to use wecodeart( 'dom' )::add_classes

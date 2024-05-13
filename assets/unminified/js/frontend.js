@@ -372,14 +372,14 @@ const enableDismissTrigger = (component, method = 'hide') => {
   } = wecodeart;
   const clickEvent = `click.dismiss${component.EVENT_KEY}`;
   const name = component.NAME;
-  Events.on(document, clickEvent, `[data-bs-dismiss="${name}"]`, function (event) {
+  Events.on(document, clickEvent, `[data-wp-close="${name}"]`, function (event) {
     if (['A', 'AREA'].includes(this.tagName)) {
       event.preventDefault();
     }
     if ((0,_dom__WEBPACK_IMPORTED_MODULE_0__.isDisabled)(this)) {
       return;
     }
-    const target = this.closest(`.${name}`);
+    const target = this.closest(`.wp-${name}`) || this.closest(`.${name}`);
     const instance = component.getOrCreateInstance(target);
 
     // Method argument is left, for Alert and only, as it doesn't implement the 'hide' method
@@ -553,6 +553,7 @@ const DefaultAllowlist = {
   // Global attributes allowed on any supplied element below.
   '*': ['class', 'dir', 'id', 'lang', 'role', PATTERN_ARIA_ATTRIBUTE],
   a: ['target', 'href', 'title', 'rel'],
+  button: ['type', 'data-wp-close'],
   area: [],
   b: [],
   br: [],
@@ -630,148 +631,6 @@ function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
 
 /***/ }),
 
-/***/ "./src/js/frontend/plugins/wecodeart-Backdrop.js":
-/*!*******************************************************!*\
-  !*** ./src/js/frontend/plugins/wecodeart-Backdrop.js ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helpers */ "./src/js/frontend/helpers/index.js");
-/**
- * --------------------------------------------------------------------------
- * Backdrop Component
- *
- * @author 	Bican Marian Valeriu
- * @version 1.0.0
- * --------------------------------------------------------------------------
- */
-const NAME = 'backdrop';
-const CLASS_NAME_FADE = 'fade';
-const CLASS_NAME_SHOW = 'show';
-const EVENT_MOUSEDOWN = `mousedown.wp.${NAME}`;
-const Default = {
-  className: 'wp-backdrop',
-  clickCallback: null,
-  isAnimated: false,
-  isVisible: true,
-  // if false, we use the backdrop helper without adding any element to the dom
-  rootElement: 'body' // give the choice to place backdrop under different elements
-};
-const DefaultType = {
-  className: 'string',
-  clickCallback: '(function|null)',
-  isAnimated: 'boolean',
-  isVisible: 'boolean',
-  rootElement: '(element|string)'
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
-  const {
-    Config,
-    Events
-  } = wecodeart;
-
-  /**
-   * Class definition
-   */
-  class Backdrop extends Config {
-    constructor(config) {
-      super();
-      this._config = this._getConfig(config);
-      this._isAppended = false;
-      this._element = null;
-    }
-
-    // Getters
-    static get Default() {
-      return Default;
-    }
-    static get DefaultType() {
-      return DefaultType;
-    }
-    static get NAME() {
-      return NAME;
-    }
-
-    // Public
-    show(callback) {
-      if (!this._config.isVisible) {
-        (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(callback);
-        return;
-      }
-      this._append();
-      const element = this._getElement();
-      if (this._config.isAnimated) {
-        (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.reflow)(element);
-      }
-      element.classList.add(CLASS_NAME_SHOW);
-      this._emulateAnimation(() => (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(callback));
-    }
-    hide(callback) {
-      if (!this._config.isVisible) {
-        (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(callback);
-        return;
-      }
-      this._getElement().classList.remove(CLASS_NAME_SHOW);
-      this._emulateAnimation(() => {
-        this.dispose();
-        (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(callback);
-      });
-    }
-    dispose() {
-      if (!this._isAppended) {
-        return;
-      }
-      Events.off(this._element, EVENT_MOUSEDOWN);
-      this._element.remove();
-      this._isAppended = false;
-    }
-
-    // Private
-    _getElement() {
-      if (!this._element) {
-        const backdrop = document.createElement('div');
-        backdrop.className = this._config.className;
-        if (this._config.isAnimated) {
-          backdrop.classList.add(CLASS_NAME_FADE);
-        }
-        this._element = backdrop;
-      }
-      return this._element;
-    }
-    _configAfterMerge(config) {
-      config.rootElement = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.getElement)(config.rootElement);
-      return config;
-    }
-    _append() {
-      if (this._isAppended) {
-        return;
-      }
-      const element = this._getElement();
-      this._config.rootElement.append(element);
-      Events.on(element, EVENT_MOUSEDOWN, () => (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(this._config.clickCallback, [this]));
-      this._isAppended = true;
-    }
-    _emulateAnimation(callback) {
-      (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.executeAfterTransition)(callback, this._getElement(), this._config.isAnimated);
-    }
-  }
-
-  /**
-   * @static
-   * @memberof Component
-   */
-  wecodeart.Backdrop = Backdrop;
-  wecodeart.plugins.Backdrop = Backdrop;
-}).apply(undefined, [window.wecodeart]));
-
-/***/ }),
-
 /***/ "./src/js/frontend/plugins/wecodeart-Component.js":
 /*!********************************************************!*\
   !*** ./src/js/frontend/plugins/wecodeart-Component.js ***!
@@ -792,7 +651,6 @@ __webpack_require__.r(__webpack_exports__);
  * @version 1.0.0
  * --------------------------------------------------------------------------
  */
-const NAME = 'WeCodeArtComponent';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
   const {
@@ -837,9 +695,6 @@ const NAME = 'WeCodeArtComponent';
     }
     static getOrCreateInstance(element, config = {}) {
       return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
-    }
-    static get NAME() {
-      return NAME;
     }
     static get VERSION() {
       return version;
@@ -943,13 +798,7 @@ const {
       return mergedConfig;
     }
     _typeCheckConfig(config, configTypes = this.constructor.DefaultType) {
-      for (const [property, expectedTypes] of Object.entries(configTypes)) {
-        const value = config[property];
-        const valueType = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isElement)(value) ? 'element' : (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toType)(value);
-        if (!new RegExp(expectedTypes).test(valueType)) {
-          throw new TypeError(`${this.constructor.NAME.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
-        }
-      }
+      return (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.validateConfig)(this.constructor.NAME, config, configTypes);
     }
   }
   wecodeart.Config = Config;
@@ -1357,9 +1206,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/frontend/plugins/wecodeart-Template.js":
+/***/ "./src/js/frontend/plugins/wecodeart-Selector.js":
 /*!*******************************************************!*\
-  !*** ./src/js/frontend/plugins/wecodeart-Template.js ***!
+  !*** ./src/js/frontend/plugins/wecodeart-Selector.js ***!
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1368,211 +1217,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers */ "./src/js/frontend/helpers/index.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helpers */ "./src/js/frontend/helpers/index.js");
 /**
  * --------------------------------------------------------------------------
- * Template Factory
+ * Selector Engine
  *
  * @author 	Bican Marian Valeriu
  * @version 1.0.0
  * --------------------------------------------------------------------------
  */
 
-const NAME = 'TemplateFactory';
-const Default = {
-  allowList: _helpers__WEBPACK_IMPORTED_MODULE_0__.DefaultAllowlist,
-  content: {},
-  // { selector : text ,  selector2 : text2 , }
-  extraClass: '',
-  html: false,
-  sanitize: true,
-  sanitizeFn: null,
-  template: '<div></div>'
-};
-const DefaultType = {
-  allowList: 'object',
-  content: 'object',
-  extraClass: '(string|function)',
-  html: 'boolean',
-  sanitize: 'boolean',
-  sanitizeFn: '(null|function)',
-  template: 'string'
-};
-const DefaultContentType = {
-  entry: '(string|element|function|null)',
-  selector: '(string|element)'
-};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
-  const {
-    Config
-  } = wecodeart;
-  class Template extends Config {
-    constructor(config) {
-      super();
-      this._config = this._getConfig(config);
-    }
-
-    // Getters
-    static get Default() {
-      return Default;
-    }
-    static get DefaultType() {
-      return DefaultType;
-    }
-    static get NAME() {
-      return NAME;
-    }
-
-    /**
-     * Render variables to string
-     *
-     * @param 	{string} string 	HTML String
-     * @param 	{object} variables	Data to be rendered into the string
-     *
-     * @return 	{string}
-     */
-    static renderToString(string = '', variables = {}) {
-      const destruct = (obj, v) => v.split(/\.|\|/).reduce((v, k) => v?.[k], obj); // Multiple
-      const rxp = /{{([^}]+)}}/g;
-      let match;
-      while (match = rxp.exec(string)) {
-        const expression = match[1];
-        const value = destruct(variables, expression.trim());
-        if (value === undefined) {
-          continue;
+  const Selector = {
+    find(selector, element = document.documentElement) {
+      return [].concat(...Element.prototype.querySelectorAll.call(element, selector));
+    },
+    findOne(selector, element = document.documentElement) {
+      return Element.prototype.querySelector.call(element, selector);
+    },
+    children(element, selector) {
+      return [].concat(...element.children).filter(child => child.matches(selector));
+    },
+    parents(element, selector) {
+      const parents = [];
+      let ancestor = element.parentNode.closest(selector);
+      while (ancestor) {
+        parents.push(ancestor);
+        ancestor = ancestor.parentNode.closest(selector);
+      }
+      return parents;
+    },
+    prev(element, selector) {
+      let previous = element.previousElementSibling;
+      while (previous) {
+        if (previous.matches(selector)) {
+          return [previous];
         }
-        string = string.replace(new RegExp(`{{${expression}}}`, 'g'), value);
+        previous = previous.previousElementSibling;
       }
-      return string;
-    }
-
-    /**
-     * Render variables to HTML Object
-     *
-     * @param 	{string} string 	HTML String
-     * @param 	{object} variables	Data to be rendered into the string
-     *
-     * @return 	{HTMLElement}
-     */
-    static renderToHTML(string = '', variables = {}, sanitize = true, allowList = _helpers__WEBPACK_IMPORTED_MODULE_0__.DefaultAllowlist) {
-      const wrapper = document.createElement('div');
-      wrapper.innerHTML = Template.renderToString(string, variables);
-      let template = wrapper.firstChild;
-      if (sanitize) {
-        template = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.sanitizeHtml)(template, allowList);
+      return [];
+    },
+    next(element, selector) {
+      let next = element.nextElementSibling;
+      while (next) {
+        if (next.matches(selector)) {
+          return [next];
+        }
+        next = next.nextElementSibling;
       }
-      return template;
+      return [];
+    },
+    focusableChildren(element) {
+      const focusables = ['a', 'button', 'input', 'textarea', 'select', 'details', '[tabindex]', '[contenteditable="true"]'].map(selector => `${selector}:not([tabindex^="-"])`).join(',');
+      return this.find(focusables, element).filter(el => !(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isDisabled)(el) && (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isVisible)(el));
     }
-
-    // Public
-    getContent() {
-      return Object.values(this._config.content).map(cfg => this._resolvePossibleFunction(cfg)).filter(Boolean);
-    }
-    hasContent() {
-      return this.getContent().length > 0;
-    }
-    changeContent(content) {
-      this._checkContent(content);
-      this._config.content = {
-        ...this._config.content,
-        ...content
-      };
-      return this;
-    }
-    toHtml() {
-      const templateWrapper = document.createElement('div');
-      templateWrapper.innerHTML = this._maybeSanitize(this._config.template);
-      for (const [selector, text] of Object.entries(this._config.content)) {
-        this._setContent(templateWrapper, text, selector);
-      }
-      const template = templateWrapper.children[0];
-      const extraClass = this._resolvePossibleFunction(this._config.extraClass);
-      if (extraClass) {
-        template.classList.add(...extraClass.split(' '));
-      }
-      return template;
-    }
-
-    // Private
-    _typeCheckConfig(config) {
-      super._typeCheckConfig(config);
-      this._checkContent(config.content);
-    }
-    _checkContent(arg) {
-      for (const [selector, content] of Object.entries(arg)) {
-        super._typeCheckConfig({
-          selector,
-          entry: content
-        }, DefaultContentType);
-      }
-    }
-    _setContent(template, content, selector) {
-      const templateElement = Element.prototype.querySelector.call(template, selector);
-      if (!templateElement) {
-        return;
-      }
-      content = this._resolvePossibleFunction(content);
-      if (!content) {
-        templateElement.remove();
-        return;
-      }
-      if ((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isElement)(content)) {
-        this._putElementInTemplate(content, templateElement);
-        return;
-      }
-      if (this._config.html) {
-        templateElement.innerHTML = this._maybeSanitize(content);
-        return;
-      }
-      templateElement.textContent = content;
-    }
-    _maybeSanitize(arg) {
-      return this._config.sanitize ? (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.sanitizeHtml)(arg, this._config.allowList, this._config.sanitizeFn) : arg;
-    }
-    _resolvePossibleFunction(arg) {
-      return (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.execute)(arg, [this]);
-    }
-    _putElementInTemplate(element, templateElement) {
-      if (this._config.html) {
-        templateElement.innerHTML = '';
-        templateElement.append(element);
-        return;
-      }
-      templateElement.textContent = element.textContent;
-    }
-  }
-
-  /**
-   * @static
-   * @memberof Template
-   */
-  wecodeart.Template = Template;
-
-  // const markup = new Template({
-  // 	content: {
-  // 		'.tooltip-inner': 'My tooltip'
-  // 	},
-  // 	template: '<div class="tooltip" role="tooltip">' +
-  // 		'<div class="tooltip-arrow"></div>' +
-  // 		'<div class="tooltip-inner"></div>' +
-  // 		'</div>',
-  // });
-
-  // const templateString = `<div class="tooltip" role="tooltip">
-  // 	<div class="tooltip-header">{{ header }}</div>
-  // 	<div class="tooltip-inner">
-  // 		<h3>{{ content.name }}</h3>
-  // 		<p>{{ content.profesion }}</p>
-  // 	</div>
-  // </div>`;
-
-  // Template.renderToHTML(templateString, {
-  // 	header: 'Header',
-  // 	content: {
-  // 		name: 'Bican',
-  // 		profesion: 'WordPress Developer'
-  // 	}
-  // });
+  };
+  wecodeart.Selector = Selector;
 }).apply(undefined, [window.wecodeart]));
 
 /***/ }),
@@ -2009,13 +1709,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(loadjs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./src/js/frontend/helpers/index.js");
 /* harmony import */ var _plugins_wecodeart_Scripts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/wecodeart-Scripts */ "./src/js/frontend/plugins/wecodeart-Scripts.js");
-/* harmony import */ var _plugins_wecodeart_Events__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/wecodeart-Events */ "./src/js/frontend/plugins/wecodeart-Events.js");
-/* harmony import */ var _plugins_wecodeart_Data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/wecodeart-Data */ "./src/js/frontend/plugins/wecodeart-Data.js");
-/* harmony import */ var _plugins_wecodeart_Config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugins/wecodeart-Config */ "./src/js/frontend/plugins/wecodeart-Config.js");
-/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/frontend/plugins/wecodeart-Component.js");
-/* harmony import */ var _plugins_wecodeart_Backdrop__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./plugins/wecodeart-Backdrop */ "./src/js/frontend/plugins/wecodeart-Backdrop.js");
-/* harmony import */ var _plugins_wecodeart_Template__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./plugins/wecodeart-Template */ "./src/js/frontend/plugins/wecodeart-Template.js");
-/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
+/* harmony import */ var _plugins_wecodeart_Data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/wecodeart-Data */ "./src/js/frontend/plugins/wecodeart-Data.js");
+/* harmony import */ var _plugins_wecodeart_Events__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/wecodeart-Events */ "./src/js/frontend/plugins/wecodeart-Events.js");
+/* harmony import */ var _plugins_wecodeart_Selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugins/wecodeart-Selector */ "./src/js/frontend/plugins/wecodeart-Selector.js");
+/* harmony import */ var _plugins_wecodeart_Config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./plugins/wecodeart-Config */ "./src/js/frontend/plugins/wecodeart-Config.js");
+/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/frontend/plugins/wecodeart-Component.js");
+/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
 // Load JS
 
 
@@ -2023,7 +1722,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // WeCodeArt
-
 
 
 
@@ -2055,6 +1753,8 @@ function filterLog(route, func, args) {
     noop: _helpers__WEBPACK_IMPORTED_MODULE_1__.noop,
     toType: _helpers__WEBPACK_IMPORTED_MODULE_1__.toType,
     isRTL: _helpers__WEBPACK_IMPORTED_MODULE_1__.isRTL,
+    isDisabled: _helpers__WEBPACK_IMPORTED_MODULE_1__.isDisabled,
+    isVisible: _helpers__WEBPACK_IMPORTED_MODULE_1__.isVisible,
     isElement: _helpers__WEBPACK_IMPORTED_MODULE_1__.isElement,
     getElement: _helpers__WEBPACK_IMPORTED_MODULE_1__.getElement,
     getParents: _helpers__WEBPACK_IMPORTED_MODULE_1__.getParents,

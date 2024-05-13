@@ -12,6 +12,8 @@
  * @version		unknown
  */
 
+use WeCodeArt\Support\Plugins;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -160,8 +162,18 @@ return [
                 'description'   => esc_html__( 'Extends Gutenberg editor with an accordion block built on WP Interactivity API.', 'wecodeart' ),
                 'more'          => 'https://github.com/BicanMarianValeriu/wca-accordion/',
                 'source'        => 'github',
-                'version'       => '1.0.2',
+                'version'       => '1.0.3',
                 'destination'   => 'accordion',
+                'type'          => 'module',
+            ],
+            [
+                'slug'          => 'BicanMarianValeriu/wca-contact-form',
+                'title'         => esc_html__( 'WCA: Contact Form 7', 'wecodeart' ),
+                'description'   => Plugins::get_default_description( 'Contact Form 7', 'external' ),
+                'more'          => 'https://github.com/BicanMarianValeriu/wca-contact-form/',
+                'source'        => 'github',
+                'version'       => '1.0.0',
+                'destination'   => 'contactform',
                 'type'          => 'module',
             ],
             [
@@ -200,7 +212,7 @@ return [
                 'description'   => esc_html__( 'Lightweight extension for enhancing our theme with options for cleaning wp_head of unnecesary stuff.', 'wecodeart' ),
                 'more'          => 'https://github.com/BicanMarianValeriu/wca-optimization/',
                 'source'        => 'github',
-                'version'       => '1.0.3',
+                'version'       => '1.0.5',
                 'destination'   => 'optimization',
                 'type'          => 'module',
             ],
