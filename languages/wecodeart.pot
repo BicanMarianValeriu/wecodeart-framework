@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-14 22:00+0000\n"
+"POT-Creation-Date: 2024-06-29 17:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -72,7 +72,7 @@ msgstr ""
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr ""
 
-#: inc/app.php:212
+#: inc/app.php:224
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -125,7 +125,6 @@ msgstr ""
 msgid "All plugins installed successfully."
 msgstr ""
 
-#: inc/support/plugins/contactform7/class-contactform7.php:70
 #: inc/support/plugins/woocommerce/class-woocommerce.php:71
 msgid "Amazing news!"
 msgstr ""
@@ -185,11 +184,11 @@ msgstr ""
 msgid "Choose %s"
 msgstr ""
 
-#: views/general/modal.tpl.php:42 views/general/offcanvas.tpl.php:40
+#: views/general/close.tpl.php:24
 msgid "Close"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:309
+#: inc/gutenberg/blocks/design/class-group.php:329
 msgid "Close item"
 msgstr ""
 
@@ -388,7 +387,7 @@ msgstr ""
 msgid "Email *"
 msgstr ""
 
-#: views/general/protected.tpl.php:53
+#: views/general/protected.tpl.php:55
 msgid "Enter password"
 msgstr ""
 
@@ -396,19 +395,19 @@ msgstr ""
 msgid "Enter your email address to subscribe."
 msgstr ""
 
-#: inc/app.php:160
+#: inc/app.php:162
 msgid ""
 "Extends Gutenberg editor with an accordion block built on WP Interactivity "
 "API."
 msgstr ""
 
-#: inc/app.php:170
+#: inc/app.php:182
 msgid ""
 "Extends Gutenberg editor with extra formatting options like: justify, "
 "abbreviation, text decorations, tooltips and popovers."
 msgstr ""
 
-#: inc/app.php:180
+#: inc/app.php:192
 msgid ""
 "Extends Gutenberg editor with lorem ipsum dummy content generator for "
 "headings, paragraphs and lists."
@@ -540,7 +539,6 @@ msgstr ""
 msgid "Gutenberg Ready"
 msgstr ""
 
-#: inc/support/plugins/contactform7/class-contactform7.php:76
 #: inc/support/plugins/woocommerce/class-woocommerce.php:77
 msgid "here"
 msgstr ""
@@ -593,13 +591,13 @@ msgstr ""
 msgid "Less than a minute to read."
 msgstr ""
 
-#: inc/app.php:190
+#: inc/app.php:202
 msgid ""
 "Lightweight extension for adding a scroll to top button on your site. Super "
 "flexible and customizable."
 msgstr ""
 
-#: inc/app.php:200
+#: inc/app.php:212
 msgid ""
 "Lightweight extension for enhancing our theme with options for cleaning "
 "wp_head of unnecesary stuff."
@@ -613,8 +611,8 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:138
-#: inc/gutenberg/blocks/site/class-login.php:158
+#: inc/gutenberg/blocks/site/class-login.php:147
+#: inc/gutenberg/blocks/site/class-login.php:168
 msgid "Log In"
 msgstr ""
 
@@ -702,16 +700,21 @@ msgstr ""
 msgid "Notification dismissed"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:283
-#: inc/gutenberg/blocks/design/class-group.php:308
+#: inc/gutenberg/blocks/design/class-group.php:379
+#, php-format
+msgid "Open %s"
+msgstr ""
+
+#: views/general/toggler.tpl.php:65
+#: inc/gutenberg/blocks/design/class-group.php:328
 msgid "Open item"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:97
+#: inc/gutenberg/blocks/site/class-login.php:100
 msgid "Open login modal"
 msgstr ""
 
-#: inc/gutenberg/blocks/widgets/class-search.php:192
+#: inc/gutenberg/blocks/widgets/class-search.php:201
 msgid "Open search modal"
 msgstr ""
 
@@ -730,7 +733,7 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:156
+#: inc/gutenberg/blocks/site/class-login.php:166
 msgid "Password"
 msgstr ""
 
@@ -869,11 +872,12 @@ msgctxt "Pattern title"
 msgid "WooCommerce"
 msgstr ""
 
-#: inc/gutenberg/blocks/navigation/class-navigation.php:97
+#: inc/gutenberg/blocks/navigation/class-navigation.php:95
 msgid "Pills"
 msgstr ""
 
-#: inc/app.php:98 inc/app.php:99 inc/gutenberg/blocks/media/class-image.php:93
+#: inc/app.php:100 inc/app.php:101
+#: inc/gutenberg/blocks/media/class-image.php:93
 #: inc/gutenberg/blocks/media/class-text.php:75
 msgid "Placeholder"
 msgstr ""
@@ -960,7 +964,7 @@ msgstr ""
 msgid "Ready to create with %s?"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:157
+#: inc/gutenberg/blocks/site/class-login.php:167
 msgid "Remember Me"
 msgstr ""
 
@@ -1034,7 +1038,7 @@ msgstr ""
 msgid "Simple pricing plans for any size team."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:107
+#: inc/support/assets/class-assets.php:124
 msgid "Skip to content"
 msgstr ""
 
@@ -1129,7 +1133,7 @@ msgstr ""
 msgid "Super-Optimized eCommerce website built with ease."
 msgstr ""
 
-#: inc/gutenberg/blocks/navigation/class-navigation.php:91
+#: inc/gutenberg/blocks/navigation/class-navigation.php:89
 msgid "Tabs"
 msgstr ""
 
@@ -1241,17 +1245,17 @@ msgid ""
 "leave a comment."
 msgstr ""
 
-#: views/general/protected.tpl.php:35
+#: views/general/protected.tpl.php:34
 msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:250
+#: inc/gutenberg/blocks/design/class-group.php:273
 #, php-format
 msgid "Toggle %s"
 msgstr ""
 
-#: views/general/toggler.tpl.php:25
+#: views/general/toggler.tpl.php:50
 msgid "Toggle navigation"
 msgstr ""
 
@@ -1259,15 +1263,11 @@ msgstr ""
 msgid "too!"
 msgstr ""
 
-#: views/general/protected.tpl.php:58
-msgid "Unlock"
-msgstr ""
-
 #: inc/admin/class-activation.php:116
 msgid "upgrade PHP"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:155
+#: inc/gutenberg/blocks/site/class-login.php:165
 msgid "Username or Email Address"
 msgstr ""
 
@@ -1281,27 +1281,27 @@ msgstr ""
 msgid "View Themes"
 msgstr ""
 
-#: inc/app.php:159
+#: inc/app.php:161
 msgid "WCA: Accordion"
 msgstr ""
 
-#: inc/support/plugins/contactform7/class-contactform7.php:110
+#: inc/app.php:171
 msgid "WCA: Contact Form 7"
 msgstr ""
 
-#: inc/app.php:169
+#: inc/app.php:181
 msgid "WCA: Formatting"
 msgstr ""
 
-#: inc/app.php:179
+#: inc/app.php:191
 msgid "WCA: Lorem Ipsum"
 msgstr ""
 
-#: inc/app.php:199
+#: inc/app.php:211
 msgid "WCA: Optimization"
 msgstr ""
 
-#: inc/app.php:189
+#: inc/app.php:201
 msgid "WCA: Scroll Top"
 msgstr ""
 
@@ -1316,13 +1316,6 @@ msgstr ""
 
 #: patterns/page-soon.php:28
 msgid "We Are Getting Ready to Launch!"
-msgstr ""
-
-#: inc/support/plugins/contactform7/class-contactform7.php:72
-#, php-format
-msgid ""
-"We have an extension that integrates our theme with Contact Form 7 plugin! "
-"You can get it from %s."
 msgstr ""
 
 #: inc/support/plugins/woocommerce/class-woocommerce.php:73
@@ -1341,7 +1334,7 @@ msgstr ""
 msgid "WeCodeArt"
 msgstr ""
 
-#: inc/app.php:211
+#: inc/app.php:223
 msgid "WeCodeArt Developer"
 msgstr ""
 
@@ -1403,7 +1396,7 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:146
+#: inc/support/assets/class-assets.php:163
 #, php-format
 msgid ""
 "When using \"%s\" method you must define the 3rd parameter (style or script)."
