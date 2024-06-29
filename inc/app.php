@@ -216,16 +216,16 @@ return [
                 'destination'   => 'optimization',
                 'type'          => 'module',
             ],
-            [
-                'slug'          => 'BicanMarianValeriu/wca-cookies',
-                'title'         => esc_html__( 'WCA: Cookies', 'wecodeart' ),
-                'description'   => esc_html__( 'Cookie banner and management interface built with theme APIs.', 'wecodeart' ),
-                'more'          => 'https://github.com/BicanMarianValeriu/wca-cookies/',
-                'source'        => 'github',
-                'version'       => '1.0.0',
-                'destination'   => 'cookies',
-                'type'          => 'module',
-            ],
+            // [
+            //     'slug'          => 'BicanMarianValeriu/wca-cookies',
+            //     'title'         => esc_html__( 'WCA: Cookies', 'wecodeart' ),
+            //     'description'   => esc_html__( 'Cookie banner and management interface built with theme APIs.', 'wecodeart' ),
+            //     'more'          => 'https://github.com/BicanMarianValeriu/wca-cookies/',
+            //     'source'        => 'github',
+            //     'version'       => '1.0.0',
+            //     'destination'   => 'cookies',
+            //     'type'          => 'module',
+            // ],
         ],
         'themes' => [
             [
