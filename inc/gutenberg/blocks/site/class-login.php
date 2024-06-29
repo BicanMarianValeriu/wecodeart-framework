@@ -93,7 +93,9 @@ class Login extends Dynamic {
 				$contents		= wecodeart( 'dom' )::processor( $contents );
 
 				if( $contents->next_tag( [ 'tag_name' => 'a' ] ) ) {
-					$contents->set_attribute( 'href', 'javascript:void(0)' );
+					$contents->remove_attribute( 'href' );
+					$contents->set_attribute( 'role', 'button' );
+					$contents->set_attribute( 'tabindex', '0' );
 					$contents->set_attribute( 'class', 'nav-link' );
 					$contents->set_attribute( 'aria-label', esc_attr__( 'Open login modal', 'wecodeart' ) );
 					$contents->set_attribute( 'aria-controls', '#' . $instance_id . '-modal' );

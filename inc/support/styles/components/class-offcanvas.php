@@ -35,88 +35,115 @@ class OffCanvas extends Base {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		return <<<CSS
-			:is(.wp-offcanvas,.offcanvas) {
+		$breaks	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+
+		$inline = <<<CSS
+			.wp-offcanvas {
 				--wp--offcanvas-zindex: 1045;
 				--wp--offcanvas-width: 400px;
 				--wp--offcanvas-height: 30vh;
 				--wp--offcanvas-padding-x: 1rem;
 				--wp--offcanvas-padding-y: 1rem;
-				--wp--offcanvas-color: var(--wp--preset--color--dark);
+				--wp--offcanvas-border-color: rgb(var(--wp--background--rgb, 255,255,255));
+				--wp--offcanvas-color: ;
 				--wp--offcanvas-bg: rgb(var(--wp--background--rgb, 255,255,255));
 				--wp--offcanvas-transition: transform 0.3s ease-in-out;
 				position: fixed;
 				bottom: 0;
 				display: flex;
 				flex-direction: column;
-				max-width: 100%;
 				visibility: hidden;
 				background-color: var(--wp--offcanvas-bg);
 				background-clip: padding-box;
+				color: var(--wp--offcanvas-color);
 				transition: var(--wp--offcanvas-transition);
 				z-index: var(--wp--offcanvas-zindex);
+				margin: 0!important;
+				max-width: 100%!important;
 				outline: 0;
 			}
-			:is(.wp-offcanvas,.offcanvas):is(.showing,.show:not(.hiding)) {
+			.wp-offcanvas:is(.showing,.show:not(.hiding)) {
 				transform: none;
 			}
-			:is(.wp-offcanvas,.offcanvas):is(.showing,.hiding,.show) {
+			.wp-offcanvas:is(.showing,.hiding,.show) {
 				visibility: visible;
 			}
-			.theme-is-dark :is(.wp-offcanvas,.offcanvas) {
-				--wp--offcanvas-color: var(--wp--preset--color--white);
+			.theme-is-dark .wp-offcanvas {
+				--wp--offcanvas-border-color: rgb(var(--wp--background--rgb, 0,0,0));
+				--wp--offcanvas-bg: rgb(var(--wp--background--rgb, 37,37,41));
 			}
-			:is(.wp-offcanvas__header,.offcanvas-header) {
+			.wp-offcanvas__header {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 				padding: var(--wp--offcanvas-padding-y) var(--wp--offcanvas-padding-x);
 			}
-			:is(.wp-offcanvas__header,.offcanvas-header) :is(.wp-close,.btn-close) {
+			.wp-offcanvas__header .wp-close {
 				padding: calc(var(--wp--offcanvas-padding-y) * .5) calc(var(--wp--offcanvas-padding-x) * .5);
 				margin-top: calc(-.5 * var(--wp--offcanvas-padding-y));
 				margin-left: calc(-.5 * var(--wp--offcanvas-padding-x));
 				margin-right: calc(-.5 * var(--wp--offcanvas-padding-x));
 				margin-bottom: calc(-.5 * var(--wp--offcanvas-padding-y));
 			}
-			:is(.wp-offcanvas__title,.offcanvas-title) {
-				margin-bottom: 0;
+			:is(.wp-offcanvas--start,.wp-offcanvas--top,.wp-offcanvas--bottom) .wp-close {
+				margin-left: auto;
+			}
+			.wp-offcanvas__title {
+				margin: 0;
 				line-height: 1.5;
 			} 
-			:is(.wp-offcanvas__body,.offcanvas-body) {
+			.wp-offcanvas__body {
 				flex-grow: 1;
 				padding: var(--wp--offcanvas-padding-y) var(--wp--offcanvas-padding-x);
 				overflow-y: auto;
 			}
-			:is(.wp-offcanvas--start,.wp-offcanvas--end,.offcanvas-start,.offcanvas-end) {
+			.wp-offcanvas:where(.wp-offcanvas--start,.wp-offcanvas--end) {
 				top: 0;
 				width: var(--wp--offcanvas-width);
 			}
-			:is(.wp-offcanvas--start,.offcanvas-start) {
+			.wp-offcanvas:where(.wp-offcanvas--start) {
 				left: 0;
-				border-right: 1px solid var(--wp--preset--color--accent);
+				border-right: 1px solid var(--wp--offcanvas-border-color);
 				transform: translateX(-100%);
 			}
-			:is(.wp-offcanvas--end,.offcanvas-end) {
+			.wp-offcanvas:where(.wp-offcanvas--end) {
 				right: 0;
-				border-left: 1px solid var(--wp--preset--color--accent);
+				border-left: 1px solid var(--wp--offcanvas-border-color);
 				transform: translateX(100%);
 			}
-			:is(.wp-offcanvas--top,.wp-offcanvas--bottom,.offcanvas-top,.offcanvas-bottom) {
+			.wp-offcanvas:where(.wp-offcanvas--top,.wp-offcanvas--bottom) {
 				right: 0;
 				left: 0;
 				height: var(--wp--offcanvas-height);
+				max-width: none!important;
 				max-height: 100%;
 			}
-			:is(.wp-offcanvas--top,.offcanvas-top) {
+			.wp-offcanvas:where(.wp-offcanvas--top) {
 				top: 0;
-				border-bottom: 1px solid var(--wp--preset--color--accent);
+				bottom: auto;
+				border-bottom: 1px solid var(--wp--offcanvas-border-color);
 				transform: translateY(-100%);
 			} 
-			:is(.wp-offcanvas--bottom,.offcanvas-bottom) {
-				border-top: 1px solid var(--wp--preset--color--accent);
+			.wp-offcanvas:where(.wp-offcanvas--bottom) {
+				border-top: 1px solid var(--wp--offcanvas-border-color);
 				transform: translateY(100%);
 			}
 		CSS;
+
+		foreach( $breaks as $key => $value ) {
+			$inline .= <<<CSS
+				@media (min-width: {$value}) {
+					.wp-offcanvas.{$key}\:wp-offcanvas--expand,
+					.wp-offcanvas.{$key}\:wp-offcanvas--expand .wp-offcanvas__body {
+						all: inherit;
+					}
+					.wp-offcanvas.{$key}\:wp-offcanvas--expand .wp-offcanvas__header {
+						display: none;
+					}
+				}
+			CSS;
+		}
+
+		return $inline;
 	}
 }

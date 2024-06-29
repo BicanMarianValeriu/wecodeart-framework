@@ -14,7 +14,8 @@ const {
     },
     Events,
     Backdrop,
-    FocusTrap
+    FocusTrap,
+    ScrollBar
 } = wecodeart;
 
 const NAME = 'offcanvas';
@@ -30,7 +31,8 @@ const EVENT_HIDE_PREVENTED = `hidePrevented${EVENT_KEY}`;
 const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
 
 const { state, actions, callbacks } = store(NAMESPACE, {
-    state: {},
+    state: {
+    },
     actions: {
         toggle() {
             const context = getContext();
@@ -46,7 +48,10 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 return;
             }
 
-            const startEvent = Events.trigger(context.relatedElement, EVENT_SHOW);
+            const startEvent = Events.trigger(context.relatedElement, EVENT_SHOW, {
+                relatedTarget: getElement().ref
+            });
+
             if (startEvent.defaultPrevented) {
                 return;
             }
@@ -56,7 +61,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             context._backdrop.show();
 
             if (!scroll) {
-                // new ScrollBarHelper().hide();
+                new ScrollBar().hide();
             }
 
             context.relatedElement.setAttribute('aria-modal', true);
@@ -67,12 +72,15 @@ const { state, actions, callbacks } = store(NAMESPACE, {
 
             context.isOpen = true;
         },
-        hide(context = getContext()) {
+        hide(context = getContext(), element) {
             if (context.isOpen === false) {
                 return;
             }
 
-            const hideEvent = Events.trigger(context.relatedElement, EVENT_HIDE);
+            const hideEvent = Events.trigger(context.relatedElement, EVENT_HIDE, {
+                relatedTarget: element
+            });
+
             if (hideEvent.defaultPrevented) {
                 return;
             }
@@ -114,7 +122,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 collapsedEl.removeAttribute('role');
 
                 if (!scroll) {
-                    // new ScrollBarHelper().reset();
+                    new ScrollBar().reset();
                 }
 
                 Events.trigger(collapsedEl, EVENT_HIDDEN);
@@ -133,7 +141,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                     return;
                 }
 
-                actions.hide();
+                actions.hide(context, 'backdrop');
             }
 
             context._backdrop = new Backdrop({
@@ -151,7 +159,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                     return;
                 }
 
-                actions.hide(context);
+                actions.hide(context, this);
             });
 
             // Escape dismiss
@@ -161,12 +169,18 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 }
 
                 if (keyboard) {
-                    actions.hide(context);
+                    actions.hide(context, ESCAPE_KEY);
                     return;
                 }
 
                 Events.trigger(ref, EVENT_HIDE_PREVENTED);
             });
+
+            // Is opened by default?
+            if (context.isOpen) {
+                context.isOpen = false;
+                actions.show(context);
+            }
         },
         getConfig: () => {
             const context = getContext();

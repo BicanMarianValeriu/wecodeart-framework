@@ -12,7 +12,7 @@
         <?php
             printf(
                 esc_html__( 'Latest %s', 'wecodeart' ),
-                sprintf( '<strong><span class="has-underline">%s</span></strong>', esc_html__( 'Posts', 'wecodeart' ) )
+                sprintf( '<strong>%s</strong>', esc_html__( 'Posts', 'wecodeart' ) )
             );
         ?>
     </h2>

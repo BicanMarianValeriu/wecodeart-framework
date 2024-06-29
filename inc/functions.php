@@ -211,7 +211,7 @@ function calc( $number1, $action, $number2, $round = false, $decimals = 0, $prec
  *
  * @return  array a simple array
  */
-function flatten( array $array = [] ): array {
+function array_flatten( array $array = [] ): array {
     $result = [];
     
     foreach ( $array as $element ) {
@@ -227,6 +227,28 @@ function flatten( array $array = [] ): array {
     }
 
     return $result;
+}
+
+function flatten( array $array = [] ): array {
+    return array_flatten( $array );
+}
+
+/**
+ * Extract from array.
+ *
+ * @param   array   $array  a multidimensional array.
+ * @param   string  $string a string to match keys against.
+ *
+ * @return  array   Array containg matching keys
+ */
+function array_extract( array &$array, string $string = '' ): array {
+    return array_values( array_filter( $array, function( $item ) use ( &$array, $string ) {
+        if ( strpos( $item, $string ) !== false ) {
+            $array = array_values( array_diff( $array, [ $item ] ) );
+            return true;
+        }
+        return false;
+    } ) );
 }
 
 /**

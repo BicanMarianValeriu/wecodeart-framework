@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.2
- * @version		6.3.7
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Styles\Blocks;
@@ -30,12 +30,10 @@ class Group extends Processor {
 	 * @return 	void
 	 */
 	protected function process_style(): void {
-		$classNames = explode( ' ', get_prop( $this->attrs, [ 'className' ], '' ) );
-		$is_marquee = get_prop( $this->attrs, [ 'namespace' ] ) === 'wecodeart/group/marquee';
+		$declarations = [];
 
-		if( $is_marquee || in_array( 'is-style-marquee', $classNames, true ) ) {
-			$declarations = [];
-	
+		// Marquee
+		if( wecodeart( 'blocks' )->get( 'core/group' )::is_variation( $this->attrs, 'marquee' ) ) {
 			$orientation 	= get_prop( $this->attrs, [ 'layout', 'orientation' ], 'horizontal' );
 			$directionY 	= get_prop( $this->attrs, [ 'layout', 'verticalAlignment' ], 'center' );
 			$directionX 	= get_prop( $this->attrs, [ 'layout', 'justifyContent' ], 'left' );
@@ -61,9 +59,45 @@ class Group extends Processor {
 			}
 
 			$declarations['justify-content'] = 'initial';
-			$declarations['flex-wrap'] = 'nowrap';
-	
+			$declarations['flex-wrap'] = 'nowrap'; 
+
 			$this->add_declarations( $declarations );
+		}
+
+		// Offcanvas
+		if( wecodeart( 'blocks' )->get( 'core/group' )::is_variation( $this->attrs, 'offcanvas' ) ) {
+			$directionY 	= get_prop( $this->attrs, [ 'layout', 'verticalAlignment' ] );
+			$directionX 	= get_prop( $this->attrs, [ 'layout', 'justifyContent' ] );
+			$orientation	= get_prop( $this->attrs, [ 'layout', 'orientation' ] );
+
+			if( $directionY ) {
+				$direction = $directionY === 'top' ? 'flex-start' : ( $directionY === 'bottom' ? 'flex-end' : $directionY );
+				$declarations[$orientation === 'vertical' ? 'justify-content' : 'align-items'] = $direction;
+			}
+
+			if( $directionX ) {
+				$declarations[$orientation === 'vertical' ? 'align-items' : 'justify-content'] = $directionX;
+			}
+
+			if( $orientation === 'vertical' ) {
+				$declarations['flex-direction'] = 'column';
+			}
+
+			if( $blockGap = get_prop( $this->attrs, [ 'style', 'spacing', 'blockGap' ] ) ) {
+				$declarations['gap'] = wecodeart( 'styles' )::format_variable( $blockGap );
+
+				if( is_null( $orientation ) ) {
+					$this->add_declarations( [
+						'margin-block-start' => $declarations['gap']
+					], $this->get_selector( ' .wp-offcanvas__body > *:not(:first-child)' ) );
+					
+					unset( $declarations['gap'] );
+				}
+			}
+
+			if( ! empty( $declarations ) ) {
+				$this->add_declarations( $declarations, $this->get_selector( ' .wp-offcanvas__body' ) );
+			}
 		}
 
 		parent::process_style();

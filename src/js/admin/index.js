@@ -96,14 +96,13 @@ const WeCodeArt = () => {
 			className: 'wecodeart-intro',
 			render: <GettingStarted />
 		},
-		// Deprecated filter: wecodeart.admin.extensions
-		...(applyFilters('wecodeart.admin.extensions', applyFilters('wecodeart.admin.tabs.plugins', [])).length
+		...(applyFilters('wecodeart.admin.tabs.plugins', []).length
 			? [
 				{
 					name: 'plugins',
 					title: __('Plugins', 'wecodeart'),
 					className: 'wecodeart-plugins',
-					render: <SubPanel {...tabProps} tabs={applyFilters('wecodeart.admin.extensions', applyFilters('wecodeart.admin.tabs.plugins', []))} />
+					render: <SubPanel {...tabProps} tabs={applyFilters('wecodeart.admin.tabs.plugins', [])} />
 				}
 			]
 			: []

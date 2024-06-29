@@ -18,7 +18,8 @@ const {
     Events,
     Backdrop,
     FocusTrap,
-    Selector
+    Selector,
+    ScrollBar
 } = wecodeart;
 
 const NAME = 'modal';
@@ -44,28 +45,28 @@ const SELECTOR_BODY = '.wp-modal__body';
 const { state, actions, callbacks } = store(NAMESPACE, {
     state: {
         current: {},
-        get isShown() {
-            const { isShown } = state.current;
+        get isOpen() {
+            const { isOpen } = state.current;
 
-            return isShown;
+            return isOpen;
         },
     },
     actions: {
         toggle() {
-            if (state.isShown) {
+            if (state.isOpen) {
                 actions.hide(state.current);
             } else {
                 actions.show();
             }
         },
         show() {
-            if (state.isShown) {
+            if (state.isOpen) {
                 actions.hide(state.current);
             }
 
             const context = getContext();
 
-            if (context.isShown || context.isTransitioning) {
+            if (context.isOpen || context.isTransitioning) {
                 return;
             }
 
@@ -78,10 +79,10 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 return;
             }
 
-            context.isShown = true;
+            context.isOpen = true;
             context.isTransitioning = true;
 
-            // this._scrollBar.hide();
+            state._scrollBar.hide();
 
             document.body.classList.add(CLASS_NAME_OPEN);
             callbacks.adjustDialog(context);
@@ -89,22 +90,24 @@ const { state, actions, callbacks } = store(NAMESPACE, {
 
             state.current = context;
         },
-        hide(related) {
+        hide(related, element) {
             state.current = {};
 
             const context = related || getContext();
-            if (!context.isShown || context.isTransitioning) {
+            if (!context.isOpen || context.isTransitioning) {
                 return;
             }
             const { relatedElement } = context;
 
-            const hideEvent = Events.trigger(relatedElement, EVENT_HIDE);
+            const hideEvent = Events.trigger(relatedElement, EVENT_HIDE, {
+                relatedTarget: element
+            });
 
             if (hideEvent.defaultPrevented) {
                 return;
             }
 
-            context.isShown = false;
+            context.isOpen = false;
             context.isTransitioning = true;
             context._focustrap.deactivate();
 
@@ -159,14 +162,14 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             context._backdrop.hide(() => {
                 document.body.classList.remove(CLASS_NAME_OPEN);
                 callbacks.resetAdjustments(context);
-                // state._scrollBar.reset();
+                state._scrollBar.reset();
                 Events.trigger(relatedElement, EVENT_HIDDEN);
             });
         },
         onResize() {
-            const { current: { isShown, isTransitioning } } = state;
+            const { current: { isOpen, isTransitioning } } = state;
 
-            if (isShown && !isTransitioning) {
+            if (isOpen && !isTransitioning) {
                 callbacks.adjustDialog(state.current);
             }
         },
@@ -184,18 +187,20 @@ const { state, actions, callbacks } = store(NAMESPACE, {
 
             context._focustrap = new FocusTrap({ trapElement: relatedElement });
 
+            state._scrollBar = new ScrollBar();
+
             // Button click dismiss
             Events.on(relatedElement, `click.dismiss${EVENT_KEY}`, `[data-wp-close="${NAME}"]`, function () {
                 if (isDisabled(this)) {
                     return;
                 }
 
-                actions.hide(context);
+                actions.hide(context, this);
             });
 
             // Backdrop click dismiss
-            Events.on(relatedElement, `click.dismiss${EVENT_KEY}`, e => {
-                if (relatedElement !== e.target) {
+            Events.on(relatedElement, `click.dismiss${EVENT_KEY}`, function ({ target }) {
+                if (relatedElement !== target) {
                     return;
                 }
 
@@ -205,7 +210,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 }
 
                 if (backdrop) {
-                    actions.hide(context);
+                    actions.hide(context, 'backdrop');
                 }
             });
 
@@ -216,7 +221,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 }
 
                 if (keyboard) {
-                    actions.hide(context);
+                    actions.hide(context, ESCAPE_KEY);
                     return;
                 }
 
@@ -235,6 +240,12 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                     }
                 });
             });
+
+            // Is opened by default?
+            if (context.isOpen) {
+                context.isOpen = false;
+                actions.show(context);
+            }
         },
         triggerBackdropTransition(context = getContext()) {
             state.current = {};
@@ -281,7 +292,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             const { relatedElement } = context;
 
             const isModalOverflowing = relatedElement.scrollHeight > document.documentElement.clientHeight;
-            const scrollbarWidth = 17; // state._scrollBar.getWidth();
+            const scrollbarWidth = state._scrollBar.getWidth();
             const isBodyOverflowing = scrollbarWidth > 0;
 
             if (isBodyOverflowing && !isModalOverflowing) {

@@ -48,6 +48,8 @@
 		"build:modules:optimization": "wp-scripts build admin=./inc/support/modules/optimization/src/js/admin.js --output-path=inc/support/modules/optimization/assets/minified",
 		"start:modules:contactform": "wp-scripts start admin=./inc/support/modules/contactform/src/js/admin.js --output-path=inc/support/modules/contactform/assets/unminified",
 		"build:modules:contactform": "wp-scripts build admin=./inc/support/modules/contactform/src/js/admin.js --output-path=inc/support/modules/contactform/assets/minified",
+		"start:modules:cookies": "wp-scripts start admin=./inc/support/modules/cookies/src/js/admin.js front=./inc/support/modules/cookies/src/js/front.js --output-path=inc/support/modules/cookies/assets/unminified",
+		"build:modules:cookies": "wp-scripts build admin=./inc/support/modules/cookies/src/js/admin.js front=./inc/support/modules/cookies/src/js/front.js --output-path=inc/support/modules/cookies/assets/minified",
 		"lint:css": "wp-scripts lint-style ./src/scss",
 		"lint:js": "wp-scripts lint-js ./src/js/routes ./src/js/frontend.js",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.2
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query\Pagination;
@@ -185,6 +185,9 @@ class Numbers extends Dynamic {
                 background-color: var(--wp--gray-100);
                 border-color: currentColor;
             }
+            .wp-block-query-pagination-numbers .page-numbers.dots {
+                pointer-events: none;
+            } 
 		";
 	}
 }

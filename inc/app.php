@@ -202,7 +202,7 @@ return [
                 'description'   => esc_html__( 'Lightweight extension for adding a scroll to top button on your site. Super flexible and customizable.', 'wecodeart' ),
                 'more'          => 'https://www.wecodeart.com/integrations/scrolltop/',
                 'source'        => 'github',
-                'version'       => '1.0.3',
+                'version'       => '1.0.4',
                 'destination'   => 'scrolltop',
                 'type'          => 'module',
             ],

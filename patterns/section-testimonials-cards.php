@@ -14,7 +14,7 @@
             <?php
                 printf( 
                     esc_html__( 'Users %s', 'wecodeart' ), 
-                    sprintf( '<strong><span class="has-underline">%s</span></strong>', esc_html__( 'Feedback', 'wecodeart' ) )
+                    sprintf( '<strong>%s</strong>', esc_html__( 'Feedback', 'wecodeart' ) )
                 ); 
             ?>
         </h2>

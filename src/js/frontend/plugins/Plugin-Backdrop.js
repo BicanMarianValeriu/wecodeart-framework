@@ -143,6 +143,5 @@ export default (function (wecodeart) {
 	 * @memberof Component
 	 */
 	wecodeart.Backdrop = Backdrop;
-	wecodeart.plugins.Backdrop = Backdrop;
 
 }).apply(this, [window.wecodeart]);

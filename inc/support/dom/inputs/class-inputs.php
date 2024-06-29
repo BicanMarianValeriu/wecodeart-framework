@@ -101,7 +101,7 @@ class Inputs implements Configuration {
 	 * Enqueue Front-End Assets
 	 *
 	 * @since	5.3.3
-	 * @version	6.2.5
+	 * @version	6.4.5
 	 */
 	public function assets() {
 		if( empty( self::$loaded ) ) {
@@ -128,7 +128,7 @@ class Inputs implements Configuration {
 
 		$inline_css = '
 			/* Global */
-			.wecodeart-forms {
+			.wp-forms {
 				--wp--input--icon-valid: url("' . $svg_valid . '");
 				--wp--input--icon-invalid: url("' . $svg_invalid . '");
 				--wp--input--padding-y: .5rem;
@@ -145,7 +145,7 @@ class Inputs implements Configuration {
 				--wp--input--border: 1px solid var(--wp--input--border-color);
 			}
 
-			.wecodeart-forms.theme-is-dark {
+			.wp-forms.theme-is-dark {
 				--wp--input--color: var(--wp--preset--color--white);
 			}
 
@@ -154,7 +154,6 @@ class Inputs implements Configuration {
 				display: inline-block;
 			}
 			input,
-			button,
 			select,
 			optgroup,
 			textarea {
@@ -269,7 +268,7 @@ class Inputs implements Configuration {
 
 		// Body class
 		add_action( 'body_class', static function( $classes ) {
-			$classes[] = 'wecodeart-forms';
+			$classes[] = 'wp-forms';
 
 			return $classes;
 		} );
@@ -278,46 +277,42 @@ class Inputs implements Configuration {
 		wecodeart( 'assets' )->add_style( $this->make_handle(), [
 			'inline'	=> $inline_css,
 		] );
-
-		$inline_js = <<<JS
-			(function (wecodeart) {
-				wecodeart.routes = {
-					...wecodeart.routes,
-					wecodeartForms: {
-						complete: () => {
-							const { Events, Selector } = wecodeart;
-							Selector.find('.needs-validation').forEach((form) => {
-								let timeout;
-								
-								Events.on(form, 'submit', (e) => {
-									if (!form.checkValidity()) {
-										e.preventDefault();
-										e.stopPropagation();
-									}
-									
-									Selector.find('.wpcf7-not-valid-tip,.invalid-feedback,.invalid-tooltip', form).forEach(el => el.remove());
-
-									form.classList.add('was-validated');
-									
-									clearTimeout(timeout);
-
-									timeout = setTimeout(() => {
-										form.classList.remove('was-validated');
-										clearTimeout(timeout);
-									}, 5000);
-
-								}, false);
-							});
-						}
-					}
-				};
-			}).apply(this, [window.wecodeart]);
-		JS;
 		
 		// Scripts
 		wecodeart( 'assets' )->add_script( $this->make_handle(), [
-			'inline'	=> $inline_js,
 			'deps'		=> [ 'wecodeart-support-assets' ],
+			'inline'	=> <<<JS
+				(function (wecodeart) {
+					wecodeart.routes = {
+						...wecodeart.routes,
+						wpForms: {
+							complete: () => {
+								const { Events, Selector } = wecodeart;
+								Selector.find('.needs-validation').forEach((form) => {
+									let timeout;
+									
+									Events.on(form, 'submit', (e) => {
+										if (!form.checkValidity()) {
+											e.preventDefault();
+											e.stopPropagation();
+										}
+										
+										form.classList.add('was-validated');
+										
+										clearTimeout(timeout);
+
+										timeout = setTimeout(() => {
+											form.classList.remove('was-validated');
+											clearTimeout(timeout);
+										}, 5000);
+
+									}, false);
+								});
+							}
+						}
+					};
+				}).apply(this, [window.wecodeart]);
+			JS,
 		] );
 	}
 	

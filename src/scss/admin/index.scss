@@ -26,7 +26,7 @@ $enable-cssgrid: true;
 	.wca-notice {
 		margin: 0;
 
-		& + .wca-notice {
+		&+.wca-notice {
 			margin-top: 1rem;
 		}
 	}
@@ -45,13 +45,13 @@ $enable-cssgrid: true;
 	background-color: var(--wca--body--background);
 	color: var(--wca--body--color);
 
-	@include media-breakpoint-up( 'md' ) {
+	@include media-breakpoint-up('md') {
 		--wca--gutter: 50px;
 	}
 
 	/* Donate */
 	#donate-button {
-		@include media-breakpoint-up( 'md' ) {
+		@include media-breakpoint-up('md') {
 			text-align: right;
 		}
 
@@ -64,29 +64,29 @@ $enable-cssgrid: true;
 	.grid--layout {
 		--wca--columns: 1;
 
-		@include media-breakpoint-up( 'md' ) {
+		@include media-breakpoint-up('md') {
 			--wca--columns: 12;
 		}
 
-		@include media-breakpoint-up( 'xl' ) {
+		@include media-breakpoint-up('xl') {
 			--wca--gap: 4rem;
 		}
 
 		.grid {
 			&__main {
-				@include media-breakpoint-up( 'lg' ) {
+				@include media-breakpoint-up('lg') {
 					grid-column: 1 / span 8;
 				}
 			}
-			
+
 			&__side {
-				@include media-breakpoint-up( 'lg' ) {
+				@include media-breakpoint-up('lg') {
 					grid-column: 9 / span 4;
 				}
 			}
 		}
 	}
-	
+
 	/* Panels */
 	.components-panel {
 		min-height: 100vh;
@@ -111,12 +111,12 @@ $enable-cssgrid: true;
 			code {
 				margin-left: 15px;
 				border-radius: 2px;
-				background-color: rgba(0,0,0,.2);
+				background-color: rgba(0, 0, 0, .2);
 				font-size: .6rem;
 			}
 
 			form {
-				@include media-breakpoint-up( 'md' ) {
+				@include media-breakpoint-up('md') {
 					float: right;
 				}
 			}
@@ -142,24 +142,24 @@ $enable-cssgrid: true;
 	.wecodeart-tab-panel {
 		overflow: hidden;
 		margin: 0 calc(-1 * var(--wca--gutter));
-		width: calc(100% + 100px);	
+		width: calc(100% + 100px);
 
 		.components-tab-panel {
 			&__tabs {
 				padding: 0 var(--wca--gutter);
 				border-bottom: 1px solid var(--wca--border--color);
-	
+
 				&-item {
 					padding: 10px 15px;
 					border-bottom: 5px solid transparent;
-					font-size: 1rem;
+					font-size: 14px;
 					font-weight: 500;
 					color: #475569;
 
 					@media screen and (max-width: 640px) {
 						font-size: 12px;
 					}
-	
+
 					&:hover {
 						opacity: 1;
 						background-color: #f8fafc;
@@ -167,18 +167,16 @@ $enable-cssgrid: true;
 					}
 
 					&:focus {
-						color: var( --wp-admin-theme-color );
-						outline-offset: -1px;
-						outline: 1px dotted #555d66;
+						color: var(--wp-admin-theme-color);
 						box-shadow: none;
 					}
-	
+
 					&.active-tab {
 						background: #e2e8f0;
 
 						&,
 						&:hover {
-							border-color: var( --wp-admin-theme-color );
+							border-color: var(--wp-admin-theme-color);
 						}
 					}
 				}
@@ -193,7 +191,7 @@ $enable-cssgrid: true;
 
 		&--vertical {
 			display: flex;
-	
+
 			.components-tab-panel {
 				&__tabs {
 					padding: 15px 0;
@@ -221,12 +219,12 @@ $enable-cssgrid: true;
 							background-color: white;
 						}
 
-						& + button::before {
+						&+button::before {
 							border-top: 0;
 						}
 					}
 				}
-	
+
 				&__tab {
 					&-content {
 						flex: 1 1 auto;
@@ -248,7 +246,7 @@ $enable-cssgrid: true;
 		td,
 		th {
 			vertical-align: middle;
-			
+
 			&:not(:first-child) {
 				border-left: 1px solid var(--wca--border--color);
 			}
@@ -265,7 +263,7 @@ $enable-cssgrid: true;
 				display: block;
 				font-weight: bold;
 			}
-			
+
 			input {
 				display: block;
 				width: 100%;
@@ -284,7 +282,7 @@ $enable-cssgrid: true;
 		--wca--columns: 1;
 		--wca--gap: 1rem;
 
-		@include media-breakpoint-up( 'sm' ) {
+		@include media-breakpoint-up('sm') {
 			--wca--columns: 2;
 		}
 	}
@@ -305,10 +303,10 @@ $enable-cssgrid: true;
 		}
 
 		&__body {
-			color: rgba(36,47,87,.7);
+			color: rgba(36, 47, 87, .7);
 		}
 	}
-	
+
 	/* Social */
 	.wp-block-social-links {
 		list-style: none;

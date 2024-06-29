@@ -66,12 +66,14 @@ const CLASS_NAME_SHOW = 'show';
 const CLASS_NAME_SHOWING = 'showing';
 const DefaultType = {
   animation: 'boolean',
-  autohide: 'boolean',
+  autoHide: 'boolean',
+  autoRemove: 'boolean',
   delay: 'number'
 };
 const Default = {
   animation: true,
-  autohide: true,
+  autoHide: true,
+  autoRemove: true,
   delay: 5000
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
@@ -122,8 +124,6 @@ const Default = {
         Events.trigger(this._element, EVENT_SHOWN);
         this._maybeScheduleHide();
       };
-      this._element.classList.remove(CLASS_NAME_HIDE); // @deprecated
-
       reflow(this._element);
       this._element.classList.add(CLASS_NAME_SHOW, CLASS_NAME_SHOWING);
       this._queueCallback(complete, this._element, this._config.animation);
@@ -140,6 +140,10 @@ const Default = {
         this._element.classList.add(CLASS_NAME_HIDE); // @deprecated
         this._element.classList.remove(CLASS_NAME_SHOWING, CLASS_NAME_SHOW);
         Events.trigger(this._element, EVENT_HIDDEN);
+        if (this._config.autoRemove) {
+          this._element.remove();
+          this.dispose();
+        }
       };
       this._element.classList.add(CLASS_NAME_SHOWING);
       this._queueCallback(complete, this._element, this._config.animation);
@@ -157,15 +161,13 @@ const Default = {
 
     // Private
     _maybeScheduleHide() {
-      if (!this._config.autohide) {
+      if (!this._config.autoHide) {
         return;
       }
       if (this._hasMouseInteraction || this._hasKeyboardInteraction) {
         return;
       }
-      this._timeout = setTimeout(() => {
-        this.hide();
-      }, this._config.delay);
+      this._timeout = setTimeout(() => this.hide(), this._config.delay);
     }
     _onInteraction(event, isInteracting) {
       switch (event.type) {

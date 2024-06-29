@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Query;
@@ -107,12 +107,12 @@ class Title extends Dynamic {
 	 * @return 	string
 	 */
 	public function filter_title( $content ) {
-		$output = wecodeart( 'markup' )->SVG::compile( 'folder' );
+		$output = wecodeart( 'dom' )->SVG::compile( 'folder' );
 
 		$title_template = '<span>%s</span>';
 
 		if ( is_search() ) {
-			$output = wecodeart( 'markup' )->SVG::compile( 'search' );
+			$output = wecodeart( 'dom' )->SVG::compile( 'search' );
 			$output .= sprintf( $title_template, sprintf( 
 				esc_html__( 'Search Results for "%s".', 'wecodeart' ),
 				'<span>' .  get_search_query() . '</span>' 

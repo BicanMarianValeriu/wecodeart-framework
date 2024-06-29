@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.3.7
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support;
@@ -64,7 +64,24 @@ final class Styles implements Integration {
 	/**
 	 * Register hooks
 	 */
-	public function register_hooks() {}
+	public function register_hooks() {
+		\add_filter( 'safe_style_css', [ $this, 'safe_style_css' ], PHP_INT_MAX );
+	}
+
+	/**
+	 * Extend safe styles
+	 *
+	 * @param  array   $args
+	 *
+	 * @return array
+	 */
+	public function safe_style_css( $args ): array {
+		return wp_parse_args( [
+			'text-overflow',
+			'white-space',
+			'box-shadow'
+		], $args );
+	}
 
 	/**
 	 * Generate breakpoint
@@ -473,22 +490,6 @@ final class Styles implements Integration {
     }
 
 	/**
-	 * Convert Color to RGBA.
-	 *
-	 * @since   5.0.0
-	 * @param 	string 	$color   Color data.
-	 * @param 	bool 	$alpha   Either return alpha or not
-	 * @param 	bool 	$array   Either return as array or string
-	 *
-	 * @return 	mixed
-	 */
-	public static function color_to_rgba( string $color, bool $alpha = false, bool $array = false ) {
-		_deprecated_function( __FUNCTION__, '6.3.1', "wecodeart( 'styles' )::hex_to_rgb" );
-
-		return self::hex_to_rgb( $color, $alpha ? (int) $alpha : 1 , $array );
-	}
-
-	/**
 	 * Add a tint to an RGB color and make it lighter.
 	 *
 	 * @param 	float[] $rgb_array An array representing an RGB color.
@@ -524,12 +525,7 @@ final class Styles implements Integration {
 	 * @return 	string 	A hexadecimal representation.
 	 */
 	public static function rgb_to_hex( array $rgb_array = [] ): string {
-		return sprintf(
-			'#%02X%02X%02X',
-			$rgb_array['r'],
-			$rgb_array['g'],
-			$rgb_array['b']
-		);
+		return sprintf( '#%02X%02X%02X', $rgb_array['r'], $rgb_array['g'], $rgb_array['b'] );
 	}
 	
 	/**
@@ -564,7 +560,15 @@ final class Styles implements Integration {
 
 		// If shorthand format, need to expand it
 		if ( strlen( $hex ) === 3 ) {
-			$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+			$hex 	= $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+		}
+
+		// Handle 8-character hex format with alpha
+		if ( strlen( $hex ) === 8 ) {
+			$a 		= hexdec( substr( $hex, 6, 2 ) ) / 255;
+			$hex 	= substr( $hex, 0, 6 );
+		} else {
+			$a 		= $alpha;
 		}
 
 		if ( strlen( $hex ) !== 6 ) {
@@ -575,7 +579,7 @@ final class Styles implements Integration {
 		$r = hexdec( substr( $hex, 0, 2 ) );
 		$g = hexdec( substr( $hex, 2, 2 ) );
 		$b = hexdec( substr( $hex, 4, 2 ) );
-		$a = max( 0, min( 1, $alpha ) ); // Ensure alpha is between 0 and 1
+		$a = max( 0, min( 1, $a ) ); // Ensure alpha is between 0 and 1
 
 		return $array ? [
 			'r' => $r, 

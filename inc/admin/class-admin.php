@@ -168,6 +168,7 @@ class Admin {
 			],
 			'currentUser'	=> wp_get_current_user()->display_name,
 			'adminUrl'		=> untrailingslashit( esc_url_raw( admin_url() ) ),
+			'restUrl' 		=> untrailingslashit( esc_url_raw( rest_url( 'wecodeart/v1' ) ) ),
 			'adminEmail'	=> get_bloginfo( 'admin_email' ),
 			'themeDirs'		=> wecodeart_config( 'paths' )
 		] );

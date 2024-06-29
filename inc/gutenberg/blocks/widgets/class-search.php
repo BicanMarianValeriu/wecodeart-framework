@@ -109,17 +109,23 @@ class Search extends Dynamic {
 				}
 				?>
 				<div class="<?php echo esc_attr( implode( ' ', array_filter( $wrapper ) ) ); ?>">
-				<?php
-	
-				// Add search input
-				echo self::get_input( $attributes, $instance_id );
-	
-				// Maybe add submit button
-				echo self::get_button( $attributes, $instance_id );
-	
-				?>
+					<?php
+		
+					// Add search input
+					echo self::get_input( $attributes, $instance_id );
+		
+					// Maybe add submit button
+					echo self::get_button( $attributes, $instance_id );
+		
+					?>
 				</div>
 				<?php
+
+				/**
+				 * Hook - usefull to extend the widget with ajax 
+				 */
+				do_action( 'wecodeart/blocks/widgets/search/fields', $attributes, $instance_id );
+
 			}, [ $attributes, $instance_id ], false );
 		}
 
@@ -191,7 +197,7 @@ class Search extends Dynamic {
 
 		$is_btn = $type === 'button-only';
 		$icon  	= get_prop( $attributes, 'buttonUseIcon' );
-		$label 	= $icon ? wecodeart( 'markup' )->SVG::compile( 'search' ) : get_prop( $attributes, 'buttonText' );
+		$label 	= $icon ? wecodeart( 'dom' )->SVG::compile( 'search' ) : get_prop( $attributes, 'buttonText' );
 		$aria	= $is_btn ? __( 'Open search modal', 'wecodeart' ) : wp_strip_all_tags( get_prop( $attributes, 'buttonText' ) );
 
 		$attrs 	= [
@@ -318,6 +324,7 @@ class Search extends Dynamic {
 				margin-left: 1rem;
 			}
 			.wp-block-search__fields {
+				position: relative;
 				display: flex;
 			}
 		CSS;

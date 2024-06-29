@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.2.5
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -36,8 +36,7 @@ class Toggler extends Base {
 
 		$symbol	= encode_svg_data( $symbol );
 
-		return "
-			/* Toggler */
+		return <<<CSS
 			.navbar-toggler {
 				--wp--navbar-toggler-padding-y: 0;
 				--wp--navbar-toggler-padding-x: 0;
@@ -77,6 +76,6 @@ class Toggler extends Base {
 			:where(.theme-is-dark,.navbar-dark) .navbar-toggler-icon {
 				filter: invert(1) grayscale(100%) brightness(200%);
 			}
-        ";
+		CSS;
 	}
 }

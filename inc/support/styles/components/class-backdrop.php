@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.4.4
- * @version		6.4.4
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -42,6 +42,8 @@ class Backdrop extends Base {
 				left: 0;
 				width: 100vw;
 				height: 100vh;
+				margin: 0!important;
+				max-width: 100vw!important;
 				background-color: var(--wp--backdrop--background,var(--wp--preset--color--black, #000));
 				z-index: var(--wp--backdrop--zindex, 1040);
 			}

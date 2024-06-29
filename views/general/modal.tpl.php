@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use function WeCodeArt\Functions\toJSON;
+use function WeCodeArt\Functions\{ toJSON, array_extract };
 
 \wecodeart( 'styles' )->Components->load( [ 'modal' ] );
 
@@ -37,36 +37,44 @@ use function WeCodeArt\Functions\toJSON;
 /**
  * @param   mixed  	$id			Modal ID
  * @param   string	$title		Modal Title
+ * @param   boolean	$close		Modal Close
  * @param   string	$content	Modal Content
+ * @param   string	$content	Modal Footer
  */
 
 $classnames = [ 'wp-modal' ]; 
-$classnames = array_merge( $classnames, $classes ?? [] ); 
+$classnames = array_merge( $classnames, $classes ?? [] );
+
+$dialog_cls = [ 'wp-modal__dialog' ];
+$dialog_cls = array_merge( $dialog_cls, array_extract( $classnames, '__dialog--' ) );
 
 $title      = $title ?? false;
+$close 		= $close ?? true;
 $content    = $content ?? false;
 $footer     = $footer ?? false;
 
 // Allways goes to footer
-\add_action( 'wp_footer', static function() use ( $classnames, $id, $title, $content, $footer ) {
+\add_action( 'wp_footer', static function() use ( $classnames, $dialog_cls, $close, $id, $title, $content, $footer ) {
 ?>
 <div class="<?php echo esc_attr( join( ' ', $classnames) ); ?>" id="<?php echo esc_attr( $id ); ?>-modal" aria-hidden="true" tabindex="-1">
-    <div class="wp-modal__dialog modal-dialog">
-        <div class="wp-modal__content modal-content">
-            <div class="wp-modal__header modal-header">
+    <div class="<?php echo esc_attr( join( ' ', $dialog_cls ) ); ?>">
+        <div class="wp-modal__content">
+            <?php if( ! empty( $title ) || $close ) : ?>
+            <div class="wp-modal__header">
                 <?php if( ! empty( $title ) ) : ?>
-                <h5 class="wp-modal__title modal-title"><?php echo esc_html( $title ); ?></h5>
+                <h5 class="wp-modal__title"><?php echo esc_html( $title ); ?></h5>
                 <?php endif; ?>
-                <?php wecodeart_template( 'general/close', [ 'close' => 'modal' ] ); ?>
+                <?php if( $close ) wecodeart_template( 'general/close', [ 'close' => 'modal' ] ); ?>
             </div>
-            <div class="wp-modal__body modal-body"><?php
+            <?php endif; ?>
+            <div class="wp-modal__body"><?php
             
                 // Content markup should be escaped before passing to this view.
                 echo $content;
                 
             ?></div>
             <?php if( $footer ) : ?>
-            <div class="wp-modal__footer modal-footer"><?php echo wp_kses_post( $footer ); ?></div>
+            <div class="wp-modal__footer"><?php echo wp_kses_post( $footer ); ?></div>
             <?php endif; ?>
         </div>
     </div>

@@ -8,97 +8,126 @@
  */
 import { camelCase, requireJs } from '../helpers';
 
+const NAME = 'scripts';
+
+const Default = {
+	element: document.body, // The element
+};
+
+const DefaultType = {
+	element: '(element|null)',
+};
+
+const { doAction, applyFilters } = wp.hooks;
+
 export default (function (wecodeart) {
 
-	class Scripts {
-		/**
-		 * Generic constructor 
-		 * @constructor
-		 * @param {object} namespace 	| JS Object
-		 * @param {string} routes		| Key name containing routes 
-		 */
-		constructor(namespace) {
-			const { routes, lazyJs } = namespace;
-			const { doAction, applyFilters } = wp.hooks;
-			this.routes = routes;
-			this.lazyJs = lazyJs;
+	const { Config } = wecodeart;
+
+	class Scripts extends Config {
+		constructor(config) {
+			super();
+			const { routes, lazyJs } = wecodeart;
+			
+			this._config = this._getConfig(config);
+			this._routes = routes;
+			this._lazyJs = lazyJs;
+
 			this.loaded = [];
 			this.doAction = doAction;
 			this.applyFilters = applyFilters;
-			this.extendedR = Object.keys(routes).filter(k => routes[k]?.extends && routes[k].extends instanceof Array);
+			this.extendedRoutes = Object.keys(routes).filter(k => routes[k]?.extends instanceof Array);
+
 			this.loadEvents();
 		}
 
+		// Getters
+		static get Default() {
+			return Default;
+		}
+
+		static get DefaultType() {
+			return DefaultType;
+		}
+
+		static get NAME() {
+			return NAME;
+		}
+
 		/**
-		 * Meant to be run on load
-		 * @info 	It handles all necessary JS init from routes
+		 * Executes the specified function on a given route
+		 * @param {string} route - Route name
+		 * @param {string} [funcName='init'] - Function name to execute
+		 * @param {Array} args - Arguments to pass to the function
 		 */
-		fireRoute(route, funcname, args) {
-			let fire;
-			funcname = funcname === undefined ? 'init' : funcname;
-			fire = route !== '';
-			fire = fire && this.routes[route];
-			fire = fire && (typeof this.routes[route][funcname] === 'function' || typeof this.routes[route][funcname] === 'object');
+		executeRouteFunction(route, funcName = 'init', args) {
+			const routeExists = this._routes[route];
+			const funcExists = routeExists && (typeof routeExists[funcName] === 'function' || typeof routeExists[funcName] === 'object');
 
-			if (fire) {
-				args = this.applyFilters('wecodeart.route', args, route, funcname);
+			if (funcExists) {
+				args = this.applyFilters('wecodeart.route', args, route, funcName);
 
-				if (typeof this.routes[route][funcname] === 'object') {
-					const { id: bundleIds = [], callback = () => { }, condition = true } = this.routes[route][funcname];
-					const condMeet = typeof condition === 'function' ? condition() !== false : condition;
-					const missingBundles = [...bundleIds].filter(k => !Object.keys(this.lazyJs).includes(k));
-					if (condMeet) {
+				if (typeof routeExists[funcName] === 'object') {
+					const { id: bundleIds = [], callback = () => { }, condition = true } = routeExists[funcName];
+					const conditionMet = typeof condition === 'function' ? condition() !== false : condition;
+					const missingBundles = bundleIds.filter(bundle => !Object.keys(this._lazyJs).includes(bundle));
+
+					if (conditionMet) {
 						if (missingBundles.length) {
-							const message = `WeCodeArt JSM - Route "${route}" is missing the lazy bundle(s): ${missingBundles.join(', ')}. Please add them before using.`;
-							console.log(message);
+							console.warn(`WeCodeArt JSM - Route "${route}" is missing the lazy bundle(s): ${missingBundles.join(', ')}. Please add them before using.`);
 							return;
 						}
 
-						requireJs(this.lazyJs, bundleIds, () => {
+						requireJs(this._lazyJs, bundleIds, () => {
 							callback(args);
-							this.doAction('wecodeart.route', route, funcname, args);
+							this.doAction('wecodeart.route', route, funcName, args);
 							this.loaded.push(route);
 						});
 					}
 					return;
 				}
 
-				this.routes[route][funcname](args);
-				this.doAction('wecodeart.route', route, funcname, args);
+				routeExists[funcName](args);
+				this.doAction('wecodeart.route', route, funcName, args);
 				this.loaded.push(route);
-				return;
 			}
 		}
 
 		/**
-		 * Meant to be run on load
-		 * @info 	It handles all necessary JS init from routes
+		 * Executes all necessary functions for a given route
+		 * @param {string} route - Route name
 		 */
-		sequence(route) {
+		processRoute(route) {
 			if (this.loaded.includes(route)) {
 				return;
 			}
 
-			this.fireRoute(route);
-			this.fireRoute(route, 'complete');
-			this.fireRoute(route, 'lazy');
+			this.executeRouteFunction(route);
+			this.executeRouteFunction(route, 'complete');
+			this.executeRouteFunction(route, 'lazy');
 		}
 
 		/**
-		 * Meant to be run on load
-		 * @info 	It handles all necessary JS init from routes
+		 * Loads and initializes the appropriate routes based on body classes and predefined routes
 		 */
 		loadEvents() {
-			this.fireRoute('common');
-			for (let cls of document.body.classList) {
+			this.executeRouteFunction('common');
+
+			const { element } = this._config;
+
+			element.classList.forEach(cls => {
 				const route = camelCase(cls.toLowerCase().replace(/-/g, '_'));
-				// Fire Manual Routes
-				this.sequence(route);
-				// Additional Extended Routes
-				this.extendedR.filter(k => this.routes[k].extends.includes(cls) && this.sequence(k));
-			}
-			this.fireRoute('common', 'complete');
-			this.fireRoute('common', 'lazy');
+				this.processRoute(route);
+
+				this.extendedRoutes.forEach(extRoute => {
+					if (this._routes[extRoute].extends.includes(cls)) {
+						this.processRoute(extRoute);
+					}
+				});
+			});
+
+			this.executeRouteFunction('common', 'complete');
+			this.executeRouteFunction('common', 'lazy');
 		}
 	}
 

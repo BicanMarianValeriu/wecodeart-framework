@@ -28,19 +28,14 @@ const NAMESPACE = `wecodeart/${NAME}`;
 // const EVENT_ADDED = `added${EVENT_KEY}`;
 // const EVENT_REMOVED = `removed${EVENT_KEY}`;
 
-function createToastElement({ header = '', content = '', className = '', close = false }) {
-    let template = document.getElementById('wp-toast-template').innerHTML;
-
-    // Removing the button with class "wp-close"
-    if(close === false) {
-        const regex = /<button[^>]*class="[^"]*wp-close[^"]*"[^>]*>.*?<\/button>/gi;
-        template = template.replace(regex, '').replace(/\s*\n+\s*/g, '');
-    }
+function createToastElement({ header = '', content = '', className = '', close = true }) {
+    const template = document.getElementById('wp-toast-template').innerHTML;
 
     const markup = new Template({
         content: {
             '.wp-toast__header-text': header,
             '.wp-toast__body': content,
+            '.wp-close': Boolean(close) === true ? ' ' : null
         },
         extraClass: className,
         template: template,

@@ -145,7 +145,6 @@ const DefaultType = {
    * @memberof Component
    */
   wecodeart.FocusTrap = FocusTrap;
-  wecodeart.plugins.FocusTrap = FocusTrap;
 }).apply(undefined, [window.wecodeart]));
 /******/ })()
 ;

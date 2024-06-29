@@ -13,55 +13,71 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use function WeCodeArt\Functions\toJSON;
+use function WeCodeArt\Functions\{ get_prop, toJSON };
 
 wecodeart( 'styles' )->Components->load( [ 'toggler' ] );
 
 /**
- * @param   mixed  	$id			Toggle ID
- * @param   mixed	$toggle		Toggle Type
- * @param   mixed	$icon		Toggle Icon
+ * @param   string	$id			ID
+ * @param   string	$toggle		Type
+ * @param   string	$toggle		Class
+ * @param   bool	$icon		Icon
+ * @param   array	$options	Options
  */
 
 $type 	= $type ?? 'offcanvas';
 $label	= $label ?? __( 'Menu', 'wecodeart' );
+$class 	= $class ?? 'wp-element-button'; 
+$opts	= $options ?? [
+	'isOpen' => false
+];
+
+$classnames = (array) $class;
 
 ?>
 <button 
-	type="button"
+	class="<?php echo esc_attr( join( ' ', $classnames ) ); ?>"
+	id="<?php echo esc_attr( $id ); ?>-toggle"
 	<?php switch( $type ) : 
 		case 'offcanvas':
 	?>
-	class="navbar-toggler"
 	data-wp-interactive="wecodeart/offcanvas" 
-	data-wp-context="<?php echo esc_attr( toJSON( [ 'isOpen' => false ] ) ); ?>"
+	data-wp-context="<?php echo esc_attr( toJSON( $opts ) ); ?>"
 	data-wp-init--validate="callbacks.validateConfig"
 	data-wp-init--setup="callbacks.onInit"
-	data-wp-bind--aria-expanded="context.isOpen",
+	data-wp-bind--aria-expanded="context.isOpen"
 	data-wp-on--click="actions.toggle"
 	aria-label="<?php esc_attr_e( 'Toggle navigation', 'wecodeart' ); ?>"
 	aria-controls="#<?php echo esc_attr( $id ); ?>-offcanvas"
 	<?php
 		break;
 		case 'collapse':
+			if( get_prop( $opts, [ 'isOpen' ] ) === false ) {
+				$classnames[] = 'collapsed';
+			}
 	?>
-	class="wp-element-button has-accent-background-color has-dark-color collapsed"
 	data-wp-interactive="wecodeart/collapse" 
-	data-wp-context="<?php echo esc_attr( toJSON( [ 'isOpen' => false ] ) ); ?>"
-	data-wp-bind--aria-label="state.ariaLabel",
-	data-wp-bind--aria-expanded="context.isOpen",
-	data-wp-class--collapsed="!context.isOpen",
+	data-wp-context="<?php echo esc_attr( toJSON( $opts ) ); ?>"
+	data-wp-bind--aria-label="state.ariaLabel"
+	data-wp-bind--aria-expanded="context.isOpen"
+	data-wp-class--collapsed="!context.isOpen"
 	data-wp-on--click="actions.toggle"
 	aria-label="<?php esc_attr_e( 'Open item', 'wecodeart' ); ?>"
 	aria-controls="#<?php echo esc_attr( $id ); ?>-content"
 	<?php 
 		break;
 	endswitch; ?>
-	aria-expanded="false"
-	id="<?php echo esc_attr( $id ); ?>-toggle"
+	aria-expanded="<?php echo esc_attr( get_prop( $opts, [ 'isOpen' ] ) ? 'true' : 'false' ); ?>"
+	type="button"
 >
 	<?php if ( $icon ?? false ) : ?>
+	<?php if ( is_array( $icon ) ) :
+		wecodeart( 'dom' )->SVG::add( $id, $icon );
+		wecodeart( 'dom' )->SVG::render( $id, [ 'class' => 'fa-fw' ] );
+	?>
+	<?php else : ?>
 	<span class="navbar-toggler-icon"></span>
+	<?php endif; ?>
 	<?php else : ?>
 	<span><?php echo esc_html( $label ); ?></span>
 	<?php endif; ?>

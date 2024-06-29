@@ -36,7 +36,7 @@ class Toast extends Base {
 	 */
 	public static function styles(): string {
 		return <<<CSS
-			:where(.wp-toast,.toast) {
+			.wp-toast {
 				--wp--toast-zindex: 1090;
 				--wp--toast-padding-x: 0.75rem;
 				--wp--toast-padding-y: 0.5rem;
@@ -64,31 +64,20 @@ class Toast extends Base {
 				box-shadow: var(--wp--toast-box-shadow);
 				border-radius: var(--wp--toast-border-radius);
 			}
-			:is(.wp-toast,.toast).showing {
+			.wp-toast.showing {
 				opacity: 0;
 				transform: translate3d(0, 25px, 0);
 			}
-			:where(.wp-toast,.toast).fade {
+			.wp-toast.fade {
 				transition: all .3s;
 			}
-			:where(.wp-toast,.toast).show {
+			.wp-toast.show {
 				transform: none;
 			}
-			:where(.wp-toast,.toast):not(.show) {
+			.wp-toast:not(.show) {
 				display: none;
 			}
-			:where(.wp-site-toasts,.toast-container) {
-				--wp--toast-zindex: 1090;
-				position: absolute;
-				z-index: var(--wp--toast-zindex);
-				width: max-content;
-				max-width: 100%;
-				pointer-events: none;
-			}
-			:where(.wp-site-toasts,.toast-container) > :not(:first-child) {
-				margin-top: var(--wp--toast-spacing);
-			}
-			:where(.wp-toast__header,.toast-header) {
+			.wp-toast__header {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
@@ -100,16 +89,27 @@ class Toast extends Base {
 				border-top-left-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
 				border-top-right-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
 			}
-			:where(.wp-toast__header,.toast-header) :is(.wp-close,.btn-close) {
+			.wp-toast__header .wp-close {
 				margin-right: calc(-.5 * var(--wp--toast-padding-x));
 				margin-left: var(--wp--toast-padding-x);
 			}
-			:where(.wp-toast__body,.toast-body) {
+			.wp-toast__body {
 				padding: var(--wp--toast-padding-x);
 				background-color: var(--wp--toast-body-bg);
 				border-bottom-left-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
 				border-bottom-right-radius: calc(var(--wp--toast-border-radius) - var(--wp--toast-border-width));
 				word-wrap: break-word;
+			}
+			.wp-site-toasts {
+				--wp--toast-zindex: 1090;
+				position: absolute;
+				z-index: var(--wp--toast-zindex);
+				width: max-content;
+				max-width: 100%;
+				pointer-events: none;
+			}
+			.wp-site-toasts > :not(:first-child) {
+				margin-top: var(--wp--toast-spacing);
 			}
 		CSS;
 	}

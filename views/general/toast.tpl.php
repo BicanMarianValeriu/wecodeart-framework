@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 
 $classnames = [ 'wp-site-toasts', 'position-fixed', 'p-3', 'bottom-0', 'end-0' ];
 
-\wecodeart( 'styles' )->Components->load( [ 'toast', 'close' ] );
+\wecodeart( 'styles' )->Components->load( [ 'toast' ] );
 \wecodeart( 'styles' )->Utilities->load( $classnames );
 
 \wp_enqueue_script( 'wecodeart-support-assets-toast' );

@@ -90,7 +90,7 @@ final class Assets implements Integration {
 	 * Enqueue Front-End Core Assets
 	 *
 	 * @since	6.0.0
-	 * @version	6.3.7
+	 * @version	6.4.5
 	 */
 	public function core(): void {
 		// Styles
@@ -99,7 +99,7 @@ final class Assets implements Integration {
 		] );
 
 		// Scripts
-		foreach( [ 'dropdown' ] as $handle ) { // todo - update
+		foreach( [ 'dropdown' ] as $handle ) { // todo - move away from BootStrap
 			$this->add_script( $this->make_handle( $handle ), [
 				'path' 		=> $this->get_asset( 'js', 'modules/' . $handle ),
 				'deps'		=> [ $this->make_handle() ],
@@ -133,7 +133,7 @@ final class Assets implements Integration {
 			'path' 		=> $this->get_asset( 'js', 'frontend' ),
 			'deps'		=> [ 'wp-hooks' ],
 			'locale'	=> $wecodeart,
-			'inline'	=> 'document.addEventListener("DOMContentLoaded",function(){new wecodeart.Scripts(wecodeart);});',
+			'inline'	=> 'document.addEventListener("DOMContentLoaded",function(){new wecodeart.Scripts();});',
 		] );
 
 		// Script Modules

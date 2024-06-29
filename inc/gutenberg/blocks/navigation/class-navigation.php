@@ -48,9 +48,7 @@ use function preg_match;
 use function str_replace;
 use function sanitize_html_class;
 use function block_core_navigation_filter_out_empty_blocks;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_json_color;
-use function WeCodeArt\Functions\get_lightness_limit;
+use function WeCodeArt\Functions\{ get_prop, get_json_color, get_lightness_limit, array_extract };
 
 /**
  * Gutenberg Navigation block.
@@ -167,25 +165,22 @@ class Navigation extends Dynamic {
 		$block_id	= wp_unique_id( 'wp-navigation-' );
 
 		// Offcanvas classes
+		$breakpoint = wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' );
+		$breakpoint = [ $breakpoint . ':wp-offcanvas--expand' ];
+		$hidden   	= get_prop( $attributes, [ 'overlayMenu' ] ) === 'always';
 		$classes	= explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
-		$offcanvas  = [ 'offcanvas-start' ];
+		$expanded   = array_extract( $classes, ':wp-offcanvas--expand' ); 	// Extract expand modifier class
+		$expanded   = $expanded ?: ( $hidden ? [] : $breakpoint );			// Default expand modifier if not set
+		$offcanvas  = array_extract( $classes, 'wp-offcanvas--' );			// Extract other modifiers (top|start|end|bottom|other)
+		$offcanvas  = $offcanvas ?: [ 'wp-offcanvas--start' ];				// Default position if not set
+		$offcanvas 	= array_merge( $offcanvas, $expanded );					// Merge offcanvas classes
 
-		if( ! empty( $classes ) ) {
-			$excludes	= [ 'offcanvas-start', 'offcanvas-end', 'offcanvas-top', 'offcanvas-bottom' ];
+		if( get_prop( $attributes, [ 'overlayMenu' ] ) === 'always' ) {
 
-			foreach ( $classes as $key => $class ) {
-				if ( in_array( $class, $excludes ) ) {
-					unset( $classes[$key] ); // Filter out.
-					$offcanvas = [ $class ];
-				}
-			}
-
-			if( ! empty( $offcanvas ) ) {
-				$attributes['className'] = join( ' ', $classes );
-			}
 		}
 		
 		// Attributes
+		$attributes['className'] = join( ' ', $classes );
 		$attrs		= $this->get_wrapper_attributes( $attributes );
 
 		// This CSS holds the block customization.
@@ -238,6 +233,7 @@ class Navigation extends Dynamic {
 				// Toggler
 				wecodeart_template( 'general/toggler', [
 					'id'		=> $block_id,
+					'class'		=> 'navbar-toggler',
 					'toggle' 	=> 'offcanvas',
 					'icon'		=> get_prop( $attributes, 'hasIcon' )
 				] );
@@ -245,7 +241,7 @@ class Navigation extends Dynamic {
 				// OffCanvas
 				wecodeart_template( 'general/offcanvas', [
 					'id'		=> $block_id,
-					'classes'	=> $offcanvas,
+					'class'		=> $offcanvas,
 					'content' 	=> $html,
 				] );
 
@@ -445,7 +441,7 @@ class Navigation extends Dynamic {
 			}
 
 			if( $value === 'mobile' ) {
-				$classes[] 	= $this->get_mobile_breakpoint();
+				$classes[] 	= 'navbar-expand-' . wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' );
 			}
 		}
 		
@@ -469,15 +465,6 @@ class Navigation extends Dynamic {
 	}
 
 	/**
-	 * Return filter mobile breakpoint class.
-	 * 
-	 * @return 	array
-	 */
-	public function get_mobile_breakpoint() {
-		return sanitize_html_class( 'navbar-expand-' . wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' ) );
-	}
-
-	/**
 	 * Fallback arguments.
 	 *
 	 * @return array
@@ -495,8 +482,7 @@ class Navigation extends Dynamic {
 	 */
 	public function get_responsive_styles( $type = 'default' ) {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-		$filter		= explode( '-', Navigation::get_instance()->get_mobile_breakpoint() );
-		$filter		= end( $filter );
+		$filter		= wecodeart_json( [ 'settings', 'custom', 'mobileBreakpoint' ], 'lg' );
 		$breakpoint	= get_prop( $breaks, $filter, '992px' );
 
 		$inline = '';
@@ -509,7 +495,7 @@ class Navigation extends Dynamic {
 						justify-content: flex-start;
 					}
 					.navbar-expand .navbar-nav {
-						flex-direction: row;
+						flex-direction: inherit;
 					}
 					.navbar-expand .navbar-nav .dropdown-menu {
 						position: absolute;
@@ -528,33 +514,6 @@ class Navigation extends Dynamic {
 					.navbar-expand .navbar-toggler {
 						display: none;
 					}
-					.navbar-expand .offcanvas-header {
-						display: none;
-					}
-					.navbar-expand .offcanvas {
-						position: inherit;
-						bottom: 0;
-						z-index: 1000;
-						flex-grow: 1;
-						visibility: visible !important;
-						background-color: transparent;
-						border-right: 0;
-						border-left: 0;
-						transition: none;
-						transform: none;
-					}
-					.navbar-expand .offcanvas-top,
-					.navbar-expand .offcanvas-bottom {
-						height: auto;
-						border-top: 0;
-						border-bottom: 0;
-					}
-					.navbar-expand .offcanvas-body {
-						display: flex;
-						flex-grow: 0;
-						padding: 0;
-						overflow-y: visible;
-					}
 				";
 			break;
 			default:
@@ -570,7 +529,7 @@ class Navigation extends Dynamic {
 							justify-content: flex-start;
 						}
 						.navbar-expand-{$key} .navbar-nav {
-							flex-direction: row;
+							flex-direction: inherit;
 						}
 						.navbar-expand-{$key} .navbar-nav .dropdown-menu {
 							position: absolute;
@@ -585,44 +544,8 @@ class Navigation extends Dynamic {
 						.navbar-expand-{$key} .navbar-toggler {
 							display: none;
 						}
-						.navbar-expand-{$key} .offcanvas-header {
-							display: none;
-						}
-						.navbar-expand-{$key} .offcanvas {
-							position: inherit;
-							bottom: 0;
-							z-index: 1000;
-							flex-grow: 1;
-							visibility: visible !important;
-							background-color: transparent;
-							border-right: 0;
-							border-left: 0;
-							transition: none;
-							transform: none;
-						}
-						.navbar-expand-{$key} .offcanvas-start,
-						.navbar-expand-{$key} .offcanvas-end {
-							width: auto;
-						}
-						.navbar-expand-{$key} .offcanvas-top,
-						.navbar-expand-{$key} .offcanvas-bottom {
-							height: auto;
-							border-top: 0;
-							border-bottom: 0;
-						}
-						.navbar-expand-{$key} .offcanvas-body {
-							display: flex;
-							flex-grow: 0;
-							padding: 0;
-							overflow-y: visible;
-						}
 
 						/* Block */
-						.wp-block-navigation.navbar-expand-{$key} :where(.offcanvas,.offcanvas-body,.navbar-nav) {
-							flex-direction: inherit;
-							justify-content: inherit;
-							align-items: inherit;
-						}
 						.wp-block-navigation.navbar-expand-{$key} .wp-block-spacer {
 							width: var(--wp--spacer-width, 1px);
 							vertical-align: -.125em;
@@ -631,23 +554,9 @@ class Navigation extends Dynamic {
 					}
 					";
 				}
-
-				$inline .= "
-					/* Offcanvas */
-					.wp-block-navigation .offcanvas-start :is(.wp-close,.btn-close) {
-						margin-left: auto;
-					}
-
-					/* No Motion */
-					@media (prefers-reduced-motion: reduce) {
-						.wp-block-navigation :where(.navbar-toggler,.offcanvas) {
-							transition: none;
-						}
-					}
-				";
 			break;
 		endswitch;
-
+		
 		return wecodeart( 'styles' )::compress( $inline );
 	}
 
@@ -663,14 +572,14 @@ class Navigation extends Dynamic {
 			case 'navbar-dark':
 				$inline .= "
 					.navbar-dark {
-						--wp--emphasis-color-rgb: 255, 255, 255;/* white */
+						--wp--emphasis-color-rgb: 255, 255, 255;
 					}
 				";
 			break;
 			case 'navbar-light':
 				$inline .= "
 					.navbar-light {
-						--wp--emphasis-color-rgb: 0, 0, 0;/* black */
+						--wp--emphasis-color-rgb: 0, 0, 0;
 					}
 				";
 			break;
@@ -746,7 +655,7 @@ class Navigation extends Dynamic {
 					.wp-block-navigation.is-style-pills {
 						--wp--nav-pills-border-radius: .375rem;
 						--wp--nav-pills-link-active-color: var(--wp--white);
-						--wp--nav-pills-link-active-bg: var(--wp--preset--color--primary);
+						--wp--nav-pills-link-active-bg: rgb(var(--wp--color--rgb));
 					}
 					.wp-block-navigation.is-style-pills .navbar-nav {
 						--wp--nav-link-padding-x: 1rem;
@@ -780,7 +689,7 @@ class Navigation extends Dynamic {
 				display: flex;
 				align-items: center;
 			}
-			.wp-block-navigation :where(.offcanvas,.offcanvas-body,.navbar-nav) {
+			.wp-block-navigation :where(.wp-offcanvas,.wp-offcanvas__body,.navbar-nav) {
 				flex: 1 1 100%;
 				gap: inherit;
 			}
@@ -854,15 +763,18 @@ class Navigation extends Dynamic {
 				overflow-y: auto;
 			}
 
+			:is(.wp-site-header,.wp-site-footer) .wp-block-navigation {
+				padding-top: 0;
+				padding-bottom: 0;
+			}
+
 			@media (prefers-reduced-motion: reduce) {
 				.nav-link {
 					transition: none;
 				}
-			}
-
-			:is(.wp-site-header,.wp-site-footer) .wp-block-navigation {
-				padding-top: 0;
-				padding-bottom: 0;
+				.wp-block-navigation :where(.navbar-toggler,.wp-offcanvas) {
+					transition: none;
+				}
 			}
 		CSS;
 	}

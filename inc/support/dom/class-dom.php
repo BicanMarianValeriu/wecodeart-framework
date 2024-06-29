@@ -299,7 +299,7 @@ class DOM implements Integration {
 	 *
 	 * @return 	array 	Merged and filtered attributes.
 	 */
-	public static function parse_attr( $context, $attributes = [], $args = [] ) {
+	public static function parse_attr( string $context, $attributes = [], $args = [] ): array {
 		$defaults = [
 			'class' => sanitize_html_class( $context )
 		];
@@ -322,7 +322,7 @@ class DOM implements Integration {
 	 *
 	 * @return 	string
 	 */
-	public static function generate_attr( $context, $attributes = [], $args = [] ) {
+	public static function generate_attr( string $context, $attributes = [], $args = [] ): string {
 		$attributes = self::parse_attr( $context, $attributes, $args );
 		$output = '';
 
@@ -358,7 +358,7 @@ class DOM implements Integration {
 	 *
 	 * @return 	string			HTML markup with attributes stripped.
 	 */
-	public static function strip_attr( $text, $elements, $attributes, $two_passes = true ) {
+	public static function strip_attr( string $text, $elements, $attributes, $two_passes = true ): string {
 
 		// Cache elements pattern.
 		$elements_pattern = implode( '|', (array) $elements );

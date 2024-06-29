@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
+\wecodeart( 'styles' )->Utilities->load( [ 'mb-3' ] );
 
 $hooks = [
     'top'       => apply_filters( 'login_form_top', '', $args ),

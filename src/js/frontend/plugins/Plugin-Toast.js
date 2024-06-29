@@ -20,19 +20,20 @@ const EVENT_SHOW = `show${EVENT_KEY}`;
 const EVENT_SHOWN = `shown${EVENT_KEY}`;
 
 const CLASS_NAME_FADE = 'fade';
-const CLASS_NAME_HIDE = 'hide'; // @deprecated - kept here only for backwards compatibility
 const CLASS_NAME_SHOW = 'show';
 const CLASS_NAME_SHOWING = 'showing';
 
 const DefaultType = {
     animation: 'boolean',
-    autohide: 'boolean',
+    autoHide: 'boolean',
+    autoRemove: 'boolean',
     delay: 'number'
 };
 
 const Default = {
     animation: true,
-    autohide: true,
+    autoHide: true,
+    autoRemove: true,
     delay: 5000
 };
 
@@ -87,9 +88,9 @@ export default (function (wecodeart) {
 
                 this._maybeScheduleHide();
             };
-            this._element.classList.remove(CLASS_NAME_HIDE); // @deprecated
 
             reflow(this._element);
+            
             this._element.classList.add(CLASS_NAME_SHOW, CLASS_NAME_SHOWING);
 
             this._queueCallback(complete, this._element, this._config.animation);
@@ -107,9 +108,13 @@ export default (function (wecodeart) {
             }
 
             const complete = () => {
-                this._element.classList.add(CLASS_NAME_HIDE); // @deprecated
                 this._element.classList.remove(CLASS_NAME_SHOWING, CLASS_NAME_SHOW);
                 Events.trigger(this._element, EVENT_HIDDEN);
+                
+                if (this._config.autoRemove) {
+                    this._element.remove();
+                    this.dispose();
+                }
             };
 
             this._element.classList.add(CLASS_NAME_SHOWING);
@@ -132,7 +137,7 @@ export default (function (wecodeart) {
 
         // Private
         _maybeScheduleHide() {
-            if (!this._config.autohide) {
+            if (!this._config.autoHide) {
                 return;
             }
 
@@ -140,9 +145,7 @@ export default (function (wecodeart) {
                 return;
             }
 
-            this._timeout = setTimeout(() => {
-                this.hide();
-            }, this._config.delay);
+            this._timeout = setTimeout(() => this.hide(), this._config.delay);
         }
 
         _onInteraction(event, isInteracting) {

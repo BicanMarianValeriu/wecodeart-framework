@@ -41,23 +41,31 @@ use function WeCodeArt\Functions\toJSON;
 ] );
 
 /**
- * @param   mixed  	$id			Toggle ID
- * @param   string	$title		Offcanvas Title
- * @param   string	$content	Offcanvas Content
+ * @param   string	$id			ID
+ * @param   array	$class		Class
+ * @param   boolean	$close		Close
+ * @param   string	$title		Title
+ * @param   string	$content	Content
  */
 
-$classnames = [ 'wp-offcanvas', 'offcanvas' ];
-$classnames = array_merge( $classnames, $classes ?? [] );
+$title 		= $title ?? '';
+$close 		= $close ?? true;
+$class 		= $class ?? [];
+$content	= $content ?? '';
+$classnames = [ 'wp-offcanvas' ];
+$classnames = array_merge( $classnames, (array) $class );
 
 ?>
-<div class="<?php echo esc_attr( join( ' ', $classnames ) ); ?>" id="<?php echo esc_attr( $id ); ?>-offcanvas" >
-	<div class="wp-offcanvas__header offcanvas-header">
-		<?php if( isset( $title ) ) : ?>
-		<h5 class="wp-offcanvas__title offcanvas-title"><?php echo esc_html( $title ); ?></h5>
+<div class="<?php echo esc_attr( join( ' ', $classnames ) ); ?>" id="<?php echo esc_attr( $id ); ?>-offcanvas" tabindex="-1">
+	<?php if( ! empty( $title ) || $close ) : ?>
+	<div class="wp-offcanvas__header">
+		<?php if( ! empty( $title ) ) : ?>
+		<h5 class="wp-offcanvas__title"><?php echo esc_html( $title ); ?></h5>
 		<?php endif; ?>
-		<?php wecodeart_template( 'general/close', [ 'close' => 'offcanvas' ] ); ?>
+		<?php if( $close ) wecodeart_template( 'general/close', [ 'close' => 'offcanvas' ] ); ?>
 	</div>
-	<div class="wp-offcanvas__body offcanvas-body"><?php
+	<?php endif; ?>
+	<div class="wp-offcanvas__body"><?php
 
 		// Content markup should be escaped before passing to this view.
 		echo $content;

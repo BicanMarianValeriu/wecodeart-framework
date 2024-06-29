@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Entry\Meta\AuthorName
  * @since 		5.5.5
- * @version		6.1.2
+ * @version		6.4.5
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -31,7 +31,7 @@ if( $value = get_prop( $attributes, 'textAlign' ) ) {
 <div <?php echo get_block_wrapper_attributes( [ 'class' => implode( ' ', $classnames ) ] ); ?>>
     <?php 
     
-    wecodeart( 'markup' )->SVG::render( 'user', [
+    wecodeart( 'dom' )->SVG::render( 'user', [
         'class' => 'wp-block-post-author__icon fa-fw'
     ] );
     

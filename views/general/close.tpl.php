@@ -13,6 +13,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+\wecodeart( 'styles' )->Components->load( [ 'close' ] );
+
 /**
  * @param   string  $close  Type of the close button
  * @param   string  $label  Label of the close button

@@ -171,7 +171,6 @@ const DefaultType = {
    * @memberof Component
    */
   wecodeart.Backdrop = Backdrop;
-  wecodeart.plugins.Backdrop = Backdrop;
 }).apply(undefined, [window.wecodeart]));
 /******/ })()
 ;

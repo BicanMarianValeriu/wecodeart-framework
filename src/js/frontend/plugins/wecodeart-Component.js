@@ -20,7 +20,6 @@ export default (function (wecodeart) {
 				return;
 			}
 
-			this.el = element; // Deprecated
 			this._element = element;
 			this._config = this._getConfig(config);
 

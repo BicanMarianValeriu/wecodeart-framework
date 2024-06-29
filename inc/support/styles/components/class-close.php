@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.4.4
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -36,8 +36,8 @@ class Close extends Base {
 
 		$symbol	= encode_svg_data( $symbol );
 
-		return "
-			:is(.wp-close,[data-wp-close],.btn-close) {
+		return <<<CSS
+			.wp-close {
 				--wp--close-color: var(--wp--preset--color--black);
 				--wp--close-icon: transparent url('$symbol') center/1em auto no-repeat;
 				--wp--close-opacity: .5;
@@ -54,27 +54,27 @@ class Close extends Base {
 				cursor: pointer;
 			}
 
-			.theme-is-dark :is(.wp-close,[data-wp-close],.btn-close) {
+			.theme-is-dark .wp-close {
 				filter: var(--wp--close-white-filter);
 			}
 
-			:is(.wp-close,[data-wp-close],.btn-close):hover {
+			.wp-close:hover {
 				color: var(--wp--close-color);
 				text-decoration: none;
 				opacity: .75;
 			}
 
-			:is(.wp-close,[data-wp-close],.btn-close):focus {
+			.wp-close:focus {
 				outline: 0;
 				box-shadow: 0 0 0 .25rem rgba(35,136,237,0.25);
 				opacity: 1;
 			}
 
-			:is(.wp-close,[data-wp-close],.btn-close):is(.disabled,:disabled) {
+			.wp-close:is(.disabled,:disabled) {
 				pointer-events: none;
 				user-select: none;
 				opacity: .25;
 			}
-        ";
+		CSS;
 	}
 }

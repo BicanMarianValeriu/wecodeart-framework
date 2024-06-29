@@ -14,7 +14,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getElement: () => (/* binding */ getElement),
 /* harmony export */   getParents: () => (/* binding */ getParents),
 /* harmony export */   getTransitionDuration: () => (/* binding */ getTransitionDuration),
-/* harmony export */   hasScrollbar: () => (/* binding */ hasScrollbar),
 /* harmony export */   isDisabled: () => (/* binding */ isDisabled),
 /* harmony export */   isElement: () => (/* binding */ isElement),
 /* harmony export */   isRTL: () => (/* binding */ isRTL),
@@ -196,33 +195,6 @@ const findShadowRoot = element => {
 };
 
 /**
- * Has Scrollbar
- *
- * @param 	{DOMElement} element
- */
-const hasScrollbar = el => {
-  // The Modern solution
-  if (typeof window.innerWidth === 'number') return window.innerWidth > document.documentElement.clientWidth;
-
-  // Elem for quirksmode
-  const elem = el || document.documentElement || document.body;
-
-  // Check overflow style property on body for fauxscrollbars
-  let overflowStyle;
-  if (typeof elem.currentStyle !== 'undefined') overflowStyle = elem.currentStyle.overflow;
-  overflowStyle = overflowStyle || window.getComputedStyle(elem, '').overflow;
-
-  // Also need to check the Y axis overflow
-  let overflowYStyle;
-  if (typeof elem.currentStyle !== 'undefined') overflowYStyle = elem.currentStyle.overflowY;
-  overflowYStyle = overflowYStyle || window.getComputedStyle(elem, '').overflowY;
-  const contentOverflows = elem.scrollHeight > elem.clientHeight;
-  const overflowShown = /^(visible|auto)$/.test(overflowStyle) || /^(visible|auto)$/.test(overflowYStyle);
-  const alwaysShowScroll = overflowStyle === 'scroll' || overflowYStyle === 'scroll';
-  return contentOverflows && overflowShown || alwaysShowScroll;
-};
-
-/**
  * Is RTL
  */
 const isRTL = () => document.documentElement.dir === 'rtl';
@@ -310,7 +282,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getElement: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getElement),
 /* harmony export */   getParents: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getParents),
 /* harmony export */   getTransitionDuration: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getTransitionDuration),
-/* harmony export */   hasScrollbar: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.hasScrollbar),
 /* harmony export */   isDisabled: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isDisabled),
 /* harmony export */   isElement: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isElement),
 /* harmony export */   isRTL: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isRTL),
@@ -665,7 +636,6 @@ __webpack_require__.r(__webpack_exports__);
       if (!element) {
         return;
       }
-      this.el = element; // Deprecated
       this._element = element;
       this._config = this._getConfig(config);
       Data.set(this._element, this.constructor.DATA_KEY, this);
@@ -1099,101 +1069,119 @@ __webpack_require__.r(__webpack_exports__);
  * --------------------------------------------------------------------------
  */
 
+const NAME = 'scripts';
+const Default = {
+  element: document.body // The element
+};
+const DefaultType = {
+  element: '(element|null)'
+};
+const {
+  doAction,
+  applyFilters
+} = wp.hooks;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
-  class Scripts {
-    /**
-     * Generic constructor 
-     * @constructor
-     * @param {object} namespace 	| JS Object
-     * @param {string} routes		| Key name containing routes 
-     */
-    constructor(namespace) {
+  const {
+    Config
+  } = wecodeart;
+  class Scripts extends Config {
+    constructor(config) {
+      super();
       const {
         routes,
         lazyJs
-      } = namespace;
-      const {
-        doAction,
-        applyFilters
-      } = wp.hooks;
-      this.routes = routes;
-      this.lazyJs = lazyJs;
+      } = wecodeart;
+      this._config = this._getConfig(config);
+      this._routes = routes;
+      this._lazyJs = lazyJs;
       this.loaded = [];
       this.doAction = doAction;
       this.applyFilters = applyFilters;
-      this.extendedR = Object.keys(routes).filter(k => routes[k]?.extends && routes[k].extends instanceof Array);
+      this.extendedRoutes = Object.keys(routes).filter(k => routes[k]?.extends instanceof Array);
       this.loadEvents();
     }
 
+    // Getters
+    static get Default() {
+      return Default;
+    }
+    static get DefaultType() {
+      return DefaultType;
+    }
+    static get NAME() {
+      return NAME;
+    }
+
     /**
-     * Meant to be run on load
-     * @info 	It handles all necessary JS init from routes
+     * Executes the specified function on a given route
+     * @param {string} route - Route name
+     * @param {string} [funcName='init'] - Function name to execute
+     * @param {Array} args - Arguments to pass to the function
      */
-    fireRoute(route, funcname, args) {
-      let fire;
-      funcname = funcname === undefined ? 'init' : funcname;
-      fire = route !== '';
-      fire = fire && this.routes[route];
-      fire = fire && (typeof this.routes[route][funcname] === 'function' || typeof this.routes[route][funcname] === 'object');
-      if (fire) {
-        args = this.applyFilters('wecodeart.route', args, route, funcname);
-        if (typeof this.routes[route][funcname] === 'object') {
+    executeRouteFunction(route, funcName = 'init', args) {
+      const routeExists = this._routes[route];
+      const funcExists = routeExists && (typeof routeExists[funcName] === 'function' || typeof routeExists[funcName] === 'object');
+      if (funcExists) {
+        args = this.applyFilters('wecodeart.route', args, route, funcName);
+        if (typeof routeExists[funcName] === 'object') {
           const {
             id: bundleIds = [],
             callback = () => {},
             condition = true
-          } = this.routes[route][funcname];
-          const condMeet = typeof condition === 'function' ? condition() !== false : condition;
-          const missingBundles = [...bundleIds].filter(k => !Object.keys(this.lazyJs).includes(k));
-          if (condMeet) {
+          } = routeExists[funcName];
+          const conditionMet = typeof condition === 'function' ? condition() !== false : condition;
+          const missingBundles = bundleIds.filter(bundle => !Object.keys(this._lazyJs).includes(bundle));
+          if (conditionMet) {
             if (missingBundles.length) {
-              const message = `WeCodeArt JSM - Route "${route}" is missing the lazy bundle(s): ${missingBundles.join(', ')}. Please add them before using.`;
-              console.log(message);
+              console.warn(`WeCodeArt JSM - Route "${route}" is missing the lazy bundle(s): ${missingBundles.join(', ')}. Please add them before using.`);
               return;
             }
-            (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.requireJs)(this.lazyJs, bundleIds, () => {
+            (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.requireJs)(this._lazyJs, bundleIds, () => {
               callback(args);
-              this.doAction('wecodeart.route', route, funcname, args);
+              this.doAction('wecodeart.route', route, funcName, args);
               this.loaded.push(route);
             });
           }
           return;
         }
-        this.routes[route][funcname](args);
-        this.doAction('wecodeart.route', route, funcname, args);
+        routeExists[funcName](args);
+        this.doAction('wecodeart.route', route, funcName, args);
         this.loaded.push(route);
-        return;
       }
     }
 
     /**
-     * Meant to be run on load
-     * @info 	It handles all necessary JS init from routes
+     * Executes all necessary functions for a given route
+     * @param {string} route - Route name
      */
-    sequence(route) {
+    processRoute(route) {
       if (this.loaded.includes(route)) {
         return;
       }
-      this.fireRoute(route);
-      this.fireRoute(route, 'complete');
-      this.fireRoute(route, 'lazy');
+      this.executeRouteFunction(route);
+      this.executeRouteFunction(route, 'complete');
+      this.executeRouteFunction(route, 'lazy');
     }
 
     /**
-     * Meant to be run on load
-     * @info 	It handles all necessary JS init from routes
+     * Loads and initializes the appropriate routes based on body classes and predefined routes
      */
     loadEvents() {
-      this.fireRoute('common');
-      for (let cls of document.body.classList) {
+      this.executeRouteFunction('common');
+      const {
+        element
+      } = this._config;
+      element.classList.forEach(cls => {
         const route = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.camelCase)(cls.toLowerCase().replace(/-/g, '_'));
-        // Fire Manual Routes
-        this.sequence(route);
-        // Additional Extended Routes
-        this.extendedR.filter(k => this.routes[k].extends.includes(cls) && this.sequence(k));
-      }
-      this.fireRoute('common', 'complete');
-      this.fireRoute('common', 'lazy');
+        this.processRoute(route);
+        this.extendedRoutes.forEach(extRoute => {
+          if (this._routes[extRoute].extends.includes(cls)) {
+            this.processRoute(extRoute);
+          }
+        });
+      });
+      this.executeRouteFunction('common', 'complete');
+      this.executeRouteFunction('common', 'lazy');
     }
   }
 
@@ -1202,6 +1190,123 @@ __webpack_require__.r(__webpack_exports__);
    * @memberof JSManager
    */
   wecodeart.Scripts = Scripts;
+}).apply(undefined, [window.wecodeart]));
+
+/***/ }),
+
+/***/ "./src/js/frontend/plugins/wecodeart-Scrollbar.js":
+/*!********************************************************!*\
+  !*** ./src/js/frontend/plugins/wecodeart-Scrollbar.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helpers */ "./src/js/frontend/helpers/index.js");
+/**
+ * --------------------------------------------------------------------------
+ * Scrollbar Helper
+ *
+ * @author 	Bican Marian Valeriu
+ * @version 1.0.0
+ * --------------------------------------------------------------------------
+ */
+
+
+/**
+ * Constants
+ */
+const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
+const SELECTOR_STICKY_CONTENT = '.sticky-top';
+const PROPERTY_PADDING = 'padding-right';
+const PROPERTY_MARGIN = 'margin-right';
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
+  const {
+    Selector
+  } = wecodeart;
+  class ScrollBar {
+    constructor() {
+      this._element = document.body;
+    }
+
+    // Public
+    getWidth() {
+      // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
+      const documentWidth = document.documentElement.clientWidth;
+      return Math.abs(window.innerWidth - documentWidth);
+    }
+    hide() {
+      const width = this.getWidth();
+      this._disableOverFlow();
+      // give padding to element to balance the hidden scrollbar width
+      this._setElementAttributes(this._element, PROPERTY_PADDING, calculatedValue => calculatedValue + width);
+      // trick: We adjust positive paddingRight and negative marginRight to sticky-top elements to keep showing fullwidth
+      this._setElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING, calculatedValue => calculatedValue + width);
+      this._setElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN, calculatedValue => calculatedValue - width);
+    }
+    reset() {
+      this._resetElementAttributes(this._element, 'overflow');
+      this._resetElementAttributes(this._element, PROPERTY_PADDING);
+      this._resetElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING);
+      this._resetElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN);
+    }
+    isOverflowing() {
+      return this.getWidth() > 0;
+    }
+
+    // Private
+    _disableOverFlow() {
+      this._saveInitialAttribute(this._element, 'overflow');
+      this._element.style.overflow = 'hidden';
+    }
+    _setElementAttributes(selector, styleProperty, callback) {
+      const scrollbarWidth = this.getWidth();
+      const manipulationCallBack = element => {
+        if (element !== this._element && window.innerWidth > element.clientWidth + scrollbarWidth) {
+          return;
+        }
+        this._saveInitialAttribute(element, styleProperty);
+        const calculatedValue = window.getComputedStyle(element).getPropertyValue(styleProperty);
+        element.style.setProperty(styleProperty, `${callback(Number.parseFloat(calculatedValue))}px`);
+      };
+      this._applyManipulationCallback(selector, manipulationCallBack);
+    }
+    _saveInitialAttribute(element, styleProperty) {
+      const actualValue = element.style.getPropertyValue(styleProperty);
+      if (actualValue) {
+        element.setAttribute(`data-wp-${this._normalizeDataKey(styleProperty)}`, actualValue);
+      }
+    }
+    _resetElementAttributes(selector, styleProperty) {
+      const manipulationCallBack = element => {
+        const value = element.getAttribute(`data-wp-${this._normalizeDataKey(styleProperty)}`);
+        // We only want to remove the property if the value is `null`; the value can also be zero
+        if (value === null) {
+          element.style.removeProperty(styleProperty);
+          return;
+        }
+        element.removeAttribute(`data-wp-${this._normalizeDataKey(styleProperty)}`);
+        element.style.setProperty(styleProperty, value);
+      };
+      this._applyManipulationCallback(selector, manipulationCallBack);
+    }
+    _applyManipulationCallback(selector, callBack) {
+      if ((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isElement)(selector)) {
+        callBack(selector);
+        return;
+      }
+      for (const sel of Selector.find(selector, this._element)) {
+        callBack(sel);
+      }
+    }
+    _normalizeDataKey(key) {
+      return key.replace(/[A-Z]/g, chr => `-${chr.toLowerCase()}`);
+    }
+  }
+  wecodeart.ScrollBar = ScrollBar;
 }).apply(undefined, [window.wecodeart]));
 
 /***/ }),
@@ -1708,13 +1813,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! loadjs */ "./node_modules/loadjs/dist/loadjs.umd.js");
 /* harmony import */ var loadjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(loadjs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./src/js/frontend/helpers/index.js");
-/* harmony import */ var _plugins_wecodeart_Scripts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/wecodeart-Scripts */ "./src/js/frontend/plugins/wecodeart-Scripts.js");
-/* harmony import */ var _plugins_wecodeart_Data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/wecodeart-Data */ "./src/js/frontend/plugins/wecodeart-Data.js");
-/* harmony import */ var _plugins_wecodeart_Events__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/wecodeart-Events */ "./src/js/frontend/plugins/wecodeart-Events.js");
-/* harmony import */ var _plugins_wecodeart_Selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugins/wecodeart-Selector */ "./src/js/frontend/plugins/wecodeart-Selector.js");
-/* harmony import */ var _plugins_wecodeart_Config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./plugins/wecodeart-Config */ "./src/js/frontend/plugins/wecodeart-Config.js");
-/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/frontend/plugins/wecodeart-Component.js");
-/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
+/* harmony import */ var _plugins_wecodeart_Data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/wecodeart-Data */ "./src/js/frontend/plugins/wecodeart-Data.js");
+/* harmony import */ var _plugins_wecodeart_Events__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/wecodeart-Events */ "./src/js/frontend/plugins/wecodeart-Events.js");
+/* harmony import */ var _plugins_wecodeart_Selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/wecodeart-Selector */ "./src/js/frontend/plugins/wecodeart-Selector.js");
+/* harmony import */ var _plugins_wecodeart_Config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugins/wecodeart-Config */ "./src/js/frontend/plugins/wecodeart-Config.js");
+/* harmony import */ var _plugins_wecodeart_Component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./plugins/wecodeart-Component */ "./src/js/frontend/plugins/wecodeart-Component.js");
+/* harmony import */ var _plugins_wecodeart_Scripts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./plugins/wecodeart-Scripts */ "./src/js/frontend/plugins/wecodeart-Scripts.js");
+/* harmony import */ var _plugins_wecodeart_Scrollbar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./plugins/wecodeart-Scrollbar */ "./src/js/frontend/plugins/wecodeart-Scrollbar.js");
+/* harmony import */ var _scss_frontend_frontend_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../../scss/frontend/frontend.scss */ "./src/scss/frontend/frontend.scss");
 // Load JS
 
 
@@ -1722,6 +1828,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // WeCodeArt
+
 
 
 
@@ -1760,7 +1867,6 @@ function filterLog(route, func, args) {
     getParents: _helpers__WEBPACK_IMPORTED_MODULE_1__.getParents,
     sanitizeHtml: _helpers__WEBPACK_IMPORTED_MODULE_1__.sanitizeHtml,
     findShadowRoot: _helpers__WEBPACK_IMPORTED_MODULE_1__.findShadowRoot,
-    hasScrollbar: _helpers__WEBPACK_IMPORTED_MODULE_1__.hasScrollbar,
     reflow: _helpers__WEBPACK_IMPORTED_MODULE_1__.reflow,
     camelCase: _helpers__WEBPACK_IMPORTED_MODULE_1__.camelCase,
     paramsCreate: _helpers__WEBPACK_IMPORTED_MODULE_1__.paramsCreate,
@@ -1791,11 +1897,25 @@ function filterLog(route, func, args) {
     common: {
       init: () => {
         const html = document.documentElement;
+        const {
+          ScrollBar,
+          Selector
+        } = wecodeart;
         const handleDocumentScrolled = () => {
           html.classList[window.scrollY > 1 ? 'add' : 'remove']('has-scrolled');
         };
         const handleDocumentScrollbar = () => {
-          html.classList[(0,_helpers__WEBPACK_IMPORTED_MODULE_1__.hasScrollbar)() ? 'add' : 'remove']('has-scrollbar');
+          const isOverflowing = new ScrollBar().isOverflowing();
+          html.classList[isOverflowing ? 'add' : 'remove']('has-scrollbar');
+        };
+        const handleElementOnLoad = () => {
+          Selector.find('*[onload]').forEach(el => {
+            const onloadAttr = el.getAttribute('onload');
+            if (onloadAttr) {
+              var func = new Function(onloadAttr);
+              func.call(el);
+            }
+          });
         };
         const bodyJSClass = () => {
           html.classList.remove('no-js');
@@ -1840,6 +1960,7 @@ function filterLog(route, func, args) {
         };
         bodyJSClass();
         handleDocumentScrollbar();
+        handleElementOnLoad();
         skipLink();
         window.onresize = handleDocumentScrollbar;
         window.onscroll = handleDocumentScrolled;

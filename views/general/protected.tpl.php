@@ -23,10 +23,12 @@ defined( 'ABSPATH' ) || exit;
     'paths' 	=> 'M336 256H96v-96c0-70.6 25.4-128 96-128s96 57.4 96 128v20c0 6.6 5.4 12 12 12h8c6.6 0 12-5.4 12-12v-18.5C320 73.1 280.9.3 192.5 0 104-.3 64 71.6 64 160v96H48c-26.5 0-48 21.5-48 48v160c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm16 208c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V304c0-8.8 7.2-16 16-16h288c8.8 0 16 7.2 16 16v160z',
 ] );
 
-\wecodeart( 'styles' )->Utilities->load( [ 'border',  'my-5', 'me-3', 'p-3' ] );
+\wecodeart( 'styles' )->Utilities->load( [ 'border', 'my-5', 'p-3' ] );
+
+$input_id = wp_unique_id( 'pwbox-' );
 
 ?>
-<form class="border p-3 my-5" action="<?php echo esc_url( home_url( 'wp-login.php?action=postpass', 'login_post' ) ); ?>" method="post" novalidate>
+<form class="needs-validation border p-3 my-5" action="<?php echo esc_url( home_url( 'wp-login.php?action=postpass', 'login_post' ) ); ?>" method="post" novalidate>
     <h4><?php
     
         esc_html_e( 'This post is password protected. To view this post, enter the password below!', 'wecodeart' );
@@ -35,25 +37,27 @@ defined( 'ABSPATH' ) || exit;
     <?php
     
     wecodeart_input( 'group', [
-        'controls' => [
-            wecodeart( 'markup' )->SVG::compile( 'unlock', [
-                'class' => 'fa-fw'
+        'attrs'     => [
+            'id' => false,
+        ],
+        'controls'  => [
+            wecodeart( 'dom' )->SVG::compile( 'unlock', [
+                'class' => 'fa-fw',
+                'for'   => $input_id
             ] ),
             [
                 'type'  => 'password',
                 'attrs' => [
-                    'id'            => wp_unique_id( 'pwbox-' ),
+                    'id'            => $input_id,
                     'name'          => 'post_password',
                     'size'          => 20,
                     'required'      => true,
                     'placeholder'   => esc_attr__( 'Enter password', 'wecodeart' )
-                ]
+                ],
             ],
             [
                 'type'  => 'button',
-                'label' => wecodeart( 'markup' )->SVG::compile( 'key', [
-                    'class' => 'me-3'
-                ] ) . sprintf( '<span>%s</span>', esc_html__( 'Unlock', 'wecodeart' ) ),
+                'label' => wecodeart( 'dom' )->SVG::compile( 'key' ),
             ]
         ]
     ] );

@@ -113,6 +113,5 @@ export default (function (wecodeart) {
 	 * @memberof Component
 	 */
 	wecodeart.FocusTrap = FocusTrap;
-	wecodeart.plugins.FocusTrap = FocusTrap;
 
 }).apply(this, [window.wecodeart]);

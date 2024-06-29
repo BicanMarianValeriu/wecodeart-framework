@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.2.2
- * @version		6.1.2
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -209,7 +209,7 @@ class Form extends Dynamic {
 				$markup = '';
 
 				$markup .= '<button name="%1$s" type="submit" id="%2$s" class="%3$s">';
-				$markup .= wecodeart( 'markup' )->SVG::compile( 'comment-dots' );
+				$markup .= wecodeart( 'dom' )->SVG::compile( 'comment-dots' );
 				$markup .= '<span>%4$s</span>';
 				$markup .= '</button>';
 

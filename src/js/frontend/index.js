@@ -14,7 +14,6 @@ import {
 	getTransitionDuration,
 	sanitizeHtml,
 	findShadowRoot,
-	hasScrollbar,
 	reflow,
 	paramsCreate,
 	paramsUpdate,
@@ -28,12 +27,13 @@ import {
 } from './helpers';
 
 // WeCodeArt
-import './plugins/wecodeart-Scripts';
 import './plugins/wecodeart-Data';
 import './plugins/wecodeart-Events';
 import './plugins/wecodeart-Selector';
 import './plugins/wecodeart-Config';
 import './plugins/wecodeart-Component';
+import './plugins/wecodeart-Scripts';
+import './plugins/wecodeart-Scrollbar';
 
 // Styles
 import './../../scss/frontend/frontend.scss';
@@ -66,7 +66,6 @@ function filterLog(route, func, args) {
 		getParents,
 		sanitizeHtml,
 		findShadowRoot,
-		hasScrollbar,
 		reflow,
 		camelCase,
 		paramsCreate,
@@ -104,14 +103,26 @@ function filterLog(route, func, args) {
 		common: {
 			init: () => {
 				const html = document.documentElement;
+				const { ScrollBar, Selector } = wecodeart;
 
 				const handleDocumentScrolled = () => {
 					html.classList[window.scrollY > 1 ? 'add' : 'remove']('has-scrolled');
 				};
 
 				const handleDocumentScrollbar = () => {
-					html.classList[hasScrollbar() ? 'add' : 'remove']('has-scrollbar');
+					const isOverflowing = new ScrollBar().isOverflowing();
+					html.classList[isOverflowing ? 'add' : 'remove']('has-scrollbar');
 				};
+
+				const handleElementOnLoad = () => {
+					Selector.find('*[onload]').forEach(el => {
+						const onloadAttr = el.getAttribute('onload');
+						if (onloadAttr) {
+							var func = new Function(onloadAttr);
+							func.call(el);
+						}
+					});
+				}
 
 				const bodyJSClass = () => {
 					html.classList.remove('no-js');
@@ -155,6 +166,7 @@ function filterLog(route, func, args) {
 
 				bodyJSClass();
 				handleDocumentScrollbar();
+				handleElementOnLoad();
 				skipLink();
 				window.onresize = handleDocumentScrollbar;
 				window.onscroll = handleDocumentScrolled;

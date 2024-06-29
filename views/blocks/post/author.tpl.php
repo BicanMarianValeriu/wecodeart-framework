@@ -45,7 +45,7 @@ wecodeart( 'styles' )->Utilities->load( [ 'me-2', 'flex-fill' ] );
     
     else : 
     
-    wecodeart( 'markup' )->SVG::render( 'user', [
+    wecodeart( 'dom' )->SVG::render( 'user', [
         'class' => 'wp-block-post-author__icon fa-fw'
     ] );
 

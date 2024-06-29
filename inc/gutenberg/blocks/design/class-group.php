@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\{ get_prop, toJSON };
+use function WeCodeArt\Functions\{ get_prop, array_extract, toJSON };
 
 /**
  * Gutenberg Group blocks.
@@ -106,6 +106,11 @@ class Group extends Dynamic {
 		if( self::is_variation( $attributes, 'collapse' ) ) {
 			$content = self::create_collapse( $attributes, $content );
 		}
+
+		// Handle offcanvas group.
+		if( self::is_variation( $attributes, 'offcanvas' ) ) {
+			$content = self::create_offcanvas( $attributes, $content );
+		}
 	
 		return (string) $content;
 	}
@@ -139,13 +144,25 @@ class Group extends Dynamic {
 				wp.blocks.registerBlockVariation('core/group', {
 					name: 'wecodeart/group/collapse',
 					title: wp.i18n.__('Group: Collapse', 'wecodeart'),
-					description: wp.i18n.__('Gather blocks in a collapsible group.', 'wecodeart'),
+					description: wp.i18n.__('Gather blocks in a collapsible container.', 'wecodeart'),
 					icon: 'editor-expand',
 					isDefault: false,
 					isActive: ['namespace'],
 					scope: ['block', 'inserter'],
 					attributes: {
 						namespace: 'wecodeart/group/collapse'
+					},
+				});
+				wp.blocks.registerBlockVariation('core/group', {
+					name: 'wecodeart/group/offcanvas',
+					title: wp.i18n.__('Group: Offcanvas', 'wecodeart'),
+					description: wp.i18n.__('Gather blocks in an offcanvas container.', 'wecodeart'),
+					icon: 'exit',
+					isDefault: false,
+					isActive: ['namespace'],
+					scope: ['block', 'inserter'],
+					attributes: {
+						namespace: 'wecodeart/group/offcanvas'
 					},
 				});
 			});
@@ -260,7 +277,12 @@ class Group extends Dynamic {
 		$toggler 	= [
 			'type' 	=> 'collapse',
 			'label'	=> $ariaLabel,
-			'id'	=> $itemID
+			'id'	=> $itemID,
+			'class'	=> [ 
+				'wp-element-button',
+				'has-' . get_prop( $attributes, [ 'backgroundColor' ], 'accent' ). '-background-color',
+				'has-' . get_prop( $attributes, [ 'textColor' ], 'dark' ). '-color',
+			],
 		];
 
 		// Regular expression to match the specific class pattern
@@ -272,6 +294,7 @@ class Group extends Dynamic {
 			$isDisplay 	= 'd-lg-block';
 		}
 
+		wecodeart( 'styles' )->Utilities->load( [ $isHidden ] );
 		$dom	= wecodeart( 'dom' )::create( $content );
 		$div 	= wecodeart( 'dom' )::get_element( strtolower( $tagName ), $dom );
 
@@ -279,16 +302,11 @@ class Group extends Dynamic {
 		$toggler 	= wecodeart_template( 'general/toggler', $toggler, false );
 		$toggler	= wecodeart( 'dom' )::create( $toggler );
 		$toggler 	= wecodeart( 'dom' )::get_element( 'button', $toggler );
-
-		$dom->insertBefore( $dom->importNode( $toggler, true ), $dom->firstChild );
+		$toggler->setAttribute( 'onload', 'this.parentNode.insertBefore(this,this.previousElementSibling);' );
+		wecodeart( 'dom' )::add_classes( $toggler, [ $isHidden ] );
+		$dom->appendChild( $dom->importNode( $toggler, true ) );
 
 		$p = wecodeart( 'dom' )::processor( $dom->saveHTML() );
-
-		// Button
-		$p->next_tag( [ 'tag_name' => 'button' ] );
-		$p->add_class( $isHidden );
-			
-		\wecodeart( 'styles' )->Utilities->load( [ $isHidden ] );
 
 		// Container
 		$p->next_tag( [ 'tag_name' => $tagName ] );
@@ -302,7 +320,7 @@ class Group extends Dynamic {
 			
 			\wecodeart( 'styles' )->Utilities->load( [ $isDisplay ] );
 		}
-
+			
 		// Requirements
 		\wp_enqueue_script_module( '@wecodeart/collapse' );
 		\wp_interactivity_config( 'wecodeart/collapse', [
@@ -320,6 +338,92 @@ class Group extends Dynamic {
 		\wecodeart( 'styles' )->Components->load( [ 'transition' ] );
 
 		return $p->get_updated_html();
+	}
+
+	/**
+	 * Generate offcanvas markup.
+	 *
+	 * @param 	array 	$attributes 	The block attrs.
+	 * @param 	string 	$content 		The block markup.
+	 *
+	 * @return 	string 	The block updated markup.
+	 */
+	public static function create_offcanvas( array $attributes, string $content ): string {
+		$tagName 	= get_prop( $attributes, [ 'tagName' ], 'div' );
+		$className  = get_prop( $attributes, [ 'className' ], '' );
+		$blockName  = get_prop( $attributes, [ 'metadata', 'name' ] ) ?: __( 'Group' );
+		$itemID 	= wp_unique_id( 'wp-group-' );
+		$isHidden 	= '';
+		$isDisplay 	= '';
+
+		// Offcanvas classes
+		$classes	= explode( ' ', get_prop( $attributes, [ 'className' ], '' ) );
+		$expanded   = array_extract( $classes, ':wp-offcanvas--expand' );
+		$offcanvas  = array_extract( $classes, 'wp-offcanvas--' );
+		$offcanvas  = $offcanvas ?: [ 'wp-offcanvas--start' ];
+
+		$breakpoint = '';
+		if( count( $expanded ) ) {
+			$breakpoint = explode( ':', current( $expanded ) )[0];
+			$breakpoint = 'd-' . $breakpoint . '-none';
+
+			\wecodeart( 'styles' )->Utilities->load( [ $breakpoint ] );
+		}
+
+		$dom	= wecodeart( 'dom' )::create( $content );
+		$div 	= wecodeart( 'dom' )::get_element( strtolower( $tagName ), $dom );
+
+		// Create the toggler button
+		$toggler = wecodeart_template( 'general/toggler', [
+			'id'    => $itemID,
+			'label' => sprintf( esc_html__( 'Open %s', 'wecodeart' ), $blockName ),
+			'type'  => 'offcanvas',
+			'class'	=> array_filter( [ 
+				'wp-element-button',
+				'has-' . get_prop( $attributes, [ 'backgroundColor' ], 'accent' ). '-background-color',
+				'has-' . get_prop( $attributes, [ 'textColor' ], 'dark' ). '-color',
+				$breakpoint
+			] ),
+		], false);
+		$toggler = wecodeart( 'dom' )::create( $toggler );
+		$toggler = wecodeart( 'dom' )::get_element( 'button', $toggler );
+
+		// Insert the toggler button as the first child of the group
+		$div->insertBefore( $dom->importNode( $toggler, true ), $div->firstChild );
+
+		// Create the offcanvas container
+		$container = wecodeart_template( 'general/offcanvas', [
+			'id'      	=> $itemID,
+			'title'   	=> get_prop( $attributes, [ 'metadata', 'name' ] ),
+			'class'		=> array_merge( $offcanvas, $expanded ),
+			'content' 	=> ''
+		], false );
+		$container = wecodeart( 'dom' )::create( $container );
+		$offcanvas = wecodeart( 'dom' )::get_element( 'div', $container );
+		
+		$wrap = wecodeart( 'dom' )::get_elements_by_class( $container, 'wp-offcanvas__body', 'div', 0 );
+		wecodeart( 'dom' )::add_classes( $wrap, [ 'is-layout-' . get_prop( $attributes, [ 'layout', 'type' ], 'flow' ) ] );
+
+		$count 	= $div->childNodes->count();
+		for ( $i = 0; $i < $count; $i++ ) {
+			if( $i === 0 ) { // Skip toggler
+				continue;
+			}
+
+			$item = $div->childNodes->item( $i );
+
+			if ( ! $item || ! method_exists( $item, 'setAttribute' ) ) {
+				continue;
+			}
+
+			$wrap->appendChild( $container->importNode( $item, true ) );
+			$div->removeChild( $item );
+		}
+
+		// Append newly created offcanvas
+		$div->appendChild( $dom->importNode( $offcanvas, true ) );
+
+		return $dom->saveHTML();
 	}
 
 	/**

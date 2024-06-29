@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.5.5
- * @version		6.3.7
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Styles\Blocks;
@@ -42,17 +42,8 @@ class Gallery extends Processor {
 				$gap_y	= get_prop( $gap, [ 'top' ] );
 				$gap_x	= get_prop( $gap, [ 'left' ] );
 
-				// Is WP way of saved color
-				if( strpos( $gap_x, 'var:preset|spacing' ) !== false ) {
-					$gap_x = explode( '|', $gap_x );
-					$gap_x = sprintf( 'var(--wp--preset--spacing--%s)', end( $gap_x ) );
-				}
-
-				// Is WP way of saved color
-				if( strpos( $gap_y, 'var:preset|spacing' ) !== false ) {
-					$gap_y = explode( '|', $gap_y );
-					$gap_y = sprintf( 'var(--wp--preset--spacing--%s)', end( $gap_y ) );
-				}
+				$gap_x = wecodeart( 'styles' )::format_variable( $gap_x );
+				$gap_y = wecodeart( 'styles' )::format_variable( $gap_y );
 
 				$declarations['--wp--style--block-gap'] = $gap_x;
 
@@ -60,12 +51,7 @@ class Gallery extends Processor {
 					$declarations['grid-row-gap'] = $gap_y;
 				}
 			} else {
-				// Is WP way of saved color
-				if( strpos( $gap, 'var:preset|spacing' ) !== false ) {
-					$gap = explode( '|', $gap );
-					$gap = sprintf( 'var(--wp--preset--spacing--%s)', end( $gap ) );
-				}
-				$declarations['--wp--style--block-gap'] = $gap;
+				$declarations['--wp--style--block-gap'] = wecodeart( 'styles' )::format_variable( $gap );
 			}
 		}
 

@@ -9,7 +9,7 @@
  * @subpackage 	Markup\Inputs
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.1
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\DOM\Inputs;
@@ -163,9 +163,9 @@ class Toggle extends Base {
                 border-color: var(--wp--preset--color--primary);
             }
             .form-check-input:disabled {
-                background-color: var(--wp--input--disabled-color);
                 pointer-events: none;
                 filter: none;
+                opacity: .5;
             }
             .form-check-input:is([disabled],:disabled) ~ .form-check-label {
                 color: var(--wp--input--disabled-color);
@@ -202,7 +202,9 @@ class Toggle extends Base {
             }  
             .form-check-inline {
                 display: inline-block;
-                margin-right: 1rem;
+            }
+            .form-check-inline + .form-check-inline {
+                margin-left: 1rem;
             }
 
             /* Validation */

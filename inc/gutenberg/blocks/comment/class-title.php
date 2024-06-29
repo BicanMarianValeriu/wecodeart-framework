@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.5.8
- * @version		6.1.7
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
@@ -64,7 +64,7 @@ class Title extends Dynamic {
 		$show_comments_count = get_prop( $attributes, [ 'showCommentsCount' ] );
 		$comments_count      = absint( get_comments_number() );
 
-		$output	= wecodeart( 'markup' )->SVG::compile( 'comments', [
+		$output	= wecodeart( 'dom' )->SVG::compile( 'comments', [
 			'class' => 'fa-fw'
 		] );
 		
