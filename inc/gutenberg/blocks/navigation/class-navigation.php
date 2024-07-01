@@ -496,6 +496,7 @@ class Navigation extends Dynamic {
 					}
 					.navbar-expand .navbar-nav {
 						flex-direction: inherit;
+						align-items: center;
 					}
 					.navbar-expand .navbar-nav .dropdown-menu {
 						position: absolute;
@@ -530,6 +531,7 @@ class Navigation extends Dynamic {
 						}
 						.navbar-expand-{$key} .navbar-nav {
 							flex-direction: inherit;
+							align-items: center;
 						}
 						.navbar-expand-{$key} .navbar-nav .dropdown-menu {
 							position: absolute;

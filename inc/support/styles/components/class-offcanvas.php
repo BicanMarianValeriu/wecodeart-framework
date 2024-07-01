@@ -136,6 +136,7 @@ class OffCanvas extends Base {
 					.wp-offcanvas.{$key}\:wp-offcanvas--expand,
 					.wp-offcanvas.{$key}\:wp-offcanvas--expand .wp-offcanvas__body {
 						all: inherit;
+						padding: 0;
 					}
 					.wp-offcanvas.{$key}\:wp-offcanvas--expand .wp-offcanvas__header {
 						display: none;

@@ -1,3 +1,11 @@
+v6.4.7
+- Removed - unwanted modules from WP.org repository
+
+v6.4.6
+- Updated - small CSS correction with inheriting offcanvas--expand styles
+- Updated - small CSS correction with navbar-expand-{breakpoint} styles
+- Changed - header pattern/template-part to use site title instead of logo (regarding Theme Preview)
+
 v6.4.5
 - Removed - Contact Form 7 plugin installer (remade as a module instead)
 - Updated - Offcanvas`s JS upgraded to WP Interactivity API (20kb to 3kb minified) from Boostrap
