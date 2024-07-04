@@ -13,7 +13,7 @@ return [
 	<!-- wp:pattern {"slug":"wecodeart/section-woo"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/section-pricing"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/cta-center"} /-->
-	<!-- wp:pattern {"slug":"wecodeart/section-testimonials"} /-->
+	<!-- wp:pattern {"slug":"wecodeart/section-testimonials-cards"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/section-posts"} /-->
 	<!-- wp:pattern {"slug":"wecodeart/section-logos"} /-->
 	',
