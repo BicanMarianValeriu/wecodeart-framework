@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.1
+ * @version		6.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -330,7 +330,7 @@ class Social extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles() {
-		return "
+		return <<<CSS
 			.wp-block-social-links {
 				padding-left: 0;
 				padding-right: 0;
@@ -370,7 +370,7 @@ class Social extends Dynamic {
 				background-color: transparent;
 				border-radius: 9999px;
 			}
-			.wp-block-social-link-anchor {
+			.wp-block-social-link .wp-block-social-link-anchor {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
@@ -385,20 +385,20 @@ class Social extends Dynamic {
 				border-radius: inherit;
 				box-shadow: none;
 			}
-			.wp-block-social-link-anchor:is(:hover,:active,:visited) {
+			.wp-block-social-link .wp-block-social-link-anchor:is(:hover,:active,:visited) {
 				color: inherit;
 			}
-			.wp-block-social-link-anchor svg {
+			.wp-block-social-link .wp-block-social-link-anchor svg {
 				width: 1em;
 				height: 1em;
 			}
-			.is-style-logos-only .wp-block-social-link-anchor svg {
+			.is-style-logos-only .wp-block-social-link .wp-block-social-link-anchor svg {
 				width: 1.25em;
 				height: 1.25em;
 			}
 			.wp-social-link.wp-social-link__is-incomplete {
 				opacity: 1;
 			}
-		";
+		CSS;
 	}
 }

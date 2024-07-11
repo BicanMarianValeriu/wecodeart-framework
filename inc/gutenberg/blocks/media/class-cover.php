@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.2.8
+ * @version		6.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -162,6 +162,9 @@ class Cover extends Dynamic {
 			.wp-block-cover .is-repeated {
 				background-repeat: repeat;
 				background-size: auto;
+			}
+			.wp-block-cover .is-placeholder {
+				filter: opacity(0.1);
 			}
 			.wp-block-cover .has-background-dim {
 				z-index: 1;

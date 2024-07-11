@@ -9,7 +9,7 @@
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version     6.4.1
+ * @version     6.4.8
  */
 
 namespace WeCodeArt\Functions;
@@ -229,10 +229,6 @@ function array_flatten( array $array = [] ): array {
     return $result;
 }
 
-function flatten( array $array = [] ): array {
-    return array_flatten( $array );
-}
-
 /**
  * Extract from array.
  *
@@ -249,50 +245,6 @@ function array_extract( array &$array, string $string = '' ): array {
         }
         return false;
     } ) );
-}
-
-/**
- * Returns a formatted DOMDocument object from a given string.
- *
- * @since   6.0.0
- * @version 6.4.1
- *
- * @param   string $html HTML string to convert to DOM.
- *
- * @return  \DOMDocument
- */
-function dom( string $html ): \DOMDocument {
-	return wecodeart( 'dom' )::create( $html );
-}
-
-/**
- * Returns a formatted DOMElement object from a DOMDocument object.
- *
- * @since   6.0.0
- * @version 6.4.1
- *
- * @param   string $tag            HTML tag.
- * @param   mixed  $dom_or_element DOMDocument or DOMElement.
- * @param   int    $index          Index of element to return.
- *
- * @return  \DOMElement|null
- */
-function dom_get_element( string $tag, $dom_or_element, int $index = 0 ) {
-	return wecodeart( 'dom' )::get_element( $tag, $dom_or_element, $index );
-}
-
-/**
- * Casts a DOMNode to a DOMElement.
- *
- * @since   6.0.0
- * @version 6.4.1
- *
- * @param   mixed $node DOMNode to cast to DOMElement.
- *
- * @return  \DOMElement|null
- */
-function dom_element( $node ): \DOMElement {
-	return wecodeart( 'dom' )::node_2_element( $node );
 }
 
 /**
@@ -316,7 +268,7 @@ function dom_image_2_svg( \DOMDocument $dom, \DOMElement $wrap, \DOMElement $img
         return $content;
     }
 
-    $svg = $dom->importNode( dom( file_get_contents( $file ) )->documentElement, true );
+    $svg = $dom->importNode( wecodeart( 'dom' )::create( file_get_contents( $file ) )->documentElement, true );
 
     if ( ! method_exists( $svg, 'setAttribute' ) ) {
         return $content;
@@ -347,53 +299,6 @@ function dom_image_2_svg( \DOMDocument $dom, \DOMElement $wrap, \DOMElement $img
 }
 
 /**
- * Returns array of dom elements by class name.
- *
- * @since   6.0.0
- * @version 6.4.1
- *
- * @param   DOMDocument|DOMElement $dom         DOM document or element.
- * @param   string                 $class_name  Element class name.
- * @param   string                 $tag         Element tag name (optional).
- * @param   string                 $index       Element index
- *
- * @return  mixed
- */
-function dom_elements_by_class( $dom, string $class_name, string $tag = '*', $index = null ) {
-	return wecodeart( 'dom' )::get_elements_by_class( $dom, $class_name, $tag, $index );
-}
-
-/**
- * Returns an HTML element with a replaced tag.
- *
- * @since   6.0.0
- * @version 6.4.1
- *
- * @param   DOMElement $element DOM Element to change.
- * @param   string     $name    Tag name, e.g: 'div'.
- *
- * @return  DOMElement
- */
-function dom_change_tag( \DOMElement $element, string $name ): \DOMElement {
-	return wecodeart( 'dom' )::change_tag( $element, $name );
-}
-
-/**
- * Creates a DOMElement to avoid unhandled exceptions.
- *
- * @since   6.2.8
- * @version 6.4.1
- *
- * @param   string      $tag HTML tag.
- * @param   DOMDocument $dom DOM object.
- *
- * @return  ?DOMElement
- */
-function dom_create_element( string $tag, \DOMDocument $dom ): \DOMElement {
-	return wecodeart( 'dom' )::create_element( $tag, $dom );
-}
-
-/**
  * Encode SVG string as url.
  *
  * @since   6.2.5
@@ -414,12 +319,12 @@ function encode_svg_data( string $svg = '' ): string {
  * Returns an Image placeholder source.
  *
  * @since   6.0.0
- * @version 6.2.5
+ * @version 6.4.8
  *
  * @return  string
  */
 function get_placeholder_source( bool $encoded = true ): string {
-    $file = 'assets/images/placeholder-cross.svg';
+    $file = apply_filters( 'wecodeart/filter/placeholder', 'assets/images/placeholder-img.svg' );
 
     if( $encoded ) {
         $svg_string	= \file_get_contents( get_parent_theme_file_path( $file ) );

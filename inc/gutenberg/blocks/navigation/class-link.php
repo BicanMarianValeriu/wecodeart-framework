@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.5
+ * @version		6.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -330,7 +330,7 @@ class Link extends Dynamic {
 	public function styles(): string {
 		return <<<CSS
 			/* Nav Link */
-			.nav-link {
+			.wp-block-navigation-item a {
 				display: inline-block;
 				padding: var(--wp--nav-link-padding-y) var(--wp--nav-link-padding-x);
 				color: var(--wp--nav-link-color);
@@ -338,32 +338,30 @@ class Link extends Dynamic {
 				font-weight: inherit;
 				transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 			}
-			.nav-link:is(:focus,:hover) {
+			.wp-block-navigation-item a:is(:focus,:hover) {
 				outline: none;
 			}
-			.disabled > .nav-link,
-			.nav-link.disabled {
+			.wp-block-navigation-item.disabled > a,
+			.wp-block-navigation-item a.disabled {
 				color: var(--wp--nav-link-disabled-color);
 				pointer-events: none;
 				cursor: default;
 			}
-			.navbar-nav .nav-link:is(:hover,:focus) {
+			.wp-block-navigation-item a:is(:hover,:focus) {
 				color: var(--wp--nav-link-hover-color);
 			}
-			.navbar-nav .show > .nav-link,
-			.navbar-nav .nav-link.active {
+			.wp-block-navigation-item.show > a,
+			.wp-block-navigation-item a.active {
 				color: var(--wp--navbar-active-color);
 			}
-
-			/* Block */
-			.wp-block-navigation .wp-block-navigation-item__icon {
+			.wp-block-navigation-item .wp-block-navigation-item__icon {
 				margin-right: .5rem;
 			}
-			.wp-block-navigation .wp-block-navigation-item__label {
+			.wp-block-navigation-item .wp-block-navigation-item__label {
 				word-break: normal;
 				overflow-wrap: break-word;
 			}
-			.wp-block-navigation .wp-block-navigation-item__description {
+			.wp-block-navigation-item .wp-block-navigation-item__description {
 				display: none;
 			}
 		CSS;

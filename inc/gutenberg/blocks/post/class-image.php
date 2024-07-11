@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.1
+ * @version		6.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
+use function WeCodeArt\Functions\{ get_prop, get_placeholder_source };
 
 /**
  * Gutenberg Post Image block.
@@ -95,15 +95,15 @@ class Image extends Dynamic {
 		if( $html === '' && $thumbnail === 0 ) {
 			$placeholder = wecodeart_config( 'placeholder', false );
 
-			if( $placeholder === false ) return $html;
-			
-			$source = get_prop( $placeholder, [ 'src' ] );
+			if( $placeholder === false ) {
+				return $html;
+			}
 
-			$html 	= sprintf(
-				get_prop( $placeholder, 'html', '<img class="%s" src="%s" alt="%s" />' ),
-				'wp-block-post-featured-image__src',
-				esc_url( $source, strpos( $source, 'data:image' ) !== false ? [ 'data' ] : null ),
-				esc_attr( get_prop( $placeholder, [ 'text' ] ) )
+			$html = sprintf(
+				'<img class="%s" src="%s" alt="%s" />',
+				'wp-block-post-featured-image__src is-placeholder',
+				esc_url( get_placeholder_source( true ), [ 'data' ] ),
+			 	esc_attr__( 'Placeholder', 'wecodeart' )
 			);
 		}
 
@@ -122,6 +122,9 @@ class Image extends Dynamic {
 				overflow: hidden;
 				max-width: 100%;
 				margin: 0 0 var(--wp--style--block-gap);
+			}
+			.wp-block-post-featured-image .is-placeholder {
+				background-color: var(--wp--preset--color--accent);
 			}
 			.wp-block-post-featured-image__link {
 				display: block;

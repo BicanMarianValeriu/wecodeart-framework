@@ -282,6 +282,11 @@
 			},
 			"spacingSizes": [
 				{
+					"name": "Auto",
+					"slug": "auto",
+					"size": "auto"
+				},
+				{
 					"name": "Gutter",
 					"slug": "g",
 					"size": "var(--wp--custom--gutter)"

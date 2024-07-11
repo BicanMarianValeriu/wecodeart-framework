@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.5
+ * @version		6.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -574,14 +574,14 @@ class Navigation extends Dynamic {
 			case 'navbar-dark':
 				$inline .= "
 					.navbar-dark {
-						--wp--emphasis-color-rgb: 255, 255, 255;
+						--wp--emphasis-color-rgb: var(--wp--color--rgb, 255, 255, 255);
 					}
 				";
 			break;
 			case 'navbar-light':
 				$inline .= "
 					.navbar-light {
-						--wp--emphasis-color-rgb: 0, 0, 0;
+						--wp--emphasis-color-rgb: var(--wp--color--rgb, 0, 0, 0);
 					}
 				";
 			break;
@@ -724,7 +724,7 @@ class Navigation extends Dynamic {
 			.navbar {
 				--wp--navbar-padding-x: 0;
 				--wp--navbar-padding-y: 0.5rem;
-				--wp--navbar-color: rgba(var(--wp--emphasis-color-rgb), 0.65);
+				--wp--navbar-color: rgba(var(--wp--emphasis-color-rgb), 1);
 				--wp--navbar-hover-color: rgba(var(--wp--emphasis-color-rgb), 0.8);
 				--wp--navbar-active-color: rgba(var(--wp--emphasis-color-rgb), 1);
 				--wp--navbar-disabled-color: rgba(var(--wp--emphasis-color-rgb), 0.3);

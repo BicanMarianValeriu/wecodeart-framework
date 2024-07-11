@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.3.7
+ * @version		6.4.8
  */
 
 namespace WeCodeArt;
@@ -189,7 +189,9 @@ class Gutenberg {
 	 */
 	public function frontend_assets() {
 		// Manage Styles.
+		wp_deregister_style( 'wp-block-library' );		// WordPress Core
 		wp_dequeue_style( 'wp-block-library' );         // WordPress Core
+        wp_deregister_style( 'wp-block-library-theme' );// WordPress Core
         wp_dequeue_style( 'wp-block-library-theme' );   // WordPress Core
 
 		$style = '';

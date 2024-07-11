@@ -96,11 +96,7 @@ return [
     | This array of options will be used as defaults for placeholder.
     |
     */
-    'placeholder' => [
-        'text'  => __( 'Placeholder', 'wecodeart' ),
-        'src'   => "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' preserveAspectRatio='xMidYMid slice'%3E%3Crect fill='%23FAFAFA' width='100%' height='100%'/%3E%3Ctext x='50%25' y='50%25' fill='%23AAA' dominant-baseline='middle' text-anchor='middle' font-family='Arial,Helvetica,Open Sans,sans-serif,monospace' font-size='var(--wp--font-size, 20)' %3E" . esc_attr__( 'Placeholder', 'wecodeart' ) . "%3C/text%3E%3C/svg%3E",
-        'html'  => '<img class="%s" src="%s" alt="%s" />'
-    ],
+    'placeholder' => [ /* Deprecated */ ],
     /*
     |--------------------------------------------------------------------------
     | Theme Fonts

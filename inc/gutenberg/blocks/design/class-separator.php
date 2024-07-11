@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.1
+ * @version		6.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -282,7 +282,7 @@ class Separator extends Dynamic {
 		return <<<CSS
 			/* Separator */
 			hr {
-				height: 1px;
+				height: .05em;
 				border: 0;
 				opacity: 1;
 			}

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Patterns
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.4.8
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -50,6 +50,25 @@ class Patterns {
 		// Register.
 		$this->register_categories();
 		$this->register_patterns();
+
+		\add_action( 'admin_menu', [ $this, 'register_menu' ], 20, 1 );
+	}
+
+	/**
+	 * Add Reusable menu
+	 *
+	 * @return void
+	 */
+	public function register_menu(): void {
+		\add_submenu_page(
+			'themes.php',
+			esc_html__( 'Patterns', 'wecodeart' ),
+			esc_html__( 'Patterns', 'wecodeart' ),
+			'manage_options',
+			'edit.php?post_type=wp_block',
+			'',
+			'dashicons-editor-table'
+		);
 	}
 
 	/**

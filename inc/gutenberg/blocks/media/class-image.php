@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.1
+ * @version		6.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -88,6 +88,8 @@ class Image extends Dynamic {
 
 		// If no image, use placeholder.
 		if ( $img && ! $img->getAttribute( 'src' ) ) { 
+			wecodeart( 'dom' )::add_classes( $div, [ 'is-placeholder' ] );
+
 			$img->setAttribute( 'class', 'wp-block-image__placeholder' );
 			$img->setAttribute( 'src', get_placeholder_source() );
 			$img->setAttribute( 'alt', esc_attr__( 'Placeholder', 'wecodeart' ) );
@@ -131,6 +133,9 @@ class Image extends Dynamic {
 			.wp-block-image.aligncenter {
 				text-align: center;
 			}
+			.wp-block-image.is-placeholder {
+				background-color: var(--wp--preset--color--accent);
+			}
 			.wp-block-image > a,
 			.wp-block-image :where(img,svg) {
 				border-radius: inherit;
@@ -140,6 +145,7 @@ class Image extends Dynamic {
 			}
 			.wp-block-image__placeholder {
 				aspect-ratio: var(--wp--aspect-ratio, 16/9);
+				filter: opacity(0.035);
 				object-fit: fill!important;
 			}
 			.wp-block-image figcaption {

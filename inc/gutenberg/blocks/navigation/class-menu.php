@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.1
+ * @version		6.4.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -131,7 +131,12 @@ class Menu extends Dynamic {
 			.wp-block-navigation.hide-toggle .dropdown-toggle::after {
 				content: none;
 			}
-			.wp-block-navigation.with-hover :where(.dropdown,.dropup,.dropstart,.dropend,):where(:hover,:focus,:focus-within) > .dropdown-toggle ~ .dropdown-menu {
+			.wp-block-navigation.with-hover :where(
+				.dropdown,
+				.dropup,
+				.dropstart,
+				.dropend
+			):where(:hover,:focus,:focus-within) > .dropdown-toggle ~ .dropdown-menu {
 				display: block;
 				visibility: visible;
 				opacity: 1;
