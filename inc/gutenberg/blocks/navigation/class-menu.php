@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.8
+ * @version		6.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -21,8 +21,7 @@ use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use WeCodeArt\Gutenberg\Blocks\Navigation;
 use WeCodeArt\Gutenberg\Blocks\Navigation\Link;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_lightness_limit;
+use function WeCodeArt\Functions\{ get_prop, get_lightness_limit, encode_svg_data };
 
 /**
  * Gutenberg Navigation Submenu block.
@@ -31,6 +30,13 @@ class Menu extends Dynamic {
 
 	use Singleton;
 	use Asset;
+
+	/**
+	 * Block static.
+	 *
+	 * @var mixed
+	 */
+	protected static $loaded_classes = [];
 
 	/**
 	 * Block namespace.
@@ -70,8 +76,7 @@ class Menu extends Dynamic {
 			return '';
 		}
 
-		// Styles
-		wecodeart( 'styles' )->Components->load( [ 'dropdown' ] );
+		$instance = wecodeart( 'blocks' )->get( 'core/navigation-submenu' )::get_instance();
 
 		// Scripts
 		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( 'wecodeart-support-assets-dropdown' ) ) {
@@ -93,6 +98,32 @@ class Menu extends Dynamic {
 
 		if( ! in_array( 'dropdown-menu-dark', $classes, true ) && $luminance < get_lightness_limit() ) {
 			$classes[] = 'dropdown-menu-dark';
+		}
+
+		$inline_styles = '';
+
+		if( in_array( 'dropdown-menu-dark', $classes, true ) && ! in_array( 'dropdown-menu-dark', self::$loaded_classes, true ) ) {
+			$inline_styles .= <<<CSS
+				.dropdown-menu.dropdown-menu-dark {
+					--wp--dropdown-color: var(--wp--gray-500);
+					--wp--dropdown-bg: var(--wp--gray-900);
+					--wp--dropdown-border-color: rgba(var(--wp--emphasis-color-rgb), .15);
+					--wp--dropdown-divider-bg: rgba(255,255,255,.15);
+					--wp--dropdown-link-color: var(--wp--gray-500);
+					--wp--dropdown-link-hover-color: var(--wp--white);
+					--wp--dropdown-link-hover-bg: rgba(var(--wp--emphasis-color-rgb), .15);
+					--wp--dropdown-link-active-color: var(--wp--white);
+					--wp--dropdown-link-active-bg: var(--wp--preset--color--primary);
+					--wp--dropdown-link-disabled-color: var(--wp--gray-600);
+					--wp--dropdown-header-color: var(--wp--gray-500);
+				}
+			CSS;
+
+			self::$loaded_classes[] = 'dropdown-menu-dark';
+		}
+
+		if( ! empty( $inline_styles ) ) {
+			\wp_add_inline_style( $instance->get_asset_handle(), wecodeart( 'styles' )::compress( $inline_styles ) );
 		}
 
 		return wecodeart( 'dom' )::wrap( 'nav-dropdown', [ [
@@ -126,6 +157,12 @@ class Menu extends Dynamic {
 	 * @return 	string 	The block styles.
 	 */
 	public function styles(): string {
+		$symbol	= encode_svg_data( <<<HTML
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"> 
+				<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/> 
+			</svg>
+		HTML );
+
 		return <<<CSS
 			/* Block */
 			.wp-block-navigation.hide-toggle .dropdown-toggle::after {
@@ -144,6 +181,160 @@ class Menu extends Dynamic {
 			.wp-block-navigation .dropdown-menu .dropdown-toggle::after {
 				float: right;
 				margin-top: .35em;
+			}
+
+			/* Dropdowns */
+			.dropup,
+			.dropend,
+			.dropdown,
+			.dropstart {
+				--wp--dropdown-icon: url('$symbol');
+				position: relative;
+			}
+			:is(.dropup,.dropend,.dropstart) .dropdown-menu[data-bs-popper] {
+				top: 0;
+				margin-top: 0;
+			}
+			.dropstart .dropdown-menu[data-bs-popper] {
+				right: 100%;
+				left: auto;
+				margin-right: var(--wp--dropdown-spacer);
+			}
+			.dropend .dropdown-menu[data-bs-popper] {
+				right: auto;
+				left: 100%;
+				margin-left: var(--wp--dropdown-spacer);
+			}
+			.dropup .dropdown-menu[data-bs-popper] {
+				top: auto;
+				bottom: 100%;
+				margin-bottom: var(--wp--dropdown-spacer);
+			}
+
+			/* Dropdown Toggle */
+			.dropdown-toggle {
+				white-space: nowrap;
+			}
+			.dropstart>.dropdown-toggle::before,
+			:is(.dropup,.dropend,.dropdown)>.dropdown-toggle::after {
+				content: '';
+				display: inline-block;
+				vertical-align: -.15em;
+				margin-left: .5em;
+				width: .75em;
+				height: 1em;
+				-webkit-mask-repeat: no-repeat;
+				-webkit-mask-position: center;
+				-webkit-mask-size: 100%;
+				-webkit-mask-image: var(--wp--dropdown-icon);
+				background: currentColor;
+			}
+			.dropstart .dropdown-toggle::before {
+				margin-left: 0;
+				margin-right: .55em;
+				transform: rotate(90deg);
+			}
+			.dropend .dropdown-toggle::after {
+				transform: rotate(-90deg);
+			}
+			.dropup .dropdown-toggle::after {
+				transform: rotate(-180deg);
+			}
+
+			/* Dropdown Menu */
+			.wp-block-navigation .dropdown-menu {
+				position: static;
+			}
+			.dropdown-menu {
+				--wp--dropdown-zindex: 1000;
+				--wp--dropdown-min-width: 10rem;
+				--wp--dropdown-padding-x: 0;
+				--wp--dropdown-padding-y: .5rem;
+				--wp--dropdown-spacer: .125rem;
+				--wp--dropdown-color: var(--wp--preset--color--dark);
+				--wp--dropdown-bg: var(--wp--white);
+				--wp--dropdown-border-width: 1px;
+				--wp--dropdown-border-color: var(--wp--gray-200);
+				--wp--dropdown-border-radius: .375rem;
+				--wp--dropdown-divider-bg: rgba(0,0,0, .05);
+				--wp--dropdown-divider-margin-y: .5rem;
+				--wp--dropdown-box-shadow: 0 .5rem 1rem rgba(0,0,0, 0.1);
+				--wp--dropdown-link-color: var(--wp--preset--color--dark);
+				--wp--dropdown-link-hover-color: var(--wp--preset--color--dark);
+				--wp--dropdown-link-hover-bg: var(--wp--preset--color--light);
+				--wp--dropdown-link-active-color: var(--wp--white);
+				--wp--dropdown-link-active-bg: var(--wp--preset--color--primary);
+				--wp--dropdown-link-disabled-color: var(--wp--gray-400);
+				--wp--dropdown-item-padding-x: 1rem;
+				--wp--dropdown-item-padding-y: .25rem;
+				--wp--dropdown-header-color: var(--wp--gray-600);
+				--wp--dropdown-header-padding-x: 1rem;
+				--wp--dropdown-header-padding-y: .5rem;
+				position: absolute;
+				display: none;
+				z-index: var(--wp--dropdown-zindex);
+				min-width: var(--wp--dropdown-min-width);
+				padding: var(--wp--dropdown-padding-y) var(--wp--dropdown-padding-x);
+				margin: 0;
+				text-align: left;
+				list-style: none;
+				color: var(--wp--dropdown-color);
+				background-color: var(--wp--dropdown-bg);
+				border: var(--wp--dropdown-border-width) solid var(--wp--dropdown-border-color);
+				border-radius: var(--wp--dropdown-border-radius);
+				box-shadow: var(--wp--dropdown-box-shadow);
+			}
+			.dropdown-menu.show {
+				display: block;
+			}
+			.dropdown-menu[data-bs-popper] {
+				top: 100%;
+				left: 0;
+				margin-top: var(--wp--dropdown-spacer);
+			}
+			.dropdown-menu-start {
+				--wp--position: start;
+			}
+			.dropdown-menu-start[data-bs-popper] {
+				right: auto;
+				left: 0;
+			}
+			.dropdown-menu-end {
+				--wp--position: end;
+			}
+			.dropdown-menu-end[data-bs-popper] {
+				right: 0;
+				left: auto;
+			} 
+			
+			/* Dropdown Item */
+			.wp-block-navigation-item .dropdown-item {
+				display: block;
+				width: 100%;
+				padding: var(--wp--dropdown-item-padding-y) var(--wp--dropdown-item-padding-x);
+				color: var(--wp--dropdown-link-color);
+				font-weight: inherit;
+				text-align: inherit;
+				white-space: nowrap;
+				background-color: transparent;
+				border: 0;
+				border-radius: var(--wp--dropdown-item-border-radius,0);
+				clear: both;
+			}
+			.wp-block-navigation-item .dropdown-item:is(:hover,:focus) {
+				color: var(--wp--dropdown-link-hover-color);
+				background-color: var(--wp--dropdown-link-hover-bg);
+			}
+			.wp-block-navigation-item .dropdown-item:is(.active,:active) {
+				color: var(--wp--dropdown-link-active-color);
+				background-color: var(--wp--dropdown-link-active-bg);
+				text-decoration: none;
+			}
+			.wp-block-navigation-item.disabled .dropdown-item,
+			.wp-block-navigation-item .dropdown-item:is(.disabled,:disabled) {
+				color: var(--wp--dropdown-link-disabled-color);
+				pointer-events: none;
+				background-color: transparent;
 			}
 		CSS;
 	}

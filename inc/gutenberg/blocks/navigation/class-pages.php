@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.3.7
- * @version		6.1.7
+ * @version		6.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -150,9 +150,6 @@ class Pages extends Dynamic {
 		$inner_blocks = wp_list_filter( $all_pages, [ 'post_parent' => $page->ID ] );
 
 		if( ! empty( $inner_blocks ) ) {
-			// Styles
-			wecodeart( 'styles' )->Components->load( [ 'dropdown' ] );
-			
 			// Scripts
 			if( ! wp_script_is( 'wecodeart-support-assets-dropdown' ) ) {
 				wp_enqueue_script( 'wecodeart-support-assets-dropdown' );

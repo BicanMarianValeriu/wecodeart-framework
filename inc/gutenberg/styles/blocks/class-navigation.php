@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.1.3
- * @version		6.3.7
+ * @version		6.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Styles\Blocks;
@@ -50,11 +50,11 @@ class Navigation extends Processor {
 
 		// Dropdown items color.
 		if ( $value = get_prop( $this->attrs, 'overlayTextColor' ) ) {
-			$dropdown_rules['--wp--dropdown-color'] = sprintf( 'var(--wp--preset--color--%s)', $value );
+			$dropdown_rules['--wp--dropdown-link-color'] = sprintf( 'var(--wp--preset--color--%s)', $value );
 		}
 		
 		if ( $value = get_prop( $this->attrs, 'customOverlayTextColor' ) ) {
-			$dropdown_rules['--wp--dropdown-color'] = $value;
+			$dropdown_rules['--wp--dropdown-link-color'] = $value;
 		}
 
 		// Dropdown items background color.

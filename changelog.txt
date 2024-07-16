@@ -1,3 +1,10 @@
+v6.4.9
+- Removed - core/navigation tabs styles (not used - a separate Tabs module/block will be developed)
+- Changed - Dropdown styles to block style from wecodeart( 'styles' )->Components dropdown (planned for refactoring)
+- Changed - core/navigation styles refactor away from Bootstrap's navbar for improved preview (for cleaner CSS & improved admin preview)
+- Fixed - style specificity for dropdown-item classname
+- Fixed - WP required version to 6.5 from 6.6 (increased by mistake)
+
 v6.4.8
 - Updated - use wp_deregister_style on wp-block-library/wp-block-library-theme (for WP6.6+)
 - Updated - minor change for theme starter content on homepage

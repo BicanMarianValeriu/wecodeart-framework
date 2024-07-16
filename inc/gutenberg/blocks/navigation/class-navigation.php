@@ -85,12 +85,6 @@ class Navigation extends Dynamic {
 	 */
 	public function init() {
 		\register_block_style( $this->get_block_type(), [
-			'name' 	=> 'tabs',
-            'label'	=> __( 'Tabs', 'wecodeart' ),
-			'inline_style' => static::get_extra_styles( 'tabs' )
-		] );
-
-		\register_block_style( $this->get_block_type(), [
 			'name' 	=> 'pills',
             'label'	=> __( 'Pills', 'wecodeart' ),
 			'inline_style' => static::get_extra_styles( 'pills' )
@@ -213,7 +207,7 @@ class Navigation extends Dynamic {
 			$html = wecodeart( 'dom' )::wrap( 'navbar-nav', [ [
 				'tag' 	=> 'ul',
 				'attrs' => [
-					'class' => 'wp-block-navigation__container nav navbar-nav',
+					'class' => 'wp-block-navigation__container navbar-nav',
 				]
 			] ], function( $inner_blocks ) {
 				foreach( $inner_blocks as $inner_block ) echo $this->render_menu_block( $inner_block );
@@ -531,7 +525,6 @@ class Navigation extends Dynamic {
 						}
 						.navbar-expand-{$key} .navbar-nav {
 							flex-direction: inherit;
-							align-items: center;
 						}
 						.navbar-expand-{$key} .navbar-nav .dropdown-menu {
 							position: absolute;
@@ -597,79 +590,29 @@ class Navigation extends Dynamic {
 	 *
 	 * @return 	string
 	 */
-	public function get_extra_styles( string $variation = 'tabs' ): string {
+	public function get_extra_styles( string $variation = 'pills' ): string {
 		$inline = '';
 
 		switch( $variation ) :
-			case 'tabs':
-				$inline .= "
-					.wp-block-navigation.is-style-tabs {
-						--wp--nav-tabs-border-width: 1px;
-						--wp--nav-tabs-border-color: var(--wp--gray-200);
-						--wp--nav-tabs-border-radius: .25rem;
-						--wp--nav-tabs-link-hover-border-color: var(--wp--nav-tabs-border-color) var(--wp--nav-tabs-border-color) var(--wp--nav-tabs-border-color);
-						--wp--nav-tabs-link-active-color: var(--wp--preset--color--dark);
-						--wp--nav-tabs-link-active-bg: var(--wp--white);
-						--wp--nav-tabs-link-active-border-color: var(--wp--nav-tabs-border-color) var(--wp--nav-tabs-border-color) var(--wp--white);
-						border-bottom: var(--wp--nav-tabs-border-width) solid var(--wp--nav-tabs-border-color);
-					}
-					.wp-block-navigation.is-style-tabs .navbar-nav {
-						--wp--nav-link-padding-x: 1rem;
-    					--wp--nav-link-padding-y: .5rem;
-					}
-					.wp-block-navigation.is-style-tabs .navbar-nav .nav-link {
-						margin-bottom: calc(-1 * var(--wp--nav-tabs-border-width));
-						background: 0 0;
-						border: var(--wp--nav-tabs-border-width) solid transparent;
-						border-top-left-radius: var(--wp--nav-tabs-border-radius);
-						border-top-right-radius: var(--wp--nav-tabs-border-radius);
-					}
-					.wp-block-navigation.is-style-tabs .navbar-nav .nav-link:is(:hover,:focus) {
-						isolation: isolate;
-						border-color: var(--wp--nav-tabs-link-hover-border-color);
-					}
-					.wp-block-navigation.is-style-tabs .navbar-nav .nav-link.active,
-					.wp-block-navigation.is-style-tabs .navbar-nav .nav-item.show .nav-link {
-						background-color: var(--wp--nav-tabs-link-active-bg);
-						border-color: var(--wp--nav-tabs-link-active-border-color);
-						color: var(--wp--nav-tabs-link-active-color);
-					}
-					.wp-block-navigation.is-style-tabs .navbar-nav .nav-link.disabled {
-						background-color: transparent;
-						border-color: transparent;
-						color: var(--wp--nav-link-disabled-color);
-					}
-					.wp-block-navigation.is-style-tabs .navbar-nav .dropdown-menu {
-						margin-top: calc(-1 * var(--wp--nav-tabs-border-width));
-						border-top-left-radius: 0;
-						border-top-right-radius: 0;
-					}
-					.wp-block-navigation.is-style-tabs .tab-content > .tab-pane {
-						display: none;
-					}
-					.wp-block-navigation.is-style-tabs .tab-content > .active {
-						display: block;
-					}
-				";
-			break;
 			case 'pills':
 				$inline .= "
 					.wp-block-navigation.is-style-pills {
 						--wp--nav-pills-border-radius: .375rem;
 						--wp--nav-pills-link-active-color: var(--wp--white);
 						--wp--nav-pills-link-active-bg: rgb(var(--wp--color--rgb));
-					}
-					.wp-block-navigation.is-style-pills .navbar-nav {
 						--wp--nav-link-padding-x: 1rem;
     					--wp--nav-link-padding-y: .5rem;
 					}
-					.wp-block-navigation.is-style-pills .navbar-nav .nav-link {
+					.wp-block-navigation.is-style-pills .wp-block-navigation-link__dropdown {
+						--wp--dropdown-padding-x: .5rem;
+					}
+					.wp-block-navigation.is-style-pills a {
 						background: none;
 						border: 0;
 						border-radius: var(--wp--nav-pills-border-radius);
 					}
-					.wp-block-navigation.is-style-pills .navbar-nav .nav-link.active,
-					.wp-block-navigation.is-style-pills .navbar-nav .show > .nav-link {
+					.wp-block-navigation.is-style-pills a.active,
+					.wp-block-navigation.is-style-pills .show > a {
 						color: var(--wp--nav-pills-link-active-color);
     					background-color: var(--wp--nav-pills-link-active-bg);
 					}	
@@ -688,93 +631,67 @@ class Navigation extends Dynamic {
 	public function styles(): string {
 		return <<<CSS
 			.wp-block-navigation {
-				display: flex;
-				align-items: center;
+				--wp--navigation-flex-direction: column;
+				--wp--navigation-flex-wrap: wrap;
+				--wp--navigation-justify-content: initial;
+				--wp--navigation-align-items: flex-start;
+				--wp--navigation-padding-x: 0;
+				--wp--navigation-padding-y: 0.5rem;
+				--wp--navigation-color: rgba(var(--wp--emphasis-color-rgb), 1);
+				--wp--navigation-hover-color: rgba(var(--wp--emphasis-color-rgb), 0.8);
+				--wp--navigation-active-color: rgba(var(--wp--emphasis-color-rgb), 1);
+				--wp--navigation-disabled-color: rgba(var(--wp--emphasis-color-rgb), 0.3);
+				--wp--nav-link-padding-x: 0;
+				--wp--nav-link-padding-y: 0;
+				--wp--nav-link-color: var(--wp--navigation-color);
+				--wp--nav-link-hover-color: var(--wp--navigation-hover-color);
+				--wp--nav-link-disabled-color: var(--wp--navigation-disabled-color);
+				position: relative;
 			}
-			.wp-block-navigation :where(.wp-offcanvas,.wp-offcanvas__body,.navbar-nav) {
+			.wp-block-navigation :where(.wp-offcanvas,.wp-offcanvas__body,.wp-block-navigation__container) {
 				flex: 1 1 100%;
 				gap: inherit;
 			}
-			.nav {
-				--wp--nav-link-padding-x: 0.5rem;
-				--wp--nav-link-padding-y: 0.5rem;
-				--wp--nav-link-color: rgba(var(--wp--emphasis-color-rgb), 0.55);
-				--wp--nav-link-hover-color: rgba(var(--wp--emphasis-color-rgb), 0.55);
-				--wp--nav-link-disabled-color: rgba(var(--wp--emphasis-color-rgb), 0.55);
-
+			/* ul specificity to avoid overwriting editor styles */
+			.wp-block-navigation :where(ul.wp-block-navigation__container) {
 				display: flex;
-				flex-wrap: wrap;
+				flex-wrap: var(--wp--navigation-flex-wrap, wrap);
+				flex-direction: var(--wp--navigation-flex-direction, initial);
+				justify-content: var(--wp--navigation-justify-content, initial);
+				align-items: var(--wp--navigation-align-items, initial);
 				list-style: none;
-				padding-left: 0;
 				margin: 0;
+				padding: 0;
 			}
-			.nav-fill :where(.nav-link,.nav-item) {
-				flex: 1 1 auto;
-				text-align: center;
+			.wp-block-navigation.is-vertical {
+				--wp--navigation-flex-direction: column;
+				--wp--navigation-justify-content: initial;
+				--wp--navigation-align-items: flex-start;
 			}
-			.nav-justified :where(.nav-link,.nav-item) {
-				flex-basis: 0;
-				flex-grow: 1;
-				text-align: center;
+			.wp-block-navigation.is-content-justification-center {
+				--wp--navigation-justify-content: center;
 			}
-			:where(.nav-fill,.nav-justified) .nav-item .nav-link {
-				width: 100%;
+			.wp-block-navigation.is-content-justification-center.is-vertical {
+				--wp--navigation-flex-align: center;
 			}
-			
-			.navbar {
-				--wp--navbar-padding-x: 0;
-				--wp--navbar-padding-y: 0.5rem;
-				--wp--navbar-color: rgba(var(--wp--emphasis-color-rgb), 1);
-				--wp--navbar-hover-color: rgba(var(--wp--emphasis-color-rgb), 0.8);
-				--wp--navbar-active-color: rgba(var(--wp--emphasis-color-rgb), 1);
-				--wp--navbar-disabled-color: rgba(var(--wp--emphasis-color-rgb), 0.3);
-				position: relative;
-				display: flex;
-				flex-wrap: wrap;
-				align-items: center;
-				justify-content: space-between;
-				padding-top: 0.5rem;
-				padding-bottom: 0.5rem;
+			.wp-block-navigation.is-content-justification-right {
+				--wp--navigation-justify-content: flex-end;
 			}
-			.navbar-nav {
-				--wp--nav-link-padding-x: 0;
-				--wp--nav-link-padding-y: 0;
-				--wp--nav-link-color: var(--wp--navbar-color);
-				--wp--nav-link-hover-color: var(--wp--navbar-hover-color);
-				--wp--nav-link-disabled-color: var(--wp--navbar-disabled-color);
-				display: flex;
-				flex-direction: column;
-				padding-left: 0;
-				margin-bottom: 0;
-				list-style: none;
+			.wp-block-navigation.is-content-justification-right.is-vertical {
+				--wp--navigation-align-items: flex-end;
 			}
-			.navbar-nav .dropdown-menu {
-				position: static;
+			.wp-block-navigation.is-content-justification-space-between {
+				--wp--navigation-justify-content: space-between;
 			}
-			.navbar-text {
-				padding-top: 0.5rem;
-				padding-bottom: 0.5rem;
+			.wp-block-navigation.no-wrap {
+				--wp--navigation-layout-wrap: nowrap;
 			}
-			.navbar-collapse {
-				flex-basis: 100%;
-				flex-grow: 1;
-				align-items: center;
-			}
-			.navbar-nav-scroll {
-				max-height: var(--wp--scroll-height, 75vh);
-				overflow-y: auto;
-			}
-
 			:is(.wp-site-header,.wp-site-footer) .wp-block-navigation {
 				padding-top: 0;
 				padding-bottom: 0;
 			}
-
 			@media (prefers-reduced-motion: reduce) {
-				.nav-link {
-					transition: none;
-				}
-				.wp-block-navigation :where(.navbar-toggler,.wp-offcanvas) {
+				.wp-block-navigation :where(.navbar-toggler,.wp-offcanvas,.wp-block-navigation-item a) {
 					transition: none;
 				}
 			}

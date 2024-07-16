@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.8
+ * @version		6.4.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -30,6 +30,13 @@ class Link extends Dynamic {
 
 	use Asset;
 	use Singleton;
+
+	/**
+	 * Block static.
+	 *
+	 * @var mixed
+	 */
+	protected static $loaded_classes = [];
 
 	/**
 	 * Block namespace.
@@ -159,9 +166,10 @@ class Link extends Dynamic {
 	 * 
 	 * @return 	string
 	 */
-	public function get_link_tag( array $classes = [] ): string  {
+	public function get_link_tag( array $classes = [] ): string {
 		$type 	= 'link'; // Default
 		$output = '';
+		$styles = '';
 
 		foreach ( $classes as $class ) {
 			if ( empty( $class ) ) {
@@ -170,10 +178,49 @@ class Link extends Dynamic {
 
 			if ( 'dropdown-header' === $class ) {
 				$type = 'header';
+
+				if( ! in_array( $class, self::$loaded_classes, true ) ) {
+					$inline_styles .= <<<CSS
+						.wp-block-navigation-item .dropdown-header {
+							padding: var(--wp--dropdown-header-padding-y) var(--wp--dropdown-header-padding-x);
+							margin: 0;
+							color: var(--wp--dropdown-header-color);
+							font-size: var(--wp--preset--font-size--small);
+							white-space: nowrap;
+						}
+					CSS;
+		
+					self::$loaded_classes[] = $class;
+				}
 			} elseif ( 'dropdown-divider' === $class ) {
 				$type = 'divider';
-			} elseif ( in_array( $class, [ 'dropdown-text', 'dropdown-item-text' ], true ) ) {
+
+				if( ! in_array( $class, self::$loaded_classes, true ) ) {
+					$styles .= <<<CSS
+						.wp-block-navigation-item .dropdown-divider {
+							height: 0;
+							margin: var(--wp--dropdown-divider-margin-y) 0;
+							border-top: 1px solid var(--wp--dropdown-divider-bg);
+							overflow: hidden;
+						}
+					CSS;
+		
+					self::$loaded_classes[] = $class;
+				}
+			} elseif ( 'dropdown-text' === $class ) {
 				$type = 'text';
+
+				if( ! in_array( $class, self::$loaded_classes, true ) ) {
+					$styles .= <<<CSS
+						.wp-block-navigation-item .dropdown-text {
+							display: block;
+							padding: var(--wp--dropdown-header-padding-y) var(--wp--dropdown-header-padding-x);
+							color: var(--wp--dropdown-color);
+						}
+					CSS;
+		
+					self::$loaded_classes[] = $class;
+				}
 			}
 		}
 
@@ -191,6 +238,10 @@ class Link extends Dynamic {
 				$output = 'a';
 			break;
 		endswitch;
+
+		if( ! empty( $styles ) ) {
+			\wp_add_inline_style( $this->get_asset_handle(), wecodeart( 'styles' )::compress( $styles ) );
+		}
 
 		return $output;
 	}
@@ -262,7 +313,7 @@ class Link extends Dynamic {
 			}
 
 			// Submenu Elements
-			if( in_array( $class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-text', 'dropdown-item-text' ], true ) ) {
+			if( in_array( $class, [ 'dropdown-header', 'dropdown-divider', 'dropdown-text' ], true ) ) {
 				$attrs['class'] = str_replace( 'nav-link', $class, $attrs['class'] );
 				unset( $attrs['href'] );
 				unset( $attrs['target'] );
@@ -352,7 +403,7 @@ class Link extends Dynamic {
 			}
 			.wp-block-navigation-item.show > a,
 			.wp-block-navigation-item a.active {
-				color: var(--wp--navbar-active-color);
+				color: var(--wp--navigation-active-color);
 			}
 			.wp-block-navigation-item .wp-block-navigation-item__icon {
 				margin-right: .5rem;

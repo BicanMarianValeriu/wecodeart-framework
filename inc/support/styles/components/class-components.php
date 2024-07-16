@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.4.4
+ * @version		6.4.9
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -61,7 +61,6 @@ class Components implements Configuration {
 		$this->register( 'toast',       Components\Toast::class     );
 		$this->register( 'toggler',     Components\Toggler::class   );
 		$this->register( 'lightbox',    Components\Lightbox::class  );
-		$this->register( 'dropdown',    Components\Dropdown::class  );
 		$this->register( 'offcanvas',   Components\OffCanvas::class );
 		$this->register( 'parallax',    Components\Parallax::class  );
 		$this->register( 'backdrop',    Components\Backdrop::class  );
