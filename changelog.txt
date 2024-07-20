@@ -1,3 +1,8 @@
+v6.5.0
+- Fixed - core/page-list to load dropdown styles if not used inside a core/navigation (or this block is not present on the page with a dropdown)
+- Added - core/image css styles when placed in a group with grid variation (height will be 100% and object fit to cover)
+- Added - theme.json opt-out from defaultFontSizes (introduced in WP6.6+)
+
 v6.4.9
 - Removed - core/navigation tabs styles (not used - a separate Tabs module/block will be developed)
 - Changed - Dropdown styles to block style from wecodeart( 'styles' )->Components dropdown (planned for refactoring)

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.8
+ * @version		6.5.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -123,6 +123,10 @@ class Image extends Dynamic {
 			/* Block */
 			:where(.wp-block-image) {
 				margin: 0;
+			}
+			.is-layout-grid .wp-block-image :where(div,img,svg) {
+				height: 100%;
+				object-fit: cover;
 			}
 			.wp-block-image.alignfull {
 				max-width: initial;

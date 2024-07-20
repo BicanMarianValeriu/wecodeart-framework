@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.8
+ * @version		6.5.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -490,7 +490,7 @@ class Navigation extends Dynamic {
 					}
 					.navbar-expand .navbar-nav {
 						flex-direction: inherit;
-						align-items: center;
+						align-items: inherit;
 					}
 					.navbar-expand .navbar-nav .dropdown-menu {
 						position: absolute;
@@ -525,6 +525,7 @@ class Navigation extends Dynamic {
 						}
 						.navbar-expand-{$key} .navbar-nav {
 							flex-direction: inherit;
+							align-items: inherit;
 						}
 						.navbar-expand-{$key} .navbar-nav .dropdown-menu {
 							position: absolute;

@@ -332,9 +332,10 @@
 			]
 		},
 		"typography": {
-			"dropCap": true,
-			"customFontSize": true,
+			"defaultFontSizes": false,
 			"fluid": true,
+			"textColumns": true,
+			"writingMode": true,
 			"fontFamilies": [
 				{
 					"fontFamily": "var(--wp--font-system)",
