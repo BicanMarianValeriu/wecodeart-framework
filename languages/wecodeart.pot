@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-29 17:40+0000\n"
+"POT-Creation-Date: 2024-07-20 19:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -72,7 +72,7 @@ msgstr ""
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr ""
 
-#: inc/app.php:224
+#: inc/app.php:230
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -85,7 +85,7 @@ msgid ""
 " It also works perfectly with all page builder plugins."
 msgstr ""
 
-#: patterns/header.php:33
+#: patterns/header.php:36
 msgid "About"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgstr ""
 msgid "Block name is required."
 msgstr ""
 
-#: patterns/header.php:32 inc/gutenberg/blocks/query/class-title.php:157
+#: patterns/header.php:35 inc/gutenberg/blocks/query/class-title.php:157
 msgid "Blog"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:329
+#: inc/gutenberg/blocks/design/class-group.php:336
 msgid "Close item"
 msgstr ""
 
@@ -395,19 +395,19 @@ msgstr ""
 msgid "Enter your email address to subscribe."
 msgstr ""
 
-#: inc/app.php:162
+#: inc/app.php:158
 msgid ""
 "Extends Gutenberg editor with an accordion block built on WP Interactivity "
 "API."
 msgstr ""
 
-#: inc/app.php:182
+#: inc/app.php:178
 msgid ""
 "Extends Gutenberg editor with extra formatting options like: justify, "
 "abbreviation, text decorations, tooltips and popovers."
 msgstr ""
 
-#: inc/app.php:192
+#: inc/app.php:188
 msgid ""
 "Extends Gutenberg editor with lorem ipsum dummy content generator for "
 "headings, paragraphs and lists."
@@ -491,6 +491,18 @@ msgstr ""
 msgid "Free WP Theme"
 msgstr ""
 
+#: inc/gutenberg/blocks/design/class-group.php:89
+msgid "Gather blocks in a collapsible container."
+msgstr ""
+
+#: inc/gutenberg/blocks/design/class-group.php:71
+msgid "Gather blocks in a sliding container."
+msgstr ""
+
+#: inc/gutenberg/blocks/design/class-group.php:101
+msgid "Gather blocks in an offcanvas container."
+msgstr ""
+
 #: patterns/section-hero.php:16
 #, php-format
 msgid "Get it now. Is %s forever!"
@@ -533,6 +545,18 @@ msgstr ""
 
 #: inc/gutenberg/blocks/design/class-buttons.php:50
 msgid "Group"
+msgstr ""
+
+#: inc/gutenberg/blocks/design/class-group.php:88
+msgid "Group: Collapse"
+msgstr ""
+
+#: inc/gutenberg/blocks/design/class-group.php:70
+msgid "Group: Marquee"
+msgstr ""
+
+#: inc/gutenberg/blocks/design/class-group.php:100
+msgid "Group: Offcanvas"
 msgstr ""
 
 #: patterns/section-features.php:87
@@ -591,13 +615,13 @@ msgstr ""
 msgid "Less than a minute to read."
 msgstr ""
 
-#: inc/app.php:202
+#: inc/app.php:198
 msgid ""
 "Lightweight extension for adding a scroll to top button on your site. Super "
 "flexible and customizable."
 msgstr ""
 
-#: inc/app.php:212
+#: inc/app.php:208
 msgid ""
 "Lightweight extension for enhancing our theme with options for cleaning "
 "wp_head of unnecesary stuff."
@@ -700,13 +724,13 @@ msgstr ""
 msgid "Notification dismissed"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:379
+#: inc/gutenberg/blocks/design/class-group.php:386
 #, php-format
 msgid "Open %s"
 msgstr ""
 
 #: views/general/toggler.tpl.php:65
-#: inc/gutenberg/blocks/design/class-group.php:328
+#: inc/gutenberg/blocks/design/class-group.php:335
 msgid "Open item"
 msgstr ""
 
@@ -872,13 +896,18 @@ msgctxt "Pattern title"
 msgid "WooCommerce"
 msgstr ""
 
-#: inc/gutenberg/blocks/navigation/class-navigation.php:95
+#: inc/gutenberg/patterns/class-patterns.php:65
+#: inc/gutenberg/patterns/class-patterns.php:66
+msgid "Patterns"
+msgstr ""
+
+#: inc/gutenberg/blocks/navigation/class-navigation.php:89
 msgid "Pills"
 msgstr ""
 
-#: inc/app.php:100 inc/app.php:101
-#: inc/gutenberg/blocks/media/class-image.php:93
-#: inc/gutenberg/blocks/media/class-text.php:75
+#: inc/gutenberg/blocks/media/class-image.php:95
+#: inc/gutenberg/blocks/media/class-text.php:76
+#: inc/gutenberg/blocks/post/class-image.php:106
 msgid "Placeholder"
 msgstr ""
 
@@ -1072,6 +1101,11 @@ msgstr ""
 
 #: theme.json:1
 msgctxt "Space size name"
+msgid "Auto"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Space size name"
 msgid "Gutter"
 msgstr ""
 
@@ -1131,10 +1165,6 @@ msgstr ""
 
 #: patterns/section-woo.php:34
 msgid "Super-Optimized eCommerce website built with ease."
-msgstr ""
-
-#: inc/gutenberg/blocks/navigation/class-navigation.php:89
-msgid "Tabs"
 msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:127
@@ -1250,7 +1280,7 @@ msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:273
+#: inc/gutenberg/blocks/design/class-group.php:280
 #, php-format
 msgid "Toggle %s"
 msgstr ""
@@ -1281,27 +1311,27 @@ msgstr ""
 msgid "View Themes"
 msgstr ""
 
-#: inc/app.php:161
+#: inc/app.php:157
 msgid "WCA: Accordion"
 msgstr ""
 
-#: inc/app.php:171
+#: inc/app.php:167
 msgid "WCA: Contact Form 7"
 msgstr ""
 
-#: inc/app.php:181
+#: inc/app.php:177
 msgid "WCA: Formatting"
 msgstr ""
 
-#: inc/app.php:191
+#: inc/app.php:187
 msgid "WCA: Lorem Ipsum"
 msgstr ""
 
-#: inc/app.php:211
+#: inc/app.php:207
 msgid "WCA: Optimization"
 msgstr ""
 
-#: inc/app.php:201
+#: inc/app.php:197
 msgid "WCA: Scroll Top"
 msgstr ""
 
@@ -1334,7 +1364,7 @@ msgstr ""
 msgid "WeCodeArt"
 msgstr ""
 
-#: inc/app.php:223
+#: inc/app.php:229
 msgid "WeCodeArt Developer"
 msgstr ""
 
@@ -1444,6 +1474,10 @@ msgstr ""
 #: inc/gutenberg/blocks/comment/class-form.php:298
 #, php-format
 msgid "You must accept %s to comment!"
+msgstr ""
+
+#: patterns/header.php:28
+msgid "Your #1 FSE Theme"
 msgstr ""
 
 #: patterns/page-soon.php:44

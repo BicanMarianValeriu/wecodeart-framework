@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Patterns
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.8
+ * @version		6.5.1
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -67,7 +67,7 @@ class Patterns {
 			'manage_options',
 			'edit.php?post_type=wp_block',
 			'',
-			'dashicons-editor-table'
+			1
 		);
 	}
 

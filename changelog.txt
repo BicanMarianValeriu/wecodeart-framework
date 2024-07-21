@@ -1,3 +1,11 @@
+v6.5.1
+- Updated - patterns wording adjustments with translation function
+- Updated - opt-out of defaultSpacingSizes (due to WP 6.6)
+- Updated - core/group to register variations using variation_callback instead of inline JS (previously this was not working for this block)
+- Updated - local theme translations for RO (Romanian) language
+- Fixed - 7th parameter of add_submenu_page when adding "Pattern" quick access link (in Appearance)
+- Added - {breakpoint}:wp-offcanvas--expand modifier to block class suggestion list (eg: lg:wp-offcanvas--expand)
+
 v6.5.0
 - Fixed - core/page-list to load dropdown styles if not used inside a core/navigation (or this block is not present on the page with a dropdown)
 - Added - core/image css styles when placed in a group with grid variation (height will be 100% and object fit to cover)

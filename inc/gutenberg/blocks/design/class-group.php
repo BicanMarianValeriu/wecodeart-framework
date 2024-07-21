@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.4.5
+ * @version		6.5.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -45,7 +45,7 @@ class Group extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
-		\add_action( 'enqueue_block_editor_assets', [ $this, 'register_variations' ], 30, 1 );
+		\add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'class_suggestions' 	], 20, 1 );
 	}
 
 	/**
@@ -64,6 +64,50 @@ class Group extends Dynamic {
 			'supports'			=> wp_parse_args( [
 				'shadow'		=> true, 
 			], $supports ),
+			'variation_callback' => fn() => [
+				[
+					'name'        => 'core/group/marquee',
+					'title'       => esc_html__( 'Group: Marquee', 'wecodeart' ),
+					'description' => esc_html__( 'Gather blocks in a sliding container.', 'wecodeart' ),
+					'icon'		  => 'align-right',
+					'isDefault'   => false,
+					'isActive'    => ['namespace'],
+					'scope'       => [ 'block', 'inserter' ],
+					'attributes'  => [
+						'namespace'	=> 'wecodeart/group/marquee',
+						'layout'	=> [
+							'type' 				=> 'flex',
+							'flexWrap' 			=> 'nowrap',
+							'justifyContent' 	=> 'center',
+							'alignItems' 		=> 'center'
+						]
+					],
+				],
+				[
+					'name'        => 'core/group/collapse',
+					'title'       => esc_html__( 'Group: Collapse', 'wecodeart' ),
+					'description' => esc_html__( 'Gather blocks in a collapsible container.', 'wecodeart' ),
+					'icon'		  => 'editor-expand',
+					'isDefault'   => false,
+					'isActive'    => ['namespace'],
+					'scope'       => [ 'block', 'inserter' ],
+					'attributes'  => [
+						'namespace'	=> 'wecodeart/group/collapse',
+					],
+				],
+				[
+					'name'        => 'core/group/offcanvas',
+					'title'       => esc_html__( 'Group: Offcanvas', 'wecodeart' ),
+					'description' => esc_html__( 'Gather blocks in an offcanvas container.', 'wecodeart' ),
+					'icon'		  => 'exit',
+					'isDefault'   => false,
+					'isActive'    => ['namespace'],
+					'scope'       => [ 'block', 'inserter' ],
+					'attributes'  => [
+						'namespace'	=> 'wecodeart/group/offcanvas',
+					],
+				]
+			],
 			'attributes' 		=> wp_parse_args( [
 				'namespace'		=> [
 					'type'		=> 'string',
@@ -116,57 +160,20 @@ class Group extends Dynamic {
 	}
 
 	/**
-	 * Registers variation.
+	 * Add helper classes.
 	 *
-	 * @return 	string
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
 	 */
-	public function register_variations(): void {
-		wp_add_inline_script( 'wecodeart-gutenberg', <<<JS
-			wp.domReady(() => {
-				wp.blocks.registerBlockVariation('core/group', {
-					name: 'wecodeart/group/marquee',
-					title: wp.i18n.__('Group: Marquee', 'wecodeart'),
-					description: wp.i18n.__('Gather blocks in a sliding container.', 'wecodeart'),
-					icon: 'align-right',
-					isDefault: false,
-					isActive: ['namespace'],
-					scope: ['block', 'inserter'],
-					attributes: {
-						namespace: 'wecodeart/group/marquee',
-						layout: {
-							type: 'flex',
-							flexWrap: 'nowrap',
-							justifyContent: 'center',
-							alignItems: 'center'
-						}
-					},
-				});
-				wp.blocks.registerBlockVariation('core/group', {
-					name: 'wecodeart/group/collapse',
-					title: wp.i18n.__('Group: Collapse', 'wecodeart'),
-					description: wp.i18n.__('Gather blocks in a collapsible container.', 'wecodeart'),
-					icon: 'editor-expand',
-					isDefault: false,
-					isActive: ['namespace'],
-					scope: ['block', 'inserter'],
-					attributes: {
-						namespace: 'wecodeart/group/collapse'
-					},
-				});
-				wp.blocks.registerBlockVariation('core/group', {
-					name: 'wecodeart/group/offcanvas',
-					title: wp.i18n.__('Group: Offcanvas', 'wecodeart'),
-					description: wp.i18n.__('Gather blocks in an offcanvas container.', 'wecodeart'),
-					icon: 'exit',
-					isDefault: false,
-					isActive: ['namespace'],
-					scope: ['block', 'inserter'],
-					attributes: {
-						namespace: 'wecodeart/group/offcanvas'
-					},
-				});
-			});
-		JS );
+	public function class_suggestions( array $args ): array {
+		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+
+		foreach( array_keys( $breakpoints ) as $breakpoint ) {
+			$args[] = $breakpoint . ':wp-offcanvas--expand';
+		}
+
+		return $args;
 	}
 
 	/**

@@ -272,6 +272,7 @@
 		},
 		"spacing": {
 			"blockGap": true,
+			"defaultSpacingSizes": false,
 			"customSpacingSize": true,
 			"spacingScale": {
 				"operator": "*",
