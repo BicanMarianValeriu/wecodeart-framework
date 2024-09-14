@@ -1,6 +1,6 @@
 import { store, getContext, getElement, getConfig } from '@wordpress/interactivity';
 
-const { fn: { reflow, executeAfterTransition }, Events } = wecodeart;
+const { fn: { reflow, executeAfterTransition }, Events, Selector } = wecodeart;
 
 const NAME = 'collapse';
 const NAMESPACE = `wecodeart/${NAME}`;
@@ -40,7 +40,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             }
 
             const { ref } = getElement();
-            const collapsedEl = document.querySelector(ref.getAttribute('aria-controls'));
+            const collapsedEl = Selector.findOne(`#${ref.getAttribute('aria-controls')}`);
 
             const startEvent = Events.trigger(collapsedEl, EVENT_SHOW);
             if (startEvent.defaultPrevented) {
@@ -74,7 +74,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             }
 
             const { ref } = getElement();
-            const collapsedEl = document.querySelector(ref.getAttribute('aria-controls'));
+            const collapsedEl = Selector.findOne(`#${ref.getAttribute('aria-controls')}`);
 
             const startEvent = Events.trigger(collapsedEl, EVENT_HIDE);
             if (startEvent.defaultPrevented) {

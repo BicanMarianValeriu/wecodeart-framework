@@ -48,7 +48,7 @@ $classnames = (array) $class;
 	data-wp-bind--aria-expanded="context.isOpen"
 	data-wp-on--click="actions.toggle"
 	aria-label="<?php esc_attr_e( 'Toggle navigation', 'wecodeart' ); ?>"
-	aria-controls="#<?php echo esc_attr( $id ); ?>-offcanvas"
+	aria-controls="<?php echo esc_attr( $id ); ?>-offcanvas"
 	<?php
 		break;
 		case 'collapse':
@@ -63,7 +63,7 @@ $classnames = (array) $class;
 	data-wp-class--collapsed="!context.isOpen"
 	data-wp-on--click="actions.toggle"
 	aria-label="<?php esc_attr_e( 'Open item', 'wecodeart' ); ?>"
-	aria-controls="#<?php echo esc_attr( $id ); ?>-content"
+	aria-controls="<?php echo esc_attr( $id ); ?>-content"
 	<?php 
 		break;
 	endswitch; ?>

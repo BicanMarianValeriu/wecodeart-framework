@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Patterns
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.5.1
+ * @version		6.5.2
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -65,7 +65,7 @@ class Patterns {
 			esc_html__( 'Patterns', 'wecodeart' ),
 			esc_html__( 'Patterns', 'wecodeart' ),
 			'manage_options',
-			'edit.php?post_type=wp_block',
+			'site-editor.php?postType=wp_block',
 			'',
 			1
 		);

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.8
+ * @version		6.5.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -89,11 +89,10 @@ class Text extends Dynamic {
 	public function styles() {
 		$breaks 	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$tablet		= get_prop( $breaks, 'md', '768px' );
-		$desktop	= get_prop( $breaks, 'lg', '992px' );
 		
 		return <<<CSS
 			.wp-block-media-text {
-				--wp--custom--gutter: 1rem;
+				--wp--custom--gutter: 2rem;
 				display: grid;
 				grid-template-columns: 50% 1fr;
 				grid-template-rows: auto;
@@ -107,8 +106,25 @@ class Text extends Dynamic {
 			.wp-block-media-text.has-background .wp-block-media-text__content {
 				padding: var(--wp--custom--gutter);
 			}
+			.wp-block-media-text.has-media-on-the-right .wp-block-media-text__media {
+				grid-column: 2;
+			}
+			.wp-block-media-text.has-media-on-the-right .wp-block-media-text__content {
+				grid-column: 1;
+			}
+			.wp-block-media-text.is-vertically-aligned-top .wp-block-media-text__content {
+				align-self: flex-start;
+			}
+			.wp-block-media-text.is-vertically-aligned-center .wp-block-media-text__content {
+				align-self: center;
+			}
+			.wp-block-media-text.is-vertically-aligned-bottom .wp-block-media-text__content {
+				align-self: flex-end;
+			}
 			.wp-block-media-text__media {
 				margin: 0;
+				grid-column: 1;
+				grid-row: 1;
 			}
 			.wp-block-media-text__media.is-placeholder {
 				background-color: var(--wp--preset--color--accent);
@@ -146,38 +162,17 @@ class Text extends Dynamic {
 				min-width: 0;
 				min-height: 0;
 			}
-			@media (min-width: $tablet) {
-				.wp-block-media-text {
-					--wp--custom--gutter: 2rem;
-				}
-				.wp-block-media-text.has-media-on-the-right .wp-block-media-text__media {
-					grid-column: 2;
-				}
-				.wp-block-media-text.has-media-on-the-right .wp-block-media-text__content {
-					grid-column: 1;
-				}
-				.wp-block-media-text.is-vertically-aligned-top .wp-block-media-text__content {
-					align-self: flex-start;
-				}
-				.wp-block-media-text.is-vertically-aligned-center .wp-block-media-text__content {
-					align-self: center;
-				}
-				.wp-block-media-text.is-vertically-aligned-bottom .wp-block-media-text__content {
-					align-self: flex-end;
-				}
-				.wp-block-media-text__media {
-					grid-column: 1;
-					grid-row: 1;
-				}
-				.wp-block-media-text__content {
-					grid-column: 2;
-					grid-row: 1;
-					align-self: center;
-				}
+			.wp-block-media-text__content {
+				grid-column: 2;
+				grid-row: 1;
+				align-self: center;
 			}
 			@media (max-width: 767.98px) {
 				.wp-block-media-text.is-stacked-on-mobile {
 					grid-template-columns: 100%!important;
+				}
+				.wp-block-media-text.is-stacked-on-mobile:not(.has-background) .wp-block-media-text__content {
+					margin-bottom: var(--wp--custom--gutter);
 				}
 				.wp-block-media-text.is-stacked-on-mobile .wp-block-media-text__media {
 					grid-column: 1;

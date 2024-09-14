@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.7
- * @version		6.4.9
+ * @version		6.5.2
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -66,9 +66,10 @@ class Components implements Configuration {
 		$this->register( 'backdrop',    Components\Backdrop::class  );
 		$this->register( 'transition',  Components\Transition::class);
 
-        add_action( 'init',                 [ $this, 'cache'        ], 95    );
-        add_action( 'wp_enqueue_scripts',   [ $this, 'assets'       ], 20, 1 );
-        add_action( 'enqueue_block_assets', [ $this, 'editor_css'   ], 20, 1 );
+        \add_action( 'init',                                        [ $this, 'cache'        ], 95    );
+        \add_action( 'wp_enqueue_scripts',                          [ $this, 'assets'       ], 20, 1 );
+        \add_action( 'enqueue_block_assets',                        [ $this, 'editor_css'   ], 20, 1 );
+		\add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'suggestions'  ], 20, 1 );
 	}
 
     /**
@@ -87,7 +88,7 @@ class Components implements Configuration {
 	 *
 	 * @return  void
 	 */
-	public function cache() {
+	public function cache(): void {
 		$filesystem = wecodeart( 'files' );
         $filesystem->set_folder( 'cache' );
         if( ! $filesystem->has_file( self::CACHE_FILE ) || false === get_transient( self::CACHE_KEY ) ) {
@@ -106,7 +107,7 @@ class Components implements Configuration {
      *
      * @return void
 	 */
-	public function assets() {
+	public function assets(): void {
         if( empty( $this->loaded ) ) {
             return;
         }
@@ -158,7 +159,7 @@ class Components implements Configuration {
 	 *
 	 * @return  void
 	 */
-	public function editor_css() {
+	public function editor_css(): void {
         if( ! is_admin() ) {
             return;
         }
@@ -174,6 +175,27 @@ class Components implements Configuration {
 		);
 		
 		$filesystem->set_folder( '' );
+	}
+
+    /**
+	 * Add helper classes.
+	 *
+	 * @param 	array  	$args
+	 *
+	 * @return 	array 	Returns updated editors settings.
+	 */
+	public function suggestions( array $args ): array {
+		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
+
+		foreach( array_keys( $breakpoints ) as $breakpoint ) {
+			$args[] = $breakpoint . ':wp-offcanvas--expand';
+		}
+		
+		foreach( [ 'start', 'end', 'top', 'bottom'] as $side ) {
+			$args[] = 'wp-offcanvas--' . $side;
+		}
+
+		return $args;
 	}
 	
 	/**

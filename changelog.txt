@@ -1,3 +1,13 @@
+v6.5.2
+- Updated - wp-offcanvas--{position} class suggestions (in Block Advanced options) and move filter to class-components.php
+- Updated - Appearance patterns menu link to go to site-editor.php instead of default post type UI
+- Updated - bump accordion module version (for an accesibility fix regarding aria-controls)
+- Updated - core/heading and core/button classnames on error page (404) template markup
+- Updated - core/media-text style adjustments (alignment for mobile while not stacked)
+- Updated - admin styles for 3rd level child tabs
+- Fixed - Accesibility issues with offcanvas and collapse modules (aria-controls cannot have #)
+- Added - A simple cookie banner module that allows a site visitor to block cookies (until accepted)
+
 v6.5.1
 - Updated - patterns wording adjustments with translation function
 - Updated - opt-out of defaultSpacingSizes (due to WP 6.6)

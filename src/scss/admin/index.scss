@@ -231,6 +231,31 @@ $enable-cssgrid: true;
 						padding: 15px;
 						background-color: white;
 						border-bottom: 1px solid var(--wca--border--color);
+
+						.components-tab-panel {
+							&__tabs {
+								padding: 0;
+								border: 0;
+								margin-bottom: 15px;
+								justify-content: flex-end;
+
+								&-item {
+									margin-right: 0;
+									margin-right: -1px;
+
+									&::before {
+										border: 1px solid var(--wca--border--color);
+									}
+								}
+							}
+							
+							&__tab {
+								&-content {
+									padding: 0;
+									border: 0;
+								}
+							}
+						}
 					}
 				}
 			}

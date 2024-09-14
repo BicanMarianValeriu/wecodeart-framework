@@ -15,7 +15,8 @@ const {
     Events,
     Backdrop,
     FocusTrap,
-    ScrollBar
+    ScrollBar,
+    Selector
 } = wecodeart;
 
 const NAME = 'offcanvas';
@@ -132,7 +133,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             const { backdrop, keyboard } = callbacks.getConfig();
             const { ref } = getElement();
             const context = getContext();
-            const relatedElement = document.querySelector(ref.getAttribute('aria-controls'));
+            const relatedElement = Selector.findOne(`#${ref.getAttribute('aria-controls')}`);
             context.relatedElement = relatedElement;
 
             const clickCallback = () => {

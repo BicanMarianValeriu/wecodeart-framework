@@ -42,13 +42,6 @@ class Group extends Dynamic {
 	protected $block_name = 'group';
 
 	/**
-	 * Init.
-	 */
-	public function init() {
-		\add_filter( 'wecodeart/filter/gutenberg/settings/classes', [ $this, 'class_suggestions' 	], 20, 1 );
-	}
-
-	/**
 	 * Block args.
 	 *
 	 * @param	array $current	Existing register args
@@ -72,7 +65,7 @@ class Group extends Dynamic {
 					'icon'		  => 'align-right',
 					'isDefault'   => false,
 					'isActive'    => ['namespace'],
-					'scope'       => [ 'block', 'inserter' ],
+					'scope'       => [ 'inserter' ],
 					'attributes'  => [
 						'namespace'	=> 'wecodeart/group/marquee',
 						'layout'	=> [
@@ -90,7 +83,7 @@ class Group extends Dynamic {
 					'icon'		  => 'editor-expand',
 					'isDefault'   => false,
 					'isActive'    => ['namespace'],
-					'scope'       => [ 'block', 'inserter' ],
+					'scope'       => [ 'inserter' ],
 					'attributes'  => [
 						'namespace'	=> 'wecodeart/group/collapse',
 					],
@@ -102,7 +95,7 @@ class Group extends Dynamic {
 					'icon'		  => 'exit',
 					'isDefault'   => false,
 					'isActive'    => ['namespace'],
-					'scope'       => [ 'block', 'inserter' ],
+					'scope'       => [ 'inserter' ],
 					'attributes'  => [
 						'namespace'	=> 'wecodeart/group/offcanvas',
 					],
@@ -157,23 +150,6 @@ class Group extends Dynamic {
 		}
 	
 		return (string) $content;
-	}
-
-	/**
-	 * Add helper classes.
-	 *
-	 * @param 	array  	$args
-	 *
-	 * @return 	array 	Returns updated editors settings.
-	 */
-	public function class_suggestions( array $args ): array {
-		$breakpoints	= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
-
-		foreach( array_keys( $breakpoints ) as $breakpoint ) {
-			$args[] = $breakpoint . ':wp-offcanvas--expand';
-		}
-
-		return $args;
 	}
 
 	/**
@@ -310,7 +286,7 @@ class Group extends Dynamic {
 		$toggler	= wecodeart( 'dom' )::create( $toggler );
 		$toggler 	= wecodeart( 'dom' )::get_element( 'button', $toggler );
 		$toggler->setAttribute( 'onload', 'this.parentNode.insertBefore(this,this.previousElementSibling);' );
-		wecodeart( 'dom' )::add_classes( $toggler, [ $isHidden ] );
+		wecodeart( 'dom' )::add_classes( $toggler, [ $isHidden, 'collapsed' ] );
 		$dom->appendChild( $dom->importNode( $toggler, true ) );
 
 		$p = wecodeart( 'dom' )::processor( $dom->saveHTML() );
