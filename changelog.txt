@@ -1,3 +1,8 @@
+v6.5.3
+- Changed - page-sidebar.html now encapsulates the sidebar into an offcanvas container for mobile
+- Changed - sidebar.html template part content to a simple about text
+- Updated - cookies module bump to version 1.0.2 (small fixes)
+
 v6.5.2
 - Updated - wp-offcanvas--{position} class suggestions (in Block Advanced options) and move filter to class-components.php
 - Updated - Appearance patterns menu link to go to site-editor.php instead of default post type UI

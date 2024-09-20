@@ -218,7 +218,7 @@ return [
                 'description'   => esc_html__( 'Cookie banner and management interface built with theme APIs.', 'wecodeart' ),
                 'more'          => 'https://github.com/BicanMarianValeriu/wca-cookies/',
                 'source'        => 'github',
-                'version'       => '1.0.1',
+                'version'       => '1.0.2',
                 'destination'   => 'cookies',
                 'type'          => 'module',
             ],
