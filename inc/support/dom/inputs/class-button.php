@@ -64,26 +64,6 @@ class Button extends Basic {
 	 * @return 	string
 	 */
 	public static function styles(): string {
-		return '
-            button {
-                text-transform: none;
-                border-radius: 0;
-            }
-            button:focus:not(:focus-visible) {
-                outline: 0;
-            }
-            button:where(:disabled,.disabled) {
-                pointer-events: none;
-                box-shadow: none;
-                opacity: 0.65;
-            }
-            :where(button,[type=button],[type=reset],[type=submit],[role="button"]) {
-                border: 1px solid transparent;
-                -webkit-appearance: button;
-            }
-            :where(button,[type=button],[type=reset],[type=submit],[role="button"]):not(:disabled) {
-                cursor: pointer;
-            }
-        ';
+		return '';
 	}
 }

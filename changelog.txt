@@ -1,3 +1,7 @@
+v6.5.4
+- Updated - minor corrections to buttons CSS reset
+- Fixed - Offcanvas module close on click and escape key (issue with scope)
+
 v6.5.3
 - Changed - page-sidebar.html now encapsulates the sidebar into an offcanvas container for mobile
 - Changed - sidebar.html template part content to a simple about text

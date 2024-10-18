@@ -196,3 +196,28 @@ summary {
 progress {
     vertical-align: baseline;
 }
+
+// Buttons
+button {
+	text-transform: none;
+	border-radius: 0;
+
+	&:focus:not(:focus-visible) {
+		outline: 0;
+	}
+
+	&:where(:disabled,.disabled) {
+		pointer-events: none;
+		box-shadow: none;
+		opacity: 0.65;
+	}
+}
+
+:where(button,[type=button],[type=reset],[type=submit],[role="button"]) {
+	border: 1px solid transparent;
+	appearance: button;
+
+	&:not(:disabled,.disabled) {
+		cursor: pointer;
+	}
+}

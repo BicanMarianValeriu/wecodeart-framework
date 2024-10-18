@@ -160,7 +160,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                     return;
                 }
 
-                actions.hide(context, this);
+                withScope(actions.hide(context, this));
             });
 
             // Escape dismiss
@@ -170,7 +170,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 }
 
                 if (keyboard) {
-                    actions.hide(context, ESCAPE_KEY);
+                    withScope(actions.hide(context, ESCAPE_KEY));
                     return;
                 }
 
