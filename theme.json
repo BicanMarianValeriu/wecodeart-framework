@@ -219,11 +219,6 @@
 			"defaultPresets": false,
 			"presets": [
 				{
-					"name": "None",
-					"slug": "none",
-					"shadow": "none"
-				},
-				{
 					"name": "XS Small",
 					"slug": "xs",
 					"shadow": "calc(var(--wp--custom--box-shadow--y,0px)/2) calc(var(--wp--custom--box-shadow--y,0px)/2) var(--wp--custom--box-shadow--blur,0px) var(--wp--custom--box-shadow--spread,0px) var(--wp--custom--box-shadow--color,currentColor)"

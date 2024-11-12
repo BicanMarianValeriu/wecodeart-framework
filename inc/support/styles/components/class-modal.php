@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.4.5
+ * @version		6.5.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -240,7 +240,6 @@ class Modal extends Base {
 				.wp-modal {
 					--wp--modal-margin: 1.75rem;
 					--wp--modal-box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.15);
-					--wp--modal-backdrop-filter: blur(5px);
 				}
 			
 				.wp-modal__dialog {

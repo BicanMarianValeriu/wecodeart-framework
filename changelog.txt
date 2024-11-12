@@ -1,3 +1,10 @@
+v6.5.5
+- Updated - Bump cookies module to version 1.0.3 for some module admin improvements
+- Updated - .wp-modal backdrop filter default to none (very expensive on browsers without hardware acceleration enabled)
+- Updated - Custom WP Accordion block simplified assets enquee (via block.json core API)
+- Removed - theme.json box-shadow option for none (there is a default/core option)
+- Added - Google Translate module for automated translations using Google's API
+
 v6.5.4
 - Updated - minor corrections to buttons CSS reset
 - Fixed - Offcanvas module close on click and escape key (issue with scope)

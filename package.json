@@ -42,6 +42,8 @@
 		"build:modules:lorem": "wp-scripts build index=./inc/support/modules/lorem/src/js/index.js --output-path=inc/support/modules/lorem/assets/minified",
 		"start:modules:accordion": "wp-scripts start index=./inc/support/modules/accordion/src/js/index.js --output-path=inc/support/modules/accordion/assets/unminified",
 		"build:modules:accordion": "wp-scripts build index=./inc/support/modules/accordion/src/js/index.js --output-path=inc/support/modules/accordion/assets/minified",
+		"start:modules:translate": "wp-scripts start index=./inc/support/modules/translate/src/js/index.js --output-path=inc/support/modules/translate/assets/unminified",
+		"build:modules:translate": "wp-scripts build index=./inc/support/modules/translate/src/js/index.js --output-path=inc/support/modules/translate/assets/minified",
 		"start:modules:scrolltop": "wp-scripts start admin=./inc/support/modules/scrolltop/src/js/admin.js --output-path=inc/support/modules/scrolltop/assets/unminified",
 		"build:modules:scrolltop": "wp-scripts build admin=./inc/support/modules/scrolltop/src/js/admin.js --output-path=inc/support/modules/scrolltop/assets/minified",
 		"start:modules:optimization": "wp-scripts start admin=./inc/support/modules/optimization/src/js/admin.js --output-path=inc/support/modules/optimization/assets/unminified",
@@ -57,10 +59,9 @@
 		"test:unit": "wp-scripts test-unit-js"
 	},
 	"dependencies": {
-		"@wordpress/browserslist-config": "^5.38.0",
-		"@wordpress/icons": "^9.2.0",
-		"@wordpress/interactivity": "^5.0.0",
-		"@wordpress/scripts": "^27.2.0",
+		"@wordpress/browserslist-config": "^6.11.0",
+		"@wordpress/icons": "^10.11.0",
+		"@wordpress/scripts": "^30.4.0",
 		"bootstrap": "^5.1.3",
 		"classnames": "^2.2.6",
 		"dploy": "^1.2.0",
