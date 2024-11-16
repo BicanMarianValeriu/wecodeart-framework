@@ -1,7 +1,9 @@
 v6.5.5
 - Updated - Bump cookies module to version 1.0.3 for some module admin improvements
 - Updated - .wp-modal backdrop filter default to none (very expensive on browsers without hardware acceleration enabled)
+- Updated - core/image lightbox toggle button padding to 2px
 - Updated - Custom WP Accordion block simplified assets enquee (via block.json core API)
+- Updated - Offcanvas WP Interactivity API fixed to work with WP 6.7
 - Removed - theme.json box-shadow option for none (there is a default/core option)
 - Added - Google Translate module for automated translations using Google's API
 

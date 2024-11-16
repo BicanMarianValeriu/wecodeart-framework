@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.8
- * @version		6.4.4
+ * @version		6.5.5
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -66,7 +66,7 @@ class Lightbox extends Base {
 				backdrop-filter: blur(20px) saturate(180%);
 				border: none;
 				border-radius: 0;
-				padding: 0;
+				padding: 2px;
 				opacity: 0;
 				text-align: center;
 				transition: opacity 0.2s ease;

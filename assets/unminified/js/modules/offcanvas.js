@@ -1,12 +1,6 @@
 import { store, getContext, getElement, getConfig, withScope } from '@wordpress/interactivity';
 
 const {
-    hooks: {
-        applyFilters
-    }
-} = wp;
-
-const {
     fn: {
         isDisabled,
         executeAfterTransition,
@@ -33,18 +27,29 @@ const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
 
 const { state, actions, callbacks } = store(NAMESPACE, {
     state: {
+        get useKeyboard() {
+            return getContext().keyboard || state.keyboard;
+        },
+        get hasBackdrop() {
+            return getContext().backdrop || state.backdrop;
+        },
+        get allowScroll() {
+            return getContext().scroll || state.scroll;
+        }
     },
     actions: {
         toggle() {
             const context = getContext();
 
             if (context.isOpen) {
-                actions.hide(context);
+                actions.hide();
             } else {
-                actions.show(context);
+                actions.show();
             }
         },
-        show(context = getContext()) {
+        show() {
+            const context = getContext();
+
             if (context.isOpen) {
                 return;
             }
@@ -57,11 +62,11 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 return;
             }
 
-            const { classes, scroll } = callbacks.getConfig();
+            const { classes } = state;
 
             context._backdrop.show();
 
-            if (!scroll) {
+            if (!state.allowScroll) {
                 new ScrollBar().hide();
             }
 
@@ -73,7 +78,9 @@ const { state, actions, callbacks } = store(NAMESPACE, {
 
             context.isOpen = true;
         },
-        hide(context = getContext(), element) {
+        hide(element) {
+            const context = getContext();
+
             if (context.isOpen === false) {
                 return;
             }
@@ -86,7 +93,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 return;
             }
 
-            const { classes } = callbacks.getConfig();
+            const { classes } = state;
 
             context._focustrap.deactivate();
             context.relatedElement.blur();
@@ -101,10 +108,10 @@ const { state, actions, callbacks } = store(NAMESPACE, {
     callbacks: {
         onShow: (collapsedEl) => {
             const context = getContext();
-            const { classes, scroll, backdrop } = callbacks.getConfig();
+            const { classes } = state;
 
-            executeAfterTransition(() => {
-                if (!scroll || backdrop) {
+            executeAfterTransition(withScope(() => {
+                if (!state.allowScroll || state.hasBackdrop) {
                     context._focustrap.activate();
                 }
 
@@ -112,83 +119,76 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 collapsedEl.classList.remove(classes?.showing);
                 Events.trigger(collapsedEl, EVENT_SHOWN);
 
-            }, collapsedEl, true);
+            }), collapsedEl, true);
         },
         onHide: (collapsedEl) => {
-            const { classes, scroll } = callbacks.getConfig();
+            const { classes } = state;
 
-            executeAfterTransition(() => {
+            executeAfterTransition(withScope(() => {
                 collapsedEl.classList.remove(classes?.show, classes?.hiding);
                 collapsedEl.removeAttribute('aria-modal');
                 collapsedEl.removeAttribute('role');
 
-                if (!scroll) {
+                if (!state.allowScroll) {
                     new ScrollBar().reset();
                 }
 
                 Events.trigger(collapsedEl, EVENT_HIDDEN);
-            }, collapsedEl, true);
+            }), collapsedEl, true);
         },
         onInit: () => {
-            const { backdrop, keyboard } = callbacks.getConfig();
             const { ref } = getElement();
             const context = getContext();
             const relatedElement = Selector.findOne(`#${ref.getAttribute('aria-controls')}`);
             context.relatedElement = relatedElement;
 
             const clickCallback = () => {
-                if (backdrop === 'static') {
+                if (state.hasBackdrop === 'static') {
                     Events.trigger(relatedElement, EVENT_HIDE_PREVENTED);
                     return;
                 }
 
-                actions.hide(context, 'backdrop');
+                actions.hide('backdrop');
             }
 
             context._backdrop = new Backdrop({
-                isVisible: Boolean(backdrop),
+                isVisible: Boolean(state.hasBackdrop),
                 isAnimated: true,
                 rootElement: relatedElement.parentNode,
-                clickCallback: Boolean(backdrop) ? withScope(clickCallback) : null
+                clickCallback: Boolean(state.hasBackdrop) ? withScope(clickCallback) : null
             });
 
             context._focustrap = new FocusTrap({ trapElement: relatedElement });
 
             // Button click dismiss
-            Events.on(relatedElement, `click.dismiss${EVENT_KEY}`, `[data-wp-close="${NAME}"]`, function () {
-                if (isDisabled(this)) {
+            Events.on(relatedElement, `click.dismiss${EVENT_KEY}`, `[data-wp-close="${NAME}"]`, withScope(({ target }) => {
+                if (isDisabled(target)) {
                     return;
                 }
 
-                withScope(actions.hide(context, this));
-            });
+                actions.hide(target);
+            }));
 
             // Escape dismiss
-            Events.on(document, `keydown.dismiss${EVENT_KEY}`, ({ key }) => {
+            Events.on(document, `keydown.dismiss${EVENT_KEY}`, withScope(({ key }) => {
                 if (key !== ESCAPE_KEY) {
                     return;
                 }
 
-                if (keyboard) {
-                    withScope(actions.hide(context, ESCAPE_KEY));
+                if (state.useKeyboard) {
+                    actions.hide(ESCAPE_KEY);
                     return;
                 }
 
                 Events.trigger(ref, EVENT_HIDE_PREVENTED);
-            });
+            }));
 
             // Is opened by default?
             if (context.isOpen) {
                 context.isOpen = false;
-                actions.show(context);
+                actions.show();
             }
         },
-        getConfig: () => {
-            const context = getContext();
-            const config = { ...state, ...context };
-
-            return applyFilters('wecodeart.interactive.config', config, NAME);
-        },
-        validateConfig: () => validateConfig(NAME, callbacks.getConfig(), getConfig(NAMESPACE)),
+        validateConfig: () => validateConfig(NAME, { ...state, ...getContext() }, getConfig(NAMESPACE)),
     }
 });

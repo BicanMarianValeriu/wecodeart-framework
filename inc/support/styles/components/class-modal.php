@@ -81,7 +81,7 @@ class Modal extends Base {
 			}
 
 			.theme-is-dark .wp-modal {
-				--wp--modal-bg: rgb(var(--wp--background--rgb, 0,0,0));
+				--wp--modal-bg: rgb(var(--wp--background--rgb, 35,35,35));
 			}
 			
 			.wp-modal__dialog {

@@ -1,12 +1,6 @@
 import { store, getContext, getElement, getConfig } from '@wordpress/interactivity';
 
 const {
-    hooks: {
-        applyFilters
-    }
-} = wp;
-
-const {
     fn: {
         validateConfig
     },
@@ -44,7 +38,7 @@ function createToastElement({ header = '', content = '', className = '', close =
     return markup.toHtml();
 }
 
-const { state, actions, callbacks } = store(NAMESPACE, {
+const { state } = store(NAMESPACE, {
     state: {
         elements: [],
     },
@@ -56,7 +50,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
     callbacks: {
         onAdd() {
             const { ref } = getElement();
-            const { options } = callbacks.getConfig();
+            const { options } = getContext();
 
             state.elements.filter(({ show }) => show !== false).map((toast, i) => {
                 const element = createToastElement(toast);
@@ -69,12 +63,6 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 state.elements[i] = toast;
             });
         },
-        getConfig: () => {
-            const context = getContext();
-            const config = { ...state, ...context };
-
-            return applyFilters('wecodeart.interactive.config', config, NAME);
-        },
-        validateConfig: () => validateConfig(NAME, callbacks.getConfig(), getConfig(NAMESPACE)),
+        validateConfig: () => validateConfig(NAME, { ...state, ...getContext() }, getConfig(NAMESPACE)),
     }
 });
