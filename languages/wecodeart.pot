@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 19:23+0000\n"
+"POT-Creation-Date: 2024-11-17 04:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -72,7 +72,7 @@ msgstr ""
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr ""
 
-#: inc/app.php:230
+#: inc/app.php:240
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:336
+#: inc/gutenberg/blocks/design/class-group.php:312
 msgid "Close item"
 msgstr ""
 
@@ -301,6 +301,10 @@ msgstr[1] ""
 
 #: inc/gutenberg/blocks/widgets/class-posts.php:138
 msgid "Continue reading"
+msgstr ""
+
+#: inc/app.php:218
+msgid "Cookie banner and management interface built with theme APIs."
 msgstr ""
 
 #: patterns/page-soon.php:66
@@ -491,15 +495,15 @@ msgstr ""
 msgid "Free WP Theme"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:89
+#: inc/gutenberg/blocks/design/class-group.php:82
 msgid "Gather blocks in a collapsible container."
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:71
+#: inc/gutenberg/blocks/design/class-group.php:64
 msgid "Gather blocks in a sliding container."
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:101
+#: inc/gutenberg/blocks/design/class-group.php:94
 msgid "Gather blocks in an offcanvas container."
 msgstr ""
 
@@ -547,15 +551,15 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:88
+#: inc/gutenberg/blocks/design/class-group.php:81
 msgid "Group: Collapse"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:70
+#: inc/gutenberg/blocks/design/class-group.php:63
 msgid "Group: Marquee"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:100
+#: inc/gutenberg/blocks/design/class-group.php:93
 msgid "Group: Offcanvas"
 msgstr ""
 
@@ -724,13 +728,13 @@ msgstr ""
 msgid "Notification dismissed"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:386
+#: inc/gutenberg/blocks/design/class-group.php:362
 #, php-format
 msgid "Open %s"
 msgstr ""
 
 #: views/general/toggler.tpl.php:65
-#: inc/gutenberg/blocks/design/class-group.php:335
+#: inc/gutenberg/blocks/design/class-group.php:311
 msgid "Open item"
 msgstr ""
 
@@ -1280,7 +1284,7 @@ msgid ""
 "This post is password protected. To view this post, enter the password below!"
 msgstr ""
 
-#: inc/gutenberg/blocks/design/class-group.php:280
+#: inc/gutenberg/blocks/design/class-group.php:256
 #, php-format
 msgid "Toggle %s"
 msgstr ""
@@ -1291,6 +1295,10 @@ msgstr ""
 
 #: patterns/section-mobile.php:16
 msgid "too!"
+msgstr ""
+
+#: inc/app.php:228
+msgid "Translate your website using Google Translate Element API."
 msgstr ""
 
 #: inc/admin/class-activation.php:116
@@ -1319,6 +1327,10 @@ msgstr ""
 msgid "WCA: Contact Form 7"
 msgstr ""
 
+#: inc/app.php:217
+msgid "WCA: Cookies"
+msgstr ""
+
 #: inc/app.php:177
 msgid "WCA: Formatting"
 msgstr ""
@@ -1333,6 +1345,10 @@ msgstr ""
 
 #: inc/app.php:197
 msgid "WCA: Scroll Top"
+msgstr ""
+
+#: inc/app.php:227
+msgid "WCA: Translate"
 msgstr ""
 
 #: inc/support/plugins/woocommerce/class-woocommerce.php:111
@@ -1364,7 +1380,7 @@ msgstr ""
 msgid "WeCodeArt"
 msgstr ""
 
-#: inc/app.php:229
+#: inc/app.php:239
 msgid "WeCodeArt Developer"
 msgstr ""
 

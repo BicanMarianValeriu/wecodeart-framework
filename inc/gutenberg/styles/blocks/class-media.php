@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.5.6
  */
 
 namespace WeCodeArt\Gutenberg\Styles\Blocks;
@@ -56,7 +56,7 @@ class Media extends Processor {
 				}
 		
 				if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
-					$declarations['background-position'] = wecodeart( 'styles' )->Sanitize::background( $value );
+					$declarations['background-position'] = wecodeart( 'styles' )->Sanitize::focal( $value );
 				}
 			}
 		}

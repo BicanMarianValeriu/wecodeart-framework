@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2024-07-20 19:26+0000\n"
+"PO-Revision-Date: 2024-11-17 04:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -73,7 +73,7 @@ msgstr "[redării blocului a fost oprită]"
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr "O punte între WeCodeArt Framework și pluginul %s."
 
-#: inc/app.php:230
+#: inc/app.php:240
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -197,7 +197,7 @@ msgstr "Alege %s"
 msgid "Close"
 msgstr "Închide"
 
-#: inc/gutenberg/blocks/design/class-group.php:336
+#: inc/gutenberg/blocks/design/class-group.php:312
 msgid "Close item"
 msgstr "Închideți elementul"
 
@@ -316,6 +316,11 @@ msgstr[2] "Răspunsuri la \"%1$s\""
 #: inc/gutenberg/blocks/widgets/class-posts.php:138
 msgid "Continue reading"
 msgstr "Continuați lectura"
+
+#: inc/app.php:218
+msgid "Cookie banner and management interface built with theme APIs."
+msgstr ""
+"Banner cookie și interfață de gestionare construite cu API-urile temei."
 
 #: patterns/page-soon.php:66
 #, php-format
@@ -523,15 +528,15 @@ msgstr "Gratis pe viață"
 msgid "Free WP Theme"
 msgstr "Tema WP gratuită"
 
-#: inc/gutenberg/blocks/design/class-group.php:89
+#: inc/gutenberg/blocks/design/class-group.php:82
 msgid "Gather blocks in a collapsible container."
 msgstr "Adună blocurile într-un container de tip colapsibil."
 
-#: inc/gutenberg/blocks/design/class-group.php:71
+#: inc/gutenberg/blocks/design/class-group.php:64
 msgid "Gather blocks in a sliding container."
 msgstr "Adună blocurile într-un container de tip slider."
 
-#: inc/gutenberg/blocks/design/class-group.php:101
+#: inc/gutenberg/blocks/design/class-group.php:94
 msgid "Gather blocks in an offcanvas container."
 msgstr "Adună blocurile într-un container de tip offcanvas."
 
@@ -579,15 +584,15 @@ msgstr "Succes spre avertisment"
 msgid "Group"
 msgstr "Grupare"
 
-#: inc/gutenberg/blocks/design/class-group.php:88
+#: inc/gutenberg/blocks/design/class-group.php:81
 msgid "Group: Collapse"
 msgstr "Grup: colapsibil"
 
-#: inc/gutenberg/blocks/design/class-group.php:70
+#: inc/gutenberg/blocks/design/class-group.php:63
 msgid "Group: Marquee"
 msgstr "Grup: marquee"
 
-#: inc/gutenberg/blocks/design/class-group.php:100
+#: inc/gutenberg/blocks/design/class-group.php:93
 msgid "Group: Offcanvas"
 msgstr "Grup: offcanvas"
 
@@ -768,13 +773,13 @@ msgstr "Nu, nu-mi pasă."
 msgid "Notification dismissed"
 msgstr "Notificare respinsă"
 
-#: inc/gutenberg/blocks/design/class-group.php:386
+#: inc/gutenberg/blocks/design/class-group.php:362
 #, php-format
 msgid "Open %s"
 msgstr "Deschide %s"
 
 #: views/general/toggler.tpl.php:65
-#: inc/gutenberg/blocks/design/class-group.php:335
+#: inc/gutenberg/blocks/design/class-group.php:311
 msgid "Open item"
 msgstr "Deschideți elementul"
 
@@ -1336,7 +1341,7 @@ msgstr ""
 "Această postare este protejată prin parolă. Pentru a vizualiza această "
 "postare, introduceți parola mai jos!"
 
-#: inc/gutenberg/blocks/design/class-group.php:280
+#: inc/gutenberg/blocks/design/class-group.php:256
 #, php-format
 msgid "Toggle %s"
 msgstr "Comută %s"
@@ -1348,6 +1353,10 @@ msgstr "Comutare navigare"
 #: patterns/section-mobile.php:16
 msgid "too!"
 msgstr "de asemenea!"
+
+#: inc/app.php:228
+msgid "Translate your website using Google Translate Element API."
+msgstr "Traduceți site-ul dvs. folosind Google Translate Element API."
 
 #: inc/admin/class-activation.php:116
 msgid "upgrade PHP"
@@ -1375,6 +1384,10 @@ msgstr "WCA: Acordeon"
 msgid "WCA: Contact Form 7"
 msgstr "WCA: Contact Form 7"
 
+#: inc/app.php:217
+msgid "WCA: Cookies"
+msgstr "WCA: Cookies"
+
 #: inc/app.php:177
 msgid "WCA: Formatting"
 msgstr "WCA: Formatare"
@@ -1390,6 +1403,10 @@ msgstr "WCA: Optimizare"
 #: inc/app.php:197
 msgid "WCA: Scroll Top"
 msgstr "WCA: Scroll Top"
+
+#: inc/app.php:227
+msgid "WCA: Translate"
+msgstr "WCA: Translate"
 
 #: inc/support/plugins/woocommerce/class-woocommerce.php:111
 msgid "WCA: WooCommerce"
@@ -1422,7 +1439,7 @@ msgstr "Site"
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/app.php:229
+#: inc/app.php:239
 msgid "WeCodeArt Developer"
 msgstr "WeCodeArt Dezvoltator"
 

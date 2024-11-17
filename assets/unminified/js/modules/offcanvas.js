@@ -54,7 +54,9 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 return;
             }
 
-            const startEvent = Events.trigger(context.relatedElement, EVENT_SHOW, {
+            const relatedElement = callbacks.getOffcanvas();
+
+            const startEvent = Events.trigger(relatedElement, EVENT_SHOW, {
                 relatedTarget: getElement().ref
             });
 
@@ -70,11 +72,11 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 new ScrollBar().hide();
             }
 
-            context.relatedElement.setAttribute('aria-modal', true);
-            context.relatedElement.setAttribute('role', 'dialog');
-            context.relatedElement.classList.add(classes?.showing);
+            relatedElement.setAttribute('aria-modal', true);
+            relatedElement.setAttribute('role', 'dialog');
+            relatedElement.classList.add(classes?.showing);
 
-            callbacks.onShow(context.relatedElement);
+            callbacks.onShow(relatedElement);
 
             context.isOpen = true;
         },
@@ -85,7 +87,9 @@ const { state, actions, callbacks } = store(NAMESPACE, {
                 return;
             }
 
-            const hideEvent = Events.trigger(context.relatedElement, EVENT_HIDE, {
+            const relatedElement = callbacks.getOffcanvas();
+
+            const hideEvent = Events.trigger(relatedElement, EVENT_HIDE, {
                 relatedTarget: element
             });
 
@@ -96,23 +100,22 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             const { classes } = state;
 
             context._focustrap.deactivate();
-            context.relatedElement.blur();
-            context.relatedElement.classList.add(classes?.hiding);
+            relatedElement.blur();
+            relatedElement.classList.add(classes?.hiding);
             context._backdrop.hide();
 
-            callbacks.onHide(context.relatedElement);
+            callbacks.onHide(relatedElement);
 
             context.isOpen = false;
         },
     },
     callbacks: {
         onShow: (collapsedEl) => {
-            const context = getContext();
-            const { classes } = state;
+            const { classes, allowScroll, hasBackdrop } = state;
 
             executeAfterTransition(withScope(() => {
-                if (!state.allowScroll || state.hasBackdrop) {
-                    context._focustrap.activate();
+                if (!allowScroll || hasBackdrop) {
+                    getContext()._focustrap.activate();
                 }
 
                 collapsedEl.classList.add(classes?.show);
@@ -122,14 +125,14 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             }), collapsedEl, true);
         },
         onHide: (collapsedEl) => {
-            const { classes } = state;
+            const { classes, allowScroll } = state;
 
             executeAfterTransition(withScope(() => {
                 collapsedEl.classList.remove(classes?.show, classes?.hiding);
                 collapsedEl.removeAttribute('aria-modal');
                 collapsedEl.removeAttribute('role');
 
-                if (!state.allowScroll) {
+                if (!allowScroll) {
                     new ScrollBar().reset();
                 }
 
@@ -137,57 +140,68 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             }), collapsedEl, true);
         },
         onInit: () => {
-            const { ref } = getElement();
-            const context = getContext();
-            const relatedElement = Selector.findOne(`#${ref.getAttribute('aria-controls')}`);
-            context.relatedElement = relatedElement;
-
-            const clickCallback = () => {
-                if (state.hasBackdrop === 'static') {
-                    Events.trigger(relatedElement, EVENT_HIDE_PREVENTED);
-                    return;
-                }
-
-                actions.hide('backdrop');
-            }
-
-            context._backdrop = new Backdrop({
-                isVisible: Boolean(state.hasBackdrop),
-                isAnimated: true,
-                rootElement: relatedElement.parentNode,
-                clickCallback: Boolean(state.hasBackdrop) ? withScope(clickCallback) : null
-            });
-
-            context._focustrap = new FocusTrap({ trapElement: relatedElement });
-
-            // Button click dismiss
-            Events.on(relatedElement, `click.dismiss${EVENT_KEY}`, `[data-wp-close="${NAME}"]`, withScope(({ target }) => {
-                if (isDisabled(target)) {
-                    return;
-                }
-
-                actions.hide(target);
-            }));
-
-            // Escape dismiss
-            Events.on(document, `keydown.dismiss${EVENT_KEY}`, withScope(({ key }) => {
-                if (key !== ESCAPE_KEY) {
-                    return;
-                }
-
-                if (state.useKeyboard) {
-                    actions.hide(ESCAPE_KEY);
-                    return;
-                }
-
-                Events.trigger(ref, EVENT_HIDE_PREVENTED);
-            }));
+            // Setup offcanvas
+            callbacks.getOffcanvas();
 
             // Is opened by default?
-            if (context.isOpen) {
+            if (getContext().isOpen) {
                 context.isOpen = false;
                 actions.show();
             }
+        },
+        getOffcanvas: () => {
+            const context = getContext();
+
+            if (!context.relatedElement) {
+                const { ref } = getElement();
+                const { hasBackdrop, useKeyboard } = state;
+                const offcanvasEl = Selector.findOne(`#${ref.getAttribute('aria-controls')}`);
+
+                // Backdrop dismiss
+                const clickCallback = () => {
+                    if (hasBackdrop === 'static') {
+                        Events.trigger(offcanvasEl, EVENT_HIDE_PREVENTED);
+                        return;
+                    }
+
+                    actions.hide('backdrop');
+                }
+
+                // Button click dismiss
+                Events.on(offcanvasEl, `click.dismiss${EVENT_KEY}`, `[data-wp-close="${NAME}"]`, withScope(({ target }) => {
+                    if (isDisabled(target)) {
+                        return;
+                    }
+
+                    actions.hide(target);
+                }));
+
+                // Escape dismiss
+                Events.on(document, `keydown.dismiss${EVENT_KEY}`, withScope(({ key }) => {
+                    if (key !== ESCAPE_KEY) {
+                        return;
+                    }
+
+                    if (useKeyboard) {
+                        actions.hide(ESCAPE_KEY);
+                        return;
+                    }
+
+                    Events.trigger(ref, EVENT_HIDE_PREVENTED);
+                }));
+
+                // Setup context
+                context.relatedElement = offcanvasEl;
+                context._focustrap = new FocusTrap({ trapElement: offcanvasEl });
+                context._backdrop = new Backdrop({
+                    isVisible: Boolean(hasBackdrop),
+                    isAnimated: true,
+                    rootElement: offcanvasEl.parentNode,
+                    clickCallback: Boolean(hasBackdrop) ? withScope(clickCallback) : null
+                });
+            }
+
+            return context.relatedElement;
         },
         validateConfig: () => validateConfig(NAME, { ...state, ...getContext() }, getConfig(NAMESPACE)),
     }

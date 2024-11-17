@@ -1,3 +1,9 @@
+v6.5.6
+- Updated - Offcanvas WP Interactivity API - defensive programming for delayed script execution (for caching plugins)
+- Updated - ro_RO theme local translations
+- Updated - core/media-text styles for is-image-fill-element class (WP 6.7)
+- Fixed - issue with Media & Text focal point
+
 v6.5.5
 - Updated - Bump cookies module to version 1.0.3 for some module admin improvements
 - Updated - .wp-modal backdrop filter default to none (very expensive on browsers without hardware acceleration enabled)
