@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2024-11-17 04:28+0000\n"
+"PO-Revision-Date: 2024-11-23 02:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -27,7 +27,7 @@ msgid "% Comments"
 msgstr "% Comentarii"
 
 #: inc/gutenberg/blocks/design/class-separator.php:87
-#: inc/gutenberg/blocks/text/lists/class-lists.php:71
+#: inc/gutenberg/blocks/text/lists/class-lists.php:70
 #, php-format
 msgid "%s"
 msgstr "%s"
@@ -686,6 +686,10 @@ msgstr "Legături"
 msgid "Log In"
 msgstr "Autentificare"
 
+#: patterns/header.php:38
+msgid "Looking for...?"
+msgstr "Căutare dupa ...?"
+
 #: patterns/cards-background.php:22
 #, php-format
 msgid "Loved by %s"
@@ -710,6 +714,10 @@ msgstr "Modal"
 #: patterns/section-features.php:51
 msgid "Modular Design"
 msgstr "Design Modular"
+
+#: patterns/header.php:28
+msgid "Modular FSE Theme"
+msgstr "Temă FSE modulară"
 
 #: inc/admin/installer/module/class-ajax.php:116
 msgid "Module failed to install."
@@ -1574,10 +1582,6 @@ msgstr ""
 #, php-format
 msgid "You must accept %s to comment!"
 msgstr "Trebuie să accepți %s pentru a comenta!"
-
-#: patterns/header.php:28
-msgid "Your #1 FSE Theme"
-msgstr "Tema ta FSE #1"
 
 #: patterns/page-soon.php:44
 msgid "Your email"

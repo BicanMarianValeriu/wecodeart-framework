@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.0
- * @version		6.4.1
+ * @version		6.5.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -21,7 +21,7 @@ use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
 
 /**
- * Gutenberg Heading block.
+ * Gutenberg details block.
  */
 class Details extends Dynamic {
 
@@ -42,12 +42,41 @@ class Details extends Dynamic {
 	protected $block_name = 'details';
 
 	/**
-	 * Init.
+	 * Block args.
+	 *
+	 * @param	array $current	Existing register args
+	 *
+	 * @return 	array
 	 */
-	public function init() {
-		if( self::has_seo_support() === true ) {
-			\add_filter( 'render_block', [ $this, 'collect_questions' ], 20, 2 );
+	public function block_type_args( array $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+
+		return [
+			'render_callback' 	=> self::has_seo_support() ? [ $this, 'render' ] : null,
+			'supports'			=> wp_parse_args( [
+				'anchor'	=> true
+			], $supports )
+		];
+	}
+
+	/**
+	 * Dynamically renders the `core/table` block.
+	 *
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 *
+	 * @return 	string 	The block markup.
+	 */
+	public function render( array $attributes = [], string $content = '' ): string {	
+		$dom 		= wecodeart( 'dom' )::create( $content );
+		$details	= wecodeart( 'dom' )::get_element( 'details', $dom, 0 );
+		$has_id 	= is_object( $details ) ? $details->getAttribute( 'id' ) : '';
+
+		if( empty( $has_id ) ) {
+			$details->setAttribute( 'id', self::generate_id( [ 'innerHTML' => $content ] ) );
 		}
+
+		return $dom->saveHtml();
 	}
 
 	/**
@@ -57,68 +86,48 @@ class Details extends Dynamic {
 	 */
 	public static function has_seo_support(): bool {
 		if( wecodeart_if( 'is_rankmath_active' ) || wecodeart_if( 'is_yoast_active' ) ) {
-			return \apply_filters( 'wecodeart/filter/gutenberg/block/details/seo', false );
+			return \apply_filters( 'wecodeart/filter/gutenberg/block/details/seo', true );
 		}
 
 		return false;
 	}
 
 	/**
-	 * Collection questions and generate schema.
+	 * Generate ID
 	 *
-	 * @param	string|null $content   The pre-rendered content. Default null.
-	 * @param 	array       $parsed_block The block being rendered.
+	 * @param	array	$block
+	 *
+	 * @return 	string
 	 */
-	public function collect_questions( $content, $parsed_block ) {
-		if ( 'core/details' !== get_prop( $parsed_block, [ 'blockName' ] ) ) {
-			return $content;
-		}
-
-		$dom = wecodeart( 'dom' )::create( $content );
-
-		$summary	= wecodeart( 'dom' )::get_element( 'summary', $dom, 0 );
-		$summary	= is_object( $summary ) ? $summary->nodeValue : '';
-		$text 		= self::get_question_content( get_prop( $parsed_block, [ 'innerBlocks' ], [] ) );
-
-		// Only for pages.
-		\add_filter( 'wpseo_schema_webpage', static function( $data ) use ( $summary, $text ) {
-			$data['@type'] = [ 'WebPage', 'FAQPage' ];
-			if( ! isset( $data['mainEntity'] ) ) {
-				$data['mainEntity'] = [];
-			}
-			$data['mainEntity'][] = self::get_question_json( $summary, $text );
-
-			return $data;
-		} );
-		
-		\add_filter( 'rank_math/json_ld', static function( $data ) use ( $summary, $text ) {
-			if ( ! isset( $data['WebPage'] ) ) {
-				return $data;
-			}
-
-			$data['WebPage']['@type'] = [ 'WebPage', 'FAQPage' ];
-			if( ! isset( $data['WebPage']['mainEntity'] ) ) {
-				$data['WebPage']['mainEntity'] = [];
-			}
-			$data['WebPage']['mainEntity'][] = self::get_question_json( $summary, $text );
-
-			return $data;
-		} );
-
-		return $content;
+	public static function generate_id( array $block ): string {
+		return 'faq-' . \esc_attr( md5( self::get_question( $block ) ) );
 	}
 
 	/**
-	 * Get Question content
+	 * Get Question
+	 *
+	 * @param	array	$block
+	 *
+	 * @return 	string
+	 */
+	public static function get_question( array $block, $tag = 'summary' ): string {
+		$dom 		= wecodeart( 'dom' )::create( get_prop( $block, [ 'innerHTML' ], '' ) );
+		$summary	= wecodeart( 'dom' )::get_element( $tag, $dom, 0 );
+		
+		return is_object( $summary ) ? $summary->nodeValue : '';
+	}
+
+	/**
+	 * Get Answer
 	 *
 	 * @param	array	$blocks
 	 *
 	 * @return 	string
 	 */
-	public static function get_question_content( array $blocks = [] ): string {
+	public static function get_answer( array $block = [] ): string {
 		$content = '';
 
-		foreach( $blocks as $block ) {
+		foreach( get_prop( $block, [ 'innerBlocks' ], [] ) as $block ) {
 			if( ! in_array( $block['blockName'], [ 'core/heading', 'core/paragraph' ], true ) ) {
 				continue;
 			}
@@ -145,26 +154,6 @@ class Details extends Dynamic {
 		}
 
 		return trim( preg_replace( '/(<[^>]+) style=".*?"/i', '$1', $content ) );
-	}
-
-	/**
-	 * Get Question JSON
-	 *
-	 * @param	string	$question
-	 * @param	string	$answer
-	 *
-	 * @return 	array
-	 */
-	public static function get_question_json( string $question = '', string $answer = '' ): array {
-		return [
-			'@type'          => 'Question',
-			'url'            => get_permalink() . '#' . 'faq-' . md5( $question ),
-			'name'           => wp_strip_all_tags( $question ),
-			'acceptedAnswer' => [
-				'@type' => 'Answer',
-				'text'  => $answer,
-			],
-		];
 	}
 
 	/**

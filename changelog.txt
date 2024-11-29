@@ -1,3 +1,15 @@
+v6.5.7
+- Updated - Local romanian language
+- Updated - Bump Cookies module to 1.0.5 for some improvements
+- Updated - Bump ScrollTop module to 1.0.5 for some improvements
+- Updated - wecodeart/section-hero pattern list attributes
+- Updated - header-search template part and apply to all templates by default
+- Updated - core/list layout option updated (to allow switching between inline/column items) / vertical & horizontal spacing
+- Updated - core/list support for SEO plugins to generate JSON Schema (enabled by default)
+- Fixed - .wp-modal__content box-shadow
+- Added - WPSEO to generate schema from core/details block
+- Added - RankMath to generate schema from core/details block
+
 v6.5.6
 - Updated - Offcanvas WP Interactivity API - defensive programming for delayed script execution (for caching plugins)
 - Updated - ro_RO theme local translations

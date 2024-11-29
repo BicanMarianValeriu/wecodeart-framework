@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.1.5
- * @version		6.5.5
+ * @version		6.5.7
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -134,6 +134,7 @@ class Modal extends Base {
 				background-clip: padding-box;
 				border: var(--wp--modal-border-width) solid var(--wp--modal-border-color);
 				border-radius: var(--wp--modal-border-radius);
+				box-shadow: var(--wp--modal-box-shadow);
 				outline: 0;
 			}
 			

@@ -1,5 +1,5 @@
-<!-- wp:group {"align":"full","layout":{"inherit":true}} -->
-<div class="wp-block-group alignfull">
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xs","bottom":"var:preset|spacing|xs"}}},"layout":{"inherit":true,"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--xs)">
     <!-- wp:columns {"isStackedOnMobile":false,"className":"justify-content-between"} -->
     <div class="wp-block-columns is-not-stacked-on-mobile justify-content-between">
         <!-- wp:column {"verticalAlignment":"center","style":{"spacing":{"blockGap":"0","padding":{"top":"var:preset|spacing|xs","bottom":"var:preset|spacing|xs"}}},"className":"col-auto"} -->
@@ -9,7 +9,7 @@
         <!-- /wp:column --> 
         <!-- wp:column {"verticalAlignment":"center"} -->
         <div class="wp-block-column is-vertically-aligned-center">
-            <!-- wp:navigation {"openSubmenusOnClick":true,"textColor":"primary","overlayBackgroundColor":"primary","overlayTextColor":"white","layout":{"type":"flex","justifyContent":"right","orientation":"horizontal"},"style":{"typography":{"fontStyle":"normal","fontWeight":"400"}}} -->
+            <!-- wp:navigation {"openSubmenusOnClick":true,"fontSize":"small","textColor":"primary","overlayBackgroundColor":"primary","overlayTextColor":"white","layout":{"type":"flex","justifyContent":"right","orientation":"horizontal"},"style":{"typography":{"fontStyle":"normal","fontWeight":"500","textTransform":"uppercase"}}} -->
             <!-- wp:social-links {"iconColor":"primary","style":{"spacing":{"blockGap":{"top":"8px","left":"8px"},"margin":{"top":"0","right":"0","bottom":"0","left":"0"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"left","orientation":"horizontal"}} -->
             <ul class="wp-block-social-links has-icon-color is-style-logos-only" style="margin-top:0;margin-right:0;margin-bottom:0;margin-left:0">
                 <!-- wp:social-link {"url":"https://wordpress.org/themes/wecodeart/","service":"wordpress"} /-->
@@ -21,6 +21,7 @@
             <!-- /wp:spacer -->
             <!-- wp:navigation-link {"label":"Home","type":"custom","url":"/","isTopLevelLink":true} /-->
             <!-- wp:navigation-link {"label":"Blog","type":"custom","url":"/blog/","isTopLevelLink":true} /-->
+            <!-- wp:loginout {"displayLoginAsForm":true,"className":"is-style-modal"} /-->
             <!-- wp:search {"showLabel":false,"placeholder":"Looking for...?","buttonPosition":"button-only","buttonUseIcon":true,"backgroundColor":"primary","textColor":"white"} /-->
             <!-- /wp:navigation -->
         </div>

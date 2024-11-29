@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.5.0
+ * @version		6.5.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -635,7 +635,7 @@ class Navigation extends Dynamic {
 				--wp--navigation-flex-direction: column;
 				--wp--navigation-flex-wrap: wrap;
 				--wp--navigation-justify-content: initial;
-				--wp--navigation-align-items: flex-start;
+				--wp--navigation-align-items: initial;
 				--wp--navigation-padding-x: 0;
 				--wp--navigation-padding-y: 0.5rem;
 				--wp--navigation-color: rgba(var(--wp--emphasis-color-rgb), 1);

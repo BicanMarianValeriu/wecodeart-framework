@@ -52,10 +52,13 @@ class WPSeo implements Integration {
 		// This will be eventually removed as soon as I figure out another way (maybe PHP patterns?)
 		// Its only used when Yoast SEO plugin is installed and enabled.
 		// Renders author social profiles using core/social-links block markup
-		add_action( 'init', 				[ $this, 'register_social' ] );
+		add_action( 'init', 						[ $this, 'register_social' 		] );
 
 		// Register Blocks Overwrites
-		add_action( 'after_setup_theme', 	[ $this, 'register_blocks' ] );
+		add_action( 'after_setup_theme', 			[ $this, 'register_blocks' 		] );
+
+		// Register generators
+		add_filter( 'wpseo_schema_graph_pieces', 	[ $this, 'register_generators' 	], 11, 2 );
 	}
 
 	/**
@@ -68,7 +71,9 @@ class WPSeo implements Integration {
 	 */
 	public function register_blocks(): void {
 		// Avoid overwriting content in admin.
-		if( is_admin() ) return;
+		if( is_admin() ) {
+			return;
+		}
 
 		// Register Yoast FAQ Overwrite
 		wecodeart( 'blocks' )->register( 'yoast/faq-block', WPSeo\Blocks\FAQ::class );
@@ -89,6 +94,23 @@ class WPSeo implements Integration {
 		if( ! isset( $shortcode_tags['yoast-author-social'] ) ) {
 			$shortcode_tags['yoast-author-social'] = [ $this, 'render_social' ];
 		}
+	}
+
+	/**
+	 * Register Generators
+	 *
+	 * @since	6.5.7
+	 * @version 6.5.7
+	 * 
+	 * @param 	array  	$pieces  The current graph pieces.
+ 	 * @param 	string 	$context The current context.
+	 *
+	 * @return 	$array
+	 */
+	public function register_generators( $pieces, $context ): array {
+		$pieces[] = new WPSeo\Generators\FAQ( $context );
+
+		return $pieces;
 	}
 
 	/**

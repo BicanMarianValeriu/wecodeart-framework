@@ -28,13 +28,19 @@ const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
 const { state, actions, callbacks } = store(NAMESPACE, {
     state: {
         get useKeyboard() {
-            return getContext().keyboard || state.keyboard;
+            const { keyboard = state.keyboard } = getContext();
+
+            return keyboard;
         },
         get hasBackdrop() {
-            return getContext().backdrop || state.backdrop;
+            const { backdrop = state.backdrop } = getContext();
+            
+            return backdrop;
         },
         get allowScroll() {
-            return getContext().scroll || state.scroll;
+            const { scroll = state.scroll } = getContext();
+            
+            return scroll;
         }
     },
     actions: {
@@ -143,8 +149,9 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             // Setup offcanvas
             callbacks.getOffcanvas();
 
+            const context = getContext();
             // Is opened by default?
-            if (getContext().isOpen) {
+            if (context.isOpen) {
                 context.isOpen = false;
                 actions.show();
             }

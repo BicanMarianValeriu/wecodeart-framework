@@ -1222,6 +1222,7 @@ __webpack_require__.r(__webpack_exports__);
 const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
 const SELECTOR_STICKY_CONTENT = '.sticky-top';
 const PROPERTY_PADDING = 'padding-right';
+const PROPERTY_CUSTOM = '--wp--scrollbar-width';
 const PROPERTY_MARGIN = 'margin-right';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function (wecodeart) {
   const {
@@ -1250,6 +1251,7 @@ const PROPERTY_MARGIN = 'margin-right';
     reset() {
       this._resetElementAttributes(this._element, 'overflow');
       this._resetElementAttributes(this._element, PROPERTY_PADDING);
+      this._resetElementAttributes(this._element, PROPERTY_CUSTOM);
       this._resetElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING);
       this._resetElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN);
     }
@@ -1271,6 +1273,7 @@ const PROPERTY_MARGIN = 'margin-right';
         this._saveInitialAttribute(element, styleProperty);
         const calculatedValue = window.getComputedStyle(element).getPropertyValue(styleProperty);
         element.style.setProperty(styleProperty, `${callback(Number.parseFloat(calculatedValue))}px`);
+        element.style.setProperty(PROPERTY_CUSTOM, `${callback(Number.parseFloat(calculatedValue))}px`);
       };
       this._applyManipulationCallback(selector, manipulationCallBack);
     }
@@ -1290,6 +1293,7 @@ const PROPERTY_MARGIN = 'margin-right';
         }
         element.removeAttribute(`data-wp-${this._normalizeDataKey(styleProperty)}`);
         element.style.setProperty(styleProperty, value);
+        element.style.setProperty(PROPERTY_CUSTOM, value);
       };
       this._applyManipulationCallback(selector, manipulationCallBack);
     }
@@ -1803,7 +1807,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
 /*!**********************************!*\

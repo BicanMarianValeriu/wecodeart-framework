@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.4.1
+ * @version		6.5.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -18,8 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\encode_svg_data;
+use function WeCodeArt\Functions\{ get_prop, encode_svg_data };
 
 /**
  * Gutenberg Code block.
@@ -88,7 +87,7 @@ class Lists extends Dynamic {
 			'render_callback'	=> [ $this, 'render' ],
 			'supports'			=> wp_parse_args( [
 				'layout'	=> [
-					'allowSwitching'  => false,
+					'allowSwitching'  => true,
 					'allowInheriting' => false,
 					'default'         => [
 						'type'        => 'flex',
@@ -98,7 +97,7 @@ class Lists extends Dynamic {
 				'spacing'	=> [
 					'margin'  	=> true,
 					'padding' 	=> true,
-					'blockGap' 	=> true,
+					'blockGap' 	=> [ 'horizontal', 'vertical' ],
 					'__experimentalDefaultControls' => [
 						'margin' 	=> false,
 						'padding' 	=> false,

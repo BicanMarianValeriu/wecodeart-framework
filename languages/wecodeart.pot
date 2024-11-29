@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 04:25+0000\n"
+"POT-Creation-Date: 2024-11-23 02:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -26,7 +26,7 @@ msgid "% Comments"
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-separator.php:87
-#: inc/gutenberg/blocks/text/lists/class-lists.php:71
+#: inc/gutenberg/blocks/text/lists/class-lists.php:70
 #, php-format
 msgid "%s"
 msgstr ""
@@ -644,6 +644,10 @@ msgstr ""
 msgid "Log In"
 msgstr ""
 
+#: patterns/header.php:38
+msgid "Looking for...?"
+msgstr ""
+
 #: patterns/cards-background.php:22
 #, php-format
 msgid "Loved by %s"
@@ -667,6 +671,10 @@ msgstr ""
 
 #: patterns/section-features.php:51
 msgid "Modular Design"
+msgstr ""
+
+#: patterns/header.php:28
+msgid "Modular FSE Theme"
 msgstr ""
 
 #: inc/admin/installer/module/class-ajax.php:116
@@ -1490,10 +1498,6 @@ msgstr ""
 #: inc/gutenberg/blocks/comment/class-form.php:298
 #, php-format
 msgid "You must accept %s to comment!"
-msgstr ""
-
-#: patterns/header.php:28
-msgid "Your #1 FSE Theme"
 msgstr ""
 
 #: patterns/page-soon.php:44

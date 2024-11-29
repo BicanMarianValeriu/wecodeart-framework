@@ -10,10 +10,7 @@
     <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxl","bottom":"var:preset|spacing|xxl","right":"var:preset|spacing|g","left":"var:preset|spacing|g"},"blockGap":"var:preset|spacing|lg"}},"backgroundColor":"primary","textColor":"white","className":"","layout":{"type":"constrained"}} -->
     <div class="wp-block-group alignfull has-white-color has-primary-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--xxl);padding-right:var(--wp--preset--spacing--g);padding-bottom:var(--wp--preset--spacing--xxl);padding-left:var(--wp--preset--spacing--g)">
         <!-- wp:heading {"textAlign":"center","level":1,"className":"display-4 fw-700"} -->
-        <h1 class="wp-block-heading has-text-align-center display-4 fw-700"><?php esc_html_e( 'Build your website with WeCodeArt', 'wecodeart' ); ?></h1>
-        <!-- /wp:heading -->
-        <!-- wp:heading {"textAlign":"center","className":"display-5 fw-700 mt-0","customStyle":"selector .has-underline::after {\n  background: currentColor;\n}\n"} -->
-        <h2 class="wp-block-heading has-text-align-center display-5 fw-700 mt-0"><?php printf( esc_html__( 'Get it now. Is %s forever!', 'wecodeart' ), sprintf( '<span class="has-underline">%s</span>', esc_html__( 'FREE', 'wecodeart' ) ) ); ?></h2>
+        <h1 class="wp-block-heading has-text-align-center display-4 fw-700"><?php esc_html_e( 'Build your website with WeCodeArt Framework', 'wecodeart' ); ?></h1>
         <!-- /wp:heading -->
         <!-- wp:group {"layout":{"type":"constrained","contentSize":"615px"}} -->
         <div class="wp-block-group">
@@ -26,8 +23,8 @@
             <!-- /wp:paragraph -->
         </div>
         <!-- /wp:group -->
-        <!-- wp:list {"style":{"spacing":{"blockGap":"var:preset|spacing|lg"}},"className":"fw-700 g-0 is-style-icon\u002d\u002dcheck-circle-fill","layout":{"type":"flex","orientation":"horizontal","justifyContent":"center"}} -->
-        <ul class="fw-700 gy-0 is-style-icon--check-circle-fill">
+        <!-- wp:list {"className":"fw-700 is-style-icon\u002d\u002dcheck-circle-fill","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xs","left":"var:preset|spacing|lg"}}},"layout":{"type":"flex","justifyContent":"center"}} -->
+        <ul class="wp-block-list fw-700 is-style-icon--check-circle-fill">
             <!-- wp:list-item {"className":"text-uppercase"} -->
             <li class="text-uppercase"><?php esc_html_e( 'Super high performance', 'wecodeart' ); ?></li>
             <!-- /wp:list-item -->

@@ -9,7 +9,7 @@
  * @subpackage 	Support\RankMath
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.3.7
+ * @version		6.5.7
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -30,6 +30,9 @@ class RankMath implements Integration {
 
 	use Singleton;
 
+	// Vars
+	public static $questions = [];
+
 	/**
 	 * Get Conditionals
 	 *
@@ -45,8 +48,13 @@ class RankMath implements Integration {
 	 * Send to Constructor
 	 */
 	public function register_hooks(): void {
-		add_action( 'after_setup_theme',					[ $this, 'register_blocks'		] );
-		add_filter( 'wecodeart/filter/template/context',	[ $this, 'post_category_view'	], 20, 2 );
+		\add_action( 'after_setup_theme',					[ $this, 'register_blocks'		] );
+		\add_filter( 'wecodeart/filter/template/context',	[ $this, 'post_category_view'	], 20, 2 );
+
+		if( wecodeart( 'blocks' )->get( 'core/details' )::has_seo_support() === true ) {
+			\add_filter( 'render_block', 		[ $this, 'collect_questions' 	], PHP_INT_MAX, 2 ); 
+			\add_filter( 'rank_math/json_ld', 	[ $this, 'generate_schema' 		], PHP_INT_MAX, 1 );
+		}
 	}
 
 	/**
@@ -62,6 +70,73 @@ class RankMath implements Integration {
 
 		// Register RankMath FAQ Overwrite
 		wecodeart( 'blocks' )->register( 'rankmath/faq-block', RankMath\Blocks\FAQ::class );
+	}
+
+	/**
+	 * Collection questions.
+	 *
+	 * @param	string|null $content	The pre-rendered content. Default null.
+	 * @param 	array       $block 		The block being rendered.
+	 */
+	public function collect_questions( string $content, array $block ): string {
+		if ( 'core/details' !== get_prop( $block, [ 'blockName' ] ) ) {
+			return $content;
+		}
+
+		$details 	= wecodeart( 'blocks' )->get( 'core/details' );
+		$processor 	= wecodeart( 'dom' )::processor( $content );
+		$processor->next_tag( 'DETAILS' );
+
+		self::$questions[] = [
+			'id'		=> $processor->get_attribute( 'id' ),
+			'question' 	=> $details::get_question( $block ),
+			'answer' 	=> $details::get_answer( $block ),
+		];
+
+		return $content;
+	}
+
+	/**
+	 * Generate schema.
+	 *
+	 * @param	array 	$data
+	 *
+	 * @return  array
+	 */
+	public function generate_schema( array $data ): array { 
+		if ( ! isset( $data['WebPage'] ) || empty( self::$questions ) ) {
+			return $data;
+		}
+
+		$data['WebPage']['@type'] = [ 'WebPage', 'FAQPage' ];
+		
+		if( ! isset( $data['WebPage']['mainEntity'] ) ) {
+			$data['WebPage']['mainEntity'] = [];
+		}
+
+		$permalink 	= \get_permalink();
+		$language 	= \get_bloginfo( 'language' );
+
+		$data['WebPage']['mainEntity'] = wp_parse_args(
+			array_map( function( $data ) use ( $permalink, $language ) {
+				return [
+					'@type'			 => 'Question',
+					'@id'			 => $permalink . '#' . $data['id'],
+					'url'            => $permalink . '#' . $data['id'],
+					'name'           => $data['question'],
+					'inLanguage'	 => $language,
+					'answerCount'    => 1,
+					'acceptedAnswer' => [
+						'@type' 		=> 'Answer',
+						'text'  		=> $data['answer'],
+						'inLanguage'	=> $language
+					],
+				];
+			}, self::$questions ),
+			$data['WebPage']['mainEntity'] 
+		);
+
+		return $data; 
 	}
 
 	/**

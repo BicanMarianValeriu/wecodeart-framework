@@ -9,7 +9,7 @@
  * @subpackage  Yoast\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.4.2
+ * @version		6.5.7
  */
 
 namespace WeCodeArt\Support\Plugins\WPSeo\Blocks;
@@ -59,7 +59,7 @@ class Faq extends Dynamic {
 	 * @return string
 	 */
 	public function get_asset_handle(): string {
-		return 'yoast-block-' . $this->block_name;
+		return $this->namespace . '-' . $this->block_name;
 	}
 
     /**

@@ -12,8 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 
 /**
  * WordPress dependencies
@@ -34,7 +34,7 @@ const {
   const {
     removeNotice
   } = useDispatch('core/notices');
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SnackbarList, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(SnackbarList, {
     className: "components-editor-notices__snackbar",
     notices: notices,
     onRemove: removeNotice
@@ -77,8 +77,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 
 const {
   i18n: {
@@ -135,117 +135,179 @@ const {
   }, [isRequesting]);
   const joinFBImage = `${themeDirs.uri}/assets/images/join-fb.svg`;
   const getInTouchImage = `${themeDirs.uri}/assets/images/connect.svg`;
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid--layout"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid__main"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
-    className: "my-3 shadow-none"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, __('WeCodeArt Framework provides set of tools to extend the way you are building content on WordPress Gutenberg block editor. Designed and integrated to help users easily navigate; and control each block the way it should be.', 'wecodeart'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid--cards"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
-    className: "m-0 shadow-none"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
-    className: "m-0"
-  }, __('Need Support?', 'wecodeart'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('Whether you need assistance, wish to report a bug, or have a new feature request, please create a topic in the support forum on WordPress.org.', 'wecodeart')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-    href: "https://wordpress.org/support/theme/wecodeart/",
-    isPrimary: true,
-    target: "_blank"
-  }, __('Support Forum', 'wecodeart')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
-    className: "m-0 shadow-none"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
-    className: "m-0"
-  }, __('Rate Us Five!', 'wecodeart'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('If you like this theme please give it a 5-star rating. This would boost my motivation and help other users make a comfortable decision while choosing us.', 'wecodeart')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-    href: "//wordpress.org/support/theme/wecodeart/reviews/?filter=5#new-post",
-    isPrimary: true,
-    target: "_blank"
-  }, __('Ok, you deserve it', 'wecodeart')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
-    className: "m-0 shadow-none",
-    style: {
-      '--wca--card-image': `url(${joinFBImage})`,
-      '--wca--card-bg': '#D5EAFF'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
-    className: "m-0"
-  }, __('Join Our Facebook Community', 'wecodeart'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('Do join WeCodeArt\'s official Facebook page to share your experience, thoughts, and ideas.', 'wecodeart')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-    href: "https://www.facebook.com/wecodeart/",
-    isPrimary: true,
-    target: "_blank"
-  }, __('Join Now', 'wecodeart')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
-    className: "m-0 shadow-none",
-    style: {
-      '--wca--card-image': `url(${getInTouchImage})`,
-      '--wca--card-bg': '#E7E6FE'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
-    className: "m-0"
-  }, __('Stay in Touch with Us', 'wecodeart'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('Stay in touch via our social media channels to receive the latest announcements and updates.', 'wecodeart')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(HStack, {
-    className: "wp-block-social-links"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    className: "wp-social-link wp-social-link-github wp-block-social-link my-0 me-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    rel: "noopener nofollow",
-    target: "_blank",
-    href: "https://wordpress.org/themes/wecodeart/"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
-    size: 20,
-    icon: "wordpress"
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    className: "wp-social-link wp-social-link-facebook wp-block-social-link my-0 me-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    rel: "noopener nofollow",
-    target: "_blank",
-    href: "https://www.facebook.com/wecodeart/"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Icon, {
-    size: 20,
-    icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      fill: "currentColor",
-      viewBox: "0 0 16 16"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-      d: "M16 8.05A8.03 8.03 0 0 0 8 0C3.58 0 0 3.6 0 8.05A8.04 8.04 0 0 0 6.75 16v-5.62H4.72V8.05h2.03V6.27c0-2.01 1.2-3.13 3.02-3.13.88 0 1.8.16 1.8.16v1.98h-1.02c-.99 0-1.3.62-1.3 1.26v1.5h2.22l-.35 2.34H9.25V16A8.04 8.04 0 0 0 16 8.05z"
-    }))
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    className: "wp-social-link wp-social-link-github wp-block-social-link my-0 me-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    rel: "noopener nofollow",
-    target: "_blank",
-    href: "https://github.com/BicanMarianValeriu/wecodeart-framework/"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Icon, {
-    size: 20,
-    icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      fill: "currentColor",
-      viewBox: "0 0 16 16"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-      d: "M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.49c-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8a8 8 0 0 0-8-8z"
-    }))
-  })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid__side bg-white rounded-bottom"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
-    className: "shadow-none"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, __('What`s next?', 'wecodeart')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "badge rounded-pill bg-dark"
-  }, __('Developer news', 'wecodeart'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, isRequesting ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Placeholder, {
-    className: 'my-4',
-    icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null),
-    label: __('Loading', 'wecodeart'),
-    instructions: __('Please wait, loading notifications...', 'wecodeart')
-  }) : notes.map(({
-    title,
-    content,
-    type = 'success'
-  }) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Notice, {
-      className: "mx-0 my-4 shadow-sm",
-      type: type,
-      isDismissible: false
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-      dangerouslySetInnerHTML: {
-        __html: content
-      }
-    }));
-  })))));
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    className: "grid grid--layout",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: "grid__main",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Card, {
+        className: "my-3 shadow-none",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CardBody, {
+          children: __('WeCodeArt Framework provides set of tools to extend the way you are building content on WordPress Gutenberg block editor. Designed and integrated to help users easily navigate; and control each block the way it should be.', 'wecodeart')
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: "grid grid--cards",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(Card, {
+          className: "m-0 shadow-none",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CardHeader, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+              className: "m-0",
+              children: __('Need Support?', 'wecodeart')
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(CardBody, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: __('Whether you need assistance, wish to report a bug, or have a new feature request, please create a topic in the support forum on WordPress.org.', 'wecodeart')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+              href: "https://wordpress.org/support/theme/wecodeart/",
+              isPrimary: true,
+              target: "_blank",
+              children: __('Support Forum', 'wecodeart')
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(Card, {
+          className: "m-0 shadow-none",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CardHeader, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+              className: "m-0",
+              children: __('Rate Us Five!', 'wecodeart')
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(CardBody, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: __('If you like this theme please give it a 5-star rating. This would boost my motivation and help other users make a comfortable decision while choosing us.', 'wecodeart')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+              href: "//wordpress.org/support/theme/wecodeart/reviews/?filter=5#new-post",
+              isPrimary: true,
+              target: "_blank",
+              children: __('Ok, you deserve it', 'wecodeart')
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(Card, {
+          className: "m-0 shadow-none",
+          style: {
+            '--wca--card-image': `url(${joinFBImage})`,
+            '--wca--card-bg': '#D5EAFF'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CardHeader, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+              className: "m-0",
+              children: __('Join Our Facebook Community', 'wecodeart')
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(CardBody, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: __('Do join WeCodeArt\'s official Facebook page to share your experience, thoughts, and ideas.', 'wecodeart')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+              href: "https://www.facebook.com/wecodeart/",
+              isPrimary: true,
+              target: "_blank",
+              children: __('Join Now', 'wecodeart')
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(Card, {
+          className: "m-0 shadow-none",
+          style: {
+            '--wca--card-image': `url(${getInTouchImage})`,
+            '--wca--card-bg': '#E7E6FE'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CardHeader, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+              className: "m-0",
+              children: __('Stay in Touch with Us', 'wecodeart')
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(CardBody, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: __('Stay in touch via our social media channels to receive the latest announcements and updates.', 'wecodeart')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(HStack, {
+              className: "wp-block-social-links",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+                className: "wp-social-link wp-social-link-github wp-block-social-link my-0 me-2",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+                  rel: "noopener nofollow",
+                  target: "_blank",
+                  href: "https://wordpress.org/themes/wecodeart/",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+                    size: 20,
+                    icon: "wordpress"
+                  })
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+                className: "wp-social-link wp-social-link-facebook wp-block-social-link my-0 me-2",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+                  rel: "noopener nofollow",
+                  target: "_blank",
+                  href: "https://www.facebook.com/wecodeart/",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Icon, {
+                    size: 20,
+                    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "currentColor",
+                      viewBox: "0 0 16 16",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+                        d: "M16 8.05A8.03 8.03 0 0 0 8 0C3.58 0 0 3.6 0 8.05A8.04 8.04 0 0 0 6.75 16v-5.62H4.72V8.05h2.03V6.27c0-2.01 1.2-3.13 3.02-3.13.88 0 1.8.16 1.8.16v1.98h-1.02c-.99 0-1.3.62-1.3 1.26v1.5h2.22l-.35 2.34H9.25V16A8.04 8.04 0 0 0 16 8.05z"
+                      })
+                    })
+                  })
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+                className: "wp-social-link wp-social-link-github wp-block-social-link my-0 me-2",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+                  rel: "noopener nofollow",
+                  target: "_blank",
+                  href: "https://github.com/BicanMarianValeriu/wecodeart-framework/",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Icon, {
+                    size: 20,
+                    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "currentColor",
+                      viewBox: "0 0 16 16",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+                        d: "M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.49c-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8a8 8 0 0 0-8-8z"
+                      })
+                    })
+                  })
+                })
+              })]
+            })]
+          })]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: "grid__side bg-white rounded-bottom",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(Card, {
+        className: "shadow-none",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(CardHeader, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+            children: __('What`s next?', 'wecodeart')
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+            className: "badge rounded-pill bg-dark",
+            children: __('Developer news', 'wecodeart')
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CardBody, {
+          children: isRequesting ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Placeholder, {
+            className: 'my-4',
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Spinner, {}),
+            label: __('Loading', 'wecodeart'),
+            instructions: __('Please wait, loading notifications...', 'wecodeart')
+          }) : notes.map(({
+            title,
+            content,
+            type = 'success'
+          }) => {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(Notice, {
+              className: "mx-0 my-4 shadow-sm",
+              type: type,
+              isDismissible: false,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+                children: title
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+                dangerouslySetInnerHTML: {
+                  __html: content
+                }
+              })]
+            });
+          })
+        })]
+      })
+    })]
+  });
 });
 
 /***/ }),
@@ -261,8 +323,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   License: () => (/* binding */ License),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 
 /**
  * WordPress dependencies
@@ -299,11 +361,11 @@ const License = props => {
     settings
   } = props;
   if (isRequesting || !settings) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Placeholder, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Placeholder, {
       style: {
         marginTop: 20
       },
-      icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null),
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Spinner, {}),
       label: __('Loading', 'wecodeart'),
       instructions: __('Please wait, loading settings...', 'wecodeart')
     });
@@ -343,51 +405,88 @@ const License = props => {
   // Deprecated Action
   doAction('wecodeart.admin.licensePanel', props);
   doAction('wecodeart.admin.tabs.license', props);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
-    className: "my-3 shadow-none"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, null, sprintf(__('Enter your license keys here to receive updates. If your license keys are expired, please %1$srenew your licenses%2$s.', 'wecodeart'), '<a href="https://www.wecodeart.com/" target="_blank">', '</a>')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "table-responsive"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
-    className: "table table-bordered table-hover"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
-    style: {
-      textAlign: 'left'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, __('Product', 'wecodeart')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, __('License Key', 'wecodeart')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, __('Actions', 'wecodeart')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, __('Status', 'wecodeart')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, fields.map(({
-    id,
-    label,
-    externalUrl = ''
-  }) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, label)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(BaseControl, {
-      id,
-      key: id
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-      id: id,
-      type: "text",
-      value: formData[id],
-      placeholder: __('API Key', 'wecodeart'),
-      disabled: settings[id] === 'FREEMIUM',
-      onChange: handleInputChange
-    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "wecodeart-button-group"
-    }, externalUrl !== '' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ExternalLink, {
-      href: externalUrl,
-      className: "wecodeart-button-group__item"
-    }, __('Get API Key', 'wecodeart')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
-      style: {
-        backgroundColor: '#d7ffd2'
-      }
-    }, sprintf(__('Days: %s', 'wecodeart'), __('Unlimited', 'wecodeart'))));
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-    className: "button",
-    isPrimary: true,
-    icon: loading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null),
-    onClick: () => {
-      setLoading(true);
-      saveSettings(formData, handleNotice);
-    },
-    disabled: loading || !hasChanges
-  }, loading ? '' : __('Save', 'wecodeart')));
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Card, {
+      className: "my-3 shadow-none",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CardBody, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(RawHTML, {
+          children: sprintf(__('Enter your license keys here to receive updates. If your license keys are expired, please %1$srenew your licenses%2$s.', 'wecodeart'), '<a href="https://www.wecodeart.com/" target="_blank">', '</a>')
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: "table-responsive",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", {
+        className: "table table-bordered table-hover",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+            style: {
+              textAlign: 'left'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
+              children: __('Product', 'wecodeart')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
+              children: __('License Key', 'wecodeart')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
+              children: __('Actions', 'wecodeart')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
+              children: __('Status', 'wecodeart')
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", {
+          children: fields.map(({
+            id,
+            label,
+            externalUrl = ''
+          }) => {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("strong", {
+                  children: label
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(BaseControl, {
+                  id,
+                  key: id,
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+                    id: id,
+                    type: "text",
+                    value: formData[id],
+                    placeholder: __('API Key', 'wecodeart'),
+                    disabled: settings[id] === 'FREEMIUM',
+                    onChange: handleInputChange
+                  })
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                  className: "wecodeart-button-group",
+                  children: externalUrl !== '' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ExternalLink, {
+                    href: externalUrl,
+                    className: "wecodeart-button-group__item",
+                    children: __('Get API Key', 'wecodeart')
+                  })
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+                style: {
+                  backgroundColor: '#d7ffd2'
+                },
+                children: sprintf(__('Days: %s', 'wecodeart'), __('Unlimited', 'wecodeart'))
+              })]
+            });
+          })
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+      className: "button",
+      isPrimary: true,
+      icon: loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Spinner, {}),
+      onClick: () => {
+        setLoading(true);
+        saveSettings(formData, handleNotice);
+      },
+      disabled: loading || !hasChanges,
+      children: loading ? '' : __('Save', 'wecodeart')
+    })]
+  });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (withFilters('wecodeart.admin.licensePanel')(License));
 
@@ -403,8 +502,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Panel)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 
 /**
  * WordPress dependencies
@@ -448,14 +547,15 @@ function Panel(props) {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, [tabs]);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TabPanel, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TabPanel, {
     className: "wecodeart-tab-panel wecodeart-tab-panel--vertical",
     activeClass: "active-tab",
     orientation: "vertical",
     initialTabName: initialTab,
     onSelect: updateUrl,
-    tabs: tabs
-  }, tab => tab.render && typeof tab.render === 'function' && tab.render(tabProps));
+    tabs: tabs,
+    children: tab => tab.render && typeof tab.render === 'function' && tab.render(tabProps)
+  });
 }
 
 /***/ }),
@@ -472,13 +572,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "react":
-/*!************************!*\
-  !*** external "React" ***!
-  \************************/
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
 /***/ ((module) => {
 
-module.exports = window["React"];
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 
@@ -551,17 +651,16 @@ module.exports = window["React"];
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!*******************************!*\
   !*** ./src/js/admin/index.js ***!
   \*******************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ "./src/js/admin/components/index.js");
-/* harmony import */ var _scss_admin_index_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../scss/admin/index.scss */ "./src/scss/admin/index.scss");
-
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./src/js/admin/components/index.js");
+/* harmony import */ var _scss_admin_index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../scss/admin/index.scss */ "./src/scss/admin/index.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * WordPress dependencies
  */
@@ -610,6 +709,7 @@ const {
 
 
 // Core
+
 const WeCodeArt = () => {
   const {
     createNotice: coreCreateNotice
@@ -668,12 +768,12 @@ const WeCodeArt = () => {
     name: 'intro',
     title: __('Getting Started', 'wecodeart'),
     className: 'wecodeart-intro',
-    render: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components__WEBPACK_IMPORTED_MODULE_1__.GettingStarted, null)
+    render: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.GettingStarted, {})
   }, ...(applyFilters('wecodeart.admin.tabs.plugins', []).length ? [{
     name: 'plugins',
     title: __('Plugins', 'wecodeart'),
     className: 'wecodeart-plugins',
-    render: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components__WEBPACK_IMPORTED_MODULE_1__.SubPanel, {
+    render: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.SubPanel, {
       ...tabProps,
       tabs: applyFilters('wecodeart.admin.tabs.plugins', [])
     })
@@ -681,7 +781,7 @@ const WeCodeArt = () => {
     name: 'themes',
     title: __('Themes', 'wecodeart'),
     className: 'wecodeart-themes',
-    render: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components__WEBPACK_IMPORTED_MODULE_1__.SubPanel, {
+    render: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.SubPanel, {
       ...tabProps,
       tabs: applyFilters('wecodeart.admin.tabs.themes', [])
     })
@@ -689,7 +789,7 @@ const WeCodeArt = () => {
     name: 'license',
     title: __('License(s)', 'wecodeart'),
     className: 'wecodeart-license',
-    render: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components__WEBPACK_IMPORTED_MODULE_1__.Licenses, {
+    render: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.Licenses, {
       ...tabProps
     })
   }]);
@@ -737,32 +837,52 @@ const WeCodeArt = () => {
       document.head.removeChild(scriptRef.current);
     };
   }, [settings]);
-  const MainPanel = () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
-    opened: true
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "components-panel__header"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "g-col-12 g-col-md-8 g-col-lg-10"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "wecodeart-panel__header-hint"
-  }, __('Appearance', 'wecodeart'), " \u2192 WeCodeArt"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "WeCodeArt Framework"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, themeVersion))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "g-col-12 g-col-md-4 g-col-lg-2 align-self-end"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    id: "donate-button-container"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    id: "donate-button"
-  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TabPanel, {
-    className: "wecodeart-tab-panel",
-    activeClass: "active-tab",
-    initialTabName: initialTab,
-    onSelect: updateUrl,
-    tabs: tabs
-  }, ({
-    render
-  }) => render))));
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(MainPanel, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components__WEBPACK_IMPORTED_MODULE_1__.Notices, null));
+  const MainPanel = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Panel, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(PanelBody, {
+      opened: true,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "components-panel__header",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "grid",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "g-col-12 g-col-md-8 g-col-lg-10",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              className: "wecodeart-panel__header-hint",
+              children: [__('Appearance', 'wecodeart'), " \u2192 WeCodeArt"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h2", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                children: "WeCodeArt Framework"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                children: themeVersion
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "g-col-12 g-col-md-4 g-col-lg-2 align-self-end",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              id: "donate-button-container",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                id: "donate-button"
+              })
+            })
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(PanelRow, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(TabPanel, {
+          className: "wecodeart-tab-panel",
+          activeClass: "active-tab",
+          initialTabName: initialTab,
+          onSelect: updateUrl,
+          tabs: tabs,
+          children: ({
+            render
+          }) => render
+        })
+      })]
+    })
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(MainPanel, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.Notices, {})]
+  });
 };
 wp.domReady(() => {
   // Expose Settings
@@ -780,7 +900,7 @@ wp.domReady(() => {
     baseURL: '/wecodeart/v1/notifications' // API path without /wp-json
   }]);
   // Render Admin
-  render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(WeCodeArt, null), document.getElementById('wecodeart'));
+  render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(WeCodeArt, {}), document.getElementById('wecodeart'));
 });
 })();
 

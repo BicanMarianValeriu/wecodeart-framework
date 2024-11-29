@@ -8,7 +8,7 @@
  * @package		WeCodeArt Framework
  * @subpackage  OffCanvas
  * @since		5.0.0
- * @version    	6.4.5
+ * @version    	6.5.7
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -37,7 +37,7 @@ use function WeCodeArt\Functions\toJSON;
 	'backdrop'	=> '(boolean|string)',
 	'keyboard'	=> 'boolean',
 	'scroll'	=> 'boolean',
-	'classes'	=> 'object'
+	'classes'	=> '(object|array)'
 ] );
 
 /**

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.5.7
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -58,6 +58,7 @@ class Spacer extends Dynamic {
 				clear: both;
 			}
 			.wp-block-navigation .wp-block-spacer {
+				display: block;
 				width: 100%;
 				height: var(--wp--spacer-width, 1px);
 				min-height: initial;

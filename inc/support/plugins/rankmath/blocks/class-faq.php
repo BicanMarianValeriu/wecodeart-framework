@@ -49,8 +49,17 @@ class Faq extends Dynamic {
 	public function block_type_args(): array {
 		return [
 			'render_callback'  	=> [ $this, 'render' ],
-			'style'				=> 'wp-block-details'
+			'style'				=> [ $this->get_asset_handle(), 'wp-block-details' ]
 		];
+	}
+
+	/**
+	 * Get block asset handle.
+	 *
+	 * @return string
+	 */
+	public function get_asset_handle(): string {
+		return $this->namespace . '-' . $this->block_name;
 	}
 
     /**
@@ -80,5 +89,18 @@ class Faq extends Dynamic {
 		}
 
 		return (string) $content;
+	}
+
+	/**
+	 * Block styles
+	 *
+	 * @return 	string 	The block styles.
+	 */
+	public function styles() {
+		return <<<CSS
+			.wp-block-rank-math-faq-block details[open] {
+				padding-bottom: 0;
+			}
+		CSS;
 	}
 }
