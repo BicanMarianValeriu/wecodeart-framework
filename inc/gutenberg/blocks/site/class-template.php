@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.4.4
+ * @version		6.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -101,7 +101,7 @@ class Template extends Dynamic {
 	 */
 	public function filter_render( string $content, array $block ): string {
 		$attributes = get_prop( $block, [ 'attrs' ], [] );
-		$tagName 	= strtoupper( get_prop( $attributes, [ 'tagName' ] ) );
+		$tagName 	= strtoupper( get_prop( $attributes, [ 'tagName' ], '' ) );
 		
 		$markup		= wecodeart( 'dom' )::processor( $content );
 

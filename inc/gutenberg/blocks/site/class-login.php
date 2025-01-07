@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.1.8
- * @version		6.4.5
+ * @version		6.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -120,6 +120,7 @@ class Login extends Dynamic {
 		if( $contents->next_tag( [ 'tag_name' => 'a' ] ) ) {
 			// Is this a button?
 			$contents->add_class( in_array( 'wp-block-button', $classNames, true ) ? 'wp-element-button' : 'nav-link' );
+			$contents->set_attribute( 'title', is_user_logged_in() ? esc_attr__( 'Logout', 'wecodeart' ) : esc_attr__( 'Login', 'wecodeart' ) );
 		}
 		$contents = $contents->get_updated_html();
 

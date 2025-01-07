@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.9
+ * @version		6.5.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -180,7 +180,7 @@ class Link extends Dynamic {
 				$type = 'header';
 
 				if( ! in_array( $class, self::$loaded_classes, true ) ) {
-					$inline_styles .= <<<CSS
+					$styles .= <<<CSS
 						.wp-block-navigation-item .dropdown-header {
 							padding: var(--wp--dropdown-header-padding-y) var(--wp--dropdown-header-padding-x);
 							margin: 0;

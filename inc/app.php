@@ -208,7 +208,7 @@ return [
                 'description'   => esc_html__( 'Lightweight extension for enhancing our theme with options for cleaning wp_head of unnecesary stuff.', 'wecodeart' ),
                 'more'          => 'https://github.com/BicanMarianValeriu/wca-optimization/',
                 'source'        => 'github',
-                'version'       => '1.0.5',
+                'version'       => '1.0.6',
                 'destination'   => 'optimization',
                 'type'          => 'module',
             ],

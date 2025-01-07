@@ -1,3 +1,9 @@
+v6.5.8
+- Updated - Update modules to latest versions on theme update
+- Updated - Process directives for string rotator to avoid FOUC
+- Updated - core/loginout accesibility with title attribute for link
+- Fixed - core/navigation-link dropdown-header margin styles
+
 v6.5.7
 - Updated - Local romanian language
 - Updated - Bump Cookies module to 1.0.5 for some improvements

@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		6.2.8
- * @version		6.5.5
+ * @version		6.5.8
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -49,7 +49,7 @@ class Lightbox extends Base {
 				cursor: zoom-in;
 			}
 			
-			.wp-lightbox-container img:hover + button {
+			.wp-lightbox-container img:hover ~ button {
 				opacity: 1;
 			}
 			
