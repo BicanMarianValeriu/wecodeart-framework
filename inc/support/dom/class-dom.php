@@ -519,7 +519,9 @@ class DOM implements Integration {
 				$classes = explode( ' ', $args[0]['attrs']['class'] );
 				$comment = ( count( $classes ) > 0 ) ? $classes[0] : $args[0]['attrs']['class'];
 				$comment .= " @filter = `wecodeart/filter/wrappers/{$context}`";
-				$html .= "<!-- /.{$comment} -->";
+				if( function_exists( 'is_cart' ) && ! is_cart() ) {
+					$html .= "<!-- /.{$comment} -->";
+				}
 			}
 		}
 

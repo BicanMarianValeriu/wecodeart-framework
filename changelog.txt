@@ -1,3 +1,7 @@
+v6.5.9
+- Updated - Load everything on after_setup_theme to fix error_log regarding translations (after WP 6.7+)
+- Updated - minor corrections (DOM/sharing pattern)
+
 v6.5.8
 - Updated - Update modules to latest versions on theme update
 - Updated - Process directives for string rotator to avoid FOUC

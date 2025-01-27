@@ -223,6 +223,11 @@ button:where(:disabled, .disabled) {
   text-decoration: underline;
 }
 
+#wporg-pattern-preview {
+  margin-left: calc(-1 * var(--wp--style--root--padding-right)) !important;
+  margin-right: calc(-1 * var(--wp--style--root--padding-right)) !important;
+}
+
 :where(.theme-wecodeart) :where(.has-border-color, [style*=border-width]) {
   border-style: solid;
 }

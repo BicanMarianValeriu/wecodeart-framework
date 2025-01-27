@@ -355,48 +355,50 @@ function wecodeart_if( $parameters, $relation = 'AND' ) {
 /**
  * App Binding Functions
  */
-$theme  = wecodeart();
-$config = Config::get_config();
+add_action( 'after_setup_theme', static function () {
+    // Theme Vars
+    $theme  = wecodeart();
+    $config = Config::get_config();
 
-/**
- * Before Setup Hook
- *
- * @since   4.0.1
- */
-do_action( 'wecodeart/setup/before', $config );
-
-/**
- * Theme Setup
- */
-require_once( get_parent_theme_file_path( '/inc/alias.php' ) );
-require_once( get_parent_theme_file_path( '/inc/setup.php' ) );
-
-/**
- * After Setup Hook
- *
- * @since   4.0.1
- */
-do_action( 'wecodeart/setup/after', $theme );
-
-/**
- * Theme Load
- *
- * @since   4.0.9
- */
-$theme->load();
+    /**
+     * Before Setup Hook
+     *
+     * @since   4.0.1
+     */
+    do_action( 'wecodeart/setup/before', $config );
     
-/**
- * Theme Loaded Hook
- *
- * @since   4.0.9
- */
-do_action( 'wecodeart/theme/loaded', $theme );
+    /**
+     * Theme Setup
+     */
+    require_once( get_parent_theme_file_path( '/inc/alias.php' ) );
+    require_once( get_parent_theme_file_path( '/inc/setup.php' ) );
+    
+    /**
+     * After Setup Hook
+     *
+     * @since   4.0.1
+     */
+    do_action( 'wecodeart/setup/after', $theme );
+    
+    /**
+     * Theme Load
+     *
+     * @since   4.0.9
+     */
+    $theme->load();
+        
+    /**
+     * Theme Loaded Hook
+     *
+     * @since   4.0.9
+     */
+    do_action( 'wecodeart/theme/loaded', $theme );
+    
+    /**
+     * Load Support/Integrations
+     *
+     * @since   unknown
+     */
+    wecodeart( 'support' )->load();
 
-/**
- * Load Support/Integrations
- *
- * @since   unknown
- */
-wecodeart( 'support' )->load();
-
-return $theme;
+}, PHP_INT_MIN );
