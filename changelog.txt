@@ -1,3 +1,14 @@
+v6.6.0
+- Updated - some admin deprecation warnings in Scrolltop module (upgrade to 1.0.6)
+- Updated - some admin deprecation warnings in Cookies module (upgrade to 1.0.6)
+- Fixed - core/post-title markup to used wecodeart( 'dom' ) (rewriting render not necessary anymore)
+- Fixed - core/post-excerpt markup to used wecodeart( 'dom' ) (rewriting render not necessary anymore)
+- Fixed - core/post-content vs the_post() issue
+- Fixed - an issue with empty links on Optimization module / add new data-id attribute check (upgrade to v1.0.7)
+- Fixed - an issue with assets registration for Accordion module (upgrade to v1.0.6)
+- Fixed - an accesibility issue with focus on OffCanvas's Interactivity API
+- Fixed - an accesibility issue with focus on Modal's Interactivity API
+
 v6.5.9
 - Updated - Load everything on after_setup_theme to fix error_log regarding translations (after WP 6.7+)
 - Updated - minor corrections (DOM/sharing pattern)

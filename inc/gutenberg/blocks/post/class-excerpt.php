@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.1
+ * @version		6.6.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -45,77 +45,37 @@ class Excerpt extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 1 );
 		\add_filter( 'excerpt_length', [ $this, 'filter_length' ] );
 	}
 
 	/**
-	 * Block args.
+	 * Dynamically renders the `core/post-content` block.
 	 *
-	 * @return 	array
-	 */
-	public function block_type_args(): array {
-		return [
-			'render_callback' => [ $this, 'render' ]
-		];
-	}
-
-	/**
-	 * Dynamically renders the `core/post-excerpt` block.
-	 *
-	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
-		if ( ! isset( $block->context['postId'] ) ) {
-			return '';
+	public function render( string $content = '' ): string {
+		$content = wecodeart( 'dom' )::processor( $content );
+			
+		if( $content->next_tag( [
+			'class_name' => 'wp-block-post-excerpt__excerpt'
+		] ) ) {
+			$content->remove_class( 'wp-block-post-excerpt__excerpt' );
+			$content->add_class( 'wp-block-post-excerpt__text' );
+		}
+		
+		if( $content->next_tag( [
+			'class_name' => 'wp-block-post-excerpt__more-text'
+		] ) ) {
+			$content->remove_class( 'wp-block-post-excerpt__more-text' );
+			$content->add_class( 'wp-block-post-excerpt__more' );
 		}
 
-		$post_id = $block->context['postId'];
+		$content = $content->get_updated_html();
 
-		$excerpt = get_the_excerpt( $post_id );
-
-		$more_text = wecodeart( 'dom' )::wrap( 'entry-more', [
-			[
-				'tag' 	=> 'a',
-				'attrs' => [
-					'class' => 'wp-block-post-excerpt__more-btn',
-					'href'	=> esc_url( get_the_permalink( $post_id ) ),
-				]
-			]
-		], function( $attributes, $key, $default ) {
-			echo wp_kses_post( get_prop( $attributes, $key, $default ) );
-		}, [ $attributes, 'moreText', '' ], false );
-
-		$filter_excerpt_more = function( $more ) use ( $more_text ) {
-			return empty( $more_text ) ? $more : '';
-		};
-
-		add_filter( 'excerpt_more',		$filter_excerpt_more );
-		$html	= '<p class="wp-block-post-excerpt__text">' . $excerpt;
-		if ( get_prop( $attributes, 'showMoreOnNewLine', false ) && ! empty( $more_text ) ) {
-			$html .= '</p><p class="wp-block-post-excerpt__more">' . $more_text . '</p>';
-		} else {
-			$html .= " $more_text</p>";
-		}
-		remove_filter( 'excerpt_more',	$filter_excerpt_more );
-
-		$classnames = [];
-
-		if( $value = get_prop( $attributes, 'textAlign' ) ) {
-			$classnames[] = 'has-text-align-' . $value;
-		}
-
-		return wecodeart( 'dom' )::wrap( 'wp-block-post-excerpt', [
-			[
-				'tag' 	=> 'div',
-				'attrs' => $this->get_block_wrapper_attributes( [
-					'class' => join( ' ', $classnames )
-				] )
-			]
-		], $html, [], false );
+		return $content;
 	}
 
 	/**

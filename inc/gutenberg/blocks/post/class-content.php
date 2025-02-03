@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.5
+ * @version		6.6.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -45,75 +45,31 @@ class Content extends Dynamic {
 	 * Init.
 	 */
 	public function init() {
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 1 );
         \add_filter( 'wp_link_pages_link',	[ $this, 'wp_link_pages_link' 	] );
 		\add_filter( 'wp_link_pages_args',	[ $this, 'wp_link_pages_args' 	] );
 		\add_filter( 'the_password_form',	[ $this, 'the_password_form' 	] );
 	}
 
 	/**
-	 * Block args.
-	 *
-	 * @return 	array
-	 */
-	public function block_type_args(): array {
-		return [
-			'render_callback' => [ $this, 'render' ]
-		];
-	}
-
-	/**
 	 * Dynamically renders the `core/post-content` block.
 	 *
-	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
-		static $seen_ids = array();
-
-		if ( ! isset( $block->context['postId'] ) ) {
-			return '';
+	public function render( string $content = '' ): string {
+		$content = wecodeart( 'dom' )::processor( $content );
+			
+		if( $content->next_tag( [
+			'class_name' => 'entry-content'
+		] ) ) {
+			$content->remove_class( 'entry-content' );
 		}
 
-		$post_id = $block->context['postId'];
+		$content = $content->get_updated_html();
 
-		if ( isset( $seen_ids[ $post_id ] ) ) {
-			$is_debug = defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY;
-
-			return $is_debug ? esc_html__( '[block rendering halted]', 'wecodeart' ) : '';
-		}
-
-		$seen_ids[ $post_id ] = true;
-
-		if ( ! in_the_loop() && have_posts() ) {
-			the_post();
-		}
-
-		$content = get_the_content();
-
-		// Check for nextpage to display page links for paginated posts.
-		if ( has_block( 'core/nextpage' ) ) {
-			$content .= wp_link_pages( [ 'echo' => 0 ] );
-		}
-		
-		/**
-		 * This filter is documented in wp-includes/post-template.php 
-		 */
-		$content = apply_filters( 'the_content', str_replace( ']]>', ']]&gt;', $content ) );
-		unset( $seen_ids[ $post_id ] );
-
-		if ( empty( $content ) ) {
-			return '';
-		}
-
-		return wecodeart( 'dom' )::wrap( 'wp-block-post-content', [
-			[
-				'tag' 	=> 'div',
-				'attrs' => $this->get_block_wrapper_attributes()
-			]
-		], $content, [], false );
+		return $content;
 	}
 
     /**

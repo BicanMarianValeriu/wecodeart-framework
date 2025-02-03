@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.0.0
+ * @version		6.6.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -42,65 +42,34 @@ class Title extends Dynamic {
 	protected $block_name = 'post-title';
 
 	/**
-	 * Block args.
-	 *
-	 * @return 	array
+	 * Init.
 	 */
-	public function block_type_args(): array {
-		return [
-			'render_callback' => [ $this, 'render' ]
-		];
+	public function init() {
+		\add_filter( 'render_block_' . $this->get_block_type(), [ $this, 'render' ], 20, 2 );
 	}
 
 	/**
-	 * Dynamically renders the `core/post-title` block.
+	 * Dynamically renders the `core/post-content` block.
 	 *
-	 * @param 	array 	$attributes	The attributes.
 	 * @param 	string 	$content 	The block markup.
-	 * @param 	string 	$block 		The block data.
+	 * @param 	array 	$block 		The block.
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
-		if ( ! isset( $block->context['postId'] ) ) {
-			return '';
+	public function render( string $content = '', $block = null ): string {
+		if ( get_prop( $block, [ 'attrs', 'isLink' ] ) ) {
+			$content = wecodeart( 'dom' )::processor( $content );
+
+			if( $content->next_tag( [
+				'tag_name' 	=> 'A',
+			] ) ) {
+				$content->add_class( 'wp-block-post-title__link' );
+			}
+
+			$content = $content->get_updated_html();
 		}
 
-		$tag_name	= 'h2';
-		if ( $value = get_prop( $attributes, 'level', false ) ) {
-			$tag_name = 0 === $value ? 'p' : 'h' . $value;
-		}
-
-		$classnames = [];
-
-		// Fix Post Title text align
-		if( $value = get_prop( $attributes, 'textAlign', false ) ) {
-			$classnames[] = 'has-text-align-' . $value;
-		}
-
-		$wrappers = [
-			[
-				'tag' 	=> $tag_name,
-				'attrs' => $this->get_block_wrapper_attributes( [
-					'class' => join( ' ', $classnames )
-				] )
-			]
-		];
-
-		if( get_prop( $attributes, 'isLink', false ) ) {
-			$wrappers[] = [
-				'tag' 	=> 'a',
-				'attrs' => [
-					'class'		=> 'wp-block-post-title__link',
-					'target' 	=> get_prop( $attributes, 'linkTarget' ),
-					'href'		=> get_permalink( $block->context['postId'] )
-				]
-			];
-		}
-
-		return wecodeart( 'dom' )::wrap( 'wp-block-post-title', $wrappers, function( $id ) {
-			echo get_the_title( $id );
-		}, [ $block->context['postId'] ], false );
+		return $content;
 	}
 
 	/**
@@ -113,7 +82,7 @@ class Title extends Dynamic {
 			.wp-block-post-title {
 				word-break: break-word;
 			}
-			.wp-block-post-title a {
+			.wp-block-post-title__link {
 				display: inline-block;
 			}
 		CSS;

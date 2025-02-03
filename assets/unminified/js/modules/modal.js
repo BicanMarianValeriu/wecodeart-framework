@@ -110,7 +110,8 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             context.isOpen = false;
             context.isTransitioning = true;
             context._focustrap.deactivate();
-
+            
+            relatedElement.blur();
             relatedElement.classList.remove(CLASS_NAME_SHOW);
             executeAfterTransition(() => callbacks.onHide(context), relatedElement, callbacks.isAnimated(context));
         },

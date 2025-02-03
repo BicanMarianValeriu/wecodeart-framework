@@ -105,9 +105,9 @@ const { state, actions, callbacks } = store(NAMESPACE, {
 
             const { classes } = state;
 
-            context._focustrap.deactivate();
             relatedElement.blur();
             relatedElement.classList.add(classes?.hiding);
+            context._focustrap.deactivate();
             context._backdrop.hide();
 
             callbacks.onHide(relatedElement);
