@@ -256,7 +256,7 @@ wecodeart()->bind( 'layout', function ( WeCodeArt $theme, $parameters ) {
             default: 
                 return is_callable( $partial ) && call_user_func( $partial );
         }
-    }, array_keys( $parameters ) );
+    }, array_values( $parameters ) );
     
     $inner = ob_get_clean();
 

@@ -31,7 +31,7 @@ class Content {
 	 * @since 3.6.2
 	 */
 	public function init() {
-		add_action( 'wecodeart/content',	[ $this, 'markup' ] );
+		add_action( 'wecodeart/content', [ $this, 'markup' ] );
 	}
 
 	/**

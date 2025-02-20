@@ -9,7 +9,7 @@
  * @subpackage 	Support\Modules
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.2.9
- * @version		6.3.7
+ * @version		6.6.1
  */
 
 namespace WeCodeArt\Support;
@@ -144,11 +144,15 @@ final class Modules implements Integration {
 	 * Upgrade modules with theme.
 	 *
 	 * @since   6.3.1
-	 * @version	6.3.5
+	 * @version	6.6.1
 	 *
 	 * @return 	void
 	 */
 	public function update_modules(): void {
+		// Check for updates after theme update.
+		$this->check_updates();
+
+		// Update modules.
 		Module\Ajax::install( wecodeart_option( 'modules', [] ) );
 	}
 }

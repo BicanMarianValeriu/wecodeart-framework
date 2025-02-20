@@ -1,3 +1,16 @@
+v6.6.1
+- Removed - old render_block_core/template-part filter for footer shortcodes ([year][copy])
+- Removed - theme from template part rendering in wecodeart( 'layout' ) so it renders current theme header/footer
+- Updated - bump dark.json style api version to 3 (was 2 previously)
+- Updated - code cleanup on core/media-text and core/cover blocks
+- Updated - minor updates to Cookies, Optimization & Google Translate modules (bump modules versions)
+- Updated - Template.renderToString() method to support fallback with {{ author.role|guest }} syntax
+- Updated - Block dynamic css class is now applied if there is a style attribute or customStyle
+- Updated - Modules will be checked for updates after theme update
+- Added - add extra properties for safe_style_css filter
+- Fixed - an issue with JavaScript Template.renderToString() method
+- Fixed - an issue with wecodeart( 'layout' ) used to render PHP templates
+
 v6.6.0
 - Updated - some admin deprecation warnings in Scrolltop module (upgrade to 1.0.6)
 - Updated - some admin deprecation warnings in Cookies module (upgrade to 1.0.6)

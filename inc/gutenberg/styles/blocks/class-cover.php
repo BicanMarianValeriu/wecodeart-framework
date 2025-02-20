@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.6.1
  */
 
 namespace WeCodeArt\Gutenberg\Styles\Blocks;
@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Gutenberg\Styles;
 use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
-// use function WeCodeArt\Functions\get_placeholder_source;
 
 /**
  * Block CSS Processor
@@ -33,66 +32,15 @@ class Cover extends Processor {
 	protected function process_style(): void {		
 		// Block Attributes
 		$declarations	= [];
-		$has_parallax	= get_prop( $this->attrs, 'hasParallax' );
 
 		if ( $value = get_prop( $this->attrs, 'minHeight' ) ) {
 			$declarations['min-height'] = $value . get_prop( $this->attrs, 'minHeightUnit', 'px' );
 		}
 			
-		// Background image 
-		// if ( $value = get_prop( $this->attrs, 'url' ) ) {
-		// 	$declarations['background-image'] = ( new Background( $value ) )->get_value();
-		// }
-
-		// if( get_prop( $this->attrs, 'useFeaturedImage' ) ) {
-		// 	$placeholder	= get_prop( wecodeart_config( 'placeholder', [] ), [ 'src' ], '' );
-		// 	$background		= wecodeart( 'styles' )->Sanitize::background( get_post_thumbnail_id() ?: $placeholder );
-
-		// 	// Temporary as safecss_filter_attr does not allow data urls.
-		// 	$handle = 'wp-style-engine-' . Styles::CONTEXT;
-		// 	$style 	= $this->get_selector() . '{background-image:' . $background . '}';
-		// 	add_action( 'wp_enqueue_scripts', static fn() => wp_add_inline_style( $handle, $style ) );
-		// }
-		
-		$this->add_declarations( $declarations );
-
-		// Overlay solid color
-		// if ( $value = get_prop( $this->attrs, 'customOverlayColor' ) ) {
-		// 	$this->add_declarations( [
-		// 		'background-color' => $value
-		// 	], $this->get_selector( '>.wp-block-cover__background' ) );
-		// }
-
-		// // Overlay gradient
-		// if ( $value = get_prop( $this->attrs, 'customGradient' ) ) {
-		// 	$this->add_declarations( [
-		// 		'background-image' => $value
-		// 	], $this->get_selector( '>.wp-block-cover__background' ) );
-		// }
-
-		// // Focal Selector
-		// if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
-		// 	$this->add_declarations( [
-		// 		'object-position' => wecodeart( 'styles' )->Sanitize::focal( $value );
-		// 	], join( ', ', [
-		// 		$this->get_selector( '>.wp-block-cover__image-background' ),
-		// 		$this->get_selector( '>.wp-block-cover__video-background' )
-		// 	] ) );
-		// }
+		if( ! empty( $declarations ) ) {
+			$this->add_declarations( $declarations );
+		}
 
 		parent::process_style();
-	}
-
-	/**
-	 * Additional selectors to remove styles from.
-	 *
-	 * @return 	array
-	 */
-	// public function remove_style(): array {
-	// 	return [
-	// 		[ 'class_name' => 'wp-block-cover__background' ],
-	// 		[ 'class_name' => 'wp-block-cover__image-background' ],
-	// 		[ 'class_name' => 'wp-block-cover__video-background' ]
-	// 	];
-	// }
+	} 
 }

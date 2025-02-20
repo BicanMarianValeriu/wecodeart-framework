@@ -67,23 +67,12 @@ export default (function (wecodeart) {
 		 *
 		 * @return 	{string}
 		 */
-		static renderToString(string = '', variables = {}) {
-			const destruct = (obj, v) => v.split(/\.|\|/).reduce((v, k) => v?.[k], obj); // Multiple
-			const rxp = /{{([^}]+)}}/g;
-			let match;
-
-			while ((match = rxp.exec(string))) {
-				const expression = match[1];
-				const value = destruct(variables, expression.trim());
-
-				if (value === undefined) {
-					continue;
-				}
-
-				string = string.replace(new RegExp(`{{${expression}}}`, 'g'), value);
-			}
-
-			return string;
+		static renderToString(s = '', v = {}) {
+			return s.replace(/{{([^}]+)}}/g, (_, k) => {
+				let [path, fallback] = k.trim().split(/\s*\|\s*/); // Split on "|"
+				let value = path.split('.').reduce((a, b) => a?.[b], v);
+				return value ?? fallback ?? `{{${k}}}`; // Use fallback or keep original placeholder
+			});
 		}
 
 		/**

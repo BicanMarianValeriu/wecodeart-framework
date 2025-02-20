@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.3.7
+ * @version		6.6.1
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -80,14 +80,14 @@ class Styles implements Configuration {
 
 		// Hooks
         add_filter( 'should_load_separate_core_block_assets', '__return_true', PHP_INT_MAX );
+		add_filter( 'safe_style_css', 				[ $this, 'safe_style_css' 		], 20, 1 );
 		add_action( 'enqueue_block_editor_assets',	[ $this, 'block_editor_assets' 	], 20, 1 );
 		add_filter( 'render_block',					[ $this, 'filter_render' 		], 20, 2 );
 		
-		// Eventually it will be removed - 1 check since they are all from GB.
-		if( function_exists( 'gutenberg_render_duotone_support' ) ) {
+		if( defined( 'GUTENBERG_VERSION' ) ) {
 			// Gutenberg plugin removes styles and adds them in footer - we dont want that.
-			add_action( 'wp_enqueue_scripts', 'wp_enqueue_stored_styles', PHP_INT_MAX ); // Temporary
-			add_action( 'wp_footer', 'wp_enqueue_stored_styles', 1 ); // Temporary.
+			add_action( 'wp_enqueue_scripts', 	'wp_enqueue_stored_styles', PHP_INT_MAX );
+			add_action( 'wp_footer', 			'wp_enqueue_stored_styles', 1 );
 		}
 	}
 
@@ -147,11 +147,11 @@ class Styles implements Configuration {
 		$has_support 	= block_has_support( $block_type, '__experimentalStyles', false );
 
 		// To be implemented when we have dimensions / other styles
-		// $has_styles_1	= get_prop( $block, [ 'attrs', 'style' ] );
-		// $has_styles_2	= get_prop( $block, [ 'attrs', 'customStyle' ] );
+		$has_styles_1	= get_prop( $block, [ 'attrs', 'style' ] );
+		$has_styles_2	= get_prop( $block, [ 'attrs', 'customStyle' ] );
 
 		// Remove styles, where needed.
-		if ( $has_support ) {
+		if ( $has_support && ( $has_styles_1 || $has_styles_2 ) ) {
 			// Process a block
 			$processed 	= $this->process_block( $block );
 			$content 	= wecodeart( 'dom' )::processor( $content );
@@ -193,6 +193,42 @@ class Styles implements Configuration {
 		}
 		
 		return ( new $classname( $block ) );
+	}
+
+	/**
+	 * Safe styles.
+	 *
+	 * @param 	array 	$properties.
+	 *
+	 * @return 	array
+	 */
+	public function safe_style_css( array $properties = [] ): array {
+		return array_merge( [
+			'-webkit-text-stroke',
+			'text-shadow',
+			'word-spacing',
+			'white-space',
+			'overflow-wrap',
+			'hyphens',
+			'text-overflow',
+			'font-kerning',
+			'transition',
+			'transition-duration',
+			'transition-property',
+			'transition-timing-function',
+			'animation',
+			'animation-name',
+			'animation-duration',
+			'animation-timing-function',
+			'animation-delay',
+			'animation-iteration-count',
+			'animation-direction',
+			'backdrop-filter',
+			'mix-blend-mode',
+			'clip-path',
+			'mask',
+			'aspect-ratio'
+		], $properties );
 	}
 	
     /**

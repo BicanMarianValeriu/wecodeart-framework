@@ -9,7 +9,7 @@
  * @subpackage 	Core\Footer
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		3.5
- * @version		6.4.5
+ * @version		6.6.1
  */
 
 namespace WeCodeArt\Core;
@@ -32,54 +32,24 @@ class Footer {
 	 * Send to Constructor
 	 */
 	public function init() {
-		\add_action( 'wecodeart/footer',				[ $this, 'markup' ] );
-		\add_filter( 'render_block_core/template-part',	[ $this, 'footer_shortcodes'	], 10, 2 );
+		\add_action( 'wecodeart/footer', [ $this, 'markup' ] );
 	}
 	
 	/**
 	 * Output FOOTER markup function Plugin PHP fallback
 	 * 
 	 * @since 	1.0
-	 * @version	6.4.5
+	 * @version	6.6.1
 	 *
 	 * @return 	string 
 	 */
 	public static function markup( $args = [] ) {
-		$args 	= wp_parse_args( $args, [
-			'theme' 	=> wecodeart( 'name' ),
+		$args 	= wp_json_encode( wp_parse_args( $args, [ 
 			'slug' 		=> 'footer',
 			'tagName' 	=> 'footer',
 			'className' => 'wp-site-footer'
-		] );
+		] ) );
 
-		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '"} /-->';
-
-		echo do_blocks( $content ); 
-	}
-
-	/**
-	 * Dynamically renders the footer `core/template-part` block to insert some shortcodes.
-	 *
-	 * @param 	string 	$content 	The block markup.
-	 * @param 	array 	$block 		The parsed block.
-	 *
-	 * @return 	string 	The block markup.
-	 */
-	public function footer_shortcodes( $content = '', $block = [], $data = null ) {
-		$is_footer = get_prop( $block, [ 'attrs', 'tagName' ], '' );
-
-		if( strtolower( $is_footer ) === 'footer' ) {
-			$content = str_replace( [
-				'[copy]',
-				'[year]',
-				'[theme]',
-			], [
-				'&copy;',
-				date( 'Y' ),
-				sprintf( '<a href="%s" target="_blank">%s</a>', 'https://www.wecodeart.com/', 'WeCodeArt Framework' )
-			], $content );
-		}
-
-		return $content;
+		echo do_blocks( sprintf( '<!-- wp:template-part %s /-->', $args ) );
 	}
 }

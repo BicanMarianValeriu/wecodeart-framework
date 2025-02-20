@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.5.6
+ * @version		6.6.1
  */
 
 namespace WeCodeArt\Gutenberg\Styles\Blocks;
@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Styles\Processor;
 use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_placeholder_source;
 
 /**
  * Block CSS Processor
@@ -41,45 +40,10 @@ class Media extends Processor {
 			] );
 		}
 
-		// Handle media image if is used as column filler
-		if( get_prop( $this->attrs, 'mediaType' ) === 'image' ) {
-			if( get_prop( $this->attrs, 'imageFill' ) ) {
-				if ( $value = get_prop( $this->attrs, 'mediaId' ) ) {
-					if( $media = wp_get_attachment_image_url( $value, get_prop( $this->attrs, 'mediaSizeSlug', 'full' ) ) ) {
-						$declarations['background-image'] = wecodeart( 'styles' )->Sanitize::background( $value );
-						// Fallback to WP.org patterns (however some of them have wp.org page url instead of a media file)
-					} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
-						$declarations['background-image'] = wecodeart( 'styles' )->Sanitize::background( $value );
-					}
-				} elseif ( $value = get_prop( $this->attrs, 'mediaLink' ) ) {
-					$declarations['background-image'] = wecodeart( 'styles' )->Sanitize::background( $value );
-				}
-		
-				if ( $value = get_prop( $this->attrs, 'focalPoint' ) ) {
-					$declarations['background-position'] = wecodeart( 'styles' )->Sanitize::focal( $value );
-				}
-			}
-		}
-		
-		if( get_prop( $this->attrs, 'imageFill' ) && ! get_prop( $this->attrs, 'mediaLink' ) ) {
-			$declarations['background-image'] = wecodeart( 'styles' )->Sanitize::background( get_placeholder_source( false ) );
-		}
-
 		if( ! empty( $declarations ) ) {
 			$this->add_declarations( $declarations, $selector );
 		}
 
 		parent::process_style();
-	}
-
-	/**
-	 * Additional selectors to remove styles from.
-	 *
-	 * @return 	array
-	 */
-	public function remove_style(): array {
-		return [ 
-			[ 'tag_name' => 'figure' ]
-		];
 	}
 }

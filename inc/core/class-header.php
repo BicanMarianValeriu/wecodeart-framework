@@ -9,7 +9,7 @@
  * @subpackage 	Header Class
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		3.5
- * @version		6.4.5
+ * @version		6.6.1
  */
 
 namespace WeCodeArt\Core;
@@ -41,21 +41,24 @@ class Header {
 	 * Output HEADER markup function Plugin PHP fallback
 	 *
 	 * @since 	unknown
-	 * @version	6.4.5
+	 * @version	6.6.1
 	 *
 	 * @return 	string 
 	 */
 	public static function markup( $args = [] ) {
-		$args 	= wp_parse_args( $args, [
-			'theme' 	=> wecodeart( 'name' ),
+		$args 	= wp_json_encode( wp_parse_args( $args, [
 			'slug' 		=> 'header',
 			'tagName' 	=> 'header',
-			'className'	=> 'wp-site-header'
-		] );
+			'className'	=> 'wp-site-header',
+			'style'		=> [
+				'position' => [
+					'type' => 'sticky',
+					'top'  => '0px'
+				]
+			]
+		] ) );
 
-		$content = '<!-- wp:template-part {"slug":"' . $args['slug'] . '","tagName":"' . $args['tagName'] . '","className":"' . $args['className'] . '","theme":"' . $args['theme'] . '","style":{"position":{"type":"sticky","top":"0px"}}} /-->';
-
-		echo do_blocks( $content );
+		echo do_blocks( sprintf( '<!-- wp:template-part %s /-->', $args ) );
 	}
 
 	/**

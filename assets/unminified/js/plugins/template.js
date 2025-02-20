@@ -164,7 +164,7 @@ function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!****************************************************!*\
   !*** ./src/js/frontend/plugins/Plugin-Template.js ***!
@@ -242,19 +242,13 @@ const DefaultContentType = {
      *
      * @return 	{string}
      */
-    static renderToString(string = '', variables = {}) {
-      const destruct = (obj, v) => v.split(/\.|\|/).reduce((v, k) => v?.[k], obj); // Multiple
-      const rxp = /{{([^}]+)}}/g;
-      let match;
-      while (match = rxp.exec(string)) {
-        const expression = match[1];
-        const value = destruct(variables, expression.trim());
-        if (value === undefined) {
-          continue;
-        }
-        string = string.replace(new RegExp(`{{${expression}}}`, 'g'), value);
-      }
-      return string;
+    static renderToString(s = '', v = {}) {
+      return s.replace(/{{([^}]+)}}/g, (_, k) => {
+        var _ref;
+        let [path, fallback] = k.trim().split(/\s*\|\s*/); // Split on "|"
+        let value = path.split('.').reduce((a, b) => a?.[b], v);
+        return (_ref = value !== null && value !== void 0 ? value : fallback) !== null && _ref !== void 0 ? _ref : `{{${k}}}`; // Use fallback or keep original placeholder
+      });
     }
 
     /**
