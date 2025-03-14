@@ -38,8 +38,8 @@ const addAttributes = (props) => {
  */
 const withInspectorControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const { name } = props;
-		if (hasBlockSupport(name, '__experimentalStyles')) {
+		const { name, isSelected } = props;
+		if (isSelected && hasBlockSupport(name, '__experimentalStyles')) {
 			return (
 				<>
 					<BlockEdit {...props} />

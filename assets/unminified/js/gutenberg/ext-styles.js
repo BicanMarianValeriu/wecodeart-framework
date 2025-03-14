@@ -1,16 +1,19 @@
-/******/ (function() { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/js/gutenberg/extensions/with-styles/Editor.js":
 /*!***********************************************************!*\
   !*** ./src/js/gutenberg/extensions/with-styles/Editor.js ***!
   \***********************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 
 /**
  * WordPress dependencies.
@@ -30,13 +33,11 @@ const {
     Dashicon
   }
 } = wp;
-const CSSEditor = _ref => {
-  let {
-    attributes,
-    setAttributes
-  } = _ref;
+const CSSEditor = ({
+  attributes,
+  setAttributes
+}) => {
   const {
-    customCSS,
     customStyle
   } = attributes;
   const editorRef = useRef(null);
@@ -44,8 +45,8 @@ const CSSEditor = _ref => {
   const defaultValue = 'selector {\n}\n';
   useEffect(() => {
     customStyleRef.current = defaultValue;
-    if (customStyle || customCSS) {
-      customStyleRef.current = customStyle || customCSS;
+    if (customStyle) {
+      customStyleRef.current = customStyle;
     }
     editorRef.current = wp.CodeMirror(document.getElementById('wecodeart-css-editor'), {
       value: customStyleRef.current,
@@ -70,50 +71,62 @@ const CSSEditor = _ref => {
       // Deprecate old attribute naming
       if (defaultValue.replace(/\s+/g, '') === customStyleRef.current.replace(/\s+/g, '')) {
         return setAttributes({
-          customStyle: null,
-          customCSS: null
+          customStyle: null
         });
       }
       setAttributes({
-        customStyle: customStyleRef.current,
-        customCSS: null
+        customStyle: customStyleRef.current
       });
     });
   }, []);
   const DescriptionPopover = () => {
     const [isVisible, setIsVisible] = useState(false);
     const toggleVisible = () => setIsVisible(state => !state);
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
-      icon: "info-outline",
-      style: {
-        marginLeft: 'auto',
-        cursor: 'pointer'
-      },
-      onClick: toggleVisible
-    }), isVisible && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Popover, {
-      placement: "top-end"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      style: {
-        padding: '.5rem 1rem'
-      }
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, sprintf(__('Use %s to target the block CSS class.', 'wecodeart'), '"selector"')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", null, 'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'))));
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+        icon: "info-outline",
+        style: {
+          marginLeft: 'auto',
+          cursor: 'pointer'
+        },
+        onClick: toggleVisible
+      }), isVisible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Popover, {
+        placement: "top-end",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+          style: {
+            padding: '.5rem 1rem'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+            children: sprintf(__('Use %s to target the block CSS class.', 'wecodeart'), '"selector"')
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("pre", {
+            children: 'selector {\n    background: #000;\n}\n\nselector img {\n    border-radius: 100%;\n}'
+          })]
+        })
+      })]
+    });
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "wecodeart-advanced-css"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    class: "wecodeart-advanced-css__title",
-    style: {
-      display: 'flex',
-      fontSize: '11px',
-      fontWeight: '500',
-      textTransform: 'uppercase'
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, __('Additional custom CSS', 'wecodeart')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(DescriptionPopover, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "wecodeart-advanced-css__editor",
-    id: "wecodeart-css-editor"
-  })));
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      class: "wecodeart-advanced-css",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+        class: "wecodeart-advanced-css__title",
+        style: {
+          display: 'flex',
+          fontSize: '11px',
+          fontWeight: '500',
+          textTransform: 'uppercase'
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+          children: __('Additional custom CSS', 'wecodeart')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(DescriptionPopover, {})]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: "wecodeart-advanced-css__editor",
+        id: "wecodeart-css-editor"
+      })]
+    })
+  });
 };
-/* harmony default export */ __webpack_exports__["default"] = (CSSEditor);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CSSEditor);
 
 /***/ }),
 
@@ -121,7 +134,7 @@ const CSSEditor = _ref => {
 /*!*************************************************************!*\
   !*** ./src/js/gutenberg/extensions/with-styles/injector.js ***!
   \*************************************************************/
-/***/ (function() {
+/***/ (() => {
 
 /**
  * WordPress dependencies.
@@ -138,91 +151,142 @@ const {
     subscribe
   }
 } = wp;
-const {
-  flattenDeep
-} = lodash;
-const addStyle = style => {
-  let element = document.getElementById('wecodeart-blocks-dynamic-styles');
-  if (null === element) {
-    element = document.createElement('style');
-    element.setAttribute('type', 'text/css');
-    element.setAttribute('id', 'wecodeart-blocks-dynamic-styles');
-    document.getElementsByTagName('head')[0].appendChild(element);
+
+/**
+ * Updates the style element in the editor iframe with the dynamic styles of the page.
+ * When updating the styles, it tries to use CSSOM to efficiently update the styles.
+ * If CSSOM is not supported, it falls back to setting the inner text of the style element.
+ * @param {HTMLHeadElement} iframeHead The head of the iframe in which to update the style element.
+ * @param {string} finalStyle The final dynamic styles to be inserted into the style element.
+ */
+const updateStyleElement = (iframeHead, finalStyle) => {
+  let styleElement = iframeHead.querySelector('#wecodeart-blocks-dynamic-styles');
+
+  // If style element does not exist, create it
+  if (!styleElement) {
+    styleElement = document.createElement('style');
+    styleElement.setAttribute('id', 'wecodeart-blocks-dynamic-styles');
+    iframeHead.appendChild(styleElement);
   }
-  if (element.textContent === style) {
-    return null;
+  if (styleElement.textContent !== finalStyle) {
+    styleElement.textContent = finalStyle;
   }
-  return element.textContent = style;
 };
-const getCustomStyleFromBlocks = (blocks, reusableBlocks) => {
-  if (!blocks) {
-    return '';
+
+/**
+ * Recursively gets all child blocks from a given block.
+ *
+ * @param {Object} block - The block object.
+ * @return {Array} An array of the block and its children.
+ */
+const getChildrenFromBlock = block => {
+  return block.innerBlocks?.flatMap(child => [child, ...getChildrenFromBlock(child)]) || [];
+};
+
+/**
+ * Recursively matches parsed reusable blocks and inner blocks to actual DOM elements using index.
+ *
+ * @param {HTMLElement} reusableElement - The parent reusable block element.
+ * @param {Array} parsedBlocks - The parsed inner blocks from reusable block content.
+ * @return {Array} Blocks with correct clientIds assigned.
+ */
+const matchBlocksByIndex = (reusableElement, parsedBlocks) => {
+  if (!reusableElement || !parsedBlocks.length) {
+    return parsedBlocks;
   }
+  const childElements = reusableElement.querySelectorAll('.wp-block[data-block]');
+  return parsedBlocks.map((block, index) => {
+    const childElement = childElements[index];
+    if (childElement) {
+      block.clientId = childElement.getAttribute('data-block');
 
-  // Return the children of the block. The result is an array deeply nested that match the structure of the block in the editor.
-  const getChildrenFromBlock = block => {
-    const childrends = [];
-    if ('core/block' === block.name && null !== reusableBlocks) {
-      const reBlocks = reusableBlocks.find(i => block.attributes.ref === i.id);
-      if (reBlocks && reBlocks.content) {
-        childrends.push(parse(reBlocks.content.raw || reBlocks.content).map(child => [child, getChildrenFromBlock(child)]));
+      // Recursively match inner blocks
+      if (block.innerBlocks?.length > 0) {
+        block.innerBlocks = matchBlocksByIndex(childElement, block.innerBlocks);
       }
-      ;
     }
-    if (undefined !== block.innerBlocks && 0 < block.innerBlocks.length) {
-      childrends.push(block.innerBlocks.map(child => [child, getChildrenFromBlock(child)]));
-    }
-    return childrends;
-  };
+    return block;
+  });
+};
 
-  // Get all the blocks and their children
-  const allBlocks = blocks.map(block => [block, getChildrenFromBlock(block)]);
-
-  // Transform the deply nested array in a simple one and then get the `customStyle` value where it is the case
-  const extractCustomStyle = flattenDeep(allBlocks).map(block => {
-    const {
-      attributes: {
-        customCSS = null,
-        customStyle = customCSS
-      } = {},
-      clientId
-    } = block;
-    if (customStyle) {
-      return customStyle.replace(new RegExp('selector', 'g'), `.wp-block[data-block="${clientId}"]`) + '\n';
+/**
+ * Extracts and generates CSS styles from blocks, replacing `selector` with `data-block` attributes.
+ *
+ * @param {Array} blocks - The array of block objects.
+ * @return {string} The generated global style string.
+ */
+const getCustomStyleFromBlocks = blocks => {
+  const allBlocks = blocks.flatMap(block => [block, ...getChildrenFromBlock(block)]);
+  const extractCustomStyle = allBlocks.map(({
+    attributes: {
+      customStyle
+    } = {},
+    clientId
+  }) => {
+    if (customStyle && clientId) {
+      return customStyle.replace(/selector/g, `.wp-block[data-block="${clientId}"]`) + '\n';
     }
     return '';
   });
-
-  // Build the global style
-  const style = extractCustomStyle.reduce((acc, localStyle) => acc + localStyle, '');
-
-  // For debugging
-  // console.log( 'Get all the block', allBlocks );
-  // console.log( 'Extract customStyle', extractCustomStyle );
-  // console.log( 'Final Result\n', style );
-
-  return style;
+  return extractCustomStyle.filter(Boolean).join('');
 };
+
+/**
+ * Handles dynamic style updates.
+ */
 const subscribed = subscribe(() => {
-  const {
-    getBlocks
-  } = select('core/block-editor') || select('core/editor');
-  const blocks = getBlocks();
-  const reusableBlocks = select('core').getEntityRecords('postType', 'wp_block');
-  const blocksStyle = getCustomStyleFromBlocks(blocks, reusableBlocks);
-  addStyle(blocksStyle);
+  let reusableStyle = '';
+  const blocks = select('core/block-editor').getBlocks();
+  const reusableBlocks = select('core').getEntityRecords('postType', 'wp_block', {
+    context: 'view'
+  }) || [];
+  const reusableBlocksInPage = blocks.filter(({
+    name
+  }) => name === 'core/block');
+  const iframe = document.querySelector('iframe[name="editor-canvas"]');
+  reusableBlocksInPage.forEach(({
+    attributes,
+    clientId
+  }) => {
+    const reusableBlock = reusableBlocks.find(({
+      id
+    }) => id === attributes.ref);
+    if (!reusableBlock) {
+      return;
+    }
+    const domSelector = `.wp-block[data-block="${clientId}"]`;
+    const parsedBlocks = parse(reusableBlock.content.raw);
+    const reusableElement = iframe?.contentDocument.querySelector(domSelector) || document.querySelector(domSelector);
+    if (reusableElement) {
+      const matchedBlocks = matchBlocksByIndex(reusableElement, parsedBlocks);
+      reusableStyle += getCustomStyleFromBlocks(matchedBlocks);
+    }
+  });
+  const domHead = iframe?.contentDocument.head || document.head;
+  if (!domHead) {
+    return;
+  }
+  let styleElement = domHead.querySelector('#wecodeart-blocks-dynamic-styles');
+  if (!styleElement) {
+    styleElement = document.createElement('style');
+    styleElement.id = 'wecodeart-blocks-dynamic-styles';
+    domHead.appendChild(styleElement);
+  }
+  const blocksStyle = getCustomStyleFromBlocks(blocks);
+  const finalStyle = blocksStyle + reusableStyle;
+  updateStyleElement(domHead, finalStyle);
 });
 
 /***/ }),
 
-/***/ "@wordpress/element":
-/*!*********************************!*\
-  !*** external ["wp","element"] ***!
-  \*********************************/
-/***/ (function(module) {
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
 
 "use strict";
-module.exports = window["wp"]["element"];
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 
@@ -254,60 +318,59 @@ module.exports = window["wp"]["element"];
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = function(module) {
+/******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				function() { return module['default']; } :
-/******/ 				function() { return module; };
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 		__webpack_require__.d = (exports, definition) => {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	!function() {
-/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
-/******/ 	}();
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = function(exports) {
+/******/ 		__webpack_require__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-!function() {
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
 "use strict";
 /*!**********************************************************!*\
   !*** ./src/js/gutenberg/extensions/with-styles/index.js ***!
   \**********************************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Editor */ "./src/js/gutenberg/extensions/with-styles/Editor.js");
-/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./injector */ "./src/js/gutenberg/extensions/with-styles/injector.js");
-/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_injector__WEBPACK_IMPORTED_MODULE_2__);
-
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Editor */ "./src/js/gutenberg/extensions/with-styles/Editor.js");
+/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./injector */ "./src/js/gutenberg/extensions/with-styles/injector.js");
+/* harmony import */ var _injector__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_injector__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * WordPress dependencies.
  */
@@ -334,6 +397,7 @@ const {
  */
 
 
+
 const addAttributes = props => {
   if (hasBlockSupport(props, '__experimentalStyles')) {
     props.attributes = assign(props.attributes, {
@@ -357,21 +421,36 @@ const addAttributes = props => {
 const withInspectorControl = createHigherOrderComponent(BlockEdit => {
   return props => {
     const {
-      name
+      name,
+      isSelected
     } = props;
-    if (hasBlockSupport(name, '__experimentalStyles')) {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, props), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorAdvancedControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Editor__WEBPACK_IMPORTED_MODULE_1__["default"], props)));
+    if (isSelected && hasBlockSupport(name, '__experimentalStyles')) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(BlockEdit, {
+          ...props
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(InspectorAdvancedControls, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Editor__WEBPACK_IMPORTED_MODULE_0__["default"], {
+            ...props
+          })
+        })]
+      });
     }
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, props);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(BlockEdit, {
+      ...props
+    });
   };
 }, 'withInspectorControl');
 
 /**
  * Apply Filters
  */
-addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
-addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl, 90);
-}();
+function applyFilters() {
+  addFilter('blocks.registerBlockType', 'wecodeart/blocks/custom-css/addAttributes', addAttributes);
+  addFilter('editor.BlockEdit', 'wecodeart/editor/custom-css/withInspectorControl', withInspectorControl, 90);
+}
+wp.domReady(applyFilters);
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=ext-styles.js.map

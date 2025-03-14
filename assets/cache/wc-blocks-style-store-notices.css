@@ -1,0 +1,1 @@
+:where(.wc-block-components-notices,.woocommerce-notices-wrapper):not(:empty),.wc-block-store-notices .components-notice{margin:0 0 var(--wp--style--block-gap)}.woocommerce-notices-wrapper:empty{display:none}.wc-block-store-notices + *{margin-top:0!important}

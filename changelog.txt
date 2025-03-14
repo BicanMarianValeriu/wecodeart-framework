@@ -1,3 +1,6 @@
+v6.6.2
+- Fixed - DOM clientIds for reusable blocks custom styles (from Advanced tab)
+
 v6.6.1
 - Removed - old render_block_core/template-part filter for footer shortcodes ([year][copy])
 - Removed - theme from template part rendering in wecodeart( 'layout' ) so it renders current theme header/footer

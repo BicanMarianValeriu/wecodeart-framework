@@ -11,7 +11,7 @@ const CSSEditor = ({
 	attributes,
 	setAttributes,
 }) => {
-	const { customCSS, customStyle } = attributes;
+	const { customStyle } = attributes;
 
 	const editorRef = useRef(null);
 	const customStyleRef = useRef(null);
@@ -20,8 +20,8 @@ const CSSEditor = ({
 	useEffect(() => {
 		customStyleRef.current = defaultValue;
 
-		if (customStyle || customCSS) {
-			customStyleRef.current = customStyle || customCSS;
+		if (customStyle) {
+			customStyleRef.current = customStyle;
 		}
 
 		editorRef.current = wp.CodeMirror(document.getElementById('wecodeart-css-editor'), {
@@ -47,10 +47,10 @@ const CSSEditor = ({
 
 			// Deprecate old attribute naming
 			if ((defaultValue).replace(/\s+/g, '') === customStyleRef.current.replace(/\s+/g, '')) {
-				return setAttributes({ customStyle: null, customCSS: null });
+				return setAttributes({ customStyle: null });
 			}
 
-			setAttributes({ customStyle: customStyleRef.current, customCSS: null });
+			setAttributes({ customStyle: customStyleRef.current });
 		});
 	}, []);
 

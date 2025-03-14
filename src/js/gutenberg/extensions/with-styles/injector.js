@@ -7,74 +7,132 @@ const {
 	data: { select, subscribe }
 } = wp;
 
-const { flattenDeep } = lodash;
+/**
+ * Updates the style element in the editor iframe with the dynamic styles of the page.
+ * When updating the styles, it tries to use CSSOM to efficiently update the styles.
+ * If CSSOM is not supported, it falls back to setting the inner text of the style element.
+ * @param {HTMLHeadElement} domHead The head of the iframe in which to update the style element.
+ * @param {string} finalStyle The final dynamic styles to be inserted into the style element.
+ */
+const updateStyleElement = (domHead, finalStyle) => {
+	let styleElement = domHead.querySelector('#wecodeart-blocks-dynamic-styles');
 
-const addStyle = style => {
-	let element = document.getElementById('wecodeart-blocks-dynamic-styles');
-
-	if (null === element) {
-		element = document.createElement('style');
-		element.setAttribute('type', 'text/css');
-		element.setAttribute('id', 'wecodeart-blocks-dynamic-styles');
-		document.getElementsByTagName('head')[0].appendChild(element);
+	// If style element does not exist, create it
+	if (!styleElement) {
+		styleElement = document.createElement('style');
+		styleElement.setAttribute('id', 'wecodeart-blocks-dynamic-styles');
+		domHead.appendChild(styleElement);
 	}
 
-	if (element.textContent === style) {
-		return null;
+	if (styleElement.textContent !== finalStyle) {
+		styleElement.textContent = finalStyle;
 	}
-
-	return element.textContent = style;
 };
 
-const getCustomStyleFromBlocks = (blocks, reusableBlocks) => {
-	if (!blocks) {
-		return '';
+
+/**
+ * Recursively gets all child blocks from a given block.
+ *
+ * @param {Object} block - The block object.
+ * @return {Array} An array of the block and its children.
+ */
+const getChildrenFromBlock = (block) => {
+	return block.innerBlocks?.flatMap((child) => [child, ...getChildrenFromBlock(child)]) || [];
+};
+
+/**
+ * Recursively matches parsed reusable blocks and inner blocks to actual DOM elements using index.
+ *
+ * @param {HTMLElement} reusableElement - The parent reusable block element.
+ * @param {Array} parsedBlocks - The parsed inner blocks from reusable block content.
+ * @return {Array} Blocks with correct clientIds assigned.
+ */
+const matchBlocksByIndex = (reusableElement, parsedBlocks) => {
+	if (!reusableElement || !parsedBlocks.length) {
+		return parsedBlocks;
 	}
 
-	// Return the children of the block. The result is an array deeply nested that match the structure of the block in the editor.
-	const getChildrenFromBlock = (block) => {
-		const childrends = [];
-		if ('core/block' === block.name && null !== reusableBlocks) {
-			const reBlocks = reusableBlocks.find(i => block.attributes.ref === i.id);
-			if (reBlocks && reBlocks.content) {
-				childrends.push(parse(reBlocks.content.raw || reBlocks.content).map((child) => [child, getChildrenFromBlock(child)]));
-			};
+	const childElements = reusableElement.querySelectorAll('.wp-block[data-block]');
+
+	return parsedBlocks.map((block, index) => {
+		const childElement = childElements[index];
+
+		if (childElement) {
+			block.clientId = childElement.getAttribute('data-block');
+
+			// Recursively match inner blocks
+			if (block.innerBlocks?.length > 0) {
+				block.innerBlocks = matchBlocksByIndex(childElement, block.innerBlocks);
+			}
 		}
 
-		if (undefined !== block.innerBlocks && 0 < (block.innerBlocks).length) {
-			childrends.push(block.innerBlocks.map((child) => [child, getChildrenFromBlock(child)]));
+		return block;
+	});
+};
+
+/**
+ * Extracts and generates CSS styles from blocks, replacing `selector` with `data-block` attributes.
+ *
+ * @param {Array} blocks - The array of block objects.
+ * @return {string} The generated global style string.
+ */
+const getCustomStyleFromBlocks = (blocks) => {
+	const allBlocks = blocks.flatMap((block) => [block, ...getChildrenFromBlock(block)]);
+
+	const extractCustomStyle = allBlocks.map(({ attributes: { customStyle } = {}, clientId }) => {
+		if (customStyle && clientId) {
+			return customStyle.replace(/selector/g, `.wp-block[data-block="${clientId}"]`) + '\n';
 		}
 
-		return childrends;
-	};
-
-	// Get all the blocks and their children
-	const allBlocks = blocks.map((block) => [block, getChildrenFromBlock(block)]);
-
-	// Transform the deply nested array in a simple one and then get the `customStyle` value where it is the case
-	const extractCustomStyle = flattenDeep(allBlocks).map((block) => {
-		const { attributes: { customCSS = null, customStyle = customCSS } = {}, clientId } = block;
-		if (customStyle) {
-			return customStyle.replace(new RegExp('selector', 'g'), `.wp-block[data-block="${clientId}"]`) + '\n';
-		}
 		return '';
 	});
 
-	// Build the global style
-	const style = extractCustomStyle.reduce((acc, localStyle) => acc + localStyle, '');
-
-	// For debugging
-	// console.log( 'Get all the block', allBlocks );
-	// console.log( 'Extract customStyle', extractCustomStyle );
-	// console.log( 'Final Result\n', style );
-
-	return style;
+	return extractCustomStyle.filter(Boolean).join('');
 };
 
+/**
+ * Handles dynamic style updates.
+ */
 const subscribed = subscribe(() => {
-	const { getBlocks } = select('core/block-editor') || select('core/editor');
-	const blocks = getBlocks();
-	const reusableBlocks = select('core').getEntityRecords('postType', 'wp_block');
-	const blocksStyle = getCustomStyleFromBlocks(blocks, reusableBlocks);
-	addStyle(blocksStyle);
+	let reusableStyle = '';
+
+	const blocks = select('core/block-editor').getBlocks();
+	const reusableBlocks = select('core').getEntityRecords('postType', 'wp_block', { context: 'view' }) || [];
+	const reusableBlocksInPage = blocks.filter(({ name }) => name === 'core/block');
+
+	const iframe = document.querySelector('iframe[name="editor-canvas"]');
+
+	reusableBlocksInPage.forEach(({ attributes, clientId }) => {
+		const reusableBlock = reusableBlocks.find(({ id }) => id === attributes.ref);
+
+		if (!reusableBlock) {
+			return;
+		}
+
+		const domSelector = `.wp-block[data-block="${clientId}"]`;
+		const parsedBlocks = parse(reusableBlock.content.raw);
+		const reusableElement = iframe?.contentDocument.querySelector(domSelector) || document.querySelector(domSelector);
+
+		if (reusableElement) {
+			const matchedBlocks = matchBlocksByIndex(reusableElement, parsedBlocks);
+			reusableStyle += getCustomStyleFromBlocks(matchedBlocks);
+		}
+	});
+
+	const domHead = iframe?.contentDocument.head || document.head;
+	if (!domHead) {
+		return;
+	}
+
+	let styleElement = domHead.querySelector('#wecodeart-blocks-dynamic-styles');
+	if (!styleElement) {
+		styleElement = document.createElement('style');
+		styleElement.id = 'wecodeart-blocks-dynamic-styles';
+		domHead.appendChild(styleElement);
+	}
+
+	const blocksStyle = getCustomStyleFromBlocks(blocks);
+	const finalStyle = blocksStyle + reusableStyle;
+
+	updateStyleElement(domHead, finalStyle);
 });
