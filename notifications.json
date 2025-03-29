@@ -3,13 +3,13 @@
 	"items": [
 		{
 			"type": "info",
-			"title": "Version 6.5+",
-			"content": "This new version brings couple of new modules: Cookies and Google Translation. Head over Modules tab to check them out and install with 1 click."
+			"title": "Version 6.6+",
+			"content": "This new version brings a new module: Tabs. Head over Modules tab to check it out and install with 1 click."
 		},
 		{
 			"type": "info",
-			"title": "Version 6.4.5",
-			"content": "Some features (modal/offcanvas/toast) have been refactored to WP Interactivity API. More info <a href=\"https:\/\/www.wecodeart.com\/exciting-update-for-your-wordpress-theme-key-changes-and-improvements\/\" target=\"_blank\">here<\/a>."
+			"title": "Version 6.5+",
+			"content": "This new version brings couple of new modules: Cookies and Google Translation. Head over Modules tab to check them out and install with 1 click."
 		},
 		{
 			"type": "info",

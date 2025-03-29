@@ -42,6 +42,8 @@
 		"build:modules:lorem": "wp-scripts build index=./inc/support/modules/lorem/src/js/index.js --output-path=inc/support/modules/lorem/assets/minified",
 		"start:modules:accordion": "wp-scripts start index=./inc/support/modules/accordion/src/js/index.js --output-path=inc/support/modules/accordion/assets/unminified",
 		"build:modules:accordion": "wp-scripts build index=./inc/support/modules/accordion/src/js/index.js --output-path=inc/support/modules/accordion/assets/minified",
+		"start:modules:tabs": "wp-scripts start index=./inc/support/modules/tabs/src/js/index.js --output-path=inc/support/modules/tabs/assets/unminified",
+		"build:modules:tabs": "wp-scripts build index=./inc/support/modules/tabs/src/js/index.js --output-path=inc/support/modules/tabs/assets/minified",
 		"start:modules:translate": "wp-scripts start index=./inc/support/modules/translate/src/js/index.js --output-path=inc/support/modules/translate/assets/unminified",
 		"build:modules:translate": "wp-scripts build index=./inc/support/modules/translate/src/js/index.js --output-path=inc/support/modules/translate/assets/minified",
 		"start:modules:scrolltop": "wp-scripts start admin=./inc/support/modules/scrolltop/src/js/admin.js --output-path=inc/support/modules/scrolltop/assets/unminified",

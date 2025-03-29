@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Patterns
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.5.2
+ * @version		6.6.2
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -140,7 +140,7 @@ class Patterns {
 						$this->register_from_file( wp_parse_args( [
 							'theme' => $theme->get( 'TextDomain' ),
 							'path' 	=> $file,
-						], 	pathinfo( $file ) ) );
+						], pathinfo( $file ) ) );
 					}
 				}
 			}
@@ -155,12 +155,12 @@ class Patterns {
 	 * @return 	Patterns\Pattern Template.
 	 */
 	public function register_from_file( $file ) {
-		$args = [
+		$args = wp_parse_args( [
 			'title' 	=> ucwords( implode( ' ', explode( '-', $file['filename'] ) ) ),
 			'content' 	=> file_get_contents( $file['path'] ),
 			'slug'		=> $file['filename'],
 			'theme'		=> $file['theme'],
-		];
+		], $file );
 
 		$has_json = current( wp_list_filter( $this->patterns, [ 'slug' => $args['slug'] ] ) );
 		
