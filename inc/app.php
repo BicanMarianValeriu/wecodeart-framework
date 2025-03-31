@@ -61,24 +61,6 @@ return [
     ],
     /*
     |--------------------------------------------------------------------------
-    | Theme Header
-    |--------------------------------------------------------------------------
-    |
-    | This array of options will be used as defaults for header.
-    |
-    */
-    'header' => [ /* Deprecated */ ],
-    /*
-    |--------------------------------------------------------------------------
-    | Theme Footer
-    |--------------------------------------------------------------------------
-    |
-    | This array of options will be used as defaults for footer.
-    |
-    */
-    'footer' => [ /* Deprecated */ ],
-    /*
-    |--------------------------------------------------------------------------
     | Theme Gutenberg
     |--------------------------------------------------------------------------
     |
@@ -88,24 +70,6 @@ return [
     'gutenberg'     => [
         'editor'    => true, // Disable FSE Editor for non-admins
     ],
-    /*
-    |--------------------------------------------------------------------------
-    | Theme Placeholder
-    |--------------------------------------------------------------------------
-    |
-    | This array of options will be used as defaults for placeholder.
-    |
-    */
-    'placeholder' => [ /* Deprecated */ ],
-    /*
-    |--------------------------------------------------------------------------
-    | Theme Fonts
-    |--------------------------------------------------------------------------
-    |
-    | This array of options will be used as defaults for fonts.
-    |
-    */
-    'fonts' => [ /* Deprecated */ ],
     /*
     |--------------------------------------------------------------------------
     | Theme Support
@@ -158,7 +122,7 @@ return [
                 'description'   => esc_html__( 'Extends Gutenberg editor with an accordion block built on WP Interactivity API.', 'wecodeart' ),
                 'more'          => 'https://github.com/BicanMarianValeriu/wca-accordion/',
                 'source'        => 'github',
-                'version'       => '1.0.6',
+                'version'       => '1.0.7',
                 'destination'   => 'accordion',
                 'type'          => 'module',
             ],
@@ -173,13 +137,13 @@ return [
                 'type'          => 'module',
             ],
             [
-                'slug'          => 'BicanMarianValeriu/wca-contact-form',
-                'title'         => esc_html__( 'WCA: Contact Form 7', 'wecodeart' ),
-                'description'   => Plugins::get_default_description( 'Contact Form 7', 'external' ),
-                'more'          => 'https://github.com/BicanMarianValeriu/wca-contact-form/',
+                'slug'          => 'BicanMarianValeriu/wca-translate',
+                'title'         => esc_html__( 'WCA: Translate', 'wecodeart' ),
+                'description'   => esc_html__( 'Translate your website using Google Translate Element API.', 'wecodeart' ),
+                'more'          => 'https://github.com/BicanMarianValeriu/wca-translate/',
                 'source'        => 'github',
-                'version'       => '1.0.0',
-                'destination'   => 'contactform',
+                'version'       => '1.0.1',
+                'destination'   => 'translate',
                 'type'          => 'module',
             ],
             [
@@ -223,13 +187,13 @@ return [
                 'type'          => 'module',
             ],
             [
-                'slug'          => 'BicanMarianValeriu/wca-translate',
-                'title'         => esc_html__( 'WCA: Translate', 'wecodeart' ),
-                'description'   => esc_html__( 'Translate your website using Google Translate Element API.', 'wecodeart' ),
-                'more'          => 'https://github.com/BicanMarianValeriu/wca-translate/',
+                'slug'          => 'BicanMarianValeriu/wca-contact-form',
+                'title'         => esc_html__( 'WCA: Contact Form 7', 'wecodeart' ),
+                'description'   => Plugins::get_default_description( 'Contact Form 7', 'external' ),
+                'more'          => 'https://github.com/BicanMarianValeriu/wca-contact-form/',
                 'source'        => 'github',
-                'version'       => '1.0.1',
-                'destination'   => 'translate',
+                'version'       => '1.0.0',
+                'destination'   => 'contactform',
                 'type'          => 'module',
             ],
             [

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-23 02:50+0000\n"
+"POT-Creation-Date: 2025-03-31 00:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -63,16 +63,12 @@ msgstr ""
 msgid "100% Responsive"
 msgstr ""
 
-#: inc/gutenberg/blocks/post/class-content.php:85
-msgid "[block rendering halted]"
-msgstr ""
-
 #: inc/support/plugins/class-plugins.php:123
 #, php-format
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr ""
 
-#: inc/app.php:240
+#: inc/app.php:214
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -89,8 +85,51 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:430
+#: src/js/admin/components/panels/licenses.js:102
+msgid "Actions"
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:582
+#: src/js/admin/plugins/Components/PluginActivation.js:56
+msgid "Activate"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:468
+#: src/js/admin/themes/Components.js:338
+msgid "activate"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:468
+#: src/js/admin/themes/Components.js:331
+msgid "activated"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:281
+#: src/js/admin/themes/Components.js:123
+msgid "Active"
+msgstr ""
+
 #: inc/gutenberg/blocks/comment/class-title.php:106
 msgid "add one"
+msgstr ""
+
+#: assets/minified/js/gutenberg/ext-classes.min.js:1
+#: assets/unminified/js/gutenberg/ext-classes.js:185
+#: src/js/gutenberg/extensions/with-classes/index.js:64
+msgid "Additional CSS Class(es)"
+msgstr ""
+
+#: assets/minified/js/gutenberg/ext-styles.min.js:1
+#: assets/unminified/js/gutenberg/ext-styles.js:120
+#: src/js/gutenberg/extensions/with-styles/Editor.js:81
+msgid "Additional custom CSS"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:405
+#: src/js/admin/themes/Components.js:259
+msgid "Additional info"
 msgstr ""
 
 #: inc/admin/installer/module/class-ajax.php:124
@@ -135,6 +174,22 @@ msgid ""
 "later."
 msgstr ""
 
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:454
+#: src/js/admin/components/panels/licenses.js:117
+msgid "API Key"
+msgstr ""
+
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:389
+#: src/js/admin/components/panels/licenses.js:70
+msgid "API Keys Saved."
+msgstr ""
+
+#: src/js/admin/index.js:180 assets/unminified/js/admin/admin.js:851
+msgid "Appearance"
+msgstr ""
+
 #: inc/gutenberg/blocks/query/class-title.php:159
 #: inc/gutenberg/blocks/widgets/class-archives.php:98
 msgid "Archives"
@@ -143,6 +198,11 @@ msgstr ""
 #: inc/gutenberg/blocks/query/class-title.php:132
 #, php-format
 msgid "Author Archives: %s"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:373
+#: src/js/admin/themes/Components.js:234
+msgid "Awesome, let's see it!"
 msgstr ""
 
 #: patterns/footer.php:54
@@ -162,7 +222,7 @@ msgid "Blog"
 msgstr ""
 
 #: patterns/section-hero.php:13
-msgid "Build your website with WeCodeArt"
+msgid "Build your website with WeCodeArt Framework"
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-form.php:237
@@ -299,11 +359,16 @@ msgid_plural "Responses on \"%1$s\""
 msgstr[0] ""
 msgstr[1] ""
 
+#: assets/unminified/js/admin/themes.js:438
+#: src/js/admin/themes/Components.js:294
+msgid "Contact us"
+msgstr ""
+
 #: inc/gutenberg/blocks/widgets/class-posts.php:138
 msgid "Continue reading"
 msgstr ""
 
-#: inc/app.php:218
+#: inc/app.php:182
 msgid "Cookie banner and management interface built with theme APIs."
 msgstr ""
 
@@ -350,6 +415,13 @@ msgstr ""
 msgid "Daily Archives: %s"
 msgstr ""
 
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:472
+#: src/js/admin/components/panels/licenses.js:134
+#, javascript-format
+msgid "Days: %s"
+msgstr ""
+
 #: patterns/cards-overlay.php:56
 msgid "Design"
 msgstr ""
@@ -358,12 +430,24 @@ msgstr ""
 msgid "Developer Mode"
 msgstr ""
 
+#: assets/unminified/js/admin/admin.js:281
+#: src/js/admin/components/panels/gettingStarted.js:145
+msgid "Developer news"
+msgstr ""
+
 #: inc/gutenberg/blocks/widgets/social/class-social.php:110
 msgid "Display icons for sharing the current page on social media sites."
 msgstr ""
 
 #: inc/gutenberg/blocks/widgets/social/class-social.php:94
 msgid "Display icons linking to your social media profiles or sites."
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:196
+#: src/js/admin/components/panels/gettingStarted.js:98
+msgid ""
+"Do join WeCodeArt's official Facebook page to share your experience, "
+"thoughts, and ideas."
 msgstr ""
 
 #: patterns/cards-background.php:56 patterns/cards-overlay.php:22
@@ -377,13 +461,17 @@ msgid ""
 "find a couple of pages and section examples created with WeCodeArt Framework."
 msgstr ""
 
+#: src/js/admin/index.js:161 assets/unminified/js/admin/admin.js:830
+msgid "Donate with PayPal button"
+msgstr ""
+
 #: inc/gutenberg/blocks/design/class-separator.php:70
 msgid "Dots"
 msgstr ""
 
 #: patterns/cta-border.php:22 patterns/cta-center.php:23
 #: patterns/cta-default.php:31 patterns/cta-separator.php:33
-#: patterns/section-hero.php:46
+#: patterns/section-hero.php:43
 msgid "Download Now"
 msgstr ""
 
@@ -399,19 +487,33 @@ msgstr ""
 msgid "Enter your email address to subscribe."
 msgstr ""
 
-#: inc/app.php:158
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:413
+#: src/js/admin/components/panels/licenses.js:89
+#, javascript-format
+msgid ""
+"Enter your license keys here to receive updates. If your license keys are "
+"expired, please %1$srenew your licenses%2$s."
+msgstr ""
+
+#: inc/app.php:122
 msgid ""
 "Extends Gutenberg editor with an accordion block built on WP Interactivity "
 "API."
 msgstr ""
 
-#: inc/app.php:178
+#: inc/app.php:132
+msgid ""
+"Extends Gutenberg editor with an tabs block built on WP Interactivity API."
+msgstr ""
+
+#: inc/app.php:152
 msgid ""
 "Extends Gutenberg editor with extra formatting options like: justify, "
 "abbreviation, text decorations, tooltips and popovers."
 msgstr ""
 
-#: inc/app.php:188
+#: inc/app.php:202
 msgid ""
 "Extends Gutenberg editor with lorem ipsum dummy content generator for "
 "headings, paragraphs and lists."
@@ -450,7 +552,7 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
-#: patterns/section-hero.php:23
+#: patterns/section-hero.php:20
 msgid "FIRST"
 msgstr ""
 
@@ -483,11 +585,7 @@ msgctxt "Font size name"
 msgid "Normal"
 msgstr ""
 
-#: patterns/section-hero.php:16
-msgid "FREE"
-msgstr ""
-
-#: patterns/section-hero.php:38
+#: patterns/section-hero.php:35
 msgid "Free for lifetime"
 msgstr ""
 
@@ -507,9 +605,19 @@ msgstr ""
 msgid "Gather blocks in an offcanvas container."
 msgstr ""
 
-#: patterns/section-hero.php:16
-#, php-format
-msgid "Get it now. Is %s forever!"
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:465
+#: src/js/admin/components/panels/licenses.js:127
+msgid "Get API Key"
+msgstr ""
+
+#: src/js/admin/index.js:95 assets/unminified/js/admin/admin.js:769
+msgid "Getting Started"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:396
+#: src/js/admin/themes/Components.js:252
+msgid "Github repository or website demo"
 msgstr ""
 
 #: theme.json:1
@@ -567,6 +675,13 @@ msgstr ""
 msgid "Gutenberg Ready"
 msgstr ""
 
+#: assets/unminified/js/admin/themes.js:430
+#: src/js/admin/themes/Components.js:285
+msgid ""
+"Have you created an amazing child skin for our theme? We would love to "
+"feature it here!"
+msgstr ""
+
 #: inc/support/plugins/woocommerce/class-woocommerce.php:77
 msgid "here"
 msgstr ""
@@ -579,13 +694,53 @@ msgstr ""
 msgid "https://www.wecodeart.com/about/"
 msgstr ""
 
+#: assets/unminified/js/admin/admin.js:175
+#: src/js/admin/components/panels/gettingStarted.js:82
+msgid ""
+"If you like this theme please give it a 5-star rating. This would boost my "
+"motivation and help other users make a comfortable decision while choosing "
+"us."
+msgstr ""
+
 #: views/admin/notification-theme.tpl.php:39
 msgid "Ignore for 1 day"
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:274
+#: assets/unminified/js/admin/plugins.js:279
+#: assets/unminified/js/admin/plugins.js:687
+#: assets/unminified/js/admin/themes.js:294
+#: src/js/admin/themes/Components.js:136
+#: src/js/admin/plugins/Components/Install.js:117
+#: src/js/admin/plugins/Components/Install.js:120
+#: src/js/admin/plugins/Components/Recommended.js:59
+msgid "Install"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:468
+#: src/js/admin/themes/Components.js:338
+msgid "install"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:468
+#: src/js/admin/themes/Components.js:331
+msgid "installed"
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:687
+#: src/js/admin/plugins/Components/Recommended.js:59
+msgid "Installing"
 msgstr ""
 
 #: inc/support/dom/class-dom.php:474
 #, php-format
 msgid "Invalid HTML wrappers for \"%s\"."
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:468
+#: src/js/admin/themes/Components.js:330
+#, javascript-format
+msgid "It appears that you do not currently have a child theme %s."
 msgstr ""
 
 #: views/admin/notification-theme.tpl.php:28
@@ -600,6 +755,16 @@ msgstr ""
 msgid "It looks like WeCodeArt Framework is not translated in %s. "
 msgstr ""
 
+#: assets/unminified/js/admin/admin.js:201
+#: src/js/admin/components/panels/gettingStarted.js:101
+msgid "Join Now"
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:192
+#: src/js/admin/components/panels/gettingStarted.js:94
+msgid "Join Our Facebook Community"
+msgstr ""
+
 #: patterns/section-posts.php:14
 #, php-format
 msgid "Latest %s"
@@ -608,6 +773,10 @@ msgstr ""
 #: patterns/cards-background.php:34 patterns/cards-background.php:68
 #: patterns/cards-default.php:29 patterns/cards-default.php:55
 #: patterns/cards-overlay.php:34 patterns/cards-overlay.php:68
+#: assets/unminified/js/admin/plugins.js:480
+#: assets/unminified/js/admin/themes.js:277
+#: src/js/admin/themes/Components.js:113
+#: src/js/admin/plugins/Components/Plugin.js:58
 msgid "Learn more"
 msgstr ""
 
@@ -619,13 +788,23 @@ msgstr ""
 msgid "Less than a minute to read."
 msgstr ""
 
-#: inc/app.php:198
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:428
+#: src/js/admin/components/panels/licenses.js:101
+msgid "License Key"
+msgstr ""
+
+#: src/js/admin/index.js:123 assets/unminified/js/admin/admin.js:790
+msgid "License(s)"
+msgstr ""
+
+#: inc/app.php:162
 msgid ""
 "Lightweight extension for adding a scroll to top button on your site. Super "
 "flexible and customizable."
 msgstr ""
 
-#: inc/app.php:208
+#: inc/app.php:172
 msgid ""
 "Lightweight extension for enhancing our theme with options for cleaning "
 "wp_head of unnecesary stuff."
@@ -639,9 +818,25 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:147
-#: inc/gutenberg/blocks/site/class-login.php:168
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:287
+#: assets/unminified/js/admin/admin.js:369
+#: src/js/admin/components/panels/gettingStarted.js:152
+#: src/js/admin/components/panels/licenses.js:42
+msgid "Loading"
+msgstr ""
+
+#: inc/gutenberg/blocks/site/class-login.php:148
+#: inc/gutenberg/blocks/site/class-login.php:169
 msgid "Log In"
+msgstr ""
+
+#: inc/gutenberg/blocks/site/class-login.php:123
+msgid "Login"
+msgstr ""
+
+#: inc/gutenberg/blocks/site/class-login.php:123
+msgid "Logout"
 msgstr ""
 
 #: patterns/header.php:38
@@ -714,6 +909,17 @@ msgstr ""
 msgid "Name *"
 msgstr ""
 
+#: assets/unminified/js/admin/admin.js:154
+#: src/js/admin/components/panels/gettingStarted.js:65
+msgid "Need Support?"
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:296
+#: src/js/admin/plugins/Components/Install.js:141
+#, javascript-format
+msgid "New version available: %s"
+msgstr ""
+
 #: inc/gutenberg/blocks/widgets/class-archives.php:109
 msgid "No archives to show."
 msgstr ""
@@ -734,6 +940,11 @@ msgstr ""
 
 #: inc/admin/notifications/class-ajax.php:74
 msgid "Notification dismissed"
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:180
+#: src/js/admin/components/panels/gettingStarted.js:85
+msgid "Ok, you deserve it"
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-group.php:362
@@ -769,7 +980,7 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:166
+#: inc/gutenberg/blocks/site/class-login.php:167
 msgid "Password"
 msgstr ""
 
@@ -933,8 +1144,60 @@ msgstr ""
 msgid "Please define an action type."
 msgstr ""
 
+#: assets/unminified/js/admin/themes.js:334
+#: src/js/admin/themes/Components.js:187
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:339
+#: src/js/admin/themes/Components.js:193
+msgid "Please enter a valid URL."
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:337
+#: src/js/admin/themes/Components.js:191
+msgid "Please enter the theme URL."
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:332
+#: src/js/admin/themes/Components.js:185
+msgid "Please enter your email."
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:329
+#: src/js/admin/themes/Components.js:181
+msgid "Please enter your name."
+msgstr ""
+
 #: views/admin/notification-theme.tpl.php:23
 msgid "Please use a child theme!"
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:288
+#: src/js/admin/components/panels/gettingStarted.js:153
+msgid "Please wait, loading notifications..."
+msgstr ""
+
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:370
+#: src/js/admin/components/panels/licenses.js:43
+msgid "Please wait, loading settings..."
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:582
+#: src/js/admin/plugins/Components/PluginActivation.js:56
+msgctxt "plugin"
+msgid "Active"
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:267
+#: assets/unminified/js/admin/plugins.js:274
+#: assets/unminified/js/admin/plugins.js:279
+#: src/js/admin/plugins/Components/Install.js:108
+#: src/js/admin/plugins/Components/Install.js:117
+#: src/js/admin/plugins/Components/Install.js:120
+msgctxt "plugin"
+msgid "Installed"
 msgstr ""
 
 #: inc/admin/installer/plugin/class-ajax.php:165
@@ -961,8 +1224,21 @@ msgstr ""
 msgid "Plugin installed successfully."
 msgstr ""
 
+#: assets/unminified/js/admin/plugins.js:586
+#: src/js/admin/plugins/Components/PluginActivation.js:61
+msgid "Plugin not detected."
+msgstr ""
+
+#: src/js/admin/index.js:103 assets/unminified/js/admin/admin.js:774
+msgid "Plugins"
+msgstr ""
+
 #: inc/admin/installer/plugin/class-ajax.php:57
 msgid "Plugins array is empty."
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:974 src/js/admin/plugins/index.js:42
+msgid "Plugins Manager"
 msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:154
@@ -987,6 +1263,17 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:426
+#: src/js/admin/components/panels/licenses.js:100
+msgid "Product"
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:171
+#: src/js/admin/components/panels/gettingStarted.js:78
+msgid "Rate Us Five!"
+msgstr ""
+
 #: patterns/footer.php:26
 msgid "Read More"
 msgstr ""
@@ -1005,8 +1292,20 @@ msgstr ""
 msgid "Ready to create with %s?"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:167
+#: assets/unminified/js/admin/plugins.js:382
+#: assets/unminified/js/admin/themes.js:509
+#: src/js/admin/themes/Components.js:370
+#: src/js/admin/plugins/Components/Manager.js:60
+msgid "Reload"
+msgstr ""
+
+#: inc/gutenberg/blocks/site/class-login.php:168
 msgid "Remember Me"
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:778
+#: src/js/admin/plugins/Components/Uninstall.js:58
+msgid "Remove"
 msgstr ""
 
 #. %1$s expands to the request method
@@ -1026,6 +1325,12 @@ msgstr ""
 
 #: inc/gutenberg/blocks/widgets/class-rss.php:65
 msgid "RSS Error"
+msgstr ""
+
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:487
+#: src/js/admin/components/panels/licenses.js:151
+msgid "Save"
 msgstr ""
 
 #: patterns/section-woo.php:31
@@ -1060,6 +1365,11 @@ msgstr ""
 
 #: inc/gutenberg/blocks/widgets/class-archives.php:80
 msgid "Select Year"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:420
+#: src/js/admin/themes/Components.js:271
+msgid "Send"
 msgstr ""
 
 #: inc/gutenberg/blocks/widgets/social/class-link.php:94
@@ -1155,11 +1465,29 @@ msgstr ""
 msgid "Speak Your Mind"
 msgstr ""
 
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:432
+#: src/js/admin/components/panels/licenses.js:103
+msgid "Status"
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:217
+#: src/js/admin/components/panels/gettingStarted.js:114
+msgid ""
+"Stay in touch via our social media channels to receive the latest "
+"announcements and updates."
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:213
+#: src/js/admin/components/panels/gettingStarted.js:110
+msgid "Stay in Touch with Us"
+msgstr ""
+
 #: patterns/footer.php:17
 msgid "Stay Updated"
 msgstr ""
 
-#: patterns/section-hero.php:35
+#: patterns/section-hero.php:32
 msgid "Strict coding standards"
 msgstr ""
 
@@ -1167,7 +1495,7 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
-#: patterns/section-hero.php:32
+#: patterns/section-hero.php:29
 msgid "Super high performance"
 msgstr ""
 
@@ -1177,6 +1505,15 @@ msgstr ""
 
 #: patterns/section-woo.php:34
 msgid "Super-Optimized eCommerce website built with ease."
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:163
+#: src/js/admin/components/panels/gettingStarted.js:72
+msgid "Support Forum"
+msgstr ""
+
+#: src/js/admin/index.js:162 assets/unminified/js/admin/admin.js:831
+msgid "Support the development of WeCodeArt Framework!"
 msgstr ""
 
 #: inc/gutenberg/blocks/query/class-title.php:127
@@ -1233,6 +1570,24 @@ msgstr ""
 msgid "The file must be of type CSS/JS."
 msgstr ""
 
+#: assets/unminified/js/admin/themes.js:281
+#: src/js/admin/themes/Components.js:123
+msgctxt "theme"
+msgid "Activate"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:294
+#: src/js/admin/themes/Components.js:136
+msgctxt "theme"
+msgid "Installed"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:285
+#: src/js/admin/themes/Components.js:127
+msgctxt "theme"
+msgid "Not installed."
+msgstr ""
+
 #: inc/admin/installer/theme/class-ajax.php:93
 msgid "Theme failed to install."
 msgstr ""
@@ -1281,6 +1636,19 @@ msgstr ""
 msgid "Theme switched."
 msgstr ""
 
+#: assets/unminified/js/admin/themes.js:393
+#: src/js/admin/themes/Components.js:249
+msgid "Theme URL"
+msgstr ""
+
+#: src/js/admin/index.js:114 assets/unminified/js/admin/admin.js:782
+msgid "Themes"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:674 src/js/admin/themes/index.js:30
+msgid "Themes Manager"
+msgstr ""
+
 #: inc/gutenberg/blocks/comment/class-template.php:76
 msgid ""
 "This post is password protected. Enter the password to view comments or "
@@ -1305,15 +1673,38 @@ msgstr ""
 msgid "too!"
 msgstr ""
 
-#: inc/app.php:228
+#: inc/app.php:142
 msgid "Translate your website using Google Translate Element API."
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:778
+#: src/js/admin/plugins/Components/Uninstall.js:58
+msgid "Uninstalling"
+msgstr ""
+
+#: assets/minified/js/admin/admin.min.js:1
+#: assets/unminified/js/admin/admin.js:472
+#: src/js/admin/components/panels/licenses.js:134
+msgid "Unlimited"
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:270
+#: src/js/admin/plugins/Components/Install.js:112
+msgid "Update"
 msgstr ""
 
 #: inc/admin/class-activation.php:116
 msgid "upgrade PHP"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:165
+#: assets/minified/js/gutenberg/ext-styles.min.js:1
+#: assets/unminified/js/gutenberg/ext-styles.js:100
+#: src/js/gutenberg/extensions/with-styles/Editor.js:66
+#, javascript-format
+msgid "Use %s to target the block CSS class."
+msgstr ""
+
+#: inc/gutenberg/blocks/site/class-login.php:166
 msgid "Username or Email Address"
 msgstr ""
 
@@ -1327,35 +1718,39 @@ msgstr ""
 msgid "View Themes"
 msgstr ""
 
-#: inc/app.php:157
+#: inc/app.php:121
 msgid "WCA: Accordion"
 msgstr ""
 
-#: inc/app.php:167
+#: inc/app.php:191
 msgid "WCA: Contact Form 7"
 msgstr ""
 
-#: inc/app.php:217
+#: inc/app.php:181
 msgid "WCA: Cookies"
 msgstr ""
 
-#: inc/app.php:177
+#: inc/app.php:151
 msgid "WCA: Formatting"
 msgstr ""
 
-#: inc/app.php:187
+#: inc/app.php:201
 msgid "WCA: Lorem Ipsum"
 msgstr ""
 
-#: inc/app.php:207
+#: inc/app.php:171
 msgid "WCA: Optimization"
 msgstr ""
 
-#: inc/app.php:197
+#: inc/app.php:161
 msgid "WCA: Scroll Top"
 msgstr ""
 
-#: inc/app.php:227
+#: inc/app.php:131
+msgid "WCA: Tabs"
+msgstr ""
+
+#: inc/app.php:141
 msgid "WCA: Translate"
 msgstr ""
 
@@ -1379,6 +1774,13 @@ msgid ""
 "can get it from %s."
 msgstr ""
 
+#: assets/unminified/js/admin/themes.js:468
+#: src/js/admin/themes/Components.js:334
+msgid ""
+"We highly recommend using a child theme for making any modifications to your "
+"website."
+msgstr ""
+
 #: inc/gutenberg/blocks/comment/class-form.php:176
 msgid "Website"
 msgstr ""
@@ -1388,7 +1790,7 @@ msgstr ""
 msgid "WeCodeArt"
 msgstr ""
 
-#: inc/app.php:239
+#: inc/app.php:213
 msgid "WeCodeArt Developer"
 msgstr ""
 
@@ -1408,11 +1810,19 @@ msgstr ""
 msgid "WeCodeArt Framework is one of the %s Theme for %s"
 msgstr ""
 
-#: patterns/section-hero.php:22
+#: patterns/section-hero.php:19
 #, php-format
 msgid ""
 "WeCodeArt Framework is the %s theme to embrace %s and is one of the top-"
 "rated block themes."
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:145
+#: src/js/admin/components/panels/gettingStarted.js:59
+msgid ""
+"WeCodeArt Framework provides set of tools to extend the way you are building "
+"content on WordPress Gutenberg block editor. Designed and integrated to help "
+"users easily navigate; and control each block the way it should be."
 msgstr ""
 
 #: inc/admin/class-activation.php:113
@@ -1444,6 +1854,11 @@ msgstr ""
 msgid "Well %s"
 msgstr ""
 
+#: assets/unminified/js/admin/admin.js:278
+#: src/js/admin/components/panels/gettingStarted.js:144
+msgid "What`s next?"
+msgstr ""
+
 #: inc/support/dom/svg/class-svg.php:158
 #, php-format
 msgid ""
@@ -1454,6 +1869,13 @@ msgstr ""
 #, php-format
 msgid ""
 "When using \"%s\" method you must define the 3rd parameter (style or script)."
+msgstr ""
+
+#: assets/unminified/js/admin/admin.js:158
+#: src/js/admin/components/panels/gettingStarted.js:69
+msgid ""
+"Whether you need assistance, wish to report a bug, or have a new feature "
+"request, please create a topic in the support forum on WordPress.org."
 msgstr ""
 
 #: patterns/cards-default.php:17
@@ -1477,6 +1899,12 @@ msgid ""
 "the \"Getting Started\" page."
 msgstr ""
 
+#: assets/unminified/js/admin/themes.js:468
+#: src/js/admin/themes/Components.js:337
+#, javascript-format
+msgid "Would you like us to %s our child theme for you?"
+msgstr ""
+
 #: inc/gutenberg/blocks/query/class-title.php:138
 msgctxt "yearly archives date format"
 msgid "Y"
@@ -1491,6 +1919,11 @@ msgstr ""
 msgid "Yes, I would love to!"
 msgstr ""
 
+#: assets/unminified/js/admin/themes.js:496
+#: src/js/admin/themes/Components.js:360
+msgid "Yes, please do."
+msgstr ""
+
 #: patterns/section-features.php:90
 msgid "You don't need to fear the Gutenberg update introduced into WordPress."
 msgstr ""
@@ -1500,12 +1933,23 @@ msgstr ""
 msgid "You must accept %s to comment!"
 msgstr ""
 
-#: patterns/page-soon.php:44
+#: patterns/page-soon.php:44 assets/unminified/js/admin/themes.js:384
+#: src/js/admin/themes/Components.js:242
 msgid "Your email"
 msgstr ""
 
 #: inc/gutenberg/blocks/comment/class-form.php:271
 msgid "Your email address will not be published."
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:403
+#: src/js/admin/themes/Components.js:257
+msgid "Your message"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:376
+#: src/js/admin/themes/Components.js:236
+msgid "Your name"
 msgstr ""
 
 #: patterns/section-pricing.php:15
@@ -1514,4 +1958,17 @@ msgstr ""
 
 #: inc/admin/installer/theme/class-ajax.php:193
 msgid "Your submission was successfully sent. We well get back to you shortly."
+msgstr ""
+
+#: assets/unminified/js/admin/plugins.js:641
+#: src/js/admin/plugins/Components/Recommended.js:33
+#, javascript-format
+msgid ""
+"Your theme has recommended the following plugins: %s. Would you like to "
+"install them?"
+msgstr ""
+
+#: assets/unminified/js/admin/themes.js:430
+#: src/js/admin/themes/Components.js:282
+msgid "Your Theme Here"
 msgstr ""

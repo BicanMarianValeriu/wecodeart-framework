@@ -1,7 +1,9 @@
 v6.6.2
+- Updated - local translations for Romanian language (mainly translations for script files)
 - Updated - Patterns registration to pass all $file arguments to Pattern model
+- Updated - wecodeart/accordion block updates to render functions (moved to WP Standard JSON)
 - Fixed - DOM clientIds for reusable blocks custom styles (from Advanced tab)
-- Added - Tabs module (1 click install from Theme Options -> Modules)
+- Added - wecodeart/tabs block (1 click install from Theme Options -> Modules)
 
 v6.6.1
 - Removed - old render_block_core/template-part filter for footer shortcodes ([year][copy])
