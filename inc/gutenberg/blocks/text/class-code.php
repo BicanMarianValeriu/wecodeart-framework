@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.6.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -18,8 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\toJSON;
+use function WeCodeArt\Functions\{ get_prop, toJSON };
 
 /**
  * Gutenberg Code block.
@@ -42,7 +41,7 @@ class Code extends Dynamic {
 	 */
 	protected $block_name = 'code';
 
-	 /**
+	/**
 	 * Send to Constructor
 	 */
 	public function init() {
@@ -95,23 +94,24 @@ class Code extends Dynamic {
 
 		$highlight_js = toJSON( $highlight_js );
 
-		wecodeart( 'assets' )->add_script( 'highlightjs-lazy', [
+		wecodeart( 'assets' )->add_script( 'wecodeart-block-code', [
 			'deps'	 => [ 'wecodeart-support-assets' ],
 			'load'	 => fn( $blocks ) => in_array( $this->get_block_type(), $blocks, true ),
 			'inline' => <<<JS
-				const { fn: { loadJs } } = wecodeart;
+				(function( wecodeart ) {
+					const { Selector, fn: { loadJs } } = wecodeart;
 				
-				loadJs( $highlight_js, 'highlightjs', { async: false } );
+					loadJs( $highlight_js, 'highlightjs', { async: false } );
 
-				loadJs.ready( 'highlightjs', () => {
-					hljs.configure({ ignoreUnescapedHTML: true });
-
-					const codeBlocks = document.querySelectorAll( 'pre.wp-block-code:not(.ignore) code' );
-					[...codeBlocks].forEach(el => {
-						hljs.highlightElement(el);
-						hljs.lineNumbersBlock(el);
+					loadJs.ready( 'highlightjs', () => {
+						hljs.configure({ ignoreUnescapedHTML: true });
+						
+						Selector.find( 'pre.wp-block-code:not(.ignore) code' ).forEach(el => {
+							hljs.highlightElement(el);
+							hljs.lineNumbersBlock(el);
+						});
 					});
-				});
+				}).apply( this, [ window.wecodeart ] );
 			JS,
 		] );
 	}

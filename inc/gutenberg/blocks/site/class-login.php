@@ -147,7 +147,6 @@ class Login extends Dynamic {
 			'classes'	=> [ 'wp-modal--login', 'wp-modal--fullscreen:sm', 'fade' ],
 			'title'		=> get_prop( $attributes, [ 'metadata', 'name' ] ) ?: esc_html__( 'Log In', 'wecodeart' ),
 			'content' 	=> $content,
-			// 'content' 	=> $content . '<a aria-controls="#wp-login-58-modal" data-wp-interactive="wecodeart/modal" data-wp-context="{}" data-wp-init--validate="callbacks.validateConfig" data-wp-init--setup="callbacks.onInit" data-wp-on-window--resize="callbacks.onResize" data-wp-on--click="actions.show">trigger</a>',
 		], false );
 	}
 

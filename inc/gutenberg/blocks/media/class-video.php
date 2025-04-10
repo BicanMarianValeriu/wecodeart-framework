@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.4
+ * @version		6.6.3
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
+use function WeCodeArt\Functions\{ get_prop, toJSON };
 
 /**
  * Gutenberg Video block.
@@ -41,6 +42,140 @@ class Video extends Dynamic {
 	protected $block_name = 'video';
 
 	/**
+	 * Block args.
+	 *
+	 * @param	array $current	Existing register args
+	 *
+	 * @return 	array
+	 */
+	public function block_type_args( $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+
+		return [
+			'render_callback' => [ $this, 'render' ],
+			'supports' 			=> wp_parse_args( [
+				'shadow' 	=> true,
+				'color'		=> [
+					'gradients'	 => false,
+					'link' 		 => true,
+					'background' => true,
+					'text'       => true, // For SVG currentColor.
+				],
+				'__experimentalBorder'	=> [
+					'width'  	=> true,
+					'color' 	=> true,
+					'style' 	=> true,
+					'radius' 	=> true,
+				],
+			], $supports ),
+		];
+	}
+
+	/**
+	 * Dynamically renders the `core/video` block.
+	 *
+	 * @param 	array 	$attributes	The attributes.
+	 * @param 	string 	$content 	The block markup.
+	 *
+	 * @return 	string 	The block markup.
+	 */
+	public function render( array $attributes = [], string $content = '' ): string {
+		$dom	= $this->dom( $content );
+		$figure	= wecodeart( 'dom' )::get_element( 'figure', $dom );
+		$video	= wecodeart( 'dom' )::get_element( 'video', $figure );
+		$poster = $video ? $video->getAttribute( 'poster' ) : false;
+
+		// If no image, use placeholder.
+		if ( $poster ) {
+			$attrs = []; 
+			foreach ( $video->attributes as $attr ) {
+				$attrs[$attr->nodeName] = $attr->nodeValue ?: true;
+			}
+			
+			wecodeart( 'dom' )::add_classes( $figure, [ 'has-poster' ] );
+
+			// Create placeholder from poster
+			$image_id = (int) attachment_url_to_postid( $poster );
+			$image = wecodeart( 'dom' )::create_element( 'img', $dom );
+			$image->setAttribute( 'class', 'wp-block-video__poster' );
+			$image->setAttribute( 'src', $poster );
+
+			if( $image_id ) {
+				$image->setAttribute( 'data-id', $image_id );
+			}
+
+			$image->setAttribute( 'data-options', toJSON( $attrs ) );
+			$figure->replaceChild( $image, $video );
+
+			wecodeart( 'assets' )->add_script( 'wecodeart-block-video', [
+				'deps'	 => [ 'wecodeart-support-assets' ],
+				'inline' => <<<JS
+					(function( wecodeart ) {
+						const { Selector, Events, fn: { getOptions } } = wecodeart;
+						
+						function replaceVideo( el ) {
+							const options = getOptions( el.getAttribute( 'data-options' ) );
+							const videoEl = document.createElement( 'video' );
+
+							Object.keys( options ).forEach( ( key ) => videoEl.setAttribute( key, options[ key ] ) );
+							videoEl.muted = Object.keys( options ).includes( 'muted' );
+							el.parentNode.replaceChild( videoEl, el );
+
+							return { videoEl, options };
+						}
+
+						Selector.find( '.wp-block-video.has-poster' ).forEach( ( el ) => {
+							const posterImg = Selector.findOne( '.wp-block-video__poster', el );
+							const playButton = Selector.findOne( '.wp-block-video__play', el );
+							if( playButton ) {
+								Events.on( playButton, 'click', () => {
+									const { videoEl } = replaceVideo( posterImg );
+									playButton.remove();
+									videoEl.play();
+								} );
+							} else {
+								const observer = new IntersectionObserver( ( entries ) => {
+									if ( entries[0].isIntersecting ) {
+										replaceVideo( posterImg );
+										observer.unobserve( posterImg );
+									}
+								}, { rootMargin: '100px 0px 100px 0px' } );
+								observer.observe( posterImg );
+							}
+						} );
+					}).apply( this, [ window.wecodeart ] );
+				JS,
+			] );
+
+			// Create controls button
+			if( in_array( 'controls', array_keys( $attrs ) ) ) {
+				wecodeart( 'dom' )::add_classes( $figure, [ 'has-controls' ] );
+
+				if( ! in_array( 'autoplay', array_keys( $attrs ) ) ) {
+					$button = wecodeart( 'dom' )::create_element( 'button', $dom );
+					$button->setAttribute( 'class', 'wp-block-video__play' );
+					$button->setAttribute( 'type', 'button' );
+					
+					$svg = wecodeart( 'dom' )::create_element( 'svg', $dom );
+					$svg->setAttribute( 'viewBox', '0 0 512 512' );
+					$svg->setAttribute( 'role', 'img' );
+					$svg->setAttribute( 'focusable', 'false' );
+					$path = wecodeart( 'dom' )::create_element( 'path', $dom );
+					$path->setAttribute( 'd', 'M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9l0 176c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z' );
+					
+					$svg->appendChild( $path );
+					$button->appendChild( $svg );
+					$figure->appendChild( $button );
+				}
+			}
+			
+			$content = $dom->saveHTML();
+		}
+
+		return $content;
+	}
+
+	/**
 	 * Block styles
 	 *
 	 * @return 	string 	The block styles.
@@ -49,12 +184,16 @@ class Video extends Dynamic {
 		return <<<CSS
 			:where(.wp-block-video) {
 				margin: 0;
+				overflow: hidden;
 			}
 			.wp-block-video.aligncenter {
 				text-align: center;
 			}
 			.wp-block-video.alignfull {
 				max-width: initial;
+			}
+			.wp-block-video.has-controls {
+				position: relative;
 			}
 			.wp-block-video	video {
 				display: block;
@@ -63,6 +202,22 @@ class Video extends Dynamic {
 			}
 			.wp-block-video	[poster] {
 				object-fit: cover;
+			}
+			.wp-block-video__play {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				padding: .25rem;
+				transform: translate(-50%, -50%);
+				background: transparent;
+				border: 0;
+				box-shadow: none;
+				color: currentColor;
+			}
+			.wp-block-video__play svg {
+				display: block;
+				width: 2rem;
+				fill: currentColor;
 			}
 		CSS;
 	}

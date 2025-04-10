@@ -1,3 +1,9 @@
+v6.6.3
+- Updated - core/code block highlightjs.js enqueue is now encapsultated in a function
+- Updated - core/video block will now load the poster image if set (load video file if clicked or appears in viewport)
+- Updated - core/video block support for colors, border and shadow
+- Fixed - issue with optimization module when collecting above the fold media
+
 v6.6.2
 - Updated - local translations for Romanian language (mainly translations for script files)
 - Updated - Patterns registration to pass all $file arguments to Pattern model
