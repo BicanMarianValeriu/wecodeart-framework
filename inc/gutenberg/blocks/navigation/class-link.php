@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2024, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.5.8
+ * @version		6.6.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -18,10 +18,8 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Gutenberg\Blocks\Dynamic;
-use WeCodeArt\Gutenberg\Blocks\Navigation;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_lightness_limit;
+use WeCodeArt\Gutenberg\Blocks\{ Dynamic, Navigation };
+use function WeCodeArt\Functions\{ get_prop, get_lightness_limit, toJSON };
 
 /**
  * Gutenberg Navigation Link block.
@@ -144,7 +142,7 @@ class Link extends Dynamic {
 					'class' => 'wp-block-navigation-item__label'
 				]
 			] ], function( $attributes ) { 
-					echo wp_kses_post( get_prop( $attributes, [ 'label' ], '' ) );
+				echo wp_kses_post( get_prop( $attributes, [ 'label' ], '' ) );
 			}, [ $attributes ] );
 
 			// Description
@@ -154,7 +152,7 @@ class Link extends Dynamic {
 					'class' => 'wp-block-navigation-item__description'
 				]
 			] ], function( $attributes ) { 
-					echo wp_kses_post( get_prop( $attributes, [ 'description' ], '' ) );
+				echo wp_kses_post( get_prop( $attributes, [ 'description' ], '' ) );
 			}, [ $attributes ] );
 		}, [ $attributes, $extras ] );
 	}
@@ -252,12 +250,28 @@ class Link extends Dynamic {
 	 * @return 	array
 	 */
 	public function get_link_attributes( $attributes, $block, $extras ): array {
-		$current_object = get_queried_object_id();
-		
-		$is_active  = $current_object === get_prop( $attributes, [ 'id' ] );
-		$same_url 	= $current_object && get_permalink( $current_object ) === trailingslashit( get_prop( $attributes, [ 'url' ], '' ) );
-		$is_active	= $is_active ?: $same_url;
+		$current_id = get_queried_object_id();
+		$is_archive	= empty( get_prop( $attributes, [ 'type' ] ) );
+		$same_url 	= trailingslashit( get_permalink( $current_id ) ) === trailingslashit( get_prop( $attributes, [ 'url' ], '' ) );
 		$classes 	= [ 'wp-block-navigation-item__content', 'nav-link' ];
+
+		if( $is_archive ) {
+			if ( is_post_type_archive() ) {
+				$queried_archive_link = get_post_type_archive_link( get_queried_object()->name );
+				if ( trailingslashit( $attributes['url'] ) === trailingslashit( $queried_archive_link ) ) {
+					$is_active = true;
+				}
+			}
+	
+			if( is_tax() ) {
+				$queried_archive_link = get_term_link( get_queried_object() );
+				if ( trailingslashit( $attributes['url'] ) === trailingslashit( $queried_archive_link ) ) {
+					$is_active = true;
+				}
+			}
+		} elseif( $same_url ) {
+			$is_active = true;
+		}
 			
 		if( $is_active ) {
 			$classes[] = 'active';
@@ -286,13 +300,15 @@ class Link extends Dynamic {
 
 		// Submenu
 		if( count( $block->inner_blocks ) > 0 ) {
-			$attrs = wp_parse_args( [
-				'href'				=> '#',
-				'data-bs-toggle' 	=> 'dropdown',
-				'data-bs-auto-close'=> 'outside',
-				'aria-haspopup' 	=> 'true',
-				'aria-expanded' 	=> 'false',
-			], $attrs );
+			if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) ) {
+				$attrs = wp_parse_args( [
+					'href'						=> 'javascript:void(0)',
+					'data-wp-interactive'		=> 'wecodeart/dropdown',
+					'data-wp-context'			=> toJSON( [] ),
+					'data-wp-on--click'			=> 'actions.toggle',
+					'data-wp-init--validate'	=> 'callbacks.validateConfig',
+				], $attrs );
+			}
 
 			$classes[] = 'dropdown-toggle';
 		}

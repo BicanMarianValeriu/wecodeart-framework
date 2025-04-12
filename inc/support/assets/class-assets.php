@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Assets
- * @copyright   Copyright (c) 2024, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since 		5.4.0
  * @version		6.4.5
  */
@@ -99,14 +99,6 @@ final class Assets implements Integration {
 		] );
 
 		// Scripts
-		foreach( [ 'dropdown' ] as $handle ) { // todo - move away from BootStrap
-			$this->add_script( $this->make_handle( $handle ), [
-				'path' 		=> $this->get_asset( 'js', 'modules/' . $handle ),
-				'deps'		=> [ $this->make_handle() ],
-				'load'		=> false,
-			] );
-		}
-
 		foreach( [ 'backdrop', 'focustrap', 'template', 'toast' ] as $handle ) {
 			$this->add_script( $this->make_handle( $handle ), [
 				'path' 		=> $this->get_asset( 'js', 'plugins/' . $handle ),
@@ -137,7 +129,7 @@ final class Assets implements Integration {
 		] );
 
 		// Script Modules
-		foreach( [ 'collapse', 'offcanvas', 'modal', 'toast' ] as $handle ) {
+		foreach( [ 'collapse', 'offcanvas', 'modal', 'toast', 'dropdown' ] as $handle ) {
 			\wp_register_script_module(
 				'@wecodeart/' . $handle,
 				$this->get_asset( 'js', 'modules/' . $handle ),

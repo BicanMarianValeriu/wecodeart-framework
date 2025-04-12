@@ -63,7 +63,7 @@ const enableDismissTrigger = (component, method = 'hide') => {
 const noop = () => { };
 
 // Exports
-export { isElement, getElement, getParents, getTransitionDuration, isVisible, isDisabled, findShadowRoot, reflow, isRTL } from './dom';
+export { isElement, getElement, getNextActiveElement, getParents, getTransitionDuration, isVisible, isDisabled, findShadowRoot, reflow, isRTL } from './dom';
 export { paramsCreate, paramsUpdate, parseData, validateConfig } from './params';
 export { sanitizeHtml, DefaultAllowlist } from './sanitizer';
 export { execute, executeAfterTransition } from './execute';

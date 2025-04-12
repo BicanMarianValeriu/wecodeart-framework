@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Inputs
- * @copyright   Copyright (c) 2024, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.1.7
  * @version		6.4.5
  */

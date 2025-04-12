@@ -6,7 +6,7 @@
  *
  * @package 	WeCodeArt FrameWork
  * @subpackage 	Admin/Notifications
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since 		3.8.1
  * @version		6.1.2
  */

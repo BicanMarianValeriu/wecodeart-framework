@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  Class Alias
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.3.7
  * @version		6.3.7
  */

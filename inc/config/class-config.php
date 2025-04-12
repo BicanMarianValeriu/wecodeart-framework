@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework.
  * @subpackage  WeCodeArt/Config
- * @copyright   Copyright (c) 2024, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		3.9.5
  * @version		6.1.2
  */

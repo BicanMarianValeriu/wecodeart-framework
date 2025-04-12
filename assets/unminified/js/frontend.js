@@ -12,6 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   findShadowRoot: () => (/* binding */ findShadowRoot),
 /* harmony export */   getElement: () => (/* binding */ getElement),
+/* harmony export */   getNextActiveElement: () => (/* binding */ getNextActiveElement),
 /* harmony export */   getParents: () => (/* binding */ getParents),
 /* harmony export */   getTransitionDuration: () => (/* binding */ getTransitionDuration),
 /* harmony export */   isDisabled: () => (/* binding */ isDisabled),
@@ -64,6 +65,31 @@ const getElement = object => {
     return document.querySelector(parseSelector(object));
   }
   return null;
+};
+
+/**
+ * Return the previous/next element of a list.
+ *
+ * @param {array} list    The list of elements
+ * @param activeElement   The active element
+ * @param shouldGetNext   Choose to get next or previous element
+ * @param isCycleAllowed
+ * @return {Element|elem} The proper element
+ */
+const getNextActiveElement = (list, activeElement, shouldGetNext, isCycleAllowed) => {
+  const listLength = list.length;
+  let index = list.indexOf(activeElement);
+
+  // if the element does not exist in the list return an element
+  // depending on the direction and if cycle is allowed
+  if (index === -1) {
+    return !shouldGetNext && isCycleAllowed ? list[listLength - 1] : list[0];
+  }
+  index += shouldGetNext ? 1 : -1;
+  if (isCycleAllowed) {
+    index = (index + listLength) % listLength;
+  }
+  return list[Math.max(0, Math.min(index, listLength - 1))];
 };
 
 /**
@@ -280,6 +306,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   executeAfterTransition: () => (/* reexport safe */ _execute__WEBPACK_IMPORTED_MODULE_3__.executeAfterTransition),
 /* harmony export */   findShadowRoot: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.findShadowRoot),
 /* harmony export */   getElement: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getElement),
+/* harmony export */   getNextActiveElement: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getNextActiveElement),
 /* harmony export */   getParents: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getParents),
 /* harmony export */   getTransitionDuration: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.getTransitionDuration),
 /* harmony export */   isDisabled: () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_0__.isDisabled),
@@ -1868,6 +1895,7 @@ function filterLog(route, func, args) {
     isVisible: _helpers__WEBPACK_IMPORTED_MODULE_1__.isVisible,
     isElement: _helpers__WEBPACK_IMPORTED_MODULE_1__.isElement,
     getElement: _helpers__WEBPACK_IMPORTED_MODULE_1__.getElement,
+    getNextActiveElement: _helpers__WEBPACK_IMPORTED_MODULE_1__.getNextActiveElement,
     getParents: _helpers__WEBPACK_IMPORTED_MODULE_1__.getParents,
     sanitizeHtml: _helpers__WEBPACK_IMPORTED_MODULE_1__.sanitizeHtml,
     findShadowRoot: _helpers__WEBPACK_IMPORTED_MODULE_1__.findShadowRoot,

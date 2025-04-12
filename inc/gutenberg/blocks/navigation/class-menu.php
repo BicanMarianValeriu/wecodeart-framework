@@ -7,9 +7,9 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2024, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.9
+ * @version		6.6.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -79,8 +79,24 @@ class Menu extends Dynamic {
 		$instance = wecodeart( 'blocks' )->get( 'core/navigation-submenu' )::get_instance();
 
 		// Scripts
-		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) && ! wp_script_is( 'wecodeart-support-assets-dropdown' ) ) {
-			\wp_enqueue_script( 'wecodeart-support-assets-dropdown' );
+		if( get_prop( $block->context, [ 'openSubmenusOnClick' ] ) ) {
+			\wp_enqueue_script_module( '@wecodeart/dropdown' );
+			
+			\wp_interactivity_state( 'wecodeart/dropdown', apply_filters( 'wecodeart/filter/interactive/state/dropdown', [
+				'autoClose' => 'outside',
+				'boundary' 	=> 'clippingParents',
+				'display' 	=> 'dynamic',
+				'offset' 	=> [0, 0],
+				'reference' => 'toggle',
+			] ) );
+
+			\wp_interactivity_config( 'wecodeart/dropdown', [
+				'autoClose' => '(boolean|string)',	
+				'boundary' 	=> '(string|element)',
+				'display'   => 'string',
+				'offset' 	=> '(array|object|string|function)',
+				'reference' => '(string|element|object)',
+			] );
 		}
 		
 		// Use overlay first, fallback to nav background (or body).

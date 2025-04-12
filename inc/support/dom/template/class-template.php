@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework 
  * @subpackage 	Markup\Template
- * @copyright   Copyright (c) 2024, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		3.7.3
  * @version     6.4.1
  */

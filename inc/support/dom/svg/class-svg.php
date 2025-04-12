@@ -7,7 +7,7 @@
  *
  * @package 	WeCodeArt Framework
  * @subpackage  DOM\SVG
- * @copyright   Copyright (c) 2024, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		3.5
  * @version		6.4.1
  */

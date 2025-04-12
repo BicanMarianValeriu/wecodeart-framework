@@ -50,6 +50,34 @@ const getElement = object => {
 };
 
 /**
+ * Return the previous/next element of a list.
+ *
+ * @param {array} list    The list of elements
+ * @param activeElement   The active element
+ * @param shouldGetNext   Choose to get next or previous element
+ * @param isCycleAllowed
+ * @return {Element|elem} The proper element
+ */
+const getNextActiveElement = (list, activeElement, shouldGetNext, isCycleAllowed) => {
+    const listLength = list.length;
+    let index = list.indexOf(activeElement);
+
+    // if the element does not exist in the list return an element
+    // depending on the direction and if cycle is allowed
+    if (index === -1) {
+        return !shouldGetNext && isCycleAllowed ? list[listLength - 1] : list[0];
+    }
+
+    index += shouldGetNext ? 1 : -1;
+
+    if (isCycleAllowed) {
+        index = (index + listLength) % listLength;
+    }
+
+    return list[Math.max(0, Math.min(index, listLength - 1))];
+};
+
+/**
  * Get DOMElement parents
  *
  * @param   {DOMElement}
@@ -194,4 +222,4 @@ const findShadowRoot = element => {
 const isRTL = () => document.documentElement.dir === 'rtl';
 
 // Exports
-export { isElement, getElement, getParents, getTransitionDuration, isDisabled, isVisible, findShadowRoot, reflow, isRTL };
+export { isElement, getElement, getNextActiveElement, getParents, getTransitionDuration, isDisabled, isVisible, findShadowRoot, reflow, isRTL };

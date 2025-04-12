@@ -1,3 +1,8 @@
+v6.6.4
+- Updated - core/submenu now uses WP Interactivity API for dropdowns
+- Updated - core/navigation-link active class for post types archives
+- Removed - BootStrap's Dropdown 200+KB javascript in favor of custom (maintaining same functionality)
+
 v6.6.3
 - Updated - core/code block highlightjs.js enqueue is now encapsultated in a function
 - Updated - core/video block will now load the poster image if set (load video file if clicked or appears in viewport)
