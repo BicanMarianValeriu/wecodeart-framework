@@ -7,7 +7,7 @@
  *
  * @package		WeCodeArt Framework
  * @subpackage  Gutenberg\Blocks
- * @copyright   Copyright (c) 2025, WeCodeArt Framework
+ * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since		5.1.8
  * @version		6.5.8
  */
@@ -98,7 +98,7 @@ class Login extends Dynamic {
 					$contents->set_attribute( 'tabindex', '0' );
 					$contents->set_attribute( 'class', 'nav-link' );
 					$contents->set_attribute( 'aria-label', esc_attr__( 'Open login modal', 'wecodeart' ) );
-					$contents->set_attribute( 'aria-controls', '#' . $instance_id . '-modal' );
+					$contents->set_attribute( 'aria-controls', $instance_id . '-modal' );
 					$contents->set_attribute( 'data-wp-interactive', 'wecodeart/modal' );
 					$contents->set_attribute( 'data-wp-context', esc_attr( toJSON( [ 'backdrop' => 'static' ] ) ) );
 					$contents->set_attribute( 'data-wp-init--validate', 'callbacks.validateConfig' );

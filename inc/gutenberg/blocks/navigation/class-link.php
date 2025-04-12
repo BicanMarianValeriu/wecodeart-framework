@@ -255,6 +255,8 @@ class Link extends Dynamic {
 		$same_url 	= trailingslashit( get_permalink( $current_id ) ) === trailingslashit( get_prop( $attributes, [ 'url' ], '' ) );
 		$classes 	= [ 'wp-block-navigation-item__content', 'nav-link' ];
 
+		$is_active  = false;
+		
 		if( $is_archive ) {
 			if ( is_post_type_archive() ) {
 				$queried_archive_link = get_post_type_archive_link( get_queried_object()->name );

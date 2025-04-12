@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.6.3
+ * @version		6.6.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -89,7 +89,7 @@ class Video extends Dynamic {
 		if ( $poster ) {
 			$attrs = []; 
 			foreach ( $video->attributes as $attr ) {
-				$attrs[$attr->nodeName] = $attr->nodeValue ?: true;
+				$attrs[$attr->nodeName] = $attr->nodeValue ?: '';
 			}
 			
 			wecodeart( 'dom' )::add_classes( $figure, [ 'has-poster' ] );

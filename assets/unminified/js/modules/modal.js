@@ -178,7 +178,7 @@ const { state, actions, callbacks } = store(NAMESPACE, {
             const { backdrop, keyboard } = callbacks.getConfig();
             const { ref } = getElement();
             const context = getContext();
-            const relatedElement = Selector.findOne(ref.getAttribute('aria-controls'));
+            const relatedElement = Selector.findOne(`#${ref.getAttribute('aria-controls')}`);
             context.relatedElement = relatedElement;
 
             context._backdrop = new Backdrop({

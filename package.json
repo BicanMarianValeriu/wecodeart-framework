@@ -1,6 +1,6 @@
 {
 	"name": "wecodeart",
-	"version": "6.4.5",
+	"version": "6.6.4",
 	"main": "webpack.config.js",
 	"author": "Bican Marian Valeriu",
 	"browserslist": [

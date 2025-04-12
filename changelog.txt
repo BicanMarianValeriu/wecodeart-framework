@@ -2,6 +2,7 @@ v6.6.4
 - Updated - core/submenu now uses WP Interactivity API for dropdowns
 - Updated - core/navigation-link active class for post types archives
 - Removed - BootStrap's Dropdown 200+KB javascript in favor of custom (maintaining same functionality)
+- Fixed - Various accesibility issues with aria-controls (modal js)
 
 v6.6.3
 - Updated - core/code block highlightjs.js enqueue is now encapsultated in a function

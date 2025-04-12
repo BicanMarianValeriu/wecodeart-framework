@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.5
+ * @version		6.6.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -209,7 +209,7 @@ class Search extends Dynamic {
 		return wecodeart_input( 'button', [
 			'label' => $label,
 			'attrs' => $is_btn ? wp_parse_args( [
-				'aria-controls'				=> '#' . $instance_id . '-modal',
+				'aria-controls'				=> $instance_id . '-modal',
 				'data-wp-interactive' 		=> 'wecodeart/modal',
 				'data-wp-context' 			=> '{}',
 				'data-wp-init--validate' 	=> 'callbacks.validateConfig',
