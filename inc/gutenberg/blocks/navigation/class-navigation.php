@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.5.7
+ * @version		6.6.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks;
@@ -440,7 +440,7 @@ class Navigation extends Dynamic {
 		}
 		
 		// Hover or click
-		if( get_prop( $attributes, 'openSubmenusOnClick', false ) === false ) {
+		if( ! get_prop( $attributes, 'openSubmenusOnClick' ) ) {
 			$classes[] 	= 'with-hover';
 		}
 

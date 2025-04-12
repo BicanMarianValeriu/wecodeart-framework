@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.8
+ * @version		6.6.5
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -93,7 +93,7 @@ class Image extends Dynamic {
 	 */
 	public function filter_html( $html, $post, $thumbnail ) {
 		if( $html === '' && $thumbnail === 0 ) {
-			$placeholder = wecodeart_config( 'placeholder', false );
+			$placeholder = wecodeart_config( 'placeholder', true );
 
 			if( $placeholder === false ) {
 				return $html;

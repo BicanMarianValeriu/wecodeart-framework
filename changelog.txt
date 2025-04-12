@@ -1,3 +1,7 @@
+v6.6.5
+- Fixed - core/post-featured-image if no image is present/selected
+- Fixed - core/navigation with-hover class to be enabled when no click attribute
+
 v6.6.4
 - Updated - core/submenu now uses WP Interactivity API for dropdowns
 - Updated - core/navigation-link active class for post types archives
