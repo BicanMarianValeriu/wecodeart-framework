@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.6.4
+ * @version		6.6.6
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -57,9 +57,12 @@ class Menu extends Dynamic {
 	 *
 	 * @return 	array
 	 */
-	public function block_type_args(): array {
+	public function block_type_args( $current ): array {
+		$supports 	= get_prop( $current, [ 'supports' ], [] );
+		
 		return [
-			'render_callback' => [ Link::get_instance(), 'render' ],
+			'render_callback'	=> [ Link::get_instance(), 'render' ],
+			'supports'			=> wp_parse_args( [], $supports )
 		];
 	}
 
@@ -184,12 +187,7 @@ class Menu extends Dynamic {
 			.wp-block-navigation.hide-toggle .dropdown-toggle::after {
 				content: none;
 			}
-			.wp-block-navigation.with-hover :where(
-				.dropdown,
-				.dropup,
-				.dropstart,
-				.dropend
-			):where(:hover,:focus,:focus-within) > .dropdown-toggle ~ .dropdown-menu {
+			.wp-block-navigation.with-hover :where(.dropdown,.dropup,.dropstart,.dropend ):where(:hover,:focus,:focus-within) > .dropdown-toggle ~ .dropdown-menu {
 				display: block;
 				visibility: visible;
 				opacity: 1;
@@ -207,21 +205,21 @@ class Menu extends Dynamic {
 				--wp--dropdown-icon: url('$symbol');
 				position: relative;
 			}
-			:is(.dropup,.dropend,.dropstart) .dropdown-menu[data-bs-popper] {
+			:is(.dropup,.dropend,.dropstart) .dropdown-menu[data-placement] {
 				top: 0;
 				margin-top: 0;
 			}
-			.dropstart .dropdown-menu[data-bs-popper] {
+			.dropstart .dropdown-menu[data-placement] {
 				right: 100%;
 				left: auto;
 				margin-right: var(--wp--dropdown-spacer);
 			}
-			.dropend .dropdown-menu[data-bs-popper] {
+			.dropend .dropdown-menu[data-placement] {
 				right: auto;
 				left: 100%;
 				margin-left: var(--wp--dropdown-spacer);
 			}
-			.dropup .dropdown-menu[data-bs-popper] {
+			.dropup .dropdown-menu[data-placement] {
 				top: auto;
 				bottom: 100%;
 				margin-bottom: var(--wp--dropdown-spacer);
@@ -303,7 +301,7 @@ class Menu extends Dynamic {
 			.dropdown-menu.show {
 				display: block;
 			}
-			.dropdown-menu[data-bs-popper] {
+			.dropdown-menu[data-placement] {
 				top: 100%;
 				left: 0;
 				margin-top: var(--wp--dropdown-spacer);
@@ -311,14 +309,14 @@ class Menu extends Dynamic {
 			.dropdown-menu-start {
 				--wp--position: start;
 			}
-			.dropdown-menu-start[data-bs-popper] {
+			.dropdown-menu-start[data-placement] {
 				right: auto;
 				left: 0;
 			}
 			.dropdown-menu-end {
 				--wp--position: end;
 			}
-			.dropdown-menu-end[data-bs-popper] {
+			.dropdown-menu-end[data-placement] {
 				right: 0;
 				left: auto;
 			} 

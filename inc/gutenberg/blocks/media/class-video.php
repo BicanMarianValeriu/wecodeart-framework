@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.6.4
+ * @version		6.6.6
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -107,6 +107,29 @@ class Video extends Dynamic {
 			$image->setAttribute( 'data-options', toJSON( $attrs ) );
 			$figure->replaceChild( $image, $video );
 
+			// Create controls button
+			if( in_array( 'controls', array_keys( $attrs ) ) ) {
+				wecodeart( 'dom' )::add_classes( $figure, [ 'has-controls' ] );
+
+				if( ! in_array( 'autoplay', array_keys( $attrs ) ) ) {
+					$button = wecodeart( 'dom' )::create_element( 'button', $dom );
+					$button->setAttribute( 'class', 'wp-block-video__play' );
+					$button->setAttribute( 'type', 'button' );
+					
+					$svg = wecodeart( 'dom' )::create_element( 'svg', $dom );
+					$svg->setAttribute( 'viewBox', '0 0 512 512' );
+					$svg->setAttribute( 'role', 'img' );
+					$svg->setAttribute( 'focusable', 'false' );
+					$path = wecodeart( 'dom' )::create_element( 'path', $dom );
+					$path->setAttribute( 'd', 'M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9l0 176c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z' );
+					
+					$svg->appendChild( $path );
+					$button->appendChild( $svg );
+					$figure->appendChild( $button );
+				}
+			}
+
+			// Add script to replace video
 			wecodeart( 'assets' )->add_script( 'wecodeart-block-video', [
 				'deps'	 => [ 'wecodeart-support-assets' ],
 				'inline' => <<<JS
@@ -146,28 +169,6 @@ class Video extends Dynamic {
 					}).apply( this, [ window.wecodeart ] );
 				JS,
 			] );
-
-			// Create controls button
-			if( in_array( 'controls', array_keys( $attrs ) ) ) {
-				wecodeart( 'dom' )::add_classes( $figure, [ 'has-controls' ] );
-
-				if( ! in_array( 'autoplay', array_keys( $attrs ) ) ) {
-					$button = wecodeart( 'dom' )::create_element( 'button', $dom );
-					$button->setAttribute( 'class', 'wp-block-video__play' );
-					$button->setAttribute( 'type', 'button' );
-					
-					$svg = wecodeart( 'dom' )::create_element( 'svg', $dom );
-					$svg->setAttribute( 'viewBox', '0 0 512 512' );
-					$svg->setAttribute( 'role', 'img' );
-					$svg->setAttribute( 'focusable', 'false' );
-					$path = wecodeart( 'dom' )::create_element( 'path', $dom );
-					$path->setAttribute( 'd', 'M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9l0 176c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z' );
-					
-					$svg->appendChild( $path );
-					$button->appendChild( $svg );
-					$figure->appendChild( $button );
-				}
-			}
 			
 			$content = $dom->saveHTML();
 		}
@@ -183,6 +184,7 @@ class Video extends Dynamic {
 	public function styles() {
 		return <<<CSS
 			:where(.wp-block-video) {
+				position: relative;
 				margin: 0;
 				overflow: hidden;
 			}
@@ -191,9 +193,6 @@ class Video extends Dynamic {
 			}
 			.wp-block-video.alignfull {
 				max-width: initial;
-			}
-			.wp-block-video.has-controls {
-				position: relative;
 			}
 			.wp-block-video	video {
 				display: block;

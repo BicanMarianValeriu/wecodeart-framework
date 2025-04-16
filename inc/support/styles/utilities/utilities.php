@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg Utilities
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.2.4
- * @version		6.3.7
+ * @version		6.6.6
  */
 
 // Theme Shadows
@@ -760,4 +760,17 @@ foreach( [
             'hidden'    => 'hidden'
         ],
     ],
+    // Fade
+    [
+        'property'  => 'mask-image',
+        'class'     => 'fade',
+        'values'	=> [
+            'left'          => 'linear-gradient(to right, transparent var(--wp--fade-start, 2.5%), #000 var(--wp--fade-size, 15%))',
+            'right'         => 'linear-gradient(to left, transparent var(--wp--fade-start, 2.5%), #000 var(--wp--fade-size, 15%))',
+            'top'           => 'linear-gradient(to bottom, transparent var(--wp--fade-start, 2.5%), #000 var(--wp--fade-size, 15%))',
+            'bottom'        => 'linear-gradient(to top, transparent var(--wp--fade-start, 2.5%), #000 var(--wp--fade-size, 15%))',
+            'horizontal'    => 'linear-gradient(to left, transparent var(--wp--fade-start, 2.5%), #000 var(--wp--fade-size, 15%), #000 calc(100% - var(--wp--fade-size, 15%)), transparent calc(100% - var(--wp--fade-start, 2.5%)))',
+            'vertical'      => 'linear-gradient(to top, transparent var(--wp--fade-start, 2.5%), #000 var(--wp--fade-size, 15%), #000 calc(100% - var(--wp--fade-size, 15%)), transparent calc(100% - var(--wp--fade-start, 2.5%)))'
+        ], 
+    ]
 ] as $utility ) wecodeart( 'styles' )::register_utility( $utility );

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.6.6
  */
 
 namespace WeCodeArt\Gutenberg\Styles;
@@ -72,13 +72,15 @@ class Processor {
 	 *
 	 * @return 	string
 	 */
-	protected function get_selector( string $prefix = '', bool $support = true ): string {
+	protected function get_selector( string $prefix = '', bool $support = true, array $type = [ 'root' ] ): string {
 		$excludes = [ 'core/heading', 'core/paragraph' ]; // Exclude this.
 		$selector = '';
 		
 		if( $support === true && ! in_array( $this->name, $excludes ) ) {
 			$block_type	= \WP_Block_Type_Registry::get_instance()->get_registered( $this->name );
-			$selector 	= $block_type ? get_prop( $block_type->supports, [ '__experimentalSelector' ], '' ) : '';
+			$selector 	= $block_type ? get_prop( $block_type->supports, [ '__experimentalSelector' ], '' ) : ''; // Deprecated
+			$selector 	= get_prop( $block_type->selectors, [ 'root' ], $selector ); // Fallback to root if not exists
+			$selector 	= get_prop( $block_type->selectors, $type, $selector );
 
 			if( $selector && strpos( $selector, ',' ) ) {
 				$selector 	= join( ',', array_map( function( $item ) use ( $prefix ) {

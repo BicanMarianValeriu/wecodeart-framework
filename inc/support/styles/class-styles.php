@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.4.5
+ * @version		6.6.6
  */
 
 namespace WeCodeArt\Support;
@@ -77,9 +77,12 @@ final class Styles implements Integration {
 	 */
 	public function safe_style_css( $args ): array {
 		return wp_parse_args( [
+			'-webkit-text-stroke',
 			'text-overflow',
+			'text-shadow',
 			'white-space',
-			'box-shadow'
+			'box-shadow',
+			'transform',
 		], $args );
 	}
 
@@ -144,13 +147,17 @@ final class Styles implements Integration {
 		$values = (array) get_prop( $args, 'values', [] );
 		
 		// Bail if no values.
-		if( empty( $values ) ) return;
+		if( empty( $values ) ) {
+			return;
+		}
 		
 		$properties	= (array) get_prop( $args, 'property' );
 		$class 		= get_prop( $args, 'class', current( $properties ) );
 
 		// Bail if no class.
-		if( ! $class ) return;
+		if( ! $class ) {
+			return;
+		}
 
 		$media		= wecodeart_json( [ 'settings', 'custom', 'breakpoints' ], [] );
 		$responsive = get_prop( $args, 'responsive' ) && ! empty( $media );
@@ -170,7 +177,9 @@ final class Styles implements Integration {
 			] );
 			
 			// Move on if not responsive
-			if( ! $responsive ) continue;
+			if( ! $responsive ) {
+				continue;
+			}
 
 			foreach( $media as $break => $query ) {
 				$_break_ = static::generate_breakpoint( $query );
@@ -452,6 +461,16 @@ final class Styles implements Integration {
 					foreach( $properties as $property => $value ) {
 						// Missing then skip.
 						if( ! $property ) continue;
+
+						// Add -webkit-*
+						if ( is_string( $property ) && in_array( $property, [
+							'mask-image',
+						], true ) ) {
+							unset( $css[ $media_query ][ $element ][ $property ] );
+							$css[ $media_query ][ $element ][ '-webkit-' . $property ] = $value;
+							$css[ $media_query ][ $element ][ $property ]              = $value;
+						}
+
 						// Add -webkit-* and -moz-*.
 						if ( is_string( $property ) && in_array( $property, [
 							'border-radius',

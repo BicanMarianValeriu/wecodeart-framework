@@ -9,7 +9,7 @@
  * @subpackage 	Support\Styles
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since 		5.0.0
- * @version		6.3.9
+ * @version		6.6.6
  */
 
 namespace WeCodeArt\Support\Styles;
@@ -64,43 +64,6 @@ final class Sanitize {
 	}
 
 	/**
-	 * Sanitize rgba color.
-	 *
-	 * @since   5.0.0
-	 * @param 	string $value Color in rgba format.
-	 *
-	 * @return 	string
-	 */
-	public static function color_rgba( string $value = '' ): string {
-		$red   = 'rgba(0,0,0,0)';
-		$green = 'rgba(0,0,0,0)';
-		$blue  = 'rgba(0,0,0,0)';
-		$alpha = 'rgba(0,0,0,0)'; // If empty or an array return transparent
-		
-		if ( empty( $value ) || is_array( $value ) ) {
-			return '';
-		}
-
-		// By now we know the string is formatted as an rgba color so we need to further sanitize it.
-		$value = str_replace( ' ', '', $value );
-		sscanf( $value, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
-
-		return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
-	}
-	
-	/**
-	 * Sanitize hex color.
-	 *
-	 * @since   5.0.0
-	 * @param 	string $value Color in hex format.
-	 *
-	 * @return 	string
-	 */
-	public static function color_hex( string $value = '' ): string {
-		return sanitize_hex_color( $value );
-	}
-
-	/**
 	 * Sanitize color.
 	 *
 	 * @param 	string $value Color value.
@@ -108,20 +71,6 @@ final class Sanitize {
 	 * @return 	string
 	 */
 	public static function color( string $value = '' ): string {
-		// Is CSS Variable or RGB
-		$is_var = ( strpos( $value, 'var(' ) !== false || strpos( $value, 'rgb(' ) !== false );
-	
-		if ( $is_var ) {
-			return filter_var( $value, FILTER_SANITIZE_STRING );
-		}
-	
-		// Is this an rgba color or a hex?
-		$mode = ( strpos( $value, 'rgba(' ) !== false ) ? 'rgba' : 'hex';
-	
-		if ( 'rgba' === $mode ) {
-			return self::color_rgba( $value );
-		} else {
-			return self::color_hex( $value );
-		}
+		return ( new Property\Color( $value ) )->get_value();
 	}
 }

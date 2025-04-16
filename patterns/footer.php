@@ -35,7 +35,7 @@
 			<!-- wp:heading {"level":6,"className":"fw-700"} -->
 			<h6 class="wp-block-heading fw-700"><?php esc_html_e( 'Links', 'wecodeart' ); ?></h6>
 			<!-- /wp:heading -->
-			<!-- wp:navigation {"openSubmenusOnClick":true,"overlayMenu":"never","hasIcon":false,"layout":{"type":"flex","orientation":"vertical"},"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"fontSize":"small"} /-->
+			<!-- wp:navigation {"overlayMenu":"never","hasIcon":false,"layout":{"type":"flex","orientation":"vertical"},"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"fontSize":"small"} /-->
 		</div>
 		<!-- /wp:column -->
 		<!-- wp:column {"className":""} -->

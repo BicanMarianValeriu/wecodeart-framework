@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.6.6
  */
 
 namespace WeCodeArt\Gutenberg\Styles\Blocks;
@@ -18,8 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Styles\Processor;
-use function WeCodeArt\Functions\get_prop;
-use function WeCodeArt\Functions\get_lightness_limit;
+use function WeCodeArt\Functions\{ get_prop, get_lightness_limit };
 
 /**
  * Block CSS Processor
@@ -41,9 +40,13 @@ class Button extends Processor {
 		if( get_prop( $this->attrs, 'textColor' ) === null && get_prop( $this->attrs, 'backgroundColor' ) ) {
 			$selected	= wp_list_filter( $palette, [ 'slug' => get_prop( $this->attrs, 'backgroundColor' ) ] );
 
+			$is_dark 	= false;
 			$rgba 		= wecodeart( 'styles' )::hex_to_rgb( get_prop( current( $selected ), 'color' ), 1, true );
-			$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
-			$is_dark 	= $luminance < get_lightness_limit();
+
+			if( is_array( $rgba ) ) {
+				$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
+				$is_dark 	= $luminance < get_lightness_limit();
+			}
 
 			$declarations['color'] = $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
 		}
@@ -52,9 +55,13 @@ class Button extends Processor {
 		if( get_prop( $this->attrs, 'textColor' ) && $is_outline ) {
 			$selected	= wp_list_filter( $palette, [ 'slug' => get_prop( $this->attrs, 'textColor' ) ] );
 
+			$is_dark 	= false;
 			$rgba 		= wecodeart( 'styles' )::hex_to_rgb( get_prop( current( $selected ), 'color' ), 1, true );
-			$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
-			$is_dark 	= $luminance < get_lightness_limit();
+			
+			if( is_array( $rgba ) ) {
+				$luminance	= wecodeart( 'styles' )::rgb_luminance( $rgba );
+				$is_dark 	= $luminance < get_lightness_limit();
+			}
 
 			$declarations['--wp--color--hover'] = $is_dark ? 'var(--wp--preset--color--white)' : 'var(--wp--preset--color--black)';
 		}

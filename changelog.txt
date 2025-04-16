@@ -1,3 +1,12 @@
+v6.6.6
+- Updated - minify modules scripts using new method for smaller bundles
+- Updated - wecodeart( 'styles' )::add_prefixes to add -webkit prefix for mask-image
+- Updated - wecodeart( 'styles' ) utility for fade-{top|left|right|bottom|vertical|horizontal}
+- Updated - wecodeart( 'styles' ) sanitize color encapsulated as a method
+- Updated - extend safe_style_css rules with some extra safe css rules
+- Updated - added support for block selectors for WP 6.8
+- Fixed - core/button issue with accent color not being hex (converted to rgb array) with dark style
+
 v6.6.5
 - Fixed - core/post-featured-image if no image is present/selected
 - Fixed - core/navigation with-hover class to be enabled when no click attribute
