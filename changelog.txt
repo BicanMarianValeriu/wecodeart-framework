@@ -1,3 +1,10 @@
+v6.6.7
+- Updated - Testimonials pattern HTML corrections (bottom spacing to fit the shadow + fade horizontal)
+- Updated - Custom block formats are now exposed to BlockControls Toolbar (floating, counter, string rotator)
+- Updated - Use popover (instead of modal) for the Toolbar block formats
+- Fixed - issue with click event, animation and offset/delay for tooltip/popover module
+- Added - new inline typography options formatting
+
 v6.6.6
 - Updated - minify modules scripts using new method for smaller bundles
 - Updated - wecodeart( 'styles' )::add_prefixes to add -webkit prefix for mask-image
