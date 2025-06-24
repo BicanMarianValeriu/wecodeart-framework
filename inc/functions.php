@@ -220,7 +220,7 @@ function array_flatten( array $array = [] ): array {
         }
 
         if ( is_array( $element ) ) {
-            array_push( $result, ...flatten( $element ) );
+            array_push( $result, ...array_flatten( $element ) );
         } else {
             $result[] = $element;
         }
