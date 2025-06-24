@@ -106,7 +106,7 @@ function wp_parse_args_r( &$a, $b ) {
  * @param 	int 	$decimals
  * @param 	int 	$precision
  *
- * @return 	array
+ * @return 	int|float|false
  */
 function calc( $number1, $action, $number2, $round = false, $decimals = 0, $precision = 10 ) {
     static $bc;
