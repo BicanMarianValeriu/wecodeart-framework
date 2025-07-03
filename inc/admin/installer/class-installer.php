@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.3.7
+ * @version		6.6.8
  */
 
 namespace WeCodeArt\Admin;
@@ -131,10 +131,11 @@ abstract class Installer implements Installable {
 	 * Set zip url.
 	 *
 	 * @since 	6.1.2
+	 * @version 6.6.8
 	 *
 	 * @return 	mixed
 	 */
-	public function set_zip_url(): mixed {
+	public function set_zip_url() {
 		switch ( $this->source ) {
 			case 'custom':
 				return $this->package = $this->slug;
@@ -203,7 +204,7 @@ abstract class Installer implements Installable {
 	 *
 	 * @return 	mixed
 	 */
-	public function ok(): mixed {
+	public function ok() {
 		return $this->status;
 	}
 }

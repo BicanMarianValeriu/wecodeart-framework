@@ -1,3 +1,14 @@
+v6.6.8
+- Updated - core/page-list to properly load required navigation styles when individually used
+- Updated - core/post-navigation-link is now enhanced with (post title) tooltip if formatting module is installed
+- Updated - optimization (image preloading) to search for images only in .wp-site-blocks selector
+- Updated - mixed return type on some class methods to maintain compatability for PHP 7.4
+- Updated - cookies module to support regex blocking
+- Fixed - issue with undefined index key url for class-link.php (navigation block)
+- Fixed - offcanvas template accesibility with aria-labeledby title
+- Fixed - modal template accesibility with aria-labeledby title
+- Fixed - tabs module accesibility with role=tablist
+
 v6.6.7
 - Updated - Testimonials pattern HTML corrections (bottom spacing to fit the shadow + fade horizontal)
 - Updated - Custom block formats are now exposed to BlockControls Toolbar (floating, counter, string rotator)

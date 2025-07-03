@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.3.7
- * @version		6.5.0
+ * @version		6.6.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -48,7 +48,12 @@ class Pages extends Dynamic {
 	 */
 	public function block_type_args(): array {
 		return [
-			'render_callback' => [ $this, 'render' ]
+			'render_callback' 		=> [ $this, 'render' ],
+			'view_style_handles'	=> [
+				'wp-block-navigation',
+				'wp-block-navigation-link',
+				'wp-block-navigation-submenu'
+			],
 		];
 	}
 
@@ -109,16 +114,11 @@ class Pages extends Dynamic {
 			return $content;
 		}
 
-		if( ! wp_style_is( 'wp-block-navigation' ) ) {
-			wp_enqueue_style( 'wp-block-navigation' );
-			wp_enqueue_style( 'wp-block-navigation-link' );
-		}
-
 		// Otherwise we wrap them in <ul> tag.
 		$content = wecodeart( 'dom' )::wrap( 'wp-block-page-list', [ [
 			'tag' 	=> 'ul',
 			'attrs'	=> $this->get_block_wrapper_attributes( [
-				'class' => 'wp-block-navigation nav'
+				'class' => 'wp-block-navigation with-hover nav'
 			] )
 		] ], $content, [], false );
 
@@ -150,12 +150,6 @@ class Pages extends Dynamic {
 		$inner_blocks = wp_list_filter( $all_pages, [ 'post_parent' => $page->ID ] );
 
 		if( ! empty( $inner_blocks ) ) {
-			// Scripts
-			if( ! wp_script_is( 'wecodeart-support-assets-dropdown' ) ) {
-				\wp_enqueue_script( 'wecodeart-support-assets-dropdown' );
-				\wp_enqueue_style( 'wp-block-navigation-submenu' );
-			}
-
 			$block = wp_parse_args( [
 				'innerBlocks' => array_map( function( $page ) use( $all_pages ) {
 					return self::parse_block( $page, $all_pages );

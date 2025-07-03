@@ -8,7 +8,7 @@
  * @package		WeCodeArt Framework
  * @subpackage  Modal
  * @since		6.1.5
- * @version    	6.4.5
+ * @version    	6.6.8
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -56,13 +56,17 @@ $footer     = $footer ?? false;
 // Allways goes to footer
 \add_action( 'wp_footer', static function() use ( $classnames, $dialog_cls, $close, $id, $title, $content, $footer ) {
 ?>
-<div class="<?php echo esc_attr( join( ' ', $classnames) ); ?>" id="<?php echo esc_attr( $id ); ?>-modal" aria-hidden="true" tabindex="-1">
+<div class="<?php echo esc_attr( join( ' ', $classnames) ); ?>" id="<?php echo esc_attr( $id ); ?>-modal" aria-hidden="true" tabindex="-1"
+    <?php if( ! empty( $title ) ) : ?>
+	aria-labelledby="<?php echo esc_attr( $id ); ?>-modal-title"
+	<?php endif; ?>
+    >
     <div class="<?php echo esc_attr( join( ' ', $dialog_cls ) ); ?>">
         <div class="wp-modal__content">
             <?php if( ! empty( $title ) || $close ) : ?>
             <div class="wp-modal__header">
                 <?php if( ! empty( $title ) ) : ?>
-                <h5 class="wp-modal__title"><?php echo esc_html( $title ); ?></h5>
+                <h5 class="wp-modal__title" id="<?php echo esc_attr( $id ); ?>-modal-title"><?php echo esc_html( $title ); ?></h5>
                 <?php endif; ?>
                 <?php if( $close ) wecodeart_template( 'general/close', [ 'close' => 'modal' ] ); ?>
             </div>

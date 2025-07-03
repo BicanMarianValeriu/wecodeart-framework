@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.6.4
+ * @version		6.6.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -260,14 +260,14 @@ class Link extends Dynamic {
 		if( $is_archive ) {
 			if ( is_post_type_archive() ) {
 				$queried_archive_link = get_post_type_archive_link( get_queried_object()->name );
-				if ( trailingslashit( $attributes['url'] ) === trailingslashit( $queried_archive_link ) ) {
+				if ( trailingslashit( get_prop( $attributes, [ 'url' ], '' ) ) === trailingslashit( $queried_archive_link ) ) {
 					$is_active = true;
 				}
 			}
 	
 			if( is_tax() ) {
 				$queried_archive_link = get_term_link( get_queried_object() );
-				if ( trailingslashit( $attributes['url'] ) === trailingslashit( $queried_archive_link ) ) {
+				if ( trailingslashit( get_prop( $attributes, [ 'url' ], '' ) ) === trailingslashit( $queried_archive_link ) ) {
 					$is_active = true;
 				}
 			}

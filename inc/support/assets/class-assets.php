@@ -9,7 +9,7 @@
  * @subpackage 	Support\Assets
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since 		5.4.0
- * @version		6.4.5
+ * @version		6.6.8
  */
 
 namespace WeCodeArt\Support;
@@ -109,6 +109,7 @@ final class Assets implements Integration {
 
 		$wecodeart = [ 
 			'templateDirectory' => get_template_directory_uri(),
+			'styleDirectory'	=> is_child_theme() ? get_stylesheet_directory_uri() : null,
 			'version'			=> wecodeart( 'version' ),
 			'isDevMode'			=> wecodeart_if( 'is_dev_mode' ),
 			'plugins'			=> [],
@@ -116,15 +117,11 @@ final class Assets implements Integration {
 				'skipLink' => esc_html__( 'Skip to content', 'wecodeart' )
 			]
 		];
-
-		if( is_child_theme() ) {
-			$wecodeart['styleDirectory'] = get_stylesheet_directory_uri();
-		}
 		
 		$this->add_script( $this->make_handle(), [
 			'path' 		=> $this->get_asset( 'js', 'frontend' ),
 			'deps'		=> [ 'wp-hooks' ],
-			'locale'	=> $wecodeart,
+			'locale'	=> array_filter( $wecodeart, fn( $value ) => $value !== null ),
 			'inline'	=> 'document.addEventListener("DOMContentLoaded",function(){new wecodeart.Scripts();});',
 		] );
 
@@ -148,7 +145,7 @@ final class Assets implements Integration {
      *
      * @return mixed
      */
-    public function update( string $handle, array $data = [], string $type = '' ): mixed {
+    public function update( string $handle, array $data = [], string $type = '' ) {
 		if( ! in_array( $type, [ 'style', 'script' ] ) ) {
 			return _doing_it_wrong(
 				__CLASS__, 

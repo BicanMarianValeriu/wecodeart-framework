@@ -9,7 +9,7 @@
  * @subpackage 	Admin\Installer\Module
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since 		6.2.9
- * @version		6.3.7
+ * @version		6.6.8
  */
 
 namespace WeCodeArt\Admin\Installer;
@@ -85,10 +85,11 @@ class Module extends Installer {
 	 * Set zip url.
 	 *
 	 * @since 	6.3.7
+	 * @version 6.6.8
 	 *
 	 * @return 	mixed
 	 */
-	public function set_zip_url(): mixed {
+	public function set_zip_url() {
 		if ( $this->version === '' ) {
 			parent::set_zip_url();
 	

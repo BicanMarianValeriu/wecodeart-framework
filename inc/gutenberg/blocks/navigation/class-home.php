@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use WeCodeArt\Gutenberg\Blocks\Navigation\Link;
-use function WeCodeArt\Functions\get_prop;
 
 /**
  * Gutenberg Navigation Home Link block.

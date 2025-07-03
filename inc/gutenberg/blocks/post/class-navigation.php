@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.4.4
- * @version		6.4.4
+ * @version		6.6.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -64,7 +64,21 @@ class Navigation extends Dynamic {
 		if( $p->next_tag( [
 			'tag_name' 	=> 'A',
 		] ) ) {
-			$p->add_class( 'post-navigation-link' );
+			$p->add_class( 'wp-block-post-navigation-link__link post-navigation-link' );
+
+			if( wecodeart( 'support' )->has( 'modules/formatting' ) ) {
+				$p->set_attribute( 'data-wp-interactive', 'wecodeart/floating' );
+				$p->set_attribute( 'data-wp-on--focusin', 'actions.enter' );
+				$p->set_attribute( 'data-wp-on--focusout', 'actions.leave' );
+				$p->set_attribute( 'data-wp-on--mouseenter', 'actions.enter' );
+				$p->set_attribute( 'data-wp-on--mouseleave', 'actions.leave' );
+				$p->set_attribute( 'data-wp-init--validate', 'callbacks.validateConfig' );
+				$p->set_attribute( 'data-wp-context', esc_attr( toJSON( [
+					'title'	=> get_the_title( url_to_postid( $p->get_attribute( 'href' ) ) ),
+					'html' 	=> true,
+					'delay'	=> 150
+				] ) ) );
+			}
 		}
 
 		$content = $p->get_updated_html();

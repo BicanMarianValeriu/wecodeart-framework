@@ -8,7 +8,7 @@
  * @package		WeCodeArt Framework
  * @subpackage  OffCanvas
  * @since		5.0.0
- * @version    	6.5.7
+ * @version    	6.6.8
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -56,11 +56,15 @@ $classnames = [ 'wp-offcanvas' ];
 $classnames = array_merge( $classnames, (array) $class );
 
 ?>
-<div class="<?php echo esc_attr( join( ' ', $classnames ) ); ?>" id="<?php echo esc_attr( $id ); ?>-offcanvas" tabindex="-1">
+<div class="<?php echo esc_attr( join( ' ', $classnames ) ); ?>" id="<?php echo esc_attr( $id ); ?>-offcanvas" tabindex="-1"
+	<?php if( ! empty( $title ) ) : ?>
+	aria-labelledby="<?php echo esc_attr( $id ); ?>-offcanvas-title"
+	<?php endif; ?>
+	>
 	<?php if( ! empty( $title ) || $close ) : ?>
 	<div class="wp-offcanvas__header">
 		<?php if( ! empty( $title ) ) : ?>
-		<h5 class="wp-offcanvas__title"><?php echo esc_html( $title ); ?></h5>
+		<h5 class="wp-offcanvas__title" id="<?php echo esc_attr( $id ); ?>-offcanvas-title"><?php echo esc_html( $title ); ?></h5>
 		<?php endif; ?>
 		<?php if( $close ) wecodeart_template( 'general/close', [ 'close' => 'offcanvas' ] ); ?>
 	</div>
