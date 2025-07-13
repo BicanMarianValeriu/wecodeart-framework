@@ -123,7 +123,7 @@ class Request {
 	 */
 	public function get_response_body( bool $decoded = false ) {
 		if( $decoded ) {
-			$data =  json_decode( $this->response_body, true );
+			$data =  json_decode( $this->response_body ?: '{}', true );
 
 			if( json_last_error() === JSON_ERROR_NONE ) {
 				return $data;

@@ -1,6 +1,23 @@
 .wca-notice {
     position: relative;
-    min-height: 85px;
+    min-height: 75px;
+    background-image: linear-gradient(90deg, #2c3337 75px, white 75px, white);
+
+    &.notice-warning {
+        .wca-notice {
+            &__container {
+                border-top: 5px solid #ffc107;
+            }
+        }
+    }
+
+    &.notice-error {
+        .wca-notice {
+            &__container {
+                border-top: 5px solid #dc3545;
+            }
+        }
+    }
 
     &__branding {
         position: absolute;
@@ -10,8 +27,25 @@
         img {
             display: block;
             width: 100%;
-            max-width: 65px;
+            max-width: 55px;
+            margin: 10px;
             height: auto;
+        }
+    }
+
+    &__container { 
+        padding: 10px;
+        padding-left: 85px;
+        border-top: 5px solid #0088cc;
+
+        > * {
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
 }

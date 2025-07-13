@@ -128,6 +128,9 @@ class Module extends Installer {
 			'abort_if_destination_exists' 	=> false
 		] );
 
+		// Security validation after installation
+		$this->validate_module_security();
+
 		// Update options
 		$modules		= wecodeart_option( 'modules', [] );
 		$current_module	= array_search( $this->slug, array_column( $modules, 'slug' ) );
@@ -151,6 +154,35 @@ class Module extends Installer {
 		] );
 		
 		return $this->status = $this->get_ver();
+	}
+
+	/**
+	 * Validate module security after installation
+	 *
+	 * @since 	6.7.0
+	 *
+	 * @return 	void
+	 */
+	private function validate_module_security(): void {
+		$module_path = $this->get_dir();
+		
+		if ( ! is_dir( $module_path ) ) {
+			return;
+		}
+
+		// Initialize security validation
+		$security = \WeCodeArt\Support\Modules\Security::get_instance();
+		
+		// Run security checks
+		$is_secure = $security->validate_module( $module_path );
+		
+		// If security issues found, log them but don't prevent installation
+		if ( ! $is_secure ) {
+			error_log( sprintf( 
+				'WeCodeArt Module Security: Security issues detected in module "%s" but installation continued', 
+				basename( $module_path )
+			) );
+		}
 	}
 
 	/**

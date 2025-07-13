@@ -54,7 +54,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!*********************************************!*\
   !*** ./src/js/admin/notifications/index.js ***!
@@ -69,21 +69,20 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @package 	WeCodeArt FrameWork
  * @subpackage 	Admin/Notifications
- * @copyright   Copyright (c) 2023, WeCodeArt Framework
+ * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since 		3.8.1
  * @version		6.1.2
  */
 
+
 const Notification = {
   init() {
     document.addEventListener('click', e => {
-      var _target$closest$datas, _target$closest, _target$closest$datas2;
-
+      var _target$closest$datas;
       const {
         target
       } = e;
-      const noticeId = (_target$closest$datas = (_target$closest = target.closest('.wca-notice')) === null || _target$closest === void 0 ? void 0 : (_target$closest$datas2 = _target$closest.dataset) === null || _target$closest$datas2 === void 0 ? void 0 : _target$closest$datas2.id) !== null && _target$closest$datas !== void 0 ? _target$closest$datas : '';
-
+      const noticeId = (_target$closest$datas = target.closest('.wca-notice')?.dataset?.id) !== null && _target$closest$datas !== void 0 ? _target$closest$datas : '';
       if (target.matches('[data-dismiss]')) {
         this.dismissNew(e, noticeId);
       } else if (target.classList.contains('notice-dismiss')) {
@@ -91,15 +90,12 @@ const Notification = {
       }
     });
   },
-
   dismiss(e, noticeId) {
     e.preventDefault();
     this.ajax(noticeId);
   },
-
   dismissNew(e, noticeId) {
     var _target$getAttribute, _target$getAttribute2;
-
     e.preventDefault();
     const {
       target
@@ -108,29 +104,22 @@ const Notification = {
     this.ajax(noticeId);
     el.parentNode.removeChild(el);
     const link = (_target$getAttribute = target.getAttribute('href')) !== null && _target$getAttribute !== void 0 ? _target$getAttribute : '';
-
     const _target = (_target$getAttribute2 = target.getAttribute('target')) !== null && _target$getAttribute2 !== void 0 ? _target$getAttribute2 : '';
-
     link && _target === '_blank' && window.open(link, '_blank');
   },
-
   ajax(noticeId) {
     if (noticeId === '') {
       return;
     }
-
     const notices = [...document.querySelectorAll('.wca-notice')];
-    const container = notices.filter(_ref => {
-      let {
-        dataset: {
-          id = ''
-        } = {}
-      } = _ref;
-      return id == noticeId;
-    }).pop();
+    const container = notices.filter(({
+      dataset: {
+        id = ''
+      } = {}
+    }) => id == noticeId).pop();
     const {
       nonce = ''
-    } = (container === null || container === void 0 ? void 0 : container.dataset) || {};
+    } = container?.dataset || {};
     fetch(ajaxurl, {
       method: 'POST',
       headers: {
@@ -139,7 +128,6 @@ const Notification = {
       body: `action=wca_dismiss_notification&notification=${encodeURIComponent(noticeId)}&nonce=${encodeURIComponent(nonce)}`
     });
   }
-
 };
 document.addEventListener('DOMContentLoaded', () => {
   Notification.init();

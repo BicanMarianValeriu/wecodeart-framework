@@ -1,4 +1,11 @@
-v6.6.8
+v6.7.0
+- Updated - improved cookie management interface with search/pagination and cookies added via API will be highlighted
+- Updated - default translation domain for core-group.php and core-template.php blocks
+- Fixed - an issue with Cookies module vs blocked cookies cookie default value
+- Added - module security scan on install with notification if suspicious code is found
+- Added - SmoothScroll plugin
+
+v6.6.8/9
 - Updated - core/page-list to properly load required navigation styles when individually used
 - Updated - core/post-navigation-link is now enhanced with (post title) tooltip if formatting module is installed
 - Updated - optimization (image preloading) to search for images only in .wp-site-blocks selector

@@ -1,9 +1,16 @@
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/scss/admin/notification/index.scss ***!
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/scss/admin/notification/index.scss ***!
   \***************************************************************************************************************************************************************************************************************************************************************/
 .wca-notice {
   position: relative;
-  min-height: 85px;
+  min-height: 75px;
+  background-image: linear-gradient(90deg, #2c3337 75px, white 75px, white);
+}
+.wca-notice.notice-warning .wca-notice__container {
+  border-top: 5px solid #ffc107;
+}
+.wca-notice.notice-error .wca-notice__container {
+  border-top: 5px solid #dc3545;
 }
 .wca-notice__branding {
   position: absolute;
@@ -13,8 +20,20 @@
 .wca-notice__branding img {
   display: block;
   width: 100%;
-  max-width: 65px;
+  max-width: 55px;
+  margin: 10px;
   height: auto;
+}
+.wca-notice__container {
+  padding: 10px;
+  padding-left: 85px;
+  border-top: 5px solid #0088cc;
+}
+.wca-notice__container > *:first-child {
+  margin-top: 0;
+}
+.wca-notice__container > *:last-child {
+  margin-bottom: 0;
 }
 
 /*# sourceMappingURL=notifications.css.map*/

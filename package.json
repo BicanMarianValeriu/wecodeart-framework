@@ -52,6 +52,8 @@
 		"build:modules:optimization": "wp-scripts build admin=./inc/support/modules/optimization/src/js/admin.js --output-path=inc/support/modules/optimization/assets/minified",
 		"start:modules:contactform": "wp-scripts start admin=./inc/support/modules/contactform/src/js/admin.js --output-path=inc/support/modules/contactform/assets/unminified",
 		"build:modules:contactform": "wp-scripts build admin=./inc/support/modules/contactform/src/js/admin.js --output-path=inc/support/modules/contactform/assets/minified",
+		"start:modules:smoothscroll": "wp-scripts start front=./inc/support/modules/smoothscroll/src/js/front.js admin=./inc/support/modules/smoothscroll/src/js/admin.js --output-path=inc/support/modules/smoothscroll/assets/unminified",
+		"build:modules:smoothscroll": "wp-scripts build front=./inc/support/modules/smoothscroll/src/js/front.js admin=./inc/support/modules/smoothscroll/src/js/admin.js --output-path=inc/support/modules/smoothscroll/assets/minified",
 		"start:modules:cookies": "wp-scripts start admin=./inc/support/modules/cookies/src/js/admin.js front=./inc/support/modules/cookies/src/js/front.js --output-path=inc/support/modules/cookies/assets/unminified",
 		"build:modules:cookies": "wp-scripts build admin=./inc/support/modules/cookies/src/js/admin.js front=./inc/support/modules/cookies/src/js/front.js --output-path=inc/support/modules/cookies/assets/minified",
 		"lint:css": "wp-scripts lint-style ./src/scss",

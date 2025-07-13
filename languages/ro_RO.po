@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-10 12:32+0000\n"
-"PO-Revision-Date: 2025-03-31 00:41+0000\n"
+"PO-Revision-Date: 2025-07-13 16:23+0000\n"
 "Last-Translator: \n"
 "Language-Team: Română\n"
 "Language: ro_RO\n"
@@ -69,7 +69,7 @@ msgstr "100% Receptiv"
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr "O punte între WeCodeArt Framework și pluginul %s."
 
-#: inc/app.php:214
+#: inc/app.php:224
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -261,6 +261,10 @@ msgstr "Închide"
 msgid "Close item"
 msgstr "Închideți elementul"
 
+#: inc/gutenberg/blocks/site/class-template.php:89
+msgid "Collapse"
+msgstr "Colaps"
+
 #: theme.json:1 styles/dark.json:1
 msgctxt "Color name"
 msgid "Accent"
@@ -382,7 +386,7 @@ msgstr "Contactaţi-ne"
 msgid "Continue reading"
 msgstr "Continuați lectura"
 
-#: inc/app.php:182
+#: inc/app.php:192
 msgid "Cookie banner and management interface built with theme APIs."
 msgstr ""
 "Banner cookie și interfață de gestionare construite cu API-urile temei."
@@ -439,11 +443,15 @@ msgstr "Arhive zilnice: %s"
 msgid "Days: %s"
 msgstr "Zile: %s"
 
+#: inc/gutenberg/blocks/site/class-template.php:84
+msgid "Default"
+msgstr "Implicit"
+
 #: patterns/cards-overlay.php:56
 msgid "Design"
 msgstr "Personalizări"
 
-#: inc/admin/class-admin.php:167
+#: inc/admin/class-admin.php:168
 msgid "Developer Mode"
 msgstr "Mod Dezvoltator"
 
@@ -547,7 +555,7 @@ msgstr ""
 "Extinde editorul Gutenberg cu opțiuni extra pentru formatare, precum: "
 "justificare, abreviere, decoratii text, tooltip-uri si popover."
 
-#: inc/app.php:202
+#: inc/app.php:212
 msgid ""
 "Extends Gutenberg editor with lorem ipsum dummy content generator for "
 "headings, paragraphs and lists."
@@ -695,6 +703,8 @@ msgid "Success to Warning"
 msgstr "Succes spre avertisment"
 
 #: inc/gutenberg/blocks/design/class-buttons.php:50
+#: inc/gutenberg/blocks/design/class-group.php:255
+#: inc/gutenberg/blocks/design/class-group.php:337
 msgid "Group"
 msgstr "Grupare"
 
@@ -857,6 +867,14 @@ msgstr ""
 
 #: inc/app.php:172
 msgid ""
+"Lightweight extension for adding smoothscroll on your site. Super flexible "
+"and customizable."
+msgstr ""
+"Extensie ușoară pentru adăugarea funcției Smoothscroll pe site-ul tău. Super "
+"flexibilă și personalizabilă."
+
+#: inc/app.php:182
+msgid ""
 "Lightweight extension for enhancing our theme with options for cleaning "
 "wp_head of unnecesary stuff."
 msgstr ""
@@ -880,7 +898,7 @@ msgid "Loading"
 msgstr "Încărcare"
 
 #: inc/gutenberg/blocks/site/class-login.php:148
-#: inc/gutenberg/blocks/site/class-login.php:169
+#: inc/gutenberg/blocks/site/class-login.php:168
 msgid "Log In"
 msgstr "Autentificare"
 
@@ -1039,7 +1057,7 @@ msgstr ""
 msgid "Outline"
 msgstr "Contur"
 
-#: inc/gutenberg/blocks/site/class-login.php:167
+#: inc/gutenberg/blocks/site/class-login.php:166
 msgid "Password"
 msgstr "Parolă"
 
@@ -1361,7 +1379,7 @@ msgstr "Sunteți gata să creați cu %s?"
 msgid "Reload"
 msgstr "Reîncărcați"
 
-#: inc/gutenberg/blocks/site/class-login.php:168
+#: inc/gutenberg/blocks/site/class-login.php:167
 msgid "Remember Me"
 msgstr "Ține-mă minte"
 
@@ -1384,6 +1402,11 @@ msgstr "Fișele obligatorii sunt marcate cu %s\"."
 #: patterns/section-mobile.php:82
 msgid "Retina Ready"
 msgstr "Pregătită pentru retina"
+
+#: inc/support/modules/class-helper.php:131
+#, php-format
+msgid "Review module \"%s\" for %d security issues"
+msgstr "Verificați modulul „%s” pentru %d probleme de securitate"
 
 #: inc/gutenberg/blocks/widgets/class-rss.php:65
 msgid "RSS Error"
@@ -1410,6 +1433,15 @@ msgstr "Caută"
 msgid "Search Results for \"%s\"."
 msgstr "Rezultate căutare pentru \"%s\""
 
+#: inc/admin/class-admin.php:263
+#, php-format
+msgid ""
+"Security issues detected in module \"%s\". Please review the module files "
+"for security concerns."
+msgstr ""
+"Probleme de securitate detectate în modulul „%s”. Vă rugăm să verificați "
+"fișierele modulului pentru probleme de securitate."
+
 #: inc/gutenberg/blocks/widgets/class-archives.php:86
 msgid "Select Day"
 msgstr "Selectați Ziua"
@@ -1435,6 +1467,51 @@ msgstr "Selectați Anul"
 msgid "Send"
 msgstr "Trimite"
 
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Crisp"
+msgstr "Vioi"
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Large"
+msgstr "Mare"
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Medium"
+msgstr "Mediu"
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Outlined"
+msgstr "Conturat"
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Sharp"
+msgstr "Ascuțit"
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Small"
+msgstr "Mic"
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "X Large"
+msgstr "X mare"
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "XS Small"
+msgstr "XS Mic"
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "XX Large"
+msgstr "XX Mare"
+
 #: inc/gutenberg/blocks/widgets/social/class-link.php:94
 #, php-format
 msgid "Share on %s"
@@ -1452,7 +1529,7 @@ msgstr "Distribuie postarea:"
 msgid "Simple pricing plans for any size team."
 msgstr "Planuri simple de prețuri pentru echipe de orice dimensiune."
 
-#: inc/support/assets/class-assets.php:124
+#: inc/support/assets/class-assets.php:117
 msgid "Skip to content"
 msgstr "Sari la conținut"
 
@@ -1666,7 +1743,7 @@ msgstr "Tema instalată cu succes."
 msgid "Theme is not defined."
 msgstr "Tema nu este definită."
 
-#: inc/admin/class-admin.php:121 inc/admin/class-admin.php:122
+#: inc/admin/class-admin.php:122 inc/admin/class-admin.php:123
 msgid "Theme Options"
 msgstr "Opțiuni temă"
 
@@ -1774,7 +1851,7 @@ msgstr "actualizați PHP"
 msgid "Use %s to target the block CSS class."
 msgstr "Utilizați %s pentru a viza clasa CSS a blocului."
 
-#: inc/gutenberg/blocks/site/class-login.php:166
+#: inc/gutenberg/blocks/site/class-login.php:165
 msgid "Username or Email Address"
 msgstr "Nume de utilizator sau adresă de e-mail"
 
@@ -1792,11 +1869,11 @@ msgstr "Vedeți Teme"
 msgid "WCA: Accordion"
 msgstr "WCA: Acordeon"
 
-#: inc/app.php:191
+#: inc/app.php:201
 msgid "WCA: Contact Form 7"
 msgstr "WCA: Contact Form 7"
 
-#: inc/app.php:181
+#: inc/app.php:191
 msgid "WCA: Cookies"
 msgstr "WCA: Cookies"
 
@@ -1804,17 +1881,21 @@ msgstr "WCA: Cookies"
 msgid "WCA: Formatting"
 msgstr "WCA: Formatare"
 
-#: inc/app.php:201
+#: inc/app.php:211
 msgid "WCA: Lorem Ipsum"
 msgstr "WCA: Lorem Ipsum"
 
-#: inc/app.php:171
+#: inc/app.php:181
 msgid "WCA: Optimization"
 msgstr "WCA: Optimizare"
 
 #: inc/app.php:161
 msgid "WCA: Scroll Top"
 msgstr "WCA: Scroll Top"
+
+#: inc/app.php:171
+msgid "WCA: Smooth Scroll"
+msgstr "WCA: Derulare lină"
 
 #: inc/app.php:131
 msgid "WCA: Tabs"
@@ -1864,7 +1945,7 @@ msgstr "Site"
 msgid "WeCodeArt"
 msgstr "WeCodeArt"
 
-#: inc/app.php:213
+#: inc/app.php:223
 msgid "WeCodeArt Developer"
 msgstr "WeCodeArt Dezvoltator"
 
@@ -1957,7 +2038,7 @@ msgstr ""
 "Când adăugați o pictogramă SVG cu %s, trebuie să definiți cheile `viewBox` "
 "și `paths`."
 
-#: inc/support/assets/class-assets.php:163
+#: inc/support/assets/class-assets.php:152
 #, php-format
 #| msgid ""
 #| "When using \"%s\" method you must define 3rd parameter (style or script)."

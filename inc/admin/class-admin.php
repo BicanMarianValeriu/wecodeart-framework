@@ -39,6 +39,7 @@ class Admin {
 	public function init() {
 		\add_action( 'rest_api_init',	[ $this, 'register_routes' 		] );
 		\add_action( 'admin_menu',		[ $this, 'register_menu_page' 	] );
+		\add_action( 'admin_init', 		[ $this, 'add_security_notifications' ], 20 );
 
 		Upgrade::get_instance();
 		Settings::get_instance();
@@ -47,7 +48,7 @@ class Admin {
 
 		new Installer\Plugin\Ajax();
 		new Installer\Module\Ajax();
-		new Installer\Theme\Ajax();
+		new Installer\Theme\Ajax(); 
 	}
 
 	/**
@@ -208,5 +209,82 @@ class Admin {
 		}
 
 		return $sanitized;
+	}
+
+	/**
+	 * Add security notifications
+	 *
+	 * @since 	6.7.0
+	 *
+	 * @return 	void
+	 */
+	public function add_security_notifications(): void {
+		// Only show on theme admin page
+		if ( ! wecodeart_if( 'is_theme_admin' ) ) {
+			return;
+		}
+
+		$modules 		= wecodeart_option( 'modules', [] );
+		$security 		= \WeCodeArt\Support\Modules\Security::get_instance();
+		$notifications 	= Notifications::get_instance();
+
+		foreach ( $modules as $module ) {
+			$module_name = get_prop( $module, 'destination', '' );
+			if ( ! $module_name ) {
+				continue;
+			}
+
+			$issues = $security->get_security_issues( $module_name );
+			if ( ! empty( $issues ) ) {
+				$this->create_security_notification( $module_name, $issues, $notifications );
+			}
+		}
+	}
+
+	/**
+	 * Create security notification for a module
+	 *
+	 * @param  string $module_name
+	 * @param  array  $issues
+	 * @param  Notifications $notifications
+	 * @return void
+	 */
+	private function create_security_notification( string $module_name, array $issues, Notifications $notifications ): void {
+		$notification_id = 'wecodeart-security-' . sanitize_title( $module_name );
+		
+		// Check if notification already exists
+		$existing = $notifications->get_notification_by_id( $notification_id );
+		if ( $existing ) {
+			return;
+		}
+
+		// Create notification message
+		$message = sprintf( 
+			__( 'Security issues detected in module "%s". Please review the module files for security concerns.', 'wecodeart' ),
+			esc_html( $module_name )
+		);
+
+		// Add issue details
+		if ( count( $issues ) > 0 ) {
+			$message .= '<ul>';
+			foreach ( $issues as $issue ) {
+				$message .= '<li>' . esc_html( $issue['message'] ) . '</li>';
+			}
+			$message .= '</ul>';
+		}
+
+		// Create notification
+		$notification = new \WeCodeArt\Admin\Notifications\Notification(
+			$message,
+			[
+				'id'            => $notification_id,
+				'type'          => 'warning',
+				'priority'      => 0.8,
+				'dismissal_key' => 'wecodeart_security_' . sanitize_title( $module_name ),
+				'capabilities'  => [ 'manage_options' ],
+			]
+		);
+
+		$notifications->add_notification( $notification );
 	}
 }

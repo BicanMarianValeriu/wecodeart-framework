@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeCodeArt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-31 00:27+0000\n"
+"POT-Creation-Date: 2025-07-13 16:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -68,7 +68,7 @@ msgstr ""
 msgid "A bridge between WeCodeArt Framework and %s plugin."
 msgstr ""
 
-#: inc/app.php:214
+#: inc/app.php:224
 msgid ""
 "A simple starter theme with webpack configuration. Ideal for developers "
 "seeking a streamlined starting point."
@@ -252,6 +252,10 @@ msgstr ""
 msgid "Close item"
 msgstr ""
 
+#: inc/gutenberg/blocks/site/class-template.php:89
+msgid "Collapse"
+msgstr ""
+
 #: theme.json:1 styles/dark.json:1
 msgctxt "Color name"
 msgid "Accent"
@@ -368,7 +372,7 @@ msgstr ""
 msgid "Continue reading"
 msgstr ""
 
-#: inc/app.php:182
+#: inc/app.php:192
 msgid "Cookie banner and management interface built with theme APIs."
 msgstr ""
 
@@ -422,11 +426,15 @@ msgstr ""
 msgid "Days: %s"
 msgstr ""
 
+#: inc/gutenberg/blocks/site/class-template.php:84
+msgid "Default"
+msgstr ""
+
 #: patterns/cards-overlay.php:56
 msgid "Design"
 msgstr ""
 
-#: inc/admin/class-admin.php:167
+#: inc/admin/class-admin.php:168
 msgid "Developer Mode"
 msgstr ""
 
@@ -513,7 +521,7 @@ msgid ""
 "abbreviation, text decorations, tooltips and popovers."
 msgstr ""
 
-#: inc/app.php:202
+#: inc/app.php:212
 msgid ""
 "Extends Gutenberg editor with lorem ipsum dummy content generator for "
 "headings, paragraphs and lists."
@@ -656,6 +664,8 @@ msgid "Success to Warning"
 msgstr ""
 
 #: inc/gutenberg/blocks/design/class-buttons.php:50
+#: inc/gutenberg/blocks/design/class-group.php:255
+#: inc/gutenberg/blocks/design/class-group.php:337
 msgid "Group"
 msgstr ""
 
@@ -806,6 +816,12 @@ msgstr ""
 
 #: inc/app.php:172
 msgid ""
+"Lightweight extension for adding smoothscroll on your site. Super flexible "
+"and customizable."
+msgstr ""
+
+#: inc/app.php:182
+msgid ""
 "Lightweight extension for enhancing our theme with options for cleaning "
 "wp_head of unnecesary stuff."
 msgstr ""
@@ -827,7 +843,7 @@ msgid "Loading"
 msgstr ""
 
 #: inc/gutenberg/blocks/site/class-login.php:148
-#: inc/gutenberg/blocks/site/class-login.php:169
+#: inc/gutenberg/blocks/site/class-login.php:168
 msgid "Log In"
 msgstr ""
 
@@ -980,7 +996,7 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:167
+#: inc/gutenberg/blocks/site/class-login.php:166
 msgid "Password"
 msgstr ""
 
@@ -1299,7 +1315,7 @@ msgstr ""
 msgid "Reload"
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:168
+#: inc/gutenberg/blocks/site/class-login.php:167
 msgid "Remember Me"
 msgstr ""
 
@@ -1321,6 +1337,11 @@ msgstr ""
 
 #: patterns/section-mobile.php:82
 msgid "Retina Ready"
+msgstr ""
+
+#: inc/support/modules/class-helper.php:131
+#, php-format
+msgid "Review module \"%s\" for %d security issues"
 msgstr ""
 
 #: inc/gutenberg/blocks/widgets/class-rss.php:65
@@ -1345,6 +1366,13 @@ msgstr ""
 #: inc/gutenberg/blocks/query/class-title.php:117
 #, php-format
 msgid "Search Results for \"%s\"."
+msgstr ""
+
+#: inc/admin/class-admin.php:263
+#, php-format
+msgid ""
+"Security issues detected in module \"%s\". Please review the module files "
+"for security concerns."
 msgstr ""
 
 #: inc/gutenberg/blocks/widgets/class-archives.php:86
@@ -1372,6 +1400,51 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Crisp"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Large"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Outlined"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Sharp"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "Small"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "X Large"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "XS Small"
+msgstr ""
+
+#: theme.json:1
+msgctxt "Shadow name"
+msgid "XX Large"
+msgstr ""
+
 #: inc/gutenberg/blocks/widgets/social/class-link.php:94
 #, php-format
 msgid "Share on %s"
@@ -1389,7 +1462,7 @@ msgstr ""
 msgid "Simple pricing plans for any size team."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:124
+#: inc/support/assets/class-assets.php:117
 msgid "Skip to content"
 msgstr ""
 
@@ -1600,7 +1673,7 @@ msgstr ""
 msgid "Theme is not defined."
 msgstr ""
 
-#: inc/admin/class-admin.php:121 inc/admin/class-admin.php:122
+#: inc/admin/class-admin.php:122 inc/admin/class-admin.php:123
 msgid "Theme Options"
 msgstr ""
 
@@ -1704,7 +1777,7 @@ msgstr ""
 msgid "Use %s to target the block CSS class."
 msgstr ""
 
-#: inc/gutenberg/blocks/site/class-login.php:166
+#: inc/gutenberg/blocks/site/class-login.php:165
 msgid "Username or Email Address"
 msgstr ""
 
@@ -1722,11 +1795,11 @@ msgstr ""
 msgid "WCA: Accordion"
 msgstr ""
 
-#: inc/app.php:191
+#: inc/app.php:201
 msgid "WCA: Contact Form 7"
 msgstr ""
 
-#: inc/app.php:181
+#: inc/app.php:191
 msgid "WCA: Cookies"
 msgstr ""
 
@@ -1734,16 +1807,20 @@ msgstr ""
 msgid "WCA: Formatting"
 msgstr ""
 
-#: inc/app.php:201
+#: inc/app.php:211
 msgid "WCA: Lorem Ipsum"
 msgstr ""
 
-#: inc/app.php:171
+#: inc/app.php:181
 msgid "WCA: Optimization"
 msgstr ""
 
 #: inc/app.php:161
 msgid "WCA: Scroll Top"
+msgstr ""
+
+#: inc/app.php:171
+msgid "WCA: Smooth Scroll"
 msgstr ""
 
 #: inc/app.php:131
@@ -1790,7 +1867,7 @@ msgstr ""
 msgid "WeCodeArt"
 msgstr ""
 
-#: inc/app.php:213
+#: inc/app.php:223
 msgid "WeCodeArt Developer"
 msgstr ""
 
@@ -1865,7 +1942,7 @@ msgid ""
 "When adding an SVG Icon with %s you must define `viewBox` and `paths` keys."
 msgstr ""
 
-#: inc/support/assets/class-assets.php:163
+#: inc/support/assets/class-assets.php:152
 #, php-format
 msgid ""
 "When using \"%s\" method you must define the 3rd parameter (style or script)."

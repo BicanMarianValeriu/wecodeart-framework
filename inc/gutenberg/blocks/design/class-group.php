@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.5.1
+ * @version		6.7.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -252,7 +252,7 @@ class Group extends Dynamic {
 	public static function create_collapse( array $attributes, string $content ): string {
 		$tagName 	= get_prop( $attributes, [ 'tagName' ], 'div' );
 		$className  = get_prop( $attributes, [ 'className' ], '' );
-		$ariaLabel  = get_prop( $attributes, [ 'metadata', 'name' ] ) ?: __( 'Group' );
+		$ariaLabel  = get_prop( $attributes, [ 'metadata', 'name' ] ) ?: __( 'Group', 'wecodeart' );
 		$ariaLabel  = sprintf( esc_html__( 'Toggle %s', 'wecodeart' ), $ariaLabel );
 		$itemID 	= wp_unique_id( 'wp-collapse-' );
 		$isHidden 	= '';
@@ -334,7 +334,7 @@ class Group extends Dynamic {
 	public static function create_offcanvas( array $attributes, string $content ): string {
 		$tagName 	= get_prop( $attributes, [ 'tagName' ], 'div' );
 		$className  = get_prop( $attributes, [ 'className' ], '' );
-		$blockName  = get_prop( $attributes, [ 'metadata', 'name' ] ) ?: __( 'Group' );
+		$blockName  = get_prop( $attributes, [ 'metadata', 'name' ] ) ?: __( 'Group', 'wecodeart' );
 		$itemID 	= wp_unique_id( 'wp-group-' );
 		$isHidden 	= '';
 		$isDisplay 	= '';

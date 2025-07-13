@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.5.8
+ * @version		6.7.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Site;
@@ -81,12 +81,12 @@ class Template extends Dynamic {
 			'styles'	=> wp_parse_args( [
 				[
 					'name' 	=> 'default',
-					'label' => __( 'Default' ),
+					'label' => __( 'Default', 'wecodeart' ),
 					'isDefault' => true
 				],
 				[
 					'name' 	=> 'collapse',
-					'label' => __( 'Collapse' ),
+					'label' => __( 'Collapse', 'wecodeart' ),
 				]
 			], $styles )
 		];

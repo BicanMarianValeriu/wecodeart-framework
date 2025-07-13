@@ -7,4 +7,5 @@ dploy.js
 
 inc/support/modules/*
 !inc/support/modules/class-modules.php
+!inc/support/modules/class-security.php
 .codegpt
