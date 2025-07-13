@@ -1,3 +1,6 @@
+v6.7.1
+- Added - missing index.php files on translate and cookies modules
+
 v6.7.0
 - Updated - improved cookie management interface with search/pagination and cookies added via API will be highlighted
 - Updated - default translation domain for core-group.php and core-template.php blocks
