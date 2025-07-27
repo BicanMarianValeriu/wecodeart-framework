@@ -1,3 +1,10 @@
+v6.7.3
+- Updated - smoothscroll to targets issue with scrollRoot
+- Added - Optimization module: font-display swap on self hosted fonts
+
+v6.7.2
+- Removed - title-tag theme support to avoid double title tag issue
+
 v6.7.1
 - Added - missing index.php files on translate and cookies modules
 
