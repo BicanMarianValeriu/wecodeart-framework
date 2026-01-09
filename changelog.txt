@@ -1,3 +1,6 @@
+v6.7.5
+- Fixed - issue with sprintf translations on admin screen
+
 v6.7.4
 - Updated - cookies module issue with required regex pattern / continuously remove cookies for 15s for delayed scripts
 - Updated - contact form 7 plugin form fields modules upgraded / styles

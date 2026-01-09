@@ -4,6 +4,7 @@
 const {
     i18n: {
         __,
+        sprintf,
     },
     components: {
         Card,
