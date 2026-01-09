@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.6.8
+ * @version		6.7.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Gutenberg\Blocks\{ Dynamic, Navigation };
-use function WeCodeArt\Functions\{ get_prop, get_lightness_limit, toJSON };
+use function WeCodeArt\Functions\{ get_prop, get_lightness_limit };
 
 /**
  * Gutenberg Navigation Link block.
@@ -306,7 +306,7 @@ class Link extends Dynamic {
 				$attrs = wp_parse_args( [
 					'href'						=> 'javascript:void(0)',
 					'data-wp-interactive'		=> 'wecodeart/dropdown',
-					'data-wp-context'			=> toJSON( [] ),
+					'data-wp-context'			=> '{}',
 					'data-wp-on--click'			=> 'actions.toggle',
 					'data-wp-init--validate'	=> 'callbacks.validateConfig',
 				], $attrs );

@@ -1,3 +1,11 @@
+v6.7.4
+- Updated - cookies module issue with required regex pattern / continuously remove cookies for 15s for delayed scripts
+- Updated - contact form 7 plugin form fields modules upgraded / styles
+- Updated - core/group to detect and load styles for has-parallax (same as cover)
+- Updated - core/link unnecessary toJSON reference removed
+- Updated - core/loginloginout unnecessary escape for toJSON
+- Updated - .has-parallax offset to background image to avoid early "cutoff"
+
 v6.7.3
 - Updated - smoothscroll to targets issue with scrollRoot
 - Added - Optimization module: font-display swap on self hosted fonts

@@ -9,7 +9,7 @@
  * @subpackage 	Functions
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version     6.4.8
+ * @version     6.7.4
  */
 
 namespace WeCodeArt\Functions;
@@ -28,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function toJSON( array $json = [], $options = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP ) {
     if( ! is_array( $json ) ) {
-        return null;
+        return '';
     }
 
     return wp_json_encode( $json, $options );

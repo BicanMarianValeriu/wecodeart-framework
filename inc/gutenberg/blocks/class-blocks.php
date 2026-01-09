@@ -65,6 +65,9 @@ class Blocks implements Configuration {
 		$this->register( 'core/column',     Blocks\Design\Column::class );
 		$this->register( 'core/spacer',     Blocks\Design\Spacer::class );
 		$this->register( 'core/separator',  Blocks\Design\Separator::class );
+		$this->register( 'core/accordion',  Blocks\Design\Accordion::class );
+		$this->register( 'core/accordion-item',     Blocks\Design\Accordion\Item::class );
+		$this->register( 'core/accordion-heading',  Blocks\Design\Accordion\Heading::class );
         // Widget Blocks
 		$this->register( 'core/archives',           Blocks\Widgets\Archives::class );
 		$this->register( 'core/calendar',           Blocks\Widgets\Calendar::class );

@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.2.8
- * @version		6.3.7
+ * @version		6.7.4
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -43,6 +43,8 @@ class Parallax extends Base {
 				--wp--easing: linear;
 				--wp--offset: -250px;
 				--wp--range: 0 calc(100vh + max(var(--wp--offset) * -1,0));
+				--wp--start-x: 50%;
+				--wp--start-y: 50%;
 				animation-timeline: view();
 				animation-range: var(--wp--range);
 				animation-name: var(--wp--animation);
@@ -50,10 +52,14 @@ class Parallax extends Base {
 				animation-direction: forwards;
 				animation-duration: 1ms;
 			}
+
+			.has-parallax.scroll {
+				animation-timeline: scroll();
+			}
 			
 			@keyframes __backgroundPosition {
 				to {
-					background-position: 50% calc(50% + var(--wp--offset));
+					background-position: var(--wp--start-x) calc(var(--wp--start-y) + (1 * var(--wp--offset)));
 				}
 			}
 

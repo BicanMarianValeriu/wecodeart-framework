@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.0.0
- * @version		6.7.0
+ * @version		6.7.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Design;
@@ -147,6 +147,11 @@ class Group extends Dynamic {
 		// Handle offcanvas group.
 		if( self::is_variation( $attributes, 'offcanvas' ) ) {
 			$content = self::create_offcanvas( $attributes, $content );
+		}
+
+		// Add parallax support.
+		if( str_contains( get_prop( $attributes, [ 'className' ], '' ), 'has-parallax' ) ) {
+			wecodeart( 'styles' )->Components->load( [ 'parallax' ] );
 		}
 	
 		return (string) $content;

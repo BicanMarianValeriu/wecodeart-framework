@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.4.4
- * @version		6.6.8
+ * @version		6.7.4
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Post;
@@ -73,11 +73,11 @@ class Navigation extends Dynamic {
 				$p->set_attribute( 'data-wp-on--mouseenter', 'actions.enter' );
 				$p->set_attribute( 'data-wp-on--mouseleave', 'actions.leave' );
 				$p->set_attribute( 'data-wp-init--validate', 'callbacks.validateConfig' );
-				$p->set_attribute( 'data-wp-context', esc_attr( toJSON( [
+				$p->set_attribute( 'data-wp-context', toJSON( [
 					'title'	=> get_the_title( url_to_postid( $p->get_attribute( 'href' ) ) ),
 					'html' 	=> true,
 					'delay'	=> 150
-				] ) ) );
+				] ) );
 			}
 		}
 

@@ -68,10 +68,138 @@ class DOM implements Integration {
 	public static function processor( string $html = '' ): \WP_HTML_Tag_Processor {
 		return new \WP_HTML_Tag_Processor( $html );
 	}
-	
+
 	public static function procesor( string $html = '' ): \WP_HTML_Tag_Processor {
 		return self::processor( $html );
 	}
+
+	/**
+	 * Returns the content of a DOM element.
+	 *
+	 * @since 	6.4.1
+	 *
+	 * @param 	WP_HTML_Tag_Processor $processor DOM element.
+	 *
+	 * @return 	string
+	 */
+	public static function get_content( \WP_HTML_Tag_Processor $processor ): ?string {
+		$text_content = '';
+		$depth        = 0;
+		$tag_name     = $processor->get_tag();
+	
+		while ( $processor->next_token() ) {
+			$token_type = $processor->get_token_type();
+	
+			if ( '#text' === $token_type ) {
+				$text_content .= $processor->get_modifiable_text();
+			} elseif ( '#tag' === $token_type ) {
+				$current_tag = $processor->get_tag();
+	
+				if ( is_string( $current_tag ) && is_string( $tag_name ) && strtoupper( $current_tag ) === strtoupper( $tag_name ) ) {
+					if ( $processor->is_tag_closer() ) {
+						if ( $depth === 0 ) {
+							return ! empty( $text_content ) ? trim( $text_content ) : null;
+						}
+						$depth--;
+					} else {
+						$depth++;
+					}
+				}
+			}
+		}
+	
+		return ! empty( $text_content ) ? trim( $text_content ) : null;
+	}
+
+	/**
+	 * Sets content for all matching elements in the HTML.
+	 *
+	 * @since 	6.4.2
+	 *
+	 * @param 	string $html        HTML string to process.
+	 * @param 	array  $query       Query to find matching elements (same as next_tag).
+	 * @param 	string $content     New content to set.
+	 *
+	 * @return 	string Modified HTML string.
+	 */
+	public static function set_content( string $html, array $query, string $content ): string {
+		$processor = self::processor( $html );
+		$replacements = [];
+		
+		// Use reflection to access protected bookmarks property
+		$reflection = new \ReflectionClass( $processor );
+		$bookmarks_prop = $reflection->getProperty( 'bookmarks' );
+		$bookmarks_prop->setAccessible( true );
+		
+		// Collect all matching positions
+		while ( $processor->next_tag( $query ) ) {
+			// Check if bookmark was set successfully
+			if ( ! $processor->set_bookmark( 'target' ) ) {
+				continue;
+			}
+			
+			// Get bookmark using reflection
+			$bookmarks = $bookmarks_prop->getValue( $processor );
+			$bookmark = $bookmarks['target'] ?? null;
+			
+			if ( ! $bookmark ) {
+				continue;
+			}
+			
+			$tag_name = $processor->get_tag();
+			$depth = 0;
+			$content_start = $bookmark->start + $bookmark->length;
+			$content_end = null;
+			
+			// Find closing tag
+			while ( $processor->next_token() ) {
+				$token_type = $processor->get_token_type();
+				
+				if ( '#tag' === $token_type ) {
+					$current_tag = $processor->get_tag();
+					
+					if ( is_string( $current_tag ) && is_string( $tag_name ) && strtoupper( $current_tag ) === strtoupper( $tag_name ) ) {
+						if ( $processor->is_tag_closer() ) {
+							if ( $depth === 0 ) {
+								if ( $processor->set_bookmark( 'closer' ) ) {
+									$bookmarks = $bookmarks_prop->getValue( $processor );
+									$closer_bookmark = $bookmarks['closer'] ?? null;
+									if ( $closer_bookmark ) {
+										$content_end = $closer_bookmark->start;
+										break;
+									}
+								}
+							}
+							$depth--;
+						} else {
+							$depth++;
+						}
+					}
+				}
+			}
+			
+			if ( null !== $content_end ) {
+				$replacements[] = [
+					'start' => $content_start,
+					'end' => $content_end,
+				];
+			}
+			
+			// Release bookmarks to avoid hitting the limit
+			$processor->release_bookmark( 'target' );
+			if ( $processor->has_bookmark( 'closer' ) ) {
+				$processor->release_bookmark( 'closer' );
+			}
+		}
+		
+		// Apply replacements in reverse order to preserve positions
+		$modified = $html;
+		foreach ( array_reverse( $replacements ) as $replacement ) {
+			$modified = substr( $modified, 0, $replacement['start'] ) . $content . substr( $modified, $replacement['end'] );
+		}
+		
+		return $modified;
+	} 
 
 	/**
 	 * Returns a formatted DOMDocument object from a given string.
