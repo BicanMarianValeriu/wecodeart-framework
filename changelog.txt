@@ -1,3 +1,6 @@
+v6.7.7
+- Fixed - issue with sprintf translations on plugins admin
+
 v6.7.6
 - Fixed - issue with sprintf translations on admin screen for cookies module
 

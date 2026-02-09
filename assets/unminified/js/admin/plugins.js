@@ -158,7 +158,8 @@ __webpack_require__.r(__webpack_exports__);
 const {
   i18n: {
     __,
-    _x
+    _x,
+    sprintf
   },
   components: {
     Button,
@@ -637,7 +638,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 const {
   i18n: {
-    __
+    __,
+    sprintf
   },
   components: {
     Button,

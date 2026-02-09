@@ -5,6 +5,7 @@ const {
     i18n: {
         __,
         _x,
+        sprintf
     },
     components: {
         Button,

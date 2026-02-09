@@ -1,6 +1,6 @@
 const {
     i18n: {
-        __,
+        __, 
     },
     element: {
         useState,
