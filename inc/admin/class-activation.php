@@ -97,7 +97,7 @@ class Activation {
 	 */
 	public function set_requirements( $args = [] ) {
 		return $this->requirements = wp_parse_args( $args, [
-			'wordpress' => [
+			'wp' => [
 				'required'  => self::REQUIRED_WP,
 				'installed' => $GLOBALS['wp_version'],
 				'i18n'      => sprintf(

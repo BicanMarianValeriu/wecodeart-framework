@@ -245,7 +245,7 @@ class Social extends Dynamic {
 			'x' 		=> '#000000',
 			'vk' 		=> '#4680c2',
 			'vimeo' 	=> '#1eb7ea',
-			'wordpress'	=> '#3499cd',
+			// 'wp'	=> '#3499cd', // Incorrect capitalization, use 'WordPress' instead warning
 			'whatsapp'	=> '#25d366',
 			'yelp' 		=> '#d32422',
 			'youtube'	=> '#ff0100',

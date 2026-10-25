@@ -38,7 +38,7 @@ const Theme = ({
     slug = '',
     description = '',
     more = '',
-    source = 'wordpress',
+    source = 'wporg',
     allThemes,
     setAllThemes,
     activeTheme,

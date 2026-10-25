@@ -123,16 +123,7 @@ class Link extends Dynamic {
 		$current_txt = get_the_excerpt();
 		$current_img = get_the_post_thumbnail_url();
 
-		switch( $service ):
-			case 'wordpress':
-				$sharing_url 	= 'https://wordpress.com/press-this.php';
-				$network_args 	= [
-					'u'	=> $current_url,
-					't'	=> $current_ttl,
-					's'	=> $current_txt,
-					'i'	=> $current_img
-				];
-			break;
+		switch( $service ): 
 			case 'facebook':
 				$sharing_url 	= 'https://www.facebook.com/sharer/sharer.php';
 				$network_args 	= [
@@ -225,6 +216,15 @@ class Link extends Dynamic {
 				$network_args 	= [
 					'subject'	=> $current_ttl,
 					'body'		=> $current_txt . ' ' . $current_url,
+				];
+			break;
+			default:
+				$sharing_url 	= 'https://wordpress.com/press-this.php';
+				$network_args 	= [
+					'u'	=> $current_url,
+					't'	=> $current_ttl,
+					's'	=> $current_txt,
+					'i'	=> $current_img
 				];
 			break;
 		endswitch;

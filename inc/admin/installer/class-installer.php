@@ -85,7 +85,7 @@ abstract class Installer implements Installable {
 		$valid = array_map( 'sanitize_text_field', $valid );
 		$valid = wp_parse_args( $valid, [
 			// Should be github based on set_api_url() but lets keep WP as default.
-			'source' => 'wordpress'
+			'source' => 'wporg',
 		] );
 
 		foreach( $valid as $key => $value ) $this->{ $key } = $value;
@@ -139,7 +139,7 @@ abstract class Installer implements Installable {
 		switch ( $this->source ) {
 			case 'custom':
 				return $this->package = $this->slug;
-			case 'wordpress':
+			case 'wporg':
 				$api_url  = sprintf( $this->remote, rtrim( basename( $this->slug ), '.php' ) );
 				$zip_key  = 'download_link';
 				break;

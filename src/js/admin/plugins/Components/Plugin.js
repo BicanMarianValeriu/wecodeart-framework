@@ -26,7 +26,7 @@ const Plugin = ({
     description = '',
     destination = '',
     more = '',
-    source = 'wordpress',
+    source = 'wporg',
     type = 'plugin',
     required = true,
     activePlugins,

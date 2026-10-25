@@ -39,7 +39,7 @@ const getInstallerIcon = source => {
         })
       });
       break;
-    case 'wordpress':
+    case 'wporg':
       icon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 69 69",
@@ -92,7 +92,7 @@ const getInstallerIcon = source => {
 };
 const getInstallerDir = ({
   slug,
-  source = 'wordpress',
+  source = 'wporg',
   destination
 }) => {
   let dir = slug;
@@ -438,7 +438,7 @@ const Plugin = ({
   description = '',
   destination = '',
   more = '',
-  source = 'wordpress',
+  source = 'wporg',
   type = 'plugin',
   required = true,
   activePlugins,

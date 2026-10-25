@@ -33,7 +33,7 @@ class Plugin extends Installer {
 	 */
 	public function set_api_url(): bool {
 		switch ( $this->source ) {
-			case 'wordpress':
+			case 'wporg':
 				$this->remote = 'https://api.wordpress.org/plugins/info/1.0/%s.json';
 				break;
 			default:
