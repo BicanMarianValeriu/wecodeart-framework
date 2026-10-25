@@ -1,3 +1,6 @@
+v6.8.0
+- Fixed - core/social link warning about missing WordPress key
+
 v6.7.9
 - Updated - Autocomplete attributes for username/password fields
 - Updated - core/details is now animated on open/close

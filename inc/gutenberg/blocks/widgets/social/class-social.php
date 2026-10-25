@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.8
+ * @version		6.8.0
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Widgets;
@@ -245,7 +245,7 @@ class Social extends Dynamic {
 			'x' 		=> '#000000',
 			'vk' 		=> '#4680c2',
 			'vimeo' 	=> '#1eb7ea',
-			// 'wp'	=> '#3499cd', // Incorrect capitalization, use 'WordPress' instead warning
+			strtolower( 'WordPress' )	=> '#3499cd', // Incorrect capitalization, use 'WordPress' instead warning
 			'whatsapp'	=> '#25d366',
 			'yelp' 		=> '#d32422',
 			'youtube'	=> '#ff0100',
