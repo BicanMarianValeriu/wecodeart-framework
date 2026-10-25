@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.4.8
+ * @version		6.7.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -136,6 +136,7 @@ class Cover extends Dynamic {
 			.wp-block-cover__background,
 			.wp-block-cover__image-background,
 			.wp-block-cover__video-background,
+			.wp-block-cover__video-background iframe,
 			.wp-block-cover__gradient-background {
 				position: absolute;
 				inset: 0;

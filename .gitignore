@@ -6,6 +6,8 @@ yarn.lock
 dploy.js
 
 inc/support/modules/*
+!inc/support/modules/helper.php
 !inc/support/modules/class-modules.php
 !inc/support/modules/class-security.php
+!inc/support/modules/index.php
 .codegpt

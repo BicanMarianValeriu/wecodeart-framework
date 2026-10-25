@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.3.7
+ * @version		6.7.8
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Media;
@@ -76,10 +76,14 @@ class Gallery extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '' ): string {
-		$columns = get_prop( $attributes, 'columns', 'default' );
+	public function render( array $attributes = [], string $content = '', $block = null ): string {
+		
+		$content = block_core_gallery_render( $attributes, $content, $block );
+		$processor = wecodeart( 'dom' )::processor( $content );
+		$processor->next_tag();
+		$processor->add_class( 'grid' );
 
-		return preg_replace( '/(columns-)\w+/', 'grid columns-' . $columns, $content, 1 );
+		return (string) $processor->get_updated_html();
 	}
 
 	/**
@@ -89,7 +93,7 @@ class Gallery extends Dynamic {
 	 */
 	public function styles() {
 		return <<<CSS
-			.wp-block-gallery {
+			.wp-block-gallery { 
 				max-width: initial;
 			}
 			.wp-block-gallery.alignleft,

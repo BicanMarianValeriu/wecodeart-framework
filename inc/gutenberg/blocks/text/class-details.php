@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.2.0
- * @version		6.5.7
+ * @version		6.7.9
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -165,64 +165,122 @@ class Details extends Dynamic {
 		return <<<CSS
 			.wp-block-details {
 				--wp--details--padding-y: 1rem;
-				--wp--details--padding-x: 2rem;
+				--wp--details--padding-x: 1rem;
 				--wp--details--padding: var(--wp--details--padding-y) var(--wp--details--padding-x);
 				--wp--details--chevron-size: .4rem;
 				--wp--details--chevron-color: currentColor;
-				--wp--details--chevron-transition: .25s transform ease;
 				--wp--details--border: 1px solid var(--wp--preset--color--accent);
+				--wp--details--radius: .5rem;
+				--wp--details--duration: .2s;
+				--wp--details--ease: cubic-bezier(.25, 0, .3, 1); 
+				inline-size: 100%;
 				border: var(--wp--details--border);
 			}
+
+			/* spacing between stacked details (replaces the old border-top divider) */
 			.wp-block-details details + details {
-				border-top: var(--wp--details--border);
+				margin-block-start: .5rem;
 			}
+
+			/* ---------- summary ---------- */
 			.wp-block-details summary {
 				position: relative;
 				display: block;
-				padding: var(--wp--details--padding);
-				font-size: var(--wp--preset--font-size--normal);
-				font-weight: 700;
-				transition: background-color .5s ease-in-out;
+				list-style: none;
 				cursor: pointer;
+				padding: var(--wp--details--padding);
+				padding-inline-start: 2.25rem; /* room for chevron */
+				font-size: var(--wp--preset--font-size--normal);
+				font-weight: 700; 
 			}
+
+			.wp-block-details summary::-webkit-details-marker { 
+				display: none; 
+			}
+			.wp-block-details summary::marker { 
+				content: none; 
+			}
+
 			.wp-block-details summary::before {
 				content: "";
 				position: absolute;
 				top: calc(50% - var(--wp--details--chevron-size));
-				left: 1rem;
-				border-width: var(--wp--details--chevron-size);
-				border-style: solid;
-				border-color: transparent transparent transparent var(--wp--details--chevron-color);
+				left: 1rem; 
+				border: var(--wp--details--chevron-size) solid transparent;
+				border-left-color: var(--wp--details--chevron-color);
 				transform: rotate(0);
 				transform-origin: .125em 50%;
-				transition: var(--wp--details--chevron-transition);
 			}
+
 			.wp-block-details summary:hover,
 			.wp-block-details summary:focus,
 			details[open].wp-block-details summary,
 			.wp-block-details details[open] summary {
 				background-color: var(--wp--preset--color--accent);
 			}
-			details[open].wp-block-details summary,
-			.wp-block-details details[open] summary {
-				border-bottom: var(--wp--details--border);
+
+			.wp-block-details summary:focus-visible {
+				outline: 2px solid currentColor;
+				outline-offset: 4px;
 			}
-			details[open].wp-block-details,
-			.wp-block-details details[open] {
-				padding-bottom: var(--wp--details--padding-y);
-			}
+
+			/* ---------- content panel ---------- */
+			details.wp-block-details::details-content,
+			.wp-block-details details::details-content {
+				display: grid;
+				gap: 1rem;
+				padding-inline: var(--wp--details--padding-x);
+				padding-block: 0;  
+				opacity: 0;
+				block-size: 0;
+				overflow-y: clip;
+			} 
+
+			/* ---------- open state ---------- */
 			details[open].wp-block-details > summary::before,
 			.wp-block-details details[open] > summary::before {
 				transform: rotate(90deg);
 			}
-			details.wp-block-details > *:not(summary),
-			.wp-block-details details > *:not(summary) {
-				margin: var(--wp--details--padding);
+
+			details[open].wp-block-details::details-content,
+			.wp-block-details details[open]::details-content {
+				padding-block: var(--wp--details--padding-y);
+				padding-top: 0;
+				opacity: 1;
+				block-size: auto;
 			}
-			details summary::marker,
-			details summary::-webkit-details-marker {
-				display: none;
-				content: none;
+
+			/* ---------- animation ---------- */
+			@media (prefers-reduced-motion: no-preference) {
+				.wp-block-details,
+				.wp-block-details details {
+					interpolate-size: allow-keywords;
+				}
+
+				details.wp-block-details::details-content,
+				.wp-block-details details::details-content {
+					transition:
+					content-visibility var(--wp--details--duration) allow-discrete,
+					opacity var(--wp--details--duration) var(--wp--details--ease),
+					block-size var(--wp--details--duration) var(--wp--details--ease),
+					padding-block var(--wp--details--duration) var(--wp--details--ease);
+				}
+
+				.wp-block-details summary,
+				.wp-block-details summary::before {
+					transition:
+					background-color var(--wp--details--duration) var(--wp--details--ease),
+					border-radius var(--wp--details--duration) var(--wp--details--ease),
+					transform var(--wp--details--duration) var(--wp--details--ease);
+				}
+			} 
+
+			/* ---------- fallback: no ::details-content support ---------- */
+			@supports not (selector(::details-content)) {
+				details.wp-block-details > *:not(summary),
+				.wp-block-details details > *:not(summary) {
+					margin: var(--wp--details--padding);
+				}
 			}
 		CSS;
 	}

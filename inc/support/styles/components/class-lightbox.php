@@ -9,7 +9,7 @@
  * @subpackage  Styles\Components
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.2.8
- * @version		6.5.8
+ * @version		6.7.8
  */
 
 namespace WeCodeArt\Support\Styles\Components;
@@ -107,21 +107,49 @@ class Lightbox extends Base {
 				z-index: 100000;
 			}
 			
-			.has-scrollbar .wp-lightbox-overlay .close-button {
-				right: 1rem;
+			.has-scrollbar .wp-lightbox-overlay .wp-lightbox-close-button {
+				right: calc(env(safe-area-inset-right) + 1rem);
 			}
-			.wp-lightbox-overlay .close-button {
-				position: absolute;
-				top: 0;
-				right: 0;
-				padding: 0;
+
+			.wp-lightbox-overlay :is(
+				.wp-lightbox-navigation-button,
+				.wp-lightbox-close-button
+			) {
+				position: absolute; 
 				min-width: 40px; 
 				min-height: 40px;
+				padding: 0;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				z-index: 5000000;
+				z-index: 99999999;
 				cursor: pointer;
+			}
+
+			.wp-lightbox-overlay .wp-lightbox-close-button {
+				top: 0;
+				right: env(safe-area-inset-right);
+				color: var(--wp--preset--color--white);
+			}
+
+            .wp-lightbox-overlay .wp-lightbox-navigation-button { 
+				top: 50%;
+				transform: translateY(-50%);
+				background-color: var(--wp--preset--color--accent);
+				border-radius: 3px;
+			}
+
+			.wp-lightbox-overlay .wp-lightbox-navigation-button-prev { 
+				left: calc(env(safe-area-inset-left) + var(--wp--custom--gutter)); 
+			}
+
+			.wp-lightbox-overlay .wp-lightbox-navigation-button-next { 
+				right: calc(env(safe-area-inset-right) + var(--wp--custom--gutter)); 
+			}
+
+			.wp-lightbox-overlay .wp-lightbox-navigation-button:is(:hover,:focus) {
+				background-color: var(--wp--preset--color--primary);
+				color: var(--wp--preset--color--white);
 			}
 			
 			.wp-lightbox-overlay::where(:hover,:focus,:not(:hover):not(:active):not(.has-background)) {
@@ -138,7 +166,7 @@ class Lightbox extends Base {
 				transform: translate(-50%, -50%);
 				width: var(--wp--lightbox-container-width);
 				height: var(--wp--lightbox-container-height);
-				z-index: 9999999999;
+				z-index: 9999999;
 			}
 			
 			.wp-lightbox-overlay .wp-block-image {
@@ -172,15 +200,18 @@ class Lightbox extends Base {
 			.wp-lightbox-overlay button {
 				border: none;
 				background: none;
+				box-shadow: none;
 			}
 			
 			.wp-lightbox-overlay .scrim {
+				--wp--scrim--rgb: 0, 0, 0;
+				--wp--scrim-opacity: 0.75;
+				--wp--preset--color--white: rgba(var(--wp--scrim--rgb), var(--wp--scrim-opacity));
 				width: 100%;
 				height: 100%;
 				position: absolute;
 				z-index: 2000000;
-				background-color: rgb(255, 255, 255);
-				opacity: 0.9;
+				opacity: 0.5;
 			}
 			
 			.wp-lightbox-overlay.active {

@@ -189,8 +189,8 @@ class Gutenberg {
 	 */
 	public function frontend_assets() {
 		// Manage Styles.
-		wp_deregister_style( 'wp-block-library' );		// WordPress Core
-		wp_dequeue_style( 'wp-block-library' );         // WordPress Core
+		// wp_deregister_style( 'wp-block-library' );		// WordPress Core
+		// wp_dequeue_style( 'wp-block-library' );         // WordPress Core
         wp_deregister_style( 'wp-block-library-theme' );// WordPress Core
         wp_dequeue_style( 'wp-block-library-theme' );   // WordPress Core
 

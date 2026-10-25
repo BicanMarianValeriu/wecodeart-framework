@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Frontend
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.5.5
- * @version		6.4.5
+ * @version		6.7.8
  */
 
 namespace WeCodeArt\Gutenberg\Styles\Blocks;
@@ -29,11 +29,13 @@ class Gallery extends Processor {
 	 * @return 	void
 	 */
 	protected function process_style(): void {
-		$declarations = [];
+		$declarations = [
+			'display' => 'grid',
+		];
 
 		// Columns
 		if( $columns = get_prop( $this->attrs, 'columns', 3 ) ) {
-			$declarations['--wp--columns'] = $columns;
+			$declarations['--wp--columns'] = (string) $columns;
 		}
 		
 		// Gap

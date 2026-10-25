@@ -1,3 +1,14 @@
+v6.7.9
+- Updated - Autocomplete attributes for username/password fields
+- Updated - core/details is now animated on open/close
+- Added - support for WP 7.1 icon collections / registered existing icons
+
+v6.7.8
+- Updated - core/gallery styles for WP 7.0 (lightbox gallery with multiple images)
+- Updated - core/media-text styles for is-style-fill removed
+- Fixed - core/media-text issue with placeholder visibility
+- Added - core/cover styles support for iframes (WP 7.0)
+
 v6.7.7
 - Fixed - issue with sprintf translations on plugins admin
 

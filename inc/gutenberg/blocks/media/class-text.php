@@ -127,8 +127,7 @@ class Text extends Dynamic {
 				grid-row: 1;
 			}
 			.wp-block-media-text__media.is-placeholder {
-				background-color: var(--wp--preset--color--accent);
-				background-blend-mode: soft-light;
+				background-color: var(--wp--preset--color--accent); 
 			}
 			.wp-block-media-text__media.is-placeholder img {
 				height: 100%;
@@ -144,27 +143,16 @@ class Text extends Dynamic {
 				object-fit: initial;
 				min-height: 250px;
 			}
-			:is(.is-image-fill,.is-image-fill-element) .wp-block-media-text__media {
+			.is-image-fill-element .wp-block-media-text__media {
 				position: relative;
 				min-height: 250px;
-				background-size: cover;
-				background-position: center;
+				height: 100%;
 			}
 			.is-image-fill-element .wp-block-media-text__media img {
 				position: absolute;
-				height: 100%;
-			}
-			.is-image-fill .wp-block-media-text__media img {
-				position: absolute;
-				width: 1px;
-				height: 1px;
-				padding: 0;
-				margin: -1px;
-				overflow: hidden;
-				clip: rect(0, 0, 0, 0);
-				border: 0;
-				min-width: 0;
-				min-height: 0;
+				inset: 0;
+				width: 100%;
+				height: 100%; 
 			}
 			.wp-block-media-text__content {
 				grid-column: 2;

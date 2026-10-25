@@ -9,7 +9,7 @@
  * @subpackage  DOM\SVG
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		3.5
- * @version		6.4.1
+ * @version		6.7.9
  */
 
 namespace WeCodeArt\Support\DOM;
@@ -132,6 +132,28 @@ class SVG implements Configuration {
 			]
 		]
 	];
+
+	/**
+	 * Initialize the SVG class.
+	 *
+	 * @return void
+	 */
+	public function init() {
+		add_action( 'init', function() {
+			wp_register_icon_collection( 'wecodeart', [
+				'label'       => esc_html__( 'WeCodeArt', 'wecodeart' ),
+				'description' => esc_html__( 'Icons provided by WeCodeArt Framework.', 'wecodeart' ),
+			] ); 
+
+			foreach( $this->all() as $key => $item ) {
+				$label = ucwords( str_replace( '-', ' ', $key ) );
+				wp_register_icon( 'wecodeart/' . $key, [
+					'label'   => esc_html__( $label, 'wecodeart' ),
+					'content' => self::compile( $key, $item ),
+				] );
+			}
+		} );
+	}
 
 	/**
 	 * Adds a icon to the store.

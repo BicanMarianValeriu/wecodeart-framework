@@ -8,7 +8,7 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Login Template
  * @since 	    5.1.8
- * @version	    6.4.5
+ * @version	    6.7.9
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -44,7 +44,8 @@ $hooks = [
                 'size'      => 20,
                 'required'  => true,
                 'class'     => 'form-control mb-3',
-                'placeholder' => ' ',
+                'autocomplete'  => 'username',
+                'placeholder'   => ' ',
             ]
         ] );
                 
@@ -57,7 +58,8 @@ $hooks = [
                 'size'      => 20,
                 'required'  => true,
                 'class'     => 'form-control mb-3',
-                'placeholder' => ' ',
+                'autocomplete'  => 'current-password',
+                'placeholder'   => ' ',
             ]
         ] );
     

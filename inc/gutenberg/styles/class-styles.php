@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg CSS Module
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		4.0.3
- * @version		6.6.1
+ * @version		6.7.8
  */
 
 namespace WeCodeArt\Gutenberg;
@@ -151,7 +151,7 @@ class Styles implements Configuration {
 		$has_styles_2	= get_prop( $block, [ 'attrs', 'customStyle' ] );
 
 		// Remove styles, where needed.
-		if ( $has_support && ( $has_styles_1 || $has_styles_2 ) ) {
+		if ( $has_support ) {
 			// Process a block
 			$processed 	= $this->process_block( $block );
 			$content 	= wecodeart( 'dom' )::processor( $content );
@@ -203,7 +203,7 @@ class Styles implements Configuration {
 	 * @return 	array
 	 */
 	public function safe_style_css( array $properties = [] ): array {
-		return array_merge( [
+		return array_merge( [ 
 			'-webkit-text-stroke',
 			'text-shadow',
 			'word-spacing',
