@@ -1,3 +1,8 @@
+v6.8.1
+- Updated - code/table tabindex - make a horizontally scrolling table reachable from the keyboard
+- Updated - core/details block styles
+- Fixed - php 8.1+ notices
+
 v6.8.0
 - Fixed - core/social link warning about missing WordPress key
 

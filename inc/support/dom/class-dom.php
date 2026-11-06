@@ -9,7 +9,7 @@
  * @subpackage  DOM
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		3.5
- * @version		6.4.2
+ * @version		6.8.1
  */
 
 namespace WeCodeArt\Support;
@@ -129,7 +129,8 @@ class DOM implements Integration {
 		// Use reflection to access protected bookmarks property
 		$reflection = new \ReflectionClass( $processor );
 		$bookmarks_prop = $reflection->getProperty( 'bookmarks' );
-		$bookmarks_prop->setAccessible( true );
+		// $bookmarks_prop->setAccessible( true ); 
+		// PHP 8.1+ does not require this for public properties, but it's good practice to set it accessible if it's protected/private.
 		
 		// Collect all matching positions
 		while ( $processor->next_tag( $query ) ) {

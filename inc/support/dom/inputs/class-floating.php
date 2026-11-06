@@ -32,6 +32,7 @@ class Floating extends Basic {
      */
     public $type    = 'floating';
     public $_label  = 'none';
+    public $args    = [];
 
     /**
 	 * Constructor 

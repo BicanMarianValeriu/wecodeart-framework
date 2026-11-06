@@ -16,7 +16,7 @@
 $shadows    = wecodeart_json( [ 'settings', 'shadow', 'presets' ], [] );
 $shadows    = wp_list_pluck( $shadows, 'shadow', 'slug' );
 $shadows    = $shadows + [
-    null    => 'var(--wp--preset--shadow--natural)',
+    ''      => 'var(--wp--preset--shadow--natural)',
     'none'  => 'none'
 ];
 
@@ -83,7 +83,7 @@ foreach( [
         'property'  => 'border',
         'class'		=> 'border',
         'values'	=> [
-            null    => '1px solid var(--wp--preset--color--accent)',
+            ''      => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],
@@ -91,7 +91,7 @@ foreach( [
         'property'  => 'border-top',
         'class'		=> 'border-top',
         'values'	=> [
-            null    => '1px solid var(--wp--preset--color--accent)',
+            ''      => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],
@@ -99,7 +99,7 @@ foreach( [
         'property'  => 'border-bottom',
         'class'		=> 'border-bottom',
         'values'	=> [
-            null    => '1px solid var(--wp--preset--color--accent)',
+            ''      => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],
@@ -107,7 +107,7 @@ foreach( [
         'property'  => 'border-left',
         'class'		=> 'border-start',
         'values'	=> [
-            null    => '1px solid var(--wp--preset--color--accent)',
+            ''      => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],
@@ -115,7 +115,7 @@ foreach( [
         'property'  => 'border-right',
         'class'		=> 'border-end',
         'values'	=> [
-            null    => '1px solid var(--wp--preset--color--accent)',
+            ''      => '1px solid var(--wp--preset--color--accent)',
             0       => 0,
         ],
     ],
@@ -135,7 +135,7 @@ foreach( [
         'property'  => 'border-radius',
         'class'		=> 'rounded',
         'values'	=> [
-            null    => '.25rem',
+            ''      => '.25rem',
             0       => 0,
             1       => '.5rem',
             2       => '1rem',
@@ -148,7 +148,7 @@ foreach( [
         'property'  => [ 'border-top-left-radius', 'border-top-right-radius' ],
         'class'		=> 'rounded-top',
         'values'	=> [
-            null    => '.25rem',
+            ''      => '.25rem',
             0       => 0,
         ],
     ],
@@ -156,7 +156,7 @@ foreach( [
         'property'  => [ 'border-bottom-left-radius', 'border-bottom-right-radius' ],
         'class'		=> 'rounded-bottom',
         'values'	=> [
-            null    => '.25rem',
+            ''      => '.25rem',
             0       => 0,
         ],
     ],
@@ -164,7 +164,7 @@ foreach( [
         'property'  => [ 'border-top-left-radius', 'border-bottom-left-radius' ],
         'class'		=> 'rounded-start',
         'values'	=> [
-            null    => '.25rem',
+            ''      => '.25rem',
             0       => 0,
         ],
     ],
@@ -172,7 +172,7 @@ foreach( [
         'property'  => [ 'border-top-right-radius', 'border-bottom-right-radius' ],
         'class'		=> 'rounded-end',
         'values'	=> [
-            null    => '.25rem',
+            ''      => '.25rem',
             0       => 0,
         ],
     ],
@@ -726,7 +726,7 @@ foreach( [
         'property'  => 'transform',
         'class'		=> 'translate-middle',
         'values'	=> [
-            null    => 'translate3d(-50%,-50%,0)',
+            ''      => 'translate3d(-50%,-50%,0)',
             'x'     => 'translateX(-50%)',
             'y'     => 'translateY(-50%)',
         ],
@@ -736,7 +736,7 @@ foreach( [
         'property'  => 'transform',
         'class'		=> 'flip',
         'values'	=> [
-            null    => 'scaleX(-1) scaleY(-1)',
+            ''      => 'scaleX(-1) scaleY(-1)',
             'x'     => 'scaleX(-1)',
             'y'     => 'scaleY(-1)',
         ],

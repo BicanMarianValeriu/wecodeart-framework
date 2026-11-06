@@ -9,7 +9,7 @@
  * @subpackage 	Support\RankMath
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since 		6.1.2
- * @version		6.5.7
+ * @version		6.8.1
  */
 
 namespace WeCodeArt\Support\Plugins;
@@ -70,6 +70,7 @@ class RankMath implements Integration {
 
 		// Register RankMath FAQ Overwrite
 		wecodeart( 'blocks' )->register( 'rankmath/faq-block', RankMath\Blocks\FAQ::class );
+		wecodeart( 'blocks' )->register( 'rankmath/toc-block', RankMath\Blocks\TOC::class );
 	}
 
 	/**

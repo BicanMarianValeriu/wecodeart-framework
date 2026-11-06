@@ -133,7 +133,7 @@ class Blocks implements Configuration {
         $block_name = get_prop( $block, [ 'blockName' ], '' );
 		$registered = \WP_Block_Type_Registry::get_instance()->get_all_registered();
 
-        if ( ! array_key_exists( $block_name, $registered ) ) {
+        if ( ! array_key_exists( $block_name ?? "", $registered ) ) {
 			return $html;
 		}
 

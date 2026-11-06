@@ -162,7 +162,7 @@ final class WeCodeArt {
  *
  * @return	void
  */
-function wecodeart( $key = null, $parameters = [], WeCodeArt $theme = null ) {
+function wecodeart( $key = null, $parameters = [], ?WeCodeArt $theme = null ) {
     $theme = $theme ?: WeCodeArt::get_instance();
 
 	if( null !== $key ) {

@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		6.2.0
- * @version		6.7.9
+ * @version		6.8.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -69,8 +69,8 @@ class Details extends Dynamic {
 	 */
 	public function render( array $attributes = [], string $content = '' ): string {	
 		$dom 		= wecodeart( 'dom' )::create( $content );
-		$details	= wecodeart( 'dom' )::get_element( 'details', $dom, 0 );
-		$has_id 	= is_object( $details ) ? $details->getAttribute( 'id' ) : '';
+		$details	= wecodeart( 'dom' )::get_element( 'details', $dom, 0 ); 
+		$has_id 	= is_object( $details ) ? $details->getAttribute( 'id' ) : ''; 
 
 		if( empty( $has_id ) ) {
 			$details->setAttribute( 'id', self::generate_id( [ 'innerHTML' => $content ] ) );
@@ -189,7 +189,7 @@ class Details extends Dynamic {
 				list-style: none;
 				cursor: pointer;
 				padding: var(--wp--details--padding);
-				padding-inline-start: 2.25rem; /* room for chevron */
+				padding-inline-end: 2.25rem; /* room for chevron */
 				font-size: var(--wp--preset--font-size--normal);
 				font-weight: 700; 
 			}
@@ -201,11 +201,11 @@ class Details extends Dynamic {
 				content: none; 
 			}
 
-			.wp-block-details summary::before {
+			.wp-block-details summary::after {
 				content: "";
 				position: absolute;
 				top: calc(50% - var(--wp--details--chevron-size));
-				left: 1rem; 
+				right: 1rem; 
 				border: var(--wp--details--chevron-size) solid transparent;
 				border-left-color: var(--wp--details--chevron-color);
 				transform: rotate(0);
@@ -237,8 +237,8 @@ class Details extends Dynamic {
 			} 
 
 			/* ---------- open state ---------- */
-			details[open].wp-block-details > summary::before,
-			.wp-block-details details[open] > summary::before {
+			details[open].wp-block-details > summary::after,
+			.wp-block-details details[open] > summary::after {
 				transform: rotate(90deg);
 			}
 
@@ -267,7 +267,7 @@ class Details extends Dynamic {
 				}
 
 				.wp-block-details summary,
-				.wp-block-details summary::before {
+				.wp-block-details summary::after {
 					transition:
 					background-color var(--wp--details--duration) var(--wp--details--ease),
 					border-radius var(--wp--details--duration) var(--wp--details--ease),

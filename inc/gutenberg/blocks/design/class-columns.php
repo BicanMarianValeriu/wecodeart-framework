@@ -68,7 +68,7 @@ class Columns extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', object $block = null ): string {
+	public function render( array $attributes = [], string $content = '', ?object $block = null ): string {
 		$dom 	= wecodeart( 'dom' )::create( (string) $content );
 		$div 	= wecodeart( 'dom' )::get_element( 'div', $dom );
 

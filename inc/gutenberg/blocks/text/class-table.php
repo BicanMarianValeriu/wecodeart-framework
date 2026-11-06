@@ -9,7 +9,7 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.1.2
+ * @version		6.8.1
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Text;
@@ -88,6 +88,7 @@ class Table extends Dynamic {
 		$ommited 	= array_diff( $classnames, $exclude );
 		
 		$wrapper->setAttribute( 'class', join( ' ', array_filter( $ommited ) ) );
+		$wrapper->setAttribute( 'tabindex', '0' );
 		
 		// Table Changes
 		$table 		= $wrapper->getElementsByTagName( 'table' )->item(0);
@@ -110,7 +111,21 @@ class Table extends Dynamic {
 		// Set Table Classname
 		$table->setAttribute( 'class', join( ' ', $table_cls ) );
 
-		return $dom->saveHTML();
+		$processor = wecodeart( 'dom' )::processor( $dom->saveHTML() );
+
+		if ( ! $processor->next_tag( array( 'tag_name' => 'FIGURE' ) ) ) {
+			return $dom->saveHTML();
+		} 
+
+		if ( preg_match( '#<figcaption[^>]*>(.*?)</figcaption>#s', $dom->saveHTML(), $caption ) ) {
+			$label = trim( wp_strip_all_tags( $caption[1] ) );
+			if ( '' !== $label ) {
+				$processor->set_attribute( 'role', 'group' );
+				$processor->set_attribute( 'aria-label', $label );
+			}
+		}
+
+		return $processor->get_updated_html();
 	}
 
 	/**

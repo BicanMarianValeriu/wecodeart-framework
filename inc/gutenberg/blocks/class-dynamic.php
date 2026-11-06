@@ -234,7 +234,6 @@ abstract class Dynamic {
 					'default' => $default ?: []
 				], $schema );
 			break;
-			default;
 		endswitch;
 
 		return $schema;
