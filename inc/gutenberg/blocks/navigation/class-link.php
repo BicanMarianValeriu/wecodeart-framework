@@ -9,13 +9,14 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.0.0
- * @version		6.7.4
+ * @version		6.8.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Navigation;
 
 defined( 'ABSPATH' ) || exit;
 
+use WP_Block;
 use WeCodeArt\Singleton;
 use WeCodeArt\Config\Traits\Asset;
 use WeCodeArt\Gutenberg\Blocks\{ Dynamic, Navigation };
@@ -70,7 +71,7 @@ class Link extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', $block = null ): string {
+	public function render( array $attributes = [], string $content = '', ?WP_Block $block = null ): string {
 		$link_has_id 	= isset( $attributes['id'] ) && is_numeric( $attributes['id'] );
 		$is_post_type	= isset( $attributes['kind'] ) && 'post-type' === $attributes['kind'];
 		$is_post_type	= $is_post_type || isset( $attributes['type'] ) && ( 'post' === $attributes['type'] || 'page' === $attributes['type'] );

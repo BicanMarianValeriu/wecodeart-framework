@@ -179,7 +179,7 @@ class Details extends Dynamic {
 
 			/* spacing between stacked details (replaces the old border-top divider) */
 			.wp-block-details details + details {
-				margin-block-start: .5rem;
+				border-top: var(--wp--details--border);
 			}
 
 			/* ---------- summary ---------- */
@@ -230,11 +230,17 @@ class Details extends Dynamic {
 				display: grid;
 				gap: 1rem;
 				padding-inline: var(--wp--details--padding-x);
-				padding-block: 0;  
 				opacity: 0;
 				block-size: 0;
 				overflow-y: clip;
 			} 
+
+			details.wp-block-details *:not(summary):first-of-type {
+				margin-top: 0;
+			}
+			.wp-block-details details *:not(summary):last-child {
+				margin-bottom: 0;
+			}
 
 			/* ---------- open state ---------- */
 			details[open].wp-block-details > summary::after,
@@ -245,7 +251,6 @@ class Details extends Dynamic {
 			details[open].wp-block-details::details-content,
 			.wp-block-details details[open]::details-content {
 				padding-block: var(--wp--details--padding-y);
-				padding-top: 0;
 				opacity: 1;
 				block-size: auto;
 			}

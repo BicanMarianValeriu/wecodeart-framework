@@ -9,13 +9,14 @@
  * @subpackage  Gutenberg\Blocks
  * @copyright   Copyright (c) 2025, WeCodeArt Framework
  * @since		5.2.2
- * @version		6.0.0
+ * @version		6.8.2
  */
 
 namespace WeCodeArt\Gutenberg\Blocks\Comment;
 
 defined( 'ABSPATH' ) || exit;
 
+use WP_Block;
 use WeCodeArt\Singleton;
 use WeCodeArt\Gutenberg\Blocks\Dynamic;
 use function WeCodeArt\Functions\get_prop;
@@ -61,7 +62,7 @@ class Template extends Dynamic {
 	 *
 	 * @return 	string 	The block markup.
 	 */
-	public function render( array $attributes = [], string $content = '', object $block = null ): string {
+	public function render( array $attributes = [], string $content = '', ?WP_Block $block = null ): string {
 		$post_id = $block->context['postId'];
 
         // Bail out early if the post ID is not set for some reason.

@@ -155,11 +155,6 @@ class Cover extends Dynamic {
 			.wp-block-cover__gradient-background {
 				opacity: var(--wp--bg--opacity);
 			}
-			.wp-block-cover .has-parallax {
-				background-attachment: fixed;
-				background-size: cover;
-				background-repeat: no-repeat;
-			}
 			.wp-block-cover .is-repeated {
 				background-repeat: repeat;
 				background-size: auto;
